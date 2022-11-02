@@ -12,7 +12,7 @@ describe('숫자 야구 게임', () => {
 		const logSpy = getLogSpy();
 		const app = new App();
 		const input = '테스트용 메세지를 출력합니다';
-		app.print(input);
+		app.printMessage(input);
 
 		expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(input));
 	});
