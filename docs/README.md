@@ -1,8 +1,36 @@
 # 기능 요구 사항
 
----
+1. 시작 / 종료 선택 구현
 
-1~9까지 사용.
+   - [ ] Console.readLine으로 user의 input 받기. (1. Play, 2. Quit)
+   - [ ] 게임을 시작하는 경우와 게임을 끝낸 경우 분기처리.
+   - [ ] 이외의 값이 들어오면 예외처리.
+
+2. Player 구현
+
+   - [ ] User Class 구현.
+   - [ ] Computer Class 구현.
+     - [ ] 랜덤 값 뽑는 메서드 구현.
+
+3. 게임시작
+
+   - [ ] Console.readLine으로 user의 정답 받기.
+     - [ ] 숫자 이외는 예외처리.
+   - [ ] `pickUniqueNumbersInRange`를 이용해 computer 값 생성.
+
+4. 값 비교
+
+   - [ ] user의 값과 computer의 값을 비교하는 함수 생성.
+     - 비교하는 value가 computer의 정답 Array에 존재하는 경우 .
+       - index가 같은 경우 strike += 1
+       - index가 다른 경우 ball += 1
+
+5. 결과값 출력
+   - [ ] `Console.print();`를 이용해, 결과값을 출력하는 함수 구현.
+     - strike = 3일 경우 정답 return
+     - strike + ball = 0일 경우 `낫싱` return
+
+---
 
 ### 예외처리
 
