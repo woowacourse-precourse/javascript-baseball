@@ -57,4 +57,7 @@ function restartGame() {
   });
 }
 
+let app = new App();
+app.play();
+
 module.exports = App;
