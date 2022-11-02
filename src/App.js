@@ -63,6 +63,20 @@ class App {
         }
       );
     }
+
+    
+    function continueAnswer(input) {
+      switch (input) {
+        case "1":
+          setBaseLine();
+          progress();
+          break;
+        case "2":
+          break;
+        default:
+          throw new Error();
+      }
+    }
     
     try {
       progress();
