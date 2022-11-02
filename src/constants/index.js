@@ -13,6 +13,7 @@ const ERROR_MESSAGE = {
   TYPE_ERROR: "숫자형식 값만 입력해주세요.",
   RANGE_ERROR: "1 ~ 9 사이의 숫자만 입력해주세요.",
   UNIQUE_ERROR: "숫자가 중복되지 않게 입력해주세요.",
+  LENGTH_ERROR: `${NUMBER_VALUE.LENGTH} 자릿수 까지만 입력해주세요.`,
 };
 
 module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE };

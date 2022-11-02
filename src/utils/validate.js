@@ -4,6 +4,10 @@ const isValidType = (values) => {
   return values.every((value) => !isNaN(value));
 };
 
+const isValidLength = (values) => {
+  return values.length === NUMBER_VALUE.LENGTH;
+};
+
 const isValidRange = (values) => {
   return values.every(
     (value) => value >= NUMBER_VALUE.MIN && value <= NUMBER_VALUE.MAX
@@ -25,6 +29,10 @@ const isValid = (userNumber) => {
 
   if (!isValidType(userNumberArray)) {
     throw ERROR_MESSAGE.TYPE_ERROR;
+  }
+
+  if (!isValidLength(userNumberArray)) {
+    throw ERROR_MESSAGE.LENGTH_ERROR;
   }
 
   if (!isValidRange(userNumberArray)) {
