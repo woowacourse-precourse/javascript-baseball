@@ -3,17 +3,17 @@ class App {
 }
 
 const makeRandomNumber = () => {
-  const RANDOM_NUMBER = [];
+  const NOT_DUPLICATED_NUMBER = [];
 
-  while (RANDOM_NUMBER.length < 3) {
-    const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+  while (NOT_DUPLICATED_NUMBER.length < 3) {
+    const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    if (!RANDOM_NUMBER.includes(NUMBER)) {
-      RANDOM_NUMBER.push(NUMBER);
+    if (!NOT_DUPLICATED_NUMBER.includes(RANDOM_NUMBER)) {
+      NOT_DUPLICATED_NUMBER.push(RANDOM_NUMBER);
     }
   }
 
-  return RANDOM_NUMBER;
+  return NOT_DUPLICATED_NUMBER;
 };
 
 module.exports = App;
