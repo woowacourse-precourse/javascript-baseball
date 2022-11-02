@@ -51,6 +51,12 @@
 
 <br/>
 
+2. 사용자에게 숫자를 입력받는 기능
+   - App 클래스에 inputNumber 프로퍼티 추가
+   - MissionUtils.Console.readLine을 통해 숫자를 입력해 inputNumber 값 변경
+
+<br/>
+
 ## 🚨 예외 경우
 
 1. 사용자의 입력값 (게임 진행 중)
