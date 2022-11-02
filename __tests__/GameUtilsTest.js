@@ -49,13 +49,19 @@ describe('게임 기능 테스트', () => {
   });
 
   test('힌트 생성', () => {
-    const inputValues = ['123', '456', '312', '132'];
+    const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
 
     const hints = inputValues.map(inputValue =>
       app.getHint(computerNumbers, inputValue),
     );
 
-    expect(hints).toEqual([null, '낫싱', '3볼', '2볼 1스트라이크']);
+    expect(hints).toEqual([
+      null,
+      '낫싱',
+      '3볼',
+      '2볼 1스트라이크',
+      '2스트라이크',
+    ]);
   });
 });
