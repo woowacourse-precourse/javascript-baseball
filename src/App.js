@@ -21,7 +21,7 @@ class App {
       if (new Set(data).size != 3) throw new Error();
       return data;
     }
-    
+
     function compare(testCase) {
       let ball = 0;
       let strike = 0;
@@ -44,6 +44,15 @@ class App {
         const end = compare(testCase);
         nextProgress(end);
       });
+    }
+    
+    function nextProgress(end) {
+      if (end) {
+        wConsole.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        continueQuestion();
+      } else {
+        progress();
+      }
     }
     
     try {
