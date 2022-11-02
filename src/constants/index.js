@@ -3,4 +3,10 @@ const GAME_MESSAGE = {
   INPUT_NUMBER: "숫자를 입력해주세요 : ",
 };
 
-module.exports = { GAME_MESSAGE };
+const NUMBER_VALUE = {
+  MIN: 1,
+  MAX: 9,
+  LENGTH: 3,
+};
+
+module.exports = { GAME_MESSAGE, NUMBER_VALUE };
