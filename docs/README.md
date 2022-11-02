@@ -1,15 +1,17 @@
-## Feature implementation list
+# Feature implementation list
 
 ✅ \[docs\] write feature implementation list
 ✅ \[set\] set eslint, prettier, jest
-- \[feat\] 라이브러리를 이용하여 입출력 기능 구현
-- \[feat\] 종료시 재시작 기능 구현
-- \[feat\] 라이브러리를 이용하여 랜덤 숫자 생성 기능 구현
-- \[feat\] 랜덤 숫자와 사용자 입력 숫자 비교하는 기능 구현
-- \[test\] 테스트 케이스 작성
+- \[feat\] implement I/O feature with library
+- \[feat\] implement feature that restarts the program when exited
+- \[feat\] implement feature that generates random number using library
+- \[feat\] implement feature that compares between random number and user input 
+- \[test\] write test case
 
 
-## Github commit convention
+# Github commit convention
+
+> ## Message format - \[name of mission\]\[type of commit\] : commit message
 
 * feat : new feature implementation
 * fix : bug fix
