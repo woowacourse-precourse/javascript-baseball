@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { getRandomNumber } = require('../utils/missionUtils');
 
 class BaseballModel {
   constructor() {
@@ -9,7 +9,7 @@ class BaseballModel {
   setComputerValue() {
     const computerValueArray = [];
     while (computerValueArray.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      const number = getRandomNumber();
       if (!computerValueArray.includes(number)) {
         computerValueArray.push(number);
       }
