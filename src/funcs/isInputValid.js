@@ -18,7 +18,7 @@ function isNumberValid(numString) {
 }
 
 function areNumbersValid(input) {
-	input.split('').reduce((acc, cur) => (acc &= isNumberValid(cur)), true);
+	return input.split('').reduce((acc, cur) => (acc &= isNumberValid(cur)), true);
 }
 function isInputValid(input) {
 	return isLengthValid(input) && hasOnlyNumbers(input) && hasDuplicatedNumber(input) && areNumbersValid(input);

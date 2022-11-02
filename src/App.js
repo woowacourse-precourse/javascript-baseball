@@ -1,24 +1,27 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const isInputValid = require('./isInputValid');
+const printStartMessage = require('./funcs/printStartMessage');
+const isInputValid = require('./funcs/isInputValid');
+const createAnswerNumbers = require('./funcs/createAnswerNumbers');
 
 class App {
 	constructor() {
 		this._answerNumbers = null;
+		this._inputNumbers = null;
 	}
 	play() {
-		this.printStartMessage();
-		this.createAnswerNumbers();
+		printStartMessage();
+		this.setAnswerNumbers();
 		this.getUserInput();
 	}
-	printStartMessage() {
-		Console.print('숫자 야구 게임을 시작합니다.');
+
+	setAnswerNumbers() {
+		this._answerNumbers = createAnswerNumbers();
 	}
-	createAnswerNumbers() {
-		this._answerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
-	}
+
 	getUserInput() {
 		Console.readLine('숫자를 입력해주세요 : ', input => {
-			console.log(isInputValid(input));
+			console.log(input);
+			if (!isInputValid(input)) throw new Error('입력값이 잘못 되었습니다.');
 		});
 	}
 }
