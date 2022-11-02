@@ -9,25 +9,29 @@ class App {
   }
   
   async play() {
-    const answer = randomNum();
+    //const answer = randomNum();
     this.gamecount += 1;
     if (this.gamecount === 1){
       MissionUtils.Console.print(constant.GAME.START);
     }
-    
+    const answer = 713;
     const game = new GameControl(answer);
 
     while(1){
       const input = await game.userInput();
       if (this.checkSuccess(game.userOutput(input))){
         this.restartGame(game);
-      };
+      }
+      else{
+        MissionUtils.Console.print(game.printAnswer(game.userOutput(input)));
+      }
     }
     
   }
 
   checkSuccess(resultarray){
     if (resultarray[0] === 3){
+      MissionUtils.Console.print(constant.GAME.ANSWER);
       return true;
     }
   }
