@@ -1,5 +1,4 @@
 const App = require('../src/App');
-const { Random } = require('@woowacourse/mission-utils');
 
 const app = new App();
 
@@ -51,7 +50,6 @@ describe('게임 기능 테스트', () => {
   test('힌트 생성', () => {
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
-
     const hints = inputValues.map(inputValue =>
       app.getHint(computerNumbers, inputValue),
     );
