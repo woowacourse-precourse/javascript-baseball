@@ -11,9 +11,6 @@ const inputNumber = () => {
   MissionUtils.Console.readLine(GAME_MESSAGE.INPUT_NUMBER, (number) => {
     if (isValid(number)) {
       compareNumbers(number, getComputerNumber());
-    } else {
-      closeGame();
-      throw "Error!";
     }
   });
 };

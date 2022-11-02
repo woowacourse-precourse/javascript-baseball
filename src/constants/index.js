@@ -9,4 +9,8 @@ const NUMBER_VALUE = {
   LENGTH: 3,
 };
 
-module.exports = { GAME_MESSAGE, NUMBER_VALUE };
+const ERROR_MESSAGE = {
+  TYPE_ERROR: "숫자형식 값만 입력해주세요",
+};
+
+module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE };
