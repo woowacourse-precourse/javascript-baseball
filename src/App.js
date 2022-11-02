@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
+    this.input = "";
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
@@ -9,9 +10,15 @@ class App {
     MissionUtils.Console.print(message);
   }
 
+  getInput() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.input = input;
+    });
+  }
+
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
-    this.print("숫자를 입력해주세요 : ");
+    this.getInput();
   }
 }
 
