@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GameControl = require('./Controller.js')
+const GameControl = require('./Controller.js');
 const constant = require('./Constants');
 const randomNum = require('./model/Random');
 
@@ -16,11 +16,30 @@ class App {
     }
     
     const game = new GameControl(answer);
+
     while(1){
       const input = await game.userInput();
-      //console.log(game.userOutput(input));
+      if (this.checkSuccess(game.userOutput(input))){
+        this.restartGame(game);
+      };
     }
     
+  }
+
+  checkSuccess(resultarray){
+    if (resultarray[0] === 3){
+      return true;
+    }
+  }
+
+  async restartGame(game){
+    const input =  await game.restartCheck();
+    if (input === '1'){
+      this.play();
+    }
+    else if (input === '2'){
+      MissionUtils.Console.close();
+    }
   }
 
 }
