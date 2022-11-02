@@ -1,17 +1,35 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 const makeRandomNumber = () => {
-  const targetRandomNumber = [];
-  for (let randomNumberIdx = 0; randomNumberIdx < 3; randomNumberIdx++) {
-    targetRandomNumber.push(Math.floor(Math.random() * 9 + 1));
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
   }
-  return targetRandomNumber;
+  console.log(computer);
+  return computer;
+};
+
+const inputNumber = () => {
+  let userInputNumber;
+
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    if (answer == 1) makeRandomNumber();
+    if (answer == 2) MissionUtils.Console.close();
+  });
+
+  return userInputNumber;
 };
 
 class App {
   play() {
-    let target = [];
-    target = makeRandomNumber();
+    makeRandomNumber();
 
-    console.log(target);
+    inputNumber();
+
+    return;
   }
 }
 
