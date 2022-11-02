@@ -46,6 +46,7 @@ function createComputerNumber() {
 function readInputNumber(computerNumber) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (myNumber) => {
     console.log(compare(myNumber, computerNumber));
+    if (compare(myNumber, computerNumber) !== '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') readInputNumber(computerNumber);
   });
 }
 
