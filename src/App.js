@@ -78,6 +78,23 @@ class App {
     return computerNumbers.includes(userNumber);
   }
 
+  getHintType(strikeCount, ballCount) {
+    if (strikeCount === 3) {
+      return null;
+    }
+
+    switch (true) {
+      case strikeCount === 0 && ballCount === 0:
+        return 'NOTHING';
+      case strikeCount === 0:
+        return 'ONLY_BALLS';
+      case ballCount === 0:
+        return 'ONLY_STRIKES';
+      default:
+        return 'DEFAULT';
+    }
+  }
+
   exit() {
     Console.close();
   }
