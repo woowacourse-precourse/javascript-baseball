@@ -10,6 +10,15 @@ class App {
       baseLine = Array.from(baseLine);
     }
     setBaseLine();
+    wConsole.print("숫자 야구 게임을 시작합니다.");
+
+    function progress() {
+      wConsole.readLine("숫자를 입력해주세요. : ", (input) => {
+        const testCase = inputToTestData(input);
+        const end = compare(testCase);
+        nextProgress(end);
+      });
+    }
     
     try {
       progress();
