@@ -1,3 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const wRandom = MissionUtils.Random;
+const wConsole = MissionUtils.Console;
+
 class App {
   play() {
     let baseLine = null;
