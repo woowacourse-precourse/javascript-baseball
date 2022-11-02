@@ -1,13 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { NUMBER_VALUE } = require("../constants/index");
 
-const isLessThanInputMaxLength = (size) => {
-  return size < NUMBER_VALUE.LENGTH;
-};
+const isLessThanInputMaxLength = (size) => size < NUMBER_VALUE.LENGTH;
 
-const getRandomNumber = (rangeStart, rangeEnd) => {
-  return MissionUtils.Random.pickNumberInRange(rangeStart, rangeEnd);
-};
+const getRandomNumber = (rangeStart, rangeEnd) =>
+  MissionUtils.Random.pickNumberInRange(rangeStart, rangeEnd);
 
 const getComputerNumber = () => {
   const numbers = new Set();
