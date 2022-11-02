@@ -5,11 +5,10 @@ const wConsole = MissionUtils.Console;
 class App {
   play() {
     let baseLine = null;
-    const numList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     function setBaseLine() {
       baseLine = new Set();
       while (baseLine.size < 3) {
-        baseLine.add(wRandom.pickNumberInList(numList));
+        baseLine.add(wRandom.pickNumberInRange(1, 9));
       }
       baseLine = Array.from(baseLine);
     }
