@@ -3,17 +3,17 @@ class App {
 }
 
 const makeRandomNumber = () => {
-  const NOT_DUPLICATED_NUMBER = [];
+  const COMPUTER_NUMBER = [];
 
-  while (NOT_DUPLICATED_NUMBER.length < 3) {
+  while (COMPUTER_NUMBER.length < 3) {
     const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    if (!NOT_DUPLICATED_NUMBER.includes(RANDOM_NUMBER)) {
-      NOT_DUPLICATED_NUMBER.push(RANDOM_NUMBER);
+    if (!COMPUTER_NUMBER.includes(RANDOM_NUMBER)) {
+      COMPUTER_NUMBER.push(RANDOM_NUMBER);
     }
   }
 
-  return NOT_DUPLICATED_NUMBER;
+  return COMPUTER_NUMBER;
 };
 
 const findDuplicate = (numberArr) => {
@@ -27,29 +27,29 @@ const findDuplicate = (numberArr) => {
 };
 
 const condition = (input) => {
-  const USER_INPUT = input.split('');
+  const USER_NUMBER = input.split('');
 
-  for (let index = 0; index < USER_INPUT.length; index += 1) {
-    if (USER_INPUT[index] < '1' || USER_INPUT[index] > '9') {
+  for (let index = 0; index < USER_NUMBER.length; index += 1) {
+    if (USER_NUMBER[index] < '1' || USER_NUMBER[index] > '9') {
       throw '1~9 사이의 숫자를 입력해 주세요!';
     }
   }
 
-  if (USER_INPUT.length !== 3) {
+  if (USER_NUMBER.length !== 3) {
     throw '3자리 숫자를 입력해주세요!';
   }
-  if (findDuplicate(USER_INPUT)) {
+  if (findDuplicate(USER_NUMBER)) {
     throw '중복되지 않은 숫자를 입력해 주세요!';
   }
 
-  return USER_INPUT;
+  return USER_NUMBER;
 };
 
-const countBall = (computer, userInput) => {
+const countBall = (computerNumber, userNumber) => {
   let ballNumber = 0;
 
-  for (let index = 0; index < computer.length; index += 1) {
-    if (computer[index] !== userInput[index] && computer.includes(userInput[index])) {
+  for (let index = 0; index < computerNumber.length; index += 1) {
+    if (computerNumber[index] !== userNumber[index] && computerNumber.includes(userNumber[index])) {
       ballNumber += 1;
     }
   }
@@ -57,11 +57,11 @@ const countBall = (computer, userInput) => {
   return ballNumber;
 };
 
-const countStrike = (computer, userInput) => {
+const countStrike = (computerNumber, userNumber) => {
   let strikeNumber = 0;
 
-  for (let index = 0; index < computer.length; index += 1) {
-    if (computer[index] === userInput[index]) {
+  for (let index = 0; index < computerNumber.length; index += 1) {
+    if (computerNumber[index] === userNumber[index]) {
       strikeNumber += 1;
     }
   }
