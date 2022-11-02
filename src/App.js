@@ -47,6 +47,20 @@ class App {
     Console.print(this.getHint(answer));
   }
 
+  getHint(answer) {
+    const [strikeCount, ballCount] = this.getBallCounts(this.computer, answer);
+    const hintType = getHintType(strikeCount, ballCount);
+
+    return hintType
+      ? {
+          NOTHING: '낫싱',
+          ONLY_BALLS: `${ballCount}볼`,
+          ONLY_STRIKES: `${strikeCount}스트라이크`,
+          DEFAULT: `${ballCount}볼 ${strikeCount}스트라이크`,
+        }[hintType]
+      : null;
+  }
+
   getBallCounts(computerNumbers, answer) {
     const userNumbers = answer
       .split('')
