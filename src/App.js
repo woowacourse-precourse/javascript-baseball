@@ -47,6 +47,37 @@ class App {
     Console.print(this.getHint(answer));
   }
 
+  getBallCounts(computerNumbers, answer) {
+    const userNumbers = answer
+      .split('')
+      .map(userNumber => parseInt(userNumber, 10));
+
+    return userNumbers.reduce(
+      (prevBallCounts, userNumber, idx) => {
+        const [strikeCount, ballCount] = prevBallCounts;
+
+        if (this.isStrike(computerNumbers[idx], userNumber)) {
+          return [strikeCount + 1, ballCount];
+        }
+
+        if (this.isBall(computerNumbers, userNumber)) {
+          return [strikeCount, ballCount + 1];
+        }
+
+        return [strikeCount, ballCount];
+      },
+      [0, 0],
+    );
+  }
+
+  isStrike(computerNumber, userNumber) {
+    return computerNumber === userNumber;
+  }
+
+  isBall(computerNumbers, userNumber) {
+    return computerNumbers.includes(userNumber);
+  }
+
   exit() {
     Console.close();
   }
