@@ -9,7 +9,7 @@ class App {
 
 function readInputNumber() {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-    console.log(`입력된 3개의 숫자: ${input}`)
+    console.log();
   });
 }
 
