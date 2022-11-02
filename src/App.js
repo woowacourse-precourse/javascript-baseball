@@ -2,6 +2,20 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const VALID_INPUT_REGEX = /^[1-9]{3}$/;
 
 class App {
+  constructor() {
+    this.computer = this.generateRandomNumbers();
+  }
+
+  generateRandomNumbers() {
+    const numberSet = new Set();
+
+    while (numberSet.size !== 3) {
+      numberSet.add(Random.pickNumberInRange(1, 9));
+    }
+
+    return [...numberSet];
+  }
+
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     try {
