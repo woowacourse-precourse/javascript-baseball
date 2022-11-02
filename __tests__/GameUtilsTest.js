@@ -3,13 +3,13 @@ const App = require('../src/App');
 const app = new App();
 
 describe('게임 기능 테스트', () => {
-  test('컴퓨터가 생각중인 숫자를 무작위로 생성', () => {
+  test('컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
     const result = app.generateRandomNumbers();
 
     expect(result).toHaveLength(3);
   });
 
-  test('스트라이크, 볼의 개수 구하기', () => {
+  test('스트라이크, 볼의 개수를 구한다.', () => {
     const inputValues = ['123', '456', '312', '132'];
     const computerNumbers = [1, 2, 3];
     const result = inputValues.map(inputValue =>
@@ -24,7 +24,7 @@ describe('게임 기능 테스트', () => {
     ]);
   });
 
-  test('스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환', () => {
+  test('스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환한다.', () => {
     const counts = [
       [3, 0],
       [1, 0],
@@ -47,7 +47,7 @@ describe('게임 기능 테스트', () => {
     ]);
   });
 
-  test('힌트 생성', () => {
+  test('스트라이크, 볼의 개수를 기반으로 힌트를 생성한다.', () => {
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
     const hints = inputValues.map(inputValue =>
