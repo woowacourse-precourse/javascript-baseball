@@ -1,14 +1,14 @@
-const BaseballGameModel = require('./model/BaseballGameModel');
-const BaseballGameController = require('./controller/BaseballGameController');
+const BaseballModel = require('./model/BaseballModel');
+const BaseballController = require('./controller/BaseballController');
 
 class App {
   constructor() {
-    this.baseballGameModel = new BaseballGameModel();
-    this.baseballGameController = new BaseballGameController(this.baseballGameModel);
+    this.baseballModel = new BaseballModel();
+    this.baseballController = new BaseballController(this.baseballModel);
   }
 
   play() {
-    this.baseballGameController.getUserValue();
+    this.baseballController.getUserValue();
   }
 }
 

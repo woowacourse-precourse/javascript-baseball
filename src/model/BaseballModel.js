@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-class BaseballGameModel {
+class BaseballModel {
   constructor() {
     this.computerValue = '';
     this.userValue = '';
@@ -22,4 +22,4 @@ class BaseballGameModel {
   }
 }
 
-module.exports = BaseballGameModel;
+module.exports = BaseballModel;
