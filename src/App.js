@@ -12,6 +12,16 @@ class App {
     setBaseLine();
     wConsole.print("숫자 야구 게임을 시작합니다.");
 
+    function inputToTestData(input) {
+      if (input.length != 3) throw new Error();
+      let data = input.split("").map((num) => {
+        if (isNaN(num)) throw new Error();
+        return parseInt(num);
+      });
+      if (new Set(data).size != 3) throw new Error();
+      return data;
+    }
+    
     function compare(testCase) {
       let ball = 0;
       let strike = 0;
