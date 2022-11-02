@@ -1,7 +1,7 @@
 const { ERROR_MESSAGE, NUMBER_VALUE } = require("../constants/index");
 
 const isValidType = (values) => {
-  return values.every((value) => typeof value === "number");
+  return values.every((value) => !isNaN(value));
 };
 
 const isValidRange = (values) => {
