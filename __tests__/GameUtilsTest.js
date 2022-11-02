@@ -13,7 +13,6 @@ describe('게임 기능 테스트', () => {
   test('스트라이크, 볼의 개수 구하기', () => {
     const inputValues = ['123', '456', '312', '132'];
     const computerNumbers = [1, 2, 3];
-
     const result = inputValues.map(inputValue =>
       app.getBallCounts(computerNumbers, inputValue),
     );
@@ -23,6 +22,29 @@ describe('게임 기능 테스트', () => {
       [0, 0],
       [0, 3],
       [1, 2],
+    ]);
+  });
+
+  test('스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환', () => {
+    const counts = [
+      [3, 0],
+      [1, 0],
+      [0, 1],
+      [1, 1],
+      [0, 0],
+    ];
+    const result = counts.map(count => {
+      const [strikeCount, ballCount] = count;
+
+      return app.getHintType(strikeCount, ballCount);
+    });
+
+    expect(result).toEqual([
+      null,
+      'ONLY_STRIKES',
+      'ONLY_BALLS',
+      'DEFAULT',
+      'NOTHING',
     ]);
   });
 });
