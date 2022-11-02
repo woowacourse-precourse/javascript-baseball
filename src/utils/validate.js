@@ -1,18 +1,13 @@
 const { ERROR_MESSAGE, NUMBER_VALUE } = require("../constants/index");
 
-const isValidType = (values) => {
-  return values.every((value) => !isNaN(value));
-};
+const isValidType = (values) => values.every((value) => !isNaN(value));
 
-const isValidLength = (values) => {
-  return values.length === NUMBER_VALUE.LENGTH;
-};
+const isValidLength = (values) => values.length === NUMBER_VALUE.LENGTH;
 
-const isValidRange = (values) => {
-  return values.every(
+const isValidRange = (values) =>
+  values.every(
     (value) => value >= NUMBER_VALUE.MIN && value <= NUMBER_VALUE.MAX
   );
-};
 
 const isValidUnique = (values) => {
   const set = new Set();
