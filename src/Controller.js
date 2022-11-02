@@ -19,6 +19,12 @@ class GameControl{
     const resultList = game.totalCount();
     return resultList;
   }
+
+  restartCheck(){
+    return new Promise(resolve => {
+      MissionUtils.Console.readLine(constant.GAME.RESTART+'\n', (number) => resolve(number))
+    });
+  }
 }
 
 module.exports = GameControl;
