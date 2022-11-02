@@ -2,7 +2,7 @@
 
 ## 환경 설정
 
-- [ ] eslint, prettier 설정
+- [x] eslint, prettier 설정
 
 ## 기능 목록
 
