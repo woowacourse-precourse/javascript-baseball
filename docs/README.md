@@ -24,8 +24,7 @@
 
 ## `setRandomComputerValue`: 컴퓨터의 수를 정하는 private 메서드
 
-- `MissionUtils` 라이브러리의 `Random.pickNumberInRange()`를 사용하여 무작위의 3자리 수를 받아옵니다.
-- `isAvailableValue` 메서드를 호출하여 입력된 수를 사용할 수 있는지 확인합니다.
+- `MissionUtils` 라이브러리의 `Random.pickUniqueNumbersInRange()`를 사용하여 1~9 까지 겹치지 않는 숫자를 3개 가져온 후 `join` 메서드를 사용해서 문자열로 만듭니다.
 - `#computerValue` 필드에 저장합니다.
 
 ## `readUserValue`: 사용자의 수를 입력받는 메서드
@@ -39,6 +38,7 @@
 - `getResult` 메서드를 호출합니다.
 
 ## `isAvailableValue`: 입력된 수가 사용 가능한지 확인하는 메서드
+
 - 숫자로 이루어져 있는지 확인합니다.
 - 1부터 9까지 서로 다른 수로 이루어진 3자리의 수인지 확인합니다.
 - 사용할 수 있으면 `true`, 없으면 `false`를 리턴합니다.
