@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const constant = require('./Constants');
+const GameCalc = require('./model/Game');
 
 class GameControl{
   constructor(answerNum){
@@ -14,7 +15,9 @@ class GameControl{
   }
 
   userOutput(number){
-    
+    const game = new GameCalc(this.answerNum, number);
+    const resultList = game.totalCount();
+    return resultList;
   }
 }
 
