@@ -13,7 +13,7 @@ function randomNums() {
 // 2. 사용자에게 숫자 3개 받는 함수
 function readNums() {
   Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    let user = answer.split("").map(string => Number(string));
+    let user = answer.split("").map((string) => Number(string));
     if (typeof answer !== "number") {
       throw "Not a number";
     } else if (user.includes(0)) {
@@ -23,6 +23,21 @@ function readNums() {
     }
   });
   return user;
+}
+
+// 3. 컴퓨터 숫자와 사용자 숫자 비교하는 함수
+function compareNums(computer, user) {
+  let ball = 0;
+  let strike = 0;
+
+  for (let i = 0; i < user.length; i++) {
+    if (user[i] === computer[i]) {
+      strike++;
+    } else if (computer.includes(user[i])) {
+      ball++;
+    }
+  }
+  return [ball, strike];
 }
 
 class App {
