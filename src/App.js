@@ -23,6 +23,19 @@ class App {
   stringToNumberArray(string) {
     return [...string].map(char => Number(char));
   }
+
+  compareNumber(userNumber, computerNumber) {
+    const result = {
+      ball: 0,
+      strike: 0,
+    };
+    
+    userNumber.forEach((num, index) => {
+      if (num === computerNumber[index]) result.strike += 1;
+      else if (computerNumber.includes(num)) result.ball += 1;
+    });
+    return result;
+  }
 }
 
 module.exports = App;
