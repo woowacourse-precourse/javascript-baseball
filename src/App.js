@@ -10,6 +10,22 @@ function randomNums() {
   return computer;
 }
 
+// 2. 사용자에게 숫자 3개 받는 함수
+function readNums() {
+  Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    if (typeof answer !== "number") {
+      throw "Not a number";
+    } else if (answer.toString().includes(0)) {
+      throw "0 exists";
+    } else if (answer.toString().length !== 3) {
+      throw "Not three digits";
+    } else {
+      answer = answer.toString();
+    }
+  });
+  return answer;
+}
+
 class App {
   play() {}
 }
