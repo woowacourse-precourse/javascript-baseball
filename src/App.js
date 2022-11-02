@@ -45,4 +45,28 @@ const condition = (input) => {
   return USER_INPUT;
 };
 
+const countBall = (computer, userInput) => {
+  let ballNumber = 0;
+
+  for (let index = 0; index < computer.length; index += 1) {
+    if (computer[index] !== userInput[index] && computer.includes(userInput[index])) {
+      ballNumber += 1;
+    }
+  }
+
+  return ballNumber;
+};
+
+const countStrike = (computer, userInput) => {
+  let strikeNumber = 0;
+
+  for (let index = 0; index < computer.length; index += 1) {
+    if (computer[index] === userInput[index]) {
+      strikeNumber += 1;
+    }
+  }
+
+  return strikeNumber;
+};
+
 module.exports = App;
