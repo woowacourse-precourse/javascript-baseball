@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const isInputValid = require('./isInputValid');
 
 class App {
 	constructor() {
@@ -17,7 +18,7 @@ class App {
 	}
 	getUserInput() {
 		Console.readLine('숫자를 입력해주세요 : ', input => {
-			// 입력 받은 값을 토대로 다른 작업 진행
+			console.log(isInputValid(input));
 		});
 	}
 }
