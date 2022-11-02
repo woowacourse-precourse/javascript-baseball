@@ -11,6 +11,7 @@ const NUMBER_VALUE = {
 
 const ERROR_MESSAGE = {
   TYPE_ERROR: "숫자형식 값만 입력해주세요",
+  RANGE_ERROR: "1 ~ 9 사이의 숫자만 입력해주세요.",
 };
 
 module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE };
