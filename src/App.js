@@ -1,5 +1,4 @@
 // 컴퓨터의 수 3자리 구하기.
-
 const machinNum = [];
 while (machinNum.length < 3) {
   const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -20,3 +19,4 @@ class App {
 
 
 // module.exports = App;
+
