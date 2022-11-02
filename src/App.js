@@ -44,11 +44,14 @@ class App {
     //   return;
     // }
 
-    Console.print(this.getHint(answer));
+    Console.print(this.getHint(this.computer, answer));
   }
 
-  getHint(answer) {
-    const [strikeCount, ballCount] = this.getBallCounts(this.computer, answer);
+  getHint(computerNumbers, answer) {
+    const [strikeCount, ballCount] = this.getBallCounts(
+      computerNumbers,
+      answer,
+    );
     const hintType = getHintType(strikeCount, ballCount);
 
     return hintType
