@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+
 const VALID_INPUT_REGEX = /^[1-9]{3}$/;
 
 class App {
@@ -32,8 +33,18 @@ class App {
         throw new Error('잘못된 입력입니다. 게임 종료');
       }
 
+      this.printHint(answer);
       this.inputAnswer();
     });
+  }
+
+  printHint(answer) {
+    // if (!this.getHint()) {
+    //   this.gameOver();
+    //   return;
+    // }
+
+    Console.print(this.getHint(answer));
   }
 
   exit() {
