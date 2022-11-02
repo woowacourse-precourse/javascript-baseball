@@ -1,10 +1,12 @@
-const { startGame } = require("./libs");
+const { startGame, getRandomThreeNumber } = require("./libs");
 
 class App {
   play() {
-    const r1 = startGame();
-    r1.on("line", (line) => {
+    const computerNumbers = getRandomThreeNumber();
+    const inputConsole = startGame();
+    inputConsole.on("line", (line) => {
       console.log(line);
+      inputConsole.close();
     });
   }
 }
