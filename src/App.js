@@ -12,6 +12,22 @@ class App {
     setBaseLine();
     wConsole.print("숫자 야구 게임을 시작합니다.");
 
+    function compare(testCase) {
+      let ball = 0;
+      let strike = 0;
+      testCase.map((num, i) => {
+        if (baseLine.includes(num)) {
+          baseLine[i] === num ? strike++ : ball++;
+        }
+      });
+      let text = "";
+      if (ball != 0) text += `${ball}볼`;
+      if (strike != 0) text += `${text != "" ? " " : ""}${strike}스트라이크`;
+      if (text === "") text = "낫싱";
+      wConsole.print(text);
+      return strike === 3;
+    }
+
     function progress() {
       wConsole.readLine("숫자를 입력해주세요. : ", (input) => {
         const testCase = inputToTestData(input);
