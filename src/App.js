@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor(input) {
-    this.input = input;
+  constructor() {
+    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   print(message) {
