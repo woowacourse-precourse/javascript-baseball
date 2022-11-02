@@ -10,6 +10,16 @@ const isValidRange = (values) => {
   );
 };
 
+const isValidUnique = (values) => {
+  const set = new Set();
+
+  values.forEach((value) => {
+    set.add(value);
+  });
+
+  return set.size === values.length;
+};
+
 const isValid = (userNumber) => {
   const userNumberArray = userNumber.split("").map((value) => Number(value));
 
@@ -19,6 +29,10 @@ const isValid = (userNumber) => {
 
   if (!isValidRange(userNumberArray)) {
     throw ERROR_MESSAGE.RANGE_ERROR;
+  }
+
+  if (!isValidUnique(userNumberArray)) {
+    throw ERROR_MESSAGE.UNIQUE_ERROR;
   }
 
   return true;
