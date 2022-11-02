@@ -19,6 +19,10 @@ class App {
       // TODO: 컴퓨터와 입력한 수 비교
     });
   }
+  
+  stringToNumberArray(string) {
+    return [...string].map(char => Number(char));
+  }
 }
 
 module.exports = App;
