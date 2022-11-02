@@ -25,6 +25,19 @@ class GameControl{
       MissionUtils.Console.readLine(constant.GAME.RESTART+'\n', (number) => resolve(number))
     });
   }
+
+  printAnswer(resultList){
+    if (resultList[0] === 0 && resultList[1] === 0){
+      return constant.RESULTS.NOTHING;
+    }
+    else if (resultList[0] === 0 && resultList[1] !== 0){
+      return String(resultList[1])+constant.RESULTS.BALL;
+    }
+    else if (resultList[0] === 1 && resultList[1] === 0){
+      return String(resultList[0])+constant.RESULTS.STRIKE;
+    }
+    return String(resultList[1])+constant.RESULTS.BALL+' '+String(resultList[0])+constant.RESULTS.STRIKE;
+  }
 }
 
 module.exports = GameControl;
