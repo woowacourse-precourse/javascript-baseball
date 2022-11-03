@@ -9,7 +9,16 @@ class App {
     this.showMessage("숫자 야구 게임을 시작합니다.");
   }
 
-  play() {}
+  play() {
+    this.startGame();
+  }
+
+  startGame() {
+    this.setRandomNumber();
+    this.getUserInputNumber().then((userInputNumber) =>
+      this.getUserInputResult(userInputNumber)
+    );
+  }
 
   setRandomNumber() {
     this.randomNumber = generateRandomNumber({
@@ -32,6 +41,20 @@ class App {
       })
     );
   }
+
+  getUserInputResult(input) {
+    return input.split("").reduce(this.compareUserInput.bind(this), [0, 0]);
+  }
+
+  compareUserInput(acc, cur, index) {
+    const [ball, strike] = acc;
+    if (this.randomNumber[index] === cur) return [ball, strike + 1];
+    if (this.randomNumber[index].includes(cur)) return [ball + 1, strike];
+    return acc;
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
