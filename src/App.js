@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
     PICKED_NUMBERS = [];
+
     play() {
         this.start();
         this.getInput();
