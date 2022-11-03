@@ -42,6 +42,18 @@ class App {
 
     return true;
   }
+
+  checkNoSameNumber(inputData) {
+    for (let i = 0; i < inputData.length; i++) {
+      if (
+        inputData.indexOf(inputData[i]) !== inputData.lastIndexOf(inputData[i])
+      ) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 const app = new App();
