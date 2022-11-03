@@ -33,7 +33,7 @@ class Game {
       !validRange.test(numbers) ||
       diversityOfNum !== 3
     ) {
-      console.error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+      throw new Error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
     }
   }
 }
