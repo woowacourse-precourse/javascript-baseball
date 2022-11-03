@@ -18,20 +18,25 @@ class App {
 
     let retry = true;
     while(retry) {
-      // step3
-      let input = await this.setUserNum();
-      MissionUtils.Console.print(input);
-
-      // step4
-      const countRes = this.countStrikeAndBall(input, computer);
-      MissionUtils.Console.print(countRes);
+      const countResult = await this.predict(computer);
 
       // step5
-      MissionUtils.Console.print(this.result(countRes));
-      retry = countRes[1] === 3 ? false : true;
+      MissionUtils.Console.print(this.result(countResult));
+      retry = countResult.strike  === 3 ? false : true;
     }
     // step6
     return await this.checkContinue();
+  }
+
+  async predict(computer) { 
+    // step3
+    let input = await this.setUserNum();
+    MissionUtils.Console.print(input);
+
+    // step4
+    const countResult = this.countStrikeAndBall(input, computer);
+    MissionUtils.Console.print(countResult);
+    return countResult;
   }
 
   setUserNum() {
@@ -78,18 +83,18 @@ class App {
       }
     })
 
-    return [countB, countS];
+    return {strike:countS, ball:countB};
   }
 
-  result(countRes) {
-    if(countRes[0] === 0 && countRes[1] === 0){
+  result(countResult) {
+    if(countResult.strike === 0 && countResult.ball === 0){
       return '낫싱';
-    } else if(countRes[1] === 3) {
+    } else if(countResult.strike === 3) {
       return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     } else {
       let res = '';
-      res += countRes[0]>0 ? `${countRes[0]}볼`:'';
-      res += countRes[1]>0 ? `${countRes[1]}스트라이크`:'';
+      res += countResult.ball>0 ? `${countResult.ball}볼`:'';
+      res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
       return res;
     }
   }
