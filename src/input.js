@@ -1,4 +1,7 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
+const { COMPUTERSTORE, USERSTORE } = require('./store');
+
+const [STATE, SETSTATE] = COMPUTERSTORE();
 
 function extractComputerNumber() {
     while (STATE.length < 3) {
