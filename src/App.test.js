@@ -49,24 +49,22 @@ describe('숫자 야구 게임', () => {
 
 	test('getUserNumber 메서드로 받아온 userNumber 가 0을 포함할 경우 에러를 발생시킨다', () => {
 		const answer = ['012'];
-
+		const app = new App();
 		mockQuestions(answer);
 
 		expect(() => {
-			const app = new App();
-			app.play();
-		}).toThrow();
+			app.getUserNumber();
+		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
 	test('getUserNumber 메서드로 받아온 userNumber 의 숫자가 중복될 경우 에러를 발생시킨다', () => {
 		const answer = ['112'];
-
+		const app = new App();
 		mockQuestions(answer);
 
 		expect(() => {
-			const app = new App();
-			app.play();
-		}).toThrow();
+			app.getUserNumber();
+		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
 	test('getComparResult 메소드로 비교한 결과를 반환', () => {

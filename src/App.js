@@ -15,9 +15,13 @@ class App {
 		this.gameEnd = false;
 	}
 
-	play() {
-		this.printMessage(START_MESSAGE);
+	initializeGame() {
 		this.computerNumber = this.getComputerNumber();
+		this.gameEnd = false;
+	}
+
+	playMainLogic() {
+		this.initializeGame();
 		while (this.gameEnd === false) {
 			const resultMessage = this.getCompareResult(this.computerNumber, this.getUserNumber());
 			this.printMessage(resultMessage);
@@ -26,6 +30,30 @@ class App {
 				this.printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
 			}
 		}
+	}
+
+	play() {
+		this.printMessage(START_MESSAGE);
+		this.playMainLogic();
+		this.printMessage('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+		this.checkRestart();
+	}
+
+	checkRestart() {
+		MissionUtils.Console.readLine(
+			'게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+			answer => {
+				if (!(answer === '1' || answer === '2')) {
+					throw new Error('1또는 2를 입력하세요');
+				}
+				if (answer === '1') {
+					this.printMessage(answer);
+					this.playMainLogic();
+					return;
+				}
+				MissionUtils.Console.close();
+			},
+		);
 	}
 
 	printMessage(message) {
