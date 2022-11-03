@@ -8,8 +8,12 @@ class App {
     this.getUserNumber();
   }
   getUserNumber() {
-    MissionUtils.Console.readLine("닉네임을 입력해주세요.", (answer) => {
-      this.isValid(answer);
+    MissionUtils.Console.readLine("닉네임을 입력해주세요.", (userNumberStr) => {
+      this.isValid(userNumberStr);
+      const totalCountStrike = this.countStrike(
+        userNumberStr,
+        this.computerNumberArr
+      );
       MissionUtils.Console.close();
     });
   }
@@ -45,6 +49,19 @@ class App {
       !randomArr.includes(randomNum) && randomArr.push(randomNum);
     }
     return randomArr;
+  }
+
+  countStrike(userNumberStr, computerNumberArr) {
+    let totalCount = 0;
+    totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
+      const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
+      if (oneLetterOfuserNumberStr === comCurNum) {
+        return count + 1;
+      } else {
+        return count;
+      }
+    }, 0);
+    return totalCount;
   }
 }
 
