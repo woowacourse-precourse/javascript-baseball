@@ -35,12 +35,14 @@ describe("숫자 야구 게임", () => {
 
   test("컴퓨터 랜덤 숫자 생성", () => {
     const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
+    const constraintsSpy = jest.spyOn(App.prototype, "checkConstraints");
 
     const app = new App();
     app.makeRandomNumber();
 
     expect(randomSpy).toHaveBeenCalled();
     expect(randomSpy).toHaveBeenCalledWith(1, 9);
+    expect(constraintsSpy).toBeTruthy();
   });
 
   test("게임 종료 후 재시작", () => {
