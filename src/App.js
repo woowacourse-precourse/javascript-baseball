@@ -1,11 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { GAME_MENU_EXIT } = require('./lib/constants/game');
+const {
+  THREE_DIGIT_NUMBER_REGEX,
+  DUPLICATE_CHARACTER_REGEX,
+  GAME_MENU_CODE_REGEX,
+} = require('./lib/constants/validation');
 const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
-
-const DUPLICATE_CHARACTER_REGEX = /(.)\1{1,}/;
-const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
-const THREE_DIGIT_NUMBER_REGEX = /^[1-9]{3}$/;
-
-const GAME_MENU_EXIT = 2;
 
 class App {
   gameManager;

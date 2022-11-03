@@ -1,8 +1,9 @@
 const { Random } = require('@woowacourse/mission-utils');
-
-const RANDOM_NUMBER_COUNT = 3;
-const MIN_RANDOM_NUMBER_LIMIT = 1;
-const MAX_RANDOM_NUMBER_LIMIT = 9;
+const {
+  RANDOM_NUMBER_COUNT,
+  MIN_RANDOM_NUMBER_LIMIT,
+  MAX_RANDOM_NUMBER_LIMIT,
+} = require('./lib/constants/game');
 
 class NumberBaseballGameManager {
   computerNumbers;
