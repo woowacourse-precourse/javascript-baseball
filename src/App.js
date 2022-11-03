@@ -16,6 +16,10 @@ function computerInput(){
   return computerInputArr;
 }
 
+const startText = () => {
+  return MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+}
+
 const ballCount = (computer,user) => {
   let count = 0;
   computer.forEach((number,index) => {
