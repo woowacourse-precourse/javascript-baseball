@@ -19,6 +19,11 @@ class App {
         const balls = this.countBalls(this.computerInput, userInput);
         const result = this.showResult(strikes, balls);
         MissionUtils.Console.print(result);
+        if (this.isCorrect) {
+          this.restartOrExitGame();
+        } else {
+          this.startGame();
+        }
       } else {
         throw "잘못된 입력입니다.";
       }
