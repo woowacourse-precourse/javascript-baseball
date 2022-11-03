@@ -6,11 +6,15 @@ class App {
   }
   getUserNumber() {
     MissionUtils.Console.readLine("닉네임을 입력해주세요.", (answer) => {
-      this.isValidSingleDigitNaturalNumber(answer);
-      this.isValidNumberWithoutDuplicate(answer);
+      this.isValid(answer);
       MissionUtils.Console.close();
     });
   }
+  isValid(answer) {
+    this.isValidSingleDigitNaturalNumber(answer);
+    this.isValidNumberWithoutDuplicate(answer);
+  }
+
   isValidSingleDigitNaturalNumber(answer) {
     const regexp = new RegExp("^[1-9]+$");
     if (!regexp.test(answer)) {
