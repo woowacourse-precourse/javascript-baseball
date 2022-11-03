@@ -1,7 +1,11 @@
-class Game {
+const MissionUtils = require("@woowacourse/mission-utils");
+module.exports = class Game {
   constructor() {
-    this.computerNumbers = this.getRandomNumbers();
+    this.computerNumbers = [...this.getRandomNumbers()].join("");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.getUserNumberInput();
   }
+
   getRandomNumbers() {
     const computerNumbers = new Set();
     while (computerNumbers.size < 3) {
@@ -10,4 +14,11 @@ class Game {
     }
     return computerNumbers;
   }
-}
+
+  getUserNumberInput() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+      MissionUtils.Console.print(number);
+      MissionUtils.Console.close();
+    });
+  }
+};
