@@ -31,7 +31,7 @@ function compare(myNumber, computerNumber) {
   const ball = countBall(myNumber, computerNumber) - strike;
 
   if ((strike + ball) === 0) return '낫싱';
-  if (strike === 3) return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+  if (strike === 3) return '3스트라이크';
   if (strike === 0) return `${ball}볼`;
   if (ball === 0) return `${strike}스트라이크`;
   if (true) return `${ball}볼 ${strike}스트라이크`;
@@ -43,18 +43,35 @@ function createComputerNumber() {
 
 function readInputNumber(computerNumber) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (myNumber) => {
-    console.log(compare(myNumber, computerNumber));
-    if (compare(myNumber, computerNumber) !== '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') readInputNumber(computerNumber);
-    else restartGame();
+    const gameState = compare(myNumber, computerNumber);
+    MissionUtils.Console.print(gameState);
+    gameInProgress(gameState, computerNumber);
   });
 }
 
-function restartGame() {
-  let computerNumber = createComputerNumber();
-  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
-    if (input === "1") readInputNumber(computerNumber);
-    if (input === "2") MissionUtils.Console.close();
+function gameInProgress(gameState, computerNumber) {
+  if (gameState === "3스트라이크") {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    gameRestartOption();
+  } else {
+    readInputNumber(computerNumber);
+  }
+}
+
+function gameRestartOption() {
+  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
+    selectGameRestart(input);
   });
+}
+
+function selectGameRestart(input) {
+  if (input === "1") {
+    let computerNumber = createComputerNumber();
+    readInputNumber(computerNumber);
+  }
+  if (input === "2") {
+    MissionUtils.Console.close();
+  }
 }
 
 let app = new App();
