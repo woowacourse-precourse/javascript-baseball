@@ -54,6 +54,18 @@ class App {
 
     return true;
   }
+
+  checkConstraints(inputData) {
+    if (
+      !this.checkNumberRange(inputData) ||
+      !this.checkInputLength(inputData) ||
+      !this.checkNoSameNumber(inputData)
+    ) {
+      throw new Error("잘못된 값이 생성되었습니다. 게임을 종료합니다.");
+    }
+
+    return true;
+  }
 }
 
 const app = new App();
