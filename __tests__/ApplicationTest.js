@@ -83,4 +83,16 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("1에서 9까지의 자연수를 입력해주세요");
   });
+  test("예외테스트4 : 중복되는 숫자가 있는 경우 ", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("서로 다른 3개의 숫자를 입력해주세요");
+  });
 });
