@@ -20,6 +20,19 @@ class App {
     });
     return inputNumber;
   }
+
+  checkValidInput(inputNum) {
+    // 입력받은 숫자가 유효한 숫자인지 확인하는 함수.
+    // 1. 3자리 숫자인지 체크
+    // 2. 서로 다른 숫자인지 체크
+    // 3. 리턴값 : true, false
+    let valid3Digit = false; // 3자리 수 체크하는 변수.
+    if (inputNum.length() === 3) {
+      valid3Digit = true;
+    }
+
+    return valid;
+  }
 }
 
 module.exports = App;
