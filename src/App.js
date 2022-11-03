@@ -6,7 +6,7 @@ class App {
   #userValue = null;
 
   setRandomComputerValue() {
-    let randomValue = Random.pickUniqueNumbersInRange(1, 9, 3).join();
+    let randomValue = Random.pickUniqueNumbersInRange(1, 9, 3).join('');
     this.#computerValue = randomValue;
   }
 
