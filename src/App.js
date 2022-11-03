@@ -26,7 +26,10 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
-        if (input === "1") this.play();
+        if (input === "1") {
+          this.resetGameValue();
+          this.play();
+        }
       }
     );
   }
@@ -48,6 +51,11 @@ class App {
     const hint = convertCountToHintString(strikeCount, ballCount);
 
     return hint;
+  }
+
+  resetGameValue() {
+    this.hint = "";
+    this.computer.setNewCorrectNumber();
   }
 }
 
