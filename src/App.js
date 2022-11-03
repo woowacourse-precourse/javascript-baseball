@@ -69,4 +69,32 @@ const countStrike = (computerNumber, userNumber) => {
   return strikeNumber;
 };
 
+const result = () => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    const USER = condition(userInput);
+    ball = countBall(COMPUTER, USER);
+    strike = countStrike(COMPUTER, USER);
+
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print('낫싱');
+      result();
+    }
+    if (ball > 0 && strike === 0) {
+      MissionUtils.Console.print(`${ball} 볼`);
+      result();
+    }
+    if (ball === 0 && strike > 0 && strike < 3) {
+      MissionUtils.Console.print(`${strike} 스트라이크`);
+      result();
+    }
+    if (ball > 0 && strike > 0) {
+      MissionUtils.Console.print(`${ball} 볼 ${strike} 스트라이크`);
+      result();
+    }
+    if (strike === 3) {
+      MissionUtils.Console.print(`${strike} 스트라이크`);
+    }
+  });
+};
+
 module.exports = App;
