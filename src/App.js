@@ -32,7 +32,7 @@ const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
 const CHECK_BALL = function numberOfBalls(userInput, answer) {
   let count = 0;
   const ANSWER_TO_STRING = String(answer);
-  if (userInput[0] === ANSWER_TO_STRING[1] 
+  if (userInput[0] === ANSWER_TO_STRING[1]
     || userInput[0] === ANSWER_TO_STRING[2]) count++;
   if (userInput[1] === ANSWER_TO_STRING[0]
     || userInput[1] === ANSWER_TO_STRING[2]) count++;
@@ -41,8 +41,34 @@ const CHECK_BALL = function numberOfBalls(userInput, answer) {
   return count;
 }
 
+const GAME_HINT = function getHintFromInput(userInput, answer) {
+  const strikes = CHECK_STRIKE(userInput, answer);
+  const balls = CHECK_BALL(userInput, answer);
+
+  if (strikes === 3) return true;
+  if (strikes === 0 && balls === 0) {
+    GAME_APP(answer);
+  }
+  GAME_APP(answer);
+}
+
+const GAME_APP = function gameApplication(answer) {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    GAME_HINT(userInput, answer);
+  });
+  
+}
+
+const START_GAME = function launchNewGame() {
+  const ANSWER = MAKEANSWER();
+  GAME_APP(ANSWER);
+}
+
+
 class App {
-  play() {}
+  play() {
+    START_GAME();
+  }
 }
 const app = new App();
 app.play();
