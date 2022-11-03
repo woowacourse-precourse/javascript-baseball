@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 // 1. 컴퓨터가 뽑은 랜덤 숫자 3개 배열로 만드는 함수
 function randomNums() {
   const computer = [];
@@ -12,11 +14,15 @@ function randomNums() {
 
 // 2. 사용자에게 숫자 3개 받는 함수
 function readNums() {
-  Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    let user = answer.split("").map((string) => Number(string));
-    if (typeof answer !== "number") {
-      throw "Not a number";
-    } else if (user.includes(0)) {
+  let user;
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    user = answer.split("").map((string) => Number(string));
+    user.map(num => {
+      if (isNaN(num)) {
+        throw "Not a number";
+      }
+    })
+    if (user.includes(0)) {
       throw "0 exists";
     } else if (user.length !== 3) {
       throw "Not three digits";
