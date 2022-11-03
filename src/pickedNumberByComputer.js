@@ -7,7 +7,7 @@ function pickedNumberByComputer() {
     if (!pickedNumber.includes(number)) pickedNumber.push(number);
   }
 
-  return pickedNumber.join("");
+  return pickedNumber;
 }
 
 module.exports = pickedNumberByComputer;
