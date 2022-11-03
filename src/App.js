@@ -9,10 +9,18 @@ function printStartMassage() {
     isFirstStart && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
 }
 
+function getUserInput() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+        console.log("결과");
+        getUserInput();
+    });
+}
+
 class App {
     play() {
-        const ANSWER = createAnswer();
+        const COMPUTER_NUMBER = createAnswer();
         printStartMassage();
+        getUserInput();
     }
 }
 
