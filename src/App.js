@@ -1,9 +1,13 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+  print(message) {
+    Console.print(message);
     Console.close();
+  }
+
+  play() {
+    this.print("숫자 야구 게임을 시작합니다.");
   }
 }
 
