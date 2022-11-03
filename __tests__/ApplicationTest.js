@@ -43,6 +43,7 @@ describe("숫자 야구 게임", () => {
     expect(randomSpy).toHaveBeenCalled();
     expect(randomSpy).toHaveBeenCalledWith(1, 9);
     expect(constraintsSpy).toBeTruthy();
+    expect(constraintsSpy).toHaveBeenCalledTimes(1);
   });
 
   test("플레이어 숫자 입력", () => {
@@ -55,6 +56,7 @@ describe("숫자 야구 게임", () => {
     expect(readSpy).toHaveBeenCalled();
     expect(readSpy).toHaveBeenCalledTimes(1);
     expect(constraintsSpy).toBeTruthy();
+    expect(constraintsSpy).toHaveBeenCalledTimes(1);
   });
 
   test("게임 종료 후 재시작", () => {
