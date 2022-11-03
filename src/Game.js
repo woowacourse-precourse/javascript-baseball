@@ -2,6 +2,7 @@ const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다!
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameControlValidation = require("./GameControlValidation.js");
 const GameInputValidation = require("./GameInputValidation.js");
+const print = require("./utils/print.js");
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
@@ -10,7 +11,7 @@ module.exports = class Game {
 
   gameInit() {
     this.computerNumbers = [...this.getRandomNumbers()].join("");
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    print("숫자 야구 게임을 시작합니다.");
     this.getUserNumberInput();
   }
 
@@ -27,7 +28,7 @@ module.exports = class Game {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       let validationChecker = new GameInputValidation(number);
       validationChecker.validation();
-      MissionUtils.Console.print(this.getGameResultString(number));
+      print(this.getGameResultString(number));
       if (this.getGameResultString(number) == GAME_WIN) {
         this.handleGame();
       } else this.getUserNumberInput();
