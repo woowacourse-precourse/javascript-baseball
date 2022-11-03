@@ -12,60 +12,51 @@ const makeRandomNumber = () => {
 };
 
 const inputNumber = (targetNumber) => {
-  let isCorrect = false;
-  console.log(targetNumber); // 테스트 중 보이게 하기 위함.
+  let isCorrect = false; //예외처리를 위한 boolean
+  // console.log(targetNumber); // 테스트 중 보이게 하기 위함. 이후 필히 삭제
 
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    let guessNumber;
-
-    if (answer.length === 3) {
-      guessNumber = answer.split("").map((v) => +v);
-      let [ball, strike] = checkBallCount(targetNumber, guessNumber);
-      if (strike < 3) {
-        printBallCount(ball, strike);
-        inputNumber(targetNumber);
-      }
-      if (strike == 3) {
-        MissionUtils.Console.print(
-          "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-        );
-        /**
-         * reset game 함수 분리
-         */
-      }
-    }
-
-    // 재경기 & 종료
-    if (answer == 1) {
-      app.play();
-    }
-    if (answer == 2) {
-      MissionUtils.Console.print("게임을 종료합니다.");
-      MissionUtils.Console.close();
-    }
+    guessNumber(answer, targetNumber);
   });
   return isCorrect;
 };
 
-const checkBallCount = (targetNumber, guessNumber) => {
+const guessNumber = (answer, targetNumber) => {
+  let userGuessedNumber;
+
+  if (answer.length === 3) {
+    userGuessedNumber = answer.split("").map((v) => +v);
+
+    let [ball, strike] = checkBallCount(targetNumber, userGuessedNumber);
+    if (strike < 3) {
+      printBallCount(ball, strike);
+      inputNumber(targetNumber);
+    }
+    if (strike == 3) {
+      printBallCount(ball, strike);
+      manageGame();
+    }
+  }
+};
+
+const checkBallCount = (targetNumber, userGuessedNumber) => {
   let ball = 0;
   let strike = 0;
 
-  for (let number = 0; number < guessNumber.length; number++) {
+  for (let number = 0; number < userGuessedNumber.length; number++) {
     if (
-      targetNumber.includes(guessNumber[number]) &&
-      targetNumber[number] !== guessNumber[number]
+      targetNumber.includes(userGuessedNumber[number]) &&
+      targetNumber[number] !== userGuessedNumber[number]
     ) {
       ball++;
     }
     if (
-      targetNumber.includes(guessNumber[number]) &&
-      targetNumber[number] === guessNumber[number]
+      targetNumber.includes(userGuessedNumber[number]) &&
+      targetNumber[number] === userGuessedNumber[number]
     ) {
       strike++;
     }
   }
-
   return [ball, strike];
 };
 
@@ -73,12 +64,33 @@ const printBallCount = (ball, strike) => {
   if (ball === 0 && strike > 0)
     MissionUtils.Console.print(`${strike}스트라이크`);
   if (strike === 0 && ball > 0) MissionUtils.Console.print(`${ball}볼`);
+  if (strike > 0 && ball > 0)
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
   if (ball === 0 && strike === 0) MissionUtils.Console.print("낫싱");
 };
 
-const resetGame = () => {};
+const manageGame = () => {
+  MissionUtils.Console.readLine(
+    "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (answer) => {
+      if (answer == 1) {
+        resetGame();
+      }
+      if (answer == 2) {
+        exitGame();
+      }
+    }
+  );
+};
 
-const exitGame = () => {};
+const resetGame = () => {
+  app.play();
+};
+
+const exitGame = () => {
+  MissionUtils.Console.print("게임 종료");
+  MissionUtils.Console.close();
+};
 
 class App {
   play() {
@@ -96,4 +108,4 @@ class App {
 const app = new App();
 app.play();
 
-// module.exports = App;
+module.exports = App;
