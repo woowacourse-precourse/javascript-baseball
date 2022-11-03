@@ -2,7 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.input = "";
+    this.input;
+    this.answer;
+  }
+
+  setAnswer() {
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
@@ -18,6 +22,7 @@ class App {
 
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
+    this.setAnswer();
     this.receiveAndUpdateInput();
   }
 }
