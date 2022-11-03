@@ -30,6 +30,9 @@ class App {
     if (input.includes(NaN))
       throw new Error("문자를 제외한 숫자만 입력하세요.");
     if (input.includes(0)) throw new Error("1~9 사이의 숫자만 입력하세요.");
+    if (!(input.length === 3)) throw new Error("3개의 숫자만 입력하세요.");
+    if (!(input === new Set(input)))
+      throw new Error("서로 다른 숫자를 입력하세요.");
   }
 
   receiveInputFromConsole() {
