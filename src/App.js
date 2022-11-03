@@ -6,6 +6,9 @@ class App {
   play() {
     let computer = [];
     computer = computer_randomnumber();
+
+    let user = ""
+    user = user_inputnumber();
   }
 }
 
@@ -21,5 +24,12 @@ function computer_randomnumber(){
   }
   return COMPUTER_NUMBER;
 }
+
+function user_inputnumber(){
+  const USER_NUMBER = MissionUtils.Console.readLine();
+
+  return USER_NUMBER;
+}
+
 
 module.exports = App;
