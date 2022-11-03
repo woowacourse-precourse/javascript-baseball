@@ -24,11 +24,13 @@ class App {
   }
 
   getUserInputNumber() {
-    Console.readLine("숫자를 입력해주세요 : ", (userInputNumber) => {
-      if (!isValidUserInput(userInputNumber))
-        throw new Error("인풋 값이 유효하지 않습니다.");
-      this.userInputNumber = userInputNumber;
-    });
+    return new Promise((resolve) =>
+      Console.readLine("숫자를 입력해주세요 : ", (userInputNumber) => {
+        if (!isValidUserInput(userInputNumber))
+          throw new Error("인풋 값이 유효하지 않습니다.");
+        resolve(userInputNumber);
+      })
+    );
   }
 }
 
