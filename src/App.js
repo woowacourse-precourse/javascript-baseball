@@ -33,6 +33,26 @@ class App {
   parseUserAnswertoString() {
     this.userAnswer = String(this.userAnswer);
   }
+
+  checkBallStrike(computerRandomNumber, userAnswer) {
+    let ball = 0;
+    let strike = 0;
+
+    for (let i = 0; i < input.length; i++) {
+      if (
+        computerRandomNumber.includes(parseInt(userAnswer[i])) &&
+        computerRandomNumber[i] == userAnswer[i]
+      ) {
+        strike++;
+      } else if (
+        computerRandomNumber.includes(parseInt(userAnswer[i])) &&
+        computerRandomNumber[i] != userAnswer[i]
+      ) {
+        ball++;
+      }
+    }
+    return [ball, strike];
+  }
 }
 
 const app = new App();
