@@ -2,7 +2,7 @@ function countStrike(answer, input) {
 	let count = 0;
 
 	for (let i = 0; i < 3; i++) {
-		if (answer[i] === input[i]) strike++;
+		if (answer[i] === input[i]) count++;
 	}
 	return count;
 }
