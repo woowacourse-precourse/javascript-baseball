@@ -12,6 +12,10 @@ function gameRestartQuestion() {
         let answer = randomNumberSetting();
         userInput(answer);
       }
+
+      if (number === "2") {
+        MissionUtils.Console.close();
+      }
     }
   );
 }
