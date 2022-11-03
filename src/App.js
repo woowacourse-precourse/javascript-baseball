@@ -1,22 +1,24 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+
+const GAME_START = '숫자 야구 게임을 시작합니다.';
 const THREE_STRIKE = '3스트라이크';
+const GAME_OVER = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 
 class App {
     constructor() {
         this.answer = '123';
-        this.numbers = ['456', '132', '123'];
     }
     play() {
-        console.log('숫자 야구 게임을 시작합니다.');
-        this.input(this.numbers);
+        console.log(GAME_START);
+        this.input();
     }
-    input(numbers) {
-        for (let number of numbers) {
-            console.log(`숫자를 입력해주세요 : ${number}`);
-            let comment = this.match(number);
+    async input() {
+        for await (const number of this.question('숫자를 입력하세요.')) {
+            const comment = this.match(number);
             console.log(comment);
-
             if (comment === THREE_STRIKE) {
-                console.log(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+                console.log(GAME_OVER);
+                break;
             }
         }
     }
@@ -44,6 +46,17 @@ class App {
             return `${ball}볼`;
         } else {
             return `${ball}볼 ${strike}스트라이크`;
+        }
+    }
+    async *question(query) {
+        try {
+            while (1) {
+                yield new Promise((resolve) =>
+                    MissionUtils.Console.readLine(query, resolve)
+                );
+            }
+        } finally {
+            MissionUtils.Console.close();
         }
     }
 }
