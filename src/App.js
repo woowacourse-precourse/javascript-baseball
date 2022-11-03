@@ -1,12 +1,12 @@
-import Computer from './Computer';
-import Interaction from './Interaction';
-import { Console, Random } from '@woowacourse/mission-utils';
+const Computer = require('./Computer');
+const Interaction = require('./Interaction');
 
 class App {
   play() {
     Interaction.printPlayMessage();
     const computer = new Computer();
     const interaction = new Interaction();
+    // interaction.printResponseMessage();
   }
 
   start() {
@@ -14,7 +14,7 @@ class App {
     const interaction = new Interaction();
   }
 }
+
+// module.exports = App;
 const app = new App();
 app.play();
-
-module.exports = App;

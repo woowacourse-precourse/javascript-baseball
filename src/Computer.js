@@ -1,6 +1,7 @@
-import { Console, Random } from '@woowacourse/mission-utils';
+const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = MissionUtils;
 
-export default class Computer {
+class Computer {
   constructor() {
     this.number = this.initNumber();
   }
@@ -17,3 +18,5 @@ export default class Computer {
     return container;
   }
 }
+
+module.exports = Computer;
