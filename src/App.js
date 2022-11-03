@@ -1,7 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    const computerRandomNumber = getComputerNumber();
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    getUserInput(computerRandomNumber);
+  }
 }
 
 function getComputerNumber() {
@@ -23,6 +27,7 @@ function getUserInput(computerRandomNumber) {
     const isWin = winOrLose(gameResult);
 
     if (isWin) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return MissionUtils.Console.close();
     }
     getUserInput(computerRandomNumber);
@@ -74,5 +79,8 @@ function winOrLose(resultArr) {
     return false;
   }
 }
+
+const app = new App();
+app.play()
 
 module.exports = App;
