@@ -61,8 +61,9 @@ class App {
     Console.print(`${MESSAGES.SUCCESS} ${MESSAGES.END}`);
     Console.readLine(MESSAGES.RESTART, (answer) => {
     if (!this.isValidEndInput(answer)) {
-      throw new Error();
+      return this.throwError();
     }
+    
     if (parseInt(answer) === NUMBERS.RESTART_GAME) {
       return this.play();
     }
@@ -70,14 +71,15 @@ class App {
       Console.print(MESSAGES.END);
       return Console.close();
     }
-    throw new Error();
+    
+    return this.throwError();
     })
   }
 
   game(computer) {
     Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
       if (!this.isValidNumberInput(input)) {
-        throw new Error();
+        return this.throwError();
       }
       
       const inputNumbers = [...input].map(number => parseInt(number));
@@ -95,6 +97,11 @@ class App {
     const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
     Console.print(MESSAGES.START);
     this.game(computer);
+  }
+
+  throwError() {
+    Console.close();
+    throw new Error();
   }
 }
 
