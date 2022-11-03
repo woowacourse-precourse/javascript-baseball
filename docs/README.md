@@ -8,6 +8,7 @@
 ✅ \[feat\] implement feature that compares between random number and user input
 - \[fix\] add extra logic for edge cases
 - \[test\] write test case for each implementation
+- \[test\] check whether the code passes test cases of ApplicationTest.js and adjust if not
 
 
 # Github commit convention

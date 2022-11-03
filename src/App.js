@@ -1,5 +1,4 @@
-/* eslint-disable class-methods-use-this */
-// this 문제, readline 문제, 삼항연산자 && 가독성
+// this 문제 destructuring & arrow func, readline async 문제, 삼항연산자 && 가독성, jest
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const { Console, Random } = MissionUtils;
@@ -34,6 +33,7 @@ class App {
 
   getUserInput() {
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      if (answer.length !== 3 || !Number.isInteger(+answer) || Math.sign(answer) === -1) throw new Error('잘못된 값을 입력하셨습니다.');
       this.userInput = [...answer];
       this.gameResults = {};
 
@@ -73,7 +73,10 @@ class App {
         this.start();
         return;
       }
-      if (answer === '2') throw '';
+      if (answer === '2') {
+        this.print('게임 종료');
+        return;
+      };
       throw new Error('잘못된 값을 입력하셨습니다.');
     });
   }
