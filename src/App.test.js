@@ -47,20 +47,6 @@ describe('숫자 야구 게임', () => {
 		expect(result).toHaveLength(3);
 	});
 
-	test('getUserNumber 메서드로 받아온 userNumber를 확인', () => {
-		const correctAnswer = ['123'];
-
-		mockQuestions(correctAnswer);
-
-		const app = new App();
-		app.play();
-		const correctResult = app.userNumber;
-
-		expect(correctResult).toEqual('123');
-		expect([...correctResult]).not.toContain('0');
-		expect(correctResult).toHaveLength(3);
-	});
-
 	test('getUserNumber 메서드로 받아온 userNumber 가 0을 포함할 경우 에러를 발생시킨다', () => {
 		const answer = ['012'];
 
@@ -83,14 +69,20 @@ describe('숫자 야구 게임', () => {
 		}).toThrow();
 	});
 
-	test('진행상황 확인용 테스트', () => {
-		const randoms = [1, 3, 5];
-		const answers = ['123'];
-
-		mockRandoms(randoms);
-		mockQuestions(answers);
-
+	test('getComparResult 메소드로 비교한 결과를 반환', () => {
 		const app = new App();
-		app.play();
+		const results = [
+			app.getCompareResult('135', '678'),
+			app.getCompareResult('135', '329'),
+			app.getCompareResult('135', '129'),
+			app.getCompareResult('135', '159'),
+			app.getCompareResult('135', '135'),
+		];
+
+		const messages = ['낫싱', '1볼', '1스트라이크', '1볼 1스트라이크', '3스트라이크'];
+
+		results.forEach((result, index) => {
+			expect(result).toEqual(messages[index]);
+		});
 	});
 });

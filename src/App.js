@@ -1,26 +1,31 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-
-const START_MESSAGE = `숫자 야구 게임을 시작합니다.`;
-const INPUT_USER_NUM_MESSAGE = '숫자를 입력하세요';
-const ERROR_MESSAGE = '알맞은 숫자를 입력하지않아 프로그램을 종료합니다';
-const USER_INPUT_FEEDBACK_MESSAGE = answer => `숫자를 입력하세요 : ${answer}`;
-const NUMBER_RANGE = {
-	MIN: 1,
-	MAX: 9,
-};
-const NUMBER_LENGTH = 3;
-const SHOULD_NOT_INCLUDE_NUMBER = '0';
+const {
+	START_MESSAGE,
+	NUMBER_LENGTH,
+	NUMBER_RANGE,
+	ERROR_MESSAGE,
+	INPUT_USER_NUM_MESSAGE,
+	SHOULD_NOT_INCLUDE_NUMBER,
+	USER_INPUT_FEEDBACK_MESSAGE,
+} = require('./constants');
 
 class App {
 	constructor() {
 		this.computerNumber = '';
-		this.userNumber = '';
+		this.gameEnd = false;
 	}
 
 	play() {
 		this.printMessage(START_MESSAGE);
 		this.computerNumber = this.getComputerNumber();
-		this.userNumber = this.getUserNumber();
+		while (this.gameEnd === false) {
+			const resultMessage = this.getCompareResult(this.computerNumber, this.getUserNumber());
+			this.printMessage(resultMessage);
+			if (resultMessage === '3스트라이크') {
+				this.gameEnd = true;
+				this.printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+			}
+		}
 	}
 
 	printMessage(message) {
@@ -57,6 +62,48 @@ class App {
 			return false;
 		}
 		return true;
+	}
+
+	getCompareResult(computerNumber, userNumber) {
+		const computerArray = [...computerNumber];
+		const userArray = [...userNumber];
+		const ballAndStrikeScore = this.getBallAndStrikeScore(computerArray, userArray);
+		const strikeScore = this.getStrikeScore(computerArray, userArray);
+		const ballScore = ballAndStrikeScore - strikeScore;
+		return this.getResultString(strikeScore, ballScore);
+	}
+
+	getBallAndStrikeScore(computerArray, userArray) {
+		let ballAndStrikeScore = 0;
+		computerArray.forEach(number => {
+			if (userArray.includes(number)) {
+				ballAndStrikeScore += 1;
+			}
+		});
+		return ballAndStrikeScore;
+	}
+
+	getStrikeScore(computerArray, userArray) {
+		let strikeScore = 0;
+		computerArray.forEach((number, index) => {
+			if (number === userArray[index]) {
+				strikeScore += 1;
+			}
+		});
+		return strikeScore;
+	}
+
+	getResultString(strikeScore, ballScore) {
+		if (strikeScore + ballScore === 0) {
+			return '낫싱';
+		}
+		if (strikeScore === 0) {
+			return `${ballScore}볼`;
+		}
+		if (ballScore === 0) {
+			return `${strikeScore}스트라이크`;
+		}
+		return `${ballScore}볼 ${strikeScore}스트라이크`;
 	}
 }
 
