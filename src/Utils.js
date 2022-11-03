@@ -12,7 +12,11 @@ const utils = {
     });
   },
   pickUniqueNumbersInRange(startInclusive, endInclusive, count) {
-    return MissionUtils.Random.pickUniqueNumbersInRange(startInclusive, endInclusive, count);
+    return MissionUtils.Random.pickUniqueNumbersInRange(
+      startInclusive,
+      endInclusive,
+      count
+    );
   },
 };
 
