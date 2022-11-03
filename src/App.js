@@ -43,11 +43,14 @@ class App {
     return computer;
   }
 
-  countStrike() {
-
+  countStrike(input, computer) {
+    const count = input.reduce((prev, curr, idx) => (
+      curr === computer[idx] ? prev + 1 : prev
+    ), 0);
+    return count;
   }
 
-  countBall() {
+  countBall(input, computer) {
 
   }
 
