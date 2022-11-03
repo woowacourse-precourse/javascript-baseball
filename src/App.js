@@ -1,5 +1,7 @@
 class App {
-  play() {}
+  play() {
+    const GAME = new Game();
+  }
 }
 
 module.exports = App;
