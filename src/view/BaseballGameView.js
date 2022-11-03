@@ -1,16 +1,16 @@
 const { printConsole } = require('../utils/missionUtils');
 
 class BaseballGameView {
-  renderPrint(message) {
+  print(message) {
     printConsole(message);
   }
 
-  renderResultGame(result) {
+  printResultGame(result) {
     if (!result) {
-      this.renderPrint('낫싱');
+      this.print('낫싱');
       return;
     }
-    this.renderPrint(result);
+    this.print(result);
   }
 }
 

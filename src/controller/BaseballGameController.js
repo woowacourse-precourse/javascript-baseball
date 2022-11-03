@@ -7,7 +7,7 @@ class BaseballGameController {
   }
 
   startGame() {
-    this.baseballGameView.renderPrint('숫자 야구 게임을 시작합니다.');
+    this.baseballGameView.print('숫자 야구 게임을 시작합니다.');
     this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
     this.triggerUserInput();
   }
@@ -45,7 +45,7 @@ class BaseballGameController {
 
   resultGame() {
     const result = this.getBall() + this.getStrike();
-    this.baseballGameView.renderResultRender(result);
+    this.baseballGameView.printResultGame(result);
     if (result !== '3스트라이크') {
       this.triggerUserInput();
     }
