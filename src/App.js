@@ -72,6 +72,10 @@ class App {
     this.makeHint();
   }
 
+  makeHint() {
+    if (this.hint["nothing"] === 3) this.print("낫싱");
+  }
+
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
     this.setAnswer();
