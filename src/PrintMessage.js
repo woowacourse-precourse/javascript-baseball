@@ -12,3 +12,6 @@ function printUserInput(){
     });
     return userInputNum;
 }
+
+module.exports.printGameStart = printGameStart;
+module.exports.printUserInput = printUserInput;

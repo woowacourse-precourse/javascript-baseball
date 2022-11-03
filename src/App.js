@@ -1,9 +1,9 @@
-const generateComputerNum = require("./GenerateRandomNumber.js");
+const printMessage = require("./PrintMessage.js");
+const playGame = require("./PlayBaseball/js");
 
 class App {
   play() {
-    const computerNum = generateComputerNum();
-    console.log(computerNum);
+    printMessage.printGameStart();
   }
 }
 
