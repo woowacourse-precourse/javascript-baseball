@@ -8,10 +8,9 @@ class App {
 
   setInput(input) {
     input = input.split("").map((num) => parseInt(num));
-    if (this.isBadInput(input)) {
-      this.close();
+    if (!this.isBadInput(input)) {
+      this.input = input;
     }
-    this.input = input;
   }
 
   setAnswer() {
@@ -31,8 +30,9 @@ class App {
       throw new Error("문자를 제외한 숫자만 입력하세요.");
     if (input.includes(0)) throw new Error("1~9 사이의 숫자만 입력하세요.");
     if (!(input.length === 3)) throw new Error("3개의 숫자만 입력하세요.");
-    if (!(input === new Set(input)))
+    if (!(input.length === new Set(input).size))
       throw new Error("서로 다른 숫자를 입력하세요.");
+    return false;
   }
 
   receiveInputFromConsole() {
