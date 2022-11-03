@@ -1,5 +1,5 @@
-const MISSIONUTIL = require("@woowacourse/mission-utils");
-const CONSOLE = MISSIONUTIL.Console;
+const MissionUtils = require("@woowacourse/mission-utils");
+const CONSOLE = MissionUtils.Console;
 
 class App {
   play() {
