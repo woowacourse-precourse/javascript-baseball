@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const { Console, Random } = MissionUtils;
+
 class App {
   constructor() {
     this.userInput = '';
@@ -12,13 +14,15 @@ class App {
       },
 
       isBall(num, idx) {
-        return this.randomNumber[idx] !== num && this.randomNumber.includes(num);
+        return (
+          this.randomNumber[idx] !== num && this.randomNumber.includes(num)
+        );
       },
     };
   }
 
   print(message) {
-    MissionUtils.Console.print(message);
+    Console.print(message);
   }
 
   printStartNotification() {
@@ -26,25 +30,23 @@ class App {
   }
 
   generateRandomNumber() {
-    const { randomNumber } = this;
-    randomNumber = '';
+    this.randomNumber = '';
 
-    while (randomNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!randomNumber.includes(number)) randomNumber += `${number}`;
+    while (this.randomNumber.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!this.randomNumber.includes(number)) this.randomNumber += `${number}`;
     }
-    randomNumber = [...randomNumber];
+    this.randomNumber = [...this.randomNumber];
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      const { userInput, getResult, gameResult, print } = this;
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      const { getResult, gameResult, printResult, restart } = this;
+      this.userInput = [...answer];
 
-      userInput = [...answer];
       getResult();
-      if (!gameResult.strike && !gameResult.ball) print('낫싱');
-      if (gameResult.strike && !gameResult.ball) print(`${gameResult.strike} 스트라이크`);
-      
+      printResult(gameResult);
+      restart();
     });
   }
 
@@ -52,19 +54,42 @@ class App {
     const { compare, gameResults } = this;
 
     this.userInput.forEach((num, idx) => {
-      if (compare.isStrike(num, idx)) gameResults.strike = gameResults.strike + 1 || 1;
-      if (compare.isBall(num, idx)) gameResults.ball = gameResults.ball + 1 || 1;
+      if (compare.isStrike(num, idx)) {
+        gameResults.strike = gameResults.strike + 1 || 1;
+      }
+      if (compare.isBall(num, idx)) {
+        gameResults.ball = gameResults.ball + 1 || 1;
+      }
     });
   }
 
-  get userInput() {
-    return this.userInput;
+  printResult(gameResult) {
+    const { strike, ball } = gameResult;
+    const { print } = this;
+
+    const strikeMessage = `${strike ? strike + '스트라이크 ' : ''}`;
+    const ballMessage = `${ball ? ball + '볼 ' : ''}`;
+    const nothingMessage = `${!strike && !ball ? '낫싱' : ''}`;
+
+    print(strikeMessage + ballMessage + nothingMessage);
+    if (strike === 3) print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
+
+  restart() {
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      if (answer === 1) this.start();
+      if (answer === 2) return;
+    });
+  }
+
+  start() {
+    this.generateRandomNumber();
+    this.getUserInput();
   }
 
   play() {
     this.printStartNotification();
-    this.generateRandomNumber();
-    this.getUserInput();
+    this.start();
   }
 }
 
