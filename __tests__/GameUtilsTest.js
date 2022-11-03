@@ -2,6 +2,10 @@ const App = require('../src/App');
 
 const app = new App();
 
+afterAll(() => {
+  app.exit();
+});
+
 describe('게임 기능 테스트', () => {
   test('컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
     const result = app.generateRandomNumbers();
@@ -26,7 +30,6 @@ describe('게임 기능 테스트', () => {
 
   test('스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환한다.', () => {
     const counts = [
-      [3, 0],
       [1, 0],
       [0, 1],
       [1, 1],
