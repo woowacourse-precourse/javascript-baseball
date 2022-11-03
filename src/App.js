@@ -14,6 +14,43 @@ class App {
     this.strikeCount = 0;
     this.ballCount = 0;
   }
+  inputNumberSizeCheck() {
+    if (this.INPUT_USER_NUMBER.length !== 3) {
+      throw new Error("3자리의 수를 입력하지 않았습니다.");
+    }
+    return this;
+  }
+
+  overlapNumberSpaceCheck() {
+    const overLapNumberSet = new Set(this.INPUT_USER_NUMBER);
+    if (overLapNumberSet.size !== 3) {
+      throw new Error("잘못된 값을 입력하셨습니다.");
+    }
+    return this;
+  }
+  numberTypeCheck() {
+    const numberTypeString = this.INPUT_USER_NUMBER;
+    for (let letter of numberTypeString) {
+      if (typeof parseInt(letter) !== "number") {
+        throw new Error("숫자가 아닌 값을 입력하셨습니다.");
+      }
+    }
+    return this;
+  }
+  zeroSpaceCheck() {
+    for (let letter of this.INPUT_USER_NUMBER) {
+      if (parseInt(letter) === 0) {
+        throw new Error("0을 입력하셨습니다.");
+      }
+    }
+  }
+
+  error() {
+    this.inputNumberSizeCheck();
+    this.overlapNumberSpaceCheck();
+    this.numberTypeCheck();
+    this.zeroSpaceCheck();
+  }
   randomNumberGenerator() {
     this.gameState = false;
     this.RANDOM_NUMBER_ARRAY = pickUniqueNumbersInRange(1, 9, 3);
@@ -24,10 +61,11 @@ class App {
     Console.print(this.RANDOM_NUMBER_ARRAY);
     return this.initNumber();
   }
-
   initNumber() {
     Console.readLine("숫자를 입력하세요. : ", (inputNumber) => {
       this.INPUT_USER_NUMBER = inputNumber;
+      Console.print(Number(inputNumber));
+      this.error();
       this.strikeAndBallCheck();
     });
   }
