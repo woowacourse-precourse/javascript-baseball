@@ -5,7 +5,7 @@
 - 분홍색: gameManager 함수
 - 초록색: game 함수
 - 파랑색: enterNumber 함수
-- 보라색: resultsForEnterNumber 함수
+- 보라색: countStrikeBallNothing 함수, resultsForCount 함수
 - 그 외(컴퓨터가 정하는 랜덤숫자): pickedNumberByComputer 함수
 
 ##
