@@ -9,6 +9,8 @@
 ### 함수 기능 명세
 - `consturctor` : 객체 초기화 시 필요한 변수들을 선언한다.
 - `play` : 해당 메소드를 통해 게임이 시작&재시작 돼야 한다.
+- `gameOrder` : 메인 로직
+- `restart` : 게임 재시작을 위한 함수.
 - `makeRandomNumber` : 컴퓨터의 랜덤 숫자를 만드는 함수.
 - `checkUserValue` : 사용자가 입력한 값이 올바른 형식인지 확인하는 함수.
 - `compareWithUser` : 사용자의 값과 컴퓨터의 값을 비교하는 함수.
