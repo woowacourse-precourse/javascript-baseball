@@ -8,17 +8,16 @@ class App {
   computer = new Computer();
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    if (this.hint === "")
+      MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    while (this.hint !== "3스트라이크") {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-        this.inputNumber = input;
-        hint = getHint(this.computer.correctNumber, this.inputNumber);
-        MissionUtils.Console.print(hint);
-      });
-    }
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.inputNumber = input;
+      this.hint = this.getHint(this.computer.correctNumber, this.inputNumber);
+      MissionUtils.Console.print(this.hint);
 
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      if (this.hint !== "3스트라이크") this.play();
+    });
   }
 
   getIsInputValueValid(inputValue) {
@@ -96,3 +95,4 @@ const convertCountToHintString = (strikeCount, ballCount) => {
 module.exports = App;
 
 const app = new App();
+app.play();
