@@ -1,10 +1,6 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 const { NUMBERS, MESSAGES, RESULT } = require('../src/Constructor')
 class App {
-  result = {
-    ball: 0,
-    strike: 0
-  }
 
   generateRandomNums(min, max, length) {
     const randoms = Random.pickUniqueNumbersInRange(min, max, length);
@@ -33,14 +29,26 @@ class App {
     if (!isInteger) {
       return false;
     }
-    return number === NUMBERS.RESTART_GAME || number === NUMBERS.END_GAME;
+    return userInput == NUMBERS.RESTART_GAME || userInput == NUMBERS.END_GAME;
+  }
+
+  countBallAndStrike(computer, inputNumbers) {
+    let ball = 0;
+    let strike = 0;
+    inputNumbers.forEach((number, index) => {
+      if (number === computer[index]) strike += 1;
+      else if (computer.includes(number)) ball += 1;
+    });
+    return { ball, strike };
   }
   
   play() {
-    const computer =  this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
-    Console.print(MESSAGES.START);
-    Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
-    })
+    try {
+      const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
+      Console.print(MESSAGES.START);
+    } catch {
+      this.error();
+    }
   }
 }
 
