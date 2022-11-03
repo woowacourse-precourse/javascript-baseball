@@ -8,14 +8,13 @@ class App {
     this.strike = 0;
   }
 
-  resetTargetNumber() {
-    this.targetNumber = [];
-    while (this.targetNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.targetNumber.includes(number)) {
-        this.targetNumber.push(number);
-      }
+  init() {
+    const numbers = new Set();
+    while (numbers.size < 3) {
+      numbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
+    
+    this.targetNumber = [...numbers];
   }
 
   inputUserNumber() {
@@ -54,7 +53,7 @@ class App {
   }
 
   guessingNumber() {
-    this.getUserNumber();
+    this.inputUserNumber();
     this.calcResult();
     this.printResult();
 
@@ -64,7 +63,7 @@ class App {
   confirmExit() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       if (answer === '1') {
-        this.resetTargetNumber();
+        this.init();
         this.guessingNumber();
       } else if (answer !== '2') {
         throw('Invalid input');
@@ -73,7 +72,7 @@ class App {
   }
 
   play() {
-    this.resetTargetNumber();
+    this.init();
     this.guessingNumber();
     this.confirmExit();
   }
