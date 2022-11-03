@@ -11,7 +11,12 @@ class App {
       this.checkValidInput(INPUT_NUM); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
     }
   }
-
+  numberToArray(number) {
+    // 숫자를 배열로 바꾸는 함수.
+    const STR = String(number);
+    const MAP_FN = (arg) => Number(arg);
+    return Array.from(STR, MAP_FN);
+  }
   customInput() {
     // 사용자로부터 입력 받는 함수.
     let inputNumber;
