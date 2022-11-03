@@ -1,3 +1,6 @@
+const START_MESSAGE = "숫자 야구 게임을 시작합니다."
+const PLEASE_NUMBER = "숫자를 입력해주세요 :"
+
 class App {
   userInput = ''
   randomNumber = ''
@@ -11,9 +14,8 @@ class App {
     MissionUtils.Console.print(str)
   }
   // 사용자 입력 받기
-  setUserInput(showStr) {
-    return MissionUtils.Console.readLine(showStr, (answer) => {
-      this.outputString(`${showStr} ${answer}`)
+  setUserInput() {
+    return MissionUtils.Console.readLine(PLEASE_NUMBER, (answer) => {
       return this.userInput = answer
     })
   }
