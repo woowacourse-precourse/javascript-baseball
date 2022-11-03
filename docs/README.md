@@ -6,7 +6,7 @@
 - \[feat\] implement feature that restarts the program when exited
 - \[feat\] implement feature that generates random number using library
 - \[feat\] implement feature that compares between random number and user input 
-- \[test\] write test case
+- \[test\] write test case for each implementation
 
 
 # Github commit convention
