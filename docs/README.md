@@ -16,4 +16,4 @@
 코드 가독성을 위한 기능 구현(utils)
 
 1. ~~Missions.Console.print를 print로 wrapping~~
-2. Missions.Console.readLine을 input으로 wrapping
+2. ~~Missions.Console.readLine을 input으로 wrapping~~

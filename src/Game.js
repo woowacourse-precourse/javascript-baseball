@@ -2,7 +2,7 @@ const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다!
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameControlValidation = require("./GameControlValidation.js");
 const GameInputValidation = require("./GameInputValidation.js");
-const print = require("./utils/print.js");
+let print = require("./utils/print.js");
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
