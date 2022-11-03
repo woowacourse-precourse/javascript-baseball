@@ -3,15 +3,34 @@ const MissionUtils = require('@woowacourse/mission-utils');
 /**
  * @param computer : computer가제시한숫자
  * @param user : user가입력한숫자
+ *
+ * @return result : Array
+ * result[0] : ball number
+ * result[1] : strike number
  */
-// function match(computer, user) {
-//   const userArr = user.toString().split('');
-//   computer.toString().split('').forEach((c, index) => {
-//     if (c === userArr[index]) {
-//
-//     }
-//   });
-// }
+function match(computer, user) {
+  const userArr = user.toString().split('');
+  // result[0] : ball
+  // result[1] : strike
+  const result = [0, 0];
+
+  computer.toString().split('').forEach((c, index) => {
+    let ball = 0;
+    let strike = 0;
+    if (userArr.includes(c)) {
+      ball += 1;
+    }
+
+    if (c === userArr[index]) {
+      strike += 1;
+      ball -= 1;
+    }
+    result[0] += ball;
+    result[1] += strike;
+  });
+
+  return result;
+}
 
 /**
  * computer또는 user가 입력한 숫자 값의 validation check
@@ -55,4 +74,4 @@ class App {
   }
 }
 
-module.exports = { App, validationCheck };
+module.exports = { App, validationCheck, match };
