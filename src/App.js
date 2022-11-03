@@ -12,30 +12,65 @@ const makeRandomNumber = () => {
 };
 
 const inputNumber = (targetNumber) => {
-  let isCorrect = false; //예외처리를 위한 boolean
-  // console.log(targetNumber); // 테스트 중 보이게 하기 위함. 이후 필히 삭제
-
-  const regex = /[0-9]/;
-
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    let splittedAnswer = answer.split("");
-    for (let splittedNumber of splittedAnswer) {
-      if (!regex.test(splittedNumber)) {
-        throw "숫자만을 입력해주세요.\n게임 종료";
-      }
-    }
-
-    if (answer.length > 3) {
-      throw "숫자 세 개보다 많이 입력하지 마세요.\n게임 종료";
-    }
-    if (answer.length < 3) {
-      throw "숫자 세 개보다 적게 입력하지 마세요.\n게임 종료";
-    }
-
+    throwExceptions(answer);
     guessNumber(answer, targetNumber);
   });
-  return isCorrect;
 };
+
+const throwExceptions = (answer) => {
+  const regex = /[1-9]/;
+  const zeroRegex = /[0]/;
+  let splittedAnswer = answer.split("");
+  let notANumberList = [];
+  let isZero = false;
+
+  if (zeroRegex.test(answer)) isZero = true;
+
+  if (answer.length === 3 && isZero) {
+    throw "숫자 0이 포함되었습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료";
+  }
+
+  for (
+    let splittedIdx = 0;
+    splittedIdx < splittedAnswer.length;
+    splittedIdx++
+  ) {
+    if (!regex.test(splittedAnswer[splittedIdx])) {
+      notANumberList.push(splittedIdx + 1);
+    }
+  }
+
+  if (notANumberList.length !== 0) {
+    if (answer.length === 3) {
+      throw `${notANumberList.join(
+        ","
+      )}번째 문자는 숫자가 아닙니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+    }
+    if (answer.length > 3) {
+      throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
+        answer.length - 3
+      }개의 문자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+    }
+    if (answer.length < 3) {
+      throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
+        3 - answer.length
+      }개의 문자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+    }
+  }
+
+  if (answer.length > 3) {
+    throw `${
+      answer.length - 3
+    }개의 숫자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+  if (answer.length < 3) {
+    throw `${
+      3 - answer.length
+    }개의 숫자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+};
+// 함수를 더 잘게 쪼개야 됨. answer 길이를 미리 판단하여 세분화한 함수로 보내는 것이 좋아보임. 지금은 if문을 전부 검사함. not good
 
 const guessNumber = (answer, targetNumber) => {
   let userGuessedNumber;
