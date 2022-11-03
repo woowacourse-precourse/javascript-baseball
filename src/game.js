@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { RANDOM_NUMBER } = require('./constants');
 
 class Game {
   start(startMessage) {
@@ -13,8 +14,27 @@ class Game {
         randomNumber.push(number);
       }
     }
-    // console.log(randomNumber);
+
     return randomNumber;
+  }
+
+  getNumberFromUser(enterMessage) {
+    MissionUtils.Console.readLine(enterMessage, (inputNumbers) => {
+      // try, catch ?
+      this.isValidInputNumber(inputNumbers, RANDOM_NUMBER.RANGE);
+    });
+  }
+
+  isValidInputNumber(numbers, validRange) {
+    const diversityOfNum = [...new Set(numbers)].length;
+
+    if (
+      numbers.length !== 3 ||
+      !validRange.test(numbers) ||
+      diversityOfNum !== 3
+    ) {
+      console.error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+    }
   }
 }
 

@@ -9,10 +9,13 @@ class App {
     game.generateRandomNumber(1, 9, 3);
   }
 
-  play() {}
+  play() {
+    game.getNumberFromUser(MESSAGE.ENTER_NUMBER);
+  }
 }
 
 const app = new App();
 app.init();
+app.play();
 
 module.exports = App;
