@@ -1,5 +1,12 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const isValidNumber = (userInputValue) => {
+  const regex = /^[1-9]{3}$/;
+  if (!regex.test(userInputValue.join(''))) {
+    throw Error('1~9까지의 숫자 중 세개의 숫자를 입력해주세요');
+  }
+};
+
 const stringToNumbers = (string) => [...string].map((char) => +char);
 
 const offerUserInput = async () => {
@@ -27,6 +34,10 @@ class App {
   async getUserInputNumbers() {
     const userInputValue = await offerUserInput();
     this.userInputNumbers = stringToNumbers(userInputValue);
+    this.isValid();
+  }
+  isValid() {
+    isValidNumber(this.userInputNumbers);
   }
 }
 
