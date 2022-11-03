@@ -19,7 +19,7 @@ class App {
 
   getUserNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      // TODO: 컴퓨터와 입력한 수 비교
+      this.compareNumber(this.computerNumber, this.stringToNumberArray(input))
     });
   }
 
