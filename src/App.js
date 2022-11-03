@@ -31,6 +31,7 @@ class App {
   }
 
   init() {
+    this.generateRandomNumber();
     this.initUserInputInterface();
   }
 
