@@ -1,10 +1,12 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
+const { GAME_RULE } = require('./constant');
 
 const missionUtils = {};
 
-missionUtils.getRandomNumber = (startRange = 1, endRange = 9) => {
-  return Random.pickNumberInRange(startRange, endRange);
-};
+missionUtils.getRandomNumber = (
+  minNumber = GAME_RULE.MIN_NUMBER,
+  maxNumber = GAME_RULE.MAX_NUMBER,
+) => Random.pickNumberInRange(minNumber, maxNumber);
 
 missionUtils.triggerConsole = (message, fn) => {
   Console.readLine(message, fn);

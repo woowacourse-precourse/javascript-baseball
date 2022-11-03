@@ -1,3 +1,4 @@
+const { GAME_MESSAGE } = require('../utils/constant');
 const { printConsole } = require('../utils/missionUtils');
 
 class BaseballGameView {
@@ -13,7 +14,7 @@ class BaseballGameView {
     } else if (ball && strike) {
       this.print(`${ball} ${strike}`);
     } else if (!ball && !strike) {
-      this.print('낫싱');
+      this.print(GAME_MESSAGE.NOTHING);
     }
   }
 }

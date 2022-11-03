@@ -1,3 +1,4 @@
+const { GAME_MESSAGE, GAME_RULE } = require('../utils/constant');
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
 const { isValidateNumber, isValidateNumbers } = require('../utils/validator');
 
@@ -8,13 +9,13 @@ class BaseballGameController {
   }
 
   startGame() {
-    this.baseballGameView.print('숫자 야구 게임을 시작합니다.');
+    this.baseballGameView.print(GAME_MESSAGE.START);
     this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
     this.triggerGame();
   }
 
   triggerGame() {
-    triggerConsole('숫자를 입력해주세요 : ', (number) => {
+    triggerConsole(GAME_MESSAGE.INPUT_NUMBERS, (number) => {
       if (isValidateNumbers(number)) {
         this.baseballGameModel.setUserValue(number);
         this.resultGame();
@@ -25,21 +26,21 @@ class BaseballGameController {
   resultGame() {
     const strike = this.getStrike();
     const ball = this.getBall();
-    if (strike !== '3스트라이크') {
+    if (strike !== `${GAME_RULE.STRIKE}${GAME_MESSAGE.STRIKE}`) {
       this.baseballGameView.printResultGame(strike, ball);
       this.triggerGame();
-    } else if (strike === '3스트라이크') {
-      this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    } else if (strike === `${GAME_RULE.STRIKE}${GAME_MESSAGE.STRIKE}`) {
+      this.baseballGameView.print(GAME_MESSAGE.SUCCESS);
       this.successGame();
     }
   }
 
   successGame() {
-    triggerConsole('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
+    triggerConsole(GAME_MESSAGE.INPUT_NUMBER, (number) => {
       if (isValidateNumber(number)) {
-        if (number === '1') {
+        if (number === GAME_RULE.RESTART_NUMBER) {
           this.restartGame();
-        } else if (number === '2') {
+        } else if (number === GAME_RULE.FINISH_NUMBER) {
           closeConsole();
         }
       }
@@ -53,18 +54,18 @@ class BaseballGameController {
 
   getStrike() {
     let strike = 0;
-    for (let index = 0; index < 3; index += 1) {
+    for (let index = 0; index < GAME_RULE.NUMBERS_LENGTH; index += 1) {
       if (this.baseballGameModel.userValue[index] === this.baseballGameModel.computerValue[index]) {
         strike += 1;
       }
     }
-    return strike ? `${strike}스트라이크` : '';
+    return strike ? `${strike}${GAME_MESSAGE.STRIKE}` : '';
   }
 
   getBall() {
     const strike = this.getStrike();
     let ball = 0;
-    for (let index = 0; index < 3; index += 1) {
+    for (let index = 0; index < GAME_RULE.NUMBERS_LENGTH; index += 1) {
       if (this.baseballGameModel.computerValue.includes(this.baseballGameModel.userValue[index])) {
         ball += 1;
       }
@@ -72,7 +73,7 @@ class BaseballGameController {
     if (strike) {
       ball -= Number(strike.slice(0, 1));
     }
-    return ball ? `${ball}볼` : '';
+    return ball ? `${ball}${GAME_MESSAGE.BALL}` : '';
   }
 }
 
