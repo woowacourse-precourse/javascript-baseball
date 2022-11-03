@@ -59,20 +59,28 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
-  test("1~9까지의 숫자 예외 테스트", () => {
-    const app = new App();
-    const input = "";
+  test("예외테스트2 : 0이 포함될 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["120"];
 
-    expect(() => app.isValidSingleDigitNaturalNumber(input)).toThrow(
-      "1에서 9까지의 자연수를 입력해주세요"
-    );
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1에서 9까지의 자연수를 입력해주세요");
   });
-  test("서로 다른 숫자 예외 테스트", () => {
-    const app = new App();
-    const input = "123";
+  test("예외테스트3 : 빈문자열이 포함된 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["12 "];
 
-    expect(() => app.isValidNumberWithoutDuplicate(input)).toThrow(
-      "서로 다른 3개의 숫자를 입력해주세요"
-    );
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1에서 9까지의 자연수를 입력해주세요");
   });
 });
