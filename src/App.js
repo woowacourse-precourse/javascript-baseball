@@ -115,7 +115,9 @@ class App {
   isUserWin() {
     this.gameResult.strike === 3 ? this.gameOver() : this.retry();
   }
-  gameOver() {}
+  gameOver() {
+    Console.print(GAME_MESSAGE.gameOverMessage);
+  }
   retry() {
     this.initGameResult();
     this.getUserInputNumbers();
