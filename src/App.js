@@ -21,6 +21,7 @@ function numberInput() {
 function inputValidation(number) {
     threeDigitValidation(number);
     numberRangeValidation(number);
+    reduplicationValidation(number);
 }
 
 function threeDigitValidation(number) {
@@ -34,6 +35,14 @@ function numberRangeValidation(number) {
     const numberSplit = String(number).split("").map(Number);
     const isNumberBetween = numberSplit.every(eachDigit => eachDigit > 0 && eachDigit < 10);
     if (!isNumberBetween) {
+        throw "잘못된 값을 입력하였습니다.";
+    }
+}
+
+function reduplicationValidation(number) {
+    const numberSplit = String(number).split("");
+    const isReduplication = new Set(numberSplit).size === 3;
+    if (!isReduplication) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
