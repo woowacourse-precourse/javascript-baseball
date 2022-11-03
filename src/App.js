@@ -46,7 +46,10 @@ class App {
   }
   
   printResult(strike, ball) {
-    if (strike === 0 && ball === 0) MissionUtils.Console.print('낫싱');
+    if (strike === 0 && ball === 0) {
+      MissionUtils.Console.print('낫싱');
+      return;
+    } 
     
     const resultText = [];
     if (ball > 0) resultText.push(ball + '볼');
