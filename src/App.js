@@ -10,7 +10,24 @@ class App {
       checkContinue = game();
     }
   }
+  
+  async game() {
+    // step2
+    let computer = this.setComputerNum();
+    MissionUtils.Console.print(computer);
 
+    while(true) {
+      // step3
+      let input = await this.setUserNum();
+      MissionUtils.Console.print(input);
+
+      // step4
+
+      // step5
+
+      // step6
+    }
+  }
 
   setUserNum() {
     return new Promise((resolve) => {
@@ -73,7 +90,12 @@ class App {
   }
 
   checkContinue() {
-
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+        if (![1,2].inclues(input)) throw new Error('input error: should be 1 or 2');
+        else resolve(input);
+      });
+    })
   }
 }
 
