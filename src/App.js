@@ -9,6 +9,7 @@ class App {
     while (isEnd) {
       // Todo: 사용자가 정답을 맞출때 까지 숫자 입력 받아야함.
       inputNum = this.customInput();
+      this.checkValidInput(inputNum); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
     }
   }
 
@@ -25,18 +26,13 @@ class App {
     // 입력받은 숫자가 유효한 숫자인지 확인하는 함수.
     // 1. 3자리 숫자인지 체크
     // 2. 서로 다른 숫자인지 체크
-    // 3. 리턴값 : true, false
     const INPUT_NUM_ARR = (inputNum + "").split(""); // 숫자를 arr로 바꾸기.
     const INPUT_NUM_SET = new Set(INPUT_NUM_ARR); // 서로 다른 숫자인지 확인하기 위한 Set Object 만들기.
 
-    let validThreeDigit = false; // 3자리 수 체크하는 변수
-    let validDifferentNubmer = false; // 다 다른 숫자인지 체크하는 변수
-
-    if (INPUT_NUM_ARR.length === 3) validThreeDigit = true;
-    if (INPUT_NUM_ARR.length === INPUT_NUM_SET.size)
-      validDifferentNubmer = true;
-
-    return validThreeDigit && validDifferentNubmer;
+    if (INPUT_NUM_ARR.length !== 3)
+      throw "길이가 3인 숫자를 입력해야합니다. 프로그램을 종료합니다.";
+    if (INPUT_NUM_ARR.length !== INPUT_NUM_SET.size)
+      throw "각각 다른 숫자를 입력해야합니다. 프로그램을 종료합니다.";
   }
 }
 
