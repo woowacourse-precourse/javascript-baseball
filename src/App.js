@@ -24,19 +24,26 @@ class App {
 
   inputAnswer() {
     Console.readLine('숫자를 입력해주세요 : ', answer => {
-      if (this.isInvalidInput(answer)) {
-        throw new Error('잘못된 입력입니다. 게임 종료');
+      try {
+        this.checkUserInput(answer);
+        this.printHint(answer);
+
+        if (this.gameManager.isGameOver) {
+          this.gameOver();
+          return;
+        }
+
+        this.inputAnswer();
+      } catch (err) {
+        throw err;
       }
-
-      this.printHint(answer);
-
-      if (this.gameManager.isGameOver) {
-        this.gameOver();
-        return;
-      }
-
-      this.inputAnswer();
     });
+  }
+
+  checkUserInput(inputValue) {
+    if (this.isInvalidInput(inputValue)) {
+      throw new Error('잘못된 입력입니다. 게임 종료');
+    }
   }
 
   isInvalidInput(inputValue) {
