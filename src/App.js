@@ -27,14 +27,9 @@ class App {
   }
 
   isBadInput(input) {
-    if (input.includes(NaN)) {
-      this.print("한글, 영어, 특수문자 등을 제외한 숫자만 입력하세요.");
-      return true;
-    }
-    if (input.includes(0)) {
-      this.print("1~9 사이의 숫자만 입력하세요.");
-      return true;
-    }
+    if (input.includes(NaN))
+      throw new Error("문자를 제외한 숫자만 입력하세요.");
+    if (input.includes(0)) throw new Error("1~9 사이의 숫자만 입력하세요.");
   }
 
   receiveInputFromConsole() {
