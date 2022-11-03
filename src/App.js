@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
-    const ANSWER_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const ANSWER_NUMBER = this.makeAnswer();
     let isEnd = false;
     // 미션 유틸 라이브러리에 있는 함수 pickUniqueNumbersInRange를 활용하여 1부터 9까지의 숫자 중 겹치지 않는 3개의 숫자를 반환.
     // 출력값 예시)[ 3, 2, 8 ] or [ 2, 3, 4 ] 같이 배열로 반환됨.
@@ -19,6 +19,14 @@ class App {
     this.selectEndState();
   }
 
+  makeAnswer() {
+    let answer = [];
+    while (answer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(number)) answer.push(number);
+    }
+    return answer;
+  }
   numberToArray(number) {
     // 숫자를 배열로 바꾸는 함수.
     const STR = String(number);
