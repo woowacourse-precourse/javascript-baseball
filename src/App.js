@@ -17,6 +17,10 @@ class App {
   closeConsole() {
     MissionUtils.Console.close()
   }
+  // 랜덤 숫자 뽑기
+  getRandomNumber() {
+    this.randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+  }
 } 
 
 module.exports = App;
