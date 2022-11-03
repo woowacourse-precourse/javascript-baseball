@@ -30,7 +30,7 @@ class App {
     input.split('').forEach((character) => {
       const number = parseInt(character);
       if (isNaN(number)) throw new Error('숫자가 아닙니다');
-      if (number === 0) throw new Error('0이 포함되어 있습니다')
+      if (number === 0) throw new Error('0이 포함되어 있습니다');
       set.add(number);
     });
 
@@ -96,6 +96,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
