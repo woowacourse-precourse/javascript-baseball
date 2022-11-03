@@ -1,26 +1,15 @@
-const { Console, Random } = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
+const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 
 const DUPLICATE_CHARACTER_REGEX = /(.)\1{1,}/;
 const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
 const THREE_DIGIT_NUMBER_REGEX = /^[1-9]{3}$/;
 
 class App {
-  computer;
-  isGameOver;
+  gameManager;
 
   constructor() {
-    this.computer = this.generateRandomNumbers();
-    this.isGameOver = false;
-  }
-
-  generateRandomNumbers() {
-    const numberSet = new Set();
-
-    while (numberSet.size !== 3) {
-      numberSet.add(Random.pickNumberInRange(1, 9));
-    }
-
-    return [...numberSet];
+    this.gameManager = new NumberBaseballGameManager();
   }
 
   play() {
@@ -41,7 +30,7 @@ class App {
 
       this.printHint(answer);
 
-      if (this.isGameOver) {
+      if (this.gameManager.isGameOver) {
         this.gameOver();
         return;
       }
@@ -66,70 +55,7 @@ class App {
   }
 
   printHint(answer) {
-    Console.print(this.getHint(this.computer, answer));
-  }
-
-  getHint(computerNumbers, answer) {
-    const [strikeCount, ballCount] = this.getBallCounts(
-      computerNumbers,
-      answer,
-    );
-    const hintType = this.getHintType(strikeCount, ballCount);
-
-    if (strikeCount === 3) {
-      this.isGameOver = true;
-    }
-
-    return {
-      NOTHING: '낫싱',
-      ONLY_BALLS: `${ballCount}볼`,
-      ONLY_STRIKES: `${strikeCount}스트라이크`,
-      DEFAULT: `${ballCount}볼 ${strikeCount}스트라이크`,
-    }[hintType];
-  }
-
-  getBallCounts(computerNumbers, answer) {
-    const userNumbers = answer
-      .split('')
-      .map(userNumber => parseInt(userNumber, 10));
-
-    return userNumbers.reduce(
-      (prevBallCounts, userNumber, idx) => {
-        const [strikeCount, ballCount] = prevBallCounts;
-
-        if (this.isStrike(computerNumbers[idx], userNumber)) {
-          return [strikeCount + 1, ballCount];
-        }
-
-        if (this.isBall(computerNumbers, userNumber)) {
-          return [strikeCount, ballCount + 1];
-        }
-
-        return [strikeCount, ballCount];
-      },
-      [0, 0],
-    );
-  }
-
-  isStrike(computerNumber, userNumber) {
-    return computerNumber === userNumber;
-  }
-
-  isBall(computerNumbers, userNumber) {
-    return computerNumbers.includes(userNumber);
-  }
-
-  getHintType(strikeCount, ballCount) {
-    switch (true) {
-      case strikeCount === 0 && ballCount === 0:
-        return 'NOTHING';
-      case strikeCount === 0:
-        return 'ONLY_BALLS';
-      case ballCount === 0:
-        return 'ONLY_STRIKES';
-      default:
-        return 'DEFAULT';
-    }
+    Console.print(this.gameManager.getHint(answer));
   }
 
   gameOver() {
@@ -163,12 +89,9 @@ class App {
   }
 
   restartGame() {
-    this.isGameOver = false;
-    this.computer = this.generateRandomNumbers();
+    this.gameManager.reset();
     this.inputAnswer();
   }
 }
-
-new App().play();
 
 module.exports = App;
