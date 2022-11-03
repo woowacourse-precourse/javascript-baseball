@@ -44,6 +44,24 @@ class App {
         }
         this.printResult([BALLS, STRIKES]);
     }
+    printResult(res) {
+        if (res[1] === 3) {
+            MissionUtils.Console.print(
+                "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+            );
+            this.checkRetry();
+        } else {
+            if (res[0] === 0 && res[1] === 0)
+                MissionUtils.Console.print("낫싱");
+            else
+                MissionUtils.Console.print(
+                    `${res[0] > 0 ? res[0] + "볼 " : ""}${
+                        res[1] > 0 ? res[1] + "스트라이크" : ""
+                    }`.trimEnd()
+                );
+            this.getInput();
+        }
+    }
 }
 
 module.exports = App;
