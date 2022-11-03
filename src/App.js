@@ -1,5 +1,9 @@
 class App {
   userInput = ''
+  randomNumber = ''
+  strike = 0
+  ball = 0
+  notThing = false
 
   play() {}
 
@@ -27,11 +31,41 @@ class App {
 
     return true
   }
-  // 스트라이크, 볼 멤버변수 초기화하기
+  // 스트라이크, 볼, 낫싱 멤버변수 초기화하기
   resetStringAndBall() {
     this.strike = 0
     this.ball = 0
+    this.notThing = false
   }
+  // 입력 판단하기 (스트라이크, 볼, 낫싱)
+  JudgeInput() {
+    this.resetStringAndBall()
+    
+    const inputSet = new Set()
+    this.findStrike(inputSet)
+    this.findBall(inputSet)
+
+    if (this.ball === 0 && this.strike === 0) this.notThing = true
+  }
+  // 스트라이크 찾기
+  findStrike(set) {
+    let input = this.userInput.split('')
+
+    input.forEach((val, i) => {
+      set.add(val)
+      if (val === this.randomNumber[i]) {
+        set.delete(val)
+        this.strike += 1
+      }
+    })
+  }
+  // 볼 찾기
+  findBall(set) {
+    set.forEach((val) => {
+      if (this.randomNumber.includes(val)) this.ball += 1
+    })
+  }
+
 } 
 
 module.exports = App;
