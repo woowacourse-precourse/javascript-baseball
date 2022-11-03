@@ -1,11 +1,11 @@
 function checkInputAvailable(input) {
   let isAvailable = true;
   let checkedLetter = [];
-  const regExp = /[0-9]/g;
+  const REGEXP = /[0-9]/g;
 
   input.forEach((letter) => {
     if (
-      !letter.match(regExp) ||
+      !letter.match(REGEXP) ||
       checkedLetter.includes(letter) ||
       input.length !== 3
     ) {
