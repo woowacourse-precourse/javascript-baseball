@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const GameControlValidation = require("./GameControlValidation.js");
 const GameInputValidation = require("./GameInputValidation.js");
 let print = require("./utils/print.js");
+let input = require("./utils/input.js");
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
@@ -24,15 +25,14 @@ module.exports = class Game {
     return computerNumbers;
   }
 
-  getUserNumberInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-      let validationChecker = new GameInputValidation(number);
-      validationChecker.validation();
-      print(this.getGameResultString(number));
-      if (this.getGameResultString(number) == GAME_WIN) {
-        this.handleGame();
-      } else this.getUserNumberInput();
-    });
+  async getUserNumberInput() {
+    const userNumberInput = await input("숫자를 입력해 주세요 : ");
+    let validationChecker = new GameInputValidation(userNumberInput);
+    validationChecker.validation();
+    print(this.getGameResultString(userNumberInput));
+    if (this.getGameResultString(userNumberInput) == GAME_WIN) {
+      this.handleGame();
+    } else this.getUserNumberInput();
   }
 
   getGameResultString(inputNumber) {
@@ -70,15 +70,13 @@ module.exports = class Game {
     return count;
   }
 
-  handleGame() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (number) => {
-        let gameControlValidation = new GameControlValidation(number);
-        gameControlValidation.validation();
-        if (number == 1) this.gameInit();
-        else MissionUtils.Console.close();
-      }
+  async handleGame() {
+    let userControlInput = await input(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
     );
+    let gameControlValidation = new GameControlValidation(userControlInput);
+    gameControlValidation.validation();
+    if (userControlInput == 1) this.gameInit();
+    else MissionUtils.Console.close();
   }
 };
