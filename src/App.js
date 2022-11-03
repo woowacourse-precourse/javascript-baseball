@@ -4,6 +4,8 @@ class App {
   constructor() {
     this.targetNumber = [];
     this.userNumber = [];
+    this.ball = 0;
+    this.strike = 0;
   }
 
   resetTargetNumber() {
@@ -26,9 +28,24 @@ class App {
     });
   }
 
+  calcResult() {
+    this.ball = 0;
+    this.strike = 0;
+    for (let i = 0; i < this.targetNumber.length; i++) {
+      const idx = this.userNumber.indexOf(this.targetNumber[i]);
+
+      if (idx === i) {
+        this.strike += 1;
+      } else if (idx !== -1) {
+        this.ball += 1;
+      }
+    }
+  }
+
   play() {
     this.resetTargetNumber();
     this.getUserNumber();
+    this.calcResult();
   }
 }
 
