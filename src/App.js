@@ -1,7 +1,8 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
-const VALID_INPUT_REGEX = /^[1-9]{3}$/;
+const DUPLICATE_CHARACTER_REGEX = /(.)\1{1,}/;
 const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
+const THREE_DIGIT_NUMBER_REGEX = /^[1-9]{3}$/;
 
 class App {
   computer;
@@ -47,6 +48,21 @@ class App {
 
       this.inputAnswer();
     });
+  }
+
+  isInvalidInput(inputValue) {
+    return (
+      this.isNotThreeDigitNumber(inputValue) ||
+      this.hasDuplicateNumber(inputValue)
+    );
+  }
+
+  isNotThreeDigitNumber(inputValue) {
+    return !THREE_DIGIT_NUMBER_REGEX.test(inputValue);
+  }
+
+  hasDuplicateNumber(inputValue) {
+    return DUPLICATE_CHARACTER_REGEX.test(inputValue);
   }
 
   printHint(answer) {
