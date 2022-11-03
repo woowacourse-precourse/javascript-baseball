@@ -1,5 +1,18 @@
+const Console = require('./Console');
+const { MESSAGE } = require('./static/constants');
+
 class App {
-  play() {}
+  constructor() {
+    this.console = new Console();
+  }
+
+  play() {
+    this.printStartMessage();
+  }
+
+  printStartMessage() {
+    this.console.print(MESSAGE.startApp);
+  }
 }
 
 module.exports = App;
