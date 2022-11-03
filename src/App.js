@@ -1,6 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   getThreeRandom() {
-    const MissionUtils = require("@woowacourse/mission-utils");
     const randoms = [];
 
     while (randoms.length < 3) {
@@ -10,7 +11,11 @@ class App {
       }
     }
     return randoms.join('');
-  }
+  };
+
+  printStart() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  };
 
   play() {}
 }
