@@ -30,23 +30,25 @@ class App {
       userNumberStr,
       this.computerNumberArr
     );
+    this.printNumberOfBallAndStrike(totalCountBall, totalCountStrike);
+    this.getUserNumberFromReadLine();
+  }
 
+  printNumberOfBallAndStrike(totalCountBall, totalCountStrike) {
     if (totalCountStrike === 0 && totalCountBall === 0) {
-      MissionUtils.Console.print("낫싱");
+      return MissionUtils.Console.print("낫싱");
     } else if (totalCountStrike === 3) {
       MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.confirmExitOrReStart();
+      return this.confirmExitOrReStart();
     } else if (totalCountBall === 0) {
-      MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
+      return MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
     } else if (totalCountStrike === 0) {
-      MissionUtils.Console.print(`${totalCountBall}볼`);
-    } else {
-      MissionUtils.Console.print(
-        `${totalCountBall}볼 ${totalCountStrike}스트라이크`
-      );
+      return MissionUtils.Console.print(`${totalCountBall}볼`);
     }
-    this.getUserNumberFromReadLine();
+    return MissionUtils.Console.print(
+      `${totalCountBall}볼 ${totalCountStrike}스트라이크`
+    );
   }
 
   confirmExitOrReStart() {
