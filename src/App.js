@@ -41,11 +41,22 @@ const CHECK_BALL = function numberOfBalls(userInput, answer) {
   return count;
 }
 
+const RESTART = function restartGame(userInput) {
+  if (+userInput === 1) START_GAME();
+  if (+userInput === 2) MissionUtils.Console.close();
+}
+
+const END_OF_GAME = function askQuestionToUserWhenGameEnds() {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userInput) => {
+    RESTART(userInput);
+  });
+}
+
 const GAME_HINT = function getHintFromInput(userInput, answer) {
   const strikes = CHECK_STRIKE(userInput, answer);
   const balls = CHECK_BALL(userInput, answer);
 
-  if (strikes === 3) return true;
+  if (strikes === 3) END_OF_GAME();
   if (strikes === 0 && balls === 0) {
     GAME_APP(answer);
   }
@@ -56,14 +67,12 @@ const GAME_APP = function gameApplication(answer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
     GAME_HINT(userInput, answer);
   });
-  
 }
 
 const START_GAME = function launchNewGame() {
   const ANSWER = MAKEANSWER();
   GAME_APP(ANSWER);
 }
-
 
 class App {
   play() {
