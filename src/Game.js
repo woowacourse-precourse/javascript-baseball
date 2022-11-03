@@ -1,3 +1,4 @@
+const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 const MissionUtils = require("@woowacourse/mission-utils");
 module.exports = class Game {
   constructor() {
@@ -25,7 +26,7 @@ module.exports = class Game {
   getStrikeCount(inputNumber) {
     let count = 0;
     for (index in inputNumber) {
-      if (inputNumber[index] == this.computerNumbers[index]) count++;
+      if (inputNumber[index] == this.computerNumbers[index]) count += 1;
     }
     return count;
   }
@@ -33,9 +34,12 @@ module.exports = class Game {
   getBallCount() {
     let count = 0;
     for (index in inputNumber) {
-      if (inputNumber[index] == this.computerNumbers[(index + 1) % 3]) count++;
-      if (inputNumber[index] == this.computerNumbers[index - 1]) count++;
+      if (inputNumber[index] == this.computerNumbers[(index + 1) % 3]) {
+        count += 1;
+      }
+      if (inputNumber[index] == this.computerNumbers[index - 1]) {
+        count += 1;
+      }
     }
   }
-  
 };
