@@ -116,12 +116,23 @@
    - `hint`를 출력한다.
    - `hint`와 `3스트라이크`가 불일치하면 `play()`함수 다시 호출
 
+<br/>
+
 7. 게임 종료 이후 재시작 여부를 결정하는 기능
    - App클래스에 `recommendRestart` 메서드 추가
    - `play()`에서 재귀 호출 조건에 걸리지 않았을 때 `recommendRestart`호출
      - `3개의 숫자를 모두 맞히셨습니다! 게임 종료` 문구를 출력한다.
      - `MissionUtils.Console.readLine`을 통해 사용자에게 값을 입력 받는다
      - 1이 입력된 경우 `play()`호출
+
+<br/>
+
+8. 이전 게임에서 사용된 변수들의 값을 리셋 하는 기능
+   - App 클래스에 `resetGameValue` 메서드 추가
+     - `hint` 프로퍼티를 빈 문자열로 초기화
+     - `computer` 클래스의 `setNewCorrectNumber` 메서드 호출하여 랜덤 숫자 교체
+
+<br/>
 
 ## 🚨 예외 경우
 
