@@ -1,6 +1,6 @@
 // 해당 파일은 로직을 합치기 전, 임시 코드를 작성하는 파일입니다.
 
-const { Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class testCode {
   getUserInputNum() {
@@ -25,7 +25,11 @@ class testCode {
     }
     return false;
   }
+
+  getComputerRandomNum() {
+    return Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
 }
 
 const test = new testCode();
-test.checkInputValidation('123');
+test.getComputerRandomNum();
