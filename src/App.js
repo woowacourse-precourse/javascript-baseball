@@ -18,9 +18,17 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const throwError = (message) => {
+  try {
+    throw message;
+  } catch (error) {
+    Console.print('Error: ' + error);
+  }
+};
+
 const isOneOrTwo = (num) => {
   if (!['1', '2'].includes(num)) {
-    throw Error(ERROR_MESSAGE.invalidRestartValue);
+    throwError(ERROR_MESSAGE.invalidRestartValue);
   }
 };
 
@@ -57,14 +65,14 @@ const haveDuplicateNumber = (userInputNumbers) => {
     return userInputNumbers.indexOf(num) !== userInputNumbers.lastIndexOf(num);
   });
   if (duplicateNumber.length > 0) {
-    throw Error(ERROR_MESSAGE.duplicateError);
+    throwError(ERROR_MESSAGE.duplicateError);
   }
 };
 
 const isValidNumber = (userInputValue) => {
   const regex = /^[1-9]{3}$/;
   if (!regex.test(userInputValue.join(''))) {
-    throw Error(ERROR_MESSAGE.invalidValueError);
+    throwError(ERROR_MESSAGE.invalidValueError);
   }
 };
 
