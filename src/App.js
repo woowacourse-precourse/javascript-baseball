@@ -14,6 +14,29 @@ class App {
     }
     return DIFFER_RANDOM_NUM_ARR;
   }
+
+  checkUserInputValid(userInputArr) {
+    if (!userInputArr) {
+      return false;
+    }
+    if (
+      !userInputArr.every((num) => {
+        return Number.isInteger(num) && num > 0;
+      })
+    ) {
+      return false;
+    }
+    if (userInputArr.length !== 3) {
+      return false;
+    }
+    if (userInputArr.includes(0)) {
+      return false;
+    }
+    if (new Set(userInputArr).size !== userInputArr.length) {
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = App;
