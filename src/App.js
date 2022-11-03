@@ -11,6 +11,13 @@ const GAME_MESSAGE = {
 const ERROR_MESSAGE = {
   duplicateError: '중복 된 숫자를 입력할 수 없습니다',
   invalidValueError: '1~9까지의 숫자 중 세개의 숫자를 입력해주세요',
+  invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
+};
+
+const isOneOrTwo = (num) => {
+  if (!['1', '2'].includes(num)) {
+    throw Error(ERROR_MESSAGE.invalidRestartValue);
+  }
 };
 
 const getGameResultMessage = (gameResult) => {
@@ -126,6 +133,7 @@ class App {
   }
   async doesUserWantRestart() {
     const inputValue = await offerUserInput(GAME_MESSAGE.restart);
+    isOneOrTwo(inputValue);
   }
 }
 
