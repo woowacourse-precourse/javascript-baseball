@@ -13,11 +13,16 @@ function isOutOfRange(value) {
   return result;
 }
 
+function isDuplicated(value) {
+  return ([...new Set(value)].length !== 3);
+}
+
 function isVaild(value) {
   console.log(value);
   if(value.length === 0) throw new Error(constants.MESSAGE.IS_BLANK);
   if(isNotThreeLength(value)) throw new Error(constants.MESSAGE.NOT_THREE_LENGTH);
   if(isOutOfRange(value)) throw new Error(constants.MESSAGE.NOT_NUMBER_RANGE);
+  if(isDuplicated(value)) throw new Error(constants.MESSAGE.IS_DUPLICATED);
 }
 
 exports.isVaild = isVaild;
