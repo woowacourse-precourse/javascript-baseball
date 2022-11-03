@@ -4,6 +4,11 @@ class App {
   constructor() {
     this.input;
     this.answer;
+    this.hint = {
+      ball: 0,
+      strike: 0,
+      nothing: 0,
+    };
   }
 
   setInput(input) {
