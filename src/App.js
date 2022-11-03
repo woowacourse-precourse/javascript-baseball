@@ -39,3 +39,21 @@ const strikeCount = (computer,user) => {
   },0)
   return count;
 }
+
+const gameRule = (computer,user) => {
+  let ballScore = ballCount(computer,user);
+  let strikeScorer = strikeCount(computer,user);
+  if(strikeScorer === 3) {
+    return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+  }
+  if(ballScore === 0 && strikeScorer === 0) {
+    return "낫싱";
+  }
+  if(strikeScorer === 0) {
+    return `${ballScore}볼`;
+  }
+  if(ballScore === 0) {
+    return `${strikeScorer}스트라이크`;
+  }
+  return `${ballScore}볼 ${strikeScorer}스트라이크`
+}
