@@ -4,6 +4,7 @@ class App {
   play() {
     this.showStartMessage();
     this.makeRandomNumber();
+    this.getUserInput();
   }
 
   showStartMessage() {
@@ -21,6 +22,8 @@ class App {
         this.COMPUTER.push(number);
       }
     }
+
+    this.checkConstraints(this.COMPUTER);
   }
 
   checkNumberRange(inputData) {
@@ -65,6 +68,14 @@ class App {
     }
 
     return true;
+  }
+
+  getUserInput() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.checkConstraints(userInput);
+
+      MissionUtils.Console.close();
+    });
   }
 }
 
