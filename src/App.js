@@ -44,7 +44,7 @@ class App {
 
   checkUserInput(inputValue) {
     if (this.isInvalidInput(inputValue)) {
-      throw new Error('잘못된 입력입니다. 게임 종료');
+      throw new Error('잘못된 입력입니다.');
     }
   }
 
