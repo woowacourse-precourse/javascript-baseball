@@ -39,7 +39,7 @@ class NumberBaseballGameManager {
     );
     const hintType = this.getHintType(strikeCount, ballCount);
 
-    if (strikeCount === 3) {
+    if (strikeCount === RANDOM_NUMBER_COUNT) {
       this.isGameOver = true;
     }
 
