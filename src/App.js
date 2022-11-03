@@ -29,6 +29,15 @@ class App {
       throw "서로 다른 3개의 숫자를 입력해주세요";
     }
   }
+  getRandomNumberFromComputer() {
+    const randomArr = [];
+
+    while (randomArr.length !== 3) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      !randomArr.includes(randomNum) && randomArr.push(randomNum);
+    }
+    return randomArr;
+  }
 }
 
 const app = new App();
