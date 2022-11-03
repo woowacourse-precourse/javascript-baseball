@@ -13,7 +13,7 @@ function baseballGameCycle(randomNumbers) {
         ? getRestartOption()
         : baseballGameCycle(randomNumbers);
     } else {
-      //throw문 구현
+      throw new Error("잘못된 값을 입력했습니다.");
     }
   });
 }
