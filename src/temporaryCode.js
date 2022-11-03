@@ -1,4 +1,4 @@
-// 해당 파일은 테스트 코드를 작성하는 파일입니다.
+// 해당 파일은 로직을 합치기 전, 임시 코드를 작성하는 파일입니다.
 
 const { Console } = require('@woowacourse/mission-utils');
 
