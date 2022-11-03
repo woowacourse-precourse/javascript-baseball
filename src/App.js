@@ -21,6 +21,12 @@ class App {
   getRandomNumber() {
     this.randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
   }
+  // 입력 검증하기
+  verifyInput() {
+    if (typeof this.userInput !== 'string' || this.userInput.length > 3 || this.userInput.length !== new Set(this.userInput).size ) return false
+
+    return true
+  }
 } 
 
 module.exports = App;
