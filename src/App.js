@@ -4,10 +4,18 @@ function gameStart() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 }
 
-function userInput() {
+function userInput(answer) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-    console.log(number);
+    let strikeNum = strikeCalculation(answer, number);
   });
+}
+
+function strikeCalculation(answer, userNumber) {
+  let count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (answer[i] == userNumber[i]) count++;
+  }
+  return count;
 }
 
 function randomNumberSetting() {
@@ -17,14 +25,15 @@ function randomNumberSetting() {
     if (randomNumberArray.includes(randomNumber)) continue;
     randomNumberArray.push(randomNumber);
   }
+  console.log(randomNumberArray);
   return randomNumberArray;
 }
 
 class App {
   play() {
-    randomNumberSetting();
+    let answer = randomNumberSetting();
     gameStart();
-    userInput();
+    userInput(answer);
   }
 }
 
