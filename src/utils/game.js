@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { getComputerNumber } = require("./numberMaker");
 const { isValid } = require("../utils/validate");
+const { getHint } = require("./hintMaker");
 const { GAME_MESSAGE } = require("../constants/index");
 
 const startGame = () => MissionUtils.Console.print(GAME_MESSAGE.START);
@@ -15,7 +16,7 @@ const inputNumber = () =>
 const closeGame = () => MissionUtils.Console.close();
 
 const compareNumbers = (userNumber, computerNumber) => {
-  console.log(userNumber, computerNumber);
+  console.log(getHint(userNumber, computerNumber));
 };
 
 module.exports = { startGame, inputNumber };
