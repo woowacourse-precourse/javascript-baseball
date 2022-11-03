@@ -3,8 +3,12 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const VALID_INPUT_REGEX = /^[1-9]{3}$/;
 
 class App {
+  computer;
+  isGameOver;
+
   constructor() {
     this.computer = this.generateRandomNumbers();
+    this.isGameOver = false;
   }
 
   generateRandomNumbers() {
@@ -34,6 +38,12 @@ class App {
       }
 
       this.printHint(answer);
+
+      if (this.isGameOver) {
+        this.gameOver();
+        return;
+      }
+
       this.inputAnswer();
     });
   }
@@ -103,6 +113,11 @@ class App {
       default:
         return 'DEFAULT';
     }
+  }
+
+  gameOver() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.inputGameMenuCode();
   }
 
   exit() {
