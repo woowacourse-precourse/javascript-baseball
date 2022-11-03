@@ -19,7 +19,7 @@ class App {
     try {
       this.inputAnswer();
     } catch (err) {
-      this.exit();
+      this.exitGame();
       throw err;
     }
   }
@@ -81,8 +81,7 @@ class App {
           const gameMenuCode = parseInt(code, 10);
 
           if (gameMenuCode === GAME_MENU_EXIT) {
-            Console.print('게임을 종료합니다.');
-            this.exit();
+            this.exitGame();
             return;
           }
 
@@ -100,7 +99,8 @@ class App {
     }
   }
 
-  exit() {
+  exitGame() {
+    Console.print('게임을 종료합니다.');
     Console.close();
   }
 
