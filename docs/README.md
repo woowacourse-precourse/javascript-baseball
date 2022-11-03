@@ -5,7 +5,7 @@
 
 -   [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 `Random.pickNumberInRange()`를 사용하여 1 ~ 9 까지의 임의의 수 3개를 생성한다.
 
-### 2. 게임시작 안내 출력 기능
+### 2. 게임시작 문구 출력 기능 [✔️]
 
 -   `Console.print()`를 사용하여 '숫자 야구 게임을 시작합니다' 출력
     -   처음 시작시에만 노출 재시작 일 시 X
