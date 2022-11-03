@@ -27,7 +27,7 @@ class App {
         let input = i.split('').map(num => parseInt(num));
         if (input.length !== 3) throw new Error('length error');
         else if(input.length !== new Set(input).size) throw new Error('duplicate error');
-        else resolve(input) 
+        else resolve(input);
       });
     })
   }
@@ -43,19 +43,29 @@ class App {
     return computer;
   }
 
-  countStrike(input, computer) {
-    const count = input.reduce((prev, curr, idx) => (
-      curr === computer[idx] ? prev + 1 : prev
-    ), 0);
-    return count;
-  }
+  countStrikeAndBall(input, computer) {
+    let countS = 0;
+    let countB = 0;
+    const checkComp = [...computer];
 
-  countBall(input, computer) {
+    // index가 동일한 수 제거
+    input.map((curr, idx) => {
+      if(curr === checkComp[idx]){
+        countS += 1;
+        checkComp[idx] = -1;
+      }
+    })
 
-  }
+    // index가 다른 중복 수 제거
+    input.map((curr) => {
+      const findIdx = checkComp.indexOf(curr);
+      if(findIdx >= 0) {
+        countB += 1;
+        checkComp[findIdx] = -1;
+      }
+    })
 
-  result() {
-
+    return [countS, countB];
   }
 
   resultString() {
