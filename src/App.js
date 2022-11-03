@@ -35,6 +35,7 @@ class App {
         this.checkGuessVaildation(guess);
       } catch (err) {
         console.log(err.message);
+        this.rl.close();
       }
     });
     return;
