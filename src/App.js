@@ -8,6 +8,7 @@ class App {
 
   play() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.check(input);
       this.initInputArray(input);
 
       const resultString = this.getResultString();
@@ -20,6 +21,20 @@ class App {
         this.play();
       }
     });
+  }
+
+  check(input) {
+    if (input.length !== 3) throw new Error('3글자가 아닙니다');
+
+    const set = new Set();
+    input.split('').forEach((character) => {
+      const number = parseInt(character);
+      if (isNaN(number)) throw new Error('숫자가 아닙니다');
+      if (number === 0) throw new Error('0이 포함되어 있습니다')
+      set.add(number);
+    });
+
+    if (set.size !== 3) throw new Error('중복된 숫자입니다');
   }
 
   initRandomArray() {
