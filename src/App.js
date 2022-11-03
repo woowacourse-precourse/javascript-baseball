@@ -52,11 +52,17 @@ class App {
     MissionUtils.Console.print(result);
   }
 
-  play() {
-    this.resetTargetNumber();
+  guessingNumber() {
     this.getUserNumber();
     this.calcResult();
     this.printResult();
+
+    if (this.strike < 3) this.guessingNumber();
+  }
+
+  play() {
+    this.resetTargetNumber();
+    this.guessingNumber();
   }
 }
 
