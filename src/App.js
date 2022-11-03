@@ -2,27 +2,24 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.computerInput = 0;
     this.isCorrect = false;
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.computerInput = this.generateComputerNumbers();
-    this.startGame();
+    this.startGame(this.generateComputerNumbers());
   }
 
-  startGame() {
+  startGame(computerInput) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       if (this.checkInputValidation(userInput)) {
-        MissionUtils.Console.print(userInput);
-        const strikes = this.countStrikes(this.computerInput, userInput);
-        const balls = this.countBalls(this.computerInput, userInput);
+        const strikes = this.countStrikes(computerInput, userInput);
+        const balls = this.countBalls(computerInput, userInput);
         const result = this.showResult(strikes, balls);
         MissionUtils.Console.print(result);
         if (this.isCorrect) {
           this.restartOrExitGame();
         } else {
-          this.startGame();
+          this.startGame(computerInput);
         }
       } else {
         throw "잘못된 입력입니다.";
@@ -73,7 +70,7 @@ class App {
     if (strike === 3) {
       this.isCorrect = true;
       return (
-        `${strike}스트라이크 \n` + `3개의 숫자를 모두 맞히셨습니다! 게임 종료`
+        `${strike}스트라이크 \n` + "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
       );
     }
     if (ball === 0) return `${strike}스트라이크`;
@@ -87,8 +84,7 @@ class App {
       (userSelection) => {
         if (userSelection === "1") {
           this.isCorrect = false;
-          this.computerInput = this.generateComputerNumbers();
-          this.startGame();
+          this.startGame(this.generateComputerNumbers());
         }
         if (userSelection === "2") {
           MissionUtils.Console.close();
