@@ -11,11 +11,10 @@ class App {
                 computer.push(number);
             }
         }
+        MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     }
 
     play() {}
 }
-
-const app = new App();
 
 module.exports = App;
