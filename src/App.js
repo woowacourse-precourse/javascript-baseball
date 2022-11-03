@@ -77,7 +77,7 @@ class App {
     }
     restart(input) {
         if (input === 1) {
-            this.PICKED_NUMBERS = this.makeRandomNumber();
+            this.PICKED_NUMBERS = this.getRandomNumber();
             this.getInput();
         }
     }
