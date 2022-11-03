@@ -42,6 +42,15 @@ class App {
     if (ball > 0) MissionUtils.Console.print(ball + '볼');
     if (strike > 0) MissionUtils.Console.print(strike + '스트라이크');
   }
+
+  isCorrectAnswer(result) {
+    if (result.strike === 3){
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.askRetry();
+      return;
+    }
+    this.getUserNumber();
+  }
 }
 
 module.exports = App;
