@@ -39,7 +39,6 @@ describe('게임 기능 테스트', () => {
     });
 
     expect(result).toEqual([
-      null,
       'ONLY_STRIKES',
       'ONLY_BALLS',
       'DEFAULT',
@@ -55,7 +54,7 @@ describe('게임 기능 테스트', () => {
     );
 
     expect(hints).toEqual([
-      null,
+      '3스트라이크',
       '낫싱',
       '3볼',
       '2볼 1스트라이크',
