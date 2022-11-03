@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const CheckValid = require('./CheckValid');
 const Computer = require('./Computer');
 const User = require('./User');
 
@@ -16,7 +17,7 @@ class App {
 
     this.computer = new Computer(NUMBER_LIMIT);
     this.user = new User();
-    this.checkValid;
+    this.checkValid = new CheckValid(NUMBER_LIMIT);
   }
 
   start() {
@@ -35,7 +36,8 @@ class App {
       // 2. 해당 숫자가 유효한지 판단한다.
       // 3. 만약 유효하다면 해당 숫자에 대한 문구(ex. 1볼)를 띄운다
       // 4. 유저의 입력값과 컴퓨터 숫자와 동일한지 여부를 업데이트한다.
-      const userInput = this.user.getInputValue();
+      const userInput = this.user.getInputValue(); // 1번
+      const isUserInputValid = this.checkValid.validateInput(userInput); // 2번
     }
     // 반복문 탈출 후(= Match 종료) 게임을 다시 할 것 인지 여부를 묻는다.
   }
@@ -45,7 +47,7 @@ class App {
   }
 
   restart() {
-    this.start = INIT_STATE;
+    this.state = INIT_STATE;
     this.play();
   }
 }
