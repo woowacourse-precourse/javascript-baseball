@@ -22,6 +22,13 @@ function getUserInput() {
   })
 }
 
-getUserInput()
+function strToIntArr(str) {
+  const strArr = [...str]
+  const intArr = [];
+
+  strArr.forEach((item) => intArr.push(parseInt(item)));
+
+  return intArr;
+}
 
 module.exports = App;
