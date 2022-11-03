@@ -73,12 +73,19 @@ class App {
   }
 
   makeHint() {
-    if (this.hint["nothing"] === 3) this.print("낫싱");
+    if (this.hint["nothing"] === 3) return this.print("낫싱");
+    if (this.hint["strike"] === 0) return this.print(`${this.hint["ball"]}볼`);
+    if (this.hint["ball"] === 0)
+      return this.print(`${this.hint["strike"]}스트라이크`);
+    return this.print(
+      `${this.hint["ball"]}볼 ${this.hint["sstrike"]}스트라이크`
+    );
   }
 
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
     this.setAnswer();
+    this.print(this.answer);
     this.receiveInputFromConsole();
   }
 }
