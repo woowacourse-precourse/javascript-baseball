@@ -33,19 +33,11 @@ class App {
 
   compareUserInputAndComputer(input) {
     if (this.answer === input) {
-      this.printRestartPhrase();
+      return this.printRestartPhrase();
     }
 
-    this.strToArr(input).forEach((element, index) => {
-      if (element === this.answer[index]) {
-        strike++;
-      }
-      if (element !== this.answer[index] && this.answer.includes(element)) {
-        ball++;
-      }
-    });
+    this.countStrikeAndBall();
 
-    // else if 제거하기
     let result = '';
     if (!strike && !ball) {
       result = '낫싱';
@@ -59,6 +51,17 @@ class App {
 
     Console.print(result);
     return this.initUserInputInterface();
+  }
+
+  countStrikeAndBall(input) {
+    this.strToArr(input).forEach((element, index) => {
+      if (element === this.answer[index]) {
+        strike++;
+      }
+      if (element !== this.answer[index] && this.answer.includes(element)) {
+        ball++;
+      }
+    });
   }
 
   init() {
