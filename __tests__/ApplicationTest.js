@@ -24,24 +24,23 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
-  test("게임이 실행되면 '숫자 야구 게임을 시작합니다.'라는 문구를 출력한다.", () => {
-    const logSpy = getLogSpy();
-
-    const app = new App();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
-  });
-
-  test("게임이 실행되면 '숫자를 입력해주세요 : '라는 문구를 출력한다.", () => {
-    const logSpy = getLogSpy();
-
-    const app = new App();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith("숫자를 입력해주세요 : ");
-  });
-
+  // test("게임이 실행되면 '숫자 야구 게임을 시작합니다.'라는 문구를 출력한다.", () => {
+  //   const logSpy = getLogSpy();
+  //   const app = new App();
+  //   app.play();
+  //   expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
+  // });
+  // test("게임이 실행되면 숫자 야구 게임의 정답을 생성한다.", () => {
+  //   const app = new App();
+  //   const answer = app.ANSWER;
+  //   expect(answer).toHaveLength(3);
+  // });
+  // test("게임이 실행되면 '숫자를 입력해주세요 : '라는 문구를 출력한다.", () => {
+  //   const logSpy = getLogSpy();
+  //   const app = new App();
+  //   app.play();
+  //   expect(logSpy).toHaveBeenCalledWith("숫자를 입력해주세요 : ");
+  // });
   // test("게임 종료 후 재시작", () => {
   //   const randoms = [1, 3, 5, 5, 8, 9];
   //   const answers = ["246", "135", "1", "597", "589", "2"];
@@ -53,25 +52,19 @@ describe("숫자 야구 게임", () => {
   //     "3스트라이크",
   //     "게임 종료",
   //   ];
-
   //   mockRandoms(randoms);
   //   mockQuestions(answers);
-
   //   const app = new App();
   //   app.play();
-
   //   messages.forEach((output) => {
   //     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   //   });
   // });
-
   // test("예외 테스트", () => {
   //   const randoms = [1, 3, 5];
   //   const answers = ["1234"];
-
   //   mockRandoms(randoms);
   //   mockQuestions(answers);
-
   //   expect(() => {
   //     const app = new App();
   //     app.play();
