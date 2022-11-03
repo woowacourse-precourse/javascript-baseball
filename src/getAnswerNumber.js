@@ -9,3 +9,4 @@ function getAnswerNumber() {
   }
   return computer;
 }
+module.exports = getAnswerNumber;
