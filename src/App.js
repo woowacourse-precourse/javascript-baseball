@@ -33,7 +33,7 @@ class App {
 
   compareUserInputAndComputer(input) {
     if (this.answer === input) {
-      return this.printRestartPhrase();
+      return this.printAnswerAndRestartPhrase();
     }
 
     const [ball, strike] = this.countStrikeAndBall(input);
@@ -95,7 +95,7 @@ class App {
     Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     Console.readLine('', (input) => {
       if (input === '1') {
-        this.startGame();
+        this.init();
         return;
       }
 
