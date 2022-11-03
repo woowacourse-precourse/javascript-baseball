@@ -24,6 +24,17 @@ class App {
     if (Number.isNaN(Number(userInputs))) return false;
     return true;
   }
+
+  generateComputerNumbers() {
+    let computerArray = [];
+    while (new Set(computerArray).size < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerArray.includes(randomNumber)) {
+        computerArray.push(randomNumber);
+      }
+    }
+    return computerArray;
+  }
 }
 
 const app = new App();
