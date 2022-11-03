@@ -27,8 +27,8 @@
 
 ## 작동 순서 정리
 
-[프로그램 작동 순서](../public/Week2_algorithm.png)
+![프로그램 작동 순서](../public/Week2_algorithm.png)
 
 ## 객체별 구현 기능
 
-[객체별 구현 기능](../public/Week2_object-property.png)
+![객체별 구현 기능](../public/Week2_object-property.png)
