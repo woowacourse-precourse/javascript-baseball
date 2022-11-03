@@ -73,9 +73,10 @@ function selectGameRestart(input) {
   if (input === "1") {
     let computerNumber = createComputerNumber();
     readInputNumber(computerNumber);
-  }
-  if (!(input === "1" || input === "2")) {
-    throw new Error();
+  } else if (input === "2") {
+    MissionUtils.Console.close();
+  } else {
+    throw new Error("1이나 2가 아닌 다른 숫자가 입력되었습니다.");
   }
 }
 
