@@ -1,11 +1,12 @@
-const { startGame, inputNumber } = require("./game");
+const { startGame, playGame, closeGame } = require("./game");
 const { getComputerNumber } = require("./numberMaker");
 const { isValid } = require("./validate");
 const { getHint } = require("./hintMaker");
 
 module.exports = {
   startGame,
-  inputNumber,
+  playGame,
+  closeGame,
   getComputerNumber,
   isValid,
   getHint,

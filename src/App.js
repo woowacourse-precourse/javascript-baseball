@@ -1,5 +1,9 @@
+const { startGame, playGame } = require("./utils/index");
 class App {
-  play() {}
+  play() {
+    startGame();
+    playGame();
+  }
 }
 
 module.exports = App;
