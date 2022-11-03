@@ -45,6 +45,18 @@ describe("숫자 야구 게임", () => {
     expect(constraintsSpy).toBeTruthy();
   });
 
+  test("플레이어 숫자 입력", () => {
+    const readSpy = jest.spyOn(MissionUtils.Console, "readLine");
+    const constraintsSpy = jest.spyOn(App.prototype, "checkConstraints");
+
+    const app = new App();
+    app.getUserInput();
+
+    expect(readSpy).toHaveBeenCalled();
+    expect(readSpy).toHaveBeenCalledTimes(1);
+    expect(constraintsSpy).toBeTruthy();
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
