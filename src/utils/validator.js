@@ -1,4 +1,4 @@
-const isValidateUserInput = (value) => {
+const isValidateNumbers = (value) => {
   if (!Number(value)) {
     throw new Error('숫자가 아닙니다.');
   }
@@ -14,4 +14,12 @@ const isValidateUserInput = (value) => {
   return true;
 };
 
-module.exports = isValidateUserInput;
+const isValidateNumber = (value) => {
+  if (value !== '1' && value !== '2') {
+    throw new Error('1 또는 2의 값이 아닙니다.');
+  }
+  return true;
+};
+
+exports.isValidateNumbers = isValidateNumbers;
+exports.isValidateNumber = isValidateNumber;

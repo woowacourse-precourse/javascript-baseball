@@ -1,5 +1,5 @@
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
-const isValidateUserInput = require('../utils/validator');
+const { isValidateNumber, isValidateNumbers } = require('../utils/validator');
 
 class BaseballGameController {
   constructor(baseballGameModel, baseballGameView) {
@@ -15,11 +15,40 @@ class BaseballGameController {
 
   triggerGame() {
     triggerConsole('숫자를 입력해주세요 : ', (number) => {
-      if (isValidateUserInput(number)) {
+      if (isValidateNumbers(number)) {
         this.baseballGameModel.setUserValue(number);
         this.resultGame();
       }
     });
+  }
+
+  resultGame() {
+    const strike = this.getStrike();
+    const ball = this.getBall();
+    if (strike !== '3스트라이크') {
+      this.baseballGameView.printResultGame(strike, ball);
+      this.triggerGame();
+    } else if (strike === '3스트라이크') {
+      this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.successGame();
+    }
+  }
+
+  successGame() {
+    triggerConsole('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
+      if (isValidateNumber(number)) {
+        if (number === '1') {
+          this.restartGame();
+        } else if (number === '2') {
+          closeConsole();
+        }
+      }
+    });
+  }
+
+  restartGame() {
+    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
+    this.triggerGame();
   }
 
   getStrike() {
@@ -44,33 +73,6 @@ class BaseballGameController {
       ball -= Number(strike.slice(0, 1));
     }
     return ball ? `${ball}볼` : '';
-  }
-
-  resultGame() {
-    const strike = this.getStrike();
-    const ball = this.getBall();
-    if (strike !== '3스트라이크') {
-      this.baseballGameView.printResultGame(strike, ball);
-      this.triggerGame();
-    } else if (strike === '3스트라이크') {
-      this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.successGame();
-    }
-  }
-
-  successGame() {
-    triggerConsole('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
-      if (number === '1') {
-        this.restartGame();
-      } else if (number === '2') {
-        closeConsole();
-      }
-    });
-  }
-
-  restartGame() {
-    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
-    this.triggerGame();
   }
 }
 
