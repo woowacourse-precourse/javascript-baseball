@@ -1,18 +1,33 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const GAME_MESSAGE = {
+  startNotification: '숫자 야구 게임을 시작합니다.',
+  requestInput: '숫자를 입력해주세요 : ',
+};
+
+const ERROR_MESSAGE = {
+  duplicateError: '중복 된 숫자를 입력할 수 없습니다',
+  invalidValueError: '1~9까지의 숫자 중 세개의 숫자를 입력해주세요',
+};
+
+const getStrikeCount = (computerNumbers, userNumbers) => {
+  return userNumbers.filter((_, i) => computerNumbers[i] === userNumbers[i])
+    .length;
+};
+
 const haveDuplicateNumber = (userInputNumbers) => {
   const duplicateNumber = userInputNumbers.filter((num) => {
     return userInputNumbers.indexOf(num) !== userInputNumbers.lastIndexOf(num);
   });
   if (duplicateNumber.length > 0) {
-    throw Error('중복 된 숫자를 입력할 수 없습니다');
+    throw Error(ERROR_MESSAGE.duplicateError);
   }
 };
 
 const isValidNumber = (userInputValue) => {
   const regex = /^[1-9]{3}$/;
   if (!regex.test(userInputValue.join(''))) {
-    throw Error('1~9까지의 숫자 중 세개의 숫자를 입력해주세요');
+    throw Error(ERROR_MESSAGE.invalidValueError);
   }
 };
 
@@ -20,24 +35,29 @@ const stringToNumbers = (string) => [...string].map((char) => +char);
 
 const offerUserInput = async () => {
   return new Promise((resolve) => {
-    Console.readLine('숫자를 입력해주세요 : ', (nums) => resolve(nums));
+    Console.readLine(GAME_MESSAGE.requestInput, (nums) => resolve(nums));
   });
 };
 
 class App {
   constructor() {
     this.offerComputerRandomNumbers();
+    this.initGameResult();
     this.userInputNumbers;
   }
 
-  offerComputerRandomNumbers() {
-    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
-  }
   play() {
     this.gameStart();
   }
+  offerComputerRandomNumbers() {
+    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(this.computerNumbers);
+  }
+  initGameResult() {
+    this.gameResult = { ball: 0, strike: 0 };
+  }
   gameStart() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(GAME_MESSAGE.startNotification);
     this.getUserInputNumbers();
   }
   async getUserInputNumbers() {
@@ -48,6 +68,13 @@ class App {
   isValid() {
     isValidNumber(this.userInputNumbers);
     haveDuplicateNumber(this.userInputNumbers);
+    this.setGameResult();
+  }
+  setGameResult() {
+    this.gameResult.strike = getStrikeCount(
+      this.computerNumbers,
+      this.userInputNumbers
+    );
   }
 }
 
