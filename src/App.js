@@ -29,7 +29,11 @@ class App {
     return stringValue.length === 3 && /^[1-9]{3}$/.test([...new Set(stringValue)].join(''));
   }
 
-  #readUserValue() {}
+  #setUserValue(value) {}
+
+  #readUserValue() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => this.#setUserValue(answer));
+  }
 
   play() {
     if (!this.#isPlaying) MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
