@@ -4,6 +4,7 @@ let computer = [];
 class App {
   play() {
     this.computerNumber();
+    this.start();
   }
 
   computerNumber() {
@@ -14,6 +15,12 @@ class App {
         computer.push(number);
       }
     }
+  }
+
+  start() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      console.log(answer);
+    });
   }
 }
 module.exports = App;
