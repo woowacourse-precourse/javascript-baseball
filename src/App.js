@@ -6,14 +6,25 @@ function gameStart() {
 
 function userInput(answer) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-    let strikeNum = strikeCalculation(answer, number);
+    let userNumberArray = number.split("").map((num) => Number(num));
+    let strikeNum = strikeCalculation(answer, userNumberArray);
+    let ballNum = ballCalculation(answer, userNumberArray);
+    console.log(strikeNum, ballNum);
   });
 }
 
 function strikeCalculation(answer, userNumber) {
   let count = 0;
   for (let i = 0; i < 3; i++) {
-    if (answer[i] == userNumber[i]) count++;
+    if (answer[i] === userNumber[i]) count++;
+  }
+  return count;
+}
+
+function ballCalculation(answer, userNumber) {
+  let count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (answer[i] !== userNumber[i] && userNumber.includes(answer[i])) count++;
   }
   return count;
 }
