@@ -39,11 +39,6 @@ class App {
   }
 
   printHint(answer) {
-    // if (!this.getHint()) {
-    //   this.gameOver();
-    //   return;
-    // }
-
     Console.print(this.getHint(this.computer, answer));
   }
 
@@ -52,16 +47,18 @@ class App {
       computerNumbers,
       answer,
     );
-    const hintType = getHintType(strikeCount, ballCount);
+    const hintType = this.getHintType(strikeCount, ballCount);
 
-    return hintType
-      ? {
-          NOTHING: '낫싱',
-          ONLY_BALLS: `${ballCount}볼`,
-          ONLY_STRIKES: `${strikeCount}스트라이크`,
-          DEFAULT: `${ballCount}볼 ${strikeCount}스트라이크`,
-        }[hintType]
-      : null;
+    if (strikeCount === 3) {
+      this.isGameOver = true;
+    }
+
+    return {
+      NOTHING: '낫싱',
+      ONLY_BALLS: `${ballCount}볼`,
+      ONLY_STRIKES: `${strikeCount}스트라이크`,
+      DEFAULT: `${ballCount}볼 ${strikeCount}스트라이크`,
+    }[hintType];
   }
 
   getBallCounts(computerNumbers, answer) {
@@ -96,10 +93,6 @@ class App {
   }
 
   getHintType(strikeCount, ballCount) {
-    if (strikeCount === 3) {
-      return null;
-    }
-
     switch (true) {
       case strikeCount === 0 && ballCount === 0:
         return 'NOTHING';
