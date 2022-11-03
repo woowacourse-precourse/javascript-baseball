@@ -28,6 +28,30 @@ class App {
     if (this.answer === input) {
       this.printRestartPhrase();
     }
+
+    this.strToArr(input).forEach((element, index) => {
+      if (element === this.answer[index]) {
+        strike++;
+      }
+      if (element !== this.answer[index] && this.answer.includes(element)) {
+        ball++;
+      }
+    });
+
+    // else if 제거하기
+    let result = '';
+    if (!strike && !ball) {
+      result = '낫싱';
+    }
+    if (ball) {
+      result += `${ball}볼 `;
+    }
+    if (strike) {
+      result += `${strike}스트라이크`;
+    }
+
+    Console.print(result);
+    return this.initUserInputInterface();
   }
 
   init() {
