@@ -107,6 +107,7 @@ class App {
   }
   printGameResult() {
     const gameResultMessage = getGameResultMessage(this.gameResult);
+    Console.print(gameResultMessage);
   }
 }
 
