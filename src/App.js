@@ -7,7 +7,11 @@ class App {
   }
 
   setInput(input) {
-    this.input = input.split("").map((num) => parseInt(num));
+    input = input.split("").map((num) => parseInt(num));
+    if (this.isBadInput(input)) {
+      this.close();
+    }
+    this.input = input;
   }
 
   setAnswer() {
@@ -20,6 +24,17 @@ class App {
 
   close() {
     MissionUtils.Console.close();
+  }
+
+  isBadInput(input) {
+    if (input.includes(NaN)) {
+      this.print("한글, 영어, 특수문자 등을 제외한 숫자만 입력하세요.");
+      return true;
+    }
+    if (input.includes(0)) {
+      this.print("1~9 사이의 숫자만 입력하세요.");
+      return true;
+    }
   }
 
   receiveInputFromConsole() {
