@@ -4,7 +4,8 @@ const GAME_MESSAGE = {
   startNotification: '숫자 야구 게임을 시작합니다.',
   requestInput: '숫자를 입력해주세요 : ',
   gameOver: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ',
+  exit: '게임을 종료합니다.',
 };
 
 const ERROR_MESSAGE = {
@@ -117,13 +118,15 @@ class App {
   }
   gameOver() {
     Console.print(GAME_MESSAGE.gameOver);
-    this.askUserToRestart();
+    this.doesUserWantRestart();
   }
   retry() {
     this.initGameResult();
     this.getUserInputNumbers();
   }
-  isUserWantRestart() {}
+  async doesUserWantRestart() {
+    const inputValue = await offerUserInput(GAME_MESSAGE.restart);
+  }
 }
 
 const app = new App();
