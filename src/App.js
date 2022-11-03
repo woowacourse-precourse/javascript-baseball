@@ -3,8 +3,8 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 const GAME_MESSAGE = {
   startNotification: '숫자 야구 게임을 시작합니다.',
   requestInput: '숫자를 입력해주세요 : ',
-  gameOverMessage: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  restartMessage: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  gameOver: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 };
 
 const ERROR_MESSAGE = {
@@ -58,9 +58,9 @@ const isValidNumber = (userInputValue) => {
 
 const stringToNumbers = (string) => [...string].map((char) => +char);
 
-const offerUserInput = async () => {
+const offerUserInput = async (message) => {
   return new Promise((resolve) => {
-    Console.readLine(GAME_MESSAGE.requestInput, (nums) => resolve(nums));
+    Console.readLine(message, (num) => resolve(num));
   });
 };
 
@@ -86,7 +86,7 @@ class App {
     this.getUserInputNumbers();
   }
   async getUserInputNumbers() {
-    const userInputValue = await offerUserInput();
+    const userInputValue = await offerUserInput(GAME_MESSAGE.requestInput);
     this.userInputNumbers = stringToNumbers(userInputValue);
     this.isValid();
   }
@@ -116,12 +116,14 @@ class App {
     this.gameResult.strike === 3 ? this.gameOver() : this.retry();
   }
   gameOver() {
-    Console.print(GAME_MESSAGE.gameOverMessage);
+    Console.print(GAME_MESSAGE.gameOver);
+    this.askUserToRestart();
   }
   retry() {
     this.initGameResult();
     this.getUserInputNumbers();
   }
+  isUserWantRestart() {}
 }
 
 const app = new App();
