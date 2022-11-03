@@ -16,7 +16,6 @@
 - `checkUserValue` : 사용자가 입력한 값이 올바른 형식인지 확인하는 함수.
 - `compareWithUser` : 사용자의 값과 컴퓨터의 값을 비교하는 함수.
 - `printResult` : 결과를 알려주는 함수
-- `exitProgram` : 게임을 종료하는 함수.
 
 ## 알고리즘 
 ### 1. computer 랜덤 값 생성.
