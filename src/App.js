@@ -3,7 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
     play() {
         startGuidePrint();
-        numberInput()
+        numberInput();
     }
 }
 
@@ -15,7 +15,16 @@ function startGuidePrint() {
 }
 
 function numberInput() {
-    MissionUtils.Console.readLine("세자리 숫자를 입력해주세요 : ", (numberInput) => {
-        console.log(numberInput);
-    });
+    MissionUtils.Console.readLine("세자리 숫자를 입력해주세요 : ", inputValidation);
+}
+
+function inputValidation(number) {
+    threeDigitValidation(number);
+}
+
+function threeDigitValidation(number) {
+    const numberLength = String(number).length;
+    if (numberLength !== 3) {
+        throw "잘못된 값을 입력하였습니다.";
+    }
 }
