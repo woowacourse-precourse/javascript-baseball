@@ -1,7 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-function gameStart() {
+function gameStartPhrase() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+}
+
+function gameRestartQuestion() {
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (number) => {
+      console.log(number);
+    }
+  );
 }
 
 function userInput(answer) {
@@ -9,9 +18,10 @@ function userInput(answer) {
     let userNumberArray = number.split("").map((num) => Number(num));
     let strikeNum = strikeCalculation(answer, userNumberArray);
     let ballNum = ballCalculation(answer, userNumberArray);
-    console.log(strikeNum, ballNum);
+
     if (strikeNum === 0 && ballNum === 0) {
       MissionUtils.Console.print("낫싱");
+      userInput(answer);
     }
 
     if (strikeNum !== 3) {
@@ -19,12 +29,14 @@ function userInput(answer) {
       message += ballNum ? `${ballNum}볼 ` : "";
       message += strikeNum ? `${strikeNum}스트라이크 ` : "";
       MissionUtils.Console.print(message);
+      userInput(answer);
     }
 
     if (strikeNum === 3) {
       MissionUtils.Console.print(
         `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
+      gameRestartQuestion();
     }
   });
 }
@@ -59,7 +71,7 @@ function randomNumberSetting() {
 class App {
   play() {
     let answer = randomNumberSetting();
-    gameStart();
+    gameStartPhrase();
     userInput(answer);
   }
 }
