@@ -25,6 +25,8 @@ class App {
     checkInput(input, len) {
         if (input.length !== len) throw `입력은 ${len}개여야 합니다.`;
         if (isNaN(input)) throw "입력은 숫자여야 합니다.";
+        if (len === 1 && (Number(input) < 1 || Number(input) > 2))
+            throw "입력은 1 또는 2여야 합니다.";
         if (
             len === 3 &&
             (input[0] === input[1] ||
@@ -33,6 +35,7 @@ class App {
         )
             throw "입력은 서로 달라야 합니다.";
         if (len === 3) this.countInput(input.split("").map(Number));
+        else this.restart(Number(input));
     }
     countInput(arr) {
         let BALLS = 0;
@@ -61,6 +64,14 @@ class App {
                 );
             this.getInput();
         }
+    }
+    checkRetry() {
+        MissionUtils.Console.print(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+        );
+        MissionUtils.Console.readLine("", (input) => {
+            this.checkInput(input, 1);
+        });
     }
 }
 
