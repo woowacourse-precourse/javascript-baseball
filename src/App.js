@@ -42,6 +42,7 @@ const CHECK_BALL = function numberOfBalls(userInput, answer) {
 }
 
 const RESTART = function restartGame(userInput) {
+  if (!CHECK_INPUT_AFTER_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
   if (+userInput === 1) START_GAME();
   if (+userInput === 2) MissionUtils.Console.close();
 }
@@ -53,6 +54,7 @@ const END_OF_GAME = function askQuestionToUserWhenGameEnds() {
 }
 
 const GAME_HINT = function getHintFromInput(userInput, answer) {
+  if (!CHECK_INPUT_DURING_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
   const strikes = CHECK_STRIKE(userInput, answer);
   const balls = CHECK_BALL(userInput, answer);
 
@@ -75,7 +77,6 @@ const GAME_APP = function gameApplication(answer) {
 
 const START_GAME = function launchNewGame() {
   const ANSWER = MAKEANSWER();
-  console.log(ANSWER);
   GAME_APP(ANSWER);
 }
 
