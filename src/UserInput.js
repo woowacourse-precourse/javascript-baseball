@@ -3,9 +3,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class UserInput {
   userInputNum() {
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요.', (answer) => {
-      console.log(`숫자를 입력해주세요: ${answer}`);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      console.log(answer);
     });
+
+    MissionUtils.Console.print('adf \nadsf');
+
 
   }
 }

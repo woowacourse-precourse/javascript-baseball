@@ -1,15 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class RandomNum {
+  constructor(randomNumArr) {
+    this.randomNumArr = randomNumArr;
+  }
+
   creatNum() {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
-    console.log(computer);
+    const computerNumArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(computerNumArr.toString());
+    return computerNumArr;
   }
 }
 
