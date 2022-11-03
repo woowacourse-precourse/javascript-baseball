@@ -19,7 +19,7 @@ class App {
       // TODO: 컴퓨터와 입력한 수 비교
     });
   }
-  
+
   isValidUserNumber(input) {
     if (input.length !== 3) return false;
     if (new Set(input).size !== 3) return false;
@@ -47,8 +47,11 @@ class App {
   
   printResult(strike, ball) {
     if (strike === 0 && ball === 0) MissionUtils.Console.print('낫싱');
-    if (ball > 0) MissionUtils.Console.print(ball + '볼');
-    if (strike > 0) MissionUtils.Console.print(strike + '스트라이크');
+    
+    const resultText = [];
+    if (ball > 0) resultText.push(ball + '볼');
+    if (strike > 0)  resultText.push(strike + '스트라이크');
+    MissionUtils.Console.print(resultText.join(' '));
   }
 
   isCorrectAnswer(result) {
