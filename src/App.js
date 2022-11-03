@@ -12,7 +12,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     while (this.flag !== 2) {
-      this.gameOrder();
+      this.gameOrder("exit");
     }
   }
 
@@ -23,8 +23,12 @@ class App {
     while (this.strike !== 3) {
       // 2. user값을 받아와 검사한다
       this.getUserValue();
-      // 3. computer & user 값을 비교한다
-      this.checkUserValue(this.user);
+      if (this.checkUserValue(this.user)) {
+        // 3. computer & user 값을 비교한다
+        this.compareWithUser();
+      } else {
+        this.exitProgram("form");
+      }
     }
     // 4. 게임 재시작
     this.askRestart();
@@ -57,12 +61,14 @@ class App {
   getUserValue() {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
       console.log(`${answer}`);
-      this.user = answer;
+      this.user = answer.split("");
     });
   }
 
   checkUserValue(value) {
-    
+    const valueSet = new Set(value);
+
+    return valueSet.size === 3 ? true : false;
   }
 
   compareWithUser(computer, user) {}
