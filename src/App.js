@@ -9,6 +9,7 @@ class App {
       userAnswer = answer.split('').map((num)=>{return Number(num)});
     });
   }
+
 }
 
 
