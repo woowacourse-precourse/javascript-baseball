@@ -18,8 +18,14 @@ class App {
   }
 
   start() {
+    let ball = 0;
+    let strike = 0;
+
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-      console.log(answer);
+      for (let i = 0; i < computer.length; i++) {
+        if (i == computer.indexOf(parseInt(answer[i]))) strike++;
+        else if (computer.includes(parseInt(answer[i]))) ball++;
+      }
     });
   }
 }
