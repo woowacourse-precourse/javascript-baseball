@@ -16,12 +16,16 @@ function getComputerNumber() {
   return computerNumber;
 }
 
-function getUserInput() {
+function getUserInput(computerRandomNumber) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    if (input == "quit") {
+    const userInputNumber = strToIntArr(input);
+    const gameResult = getResult(computerRandomNumber, userInputNumber);
+    const isWin = winOrLose(gameResult);
+
+    if (isWin) {
       return MissionUtils.Console.close();
     }
-    getUserInput();
+    getUserInput(computerRandomNumber);
   })
 }
 
