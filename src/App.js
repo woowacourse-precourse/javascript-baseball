@@ -145,6 +145,9 @@ class App {
     this.initGameResult();
     this.gameStart();
   }
+  gameExit() {
+    Console.close();
+  }
 }
 
 const app = new App();
