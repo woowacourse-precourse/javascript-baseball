@@ -11,8 +11,8 @@ const utils = {
       });
     });
   },
-  pickNumberInRange(startInclusive, endInclusive) {
-    return MissionUtils.Random.pickNumberInRange(startInclusive, endInclusive);
+  pickUniqueNumbersInRange(startInclusive, endInclusive, count) {
+    return MissionUtils.Random.pickUniqueNumbersInRange(startInclusive, endInclusive, count);
   },
 };
 
