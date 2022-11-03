@@ -15,6 +15,7 @@ class App {
       if (this.checkInputValidation(userInput)) {
         MissionUtils.Console.print(userInput);
         const strikes = this.countStrikes(this.computerInput, userInput);
+        const balls = this.countBalls(this.computerInput, userInput);
       } else {
         throw "잘못된 입력입니다.";
       }
@@ -47,6 +48,16 @@ class App {
       else return count;
     }, 0);
     return totalStrike;
+  }
+
+  countBalls(computerInputs, userInputs) {
+    let totalBall = computerInputs.reduce((count, currentValue, index) => {
+      const userInputNumber = Number(userInputs[index]);
+      if (userInputNumber !== currentValue && userInputs.includes(currentValue))
+        return count + 1;
+      else return count;
+    }, 0);
+    return totalBall;
   }
 }
 
