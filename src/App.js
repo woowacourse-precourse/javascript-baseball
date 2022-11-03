@@ -9,7 +9,6 @@ class App {
 
   showStartMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.close();
   }
 
   makeRandomNumber() {
@@ -29,7 +28,9 @@ class App {
   checkNumberRange(inputData) {
     const regex = /^[1-9]+$/;
 
-    inputData = inputData.join("");
+    if (typeof inputData === "object") {
+      inputData = inputData.join("");
+    }
 
     if (!regex.test(inputData)) {
       return false;
@@ -47,6 +48,10 @@ class App {
   }
 
   checkNoSameNumber(inputData) {
+    if (typeof inputData === "string") {
+      inputData = inputData.split("");
+    }
+
     for (let i = 0; i < inputData.length; i++) {
       if (
         inputData.indexOf(inputData[i]) !== inputData.lastIndexOf(inputData[i])
