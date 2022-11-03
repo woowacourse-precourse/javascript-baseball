@@ -86,7 +86,7 @@ class App {
     if (this.hint["ball"] === 0)
       return this.print(`${this.hint["strike"]}스트라이크`);
     return this.print(
-      `${this.hint["ball"]}볼 ${this.hint["sstrike"]}스트라이크`
+      `${this.hint["ball"]}볼 ${this.hint["strike"]}스트라이크`
     );
   }
 
