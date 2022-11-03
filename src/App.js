@@ -25,6 +25,14 @@ class App {
     
     return true;
   }
+
+  isValidEndInput(userInput) {
+    const isInteger = parseInt(userInput);
+    if (!isInteger) {
+      return false;
+    }
+    return number === NUMBERS.RESTART_GAME || number === NUMBERS.END_GAME;
+  }
   
   play() {
     const computer =  this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
