@@ -1,5 +1,9 @@
+const { createRandomNumber } = require('./computer/computer');
+
 class App {
-  play() {}
+  play() {
+    const randomNumber = createRandomNumber();
+  }
 }
 
 module.exports = App;
