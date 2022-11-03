@@ -10,8 +10,7 @@ class App {
   }
 
   play() {
-    this.baseballModel.setComputerValue(this.baseballModel.getRandomNumbers());
-    this.baseballController.triggerUserInput();
+    this.baseballController.startGame();
   }
 }
 

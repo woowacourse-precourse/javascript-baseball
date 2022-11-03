@@ -6,9 +6,15 @@ class BaseballController {
     this.baseballView = baseballView;
   }
 
+  startGame() {
+    this.baseballView.renderPrint('숫자 야구 게임을 시작합니다.');
+    this.baseballModel.setComputerValue(this.baseballModel.getRandomNumbers());
+    this.triggerUserInput();
+  }
+
   triggerUserInput() {
-    triggerConsole('숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ', (userValue) => {
-      this.baseballModel.setUserValue(userValue);
+    triggerConsole('숫자를 입력해주세요 : ', (value) => {
+      this.baseballModel.setUserValue(value);
       this.resultGame();
     });
   }
@@ -38,11 +44,11 @@ class BaseballController {
   }
 
   resultGame() {
-    let result = this.getBall() + this.getStrike();
-    if (!result) {
-      result = '낫싱';
+    const result = this.getBall() + this.getStrike();
+    this.baseballView.renderResultRender(result);
+    if (result !== '3스트라이크') {
+      this.triggerUserInput();
     }
-    this.baseballView.renderPrint(result);
     if (result === '3스트라이크') {
       this.successGame();
     }
