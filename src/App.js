@@ -1,5 +1,6 @@
-const START_MESSAGE = "숫자 야구 게임을 시작합니다."
-const PLEASE_NUMBER = "숫자를 입력해주세요 :"
+const START_MESSAGE = '숫자 야구 게임을 시작합니다.'
+const PLEASE_NUMBER = '숫자를 입력해주세요 :'
+const IS_RESTART = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
 
 class App {
   userInput = ''
@@ -8,7 +9,15 @@ class App {
   ball = 0
   notThing = false
 
-  play() {}
+  play() {
+    this.outputString(START_MESSAGE)
+
+    this.setUserInput()
+
+    this.verifyInput()
+
+    this.JudgeInput()
+  }
 
   outputString(str) {
     MissionUtils.Console.print(str)
@@ -70,6 +79,19 @@ class App {
     set.forEach((val) => {
       if (this.randomNumber.includes(val)) this.ball += 1
     })
+  }
+  // 결과 출력하기
+  outputResult() {
+    let str = ''
+    if (this.strike === 0 && this.ball === 0) str = '낫싱'
+    else if (this.strike === 3) {
+      str = '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+    } else {
+      if (this.ball > 0) str += `${this.ball}볼 `
+      if (this.strike > 0) str += `${this.strike}스트라이크`
+    }
+    
+    this.outputString(str)
   }
   // 게임 재시작하기
   restart() {
