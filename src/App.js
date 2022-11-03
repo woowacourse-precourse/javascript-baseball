@@ -18,9 +18,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-
-const answer = 1;
-
-app.play();
