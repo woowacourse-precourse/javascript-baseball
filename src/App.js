@@ -4,6 +4,8 @@ const isInputValid = require('./funcs/isInputValid');
 const createAnswerNumbers = require('./funcs/createAnswerNumbers');
 const compareInputNumbers = require('./funcs/compareInputNumbers');
 const printCompareResult = require('./funcs/printCompareResult');
+const printEndMessage = require('./funcs/printEndMessage');
+const printNewGameMessage = require('./funcs/printNewGameMessage');
 
 class App {
 	constructor() {
@@ -18,6 +20,7 @@ class App {
 
 	setAnswerNumbers() {
 		this._answerNumbers = createAnswerNumbers();
+		console.log(this._answerNumbers);
 	}
 
 	getAnswerNumbers() {
@@ -39,10 +42,27 @@ class App {
 			printCompareResult(strike, ball);
 			if (strike === 3) this.setIsGameOver();
 			if (this.getIsGameOver()) {
-				Console.close();
+				printEndMessage();
+				printNewGameMessage();
+				this.getNewGameInput();
 				return;
 			}
 			this.getUserInput();
+		});
+	}
+
+	getNewGameInput() {
+		Console.readLine('', input => {
+			if (input !== '1' && input !== '2') throw new Error('입력값이 잘못 되었습니다.');
+			if (input === '1') {
+				this.setAnswerNumbers();
+				this.setIsGameOver();
+				this.getUserInput();
+			}
+			if (input === '2') {
+				Console.close();
+				return;
+			}
 		});
 	}
 }
