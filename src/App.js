@@ -8,18 +8,35 @@ class App {
     this.getUserNumber();
   }
   getUserNumber() {
-    MissionUtils.Console.readLine("닉네임을 입력해주세요.", (userNumberStr) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumberStr) => {
       this.isValid(userNumberStr);
-      const totalCountStrike = this.countStrike(
-        userNumberStr,
-        this.computerNumberArr
-      );
-      const totalCountBall = this.countBall(
-        userNumberStr,
-        this.computerNumberArr
-      );
-      MissionUtils.Console.close();
+      this.playBaseBall(userNumberStr);
     });
+  }
+  playBaseBall(userNumberStr) {
+    const totalCountStrike = this.countStrike(
+      userNumberStr,
+      this.computerNumberArr
+    );
+    const totalCountBall = this.countBall(
+      userNumberStr,
+      this.computerNumberArr
+    );
+    if (totalCountStrike === 0 && totalCountBall === 0) {
+      MissionUtils.Console.print("낫싱");
+    } else if (totalCountStrike === 3) {
+      MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    } else if (totalCountBall === 0) {
+      MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
+    } else if (totalCountStrike === 0) {
+      MissionUtils.Console.print(`${totalCountBall}볼`);
+    } else {
+      MissionUtils.Console.print(
+        `${totalCountBall}볼 ${totalCountStrike}스트라이크`
+      );
+    }
+    this.getUserNumber();
   }
 
   isValid(answer) {
