@@ -9,6 +9,7 @@ class App {
     this.greeting();
     this.computerRandomNumber = this.makeRandomNumberArray();
     this.userAnswer = this.inputUserAnswer();
+    this.parseUserAnswertoString();
   }
 
   greeting() {
@@ -28,9 +29,17 @@ class App {
       3
     );
   }
+
+  parseUserAnswertoString() {
+    this.userAnswer = String(this.userAnswer);
+  }
 }
 
 const app = new App();
 app.play();
+
+setTimeout(() => {
+  console.log(typeof app.userAnswer);
+}, 5000);
 
 module.exports = App;
