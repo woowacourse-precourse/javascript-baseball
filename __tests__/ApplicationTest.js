@@ -77,7 +77,7 @@ describe("App", () => {
     const MESSAGE = "메시지";
     const app = new App();
 
-    app.print(MESSAGE);
+    app.print(MESSAGE, true);
 
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
   });
