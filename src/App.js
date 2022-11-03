@@ -1,5 +1,14 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const haveDuplicateNumber = (userInputNumbers) => {
+  const duplicateNumber = userInputNumbers.filter((num) => {
+    return userInputNumbers.indexOf(num) !== userInputNumbers.lastIndexOf(num);
+  });
+  if (duplicateNumber.length > 0) {
+    throw Error('중복 된 숫자를 입력할 수 없습니다');
+  }
+};
+
 const isValidNumber = (userInputValue) => {
   const regex = /^[1-9]{3}$/;
   if (!regex.test(userInputValue.join(''))) {
@@ -38,6 +47,7 @@ class App {
   }
   isValid() {
     isValidNumber(this.userInputNumbers);
+    haveDuplicateNumber(this.userInputNumbers);
   }
 }
 
