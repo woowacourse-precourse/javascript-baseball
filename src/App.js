@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Counter = require("./Counter");
 const Valid = require("./Valid");
 
 class App {
@@ -20,11 +21,12 @@ class App {
   }
 
   playBaseBall(userNumberStr) {
-    const totalCountStrike = this.countStrike(
+    const counterClass = new Counter();
+    const totalCountStrike = counterClass.countStrike(
       userNumberStr,
       this.computerNumberArr
     );
-    const totalCountBall = this.countBall(
+    const totalCountBall = counterClass.countBall(
       userNumberStr,
       this.computerNumberArr
     );
@@ -61,41 +63,11 @@ class App {
 
   getRandomNumberFromComputer() {
     const randomArr = [];
-
     while (randomArr.length !== 3) {
       const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
       !randomArr.includes(randomNum) && randomArr.push(randomNum);
     }
     return randomArr;
-  }
-
-  countStrike(userNumberStr, computerNumberArr) {
-    let totalCount = 0;
-    totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
-      if (oneLetterOfuserNumberStr === comCurNum) {
-        return count + 1;
-      } else {
-        return count;
-      }
-    }, 0);
-    return totalCount;
-  }
-
-  countBall(userNumberStr, computerNumberArr) {
-    let totalCount = 0;
-    totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
-      if (
-        computerNumberArr.includes(oneLetterOfuserNumberStr) &&
-        comCurNum !== oneLetterOfuserNumberStr
-      ) {
-        return count + 1;
-      } else {
-        return count;
-      }
-    }, 0);
-    return totalCount;
   }
 }
 
