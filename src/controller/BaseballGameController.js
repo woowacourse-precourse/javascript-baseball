@@ -1,4 +1,5 @@
 const { GAME_MESSAGE, GAME_RULE } = require('../utils/constant');
+const { getRandomNumbers } = require('../utils/core');
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
 const { isValidateNumber, isValidateNumbers } = require('../utils/validator');
 
@@ -10,7 +11,7 @@ class BaseballGameController {
 
   startGame() {
     this.baseballGameView.print(GAME_MESSAGE.START);
-    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
+    this.baseballGameModel.setComputerValue(getRandomNumbers());
     this.triggerGame();
   }
 
@@ -48,7 +49,7 @@ class BaseballGameController {
   }
 
   restartGame() {
-    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
+    this.baseballGameModel.setComputerValue(getRandomNumbers());
     this.triggerGame();
   }
 
