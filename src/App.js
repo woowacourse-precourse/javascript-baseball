@@ -15,6 +15,17 @@ class App {
   init() {
     this.initUserInputInterface();
   }
+
+  generateRandomNumber() {
+    const computer = [];
+    while (computer.length < 3) {
+      const randomNumber = Random.pickNumberInRange(1, 9);
+      if (!computer.includes(randomNumber)) {
+        computer.push(randomNumber);
+      }
+    }
+    this.answer = computer.join('');
+  }
 }
 
 const app = new App();
