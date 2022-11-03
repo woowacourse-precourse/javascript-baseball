@@ -11,6 +11,7 @@ class App {
       this.checkValidInput(INPUT_NUM); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
       const INPUT_NUM_ARR = this.numberToArray(INPUT_NUM);
       const HINT_ARR = this.compareTwoNumbers(ANSWER_NUMBER, INPUT_NUM_ARR);
+      this.printHint(HINT_ARR);
     }
   }
 
@@ -59,6 +60,19 @@ class App {
     hintArr[1] = sameNumberNum - hintArr[0];
 
     return hintArr;
+  }
+
+  printHint(hint) {
+    // Hint 문구를 출력하는 함수.
+    const STRIKE_NUM = hint[0];
+    const BALL_NUM = hint[1];
+
+    if (STRIKE_NUM + BALL_NUM === 0) MissionUtils.Console.print("낫싱");
+    else if (STRIKE_NUM === 0 && BALL_NUM > 0)
+      MissionUtils.Console.print("${BALL_NUM}볼");
+    else if (BALL_NUM === 0 && STRIKE_NUM > 0)
+      MissionUtils.Console.print("${STRIKE_NUM}스트라이크");
+    else MissionUtils.Console.print("${BALL_NUM}볼 ${STRIKE_NUM}스트라이크");
   }
 }
 
