@@ -4,8 +4,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
+    let computer = [];
     computer = computer_randomnumber();
-
   }
 }
 
@@ -19,6 +19,7 @@ function computer_randomnumber(){
       COMPUTER_NUMBER.push(COMPUTER_RANDOMNUMBER);
     }
   }
+  return COMPUTER_NUMBER;
 }
 
 module.exports = App;
