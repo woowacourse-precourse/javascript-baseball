@@ -52,17 +52,27 @@
 ## 메인함수
 ```
 '숫자 게임을 시작합니다' 출력
+
+while(true) {
 answer = build_answer();
 
-while(strike != 3){
-    유저한테 입력받음 
-    user_select = choice_answer(입력받은 숫자);
+    while(strike != 3){
+        '숫자를 입력해주세요 : '유저한테 입력받음 
+        user_select = choice_answer(입력받은 숫자);
 
-    strike = count_strike(answer,user_select);
+        strike = count_strike(answer,user_select);
 
-    ball = count_ball(answer,user_select);
+        ball = count_ball(answer,user_select);
 
-    print_hint(strike,ball);
+        print_hint(strike,ball);
+    } 
+    3개의 숫자를 모두 맞히셨습니다! 게임 종료
+    게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.
+    유저한테 1이나 2를 입력받는다
+
+    if(유저한테 입력받은 수 == 2) {
+        break;
+    }
 }
 ```
 
