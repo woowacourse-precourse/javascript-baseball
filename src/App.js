@@ -62,12 +62,12 @@ class App {
   }
 
   getRandomNumberFromComputer() {
-    const randomArr = [];
-    while (randomArr.length !== 3) {
+    const randomNumberArr = [];
+    while (randomNumberArr.length !== 3) {
       const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
-      !randomArr.includes(randomNum) && randomArr.push(randomNum);
+      !randomNumberArr.includes(randomNum) && randomNumberArr.push(randomNum);
     }
-    return randomArr;
+    return randomNumberArr;
   }
 }
 
