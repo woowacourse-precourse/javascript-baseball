@@ -1,10 +1,12 @@
 const BaseballModel = require('./model/BaseballModel');
 const BaseballController = require('./controller/BaseballController');
+const BaseballView = require('./view/BaseballView');
 
 class App {
   constructor() {
     this.baseballModel = new BaseballModel();
-    this.baseballController = new BaseballController(this.baseballModel);
+    this.baseballView = new BaseballView();
+    this.baseballController = new BaseballController(this.baseballModel, this.baseballView);
   }
 
   play() {

@@ -9,6 +9,7 @@ class BaseballController {
   triggerUserInput() {
     triggerReadLine('숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ', (userValue) => {
       this.baseballModel.setUserValue(userValue);
+      this.gameResult();
     });
   }
 
@@ -19,18 +20,31 @@ class BaseballController {
         strike += 1;
       }
     }
-    return strike;
+    return strike ? `${strike}스트라이크` : '';
   }
 
   getBall() {
+    const strike = this.getStrike();
     let ball = 0;
     for (let index = 0; index < 3; index += 1) {
       if (this.baseballModel.computerValue.includes(this.baseballModel.userValue[index])) {
         ball += 1;
       }
     }
-    ball -= this.getStrike();
-    return ball;
+    if (strike) {
+      ball -= Number(strike.slice(0, 1));
+    }
+    return ball ? `${ball}볼` : '';
+  }
+
+  gameResult() {
+    let result = this.getBall() + this.getStrike();
+    if (!result) {
+      result = '낫싱';
+    } else if (result === '3스트라이크') {
+      // ...
+    }
+    this.baseballView.renderPrint(result);
   }
 }
 
