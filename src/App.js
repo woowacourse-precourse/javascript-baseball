@@ -43,8 +43,9 @@ class App {
     return new Promise((resolve) => {
       MissionUtils.Console.readLine('숫자를 입력해주세요 :', (i) => {
         let input = i.split('').map(num => parseInt(num));
-        if (input.length !== 3) throw new Error('length error');
-        else if(input.length !== new Set(input).size) throw new Error('duplicate error');
+        if (input.length !== 3) throw new Error('input length error');
+        else if(input.length !== new Set(input).size) throw new Error('input overlap error');
+        else if(input.includes(0)) throw new Error('input include 0');
         else resolve(input);
       });
     })
