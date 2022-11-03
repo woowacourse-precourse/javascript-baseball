@@ -23,6 +23,9 @@ class App {
     let strike = 0;
 
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      if (answer.length != 3 && (answer != 1) & (answer != 2))
+        throw new Error();
+
       if (answer != 2 && answer != 1) {
         for (let i = 0; i < computer.length; i++) {
           if (i == computer.indexOf(parseInt(answer[i]))) strike++;
