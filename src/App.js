@@ -45,9 +45,23 @@ class App {
     }
   };
 
+  getStrikeAndBallNumber = (computer, user) => {
+    const strikeNum = user.filter((item, ind) => item === computer[ind]).length;
+
+    const ballNum = user
+      .filter((item, index) => item !== computer[index])
+      .filter((item) => computer.includes(item)).length;
+
+    return [strikeNum, ballNum];
+  };
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const userNumber = this.getUserNumber();
+    const strikeAndBall = this.getStrikeAndBallNumber(
+      this.computerNumber,
+      userNumber
+    );
   }
 }
 
