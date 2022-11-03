@@ -8,20 +8,55 @@ function gameRestartQuestion() {
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
     (number) => {
-      if (number === "1") {
+      number = Number(number);
+      if (number === 1) {
         let answer = randomNumberSetting();
         userInput(answer);
       }
 
-      if (number === "2") {
+      if (number === 2) {
         MissionUtils.Console.close();
+      }
+
+      if (number !== 1 && number !== 2) {
+        throw "잘못된 값을 입력하였습니다.";
       }
     }
   );
 }
 
+function isNotNumber(number) {
+  return isNaN(Number(number));
+}
+
+function isContainsNumberZero(number) {
+  return number.includes("0");
+}
+
+function isDuplicate(number) {
+  const set = new Set();
+  set.add(number[0]);
+  set.add(number[1]);
+  set.add(number[2]);
+
+  if (set.size !== number.length) return true;
+  return false;
+}
+
+function exceptionDetection(number) {
+  if (number.length !== 3) return true;
+  if (isNotNumber(number)) return true;
+  if (isContainsNumberZero(number)) return true;
+  if (isDuplicate(number)) return true;
+  return false;
+}
+
 function userInput(answer) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+    if (exceptionDetection(number)) {
+      throw "잘못된 값을 입력하였습니다.";
+    }
+
     let userNumberArray = number.split("").map((num) => Number(num));
     let strikeNum = strikeCalculation(answer, userNumberArray);
     let ballNum = ballCalculation(answer, userNumberArray);
@@ -71,7 +106,6 @@ function randomNumberSetting() {
     if (randomNumberArray.includes(randomNumber)) continue;
     randomNumberArray.push(randomNumber);
   }
-  console.log(randomNumberArray);
   return randomNumberArray;
 }
 
@@ -82,9 +116,5 @@ class App {
     userInput(answer);
   }
 }
-
-const app = new App();
-
-app.play();
 
 module.exports = App;
