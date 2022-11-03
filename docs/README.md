@@ -12,3 +12,8 @@
 2. ~~input이 숫자가 아닌 경우~~
 3. ~~재시작, 종료 input이 1 또는 2가 아닌경우~~
 4. gameinput이 중복값을 가지는 경우
+
+코드 가독성을 위한 기능 구현(utils)
+
+1. Missions.Console.print를 print로 wrapping
+2. Missions.Console.readLine을 input으로 wrapping
