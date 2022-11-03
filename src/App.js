@@ -20,6 +20,14 @@ class App {
     });
   }
   
+  isValidUserNumber(input) {
+    if (input.length !== 3) return false;
+    if (new Set(input).size !== 3) return false;
+    if (input.includes(0)) return false;
+    if (Number.isNaN(Number(input))) return false;
+    return true;
+  }
+
   stringToNumberArray(string) {
     return [...string].map(char => Number(char));
   }
