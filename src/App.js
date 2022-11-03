@@ -36,24 +36,14 @@ class App {
       return this.printRestartPhrase();
     }
 
-    this.countStrikeAndBall();
-
-    let result = '';
-    if (!strike && !ball) {
-      result = '낫싱';
-    }
-    if (ball) {
-      result += `${ball}볼 `;
-    }
-    if (strike) {
-      result += `${strike}스트라이크`;
-    }
-
-    Console.print(result);
-    return this.initUserInputInterface();
+    const [ball, strike] = this.countStrikeAndBall();
+    this.printStrikeAndBall(ball, strike);
+    this.initUserInputInterface();
   }
 
   countStrikeAndBall(input) {
+    let ball = 0;
+    let strike = 0;
     this.strToArr(input).forEach((element, index) => {
       if (element === this.answer[index]) {
         strike++;
@@ -62,6 +52,25 @@ class App {
         ball++;
       }
     });
+
+    return [ball, strike];
+  }
+
+  printStrikeAndBall(ball, strike) {
+    let result = '';
+    if (!ball && !strike) {
+      result = '낫싱';
+    }
+
+    if (ball) {
+      result += `${ball}볼 `;
+    }
+
+    if (strike) {
+      result += `${strike}스트라이크`;
+    }
+
+    Console.print(result);
   }
 
   init() {
