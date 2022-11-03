@@ -20,7 +20,6 @@ class App {
 
 	setAnswerNumbers() {
 		this._answerNumbers = createAnswerNumbers();
-		console.log(this._answerNumbers);
 	}
 
 	getAnswerNumbers() {
