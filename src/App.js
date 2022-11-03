@@ -13,22 +13,30 @@ class App {
     this.randomNumbers = [];
   }
 
+  play() {
+    this.startGame();
+  }
+
   startGame() {
     Console.print(START_MESSAGE);
-    this.makeRandomNumber();
+    this.initRandomNumbers();
+  }
+
+  initRandomNumbers() {
+    this.randomNumbers = this.makeRandomNumber();
   }
 
   makeRandomNumber() {
-    while (this.randomNumbers.length < MAX_LENGTH) {
+    const pickedNumbers = [];
+
+    while (pickedNumbers.length < MAX_LENGTH) {
       let number = Random.pickNumberInRange(START_NUM, END_NUM);
-      if (!this.randomNumbers.includes(number)) {
-        this.randomNumbers.push(number);
+      if (!pickedNumbers.includes(number)) {
+        pickedNumbers.push(number);
       }
     }
-  }
 
-  play() {
-    this.startGame();
+    return [...pickedNumbers];
   }
 }
 
