@@ -6,19 +6,23 @@ class BaseballModel {
     this.userValue = '';
   }
 
-  setComputerValue() {
-    const computerValueArray = [];
-    while (computerValueArray.length < 3) {
+  getRandomNumbers() {
+    const randomNumbers = [];
+    while (randomNumbers.length < 3) {
       const number = getRandomNumber();
-      if (!computerValueArray.includes(number)) {
-        computerValueArray.push(number);
+      if (!randomNumbers.includes(number)) {
+        randomNumbers.push(number);
       }
     }
-    this.computerValue = computerValueArray.join('');
+    return randomNumbers.join('');
   }
 
   setUserValue(data) {
     this.userValue = data;
+  }
+
+  setComputerValue(data) {
+    this.computerValue = data;
   }
 }
 

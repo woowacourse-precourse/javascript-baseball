@@ -8,7 +8,8 @@ class App {
   }
 
   play() {
-    this.baseballController.getUserValue();
+    this.baseballModel.setComputerValue(this.baseballModel.getRandomNumbers());
+    this.baseballController.triggerUserInput();
   }
 }
 
