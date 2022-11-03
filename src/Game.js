@@ -25,15 +25,15 @@ module.exports = class Game {
 
   getStrikeCount(inputNumber) {
     let count = 0;
-    for (index in inputNumber) {
+    for (let index in inputNumber) {
       if (inputNumber[index] == this.computerNumbers[index]) count += 1;
     }
     return count;
   }
 
-  getBallCount() {
+  getBallCount(inputNumber) {
     let count = 0;
-    for (index in inputNumber) {
+    for (let index in inputNumber) {
       if (inputNumber[index] == this.computerNumbers[(index + 1) % 3]) {
         count += 1;
       }
@@ -41,5 +41,6 @@ module.exports = class Game {
         count += 1;
       }
     }
+    return count;
   }
 };
