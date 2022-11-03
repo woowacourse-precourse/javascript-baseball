@@ -56,6 +56,23 @@ class App {
       return Console.print(`${strike}${RESULT.STRIKE}`);
     }
   }
+
+  game(computer) {
+    Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
+      if (!this.isValidNumberInput(input)) {
+        throw new Error();
+      }
+      
+      const inputNumbers = [...input].map(number => parseInt(number));
+      const { ball, strike } = this.countBallAndStrike(computer, inputNumbers);
+      this.printResult(ball, strike);
+      
+      if (strike !== 3) {
+        return this.game(computer);
+      } 
+      return this.success();
+    }
+  )}
     
   play() {
     const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
