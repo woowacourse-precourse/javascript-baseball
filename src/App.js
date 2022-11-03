@@ -9,8 +9,20 @@ class App {
 
   startGame() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      MissionUtils.Console.print(userInput);
+      if (this.checkInputValidation(userInput)) {
+        MissionUtils.Console.print(userInput);
+      } else {
+        throw "잘못된 입력입니다.";
+      }
     });
+  }
+
+  checkInputValidation(userInputs) {
+    if (userInputs.length !== 3) return false;
+    if (new Set(userInputs).size !== 3) return false;
+    if (userInputs.includes(0)) return false;
+    if (Number.isNaN(Number(userInputs))) return false;
+    return true;
   }
 }
 
