@@ -3,15 +3,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const ramdomArray = this.getRandomArray();
+    this.initRandomArray();
   }
 
   play() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      const inputArray = this.getInputArray(input);
+      this.initInputArray(input);
 
-      MissionUtils.Console.print(inputArray);
-      MissionUtils.Console.print('2스트라이크', inputArray);
+      const { ball, strike } = this.getBallStrike();
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
 
       if (input === '2') {
         MissionUtils.Console.close();
@@ -21,7 +21,7 @@ class App {
     });
   }
 
-  getRandomArray() {
+  initRandomArray() {
     const randomArray = [];
     while (randomArray.length < 3) {
       const random = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -30,16 +30,30 @@ class App {
       }
     }
   
-    return randomArray;
+    this.randomArray = randomArray;
   }
 
-  getInputArray(input) {
+  initInputArray(input) {
     const inputArray = [];
     input.split('').forEach((character) => {
       inputArray.push(parseInt(character));
     });
 
-    return inputArray;
+    this.inputArray = inputArray;
+  }
+
+  getBallStrike() {
+    let ball = 0, strike = 0;
+
+    for (let i = 0; i <= 2; i++) {
+      if (this.randomArray[i] === this.inputArray[i]) {
+        strike += 1;
+      } else if (this.randomArray.includes(this.inputArray[i])) {
+        ball += 1;
+      }
+    }
+
+    return { ball, strike };
   }
 }
 
