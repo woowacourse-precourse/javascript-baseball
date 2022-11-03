@@ -29,4 +29,13 @@ module.exports = class Game {
     }
     return count;
   }
+
+  getBallCount() {
+    let count = 0;
+    for (index in inputNumber) {
+      if (inputNumber[index] == this.computerNumbers[(index + 1) % 3]) count++;
+      if (inputNumber[index] == this.computerNumbers[index - 1]) count++;
+    }
+  }
+  
 };
