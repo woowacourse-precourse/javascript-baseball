@@ -26,12 +26,17 @@ class App {
     // 1. 3자리 숫자인지 체크
     // 2. 서로 다른 숫자인지 체크
     // 3. 리턴값 : true, false
-    let valid3Digit = false; // 3자리 수 체크하는 변수.
-    if (inputNum.length() === 3) {
-      valid3Digit = true;
-    }
+    const INPUT_NUM_ARR = (inputNum + "").split(""); // 숫자를 arr로 바꾸기.
+    const INPUT_NUM_SET = new Set(INPUT_NUM_ARR); // 서로 다른 숫자인지 확인하기 위한 Set Object 만들기.
 
-    return valid;
+    let validThreeDigit = false; // 3자리 수 체크하는 변수
+    let validDifferentNubmer = false; // 다 다른 숫자인지 체크하는 변수
+
+    if (INPUT_NUM_ARR.length === 3) validThreeDigit = true;
+    if (INPUT_NUM_ARR.length === INPUT_NUM_SET.size)
+      validDifferentNubmer = true;
+
+    return validThreeDigit && validDifferentNubmer;
   }
 }
 
