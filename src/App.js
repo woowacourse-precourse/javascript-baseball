@@ -11,8 +11,8 @@ class App {
     const CHECK_INPUT_DURING_GAME = function checkInputDuringGame(userInput) {
       if (userInput.length !== 3) return false;
       if (isNaN(userInput)) return false;
-      if (userInput[0] === userInput[1] 
-        || userInput[1] === userInput[2] 
+      if (userInput[0] === userInput[1]
+        || userInput[1] === userInput[2]
         || userInput[0] === userInput[2]) return false;
       if (!(userInput.match(/[123456789]{3}/))) return false;
       return true;
@@ -23,11 +23,13 @@ class App {
       return false;
     }
 
-
-    MissionUtils.Console.readLine('닉네임을 입력해주세요.', (answer) => {
-      console.log(CHECK_INPUT_AFTER_GAME(answer));
-    });
-
+    const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
+      let count = 0;
+      for (let index = 0; index < 3; index++){
+        if (userInput[index] === answer.toString()[index]) count++;
+      }
+      return count;
+    }
   }
 }
 const app = new App();
