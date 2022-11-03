@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -20,10 +20,11 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       this.userNumber = answer.split('').map(Number);
 
-      if (this.userNumber.includes(NaN) || this.userNumber.includes(0)
-         || new Set(this.userNumber).size !== 3
+      if (
+        this.userNumber.includes(NaN) || this.userNumber.includes(0)
+        || new Set(this.userNumber).size !== 3
       ) {
-        throw 'Invalid input';
+        throw new Error('Invalid input');
       }
     });
   }
@@ -31,7 +32,7 @@ class App {
   calcResult() {
     this.ball = 0;
     this.strike = 0;
-    for (let i = 0; i < this.targetNumber.length; i++) {
+    for (let i = 0; i < this.targetNumber.length; i += 1) {
       const idx = this.userNumber.indexOf(this.targetNumber[i]);
 
       if (idx === i) {
@@ -62,14 +63,17 @@ class App {
   }
 
   confirmExit() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
-      if (answer === '1') {
-        this.init();
-        this.guessingNumber();
-      } else if (answer !== '2') {
-        throw('Invalid input');
-      }
-    });
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', 
+      (answer) => {
+        if (answer === '1') {
+          this.init();
+          this.guessingNumber();
+        } else if (answer !== '2') {
+          throw new Error('Invalid input');
+        }
+      },
+    );
   }
 
   play() {
