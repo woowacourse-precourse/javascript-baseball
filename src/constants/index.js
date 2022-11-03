@@ -16,4 +16,9 @@ const ERROR_MESSAGE = {
   LENGTH_ERROR: `${NUMBER_VALUE.LENGTH} 자릿수 까지만 입력해주세요.`,
 };
 
-module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE };
+const RESULT = {
+  STRIKE: "스트라이크",
+  BALL: "볼",
+};
+
+module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE, RESULT };
