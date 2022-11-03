@@ -70,6 +70,7 @@ class App {
       }
     });
     this.makeHint();
+    this.receiveInputFromConsole();
   }
 
   makeHint() {
