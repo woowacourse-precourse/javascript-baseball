@@ -36,7 +36,7 @@ class App {
       return this.printRestartPhrase();
     }
 
-    const [ball, strike] = this.countStrikeAndBall();
+    const [ball, strike] = this.countStrikeAndBall(input);
     this.printStrikeAndBall(ball, strike);
     this.initUserInputInterface();
   }
