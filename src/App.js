@@ -8,8 +8,8 @@ const makeRandomNumber = () => {
   while (COMPUTER_NUMBER.length < 3) {
     const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    if (!COMPUTER_NUMBER.includes(RANDOM_NUMBER)) {
-      COMPUTER_NUMBER.push(RANDOM_NUMBER);
+    if (!COMPUTER_NUMBER.includes(String(RANDOM_NUMBER))) {
+      COMPUTER_NUMBER.push(String(RANDOM_NUMBER));
     }
   }
 
