@@ -1,5 +1,9 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const GAME_VALUE = {
+  restart: '1',
+};
+
 const GAME_MESSAGE = {
   startNotification: '숫자 야구 게임을 시작합니다.',
   requestInput: '숫자를 입력해주세요 : ',
@@ -134,6 +138,12 @@ class App {
   async doesUserWantRestart() {
     const inputValue = await offerUserInput(GAME_MESSAGE.restart);
     isOneOrTwo(inputValue);
+    inputValue === GAME_VALUE.restart ? this.restart() : this.gameExit();
+  }
+  restart() {
+    this.offerComputerRandomNumbers();
+    this.initGameResult();
+    this.gameStart();
   }
 }
 
