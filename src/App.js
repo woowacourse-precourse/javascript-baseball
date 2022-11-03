@@ -19,6 +19,9 @@ class App {
 
   getUserNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if (!this.isValidUserNumber(input)) {
+        throw new Error('잘못된 값을 입력하였습니다.');
+      }
       this.compareNumber(this.computerNumber, this.stringToNumberArray(input))
     });
   }
