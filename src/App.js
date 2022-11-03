@@ -13,6 +13,10 @@ class App {
       return this.userInput = answer
     })
   }
-}
+  // 입력 닫기
+  closeConsole() {
+    MissionUtils.Console.close()
+  }
+} 
 
 module.exports = App;
