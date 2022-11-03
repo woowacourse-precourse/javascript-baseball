@@ -46,26 +46,23 @@ class BaseballGameController {
   resultGame() {
     const strike = this.getStrike();
     const ball = this.getBall();
-    this.baseballGameView.printResultGame(strike, ball);
     if (strike !== '3스트라이크') {
+      this.baseballGameView.printResultGame(strike, ball);
       this.triggerUserInput();
-    }
-    if (strike === '3스트라이크') {
+    } else if (strike === '3스트라이크') {
       this.successGame();
     }
   }
 
   successGame() {
-    triggerConsole(
-      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (number) => {
-        if (number === '1') {
-          this.restartGame();
-        } else if (number === '2') {
-          closeConsole();
-        }
-      },
-    );
+    this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    triggerConsole('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
+      if (number === '1') {
+        this.restartGame();
+      } else if (number === '2') {
+        closeConsole();
+      }
+    });
   }
 
   restartGame() {
