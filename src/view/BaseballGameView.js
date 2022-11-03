@@ -5,12 +5,16 @@ class BaseballGameView {
     printConsole(message);
   }
 
-  printResultGame(result) {
-    if (!result) {
+  printResultGame(strike, ball) {
+    if (ball && !strike) {
+      this.print(ball);
+    } else if (!ball && strike) {
+      this.print(strike);
+    } else if (ball && strike) {
+      this.print(`${ball} ${strike}`);
+    } else if (!ball && !strike) {
       this.print('낫싱');
-      return;
     }
-    this.print(result);
   }
 }
 

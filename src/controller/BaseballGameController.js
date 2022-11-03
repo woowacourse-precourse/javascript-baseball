@@ -44,12 +44,13 @@ class BaseballGameController {
   }
 
   resultGame() {
-    const result = this.getBall() + this.getStrike();
-    this.baseballGameView.printResultGame(result);
-    if (result !== '3스트라이크') {
+    const strike = this.getStrike();
+    const ball = this.getBall();
+    this.baseballGameView.printResultGame(strike, ball);
+    if (strike !== '3스트라이크') {
       this.triggerUserInput();
     }
-    if (result === '3스트라이크') {
+    if (strike === '3스트라이크') {
       this.successGame();
     }
   }
