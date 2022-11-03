@@ -1,11 +1,20 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  constructor() {
+    this.userValue=''
+  }
+
   play() {
     const randomValue=makeRandomValue()
-    MissionUtils.Console.print(randomValue);
-    MissionUtils.Console.close()
+    inputUserValue()
+
   }
+
+  setUserValue(number) {
+    this.userValue=number
+  }
+
 }
 
 const app=new App()
@@ -22,8 +31,24 @@ function makeRandomValue() {
   return randomValue
 }
 
+// 사용자의 숫자 입력받기
+function inputUserValue() {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(answer)=> {
+    isValidValue(answer)
+  })
+}
 
+//사용자의 입력값이 유효값인지 검사
+function isValidValue(number) {
+  let isUnique=(new Set(number)).size
+  if (!number.match(/[1-9]{3}/) || isUnique!==3) {
+    throw ("잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요")
+  }
+  app.setUserValue(number)
+}
+
+// MissionUtils.Console.close()
+// MissionUtils.Console.print(randomValue);
 
 // module.exports = App;
-
 
