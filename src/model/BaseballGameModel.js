@@ -1,6 +1,6 @@
 const { getRandomNumber } = require('../utils/missionUtils');
 
-class BaseballModel {
+class BaseballGameModel {
   constructor() {
     this.computerValue = '';
     this.userValue = '';
@@ -26,4 +26,4 @@ class BaseballModel {
   }
 }
 
-module.exports = BaseballModel;
+module.exports = BaseballGameModel;

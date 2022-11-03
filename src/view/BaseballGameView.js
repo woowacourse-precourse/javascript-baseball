@@ -1,6 +1,6 @@
 const { printConsole } = require('../utils/missionUtils');
 
-class BaseballView {
+class BaseballGameView {
   renderPrint(message) {
     printConsole(message);
   }
@@ -14,4 +14,4 @@ class BaseballView {
   }
 }
 
-module.exports = BaseballView;
+module.exports = BaseballGameView;

@@ -1,20 +1,20 @@
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
 
-class BaseballController {
-  constructor(baseballModel, baseballView) {
-    this.baseballModel = baseballModel;
-    this.baseballView = baseballView;
+class BaseballGameController {
+  constructor(baseballGameModel, baseballGameView) {
+    this.baseballGameModel = baseballGameModel;
+    this.baseballGameView = baseballGameView;
   }
 
   startGame() {
-    this.baseballView.renderPrint('숫자 야구 게임을 시작합니다.');
-    this.baseballModel.setComputerValue(this.baseballModel.getRandomNumbers());
+    this.baseballGameView.renderPrint('숫자 야구 게임을 시작합니다.');
+    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
     this.triggerUserInput();
   }
 
   triggerUserInput() {
     triggerConsole('숫자를 입력해주세요 : ', (value) => {
-      this.baseballModel.setUserValue(value);
+      this.baseballGameModel.setUserValue(value);
       this.resultGame();
     });
   }
@@ -22,7 +22,7 @@ class BaseballController {
   getStrike() {
     let strike = 0;
     for (let index = 0; index < 3; index += 1) {
-      if (this.baseballModel.userValue[index] === this.baseballModel.computerValue[index]) {
+      if (this.baseballGameModel.userValue[index] === this.baseballGameModel.computerValue[index]) {
         strike += 1;
       }
     }
@@ -33,7 +33,7 @@ class BaseballController {
     const strike = this.getStrike();
     let ball = 0;
     for (let index = 0; index < 3; index += 1) {
-      if (this.baseballModel.computerValue.includes(this.baseballModel.userValue[index])) {
+      if (this.baseballGameModel.computerValue.includes(this.baseballGameModel.userValue[index])) {
         ball += 1;
       }
     }
@@ -45,7 +45,7 @@ class BaseballController {
 
   resultGame() {
     const result = this.getBall() + this.getStrike();
-    this.baseballView.renderResultRender(result);
+    this.baseballGameView.renderResultRender(result);
     if (result !== '3스트라이크') {
       this.triggerUserInput();
     }
@@ -68,9 +68,9 @@ class BaseballController {
   }
 
   restartGame() {
-    this.baseballModel.setComputerValue(this.baseballModel.getRandomNumbers());
+    this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
     this.triggerUserInput();
   }
 }
 
-module.exports = BaseballController;
+module.exports = BaseballGameController;

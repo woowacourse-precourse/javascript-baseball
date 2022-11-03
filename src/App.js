@@ -1,16 +1,19 @@
-const BaseballModel = require('./model/BaseballModel');
-const BaseballController = require('./controller/BaseballController');
-const BaseballView = require('./view/BaseballView');
+const BaseballGameModel = require('./model/BaseballGameModel');
+const BaseballGameController = require('./controller/BaseballGameController');
+const BaseballGameView = require('./view/BaseballGameView');
 
 class App {
   constructor() {
-    this.baseballModel = new BaseballModel();
-    this.baseballView = new BaseballView();
-    this.baseballController = new BaseballController(this.baseballModel, this.baseballView);
+    this.baseballGameModel = new BaseballGameModel();
+    this.baseballGameView = new BaseballGameView();
+    this.baseballGameController = new BaseballGameController(
+      this.baseballGameModel,
+      this.baseballGameView,
+    );
   }
 
   play() {
-    this.baseballController.startGame();
+    this.baseballGameController.startGame();
   }
 }
 
