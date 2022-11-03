@@ -1,5 +1,7 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const stringToNumbers = (string) => [...string].map((char) => +char);
+
 const offerUserInput = async () => {
   return new Promise((resolve) => {
     Console.readLine('숫자를 입력해주세요 : ', (nums) => resolve(nums));
@@ -23,8 +25,8 @@ class App {
     this.getUserInputNumbers();
   }
   async getUserInputNumbers() {
-    this.userInputNumbers = await offerUserInput();
-    console.log(this.userInputNumbers);
+    const userInputValue = await offerUserInput();
+    this.userInputNumbers = stringToNumbers(userInputValue);
   }
 }
 
