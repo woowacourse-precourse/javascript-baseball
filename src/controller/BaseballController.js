@@ -21,6 +21,17 @@ class BaseballController {
     }
     return strike;
   }
+
+  getBall() {
+    let ball = 0;
+    for (let index = 0; index < 3; index += 1) {
+      if (this.baseballModel.computerValue.includes(this.baseballModel.userValue[index])) {
+        ball += 1;
+      }
+    }
+    ball -= this.getStrike();
+    return ball;
+  }
 }
 
 module.exports = BaseballController;
