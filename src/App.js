@@ -42,10 +42,21 @@ class App {
     }
   }
 
+  printResult() {
+    let result = '';
+
+    if (this.ball > 0) result += `${this.ball}볼 `;
+    if (this.strike > 0) result += `${this.strike}스트라이크`;
+    if (result.length === 0) result += '낫싱';
+
+    MissionUtils.Console.print(result);
+  }
+
   play() {
     this.resetTargetNumber();
     this.getUserNumber();
     this.calcResult();
+    this.printResult();
   }
 }
 
