@@ -2,15 +2,15 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.computerAnswer = [];
+    this.answer = [];
     this.userAnswer;
   }
 
   initAnswer() {
-    while (this.computerAnswer.length < 3) {
+    while (this.answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
-      if (!this.computerAnswer.includes(number)) {
-        this.computerAnswer.push(number);
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
       }
     }
   }
