@@ -33,6 +33,16 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
 
+  test("컴퓨터 랜덤 숫자 생성", () => {
+    const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
+
+    const app = new App();
+    app.makeRandomNumber();
+
+    expect(randomSpy).toHaveBeenCalled();
+    expect(randomSpy).toHaveBeenCalledWith(1, 9);
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
