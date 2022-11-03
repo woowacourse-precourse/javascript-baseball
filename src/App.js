@@ -18,7 +18,10 @@ function getComputerNumber() {
 
 function getUserInput() {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    MissionUtils.Console.close();
+    if (input == "quit") {
+      return MissionUtils.Console.close();
+    }
+    getUserInput();
   })
 }
 
