@@ -71,7 +71,10 @@ class App {
       if (this.randomNumber.includes(val)) this.ball += 1
     })
   }
-
+  // 게임 재시작하기
+  restart() {
+    this.play()
+  }
 } 
 
 module.exports = App;
