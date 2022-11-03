@@ -24,6 +24,15 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+  test("게임 시작 문구를 화면에 출력한다.", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toBeCalledWith("숫자 야구 게임을 시작합니다.");
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
