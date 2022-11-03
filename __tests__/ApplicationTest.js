@@ -84,23 +84,24 @@ describe("App", () => {
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
   });
 
-  test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
-    const app = new App();
+  // test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
+  //   const app = new App();
 
-    const randomNumber = app.getRandomNumber();
+  //   const randomNumber = app.getRandomNumber();
 
-    expect(randomNumber).toBeGreaterThanOrEqual(1);
-    expect(randomNumber).toBeLessThanOrEqual(9);
-  });
+  //   expect(randomNumber).toBeGreaterThanOrEqual(1);
+  //   expect(randomNumber).toBeLessThanOrEqual(9);
+  // });
 
   test("숫자 야구 게임의 정답을 만든다.", () => {
     const app = new App();
 
     const answer = app.makeBaseballGameAnswer();
 
-    console.log(answer);
-
     expect(answer).toHaveLength(3);
     expect(typeof answer).toBe("string");
+    expect(
+      Array.from(answer).every((number) => !isNaN(Number(number)))
+    ).toBeTruthy();
   });
 });
