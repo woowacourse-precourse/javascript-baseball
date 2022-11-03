@@ -1,11 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
 const print = require("./print.js");
+const game = require("./game.js");
 
 class App {
-  constructor() {}
   play() {
     print.start();
+    this.answer = game.getAnswer();
   }
 }
 
