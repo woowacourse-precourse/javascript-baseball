@@ -1,13 +1,8 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const baseballGameCycle = require("./baseballGameCycle");
-const createRandomNumbers = require("./createRandomNumbers");
+const playBaseballGame = require("./playBaseballGame");
 
 class App {
   play() {
-    const randomNumbers = createRandomNumbers();
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
-    baseballGameCycle(randomNumbers);
+    playBaseballGame();
   }
 }
 
