@@ -34,6 +34,16 @@ class App {
             throw "입력은 서로 달라야 합니다.";
         if (len === 3) this.countInput(input.split("").map(Number));
     }
+    countInput(arr) {
+        let BALLS = 0;
+        let STRIKES = 0;
+        for (let i = 0; i < 3; i++) {
+            if (arr[i] === this.PICKED_NUMBERS[i]) STRIKES++;
+            else if (arr[i] === this.PICKED_NUMBERS[(i + 1) % 3]) BALLS++;
+            else if (arr[i] === this.PICKED_NUMBERS[(i + 2) % 3]) BALLS++;
+        }
+        this.printResult([BALLS, STRIKES]);
+    }
 }
 
 module.exports = App;
