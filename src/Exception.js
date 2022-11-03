@@ -1,6 +1,8 @@
 class Exception {
   #regexNum = /[1-9]/g;
   #CONSTANT = Object.freeze({
+    RESTART: 1,
+    EXIT: 2,
     LENGTH: 3,
   });
 
@@ -17,6 +19,14 @@ class Exception {
 
   is3DifferNumber() {
     return [...new Set(this._input.split(""))].length === this.#CONSTANT.LENGTH;
+  }
+
+  isRestart() {
+    return this._input == this.#CONSTANT.RESTART;
+  }
+
+  isExit() {
+    return this._input == this.#CONSTANT.EXIT;
   }
 }
 
