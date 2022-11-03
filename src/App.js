@@ -57,3 +57,19 @@ const gameRule = (computer,user) => {
   }
   return `${ballScore}볼 ${strikeScorer}스트라이크`
 }
+
+const userInputError = (userInput) => {
+  if(userInput.length !== 3) {
+    throw ('3자리의 수를 입력하세요.');
+  }
+  if(new Set(userInput).size !== 3) {
+    throw ('중복된 수가 없는지 확인해주세요.');
+  }
+  if(userInput.includes('0')) {
+    throw ('1~9까지의 숫자만 입력해주세요.');
+  }
+  if(isNaN(userInput) || userInput.includes(' ')) {
+    throw ('숫자만 입력해주세요.');
+  }
+  return true;
+}
