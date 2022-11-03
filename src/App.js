@@ -1,20 +1,22 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   constructor() {
-    this.computerNumber = createComputerNumber();
+    this.computerNumber = this.createComputerNumber();
   }
 
-  static createComputerNumber = () => {
+  createComputerNumber = () => {
     const computerNumber = [];
     while (computerNumber.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (isEveryNumberUnique(computerNumber)) {
+      if (this.isEveryNumberUnique(computerNumber)) {
         computerNumber.push(randomNumber);
       }
     }
     return computerNumber;
   };
 
-  static isEveryNumberUnique = (nums) => {
+  isEveryNumberUnique = (nums) => {
     return nums.length === new Set(nums).size;
   };
 
