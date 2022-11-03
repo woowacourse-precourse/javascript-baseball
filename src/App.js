@@ -27,7 +27,7 @@ class App {
       const index = this.computerNumberArray.indexOf(userNumber);
       if (index === userNumberArrayIndex) {
         this.answerMap.set('strike', this.answerMap.get('strike') + 1);
-      } else if (index > 0) {
+      } else if (index >= 0) {
         this.answerMap.set('ball', this.answerMap.get('ball') + 1);
       }
     });
@@ -55,19 +55,42 @@ class App {
     }
     this.startApp();
   }
+  async getInput(input) {
+    return [
+      ...input
+        .toString()
+        .split('')
+        .map(i => +i),
+    ];
+  }
 
-  startApp() {
-    this.initAnswerMap();
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-      this.userNumberArray = [
-        ...input
-          .toString()
-          .split('')
-          .map(i => +i),
-      ];
-
-      this.compareUserAndComputerNumber();
+  getUserNumberFromInput = async () => {
+    let that = this;
+    return new Promise(function (resolve, reject) {
+      try {
+        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+          that.userNumberArray = [
+            ...input
+              .toString()
+              .split('')
+              .map(i => +i),
+          ];
+          resolve();
+        });
+      } catch (e) {
+        reject(e);
+      }
     });
+  };
+
+  async startApp() {
+    this.initAnswerMap();
+    try {
+      await this.getUserNumberFromInput();
+    } catch (e) {
+      throw Error(e);
+    }
+    this.compareUserAndComputerNumber();
   }
 
   play() {
