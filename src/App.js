@@ -57,6 +57,11 @@ class App {
       this.retryOrExit(answer);
     });
   }
+
+  retryOrExit(answer) {
+    if (answer === '1') this.play();
+    if (answer === '2') MissionUtils.Console.close(); 
+  }
 }
 
 module.exports = App;
