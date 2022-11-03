@@ -10,6 +10,21 @@ const ERROR_MESSAGE = {
   invalidValueError: '1~9까지의 숫자 중 세개의 숫자를 입력해주세요',
 };
 
+const getGameResultMessage = (gameResult) => {
+  if (gameResult.strike === 0 && gameResult.ball === 0) {
+    return '낫싱';
+  }
+  if (gameResult.strike && gameResult.ball) {
+    return `${gameResult.ball}볼 ${gameResult.strike}스트라이크`;
+  }
+  if (gameResult.strike) {
+    return `${gameResult.strike}스트라이크`;
+  }
+  if (gameResult.ball) {
+    return `${gameResult.ball}볼`;
+  }
+};
+
 const getBallCount = (computerNumbers, userNumbers, strikeCount) => {
   const bothHaveNumberLength = userNumbers.filter((num) =>
     computerNumbers.includes(num)
@@ -88,6 +103,10 @@ class App {
       this.userInputNumbers,
       this.gameResult.strike
     );
+    this.printGameResult();
+  }
+  printGameResult() {
+    const gameResultMessage = getGameResultMessage(this.gameResult);
   }
 }
 
