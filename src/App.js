@@ -10,10 +10,11 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.initInputArray(input);
 
-      const { ball, strike } = this.getBallStrike();
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      const resultString = this.getResultString();
+      MissionUtils.Console.print(resultString);
 
-      if (input === '2') {
+      if (resultString === '3스트라이크') {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         MissionUtils.Console.close();
       } else {
         this.play();
@@ -42,6 +43,15 @@ class App {
     this.inputArray = inputArray;
   }
 
+  getResultString() {
+    const { ball, strike } = this.getBallStrike();
+
+    if (ball === 0 && strike === 0) return '낫싱';
+    if (ball === 0) return `${strike}스트라이크`;
+    if (strike === 0) return `${ball}볼`;
+    return `${ball}볼 ${strike}스트라이크`;
+  }
+
   getBallStrike() {
     let ball = 0, strike = 0;
 
@@ -56,6 +66,7 @@ class App {
     return { ball, strike };
   }
 }
+
 
 module.exports = App;
 
