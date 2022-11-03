@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
+const validator = require("./Validate");
 
 class App {
   play() {
@@ -11,10 +12,20 @@ class App {
     MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  validateInput(inputStr) {
+    if (
+      !validator.isLengthOk(inputStr) ||
+      !validator.isNumber(inputStr) ||
+      !validator.isDifferent(inputStr) ||
+      !validator.isRangeStr(inputStr)
+    )
+      throw Error("입력 형식이 맞지 않습니다.");
+
+    const inputArr = inputStr.split("").map(Number);
+  }
+
   input() {
-    Console.readLine("숫자를 입력해주세요: ", (inputNum) => {
-      console.log(`입력 받은 숫자 : ${inputNum}`);
-    });
+    Console.readLine("숫자를 입력해주세요: ", this.validateInput);
   }
 }
 
