@@ -1,4 +1,5 @@
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
+const isValidateUserInput = require('../utils/validator');
 
 class BaseballGameController {
   constructor(baseballGameModel, baseballGameView) {
@@ -9,13 +10,15 @@ class BaseballGameController {
   startGame() {
     this.baseballGameView.print('숫자 야구 게임을 시작합니다.');
     this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
-    this.triggerUserInput();
+    this.triggerGame();
   }
 
-  triggerUserInput() {
-    triggerConsole('숫자를 입력해주세요 : ', (value) => {
-      this.baseballGameModel.setUserValue(value);
-      this.resultGame();
+  triggerGame() {
+    triggerConsole('숫자를 입력해주세요 : ', (number) => {
+      if (isValidateUserInput(number)) {
+        this.baseballGameModel.setUserValue(number);
+        this.resultGame();
+      }
     });
   }
 
@@ -48,14 +51,14 @@ class BaseballGameController {
     const ball = this.getBall();
     if (strike !== '3스트라이크') {
       this.baseballGameView.printResultGame(strike, ball);
-      this.triggerUserInput();
+      this.triggerGame();
     } else if (strike === '3스트라이크') {
+      this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.successGame();
     }
   }
 
   successGame() {
-    this.baseballGameView.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     triggerConsole('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
       if (number === '1') {
         this.restartGame();
@@ -67,7 +70,7 @@ class BaseballGameController {
 
   restartGame() {
     this.baseballGameModel.setComputerValue(this.baseballGameModel.getRandomNumbers());
-    this.triggerUserInput();
+    this.triggerGame();
   }
 }
 
