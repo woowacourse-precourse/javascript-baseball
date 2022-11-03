@@ -1,7 +1,5 @@
-const startGame = require("./startGame");
-const getRandomThreeNumber = require("./getRandomThreeNumber");
+const game = require("./game");
 
 module.exports = {
-  startGame,
-  getRandomThreeNumber,
+  game,
 };
