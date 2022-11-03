@@ -8,7 +8,10 @@ class App {
 
   play() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      MissionUtils.Console.print('2스트라이크');
+      const inputArray = this.getInputArray(input);
+
+      MissionUtils.Console.print(inputArray);
+      MissionUtils.Console.print('2스트라이크', inputArray);
 
       if (input === '2') {
         MissionUtils.Console.close();
@@ -28,6 +31,15 @@ class App {
     }
   
     return randomArray;
+  }
+
+  getInputArray(input) {
+    const inputArray = [];
+    input.split('').forEach((character) => {
+      inputArray.push(parseInt(character));
+    });
+
+    return inputArray;
   }
 }
 
