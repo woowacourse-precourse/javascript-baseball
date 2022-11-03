@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const pickedNumberByComputer = require("./pickedNumberByComputer");
 const enterNumber = require("./enterNumber");
 const countStrikeBallNothing = require("./countStrikeBallNothing");
+const resultsForCount = require("./resultsForCount");
 
 async function game() {
   const COMPUTER = pickedNumberByComputer();
@@ -12,6 +13,7 @@ async function game() {
       pickedNumberByUser,
       COMPUTER
     );
+    resultsForCount(strike, ball, nothing);
   }
   MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 }
