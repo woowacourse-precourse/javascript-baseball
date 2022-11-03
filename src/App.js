@@ -38,7 +38,11 @@ function compare(myNumber, computerNumber) {
 }
 
 function createComputerNumber() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+  let set = new Set();
+  while (set.size < 3) {
+    set.add(MissionUtils.Random.pickNumberInRange(1, 9));
+  }
+  return Array.from(set).join("");
 }
 
 function readInputNumber(computerNumber) {
@@ -69,10 +73,9 @@ function selectGameRestart(input) {
   if (input === "1") {
     let computerNumber = createComputerNumber();
     readInputNumber(computerNumber);
-  } else if (input === "2") {
-    MissionUtils.Console.close();
-  } else {
-    throw new Error("1이나 2가 아닌 숫자가 입력되었습니다.");
+  }
+  if (!(input === "1" || input === "2")) {
+    throw new Error();
   }
 }
 
