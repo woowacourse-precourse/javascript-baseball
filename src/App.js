@@ -9,14 +9,18 @@ class App {
       // Todo: 사용자가 정답을 맞출때 까지 숫자 입력 받아야함.
       const INPUT_NUM = this.customInput();
       this.checkValidInput(INPUT_NUM); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
+      const INPUT_NUM_ARR = this.numberToArray(INPUT_NUM);
+      const HINT_ARR = this.compareTwoNumbers(ANSWER_NUMBER, INPUT_NUM_ARR);
     }
   }
+
   numberToArray(number) {
     // 숫자를 배열로 바꾸는 함수.
     const STR = String(number);
     const MAP_FN = (arg) => Number(arg);
     return Array.from(STR, MAP_FN);
   }
+
   customInput() {
     // 사용자로부터 입력 받는 함수.
     let inputNumber;
@@ -43,10 +47,18 @@ class App {
   }
 
   compareTwoNumbers(answer, number) {
-    // TODO: [0, 0] 형태의 배열 리턴.
+    // [arg1, arg2] -> arg1: 스트라이크 수 , arg2: 볼 수
     // 1. 스트라이크부터 확인
     // 2. 그 다음 볼 확인.
     let hintArr = [0, 0];
+    let sameNumberNum = 0; // 전체 배열에서 같은 숫자의 개수 세는 변수.
+
+    for (let i = 0; i < 3; i++) if (answer[i] === number[i]) hintArr[0]++; // 같은 자리의 숫자 같으면 스트라이크 + 1
+    for (let i = 0; i < 3; i++) if (answer.includes(number[i])) sameNumberNum++;
+
+    hintArr[1] = sameNumberNum - hintArr[0];
+
+    return hintArr;
   }
 }
 
