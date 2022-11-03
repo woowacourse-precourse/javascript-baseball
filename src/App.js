@@ -1,5 +1,11 @@
+import * as MissionUtils from '@woowacourse/mission-utils';
+
 class App {
-  play() {}
+  play() {
+  }
 }
+
+
+
 
 module.exports = App;
