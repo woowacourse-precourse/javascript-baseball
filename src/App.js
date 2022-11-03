@@ -10,6 +10,9 @@ function userInput(answer) {
     let strikeNum = strikeCalculation(answer, userNumberArray);
     let ballNum = ballCalculation(answer, userNumberArray);
     console.log(strikeNum, ballNum);
+    if (strikeNum === 0 && ballNum === 0) {
+      MissionUtils.Console.print("낫싱");
+    }
   });
 }
 
