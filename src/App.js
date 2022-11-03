@@ -65,6 +65,11 @@ class App {
       this.error();
     }
   }
+  
+  error() {
+    Console.print(MESSAGES.END);
+    Console.close();
+  }
 }
 
 module.exports = App;
