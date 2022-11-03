@@ -1,11 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const printStartMessage = require('./funcs/printStartMessage');
 const isInputValid = require('./funcs/isInputValid');
 const createAnswerNumbers = require('./funcs/createAnswerNumbers');
 const compareInputNumbers = require('./funcs/compareInputNumbers');
-const printCompareResult = require('./funcs/printCompareResult');
-const printEndMessage = require('./funcs/printEndMessage');
-const printNewGameMessage = require('./funcs/printNewGameMessage');
+const { printStartMessage, printCompareResult, printEndMessage, printNewGameMessage } = require('./funcs/custom_print');
 
 class App {
 	constructor() {
