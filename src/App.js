@@ -13,6 +13,13 @@ function userInput(answer) {
     if (strikeNum === 0 && ballNum === 0) {
       MissionUtils.Console.print("낫싱");
     }
+
+    if (strikeNum !== 3) {
+      let message = "";
+      message += ballNum ? `${ballNum}볼 ` : "";
+      message += strikeNum ? `${strikeNum}스트라이크 ` : "";
+      MissionUtils.Console.print(message);
+    }
   });
 }
 
