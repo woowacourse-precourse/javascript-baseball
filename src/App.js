@@ -10,6 +10,8 @@ class App {
     MissionUtils.Console.print(computer);
 
     // step3
+    let input = await this.setUserNum();
+    MissionUtils.Console.print(input);
 
     // step4
 
