@@ -12,6 +12,9 @@ class App {
       MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!this.getIsInputValueValid(input)) {
+        throw Error("입력값이 유효하지 않습니다.");
+      }
       this.inputNumber = input;
       this.hint = this.getHint(this.computer.correctNumber, this.inputNumber);
       MissionUtils.Console.print(this.hint);
