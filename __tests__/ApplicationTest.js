@@ -59,4 +59,12 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+  test("1~9까지의 숫자 예외 테스트", () => {
+    const app = new App();
+    const input = "";
+
+    expect(() => app.isValidSingleDigitNaturalNumber(input)).toThrow(
+      "1에서 9까지의 자연수를 입력해주세요"
+    );
+  });
 });
