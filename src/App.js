@@ -18,7 +18,7 @@ class App {
 
     this.getRandomNumber()
 
-    while(this.strike < 3) {
+    while(this.strike !== 3) {
       this.setUserInput(PLEASE_NUMBER)
 
       if (!this.verifyInput()) return this.throwError()
@@ -30,7 +30,9 @@ class App {
 
     this.outputString(IS_RESTART)
     this.setUserInput('')
-    if (this.userInput === '1') this.restart()
+    if (this.userInput === '1') return this.restart()
+
+    return this.resetAllMember()
   }
   // 메시지 출력 하기
   outputString(str) {
@@ -40,6 +42,7 @@ class App {
   setUserInput(str) {
     return MissionUtils.Console.readLine(str, (answer) => {
       this.outputString(`${str} ${answer}`)
+      this.closeConsole()
       return this.userInput = answer.toString()
     })
   }
@@ -112,6 +115,7 @@ class App {
     if (this.notThing) str = '낫싱'
     else if (this.strike === 3) {
       str = CLEAR
+      this.outputString('3스트라이크')
     } else {
       if (this.ball > 0) str += `${this.ball}볼 `
       if (this.strike > 0) str += `${this.strike}스트라이크`
@@ -128,8 +132,9 @@ class App {
   }
   // 게임 재시작하기
   restart() {
-    this.resetStringAndBall()
-    this.play()
+    // const app = new App()
+    this.resetAllMember()
+    return this.play()
   }
 } 
 
