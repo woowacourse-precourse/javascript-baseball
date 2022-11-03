@@ -59,6 +59,18 @@ class App {
     if (JSON.stringify(this.input) === JSON.stringify(this.answer)) {
       this.success();
     }
+    this.input.forEach((num, index) => {
+      if (this.answer[index] === num) {
+        this.hint["strike"] += 1;
+      }
+      if (this.answer.includes(num) && this.answer[index] !== num) {
+        this.hint["ball"] += 1;
+      }
+      if (!this.answer.includes(num)) {
+        this.hint["nothing"] += 1;
+      }
+    });
+    this.makeHint();
   }
 
   play() {
