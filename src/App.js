@@ -27,6 +27,11 @@ class App {
 
     return true
   }
+  // 스트라이크, 볼 멤버변수 초기화하기
+  resetStringAndBall() {
+    this.strike = 0
+    this.ball = 0
+  }
 } 
 
 module.exports = App;
