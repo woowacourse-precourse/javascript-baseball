@@ -2,29 +2,20 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    console.log(init());
+    let answers = init();
+    console.log(answers);
   }
 }
 
 const init = () => {
-  let answers = [];
-  let numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  for (let i = 0; i < 3; i++) {
-    let pickNumber = MissionUtils.Random.pickNumberInList(numberList);
-    answers.push(pickNumber);
-    numberList = deleteItemInArr(numberList, pickNumber);
-  }
-  return answers;
-};
-
-const deleteItemInArr = (arr, item) => {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === item) {
-      arr.splice(i, 1);
-      i--;
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
     }
   }
-  return arr;
+  return computer;
 };
 
 const app = new App();
