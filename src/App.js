@@ -56,10 +56,14 @@ const GAME_HINT = function getHintFromInput(userInput, answer) {
   const strikes = CHECK_STRIKE(userInput, answer);
   const balls = CHECK_BALL(userInput, answer);
 
-  if (strikes === 3) END_OF_GAME();
-  if (strikes === 0 && balls === 0) {
-    GAME_APP(answer);
+  if (strikes === 3) {
+    MissionUtils.Console.print('3스트라이크');
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    END_OF_GAME();
+    return;
   }
+  if (strikes === 0 && balls === 0) MissionUtils.Console.print('낫싱');
+  else MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
   GAME_APP(answer);
 }
 
@@ -71,11 +75,13 @@ const GAME_APP = function gameApplication(answer) {
 
 const START_GAME = function launchNewGame() {
   const ANSWER = MAKEANSWER();
+  console.log(ANSWER);
   GAME_APP(ANSWER);
 }
 
 class App {
   play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     START_GAME();
   }
 }
