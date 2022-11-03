@@ -5,10 +5,10 @@ module.exports = class Game {
     this.computerNumbers;
     this.gameInit();
   }
+  
   gameInit() {
     this.computerNumbers = [...this.getRandomNumbers()].join("");
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.print(this.computerNumbers);
     this.getUserNumberInput();
   }
 
@@ -24,9 +24,9 @@ module.exports = class Game {
   getUserNumberInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       MissionUtils.Console.print(this.getGameResultString(number));
-      if (this.getGameResultString(number) == GAME_WIN)
-        return MissionUtils.Console.close();
-      else this.getUserNumberInput();
+      if (this.getGameResultString(number) == GAME_WIN) {
+        this.handleGame();
+      } else this.getUserNumberInput();
     });
   }
 
@@ -63,5 +63,15 @@ module.exports = class Game {
       }
     }
     return count;
+  }
+
+  handleGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (number) => {
+        if (number == 1) this.gameInit();
+        else MissionUtils.Console.close();
+      }
+    );
   }
 };
