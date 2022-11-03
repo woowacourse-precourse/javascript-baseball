@@ -23,6 +23,23 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getTestFunctoin = (answer) => {
+  const testFunction = () => {
+    const randoms = [1, 3, 5];
+    const answers = [answer];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  }
+
+  return testFunction;
+}
+
 describe("숫자 야구 게임", () => {
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
@@ -47,16 +64,9 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
-    const randoms = [1, 3, 5];
-    const answers = ["1234"];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
-  });
+  test("예외 테스트 1", getTestFunctoin("1234"));
+  test("예외 테스트 2", getTestFunctoin(""));
+  test("예외 테스트 3", getTestFunctoin("039"));
+  test("예외 테스트 4", getTestFunctoin("191"));
+  test("예외 테스트 5", getTestFunctoin("36e"));
 });
