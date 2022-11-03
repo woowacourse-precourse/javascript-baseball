@@ -5,6 +5,8 @@ class App {
 
 module.exports = App;
 
+const answerCheck = false;
+
 function computerInput(){
   const computerInputArr=[];
   while (computerInputArr.length < 3) {
@@ -72,4 +74,14 @@ const userInputError = (userInput) => {
     throw ('숫자만 입력해주세요.');
   }
   return true;
+}
+
+const userInputHandler = (computer) => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInput) => {
+    userInputError(answer);
+    MissionUtils.Console.print(gameRule(computer,userInput));
+    if(!answerCheck) {
+      return userInputHandler();
+    }
+  })
 }
