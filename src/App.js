@@ -35,7 +35,7 @@ class App {
     return [...string].map(char => Number(char));
   }
 
-  compareNumber(userNumber, computerNumber) {
+  compareNumber(computerNumber, userNumber) {
     const result = {
       ball: 0,
       strike: 0,
@@ -45,7 +45,8 @@ class App {
       if (num === computerNumber[index]) result.strike += 1;
       else if (computerNumber.includes(num)) result.ball += 1;
     });
-    return result;
+    this.printResult(result.strike, result.ball);
+    this.isCorrectAnswer(result);
   }
   
   printResult(strike, ball) {
