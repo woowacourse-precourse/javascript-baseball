@@ -12,10 +12,12 @@ class App {
   }
 
   isValidNumberInput(userInput) {
-    const regex = new RegExp(`[${NUMBERS.RANDOM_MIN}-${NUMBERS.RANDOM_MAX}]*${NUMBERS.REQUIRED_LENGHT}`);
+    if (userInput.length !== NUMBERS.REQUIRED_LENGHT) {
+      return false;
+    }
 
-    if (!regex.test(userInput)) {
-      return false
+    if (!parseInt(userInput)) {
+      return false;
     }
 
     const set = new Set([...userInput])
