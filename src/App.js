@@ -1,5 +1,11 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const offerUserInput = async () => {
+  return new Promise((resolve) => {
+    Console.readLine('숫자를 입력해주세요 : ', (nums) => resolve(nums));
+  });
+};
+
 class App {
   constructor() {
     this.offerComputerRandomNumbers();
@@ -14,6 +20,11 @@ class App {
   }
   gameStart() {
     Console.print('숫자 야구 게임을 시작합니다.');
+    this.getUserInputNumbers();
+  }
+  async getUserInputNumbers() {
+    this.userInputNumbers = await offerUserInput();
+    console.log(this.userInputNumbers);
   }
 }
 
