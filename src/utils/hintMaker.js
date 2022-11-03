@@ -18,6 +18,8 @@ const getStrikeBallCount = (userNumber, computerNumber) => {
 const getHint = (userNumber, computerNumber) => {
   const { strike, ball } = getStrikeBallCount(userNumber, computerNumber);
 
+  if (strike === 0 && ball === 0) return RESULT.NOTHING;
+
   if (ball === 0 && strike !== 0) return `${strike}${RESULT.STRIKE}`;
   if (strike === 0 && ball !== 0) return `${ball}${RESULT.BALL}`;
 

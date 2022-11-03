@@ -19,6 +19,7 @@ const ERROR_MESSAGE = {
 const RESULT = {
   STRIKE: "스트라이크",
   BALL: "볼",
+  NOTHING: "낫싱",
 };
 
 module.exports = { GAME_MESSAGE, NUMBER_VALUE, ERROR_MESSAGE, RESULT };
