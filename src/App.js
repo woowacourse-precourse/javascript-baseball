@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  async play() {
     // step1
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     
@@ -17,6 +17,17 @@ class App {
 
     // step6
 
+  }
+
+  setUserNum() {
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 :', (i) => {
+        let input = i.split('').map(num => parseInt(num));
+        if (input.length !== 3) throw new Error('length error');
+        else if(input.length !== new Set(input).size) throw new Error('duplicate error');
+        else resolve(input) 
+      });
+    })
   }
 
   setComputerNum() {
