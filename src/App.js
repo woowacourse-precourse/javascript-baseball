@@ -6,6 +6,10 @@ class App {
     this.answer;
   }
 
+  setInput(input) {
+    this.input = input.split("").map((num) => parseInt(num));
+  }
+
   setAnswer() {
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
@@ -14,16 +18,20 @@ class App {
     MissionUtils.Console.print(message);
   }
 
-  receiveAndUpdateInput() {
+  close() {
+    MissionUtils.Console.close();
+  }
+
+  receiveInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      this.input = input;
+      this.setInput(input);
     });
   }
 
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
     this.setAnswer();
-    this.receiveAndUpdateInput();
+    this.receiveInput();
   }
 }
 
