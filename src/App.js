@@ -18,7 +18,7 @@ class App {
     }
   }
 
-  getUserNumber() {
+  inputUserNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       this.userNumber = answer.split('').map(Number);
 
