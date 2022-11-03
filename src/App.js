@@ -3,9 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     let answers = init();
-    // while (1) {
-    //   MissionUtils.Console.readLine("숫자를 입력해주세요:", (number) => {});
-    // }
+    console.log(checkInput("123"));
   }
 }
 
@@ -18,6 +16,21 @@ const init = () => {
     }
   }
   return computer;
+};
+
+const checkInput = (input) => {
+  let str = String(input);
+  if (str.length !== 3) {
+    return false;
+  } else if (isNaN(input)) {
+    return false;
+  }
+  for (let i = 0; i < str.length; i++) {
+    if (i !== str.indexOf(str[i])) {
+      return false;
+    }
+  }
+  return true;
 };
 
 const app = new App();
