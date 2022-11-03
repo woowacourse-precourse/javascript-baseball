@@ -1,33 +1,71 @@
+const exception = Object.freeze({
+  REGEX: /[1-9]/g,
+  RESTART: 1,
+  EXIT: 2,
+  LENGTH: 3,
+});
+
 class Exception {
-  #regexNum = /[1-9]/g;
-  #CONSTANT = Object.freeze({
-    RESTART: 1,
-    EXIT: 2,
-    LENGTH: 3,
-  });
-
-  constructor(input) {
-    this._input = input;
+  checkErrorFor(errorInstance) {
+    errorInstance.occurError();
   }
 
-  isNumber() {
-    return (
-      !!this._input.match(this.#regexNum) &&
-      this._input.match(this.#regexNum).length === this._input.length
-    );
-  }
-
-  is3DifferNumber() {
-    return [...new Set(this._input.split(""))].length === this.#CONSTANT.LENGTH;
-  }
-
-  isRestart() {
-    return this._input == this.#CONSTANT.RESTART;
-  }
-
-  isExit() {
-    return this._input == this.#CONSTANT.EXIT;
+  occurError() {
+    throw new Error("OVERRIDING ERROR");
   }
 }
 
-module.exports = Exception;
+class BaseBallException {
+  #input;
+  #errorMessage = "임의의 다른 세 가지 숫자를 해야합니다!!";
+
+  constructor(input) {
+    this.#input = input;
+  }
+
+  #isNumber() {
+    return (
+      !!this.#input.match(exception.REGEX) &&
+      this.#input.match(exception.REGEX).length === this.#input.length
+    );
+  }
+
+  #is3DifferNumber() {
+    return [...new Set(this.#input.split(""))].length === exception.LENGTH;
+  }
+
+  occurError() {
+    if (!(this.#isNumber() && this.#is3DifferNumber())) {
+      throw new Error(this.#errorMessage);
+    }
+  }
+}
+
+class RestartException {
+  #input;
+  #errorMessage = "재시작(1), 종료(2)를 눌러야 됩니다!!";
+
+  constructor(input) {
+    this.#input = input;
+  }
+
+  #isRestart() {
+    return this.#input == exception.RESTART;
+  }
+
+  #isExit() {
+    return this.#input == exception.EXIT;
+  }
+
+  occurError() {
+    if (!(this.#isRestart() && this.#isExit())) {
+      throw new Error(this.#errorMessage);
+    }
+  }
+}
+
+module.exports = {
+  Exception,
+  BaseBallException,
+  RestartException,
+};
