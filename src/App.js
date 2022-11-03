@@ -56,12 +56,18 @@ class App {
     return STRIKE_COUNT
   }
 
+  checkRestart(){
+    MissionUtils.Console.print(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`)
+    MissionUtils.Console.readLine('', (number) => {
+      if(number === '1') {
+        return this.play()
+      } else if(number === '2') {
+        MissionUtils.Console.close()
+      }
+    });
+  }
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.')
-
-    // BALL , STRIKE
-    let BALL = 0
-    let STRIKE  = 0
   
     // 컴퓨터의 수 가져오기
     const COMPUTER_NUM = this.computerNum()
@@ -69,9 +75,10 @@ class App {
 
     // 유저가 맞출 때 까지 while문 반복
     while (true) {
-      if ( STRIKE === 3) {
-        break
-      }
+      // BALL , STRIKE
+      let BALL = 0
+      let STRIKE  = 0
+
       const USER_NUM = this.userNum()
       console.log(`user : ${USER_NUM}`)
 
@@ -79,15 +86,26 @@ class App {
       STRIKE = this.checkStrike(COMPUTER_NUM , USER_NUM)
       
       
-      break
       // 출력 부
+      if (BALL === 0 && STRIKE === 0) {
+        MissionUtils.Console.print(`낫싱`)
+      } else if (BALL !== 0 && STRIKE === 0){
+        MissionUtils.Console.print(`${BALL}볼`)
+      } else if (BALL === 0 && STRIKE !== 0){
+        MissionUtils.Console.print(`${STRIKE}스트라이크`)
+      } else {
+        MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`)
+      }
+
+      if ( STRIKE === 3) {
+        break
+      }
+
       
     }
-
-
     // Check
-
-
+    MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
+    this.checkRestart()
   }
 }
 
