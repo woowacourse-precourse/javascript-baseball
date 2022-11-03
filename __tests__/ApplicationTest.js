@@ -79,7 +79,7 @@ describe("App", () => {
     const MESSAGE = "메시지";
     const app = new App();
 
-    app.print(MESSAGE, true);
+    app.print(MESSAGE);
 
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
   });
@@ -103,5 +103,27 @@ describe("App", () => {
     expect(
       Array.from(answer).every((number) => !isNaN(Number(number)))
     ).toBeTruthy();
+  });
+
+  // test("유저의 input이 올바르지 않을 경우 에러를 발생시킨다.", () => {
+  //   const app = new App();
+  //   mocking 어떻게해?
+  //   app.getPlayerInput = jest.fn(() => "1A3");
+
+  //   const input = app.getPlayerInput();
+
+  //   expect(result).toThrow(RangeError);
+  // });
+
+  test("유저의 input과 정답을 비교해 결과를 출력한다.", () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+
+    const input = "123";
+    app.ANSWER = "456";
+
+    app.print(app.compareUserInputWithAnswer(input));
+
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
   });
 });
