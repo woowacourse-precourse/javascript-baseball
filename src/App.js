@@ -29,6 +29,18 @@ const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
   return count;
 }
 
+const CHECK_BALL = function numberOfBalls(userInput, answer) {
+  let count = 0;
+  const ANSWER_TO_STRING = String(answer);
+  if (userInput[0] === ANSWER_TO_STRING[1] 
+    || userInput[0] === ANSWER_TO_STRING[2]) count++;
+  if (userInput[1] === ANSWER_TO_STRING[0]
+    || userInput[1] === ANSWER_TO_STRING[2]) count++;
+  if (userInput[2] === ANSWER_TO_STRING[0]
+    || userInput[2] === ANSWER_TO_STRING[1]) count++;
+  return count;
+}
+
 class App {
   play() {}
 }
