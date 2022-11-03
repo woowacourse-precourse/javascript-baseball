@@ -2,13 +2,19 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
+    this.randomValue=''
     this.userValue=''
   }
 
   play() {
-    const randomValue=makeRandomValue()
-    inputUserValue()
+    makeRandomValue()
+    // inputUserValue()
+    console.log(this.randomValue)
 
+  }
+
+  setRandomValue(number) {
+    this.randomValue=number
   }
 
   setUserValue(number) {
@@ -20,15 +26,13 @@ class App {
 const app=new App()
 app.play()
 
+// 랜덤값 생성 함수
 function makeRandomValue() {
-  const randomValue=[];
-  while (randomValue.length<3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!randomValue.includes(number)) {
-      randomValue.push(number)
-    }
+  let randomValue=new Set();
+  while (randomValue.size<3) {
+    randomValue.add(MissionUtils.Random.pickNumberInRange(1, 9));
   }
-  return randomValue
+  app.setRandomValue([...randomValue].join(''))
 }
 
 // 사용자의 숫자 입력받기
