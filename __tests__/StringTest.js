@@ -1,14 +1,14 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/App');
+// const MissionUtils = require('@woowacourse/mission-utils');
+// const App = require('../src/App');
 
-describe('숫자 야구 게임 테스트', () => {
-  test('게임 시작 인사 출력 확인', () => {
-    const app = new App();
-    const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-    app.printStartNotification();
+// describe('숫자 야구 게임 테스트', () => {
+//   test('게임 시작 인사 출력 확인', () => {
+//     const app = new App();
+//     const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+//     app.printStartNotification();
 
-    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
-  });
+//     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+//   });
 
   
   // test("split 메서드로 주어진 값을 구분", () => {
