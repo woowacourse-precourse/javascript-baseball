@@ -1,6 +1,6 @@
 // 기능요구사항
 
-// - [] 시작 메세지 출력.
+// - [x] 시작 메세지 출력.
 // - [] 랜덤수를 생성한다.
 // - [] 숫자를 입력해주세요 메세지 출력.
 // - [] 숫자를 입력받는다.
@@ -15,10 +15,19 @@ import MissionUtils from "@woowacourse/mission-utils";
 function App() {
   this.play = () => {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    recursiveAsyncReadLine();
   };
 
   this.init = () => {
     this.play();
+  };
+
+  const recursiveAsyncReadLine = () => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+      MissionUtils.Console.print(number);
+      recursiveAsyncReadLine();
+    });
   };
 }
 
