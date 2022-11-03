@@ -58,17 +58,9 @@ class App {
   }
     
   play() {
-    try {
-      const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
-      Console.print(MESSAGES.START);
-    } catch {
-      this.error();
-    }
-  }
-  
-  error() {
-    Console.print(MESSAGES.END);
-    Console.close();
+    const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
+    Console.print(MESSAGES.START);
+    this.game(computer);
   }
 }
 
