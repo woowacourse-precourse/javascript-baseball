@@ -56,8 +56,10 @@ class App {
         if (userNumberStr === "1") {
           this.computerNumberArr = this.getRandomNumberFromComputer();
           return this.getUserNumberFromReadLine();
+        } else if (userNumberStr === "2") {
+          return MissionUtils.Console.close();
         }
-        return MissionUtils.Console.close();
+        throw "새로 시작할려면 1, 종료하려면 2를 입력해주세요.";
       }
     );
   }
