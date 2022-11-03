@@ -47,6 +47,7 @@ class App {
 
     if (this.ball > 0) result += `${this.ball}볼 `;
     if (this.strike > 0) result += `${this.strike}스트라이크`;
+    if (this.strike === 3) result += '\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     if (result.length === 0) result += '낫싱';
 
     MissionUtils.Console.print(result);
