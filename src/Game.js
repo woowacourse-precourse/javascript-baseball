@@ -11,6 +11,7 @@ module.exports = class Game {
     MissionUtils.Console.print(this.computerNumbers);
     this.getUserNumberInput();
   }
+
   getRandomNumbers() {
     const computerNumbers = new Set();
     while (computerNumbers.size < 3) {
