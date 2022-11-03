@@ -22,6 +22,7 @@ function inputValidation(number) {
     threeDigitValidation(number);
     numberRangeValidation(number);
     reduplicationValidation(number);
+
 }
 
 function threeDigitValidation(number) {
@@ -45,4 +46,8 @@ function reduplicationValidation(number) {
     if (!isReduplication) {
         throw "잘못된 값을 입력하였습니다.";
     }
+}
+
+function pickRandomNumber() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
