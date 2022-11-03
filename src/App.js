@@ -54,9 +54,16 @@ class App {
     this.computer = [...computer];
   }
 
-  getUserValue() {}
+  getUserValue() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
+      console.log(`${answer}`);
+      this.user = answer;
+    });
+  }
 
-  checkUserValue(value) {}
+  checkUserValue(value) {
+    
+  }
 
   compareWithUser(computer, user) {}
 
