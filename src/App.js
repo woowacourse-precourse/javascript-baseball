@@ -22,6 +22,18 @@ class App {
       }
     }
   }
+
+  checkNumberRange(inputData) {
+    const regex = /^[1-9]+$/;
+
+    inputData = inputData.join("");
+
+    if (!regex.test(inputData)) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
 const app = new App();
