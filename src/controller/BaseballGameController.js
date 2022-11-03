@@ -1,5 +1,5 @@
 const { GAME_MESSAGE, GAME_RULE } = require('../utils/constant');
-const { getRandomNumbers } = require('../utils/core');
+const { getRandomNumbers, getStrike, getBall } = require('../utils/core');
 const { triggerConsole, closeConsole } = require('../utils/missionUtils');
 const { isValidateNumber, isValidateNumbers } = require('../utils/validator');
 
@@ -25,8 +25,11 @@ class BaseballGameController {
   }
 
   resultGame() {
-    const strike = this.getStrike();
-    const ball = this.getBall();
+    const strike = getStrike(
+      this.baseballGameModel.computerValue,
+      this.baseballGameModel.userValue,
+    );
+    const ball = getBall(this.baseballGameModel.computerValue, this.baseballGameModel.userValue);
     if (strike !== `${GAME_RULE.STRIKE}${GAME_MESSAGE.STRIKE}`) {
       this.baseballGameView.printResultGame(strike, ball);
       this.triggerGame();
@@ -51,30 +54,6 @@ class BaseballGameController {
   restartGame() {
     this.baseballGameModel.setComputerValue(getRandomNumbers());
     this.triggerGame();
-  }
-
-  getStrike() {
-    let strike = 0;
-    for (let index = 0; index < GAME_RULE.NUMBERS_LENGTH; index += 1) {
-      if (this.baseballGameModel.userValue[index] === this.baseballGameModel.computerValue[index]) {
-        strike += 1;
-      }
-    }
-    return strike ? `${strike}${GAME_MESSAGE.STRIKE}` : '';
-  }
-
-  getBall() {
-    const strike = this.getStrike();
-    let ball = 0;
-    for (let index = 0; index < GAME_RULE.NUMBERS_LENGTH; index += 1) {
-      if (this.baseballGameModel.computerValue.includes(this.baseballGameModel.userValue[index])) {
-        ball += 1;
-      }
-    }
-    if (strike) {
-      ball -= Number(strike.slice(0, 1));
-    }
-    return ball ? `${ball}${GAME_MESSAGE.BALL}` : '';
   }
 }
 
