@@ -17,6 +17,9 @@ class App {
         }
         return picks;
     }
+    getInput() {
+        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {});
+    }
 }
 
 module.exports = App;
