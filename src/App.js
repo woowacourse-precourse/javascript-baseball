@@ -25,10 +25,18 @@ class App {
       console.log(`숫자를 입력해주세요 : ${number}`)
       USER_NUM = number
       // 잘못된 값을 입력했을 땐 throw 로 ERROR 처리 할 것
+      this.checkError(USER_NUM)
     });
     return USER_NUM
   }
 
+  checkError(number){
+    number = number.split('')
+    if (number.length !== 3){
+      throw MissionUtils.Console.close()
+    }
+
+  }
 
   checkBall(computer, user){
 
@@ -46,7 +54,7 @@ class App {
 
   checkStrike(computer, user) {
     let STRIKE_COUNT = 0
-    user = user.split("")
+    user = user.split('')
 
     for ( let i = 0 ; i < 3 ; i ++ ){
       if ( computer[i] === parseInt(user[i])) {
@@ -71,7 +79,6 @@ class App {
   
     // 컴퓨터의 수 가져오기
     const COMPUTER_NUM = this.computerNum()
-    console.log(`computer : ${COMPUTER_NUM}`)
 
     // 유저가 맞출 때 까지 while문 반복
     while (true) {
@@ -80,7 +87,6 @@ class App {
       let STRIKE  = 0
 
       const USER_NUM = this.userNum()
-      console.log(`user : ${USER_NUM}`)
 
       BALL = this.checkBall(COMPUTER_NUM, USER_NUM)
       STRIKE = this.checkStrike(COMPUTER_NUM , USER_NUM)
