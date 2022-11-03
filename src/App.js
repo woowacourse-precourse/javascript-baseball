@@ -61,10 +61,14 @@ class App {
   }
 
   compareInputToAnswer() {
-    this.resetHint();
     if (JSON.stringify(this.input) === JSON.stringify(this.answer)) {
-      this.success();
+      return this.success();
     }
+    this.makeHint();
+  }
+
+  makeHint() {
+    this.resetHint();
     this.input.forEach((num, index) => {
       if (this.answer[index] === num) {
         this.hint["strike"] += 1;
@@ -76,11 +80,11 @@ class App {
         this.hint["nothing"] += 1;
       }
     });
-    this.makeHint();
+    this.printHint();
     this.receiveInputFromConsole();
   }
 
-  makeHint() {
+  printHint() {
     if (this.hint["nothing"] === 3) return this.print("낫싱");
     if (this.hint["strike"] === 0) return this.print(`${this.hint["ball"]}볼`);
     if (this.hint["ball"] === 0)
