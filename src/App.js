@@ -76,11 +76,31 @@ class App {
   }
 
   getUserInput() {
+    this.ball = 0;
+    this.strike = 0;
+
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       this.checkConstraints(userInput);
 
+      this.showGameResult(userInput);
+
       MissionUtils.Console.close();
     });
+  }
+
+  showGameResult(userInput) {
+    const USER_INPUT = userInput.split("").map((item) => Number(item));
+
+    for (let index = 0; index < this.COMPUTER.length; index++) {
+      if (this.COMPUTER[index] === USER_INPUT[index]) {
+        this.strike++;
+        continue;
+      }
+
+      if (USER_INPUT.includes(this.COMPUTER[index])) {
+        this.ball++;
+      }
+    }
   }
 }
 
