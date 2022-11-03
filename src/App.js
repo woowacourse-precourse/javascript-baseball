@@ -21,8 +21,8 @@ class App {
   inputUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputString = input + "";
-      if (inputString.length !== 3) {
-        throw "3자리 숫자를 입력해야 합니다";
+      if (/^[1-9]{3}$/.test(inputString)) {
+        throw "1에서 9까지의 숫자 3자리만 입력할 수 있습니다";
       }
       if (!checkDistinct(input)) {
         throw "각 자릿수는 서로 달라야 합니다";
