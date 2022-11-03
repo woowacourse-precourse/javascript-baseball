@@ -5,6 +5,8 @@ const DUPLICATE_CHARACTER_REGEX = /(.)\1{1,}/;
 const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
 const THREE_DIGIT_NUMBER_REGEX = /^[1-9]{3}$/;
 
+const GAME_MENU_EXIT = 2;
+
 class App {
   gameManager;
 
@@ -74,21 +76,28 @@ class App {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       code => {
-        if (!GAME_MENU_CODE_REGEX.test(code)) {
-          throw new Error('잘못된 입력입니다.');
+        try {
+          this.checkGameMenuCode(code);
+          const gameMenuCode = parseInt(code, 10);
+
+          if (gameMenuCode === GAME_MENU_EXIT) {
+            Console.print('게임을 종료합니다.');
+            this.exit();
+            return;
+          }
+
+          this.restartGame();
+        } catch (err) {
+          throw err;
         }
-
-        const gameMenuCode = parseInt(code, 10);
-
-        if (gameMenuCode === 2) {
-          Console.print('게임을 종료합니다.');
-          this.exit();
-          return;
-        }
-
-        this.restartGame();
       },
     );
+  }
+
+  checkGameMenuCode(code) {
+    if (!GAME_MENU_CODE_REGEX.test(code)) {
+      throw new Error('잘못된 입력입니다.');
+    }
   }
 
   exit() {
