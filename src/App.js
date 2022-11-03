@@ -10,6 +10,7 @@ class App {
     this.computerRandomNumber = this.makeRandomNumberArray();
     this.userAnswer = this.inputUserAnswer();
     this.parseUserAnswertoString();
+    this.printBallStrike(this.checkBallStrike(this.userAnswer));
   }
 
   greeting() {
@@ -52,6 +53,22 @@ class App {
       }
     }
     return [ball, strike];
+  }
+
+  printBallStrike(ballStrike) {
+    let ball = ballStrike[0];
+    let strike = ballStrike[1];
+
+    if (ball === 0 && strike !== 0) {
+      MissionUtils;
+      console.log(`${strike}스트라이크`);
+    } else if (strike === 0 && ball !== 0) {
+      console.log(`${ball}볼`);
+    } else if (strike !== 0 && ball !== 0) {
+      console.log(`${ball}볼 ${strike}스트라이크`);
+    } else {
+      console.log("낫싱");
+    }
   }
 }
 
