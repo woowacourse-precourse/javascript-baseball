@@ -41,7 +41,22 @@ class App {
     });
     return { ball, strike };
   }
-  
+
+  printResult(ball, strike) {
+    if (ball === 0 && strike === 0) {
+      return Console.print(RESULT.NOTHING);
+    }
+    if (ball > 0 && strike > 0) {
+      return Console.print(`${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`);
+    }
+    if (ball > 0) {
+      return Console.print(`${ball}${RESULT.BALL}`);
+    }
+    if (strike > 0) {
+      return Console.print(`${strike}${RESULT.STRIKE}`);
+    }
+  }
+    
   play() {
     try {
       const computer = this.generateRandomNums(NUMBERS.RANDOM_MIN, NUMBERS.RANDOM_MAX, NUMBERS.REQUIRED_LENGHT);
