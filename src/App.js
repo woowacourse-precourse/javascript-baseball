@@ -38,8 +38,4 @@ class App {
 const app = new App();
 app.play();
 
-setTimeout(() => {
-  console.log(typeof app.userAnswer);
-}, 5000);
-
 module.exports = App;
