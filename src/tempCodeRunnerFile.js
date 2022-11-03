@@ -1,0 +1,1 @@
+checkStrike(machineNum)
