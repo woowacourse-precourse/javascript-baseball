@@ -23,6 +23,29 @@ class App {
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  setHint() {
+    this.resetHint();
+    this.input.forEach((num, index) => {
+      if (this.answer[index] === num) {
+        this.hint["strike"] += 1;
+      }
+      if (this.answer.includes(num) && this.answer[index] !== num) {
+        this.hint["ball"] += 1;
+      }
+      if (!this.answer.includes(num)) {
+        this.hint["nothing"] += 1;
+      }
+    });
+    this.printHint();
+    this.receiveInputFromConsole();
+  }
+
+  resetHint() {
+    for (const key in this.hint) {
+      this.hint[key] = 0;
+    }
+  }
+
   print(message) {
     MissionUtils.Console.print(message);
   }
@@ -54,34 +77,11 @@ class App {
     );
   }
 
-  resetHint() {
-    for (const key in this.hint) {
-      this.hint[key] = 0;
-    }
-  }
-
   compareInputToAnswer() {
     if (JSON.stringify(this.input) === JSON.stringify(this.answer)) {
       return this.success();
     }
     this.makeHint();
-  }
-
-  makeHint() {
-    this.resetHint();
-    this.input.forEach((num, index) => {
-      if (this.answer[index] === num) {
-        this.hint["strike"] += 1;
-      }
-      if (this.answer.includes(num) && this.answer[index] !== num) {
-        this.hint["ball"] += 1;
-      }
-      if (!this.answer.includes(num)) {
-        this.hint["nothing"] += 1;
-      }
-    });
-    this.printHint();
-    this.receiveInputFromConsole();
   }
 
   printHint() {
