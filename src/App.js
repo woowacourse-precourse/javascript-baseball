@@ -29,6 +29,7 @@ class App {
       MissionUtils.Console.print(this.result(countRes));
 
       // step6
+      let check = await this.checkContinue();
     }
   }
 
