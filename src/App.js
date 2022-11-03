@@ -25,10 +25,13 @@ class App {
   }
 
   recommendRestart() {
+    const expectInputValues = ["1", "2"];
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
+        if (!expectInputValues.includes(input))
+          throw Error("입력값이 유효하지 않습니다.");
         if (input === "1") {
           this.resetGameValue();
           this.play();
@@ -115,6 +118,3 @@ const convertCountToHintString = (strikeCount, ballCount) => {
 };
 
 module.exports = App;
-
-const app = new App();
-app.play();
