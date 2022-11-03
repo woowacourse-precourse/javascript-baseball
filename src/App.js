@@ -83,6 +83,12 @@ class App {
     });
   }
 
+  selectReplayOrClose(selectedNum) {
+    if (selectedNum == 1) return this.play();
+    if (selectedNum == 2) return this.close();
+    throw new Error("1 또는 2만 입력해주세요.");
+  }
+
   printHint() {
     if (this.hint["strike"] === 3) {
       this.print("3스트라이크");
