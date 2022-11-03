@@ -1,6 +1,10 @@
+const MissionUtils = require("@woowacourse/mission-utils")
+
 const START_MESSAGE = '숫자 야구 게임을 시작합니다.'
 const PLEASE_NUMBER = '숫자를 입력해주세요 :'
 const IS_RESTART = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+const CLEAR = '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+
 
 class App {
   userInput = ''
@@ -12,20 +16,31 @@ class App {
   play() {
     this.outputString(START_MESSAGE)
 
-    this.setUserInput()
+    this.getRandomNumber()
 
-    this.verifyInput()
+    while(this.strike < 3) {
+      this.setUserInput(PLEASE_NUMBER)
 
-    this.JudgeInput()
+      if (!this.verifyInput()) return this.throwError()
+
+      this.JudgeInput()
+
+      this.outputResult()
+    }
+
+    this.outputString(IS_RESTART)
+    this.setUserInput('')
+    if (this.userInput === '1') this.restart()
   }
-
+  // 메시지 출력 하기
   outputString(str) {
     MissionUtils.Console.print(str)
   }
   // 사용자 입력 받기
-  setUserInput() {
-    return MissionUtils.Console.readLine(PLEASE_NUMBER, (answer) => {
-      return this.userInput = answer
+  setUserInput(str) {
+    return MissionUtils.Console.readLine(str, (answer) => {
+      this.outputString(`${str} ${answer}`)
+      return this.userInput = answer.toString()
     })
   }
   // 에러 표출 하기
@@ -38,13 +53,23 @@ class App {
   }
   // 랜덤 숫자 뽑기
   getRandomNumber() {
-    this.randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    // 3글자 뽑기.
+    const set = new Set()
+    while (set.size < 3) {
+      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+      set.add(num)
+    }
+    
+    set.forEach(val => {
+      this.randomNumber += val
+    })
   }
   // 입력 검증하기
   verifyInput() {
-    if (typeof this.userInput !== 'string' || this.userInput.length > 3 || this.userInput.length !== new Set(this.userInput).size ) return false
+    let res = true
+    if (typeof this.userInput !== 'string' || this.userInput.length > 3 || this.userInput.length !== new Set(this.userInput).size ) res = false
 
-    return true
+    return res
   }
   // 스트라이크, 볼, 낫싱 멤버변수 초기화하기
   resetStringAndBall() {
@@ -83,9 +108,10 @@ class App {
   // 결과 출력하기
   outputResult() {
     let str = ''
-    if (this.strike === 0 && this.ball === 0) str = '낫싱'
+    console.log("outputResult", this.strike, this.ball, this.notThing, this.randomNumber)
+    if (this.notThing) str = '낫싱'
     else if (this.strike === 3) {
-      str = '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+      str = CLEAR
     } else {
       if (this.ball > 0) str += `${this.ball}볼 `
       if (this.strike > 0) str += `${this.strike}스트라이크`
@@ -93,8 +119,16 @@ class App {
     
     this.outputString(str)
   }
+  resetAllMember() {
+    this.notThing = false
+    this.ball = 0
+    this.strike = 0
+    this.randomNumber = ''
+    this.userInput = ''
+  }
   // 게임 재시작하기
   restart() {
+    this.resetStringAndBall()
     this.play()
   }
 } 
