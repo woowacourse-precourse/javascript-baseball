@@ -9,7 +9,7 @@ function getRestartOption() {
         playBaseballGame();
       }
       if (input == 2) {
-        // 종료
+        MissionUtils.Console.close();
       }
     }
   );
