@@ -6,9 +6,15 @@ class App {
   }
   getUserNumber() {
     MissionUtils.Console.readLine("닉네임을 입력해주세요.", (answer) => {
-      console.log(`닉네임: ${answer}`);
+      this.isValidSingleDigitNaturalNumber(answer);
       MissionUtils.Console.close();
     });
+  }
+  isValidSingleDigitNaturalNumber(number) {
+    const regexp = new RegExp("^[1-9]+$");
+    if (!regexp.test(number)) {
+      throw "1에서 9까지의 자연수를 입력해주세요";
+    }
   }
 }
 
