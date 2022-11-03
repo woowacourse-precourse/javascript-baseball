@@ -1,5 +1,6 @@
 import MissionUtils from '@woowacourse/mission-utils';
 import Computer from './Computer.js';
+import User from './User.js';
 
 const APP_MESSAGE = {
   hello: '숫자 야구 게임을 시작합니다.',
@@ -12,7 +13,8 @@ class App {
   }
 
   play() {
-    this.Computer = new Computer();
+    this.computer = new Computer();
+    this.user = new User();
   }
 }
 
