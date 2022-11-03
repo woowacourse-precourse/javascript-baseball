@@ -29,6 +29,7 @@ class App {
       } else {
         this.exitProgram("form");
       }
+      // 결과 출력
     }
     // 4. 게임 재시작
     this.askRestart();
@@ -48,8 +49,8 @@ class App {
   makeRandomNumber() {
     const computer = [];
 
-    while(computer.length !== 3) {
-      const number = MissionUtils.Random. pickNumberInRange(1, 9);
+    while (computer.length !== 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
         computer.push(number);
       }
@@ -59,7 +60,7 @@ class App {
   }
 
   getUserValue() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
       console.log(`${answer}`);
       this.user = answer.split("");
     });
@@ -71,7 +72,33 @@ class App {
     return valueSet.size === 3 ? true : false;
   }
 
-  compareWithUser(computer, user) {}
+  compareWithUser() {
+    const computerMap = {};
+
+    for (let idx = 0; idx < this.computer.length; idx++) {
+      const num = this.computer[idx];
+      computerMap[num] = idx;
+    }
+
+    for (let idx = 0; idx < this.user.length; idx++) {
+      const num = this.user[idx];
+      if (computerMap[num] !== undefined) {
+        computerMap[num] === idx ? this.strike++ : this.ball++;
+      }
+    }
+  }
+
+  printResult() {
+    if (!this.strike && !this.ball) {
+      MissionUtils.Console.print("낫싱");
+    } else if (!this.ball) {
+      MissionUtils.Console.print(`${this.strike} 스트라이크`);
+    } else if (!this.strike) {
+      MissionUtils.Console.print(`${this.ball} 볼`);
+    } else {
+      MissionUtils.Console.print(`${this.strike} 스트라이크 ${ball} 볼`);
+    }
+  }
 
   exitProgram() {}
 }
