@@ -6,12 +6,16 @@ missionUtils.getRandomNumber = (startRange = 1, endRange = 9) => {
   return Random.pickNumberInRange(startRange, endRange);
 };
 
-missionUtils.triggerReadLine = (message, fn) => {
+missionUtils.triggerConsole = (message, fn) => {
   Console.readLine(message, fn);
 };
 
-missionUtils.triggerPrint = (message) => {
+missionUtils.printConsole = (message) => {
   Console.print(message);
+};
+
+missionUtils.closeConsole = () => {
+  Console.close();
 };
 
 module.exports = missionUtils;

@@ -1,8 +1,8 @@
-const { triggerPrint } = require('../utils/missionUtils');
+const { printConsole } = require('../utils/missionUtils');
 
 class BaseballView {
   renderPrint(message) {
-    triggerPrint(message);
+    printConsole(message);
   }
 }
 
