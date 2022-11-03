@@ -2,17 +2,21 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const ANSWER_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    let isEnd = false;
     // 미션 유틸 라이브러리에 있는 함수 pickUniqueNumbersInRange를 활용하여 1부터 9까지의 숫자 중 겹치지 않는 3개의 숫자를 반환.
     // 출력값 예시)[ 3, 2, 8 ] or [ 2, 3, 4 ] 같이 배열로 반환됨.
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다."); // 게임 시작 문구 출력
-    while (isEnd) {
+
+    while (!isEnd) {
       // Todo: 사용자가 정답을 맞출때 까지 숫자 입력 받아야함.
       const INPUT_NUM = this.customInput();
       this.checkValidInput(INPUT_NUM); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
       const INPUT_NUM_ARR = this.numberToArray(INPUT_NUM);
       const HINT_ARR = this.compareTwoNumbers(ANSWER_NUMBER, INPUT_NUM_ARR);
       this.printHint(HINT_ARR);
+      isEnd = this.checkEnd(HINT_ARR);
     }
+    this.selectEndState();
   }
 
   numberToArray(number) {
@@ -69,10 +73,31 @@ class App {
 
     if (STRIKE_NUM + BALL_NUM === 0) MissionUtils.Console.print("낫싱");
     else if (STRIKE_NUM === 0 && BALL_NUM > 0)
-      MissionUtils.Console.print("${BALL_NUM}볼");
+      MissionUtils.Console.print(`${BALL_NUM}볼`);
     else if (BALL_NUM === 0 && STRIKE_NUM > 0)
-      MissionUtils.Console.print("${STRIKE_NUM}스트라이크");
-    else MissionUtils.Console.print("${BALL_NUM}볼 ${STRIKE_NUM}스트라이크");
+      MissionUtils.Console.print(`${STRIKE_NUM}스트라이크`);
+    else MissionUtils.Console.print(`${BALL_NUM}볼 ${STRIKE_NUM}스트라이크`);
+  }
+
+  checkEnd(hint) {
+    // 끝났는지 체크하는 함수.
+    let isEnd = false;
+    if (hint[0] === 3) isEnd = true; // 3 스트라이크면 게임 종료!
+    return isEnd;
+  }
+
+  selectEndState() {
+    let selectNum = 0;
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (select) => {
+        selectNum = select;
+      }
+    );
+    if (selectNum === 1) this.play();
+    else if (selectNum === 2) MissionUtils.Console.close();
+    else throw "잘못된 입력입니다. 애플리케이션을 종료합니다.";
   }
 }
 
