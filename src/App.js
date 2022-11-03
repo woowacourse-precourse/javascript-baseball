@@ -44,6 +44,18 @@ class App {
     return BALL_STACK.length
   }
 
+  checkStrike(computer, user) {
+    let STRIKE_COUNT = 0
+    user = user.split("")
+
+    for ( let i = 0 ; i < 3 ; i ++ ){
+      if ( computer[i] === parseInt(user[i])) {
+        STRIKE_COUNT += 1
+      }
+    }
+    return STRIKE_COUNT
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.')
 
@@ -64,9 +76,12 @@ class App {
       console.log(`user : ${USER_NUM}`)
 
       BALL = this.checkBall(COMPUTER_NUM, USER_NUM)
-      console.log('# CHECK BALL')
-      console.log(BALL)
+      STRIKE = this.checkStrike(COMPUTER_NUM , USER_NUM)
+      
+      
       break
+      // 출력 부
+      
     }
 
 
