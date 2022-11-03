@@ -7,11 +7,11 @@ class Counter {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
       const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
+      oneLetterOfuserNumberStr === comCurNum ? count + 1 : count;
       if (oneLetterOfuserNumberStr === comCurNum) {
         return count + 1;
-      } else {
-        return count;
       }
+      return count;
     }, 0);
     return totalCount;
   }
@@ -25,9 +25,8 @@ class Counter {
         comCurNum !== oneLetterOfuserNumberStr
       ) {
         return count + 1;
-      } else {
-        return count;
       }
+      return count;
     }, 0);
     return totalCount;
   }

@@ -30,6 +30,7 @@ class App {
       userNumberStr,
       this.computerNumberArr
     );
+
     if (totalCountStrike === 0 && totalCountBall === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (totalCountStrike === 3) {
