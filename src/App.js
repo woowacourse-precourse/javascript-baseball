@@ -1,7 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  constructor() {
+    this.getUserInputNumber = MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
+      MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
+      MissionUtils.Console.close();
+    });
+  }
+
+  play() {
+    this.getUserInputNumber;
+  }
 
   generateComputerNumberArray() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
@@ -9,3 +18,9 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+
+const answer = 1;
+
+app.play();
