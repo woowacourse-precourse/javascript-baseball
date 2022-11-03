@@ -75,6 +75,25 @@ class App {
     if (strike === 0) return `${ball}볼`;
     return `${ball}볼 ${strike}스트라이크`;
   }
+
+  restartOrExitGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
+      (userSelection) => {
+        if (userSelection === "1") {
+          this.isCorrect = false;
+          this.computerInput = this.generateComputerNumbers();
+          this.startGame();
+        }
+        if (userSelection === "2") {
+          MissionUtils.Console.close();
+        }
+        if (userSelection !== "1" && userSelection !== "2") {
+          throw "1 또는 2만 입력 가능";
+        }
+      }
+    );
+  }
 }
 
 const app = new App();
