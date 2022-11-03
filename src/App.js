@@ -15,7 +15,7 @@ class App {
 
       if (resultString === '3스트라이크') {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        MissionUtils.Console.close();
+        this.replay();
       } else {
         this.play();
       }
@@ -54,7 +54,6 @@ class App {
 
   getBallStrike() {
     let ball = 0, strike = 0;
-
     for (let i = 0; i <= 2; i++) {
       if (this.randomArray[i] === this.inputArray[i]) {
         strike += 1;
@@ -65,8 +64,21 @@ class App {
 
     return { ball, strike };
   }
-}
 
+  replay() {
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.readLine('', (input) => {
+      if (input === '1') {
+        this.initRandomArray();
+        this.play();
+      } else if (input === '2') {
+        MissionUtils.Console.close();
+      } else {
+        throw new Error('1이나 2가 아닙니다');
+      }
+    });
+  }
+}
 
 module.exports = App;
 
