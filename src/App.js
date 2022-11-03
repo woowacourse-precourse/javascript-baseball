@@ -10,14 +10,21 @@ class App {
       MissionUtils.Console.close();
     });
   }
-  isValidSingleDigitNaturalNumber(number) {
+  isValidSingleDigitNaturalNumber(answer) {
     const regexp = new RegExp("^[1-9]+$");
-    if (!regexp.test(number)) {
+    if (!regexp.test(answer)) {
       throw "1에서 9까지의 자연수를 입력해주세요";
+    }
+  }
+  isValidNumberWithoutDuplicate(answer) {
+    const wordLengthWidhoutDuplicate = new Set(answer).size;
+    if (wordLengthWidhoutDuplicate !== 3) {
+      throw "서로 다른 3개의 숫자를 입력해주세요";
     }
   }
 }
 
 const app = new App();
-app.play();
+app.isValidNumberWithoutDuplicate("123");
+// app.play();
 module.exports = App;
