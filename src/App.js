@@ -26,6 +26,7 @@ class App {
       MissionUtils.Console.print(countRes);
 
       // step5
+      MissionUtils.Console.print(this.result(countRes));
 
       // step6
     }
