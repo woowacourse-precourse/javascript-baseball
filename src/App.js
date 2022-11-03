@@ -6,6 +6,8 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     
     // step2
+    let computer = this.setComputerNum();
+    MissionUtils.Console.print(computer);
 
     // step3
 
