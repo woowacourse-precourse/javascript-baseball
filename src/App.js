@@ -22,6 +22,8 @@ class App {
       MissionUtils.Console.print(input);
 
       // step4
+      const countRes = this.countStrikeAndBall(input, computer);
+      MissionUtils.Console.print(countRes);
 
       // step5
 
