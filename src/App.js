@@ -15,7 +15,23 @@ const inputNumber = (targetNumber) => {
   let isCorrect = false; //예외처리를 위한 boolean
   // console.log(targetNumber); // 테스트 중 보이게 하기 위함. 이후 필히 삭제
 
+  const regex = /[0-9]/;
+
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    let splittedAnswer = answer.split("");
+    for (let splittedNumber of splittedAnswer) {
+      if (!regex.test(splittedNumber)) {
+        throw "숫자만을 입력해주세요.\n게임 종료";
+      }
+    }
+
+    if (answer.length > 3) {
+      throw "숫자 세 개보다 많이 입력하지 마세요.\n게임 종료";
+    }
+    if (answer.length < 3) {
+      throw "숫자 세 개보다 적게 입력하지 마세요.\n게임 종료";
+    }
+
     guessNumber(answer, targetNumber);
   });
   return isCorrect;
