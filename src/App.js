@@ -8,8 +8,19 @@ class App {
 
   initUserInputInterface() {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      Console.print(input);
+      this.validateInput(input);
     });
+  }
+
+  validateInput(input) {
+    if (input.length !== 3) {
+      throw '올바른 입력 값이 아닙니다. 3자리 숫자가 아닙니다. 게임을 종료합니다.';
+    }
+
+    const set = new Set(input.split(''));
+    if (input.length !== set.size) {
+      throw '올바른 입력 값이 아닙니다. 중복된 숫자가 존재합니다. 게임을 종료합니다.';
+    }
   }
 
   init() {
