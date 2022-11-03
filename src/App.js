@@ -1,13 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  async play() {
     // step1
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     
-    let checkContinue = true;
-    while(checkContinue){
-      checkContinue = game();
+    let restart = true;
+    while(restart){
+      restart = await this.game() === 1 ? true : false;
     }
   }
   
@@ -16,7 +16,8 @@ class App {
     let computer = this.setComputerNum();
     MissionUtils.Console.print(computer);
 
-    while(true) {
+    let retry = true;
+    while(retry) {
       // step3
       let input = await this.setUserNum();
       MissionUtils.Console.print(input);
@@ -27,10 +28,10 @@ class App {
 
       // step5
       MissionUtils.Console.print(this.result(countRes));
-
-      // step6
-      let check = await this.checkContinue();
+      retry = countRes[1] === 3 ? false : true;
     }
+    // step6
+    return await this.checkContinue();
   }
 
   setUserNum() {
@@ -95,9 +96,9 @@ class App {
 
   checkContinue() {
     return new Promise((resolve) => {
-      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
-        if (![1,2].inclues(input)) throw new Error('input error: should be 1 or 2');
-        else resolve(input);
+      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+        if (![1,2].includes(parseInt(input))) throw new Error('input error - should be 1 or 2');
+        else resolve(parseInt(input));
       });
     })
   }
