@@ -3,8 +3,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const randomValue=makeRandomValue()
-    console.log(randomValue);
-    
+    MissionUtils.Console.print(randomValue);
+    MissionUtils.Console.close()
   }
 }
 
