@@ -10,8 +10,19 @@ function userInput() {
   });
 }
 
+function randomNumberSetting() {
+  let randomNumberArray = [];
+  while (randomNumberArray.length < 3) {
+    let randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (randomNumberArray.includes(randomNumber)) continue;
+    randomNumberArray.push(randomNumber);
+  }
+  return randomNumberArray;
+}
+
 class App {
   play() {
+    randomNumberSetting();
     gameStart();
     userInput();
   }
