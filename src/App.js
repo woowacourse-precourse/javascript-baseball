@@ -49,18 +49,22 @@ function getResult(comArr, userArr) {
 function winOrLose(resultArr) {
   if (resultArr[0] == 0 && resultArr[1] == 0) {
     MissionUtils.Console.print("낫싱");
+    return false;
   }
   else if (resultArr[0] == 0 && resultArr[1] != 0) {
     MissionUtils.Console.print(`${resultArr[1]}스트라이크`);
-    if (resultArr[0] == 3) {
+    if (resultArr[1] == 3) {
       return true;
     }
+    return false;
   }
   else if (resultArr[1] == 0 && resultArr[0] != 0) {
     MissionUtils.Console.print(`${resultArr[0]}볼`);
+    return false;
   }
   else {
     MissionUtils.Console.print(`${resultArr[0]}볼 ${resultArr[1]}스트라이크`);
+    return false;
   }
 }
 
