@@ -25,13 +25,23 @@ class App {
     // 입력받은 숫자가 유효한 숫자인지 확인하는 함수.
     // 1. 3자리 숫자인지 체크
     // 2. 서로 다른 숫자인지 체크
+    // 3. 0 이 있다면 오류.
     const INPUT_NUM_ARR = (inputNum + "").split(""); // 숫자를 arr로 바꾸기.
     const INPUT_NUM_SET = new Set(INPUT_NUM_ARR); // 서로 다른 숫자인지 확인하기 위한 Set Object 만들기.
 
     if (INPUT_NUM_ARR.length !== 3)
       throw "길이가 3인 숫자를 입력해야합니다. 프로그램을 종료합니다.";
+    if (INPUT_NUM_ARR.includes(0))
+      throw "0은 입력값에 포함 될 수 없습니다. 프로그램을 종료합니다.";
     if (INPUT_NUM_ARR.length !== INPUT_NUM_SET.size)
       throw "각각 다른 숫자를 입력해야합니다. 프로그램을 종료합니다.";
+  }
+
+  compareTwoNumbers(answer, number) {
+    // TODO: [0, 0] 형태의 배열 리턴.
+    // 1. 스트라이크부터 확인
+    // 2. 그 다음 볼 확인.
+    let hintArr = [0, 0];
   }
 }
 
