@@ -15,3 +15,23 @@ function computerInput(){
   }
   return computerInputArr;
 }
+
+const ballCount = (computer,user) => {
+  let count = 0;
+  computer.forEach((number,index) => {
+    if(user.includes(number) && number !== Number(user[index])) {
+      count++
+    }
+  },0)
+  return count;
+}
+
+const strikeCount = (computer,user) => {
+  let count = 0;
+  computer.forEach((number,index) => {
+    if(user.includes(number) && number === Number(user[index])) {
+      count++
+    }
+  },0)
+  return count;
+}
