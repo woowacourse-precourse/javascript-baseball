@@ -1,13 +1,17 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
-  print(message) {
+  START = "숫자 야구 게임을 시작합니다.";
+  END = "게임 종료";
+
+  print(message, close = false) {
     Console.print(message);
-    Console.close();
+
+    if (close) Console.close();
   }
 
   play() {
-    this.print("숫자 야구 게임을 시작합니다.");
+    this.print(this.START, true);
   }
 }
 
