@@ -73,7 +73,7 @@ describe("숫자 야구 게임", () => {
 });
 
 describe("App", () => {
-  test("print 메서드를 통해 메시지를 출력한다.", () => {
+  test("print 메소드를 통해 원하는 메시지를 출력한다.", () => {
     const logSpy = getLogSpy();
 
     const MESSAGE = "메시지";
@@ -82,5 +82,25 @@ describe("App", () => {
     app.print(MESSAGE, true);
 
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
+  });
+
+  test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
+    const app = new App();
+
+    const randomNumber = app.getRandomNumber();
+
+    expect(randomNumber).toBeGreaterThanOrEqual(1);
+    expect(randomNumber).toBeLessThanOrEqual(9);
+  });
+
+  test("숫자 야구 게임의 정답을 만든다.", () => {
+    const app = new App();
+
+    const answer = app.makeBaseballGameAnswer();
+
+    console.log(answer);
+
+    expect(answer).toHaveLength(3);
+    expect(typeof answer).toBe("string");
   });
 });
