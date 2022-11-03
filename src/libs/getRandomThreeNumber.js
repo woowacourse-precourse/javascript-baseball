@@ -4,8 +4,8 @@ const getRandomThreeNumber = () => {
   const numbers = [];
   while (numbers.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!numbers.includes(number)) {
-      numbers.push(number);
+    if (!numbers.includes(String(number))) {
+      numbers.push(String(number));
     }
   }
   return numbers;
