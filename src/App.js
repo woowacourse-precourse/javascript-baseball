@@ -93,8 +93,22 @@ const result = () => {
     }
     if (strike === 3) {
       MissionUtils.Console.print(`${strike} 스트라이크`);
+      restartOrEnd();
     }
   });
 };
 
+const restartOrEnd = () => {
+  return MissionUtils.Console.readLine(
+    '🎉🥳 정답입니다! 🥳🎉 게임을 종료합니다.\n게임을 다시 시작하러면 1, 종료하려면 2를 입력하세요.',
+    (number) => {
+      if (number === '1') {
+        app.play();
+      }
+      if (number === '2') {
+        MissionUtils.Console.close();
+      }
+    }
+  );
+};
 module.exports = App;
