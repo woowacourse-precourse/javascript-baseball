@@ -22,12 +22,12 @@ const MAKEANSWER = function makeAnswerWithThreeUniqueNumbers() {
 
 const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
   let count = 0;
-  if (userInput[0] === answer.toString()[0]) count++;
-  if (userInput[1] === answer.toString()[1]) count++;
-  if (userInput[2] === answer.toString()[2]) count++;
+  const ANSWER_TO_STRING = String(answer);
+  if (userInput[0] === ANSWER_TO_STRING[0]) count++;
+  if (userInput[1] === ANSWER_TO_STRING[1]) count++;
+  if (userInput[2] === ANSWER_TO_STRING[2]) count++;
   return count;
 }
-
 
 class App {
   play() {}
