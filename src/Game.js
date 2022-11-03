@@ -21,4 +21,12 @@ module.exports = class Game {
       MissionUtils.Console.close();
     });
   }
+
+  getStrikeCount(inputNumber) {
+    let count = 0;
+    for (index in inputNumber) {
+      if (inputNumber[index] == this.computerNumbers[index]) count++;
+    }
+    return count;
+  }
 };
