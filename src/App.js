@@ -1,9 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_MENU_EXIT } = require('./lib/constants/game');
 const {
-  THREE_DIGIT_NUMBER_REGEX,
+  GAME_MENU_RESTART,
+  GAME_MENU_EXIT,
+  RANDOM_NUMBER_COUNT,
+} = require('./lib/constants/game');
+const {
   DUPLICATE_CHARACTER_REGEX,
   GAME_MENU_CODE_REGEX,
+  THREE_DIGIT_NUMBER_REGEX,
 } = require('./lib/constants/validation');
 const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 
@@ -68,13 +72,15 @@ class App {
   }
 
   gameOver() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print(
+      `${RANDOM_NUMBER_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`,
+    );
     this.inputGameMenuCode();
   }
 
   inputGameMenuCode() {
     Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      `게임을 새로 시작하려면 ${GAME_MENU_RESTART}, 종료하려면 ${GAME_MENU_EXIT}를 입력하세요.\n`,
       code => {
         try {
           this.checkGameMenuCode(code);
