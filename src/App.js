@@ -1,6 +1,13 @@
-const { Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this.answer;
+    this.strToArr = function (str) {
+      return str.split('');
+    };
+  }
+
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.init();
@@ -18,7 +25,7 @@ class App {
       throw '올바른 입력 값이 아닙니다. 3자리 숫자가 아닙니다. 게임을 종료합니다.';
     }
 
-    const set = new Set(input.split(''));
+    const set = new Set(this.strToArr(input));
     if (input.length !== set.size) {
       throw '올바른 입력 값이 아닙니다. 중복된 숫자가 존재합니다. 게임을 종료합니다.';
     }
