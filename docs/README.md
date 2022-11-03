@@ -1,14 +1,14 @@
 # 🕹 기능 구현 목록
 
-### 1. 게임시작 기능
 
--   `Console.print()`를 사용하여 '숫자 야구 게임을 시작합니다' 출력
-    -   처음 시작시에만 노출 재시작 일 시 X
-
-### 2. Random값(정답) 생성 기능
+### 1. Random값(정답) 생성 기능 [✔️]
 
 -   [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)의 `Random.pickNumberInRange()`를 사용하여 1 ~ 9 까지의 임의의 수 3개를 생성한다.
 
+### 2. 게임시작 안내 출력 기능
+
+-   `Console.print()`를 사용하여 '숫자 야구 게임을 시작합니다' 출력
+    -   처음 시작시에만 노출 재시작 일 시 X
 ### 3. 사용자에게 입력을 받아 체크하는 기능.
 
 `readLine(query, callback)`을 사용해 `숫자를 입력해주세요 : ` 문구 출력 후
