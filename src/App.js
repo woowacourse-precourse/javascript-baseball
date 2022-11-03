@@ -14,6 +14,7 @@ class App {
     let userInput;
     MissionUtils.Console.readLine(constants.MESSAGE.INPUT, (input) => {
       userInput = input.trim().split('').map(number => +number);
+      validator.isVaild(userInput);
     });
   }
 }
