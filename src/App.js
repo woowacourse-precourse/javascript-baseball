@@ -54,7 +54,14 @@ class App {
     );
   }
 
+  resetHint() {
+    for (const key in this.hint) {
+      this.hint[key] = 0;
+    }
+  }
+
   compareInputToAnswer() {
+    this.resetHint();
     if (JSON.stringify(this.input) === JSON.stringify(this.answer)) {
       this.success();
     }
