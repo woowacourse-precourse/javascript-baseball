@@ -16,6 +16,7 @@ class App {
     if (!this.isBadInput(input)) {
       this.input = input;
     }
+    this.compareInputToAnswer();
   }
 
   setAnswer() {
@@ -44,6 +45,12 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.setInput(input);
     });
+  }
+
+  compareInputToAnswer() {
+    if (JSON.stringify(this.input) === JSON.stringify(this.answer)) {
+      this.success();
+    }
   }
 
   play() {
