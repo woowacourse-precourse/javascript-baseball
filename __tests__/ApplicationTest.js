@@ -33,6 +33,15 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
 
+  test("게임이 실행되면 '숫자를 입력해주세요 : '라는 문구를 출력한다.", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith("숫자를 입력해주세요 : ");
+  });
+
   // test("게임 종료 후 재시작", () => {
   //   const randoms = [1, 3, 5, 5, 8, 9];
   //   const answers = ["246", "135", "1", "597", "589", "2"];
