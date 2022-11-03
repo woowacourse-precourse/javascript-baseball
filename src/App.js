@@ -31,6 +31,7 @@ class App {
     let inputNumber;
     MissionUtils.Console.readLine("숫자를 입력해 주세요. : ", (number) => {
       inputNumber = number;
+      MissionUtils.Console.close();
     });
     return inputNumber;
   }
@@ -93,10 +94,11 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (select) => {
         selectNum = select;
+        MissionUtils.Console.close();
       }
     );
     if (selectNum === 1) this.play();
-    else if (selectNum === 2) MissionUtils.Console.close();
+    else if (selectNum === 2) throw "프로그램이 종료되었습니다.";
     else throw "잘못된 입력입니다. 애플리케이션을 종료합니다.";
   }
 }
