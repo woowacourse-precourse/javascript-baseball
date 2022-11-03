@@ -4,6 +4,7 @@ module.exports = class Game {
   constructor() {
     this.computerNumbers = [...this.getRandomNumbers()].join("");
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(this.computerNumbers);
     this.getUserNumberInput();
   }
 
@@ -19,8 +20,23 @@ module.exports = class Game {
   getUserNumberInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       MissionUtils.Console.print(number);
+      MissionUtils.Console.print(this.getGameResultString(number));
       MissionUtils.Console.close();
     });
+  }
+
+  getGameResultString(inputNumber) {
+    const STRIKE_NUMBER = this.getStrikeCount(inputNumber);
+    const BALL_NUMBER = this.getBallCount(inputNumber);
+    if (STRIKE_NUMBER === 3) return GAME_WIN;
+    if (STRIKE_NUMBER == 0 && BALL_NUMBER == 0) {
+      return `낫싱`;
+    }
+    if (STRIKE_NUMBER > 0 && BALL_NUMBER == 0) {
+      return `${STRIKE_NUMBER}스트라이크`;
+    }
+    if (STRIKE_NUMBER == 0 && BALL_NUMBER > 0) return `${BALL_NUMBER}볼`;
+    return `${BALL_NUMBER}볼 ${STRIKE_NUMBER}스트라이크`;
   }
 
   getStrikeCount(inputNumber) {
