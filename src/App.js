@@ -34,6 +34,14 @@ class App {
 
     return true;
   }
+
+  checkInputLength(inputData) {
+    if (inputData.length !== 3) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
 const app = new App();
