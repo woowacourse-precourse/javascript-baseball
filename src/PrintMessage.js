@@ -5,3 +5,10 @@ function printGameStart(){
     MissionUtils.Console.print(GAME_START_MESSAGE);
 }
 
+function printUserInput(){
+    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요";
+    MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInputNum) => {
+        console.log(` : ${userInputNum}`);
+    });
+    return userInputNum;
+}
