@@ -61,9 +61,21 @@ class App {
     if (this.strike < 3) this.guessingNumber();
   }
 
+  confirmExit() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      if (answer === '1') {
+        this.resetTargetNumber();
+        this.guessingNumber();
+      } else if (answer !== '2') {
+        throw('Invalid input');
+      }
+    });
+  }
+
   play() {
     this.resetTargetNumber();
     this.guessingNumber();
+    this.confirmExit();
   }
 }
 
