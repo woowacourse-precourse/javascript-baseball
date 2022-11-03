@@ -10,12 +10,16 @@ class App {
   outputString(str) {
     MissionUtils.Console.print(str)
   }
-  // 사용자에게 보여줄 str과 입력을 받고 저장함.
+  // 사용자 입력 받기
   setUserInput(showStr) {
     return MissionUtils.Console.readLine(showStr, (answer) => {
       this.outputString(`${showStr} ${answer}`)
       return this.userInput = answer
     })
+  }
+  // 에러 표출 하기
+  throwError() {
+    throw ''
   }
   // 입력 닫기
   closeConsole() {
