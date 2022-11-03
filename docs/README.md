@@ -23,22 +23,13 @@
     - 컴퓨터 수를 설정하는 함수
     - Random.pickNumberInRange()를 활용하여 random하게 각 자리수를 설정
 
-- countStrike()
-    - 스트라이크 수를 계산하여 반환하는 함수
-    - 입력한 수(이하 input)와 컴퓨터수(이하 computer)의 각 자리를 비교
-    - 각 자리의 수가 같을 경우 +1
-    - return strike
-
-- countBall()
-    - 볼 수를 계산하여 반환하는 함수
-    - input과 computer가 공통으로 가지는 수 세기
-    - 같은 수가 다른 자리에 위치할 경우 +1 
-    - return ball
-
-- result()
-    - countStrike 와 countBall 의 결과에 따라 해당 예측의 결과를 반환하는 함수
+- countStrikeAndBall()
+    - 스트라이크 수와 볼 수를 계산하여 반환하는 함수
+    - 컴퓨터 수를 copy한 임시 배열을 사용(checkComp)
+    - 각 자리수의 공통 여부 확인후 checkComp의 수를 -1로 변경 : strike + 1
+    - 스트라이크를 제외하고 사용자수의 각 자리수가 컴퓨터 수에 중복되는지 확인 : ball + 1
     - return [strike, ball]
 
-- resultString()
+- result()
     - 결과에 따른 문구 출력
     - (ball && {ball}볼) (strike && {strike}스트라이크)
