@@ -23,11 +23,8 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const getTestFunctoin = (answer) => {
-  const testFunction = () => {
-    const randoms = [1, 3, 5];
-    const answers = [answer];
-
+const getExceptionTest = (randoms, answers) => {
+  const exceptionTest = () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
@@ -37,7 +34,7 @@ const getTestFunctoin = (answer) => {
     }).toThrow();
   }
 
-  return testFunction;
+  return exceptionTest;
 }
 
 describe("숫자 야구 게임", () => {
@@ -64,9 +61,10 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트 1", getTestFunctoin("1234"));
-  test("예외 테스트 2", getTestFunctoin(""));
-  test("예외 테스트 3", getTestFunctoin("039"));
-  test("예외 테스트 4", getTestFunctoin("191"));
-  test("예외 테스트 5", getTestFunctoin("36e"));
+  test("예외 테스트 1", getExceptionTest([1, 3, 5], ["1234"]));
+  test("예외 테스트 2", getExceptionTest([1, 3, 5], [""]));
+  test("예외 테스트 3", getExceptionTest([1, 3, 5], ["039"]));
+  test("예외 테스트 4", getExceptionTest([1, 3, 5], ["191"]));
+  test("예외 테스트 5", getExceptionTest([1, 3, 5], ["36e"]));
+  test("재시작 예외 테스트", getExceptionTest([1, 3, 5], ["123", "456", "789", "135", "3"]));
 });
