@@ -67,4 +67,12 @@ describe("숫자 야구 게임", () => {
       "1에서 9까지의 자연수를 입력해주세요"
     );
   });
+  test("서로 다른 숫자 예외 테스트", () => {
+    const app = new App();
+    const input = "123";
+
+    expect(() => app.isValidNumberWithoutDuplicate(input)).toThrow(
+      "서로 다른 3개의 숫자를 입력해주세요"
+    );
+  });
 });
