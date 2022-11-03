@@ -2,9 +2,13 @@
 
 **1. 게임 시작알림 출력**
 
+- MissionUtils 라이브러리의 Console.print() 사용
+
 **2. 3자리의 수 랜덤으로 생성**
 
-- 서로 다른 3자리의 수
+- MissionUtils 라이브러리의 Random.pickUniqueNumbersInRange() 사용
+- 배열 저장 값과 생성 값이 중복되지 않는 경우에만 배열에 저장
+- 배열에 생성 값 3개까지 저장
 
 **3. 사용자 숫자 입력 기능**
 
