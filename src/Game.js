@@ -50,10 +50,10 @@ module.exports = class Game {
   getBallCount(inputNumber) {
     let count = 0;
     for (let index in inputNumber) {
-      if (inputNumber[index] == this.computerNumbers[(index + 1) % 3]) {
-        count += 1;
-      }
-      if (inputNumber[index] == this.computerNumbers[index - 1]) {
+      if (
+        this.computerNumbers.includes(inputNumber[index]) &&
+        this.computerNumbers[index] != inputNumber[index]
+      ) {
         count += 1;
       }
     }
