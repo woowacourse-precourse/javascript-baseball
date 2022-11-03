@@ -16,4 +16,12 @@ function getComputerNumber() {
   return computerNumber;
 }
 
+function getUserInput() {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    MissionUtils.Console.close()
+  })
+}
+
+getUserInput()
+
 module.exports = App;
