@@ -35,7 +35,7 @@ class App {
     } else if (totalCountStrike === 3) {
       MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.confirmExit();
+      this.confirmExitOrReStart();
     } else if (totalCountBall === 0) {
       MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
     } else if (totalCountStrike === 0) {
@@ -48,7 +48,7 @@ class App {
     this.getUserNumberFromReadLine();
   }
 
-  confirmExit() {
+  confirmExitOrReStart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (userNumberStr) => {
