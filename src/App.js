@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const VALIDATION_CODE = ["SUCCESS", "RESTART", "EXIT"];
 
 class App {
   constructor() {
@@ -20,9 +21,17 @@ class App {
 
   input() {
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      this.code = this.checkValidation(answer);
       this.user = answer.split("").map((num) => parseInt(num));
-      console.log("user", this.user);
+      console.log("user", this.user, this.code);
     });
+  }
+
+  checkValidation(answer) {
+    if (answer.split("").length > 3) throw "error";
+    else if (answer == "1") return VALIDATION_CODE[1];
+    else if (answer == "2") return VALIDATION_CODE[2];
+    else return VALIDATION_CODE[0];
   }
 }
 
