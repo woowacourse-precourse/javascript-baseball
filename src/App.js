@@ -46,6 +46,22 @@ function compareNums(computer, user) {
   return [ball, strike];
 }
 
+// 4. 3번에 비교한 결과를 바탕으로 출력해주는 함수
+function printResult(score) {
+  let ball = score[0];
+  let strike = score[1];
+  if (ball === 0 && strike === 0) {
+    MissionUtils.Console.print("낫싱");
+  } else if (strike === 3) {
+    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  } else if (ball === 3) {
+    MissionUtils.Console.print(`${ball}볼`);
+  } else {
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+  }
+}
+
 class App {
   play() {}
 }
