@@ -1,25 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  async play() {
+  play() {
     // step1
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     
-    // step2
-    let computer = this.setComputerNum();
-    MissionUtils.Console.print(computer);
-
-    // step3
-    let input = await this.setUserNum();
-    MissionUtils.Console.print(input);
-
-    // step4
-
-    // step5
-
-    // step6
-
+    let checkContinue = true;
+    while(checkContinue){
+      checkContinue = game();
+    }
   }
+
 
   setUserNum() {
     return new Promise((resolve) => {
@@ -65,10 +56,23 @@ class App {
       }
     })
 
-    return [countS, countB];
+    return [countB, countS];
   }
 
-  resultString() {
+  result(countRes) {
+    if(countRes[0] === 0 && countRes[1] === 0){
+      return '낫싱';
+    } else if(countRes[1] === 3) {
+      return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    } else {
+      let res = '';
+      res += countRes[0]>0 ? `${countRes[0]}볼`:'';
+      res += countRes[1]>0 ? `${countRes[1]}스트라이크`:'';
+      return res;
+    }
+  }
+
+  checkContinue() {
 
   }
 }
