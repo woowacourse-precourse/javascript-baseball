@@ -46,4 +46,22 @@ function getResult(comArr, userArr) {
   return resultArr;
 }
 
+function winOrLose(resultArr) {
+  if (resultArr[0] == 0 && resultArr[1] == 0) {
+    MissionUtils.Console.print("낫싱");
+  }
+  else if (resultArr[0] == 0 && resultArr[1] != 0) {
+    MissionUtils.Console.print(`${resultArr[1]}스트라이크`);
+    if (resultArr[0] == 3) {
+      return true;
+    }
+  }
+  else if (resultArr[1] == 0 && resultArr[0] != 0) {
+    MissionUtils.Console.print(`${resultArr[0]}볼`);
+  }
+  else {
+    MissionUtils.Console.print(`${resultArr[0]}볼 ${resultArr[1]}스트라이크`);
+  }
+}
+
 module.exports = App;
