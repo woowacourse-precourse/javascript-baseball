@@ -55,18 +55,22 @@ class App {
 
   askRestartApp() {
     MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
       input => {
         if (input === '1') {
           console.log(this);
           this.startApp('restart');
         } else if (input === '2') {
-          console.log('종료하기');
+          this.endApp();
         } else {
           console.log('error');
         }
       },
     );
+  }
+
+  endApp() {
+    MissionUtils.Console.close();
   }
 
   getUserNumberFromInput() {
@@ -89,7 +93,6 @@ class App {
   }
 
   async startApp(start) {
-    console.log(start, 'start');
     if (start === 'restart') this.resetComputerNumberArray();
     this.initAnswerMap();
     try {
