@@ -13,3 +13,10 @@
   - 같은 index에 같은 값이면 strike + 1
   - index는 다르지만 값이 있을 때 ball + 1
   - return [ball, strike]
+
+4. 3번에 비교한 결과를 바탕으로 출력해주는 함수
+  - printResult(score)
+  - score -> [ball, strike]
+  - ball, strike 둘 다 0이면 "낫싱" 출력
+  - strike가 3이면 게임 종료 출력
+  - ball과 strike 개수만큼 출력
