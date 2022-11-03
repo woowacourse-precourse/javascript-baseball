@@ -3,7 +3,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     let answers = init();
-    console.log(answers);
+    // while (1) {
+    //   MissionUtils.Console.readLine("숫자를 입력해주세요:", (number) => {});
+    // }
   }
 }
 
