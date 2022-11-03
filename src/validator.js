@@ -5,11 +5,19 @@ function isNotThreeLength(value) {
   return false;
 }
 
+function isOutOfRange(value) {
+  let result = false;
+  value.forEach(Number => {
+    if(isNaN(+Number) || Number < 1) result = true;
+  });
+  return result;
+}
 
 function isVaild(value) {
   console.log(value);
   if(value.length === 0) throw new Error(constants.MESSAGE.IS_BLANK);
   if(isNotThreeLength(value)) throw new Error(constants.MESSAGE.NOT_THREE_LENGTH);
+  if(isOutOfRange(value)) throw new Error(constants.MESSAGE.NOT_NUMBER_RANGE);
 }
 
 exports.isVaild = isVaild;
