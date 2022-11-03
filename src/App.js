@@ -20,11 +20,20 @@ function numberInput() {
 
 function inputValidation(number) {
     threeDigitValidation(number);
+    numberRangeValidation(number);
 }
 
 function threeDigitValidation(number) {
     const numberLength = String(number).length;
     if (numberLength !== 3) {
+        throw "잘못된 값을 입력하였습니다.";
+    }
+}
+
+function numberRangeValidation(number) {
+    const numberSplit = String(number).split("").map(Number);
+    const isNumberBetween = numberSplit.every(eachDigit => eachDigit > 0 && eachDigit < 10);
+    if (!isNumberBetween) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
