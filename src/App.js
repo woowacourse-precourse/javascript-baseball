@@ -13,7 +13,6 @@ class App {
     while (numbers.size < 3) {
       numbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    
     this.targetNumber = [...numbers];
   }
 
@@ -21,7 +20,9 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       this.userNumber = answer.split('').map(Number);
 
-      if (this.userNumber.includes(NaN) || new Set(this.userNumber).size !== 3) {
+      if (this.userNumber.includes(NaN) || this.userNumber.includes(0)
+         || new Set(this.userNumber).size !== 3
+      ) {
         throw 'Invalid input';
       }
     });
