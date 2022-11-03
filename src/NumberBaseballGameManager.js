@@ -1,4 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
+
 const {
   RANDOM_NUMBER_COUNT,
   MIN_RANDOM_NUMBER_LIMIT,

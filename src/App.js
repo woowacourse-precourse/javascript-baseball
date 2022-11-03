@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+
 const {
   GAME_MENU_RESTART,
   GAME_MENU_EXIT,
@@ -9,6 +10,7 @@ const {
   GAME_MENU_CODE_REGEX,
   THREE_DIGIT_NUMBER_REGEX,
 } = require('./lib/constants/validation');
+
 const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 
 class App {
