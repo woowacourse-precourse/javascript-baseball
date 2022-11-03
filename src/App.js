@@ -57,6 +57,23 @@ class App {
     }
   }
 
+  success() {
+    Console.print(`${MESSAGES.SUCCESS} ${MESSAGES.END}`);
+    Console.readLine(MESSAGES.RESTART, (answer) => {
+    if (!this.isValidEndInput(answer)) {
+      throw new Error();
+    }
+    if (parseInt(answer) === NUMBERS.RESTART_GAME) {
+      return this.play();
+    }
+    if (parseInt(answer) === NUMBERS.END_GAME) {
+      Console.print(MESSAGES.END);
+      return Console.close();
+    }
+    throw new Error();
+    })
+  }
+
   game(computer) {
     Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
       if (!this.isValidNumberInput(input)) {
