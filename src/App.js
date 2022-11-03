@@ -55,16 +55,8 @@ class App {
     }
     this.startApp();
   }
-  async getInput(input) {
-    return [
-      ...input
-        .toString()
-        .split('')
-        .map(i => +i),
-    ];
-  }
 
-  getUserNumberFromInput = async () => {
+  getUserNumberFromInput() {
     let that = this;
     return new Promise(function (resolve, reject) {
       try {
@@ -81,7 +73,7 @@ class App {
         reject(e);
       }
     });
-  };
+  }
 
   async startApp() {
     this.initAnswerMap();
