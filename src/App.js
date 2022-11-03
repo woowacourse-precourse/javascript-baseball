@@ -23,10 +23,10 @@ class App {
   }
 
   initRandomNumbers() {
-    this.randomNumbers = this.makeRandomNumber();
+    this.randomNumbers = this.makeRandomNumbers();
   }
 
-  makeRandomNumber() {
+  makeRandomNumbers() {
     const pickedNumbers = [];
 
     while (pickedNumbers.length < MAX_LENGTH) {
