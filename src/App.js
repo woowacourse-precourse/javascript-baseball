@@ -1,6 +1,7 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 const VALID_INPUT_REGEX = /^[1-9]{3}$/;
+const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
 
 class App {
   computer;
@@ -120,12 +121,35 @@ class App {
     this.inputGameMenuCode();
   }
 
+  inputGameMenuCode() {
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      code => {
+        if (!GAME_MENU_CODE_REGEX.test(code)) {
+          throw new Error('잘못된 입력입니다.');
+        }
+
+        const gameMenuCode = parseInt(code, 10);
+
+        if (gameMenuCode === 2) {
+          Console.print('게임을 종료합니다.');
+          this.exit();
+          return;
+        }
+
+        this.restartGame();
+      },
+    );
+  }
+
   exit() {
     Console.close();
   }
 
-  isInvalidInput(inputValue) {
-    return !VALID_INPUT_REGEX.test(inputValue);
+  restartGame() {
+    this.isGameOver = false;
+    this.computer = this.generateRandomNumbers();
+    this.inputAnswer();
   }
 }
 
