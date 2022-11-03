@@ -43,7 +43,8 @@ function createComputerNumber() {
 
 function readInputNumber(computerNumber) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (myNumber) => {
-    const gameState = compare(myNumber, computerNumber);
+    const validMyNumber = validCheck(myNumber);
+    const gameState = compare(validMyNumber, computerNumber);
     MissionUtils.Console.print(gameState);
     gameInProgress(gameState, computerNumber);
   });
@@ -68,10 +69,20 @@ function selectGameRestart(input) {
   if (input === "1") {
     let computerNumber = createComputerNumber();
     readInputNumber(computerNumber);
-  }
-  if (input === "2") {
+  } else if (input === "2") {
     MissionUtils.Console.close();
+  } else {
+    throw new Error("1이나 2가 아닌 숫자가 입력되었습니다.");
   }
+}
+
+function validCheck(myNumber) {
+  if (myNumber.length !== 3) throw new Error("입력한 숫자가 3개가 아닙니다.");
+  if (new Set(myNumber).size !== 3) throw new Error("중복된 숫자가 있습니다.");
+  myNumber.split("").map((number) => {
+    if(!(parseInt(number, 10) >= 1 && parseInt(number, 10) <= 9)) throw new Error("숫자가 아닌 문자가 있습니다.");
+  });
+  return myNumber;
 }
 
 let app = new App();
