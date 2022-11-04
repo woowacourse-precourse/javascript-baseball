@@ -21,6 +21,10 @@ class App {
     return this.#random;
   }
 
+  isStrike(randomItem, inputItem) {
+    return randomItem === +inputItem;
+  }
+
   play() {}
 }
 
