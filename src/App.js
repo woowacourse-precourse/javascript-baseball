@@ -32,6 +32,7 @@ class App {
 
   compareInputWithAnswer(computerNumber, userInput) {
     const strike = this.countStrike(computerNumber, userInput);
+    const ball = this.countBall(computerNumber, userInput);
   }
 
   countStrike(computerNumber, userInput) {
@@ -43,6 +44,17 @@ class App {
       }
     }
     return strike;
+  }
+
+  countBall(computerNumber, userInput) {
+    let ball = 0;
+    for (let i = 0; i < computerNumber.length; i++) {
+      const userIndex = userInput.indexOf(computerNumber[i]);
+      if (userIndex !== -1 && userIndex !== i) {
+        ball++;
+      }
+    }
+    return ball;
   }
 }
 
