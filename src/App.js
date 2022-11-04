@@ -1,7 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
-const { Random } = MissionUtils;
-const { Console } = MissionUtils;
+const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -37,6 +34,28 @@ class App {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.inputNum = this.inputCheck(input);
     });
+  }
+
+  compare() {
+    const ComputerNum = this.computer;
+    const UserNum = this.UserInput;
+    let ball = 0;
+    let strike = 0;
+    if (ComputerNum === UserNum) return "정답!";
+    UserNum.map((num, i) => {
+      if (ComputerNum.includes(num)) {
+        if (UserNum.indexOf(num) === ComputerNum.indexOf(ComputerNum[i])) {
+          strike += 1;
+        } else {
+          ball += 1;
+        }
+      }
+    });
+    let resultText = "";
+    if (ball !== 0) resultText += `${ball}볼 `;
+    if (strike !== 0) resultText += `${strike}스트라이크`;
+    if (resultText === "") resultText += `낫싱`;
+    return resultText;
   }
 
   reStart() {}
