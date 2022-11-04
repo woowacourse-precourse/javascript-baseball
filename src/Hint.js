@@ -34,8 +34,12 @@ const convertCountToHintString = (strikeCount, ballCount) => {
   return hint;
 };
 
-module.exports = {
-  countBall,
-  countStrike,
-  convertCountToHintString,
+const getHint = (correctNumber, inputNumber) => {
+  const strikeCount = countStrike(correctNumber, inputNumber);
+  const ballCount = countBall(correctNumber, inputNumber, strikeCount);
+  const hint = convertCountToHintString(strikeCount, ballCount);
+
+  return hint;
 };
+
+module.exports = getHint;
