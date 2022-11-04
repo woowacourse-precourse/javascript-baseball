@@ -76,4 +76,16 @@ function isAnswer(computerNumber, userNumber) {
   return computerNumber.join('') === userNumber.join('');
 }
 
+function countStrike(computerNumber, userNumber) {
+  let strike = 0;
+
+  for (let i = 0; i < 3; i++) {
+    if (computerNumber[i] === userNumber[i]) {
+      strike++;
+    }
+  }
+
+  return strike;
+}
+
 module.exports = App;
