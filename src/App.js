@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  static generateTargetNumber() {
+  generateTargetNumber() {
     const target = [];
 
     while (target.length < 3) {
@@ -9,6 +9,15 @@ class App {
       if (!target.includes(number)) target.push(number);
     }
     return target;
+  }
+
+  validateGuessedNumber(input) {
+    if (input.length !== 3) {
+      throw new Error('Input string length must be 3.');
+    }
+    if (input.split('').some((character) => Number.isNaN(Number(character)))) {
+      throw new Error('Input string must be number.');
+    }
   }
 }
 
