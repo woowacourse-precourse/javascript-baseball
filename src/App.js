@@ -54,19 +54,37 @@ const discriminator = (userNumbers, refNumbers) => {
   return discrimination;
 };
 
+const reStartSelector = () => {
+  return new Promise((resolve, reject) => {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (asnwer) => {
+        resolve(Number(asnwer));
+      }
+    );
+  });
+};
+
 class App {
   async play() {
     printer("숫자 야구 게임을 시작합니다.");
-    let discrimination = "";
-    const refNumbersArr = refNumbersGetter();
 
-    while (discrimination !== "3스트라이크") {
-      const usersInput = await userNumbersGetter();
-      const userNumbersArr = stringToArrConverter(usersInput);
-      discrimination = discriminator(userNumbersArr, refNumbersArr);
-      printer(refNumbersArr);
-      printer(userNumbersArr);
-      printer(discrimination);
+    let restart = 1;
+    while (restart === 1) {
+      let discrimination = "";
+      const refNumbersArr = refNumbersGetter();
+
+      while (discrimination !== "3스트라이크") {
+        const usersInput = await userNumbersGetter();
+        const userNumbersArr = stringToArrConverter(usersInput);
+        discrimination = discriminator(userNumbersArr, refNumbersArr);
+        printer(refNumbersArr);
+        printer(userNumbersArr);
+        printer(discrimination);
+      }
+
+      restart = await reStartSelector();
+      printer(restart);
     }
   }
 }
