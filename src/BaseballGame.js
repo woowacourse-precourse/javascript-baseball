@@ -1,4 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const GameUtils = require("./GameUtils");
+const Validate = require("./Validate");
 const print = MissionUtils.Console.print;
 const readLine = MissionUtils.Console.readLine;
 
@@ -19,7 +21,7 @@ class BaseballGame {
   }
 
   static getUserGuessNumber() {
-    return userInputNumber();
+    return userGuessNumber();
   }
 }
 
@@ -32,11 +34,15 @@ const generateRandomNumber = (startNum, endNum) => {
   return randomArr;
 };
 
-const userInputNumber = () => {
-  const userGuessNumber = readLine("3자리 숫자를 입력해 주세요", (answer) => {
-    print(`숫자를 입력해 주세요 :  ${answer}`);
+const userGuessNumber = () => {
+  readLine(" 3자리 숫자를 입력해 주세요 ", (answer) => {
+    print(`숫자를 입력해 주세요 : ${answer}`);
+    Validate.userGuessNumbers(answer);
+
+    const userGuess = GameUtils.userInputToNumberArr(answer);
+    MissionUtils.Console.close();
+    return userGuess;
   });
-  // validateUserInput(userGuessNumber);
 };
 
 module.exports = BaseballGame;
