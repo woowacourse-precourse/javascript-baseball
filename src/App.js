@@ -3,7 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.input;
-    this.answer;
+    this.answer = [];
     this.hint = {
       ball: 0,
       strike: 0,
@@ -20,7 +20,12 @@ class App {
   }
 
   setAnswer() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    while (this.answer.length < 3) {
+      let number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
+      }
+    }
   }
 
   setHint() {
@@ -55,12 +60,13 @@ class App {
   }
 
   isBadInput(input) {
-    if (input.includes(NaN))
-      throw new Error("문자를 제외한 숫자만 입력하세요.");
-    if (input.includes(0)) throw new Error("1~9 사이의 숫자만 입력하세요.");
-    if (!(input.length === 3)) throw new Error("3개의 숫자만 입력하세요.");
-    if (!(input.length === new Set(input).size))
-      throw new Error("서로 다른 숫자를 입력하세요.");
+    if (input.includes(NaN)) throw "문자를 제외한 숫자만 입력하세요.";
+    if (input.includes(0)) throw "1~9 사이의 숫자만 입력하세요.";
+    if (input.length !== 3) {
+      throw `3개의 숫자만 입력하세요.`;
+    }
+    if (input.length !== new Set(input).size)
+      throw "서로 다른 숫자를 입력하세요.";
     return false;
   }
 
@@ -71,22 +77,23 @@ class App {
   }
 
   success() {
-    this.print(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-    );
+    this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     this.receive1Or2FromConsole();
   }
 
   receive1Or2FromConsole() {
-    MissionUtils.Console.readLine("", (selectedNumByUser) => {
-      this.selectReplayOrClose(selectedNumByUser);
-    });
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (selectedNumByUser) => {
+        return this.selectReplayOrClose(selectedNumByUser);
+      }
+    );
   }
 
   selectReplayOrClose(selectedNum) {
     if (selectedNum == 1) return this.play();
     if (selectedNum == 2) return this.close();
-    throw new Error("1 또는 2만 입력해주세요.");
+    throw "1 또는 2만 입력해주세요.";
   }
 
   printHint() {
@@ -106,7 +113,7 @@ class App {
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
     this.setAnswer();
-    this.print(this.answer);
+    // this.print(this.answer);
     this.receiveInputFromConsole();
   }
 }
