@@ -5,6 +5,8 @@ class App {
 
   baseballAnswer = [];
 
+  userInput = '';
+
   findNewBaseballNumber(CHECK_SAME_NUMBER) {
     let newBaseballNumber = 0;
     do {
@@ -22,12 +24,29 @@ class App {
     }
   }
 
+  userInputHandler = (input) => {
+    this.userInput = input;
+    this.userInputExceptionHandler();
+
+    const [BALL, STRIKE, NOTHING] = this.compareUserInputWithAnswer();
+    const OUTPUT_STRING = this.makeOutputString(BALL, STRIKE, NOTHING);
+    MissionUtils.Console.print(OUTPUT_STRING);
+
+    if (STRIKE !== 3) {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
+    } else if (STRIKE === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.gameRestartHandler();
+    }
+  };
+
   play() {
     if (this.firstPlay) {
       MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     }
     this.firstPlay = false;
     this.setBaseballAnswer();
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
   }
 }
 
