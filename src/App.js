@@ -8,7 +8,7 @@ const INIT_STATE = {
   userInput: '',
   computerNum: '',
   isUserInputValid: false,
-  isEqualInputAndComputerNum: false,
+  isGameEnd: false,
 };
 
 class App {
@@ -27,9 +27,8 @@ class App {
 
     // TODO: 유저의 입력값과 컴퓨터의 숫자가 동일 할 때까지 MATCH
     // 2. 현재 컴퓨터 숫자와 유저의 숫자가 동일한지 판별하기
-    let isComputerNumAndUserNumEqual = this.computerNum === this.userInput;
     // 3. 동일해질 때까지 Match -> match
-    while (isComputerNumAndUserNumEqual === false) {
+    while (this.isGameEnd === false) {
       // Match flow
       // 1. 유저가 숫자를 입력한다. ✅
       // 2. 해당 숫자가 유효한지 판단한다. ✅
@@ -47,7 +46,7 @@ class App {
 
       // 5. 3번에서 구한 볼, 스트라이크 개수를 이용해 적절한 문구를 띄운다. ✅
 
-      // 6. 유저의 입력값과 컴퓨터 숫자와 동일한지 여부를 업데이트한다.
+      // 6. 유저의 입력값과 컴퓨터 숫자와 동일한지 여부를 업데이트한다. ✅
       //    -> 스트라이크 개수가 3개인지 판별
       const userInput = this.user.getInputValue(); // 1번
       const isUserInputValid = this.checkValid.validateInput(userInput); // 2번
@@ -62,6 +61,8 @@ class App {
 
       const gameMessage = this.makeGameMessage(ballCount, strikeCount); // 5번
       Console.print(gameMessage);
+
+      this.isGameEnd = this.determineGameIsEnd(this.computerNum, this.userInput);
     }
     // 7. 반복문 탈출 후(= Match 종료) 게임을 다시 할 것 인지 여부를 묻는다.
   }
@@ -109,6 +110,10 @@ class App {
     }
 
     return '낫싱';
+  }
+
+  determineGameIsEnd(computerNum, userInput) {
+    return computerNum === userInput;
   }
 
   restart() {
