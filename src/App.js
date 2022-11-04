@@ -1,8 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const generateNumber = require('./generateNumber');
 
 class App {
   play() {
     this.start();
+    const computerSet = generateNumber();
   }
 
   start() {
