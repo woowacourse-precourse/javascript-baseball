@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-
 class App {
   play() {
     const computerNumber = setComputerNumber();
@@ -18,6 +17,17 @@ function setComputerNumber() {
       computer.push(number);
     }
   }
+
+  return computer;
+}
+
+function setUserNumber() {
+  let userNumber = "";
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    userNumber = answer;
+  })
+
+  return userNumber;
 }
 
 module.exports = App;
