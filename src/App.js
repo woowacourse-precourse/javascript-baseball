@@ -1,5 +1,22 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const gameSetting = () => {
+  const computer = [];
+
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
+
+  return computer;
+};
+
+const gameStart = (computer) => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+};
+
 const getStrike = (computer, user) => {
   let strike = 0;
 
@@ -24,6 +41,15 @@ const getBall = (computer, user) => {
   return ball;
 };
 
+const gameRestart = (answer) => {
+  if (answer === '2') {
+    MissionUtils.Console.close();
+  } else {
+    const computerNumber = gameSetting();
+    gameStart(computerNumber);
+  }
+};
+
 const checkResult = (computer, userNumber) => {
   const user = userNumber.split('').map((a) => Number(a));
   const strike = getStrike(computer, user);
@@ -31,35 +57,30 @@ const checkResult = (computer, userNumber) => {
 
   if (strike === 3) {
     MissionUtils.Console.print(`${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
-    MissionUtils.Console.close();
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (
+      answer,
+    ) => gameRestart(answer));
   } else if (strike === 0 && ball === 0) {
     MissionUtils.Console.print('낫싱');
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+    gameStart(computer);
   } else if (strike === 0 && ball > 0) {
     MissionUtils.Console.print(`${ball}볼`);
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+    gameStart(computer);
   } else if (strike > 0 && ball === 0) {
     MissionUtils.Console.print(`${strike}스트라이크`);
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+    gameStart(computer);
   } else {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+    gameStart(computer);
   }
 };
 
 class App {
   play() {
-    const computer = [];
-
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
+    const computerNumber = gameSetting();
 
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+    gameStart(computerNumber);
   }
 }
 
