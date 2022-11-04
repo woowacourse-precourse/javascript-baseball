@@ -1,28 +1,43 @@
 import MissionUtils from '@woowacourse/mission-utils';
 import Computer from './Computer.js';
 import User from './User.js';
-
-const APP_MESSAGE = {
-  hello: '숫자 야구 게임을 시작합니다.',
-  bye: '숫자 야구 게임을 종료합니다.',
-};
+import Game from './Game.js';
 
 class App {
   constructor() {
-    MissionUtils.Console.print(APP_MESSAGE.hello);
+    this.isGameRun = true;
+  }
+
+  startMessagePrint() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   async play() {
+    this.startMessagePrint();
     this.computer = new Computer();
     this.user = new User();
-    await this.user.getUserInput();
-    this.user.convertStringToNum();
-    this.user.convertNumToArray();
-    this.user.checkUserInput();
+
+    await this.runGame();
+  }
+
+  async runGame() {
+    while (this.isGameRun) {
+      await this.user.enterAnswer();
+      this.user.convertStringToNum();
+      this.user.convertNumToArray();
+      if (!this.user.checkUserInput()) {
+        throw new Error('잘못된 입력 값입니다.');
+      }
+      this.game = new Game();
+      this.game.countBall(this.computer.getter(), this.user.getter());
+      this.game.countStrike(this.computer.getter(), this.user.getter());
+      this.game.printResultMessage();
+      this.isGameRun = this.game.checkGameRun();
+    }
   }
 }
 
 const app = new App();
 app.play();
 
-// module.exports = App;
+export default App;

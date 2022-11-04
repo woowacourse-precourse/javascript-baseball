@@ -2,10 +2,14 @@ import MissionUtils from '@woowacourse/mission-utils';
 
 class Computer {
   constructor() {
-    this.getAnswer();
+    this.setter();
   }
 
-  getAnswer() {
+  getter() {
+    return this.answer;
+  }
+
+  setter() {
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 }
