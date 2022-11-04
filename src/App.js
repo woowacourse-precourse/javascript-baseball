@@ -36,7 +36,6 @@ class App {
       try {
         this.checkGuessVaildation(guess);
         this.compareAndDisplay(guess);
-        this.getUserGuess();
       } catch (err) {
         console.log(err.message);
         this.rl.close();
@@ -77,9 +76,12 @@ class App {
   compareAndDisplay(guess) {
     let result = this.compareGuessAndAnswer(guess);
     this.displayResult(result);
-    // if (this.isAnswer(result.strike)) {
-    // } else {
-    // }
+    if (this.isAnswer(result.strike)) {
+      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.replayOrEnd();
+    } else {
+      this.getUserGuess();
+    }
   }
 
   compareGuessAndAnswer(guess) {
@@ -103,6 +105,13 @@ class App {
 
   isAnswer(strike) {
     return strike == 3;
+  }
+
+  replayOrEnd() {
+    this.rl.question(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (reply) => {}
+    );
   }
 }
 
