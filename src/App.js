@@ -3,15 +3,17 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const NUMBER_LENGTH = 3;
 
 class App {
-  #computer = [];
+  constructor() {}
 
-  constructor() {
-    while (this.#computer.length < 3) {
+  setComputerNumber() {
+    const computer = [];
+    while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.#computer.includes(number)) {
-        this.#computer.push(number);
+      if (!computer.includes(number)) {
+        computer.push(number);
       }
     }
+    return computer;
   }
 
   getNumberFromPlayer() {
