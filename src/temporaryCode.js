@@ -36,7 +36,23 @@ class testCode {
     }
     return computerNum;
   }
+
+  BallCounter(userInputNum, computerNum) {
+    let ball = 0;
+    userInputNum.forEach((curValue) => {
+      if (computerNum.includes(curValue)) ball += 1;
+    });
+    return ball;
+  }
+
+  StrikeCounter(userInputNum, computerNum) {
+    let strike = 0;
+    userInputNum.forEach((curValue, index) => {
+      if (curValue === computerNum[index]) strike += 1;
+    });
+    return strike;
+  }
 }
 
 const test = new testCode();
-test.getComputerRandomNum();
+test.BallCounter([5, 2, 4], [4, 2, 5]);
