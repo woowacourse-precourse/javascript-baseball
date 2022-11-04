@@ -22,31 +22,58 @@ function getInputIntArray(input){
   return newArray;
 }
 
-function startGame(){
-  const computer = pickComputerNumber();
+function startGame(computer){
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
     const userInputArray = getInputIntArray(userInput);
+    let hint = '';
     console.log(userInputArray, computer);
     if (checkInput(userInput)){
-      getHint(userInputArray, computer);
+      hint = getHint(userInputArray, computer);
     } else {
-      MissionUtils.Console.print('숫자가 올바르지 않습니다. 다시입력해주세요 !');
-      startGame();
+      MissionUtils.Console.print('숫자가 올바르지 않습니다. 서로 다른 숫자를 입력해주세요 !');
+      startGame(computer);
     }
-    MissionUtils.Console.close();
+
+    if (hint === '3스트라이크'){
+      console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      endGame();
+    } else{
+      startGame(computer);
+    }
   });
 }
 
-function getHint(){
+function getHint(userInputArray, computer){
   let hint = '';
+  let strike = 0;
+  let ball = 0;
+  for (let i = 0; i < userInputArray.length; i++){
+    let idx = -1;
+    idx = computer.indexOf(userInputArray[i]);
+    if (idx === i){
+      strike++;
+    } else if (idx > -1){
+      ball++;
+    }
+  }
+
+  if (ball){
+    hint += `${ball}볼`;
+  } else if (strike) {
+    hint += `${strike}스트라이크`;
+  } else{
+    hint = '낫싱';
+  }
+  console.log(hint);
+
   return hint;
 }
 
+
 function endGame(){
-  console.log()
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (answer) => {
     if (answer === '1'){
-      startGame();
+      app.play();
     } else if (answer === '2'){
       MissionUtils.Console.close();
       return;
@@ -59,27 +86,15 @@ function endGame(){
 
 
 function pickComputerNumber() {
-  // const computer = [];
-  // while (computer.length < 3) {
-  //   const number = MissionUtils.Random.pickNumberInRange(1, 9);
-  //   if (!computer.includes(number)) {
-  //     computer.push(number);
-  //   }
-  // }
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
+  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
 
 
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    startGame();
-    // console.log('start game !');
-    // const MissionUtils = require("@woowacourse/mission-utils");
-    // console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]));
-
-    // MissionUtils.Console.close();
-  
+    const computer = pickComputerNumber();
+    startGame(computer);
   }
   
 }
@@ -91,5 +106,5 @@ const app = new App();
 // endGame();
 // console.log(checkInput("123"));
 // pickComputerNumber();
-startGame();
+app.play();
 module.exports = App;
