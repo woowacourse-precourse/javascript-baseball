@@ -14,7 +14,7 @@
 
 새로운 숫자를 정하기 위해 `findNewBaseballNumber()`를 실행한다.
 
-`findNewBaseballNumber()`에서 중복된 숫자를 제외하면서 새로운 숫자를 선택하고 정답에 추가한다.
+`findNewBaseballNumber()`에서 중복된 숫자를 제외하면서 새로운 숫자를 선택하고 정답에 추가합니다.
 
 ---
 
