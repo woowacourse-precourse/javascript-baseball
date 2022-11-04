@@ -43,4 +43,14 @@ describe('기능 구현 목록 테스트', () => {
       '1부터 9까지 서로 다른 숫자 3개를 입력해주세요'
     );
   });
+
+  test('랜덤 값과 사용자 입력한 값 비교', () => {
+    const random = [2, 4, 6];
+    const answers = [2, 6, 4];
+
+    const { ball, strike } = game.countScore(answers, random);
+
+    expect(ball).toEqual(2);
+    expect(strike).toEqual(1);
+  });
 });
