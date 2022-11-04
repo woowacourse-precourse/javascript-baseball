@@ -1,5 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const gameStatus = {
+  play: true,
+  stop: false,
+};
+
 const ment = {
   start: "숫자 야구 게임을 시작합니다.",
   end: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
@@ -13,12 +18,17 @@ const ment = {
 
 class App {
   play() {
-    this.startPrint();
-    const anwser = this.createAnwser();
-    console.log(anwser);
-    this.endGamePrint();
+    this.game = gameStatus.play;
+
+    while (this.game) {
+      this.startPrint();
+      const anwser = this.createAnwser();
+      console.log(anwser);
+
+      this.endGamePrint();
+    }
   }
-  // - 랜덤 3자리 생성하는 기능
+
   createAnwser() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
@@ -30,8 +40,17 @@ class App {
   }
   // - 사용자 입력을 받는 기능
   inputUserAnwser() {}
+
   // - 입력 예외처리 하는 기능 ( 게임 진행 중 )
-  checkUserGameAnwser() {}
+  checkUserGameAnwser(anwser) {
+    try {
+      if (typeof anwser !== "number") throw new Error("Not number");
+      if (anwser < 100 || anwser > 999) throw new Error("Out of range");
+    } catch (error) {
+      return false;
+    }
+    return true;
+  }
   // - 입력값과 컴퓨터 값을 비교하는 기능
   compareUserAnwser() {}
   // - 결과를 출력하는 기능
@@ -43,6 +62,7 @@ class App {
   checkUserProgressInput() {}
 
   endGamePrint() {
+    this.game = gameStatus.stop;
     MissionUtils.Console.print(ment.end);
     MissionUtils.Console.close();
     return;
