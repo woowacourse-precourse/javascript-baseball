@@ -40,10 +40,28 @@ function printPitchResult(gameData) {
   if (strike === 3) {
     Console.print('3스트라이크');
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    gameData.setState(false);
+    gameData.setThreeStrike(true);
     return;
   }
   Console.print(`${ball}볼 ${strike}스트라이크`);
+}
+
+async function continueOrEndGame(gameData) {
+  const inputNumber = await new Promise((resolve) => {
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (input) => {
+        resolve(input);
+      }
+    );
+  });
+  if (inputNumber !== '1' && inputNumber !== '2') {
+    throw new Error('잘못된 값을 입력했습니다.');
+  }
+  if (inputNumber === '2') {
+    return gameData.setState(false);
+  }
+  gameData.setThreeStrike(false);
 }
 
 async function gameStart() {
@@ -53,8 +71,13 @@ async function gameStart() {
   while (gameData.getState()) {
     const computerRandomNumbers = generateRandomNumbers();
     const userRandomNumbers = await inputUserNumbers();
+
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
     printPitchResult(gameData);
+
+    if (gameData.getThreeStrike()) {
+      await continueOrEndGame(gameData);
+    }
   }
 }
 exports.gameStart = gameStart;
