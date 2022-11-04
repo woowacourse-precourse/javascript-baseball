@@ -70,7 +70,9 @@ class App {
   }
 
   printHint(answer) {
-    Console.print(this.gameManager.getHint(answer));
+    Console.print(
+      this.gameManager.getHint(this.gameManager.computerNumbers, answer),
+    );
   }
 
   gameOver() {

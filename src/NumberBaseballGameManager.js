@@ -34,9 +34,9 @@ class NumberBaseballGameManager {
     return [...numberSet];
   }
 
-  getHint(answer) {
+  getHint(computerNumbers, answer) {
     const [strikeCount, ballCount] = this.getBallCounts(
-      this.computerNumbers,
+      computerNumbers,
       answer,
     );
     const hintType = this.getHintType(strikeCount, ballCount);
