@@ -51,7 +51,8 @@ class App {
     else result = `낫싱`;
 
     MissionUtils.Console.print(result);
-    if (ball && strike) this.inputRestartOrEnd();
+    if (strike === 3) this.inputRestartOrEnd();
+    else this.inputNumbers(answers);
   };
 
   inputNumbers(answers) {
