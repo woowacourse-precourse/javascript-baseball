@@ -1,25 +1,25 @@
 class GameData {
   constructor() {
-    this.state = true;
-    this.threeStrike = false;
+    this.threeStrikeState = false;
+    this.computerRandomNumbers = [];
     this.ball = 0;
     this.strike = 0;
   }
 
-  getState() {
-    return this.state;
+  getComputerRandomNumbers() {
+    return this.computerRandomNumbers;
   }
 
-  setState(state) {
-    this.state = state;
+  setComputerRandomNumbers(computerRandomNumbers) {
+    this.computerRandomNumbers = computerRandomNumbers;
   }
 
-  getThreeStrike() {
-    return this.threeStrike;
+  getThreeStrikeState() {
+    return this.threeStrikeState;
   }
 
-  setThreeStrike(threeStrike) {
-    this.threeStrike = threeStrike;
+  setgetThreeStrikeState(threeStrikeState) {
+    this.threeStrikeState = threeStrikeState;
   }
 
   getBall() {
