@@ -12,9 +12,13 @@ class App {
     MissionUtils.Console.print(APP_MESSAGE.hello);
   }
 
-  play() {
+  async play() {
     this.computer = new Computer();
     this.user = new User();
+    await this.user.getUserInput();
+    this.user.convertStringToNum();
+    this.user.convertNumToArray();
+    this.user.checkUserInput();
   }
 }
 
