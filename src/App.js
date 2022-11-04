@@ -16,11 +16,7 @@ class App {
   #random;
 
   constructor() {
-    this.#random = Random.pickUniqueNumbersInRange(
-      RANDOMLIST.STARTPOINT,
-      RANDOMLIST.ENDPOINT,
-      RANDOMLIST.COUNT,
-    );
+    this.#random = Random.pickUniqueNumbersInRange(RANDOMLIST.STARTPOINT, RANDOMLIST.ENDPOINT, RANDOMLIST.COUNT);
   }
 
   get3RandomNumbers() {
@@ -32,9 +28,7 @@ class App {
   }
 
   countStrike(random, input) {
-    return input.filter((inputItem, index) =>
-      this.isStrike(random[index], inputItem),
-    ).length;
+    return input.filter((inputItem, index) => this.isStrike(random[index], inputItem)).length;
   }
 
   isBall(random, input, numberIndex) {
@@ -62,9 +56,11 @@ class App {
 
     if (ball === 0 && strike === 0) return `${BASEBALL.NOTHING}`;
 
-    return [this.getBallToString(ball), this.getStrikeToString(strike)]
-      .join(' ')
-      .trim();
+    return [this.getBallToString(ball), this.getStrikeToString(strike)].join(' ').trim();
+  }
+
+  isStrikeOut(random, input) {
+    return this.countStrike(random, input) === 3;
   }
 
   play() {}
