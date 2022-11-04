@@ -13,6 +13,10 @@ class BaseballGame {
     this.getUserGuess();
   }
 
+  end() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
+
   getUserGuess() {
     Console.readLine('숫자를 입력해주세요 : ', (guess) => {
       const userGuessToArray = guess.split('').map(Number);
@@ -26,6 +30,12 @@ class BaseballGame {
     const { strike, ball } = this.getResult();
     const resultMessage = this.createResultMessage(strike, ball);
     Console.print(resultMessage);
+
+    if (strike === 3) {
+      this.end();
+      return;
+    }
+    this.getUserGuess();
   }
 
   getResult() {
