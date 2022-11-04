@@ -38,12 +38,33 @@ class App {
 
   countScore(computer, user) {
     this.isError(user);
+    this.calculateScore(computer, user);
   }
 
   isError(number) {
     if (number.length !== 3 || isNaN(number)) {
       throw "Parameter is not a number!";
     }
+  }
+
+  calculateScore(computer, user) {
+    let ball = 0;
+    let strike = 0;
+
+    const intersection = [...computer].filter((number) =>
+      [...user].includes(number)
+    );
+
+    intersection.forEach((number) => {
+      ball++;
+
+      if (computer.indexOf(number) === user.indexOf(number)) {
+        ball--;
+        strike++;
+      }
+    });
+
+    return [ball, strike];
   }
 }
 
