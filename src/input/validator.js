@@ -1,3 +1,5 @@
+const { NUMBER_LENGTH, ERROR_MESSAGE } = require('../constant/constant');
+
 const errorMessage = {
   print(message) {
     return { isValid: false, message };
@@ -5,20 +7,20 @@ const errorMessage = {
 };
 
 function inputValidator(input) {
-  if (input.length !== 3) {
-    return errorMessage.print('자릿수를 확인해주세요!');
+  if (input.length !== NUMBER_LENGTH) {
+    return errorMessage.print(ERROR_MESSAGE.length);
   }
 
   if (isNaN(input)) {
-    return errorMessage.print('숫자를 입력해주세요!');
+    return errorMessage.print(ERROR_MESSAGE.type);
   }
 
   if (input.includes('0')) {
-    return errorMessage('0이 아닌 숫자를 입력해주세요!');
+    return errorMessage.print(ERROR_MESSAGE.range);
   }
 
-  if ([...new Set(input)].length !== 3) {
-    return errorMessage('중복되지 않은 수를 입력해주세요!');
+  if ([...new Set(input)].length !== NUMBER_LENGTH) {
+    return errorMessage.print(ERROR_MESSAGE.duplication);
   }
 
   return { isValid: true };

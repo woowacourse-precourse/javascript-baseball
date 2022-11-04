@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { NUMBER_LENGTH } = require('../constant/constant');
 
 function addRandomNumber(numberArr) {
   const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -11,7 +12,7 @@ function addRandomNumber(numberArr) {
 function createRandomNumber() {
   const numberArr = [];
 
-  while (numberArr.length < 3) {
+  while (numberArr.length < NUMBER_LENGTH) {
     addRandomNumber(numberArr);
   }
 
