@@ -50,3 +50,5 @@
 - [ ] 추리 숫자와 랜덤 숫자의 일치 여부 확인하는 함수
 
 # 💻 순서도
+
+<img width="1146" alt="Flow Chart" src="https://user-images.githubusercontent.com/86355699/200002856-888cf83d-d12d-44de-9103-0198a6b7c75d.png">
