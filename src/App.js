@@ -3,6 +3,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.computer = [];
+    this.ball = 0;
+    this.strike = 0;
   }
 
   play() {
@@ -22,8 +24,8 @@ class App {
   }
 
   start() {
-    let ball = 0;
-    let strike = 0;
+    this.ball = 0;
+    this.strike = 0;
 
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
       if (answer.length != 3 && (answer != 1) & (answer != 2))
@@ -31,19 +33,19 @@ class App {
 
       if (answer != 2 && answer != 1) {
         for (let i = 0; i < this.computer.length; i++) {
-          if (i == this.computer.indexOf(parseInt(answer[i]))) strike++;
-          else if (this.computer.includes(parseInt(answer[i]))) ball++;
+          if (i == this.computer.indexOf(parseInt(answer[i]))) this.strike++;
+          else if (this.computer.includes(parseInt(answer[i]))) this.ball++;
         }
 
-        if (ball > 0 && strike > 0) {
-          MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-        } else if (ball > 0 && strike == 0) {
-          MissionUtils.Console.print(`${ball}볼`);
-        } else if (ball == 0 && strike > 0 && strike != 3) {
-          MissionUtils.Console.print(`${strike}스트라이크`);
-        } else if (ball == 0 && strike == 0) {
+        if (this.ball > 0 && this.strike > 0) {
+          MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+        } else if (this.ball > 0 && this.strike == 0) {
+          MissionUtils.Console.print(`${this.ball}볼`);
+        } else if (this.ball == 0 && this.strike > 0 && this.strike != 3) {
+          MissionUtils.Console.print(`${this.strike}스트라이크`);
+        } else if (this.ball == 0 && this.strike == 0) {
           MissionUtils.Console.print("낫싱");
-        } else if (strike == 3) {
+        } else if (this.strike == 3) {
           MissionUtils.Console.print("3스트라이크");
           MissionUtils.Console.print(
             "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
