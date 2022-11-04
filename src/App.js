@@ -57,10 +57,17 @@ const discriminator = (userNumbers, refNumbers) => {
 class App {
   async play() {
     printer("숫자 야구 게임을 시작합니다.");
+    let discrimination = "";
     const refNumbersArr = refNumbersGetter();
-    const usersInput = await userNumbersGetter();
-    const userNumbersArr = stringToArrConverter(usersInput);
-    const discrimination = discriminator(userNumbersArr, refNumbersArr);
+
+    while (discrimination !== "3스트라이크") {
+      const usersInput = await userNumbersGetter();
+      const userNumbersArr = stringToArrConverter(usersInput);
+      discrimination = discriminator(userNumbersArr, refNumbersArr);
+      printer(refNumbersArr);
+      printer(userNumbersArr);
+      printer(discrimination);
+    }
   }
 }
 
