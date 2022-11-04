@@ -14,4 +14,15 @@ describe("구현 기능 목록 테스트", () => {
     app.printStartMsg();
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
+  test("컴퓨터의 세자리 수 만들기", () => {
+    const app = new App();
+    // amend 로 처리
+    const computerNum = app.pickComputerNum();
+    let answerArr = computerNum.split("");
+    let duplicates = answerArr.filter((value, index) => {
+      return index !== answerArr.indexOf(value);
+    });
+    expect(computerNum).toMatch(/^[1-9]{3}$/); // 세자리 숫자 정규표현식
+    expect(duplicates.length).toBe(0);
+  });
 });
