@@ -46,8 +46,8 @@ describe("입력 유효성 검사", () => {
     }).toThrow();
   });
 
-  test("입력된 값이 숫자가 아닌 경우 예외 발생", () => {
-    const answers = ["가나다", "abc", "$#@"];
+  test("입력된 값이 1~9까지의 숫자가 아닌 경우 예외 발생", () => {
+    const answers = ["가나다", "abc", "$#@", "012"];
 
     mockQuestions(answers);
 
