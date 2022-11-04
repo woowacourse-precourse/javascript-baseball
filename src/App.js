@@ -6,6 +6,7 @@ class App {
     this.NUMBER_LENGTH_MODE = 3;
     this.RESTART = "1";
     this.EXIT = "2";
+    this.IS_NEWGAME = true;
   }
 
   play() {
@@ -14,21 +15,24 @@ class App {
   }
 
   startGame() {
-    const answer = this.genAnswer();
+    if (this.IS_NEWGAME) {
+      this.answer = this.genAnswer();
+    }
+
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
-      this.checktryNum(tryNum, answer);
+      this.checktryNum(tryNum);
     });
   }
 
-  checktryNum(tryNum, answer) {
+  checktryNum(tryNum) {
     this.checkValid(tryNum);
-    const IS_ANSWER = this.checkAnswer(tryNum, answer);
+    const IS_ANSWER = this.checkAnswer(tryNum, this.answer);
     if (IS_ANSWER) {
       return;
     }
     const tryNumArr = tryNum.split("");
     const BallStrikeResult = tryNumArr.map((tryNumEle, tryNumEleIdx) =>
-      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, answer)
+      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
     );
 
     const resultSentence = this.getResultSentence(BallStrikeResult);
@@ -38,6 +42,7 @@ class App {
     } else {
       MissionUtils.Console.print(resultSentence);
     }
+    this.IS_NEWGAME = false;
     this.startGame();
   }
 
@@ -83,6 +88,7 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
       (input) => {
         if (this.RESTART === input) {
+          this.IS_NEWGAME = true;
           this.startGame();
         } else if (this.EXIT === input) {
           MissionUtils.Console.close();
