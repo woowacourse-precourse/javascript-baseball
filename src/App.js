@@ -1,8 +1,22 @@
+function checkInput(input){
+  let newArray = [];
+  for (let i = 0;  i < input.length; i++){
+    if(!newArray.includes(input[i])){
+      newArray.push(input[i]);
+    } else{
+      return false;
+    }
+  }
+  return true;
+}
+
 function startGame(){
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-    // console.log(getHint(answer)); 힌트 출력
-    console.log('숫자 :', answer);
-    pickComputerNumber();
+  const computer = pickComputerNumber();
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    const userInputArray = [...userInput];
+    if (checkInput(userInputArray)){
+      getHint(userInputArray, computer);
+    }
     MissionUtils.Console.close();
   });
 }
@@ -29,15 +43,17 @@ function endGame(){
 
 
 function pickComputerNumber() {
-  const computer = [];
-  while (computer.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!computer.includes(number)) {
-      computer.push(number);
-    }
-  }
-  console.log(computer);
+  // const computer = [];
+  // while (computer.length < 3) {
+  //   const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  //   if (!computer.includes(number)) {
+  //     computer.push(number);
+  //   }
+  // }
+  return MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
 }
+
+
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -56,5 +72,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const app = new App();
 // app.play();
-endGame();
+// endGame();
+console.log(checkInput("112"));
+// pickComputerNumber();
 module.exports = App;
