@@ -1,4 +1,9 @@
 class Checker {
+  checker = {
+    min: 123,
+    max: 987,
+  };
+
   setter([answer, answerArr]) {
     this.answer = answer;
     this.answerArr = answerArr;
@@ -13,7 +18,7 @@ class Checker {
   }
 
   checkRange() {
-    return this.answer >= 123 && this.answer <= 987;
+    return this.answer >= this.checker.min && this.answer <= this.checker.max;
   }
 
   checkDuplication() {

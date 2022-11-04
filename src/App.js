@@ -1,56 +1,92 @@
 import MissionUtils from '@woowacourse/mission-utils';
 import User from './User.js';
-import Checker from './Checker.js';
-import Computer from './Computer.js';
 import Game from './Game.js';
+import Computer from './Computer.js';
+import Checker from './Checker.js';
 
 class App {
+  message = {
+    start: '숫자 야구 게임을 시작합니다.',
+    end: '숫자 야구 게임을 종료합니다.',
+    error: '잘못된 입력 값입니다.',
+  };
+
   constructor() {
-    this.isGameRun = true;
+    this.dataInit();
+  }
+
+  dataInit() {
+    this.user = new User();
+    this.game = new Game();
+    this.computer = new Computer();
+    this.checker = new Checker();
+    this.computer.setAnswer();
+    this.setGameState(true);
+  }
+
+  setGameState(state) {
+    this.isGameRun = state;
   }
 
   async play() {
-    this.appStartMessagePrint();
-    this.user = new User();
-    this.computer = new Computer();
-    this.computer.setter();
+    this.printAppMessage(this.message.start);
 
     await this.runGame();
 
-    this.appEndMessagePrint();
+    this.printAppMessage(this.message.end);
   }
 
-  appStartMessagePrint() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  printAppMessage(msg) {
+    MissionUtils.Console.print(msg);
   }
 
   async runGame() {
     while (this.isGameRun) {
-      await this.user.enterAnswer();
-      this.user.convertNumToArray();
-      this.checker = new Checker();
-      this.checker.setter(this.user.getter());
-      if (!this.checker.checkUserInput()) {
-        throw new Error('잘못된 입력 값입니다.');
-      }
-      this.game = new Game();
-      this.game.countBall(this.computer.getter(), this.user.getter()[1]);
-      this.game.countStrike(this.computer.getter(), this.user.getter()[1]);
-      this.game.printResultMessage();
-      this.isGameRun = this.game.checkGameRun();
+      await this.getUserAnswer();
+      this.getGameResult();
+
       if (!this.isGameRun) {
-        await this.game.checkRestart();
-        this.isGameRun = this.game.checkRestartNum();
-        if (this.isGameRun) {
-          this.computer.setter();
-        }
+        await this.decideRestartOrEndGame();
       }
     }
   }
 
-  appEndMessagePrint() {
-    MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
+  async getUserAnswer() {
+    await this.user.enterAnswer();
+    this.user.convertNumToArray();
+    this.checkUserAnswer();
+  }
+
+  checkUserAnswer() {
+    this.checker.setter(this.user.getter());
+
+    if (!this.checker.checkUserInput()) {
+      throw new Error(this.message.error);
+    }
+  }
+
+  getGameResult() {
+    const comAnswer = this.computer.getter();
+    const userAnswer = this.user.getter()[1];
+
+    this.game.setAnswer(comAnswer, userAnswer);
+    this.game.countBall();
+    this.game.countStrike();
+    this.game.printResultMessage();
+    this.setGameState(this.game.checkGameRun());
+  }
+
+  async decideRestartOrEndGame() {
+    await this.game.getRestartOrEndNum();
+    this.setGameState(this.game.checkRestartOrEndNum());
+
+    if (this.isGameRun) {
+      this.computer.setAnswer();
+    }
   }
 }
+
+const app = new App();
+app.play();
 
 export default App;

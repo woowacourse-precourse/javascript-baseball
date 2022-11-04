@@ -1,13 +1,17 @@
 import MissionUtils from '@woowacourse/mission-utils';
 
 class User {
+  message = {
+    waitAnswer: '숫자를 입력해주세요 : ',
+  };
+
   getter() {
     return [this.answer, this.answerArr];
   }
 
   enterAnswer() {
     return new Promise(resolve => {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
+      MissionUtils.Console.readLine(this.message.waitAnswer, answer => {
         this.answer = parseInt(answer, 10);
         resolve();
       });

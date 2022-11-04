@@ -1,105 +1,121 @@
 import MissionUtils from '@woowacourse/mission-utils';
-import Computer from './Computer.js';
+
+const RESTART = 1;
+const ZERO = 0;
 
 class Game {
+  message = {
+    nothing: '낫싱',
+    threeStrike: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+    ball: '볼',
+    strike: '스트라이크',
+    waitAnswer: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  };
+
   constructor() {
-    this.isRun = true;
+    this.setGameState(true);
   }
 
-  countBall(comAnswer, userAnswer) {
-    console.log(comAnswer, userAnswer);
-    this.ballNum = comAnswer.filter(comAnswerValue => {
-      return (
-        userAnswer.indexOf(comAnswerValue) !== -1 &&
-        comAnswer.indexOf(comAnswerValue) !== userAnswer.indexOf(comAnswerValue)
-      );
+  setGameState(state) {
+    this.isGameRun = state;
+  }
+
+  setAnswer(comAnswer, userAnswer) {
+    this.comAnswer = comAnswer;
+    this.userAnswer = userAnswer;
+  }
+
+  countBall() {
+    this.ballNum = this.comAnswer.filter(comAnswerValue => {
+      return this.isSameNumberAndDifferentPlace(comAnswerValue);
     }).length;
   }
 
-  countStrike(comAnswer, userAnswer) {
-    this.strikeNum = comAnswer.filter(comAnswerValue => {
-      return comAnswer.indexOf(comAnswerValue) === userAnswer.indexOf(comAnswerValue);
+  isSameNumberAndDifferentPlace(comAnswerValue) {
+    return (
+      this.userAnswer.indexOf(comAnswerValue) !== -1 &&
+      this.comAnswer.indexOf(comAnswerValue) !== this.userAnswer.indexOf(comAnswerValue)
+    );
+  }
+
+  countStrike() {
+    this.strikeNum = this.comAnswer.filter(comAnswerValue => {
+      return this.isSameNumberAndSamePlace(comAnswerValue);
     }).length;
+  }
+
+  isSameNumberAndSamePlace(comAnswerValue) {
+    return this.comAnswer.indexOf(comAnswerValue) === this.userAnswer.indexOf(comAnswerValue);
+  }
+
+  printResultMessage() {
+    if (this.isNothing()) {
+      this.msg = this.message.nothing;
+    }
+
+    if (this.isThreeStrike()) {
+      this.setGameState(false);
+      this.msg = this.message.threeStrike;
+    }
+
+    if (this.isOnlyBall()) {
+      this.msg = `${this.ballNum}${this.message.ball}`;
+    }
+
+    if (this.isOnlyStrike()) {
+      this.msg = `${this.strikeNum}${this.message.strike}`;
+    }
+
+    if (this.isBallAndStrike()) {
+      this.msg = `${this.ballNum}${this.message.ball} ${this.strikeNum}${this.message.strike}`;
+    }
+
+    this.printMessage();
+  }
+
+  isNothing() {
+    return this.ballNum === ZERO && this.strikeNum === ZERO;
+  }
+
+  isThreeStrike() {
+    return this.ballNum === ZERO && this.strikeNum === 3;
+  }
+
+  isOnlyBall() {
+    return this.ballNum !== ZERO && this.strikeNum === ZERO;
+  }
+
+  isOnlyStrike() {
+    return this.ballNum === ZERO && this.strikeNum !== ZERO;
+  }
+
+  isBallAndStrike() {
+    return this.ballNum !== ZERO && this.strikeNum !== ZERO;
   }
 
   printMessage() {
     MissionUtils.Console.print(this.msg);
   }
 
-  isNothing() {
-    return this.ballNum === 0 && this.strikeNum === 0;
-  }
-
-  isThreeStrike() {
-    return this.ballNum === 0 && this.strikeNum === 3;
-  }
-
-  isOnlyBall() {
-    return this.ballNum !== 0 && this.strikeNum === 0;
-  }
-
-  isOnlyStrike() {
-    return this.ballNum === 0 && this.strikeNum !== 0;
-  }
-
-  isBallAndStrike() {
-    return this.ballNum !== 0 && this.strikeNum !== 0;
-  }
-
-  printResultMessage() {
-    this.msg = '';
-
-    if (this.isNothing()) {
-      this.msg = '낫싱';
-    }
-
-    if (this.isThreeStrike()) {
-      this.isRun = this.toggleIsRun();
-      this.msg = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
-    }
-
-    if (this.isOnlyBall()) {
-      this.msg = `${this.ballNum}볼`;
-    }
-
-    if (this.isOnlyStrike()) {
-      this.msg = `${this.strikeNum}스트라이크`;
-    }
-
-    if (this.isBallAndStrike()) {
-      this.msg = `${this.ballNum}볼 ${this.strikeNum}스트라이크`;
-    }
-
-    this.printMessage();
-  }
-
-  toggleIsRun() {
-    return !this.isRun;
-  }
-
   checkGameRun() {
-    return this.isRun;
+    return this.isGameRun;
   }
 
-  checkRestart() {
+  getRestartOrEndNum() {
     return new Promise(resolve => {
-      MissionUtils.Console.readLine(
-        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-        num => {
-          this.restartNum = parseInt(num, 10);
-          resolve();
-        }
-      );
+      MissionUtils.Console.readLine(this.message.waitAnswer, num => {
+        this.restartNum = parseInt(num, 10);
+        resolve();
+      });
     });
   }
 
-  checkRestartNum() {
-    if (this.restartNum === 1) {
-      this.isRun = this.toggleIsRun();
-    } else if (this.restartNum !== 2) {
+  checkRestartOrEndNum() {
+    if (this.restartNum === RESTART) {
+      this.setGameState(true);
     }
 
-    return this.isRun;
+    return this.isGameRun;
   }
 }
 

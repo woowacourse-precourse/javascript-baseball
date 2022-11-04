@@ -1,12 +1,22 @@
 import MissionUtils from '@woowacourse/mission-utils';
 
 class Computer {
+  number = {
+    min: 1,
+    max: 9,
+    count: 3,
+  };
+
   getter() {
     return this.answer;
   }
 
-  setter() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  setAnswer() {
+    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(
+      this.number.min,
+      this.number.max,
+      this.number.count
+    );
   }
 }
 
