@@ -47,4 +47,20 @@ function input(text) {
   return result;
 }
 
+function baseballGame(randomNumber, userInput) {
+  let strike = 0;
+  let ball = 0;
+  
+  for (let val of userInput) {
+    if (randomNumber.indexOf(val) === -1)
+      continue;
+    else if (randomNumber.indexOf(val) === userInput.indexOf(val) && randomNumber.indexOf(val) !== -1)
+      strike += 1;
+    else if (randomNumber.indexOf(val) !== userInput.indexOf(val) && randomNumber.indexOf(val) !== -1)
+      ball += 1;
+  }
+
+  return [strike, ball];
+}
+
 module.exports = App;
