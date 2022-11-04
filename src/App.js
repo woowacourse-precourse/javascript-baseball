@@ -6,15 +6,13 @@ class App {
   }
 
   getAnswer() {
-    let answer = {};
-    let index = 1;
+    let answer = [];
 
-    while (index <= 3) {
+    while (answer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
 
-      if (answer[number] === undefined) {
-        answer[number] = index;
-        index += 1;
+      if (!answer.includes(number)) {
+        answer.push(number);
       }
     }
 
