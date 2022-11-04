@@ -1,10 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-
-  constructor() {
-    this.answer = []
-  }
+  answer = []
+  userNumber = []
 
   play() {}
 
@@ -16,6 +14,16 @@ class App {
       }
     }
   }
+
+  userInputAnswer() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      this.userNumber = inputNumber.split("").map(num => Number(num));
+      MissionUtils.Console.close();
+    })
+    this.inputAnswerException()
+  }
+
+  inputAnswerException()
 }
 
 const baseBallGame = new App;
