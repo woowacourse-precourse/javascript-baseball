@@ -39,7 +39,7 @@ function printPitchResult(gameData) {
     Console.print(`${strike}스트라이크`);
     if (strike === 3) {
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      gameData.setThreeStrike(true);
+      gameData.setThreeStrikeState(true);
     }
     return;
   }
@@ -67,7 +67,6 @@ async function continueOrEndGame(gameData) {
   }
   return gameData.setThreeStrike(false);
 }
-
 function gameStart(gameData) {
   Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
     const computerRandomNumbers = gameData.getComputerRandomNumbers();
@@ -80,6 +79,9 @@ function gameStart(gameData) {
 
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
     printPitchResult(gameData);
+    if (!gameData.getThreeStrikeState()) {
+      return gameStart(gameData);
+    }
 
     Console.close();
   });
