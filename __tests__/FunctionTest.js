@@ -1,4 +1,9 @@
-const { App, refNumbersGetter, stringToArrConverter } = require("../src/App");
+const {
+  App,
+  refNumbersGetter,
+  stringToArrConverter,
+  discriminator,
+} = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const getLogSpy = () => {

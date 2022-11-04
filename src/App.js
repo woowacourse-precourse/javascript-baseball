@@ -46,8 +46,10 @@ const discriminator = (userNumbers, refNumbers) => {
   }
 
   discrimination =
-    (ballCount ? `${ballCount}볼` : "") +
-      (strikeCount ? `${strikeCount}스트라이크` : "") || "낫싱";
+    ballCount && strikeCount
+      ? `${ballCount}볼 ${strikeCount}스트라이크`
+      : (ballCount ? `${ballCount}볼` : "") +
+          (strikeCount ? `${strikeCount}스트라이크` : "") || "낫싱";
 
   return discrimination;
 };
@@ -56,16 +58,19 @@ class App {
   async play() {
     printer("숫자 야구 게임을 시작합니다.");
     const refNumbersArr = refNumbersGetter();
-    printer(refNumbersArr);
     const usersInput = await userNumbersGetter();
     const userNumbersArr = stringToArrConverter(usersInput);
     const discrimination = discriminator(userNumbersArr, refNumbersArr);
-    printer(userNumbersArr);
-    printer(discrimination);
   }
 }
 
 const app = new App();
 app.play();
 
-module.exports = { App, printer, refNumbersGetter, stringToArrConverter };
+module.exports = {
+  App,
+  printer,
+  refNumbersGetter,
+  stringToArrConverter,
+  discriminator,
+};
