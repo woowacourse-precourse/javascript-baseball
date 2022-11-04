@@ -87,4 +87,27 @@ describe("숫자 야구 게임", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1볼 1스트라이크'));
   });
+
+  test("게임 종료 후 재시작", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["135", "1", "589", "2"];
+    const logSpy = getLogSpy();
+
+    const messages = [
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
