@@ -49,5 +49,25 @@ describe("야구 게임 테스트", () => {
 
     expect(result).toEqual("456");
   });
+
+  test("예외사항: 사용자 숫자 길이가 올바르지 않음", () => {
+    const computer = "123";
+    const user = "1234";
+
+    expect(() => {
+      const app = new App();
+      app.countScore(computer, user);
+    }).toThrow();
+  });
+
+  test("예외사항: 사용자 입력 값이 숫자가 아님", () => {
+    const computer = "123";
+    const user = "abc";
+
+    expect(() => {
+      const app = new App();
+      app.countScore(computer, user);
+    }).toThrow();
+  });
 });
 
