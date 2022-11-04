@@ -69,8 +69,38 @@ class App {
     return message;
   };
 
+  showMessage = (message) => {
+    MissionUtils.Console.print(message);
+    if (message === "3스트라이크") {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        (answer) => {
+          if (answer === 1) {
+            MissionUtils.Console.print("리플레이");
+          } else {
+            MissionUtils.Console.print(" 게임 종료");
+          }
+        }
+      );
+    } else {
+      this.compareNumbers();
+    }
+  };
+
+  compareNumbers = () => {
+    const userNumber = this.getUserNumber();
+    const strikeAndBallNumber = this.getStrikeAndBallNumber(
+      this.computerNumber,
+      userNumber
+    );
+    const result = this.convertNumberToMessage(strikeAndBallNumber);
+    this.showMessage(result);
+  };
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.compareNumbers();
   }
 }
 
