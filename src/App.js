@@ -14,21 +14,23 @@ class App {
   }
 
   isValidNumberInput(userInput) {
-    if (userInput.length !== NUMBERS.REQUIRED_LENGHT) {
+    const inputs = [...userInput];
+    if (inputs.length !== NUMBERS.REQUIRED_LENGHT) {
       return false;
     }
-
-    if (!parseInt(userInput)) {
-      return false;
-    }
-
+  
     const set = new Set([...userInput])
     if (set.size !== userInput.length) {
       return false;
     }
 
-    const unvalidNumbers = [...userInput].filter(number => number < NUMBERS.RANDOM_MIN || number > NUMBERS.RANDOM_MAX);
-    if (unvalidNumbers.length > 0) {
+    const isNotNumbers = inputs.filter(number => isNaN(number));
+    if (isNotNumbers.length > 0) {
+      return false;
+    }
+
+    const outOfRangeNums = inputs.filter(number => number < NUMBERS.RANDOM_MIN || number > NUMBERS.RANDOM_MAX);
+    if (outOfRangeNums.length > 0) {
       return false;
     }
     return true;
