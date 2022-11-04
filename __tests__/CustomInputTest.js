@@ -34,7 +34,7 @@ describe('App 클래스 - end()', () => {
     const app = new App();
     app.end();
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('종료'));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
     expect(closeLogSpy).toBeCalled();
   });
 });
