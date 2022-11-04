@@ -1,5 +1,5 @@
-import { START_MESSAGE } from './constant';
 const MissionUtils = require('@woowacourse/mission-utils');
+const Constants = require('./constant');
 
 class App {
   play() {
@@ -9,7 +9,7 @@ class App {
 }
 
 function printGameStartMsg() {
-  MissionUtils.Console.print(START_MESSAGE);
+  MissionUtils.Console.print(Constants.START_MESSAGE);
 }
 
 function createComputerNumber() {
