@@ -44,6 +44,14 @@ class App {
 
     return duplicateCheckSet.size === MAX_NUMBER_LENGTH;
   }
+  hasOnlyValidRangeNumber(userInput) {
+    const isValidRangeNumber = (number) => MIN_NUMBER_RANGE <= number && number <= MAX_NUMBER_RANGE;
+
+    return userInput
+      .split("")
+      .map((eachLetter) => parseInt(eachLetter), 10)
+      .every(isValidRangeNumber);
+  }
 }
 
 const app = new App();
