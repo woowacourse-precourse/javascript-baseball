@@ -1,14 +1,13 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 /**
- * @description 유저가 입력한 값이 정상 데이터인지 검사
- */
-/**
  * @description 유저입력값의 유효성을 확인하는 기능
  */
 function checkVaildUserInputValue(userInput) {
   let check = /^[1-9]+$/;
-  if (!userInput.length === 3) {
+  const set = new Set(userInput);
+
+  if (userInput.length !== 3) {
     throw new Error("3자리의 숫자를 입력해야합니다.");
   }
   for (let i = 0; i < userInput.length; i++) {
@@ -16,15 +15,17 @@ function checkVaildUserInputValue(userInput) {
       throw new Error("1~9까지의 숫자만 입력 가능합니다.");
     }
   }
+  if (set.size !== userInput.length) {
+    throw new Error("중복 숫자를 입력할 수 없습니다.");
+  }
 }
 
 /**
  * @description 유저가 입력한 값이 답과 일치하는지 비교
  */
-function checkAnswer(answerNumber, userInput) {
+function UserInputValueCompareToCPUAnswer(answerNumber, userInput) {
   let splitAnswerNumber = [];
   for (let i = 0; i < answerNumber.length; i++) {}
-  console.log(splitAnswerNumber);
 }
 
 /**
@@ -46,13 +47,12 @@ function cpuMakeAnswer() {
 class App {
   constructor() {}
   play() {
-    const userInput = [1, 2, 3];
     // const answerNumber = cpuMakeAnswer();
     const answerNumber = [3, 2, 9];
-
+    const userInput = [1, 2, 3];
     Console.print("숫자 야구게임을 시작합니다.");
     checkVaildUserInputValue(userInput);
-    checkAnswer(answerNumber, userInput);
+    UserInputValueCompareToCPUAnswer(answerNumber, userInput);
   }
 
   callResult() {}
