@@ -1,13 +1,15 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Random } = require("@woowacourse/mission-utils");
 
-function pickedNumberByComputer() {
-  let pickedNumber = [];
-  while (pickedNumber.length < 3) {
-    let number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!pickedNumber.includes(number)) pickedNumber.push(number);
+class PickedNumberByComputer {
+  randomNumInRange() {
+    let pickedNumber = [];
+    while (pickedNumber.length < 3) {
+      let number = Random.pickNumberInRange(1, 9);
+      if (!pickedNumber.includes(number)) pickedNumber.push(number);
+    }
+
+    return pickedNumber;
   }
-
-  return pickedNumber;
 }
 
-module.exports = pickedNumberByComputer;
+module.exports = PickedNumberByComputer;
