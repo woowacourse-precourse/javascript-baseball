@@ -4,6 +4,7 @@ function numberBaseballReferee(strike, ball){
     allStrike(strike,ball);
     allBall(strike, ball);
     strikeAndBall(strike,ball);
+    nothing(strike, ball);
 }
 
 function allStrike(strike, ball){
@@ -26,3 +27,11 @@ function strikeAndBall(strike,ball){
         MissionUtils.console.print(`${strike}`+스트라이크 , `${ball}` + 볼);
     }
 }
+
+function nothing(strike, ball){
+    if(strike == 0 && ball == 0 ){
+        MissionUtils.console.print('낫싱');
+    }
+}
+
+module.exports = numbers_baseball_referee
