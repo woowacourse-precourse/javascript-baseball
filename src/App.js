@@ -2,11 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.randomValue=makeRandomValue()
+    this.randomValue=''
     this.userValue=''
   }
 
   play() {
+    this.randomValue=makeRandomValue()
     MissionUtils.Console.print(this.randomValue)
     inputUserValue()
   }
@@ -16,7 +17,8 @@ class App {
   }
   
   checkcheck() {
-    checkAnswer(this.randomValue,this.userValue)
+    let regame=checkAnswer(this.randomValue,this.userValue)
+    whatsAfter(regame)
   }
 }
 
@@ -50,33 +52,25 @@ function isValidValue(number) {
   app.checkcheck()
 }
 
-function here() {
-  console.log('55555555555')
-}
-
 // 정답 검사
 function checkAnswer(computer,user) {
   const ball=countBall(computer,user)
   const strike=countScrike(computer,user)
   if (strike===3) {
     // 재시작 여부 묻는 함수 실행하기
-    here()
+    return (`3스트라이크`);
   }
   if (ball===0 && strike===0) {
-    MissionUtils.Console.print(`낫싱`);
-    // inputUserValue()
+    return (`낫싱`);
   }
   if (ball===0 && strike!==0) {
-    MissionUtils.Console.print(`${strike}스트라이크`);
-    // inputUserValue()
+    return (`${strike}스트라이크`);
   }
   if (ball!==0 && strike===0) {
-    MissionUtils.Console.print(`${ball}볼`);
-    // inputUserValue()
+    return (`${ball}볼`);
   }
   if (ball!==0 && strike!==0) {
-    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    // inputUserValue()
+    return (`${ball}볼 ${strike}스트라이크`);
   }
   
 }
@@ -91,8 +85,36 @@ const countScrike = (computer,user) => {
   return [...computer].filter((x,idx) => user[idx]===x).length
 }
 
+function whatsAfter(afterGame) {
+  if (afterGame===`3스트라이크`) {
+    MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
+    askRegame()
+  }
+  if (afterGame!==`3스트라이크`) {
+    MissionUtils.Console.print(afterGame)
+    inputUserValue()
+  }
+}
+
+function askRegame() {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',(answer)=> {
+    realReGame(answer)
+  })
+}
+
+function realReGame(num){
+  if (!num.match(/[1,2]{1}/)) {
+    throw ("잘못된 형식을 입력하였습니다. 게임을 종료합니다.")
+  }
+  if (num==='1') {
+    app.play()
+  }
+  if (num==='2') {
+    MissionUtils.Console.close();
+  }
+}
+
 // MissionUtils.Console.close()
 // MissionUtils.Console.print(randomValue);
 
 // module.exports = App;
-
