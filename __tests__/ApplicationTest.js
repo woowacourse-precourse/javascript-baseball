@@ -2,6 +2,7 @@ const App = require("../src/App");
 const MakeRandomNumber = require("../src/MakeRandomNumber");
 const CheckConstraints = require("../src/CheckConstraints");
 const GetUserIput = require("../src/GetUserInput");
+const GameResult = require("../src/GameResult");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -65,6 +66,30 @@ describe("숫자 야구 게임", () => {
     expect(readSpy).toHaveBeenCalledTimes(1);
     expect(constraintsSpy).toBeTruthy();
     expect(constraintsSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test("점수 산정", () => {
+    const gameResult = new GameResult();
+
+    gameResult.COMPUTER = [1, 2, 3];
+    gameResult.showGameResult("123");
+    expect(gameResult.strike).toEqual(3);
+    expect(gameResult.ball).toEqual(0);
+
+    gameResult.COMPUTER = [3, 2, 5];
+    gameResult.showGameResult("123");
+    expect(gameResult.strike).toEqual(1);
+    expect(gameResult.ball).toEqual(1);
+
+    gameResult.COMPUTER = [7, 2, 9];
+    gameResult.showGameResult("972");
+    expect(gameResult.strike).toEqual(0);
+    expect(gameResult.ball).toEqual(3);
+
+    gameResult.COMPUTER = [7, 2, 9];
+    gameResult.showGameResult("136");
+    expect(gameResult.strike).toEqual(0);
+    expect(gameResult.ball).toEqual(0);
   });
 
   test("게임 종료 후 재시작", () => {
