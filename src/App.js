@@ -1,14 +1,14 @@
-const {Random , Console} = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
 // class App {
 //   play() {}
 // }
 console.log('숫자 야구 게임을 시작합니다.');
 
-function setComputerNumber() {
+const setComputerNumber = () {
   let computerNumber = [];
   while (computerNumber.length < 3) {
-    const randomNumber = Random.pickNumberInRange(1,9);
-    if(!computerNumber.includes(randomNumber)){
+    const randomNumber = Random.pickNumberInRange(1, 9);
+    if (!computerNumber.includes(randomNumber)) {
       computerNumber.push(randomNumber);
     }
   }
@@ -16,42 +16,47 @@ function setComputerNumber() {
   return computerNumber;
 }
 
-function setUserNumber(computer) {
+const setUserNumber = (computer) => {
   let input;
   let strike = 0;
   let ball = 0;
   Console.readLine('숫자 3자리를 입력해주세요 : ', (num) => {
     input = num.toString().split("").map((str) => Number(str));
-    for(let i = 0; i < input.length; i++){
-      if(input[i] == computer[i]){
-        strike++;
-      }
-      else if(input.includes(computer[i])){
-        ball++;
-      }
-    }
-    if(strike > 0 && ball > 0){
-      console.log(`${strike} 스트라이크 ${ball} 볼`);
-      Console.close();
-      return false;
-    } else if(strike == 0 && ball > 0){
-      console.log(`${ball} 볼`);
-      Console.close();
-      return false;
-    } else if(strike > 0 && ball == 0){
-      console.log(`${strike} 스트라이크`);
-      Console.close();
-      return false;
-    }  else if(strike == 3) {
-      console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      Console.close();
-      return true;
-    } else {
-      console.log('낫싱');
-      Console.close();
-      return false;
-    }
+    checkNumber(input, computer);
   })
+}
+
+const checkNumber = (input, computer) => {
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] == computer[i]) {
+      strike++;
+    }
+    else if (input.includes(computer[i])) {
+      ball++;
+    }
+  }
+  if(strike < 3){
+    printCount(strike, ball);
+    setUserNumber(computer);
+  }
+  if(strike == 3){
+    printCount(strike, ball);
+    gameClear();
+  }
+}
+
+const printCount = (strike, ball) => {
+  // if (strike > 0 && ball > 0) {
+  //   console.log(`${strike} 스트라이크 ${ball} 볼`);
+  // } else if (strike == 0 && ball > 0) {
+  //   console.log(`${ball} 볼`);
+  // } else if (strike > 0 && ball == 0) {
+  //   console.log(`${strike} 스트라이크`);
+  // } else if (strike == 3) {
+  //   console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  // } else {
+  //   console.log('낫싱');
+  // }
 }
 
 let computer = setComputerNumber();
