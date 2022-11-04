@@ -44,7 +44,6 @@ class App {
     while (true) {
       this.initializer();
       await this.doBaseBall();
-
       if (this.err) {
         console.log("err");
       }
@@ -59,8 +58,22 @@ class App {
     this.checkBallValidity();
     if (!this.err) {
       this.judgeResult();
+      console.log(this.strike, this.ball);
+      this.printResult();
     }
   }
+
+  printResult = () => {
+    if ((this.strike === 0) & (this.ball === 0)) {
+      MissionUtils.Console.print("낫싱");
+    } else if ((this.strike === 0) & (this.ball !== 0)) {
+      MissionUtils.Console.print(`${this.ball}볼`);
+    } else if ((this.strike !== 0) & (this.ball === 0)) {
+      MissionUtils.Console.print(`${this.strike}스트라이크`);
+    } else {
+      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+    }
+  };
 
   judgeResult = () => {
     [...this.userAnswer].map((e, ballIdx) => {
@@ -69,7 +82,7 @@ class App {
   };
 
   countScore = (userAnswerBall, ballIdx) => {
-    if (this.answer[ballIdx] === userAnswerBall) {
+    if (this.answer[ballIdx] === parseInt(userAnswerBall)) {
       this.countStrike();
     } else if (this.answer.includes(userAnswerBall)) {
       this.countBall();
@@ -112,7 +125,9 @@ const endGame = () => {
 };
 
 const app = new App();
+console.log(app.answer);
 app.play();
+
 // app.createAnswer();
 
 module.exports = App;
