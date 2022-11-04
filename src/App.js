@@ -91,8 +91,8 @@ class App {
   }
 
   gameWin() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-    this.gameSelect()
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.gameSelect();
   }
 
   gameSelect() {
@@ -100,7 +100,23 @@ class App {
       this.selectNumber = Number(inputNumber);
       MissionUtils.Console.close();
     })
-    this.gameSelectException()
+    this.gameSelectException();
+  }
+
+  gameSeletException() {
+    try {
+      if (this.selectNumber !== 1 || this.selectNumber !== 2) {
+        throw new Error;
+      }
+      if (this.selectNumber === 1) {
+        this.startNewGame();
+      }
+      if (this.selectNumber === 2) {
+        this.gameEnd();
+      }
+    } catch {
+      this.gameEnd();
+    }
   }
 }
 
