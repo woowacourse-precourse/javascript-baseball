@@ -1,7 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    const computerNumber = this.generateRandomNumber();
+  }
 
   generateRandomNumber() {
     const computerNumbers = [];
