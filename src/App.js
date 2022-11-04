@@ -86,6 +86,8 @@ class App {
       restart = await reStartSelector();
       printer(restart);
     }
+
+    MissionUtils.Console.close();
   }
 }
 
