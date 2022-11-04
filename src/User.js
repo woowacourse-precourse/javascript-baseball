@@ -1,5 +1,6 @@
 const Mission = require('./Mission');
 const Compare = require('./Compare');
+const Computer = require('./Computer');
 
 class User extends Mission {
   constructor(computerNumbers) {
@@ -11,7 +12,7 @@ class User extends Mission {
     this.mission.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const userNumbers = this.makeNumberArray(answer);
       this.checkUserNumber(userNumbers);
-      this.compareNumbers();
+      this.compareNumbers(userNumbers);
     });
   }
   makeNumberArray(answer) {
@@ -34,10 +35,26 @@ class User extends Mission {
   compareNumbers(userNumbers) {
     const compare = new Compare(this.computerNumbers, userNumbers);
     if (compare.getResult() === 'clear') {
-      // 재시작 or 종료 선택
+      this.selectStartOrExit();
     } else {
       this.userInputStart();
     }
+  }
+  selectStartOrExit() {
+    this.mission.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (answer) => {
+        if (answer === '1') {
+          const computer = new Computer();
+          const newComputerNumbers = computer.getComputerNumbers();
+          this.computerNumbers = newComputerNumbers;
+          this.userInputStart();
+        }
+        if (answer === '2') {
+          this.mission.Console.close();
+        }
+      }
+    );
   }
 }
 
