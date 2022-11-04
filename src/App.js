@@ -45,6 +45,15 @@ class App {
     return true;
   }
 
+  countBall(computerNumber, playerNumber) {
+    return playerNumber.reduce((acc, cur) => {
+      if (computerNumber.includes(cur)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  }
+
   play() {}
 }
 
