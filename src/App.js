@@ -14,6 +14,8 @@ const ment = {
 class App {
   play() {
     this.startPrint();
+
+    this.endGamePrint();
   }
   // - 랜덤 3자리 생성하는 기능
   createAnwser() {}
@@ -36,8 +38,12 @@ class App {
   //   2. 사용자 질문을 받는 기능
   // - 사용자 입력 예외처리하는 기능 ( 게임 진행 완료 후 )
   checkUserProgressInput() {}
-  // - 종료 멘트 날리는 기능
-  endGamePrint() {}
+
+  endGamePrint() {
+    MissionUtils.Console.print(ment.end);
+    MissionUtils.Console.close();
+    return;
+  }
 }
 
 const app = new App();
