@@ -45,7 +45,36 @@ class App {
     INPUT_ARRAY.forEach(CHECK_EXCEPTION);
   }
 
-  compareUserInputWithAnswer() {}
+  increaseBaseball(digit, index) {
+    let strike = 0;
+    let ball = 0;
+    if (+digit === this.baseballAnswer[index]) {
+      strike += 1;
+    } else if (this.baseballAnswer.includes(+digit)) {
+      ball += 1;
+    }
+    return [strike, ball];
+  }
+
+  compareUserInputWithAnswer() {
+    const USER_DIGITS = [...this.userInput];
+    let strike = 0;
+    let ball = 0;
+    let nothing = false;
+
+    const JUDGE_BASEBALL = (digit, index) => {
+      const [increaseStrike, increaseBall] = this.increaseBaseball(digit, index);
+      strike += increaseStrike;
+      ball += increaseBall;
+    };
+    USER_DIGITS.forEach(JUDGE_BASEBALL);
+
+    if (!strike && !ball) {
+      nothing = true;
+    }
+
+    return [ball, strike, nothing];
+  }
 
   makeOutputString(ball, strike, nothing) {}
 
