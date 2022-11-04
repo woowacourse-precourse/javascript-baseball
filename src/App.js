@@ -7,7 +7,27 @@ class App {
 
   play() {
     let randomNumber = [];
+    let userInput;
+
     randomNumber = createRandom();
+    
+
+    while (true) {
+      let strike = 0;
+      let ball = 0;
+
+
+      userInput = checkUserInput();
+      let strikeAndBall = baseballGame(randomNumber, userInput);
+      strike = strikeAndBall[0];
+      ball = strikeAndBall[1];
+
+      let result = check3Strike(strike, ball);
+      if (result[0] === 'break')
+        break;
+      else if (result[0] === 'restart')
+        randomNumber = result[1];
+    }
   }
 }
 
@@ -23,7 +43,7 @@ function createRandom() {
   return randomNumber;
 }
 
-function checkUserInput(userInput) {
+function checkUserInput() {
   let userInput;
 
   userInput = input('숫자를 입력해주세요 : ');
@@ -68,28 +88,29 @@ function check3Strike(strike, ball) {
     if (userInput === 1) {
       let randomNumber = [];
       randomNumber = createRandom();
-      return randomNumber;
+      console.log(`========= ${randomNumber}`)
+      return ['restart', randomNumber];
     }
     else if (userInput === 2) {
       MissionUtils.Console.print('게임 종료');
-      return 'break';
+      return ['break'];
     }
   }
   else if (strike > 0 && ball > 0) {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    return 'not a 3 strike';
+    return ['not a 3 strike'];
   }
   else if (strike > 0 && ball <= 0) {
     MissionUtils.Console.print(`${strike}스트라이크`);
-    return 'not a 3 strike';
+    return ['not a 3 strike'];
   }
   else if (strike <= 0 && ball > 0) {
     MissionUtils.Console.print(`${ball}볼`);
-    return 'not a 3 strike';
+    return ['not a 3 strike'];
   }
   else {
     MissionUtils.Console.print(`낫싱`);
-    return 'not a 3 strike';
+    return ['not a 3 strike'];
   }
 }
 
