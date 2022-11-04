@@ -28,22 +28,24 @@ class App {
     this.strike = 0;
 
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-      if (answer.length != 3 && (answer != 1) & (answer != 2))
+      answer = parseInt(answer);
+      if (answer.toString().length !== 3 && (answer !== 1) & (answer !== 2))
         throw new Error();
 
-      if (answer != 2 && answer != 1) {
+      if (answer !== 2 && answer !== 1) {
         this.ballAndStrikeCount(answer);
         this.ballAndStrikeMessage();
         this.start();
-      } else if (answer == 1) {
+      } else if (answer === 1) {
         this.computerNumber();
         this.start();
       }
     });
   }
   ballAndStrikeCount(answer) {
+    answer = answer.toString();
     for (let i = 0; i < this.computer.length; i++) {
-      if (i == this.computer.indexOf(parseInt(answer[i]))) this.strike++;
+      if (i === this.computer.indexOf(parseInt(answer[i]))) this.strike++;
       else if (this.computer.includes(parseInt(answer[i]))) this.ball++;
     }
   }
@@ -51,13 +53,13 @@ class App {
   ballAndStrikeMessage() {
     if (this.ball > 0 && this.strike > 0) {
       MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
-    } else if (this.ball > 0 && this.strike == 0) {
+    } else if (this.ball > 0 && this.strike === 0) {
       MissionUtils.Console.print(`${this.ball}볼`);
-    } else if (this.ball == 0 && this.strike > 0 && this.strike != 3) {
+    } else if (this.ball === 0 && this.strike > 0 && this.strike != 3) {
       MissionUtils.Console.print(`${this.strike}스트라이크`);
-    } else if (this.ball == 0 && this.strike == 0) {
+    } else if (this.ball === 0 && this.strike === 0) {
       MissionUtils.Console.print("낫싱");
-    } else if (this.strike == 3) {
+    } else if (this.strike === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       MissionUtils.Console.print(
