@@ -1,15 +1,15 @@
-const GameManager = require("./GameManager");
+const BaseballGame = require("./BaseballGame");
 
 class App {
   constructor() {
-    this.gameManager = new GameManager();
+    this.baseballGame = new BaseballGame();
   }
 
   play() {
-    this.gameManager.startGame();
+    this.baseballGame.playGame();
   }
 }
 
-new App().play();
+// new App().play();
 
 module.exports = App;
