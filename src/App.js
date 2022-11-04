@@ -60,9 +60,9 @@ const getStrikeCount = (computerNumbers, userNumbers) => {
     .length;
 };
 
-const haveDuplicateNumber = (userInputNumbers) => {
-  const duplicateNumber = userInputNumbers.filter((num) => {
-    return userInputNumbers.indexOf(num) !== userInputNumbers.lastIndexOf(num);
+const haveDuplicateNumber = (userNumbers) => {
+  const duplicateNumber = userNumbers.filter((num) => {
+    return userNumbers.indexOf(num) !== userNumbers.lastIndexOf(num);
   });
   if (duplicateNumber.length > 0) {
     throwError(ERROR_MESSAGE.duplicateError);
@@ -84,18 +84,37 @@ const offerUserInput = async (message) => {
   });
 };
 
+const getNotContainNumber = (randomNumbers, number) => {
+  if (randomNumbers.includes(number)) {
+    return [];
+  }
+
+  return [number];
+};
+
+const getRandomNumbers = (size, start, end) => {
+  let randomNumbers = [];
+  while (randomNumbers.length < size) {
+    const number = Random.pickNumberInRange(start, end);
+    const notContainNumber = getNotContainNumber(randomNumbers, number);
+    randomNumbers = [...randomNumbers, ...notContainNumber];
+  }
+
+  return randomNumbers;
+};
+
 class App {
   constructor() {
     this.offerComputerRandomNumbers();
     this.initGameResult();
-    this.userInputNumbers;
+    this.userNumbers;
   }
 
   play() {
     this.gameStart();
   }
   offerComputerRandomNumbers() {
-    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.computerNumbers = getRandomNumbers(3, 1, 9);
     console.log(this.computerNumbers);
   }
   initGameResult() {
@@ -107,22 +126,22 @@ class App {
   }
   async getUserInputNumbers() {
     const userInputValue = await offerUserInput(GAME_MESSAGE.requestInput);
-    this.userInputNumbers = stringToNumbers(userInputValue);
+    this.userNumbers = stringToNumbers(userInputValue);
     this.isValid();
   }
   isValid() {
-    isValidNumber(this.userInputNumbers);
-    haveDuplicateNumber(this.userInputNumbers);
+    isValidNumber(this.userNumbers);
+    haveDuplicateNumber(this.userNumbers);
     this.setGameResult();
   }
   setGameResult() {
     this.gameResult.strike = getStrikeCount(
       this.computerNumbers,
-      this.userInputNumbers
+      this.userNumbers
     );
     this.gameResult.ball = getBallCount(
       this.computerNumbers,
-      this.userInputNumbers,
+      this.userNumbers,
       this.gameResult.strike
     );
     this.printGameResult();
