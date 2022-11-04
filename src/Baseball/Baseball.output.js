@@ -12,6 +12,20 @@ class BaseBasllOutput {
       return answer;
     });
   }
+  result(baseBallDto) {
+    const { ball, strike } = baseBallDto;
+    let returnString = "";
+    if (ball >= 0) {
+      returnString += `${ball}볼 `;
+    }
+    if (strike >= 0) {
+      returnString += `${strike}스트라이크`;
+    }
+    if (returnString == "") {
+      returnString += "낫싱";
+    }
+    MissionUtils.Console.print(returnString.trim());
+  }
   restart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
