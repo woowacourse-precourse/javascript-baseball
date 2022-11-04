@@ -2,7 +2,7 @@
 
 - [x] 게임 시작 문구를 화면에 출력한다.
 - [x] 이번 게임에 사용할 3자리 수를 생성한다.
-  - [ ] MissionUtils.Random.pickNumberInRange` 함수를 이용하여 생성한다.
+  - [x] MissionUtils.Random.pickNumberInRange` 함수를 이용하여 생성한다.
   - [x] 각 자릿수가 1에서 9사이인 서로 다른 3자리 수의 숫자를 생성한다.
 - [ ] 사용자의 숫자 입력을 받는다.
 - [ ] 올바르지 않은 입력인지 여부를 확인한다.

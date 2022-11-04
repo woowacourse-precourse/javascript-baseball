@@ -29,6 +29,18 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getRandomSpy = () => {
+  const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
+  randomSpy.mockClear();
+
+  return randomSpy;
+};
+
+const isRightRangeNumber = (array) =>
+  array.every(
+    (el) => typeof el === "number" && el >= NUMBERS.MIN && el <= NUMBERS.MAX
+  );
+
 describe("숫자 야구 게임", () => {
   test("게임 시작 문구를 화면에 출력한다.", () => {
     const logSpy = getLogSpy();
@@ -39,19 +51,18 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toBeCalledWith("숫자 야구 게임을 시작합니다.");
   });
 
-  test.only("게임에 사용할 서로 다른 3자리 수(범위 : 1 ~ 9)의 숫자를 생성한다.", () => {
-    const isRightArrayLength = (array) => array.length === NUMBERS_LIST_LENGTH;
-    const isRightRangeNumber = (array) =>
-      array.every(
-        (el) => typeof el === "number" && el >= NUMBERS.MIN && el <= NUMBERS.MAX
-      );
+  test("게임에 사용할 3자리 수를 생성한다.", () => {
+    const randomSpy = getRandomSpy();
 
     const app = new App();
     app.play();
 
-    expect(
-      isRightArrayLength(app.gameNumber) && isRightRangeNumber(app.gameNumber)
-    ).toBe(true);
+    expect(app.gameNumber).toHaveLength(NUMBERS_LIST_LENGTH);
+    expect(isRightRangeNumber(app.gameNumber)).toBe(true);
+    expect(randomSpy).toHaveBeenCalled();
+    expect(randomSpy.mock.calls.length).toBeGreaterThanOrEqual(
+      NUMBERS_LIST_LENGTH
+    );
   });
 
   test("게임 종료 후 재시작", () => {
