@@ -1,6 +1,9 @@
 
 class App {
   play() {
+    // 프로그램 시작
+    console.log(`숫자 야구 게임을 시작합니다.`);
+    
     // 정답 숫자 선정
     const computer = [];
     const MissionUtils = require("@woowacourse/mission-utils");
