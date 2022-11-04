@@ -32,10 +32,7 @@ class App {
         throw new Error();
 
       if (answer != 2 && answer != 1) {
-        for (let i = 0; i < this.computer.length; i++) {
-          if (i == this.computer.indexOf(parseInt(answer[i]))) this.strike++;
-          else if (this.computer.includes(parseInt(answer[i]))) this.ball++;
-        }
+        this.ballAndStrikeCount(answer);
 
         if (this.ball > 0 && this.strike > 0) {
           MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
@@ -60,6 +57,12 @@ class App {
         this.start();
       }
     });
+  }
+  ballAndStrikeCount(answer) {
+    for (let i = 0; i < this.computer.length; i++) {
+      if (i == this.computer.indexOf(parseInt(answer[i]))) this.strike++;
+      else if (this.computer.includes(parseInt(answer[i]))) this.ball++;
+    }
   }
 }
 module.exports = App;
