@@ -12,6 +12,11 @@ const MESSAGE = {
   askNumber: "숫자를 입력해주세요 :",
 };
 
+const ERRORMESSAGE = {
+  repeat: "중복되지 않는 숫자 3개를 입력해야 합니다.",
+  quantity: "숫자 3개를 입력해야 합니다.",
+};
+
 class App {
   static computerNumber;
 
@@ -49,9 +54,9 @@ class App {
   checkValidity = (userNumber) => {
     const numsArray = Array.from(String(userNumber), Number);
     if (numsArray.length !== 3) {
-      throw "숫자 3개를 입력해야 합니다.";
+      throw ERRORMESSAGE.quantity;
     } else if (this.isEveryNumberUnique(numsArray)) {
-      throw "중복되지 않는 숫자 3개를 입력해야 합니다.";
+      throw ERRORMESSAGE.repeat;
     } else {
       return numsArray;
     }
@@ -84,7 +89,7 @@ class App {
   showMessage = (message) => {
     MissionUtils.Console.print(message);
     if (message === "3스트라이크") {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.print(MESSAGE.gameEnd);
       this.askToPlayAgain();
     } else {
       this.compareNumbers();
