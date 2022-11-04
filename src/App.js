@@ -7,12 +7,18 @@ class App {
 
     for (let playCount = 0; playCount < 3; playCount++) {
       const userInput = getUserInput();
+
       const STRIKE_BALL_RECORD = calculateInputNumber(
         computerNumber,
         userInput
       );
-      const isStrike = printBallStrike(STRIKE_BALL_RECORD);
+
+      const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
+      if (IS_THREE_STRIKE) {
+        askEndGame();
+      }
     }
+    askEndGame();
   }
 }
 
@@ -71,6 +77,19 @@ const printBallStrike = (strikeBallRecord) => {
   }
 
   return false;
+};
+
+const askEndGame = () => {
+  console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (isEnd) => {
+      if (isEnd === 2) {
+        exit();
+      }
+    }
+  );
 };
 
 module.exports = App;
