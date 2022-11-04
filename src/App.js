@@ -14,6 +14,18 @@ const getComputerInput = () => {
   return inputString;
 }
 
+const getUserInput = () => {
+  let userAnswer;
+  MissionUtils.Console.readLine("사용자가 입력한 숫자 불러오기", (userValue) => {
+    if (userValue) {
+      userAnswer = userValue;
+    }
+  });
+  return userAnswer;
+};
+
+
+
 class App {
   play() {
   }
