@@ -1,6 +1,8 @@
+const { createRandomNumber } = require('../computer/computer');
+
 class BaseballGame {
-  constructor({ randomNumber }) {
-    this.randomNumber = randomNumber;
+  constructor() {
+    this.randomNumber = createRandomNumber();
   }
 }
 
