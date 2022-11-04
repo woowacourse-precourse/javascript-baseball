@@ -6,5 +6,8 @@ const changeNumberToArray = (input) => {
     .map((e) => parseInt(e));
   return arr;
 };
+const checkLength = (arr) => {
+  return arr.length > 3 ? false : true;
+};
 
 module.exports = getUserExecption;
