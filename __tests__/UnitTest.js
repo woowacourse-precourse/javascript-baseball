@@ -3,20 +3,34 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 expect.extend({
   toBeDistinct(received) {
-    const pass =
-      received && new Set(received).size === received.length;
-      if (pass) {
-        return {
-          message: () => `expected ${received} string is unique`,
-          pass: true,
-        };
-      } else {
-        return {
-          message: () => `expected ${received} string is not to unique`,
-          pass: false,
+    const pass = received && new Set(received).size === received.length;
+    if (pass) {
+      return {
+        message: () => `expected ${received} string is unique`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `expected ${received} string is not to unique`,
+        pass: false,
       };
     }
   },
+}, {
+  toBeThreeNumber(received) {
+    const pass = received.length === 3 && !/[^1-9]/g.test(received);
+    if (pass) {
+      return {
+        message: () => `expected ${received} string is three number`,
+        pass: true,
+    };
+    } else {
+      return {
+        message: () => `expected ${received} string is not to three number`,
+        pass: false,
+    };
+    }
+  }
 });
   
 const getLogSpy = () => {
@@ -30,7 +44,7 @@ describe("숫자 랜덤 생성 테스트", () => {
     const app = new App();
     const randoms = app.getThreeRandom()
 
-    expect(randoms).toMatch(/[1-9]{3}/g); // 1-9 범위의 세 자리 숫자인지
+    expect(randoms).toBeThreeNumber();
     expect(randoms).toBeDistinct();
   });
 });
