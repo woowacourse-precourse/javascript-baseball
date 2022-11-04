@@ -22,9 +22,19 @@ class App {
     });
   }
 
+  // 사용자가 입력한 값이 적절한지 검증하는 기능
+  static validateUserInput(input) {
+    const REGEX = /^[1-9]{3}$/;
+    const INPUT_SET = new Set(input);
+    if (REGEX.test(input) && INPUT_SET.size === 3) {
+      return true;
+    }
+    return false;
+  }
+
   play() {
     this.#RANDOM_NUMBER = App.getRandomNumber();
-    this.getUserInput();
+    this.setUserInput();
   }
 }
 
