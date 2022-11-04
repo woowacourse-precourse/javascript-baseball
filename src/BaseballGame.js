@@ -10,7 +10,6 @@ class BaseballGame {
   start() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.computerNumber = this.createComputerNumber();
-    this.playGame();
   }
 
   playGame() {
@@ -18,16 +17,27 @@ class BaseballGame {
       const userGuessToArray = guess.split('').map(Number);
       this.guess = userGuessToArray;
       validate(this.guess);
+      const { strike, ball } = this.getResult();
     });
   }
 
   getResult() {
     const strike = this.countStrike();
+    const ball = this.countBall();
+    return { strike, ball };
   }
 
   countStrike() {
     const strike = this.guess.filter((number, idx) => number === this.computerNumber[idx]);
     return strike.length;
+  }
+
+  countBall() {
+    const ball = this.guess.filter((number, idx) => {
+      const indexOfComputerNumber = this.computerNumber.indexOf(number);
+      return indexOfComputerNumber !== -1 && indexOfComputerNumber !== idx;
+    });
+    return ball.length;
   }
 
   createComputerNumber() {
