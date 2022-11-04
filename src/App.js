@@ -2,9 +2,10 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const Constants = require('./constant');
 
 class App {
-  play() {
+  async play() {
     printGameStartMsg();
     const computerNumber = createComputerNumber();
+    const number = await inputNumber();
   }
 }
 
@@ -24,6 +25,17 @@ function createComputerNumber() {
   }
 
   return computerNumber;
+}
+
+function input(msg) {
+  return new Promise((resolve) => {
+    MissionUtils.Console.readLine(msg, resolve);
+  });
+}
+
+async function inputNumber() {
+  const number = await input(Constants.INPUT_NUMBER_MESSAGE);
+  return [...number];
 }
 
 module.exports = App;
