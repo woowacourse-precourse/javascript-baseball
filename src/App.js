@@ -38,9 +38,16 @@ class App {
           isNaN(this.userNumber[2]) || this.userNumber[2] === 0) {
         throw new Error
       }
-      answerCompare()
+      this.answerCompare()
     } catch {
-      gameEnd()
+      this.gameEnd()
+    }
+  }
+
+  answerCompare() {
+    this.getHint()
+    if (this.userNumber.toString() === this.answer.toString()) {
+      this.gameWin()
     }
   }
 }
