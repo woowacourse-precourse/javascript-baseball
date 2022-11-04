@@ -14,7 +14,6 @@ class App {
       computerAnswer = Array.from(computerAnswer);
     }
     makeComputerAnswer();
-    console.log(computerAnswer);
     Console.print("숫자 야구 게임을 시작합니다.");
 
     function isVaildData(input) {
@@ -31,17 +30,34 @@ class App {
 
       return vaildNumber;
     }
+
+    function compareComputerAndUser(userInput) {
+      let ball = 0;
+      let strike = 0;
+      let answer = "";
+      userInput.forEach((num, i) => {
+        if (computerAnswer.includes(num)) {
+          computerAnswer[i] === num ? strike++ : ball++;
+        }
+      });
+      if (ball + strike === 0) {
+        answer = "낫싱";
+      }
+      if (ball !== 0) {
+        answer += `${ball}볼`;
+      }
+      if (strike !== 0) {
+        answer += `${strike}스트라이크`;
+      }
+      Console.print(answer);
+      return strike === 3;
+    }
   }
 }
 
-[...a].map((num) => {
-  if (isNaN(num)) return false;
-  return +num;
-});
-
-// const a = new App();
-// console.log(a.play());
-Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-  console.log(answer);
-});
+const a = new App();
+console.log(a.play());
+// Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+//   console.log(answer);
+// });
 module.exports = App;
