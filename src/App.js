@@ -10,8 +10,12 @@ class App {
     this.gameResults = {};
     this.compare = {
       isStrike: (num, idx) => this.randomNumber[idx] === num,
-
       isBall: (num, idx) => this.randomNumber[idx] !== num && this.randomNumber.includes(num),
+    };
+    this.inputCheck = {
+      isLenThree: answer => answer.length === 3,
+      isInt: answer => Number.isInteger(+answer),
+      isNegative: answer => Math.sign(answer) === -1,
     };
   }
 
@@ -32,8 +36,10 @@ class App {
   }
 
   getUserInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      if (answer.length !== 3 || !Number.isInteger(+answer) || Math.sign(answer) === -1) throw new Error('잘못된 값을 입력하셨습니다.');
+    Console.readLine('숫자를 입력해주세요 : ', answer => {
+      const { isLenThree, isInt, isNegative } = this.inputCheck;
+      if (!isLenThree(answer) || !isInt(answer) || isNegative(answer)) throw new Error('잘못된 값을 입력하셨습니다.');
+
       this.userInput = [...answer];
       this.gameResults = {};
 
@@ -67,7 +73,7 @@ class App {
   }
 
   restart() {
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', answer => {
       if (answer === '1') {
         this.randomNumber = '';
         this.start();
@@ -76,7 +82,7 @@ class App {
       if (answer === '2') {
         this.print('게임 종료');
         return;
-      };
+      }
       throw new Error('잘못된 값을 입력하셨습니다.');
     });
   }
