@@ -19,28 +19,38 @@ class App {
   getUserNum() {
     let userNum;
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-      this.judgeUserNum(answer);
-      userNum = answer;
-      this.print(`숫자를 입력해주세요 : ${answer}`);
+      let validatedAnswer = this.judgeUserNum(answer); // answer validation
+      userNum = validatedAnswer;
+      this.print(`숫자를 입력해주세요 : ${validatedAnswer}`);
     });
     return userNum;
   }
   judgeUserNum(answer) {
-    if (parseInt(answer) === NaN) {
+    let trimedanswer = this.deleteSpace(answer);
+    if (trimedanswer.length === 0) {
       throw new Error("숫자를 입력해주세요");
-    }
-    if (answer.length !== 3) {
+    } else if (isNaN(parseInt(trimedanswer))) {
+      throw new Error("문자를 제외한 숫자만을 입력해주세요");
+    } else if (trimedanswer.length !== 3) {
       throw new Error("입력한 숫자가 3 자리가 아닙니다");
     }
-    let answerArr = answer.split("");
+    let answerArr = trimedanswer.split("");
     let duplicates = answerArr.filter((value, index) => {
       return index !== answerArr.indexOf(value);
     });
     if (duplicates.length !== 0) {
       throw new Error("입력한 숫자에 중복된 숫자가 존재합니다");
     }
+    return trimedanswer;
   }
-  getResult(computer, user) {
+  deleteSpace(string) {
+    let trimedString;
+    string.trim(); // delete space outside of string
+    let regex = / /gi;
+    trimedString = string.replace(regex, ""); // delete space inside of string
+    return trimedString;
+  }
+  createResult(computer, user) {
     const { strike, ball } = this.compareNums(computer, user);
     const resultSring = this.printResult(strike, ball);
     return this.getResultFlag(resultSring);
@@ -53,18 +63,20 @@ class App {
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
         (answer) => {
-          this.judgeRestartNum(answer);
-          this.print(`${answer}`);
-          resultFlag = parseInt(answer);
+          let validatedAnswer = this.judgeRestartNum(answer); //answer validation
+          this.print(`${validatedAnswer}`);
+          resultFlag = parseInt(validatedAnswer);
         }
       );
     }
     return resultFlag;
   }
   judgeRestartNum(answer) {
-    if (!(answer === "1" || answer === "2")) {
+    let trimedanswer = this.deleteSpace(answer);
+    if (!(trimedanswer === "1" || trimedanswer === "2")) {
       throw new Error("1 과 2 중 하나를 입력해주세요");
     }
+    return trimedanswer;
   }
   compareNums(computer, user) {
     let strike = 0;
@@ -102,7 +114,7 @@ class App {
       gameFlag = 0;
       while (gameFlag === 0) {
         userNum = this.getUserNum();
-        gameFlag = this.getResult(computerNum, userNum);
+        gameFlag = this.createResult(computerNum, userNum);
       }
     }
   }
