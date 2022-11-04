@@ -26,17 +26,17 @@ module.exports = class Game {
   }
 
   getUserNumberInput() {
-    MissionUtils.Console.readLine(
-      "숫자를 입력해 주세요 : ",
-      (userNumberInput) => {
-        gameInputValidation(userNumberInput);
-        const gameResultString = this.getGameResultString(userNumberInput);
-        MissionUtils.Console.print(gameResultString);
-        if (gameResultString == GAME_WIN) {
-          this.handleGame();
-        } else this.getUserNumberInput();
-      }
+    MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (input) =>
+      this.progressGame(input)
     );
+  }
+
+  progressGame(userNumberInput) {
+    gameInputValidation(userNumberInput);
+    const gameResultString = this.getGameResultString(userNumberInput);
+    MissionUtils.Console.print(gameResultString);
+    if (gameResultString == GAME_WIN) this.handleGame();
+    this.getUserNumberInput();
   }
 
   getGameResultString(inputNumber) {
