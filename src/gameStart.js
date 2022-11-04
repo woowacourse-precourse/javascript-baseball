@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { validationNumbers } = require('./validation');
 const GameData = require('./GameData');
 
 function generateRandomNumbers() {
@@ -6,12 +7,16 @@ function generateRandomNumbers() {
   return generatedRandomNumbers;
 }
 
-function inputUserNumbers() {
-  return new Promise((resolve) => {
+async function inputUserNumbers() {
+  const inputResult = await new Promise((resolve) => {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
       resolve(input);
     });
   });
+  if (!validationNumbers(inputResult.split(''))) {
+    throw new Error('잘못된 값을 입력했습니다.');
+  }
+  return inputResult;
 }
 
 async function gameStart() {
