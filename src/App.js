@@ -38,6 +38,10 @@ class App {
     return !this.isStrike(randomItem, inputItem) && random.includes(inputItem);
   }
 
+  countBall(random, input) {
+    return input.filter((_, index) => this.isBall(random, input, index)).length;
+  }
+
   play() {}
 }
 
