@@ -38,11 +38,9 @@ class App {
   };
 
   getUserNumber = () => {
-    let userNumber;
     MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
       try {
-        const valideNumbers = this.checkValidity(inputNumber);
-        userNumber = valideNumbers;
+        const userNumber = this.checkValidity(inputNumber);
         return userNumber;
       } catch (e) {
         MissionUtils.Console.print(e);
@@ -66,7 +64,7 @@ class App {
     const strikeNum = user.filter((item, ind) => item === computer[ind]).length;
 
     const ballNum = user
-      .filter((item, index) => item !== computer[index])
+      .filter((item, ind) => item !== computer[ind])
       .filter((item) => computer.includes(item)).length;
 
     return [strikeNum, ballNum];
