@@ -33,6 +33,27 @@ describe("숫자 야구 게임", () => {
     expect(isNumberTypeGoal).toEqual(true);
   });
 
+  test("Goal과 UserAnswer를 비교해 [볼 숫자, 스트라이크 숫자] 반환", () => {
+    const app = new App();
+    const GOAL = [1, 2, 3];
+    const result = {
+      threeStrike: [3, 0],
+      oneStrikeAndTwoBall: [1, 2],
+    };
+    const answer = {
+      threeStrike: GOAL,
+      oneStrikeAndTwoBall: [1, 3, 2],
+    };
+
+    const [threeOut, oneBallAndOnwStrike] = [
+      app.getStrikeAndBallCount(GOAL, answer.threeStrike),
+      app.getStrikeAndBallCount(GOAL, answer.oneStrikeAndTwoBall),
+    ];
+
+    expect(threeOut).toEqual(result.threeStrike);
+    expect(oneBallAndOnwStrike).toEqual(result.oneStrikeAndTwoBall);
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
