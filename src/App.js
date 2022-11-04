@@ -1,8 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  answer = []
-  userNumber = []
+  answer = [];
+  userNumber = [];
+  ballCount = 0;
+  strikeCount = 0;
 
   play() {}
 
@@ -26,28 +28,43 @@ class App {
   inputAnswerException() {
     try {
       if (this.userNumber.length !== 3) {
-        throw new Error
+        throw new Error;
       }
       if (this.userNumber[0] === this.userNumber[1] ||
           this.userNumber[0] === this.userNumber[2] ||
           this.userNumber[1] === this.userNumber[2]) {
-        throw new Error
+        throw new Error;
       }
       if (isNaN(this.userNumber[0]) || this.userNumber[0] === 0 ||
           isNaN(this.userNumber[1]) || this.userNumber[1] === 0 ||
           isNaN(this.userNumber[2]) || this.userNumber[2] === 0) {
-        throw new Error
+        throw new Error;
       }
-      this.answerCompare()
+      this.answerCompare();
     } catch {
-      this.gameEnd()
+      this.gameEnd();
     }
   }
 
   answerCompare() {
-    this.getHint()
+    this.getHint();
     if (this.userNumber.toString() === this.answer.toString()) {
-      this.gameWin()
+      this.gameWin();
+    }
+  }
+
+  getHint() {
+    this.getBall();
+    this.getStrike();
+
+    if (this.ballCount > 0 && this.strikeCount > 0) {
+      return MissionUtils.Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
+    } else if (this.ballCount > 0) {
+      return MissionUtils.Console.print(`${this.ballCount}볼`);
+    } else if (this.strikeCount > 0) {
+      return MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
+    } else {
+      return MissionUtils.Console.print(`낫싱`);
     }
   }
 }
