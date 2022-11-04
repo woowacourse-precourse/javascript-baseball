@@ -1,40 +1,41 @@
 import MissionUtils from '@woowacourse/mission-utils';
 
 class User {
-  waitEnter() {
+  getter() {
+    return this.answerArr;
+  }
+
+  enterAnswer() {
     return new Promise(resolve => {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', num => {
-        resolve(num);
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
+        this.answer = answer;
+        resolve();
       });
     });
   }
 
-  async getUserInput() {
-    this.num = await this.waitEnter();
-  }
-
   convertStringToNum() {
-    this.num = parseInt(this.num, 10);
+    this.answer = parseInt(this.answer, 10);
   }
 
   convertNumToArray() {
-    this.numArr = Array.from(String(this.num), Number);
+    this.answerArr = Array.from(String(this.answer), Number);
   }
 
   checkTruthy() {
-    return Boolean(this.num);
+    return Boolean(this.answer);
   }
 
   checkType() {
-    return typeof this.num === 'number';
+    return typeof this.answer === 'number';
   }
 
   checkRange() {
-    return this.num >= 123 && this.num <= 987;
+    return this.answer >= 123 && this.answer <= 987;
   }
 
   checkDuplication() {
-    return this.numArr.every((num, i, numArr) => numArr.indexOf(num) === i);
+    return this.answerArr.every((num, i, answerArr) => answerArr.indexOf(num) === i);
   }
 
   checkUserInput() {
