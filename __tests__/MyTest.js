@@ -17,7 +17,9 @@ test("입력값 제한 사항 체크", () => {
 });
 
 test("사용자 숫자 상대방 숫자 비교", () => {
+  const nab = [1, 2, 3];
+  const nbb = [1, 2, 3];
   const app = new App();
-  const resultText = app.compare([1, 2, 3], [1, 2, 3]);
-  expect(resultText).toEqual("3스트라이크");
+  const resultText = app.compare(nab, nbb);
+  expect(app.compare(nab, nbb)).toEqual("3스트라이크");
 });

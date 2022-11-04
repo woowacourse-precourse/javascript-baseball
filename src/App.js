@@ -1,13 +1,23 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {
+  play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.Answer = this.makeComputerArr();
+    console.log(this.Answer);
+    this.makeInputNum();
   }
 
-  play() {
-    this.baseballAnswer = this.makeComputerArr();
-    this.UserInput = this.InputNum();
+  restart() {
+    this.play();
+  }
+
+  resultChoice(flag) {
+    if (flag) {
+      this.end();
+    } else {
+      this.inputCheck();
+    }
   }
 
   makeComputerArr() {
@@ -30,22 +40,25 @@ class App {
     return numberArr;
   }
 
-  InputNum() {
+  makeInputNum() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      this.inputNum = this.inputCheck(input);
+      const inputArr = this.inputCheck(input);
+      const resultText = this.compare(inputArr);
+      console.log(resultText);
     });
   }
 
-  compare() {
-    const ComputerNum = this.baseballAnswer;
-    const UserNum = this.UserInput;
+  compare(nb) {
+    const answerArr = this.Answer;
     let ball = 0;
     let strike = 0;
     let resultText = "";
-    if (ComputerNum === UserNum) return (resultText = "3스트라이크");
-    UserNum.map((num, i) => {
-      if (ComputerNum.includes(num)) {
-        if (UserNum.indexOf(num) === ComputerNum.indexOf(ComputerNum[i])) {
+    console.log(`받은값${nb}`);
+    console.log(`정답${answerArr}`);
+
+    nb.map((num, i) => {
+      if (answerArr.includes(num)) {
+        if (num === answerArr[i]) {
           strike += 1;
         } else {
           ball += 1;
@@ -55,10 +68,22 @@ class App {
     if (ball !== 0) resultText += `${ball}볼 `;
     if (strike !== 0) resultText += `${strike}스트라이크`;
     if (resultText === "") resultText += `낫싱`;
-    return resultText;
+    Console.print(resultText);
+    return resultText === "3스트라이크";
   }
 
-  reStart() {}
+  end() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (input === 1) {
+          this.restart();
+        }
+        if (input === 2) return "종료";
+      }
+    );
+  }
 }
 
 const app = new App();
