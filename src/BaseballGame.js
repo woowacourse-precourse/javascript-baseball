@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { validate } = require('./utils/');
+const { validate } = require('./utils/validation');
 
 class BaseballGame {
   constructor() {
@@ -10,15 +10,24 @@ class BaseballGame {
   start() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.computerNumber = this.createComputerNumber();
-    this.getUserInput();
+    this.playGame();
   }
 
-  getUserInput() {
+  playGame() {
     Console.readLine('숫자를 입력해주세요 : ', (guess) => {
       const userGuessToArray = guess.split('').map(Number);
       this.guess = userGuessToArray;
       validate(this.guess);
     });
+  }
+
+  getResult() {
+    const strike = this.countStrike();
+  }
+
+  countStrike() {
+    const strike = this.guess.filter((number, idx) => number === this.computerNumber[idx]);
+    return strike.length;
   }
 
   createComputerNumber() {
