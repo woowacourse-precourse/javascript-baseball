@@ -1,9 +1,10 @@
-const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameControlValidation = require("./GameControlValidation.js");
 const GameInputValidation = require("./GameInputValidation.js");
 const print = require("./utils/print.js");
 const input = require("./utils/input.js");
+
+const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
@@ -76,7 +77,7 @@ module.exports = class Game {
     );
     const gameControlValidation = new GameControlValidation(userControlInput);
     gameControlValidation.validation();
-    if (userControlInput == 1) this.gameInit();
+    if (userControlInput == RESTART) this.gameInit();
     else MissionUtils.Console.close();
   }
 };
