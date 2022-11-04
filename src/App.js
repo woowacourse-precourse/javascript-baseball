@@ -1,8 +1,10 @@
-const { gameStart } = require('./gameStart');
+const { gameStart, generateRandomNumbers } = require('./gameStart');
+const GameData = require('./GameData');
 
 class App {
   play() {
-    gameStart();
+    const gameData = new GameData();
+    gameStart(generateRandomNumbers(gameData));
   }
 }
 
