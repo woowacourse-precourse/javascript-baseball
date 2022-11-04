@@ -77,7 +77,7 @@ async function continueOrEndGame(gameData) {
   if (inputNumber === '2') {
     return gameData.setState(false);
   }
-  gameData.setThreeStrike(false);
+  return gameData.setThreeStrike(false);
 }
 
 async function gameStart() {
