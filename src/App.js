@@ -67,6 +67,11 @@ class App {
     Console.print(message);
   }
 
+  end() {
+    this.print('종료');
+    Console.close();
+  }
+
   play() {}
 }
 
