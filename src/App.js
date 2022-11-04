@@ -65,6 +65,21 @@ class App {
         return hintMessage;
     }
 
+    checkInputNumber(inputNumber) {
+        const number = inputNumber.filter(
+            (num, idx, arr) => arr.indexOf(num) === arr.lastIndexOf(num)
+        );
+        if (
+            inputNumber.length !== 3 ||
+            Number(inputNumber.join("")) === NaN ||
+            number.length !== 3
+        ) {
+            throw "입력값이 잘못되었습니다.";
+        } else {
+            console.log(this.getHintMessage(inputNumber));
+        }
+    }
+
     play() {}
 }
 
