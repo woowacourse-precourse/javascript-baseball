@@ -43,7 +43,7 @@ class App {
           result();
         }
         if (STRIKE === 3) {
-          MissionUtils.Console.print(`${STRIKE}스트라이크`);
+          MissionUtils.Console.print(`${STRIKE}스트라이크\n🎉🥳정답입니다!🥳🎉 게임 종료.`);
           restartOrEnd();
         }
       });
@@ -106,7 +106,6 @@ class App {
     }
 
     function restartOrEnd() {
-      MissionUtils.Console.print('🎉🥳 정답입니다!🥳🎉 게임 종료.');
       MissionUtils.Console.readLine(
         '게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.',
         (number) => {
@@ -115,6 +114,9 @@ class App {
           }
           if (number === '2') {
             MissionUtils.Console.close();
+          }
+          if (number !== '1' && number !== '2') {
+            restartOrEnd();
           }
         }
       );
