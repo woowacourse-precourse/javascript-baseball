@@ -26,11 +26,11 @@ class App {
     this.computerNumber = null;
   }
 
-  createComputerNumber = () => {
+  generateComputerNumber = () => {
     const computerNumber = [];
     while (computerNumber.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (this.isEveryNumberUnique(computerNumber)) {
+      if (!computerNumber.includes(randomNumber)) {
         computerNumber.push(randomNumber);
       }
     }
@@ -121,7 +121,7 @@ class App {
 
   play() {
     MissionUtils.Console.print(MESSAGE.gameStart);
-    this.computerNumber = this.createComputerNumber();
+    this.computerNumber = this.generateComputerNumber();
     this.compareNumbers();
   }
 }
