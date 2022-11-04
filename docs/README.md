@@ -5,7 +5,7 @@
   - [x] `MissionUtils.Random.pickNumberInRange` 함수를 이용하여 생성한다.
   - [x] 각 자릿수가 1에서 9사이인 서로 다른 3자리 수의 숫자를 생성한다.
 - [ ] 사용자의 숫자 입력을 받아 저장한다.
-  - [ ] `MissionUtils.Console.readLine` 함수를 이용하여 입력받는다.
+  - [x] `MissionUtils.Console.readLine` 함수를 이용하여 입력받는다.
 - [ ] 올바르지 않은 입력인지 여부를 확인한다.
   - [ ] 입력이 숫자인지 확인한다.
   - [ ] 각 자릿수가 서로 다른 숫자인지 확인한다.

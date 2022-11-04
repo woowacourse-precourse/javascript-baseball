@@ -29,6 +29,13 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getReadLineSpy = () => {
+  const readLineSpy = jest.spyOn(MissionUtils.Console, "readLine");
+  readLineSpy.mockClear();
+
+  return readLineSpy;
+};
+
 const getRandomSpy = () => {
   const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
   randomSpy.mockClear();
@@ -63,6 +70,15 @@ describe("숫자 야구 게임", () => {
     expect(randomSpy.mock.calls.length).toBeGreaterThanOrEqual(
       NUMBERS_LIST_LENGTH
     );
+  });
+
+  test.only("사용자의 숫자를 MissionUtils.Console.readLine 함수를 이용하여 입력받는다.", () => {
+    const readLineSpy = getReadLineSpy();
+
+    const app = new App();
+    app.play();
+
+    expect(readLineSpy).toHaveBeenCalled();
   });
 
   test("게임 종료 후 재시작", () => {
