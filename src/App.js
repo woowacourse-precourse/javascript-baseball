@@ -3,8 +3,14 @@ const { NUMBERS, MESSAGES, RESULT } = require('../src/Constructor')
 class App {
 
   generateRandomNums(min, max, length) {
-    const randoms = Random.pickUniqueNumbersInRange(min, max, length);
-    return Random.shuffle(randoms);
+    const computer = [];
+    while (computer.length < length) {
+      const number = Random.pickNumberInRange(min, max);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
   }
 
   isValidNumberInput(userInput) {
