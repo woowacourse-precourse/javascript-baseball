@@ -69,11 +69,11 @@ const gameClear = () => {
 }
 
 const reStart = () => {
-
+  app.play();
 }
 
 const closeGame = () => {
-  
+
 }
 
 let computer = setComputerNumber();
