@@ -21,6 +21,7 @@ class App {
   inputUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputString = input + "";
+
       if (/^[1-9]{3}$/.test(inputString)) {
         throw "1에서 9까지의 숫자 3자리만 입력할 수 있습니다";
       }
@@ -41,13 +42,31 @@ class App {
     }
   }
 
+  shouldContinue() {
+    let flag;
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (/[12]{1}/.test(input)) {
+          throw "1 또는 2만 입력 가능합니다";
+        }
+        flag = input === 1;
+      }
+    );
+
+    return flag;
+  }
+
   main() {
     this.inputUserNumber();
     this.setComputerNumber();
   }
 
   play() {
-    this.main();
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    do {
+      this.main();
+    } while (this.shouldContinue());
   }
 }
 
