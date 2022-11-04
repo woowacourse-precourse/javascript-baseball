@@ -67,12 +67,12 @@ class App {
     this.gameNumber = gameNumbers;
   }
 
-  isValidLength(input) {
-    return input.length === this.count;
+  isValidDigit(numbers) {
+    return numbers.length === this.count;
   }
 
-  isNumber(value) {
-    return typeof value === "number";
+  isNumber(number) {
+    return typeof number === "number";
   }
 
   isValidNumber(number) {
@@ -86,19 +86,30 @@ class App {
   isValidInput(input) {
     const numbers = input.split("").map(Number);
 
-    return (
-      this.isValidLength(input) &&
-      numbers.every(this.isNumber) &&
-      this.hasDuplicateElement(numbers) &&
-      numbers.every(this.isValidNumber)
-    );
+    if (!this.isValidDigit(numbers)) {
+      console.log("isValidDigit");
+    }
+
+    if (!numbers.every(this.isNumber)) {
+      console.log("isNumber");
+    }
+
+    if (!numbers.every(this.isValidNumber.bind(this))) {
+      console.log("isValidNumber");
+    }
+
+    if (this.hasDuplicateElement(numbers)) {
+      console.log("hasDuplicateElement");
+    }
+
+    return true;
   }
 
   inputUserNumbers() {
     this.readLine(this.MESSAGES.INSERT_NUMBER, (input) => {
       if (!this.isValidInput(input)) {
         // 여기 throw Error 하고 아래 console.log문은 삭제
-        console.log(input);
+        console.log("input", input);
       }
       this.userNumber = input.split("").map(Number);
     });
