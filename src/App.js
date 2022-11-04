@@ -38,7 +38,7 @@ class App {
     const CHECK_EXCEPTION = (input) => {
       const IS_NUMBER = input.charCodeAt(0) >= 48 && input.charCodeAt(0) <= 57;
       const IS_UNIQUE = !CHECK_SAME_INPUT.has(input);
-      this.throwError(IS_UNIQUE, IS_NUMBER, IS_LENGTH_3);
+      App.throwError(IS_UNIQUE, IS_NUMBER, IS_LENGTH_3);
       CHECK_SAME_INPUT.add(input);
     };
 
@@ -90,16 +90,25 @@ class App {
     return outputString;
   }
 
-  gameRestartHandler() {}
+  gameRestartHandler() {
+    const QUERY_STRING = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
+    const DECISION_HANDLER = (input) => {
+      App.throwError(input === '1' || input === '2');
+      const nextEvent = input === '2' ? () => MissionUtils.Console.close() : () => this.play();
+      nextEvent();
+    };
+    MissionUtils.Console.readLine(QUERY_STRING, DECISION_HANDLER);
+  }
 
   userInputHandler = (input) => {
     this.userInput = input;
     this.userInputExceptionHandler();
 
     const [BALL, STRIKE, NOTHING] = this.compareUserInputWithAnswer();
-    const OUTPUT_STRING = this.makeOutputString(BALL, STRIKE, NOTHING);
+    const OUTPUT_STRING = App.makeOutputString(BALL, STRIKE, NOTHING);
     MissionUtils.Console.print(OUTPUT_STRING);
 
+    // Refactor later...
     if (STRIKE !== 3) {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
     } else if (STRIKE === 3) {
@@ -114,6 +123,8 @@ class App {
     }
     this.firstPlay = false;
     this.setBaseballAnswer();
+    // test----------------
+    // MissionUtils.Console.print(this.baseballAnswer);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
   }
 }
