@@ -47,6 +47,31 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 종료 후 재시작: 볼과 스트라이크도 잘 출력되는지 확인", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "132", "135", "1", "597", "892", "589", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "2스트라이크",
+      "3스트라이크",
+      "1볼 1스트라이크",
+      "2볼",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트: 입력값의 길이가 3이 아닌 경우", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
