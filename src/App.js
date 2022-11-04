@@ -31,7 +31,7 @@ class App {
                     ball += 1;
                 }
             });
-            return `${ball}볼`;
+            return ball;
         };
 
         const getStrikeCount = (userInput, answer) => {
@@ -45,31 +45,46 @@ class App {
                 }
             });
 
-            return `${strike}스트라이크`
+            return strike;
+        };
+
+        const printInputResult = (userInput, answer) => {
+            const BALL = getBallCount(userInput, answer);
+            const STRIKE = getStrikeCount(userInput, answer);
+            if (BALL === 0 && STRIKE === 0) {
+                return MissionUtils.Console.print("낫싱");
+            }
+            if (BALL === 0) {
+                return MissionUtils.Console.print(`${STRIKE}스트라이크`);
+            }
+            if (STRIKE === 0) {
+                return MissionUtils.Console.print(`${BALL}볼`);
+            }
+
+            return MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
         };
 
         const printEndMessage = () => {
             setTimeout(() => {
                 MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-            }, 800);
+            }, 500);
             setTimeout(() => {
                 MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-            }, 1600);
+            }, 1000);
         };
 
         const getUserInput = () => {
             MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
                 if (isCorrect(input, ANSWER)) {
-                    console.log("성공");
                     return printEndMessage();
                 }
-                MissionUtils.Console.print(getBallCount(input, ANSWER));
+                printInputResult(input, ANSWER);
                 getUserInput();
             });
         };
 
         const ANSWER = createAnswer();
-        console.log(ANSWER);
+        // console.log(ANSWER);
         printStartMassage();
         getUserInput();
     }
