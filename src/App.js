@@ -5,13 +5,19 @@ const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
 
 class App {
   constructor() {
-    this.userInput = "";
+    this.number = "";
   }
   getUserInput() {
     MissionUtils.Console.readLine(INPUT_MESSAGE, (number) => {
-      this.userInput = number;
+      this.number = number;
+      this.isInputValid();
       this.getUserInput();
     });
+  }
+
+  isInputValid() {
+    if (this.number === "")
+      throw new Error("잘못된 값을 입력하여 게임을 종료합니다.");
   }
 
   printGameStartMessage() {
