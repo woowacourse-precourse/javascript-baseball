@@ -72,18 +72,14 @@ class App {
     }
   }
 
-  main() {
-    this.inputUserNumber();
-    this.setComputerNumber();
-    this.calcScore();
-    this.printResult();
-  }
-
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    do {
-      this.main();
-    } while (this.isContinued);
+    while (this.isContinued) {
+      this.inputUserNumber();
+      this.setComputerNumber();
+      this.calcScore();
+      this.printResult();
+    }
   }
 }
 
