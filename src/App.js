@@ -46,8 +46,10 @@ class App {
       throw new Error("숫자가 아닌 문자는 입력이 불가능합니다.");
     } else if (guess.length !== 3 || this.hasSameNumber(guess)) {
       throw new Error(
-        "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력 가능합니다."
+        "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력이 가능합니다."
       );
+    } else if (this.hasZero(guess)) {
+      throw new Error("0이 포함된 숫자는 입력이 불가능합니다.");
     }
   }
 
@@ -55,7 +57,9 @@ class App {
     return /^\d+$/.test(number);
   }
 
-  hasZero(number) {}
+  hasZero(number) {
+    return number.includes("0");
+  }
 
   hasSameNumber(number) {
     for (let index = 0; index < 3; index++) {
