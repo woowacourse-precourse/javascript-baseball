@@ -1,13 +1,13 @@
---필요한 변수: ComputerNumbers, PlayerNumbers, strike, ball,
+--필요한 변수: ComputerNumbers, PlayerNumbers, strike, ball, gameAgain
 
 --설계
 0. "야구 게임을 시작합니다" 출력.
-1. 임의의 세자리 수를 Computer가 생성함.
-2. Player에게 수를 입력 받음.
 반복문(횟수:무한){
-
-    <oneGame>
+    1. 임의의 세자리 수를 Computer가 생성함.
+    oneGame
     반복문(횟수:무한){
+        
+        2. Player에게 수를 입력 받음.
         
         3. computer 수와 player의 수를 비교 검사하여 strike와 ball의 수를 산출함.
         반복문(횟수:3번){
@@ -34,11 +34,7 @@
 
     6. 게임을 새로 시작할지 종료할지 숫자 입력받음 ===> askGameAgain 함수
 
-    7. 입력받은 숫자 값 검사.
-    조건문{
-        1. 플레이어 입력값이 1이면 그대로 진행.
-        2. 플레이어 입력값이 2이면 게임 완전 종료. 반복문 break.
-    }
+    7. 입력받은 숫자 값 검사 또는 변수에 할당.
 }
 
 
@@ -51,4 +47,4 @@
 6. strike와 ball 개수에 맞게 출력하는 함수(printStrikeAndBall)
 7. 게임 종료 조건 검사하는 조건문
 8. 게임 재시작할지 입력받는 함수(askGameAgain)
-9. 게임 재시작 조건 검사하는 조건문
+9. 게임 재시작 조건 검사 또는 변수 할당
