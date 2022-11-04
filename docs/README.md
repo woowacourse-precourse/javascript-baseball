@@ -36,11 +36,11 @@
 >
 > 1️⃣ Computer 클래스를 통해 컴퓨터가 생성하는 랜덤 숫자를 관리한다.
 >
-> 2️⃣ User 클래스를 통해 사용자에게 입력받는 숫자를 관리한다.
+> 2️⃣ BaseballGame 클래스를 통해 게임 진행을 관리한다.
 >
-> 3️⃣ App 클래스 내부에서 Computer 클래스를 생성한다.
+> 3️⃣ BaseballGame 클래스 내부에 Computer 클래스를 생성하여 생성된 랜덤 숫자와 사용자 입력을 비교하며 게임을 진행한다.
 >
-> 4️⃣ App의 play 메서드를 통해 게임을 진행한다.
+> 4️⃣ App의 play 메서드를 통해 게임을 시작한다.
 
 <br/>
 
@@ -53,18 +53,20 @@
 <br/>
 
 2. 사용자에게 숫자를 입력받는 기능
-   - App 클래스에 inputNumber 프로퍼티 추가
-   - MissionUtils.Console.readLine을 통해 숫자를 입력해 inputNumber 값 변경
+   - BaseballGame 클래스에 inputNumber 프로퍼티 추가
+   - `MissionUtils.Console.readLine`을 통해 숫자를 입력해 inputNumber 값 변경
 
 <br/>
 
 3. 사용자의 입력 숫자가 유효한 숫자인지 판별하는 기능 (게임 진행 중)
 
-   - App 클래스에 getIsInputValueValid 메서드 추가
+   - `getIsInputValueValid` 모듈 추가
    - 입력값이 세 글자인지 확인하는 함수 추가
    - 입력값에 중복되는 값이 있는지 확인하는 함수 추가
    - 입력값에 숫자가 아닌 값이 있는지 확인하는 함수 추가
    - 위 세 함수의 반환값 중 하나라도 true가 있다면 false 반환 / 없다면 true 반환
+
+<br/>
 
 4. 사용자의 입력 숫자가 유효한 숫자인지 판별하는 기능 (게임 종료 후)
    - "1", "2"를 갖는 배열 선언
@@ -72,32 +74,32 @@
 
 <br/>
 
-1. 컴퓨터의 숫자와 사용자의 숫자를 비교해 힌트를 계산하는 기능
-   - App 클래스에 getHint 메서드 추가
+5. 컴퓨터의 숫자와 사용자의 숫자를 비교해 힌트를 계산하는 기능
+   - `getHint` 모듈 추가
      - 입력값: 컴퓨터 숫자, 사용자 입력 숫자
      - 출력값: 힌트 문자열
      - strikeCount, ballCount 변수를 선언한다.
      - countStrike 함수와 countBall 함수로 스트라이크, 볼 개수를 계산해 srikeCount, ballCount 변수에 대입한다.
-     - strikeCount, ballCount 변수를 convertCountToHintString 함수의 인자로 전달한다.
+     - strikeCount, ballCount 변수를 `convertCountToHintString` 함수의 인자로 전달한다.
      - 반환된 힌트 문자열을 리턴한다.
-   - convertStringToArray 함수 추가
+   - `convertStringToArray` 함수 추가
      - 입력값: 문자열
      - 출력값: 배열
      - String의 split 메서드를 사용하여 배열로 분리한다.
-   - countStrike 함수 추가
+   - `countStrike` 함수 추가
      - 입력값: 컴퓨터 숫자, 사용자 입력 숫자
      - 출력값: 스트라이크 개수
      - count 변수를 0으로 초기화 하여 선언한다.
-     - 컴퓨터 숫자와 사용자 숫자를 convertStringToArray 함수를 사용하여 배열로 변환한다.
+     - 컴퓨터 숫자와 사용자 숫자를 `convertStringToArray` 함수를 사용하여 배열로 변환한다.
      - i를 0부터 3전까지 증가시키는 반복문을 사용하여 변환된 각 배열의 값을 비교한다.
      - 서로 같은 수라면 count 변수에 1을 더해준다.
      - count를 리턴한다.
-   - countBall 함수 추가
+   - `countBall` 함수 추가
      - 입력값: 컴퓨터 숫자, 사용자 입력 숫자, 스트라이크 개수
      - 출력값: 볼 개수
      - filter 메서드를 사용해 컴퓨터 숫자 중 사용자 입력 숫자와 일치하는 숫자만을 남긴 배열을 만든다.
      - 앞에서 만든 배열의 크기에서 스트라이크 개수를 뺀 후 그 값을 리턴한다.
-   - convertCountToHintString 함수 추가
+   - `convertCountToHintString` 함수 추가
      - 입력값: 볼 개수, 스트라이크 개수
      - 출력값: 힌트 문자열
      - 빈 문자열 변수 hint를 선언한다.
@@ -110,18 +112,18 @@
 
 6. 게임을 지속적으로 이어나갈 수 있게 하는 기능 (반복)
 
-   - App 클래스에 `hint` 빈 문자열 프로퍼티 추가
-   - `play()`에서 `hint`가 빈 문자열이면 `숫자 야구 게임을 시작합니다.` 문구 출력부분 추가
+   - BaseballGame 클래스에 `hint` 빈 문자열 프로퍼티 추가
+   - `getUserInput()`에서 `hint`가 빈 문자열이면 "숫자 야구 게임을 시작합니다." 문구 출력부분 추가
    - `MissionUtils.Console.readLine` 를 통해 사용자의 입력값을 받아온다.
    - 입력된 입력값과 `Computer`의 `correctNumber`를 `getHint`의 인자로 전달해 반환 값을 `hint`에 대입한다.
    - `hint`를 출력한다.
-   - `hint`와 `3스트라이크`가 불일치하면 `play()`함수 다시 호출
+   - `hint`와 `3스트라이크`가 불일치하면 `getUserInput()`함수 다시 호출
 
 <br/>
 
 7. 게임 종료 이후 재시작 여부를 결정하는 기능
-   - App클래스에 `recommendRestart` 메서드 추가
-   - `play()`에서 재귀 호출 조건에 걸리지 않았을 때 `recommendRestart`호출
+   - BaseBallGame 클래스에 `recommendRestart` 메서드 추가
+   - `getUserInput()`에서 재귀 호출 조건에 걸리지 않았을 때 `recommendRestart`호출
      - `3개의 숫자를 모두 맞히셨습니다! 게임 종료` 문구를 출력한다.
      - `MissionUtils.Console.readLine`을 통해 사용자에게 값을 입력 받는다
      - 1이 입력된 경우 `play()`호출
@@ -129,7 +131,7 @@
 <br/>
 
 8. 이전 게임에서 사용된 변수들의 값을 리셋 하는 기능
-   - App 클래스에 `resetGameValue` 메서드 추가
+   - BaseballGame 클래스에 `resetGameValue` 메서드 추가
      - `hint` 프로퍼티를 빈 문자열로 초기화
      - `computer` 클래스의 `setNewCorrectNumber` 메서드 호출하여 랜덤 숫자 교체
 
@@ -151,3 +153,5 @@
 - 테스트 코드를 추가할 때마다 작성하기
 
 - Computer 클래스 랜덤 숫자 생성 기능 테스트
+- 입력값 유효성 판별 기능 테스트
+- 힌트 산출 기능 테스트
