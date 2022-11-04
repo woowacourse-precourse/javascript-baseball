@@ -16,7 +16,9 @@ expect.extend({
       };
     }
   },
-}, {
+});
+
+expect.extend({
   toBeThreeNumber(received) {
     const pass = received.length === 3 && !/[^1-9]/g.test(received);
     if (pass) {
