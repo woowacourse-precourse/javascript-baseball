@@ -55,7 +55,22 @@ class App {
     return this.postGameMessage(computer, strike, ball);
   }
 
-  play() {}
+  postGameMessage(computer, strike, ball) {
+    let message;
+    if (strike && ball) message = `${ball}볼 ${strike}스트라이크`;
+    else if (strike) message = `${strike}스트라이크`;
+    else if (ball) message = `${ball}스트라이크`;
+    else message = `낫싱`;
+
+    MissionUtils.Console.print(message);
+    this.getUserAnswer(computer);
+  }
+
+  play() {
+    const computer = this.getRandomNumber();
+    this.postStartMessage();
+    this.getUserAnswer(computer);
+  }
 }
 
 module.exports = App;
