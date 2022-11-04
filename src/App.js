@@ -18,7 +18,9 @@ class App {
   };
 
   isUniqueThreeNumber(numbers) {
-    return (numbers.length === 3) && (numbers.length === new Set(numbers).size);
+    return (numbers.length === 3) 
+            && (numbers.length === new Set(numbers).size)
+            && !(/[^1-9]/g.test(numbers));
   };
 
   getBallStrike(numbers, answers) {
