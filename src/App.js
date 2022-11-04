@@ -38,10 +38,25 @@ class App {
     });
   }
 
+  createResultMessage() {
+    if (this.strike === 0 && this.ball === 0) {
+      return "낫싱";
+    }
+    if (this.strike === 0) {
+      return `${this.ball}볼`;
+    }
+    if (this.ball === 0) {
+      return `${this.strike}스트라이크`;
+    }
+    return `${this.ball}볼 ${this.strike}스트라이크 `;
+  }
+
   play() {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       this.checkUserInput(userInput);
       this.compareScore(userInput);
+
+      Console.print(this.createResultMessage());
     });
   }
 }
