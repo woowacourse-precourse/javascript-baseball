@@ -178,4 +178,29 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("예외처리-게임종료 시 문자입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "끝"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("예외처리-게임종료 시 1,2 외에 다른 숫자 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
