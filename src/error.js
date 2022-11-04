@@ -13,8 +13,15 @@ const checkOverlapNumbers = (userInput) => {
 }
 
 const checkOnlyNumbers = (userInput) => userInput.every(v => parseInt(v));
+const checkNumbersLength = (userInput) => userInput.length > 3;
 
 function validateNumbers(userInput) {
+
+    if (checkNumbersLength(userInput)) {
+        Console.print("3개 이상의 숫자를 입력하셨습니다. 게임을 다시 시작해주세요.");
+        throw Error("over Length");
+    }
+
     if (checkOverlapNumbers(userInput)) {
         Console.print("중복되는 숫자를 입력하셨습니다. 게임을 다시 시작해주세요.");
         throw Error("overlap");
