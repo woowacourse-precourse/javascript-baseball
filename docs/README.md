@@ -2,11 +2,9 @@
 
 <img width="384" alt="스크린샷 2022-11-03 10 31 20" src="https://user-images.githubusercontent.com/88531407/199633644-55df8aa2-c95c-46ea-917d-535e6354c5a7.png">
 
-- 분홍색: gameManager 함수
-- 초록색: game 함수
-- 파랑색: enterNumber 함수
-- 보라색: countStrikeBallNothing 함수, resultsForCount 함수
-- 그 외(컴퓨터가 정하는 랜덤숫자): pickedNumberByComputer 함수
+- 분홍색: GameManager 함수
+- 초록색: BaseballGame 함수
+- 그 외(컴퓨터가 정하는 랜덤숫자): PickedNumberByComputer 함수
 
 ##
 
