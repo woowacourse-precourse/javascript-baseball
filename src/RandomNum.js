@@ -7,7 +7,7 @@ class RandomNum {
 
   creatNum() {
     const computerNumArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    console.log(computerNumArr.toString());
+    console.log(computerNumArr);
     return computerNumArr;
   }
 }

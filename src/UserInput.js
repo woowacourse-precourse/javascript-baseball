@@ -1,19 +1,31 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-class UserInput {
-  userInputNum() {
+const userInputArr = [];
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      console.log(answer);
-    });
+const userInputNum = function () {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    // userInputArr.push(answer);
+    // 에러?
+    // console.log(answer)
+    MissionUtils.Console.close();
+  });
 
-    MissionUtils.Console.print('adf \nadsf');
+};
+// class UserInput {
+//   userInputNum() {
+//     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+//       userInputArr.push(answer);
+//     });
+    
+//     // MissionUtils.Console.print("adf \nadsf"); 컴퓨터아웃풋
+//   }
+// }
+
+// const userInput = new UserInput();
+// userInput.userInputNum();
 
 
-  }
-}
+userInputNum();
+exports.userInputNum = userInputNum;
 
-const userInput = new UserInput();
-userInput.userInputNum();
-
-module.exports = UserInput;
+exports.userInputArr = userInputArr;
