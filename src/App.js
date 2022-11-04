@@ -24,6 +24,27 @@ class App {
         else ballCount += 1;
       }
     });
+    this.printResult(strikeCount, ballCount);
+  }
+
+  printResult(strikeCount, ballCount) {
+    if (strikeCount === 3) console.log(`${strikeCount}스트라이크`);
+    if (strikeCount > 0 && ballCount > 0) {
+      console.log(`${strikeCount} 스트라이크 ${ballCount} 볼`);
+      this.getUserInputNumber();
+    }
+    if (strikeCount > 0 && ballCount === 0) {
+      console.log(`${strikeCount}스트라이크`);
+      this.getUserInputNumber();
+    }
+    if (ballCount > 0 && strikeCount === 0) {
+      console.log(`${ballCount} 볼`);
+      this.getUserInputNumber();
+    }
+    if (ballCount === 0 && strikeCount === 0) {
+      console.log("낫 싱");
+      this.getUserInputNumber();
+    }
   }
 
   convertUserNumberToArray() {
