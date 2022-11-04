@@ -19,10 +19,26 @@ class App {
   getUserNum() {
     let userNum;
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
+      this.judgeUserNum(answer);
       userNum = answer;
       this.print(`숫자를 입력해주세요 : ${answer}`);
     });
     return userNum;
+  }
+  judgeUserNum(answer) {
+    if (parseInt(answer) === NaN) {
+      throw new Error("숫자를 입력해주세요");
+    }
+    if (answer.length !== 3) {
+      throw new Error("입력한 숫자가 3 자리가 아닙니다");
+    }
+    let answerArr = answer.split("");
+    let duplicates = answerArr.filter((value, index) => {
+      return index !== answerArr.indexOf(value);
+    });
+    if (duplicates.length !== 0) {
+      throw new Error("입력한 숫자에 중복된 숫자가 존재합니다");
+    }
   }
   getResult(computer, user) {
     const { strike, ball } = this.compareNums(computer, user);
@@ -37,12 +53,18 @@ class App {
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
         (answer) => {
+          this.judgeRestartNum(answer);
           this.print(`${answer}`);
           resultFlag = parseInt(answer);
         }
       );
     }
     return resultFlag;
+  }
+  judgeRestartNum(answer) {
+    if (!(answer === "1" || answer === "2")) {
+      throw new Error("1 과 2 중 하나를 입력해주세요");
+    }
   }
   compareNums(computer, user) {
     let strike = 0;
