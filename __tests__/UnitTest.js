@@ -34,6 +34,15 @@ expect.extend({
     }
   }
 });
+
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+    callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
   
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -59,5 +68,57 @@ describe("시작 문구 출력 테스트", () => {
     app.printStart();
       
     expect(logSpy).toHaveBeenCalled();
+  });
+});
+
+describe("세 자리 숫자 입력 테스트", () => {
+  test("case1", () => {
+    const logSpy = getLogSpy();
+    const answer = '123';
+    const input = ['123'];
+
+    mockQuestions(input);
+
+    const app = new App();
+    app.inputNumbers(answer);
+    
+    expect(logSpy).toHaveBeenCalled();
+  });
+
+  test("case2", () => {
+    const logSpy = getLogSpy();
+    const answer = '123';
+    const input = ['132'];
+
+    mockQuestions(input);
+
+    const app = new App();
+    app.inputNumbers(answer);
+    
+    expect(logSpy).toHaveBeenCalled();
+  });
+
+  test("case3", () => {
+    const answer = '123';
+    const input = ['ddd'];
+
+    mockQuestions(input);
+    
+    expect(() => {
+        const app = new App();
+        app.inputNumbers(answer);
+    }).toThrow();
+  });
+
+  test("case4", () => {
+    const answer = '123';
+    const input = ['012'];
+
+    mockQuestions(input);
+    
+    expect(() => {
+        const app = new App();
+        app.inputNumbers(answer);
+    }).toThrow();
   });
 });
