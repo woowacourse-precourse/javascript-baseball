@@ -34,9 +34,7 @@ class App {
       if (!this.isValid(answer)) {
         throw new Error();
       } else {
-        const data = String(answer)
-          .split("")
-          .map((letter) => Number(letter));
+        const data = answer.split("").map((letter) => Number(letter));
         this.playerNumber = [...data];
       }
     });
