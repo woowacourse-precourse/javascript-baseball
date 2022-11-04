@@ -23,7 +23,9 @@ class App {
   }
 
   play() {
-    console.log(this.randoms);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (playerInput) => {
+      this.inputValidation(playerInput)
+    })
   }
 
 }
