@@ -2,6 +2,7 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
+    this.Answer = null;
     Console.print("숫자 야구 게임을 시작합니다.");
     this.Answer = this.makeComputerArr();
     console.log(this.Answer);
@@ -16,7 +17,7 @@ class App {
     if (flag) {
       this.end();
     } else {
-      this.inputCheck();
+      this.makeInputNum();
     }
   }
 
@@ -45,6 +46,7 @@ class App {
       const inputArr = this.inputCheck(input);
       const resultText = this.compare(inputArr);
       console.log(resultText);
+      this.resultChoice(resultText);
     });
   }
 
