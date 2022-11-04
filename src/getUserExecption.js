@@ -1,4 +1,12 @@
-const getUserExecption = (input) => {};
+const getUserExecption = (input) => {
+  const arr = changeNumberToArray(input);
+  if (checkLength(arr) && checkIsNumber(arr) && checkOverlap(arr)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const changeNumberToArray = (input) => {
   const arr = input
     .toString()
@@ -6,9 +14,11 @@ const changeNumberToArray = (input) => {
     .map((e) => parseInt(e));
   return arr;
 };
+
 const checkLength = (arr) => {
   return arr.length > 3 ? false : true;
 };
+
 const checkIsNumber = (arr) => {
   let check = true;
   const checkList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -20,10 +30,12 @@ const checkIsNumber = (arr) => {
   });
   return check;
 };
+
 const checkOverlap = (arr) => {
   const set = [...new Set(arr)];
   if (arr.length !== set.length) return false;
   return true;
 };
 
+console.log(getUserExecption("123"));
 module.exports = getUserExecption;
