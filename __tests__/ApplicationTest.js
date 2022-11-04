@@ -55,6 +55,16 @@ describe.only("숫자 야구 게임", () => {
     expect(result).toBeLessThan(987);
   });
 
+  test("입력값 검증하기", () => {
+    const app = new App();
+    const number = ["4567", "23", "120", "778", "1", "745"];
+    const isValid = [false, false, false, false, false, true];
+
+    number.forEach((output, idx) => {
+      expect(app.isValidInput(output)).toEqual(isValid[idx]);
+    });
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
