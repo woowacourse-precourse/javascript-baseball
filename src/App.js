@@ -35,7 +35,7 @@ class App {
         computerNumber.push(randomNumber);
       }
     }
-    return computerNumber;
+    this.computerNumber = computerNumber;
   };
 
   isEveryNumberUnique = (nums) => {
@@ -44,17 +44,18 @@ class App {
 
   getUserNumber = () => {
     let userNumber;
-    MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
-      const numberArr = Array.from(inputNumber, Number);
 
-      try {
-        this.checkValidity(numberArr);
-        userNumber = numberArr;
-      } catch (e) {
-        MissionUtils.Console.print(e);
-        MissionUtils.Console.close();
-      }
+    MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
+      userNumber = Array.from(inputNumber, Number);
     });
+
+    try {
+      this.checkValidity(numberArr);
+    } catch (e) {
+      MissionUtils.Console.print(e);
+      MissionUtils.Console.close();
+    }
+
     return userNumber;
   };
 
@@ -128,7 +129,7 @@ class App {
   };
 
   playNewGame = () => {
-    this.computerNumber = this.generateComputerNumber();
+    this.generateComputerNumber();
     this.compareNumbers();
   };
 
