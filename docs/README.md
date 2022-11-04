@@ -23,7 +23,14 @@
 - [ ] 프로그램 구현 완료 후 `ApplicationTest`의 모든 테스트 통과
 - [ ] indent depth가 3이 넘지 않도록 구현 (2까지만 허용)
 - [ ] 함수(메서드)가 한가지 일만 하도록 최대한 작게 작성
-- [ ] Jest를 이용한 TDD방식 활용
+- [ ] Jest를 이용한 TDD방식 활용 (StringTest.js 참고하여 작성)
 - [ ] 사용 라이브러리
   - MissionUtils 라이브러리에서 제공하는 `Random` 및 `Console` API를 사용하여 구현
   - 사용자의 값을 입력 받고 출력하기 위해서는 `Console.readLine`, `Console.print`를 활용
+
+### 기능 구현 사항
+
+[ ] random 값 (컴퓨터의 수) 생성
+[ ] 2. 입력 값 입력
+[ ] 3. Random 값과 입력 값 비교
+[ ] 4. 입력 받기
