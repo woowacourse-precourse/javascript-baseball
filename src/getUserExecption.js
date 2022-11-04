@@ -9,5 +9,16 @@ const changeNumberToArray = (input) => {
 const checkLength = (arr) => {
   return arr.length > 3 ? false : true;
 };
+const checkIsNumber = (arr) => {
+  let check = true;
+  const checkList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  arr.forEach((num) => {
+    if (!checkList.includes(num)) {
+      console.log(num);
+      check = false;
+    }
+  });
+  return check;
+};
 
 module.exports = getUserExecption;
