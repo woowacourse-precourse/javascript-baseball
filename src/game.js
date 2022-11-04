@@ -1,27 +1,37 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { RANDOM_NUMBER } = require('./constants');
+const { MESSAGE } = require('./constants');
 
 class Game {
+  constructor() {
+    this.randomNumber;
+  }
+
+  init() {
+    this.start(MESSAGE.START);
+    this.generateRandomNumber(1, 9, 3);
+  }
+
   start(startMessage) {
     MissionUtils.Console.print(startMessage);
   }
 
   generateRandomNumber(min, max, length) {
-    const randomNumber = [];
-    while (randomNumber.length < length) {
+    this.randomNumber = [];
+    while (this.randomNumber.length < length) {
       const number = MissionUtils.Random.pickNumberInRange(min, max);
-      if (!randomNumber.includes(number)) {
-        randomNumber.push(number);
+      if (!this.randomNumber.includes(number)) {
+        this.randomNumber.push(number);
       }
     }
 
-    return randomNumber;
+    return this.randomNumber;
   }
 
-  getNumberFromUser(enterMessage) {
-    MissionUtils.Console.readLine(enterMessage, (inputNumbers) => {
-      // try, catch ?
+  play() {
+    MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (inputNumbers) => {
       this.isValidInputNumber(inputNumbers, RANDOM_NUMBER.RANGE);
+      console.log(this.randomNumber);
     });
   }
 
