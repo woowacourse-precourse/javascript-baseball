@@ -1,7 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-let computer = [];
 
 class App {
+  constructor() {
+    this.computer = [];
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.computerNumber();
@@ -9,11 +12,11 @@ class App {
   }
 
   computerNumber() {
-    computer = [];
-    while (computer.length < 3) {
+    this.computer = [];
+    while (this.computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
+      if (!this.computer.includes(number)) {
+        this.computer.push(number);
       }
     }
   }
@@ -27,9 +30,9 @@ class App {
         throw new Error();
 
       if (answer != 2 && answer != 1) {
-        for (let i = 0; i < computer.length; i++) {
-          if (i == computer.indexOf(parseInt(answer[i]))) strike++;
-          else if (computer.includes(parseInt(answer[i]))) ball++;
+        for (let i = 0; i < this.computer.length; i++) {
+          if (i == this.computer.indexOf(parseInt(answer[i]))) strike++;
+          else if (this.computer.includes(parseInt(answer[i]))) ball++;
         }
 
         if (ball > 0 && strike > 0) {
