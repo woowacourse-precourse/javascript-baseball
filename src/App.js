@@ -5,16 +5,50 @@ class App {
     this.error = false;
   }
   play() {
-    // this.play_number_baseball_game();
+    this.play_number_baseball_game();
+
     /**while(True),
      * 다 맞히면 게임 종료 후 1,2 선택 (1이면 재시작, 2면 애플리케이션을 종료)
      * 입력값 잘못되면 throw 이용한 예외처리 => 얘는 애플리케이션을 종료
      * **/
   }
 
-  // play_number_baseball_game() {
+  play_number_baseball_game() {
+    // MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    // const answer = this.computer_random_number();
+    // this.receive_input();
+    // MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input_num => {
+    //   MissionUtils.Console.close();
+    //   const compare_result = this.compare_and_give_hint(input_num, answer);
+    //   if (compare_result === '3스트라이크') {
+    //     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    //   } else {
+    //     MissionUtils.Console.print(compare_result);
+    //   }
+    // });
+  }
 
-  // }
+  receive_input() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input_num => {
+      MissionUtils.Console.close();
+      const validation = this.check_input_validation(input_num);
+      if (!validation) {
+        throw '잘못된 형식입니다';
+      }
+    });
+  }
+
+  check_input_validation(input) {
+    let validation;
+    const num_range = /^[0-9]+$/;
+    let checkNum = num_range.test(input);
+    let checkLength = input.length;
+    const set = new Set(input);
+    let checkOverlap = set.size;
+
+    if (checkNum && checkLength === 3 && checkOverlap === 3) return true;
+    return false;
+  }
 
   computer_random_number() {
     const number_list = [];
@@ -38,7 +72,9 @@ class App {
       }
     }
     if (ball === 0 && strike === 0) return '낫싱';
-    else if (strike === 3) return true;
+    else if (strike === 3) return '3스트라이크';
+    else if (strike === 0) return `${ball}볼`;
+    else if (ball === 0) return `${strike}스트라이크`;
     return `${ball}볼 ${strike}스트라이크`;
   }
 }
