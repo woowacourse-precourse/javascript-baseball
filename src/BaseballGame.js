@@ -5,6 +5,7 @@ const input = require("./util/input");
 class BaseballGame {
   constructor() {
     this.pickedNumberByComputer = pickedNumberByComputer();
+    console.log(this.pickedNumberByComputer);
   }
 
   countStrikeBallNothing(pickedNumberByUser, pickedNumberByComputer) {
@@ -34,11 +35,11 @@ class BaseballGame {
 
   async playTurn() {
     let pickedNumberByUser = await input("숫자를 입력해주세요 : ");
-    let [strike, ball, nothing] = countStrikeBallNothing(
+    let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
       this.pickedNumberByComputer
     );
-    printResultsForCount(strike, ball, nothing);
+    this.printResultsForCount(strike, ball, nothing);
 
     return strike;
   }
