@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const NUMBER_LENGTH = 3;
+
 class App {
   #computer = [];
 
@@ -16,6 +18,31 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
       String(number)
     );
+  }
+
+  isValid(number) {
+    if (!Number(number)) {
+      return false;
+    }
+
+    if (number.length !== NUMBER_LENGTH) {
+      return false;
+    }
+
+    if (number.includes("0")) {
+      return false;
+    }
+
+    const hasDuplicate = [...number].some((item) => {
+      const regex = new RegExp(`[${item}]`, "g");
+      return number.match(regex)?.length > 1;
+    });
+
+    if (hasDuplicate) {
+      return false;
+    }
+
+    return true;
   }
 
   play() {}
