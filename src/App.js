@@ -6,8 +6,6 @@ class App {
     this.NUMBER_LENGTH_MODE = 3;
     this.RESTART = "1";
     this.EXIT = "2";
-    this.BALL = 0;
-    this.STRIKE = 0;
   }
 
   play() {
@@ -24,7 +22,10 @@ class App {
 
   checktryNum(tryNum) {
     this.checkValid(tryNum);
-    this.checkAnswer(tryNum, this.answer);
+    const IS_ANSWER = this.checkAnswer(tryNum, this.answer);
+    if (IS_ANSWER) {
+      return;
+    }
     const tryNumArr = tryNum.split("");
     tryNumArr.forEach((tryNumEle, tryNumEleIdx) =>
       this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
@@ -53,7 +54,7 @@ class App {
         answer.push(number);
       }
     }
-
+    console.log(answer);
     return answer;
   }
 
@@ -63,7 +64,9 @@ class App {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.selectRestartOrExit();
+      return IS_ANSWER;
     }
+    return IS_ANSWER;
   }
 
   selectRestartOrExit() {
