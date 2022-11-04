@@ -11,11 +11,12 @@
 
   "rules": {
     "no-var": "error",
-    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
     "no-param-reassign": "error",
     "no-unused-vars": "warn",
     "no-multiple-empty-lines": "error",
+    "no-console": "off",
     "max-depth": ["error", 2],
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "class-methods-use-this": "off"
   }
 }
