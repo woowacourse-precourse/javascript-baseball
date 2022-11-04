@@ -43,6 +43,7 @@ class App {
 	checkRestart() {
 		MissionUtils.Console.readLine(GAME_MESSAGES.GAME_RESTART_MESSAGE, answer => {
 			if (!(answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO)) {
+				this.closeConsole();
 				throw new Error(GAME_MESSAGES.RESTART_ERROR_MESSAGE);
 			}
 			if (answer === RESTART_ANSWER.YES) {
@@ -50,8 +51,12 @@ class App {
 				this.playMainGame();
 				return;
 			}
-			MissionUtils.Console.close();
+			this.closeConsole();
 		});
+	}
+
+	closeConsole() {
+		MissionUtils.Console.close();
 	}
 
 	printMessage(message) {
