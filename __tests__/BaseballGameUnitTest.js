@@ -30,4 +30,39 @@ describe("숫자 야구 게임 단위 테스트", () => {
     expect(app.isValidNumber("1234")).toBe(false);
     expect(app.isValidNumber("abc")).toBe(false);
   });
+
+  test("getResult 메서드로 스트라이크, 볼 정보를 반환", () => {
+    const app = new App();
+
+    const TEST_CASE = [
+      {
+        inputs: ["123", "123"],
+        results: [3, 0],
+      },
+      {
+        inputs: ["713", "123"],
+        results: [1, 1],
+      },
+      {
+        inputs: ["713", "145"],
+        results: [0, 1],
+      },
+      {
+        inputs: ["713", "671"],
+        results: [0, 2],
+      },
+      {
+        inputs: ["713", "256"],
+        results: [0, 0],
+      },
+    ];
+
+    TEST_CASE.forEach(({ inputs, results }) => {
+      const [computerNumber, enteredNumber] = inputs;
+      const [strikeCount, ballCount] = results;
+      const { strike, ball } = app.getResult(computerNumber, enteredNumber);
+      expect(strike).toBe(strikeCount);
+      expect(ball).toBe(ballCount);
+    });
+  });
 });
