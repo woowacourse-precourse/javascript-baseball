@@ -1,8 +1,11 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
-  generateGoalNumber(minNumber = 1, maxNumber = 9, numberLength = 3) {
-    return Random.pickUniqueNumbersInRange(minNumber, maxNumber, numberLength);
+  generateGoalNumber() {
+    const MIN = 1;
+    const MAX = 9;
+    const LENGTH = 3;
+    return Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
   }
 
   async receiveNumberFromUser() {
