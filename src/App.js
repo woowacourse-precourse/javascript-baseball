@@ -1,10 +1,6 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-// class App {
-//   play() {}
-// }
-console.log('숫자 야구 게임을 시작합니다.');
 
-const setComputerNumber = () {
+const setComputerNumber = () => {
   let computerNumber = [];
   while (computerNumber.length < 3) {
     const randomNumber = Random.pickNumberInRange(1, 9);
@@ -18,8 +14,6 @@ const setComputerNumber = () {
 
 const setUserNumber = (computer) => {
   let input;
-  let strike = 0;
-  let ball = 0;
   Console.readLine('숫자 3자리를 입력해주세요 : ', (num) => {
     input = num.toString().split("").map((str) => Number(str));
     checkNumber(input, computer);
@@ -27,6 +21,8 @@ const setUserNumber = (computer) => {
 }
 
 const checkNumber = (input, computer) => {
+  let strike = 0;
+  let ball = 0;
   for (let i = 0; i < input.length; i++) {
     if (input[i] == computer[i]) {
       strike++;
@@ -77,7 +73,19 @@ const closeGame = () => {
   Console.close();
 }
 
-let computer = setComputerNumber();
-let user = setUserNumber(computer);
+class App {
+  play() {
 
-// module.exports = App;
+    console.log('숫자 야구 게임을 시작합니다.');
+    let answer = setComputerNumber();
+
+    setUserNumber(answer);
+
+    return;
+  }
+}
+
+const app = new App();
+app.play();
+
+module.exports = App;
