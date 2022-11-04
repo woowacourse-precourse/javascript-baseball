@@ -4,7 +4,7 @@ class App {
     this.missionConsole = require("@woowacourse/mission-utils").Console;
   }
   play() {
-    return this.makeRandomNumbers();
+    return this.getUserInput();
   }
 
   makeRandomNumbers() {
@@ -20,8 +20,18 @@ class App {
 
   getUserInput() {
     this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
-      this.missionConsole.print(userInputNumbers);
+      if (this.compareNumber(this.makeRandomNumbers(), userInputNumbers)) {
+        this.missionConsole.print(this.compareNumber(this.makeRandomNumbers(), userInputNumbers));
+      }
+      this.missionConsole.close();
     });
+  }
+
+  compareNumber(pcInputNumbers, userInputNumbers) {
+    if (+pcInputNumbers > +userInputNumbers) return "pc 승";
+    if (+pcInputNumbers === +userInputNumbers) return "무승부";
+    if (+pcInputNumbers < +userInputNumbers) return "유저 승";
+    return "error";
   }
 }
 const app = new App();
