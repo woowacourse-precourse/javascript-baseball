@@ -5,7 +5,7 @@ class App {
   async play() {
     printGameStartMsg();
     const computerNumber = createComputerNumber();
-    const number = await inputNumber();
+    const userNumber = await inputNumber();
   }
 }
 
