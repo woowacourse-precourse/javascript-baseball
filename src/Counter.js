@@ -6,9 +6,8 @@ class Counter {
   countStrike(userNumberStr, computerNumberArr) {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
-      oneLetterOfuserNumberStr === comCurNum ? count + 1 : count;
-      if (oneLetterOfuserNumberStr === comCurNum) {
+      const oneLetterOfUserNumberStr = Number(userNumberStr[index]);
+      if (oneLetterOfUserNumberStr === comCurNum) {
         return count + 1;
       }
       return count;
@@ -19,10 +18,10 @@ class Counter {
   countBall(userNumberStr, computerNumberArr) {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfuserNumberStr = Number(userNumberStr[index]);
+      const oneLetterOfUserNumberStr = Number(userNumberStr[index]);
       if (
-        computerNumberArr.includes(oneLetterOfuserNumberStr) &&
-        comCurNum !== oneLetterOfuserNumberStr
+        computerNumberArr.includes(oneLetterOfUserNumberStr) &&
+        comCurNum !== oneLetterOfUserNumberStr
       ) {
         return count + 1;
       }

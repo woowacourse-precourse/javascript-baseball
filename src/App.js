@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Counter = require("./Counter");
+const Print = require("./Print");
 const Valid = require("./Valid");
 
 class App {
@@ -31,29 +32,20 @@ class App {
       this.computerNumberArr
     );
     this.printNumberOfBallAndStrike(totalCountBall, totalCountStrike);
-    this.getUserNumberFromReadLine();
   }
 
   printNumberOfBallAndStrike(totalCountBall, totalCountStrike) {
-    if (totalCountStrike === 0 && totalCountBall === 0) {
-      return MissionUtils.Console.print("낫싱");
-    } else if (totalCountStrike === 3) {
-      MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    const print = new Print();
+    print.printPlayGame(totalCountBall, totalCountStrike);
+    if (totalCountBall === 0 && totalCountStrike === 3) {
       return this.confirmExitOrReStart();
-    } else if (totalCountBall === 0) {
-      return MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
-    } else if (totalCountStrike === 0) {
-      return MissionUtils.Console.print(`${totalCountBall}볼`);
     }
-    return MissionUtils.Console.print(
-      `${totalCountBall}볼 ${totalCountStrike}스트라이크`
-    );
+    return this.getUserNumberFromReadLine();
   }
 
   confirmExitOrReStart() {
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userNumberStr) => {
         if (userNumberStr === "1") {
           this.computerNumberArr = this.getRandomNumberFromComputer();
