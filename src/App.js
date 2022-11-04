@@ -110,7 +110,7 @@ class App {
   }
 
   exitGame() {
-    Console.print('게임을 종료합니다.');
+    Console.print('게임 종료');
     Console.close();
   }
 
