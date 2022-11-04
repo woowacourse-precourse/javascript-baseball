@@ -23,7 +23,26 @@ class App {
     this.inputAnswerException()
   }
 
-  inputAnswerException()
+  inputAnswerException() {
+    try {
+      if (this.userNumber.length !== 3) {
+        throw new Error
+      }
+      if (this.userNumber[0] === this.userNumber[1] ||
+          this.userNumber[0] === this.userNumber[2] ||
+          this.userNumber[1] === this.userNumber[2]) {
+        throw new Error
+      }
+      if (isNaN(this.userNumber[0]) || this.userNumber[0] === 0 ||
+          isNaN(this.userNumber[1]) || this.userNumber[1] === 0 ||
+          isNaN(this.userNumber[2]) || this.userNumber[2] === 0) {
+        throw new Error
+      }
+      answerCompare()
+    } catch {
+      gameEnd()
+    }
+  }
 }
 
 const baseBallGame = new App;
