@@ -1,19 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const {
-	START_MESSAGE,
 	NUMBER_LENGTH,
 	NUMBER_RANGE,
-	ERROR_MESSAGE,
-	INPUT_USER_NUM_MESSAGE,
 	SHOULD_NOT_INCLUDE_NUMBER,
-	USER_INPUT_FEEDBACK_MESSAGE,
-	THREE_STRIKE_MESSAGE,
-	GAME_END_MESSAGE,
-	GAME_RESTART_MESSAGE,
 	RESTART_ANSWER,
-	RESTART_ERROR_MESSAGE,
 	SCORE_START_NUMBER,
 	RESULT_MESSAGES,
+	GAME_MESSAGES,
+	ERROR_MESSAGES,
 } = require('./constants');
 
 class App {
@@ -28,9 +22,9 @@ class App {
 	}
 
 	play() {
-		this.printMessage(START_MESSAGE);
+		this.printMessage(GAME_MESSAGES.START_MESSAGE);
 		this.playMainGame();
-		this.printMessage(GAME_RESTART_MESSAGE);
+		this.printMessage(GAME_MESSAGES.GAME_RESTART_MESSAGE);
 		this.checkRestart();
 	}
 
@@ -39,17 +33,17 @@ class App {
 		while (this.gameEnd === false) {
 			const resultMessage = this.getCompareResult(this.computerNumber, this.getUserNumber());
 			this.printMessage(resultMessage);
-			if (resultMessage === THREE_STRIKE_MESSAGE) {
+			if (resultMessage === GAME_MESSAGES.THREE_STRIKE_MESSAGE) {
 				this.gameEnd = true;
-				this.printMessage(GAME_END_MESSAGE);
+				this.printMessage(GAME_MESSAGES.GAME_END_MESSAGE);
 			}
 		}
 	}
 
 	checkRestart() {
-		MissionUtils.Console.readLine(GAME_RESTART_MESSAGE, answer => {
+		MissionUtils.Console.readLine(GAME_MESSAGES.GAME_RESTART_MESSAGE, answer => {
 			if (!(answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO)) {
-				throw new Error(RESTART_ERROR_MESSAGE);
+				throw new Error(GAME_MESSAGES.RESTART_ERROR_MESSAGE);
 			}
 			if (answer === RESTART_ANSWER.YES) {
 				this.printMessage(answer);
@@ -74,10 +68,10 @@ class App {
 
 	getUserNumber() {
 		let userAnswer;
-		MissionUtils.Console.readLine(INPUT_USER_NUM_MESSAGE, answer => {
-			this.printMessage(USER_INPUT_FEEDBACK_MESSAGE(answer));
+		MissionUtils.Console.readLine(GAME_MESSAGES.INPUT_USER_NUM_MESSAGE, answer => {
+			this.printMessage(GAME_MESSAGES.USER_INPUT_FEEDBACK_MESSAGE(answer));
 			if (!this.validateUserNumber(answer)) {
-				throw new Error(ERROR_MESSAGE);
+				throw new Error(ERROR_MESSAGES.WRONG_NUMBER_ERROR_MESSAGE);
 			}
 			userAnswer = answer;
 		});
