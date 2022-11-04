@@ -67,11 +67,33 @@ class App {
     this.gameNumber = gameNumbers;
   }
 
-  inputUserNumbers() {
-    this.readLine(
-      this.MESSAGES.INSERT_NUMBER,
-      (num) => (this.userNumber = num)
+  isNumber(value) {
+    return typeof value === "number";
+  }
+
+  isValidNumber(number) {
+    return number >= this.minNum && number <= this.maxNum;
+  }
+
+  isValidInput(input) {
+    const numbers = input.split("").map(Number);
+
+    return (
+      numbers.every((number) => this.isNumber(number)) &&
+      input.length === [...new Set(numbers)].length &&
+      [...new Set(numbers)].length === this.count &&
+      numbers.every((number) => this.isValidNumber(number))
     );
+  }
+
+  inputUserNumbers() {
+    this.readLine(this.MESSAGES.INSERT_NUMBER, (input) => {
+      if (!this.isValidInput(input)) {
+        // 여기 throw Error 하고 아래 console.log문은 삭제
+        console.log(input);
+      }
+      this.userNumber = input.split("").map(Number);
+    });
   }
 
   startGame() {
@@ -84,5 +106,8 @@ class App {
     this.startGame();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
