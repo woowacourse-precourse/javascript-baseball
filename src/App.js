@@ -12,6 +12,7 @@ class App {
         this.threeDigitsAnswer.push(randomNumber);
       }
     }
+    console.log(this.threeDigitsAnswer);
   }
 
   init() {
@@ -38,13 +39,31 @@ class App {
     }
   }
 
+  checkAnswer(userInput) {
+    let matchCnt = 0;
+
+    for (let i = 0; i < userInput.length; i++) {
+      if (userInput[i] === this.threeDigitsAnswer[i]) {
+        matchCnt += 1;
+      }
+    }
+
+    if (matchCnt === 3) {
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return;
+    }
+
+    this.getUserInput();
+  }
+
   getUserInput() {
     Console.readLine('숫자를 입력해주세요 : ', (expectedAnswer) => {
       try {
         this.handleUserInputException(expectedAnswer);
+        const userInput = expectedAnswer.split('').map(Number);
+        this.checkAnswer(userInput);
       } catch (e) {
         Console.print(e.message);
-        Console.close();
       }
     });
   }
