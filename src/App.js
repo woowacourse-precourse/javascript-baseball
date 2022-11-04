@@ -78,6 +78,16 @@ class App {
       }
     }
   }
+
+  getStrike() {
+    this.strikeCount = 0;
+
+    for (let idx = 0; idx < this.answer.length; idx++) {
+      if (this.userNumber[idx] === this.answer[idx]) {
+        this.strikeCount++;
+      }
+    }
+  }
 }
 
 const baseBallGame = new App;
