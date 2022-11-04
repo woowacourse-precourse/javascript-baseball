@@ -1,5 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const REPLY = {
+  replay: 1,
+  gameEnd: 2,
+};
+
+const MESSAGE = {
+  gameStart: "숫자 야구 게임을 시작합니다.",
+  askReplay: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  gameEnd: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  askNumber: "숫자를 입력해주세요 :",
+};
+
 class App {
   constructor() {
     this.computerNumber = this.createComputerNumber();
@@ -22,7 +34,7 @@ class App {
 
   getUserNumber = () => {
     let userNumber;
-    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (inputNumber) => {
+    MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
       try {
         const valideNumbers = this.checkValidity(inputNumber);
         userNumber = valideNumbers;
@@ -99,7 +111,7 @@ class App {
   };
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.gameStart);
     this.compareNumbers();
   }
 }
