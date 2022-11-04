@@ -7,6 +7,11 @@ class App {
     const computerNumber = createComputerNumber();
     const userNumber = await inputNumber();
     userNumberException(userNumber);
+    if (isAnswer()) {
+      // 정답인 경우
+    } else {
+      // 정답이 아닌 경우
+    }
   }
 }
 
@@ -65,6 +70,10 @@ function userNumberException(userNumber) {
   ) {
     throw new Error('Invalid number..!');
   }
+}
+
+function isAnswer(computerNumber, userNumber) {
+  return computerNumber.join('') === userNumber.join('');
 }
 
 module.exports = App;
