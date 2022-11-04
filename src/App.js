@@ -73,7 +73,8 @@ const reStart = () => {
 }
 
 const closeGame = () => {
-
+  Console.print('게임 종료');
+  Console.close();
 }
 
 let computer = setComputerNumber();
