@@ -22,7 +22,14 @@ class App {
   }
 
   isStrike(randomItem, inputItem) {
-    return randomItem === +inputItem;
+    return randomItem === inputItem;
+  }
+
+  isBall(random, input, numberIndex) {
+    const randomItem = random[numberIndex];
+    const inputItem = input[numberIndex];
+
+    return !this.isStrike(randomItem, inputItem) && random.includes(inputItem);
   }
 
   play() {}
