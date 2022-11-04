@@ -29,7 +29,10 @@ module.exports = class Game {
   async getUserNumberInput() {
     const userNumberInput = await input("숫자를 입력해 주세요 : ");
     const validationChecker = new GameInputValidation(userNumberInput);
-    validationChecker.validation();
+    if (validationChecker.validation()) {
+      MissionUtils.Console.close();
+      return;
+    }
     const gameResultString = this.getGameResultString(userNumberInput);
 
     print(gameResultString);
@@ -80,7 +83,10 @@ module.exports = class Game {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
     );
     const gameControlValidation = new GameControlValidation(userControlInput);
-    gameControlValidation.validation();
+    if (gameControlValidation.validation()) {
+      MissionUtils.Console.close();
+      return;
+    }
     if (userControlInput == RESTART) this.gameInit();
     else MissionUtils.Console.close();
   }
