@@ -128,5 +128,54 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
-  })
+  });
+
+  test("예외처리-0을 포함한 숫자입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["013"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("예외처리-문자 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["_29"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("예외처리-중복되는 숫자 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["229"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("예외처리-3자리 이상 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["2198"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
