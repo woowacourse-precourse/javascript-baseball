@@ -8,6 +8,7 @@ class App {
     const computerNumbers = computerNumbersMaking();
     console.log(computerNumbers);
     const playerNumbers = playerNumbersInput();
+    console.log(playerNumbers);
   }
 }
 
@@ -27,6 +28,11 @@ const computerNumbersMaking = () => {
 };
 
 const playerNumbersInput = () => {
+  let input;
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    input = answer;
+  });
+  return input;
 };
 
 module.exports = App;
