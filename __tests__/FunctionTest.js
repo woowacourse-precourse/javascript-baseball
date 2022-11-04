@@ -24,4 +24,15 @@ describe("목표값 테스트", () => {
     const refNumbersArr = refNumbersGetter();
     expect(refNumbersArr.length).toEqual(3);
   });
+
+  test("목표값 내 중복 확인", () => {
+    const refNumbersArr = refNumbersGetter();
+
+    let duplicateChecker;
+    refNumbersArr.map((number, index) => {
+      duplicateChecker =
+        refNumbersArr.indexOf(number) === index ? "clear" : "duplicate";
+    });
+    expect(duplicateChecker).toEqual("clear");
+  });
 });
