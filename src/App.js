@@ -10,8 +10,11 @@ class App {
   #random;
 
   constructor() {
-    const { STARTPOINT, ENDPOINT, COUNT } = RANDOMLIST;
-    this.#random = Random.pickUniqueNumbersInRange(STARTPOINT, ENDPOINT, COUNT);
+    this.#random = Random.pickUniqueNumbersInRange(
+      RANDOMLIST.STARTPOINT,
+      RANDOMLIST.ENDPOINT,
+      RANDOMLIST.COUNT,
+    );
   }
 
   get3RandomNumbers() {
