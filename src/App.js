@@ -1,5 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const { rule } = require('./constants');
+const { message, rule } = require('./constants');
 
 class App {
   constructor() {
@@ -8,7 +8,11 @@ class App {
 
   play() {
     this.computerNumbers = this.generateComputerNumbers();
-    Console.close();
+    Console.print(message.START);
+    Console.readLine(message.INPUT, (number) => {
+      Console.print(`입력 숫자 : ${number}`);
+      Console.close();
+    });
   }
 
   generateComputerNumbers() {
