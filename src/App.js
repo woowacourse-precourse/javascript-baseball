@@ -29,7 +29,28 @@ class App {
     return stringValue.length === 3 && /^[1-9]{3}$/.test([...new Set(stringValue)].join(''));
   }
 
-  #getResult() {}
+  #gameOver() {}
+
+  #getResult() {
+    let ball = 0;
+    let strike = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (this.#computerValue[i] === this.#userValue[i]) strike++;
+      else if (this.#computerValue.includes(this.#userValue[i])) ball++;
+    }
+
+    const nothingString = ball === 0 && strike === 0 ? '낫싱' : '';
+    const ballString = ball ? `${ball}볼 ` : '';
+    const strikeString = strike ? `${strike}스트라이크` : '';
+
+    MissionUtils.Console.print(nothingString + ballString + strikeString);
+
+    if (strike === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.#gameOver();
+    } else this.#readUserValue();
+  }
 
   #setUserValue(value) {
     if (this.#isAvailableValue(value)) {
