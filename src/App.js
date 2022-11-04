@@ -46,17 +46,15 @@ const checkNumber = (input, computer) => {
 }
 
 const printCount = (strike, ball) => {
-  // if (strike > 0 && ball > 0) {
-  //   console.log(`${strike} 스트라이크 ${ball} 볼`);
-  // } else if (strike == 0 && ball > 0) {
-  //   console.log(`${ball} 볼`);
-  // } else if (strike > 0 && ball == 0) {
-  //   console.log(`${strike} 스트라이크`);
-  // } else if (strike == 3) {
-  //   console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-  // } else {
-  //   console.log('낫싱');
-  // }
+  if (strike > 0 && ball > 0) {
+    Console.print(`${strike} 스트라이크 ${ball} 볼`);
+  } else if (strike === 0 && ball > 0) {
+    Console.print(`${ball} 볼`);
+  } else if (strike > 0 && ball === 0) {
+    Console.print(`${strike} 스트라이크`);
+  } else {
+    Console.print('낫싱');
+  }
 }
 
 let computer = setComputerNumber();
