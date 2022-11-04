@@ -1,12 +1,14 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
+const input = require("./util/input");
 
-function gameManager() {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+class GameManager {
+  startGame() {
+    Console.print("숫자 야구 게임을 시작합니다.");
+  }
 
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (answer) => answer
-  );
+  async restartOrEnd() {
+    await input("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
+  }
 }
 
-module.exports = gameManager;
+module.exports = GameManager;
