@@ -83,4 +83,14 @@ describe('숫자 야구 게임', () => {
 			expect(result).toEqual(messages[index]);
 		});
 	});
+
+	test('initializeGame 메소드로 초기값 설정', () => {
+		const randoms = [1, 3, 5, 5, 8, 9];
+		mockRandoms(randoms);
+		const app = new App();
+		app.initializeGame();
+
+		expect(app.gameEnd).toEqual(false);
+		expect(app.computerNumber).toEqual('135');
+	});
 });
