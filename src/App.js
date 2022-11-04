@@ -1,10 +1,14 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const message = require("./constants/message.js");
-const condition = require("./constants/condition.js");
+const { Random, Console } = require("@woowacourse/mission-utils");
+const { GAME_START_MESSAGE } = require("./constants/message.js");
+const {
+  MAX_NUMBER_LENGTH,
+  MAX_NUMBER_RANGE,
+  MIN_NUMBER_RANGE,
+} = require("./constants/condition.js");
 
 class App {
   constructor() {
-    MissionUtils.Console.print(message.GAME_START);
+    Console.print(GAME_START_MESSAGE);
     this.computerInput = this.generateComputerInput();
   }
 
@@ -12,13 +16,8 @@ class App {
 
   generateComputerInput() {
     let randomNum = new Set();
-    while (randomNum.size !== condition.MAX_NUMBER_LENGTH) {
-      randomNum.add(
-        MissionUtils.Random.pickNumberInRange(
-          condition.MIN_NUMBER_RANGE,
-          condition.MAX_NUMBER_RANGE
-        )
-      );
+    while (randomNum.size !== MAX_NUMBER_LENGTH) {
+      randomNum.add(Random.pickNumberInRange(MIN_NUMBER_RANGE, MAX_NUMBER_RANGE));
     }
 
     return [...randomNum].join("");
