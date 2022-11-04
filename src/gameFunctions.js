@@ -25,8 +25,9 @@ const gameResultOutput = (strikeNum, ballNum) => {
 
   if (strikeNum !== 3) {
     let message = "";
-    message += ballNum ? `${ballNum}볼 ` : "";
-    message += strikeNum ? `${strikeNum}스트라이크 ` : "";
+    message += ballNum > 0 ? `${ballNum}볼` : "";
+    message += ballNum > 0 && strikeNum > 0 ? " " : "";
+    message += strikeNum > 0 ? `${strikeNum}스트라이크` : "";
     MissionUtils.Console.print(message);
     return 0;
   }
