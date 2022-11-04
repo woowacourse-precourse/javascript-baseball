@@ -8,9 +8,22 @@ class App {
     return String([...computer].join(""));
   }
 
+  isValidInput(input) {
+    return (
+      new RegExp(/^[1-9]{3}$/).test(String(input)) &&
+      !new RegExp(/([1-9])\1/).test(String(input))
+    );
+  }
+
   play() {
     MissionUtils.Console.print("숫자게임을 시작합니다.");
-    this.selectNum();
+    let computerNum = this.selectNum();
+    while (true) {
+      MissionUtils.Console.readLine("숫자를 입력해주세요.", (number) => {
+        isValidInput(number);
+      });
+      break;
+    }
   }
 }
 
