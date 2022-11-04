@@ -21,6 +21,50 @@ class App {
         });
     }
 
+    getBalls(inputNumber) {
+        let ball = 0;
+        for (let i = 0; i < inputNumber.length; i++) {
+            const number = Number(inputNumber[i]);
+            if (
+                this.computer.includes(number) &&
+                this.computer.indexOf(number) !== i
+            ) {
+                ball++;
+            }
+        }
+        return ball;
+    }
+
+    getStrikes(inputNumber) {
+        let strike = 0;
+        for (let i = 0; i < inputNumber.length; i++) {
+            const number = Number(inputNumber[i]);
+            if (number === this.computer[i]) {
+                strike++;
+            }
+        }
+        return strike;
+    }
+
+    getHintMessage(inputNumber) {
+        let hintMessage = "";
+        const ball = this.getBalls(inputNumber);
+        const strike = this.getStrikes(inputNumber);
+        if (ball > 0) {
+            hintMessage += `${ball}볼`;
+        }
+        if (hintMessage.length > 0) {
+            hintMessage += " ";
+        }
+        if (strike > 0) {
+            hintMessage += `${strike}스트라이크`;
+        }
+        if (ball === 0 && strike === 0) {
+            hintMessage += "낫싱";
+        }
+        return hintMessage;
+    }
+
     play() {}
 }
 
