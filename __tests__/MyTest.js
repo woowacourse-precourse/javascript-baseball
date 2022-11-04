@@ -1,4 +1,21 @@
 const App = require('../src/App');
+const MissionUtils = require('@woowacourse/mission-utils');
+
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
 
 describe('숫자 야구 게임 My Test', () => {
   test('3자리 숫자 랜덤 숫자 생성', () => {
@@ -62,5 +79,18 @@ describe('숫자 야구 게임 My Test', () => {
       '1볼 1스트라이크',
       '3스트라이크',
     ]);
+  });
+
+  test('사용자의 잘못된 입력시 예외 발생 후 애플리케이션 종료', () => {
+    const computer = [3, 6, 9];
+    const user_inputs = ['324', '23'];
+
+    mockRandoms(computer);
+    mockQuestions(user_inputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
   });
 });
