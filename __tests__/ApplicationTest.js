@@ -72,13 +72,24 @@ describe("숫자 야구 게임", () => {
     );
   });
 
-  test.only("사용자의 숫자를 MissionUtils.Console.readLine 함수를 이용하여 입력받는다.", () => {
+  test("사용자의 숫자를 MissionUtils.Console.readLine 함수를 이용하여 입력받는다.", () => {
     const readLineSpy = getReadLineSpy();
 
     const app = new App();
     app.play();
 
     expect(readLineSpy).toHaveBeenCalled();
+  });
+
+  test("사용자의 숫자 입력을 받아 저장한다.", () => {
+    const userInput = ["123"];
+
+    mockQuestions(userInput);
+
+    const app = new App();
+    app.play();
+
+    expect(app.userNumber).toBe(userInput[0]);
   });
 
   test("게임 종료 후 재시작", () => {
