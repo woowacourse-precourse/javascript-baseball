@@ -6,6 +6,7 @@ class App {
     let ball = 0;
     gameStartingText();
     const computerNumbers = computerNumbersMaking();
+    console.log(computerNumbers);
     const playerNumbers = playerNumbersInput();
   }
 }
@@ -13,7 +14,6 @@ class App {
 const gameStartingText = () => {
   console.log("숫자 야구 게임을 시작합니다.");
 }
-
 
 const computerNumbersMaking = () => {
   const computer = [];
