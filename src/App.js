@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+
+
 const CHECK_INPUT_DURING_GAME = function checkInputDuringGame(userInput) {
   if (userInput.length !== 3) return false;
   if (isNaN(userInput)) return false;
@@ -9,14 +11,17 @@ const CHECK_INPUT_DURING_GAME = function checkInputDuringGame(userInput) {
   if (!(userInput.match(/[123456789]{3}/))) return false;
   return true;
 }
+
 const CHECK_INPUT_AFTER_GAME = function checkInputAfterGame(userInput) {
   if (+userInput === 1 || +userInput === 2) return true;
   return false;
 }
 
+
+
 const MAKEANSWER = function makeAnswerWithThreeUniqueNumbers() {
   let threeUniqueNumbers = []
-  while (threeUniqueNumbers.length < 3){
+  while (threeUniqueNumbers.length < 3) {
     const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
     threeUniqueNumbers = CHECK_DUPLICATE(threeUniqueNumbers, RANDOM_NUMBER);
   }
@@ -28,6 +33,7 @@ const CHECK_DUPLICATE = function checkRepeatedElementOfArray(array, target) {
   if (!array.includes(target)) ARRAY_COPIED.push(target)
   return ARRAY_COPIED;
 }
+
 
 
 const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
@@ -51,6 +57,8 @@ const CHECK_BALL = function numberOfBalls(userInput, answer) {
   return count;
 }
 
+
+
 const RESTART = function restartGame(userInput) {
   if (!CHECK_INPUT_AFTER_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
   if (+userInput === 1) START_GAME();
@@ -60,6 +68,19 @@ const RESTART = function restartGame(userInput) {
 const END_OF_GAME = function askQuestionToUserWhenGameEnds() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userInput) => {
     RESTART(userInput);
+  });
+}
+
+
+
+const START_GAME = function launchNewGame() {
+  const ANSWER = MAKEANSWER();
+  GAME_APP(ANSWER);
+}
+
+const GAME_APP = function gameApplication(answer) {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    GAME_HINT(userInput, answer);
   });
 }
 
@@ -79,16 +100,7 @@ const GAME_HINT = function getHintFromInput(userInput, answer) {
   GAME_APP(answer);
 }
 
-const GAME_APP = function gameApplication(answer) {
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-    GAME_HINT(userInput, answer);
-  });
-}
 
-const START_GAME = function launchNewGame() {
-  const ANSWER = MAKEANSWER();
-  GAME_APP(ANSWER);
-}
 
 class App {
   play() {
