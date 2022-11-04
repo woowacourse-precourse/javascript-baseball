@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { validate } = require('./utils/');
 
 class BaseballGame {
   constructor() {
@@ -16,6 +17,7 @@ class BaseballGame {
     Console.readLine('숫자를 입력해주세요 : ', (guess) => {
       const userGuessToArray = guess.split('').map(Number);
       this.guess = userGuessToArray;
+      validate(this.guess);
     });
   }
 
