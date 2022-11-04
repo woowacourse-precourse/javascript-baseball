@@ -103,4 +103,18 @@ function countBall(computerNumber, userNumber) {
   return ball;
 }
 
+function printResult(computerNumber, userNumber) {
+  const strike = countStrike(computerNumber, userNumber);
+  const ball = countBall(computerNumber, userNumber);
+  let result = ``;
+
+  if (ball) result += `${ball}볼`;
+
+  if (strike) result += ` ${strike}스트라이크`;
+
+  if (result === ``) result += `낫싱`;
+
+  MissionUtils.Console.print(result.trim());
+}
+
 module.exports = App;
