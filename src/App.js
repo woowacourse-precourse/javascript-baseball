@@ -1,54 +1,93 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  async play() {
+  play() {
     // step1
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    console.log('숫자 야구 게임을 시작합니다.');
     
     let restart = true;
     while(restart){
-      restart = await this.game() === 1 ? true : false;
+      restart = this.game() === 1 ? true : false;
     }
+    return 0;
   }
   
   async game() {
     // step2
     let computer = this.setComputerNum();
-    MissionUtils.Console.print(computer);
+    // MissionUtils.Console.print(computer);
 
-    let retry = true;
-    while(retry) {
-      const countResult = await this.predict(computer);
+    
+    // while(retry) {
+      // const countResult = this.predict(computer);
+      
 
       // step5
-      MissionUtils.Console.print(this.result(countResult));
-      retry = countResult.strike  === 3 ? false : true;
-    }
+      // MissionUtils.Console.print(this.result(countResult));
+    // }
+    return this.predict(computer)
+    // console.log('3개의 숫자를 모두 맞히셨습니다!');
+    // MissionUtils.Console.print('게임 종료');
     // step6
-    return await this.checkContinue();
+    // return await this.checkContinue();
   }
 
-  async predict(computer) { 
+  predict(computer) { 
     // step3
-    let input = await this.setUserNum();
-    MissionUtils.Console.print(input);
+    // const input = this.setUserNum();
+    // const inputArray = this.checkInputError(input);
+    // MissionUtils.Console.print(inputArray);
 
     // step4
-    const countResult = this.countStrikeAndBall(input, computer);
-    MissionUtils.Console.print(countResult);
-    return countResult;
+    // const countResult = this.countStrikeAndBall(inputArray, computer);
+    // MissionUtils.Console.print(countResult);
+    // return this.setUserNum();
+    let retry = true;
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      const inputArray = this.checkInputError(input);
+      const countResult = this.countStrikeAndBall(inputArray, computer);
+      MissionUtils.Console.print(this.result(countResult));
+      retry = countResult.strike  === 3 ? false : true;
+      if (retry) {
+        this.predict(computer);
+      } else {
+        console.log('3개의 숫자를 모두 맞히셨습니다!');
+        MissionUtils.Console.print('게임 종료');
+        return this.checkContinue();
+      }
+    });
   }
 
   setUserNum() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 :', (i) => {
-        let input = i.split('').map(num => parseInt(num));
-        if (input.length !== 3) throw new Error('input length error');
-        else if(input.length !== new Set(input).size) throw new Error('input overlap error');
-        else if(input.includes(0)) throw new Error('input include 0');
-        else resolve(input);
-      });
-    })
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      const inputArray = this.checkInputError(input);
+      const countResult = this.countStrikeAndBall(inputArray, computer);
+      MissionUtils.Console.print(this.result(countResult));
+    });
+  }
+
+  checkInputError(input) {
+    const re = /^[1-9]{3}$/;
+    const inputArray = input.split('').map(num => parseInt(num));
+    let result;
+    let message;
+    if (inputArray.length !== 3) {
+      result = false;
+      message = input + 'input length error';
+      throw new Error(message);
+    } else if(inputArray.length !== new Set(input).size) {
+      result = false;
+      message = 'input overlap error';
+      throw new Error(message);
+    } else if (!re.test(input)) {
+      result = false;
+      message = 'input 1~9 range & isDigit error';
+      throw new Error(message);
+    } else {
+      result = true;
+      message = 'none';
+    }
+    return inputArray;
   }
 
   setComputerNum() {
@@ -90,8 +129,6 @@ class App {
   result(countResult) {
     if(countResult.strike === 0 && countResult.ball === 0){
       return '낫싱';
-    } else if(countResult.strike === 3) {
-      return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     } else {
       let res = '';
       res += countResult.ball>0 ? `${countResult.ball}볼`:'';
@@ -110,7 +147,7 @@ class App {
   }
 }
 
-const app = new App;
+const app = new App();
 app.play();
 
 module.exports = App;
