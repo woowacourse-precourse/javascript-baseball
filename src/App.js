@@ -7,6 +7,7 @@ const GAME_MESSAGE = Object.freeze({
 
 const GAME_ERROR_MESSAGE = Object.freeze({
   BLANK: "아무것도 입력되지 않았습니다.",
+  THREE_DIGIT: "숫자 3개가 입력되지 않았습니다.",
   DUPLICATE: "중복된 숫자가 있습니다.",
 });
 
@@ -23,7 +24,10 @@ class App {
   }
 
   isInputValid() {
-    if (this.number === "") throw new Error(GAME_ERROR_MESSAGE.BLANK);
+    if (this.number === "") 
+      throw new Error(GAME_ERROR_MESSAGE.BLANK);
+    if (this.number.length !== 3)
+      throw new Error(GAME_ERROR_MESSAGE.THREE_DIGIT);
     if ([...new Set(this.number.split(""))].length !== 3)
       throw new Error(GAME_ERROR_MESSAGE.DUPLICATE);
   }
