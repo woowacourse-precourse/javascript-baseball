@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 
 function input(comment) {
   return new Promise((resolve) => {
-    Console.readLine(comment, (answer) => resolve(answer));
+    Console.readLine(comment, resolve);
   });
 }
 
