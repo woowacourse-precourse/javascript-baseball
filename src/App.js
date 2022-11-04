@@ -17,7 +17,7 @@ function createComputerNumber() {
   const computerNumber = [];
 
   while (computerNumber.length < 3) {
-    const randomNumber = String(MissionUtils.Random.pickNumberInRange(1, 9));
+    const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
 
     if (!computerNumber.includes(randomNumber)) {
       computerNumber.push(randomNumber);
