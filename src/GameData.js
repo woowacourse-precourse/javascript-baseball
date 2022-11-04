@@ -18,7 +18,7 @@ class GameData {
     return this.threeStrikeState;
   }
 
-  setgetThreeStrikeState(threeStrikeState) {
+  setThreeStrikeState(threeStrikeState) {
     this.threeStrikeState = threeStrikeState;
   }
 
