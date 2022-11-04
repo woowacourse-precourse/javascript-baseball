@@ -7,8 +7,7 @@ class App {
     while (true) {
       let userNumber = setUserNumber();
       let compareResult = compareNumbers(computerNumber, userNumber);
-      if (compareResult == "3스트라이크") break;
-      else break;
+
     }
   }
 }
@@ -31,7 +30,11 @@ function setUserNumber() {
     userNumber = answer;
   });
 
-  return userNumber;
+  if (userNumber.length > 3) throw "입력된 숫자의 자릿수가 많습니다";
+  else if (userNumber.length < 3) throw "입력된 숫자의 자릿수가 적습니다";
+  else if (isNaN(userNumber)) throw "숫자가 아닙니다";
+  else if (Number(userNumber) < 0) throw "음수를 입력했습니다";
+  else return userNumber;
 }
 
 function compareNumbers(computerNumber, userNumber) {
