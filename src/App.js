@@ -16,6 +16,7 @@ const ERROR_MESSAGE = {
   REPEAT: "서로 다른 숫자 3개를 입력해야 합니다.",
   QUANTITY: "숫자 3개를 입력해야 합니다.",
   NOTNUMBER: "숫자만 입력해야 합니다.",
+  WRONG_REPLY: "잘못된 값을 입력하셨습니다.",
 };
 
 const BASEBALLTERM = {
@@ -100,11 +101,13 @@ class App {
   }
 
   askToPlayAgain() {
-    MissionUtils.Console.readLine(MESSAGE.ASKREPLAY, (answer) => {
-      if (answer === REPLY.REPLAY) {
+    MissionUtils.Console.readLine(MESSAGE.ASKREPLAY, (reply) => {
+      if (reply === REPLY.REPLAY) {
         this.playNewGame();
-      } else if (answer === REPLY.GAMEEND) {
+      } else if (reply === REPLY.GAMEEND) {
         MissionUtils.Console.close();
+      } else {
+        throw new Error(ERROR_MESSAGE.WRONG_REPLY);
       }
     });
   }
