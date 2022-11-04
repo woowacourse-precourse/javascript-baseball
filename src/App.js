@@ -5,14 +5,24 @@ class App {
     return Random.pickUniqueNumbersInRange(minNumber, maxNumber, numberLength);
   }
 
-  receiveNumberFromUser() {
-    let userNumber;
-    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      const uniqueNumber = [...new Set(Array.from(answer))];
-      if (uniqueNumber.length !== 3) throw Error();
-      userNumber = uniqueNumber.map((stringNumber) => +stringNumber);
+  async receiveNumberFromUser() {
+    let userAnswer;
+    const answer = await new Promise((resolve) => {
+      Console.readLine("숫자를 입력해주세요 : ", (answer) => resolve(answer));
     });
-    return userNumber;
+    const arrayOfAnswer = Array.from(answer).map(
+      (stringNumber) => +stringNumber
+    );
+    const isAllNumber = (numberArr) =>
+      numberArr.every((number) => !Number.isNaN(number));
+    if (!isAllNumber(arrayOfAnswer)) throw Error("숫자만 입력해주세요.");
+
+    userAnswer = [...new Set(arrayOfAnswer)];
+    const isCorrectedLength = (arr) => arr.length === 3;
+    if (!isCorrectedLength(userAnswer))
+      throw Error("세 자리 숫자를 입력해주세요.");
+
+    return userAnswer;
   }
 
   getStrikeAndBallCount(goal, userAnswer) {
@@ -55,9 +65,9 @@ class App {
 
   exitGame() {}
 
-  play() {
+  async play() {
     const goal = this.generateGoalNumber();
-    let userAnswer = this.receiveNumberFromUser();
+    let userAnswer = await this.receiveNumberFromUser();
     // userAnswer가 undefined면 앱 종료하기
 
     let score = this.getStrikeAndBallCount(goal, userAnswer);
@@ -71,5 +81,6 @@ class App {
     // exitGame();
   }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
