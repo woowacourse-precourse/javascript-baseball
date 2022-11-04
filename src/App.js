@@ -45,7 +45,7 @@ function isNumber(userNumber) {
     }
   }
 
-  return ture;
+  return true;
 }
 
 function isLength3(userNumber) {
