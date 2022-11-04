@@ -22,7 +22,7 @@ class App {
       // this.shuffle(oneToNine)
       //   .slice(0, 3)
       .reduce((acc, cur, idx) => {
-        acc[cur] = idx;
+        acc[cur] = idx + 1;
         return acc;
       }, {});
   }
@@ -36,6 +36,7 @@ class App {
       try {
         this.checkGuessVaildation(guess);
         this.compareAndDisplay(guess);
+        this.getUserGuess();
       } catch (err) {
         console.log(err.message);
         this.rl.close();
@@ -76,7 +77,9 @@ class App {
   compareAndDisplay(guess) {
     let result = this.compareGuessAndAnswer(guess);
     this.displayResult(result);
-    // if ()
+    // if (this.isAnswer(result.strike)) {
+    // } else {
+    // }
   }
 
   compareGuessAndAnswer(guess) {
@@ -84,7 +87,8 @@ class App {
     let strike = 0;
 
     guess.split("").forEach((digit, index) => {
-      if (this.answer[digit]) this.answer[digit] === index ? strike++ : ball++;
+      if (this.answer[digit])
+        this.answer[digit] === index + 1 ? strike++ : ball++;
     });
     return { ball: ball, strike: strike };
   }
