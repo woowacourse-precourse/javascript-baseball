@@ -19,19 +19,29 @@ class App {
   }
 
   getUserInput() {
-    this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
-      if (this.compareNumber(this.makeRandomNumbers(), userInputNumbers)) {
-        this.missionConsole.print(this.compareNumber(this.makeRandomNumbers(), userInputNumbers));
+    this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      if (this.compareEachNumber(this.makeRandomNumbers(), userInput)) {
+        this.missionConsole.print(this.compareEachNumber(this.makeRandomNumbers(), userInput));
       }
       this.missionConsole.close();
     });
   }
 
-  compareNumber(pcInputNumbers, userInputNumbers) {
-    if (+pcInputNumbers > +userInputNumbers) return "pc 승";
-    if (+pcInputNumbers === +userInputNumbers) return "무승부";
-    if (+pcInputNumbers < +userInputNumbers) return "유저 승";
-    return "error";
+  compareEachNumber(pcInputNumbers, userInput) {
+    const computerInputNumbers = pcInputNumbers.split("").map((i) => +i);
+    const userInputNumbers = userInput.split("").map((i) => +i);
+
+    return userInputNumbers.reduce((acc, currentValue, index) => {
+      if (computerInputNumbers[index] > currentValue) {
+        // return acc.push;
+        acc.push(`${index}번째 인덱스 자릿수: pc`);
+      } else if (computerInputNumbers[index] === currentValue) {
+        acc.push(`${index}번째 인덱스 자릿수: 무승부`);
+      } else {
+        acc.push(`${index}번째 인덱스 자릿수: user`);
+      }
+      return acc;
+    }, []);
   }
 }
 const app = new App();
