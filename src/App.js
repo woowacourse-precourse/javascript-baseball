@@ -37,11 +37,12 @@ class App {
   }
 
   compare() {
-    const ComputerNum = this.computer;
+    const ComputerNum = this.baseballAnswer;
     const UserNum = this.UserInput;
     let ball = 0;
     let strike = 0;
-    if (ComputerNum === UserNum) return "정답!";
+    let resultText = "";
+    if (ComputerNum === UserNum) return (resultText = "3스트라이크");
     UserNum.map((num, i) => {
       if (ComputerNum.includes(num)) {
         if (UserNum.indexOf(num) === ComputerNum.indexOf(ComputerNum[i])) {
@@ -51,7 +52,6 @@ class App {
         }
       }
     });
-    let resultText = "";
     if (ball !== 0) resultText += `${ball}볼 `;
     if (strike !== 0) resultText += `${strike}스트라이크`;
     if (resultText === "") resultText += `낫싱`;
