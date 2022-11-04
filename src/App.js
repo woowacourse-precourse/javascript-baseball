@@ -65,5 +65,11 @@ function strikeBallCount(userNumber, computerNumber) {
             ballCount++;
         }
     }
-    return [strikeCount, ballCount];
+    if (strikeCount > 0 && ballCount === 0) {
+        MissionUtils.Console.print(`${strikeCount}스트라이크`);
+    } else if (strikeCount === 0 && ballCount > 0) {
+        MissionUtils.Console.print(`${ballCount}볼`);
+    } else if (strikeCount > 0 && ballCount > 0) {
+        MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    }
 }
