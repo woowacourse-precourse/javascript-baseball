@@ -56,7 +56,15 @@ class App {
   }
 
   hasZero(number) {}
-  hasSameNumber(number) {}
+
+  hasSameNumber(number) {
+    for (let index = 0; index < 3; index++) {
+      if (number.indexOf(number[index]) !== number.lastIndexOf(number[index])) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 const baseballGame = new App();
