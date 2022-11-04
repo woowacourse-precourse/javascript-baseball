@@ -1,14 +1,10 @@
-const App = require('../src/App');
+const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 
-const app = new App();
-
-afterAll(() => {
-  app.exit();
-});
+const gameManager = new NumberBaseballGameManager();
 
 describe('게임 기능 테스트', () => {
   test('컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
-    const result = app.generateRandomNumbers();
+    const result = gameManager.generateRandomNumberArray();
 
     expect(result).toHaveLength(3);
   });
@@ -17,7 +13,7 @@ describe('게임 기능 테스트', () => {
     const inputValues = ['123', '456', '312', '132'];
     const computerNumbers = [1, 2, 3];
     const result = inputValues.map(inputValue =>
-      app.getBallCounts(computerNumbers, inputValue),
+      gameManager.getBallCounts(computerNumbers, inputValue),
     );
 
     expect(result).toEqual([
@@ -37,8 +33,7 @@ describe('게임 기능 테스트', () => {
     ];
     const result = counts.map(count => {
       const [strikeCount, ballCount] = count;
-
-      return app.getHintType(strikeCount, ballCount);
+      return gameManager.getHintType(strikeCount, ballCount);
     });
 
     expect(result).toEqual([
@@ -53,7 +48,7 @@ describe('게임 기능 테스트', () => {
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
     const hints = inputValues.map(inputValue =>
-      app.getHint(computerNumbers, inputValue),
+      gameManager.getHint(computerNumbers, inputValue),
     );
 
     expect(hints).toEqual([
