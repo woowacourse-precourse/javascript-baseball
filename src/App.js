@@ -46,7 +46,8 @@ const gameRule = (computer,user) => {
   let ballScore = ballCount(computer,user);
   let strikeScorer = strikeCount(computer,user);
   if(strikeScorer === 3) {
-    return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    answerCheck = true ; 
+    return `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
   }
   if(ballScore === 0 && strikeScorer === 0) {
     return "낫싱";
@@ -62,6 +63,7 @@ const gameRule = (computer,user) => {
 
 const userInputError = (userInput) => {
   if(userInput.length !== 3) {
+    answerCheck = true ; 
     throw ('3자리의 수를 입력하세요.');
   }
   if(new Set(userInput).size !== 3) {
@@ -85,14 +87,22 @@ const userInputHandler = (computer) => {
     }
   })
 }
+const gameRepeat = () => {
+  const computer = computerInput();
+  userInputHandler(computer);
+}
 
 const gameReset = () => {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
     if(userInput === '1') {
-      return play();
+      answerCheck = false;
+      return gameRepeat()
     }
     if(userInput === '2') {
       return MissionUtils.Console.close();
     }
   })
 }
+
+let a = new App();
+a.play()
