@@ -13,11 +13,21 @@ function checkInput(input){
   return true;
 }
 
+function getInputIntArray(input){
+  const userInputArray = [...input];
+  const newArray = [];
+  for (let i = 0; i < userInputArray.length; i++){
+    newArray.push(parseInt(userInputArray[i]));
+  }
+  return newArray;
+}
+
 function startGame(){
   const computer = pickComputerNumber();
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-    const userInputArray = [...userInput];
-    if (checkInput(userInputArray)){
+    const userInputArray = getInputIntArray(userInput);
+    console.log(userInputArray, computer);
+    if (checkInput(userInput)){
       getHint(userInputArray, computer);
     } else {
       MissionUtils.Console.print('숫자가 올바르지 않습니다. 다시입력해주세요 !');
@@ -79,6 +89,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const app = new App();
 // app.play();
 // endGame();
-console.log(checkInput("123"));
+// console.log(checkInput("123"));
 // pickComputerNumber();
+startGame();
 module.exports = App;
