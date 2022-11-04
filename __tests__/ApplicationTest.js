@@ -47,9 +47,126 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트1 - 3개이상의 숫자", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트2 - 음수일 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["-12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트3 - 반복된 숫자", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["114"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트4 - 숫자가 아닌 영어", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["aaa"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트5 - 숫자가 아닌 한글", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["삼이일"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트6 - 특수문자", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["&^%"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트7 - 연산기호", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["10+208"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트8 - 공백", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["   "];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트9 - 1~9사이 숫자인지", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["074"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트10 - 소수인 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1.5"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
