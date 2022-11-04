@@ -50,6 +50,21 @@ describe('숫자 야구 게임', () => {
     expect(result).toEqual({ strike: 1, ball: 1 });
   });
 
+  test('스트라이크 볼 메세지를 출력한다', () => {
+    const counts = [
+      { strike: 1, ball: 2 },
+      { strike: 3, ball: 0 },
+      { strike: 0, ball: 0 },
+    ];
+    const messages = ['2볼 1스트라이크', '3스트라이크', '낫싱'];
+
+    const app = new App();
+
+    messages.forEach((message, i) => {
+      expect(app.getResult(counts[i])).toEqual(message);
+    });
+  });
+
   test('게임 종료 후 재시작', () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ['246', '135', '1', '597', '589', '2'];
