@@ -21,6 +21,8 @@ class App {
     if(user == 3){
       throw "is not a number from 1 to 9";
     }
+
+    to_array(user);
   }
 }
 
@@ -53,6 +55,10 @@ function user_inputnumber(){
     return 3;
   }
   return userNumber;
+}
+
+function to_array(user_array){
+  return user_array.split("");
 }
 
 module.exports = App;
