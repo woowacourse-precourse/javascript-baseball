@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const makeAnswer = require("./makeNumber");
 
 class App {
   play() {
