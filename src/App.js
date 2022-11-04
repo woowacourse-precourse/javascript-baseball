@@ -29,7 +29,19 @@ class App {
     return stringValue.length === 3 && /^[1-9]{3}$/.test([...new Set(stringValue)].join(''));
   }
 
-  #gameOver() {}
+  #gameOver() {
+    this.#computerValue = '';
+    this.#userValue = '';
+
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (answer) => {
+        if (answer === '1') this.play();
+        else if (answer === '2') this.#isPlaying = false;
+        else this.#gameOver();
+      }
+    );
+  }
 
   #getResult() {
     let ball = 0;
