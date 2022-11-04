@@ -17,9 +17,17 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   };
 
-  inputUniqueThreeNumber() {
+  isUniqueThreeNumber(numbers) {
+    return (numbers.length === 3) && (numbers.length === new Set(numbers).size);
+  };
+
+  inputNumbers() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
-      // 입력한 숫자와 정답의 비교 결과 출력
+      if (this.isUniqueThreeNumber(numbers)) {
+        console.log(`${numbers}을 입력하셨습니다.`);
+      } else {
+        throw new Error('입력 형식에 맞지 않습니다.')
+      }
     });
   }
 
