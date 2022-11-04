@@ -56,7 +56,7 @@ function isValidValue(number) {
 
 // 정답 검사
 function checkAnswer(computer,user) {
-  const strike=countScrike(computer,user)
+  const strike=countStrike(computer,user)
   const ball=countBall(computer,user)-strike
   if (strike===3) {
     return (`3스트라이크`);
@@ -76,12 +76,12 @@ function checkAnswer(computer,user) {
 }
 
 //볼 개수
-const countBall = (computer,user) => {
+function countBall(computer,user) {
   return [...computer].filter(x => user.includes(x)).length
 }
 
 //스트라이크 개수
-const countScrike = (computer,user) => {
+function countStrike(computer,user) {
   return [...computer].filter((x,idx) => user[idx]===x).length
 }
 
