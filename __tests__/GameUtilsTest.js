@@ -4,7 +4,7 @@ const gameManager = new NumberBaseballGameManager();
 
 describe('게임 기능 테스트', () => {
   test('컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
-    const result = gameManager.generateRandomNumberArray();
+    const result = gameManager.getRandomNumberArray();
 
     expect(result).toHaveLength(3);
   });
