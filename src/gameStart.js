@@ -83,9 +83,9 @@ async function continueOrEndGame(gameData) {
 async function gameStart() {
   Console.print('숫자 야구 게임을 시작합니다.');
   const gameData = new GameData();
+  const computerRandomNumbers = generateRandomNumbers();
 
   while (gameData.getState()) {
-    const computerRandomNumbers = generateRandomNumbers();
     const userRandomNumbers = await inputUserNumbers();
 
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
