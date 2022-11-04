@@ -18,6 +18,21 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const getGameResultMessage = ({ strike, ball }) => {
+  if (strike === 0 && ball === 0) {
+    return '낫싱';
+  }
+  if (strike && ball) {
+    return `${ball}볼 ${strike}스트라이크`;
+  }
+  if (strike) {
+    return `${strike}스트라이크`;
+  }
+  if (ball) {
+    return `${ball}볼`;
+  }
+};
+
 const getSameNumCount = (userNumbers, computerNumbers) => {
   return [...userNumbers].filter((num) => computerNumbers.includes(num)).length;
 };
@@ -99,6 +114,11 @@ class App {
     const sameNumCnt = getSameNumCount(this.userNumbers, this.computerNumbers);
     this.gameResult.strike = strikeCnt;
     this.gameResult.ball = sameNumCnt - strikeCnt;
+    this.printGameResult();
+  }
+
+  printGameResult() {
+    const gameResultMessage = getGameResultMessage(this.gameResult);
   }
 }
 
