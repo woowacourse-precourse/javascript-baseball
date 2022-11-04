@@ -1,6 +1,12 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const NUMBERS = {
+  MIN: 1,
+  MAX: 9,
+};
+const NUMBERS_LIST_LENGTH = 3;
+
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -31,6 +37,21 @@ describe("숫자 야구 게임", () => {
     app.play();
 
     expect(logSpy).toBeCalledWith("숫자 야구 게임을 시작합니다.");
+  });
+
+  test.only("게임에 사용할 서로 다른 3자리 수(범위 : 1 ~ 9)의 숫자를 생성한다.", () => {
+    const isRightArrayLength = (array) => array.length === NUMBERS_LIST_LENGTH;
+    const isRightRangeNumber = (array) =>
+      array.every(
+        (el) => typeof el === "number" && el >= NUMBERS.MIN && el <= NUMBERS.MAX
+      );
+
+    const app = new App();
+    app.play();
+
+    expect(
+      isRightArrayLength(app.gameNumber) && isRightRangeNumber(app.gameNumber)
+    ).toBe(true);
   });
 
   test("게임 종료 후 재시작", () => {
