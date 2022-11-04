@@ -9,16 +9,20 @@
 ### 함수 기능 명세
 - `consturctor` : 객체 초기화 시 필요한 변수들을 선언한다.
 - `play` : 해당 메소드를 통해 게임이 시작&재시작 돼야 한다.
-- `gameOrder` : 메인 로직
-- `restart` : 게임 재시작을 위한 함수.
-- `makeRandomNumber` : 컴퓨터의 랜덤 숫자를 만드는 함수.
-- `getUserValue` : 사용자의 값을 받아오는 함수.
-- `checkUserValue` : 사용자가 입력한 값이 올바른 형식인지 확인하는 함수.
-- `compareWithUser` : 사용자의 값과 컴퓨터의 값을 비교하는 함수.
+- `callGameSequence` : 메인 로직
+- `initGameSetting` : 컴퓨터의 랜덤 숫자를 만드는 함수.
+- `getUserNumber` : 사용자의 값을 받아오는 함수.
+- `checkUserNumber` : 사용자가 입력한 값이 올바른 형식인지 확인하는 함수.
+- `compaereWithAnswer` : 사용자의 값과 컴퓨터의 값을 비교하는 함수.
 - `printResult` : 결과를 알려주는 함수
 
 ## 알고리즘 
+
+### 0. play
+처음, 그리고 재시작을 누르면 아래 1,2,3번 로직이 반복된다. 
+
 ### 1. computer 랜덤 값 생성.
+스트라이크가 3일 때까지 2,3번 로직을 반복한다.
 1. 랜덤 값 3개를 저장하는 배열 `computerValue`가 있다.
 2. 우테코 유틸을 사용해서 랜덤 값을 생성한다.
 3. 랜덤 값이 배열 내에 없다면 추가.
