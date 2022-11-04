@@ -67,6 +67,17 @@ class App {
       return MissionUtils.Console.print(`낫싱`);
     }
   }
+
+  getBall() {
+    this.ballCount = 0;
+    
+    for (let idx = 0; idx < this.answer.length; idx++) {
+      if (this.userNumber[idx] !== this.answer[idx] &&
+          this.answer.includes(this.userNumber[idx])) {
+        this.ballCount++;
+      }
+    }
+  }
 }
 
 const baseBallGame = new App;
