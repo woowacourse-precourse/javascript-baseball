@@ -80,7 +80,7 @@ class App {
   }
 
   hasDuplicateElement(list) {
-    return [...new Set(list)].length === list.length;
+    return [...new Set(list)].length !== list.length;
   }
 
   isValidInput(input) {
