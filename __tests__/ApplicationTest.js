@@ -24,6 +24,15 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+  test("랜덤 숫자 생성", () => {
+    const app = new App();
+    const goal = app.generateGoalNumber();
+    const isNumberTypeGoal = goal.every((number) => typeof number === "number");
+
+    expect(goal.length).toEqual(3);
+    expect(isNumberTypeGoal).toEqual(true);
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
