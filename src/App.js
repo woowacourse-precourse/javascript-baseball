@@ -61,6 +61,15 @@ class App {
     }
   }
 
+  initScore() {
+    this.ball = 0;
+    this.strike = 0;
+
+    if (this.isRestart) {
+      this.answer = this.makeAnswer();
+    }
+  }
+
   play() {
     const message = this.isRestart
       ? "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
@@ -86,6 +95,7 @@ class App {
 
       Console.print(this.createResultMessage());
       this.decideContinue();
+      this.initScore();
       this.play();
     });
   }
