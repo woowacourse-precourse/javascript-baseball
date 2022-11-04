@@ -27,11 +27,26 @@ class BaseBallValidator {
       if (isStirke(computerNumbers[index], userNumber)) {
         baseballDto.addStrikeOne();
       }
+      if (this.isBall(computerNumbers, userNumber, index)) {
+        baseballDto.addBallOne();
+      }
     });
     return baseballDto;
   }
   isStrike(computerNumber, userNumber) {
     return computerNumber === userNumber;
+  }
+  isBall(computerNumbers, userNumber, userNumberIndex) {
+    computerNumbers.foreEach((computerNumber, index) => {
+      if (
+        !(
+          this.isStrike(computerNumber, userNumber) && userNumberIndex === index
+        )
+      ) {
+        return true;
+      }
+    });
+    return false;
   }
 }
 
