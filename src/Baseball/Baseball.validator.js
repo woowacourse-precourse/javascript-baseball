@@ -1,3 +1,5 @@
+const BaseballDto = require("./BaseBall.dto");
+
 class BaseBallValidator {
   checkNumericNumbers([...numbers]) {
     nonNuemrics = numbers.filter((number) => "1" > number && number > "9");
@@ -18,6 +20,18 @@ class BaseBallValidator {
     ) {
       throw "잘못된 입력값입니다.";
     }
+  }
+  checkBallState(computerNumbers, userNumbers) {
+    const baseballDto = new BaseballDto();
+    userNumbers.forEach((userNumber, index) => {
+      if (isStirke(computerNumbers[index], userNumber)) {
+        baseballDto.addStrikeOne();
+      }
+    });
+    return baseballDto;
+  }
+  isStrike(computerNumber, userNumber) {
+    return computerNumber === userNumber;
   }
 }
 
