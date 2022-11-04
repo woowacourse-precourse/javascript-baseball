@@ -35,4 +35,14 @@ describe("입력 유효성 검사", () => {
       app.play();
     }).toThrow();
   });
+
+  test("입력된 수가 3자리가 아닌 경우 예외 발생", () => {
+    const answers = ["1", "12", "1234"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      app.play();
+    }).toThrow();
+  });
 });
