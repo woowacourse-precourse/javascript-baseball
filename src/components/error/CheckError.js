@@ -1,68 +1,81 @@
 const CheckError = (answer) => {
-  const regex = /[1-9]/;
-  const zeroRegex = /[0]/;
-  let splittedAnswer = answer.split("");
-  let notANumberList = [];
-  let isZero = false;
+  let splitAnswer = answer.split("");
 
-  if (zeroRegex.test(answer)) isZero = true;
-
-  if (
-    splittedAnswer[0] == splittedAnswer[1] ||
-    splittedAnswer[1] == splittedAnswer[2] ||
-    splittedAnswer[0] == splittedAnswer[2]
-  ) {
+  hasZero(answer);
+  if (checkDuplicated(splitAnswer)) {
     throw "숫자끼리 중복되어서는 안됩니다.\n세 자리 모두 다른 수를 입력해주세요.";
   }
+  containNotANumber(splitAnswer, answer);
+  notRightLength(answer.length);
+};
 
+const checkDuplicated = (splitAnswer) => {
+  return splitAnswer[0] == splitAnswer[1] ||
+    splitAnswer[1] == splitAnswer[2] ||
+    splitAnswer[0] == splitAnswer[2]
+    ? true
+    : false;
+};
+
+const hasZero = (answer) => {
+  let isZero = false;
+  const zeroRegex = /[0]/;
+  zeroRegex.test(answer) ? (isZero = true) : (isZero = false);
   if (answer.length === 3 && isZero) {
     throw "숫자 0이 포함되었습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료";
   }
-
-  for (
-    let splittedIdx = 0;
-    splittedIdx < splittedAnswer.length;
-    splittedIdx++
-  ) {
-    if (!regex.test(splittedAnswer[splittedIdx])) {
-      notANumberList.push(splittedIdx + 1);
-    }
-  }
-
-  if (notANumberList.length !== 0) {
-    if (answer.length === 3) {
-      throw `${notANumberList.join(
-        ","
-      )}번째 문자는 숫자가 아닙니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
-    }
-    if (answer.length > 3) {
-      throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
-        answer.length - 3
-      }개의 문자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
-    }
-    if (answer.length < 3) {
-      throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
-        3 - answer.length
-      }개의 문자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
-    }
-  }
-
-  if (answer.length > 3) {
-    throw `${
+  if (answer.length > 3 && isZero) {
+    throw `숫자 0이 포함되었으며, ${
       answer.length - 3
-    }개의 숫자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+    }글자 초과되었습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
   }
-  if (answer.length < 3) {
-    throw `${
+  if (answer.length < 3 && isZero) {
+    throw `숫자 0이 포함되었으며, ${
       3 - answer.length
-    }개의 숫자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+    }글자 미달되었습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
   }
 };
 
-const lessThanThree = () => {};
+const containNotANumber = (splitAnswer, answer) => {
+  const regex = /[1-9]/;
+  let notANumberList = [];
 
-const moreThanThree = () => {};
+  for (let splitIdx = 0; splitIdx < splitAnswer.length; splitIdx++) {
+    if (!regex.test(splitAnswer[splitIdx])) {
+      notANumberList.push(splitIdx + 1);
+    }
+  }
 
-const lengthIsThree = () => {};
+  let existNotANumber = notANumberList.length !== 0;
+
+  if (existNotANumber && answer.length === 3) {
+    throw `${notANumberList.join(
+      ","
+    )}번째 문자는 숫자가 아닙니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+  if (existNotANumber && answer.length > 3) {
+    throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
+      answer.length - 3
+    }개의 문자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+  if (existNotANumber && answer.length < 3) {
+    throw `${notANumberList.join(",")}번째 문자는 숫자가 아니며, ${
+      3 - answer.length
+    }개의 문자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+};
+
+const notRightLength = (length) => {
+  if (length > 3) {
+    throw `${
+      length - 3
+    }개의 숫자를 더 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+  if (length < 3) {
+    throw `${
+      3 - length
+    }개의 숫자를 덜 입력하셨습니다.\n1 ~ 9로 구성된 3자리 숫자를 입력해주세요.\n게임 종료`;
+  }
+};
 
 module.exports = CheckError;
