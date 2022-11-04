@@ -11,18 +11,16 @@ class App {
     inputUserValue();
   };
 
-  setRandomValue(number) {
-    this.randomValue = number;
+  setRandomValue(randomValue) {
+    this.randomValue = randomValue;
     // MISSION_UTILS.Console.print(this.randomValue);
   };
 
-  setUserValue(number) {
-    this.userValue = number;
-  };
-  
-  checkcheck() {
+  startGame(userValue) {
+    this.userValue = userValue;
     whatsAfter(checkAnswer(this.randomValue, this.userValue));
   };
+  
 };
 
 const app = new App();
@@ -41,21 +39,21 @@ function makeRandomValue() {
 
 // 사용자의 숫자 입력받기
 function inputUserValue() {
-  MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : ', (answer)=> {
-    isValidValue(answer);
+  MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : ', (userValue)=> {
+    isValidUserInput(userValue);
   });
 };
 
 //사용자의 입력값이 유효값인지 검사
-function isValidValue(number) {
-  const IS_UNIQUE = (new Set(number)).size;
+function isValidUserInput(userValue) {
+  const IS_UNIQUE = (new Set(userValue)).size;
 
-  if (!number.match(/[1-9]{3}/) || IS_UNIQUE !== 3) {
+  if (!userValue.match(/[1-9]{3}/) || IS_UNIQUE !== 3) {
     throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요';
   };
-
-  app.setUserValue(number);
-  app.checkcheck();
+  app.startGame(userValue)
+  // app.setUserValue(userValue);
+  // app.checkcheck();
 };
 
 // 정답 검사
