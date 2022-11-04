@@ -1,6 +1,7 @@
 const App = require("../src/App");
 const MakeRandomNumber = require("../src/MakeRandomNumber");
 const CheckConstraints = require("../src/CheckConstraints");
+const GetUserIput = require("../src/GetUserInput");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -52,10 +53,13 @@ describe("숫자 야구 게임", () => {
 
   test("플레이어 숫자 입력", () => {
     const readSpy = jest.spyOn(MissionUtils.Console, "readLine");
-    const constraintsSpy = jest.spyOn(App.prototype, "checkConstraints");
+    const constraintsSpy = jest.spyOn(
+      CheckConstraints.prototype,
+      "checkConstraints"
+    );
 
-    const app = new App();
-    app.getUserInput();
+    const getUserInput = new GetUserIput();
+    getUserInput.getUserInput();
 
     expect(readSpy).toHaveBeenCalled();
     expect(readSpy).toHaveBeenCalledTimes(1);
