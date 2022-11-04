@@ -18,7 +18,9 @@ class App {
   // 사용자의 입력을 받는 기능
   setUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
-      this.#userInput = answer;
+      if (!App.validateUserInput(answer)) {
+        throw new Error('잘못된 값을 입력하였습니다!');
+      }
     });
   }
 
