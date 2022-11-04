@@ -14,8 +14,15 @@ const getIsInvalidWordExist = (inputValue) => {
   return inputValueWithoutNumber.length !== 0;
 };
 
-module.exports = {
-  getIsInvalidWordExist,
-  getIsRepeatExist,
-  getIsLengthInvalid,
+const getIsInputValueValid = (inputValue) => {
+  let isInputValueValid = true;
+  if (
+    getIsLengthInvalid(inputValue) ||
+    getIsRepeatExist(inputValue) ||
+    getIsInvalidWordExist(inputValue)
+  )
+    isInputValueValid = false;
+  return isInputValueValid;
 };
+
+module.exports = getIsInputValueValid;
