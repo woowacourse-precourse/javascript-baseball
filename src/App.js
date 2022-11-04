@@ -4,7 +4,9 @@ class App {
     this.baseballGame = new BaseballGame();
   }
 
-  play() {}
+  play() {
+    this.baseballGame.start();
+  }
 }
 
 const app = new App();
