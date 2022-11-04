@@ -18,6 +18,13 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const isValidRangeNumber = (userNumbers) => {
+  const regex = /^[1-9]{3}$/;
+  if (!regex.test(userNumbers)) {
+    throw ERROR_MESSAGE.invalidValueError;
+  }
+};
+
 const getNotContainNumber = (randomNumbers, number) => {
   if (randomNumbers.includes(number)) {
     return [];
@@ -64,6 +71,11 @@ class App {
 
   setUserNumbers(inputValue) {
     this.userNumbers = inputValue;
+    this.isValidInput();
+  }
+
+  isValidInput() {
+    isValidRangeNumber(this.userNumbers);
   }
 }
 
