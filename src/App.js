@@ -1,14 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+
 class App {
+  
   play() {
-    const computer = [];
-    while (computer.length < 3) {
+    const computer = this.getRandomNumberString();
+  }
+
+  getRandomNumberString() {
+    let randomNumberList = [];
+    while (randomNumberList.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
+      if (!randomNumberList.includes(number)) {
+        randomNumberList.push(number);
       }
     }
+    return randomNumberList.join('');
   }
 }
 
