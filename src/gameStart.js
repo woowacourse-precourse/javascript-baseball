@@ -5,9 +5,17 @@ function generateRandomNumbers() {
   return generatedRandomNumbers;
 }
 
-function gameStart() {
-  Console.print('숫자 야구 게임을 시작합니다.');
-  const computerRandomNumbers = generateRandomNumbers();
+function inputUserNumbers() {
+  return new Promise((resolve) => {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      resolve(input);
+    });
+  });
 }
 
+async function gameStart() {
+  Console.print('숫자 야구 게임을 시작합니다.');
+  const computerRandomNumbers = generateRandomNumbers();
+  const userRandomNumbers = await inputUserNumbers();
+}
 exports.gameStart = gameStart;
