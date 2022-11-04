@@ -32,6 +32,12 @@ const checkResult = (computer, userNumber) => {
   if (strike === 3) {
     MissionUtils.Console.print(`${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
     MissionUtils.Console.close();
+  } else if (strike === 0 && ball > 0) {
+    MissionUtils.Console.print(`${ball}볼`);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
+  } else if (strike > 0 && ball === 0) {
+    MissionUtils.Console.print(`${strike}스트라이크`);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
   } else {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
