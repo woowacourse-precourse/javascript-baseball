@@ -4,7 +4,6 @@ class App {
   constructor() {
     // 3자리 숫자 모드
     this.NUMBER_LENGTH_MODE = 3;
-    this.answer = this.genAnswer();
     this.RESTART = "1";
     this.EXIT = "2";
     this.BALL = 0;
@@ -17,6 +16,7 @@ class App {
   }
 
   startGame() {
+    this.answer = this.genAnswer();
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
       this.checktryNum(tryNum);
     });
