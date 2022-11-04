@@ -3,8 +3,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     this.startGame();
-    this.selectComputer();
-    this.selectUser();
+    const computer = this.selectComputer();
+    const user = this.selectUser();
+    this.countScore(computer, user);
   }
 
   startGame() {
@@ -33,6 +34,16 @@ class App {
     });
 
     return user;
+  }
+
+  countScore(computer, user) {
+    this.isError(user);
+  }
+
+  isError(number) {
+    if (number.length !== 3 || isNum(number)) {
+      throw 'Parameter is not a number!';
+    }
   }
 }
 
