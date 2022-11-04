@@ -4,6 +4,7 @@ function gameStart(answer){
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     threeDigitsError(answer);
     includeZeroError(answer);
+    isNotNumberError(answer);
 }
 
 function threeDigitsError(answer){
@@ -14,6 +15,12 @@ function threeDigitsError(answer){
 
 function includeZeroError(answer){
     if(answer.includes(0)){
+        throw "Error"
+    }
+}
+
+function isNotNumberError(answer){
+    if(!isNan(answer)){
         throw "Error"
     }
 }
