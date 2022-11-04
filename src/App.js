@@ -1,13 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-
 class App {
-  
   play() {
-    const computer = this.getRandomNumberString();
+    const computer = this.getComputerRandomNumberString();
+    this.numberBaseballGame(computer);
   }
 
-  getRandomNumberString() {
+  getComputerRandomNumberString() {
     let randomNumberList = [];
     while (randomNumberList.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -16,6 +15,17 @@ class App {
       }
     }
     return randomNumberList.join('');
+  }
+
+  numberBaseballGame(computer) {
+    MissionUtils.Console.readLine('', (user) => {
+      if(computer === user){
+        MissionUtils.Console.close();
+      }
+      else{
+        this.numberBaseballGame(computer);
+      }
+    });
   }
 }
 
