@@ -1,11 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
-const pickedNumberByComputer = require("./pickedNumberByComputer");
 const input = require("./util/input");
+const PickedNumberByComputer = require("./PickedNumberByComputer");
 
 class BaseballGame {
   constructor() {
-    this.pickedNumberByComputer = pickedNumberByComputer();
-    console.log(this.pickedNumberByComputer);
+    this.pickedNumberByComputer =
+      new PickedNumberByComputer().randomNumInRange();
   }
 
   countStrikeBallNothing(pickedNumberByUser, pickedNumberByComputer) {
