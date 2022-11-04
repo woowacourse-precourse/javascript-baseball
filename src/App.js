@@ -19,7 +19,7 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
       const user = answer.split('').map(Number);
       if (this.testAnswer(user, computer)) {
-        return user;
+        this.gameSystem(computer, user);
       }
     });
   }
@@ -43,6 +43,16 @@ class App {
       }
     });
     return answer;
+  }
+
+  gameSystem(computer, user) {
+    let strike = 0;
+    let ball = 0;
+    user.forEach((number, index) => {
+      if (number === computer[index]) strike++;
+      else if (computer.includes(number)) ball++;
+    });
+    return this.postGameMessage(computer, strike, ball);
   }
 
   play() {}
