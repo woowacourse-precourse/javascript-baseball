@@ -3,6 +3,7 @@ const { MissionUtils } = require("@woowacourse/mission-utils");
 function numberBaseballReferee(strike, ball){
     allStrike(strike,ball);
     allBall(strike, ball);
+    strikeAndBall(strike,ball);
 }
 
 function allStrike(strike, ball){
@@ -17,5 +18,11 @@ function allStrike(strike, ball){
 function allBall(strike, ball){
     if(strike == 0 && ball > 0){
         MissionUtils.Console.print(`${ball}` + 볼);
+    }
+}
+
+function strikeAndBall(strike,ball){
+    if(strike > 0 && ball > 0){
+        MissionUtils.console.print(`${strike}`+스트라이크 , `${ball}` + 볼);
     }
 }
