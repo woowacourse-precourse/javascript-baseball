@@ -93,4 +93,22 @@ describe('숫자 야구 게임', () => {
 		expect(app.gameEnd).toEqual(false);
 		expect(app.computerNumber).toEqual('135');
 	});
+
+	test('게임 종료 후 재시작시 알맞지않은 입력을 할 경우 에러를 반환', () => {
+		const randoms = [1, 3, 5, 5, 8, 9];
+		const answers = ['246', '135', '3'];
+		const messages = ['낫싱', '3스트라이크', '1 또는 2를 입력하세요'];
+
+		mockRandoms(randoms);
+		mockQuestions(answers);
+
+		messages.forEach((output, index) => {
+			if (index === 2) {
+				expect(() => {
+					const app = new App();
+					app.play();
+				}).toThrow();
+			}
+		});
+	});
 });
