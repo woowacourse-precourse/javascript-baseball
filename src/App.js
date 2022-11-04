@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   generateGoalNumber(minNumber = 1, maxNumber = 9, numberLength = 3) {
@@ -6,8 +6,13 @@ class App {
   }
 
   receiveNumberFromUser() {
-    // 서로 다른 3자리의 수 입력 받고 반환
-    // 잘못된 값일 경우 throw 하고 앱 종료하기
+    let userNumber;
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      const uniqueNumber = [...new Set(Array.from(answer))];
+      if (uniqueNumber.length !== 3) throw Error();
+      userNumber = uniqueNumber.map((stringNumber) => +stringNumber);
+    });
+    return userNumber;
   }
 
   compareGoalAndUserAnswer() {
@@ -28,7 +33,9 @@ class App {
 
   play() {
     // const goal = generateGoalNumber();
-    // let userAnswer = receiveNumberFromUser();
+    let userAnswer = this.receiveNumberFromUser();
+    // userAnswer가 undefined면 앱 종료하기
+
     // let score = compareGoalAndUserAnswer(goal, userAnswer);
     // while (score !== 스트라이크3) {
     //   printResult(score);
