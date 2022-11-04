@@ -34,8 +34,18 @@ class Compare extends Mission {
       this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 
+  returnResult(strike) {
+    if (strike === 3) {
+      return true;
+    }
+    return false;
+  }
+
   getResult() {
-    return this.returnConsole(this.getStrikeCount(), this.getBallCount());
+    const strikeCount = this.getStrikeCount();
+    const ballCount = this.getBallCount();
+    this.consoleCompareResult(strikeCount, ballCount);
+    return this.returnResult(strikeCount);
   }
 }
 

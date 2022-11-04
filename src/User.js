@@ -34,7 +34,7 @@ class User extends Mission {
   }
   compareNumbers(userNumbers) {
     const compare = new Compare(this.computerNumbers, userNumbers);
-    if (compare.getResult() === 'clear') {
+    if (compare.getResult() === true) {
       this.selectStartOrExit();
     } else {
       this.userInputStart();
