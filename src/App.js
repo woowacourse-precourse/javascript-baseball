@@ -10,6 +10,7 @@ class App {
         computer.push(number);
       }
     }
+    MissionUtils.Console.print(Messages.START);
   }
 }
 const app = new App();
