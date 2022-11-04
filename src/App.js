@@ -19,7 +19,25 @@ class App {
     })
   }
 
-  
+  getStrikeCount(randomNum, inputNum){
+
+    const randomNumList = randomNum.toString().split('');
+    const inputNumList = inputNum.toString().split('');
+
+    let strike = 0;
+
+    for(let i=0; i<3; i++){
+      if(randomNumList[i] === inputNumList[i]){
+        strike += 1;
+      }
+    }
+
+    return strike
+
+  }
+
+
+
 
 }
 
