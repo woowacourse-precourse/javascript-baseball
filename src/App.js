@@ -22,9 +22,9 @@ const BALL = "볼";
 const NOTHING = "낫싱";
 
 class App {
-  static computerNumber;
-
-  constructor() {}
+  constructor() {
+    this.computerNumber = null;
+  }
 
   createComputerNumber = () => {
     const computerNumber = [];
@@ -65,19 +65,19 @@ class App {
   };
 
   getStrikeAndBallNumber = (computer, user) => {
-    const strikeNum = user.filter((item, ind) => item === computer[ind]).length;
-
     const ballNum = user
       .filter((item, ind) => item !== computer[ind])
       .filter((item) => computer.includes(item)).length;
 
-    return [strikeNum, ballNum];
+    const strikeNum = user.filter((item, ind) => item === computer[ind]).length;
+
+    return [ballNum, strikeNum];
   };
 
   convertNumberToMessage = (matchNum) => {
-    const [strikeNum, ballNum] = matchNum;
+    const [ballNum, strikeNum] = matchNum;
 
-    let message = `${ballNum === 0 ? "" : ballNum + BALL}${
+    let message = `${ballNum === 0 ? "" : ballNum + BALL} ${
       strikeNum === 0 ? "" : strikeNum + STRIKE
     }`;
 
@@ -85,7 +85,7 @@ class App {
       message = NOTHING;
     }
 
-    return message;
+    return message.trim();
   };
 
   showMessage = (message) => {
@@ -112,7 +112,7 @@ class App {
   compareNumbers = () => {
     const userNumber = this.getUserNumber();
     const strikeAndBallNumber = this.getStrikeAndBallNumber(
-      computerNumber,
+      this.computerNumber,
       userNumber
     );
     const result = this.convertNumberToMessage(strikeAndBallNumber);
@@ -120,8 +120,8 @@ class App {
   };
 
   play() {
-    computerNumber = this.createComputerNumber();
     MissionUtils.Console.print(MESSAGE.gameStart);
+    this.computerNumber = this.createComputerNumber();
     this.compareNumbers();
   }
 }
