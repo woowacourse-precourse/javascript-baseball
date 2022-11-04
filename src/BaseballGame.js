@@ -32,18 +32,24 @@ class BaseballGame {
     else Console.print(`${ball}볼 ${strike}스트라이크 `);
   }
 
-  async isThreeStrike() {
-    while (!this.threeStrike) {
-      let pickedNumberByUser = await input("숫자를 입력해주세요 : ");
-      let [strike, ball, nothing] = countStrikeBallNothing(
-        pickedNumberByUser,
-        this.pickedNumberByComputer
-      );
-      resultsForCount(strike, ball, nothing);
-      if (strike === 3) this.threeStrike = true;
+  async playTurn() {
+    let pickedNumberByUser = await input("숫자를 입력해주세요 : ");
+    let [strike, ball, nothing] = countStrikeBallNothing(
+      pickedNumberByUser,
+      this.pickedNumberByComputer
+    );
+    printResultsForCount(strike, ball, nothing);
+
+    return strike;
+  }
+
+  async playGame() {
+    let isThreeStrike = false;
+    while (!isThreeStrike) {
+      let numberOfStrike = await this.playTurn();
+      if (numberOfStrike === 3) isThreeStrike = true;
     }
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    new GameManager().restartOrEnd();
   }
 }
 
