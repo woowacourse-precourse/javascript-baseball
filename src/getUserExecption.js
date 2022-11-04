@@ -1,10 +1,8 @@
 const getUserExecption = (input) => {
   const arr = changeNumberToArray(input);
-  if (checkLength(arr) && checkIsNumber(arr) && checkOverlap(arr)) {
-    return true;
-  } else {
-    return false;
-  }
+  if (!checkLength(arr) || !checkIsNumber(arr) || !checkOverlap(arr)) {
+    throw "error";
+  } else return;
 };
 
 const changeNumberToArray = (input) => {
@@ -37,5 +35,5 @@ const checkOverlap = (arr) => {
   return true;
 };
 
-console.log(getUserExecption("123"));
+console.log(getUserExecption("128"));
 module.exports = getUserExecption;
