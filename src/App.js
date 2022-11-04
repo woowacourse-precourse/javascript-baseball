@@ -7,7 +7,11 @@ class App {
 
     for (let playCount = 0; playCount < 3; playCount++) {
       const userInput = getUserInput();
-      calculateInputNumber(computerNumber, userInput);
+      const STRIKE_BALL_RECORD = calculateInputNumber(
+        computerNumber,
+        userInput
+      );
+      const isStrike = printBallStrike(STRIKE_BALL_RECORD);
     }
   }
 }
@@ -48,6 +52,25 @@ const calculateInputNumber = (computerNumber, userNumber) => {
     }
   }
   return strikeBallRecord;
+};
+
+const printBallStrike = (strikeBallRecord) => {
+  if (strikeBallRecord[0] === 3) {
+    console.log(`${strikeBallRecord[0]}스트라이크`);
+    return true;
+  }
+
+  if (strikeBallRecord[0] + strikeBallRecord[1] === 0) {
+    console.log("낫싱");
+  } else if (strikeBallRecord[0] > 0 && strikeBallRecord[0] > 0) {
+    console.log(`${strikeBallRecord[1]}볼 ${strikeBallRecord[0]}스트라이크`);
+  } else if (strikeBallRecord[0] > 0 && strikeBallRecord[0] === 0) {
+    console.log(`${strikeBallRecord[0]}스트라이크`);
+  } else if (strikeBallRecord[0] === 0 && strikeBallRecord[1] > 0) {
+    console.log(`${strikeBallRecord[1]}볼`);
+  }
+
+  return false;
 };
 
 module.exports = App;
