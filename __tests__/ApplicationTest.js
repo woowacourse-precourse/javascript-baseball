@@ -38,6 +38,7 @@ describe("숫자 야구 게임", () => {
 
     mockRandoms(randoms);
     mockQuestions(answers);
+    
 
     const app = new App();
     app.play();
