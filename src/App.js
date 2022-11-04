@@ -1,12 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
-  constructor() {
+  play() {
     const computerNumber = this.createComputerNumber();
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.readLine("숫자를 입력해주세요:", (answer) =>
-      console.log(answer)
+    MissionUtils.Console.readLine("숫자를 입력해주세요:", (userInput) =>
+      this.checkInputValidation(userInput)
     );
   }
+
   createComputerNumber() {
     const eachNumberArray = [];
     while (eachNumberArray.length < 3) {
@@ -17,9 +18,9 @@ class App {
     }
     return eachNumberArray.join("");
   }
-  play() {}
 }
 
-new App();
+const app = new App();
+app.play();
 
 module.exports = App;
