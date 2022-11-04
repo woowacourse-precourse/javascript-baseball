@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const ValidCheck = require("./ValidCheck");
-const Hint = require("./Hint");
+const getIsInputValueValid = require("./ValidCheck");
+const getHint = require("./Hint");
 const Computer = require("./Computer");
 
 class BaseballGame {
@@ -43,25 +43,6 @@ class BaseballGame {
         }
       }
     );
-  }
-
-  getIsInputValueValid(inputValue) {
-    let isInputValueValid = true;
-    if (
-      ValidCheck.getIsLengthInvalid(inputValue) ||
-      ValidCheck.getIsRepeatExist(inputValue) ||
-      ValidCheck.getIsInvalidWordExist(inputValue)
-    )
-      isInputValueValid = false;
-    return isInputValueValid;
-  }
-
-  getHint(correctNumber, inputNumber) {
-    const strikeCount = Hint.countStrike(correctNumber, inputNumber);
-    const ballCount = Hint.countBall(correctNumber, inputNumber, strikeCount);
-    const hint = Hint.convertCountToHintString(strikeCount, ballCount);
-
-    return hint;
   }
 
   resetGameValue() {
