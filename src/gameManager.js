@@ -1,8 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
 const input = require("./util/input");
+const BaseballGame = require("./BaseballGame");
 
 class GameManager {
-  startGame() {
+  constructor() {
+    this.game = new BaseballGame();
+    this.restart = true;
+  }
+
+  async startGame() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
 
