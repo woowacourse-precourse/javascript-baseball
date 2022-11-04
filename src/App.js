@@ -1,11 +1,12 @@
 function checkInput(input){
-  let newArray = [];
   if(input.length !== 3){
     return false;
   }
   if (isNaN(input)){
     return false;
   }
+
+  let newArray = [];
   for (let i = 0;  i < input.length; i++){
     if(!newArray.includes(input[i])){
       newArray.push(input[i]);
@@ -16,6 +17,7 @@ function checkInput(input){
   return true;
 }
 
+
 function getInputIntArray(input){
   const userInputArray = [...input];
   const newArray = [];
@@ -25,11 +27,11 @@ function getInputIntArray(input){
   return newArray;
 }
 
+
 function startGame(computer){
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
     const userInputArray = getInputIntArray(userInput);
     let hint = '';
-    console.log(userInputArray, computer);
     if (checkInput(userInput)){
       hint = getHint(userInputArray, computer);
     } else {
@@ -37,14 +39,16 @@ function startGame(computer){
       startGame(computer);
     }
 
+    MissionUtils.Console.print(hint);
     if (hint === '3스트라이크'){
-      console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       endGame();
     } else{
       startGame(computer);
     }
   });
 }
+
 
 function getHint(userInputArray, computer){
   let hint = '';
@@ -61,11 +65,11 @@ function getHint(userInputArray, computer){
   }
 
   if (strike || ball){
-    if (strike > 0){
-      hint += `${strike}스트라이크`;
+    if (ball > 0){
+      hint += `${ball}볼 `;
   
-    } if (ball > 0) {
-      hint += `${ball}볼`;
+    } if (strike > 0) {
+      hint += `${strike}스트라이크`;
     }
   } else{
     hint = '낫싱';
@@ -105,11 +109,7 @@ class App {
 }
 
 const MissionUtils = require("@woowacourse/mission-utils");
-
 const app = new App();
-// app.play();
-// endGame();
-// console.log(checkInput("123"));
-// pickComputerNumber();
 app.play();
+
 module.exports = App;
