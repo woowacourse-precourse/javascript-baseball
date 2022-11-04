@@ -41,7 +41,7 @@ class App {
   }
 
   isError(number) {
-    if (number.length !== 3 || isNum(number)) {
+    if (number.length !== 3 || isNaN(number)) {
       throw "Parameter is not a number!";
     }
   }
