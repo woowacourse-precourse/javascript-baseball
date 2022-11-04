@@ -20,10 +20,14 @@ async function inputUserNumbers() {
 }
 
 function pitchAnalysis(gameData, userNumbers, computerNumbers) {
-  const strike = userNumbers.filter(
-    (userNumber, index) => computerNumbers[index] === userNumber
-  ).length;
-  const ball = 3 - strike;
+  const notStrikeNumbers = userNumbers.filter(
+    (userNumber, index) => computerNumbers[index] !== userNumber
+  );
+  const ballNumbers = notStrikeNumbers.filter((notStrikeNumber) =>
+    computerNumbers.includes(notStrikeNumber)
+  );
+  const strike = 3 - notStrikeNumbers.length;
+  const ball = ballNumbers.length;
 
   gameData.setBall(ball);
   gameData.setStrike(strike);
