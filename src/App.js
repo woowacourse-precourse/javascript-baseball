@@ -38,18 +38,21 @@ function computer_randomnumber(){
 }
 
 function user_inputnumber(){
-  const USER_NUMBER = MissionUtils.Console.readLine();
-  if(USER_NUMBER.length != 3) {
+  let userNumber;
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(inputNumber) => {
+    userNumber = inputNumber;
+  })
+  
+  if(userNumber.length != 3) {
     return 1;
   }
-  if(USER_NUMBER == String){
+  if(userNumber == String){
     return 2;
   }
-  if(USER_NUMBER <= 0){
+  if(userNumber <= 0){
     return 3;
   }
-  return USER_NUMBER;
+  return userNumber;
 }
-
 
 module.exports = App;
