@@ -60,8 +60,27 @@ class App {
     return result;
   }
 
-  printResult() {
-    // 볼 스트라이크 낫싱 등 결과 출력;
+  printResult(score) {
+    const [strikeScore, ballScore] = score;
+    const BALL = {
+      0: "",
+      1: "1볼",
+      2: "2볼",
+      3: "3볼",
+    };
+    const STRIKE = {
+      0: "",
+      1: "1스트라이크",
+      2: "2스트라이크",
+      3: "3스트라이크",
+    };
+    const NOTHING = "낫싱";
+    const message = `${BALL[ballScore]} ${STRIKE[strikeScore]}`.trimLeft();
+    if (message) {
+      Console.print(message);
+      return;
+    }
+    Console.print(NOTHING);
   }
 
   confirmRestart() {}
@@ -75,19 +94,23 @@ class App {
   async play() {
     const goal = this.generateGoalNumber();
     let userAnswer = await this.receiveNumberFromUser();
-    // userAnswer가 undefined면 앱 종료하기
-
     let score = this.getStrikeAndBallCount(goal, userAnswer);
-    // while (score !== 스트라이크3) {
-    //   printResult(score);
-    //   userAnswer = receiveNumberFromUser();
-    //   score = getBallAndStrikeCount(goal, userAnswer);
-    // }
-    // printResult(score);
+
+    const STRIKE_COUNT = 3;
+    const isThreeStrike = (strikeScore) => strikeScore === STRIKE_COUNT;
+    while (!isThreeStrike(score[0])) {
+      this.printResult(score);
+      userAnswer = await this.receiveNumberFromUser();
+      score = this.getStrikeAndBallCount(goal, userAnswer);
+    }
+
+    // this.printResult(score);
     // if (confirmRestart()) return restartGame();
     // exitGame();
   }
 }
-const app = new App();
-app.play();
+
+// const app = new App();
+// app.play();
+
 module.exports = App;
