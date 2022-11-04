@@ -1,5 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const removeDuplicatedNumber = (stringNumber) => [
+  ...new Set([...stringNumber]),
+];
+
 class App {
   play() {
     const computerNumber = this.generateRandomNumber();
@@ -22,6 +26,19 @@ class App {
       // TODO
       // 사용자가 입력한 숫자가 올바른 숫자인지 검증한다.
     });
+  }
+
+  isValidNumber(enteredNumber) {
+    if (typeof enteredNumber !== "string") {
+      return false;
+    }
+    if (
+      Number.isNaN(Number(enteredNumber)) ||
+      removeDuplicatedNumber(enteredNumber).length !== 3
+    ) {
+      return false;
+    }
+    return true;
   }
 }
 
