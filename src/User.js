@@ -56,6 +56,8 @@ class User extends Mission {
       this.userInputStart();
     } else if (answer === '2') {
       this.mission.Console.close();
+    } else {
+      throw '1과 2만 입력 가능합니다. 잘못된 값이 입력 되었습니다.';
     }
   }
 }
