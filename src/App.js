@@ -17,11 +17,20 @@ const refNumbersGetter = () => {
   return refNumbers;
 };
 
+const userNumbersGetter = () => {
+  return new Promise((resolve, reject) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (asnwer) => {
+      resolve(asnwer);
+    });
+  });
+};
+
 class App {
-  play() {
+  async play() {
     printer("숫자 야구 게임을 시작합니다.");
     const refNumbersArr = refNumbersGetter();
-    printer(refNumbersArr);
+    const usersInput = await userNumbersGetter();
+    printer(usersInput);
   }
 }
 
