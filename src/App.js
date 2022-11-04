@@ -12,6 +12,15 @@ class App {
     return Number(number.join(''))
   }
 
+  readUserInputValue(){
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(value)=>{
+      //TODO - 입력한 값이 유효한지 확인하는 기능
+      return value;
+    })
+  }
+
+  
+
 }
 
 module.exports = App;
