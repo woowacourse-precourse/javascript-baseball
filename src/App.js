@@ -26,18 +26,46 @@ class App {
         i++;
       }
     }
+    console.log(answer);
     return answer;
+  };
+
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.Game();
+  }
+
+  async checkRestartGame() {
+    if ((await this.inputRestartGameValue()) == 2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  inputRestartGameValue = () => {
+    return new Promise((resolove, reject) => {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        (answer) => {
+          resolove(answer);
+        }
+      );
+    });
   };
 
   async Game() {
     while (true) {
       this.initializer();
       await this.doBaseBall();
+
       if (this.err) {
         console.log("err");
       }
-      if (this.isRight) {
+      if (this.isRight && (await this.checkRestartGame())) {
         break;
+      } else {
+        this.reGame();
       }
     }
   }
@@ -45,6 +73,14 @@ class App {
   duplicateCheck(answer, val) {
     return answer.every((e) => val !== e);
   }
+
+  reGame = () => {
+    this.answer = this.createAnswer();
+    this.isRight = false;
+    this.err = false;
+    this.strike = 0;
+    this.ball = 0;
+  };
 
   initializer = () => {
     this.isRight = false;
@@ -63,12 +99,12 @@ class App {
     }
   }
 
-  checkWin = () => {
+  async checkWin() {
     if (this.strike === 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.isRight = true;
     }
-  };
+  }
 
   printResult = () => {
     console.log(this.strike, this.ball);
@@ -121,19 +157,9 @@ class App {
       });
     });
   };
-
-  play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.Game();
-  }
 }
 
-const endGame = () => {
-  process.exit(1);
-};
-
 const app = new App();
-console.log(app.answer);
 app.play();
 
 module.exports = App;
