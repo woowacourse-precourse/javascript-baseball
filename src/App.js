@@ -22,6 +22,10 @@ function getComputerNumber() {
 
 function getUserInput(computerRandomNumber) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    if (!validUserInput(input)) {
+      throw new Error('사용자의 입력이 올바르지 않습니다.');
+    }
+
     const userInputNumber = strToIntArr(input);
     const gameResult = getResult(computerRandomNumber, userInputNumber);
     const isWin = winOrLose(gameResult);
@@ -91,6 +95,11 @@ function newGame() {
       getUserInput(computerRandomNumber);
     }
   })
+}
+
+function validUserInput(str) {
+  const reg = /^[0-9]+$/;
+  return (str.length == 3 && reg.test(str));
 }
 
 module.exports = App;
