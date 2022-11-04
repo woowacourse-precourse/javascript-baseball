@@ -4,26 +4,48 @@ class App {
   answer = 0;
   userAnswer = 0;
   isRight = false;
-
+  err = false;
   constructor() {
     this.answer = MissionUtils.Random.pickNumberInRange(1, 9);
     this.isRight = false;
+    this.err = false;
   }
 
   async Game() {
     while (true) {
-      await this.checkBallValidity();
-      if (this.isRight) {
-        break;
+      await this.doBaseBall();
+      if (this.err) {
+        console.log("ERR");
       } else {
-        console.log(false);
+        if (this.isRight) {
+          break;
+        } else {
+          console.log(false);
+        }
       }
     }
   }
 
-  async checkBallValidity() {
-    this.userAnswer = parseInt(await this.input());
+  async doBaseBall() {
+    this.userAnswer = await this.input();
+    this.checkBallValidity();
+    if (this.err) {
+      return;
+    } else {
+      [...this.userAnswer].map((e) => {
+        console.log(e);
+      });
+    }
   }
+
+  checkBallValidity = () => {
+    if (isNaN(parseInt(this.userAnswer))) {
+      this.err = true;
+    }
+    if ([...this.userAnswer].length !== 3) {
+      this.err = true;
+    }
+  };
 
   input = () => {
     return new Promise((resolove, reject) => {
@@ -44,6 +66,6 @@ const endGame = () => {
 };
 
 const app = new App();
-app.play();
-
+// app.play();
+app.checkBallValidity("c13");
 module.exports = App;
