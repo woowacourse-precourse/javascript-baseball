@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const REPLY = {
-  replay: 1,
-  gameEnd: 2,
+  replay: "1",
+  gameEnd: "2",
 };
 
 const MESSAGE = {
@@ -15,6 +15,7 @@ const MESSAGE = {
 const ERRORMESSAGE = {
   repeat: "중복되지 않는 숫자 3개를 입력해야 합니다.",
   quantity: "숫자 3개를 입력해야 합니다.",
+  notNumber: "숫자만 입력해야 합니다.",
 };
 
 const STRIKE = "스트라이크";
@@ -42,29 +43,36 @@ class App {
   };
 
   getUserNumber = () => {
+    let userNumber;
     MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
-      const userNumber = Array.from(String(inputNumber), Number);
+      const numberArr = Array.from(inputNumber, Number);
 
       try {
-        this.checkValidity(userNumber);
-        return userNumber;
+        this.checkValidity(numberArr);
+        userNumber = numberArr;
       } catch (e) {
         MissionUtils.Console.print(e);
         MissionUtils.Console.close();
       }
     });
+    return userNumber;
   };
 
   checkValidity = (userNumber) => {
     if (userNumber.length !== 3) {
-      throw ERRORMESSAGE.quantity;
-    } else if (!this.isEveryNumberUnique(userNumber)) {
-      throw ERRORMESSAGE.repeat;
+      throw new Error(ERRORMESSAGE.quantity);
     }
-    return true;
+
+    if (!this.isEveryNumberUnique(userNumber)) {
+      throw new Error(ERRORMESSAGE.repeat);
+    }
+
+    if (!userNumber.every((num) => Number.isInteger(num))) {
+      throw new Error(ERRORMESSAGE.notNumber);
+    }
   };
 
-  getStrikeAndBallNumber = (computer, user) => {
+  getBallAndStrikeNumber = (computer, user) => {
     const ballNum = user
       .filter((item, ind) => item !== computer[ind])
       .filter((item) => computer.includes(item)).length;
@@ -102,7 +110,7 @@ class App {
   askToPlayAgain = () => {
     MissionUtils.Console.readLine(MESSAGE.askReplay, (answer) => {
       if (answer === REPLY.replay) {
-        this.play();
+        this.playNewGame();
       } else if (answer === REPLY.gameEnd) {
         MissionUtils.Console.close();
       }
@@ -111,18 +119,22 @@ class App {
 
   compareNumbers = () => {
     const userNumber = this.getUserNumber();
-    const strikeAndBallNumber = this.getStrikeAndBallNumber(
+    const ballAndStrikeNumber = this.getBallAndStrikeNumber(
       this.computerNumber,
       userNumber
     );
-    const result = this.convertNumberToMessage(strikeAndBallNumber);
+    const result = this.convertNumberToMessage(ballAndStrikeNumber);
     this.showMessage(result);
+  };
+
+  playNewGame = () => {
+    this.computerNumber = this.generateComputerNumber();
+    this.compareNumbers();
   };
 
   play() {
     MissionUtils.Console.print(MESSAGE.gameStart);
-    this.computerNumber = this.generateComputerNumber();
-    this.compareNumbers();
+    this.playNewGame();
   }
 }
 
