@@ -1,106 +1,129 @@
-import * as MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {
-    this.flag = null;
-    this.computer = null;
-    this.user = null;
-    this.strike = 0;
-    this.ball = 0;
-  }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    while (this.flag !== 2) {
-      this.gameOrder("exit");
+    console.log("숫자 야구 게임");
+    let isPlaying = true;
+
+    while (isPlaying) {
+      this.callGameSequence(); 
+      if (!this.askRestart()) isPlaying = false;
+    }
+    MissionUtils.Console.print("게임 종료");
+  }
+
+  callGameSequence() {
+    this.gameStatus = true;
+    // 1. computer값을 생성한다
+    const answerMap = this.initGameSetting(); 
+    // 스트라이크까지 2,3번 반복
+    while (this.gameStatus) {
+      // 2. user값을 받아와 검사한다
+      const userNumber = this.getUserNumber();
+      // 3. computer & user 값을 비교한다
+      if (this.compareWithAnswer(answerMap, userNumber)){ 
+        this.gameStatus = false;
+      } 
     }
   }
 
-  gameOrder() {
-    // 1. computer값을 생성한다
-    this.makeRandomNumber();
-    // 정답이 아닌 경우 값을 받아오는 작업을 반복한다.
-    while (this.strike !== 3) {
-      // 2. user값을 받아와 검사한다
-      this.getUserValue();
-      if (this.checkUserValue(this.user)) {
-        // 3. computer & user 값을 비교한다
-        this.compareWithUser();
-      } else {
-        this.exitProgram("form");
+  initGameSetting() { // 컴퓨터 숫자 생성, map 생성
+    const answer = [];
+    const answerMap = {};
+
+    while (answer.length !== 3) {
+      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(num)) {
+        answer.push(num);
       }
-      // 결과 출력
     }
-    // 4. 게임 재시작
-    this.askRestart();
+  
+    for (let idx = 0; idx < answer.length; idx++) {
+      const num = answer[idx];
+      answerMap[num] = idx;
+    }
+
+    return answerMap;
+  }
+
+  getUserNumber() {
+    const userNumber = []; 
+    
+    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
+      answer = answer.split("").map(e => userNumber.push(e));
+    });
+    MissionUtils.Console.close();
+    // 예외 처리
+    this.checkUserNumber(userNumber);
+    
+    return userNumber;
+  }
+
+  checkUserNumber(value) {
+    const valueSet = new Set(value);
+
+    if (value.length !== 3) { // 길이 검사
+      throw `잘못된 형식 입력`;
+    }
+
+    if (valueSet.size !== 3) { // 중복 숫자 검사
+      throw `잘못된 형식 입력`;
+    }
+
+    value.map(element => { // 숫자 검사
+      element = Number(element);
+      if (Number.isNaN(element)) throw `잘못된 형식 입력`;
+    })
+  }
+
+  compareWithAnswer(answerMap, userNumber) {
+    let strike = 0;
+    let ball = 0;
+
+    for (let idx = 0; idx < userNumber.length; idx++) {
+      const num = userNumber[idx];
+      if (answerMap[num] !== undefined) {
+        answerMap[num] === idx ? strike++ : ball++;
+      }
+    }
+    this.printResult(strike, ball);
+
+    return strike === 3 ? true : false;
+  }
+
+  printResult(strike, ball) {
+    if (!strike && !ball) {
+      MissionUtils.Console.print("낫싱");
+    } else if (!ball) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    } else if (!strike) {
+      MissionUtils.Console.print(`${ball}볼`);
+    } else {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
   }
 
   askRestart() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    let isRestart;
+    
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 재시작하려면 1, 종료하려면 2를 입력해주세요.",
       (answer) => {
-        console.log(`숫자입력: ${answer}`);
-        this.flag = answer;
+        answer = Number(answer);
+        isRestart = answer;
       }
-    );
-  }
+    )
+    MissionUtils.Console.close();
 
-  makeRandomNumber() {
-    const computer = [];
-
-    while (computer.length !== 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
-
-    this.computer = [...computer];
-  }
-
-  getUserValue() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-      console.log(`${answer}`);
-      this.user = answer.split("");
-    });
-  }
-
-  checkUserValue(value) {
-    const valueSet = new Set(value);
-
-    return valueSet.size === 3 ? true : false;
-  }
-
-  compareWithUser() {
-    const computerMap = {};
-
-    for (let idx = 0; idx < this.computer.length; idx++) {
-      const num = this.computer[idx];
-      computerMap[num] = idx;
-    }
-
-    for (let idx = 0; idx < this.user.length; idx++) {
-      const num = this.user[idx];
-      if (computerMap[num] !== undefined) {
-        computerMap[num] === idx ? this.strike++ : this.ball++;
-      }
-    }
-  }
-
-  printResult() {
-    if (!this.strike && !this.ball) {
-      MissionUtils.Console.print("낫싱");
-    } else if (!this.ball) {
-      MissionUtils.Console.print(`${this.strike} 스트라이크`);
-    } else if (!this.strike) {
-      MissionUtils.Console.print(`${this.ball} 볼`);
+    if (isRestart === 1) {
+      return true;
+    } else if (isRestart === 2) {
+      return false;
     } else {
-      MissionUtils.Console.print(`${this.strike} 스트라이크 ${ball} 볼`);
+      throw `잘못된 값을 입력하여 게임을 종료합니다.`
     }
   }
-
-  exitProgram() {}
 }
 
 module.exports = App;
