@@ -1,5 +1,39 @@
+const { Console } = require('@woowacourse/mission-utils');
+
+const CONSOLE_MESSAGE = {
+  gameStart: '숫자 야구 게임을 시작합니다.',
+  getQuery: '숫자를 입력해주세요 :',
+};
+
+async function readLineAsync(message) {
+  return new Promise((res) => {
+    Console.readLine(message, (line) => {
+      res(line);
+    });
+  });
+}
+
 class App {
-  play() {}
+  answer = '';
+
+  resetAnswer() {}
+
+  checkValidQuery() {}
+
+  checkValidRestartQuery() {}
+
+  repeatQuery() {}
+
+  getQueryResult() {}
+
+  checkRestart() {}
+
+  async play() {
+    Console.print(CONSOLE_MESSAGE.gameStart);
+    const query = await readLineAsync(CONSOLE_MESSAGE.getQuery);
+    Console.print(query);
+    Console.close();
+  }
 }
 
 module.exports = App;
