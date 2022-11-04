@@ -119,7 +119,17 @@ class App {
 
   printGameResult() {
     const gameResultMessage = getGameResultMessage(this.gameResult);
+    Console.print(gameResultMessage);
+    this.isUserWin();
   }
+
+  isUserWin() {
+    this.gameResult.strike === 3 ? this.gameOver() : this.retry();
+  }
+
+  retry() {}
+
+  gameOver() {}
 }
 
 const app = new App();
