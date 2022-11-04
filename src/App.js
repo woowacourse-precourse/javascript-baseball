@@ -40,8 +40,8 @@ class App {
       ball: 0,
     };
 
-    [...userNumber].forEach((number) => {
-      if (number === this.computerNumbers[0]) {
+    [...userNumber].forEach((number, i) => {
+      if (number === this.computerNumbers[i]) {
         strikeBallCount.strike += 1;
         return;
       }
