@@ -1,12 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {
-    this.isCorrect = false;
-  }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.startGame(this.generateComputerNumbers());
+    const computerNumbers = this.generateComputerNumbers();
+    this.startGame(computerNumbers);
   }
 
   startGame(computerInput) {
@@ -15,8 +13,9 @@ class App {
         const strikes = this.countStrikes(computerInput, userInput);
         const balls = this.countBalls(computerInput, userInput);
         const result = this.showResult(strikes, balls);
+        const isFinished = this.isGameFinished(strikes);
         MissionUtils.Console.print(result);
-        if (this.isCorrect) {
+        if (isFinished) {
           this.restartOrExitGame();
         } else {
           this.startGame(computerInput);
@@ -68,7 +67,6 @@ class App {
   showResult(strike, ball) {
     if (strike === 0 && ball === 0) return "낫싱";
     if (strike === 3) {
-      this.isCorrect = true;
       return (
         `${strike}스트라이크 \n` + "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
       );
@@ -83,8 +81,8 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
       (userSelection) => {
         if (userSelection === "1") {
-          this.isCorrect = false;
-          this.startGame(this.generateComputerNumbers());
+          const newComputerNumbers = this.generateComputerNumbers();
+          this.startGame(newComputerNumbers);
         }
         if (userSelection === "2") {
           MissionUtils.Console.close();
@@ -95,9 +93,13 @@ class App {
       }
     );
   }
+  isGameFinished(strike) {
+    if (strike === 3) return true;
+    return false;
+  }
 }
 
-const app = new App();
-app.play();
+//const app = new App();
+//app.play();
 
 module.exports = App;
