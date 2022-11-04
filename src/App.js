@@ -87,19 +87,19 @@ class App {
     const numbers = input.split("").map(Number);
 
     if (!this.isValidDigit(numbers)) {
-      console.log("isValidDigit");
+      throw new Error("isValidDigit");
     }
 
     if (!numbers.every(this.isNumber)) {
-      console.log("isNumber");
+      throw new Error("isNumber");
     }
 
     if (!numbers.every(this.isValidNumber.bind(this))) {
-      console.log("isValidNumber");
+      throw new Error("isValidNumber");
     }
 
     if (this.hasDuplicateElement(numbers)) {
-      console.log("hasDuplicateElement");
+      throw new Error("hasDuplicateElement");
     }
 
     return true;
@@ -108,9 +108,9 @@ class App {
   inputUserNumbers() {
     this.readLine(this.MESSAGES.INSERT_NUMBER, (input) => {
       if (!this.isValidInput(input)) {
-        // 여기 throw Error 하고 아래 console.log문은 삭제
-        console.log("input", input);
+        return;
       }
+
       this.userNumber = input.split("").map(Number);
     });
   }
