@@ -14,6 +14,10 @@ class App {
 
   async play() {
     const userInput = await this.requestUserNumberInput();
+    const { isValid, errorType } = this.isValidUserNumberInput(userInput);
+    if (!isValid) {
+      throw new Error(ERROR_MESSAGE[errorType]);
+    }
   }
 
   generateComputerInput() {
@@ -51,6 +55,22 @@ class App {
       .split("")
       .map((eachLetter) => parseInt(eachLetter), 10)
       .every(isValidRangeNumber);
+  }
+  isValidUserNumberInput(userInput) {
+    if (!this.hasOnlyNumber(userInput)) {
+      return { isValid: false, errorType: "INVALID_INPUT_TYPE" };
+    }
+    if (!this.hasValidLength(userInput)) {
+      return { isValid: false, errorType: "INVALID_INPUT_LENGTH" };
+    }
+    if (!this.hasOnlyUniqueNumber(userInput)) {
+      return { isValid: false, errorType: "DUPLICATED_NUMBER" };
+    }
+    if (!this.hasOnlyValidRangeNumber(userInput)) {
+      return { isValid: false, errorType: "INVALID_INPUT_RANGE" };
+    }
+
+    return { isValid: true };
   }
 }
 
