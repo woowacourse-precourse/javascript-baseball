@@ -1,5 +1,4 @@
 const { Console } = require("@woowacourse/mission-utils");
-const input = require("./util/input");
 const PickedNumberByComputer = require("./PickedNumberByComputer");
 
 class BaseballGame {
@@ -8,7 +7,7 @@ class BaseballGame {
       new PickedNumberByComputer().randomNumInRange();
   }
 
-  countStrikeBallNothing(pickedNumberByUser, pickedNumberByComputer) {
+  countStrikeBallNothing = (pickedNumberByUser, pickedNumberByComputer) => {
     let strike = 0;
     let ball = 0;
     let nothing = 0;
@@ -24,17 +23,17 @@ class BaseballGame {
     });
 
     return [strike, ball, nothing];
-  }
+  };
 
-  printResultsForCount(strike, ball, nothing) {
+  printResultsForCount = (strike, ball, nothing) => {
     if (nothing === 3) Console.print(`낫싱`);
     else if (strike > 0 && ball === 0) Console.print(`${strike}스트라이크`);
     else if (ball > 0 && strike === 0) Console.print(`${ball}볼`);
     else Console.print(`${ball}볼 ${strike}스트라이크 `);
-  }
+  };
 
-  async playTurn() {
-    let pickedNumberByUser = await input("숫자를 입력해주세요 : ");
+  playTurn = () => {
+    let pickedNumberByUser = input("숫자를 입력해주세요 : ");
     let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
       this.pickedNumberByComputer
@@ -42,16 +41,16 @@ class BaseballGame {
     this.printResultsForCount(strike, ball, nothing);
 
     return strike;
-  }
+  };
 
-  async playGame() {
+  playGame = () => {
     let isThreeStrike = false;
     while (!isThreeStrike) {
-      let numberOfStrike = await this.playTurn();
+      let numberOfStrike = this.playTurn();
       if (numberOfStrike === 3) isThreeStrike = true;
     }
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-  }
+  };
 }
 
 module.exports = BaseballGame;
