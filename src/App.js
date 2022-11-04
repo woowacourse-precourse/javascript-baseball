@@ -23,19 +23,17 @@ class App {
   exitGame() {}
 
   play() {
-    const goal = generateGoalNumber();
-    let userAnswer = receiveNumberFromUser();
-    let score = compareGoalAndUserAnswer(goal, userAnswer);
-
-    while (score !== 스트라이크3) {
-      printResult(score);
-      userAnswer = receiveNumberFromUser();
-      score = compareGoalAndUserAnswer(goal, userAnswer);
-    }
-
-    printResult(score);
-    if (confirmRestart()) return restartGame();
-    exitGame();
+    // const goal = generateGoalNumber();
+    // let userAnswer = receiveNumberFromUser();
+    // let score = compareGoalAndUserAnswer(goal, userAnswer);
+    // while (score !== 스트라이크3) {
+    //   printResult(score);
+    //   userAnswer = receiveNumberFromUser();
+    //   score = compareGoalAndUserAnswer(goal, userAnswer);
+    // }
+    // printResult(score);
+    // if (confirmRestart()) return restartGame();
+    // exitGame();
   }
 }
 
