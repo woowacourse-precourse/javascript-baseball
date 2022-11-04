@@ -88,4 +88,19 @@ function countStrike(computerNumber, userNumber) {
   return strike;
 }
 
+function countBall(computerNumber, userNumber) {
+  let ball = 0;
+
+  for (let i = 0; i < 3; i++) {
+    if (
+      computerNumber.includes(userNumber[i]) &&
+      computerNumber[i] !== userNumber[i]
+    ) {
+      ball++;
+    }
+  }
+
+  return ball;
+}
+
 module.exports = App;
