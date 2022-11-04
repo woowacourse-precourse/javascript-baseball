@@ -4,12 +4,20 @@ const { MESSAGE } = require('./constants');
 
 class Game {
   constructor() {
+    this.started = false;
     this.randomNumber;
+    this.score = {
+      ball: 0,
+      strike: 0,
+    };
   }
 
   init() {
     this.start(MESSAGE.START);
     this.generateRandomNumber(1, 9, 3);
+    this.started = true;
+    this.score.ball = 0;
+    this.score.strike = 0;
   }
 
   start(startMessage) {
