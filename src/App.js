@@ -48,4 +48,12 @@ function isNumber(userNumber) {
   return ture;
 }
 
+function isLength3(userNumber) {
+  if (userNumber.length !== 3) {
+    return false;
+  }
+
+  return true;
+}
+
 module.exports = App;
