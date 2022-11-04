@@ -32,19 +32,19 @@ class BaseballGame {
     else Console.print(`${ball}볼 ${strike}스트라이크`);
   };
 
-  playTurn = () => {
-    let pickedNumberByUser = input("숫자를 입력해주세요 : ");
+  playTurn = (pickedNumberByUser) => {
     let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
       this.pickedNumberByComputer
     );
     this.printResultsForCount(strike, ball, nothing);
 
-    return strike;
+    this.playGame(strike === 3);
   };
 
   playGame = () => {
     let isThreeStrike = false;
+
     while (!isThreeStrike) {
       let numberOfStrike = this.playTurn();
       if (numberOfStrike === 3) isThreeStrike = true;
