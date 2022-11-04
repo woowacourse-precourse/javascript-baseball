@@ -34,4 +34,4 @@ function nothing(strike, ball){
     }
 }
 
-module.exports = numbers_baseball_referee
+module.exports = numberBaseballReferee;

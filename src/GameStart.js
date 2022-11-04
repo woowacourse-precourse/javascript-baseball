@@ -27,10 +27,11 @@ function isNotNumberError(answer){
 }
 
 function overlapNumberError(answer){
-    const user_input = Array.from(answer);
-    for(let i = 0 ; i < user_input.length; i++){
-        if(user_input[i] == user_input[i+1]){
+    let userInput = Array.from(answer);
+    for(let i = 0 ; i < userInput.length; i++){
+        if(userInput[i] == userInput[i+1]){
             throw "Error" ; 
         }
     }
 }
+module.exports = gameStart;
