@@ -18,6 +18,7 @@ class App {
     getInputNumber() {
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
             this.inputNumber = String(number).split("");
+            this.checkInputNumber(this.inputNumber);
         });
     }
 
@@ -53,7 +54,7 @@ class App {
         if (ball > 0) {
             hintMessage += `${ball}볼`;
         }
-        if (hintMessage.length > 0) {
+        if (ball > 0 && strike > 0) {
             hintMessage += " ";
         }
         if (strike > 0) {
@@ -76,7 +77,7 @@ class App {
         ) {
             throw "입력값이 잘못되었습니다.";
         } else {
-            console.log(this.getHintMessage(inputNumber));
+            MissionUtils.Console.print(this.getHintMessage(inputNumber));
         }
     }
 
