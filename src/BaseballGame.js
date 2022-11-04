@@ -1,9 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
 const PickedNumberByComputer = require("./PickedNumberByComputer");
+const ValidateUserInput = require("./ValidateUserInput");
 
 class BaseballGame {
   constructor() {
     this.isFirstGame = true;
+    this.validateUserInput = new ValidateUserInput();
     this.pickedNumberByComputer =
       new PickedNumberByComputer().randomNumInRange();
   }
@@ -34,6 +36,8 @@ class BaseballGame {
   };
 
   playTurn = (pickedNumberByUser) => {
+    this.validateUserInput.validate(pickedNumberByUser);
+
     let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
       this.pickedNumberByComputer
