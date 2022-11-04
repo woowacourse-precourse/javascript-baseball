@@ -95,5 +95,6 @@ async function gameStart() {
       await continueOrEndGame(gameData);
     }
   }
+  Console.close();
 }
 exports.gameStart = gameStart;
