@@ -51,4 +51,4 @@
 
 # 💻 순서도
 
-<img width="1146" alt="Flow Chart" src="https://user-images.githubusercontent.com/86355699/200002856-888cf83d-d12d-44de-9103-0198a6b7c75d.png">
+<img width="600" alt="Flow Chart" src="https://user-images.githubusercontent.com/86355699/200002856-888cf83d-d12d-44de-9103-0198a6b7c75d.png">
