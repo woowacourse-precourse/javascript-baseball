@@ -15,10 +15,20 @@ const CHECK_INPUT_AFTER_GAME = function checkInputAfterGame(userInput) {
 }
 
 const MAKEANSWER = function makeAnswerWithThreeUniqueNumbers() {
-  const THREE_NUMBERS = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  const ANSWER = THREE_NUMBERS[0] * 100 + THREE_NUMBERS[1] * 10 + THREE_NUMBERS[2] * 1;
-  return ANSWER;
+  let threeUniqueNumbers = []
+  while (threeUniqueNumbers.length < 3){
+    const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+    threeUniqueNumbers = CHECK_DUPLICATE(threeUniqueNumbers, RANDOM_NUMBER);
+  }
+  return threeUniqueNumbers[0] * 100 + threeUniqueNumbers[1] * 10 + threeUniqueNumbers[2] * 1;
 }
+
+const CHECK_DUPLICATE = function checkRepeatedElementOfArray(array, target) {
+  const ARRAY_COPIED = [...array];
+  if (!array.includes(target)) ARRAY_COPIED.push(target)
+  return ARRAY_COPIED;
+}
+
 
 const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
   let count = 0;
