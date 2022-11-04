@@ -6,6 +6,7 @@ class App {
     printGameStartMsg();
     const computerNumber = createComputerNumber();
     const userNumber = await inputNumber();
+    userNumberException(userNumber);
   }
 }
 
@@ -56,6 +57,14 @@ function isDuplicated(userNumber) {
   const userNumberSet = new Set(userNumber);
 
   return userNumberSet.size === userNumber.length;
+}
+
+function userNumberException(userNumber) {
+  if (
+    !(isNumber(userNumber) && isLength3(userNumber) && isDuplicated(userNumber))
+  ) {
+    throw new Error('Invalid number..!');
+  }
 }
 
 module.exports = App;
