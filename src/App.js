@@ -44,10 +44,10 @@ class App {
     return nums.length === new Set(nums).size;
   }
 
-  getUserNumber() {
+  async getUserNumber() {
     let userNumber;
 
-    MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
+    await MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
       userNumber = Array.from(inputNumber, Number);
     });
 
@@ -109,8 +109,8 @@ class App {
     });
   }
 
-  compareNumbers() {
-    const userNumber = this.getUserNumber();
+  async compareNumbers() {
+    const userNumber = await this.getUserNumber();
     const ballAndStrikeNumber = this.getResult(this.computerNumber, userNumber);
     this.showMessage(ballAndStrikeNumber);
 
