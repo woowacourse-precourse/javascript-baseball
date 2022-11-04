@@ -68,7 +68,7 @@ class App {
         answer.push(number);
       }
     }
-    console.log(answer);
+
     return answer;
   }
 
@@ -129,6 +129,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
