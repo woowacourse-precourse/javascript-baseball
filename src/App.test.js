@@ -47,7 +47,7 @@ describe('숫자 야구 게임', () => {
 		expect(result).toHaveLength(3);
 	});
 
-	test('getUserNumber 메서드로 받아온 userNumber 가 0을 포함할 경우 에러를 발생시킨다', () => {
+	test('getUserNumber 메서드로 받아온 userNumber 가 0을 포함할 경우 에러 발생', () => {
 		const answer = ['012'];
 		const app = new App();
 		mockQuestions(answer);
@@ -57,7 +57,7 @@ describe('숫자 야구 게임', () => {
 		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
-	test('getUserNumber 메서드로 받아온 userNumber 의 숫자가 중복될 경우 에러를 발생시킨다', () => {
+	test('getUserNumber 메서드로 받아온 userNumber 의 숫자가 중복될 경우 에러 발생', () => {
 		const answer = ['112'];
 		const app = new App();
 		mockQuestions(answer);
