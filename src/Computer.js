@@ -1,4 +1,4 @@
-const { Console, Random } = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 
 class Computer {
   constructor(NUMBER_LIMIT) {

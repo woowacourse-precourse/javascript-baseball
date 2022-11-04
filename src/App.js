@@ -25,49 +25,32 @@ class App {
     this.computerNum = this.computer.makeNumbers();
     Console.print('숫자 야구 게임을 시작합니다.');
 
-    // TODO: 유저의 입력값과 컴퓨터의 숫자가 동일 할 때까지 MATCH
-    // 2. 현재 컴퓨터 숫자와 유저의 숫자가 동일한지 판별하기
-    // 3. 동일해질 때까지 Match -> match
     while (this.isGameEnd === false) {
-      // Match flow
-      // 1. 유저가 숫자를 입력한다. ✅
-      // 2. 해당 숫자가 유효한지 판단한다. ✅
-      // 3. 유효하지 않다면 throw Error후 return ✅
+      const userInput = this.user.getInputValue();
+      const isUserInputValid = this.checkValid.validateInput(userInput);
 
-      // 4. 만약 유효하다면 입력값의 볼, 스트라이크 개수를 센다. ✅
-      // @method
-      //  - countBall
-      //    @args: 유저의 입력값, 컴퓨터 숫자
-      //    @return: 유저의 입력값과 컴퓨터 숫자 중 "같은 수지만 다른 위치"에 있는 숫자들의 개수
-
-      //  - 2. countStrike
-      //    @args: 유저의 입력값, 컴퓨터 숫자
-      //    @return: 유저의 입력값과 컴퓨터 숫자 중 "같은 숫자 같은 위치"에 있는 숫자들의 개수
-
-      // 5. 3번에서 구한 볼, 스트라이크 개수를 이용해 적절한 문구를 띄운다. ✅
-
-      // 6. 유저의 입력값과 컴퓨터 숫자와 동일한지 여부를 업데이트한다. ✅
-      //    -> 스트라이크 개수가 3개인지 판별
-      const userInput = this.user.getInputValue(); // 1번
-      const isUserInputValid = this.checkValid.validateInput(userInput); // 2번
-
-      // 3번
       if (isUserInputValid === false) {
         throw new Error('유저의 입력값이 유효하지 않습니다!');
       }
 
-      const ballCount = this.countBall(this.computerNum, this.userInput); // 4번
+      const ballCount = this.countBall(this.computerNum, this.userInput);
       const strikeCount = this.countStrike(this.computerNum, this.userInput);
 
-      const gameMessage = this.makeGameMessage(ballCount, strikeCount); // 5번
+      // TODO: 메세지를 만들고 print하는 로직을 메서드로 묶기
+      const gameMessage = this.makeGameMessage(ballCount, strikeCount);
       Console.print(gameMessage);
 
       this.isGameEnd = this.determineGameIsEnd(this.computerNum, this.userInput);
     }
-    // 7. 반복문 탈출 후(= Match 종료) 게임을 다시 할 것 인지 여부를 묻는다.
+
+    this.askUserToRestart();
+    // 7. 반복문 탈출 후(= Match 종료) 게임을 다시 할 것 인지 여부를 묻는다. - askUserToRestart
+    //  - 유저가 말한 숫자들과 컴퓨터의 숫자들이 동일할 시 맞추었다는 문구와 함께 게임 종료한다.
+    //    >> 문구:  "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    //  - 사용자의 입력값 받은 후, 입력값에 따라 게임을 다시 시작하거나 종료시킨다.
+    //    >>
   }
 
-  // method: 유저 입력값의 볼 개수를 세기
   // TODO: countBall과 countStrike에서 splittedComputerNum, splittedUserInput 중복되는 것을 어디로 빼줄지 고민하기
   countBall(computerNum, userInput) {
     const splittedComputerNum = [...computerNum];
@@ -82,7 +65,6 @@ class App {
     }, 0);
   }
 
-  // method: 유저 입력값의 스트라이크 개수 세기
   countStrike(computerNum, userInput) {
     const splittedComputerNum = [...computerNum];
     const splittedUserInput = [...userInput];
@@ -95,7 +77,6 @@ class App {
     }, 0);
   }
 
-  // method: 볼, 스트라이크 개수를 이용해 message 띄우기
   makeGameMessage(ballCount, strikeCount) {
     if (ballCount && strikeCount) {
       return `${ballCount}볼 ${strikeCount}스트라이크`;
@@ -114,6 +95,17 @@ class App {
 
   determineGameIsEnd(computerNum, userInput) {
     return computerNum === userInput;
+  }
+
+  askUserToRestart() {
+    const userChoice = Console.readLine('3개의 숫자를 모두 맞히셨습니다! 게임 종료', userChoice => {
+      console.log(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n${userChoice}`);
+    });
+
+    if (userChoice === 1) this.restart();
+    if (userChoice === 2) return;
+
+    throw new Error('1, 2가 아닌 값을 입력했습니다!');
   }
 
   restart() {

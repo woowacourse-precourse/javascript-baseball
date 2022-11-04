@@ -1,12 +1,3 @@
-// CheckValid
-// @property: NUMBER_LIMIT,
-// @args: 유저 입력값
-// @func: 아래 조건을 전부 만족하는지 여부를 판별하는 함수
-//  - 1. 유저가 입력한 값이 3글자인지 판별
-//  - 2. 입력한 값이 숫자여야 한다.
-//  - 3. 입력한 숫자가 1~9 사이에 있다
-//  - 4. 입력한 숫자들 중 중복되는 값이 없어야 한다.
-
 class CheckValid {
   constructor(NUMBER_LIMIT) {
     this.NUMBER_LIMIT = NUMBER_LIMIT;
