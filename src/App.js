@@ -8,6 +8,7 @@ const { getComputerNumber } = require("./computer");
 class App {
   play() {
     const answer = getComputerNumber();
+    console.log("숫자 야구 게임을 시작합니다.");
   }
 }
 
