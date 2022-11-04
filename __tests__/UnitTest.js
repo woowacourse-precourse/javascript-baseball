@@ -153,5 +153,6 @@ describe("결과 출력 테스트", () => {
     app.printResult(input, answer);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('3스트라이크'));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
 });
