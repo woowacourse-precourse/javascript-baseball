@@ -18,6 +18,9 @@ const utils = {
       count,
     );
   },
+  closeIO() {
+    MissionUtils.Console.close();
+  },
 };
 
 module.exports = utils;
