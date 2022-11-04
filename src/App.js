@@ -26,12 +26,12 @@ class App {
       try {
         const valideNumbers = this.checkValidity(inputNumber);
         userNumber = valideNumbers;
+        return userNumber;
       } catch (e) {
         MissionUtils.Console.print(e);
         MissionUtils.Console.close();
       }
     });
-    return userNumber;
   };
 
   checkValidity = (userNumber) => {
@@ -55,13 +55,22 @@ class App {
     return [strikeNum, ballNum];
   };
 
+  convertNumberToMessage = (matchNum) => {
+    const [strikeNum, ballNum] = matchNum;
+
+    let message = `${ballNum === 0 ? "" : `${ballNum}볼`}${
+      strikeNum === 0 ? "" : ` ${strikeNum}스트라이크`
+    }`;
+
+    if (matchNum.every((item) => item === 0)) {
+      message = "낫싱";
+    }
+
+    return message;
+  };
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    const userNumber = this.getUserNumber();
-    const strikeAndBall = this.getStrikeAndBallNumber(
-      this.computerNumber,
-      userNumber
-    );
   }
 }
 
