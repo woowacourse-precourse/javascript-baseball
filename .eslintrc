@@ -1,0 +1,21 @@
+{
+  "plugins": ["prettier"],
+
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+
+  "rules": {
+    "no-var": "error",
+    "no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+    "no-param-reassign": "error",
+    "no-unused-vars": "warn",
+    "no-multiple-empty-lines": "error",
+    "max-depth": ["error", 2],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  }
+}
