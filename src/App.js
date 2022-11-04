@@ -1,7 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  constructor() {
+    this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
+  }
+
+  play() {
+    MissionUtils.Console.print(this.GAME_START_MESSAGE);
+  }
 
   static getUserInputNumber() {
     return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
