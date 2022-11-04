@@ -29,6 +29,23 @@ function pitchAnalysis(gameData, userNumbers, computerNumbers) {
   gameData.setStrike(strike);
 }
 
+function printPitchResult(gameData) {
+  const ball = gameData.getBall();
+  const strike = gameData.getStrike();
+
+  if (ball === 3) {
+    Console.print('낫싱');
+    return;
+  }
+  if (strike === 3) {
+    Console.print('3스트라이크');
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    gameData.setState(false);
+    return;
+  }
+  Console.print(`${ball}볼 ${strike}스트라이크`);
+}
+
 async function gameStart() {
   Console.print('숫자 야구 게임을 시작합니다.');
   const gameData = new GameData();
@@ -37,6 +54,7 @@ async function gameStart() {
     const computerRandomNumbers = generateRandomNumbers();
     const userRandomNumbers = await inputUserNumbers();
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
+    printPitchResult(gameData);
   }
 }
 exports.gameStart = gameStart;
