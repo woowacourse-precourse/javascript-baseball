@@ -42,9 +42,10 @@ const oneGame = (computerNumbers) => {
     playerNumbers = playerNumbersInput();
     strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
-    if (strikeBall.strike == 3){
+    if (strikeBall.strike == 3) {
+      gameEndingText();
       break;
-    } 
+    }
   }
 };
 
@@ -58,19 +59,25 @@ const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
       ball++;
     }
   }
-  return {strike: strike, ball: ball};
+  return { strike: strike, ball: ball };
 };
 
 const printStrikeAndBall = (strikeBall) => {
-  if(strikeBall.strike === 0 && strikeBall.ball === 0){
-    MissionUtils.Console.print('낫싱');
-  }else if(strikeBall.strike === 0){
+  if (strikeBall.strike === 0 && strikeBall.ball === 0) {
+    MissionUtils.Console.print("낫싱");
+  } else if (strikeBall.strike === 0) {
     MissionUtils.Console.print(`${strikeBall.ball}볼`);
-  }else if(strikeBall.ball === 0){
+  } else if (strikeBall.ball === 0) {
     MissionUtils.Console.print(`${strikeBall.strike}스트라이크`);
-  }else{
-    MissionUtils.Console.print(`${strikeBall.ball}볼 ${strikeBall.strike}스트라이크`);
+  } else {
+    MissionUtils.Console.print(
+      `${strikeBall.ball}볼 ${strikeBall.strike}스트라이크`
+    );
   }
+};
+
+const gameEndingText = () => {
+  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 };
 
 const askGameAgain = () => {
