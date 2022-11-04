@@ -156,3 +156,62 @@ describe("결과 출력 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
 });
+
+describe("한 자리 숫자 입력 테스트", () => {
+  test("case1", () => {
+    const logSpy = getLogSpy();
+    const input = '1';
+
+    mockQuestions(input);
+
+    const app = new App();
+    app.inputRestartOrEnd();
+    
+    expect(logSpy).toBeCalledTimes(2);
+  });
+
+  test("case2", () => {
+    const logSpy = getLogSpy();
+    const input = '2';
+
+    mockQuestions(input);
+
+    const app = new App();
+    app.inputRestartOrEnd();
+    
+    expect(logSpy).not.toBeCalledTimes(2);
+  });
+
+  test("case3", () => {
+    const input = '0';
+
+    mockQuestions(input);
+    
+    expect(() => {
+      const app = new App();
+      app.inputRestartOrEnd();
+    }).toThrow();
+  });
+
+  test("case4", () => {
+    const input = '11';
+
+    mockQuestions(input);
+    
+    expect(() => {
+      const app = new App();
+      app.inputRestartOrEnd();
+    }).toThrow();
+  });
+
+  test("case5", () => {
+    const input = 'd';
+
+    mockQuestions(input);
+    
+    expect(() => {
+      const app = new App();
+      app.inputRestartOrEnd();
+    }).toThrow();
+  });
+});
