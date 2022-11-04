@@ -9,6 +9,10 @@ class App {
 
     let user = ""
     user = user_inputnumber();
+
+    if(user == 1){
+      throw "is not three numbers";
+    }
   }
 }
 
@@ -27,7 +31,9 @@ function computer_randomnumber(){
 
 function user_inputnumber(){
   const USER_NUMBER = MissionUtils.Console.readLine();
-
+  if(USER_NUMBER.length != 3) {
+    return 1;
+  }
   return USER_NUMBER;
 }
 
