@@ -49,17 +49,12 @@ const askRestartOrQuit = async () => {
 };
 
 const playGame = async () => {
-  let isRestart = true;
-
   print("숫자 야구 게임을 시작합니다.");
-  while (isRestart) {
+  do {
     await gameStart();
     gameEnd();
-    if ((await askRestartOrQuit()) === "quit") {
-      closeIO();
-      isRestart = false;
-    }
-  }
+  } while ((await askRestartOrQuit()) === "restart");
+  closeIO();
 };
 
 module.exports = playGame;
