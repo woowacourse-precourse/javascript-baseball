@@ -1,27 +1,24 @@
+const { ERROR, RESULT, MESSAGE } = require("./constant");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.START_GAME);
     const computerNumbers = this.generateComputerNumbers();
     this.startGame(computerNumbers);
   }
 
   startGame(computerInput) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+    MissionUtils.Console.readLine(MESSAGE.INSERT_NUMBER, (userInput) => {
       if (this.checkInputValidation(userInput)) {
         const strikes = this.countStrikes(computerInput, userInput);
         const balls = this.countBalls(computerInput, userInput);
         const result = this.showResult(strikes, balls);
         const isFinished = this.isGameFinished(strikes);
         MissionUtils.Console.print(result);
-        if (isFinished) {
-          this.restartOrExitGame();
-        } else {
-          this.startGame(computerInput);
-        }
+        isFinished ? this.restartOrExitGame() : this.startGame(computerInput);
       } else {
-        throw "잘못된 입력입니다.";
+        throw ERROR.WRONG_INPUT;
       }
     });
   }
@@ -65,37 +62,30 @@ class App {
   }
 
   showResult(strike, ball) {
-    if (strike === 0 && ball === 0) return "낫싱";
-    if (strike === 3) {
-      return (
-        `${strike}스트라이크 \n` + "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-      );
-    }
-    if (ball === 0) return `${strike}스트라이크`;
-    if (strike === 0) return `${ball}볼`;
-    return `${ball}볼 ${strike}스트라이크`;
+    if (strike === 0 && ball === 0) return RESULT.NOTHING;
+    if (strike === 3)
+      return `${strike}` + RESULT.STRIKE + `\n` + RESULT.GAME_END;
+    if (ball === 0) return `${strike + RESULT.STRIKE}`;
+    if (strike === 0) return `${ball + RESULT.BALL}`;
+    return `${ball + RESULT.BALL} ${strike + RESULT.STRIKE}`;
   }
 
   restartOrExitGame() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
-      (userSelection) => {
-        if (userSelection === "1") {
-          const newComputerNumbers = this.generateComputerNumbers();
-          this.startGame(newComputerNumbers);
-        }
-        if (userSelection === "2") {
-          MissionUtils.Console.close();
-        }
-        if (userSelection !== "1" && userSelection !== "2") {
-          throw "1 또는 2만 입력 가능";
-        }
+    MissionUtils.Console.readLine(MESSAGE.START_OR_EXIT, (userSelection) => {
+      if (userSelection === "1") {
+        const newComputerNumbers = this.generateComputerNumbers();
+        this.startGame(newComputerNumbers);
       }
-    );
+      if (userSelection === "2") {
+        MissionUtils.Console.close();
+      }
+      if (userSelection !== "1" && userSelection !== "2") {
+        throw RROR.WRONG_SELECTION;
+      }
+    });
   }
   isGameFinished(strike) {
-    if (strike === 3) return true;
-    return false;
+    return strike === 3;
   }
 }
 
