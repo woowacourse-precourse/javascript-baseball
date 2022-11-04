@@ -2,19 +2,14 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    this.Answer = null;
     Console.print("숫자 야구 게임을 시작합니다.");
     this.Answer = this.makeComputerArr();
     console.log(this.Answer);
     this.makeInputNum();
   }
 
-  restart() {
-    this.play();
-  }
-
-  resultChoice(flag) {
-    if (flag) {
+  AnswerisRight(userAnswer) {
+    if (userAnswer) {
       this.end();
     } else {
       this.makeInputNum();
@@ -45,8 +40,7 @@ class App {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputArr = this.inputCheck(input);
       const resultText = this.compare(inputArr);
-      console.log(resultText);
-      this.resultChoice(resultText);
+      this.AnswerisRight(resultText);
     });
   }
 
@@ -55,9 +49,6 @@ class App {
     let ball = 0;
     let strike = 0;
     let resultText = "";
-    console.log(`받은값${userInput}`);
-    console.log(`정답${answerArr}`);
-
     userInput.map((num, i) => {
       if (answerArr.includes(num)) {
         if (num === answerArr[i]) {
@@ -79,10 +70,13 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
-        if (input === 1) {
-          this.restart();
+        if (input === "1") {
+          this.Answer = this.makeComputerArr();
+          console.log(this.Answer);
+          this.makeInputNum();
         }
-        if (input === 2) return "종료";
+        if (input === "2") return "게임 종료";
+        throw new Error();
       }
     );
   }
