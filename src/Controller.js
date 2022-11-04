@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 const constant = require('./Constants');
 const GameCalc = require('./model/Game');
 const randomNum = require('./model/Random');
