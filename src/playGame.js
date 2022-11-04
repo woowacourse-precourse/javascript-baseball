@@ -7,7 +7,7 @@ function playGame() {
     `${Message.START}\n${Message.INPUT}`,
     (input) => {
       console.log(input);
-      checkException(input);
+      console.log(checkException(input));
     }
   );
 }
