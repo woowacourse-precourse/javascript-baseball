@@ -7,6 +7,7 @@ class App {
       output: process.stdout,
     });
     this.answer = {};
+    this.guess = null;
   }
 
   play() {
@@ -30,9 +31,10 @@ class App {
   }
 
   getUserGuess() {
-    this.rl.on("line", (guess) => {
+    this.rl.question("숫자를 입력해주세요 : ", (guess) => {
       try {
         this.checkGuessVaildation(guess);
+        this.compareAndDisplay(guess);
       } catch (err) {
         console.log(err.message);
         this.rl.close();
@@ -68,6 +70,25 @@ class App {
       }
     }
     return false;
+  }
+
+  compareAndDisplay(guess) {
+    let result = this.compareGuessAndAnswer(guess);
+    this.displayResult(result);
+  }
+
+  compareGuessAndAnswer(guess) {
+    let ball = 0;
+    let strike = 0;
+
+    guess.split("").forEach((digit, index) => {
+      if (this.answer[digit]) this.answer[digit] === index ? strike++ : ball++;
+    });
+    return { ball: ball, stirke: strike };
+  }
+
+  displayResult({ ball, stirke }) {
+    console.log(ball, stirke);
   }
 }
 
