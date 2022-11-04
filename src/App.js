@@ -3,6 +3,9 @@ class App {
   print(message) {
     MissionUtils.Console.print(message);
   }
+  printStartMsg() {
+    this.print("숫자 야구 게임을 시작합니다.");
+  }
   pickSingleDigit() {
     return MissionUtils.Random.pickNumberInRange(1, 9);
   }
@@ -112,7 +115,7 @@ class App {
     return resultSring;
   }
   play() {
-    this.print("숫자 야구 게임을 시작합니다.");
+    this.printStartMsg();
     let gameFlag = 1; // 0: continue 1: restart, 2: end
     let computerNum;
     let userNum;
