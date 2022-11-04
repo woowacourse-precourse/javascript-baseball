@@ -43,7 +43,9 @@ describe('숫자 야구 게임', () => {
     const app = new App();
     app.play();
 
-    expect(app.randomNumber.join('')).toBe('235');
+    const currentRandom = app.randomNumber.join('');
+
+    expect(currentRandom).toBe('235');
   });
 
   test('사용자의 값 입력 확인', () => {
@@ -54,7 +56,9 @@ describe('숫자 야구 게임', () => {
     const app = new App();
     app.play();
 
-    expect(app.userInput.join('')).toBe(answers[0]);
+    const currentUserInput = app.userInput.join('');
+
+    expect(currentUserInput).toBe('245');
   });
 
   test('사용자 입력 값과 랜덤 생성 숫자 비교 확인', () => {

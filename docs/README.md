@@ -7,7 +7,7 @@
 ✅ \[feat\] implement feature that generates random number using library
 ✅ \[feat\] implement feature that compares between random number and user input
 ✅ \[fix\] add extra logic for edge cases
-✅ \[test\] write test case for each implementation
+✅ \[test\] write test case for each feature
 ✅ \[test\] check whether the code passes test cases of ApplicationTest.js and adjust if not
 
 
