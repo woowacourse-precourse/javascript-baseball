@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 const CONSOLE_MESSAGE = {
   gameStart: '숫자 야구 게임을 시작합니다.',
@@ -16,7 +16,16 @@ async function readLineAsync(message) {
 class App {
   answer = '';
 
-  resetAnswer() {}
+  resetAnswer() {
+    let newAnswer = '';
+    while (newAnswer.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!newAnswer.includes(number)) {
+        newAnswer += number;
+      }
+    }
+    this.answer = newAnswer;
+  }
 
   checkValidQuery() {}
 
@@ -30,8 +39,8 @@ class App {
 
   async play() {
     Console.print(CONSOLE_MESSAGE.gameStart);
-    const query = await readLineAsync(CONSOLE_MESSAGE.getQuery);
-    Console.print(query);
+    this.resetAnswer();
+
     Console.close();
   }
 }
