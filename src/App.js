@@ -36,10 +36,35 @@ class App {
     } else if([...inputToSet].length !== 3) {
       throw new Error('중첩되지 않는 세자리 수를 입력해주세요.')
     }
-    
+
     inputToSet.forEach((v) => { if(isNaN(v)) throw new Error('숫자만 입력해주세요.') })
 
     return this.check(playerInput);
+  }
+
+  checkAnswer(playerInput) {   
+    const ball = this.countBall(playerInput);
+    const strike = this.countStrike(playerInput);
+
+    return this.printHint(ball, strike);
+  }
+
+  countStrike(playerInput) {
+    let strikes = 0;
+    for(let digit = 0; digit < 3; digit++)
+      if(this.randoms[digit] === Number(playerInput[digit])) strikes++;
+    
+    return strikes;
+  }
+
+  countBall(playerInput) {
+    let balls = 0;
+    for(let digit = 0; digit < 3; digit++) {
+      if(this.randoms[digit] !== Number(playerInput[digit]) && this.randoms.includes(Number(playerInput[digit]))){
+        balls++;
+      } 
+    }
+    return balls;
   }
 
 }
