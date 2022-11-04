@@ -17,9 +17,21 @@ class App {
   }
 
   createAnswer = () => {
+    let i = 0;
     const answer = [];
-    [1, 2, 3].map((e, idx) => MissionUtils.Random.pickNumberInRange(1, 9));
+    while (i < 3) {
+      let randVal = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (this.duplicateCheck(answer, randVal)) {
+        answer.push(randVal);
+        i++;
+      }
+    }
+    return answer;
   };
+
+  duplicateCheck(answer, val) {
+    return answer.every((e) => val !== e);
+  }
 
   initializer = () => {
     this.isRight = false;
@@ -100,8 +112,7 @@ const endGame = () => {
 };
 
 const app = new App();
-// app.play();
-app.countScore(1, 1);
-console.log(app.answer);
-console.log(app.strike, app.ball);
+app.play();
+// app.createAnswer();
+
 module.exports = App;
