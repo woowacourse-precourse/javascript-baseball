@@ -32,6 +32,15 @@ class App {
     return [ball, strike];
   };
 
+  inputRestartOrEnd() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
+      if (number === '1') this.play();
+      else if (number === '2') MissionUtils.Console.close();
+      else throw new Error('입력 형식에 맞지 않습니다.');
+    });
+  };
+
   printResult(numbers, answers) {
     const [ball, strike] = this.getBallStrike(numbers, answers);
     let result;
@@ -57,5 +66,4 @@ class App {
 
   play() {}
 }
-
 module.exports = App;
