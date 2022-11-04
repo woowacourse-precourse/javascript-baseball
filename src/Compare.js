@@ -30,7 +30,8 @@ class Compare extends Mission {
     if (!strike && !ball) this.mission.Console.print('낫싱');
     if (strike && !ball) this.mission.Console.print(`${strike}스트라이크`);
     if (!strike && ball) this.mission.Console.print(`${ball}볼`);
-    this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
+    if (strike && ball)
+      this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 
   getResult() {
