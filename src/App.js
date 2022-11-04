@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 
 
-const CHECK_INPUT_DURING_GAME = function checkInputDuringGame(userInput) {
+const IS_INPUT_VALID_DURING_GAME = function checkUserInputDuringGamePlay(userInput) {
   if (userInput.length !== 3) return false;
   if (isNaN(userInput)) return false;
   if (userInput[0] === userInput[1]
@@ -12,7 +12,7 @@ const CHECK_INPUT_DURING_GAME = function checkInputDuringGame(userInput) {
   return true;
 }
 
-const CHECK_INPUT_AFTER_GAME = function checkInputAfterGame(userInput) {
+const IS_INPUT_VALID_AFTER_GAME = function checkUserInputAfterGameOver(userInput) {
   if (+userInput === 1 || +userInput === 2) return true;
   return false;
 }
@@ -36,7 +36,7 @@ const CHECK_DUPLICATE = function checkRepeatedElementOfArray(array, target) {
 
 
 
-const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
+const COUNT_STRIKE = function numberOfStrikes(userInput, answer) {
   let count = 0;
   const ANSWER_TO_STRING = String(answer);
   if (userInput[0] === ANSWER_TO_STRING[0]) count++;
@@ -45,7 +45,7 @@ const CHECK_STRIKE = function numberOfStrikes(userInput, answer) {
   return count;
 }
 
-const CHECK_BALL = function numberOfBalls(userInput, answer) {
+const COUNT_BALL = function numberOfBalls(userInput, answer) {
   let count = 0;
   const ANSWER_TO_STRING = String(answer);
   if (userInput[0] === ANSWER_TO_STRING[1]
@@ -60,7 +60,7 @@ const CHECK_BALL = function numberOfBalls(userInput, answer) {
 
 
 const RESTART = function restartGame(userInput) {
-  if (!CHECK_INPUT_AFTER_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
+  if (!IS_INPUT_VALID_AFTER_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
   if (+userInput === 1) START_GAME();
   if (+userInput === 2) MissionUtils.Console.close();
 }
@@ -85,9 +85,9 @@ const GAME_APP = function gameApplication(answer) {
 }
 
 const GAME_HINT = function getHintFromInput(userInput, answer) {
-  if (!CHECK_INPUT_DURING_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
-  const strikes = CHECK_STRIKE(userInput, answer);
-  const balls = CHECK_BALL(userInput, answer);
+  if (!IS_INPUT_VALID_DURING_GAME(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
+  const strikes = COUNT_STRIKE(userInput, answer);
+  const balls = COUNT_BALL(userInput, answer);
 
   if (strikes === 3) {
     MissionUtils.Console.print('3스트라이크');
