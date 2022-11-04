@@ -15,22 +15,26 @@ class App {
       }
     }
     
-    let userInput = 123 + '';
-    let result = {};
+    let isFinished = false;
+    while (!isFinished) {
+      let userInput = 123 + '';
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+        MissionUtils.Console.print(answer)
+        MissionUtils.Console.close();
+      });
+      let result = {};
 
-    while (result.strike !== 3) {
+      
       randomNums.forEach((randomNum,i) => {
         if (randomNum === +userInput[i]) {
           result.strike = (result.strike ?? 0) + 1;
         } else if (randomNums.includes(+userInput[i])) {
-          result.ball = result.ball ?? 0 + 1;
+          result.ball = (result.ball ?? 0) + 1;
         }
       })
       
-      MissionUtils.Console.print(result)
-      if (result.strike !== 3) result = {};
-    }
-    
+      if (result.strike === 3) isFinished = true;
+    }   
   }
 }
 
