@@ -42,8 +42,21 @@ class App {
   }
 
   checkGuessVaildation(guess) {
-    if (guess.length !== 3) throw new Error("");
+    if (!this.isDigits(guess)) {
+      throw new Error("숫자가 아닌 문자는 입력이 불가능합니다.");
+    } else if (guess.length !== 3 || this.hasSameNumber(guess)) {
+      throw new Error(
+        "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력 가능합니다."
+      );
+    }
   }
+
+  isDigits(number) {
+    return /^\d+$/.test(number);
+  }
+
+  hasZero(number) {}
+  hasSameNumber(number) {}
 }
 
 const baseballGame = new App();

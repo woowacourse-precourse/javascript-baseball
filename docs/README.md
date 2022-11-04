@@ -6,7 +6,7 @@
   - [x] 사용자에게 인풋 받기
 - [ ] feat2. 유효성 검사. 틀리면 프로그램 종료
   - [ ] input.length !== 3자리 or 같은 숫자가 있는 수를 입력하면 "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력 가능합니다."
-  - [ ] 숫자가 아닌 인풋이 들어온다면, "숫자가 아닌 문자는 입력이 불가능합니다."
+  - [x] 숫자가 아닌 인풋이 들어온다면, "숫자가 아닌 문자는 입력이 불가능합니다."
   - [ ] 0이 포함되었으면 0이 아닌 1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력 가능합니다.
 - [ ] feat3. 유효성 검사 통과한 값에 대하여 정답 숫자와 검사
   - [ ] ball, strike 변수 사용
@@ -36,6 +36,12 @@ shuffle(numbers);
 부동 소수점 `Math.random()`
 https://7942yongdae.tistory.com/96
 
+## 숫자 유성 검사 정규식
+
+https://stackoverflow.com/questions/9011524/regex-to-check-whether-a-string-contains-only-numbers
+
 # 소감
 
 - package 파일에 "type": "module" 로 할 것이냐 module.exports로 할 것이냐~~
+- src 로 터미널을 열어서 뒷북으로 기능 목록 업데이트 함~~~ㅜㅜ git add 할 때 위치 항상 확인할 것!
+- 영어로 커밋 메세지 남기는 건 어렵다.
