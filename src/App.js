@@ -1,29 +1,44 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-// 클래스내에서는 안되는구나...
-// 클래스에서 this로 자신 객체 전달 가능
 class App {
   answer = 0;
   userAnswer = 0;
+  isRight = false;
+
   constructor() {
     this.answer = MissionUtils.Random.pickNumberInRange(1, 9);
+    this.isRight = false;
   }
+
+  async Game() {
+    while (true) {
+      await this.checkBallValidity();
+      if (this.isRight) {
+        break;
+      } else {
+        console.log(false);
+      }
+    }
+  }
+
+  async checkBallValidity() {
+    this.userAnswer = parseInt(await this.input());
+  }
+
+  input = () => {
+    return new Promise((resolove, reject) => {
+      MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
+        resolove(answer);
+      });
+    });
+  };
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    Game(this);
+    this.Game(this);
   }
 }
 
-function Game(user) {
-  input(user.userAnswer);
-}
-
-const input = (userAnswer) => {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-    userAnswer = answer;
-  });
-};
 const endGame = () => {
   process.exit(1);
 };
