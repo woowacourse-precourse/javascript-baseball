@@ -127,7 +127,10 @@ class App {
     this.gameResult.strike === 3 ? this.gameOver() : this.retry();
   }
 
-  retry() {}
+  retry() {
+    this.initGameResult();
+    this.gameStart();
+  }
 
   gameOver() {}
 }
