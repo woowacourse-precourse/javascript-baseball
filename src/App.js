@@ -54,6 +54,15 @@ class App {
     }, 0);
   }
 
+  countStrike(computerNumber, playerNumber) {
+    return playerNumber.reduce((acc, cur, idx) => {
+      if (cur === computerNumber[idx]) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  }
+
   play() {}
 }
 
