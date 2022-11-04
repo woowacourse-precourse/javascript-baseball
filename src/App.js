@@ -1,36 +1,44 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const UserInputNumber = require("./UserInputNumber");
 
 function checkAnswer(input) {}
 
-// function getAnswer() {
-//   const computer = [];
-//   while (computer.length < 3) {
-//     const number = Random.pickNumberInRange(1, 9);
-//     if (!computer.includes(number)) {
-//       computer.push(number);
-//     }
-//   }
+function cpuMakeAnswer() {
+  const computer = [];
+  while (computer.length < 3) {
+    const number = Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
 
-//   return computer;
-// }
+  return computer;
+}
 
 class App {
-  constructor() {
-    this.UserInputNumber = new UserInputNumber();
-  }
+  constructor() {}
   play() {
-    // const answerNumber = getAnswer();
+    const userInput = [1, 2, 3];
+    const answerNumber = cpuMakeAnswer();
+    Console.print(answerNumber);
 
     Console.print("숫자 야구게임을 시작합니다.");
-
-    console.log(answerNumber);
+    // console.log(answerNumber);
     /**
      * todo : readLine이 안먹히는데 어떻게 사용하는지 알아야함
      */
-    Console.readLine("숫자를 입력해주세요.", (inputNumber) => {
-      console.log(inputNumber);
-    });
+    // inputNumber() {
+    //   Console.readLine("숫자를 입력해주세요.", (inputNumber) => {
+    //     this.inputNumber = inputNumber;
+    //   });
+    // }
+    // const inputNum = [];
+
+    // Console.readLine("서로 다른 숫자를 3개 입력하시오.", (answer) => {
+    //   Console.print(answer);
+
+    //   Console.close();
+    // });
+    //한 개의 입력(띄어쓰기x)
   }
 
   callResult() {}
