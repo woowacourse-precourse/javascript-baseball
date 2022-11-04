@@ -15,9 +15,6 @@ class App {
 
   startGame() {
     this.setRandomNumber();
-    this.getUserInputNumber().then((userInputNumber) =>
-      this.getUserInputResult(userInputNumber)
-    );
   }
 
   setRandomNumber() {
@@ -49,12 +46,9 @@ class App {
   compareUserInput(acc, cur, index) {
     const [ball, strike] = acc;
     if (this.randomNumber[index] === cur) return [ball, strike + 1];
-    if (this.randomNumber[index].includes(cur)) return [ball + 1, strike];
+    if (this.randomNumber.includes(cur)) return [ball + 1, strike];
     return acc;
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
