@@ -20,7 +20,8 @@ class App {
   }
 
   userInputvalidation(inputNum) {
-    return !isNaN(Number(inputNum)) &&
+    return Number.isInteger(Number(inputNum)) &&
+      Number(inputNum) > 0 &&
       inputNum.length === 3 &&
       new Set(inputNum).size === 3 &&
       !inputNum.includes(0)
