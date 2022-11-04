@@ -13,7 +13,7 @@ class App {
 }
 
 const gameStartingText = () => {
-  console.log("숫자 야구 게임을 시작합니다.");
+  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 };
 
 const computerNumbersMaking = () => {
@@ -42,7 +42,9 @@ const oneGame = (computerNumbers) => {
     playerNumbers = playerNumbersInput();
     strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
-    if (strikeBall.strike == 3) break;
+    if (strikeBall.strike == 3){
+      break;
+    } 
   }
 };
 
