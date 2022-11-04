@@ -4,42 +4,34 @@ const Computer = require('./Computer');
 const User = require('./User');
 
 const NUMBER_LIMIT = 3;
-const INIT_STATE = {
-  userInput: '',
-  computerNum: '',
-  isUserInputValid: false,
-  isGameEnd: false,
-};
 
 class App {
   constructor() {
-    this.state = INIT_STATE;
-
     this.computer = new Computer(NUMBER_LIMIT);
     this.user = new User();
     this.checkValid = new CheckValid(NUMBER_LIMIT);
   }
 
   play() {
-    this.computerNum = this.computer.makeNumbers();
+    const computerNum = this.computer.makeNumbers();
     Console.print('숫자 야구 게임을 시작합니다.');
 
-    while (this.isGameEnd) {
-      this.userInput = this.user.getInputValue();
-      this.isUserInputValid = this.checkValid.validateInput(userInput);
+    let isGameEnd = false;
+    while (isGameEnd === false) {
+      const userInput = this.user.getInputValue();
+      const isUserInputValid = this.checkValid.validateInput(userInput);
 
       if (isUserInputValid === false) {
         throw new Error('유저의 입력값이 유효하지 않습니다!');
       }
 
-      const ballCount = this.countBall(this.computerNum, this.userInput);
-      const strikeCount = this.countStrike(this.computerNum, this.userInput);
+      const ballCount = this.countBall(computerNum, userInput);
+      const strikeCount = this.countStrike(computerNum, userInput);
 
-      // TODO: 메세지를 만들고 print하는 로직을 메서드로 묶기
       const gameMessage = this.makeGameMessage(ballCount, strikeCount);
       Console.print(gameMessage);
 
-      this.isGameEnd = this.determineGameIsEnd(this.computerNum, this.userInput);
+      isGameEnd = this.determineGameIsEnd(computerNum, userInput);
     }
 
     this.askUserToRestart();
@@ -93,8 +85,6 @@ class App {
   askUserToRestart() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', userChoice => {
-      console.log('userChoice :>> ', userChoice);
-
       if (userChoice === '1') return this.restart();
       if (userChoice === '2') return this.exit();
 
@@ -103,7 +93,6 @@ class App {
   }
 
   restart() {
-    this.state = INIT_STATE;
     this.play();
   }
 
