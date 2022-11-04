@@ -10,6 +10,11 @@ class Input {
   static isBetweenOneAndNine(numbers) {
     return numbers.every((number) => number >= 1 && number <= 9);
   }
+
+  static hasDuplicates(numbers) {
+    const set = new Set(numbers);
+    return numbers.length !== set.size;
+  }
 }
 
 module.exports = Input;
