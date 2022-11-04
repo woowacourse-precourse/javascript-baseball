@@ -18,9 +18,8 @@ class App {
 
   selectAnswerNumber() {
     const oneToNine = new Array(9).fill().map((_, idx) => idx + 1);
-    this.answer = [1, 2, 3]
-      // this.shuffle(oneToNine)
-      //   .slice(0, 3)
+    this.answer = this.shuffle(oneToNine)
+      .slice(0, 3)
       .reduce((acc, cur, idx) => {
         acc[cur] = idx + 1;
         return acc;
@@ -110,7 +109,15 @@ class App {
   replayOrEnd() {
     this.rl.question(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (reply) => {}
+      (reply) => {
+        if (reply === "1") {
+          this.play();
+        } else {
+          if (reply !== "2") console.log("옳지 않은 값을 입력하셨습니다.");
+          console.log("프로그램이 종료됩니다.");
+          this.rl.close();
+        }
+      }
     );
   }
 }
