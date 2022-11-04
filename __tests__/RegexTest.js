@@ -1,13 +1,15 @@
-const VALID_INPUT_REGEX = /^[1-9]{3}$/;
-const GAME_MENU_CODE_REGEX = /^[1-2]{1}$/;
-const DUPLICATE_CHARACTER_REGEX = /(.)\1{1,}/;
+const {
+  DUPLICATE_CHARACTER_REGEX,
+  GAME_MENU_CODE_REGEX,
+  THREE_DIGIT_NUMBER_REGEX,
+} = require('../src/lib/constants/validation');
 
 describe('정규식 테스트', () => {
   describe('올바른 입력값에 대한 정규식 테스트', () => {
     test('중복이 없는 세 자리 숫자인 경우 true를 반환해야 한다.', () => {
       const inputValues = ['123', '456'];
       const result = inputValues.map(inputValue =>
-        VALID_INPUT_REGEX.test(inputValue),
+        THREE_DIGIT_NUMBER_REGEX.test(inputValue),
       );
 
       expect(result).toEqual([true, true]);
@@ -27,7 +29,7 @@ describe('정규식 테스트', () => {
     test('숫자가 아닌 문자가 포함된 경우 false를 반환해야 한다.', () => {
       const inputValues = ['asdf', 'asd120', 'a1b2c3'];
       const result = inputValues.map(inputValue =>
-        VALID_INPUT_REGEX.test(inputValue),
+        THREE_DIGIT_NUMBER_REGEX.test(inputValue),
       );
 
       expect(result).toEqual([false, false, false]);
@@ -36,7 +38,7 @@ describe('정규식 테스트', () => {
     test('세 자리 숫자가 아닌 경우 false를 반환해야 한다.', () => {
       const inputValues = ['1234', '12', '3'];
       const result = inputValues.map(inputValue =>
-        VALID_INPUT_REGEX.test(inputValue),
+        THREE_DIGIT_NUMBER_REGEX.test(inputValue),
       );
 
       expect(result).toEqual([false, false, false]);
