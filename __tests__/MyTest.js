@@ -10,6 +10,8 @@ test("상대방 배열 생성", () => {
   expect(ComputerArr).toHaveLength(3);
 });
 
-test("", () => {
-  expect();
+test("게임 시작 문구 출력", () => {
+  const app = new App();
+  const startText = app.play();
+  expect(startText).toBe("숫자 야구 게임을 시작합니다.");
 });
