@@ -36,6 +36,9 @@ class App {
       .map((eachLetter) => parseInt(eachLetter), 10)
       .every((number) => !isNaN(number));
   }
+  hasValidLength(userInput) {
+    return userInput.length === MAX_NUMBER_LENGTH;
+  }
 }
 
 const app = new App();
