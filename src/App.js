@@ -25,16 +25,23 @@ const userNumbersGetter = () => {
   });
 };
 
+const stringToArrConverter = (numbersString) => {
+  numbersStringArray = numbersString.split("");
+  numbersNumberArray = numbersStringArray.map((number) => Number(number));
+  return numbersNumberArray;
+};
+
 class App {
   async play() {
     printer("숫자 야구 게임을 시작합니다.");
     const refNumbersArr = refNumbersGetter();
     const usersInput = await userNumbersGetter();
-    printer(usersInput);
+    const userNumbersArr = stringToArrConverter(usersInput);
+    printer(userNumbersArr);
   }
 }
 
 const app = new App();
 app.play();
 
-module.exports = { App, printer, refNumbersGetter };
+module.exports = { App, printer, stringToArrConverter };
