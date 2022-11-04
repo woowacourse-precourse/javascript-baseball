@@ -7,6 +7,13 @@ const {
 	INPUT_USER_NUM_MESSAGE,
 	SHOULD_NOT_INCLUDE_NUMBER,
 	USER_INPUT_FEEDBACK_MESSAGE,
+	THREE_STRIKE_MESSAGE,
+	GAME_END_MESSAGE,
+	GAME_RESTART_MESSAGE,
+	RESTART_ANSWER,
+	RESTART_ERROR_MESSAGE,
+	SCORE_START_NUMBER,
+	RESULT_MESSAGES,
 } = require('./constants');
 
 class App {
@@ -20,40 +27,37 @@ class App {
 		this.gameEnd = false;
 	}
 
-	playMainLogic() {
+	play() {
+		this.printMessage(START_MESSAGE);
+		this.playMainGame();
+		this.printMessage(GAME_RESTART_MESSAGE);
+		this.checkRestart();
+	}
+
+	playMainGame() {
 		this.initializeGame();
 		while (this.gameEnd === false) {
 			const resultMessage = this.getCompareResult(this.computerNumber, this.getUserNumber());
 			this.printMessage(resultMessage);
-			if (resultMessage === '3스트라이크') {
+			if (resultMessage === THREE_STRIKE_MESSAGE) {
 				this.gameEnd = true;
-				this.printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+				this.printMessage(GAME_END_MESSAGE);
 			}
 		}
 	}
 
-	play() {
-		this.printMessage(START_MESSAGE);
-		this.playMainLogic();
-		this.printMessage('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-		this.checkRestart();
-	}
-
 	checkRestart() {
-		MissionUtils.Console.readLine(
-			'게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-			answer => {
-				if (!(answer === '1' || answer === '2')) {
-					throw new Error('1또는 2를 입력하세요');
-				}
-				if (answer === '1') {
-					this.printMessage(answer);
-					this.playMainLogic();
-					return;
-				}
-				MissionUtils.Console.close();
-			},
-		);
+		MissionUtils.Console.readLine(GAME_RESTART_MESSAGE, answer => {
+			if (!(answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO)) {
+				throw new Error(RESTART_ERROR_MESSAGE);
+			}
+			if (answer === RESTART_ANSWER.YES) {
+				this.printMessage(answer);
+				this.playMainGame();
+				return;
+			}
+			MissionUtils.Console.close();
+		});
 	}
 
 	printMessage(message) {
@@ -61,11 +65,11 @@ class App {
 	}
 
 	getComputerNumber() {
-		const numberSet = new Set();
-		while (numberSet.size !== NUMBER_LENGTH) {
-			numberSet.add(MissionUtils.Random.pickNumberInRange(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX));
+		const numSet = new Set();
+		while (numSet.size !== NUMBER_LENGTH) {
+			numSet.add(MissionUtils.Random.pickNumberInRange(NUMBER_RANGE.MIN, NUMBER_RANGE.MAX));
 		}
-		return [...numberSet].join('');
+		return [...numSet].join('');
 	}
 
 	getUserNumber() {
@@ -102,7 +106,7 @@ class App {
 	}
 
 	getBallAndStrikeScore(computerArray, userArray) {
-		let ballAndStrikeScore = 0;
+		let ballAndStrikeScore = SCORE_START_NUMBER;
 		computerArray.forEach(number => {
 			if (userArray.includes(number)) {
 				ballAndStrikeScore += 1;
@@ -112,7 +116,7 @@ class App {
 	}
 
 	getStrikeScore(computerArray, userArray) {
-		let strikeScore = 0;
+		let strikeScore = SCORE_START_NUMBER;
 		computerArray.forEach((number, index) => {
 			if (number === userArray[index]) {
 				strikeScore += 1;
@@ -122,16 +126,16 @@ class App {
 	}
 
 	getResultString(strikeScore, ballScore) {
-		if (strikeScore + ballScore === 0) {
-			return '낫싱';
+		if (strikeScore + ballScore === SCORE_START_NUMBER) {
+			return RESULT_MESSAGES.NOTHING;
 		}
-		if (strikeScore === 0) {
-			return `${ballScore}볼`;
+		if (strikeScore === SCORE_START_NUMBER) {
+			return RESULT_MESSAGES.ONLY_BALL(ballScore);
 		}
-		if (ballScore === 0) {
-			return `${strikeScore}스트라이크`;
+		if (ballScore === SCORE_START_NUMBER) {
+			return RESULT_MESSAGES.ONLY_STRIKE(strikeScore);
 		}
-		return `${ballScore}볼 ${strikeScore}스트라이크`;
+		return RESULT_MESSAGES.BALL_AND_STRIKE({ ballScore, strikeScore });
 	}
 }
 

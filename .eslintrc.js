@@ -3,7 +3,7 @@ module.exports = {
         browser: true,
         es2021: true,
         node: true,
-        mocha: true
+        jest: true
     },
     extends: ['eslint:recommended','airbnb-base','prettier'],
     plugins: ['prettier'],

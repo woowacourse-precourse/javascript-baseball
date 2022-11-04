@@ -27,7 +27,7 @@ const mockRandoms = numbers => {
 };
 
 describe('숫자 야구 게임', () => {
-	test('print 메소드로 받은값을 출력', () => {
+	test('printMessage 메소드로 받은값을 출력', () => {
 		const logSpy = getLogSpy();
 		const app = new App();
 		const input = '테스트용 메세지를 출력합니다';
@@ -67,7 +67,7 @@ describe('숫자 야구 게임', () => {
 		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
-	test('getComparResult 메소드로 비교한 결과를 반환', () => {
+	test('getCompareResult 메소드로 비교한 결과를 반환', () => {
 		const app = new App();
 		const results = [
 			app.getCompareResult('135', '678'),
