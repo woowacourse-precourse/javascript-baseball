@@ -1,6 +1,8 @@
 class App {
   constructor() {
     this.answer = this.makeAnswer();
+    this.strike = 0;
+    this.ball = 0;
   }
 
   makeAnswer() {
@@ -26,9 +28,20 @@ class App {
     }
   }
 
+  compareScore(userInput) {
+    this.answer.forEach((num, index) => {
+      if (num === parseInt(userInput[index])) {
+        this.strike++;
+      } else if (userInput.includes(num)) {
+        this.ball++;
+      }
+    });
+  }
+
   play() {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       this.checkUserInput(userInput);
+      this.compareScore(userInput);
     });
   }
 }
