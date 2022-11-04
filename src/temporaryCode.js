@@ -27,7 +27,14 @@ class testCode {
   }
 
   getComputerRandomNum() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computerNum = [];
+    while (computerNum.length < 3) {
+      const Randomnumber = Random.pickNumberInRange(1, 9);
+      if (!computerNum.includes(Randomnumber)) {
+        computerNum.push(Randomnumber);
+      }
+    }
+    return computerNum;
   }
 }
 

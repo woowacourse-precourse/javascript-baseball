@@ -17,7 +17,7 @@
 
 ### 3. 컴퓨터(상대방)가 1~9까지의 서로 다른 임의의 수 3개를 생성하는 기능  
   
-   * [x] 난수 추출은 `MissionUtils` 라이브러리의 `Random.pickUniqueNumbersInRange()`를 활용  
+   * [x] 난수 추출은 `MissionUtils` 라이브러리의 `Random.pickNumberInRange()`를 활용  
 
 ### 4. 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시하는 기능  
 
