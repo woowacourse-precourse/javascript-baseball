@@ -16,13 +16,17 @@ class App {
 
   startGame() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
-      this.checkNum(tryNum);
+      this.checktryNum(tryNum);
     });
   }
 
-  checkNum(tryNum) {
+  checktryNum(tryNum) {
     this.checkValid(tryNum);
     this.checkAnswer(tryNum, this.answer);
+    const tryNumArr = tryNum.split("");
+    tryNumArr.forEach((tryNumEle) =>
+      this.comparetryNumAndAnswer(Number(tryNumEle), this.answer)
+    );
   }
 
   checkValid(tryNum) {
@@ -73,6 +77,10 @@ class App {
         }
       }
     );
+  }
+
+  comparetryNumAndAnswer(tryNumEle, answer) {
+    const IS_INCLUDE = answer.includes(tryNumEle);
   }
 }
 
