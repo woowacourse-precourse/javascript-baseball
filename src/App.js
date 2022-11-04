@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.computerNumber = [];
+    this.playerNumber = [];
   }
 
   play() {
@@ -13,13 +14,33 @@ class App {
     }
     this.computerNumber.push(...numberList);
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    inputNumber();
+    this.inputNumber();
   }
 
   inputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      console.log(answer);
+      if (!this.isValid(answer)) {
+        throw new Error();
+      } else {
+        const data = String(answer)
+          .split("")
+          .map((letter) => Number(letter));
+        this.playerNumber = [...data];
+      }
     });
+  }
+
+  isValid(data) {
+    if (data.length !== 3) {
+      return false;
+    }
+    if (new Set(data).size !== 3) {
+      return false;
+    }
+    if (isNaN(data)) {
+      return false;
+    }
+    return true;
   }
 }
 
