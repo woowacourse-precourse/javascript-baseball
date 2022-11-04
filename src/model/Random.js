@@ -1,14 +1,12 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 function randomNum(){
-  const numEach = [];
-  while (numEach.length < 3) {
+  const numEach = new Set();
+  while (numEach.size < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!numEach.includes(number)) {
-      numEach.push(number);
-    }
+    numEach.add(number);
   }
-  return parseInt(numEach.join(''));
+  return parseInt(Array.from(numEach).join(''));
 }
 
 module.exports = randomNum;
