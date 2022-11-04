@@ -5,6 +5,10 @@ const NUMBER_LENGTH = 3;
 class App {
   constructor() {}
 
+  printGameStart() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
   setComputerNumber() {
     const computer = [];
     while (computer.length < 3) {
