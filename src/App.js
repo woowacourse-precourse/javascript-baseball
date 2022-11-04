@@ -5,6 +5,7 @@ class App {
   userNumber = [];
   ballCount = 0;
   strikeCount = 0;
+  selectNumber = 0;
 
   play() {}
 
@@ -18,8 +19,8 @@ class App {
   }
 
   userInputAnswer() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
-      this.userNumber = inputNumber.split("").map(num => Number(num));
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputAnswer) => {
+      this.userNumber = inputAnswer.split("").map(num => Number(num));
       MissionUtils.Console.close();
     })
     this.inputAnswerException()
@@ -92,6 +93,14 @@ class App {
   gameWin() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
     this.gameSelect()
+  }
+
+  gameSelect() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (inputNumber) => {
+      this.selectNumber = Number(inputNumber);
+      MissionUtils.Console.close();
+    })
+    this.gameSelectException()
   }
 }
 
