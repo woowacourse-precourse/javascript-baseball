@@ -35,9 +35,9 @@ describe('App 클래스 - isBall()', () => {
 
     const app = new App();
 
-    expect(app.isBall(random, input[0])).toBeTruthy();
-    expect(app.isBall(random, input[1])).toBeFalsy();
-    expect(app.isBall(random, input[2])).toBeFalsy();
+    expect(app.isBall(random, input, 0)).toBeTruthy();
+    expect(app.isBall(random, input, 1)).toBeFalsy();
+    expect(app.isBall(random, input, 2)).toBeFalsy();
   });
 
   test('스트라이크일때 볼이라고 하지 않는지 확인하는 예제', () => {
@@ -46,8 +46,8 @@ describe('App 클래스 - isBall()', () => {
 
     const app = new App();
 
-    expect(app.isBall(random, input[0])).toBeFalsy();
-    expect(app.isBall(random, input[1])).toBeTruthy();
-    expect(app.isBall(random, input[2])).toBeTruthy();
+    expect(app.isBall(random, input, 0)).toBeFalsy();
+    expect(app.isBall(random, input, 1)).toBeTruthy();
+    expect(app.isBall(random, input, 2)).toBeTruthy();
   });
 });
