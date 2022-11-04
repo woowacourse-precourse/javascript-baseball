@@ -1,4 +1,4 @@
-import * as MissionUnits from "@woowacourse/mission-untils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const ment = {
   start: "숫자 야구 게임을 시작합니다.",
@@ -12,12 +12,17 @@ const ment = {
 };
 
 class App {
-  //   - 게임 진행을 하는 기능 - play
-  play() {}
+  play() {
+    this.startPrint();
+  }
   // - 랜덤 3자리 생성하는 기능
   createAnwser() {}
-  // - 시작 멘트 출력하는 기능
-  startPrint() {}
+
+  startPrint() {
+    MissionUtils.Console.print(ment.start);
+    MissionUtils.Console.close();
+    return;
+  }
   // - 사용자 입력을 받는 기능
   inputUserAnwser() {}
   // - 입력 예외처리 하는 기능 ( 게임 진행 중 )
@@ -34,5 +39,8 @@ class App {
   // - 종료 멘트 날리는 기능
   endGamePrint() {}
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
