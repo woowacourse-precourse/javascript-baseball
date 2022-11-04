@@ -34,7 +34,19 @@ class App {
             return `${ball}볼`;
         };
 
-        const getStrikeCount = (userInput, answer) => {};
+        const getStrikeCount = (userInput, answer) => {
+            const USER_INPUT = changeToArray(userInput);
+            const COMPUTER_ANSWER = changeToArray(answer);
+
+            let strike = 0;
+            USER_INPUT.forEach((num, index) => {
+                if (num === COMPUTER_ANSWER[index]) {
+                    strike += 1;
+                }
+            });
+
+            return `${strike}스트라이크`
+        };
 
         const printEndMessage = () => {
             setTimeout(() => {
