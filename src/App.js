@@ -52,17 +52,13 @@ class App {
   }
 
   getInputArray(input) {
-    const inputArray = [];
-    input.split('').forEach((character) => {
-      inputArray.push(parseInt(character));
-    });
-
-    return inputArray;
+    return input.split('').map((character) => parseInt(character));
   }
 
   getBallStrike(randomArray, inputArray) {
     let ball = 0,
       strike = 0;
+
     for (let i = 0; i <= 2; i++) {
       if (randomArray[i] === inputArray[i]) {
         strike += 1;
