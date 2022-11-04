@@ -28,19 +28,19 @@ class App {
     return [...computerNumbers];
   }
 
-  getStrikeBallCount(userNumber) {
+  getStrikeBallCount(userNumber, computerNumbers) {
     const strikeBallCount = {
       strike: 0,
       ball: 0,
     };
 
     [...userNumber].forEach((number, i) => {
-      if (number === this.computerNumbers[i]) {
+      if (number === computerNumbers[i]) {
         strikeBallCount.strike += 1;
         return;
       }
 
-      if (this.computerNumbers.includes(number)) {
+      if (computerNumbers.includes(number)) {
         strikeBallCount.ball += 1;
       }
     });
@@ -74,7 +74,7 @@ class App {
 
   readUserInput() {
     Console.readLine(message.INPUT, (number) => {
-      this.gameCount = this.getStrikeBallCount(number);
+      this.gameCount = this.getStrikeBallCount(number, this.computerNumbers);
       this.printResult();
 
       if (this.gameCount.strike === 3) {

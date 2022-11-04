@@ -8,9 +8,11 @@ describe('컴퓨터 숫자 생성', () => {
 
     expect(result).toHaveLength(3);
   });
+
   test('서로 다른 임의의 수로 구성되어 있다', () => {
     const app = new App();
     const numbers = app.generateComputerNumbers();
+
     const numberSet = new Set(numbers);
     const result = numbers.length === numberSet.size;
 
