@@ -6,9 +6,7 @@ describe('App 클래스 - get3RandomNumbers()', () => {
     const app = new App();
     const isNumber = (item) => typeof item === 'number';
 
-    expect(
-      app.get3RandomNumbers().every((item) => isNumber(item)),
-    ).toBeTruthy();
+    expect(app.get3RandomNumbers().every((item) => isNumber(item))).toBeTruthy();
     expect([...new Set(app.get3RandomNumbers())]).toHaveLength(3);
 
     MissionUtils.Console.close();
@@ -174,5 +172,24 @@ describe('App 클래스 - isStrikeOut()', () => {
     const app = new App();
 
     expect(app.isStrikeOut(random, input)).toBeTruthy();
+  });
+});
+
+describe('App 클래스 - print()', () => {
+  test('원하는 메세지 출력', () => {
+    const getLogSpy = () => {
+      const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+      logSpy.mockClear();
+      return logSpy;
+    };
+
+    const message = '숫자 야구 게임을 시작합니다.';
+    const logSpy = getLogSpy();
+
+    // 실행
+    const app = new App();
+    app.print(message);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
   });
 });
