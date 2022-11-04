@@ -56,4 +56,13 @@ function isLength3(userNumber) {
   return true;
 }
 
+function isDuplicated(userNumber) {
+  const userNumberSet = new Set(userNumber);
+  if (userNumberSet.size !== userNumber.length) {
+    return false;
+  }
+
+  return true;
+}
+
 module.exports = App;
