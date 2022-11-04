@@ -2,11 +2,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const { Random } = MissionUtils;
 const { Console } = MissionUtils;
-const User = require("./User");
 
 class App {
   constructor() {
-    this.user = new User();
+    Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
+  play() {
+    this.baseballAnswer = this.makeComputerArr();
+    this.UserInput = this.InputNum();
   }
 
   makeComputerArr() {
@@ -20,17 +24,22 @@ class App {
     return this.computer;
   }
 
-  start() {
-    Console.print("숫자 야구 게임을 시작합니다.");
-    const ComputerNum = this.makeComputerArr();
-    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      const Answer = answer;
+  inputCheck(inputString) {
+    if (inputString.length !== 3) throw new Error();
+    const numberArr = inputString.split("").map((x) => {
+      if (Number.isNaN(x)) throw new Error();
+      return x;
+    });
+    return numberArr;
+  }
+
+  InputNum() {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.inputNum = this.inputCheck(input);
     });
   }
 
-  play() {
-    return this.start();
-  }
+  reStart() {}
 }
 
 const app = new App();
