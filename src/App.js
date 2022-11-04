@@ -3,21 +3,20 @@
 // CHECK :: 커밋 컨벤션 :: https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message
 // CHECK :: Random 값 추출 / Console 활용 -> MissionUtils 라이브러리
 
-const { getComputerNumber } = require("./computer");
+const Computer = require("./computer");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    const answer = getComputerNumber();
+    const computer = Computer();
+    const answer = computer.computerNumberStr;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    this.playOneRound();
+    console.log(computer.checkGameResult("123"));
   }
 
   playOneRound() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-      console.log(`${number}에 대한 결과`);
-    });
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {});
   }
 }
 
