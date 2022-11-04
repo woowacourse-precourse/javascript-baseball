@@ -15,17 +15,17 @@ const calculateBall = (excludedStrikeNumbers, inputNumbers) => {
 };
 
 const calculateScore = (computerNumbers, inputNumbers) => {
-  const score = { strike: 0, ball: 0, isNothing: false };
+  const score = { strikeCount: 0, ballCount: 0, isNothing: false };
 
   const [excludedStrike, strikeCount] = calculateStrike(
     computerNumbers,
     inputNumbers,
   );
-  score.strike = strikeCount;
-  if (score.strike === 3) return score;
+  score.strikeCount = strikeCount;
+  if (score.strikeCount === 3) return score;
 
   const [excludedBall, ballCount] = calculateBall(excludedStrike, inputNumbers);
-  score.ball = ballCount;
+  score.ballCount = ballCount;
   if (excludedBall.length === 3) score.isNothing = true;
   return score;
 };

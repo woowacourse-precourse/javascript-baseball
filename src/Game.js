@@ -6,7 +6,7 @@ const {
 } = require("./Utils");
 const calculateScore = require("./CalculateScore");
 
-const createComputerNumbers = () => {
+const createComputerNumberList = () => {
   return pickUniqueNumbersInRange(1, 9, 3);
 };
 
@@ -14,34 +14,50 @@ const parseStringToNumberList = (stringNumber) => {
   return stringNumber.split("").map((number) => parseInt(number, 10));
 };
 
+const getInputNumberList = async () => {
+  const inputStringNumber = await readLine("숫자를 입력해주세요 : ");
+  return parseStringToNumberList(inputStringNumber);
+};
+
+const scoreOutputMap = {
+  ballCount: 0,
+  strikeCount: 0,
+  nothing() {
+    return "낫싱";
+  },
+  onlyBall() {
+    return `${this.ballCount}볼`;
+  },
+  onlyStrike() {
+    return `${this.strikeCount}스트라이크`;
+  },
+  ballWithStrike() {
+    return `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
+  },
+};
+
+const judge = (score) => {
+  if (score.isNothing) return "nothing";
+  if (score.strikeCount === 0) return "onlyBall";
+  if (score.ballCount === 0) return "onlyStrike";
+  return "ballWithStrike";
+};
+
 const gameStart = async () => {
-  let isThreeStrike = false;
-
-  const computerNumbers = createComputerNumbers();
-  while (!isThreeStrike) {
-    const inputNumbers = await readLine("숫자를 입력해주세요 : ");
-    const numberList = parseStringToNumberList(inputNumbers);
-    const score = calculateScore(computerNumbers, numberList);
-    if (score.isNothing) {
-      print("낫싱");
-    } else if (score.strike === 3) {
-      print(`${score.strike}스트라이크`);
-      isThreeStrike = true;
-    } else if (score.strike === 0) {
-      print(`${score.ball}볼`);
-    } else if (score.ball === 0) {
-      print(`${score.strike}스트라이크`);
-    } else {
-      print(`${score.ball}볼 ${score.strike}스트라이크`);
-    }
-  }
+  const computerNumberList = createComputerNumberList();
+  let inputNumberList;
+  let score;
+  do {
+    inputNumberList = await getInputNumberList();
+    score = calculateScore(computerNumberList, inputNumberList);
+    scoreOutputMap.ballCount = score.ballCount;
+    scoreOutputMap.strikeCount = score.strikeCount;
+    print(scoreOutputMap[judge(score)]());
+  } while (score.strikeCount !== 3);
 };
 
-const gameEnd = () => {
+const gameEndAskRestartOrQuit = async () => {
   print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-};
-
-const askRestartOrQuit = async () => {
   const answer = await readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
   );
@@ -52,8 +68,7 @@ const playGame = async () => {
   print("숫자 야구 게임을 시작합니다.");
   do {
     await gameStart();
-    gameEnd();
-  } while ((await askRestartOrQuit()) === "restart");
+  } while ((await gameEndAskRestartOrQuit()) === "restart");
   closeIO();
 };
 
