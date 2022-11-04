@@ -15,22 +15,22 @@ class App {
   }
 
   startGame() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
-      this.checkNum(num);
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
+      this.checkNum(tryNum);
     });
   }
 
-  checkNum(num) {
-    this.checkValid(num);
-    this.checkAnswer(num, this.answer);
+  checkNum(tryNum) {
+    this.checkValid(tryNum);
+    this.checkAnswer(tryNum, this.answer);
   }
 
-  checkValid(num) {
-    const IS_VALID_LENGTH = num.length === this.NUMBER_LENGTH_MODE;
-    const IS_TYPE_NUMBER = !Number.isNaN(num);
+  checkValid(tryNum) {
+    const IS_VALID_LENGTH = tryNum.length === this.NUMBER_LENGTH_MODE;
+    const IS_TYPE_NUMBER = !Number.isNaN(tryNum);
 
-    const numSet = new Set(num);
-    const IS_NO_DUPLICATE = num.length === numSet.size;
+    const tryNumtSet = new Set(tryNum);
+    const IS_NO_DUPLICATE = tryNum.length === tryNumtSet.size;
 
     const IS_VALID = IS_VALID_LENGTH && IS_TYPE_NUMBER && IS_NO_DUPLICATE;
 
@@ -51,8 +51,8 @@ class App {
     return answer;
   }
 
-  checkAnswer(num, answer) {
-    const IS_ANSWER = num === answer.join("");
+  checkAnswer(tryNum, answer) {
+    const IS_ANSWER = tryNum === answer.join("");
     if (IS_ANSWER) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
