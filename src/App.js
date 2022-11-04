@@ -4,10 +4,11 @@ class App {
   play() {
     let gameAgain = 1;
     gameStartingText();
-    while (gameAgain === 1) {
+    while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
       oneGame(computerNumbers);
       gameAgain = askGameAgain();
+      console.log(gameAgain);
     }
   }
 }
