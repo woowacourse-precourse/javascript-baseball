@@ -20,5 +20,10 @@ const checkIsNumber = (arr) => {
   });
   return check;
 };
+const checkOverlap = (arr) => {
+  const set = [...new Set(arr)];
+  if (arr.length !== set.length) return false;
+  return true;
+};
 
 module.exports = getUserExecption;
