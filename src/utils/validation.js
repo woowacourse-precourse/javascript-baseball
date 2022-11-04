@@ -8,3 +8,8 @@ const isThreeDigit = (input) => {
   if (input.length === 3) return true;
   return false;
 };
+
+const isInRange = (input) => {
+  if (input.includes(0)) return false;
+  return true;
+};
