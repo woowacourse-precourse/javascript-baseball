@@ -193,3 +193,28 @@ describe('App 클래스 - print()', () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
   });
 });
+
+describe('App 클래스 - end()', () => {
+  test('종료 함수 테스트', () => {
+    const getCloseLogSpy = () => {
+      const logSpy = jest.spyOn(MissionUtils.Console, 'close');
+      logSpy.mockClear();
+      return logSpy;
+    };
+
+    const getLogSpy = () => {
+      const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+      logSpy.mockClear();
+      return logSpy;
+    };
+
+    const closeLogSpy = getCloseLogSpy();
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.end();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('종료'));
+    expect(closeLogSpy).toBeCalled();
+  });
+});
