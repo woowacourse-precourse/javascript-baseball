@@ -24,6 +24,33 @@ class App {
     }
   }
 
+  static throwError(...args) {
+    if (args.includes(false)) {
+      throw new Error();
+    }
+  }
+
+  userInputExceptionHandler() {
+    const CHECK_SAME_INPUT = new Set();
+    const IS_LENGTH_3 = this.userInput.length === 3;
+    const INPUT_ARRAY = [...this.userInput];
+
+    const CHECK_EXCEPTION = (input) => {
+      const IS_NUMBER = input.charCodeAt(0) >= 48 && input.charCodeAt(0) <= 57;
+      const IS_UNIQUE = !CHECK_SAME_INPUT.has(input);
+      this.throwError(IS_UNIQUE, IS_NUMBER, IS_LENGTH_3);
+      CHECK_SAME_INPUT.add(input);
+    };
+
+    INPUT_ARRAY.forEach(CHECK_EXCEPTION);
+  }
+
+  compareUserInputWithAnswer() {}
+
+  makeOutputString(ball, strike, nothing) {}
+
+  gameRestartHandler() {}
+
   userInputHandler = (input) => {
     this.userInput = input;
     this.userInputExceptionHandler();
