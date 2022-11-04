@@ -75,12 +75,16 @@ class App {
     return number >= this.minNum && number <= this.maxNum;
   }
 
+  hasDuplicateElement(list) {
+    return [...new Set(list)].length === list.length;
+  }
+
   isValidInput(input) {
     const numbers = input.split("").map(Number);
 
     return (
       numbers.every((number) => this.isNumber(number)) &&
-      input.length === [...new Set(numbers)].length &&
+      this.hasDuplicateElement(numbers) &&
       [...new Set(numbers)].length === this.count &&
       numbers.every((number) => this.isValidNumber(number))
     );
