@@ -4,6 +4,10 @@ const { message, rule } = require('./constants');
 class App {
   constructor() {
     this.computerNumbers = [];
+    this.gameCount = {
+      strike: 0,
+      ball: 0,
+    };
   }
 
   play() {
@@ -24,6 +28,26 @@ class App {
     }
 
     return [...computerNumbers];
+  }
+
+  getStrikeBallCount(userNumber) {
+    const strikeBallCount = {
+      strike: 0,
+      ball: 0,
+    };
+
+    [...userNumber].forEach((number) => {
+      if (number === this.computerNumbers[0]) {
+        strikeBallCount.strike += 1;
+        return;
+      }
+
+      if (this.computerNumbers.includes(number)) {
+        strikeBallCount.ball += 1;
+      }
+    });
+
+    return strikeBallCount;
   }
 }
 
