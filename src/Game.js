@@ -1,12 +1,10 @@
-const { print, readLine, pickUniqueNumbersInRange } = require("./Utils");
+const { print, pickUniqueNumbersInRange } = require("./Utils");
 
-function gameStart() {
+const createComputerNumbers = () => {
+  return pickUniqueNumbersInRange(1, 9, 3);
+};
+
+module.exports = () => {
   const computerNumbers = createComputerNumbers();
   print(computerNumbers);
-}
-
-function createComputerNumbers() {
-  return pickUniqueNumbersInRange(1, 9, 3);
-}
-
-module.exports.gameStart = gameStart;
+};

@@ -5,7 +5,7 @@ const utils = {
     MissionUtils.Console.print(message);
   },
   readLine(question) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       MissionUtils.Console.readLine(question, (answer) => {
         resolve(answer);
       });
@@ -15,7 +15,7 @@ const utils = {
     return MissionUtils.Random.pickUniqueNumbersInRange(
       startInclusive,
       endInclusive,
-      count
+      count,
     );
   },
 };
