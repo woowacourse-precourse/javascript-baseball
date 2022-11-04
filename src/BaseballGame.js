@@ -3,6 +3,7 @@ const PickedNumberByComputer = require("./PickedNumberByComputer");
 
 class BaseballGame {
   constructor() {
+    this.isFirstGame = true;
     this.pickedNumberByComputer =
       new PickedNumberByComputer().randomNumInRange();
   }
@@ -43,13 +44,13 @@ class BaseballGame {
   };
 
   playGame = () => {
-    let isThreeStrike = false;
-
-    while (!isThreeStrike) {
-      let numberOfStrike = this.playTurn();
-      if (numberOfStrike === 3) isThreeStrike = true;
+    if (this.isFirstGame) {
+      this.isFirstGame = false;
+      Console.readLine(
+        "숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ",
+        this.playTurn
+      );
     }
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   };
 }
 
