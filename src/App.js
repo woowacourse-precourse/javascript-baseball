@@ -1,13 +1,16 @@
+const { Random, Console } = require("@woowacourse/mission-utils");
+
 class App {
   constructor() {
     this.answer = this.makeAnswer();
     this.strike = 0;
     this.ball = 0;
+    this.isRestart = false;
   }
 
   makeAnswer() {
     const answer = [];
-    while (computer.length < 3) {
+    while (answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!answer.includes(number)) {
         answer.push(number);
@@ -51,12 +54,24 @@ class App {
     return `${this.ball}볼 ${this.strike}스트라이크 `;
   }
 
+  decideContinue() {
+    if (this.strike === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.isRestart = true;
+    }
+  }
+
   play() {
-    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+    const message = this.isRestart
+      ? "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+      : "숫자를 입력해주세요 : ";
+    Console.readLine(message, (userInput) => {
       this.checkUserInput(userInput);
       this.compareScore(userInput);
 
       Console.print(this.createResultMessage());
+      this.decideContinue();
+      this.play();
     });
   }
 }
