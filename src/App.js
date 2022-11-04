@@ -14,22 +14,31 @@ class App {
   }
 
   startGame() {
-    this.answer = this.genAnswer();
+    const answer = this.genAnswer();
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
-      this.checktryNum(tryNum);
+      this.checktryNum(tryNum, answer);
     });
   }
 
-  checktryNum(tryNum) {
+  checktryNum(tryNum, answer) {
     this.checkValid(tryNum);
-    const IS_ANSWER = this.checkAnswer(tryNum, this.answer);
+    const IS_ANSWER = this.checkAnswer(tryNum, answer);
     if (IS_ANSWER) {
       return;
     }
     const tryNumArr = tryNum.split("");
-    tryNumArr.forEach((tryNumEle, tryNumEleIdx) =>
-      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
+    const BallStrikeResult = tryNumArr.map((tryNumEle, tryNumEleIdx) =>
+      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, answer)
     );
+
+    const resultSentence = this.getResultSentence(BallStrikeResult);
+
+    if (!resultSentence) {
+      MissionUtils.Console.print("낫싱");
+    } else {
+      MissionUtils.Console.print(resultSentence);
+    }
+    this.startGame();
   }
 
   checkValid(tryNum) {
@@ -90,12 +99,26 @@ class App {
       const answerIdx = answer.indexOf(tryNumEle);
       const IS_SAME_POSITION = answerIdx === tryNumEleIdx;
       if (IS_SAME_POSITION) {
-        this.strike += 1;
+        return "strike";
       }
       if (!IS_SAME_POSITION) {
-        this.ball += 1;
+        return "ball";
       }
     }
+    return "낫싱";
+  }
+
+  getResultSentence(BallStrikeResult) {
+    const ballCount = BallStrikeResult.filter(
+      (result) => result === "ball"
+    ).length;
+    const strikeCount = BallStrikeResult.filter(
+      (result) => result === "strike"
+    ).length;
+    const ballSentence = ballCount ? `${ballCount}볼 ` : "";
+    const strikeSentence = strikeCount ? `${strikeCount}스트라이크` : "";
+    const resultSentence = ballSentence + strikeSentence;
+    return resultSentence;
   }
 }
 
