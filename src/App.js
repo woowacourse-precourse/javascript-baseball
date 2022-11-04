@@ -2,8 +2,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.randomValue=''
-    this.userValue=''
+    this.randomValue = ''
+    this.userValue = ''
   }
 
   play() {
@@ -12,12 +12,12 @@ class App {
   }
 
   setRandomValue(number) {
-    this.randomValue=number
+    this.randomValue = number
     // MissionUtils.Console.print(this.randomValue)
   }
 
   setUserValue(number) {
-    this.userValue=number
+    this.userValue = number
   }
   
   checkcheck() {
@@ -31,7 +31,7 @@ app.play()
 // 랜덤값 생성 함수
 function makeRandomValue() {
   let randomValue=new Set();
-  while (randomValue.size<3) {
+  while (randomValue.size < 3) {
     randomValue.add(MissionUtils.Random.pickNumberInRange(1, 9));
   }
   app.setRandomValue([...randomValue].join(''))
@@ -58,19 +58,19 @@ function isValidValue(number) {
 function checkAnswer(computer,user) {
   const strike=countStrike(computer,user)
   const ball=countBall(computer,user)-strike
-  if (strike===3) {
+  if (strike === 3) {
     return (`3스트라이크`);
   }
-  if (ball===0 && strike===0) {
+  if (ball === 0 && strike === 0) {
     return (`낫싱`);
   }
-  if (ball===0 && strike!==0) {
+  if (ball === 0 && strike !== 0) {
     return (`${strike}스트라이크`);
   }
-  if (ball!==0 && strike===0) {
+  if (ball !== 0 && strike === 0) {
     return (`${ball}볼`);
   }
-  if (ball!==0 && strike!==0) {
+  if (ball !== 0 && strike !== 0) {
     return (`${ball}볼 ${strike}스트라이크`);
   }
 }
@@ -90,6 +90,7 @@ function whatsAfter(afterGame) {
   if (afterGame === `3스트라이크`) {
     askRegame()
   }
+  
   if (afterGame !== `3스트라이크`) {
     inputUserValue()
   }
@@ -101,15 +102,15 @@ function askRegame() {
   })
 }
 
-function realReGame(num){
-  if (num!=='1' && num!=='2') {
+function realReGame(num) {
+  if (num !== '1' && num !== '2') {
     throw '잘못된 형식을 입력하였습니다. 게임을 종료합니다.'
   }
-  if (num==='1') {
+  if (num === '1') {
     const app = new App();
     app.play();
   }
-  if (num==='2') {
+  if (num === '2') {
     MissionUtils.Console.print(`게임 종료`)
     MissionUtils.Console.close();
   }
