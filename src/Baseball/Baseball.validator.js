@@ -20,3 +20,5 @@ class BaseBallValidator {
     }
   }
 }
+
+export default BaseBallValidator;
