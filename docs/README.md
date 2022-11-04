@@ -1,8 +1,8 @@
-# ⚾ 미션 - 숫자 야구 게 임
+# 2주차 미션 - 숫자 야구 게임
 
 <br>
 
-# [작성자] : 김동우(DongWooKim97)
+## [작성자] : 김동우(DongWooKim97)
 
 ## 📝 구현할 기능 목록
 
@@ -46,8 +46,8 @@
   - **기능 2번**에서 처럼, 숫자 야구 게임의 룰대로 입력되었는지 확인하고 예외 및 에러 발견시 처리하는 기능.
 
   ```javascript
-    1) 숫자 외에 다른 입력 형태 (영어, 한글, 특수문자 등등)인지 확인 ❗️ => checkInputType()
-    2) 3자리의 숫자 이 외의 범위(number.length !==3) 확인 ❗️ => checkValidLength()
+    1) 숫자 외에 다른 입력 형태 [영어, 한글, 특수문자 등등]인지 확인 ❗️ => checkInputType()
+    2) 3자리의 숫자 이 외의 범위 [number.length !==3] 확인 ❗️ => checkValidLength()
     3) 각 자리의 숫자가 1 ~ 9 사이의 숫자인지 확인 ❗️ => checkValidScope()
     4) 각 자리의 값을 비교하여 중복된 값이 있는지 확인 ❗️ => checkDuplicate()
   ```
