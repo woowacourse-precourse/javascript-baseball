@@ -75,7 +75,7 @@ const END_OF_GAME = function askQuestionToUserWhenGameEnds() {
 
 const START_GAME = function launchNewGame() {
   const ANSWER = MAKEANSWER();
-  GAME_APP(ANSWER);
+  GAME_APPLICATION(ANSWER);
 }
 
 const GAME_APPLICATION = function gamePlayApplication(answer) {
@@ -97,7 +97,7 @@ const GAME_HINT = function getHintFromInput(userInput, answer) {
   }
   if (strikes === 0 && balls === 0) MissionUtils.Console.print('낫싱');
   else MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
-  GAME_APP(answer);
+  GAME_APPLICATION(answer);
 }
 
 
