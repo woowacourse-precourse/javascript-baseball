@@ -4,18 +4,17 @@ class App {
   play() {
     let gameAgain = 1;
     gameStartingText();
-    while(gameAgain == 1){
+    while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
       oneGame(computerNumbers);
       gameAgain = askGameAgain();
     }
-
   }
 }
 
 const gameStartingText = () => {
   console.log("숫자 야구 게임을 시작합니다.");
-}
+};
 
 const computerNumbersMaking = () => {
   const computer = [];
@@ -30,43 +29,56 @@ const computerNumbersMaking = () => {
 
 const playerNumbersInput = () => {
   let input;
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
     input = answer;
   });
   return input;
 };
 
 const oneGame = (computerNumbers) => {
-  while(1){
-    const playerNumbers = playerNumbersInput();
-    const strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
+  let strikeBall = {};
+  let playerNumbers;
+  while (1) {
+    playerNumbers = playerNumbersInput();
+    strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
-    if(strikeBall.strike == 3) break;
+    if (strikeBall.strike == 3) break;
   }
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
   let strike = 0;
   let ball = 0;
-  for(i = 0; i < 3; i++){
-    if(playerNumbers[i] == computerNumbers[i]){
+  for (i = 0; i < 3; i++) {
+    if (playerNumbers[i] == computerNumbers[i]) {
       strike++;
-    }elseif(computerNumbers.includes(playerNumbers[i])){
+    } else if (computerNumbers.includes(playerNumbers[i])) {
       ball++;
     }
-  };
-  return { strike:strike, ball:ball };
+  }
+  return {strike: strike, ball: ball};
 };
 
 const printStrikeAndBall = (strikeBall) => {
-
+  if(strikeBall.strike === 0 && strikeBall.ball === 0){
+    MissionUtils.Console.print('낫싱');
+  }else if(strikeBall.strike === 0){
+    MissionUtils.Console.print(`${strikeBall.ball}볼`);
+  }else if(strikeBall.ball === 0){
+    MissionUtils.Console.print(`${strikeBall.strike}스트라이크`);
+  }else{
+    MissionUtils.Console.print(`${strikeBall.ball}볼 ${strikeBall.strike}스트라이크`);
+  }
 };
 
 const askGameAgain = () => {
   let input;
-  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
-    input = answer;
-  });
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (answer) => {
+      input = answer;
+    }
+  );
   return input;
 };
 
