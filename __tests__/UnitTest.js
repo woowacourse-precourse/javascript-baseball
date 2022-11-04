@@ -35,13 +35,11 @@ expect.extend({
   }
 });
 
-const mockQuestions = (answers) => {
+const mockQuestions = (input) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
+  MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
     callback(input);
-    });
-  }, MissionUtils.Console.readLine);
+  });
 };
   
 const getLogSpy = () => {
@@ -75,7 +73,7 @@ describe("세 자리 숫자 입력 테스트", () => {
   test("case1", () => {
     const logSpy = getLogSpy();
     const answer = '123';
-    const input = ['123'];
+    const input = '123';
 
     mockQuestions(input);
 
@@ -88,7 +86,7 @@ describe("세 자리 숫자 입력 테스트", () => {
   test("case2", () => {
     const logSpy = getLogSpy();
     const answer = '123';
-    const input = ['132'];
+    const input = '132';
 
     mockQuestions(input);
 
@@ -100,7 +98,7 @@ describe("세 자리 숫자 입력 테스트", () => {
 
   test("case3", () => {
     const answer = '123';
-    const input = ['ddd'];
+    const input = 'ddd';
 
     mockQuestions(input);
     
@@ -112,7 +110,7 @@ describe("세 자리 숫자 입력 테스트", () => {
 
   test("case4", () => {
     const answer = '123';
-    const input = ['012'];
+    const input = '012';
 
     mockQuestions(input);
     
@@ -120,5 +118,40 @@ describe("세 자리 숫자 입력 테스트", () => {
         const app = new App();
         app.inputNumbers(answer);
     }).toThrow();
+  });
+});
+
+describe("결과 출력 테스트", () => {
+  test("case1", () => {
+    const logSpy = getLogSpy();
+    const answer = '123';
+    const input = '132';
+
+    const app = new App();
+    app.printResult(input, answer);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('2볼 1스트라이크'));
+  });
+
+  test("case2", () => {
+    const logSpy = getLogSpy();
+    const answer = '123';
+    const input = '325';
+
+    const app = new App();
+    app.printResult(input, answer);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1볼 1스트라이크'));
+  });
+
+  test("case3", () => {
+    const logSpy = getLogSpy();
+    const answer = '123';
+    const input = '123';
+
+    const app = new App();
+    app.printResult(input, answer);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('3스트라이크'));
   });
 });
