@@ -4,7 +4,7 @@ class App {
   play() {
     let gameAgain = 1;
     gameStartingText();
-    while (gameAgain == 1) {
+    while (gameAgain === 1) {
       const computerNumbers = computerNumbersMaking();
       oneGame(computerNumbers);
       gameAgain = askGameAgain();
@@ -13,7 +13,7 @@ class App {
 }
 
 const gameStartingText = () => {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  console.log("숫자 야구 게임을 시작합니다.");
 };
 
 const computerNumbersMaking = () => {
@@ -24,7 +24,8 @@ const computerNumbersMaking = () => {
       computer.push(number);
     }
   }
-  return computer;
+  const computerNumbers = computer.join("");
+  return computerNumbers;
 };
 
 const playerNumbersInput = () => {
@@ -50,6 +51,7 @@ const oneGame = (computerNumbers) => {
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
+  console.log(computerNumbers, playerNumbers);
   let strike = 0;
   let ball = 0;
   for (i = 0; i < 3; i++) {
@@ -77,7 +79,7 @@ const printStrikeAndBall = (strikeBall) => {
 };
 
 const gameEndingText = () => {
-  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 };
 
 const askGameAgain = () => {
