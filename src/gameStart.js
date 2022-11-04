@@ -57,7 +57,7 @@ function gameStart(gameData) {
       .split('')
       .map((userNumber) => parseInt(userNumber, 10));
     if (!validationNumbers(userRandomNumbers)) {
-      throw '잘못된 값을 입력했습니다.';
+      throw new Error('잘못된 값을 입력했습니다.');
     }
 
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
@@ -70,7 +70,7 @@ function gameStart(gameData) {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (commandNumber) => {
         if (!(commandNumber === '1' || commandNumber === '2')) {
-          throw '잘못된 값을 입력했습니다.';
+          throw new Error('잘못된 값을 입력했습니다.');
         }
         if (commandNumber === '1') {
           gameData.setThreeStrikeState(false);
