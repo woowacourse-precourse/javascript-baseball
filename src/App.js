@@ -132,7 +132,12 @@ class App {
     this.gameStart();
   }
 
-  gameOver() {}
+  gameOver() {
+    Console.print(GAME_MESSAGE.gameOver);
+    Console.readLine('', (ans) => this.isOneOrTwo(ans));
+  }
+
+  isOneOrTwo(inputValue) {}
 }
 
 const app = new App();
