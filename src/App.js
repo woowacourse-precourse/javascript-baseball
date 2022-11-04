@@ -1,10 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-function gameStartPhrase() {
+const gameStartPhrase = () => {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-}
+};
 
-function gameRestartQuestion() {
+const gameRestartQuestion = () => {
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
     (number) => {
@@ -23,17 +23,17 @@ function gameRestartQuestion() {
       }
     }
   );
-}
+};
 
-function isNotNumber(number) {
+const isNotNumber = (number) => {
   return isNaN(Number(number));
-}
+};
 
-function isContainsNumberZero(number) {
+const isContainsNumberZero = (number) => {
   return number.includes("0");
-}
+};
 
-function isDuplicate(number) {
+const isDuplicate = (number) => {
   const set = new Set();
   set.add(number[0]);
   set.add(number[1]);
@@ -41,17 +41,17 @@ function isDuplicate(number) {
 
   if (set.size !== number.length) return true;
   return false;
-}
+};
 
-function exceptionDetection(number) {
+const exceptionDetection = (number) => {
   if (number.length !== 3) return true;
   if (isNotNumber(number)) return true;
   if (isContainsNumberZero(number)) return true;
   if (isDuplicate(number)) return true;
   return false;
-}
+};
 
-function userInput(answer) {
+const userInput = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
     if (exceptionDetection(number)) {
       throw "잘못된 값을 입력하였습니다.";
@@ -81,25 +81,25 @@ function userInput(answer) {
       gameRestartQuestion();
     }
   });
-}
+};
 
-function strikeCalculation(answer, userNumber) {
+const strikeCalculation = (answer, userNumber) => {
   let count = 0;
   for (let i = 0; i < 3; i++) {
     if (answer[i] === userNumber[i]) count++;
   }
   return count;
-}
+};
 
-function ballCalculation(answer, userNumber) {
+const ballCalculation = (answer, userNumber) => {
   let count = 0;
   for (let i = 0; i < 3; i++) {
     if (answer[i] !== userNumber[i] && userNumber.includes(answer[i])) count++;
   }
   return count;
-}
+};
 
-function randomNumberSetting() {
+const randomNumberSetting = () => {
   let randomNumberArray = [];
   while (randomNumberArray.length < 3) {
     let randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -107,7 +107,7 @@ function randomNumberSetting() {
     randomNumberArray.push(randomNumber);
   }
   return randomNumberArray;
-}
+};
 
 class App {
   play() {
