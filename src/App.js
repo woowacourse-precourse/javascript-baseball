@@ -14,7 +14,9 @@ class App {
     return PLAYER;
   }
   checkNumber(num) { // 플레이어가 입력한 숫자가 서로 다른 3개의 숫자인지 확인하는 메서드
-    if (num.length!==3) {
+    if (!isNaN(num)) {
+      return false;
+    } else if (num.length!==3) {
       return false;
     } else if ((num[0]===num[1]) || (num[0]===num[2]) || (num[1]===num[2])) {
       return false;
