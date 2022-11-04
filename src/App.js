@@ -26,7 +26,11 @@ class App {
     if (set.size !== userInput.length) {
       return false;
     }
-    
+
+    const unvalidNumbers = [...userInput].filter(number => number < NUMBERS.RANDOM_MIN || number > NUMBERS.RANDOM_MAX);
+    if (unvalidNumbers.length > 0) {
+      return false;
+    }
     return true;
   }
 
