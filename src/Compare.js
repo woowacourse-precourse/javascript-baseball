@@ -13,6 +13,14 @@ class Compare extends Mission {
       return acc;
     }, 0);
   }
+
+  getBallCount() {
+    return this.computerNumbers.reduce((acc, value, index) => {
+      if (this.userNumbers.includes(value) && value !== this.userNumbers[index])
+        return acc + 1;
+      return acc;
+    }, 0);
+  }
 }
 
 module.exports = Compare;
