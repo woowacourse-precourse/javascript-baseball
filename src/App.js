@@ -20,6 +20,7 @@ class App {
     this.checkValid = new CheckValid(NUMBER_LIMIT);
   }
 
+  // TODO: play 로직들 함수로 분리하기
   play() {
     this.computerNum = this.computer.makeNumbers();
     Console.print('숫자 야구 게임을 시작합니다.');
@@ -44,7 +45,7 @@ class App {
       //    @args: 유저의 입력값, 컴퓨터 숫자
       //    @return: 유저의 입력값과 컴퓨터 숫자 중 "같은 숫자 같은 위치"에 있는 숫자들의 개수
 
-      // 5. 3번에서 구한 볼, 스트라이크 개수를 이용해 적절한 문구를 띄운다.
+      // 5. 3번에서 구한 볼, 스트라이크 개수를 이용해 적절한 문구를 띄운다. ✅
 
       // 6. 유저의 입력값과 컴퓨터 숫자와 동일한지 여부를 업데이트한다.
       //    -> 스트라이크 개수가 3개인지 판별
@@ -54,11 +55,13 @@ class App {
       // 3번
       if (isUserInputValid === false) {
         throw new Error('유저의 입력값이 유효하지 않습니다!');
-        return;
       }
 
       const ballCount = this.countBall(this.computerNum, this.userInput); // 4번
       const strikeCount = this.countStrike(this.computerNum, this.userInput);
+
+      const gameMessage = this.makeGameMessage(ballCount, strikeCount); // 5번
+      Console.print(gameMessage);
     }
     // 7. 반복문 탈출 후(= Match 종료) 게임을 다시 할 것 인지 여부를 묻는다.
   }
@@ -89,6 +92,23 @@ class App {
       if (isStrike) strikeCount += 1;
       return strikeCount;
     }, 0);
+  }
+
+  // method: 볼, 스트라이크 개수를 이용해 message 띄우기
+  makeGameMessage(ballCount, strikeCount) {
+    if (ballCount && strikeCount) {
+      return `${ballCount}볼 ${strikeCount}스트라이크`;
+    }
+
+    if (ballCount) {
+      return `${ballCount}볼`;
+    }
+
+    if (strikeCount) {
+      return `${strikeCount}스트라이크`;
+    }
+
+    return '낫싱';
   }
 
   restart() {
