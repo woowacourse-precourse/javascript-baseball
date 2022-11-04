@@ -13,3 +13,10 @@ const isInRange = (input) => {
   if (input.includes(0)) return false;
   return true;
 };
+
+const isDifferent = (input) => {
+  const set = new Set();
+  input.map((digit) => set.add(digit));
+  if (set.size === 3) return true;
+  return false;
+};
