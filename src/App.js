@@ -10,15 +10,23 @@ class App {
   }
   UserInputNumber = '';
 
+  Init() {
+    this.ball = 0;
+    this.strike = 0;
+    this.UserInputNumber = '';
+  }
+
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.input();
+    this.CheckInputIsValid();
+    this.CheckHasStrike();
+    this.CheckHasBall();
+    this.Init();
   }
   input() {
     MissionUtils.Console.readLine('숫자를 입력하세요 : ', (InputNumber) => {
       this.UserInputNumber = InputNumber;
     });
-    MissionUtils.Console.print(this.UserInputNumber);
     MissionUtils.Console.close();
   }
   CheckInputIsValid() {
@@ -37,6 +45,33 @@ class App {
       throw new Error('Input must be 3 different charater');
     }
     return true;
+  }
+
+  CheckHasStrike() {
+    /*
+    인덱스가 같을떄 동일한 단어인 경우 스트라이크
+    */
+    for (let i = 0; i < this.Number.length; i++) {
+      if (this.Number[i] === this.UserInputNumber[i]) {
+        this.strike += 1;
+      }
+      return this.strike;
+    }
+  }
+
+  CheckHasBall() {
+    /*
+    인덱스가 다르면서 랜덤한 숫자가 입력한 값을 포함한다면
+    */
+    for (let i = 0; i < this.Number.length; i++) {
+      if (
+        this.Number[i] !== this.UserInputNumber[i] &&
+        this.Number.includes(this.Number[i])
+      ) {
+        this.ball += 1;
+      }
+      return this.ball;
+    }
   }
 }
 
