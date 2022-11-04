@@ -14,7 +14,12 @@ class App {
     }
     this.computerNumber.push(...numberList);
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.progressGame();
+  }
+
+  progressGame() {
     this.inputNumber();
+    this.getHint();
   }
 
   inputNumber() {
@@ -26,7 +31,6 @@ class App {
           .split("")
           .map((letter) => Number(letter));
         this.playerNumber = [...data];
-        this.getHint();
       }
     });
   }
