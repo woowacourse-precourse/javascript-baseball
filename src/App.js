@@ -1,4 +1,8 @@
 class App {
+  constructor() {
+    this.play();
+  }
+
   play() {}
 }
 
