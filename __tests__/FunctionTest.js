@@ -61,3 +61,23 @@ describe("입력값 테스트", () => {
     expect(stringToArrConverter(userInput)).toEqual([1, 2, 3]);
   });
 });
+
+describe("판정 테스트", () => {
+  test("판정", () => {
+    const discriminateExamples = [
+      [[1, 2, 3], [1, 2, 3], "3스트라이크"],
+      [[1, 2, 3], [1, 2, 4], "2스트라이크"],
+      [[1, 2, 3], [1, 4, 5], "1스트라이크"],
+      [[1, 2, 3], [3, 1, 2], "3볼"],
+      [[1, 2, 3], [4, 1, 2], "2볼"],
+      [[1, 2, 3], [4, 5, 2], "1볼"],
+      [[1, 2, 3], [4, 5, 6], "낫싱"],
+      [[1, 2, 3], [3, 2, 1], "2볼 1스트라이크"],
+      [[1, 2, 3], [5, 1, 3], "1볼 1스트라이크"],
+    ];
+
+    discriminateExamples.map((example) => {
+      expect(discriminator(example[0], example[1])).toEqual(example[2]);
+    });
+  });
+});
