@@ -4,24 +4,29 @@ class App {
   play() {
     const computerNumber = makeComputerNumber();
     console.log("숫자 야구 게임을 시작합니다.");
+    const IS_PLAY_GAME = 1;
+    console.log("computer number : ", computerNumber);
 
-    for (let playCount = 0; playCount < 3; playCount++) {
-      const userInput = getUserInput();
+    while (IS_PLAY_GAME === 1) {
+      for (let playCount = 0; playCount < 3; playCount++) {
+        const userInput = getUserInput();
 
-      const STRIKE_BALL_RECORD = calculateInputNumber(
-        computerNumber,
-        userInput
-      );
+        const STRIKE_BALL_RECORD = calculateInputNumber(
+          computerNumber,
+          userInput
+        );
 
-      const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
-      if (IS_THREE_STRIKE) {
-        askEndGame();
+        const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
+        if (IS_THREE_STRIKE) {
+          askEndGame();
+        }
       }
+      const IS_PLAY_GAME = askEndGame();
     }
-    askEndGame();
   }
 }
 
+// Todo: Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
 const makeComputerNumber = () => {
   const computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   return computerNumber;
@@ -31,6 +36,7 @@ const getUserInput = () => {
   let inputArray = [];
 
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+    console.log(inputNumber);
     if (isNaN(inputNumber) || inputNumber.length !== 3) {
       throw new Error(
         "Input values should be given in three natural numbers under 10."
