@@ -44,17 +44,19 @@ class User extends Mission {
     this.mission.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        if (answer === '1') {
-          const computer = new Computer();
-          const newComputerNumbers = computer.getComputerNumbers();
-          this.computerNumbers = newComputerNumbers;
-          this.userInputStart();
-        }
-        if (answer === '2') {
-          this.mission.Console.close();
-        }
+        this.checkAnswer(answer);
       }
     );
+  }
+  checkAnswer(answer) {
+    if (answer === '1') {
+      const computer = new Computer();
+      const newComputerNumbers = computer.getComputerNumbers();
+      this.computerNumbers = newComputerNumbers;
+      this.userInputStart();
+    } else if (answer === '2') {
+      this.mission.Console.close();
+    }
   }
 }
 
