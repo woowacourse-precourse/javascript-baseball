@@ -4,6 +4,7 @@ class App {
   constructor() {
     this.computerNumber = [];
     this.playerNumber = [];
+    this.isCorrectAnswer = false;
   }
 
   play() {
@@ -20,6 +21,12 @@ class App {
   progressGame() {
     this.inputNumber();
     this.getHint();
+
+    if (this.isCorrectAnswer) {
+      this.gameOver();
+    } else {
+      this.progressGame();
+    }
   }
 
   inputNumber() {
@@ -70,6 +77,13 @@ class App {
     }
 
     MissionUtils.Console.print(hint.join(" "));
+    if (strike === 3) {
+      this.isCorrectAnswer = true;
+    }
+  }
+
+  gameOver() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 }
 
