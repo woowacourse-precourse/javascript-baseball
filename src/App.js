@@ -17,6 +17,10 @@ const ERRORMESSAGE = {
   quantity: "숫자 3개를 입력해야 합니다.",
 };
 
+const STRIKE = "스트라이크";
+const BALL = "볼";
+const NOTHING = "낫싱";
+
 class App {
   static computerNumber;
 
@@ -54,9 +58,10 @@ class App {
   checkValidity = (userNumber) => {
     if (userNumber.length !== 3) {
       throw ERRORMESSAGE.quantity;
-    } else if (this.isEveryNumberUnique(userNumber)) {
+    } else if (!this.isEveryNumberUnique(userNumber)) {
       throw ERRORMESSAGE.repeat;
     }
+    return true;
   };
 
   getStrikeAndBallNumber = (computer, user) => {
@@ -72,12 +77,12 @@ class App {
   convertNumberToMessage = (matchNum) => {
     const [strikeNum, ballNum] = matchNum;
 
-    let message = `${ballNum === 0 ? "" : `${ballNum}볼`}${
-      strikeNum === 0 ? "" : ` ${strikeNum}스트라이크`
+    let message = `${ballNum === 0 ? "" : ballNum + BALL}${
+      strikeNum === 0 ? "" : strikeNum + STRIKE
     }`;
 
     if (matchNum.every((item) => item === 0)) {
-      message = "낫싱";
+      message = NOTHING;
     }
 
     return message;
