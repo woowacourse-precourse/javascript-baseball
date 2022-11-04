@@ -1,11 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
-  play() {}
+  play() {
+    startText();
+    gameRepeat();
+  }
 }
 
 module.exports = App;
 
-const answerCheck = false;
+let answerCheck = false;
 
 function computerInput(){
   const computerInputArr=[];
@@ -80,10 +83,13 @@ const userInputError = (userInput) => {
 
 const userInputHandler = (computer) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInput) => {
-    userInputError(answer);
+    userInputError(userInput);
     MissionUtils.Console.print(gameRule(computer,userInput));
     if(!answerCheck) {
-      return userInputHandler();
+      return userInputHandler(computer);
+    }
+    if(answerCheck) {
+      return gameReset();
     }
   })
 }
@@ -96,13 +102,10 @@ const gameReset = () => {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
     if(userInput === '1') {
       answerCheck = false;
-      return gameRepeat()
+      return gameRepeat();
     }
     if(userInput === '2') {
       return MissionUtils.Console.close();
     }
   })
 }
-
-let a = new App();
-a.play()
