@@ -1,4 +1,5 @@
 const Mission = require('./Mission');
+const Compare = require('./Compare');
 
 class User extends Mission {
   constructor(computerNumbers) {
@@ -10,6 +11,7 @@ class User extends Mission {
     this.mission.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const userNumbers = this.makeNumberArray(answer);
       this.checkUserNumber(userNumbers);
+      this.compareNumbers();
     });
   }
   makeNumberArray(answer) {
@@ -28,6 +30,14 @@ class User extends Mission {
 
     if (userArr.length !== new Set(userArr).size)
       throw '중복되었습니다. 종료합니다.';
+  }
+  compareNumbers(userNumbers) {
+    const compare = new Compare(this.computerNumbers, userNumbers);
+    if (compare.getResult() === 'clear') {
+      // 재시작 or 종료 선택
+    } else {
+      this.userInputStart();
+    }
   }
 }
 
