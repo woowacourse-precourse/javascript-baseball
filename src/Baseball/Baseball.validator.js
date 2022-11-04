@@ -1,8 +1,11 @@
 class BaseBallValidator {
   checkOtherNumbers([...numbers]) {
-    let removedDuplicateNumbers = Array.from(new Set(...numbers));
-    return (
-      removedDuplicateNumbers.length === numbers.length && numbers.length === 3
-    );
+    const removedDuplicateNumbers = Array.from(new Set(...numbers));
+    if (
+      removedDuplicateNumbers.length === numbers.length &&
+      numbers.length === 3
+    ) {
+      throw "잘못된 입력값입니다.";
+    }
   }
 }
