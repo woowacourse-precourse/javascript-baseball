@@ -1,8 +1,9 @@
 const Mission = require('./Mission');
 
 class User extends Mission {
-  constructor() {
+  constructor(computerNumbers) {
     super();
+    this.computerNumbers = computerNumbers;
   }
 
   userInputStart() {
