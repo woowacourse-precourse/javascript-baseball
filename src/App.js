@@ -41,6 +41,19 @@ const compareUserAndComputer = (user, computer) => {
   return [strike, ball];
 }
 
+const printResult = (user, computer) => {
+  let [strike, ball] = compareUserAndComputer(user, computer);
+
+  if (strike === 0 && ball === 0) { MissionUtils.Console.print("낫싱")};
+  if (strike === 1 && ball === 0) { MissionUtils.Console.print("1스트라이크")};
+  if (strike === 2 && ball === 0) { MissionUtils.Console.print("2스트라이크")};
+  if (strike === 3 && ball === 0) { MissionUtils.Console.print("3스트라이크")};
+  if (strike === 0 && ball === 1) { MissionUtils.Console.print("1볼")};
+  if (strike === 0 && ball === 2) { MissionUtils.Console.print("2볼")};
+  if (strike === 1 && ball === 1) { MissionUtils.Console.print("1볼 1스트라이크")};
+  if (strike === 1 && ball === 2) { MissionUtils.Console.print("2볼 1스트라이크")};
+}
+
 
 
 class App {
