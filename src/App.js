@@ -38,4 +38,14 @@ async function inputNumber() {
   return [...number];
 }
 
+function isNumber(userNumber) {
+  for (let number of userNumber) {
+    if (!(1 <= number && number <= 9)) {
+      return false;
+    }
+  }
+
+  return ture;
+}
+
 module.exports = App;
