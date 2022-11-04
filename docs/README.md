@@ -22,3 +22,18 @@ n볼 n스트라이크
 - 2 입력) 3. 게임 종료로 이동
 
 ## 3. 게임 종료
+baseball game 종료
+
+# baseball game function list
+
+- 게임을 실행하면 동작될 함수(게임 시작 함수) - play
+
+- 게임을 계속해서 구동시킬 함수 -> runningGame
+  - 게임을 재시작할지 종료할지 입력값을 리턴해주는 함수 -> restartOrEnd
+  - 게임 진행에 핵심이 되는 프로세스 함수 -> gameProcess
+    - 랜덤으로 상대방 수를 생성할 함수 -> getRandomNumber
+    - "숫자를 입력해주세요 : " 메시지를 출력하고 수를 입력할 함수 -> inputNumber
+    - 결과를 구할 함수(상대방의 수와 내가 제시한 수를 비교) -> getResult
+      - 같은 숫자가 포함되어있는지 비교할 함수 -> compareNumbers
+        - 같은 숫자가 서로 같은 자릿수인지 비교할 함수 (서로 같은 자릿수이면 스트라이크 아니면 볼) -> checkIndex
+    - 비교 결과를 출력할 함수 -> printResult
