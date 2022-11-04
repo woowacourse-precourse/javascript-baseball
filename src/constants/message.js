@@ -1,8 +1,8 @@
-const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-const USER_NUMBER_INPUT_REQUEST_MESSAGE = "숫자를 입력해 주세요 : ";
+const GAME_START = "숫자 야구 게임을 시작합니다.";
+const USER_NUMBER_INPUT_REQUEST = "숫자를 입력해 주세요 : ";
 const GAME_MESSAGE = {
-  GAME_START_MESSAGE,
-  USER_NUMBER_INPUT_REQUEST_MESSAGE,
+  GAME_START,
+  USER_NUMBER_INPUT_REQUEST,
 };
 
 const INVALID_INPUT_TYPE = "입력에 숫자 이외의 문자가 있습니다. 게임 종료!";

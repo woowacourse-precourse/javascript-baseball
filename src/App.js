@@ -8,7 +8,7 @@ const {
 
 class App {
   constructor() {
-    Console.print(GAME_MESSAGE.GAME_START_MESSAGE);
+    Console.print(GAME_MESSAGE.GAME_START);
     this.computerInput = this.generateComputerInput();
   }
 
@@ -26,7 +26,7 @@ class App {
   }
   requestUserNumberInput() {
     return new Promise((resolve) => {
-      Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST_MESSAGE, resolve);
+      Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, resolve);
     });
   }
 
