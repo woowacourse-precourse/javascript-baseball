@@ -6,6 +6,12 @@ const RANDOMLIST = Object.freeze({
   COUNT: 3,
 });
 
+const BASEBALL = Object.freeze({
+  STRIKE: '스트라이크',
+  BALL: '볼',
+  NOTHING: '낫싱',
+});
+
 class App {
   #random;
 
@@ -40,6 +46,25 @@ class App {
 
   countBall(random, input) {
     return input.filter((_, index) => this.isBall(random, input, index)).length;
+  }
+
+  getStrikeToString(strikeCount) {
+    return strikeCount > 0 ? `${strikeCount}${BASEBALL.STRIKE}` : '';
+  }
+
+  getBallToString(ballCount) {
+    return ballCount > 0 ? `${ballCount}${BASEBALL.BALL}` : '';
+  }
+
+  getResultToString(random, input) {
+    const ball = this.countBall(random, input);
+    const strike = this.countStrike(random, input);
+
+    if (ball === 0 && strike === 0) return `${BASEBALL.NOTHING}`;
+
+    return [this.getBallToString(ball), this.getStrikeToString(strike)]
+      .join(' ')
+      .trim();
   }
 
   play() {}
