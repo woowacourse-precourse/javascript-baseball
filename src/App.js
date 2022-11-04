@@ -1,9 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
+const changeToArray = (number) => {
+    return number
+        .toString()
+        .split("")
+        .map((num) => parseInt(num), 10);
+};
 class App {
     play() {
         const createAnswer = () => {
-            return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+            return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
         };
 
         let isFirstStart = true;
@@ -14,6 +19,22 @@ class App {
         const isCorrect = (userInput, answer) => {
             return userInput === answer;
         };
+
+        const getBallCount = (userInput, answer) => {
+            const USER_INPUT = changeToArray(userInput);
+            const COMPUTER_ANSWER = changeToArray(answer);
+            const IS_TRUE = USER_INPUT.map((num, index) => num === COMPUTER_ANSWER[index]);
+
+            let ball = 0;
+            USER_INPUT.forEach((num, index) => {
+                if (!IS_TRUE[index] && COMPUTER_ANSWER.includes(num)) {
+                    ball += 1;
+                }
+            });
+            return `${ball}볼`;
+        };
+
+        const getStrikeCount = (userInput, answer) => {};
 
         const printEndMessage = () => {
             setTimeout(() => {
@@ -30,15 +51,12 @@ class App {
                     console.log("성공");
                     return printEndMessage();
                 }
+                MissionUtils.Console.print(getBallCount(input, ANSWER));
                 getUserInput();
             });
         };
 
-        const getBall = (userInput, answer) => {};
-
-        const getStrike = (userInput, answer) => {};
-
-        const ANSWER = createAnswer().join("");
+        const ANSWER = createAnswer();
         console.log(ANSWER);
         printStartMassage();
         getUserInput();
