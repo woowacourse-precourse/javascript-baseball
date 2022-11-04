@@ -23,12 +23,6 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const getReadlineSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "readLine");
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe("숫자 야구 게임", () => {
   test("1-9까지 서로 다른 임의의 수 3개 생성", () => {
     const app = new App();
@@ -144,7 +138,19 @@ describe("숫자 야구 게임", () => {
   });
   test("예외처리-문자 입력", () => {
     const randoms = [1, 3, 5];
-    const answers = ["_29"];
+    const answers = ["29a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("예외처리-특수문자 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["29!"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
