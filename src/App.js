@@ -1,4 +1,4 @@
-const { game } = require("./libs");
+const { game, statusValidation } = require("./libs");
 const { Console } = require("@woowacourse/mission-utils");
 
 class App {
@@ -7,15 +7,7 @@ class App {
     let isOver = false;
     while (!isOver) {
       for await (const { status, num } of game()) {
-        if (status === "pitch" && num.length !== 3) {
-          throw new Error();
-        }
-        if (status === "restart" && !(num === "1" || num === "2")) {
-          throw new Error();
-        }
-        if (status === "restart" && num === "2") {
-          isOver = true;
-        }
+        isOver = !statusValidation({ status, num });
       }
     }
     Console.close();
