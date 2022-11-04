@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  answer = 0;
+  answer = [];
   userAnswer = 0;
   isRight = false;
   err = false;
@@ -17,7 +17,8 @@ class App {
   }
 
   createAnswer = () => {
-    return [1, 2, 3].map(() => MissionUtils.Random.pickNumberInRange(1, 9));
+    const answer = [];
+    [1, 2, 3].map((e, idx) => MissionUtils.Random.pickNumberInRange(1, 9));
   };
 
   initializer = () => {
@@ -51,18 +52,26 @@ class App {
 
   judgeResult = () => {
     [...this.userAnswer].map((e, ballIdx) => {
-      this.countStrike(e, ballIdx);
-      this.countBall();
+      this.countScore(e, ballIdx);
     });
   };
 
-  countStrike = (userAnswerBall, ballIdx) => {
-    if ([...this.answer][ballIdx] === userAnswerBall) {
-      console.log("same");
+  countScore = (userAnswerBall, ballIdx) => {
+    if (this.answer[ballIdx] === userAnswerBall) {
+      this.countStrike();
+    } else if (this.answer.includes(userAnswerBall)) {
+      this.countBall();
     }
   };
 
-  countBall = () => {};
+  countStrike = () => {
+    this.strike += 1;
+  };
+
+  countBall = () => {
+    this.ball += 1;
+  };
+
   checkBallValidity = () => {
     if (isNaN(parseInt(this.userAnswer))) {
       this.err = true;
@@ -92,6 +101,7 @@ const endGame = () => {
 
 const app = new App();
 // app.play();
-app.createAnswer();
+app.countScore(1, 1);
 console.log(app.answer);
+console.log(app.strike, app.ball);
 module.exports = App;
