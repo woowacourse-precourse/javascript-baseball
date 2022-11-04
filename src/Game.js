@@ -14,14 +14,11 @@ const parseStringToNumberList = (stringNumber) => {
   return stringNumber.split("").map((number) => parseInt(number, 10));
 };
 
-const gameEnd = () => {
-  print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-};
-
 const gameStart = async () => {
+  let isThreeStrike = false;
+
   const computerNumbers = createComputerNumbers();
-  console.log(computerNumbers);
-  while (true) {
+  while (!isThreeStrike) {
     const inputNumbers = await readLine("숫자를 입력해주세요 : ");
     const numberList = parseStringToNumberList(inputNumbers);
     const score = calculateScore(computerNumbers, numberList);
@@ -29,13 +26,19 @@ const gameStart = async () => {
       print("낫싱");
     } else if (score.strike === 3) {
       print(`${score.strike}스트라이크`);
-      return;
-    } else if (score.ball === 3) {
+      isThreeStrike = true;
+    } else if (score.strike === 0) {
       print(`${score.ball}볼`);
+    } else if (score.ball === 0) {
+      print(`${score.strike}스트라이크`);
     } else {
       print(`${score.ball}볼 ${score.strike}스트라이크`);
     }
   }
+};
+
+const gameEnd = () => {
+  print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 };
 
 const askRestartOrQuit = async () => {
