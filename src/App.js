@@ -19,9 +19,10 @@ class App {
   }
 
   inputNumber(computerNumber) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      // TODO
-      // 사용자가 입력한 숫자가 올바른 숫자인지 검증한다.
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (enteredNumber) => {
+      if (!this.isValidNumber(enteredNumber)) {
+        throw new Error();
+      }
     });
   }
 
