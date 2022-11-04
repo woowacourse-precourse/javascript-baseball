@@ -10,6 +10,7 @@ const BASEBALL = Object.freeze({
   STRIKE: '스트라이크',
   BALL: '볼',
   NOTHING: '낫싱',
+  CLOSE: '게임 종료',
 });
 
 class App {
@@ -68,7 +69,7 @@ class App {
   }
 
   end() {
-    this.print('종료');
+    this.print(BASEBALL.CLOSE);
     Console.close();
   }
 
