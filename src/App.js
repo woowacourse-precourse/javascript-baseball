@@ -77,7 +77,7 @@ class App {
     }
   }
 
-  getBallAndStrikeNumber(computer, user) {
+  getResult(computer, user) {
     const ballNum = user
       .filter((item, ind) => item !== computer[ind])
       .filter((item) => computer.includes(item)).length;
@@ -87,7 +87,7 @@ class App {
     return { ballNum, strikeNum };
   }
 
-  convertNumberToMessage(matchNum) {
+  showMessage(matchNum) {
     const { ballNum, strikeNum } = matchNum;
 
     let message = `${ballNum === 0 ? "" : ballNum + BASEBALLTERM.BALL} ${
@@ -98,18 +98,7 @@ class App {
       message = BASEBALLTERM.NOTHING;
     }
 
-    return message.trim();
-  }
-
-  showMessage(message) {
-    MissionUtils.Console.print(message);
-
-    if (message === "3스트라이크") {
-      MissionUtils.Console.print(MESSAGE.GAMEEND);
-      this.askToPlayAgain();
-    } else {
-      this.compareNumbers();
-    }
+    MissionUtils.Console.print(message.trim());
   }
 
   askToPlayAgain() {
@@ -124,12 +113,15 @@ class App {
 
   compareNumbers() {
     const userNumber = this.getUserNumber();
-    const ballAndStrikeNumber = this.getBallAndStrikeNumber(
-      this.computerNumber,
-      userNumber
-    );
-    const result = this.convertNumberToMessage(ballAndStrikeNumber);
-    this.showMessage(result);
+    const ballAndStrikeNumber = this.getResult(this.computerNumber, userNumber);
+    this.showMessage(ballAndStrikeNumber);
+
+    if (ballAndStrikeNumber.strikeNum === 3) {
+      MissionUtils.Console.print(MESSAGE.GAMEEND);
+      this.askToPlayAgain();
+    } else {
+      this.compareNumbers();
+    }
   }
 
   playNewGame() {
