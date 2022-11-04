@@ -1,6 +1,7 @@
 ## 📜 구현 기능 목록
 
 GameData라는 Class를 생성해 게임 state, ball, strike 저장
+state가 true인 동안 사용자 숫자 입력 반복
 
 **1. 게임 시작알림 출력**
 
