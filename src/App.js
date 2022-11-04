@@ -14,11 +14,14 @@ const ment = {
 class App {
   play() {
     this.startPrint();
-
+    const anwser = this.createAnwser();
+    console.log(anwser);
     this.endGamePrint();
   }
   // - 랜덤 3자리 생성하는 기능
-  createAnwser() {}
+  createAnwser() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
 
   startPrint() {
     MissionUtils.Console.print(ment.start);
@@ -32,7 +35,7 @@ class App {
   // - 입력값과 컴퓨터 값을 비교하는 기능
   compareUserAnwser() {}
   // - 결과를 출력하는 기능
-  resultPrint() {}
+  resultPrint(ball = 0, strike = 0) {}
   // - 결과에 따라 다른 기능을 호출하는 기능
   //   1. 사용자 입력을 받는 기능으로 돌아가기
   //   2. 사용자 질문을 받는 기능
