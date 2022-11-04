@@ -22,7 +22,9 @@ function inputValidation(number) {
     threeDigitValidation(number);
     numberRangeValidation(number);
     reduplicationValidation(number);
-
+    const userNumber = String(number).split("").map(Number);
+    const computerNumber = pickRandomNumber();
+    strikeBallCount(userNumber, computerNumber);
 }
 
 function threeDigitValidation(number) {
@@ -49,5 +51,19 @@ function reduplicationValidation(number) {
 }
 
 function pickRandomNumber() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const randomThreeNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    return randomThreeNumber.map(Number);
+}
+
+function strikeBallCount(userNumber, computerNumber) {
+    let strikeCount = 0;
+    let ballCount = 0;
+    for (let index = 0; index < userNumber.length; index++) {
+        if (userNumber[index] === computerNumber[index]) {
+            strikeCount++;
+        } else if (computerNumber.includes(userNumber[index])) {
+            ballCount++;
+        }
+    }
+    return [strikeCount, ballCount];
 }
