@@ -18,8 +18,9 @@ class App {
 
   selectAnswerNumber() {
     const oneToNine = new Array(9).fill().map((_, idx) => idx + 1);
-    this.answer = this.shuffle(oneToNine)
-      .slice(0, 3)
+    this.answer = [1, 2, 3]
+      // this.shuffle(oneToNine)
+      //   .slice(0, 3)
       .reduce((acc, cur, idx) => {
         acc[cur] = idx;
         return acc;
@@ -75,6 +76,7 @@ class App {
   compareAndDisplay(guess) {
     let result = this.compareGuessAndAnswer(guess);
     this.displayResult(result);
+    // if ()
   }
 
   compareGuessAndAnswer(guess) {
@@ -84,11 +86,19 @@ class App {
     guess.split("").forEach((digit, index) => {
       if (this.answer[digit]) this.answer[digit] === index ? strike++ : ball++;
     });
-    return { ball: ball, stirke: strike };
+    return { ball: ball, strike: strike };
   }
 
-  displayResult({ ball, stirke }) {
-    console.log(ball, stirke);
+  displayResult({ ball, strike }) {
+    const displayed = [];
+    if (ball) displayed.push(`${ball}볼`);
+    if (strike) displayed.push(`${strike}스트라이크`);
+    if (!ball & !strike) displayed.push("낫싱");
+    console.log(displayed.join(" "));
+  }
+
+  isAnswer(strike) {
+    return strike == 3;
   }
 }
 
