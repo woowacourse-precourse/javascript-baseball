@@ -27,3 +27,16 @@ describe('App 클래스 - isStrike()', () => {
     expect(app.isStrike(random[2], input[2])).toBeFalsy();
   });
 });
+
+describe('App 클래스 - isBall()', () => {
+  test('주어진 입력값이 random값과 비교 볼인지 확인하는 함수', () => {
+    const random = [2, 1, 3];
+    const input = [1, 4, 5];
+
+    const app = new App();
+
+    expect(app.isBall(random, input[0])).toBeTruthy();
+    expect(app.isBall(random, input[1])).toBeFalsy();
+    expect(app.isBall(random, input[2])).toBeFalsy();
+  });
+});
