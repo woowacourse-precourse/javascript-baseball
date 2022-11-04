@@ -10,7 +10,7 @@ module.exports = App;
 
 let answerCheck = false;
 
-function computerInput(){
+const computerInput = () => {
   const computerInputArr=[];
   while (computerInputArr.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1,9);
@@ -109,3 +109,6 @@ const gameReset = () => {
     }
   })
 }
+
+const a= new App;
+a.play()
