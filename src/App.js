@@ -97,6 +97,8 @@ class App {
   setGameResult() {
     const strikeCnt = getStrikeCount(this.userNumbers, this.computerNumbers);
     const sameNumCnt = getSameNumCount(this.userNumbers, this.computerNumbers);
+    this.gameResult.strike = strikeCnt;
+    this.gameResult.ball = sameNumCnt - strikeCnt;
   }
 }
 
