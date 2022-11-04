@@ -39,8 +39,10 @@ class App {
 
   getUserNumber = () => {
     MissionUtils.Console.readLine(MESSAGE.askNumber, (inputNumber) => {
+      const userNumber = Array.from(String(inputNumber), Number);
+
       try {
-        const userNumber = this.checkValidity(inputNumber);
+        this.checkValidity(userNumber);
         return userNumber;
       } catch (e) {
         MissionUtils.Console.print(e);
@@ -50,13 +52,10 @@ class App {
   };
 
   checkValidity = (userNumber) => {
-    const numsArray = Array.from(String(userNumber), Number);
-    if (numsArray.length !== 3) {
+    if (userNumber.length !== 3) {
       throw ERRORMESSAGE.quantity;
-    } else if (this.isEveryNumberUnique(numsArray)) {
+    } else if (this.isEveryNumberUnique(userNumber)) {
       throw ERRORMESSAGE.repeat;
-    } else {
-      return numsArray;
     }
   };
 
@@ -86,6 +85,7 @@ class App {
 
   showMessage = (message) => {
     MissionUtils.Console.print(message);
+
     if (message === "3스트라이크") {
       MissionUtils.Console.print(MESSAGE.gameEnd);
       this.askToPlayAgain();
