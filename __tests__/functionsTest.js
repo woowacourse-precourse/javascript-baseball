@@ -19,22 +19,22 @@ const mockQuestions = (answers) => {
 
 describe("야구 게임 테스트", () => {
   test("시작 메세지 출력", () => {
-    const logSpy = jest.spyOn(console, 'log');
+    const logSpy = jest.spyOn(console, "log");
     logSpy.mockClear();
 
     const app = new App();
     app.startGame();
 
-    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+    expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
 
   test("컴퓨터 숫자 랜덤", () => {
     const number = [1, 2, 3];
-    
+
     mockRandoms(number);
 
     const app = new App();
-    const result = app.selectComputer(); 
+    const result = app.selectComputer();
 
     expect(result).toEqual("123");
   });
@@ -45,7 +45,7 @@ describe("야구 게임 테스트", () => {
     mockQuestions(userNumber);
 
     const app = new App();
-    const result = app.selectUser(); 
+    const result = app.selectUser();
 
     expect(result).toEqual("456");
   });
@@ -70,4 +70,3 @@ describe("야구 게임 테스트", () => {
     }).toThrow();
   });
 });
-

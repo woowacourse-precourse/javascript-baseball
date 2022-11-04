@@ -23,13 +23,13 @@ class App {
       }
     }
 
-    return computer.join('');
+    return computer.join("");
   }
 
   selectUser() {
     let user;
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (num) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
       user = num;
     });
 
@@ -42,7 +42,7 @@ class App {
 
   isError(number) {
     if (number.length !== 3 || isNum(number)) {
-      throw 'Parameter is not a number!';
+      throw "Parameter is not a number!";
     }
   }
 }
