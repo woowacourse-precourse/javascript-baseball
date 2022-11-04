@@ -45,4 +45,14 @@ describe("입력 유효성 검사", () => {
       app.play();
     }).toThrow();
   });
+
+  test("입력된 값이 숫자가 아닌 경우 예외 발생", () => {
+    const answers = ["가나다", "abc", "$#@"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      app.play();
+    }).toThrow();
+  });
 });
