@@ -66,6 +66,21 @@ class App {
       ? "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
       : "숫자를 입력해주세요 : ";
     Console.readLine(message, (userInput) => {
+      if (this.isRestart) {
+        if (userInput === "1") {
+          this.isRestart = false;
+          this.play();
+        } else if (userInput === "2") {
+          Console.print("게임을 종료합니다.");
+          Console.close();
+          return;
+        } else {
+          Console.print("잘못된 입력입니다.");
+          this.play();
+        }
+        return;
+      }
+
       this.checkUserInput(userInput);
       this.compareScore(userInput);
 
