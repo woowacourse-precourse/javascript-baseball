@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GameControlValidation = require("./GameControlValidation.js");
-const GameInputValidation = require("./GameInputValidation.js");
+const gameControlValidation = require("./validation/gameControlValidation.js");
+const gameInputValidation = require("./validation/gameInputValidation.js");
 
 const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 const RESTART = 1;
@@ -29,8 +29,7 @@ module.exports = class Game {
     MissionUtils.Console.readLine(
       "숫자를 입력해 주세요 : ",
       (userNumberInput) => {
-        const validationChecker = new GameInputValidation(userNumberInput);
-        validationChecker.validation();
+        gameInputValidation(userNumberInput);
         const gameResultString = this.getGameResultString(userNumberInput);
         MissionUtils.Console.print(gameResultString);
         if (gameResultString == GAME_WIN) {
@@ -81,10 +80,7 @@ module.exports = class Game {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
       (userControlInput) => {
-        const gameControlValidation = new GameControlValidation(
-          userControlInput
-        );
-        gameControlValidation.validation();
+        gameControlValidation(userControlInput);
         if (userControlInput == RESTART) this.gameInit();
         else MissionUtils.Console.close();
       }
