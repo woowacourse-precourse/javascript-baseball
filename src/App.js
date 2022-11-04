@@ -35,8 +35,7 @@ function startGame(computer){
     if (checkInput(userInput)){
       hint = getHint(userInputArray, computer);
     } else {
-      MissionUtils.Console.print('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
-      startGame(computer);
+      throw new Error('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
     }
 
     MissionUtils.Console.print(hint);
@@ -87,15 +86,21 @@ function endGame(){
       MissionUtils.Console.close();
       return;
     } else{
-      MissionUtils.Console.print('다시 입력해주세요 !');
-      endGame();
+      throw new Error('다시 입력해주세요 !');
     }
   });
 }
 
 
 function pickComputerNumber() {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
+  return computer;
 }
 
 
