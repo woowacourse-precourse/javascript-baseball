@@ -48,6 +48,7 @@ const game = new App(randomNumber);
 const gameNumber = game.number;
 
 console.log(`시스템 게임 번호: ${gameNumber}`);
+MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
 function userInputNumber() {
   MissionUtils.Console.readLine("3자리 숫자를 입력해주세요: ", (answer) => {
@@ -55,6 +56,19 @@ function userInputNumber() {
     console.log(`게임 결과: ${result}`);
     if (result !== "3스트라이크") {
       userInputNumber();
+    }
+    if (result === "3스트라이크") {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다!");
+      MissionUtils.Console.print(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+      );
+      MissionUtils.Console.readLine("게임 재개 여부: ", (gameResumeChoice) => {
+        if (Number(gameResumeChoice) === 1) {
+          userInputNumber();
+        } else if (Number(gameResumeChoice) === 2) {
+          return MissionUtils.Console.print("게임을 종료합니다.");
+        }
+      });
     }
   });
 }
