@@ -2,10 +2,14 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   generateGoalNumber() {
+    const threeNumbers = new Set();
     const MIN = 1;
     const MAX = 9;
-    const LENGTH = 3;
-    return Random.pickUniqueNumbersInRange(MIN, MAX, LENGTH);
+    while (threeNumbers.size < 3) {
+      const number = Random.pickNumberInRange(MIN, MAX);
+      threeNumbers.add(number);
+    }
+    return [...threeNumbers];
   }
 
   async receiveNumberFromUser() {
