@@ -1,24 +1,38 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {
+  play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.initRandomArray();
+    const randomArray = this.getRandomArray();
+    this.question(randomArray);
   }
 
-  play() {
+  getRandomArray() {
+    const randomArray = [];
+    while (randomArray.length < 3) {
+      const random = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!randomArray.includes(random)) {
+        randomArray.push(random);
+      }
+    }
+  
+    return randomArray;
+  }
+
+  question(randomArray) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.check(input);
-      this.initInputArray(input);
+      const inputArray = this.getInputArray(input);
+      const { ball, strike } = this.getBallStrike(randomArray, inputArray);
+      const resultString = this.getResultString(ball, strike);
 
-      const resultString = this.getResultString();
       MissionUtils.Console.print(resultString);
 
       if (resultString === '3스트라이크') {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        this.replay();
+        this.questionReplay();
       } else {
-        this.play();
+        this.question(randomArray);
       }
     });
   }
@@ -37,42 +51,21 @@ class App {
     if (set.size !== 3) throw new Error('중복된 숫자입니다');
   }
 
-  initRandomArray() {
-    const randomArray = [];
-    while (randomArray.length < 3) {
-      const random = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!randomArray.includes(random)) {
-        randomArray.push(random);
-      }
-    }
-  
-    this.randomArray = randomArray;
-  }
-
-  initInputArray(input) {
+  getInputArray(input) {
     const inputArray = [];
     input.split('').forEach((character) => {
       inputArray.push(parseInt(character));
     });
 
-    this.inputArray = inputArray;
+    return inputArray;
   }
 
-  getResultString() {
-    const { ball, strike } = this.getBallStrike();
-
-    if (ball === 0 && strike === 0) return '낫싱';
-    if (ball === 0) return `${strike}스트라이크`;
-    if (strike === 0) return `${ball}볼`;
-    return `${ball}볼 ${strike}스트라이크`;
-  }
-
-  getBallStrike() {
+  getBallStrike(randomArray, inputArray) {
     let ball = 0, strike = 0;
     for (let i = 0; i <= 2; i++) {
-      if (this.randomArray[i] === this.inputArray[i]) {
+      if (randomArray[i] === inputArray[i]) {
         strike += 1;
-      } else if (this.randomArray.includes(this.inputArray[i])) {
+      } else if (randomArray.includes(inputArray[i])) {
         ball += 1;
       }
     }
@@ -80,12 +73,19 @@ class App {
     return { ball, strike };
   }
 
-  replay() {
+  getResultString(ball, strike) {
+    if (ball === 0 && strike === 0) return '낫싱';
+    if (ball === 0) return `${strike}스트라이크`;
+    if (strike === 0) return `${ball}볼`;
+    return `${ball}볼 ${strike}스트라이크`;
+  }
+
+  questionReplay() {
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (input) => {
       if (input === '1') {
-        this.initRandomArray();
-        this.play();
+        const newRandomArray = this.getRandomArray();
+        this.question(newRandomArray);
       } else if (input === '2') {
         MissionUtils.Console.close();
       } else {
