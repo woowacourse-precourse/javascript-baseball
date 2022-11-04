@@ -94,6 +94,14 @@ describe('숫자 야구 게임', () => {
 		expect(app.computerNumber).toEqual('135');
 	});
 
+	test('getBallAndStrike 메소드로 볼과 스트라이크를 합한 개수 반환', () => {
+		const app = new App();
+		const result = app.getBallAndStrikeScore('135', '312');
+		expect(result).toEqual(2);
+		expect(result).not.toEqual('2');
+		expect(result).not.toEqual(3);
+	});
+
 	test('게임 종료 후 재시작시 알맞지않은 입력을 할 경우 에러를 반환', () => {
 		const randoms = [1, 3, 5, 5, 8, 9];
 		const answers = ['246', '135', '3'];
