@@ -12,9 +12,23 @@ class App {
 
   play() {
     this.pickRandomNumber();
-    for (let i = 0; i < 7; i += 1) {
+    while (!this.exit) {
       this.start();
       this.input();
+      console.log('게임 시작!', 'user', this.user, 'com', this.computer);
+
+      switch (this.code) {
+        case 'RESTART':
+          break;
+        case 'SUCCESS':
+          break;
+        case 'EXIT':
+          this.exit = true;
+          MissionUtils.Console.print('게임 종료.');
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -61,6 +75,12 @@ class App {
         ball += 1;
     });
     return ball;
+  }
+
+  compare() {
+    const strike = this.checkStrike();
+    const ball = this.checkBall();
+    return { strike, ball };
   }
 }
 
