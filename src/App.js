@@ -1,8 +1,23 @@
+import * as MissionUnits from "@woowacourse/mission-untils";
+
+const ment = {
+  start: "숫자 야구 게임을 시작합니다.",
+  end: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  reStart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  input: "숫자를 입력해주세요 : ",
+  ball: "볼",
+  strike: "스트라이크",
+  nothing: "낫싱",
+  exception: "잘못된 숫자를 입력하셨습니다. 게임 종료",
+};
+
 class App {
   //   - 게임 진행을 하는 기능 - play
   play() {}
   // - 랜덤 3자리 생성하는 기능
   createAnwser() {}
+  // - 시작 멘트 출력하는 기능
+  startPrint() {}
   // - 사용자 입력을 받는 기능
   inputUserAnwser() {}
   // - 입력 예외처리 하는 기능 ( 게임 진행 중 )
