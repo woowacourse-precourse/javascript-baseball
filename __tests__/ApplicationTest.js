@@ -110,4 +110,30 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("예외 테스트: 입력값에 숫자 이외의 값 포함된 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["안12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트: 입력값에 0이 포함된 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["102"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
