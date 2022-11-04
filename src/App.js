@@ -4,11 +4,20 @@
 // CHECK :: Random 값 추출 / Console 활용 -> MissionUtils 라이브러리
 
 const { getComputerNumber } = require("./computer");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
     const answer = getComputerNumber();
-    console.log("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    this.playOneRound();
+  }
+
+  playOneRound() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+      console.log(`${number}에 대한 결과`);
+    });
   }
 }
 
