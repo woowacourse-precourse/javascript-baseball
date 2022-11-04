@@ -10,6 +10,9 @@ class GameManager {
 
   async startGame() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    while (this.restart) {
+      await this.game.playGame();
+    }
   }
 
   async restartOrEnd() {
