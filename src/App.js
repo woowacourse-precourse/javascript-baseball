@@ -13,9 +13,7 @@ class App {
       if (this.checkInputValidation(userInput)) {
         const computedResult = this.compute(computerInput, userInput);
         MissionUtils.Console.print(computedResult);
-        const isFinished = this.isGameFinished(strikes);
-        MissionUtils.Console.print(result);
-        isFinished ? this.restartOrExitGame() : this.startGame(computerInput);
+        this.isGameFinished(computerInput, userInput);
       } else {
         throw ERROR.WRONG_INPUT;
       }
@@ -90,8 +88,14 @@ class App {
       }
     });
   }
-  isGameFinished(strike) {
-    return strike === 3;
+  isGameFinished(computerInput, userInput) {
+    const isThreeStrike =
+      this.countStrikes(computerInput, userInput) === 3 ? true : false;
+    if (isThreeStrike) {
+      this.restartOrExitGame();
+    } else {
+      this.startGame(computerInput);
+    }
   }
 }
 
