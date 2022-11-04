@@ -18,6 +18,10 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const getStrikeCount = (userNumbers, computerNumbers) => {
+  return [...userNumbers].filter((num, i) => num === computerNumbers[i]).length;
+};
+
 const haveSameNumber = (userNumbers) => {
   if (new Set([...userNumbers]).size < 3) {
     throw ERROR_MESSAGE.duplicateError;
@@ -83,6 +87,11 @@ class App {
   isValidInput() {
     isValidRangeNumber(this.userNumbers);
     haveSameNumber(this.userNumbers);
+    this.setGameResult();
+  }
+
+  setGameResult() {
+    const strikeCnt = getStrikeCount(this.userNumbers, this.computerNumbers);
   }
 }
 
