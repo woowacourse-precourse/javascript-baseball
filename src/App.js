@@ -22,7 +22,8 @@ class App {
       throw "is not a number from 1 to 9";
     }
 
-    to_array(user);
+    let ball_strike_result = [];
+    ball_strike_result = ball_and_strike(computer, to_array(user));
   }
 }
 
@@ -59,6 +60,29 @@ function user_inputnumber(){
 
 function to_array(user_array){
   return user_array.split("");
+}
+
+function ball_and_strike(computer, to_array){
+  let ball_strike_count = [];
+
+  for(let i of to_array) {
+    if(computer[0] == to_array[i]){
+      ball_strike_count = ball_strike_check(i);
+    }
+  }
+  return ball_strike_count;
+}
+
+function ball_strike_check(i){
+  ball = 0;
+  strike = 0;
+
+  if(i == 0) {
+    strike++;
+  } else {
+    ball++;
+  }
+  return [ball, strike];
 }
 
 module.exports = App;
