@@ -12,7 +12,6 @@ class App {
       while (computerNum.includes(num) === 0) {
         num = MissionUtils.Random.pickNumberInRange(1, 9);
       }
-      console.log(computerNum);
       computerNum.push(num);
     }
     return computerNum.join("");
@@ -26,19 +25,22 @@ class App {
     return userNum;
   }
   getResult(computer, user) {
-    let resultFlag = 0;
     const { strike, ball } = this.compareNums(computer, user);
     const resultSring = this.printResult(strike, ball);
+    return this.getResultFlag(resultSring);
+  }
+  getResultFlag(resultSring) {
+    let resultFlag = 0;
     if (resultSring === "3스트라이크") {
       this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-      // MissionUtils.Console.readLine(
-      //   "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      //   (answer) => {
-      //     resultFlag = answer;
-      //     this.print(`${answer}`);
-      //   }
-      // );
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        (answer) => {
+          this.print(`${answer}`);
+          resultFlag = parseInt(answer);
+        }
+      );
     }
     return resultFlag;
   }
@@ -70,12 +72,14 @@ class App {
   }
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
-    let gameFlag = 0; // 0: continue 1: restart, 2: end
-    while (gameFlag === 0 || gameFlag === 1) {
-      const computerNum = this.pickComputerNum();
+    let gameFlag = 1; // 0: continue 1: restart, 2: end
+    let computerNum;
+    let userNum;
+    while (gameFlag === 1) {
+      computerNum = this.pickComputerNum();
+      gameFlag = 0;
       while (gameFlag === 0) {
-        const userNum = this.getUserNum();
-        console.log(computerNum, userNum);
+        userNum = this.getUserNum();
         gameFlag = this.getResult(computerNum, userNum);
       }
     }
