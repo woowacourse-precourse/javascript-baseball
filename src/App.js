@@ -3,14 +3,16 @@ class App {
   print(message) {
     MissionUtils.Console.print(message);
   }
+  pickSingleDigit() {
+    return MissionUtils.Random.pickNumberInRange(1, 9);
+  }
   pickComputerNum() {
     let computerNum = [];
-    let num = MissionUtils.Random.pickNumberInRange(1, 9);
-    computerNum.push(num);
-    for (let digit = 1; digit < 3; digit++) {
-      num = MissionUtils.Random.pickNumberInRange(1, 9);
+    let num;
+    for (let digit = 0; digit < 3; digit++) {
+      num = this.pickSingleDigit();
       while (computerNum.includes(num) === 0) {
-        num = MissionUtils.Random.pickNumberInRange(1, 9);
+        num = this.pickSingleDigit();
       }
       computerNum.push(num);
     }
@@ -19,13 +21,13 @@ class App {
   getUserNum() {
     let userNum;
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-      let validatedAnswer = this.judgeUserNum(answer); // answer validation
+      let validatedAnswer = this.validateUserNum(answer); // answer validation
       userNum = validatedAnswer;
       this.print(`숫자를 입력해주세요 : ${validatedAnswer}`);
     });
     return userNum;
   }
-  judgeUserNum(answer) {
+  validateUserNum(answer) {
     let trimedanswer = this.deleteSpace(answer);
     if (trimedanswer.length === 0) {
       throw new Error("숫자를 입력해주세요");
@@ -53,25 +55,30 @@ class App {
   createResult(computer, user) {
     const { strike, ball } = this.compareNums(computer, user);
     const resultSring = this.printResult(strike, ball);
-    return this.getResultFlag(resultSring);
+    return this.updateGameFlag(resultSring);
   }
-  getResultFlag(resultSring) {
-    let resultFlag = 0;
+  updateGameFlag(resultSring) {
+    let gameFlag = 0;
     if (resultSring === "3스트라이크") {
       this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-        (answer) => {
-          let validatedAnswer = this.judgeRestartNum(answer); //answer validation
-          this.print(`${validatedAnswer}`);
-          resultFlag = parseInt(validatedAnswer);
-        }
-      );
+      gameFlag = this.getUserGameFlag();
     }
-    return resultFlag;
+    return gameFlag;
   }
-  judgeRestartNum(answer) {
+  getUserGameFlag() {
+    let gameFlag;
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        let validatedAnswer = this.validateRestartNum(answer); //answer validation
+        this.print(`${validatedAnswer}`);
+        gameFlag = parseInt(validatedAnswer);
+      }
+    );
+    return gameFlag;
+  }
+  validateRestartNum(answer) {
     let trimedanswer = this.deleteSpace(answer);
     if (!(trimedanswer === "1" || trimedanswer === "2")) {
       throw new Error("1 과 2 중 하나를 입력해주세요");
