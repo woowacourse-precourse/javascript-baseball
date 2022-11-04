@@ -59,4 +59,10 @@ const CheckError = (answer) => {
   }
 };
 
+const lessThanThree = () => {};
+
+const moreThanThree = () => {};
+
+const lengthIsThree = () => {};
+
 module.exports = CheckError;
