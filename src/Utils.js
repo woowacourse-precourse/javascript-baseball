@@ -12,6 +12,8 @@ const utils = {
     });
   },
   pickUniqueNumbersInRange(startInclusive, endInclusive, count) {
+    // TODO: pickUniqueNumbersInRange는 사용 불가능 함수
+    // -> pickNumberInRange 사용해야 함
     return MissionUtils.Random.pickUniqueNumbersInRange(
       startInclusive,
       endInclusive,

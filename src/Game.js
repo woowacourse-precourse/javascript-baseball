@@ -1,8 +1,8 @@
 const {
   print,
   readLine,
-  pickUniqueNumbersInRange,
   closeIO,
+  pickUniqueNumbersInRange,
 } = require("./Utils");
 const calculateScore = require("./CalculateScore");
 
@@ -16,6 +16,8 @@ const parseStringToNumberList = (stringNumber) => {
 
 const getInputNumberList = async () => {
   const inputStringNumber = await readLine("숫자를 입력해주세요 : ");
+  if (isNaN(inputStringNumber)) throw new Error("only number.");
+  if (inputStringNumber.length !== 3) throw new Error("only three characters.");
   return parseStringToNumberList(inputStringNumber);
 };
 
@@ -47,6 +49,8 @@ const gameStart = async () => {
   const computerNumberList = createComputerNumberList();
   let inputNumberList;
   let score;
+
+  // print(computerNumberList);
   do {
     inputNumberList = await getInputNumberList();
     score = calculateScore(computerNumberList, inputNumberList);
@@ -61,14 +65,23 @@ const gameEndAskRestartOrQuit = async () => {
   const answer = await readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
   );
+  if (answer !== "1" && answer !== "2") throw new Error("only 1 or 2.");
   return answer === "1" ? "restart" : "quit";
 };
 
 const playGame = async () => {
+  let isRestart = true;
+
   print("숫자 야구 게임을 시작합니다.");
-  do {
-    await gameStart();
-  } while ((await gameEndAskRestartOrQuit()) === "restart");
+  while (isRestart) {
+    try {
+      await gameStart();
+      if ((await gameEndAskRestartOrQuit()) === "quit") isRestart = false;
+    } catch (error) {
+      print(error);
+      break;
+    }
+  }
   closeIO();
 };
 
