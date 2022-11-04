@@ -18,6 +18,12 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const isValidRestartInputValue = (inputValue) => {
+  if (!['1', '2'].includes(inputValue)) {
+    throw ERROR_MESSAGE.invalidRestartValue;
+  }
+};
+
 const getGameResultMessage = ({ strike, ball }) => {
   if (strike === 0 && ball === 0) {
     return '낫싱';
@@ -137,7 +143,9 @@ class App {
     Console.readLine('', (ans) => this.isOneOrTwo(ans));
   }
 
-  isOneOrTwo(inputValue) {}
+  isOneOrTwo(inputValue) {
+    isValidRestartInputValue(inputValue);
+  }
 }
 
 const app = new App();
