@@ -65,6 +65,23 @@ class App {
     }, 0);
   }
 
+  printHint(numberOfBall, numberOfStrike) {
+    let hint = "";
+
+    if (numberOfBall) {
+      hint += `${numberOfBall}볼`;
+    }
+
+    if (numberOfStrike) {
+      if (hint) {
+        hint += " ";
+      }
+      hint += `${numberOfStrike}스트라이크`;
+    }
+
+    return hint ? hint : "낫싱";
+  }
+
   play() {}
 }
 
