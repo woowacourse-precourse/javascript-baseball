@@ -16,7 +16,6 @@ class App {
   play() {
     console.log('start game !');
     const MissionUtils = require("@woowacourse/mission-utils");
-
     console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]));
     MissionUtils.Console.readLine('닉네임을 입력해주세요.', (answer) => {
       console.log(`닉네임: ${answer}`);
