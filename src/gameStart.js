@@ -13,18 +13,6 @@ function generateRandomNumbers(gameData) {
   return gameData;
 }
 
-async function inputUserNumbers() {
-  const userNumbers = await new Promise((resolve) => {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      resolve(input);
-    });
-  });
-  if (!validationNumbers(userNumbers.split(''))) {
-    throw new Error('잘못된 값을 입력했습니다.');
-  }
-  return userNumbers.split('').map((userNumber) => parseInt(userNumber, 10));
-}
-
 function pitchAnalysis(gameData, userNumbers, computerNumbers) {
   const notStrikeNumbers = userNumbers.filter(
     (userNumber, index) => computerNumbers[index] !== userNumber
@@ -80,20 +68,21 @@ async function continueOrEndGame(gameData) {
   return gameData.setThreeStrike(false);
 }
 
-async function gameStart(gameData) {
-  const computerRandomNumbers = gameData.getComputerRandomNumbers();
-
-  while (gameData.getState()) {
-    const userRandomNumbers = await inputUserNumbers();
+function gameStart(gameData) {
+  Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
+    const computerRandomNumbers = gameData.getComputerRandomNumbers();
+    const userRandomNumbers = inputNumber
+      .split('')
+      .map((userNumber) => parseInt(userNumber, 10));
+    if (!validationNumbers(userRandomNumbers)) {
+      throw '잘못된 값을 입력했습니다.';
+    }
 
     pitchAnalysis(gameData, userRandomNumbers, computerRandomNumbers);
     printPitchResult(gameData);
 
-    if (gameData.getThreeStrike()) {
-      await continueOrEndGame(gameData);
-    }
-  }
-  Console.close();
+    Console.close();
+  });
 }
 
 exports.generateRandomNumbers = generateRandomNumbers;
