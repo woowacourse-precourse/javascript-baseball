@@ -61,10 +61,8 @@ const getStrikeCount = (computerNumbers, userNumbers) => {
 };
 
 const haveDuplicate = (userNumbers) => {
-  const duplicateNumber = userNumbers.filter((num) => {
-    return userNumbers.indexOf(num) !== userNumbers.lastIndexOf(num);
-  });
-  if (duplicateNumber.length > 0) {
+  const duplicateNumber = [...new Set(userNumbers)];
+  if (duplicateNumber.length < 3) {
     throwError(ERROR_MESSAGE.duplicateError);
     return true;
   }
@@ -121,7 +119,6 @@ class App {
   }
   offerComputerRandomNumbers() {
     this.computerNumbers = getRandomNumbers(3, 1, 9);
-    console.log(this.computerNumbers);
   }
   initGameResult() {
     this.gameResult = { ball: 0, strike: 0 };

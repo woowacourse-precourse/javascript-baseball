@@ -58,3 +58,5 @@
 - [✅] 프로그래밍 요수 사항에 따라 pickUniqueNumbersInRange -> Random.pickNumberInRange 사용
 - [✅] 승리 시 출력하는 gameOver, restart 메시지 합쳐서 출력
 - [✅] restart 시, 게임 시작 메시지를 출력하지 않도록 수정
+- Airbnb 자바스크립트 스타일 가이드 따르기
+- [✅] 중복 제거 set을 이용하여 구현하도록 변경
