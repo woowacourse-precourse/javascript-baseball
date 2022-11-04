@@ -5,7 +5,7 @@ const MESSAGE = Object.freeze({
   RESTART: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 });
 
-const RESULT = Object.freeze({
+const SCORE = Object.freeze({
   BALL: '볼',
   STRIKE: '스트라이크',
   NOTHING: '낫싱',
@@ -25,7 +25,7 @@ const GAME = Object.freeze({
 
 module.exports = {
   MESSAGE,
-  RESULT,
+  SCORE,
   RANDOM_NUMBER,
   GAME,
 };
