@@ -18,6 +18,12 @@ const ERROR_MESSAGE = {
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
 };
 
+const haveSameNumber = (userNumbers) => {
+  if (new Set([...userNumbers]).size < 3) {
+    throw ERROR_MESSAGE.duplicateError;
+  }
+};
+
 const isValidRangeNumber = (userNumbers) => {
   const regex = /^[1-9]{3}$/;
   if (!regex.test(userNumbers)) {
@@ -76,6 +82,7 @@ class App {
 
   isValidInput() {
     isValidRangeNumber(this.userNumbers);
+    haveSameNumber(this.userNumbers);
   }
 }
 
