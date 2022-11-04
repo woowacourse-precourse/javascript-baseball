@@ -1,5 +1,10 @@
+const System = require("./System");
 class App {
-  play() {}
+  play() {
+    System.prototype.getStarted();
+  }
 }
+
+App.prototype.play();
 
 module.exports = App;
