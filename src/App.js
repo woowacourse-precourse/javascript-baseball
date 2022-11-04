@@ -48,15 +48,15 @@ class App {
     });
   }
 
-  compare(nb) {
+  compare(userInput) {
     const answerArr = this.Answer;
     let ball = 0;
     let strike = 0;
     let resultText = "";
-    console.log(`받은값${nb}`);
+    console.log(`받은값${userInput}`);
     console.log(`정답${answerArr}`);
 
-    nb.map((num, i) => {
+    userInput.map((num, i) => {
       if (answerArr.includes(num)) {
         if (num === answerArr[i]) {
           strike += 1;
