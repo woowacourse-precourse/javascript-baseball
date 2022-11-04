@@ -1,18 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const BaseballOutput = require("./Baseball.output");
-const BaseballValidator = require("./BaseBall.validator");
 
 class BaseballComputer {
-  baseballNumbers = [];
-  baseballOutput = new BaseballOutput();
-  baseballValidator = new BaseballValidator();
-
-  constructor() {
+  constructor(baseballOutput, baseballValidator) {
     this.baseballNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
       1,
       9,
       3
     );
+    this.baseBallOutput = baseballOutput;
+    this.baseballValidator = baseballValidator;
   }
   getUserNumbers() {
     const userNumbers = this.baseballOutput.getNumber();
