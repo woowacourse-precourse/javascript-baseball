@@ -9,13 +9,7 @@ class App {
 }
 
 const makeGivenNumber = () => {
-  const givenNumber = [];
-  while (givenNumber.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!givenNumber.includes(number)) {
-      givenNumber.push(number);
-    }
-  }
+  const givenNumber = MissionUtils.pickUniqueNumbersInRange(1, 9, 3);
   return givenNumber;
 };
 
