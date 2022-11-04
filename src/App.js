@@ -1,4 +1,4 @@
-const BaseballGame = require('./baseballGame');
+const BaseballGame = require('./BaseballGame');
 class App {
   constructor() {
     this.baseballGame = new BaseballGame();
