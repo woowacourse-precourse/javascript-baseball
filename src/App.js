@@ -1,6 +1,7 @@
 class App {
   constructor() {
     this.missionRandom = require("@woowacourse/mission-utils").Random;
+    this.missionConsole = require("@woowacourse/mission-utils").Console;
   }
   play() {
     return this.makeRandomNumbers();
@@ -15,6 +16,12 @@ class App {
       }
     }
     return computerInputNumbersArray.join("");
+  }
+
+  getUserInput() {
+    this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
+      this.missionConsole.print(userInputNumbers);
+    });
   }
 }
 const app = new App();
