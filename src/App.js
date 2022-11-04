@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   #computer = [];
+  player = [];
 
   constructor() {
     while (this.#computer.length < 3) {
@@ -10,6 +11,13 @@ class App {
         this.#computer.push(number);
       }
     }
+  }
+
+  getNumberFromPlayer() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+      this.player = number;
+      MissionUtils.Console.print(this.player);
+    });
   }
 
   play() {}
