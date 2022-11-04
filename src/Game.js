@@ -30,8 +30,10 @@ module.exports = class Game {
     const userNumberInput = await input("숫자를 입력해 주세요 : ");
     const validationChecker = new GameInputValidation(userNumberInput);
     validationChecker.validation();
-    print(this.getGameResultString(userNumberInput));
-    if (this.getGameResultString(userNumberInput) == GAME_WIN) {
+    const gameResultString = this.getGameResultString(userNumberInput);
+
+    print(gameResultString);
+    if (gameResultString == GAME_WIN) {
       this.handleGame();
     } else this.getUserNumberInput();
   }
