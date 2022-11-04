@@ -1,5 +1,9 @@
+const { Random } = require("@woowacourse/mission-utils");
+
 class App {
-  generateGoalNumber() {}
+  generateGoalNumber(minNumber = 1, maxNumber = 9, numberLength = 3) {
+    return Random.pickUniqueNumbersInRange(minNumber, maxNumber, numberLength);
+  }
 
   receiveNumberFromUser() {
     // 서로 다른 3자리의 수 입력 받고 반환
