@@ -69,4 +69,14 @@ describe("야구 게임 테스트", () => {
       app.countScore(computer, user);
     }).toThrow();
   });
+
+  test("점수 카운트하기", () => {
+    const computer = "589";
+    const user = "597";
+
+    const app = new App();
+    const result = app.calculateScore(computer, user);
+
+    expect(result).toEqual([1, 1]);
+  });
 });
