@@ -8,13 +8,17 @@ class App {
       strike: 0,
       ball: 0,
     };
+    this.result = '';
   }
 
   play() {
     this.computerNumbers = this.generateComputerNumbers();
     Console.print(message.START);
     Console.readLine(message.INPUT, (number) => {
-      Console.print(`입력 숫자 : ${number}`);
+      this.gameCount = this.getStrikeBallCount(number);
+      this.result = this.getResult(this.gameCount);
+      Console.print(this.result);
+
       Console.close();
     });
   }
@@ -48,6 +52,25 @@ class App {
     });
 
     return strikeBallCount;
+  }
+
+  getResult({ strike, ball }) {
+    const ballMessage = `${ball}${message.BALL}`;
+    const strikeMessage = `${strike}${message.STRIKE}`;
+
+    if (ball === 0 && strike === 0) {
+      return message.NOTHING;
+    }
+
+    if (ball > 0 && strike === 0) {
+      return ballMessage;
+    }
+
+    if (ball === 0 && strike > 0) {
+      return strikeMessage;
+    }
+
+    return `${ballMessage} ${strikeMessage}`;
   }
 }
 
