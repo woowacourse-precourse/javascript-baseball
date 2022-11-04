@@ -145,7 +145,16 @@ class App {
 
   isOneOrTwo(inputValue) {
     isValidRestartInputValue(inputValue);
+    inputValue === GAME_VALUE.restart ? this.gameRestart() : this.gameExit();
   }
+
+  gameRestart() {
+    this.offerComputerRandomNumbers();
+    this.initGameResult();
+    this.gameStart();
+  }
+
+  gameExit() {}
 }
 
 const app = new App();
