@@ -24,6 +24,23 @@ const getUserInput = () => {
   return userAnswer;
 };
 
+const compareUserAndComputer = (user, computer) => {
+  user = [...user];
+  computer = [...computer];
+  let i = 0;
+  let strike = 0;
+  let ball = 0;
+  user.forEach(element => {
+    if (computer.includes(element)){
+      if (element === computer[i]) { strike += 1 }
+      else { ball += 1}
+    }
+    i += 1;
+  });
+
+  return [strike, ball];
+}
+
 
 
 class App {
