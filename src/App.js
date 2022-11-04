@@ -45,6 +45,23 @@ class App {
     else if (answer === '2') return VALIDATION_CODE[2];
     else return VALIDATION_CODE[0];
   }
+
+  checkStrike() {
+    let strike = 0;
+    this.user.forEach((number, i) => {
+      if (number === this.computer[i]) strike += 1;
+    });
+    return strike;
+  }
+
+  checkBall() {
+    let ball = 0;
+    this.user.forEach((number, i) => {
+      if (this.computer.includes(number) && this.computer[i] !== number)
+        ball += 1;
+    });
+    return ball;
+  }
 }
 
 module.exports = App;
