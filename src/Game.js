@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameControlValidation = require("./GameControlValidation.js");
 const GameInputValidation = require("./GameInputValidation.js");
-const print = require("./utils/print.js");
-const input = require("./utils/input.js");
 
 const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 const RESTART = 1;
@@ -14,7 +12,7 @@ module.exports = class Game {
 
   gameInit() {
     this.computerNumbers = [...this.getRandomNumbers()].join("");
-    print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getUserNumberInput();
   }
 
@@ -27,19 +25,19 @@ module.exports = class Game {
     return computerNumbers;
   }
 
-  async getUserNumberInput() {
-    const userNumberInput = await input("숫자를 입력해 주세요 : ");
-    const validationChecker = new GameInputValidation(userNumberInput);
-    if (validationChecker.validation()) {
-      MissionUtils.Console.close();
-      return;
-    }
-    const gameResultString = this.getGameResultString(userNumberInput);
-
-    print(gameResultString);
-    if (gameResultString == GAME_WIN) {
-      this.handleGame();
-    } else this.getUserNumberInput();
+  getUserNumberInput() {
+    MissionUtils.Console.readLine(
+      "숫자를 입력해 주세요 : ",
+      (userNumberInput) => {
+        const validationChecker = new GameInputValidation(userNumberInput);
+        validationChecker.validation();
+        const gameResultString = this.getGameResultString(userNumberInput);
+        MissionUtils.Console.print(gameResultString);
+        if (gameResultString == GAME_WIN) {
+          this.handleGame();
+        } else this.getUserNumberInput();
+      }
+    );
   }
 
   getGameResultString(inputNumber) {
@@ -79,16 +77,17 @@ module.exports = class Game {
     return count;
   }
 
-  async handleGame() {
-    const userControlInput = await input(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
+  handleGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+      (userControlInput) => {
+        const gameControlValidation = new GameControlValidation(
+          userControlInput
+        );
+        gameControlValidation.validation();
+        if (userControlInput == RESTART) this.gameInit();
+        else MissionUtils.Console.close();
+      }
     );
-    const gameControlValidation = new GameControlValidation(userControlInput);
-    if (gameControlValidation.validation()) {
-      MissionUtils.Console.close();
-      return;
-    }
-    if (userControlInput == RESTART) this.gameInit();
-    else MissionUtils.Console.close();
   }
 };

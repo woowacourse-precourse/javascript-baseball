@@ -1,6 +1,3 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
-const print = require("./utils/print");
-
 module.exports = class GameControlValidation {
   constructor(controlInput) {
     this.controlInput = controlInput;
@@ -9,9 +6,8 @@ module.exports = class GameControlValidation {
   validation() {
     try {
       this.checkOneOrTwo();
-    } catch (e) {
-      print(e);
-      return 1;
+    } catch (error) {
+      throw error;
     }
   }
 

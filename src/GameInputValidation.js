@@ -1,5 +1,3 @@
-const print = require("./utils/print");
-
 module.exports = class GameInputValidation {
   constructor(gameInput) {
     this.gameInput = gameInput;
@@ -10,9 +8,8 @@ module.exports = class GameInputValidation {
       this.checkLength();
       this.checkNumber();
       this.checkDuplicate();
-    } catch (e) {
-      print(e);
-      return 1;
+    } catch (error) {
+      throw error;
     }
     return 0;
   }
