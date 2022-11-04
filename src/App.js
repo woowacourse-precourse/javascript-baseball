@@ -90,9 +90,12 @@ function newGame() {
     if (input == 2) {
       return MissionUtils.Console.close();
     }
-    else {
+    else if (input == 1) {
       const computerRandomNumber = getComputerNumber();
       getUserInput(computerRandomNumber);
+    }
+    else {
+      throw new Error('올바르지 않은 입력입니다.');
     }
   })
 }
