@@ -70,6 +70,8 @@ class BaseballGame {
         this.inputRestartOrEnd
       );
     }
+
+    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
   };
 }
 
