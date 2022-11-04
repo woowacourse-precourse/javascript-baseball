@@ -1,6 +1,6 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   getRandomNumber() {
-    const MissionUtils = require('@woowacourse/mission-utils');
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -10,6 +10,11 @@ class App {
     }
     return computer;
   }
+
+  postStartMessage() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  }
+
   play() {}
 }
 
