@@ -43,12 +43,31 @@ class BaseballGame {
     this.playGame(strike === 3);
   };
 
-  playGame = () => {
+  inputRestartOrEnd = (selectedNumber) => {
+    selectedNumber = Number(selectedNumber);
+
+    if (selectedNumber === 1) {
+      this.isFirstGame = false;
+      new BaseballGame().playGame(false);
+    } else if (selectedNumber === 2) {
+      Console.print("게임 종료");
+      Console.close();
+    } else throw new Error("1 또는 2만 입력해주세요.");
+  };
+
+  playGame = (isThreeStrike) => {
     if (this.isFirstGame) {
       this.isFirstGame = false;
       Console.readLine(
         "숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ",
         this.playTurn
+      );
+    }
+
+    if (isThreeStrike) {
+      Console.readLine(
+        "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        this.inputRestartOrEnd
       );
     }
   };
