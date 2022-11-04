@@ -1,4 +1,4 @@
-const a = {
+const constant = {
   ANSWER: {
     LENGTH: 3,
     MIN: 1,
@@ -28,4 +28,4 @@ const a = {
   },
 };
 
-module.exports = a;
+module.exports = constant;
