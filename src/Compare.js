@@ -21,6 +21,34 @@ class Compare extends Mission {
       return acc;
     }, 0);
   }
+
+  returnConsole(strike, ball) {
+    if (strike === 3) {
+      this.mission.Console.print(
+        '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+      );
+      return 'clear';
+    }
+    if (!strike && !ball) {
+      this.mission.Console.print('낫싱');
+      return 'nothing';
+    }
+    if (strike && !ball) {
+      this.mission.Console.print(`${strike}스트라이크`);
+      return 'onlyStrike';
+    }
+
+    if (!strike && ball) {
+      this.mission.Console.print(`${ball}볼`);
+      return 'onlyBall';
+    }
+    this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
+    return 'strikeBall';
+  }
+
+  getResult() {
+    return this.returnConsole(this.getStrikeCount(), this.getBallCount());
+  }
 }
 
 module.exports = Compare;
