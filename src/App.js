@@ -1,24 +1,92 @@
 import * as MissionUtils from "@woowacourse/mission-utils"
-// console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]));
 
-// 스트라이크: 같은 자리 + 같은 수
-// 볼: 다른 자리 + 같은 수
-// 낫싱: 같은 수가 없음
-// 3개의 숫자를 모두 맞히면 게임 종료
-// 게임을 종료한 후 게임을 다시 시작하거나 완전히 종료할 수 있다. (재시작/종료를 구분하는 1과 2중 하나의 수)
-// 사용자가 잘못된 값을 입력하면 throw문을 이용해 예외 발생시킨 후 앱은 종료되어야 한다.
+function announcement (status) {
+  switch (status) {
+    case 'start':
+      Console.print('숫자 야구 게임을 시작합니다.')
+      break
+    case 'requestAndAnswer':
+      // 숫자 3개 인풋을 받아서 결과 출력
+      Console.readLine('숫자를 입력해주세요', (answer) => {
+        console.log(`닉네임: ${answer}`);
+      })
+      break
+    case 'success':
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+      break
+    case 'requestRestart':
+      Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.')
+      break
+  }
+}
 
-// 입력: 서로다른 3개의 수
-// 출력: 스트라이크, 볼, 낫싱 
-//      3개를 다 맞힐 경우 : 3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료
-// 시작: 숫자 야구 게임을 시작합니다.
+function initCount () {
+  return [0, 0]
+}
 
 function getRandomNumber () {
-  let randomNumber = Random.pickUniqueNumbersInRange(1, 9, 3)
+  let randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
   return randomNumber.join('')
 }
 
 // 사용자에게 number 입력 받아 실행하는 함수
+function game (number) {
+  if (!isNaN(number)) {
+    throw new Error('숫자를 입력하세요.')
+  }
+
+  const correctNum = getRandomNumber() // 랜덤 숫자 부분을 class constructor로 빼야할 것 같음
+  const num = String(number)
+  
+  let [strike, ball] = initCount()
+
+  for (let i=0; i<3; i++) {
+      if(correctNum.includes(num[i])) {
+          ball += 1
+      }
+      if(num[i] === correctNum[i]) {
+          strike += 1
+          ball -= 1
+      }
+  }
+
+  if (strike === 3) {
+    MissionUtils.Console.print(`${strike}스트라이크
+    3개의 숫자를 모두 맞히셨습니다! 게임 종료
+    게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`)
+
+    [strike, ball] = initCount()
+    return 
+  }
+
+  if (!strike+ball) {
+    MissionUtils.Console.print("낫싱")
+
+    [strike, ball] = initCount()
+    return
+  }
+
+  if (strike > 0 && !ball) {
+    MissionUtils.Console.print(`${strike}스트라이크`)
+
+    [strike, ball] = initCount()
+    return 
+  }
+
+  if (!strike && ball > 0) {
+    MissionUtils.Console.print(`${ball}볼`)
+
+    [strike, ball] = initCount()
+    return 
+  }
+
+  if (strike > 0 && ball > 0) {
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
+
+    [strike, ball] = initCount()
+    return 
+  }
+}
 class App {
   play() {}
 }
