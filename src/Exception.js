@@ -11,27 +11,24 @@ class Exception {
   }
 
   occurError() {
-    throw new Error("OVERRIDING ERROR");
+    throw new Error('OVERRIDING ERROR');
   }
 }
 
 class BaseBallException {
   #input;
-  #errorMessage = "임의의 다른 세 가지 숫자를 해야합니다!!";
+  #errorMessage = '임의의 다른 세 가지 숫자를 해야합니다!!';
 
   constructor(input) {
     this.#input = input;
   }
 
   #isNumber() {
-    return (
-      !!this.#input.match(exception.REGEX) &&
-      this.#input.match(exception.REGEX).length === this.#input.length
-    );
+    return !!this.#input.match(exception.REGEX) && this.#input.match(exception.REGEX).length === this.#input.length;
   }
 
   #is3DifferNumber() {
-    return [...new Set(this.#input.split(""))].length === exception.LENGTH;
+    return [...new Set(this.#input.split(''))].length === exception.LENGTH;
   }
 
   occurError() {
@@ -43,7 +40,7 @@ class BaseBallException {
 
 class RestartException {
   #input;
-  #errorMessage = "재시작(1), 종료(2)를 눌러야 됩니다!!";
+  #errorMessage = '재시작(1), 종료(2)를 눌러야 됩니다!!';
 
   constructor(input) {
     this.#input = input;
