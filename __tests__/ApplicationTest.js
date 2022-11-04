@@ -47,9 +47,61 @@ describe('숫자 야구 게임', () => {
     });
   });
 
-  test('예외 테스트', () => {
+  test('세 자리 숫자가 아닌 경우 예외를 throw해야 한다.', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('숫자가 아닌 문자가 포함된 경우 예외를 throw해야 한다.', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['a12'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('중복된 숫자가 포함된 경우 throw해야 한다.', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['122'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('숫자가 아닌 문자인 경우 예외를 throw해야 한다.', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['abc'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('게임 종료 후 입력된 값이 1 또는 2가 아닌 경우 예외를 throw해야 한다.', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['246', '135', '12'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
