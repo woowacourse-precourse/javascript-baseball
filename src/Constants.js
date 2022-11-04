@@ -1,5 +1,5 @@
 const ERROR = Object.freeze({
-  INPUT_FORMAT: '숫자를 입력해주세요',
+  INPUT_FORMAT: '각 자릿수가 1-9인 숫자를 입력해주세요',
   INPUT_LENGTH : '숫자는 서로 다른 세 자릿수를 입력해주세요',
   NEWGAME_RESTART: '1 혹은 2 만 입력해주세요',
   INPUT_DUPLICATE : '각 자릿수는 서로 중복되지 않도록 입력해주세요'

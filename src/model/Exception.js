@@ -3,7 +3,7 @@ const constant = require('../Constants');
 class Exception{
 
   inputError(input){
-    if (!/[0-9]+/g.test(input)){
+    if (!/[0-9]+/g.test(input) || String(input).includes('0')){
       return constant.ERROR.INPUT_FORMAT;
     }
     if (String(input).length !== 3){
