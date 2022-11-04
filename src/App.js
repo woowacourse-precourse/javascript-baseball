@@ -91,7 +91,7 @@ class App {
   }
 
   selectReplayOrClose(selectedNum) {
-    if (selectedNum == 1) return this.play();
+    if (selectedNum == 1) return this.setAnswerAndreceiveInput();
     if (selectedNum == 2) return this.close();
     throw "1 또는 2만 입력해주세요.";
   }
@@ -110,11 +110,14 @@ class App {
     );
   }
 
+  setAnswerAndreceiveInput() {
+    this.setAnswer();
+    this.receiveInputFromConsole();
+  }
+
   play() {
     this.print("숫자 야구 게임을 시작합니다.");
-    this.setAnswer();
-    // this.print(this.answer);
-    this.receiveInputFromConsole();
+    this.setAnswerAndreceiveInput();
   }
 }
 
