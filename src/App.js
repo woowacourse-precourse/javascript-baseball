@@ -33,6 +33,9 @@ class App {
       this.game.countStrike(this.computer.getter(), this.user.getter());
       this.game.printResultMessage();
       this.isGameRun = this.game.checkGameRun();
+      if (!this.isGameRun) {
+        this.isGameRun = this.game.checkRestart();
+      }
     }
   }
 }
