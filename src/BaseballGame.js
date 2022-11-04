@@ -15,6 +15,17 @@ class BaseballGame {
 
   end() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.restart();
+  }
+
+  restart() {
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (choice) => {
+      if (choice == 1) {
+        this.start();
+        return;
+      }
+      Console.close();
+    });
   }
 
   getUserGuess() {
