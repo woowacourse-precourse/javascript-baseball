@@ -1,8 +1,8 @@
-const App = require("../src/App");
+const App = require("../src/App.js");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
+  MissionUtils.Console.readLine = jest.fn(); 
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((question, callback) => {
       callback(input);
@@ -57,6 +57,6 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(new Error(`잘못된 형식 입력`));
   });
 });
