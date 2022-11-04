@@ -7,6 +7,8 @@ class App {
     this.answer = this.genAnswer();
     this.RESTART = "1";
     this.EXIT = "2";
+    this.BALL = 0;
+    this.STRIKE = 0;
   }
 
   play() {
@@ -24,8 +26,8 @@ class App {
     this.checkValid(tryNum);
     this.checkAnswer(tryNum, this.answer);
     const tryNumArr = tryNum.split("");
-    tryNumArr.forEach((tryNumEle) =>
-      this.comparetryNumAndAnswer(Number(tryNumEle), this.answer)
+    tryNumArr.forEach((tryNumEle, tryNumEleIdx) =>
+      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
     );
   }
 
@@ -79,8 +81,18 @@ class App {
     );
   }
 
-  comparetryNumAndAnswer(tryNumEle, answer) {
+  comparetryNumAndAnswer(tryNumEle, tryNumEleIdx, answer) {
     const IS_INCLUDE = answer.includes(tryNumEle);
+    if (IS_INCLUDE) {
+      const answerIdx = answer.indexOf(tryNumEle);
+      const IS_SAME_POSITION = answerIdx === tryNumEleIdx;
+      if (IS_SAME_POSITION) {
+        this.strike += 1;
+      }
+      if (!IS_SAME_POSITION) {
+        this.ball += 1;
+      }
+    }
   }
 }
 
