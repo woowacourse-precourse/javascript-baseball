@@ -8,8 +8,8 @@ class App {
       const computerNumbers = computerNumbersMaking();
       oneGame(computerNumbers);
       gameAgain = askGameAgain();
-      console.log(gameAgain);
     }
+    gameCompleteEndText();
   }
 }
 
@@ -93,5 +93,9 @@ const askGameAgain = () => {
   );
   return input;
 };
+
+const gameCompleteEndText = () => {
+  MissionUtils.Console.print("게임 종료.");
+}
 
 module.exports = App;
