@@ -7,8 +7,8 @@ const GAME_VALUE = {
 const GAME_MESSAGE = {
   startNotification: '숫자 야구 게임을 시작합니다.',
   requestInput: '숫자를 입력해주세요 : ',
-  gameOver: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ',
+  gameOver:
+    '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요',
   exit: '게임을 종료합니다.',
 };
 
@@ -84,7 +84,7 @@ const isValidNumber = (userInputValue) => {
 
 const stringToNumbers = (string) => [...string].map((char) => +char);
 
-const offerUserInput = async (message) => {
+const offerUserInput = async (message = '') => {
   return new Promise((resolve) => {
     Console.readLine(message, (num) => resolve(num));
   });
@@ -170,7 +170,7 @@ class App {
     this.getUserInputNumbers();
   }
   async doesUserWantRestart() {
-    const inputValue = await offerUserInput(GAME_MESSAGE.restart);
+    const inputValue = await offerUserInput();
     isOneOrTwo(inputValue);
     inputValue === GAME_VALUE.restart ? this.restart() : this.gameExit();
   }

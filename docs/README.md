@@ -56,3 +56,4 @@
 - [✅] isValid 메소드 isValidRangeNumber, haveSameNumber 쪼개기
 - [✅] throw 후 게임을 종료 시키는 로직 작성
 - [✅] 프로그래밍 요수 사항에 따라 pickUniqueNumbersInRange -> Random.pickNumberInRange 사용
+- [✅] 승리 시 출력하는 gameOver, restart 메시지 합쳐서 출력
