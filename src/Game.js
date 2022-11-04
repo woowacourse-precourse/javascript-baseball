@@ -1,4 +1,5 @@
 import MissionUtils from '@woowacourse/mission-utils';
+import Computer from './Computer.js';
 
 class Game {
   constructor() {
@@ -53,7 +54,7 @@ class Game {
     }
 
     if (this.isThreeStrike()) {
-      this.isRun = false;
+      this.isRun = this.toggleIsRun();
       this.msg = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     }
 
@@ -72,16 +73,33 @@ class Game {
     this.printMessage();
   }
 
+  toggleIsRun() {
+    return !this.isRun;
+  }
+
   checkGameRun() {
     return this.isRun;
   }
 
-  printRestart() {
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+  checkRestart() {
+    return new Promise(resolve => {
+      MissionUtils.Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+        num => {
+          this.restartNum = parseInt(num, 10);
+          resolve();
+        }
+      );
+    });
   }
 
-  checkRestart() {
-    this.printRestart();
+  checkRestartNum() {
+    if (this.restartNum === 1) {
+      this.isRun = this.toggleIsRun();
+    } else if (this.restartNum !== 2) {
+    }
+
+    return this.isRun;
   }
 }
 

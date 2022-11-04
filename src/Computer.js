@@ -1,10 +1,6 @@
 import MissionUtils from '@woowacourse/mission-utils';
 
 class Computer {
-  constructor() {
-    this.setter();
-  }
-
   getter() {
     return this.answer;
   }
