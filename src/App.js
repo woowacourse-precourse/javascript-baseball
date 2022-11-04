@@ -14,13 +14,7 @@ class App {
   play() {
     this.computerNumbers = this.generateComputerNumbers();
     Console.print(message.START);
-    Console.readLine(message.INPUT, (number) => {
-      this.gameCount = this.getStrikeBallCount(number);
-      this.result = this.getResult(this.gameCount);
-      Console.print(this.result);
-
-      Console.close();
-    });
+    this.readUserInput();
   }
 
   generateComputerNumbers() {
@@ -71,6 +65,26 @@ class App {
     }
 
     return `${ballMessage} ${strikeMessage}`;
+  }
+
+  printResult() {
+    const result = this.getResult(this.gameCount);
+    Console.print(result);
+  }
+
+  readUserInput() {
+    Console.readLine(message.INPUT, (number) => {
+      this.gameCount = this.getStrikeBallCount(number);
+      this.printResult();
+
+      if (this.gameCount.strike === 3) {
+        Console.print(message.CORRECT);
+        Console.close();
+        return;
+      }
+
+      this.readUserInput();
+    });
   }
 }
 
