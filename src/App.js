@@ -25,6 +25,12 @@ class App {
     return randomItem === inputItem;
   }
 
+  countStrike(random, input) {
+    return input.filter((inputItem, index) =>
+      this.isStrike(random[index], inputItem),
+    ).length;
+  }
+
   isBall(random, input, numberIndex) {
     const randomItem = random[numberIndex];
     const inputItem = input[numberIndex];
