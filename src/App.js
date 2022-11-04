@@ -1,8 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
-const removeDuplicatedNumber = (stringNumber) => [
-  ...new Set([...stringNumber]),
-];
+const Utils = require("./Utils");
 
 class App {
   play() {
@@ -34,7 +31,7 @@ class App {
     }
     if (
       Number.isNaN(Number(enteredNumber)) ||
-      removeDuplicatedNumber(enteredNumber).length !== 3
+      Utils.removeDuplicatedString(enteredNumber).length !== 3
     ) {
       return false;
     }
