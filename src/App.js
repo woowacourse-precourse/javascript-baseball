@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {
@@ -15,7 +15,7 @@ class App {
         randomArray.push(random);
       }
     }
-  
+
     return randomArray;
   }
 
@@ -61,7 +61,8 @@ class App {
   }
 
   getBallStrike(randomArray, inputArray) {
-    let ball = 0, strike = 0;
+    let ball = 0,
+      strike = 0;
     for (let i = 0; i <= 2; i++) {
       if (randomArray[i] === inputArray[i]) {
         strike += 1;
@@ -81,7 +82,9 @@ class App {
   }
 
   questionReplay() {
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.print(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+    );
     MissionUtils.Console.readLine('', (input) => {
       if (input === '1') {
         const newRandomArray = this.getRandomArray();
