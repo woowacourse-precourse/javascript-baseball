@@ -17,6 +17,10 @@ class App {
     if(user == 2){
       throw "is not number";
     }
+
+    if(user == 3){
+      throw "is not a number from 1 to 9";
+    }
   }
 }
 
@@ -40,6 +44,9 @@ function user_inputnumber(){
   }
   if(USER_NUMBER == String){
     return 2;
+  }
+  if(USER_NUMBER <= 0){
+    return 3;
   }
   return USER_NUMBER;
 }
