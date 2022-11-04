@@ -1,5 +1,8 @@
 function checkInput(input){
   let newArray = [];
+  if(input.length !== 3){
+    return false;
+  }
   if (isNaN(input)){
     return false;
   }
@@ -30,7 +33,7 @@ function startGame(computer){
     if (checkInput(userInput)){
       hint = getHint(userInputArray, computer);
     } else {
-      MissionUtils.Console.print('숫자가 올바르지 않습니다. 서로 다른 숫자를 입력해주세요 !');
+      MissionUtils.Console.print('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
       startGame(computer);
     }
 
@@ -57,14 +60,16 @@ function getHint(userInputArray, computer){
     }
   }
 
-  if (ball){
-    hint += `${ball}볼`;
-  } else if (strike) {
-    hint += `${strike}스트라이크`;
+  if (strike || ball){
+    if (strike > 0){
+      hint += `${strike}스트라이크`;
+  
+    } if (ball > 0) {
+      hint += `${ball}볼`;
+    }
   } else{
     hint = '낫싱';
   }
-  console.log(hint);
 
   return hint;
 }
