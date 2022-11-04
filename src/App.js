@@ -8,11 +8,15 @@ class App {
   play() {
     this.playOption = selectPlayOption();
     const validValue = isValidOption(this.playOption);
-    if (!validValue) {
-      throw new Error('Play옵션에 없는 값입니다.');
-    }
+    checkValidPlayOption(validValue);
   }
 }
+
+const checkValidPlayOption = (validValue) => {
+  if (!validValue) {
+    throw new Error('Play옵션에 없는 값입니다.');
+  }
+};
 
 const selectPlayOption = () => {
   let selectValue;
