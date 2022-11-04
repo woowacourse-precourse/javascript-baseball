@@ -1,5 +1,8 @@
 function checkInput(input){
   let newArray = [];
+  if (isNaN(input)){
+    return false;
+  }
   for (let i = 0;  i < input.length; i++){
     if(!newArray.includes(input[i])){
       newArray.push(input[i]);
@@ -16,6 +19,9 @@ function startGame(){
     const userInputArray = [...userInput];
     if (checkInput(userInputArray)){
       getHint(userInputArray, computer);
+    } else {
+      MissionUtils.Console.print('숫자가 올바르지 않습니다. 다시입력해주세요 !');
+      startGame();
     }
     MissionUtils.Console.close();
   });
@@ -73,6 +79,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const app = new App();
 // app.play();
 // endGame();
-console.log(checkInput("112"));
+console.log(checkInput("123"));
 // pickComputerNumber();
 module.exports = App;
