@@ -7,6 +7,7 @@ class App {
 
     for (let playCount = 0; playCount < 3; playCount++) {
       const userInput = getUserInput();
+      calculateInputNumber(computerNumber, userInput);
     }
   }
 }
@@ -34,6 +35,19 @@ const getUserInput = () => {
     }
   });
   return inputArray;
+};
+
+const calculateInputNumber = (computerNumber, userNumber) => {
+  let strikeBallRecord = [0, 0];
+
+  for (index = 0; index < 3; index++) {
+    if (computerNumber[index] === userNumber[index]) {
+      strikeBallRecord[0]++;
+    } else if (computerNumber.includes(userNumber[index])) {
+      strikeBallRecord[1]++;
+    }
+  }
+  return strikeBallRecord;
 };
 
 module.exports = App;
