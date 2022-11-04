@@ -177,7 +177,7 @@ class App {
   restart() {
     this.offerComputerRandomNumbers();
     this.initGameResult();
-    this.gameStart();
+    this.getUserInputNumbers();
   }
   gameExit() {
     Console.close();
