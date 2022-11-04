@@ -1,4 +1,4 @@
-const { App, printer, refNumbersGetter } = require("../src/App");
+const { App, refNumbersGetter, stringToArrConverter } = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const getLogSpy = () => {
@@ -50,33 +50,9 @@ describe("목표값 테스트", () => {
   });
 });
 
-describe("목표값 테스트", () => {
-  test("목표값 개수", () => {
-    const refNumbersArr = refNumbersGetter();
-    expect(refNumbersArr.length).toEqual(3);
-  });
-
-  test("목표값 내 중복 확인", () => {
-    const refNumbersArr = refNumbersGetter();
-
-    let duplicateChecker;
-    refNumbersArr.map((number, index) => {
-      duplicateChecker =
-        refNumbersArr.indexOf(number) === index ? "clear" : "duplicate";
-    });
-    expect(duplicateChecker).toEqual("clear");
-  });
-
-  test("목표값 숫자 범위 1~9 확인", () => {
-    const refNumbersArr = refNumbersGetter();
-
-    let rangeChecker;
-    refNumbersArr.map((number, index) => {
-      rangeChecker =
-        Number.isInteger(number) && number < 10 && number > 0
-          ? "clear"
-          : "rangeOver";
-    });
-    expect(rangeChecker).toEqual("clear");
+describe("입력값 테스트", () => {
+  test("입력값 배열화", () => {
+    const userInput = "123";
+    expect(stringToArrConverter(userInput)).toEqual([1, 2, 3]);
   });
 });
