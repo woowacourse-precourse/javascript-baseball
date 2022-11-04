@@ -76,7 +76,19 @@ class App {
     return [ball, strike, nothing];
   }
 
-  makeOutputString(ball, strike, nothing) {}
+  static makeOutputString(ball, strike, nothing) {
+    let outputString = '';
+    if (ball) {
+      outputString += `${ball}볼 `;
+    }
+    if (strike) {
+      outputString += `${strike}스트라이크 `;
+    }
+    if (nothing) {
+      outputString += '낫싱';
+    }
+    return outputString;
+  }
 
   gameRestartHandler() {}
 
