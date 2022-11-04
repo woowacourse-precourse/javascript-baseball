@@ -15,6 +15,19 @@ const gameStart = (computer) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
 };
 
+const gameRestart = (answer) => {
+  if (answer === '1') {
+    const computerNumber = gameSetting();
+    gameStart(computerNumber);
+    return;
+  }
+  if (answer === '2') {
+    MissionUtils.Console.close();
+    return;
+  }
+  throw new Error('올바른 입력이 아닙니다.');
+};
+
 const getStrike = (computer, user) => {
   let strike = 0;
   for (let i = 0; i < 3; i++) {
@@ -33,15 +46,6 @@ const getBall = (computer, user) => {
     }
   }
   return ball;
-};
-
-const gameRestart = (answer) => {
-  if (answer === '2') {
-    MissionUtils.Console.close();
-  } else {
-    const computerNumber = gameSetting();
-    gameStart(computerNumber);
-  }
 };
 
 const checkResult = (computer, userNumber) => {
