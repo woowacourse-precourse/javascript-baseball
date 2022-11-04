@@ -65,6 +65,12 @@ class App {
     });
   }
 
-  play() {}
+  play() {
+    const answers = this.getThreeRandom();
+
+    this.printStart();
+    this.inputNumbers(answers);
+  }
 }
+
 module.exports = App;
