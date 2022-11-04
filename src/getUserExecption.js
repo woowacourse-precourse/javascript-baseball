@@ -24,7 +24,6 @@ const checkIsNumber = (arr) => {
   const checkList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   arr.forEach((num) => {
     if (!checkList.includes(num)) {
-      console.log(num);
       check = false;
     }
   });
