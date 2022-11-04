@@ -4,6 +4,7 @@ class App {
   play() {
     System.prototype.getStarted();
     System.prototype.chooseNumber();
+    System.prototype.requestEnterNumbers();
     MissionUtils.Console.close();
   }
 }

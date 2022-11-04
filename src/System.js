@@ -21,6 +21,10 @@ class System {
     const numberArray = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     this.setNumber = numberArray;
   }
+
+  requestEnterNumbers() {
+    MissionUtils.Console.print("숫자를 입력해주세요 : ");
+  }
 }
 
 module.exports = System;
