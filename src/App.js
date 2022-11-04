@@ -51,6 +51,38 @@ class App {
     MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크 `);
     return MissionUtils.Console.close();
   }
+
+  scoreUserInput(answerArr, userInputArr) {
+    let result = { ball: 0, strike: 0 };
+    const LENTH_OF_ARRAY = 3;
+
+    if (!userInputArr.some((num) => answerArr.includes(num))) {
+      return result;
+    }
+    if (userInputArr.every((num) => answerArr.includes(num))) {
+      for (let i = 0; i < LENTH_OF_ARRAY; i++) {
+        if (answerArr[i] === userInputArr[i]) {
+          result.strike += 1;
+        }
+        if (answerArr[i] !== userInputArr[i]) {
+          result.ball += 1;
+        }
+      }
+      return result;
+    }
+    for (let i = 0; i < LENTH_OF_ARRAY; i++) {
+      if (answerArr[i] === userInputArr[i]) {
+        result.strike += 1;
+      }
+      if (
+        answerArr[i] !== userInputArr[i] &&
+        answerArr.includes(userInputArr[i])
+      ) {
+        result.ball += 1;
+      }
+    }
+    return result;
+  }
 }
 
 module.exports = App;
