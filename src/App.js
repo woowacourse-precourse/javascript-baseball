@@ -15,8 +15,32 @@ class App {
     return userNumber;
   }
 
-  compareGoalAndUserAnswer() {
-    // 스트라이크 아웃 비교하고 결과 반환
+  getStrikeAndBallCount(goal, userAnswer) {
+    const result = [];
+    const userAnswerOfNotIncludeStrike = [];
+
+    const getStrike = () => {
+      let strikeCount = 0;
+      userAnswer.forEach((oneAnswer, idx) => {
+        oneAnswer === goal[idx]
+          ? (strikeCount = strikeCount + 1)
+          : userAnswerOfNotIncludeStrike.push(oneAnswer);
+      });
+      result.push(strikeCount);
+    };
+    getStrike();
+
+    const getBall = () => {
+      let ballCount = 0;
+      userAnswerOfNotIncludeStrike.forEach((oneAnswer) => {
+        const existBall = goal.find((oneGoal) => oneGoal === oneAnswer);
+        if (existBall) ballCount = ballCount + 1;
+      });
+      result.push(ballCount);
+    };
+    getBall();
+
+    return result;
   }
 
   printResult() {
@@ -32,15 +56,15 @@ class App {
   exitGame() {}
 
   play() {
-    // const goal = generateGoalNumber();
+    const goal = this.generateGoalNumber();
     let userAnswer = this.receiveNumberFromUser();
     // userAnswer가 undefined면 앱 종료하기
 
-    // let score = compareGoalAndUserAnswer(goal, userAnswer);
+    let score = this.getStrikeAndBallCount(goal, userAnswer);
     // while (score !== 스트라이크3) {
     //   printResult(score);
     //   userAnswer = receiveNumberFromUser();
-    //   score = compareGoalAndUserAnswer(goal, userAnswer);
+    //   score = getBallAndStrikeCount(goal, userAnswer);
     // }
     // printResult(score);
     // if (confirmRestart()) return restartGame();
