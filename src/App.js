@@ -25,21 +25,19 @@ const BASEBALLTERM = {
 };
 
 class App {
-  constructor() {
-    this.computerNumber = null;
-  }
+  computerNumber = null;
 
   generateComputerNumber() {
-    const computerNumber = [];
+    const numberArr = [];
 
-    while (computerNumber.length < 3) {
+    while (numberArr.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerNumber.includes(randomNumber)) {
-        computerNumber.push(randomNumber);
+      if (!numberArr.includes(randomNumber)) {
+        numberArr.push(randomNumber);
       }
     }
 
-    this.computerNumber = computerNumber;
+    this.computerNumber = numberArr;
   }
 
   isEveryNumberUnique(nums) {
