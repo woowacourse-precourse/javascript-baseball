@@ -15,11 +15,11 @@ class NumberBaseballGameManager {
   }
 
   reset() {
-    this.computerNumbers = this.generateRandomNumberArray();
+    this.computerNumbers = this.getRandomNumberArray();
     this.isGameOver = false;
   }
 
-  generateRandomNumberArray() {
+  getRandomNumberArray() {
     const numberSet = new Set();
 
     while (numberSet.size !== RANDOM_NUMBER_COUNT) {
