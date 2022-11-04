@@ -13,6 +13,10 @@ class App {
     if(user == 1){
       throw "is not three numbers";
     }
+
+    if(user == 2){
+      throw "is not number";
+    }
   }
 }
 
@@ -33,6 +37,9 @@ function user_inputnumber(){
   const USER_NUMBER = MissionUtils.Console.readLine();
   if(USER_NUMBER.length != 3) {
     return 1;
+  }
+  if(USER_NUMBER == String){
+    return 2;
   }
   return USER_NUMBER;
 }
