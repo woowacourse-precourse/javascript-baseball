@@ -15,10 +15,34 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  getUserAnswer() {
+  getUserAnswer(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
-      console.log(answer);
+      const user = answer.split('').map(Number);
+      if (this.testAnswer(user, computer)) {
+        return user;
+      }
     });
+  }
+
+  testAnswer(answer, computer) {
+    const testType = /[1-9]/;
+    const set = new Set(answer);
+    answer.forEach(number => {
+      try {
+        if (!testType.test(number)) {
+          throw new Error('숫자를 입력하세요.');
+        }
+        if (answer.length !== 3) {
+          throw new Error('3자리를 입력하세요.');
+        }
+        if (answer.length !== set.size) {
+          throw new Error('중복된 수가 있습니다.');
+        }
+      } catch {
+        this.getUserAnswer(computer);
+      }
+    });
+    return answer;
   }
 
   play() {}
