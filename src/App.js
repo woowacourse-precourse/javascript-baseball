@@ -118,6 +118,10 @@ class App {
       this.gameEnd();
     }
   }
+
+  startNewGame() {
+    this.play();
+  }
 }
 
 const baseBallGame = new App;
