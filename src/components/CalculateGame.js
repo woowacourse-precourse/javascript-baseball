@@ -36,6 +36,10 @@ class CalculateGame {
 
     return '낫싱';
   }
+
+  checkSuccess() {
+    return this.strike === 3; 
+  }
 }
 
 module.exports = CalculateGame;
