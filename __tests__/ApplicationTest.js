@@ -1,4 +1,6 @@
 const App = require("../src/App");
+const MakeRandomNumber = require("../src/MakeRandomNumber");
+const CheckConstraints = require("../src/CheckConstraints");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -35,10 +37,12 @@ describe("숫자 야구 게임", () => {
 
   test("컴퓨터 랜덤 숫자 생성", () => {
     const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
-    const constraintsSpy = jest.spyOn(App.prototype, "checkConstraints");
+    const constraintsSpy = jest.spyOn(
+      CheckConstraints.prototype,
+      "checkConstraints"
+    );
 
-    const app = new App();
-    app.makeRandomNumber();
+    MakeRandomNumber.makeRandomNumber();
 
     expect(randomSpy).toHaveBeenCalled();
     expect(randomSpy).toHaveBeenCalledWith(1, 9);
