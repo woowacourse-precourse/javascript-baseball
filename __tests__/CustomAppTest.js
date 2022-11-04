@@ -109,3 +109,41 @@ describe('App 클래스 - countBall()', () => {
     expect(app.countBall(random, input)).toEqual(0);
   });
 });
+
+describe('App 클래스 - getStrikeBalltoString()', () => {
+  test('2볼 1스트라이크 상황', () => {
+    const random = [2, 1, 3];
+    const input = [1, 2, 3];
+
+    const app = new App();
+
+    expect(app.getStrikeBalltoString(random, input)).toEqual('2볼 1스트라이크');
+  });
+
+  test('노볼 노스트라이크 상황', () => {
+    const random = [1, 2, 3];
+    const input = [4, 5, 6];
+
+    const app = new App();
+
+    expect(app.getStrikeBalltoString(random, input)).toEqual('낫싱');
+  });
+
+  test('3스트라이크 상황', () => {
+    const random = [1, 2, 3];
+    const input = [1, 2, 3];
+
+    const app = new App();
+
+    expect(app.getStrikeBalltoString(random, input)).toEqual('3스트라이크');
+  });
+
+  test('2볼 상황', () => {
+    const random = [1, 2, 3];
+    const input = [2, 1, 4];
+
+    const app = new App();
+
+    expect(app.getStrikeBalltoString(random, input)).toEqual('2볼');
+  });
+});
