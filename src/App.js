@@ -67,6 +67,10 @@ class App {
     this.gameNumber = gameNumbers;
   }
 
+  isValidLength(input) {
+    return input.length === this.count;
+  }
+
   isNumber(value) {
     return typeof value === "number";
   }
@@ -83,10 +87,10 @@ class App {
     const numbers = input.split("").map(Number);
 
     return (
-      numbers.every((number) => this.isNumber(number)) &&
+      this.isValidLength(input) &&
+      numbers.every(this.isNumber) &&
       this.hasDuplicateElement(numbers) &&
-      [...new Set(numbers)].length === this.count &&
-      numbers.every((number) => this.isValidNumber(number))
+      numbers.every(this.isValidNumber)
     );
   }
 
