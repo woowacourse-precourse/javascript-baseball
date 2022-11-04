@@ -7,9 +7,13 @@ class App {
   }
 
   play() {
-    this.randomValue=makeRandomValue()
-    MissionUtils.Console.print(this.randomValue)
+    makeRandomValue()
     inputUserValue()
+  }
+
+  setRandomValue(number) {
+    this.randomValue=number
+    // MissionUtils.Console.print(this.randomValue)
   }
 
   setUserValue(number) {
@@ -17,8 +21,7 @@ class App {
   }
   
   checkcheck() {
-    let regame=checkAnswer(this.randomValue,this.userValue)
-    whatsAfter(regame)
+    whatsAfter(checkAnswer(this.randomValue,this.userValue))
   }
 }
 
@@ -31,7 +34,7 @@ function makeRandomValue() {
   while (randomValue.size<3) {
     randomValue.add(MissionUtils.Random.pickNumberInRange(1, 9));
   }
-  return [...randomValue].join('')
+  app.setRandomValue([...randomValue].join(''))
 }
 
 // 사용자의 숫자 입력받기
@@ -45,19 +48,17 @@ function inputUserValue() {
 function isValidValue(number) {
   let isUnique=(new Set(number)).size
   if (!number.match(/[1-9]{3}/) || isUnique!==3) {
-    throw ("잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요")
+    throw "잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요"
   }
-  // return answer
   app.setUserValue(number)
   app.checkcheck()
 }
 
 // 정답 검사
 function checkAnswer(computer,user) {
-  const ball=countBall(computer,user)
   const strike=countScrike(computer,user)
+  const ball=countBall(computer,user)-strike
   if (strike===3) {
-    // 재시작 여부 묻는 함수 실행하기
     return (`3스트라이크`);
   }
   if (ball===0 && strike===0) {
@@ -72,7 +73,6 @@ function checkAnswer(computer,user) {
   if (ball!==0 && strike!==0) {
     return (`${ball}볼 ${strike}스트라이크`);
   }
-  
 }
 
 //볼 개수
@@ -86,12 +86,11 @@ const countScrike = (computer,user) => {
 }
 
 function whatsAfter(afterGame) {
-  if (afterGame===`3스트라이크`) {
-    MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
+  MissionUtils.Console.print(afterGame)
+  if (afterGame === `3스트라이크`) {
     askRegame()
   }
-  if (afterGame!==`3스트라이크`) {
-    MissionUtils.Console.print(afterGame)
+  if (afterGame !== `3스트라이크`) {
     inputUserValue()
   }
 }
@@ -103,18 +102,17 @@ function askRegame() {
 }
 
 function realReGame(num){
-  if (!num.match(/[1,2]{1}/)) {
-    throw ("잘못된 형식을 입력하였습니다. 게임을 종료합니다.")
+  if (num!=='1' && num!=='2') {
+    throw "잘못된 형식을 입력하였습니다. 게임을 종료합니다."
   }
   if (num==='1') {
-    app.play()
+    const app = new App();
+    app.play();
   }
   if (num==='2') {
+    MissionUtils.Console.print(`게임 종료`)
     MissionUtils.Console.close();
   }
 }
 
-// MissionUtils.Console.close()
-// MissionUtils.Console.print(randomValue);
-
-// module.exports = App;
+module.exports = App;
