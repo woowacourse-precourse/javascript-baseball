@@ -20,8 +20,12 @@ class App {
   }
 
   getUserInput() {
-    this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.missionConsole.print(this.compareEachNumber(this.makeRandomNumbers(), userInput));
+    const computerInputNumbers = this.makeRandomNumbers();
+
+    this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
+      console.log(computerInputNumbers, userInputNumbers);
+      const scoreCount = new this.score(computerInputNumbers, userInputNumbers);
+      this.missionConsole.print(scoreCount.compare());
       this.missionConsole.close();
     });
   }
