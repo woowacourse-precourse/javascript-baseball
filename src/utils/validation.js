@@ -1,24 +1,16 @@
-const Exception = require('../model/Exception');
-const constant = require('../Constants');
-const MissionUtils = require("@woowacourse/mission-utils");
 
+const constant = require('../Constants');
+const MissionUtils = require('@woowacourse/mission-utils');
+const errorthrow = require('./throw-error');
 
 class Validation{
 
-  constructor(){
-    this.error = new Exception();
-  }
-
   checkInput(input, startOrrestart){
     if (startOrrestart === 0){
-      if(this.error.inputError(input) != false){
-        throw new Error(this.error.inputError(input));
-      }
+      errorthrow.inputError(input);
     }
     if (startOrrestart === 1){
-      if (this.error.restartError(String(input)) != false){
-        throw new Error(this.error.restartError(String(input)));
-      }
+      errorthrow.restartError(input);
     }
   }
 
