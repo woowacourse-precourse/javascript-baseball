@@ -154,7 +154,10 @@ class App {
     this.gameStart();
   }
 
-  gameExit() {}
+  gameExit() {
+    Console.print(GAME_MESSAGE.exit);
+    Console.close();
+  }
 }
 
 const app = new App();
