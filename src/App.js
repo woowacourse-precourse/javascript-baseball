@@ -38,6 +38,23 @@ class App {
     }
     return true;
   }
+
+  getResult(computerNumber, enteredNumber) {
+    const initialCounter = {
+      strike: 0,
+      ball: 0,
+    };
+
+    return [...enteredNumber].reduce((resultObj, eachEnteredNumber, index) => {
+      if (computerNumber[index] === eachEnteredNumber) {
+        return { ...resultObj, strike: resultObj.strike + 1 };
+      }
+      if (computerNumber.includes(eachEnteredNumber)) {
+        return { ...resultObj, ball: resultObj.ball + 1 };
+      }
+      return resultObj;
+    }, initialCounter);
+  }
 }
 
 module.exports = App;
