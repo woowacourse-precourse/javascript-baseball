@@ -93,4 +93,30 @@ describe('숫자 야구 게임 My Test', () => {
       app.play();
     }).toThrow();
   });
+
+  test('게임을 종료하고 게임 재시작 & 애플리이션 완전 종료', () => {
+    const randoms = [3, 6, 9, 5, 8, 9];
+    const answers = ['000', '146', '321', '398', '369', '1', '597', '589', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '낫싱',
+      '1볼',
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
