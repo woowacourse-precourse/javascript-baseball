@@ -6,4 +6,6 @@ class App {
   play() {}
 }
 
+new App();
+
 module.exports = App;
