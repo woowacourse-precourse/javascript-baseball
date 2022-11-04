@@ -39,6 +39,11 @@ class App {
   hasValidLength(userInput) {
     return userInput.length === MAX_NUMBER_LENGTH;
   }
+  hasOnlyUniqueNumber(userInput) {
+    const duplicateCheckSet = new Set(userInput.split(""));
+
+    return duplicateCheckSet.size === MAX_NUMBER_LENGTH;
+  }
 }
 
 const app = new App();
