@@ -49,3 +49,34 @@ describe("목표값 테스트", () => {
     expect(rangeChecker).toEqual("clear");
   });
 });
+
+describe("목표값 테스트", () => {
+  test("목표값 개수", () => {
+    const refNumbersArr = refNumbersGetter();
+    expect(refNumbersArr.length).toEqual(3);
+  });
+
+  test("목표값 내 중복 확인", () => {
+    const refNumbersArr = refNumbersGetter();
+
+    let duplicateChecker;
+    refNumbersArr.map((number, index) => {
+      duplicateChecker =
+        refNumbersArr.indexOf(number) === index ? "clear" : "duplicate";
+    });
+    expect(duplicateChecker).toEqual("clear");
+  });
+
+  test("목표값 숫자 범위 1~9 확인", () => {
+    const refNumbersArr = refNumbersGetter();
+
+    let rangeChecker;
+    refNumbersArr.map((number, index) => {
+      rangeChecker =
+        Number.isInteger(number) && number < 10 && number > 0
+          ? "clear"
+          : "rangeOver";
+    });
+    expect(rangeChecker).toEqual("clear");
+  });
+});
