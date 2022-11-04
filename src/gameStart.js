@@ -50,23 +50,6 @@ function printPitchResult(gameData) {
   Console.print(`${ball}볼 ${strike}스트라이크`);
 }
 
-async function continueOrEndGame(gameData) {
-  const inputNumber = await new Promise((resolve) => {
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (input) => {
-        resolve(input);
-      }
-    );
-  });
-  if (inputNumber !== '1' && inputNumber !== '2') {
-    throw new Error('잘못된 값을 입력했습니다.');
-  }
-  if (inputNumber === '2') {
-    return gameData.setState(false);
-  }
-  return gameData.setThreeStrike(false);
-}
 function gameStart(gameData) {
   Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
     const computerRandomNumbers = gameData.getComputerRandomNumbers();
@@ -83,7 +66,19 @@ function gameStart(gameData) {
       return gameStart(gameData);
     }
 
-    Console.close();
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (commandNumber) => {
+        if (!(commandNumber === '1' || commandNumber === '2')) {
+          throw '잘못된 값을 입력했습니다.';
+        }
+        if (commandNumber === '1') {
+          gameData.setThreeStrikeState(false);
+          return gameStart(generateRandomNumbers(gameData));
+        }
+        Console.close();
+      }
+    );
   });
 }
 
