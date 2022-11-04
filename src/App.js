@@ -1,35 +1,25 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   nums = [1,2,3,4,5,6,7,8,9];
-  RANDOM_CASES = this.getRandomCases(this.nums,3);
+  COUNT = 3;
   
   play() {
-    const randomNum = this.RANDOM_CASES[this.randomIndex]
-    
-  }
+    let randomNums = [];
 
-  getRandomCases(nums, count) {
-    let result = [];
-    if (count === 1) return nums.map(num => [num]);
-    
-    nums.forEach((fixed,index,self) => {
-      const rest = [...self.slice(0, index), ...self.slice(index + 1)];
-  
-      const randomCases = this.getRandomCases(rest, count - 1);
-  
-      const attached = randomCases.map(randomCase => [fixed, ...randomCase]);
-  
-      result = [...result, ...attached]
-    });
-    return result;
-  }
-
-  get randomIndex() {
-    return Math.floor(Math.random() * this.RANDOM_CASES.length);
+    for (let i = 0; i < this.COUNT; i++) {
+      const randomNum = MissionUtils.Random.pickNumberInList(this.nums);
+      randomNums = [...randomNums, randomNum];
+      
+      const randomNumIndex = this.nums.indexOf(randomNum);
+      this.nums = [...this.nums.slice(0, randomNumIndex),...this.nums.slice(randomNumIndex + 1)];
+    }
   }
 }
 
 const app = new App();
-
 app.play();
+
+MissionUtils.Console.close();
 
 // module.exports = App;
