@@ -19,8 +19,9 @@ describe.only("플레이어 입력 테스트", () => {
     const app = new App();
 
     inputs.forEach((input) => {
-      const result = app.readPlayerInput();
-      expect(result).toEqual(input);
+      app.readPlayerInput().then((result) => {
+        expect(result).toEqual(input);
+      });
     });
   });
 });
