@@ -39,6 +39,49 @@ class App {
     }
   }
 
+  getStrike(userInput) {
+    let strike = 0;
+
+    for (let i = 0; i < userInput.length; i++) {
+      if (userInput[i] === this.threeDigitsAnswer[i]) {
+        strike += 1;
+      }
+    }
+
+    return strike;
+  }
+
+  getBall(userInput) {
+    let ball = 0;
+
+    userInput.forEach((num, idx) => {
+      const computerIndex = this.threeDigitsAnswer.indexOf(num);
+      if (computerIndex !== -1 && computerIndex !== idx) {
+        ball += 1;
+      }
+    });
+
+    return ball;
+  }
+
+  printHint(userInput) {
+    const strike = this.getStrike(userInput);
+    const ball = this.getBall(userInput);
+
+    if (strike === 0 && ball === 0) {
+      Console.print('낫싱');
+    } else {
+      let hintStr = '';
+      if (ball >= 1) {
+        hintStr += `${ball}볼 `;
+      }
+      if (strike >= 1) {
+        hintStr += `${strike}스트라이크`;
+      }
+      Console.print(hintStr);
+    }
+  }
+
   checkAnswer(userInput) {
     let matchCnt = 0;
 
@@ -48,6 +91,7 @@ class App {
       }
     }
 
+    this.printHint(userInput);
     if (matchCnt === 3) {
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return;
