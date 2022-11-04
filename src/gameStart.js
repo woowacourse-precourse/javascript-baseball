@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const GameData = require('./GameData');
 
 function generateRandomNumbers() {
   const generatedRandomNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
@@ -15,7 +16,10 @@ function inputUserNumbers() {
 
 async function gameStart() {
   Console.print('숫자 야구 게임을 시작합니다.');
-  const computerRandomNumbers = generateRandomNumbers();
-  const userRandomNumbers = await inputUserNumbers();
+  const gameData = new GameData();
+  while (gameData.getState()) {
+    const computerRandomNumbers = generateRandomNumbers();
+    const userRandomNumbers = await inputUserNumbers();
+  }
 }
 exports.gameStart = gameStart;
