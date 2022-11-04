@@ -3,7 +3,13 @@ const { validationNumbers } = require('./validation');
 const GameData = require('./GameData');
 
 function generateRandomNumbers() {
-  const generatedRandomNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
+  const generatedRandomNumbers = [];
+  while (generatedRandomNumbers.length < 3) {
+    const randomNumber = Random.pickNumberInRange(1, 9);
+    if (!generatedRandomNumbers.includes(randomNumber)) {
+      generatedRandomNumbers.push(randomNumber);
+    }
+  }
   return generatedRandomNumbers;
 }
 
