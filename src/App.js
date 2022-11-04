@@ -36,17 +36,14 @@ class App {
     }
   }
 
-  shouldContinue() {
-    let flag;
+  setIsContinued() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (/[12]{1}/.test(input)) throw "1 또는 2만 입력 가능합니다";
-        flag = input === 1;
+        isContinued = input === 1;
       }
     );
-
-    return flag;
   }
 
   calcScore() {
@@ -71,7 +68,7 @@ class App {
 
     if (this.score.strike === 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      shouldContinue();
+      setIsContinued();
     }
   }
 
@@ -86,7 +83,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     do {
       this.main();
-    } while (this.shouldContinue());
+    } while (this.isContinued);
   }
 }
 
