@@ -7,7 +7,7 @@ const IS_INPUT_VALID_DURING_GAME = function checkUserInputDuringGamePlay(userInp
   if (isNaN(userInput)) return false;
   if (userInput[0] === userInput[1]
     || userInput[1] === userInput[2]
-    || userInput[0] === userInput[2]) return false;
+    || userInput[2] === userInput[0]) return false;
   if (!(userInput.match(/[123456789]{3}/))) return false;
   return true;
 }
@@ -78,7 +78,7 @@ const START_GAME = function launchNewGame() {
   GAME_APP(ANSWER);
 }
 
-const GAME_APP = function gameApplication(answer) {
+const GAME_APPLICATION = function gamePlayApplication(answer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
     GAME_HINT(userInput, answer);
   });
