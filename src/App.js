@@ -49,11 +49,7 @@ function isNumber(userNumber) {
 }
 
 function isLength3(userNumber) {
-  if (userNumber.length !== 3) {
-    return false;
-  }
-
-  return true;
+  return userNumber.length === 3;
 }
 
 function isDuplicated(userNumber) {
