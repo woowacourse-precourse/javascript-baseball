@@ -76,7 +76,7 @@ describe('숫자 야구 게임', () => {
       }).toThrow();
     });
 
-    test('중복된 숫자가 포함된 경우 throw해야 한다.', () => {
+    test('중복된 숫자가 포함된 경우 예외를 throw해야 한다.', () => {
       const randoms = [1, 3, 5];
       const answers = ['122'];
 
