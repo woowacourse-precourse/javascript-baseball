@@ -16,10 +16,18 @@ class App {
     return this._gameNumber;
   }
 
+  set userNumber(number) {
+    this._userNumber = number;
+  }
+
+  get userNumber() {
+    return this._userNumber;
+  }
+
   MESSAGES = {
     START: "숫자 야구 게임을 시작합니다.",
     END: "게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    INSERT_NUMBER: "숫자를 입력해주세요",
+    INSERT_NUMBER: "숫자를 입력해주세요 : ",
     NOTHING: "낫싱",
     CORRECT(num) {
       return `${num}개의 숫자를 모두 맞히셨습니다!`;
@@ -34,6 +42,10 @@ class App {
 
   printMessage(msg) {
     return Console.print(msg);
+  }
+
+  readLine(msg, callback) {
+    return Console.readLine(msg, callback);
   }
 
   createUniqueNumberInList(array) {
@@ -55,18 +67,22 @@ class App {
     this.gameNumber = gameNumbers;
   }
 
+  inputUserNumbers() {
+    this.readLine(
+      this.MESSAGES.INSERT_NUMBER,
+      (num) => (this.userNumber = num)
+    );
+  }
+
   startGame() {
     this.printMessage(this.MESSAGES.START);
     this.createGameNumbers();
-    this.printMessage(this.gameNumber);
+    this.inputUserNumbers();
   }
 
   play() {
     this.startGame();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
