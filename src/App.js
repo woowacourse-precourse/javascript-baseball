@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -48,7 +48,7 @@ function inputUserValue() {
 function isValidValue(number) {
   let isUnique=(new Set(number)).size
   if (!number.match(/[1-9]{3}/) || isUnique!==3) {
-    throw "잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요"
+    throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요'
   }
   app.setUserValue(number)
   app.checkcheck()
@@ -103,7 +103,7 @@ function askRegame() {
 
 function realReGame(num){
   if (num!=='1' && num!=='2') {
-    throw "잘못된 형식을 입력하였습니다. 게임을 종료합니다."
+    throw '잘못된 형식을 입력하였습니다. 게임을 종료합니다.'
   }
   if (num==='1') {
     const app = new App();
