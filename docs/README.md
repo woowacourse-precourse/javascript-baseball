@@ -4,8 +4,8 @@
 
 ### 게임의 시작점 Dispatcher에게 메세지를 보내는 클래스
 
-- [-] UserInterface 에서 사용자의 상호작용을 받아 Action 생성
-- [-] Dispatcher 에게 Action을 전송
+- [o] UserInterface 에서 사용자의 상호작용을 받아 Action 생성
+- [o] Dispatcher 에게 Action을 전송
 
 ---
 
