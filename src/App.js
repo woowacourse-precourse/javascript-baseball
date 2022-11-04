@@ -1,3 +1,5 @@
+const MissonUtils = require("@woowacourse/mission-utils");
+
 class App {
   play() {}
 }
