@@ -2,7 +2,7 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const { validationNumbers } = require('./validation');
 const GameData = require('./GameData');
 
-function generateRandomNumbers() {
+function generateRandomNumbers(gameData) {
   const generatedRandomNumbers = [];
   while (generatedRandomNumbers.length < 3) {
     const randomNumber = Random.pickNumberInRange(1, 9);
@@ -10,7 +10,8 @@ function generateRandomNumbers() {
       generatedRandomNumbers.push(randomNumber);
     }
   }
-  return generatedRandomNumbers;
+  gameData.setComputerRandomNumbers(generatedRandomNumbers);
+  return gameData;
 }
 
 async function inputUserNumbers() {
