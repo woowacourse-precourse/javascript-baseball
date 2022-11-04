@@ -5,7 +5,7 @@ const countStrikeBallNothing = require("./countStrikeBallNothing");
 const resultsForCount = require("./resultsForCount");
 const GameManager = require("./GameManager");
 
-class Game {
+class BaseballGame {
   constructor() {
     this.pickedNumberByComputer = pickedNumberByComputer();
     this.threeStrike = false;
@@ -26,4 +26,4 @@ class Game {
   }
 }
 
-module.exports = Game;
+module.exports = BaseballGame;
