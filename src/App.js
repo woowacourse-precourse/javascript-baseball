@@ -37,17 +37,25 @@ const playerNumbersInput = () => {
 };
 
 const oneGame = (computerNumbers) => {
-  let strikeBall = [0, 0];
   while(1){
     const playerNumbers = playerNumbersInput();
-    strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
+    const strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
-    if(strikeBall[0] == 3) break;
+    if(strikeBall.strike == 3) break;
   }
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
-
+  let strike = 0;
+  let ball = 0;
+  for(i = 0; i < 3; i++){
+    if(playerNumbers[i] == computerNumbers[i]){
+      strike++;
+    }elseif(computerNumbers.includes(playerNumbers[i])){
+      ball++;
+    }
+  };
+  return { strike:strike, ball:ball };
 };
 
 const printStrikeAndBall = (strikeBall) => {
