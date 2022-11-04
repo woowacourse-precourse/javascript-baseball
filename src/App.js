@@ -1,5 +1,5 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-const { GAME_START_MESSAGE, USER_NUMBER_INPUT_REQUEST_MESSAGE } = require("./constants/message.js");
+const { GAME_MESSAGE, ERROR_MESSAGE } = require("./constants/message.js");
 const {
   MAX_NUMBER_LENGTH,
   MAX_NUMBER_RANGE,
@@ -8,7 +8,7 @@ const {
 
 class App {
   constructor() {
-    Console.print(GAME_START_MESSAGE);
+    Console.print(GAME_MESSAGE.GAME_START_MESSAGE);
     this.computerInput = this.generateComputerInput();
   }
 
@@ -26,7 +26,7 @@ class App {
   }
   requestUserNumberInput() {
     return new Promise((resolve) => {
-      Console.readLine(USER_NUMBER_INPUT_REQUEST_MESSAGE, resolve);
+      Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST_MESSAGE, resolve);
     });
   }
 
