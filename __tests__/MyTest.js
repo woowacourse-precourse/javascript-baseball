@@ -10,8 +10,8 @@ test("상대방 배열 생성", () => {
   expect(ComputerArr).toHaveLength(3);
 });
 
-test("게임 시작 문구 출력", () => {
+test("입력값 제한 사항 체크", () => {
   const app = new App();
-  const startText = app.play();
-  expect(startText).toBe("숫자 야구 게임을 시작합니다.");
+  const startText = app.inputCheck("123");
+  expect(startText).toEqual([1, 2, 3]);
 });

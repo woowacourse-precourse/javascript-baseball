@@ -28,7 +28,7 @@ class App {
     if (inputString.length !== 3) throw new Error();
     const numberArr = inputString.split("").map((x) => {
       if (Number.isNaN(x)) throw new Error();
-      return x;
+      return parseInt(x, 10);
     });
     return numberArr;
   }
