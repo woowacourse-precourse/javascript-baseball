@@ -28,6 +28,20 @@ class App {
     })
   }
 
+  inputValidation(playerInput) {
+    const inputToSet = new Set(inplayerInputput.split('').map(Number))
+    
+    if(playerInput.length !== 3) {
+      throw new Error('입력값은 세자리 수를 입력해주세요.')
+    } else if([...inputToSet].length !== 3) {
+      throw new Error('중첩되지 않는 세자리 수를 입력해주세요.')
+    }
+    
+    inputToSet.forEach((v) => { if(isNaN(v)) throw new Error('숫자만 입력해주세요.') })
+
+    return this.check(playerInput);
+  }
+
 }
 
 const app = new App();
