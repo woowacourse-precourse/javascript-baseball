@@ -35,5 +35,4 @@ const checkOverlap = (arr) => {
   return true;
 };
 
-console.log(getUserExecption("128"));
 module.exports = getUserExecption;
