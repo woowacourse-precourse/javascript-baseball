@@ -60,20 +60,26 @@ const getStrikeCount = (computerNumbers, userNumbers) => {
     .length;
 };
 
-const haveDuplicateNumber = (userNumbers) => {
+const haveDuplicate = (userNumbers) => {
   const duplicateNumber = userNumbers.filter((num) => {
     return userNumbers.indexOf(num) !== userNumbers.lastIndexOf(num);
   });
   if (duplicateNumber.length > 0) {
     throwError(ERROR_MESSAGE.duplicateError);
+    return true;
   }
+
+  return false;
 };
 
 const isValidNumber = (userInputValue) => {
   const regex = /^[1-9]{3}$/;
   if (!regex.test(userInputValue.join(''))) {
     throwError(ERROR_MESSAGE.invalidValueError);
+    return false;
   }
+
+  return true;
 };
 
 const stringToNumbers = (string) => [...string].map((char) => +char);
@@ -127,12 +133,13 @@ class App {
   async getUserInputNumbers() {
     const userInputValue = await offerUserInput(GAME_MESSAGE.requestInput);
     this.userNumbers = stringToNumbers(userInputValue);
-    this.isValid();
+    this.isValidRangeNumber();
   }
-  isValid() {
-    isValidNumber(this.userNumbers);
-    haveDuplicateNumber(this.userNumbers);
-    this.setGameResult();
+  isValidRangeNumber() {
+    isValidNumber(this.userNumbers) ? this.haveSameNumber() : this.gameExit();
+  }
+  haveSameNumber() {
+    haveDuplicate(this.userNumbers) ? this.gameExit() : this.setGameResult();
   }
   setGameResult() {
     this.gameResult.strike = getStrikeCount(
