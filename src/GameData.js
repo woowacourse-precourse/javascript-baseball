@@ -1,6 +1,7 @@
 class GameData {
   constructor() {
     this.state = true;
+    this.threeStrike = false;
     this.ball = 0;
     this.strike = 0;
   }
@@ -11,6 +12,14 @@ class GameData {
 
   setState(state) {
     this.state = state;
+  }
+
+  getThreeStrike() {
+    return this.threeStrike;
+  }
+
+  setThreeStrike(threeStrike) {
+    this.threeStrike = threeStrike;
   }
 
   getBall() {
