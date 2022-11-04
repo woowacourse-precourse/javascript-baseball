@@ -5,6 +5,11 @@ class BaseBallValidator {
       throw "숫자가 아닌 값이 있습니다.";
     }
   }
+  checkNumbersLength([...numbers]) {
+    if (numbers.length !== 3) {
+      throw "글자가 3개가 아닙니다.";
+    }
+  }
   checkOtherNumbers([...numbers]) {
     const removedDuplicateNumbers = Array.from(new Set(...numbers));
     if (
