@@ -68,7 +68,7 @@ class App {
     if (this.#isAvailableValue(value)) {
       this.#userValue = value;
       this.#getResult();
-    } else throw Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    } else throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
   }
 
   #readUserValue() {
