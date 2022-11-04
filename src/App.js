@@ -6,7 +6,8 @@ class App {
     System.prototype.getStarted();
     System.prototype.chooseNumber();
     System.prototype.requestEnterNumbers();
-    const guessNumber = User.prototype.responseSendNumber();
+    User.prototype.responseSendNumber();
+
     // MissionUtils.Console.close();
   }
 }
