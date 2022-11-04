@@ -25,4 +25,14 @@ describe("입력 유효성 검사", () => {
       app.play();
     }).toThrow();
   });
+
+  test("중복된 숫자가 있으면 예외 발생", () => {
+    const answers = ["112"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      app.play();
+    }).toThrow();
+  });
 });
