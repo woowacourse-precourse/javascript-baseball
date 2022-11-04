@@ -31,12 +31,14 @@ class App {
 
   generateComputerNumber() {
     const computerNumber = [];
+
     while (computerNumber.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNumber.includes(randomNumber)) {
         computerNumber.push(randomNumber);
       }
     }
+
     this.computerNumber = computerNumber;
   }
 
@@ -82,17 +84,17 @@ class App {
 
     const strikeNum = user.filter((item, ind) => item === computer[ind]).length;
 
-    return [ballNum, strikeNum];
+    return { ballNum, strikeNum };
   }
 
   convertNumberToMessage(matchNum) {
-    const [ballNum, strikeNum] = matchNum;
+    const { ballNum, strikeNum } = matchNum;
 
     let message = `${ballNum === 0 ? "" : ballNum + BASEBALLTERM.BALL} ${
       strikeNum === 0 ? "" : strikeNum + BASEBALLTERM.STRIKE
     }`;
 
-    if (matchNum.every((item) => item === 0)) {
+    if (ballNum === 0 && strikeNum === 0) {
       message = BASEBALLTERM.NOTHING;
     }
 
