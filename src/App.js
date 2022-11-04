@@ -29,6 +29,13 @@ class App {
       Console.readLine(USER_NUMBER_INPUT_REQUEST_MESSAGE, resolve);
     });
   }
+
+  hasOnlyNumber(userInput) {
+    return userInput
+      .split("")
+      .map((eachLetter) => parseInt(eachLetter), 10)
+      .every((number) => !isNaN(number));
+  }
 }
 
 const app = new App();
