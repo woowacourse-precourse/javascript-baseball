@@ -53,7 +53,18 @@ class App {
     this.gameResult = { ball: 0, strike: 0 };
   }
 
-  play() {}
+  play() {
+    Console.print(GAME_MESSAGE.startNotification);
+    this.gameStart();
+  }
+
+  gameStart() {
+    Console.readLine(GAME_MESSAGE.input, (ans) => this.setUserNumbers(ans));
+  }
+
+  setUserNumbers(inputValue) {
+    this.userNumbers = inputValue;
+  }
 }
 
 const app = new App();
