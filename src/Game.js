@@ -5,6 +5,7 @@ const print = require("./utils/print.js");
 const input = require("./utils/input.js");
 
 const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+const RESTART = 1;
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
