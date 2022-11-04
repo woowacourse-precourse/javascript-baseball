@@ -39,14 +39,16 @@ module.exports = class Game {
   getGameResultString(inputNumber) {
     const strikeCount = this.getStrikeCount(inputNumber);
     const ballCount = this.getBallCount(inputNumber);
-    if (strikeCount === 3) return GAME_WIN;
-    if (strikeCount == 0 && ballCount == 0) {
-      return `낫싱`;
-    }
-    if (strikeCount > 0 && ballCount == 0) {
-      return `${strikeCount}스트라이크`;
-    }
-    if (strikeCount == 0 && ballCount > 0) return `${ballCount}볼`;
+
+    const IS_ANSWER = strikeCount === 3;
+    const IS_NOTHING = strikeCount == 0 && ballCount === 0;
+    const IS_ONLY_STRIKE = strikeCount > 0 && ballCount == 0;
+    const IS_ONLY_BALL = strikeCount === 0 && ballCount > 0;
+
+    if (IS_ANSWER) return GAME_WIN;
+    if (IS_NOTHING) return `낫싱`;
+    if (IS_ONLY_STRIKE) return `${strikeCount}스트라이크`;
+    if (IS_ONLY_BALL) return `${ballCount}볼`;
     return `${ballCount}볼 ${strikeCount}스트라이크`;
   }
 
