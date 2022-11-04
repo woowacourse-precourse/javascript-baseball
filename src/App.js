@@ -97,28 +97,26 @@ class App {
 	}
 
 	getCompareResult(computerNumber, userNumber) {
-		const computerArray = [...computerNumber];
-		const userArray = [...userNumber];
-		const ballAndStrikeScore = this.getBallAndStrikeScore(computerArray, userArray);
-		const strikeScore = this.getStrikeScore(computerArray, userArray);
+		const ballAndStrikeScore = this.getBallAndStrikeScore(computerNumber, userNumber);
+		const strikeScore = this.getStrikeScore(computerNumber, userNumber);
 		const ballScore = ballAndStrikeScore - strikeScore;
 		return this.getResultString(strikeScore, ballScore);
 	}
 
-	getBallAndStrikeScore(computerArray, userArray) {
+	getBallAndStrikeScore(computerNumber, userNumber) {
 		let ballAndStrikeScore = SCORE_START_NUMBER;
-		computerArray.forEach(number => {
-			if (userArray.includes(number)) {
+		[...computerNumber].forEach(number => {
+			if ([...userNumber].includes(number)) {
 				ballAndStrikeScore += 1;
 			}
 		});
 		return ballAndStrikeScore;
 	}
 
-	getStrikeScore(computerArray, userArray) {
+	getStrikeScore(computerNumber, userNumber) {
 		let strikeScore = SCORE_START_NUMBER;
-		computerArray.forEach((number, index) => {
-			if (number === userArray[index]) {
+		[...computerNumber].forEach((number, index) => {
+			if (number === [...userNumber][index]) {
 				strikeScore += 1;
 			}
 		});
