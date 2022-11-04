@@ -29,17 +29,6 @@ class App {
     return answer;
   };
 
-  duplicateCheck(answer, val) {
-    return answer.every((e) => val !== e);
-  }
-
-  initializer = () => {
-    this.isRight = false;
-    this.err = false;
-    this.strike = 0;
-    this.ball = 0;
-  };
-
   async Game() {
     while (true) {
       this.initializer();
@@ -53,17 +42,36 @@ class App {
     }
   }
 
+  duplicateCheck(answer, val) {
+    return answer.every((e) => val !== e);
+  }
+
+  initializer = () => {
+    this.isRight = false;
+    this.err = false;
+    this.strike = 0;
+    this.ball = 0;
+  };
+
   async doBaseBall() {
     this.userAnswer = await this.input();
     this.checkBallValidity();
     if (!this.err) {
       this.judgeResult();
-      console.log(this.strike, this.ball);
       this.printResult();
+      this.checkWin();
     }
   }
 
+  checkWin = () => {
+    if (this.strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.isRight = true;
+    }
+  };
+
   printResult = () => {
+    console.log(this.strike, this.ball);
     if ((this.strike === 0) & (this.ball === 0)) {
       MissionUtils.Console.print("낫싱");
     } else if ((this.strike === 0) & (this.ball !== 0)) {
@@ -84,7 +92,7 @@ class App {
   countScore = (userAnswerBall, ballIdx) => {
     if (this.answer[ballIdx] === parseInt(userAnswerBall)) {
       this.countStrike();
-    } else if (this.answer.includes(userAnswerBall)) {
+    } else if (this.answer.includes(parseInt(userAnswerBall))) {
       this.countBall();
     }
   };
@@ -127,7 +135,5 @@ const endGame = () => {
 const app = new App();
 console.log(app.answer);
 app.play();
-
-// app.createAnswer();
 
 module.exports = App;
