@@ -1,10 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const checkException = require("./checkException");
+const Message = require("./message/message");
 
 function playGame() {
   MissionUtils.Console.readLine(
-    "숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ",
+    `${Message.START}\n${Message.INPUT}`,
     (input) => {
       console.log(input);
+      checkException(input);
     }
   );
 }
