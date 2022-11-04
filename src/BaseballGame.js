@@ -10,6 +10,7 @@ class BaseballGame {
   start() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.computerNumber = this.createComputerNumber();
+    this.playGame();
   }
 
   playGame() {
@@ -18,6 +19,8 @@ class BaseballGame {
       this.guess = userGuessToArray;
       validate(this.guess);
       const { strike, ball } = this.getResult();
+      const resultMessage = this.createResultMessage(strike, ball);
+      Console.print(resultMessage);
     });
   }
 
@@ -38,6 +41,14 @@ class BaseballGame {
       return indexOfComputerNumber !== -1 && indexOfComputerNumber !== idx;
     });
     return ball.length;
+  }
+
+  createResultMessage(strike, ball) {
+    let resultMessage = '';
+    if (strike === 0 && ball === 0) return '낫싱';
+    if (ball) resultMessage += `${ball}볼 `;
+    if (strike) resultMessage += `${strike}스트라이크`;
+    return resultMessage;
   }
 
   createComputerNumber() {
