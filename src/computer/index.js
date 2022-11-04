@@ -9,7 +9,7 @@ function getComputerNumber() {
     }
   }
 
-  return +computer.join("");
+  return computer.join("");
 }
 
 module.exports = { getComputerNumber };
