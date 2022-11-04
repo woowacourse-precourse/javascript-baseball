@@ -1,27 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
-  answer = "";
-  isValid = null;
-  constructor() {
-    this.answer = MissionUtils.Random.pickNumberInRange(123, 987);
+  selectNum() {
+    const computer = new Set();
+    while (computer.size < 3) {
+      computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    }
+    return String([...computer].join(""));
   }
-  isValid = (number) => {
-    let regex = new RegExp(/^[1-9]{3}&/);
-    let overlap = new RegExp(/([1-9])\1/);
 
-    return regex.test(String(number))
-      ? overlap.test(String(number))
-        ? true
-        : false
-      : false;
-  };
   play() {
-    MissionUtils.Console.readLine("닉네임을 입력해주세요.", (inputNum) => {
-      if (this.isValid(inputNum)) {
-      } else {
-        throw "유효하지 않는 값";
-      }
-    });
+    MissionUtils.Console.print("숫자게임을 시작합니다.");
+    this.selectNum();
   }
 }
 
