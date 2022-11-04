@@ -27,3 +27,4 @@
 ## ❕ 학습
 
 - `require` / `module.exports` (`ES Modules` <-> `CommonJS`)
+- `static` 메소드
