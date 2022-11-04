@@ -15,7 +15,7 @@ class App {
   userInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (inputNum) => {
       if (this.userInputvalidation(inputNum)) {
-        console.log(`숫자를 입력해주세요. ${inputNum}`);
+        console.log(`숫자를 입력해주세요 : ${inputNum}`);
         this.showResult(inputNum);
       } else {
         const error = new Error("유효한 값이 아닙니다");
@@ -40,8 +40,6 @@ class App {
       ballNum: this.countBalls(userInputNum),
       strikeNum: this.countStrikes(userInputNum),
     };
-
-    MissionUtils.Console.print(userInputNum, this.randomAnswer.join(""));
     if (!result.strikeNum && !result.ballNum) {
       MissionUtils.Console.print("낫싱");
     } else if (!result.strikeNum) {
@@ -50,7 +48,7 @@ class App {
       MissionUtils.Console.print(result.strikeNum + "스트라이크");
     } else {
       MissionUtils.Console.print(
-        `${result.ballNum} 볼 ${result.strikeNum} 스트라이크`
+        `${result.ballNum}볼 ${result.strikeNum}스트라이크`
       );
     }
     return result.strikeNum === 3 ? this.gameEnd() : this.userInput();
@@ -83,25 +81,30 @@ class App {
     );
   }
 
-  gameEndvalidation(endNum) {
-    switch (endNum) {
-      case 1:
+  gameEndvalidation(endNumber) {
+    MissionUtils.Console.print(endNumber);
+    switch (endNumber) {
+      case "1":
+        this.playProcess();
+        break;
+
+      case "2":
+        MissionUtils.Console.print("게임종료");
         MissionUtils.Console.close();
         break;
 
-      case 2:
-        this.play();
-        break;
-
       default:
-        MissionUtils.Console.print(
-          "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-        );
+        this.gameEnd();
+        break;
     }
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.playProcess();
+  }
+
+  playProcess() {
     this.randomAnswer = this.generationRandomAnswer();
     this.userInput();
   }
