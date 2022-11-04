@@ -34,4 +34,7 @@ describe("문자열 테스트", () => {
 
     expect(result).toThrow(RangeError);
   });
+
 });
+
+
