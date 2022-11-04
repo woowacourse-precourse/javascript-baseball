@@ -66,8 +66,7 @@ class App {
       (input) => {
         if (this.RESTART === input) {
           this.startGame();
-        }
-        if (this.EXIT === input) {
+        } else if (this.EXIT === input) {
           MissionUtils.Console.close();
         } else {
           throw new Error("올바르지 않은 입력입니다");
