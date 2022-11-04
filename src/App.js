@@ -1,16 +1,27 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const checkResult = (computer, user) => {
-  let count = 0;
-  const test = user.split('').map((a) => Number(a));
+const getStrike = (computer, user) => {
+  let strike = 0;
+
   for (let i = 0; i < 3; i++) {
-    if (computer[i] !== test[i]) break;
-    count += 1;
+    if (computer[i] === user[i]) {
+      strike += 1;
+    }
   }
-  if (count === 3) {
+
+  return strike;
+};
+
+const checkResult = (computer, userNumber) => {
+  const user = userNumber.split('').map((a) => Number(a));
+  const strike = getStrike(computer, user);
+
+  if (strike === 3) {
+    MissionUtils.Console.print(`${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
     MissionUtils.Console.close();
   } else {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (user) => checkResult(computer, user));
+    MissionUtils.Console.print(`${strike}스트라이크`);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
   }
 };
 
@@ -26,7 +37,7 @@ class App {
     }
 
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (user) => checkResult(computer, user));
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => checkResult(computer, userNumber));
   }
 }
 
