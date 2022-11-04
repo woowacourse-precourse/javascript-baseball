@@ -1,4 +1,4 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 
 const RANDOMLIST = Object.freeze({
   STARTPOINT: 1,
@@ -61,6 +61,10 @@ class App {
 
   isStrikeOut(random, input) {
     return this.countStrike(random, input) === 3;
+  }
+
+  print(message) {
+    Console.print(message);
   }
 
   play() {}
