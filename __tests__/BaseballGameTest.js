@@ -100,4 +100,17 @@ describe('숫자 야구 게임', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('게임 종료 후 사용자의 입력값이 1 또는 2 이외의 값일 때 예외 발생', () => {
+    const randoms = [7, 1, 5];
+    const userValue = ['715', '3'];
+
+    mockRandoms(randoms);
+    mockUserValue(userValue);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
