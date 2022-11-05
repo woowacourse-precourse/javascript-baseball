@@ -65,7 +65,7 @@ describe("숫자 야구 게임", () => {
 
     expect(app.getResultMessage(0, 0)).toEqual('낫싱');
     expect(app.getResultMessage(1, 0)).toEqual('1스트라이크');
-    expect(app.getResultMessage(1, 1)).toEqual('1스트라이크 1볼');
+    expect(app.getResultMessage(1, 1)).toEqual('1볼 1스트라이크');
     expect(app.getResultMessage(3, 0)).toEqual('3스트라이크');
   })
 });
