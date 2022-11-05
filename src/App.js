@@ -24,7 +24,10 @@ class App {
     });
   }
 
-  wrongInput(err) {}
+  wrongInput(err) {
+    MissionUtils.Console.print(err);
+    MissionUtils.Console.close();
+  }
 
   close() {
     MissionUtils.Console.close();
