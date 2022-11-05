@@ -3,8 +3,13 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   #userInput;
   #answer;
-  #correct = false;
-  #finish = false;
+  #correct;
+  #finish;
+
+  constructor() {
+    this.#correct = false;
+    this.#finish = false;
+  }
 
   startMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -98,7 +103,6 @@ class App {
   }
 
   game() {
-    this.startMessage();
     this.pickNumber();
     while (!this.#correct) {
       this.getUserInput();
@@ -117,10 +121,11 @@ class App {
   checkRestartInput(input) {
     console.log("재시작 입력 : ", input);
     if (!["1", "2"].includes(input)) throw "잘못된 입력값입니다.";
-    if (input === "2") this.#finish = true;
+    if (input === "1") this.#correct = false;
   }
 
   play() {
+    this.startMessage();
     while (!this.#finish) {
       this.game();
       this.askRestart();
