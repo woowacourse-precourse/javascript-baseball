@@ -16,4 +16,7 @@ describe('상대방(Computer)의 숫자 테스트', () => {
     const testComputerSet = new Set(app.createComputerNum());
     expect(testComputerSet.size).toEqual(3);
   });
+  test('1-4. 길이가 3이 아닌 경우', () => {
+    expect(app.createComputerNum().length).toEqual(3);
+  });
 });
