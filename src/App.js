@@ -1,9 +1,9 @@
 const giveHint = require("./components/giveHint");
-const checkRandomNum = require("./components/firstAnnouncement");
+const firstAnnouncement = require("./components/firstAnnouncement");
 
 class App {
   play() {
-    checkRandomNum();
+    firstAnnouncement();
     giveHint();
   }
 }
