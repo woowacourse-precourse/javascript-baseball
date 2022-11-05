@@ -99,4 +99,27 @@ describe("숫자 야구 게임", () => {
 
     expect(testResult).toEqual(false);
   });
+
+  test("유효하지 않은 값을 입력한 경우 예외를 발생시킨다.", () => {
+    const answers = ["112"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.inputNumber();
+    }).toThrow();
+  });
+
+  test("유효한 값을 입력한 경우 입력값을 playerNumber에 저장한다.", () => {
+    const answers = ["123"];
+
+    mockQuestions(answers);
+
+    const app = new App();
+    app.inputNumber();
+    const testResult = app.playerNumber.join("");
+
+    expect(testResult).toEqual("123");
+  });
 });
