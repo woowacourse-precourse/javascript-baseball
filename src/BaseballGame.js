@@ -20,7 +20,7 @@ class BaseballGame {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
       this.user.setUserNumber(userNumber);
       result = this.compareNumbers(this.user.number, this.computer.numbers);
-      console.log(result);
+      console.log(result); // 여기 수정
       this.gameLoop(result);
     });
   }
@@ -37,7 +37,8 @@ class BaseballGame {
         if (answer === "1") {
           this.initGame();
         } else if (answer === "2") {
-          process.exit();
+          MissionUtils.Console.close();
+
         }
       }
     );
@@ -65,7 +66,7 @@ class BaseballGame {
     if (strike > 0) {
       resultMessage.push(`${strike}스트라이크`);
     }
-    return resultMessage.join(" ");
+    return resultMessage.length === 0 ? '낫싱' : resultMessage.join(" ");
   }
 }
 
