@@ -36,13 +36,13 @@ class App {
     this.resetHint();
 
     this.input.forEach((digitNumber, index) => {
-      if (this.answer[index] === digitNumber) this.hint['strike'] += 1;
+      if (this.answer[index] === digitNumber) this.hint.strike += 1;
       if (
         this.answer.includes(digitNumber) &&
         this.answer[index] !== digitNumber
       )
-        this.hint['ball'] += 1;
-      if (!this.answer.includes(digitNumber)) this.hint['nothing'] += 1;
+        this.hint.ball += 1;
+      if (!this.answer.includes(digitNumber)) this.hint.nothing += 1;
     });
 
     this.printHint();
@@ -101,16 +101,15 @@ class App {
   }
 
   printHint() {
-    if (this.hint['strike'] === 3) {
+    if (this.hint.strike === 3) {
       App.print('3스트라이크');
       return this.success();
     }
-    if (this.hint['nothing'] === 3) return App.print('낫싱');
-    if (this.hint['strike'] === 0) return App.print(`${this.hint['ball']}볼`);
-    if (this.hint['ball'] === 0)
-      return App.print(`${this.hint['strike']}스트라이크`);
+    if (this.hint.nothing === 3) return App.print('낫싱');
+    if (this.hint.strike === 0) return App.print(`${this.hint.ball}볼`);
+    if (this.hint.ball === 0) return App.print(`${this.hint.strike}스트라이크`);
 
-    return App.print(`${this.hint['ball']}볼 ${this.hint['strike']}스트라이크`);
+    return App.print(`${this.hint.ball}볼 ${this.hint.strike}스트라이크`);
   }
 
   setAnswerAndreceiveInput() {
