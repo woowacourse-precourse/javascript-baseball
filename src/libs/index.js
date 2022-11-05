@@ -1,7 +1,11 @@
-const game = require("./game");
-const statusValidation = require("./statusValidation");
+const makeBallCountString = require("./makeBallCountString");
+const getRandomThreeNumber = require("./getRandomThreeNumber");
+const checkRestartInputValidation = require("./checkRestartInputValidation");
+const checkBallInputValidation = require("./checkBallInputValidation");
 
 module.exports = {
-  game,
-  statusValidation,
+  makeBallCountString,
+  getRandomThreeNumber,
+  checkRestartInputValidation,
+  checkBallInputValidation,
 };
