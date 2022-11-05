@@ -10,7 +10,7 @@ class Game {
 
   start() {
     this.computerNumber = generateRandomComputerNumber();
-    this.gameCount += 1; 
+    this.gameCount += 1;
 
     if (this.gameCount === 1) MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
@@ -20,22 +20,30 @@ class Game {
   getUserInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.validateUserInputNumber(input);
-      this.getResult(input)
+      this.getResult(input);
     });
   }
 
   getResult(userInputNumber) {
-    const gameCalculator =  new CalculateGame(this.computerNumber, userInputNumber);
+    const gameCalculator = new CalculateGame(this.computerNumber, userInputNumber);
 
     MissionUtils.Console.print(gameCalculator.getResult());
 
     if (gameCalculator.checkSuccess()) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      // if successful ask if restart question
+      this.askRestart();
     } else {
-      // keep getting user input until user input matches computer number
       this.getUserInputNumber();
     }
+  }
+
+  askRestart() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (input) => {
+        // decide reset based on user input
+      }
+    );
   }
 
   validateUserInputNumber(input) {
