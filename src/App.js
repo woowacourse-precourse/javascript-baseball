@@ -42,7 +42,7 @@ class App {
     if (count.strike > 0) {
       this.hint += ` ${count.strike}스트라이크`;
     }
-    if (hint === '') {
+    if (this.hint === '') {
       this.hint = '낫싱';
     }
     this.hint.trimStart();
