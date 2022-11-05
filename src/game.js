@@ -4,42 +4,37 @@ const GAME_MESSAGE = require("./constants/message");
 class NumericBaseballGame {
   constructor() {}
 
-  async creat() {
+  getNumberFromComputer() {
     const getRandomNumber = () => MissionUtils.Random.pickNumberInRange(1, 9);
-    const isNumberNotInSpace = (number, array) => !array.includes(number);
     const isNotFull = (computerSpace) => computerSpace.length < 3;
-    const convertArgsStringToInt = (arg) => Number(arg);
+    const isNumberNotInSpace = (number, array) => !array.includes(number);
     const InsertNumberToSpace = (computerNumberSpace) => {
       const number = getRandomNumber();
       if (isNumberNotInSpace(number, computerNumberSpace)) {
         computerNumberSpace.push(number);
       }
     };
-    const getNumberFromComputer = () => {
-      const computerNumberSpace = [];
-      while (isNotFull(computerNumberSpace)) {
-        InsertNumberToSpace(computerNumberSpace);
-      }
-      return computerNumberSpace;
-    };
 
-    const getNumberFromUser = async () => {
-      const inputStringNumberFromUser = await new Promise((resolve) => {
-        MissionUtils.Console.readLine("숫자를 입력하시오. : ", (answer) => {
-          resolve(answer);
-        });
+    const computerNumberSpace = [];
+    while (isNotFull(computerNumberSpace)) {
+      InsertNumberToSpace(computerNumberSpace);
+    }
+    return computerNumberSpace;
+  }
+
+  async getNumberFromUser() {
+    const convertArgsStringToInt = (arg) => Number(arg);
+
+    const inputStringNumberFromUser = await new Promise((resolve) => {
+      MissionUtils.Console.readLine("숫자를 입력하시오. : ", (answer) => {
+        resolve(answer);
       });
+    });
 
-      if (this.checkArgNumberValid(inputStringNumberFromUser)) {
-        return Array.from(
-          [...inputStringNumberFromUser],
-          convertArgsStringToInt
-        );
-      }
-      throw new Error("유효하지 않은 숫자입니다.");
-    };
-
-    return [getNumberFromComputer(), await getNumberFromUser()];
+    if (this.checkArgNumberValid(inputStringNumberFromUser)) {
+      return Array.from([...inputStringNumberFromUser], convertArgsStringToInt);
+    }
+    throw new Error("유효하지 않은 숫자입니다.");
   }
 
   checkArgNumberValid(number) {
@@ -58,8 +53,8 @@ class NumericBaseballGame {
 
   async start() {
     MissionUtils.Console.print(GAME_MESSAGE.NOTIFY_START_MESSAGE);
-    const [numberFromComputer, numberFromUser] = await this.creat();
-    console.log(numberFromComputer, numberFromUser);
+    const numberFromComputer = this.getNumberFromComputer();
+    const numberFromUserInput = await this.getNumberFromUser();
   }
 }
 module.exports = NumericBaseballGame;
