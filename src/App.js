@@ -1,61 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const getComputerInput = () => {
-  let computerInput = [];
-  while (computerInput.length < 3) {
-    const randomNumber = MissionUtils.Random.pickNumberInRange(1,9);
-    if (!computerInput.includes(randomNumber)) {
-      computerInput.push(randomNumber);
-    }
-  }
-  return computerInput.join("");
-}
-
-const getUserInput = () => {
-  let userAnswer;
-  MissionUtils.Console.readLine("사용자가 입력한 숫자 불러오기", (userValue) => {
-    if (userValue) {
-      userAnswer = userValue;
-    }
-  });
-  return userAnswer;
-};
-
-const compareUserAndComputer = (user, computer) => {
-  user = [...user];
-  computer = [...computer];
-  let i = 0;
-  let strike = 0;
-  let ball = 0;
-  user.forEach(element => {
-    if (computer.includes(element)){
-      if (element === computer[i]) { strike += 1 }
-      else { ball += 1}
-    }
-    i += 1;
-  });
-
-  return [strike, ball];
-}
-
-const printResult = (user, computer) => {
-  let [strike, ball] = compareUserAndComputer(user, computer);
-
-  if (strike === 0 && ball === 0) { MissionUtils.Console.print("낫싱")};
-  if (strike === 1 && ball === 0) { MissionUtils.Console.print("1스트라이크")};
-  if (strike === 2 && ball === 0) { MissionUtils.Console.print("2스트라이크")};
-  if (strike === 3 && ball === 0) { MissionUtils.Console.print("3스트라이크")};
-  if (strike === 0 && ball === 1) { MissionUtils.Console.print("1볼")};
-  if (strike === 0 && ball === 2) { MissionUtils.Console.print("2볼")};
-  if (strike === 1 && ball === 1) { MissionUtils.Console.print("1볼 1스트라이크")};
-  if (strike === 1 && ball === 2) { MissionUtils.Console.print("2볼 1스트라이크")};
-}
-
-
 
 class App {
+
+  constructor () {}
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
     let user = this.getUserInput();
     let computer = this.getComputerInput();
 
@@ -85,8 +37,78 @@ class App {
         continue;
       }
     }
-
   }
+
+  getUserInput () {
+    let userAnswer;
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
+      if (userValue) {
+        userAnswer = userValue;
+      }
+    });
+    // 스트라이크 아웃이 된 이후 1, 2를 받아 올 수 있음. 만약 그 값이 2라면 종료해야됨
+    if (userAnswer === '2') {
+      MissionUtils.Console.print(`${userAnswer}`); 
+    }
+    else if (userAnswer === '1') { 
+      MissionUtils.Console.print(`${userAnswer}`); 
+    }
+    else { 
+      MissionUtils.Console.print(`${userAnswer}`); 
+    }
+  
+    return userAnswer;
+  };
+
+  getComputerInput() {
+    let computerInput = [];
+    while (computerInput.length < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1,9);
+      if (!computerInput.includes(randomNumber)) {
+        computerInput.push(randomNumber);
+      }
+    }
+    return computerInput.join("");
+  }
+
+  compareUserAndComputer(user, computer) {
+    user = [...user];
+    computer = [...computer];
+    let i = 0;
+    let strike = 0;
+    let ball = 0;
+    user.forEach(element => {
+      if (computer.includes(element)){
+        if (element === computer[i]) { strike += 1 }
+        else { ball += 1}
+      }
+      i += 1;
+    });
+  
+    return [strike, ball];
+  }
+  
+  isStrikeOut(user, computer) {
+    let [strike, ball] = this.compareUserAndComputer(user, computer);
+  
+    if (strike === 0 && ball === 0) { MissionUtils.Console.print("낫싱")};
+    if (strike === 1 && ball === 0) { MissionUtils.Console.print("1스트라이크")};
+    if (strike === 2 && ball === 0) { MissionUtils.Console.print("2스트라이크")};
+    if (strike === 3 && ball === 0) { 
+      MissionUtils.Console.print("3스트라이크");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return 1;
+    };
+    if (strike === 0 && ball === 1) { MissionUtils.Console.print("1볼")};
+    if (strike === 0 && ball === 2) { MissionUtils.Console.print("2볼")};
+    if (strike === 1 && ball === 1) { MissionUtils.Console.print("1볼 1스트라이크")};
+    if (strike === 1 && ball === 2) { MissionUtils.Console.print("2볼 1스트라이크")};
+  
+  
+    return 0;
+  }
+
+  
 }
 
 module.exports = App;
