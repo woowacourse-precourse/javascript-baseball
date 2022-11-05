@@ -21,17 +21,17 @@
 
 ## 구현할 메소드 목록
 
-- app
+- [ ] app
 
-  - startApp : app이 user input을 물어보는 동작부터 시작
-  - endApp : app을 종료시킨다.
-  - askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
-  - compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
+  - [x] startApp : app이 user input을 물어보는 동작부터 시작
+  - [x] endApp : app을 종료시킨다.
+  - [x] askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
+  - [x] compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
+  - [ ] initAnswerMap
 
-- user
+- [ ]user
 
-  - getUserNumberFromInput
+  - [x] getUserNumberFromInput
 
-- computer
-
-  - getComputerRandomNumber
+- [ ] computer
+  - [ ] getComputerRandomNumber
