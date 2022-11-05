@@ -21,7 +21,7 @@ class App {
 
   play() {
     let select = this.gameplay();
-    while (select === 1) {
+    while (select === "1") {
       select = this.gameplay();
     }
   }
