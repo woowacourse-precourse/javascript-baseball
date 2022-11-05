@@ -9,7 +9,7 @@ class Game {
   }
 
   init() {
-    this.start(MESSAGE.START);
+    this.print(MESSAGE.START);
     this.randomNumbers = this.generateRandomNumber(1, 9, 3);
     this.isCorrect = false;
   }
@@ -18,8 +18,8 @@ class Game {
     this.playRound(this.randomNumbers);
   }
 
-  start(startMessage) {
-    MissionUtils.Console.print(startMessage);
+  print(message) {
+    MissionUtils.Console.print(message);
   }
 
   generateRandomNumber(min, max, length) {
@@ -48,6 +48,7 @@ class Game {
 
       if (strike === 3) {
         this.isCorrect = true;
+        this.print(MESSAGE.SUCCESS);
         return;
       }
 
