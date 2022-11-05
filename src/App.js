@@ -31,7 +31,6 @@ class App {
 
   solveNumber(computer) {
     this.selectUser(computer);
-    this.isAnswer(result, computer);
   }
 
   selectUser(computer) {
@@ -42,7 +41,7 @@ class App {
 
   countScore(computer, user) {
     const score = this.calculateScore(computer, user);
-    return this.printScore(score);
+    return this.printScore(score, computer);
   }
 
   isError(user, computer) {
@@ -73,7 +72,7 @@ class App {
     return [ball, strike];
   }
 
-  printScore(score) {
+  printScore(score, computer) {
     const scoreList = [
       { name: "볼", score: score[0] },
       { name: "스트라이크", score: score[1] },
@@ -94,7 +93,7 @@ class App {
     }
 
     MissionUtils.Console.print(result);
-    return result;
+    return this.isAnswer(result, computer);
   }
 
   isAnswer(answer, computer) {
