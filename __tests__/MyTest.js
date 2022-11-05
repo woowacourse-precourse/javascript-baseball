@@ -1,6 +1,22 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 test("1 = 1", () => {
   expect(1).toBe(1);
 });
@@ -35,4 +51,17 @@ test("사용자 숫자 상대방 숫자 비교3", () => {
   const nbb = [1, 3, 2];
   const app = new App();
   expect(app.compare(nab, nbb)).toEqual("2볼 1스트라이크");
+});
+
+test("예외 테스트", () => {
+  const randoms = [1, 3, 5];
+  const answers = ["1234"];
+
+  mockRandoms(randoms);
+  mockQuestions(answers);
+
+  expect(() => {
+    const app = new App();
+    app.play();
+  }).toThrow();
 });
