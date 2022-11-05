@@ -22,8 +22,8 @@
 
 ### 입출력을 담당하는 클래스들
 
-- [-] Store에서 freshData 정보를 받으면 각 클래스는 update 메소드를 실행
-- [-] gameStatus에 따라 문자열을 출력하기
+- [o] Store에서 freshData 정보를 받으면 각 클래스는 update 메소드를 실행
+- [o] gameStatus에 따라 문자열을 출력하기
 - [-] ball, strike에 따라 문자열을 출력하고 입력받기
 - [-] 입력이 잘못되었을 때 에러처리
 - [-] Dispatcher 에게 action 객체를 만들어서 전달해주기
