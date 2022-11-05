@@ -35,6 +35,10 @@
 - [x]user
 
   - [x] getUserNumberFromInput
+  - [x] getInput
+  - [x] setNumberArray
+  - [x] validInput
+  - [x] makeInputToArray
 
 - [x] computer
 
