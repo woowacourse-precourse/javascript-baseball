@@ -19,9 +19,23 @@ class App {
     return new Promise((resolve) => {
       MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) => {
         this.userInput = Array.from(input, Number);
+        this.checkInput(this.userInput);
         resolve();
       });
     });
+  }
+
+  checkInput(userInput) {
+    const inputSet = new Set(userInput);
+
+    if (
+      inputSet.size !== userInput.length
+      || inputSet.size > 3
+      || inputSet.has(NaN)
+      || inputSet.has(0)
+    ) {
+      throw new Error('잘못된 값을 입력하셨습니다.');
+    }
   }
 
   setCount(answer, userInput) {
@@ -70,10 +84,17 @@ class App {
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
         (input) => {
           this.state = Number(input);
+          this.checkState(this.state);
           resolve();
         }
       );
     });
+  }
+
+  checkState(state) {
+    if (state === 1 || state === 2) {
+      throw new Error('잘못된 값을 입력하셨습니다.');
+    }
   }
 
   async play() {
