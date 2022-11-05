@@ -6,6 +6,7 @@ const BaseballModel = require("./BaseballModel");
 const readLine = MissionUtils.Console.readLine;
 
 const ALL_STRIKE = "3스트라이크";
+const END_OF_GAME = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 
 class BaseballGame {
   baseballModel;
@@ -24,19 +25,11 @@ class BaseballGame {
     return this.baseballModel.getRandom();
   }
 
-  static scoreSet(score) {
-    this.baseballModel.strike = score.strike;
-    this.baseballModel.ball = score.ball;
-
-    return this.baseballModel;
-  }
-
   static compareComputerAndUser(userGuessNumber) {
     const userNumber = GameUtils.userInputToNumberArr(userGuessNumber);
     const random = BaseballGame.getRandom();
     const score = GameUtils.evaluScore(userNumber, random);
-    const scoreModel = BaseballGame.scoreSet(score);
-    willGameContinue(GameUtils.printFormat(scoreModel));
+    willGameContinue(GameUtils.printFormat(score));
   }
 }
 // const willPlayMoreGame = () => {
@@ -46,6 +39,7 @@ class BaseballGame {
 const willGameContinue = (result) => {
   if (result === ALL_STRIKE) {
     GameUtils.printLine(result);
+    GameUtils.printLine(END_OF_GAME);
     willPlayMoreGame();
   }
   if (result !== ALL_STRIKE) {
