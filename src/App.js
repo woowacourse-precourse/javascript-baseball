@@ -91,4 +91,9 @@ class App {
     }
   }
 
+  play() {
+    this.startGameOption();
+  }
+}
+
 module.exports = App;
