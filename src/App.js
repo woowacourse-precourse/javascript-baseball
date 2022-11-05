@@ -62,13 +62,17 @@ class App {
   restartOrExit() {
     MissionUtils.Console.readLine('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
         answer = Number(answer);
-        if (answer = 1) {
-          const restarApp = new App();
-          restarApp.play();
-        } else if(answer = 2){
+        if (answer === 1) {
+          const restartApp = new App();
+          restartApp.play();
+        } else if (answer === 2) {
           gameEixt();
         }
       }
+    }
+
+    gameExit() {
+
     }
 
     play() {
