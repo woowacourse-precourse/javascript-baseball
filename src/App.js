@@ -45,6 +45,20 @@ function compareNumber(computerNumber, userNumber) {
   return { strike: strike, ball: sameNumber - strike };
 }
 
+function printScore(scoreObject) {
+  let resultMessage = "";
+  if (scoreObject.ball) {
+    resultMessage += scoreObject.ball + "볼";
+  }
+  if (scoreObject.strike) {
+    resultMessage += (resultMessage && " ") + scoreObject.strike + "스트라이크";
+  }
+  if (!scoreObject.ball && !scoreObject.strike) {
+    resultMessage = "낫싱";
+  }
+  return resultMessage;
+}
+
 class App {
   play() {}
 }
