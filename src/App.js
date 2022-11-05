@@ -36,11 +36,15 @@ class App {
     const totalCountStrike = counter.countStrike(inputNumber, this.computerNumberArr);
     const totalCountBall = counter.countBall(inputNumber, this.computerNumberArr);
     this.printNumberOfBallAndStrike(totalCountBall, totalCountStrike);
+    this.checkThreeStrike(totalCountBall, totalCountStrike);
   }
 
   printNumberOfBallAndStrike(totalCountBall, totalCountStrike) {
     const print = new Print();
     print.printPlayGame(totalCountBall, totalCountStrike);
+  }
+
+  checkThreeStrike(totalCountBall, totalCountStrike) {
     if (totalCountBall === 0 && totalCountStrike === 3) {
       return this.inputExitOrReStart();
     }
