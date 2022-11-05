@@ -2,16 +2,10 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 
 const CONSOLE_MESSAGE = {
   gameStart: '숫자 야구 게임을 시작합니다.',
+  gameEnd: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  gameRestart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
   getQuery: '숫자를 입력해주세요 : ',
 };
-
-async function readLineAsync(message) {
-  return new Promise((res) => {
-    Console.readLine(message, (line) => {
-      res(line);
-    });
-  });
-}
 
 class App {
   answer = '';
@@ -40,7 +34,7 @@ class App {
       case ballCount === 0:
         return `${strikeCount}스트라이크`;
       default:
-        return `${strikeCount}스트라이크 ${ballCount}볼`;
+        return `${ballCount}볼 ${strikeCount}스트라이크`;
     }
   }
 
@@ -67,27 +61,28 @@ class App {
     };
   }
 
-  checkRestart() {}
+  handleGameEnd() {}
 
-  async repeatQuery() {
-    while (true) {
-      const query = await readLineAsync(CONSOLE_MESSAGE.getQuery);
+  repeatQuery() {
+    Console.readLine(CONSOLE_MESSAGE.getQuery, (query) => {
       this.checkValidQuery(query);
 
-      const { isGameEnd, resultMessage } = await this.getQueryResult(query);
+      const { isGameEnd, resultMessage } = this.getQueryResult(query);
       Console.print(resultMessage);
 
-      if (isGameEnd && !this.checkRestart()) {
-        break;
+      if (isGameEnd) {
+        this.handleGameEnd();
+      } else {
+        this.repeatQuery();
       }
-    }
+    });
   }
 
   play() {
     Console.print(CONSOLE_MESSAGE.gameStart);
-    this.resetAnswer();
 
     try {
+      this.resetAnswer();
       this.repeatQuery();
     } catch {
       Console.close();
