@@ -5,9 +5,9 @@ class App {
   constructor() {
     this.computerNumbers = [];
     this.userNumbers = [];
-    this.gameCount = {
-      strike: 0,
+    this.ballStrikeCount = {
       ball: 0,
+      strike: 0,
     };
     this.result = '';
   }
@@ -33,11 +33,11 @@ class App {
     Console.readLine(message.INPUT, (number) => {
       this.userNumbers = [...number];
 
-      this.setStrikeBallCount();
+      this.setBallStrikeCount();
       this.setResult();
       Console.print(this.result);
 
-      if (this.gameCount.strike === 3) {
+      if (this.ballStrikeCount.strike === 3) {
         Console.print(message.CORRECT);
         this.readRestartInput();
       }
@@ -46,28 +46,28 @@ class App {
     });
   }
 
-  setStrikeBallCount() {
-    const strikeBallCount = {
-      strike: 0,
+  setBallStrikeCount() {
+    const ballStrikeCount = {
       ball: 0,
+      strike: 0,
     };
 
     this.userNumbers.forEach((number, i) => {
       if (number === this.computerNumbers[i]) {
-        strikeBallCount.strike += 1;
+        ballStrikeCount.strike += 1;
         return;
       }
 
       if (this.computerNumbers.includes(number)) {
-        strikeBallCount.ball += 1;
+        ballStrikeCount.ball += 1;
       }
     });
 
-    this.gameCount = strikeBallCount;
+    this.ballStrikeCount = ballStrikeCount;
   }
 
   setResult() {
-    const { strike, ball } = this.gameCount;
+    const { ball, strike } = this.ballStrikeCount;
     const ballMessage = `${ball}${message.BALL}`;
     const strikeMessage = `${strike}${message.STRIKE}`;
 
