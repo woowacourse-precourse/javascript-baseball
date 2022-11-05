@@ -80,11 +80,18 @@ describe("숫자 야구 게임", () => {
   });
 
   test("알맞은 콘솔 출력 테스트", () => {
-    const app = new App();
+    const randoms = [1, 2, 3];
+    const answers = ["189", "819", "139", "132", "123"];
+    const messages = ["1볼", "1스트라이크", "1볼 1스트라이크", "2볼 1스트라이크", "3스트라이크"]
+    const logSpy = getLogSpy();
 
-    expect(app.getResultMessage(0, 0)).toEqual('낫싱');
-    expect(app.getResultMessage(1, 0)).toEqual('1스트라이크');
-    expect(app.getResultMessage(1, 1)).toEqual('1볼 1스트라이크');
-    expect(app.getResultMessage(3, 0)).toEqual('3스트라이크');
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   })
 });
