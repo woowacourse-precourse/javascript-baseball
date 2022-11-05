@@ -1,3 +1,4 @@
+const Validator = require('./Validator');
 const { Random, Console } = require('./util/missionUtils');
 const { MAX_LENGTH, BEGIN_NUM, END_NUM } = require('./common/constants');
 const {
@@ -5,9 +6,6 @@ const {
   END_MESSAGE,
   GAMEOVER_MESSAGE,
   INPUT_MESSGAE,
-  INVALID_NUMERIC_ERROR_MESSAGE,
-  DUPLICATE_NUMERIC_ERROR_MESSAGE,
-  RANGE_ERROR_MESSAGE,
 } = require('./common/messages');
 
 class App {
@@ -48,65 +46,20 @@ class App {
 
   checkPlayerInput(playerInput) {
     const checkList = [
-      this.isNumber,
-      this.isValidInputLength,
-      this.isValidRangeOfNumber,
-      this.isUniqueNumber,
+      Validator.isNumber,
+      Validator.isValidInputLength,
+      Validator.isValidRangeOfNumber,
+      Validator.isUniqueNumber,
     ];
 
     let isValid = false;
-    checkList.forEach((validInputCheckFunction) => {
-      isValid = validInputCheckFunction(playerInput);
+    checkList.forEach((validatorFunction) => {
+      isValid = validatorFunction(playerInput);
     });
 
     if (isValid) {
       this.printGameResult(playerInput);
     }
-  }
-
-  isNumber(playerInput) {
-    const convertNumberPlayerInput = Number(playerInput);
-    const isNoNumber = isNaN(convertNumberPlayerInput);
-
-    if (isNoNumber) {
-      throw new Error(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
-    }
-
-    return true;
-  }
-
-  isValidInputLength(playerInput) {
-    const convertStringPlayerInput = String(playerInput);
-
-    if (convertStringPlayerInput.length !== MAX_LENGTH) {
-      throw new Error(`${RANGE_ERROR_MESSAGE}`);
-    }
-
-    return true;
-  }
-
-  isValidRangeOfNumber(playerInput) {
-    const convertStringPlayerInput = String(playerInput);
-    const inputNumbers = convertStringPlayerInput.split('');
-
-    inputNumbers.forEach((inputNumber) => {
-      if (inputNumber < BEGIN_NUM) {
-        throw new Error(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
-      }
-    });
-
-    return true;
-  }
-
-  isUniqueNumber(playerInput) {
-    const convertStringPlayerInput = String(playerInput);
-    const differentNumbers = [...new Set(convertStringPlayerInput)];
-
-    if (differentNumbers.length !== MAX_LENGTH) {
-      throw new Error(`${DUPLICATE_NUMERIC_ERROR_MESSAGE}`);
-    }
-
-    return true;
   }
 
   countStrike(playerPickedNumbers) {
