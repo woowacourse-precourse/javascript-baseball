@@ -5,7 +5,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const computerNumber = this.createComputerNumber();
     const userNumber = this.inputUserNumber();
-    console.log(computerNumber, userNumber);
+    // console.log(computerNumber, userNumber);
   }
 
   // 컴퓨터의 숫자 랜덤으로 생성한다. (1부터 9까지 서로 다른 수로 이루어진 3자리의 수)
@@ -34,11 +34,12 @@ class App {
 
   // 사용자가 입력한 숫자 유효성 검사
   vaildCheck(number) {
+    // console.log(number);
     const set = new Set(number);
     const len = number.length;
     //  입력한 수가 3자리 수인가
     if (len !== 3) {
-      throw "숫자를 입력하세요.";
+      throw "3자리 수를 입력해주세요.";
     }
     // 서로 다른 숫자인가
     if (len === set.size) {
@@ -56,4 +57,5 @@ class App {
 
 const app = new App();
 app.play();
+
 module.exports = App;
