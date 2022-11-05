@@ -48,6 +48,9 @@ class BaseBallValidator {
     });
     return false;
   }
+  isFinish(baseballDto) {
+    return baseballDto.strike === 3;
+  }
 }
 
 export default BaseBallValidator;

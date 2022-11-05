@@ -18,10 +18,22 @@ class BaseballComputer {
     return userNumbers;
   }
   getBallState(userNumbers) {
-    return this.baseballValidator.checkBallState(
+    const baseballDto = this.baseballValidator.checkBallState(
       this.baseballNumbers,
       userNumbers
     );
+    this.baseBallOutput.result(baseballDto);
+    return baseballDto;
+  }
+  isFinish(baseballDto) {
+    if (this.baseballValidator.isFinish(baseballDto)) {
+      this.baseballOutput.end();
+      return true;
+    }
+    return false;
+  }
+  restart() {
+    return this.baseballOutput.restart();
   }
 }
 
