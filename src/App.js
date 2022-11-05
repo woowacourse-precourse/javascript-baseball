@@ -94,8 +94,8 @@ class App {
     const QUERY_STRING = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
     const DECISION_HANDLER = (input) => {
       App.throwError(input === '1' || input === '2');
-      const nextEvent = input === '2' ? () => MissionUtils.Console.close() : () => this.play();
-      nextEvent();
+      const NEXT_EVENT = input === '2' ? () => MissionUtils.Console.close() : () => this.play();
+      NEXT_EVENT();
     };
     MissionUtils.Console.readLine(QUERY_STRING, DECISION_HANDLER);
   }
