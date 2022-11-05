@@ -15,8 +15,23 @@ class App {
   }
   receivePredictNum() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
-      return this.predictNum = inputNum;
+      const checkedInputNum = this.validCheck(inputNum);
+      return this.predictNum = checkedInputNum;
     });
+  }
+  validCheck(number){
+    const numberIsDiff = new Set(number).size;
+    const isntNum = /[^0-9]/g;
+    if(number.length!==3){
+      throw new Error("3자리 숫자를 입력해주세요");
+    }
+    if(numberIsDiff!==3){
+      throw new Error("서로 다른 숫자를 입력해주세요");
+    }
+    if(isntNum.test(number)){
+      throw new Error("숫자만 입력해주세요(0~9)");
+    }
+    return number;
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
