@@ -1,7 +1,7 @@
 class BaseballDto {
-  constructor() {
-    this.#ball = 0;
-  }
+  #ball = 0;
+  #strike = 0;
+  constructor() {}
   get ball() {
     return this.#ball;
   }
