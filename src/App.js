@@ -10,18 +10,19 @@ class App {
     }
     play() {
         MissionUtils.Console.print(GAME_START);
-        // this.input();
-        this.input2();
+        this.input();
     }
-    async input() {
-        for await (const number of this.question('숫자를 입력하세요.')) {
+    input() {
+        MissionUtils.Console.readLine('숫자를 입력하세요.', (number) => {
             const comment = this.match(number);
             MissionUtils.Console.print(comment);
             if (comment === THREE_STRIKE) {
                 MissionUtils.Console.print(GAME_OVER);
-                break;
+                MissionUtils.Console.close();
+            } else {
+                this.input();
             }
-        }
+        });
     }
     match(number) {
         let ball = 0;
@@ -47,17 +48,6 @@ class App {
             return `${ball}볼`;
         } else {
             return `${ball}볼 ${strike}스트라이크`;
-        }
-    }
-    async *question(query) {
-        try {
-            while (1) {
-                yield new Promise((resolve) =>
-                    MissionUtils.Console.readLine(query, resolve)
-                );
-            }
-        } finally {
-            MissionUtils.Console.close();
         }
     }
 }

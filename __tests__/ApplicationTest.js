@@ -75,7 +75,6 @@ describe('숫자 야구 게임', () => {
         app.play();
 
         messages.forEach((output, index) => {
-            console.log(index);
             expect(logSpy).toHaveBeenCalledWith(
                 expect.stringContaining(output)
             );
