@@ -61,7 +61,19 @@ class App {
     };
   }
 
-  handleGameEnd() {}
+  handleGameEnd() {
+    Console.print(CONSOLE_MESSAGE.gameEnd);
+    Console.readLine(CONSOLE_MESSAGE.gameRestart, (restartQuery) => {
+      this.checkValidRestartQuery(restartQuery);
+
+      if (restartQuery === '1') {
+        this.resetAnswer();
+        this.repeatQuery();
+      } else {
+        Console.close();
+      }
+    });
+  }
 
   repeatQuery() {
     Console.readLine(CONSOLE_MESSAGE.getQuery, (query) => {
