@@ -5,7 +5,6 @@ function isStrikeBall(computerInput, userInput) {
     let ballCount = 0
 
     computerInputArr.forEach((ele , idx) => {
-        console.log(ele, userInput[idx])
         if(ele === userInputArr[idx]) strikeCount++
         else if(userInputArr.includes(ele)) ballCount++
     })
