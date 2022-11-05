@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    console.log('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.game();
   }
   
@@ -15,15 +15,28 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
       const inputArray = input.split('').map(digit => parseInt(digit));
       this.checkInputError(inputArray);
+
       const countResult = this.countStrikeAndBall(inputArray, computer);
       MissionUtils.Console.print(this.resultString(countResult));
-      if (countResult.strike !== 3){
-        this.predict(computer);
-      } else {
-        console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        this.checkContinue();
-      }
+      this.terminate(computer, countResult);
     })
+  }
+
+  terminate(computer, countResult) {
+    if (countResult.strike !== 3){
+      this.predict(computer);
+    } else {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.checkContinue();
+    }
+  }
+
+  checkContinue() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+      if(parseInt(input) === 1) this.game();
+      else if(parseInt(input) === 2)  return 0;
+      else throw new Error('input error - should be 1 or 2');
+    });
   }
 
   checkInputError(inputArray) {
@@ -85,13 +98,7 @@ class App {
     return res;
   }
 
-  checkContinue() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
-      if(parseInt(input) === 1) this.game();
-      else if(parseInt(input) === 2)  MissionUtils.Console.print('게임 종료');
-      else throw new Error('input error - should be 1 or 2');
-    });
-  }
+
 }
 
 module.exports = App;
