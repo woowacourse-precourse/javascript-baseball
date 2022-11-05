@@ -20,6 +20,9 @@ class App {
   print(message) {
     MissionUtils.Console.print(message);
   }
+  isEqual(a, b) {
+    return a === b;
+  }
 }
 const app = new App();
 app.play();
