@@ -3,8 +3,9 @@ const Console = require('./Console');
 const Player = require('./Player');
 const { getBallAndStrikeMessage, countBallAndStrike } = require('./utils/baseball');
 const {
-  QUESTION, MESSAGE, NUMBERS_RULES, START_RULES,
+  QUESTION, MESSAGE, NUMBERS_RULES, START_RULES, EXCEPTION,
 } = require('./static/constants');
+const Exception = require('./Exception');
 
 class BaseballGame {
   constructor(console = new Console()) {
@@ -14,6 +15,7 @@ class BaseballGame {
   }
 
   start(answer = START_RULES.start) {
+    BaseballGame.validateStartRules(answer);
     if (BaseballGame.isExit(answer)) {
       this.exit();
       return;
@@ -54,6 +56,16 @@ class BaseballGame {
 
   exit() {
     this.console.close();
+  }
+
+  static validateStartRules(value) {
+    if (!BaseballGame.isIncludeInStartRules(value)) {
+      throw new Exception(EXCEPTION.invalidInput);
+    }
+  }
+
+  static isIncludeInStartRules(value) {
+    return Object.values(START_RULES).includes(value);
   }
 
   static isExit(value) {
