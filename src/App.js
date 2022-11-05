@@ -50,6 +50,14 @@ class App {
     }
   }
 
+  threeStrikeCheck() {
+    if (this.strikeCount === 3) {
+      MissionUtils.Console.print('3스트라이크');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
+    return false;
+  }
+
   nothingCheck() {
     if (this.strikeCount === 0 && this.ballCount === 0) {
       MissionUtils.Console.print('낫싱');
