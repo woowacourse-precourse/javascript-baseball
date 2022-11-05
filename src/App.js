@@ -15,8 +15,8 @@ class App {
     while (computer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
-          computer.push(number);
-        }
+        computer.push(number);
+      }
     }
     this.randomNumber = computer;
   } 
@@ -26,21 +26,23 @@ class App {
   }
 
   calcResult(result) {
-    if (result[0] === 3) {
+    if (result['strikeCount'] === 3) {
       Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
       return true;
-    } else {
-      if (result[2] > 0) {
-        Console.print("낫싱");
-      } else if (result[1] - result[0] === 0) {
-        Console.print(`${result[0]}스트라이크`)
-      } else if (result[0] === 0 && result[1] - result[0] > 0) {
-        Console.print(`${result[1]}볼`);
-      } else {
-        Console.print(`${result[1] - result[0]}볼 ${result[0]}스트라이크`);
-      }
-      return false;
     }
+
+    if (result['strikeCount'] === 0 && result['ballCount'] === 0) {
+      Console.print("낫싱");
+    } else if (result['strikeCount'] === result['ballCount']) {
+      Console.print(`${result['strikeCount']}스트라이크`);
+    } else if (result['strikeCount'] === 0  && result['ballCount'] > 0) {
+      Console.print(`${result['ballCount']}볼`);
+    } else {
+      Console.print(`${result['ballCount'] - result['strikeCount']}볼 ${result['strikeCount']}스트라이크`);
+    }
+    return false;
+  }
+
   duplicateNumber(userNumber, randomNumber) {
     const result = { strikeCount: 0, ballCount: 0 };
 
@@ -94,11 +96,10 @@ class App {
     Console.readLine(questionText, (input) => {
       this.isValidateInputNumber(input);
 
-      input = this.stringToArray(input);
-      let result = this.duplicateNumber(input, this.randomNumber);
-      let now = this.calcResult(result);
+      this.userNumber = this.stringToArray(input);
+      let result = this.duplicateNumber(this.userNumber, this.randomNumber);
 
-      if (now) {
+      if (result) {
         this.gameOption('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
       } else {
         this.inputUserNumber(questionText);
