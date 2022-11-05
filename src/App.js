@@ -60,12 +60,15 @@ class App {
     }
   }
 
-  async startOrRestartApp(start) {
+  validStartInput(start) {
     if (start !== 'restart' && start !== 'start') {
       throw Error('start 명령을 잘못 입력했습니다.');
     }
-    if (start === 'restart') return this.computer.setRandomNumberArray();
+    if (start === 'restart') this.computer.setRandomNumberArray();
+  }
 
+  async startOrRestartApp(start) {
+    this.validStartInput(start);
     this.initAnswerMap();
     try {
       await this.user.getNumberArrayFromInput();
@@ -76,22 +79,35 @@ class App {
   }
 
   setAnswerMapByCompareUserAndComputer() {
-    this.user.numberArray.forEach((userNumber, userNumberArrayIndex) => {
-      const index = this.computer.computerNumberArray.indexOf(userNumber);
-      if (index === userNumberArrayIndex) {
-        this.answerMap.set('strike', this.answerMap.get('strike') + 1);
-      } else if (index >= 0) {
-        this.answerMap.set('ball', this.answerMap.get('ball') + 1);
-      }
-    });
+    let that = this;
+    this.user.numberArray.forEach((userNumber, userNumberArrayIndex) =>
+      that.compareAnswerMapByCompareUserAndComputer(
+        userNumber,
+        userNumberArrayIndex,
+      ),
+    );
+  }
+
+  compareAnswerMapByCompareUserAndComputer(userNumber, userNumberArrayIndex) {
+    const index = this.computer.numberArray.indexOf(userNumber);
+    if (index === userNumberArrayIndex) this.setAnswerMapStrikePlusOne();
+    else if (index >= 0) this.setAnswerMapBallPlusOne();
+  }
+
+  setAnswerMapStrikePlusOne() {
+    this.answerMap.set('strike', this.answerMap.get('strike') + 1);
+  }
+
+  setAnswerMapBallPlusOne() {
+    this.answerMap.set('ball', this.answerMap.get('ball') + 1);
   }
 
   endApp() {
+    MissionUtils.Console.print('게임종료');
     MissionUtils.Console.close();
   }
 
   play() {
-    MissionUtils.Console.print('play');
     this.computer.setRandomNumberArray();
     this.startOrRestartApp('start');
   }
