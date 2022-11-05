@@ -60,6 +60,25 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
+  test("게임 종료 후 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
+    const messages = ["3개의 숫자를 모두 맞히셨습니다! 게임 종료"]
+    const logSpy = getLogSpy();
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("알맞은 콘솔 출력 테스트", () => {
     const app = new App();
 

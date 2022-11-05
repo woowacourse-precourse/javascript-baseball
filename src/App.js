@@ -28,7 +28,12 @@ class App {
     }
   }
 
-  checkValidRestartQuery() {}
+  checkValidRestartQuery(query) {
+    const restartNumberRegExp = /^[1|2]$/;
+    if (!restartNumberRegExp.test(query)) {
+      throw new Error('"1" 또는 "2"만 입력할 수 있습니다.');
+    }
+  }
 
   getResultMessage(strikeCount, ballCount) {
     switch (true) {
