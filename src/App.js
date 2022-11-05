@@ -60,13 +60,13 @@ class App {
     }
   }
 
-  startGameOption() {
-    this.printStartSentence();
+  restartGameOption() {
     this.setRandomNumber();
     this.inputUserNumber("숫자를 입력하세요 :");  
   }
 
   endGameOption() {
+    Console.print('게임을 완전히 종료합니다.');
     Console.close();
   }
 
@@ -81,7 +81,7 @@ class App {
       this.isValidateGameOption(input);
 
       if (input === '1'){
-        this.startGameOption();
+        this.restartGameOption();
       } else if (input === '2'){
         this.endGameOption();
       }
@@ -111,7 +111,9 @@ class App {
   }
 
   play() {
-    this.startGameOption();
+    this.printStartSentence();
+    this.setRandomNumber();
+    this.inputUserNumber("숫자를 입력하세요 :"); 
   }
 }
 
