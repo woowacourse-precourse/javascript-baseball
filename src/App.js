@@ -62,6 +62,7 @@ class App {
   nothingCheck() {
     if (this.strikeCount === 0 && this.ballCount === 0) {
       MissionUtils.Console.print('낫싱');
+      return this.getUserNumber();
     }
     return false;
   }
@@ -69,6 +70,7 @@ class App {
   ballCheck() {
     if (this.strikeCount === 0 && this.ballCount !== 0) {
       MissionUtils.Console.print(`${this.ballCount}볼`);
+      return this.getUserNumber();
     }
     return false;
   }
@@ -80,6 +82,7 @@ class App {
       this.strikeCount !== 3
     ) {
       MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
+      return this.getUserNumber();
     }
     return false;
   }
@@ -93,6 +96,7 @@ class App {
       MissionUtils.Console.print(
         `${this.ballCount}볼 ${this.strikeCount}스트라이크`,
       );
+      return this.getUserNumber();
     }
     return false;
   }
