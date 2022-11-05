@@ -47,6 +47,29 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 종료 후 재시작 예외 - 1 또는 2 이외의 문자", () => {
+    const randoms = [1, 3, 5, 3, 2, 4];
+    const answers = ["246", "135", "종료", "1", "342", "324", "4", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "3스트라이크",
+      "2볼 1스트라이크",
+      "3스트라이크",
+      "게임종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트1 - 3개이상의 숫자", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
