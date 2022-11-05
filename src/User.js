@@ -1,4 +1,4 @@
-export default class User{
+class User{
     constructor() {
         this.number = [];
     }
@@ -7,3 +7,5 @@ export default class User{
         this.number = number.split('');
     }
 }
+
+module.exports = User;

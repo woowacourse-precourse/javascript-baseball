@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-export default class Computer {
+class Computer {
   constructor() {
     this.numbers = this.settingComputerNums();
   }
@@ -26,3 +26,5 @@ export default class Computer {
     return computerNumbers.includes(newNumber);
   }
 }
+
+module.exports = Computer;
