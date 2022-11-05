@@ -19,7 +19,7 @@ class App {
   guessAnswer() {
     MissionUtils.Console.readLine('숫자를 입력하세요 : ', answer => {
       this.guessAnswerValidate(answer);
-      if (this.outputResult(answer) == '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
+      if (this.outputResult(answer) === '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
         MissionUtils.Console.print(this.outputResult(answer));
         this.restartEndGameAnswer();
         return;
@@ -45,7 +45,7 @@ class App {
   restartEndGameAnswer() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n', answer => {
       this.restartEndGameAnswerValidator(answer);
-      if (answer == '1') {
+      if (answer === '1') {
         this.play();
         return;
       }
@@ -80,7 +80,7 @@ class App {
   }
 
   scoreConversion(strike, ball) {
-    if (strike == 0 && ball == 0) {
+    if (strike === 0 && ball === 0) {
       return '낫싱';
     }
     if (strike === 3) {
