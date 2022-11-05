@@ -13,7 +13,7 @@ class App {
         console.log('${answer}\n');
         return answer;
       }
-      gameEixt();
+      throw ('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
     })
   }
 
@@ -61,36 +61,43 @@ class App {
 
   restartOrExit() {
     MissionUtils.Console.readLine('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
-        answer = Number(answer);
-        if (answer === 1) {
-          const restartApp = new App();
-          restartApp.play();
-        } else if (answer === 2) {
-          gameEixt();
-        }
+      answer = Number(answer);
+      if (answer === 1) {
+        const restartApp = new App();
+        restartApp.play();
+      } else if (answer === 2) {
+        gameEixt();
       }
-    }
-
-    gameExit() {
-
-    }
-
-    play() {
-      console.print('숫자 야구 게임을 시작합니다.\n');
-      const computerNum = this.computerNum();
-      do {
-        let userNum = this.userNum();
-        let ballCount = this.compareNum(userNum, computerNum);
-        this.printBallCount(ballCount);
-        if (ballCount.strike === 3) {
-          console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
-          restartOrExit();
-        }
-      } while (true);
-    }
+    })
   }
 
-  const app = new App();
-  app.play();
+  gameExit() {
+    console.print('게임을 종료합니다.\n');
+    return 0;
+  }
 
-  export default App;
+  play() {
+    console.print('숫자 야구 게임을 시작합니다.\n');
+    const computerNum = this.computerNum();
+    do {
+      let userNum;
+      try {
+        userNum = this.userNum();
+      } catch (e) {
+        console.print(e);
+        this.gameExit();
+      }
+      let ballCount = this.compareNum(userNum, computerNum);
+      this.printBallCount(ballCount);
+      if (ballCount.strike === 3) {
+        console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+        restartOrExit();
+      }
+    } while (true);
+  }
+}
+
+const app = new App();
+app.play();
+
+export default App;
