@@ -55,16 +55,25 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (inputNumber) => {
-        if (inputNumber === "1") {
-          this.computerNumberArr = this.getRandomNumber();
-          return this.inputNumberFromUser();
-        } else if (inputNumber === "2") {
-          return MissionUtils.Console.close();
-        }
-        const valiation = new Validation();
-        valiation.isValidationConfirmInput(inputNumber);
+        this.checkExitOrRestart(inputNumber);
       }
     );
+  }
+
+  checkExitOrRestart(inputNumber) {
+    const valiation = new Validation();
+    if (inputNumber === "1") return this.reStartGame(inputNumber);
+    if (inputNumber === "2") return this.exitGame(inputNumber);
+    valiation.isValidationConfirmInput(inputNumber);
+  }
+
+  reStartGame() {
+    this.computerNumberArr = this.getRandomNumber();
+    return this.inputNumberFromUser();
+  }
+
+  exitGame() {
+    return MissionUtils.Console.close();
   }
 }
 
