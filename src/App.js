@@ -60,11 +60,14 @@ function printScore(scoreObject) {
 }
 
 function readNumber() {
-  let answer = -1;
+  let answerList = [];
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    answer = input;
+    const inputList = Array.from(input);
+    inputList.map((number) => {
+      answerList.push(parseInt(number));
+    });
   });
-  return answer;
+  return answerList;
 }
 
 function readControlNumber() {
