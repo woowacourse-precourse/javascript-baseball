@@ -117,8 +117,8 @@ class App {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
     };
 
-    const nextEvent = STRIKE === 3 ? END_GAME : RESTART_GAME;
-    nextEvent();
+    const NEXT_EVENT = STRIKE === 3 ? END_GAME : RESTART_GAME;
+    NEXT_EVENT();
   };
 
   play() {
