@@ -58,6 +58,37 @@ const printResult = (user, computer) => {
 
 class App {
   play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    let user = this.getUserInput();
+    let computer = this.getComputerInput();
+
+    while (user) {
+      if(this.isStrikeOut(user, computer)) {
+        MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        user = this.getUserInput(); // 1 or 2를 받을예정.
+
+        if (user === '1') {
+          MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+          user = this.getUserInput();
+          computer = this.getComputerInput();
+          continue;
+        }
+
+        if (user === '2') {
+          MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
+          break;
+        }
+      
+        throw new Error("유효하지 않은 값이 입력되었습니다.");
+        
+      }
+      else{
+        user = this.getUserInput();
+        continue;
+      }
+    }
+
   }
 }
 
