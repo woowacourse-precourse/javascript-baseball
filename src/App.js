@@ -24,6 +24,23 @@ class App {
     Console.print(START_MESSAGE);
   }
 
+  initRandomNumbers() {
+    this.randomNumbers = this.makeRandomNumbers();
+  }
+
+  makeRandomNumbers() {
+    const pickedNumbers = [];
+
+    while (pickedNumbers.length < MAX_LENGTH) {
+      let number = Random.pickNumberInRange(BEGIN_NUM, END_NUM);
+      if (!pickedNumbers.includes(number)) {
+        pickedNumbers.push(number);
+      }
+    }
+
+    return [...pickedNumbers];
+  }
+
   getPlayerInput() {
     const playerInput = (answer) => {
       this.checkPlayerInput(answer);
@@ -93,23 +110,6 @@ class App {
     }
 
     return true;
-  }
-
-  initRandomNumbers() {
-    this.randomNumbers = this.makeRandomNumbers();
-  }
-
-  makeRandomNumbers() {
-    const pickedNumbers = [];
-
-    while (pickedNumbers.length < MAX_LENGTH) {
-      let number = Random.pickNumberInRange(BEGIN_NUM, END_NUM);
-      if (!pickedNumbers.includes(number)) {
-        pickedNumbers.push(number);
-      }
-    }
-
-    return [...pickedNumbers];
   }
 }
 
