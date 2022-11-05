@@ -6,6 +6,7 @@ class Computer {
   }
 
   getNumbers () {
+    this.setNumbers(3);
     return this.numbers;
   }
 

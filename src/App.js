@@ -1,16 +1,20 @@
 const {Console} = require("@woowacourse/mission-utils");
 const Computer = require("./Computer")
+const User = require("./User")
 
 class App {
   constructor () {
     this.computer = new Computer;
+    this.user = new User;
   }
 
   play() {
-    this.computer.setNumbers(3);
     Console.print(this.computer.getNumbers())
-    Console.print('숫자 야구 게임을 시작합니다.')
-    Console.close();    
+    // const computerNumbers = this.computer.getNumbers();
+    Console.print('숫자 야구 게임을 시작합니다.');
+    const userNumbers = this.user.getNumbers();
+
+    // Console.close();
   }
 }
 
