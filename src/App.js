@@ -38,6 +38,9 @@ function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
     if (checkIndex[i] == i) {
       strike++;
     }
+    if (checkIndex[i] != i && cpuNumber.includes(userInput[i])) {
+      ball++;
+    }
   }
 
   if (nothing === 3) {
@@ -46,6 +49,13 @@ function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
   if (strike === 3) {
     return "3스트라이크";
   }
+  if (strike > 0 && ball === 0) {
+    return `${strike}스트라이크`;
+  }
+  if (strike === 0 && ball > 0) {
+    return `${ball}볼`;
+  }
+  return `${ball}볼 ${strike}스트라이크`;
 }
 
 /**
@@ -90,12 +100,6 @@ class App {
         Console.print(gameResult);
       }
     });
-
-    // const userInput = [1, 2, 3];
-    // const userInput = [1, 2, 3]; // 1볼 1스트라이크
-    // const userInput = [3, 2, 9]; // 3스트라크
-    // const userInput = [4, 8, 7]; // 낫싱
-    // const userInput = [9, 3, 2]; // 3볼
   }
 }
 
