@@ -13,7 +13,7 @@ class App {
 
   setRandomValue(randomValue) {
     this.randomValue = randomValue;
-    MISSION_UTILS.Console.print(this.randomValue);
+    // MISSION_UTILS.Console.print(this.randomValue);
   };
 
   setUserValueAndCountStart(userValue) {
@@ -26,7 +26,6 @@ class App {
 const app = new App();
 app.play();
 
-// 랜덤값 생성 함수
 function makeRandomValue() {
   let randomValue=new Set();
 
@@ -37,14 +36,12 @@ function makeRandomValue() {
   app.setRandomValue([...randomValue].join(''));
 };
 
-// 사용자의 숫자 입력받기
 function makeUserValue() {
   MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : ', (userValue)=> {
     isValidUserInput(userValue);
   });
 };
 
-//사용자의 입력값이 유효값인지 검사
 function isValidUserInput(userValue) {
   const IS_UNIQUE = (new Set(userValue)).size;
 
@@ -52,11 +49,8 @@ function isValidUserInput(userValue) {
     throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요';
   };
   app.setUserValueAndCountStart(userValue)
-  // app.setUserValue(userValue);
-  // app.checkcheck();
 };
 
-// 정답 검사
 function countBallAndStrike(randomValue, userValue) {
   const STRIKE = countStrike(randomValue, userValue);
   const BALL = countBall(randomValue, userValue) - STRIKE;
@@ -83,12 +77,10 @@ function countBallAndStrike(randomValue, userValue) {
 
 };
 
-//볼 개수
 function countBall(randomValue, userValue) {
   return [...randomValue].filter(x => userValue.includes(x)).length;
 };
 
-//스트라이크 개수
 function countStrike(randomValue, userValue) {
   return [...randomValue].filter((x, idx) => userValue[idx] === x).length;
 };
