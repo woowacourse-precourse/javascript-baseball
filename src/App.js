@@ -8,7 +8,6 @@ const setComputerNumber = () => {
       computerNumber.push(randomNumber);
     }
   }
-  console.log(computerNumber);
   return computerNumber;
 }
 
@@ -23,7 +22,7 @@ const setUserNumber = (computer) => {
 
 const errorCheck = (input) => {
   const stringInput = input.join("");
-  const numReg = /^[0-9]+$/;
+  const numReg = /^[1-9]+$/;
   const setNumber = new Set(input);
   if(!numReg.test(stringInput)) throw "숫자만 입력 가능합니다.";
   if(input.length !== 3) throw "숫자는 3자리만 입력 가능합니다";
