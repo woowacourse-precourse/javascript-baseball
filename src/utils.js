@@ -53,8 +53,16 @@ function getBallsAndStrikes(target, input) {
   }, initialValue);
 }
 
+function getUniqueNumberCount(string) {
+  const matchs = string.match(/[1-9]/g) || [];
+  const uniqueNumberCount = [...new Set(matchs)].length;
+
+  return uniqueNumberCount;
+}
+
 module.exports = {
   makeTarget,
   getGuessResult,
   getBallsAndStrikes,
+  getUniqueNumberCount,
 };

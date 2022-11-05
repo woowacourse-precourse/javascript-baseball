@@ -25,7 +25,7 @@
 - [o] Store에서 freshData 정보를 받으면 각 클래스는 update 메소드를 실행
 - [o] gameStatus에 따라 문자열을 출력하기
 - [o] ball, strike에 따라 문자열을 출력하고 입력받기
-- [-] 입력이 잘못되었을 때 에러처리
+- [o] 입력이 잘못되었을 때 에러처리
 - [o] Dispatcher 에게 action 객체를 만들어서 전달해주기
 
 ---
