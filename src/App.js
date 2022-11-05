@@ -37,6 +37,10 @@ class App {
 
     return true;
   }
+  isValidCommand(command) {
+    const commandList = ["1", "2"];
+    return commandList.includes(command);
+  }
 }
 const app = new App();
 app.play();
