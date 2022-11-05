@@ -1,9 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-    constructor() {
-        this.computer = [];
-    }
+    constructor() {}
 
     getRandomNumber() {
         this.computer = [];
@@ -91,6 +89,7 @@ class App {
             (num, idx, arr) => arr.indexOf(num) === arr.lastIndexOf(num)
         );
         if (
+            inputNumber.includes("0") ||
             inputNumber.length !== 3 ||
             Number(inputNumber.join("")) === NaN ||
             number.length !== 3
