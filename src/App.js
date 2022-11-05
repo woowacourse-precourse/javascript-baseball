@@ -1,5 +1,5 @@
 const { Random, Console } = require('./util/missionUtils');
-const { MAX_LENGTH, START_NUM, END_NUM } = require('./common/constants');
+const { MAX_LENGTH, BEGIN_NUM, END_NUM } = require('./common/constants');
 const {
   START_MESSAGE,
   END_MESSAGE,
@@ -31,34 +31,72 @@ class App {
   getPlayerInput() {
     const playerInput = (answer) => {
       this.checkPlayerInput(answer);
-      // this.checkGameResult(answer);
     };
 
     Console.readLine(`${INPUT_MESSGAE}`, playerInput);
   }
 
   checkPlayerInput(playerInput) {
+    const checkList = [
+      this.isNotANumber,
+      this.isValidInputLength,
+      this.isValidRangeOfNumber,
+      this.isDuplicateNumber,
+    ];
+
+    let isValid;
+    checkList.forEach((validInputCheckFunction) => {
+      isValid = validInputCheckFunction(playerInput);
+    });
+
+    if (isValid) {
+      // 결과를 체크할 함수 호출
+    }
+  }
+
+  isNotANumber(playerInput) {
     const convertNumberPlayerInput = Number(playerInput);
-    const convertStringPlayerInput = String(playerInput);
-    const differentNumbers = [...new Set(convertStringPlayerInput)];
     const isNoNumber = isNaN(convertNumberPlayerInput);
 
     if (isNoNumber) {
       throw new Error(`${INVALID_ERROR_MESSAGE}`);
     }
 
-    if (convertStringPlayerInput.length !== 3) {
+    return true;
+  }
+
+  isValidInputLength(playerInput) {
+    const convertStringPlayerInput = String(playerInput);
+
+    if (convertStringPlayerInput.length !== MAX_LENGTH) {
       throw new Error(`${RANGE_ERROR_MESSAGE}`);
     }
 
-    if (differentNumbers.length !== 3) {
+    return true;
+  }
+
+  isValidRangeOfNumber(playerInput) {
+    const convertStringPlayerInput = String(playerInput);
+    const inputNumbers = convertStringPlayerInput.split('');
+
+    inputNumbers.forEach((inputNumber) => {
+      if (inputNumber < BEGIN_NUM) {
+        throw new Error(`${INVALID_ERROR_MESSAGE}`);
+      }
+    });
+
+    return true;
+  }
+
+  isDuplicateNumber(playerInput) {
+    const convertStringPlayerInput = String(playerInput);
+    const differentNumbers = [...new Set(convertStringPlayerInput)];
+
+    if (differentNumbers.length !== MAX_LENGTH) {
       throw new Error(`${DUPLICATE_ERROR_MESSAGE}`);
     }
 
-    const inputNumbers = convertStringPlayerInput.split('');
-    if (inputNumbers.includes('0')) {
-      throw new Error(`${INVALID_ERROR_MESSAGE}`);
-    }
+    return true;
   }
 
   initRandomNumbers() {
@@ -69,7 +107,7 @@ class App {
     const pickedNumbers = [];
 
     while (pickedNumbers.length < MAX_LENGTH) {
-      let number = Random.pickNumberInRange(START_NUM, END_NUM);
+      let number = Random.pickNumberInRange(BEGIN_NUM, END_NUM);
       if (!pickedNumbers.includes(number)) {
         pickedNumbers.push(number);
       }
