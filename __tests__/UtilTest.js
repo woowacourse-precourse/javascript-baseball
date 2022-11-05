@@ -82,6 +82,7 @@ describe("유틸 함수 체크", () => {
 
     // given
     const input2 = {
+      ball: 0,
       strike: 3,
     };
     // when
@@ -90,6 +91,16 @@ describe("유틸 함수 체크", () => {
     expect(result2).toBe(
       "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
+
+    // given
+    const input3 = {
+      ball: 0,
+      strike: 0,
+    };
+    // when
+    const result3 = makeReplyToReply(input3);
+    // then
+    expect(result3).toBe("낫싱");
   });
 
   //   test("inputReply", () => {
