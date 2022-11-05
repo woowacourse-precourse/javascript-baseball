@@ -12,12 +12,13 @@ class App {
     this.computerInput = this.generateComputerInput();
   }
 
-  async play() {
-    const userInput = await this.requestUserNumberInput();
-    const { isValid, errorType } = this.isValidUserNumberInput(userInput);
-    if (!isValid) {
-      throw new Error(ERROR_MESSAGE[errorType]);
-    }
+  play() {
+    Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
+      const { isValid, errorType } = this.isValidUserNumberInput(userInput);
+      if (!isValid) {
+        throw new Error(ERROR_MESSAGE[errorType]);
+      }
+    });
   }
 
   generateComputerInput() {
@@ -27,11 +28,6 @@ class App {
     }
 
     return [...randomNum].join("");
-  }
-  requestUserNumberInput() {
-    return new Promise((resolve) => {
-      Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, resolve);
-    });
   }
 
   hasOnlyNumber(userInput) {
