@@ -27,13 +27,16 @@ const replyCheckAnswer = (input, answer) => {
 };
 
 const makeReplyToReply = ({ ball, strike }) => {
-  if (ball === 0 && strike === 0) return "낫싱";
+  if (ball === 0 && strike === 0) return { message: "낫싱", done: false };
   if (strike === 3)
-    return "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-  let answer = "";
-  if (ball) answer += `${ball}볼 `;
-  if (strike) answer += `${strike}스트라이크`;
-  return answer;
+    return {
+      message: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+      done: true,
+    };
+  let message = "";
+  if (ball) message += `${ball}볼 `;
+  if (strike) message += `${strike}스트라이크`;
+  return { message, done: false };
 };
 
 const inputReply = (cb) =>
