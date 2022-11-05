@@ -55,6 +55,7 @@ class NumericBaseballGame {
     const userScore = {
       strikeCount: 0,
       ballCount: 0,
+      nothingCount: 0,
     };
 
     userInput.forEach((value, idx) => {
@@ -70,6 +71,14 @@ class NumericBaseballGame {
     const numberFromComputer = this.getNumberFromComputer();
     while (true) {
       let numberFromUserInput = await this.getNumberFromUser();
+
+      const { strikeCount, ballCount } = this.getResult(
+        numberFromUserInput,
+        numberFromComputer
+      );
+      if (strikeCount === 3) {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞추셨습니다!");
+      }
     }
   }
 }
