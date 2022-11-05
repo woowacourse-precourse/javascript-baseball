@@ -26,7 +26,7 @@ class App {
 
     while (this.answer.length < 3) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.answers || !this.answers.includes(number)) {
+      if (this.answers === undefined || !this.answers.includes(number)) {
         this.answer.push(number);
       }
     }
