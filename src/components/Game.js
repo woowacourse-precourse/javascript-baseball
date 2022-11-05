@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const CalculateGame = require('./CalculateGame');
 const generateRandomComputerNumber = require('./generateRandomComputerNumber');
 
 class Game {
@@ -19,7 +20,22 @@ class Game {
   getUserInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.validateUserInputNumber(input);
+      this.getResult(input)
     });
+  }
+
+  getResult(userInputNumber) {
+    const gameCalculator =  new CalculateGame(this.computerNumber, userInputNumber);
+
+    MissionUtils.Console.print(gameCalculator.getResult());
+
+    if (gameCalculator.checkSuccess()) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      // if successful ask if restart question
+    } else {
+      // keep getting user input until user input matches computer number
+      this.getUserInputNumber();
+    }
   }
 
   validateUserInputNumber(input) {
