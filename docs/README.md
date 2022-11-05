@@ -14,11 +14,11 @@
 - judge : 유효성 판단, 숫자 비교, 비교 결과 전달
 - app : 게임 시작
 ---
-- START = "숫자 야구 게임을 시작합니다."
+- START_MESSAGE = "숫자 야구 게임을 시작합니다."
+- FINISH_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+- RESTART_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요"
 - BALL = "볼"
 - STRIKE = "스트라이크"
 - NOTHING = "낫싱"
-- FINISH = "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-- RESTART = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요"
 - LENGTH = 3
 - RANGE, MIN = 1, MAX = 9
