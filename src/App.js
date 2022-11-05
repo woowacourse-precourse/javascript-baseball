@@ -23,7 +23,19 @@ class App {
             if(new Set(userNumbers).size !== 3) throw new Error('중복되지 않는 숫자를 입력해주세요.');
             if(String(userNumbers).indexOf(0) !== -1) throw new Error('1부터 9의 숫자만 입력해주세요.');
             parseInt(userNumbers);
-        });
+            this.isMatchNumbers(computerNumbers,userNumbers);
+        })
+    }
+
+    isMatchNumbers(computerNumbers,userNumbers) {
+        if(computerNumbers == userNumbers) {
+            const MISSION_UTILS = require("@woowacourse/mission-utils");
+            MISSION_UTILS.Console.print('3스트라이크');
+            MISSION_UTILS.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        }
+        if(computerNumbers !== userNumbers) {
+            this.isUserNumbers(computerNumbers);
+        }
     }
 }
 module.exports = App;
