@@ -9,7 +9,7 @@ class User {
     return new Promise((resolve, reject) => this.getInput(resolve, reject));
   }
 
-  getInput(resolve, reject) {
+  getInput(resolve) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
       this.setNumberArray(input);
       resolve();
@@ -18,7 +18,7 @@ class User {
 
   setNumberArray(input) {
     if (!this.validInput(input)) {
-      throw Error('입력값이 잘못되었습니다.');
+      throw new Error('입력값이 잘못되었습니다.');
     }
 
     const inputArray = this.makeInputToArray(input);

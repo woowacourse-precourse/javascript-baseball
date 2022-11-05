@@ -15,7 +15,7 @@ class App {
     } else if (input === '2') {
       this.endApp();
     } else {
-      throw Error('잘못된 번호를 입력하였습니다.');
+      throw new Error('잘못된 번호를 입력하였습니다.');
     }
   }
 
@@ -62,7 +62,7 @@ class App {
 
   validStartInput(start) {
     if (start !== 'restart' && start !== 'start') {
-      throw Error('start 명령을 잘못 입력했습니다.');
+      throw new Error('start 명령을 잘못 입력했습니다.');
     }
     if (start === 'restart') this.computer.setRandomNumberArray();
   }
@@ -73,7 +73,7 @@ class App {
     try {
       await this.user.getNumberArrayFromInput();
     } catch (e) {
-      throw Error(e);
+      throw new Error(e);
     }
     this.compareUserAndComputerNumber();
   }
