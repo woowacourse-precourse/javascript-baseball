@@ -13,7 +13,7 @@ class App {
 
   setInput(input) {
     input = input.split("").map((num) => parseInt(num));
-    if (!this.isBadInput(input)) {
+    if (this.isValidInput(input)) {
       this.input = input;
     }
     this.setHint();
@@ -60,7 +60,7 @@ class App {
     MissionUtils.Console.close();
   }
 
-  isBadInput(input) {
+  isValidInput(input) {
     if (input.includes(NaN)) throw "문자를 제외한 숫자만 입력하세요.";
     if (input.includes(0)) throw "1~9 사이의 숫자만 입력하세요.";
     if (input.length !== 3) {
@@ -68,7 +68,7 @@ class App {
     }
     if (input.length !== new Set(input).size)
       throw "서로 다른 숫자를 입력하세요.";
-    return false;
+    return true;
   }
 
   receiveInputFromConsole() {
