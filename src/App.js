@@ -11,12 +11,20 @@ class App {
     }
     return computer;
   };
+  isValid = (userNumber) => {
+    if (userNumber.length !== 3) throw new Error("숫자 3개를 입력해주세요");
+    if (userNumber.size > new Set(userNumber).length)
+      throw new Error("중복되지 않는 숫자를 입력해주세요");
+    if (userNumber.every((num) => !Number.isInteger(num)))
+      throw new Error("숫자를 입력해주세요");
+  };
   getUserNumber = () => {
     let userNumber;
     MissionUtils.Console.readLine("숫자를 입력해주세요", (inputNumber) => {
       const userNumber = [...inputNumber];
       try {
         // 예외처리 throw 할 곳
+        this.isValid(userNumber);
       } catch (error) {
         MissionUtils.Console.print(error);
         MissionUtils.Console.close();
