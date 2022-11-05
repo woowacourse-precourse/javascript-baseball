@@ -13,7 +13,18 @@ const replyValidation = (input) => {
   return true;
 };
 
-const replyCheckAnswer = (input, answer) => {};
+const replyCheckAnswer = (input, answer) => {
+  const userValues = input.split("");
+  const answerValues = answer.split("");
+  let strike = 0;
+  let ball = 0;
+  for (let i = 0; i < 3; i++) {
+    const userTarget = userValues[i];
+    if (userTarget === answerValues[i]) strike++;
+    else if (answerValues.indexOf(userTarget) > -1) ball++;
+  }
+  return { ball, strike };
+};
 
 const makeReplyToReply = ({ ball, strike }) => {};
 
