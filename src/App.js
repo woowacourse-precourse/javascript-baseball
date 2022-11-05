@@ -12,7 +12,6 @@ class App {
   constructor() {
     this.io = MissionUtils.Console;
     this.io.print(QuestionText.startText);
-    this.userInput = undefined;
     this.userInputArray = [];
     this.isFinish = false;
     this.target = this.setTarget();
@@ -77,7 +76,48 @@ class App {
 
   // Game
   onGame(input) {
-    this.io.print(input);
+    // this.io.print(input);
+    this.validation(parseInt(input));
+
+    let ball = this.countBall();
+    let strike = this.countStrike();
+
+    if (strike === LENGTH) {
+      this.finish();
+    } else {
+      this.io.print(this.showResult(ball, strike));
+      this.onInput(QuestionText.inputText, this.onGame);
+    }
+  }
+
+  countStrike() {
+    let count = 0;
+
+    for (let i = 0; i < LENGTH; i++) {
+      if (this.target[i] === this.userInputArray[i]) count++;
+    }
+    return count;
+  }
+
+  countBall() {
+    let count = 0;
+
+    for (let i = 0; i < LENGTH; i++) {
+      if (
+        this.target[i] !== this.userInputArray[i] &&
+        this.target.includes(this.userInputArray[i])
+      )
+        count++;
+
+      return count;
+    }
+  }
+
+  showResult(ball, strike) {
+    if (ball === 0 && strike === 0) return "낫싱";
+    else if (ball > 0 && strike == 0) return `${ball}볼`;
+    else if (ball == 0 && strike > 0) return `${strike}스트라이크`;
+    else return `${ball}볼 ${strike}스트라이크`;
   }
 }
 
