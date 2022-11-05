@@ -126,4 +126,14 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("정답 체크", () => {
+    const DIGITS = 3;
+    const expectedResults = [false, false, false, true];
+    const app = new App();
+    expectedResults.forEach((expectedResult, index) => {
+      const result = app.isCorrectAnswer((strikeCounts = index), DIGITS);
+      expect(result).toBe(expectedResult);
+    });
+  });
 });
