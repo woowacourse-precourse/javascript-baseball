@@ -88,6 +88,13 @@ class App {
         }
       );
     };
+
+    // 게임플레이어의 값이 잘못되었을 때 에러문을 throw하는 기능
+    try {
+      input();
+    } catch (e) {
+      throw new Error();
+    }
   }
 }
 
