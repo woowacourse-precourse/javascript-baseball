@@ -54,11 +54,17 @@ class App {
     this.hint.trimStart();
   }
 
-  async play() {
+  async startGame() {
     this.setAnswer();
-    await this.readInput();
-    this.setCount(this.answer, this.userInput);
-    this.setHint(this.count);
+    do {
+      await this.readInput();
+      this.setCount(this.answer, this.userInput);
+      this.setHint(this.count);
+      MissionUtils.Console.print(this.hint);
+    } while (this.count.strike !== 3);
+  }
+
+  play() {
   }
 }
 
