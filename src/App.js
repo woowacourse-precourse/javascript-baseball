@@ -9,7 +9,20 @@ const pickRandomNumber = () => {
 };
 
 const getUserInput = () => {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {});
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) =>
+    validateUserInput(input)
+  );
+};
+
+const validateUserInput = (input) => {
+  if (
+    input.length !== 3 ||
+    input.match(/[^1-9]/g) ||
+    new Set(input.split("")).size !== 3
+  )
+    throw new Error("Invalid UserInput");
+
+  return true;
 };
 
 class App {
