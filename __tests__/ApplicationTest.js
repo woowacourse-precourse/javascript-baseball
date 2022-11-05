@@ -3,6 +3,7 @@ const RandomNumber = require("../src/RandomNumber");
 const CheckConstraints = require("../src/CheckConstraints");
 const Player = require("../src/Player");
 const MissionUtils = require("@woowacourse/mission-utils");
+const ReStart = require("../src/ReStart");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -97,6 +98,25 @@ describe("숫자 야구 게임", () => {
     expect(player.strike).toEqual(0);
     expect(player.ball).toEqual(0);
     expect(logSpy).toHaveBeenCalledWith("낫싱");
+  });
+
+  test("게임 재시작 여부 질문", () => {
+    const logSpy = getLogSpy();
+    const restartSpy = jest.spyOn(ReStart.prototype, "decideReStart");
+
+    const player = new Player();
+
+    player.COMPUTER = [1, 2, 3];
+    player.comparePlayerInputWithRadomNumber("123");
+
+    expect(player.strike).toEqual(3);
+    expect(player.ball).toEqual(0);
+    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
+    expect(logSpy).toHaveBeenCalledWith(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+    expect(restartSpy).toHaveBeenCalled();
+    expect(restartSpy).toHaveBeenCalledTimes(1);
   });
 
   test("게임 종료 후 재시작", () => {
