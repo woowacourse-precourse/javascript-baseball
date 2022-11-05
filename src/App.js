@@ -1,6 +1,24 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  getResult(number, answer) {
+    const numberArr = [...number];
+    const result = numberArr.reduce(
+      ({ strike, ball }, num, nowInd) => {
+        const ind = answer.indexOf(num);
+        if (ind === -1) {
+          return { strike, ball };
+        }
+        if (ind === nowInd) {
+          return { strike: strike + 1, ball };
+        }
+        return { strike, ball: ball + 1 };
+      },
+      { strike: 0, ball: 0 }
+    );
+    return result;
+  }
+
   chkValidNumber(answer) {
     const answerArr = [...answer];
 
