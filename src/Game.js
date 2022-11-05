@@ -1,13 +1,17 @@
-const {
-  print,
-  readLine,
-  closeIO,
-  pickUniqueNumbersInRange,
-} = require("./Utils");
+const { print, readLine, closeIO, pickNumberInRange } = require("./Utils");
 const calculateScore = require("./CalculateScore");
 
 const createComputerNumberList = () => {
-  return pickUniqueNumbersInRange(1, 9, 3);
+  const computerNumberList = [];
+  let tempNumber;
+
+  while (computerNumberList.length < 3) {
+    tempNumber = pickNumberInRange(1, 9);
+    if (!computerNumberList.includes(tempNumber)) {
+      computerNumberList.push(tempNumber);
+    }
+  }
+  return computerNumberList;
 };
 
 const parseStringToNumberList = (stringNumber) => {
@@ -17,7 +21,7 @@ const parseStringToNumberList = (stringNumber) => {
 const getInputNumberList = async () => {
   const inputStringNumber = await readLine("숫자를 입력해주세요 : ");
   if (isNaN(inputStringNumber)) throw new Error("only number.");
-  if (inputStringNumber.length !== 3) throw new Error("only three characters.");
+  if (inputStringNumber.length !== 3) throw new Error("only three numbers.");
   return parseStringToNumberList(inputStringNumber);
 };
 
@@ -50,7 +54,6 @@ const gameStart = async () => {
   let inputNumberList;
   let score;
 
-  // print(computerNumberList);
   do {
     inputNumberList = await getInputNumberList();
     score = calculateScore(computerNumberList, inputNumberList);
