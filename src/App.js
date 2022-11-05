@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const checkInput = require("./validation");
 
 class App {
   #userInput;
@@ -20,29 +21,6 @@ class App {
     }
 
     this.#answer = computer.join("");
-  }
-
-  checkLength(input) {
-    if (input.length === 3) return true;
-    else return false;
-  }
-
-  checkIsNumber(input) {
-    if (isNaN(Number(input))) return false;
-    else return true;
-  }
-
-  checkDuplicate(input) {
-    for (let i = 0; i < input.length; i++) {
-      if (input.indexOf(input[i]) !== i) return false;
-    }
-    return true;
-  }
-
-  checkInput(input) {
-    if (!this.checkLength(input)) throw "3자리 숫자를 입력해주세요.";
-    if (!this.checkIsNumber(input)) throw "숫자만 입력해주세요.";
-    if (!this.checkDuplicate(input)) throw "서로 다른 숫자를 입력해주세요.";
   }
 
   getUserInput() {
@@ -102,7 +80,7 @@ class App {
     this.pickNumber();
     while (!this.#correct) {
       this.getUserInput();
-      this.checkInput(this.#userInput);
+      checkInput(this.#userInput);
       this.compareInputAnswer(this.#answer, this.#userInput);
     }
   }
