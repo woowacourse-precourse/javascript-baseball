@@ -12,4 +12,6 @@ const app = new App();
 // 문장 출력
 Console.print(GAME_SENTENCE.OPENING);
 
+Console.readLine(GAME_SENTENCE.INPUT, (input) => {});
+
 module.exports = App;
