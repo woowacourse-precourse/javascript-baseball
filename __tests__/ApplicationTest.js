@@ -105,6 +105,24 @@ describe("App", () => {
     ).toBeTruthy();
   });
 
+  test("isValidInput 메소드를 통해 사용자의 입력이 유효한 입력인지 확인한다.", () => {
+    const app = new App();
+
+    const LONGER_THEN_THREE = "1234";
+    const SHORTER_THEN_THREE = "12";
+    const NOT_NUMBER = "a12";
+    const HAS_ZERO = "012";
+
+    const VALID_NUMBER = "123";
+
+    expect(() => app.isValidInput(LONGER_THEN_THREE)).toThrow(Error);
+    expect(() => app.isValidInput(SHORTER_THEN_THREE)).toThrow(Error);
+    expect(() => app.isValidInput(NOT_NUMBER)).toThrow(Error);
+    expect(() => app.isValidInput(HAS_ZERO)).toThrow(Error);
+
+    expect(app.isValidInput(VALID_NUMBER)).toBeTruthy();
+  });
+
   // test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
   //   const app = new App();
 
