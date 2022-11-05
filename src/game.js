@@ -18,7 +18,7 @@ class ResultCalculator {
     const result = {
       strike: 0,
       ball: 0,
-      }
+    }
     input.forEach((inputNumber, idx) => {
       const answerNumber = answer[idx];
       if(this.isStrike(inputNumber, answerNumber)) return result.strike++;
