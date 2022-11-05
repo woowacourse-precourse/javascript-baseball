@@ -2,8 +2,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const GameUtils = require("./GameUtils");
 const Validate = require("./Validate");
 const BaseballModel = require("./BaseballModel");
-const print = MissionUtils.Console.print;
+
 const readLine = MissionUtils.Console.readLine;
+
+const ALL_STRIKE = "3스트라이크";
 
 class BaseballGame {
   baseballModel;
@@ -34,13 +36,23 @@ class BaseballGame {
     const random = BaseballGame.getRandom();
     const score = GameUtils.evaluScore(userNumber, random);
     const scoreModel = BaseballGame.scoreSet(score);
-
-    const result = GameUtils.pritFormat(scoreModel);
-    console.log(result);
-    return result;
+    willGameContinue(GameUtils.printFormat(scoreModel));
   }
 }
-// const willPlayNewGame
+// const willPlayMoreGame = () => {
+//   readLine("")
+// };
+
+const willGameContinue = (result) => {
+  if (result === ALL_STRIKE) {
+    GameUtils.printLine(result);
+    willPlayMoreGame();
+  }
+  if (result !== ALL_STRIKE) {
+    GameUtils.printLine(result);
+    userGuessNumber();
+  }
+};
 
 const generateRandomNumber = (startNum, endNum) => {
   const randomArr = [];
@@ -52,10 +64,10 @@ const generateRandomNumber = (startNum, endNum) => {
 };
 
 const userGuessNumber = () => {
-  const arr = readLine("3자리 숫자를 입력해 주세요 : ", (answer) => {
+  readLine("3자리 숫자를 입력해 주세요 : ", (answer) => {
     Validate.userGuessNumbers(answer);
     BaseballGame.compareComputerAndUser(answer);
-    MissionUtils.Console.close();
+    // MissionUtils.Console.close();
   });
 };
 

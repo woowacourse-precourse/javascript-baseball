@@ -1,3 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const print = MissionUtils.Console.print;
+
 class GameUtils {
   constructor() {}
 
@@ -24,8 +27,7 @@ class GameUtils {
     return result;
   }
 
-  static pritFormat(score) {
-    console.log("게임유틸의 프린트폼", score);
+  static printFormat(score) {
     let text = "";
     if (score.ball) text = `${score.ball}볼`;
     if (score.ball && score.strike) text += ` ${score.strike}스트라이크`;
@@ -33,6 +35,10 @@ class GameUtils {
     if (score.ball === 0 && score.strike === 0) text = "낫싱";
 
     return text;
+  }
+
+  static printLine(result) {
+    print(result);
   }
 }
 
