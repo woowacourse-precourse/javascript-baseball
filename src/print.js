@@ -5,6 +5,10 @@ function start() {
   MissionUtils.Console.print(constants.MESSAGE.START);
 }
 
+function gameover() {
+  MissionUtils.Console.print(constants.MESSAGE.GAMEOVER);
+}
+
 function result(resultValue) {
   let resultMessage = '';
   if(resultValue.ball) resultMessage += `${resultValue.ball}${constants.RESULT_COUNT.BALL} `;
@@ -15,3 +19,4 @@ function result(resultValue) {
 
 exports.start = start;
 exports.result = result;
+exports.gameover = gameover;
