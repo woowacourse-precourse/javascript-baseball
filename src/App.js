@@ -48,6 +48,8 @@ class App {
   increaseBaseball(digit, index) {
     let strike = 0;
     let ball = 0;
+    // type conversion
+    // character type to number type
     if (+digit === this.baseballAnswer[index]) {
       strike += 1;
     } else if (this.baseballAnswer.includes(+digit)) {
