@@ -6,10 +6,10 @@ class App {
   constructor() {
     this.randomNumber;
     this.userInputNumber;
-    this.showMessage("숫자 야구 게임을 시작합니다.");
   }
 
   play() {
+    this.showMessage("숫자 야구 게임을 시작합니다.");
     this.startGame();
   }
 
@@ -17,8 +17,25 @@ class App {
     this.setRandomNumber();
     this.getUserInputNumber()
       .then((userInputNumber) => this.getUserInputResult(userInputNumber))
-      .then((userInputResult) => this.getHintMessage(userInputResult))
-      .then((hint) => console.log(hint));
+      .then((userInputResult) => this.proceedGame(userInputResult));
+  }
+
+  proceedGame(userInputResult) {
+    const [_, strike] = userInputResult;
+    const hint = this.getHintMessage(userInputResult);
+    this.showMessage(hint);
+    if (this.isAnswer(strike))
+      return this.askGame().then((userInputNumber) => {
+        if (userInputNumber === "1") this.startGame();
+        else this.endGame();
+      });
+    return this.getUserInputNumber()
+      .then((userInputNumber) => this.getUserInputResult(userInputNumber))
+      .then((userInputResult) => this.proceedGame(userInputResult));
+  }
+
+  endGame() {
+    Console.close();
   }
 
   askGame() {
