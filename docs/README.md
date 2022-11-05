@@ -34,7 +34,7 @@
 
 ### 게임 진행에 필요한 정보들을 담고있는 Store 클래스들
 
-- [-] GameStatusStore 구현 (gameStatus)
+- [o] GameStatusStore 구현 (gameStatus)
 - [-] GameDataStore 구현 (target, ballsAndStrikes)
 
 ---
