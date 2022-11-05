@@ -41,16 +41,43 @@ class App {
   getPlayerInput() {
     MissionUtils.Console.readLine(NUM_INPUT_MSG, (line) => {
       this.NumInputExceptionCheck(line);
-      return line;
+      this.input = line.split('');
+      this.calScore();
     });
   }
 
+  countBall() {
+    if (this.input[0] === this.answer[1] || this.input[0] === this.answer[2])
+      this.score.ball += 1;
+    if (this.input[1] === this.answer[0] || this.input[1] === this.answer[2])
+      this.score.ball += 1;
+    if (this.input[2] === this.answer[0] || this.input[2] === this.answer[1])
+      this.score.ball += 1;
+  }
+
+  countStrike() {
+    if (this.input[0] === this.answer[0]) this.score.strike += 1;
+    if (this.input[1] === this.answer[1]) this.score.strike += 1;
+    if (this.input[2] === this.answer[2]) this.score.strike += 1;
+  }
+
+  calScore() {
+    this.countBall();
+    this.countStrike();
+    // Debug
+    // MissionUtils.Console.print(this.answer);
+    // MissionUtils.Console.print(this.score);
+  }
+
   generateAnswer() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
+      .join('')
+      .split('');
   }
 
   constructor() {
     this.answer = this.generateAnswer();
+    this.score = { ball: 0, strike: 0 };
   }
 }
 
