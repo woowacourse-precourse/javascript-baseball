@@ -13,6 +13,13 @@ class App {
     }
     return true;
   }
+
+  static isThreeDigit(str) {
+    if (!App.isNumber(str) || str.length !== 3) {
+      return false;
+    } 
+    return true;
+  }
   
   play() {
     App.printGameStart();
