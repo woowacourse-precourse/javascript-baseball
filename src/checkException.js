@@ -8,9 +8,10 @@ const isAllowed = (nowCheckStr, exception) => {
 const checkException = (input, checkStyle) => {
   const playingInput = 0;
   const restartInput = 1;
+  const RESTART = "1";
+  const EXIT = "2";
   let allowed = true;
   if (checkStyle === playingInput) {
-    if (input === "") return true;
     if (input.length !== 3) {
       return false;
     }
@@ -23,7 +24,7 @@ const checkException = (input, checkStyle) => {
     if (input.length !== 1) {
       allowed = false;
     }
-    if (input !== "1" && input !== "2") {
+    if (input !== RESTART && input !== EXIT) {
       allowed = false;
     }
   }

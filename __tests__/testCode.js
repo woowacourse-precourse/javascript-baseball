@@ -62,9 +62,23 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
   test("게임 종료 후 예외처리 테스트", () => {
     const randoms = [2, 4, 5];
     const answers = ["123", "245", "5"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+  });
+
+  test("공백 입력 예외처리 테스트", () => {
+    const randoms = [3, 6, 8];
+    const answers = [""];
 
     mockRandoms(randoms);
     mockQuestions(answers);
