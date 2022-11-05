@@ -122,4 +122,42 @@ describe("숫자 야구 게임", () => {
 
     expect(testResult).toEqual("123");
   });
+
+  test("게임 종료 후 1을 입력한 경우 게임을 새로 시작한다.", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["1", "123", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["게임 종료", "시작합니다"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.gameOver();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 종료 후 2를 입력한 경우 게임을 종료한다.", () => {
+    const answers = ["2"];
+
+    mockQuestions(answers);
+
+    const app = new App();
+    const testResult = app.gameOver();
+
+    expect(testResult).toEqual(undefined);
+  });
+
+  test("게임 종료 후 입력값이 1 또는 2가 아닌 경우 예외를 발생시킨다.", () => {
+    const answers = ["3"];
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.gameOver();
+    }).toThrow();
+  });
 });
