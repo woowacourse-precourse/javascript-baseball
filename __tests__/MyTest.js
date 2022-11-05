@@ -20,7 +20,6 @@ test("사용자 숫자 상대방 숫자 비교", () => {
   const nab = [1, 2, 3];
   const nbb = [1, 2, 3];
   const app = new App();
-  const resultText = app.compare(nab, nbb);
   expect(app.compare(nab, nbb)).toEqual("3스트라이크");
 });
 
@@ -28,7 +27,6 @@ test("사용자 숫자 상대방 숫자 비교2", () => {
   const nab = [4, 5, 6];
   const nbb = [1, 2, 3];
   const app = new App();
-  const resultText = app.compare(nab, nbb);
   expect(app.compare(nab, nbb)).toEqual("낫싱");
 });
 
@@ -36,6 +34,5 @@ test("사용자 숫자 상대방 숫자 비교3", () => {
   const nab = [1, 2, 3];
   const nbb = [1, 3, 2];
   const app = new App();
-  const resultText = app.compare(nab, nbb);
   expect(app.compare(nab, nbb)).toEqual("2볼 1스트라이크");
 });

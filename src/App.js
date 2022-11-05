@@ -72,15 +72,19 @@ class App {
       (input) => {
         if (input === "1") {
           this.Answer = this.makeComputerArr();
-          console.log(this.Answer);
           this.makeInputNum();
         }
         if (input === "2") return "게임 종료";
-        throw new Error();
+        if (input < 1 || input > 2 || Number.isNaN(input))
+          throw new Error("정해진 값을 입력해주세요.");
       }
     );
   }
 }
+
+// todo
+// 예외 사항 처리 기능
+// 게임 종료 기능
 
 const app = new App();
 app.play();
