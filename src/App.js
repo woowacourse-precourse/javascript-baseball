@@ -38,7 +38,7 @@ class App {
 
   // 사용자가 입력한 값을 판단하여 결과를 출력하는 기능
   getComputerOutput() {
-    const BALL_STRIKE_MAP = this.getStrikeAndBallMap();
+    const BALL_STRIKE_MAP = this.getBallAndStrikeMap();
     const BALL_COUNT = BALL_STRIKE_MAP.get('BALL_COUNT');
     const STRIKE_COUNT = BALL_STRIKE_MAP.get('STRIKE_COUNT');
     let result = '';
@@ -47,14 +47,14 @@ class App {
     }
     if (BALL_STRIKE_MAP.size === 1) {
       if (STRIKE_COUNT) {
-        result = `${STRIKE_COUNT} 스트라이크`;
+        result = `${STRIKE_COUNT}스트라이크`;
       }
       if (BALL_COUNT) {
-        result = `${BALL_COUNT} 볼`;
+        result = `${BALL_COUNT}볼`;
       }
     }
     if (BALL_STRIKE_MAP.size === 2) {
-      result = `${BALL_COUNT} 볼 ${STRIKE_COUNT} 스트라이크`;
+      result = `${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`;
     }
     MissionUtils.Console.print(result);
   }
