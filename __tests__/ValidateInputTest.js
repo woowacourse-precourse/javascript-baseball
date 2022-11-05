@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const validateInput = require("../src/ValidateInput");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -14,10 +15,8 @@ describe.only("플레이어 입력 검증 테스트", () => {
   test("입력 검증 함수 정상 입력", () => {
     const inputs = ["123", "231", "451", "643"];
 
-    const app = new App();
-
     inputs.forEach((input) => {
-      const result = app.validateInput(input);
+      const result = validateInput(input);
       expect(result).toBeTruthy();
     });
   });
@@ -31,10 +30,8 @@ describe.only("플레이어 입력 검증 테스트", () => {
       ["de2", false],
     ];
 
-    const app = new App();
-
     inputs.forEach(([input, answer]) => {
-      const result = app.validateInput(input);
+      const result = validateInput(input);
       expect(result).toEqual(answer);
     });
   });
