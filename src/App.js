@@ -41,7 +41,16 @@ class App {
   compareInputWithAnswer(userInput) {
     const strike = this.countStrike(userInput);
     const ball = this.countBall(userInput);
-    this.printResult(strike, ball);
+    if (strike === 3) {
+      this.printEndMessage();
+    } else {
+      this.printResult(strike, ball);
+      this.printInputMessage();
+    }
+  }
+
+  printEndMessage() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 
   countStrike(userInput) {
@@ -79,7 +88,6 @@ class App {
     if (ball !== 0 && strike !== 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
-    this.printInputMessage();
   }
 }
 const app = new App();
