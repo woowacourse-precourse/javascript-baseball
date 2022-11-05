@@ -51,8 +51,7 @@ class App {
     const message = [];
     const [ball, strike] = userInputResult;
     if (this.isNothing(userInputResult)) return CASE.NOTING;
-    if (this.isAnswer(strike))
-      return "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    if (this.isAnswer(strike)) return "3스트라이크";
     if (ball) message.push(`${ball}${CASE.BALL}`);
     if (strike) message.push(`${strike}${CASE.STRIKE}`);
     return message.join(" ");
