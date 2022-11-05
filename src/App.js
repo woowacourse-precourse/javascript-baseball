@@ -25,29 +25,35 @@ function checkVaildUserInputValue(userInput) {
  * @description 유저가 입력한 값이 답과 일치하는지 비교
  */
 function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
-  let splitCPUNumber = [];
-  let splitUserNumber = [];
   let strike = 0;
   let ball = 0;
   let nothing = 0; // nothing이 3이면 낫싱처리
-  for (let i = 0; i < userInput.length; i++) {
-    // if (userInput[i].includes()) {
-    //   console.log("3스");
-    // }
+  let checkIndex = [];
 
+  for (let i = 0; i < userInput.length; i++) {
     if (!cpuNumber.includes(userInput[i])) {
       nothing++;
     }
     if (cpuNumber.includes(userInput[i])) {
+      console.log("sdf");
+    }
+    checkIndex[i] = cpuNumber.indexOf(userInput[i]);
+  }
+
+  for (let i = 0; i < checkIndex.length; i++) {
+    if (checkIndex[i] == i) {
       strike++;
     }
   }
+
+  console.log(checkIndex);
+
   if (nothing === 3) {
     return "낫싱";
   }
-  console.log(strike);
-  console.log(ball);
-  console.log(nothing);
+  if (strike === 3) {
+    return "3스트라이크";
+  }
 }
 
 /**
@@ -71,16 +77,20 @@ class App {
   play() {
     // const cpuNumber = cpuMakeAnswer();
     const cpuNumber = [3, 2, 9];
+    const userInput = [];
+    Console.readLine("숫자를 입력해주세요.", (userInput) => {
+      Console.print("숫자 야구게임을 시작합니다.");
+      Console.print(userInput);
+      if (checkVaildUserInputValue(userInput)) {
+        UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
+      }
+    });
 
     // const userInput = [1, 2, 3];
     // const userInput = [1, 2, 3]; // 1볼 1스트라이크
-    const userInput = [3, 2, 9]; // 3스트라크
+    // const userInput = [3, 2, 9]; // 3스트라크
     // const userInput = [4, 8, 7]; // 낫싱
     // const userInput = [9, 3, 2]; // 3볼
-    Console.print("숫자 야구게임을 시작합니다.");
-    if (checkVaildUserInputValue(userInput)) {
-      UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
-    }
   }
 }
 
