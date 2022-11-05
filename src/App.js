@@ -92,7 +92,7 @@ class App {
   }
 
   checkState(state) {
-    if (state === 1 || state === 2) {
+    if (state !== 1 && state !== 2) {
       throw new Error('잘못된 값을 입력하셨습니다.');
     }
   }
