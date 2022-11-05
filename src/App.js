@@ -47,7 +47,7 @@ class App {
   }
 
   calcScore() {
-    this.user.forEach(digit, (idx) => {
+    this.user.forEach((digit, idx) => {
       if (digit === this.computer[idx]) this.score.strike++;
       else if (this.computer.includes(digit)) this.score.ball++;
     });
@@ -55,13 +55,14 @@ class App {
 
   printResult() {
     let resultString = "";
+    if (this.score.ball > 0) {
+      resultString += `${this.score.ball}볼`;
+    }
     if (this.score.strike > 0) {
+      resultString += resultString ? " " : "";
       resultString += `${this.score.strike}스트라이크`;
     }
-    if (this.score.ball > 0) {
-      resultString += ` ${this.score.ball}볼`;
-    }
-    if (!resultString) {
+    if (!this.score.strike && !this.score.ball) {
       resultString = "낫싱";
     }
     MissionUtils.Console.print(resultString);
