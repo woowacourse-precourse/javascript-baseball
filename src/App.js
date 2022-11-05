@@ -9,11 +9,8 @@ class App {
   }
 
   AnswerisRight(userAnswer) {
-    if (userAnswer) {
-      this.end();
-    } else {
-      this.makeInputNum();
-    }
+    if (userAnswer) return this.end();
+    if (!userAnswer) return this.makeInputNum();
   }
 
   makeComputerArr() {
@@ -72,6 +69,7 @@ class App {
       (input) => {
         if (input === "1") {
           this.Answer = this.makeComputerArr();
+          console.log(this.Answer);
           this.makeInputNum();
         }
         if (input === "2") process.exit();
@@ -83,7 +81,6 @@ class App {
 }
 
 // todo
-// 게임 종료 기능
 // 변수 이름 고민하기
 // 기능 분리 다시 생각하기
 // 예외 처리 기능 분리해보기
