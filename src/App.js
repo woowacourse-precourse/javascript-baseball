@@ -12,7 +12,7 @@ class App {
 
   async play() {
     this.print(this.START);
-    this.answer = this.makeBaseballGameAnswer();
+    this.answer = this.generateAnswer();
 
     console.log(this.answer);
 
@@ -29,10 +29,6 @@ class App {
 
     if (newGameOrEnd === "1") await this.play();
     else Console.close();
-  }
-
-  print(message) {
-    Console.print(message);
   }
 
   calculateCountWithUserInput(userInput) {
@@ -66,10 +62,14 @@ class App {
     return this.answer !== this.userInput;
   }
 
-  makeBaseballGameAnswer() {
-    return Array.from({ length: 3 }, () =>
-      Random.pickNumberInRange(1, 9).toString()
-    ).join("");
+  generateAnswer() {
+    const numbers = new Set();
+
+    while (numbers.size < 3) {
+      numbers.add(Random.pickNumberInRange(1, 9));
+    }
+
+    return Array.from(numbers).join("");
   }
 
   async getPlayerInput(question) {
@@ -78,6 +78,13 @@ class App {
         resolve(userInput);
       });
     });
+  }
+
+  isValidInput(userInput) {}
+  isOneOrTwo(userInput) {}
+
+  print(message) {
+    Console.print(message);
   }
 }
 
