@@ -18,6 +18,13 @@ class App {
   async oneGame(computer, interaction) {
     while (true) {
       const input = await interaction.printPlayInputMessage();
+      try {
+        interaction.checkValidNumberInput(input);
+      } catch (error) {
+        Console.print(error);
+        Console.close();
+        return;
+      }
       Console.print(computer.number);
       Console.print(input);
       const resultMap = computer.getResultMap(input);
@@ -29,6 +36,14 @@ class App {
       }
     }
     const response = await interaction.printEndGameMEssage();
+
+    if (response === '1') {
+      this.play();
+      return;
+    }
+    if (response === '2') {
+      Console.close();
+    }
 
     // .then(interaction.checkValidNumberInput)
     // .then((inputNumber) => {

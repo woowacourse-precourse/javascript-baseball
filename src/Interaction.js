@@ -30,13 +30,9 @@ class Interaction {
   }
 
   checkValidNumberInput(inputNumber) {
-    return new Promise((resolve, reject) => {
-      if (!error.isValidResponse(inputNumber)) {
-        throw new Error('숫자 세자리이상');
-      }
-
-      resolve(inputNumber);
-    });
+    if (!error.isValidResponse(inputNumber)) {
+      throw new Error('숫자 세자리이상');
+    }
   }
 }
 
