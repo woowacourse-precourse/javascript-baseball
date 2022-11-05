@@ -18,6 +18,11 @@ class App {
     MissionUtils.Console.print('낫싱');
   }
 
+
+  printAllMatchMessage(){
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
+
   throwExceptionMessage(message){
     throw message
   }
