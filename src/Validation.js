@@ -15,10 +15,10 @@ const validRange = (num) => {
 const duplication = (num) => new Set(num).size !== num.length;
 
 const isValidInput = (num) => {
-  if (isNaN(num.join(''))) return false;
-  if (!validLength(num)) return false;
-  if (!validRange(num)) return false;
-  if (duplication(num)) return false;
+  if (isNaN(num.join(''))) throw new Error(ERROR.NAN);
+  if (!validLength(num)) throw new Error(ERROR.LENGTH);
+  if (!validRange(num)) throw new Error(ERROR.RANGE);
+  if (duplication(num)) throw new Error(ERROR.DUPLICATION);
   return true;
 };
 
