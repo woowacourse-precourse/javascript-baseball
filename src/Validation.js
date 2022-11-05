@@ -7,17 +7,12 @@ class Validation {
   }
 
   isValidationNumberWithoutDuplicate(answer) {
-    let isValidation = false;
     const wordLengthWidhoutDuplicate = new Set([...answer]).size;
-
-    [...answer].map((i) => {
-      i === "" || i === " " ? (isValidation = true) : (isValidation = false);
-    });
-
-    if (wordLengthWidhoutDuplicate !== 3 || isValidation) {
+    if (wordLengthWidhoutDuplicate !== 3) {
       throw "서로 다른 3개의 숫자를 입력해주세요";
     }
   }
+
   isValidationConfirmInput(answer) {
     if (answer !== "1" || answer !== "2") {
       throw "새로 시작할려면 1, 종료하려면 2를 입력해주세요.";
