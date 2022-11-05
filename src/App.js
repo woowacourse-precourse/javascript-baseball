@@ -20,8 +20,11 @@ class App {
       throw "is not a number from 1 to 9";
     }
 
-    let ball_strike_result = [];
-    ball_strike_result = ball_and_strike(computer, to_array(user));
+    let ball_strike_result = [0, 0];
+    for(let i = 0; i < 3; i++){
+      ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
+      ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
+    }
 
     notthing(ball_strike_result);
   }
@@ -62,22 +65,22 @@ function to_array(user_array){
   return user_array.split("");
 }
 
-function ball_and_strike(computer, to_array){
+function ball_and_strike(computer, to_array, number_of_digits){
   let ball_strike_count = [0, 0];
 
-  for(let i of to_array) {
-    if(computer[0] == to_array[i]){
-      ball_strike_count = ball_strike_check(i);
+  for(let i = 0; i < to_array.length; i++){
+    if(computer[number_of_digits] == to_array[i]){
+      ball_strike_count = ball_strike_check(i, number_of_digits);
     }
   }
   return ball_strike_count;
 }
 
-function ball_strike_check(i){
+function ball_strike_check(i, number_of_digits){
   ball = 0;
   strike = 0;
 
-  if(i == 0) {
+  if(i == number_of_digits) {
     strike++;
   } else {
     ball++;
