@@ -64,14 +64,12 @@ class App {
     if (start !== 'restart' && start !== 'start') {
       throw Error('start 명령을 잘못 입력했습니다.');
     }
-    if (start === 'restart')
-      return this.computer.setRandomComputerNumberArray();
+    if (start === 'restart') return this.computer.setRandomNumberArray();
 
     this.initAnswerMap();
     try {
       await this.user.getNumberArrayFromInput();
     } catch (e) {
-      console.log('error');
       throw Error(e);
     }
     this.compareUserAndComputerNumber();
@@ -94,7 +92,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('play');
-    this.computer.setRandomComputerNumberArray();
+    this.computer.setRandomNumberArray();
     this.startOrRestartApp('start');
   }
 }
