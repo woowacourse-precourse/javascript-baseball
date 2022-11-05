@@ -1,11 +1,33 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+class User {
+  constructor() {
+    this.userNumberArray = [];
+  }
+  getUserNumberFromInput() {
+    let that = this;
+    return new Promise(function (resolve, reject) {
+      try {
+        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+          that.userNumberArray = [
+            ...input
+              .toString()
+              .split('')
+              .map(i => +i),
+          ];
+          resolve();
+        });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+}
 
 class App {
   constructor() {
     this.answerMap = new Map();
     this.computerNumberArray = [];
-
-    this.userNumberArray = [];
+    this.user = new User();
   }
 
   initAnswerMap() {
@@ -27,7 +49,7 @@ class App {
   }
 
   compareUserAndComputerNumber() {
-    this.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
+    this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
       const index = this.computerNumberArray.indexOf(userNumber);
       if (index === userNumberArrayIndex) {
         this.answerMap.set('strike', this.answerMap.get('strike') + 1);
@@ -58,12 +80,11 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
       input => {
         if (input === '1') {
-          console.log(this);
           this.startApp('restart');
         } else if (input === '2') {
           this.endApp();
         } else {
-          console.log('error');
+          throw Error('잘못된 번호를 입력하였습니다.');
         }
       },
     );
@@ -73,30 +94,11 @@ class App {
     MissionUtils.Console.close();
   }
 
-  getUserNumberFromInput() {
-    let that = this;
-    return new Promise(function (resolve, reject) {
-      try {
-        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-          that.userNumberArray = [
-            ...input
-              .toString()
-              .split('')
-              .map(i => +i),
-          ];
-          resolve();
-        });
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
-
   async startApp(start) {
     if (start === 'restart') this.resetComputerNumberArray();
     this.initAnswerMap();
     try {
-      await this.getUserNumberFromInput();
+      await this.user.getUserNumberFromInput();
     } catch (e) {
       throw Error(e);
     }
@@ -104,14 +106,14 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
+    MissionUtils.Console.print('play');
     this.resetComputerNumberArray();
     this.startApp();
   }
 }
 
+MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
 const app = new App();
-
 app.play();
 
 module.exports = App;

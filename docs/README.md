@@ -27,7 +27,7 @@
   - [x] endApp : app을 종료시킨다.
   - [x] askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
   - [x] compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
-  - [ ] initAnswerMap
+  - [x] initAnswerMap
 
 - [ ]user
 
