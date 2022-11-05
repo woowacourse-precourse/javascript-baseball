@@ -60,6 +60,8 @@ class App {
   startGameOption() {
     this.printStartSentence();
     this.setRandomNumber();
+  endGameOption() {
+    Console.close();
   }
 }
 module.exports = App;
