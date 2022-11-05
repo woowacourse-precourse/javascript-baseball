@@ -39,6 +39,8 @@ class BaseballGame {
           this.initGame();
         } else if (answer === "2") {
           MissionUtils.Console.close();
+        } else {
+          throw constants.INVALID_COMMAND;
         }
       }
     );
