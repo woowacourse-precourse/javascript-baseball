@@ -1,8 +1,7 @@
 const App = require("../src/App");
 const RandomNumber = require("../src/RandomNumber");
 const CheckConstraints = require("../src/CheckConstraints");
-const GetUserIput = require("../src/GetUserInput");
-const GameResult = require("../src/GameResult");
+const Player = require("../src/Player");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -59,8 +58,8 @@ describe("숫자 야구 게임", () => {
       "checkConstraints"
     );
 
-    const getUserInput = new GetUserIput();
-    getUserInput.getUserInput();
+    const player = new Player();
+    player.getPlayerInput();
 
     expect(readSpy).toHaveBeenCalled();
     expect(readSpy).toHaveBeenCalledTimes(1);
