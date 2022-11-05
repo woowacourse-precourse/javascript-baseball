@@ -1,6 +1,23 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  printResult(result) {
+    let output = '';
+    if (result.ball !== 0) {
+      output += `${result.ball}볼`;
+      if (result.strike !== 0) {
+        output += ' ';
+      }
+    }
+    if (result.strike !== 0) {
+      output += `${result.strike}스트라이크`;
+    }
+    if (result.strike === 0 && result.ball === 0) {
+      output = '낫싱';
+    }
+    Console.print(output);
+  }
+
   getResult(number, answer) {
     const numberArr = [...number];
     const result = numberArr.reduce(
