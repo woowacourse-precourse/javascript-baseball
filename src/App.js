@@ -5,6 +5,7 @@ const Random = MissionUtils.Random;
 class App {
   constructor() {
     this.gameSet = {};
+    this.answer = [];
     this.round = 0;
     this.score = {
       strike: 0,
