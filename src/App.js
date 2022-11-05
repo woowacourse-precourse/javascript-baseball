@@ -12,6 +12,7 @@ class App {
     );
     let Finished = false;
     while (!Finished) {
+      baseballOutput.start();
       const userNumbers = baseballComputer.getUserNumbers();
       const baseballDto = baseballComputer.getBallState(userNumbers);
       Finished = baseballComputer.isFinish(baseballDto);

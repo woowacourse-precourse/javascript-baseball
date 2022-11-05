@@ -1,18 +1,21 @@
 const BaseballDto = require("./Baseball.dto");
 
 class BaseballValidator {
-  checkNumericNumbers([...numbers]) {
+  checkNumericNumbers(numbers) {
     nonNuemrics = numbers.filter((number) => "1" > number && number > "9");
     if (nonNuemrics > 0) {
       throw "숫자가 아닌 값이 있습니다.";
     }
   }
-  checkNumbersLength([...numbers]) {
+  checkNumbersLength(numbers) {
+    if (numbers === undefined) {
+      throw "알 수 없는 입력값입니다";
+    }
     if (numbers.length !== 3) {
       throw "글자가 3개가 아닙니다.";
     }
   }
-  checkOtherNumbers([...numbers]) {
+  checkOtherNumbers(numbers) {
     const removedDuplicateNumbers = Array.from(new Set(...numbers));
     if (
       removedDuplicateNumbers.length === numbers.length &&
@@ -54,9 +57,8 @@ class BaseballValidator {
   checkRestartValue(restartValue) {
     if (!(+restartValue === 1 || +restartValue === 2)) {
       throw "잘못된 입력값입니다";
-      return false;
     }
-    return true;
+    return +restartValue === 1;
   }
 }
 
