@@ -110,7 +110,7 @@ export default class BaseballGame {
         return answer;
     };
 
-    // 정답 여부 확인 함수 구현(3스트라이크)
+    // 정답여부 확인 함수 구현(3스트라이크)
     checkStrike(result) {
         if (result == "3스트라이크") {
             return true;
@@ -159,6 +159,6 @@ export default class BaseballGame {
         submitBtn.disabled = false;
         result.innerHTML = "";
         return new BaseballGame();
-    }
+    };
 }
 new BaseballGame();
