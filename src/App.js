@@ -65,6 +65,13 @@ class App {
     return false;
   }
 
+  ballCheck() {
+    if (this.strikeCount === 0 && this.ballCount !== 0) {
+      MissionUtils.Console.print(`${this.ballCount}볼`);
+    }
+    return false;
+  }
+
   strikeCheck() {
     if (
       this.strikeCount !== 0 &&
