@@ -1,12 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const ExceptionCheck = require("./ExceptionCheck")
 
-
-
 class App {
   constructor() {
-    this.correct_answer;
-    this.user_input;
+    this.correctAnswer;
+    this.userInput;
   }
   play() {
     this.gamaStartAlram()
@@ -19,11 +17,11 @@ class App {
   }
 
   createRandomNum() {
-    let random_nums = new Set()
-    while (random_nums.size < 3) {
-      random_nums.add(MissionUtils.Random.pickNumberInRange(1, 9))
+    let computerRandomNums = new Set()
+    while (computerRandomNums.size < 3) {
+      computerRandomNums.add(MissionUtils.Random.pickNumberInRange(1, 9))
     }
-    return this.correct_answer = [...random_nums].join('')
+    return this.correctAnswer = [...computerRandomNums].join('')
   }
 
   getAnswer() {
@@ -31,7 +29,7 @@ class App {
       const exceptionCheck = new ExceptionCheck()
       exceptionCheck.UserInputCheck(input)
       MissionUtils.Console.print(`입력한 숫자는 ${input} 입니다`)
-      return this.user_input = input
+      return this.userInput = input
     })
   }
 
