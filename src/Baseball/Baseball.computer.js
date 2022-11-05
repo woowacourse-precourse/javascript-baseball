@@ -13,8 +13,7 @@ class BaseballComputer {
     this.baseballValidator = baseballValidator;
   }
   getUserNumbers() {
-    let userNumbers = this.baseballOutput.getNumber();
-    userNumbers = "135";
+    const userNumbers = this.baseballOutput.getNumber();
     this.baseballValidator.checkNumbersLength(userNumbers);
     this.baseballValidator.checkNumericNumbers(userNumbers);
     this.baseballValidator.checkOtherNumbers(userNumbers);

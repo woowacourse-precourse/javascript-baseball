@@ -8,9 +8,12 @@ class BaseBasllOutput {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
   }
   getNumber() {
+    let result = "";
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      return answer;
+      result = answer;
+      MissionUtils.Console.close();
     });
+    return result;
   }
   result(baseBallDto) {
     const { ball, strike } = baseBallDto;
@@ -27,12 +30,15 @@ class BaseBasllOutput {
     MissionUtils.Console.print(returnString.trim());
   }
   restart() {
+    let result = "";
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
-        return answer;
+        result = answer;
+        MissionUtils.Console.close();
       }
     );
+    return result;
   }
 }
 

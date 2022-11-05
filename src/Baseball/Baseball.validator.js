@@ -42,11 +42,10 @@ class BaseballValidator {
     return computerNumber === userNumber;
   }
   isBall(computerNumbers, userNumber, userNumberIndex) {
-    Array.from(computerNumbers).forEach((computerNumber, index) => {
+    computerNumbers.forEach((computerNumber, index) => {
       if (
-        !(
-          this.isStrike(computerNumber, userNumber) && userNumberIndex === index
-        )
+        !this.isStrike(computerNumber, userNumber) ||
+        userNumberIndex !== index
       ) {
         return true;
       }
