@@ -3,9 +3,6 @@ const {
   replyValidation,
   replyCheckAnswer,
   makeReplyToReply,
-  //   inputReply,
-  //   inputReplay,
-  //   closePlay,
 } = require("../src/util");
 
 describe("유틸 함수 체크", () => {
@@ -103,25 +100,4 @@ describe("유틸 함수 체크", () => {
     // then
     expect(result3).toEqual({ message: "낫싱", done: false });
   });
-
-  //   test("inputReply", () => {
-  //     // given
-  //     // when
-  //     // then
-  //     expect(inputReply());
-  //   });
-
-  //   test("inputReplay", () => {
-  //     // given
-  //     // when
-  //     // then
-  //     expect(inputReplay());
-  //   });
-
-  //   test("closePlay", () => {
-  //     // given
-  //     // when
-  //     // then
-  //     expect(closePlay());
-  //   });
 });

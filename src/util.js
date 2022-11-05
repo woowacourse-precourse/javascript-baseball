@@ -1,4 +1,4 @@
-const { Random, Console } = require("@woowacourse/mission-utils");
+const { Random } = require("@woowacourse/mission-utils");
 
 const makeAnswer = () => {
   const set = new Set();
@@ -45,21 +45,7 @@ const makeReplyToReply = ({ ball, strike }) => {
   return { message, done: false };
 };
 
-const inputReply = (cb) =>
-  Console.readLine("숫자를 입력해주세요 : ", (n) => cb(n));
-
-const inputReplay = (cb) =>
-  Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (n) => cb(n)
-  );
-
-const closePlay = () => Console.close();
-
 exports.makeAnswer = makeAnswer;
 exports.replyValidation = replyValidation;
 exports.replyCheckAnswer = replyCheckAnswer;
 exports.makeReplyToReply = makeReplyToReply;
-exports.inputReply = inputReply;
-exports.inputReplay = inputReplay;
-exports.closePlay = closePlay;

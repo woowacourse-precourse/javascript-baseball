@@ -1,33 +1,41 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {
   makeAnswer,
-  inputReply,
-  inputReplay,
-  closePlay,
   replyCheckAnswer,
   makeReplyToReply,
   replyValidation,
 } = require("./util.js");
 
+const EXIT = "2";
 class App {
   play() {
     const answer = makeAnswer();
     const playing = (n) => {
-      if (replyValidation(n)) {
-        const replyInfo = replyCheckAnswer(n, answer);
-        const { message, done } = makeReplyToReply(replyInfo);
-        Console.print(message);
-        if (done) {
-          inputReplay((input) => {
-            if (input === "2") closePlay();
-            else this.play();
-          });
-        } else {
-          inputReply(playing);
-        }
-      }
+      replyValidation(n);
+      const replyInfo = replyCheckAnswer(n, answer);
+      const { message, done } = makeReplyToReply(replyInfo);
+      this.print(message);
+      done ? this.exit() : this.reply(playing);
     };
-    inputReply(playing);
+    this.reply(playing);
+  }
+
+  print(message) {
+    Console.print(message);
+  }
+  reply(cb) {
+    Console.readLine("숫자를 입력해주세요 : ", (n) => cb(n));
+  }
+
+  exit() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => (input === EXIT ? this.close() : this.play())
+    );
+  }
+
+  close() {
+    Console.close();
   }
 }
 
