@@ -101,10 +101,25 @@ class App {
     if (answer.includes("3스트라이크")) {
       console.log("3개의 숫자를 모두 맞히셨습니다!");
       MissionUtils.Console.print("게임 종료");
-      return;
+      return this.selectOption();
     }
 
     this.solveNumber(computer);
+  }
+
+  selectOption() {
+    let option;
+
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (num) => {
+        option = num;
+      }
+    );
+
+    if (option === "2") {
+      MissionUtils.Console.print("게임 종료");
+    }
   }
 }
 
