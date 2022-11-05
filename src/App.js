@@ -22,8 +22,17 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputs = input.split("").map((i) => Number(i));
       if (!handleException(inputs)) throw "입력 형식이 잘못되었습니다.";
-      calculateScore(this.answer, inputs);
+      const score = calculateScore(this.answer, inputs);
+      const print = this.printScore(score);
+      MissionUtils.Console.print(print);
     });
+  }
+
+  printScore({ strike, ball }) {
+    if (strike !== 0 && ball === 0) return `${strike}스트라이크`;
+    if (strike === 0 && ball !== 0) return `${ball}볼`;
+    if (strike === 0 && ball === 0) return "낫싱";
+    return `${ball}볼 ${strike}스트라이크`;
   }
 }
 
