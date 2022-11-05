@@ -21,23 +21,15 @@ class App {
 
   startGame() {
     this.setRandomNumber();
-    this.getUserInputNumber()
-      .then((userInputNumber) => this.getUserInputResult(userInputNumber))
-      .then((userInputResult) => this.proceedGame(userInputResult));
+    this.getUserInputNumber();
   }
 
   proceedGame(userInputResult) {
     const [_, strike] = userInputResult;
     const hint = this.getHintMessage(userInputResult);
     this.showMessage(hint);
-    if (isAnswer(strike))
-      return this.askGame().then((userInputNumber) => {
-        if (userInputNumber === "1") this.startGame();
-        else this.endGame();
-      });
-    return this.getUserInputNumber()
-      .then((userInputNumber) => this.getUserInputResult(userInputNumber))
-      .then((userInputResult) => this.proceedGame(userInputResult));
+    if (isAnswer(strike)) return this.askGame();
+    return this.getUserInputNumber();
   }
 
   endGame() {
@@ -46,15 +38,14 @@ class App {
 
   askGame() {
     this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    return new Promise((resolve) =>
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        (userInputNumber) => {
-          if (!isValidUserAskInput(userInputNumber))
-            throw new Error("인풋 값이 유효하지 않습니다.");
-          resolve(userInputNumber);
-        }
-      )
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (userInputNumber) => {
+        if (!isValidUserAskInput(userInputNumber))
+          throw new Error("인풋 값이 유효하지 않습니다.");
+        if (userInputNumber === "1") this.startGame();
+        else this.endGame();
+      }
     );
   }
 
@@ -67,15 +58,14 @@ class App {
   }
 
   getUserInputNumber() {
-    return new Promise((resolve) =>
-      MissionUtils.Console.readLine(
-        "숫자를 입력해주세요 : ",
-        (userInputNumber) => {
-          if (!isValidUserInput(userInputNumber))
-            throw new Error("인풋 값이 유효하지 않습니다.");
-          resolve(userInputNumber);
-        }
-      )
+    MissionUtils.Console.readLine(
+      "숫자를 입력해주세요 : ",
+      (userInputNumber) => {
+        if (!isValidUserInput(userInputNumber))
+          throw new Error("인풋 값이 유효하지 않습니다.");
+        const userInputResult = this.getUserInputResult(userInputNumber);
+        this.proceedGame(userInputResult);
+      }
     );
   }
 
