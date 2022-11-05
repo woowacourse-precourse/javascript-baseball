@@ -3,13 +3,17 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     this.startGame();
-    const computer = this.selectComputer();
-    this.solveNumber(computer);
+    this.playGame();
   }
 
   startGame() {
     const START = "숫자 야구 게임을 시작합니다.";
     console.log(START);
+  }
+
+  playGame() {
+    const computer = this.selectComputer();
+    this.solveNumber(computer);
   }
 
   selectComputer() {
@@ -116,6 +120,9 @@ class App {
         option = num;
       }
     );
+
+    if (option === "1") {
+    }
 
     if (option === "2") {
       MissionUtils.Console.print("게임 종료");
