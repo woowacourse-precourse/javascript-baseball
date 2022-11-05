@@ -1,4 +1,7 @@
-const makeAnswer = () => {};
+const { Random } = require("@woowacourse/mission-utils");
+
+const makeAnswer = () => Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+
 const replyValidation = (input) => {
   const map = {};
   for (const value of input.split("")) {
@@ -7,10 +10,15 @@ const replyValidation = (input) => {
   }
   return true;
 };
+
 const replyCheckAnswer = (input, answer) => {};
+
 const makeReplyToReply = ({ ball, strike }) => {};
+
 const inputReply = () => {};
+
 const inputReplay = () => {};
+
 const closePlay = () => {};
 
 exports.makeAnswer = makeAnswer;
