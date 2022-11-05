@@ -32,10 +32,21 @@ class App {
             const MISSION_UTILS = require("@woowacourse/mission-utils");
             MISSION_UTILS.Console.print('3스트라이크');
             MISSION_UTILS.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+            return this.replayGame();
         }
         if(computerNumbers !== userNumbers) {
             this.isUserNumbers(computerNumbers);
         }
+    }
+
+    replayGame(){
+        const MISSION_UTILS = require("@woowacourse/mission-utils");
+        MISSION_UTILS.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+        MISSION_UTILS.Console.readLine('', (answer) => {
+            if(answer == 1) return this.isUserNumbers(this.isComputerNumbers());
+            if(answer == 2) return MISSION_UTILS.Console.print('게임 종료');
+            if(answer !== 1 && answer !== 2) throw new Error('1 또는 2를 입력하세요.');
+        })
     }
 }
 module.exports = App;
