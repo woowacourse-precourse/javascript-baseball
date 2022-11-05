@@ -19,10 +19,34 @@ function generateNumberList(size) {
   return result;
 }
 
-class App {
-  play() {
-    const computerNumberList = generateNumberList(GAME_NUM_SIZE);
+function getStrikeCount(computerNumber, userNumber) {
+  let count = 0;
+  for (let i = 0; i < GAME_NUM_SIZE; i++) {
+    if (computerNumber[i] === userNumber[i]) {
+      count++;
+    }
   }
+  return count;
+}
+
+function getSameNumberCount(computerNumber, userNumber) {
+  let count = 0;
+  for (let i = 0; i < GAME_NUM_SIZE; i++) {
+    if (userNumber.includes(computerNumber[i])) {
+      count++;
+    }
+  }
+  return count;
+}
+
+function compareNumber(computerNumber, userNumber) {
+  const strike = getStrikeCount(computerNumber, userNumber);
+  const sameNumber = getSameNumberCount(computerNumber, userNumber);
+  return { strike: strike, ball: sameNumber - strike };
+}
+
+class App {
+  play() {}
 }
 
 module.exports = App;
