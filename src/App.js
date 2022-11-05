@@ -16,9 +16,18 @@ function checkIsStrike(problem){
   MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
     const answer = input;
     // 4. 스트라이크 검사하기
-    console.log(answer);
+    let strike_count = 0;
+    const strikeResultList = problem.map((problemNumber,idx)=>{
+      if(String(problemNumber) === answer[idx]){
+        strike_count+= 1;
+        return 0;
+      }return problemNumber;
+    })
+    MissionUtils.Console.print(`${strike_count}스트라이크`)
+    return strikeResultList;
   })
 }
+
 
 
 class App {
