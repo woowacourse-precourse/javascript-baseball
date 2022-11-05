@@ -14,21 +14,19 @@ class BaseballGame {
 
   static gameStart() {
     console.log("숫자 야구 게임을 시작합니다.");
-    BaseballGame.getUserGuessNumber();
-  }
-
-  static getUserGuessNumber() {
-    return userGuessNumber();
+    userGuessNumber();
   }
 
   static getRandomNumbers() {
     return generateRandomNumber(1, 9);
   }
 
-  static async evalueScore() {
+  static evalueScore(userGuessNumber) {
+    const userNumber = GameUtils.userInputToNumberArr(userGuessNumber);
     const random = BaseballGame.getRandomNumbers();
-    const userNumber = await BaseballGame.getUserGuessNumber();
-    const result = scoreCheck(random, userNumber);
+
+    console.log(userNumber, random);
+    // const result = scoreCheck(random, userNumber);
   }
 }
 
@@ -41,17 +39,12 @@ const generateRandomNumber = (startNum, endNum) => {
   return randomArr;
 };
 
-const userGuessNumber = async () => {
-  const arr = await readLine(" 3자리 숫자를 입력해 주세요 ", (answer) => {
-    print(`숫자를 입력해 주세요 : ${answer}`);
+const userGuessNumber = () => {
+  const arr = readLine(" 3자리 숫자를 입력해 주세요 : ", (answer) => {
     Validate.userGuessNumbers(answer);
-
-    //값 저장이 아니라 바로 넘겨주어야 함.
-
-    const userGuess = GameUtils.userInputToNumberArr(answer);
+    BaseballGame.evalueScore(answer);
     MissionUtils.Console.close();
   });
-  return arr;
 };
 
 module.exports = BaseballGame;
