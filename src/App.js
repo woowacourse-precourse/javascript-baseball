@@ -11,8 +11,17 @@ let ANSWER_NUMBER = [];
 function putNumber() {
   MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
     ANSWER_NUMBER = answer.split("").map(Number);
-    comparingNumber();
+    numberValidate(answer);
+    comparingNumber(answer);
   });
+}
+
+function numberValidate(number) {
+  if (number.length !== 3) {
+    throw "정확한 값을 입력하세요!";
+  } else if (ANSWER_NUMBER.includes(0)) {
+    throw "정확한 값을 입력하세요!";
+  }
 }
 
 function comparingNumber() {
@@ -33,8 +42,8 @@ function gameWin() {
         makeCorrectNumber();
         console.log(CORRECT_NUMBER);
         putNumber();
-      } else {
-        return;
+      } else if (answer === "2") {
+        MissionUtils.Console.print("게임 종료");
       }
     }
   );
@@ -45,13 +54,7 @@ function notWin() {
   let BALL_NUMBER = [];
 
   ANSWER_NUMBER.map((el, index) => {
-    if (ANSWER_NUMBER[index] === CORRECT_NUMBER[index]) {
-      STRIKE_NUMBER.push(el);
-    } else if (
-      CORRECT_NUMBER.filter((el) => el !== CORRECT_NUMBER[index]).includes(el)
-    ) {
-      BALL_NUMBER.push(el);
-    }
+    findBallandStrike(el, index);
   });
 
   if (STRIKE_NUMBER.length === 0 && BALL_NUMBER.length === 0) {
@@ -68,6 +71,16 @@ function notWin() {
   STRIKE_NUMBER = [];
   BALL_NUMBER = [];
   putNumber();
+}
+
+function findBallandStrike(el, index) {
+  if (ANSWER_NUMBER[index] === CORRECT_NUMBER[index]) {
+    STRIKE_NUMBER.push(el);
+  } else if (
+    CORRECT_NUMBER.filter((el) => el !== CORRECT_NUMBER[index]).includes(el)
+  ) {
+    BALL_NUMBER.push(el);
+  }
 }
 
 class App {
