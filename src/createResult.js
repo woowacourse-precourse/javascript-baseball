@@ -1,3 +1,15 @@
+function getBall(ball, inputNumber, answer, includeOfNum) {
+  inputNumber.forEach((num, idx) => {
+    if (num !== answer[idx]) {
+      if (includeOfNum[num]) {
+        ball += 1;
+      }
+    }
+  });
+
+  return ball;
+}
+
 function createResult(inputNumber, answer) {
   const includeOfNum = {};
   inputNumber = String(inputNumber).split("");
