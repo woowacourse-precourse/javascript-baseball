@@ -1,11 +1,13 @@
-export default class Computer {
+const MissionUtils = require("@woowacourse/mission-utils");
+
+class Computer {
   constructor() {
     this.numbers = this.settingComputerNums();
   }
 
   settingComputerNums() {
     let computerNumbers = [];
-    while (computerNumbers.length !== 3) {
+    while (computerNumbers.length < 3) {
       computerNumbers.push(this.createNewNum(computerNumbers));
     }
 
