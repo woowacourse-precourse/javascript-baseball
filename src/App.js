@@ -32,9 +32,9 @@ class App {
   }
 
   checkInputValidation(userInput) {
-    if (userInput.length < 3) return;
-    else if (new Set(userInput).size !== 3) return;
-    else if (userInput.includes("0")) return;
+    if (userInput.length !== 3) throw "세자리 수를 입력해주세요.";
+    else if (new Set(userInput).size !== 3) throw "중복이 있습니다.";
+    else if (userInput.includes("0")) throw "0을 포함합니다.";
     return true;
   }
 
