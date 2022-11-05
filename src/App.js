@@ -14,9 +14,7 @@ class App {
   setInput(input) {
     input = Array.from(input.split(''), (num) => parseInt(num));
 
-    if (App.isValidInput(input)) {
-      this.input = input;
-    }
+    if (App.isValidInput(input)) this.input = input;
 
     this.setHint();
   }
@@ -40,8 +38,9 @@ class App {
       if (
         this.answer.includes(digitNumber) &&
         this.answer[index] !== digitNumber
-      )
+      ) {
         this.hint.ball += 1;
+      }
       if (!this.answer.includes(digitNumber)) this.hint.nothing += 1;
     });
 
@@ -116,8 +115,9 @@ class App {
     if (input.includes(NaN)) throw '문자를 제외한 숫자만 입력하세요.';
     if (input.includes(0)) throw '1~9 사이의 숫자만 입력하세요.';
     if (input.length !== 3) throw '3개의 숫자만 입력하세요.';
-    if (input.length !== new Set(input).size)
+    if (input.length !== new Set(input).size) {
       throw '서로 다른 숫자를 입력하세요.';
+    }
 
     return true;
   }
