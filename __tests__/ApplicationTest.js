@@ -59,4 +59,44 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("3개의 수 입력값이 유효한 경우 true를 반환한다.", () => {
+    const answers = "123";
+    const app = new App();
+    const testResult = app.isValid(answers);
+
+    expect(testResult).toEqual(true);
+  });
+
+  test("3개의 수 입력값 중 중복 숫자가 있는 경우 false를 반환한다.", () => {
+    const answers = "112";
+    const app = new App();
+    const testResult = app.isValid(answers);
+
+    expect(testResult).toEqual(false);
+  });
+
+  test("3개의 수 입력값이 숫자가 아닌 경우 false를 반환한다.", () => {
+    const answers = "ab3";
+    const app = new App();
+    const testResult = app.isValid(answers);
+
+    expect(testResult).toEqual(false);
+  });
+
+  test("3개의 수 입력값이 3자리 초과인 경우 false를 반환한다.", () => {
+    const answers = "1234";
+    const app = new App();
+    const testResult = app.isValid(answers);
+
+    expect(testResult).toEqual(false);
+  });
+
+  test("3개의 수 입력값이 3자리 미만인 경우 false를 반환한다.", () => {
+    const answers = "56";
+    const app = new App();
+    const testResult = app.isValid(answers);
+
+    expect(testResult).toEqual(false);
+  });
 });
