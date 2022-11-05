@@ -35,6 +35,10 @@ class App {
     return true;
   }
 
+  isSameTwoNumber(randomNum, inputNum){
+    if(randomNum === inputNum){return false;}
+    return true;
+  }
 
   getStrikeCount(randomNum, inputNum) {
     const randomNumList = randomNum.toString().split("");
