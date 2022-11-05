@@ -36,8 +36,14 @@ class App {
     return this.endOrRetry();
   }
 
-  // TODO: 종료했을 때 사용자에게 입력을 받아 종료할지 재시도할지 하는 메소드 구현
   endOrRetry() {}
+
+  isValidEndOrRetryInput(answer) {
+    if (answer === '1' || answer === '2') {
+      return Number(answer);
+    }
+    throw new Error('1또는 2를 입력해주세요.');
+  }
 
   wrongInput(err) {
     MissionUtils.Console.print(err);
