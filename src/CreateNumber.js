@@ -9,7 +9,7 @@ class CreateNumber {
         pickNumber.push(computerNumber);
     }
   }
-  return pickNumber.join("");
+  return pickNumber;
   }
 }
 
