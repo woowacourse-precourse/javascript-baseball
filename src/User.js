@@ -11,7 +11,7 @@ class User {
   numbersValidation(numbers) {
     if (numbers.length <= 3) this.rangeErrorValidation(numbers);
     else {
-      throw "올바르지 못한 숫자 입력입니다1.";
+      throw "올바르지 못한 숫자 입력입니다.";
     }
   }
 
@@ -21,7 +21,7 @@ class User {
         acc.push(cur);
         return acc;
       }
-      throw "올바르지 못한 숫자 입력입니다2.";
+      throw "올바르지 못한 숫자 입력입니다.";
     }, []);
   }
 }
