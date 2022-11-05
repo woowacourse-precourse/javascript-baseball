@@ -21,7 +21,7 @@ class App {
     this.randomNumber = computer;
   } 
   
-  filterInput(number) {
+  stringToArray(number) {
     return String(number).split('').map((str) => Number(str));
   }
 
@@ -98,7 +98,7 @@ class App {
     Console.readLine(questionText, (input) => {
       this.isValidateInputNumber(input);
 
-      input = this.filterInput(input);
+      input = this.stringToArray(input);
       let result = this.duplicateNumber(input, this.randomNumber);
       let now = this.calcResult(result);
 
