@@ -8,55 +8,49 @@ class GameDataUI {
     this.#action = {};
   }
 
+  #inputError() {
+    Console.close();
+    throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
+  }
+
   injection(newAction) {
     this.#action = newAction;
   }
 
   newGuess() {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      try {
-        if (input.length !== 3) {
-          throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
-        }
-
-        if (utils.getUniqueNumberCount(input) !== 3) {
-          throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
-        }
-
-        this.#action.sendToDispatcher({
-          type: 'new-guess',
-          input,
-        });
-      } catch (error) {
-        Console.print(error);
-        Console.close();
+      if (input.length !== 3) {
+        this.#inputError();
       }
+
+      if (utils.getUniqueNumberCount(input) !== 3) {
+        this.#inputError();
+      }
+
+      this.#action.sendToDispatcher({
+        type: 'new-guess',
+        input,
+      });
     });
   }
 
   gameOver() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine(
-      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n'
-      + '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        try {
-          if (answer === '1') {
-            this.#action.sendToDispatcher({
-              type: 'game-restart',
-            });
-            return;
-          }
-
-          if (answer === '2') {
-            Console.close();
-            return;
-          }
-
-          throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
-        } catch (error) {
-          Console.print(error);
-          Console.close();
+        if (answer === '1') {
+          this.#action.sendToDispatcher({
+            type: 'game-restart',
+          });
+          return;
         }
+
+        if (answer === '2') {
+          Console.close();
+          return;
+        }
+        this.#inputError();
       },
     );
   }

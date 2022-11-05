@@ -1,7 +1,14 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 function makeTarget() {
-  return Random.pickUniqueNumbersInRange(1, 9, 3).map(String);
+  const targat = [];
+  while (targat.length < 3) {
+    const number = Random.pickNumberInRange(1, 9);
+    if (!targat.includes(number)) {
+      targat.push(number);
+    }
+  }
+  return targat.map(String);
 }
 
 function getBallString(ball) {
