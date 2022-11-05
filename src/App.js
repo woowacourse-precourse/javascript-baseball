@@ -16,7 +16,6 @@ class App {
         this.threeDigitsAnswer.push(randomNumber);
       }
     }
-    console.log(this.threeDigitsAnswer);
   }
 
   init() {
