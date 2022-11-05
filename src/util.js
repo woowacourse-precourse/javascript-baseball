@@ -1,6 +1,12 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
-const makeAnswer = () => Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+const makeAnswer = () => {
+  const set = new Set();
+  while (set.size !== 3) {
+    set.add(Random.pickNumberInRange(1, 9));
+  }
+  return Array.from(set).join("");
+};
 
 const replyValidation = (input) => {
   const values = input.split("");
