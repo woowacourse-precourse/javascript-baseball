@@ -1,5 +1,6 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 const { message, rule } = require('./constants');
+const isValidUserNumbers = require('./utils/validate');
 
 class App {
   constructor() {
@@ -32,6 +33,10 @@ class App {
   readUserInput() {
     Console.readLine(message.INPUT, (number) => {
       this.userNumbers = [...number];
+
+      if (!isValidUserNumbers(this.userNumbers)) {
+        throw new Error('유효하지 않은 값을 입력했습니다.');
+      }
 
       this.setBallStrikeCount();
       this.setResult();
