@@ -8,7 +8,7 @@ class App {
 
   startGame() {
     const START = "숫자 야구 게임을 시작합니다.";
-    console.log(START);
+    MissionUtils.Console.print(START);
   }
 
   playGame() {
@@ -40,7 +40,6 @@ class App {
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
       user = num;
-      console.log(`숫자를 입력해주세요 : ${user}`);
     });
 
     return user;
@@ -104,7 +103,7 @@ class App {
 
   isAnswer(answer, computer) {
     if (answer.includes("3스트라이크")) {
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return this.selectOption();
     }
 
@@ -115,11 +114,10 @@ class App {
     let option;
 
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (num) => {
-        console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         option = num;
-        console.log(option);
+        MissionUtils.Console.print(option);
       }
     );
 
