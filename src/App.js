@@ -1,5 +1,11 @@
+const giveHint = require("./components/giveHint");
+const checkRandomNum = require("./components/firstAnnouncement");
+
 class App {
-  play() {}
+  play() {
+    checkRandomNum();
+    giveHint();
+  }
 }
 
 module.exports = App;
