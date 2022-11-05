@@ -68,7 +68,29 @@ class App {
         this.result.ball += 1;
       }
     }
-    console.log(this.result);
+    this.checkResult();
+  }
+  //결과 출력 함수
+  checkResult() {
+    let result = '';
+    if (this.result.ball) {
+      result += this.result.ball + '볼 ';
+    }
+    if (this.result.strike) {
+      result += this.result.strike + '스트라이크 ';
+    }
+    if (result) {
+      MissionUtils.Console.print(result);
+    } else {
+      MissionUtils.Console.print('낫싱');
+    }
+    if (this.result.strike !== 3) {
+      this.result.strike = 0;
+      this.result.ball = 0;
+      this.getInputNumber();
+    } else {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
   }
 }
 
