@@ -14,6 +14,11 @@ class App {
     MissionUtils.Console.print(outputMessageList.join(' '));
   }
 
+  throwExceptionMessage(message){
+    throw message
+  }
+
+
   getRandomThreeDigitsNumber() {
     const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     return Number(number.join(""));
