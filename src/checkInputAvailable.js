@@ -15,7 +15,7 @@ function checkInputAvailable(input) {
     checkedLetter.push(letter);
   });
 
-  return isAvailable;
+  return Boolean(input.length) && isAvailable;
 }
 
 module.exports = checkInputAvailable;
