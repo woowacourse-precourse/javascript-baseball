@@ -1,5 +1,3 @@
-//indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용
-
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
@@ -65,7 +63,7 @@ function to_array(user_array){
 }
 
 function ball_and_strike(computer, to_array){
-  let ball_strike_count = [];
+  let ball_strike_count = [0, 0];
 
   for(let i of to_array) {
     if(computer[0] == to_array[i]){
@@ -90,7 +88,10 @@ function ball_strike_check(i){
 function notthing(ball_strike_result){
   if(ball_strike_result[0] == 0 && ball_strike_result[1] == 0) {
     MissionUtils.Console.print("낫싱");
+    return;
   }
+  MissionUtils.Console.print(`${ball_strike_result[0]}볼 ${ball_strike_result[1]}스트라이크`);
+  return;
 }
 
 module.exports = App;
