@@ -5,7 +5,15 @@ class App {
     PrintGameStartPhrase();
 
     const computerNumber = makeComputerNumber();
-    const userNumber = await getUserNumber();
+    console.log(computerNumber);
+
+    let isGameEnd = false;
+    while (isGameEnd === false) {
+      const userNumber = await getUserNumber();
+      checkValidityUserNumber(userNumber);
+
+
+    }
     
   }
 }
@@ -43,6 +51,33 @@ function getUserNumber() {
   userNumber = promise;
 
   return userNumber;
+}
+
+// 기능 4
+function checkValidityUserNumber(userNumber) {
+
+  const userNumberList = Array.from(userNumber);
+  const firstNumber = Number(userNumberList[0]);
+  const secondNumber = Number(userNumberList[1]);
+  const thirdNumber = Number(userNumberList[2]);
+
+  console.log(firstNumber, secondNumber, thirdNumber);
+
+  if (!(userNumberList.length === 3)) {
+    throw Error ("3자리의 숫자를 입력하지 않아 에러가 발생하였습니다.");
+  }
+
+  if ((isNaN(firstNumber) == true) || (isNaN(secondNumber) == true) || (isNaN(thirdNumber) == true)) {
+    throw Error ("숫자를 입력하지 않아 에러가 발생하였습니다.");
+  }
+
+  if (!((firstNumber !== secondNumber) && (secondNumber !== thirdNumber) && (thirdNumber !== firstNumber))) {
+    throw Error ("중복되는 숫자가 있어 에러가 발생하였습니다.");
+  }
+
+  if (firstNumber === 0 || secondNumber === 0 || thirdNumber === 0) {
+    throw Error ("1부터 9사이의 숫자가 아닌 0이 포함되어 있어 에러가 발생하였습니다.");
+  }
 }
 
 
