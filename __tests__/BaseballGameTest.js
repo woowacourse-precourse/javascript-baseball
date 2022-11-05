@@ -11,6 +11,21 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toHaveBeenCalledWith(message);
   });
 
+  test("질문 출력, 입력값 받기", () => {
+    const message = "input number: ";
+    const answers = ["246", "135"];
+    const logSpy = jest.spyOn(console, "log");
+
+    const app = new App();
+    app.readLine = jest.fn();
+
+    answers.forEach(async (answer) => {
+      const input = await app.readLine.mockImplementationOnce(message);
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+      expect(input).toBe(answer);
+    });
+  });
+
   test("서로 다른 세 자리 수를 랜덤으로 생성", () => {
     const DIGITS = 3;
     const set = new Set();
