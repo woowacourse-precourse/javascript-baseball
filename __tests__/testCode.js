@@ -88,4 +88,30 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
   });
+
+  test("숫자 이외 입력 예외처리 테스트", () => {
+    const randoms = [3, 6, 8];
+    const answers = ["a12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+  });
+
+  test("0 입력 예외처리 테스트", () => {
+    const randoms = [3, 6, 8];
+    const answers = ["045"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+  });
 });
