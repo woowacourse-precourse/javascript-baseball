@@ -3,11 +3,14 @@ const App = require('../src/App');
 describe('함수 테스트', () => {
   const app = new App();
 
-  test('난수 생성 중복 체크', () => {
+  test('난수 테스트', () => {
     const randomList = app.createRandomList();
     const set = new Set(randomList);
 
     expect(set.size).toEqual(3);
+    set.forEach((number) => {
+      expect(number).not.toEqual(0);
+    });
   });
 
   test('볼 스트라이크 계산', () => {
