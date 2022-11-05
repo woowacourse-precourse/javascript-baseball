@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const App = require("../src/App");
 
 class ReStart {
   getRestartInput() {
@@ -7,7 +8,7 @@ class ReStart {
       (userInput) => {
         this.checkReStartInput(userInput);
 
-        this.deciedReStart(userInput);
+        this.decideReStart(userInput);
       }
     );
   }
@@ -20,9 +21,11 @@ class ReStart {
     throw new Error("잘못된 입력입니다. 게임을 종료합니다.");
   }
 
-  deciedReStart(userInput) {
+  // 오타 수정
+  decideReStart(userInput) {
     if (userInput === "1") {
-      this.play();
+      const app = new App();
+      app.play();
     }
 
     if (userInput === "2") {
