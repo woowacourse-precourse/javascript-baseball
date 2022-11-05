@@ -21,6 +21,19 @@ class App {
     };
   }
 
+  choiceNumber () {
+    const answer = [];
+    const minNumber = this.gameSet.NUM_MIN;
+    const maxNumber = this.gameSet.NUM_MAX;
+    
+    this.answer = answer;
+
+    while(answer.length < 3){
+      const randomNumber = Random.pickNumberInRange(minNumber, maxNumber);
+      answer.includes(randomNumber) ? answer : answer.push(randomNumber);
+    }
+  }
+
   printMsg(msg) {
     Console.print(msg);
     Console.close();
