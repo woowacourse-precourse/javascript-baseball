@@ -17,6 +17,9 @@ class App {
     };
 
     make_Random();
+
+    // 게임을 시작하는 기능
+    Console.print("숫자 야구 게임을 시작합니다.");
   }
 }
 
