@@ -7,6 +7,13 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
+  printBallAndStrikeCount(ballCount,strikeCount){
+    const outputMessageList = [];
+    if(ballCount > 0){outputMessageList.push(`${ballCount}볼`);}
+    if(strikeCount > 0){outputMessageList.push(`${strikeCount}스트라이크`);}
+    MissionUtils.Console.print(outputMessageList.join(' '));
+  }
+
   getRandomThreeDigitsNumber() {
     const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     return Number(number.join(""));
