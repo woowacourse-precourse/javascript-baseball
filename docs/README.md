@@ -17,3 +17,28 @@
 2. 3.4.1번의 1,2가 아닌 수를 입력한 경우
 
 예외사항에 해당할 시 프로그램 종료
+
+1. class App
+⇒ 게임을 시작하고 플레이
+    1.1 constructor(ball,strike)
+        ball,strike 멤버 변수 선언
+    1.2 play()
+        게임의 시작을 알리는 프린트를 출력
+    1.3 compare(player_number,comp_number)⇒ ball과 strike의 갯수 리턴
+        play_number와 comp_number를 비교
+
+2. class player
+⇒ 플레이어의 숫자를 입력 받고 검사
+    2.1 constructor(player_number)
+        player_number를 멤버 변수로 선언
+    2.2 getplayer_number() ⇒ player_number를 리턴
+        console.readline으로  player_number를 입력
+    2.3 player_numbercheck(player_number)// 예외 처리
+        입력 받은 player_number가 정확한 정보인지 검사
+
+3. class computer
+⇒컴퓨터의 숫자를 입력받음
+    3,1 constructor(computer_number)
+        computer_number를 멤버 변수로 선언
+    3.1 getcomputer_number() ⇒computer_number를 리턴
+        랜덤으로 서로 다른 숫자 3개를 입력
