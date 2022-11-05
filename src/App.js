@@ -4,7 +4,7 @@ function printMsg(message) {
   MissionUtils.Console.print(message);
 }
 
-function setAnswerNum() {
+function setAnswer() {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
 }
 
@@ -34,16 +34,16 @@ function isVaildLength(input) {
 }
 
 function isAllDiffNum(input) {
-  const setNum = new Set(input.split(""));
-  if (setNum.size !== 3) return false;
+  const setInput = new Set(input.split(""));
+  if (setInput.size !== 3) return false;
   return true;
 }
 
 class App {
   play() {
     printMsg("숫자 야구 게임을 시작합니다.");
+    const ANSWER = setAnswer();
     try {
-      var answerNum = setAnswerNum();
       askNumInput();
     } catch (e) {
       printMsg(e);
