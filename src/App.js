@@ -24,6 +24,8 @@ class App {
 
     let ball_strike_result = [];
     ball_strike_result = ball_and_strike(computer, to_array(user));
+
+    notthing(ball_strike_result);
   }
 }
 
@@ -83,6 +85,12 @@ function ball_strike_check(i){
     ball++;
   }
   return [ball, strike];
+}
+
+function notthing(ball_strike_result){
+  if(ball_strike_result[0] == 0 && ball_strike_result[1] == 0) {
+    MissionUtils.Console.print("낫싱");
+  }
 }
 
 module.exports = App;
