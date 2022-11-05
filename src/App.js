@@ -1,10 +1,13 @@
-const { Random, Console } = require('@woowacourse/mission-utils');
-const { message, rule } = require('./constants');
+const { Console } = require('@woowacourse/mission-utils');
+const { message } = require('./constants');
+
+const BaseballComputer = require('./models/BaseballComputer');
 const isValidUserNumbers = require('./utils/validate');
 
 class App {
+  #computer;
+
   constructor() {
-    this.computerNumbers = [];
     this.userNumbers = [];
     this.ballStrikeCount = {
       ball: 0,
@@ -14,20 +17,9 @@ class App {
   }
 
   play() {
-    this.setComputerNumbers();
+    this.#computer = new BaseballComputer();
     Console.print(message.START);
     this.readUserInput();
-  }
-
-  setComputerNumbers() {
-    const computerNumbers = new Set();
-
-    while (computerNumbers.size < rule.LENGTH) {
-      const number = Random.pickNumberInRange(rule.RANGE_START, rule.RANGE_END);
-      computerNumbers.add(String(number));
-    }
-
-    this.computerNumbers = [...computerNumbers];
   }
 
   readUserInput() {
@@ -40,7 +32,7 @@ class App {
 
       this.setBallStrikeCount();
       this.setResult();
-      Console.print(this.computerNumbers);
+      Console.print(this.#computer.numbers);
       Console.print(this.result);
 
       if (this.ballStrikeCount.strike === 3) {
@@ -59,12 +51,12 @@ class App {
     };
 
     this.userNumbers.forEach((number, i) => {
-      if (number === this.computerNumbers[i]) {
+      if (number === this.#computer.numbers[i]) {
         ballStrikeCount.strike += 1;
         return;
       }
 
-      if (this.computerNumbers.includes(number)) {
+      if (this.#computer.numbers.includes(number)) {
         ballStrikeCount.ball += 1;
       }
     });
