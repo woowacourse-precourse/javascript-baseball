@@ -1,4 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
+const { handleUserInputException } = require('./exception');
 
 class App {
   constructor() {
@@ -22,59 +23,24 @@ class App {
     this.getThreeDigitsAnswer();
   }
 
-  handleUserInputException(userInput, inputType) {
-    if (inputType === 'getExpectedAnswer') {
-      const removeNaN = userInput.replace(/[^0-9]/g, '');
-      const removeDuplicates = [...new Set(removeNaN.split(''))];
-
-      if (removeNaN.length !== 3) {
-        throw new Error('3자리 숫자를 입력해주세요');
-      }
-
-      for (const num of removeNaN) {
-        if (Number(num) <= 0) {
-          throw new Error('1에서 9 사이의 숫자를 입력해주세요');
-        }
-      }
-
-      if (removeDuplicates.length !== 3) {
-        throw new Error('각 자리에 중복되지 않은 숫자를 입력해주세요');
-      }
-    }
-
-    if (inputType === 'getRestart') {
-      if (userInput !== '1' && userInput !== '2') {
-        throw new Error('1 또는 2 중에 선택해주세요');
-      }
-    }
-  }
-
   getExpectedAnswer() {
     Console.readLine('숫자를 입력해주세요 : ', (expectedAnswer) => {
-      try {
-        this.handleUserInputException(expectedAnswer, 'getExpectedAnswer');
-        const userInput = expectedAnswer.split('').map(Number);
-        this.checkAnswer(userInput);
-      } catch (e) {
-        throw e;
-      }
+      handleUserInputException(expectedAnswer, 'getExpectedAnswer');
+      const userInput = expectedAnswer.split('').map(Number);
+      this.checkAnswer(userInput);
     });
   }
 
   getRestart() {
     console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     Console.readLine('', (isRestart) => {
-      try {
-        this.handleUserInputException(isRestart, 'getRestart');
+      handleUserInputException(isRestart, 'getRestart');
 
-        if (isRestart === '1') {
-          this.play();
-        } else {
-          Console.print('게임 종료');
-          Console.close();
-        }
-      } catch (e) {
-        throw e;
+      if (isRestart === '1') {
+        this.play();
+      } else {
+        Console.print('게임 종료');
+        Console.close();
       }
     });
   }
@@ -117,6 +83,7 @@ class App {
   printHint(userInput) {
     const strike = this.getStrike(userInput);
     const ball = this.getBall(userInput);
+
     if (strike === 0 && ball === 0) {
       Console.print('낫싱');
     } else if (strike === 0 && ball > 0) {
@@ -151,7 +118,6 @@ class App {
     try {
       this.getUserInput('getExpectedAnswer');
     } catch (e) {
-      console.log(e);
       throw e;
     }
   }
