@@ -1,5 +1,5 @@
 const App = require("../src/App");
-const MakeRandomNumber = require("../src/MakeRandomNumber");
+const RandomNumber = require("../src/RandomNumber");
 const CheckConstraints = require("../src/CheckConstraints");
 const GetUserIput = require("../src/GetUserInput");
 const GameResult = require("../src/GameResult");
@@ -44,7 +44,7 @@ describe("숫자 야구 게임", () => {
       "checkConstraints"
     );
 
-    MakeRandomNumber.makeRandomNumber();
+    RandomNumber.makeRandomNumber();
 
     expect(randomSpy).toHaveBeenCalled();
     expect(randomSpy).toHaveBeenCalledWith(1, 9);
