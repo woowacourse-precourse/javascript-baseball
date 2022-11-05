@@ -31,7 +31,12 @@ class App {
     else return true;
   }
 
-  checkDuplicate(input) {}
+  checkDuplicate(input) {
+    for (let i = 0; i < input.length; i++) {
+      if (input.indexOf(input[i]) !== i) return false;
+    }
+    return true;
+  }
 
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
