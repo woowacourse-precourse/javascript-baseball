@@ -2,31 +2,45 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    const computerNumber = makeComputerNumber();
-    console.log("숫자 야구 게임을 시작합니다.");
-    const IS_PLAY_GAME = 1;
-    console.log("computer number : ", computerNumber);
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    while (IS_PLAY_GAME === 1) {
-      for (let playCount = 0; playCount < 3; playCount++) {
-        const userInput = getUserInput();
+    let playCount = 0;
+    let computerNumber = [];
 
-        const STRIKE_BALL_RECORD = calculateInputNumber(
-          computerNumber,
-          userInput
-        );
-
-        const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
-        if (IS_THREE_STRIKE) {
-          askEndGame();
-        }
+    for (playCount = 0; playCount < 3; playCount++) {
+      if (playCount === 0) {
+        computerNumber = makeComputerNumber();
       }
-      const IS_PLAY_GAME = askEndGame();
+
+      const userInput = getUserInput();
+
+      if (userInput.length === 0) {
+        playCount = 4;
+        break;
+      }
+
+      const STRIKE_BALL_RECORD = calculateInputNumber(
+        computerNumber,
+        userInput
+      );
+
+      const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
+
+      if (IS_THREE_STRIKE) {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        playCount = askEndGame();
+      } else if (playCount === 2) {
+        playCount = askEndGame();
+      }
+    }
+
+    MissionUtils.Console.close();
+    if (playCount === 4) {
+      throw "Input format is wrong.";
     }
   }
 }
 
-// Todo: Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
 const makeComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
@@ -46,20 +60,18 @@ const getUserInput = () => {
   let inputArray = [];
 
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
-    console.log(inputNumber);
     if (isNaN(inputNumber) || inputNumber.length !== 3) {
-      throw new Error(
-        "Input values should be given in three natural numbers under 10."
-      );
+      return [];
     }
 
     inputArray = inputNumber.split("");
     const set = new Set(inputArray);
 
     if (inputArray.length !== set.size) {
-      throw new Error("Duplication is not allowed.");
+      return [];
     }
   });
+
   return inputArray;
 };
 
@@ -76,36 +88,39 @@ const calculateInputNumber = (computerNumber, userNumber) => {
   return strikeBallRecord;
 };
 
+const askEndGame = () => {
+  let isQuit = -1;
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (isEnd) => {
+      if (isEnd === "2") {
+        MissionUtils.Console.print("게임 종료");
+        isQuit = 5;
+      }
+    }
+  );
+  return isQuit;
+};
+
 const printBallStrike = (strikeBallRecord) => {
   if (strikeBallRecord[0] === 3) {
-    console.log(`${strikeBallRecord[0]}스트라이크`);
+    MissionUtils.Console.print(`${strikeBallRecord[0]}스트라이크`);
     return true;
   }
 
   if (strikeBallRecord[0] + strikeBallRecord[1] === 0) {
-    console.log("낫싱");
+    MissionUtils.Console.print("낫싱");
   } else if (strikeBallRecord[0] > 0 && strikeBallRecord[0] > 0) {
-    console.log(`${strikeBallRecord[1]}볼 ${strikeBallRecord[0]}스트라이크`);
+    MissionUtils.Console.print(
+      `${strikeBallRecord[1]}볼 ${strikeBallRecord[0]}스트라이크`
+    );
   } else if (strikeBallRecord[0] > 0 && strikeBallRecord[0] === 0) {
-    console.log(`${strikeBallRecord[0]}스트라이크`);
+    MissionUtils.Console.print(`${strikeBallRecord[0]}스트라이크`);
   } else if (strikeBallRecord[0] === 0 && strikeBallRecord[1] > 0) {
-    console.log(`${strikeBallRecord[1]}볼`);
+    MissionUtils.Console.print(`${strikeBallRecord[1]}볼`);
   }
 
   return false;
-};
-
-const askEndGame = () => {
-  console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (isEnd) => {
-      if (isEnd === 2) {
-        exit();
-      }
-    }
-  );
 };
 
 module.exports = App;
