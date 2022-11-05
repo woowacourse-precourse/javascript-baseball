@@ -33,6 +33,15 @@ class App {
     return [strikeCount, ballCount];
   }
 
+  #tryToSolve() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      validateInput(userInput);
+      this.#userInput = [...userInput].map((input) => Number(input));
+      const [strikeCount, ballCount] = this.#calcScore();
+      this.#getResult(strikeCount, ballCount);
+    });
+  }
+
   #init() {
     this.#makeComputerAnswer();
   }
