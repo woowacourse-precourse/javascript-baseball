@@ -65,7 +65,10 @@ class App {
         }
       }
     }
+    this.compareResult(computerNum, strike, ball);
+  }
 
+  compareResult(computerNum, strike, ball) {
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
       return this.playGame(computerNum);
@@ -83,7 +86,6 @@ class App {
       return this.playGame(computerNum);
     }
   }
-
   //
 }
 
