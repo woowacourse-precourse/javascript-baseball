@@ -80,9 +80,9 @@ const calculateInputNumber = (computerNumber, userNumber) => {
 
   for (index = 0; index < 3; index++) {
     if (computerNumber[index] === userNumber[index]) {
-      strikeBallRecord[0]++;
+      strikeBallRecord[0] += 1;
     } else if (computerNumber.includes(userNumber[index])) {
-      strikeBallRecord[1]++;
+      strikeBallRecord[1] += 1;
     }
   }
   return strikeBallRecord;
