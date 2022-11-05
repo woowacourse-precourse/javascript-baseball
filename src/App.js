@@ -58,6 +58,9 @@ class App {
   isEqual(a, b) {
     return a === b;
   }
+  isCorrectAnswer(strikeCount, digits) {
+    return this.isEqual(strikeCount, digits);
+  }
   isValidNumber(num, digits) {
     if (isNaN(num)) return false;
 
