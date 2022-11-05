@@ -15,10 +15,12 @@ class User extends Mission {
       this.compareNumbers(userNumbers);
     });
   }
+
   makeNumberArray(answer) {
     const userNumbers = answer.split('').map((item) => Number(item));
     return userNumbers;
   }
+
   checkUserNumber(userArr) {
     if (userArr.length !== 3) {
       throw '입력할 수 있는 길이는 3입니다. 종료합니다.';
@@ -38,6 +40,7 @@ class User extends Mission {
       throw '중복되었습니다. 종료합니다.';
     }
   }
+
   compareNumbers(userNumbers) {
     const compare = new Compare(this.computerNumbers, userNumbers);
     if (compare.getResult() === true) {
@@ -46,6 +49,7 @@ class User extends Mission {
       this.userInputStart();
     }
   }
+
   selectStartOrExit() {
     this.mission.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
@@ -54,6 +58,7 @@ class User extends Mission {
       }
     );
   }
+
   checkAnswer(answer) {
     if (answer === '1') {
       const computer = new Computer();

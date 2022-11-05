@@ -4,9 +4,11 @@ class Computer extends Mission {
   constructor() {
     super();
   }
+
   getRandomNumber() {
     return this.mission.Random.pickNumberInRange(1, 9);
   }
+
   getComputerNumbers() {
     const computerNumbers = new Set();
     while (computerNumbers.size < 3) {
