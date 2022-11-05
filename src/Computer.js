@@ -12,6 +12,7 @@ class Computer extends Mission {
     while (computerNumbers.size < 3) {
       computerNumbers.add(this.getRandomNumber());
     }
+
     return Array.from(computerNumbers);
   }
 }

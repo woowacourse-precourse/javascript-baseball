@@ -12,6 +12,7 @@ class Compare extends Mission {
       if (value === this.userNumbers[index]) {
         return acc + 1;
       }
+
       return acc;
     }, 0);
   }
@@ -24,6 +25,7 @@ class Compare extends Mission {
       ) {
         return acc + 1;
       }
+
       return acc;
     }, 0);
   }
@@ -38,12 +40,15 @@ class Compare extends Mission {
     if (!strike && !ball) {
       this.mission.Console.print('낫싱');
     }
+
     if (strike && !ball) {
       this.mission.Console.print(`${strike}스트라이크`);
     }
+
     if (!strike && ball) {
       this.mission.Console.print(`${ball}볼`);
     }
+
     if (strike && ball) {
       this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
@@ -53,6 +58,7 @@ class Compare extends Mission {
     if (strike === 3) {
       return true;
     }
+
     return false;
   }
 

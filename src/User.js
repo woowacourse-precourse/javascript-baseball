@@ -28,6 +28,7 @@ class User extends Mission {
       if (isNaN(item)) {
         throw '숫자만 입력 가능합니다. 종료합니다.';
       }
+
       if (item < 1 || item > 9) {
         throw '1-9 범위만 입력 가능합니다. 종료합니다.';
       }
