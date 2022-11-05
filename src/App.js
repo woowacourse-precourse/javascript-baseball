@@ -5,8 +5,7 @@ class App {
         this.computerNumberArray = [];
     }
     play() {
-        this.pickRandomThreeNumbers();
-        this.pickRandomNumberUser();
+        this.compareUserAndComputer();
     }
 
     // 랜덤한 3개의 숫자를 뽑는 함수
@@ -54,6 +53,37 @@ class App {
             !this.validateNumberArray(userNumberArray)
         ) {
             console.log('잘못되었습니다.');
+        }
+    }
+    // 같은 자리에 있는지 포함하고 있는지 알려주는 함수
+    checkSameOrInclude(array1, array2) {
+        let same = 0;
+        let include = 0;
+        for (let i = 0; i < 3; i++) {
+            if (array1[i] === array2[i]) same += 1;
+            else if (array1[1].include(array2[i])) include += 1;
+        }
+        console.log(same, include);
+        return same, include;
+    }
+    // 컴퓨터 값과 유저 값 비교 함수
+    compareUserAndComputer() {
+        this.pickRandomThreeNumbers();
+        this.pickRandomNumberUser();
+    }
+    // 게임 시작 함수
+    start(computerNumberArray, userNumberArray) {
+        let strike = 0,
+            ball = 0;
+        for (let i = 0; i < 3; i++) {
+            if (userNumberArray[i] === computerNumberArray[i]) {
+                strike += 1;
+            } else if (computerNumberArray.include(userNumberArray[i])) {
+                ball += 1;
+            }
+            const resultStrike = strike ? `${strike}스트라이크` : '';
+            const resultBall = ball ? `${ball}볼` : '';
+            return !ball && !strike ? '낫싱' : `${resultBall} ${resultStrike}`;
         }
     }
 }
