@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const print = MissionUtils.Console.print;
 
 class GameUtils {
   constructor() {}
@@ -7,7 +6,7 @@ class GameUtils {
   static userInputToNumberArr(text) {
     const splitString = text.split("");
     let userInputArr = [];
-    splitString.forEach((char, index) => (userInputArr[index] = Number(char)));
+    splitString.forEach((char) => userInputArr.push(Number(char)));
 
     return userInputArr;
   }
@@ -29,16 +28,23 @@ class GameUtils {
 
   static printFormat(score) {
     let text = "";
-    if (score.ball > 0) text = `${score.ball}볼`;
-    if (score.ball && score.strike) text += ` ${score.strike}스트라이크`;
-    if (!score.ball && score.strike) text = `${score.strike}스트라이크`;
-    if (score.ball === 0 && score.strike === 0) text = "낫싱";
-
+    if (score.ball > 0) {
+      text = `${score.ball}볼`;
+    }
+    if (score.ball && score.strike) {
+      text += ` ${score.strike}스트라이크`;
+    }
+    if (!score.ball && score.strike) {
+      text = `${score.strike}스트라이크`;
+    }
+    if (score.ball === 0 && score.strike === 0) {
+      text = "낫싱";
+    }
     return text;
   }
 
   static printLine(result) {
-    print(result);
+    MissionUtils.Console.print(result);
   }
 }
 
@@ -49,7 +55,9 @@ const isAllStrike = (user, computer) => {
 const countingStrike = (user, computer) => {
   let strike = 0;
   user.forEach((number, idx) => {
-    if (computer[idx] === number) strike += 1;
+    if (computer[idx] === number) {
+      strike += 1;
+    }
   });
   return strike;
 };
@@ -57,7 +65,9 @@ const countingStrike = (user, computer) => {
 const countingBall = (user, computer) => {
   let ball = 0;
   user.forEach((number, idx) => {
-    if (computer.includes(number) && computer[idx] !== number) ball += 1;
+    if (computer[idx] !== number && computer.includes(number)) {
+      ball += 1;
+    }
   });
   return ball;
 };

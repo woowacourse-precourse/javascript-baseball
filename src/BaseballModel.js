@@ -4,6 +4,7 @@ class BaseballModel {
   }
 
   getRandom() {
+    console.log("모델넘버 :", this.randomNumber);
     return this.randomNumber;
   }
 }
