@@ -12,39 +12,36 @@ function makeRandomNumber() {
 }
 
 function userInputNumberException(inputArray) {
-  let checkCondition = 0;
-  if (inputArray.length === 3) {
-    checkCondition += 1;
+  if (inputArray.length !== 3) {
+    throw new Error("세자리 숫자가 아닙니다!");
   }
   // 배열 안에 수들이 모두 숫자인지.
-  if (!inputArray.includes(NaN)) {
-    checkCondition += 1;
+  if (inputArray.includes(NaN)) {
+    throw new Error("숫자가 아닌 입력입니다.");
   }
   //1 ~ 9의 범위인지
-  if (!inputArray.includes(0)) {
-    checkCondition += 1;
+  if (inputArray.includes(0)) {
+    throw new Error("1 ~ 9 범위내어야 합니다");
   }
   //다 다른 수인가. set 사용
-  if (new Set(inputArray).size === 3) {
-    checkCondition += 1;
+  if (new Set(inputArray).size !== 3) {
+    throw new Error("같은 수가 중복입니다");
   }
-  if (checkCondition === 4) {
-    return true;
-  }
-  return false;
+
+  return true;
 }
 
 function makeUserInputNumber() {
   let userInputNumbers;
-  let exceptionSign;
   readLine("숫자를 입력해주세요 : ", (inputNumber) => {
     userInputNumbers = [...inputNumber].map(Number);
-    exceptionSign = userInputNumberException(userInputNumbers);
 
-    if (exceptionSign) {
+    try {
+      userInputNumberException(userInputNumbers);
+      print(userInputNumbers);
       return userInputNumbers;
-    } else {
-      print("게임 종료");
+    } catch (e) {
+      print("사용자 입력 예외 발생 게임 종료");
       closeConsole();
     }
   });
