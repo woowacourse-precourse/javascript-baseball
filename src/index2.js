@@ -32,5 +32,16 @@ export default class BaseballGame {
         }
     };
 
+    // 3. 입력된 숫자가 모두 1 ~ 9 사이인지 확인
+    checkUserInputNumberRange(input) {
+        for (let i = 0; i < 3; i++) {
+            if (Number[input[i]] > 1 || Number[input[i]] < 9) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
 }
 new BaseballGame();
