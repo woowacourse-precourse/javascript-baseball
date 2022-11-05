@@ -1,6 +1,7 @@
 const Computer = require('./Computer');
 const Console = require('./Console');
 const Player = require('./Player');
+const { getBallAndStrikeMessage, countBallAndStrike } = require('./utils/baseball');
 const {
   QUESTION, MESSAGE, NUMBERS_RULES, START_RULES,
 } = require('./static/constants');
@@ -13,7 +14,7 @@ class BaseballGame {
   }
 
   start(answer = START_RULES.start) {
-    if (BaseballGame.checkIsExit(answer)) {
+    if (BaseballGame.isExit(answer)) {
       this.exit();
       return;
     }
@@ -29,12 +30,12 @@ class BaseballGame {
     this.player.setNumbers(answer);
     const computerNumbers = this.computer.getNumbers();
     const playerNumbers = this.player.getNumbers();
-    const { ball, strike } = BaseballGame.countBallAndStrike({ computerNumbers, playerNumbers });
-    const message = BaseballGame.getBallAndStrikeMessage({ ball, strike });
+    const { ball, strike } = countBallAndStrike({ computerNumbers, playerNumbers });
+    const message = getBallAndStrikeMessage({ ball, strike });
 
     this.console.print(message);
 
-    if (BaseballGame.checkIsGameOver(strike)) {
+    if (BaseballGame.isGameOver(strike)) {
       this.gameOver();
       return;
     }
@@ -55,41 +56,12 @@ class BaseballGame {
     this.console.close();
   }
 
-  static checkIsExit(value) {
+  static isExit(value) {
     return value === START_RULES.exit;
   }
 
-  static checkIsGameOver(strike) {
+  static isGameOver(strike) {
     return strike === NUMBERS_RULES.digit;
-  }
-
-  static getBallAndStrikeMessage({ ball, strike }) {
-    if (ball > 0 && strike > 0) {
-      return `${ball}${MESSAGE.resultBall} ${strike}${MESSAGE.resultStrike}`;
-    }
-    if (ball > 0) {
-      return `${ball}${MESSAGE.resultBall}`;
-    }
-    if (strike > 0) {
-      return `${strike}${MESSAGE.resultStrike}`;
-    }
-    return MESSAGE.resultNoting;
-  }
-
-  static countBallAndStrike({ computerNumbers, playerNumbers }) {
-    const result = { ball: 0, strike: 0 };
-
-    playerNumbers.forEach((playerNumber, index) => {
-      if (playerNumber === computerNumbers[index]) {
-        result.strike += 1;
-        return;
-      }
-      if (computerNumbers.includes(playerNumber)) {
-        result.ball += 1;
-      }
-    });
-
-    return result;
   }
 }
 
