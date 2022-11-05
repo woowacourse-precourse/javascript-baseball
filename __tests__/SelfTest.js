@@ -95,4 +95,35 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
       expect(app.getResult(input, gameAnswer)).toEqual(outputs[ind]);
     });
   });
+
+  test('스트라이크 & 볼 & 낫싱 출력', () => {
+    const results = [
+      { strike: 0, ball: 0 },
+      { strike: 0, ball: 1 },
+      { strike: 0, ball: 2 },
+      { strike: 0, ball: 3 },
+      { strike: 1, ball: 0 },
+      { strike: 1, ball: 1 },
+      { strike: 1, ball: 2 },
+      { strike: 2, ball: 0 },
+      { strike: 3, ball: 0 }
+    ];
+    const printResults = [
+      '낫싱',
+      '1볼',
+      '2볼',
+      '3볼',
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '2볼 1스트라이크',
+      '2스트라이크',
+      '3스트라이크'
+    ];
+    const app = new App();
+    const logSpy = getLogSpy();
+    results.forEach((result, ind) => {
+      app.printResult(result);
+      expect(logSpy).toHaveBeenCalledWith(printResults[ind]);
+    });
+  });
 });
