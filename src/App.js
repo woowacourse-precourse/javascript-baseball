@@ -1,90 +1,68 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  async play() {
     // step1
     console.log('숫자 야구 게임을 시작합니다.');
-    
     let restart = true;
     while(restart){
-      restart = this.game() === 1 ? true : false;
+      
+      restart = await this.game() === 1 ? true : false;
     }
-    return 0;
   }
   
   async game() {
     // step2
     let computer = this.setComputerNum();
-    // MissionUtils.Console.print(computer);
-
+    // console.log(computer);
     
-    // while(retry) {
-      // const countResult = this.predict(computer);
-      
-
-      // step5
-      // MissionUtils.Console.print(this.result(countResult));
-    // }
-    return this.predict(computer)
-    // console.log('3개의 숫자를 모두 맞히셨습니다!');
-    // MissionUtils.Console.print('게임 종료');
-    // step6
-    // return await this.checkContinue();
-  }
-
-  predict(computer) { 
-    // step3
-    // const input = this.setUserNum();
-    // const inputArray = this.checkInputError(input);
-    // MissionUtils.Console.print(inputArray);
-
-    // step4
-    // const countResult = this.countStrikeAndBall(inputArray, computer);
-    // MissionUtils.Console.print(countResult);
-    // return this.setUserNum();
     let retry = true;
-    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
-      const inputArray = this.checkInputError(input);
-      const countResult = this.countStrikeAndBall(inputArray, computer);
+    while(retry) {
+      const countResult = await this.predict(computer);
+      // step5
+      // const response = await this.result(countResult);
+      // MissionUtils.Console.print(response);
       MissionUtils.Console.print(this.result(countResult));
-      retry = countResult.strike  === 3 ? false : true;
-      if (retry) {
-        this.predict(computer);
-      } else {
-        console.log('3개의 숫자를 모두 맞히셨습니다!');
-        MissionUtils.Console.print('게임 종료');
-        return this.checkContinue();
-      }
-    });
+      
+      retry = countResult.strike === 3 ? false : true;
+    }
+    console.log('3개의 숫자를 모두 맞히셨습니다!');
+    MissionUtils.Console.print('게임 종료');
+
+    // step6
+    return await this.checkContinue();
   }
 
-  setUserNum() {
+  async predict(computer) { 
+    // step3
+    const input = await this.setUserNum();
+    const inputArray = this.checkInputError(input);
+    // console.log(inputArray);
+    // step4
+    const countResult = this.countStrikeAndBall(inputArray, computer);
+    return countResult;
+  }
+
+  async setUserNum() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
-      const inputArray = this.checkInputError(input);
-      const countResult = this.countStrikeAndBall(inputArray, computer);
-      MissionUtils.Console.print(this.result(countResult));
+      return input;
     });
   }
 
   checkInputError(input) {
     const re = /^[1-9]{3}$/;
     const inputArray = input.split('').map(num => parseInt(num));
-    let result;
     let message;
     if (inputArray.length !== 3) {
-      result = false;
       message = input + 'input length error';
       throw new Error(message);
     } else if(inputArray.length !== new Set(input).size) {
-      result = false;
       message = 'input overlap error';
       throw new Error(message);
     } else if (!re.test(input)) {
-      result = false;
       message = 'input 1~9 range & isDigit error';
       throw new Error(message);
     } else {
-      result = true;
       message = 'none';
     }
     return inputArray;
@@ -127,14 +105,25 @@ class App {
   }
 
   result(countResult) {
-    if(countResult.strike === 0 && countResult.ball === 0){
-      return '낫싱';
-    } else {
-      let res = '';
-      res += countResult.ball>0 ? `${countResult.ball}볼`:'';
-      res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
+    // return new Promise(resolve => {
+    //   let res ='';
+    //   if(countResult.strike === 0 && countResult.ball === 0){
+    //     res = '낫싱';
+    //   } else {
+    //     res += countResult.ball>0 ? `${countResult.ball}볼`:'';
+    //     res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
+    //   }
+    //   resolve(res)
+    // });
+
+      let res ='';
+      if(countResult.strike === 0 && countResult.ball === 0){
+        res = '낫싱';
+      } else {
+        res += countResult.ball>0 ? `${countResult.ball}볼`:'';
+        res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
+      }
       return res;
-    }
   }
 
   checkContinue() {
