@@ -12,7 +12,6 @@ class PlayGame {
   }
 
   gameStart(computerInputNumbers) {
-    console.log(computerInputNumbers);
     this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
       if (new this.valid(userInputNumbers).checkValid()) {
         if (this.result(computerInputNumbers, userInputNumbers) !== "3스트라이크") {
