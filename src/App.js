@@ -5,13 +5,55 @@ class App {
     if (situation == "END")
       console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
     if (situation == "CORRECT")
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     if (situation == "GUIDE")
       console.log("숫자를 입력해주세요 : ");
   }
 
-  play() {
+  printStrikeResult(count) {
+    switch(count) {
+      case 1:
+        console.log(" 1스트라이크");
+        break;
+      case 2:
+        console.log(" 2스트라이크");
+        break;
+      case 3:
+        this.printMessage("CORRECT");
+        break;
+      default:
+        console.log("\n");
+        break;
+    }
+  }
 
+  printBallResult(count) {
+    switch(count) {
+      case 1:
+        console.log("1볼");
+        break;
+      case 2:
+        console.log("2볼");
+        break;
+      case 3:
+        console.log("3볼");
+        break;
+      default:
+        break;
+    }
+  }
+
+  printCountResult(strike, ball) {
+    if (strike == 0 && ball == 0) {
+      console.log("낫싱\n");
+      return;
+    }
+    this.printBallResult(ball);
+    this.printStrikeResult(strike);
+  }
+
+  play() {
+    this.printMessage("START");
   }
 }
 
