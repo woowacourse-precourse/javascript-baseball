@@ -8,12 +8,18 @@ function startGame(){
 function makeProblem(NUMBER_LENGTH){
   // 2. 문제 생성
   const problemNumberList = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, NUMBER_LENGTH);
-  let problem = 0;
-  problemNumberList.forEach((problemNumber, index)=>{
-    problem += 10**index*problemNumber;
-  })
-  return problem;
+  return problemNumberList;
 }
+
+function checkIsStrike(problem){
+  // 3. 숫자 입력 받기
+  MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
+    const answer = input;
+    // 4. 스트라이크 검사하기
+    console.log(answer);
+  })
+}
+
 
 class App {
   play() {
@@ -24,6 +30,7 @@ class App {
     const NUMBER_LENGTH = 3;
     const problem = makeProblem(NUMBER_LENGTH);
     
+    checkIsStrike([1,2,3]);
   }
 }
 
