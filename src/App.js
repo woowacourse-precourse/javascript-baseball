@@ -38,6 +38,7 @@ class App {
       case 'EXIT':
         this.exit = true;
         this.print('게임 종료');
+        MissionUtils.Console.close();
         break;
       default:
         break;
