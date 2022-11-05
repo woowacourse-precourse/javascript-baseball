@@ -10,6 +10,16 @@ class App {
         );
     };
 
+    checkInputIsValid = (string) => {
+        if (
+            string.length !== 3 ||
+            !Number.isInteger(Number(string)) ||
+            this.isDuplicate(string)
+        ) {
+            throw new Error("invalid Input");
+        }
+    };
+
     makeAnswer = () => {
         let answer;
 
@@ -53,12 +63,14 @@ class App {
             (input) => {
                 if (input === "1") this.play();
                 else if (input === "2") MissionUtils.Console.close();
+                else throw new Error("invalid input");
             }
         );
     };
 
     getUserInputAndCompare = (ANSWER) => {
         MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (input) => {
+            this.checkInputIsValid(input);
             this.printResult(input, ANSWER);
             this.getUserInputAndCompare(ANSWER);
         });
