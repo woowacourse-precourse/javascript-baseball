@@ -12,10 +12,14 @@ module.exports = RandomSelectNumbersByComputer;
 
 class ValidateUserInput {
   inputNumbers() {
-    Console.readLine("숫자를 입력해주세요 : ", this.validateUserInput);
+    Console.readLine("숫자를 입력해주세요 : ", (numbers) => {
+      this.validateUserInput(numbers);
+    });
   }
 
   validateUserInput(userInput) {
+    if (typeof userInput !== 'string') throw Error("Error");
+
     Console.print(userInput);
   }
 }
@@ -31,7 +35,8 @@ class BaseballGame {
     Console.print('숫자 야구 게임을 시작합니다.');
     Console.print(this.computerNumbers);
     this.validateUserInput.inputNumbers();
-    Console.close();
+    // Console.print(this.computerNumbers);
+    // Console.close();
   }
 
 }
