@@ -16,6 +16,31 @@ class App {
     return Numbers;
   }
 
+  guessAnswer() {
+    MissionUtils.Console.readLine('숫자를 입력하세요 : ', answer => {
+      this.guessAnswerValidate(answer);
+      if (this.outputResult(answer) == '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
+        MissionUtils.Console.print(this.outputResult(answer));
+        return;
+      }
+      MissionUtils.Console.print(this.outputResult(answer));
+      return this.guessAnswer();
+    });
+  }
+
+  guessAnswerValidate(answer) {
+    const duplicate = new Set(answer);
+    if (answer.length !== 3) {
+      throw '서로다른 3자리 숫자를 입력해주세요';
+    }
+    if (answer.length !== duplicate.size) {
+      throw '서로다른 3자리 숫자를 입력해주세요';
+    }
+    if (!answer.split('').every(number => number.charCodeAt() >= 49 && number.charCodeAt() <= 57)) {
+      throw '범위에 벗어난 숫자입니다';
+    }
+  }
+
   outputResult(answer) {
     let strike = 0;
     let ball = 0;
