@@ -59,12 +59,13 @@ class App {
   compare_and_count_strike_ball(input, answer) {
     let strike = 0;
     let ball = 0;
-    for (let i = 0; i < 3; i++) {
-      if (input[i] === answer[i]) strike += 1;
-      else if (answer.indexOf(input[i]) > -1 && answer.indexOf(input[i]) < 3) {
+    const input_num = [...input];
+    input_num.map((input, i) => {
+      if (input === answer[i]) strike += 1;
+      else if (answer.indexOf(input) > -1 && answer.indexOf(input) < 3) {
         ball += 1;
       }
-    }
+    });
     return [strike, ball];
   }
 
