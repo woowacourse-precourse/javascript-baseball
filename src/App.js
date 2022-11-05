@@ -53,21 +53,40 @@ class App {
     if (ballCount.ball > 0) {
       console.print('${ballCount.ball}볼');
     }
-    if (ballCount.nothing === 3){
+    if (ballCount.nothing === 3) {
       console.print('낫싱');
     }
     console.print('\n');
   }
 
-  play() {
-    const computerNum = this.computerNum();
-    let userNum = this.userNum();
-    let ballCount = this.compareNum(userNum, computerNum);
+  restartOrExit() {
+    MissionUtils.Console.readLine('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
+        answer = Number(answer);
+        if (answer = 1) {
+          const restarApp = new App();
+          restarApp.play();
+        } else if(answer = 2){
+          gameEixt();
+        }
+      }
+    }
 
+    play() {
+      console.print('숫자 야구 게임을 시작합니다.\n');
+      const computerNum = this.computerNum();
+      do {
+        let userNum = this.userNum();
+        let ballCount = this.compareNum(userNum, computerNum);
+        this.printBallCount(ballCount);
+        if (ballCount.strike === 3) {
+          console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+          restartOrExit();
+        }
+      } while (true);
+    }
   }
-}
 
-const app = new App();
-app.play();
+  const app = new App();
+  app.play();
 
-export default App;
+  export default App;
