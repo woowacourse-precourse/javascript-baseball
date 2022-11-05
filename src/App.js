@@ -25,23 +25,6 @@ class App {
     return String(number).split('').map((str) => Number(str));
   }
 
-  duplicateNumber(userNumber, randomNumber) {
-    const result = [0,0,0];
- 
-    for (let i = 0; i < 3; i++) {
-      if (userNumber[i] === randomNumber[i]) {
-        result[0]++;
-      }
-      if (randomNumber.indexOf(userNumber[i]) >= 0) {
-        result[1]++;
-      }
-    }
-    if (result[0] === 0 && result[1] === 0) {
-      result[2]++;
-    }
-    return result;
-  }
-
   calcResult(result) {
     if (result[0] === 3) {
       Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
@@ -58,6 +41,19 @@ class App {
       }
       return false;
     }
+  duplicateNumber(userNumber, randomNumber) {
+    const result = { strikeCount: 0, ballCount: 0 };
+
+    userNumber.forEach((number, index) => {
+      if (number === randomNumber[index]) {
+        result['strikeCount'] += 1;
+      }
+      if (randomNumber.indexOf(number) !== -1) {
+        result['ballCount'] += 1;
+      }
+    })
+  
+    return this.calcResult(result);
   }
 
   restartGameOption() {
