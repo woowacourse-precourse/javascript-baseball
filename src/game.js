@@ -4,14 +4,18 @@ const { MESSAGE } = require('./constants');
 
 class Game {
   constructor() {
-    this.started = false;
+    this.isCorrect;
     this.randomNumbers;
   }
 
   init() {
     this.start(MESSAGE.START);
-    this.generateRandomNumber(1, 9, 3);
-    this.started = true;
+    this.randomNumbers = this.generateRandomNumber(1, 9, 3);
+    this.isCorrect = false;
+  }
+
+  play() {
+    this.playRound(this.randomNumbers);
   }
 
   start(startMessage) {
@@ -20,26 +24,34 @@ class Game {
 
   generateRandomNumber(min, max, length) {
     this.randomNumbers = [];
+
     while (this.randomNumbers.length < length) {
       const number = MissionUtils.Random.pickNumberInRange(min, max);
       if (!this.randomNumbers.includes(number)) {
         this.randomNumbers.push(number);
       }
     }
+
     console.log(this.randomNumbers);
 
     return this.randomNumbers;
   }
 
-  play() {
+  playRound(random) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (input) => {
       this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
+
       const inputNumbers = [...input].map(Number);
-      const { ball, strike } = this.countScore(
-        inputNumbers,
-        this.randomNumbers
-      );
+      const { ball, strike } = this.countScore(inputNumbers, random);
+
       this.printScore(ball, strike);
+
+      if (strike === 3) {
+        this.isCorrect = true;
+        return;
+      }
+
+      return this.playRound(random);
     });
   }
 
