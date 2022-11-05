@@ -1,3 +1,5 @@
+const utils = require('./utils');
+
 class GameDataStore {
   #gameData;
 
@@ -6,6 +8,7 @@ class GameDataStore {
   constructor() {
     this.#gameData = {
       target: '',
+      input: '',
       ballsAndStrikes: {},
     };
     this.#gameDataUI = {};
@@ -15,8 +18,21 @@ class GameDataStore {
     this.#gameDataUI = GameDataUI;
   }
 
-  setGameStatus(newGameData) {
-    this.#gameData = newGameData;
+  setTarget(newTarget) {
+    this.#gameData = {
+      target: newTarget,
+      input: '',
+      ballsAndStrikes: {},
+    };
+    this.#gameDataUI.update(this.#gameData);
+  }
+
+  setInput(newInput) {
+    this.#gameData.input = newInput;
+    this.#gameData.ballsAndStrikes = utils.getBallsAndStrikes(
+      this.#gameData.target,
+      this.#gameData.input,
+    );
     this.#gameDataUI.update(this.#gameData);
   }
 }

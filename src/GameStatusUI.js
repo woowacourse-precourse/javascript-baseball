@@ -15,9 +15,6 @@ class GameStatusUI {
     if (newGameStatus === 'START') {
       Console.print('숫자 야구 게임을 시작합니다.');
     }
-    this.#action.sendToDispatcher({
-      type: 'game-start',
-    });
   }
 }
 

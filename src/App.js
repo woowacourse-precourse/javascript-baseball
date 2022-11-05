@@ -1,24 +1,47 @@
 const Action = require('./Action');
 const Dispatcher = require('./Dispatcher');
+const GameDataStore = require('./GameDataStore');
+const GameDataUI = require('./GameDataUI');
+const GameStatusStore = require('./GameStatusStore');
+const GameStatusUI = require('./GameStatusUI');
+const utils = require('./utils');
 
 class App {
-  #action;
-
-  #dispatcher;
-
-  constructor() {
-    this.#action = {};
-    this.#dispatcher = {};
-  }
-
   play() {
-    this.#action = new Action();
-    this.#dispatcher = new Dispatcher();
+    const action = new Action();
+    const dispatcher = new Dispatcher();
+    const gameDataStore = new GameDataStore();
+    const gameDataUI = new GameDataUI();
+    const gameStatusStore = new GameStatusStore();
+    const gameStatusUI = new GameStatusUI();
 
-    this.#action.injection(this.#dispatcher);
-    this.#dispatcher.register(() => console.log('a'));
-    this.#dispatcher.register((payload) => console.log(payload));
-    this.#action.sendToDispatcher('asd');
+    action.injection(dispatcher);
+    gameDataStore.injection(gameDataUI);
+    gameStatusStore.injection(gameStatusUI);
+    gameDataUI.injection(action);
+    gameStatusUI.injection(action);
+
+    dispatcher.register((payload) => {
+      if (payload.type === 'game-start') {
+        gameStatusStore.setGameStatus('START');
+      }
+    });
+
+    dispatcher.register((payload) => {
+      if (payload.type === 'game-start' || payload.type === 'game-restart') {
+        gameDataStore.setTarget(utils.makeTarget());
+      }
+    });
+
+    dispatcher.register((payload) => {
+      if (payload.type === 'new-guess') {
+        gameDataStore.setInput(payload.input);
+      }
+    });
+
+    action.sendToDispatcher({
+      type: 'game-start',
+    });
   }
 }
 
