@@ -39,3 +39,7 @@ describe('1~9에 속한 세자리 숫자가 아니라면 에러 발생', () => {
     expect(() => isValidRangeNumber('12#')).toThrow();
   });
 });
+
+test('중복 된 숫자가 있다면 에러 발생', () => {
+  expect(() => haveSameNumber('119')).toThrow();
+});
