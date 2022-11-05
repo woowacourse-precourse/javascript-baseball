@@ -14,4 +14,12 @@ const validRange = (num) => {
 
 const duplication = (num) => new Set(num).size !== num.length;
 
-module.exports = { validLength, validRange, duplication };
+const isValidInput = (num) => {
+  if (isNaN(num.join(''))) return false;
+  if (!validLength(num)) return false;
+  if (!validRange(num)) return false;
+  if (duplication(num)) return false;
+  return true;
+};
+
+module.exports = { isValidInput, validLength, validRange, duplication };

@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { GAME_SENTENCE } = require('./constants');
+const { GAME_SENTENCE } = require('./Constants');
 
 class App {
   constructor() {}
