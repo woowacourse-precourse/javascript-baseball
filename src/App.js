@@ -4,7 +4,7 @@ class App {
   constructor() {
     this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
     this.isValidUserNumber = false;
-    this.computerNumberArray = App.generateComputerNumberArray();
+    this.computerNumberArray = 0;
     this.userNumber = 0;
     this.gameEndStatus = false;
     this.gameOptionValue = 0;
@@ -92,7 +92,12 @@ class App {
   }
 
   static generateComputerNumberArray() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computerNumberArray = [];
+    while (computerNumberArray.length < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerNumberArray.includes(randomNumber)) computerNumberArray.push(randomNumber);
+    }
+    return computerNumberArray;
   }
 }
 
