@@ -6,7 +6,7 @@ const playGame = require("./playGame");
 class App {
   play() {
     let playing = true;
-    console.log(Message.START);
+    MissionUtils.Console.print(Message.START);
     while (playing) {
       const answer = getAnswer();
       playing = playGame(answer);
