@@ -36,6 +36,8 @@ class App {
     const INPUT_ARRAY = [...this.userInput];
 
     const CHECK_EXCEPTION = (input) => {
+      // 48 is '1'
+      // 57 is '9'
       const IS_NUMBER = input.charCodeAt(0) >= 48 && input.charCodeAt(0) <= 57;
       const IS_UNIQUE = !CHECK_SAME_INPUT.has(input);
       App.throwError(IS_UNIQUE, IS_NUMBER, IS_LENGTH_3);
