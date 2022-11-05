@@ -32,6 +32,25 @@ class BaseBallGame{
 
     return true;
   }
+
+  checkUserAnswer(gameAnswer, userAnswer) {
+    const res = {
+      victory: false,
+      count: { 스트라이크: 0, 볼: 0, 낫싱: 0}
+    };
+  
+    gameAnswer.forEach((answer, gamePosition) => {
+      const userPosition = userAnswer.indexOf(answer);
+
+      if (userPosition == -1) res.count.낫싱++;
+      if (gamePosition == userPosition) res.count.스트라이크++;
+      if (userPosition > -1 && gamePosition !== userPosition) res.count.볼++;
+    });
+
+    if (res.count.스트라이크 === 3) res.victory = true;
+
+    return res;
+  }
 }
 
 export default BaseBallGame;
