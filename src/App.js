@@ -8,7 +8,7 @@ class App {
   
   game() {
     let computer = this.setComputerNum();
-    this.predict(computer)
+    this.predict(computer);
   }
 
   predict(computer) { 
@@ -16,11 +16,11 @@ class App {
       const inputArray = input.split('').map(digit => parseInt(digit));
       this.checkInputError(inputArray);
       const countResult = this.countStrikeAndBall(inputArray, computer);
-      MissionUtils.Console.print(this.result(countResult));
+      MissionUtils.Console.print(this.resultString(countResult));
       if (countResult.strike !== 3){
         this.predict(computer);
       } else {
-        console.log('3개의 숫자를 모두 맞히셨습니다!');
+        console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.checkContinue();
       }
     })
@@ -31,8 +31,10 @@ class App {
       throw new Error('input length error');
     } else if(inputArray.length !== new Set(inputArray).size) {
       throw new Error('input overlap error');
-    } else if (inputArray.some(digit => !Number.isInteger(digit) && digit == 0)) {
-      throw new Error('input 1~9 range & isDigit error');
+    } else if (inputArray.some(digit => !Number.isInteger(digit))) {
+      throw new Error('input isDigit error');
+    } else if (inputArray.some(digit => digit === 0)) {
+      throw new Error('input 1~9 range error');
     }
   }
 
@@ -72,13 +74,13 @@ class App {
     return {strike:countS, ball:countB};
   }
 
-  result(countResult) {
+  resultString(countResult) {
     let res ='';
     if(countResult.strike === 0 && countResult.ball === 0){
       res = '낫싱';
     } else {
-      res += countResult.ball>0 ? `${countResult.ball}볼 `:'';
-      res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
+      res += countResult.ball>0 ? `${countResult.ball}볼`:'';
+      res += countResult.strike>0 ? (res === '' ? `${countResult.strike}스트라이크` : ` ${countResult.strike}스트라이크`):'';
     }
     return res;
   }
