@@ -92,7 +92,7 @@ const printBallStrike = (strikeBallRecord) => {
   return false;
 };
 
-// 유저 입력 기능
+// 사용자 입력 기능
 const getUserInput = () => {
   let inputArray = [];
 
@@ -102,6 +102,7 @@ const getUserInput = () => {
     }
 
     inputArray = inputNumber.split("");
+
     const input_set = new Set(inputArray);
 
     if (inputArray.length !== input_set.size) {
@@ -114,6 +115,7 @@ const getUserInput = () => {
 
 const askEndGame = () => {
   let isQuit = -1;
+
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
     (isEnd) => {
