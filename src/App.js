@@ -3,6 +3,7 @@ import * as MissionUtils from "@woowacourse/mission-utils";
 class App {
   computerNum() {
     const computerTheeDifferNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(computerTheeDifferNum);
   }
 
   userNum() {
@@ -23,7 +24,31 @@ class App {
     return (number != NaN) && (number.length === 3) && (number.lenth === set.size) ? true : false;
   }
 
-  play() {}
+  compareNum(userNum, computerNum) {
+    let ballCount = {
+      strike: 0,
+      ball: 0,
+      nothing: 0,
+    };
+    const userNum = userNum.toString();
+    const computerNum = computerNum.toString();
+    for(let index=0; index<3; index++){
+      if(userNum[index] === computerNum[index]){
+        ballCount.strike++;
+        continue;
+      }else if(computerNum.match(userNum[index]) === userNum[index]){
+        ballCount.ball++;
+        continue;
+      }
+      ballCount.nothing++;
+    }
+
+    return ballCount;
+  }
+  
+  play() {
+    this.computerNum();
+  }
 }
 
 const app = new App();
