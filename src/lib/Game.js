@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { NUMBER_LIMIT, MESSAGE, RESULT } = require('../constant/baseball');
+const { RESULT } = require('../constant/baseball');
 
 class Game {
   getGameResult(computerNum, userInput) {
@@ -32,7 +32,7 @@ class Game {
 
     const ballMessage = ballCount !== 0 ? `${ballCount}${RESULT.BALL}` : '';
     const strikeMessage = strikeCount !== 0 ? `${strikeCount}${RESULT.STRIKE}` : '';
-    const gameMessage = `${ballMessage}${strikeMessage}`;
+    const gameMessage = `${ballMessage} ${strikeMessage}`;
 
     Console.print(gameMessage);
   }

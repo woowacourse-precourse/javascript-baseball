@@ -1,6 +1,6 @@
 const { NUMBER_LIMIT } = require('../constant/baseball');
 
-class CheckValid {
+class User {
   validateInput(userInput) {
     return (
       this.validateInputLength(userInput) &&
@@ -33,4 +33,4 @@ class CheckValid {
   }
 }
 
-module.exports = CheckValid;
+module.exports = User;

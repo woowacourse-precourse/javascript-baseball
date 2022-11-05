@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const CheckValid = require('./lib/CheckValid');
+const User = require('./lib/User');
 const Computer = require('./lib/Computer');
 const Game = require('./lib/Game');
 const { NUMBER_LIMIT, MESSAGE, OPTION } = require('./constant/baseball');
@@ -7,46 +7,55 @@ const { NUMBER_LIMIT, MESSAGE, OPTION } = require('./constant/baseball');
 class App {
   constructor() {
     this.computer = new Computer();
-    this.checkValid = new CheckValid();
+    this.user = new User();
     this.game = new Game();
   }
 
   play() {
+    Console.print(MESSAGE.START);
     this.start();
   }
 
   start() {
-    Console.print(MESSAGE.START);
-
     const computerNum = this.computer.makeNumbers();
     this.match(computerNum);
   }
 
   match(computerNum) {
     Console.readLine(MESSAGE.INPUT, userInput => {
-      const isUserInputValid = this.checkValid.validateInput(userInput);
+      const isUserInputValid = this.user.validateInput(userInput);
 
       if (isUserInputValid === false) {
-        throw new Error(MESSAGE.ERROR);
+        this.throwError();
+        return;
       }
 
       const { ballCount, strikeCount } = this.game.getGameResult(computerNum, userInput);
       this.game.renderGameMessage(ballCount, strikeCount);
 
-      if (strikeCount !== NUMBER_LIMIT) return this.play(computerNum);
+      if (strikeCount !== NUMBER_LIMIT) {
+        this.match(computerNum);
+        return;
+      }
 
       Console.print(MESSAGE.SUCCESS);
-      return this.askUserToRestart();
+      this.askUserToRestart();
     });
   }
 
-  // TODO: 유저 옵션 입력값 유효성 검사 로직 분리
   askUserToRestart() {
     Console.readLine(MESSAGE.END, userInput => {
-      if (userInput === OPTION.RESTART) return this.restart();
-      if (userInput === OPTION.EXIT) return this.exit();
+      if (userInput === OPTION.RESTART) {
+        this.restart();
+        return;
+      }
 
-      throw new Error(MESSAGE.ERROR);
+      if (userInput === OPTION.EXIT) {
+        this.exit();
+        return;
+      }
+
+      this.throwError();
     });
   }
 
@@ -55,8 +64,11 @@ class App {
   }
 
   exit() {
-    Console.print(MESSAGE.EXIT);
     Console.close();
+  }
+
+  throwError() {
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
