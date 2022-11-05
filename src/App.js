@@ -72,8 +72,8 @@ class App {
     this.initAnswerMap();
     try {
       await this.user.getNumberArrayFromInput();
-    } catch (e) {
-      throw new Error(e);
+    } catch (error) {
+      throw new Error(error);
     }
     this.compareUserAndComputerNumber();
   }
@@ -109,7 +109,10 @@ class App {
 
   play() {
     this.computer.setRandomNumberArray();
-    this.startOrRestartApp('start');
+    this.startOrRestartApp('start').catch(error => {
+      MissionUtils.Console.print(error);
+      this.endApp();
+    });
   }
 }
 
