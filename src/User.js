@@ -2,25 +2,42 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class User {
   constructor() {
-    this.userNumberArray = [];
+    this.numberArray = [];
   }
-  getUserNumberFromInput() {
-    let that = this;
-    return new Promise(function (resolve, reject) {
-      try {
-        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-          that.userNumberArray = [
-            ...input
-              .toString()
-              .split('')
-              .map(i => +i),
-          ];
-          resolve();
-        });
-      } catch (e) {
-        reject(e);
-      }
+
+  getNumberArrayFromInput() {
+    return new Promise((resolve, reject) => this.getInput(resolve, reject));
+  }
+
+  getInput(resolve, reject) {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+      this.setNumberArray(input);
+      resolve();
     });
+  }
+
+  setNumberArray(input) {
+    if (!this.validInput(input)) {
+      throw Error('입력값이 잘못되었습니다.');
+    }
+
+    const inputArray = this.makeInputToArray(input);
+    this.numberArray = [...inputArray];
+  }
+
+  validInput(input) {
+    if (input.length > 3) return false;
+    const validRegex = /^[1-9]*$/;
+    return validRegex.test(input);
+  }
+
+  makeInputToArray(input) {
+    return [
+      ...input
+        .toString()
+        .split('')
+        .map(i => +i),
+    ];
   }
 }
 

@@ -61,24 +61,24 @@ class App {
   }
 
   async startOrRestartApp(start) {
-    if (start == 'restart' || start == 'start') {
+    if (start !== 'restart' && start !== 'start') {
       throw Error('start 명령을 잘못 입력했습니다.');
     }
-    if (start === 'restart')
-      return this.computer.setRandomComputerNumberArray();
+    if (start === 'restart') return this.computer.setRandomNumberArray();
 
     this.initAnswerMap();
     try {
-      await this.user.getUserNumberFromInput();
+      await this.user.getNumberArrayFromInput();
     } catch (e) {
+      console.log('error');
       throw Error(e);
     }
     this.compareUserAndComputerNumber();
   }
 
   setAnswerMapByCompareUserAndComputer() {
-    this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
-      const index = this.computer.computerNumberArray.indexOf(userNumber);
+    this.user.numberArray.forEach((userNumber, userNumberArrayIndex) => {
+      const index = this.computer.NumberArray.indexOf(userNumber);
       if (index === userNumberArrayIndex) {
         this.answerMap.set('strike', this.answerMap.get('strike') + 1);
       } else if (index >= 0) {
@@ -93,7 +93,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('play');
-    this.computer.setRandomComputerNumberArray();
+    this.computer.setRandomNumberArray();
     this.startOrRestartApp('start');
   }
 }
