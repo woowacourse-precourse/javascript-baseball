@@ -7,8 +7,15 @@ class App {
     this.computerNumberArray = computerNumber;
   }
 
+  getUserNumbers() {
+    Console.readLine('숫자를 입력해주세요 :', (userNumber) => {
+      console.log(userNumber);
+    });
+  }
+
   play() {
     this.makeRandomNumbers();
+    this.getUserNumbers();
   }
 }
 
