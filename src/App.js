@@ -12,7 +12,8 @@ class App {
         computer.push(num);
       }
     }
-    return computer.join("");
+
+    this.#answer = computer.join("");
   }
 
   checkLength(input) {
@@ -76,7 +77,7 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.#answer = this.pickNumber();
+    this.pickNumber();
     this.getUserInput();
     if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
     this.printHintMessage(this.#answer, this.#userInput);
