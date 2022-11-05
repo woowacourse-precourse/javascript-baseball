@@ -1,5 +1,6 @@
 const { ERROR, ANSWER } = require('./Constants');
 const { generateNumArr } = require('./Utils');
+const { Console } = require('@woowacourse/mission-utils');
 
 const validLength = (num) => num.length === ANSWER.LENGTH;
 
