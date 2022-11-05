@@ -1,9 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const BALL = "볼";
-const STRIKE = "스트라이크";
-const NOTHING = "낫싱";
-
 class App {
   #userInput;
   #answer;
@@ -61,15 +57,23 @@ class App {
     return strike;
   }
 
+  countBall(answer, input) {
+    const answerArr = answer.split("");
+    const ball = answerArr.reduce((acc, curr, idx) => {
+      const index = input.indexOf(curr);
+      return acc + (index !== -1 && index !== idx);
+    }, 0);
+    return ball;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.#answer = this.pickNumber();
     this.getUserInput();
     console.log(this.#userInput);
     if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
-    MissionUtils.Console.print(
-      `${this.countStrike(this.#answer, this.#userInput)}스트라이크`
-    );
+    const strike = this.countStrike(this.#answer, this.#userInput);
+    const ball = this.countBall(this.#answer, this.#userInput);
   }
 }
 
