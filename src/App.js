@@ -83,6 +83,14 @@ class App {
     }
     return result;
   }
+  getUserInputArr() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      MissionUtils.Console.close();
+      let userInputArr = Array.from(String(userInput));
+      userInputArr = userInputArr.map((num) => Number(num));
+      return userInputArr;
+    });
+  }
 }
 
 module.exports = App;
