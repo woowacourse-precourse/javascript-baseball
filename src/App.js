@@ -13,6 +13,8 @@ class App {
       checkValidityUserNumber(userNumber);
 
       const checkResult = countBallAndStrike(computerNumber, userNumber);
+      console.log(checkResult);
+
 
     }
 
@@ -103,13 +105,14 @@ function countBallAndStrike(computerNumber, userNumber) {
   for (let i = 0; i < 3; i++) {
     if (computerNumberList[i] === userNumberList[i]) {
       strike += 1;
-      continue;
     }
-    ball += 1;
   }
+  ball = ballOrStrike - strike;
 
   return [ball, strike];
 }
+
+
 
 
 
