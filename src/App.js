@@ -1,29 +1,32 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  async play() {
+  play() {
     PrintGameStartPhrase();
+    StartGame();
 
-    const computerNumber = makeComputerNumber();
-    console.log(computerNumber);
-
-    let isGameEnd = false;
-    while (isGameEnd === false) {
-      const userNumber = await getUserNumber();
-      checkValidityUserNumber(userNumber);
-
-      const checkResult = countBallAndStrike(computerNumber, userNumber);
-
-      const result = printResult(checkResult);
-
-      if (result === "end") {
-        let userChoiceNumber = await reStartOrEnd();
-        console.log(userChoiceNumber);
-      }
+  }
+}
 
 
+// 기능 2 ~ 8 
+async function StartGame() {
+  const computerNumber = makeComputerNumber();
+  console.log(computerNumber);
+
+  let isGameEnd = false;
+  while (isGameEnd === false) {
+    const userNumber = await getUserNumber();
+    checkValidityUserNumber(userNumber);
+
+    const checkResult = countBallAndStrike(computerNumber, userNumber);
+
+    const result = printResult(checkResult);
+
+    if (result === "end") {
+      let userChoiceNumber = await reStartOrEnd();
+      console.log(userChoiceNumber);
     }
-
   }
 }
 
@@ -161,6 +164,7 @@ function reStartOrEnd() {
 
   return userChoiceNumber;
 }
+
 
 const baseballGame = new App();
 baseballGame.play();
