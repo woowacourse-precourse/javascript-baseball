@@ -136,5 +136,11 @@ export default class BaseballGame {
         const resultContainer = document.querySelector('#result');
         resultContainer.innerHTML = this.showResult(result);
     }
+
+    // 재시작 문구 및 버튼 출력하는 함수
+    restartBtn() {
+        const restartButton = `<button id="game-restart-button">다시하기</button>`;
+        return `<div>게임 한번 더 할래요? ${restartButton}</div>`;
+    }
 }
 new BaseballGame();
