@@ -8,6 +8,24 @@ class GameUtils {
 
     return userInputArr;
   }
+
+  static evaluScore(user, computer) {
+    const result = {};
+    if (JSON.stringify(user) === JSON.stringify(computer)) {
+      result.strike = 3;
+      return result;
+    }
+
+    user.forEach((num,idx) => {
+      if(isContain(num ,computer))
+    })
+
+    console.log(result)
+  }
 }
+
+// const isContain = (number , arr) => {
+//   return arr.includes
+// };
 
 module.exports = GameUtils;

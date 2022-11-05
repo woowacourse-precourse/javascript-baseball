@@ -1,10 +1,14 @@
 class BaseballModel {
-  constructor(strike, ball, nothing) {
-    this.strike = strike;
-    this.ball = ball;
-    this.nothing = nothing;
+  constructor(randomNumber) {
+    this.randomNumber = randomNumber;
   }
+  strike = null;
+  ball = null;
+  nothing = "낫싱";
 
+  getRandom() {
+    return this.randomNumber;
+  }
   getStrikeScore() {
     return this.strike;
   }
@@ -12,7 +16,7 @@ class BaseballModel {
     return this.ball;
   }
   getNothing() {
-    return "낫싱";
+    return this.nothing;
   }
 }
 

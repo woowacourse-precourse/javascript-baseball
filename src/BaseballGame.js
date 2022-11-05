@@ -6,14 +6,11 @@ const print = MissionUtils.Console.print;
 const readLine = MissionUtils.Console.readLine;
 
 class BaseballGame {
-  constructor() {}
-
-  strick = "스트라이크";
-  ball = "볼";
-  nothing = "낫싱";
+  baseballModel;
 
   static gameStart() {
     console.log("숫자 야구 게임을 시작합니다.");
+    this.baseballModel = new BaseballModel(BaseballGame.getRandomNumbers());
     userGuessNumber();
   }
 
@@ -21,11 +18,11 @@ class BaseballGame {
     return generateRandomNumber(1, 9);
   }
 
-  static evalueScore(userGuessNumber) {
+  static compareComputerAndUser(userGuessNumber) {
     const userNumber = GameUtils.userInputToNumberArr(userGuessNumber);
-    const random = BaseballGame.getRandomNumbers();
+    const random = this.baseballModel.getRandom();
+    GameUtils.evaluScore(userNumber, random);
 
-    console.log(userNumber, random);
     // const result = scoreCheck(random, userNumber);
   }
 }
@@ -42,7 +39,7 @@ const generateRandomNumber = (startNum, endNum) => {
 const userGuessNumber = () => {
   const arr = readLine(" 3자리 숫자를 입력해 주세요 : ", (answer) => {
     Validate.userGuessNumbers(answer);
-    BaseballGame.evalueScore(answer);
+    BaseballGame.compareComputerAndUser(answer);
     MissionUtils.Console.close();
   });
 };
