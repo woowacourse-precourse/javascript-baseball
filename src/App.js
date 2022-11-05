@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { getUniqueNumbersInRange } = require('./utils/RandomNumber');
 const { countBall, countStrike, printBallCount } = require('./utils/BallCount');
 const {
 	checkInputLength,
@@ -13,6 +14,11 @@ class App {
 	}
 
 	play() {}
+
+	createNewGame() {
+		const computerNumbers = getUniqueNumbersInRange(1, 9, this.NUMBER_LENGTH);
+		this.runTurn(computerNumbers);
+	}
 
 	runTurn(computerNumbers) {
 		Console.readLine('숫자를 입력해주세요 : ', (input) => {
