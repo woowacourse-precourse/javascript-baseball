@@ -49,7 +49,7 @@ class App {
     } else {
       Console.print(`${result.ballNum}볼 ${result.strikeNum}스트라이크`);
     }
-    return result.strikeNum === 3 ? this.gameEnd() : this.userInput();
+    return result.strikeNum === 3 ? this.gameEnd() : this.userInputProcess();
   }
 
   countBalls(userInputNum) {
@@ -82,18 +82,19 @@ class App {
   gameEndvalidation(endNumber) {
     Console.print(endNumber);
     switch (endNumber) {
-      case '1':
+      case '1': {
         this.playProcess();
         break;
-
-      case '2':
+      }
+      case '2': {
         Console.print('게임종료');
         Console.close();
         break;
-
-      default:
+      }
+      default: {
         this.gameEnd();
         break;
+      }
     }
   }
 
