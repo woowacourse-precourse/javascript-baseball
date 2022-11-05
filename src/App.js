@@ -17,7 +17,7 @@ class App {
       finished = baseballComputer.isFinish(baseballDto);
     }
     if (baseballComputer.restart()) {
-      this.start();
+      this.#start();
     }
   }
   play() {

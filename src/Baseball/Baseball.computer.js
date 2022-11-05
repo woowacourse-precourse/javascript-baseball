@@ -1,12 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class BaseballComputer {
-  baseballNumbers = [];
+  #baseballNumbers = [];
   constructor(baseballOutput, baseballValidator) {
-    while (this.baseballNumbers.length < 3) {
+    while (this.#baseballNumbers.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.baseballNumbers.includes(number)) {
-        this.baseballNumbers.push(number);
+      if (!this.#baseballNumbers.includes(number)) {
+        this.#baseballNumbers.push(number);
       }
     }
     this.baseballOutput = baseballOutput;
@@ -21,7 +21,7 @@ class BaseballComputer {
   }
   getBallState(userNumbers) {
     const baseballDto = this.baseballValidator.checkBallState(
-      this.baseballNumbers,
+      this.#baseballNumbers,
       userNumbers
     );
     this.baseballOutput.result(baseballDto);
