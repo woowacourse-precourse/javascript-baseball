@@ -57,11 +57,7 @@ class App {
   }
 
   setRandomNumber() {
-    this.randomNumber = generateRandomNumber({
-      start: EXCEPTION.MIN_NUMBER,
-      end: EXCEPTION.MAX_NUMBER,
-      count: EXCEPTION.VALID_NUMBER_LENGTH,
-    });
+    this.randomNumber = generateRandomNumber();
   }
 
   showMessage(message) {
