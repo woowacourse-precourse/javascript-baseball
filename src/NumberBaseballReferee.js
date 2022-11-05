@@ -7,11 +7,32 @@ class NumberBaseballReferee{
 
         this.createNumber = new CreateNumber(); 
         this.userNumber = new UserNumber();
+        UserComputerCompare(userNumber, createNumber);
         allStrike(strike,ball);
         allBall(strike, ball);
         strikeAndBall(strike,ball);
         nothing(strike, ball);
     }
+
+    UserComputerCompare(userNumber, createNumber){
+        let strike = 0;
+        let ball = 0;
+        let nothing = 0;
+        let strikeBallNothing = [strike, ball, nothing]
+       userNumber.foreach((number , index) =>{
+        if(createNumber.includes(number)){
+            if(number == Number(createNumber[index])){
+                strike += 1;
+            }
+            else{
+                ball +=1;
+            }
+        }
+        else{
+            nothing +=1;
+        }
+        })
+        return strikeBallNothing; }
 
     allStrike(strike, ball){
     if(strike > 0 && ball == 0){
