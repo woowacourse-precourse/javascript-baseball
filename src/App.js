@@ -9,32 +9,32 @@ function setAnswerNum() {
 }
 
 function askNumInput() {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-    isValidInput(number);
-    printMsg(`입력하신 숫자는... ${number} 입니다.`);
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    isValidInput(input);
+    printMsg(`입력하신 숫자는... ${input} 입니다.`);
   });
 }
 
-function isValidInput(number) {
-  if (!isNumber(number) || !isVaildLength(number) || !isAllDiffNum(number)) {
+function isValidInput(input) {
+  if (!isNumber(input) || !isVaildLength(input) || !isAllDiffNum(input)) {
     throw "유효한 값이 아니므로 게임을 종료합니다.";
   }
 }
 
-function isNumber(number) {
+function isNumber(input) {
   const NUM_REG = /[1-9]/g;
-  var remainedNotNum = number.replace(NUM_REG, "");
-  if (remainedNotNum) return false;
+  var remainNotNum = input.replace(NUM_REG, "");
+  if (remainNotNum) return false;
   return true;
 }
 
-function isVaildLength(number) {
-  if (number.length !== 3) return false;
+function isVaildLength(input) {
+  if (input.length !== 3) return false;
   return true;
 }
 
-function isAllDiffNum(number) {
-  const setNum = new Set(number.split(""));
+function isAllDiffNum(input) {
+  const setNum = new Set(input.split(""));
   if (setNum.size !== 3) return false;
   return true;
 }
