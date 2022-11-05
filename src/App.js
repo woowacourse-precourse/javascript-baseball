@@ -2,11 +2,13 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.threeDigitsAnswer = [];
+    this.threeDigitsAnswer = null;
     console.log('숫자 야구 게임을 시작합니다.');
   }
 
   getThreeDigitsAnswer() {
+    this.threeDigitsAnswer = [];
+
     while (this.threeDigitsAnswer.length < 3) {
       const randomNumber = Random.pickNumberInRange(1, 9);
       if (!this.threeDigitsAnswer.includes(randomNumber)) {
@@ -67,18 +69,15 @@ class App {
   printHint(userInput) {
     const strike = this.getStrike(userInput);
     const ball = this.getBall(userInput);
-
+    if (userInput[0] === 5) Console.print(userInput, this.threeDigitsAnswer);
     if (strike === 0 && ball === 0) {
       Console.print('낫싱');
+    } else if (strike === 0 && ball > 0) {
+      Console.print(`${ball}볼`);
+    } else if (strike > 0 && ball === 0) {
+      Console.print(`${strike}스트라이크`);
     } else {
-      let hintStr = '';
-      if (ball >= 1) {
-        hintStr += `${ball}볼 `;
-      }
-      if (strike >= 1) {
-        hintStr += `${strike}스트라이크`;
-      }
-      Console.print(hintStr);
+      Console.print(`${ball}볼 ${strike}스트라이크`);
     }
   }
 
