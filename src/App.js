@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const handleException = require("./handleException");
 
 class App {
   play() {}
@@ -13,7 +14,9 @@ class App {
   }
 
   enterAnswer() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      if (!handleException(answer)) throw "입력 형식이 잘못되었습니다.";
+    });
   }
 }
 
