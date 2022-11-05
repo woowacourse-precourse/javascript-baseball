@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   #userInput;
   #answer;
+  #finish = false;
 
   startMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -71,20 +72,29 @@ class App {
     return ball;
   }
 
-  printHintMessage(answer, input) {
+  compareInputAnswer(answer, input) {
     const strike = this.countStrike(answer, input);
     const ball = this.countBall(answer, input);
     const ballHint = ball > 0 ? `${ball}볼` : "";
     const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
+
     MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
+    if (strike === 3) this.correctMessage();
+  }
+
+  correctMessage() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.#finish = true;
   }
 
   play() {
     this.startMessage();
     this.pickNumber();
-    this.getUserInput();
-    if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
-    this.printHintMessage(this.#answer, this.#userInput);
+    while (!this.#finish) {
+      this.getUserInput();
+      if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
+      this.compareInputAnswer(this.#answer, this.#userInput);
+    }
   }
 }
 
