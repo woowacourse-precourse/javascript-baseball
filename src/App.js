@@ -8,6 +8,8 @@ class App {
     if (checkUserNumber) {
       console.log(checkUserNumber);
     }
+    let randomNumber = this.setRandomNumber();
+    console.log(randomNumber);
   }
   async userInput(prompt) {
     return await new Promise((resolve) => {
@@ -20,7 +22,11 @@ class App {
       MissionUtils.Console.print('조건에 맞게 숫자를 입력해주세요!');
       return 0;
     }
-    return userInputToArr;
+    const userInputToNumberArr = userInputToArr.map((item) => Number(item));
+    return userInputToNumberArr;
+  }
+  setRandomNumber() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 }
 
