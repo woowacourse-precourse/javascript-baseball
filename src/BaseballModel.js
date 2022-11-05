@@ -2,9 +2,8 @@ class BaseballModel {
   constructor(randomNumber) {
     this.randomNumber = randomNumber;
   }
-  strike = null;
-  ball = null;
-  nothing = "낫싱";
+  strike = 0;
+  ball = 0;
 
   getRandom() {
     return this.randomNumber;
