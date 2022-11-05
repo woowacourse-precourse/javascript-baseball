@@ -11,7 +11,7 @@ class App {
 
   play_number_baseball_game() {
     this.answer = this.computer_random_number();
-    this.receive_input();
+    this.receive_guess_input();
   }
 
   computer_random_number() {
@@ -49,7 +49,7 @@ class App {
     const COMPARE_RESULT = this.compare_and_give_hint(input, this.answer);
     MissionUtils.Console.print(COMPARE_RESULT);
     if (COMPARE_RESULT != '3스트라이크') {
-      this.receive_input();
+      this.receive_guess_input();
     } else {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.receive_restart_input();
