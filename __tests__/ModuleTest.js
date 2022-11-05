@@ -61,3 +61,21 @@ describe('두 배열의 index의 값이 같은 개수를 반환', () => {
     expect(getStrikeCount([1, 'a', 9], ['#', '2', 0])).toBe(0);
   });
 });
+
+describe('두 배열에 모두 포함된 값의 개수를 반환', () => {
+  test('case1', () => {
+    expect(getSameNumCount([4, 1, 3], [1, 3, 4])).toBe(3);
+  });
+
+  test('case2', () => {
+    expect(getSameNumCount(['2', '4', '1'], ['2', '1', 0])).toBe(2);
+  });
+
+  test('case3', () => {
+    expect(getSameNumCount([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1])).toBe(6);
+  });
+
+  test('case4', () => {
+    expect(getSameNumCount(['1', '2', '3'], ['4', '5', '6'])).toBe(0);
+  });
+});
