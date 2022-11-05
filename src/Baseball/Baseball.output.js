@@ -8,7 +8,7 @@ class BaseBasllOutput {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
   }
   getNumber() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요: \n", (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       return answer;
     });
   }
