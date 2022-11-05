@@ -46,8 +46,17 @@ class App {
         this.strike += 1;
       }
     })
-    MissionUtils.Console.print(`스트라이크 : ${this.strike}`)
     return this.strike
+  }
+
+  ballCount() {
+    const correctAnswerArr = this.correctAnswer.split('')
+    correctAnswerArr.map((number, index) => {
+      if (number !== this.userInput[index] && this.userInput.includes(number)) {
+        this.ball += 1;
+      }
+    })
+    return this.ball
   }
 
 }
