@@ -19,22 +19,19 @@ function getUserInputNumber(computerNum) {
 }
 
 function getStrikeAndBallCount(userNum, computerNum) {
-  let count = {
+  const count = {
     strike: 0,
     ball: 0,
   };
-  
   const userNumArr = String(userNum).split('');
   const computerNumArr = computerNum.map(String);
 
   userNumArr.forEach((ele) => {
-    if(computerNumArr.includes(ele) == true) {
-      if(computerNumArr.indexOf(ele) === userNumArr.indexOf(ele)) {
-        count.strike++;
-      }
-
-      else {
-        count.ball++;
+    if (computerNumArr.includes(ele) === true) {
+      if (computerNumArr.indexOf(ele) === userNumArr.indexOf(ele)) {
+        count.strike += 1;
+      } else {
+        count.ball += 1;
       }
     }
   });
