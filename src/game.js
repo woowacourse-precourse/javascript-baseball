@@ -59,6 +59,7 @@ class NumericBaseballGame {
 
     userInput.forEach((value, idx) => {
       if (value === computerInput[idx]) userScore.strikeCount += 1;
+      else if (computerInput.includes(value)) userScore.ballCount += 1;
     });
 
     return userScore;
