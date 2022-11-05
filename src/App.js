@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { isThreeDigitNumberWithoutZero, hasNoRedundancy } = require("./utils.js");
 
 class App {
   play() {
@@ -16,6 +17,13 @@ class App {
     }
 
     return ANSWER;
+  }
+
+  // 사용자의 입력이 올바른 입력인지 판단하는 함수
+  isValidInput(input) {
+    if (!isThreeDigitNumberWithoutZero(input)) return false;
+
+    return hasNoRedundancy(input);
   }
 }
 
