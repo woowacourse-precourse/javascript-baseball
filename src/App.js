@@ -9,6 +9,24 @@ class App {
     this.user = new User();
   }
 
+  compareInputToRestart(input) {
+    if (input === '1') {
+      this.startOrRestartApp('restart');
+    } else if (input === '2') {
+      this.endApp();
+    } else {
+      throw Error('잘못된 번호를 입력하였습니다.');
+    }
+  }
+
+  askRestartApp() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+      input => this.compareInputToRestart(input),
+    );
+  }
+
   initAnswerMap() {
     const map = new Map();
     map.set('strike', 0);
@@ -18,53 +36,37 @@ class App {
   }
 
   compareUserAndComputerNumber() {
-    this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
-      const index = this.computer.computerNumberArray.indexOf(userNumber);
-      if (index === userNumberArrayIndex) {
-        this.answerMap.set('strike', this.answerMap.get('strike') + 1);
-      } else if (index >= 0) {
-        this.answerMap.set('ball', this.answerMap.get('ball') + 1);
-      }
-    });
+    this.setAnswerMapByCompareUserAndComputer();
+    this.printResult();
+    this.startOrRestartApp('start');
+  }
+
+  printResult() {
     const strike = this.answerMap.get('strike');
     const ball = this.answerMap.get('ball');
+
+    if (strike === 3) {
+      return this.askRestartApp();
+    }
+
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print('낫싱');
     } else if (ball === 0) {
       MissionUtils.Console.print(`${strike} 스트라이크`);
-      if (strike === 3) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
-        return this.askRestartApp();
-      }
     } else if (strike === 0) {
       MissionUtils.Console.print(`${ball} 볼`);
     } else {
       MissionUtils.Console.print(`${ball} 볼 ${strike} 스트라이크`);
     }
-    this.startApp();
   }
 
-  askRestartApp() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
-      input => {
-        if (input === '1') {
-          this.startApp('restart');
-        } else if (input === '2') {
-          this.endApp();
-        } else {
-          throw Error('잘못된 번호를 입력하였습니다.');
-        }
-      },
-    );
-  }
+  async startOrRestartApp(start) {
+    if (start == 'restart' || start == 'start') {
+      throw Error('start 명령을 잘못 입력했습니다.');
+    }
+    if (start === 'restart')
+      return this.computer.setRandomComputerNumberArray();
 
-  endApp() {
-    MissionUtils.Console.close();
-  }
-
-  async startApp(start) {
-    if (start === 'restart') this.computer.setRandomComputerNumberArray();
     this.initAnswerMap();
     try {
       await this.user.getUserNumberFromInput();
@@ -74,10 +76,25 @@ class App {
     this.compareUserAndComputerNumber();
   }
 
+  setAnswerMapByCompareUserAndComputer() {
+    this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
+      const index = this.computer.computerNumberArray.indexOf(userNumber);
+      if (index === userNumberArrayIndex) {
+        this.answerMap.set('strike', this.answerMap.get('strike') + 1);
+      } else if (index >= 0) {
+        this.answerMap.set('ball', this.answerMap.get('ball') + 1);
+      }
+    });
+  }
+
+  endApp() {
+    MissionUtils.Console.close();
+  }
+
   play() {
     MissionUtils.Console.print('play');
     this.computer.setRandomComputerNumberArray();
-    this.startApp();
+    this.startOrRestartApp('start');
   }
 }
 

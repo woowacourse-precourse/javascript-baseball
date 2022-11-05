@@ -21,17 +21,21 @@
 
 ## 구현할 메소드 목록
 
-- [ ] app
+- [x] app
 
-  - [x] startApp : app이 user input을 물어보는 동작부터 시작
+  - [x] startOrRestartApp : app이 user input을 물어보는 동작부터 시작
   - [x] endApp : app을 종료시킨다.
   - [x] askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
   - [x] compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
   - [x] initAnswerMap
+  - [x] setAnswerMapByCompareUserAndComputer : user와 computer의 값을 바탕으로 answerMap의 값을 셋팅한다
+  - [x] printResult: answerMap의 값을 바탕으로 비교 결과를 print 한다
+  - [x] compareInputToRestart: input이 1이면 재시작, 2이면 프로세스를 종료한다.
 
-- [ ]user
+- [x]user
 
   - [x] getUserNumberFromInput
 
 - [x] computer
+
   - [x] setRandomComputerNumberArray
