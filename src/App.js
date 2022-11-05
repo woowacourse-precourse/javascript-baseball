@@ -8,10 +8,27 @@ class App {
 
   play() {
     this.setRandomNumbers();
+
     this.print("숫자 야구 게임을 시작합니다.");
     this.readLine("숫자를 입력해주세요 : ", (answer) =>
       this.setUserNumbers(answer)
     );
+
+    const memo = this.count(this.computer, this.user);
+  }
+
+  count(computer, user) {
+    const memo = { ball: 0, strike: 0 };
+
+    computer.forEach((computerNumber, index) => {
+      if (computerNumber === user[index]) {
+        memo.strike += 1;
+      } else if (user.includes(computerNumber, index)) {
+        memo.ball += 1;
+      }
+    });
+
+    return memo;
   }
 
   print(str) {
