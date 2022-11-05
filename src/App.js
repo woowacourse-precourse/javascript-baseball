@@ -22,11 +22,22 @@ class App {
         const inputNumArr = input.split('').map(element => +element);
         const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
         MissionUtils.Console.print(gameResult);
+        this.isGameOver(gameResult);
       } catch (error) {
         this.wrongInput(error);
       }
     });
   }
+
+  isGameOver(result) {
+    if (result !== '3스트라이크') {
+      return this.getInputAndCompare();
+    }
+    return this.endOrRetry();
+  }
+
+  // TODO: 종료했을 때 사용자에게 입력을 받아 종료할지 재시도할지 하는 메소드 구현
+  endOrRetry() {}
 
   wrongInput(err) {
     MissionUtils.Console.print(err);
