@@ -53,7 +53,7 @@ class App {
   }
 
   validateUserGameOptionValueInput() {
-    if (+this.gameOptionValue !== 1 || +this.gameOptionValue !== 2) throw new Error("1,2 만 입력해주세요");
+    if (+this.gameOptionValue !== 1 && +this.gameOptionValue !== 2) throw new Error("1,2 만 입력해주세요");
     else this.runByGameOptionValue();
   }
 
