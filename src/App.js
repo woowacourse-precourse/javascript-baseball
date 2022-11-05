@@ -1,9 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
-    this.temp();
-  }
+  play() {}
 
   drawThreeRandomNumbers() {
     const threeRandomNumber = new Set();
@@ -19,7 +17,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
-  async temp() {
+  async startRound() {
     const value = await this.readPlayerInput();
     console.log(value);
   }
@@ -30,6 +28,14 @@ class App {
         resolve(input);
       });
     });
+  }
+
+  validateInput(input) {
+    if (input.length !== 3) return false;
+    if (new Set(input.split("")).size !== 3) return false;
+    if (isNaN(input)) return false;
+
+    return true;
   }
 }
 
