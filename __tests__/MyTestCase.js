@@ -53,15 +53,15 @@ describe("count_strike 테스트", () => {
         expect(result).toBeLessThanOrEqual(3);
     });
     test("스트라이크가 0인 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
-        expect(result).toEqual(1);
+        const result = count_strike([1,5,6],[0,7,8]);
+        expect(result).toEqual(0);
     });
     test("스트라이크가 1인 경우", () => {
         const result = count_strike([1,5,6],[0,5,8]);
         expect(result).toEqual(1);
     });
     test("스트라이크가 2인 경우", () => {
-        const result = count_strike([1,5,6],[0,5,6]);
+        const result = count_strike([1,5,6],[1,5,8]);
         expect(result).toEqual(2);
     });
     test("스트라이크가 3인 경우", () => {
@@ -69,15 +69,11 @@ describe("count_strike 테스트", () => {
         expect(result).toEqual(3);
     });
     test("스트라이크가 0이면서 ball이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
-        expect(result).toEqual(1);
+        const result = count_strike([1,6,5],[0,5,8]);
+        expect(result).toEqual(0);
     });
     test("스트라이크가 1이면서 ball이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
-        expect(result).toEqual(1);
-    });
-    test("스트라이크가 2이면서 ball이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
+        const result = count_strike([8,5,6],[0,5,8]);
         expect(result).toEqual(1);
     });
 })
