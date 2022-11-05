@@ -1,16 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
+  constructor() {
+    this.computerNumber = 1;
+  }
+
   play() {
-    const computerNumber = this.createComputerNumber();
-    MissionUtils.Console.print(computerNumber); //지우기
+    this.computerNumber = this.createComputerNumber();
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.readLine("숫자를 입력해주세요:", (userInput) => {
-      if (this.checkInputValidation(userInput)) {
-        this.compareInputWithAnswer(computerNumber, userInput);
-      } else {
-        MissionUtils.Console.close();
-      }
-    });
+    this.printInputMessage();
   }
 
   createComputerNumber() {
@@ -24,6 +21,16 @@ class App {
     return eachNumberArray.join("");
   }
 
+  printInputMessage() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요:", (userInput) => {
+      if (this.checkInputValidation(userInput)) {
+        this.compareInputWithAnswer(userInput);
+      } else {
+        MissionUtils.Console.close();
+      }
+    });
+  }
+
   checkInputValidation(userInput) {
     if (userInput.length < 3) return;
     else if (new Set(userInput).size !== 3) return;
@@ -31,16 +38,16 @@ class App {
     return true;
   }
 
-  compareInputWithAnswer(computerNumber, userInput) {
-    const strike = this.countStrike(computerNumber, userInput);
-    const ball = this.countBall(computerNumber, userInput);
+  compareInputWithAnswer(userInput) {
+    const strike = this.countStrike(userInput);
+    const ball = this.countBall(userInput);
     this.printResult(strike, ball);
   }
 
-  countStrike(computerNumber, userInput) {
+  countStrike(userInput) {
     let strike = 0;
-    for (let i = 0; i < computerNumber.length; i++) {
-      const userIndex = userInput.indexOf(computerNumber[i]);
+    for (let i = 0; i < this.computerNumber.length; i++) {
+      const userIndex = userInput.indexOf(this.computerNumber[i]);
       if (userIndex !== -1 && userIndex === i) {
         strike++;
       }
@@ -48,10 +55,10 @@ class App {
     return strike;
   }
 
-  countBall(computerNumber, userInput) {
+  countBall(userInput) {
     let ball = 0;
-    for (let i = 0; i < computerNumber.length; i++) {
-      const userIndex = userInput.indexOf(computerNumber[i]);
+    for (let i = 0; i < this.computerNumber.length; i++) {
+      const userIndex = userInput.indexOf(this.computerNumber[i]);
       if (userIndex !== -1 && userIndex !== i) {
         ball++;
       }
@@ -72,6 +79,7 @@ class App {
     if (ball !== 0 && strike !== 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
+    this.printInputMessage();
   }
 }
 const app = new App();
