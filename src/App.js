@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    // 컴퓨터 랜덤 숫자 생성
+    // 컴퓨터 랜덤 값 생성
     const computerNumber = RandomChoice();
     MissionUtils.Console.print(computerNumber);
     MissionUtils.Console.close();
@@ -10,7 +10,13 @@ class App {
 }
 
 const RandomChoice = () => {
-  const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const randomNumber = [];
+  while (randomNumber.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!randomNumber.includes(number)) {
+      randomNumber.push(number);
+    }
+  }
   return randomNumber;
 };
 
