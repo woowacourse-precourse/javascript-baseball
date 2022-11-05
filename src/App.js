@@ -15,6 +15,8 @@ class App {
     );
 
     const memo = this.count(this.computer, this.user);
+
+    this.printResultMessage(memo);
   }
 
   count(computer, user) {
@@ -29,6 +31,24 @@ class App {
     });
 
     return memo;
+  }
+
+  printResultMessage(memo) {
+    let resultMessage = "";
+
+    if (memo.ball !== 0) {
+      resultMessage += `${memo.ball}볼`;
+    }
+
+    if (memo.strike !== 0) {
+      resultMessage += ` ${memo.strike}스트라이크`;
+    }
+
+    if (!resultMessage) {
+      resultMessage = "낫싱";
+    }
+
+    this.print(resultMessage);
   }
 
   print(str) {
