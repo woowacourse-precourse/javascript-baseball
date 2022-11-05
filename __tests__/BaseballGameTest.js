@@ -20,6 +20,14 @@ const mockUserValue = (numbers) => {
   );
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange,
+  );
+};
+
 describe('숫자 야구 게임', () => {
   test('게임 시작 문구 출력', () => {
     const logSpy = getSpy(MissionUtils.Console, 'print');
@@ -68,5 +76,28 @@ describe('숫자 야구 게임', () => {
       expect(resultStrike).toEqual(strike[index]);
       expect(resultBall).toEqual(ball[index]);
     }
+  });
+
+  test('게임 재시작, 종료 기능', () => {
+    const randoms = [1, 9, 2, 4, 6, 1];
+    const userValue = ['129', '192', '1', '123', '461', '2'];
+    const logSpy = getSpy(MissionUtils.Console, 'print');
+    const result = [
+      '2볼 1스트라이크',
+      '3스트라이크',
+      '1볼',
+      '3스트라이크',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockUserValue(userValue);
+
+    const app = new App();
+    app.play();
+
+    result.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
