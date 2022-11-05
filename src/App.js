@@ -12,9 +12,10 @@ class App {
       const userNumber = await getUserNumber();
       checkValidityUserNumber(userNumber);
 
+      const checkResult = countBallAndStrike(computerNumber, userNumber);
 
     }
-    
+
   }
 }
 
@@ -80,6 +81,35 @@ function checkValidityUserNumber(userNumber) {
   }
 }
 
+// 기능 5
+function countBallAndStrike(computerNumber, userNumber) {
+  const computerNumberList = Array.from(computerNumber);
+  const userNumberList = Array.from(userNumber);
+
+  let ballOrStrike = 0;
+  let ball = 0;
+  let strike = 0;
+
+  for (let userNumber of userNumberList) {
+    if (computerNumberList.includes(userNumber)) {
+      ballOrStrike += 1;
+    }
+  }
+
+  if (ballOrStrike === 0) {
+    return "nothing";
+  }
+
+  for (let i = 0; i < 3; i++) {
+    if (computerNumberList[i] === userNumberList[i]) {
+      strike += 1;
+      continue;
+    }
+    ball += 1;
+  }
+
+  return [ball, strike];
+}
 
 
 
