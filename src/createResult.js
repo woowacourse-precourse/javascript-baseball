@@ -21,6 +21,7 @@ function getStrike(strike, inputNumber, answer) {
 }
 
 function createResult(inputNumber, answer) {
+  if (inputNumber === "") return "낫싱";
   const includeOfNum = {};
   inputNumber = String(inputNumber).split("");
   answer = String(answer).split("");

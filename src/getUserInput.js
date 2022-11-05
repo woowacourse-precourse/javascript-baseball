@@ -6,14 +6,15 @@ function getUserInput() {
   const playingInput = 0;
   let userInput = "";
   MissionUtils.Console.readLine(Message.INPUT, (input) => {
-    console.log(input);
+    MissionUtils.Console.print(input);
     if (!checkException(input, playingInput)) {
-      console.log(Message.ERROR);
+      MissionUtils.Console.print(Message.ERROR);
       throw Message.ERROR;
-      MissionUtils.Console.close();
     }
     userInput = input;
+    MissionUtils.Console.close();
   });
+
   return userInput;
 }
 
