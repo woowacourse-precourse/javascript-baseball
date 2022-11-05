@@ -12,7 +12,16 @@ class App {
 
   play() {
     MissionUtils.Console.print(this.GAME_START_MESSAGE);
+    this.init();
     this.getUserInputNumber();
+  }
+
+  init() {
+    this.userNumber = 0;
+    this.gameEndStatus = false;
+    this.gameOptionValue = 0;
+    this.computerNumberArray = App.generateComputerNumberArray();
+    this.isValidUserNumber = false;
   }
 
   compareNumber() {
