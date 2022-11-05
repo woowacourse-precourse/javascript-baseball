@@ -35,7 +35,7 @@ describe('기능 구현 목록 테스트', () => {
   test('시작 문구 출력', () => {
     const logSpy = getLogSpy();
 
-    game.start(MESSAGE.START);
+    game.init();
 
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
