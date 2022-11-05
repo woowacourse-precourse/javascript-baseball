@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -12,7 +12,7 @@ class App {
   }
 
   setInput(input) {
-    input = Array.from(input.split(""), (num) => parseInt(num));
+    input = Array.from(input.split(''), (num) => parseInt(num));
 
     if (this.isValidInput(input)) {
       this.input = input;
@@ -36,13 +36,13 @@ class App {
     this.resetHint();
 
     this.input.forEach((digitNumber, index) => {
-      if (this.answer[index] === digitNumber) this.hint["strike"] += 1;
+      if (this.answer[index] === digitNumber) this.hint['strike'] += 1;
       if (
         this.answer.includes(digitNumber) &&
         this.answer[index] !== digitNumber
       )
-        this.hint["ball"] += 1;
-      if (!this.answer.includes(digitNumber)) this.hint["nothing"] += 1;
+        this.hint['ball'] += 1;
+      if (!this.answer.includes(digitNumber)) this.hint['nothing'] += 1;
     });
 
     this.printHint();
@@ -64,29 +64,29 @@ class App {
   }
 
   isValidInput(input) {
-    if (input.includes(NaN)) throw "문자를 제외한 숫자만 입력하세요.";
-    if (input.includes(0)) throw "1~9 사이의 숫자만 입력하세요.";
-    if (input.length !== 3) throw "3개의 숫자만 입력하세요.";
+    if (input.includes(NaN)) throw '문자를 제외한 숫자만 입력하세요.';
+    if (input.includes(0)) throw '1~9 사이의 숫자만 입력하세요.';
+    if (input.length !== 3) throw '3개의 숫자만 입력하세요.';
     if (input.length !== new Set(input).size)
-      throw "서로 다른 숫자를 입력하세요.";
+      throw '서로 다른 숫자를 입력하세요.';
 
     return true;
   }
 
   receiveInputFromConsole() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.setInput(input);
     });
   }
 
   success() {
-    this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     this.receive1Or2FromConsole();
   }
 
   receive1Or2FromConsole() {
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (selectedNumByUser) => {
         this.selectReplayOrClose(selectedNumByUser);
       }
@@ -97,21 +97,21 @@ class App {
     if (selectedNum == 1) return this.setAnswerAndreceiveInput();
     if (selectedNum == 2) return this.close();
 
-    throw "1 또는 2만 입력해주세요.";
+    throw '1 또는 2만 입력해주세요.';
   }
 
   printHint() {
-    if (this.hint["strike"] === 3) {
-      this.print("3스트라이크");
+    if (this.hint['strike'] === 3) {
+      this.print('3스트라이크');
       return this.success();
     }
-    if (this.hint["nothing"] === 3) return this.print("낫싱");
-    if (this.hint["strike"] === 0) return this.print(`${this.hint["ball"]}볼`);
-    if (this.hint["ball"] === 0)
-      return this.print(`${this.hint["strike"]}스트라이크`);
+    if (this.hint['nothing'] === 3) return this.print('낫싱');
+    if (this.hint['strike'] === 0) return this.print(`${this.hint['ball']}볼`);
+    if (this.hint['ball'] === 0)
+      return this.print(`${this.hint['strike']}스트라이크`);
 
     return this.print(
-      `${this.hint["ball"]}볼 ${this.hint["strike"]}스트라이크`
+      `${this.hint['ball']}볼 ${this.hint['strike']}스트라이크`
     );
   }
 
@@ -121,7 +121,7 @@ class App {
   }
 
   play() {
-    this.print("숫자 야구 게임을 시작합니다.");
+    this.print('숫자 야구 게임을 시작합니다.');
     this.setAnswerAndreceiveInput();
   }
 }
