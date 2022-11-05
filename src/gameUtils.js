@@ -57,7 +57,7 @@ class Validator {
   }
 
   static isVaildRestartSubmit(value) {
-    if(![1, 2].includes(+value)) throw new Error(constants.MESSAGE.IS_INVALID_RESTART_SUBMIT);
+    if(![1, 2].includes(+value)) throw new Error(constants.ERROR_MESSAGE.IS_INVALID_RESTART_SUBMIT);
   }
 }
 
