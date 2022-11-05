@@ -40,14 +40,12 @@ class App {
   check(input) {
     if (input.length !== 3) throw new Error('3글자가 아닙니다');
 
-    const set = new Set();
     input.split('').forEach((character) => {
-      const number = parseInt(character);
-      if (isNaN(number)) throw new Error('숫자가 아닙니다');
-      if (number === 0) throw new Error('0이 포함되어 있습니다');
-      set.add(number);
+      if (isNaN(character)) throw new Error('숫자가 아닙니다');
+      if (character === '0') throw new Error('0이 포함되어 있습니다');
     });
 
+    const set = new Set(input);
     if (set.size !== 3) throw new Error('중복된 숫자입니다');
   }
 
@@ -56,8 +54,8 @@ class App {
   }
 
   calculateCount(randomArray, inputArray) {
-    let ball = 0,
-      strike = 0;
+    let ball = 0;
+    let strike = 0;
     for (let i = 0; i <= 2; i++) {
       if (randomArray[i] === inputArray[i]) {
         strike += 1;
