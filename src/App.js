@@ -11,8 +11,22 @@ function setAnswer() {
 function askNumInput() {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
     isValidInput(input);
-    printMsg(`입력하신 숫자는... ${input} 입니다.`);
   });
+}
+
+function isBallOrStrike(answer, input) {
+  var ballCount = 0;
+  var strikeCount = 0;
+
+  var answerSet = new Set(answer);
+  for (var idx in input) {
+    if (answer[idx] === input[idx]) {
+      strikeCount += 1;
+      continue;
+    }
+    if (answerSet.has(input[idx])) ballCount += 1;
+  }
+  return { ballCount, strikeCount };
 }
 
 function askRematchOrExit() {
@@ -61,7 +75,6 @@ class App {
   play() {
     printMsg("숫자 야구 게임을 시작합니다.");
     const ANSWER = setAnswer();
-
     askNumInput();
   }
 }
