@@ -3,12 +3,10 @@ const BaseballOutput = require("./Baseball/Baseball.output");
 const BaseballComputer = require("./Baseball/Baseball.computer");
 
 class App {
-  #baseballValidator = new BaseballValidator();
-  #baseballOutput = new BaseballOutput();
   #start() {
     const baseballComputer = new BaseballComputer(
-      this.#baseballOutput,
-      this.#baseballValidator
+      BaseballOutput,
+      BaseballValidator
     );
     let finished = false;
     while (!finished) {
@@ -21,7 +19,7 @@ class App {
     }
   }
   play() {
-    this.#baseballOutput.start();
+    BaseballOutput.start();
     this.#start();
   }
 }

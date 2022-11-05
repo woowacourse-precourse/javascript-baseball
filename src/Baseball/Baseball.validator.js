@@ -1,7 +1,7 @@
 const BaseballDto = require("./Baseball.dto");
 
 class BaseballValidator {
-  checkNumericNumbers(numbers) {
+  static checkNumericNumbers(numbers) {
     const nonNuemrics = Array.from(numbers).filter(
       (number) => "1" > number && number > "9"
     );
@@ -9,7 +9,7 @@ class BaseballValidator {
       throw new Error("숫자가 아닌 값이 있습니다.");
     }
   }
-  checkNumbersLength(numbers) {
+  static checkNumbersLength(numbers) {
     if (numbers === undefined) {
       throw new Error("알 수 없는 입력값입니다");
     }
@@ -17,7 +17,7 @@ class BaseballValidator {
       throw new Error("글자가 3개가 아닙니다.");
     }
   }
-  checkOtherNumbers(numbers) {
+  static checkOtherNumbers(numbers) {
     const removedDuplicateNumbers = Array.from(new Set(...numbers));
     if (
       removedDuplicateNumbers.length === numbers.length &&
@@ -26,7 +26,7 @@ class BaseballValidator {
       throw new Error("잘못된 입력값입니다.");
     }
   }
-  checkBallState(computerNumbers, userNumbers) {
+  static checkBallState(computerNumbers, userNumbers) {
     const baseballDto = new BaseballDto();
     Array.from(userNumbers).forEach((userNumber, index) => {
       if (this.#isStrike(computerNumbers[index], userNumber)) {
@@ -38,10 +38,10 @@ class BaseballValidator {
     });
     return baseballDto;
   }
-  #isStrike(computerNumber, userNumber) {
+  static #isStrike(computerNumber, userNumber) {
     return computerNumber === +userNumber;
   }
-  #isBall(computerNumbers, userNumber, userNumberIndex) {
+  static #isBall(computerNumbers, userNumber, userNumberIndex) {
     let isBall = false;
     computerNumbers.forEach((computerNumber, index) => {
       if (
@@ -53,10 +53,10 @@ class BaseballValidator {
     });
     return isBall;
   }
-  isFinish(baseballDto) {
+  static isFinish(baseballDto) {
     return baseballDto.strike === 3;
   }
-  checkRestartValue(restartValue) {
+  static checkRestartValue(restartValue) {
     if (!(+restartValue === 1 || +restartValue === 2)) {
       throw new Error("잘못된 입력값입니다");
     }
