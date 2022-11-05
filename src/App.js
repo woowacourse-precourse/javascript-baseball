@@ -7,7 +7,10 @@ class App {
   constructor() {
     this.iterator = this.iterator.bind(this);
     this.play = this.play.bind(this);
-    this.computer = getRandomThreeNumber();
+    this.computer;
+  }
+  computerNumber() {
+    return getRandomThreeNumber();
   }
   askRestart() {
     Console.readLine("다시 시작 1 종료 2 :  ", (res) => {
@@ -29,6 +32,7 @@ class App {
     });
   }
   play() {
+    this.computer = this.computerNumber();
     this.iterator();
   }
 }
