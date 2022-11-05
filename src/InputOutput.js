@@ -14,10 +14,37 @@ async function getInputValue(question) {
   let inputValue = await new Promise((resolve) => {
     Console.readLine(question, (answer) => resolve(answer));
   });
-  if (!inputValue) throw new Error("입력한 값이 없습니다.");
+  if (!inputValue) {
+    throw new Error("입력한 값이 없습니다.");
+  }
 
   Console.close();
   return inputValue;
 }
 
+/**
+ * @typedef {{ball :number, strike:number, nothing:boolean}} numberCheckResult
+ */
+/**
+ * 문자열 혹은 숫자확인 결과 객체를 받아 출력해주는 함수.
+ * @param {string | numberCheckResult} content 문자열 혹은 숫자확인 결과 객체
+ */
+function print(content) {
+  if (!(content || JSON.stringify(content) == {} || content.length == 0)) {
+    throw Error("출력할 값이 없습니다");
+  }
+  if (!(typeof content === "string" || typeof content === "object"))
+    throw Error("string 혹은 object 값만 출력가능합니다");
+  if (typeof content === "string") {
+    return Console.print(content);
+  }
+
+  const { ball = 0, strike = 0, nothing = false } = content;
+
+  if (nothing) return Console.print("낫싱");
+
+  return Console.print(
+    `${ball ? `${ball}볼 ` : ""}${strike ? `${strike}스트라이크` : ""}`
+  );
+}
 module.exports = { getInputValue, print };
