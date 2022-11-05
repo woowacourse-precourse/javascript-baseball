@@ -22,7 +22,7 @@ const GAME_SENTENCE = {
 const ERROR = {
   LENGTH: `${ANSWER.LENGTH}개로 입력해주세요.`,
   NAN: '숫자만 입력해주세요.',
-  INVALID: `${ANSWER.MIN} ~ ${ANSWER.MAX}사이의 숫자만 입력해주세요.`,
+  RANGE: `${ANSWER.MIN} ~ ${ANSWER.MAX}사이의 숫자만 입력해주세요.`,
   DUPLICATION: '중복된 숫자는 입력할 수 없습니다.',
 };
 
