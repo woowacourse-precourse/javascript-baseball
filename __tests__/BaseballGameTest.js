@@ -57,4 +57,15 @@ describe("숫자 야구 게임", () => {
       expect(result).toBe(expectedResults[index]);
     });
   });
+
+  test("유효한 커맨드인지 확인", () => {
+    const inputs = ["1", "2", "3", "."];
+    const expectedResults = [true, true, false, false];
+    const app = new App();
+
+    inputs.forEach((input, index) => {
+      result = app.isValidCommand(input);
+      expect(result).toBe(expectedResults[index]);
+    });
+  });
 });
