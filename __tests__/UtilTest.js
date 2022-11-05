@@ -66,7 +66,7 @@ describe("유틸 함수 체크", () => {
     // when
     const result2 = replyCheckAnswer(input2, answer2);
     // then
-    expect(result2).toEqual({ strike: 3 });
+    expect(result2).toEqual({ ball: 0, strike: 3 });
   });
 
   test("makeReplyToReply", () => {
