@@ -69,6 +69,15 @@ class App {
         restart();
       } else input();
     };
+
+    // (게임 재시작시) 게임플레이어의 값이 잘못된 값인지 확인하는 유효성 검사 기능
+    const check_restart = (str) => {
+      if (str === "1") {
+        make_Random();
+        input();
+      } else if (str === "2") Console.close();
+      else throw new Error();
+    };
   }
 }
 
