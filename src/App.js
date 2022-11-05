@@ -25,7 +25,7 @@ class App {
     computer.forEach((computerNumber, index) => {
       if (computerNumber === user[index]) {
         memo.strike += 1;
-      } else if (user.includes(computerNumber, index)) {
+      } else if (user.includes(computerNumber, index + 1)) {
         memo.ball += 1;
       }
     });
