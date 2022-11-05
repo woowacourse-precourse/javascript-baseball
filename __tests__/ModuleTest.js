@@ -21,3 +21,21 @@ describe('1과 2가 아니라면 에러 발생', () => {
     expect(() => isValidRestartInputValue('@')).toThrow();
   });
 });
+
+describe('1~9에 속한 세자리 숫자가 아니라면 에러 발생', () => {
+  test('case1', () => {
+    expect(() => isValidRangeNumber('asd')).toThrow();
+  });
+
+  test('case2', () => {
+    expect(() => isValidRangeNumber('1234')).toThrow();
+  });
+
+  test('case3', () => {
+    expect(() => isValidRangeNumber('12')).toThrow();
+  });
+
+  test('case4', () => {
+    expect(() => isValidRangeNumber('12#')).toThrow();
+  });
+});
