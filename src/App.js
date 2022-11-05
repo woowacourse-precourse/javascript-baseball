@@ -40,13 +40,12 @@ class App {
       ballNum: this.countBalls(userInputNum),
       strikeNum: this.countStrikes(userInputNum),
     };
-    if (!result.strikeNum && !result.ballNum) {
-      Console.print('낫싱');
-    } else if (!result.strikeNum) {
-      Console.print(result.ballNum + '볼');
-    } else if (!result.ballNum) {
-      Console.print(result.strikeNum + '스트라이크');
-    } else {
+    if (!result.strikeNum && !result.ballNum) Console.print('낫싱');
+    if (!result.strikeNum && result.ballNum)
+      Console.print(`${result.ballNum} 볼`);
+    if (!result.ballNum && result.strikeNum)
+      Console.print(`${result.strikeNum} 스트라이크`);
+    if (result.ballNum && result.strikeNum) {
       Console.print(`${result.ballNum}볼 ${result.strikeNum}스트라이크`);
     }
     return result.strikeNum === 3 ? this.gameEnd() : this.userInputProcess();
@@ -80,7 +79,6 @@ class App {
   }
 
   gameEndvalidation(endNumber) {
-    Console.print(endNumber);
     switch (endNumber) {
       case '1': {
         this.playProcess();
