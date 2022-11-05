@@ -4,7 +4,10 @@ const playGame = require("./playGame");
 class App {
   play() {
     const answer = getAnswer();
-    const inputNum = playGame();
+    let playing = true;
+    while (playing) {
+      playing = playGame(answer);
+    }
   }
 }
 

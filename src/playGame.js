@@ -1,8 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const checkException = require("./checkException");
 const Message = require("./message/message");
+const createResult = require("././createResult");
 
-function playGame() {
+function playGame(answer) {
   MissionUtils.Console.readLine(
     `${Message.START}\n${Message.INPUT}`,
     (input) => {
@@ -13,8 +14,7 @@ function playGame() {
       }
     }
   );
+  return createResult(input, answer);
 }
-
-playGame();
 
 module.exports = playGame;
