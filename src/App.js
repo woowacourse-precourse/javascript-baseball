@@ -5,10 +5,22 @@ function makeComputerRandNums() {
   return randNumsArr;
 }
 
+function isValidInput(input) {
+  console.log(input);
+}
+
+function getUserInput() {
+  let userInput;
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    isValidInput(input)
+  })
+  return userInput;
+}
+
 function playGame() {
   while (true) {
     const computerRandNumsArr = makeComputerRandNums();
-    console.log(computerRandNumsArr);
+    getUserInput();
     break;
   }
 }
