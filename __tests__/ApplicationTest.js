@@ -72,6 +72,29 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("첫 게임 시작 후 안내문구와 힌트값이 잘 출력되는지 확인", () => {
+    const randoms = [4, 5, 9];
+    const answers = ["468", "287", "459"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "숫자 야구 게임을 시작합니다.",
+      "1스트라이크",
+      "낫싱",
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트: 입력값의 길이가 3이 아닌 경우", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
