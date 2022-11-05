@@ -4,6 +4,8 @@
 
 #### 입력
 
+- [ ] API - Console을 이용한 사용자 숫자 입력받는 `userInput` 함수 만들기
+
 - [ ] 서로 다른 3자리 숫자를 입력하는지 확인하는 `checkUserInput` 함수 만들기
 
 - [ ] 게임이 끝난 경우 종료/재시작을 구분하는 `continueOrEnd` 함수 만들기
