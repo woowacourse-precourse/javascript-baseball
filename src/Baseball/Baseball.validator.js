@@ -2,7 +2,9 @@ const BaseballDto = require("./Baseball.dto");
 
 class BaseballValidator {
   checkNumericNumbers(numbers) {
-    nonNuemrics = numbers.filter((number) => "1" > number && number > "9");
+    const nonNuemrics = Array.from(numbers).filter(
+      (number) => "1" > number && number > "9"
+    );
     if (nonNuemrics > 0) {
       throw new Error("숫자가 아닌 값이 있습니다.");
     }
@@ -27,7 +29,7 @@ class BaseballValidator {
   checkBallState(computerNumbers, userNumbers) {
     const baseballDto = new BaseballDto();
     Array.from(userNumbers).forEach((userNumber, index) => {
-      if (isStirke(computerNumbers[index], userNumber)) {
+      if (this.isStrike(computerNumbers[index], userNumber)) {
         baseballDto.addStrikeOne();
       }
       if (this.isBall(computerNumbers, userNumber, index)) {
@@ -40,7 +42,7 @@ class BaseballValidator {
     return computerNumber === userNumber;
   }
   isBall(computerNumbers, userNumber, userNumberIndex) {
-    computerNumbers.foreEach((computerNumber, index) => {
+    Array.from(computerNumbers).forEach((computerNumber, index) => {
       if (
         !(
           this.isStrike(computerNumber, userNumber) && userNumberIndex === index
