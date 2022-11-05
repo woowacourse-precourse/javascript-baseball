@@ -47,6 +47,54 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 종료 후 재시작", () => {
+    const randoms = [2, 5, 3, 9, 8, 6, 1, 4, 5, 2, 4, 5];
+    const answers = [
+      "134",
+      "321",
+      "325",
+      "253",
+      "1",
+      "984",
+      "986",
+      "1",
+      "182",
+      "147",
+      "145",
+      "1",
+      "259",
+      "254",
+      "245",
+      "2",
+    ];
+    const logSpy = getLogSpy();
+    const messages = [
+      "1볼",
+      "2볼",
+      "3볼",
+      "3스트라이크",
+      "2스트라이크",
+      "3스트라이크",
+      "1스트라이크",
+      "2스트라이크",
+      "3스트라이크",
+      "1볼 1스트라이크",
+      "2볼 1스트라이크",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
