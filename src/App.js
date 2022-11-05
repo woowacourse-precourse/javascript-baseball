@@ -38,10 +38,10 @@ class App {
   count(computer, user) {
     const memo = { ball: 0, strike: 0 };
 
-    computer.forEach((computerNumber, index) => {
-      if (computerNumber === user[index]) {
+    user.forEach((userNumber, index) => {
+      if (userNumber === computer[index]) {
         memo.strike += 1;
-      } else if (user.includes(computerNumber, index + 1)) {
+      } else if (computer.includes(userNumber, index + 1)) {
         memo.ball += 1;
       }
     });
