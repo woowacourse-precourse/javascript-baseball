@@ -1,13 +1,10 @@
-const {
-  App,
-  refNumbersGetter,
-  stringToArrConverter,
-  discriminator,
-} = require("../src/App");
+const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const app = new App();
+
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(console, "log");
   logSpy.mockClear();
   return logSpy;
 };
@@ -26,12 +23,12 @@ describe("숫자 야구 게임 시작 문구", () => {
 
 describe("목표값 테스트", () => {
   test("목표값 개수", () => {
-    const refNumbersArr = refNumbersGetter();
+    const refNumbersArr = app.refNumbersGetter();
     expect(refNumbersArr.length).toEqual(3);
   });
 
   test("목표값 내 중복 확인", () => {
-    const refNumbersArr = refNumbersGetter();
+    const refNumbersArr = app.refNumbersGetter();
 
     let duplicateChecker;
     refNumbersArr.map((number, index) => {
@@ -42,7 +39,7 @@ describe("목표값 테스트", () => {
   });
 
   test("목표값 숫자 범위 1~9 확인", () => {
-    const refNumbersArr = refNumbersGetter();
+    const refNumbersArr = app.refNumbersGetter();
 
     let rangeChecker;
     refNumbersArr.map((number, index) => {
@@ -58,7 +55,7 @@ describe("목표값 테스트", () => {
 describe("입력값 테스트", () => {
   test("입력값 배열화", () => {
     const userInput = "123";
-    expect(stringToArrConverter(userInput)).toEqual([1, 2, 3]);
+    expect(app.stringToArrConverter(userInput)).toEqual([1, 2, 3]);
   });
 });
 
@@ -77,7 +74,7 @@ describe("판정 테스트", () => {
     ];
 
     discriminateExamples.map((example) => {
-      expect(discriminator(example[0], example[1])).toEqual(example[2]);
+      expect(app.discriminator(example[0], example[1])).toEqual(example[2]);
     });
   });
 });
