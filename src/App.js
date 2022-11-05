@@ -41,6 +41,43 @@ class App {
     }
   }
 
+  getExpectedAnswer() {
+    Console.readLine('숫자를 입력해주세요 : ', (expectedAnswer) => {
+      try {
+        this.handleUserInputException(expectedAnswer);
+        const userInput = expectedAnswer.split('').map(Number);
+        this.checkAnswer(userInput);
+      } catch (e) {
+        throw e;
+        // Console.print(e.message);
+      }
+    });
+  }
+
+  getRestart() {
+    console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', (isRestart) => {
+      if (isRestart === '1') {
+        this.play();
+      } else if (isRestart === '2') {
+        Console.print('게임 종료');
+        Console.close();
+      } else {
+        throw new Error('1 또는 2 중에 선택해주세요');
+      }
+    });
+  }
+
+  getUserInput(inputType) {
+    if (inputType === 'getExpectedAnswer') {
+      this.getExpectedAnswer();
+    }
+
+    if (inputType === 'getRestart') {
+      this.getRestart();
+    }
+  }
+
   getStrike(userInput) {
     let strike = 0;
 
@@ -80,20 +117,6 @@ class App {
     }
   }
 
-  getRestart() {
-    console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    Console.readLine('', (isRestart) => {
-      if (isRestart === '1') {
-        this.play();
-      } else if (isRestart === '2') {
-        Console.print('게임 종료');
-        Console.close();
-      } else {
-        throw new Error('1 또는 2 중에 선택해주세요');
-      }
-    });
-  }
-
   checkAnswer(userInput) {
     let matchCnt = 0;
 
@@ -106,27 +129,20 @@ class App {
     this.printHint(userInput);
     if (matchCnt === 3) {
       console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.getRestart();
+      this.getUserInput('getRestart');
     } else {
-      this.getUserInput();
+      this.getUserInput('getExpectedAnswer');
     }
-  }
-
-  getUserInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (expectedAnswer) => {
-      try {
-        this.handleUserInputException(expectedAnswer);
-        const userInput = expectedAnswer.split('').map(Number);
-        this.checkAnswer(userInput);
-      } catch (e) {
-        Console.print(e.message);
-      }
-    });
   }
 
   play() {
     this.init();
-    this.getUserInput();
+    try {
+      this.getUserInput('getExpectedAnswer');
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   }
 }
 
