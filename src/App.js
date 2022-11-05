@@ -1,24 +1,22 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GameUtils = require("./gameUtils.js");
-const print = require("./print.js");
+const GameUtils = require("./GameUtils.js");
+const Print = require("./Print.js");
 const constants = require("./data/constants.js");
 
 class App {
   play() {
     this.answer = GameUtils.System.answer;
     console.log(this.answer);
-    print.start();
+    Print.GameMessage.start();
     this.submitInput();
   }
   submitInput() {
-    let userInput;
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.INPUT, (input) => {
       const noSpaceInput = input.replace(/\s/g,'');
       const userInput = noSpaceInput.split('').map(number => +number);
-      console.log(userInput);
       GameUtils.Validator.isVaildAnswer(userInput);
       const result = GameUtils.System.getResult(userInput, this.answer);
-      print.result(result);
+      Print.GameMessage.result(result);
       this.isClear(result.strike);
     });
   }
@@ -35,7 +33,7 @@ class App {
   isRestart(submit) {    
     if(+submit === 1) this.play();
     if(+submit === 2) {
-      print.gameover();
+      Print.GameMessage.gameover();
       MissionUtils.Console.close();
     }
   }
