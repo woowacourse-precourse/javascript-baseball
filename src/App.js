@@ -3,7 +3,6 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 const RANDOMLIST = Object.freeze({
   STARTPOINT: 1,
   ENDPOINT: 9,
-  COUNT: 3,
 });
 
 const BASEBALL = Object.freeze({
@@ -32,7 +31,7 @@ class App {
     const result = [];
 
     while (result.length !== 3) {
-      const randomNum = Random.pickNumberInRange(1, 9);
+      const randomNum = Random.pickNumberInRange(RANDOMLIST.STARTPOINT, RANDOMLIST.ENDPOINT);
       !result.includes(randomNum) && result.push(randomNum);
     }
 
