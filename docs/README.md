@@ -9,6 +9,9 @@
 ## 입력
 - userInput
 
+## 입력값 확인
+- checkUserInputValue : 정규표현식을 사용한 userInput값 확인후 배열로 변환후 반환
+
 ## 컴퓨터 난수 생성 
 - computerRandomNumber
 
