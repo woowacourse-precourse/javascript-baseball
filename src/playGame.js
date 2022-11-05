@@ -3,6 +3,7 @@ const Message = require("./message/message");
 const createResult = require("././createResult");
 const getUserInput = require("././getUserInput");
 const checkException = require("././checkException");
+const $utils = MissionUtils.Console;
 
 const restartGame = () => {
   const restartInput = 1;
@@ -10,13 +11,13 @@ const restartGame = () => {
   const EXIT = false;
   let result = "";
 
-  MissionUtils.Console.readLine("", (input) => {
-    MissionUtils.Console.print(input);
+  $utils.readLine("", (input) => {
+    $utils.print(input);
     if (!checkException(input, restartInput)) {
-      MissionUtils.Console.print(Message.ERROR);
+      $utils.print(Message.ERROR);
       throw Message.ERROR;
     }
-    MissionUtils.Console.close();
+    $utils.close();
     result = input;
   });
   if (result === "1") {
@@ -32,9 +33,9 @@ const playGame = (answer) => {
   while (repeat) {
     const userInput = getUserInput();
     const result = createResult(userInput, answer);
-    MissionUtils.Console.print(result);
+    $utils.print(result);
     if (result === Message.CORRECT) {
-      MissionUtils.Console.print(Message.FINISH);
+      $utils.print(Message.FINISH);
       restart = restartGame();
       repeat = false;
     }

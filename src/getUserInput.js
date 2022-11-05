@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Message = require("./message/message");
-const $utils = MissionUtils.Console;
 const checkException = require("./checkException");
+const $utils = MissionUtils.Console;
 
 const getUserInput = () => {
   const playingInput = 0;
