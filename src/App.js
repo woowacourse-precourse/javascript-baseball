@@ -4,14 +4,17 @@ class App {
   constructor() {
     this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
   }
-
   play() {
     MissionUtils.Console.print(this.GAME_START_MESSAGE);
-    this.init();
-    this.getUserInputNumber();
+    App.startGame();
   }
 
-  init() {
+  static startGame() {
+    App.init();
+    App.getUserInputNumber();
+  }
+
+  static init() {
     this.userNumber = 0;
     this.gameEndStatus = false;
     this.gameOptionValue = 0;
@@ -19,8 +22,8 @@ class App {
     this.isValidUserNumber = false;
   }
 
-  compareNumber() {
-    const userNumberArray = this.convertUserNumberToArray().map((number) => +number);
+  static compareNumber() {
+    const userNumberArray = App.convertUserNumberToArray().map((number) => +number);
     let strikeCount = 0;
     let ballCount = 0;
 
@@ -30,41 +33,41 @@ class App {
         else ballCount += 1;
       }
     });
-    this.printResult(strikeCount, ballCount);
+    App.printResult(strikeCount, ballCount);
   }
 
-  getUserGameOptionValue() {
+  static getUserGameOptionValue() {
     return MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.gameOptionValue = input;
-      this.validateUserGameOptionValueInput();
+      App.validateUserGameOptionValueInput();
     });
   }
 
-  runByGameOptionValue() {
+  static runByGameOptionValue() {
     if (+this.gameOptionValue === 2) MissionUtils.Console.close();
-    if (+this.gameOptionValue === 1) this.play();
+    if (+this.gameOptionValue === 1) App.startGame();
   }
 
-  validateUserGameOptionValueInput() {
+  static validateUserGameOptionValueInput() {
     if (+this.gameOptionValue !== 1 && +this.gameOptionValue !== 2) throw new Error("1,2 만 입력해주세요");
-    else this.runByGameOptionValue();
+    else App.runByGameOptionValue();
   }
 
-  validateUserInput(userNumber) {
+  static validateUserInput(userNumber) {
     if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
     if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
-    if (new Set([...this.convertUserNumberToArray()]).size !== 3) throw new Error("중복되지 않은 숫자 3자리를 입력해주세요");
+    if (new Set([...App.convertUserNumberToArray()]).size !== 3) throw new Error("중복되지 않은 숫자 3자리를 입력해주세요");
     if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error("소수점과 마이너스는 허용되지않습니다.");
     else this.isValidUserNumber = true;
-    if (this.isValidUserNumber === true) this.compareNumber();
+    if (this.isValidUserNumber === true) App.compareNumber();
   }
 
-  printResult(strikeCount, ballCount) {
+  static printResult(strikeCount, ballCount) {
     if (strikeCount === 3) {
       MissionUtils.Console.print(`${strikeCount}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
       this.gameEndStatus = true;
-      this.getUserGameOptionValue();
+      App.getUserGameOptionValue();
     }
     if (strikeCount > 0 && ballCount > 0) MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크 `);
     if (strikeCount > 0 && ballCount === 0) MissionUtils.Console.print(`${strikeCount}스트라이크`);
@@ -73,15 +76,15 @@ class App {
     if (this.gameEndStatus === false) this.getUserInputNumber();
   }
 
-  convertUserNumberToArray() {
+  static convertUserNumberToArray() {
     return this.userNumber.toString().split("");
   }
 
-  getUserInputNumber() {
+  static getUserInputNumber() {
     return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.userNumber = input;
-      this.validateUserInput(this.userNumber);
+      App.validateUserInput(this.userNumber);
     });
   }
 
@@ -98,3 +101,5 @@ class App {
 module.exports = App;
 
 const app = new App();
+
+console.log(app.play());
