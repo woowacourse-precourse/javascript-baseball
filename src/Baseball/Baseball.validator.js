@@ -39,7 +39,7 @@ class BaseballValidator {
     return baseballDto;
   }
   isStrike(computerNumber, userNumber) {
-    return computerNumber === userNumber;
+    return computerNumber === +userNumber;
   }
   isBall(computerNumbers, userNumber, userNumberIndex) {
     computerNumbers.forEach((computerNumber, index) => {
