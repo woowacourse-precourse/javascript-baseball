@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   #userInput;
   #answer;
+  #correct = false;
   #finish = false;
 
   startMessage() {
@@ -84,13 +85,13 @@ class App {
 
   correctMessage() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    this.#finish = true;
+    this.#correct = true;
   }
 
   game() {
     this.startMessage();
     this.pickNumber();
-    while (!this.#finish) {
+    while (!this.#correct) {
       this.getUserInput();
       if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
       this.compareInputAnswer(this.#answer, this.#userInput);
@@ -102,6 +103,10 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => this.checkRestartInput(input)
     );
+  }
+
+  checkRestartInput(input) {
+    if (!["1", "2"].includes(input)) throw "잘못된 입력값입니다.";
   }
 
   play() {
