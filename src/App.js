@@ -3,15 +3,18 @@ const Constants = require('./constant');
 
 class App {
   async play() {
-    printGameStartMsg();
+    printMessage(Constants.START_MESSAGE);
     const computerNumber = createComputerNumber();
     const userNumber = await inputNumber();
     userNumberException(userNumber);
+    const strike = countStrike(computerNumber, userNumber);
+    const ball = countBall(computerNumber, userNumber);
+    printResult(ball, strike);
   }
 }
 
-function printGameStartMsg() {
-  MissionUtils.Console.print(Constants.START_MESSAGE);
+function printMessage(message) {
+  MissionUtils.Console.print(message);
 }
 
 function createComputerNumber() {
