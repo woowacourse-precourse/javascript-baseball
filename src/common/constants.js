@@ -1,5 +1,5 @@
 const MAX_LENGTH = 3;
-const START_NUM = 1;
+const BEGIN_NUM = 1;
 const END_NUM = 9;
 
 const GAME_RESULT = {
@@ -10,7 +10,7 @@ const GAME_RESULT = {
 
 module.exports = {
   MAX_LENGTH,
-  START_NUM,
+  BEGIN_NUM,
   END_NUM,
   GAME_RESULT,
 };
