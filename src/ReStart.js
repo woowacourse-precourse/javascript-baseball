@@ -6,7 +6,8 @@ class ReStart {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
         this.checkReStartInput(userInput);
-        MissionUtils.Console.close();
+
+        this.deciedReStart(userInput);
       }
     );
   }
@@ -17,6 +18,16 @@ class ReStart {
     }
 
     throw new Error("잘못된 입력입니다. 게임을 종료합니다.");
+  }
+
+  deciedReStart(userInput) {
+    if (userInput === "1") {
+      this.play();
+    }
+
+    if (userInput === "2") {
+      MissionUtils.Console.close();
+    }
   }
 }
 
