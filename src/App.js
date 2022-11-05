@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+
 class User {
   constructor() {
     this.userNumberArray = [];
@@ -23,10 +24,25 @@ class User {
   }
 }
 
+class Computer {
+  constructor() {
+    this.computerNumberArray = [];
+  }
+  setRandomComputerNumberArray() {
+    this.computerNumberArray = [];
+    while (this.computerNumberArray.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computerNumberArray.includes(number)) {
+        this.computerNumberArray.push(number);
+      }
+    }
+  }
+}
+
 class App {
   constructor() {
     this.answerMap = new Map();
-    this.computerNumberArray = [];
+    this.computer = new Computer();
     this.user = new User();
   }
 
@@ -38,19 +54,9 @@ class App {
     this.answerMap = map;
   }
 
-  resetComputerNumberArray() {
-    this.computerNumberArray = [];
-    while (this.computerNumberArray.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computerNumberArray.includes(number)) {
-        this.computerNumberArray.push(number);
-      }
-    }
-  }
-
   compareUserAndComputerNumber() {
     this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
-      const index = this.computerNumberArray.indexOf(userNumber);
+      const index = this.computer.computerNumberArray.indexOf(userNumber);
       if (index === userNumberArrayIndex) {
         this.answerMap.set('strike', this.answerMap.get('strike') + 1);
       } else if (index >= 0) {
@@ -95,7 +101,7 @@ class App {
   }
 
   async startApp(start) {
-    if (start === 'restart') this.resetComputerNumberArray();
+    if (start === 'restart') this.computer.setRandomComputerNumberArray();
     this.initAnswerMap();
     try {
       await this.user.getUserNumberFromInput();
@@ -107,7 +113,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('play');
-    this.resetComputerNumberArray();
+    this.computer.setRandomComputerNumberArray();
     this.startApp();
   }
 }
