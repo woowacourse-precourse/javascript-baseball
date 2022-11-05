@@ -34,7 +34,7 @@ class BaseballComputer {
   }
   restart() {
     const restartValue = this.baseballOutput.restart();
-    return checkRestartValue(restartValue);
+    return this.baseballValidator.checkRestartValue(restartValue) === 1;
   }
 }
 

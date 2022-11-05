@@ -1,4 +1,3 @@
-const BaseballDto = require("./Baseball/Baseball.dto");
 const BaseballValidator = require("./Baseball/Baseball.validator");
 const BaseballOutput = require("./Baseball/Baseball.output");
 const BaseballComputer = require("./Baseball/Baseball.computer");
@@ -16,6 +15,9 @@ class App {
       const userNumbers = baseballComputer.getUserNumbers();
       const baseballDto = baseballComputer.getBallState(userNumbers);
       Finished = baseballComputer.isFinish(baseballDto);
+    }
+    if (baseballComputer.restart()) {
+      this.play();
     }
   }
 }
