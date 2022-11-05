@@ -5,7 +5,9 @@ class App {
   constructor() {
     this._inputView = new InputView((command) => {
       console.log(command);
-      this._next(GameState.ING);
+      if (command === "win") this._next(GameState.WIN);
+      else if (command === "end") this._next(GameState.END);
+      else this._next(GameState.ING);
     });
   }
   _next(isEnd) {
