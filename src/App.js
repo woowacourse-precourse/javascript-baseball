@@ -24,11 +24,10 @@ class App {
 
   play_number_baseball_game() {
     this.answer = this.computer_random_number();
-    // console.log(this.answer);
     this.receive_input();
   }
 
-  check_continue(input, answer) {
+  check_continue(input) {
     const compare_result = this.compare_and_give_hint(input, this.answer);
     MissionUtils.Console.print(compare_result);
     if (compare_result != '3스트라이크') {
@@ -36,7 +35,6 @@ class App {
     } else {
       MissionUtils.Console.print("'3개의 숫자를 모두 맞히셨습니다! 게임 종료'");
       this.receive_restart_input();
-      // MissionUtils.Console.close();
     }
   }
 
@@ -46,7 +44,7 @@ class App {
       if (!validation) {
         throw '잘못된 형식입니다';
       }
-      this.check_continue(input_num, this.answer);
+      this.check_continue(input_num);
     });
   }
 
