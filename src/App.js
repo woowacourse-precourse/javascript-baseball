@@ -33,6 +33,12 @@ function gameStart(number, randomNumber) {
     inputValidation(numberSplit);
     const [strikeCount, ballCount] = strikeBallCount(numberSplit, randomNumber);
     resultPrint(strikeCount, ballCount);
+    if (strikeCount !== 3) {
+        userInputNumber(randomNumber);
+    } else {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", wantNewstart);
+    }
 }
 
 function inputValidation(number) {
