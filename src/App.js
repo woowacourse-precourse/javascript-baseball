@@ -22,18 +22,20 @@ class App {
 
 	createNewGame() {
 		const computerNumbers = getUniqueNumbersInRange(1, 9, this.NUMBER_LENGTH);
-		this.runTurn(computerNumbers);
+		this.runGame(computerNumbers);
 	}
 
-	runTurn(computerNumbers) {
-		Console.readLine('숫자를 입력해주세요 : ', (input) => {
-			this.checkTurnInputIsValid(input);
-			const userNumbers = input.split('');
-			const ball = countBall(userNumbers, computerNumbers);
-			const strike = countStrike(userNumbers, computerNumbers);
-			printBallCount(ball, strike);
-			return strike === this.NUMBER_LENGTH ? this.quitGame() : this.runTurn(computerNumbers);
-		});
+	runGame(computerNumbers) {
+		Console.readLine('숫자를 입력해주세요 : ', (input) => this.runTurn(computerNumbers, input));
+	}
+
+	runTurn(computerNumbers, input) {
+		this.checkTurnInputIsValid(input);
+		const userNumbers = input.split('');
+		const ball = countBall(userNumbers, computerNumbers);
+		const strike = countStrike(userNumbers, computerNumbers);
+		printBallCount(ball, strike);
+		return strike === this.NUMBER_LENGTH ? this.quitGame() : this.runGame(computerNumbers);
 	}
 
 	quitGame() {
