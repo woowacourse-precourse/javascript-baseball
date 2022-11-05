@@ -33,10 +33,25 @@ class App {
     }
     return number;
   }
+  baseballCheck(){
+    const COMPUTER_NUMBERS = this.cpuNum.split("");
+    const USER_PREDICT_NUMBERS = this.predictNum.split("");
+    let strike = 0, ball = 0;
+    for(let sequenceNumber=0;sequenceNumber<3;sequenceNumber++){
+      if(COMPUTER_NUMBERS[sequenceNumber] === USER_PREDICT_NUMBERS[sequenceNumber]){
+        strike+=1;
+      }else if(COMPUTER_NUMBERS.includes(USER_PREDICT_NUMBERS[sequenceNumber])){
+        ball+=1;
+      }
+    }
+    return [strike, ball];
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.makeRandomNumber();
     this.receivePredictNum();
+    this.baseballCheck();
   }
 }
 const app = new App();
