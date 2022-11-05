@@ -1,12 +1,14 @@
-const { MAX_NUMBER_LENGTH } = require("./condition.js");
+const { MAX_NUMBER_LENGTH, RESTART_TRIGGER_NUMBER, END_TRIGGER_NUMBER } = require("./condition.js");
 
 const GAME_START = "숫자 야구 게임을 시작합니다.";
 const USER_NUMBER_INPUT_REQUEST = "숫자를 입력해 주세요 : ";
 const GAME_OVER = `${MAX_NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`;
+const GAME_RESTART_REQUEST = `게임을 새로 시작하려면 ${RESTART_TRIGGER_NUMBER}, 종료하려면 ${END_TRIGGER_NUMBER}를 입력하세요.`;
 const GAME_MESSAGE = {
   GAME_START,
   USER_NUMBER_INPUT_REQUEST,
   GAME_OVER,
+  GAME_RESTART_REQUEST,
 };
 
 const INVALID_INPUT_TYPE = "입력에 숫자 이외의 문자가 있습니다. 게임 종료!";
