@@ -55,7 +55,7 @@ class App {
       }
     })
   
-    return this.calcResult(result);
+    return this.printCompareResult(result);
   }
 
   restartGameOption() {
@@ -97,7 +97,7 @@ class App {
       this.isValidateInputNumber(input);
 
       this.userNumber = this.stringToArray(input);
-      let result = this.duplicateNumber(this.userNumber, this.randomNumber);
+      let result = this.compareNumber(this.userNumber, this.randomNumber);
 
       if (result) {
         this.gameOption('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
