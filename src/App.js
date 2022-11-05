@@ -4,6 +4,10 @@ function printMsg(message) {
   MissionUtils.Console.print(message);
 }
 
+function setAnswerNum() {
+  return MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
+}
+
 function askNumInput() {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
     isValidInput(number);
@@ -39,6 +43,7 @@ class App {
   play() {
     printMsg("숫자 야구 게임을 시작합니다.");
     try {
+      var answerNum = setAnswerNum();
       askNumInput();
     } catch (e) {
       printMsg(e);
