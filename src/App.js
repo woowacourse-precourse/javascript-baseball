@@ -76,14 +76,18 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ',
       input_num => {
-        if (input_num == 1) {
-          const app = new App();
-          app.play_number_baseball_game();
-        } else if (input_num == 2) {
-          MissionUtils.Console.close();
-        } else throw '잘못된 형식입니다';
+        this.check_restart_input_validation(input_num);
       },
     );
+  }
+
+  check_restart_input_validation(input) {
+    if (input == 1) {
+      const app = new App();
+      app.play_number_baseball_game();
+    } else if (input == 2) {
+      MissionUtils.Console.close();
+    } else throw '잘못된 형식입니다';
   }
 }
 
