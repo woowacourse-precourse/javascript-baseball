@@ -68,4 +68,12 @@ describe("숫자 야구 게임", () => {
       expect(result).toBe(expectedResults[index]);
     });
   });
+
+  test("예외 테스트", () => {
+    const MESSAGE = "Error Test";
+    expect(() => {
+      const app = new App();
+      app.throwException(MESSAGE);
+    }).toThrow();
+  });
 });
