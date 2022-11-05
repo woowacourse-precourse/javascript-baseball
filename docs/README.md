@@ -8,7 +8,7 @@
 
 - [x] 상대방 임의의 수를 랜덤 생성한다. `MissionUtils` 라이브러리의 `Random.pickNumberInRange()` 를 사용해 생성한다.
 
-- [ ] 입력창을 통해 사용자에게 임의의 수를 받는다.
+- [x] 입력창을 통해 사용자에게 임의의 수를 받는다.
 - [ ] 사용자 입력값이 옳은지 확인한다. 사용자의 입출력 값은 `MissionUtils` 라이브러리에서 제공하는 `Console.readLine`, `Console.print`를 활용한다.
 
   - [ ] 빈칸인지 확인한다.
