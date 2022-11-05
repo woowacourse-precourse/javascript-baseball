@@ -9,6 +9,7 @@ module.exports = {
     resultNoting: '낫싱',
     resultBall: '볼',
     resultStrike: '스트라이크',
+    gameOver: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   },
   QUESTION: {
     inputNumber: '숫자를 입력해주세요 : ',

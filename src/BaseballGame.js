@@ -1,7 +1,7 @@
 const Computer = require('./Computer');
 const Console = require('./Console');
 const Player = require('./Player');
-const { QUESTION, MESSAGE } = require('./static/constants');
+const { QUESTION, MESSAGE, NUMBERS_RULES } = require('./static/constants');
 
 class BaseballGame {
   constructor(console = new Console()) {
@@ -28,7 +28,20 @@ class BaseballGame {
 
     this.console.print(message);
 
+    if (BaseballGame.checkIsGameOver(strike)) {
+      this.gameOver();
+      return;
+    }
+
     this.inputPlayerNumbers();
+  }
+
+  gameOver() {
+    this.console.print(MESSAGE.gameOver);
+  }
+
+  static checkIsGameOver(strike) {
+    return strike === NUMBERS_RULES.digit;
   }
 
   static getBallAndStrikeMessage({ ball, strike }) {
