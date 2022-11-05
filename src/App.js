@@ -29,7 +29,6 @@ class App {
   }
 
   validateUserInput(userNumber) {
-    console.log(new Set([...this.convertUserNumberToArray()]).size, "sdasdasdas");
     if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
     if (userNumber.toString().length > 3 || userNumber.toString().length < 3) {
       throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
@@ -60,10 +59,7 @@ class App {
   }
 
   convertUserNumberToArray() {
-    if (this.isValidUserNumber) {
-      return this.userNumber.toString().split("");
-    }
-    return false;
+    return this.userNumber.toString().split("");
   }
 
   static handleError(e) {
