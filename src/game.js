@@ -8,6 +8,7 @@ class NumericBaseballGame {
     const getRandomNumber = () => MissionUtils.Random.pickNumberInRange(1, 9);
     const isNumberNotInSpace = (number, array) => !array.includes(number);
     const isNotFull = (computerSpace) => computerSpace.length < 3;
+    const convertArgsStringToInt = (arg) => Number(arg);
     const InsertNumberToSpace = (computerNumberSpace) => {
       const number = getRandomNumber();
       if (isNumberNotInSpace(number, computerNumberSpace)) {
@@ -23,7 +24,6 @@ class NumericBaseballGame {
     };
 
     const getNumberFromUser = async () => {
-      const convertArgsStringToInt = (arg) => Number(arg);
       const inputStringNumberFromUser = await new Promise((resolve) => {
         MissionUtils.Console.readLine("숫자를 입력하시오. : ", (answer) => {
           resolve(answer);
