@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const constants = require("./constants");
 const Computer = require("./Computer");
 const User = require("./User");
 
@@ -11,13 +12,13 @@ class BaseballGame {
   initGame() {
     this.computer = new Computer();
     this.user = new User();
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(constants.GAME_START_MESSAGE);
     this.enterUserNumbers();
   }
 
   enterUserNumbers() {
     let result = null;
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
+    MissionUtils.Console.readLine(constants.INPUT_REQUEST_MESSAGE, (userNumber) => {
       this.user.setUserNumber(userNumber);
       result = this.compareNumbers(this.user.number, this.computer.numbers);
       MissionUtils.Console.print(result);
@@ -26,13 +27,13 @@ class BaseballGame {
   }
 
   gameLoop(result) {
-    result === "3스트라이크" ? this.gameEnd() : this.enterUserNumbers();
+    result === constants.THREE_STRIKE ? this.gameEnd() : this.enterUserNumbers();
   }
 
   gameEnd() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(constants.GAME_END_MESSAGE);
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      constants.RESTART_QUESTION_MESSAGE,
       (answer) => {
         if (answer === "1") {
           this.initGame();
@@ -65,7 +66,7 @@ class BaseballGame {
     if (strike > 0) {
       resultMessage.push(`${strike}스트라이크`);
     }
-    return resultMessage.length === 0 ? "낫싱" : resultMessage.join(" ");
+    return resultMessage.length === 0 ? constants.NOTHING : resultMessage.join(" ");
   }
 }
 
