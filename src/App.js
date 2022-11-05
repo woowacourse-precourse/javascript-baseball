@@ -35,6 +35,7 @@ class App {
             return this.replayGame();
         }
         if(computerNumbers !== userNumbers) {
+            this.ballAndStrikeCalc(computerNumbers,userNumbers);
             this.isUserNumbers(computerNumbers);
         }
     }
@@ -47,6 +48,16 @@ class App {
             if(answer == 2) return MISSION_UTILS.Console.print('게임 종료');
             if(answer !== 1 && answer !== 2) throw new Error('1 또는 2를 입력하세요.');
         })
+    }
+
+    ballAndStrikeCalc(computerPickNumber,userNumbers){
+        let ball = 0;
+        let strike = 0;
+        for(let idex = 0; idex < String(computerPickNumber).length; idex++){
+            const OVERLAP_INDEX = String(computerPickNumber).indexOf(String(userNumbers)[idex]);
+            if(OVERLAP_INDEX > -1 && OVERLAP_INDEX == idex) strike += 1;
+            if(OVERLAP_INDEX > -1 && OVERLAP_INDEX !== idex) ball += 1;         
+        }
     }
 }
 module.exports = App;
