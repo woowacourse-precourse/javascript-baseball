@@ -21,6 +21,7 @@ class App {
     let stringUserNumber=userNumber.split('')
     let userNumberArray=[...stringUserNumber]
     console.log(userNumberArray);
+    return userNumberArray
   }
   computerRandomNumber() {
     const COMPUTER = [];
