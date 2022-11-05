@@ -33,7 +33,10 @@ class App {
       this.showResult(RESULT);
 
       if (RESULT.strike === 3) {
-        // 정답을 맞춘 경우
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.askRetry();
+      } else {
+        this.getUserAnswer();
       }
     });
   }
@@ -61,6 +64,23 @@ class App {
     if (result.ball + result.strike === 0) result_sentence = "낫싱";
 
     MissionUtils.Console.print(result_sentence);
+  }
+
+  askRetry() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
+      (answer) => {
+        if (answer === "1") {
+          this.answer = [];
+          this.getRandomNum();
+          this.getUserAnswer();
+        } else if (answer === "2") {
+          MissionUtils.Console.close();
+        } else {
+          throw Error();
+        }
+      },
+    );
   }
 }
 
