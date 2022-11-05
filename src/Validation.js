@@ -12,5 +12,6 @@ const validRange = (num) => {
   }, true);
 };
 
-const duplication = (num) => new Set(...num).size !== num.length;
-module.exports = { validLength, validRange };
+const duplication = (num) => new Set(num).size !== num.length;
+
+module.exports = { validLength, validRange, duplication };
