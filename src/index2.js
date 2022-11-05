@@ -7,7 +7,13 @@ export default class BaseballGame {
 
     // Computer가 1 ~ 9까지 랜덤으로 중복없이 3개의 수를 생성하는 함수 구현
     computerRandomNumber() {
-        let computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        const computerNumber = [];
+        while (computerNumber.length < 3) {
+            const number = MissionUtils.Random.pickNumberInRange(1, 9);
+            if (!computerNumber.includes(number)) {
+                computerNumber.push(number);
+            }
+        }
         return computerNumber
     };
 
@@ -75,17 +81,34 @@ export default class BaseballGame {
     };
 
     // 3구 판정 함수 구현(볼, 스트라이크)
-    checkingScore(computerNumber, userInputNumbers) {
+    checkingScore(computerNumber, userInputNumber) {
         let score = [0, 0];
         for (let i = 0; i < 3; i++) {
-            if (computerNumber[i] == userInputNumbers[i]) { // 스트라이크
+            if (computerNumber[i] == userInputNumber[i]) { // 스트라이크
                 score[0] += 1;
-            } else if (computerNumber.includes(userInputNumbers[i])) { // 볼
+            } else if (computerNumber.includes(userInputNumber[i])) { // 볼
                 score[1] += 1;
             }
         }
         return score;
-    }
+    };
+
+    // 판정 결과 함수 구현
+    checkResultScore(computerNumber, userInputNumber) {
+        const score = this.checkResultScore(computerNumber, userInputNumber);
+        let answer = "";
+
+        if (score[0] == 0 && score[1] == 0) {
+            answer = "낫싱";
+        } else if (score[0] > 0 && score[1] == 0) {
+            answer = `${score[0]}스트라이크`;
+        } else if (score[0] == 0 && score[1] > 0) {
+            answer = `${score[1]}볼`;
+        } else if (score[0] > 0 && score[1] > 0) {
+            answer = `${score[1]}볼 ${score[0]}스트라이크`
+        }
+        return answer;
+    };
 
 }
 new BaseballGame();
