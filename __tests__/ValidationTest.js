@@ -5,6 +5,8 @@ const {
   duplication,
 } = require('../src/Validation');
 
+const { ERROR } = require('../src/Constants');
+
 describe('길이 검사', () => {
   test('case1', () => {
     expect(validLength([1, 2, 3])).toEqual(true);
@@ -52,15 +54,15 @@ describe('유효값 검사', () => {
     expect(isValidInput([1, 2, 3])).toEqual(true);
   });
   test('case2', () => {
-    expect(isValidInput([1, 2, 2])).toEqual(false);
+    expect(() => isValidInput([1, 2, 2])).toThrow(ERROR.DUPLICATION);
   });
   test('case3', () => {
-    expect(isValidInput(['a', 1])).toEqual(false);
+    expect(() => isValidInput(['a', 1])).toThrow(ERROR.NAN);
   });
   test('case4', () => {
-    expect(isValidInput([0, 1, 2])).toEqual(false);
+    expect(() => isValidInput([0, 1, 2])).toThrow(ERROR.RANGE);
   });
   test('case5', () => {
-    expect(isValidInput([5, 1, 2, 4])).toEqual(false);
+    expect(() => isValidInput([5, 1, 2, 4])).toThrow(ERROR.LENGTH);
   });
 });
