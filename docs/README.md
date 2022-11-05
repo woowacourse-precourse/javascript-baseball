@@ -19,5 +19,7 @@
 - gameReplay
 
 ## 스트라이크/볼 확인
+- compareNumbers
 
-
+## Console 닫기
+- closeConsole
