@@ -47,16 +47,16 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  // test("예외 테스트", () => {
-  //   const randoms = [1, 3, 5];
-  //   const answers = ["1234"];
+  test("예외 테스트", async () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1234"];
 
-  //   mockRandoms(randoms);
-  //   mockQuestions(answers);
+    mockRandoms(randoms);
+    mockQuestions(answers);
 
-  //   expect(() => {
-  //     const app = new App();
-  //     app.play();
-  //   }).toThrow();
-  // });
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
