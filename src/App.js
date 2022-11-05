@@ -5,7 +5,14 @@ class App {
   }
 
   setAnswer() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.answer = [];
+    while (this.answer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
+      }
+    }
   }
 
   readInput() {
