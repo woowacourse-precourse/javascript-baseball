@@ -142,5 +142,11 @@ export default class BaseballGame {
         const restartButton = `<button id="game-restart-button">다시하기</button>`;
         return `<div>게임 한번 더 할래요? ${restartButton}</div>`;
     }
+
+    // 재시작 버튼 클릭 시 다시 게임을 다시 시작하는 함수 구현
+    restartBtnClick() {
+        const restartBtn = document.getElementById('game-restart-button');
+        restartBtn.addEventListener("click", this.restart);
+    }
 }
 new BaseballGame();
