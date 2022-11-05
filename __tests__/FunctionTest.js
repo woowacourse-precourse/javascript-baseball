@@ -47,4 +47,22 @@ describe("기능 테스트", () => {
     expect(case4).toEqual(false);
     expect(case5).toEqual(false);
   });
+
+  test("중복된 숫자를 입력하면 true 반환", () => {
+    const app = new App();
+    const case1 = app.isDuplicate("111");
+    const case2 = app.isDuplicate("112");
+    const case3 = app.isDuplicate("211");
+
+    expect(case1).toEqual(true);
+    expect(case2).toEqual(true);
+    expect(case3).toEqual(true);
+  });
+
+  test("중복되지 않은 숫자를 입력하면 false 반환", () => {
+    const app = new App();
+    const case1 = app.isDuplicate("123");
+
+    expect(case1).toEqual(false);
+  });
 });
