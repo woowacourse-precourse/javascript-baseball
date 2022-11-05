@@ -37,7 +37,24 @@ class System {
       }
     });
 
-    console.log(`strike : ${scoreboard[0]}, ball: ${scoreboard[1]}`);
+    this.responseGuessResult(scoreboard);
+  }
+
+  responseGuessResult(scoreboard) {
+    if (!scoreboard[0] && !scoreboard[1]) {
+      MissionUtils.Console.print("낫싱");
+    } else if (!scoreboard[0]) {
+      MissionUtils.Console.print(`${scoreboard[1]}볼`);
+    } else if (!scoreboard[1]) {
+      MissionUtils.Console.print(`${scoreboard[0]}스트라이크`);
+      if (scoreboard[0] === 3) {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      }
+    } else {
+      MissionUtils.Console.print(
+        `${scoreboard[1]}볼 ${scoreboard[0]}스트라이크`
+      );
+    }
   }
 }
 
