@@ -14,6 +14,10 @@ class App {
     MissionUtils.Console.print(outputMessageList.join(' '));
   }
 
+  printNothingMessage(){
+    MissionUtils.Console.print('낫싱');
+  }
+
   throwExceptionMessage(message){
     throw message
   }
