@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-const { getRandomNumbers } = require('../src/utils/core');
+const { getRandomNumbers, getStrike, getBall } = require('../src/utils/core');
 
 const getSpy = (object, methodName) => {
   const spy = jest.spyOn(object, methodName);
@@ -47,11 +47,26 @@ describe('숫자 야구 게임', () => {
 
     mockUserValue(userValue);
 
-    for (let i = 0; i < userValue.length; i += 1) {
+    for (let index = 0; index < userValue.length; index += 1) {
       expect(() => {
         const app = new App();
         app.play();
       }).toThrow();
+    }
+  });
+
+  test('스트라이크, 볼 개수 계산', () => {
+    const computerValue = ['132', '283', '632', '192', '527'];
+    const userValue = ['123', '139', '632', '132', '752'];
+    const strike = ['1스트라이크', '', '3스트라이크', '2스트라이크', ''];
+    const ball = ['2볼', '1볼', '', '', '3볼'];
+
+    for (let index = 0; index < computerValue.length; index += 1) {
+      const resultStrike = getStrike(computerValue[index], userValue[index]);
+      const resultBall = getBall(computerValue[index], userValue[index]);
+
+      expect(resultStrike).toEqual(strike[index]);
+      expect(resultBall).toEqual(ball[index]);
     }
   });
 });
