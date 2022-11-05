@@ -40,19 +40,16 @@ class App {
   }
 
   checkInput(input) {
-    if (
-      this.checkLength(input) &&
-      this.checkIsNumber(input) &&
-      this.checkDuplicate(input)
-    ) {
-      return true;
-    } else return false;
+    if (!this.checkLength(input)) throw "입력 길이 오류";
+    if (!this.checkIsNumber(input)) throw "숫자가 아닌 입력";
+    if (!this.checkDuplicate(input)) throw "중복 숫자 존재";
   }
 
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.#userInput = input;
     });
+    console.log("숫자 입력값 : ", this.#userInput);
   }
 
   countStrike(answer, input) {
@@ -79,13 +76,16 @@ class App {
     const ballHint = ball > 0 ? `${ball}볼` : "";
     const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
 
+    this.checkNothing(strike, ball);
+    if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.#correct = true;
+    }
     MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
-    if (strike === 3) this.correctMessage();
   }
 
-  correctMessage() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    this.#correct = true;
+  checkNothing(strike, ball) {
+    if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
   }
 
   game() {
@@ -93,7 +93,7 @@ class App {
     this.pickNumber();
     while (!this.#correct) {
       this.getUserInput();
-      if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
+      this.checkInput(this.#userInput);
       this.compareInputAnswer(this.#answer, this.#userInput);
     }
   }
@@ -106,12 +106,16 @@ class App {
   }
 
   checkRestartInput(input) {
+    console.log("재시작 입력 : ", input);
     if (!["1", "2"].includes(input)) throw "잘못된 입력값입니다.";
+    if (input === "2") this.#finish = true;
   }
 
   play() {
-    this.game();
-    this.askRestart();
+    while (!this.#finish) {
+      this.game();
+      this.askRestart();
+    }
   }
 }
 
