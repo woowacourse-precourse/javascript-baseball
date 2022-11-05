@@ -38,7 +38,8 @@ class App {
 
   countScore(computer, user) {
     this.isError(user);
-    this.calculateScore(computer, user);
+    const score = this.calculateScore(computer, user);
+    this.printScore(score);
   }
 
   isError(number) {
@@ -65,6 +66,29 @@ class App {
     });
 
     return [ball, strike];
+  }
+
+  printScore(score) {
+    const scoreList = [
+      { name: "볼", score: score[0] },
+      { name: "스트라이크", score: score[1] },
+    ];
+
+    let newScoreList = scoreList.filter((item) => {
+      return item.score >= 1;
+    });
+
+    let result = newScoreList.map((item) => {
+      return `${item.score}${item.name}`;
+    });
+
+    result = result.join(" ");
+
+    if (result.length === 0) {
+      result = "낫싱";
+    }
+
+    MissionUtils.Console.print(result);
   }
 }
 
