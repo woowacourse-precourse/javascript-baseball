@@ -74,5 +74,18 @@ export default class BaseballGame {
         return true;
     };
 
+    // 3구 판정 함수 구현(볼, 스트라이크)
+    checkingScore(computerNumber, userInputNumbers) {
+        let score = [0, 0];
+        for (let i = 0; i < 3; i++) {
+            if (computerNumber[i] == userInputNumbers[i]) { // 스트라이크
+                score[0] += 1;
+            } else if (computerNumber.includes(userInputNumbers[i])) { // 볼
+                score[1] += 1;
+            }
+        }
+        return score;
+    }
+
 }
 new BaseballGame();
