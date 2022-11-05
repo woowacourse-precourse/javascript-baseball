@@ -4,6 +4,10 @@ class App {
   #userInput;
   #answer;
 
+  startMessage() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
   pickNumber() {
     const computer = [];
     while (computer.length < 3) {
@@ -76,7 +80,7 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.startMessage();
     this.pickNumber();
     this.getUserInput();
     if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
