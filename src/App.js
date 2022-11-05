@@ -60,33 +60,51 @@ class App {
             if (STRIKE === 0) {
                 return MissionUtils.Console.print(`${BALL}볼`);
             }
+            if (STRIKE === 3) {
+                return MissionUtils.Console.print(`${STRIKE}스트라이크`);
+            }
 
             return MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
         };
 
         const printEndMessage = () => {
-            setTimeout(() => {
-                MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-            }, 500);
-            setTimeout(() => {
-                MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-            }, 1000);
+            MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         };
 
-        const getUserInput = () => {
-            MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-                if (isCorrect(input, ANSWER)) {
-                    return printEndMessage();
+        const choosesNextStep = () => {
+            MissionUtils.Console.readLine("", (number) => {
+                if (number === "1") {
+                    isFirstStart = false;
+                    return playGame();
                 }
-                printInputResult(input, ANSWER);
-                getUserInput();
+                if (number === "2") {
+                    MissionUtils.Console.close();
+                }
             });
         };
 
-        const ANSWER = createAnswer();
-        // console.log(ANSWER);
-        printStartMassage();
-        getUserInput();
+        const getUserInput = (answer) => {
+            // console.log(answer);
+
+            MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+                if (isCorrect(input, answer)) {
+                    printEndMessage();
+                    return choosesNextStep();
+                }
+                printInputResult(input, answer);
+                getUserInput(answer);
+            });
+        };
+
+        const playGame = () => {
+            let computerAnswer = createAnswer();
+
+            printStartMassage();
+            getUserInput(computerAnswer);
+        };
+
+        playGame();
     }
 }
 
