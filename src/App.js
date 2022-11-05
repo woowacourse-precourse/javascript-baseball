@@ -5,7 +5,7 @@ class App {
     while (computer.size < 3) {
       computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    return [...computer];
+    return Number([...computer].join(""));
   }
 
   isValidInput(input) {
@@ -26,6 +26,7 @@ class App {
 
   CompareInputWithComputer(input, computer) {
     let inputArray = this.NumberToArray(input);
+    let computerArray = this.NumberToArray(computer);
 
     let result = new Map();
 
@@ -34,12 +35,13 @@ class App {
     result.set("nothing", null);
 
     inputArray.forEach((e, idx) => {
-      computer.indexOf(e) != -1
-        ? computer.indexOf(e) == idx
+      computerArray.indexOf(e) != -1
+        ? computerArray.indexOf(e) == idx
           ? result.set("stright", result.get("stright") + 1 ?? 1)
           : result.set("ball", result.get("ball") + 1 ?? 1)
         : result.set("nothing", result.get("nothing") + 1 ?? 1);
     });
+    console.log(input, computer, result);
     return result;
   }
 
@@ -53,9 +55,11 @@ class App {
     while (true) {
       MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
         this.isValidInput(input)
-          ? printResult(this.CompareInputWithComputer(input.computerNum))
+          ? printResult(this.CompareInputWithComputer(input, computerNum))
           : this.executeError;
       });
+      MissionUtils.Console.clear();
+      break;
     }
   }
 }
