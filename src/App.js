@@ -31,11 +31,25 @@ class App {
   }
 
   validateInput(input) {
-    if (input.length !== 3) return false;
-    if (new Set(input.split("")).size !== 3) return false;
+    if (this.validateInputLength(input)) return false;
+    if (this.validateInputDuplication(input)) return false;
     if (isNaN(input)) return false;
 
     return true;
+  }
+  validateInputLength(input) {
+    return input.length !== 3;
+  }
+  validateInputDuplication(input) {
+    return new Set(input.split("")).size !== 3;
+  }
+  validateInputIsNaN(input) {
+    let NaN = false;
+    input.split("").forEach((eachChar) => {
+      if (typeof eachChar !== "number") NaN = true;
+    });
+
+    return NaN;
   }
 }
 
