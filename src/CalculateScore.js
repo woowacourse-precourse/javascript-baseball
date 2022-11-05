@@ -1,32 +1,39 @@
-const calculateStrike = (computerNumbers, inputNumbers) => {
-  const excludedStrikeNumbers = computerNumbers.filter(
-    (number, index) => number !== inputNumbers[index],
+const calculateStrike = (nbrOfComputer, nbrOfTryGuess) => {
+  const excludedStrikeNumbers = nbrOfComputer.filter(
+    (number, index) => number !== nbrOfTryGuess[index],
   );
-  const strikeCount = computerNumbers.length - excludedStrikeNumbers.length;
+
+  const strikeCount = nbrOfComputer.length - excludedStrikeNumbers.length;
+
   return [excludedStrikeNumbers, strikeCount];
 };
 
-const calculateBall = (excludedStrikeNumbers, inputNumbers) => {
+const calculateBall = (excludedStrikeNumbers, nbrOfTryGuess) => {
   const excludedBallNumbers = excludedStrikeNumbers.filter(
-    (number) => !inputNumbers.includes(number),
+    (number) => !nbrOfTryGuess.includes(number),
   );
+
   const ballCount = excludedStrikeNumbers.length - excludedBallNumbers.length;
+
   return [excludedBallNumbers, ballCount];
 };
 
-const calculateScore = (computerNumbers, inputNumbers) => {
+const calculateScore = (nbrOfComputer, nbrOfTryGuess) => {
   const score = { strikeCount: 0, ballCount: 0, isNothing: false };
 
-  const [excludedStrike, strikeCount] = calculateStrike(
-    computerNumbers,
-    inputNumbers,
+  const [excludedStrikeNumbers, strikeCount] = calculateStrike(
+    nbrOfComputer,
+    nbrOfTryGuess,
   );
   score.strikeCount = strikeCount;
   if (score.strikeCount === 3) return score;
 
-  const [excludedBall, ballCount] = calculateBall(excludedStrike, inputNumbers);
+  const [excludedBallNumbers, ballCount] = calculateBall(
+    excludedStrikeNumbers,
+    nbrOfTryGuess,
+  );
   score.ballCount = ballCount;
-  if (excludedBall.length === 3) score.isNothing = true;
+  if (excludedBallNumbers.length === 3) score.isNothing = true;
   return score;
 };
 
