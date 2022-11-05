@@ -2,7 +2,7 @@
 
 const { Console, Random } = require('@woowacourse/mission-utils');
 
-class testCode {
+class temporaryCode {
   getUserInputNum() {
     const userInputNum = [];
 
@@ -72,5 +72,5 @@ class testCode {
   }
 }
 
-const test = new testCode();
-test.getGameHint([4, 2, 5], [4, 2, 5]);
+const temporary = new temporaryCode();
+temporary.getGameHint([4, 2, 5], [4, 2, 5]);
