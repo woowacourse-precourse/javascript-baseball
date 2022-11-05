@@ -16,8 +16,9 @@
 - [ ] 게임시작 시 게임 시작 멘트 출력 기능 - `printStartSentence`
 - [ ] 3자리 수의 랜덤 수 반환하는 기능 - `setRandomNumber`
 - [ ] 사용자가 입력한 숫자가 랜덤 수가 존재하는 하는 경우에 대한 결과 값 반환 기능 - `duplicateNumber`
-- [ ] 랜덤 숫자와 사용자의 숫자 결과를 계산하여 결과를 반환하는 기능 `calcResult`
-
+- [ ] 랜덤 숫자와 사용자의 숫자 비교결과를 알맞는 문장을 print 하는 기능 - `printDuplicateResult`
+- [ ] 사용자가 입력한 문자열을 배열로 변환하는 기능 - `stringToArray`
+ 
  </br>
 
 ## 👨 사용자에 대한 기능
