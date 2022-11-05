@@ -44,19 +44,9 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
       if (userValue) {
         userAnswer = userValue;
+        MissionUtils.Console.print(`${userAnswer}`);
       }
-    });
-    // 스트라이크 아웃이 된 이후 1, 2를 받아 올 수 있음. 만약 그 값이 2라면 종료해야됨
-    if (userAnswer === '2') {
-      MissionUtils.Console.print(`${userAnswer}`); 
-    }
-    else if (userAnswer === '1') { 
-      MissionUtils.Console.print(`${userAnswer}`); 
-    }
-    else { 
-      MissionUtils.Console.print(`${userAnswer}`); 
-    }
-  
+    }); 
     return userAnswer;
   };
 
