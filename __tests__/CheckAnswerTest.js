@@ -1,4 +1,8 @@
-const { strikeCount, ballCount, isNothing } = require('../src/CheckAnswer');
+const {
+  strikeCount,
+  ballCount,
+  isNothing,
+} = require('../src/ControlAnswer/CheckAnswer');
 
 describe('스트라이크 개수', () => {
   test('case1', () => {

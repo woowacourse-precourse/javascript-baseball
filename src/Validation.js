@@ -1,25 +1,24 @@
 const { ERROR, ANSWER } = require('./Constants');
 const { generateNumArr } = require('./Utils');
-const { Console } = require('@woowacourse/mission-utils');
 
-const validLength = (num) => num.length === ANSWER.LENGTH;
+const validLength = (numArr) => numArr.length === ANSWER.LENGTH;
 
-const validRange = (num) => {
+const validRange = (numArr) => {
   const rangeArr = generateNumArr(ANSWER.MIN, ANSWER.MAX);
 
-  return num.reduce((result, number) => {
+  return numArr.reduce((result, number) => {
     if (!rangeArr.includes(number)) result = false;
     return result;
   }, true);
 };
 
-const duplication = (num) => new Set(num).size !== num.length;
+const duplication = (numArr) => new Set(numArr).size !== numArr.length;
 
-const isValidInput = (num) => {
-  if (isNaN(num.join(''))) throw new Error(ERROR.NAN);
-  if (!validLength(num)) throw new Error(ERROR.LENGTH);
-  if (!validRange(num)) throw new Error(ERROR.RANGE);
-  if (duplication(num)) throw new Error(ERROR.DUPLICATION);
+const isValidInput = (numArr) => {
+  if (isNaN(numArr.join(''))) throw new Error(ERROR.NAN);
+  if (!validLength(numArr)) throw new Error(ERROR.LENGTH);
+  if (!validRange(numArr)) throw new Error(ERROR.RANGE);
+  if (duplication(numArr)) throw new Error(ERROR.DUPLICATION);
   return true;
 };
 
