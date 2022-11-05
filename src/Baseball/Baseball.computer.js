@@ -12,8 +12,8 @@ class BaseballComputer {
     this.baseballOutput = baseballOutput;
     this.baseballValidator = baseballValidator;
   }
-  async getUserNumbers() {
-    const userNumbers = await this.baseballOutput.getNumber();
+  getUserNumbers() {
+    const userNumbers = this.baseballOutput.getNumber();
     this.baseballValidator.checkNumbersLength(userNumbers);
     this.baseballValidator.checkNumericNumbers(userNumbers);
     this.baseballValidator.checkOtherNumbers(userNumbers);
@@ -24,7 +24,7 @@ class BaseballComputer {
       this.baseballNumbers,
       userNumbers
     );
-    this.baseBallOutput.result(baseballDto);
+    this.baseballOutput.result(baseballDto);
     return baseballDto;
   }
   isFinish(baseballDto) {

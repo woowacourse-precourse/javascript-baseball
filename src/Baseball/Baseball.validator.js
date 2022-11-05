@@ -4,15 +4,15 @@ class BaseballValidator {
   checkNumericNumbers(numbers) {
     nonNuemrics = numbers.filter((number) => "1" > number && number > "9");
     if (nonNuemrics > 0) {
-      throw "숫자가 아닌 값이 있습니다.";
+      throw new Error("숫자가 아닌 값이 있습니다.");
     }
   }
   checkNumbersLength(numbers) {
     if (numbers === undefined) {
-      throw "알 수 없는 입력값입니다";
+      throw new Error("알 수 없는 입력값입니다");
     }
     if (numbers.length !== 3) {
-      throw "글자가 3개가 아닙니다.";
+      throw new Error("글자가 3개가 아닙니다.");
     }
   }
   checkOtherNumbers(numbers) {
@@ -21,7 +21,7 @@ class BaseballValidator {
       removedDuplicateNumbers.length === numbers.length &&
       numbers.length === 3
     ) {
-      throw "잘못된 입력값입니다.";
+      throw new Error("잘못된 입력값입니다.");
     }
   }
   checkBallState(computerNumbers, userNumbers) {
@@ -56,7 +56,7 @@ class BaseballValidator {
   }
   checkRestartValue(restartValue) {
     if (!(+restartValue === 1 || +restartValue === 2)) {
-      throw "잘못된 입력값입니다";
+      throw new Error("잘못된 입력값입니다");
     }
     return +restartValue === 1;
   }
