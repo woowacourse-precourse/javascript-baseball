@@ -26,7 +26,7 @@ class App {
   inputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if (!this.isValid(answer)) {
-        throw new Error();
+        throw new Error("중복되지 않는 3개의 숫자를 입력해주세요.");
       } else {
         const data = answer.split("").map((letter) => Number(letter));
         this.playerNumber = [...data];
@@ -92,7 +92,7 @@ class App {
           this.initialize();
           return;
         } else {
-          throw new Error();
+          throw new Error("1 또는 2를 입력해주세요.");
         }
       }
     );
