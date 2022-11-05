@@ -90,7 +90,7 @@ class NumericBaseballGame {
       if (ballCount) {
         MissionUtils.Console.print(`${ballCount}볼`);
         continue;
-      }
+      } else MissionUtils.Console.print(`낫띵`);
     }
   }
 }
