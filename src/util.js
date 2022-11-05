@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
 
 const makeAnswer = () => Random.pickUniqueNumbersInRange(1, 9, 3).join("");
 
@@ -36,11 +36,16 @@ const makeReplyToReply = ({ ball, strike }) => {
   return answer;
 };
 
-const inputReply = () => {};
+const inputReply = (cb) =>
+  Console.readLine("숫자를 입력해주세요 : ", (n) => cb(n));
 
-const inputReplay = () => {};
+const inputReplay = (cb) =>
+  Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (n) => cb(n)
+  );
 
-const closePlay = () => {};
+const closePlay = () => Console.close();
 
 exports.makeAnswer = makeAnswer;
 exports.replyValidation = replyValidation;
