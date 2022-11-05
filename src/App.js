@@ -60,7 +60,7 @@ class App {
       await this.doBaseBall();
 
       if (this.err) {
-        throw new Error("3자리 숫자를 입력하세요!");
+        console.log("err");
       }
       if (this.isRight && (await this.checkRestartGame())) {
         break;
