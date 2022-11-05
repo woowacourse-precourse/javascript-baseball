@@ -30,31 +30,27 @@ class App {
   }
 
   solveNumber(computer) {
-    const user = this.selectUser();
-    const result = this.countScore(computer, user);
+    this.selectUser(computer);
     this.isAnswer(result, computer);
   }
 
-  selectUser() {
-    let user;
-
+  selectUser(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
-      user = num;
+      this.isError(num, computer);
     });
-
-    return user;
   }
 
   countScore(computer, user) {
-    this.isError(user);
     const score = this.calculateScore(computer, user);
     return this.printScore(score);
   }
 
-  isError(number) {
-    if (number.length !== 3 || isNaN(number)) {
+  isError(user, computer) {
+    if (user.length !== 3 || isNaN(user)) {
       throw "Parameter is not a number!";
     }
+
+    this.countScore(computer, user);
   }
 
   calculateScore(computer, user) {
