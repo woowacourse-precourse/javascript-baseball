@@ -1,9 +1,11 @@
-const { EXCEPTION, CASE } = require("./constants/index.js");
+const { CASE } = require("./constants/index.js");
+const { generateRandomNumber } = require("./utils/number.js");
 const {
-  isValidUserInput,
+  isAnswer,
+  isNothing,
   isValidUserAskInput,
-  generateRandomNumber,
-} = require("./utils/number.js");
+  isValidUserInput,
+} = require("./utils/validator");
 const Console = require("./utils/console.js");
 
 class App {
@@ -28,7 +30,7 @@ class App {
     const [_, strike] = userInputResult;
     const hint = this.getHintMessage(userInputResult);
     this.showMessage(hint);
-    if (this.isAnswer(strike))
+    if (isAnswer(strike))
       return this.askGame().then((userInputNumber) => {
         if (userInputNumber === "1") this.startGame();
         else this.endGame();
@@ -81,8 +83,8 @@ class App {
   getHintMessage(userInputResult) {
     const message = [];
     const [ball, strike] = userInputResult;
-    if (this.isNothing(userInputResult)) return CASE.NOTING;
-    if (this.isAnswer(strike)) return "3스트라이크";
+    if (isNothing(userInputResult)) return CASE.NOTING;
+    if (isAnswer(strike)) return "3스트라이크";
     if (ball) message.push(`${ball}${CASE.BALL}`);
     if (strike) message.push(`${strike}${CASE.STRIKE}`);
     return message.join(" ");
@@ -93,16 +95,6 @@ class App {
     if (this.randomNumber[index] === cur) return [ball, strike + 1];
     if (this.randomNumber.includes(cur)) return [ball + 1, strike];
     return acc;
-  }
-
-  isNothing(userInputResult) {
-    if (userInputResult.every((result) => result === 0)) return true;
-    return false;
-  }
-
-  isAnswer(strike) {
-    if (strike === 3) return true;
-    return false;
   }
 }
 
