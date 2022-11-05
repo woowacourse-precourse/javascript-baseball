@@ -9,6 +9,7 @@ const {
 const EXIT = "2";
 class App {
   play() {
+    this.print("숫자 야구 게임을 시작합니다.");
     const answer = makeAnswer();
     const playing = (n) => {
       replyValidation(n);
