@@ -1,5 +1,9 @@
 const { EXCEPTION, CASE } = require("./constants/index.js");
-const { isValidUserInput, generateRandomNumber } = require("./utils/number.js");
+const {
+  isValidUserInput,
+  isValidUserAskInput,
+  generateRandomNumber,
+} = require("./utils/number.js");
 const Console = require("./utils/console.js");
 
 class App {
@@ -40,13 +44,13 @@ class App {
 
   askGame() {
     this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    return new Promise((resolve, reject) =>
+    return new Promise((resolve) =>
       Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (userInputNumber) => {
-          if ((userInputNumber === "1") | (userInputNumber === "2"))
-            resolve(userInputNumber);
-          else reject("인풋 값이 유효하지 않습니다.");
+          if (!isValidUserAskInput(userInputNumber))
+            throw new Error("인풋 값이 유효하지 않습니다.");
+          resolve(userInputNumber);
         }
       )
     );
