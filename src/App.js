@@ -3,28 +3,28 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const randomArray = this.getRandomArray();
-    this.question(randomArray);
+    const randomList = this.createRandomList();
+    this.question(randomList);
   }
 
-  getRandomArray() {
-    const randomArray = [];
-    while (randomArray.length < 3) {
+  createRandomList() {
+    const randomList = [];
+    while (randomList.length < 3) {
       const random = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!randomArray.includes(random)) {
-        randomArray.push(random);
+      if (!randomList.includes(random)) {
+        randomList.push(random);
       }
     }
 
-    return randomArray;
+    return randomList;
   }
 
-  question(randomArray) {
+  question(randomList) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.check(input);
-      const inputArray = this.getInputArray(input);
-      const { ball, strike } = this.getBallStrike(randomArray, inputArray);
-      const resultString = this.getResultString(ball, strike);
+      const inputList = this.createInputList(input);
+      const { ball, strike } = this.calculateCount(randomList, inputList);
+      const resultString = this.createResultString(ball, strike);
 
       MissionUtils.Console.print(resultString);
 
@@ -32,7 +32,7 @@ class App {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.questionReplay();
       } else {
-        this.question(randomArray);
+        this.question(randomList);
       }
     });
   }
@@ -51,14 +51,13 @@ class App {
     if (set.size !== 3) throw new Error('중복된 숫자입니다');
   }
 
-  getInputArray(input) {
+  createInputList(input) {
     return input.split('').map((character) => parseInt(character));
   }
 
-  getBallStrike(randomArray, inputArray) {
+  calculateCount(randomArray, inputArray) {
     let ball = 0,
       strike = 0;
-
     for (let i = 0; i <= 2; i++) {
       if (randomArray[i] === inputArray[i]) {
         strike += 1;
@@ -70,7 +69,7 @@ class App {
     return { ball, strike };
   }
 
-  getResultString(ball, strike) {
+  createResultString(ball, strike) {
     if (ball === 0 && strike === 0) return '낫싱';
     if (ball === 0) return `${strike}스트라이크`;
     if (strike === 0) return `${ball}볼`;
@@ -83,8 +82,8 @@ class App {
     );
     MissionUtils.Console.readLine('', (input) => {
       if (input === '1') {
-        const newRandomArray = this.getRandomArray();
-        this.question(newRandomArray);
+        const newRandomList = this.createRandomList();
+        this.question(newRandomList);
       } else if (input === '2') {
         MissionUtils.Console.close();
       } else {
