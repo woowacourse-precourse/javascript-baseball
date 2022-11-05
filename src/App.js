@@ -1,29 +1,22 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
-const getRandomNumber = (count) => {
-  const computer = [];
-  while (computer.length < count) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!computer.includes(number)) {
-      computer.push(number);
-    }
-  }
-
-  return computer;
-}
+const {Console} = require("@woowacourse/mission-utils");
+const Computer = require("./Computer")
 
 class App {
+  constructor () {
+    this.computer = new Computer;
+  }
+
   play() {
-    const computer = getRandomNumber(3);
-
-    console.log(computer);
-
-    MissionUtils.Console.close();
+    this.computer.setNumbers(3);
+    Console.print(this.computer.getNumbers())
+    Console.print('숫자 야구 게임을 시작합니다.')
+    Console.close();    
   }
 }
 
 const app = new App();
-app.play();
+app.play()
+
 
 module.exports = App;
 
