@@ -31,7 +31,6 @@ function getGuessResult(ball, strike) {
 }
 
 function getBallsAndStrikes(target, input) {
-  const targetArray = Array.from(target);
   const inputArray = Array.from(input);
   const initialValue = {
     balls: 0,
@@ -39,12 +38,12 @@ function getBallsAndStrikes(target, input) {
   };
 
   return inputArray.reduce((acc, cur, idx) => {
-    if (cur === targetArray[idx]) {
+    if (cur === target[idx]) {
       acc.strikes += 1;
       return acc;
     }
 
-    if (targetArray.includes(cur)) {
+    if (target.includes(cur)) {
       acc.balls += 1;
       return acc;
     }

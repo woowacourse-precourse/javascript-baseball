@@ -7,7 +7,7 @@ class GameDataStore {
 
   constructor() {
     this.#gameData = {
-      target: '',
+      target: [],
       input: '',
       ballsAndStrikes: {},
     };
