@@ -12,11 +12,11 @@ class Player {
       const checkConstraints = new CheckConstraints();
       checkConstraints.checkConstraints(userInput);
 
-      this.comparePlayerInputWithRadomNumber(userInput);
+      this.comparePlayerInputWithRandomNumber(userInput);
     });
   }
 
-  comparePlayerInputWithRadomNumber(userInput) {
+  comparePlayerInputWithRandomNumber(userInput) {
     this.ball = 0;
     this.strike = 0;
 
