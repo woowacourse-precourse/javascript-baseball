@@ -1,7 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  constructor() {
+    this.printGameStartPhrase();
+  }
+
+  play() {
+    this.threeRandomNumbers = this.drawThreeRandomNumbers();
+
+    // this.startPlayerTurn();
+    this.readPlayerInput();
+  }
 
   drawThreeRandomNumbers() {
     const threeRandomNumber = new Set();
@@ -17,17 +26,24 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
-  async startRound() {
-    const value = await this.readPlayerInput();
-    console.log(value);
-  }
+  // async startPlayerTurn() {
+  //   const playerInput = await this.readPlayerInput();
+  //   if (!this.validateInput(playerInput)) {
+  //     MissionUtils.Console.close();
+  //     throw new Error("잘못된 입력입니다.");
+  //   }
+  // }
 
   readPlayerInput() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-        resolve(input);
-      });
+    // return new Promise((resolve) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!this.validateInput(input)) {
+        MissionUtils.Console.close();
+        throw new Error("잘못된 입력입니다.");
+      }
+      // resolve(input);
     });
+    // });
   }
 
   validateInput(input) {
