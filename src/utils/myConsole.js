@@ -6,7 +6,6 @@ const myConsole = {
   },
   readLine(message, callback) {
     Console.readLine(message, (answer) => {
-      Console.close();
       callback(answer);
     });
   },
