@@ -21,8 +21,13 @@ function getStrikeString(strike) {
 function getGuessResult(ball, strike) {
   const ballString = getBallString(ball);
   const strikeString = getStrikeString(strike);
+  const result = ballString + strikeString;
 
-  return `${ballString}${strikeString}`;
+  if (result.length === 0) {
+    return '낫싱';
+  }
+
+  return result;
 }
 
 function getBallsAndStrikes(target, input) {
