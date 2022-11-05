@@ -57,5 +57,9 @@ class App {
     }
   }
 
+  startGameOption() {
+    this.printStartSentence();
+    this.setRandomNumber();
+  }
 }
 module.exports = App;
