@@ -53,8 +53,11 @@ class App {
       if (str_user_num.length !== 3) {
         throw new Error("세 자리 숫자를 입력해주세요.");
       }
-      if (typeof Number(user_number) !== "number") {
+      if (isNaN(user_number) === true) {
         throw new Error("숫자를 입력해주세요.");
+      }
+      if (user_number <= 0) {
+        throw new Error("0과 음수를 제외한 숫자를 입력해주세요.");
       }
       for (let i = 0; i < str_random_num.length; i++) {
         if (str_random_num[i] === str_user_num[i]) {
@@ -69,4 +72,5 @@ class App {
     playGame();
   }
 }
+
 module.exports = App;
