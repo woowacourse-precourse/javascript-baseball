@@ -12,4 +12,10 @@ function getComputerNumber() {
   getUserInputNumber(computerNum);
 }
 
+function getUserInputNumber(computerNum) {
+  MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
+    getStrikeAndBallCount(answer, computerNum);
+  });
+}
+
 module.exports = App;
