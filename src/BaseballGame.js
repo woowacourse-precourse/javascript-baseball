@@ -20,7 +20,7 @@ class BaseballGame {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
       this.user.setUserNumber(userNumber);
       result = this.compareNumbers(this.user.number, this.computer.numbers);
-      console.log(result); // 여기 수정
+      MissionUtils.Console.print(result);
       this.gameLoop(result);
     });
   }
