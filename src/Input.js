@@ -15,6 +15,14 @@ class Input {
     const set = new Set(numbers);
     return numbers.length !== set.size;
   }
+
+  static isValid(numbers) {
+    return (
+      this.isLengthThree(numbers)
+      && this.isBetweenOneAndNine(numbers)
+      && !this.hasDuplicates(numbers)
+    );
+  }
 }
 
 module.exports = Input;
