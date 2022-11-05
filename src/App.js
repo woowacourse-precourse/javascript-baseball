@@ -63,5 +63,9 @@ class App {
   endGameOption() {
     Console.close();
   }
-}
+  isValidateGameOption(number) {
+    if (number !== '1' && number !== '2'){
+      throw new Error('1 또는 2를 입력해주세요');
+    }
+  }
 module.exports = App;
