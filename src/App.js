@@ -12,21 +12,21 @@ class App {
         computerNumber = makeComputerNumber();
       }
 
-      const userInput = getUserInput();
+      const user_input = getUserInput();
 
-      if (userInput.length === 0) {
+      if (user_input.length === 0) {
         playCount = 4;
         break;
       }
 
-      const STRIKE_BALL_RECORD = calculateInputNumber(
+      const strike_ball_record = calculateInputNumber(
         computerNumber,
-        userInput
+        user_input
       );
 
-      const IS_THREE_STRIKE = printBallStrike(STRIKE_BALL_RECORD);
+      const is_three_strike = printBallStrike(strike_ball_record);
 
-      if (IS_THREE_STRIKE) {
+      if (is_three_strike) {
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         playCount = askEndGame();
       } else if (playCount === 2) {
@@ -50,10 +50,10 @@ const makeComputerNumber = () => {
     }
   }
 
-  const computerNumber = computer.map((element) => {
+  const computer_number = computer.map((element) => {
     return String(element);
   });
-  return computerNumber;
+  return computer_number;
 };
 
 const getUserInput = () => {
@@ -65,9 +65,9 @@ const getUserInput = () => {
     }
 
     inputArray = inputNumber.split("");
-    const set = new Set(inputArray);
+    const input_set = new Set(inputArray);
 
-    if (inputArray.length !== set.size) {
+    if (inputArray.length !== input_set.size) {
       return [];
     }
   });
