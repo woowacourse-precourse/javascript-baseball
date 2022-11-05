@@ -3,12 +3,14 @@ const System = require("./System");
 const User = require("./User");
 class App {
   play() {
-    System.prototype.getStarted();
-    System.prototype.chooseNumber();
-    System.prototype.requestEnterNumbers();
-    User.prototype.responseSendNumber();
+    const system = new System();
+    const user = new User();
 
-    // MissionUtils.Console.close();
+    system.getStarted();
+    system.chooseNumber();
+    user.responseSendNumber(system);
+
+    MissionUtils.Console.close();
   }
 }
 

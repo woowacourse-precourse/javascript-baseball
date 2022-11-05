@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const System = require("./System");
 
 class User {
   constructor() {
@@ -13,12 +14,10 @@ class User {
     return this.guessNumber;
   }
 
-  responseSendNumber() {
-    MissionUtils.Console.readLine("", (answer) => {
-      let number = answer.split("");
-      this.setGuessNumber = number;
-      console.log(this.getGuessNumber);
-    });
+  responseSendNumber(object) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) =>
+      object.isStrike(answer)
+    );
   }
 }
 
