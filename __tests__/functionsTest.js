@@ -79,4 +79,16 @@ describe("야구 게임 테스트", () => {
 
     expect(result).toEqual([1, 1]);
   });
+
+  test("점수 출력", () => {
+    const logSpy = jest.spyOn(console, "log");
+    logSpy.mockClear();
+
+    const score = [1, 1];
+
+    const app = new App();
+    app.printScore(score);
+
+    expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
+  });
 });
