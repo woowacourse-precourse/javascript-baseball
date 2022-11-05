@@ -1,5 +1,9 @@
+const printGameStart = require('./printGameStart');
+
 class App {
-  play() {}
+  play() {
+    printGameStart();
+  }
 }
 
 module.exports = App;
