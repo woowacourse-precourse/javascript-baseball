@@ -3,8 +3,11 @@ const RandomNumber = require("./RandomNumber");
 const Player = require("../src/Player");
 
 class App {
-  play() {
+  constructor() {
     this.showStartMessage();
+  }
+
+  play() {
     this.COMPUTER = RandomNumber.makeRandomNumber();
 
     const player = new Player(this.COMPUTER);
