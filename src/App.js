@@ -73,6 +73,7 @@ class App {
 
     if (input.length !== 3) return false;
 
+    // 중복 제거를 통하여 같은 숫자가 여러 번 들어왔을 시, 잘못된 입력으로 처리
     input = [...new Set(input.split(""))].map((el) => +el);
     if (input.length !== 3) return false;
 
