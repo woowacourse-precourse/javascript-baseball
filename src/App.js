@@ -4,6 +4,8 @@ class App {
   constructor() {
     this.ANSWER_NUMBER = [];
     this.USER_NUMBER = [];
+    this.strikeCount = 0;
+    this.ballCount = 0;
     this.playFirstTime = true;
   }
 
@@ -29,7 +31,23 @@ class App {
     this.USER_NUMBER = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', userinput => {
       this.USER_NUMBER = userinput.split('').map(Number);
+      this.compareNumbers(this.USER_NUMBER);
     });
+  }
+
+  compareNumbers(number) {
+    this.strikeCount = 0;
+    this.ballCount = 0;
+    const user = number;
+    const computer = this.ANSWER_NUMBER;
+
+    for (let i = 0; i < 3; i++) {
+      if (computer.indexOf(user[i]) !== -1 && user[i] === computer[i]) {
+        this.strikeCount += 1;
+      } else if (computer.indexOf(user[i]) !== -1) {
+        this.ballCount += 1;
+      }
+    }
   }
 }
 
