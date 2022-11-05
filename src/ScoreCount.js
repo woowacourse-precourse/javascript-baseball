@@ -1,7 +1,7 @@
 const ScoreCount = (input, Randomnumber) => {
   let inputarray = input.split('').map((a) => Number(a));
   let strike = 0,
-      ball = 0;
+      ball = 0,
       none = 0;
       
   for(let i=0; i<3; i++){
@@ -11,7 +11,6 @@ const ScoreCount = (input, Randomnumber) => {
     }
     else none += 1;
   };
-  
   return [strike, ball, none];
 }
   
