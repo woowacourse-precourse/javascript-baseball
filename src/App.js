@@ -3,6 +3,7 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 class App {
   constructor() {
     this.threeDigitsAnswer = [];
+    console.log('숫자 야구 게임을 시작합니다.');
   }
 
   getThreeDigitsAnswer() {
@@ -17,7 +18,6 @@ class App {
 
   init() {
     this.getThreeDigitsAnswer();
-    Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   handleUserInputException(userInput) {
@@ -82,6 +82,18 @@ class App {
     }
   }
 
+  getRestart() {
+    console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', (isRestart) => {
+      if (isRestart === '1') {
+        this.play();
+      } else {
+        Console.print('게임 종료');
+        Console.close();
+      }
+    });
+  }
+
   checkAnswer(userInput) {
     let matchCnt = 0;
 
@@ -93,11 +105,11 @@ class App {
 
     this.printHint(userInput);
     if (matchCnt === 3) {
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      return;
+      console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.getRestart();
+    } else {
+      this.getUserInput();
     }
-
-    this.getUserInput();
   }
 
   getUserInput() {
