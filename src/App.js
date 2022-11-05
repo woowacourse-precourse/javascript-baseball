@@ -123,6 +123,17 @@ class App {
 
     return strike;
   }
+
+  countBall(playerPickNumbers) {
+    let ball = 0;
+    playerPickNumbers.forEach((number, index) => {
+      if (number !== this.randomNumbers[index] && this.randomNumbers.includes(number)) {
+        ball += 1;
+      }
+    });
+
+    return ball;
+  }
 }
 
 const app = new App();
