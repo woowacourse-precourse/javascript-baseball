@@ -3,17 +3,18 @@ const Message = require("./message/message");
 const checkException = require("./checkException");
 
 function getUserInput() {
-  let uesrInput = "";
+  const playingInput = 0;
+  let userInput = "";
   MissionUtils.Console.readLine(Message.INPUT, (input) => {
     console.log(input);
-    if (!checkException(input)) {
+    if (!checkException(input, playingInput)) {
       console.log(Message.ERROR);
       throw Message.ERROR;
       MissionUtils.Console.close();
     }
-    uesrInput = input;
+    userInput = input;
   });
-  return uesrInput;
+  return userInput;
 }
 
 module.exports = getUserInput;

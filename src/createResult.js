@@ -16,6 +16,7 @@ function getStrike(strike, inputNumber, answer) {
       strike += 1;
     }
   });
+
   return strike;
 }
 
