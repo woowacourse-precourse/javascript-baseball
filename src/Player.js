@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const CheckConstraints = require("../src/CheckConstraints");
+const ReStart = require("../src/ReStart");
 
 class Player {
   constructor(computer) {
@@ -43,7 +44,9 @@ class Player {
     if (this.strike === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      MissionUtils.Console.close();
+
+      const restart = new ReStart();
+      restart.decideReStart();
 
       return;
     }
