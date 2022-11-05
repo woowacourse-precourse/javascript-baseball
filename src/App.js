@@ -21,6 +21,7 @@ class App {
       this.guessAnswerValidate(answer);
       if (this.outputResult(answer) == '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
         MissionUtils.Console.print(this.outputResult(answer));
+        this.restartEndGameAnswer();
         return;
       }
       MissionUtils.Console.print(this.outputResult(answer));
@@ -37,6 +38,27 @@ class App {
       throw '서로다른 3자리 숫자를 입력해주세요';
     }
     if (!answer.split('').every(number => number.charCodeAt() >= 49 && number.charCodeAt() <= 57)) {
+      throw '범위에 벗어난 숫자입니다';
+    }
+  }
+
+  restartEndGameAnswer() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n', answer => {
+      this.restartEndGameAnswerValidator(answer);
+      if (answer == '1') {
+        this.play();
+        return;
+      }
+      MissionUtils.Console.close();
+      return;
+    });
+  }
+
+  restartEndGameAnswerValidator(answer) {
+    if (answer.length !== 1) {
+      throw '한 개의 숫자만 입력해주세요';
+    }
+    if (!(answer.charCodeAt() >= 49 && answer.charCodeAt() <= 50)) {
       throw '범위에 벗어난 숫자입니다';
     }
   }
