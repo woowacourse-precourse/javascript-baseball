@@ -50,12 +50,21 @@ describe("User로부터 입력받은 후 타당성 체크", () => {
     }
     expect(checkLength(["1", "2", "3"])).toEqual(true);
   });
-  test("user가 공백을 입력했는니 검사", () => {
+  test("user가 공백을 입력했는지 검사", () => {
     function checkBlank(userNum) {
       if (userNum.length === 0) {
         return true;
       }
     }
     expect(checkBlank([])).toEqual(true);
+  });
+
+  test("false 시 에러문구 보내기 검사", () => {
+    function errorCatch(boolean) {
+      if (boolean === false) {
+        throw new Error("Invalid");
+      }
+    }
+    expect(() => errorCatch(false)).toThrow("Invalid");
   });
 });
