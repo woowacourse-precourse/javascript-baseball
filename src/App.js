@@ -10,6 +10,13 @@ class App {
     const strike = countStrike(computerNumber, userNumber);
     const ball = countBall(computerNumber, userNumber);
     printResult(ball, strike);
+
+    if (isAnswer(strike)) {
+      printMessage(Constants.WIN_MESSAGE);
+      printMessage(Constants.END_MESSAGE);
+      const selectedNumber = await inputNumber();
+      selectedNumberException(selectedNumber);
+    }
   }
 }
 
@@ -111,6 +118,12 @@ function printResult(ball, strike) {
   if (result === ``) result += `낫싱`;
 
   MissionUtils.Console.print(result.trim());
+}
+
+function selectedNumberException(selectedNumber) {
+  if (!(selectedNumber === 1 || selectedNumber === 2)) {
+    throw new Error('Invalid number..!');
+  }
 }
 
 module.exports = App;
