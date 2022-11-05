@@ -24,6 +24,26 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+  test("정답 후 게임 종료", () => {
+    const randoms = [5, 8, 9];
+    const answers = ["589", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
@@ -47,9 +67,74 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("사용자가 글자수 적게 입력할 때 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["13"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자가 글자수 초과해 입력할 때 에러", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자가 같은 문자를 2번 이상 반복해 입력시 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["112"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자가 0 입력시 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["012"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자가 문자 입력시 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["3a2"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자가 문자 입력시 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["@32"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
