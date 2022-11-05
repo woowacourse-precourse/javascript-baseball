@@ -17,6 +17,7 @@
     "no-console": "off",
     "max-depth": ["error", 2],
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "prefer-const": "off"
   }
 }
