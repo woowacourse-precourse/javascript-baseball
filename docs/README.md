@@ -17,9 +17,11 @@
 
 ## 게임 종료/ 다시 시작
 - gameReplay
+[!] 기능 오류 : 로직 문제
 
 ## 스트라이크/볼 확인
 - compareNumbers
+[!] 구현중 오류발생 : 배열이 계속 새로 생성됨
 
 ## Console 닫기
 - closeConsole
