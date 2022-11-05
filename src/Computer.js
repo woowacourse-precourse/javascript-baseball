@@ -4,26 +4,21 @@ const { Console, Random } = MissionUtils;
 class Computer {
   constructor() {
     this.number = this.initNumber();
-    this.inputNumber;
   }
-  setInputNumber(inputNumber) {
-    this.inputNumber = inputNumber;
-    this.resultMap;
-  }
-  getResultMap() {
+  getResultMap(inputNumber) {
     const resultMap = {
       ball: 0,
       strike: 0,
     };
 
-    [...this.inputNumber].forEach((digit) => {
+    [...inputNumber].forEach((digit) => {
       if (this.number.includes(digit)) {
         resultMap.ball += 1;
       }
     });
 
     for (let i = 0; i < 3; i++) {
-      if (this.number[i] === this.inputNumber[i]) {
+      if (this.number[i] === inputNumber[i]) {
         resultMap.ball -= 1;
         resultMap.strike += 1;
       }
