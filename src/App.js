@@ -79,7 +79,6 @@ class App {
   constructor() {}
   play() {
     const cpuNumber = cpuMakeAnswer();
-    // const cpuNumber = [3, 2, 9];
     let userInput = [];
     let gameResult = "";
     Console.print("숫자 야구게임을 시작합니다.");
@@ -88,7 +87,7 @@ class App {
      * to-do readLine이 못맞추면 참 -> 숫자 계속입력 맞추면 폴스 -> 게임종료
      */
 
-    Console.readLine("숫자를 입력해주세요.", (input) => {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
       userInput = Array.from(input);
       for (let i = 0; i < userInput.length; i++) {
         userInput[i] = parseInt(userInput[i]);
@@ -98,8 +97,27 @@ class App {
       if (checkVaildUserInputValue(userInput)) {
         gameResult = UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
         Console.print(gameResult);
+        if (gameResult == "3스트라이크");
+        {
+          Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임종료`);
+          Console.readLine(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ",
+            (newGame) => {
+              if (newGame == 1) {
+                bullsAndCows.play();
+              } else if (newGame == 2) {
+                Console.print("게임이 종료되었습니다.");
+              } else {
+                throw new Error("잘못된 명령어를 입력했습니다.");
+              }
+            }
+          );
+        }
       }
     });
+  }
+  replay() {
+    play();
   }
 }
 
