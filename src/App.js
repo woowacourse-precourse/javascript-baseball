@@ -1,14 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const MakeRandomNumber = require("../src/MakeRandomNumber");
-const GetUserInput = require("../src/GetUserInput");
+const RandomNumber = require("./RandomNumber");
+const Player = require("../src/Player");
 
 class App {
   play() {
     this.showStartMessage();
-    this.COMPUTER = MakeRandomNumber.makeRandomNumber();
+    this.COMPUTER = RandomNumber.makeRandomNumber();
 
-    const getUserInput = new GetUserInput(this.COMPUTER);
-    getUserInput.getUserInput();
+    const player = new Player(this.COMPUTER);
+    player.getPlayerInput();
   }
 
   showStartMessage() {
