@@ -31,6 +31,10 @@ class App {
       }
       Console.print(GAME_MESSAGE.GAME_OVER);
       Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
+        if (!this.isValidTrigger(trigger)) {
+          Console.close();
+          throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
+        }
         if (trigger === RESTART_TRIGGER) {
           this.computerInput = this.generateComputerInput();
           this.play();
@@ -110,6 +114,9 @@ class App {
     }
 
     return { isValid: true };
+  }
+  isValidTrigger(trigger) {
+    return trigger === RESTART_TRIGGER || trigger === END_TRIGGER;
   }
 }
 
