@@ -79,3 +79,25 @@ describe('두 배열에 모두 포함된 값의 개수를 반환', () => {
     expect(getSameNumCount(['1', '2', '3'], ['4', '5', '6'])).toBe(0);
   });
 });
+
+describe('결과 값에 따라 올바른 게임 결과 메시지를 반환', () => {
+  test('case1', () => {
+    const resultObj = { strike: 1, ball: 1 };
+    expect(getGameResultMessage(resultObj)).toBe('1볼 1스트라이크');
+  });
+
+  test('case2', () => {
+    const resultObj = { strike: 0, ball: 2 };
+    expect(getGameResultMessage(resultObj)).toBe('2볼');
+  });
+
+  test('case3', () => {
+    const resultObj = { strike: 3, ball: 0 };
+    expect(getGameResultMessage(resultObj)).toBe('3스트라이크');
+  });
+
+  test('case4', () => {
+    const resultObj = { strike: 0, ball: 0 };
+    expect(getGameResultMessage(resultObj)).toBe('낫싱');
+  });
+});
