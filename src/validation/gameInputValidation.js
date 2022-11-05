@@ -3,6 +3,7 @@ module.exports = function GameInputValidation(gameInput) {
     checkLength(gameInput);
     checkNumber(gameInput);
     checkDuplicate(gameInput);
+    checkZero(gameInput);
   } catch (error) {
     throw error;
   }
@@ -28,5 +29,13 @@ function checkDuplicate(gameInput) {
       throw new Error("입력 숫자가 중복되었습니다.");
     }
     duplicateChecker.add(gameInput[x]);
+  }
+}
+
+function checkZero(gameInput) {
+  for (let x of gameInput) {
+    if (x == 0) {
+      throw new Error("입력숫자의 각 자리는 1~9까지의 숫자여야 합니다.");
+    }
   }
 }

@@ -28,4 +28,4 @@
 2. [x] gameInput이 숫자가 아닌 경우
 3. [x] 재시작, 종료 input이 1 또는 2가 아닌경우
 4. [x] gameInput이 중복값을 가지는 경우
-5. [ ] gameInput이 0을 가지는 경우
+5. [x] gameInput이 0을 가지는 경우
