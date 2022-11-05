@@ -15,11 +15,11 @@ class Computer {
   }
 
   createNewNum(computerNumbers) {
-    const newNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    const NEW_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
 
-    return this.numberDuplicationCheck(computerNumbers, newNumber)
+    return this.numberDuplicationCheck(computerNumbers, NEW_NUMBER)
       ? this.createNewNum(computerNumbers)
-      : newNumber;
+      : NEW_NUMBER;
   }
 
   numberDuplicationCheck(computerNumbers, newNumber) {
