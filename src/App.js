@@ -5,6 +5,8 @@ class App {
   constructor() {
     this.correctAnswer;
     this.userInput;
+    this.ball = 0
+    this.strike = 0
   }
   play() {
     this.gamaStartAlram()
@@ -21,6 +23,7 @@ class App {
     while (computerRandomNums.size < 3) {
       computerRandomNums.add(MissionUtils.Random.pickNumberInRange(1, 9))
     }
+    MissionUtils.Console.print(computerRandomNums)
     return this.correctAnswer = [...computerRandomNums].join('')
   }
 
@@ -29,8 +32,22 @@ class App {
       const exceptionCheck = new ExceptionCheck()
       exceptionCheck.UserInputCheck(input)
       MissionUtils.Console.print(`입력한 숫자는 ${input} 입니다`)
-      return this.userInput = input
+      this.userInput = input
+      this.strikeCount();
+      this.ballCount();
+      return this.userInput
     })
+  }
+
+  strikeCount() {
+    const correctAnswerArr = this.correctAnswer.split('')
+    correctAnswerArr.map((number, index) => {
+      if (number === this.userInput[index]) {
+        this.strike += 1;
+      }
+    })
+    MissionUtils.Console.print(`스트라이크 : ${this.strike}`)
+    return this.strike
   }
 
 }
