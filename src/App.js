@@ -1,5 +1,8 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
+const DUPLICATION_NUMBER_REGEXP = /([1-9])\1+/g
+const IS_ZERO_REGEXP = /([0])/g
+const NUMBER_REGEXP = /(\D)/g
 class App {
   constructor() {
     this.userNumber = [0, 0, 0];
