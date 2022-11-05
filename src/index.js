@@ -1,4 +1,4 @@
-const App = require(".App.js");
+const App = require("./App.js");
 
 const app = new App();
 app.play();
