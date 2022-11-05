@@ -12,30 +12,29 @@ class App {
 
     checkInputIsValid = (string) => {
         if (
-            string.length !== 3 ||
             !Number.isInteger(Number(string)) ||
+            string.length !== 3 ||
+            Number(string) < 102 ||
+            987 < Number(string) ||
             this.isDuplicate(string)
         ) {
-            throw new Error("invalid Input");
+            throw new Error();
         }
     };
 
     makeAnswer = () => {
-        let answer;
+        const computer = [];
+        while (computer.length < 3) {
+            const number = MissionUtils.Random.pickNumberInRange(1, 9);
+            if (!computer.includes(number)) {
+                computer.push(number);
+            }
+        }
 
-        do {
-            answer = MissionUtils.Random.pickNumberInRange(100, 999).toString();
-        } while (this.isDuplicate(answer));
-
-        return answer;
+        return computer.join("");
     };
 
     printResult = (input, ANSWER) => {
-        if (input === ANSWER) {
-            this.printSuccessMsg();
-            return;
-        }
-
         let strike = 0,
             ball = 0,
             out = true;
@@ -55,15 +54,19 @@ class App {
         if (ball) msg += `${ball}볼 `;
         if (strike) msg += `${strike}스트라이크`;
         MissionUtils.Console.print(msg);
+        strike === 3 && this.printSuccessMsg();
     };
 
     printSuccessMsg = () => {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         MissionUtils.Console.readLine(
-            "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
             (input) => {
                 if (input === "1") this.play();
-                else if (input === "2") MissionUtils.Console.close();
-                else throw new Error("invalid input");
+                else if (input === "2") {
+                    MissionUtils.Console.close();
+                    return;
+                } else throw new Error();
             }
         );
     };
@@ -79,7 +82,6 @@ class App {
     play = () => {
         MissionUtils.Console.print("숫자야구 게임을 시작합니다.");
         const ANSWER = this.makeAnswer();
-        console.log(ANSWER);
         this.getUserInputAndCompare(ANSWER);
     };
 }
