@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
+const { getRandomNumbers } = require('../src/utils/core');
 
 const getSpy = (object, methodName) => {
   const spy = jest.spyOn(object, methodName);
@@ -17,5 +18,16 @@ describe('숫자 야구 게임', () => {
     app.play();
 
     expect(logSpy).toHaveBeenCalledWith(message);
+  });
+
+  test('1에서 9까지의 서로 다른 3자리 수 생성', () => {
+    const pickNumberSpy = getSpy(MissionUtils.Random, 'pickNumberInRange');
+    const result = getRandomNumbers();
+    const removeDuplicatedNumber = new Set(result);
+
+    expect(pickNumberSpy).toHaveBeenCalledWith(1, 9);
+    expect(result).toHaveLength(3);
+    expect(result).toEqual(expect.not.stringContaining('0'));
+    expect(result.length).toEqual(removeDuplicatedNumber.size);
   });
 });
