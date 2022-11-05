@@ -12,9 +12,7 @@ module.exports = RandomSelectNumbersByComputer;
 
 class ValidateUserInput {
   inputNumbers() {
-    Console.readLine("숫자를 입력해주세요 : ", (numbers) => {
-      this.validateUserInput(numbers);
-    });
+    Console.readLine("숫자를 입력해주세요 : ", this.validateUserInput);
   }
 
   validateUserInput(userInput) {
