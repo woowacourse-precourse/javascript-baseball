@@ -1,8 +1,4 @@
 class Counter {
-  constructor(inputNumber, computerNumberArr) {
-    this.inputNumber = inputNumber;
-    this.computerNumberArr = computerNumberArr;
-  }
   countStrike(inputNumber, computerNumberArr) {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {

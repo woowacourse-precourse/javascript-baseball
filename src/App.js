@@ -64,7 +64,7 @@ class App {
     const valiation = new Validation();
     if (inputNumber === "1") return this.reStartGame(inputNumber);
     if (inputNumber === "2") return this.exitGame(inputNumber);
-    valiation.isValidationConfirmInput(inputNumber);
+    return valiation.isValidationConfirmInput();
   }
 
   reStartGame() {
