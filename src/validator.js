@@ -24,4 +24,9 @@ function isVaild(value) {
   if(isDuplicated(value)) throw new Error(constants.MESSAGE.IS_DUPLICATED);
 }
 
+function isVaildRestartSubmit(value) {
+  if(![1, 2].includes(+value)) throw new Error(constants.MESSAGE.IS_INVALID_RESTART_SUBMIT);
+}
+
 exports.isVaild = isVaild;
+exports.isVaildRestartSubmit = isVaildRestartSubmit;

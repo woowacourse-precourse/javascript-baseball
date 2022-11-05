@@ -25,7 +25,7 @@ class App {
   }
   clearGame() {   
     MissionUtils.Console.readLine(constants.MESSAGE.CLEAR, (submit) => {
-      print.restart();
+      validator.isVaildRestartSubmit(submit);
     });
   }
 }
