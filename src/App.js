@@ -19,8 +19,8 @@ class App {
 
   progressGame() {
     this.inputNumber();
-    const strike = this.getHint();
-    this.decideWin(strike);
+    const hint = this.getHint();
+    this.decideWin(hint);
   }
 
   inputNumber() {
@@ -69,11 +69,11 @@ class App {
     }
 
     MissionUtils.Console.print(hint.join(" "));
-    return strike;
+    return hint;
   }
 
-  decideWin(strike) {
-    if (strike === 3) {
+  decideWin(hint) {
+    if (hint.includes("3스트라이크")) {
       this.gameOver();
     } else {
       this.progressGame();
