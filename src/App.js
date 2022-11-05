@@ -15,20 +15,20 @@ class App {
   }
 
   computer_random_number() {
-    const number_list = [];
-    while (number_list.length < 3) {
-      const single_digit = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!number_list.includes(single_digit)) {
-        number_list.push(single_digit);
+    const NUMBER_LIST = [];
+    while (NUMBER_LIST.length < 3) {
+      const SINGLE_DIGIT = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!NUMBER_LIST.includes(SINGLE_DIGIT)) {
+        NUMBER_LIST.push(SINGLE_DIGIT);
       }
     }
-    return number_list.join('');
+    return NUMBER_LIST.join('');
   }
 
   receive_guess_input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input_num => {
-      const validation = this.check_input_validation(input_num);
-      if (!validation) {
+      const VALIDATION = this.check_input_validation(input_num);
+      if (!VALIDATION) {
         throw '잘못된 형식입니다';
       }
       this.check_continue(input_num);
@@ -36,19 +36,19 @@ class App {
   }
 
   check_input_validation(input) {
-    const num_range = /^[0-9]+$/;
-    let checkNum = num_range.test(input);
+    const NUM_RANGE = /^[0-9]+$/;
+    let checkNum = NUM_RANGE.test(input);
     let checkLength = input.length;
-    const set = new Set(input);
-    let checkOverlap = set.size;
+    const SET = new Set(input);
+    let checkOverlap = SET.size;
     if (checkNum && checkLength === 3 && checkOverlap === 3) return true;
     return false;
   }
 
   check_continue(input) {
-    const compare_result = this.compare_and_give_hint(input, this.answer);
-    MissionUtils.Console.print(compare_result);
-    if (compare_result != '3스트라이크') {
+    const COMPARE_RESULT = this.compare_and_give_hint(input, this.answer);
+    MissionUtils.Console.print(COMPARE_RESULT);
+    if (COMPARE_RESULT != '3스트라이크') {
       this.receive_input();
     } else {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
