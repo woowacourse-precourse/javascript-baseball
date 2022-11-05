@@ -23,7 +23,6 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요", (inputNumber) => {
       const userNumber = [...inputNumber];
       try {
-        // 예외처리 throw 할 곳
         this.isValid(userNumber);
       } catch (error) {
         MissionUtils.Console.print(error);
@@ -32,13 +31,31 @@ class App {
     });
     return userNumber;
   };
-  gameStart = () => {
+  gamePrepare = () => {
     this.computerNumber = this.getComputerNumber();
     this.userNumber = this.getUserNumber();
   };
+  gameMatch = () => {
+    let strike,
+      ball = 0;
+    for (let i = 0; i < this.userNumber.length; i++) {
+      for (let j = 0; j < this.userNumber.length; j++) {
+        if (this.computerNumber[i] === this.userNumber[j]) {
+          if (i === k) strike++;
+          else ball++;
+          break;
+        }
+      }
+    }
+    if (strike === 3) MissionUtils.Console.print("스트라이크!");
+    if (strike > 0 || ball > 0)
+      MissionUtils.Console.print(ball + "볼" + strike + "스트라이크");
+    if (!(strike && ball)) MissionUtils.Console.print("낫싱");
+  };
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.gameStart();
+    this.gamePrepare();
+    this.gameMatch();
   }
 }
 
