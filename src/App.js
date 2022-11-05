@@ -18,8 +18,13 @@ class App {
   }
 
   startGame() {
-    Console.print(START_MESSAGE);
+    this.printStartMessage();
     this.initRandomNumbers();
+    this.printInputMessage();
+  }
+
+  printStartMessage() {
+    Console.print(START_MESSAGE);
   }
 
   initRandomNumbers() {
