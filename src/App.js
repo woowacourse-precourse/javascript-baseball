@@ -13,14 +13,17 @@ class App {
 
   setInput(input) {
     input = input.split("").map((num) => parseInt(num));
+
     if (this.isValidInput(input)) {
       this.input = input;
     }
+
     this.setHint();
   }
 
   setAnswer() {
     this.answer = [];
+
     while (this.answer.length < 3) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
@@ -31,17 +34,17 @@ class App {
 
   setHint() {
     this.resetHint();
-    this.input.forEach((num, index) => {
-      if (this.answer[index] === num) {
-        this.hint["strike"] += 1;
-      }
-      if (this.answer.includes(num) && this.answer[index] !== num) {
+
+    this.input.forEach((digitNumber, index) => {
+      if (this.answer[index] === digitNumber) this.hint["strike"] += 1;
+      if (
+        this.answer.includes(digitNumber) &&
+        this.answer[index] !== digitNumber
+      )
         this.hint["ball"] += 1;
-      }
-      if (!this.answer.includes(num)) {
-        this.hint["nothing"] += 1;
-      }
+      if (!this.answer.includes(digitNumber)) this.hint["nothing"] += 1;
     });
+
     this.printHint();
     this.receiveInputFromConsole();
   }
@@ -63,11 +66,10 @@ class App {
   isValidInput(input) {
     if (input.includes(NaN)) throw "문자를 제외한 숫자만 입력하세요.";
     if (input.includes(0)) throw "1~9 사이의 숫자만 입력하세요.";
-    if (input.length !== 3) {
-      throw "3개의 숫자만 입력하세요.";
-    }
+    if (input.length !== 3) throw "3개의 숫자만 입력하세요.";
     if (input.length !== new Set(input).size)
       throw "서로 다른 숫자를 입력하세요.";
+
     return true;
   }
 
@@ -94,6 +96,7 @@ class App {
   selectReplayOrClose(selectedNum) {
     if (selectedNum == 1) return this.setAnswerAndreceiveInput();
     if (selectedNum == 2) return this.close();
+
     throw "1 또는 2만 입력해주세요.";
   }
 
@@ -106,6 +109,7 @@ class App {
     if (this.hint["strike"] === 0) return this.print(`${this.hint["ball"]}볼`);
     if (this.hint["ball"] === 0)
       return this.print(`${this.hint["strike"]}스트라이크`);
+
     return this.print(
       `${this.hint["ball"]}볼 ${this.hint["strike"]}스트라이크`
     );
