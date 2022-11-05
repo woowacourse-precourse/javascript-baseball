@@ -12,6 +12,14 @@ class App {
     }
   }
 
+  gameSetting (min = 1, max = 9, length = 3) {
+    return {
+      NUM_MIN : min,
+      NUM_MAX : max,
+      NUM_LENGTH : length,
+    };
+  }
+
   printMsg(msg) {
     Console.print(msg);
     Console.close();
