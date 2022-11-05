@@ -1,5 +1,5 @@
 //@ts-check
-const { GameState } = require("../model/BaseballGame");
+const { GAME_STATE } = require("../model/BaseballGame");
 
 const PROMPT = Object.freeze({
   ING: "숫자를 입력해주세요 : ",
@@ -12,11 +12,11 @@ class InputView {
     this._handler = handler;
   }
   render(state) {
-    if (state === GameState.END) { 
+    if (state === GAME_STATE.END) { 
       this._console.close();
       return;
     }
-    const prompt = state === GameState.ING ? PROMPT.ING : PROMPT.END;
+    const prompt = state === GAME_STATE.ING ? PROMPT.ING : PROMPT.END;
     this._console.readLine(prompt, (command) => {
       this._handler(command);
     });
