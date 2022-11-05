@@ -17,6 +17,27 @@ class App {
 
     return [...randomNumberSet];
   }
+  async playRound(answer) {
+    const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+    const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    const ERROR_MESSAGE = "Invalid Input!";
+    const digits = answer.length;
+
+    while (true) {
+      const userNumber = await this.readLine(INPUT_MESSAGE);
+      if (!this.isValidNumber(userNumber, digits))
+        this.throwException(ERROR_MESSAGE);
+      const [ballCount, strikeCount] = this.checkBaseballCount(
+        answer,
+        userNumber
+      );
+      this.printResult([ballCount, strikeCount]);
+      if (this.isCorrectAnswer(strikeCount, digits)) {
+        this.print(GAME_END_MESSAGE);
+        break;
+      }
+    }
+  }
   checkBaseballCount(answer, userNumber) {
     const userNumberList = userNumber.split("").map((num) => Number(num));
     const notStrikeList = [];
