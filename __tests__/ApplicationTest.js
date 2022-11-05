@@ -82,7 +82,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("3개의 숫자만 입력하세요.");
   });
 
   test("예외 테스트: 입력값에 서로 동일한 숫자가 포함된 경우", () => {
@@ -95,7 +95,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("서로 다른 숫자를 입력하세요.");
   });
 
   test("예외 테스트: 게임 종료 후 1,2 이외의 값 입력한 경우", () => {
@@ -108,7 +108,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("1 또는 2만 입력해주세요.");
   });
 
   test("예외 테스트: 입력값에 숫자 이외의 값 포함된 경우", () => {
@@ -121,7 +121,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("문자를 제외한 숫자만 입력하세요.");
   });
 
   test("예외 테스트: 입력값에 0이 포함된 경우", () => {
@@ -134,6 +134,6 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("1~9 사이의 숫자만 입력하세요.");
   });
 });
