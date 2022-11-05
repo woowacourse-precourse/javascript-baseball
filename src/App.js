@@ -20,11 +20,19 @@ class App {
   startGame() {
     this.printStartMessage();
     this.initRandomNumbers();
-    this.printInputMessage();
+    this.getPlayerInput();
   }
 
   printStartMessage() {
     Console.print(START_MESSAGE);
+  }
+
+  getPlayerInput() {
+    const playerInput = (answer) => {
+      checkPlayerInputs(answer);
+    };
+
+    Console.readLine(`${INPUT_MESSGAE}`, playerInput);
   }
 
   initRandomNumbers() {
