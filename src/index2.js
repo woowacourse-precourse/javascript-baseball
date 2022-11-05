@@ -43,5 +43,15 @@ export default class BaseballGame {
         }
     }
 
+    // 4. 입력된 숫자중 중복된 숫자가 있는지?
+    checkUserInputIsDiff(input) {
+        let uniqueNumber = new Set(input);
+        if (uniqueNumber.size === input.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 new BaseballGame();
