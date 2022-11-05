@@ -8,17 +8,17 @@ class App {
 
   play() {
     makeRandomValue();
-    inputUserValue();
+    makeUserValue();
   };
 
   setRandomValue(randomValue) {
     this.randomValue = randomValue;
-    // MISSION_UTILS.Console.print(this.randomValue);
+    MISSION_UTILS.Console.print(this.randomValue);
   };
 
-  startGame(userValue) {
+  setUserValueAndCountStart(userValue) {
     this.userValue = userValue;
-    whatsAfter(checkAnswer(this.randomValue, this.userValue));
+    isAnswer(countBallAndStrike(this.randomValue, this.userValue));
   };
   
 };
@@ -38,7 +38,7 @@ function makeRandomValue() {
 };
 
 // 사용자의 숫자 입력받기
-function inputUserValue() {
+function makeUserValue() {
   MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : ', (userValue)=> {
     isValidUserInput(userValue);
   });
@@ -51,15 +51,15 @@ function isValidUserInput(userValue) {
   if (!userValue.match(/[1-9]{3}/) || IS_UNIQUE !== 3) {
     throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요';
   };
-  app.startGame(userValue)
+  app.setUserValueAndCountStart(userValue)
   // app.setUserValue(userValue);
   // app.checkcheck();
 };
 
 // 정답 검사
-function checkAnswer(computer, user) {
-  const STRIKE = countStrike(computer, user);
-  const BALL = countBall(computer, user) - STRIKE;
+function countBallAndStrike(randomValue, userValue) {
+  const STRIKE = countStrike(randomValue, userValue);
+  const BALL = countBall(randomValue, userValue) - STRIKE;
 
   if (STRIKE === 3) {
     return (`3스트라이크`);
@@ -84,35 +84,35 @@ function checkAnswer(computer, user) {
 };
 
 //볼 개수
-function countBall(computer, user) {
-  return [...computer].filter(x => user.includes(x)).length;
+function countBall(randomValue, userValue) {
+  return [...randomValue].filter(x => userValue.includes(x)).length;
 };
 
 //스트라이크 개수
-function countStrike(computer, user) {
-  return [...computer].filter((x, idx) => user[idx] === x).length;
+function countStrike(randomValue, userValue) {
+  return [...randomValue].filter((x, idx) => userValue[idx] === x).length;
 };
 
-function whatsAfter(afterGame) {
-  MISSION_UTILS.Console.print(afterGame);
+function isAnswer(numberOfBallAndStrike) {
+  MISSION_UTILS.Console.print(numberOfBallAndStrike);
 
-  if (afterGame === `3스트라이크`) {
-    askRegame();
+  if (numberOfBallAndStrike === `3스트라이크`) {
+    askRegameOrNot();
   };
 
-  if (afterGame !== `3스트라이크`) {
-    inputUserValue();
+  if (numberOfBallAndStrike !== `3스트라이크`) {
+    makeUserValue();
   };
 
 };
 
-function askRegame() {
+function askRegameOrNot() {
   MISSION_UTILS.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (answer) => {
-    realReGame(answer);
+    checkRegameRequest(answer);
   });
 };
 
-function realReGame(num) {
+function checkRegameRequest(num) {
 
   if (num !== '1' && num !== '2') {
     throw '잘못된 형식을 입력하였습니다. 게임을 종료합니다.';
