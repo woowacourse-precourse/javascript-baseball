@@ -27,6 +27,7 @@ class App {
         this.play();
         return;
       }
+      Console.print(GAME_MESSAGE.GAME_OVER);
       Console.close();
     });
   }
