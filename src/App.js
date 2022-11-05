@@ -12,14 +12,13 @@ class App {
     await this.playRound(answer);
     await this.selectRestartOrExit();
   }
-  async playRound(answer) {
+  playRound(answer) {
     const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
     const ERROR_MESSAGE = "Invalid Input!";
     const digits = answer.length;
 
-    while (true) {
-      const userNumber = await this.readLine(INPUT_MESSAGE);
+    MissionUtils.Console.readLine(INPUT_MESSAGE, (userNumber) => {
       if (!this.isValidNumber(userNumber, digits))
         this.throwException(ERROR_MESSAGE);
       const [ballCount, strikeCount] = this.checkBaseballCount(
@@ -29,9 +28,9 @@ class App {
       this.printResult([ballCount, strikeCount]);
       if (this.isCorrectAnswer(strikeCount, digits)) {
         this.print(GAME_END_MESSAGE);
-        break;
       }
-    }
+      this.playRound(answer);
+    });
   }
   selectRestartOrExit() {
     const FINAL_MESSAGE =
