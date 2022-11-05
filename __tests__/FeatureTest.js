@@ -7,6 +7,12 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const getCloseSpy = () => {
+  const closeSpy = jest.spyOn(MissionUtils.Console, 'close');
+  closeSpy.mockClear();
+  return closeSpy;
+};
+
 describe('기능 테스트', () => {
   test('게임 시작 문구를 출력한다.', () => {
     const message = '숫자 야구 게임을 시작합니다.';
@@ -47,5 +53,35 @@ describe('기능 테스트', () => {
     messages.forEach((message, i) => {
       expect(app.getResult(counts[i])).toEqual(message);
     });
+  });
+
+  test('1을 입력하면 재시작', () => {
+    const answer = '1';
+
+    MissionUtils.Console.readLine = jest.fn();
+    MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
+      callback(answer);
+    });
+
+    const app = new App();
+    const playSpy = jest.spyOn(app, 'play');
+    app.readRestartInput();
+
+    expect(playSpy).toHaveBeenCalledTimes(1);
+  });
+
+  test('2를 입력하면 게임 종료', () => {
+    const answer = '2';
+    const closeSpy = getCloseSpy();
+
+    MissionUtils.Console.readLine = jest.fn();
+    MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
+      callback(answer);
+    });
+
+    const app = new App();
+    app.readRestartInput();
+
+    expect(closeSpy).toHaveBeenCalledTimes(1);
   });
 });
