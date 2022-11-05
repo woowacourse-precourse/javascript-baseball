@@ -1,38 +1,36 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
+const error = require('./Error');
 
 class Interaction {
-  constructor() {}
+  constructor() {
+    this.answer;
+  }
 
-  static printPlayMessage() {
+  printStartMessage() {
     Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  printResponseMessage() {
-    Console.readLine('숫자를 입력해주세요 : ', this.emit);
+  printPlayInputMessage() {
+    return new Promise(this.handleReadLinePromise);
   }
 
-  emit(answer) {
-    if (this.isValidResponse(answer)) {
-      return -1;
-    }
-    return answer;
+  handleReadLinePromise(resolve) {
+    Console.readLine('숫자를 입력해 주세요 :', (inputNumber) => {
+      Console.close();
+      resolve(inputNumber);
+    });
   }
 
-  isValidResponse(answer) {
-    return this.isNumberType(answer) && this.isDuplicate(answer) && this.isNumberType;
-  }
+  checkValidNumberInput(inputNumber) {
+    return new Promise((resolve, reject) => {
+      console.log(this);
+      if (!error.isValidResponse(inputNumber)) {
+        throw new Error('숫자 세자리이상');
+      }
 
-  isNumberType(answer) {
-    return typeof answer === 'number';
-  }
-
-  isThreeDigit(answer) {
-    return answer.length === 3;
-  }
-
-  isDuplicate(answer) {
-    return [...String(answer)].length === new Set([...String(answer)]).size;
+      resolve(answer);
+    });
   }
 }
 
