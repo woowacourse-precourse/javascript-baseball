@@ -33,7 +33,20 @@ class App {
         }
       }
 
-      MissionUtils.Console.print(question);
+      var input = question.split('');
+
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+          if (answer[i] == input[j]) {
+            if (i === j) strike++;
+            else ball++;
+          }
+        }
+      }
+      if (strike > 0 || ball > 0)
+        MissionUtils.Console.print(ball + '볼 ' + strike + '스트라이크');
+      else MissionUtils.Console.print('낫싱');
+
       MissionUtils.Console.close();
     });
   }
