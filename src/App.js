@@ -106,17 +106,18 @@ class App {
   }
 
   selectOption() {
-    let option;
-
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (num) => {
-        option = num;
-        MissionUtils.Console.print(option);
+        this.isOptionError(num);
       }
     );
+  }
 
-    this.isOptionError(option);
+  isOptionError(option) {
+    if (option !== "1" && option !== "2") {
+      throw "잘못된 옵션을 선택하였습니다.";
+    }
 
     if (option === "1") {
       return this.playGame();
@@ -124,12 +125,6 @@ class App {
 
     if (option === "2") {
       MissionUtils.Console.print("게임 종료");
-    }
-  }
-
-  isOptionError(option) {
-    if (option !== "1" && option !== "2") {
-      throw "잘못된 옵션을 선택하였습니다.";
     }
   }
 }
