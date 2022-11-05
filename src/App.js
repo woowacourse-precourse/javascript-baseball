@@ -14,17 +14,22 @@ class App {
         userInputNumber(randomNumber);
     }
 }
-const a = new App();
-a.play();
 
 function startGuidePrint() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 }
 
-function generateRandomNumber() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, RETURN_COUNT);
-}
 
+function generateRandomNumber() {
+    const computer = [];
+    while (computer.length < RETURN_COUNT) {
+        const number = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
+        if (!computer.includes(number)) {
+            computer.push(number);
+        }
+    }
+    return computer;
+}
 
 function userInputNumber(randomNumber) {
     MissionUtils.Console.readLine("세자리 숫자를 입력해주세요 : ", number => {
