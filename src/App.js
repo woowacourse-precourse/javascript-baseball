@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
   chkValidNumber(answer) {
@@ -11,6 +11,17 @@ class App {
     }
 
     return true;
+  }
+
+  makeRandomAnswer() {
+    const randomNumArr = [];
+    while (randomNumArr.length < 3) {
+      const randomNum = Random.pickNumberInRange(1, 9);
+      if (!randomNumArr.includes(randomNum)) {
+        randomNumArr.push(randomNum);
+      }
+    }
+    return randomNumArr.join('');
   }
 
   inputByConsole() {
