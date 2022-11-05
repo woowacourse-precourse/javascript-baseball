@@ -135,18 +135,30 @@ export default class BaseballGame {
     printResult(result) {
         const resultContainer = document.querySelector('#result');
         resultContainer.innerHTML = this.showResult(result);
-    }
+    };
 
     // 재시작 문구 및 버튼 출력하는 함수
     restartBtn() {
         const restartButton = `<button id="game-restart-button">다시하기</button>`;
         return `<div>게임 한번 더 할래요? ${restartButton}</div>`;
-    }
+    };
 
     // 재시작 버튼 클릭 시 다시 게임을 다시 시작하는 함수 구현
     restartBtnClick() {
         const restartBtn = document.getElementById('game-restart-button');
-        restartBtn.addEventListener("click", this.restart);
+        restartBtn.addEventListener("click", this.gameRestart);
+    };
+
+    // 재시작 기능 함수 구현
+    gameRestart() {
+        const input = document.querySelector("#user-input");
+        const submitBtn = document.querySelector("#submit");
+        const result = document.querySelector("#result");
+
+        input.value = null;
+        submitBtn.disabled = false;
+        result.innerHTML = "";
+        return new BaseballGame();
     }
 }
 new BaseballGame();
