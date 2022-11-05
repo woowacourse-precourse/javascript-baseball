@@ -24,12 +24,32 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+  test("시작문구 출력 확인", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "숫자 야구 게임을 시작합니다.",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("정답 후 게임 종료", () => {
     const randoms = [5, 8, 9];
     const answers = ["589", "2"];
     const logSpy = getLogSpy();
     const messages = [
       "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
       "게임 종료",
     ];
 
@@ -132,7 +152,7 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("사용자가 문자 입력시 에러", () => {
+  test("사용자가 특수문자 입력시 에러", () => {
     const randoms = [1, 3, 5];
     const answers = ["@32"];
 
