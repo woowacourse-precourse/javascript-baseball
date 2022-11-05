@@ -103,4 +103,23 @@ describe("야구 게임 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith("게임 종료");
   });
+
+  test("숫자 맞지 않음", () => {
+    const logSpy = jest.spyOn(console, "log");
+    logSpy.mockClear();
+
+    const randoms = [1, 3, 5];
+    const answers = ["246", "135"];
+    const messages = ["낫싱", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
