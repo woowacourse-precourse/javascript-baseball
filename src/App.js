@@ -5,7 +5,7 @@ class App {
   async play() {
     printMessage(Constants.START_MESSAGE);
     const computerNumber = createComputerNumber();
-    const userNumber = await inputNumber();
+    const userNumber = await inputNumber(Constants.INPUT_NUMBER_MESSAGE);
     userNumberException(userNumber);
     const strike = countStrike(computerNumber, userNumber);
     const ball = countBall(computerNumber, userNumber);
@@ -13,8 +13,7 @@ class App {
 
     if (isAnswer(strike)) {
       printMessage(Constants.WIN_MESSAGE);
-      printMessage(Constants.END_MESSAGE);
-      const selectedNumber = await inputNumber();
+      const selectedNumber = await inputNumber(Constants.END_MESSAGE);
       selectedNumberException(selectedNumber);
     }
   }
@@ -38,15 +37,16 @@ function createComputerNumber() {
   return computerNumber;
 }
 
-function input(msg) {
+function input(message) {
   return new Promise((resolve) => {
-    MissionUtils.Console.readLine(msg, resolve);
+    MissionUtils.Console.readLine(message, resolve);
   });
 }
 
-async function inputNumber() {
-  const number = await input(Constants.INPUT_NUMBER_MESSAGE);
-  return [...number];
+async function inputNumber(message) {
+  const number = await input(message);
+
+  return [...number].map((num) => Number(num));
 }
 
 function isNumber(userNumber) {
