@@ -10,7 +10,6 @@ class App {
     const DIGITS = 3;
     const answer = this.generateRandomNumber(DIGITS);
     this.playRound(answer);
-    this.selectRestartOrExit();
   }
   playRound(answer) {
     const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
@@ -28,6 +27,7 @@ class App {
       this.printResult([ballCount, strikeCount]);
       if (this.isCorrectAnswer(strikeCount, digits)) {
         this.print(GAME_END_MESSAGE);
+        this.selectRestartOrExit();
       }
       this.playRound(answer);
     });
