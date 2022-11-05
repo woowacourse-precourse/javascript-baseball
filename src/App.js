@@ -1,4 +1,5 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
+const MESSAGE = require("./constant/message.js");
 
 class isValidUserInput {
   constructor(userInput) {
@@ -26,40 +27,43 @@ class isValidUserInput {
 }
 
 class App {
+  constructor() {
+    this.print(MESSAGE.GAME_START);
+    this.userinput = this.readInput();
+  }
+
   print(message) {
-    return MissionUtils.Console.print(message);
+    return Console.print(message);
   }
 
   pickNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    return Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
-  startGame() {
-    this.print("숫자 야구 게임을 시작합니다.");
-    return this.pickNumbers();
-  }
-
-  input() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-        this.userInput = [...answer];
-        resolve();
-      });
+  // readInput() {
+  //   return new Promise((resolve) => {
+  //     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+  //       this.userInput = [...answer];
+  //       resolve();
+  //     });
+  //   });
+  // }
+  readInput() {
+    Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
+      Console.close();
     });
   }
-
-  async inGame() {
-    await this.input();
-    if (this.userInput.length !== 3) {
-      throw new Error("3자리 수를 입력해주세요.");
-    }
-    if (this.userInput.map()) this.print(this.userInput);
+  inGame() {
+    this.readInput();
+    Console.print("asdfasdf");
+    const inputError = new isValidUserInput(this.userinput);
+    if (!inputError.checkAllUserInput) return -1;
   }
 
   play() {
     this.startGame();
     this.inGame();
-    // await this.input();
+    // await this.leadInput();
 
     // while (1) {
     //   switch (coin) {
