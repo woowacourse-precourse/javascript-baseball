@@ -90,11 +90,16 @@ class App {
       this.getInputNumber();
     } else {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.checkRePlay();
     }
   }
+  //재시작 여부 확인 함수
+  checkRePlay() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+      if (input === '1') this.play();
+      else MissionUtils.Console.close();
+    });
+  }
 }
-
-let app = new App();
-app.play();
 
 module.exports = App;
