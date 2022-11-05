@@ -1,6 +1,8 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  #gameAnswer = null;
+
   printResult(result) {
     let output = '';
     if (result.ball !== 0) {
@@ -60,17 +62,36 @@ class App {
   }
 
   inputByConsole() {
-    Console.readLine('숫자를 입력해주세요 : ', answer => {
-      if (!this.chkValidNumber(answer))
+    Console.readLine('숫자를 입력해주세요 : ', input => {
+      if (!this.chkValidNumber(input))
         throw new Error(
           '입력형식이 잘못되었습니다. 서로 다른 숫자 3개를 입력해주세요.🙏'
         );
-      this.inputByConsole();
+      const result = this.getResult(input, this.#gameAnswer);
+      this.printResult(result);
+      if (result.strike === 3) {
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        Console.readLine(
+          '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+          finishInput => {
+            if (finishInput === '1') {
+              this.#gameAnswer = this.makeRandomAnswer();
+              this.inputByConsole();
+            }
+            if (finishInput === '2') {
+              Console.close();
+            }
+          }
+        );
+      } else {
+        this.inputByConsole();
+      }
     });
   }
 
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
+    this.#gameAnswer = this.makeRandomAnswer();
     this.inputByConsole();
   }
 }
