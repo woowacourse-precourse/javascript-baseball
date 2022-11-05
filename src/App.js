@@ -134,6 +134,36 @@ class App {
 
     return ball;
   }
+
+  printGameResult(playerInput) {
+    console.log(`컴퓨터 숫자 : `, this.randomNumbers); // 컴퓨터 숫자 테스트용
+    const playerPickNumbers = playerInput.split('').map(Number);
+    const strike = this.countStrike(playerPickNumbers);
+    const ball = this.countBall(playerPickNumbers);
+
+    if (strike === 3) {
+      Console.print(`${strike}스트라이크`);
+      Console.print(`${STRIKE_MESSAGE}`);
+      Console.readLine(`${END_MESSAGE}\n`, (answer) => {
+        const convertNumberInput = Number(answer);
+        if (convertNumberInput == 1) {
+          this.play();
+        } else if (convertNumberInput == 2) {
+          return Console.close();
+        }
+      });
+    } else if (strike === 0 && ball === 0) {
+      Console.print('낫싱');
+    } else if (!strike && ball) {
+      Console.print(`${ball}볼`);
+    } else if (strike && !ball) {
+      Console.print(`${strike}스트라이크`);
+    } else {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
+
+    this.getPlayerInput();
+  }
 }
 
 const app = new App();
