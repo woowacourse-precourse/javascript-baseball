@@ -12,7 +12,7 @@ class App {
   }
 
   checkDistinct(input) {
-    const arr = typeof input === "string" ? input.split("") : input;
+    const arr = input.split("");
     const set = new Set(arr);
 
     return arr.length === set.size;
@@ -34,16 +34,6 @@ class App {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this.computer.includes(number)) this.computer.push(number);
     }
-  }
-
-  setIsContinued() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (input) => {
-        if (/[12]{1}/.test(input)) throw "1 또는 2만 입력 가능합니다";
-        isContinued = input === 1;
-      }
-    );
   }
 
   calcScore() {
@@ -71,6 +61,16 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       setIsContinued();
     }
+  }
+
+  setIsContinued() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (/[12]{1}/.test(input)) throw "1 또는 2만 입력 가능합니다";
+        isContinued = input === 1;
+      }
+    );
   }
 
   play() {
