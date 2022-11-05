@@ -17,7 +17,7 @@ function askNumInput() {
 
 function isValidInput(input) {
   if (!isNumber(input) || !isVaildLength(input) || !isAllDiffNum(input)) {
-    throw "유효한 값이 아니므로 게임을 종료합니다.";
+    throw new Error("유효한 값이 아니므로 게임을 종료합니다.");
   }
 }
 
@@ -43,11 +43,8 @@ class App {
   play() {
     printMsg("숫자 야구 게임을 시작합니다.");
     const ANSWER = setAnswer();
-    try {
-      askNumInput();
-    } catch (e) {
-      printMsg(e);
-    }
+
+    askNumInput();
   }
 }
 
