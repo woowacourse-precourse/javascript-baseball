@@ -7,6 +7,11 @@ class Count {
     ));
     return balls.length;
   }
+
+  static strike(computerNumbers, userNumbers) {
+    const strikes = computerNumbers.filter((number, index) => number === userNumbers[index]);
+    return strikes.length;
+  }
 }
 
 module.exports = Count;
