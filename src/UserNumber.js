@@ -1,6 +1,6 @@
 const { MissionUtils } = require("@woowacourse/mission-utils");
  
-class UserInput{
+class UserNumber{
     constructor(){
         MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
         MissionUtils.Console.readLine('숫자를 입력해주세요 :' , (answer) => {
@@ -9,6 +9,7 @@ class UserInput{
         this.isNotNumberError(answer);
         this.overlapNumberError(answer);
         });
+        return answer.split("");
     }
 
     threeDigitsError(answer){
@@ -24,7 +25,7 @@ class UserInput{
 }
 
     isNotNumberError(answer){
-    if(!isNan(answer)){
+    if(isNaN(answer)){
         throw "Error (숫자 형식이 아닙니다.)" ;
     }
 }
@@ -39,4 +40,4 @@ class UserInput{
 }
 }
 
-module.exports = UserInput ;
+module.exports = UserNumber ;
