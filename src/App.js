@@ -3,11 +3,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-    this.isValidUserNumber = false;
-    this.computerNumberArray = 0;
-    this.userNumber = 0;
-    this.gameEndStatus = false;
-    this.gameOptionValue = 0;
   }
 
   play() {
@@ -28,7 +23,6 @@ class App {
     const userNumberArray = this.convertUserNumberToArray().map((number) => +number);
     let strikeCount = 0;
     let ballCount = 0;
-    console.log(userNumberArray, this.computerNumberArray);
 
     userNumberArray.forEach((userNumber, index) => {
       if (this.computerNumberArray.includes(userNumber)) {
@@ -104,5 +98,3 @@ class App {
 module.exports = App;
 
 const app = new App();
-
-console.log(app.play());
