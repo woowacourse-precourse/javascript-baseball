@@ -7,6 +7,9 @@ const CheckInput = (input) => {
   else if(CheckValidate(inputarray)){
     throw "1~9사이의 숫자를입력해주세요!!";
   }
+  else if(CheckDuplicate(inputarray)){
+    throw "중복된 숫자가있습니다!!"
+  }
 }
 
 const CheckSize = (input) => {
@@ -18,6 +21,11 @@ const CheckValidate = (input) => {
     for( let i of input){
       return (!validnumber.includes(i)) ? true : false
     }
+};
+
+const CheckDuplicate = (input) => {
+  const setnumber = new Set(input);
+  return (input.length !== setnumber.size) ?  true : false 
 };
 
 module.exports = CheckInput;
