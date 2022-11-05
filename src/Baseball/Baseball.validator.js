@@ -3,7 +3,7 @@ const BaseballDto = require("./Baseball.dto");
 class BaseballValidator {
   static checkNumericNumbers(numbers) {
     const nonNuemrics = Array.from(numbers).filter(
-      (number) => "1" > number && number > "9"
+      (number) => "1" > number || number > "9"
     );
     if (nonNuemrics > 0) {
       throw new Error("숫자가 아닌 값이 있습니다.");
@@ -17,7 +17,7 @@ class BaseballValidator {
       throw new Error("글자가 3개가 아닙니다.");
     }
   }
-  static checkOtherNumbers(numbers) {
+  static checkDuplicateNumbers(numbers) {
     const removedDuplicateNumbers = Array.from(new Set(...numbers));
     if (
       removedDuplicateNumbers.length === numbers.length &&
