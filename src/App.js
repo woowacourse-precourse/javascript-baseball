@@ -107,23 +107,23 @@ function isAnswer(numberOfBallAndStrike) {
 };
 
 function askRegameOrNot() {
-  MISSION_UTILS.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (answer) => {
-    checkRegameRequest(answer);
+  MISSION_UTILS.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (regameRequest) => {
+    checkRegameRequest(regameRequest);
   });
 };
 
-function checkRegameRequest(num) {
+function checkRegameRequest(regameRequest) {
 
-  if (num !== '1' && num !== '2') {
+  if (regameRequest !== '1' && regameRequest !== '2') {
     throw '잘못된 형식을 입력하였습니다. 게임을 종료합니다.';
   };
 
-  if (num === '1') {
+  if (regameRequest === '1') {
     const app = new App();
     app.play();
   };
 
-  if (num === '2') {
+  if (regameRequest === '2') {
     MISSION_UTILS.Console.print(`게임 종료`);
     MISSION_UTILS.Console.close();
   };
