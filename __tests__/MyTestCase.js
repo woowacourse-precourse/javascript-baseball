@@ -16,35 +16,35 @@ describe("build_answer 테스트", () => {
     });
     test("각 개체가 한자리 숫자인지 확인", () => {
         const result = build_answer();
-        const set_result = [...new Set(result)]
-        expect(set_result).toHaveLength(3);
+        expect(result[0]).toBeLessThan(10);
+        expect(result[1]).toBeLessThan(10);
+        expect(result[2]).toBeLessThan(10);
     });
 })
 describe("choice_answer 테스트", () => {
     test("3자리 배열 인지 확인", () => {
-        const result = build_answer();
+        const result = choice_answer(123);
         expect(result).toHaveLength(3);
     });
     test("배열 객체의 타입이 숫자인지 확인", () => {
-        const result = build_answer();
+        const result = choice_answer(123);
         expect(result[0]).any(Number);
         expect(result[1]).any(Number);
         expect(result[2]).any(Number);
     });
     test("입력값이 중복있을떄 예외확인", () => {
-        const result = build_answer();
-        const set_result = [...new Set(result)]
-        expect(set_result).toHaveLength(3);
+        expect(choice_answer(222)).toThrow();
     });
     test("각 개체가 한자리 숫자인지 확인", () => {
-        const result = build_answer();
-        const set_result = [...new Set(result)]
-        expect(set_result).toHaveLength(3);
+        const result = choice_answer(123);
+        expect(result[0]).toBeLessThan(10);
+        expect(result[1]).toBeLessThan(10);
+        expect(result[2]).toBeLessThan(10);
     });
     test("입력 받은 숫자가 정상 출력 되는지 확인", () => {
-        const result = build_answer();
-        const set_result = [...new Set(result)]
-        expect(set_result).toHaveLength(3);
+        const result = choice_answer(123);
+        const exp = [1,2,3]
+        expect(result).toEqual(exp);
     });
 })
 describe("count_strike 테스트", () => {
