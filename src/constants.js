@@ -6,4 +6,5 @@ module.exports = Object.freeze({
   THREE_STRIKE: "3스트라이크",
   NOTHING: "낫싱",
   NUMERIC_VALID_ERROR: "올바르지 못한 숫자 입력입니다.",
+  INVALID_COMMAND: "올바르지 않은 커맨드 입니다.",
 });
