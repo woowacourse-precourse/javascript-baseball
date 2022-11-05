@@ -5,6 +5,7 @@ class App {
     this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
     this.isValidUserNumber = false;
     this.computerNumberArray = App.generateComputerNumberArray();
+    this.userNumber = 0;
   }
 
   play() {
@@ -27,6 +28,17 @@ class App {
     this.printResult(strikeCount, ballCount);
   }
 
+  validateUserInput(userNumber) {
+    console.log(new Set([...this.convertUserNumberToArray()]).size, "sdasdasdas");
+    if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
+    if (userNumber.toString().length > 3 || userNumber.toString().length < 3) {
+      throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
+    }
+    if (new Set([...this.convertUserNumberToArray()]).size !== 3) throw new Error("중복되지 않은 숫자 3자리를 입력해주세요");
+    else this.isValidUserNumber = true;
+    if (this.isValidUserNumber === true) this.compareNumber();
+  }
+
   printResult(strikeCount, ballCount) {
     if (strikeCount === 3) console.log(`${strikeCount}스트라이크`);
     if (strikeCount > 0 && ballCount > 0) {
@@ -42,7 +54,7 @@ class App {
       this.getUserInputNumber();
     }
     if (ballCount === 0 && strikeCount === 0) {
-      console.log("낫 싱");
+      console.log("낫싱");
       this.getUserInputNumber();
     }
   }
@@ -54,12 +66,19 @@ class App {
     return false;
   }
 
+  static handleError(e) {
+    console.log(e);
+  }
+
   getUserInputNumber() {
     return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
-      this.isValidUserNumber = true;
       this.userNumber = input;
-      this.compareNumber();
+      try {
+        this.validateUserInput(this.userNumber);
+      } catch (error) {
+        App.handleError(error);
+      }
     });
   }
 
