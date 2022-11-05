@@ -10,6 +10,15 @@ function getBall(ball, inputNumber, answer, includeOfNum) {
   return ball;
 }
 
+function getStrike(strike, inputNumber, answer) {
+  inputNumber.forEach((num, idx) => {
+    if (num === answer[idx]) {
+      strike += 1;
+    }
+  });
+  return strike;
+}
+
 function createResult(inputNumber, answer) {
   const includeOfNum = {};
   inputNumber = String(inputNumber).split("");
