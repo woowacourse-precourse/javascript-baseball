@@ -48,6 +48,7 @@ class App {
         this.ballCount += 1;
       }
     }
+    this.result();
   }
 
   threeStrikeCheck() {
@@ -94,6 +95,14 @@ class App {
       );
     }
     return false;
+  }
+
+  result() {
+    this.threeStrikeCheck();
+    this.nothingCheck();
+    this.strikeCheck();
+    this.ballCheck();
+    this.strikeAndBallCheck();
   }
 }
 
