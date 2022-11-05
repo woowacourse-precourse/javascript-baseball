@@ -28,7 +28,17 @@ class App {
 
 // Todo: Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
 const makeComputerNumber = () => {
-  const computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
+
+  const computerNumber = computer.map((element) => {
+    return String(element);
+  });
   return computerNumber;
 };
 
