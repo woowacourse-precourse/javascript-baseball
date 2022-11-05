@@ -1,5 +1,5 @@
-const App = require('../src/App');
 const { Console } = require('@woowacourse/mission-utils');
+
 const {
   isValidRestartInputValue,
   getGameResultMessage,
