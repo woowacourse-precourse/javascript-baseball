@@ -4,6 +4,7 @@ class App {
 
   constructor(){
     this.computerInput=[]
+    this.userInput=[]
   }
 
   play() {
@@ -22,9 +23,21 @@ class App {
     return computer;
   }
 
+  strikeCount(computerInput, userInput){
+    let strikeTotal=0;
+    computerInput.map((computer, index)=>{
+      if(computer===Number(userInput[index])) strikeTotal++;
+    })
+    return strikeTotal;
+  }
+
+  compareNumber(userInput){
+
+  }
+
   userInputNumber(){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      answer.split('')
+      this.compareNumber(answer.split(''));
     });
   }
 };
