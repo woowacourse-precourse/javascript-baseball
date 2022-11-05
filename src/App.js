@@ -24,23 +24,13 @@ class App {
     });
   }
 
-  testAnswer(answer, computer) {
+  testAnswer(answer) {
     const testType = /[1-9]/;
     const set = new Set(answer);
     answer.forEach(number => {
-      try {
-        if (!testType.test(number)) {
-          throw new Error('숫자를 입력하세요.');
-        }
-        if (answer.length !== 3) {
-          throw new Error('3자리를 입력하세요.');
-        }
-        if (answer.length !== set.size) {
-          throw new Error('중복된 수가 있습니다.');
-        }
-      } catch {
-        this.getUserAnswer(computer);
-      }
+      if (!testType.test(number)) throw new Error('숫자를 입력하세요.');
+      if (answer.length !== 3) throw new Error('3자리를 입력하세요.');
+      if (answer.length !== set.size) throw new Error('중복된 수가 있습니다.');
     });
     return answer;
   }
