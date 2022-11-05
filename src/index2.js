@@ -110,5 +110,25 @@ export default class BaseballGame {
         return answer;
     };
 
+    // 정답 여부 확인 함수 구현(3스트라이크)
+    checkStrike(result) {
+        if (result == "3스트라이크") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    // 정답여부에 따른 판정 결과 문자열
+    showReulst(answer) {
+        const strike = this.checkStrike(answer);
+        if (strike) {
+            answer = "🎉우와 정답이에요!";
+            const submitBtn = document.querySelector('#submit');
+            submitBtn.disabled = true;
+            return answer;
+        }
+        return answer;
+    };
 }
 new BaseballGame();
