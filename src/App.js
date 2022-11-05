@@ -17,11 +17,26 @@ class App {
   #random;
 
   constructor() {
-    this.#random = Random.pickUniqueNumbersInRange(RANDOMLIST.STARTPOINT, RANDOMLIST.ENDPOINT, RANDOMLIST.COUNT);
+    this.#random = this.#makeRandomNumber();
   }
 
   get3RandomNumbers() {
     return this.#random;
+  }
+
+  set3RandomNumbers() {
+    this.#random = this.makeRandomNumber();
+  }
+
+  #makeRandomNumber() {
+    const result = [];
+
+    while (result.length !== 3) {
+      const randomNum = Random.pickNumberInRange(1, 9);
+      !result.includes(randomNum) && result.push(randomNum);
+    }
+
+    return result;
   }
 
   isStrike(randomItem, inputItem) {
