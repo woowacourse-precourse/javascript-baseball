@@ -63,9 +63,9 @@ class App {
     let nothing = false;
 
     const JUDGE_BASEBALL = (digit, index) => {
-      const [increaseStrike, increaseBall] = this.increaseBaseball(digit, index);
-      strike += increaseStrike;
-      ball += increaseBall;
+      const [INCREASE_STRIKE, INCREASE_BALL] = this.increaseBaseball(digit, index);
+      strike += INCREASE_STRIKE;
+      ball += INCREASE_BALL;
     };
     USER_DIGITS.forEach(JUDGE_BASEBALL);
 
