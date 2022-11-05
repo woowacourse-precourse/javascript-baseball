@@ -9,6 +9,7 @@ class App {
   play() {
     this.greeting();
     this.makeRandomNumberArray();
+    console.log(this.computerRandomNumber);
     this.inputUserAnswer();
   }
 
@@ -34,6 +35,7 @@ class App {
 
   parseUserAnswertoString(answer) {
     this.userAnswer = String(answer);
+    if (this.userAnswer.length !== 3) throw new Error();
   }
 
   checkBallStrike(rn, input) {
