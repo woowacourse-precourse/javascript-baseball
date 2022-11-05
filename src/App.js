@@ -72,7 +72,8 @@ class App {
 
   reStart(num){
     if (Number(num) === 1) {
-      this.gameStart()
+      this.computerInput();
+      this.userInput();
     } 
     if (Number(num) === 2) {
       MissionUtils.Console.print("게임 종료");
