@@ -1,4 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const ExceptionCheck = require("./ExceptionCheck")
+
 
 
 class App {
@@ -26,8 +28,10 @@ class App {
 
   getAnswer() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      const exceptionCheck = new ExceptionCheck()
+      exceptionCheck.UserInputCheck(input)
       MissionUtils.Console.print(`입력한 숫자는 ${input} 입니다`)
-      this.user_input = input
+      return this.user_input = input
     })
   }
 
