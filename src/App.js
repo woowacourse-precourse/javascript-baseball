@@ -6,19 +6,23 @@ const END_GAME_NUM = 9;
 const GAME_NUM_SIZE = 3;
 
 function generateNumberList(size) {
-  if (END_GAME_NUM - START_GAME_NUM < size) {
-    return -1;
+  const result = [];
+  while (result.length < size) {
+    const number = MissionUtils.Random.pickNumberInRange(
+      START_GAME_NUM,
+      END_GAME_NUM
+    );
+    if (!result.includes(number)) {
+      result.push(number);
+    }
   }
-  const result = MissionUtils.Random.pickUniqueNumbersInRange(
-    START_GAME_NUM,
-    END_GAME_NUM,
-    size
-  );
   return result;
 }
 
 class App {
-  play() {}
+  play() {
+    const computerNumberList = generateNumberList(GAME_NUM_SIZE);
+  }
 }
 
 module.exports = App;
