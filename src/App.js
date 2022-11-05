@@ -68,7 +68,7 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (/[12]{1}/.test(input)) throw "1 또는 2만 입력 가능합니다";
-        isContinued = input === 1;
+        this.isContinued = input === 1;
         initializeMember();
       }
     );
@@ -89,6 +89,7 @@ class App {
       this.calcScore();
       this.printResult();
     }
+    MissionUtils.Console.close();
   }
 }
 
