@@ -11,6 +11,10 @@ class App {
     }
     return results;
   }
+
+  enterAnswer() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
+  }
 }
 
 module.exports = App;
