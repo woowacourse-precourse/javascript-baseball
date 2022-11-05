@@ -68,15 +68,19 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (input === "1") {
-          this.Answer = this.makeComputerArr();
-          console.log(this.Answer);
-          this.makeInputNum();
+          this.restart();
         }
         if (input === "2") process.exit();
         if (input < 1 || input > 2 || Number.isNaN(input))
           throw new Error("정해진 값을 입력해주세요.");
       }
     );
+  }
+
+  restart() {
+    this.Answer = this.makeComputerArr();
+    console.log(this.Answer);
+    this.makeInputNum();
   }
 }
 
