@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const {Random} = require("@woowacourse/mission-utils");
 
 class Computer {
   constructor () {
@@ -11,7 +11,7 @@ class Computer {
 
   setNumbers (count) {
     while (this.numbers.length < count) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      const number = Random.pickNumberInRange(1, 9);
       if (!this.numbers.includes(number)) {
         this.numbers.push(number);
       }
