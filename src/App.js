@@ -129,6 +129,7 @@ class App {
     return commandList.includes(command);
   }
   throwException(message) {
+    MissionUtils.Console.close();
     throw new Error(message);
   }
 }
