@@ -9,6 +9,10 @@ class App {
         const randomNumber = generateRandomNumber();
         userInputNumber(randomNumber);
     }
+    restart() {
+        const randomNumber = generateRandomNumber();
+        userInputNumber(randomNumber);
+    }
 }
 const a = new App();
 a.play();
@@ -38,6 +42,18 @@ function gameStart(number, randomNumber) {
     } else {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", wantNewstart);
+    }
+}
+
+function wantNewstart(number) {
+    const num = Number(number);
+    if (num === 1) {
+        const app = new App();
+        app.restart();
+    } else if (num === 2) {
+        MissionUtils.Console.close();
+    } else {
+        throw "잘못된 값을 입력하였습니다.";
     }
 }
 
