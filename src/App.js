@@ -64,9 +64,21 @@ class App {
   calScore() {
     this.countBall();
     this.countStrike();
-    // Debug
+    // // Debug
     // MissionUtils.Console.print(this.answer);
     // MissionUtils.Console.print(this.score);
+    this.printScore();
+  }
+
+  printScore() {
+    let scoreMsg = '';
+    if (this.score.ball > 0) scoreMsg += `${this.score.ball}볼`;
+    if (this.score.strike > 0) {
+      if (this.score.ball > 0) scoreMsg += ' ';
+      scoreMsg += `${this.score.strike}스트라이크`;
+    }
+    if (this.score.ball === 0 && this.score.strike === 0) scoreMsg = '낫싱';
+    MissionUtils.Console.print(scoreMsg);
   }
 
   generateAnswer() {
