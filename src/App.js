@@ -4,7 +4,6 @@ class App {
   constructor() {
     this.computerNumber = [];
     this.playerNumber = [];
-    this.isCorrectAnswer = false;
   }
 
   play() {
@@ -20,13 +19,8 @@ class App {
 
   progressGame() {
     this.inputNumber();
-    this.getHint();
-
-    if (this.isCorrectAnswer) {
-      this.gameOver();
-    } else {
-      this.progressGame();
-    }
+    const strike = this.getHint();
+    this.decideWin(strike);
   }
 
   inputNumber() {
@@ -75,8 +69,14 @@ class App {
     }
 
     MissionUtils.Console.print(hint.join(" "));
+    return strike;
+  }
+
+  decideWin(strike) {
     if (strike === 3) {
-      this.isCorrectAnswer = true;
+      this.gameOver();
+    } else {
+      this.progressGame();
     }
   }
 
@@ -101,7 +101,6 @@ class App {
   initialize() {
     this.computerNumber = [];
     this.playerNumber = [];
-    this.isCorrectAnswer = false;
   }
 }
 
