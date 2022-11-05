@@ -13,7 +13,8 @@ class App {
       checkValidityUserNumber(userNumber);
 
       const checkResult = countBallAndStrike(computerNumber, userNumber);
-      console.log(checkResult);
+
+      printResult(checkResult);
 
 
     }
@@ -112,7 +113,34 @@ function countBallAndStrike(computerNumber, userNumber) {
   return [ball, strike];
 }
 
+// 기능 6
+function printResult(checkResult) {
+  const ball = checkResult[0];
+  const strike = checkResult[1];
 
+  if (checkResult === "nothing") {
+    MissionUtils.Console.print('낫싱');
+    return;
+  }
+
+  if (strike === 3) {
+    MissionUtils.Console.print("3스트라이크 \n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    return "end";
+  }
+
+  if (ball === 0) {
+    MissionUtils.Console.print(`${strike}스트라이크`);
+    return;
+  }
+
+  if (strike === 0) {
+    MissionUtils.Console.print(`${ball}볼`);
+    return;
+  }
+
+  MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+  return;
+}
 
 
 
