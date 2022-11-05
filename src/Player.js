@@ -9,7 +9,7 @@ class Player {
   setNumbers(value) {
     const numbers = [...value];
     Player.validateNumbers(numbers);
-    this.numbers = numbers;
+    this.numbers = numbers.map(Number);
     return this;
   }
 

@@ -11,7 +11,7 @@ describe('Player', () => {
     player.setNumbers(input);
     const result = player.getNumbers();
 
-    expect(result).toContainEqual('1', '2', '3');
+    expect(result).toContainEqual(1, 2, 3);
   });
   test('비정상적인 세 자리 숫자 입출력', () => {
     const input = '12a';
