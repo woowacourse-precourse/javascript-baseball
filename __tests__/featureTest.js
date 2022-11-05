@@ -12,4 +12,8 @@ describe('상대방(Computer)의 숫자 테스트', () => {
       .createComputerNum()
       .forEach((num) => expect(num >= 1 && num <= 9).toBe(true));
   });
+  test('1-3. 값에 중복된 숫자가 있을 경우', () => {
+    const testComputerSet = new Set(app.createComputerNum());
+    expect(testComputerSet.size).toEqual(3);
+  });
 });
