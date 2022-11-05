@@ -1,21 +1,13 @@
 const { Random } = require('@woowacourse/mission-utils');
 
-const { ERROR_MESSAGE } = require('../constants');
-
-const getNotContainNumber = (randomNumbers, number) => {
-  if (randomNumbers.includes(number)) {
-    return [];
-  }
-
-  return [number];
-};
+const { ERROR_MESSAGE, GAME_VALUE } = require('../constants');
 
 const getRandomNumbers = (size, start, end) => {
   let randomNumbers = [];
   while (randomNumbers.length < size) {
     const number = Random.pickNumberInRange(start, end);
-    const notContainNumber = getNotContainNumber(randomNumbers, number);
-    randomNumbers = [...randomNumbers, ...notContainNumber];
+    if (randomNumbers.includes(number)) continue;
+    randomNumbers.push(number);
   }
 
   return randomNumbers.join('');
@@ -58,7 +50,7 @@ const getGameResultMessage = ({ strike, ball }) => {
 };
 
 const isValidRestartInputValue = (inputValue) => {
-  if (!['1', '2'].includes(inputValue)) {
+  if (![GAME_VALUE.restart, GAME_VALUE.exit].includes(inputValue)) {
     throw ERROR_MESSAGE.invalidRestartValue;
   }
 };
