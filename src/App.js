@@ -1,7 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("./constants/index");
 
-const Computer = require("./Computer");
-const User = require("./User");
+const Computer = require("./libs/Computer");
+const User = require("./libs/User");
 
 const initialState = {
   answer: "",
@@ -17,7 +18,7 @@ class App {
   }
 
   start() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(MESSAGE.START);
     this.state.answer = this.computer.getThreeUniqueNumbers();
 
     this.state.inputValue = this.user.getInputValue();

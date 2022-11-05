@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("../constants/index");
 
 class User {
   constructor() {
@@ -11,7 +12,7 @@ class User {
   }
 
   setInputValue() {
-    Console.readLine("숫자를 입력해주세요 :", (inputValue) => {
+    Console.readLine(MESSAGE.INPUT, (inputValue) => {
       this.inputValue = inputValue;
     });
   }
