@@ -1,3 +1,4 @@
+const App = require('../src/App');
 const Game = require('../src/game');
 const { RANDOM_NUMBER, MESSAGE } = require('../src/constants');
 const MissionUtils = require('@woowacourse/mission-utils');
@@ -11,8 +12,15 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(console, 'log');
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
@@ -75,5 +83,22 @@ describe('기능 구현 목록 테스트', () => {
 
     game.printScore(0, 2);
     expect(logSpy).toHaveBeenCalledWith('2스트라이크');
+  });
+
+  test('3스트라이크가 아닐 때 playRound 함수 반복', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['246', '153', '351', '135'];
+    const logSpy = getLogSpy();
+    const messages = ['낫싱', '2볼 1스트라이크', '3볼', '3스트라이크'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
