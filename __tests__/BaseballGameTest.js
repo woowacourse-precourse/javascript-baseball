@@ -93,4 +93,20 @@ describe("숫자 야구 게임", () => {
       expect(result).toBe(expectedResult);
     });
   });
+
+  test("결과 구하기", () => {
+    const counts = [
+      [0, 0],
+      [0, 3],
+      [1, 1],
+      [3, 0],
+    ];
+    const messages = ["낫싱", "3스트라이크", "1볼 1스트라이크", "3볼"];
+    const app = new App();
+
+    counts.forEach((count, index) => {
+      const result = app.getResult(count).trim();
+      expect(result).toBe(messages[index]);
+    });
+  });
 });
