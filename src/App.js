@@ -29,7 +29,7 @@ class App {
   }
 
   inputValidation(playerInput) {
-    const inputToSet = new Set(inplayerInputput.split('').map(Number))
+    const inputToSet = new Set(playerInput.split('').map(Number))
     
     if(playerInput.length !== 3) {
       throw new Error('입력값은 세자리 수를 입력해주세요.')
@@ -39,7 +39,7 @@ class App {
 
     inputToSet.forEach((v) => { if(isNaN(v)) throw new Error('숫자만 입력해주세요.') })
 
-    return this.check(playerInput);
+    return this.checkAnswer(playerInput);
   }
 
   checkAnswer(playerInput) {   
@@ -85,7 +85,7 @@ class App {
   correctAnswer() { 
     MissionUtils.Console.readLine(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n`, (decision) => {
       if(Number(decision) === 1) {
-        this.randoms = this.generateNumber()
+        this.randoms = this.generateRandomNumbers()
         return this.play();
       }
       else if(Number(decision) === 2) {
