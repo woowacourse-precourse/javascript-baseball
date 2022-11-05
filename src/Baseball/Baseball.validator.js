@@ -26,7 +26,7 @@ class BaseballValidator {
   }
   checkBallState(computerNumbers, userNumbers) {
     const baseballDto = new BaseballDto();
-    userNumbers.forEach((userNumber, index) => {
+    Array.from(userNumbers).forEach((userNumber, index) => {
       if (isStirke(computerNumbers[index], userNumber)) {
         baseballDto.addStrikeOne();
       }
