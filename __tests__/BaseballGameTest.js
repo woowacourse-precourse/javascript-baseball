@@ -10,6 +10,7 @@ describe("숫자 야구 게임", () => {
 
     expect(logSpy).toHaveBeenCalledWith(message);
   });
+
   test("서로 다른 세 자리 수를 랜덤으로 생성", () => {
     const DIGITS = 3;
     const set = new Set();
@@ -24,6 +25,7 @@ describe("숫자 야구 게임", () => {
 
     expect(set.size).toBe(DIGITS);
   });
+
   test("두 인자가 같은지 확인", () => {
     const char1 = "1",
       char2 = "1",
@@ -38,5 +40,21 @@ describe("숫자 야구 게임", () => {
     expect(result1).toBe(true);
     expect(result2).toBe(false);
     expect(result3).toBe(false);
+  });
+
+  test("유효한 숫자인지 확인", () => {
+    const inputs = ["123", "111", "120", "12", "1234", "."];
+    const expectedResults = [true, false, false, false, false, false];
+    const DIGITS = 3;
+    const app = new App();
+    const results = inputs.reduce((results, input) => {
+      const result = app.isValidNumber(input, DIGITS);
+      results.push(result);
+      return results;
+    }, []);
+
+    results.forEach((result, index) => {
+      expect(result).toBe(expectedResults[index]);
+    });
   });
 });
