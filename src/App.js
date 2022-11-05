@@ -33,6 +33,22 @@ class App {
 
     return [ballCount, strikeCount];
   }
+  printResult([ballCount, strikeCount]) {
+    const totalCount = ballCount + strikeCount;
+    let message = "";
+    if (this.isEqual(totalCount, 0)) {
+      message = "낫싱";
+      this.print(message);
+      return;
+    }
+    if (!this.isEqual(ballCount, 0)) {
+      message = message + `${ballCount}볼 `;
+    }
+    if (!this.isEqual(strikeCount, 0)) {
+      message = message + `${strikeCount}스트라이크 `;
+    }
+    this.print(message);
+  }
   print(message) {
     MissionUtils.Console.print(message);
   }
