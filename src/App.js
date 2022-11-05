@@ -4,6 +4,7 @@ const playGame = require("./PlayBaseball/js");
 class App {
   play() {
     printMessage.printGameStart();
+    playGame.playBaseballGame();
   }
 }
 
