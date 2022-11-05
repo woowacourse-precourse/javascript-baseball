@@ -26,7 +26,10 @@ class App {
     else return false;
   }
 
-  checkIsNumber(input) {}
+  checkIsNumber(input) {
+    if (isNaN(Number(input))) return false;
+    else return true;
+  }
 
   checkDuplicate(input) {}
 
