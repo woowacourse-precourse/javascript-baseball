@@ -64,6 +64,17 @@ class App {
     }
     return false;
   }
+
+  strikeCheck() {
+    if (
+      this.strikeCount !== 0 &&
+      this.ballCount === 0 &&
+      this.strikeCount !== 3
+    ) {
+      MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
+    }
+    return false;
+  }
 }
 
 module.exports = App;
