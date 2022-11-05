@@ -87,7 +87,7 @@ class App {
     this.#finish = true;
   }
 
-  play() {
+  game() {
     this.startMessage();
     this.pickNumber();
     while (!this.#finish) {
@@ -95,6 +95,10 @@ class App {
       if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
       this.compareInputAnswer(this.#answer, this.#userInput);
     }
+  }
+
+  play() {
+    this.game();
   }
 }
 
