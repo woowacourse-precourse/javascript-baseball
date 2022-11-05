@@ -48,7 +48,7 @@ class App {
       message = message + `${ballCount}볼 `;
     }
     if (!this.isEqual(strikeCount, 0)) {
-      message = message + `${strikeCount}스트라이크 `;
+      message = message + `${strikeCount}스트라이크`;
     }
     return message;
   }
