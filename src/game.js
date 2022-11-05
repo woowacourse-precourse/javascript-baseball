@@ -13,26 +13,26 @@ function addNumber(numbers) {
   if(numbers.size < 3) addNumber(numbers);
 }
 
-class GetResult {
-  constructor(input, answer) {
-    this.result = {
+class ResultCalculator {
+  getResult(input, answer) {
+    const result = {
       strike: 0,
       ball: 0,
-    }
-    this.input = input;
-    this.answer = answer;
-    this.result.strike = this.getStrike(this.input, this.answer);
-  }
-  getStrike(input, answer) {
-    console.log(input);
-    let strike = 0;
+      }
     input.forEach((inputNumber, idx) => {
       const answerNumber = answer[idx];
-      if(inputNumber === answerNumber) strike++;
+      if(this.isStrike(inputNumber, answerNumber)) return result.strike++;
+      if(this.isBall(inputNumber, answer)) return result.ball++;
     });
-    return strike;
+    return result;
+  }
+  isStrike(inputNumber, answerNumber) {
+    return inputNumber === answerNumber;
+  }
+  isBall(inputNumber, answer) {
+    return answer.includes(inputNumber);
   }
 }
 
 exports.getAnswer = getAnswer;
-exports.GetResult = GetResult;
+exports.ResultCalculator = ResultCalculator;

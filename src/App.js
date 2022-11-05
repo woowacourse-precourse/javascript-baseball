@@ -16,7 +16,8 @@ class App {
     MissionUtils.Console.readLine(constants.MESSAGE.INPUT, (input) => {
       userInput = input.trim().split('').map(number => +number);
       validator.isVaild(userInput);      
-      const result = new game.GetResult(userInput, this.answer).result;
+      const resultCalculator = new game.ResultCalculator;
+      const result = resultCalculator.getResult(userInput, this.answer);
     });
   }
 }
