@@ -86,17 +86,22 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         if (answer === "1") {
-          this.computerNumber = [];
-          this.playerNumber = [];
-          this.isCorrectAnswer = false;
+          this.initialize();
           this.play();
         } else if (answer === "2") {
+          this.initialize();
           return;
         } else {
           throw new Error();
         }
       }
     );
+  }
+
+  initialize() {
+    this.computerNumber = [];
+    this.playerNumber = [];
+    this.isCorrectAnswer = false;
   }
 }
 
