@@ -26,6 +26,9 @@ async function StartGame() {
     if (result === "end") {
       let userChoiceNumber = await reStartOrEnd();
       console.log(userChoiceNumber);
+
+      isGameEnd = checkUserChoiceNumber(isGameEnd, userChoiceNumber);
+
     }
   }
 }
@@ -165,6 +168,24 @@ function reStartOrEnd() {
   return userChoiceNumber;
 }
 
+// 기능 8
+function checkUserChoiceNumber(isGameEnd, userChoiceNumber) {
+
+  isGameEnd = true;
+
+  if (userChoiceNumber === '1') {
+    StartGame();
+    return isGameEnd;
+  }
+  
+  if (userChoiceNumber === '2') {
+    MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+    MissionUtils.Console.close();
+    return isGameEnd;
+  }
+
+  throw Error ("잘못된 값을 입력하여 에러가 발생하였습니다.");
+}
 
 const baseballGame = new App();
 baseballGame.play();
