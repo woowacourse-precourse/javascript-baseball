@@ -4,14 +4,8 @@ const getHint = require("./Hint");
 const Computer = require("./Computer");
 
 class BaseballGame {
-  inputNumber;
   hint = "";
-
   computer = new Computer();
-
-  setInputNumber(input) {
-    this.inputNumber = input;
-  }
 
   setHint(correctNumber, inputNumber) {
     this.hint = getHint(correctNumber, inputNumber);
@@ -29,9 +23,7 @@ class BaseballGame {
         throw Error("입력값이 유효하지 않습니다.");
       }
 
-      this.setInputNumber(input);
-      this.setHint(this.computer.correctNumber, this.inputNumber);
-
+      this.setHint(this.computer.correctNumber, input);
       MissionUtils.Console.print(this.hint);
 
       if (this.hint !== "3스트라이크") this.getUserInput();
@@ -48,8 +40,7 @@ class BaseballGame {
         if (!expectInputValues.includes(input))
           throw Error("입력값이 유효하지 않습니다.");
         if (input === "1") {
-          this.resetGameValue();
-          this.startGame();
+          this.restartGame();
         }
       }
     );
@@ -58,6 +49,11 @@ class BaseballGame {
   resetGameValue() {
     this.hint = "";
     this.computer.setNewCorrectNumber();
+  }
+
+  restartGame() {
+    this.resetGameValue();
+    this.startGame();
   }
 }
 
