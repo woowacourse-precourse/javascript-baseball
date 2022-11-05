@@ -2,21 +2,23 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.answer = this.makeAnswer();
+    this.isFirstPlay = true;
+    this.isRestart = false;
+
     this.strike = 0;
     this.ball = 0;
-    this.isRestart = false;
+
+    this.answer = [];
   }
 
   makeAnswer() {
-    const answer = [];
-    while (answer.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!answer.includes(number)) {
-        answer.push(number);
-      }
+    console.log("makeAnswer 실행됨");
+    const randomNumbersSet = new Set();
+    while (randomNumbersSet.size < 3) {
+      const randomNumber = Random.pickNumberInRange(1, 9);
+      randomNumbersSet.add(randomNumber);
     }
-    return answer;
+    this.answer = [...randomNumbersSet];
   }
 
   checkUserInput(userInput) {
@@ -66,38 +68,48 @@ class App {
     this.strike = 0;
 
     if (this.isRestart) {
-      this.answer = this.makeAnswer();
+      this.makeAnswer();
     }
   }
 
-  play() {
-    const message = this.isRestart
-      ? "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-      : "숫자를 입력해주세요 : ";
-    Console.readLine(message, (userInput) => {
+  start() {
+    this.initScore();
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.checkUserInput(userInput);
+      this.compareScore(userInput);
+      Console.print(this.createResultMessage());
+      this.decideContinue();
+
       if (this.isRestart) {
+        this.restart();
+      } else {
+        this.start();
+      }
+    });
+  }
+
+  restart() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (userInput) => {
+        this.initScore();
         if (userInput === "1") {
           this.isRestart = false;
-          this.play();
+          this.start();
         } else if (userInput === "2") {
           Console.print("게임을 종료합니다.");
           Console.close();
-          return;
         } else {
-          Console.print("잘못된 입력입니다.");
-          this.play();
+          throw new Error("잘못된 입력입니다.");
         }
-        return;
       }
+    );
+  }
 
-      this.checkUserInput(userInput);
-      this.compareScore(userInput);
-
-      Console.print(this.createResultMessage());
-      this.decideContinue();
-      this.initScore();
-      this.play();
-    });
+  play() {
+    this.makeAnswer();
+    console.log(this.answer);
+    this.start();
   }
 }
 
