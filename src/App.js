@@ -15,10 +15,6 @@ class App {
   }
 
   play() {
-    this.startGame();
-  }
-
-  startGame() {
     this.printStartMessage();
     this.initRandomNumbers();
     this.getPlayerInput();
