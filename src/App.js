@@ -9,7 +9,6 @@ class App {
   play() {
     this.greeting();
     this.makeRandomNumberArray();
-    console.log(this.computerRandomNumber);
     this.inputUserAnswer();
   }
 
@@ -25,7 +24,7 @@ class App {
   inputUserAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.userAnswer = answer;
-      if (answer.length > 3) {
+      if (answer.length !== 3) {
         throw new Error();
       } else {
         this.printBallStrike(this.checkBallStrike(this.computerRandomNumber, this.userAnswer));
