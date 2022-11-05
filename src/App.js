@@ -20,6 +20,17 @@ class App {
 
     // 게임을 시작하는 기능
     Console.print("숫자 야구 게임을 시작합니다.");
+
+    // (게임 진행시) 게임플레이어의 값이 잘못된 값인지 확인하는 유효성 검사 기능
+    const check_inputError = (data) => {
+      if (data.length !== 3) throw new Error();
+      if (data[0] === data[1] || data[1] === data[2] || data[0] === data[2])
+        throw new Error();
+      for (let i = 0; i < 3; i++) {
+        if (typeof Number(data[i]) !== "number") throw new Error();
+      }
+      return data;
+    };
   }
 }
 
