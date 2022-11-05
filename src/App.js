@@ -13,7 +13,9 @@ class App {
   submitInput() {
     let userInput;
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.INPUT, (input) => {
-      userInput = input.trim().split('').map(number => +number);
+      const noSpaceInput = input.replace(/\s/g,'');
+      const userInput = noSpaceInput.split('').map(number => +number);
+      console.log(userInput);
       GameUtils.Validator.isVaildAnswer(userInput);
       const result = GameUtils.System.getResult(userInput, this.answer);
       print.result(result);
