@@ -59,4 +59,10 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
       );
     });
   });
+
+  test('컴퓨터 랜덤 정답 생성', () => {
+    const app = new App();
+    const randomNum = app.makeRandomAnswer();
+    expect(app.chkValidNumber(randomNum)).toEqual(true);
+  });
 });
