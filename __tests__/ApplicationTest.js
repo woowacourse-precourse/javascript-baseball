@@ -68,27 +68,35 @@ describe("숫자 야구 게임", () => {
   });
 
   test("점수 산정", () => {
+    const logSpy = getLogSpy();
     const player = new Player();
 
     player.COMPUTER = [1, 2, 3];
     player.comparePlayerInputWithRadomNumber("123");
     expect(player.strike).toEqual(3);
     expect(player.ball).toEqual(0);
+    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
+    expect(logSpy).toHaveBeenCalledWith(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
 
     player.COMPUTER = [3, 2, 5];
     player.comparePlayerInputWithRadomNumber("123");
     expect(player.strike).toEqual(1);
     expect(player.ball).toEqual(1);
+    expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
 
     player.COMPUTER = [7, 2, 9];
     player.comparePlayerInputWithRadomNumber("972");
     expect(player.strike).toEqual(0);
     expect(player.ball).toEqual(3);
+    expect(logSpy).toHaveBeenCalledWith("3볼");
 
     player.COMPUTER = [7, 2, 9];
     player.comparePlayerInputWithRadomNumber("136");
     expect(player.strike).toEqual(0);
     expect(player.ball).toEqual(0);
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
   });
 
   test("게임 종료 후 재시작", () => {
