@@ -39,21 +39,21 @@ class App {
   }
 
   printResult(strikeCount, ballCount) {
-    if (strikeCount === 3) console.log(`${strikeCount}스트라이크`);
+    if (strikeCount === 3) MissionUtils.Console.print(`${strikeCount}스트라이크`);
     if (strikeCount > 0 && ballCount > 0) {
-      console.log(`${strikeCount} 스트라이크 ${ballCount} 볼`);
+      MissionUtils.Console.print(`${strikeCount} 스트라이크 ${ballCount} 볼`);
       this.getUserInputNumber();
     }
     if (strikeCount > 0 && ballCount === 0) {
-      console.log(`${strikeCount}스트라이크`);
+      MissionUtils.Console.print(`${strikeCount}스트라이크`);
       this.getUserInputNumber();
     }
     if (ballCount > 0 && strikeCount === 0) {
-      console.log(`${ballCount} 볼`);
+      MissionUtils.Console.print(`${ballCount} 볼`);
       this.getUserInputNumber();
     }
     if (ballCount === 0 && strikeCount === 0) {
-      console.log("낫싱");
+      MissionUtils.Console.print("낫싱");
       this.getUserInputNumber();
     }
   }
