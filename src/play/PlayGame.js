@@ -2,9 +2,9 @@ class PlayGame {
   constructor() {
     this.missionRandom = require("@woowacourse/mission-utils").Random;
     this.missionConsole = require("@woowacourse/mission-utils").Console;
-    this.valid = require("./input/userInputValid");
-    this.score = require("./play/GetScore");
-    this.pcNumber = require("./GetComputerInput");
+    this.valid = require("../input/userInputValid");
+    this.score = require("./GetScore");
+    this.pcNumber = require("../input/GetComputerInput");
   }
 
   getOtherPcNumber() {
