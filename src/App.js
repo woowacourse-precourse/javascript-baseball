@@ -7,16 +7,32 @@ class App {
   }
 
   play() {
+    this.print("숫자 야구 게임을 시작합니다.");
+    this.startGame();
+  }
+
+  startGame() {
+    let isCorrect = false;
+
     this.setRandomNumbers();
 
-    this.print("숫자 야구 게임을 시작합니다.");
-    this.readLine("숫자를 입력해주세요 : ", (answer) =>
-      this.setUserNumbers(answer)
+    while (!isCorrect) {
+      this.readLine("숫자를 입력해주세요 : ", (answer) => {
+        this.setUserNumbers(answer);
+      });
+
+      const memo = this.count(this.computer, this.user);
+      this.printResultMessage(memo);
+
+      isCorrect = memo.strike === 3;
+    }
+
+    this.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        answer === "1" && this.startGame();
+      }
     );
-
-    const memo = this.count(this.computer, this.user);
-
-    this.printResultMessage(memo);
   }
 
   count(computer, user) {
@@ -48,7 +64,11 @@ class App {
       resultMessage = "낫싱";
     }
 
-    this.print(resultMessage);
+    this.print(resultMessage.trim());
+
+    if (memo.strike === 3) {
+      this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
   }
 
   print(str) {
@@ -60,6 +80,8 @@ class App {
   }
 
   setRandomNumbers() {
+    this.computer = [];
+
     while (this.computer.length < 3) {
       const number = this.getRandomNumber();
       this.pushNumberToComputer(number);
