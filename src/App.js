@@ -8,13 +8,15 @@ class App {
   play() {
     print.start();
     this.answer = game.getAnswer();
+    console.log(this.answer);
     this.submitInput();
   }
   submitInput() {
     let userInput;
     MissionUtils.Console.readLine(constants.MESSAGE.INPUT, (input) => {
       userInput = input.trim().split('').map(number => +number);
-      validator.isVaild(userInput);
+      validator.isVaild(userInput);      
+      const result = new game.GetResult(userInput, this.answer).result;
     });
   }
 }
