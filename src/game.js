@@ -30,10 +30,19 @@ class NumericBaseballGame {
         });
       });
 
-      return Array.from([...inputStringNumberFromUser], convertArgsStringToInt);
+      if (this.checkArgNumberValid(inputStringNumberFromUser)) {
+        return Array.from(
+          [...inputStringNumberFromUser],
+          convertArgsStringToInt
+        );
+      }
     };
 
     return [getNumberFromComputer(), await getNumberFromUser()];
+  }
+
+  checkArgNumberValid(number) {
+    const isConsistOfOnlyNumber = (input) => /^[0-9]*$/g.test(input);
   }
 
   async start() {
