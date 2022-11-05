@@ -76,4 +76,21 @@ describe("숫자 야구 게임", () => {
       app.throwException(MESSAGE);
     }).toThrow();
   });
+
+  test("야구 카운트 계산", () => {
+    const answer = [3, 4, 5];
+    const userNumbers = ["123", "235", "345"];
+    const expectedResults = [
+      [1, 0],
+      [1, 1],
+      [0, 3],
+    ];
+
+    const app = new App();
+    userNumbers.forEach((num, index) => {
+      const result = JSON.stringify(app.checkBaseballCount(answer, num));
+      const expectedResult = JSON.stringify(expectedResults[index]);
+      expect(result).toBe(expectedResult);
+    });
+  });
 });
