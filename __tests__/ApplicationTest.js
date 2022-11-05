@@ -68,27 +68,27 @@ describe("숫자 야구 게임", () => {
   });
 
   test("점수 산정", () => {
-    const gameResult = new GameResult();
+    const player = new Player();
 
-    gameResult.COMPUTER = [1, 2, 3];
-    gameResult.showGameResult("123");
-    expect(gameResult.strike).toEqual(3);
-    expect(gameResult.ball).toEqual(0);
+    player.COMPUTER = [1, 2, 3];
+    player.comparePlayerInputWithRadomNumber("123");
+    expect(player.strike).toEqual(3);
+    expect(player.ball).toEqual(0);
 
-    gameResult.COMPUTER = [3, 2, 5];
-    gameResult.showGameResult("123");
-    expect(gameResult.strike).toEqual(1);
-    expect(gameResult.ball).toEqual(1);
+    player.COMPUTER = [3, 2, 5];
+    player.comparePlayerInputWithRadomNumber("123");
+    expect(player.strike).toEqual(1);
+    expect(player.ball).toEqual(1);
 
-    gameResult.COMPUTER = [7, 2, 9];
-    gameResult.showGameResult("972");
-    expect(gameResult.strike).toEqual(0);
-    expect(gameResult.ball).toEqual(3);
+    player.COMPUTER = [7, 2, 9];
+    player.comparePlayerInputWithRadomNumber("972");
+    expect(player.strike).toEqual(0);
+    expect(player.ball).toEqual(3);
 
-    gameResult.COMPUTER = [7, 2, 9];
-    gameResult.showGameResult("136");
-    expect(gameResult.strike).toEqual(0);
-    expect(gameResult.ball).toEqual(0);
+    player.COMPUTER = [7, 2, 9];
+    player.comparePlayerInputWithRadomNumber("136");
+    expect(player.strike).toEqual(0);
+    expect(player.ball).toEqual(0);
   });
 
   test("게임 종료 후 재시작", () => {
