@@ -72,6 +72,7 @@ class App {
 
   gameOver() {
     Console.print(GAME_MESSAGE.gameOver);
+    Console.print(GAME_MESSAGE.askRestart);
     Console.readLine('', (ans) => this.isOneOrTwo(ans));
   }
 
