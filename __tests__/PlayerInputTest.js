@@ -8,17 +8,17 @@ const {
 describe('사용자 인풋 예외처리 테스트 : player', () => {
   test('✨ 입력 값이 숫자로만 이루어져 있습니다.', () => {
     const app = new App();
-    const isNotANumber = app.isNotANumber;
+    const isNumber = app.isNumber;
 
-    expect(isNotANumber(123)).toBeTruthy();
+    expect(isNumber(123)).toBeTruthy();
   });
 
   test('🖐 입력 값에 숫자가 아닌 값이 포함되어 있으면 예외가 발생됩니다.', () => {
     const app = new App();
-    const isNotANumber = app.isNotANumber;
+    const isNumber = app.isNumber;
 
     expect(() => {
-      isNotANumber('2022 우테코 조아요💙');
+      isNumber('2022 우테코 조아요💙');
     }).toThrowError(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
   });
 

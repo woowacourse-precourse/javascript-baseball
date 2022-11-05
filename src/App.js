@@ -52,7 +52,7 @@ class App {
 
   checkPlayerInput(playerInput) {
     const checkList = [
-      this.isNotANumber,
+      this.isNumber,
       this.isValidInputLength,
       this.isValidRangeOfNumber,
       this.isUniqueNumber,
@@ -68,7 +68,7 @@ class App {
     }
   }
 
-  isNotANumber(playerInput) {
+  isNumber(playerInput) {
     const convertNumberPlayerInput = Number(playerInput);
     const isNoNumber = isNaN(convertNumberPlayerInput);
 
