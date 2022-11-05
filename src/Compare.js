@@ -9,29 +9,44 @@ class Compare extends Mission {
 
   getStrikeCount() {
     return this.computerNumbers.reduce((acc, value, index) => {
-      if (value === this.userNumbers[index]) return acc + 1;
+      if (value === this.userNumbers[index]) {
+        return acc + 1;
+      }
       return acc;
     }, 0);
   }
 
   getBallCount() {
     return this.computerNumbers.reduce((acc, value, index) => {
-      if (this.userNumbers.includes(value) && value !== this.userNumbers[index])
+      if (
+        this.userNumbers.includes(value) &&
+        value !== this.userNumbers[index]
+      ) {
         return acc + 1;
+      }
       return acc;
     }, 0);
   }
 
   consoleCompareResult(strike, ball) {
-    if (strike === 3)
+    if (strike === 3) {
       this.mission.Console.print(
         '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
       );
-    if (!strike && !ball) this.mission.Console.print('낫싱');
-    if (strike && !ball) this.mission.Console.print(`${strike}스트라이크`);
-    if (!strike && ball) this.mission.Console.print(`${ball}볼`);
-    if (strike && ball)
+    }
+
+    if (!strike && !ball) {
+      this.mission.Console.print('낫싱');
+    }
+    if (strike && !ball) {
+      this.mission.Console.print(`${strike}스트라이크`);
+    }
+    if (!strike && ball) {
+      this.mission.Console.print(`${ball}볼`);
+    }
+    if (strike && ball) {
       this.mission.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
   }
 
   returnResult(strike) {
