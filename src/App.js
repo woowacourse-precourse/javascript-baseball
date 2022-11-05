@@ -16,8 +16,18 @@ const setUserNumber = (computer) => {
   let input;
   Console.readLine('숫자 3자리를 입력해주세요 : ', (num) => {
     input = num.toString().split("").map((str) => Number(str));
+    errorCheck(input);
     checkNumber(input, computer);
   })
+}
+
+const errorCheck = (input) => {
+  const stringInput = input.join("");
+  const numReg = /^[0-9]+$/;
+  const setNumber = new Set(input);
+  if(!numReg.test(stringInput)) throw "숫자만 입력 가능합니다.";
+  if(input.length !== 3) throw "숫자는 3자리만 입력 가능합니다";
+  if(setNumber.size != input.length) throw "중복된 숫자가 있습니다";
 }
 
 const checkNumber = (input, computer) => {
