@@ -18,8 +18,13 @@ class App {
     this.#computerAnswer = answer;
   }
 
+  #init() {
+    this.#makeComputerAnswer();
+  }
+
   play() {
     MissionUtils.Console.print(this.message);
+    this.#init();
   }
 }
 
