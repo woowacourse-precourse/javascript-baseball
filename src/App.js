@@ -15,7 +15,10 @@ class App {
 		this.NUMBER_LENGTH = 3;
 	}
 
-	play() {}
+	play() {
+		Console.print('숫자 야구 게임을 시작합니다.');
+		this.createNewGame();
+	}
 
 	createNewGame() {
 		const computerNumbers = getUniqueNumbersInRange(1, 9, this.NUMBER_LENGTH);
