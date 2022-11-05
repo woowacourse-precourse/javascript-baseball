@@ -3,6 +3,7 @@ const { MAX_LENGTH, BEGIN_NUM, END_NUM } = require('./common/constants');
 const {
   START_MESSAGE,
   END_MESSAGE,
+  STRIKE_MESSAGE,
   INPUT_MESSGAE,
   INVALID_ERROR_MESSAGE,
   DUPLICATE_ERROR_MESSAGE,
@@ -54,16 +55,16 @@ class App {
       this.isNotANumber,
       this.isValidInputLength,
       this.isValidRangeOfNumber,
-      this.isDuplicateNumber,
+      this.isUniqueNumber,
     ];
 
-    let isValid;
+    let isValid = false;
     checkList.forEach((validInputCheckFunction) => {
       isValid = validInputCheckFunction(playerInput);
     });
 
     if (isValid) {
-      // 결과를 체크할 함수 호출
+      this.printResult(playerInput);
     }
   }
 
@@ -101,7 +102,7 @@ class App {
     return true;
   }
 
-  isDuplicateNumber(playerInput) {
+  isUniqueNumber(playerInput) {
     const convertStringPlayerInput = String(playerInput);
     const differentNumbers = [...new Set(convertStringPlayerInput)];
 
