@@ -53,7 +53,10 @@ class App {
   }
 
   setScore() {
-    // to be implemented
+    [...this.user].forEach((num, i) => {
+      if (num === this.computer[i]) this.strike += 1;
+      else if (this.computer.includes(num)) this.ball += 1;
+    });
   }
 
   printResult() {
