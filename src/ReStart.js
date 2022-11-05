@@ -21,7 +21,6 @@ class ReStart {
     throw new Error("잘못된 입력입니다. 게임을 종료합니다.");
   }
 
-  // 오타 수정
   decideReStart(userInput) {
     if (userInput === "1") {
       const app = new App();
