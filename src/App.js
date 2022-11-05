@@ -18,6 +18,7 @@ class App {
       if (!isValid) {
         throw new Error(ERROR_MESSAGE[errorType]);
       }
+      const [strikeCount, ballCount] = this.getStrikeBallCount(this.computerInput, userInput);
     });
   }
 
@@ -28,6 +29,20 @@ class App {
     }
 
     return [...randomNum].join("");
+  }
+  getStrikeBallCount(computerInput, userInput) {
+    let strikeCount = 0;
+    let ballCount = 0;
+
+    for (let i = 0; i < MAX_NUMBER_LENGTH; i++) {
+      if (computerInput[i] === userInput[i]) strikeCount++;
+    }
+    for (let eachLetter of userInput) {
+      if (computerInput.includes(eachLetter)) ballCount++;
+    }
+    ballCount -= strikeCount;
+
+    return [strikeCount, ballCount];
   }
 
   hasOnlyNumber(userInput) {
