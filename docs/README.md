@@ -5,7 +5,7 @@
     a. 랜덤 숫자를 만들기 (함수명: makeRandomNumber)
     b. 숫자 입력받기 (함수명: makeUserInputNumber)
 
-**⭐️ 예외처리: userInputNumber가 1 ~ 9까지 세자리 숫자가 아니라면 throw로 예외처리 및 App 종료** => (함수명: userInputNumberException)
+**⭐️ 예외처리: userInputNumber가 1 ~ 9까지의 서로 다른 세자리 숫자가 아니라면 throw로 예외처리 및 App 종료** => (함수명: userInputNumberException)
 
 ## 2. 숫자 검사 (3스트라이크)
 
