@@ -35,8 +35,8 @@ describe('숫자 야구 기능 테스트', () => {
       ['1', '4', '3'],
     ];
     const counts = [
-      { strike: 0, ball: 0 },
-      { strike: 1, ball: 1 },
+      { ball: 0, strike: 0 },
+      { ball: 1, strike: 1 },
     ];
 
     const app = new App();
@@ -44,7 +44,7 @@ describe('숫자 야구 기능 테스트', () => {
 
     answers.forEach((answer, i) => {
       app.userNumbers = answer;
-      app.setStrikeBallCount();
+      app.setBallStrikeCount();
 
       expect(app.gameCount).toStrictEqual(counts[i]);
     });
@@ -52,10 +52,10 @@ describe('숫자 야구 기능 테스트', () => {
 
   test('스트라이크 볼 결과 상태를 업데이트한다.', () => {
     const counts = [
-      { strike: 0, ball: 0 },
-      { strike: 1, ball: 1 },
-      { strike: 0, ball: 3 },
-      { strike: 1, ball: 0 },
+      { ball: 0, strike: 0 },
+      { ball: 1, strike: 1 },
+      { ball: 3, strike: 0 },
+      { ball: 0, strike: 1 },
     ];
     const messages = ['낫싱', '1볼 1스트라이크', '3볼', '1스트라이크'];
 
