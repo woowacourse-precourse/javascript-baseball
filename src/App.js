@@ -1,10 +1,6 @@
 import * as MissionUtils from "@woowacourse/mission-utils";
 
 class App {
-  constructor() {
-    this.play();
-  }
-
   computerNum() {
     const computerTheeDifferNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
@@ -30,6 +26,7 @@ class App {
   play() {}
 }
 
-new App();
+const app = new App();
+app.play();
 
 export default App;
