@@ -2,7 +2,7 @@ class App {
   play() {
     const MissionUtils = require('@woowacourse/mission-utils');
     const computer = [];
-    while (answer.length < 3) {
+    while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
         computer.push(number);
@@ -21,15 +21,15 @@ class App {
       } catch (err) {
         if (err == 'long') {
           MissionUtils.Console.print('입력값이 3자리보다 큽니다.');
-          process.exit();
+          play.exit();
         }
         if (err == 'short') {
           MissionUtils.Console.print('입력값이 3자리보다 작습니다.');
-          process.exit();
+          play.exit();
         }
         if (err == 'overlap') {
           MissionUtils.Console.print('중복된 숫자가 존재합니다.');
-          process.exit();
+          play.exit();
         }
       }
 
@@ -37,7 +37,7 @@ class App {
 
       for (var i = 0; i < 3; i++) {
         for (var j = 0; j < 3; j++) {
-          if (answer[i] == input[j]) {
+          if (computer[i] == input[j]) {
             if (i === j) strike++;
             else ball++;
           }
