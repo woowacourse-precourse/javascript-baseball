@@ -109,4 +109,21 @@ describe("숫자 야구 게임", () => {
       expect(result).toBe(messages[index]);
     });
   });
+
+  test("결과 출력", () => {
+    const logSpy = jest.spyOn(console, "log");
+    const counts = [
+      [0, 0],
+      [0, 3],
+      [1, 1],
+      [3, 0],
+    ];
+    const messages = ["낫싱", "3스트라이크", "1볼 1스트라이크", "3볼"];
+    const app = new App();
+
+    messages.forEach((output, index) => {
+      app.printResult(counts[index]);
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
