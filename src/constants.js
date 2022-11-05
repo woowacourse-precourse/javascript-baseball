@@ -24,6 +24,7 @@ const ERROR = {
   NAN: '숫자만 입력해주세요.',
   RANGE: `${ANSWER.MIN} ~ ${ANSWER.MAX}사이의 숫자만 입력해주세요.`,
   DUPLICATION: '중복된 숫자는 입력할 수 없습니다.',
+  INVALID_INPUT: `올바른 입력이 아닙니다. 게임을 새로 시작하려면 ${GAME.RESTART}, 종료하려면 ${GAME.EXIT}를 입력하세요.`,
 };
 
 module.exports = { ANSWER, GAME, GAME_SENTENCE, ERROR };
