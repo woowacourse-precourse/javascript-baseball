@@ -1,24 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const error = require("./error");
+const ErrorClass = require("./error");
 class App {
   constructor() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.RANDOM_NUMBER_ARRAY = [];
     this.INPUT_USER_NUMBER;
+    this.errorClass = new ErrorClass();
     this.MenuNumber = 0;
     this.strikeCount = 0;
     this.ballCount = 0;
   }
 
-  throwError() {
-    throw new Error("잘못된 값을 입력하셨습니다.");
-  }
-  error() {
-    error.inputNumberSizeCheck(this.INPUT_USER_NUMBER) && this.throwError();
-    error.overlapNumberCheck(this.INPUT_USER_NUMBER) && this.throwError();
-    error.numberTypeCheck(this.INPUT_USER_NUMBER) && this.throwError();
-    error.zeroCheck(this.INPUT_USER_NUMBER) && this.throwError();
-    error.spaceCheck(this.INPUT_USER_NUMBER) && this.throwError();
-  }
   setting() {
     this.RANDOM_NUMBER_ARRAY = [];
     return this.randomNumberGenerator();
@@ -31,7 +23,6 @@ class App {
       }
       this.RANDOM_NUMBER_ARRAY.push(number);
     }
-
     return this;
   }
   play() {
@@ -44,24 +35,23 @@ class App {
     this.ballCount = 0;
     MissionUtils.Console.readLine("숫자를 입력하세요. : ", (inputNumber) => {
       this.INPUT_USER_NUMBER = inputNumber;
-      this.error();
-      this.strikeAndBallCheck();
+      this.errorClass.errorCheck(this.INPUT_USER_NUMBER);
+      return this.splitArray();
     });
   }
-
-  strikeAndBallCheck() {
-    const stringNumberArray = String(this.INPUT_USER_NUMBER).split("");
+  splitArray() {
+    const StringToArray = this.INPUT_USER_NUMBER.split("");
+    return this.strikeAndBallCheck(StringToArray);
+  }
+  strikeAndBallCheck(StringToArray) {
     for (let index = 0; index < 3; index++) {
-      if (
-        Number(stringNumberArray[index]) === this.RANDOM_NUMBER_ARRAY[index]
-      ) {
+      if (Number(StringToArray[index]) === this.RANDOM_NUMBER_ARRAY[index]) {
         this.strikeCount++;
         continue;
       }
-      this.RANDOM_NUMBER_ARRAY.includes(Number(stringNumberArray[index])) &&
+      this.RANDOM_NUMBER_ARRAY.includes(Number(StringToArray[index])) &&
         this.ballCount++;
     }
-
     return this.printResult();
   }
 
@@ -97,6 +87,7 @@ class App {
     }
     return this;
   }
+
   printResult() {
     this.nothingCheck();
     this.threeStrikeCheck();
@@ -122,5 +113,8 @@ class App {
     );
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
