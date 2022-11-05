@@ -119,6 +119,22 @@ describe("숫자 야구 게임", () => {
     expect(restartSpy).toHaveBeenCalledTimes(1);
   });
 
+  test("게임 재시작 입력값 제한 사항 준수", () => {
+    const restartCheckSpy = jest.spyOn(ReStart.prototype, "checkReStartInput");
+
+    const restart = new ReStart();
+
+    restart.checkReStartInput("1");
+    expect(restartCheckSpy).toBeTruthy();
+
+    restart.checkReStartInput("2");
+    expect(restartCheckSpy).toBeTruthy();
+
+    expect(() => restart.checkReStartInput("3")).toThrow(
+      "잘못된 입력입니다. 게임을 종료합니다."
+    );
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
