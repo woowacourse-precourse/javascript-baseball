@@ -14,10 +14,9 @@ function isAllDifferent(str) {
 }
 
 function isInputValidate(str) {
-  if (!isLengthEqualsThree(str)) return false;
-  if (!isAllDifferent(str)) return false;
-  if (!isNumInRange(str)) return false;
-
+  if (!isLengthEqualsThree(str) || !isAllDifferent(str) || !isNumInRange(str)) {
+    throw new Error('1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요!');
+  }
   return true;
 }
 
