@@ -8,11 +8,17 @@ const pickRandomNumber = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
 };
 
+const getUserInput = () => {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {});
+};
+
 class App {
   play() {
     gameStart();
 
     let answer = pickRandomNumber();
+
+    getUserInput();
   }
 }
 
