@@ -12,8 +12,10 @@ class App {
     interaction
       .printPlayInputMessage()
       .then(interaction.checkValidNumberInput)
-      .then((answer) => {
-        Console.print(answer);
+      .then((inputNumber) => {
+        computer.setInputNumber(inputNumber);
+        Console.print(computer.number);
+        Console.print(computer.getResult(inputNumber));
       })
       .catch((error) => {
         Console.print(error);

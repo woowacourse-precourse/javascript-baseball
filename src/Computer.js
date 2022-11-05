@@ -4,8 +4,31 @@ const { Console, Random } = MissionUtils;
 class Computer {
   constructor() {
     this.number = this.initNumber();
+    this.inputNumber;
   }
+  setInputNumber(inputNumber) {
+    this.inputNumber = inputNumber;
+  }
+  getResult() {
+    const resultMap = {
+      strike: 0,
+      ball: 0,
+    };
 
+    [...this.inputNumber].forEach((digit) => {
+      if (this.number.includes(digit)) {
+        resultMap.ball += 1;
+      }
+    });
+
+    for (let i = 0; i < 3; i++) {
+      if (this.number[i] === this.inputNumber[i]) {
+        resultMap.ball -= 1;
+        resultMap.strike += 1;
+      }
+    }
+    return resultMap;
+  }
   initNumber() {
     const container = [Random.pickNumberInRange(1, 9)];
     while (container.length < 3) {
@@ -15,7 +38,7 @@ class Computer {
       }
       container.push(number);
     }
-    return container;
+    return container.join('');
   }
 }
 

@@ -29,7 +29,7 @@ class Interaction {
         throw new Error('숫자 세자리이상');
       }
 
-      resolve(answer);
+      resolve(inputNumber);
     });
   }
 }

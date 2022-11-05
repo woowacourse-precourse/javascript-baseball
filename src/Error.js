@@ -3,12 +3,11 @@ const { Console, Random } = MissionUtils;
 
 const error = {
   isValidResponse(answer) {
-    console.log(this);
     return this.isNumberType(answer) && this.isDuplicate(answer) && this.isNumberType(answer);
   },
 
   isNumberType(answer) {
-    return typeof answer === 'number';
+    return !Number.isNaN(Number(answer));
   },
 
   isThreeDigit(answer) {
