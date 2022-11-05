@@ -3,23 +3,26 @@ const BaseballOutput = require("./Baseball/Baseball.output");
 const BaseballComputer = require("./Baseball/Baseball.computer");
 
 class App {
-  play() {
-    const baseballValidator = new BaseballValidator();
-    const baseballOutput = new BaseballOutput();
+  #baseballValidator = new BaseballValidator();
+  #baseballOutput = new BaseballOutput();
+  #start() {
     const baseballComputer = new BaseballComputer(
-      baseballOutput,
-      baseballValidator
+      this.#baseballOutput,
+      this.#baseballValidator
     );
     let finished = false;
-    baseballOutput.start();
     while (!finished) {
       const userNumbers = baseballComputer.getUserNumbers();
       const baseballDto = baseballComputer.getBallState(userNumbers);
       finished = baseballComputer.isFinish(baseballDto);
     }
     if (baseballComputer.restart()) {
-      this.play();
+      this.start();
     }
+  }
+  play() {
+    this.#baseballOutput.start();
+    this.#start();
   }
 }
 
