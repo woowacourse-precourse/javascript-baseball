@@ -22,8 +22,26 @@ class App {
         answer.split("").forEach((x) => user.push(+x));
         result = this.compare.compare(computer, user);
         MissionUtils.Console.print(result);
+        if (result.split("\n")[1] == this.CORRECT) {
+          this.restartOrShutdown();
+        } else this.start();
       }
     });
+  }
+  restartOrShutdown() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (answer === "1") {
+          this.computer = new Computer().computerNumber();
+          this.start();
+        }
+        if (answer === "2") {
+          MissionUtils.Console.print("게임 종료");
+        }
+        if (answer !== "1" && answer !== "2") this.restartOrShutdown();
+      }
+    );
   }
 }
 module.exports = App;
