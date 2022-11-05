@@ -32,7 +32,9 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.Game();
+    this.Game().then(() => {
+      MissionUtils.Console.close();
+    });
   }
 
   async checkRestartGame() {
