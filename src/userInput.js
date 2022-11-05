@@ -1,6 +1,6 @@
 const { MissionUtils } = require("@woowacourse/mission-utils");
  
-class userInput{
+class UserInput{
     constructor(){
         MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
         MissionUtils.Console.readLine('숫자를 입력해주세요 :' , (answer) => {
@@ -39,4 +39,4 @@ class userInput{
 }
 }
 
-module.exports = userInput;
+module.exports = UserInput ;
