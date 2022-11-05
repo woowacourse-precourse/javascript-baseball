@@ -33,7 +33,8 @@ class BaseballComputer {
     return false;
   }
   restart() {
-    return this.baseballOutput.restart();
+    const restartValue = this.baseballOutput.restart();
+    return checkRestartValue(restartValue);
   }
 }
 

@@ -51,6 +51,13 @@ class BaseBallValidator {
   isFinish(baseballDto) {
     return baseballDto.strike === 3;
   }
+  checkRestartValue(restartValue) {
+    if (!(+restartValue === 1 || +restartValue === 2)) {
+      throw "잘못된 입력값입니다";
+      return false;
+    }
+    return true;
+  }
 }
 
 export default BaseBallValidator;
