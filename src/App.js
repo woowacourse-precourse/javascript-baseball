@@ -49,6 +49,13 @@ class App {
       }
     }
   }
+
+  nothingCheck() {
+    if (this.strikeCount === 0 && this.ballCount === 0) {
+      MissionUtils.Console.print('낫싱');
+    }
+    return false;
+  }
 }
 
 module.exports = App;
