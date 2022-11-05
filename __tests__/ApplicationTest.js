@@ -83,13 +83,14 @@ describe("숫자 야구 게임", () => {
 
   test("사용자의 숫자 입력을 받아 저장한다.", () => {
     const userInput = ["123"];
+    const userNumber = [1, 2, 3];
 
     mockQuestions(userInput);
 
     const app = new App();
     app.play();
 
-    expect(app.userNumber).toBe(userInput[0]);
+    expect(app.userNumber).toEqual(userNumber);
   });
 
   test("게임 종료 후 재시작", () => {
