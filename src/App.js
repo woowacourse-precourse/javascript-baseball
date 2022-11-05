@@ -26,33 +26,30 @@ class App {
       const isUserInputValid = this.user.validateInput(userInput);
 
       if (isUserInputValid === false) {
-        this.throwError();
-        return;
+        return this.throwError();
       }
 
       const { ballCount, strikeCount } = this.game.getGameResult(computerNum, userInput);
       this.game.renderGameMessage(ballCount, strikeCount);
 
       if (strikeCount !== NUMBER_LIMIT) {
-        this.match(computerNum);
-        return;
+        return this.match(computerNum);
       }
 
-      Console.print(MESSAGE.SUCCESS);
       this.askUserToRestart();
     });
   }
 
   askUserToRestart() {
+    Console.print(MESSAGE.SUCCESS);
+
     Console.readLine(MESSAGE.END, userInput => {
       if (userInput === OPTION.RESTART) {
-        this.restart();
-        return;
+        return this.restart();
       }
 
       if (userInput === OPTION.EXIT) {
-        this.exit();
-        return;
+        return this.exit();
       }
 
       this.throwError();

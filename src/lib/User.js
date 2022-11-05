@@ -11,8 +11,7 @@ class User {
   }
 
   validateInputLength(userInput) {
-    const isInputThreeLength = userInput.length === NUMBER_LIMIT;
-    return isInputThreeLength;
+    return userInput.length === NUMBER_LIMIT;
   }
 
   validateInputType(userInput) {

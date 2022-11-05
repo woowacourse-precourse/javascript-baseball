@@ -26,8 +26,7 @@ class Game {
 
   renderGameMessage(ballCount, strikeCount) {
     if (ballCount === 0 && strikeCount === 0) {
-      Console.print(RESULT.NOTHING);
-      return;
+      return Console.print(RESULT.NOTHING);
     }
 
     const ballMessage = ballCount !== 0 ? `${ballCount}${RESULT.BALL}` : '';
