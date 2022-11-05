@@ -76,8 +76,8 @@ class App {
   }
 
   selectReplayOrClose(selectedNum) {
-    if (selectedNum == 1) return this.setAnswerAndreceiveInput();
-    if (selectedNum == 2) return App.close();
+    if (selectedNum === '1') return this.setAnswerAndreceiveInput();
+    if (selectedNum === '2') return App.close();
 
     throw '1 또는 2만 입력해주세요.';
   }
