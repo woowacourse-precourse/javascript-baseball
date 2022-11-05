@@ -6,6 +6,7 @@ class App {
     }
 
     getRandomNumber() {
+        this.computer = [];
         while (this.computer.length < 3) {
             const number = MissionUtils.Random.pickNumberInRange(1, 9);
             if (!this.computer.includes(number)) {
@@ -50,6 +51,19 @@ class App {
     threeStrikes() {
         MissionUtils.Console.print("3스트라이크");
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        MissionUtils.Console.readLine(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+            (number) => {
+                if (number == 1) {
+                    this.getRandomNumber();
+                    this.getInputNumber();
+                } else if (number == 2) {
+                    MissionUtils.Console.close();
+                } else {
+                    throw "입력값이 잘못되었습니다.";
+                }
+            }
+        );
     }
 
     getHintMessage(inputNumber) {
