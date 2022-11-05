@@ -60,4 +60,20 @@ describe('기능 구현 목록 테스트', () => {
     expect(ball).toEqual(2);
     expect(strike).toEqual(1);
   });
+
+  test('볼, 스트라이크 점수 결과 출력', () => {
+    const logSpy = getLogSpy();
+
+    game.printScore(1, 2);
+    expect(logSpy).toHaveBeenCalledWith('1볼 2스트라이크');
+
+    game.printScore(3, 0);
+    expect(logSpy).toHaveBeenCalledWith('3볼');
+
+    game.printScore(0, 0);
+    expect(logSpy).toHaveBeenCalledWith('낫싱');
+
+    game.printScore(0, 2);
+    expect(logSpy).toHaveBeenCalledWith('2스트라이크');
+  });
 });
