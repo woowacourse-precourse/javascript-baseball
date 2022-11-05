@@ -61,6 +61,14 @@ class App {
         nextLevel(message);
       });
     };
+
+    // 결과 메세지에 따라 재시작 여부를 물을지 다시한번 입력값을 받을지 정하는 기능
+    const nextLevel = (str) => {
+      if (str === "3스트라이크") {
+        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        restart();
+      } else input();
+    };
   }
 }
 
