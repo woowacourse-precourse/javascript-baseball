@@ -9,7 +9,7 @@ const countBallAndStrike = (userInput, answerInput) => {
   // 3자리 수가 맞는가? && 숫자가 맞는 값이 들어왔는가?
   if (
     userInput.length === 3 &&
-    answerInput === 3 &&
+    answerInput.length === 3 &&
     !isNaN(+userInput) &&
     !isNaN(+answerInput)
   ) {
