@@ -12,6 +12,11 @@ class App {
     }
   }
 
+  printMsg(msg) {
+    Console.print(msg);
+    Console.close();
+  }
+
 }
 
 module.exports = App;
