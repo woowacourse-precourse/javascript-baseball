@@ -44,13 +44,17 @@ class App {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.gameOptionValue = input;
       this.validateUserGameOptionValueInput();
-      if (+this.gameOptionValue === 2) MissionUtils.Console.close();
-      if (+this.gameOptionValue === 1) this.play();
     });
+  }
+
+  runByGameOptionValue() {
+    if (+this.gameOptionValue === 2) MissionUtils.Console.close();
+    if (+this.gameOptionValue === 1) this.play();
   }
 
   validateUserGameOptionValueInput() {
     if (+this.gameOptionValue !== 1 || +this.gameOptionValue !== 2) throw new Error("1,2 만 입력해주세요");
+    else this.runByGameOptionValue();
   }
 
   validateUserInput(userNumber) {
