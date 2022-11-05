@@ -101,4 +101,20 @@ describe('기능 구현 목록 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('정답시 출력 문구 확인', () => {
+    const logSpy = getLogSpy();
+    const randoms = [1, 3, 5];
+    const answers = ['135'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+    );
+  });
 });
