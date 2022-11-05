@@ -6,6 +6,9 @@ module.exports = {
   },
   MESSAGE: {
     startApp: '숫자 야구 게임을 시작합니다.',
+    resultNoting: '낫싱',
+    resultBall: '볼',
+    resultStrike: '스트라이크',
   },
   QUESTION: {
     inputNumber: '숫자를 입력해주세요 : ',

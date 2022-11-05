@@ -1,7 +1,7 @@
 const Computer = require('./Computer');
 const Console = require('./Console');
 const Player = require('./Player');
-const { QUESTION } = require('./static/constants');
+const { QUESTION, MESSAGE } = require('./static/constants');
 
 class BaseballGame {
   constructor(console = new Console()) {
@@ -21,8 +21,27 @@ class BaseballGame {
 
   answerPlayerNumbers(answer) {
     this.player.setNumbers(answer);
+    const computerNumbers = this.computer.getNumbers();
+    const playerNumbers = this.player.getNumbers();
+    const { ball, strike } = BaseballGame.countBallAndStrike({ computerNumbers, playerNumbers });
+    const message = BaseballGame.getBallAndStrikeMessage({ ball, strike });
+
+    this.console.print(message);
 
     this.inputPlayerNumbers();
+  }
+
+  static getBallAndStrikeMessage({ ball, strike }) {
+    if (ball > 0 && strike > 0) {
+      return `${ball}${MESSAGE.resultBall} ${strike}${MESSAGE.resultStrike}`;
+    }
+    if (ball > 0) {
+      return `${ball}${MESSAGE.resultBall}`;
+    }
+    if (strike > 0) {
+      return `${strike}${MESSAGE.resultStrike}`;
+    }
+    return MESSAGE.resultNoting;
   }
 
   static countBallAndStrike({ computerNumbers, playerNumbers }) {
