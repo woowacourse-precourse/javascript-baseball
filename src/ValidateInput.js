@@ -1,7 +1,7 @@
 function validateInput(input) {
   if (validateInputLength(input)) return false;
   if (validateInputDuplication(input)) return false;
-  if (isNaN(input)) return false;
+  if (validateInputIsNaN(input)) return false;
 
   return true;
 }
@@ -15,7 +15,7 @@ function validateInputDuplication(input) {
 function validateInputIsNaN(input) {
   let NaN = false;
   input.split("").forEach((eachChar) => {
-    if (typeof eachChar !== "number") NaN = true;
+    if (isNaN(eachChar)) NaN = true;
   });
 
   return NaN;
