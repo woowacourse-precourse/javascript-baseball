@@ -1,5 +1,6 @@
 function isAllowed(nowCheckStr, exception) {
   if (exception) return false;
+  if (nowCheckStr === "0") return false;
   if (isNaN(nowCheckStr)) return false;
   return true;
 }
@@ -13,7 +14,7 @@ function checkException(input) {
   String(input)
     .split("")
     .forEach((str) => {
-      allowed = isAllowed(str, exception);
+      allowed = isAllowed(str, allowed);
     });
 
   return allowed;

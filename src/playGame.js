@@ -7,7 +7,10 @@ function playGame() {
     `${Message.START}\n${Message.INPUT}`,
     (input) => {
       console.log(input);
-      console.log(checkException(input));
+      if (checkException(input)) {
+        throw Message.ERROR;
+        MissionUtils.Console.close();
+      }
     }
   );
 }
