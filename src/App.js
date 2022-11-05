@@ -78,6 +78,16 @@ class App {
       } else if (str === "2") Console.close();
       else throw new Error();
     };
+
+    // 게임 종료 후 재시작 여부(1 또는 2)를 묻는 기능
+    const restart = () => {
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (answer) => {
+          check_restart(answer);
+        }
+      );
+    };
   }
 }
 
