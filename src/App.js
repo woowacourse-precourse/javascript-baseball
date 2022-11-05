@@ -69,8 +69,16 @@ class App {
       (input) => {
         if (/[12]{1}/.test(input)) throw "1 또는 2만 입력 가능합니다";
         isContinued = input === 1;
+        initializeMember();
       }
     );
+  }
+
+  initializeMember() {
+    this.computer = [];
+    this.user = [];
+    this.score.ball = 0;
+    this.score.strike = 0;
   }
 
   play() {
