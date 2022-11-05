@@ -29,30 +29,34 @@ class App {
   }
   askRestart() {
     const GAMEOVER = "2";
-    Console.readLine("다시 시작 1 종료 2 :  ", (input) => {
-      this.checkRestartInputValidation(input);
-      if (input === GAMEOVER) return Console.close();
-      this.computer = getRandomThreeNumber();
-      this.inning();
-    });
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => {
+        this.checkRestartInputValidation(input);
+        if (input === GAMEOVER) return Console.close();
+        this.computer = getRandomThreeNumber();
+        this.inning();
+      }
+    );
   }
   checkBallCount(number) {
     this.checkBallInputValidation(number);
     const ballCount = makeBallCountString(this.computer, number);
     Console.print(ballCount);
     if (ballCount == "3스트라이크") {
-      Console.print("게임 종료");
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.askRestart();
     }
   }
   inning() {
-    Console.readLine("되나?   ", (input) => {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
       if (input.length > 3) throw new Error();
       this.checkBallCount(input);
       this.inning();
     });
   }
   play() {
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.computer = this.computerNumber();
     this.inning();
   }
