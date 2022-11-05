@@ -16,9 +16,9 @@
 #### 기타
 - [x] Node.js 14 버전에서 작동한다.
 - [x] JavaScript 코드 컨벤션을 지킨다.
-- [ ] indent depth가 3을 넘지 않는다.
+- [x] indent depth가 3을 넘지 않는다.
 - [x] 각 함수의 책임이 명확하게 분리된다.
-- [ ] Jest를 활용한 테스트코드를 작성한다.
+- [x] Jest를 활용한 테스트코드를 작성한다.
 
 ## 학습에 참고한 자료
 * [throw](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/throw)
