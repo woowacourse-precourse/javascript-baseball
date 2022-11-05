@@ -1,5 +1,5 @@
 const Game = require('../src/game');
-const { RANDOM_NUMBER } = require('../src/constants');
+const { RANDOM_NUMBER, MESSAGE } = require('../src/constants');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -11,13 +11,23 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(console, 'log');
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe('기능 구현 목록 테스트', () => {
-  const game = new Game();
+  let game;
+
+  beforeEach(() => {
+    game = new Game();
+  });
 
   test('시작 문구 출력', () => {
-    const logSpy = jest.spyOn(console, 'log');
+    const logSpy = getLogSpy();
 
-    game.init();
+    game.start(MESSAGE.START);
 
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
