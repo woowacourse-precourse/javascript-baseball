@@ -17,6 +17,22 @@ class App {
 
     return [...randomNumberSet];
   }
+  checkBaseballCount(answer, userNumber) {
+    const userNumberList = userNumber.split("").map((num) => Number(num));
+    const notStrikeList = [];
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    userNumberList.forEach((num, index) => {
+      if (this.isEqual(num, answer[index])) strikeCount++;
+      else notStrikeList.push(num);
+    });
+    notStrikeList.forEach((num) => {
+      if (answer.includes(num)) ballCount++;
+    });
+
+    return [ballCount, strikeCount];
+  }
   print(message) {
     MissionUtils.Console.print(message);
   }
