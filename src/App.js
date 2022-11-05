@@ -29,30 +29,49 @@ const MissionUtils = require('@woowacourse/mission-utils');
 */
 
 class App {
+  constructor() {
+    this.correctAnswer = this.setNumber();
+  }
   play() {
     this.print('숫자 야구 게임을 시작합니다.');
-    this.setNumber();
+    console.log(this.correctAnswer);
     this.selectNumber();
   }
   print(str) {
     return MissionUtils.Console.print(str);
   }
   setNumber() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
   selectNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const check = /[^0-9]/g;
-      console.log(check.test(answer));
       if (!(answer.length === 3) || check.test(answer)) {
         // 숫자가 아니거나, 글자수가 3보다 적고 크면 thow문 사용하여 예외 처리
+        //!애플리케이션 종료
         this.gameOver();
       } else {
-        console.log('하이1');
+        //게임 진행
+        const result = this.solve(answer);
+        console.log(result);
+        return result[1] === 3 ? '재시작? 종료?' : this.selectNumber();
+
+        //return `${result[0]}볼 ${result[1]}스트라이크`;
       }
     });
   }
 
+  solve(numbers) {
+    const copyCorrectAnswer = this.correctAnswer;
+    const userAnswer = [...numbers];
+    const checkStrike = copyCorrectAnswer.filter(
+      (el, idx) => el != userAnswer[idx]
+    );
+    const strike = 3 - checkStrike.length;
+    let ball = 0;
+    userAnswer.forEach((el) => checkStrike.includes(Number(el)) && ball++);
+    return [ball, strike];
+  }
   gameOver() {
     return MissionUtils.Console.close();
   }
@@ -61,7 +80,3 @@ const app = new App();
 app.play();
 
 module.exports = App;
-
-/*
-일단 어렵게 생각하지말고 
-*/
