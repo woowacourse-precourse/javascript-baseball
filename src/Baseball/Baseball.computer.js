@@ -38,4 +38,4 @@ class BaseballComputer {
   }
 }
 
-export default BaseballComputer;
+module.exports = BaseballComputer;

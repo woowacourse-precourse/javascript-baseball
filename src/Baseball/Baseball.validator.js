@@ -1,6 +1,6 @@
-const BaseballDto = require("./BaseBall.dto");
+const BaseballDto = require("./Baseball.dto");
 
-class BaseBallValidator {
+class BaseballValidator {
   checkNumericNumbers([...numbers]) {
     nonNuemrics = numbers.filter((number) => "1" > number && number > "9");
     if (nonNuemrics > 0) {
@@ -60,4 +60,4 @@ class BaseBallValidator {
   }
 }
 
-export default BaseBallValidator;
+module.exports = BaseballValidator;

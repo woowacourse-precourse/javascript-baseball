@@ -1,7 +1,6 @@
 class BaseballDto {
   constructor() {
     this.#ball = 0;
-    this.#strike = 0;
   }
   get ball() {
     return this.#ball;
@@ -17,4 +16,4 @@ class BaseballDto {
   }
 }
 
-export default BaseballDto;
+module.exports = BaseballDto;

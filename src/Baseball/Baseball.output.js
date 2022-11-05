@@ -36,4 +36,4 @@ class BaseBasllOutput {
   }
 }
 
-export default BaseBasllOutput;
+module.exports = BaseBasllOutput;
