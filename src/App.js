@@ -18,4 +18,28 @@ function getUserInputNumber(computerNum) {
   });
 }
 
+function getStrikeAndBallCount(userNum, computerNum) {
+  let count = {
+    strike: 0,
+    ball: 0,
+  };
+  
+  const userNumArr = String(userNum).split('');
+  const computerNumArr = computerNum.map(String);
+
+  userNumArr.forEach((ele) => {
+    if(computerNumArr.includes(ele) == true) {
+      if(computerNumArr.indexOf(ele) === userNumArr.indexOf(ele)) {
+        count.strike++;
+      }
+
+      else {
+        count.ball++;
+      }
+    }
+  });
+
+  getResult(count, computerNum);
+}
+
 module.exports = App;
