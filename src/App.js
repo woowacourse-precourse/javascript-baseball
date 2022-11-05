@@ -66,14 +66,20 @@ class App {
     return ball;
   }
 
+  printHintMessage(answer, input) {
+    const strike = this.countStrike(answer, input);
+    const ball = this.countBall(answer, input);
+    const ballHint = ball > 0 ? `${ball}볼` : "";
+    const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
+    MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.#answer = this.pickNumber();
     this.getUserInput();
-    console.log(this.#userInput);
     if (!this.checkInput(this.#userInput)) throw "잘못된 입력값입니다.";
-    const strike = this.countStrike(this.#answer, this.#userInput);
-    const ball = this.countBall(this.#answer, this.#userInput);
+    this.printHintMessage(this.#answer, this.#userInput);
   }
 }
 
