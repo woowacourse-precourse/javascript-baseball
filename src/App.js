@@ -97,13 +97,6 @@ class App {
   print(message) {
     MissionUtils.Console.print(message);
   }
-  readLine(message) {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine(message, (answer) => {
-        resolve(answer);
-      });
-    });
-  }
   isEqual(a, b) {
     return a === b;
   }
