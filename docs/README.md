@@ -20,23 +20,22 @@
 
 ## UserInterface 클래스
 
-### 입출력을 담당하는 클래스
+### 입출력을 담당하는 클래스들
 
-- [-] gameStatus에 따라 문자열을 출력하고 입력받기
+- [-] Store에서 freshData 정보를 받으면 각 클래스는 update 메소드를 실행
+- [-] gameStatus에 따라 문자열을 출력하기
 - [-] ball, strike에 따라 문자열을 출력하고 입력받기
 - [-] 입력이 잘못되었을 때 에러처리
-- [-] controller 에게 action 객체를 만들어서 전달해주기
+- [-] Dispatcher 에게 action 객체를 만들어서 전달해주기
 
 ---
 
 ## Store 클래스
 
-### 게임에 필요한 정보들을 담고있는 여러개의 Store 클래스들
+### 게임 진행에 필요한 정보들을 담고있는 Store 클래스들
 
-- [-] GameStatusStore 구현
-- [-] TargetStore 구현
-- [-] InputStore 구현
-- [-] BallStrikeStore 구현
+- [-] GameStatusStore 구현 (gameStatus)
+- [-] GameDataStore 구현 (target, ballsAndStrikes)
 
 ---
 
