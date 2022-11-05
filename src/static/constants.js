@@ -4,6 +4,10 @@ module.exports = {
     maxOfRange: 9,
     digit: 3,
   },
+  START_RULES: {
+    start: '1',
+    exit: '2',
+  },
   MESSAGE: {
     startApp: '숫자 야구 게임을 시작합니다.',
     resultNoting: '낫싱',
@@ -13,6 +17,7 @@ module.exports = {
   },
   QUESTION: {
     inputNumber: '숫자를 입력해주세요 : ',
+    restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
   },
   EXCEPTION: {
     notNumbers: '입력값이 숫자가 아닌 값을 포함합니다.',

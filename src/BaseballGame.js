@@ -1,7 +1,9 @@
 const Computer = require('./Computer');
 const Console = require('./Console');
 const Player = require('./Player');
-const { QUESTION, MESSAGE, NUMBERS_RULES } = require('./static/constants');
+const {
+  QUESTION, MESSAGE, NUMBERS_RULES, START_RULES,
+} = require('./static/constants');
 
 class BaseballGame {
   constructor(console = new Console()) {
@@ -10,7 +12,11 @@ class BaseballGame {
     this.console = console;
   }
 
-  start() {
+  start(answer = START_RULES.start) {
+    if (BaseballGame.checkIsExit(answer)) {
+      this.exit();
+      return;
+    }
     this.computer.setRandomNumbers();
     this.inputPlayerNumbers();
   }
@@ -38,6 +44,19 @@ class BaseballGame {
 
   gameOver() {
     this.console.print(MESSAGE.gameOver);
+    this.inputRestartOrExit();
+  }
+
+  inputRestartOrExit() {
+    this.console.readLine(QUESTION.restart, this.start.bind(this));
+  }
+
+  exit() {
+    this.console.close();
+  }
+
+  static checkIsExit(value) {
+    return value === START_RULES.exit;
   }
 
   static checkIsGameOver(strike) {
