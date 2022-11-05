@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const { GAME_VALUE, GAME_MESSAGE } = require('./assets/constants');
+const { GAME_VALUE, GAME_MESSAGE } = require('./constants');
 const {
   isValidRestartInputValue,
   getGameResultMessage,

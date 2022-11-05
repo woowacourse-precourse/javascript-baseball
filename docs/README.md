@@ -38,6 +38,8 @@
 
 - [✅] 상수를 담은 오브젝트들을 constants 파일로 분리
 - [✅] 함수들 modules 폴더의 index.js 파일로 분리
+- [✅] assets 폴더명을 constants 로 변경
+- [✅] constants.js 파일명을 index.js 로 변경
 
 ### 메모
 

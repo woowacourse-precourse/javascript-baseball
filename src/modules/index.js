@@ -1,6 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 
-const { ERROR_MESSAGE } = require('../assets/constants');
+const { ERROR_MESSAGE } = require('../constants');
 
 module.exports.isValidRestartInputValue = (inputValue) => {
   if (!['1', '2'].includes(inputValue)) {
