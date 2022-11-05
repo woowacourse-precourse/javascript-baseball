@@ -1,103 +1,61 @@
 const { Console } = require('@woowacourse/mission-utils');
-const CheckValid = require('./CheckValid');
-const Computer = require('./Computer');
-const User = require('./User');
-
-const NUMBER_LIMIT = 3;
+const CheckValid = require('./lib/CheckValid');
+const Computer = require('./lib/Computer');
+const Game = require('./lib/Game');
+const { NUMBER_LIMIT, MESSAGE, OPTION } = require('./constant/baseball');
 
 class App {
   constructor() {
-    this.computer = new Computer(NUMBER_LIMIT);
-    this.user = new User();
-    this.checkValid = new CheckValid(NUMBER_LIMIT);
+    this.computer = new Computer();
+    this.checkValid = new CheckValid();
+    this.game = new Game();
   }
 
   play() {
-    const computerNum = this.computer.makeNumbers();
-    Console.print('숫자 야구 게임을 시작합니다.');
+    this.start();
+  }
 
-    let isGameEnd = false;
-    while (isGameEnd === false) {
-      const userInput = this.user.getInputValue();
+  start() {
+    Console.print(MESSAGE.START);
+
+    const computerNum = this.computer.makeNumbers();
+    this.match(computerNum);
+  }
+
+  match(computerNum) {
+    Console.readLine(MESSAGE.INPUT, userInput => {
       const isUserInputValid = this.checkValid.validateInput(userInput);
 
       if (isUserInputValid === false) {
-        throw new Error('유저의 입력값이 유효하지 않습니다!');
+        throw new Error(MESSAGE.ERROR);
       }
 
-      const ballCount = this.countBall(computerNum, userInput);
-      const strikeCount = this.countStrike(computerNum, userInput);
+      const { ballCount, strikeCount } = this.game.getGameResult(computerNum, userInput);
+      this.game.renderGameMessage(ballCount, strikeCount);
 
-      const gameMessage = this.makeGameMessage(ballCount, strikeCount);
-      Console.print(gameMessage);
+      if (strikeCount !== NUMBER_LIMIT) return this.play(computerNum);
 
-      isGameEnd = this.determineGameIsEnd(computerNum, userInput);
-    }
-
-    this.askUserToRestart();
+      Console.print(MESSAGE.SUCCESS);
+      return this.askUserToRestart();
+    });
   }
 
-  countBall(computerNum, userInput) {
-    const splittedComputerNum = [...computerNum];
-    const splittedUserInput = [...userInput];
-
-    return splittedComputerNum.reduce((ballCount, currNum, index) => {
-      const currNumIndex = splittedUserInput.indexOf(currNum);
-      const isBall = currNumIndex !== -1 && currNumIndex !== index;
-
-      if (isBall) ballCount += 1;
-      return ballCount;
-    }, 0);
-  }
-
-  countStrike(computerNum, userInput) {
-    const splittedComputerNum = [...computerNum];
-    const splittedUserInput = [...userInput];
-
-    return splittedComputerNum.reduce((strikeCount, currNum, index) => {
-      const isStrike = currNum === splittedUserInput[index];
-
-      if (isStrike) strikeCount += 1;
-      return strikeCount;
-    }, 0);
-  }
-
-  makeGameMessage(ballCount, strikeCount) {
-    if (ballCount && strikeCount) {
-      return `${ballCount}볼 ${strikeCount}스트라이크`;
-    }
-
-    if (ballCount) {
-      return `${ballCount}볼`;
-    }
-
-    if (strikeCount) {
-      return `${strikeCount}스트라이크`;
-    }
-
-    return '낫싱';
-  }
-
-  determineGameIsEnd(computerNum, userInput) {
-    return computerNum === userInput;
-  }
-
+  // TODO: 유저 옵션 입력값 유효성 검사 로직 분리
   askUserToRestart() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', userChoice => {
-      if (userChoice === '1') return this.restart();
-      if (userChoice === '2') return this.exit();
+    Console.readLine(MESSAGE.END, userInput => {
+      if (userInput === OPTION.RESTART) return this.restart();
+      if (userInput === OPTION.EXIT) return this.exit();
 
-      throw new Error('유저의 입력값이 유효하지 않습니다!');
+      throw new Error(MESSAGE.ERROR);
     });
   }
 
   restart() {
-    this.play();
+    this.start();
   }
 
   exit() {
-    Console.print('게임 종료');
+    Console.print(MESSAGE.EXIT);
     Console.close();
   }
 }

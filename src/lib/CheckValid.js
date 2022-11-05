@@ -1,8 +1,6 @@
-class CheckValid {
-  constructor(NUMBER_LIMIT) {
-    this.NUMBER_LIMIT = NUMBER_LIMIT;
-  }
+const { NUMBER_LIMIT } = require('../constant/baseball');
 
+class CheckValid {
   validateInput(userInput) {
     return (
       this.validateInputLength(userInput) &&
@@ -13,7 +11,7 @@ class CheckValid {
   }
 
   validateInputLength(userInput) {
-    const isInputThreeLength = userInput.length === this.NUMBER_LIMIT;
+    const isInputThreeLength = userInput.length === NUMBER_LIMIT;
     return isInputThreeLength;
   }
 
@@ -30,7 +28,7 @@ class CheckValid {
   }
 
   validateInputDuplicated(userInput) {
-    const isDuplicated = new Set([...userInput]).size !== this.NUMBER_LIMIT;
+    const isDuplicated = new Set([...userInput]).size !== NUMBER_LIMIT;
     return isDuplicated === false;
   }
 }
