@@ -67,6 +67,17 @@ function readNumber() {
   return answer;
 }
 
+function readControlNumber() {
+  let answer = -1;
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (input) => {
+      answer = input;
+    }
+  );
+  return answer;
+}
+
 class App {
   play() {}
 }
