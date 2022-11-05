@@ -1,6 +1,6 @@
 const App = require('../src/App');
 
-describe('기능 구현 테스트 : computer', () => {
+describe('기능 구현 테스트(게임 시작 시 3자리 랜덤 숫자 생성 함수) : computer 💻', () => {
   const app = new App();
   const numbers = app.makeRandomNumbers();
 
