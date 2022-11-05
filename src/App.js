@@ -58,12 +58,9 @@ class App {
         }
       }
 
-      if (USER_NUMBER.length !== 3) {
-        throw '3자리 숫자를 입력해주세요!';
-      }
-      if (findDuplicate(USER_NUMBER)) {
-        throw '중복되지 않은 숫자를 입력해 주세요!';
-      }
+      if (USER_NUMBER.length !== 3) throw '3자리 숫자를 입력해주세요!';
+
+      if (findDuplicate(USER_NUMBER)) throw '중복되지 않은 숫자를 입력해 주세요!';
 
       return USER_NUMBER;
     }
@@ -71,9 +68,7 @@ class App {
     function findDuplicate(numberArr) {
       const UNIQUE_ARRAY = new Set(numberArr);
 
-      if (numberArr.length !== UNIQUE_ARRAY.size) {
-        return true;
-      }
+      if (numberArr.length !== UNIQUE_ARRAY.size) return true;
 
       return false;
     }
@@ -109,15 +104,11 @@ class App {
       MissionUtils.Console.readLine(
         '게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.',
         (number) => {
-          if (number === '1') {
-            app.play();
-          }
-          if (number === '2') {
-            MissionUtils.Console.close();
-          }
-          if (number !== '1' && number !== '2') {
-            restartOrEnd();
-          }
+          if (number === '1') app.play();
+
+          if (number === '2') MissionUtils.Console.close();
+
+          if (number !== '1' && number !== '2') restartOrEnd();
         }
       );
     }
