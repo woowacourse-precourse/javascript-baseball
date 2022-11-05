@@ -11,8 +11,18 @@ class App {
     return Array.from(arr);
   }
 
+  makeUserInputNumber() {
+    let userInputNumbers;
+    readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      userInputNumbers = [...inputNumber].map(Number);
+      return userInputNumbers;
+    });
+  }
+
   play() {
+    print("숫자 야구 게임을 시작합니다.");
     let randomNumbers = this.makeRandomNumber();
+    let userInputNumbers = this.makeUserInputNumber();
   }
 }
 const app = new App();
