@@ -10,17 +10,6 @@ class App {
     return this.getUserInput();
   }
 
-  makeRandomNumbers() {
-    const computerInputNumbersArray = [];
-    while (computerInputNumbersArray.length < 3) {
-      const eachNumber = this.missionRandom.pickNumberInRange(1, 9);
-      if (!computerInputNumbersArray.includes(eachNumber)) {
-        computerInputNumbersArray.push(eachNumber);
-      }
-    }
-    return computerInputNumbersArray.join("");
-  }
-
   getUserInput() {
     const computerInputNumbers = this.makeRandomNumbers();
 
