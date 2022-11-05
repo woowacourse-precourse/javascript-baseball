@@ -8,8 +8,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getRandomNum();
-
-    console.log(this.answer);
+    this.getUserAnswer();
   }
 
   getRandomNum() {
@@ -20,6 +19,21 @@ class App {
       }
     }
   }
+
+  getUserAnswer() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
+      if (
+        answer.length !== 3 &&
+        [...new Set(answer.split(""))].length !== 3 &&
+        !/^\d+$/.test(answer)
+      )
+        throw Error();
+      console.log(answer);
+    });
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
