@@ -15,6 +15,24 @@ function askNumInput() {
   });
 }
 
+function askRematchOrExit() {
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (input) => {
+      switch (input) {
+        case "1":
+          printMsg("재경기를 진행합니다.");
+          askNumInput();
+          break;
+        case "2":
+          printMsg("게임을 종료합니다.");
+          MissionUtils.Console.close();
+          break;
+      }
+    }
+  );
+}
+
 function isValidInput(input) {
   if (!isNumber(input) || !isVaildLength(input) || !isAllDiffNum(input)) {
     throw new Error("유효한 값이 아니므로 게임을 종료합니다.");
