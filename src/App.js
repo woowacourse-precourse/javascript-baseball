@@ -5,7 +5,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const computerNumber = this.createComputerNumber();
     const userNumber = this.inputUserNumber();
-    // console.log(computerNumber, userNumber);
+    console.log(computerNumber, userNumber);
   }
 
   // 컴퓨터의 숫자 랜덤으로 생성한다. (1부터 9까지 서로 다른 수로 이루어진 3자리의 수)
@@ -26,32 +26,44 @@ class App {
     let userNumber;
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
-      const number = this.vaildCheck(num);
-      number = userNumber;
+      console.log(num, typeof num);
+      const checkNumber = this.isNumberVaild(num);
+      console.log("vaild check", checkNumber);
+      userNumber = checkNumber;
     });
     return userNumber;
   }
 
   // 사용자가 입력한 숫자 유효성 검사
-  vaildCheck(number) {
-    // console.log(number);
+  isNumberVaild(number) {
     const set = new Set(number);
     const len = number.length;
+
     //  입력한 수가 3자리 수인가
     if (len !== 3) {
+      console.log("3자리 수 아님");
       throw "3자리 수를 입력해주세요.";
+      isVaild = true;
     }
-    // 서로 다른 숫자인가
-    if (len === set.size) {
+
+    if (len !== set.size) {
+      console.log("서로 다른 숫자임");
       throw "서로 다른 수를 입력하세요.";
     }
     // 1 ~ 9 범위에 해당하는 수를 입력했는가
-    [...number].map((num, index) => {
-      if (!(parseInt(num) <= 1 && parseInt(num) <= 9)) {
+    this.isNumberInRange(number);
+    return number;
+  }
+
+  // 유효성 검사: 1 ~ 9 범위에 해당하는 수를 입력했는가
+  isNumberInRange(number) {
+    for (let i = 0; i < number.length; i++) {
+      console.log("각 자리 수 ", number[i]);
+      if (!(parseInt(number[i]) >= 1 && parseInt(number[i]) <= 9)) {
+        console.log("숫자 범위에 맞지 않음");
         throw "1 ~ 9 범위에 해당하는 숫자를 입력하세요.";
       }
-    });
-    return number;
+    }
   }
 }
 
