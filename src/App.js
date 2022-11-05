@@ -73,19 +73,28 @@ class App {
   compareInputAnswer(answer, input) {
     const strike = this.countStrike(answer, input);
     const ball = this.countBall(answer, input);
-    const ballHint = ball > 0 ? `${ball}볼` : "";
-    const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
 
     this.checkNothing(strike, ball);
-    if (strike === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.#correct = true;
-    }
-    MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
+    this.printHint(strike, ball);
+    this.checkCorrect(strike);
   }
 
   checkNothing(strike, ball) {
     if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
+  }
+
+  checkCorrect(strike) {
+    if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.#correct = true;
+    }
+  }
+
+  printHint(strike, ball) {
+    const ballHint = ball > 0 ? `${ball}볼` : "";
+    const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
+
+    MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
   }
 
   game() {
