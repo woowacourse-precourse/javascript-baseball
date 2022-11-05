@@ -26,16 +26,17 @@ function game(computer_numbers) {
     let user_numbers = checkUserNumber(user_number);
     let strike = getStrike(computer_numbers, user_numbers, score);
     let ball = getBall(computer_numbers, user_numbers, score);
-    if (strike == 0 && ball == 0) {
-      MissionUtils.Console.print("낫싱");
-    } else {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
-    if (strike == 3) {
-      return winGame();
-    }
-    game(computer_numbers);
+    gameResult(strike,ball);
+    if (strike == 3) return winGame();
+    return game(computer_numbers);
   });
+}
+
+function gameResult(strike,ball){
+  if (strike == 0 && ball == 0) return MissionUtils.Console.print("낫싱");
+  if(strike == 0) return MissionUtils.Console.print(`${ball}볼`);
+  if(ball == 0) return MissionUtils.Console.print(`${strike}스트라이크`);
+  if(strike != 0 && ball != 0) return MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
 }
 
 function setgame() {
@@ -45,7 +46,7 @@ function setgame() {
 
 function winGame() {
   MissionUtils.Console.readLine(
-    "게임 종료",
+    "재시작 1 종료 2",
     (renumber) => {
       restart(renumber);
     }
@@ -57,6 +58,7 @@ function restart(renumber) {
     return setgame();
   }
   if (renumber == 2) {
+    MissionUtils.Console.print("게임 종료");
     return MissionUtils.Console.close();
   }
   if (renumber != 1 || renumber != 2) {
