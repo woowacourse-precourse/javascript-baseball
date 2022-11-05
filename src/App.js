@@ -18,14 +18,6 @@ class App {
     return refNumbers;
   }
 
-  userNumbersGetter() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (asnwer) => {
-        resolve(asnwer);
-      });
-    });
-  }
-
   stringToArrConverter(numbersString) {
     const numbersStringArray = numbersString.split("");
     const numbersNumberArray = numbersStringArray.map((number) =>
@@ -58,27 +50,41 @@ class App {
   }
 
   reStartSelector() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-        (asnwer) => {
-          resolve(Number(asnwer));
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (answer === "1") {
+          const refNumbersArr = this.refNumbersGetter();
+          this.gameStarter(refNumbersArr);
+        } else if (answer === "2") {
+          MissionUtils.Console.close();
         }
-      );
+      }
+    );
+  }
+
+  gameStarter(refNumbersArr) {
+    let discrimination = "";
+
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      const usersInput = answer;
+      const userNumbersArr = this.stringToArrConverter(usersInput);
+      let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
+      this.printer(discrimination);
+
+      if (discrimination !== "3스트라이크") {
+        this.gameStarter(refNumbersArr);
+      } else if (discrimination === "3스트라이크") {
+        this.printer("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.reStartSelector();
+      }
     });
   }
 
   play() {
     console.log("숫자 야구 게임을 시작합니다.");
-    // let discrimination = "";
-    // this.test();
-    // MissionUtils.Console.readLine("숫자를 입력해주세요 : ", async (answer) => {
-    //   const usersInput = answer;
-    //   const userNumbersArr = stringToArrConverter(usersInput);
-    //   const refNumbersArr = refNumbersGetter();
-    //   discrimination = discriminator(userNumbersArr, refNumbersArr);
-    //   printer(discrimination);
-    // });
+    const refNumbersArr = this.refNumbersGetter();
+    this.gameStarter(refNumbersArr);
   }
 }
 
