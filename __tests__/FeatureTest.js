@@ -1,6 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce(
+    (acc, input) =>
+      acc.mockImplementationOnce((question, callback) => {
+        callback(input);
+      }),
+    MissionUtils.Console.readLine,
+  );
+};
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
@@ -46,7 +57,7 @@ describe('숫자 야구 기능 테스트', () => {
       app.userNumbers = answer;
       app.setBallStrikeCount();
 
-      expect(app.gameCount).toStrictEqual(counts[i]);
+      expect(app.ballStrikeCount).toStrictEqual(counts[i]);
     });
   });
 
@@ -62,7 +73,7 @@ describe('숫자 야구 기능 테스트', () => {
     const app = new App();
 
     counts.forEach((count, i) => {
-      app.gameCount = count;
+      app.ballStrikeCount = count;
       app.setResult();
 
       expect(app.result).toEqual(messages[i]);
@@ -70,12 +81,9 @@ describe('숫자 야구 기능 테스트', () => {
   });
 
   test('1을 입력하면 재시작', () => {
-    const answer = '1';
+    const answers = ['1'];
 
-    MissionUtils.Console.readLine = jest.fn();
-    MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
-      callback(answer);
-    });
+    mockQuestions(answers);
 
     const app = new App();
     const playSpy = jest.spyOn(app, 'play');
@@ -85,13 +93,10 @@ describe('숫자 야구 기능 테스트', () => {
   });
 
   test('2를 입력하면 게임 종료', () => {
-    const answer = '2';
+    const answers = ['2'];
     const closeSpy = getCloseSpy();
 
-    MissionUtils.Console.readLine = jest.fn();
-    MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
-      callback(answer);
-    });
+    mockQuestions(answers);
 
     const app = new App();
     app.readRestartInput();
