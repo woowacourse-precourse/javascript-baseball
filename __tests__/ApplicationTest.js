@@ -85,6 +85,26 @@ describe("App", () => {
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
   });
 
+  test("generateAnswer 메소드를 통해 정답을 생성한다.", () => {
+    const app = new App();
+    const answer = app.generateAnswer();
+
+    const checkNumber = (number) => !isNaN(number);
+    const checkRange = (number) => number >= 1 && number <= 9;
+
+    expect(Array.from(new Set(answer))).toHaveLength(3);
+    expect(
+      Array.from(answer)
+        .map((char) => Number(char))
+        .every(checkRange)
+    ).toBeTruthy();
+    expect(
+      Array.from(answer)
+        .map((char) => Number(char))
+        .every(checkNumber)
+    ).toBeTruthy();
+  });
+
   // test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
   //   const app = new App();
 
