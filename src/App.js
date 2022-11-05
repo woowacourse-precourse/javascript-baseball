@@ -28,7 +28,7 @@ const app = new App();
 app.play();
 
 function makeRandomValue() {
-  let randomValue=new Set();
+  let randomValue = new Set();
 
   while (randomValue.size < 3) {
     randomValue.add(MISSION_UTILS.Random.pickNumberInRange(1, 9));
@@ -49,6 +49,7 @@ function isValidUserInput(userValue) {
   if (!userValue.match(/[1-9]{3}/) || IS_UNIQUE !== 3) {
     throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요';
   };
+  
   app.setUserValueAndCountStart(userValue)
 };
 
