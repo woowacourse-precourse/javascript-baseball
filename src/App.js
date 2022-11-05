@@ -89,6 +89,10 @@ class App {
   }
 
   setUserNumbers(str) {
+    if (str.length > 3) {
+      throw new Error("error/over-length-user-input");
+    }
+
     const numbers = this.separateNumbers(str);
     this.user = [...numbers];
   }
