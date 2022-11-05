@@ -1,16 +1,24 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  constructor(){
+    this.computer = [];
+  }
+
   computerInput() {
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) computer.push(number);
+      if (!computer.includes(number)) {
+        computer.push(number);
+        this.computer = computer;
+      }
     }
-    return computer
+    return computer;
   }
 
   checkIsvaild(num) {
+    // console.log(num)
     if(num === '') throw new Error('입력해주세요.');
     if((/[^0-9]/g).match === null) throw new Error('숫자를 입력해주세요.');
     if(num.length !== 3) throw new Error('숫자 3개가 입력되지 않았습니다.');
@@ -20,11 +28,35 @@ class App {
 
   userInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (number) => {
+      console.log(number)
       this.checkIsvaild(number);
-      this.userInput();
+      const userNum = number.split('').map(Number);
+      this.checkAnswer(userNum);
     });
   }
   
+  checkAnswer(num){
+    let STRIKE = 0;
+    let BALL = 0;
+    let result = '';
+
+    if(num === this.computer) result = '3스트라이크';
+    // console.log(this.computer)
+    // console.log(num)
+    for(let i=0; i<num.length; i++){
+      if(num[i] === this.computer[i]) STRIKE ++;
+      else if(num.includes(this.computer[i])) BALL ++;
+    }
+    if(BALL !== 0 && STRIKE !== 0) {
+      result=`${BALL}볼 ${STRIKE}스트라이크`;
+    } else if(BALL !== 0 && STRIKE === 0){
+      result=`${BALL}볼`;
+    } else if(BALL === 0 && STRIKE !== 0){
+      result=`${STRIKE}스트라이크`;
+    } else result = '낫싱'
+    this.result = result;
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.computerInput();
