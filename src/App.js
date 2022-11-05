@@ -1,12 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  async play() {
     PrintGameStartPhrase();
 
     const computerNumber = makeComputerNumber();
-
-
+    const userNumber = await getUserNumber();
+    
   }
 }
 
@@ -29,6 +29,23 @@ function makeComputerNumber() {
 
   return computerNumberList.join("");
 }
+
+// 기능 3
+function getUserNumber() {
+  let userNumber;
+
+  let promise = new Promise((resolve) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      resolve(input);
+    });
+  });
+
+  userNumber = promise;
+
+  return userNumber;
+}
+
+
 
 
 const baseballGame = new App();
