@@ -2,21 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {}
-  generateRandomNumber(digits) {
-    const START_INCLUSIVE = 1,
-      END_INCLUSIVE = 9;
-    const randomNumberSet = new Set();
-
-    while (randomNumberSet.size < digits) {
-      const num = MissionUtils.Random.pickNumberInRange(
-        START_INCLUSIVE,
-        END_INCLUSIVE
-      );
-      randomNumberSet.add(num);
-    }
-
-    return [...randomNumberSet];
-  }
+  initGame() {}
   async playRound(answer) {
     const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
@@ -37,6 +23,32 @@ class App {
         break;
       }
     }
+  }
+  async selectRestartOrExit() {
+    const FINAL_MESSAGE =
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
+    const ERROR_MESSAGE = "Invalid Input!";
+    const RESTART = 1,
+      EXIT = 2;
+    const command = await this.readLine(FINAL_MESSAGE);
+    if (!this.isValidCommand(command)) this.throwException(ERROR_MESSAGE);
+    if (command == RESTART) this.initGame();
+    if (command == EXIT) MissionUtils.Console.close();
+  }
+  generateRandomNumber(digits) {
+    const START_INCLUSIVE = 1,
+      END_INCLUSIVE = 9;
+    const randomNumberSet = new Set();
+
+    while (randomNumberSet.size < digits) {
+      const num = MissionUtils.Random.pickNumberInRange(
+        START_INCLUSIVE,
+        END_INCLUSIVE
+      );
+      randomNumberSet.add(num);
+    }
+
+    return [...randomNumberSet];
   }
   checkBaseballCount(answer, userNumber) {
     const userNumberList = userNumber.split("").map((num) => Number(num));
