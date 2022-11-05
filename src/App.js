@@ -26,10 +26,6 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
   }
 
-  isVaildLength(target) {
-    return target.length === 3;
-  }
-
   isVaildNumberFormat(target) {
     return /^[1-9]{3}$/.test(target);
   }
