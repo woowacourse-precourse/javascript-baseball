@@ -69,7 +69,6 @@ class App {
   printHint(userInput) {
     const strike = this.getStrike(userInput);
     const ball = this.getBall(userInput);
-    if (userInput[0] === 5) Console.print(userInput, this.threeDigitsAnswer);
     if (strike === 0 && ball === 0) {
       Console.print('낫싱');
     } else if (strike === 0 && ball > 0) {
@@ -86,9 +85,11 @@ class App {
     Console.readLine('', (isRestart) => {
       if (isRestart === '1') {
         this.play();
-      } else {
+      } else if (isRestart === '2') {
         Console.print('게임 종료');
         Console.close();
+      } else {
+        throw new Error('1 또는 2 중에 선택해주세요');
       }
     });
   }
