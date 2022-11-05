@@ -8,9 +8,9 @@ class App {
   play() {
     print.start();
     this.answer = game.getAnswer();
-    this.getInput();
+    this.submitInput();
   }
-  getInput() {
+  submitInput() {
     let userInput;
     MissionUtils.Console.readLine(constants.MESSAGE.INPUT, (input) => {
       userInput = input.trim().split('').map(number => +number);
