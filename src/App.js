@@ -24,18 +24,17 @@ class App {
 
   inputUserAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      this.parseUserAnswertoString(answer);
-      this.printBallStrike(this.checkBallStrike(this.computerRandomNumber, this.userAnswer));
+      this.userAnswer = answer;
+      if (answer.length !== 3) {
+        throw new Error();
+      } else {
+        this.printBallStrike(this.checkBallStrike(this.computerRandomNumber, this.userAnswer));
+      }
     });
   }
 
   makeRandomNumberArray() {
     this.computerRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  }
-
-  parseUserAnswertoString(answer) {
-    this.userAnswer = String(answer);
-    if (this.userAnswer.length !== 3) throw new Error();
   }
 
   checkBallStrike(rn, input) {
@@ -69,6 +68,7 @@ class App {
 
     if (strike === 3) {
       console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.close();
       this.askReplayorClose();
     } else {
       this.inputUserAnswer();
@@ -80,7 +80,7 @@ class App {
         MissionUtils.Console.close();
       } else if (answer == 1) {
         this.replay();
-      }
+      } else throw new Error();
     });
   }
 }
