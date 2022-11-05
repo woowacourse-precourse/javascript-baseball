@@ -10,7 +10,7 @@ class App {
     system.chooseNumber();
     user.responseSendNumber(system);
 
-    MissionUtils.Console.close();
+    // MissionUtils.Console.close();
   }
 }
 
