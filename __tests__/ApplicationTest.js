@@ -2,8 +2,10 @@ const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
+  // 가짜 함수를 생성하는 jest.fn() return값은 undefined
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
+    // 즉석해서 해당 함수를 재구현
     return acc.mockImplementationOnce((question, callback) => {
       callback(input);
     });
@@ -13,11 +15,14 @@ const mockQuestions = (answers) => {
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
+    // 어떤 값을 리턴해줘야 하는지 설정하는 함수
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickNumberInRange);
 };
 
 const getLogSpy = () => {
+  // MissionUtils하는 객체에서 print라는 함수에 스파이를 붙인다
+  // print 함수를 호출 후에 호출 횟수와 어떤 인자가 넘어갔는지 감증 가능
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
   return logSpy;
