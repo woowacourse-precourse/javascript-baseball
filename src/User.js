@@ -17,7 +17,6 @@ class User extends Mission {
   }
   makeNumberArray(answer) {
     const userNumbers = answer.split('').map((item) => Number(item));
-    console.log(userNumbers);
     return userNumbers;
   }
   checkUserNumber(userArr) {
