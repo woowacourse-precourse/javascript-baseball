@@ -5,8 +5,8 @@ const {
   END_MESSAGE,
   STRIKE_MESSAGE,
   INPUT_MESSGAE,
-  INVALID_ERROR_MESSAGE,
-  DUPLICATE_ERROR_MESSAGE,
+  INVALID_NUMERIC_ERROR_MESSAGE,
+  DUPLICATE_NUMERIC_ERROR_MESSAGE,
   RANGE_ERROR_MESSAGE,
 } = require('./common/messages');
 
@@ -73,7 +73,7 @@ class App {
     const isNoNumber = isNaN(convertNumberPlayerInput);
 
     if (isNoNumber) {
-      throw new Error(`${INVALID_ERROR_MESSAGE}`);
+      throw new Error(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
     }
 
     return true;
@@ -95,7 +95,7 @@ class App {
 
     inputNumbers.forEach((inputNumber) => {
       if (inputNumber < BEGIN_NUM) {
-        throw new Error(`${INVALID_ERROR_MESSAGE}`);
+        throw new Error(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
       }
     });
 
@@ -107,7 +107,7 @@ class App {
     const differentNumbers = [...new Set(convertStringPlayerInput)];
 
     if (differentNumbers.length !== MAX_LENGTH) {
-      throw new Error(`${DUPLICATE_ERROR_MESSAGE}`);
+      throw new Error(`${DUPLICATE_NUMERIC_ERROR_MESSAGE}`);
     }
 
     return true;

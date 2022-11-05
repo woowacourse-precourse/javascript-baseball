@@ -1,7 +1,7 @@
 const App = require('../src/App');
 const {
-  INVALID_ERROR_MESSAGE,
-  DUPLICATE_ERROR_MESSAGE,
+  INVALID_NUMERIC_ERROR_MESSAGE,
+  DUPLICATE_NUMERIC_ERROR_MESSAGE,
   RANGE_ERROR_MESSAGE,
 } = require('../src/common/messages');
 
@@ -19,7 +19,7 @@ describe('사용자 인풋 예외처리 테스트 : player', () => {
 
     expect(() => {
       isNotANumber('2022 우테코 조아요💙');
-    }).toThrowError(`${INVALID_ERROR_MESSAGE}`);
+    }).toThrowError(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
   });
 
   test('✨ 1부터 9까지의 숫자로만 이루어져 있습니다.', () => {
@@ -35,7 +35,7 @@ describe('사용자 인풋 예외처리 테스트 : player', () => {
 
     expect(() => {
       isValidRangeOfNumber(104);
-    }).toThrowError(`${INVALID_ERROR_MESSAGE}`);
+    }).toThrowError(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
   });
 
   test('✨ 입력 값의 길이가 3자리로 유효합니다.', () => {
@@ -56,17 +56,17 @@ describe('사용자 인풋 예외처리 테스트 : player', () => {
 
   test('✨ 입력 값에 중복이 존재하지 않습니다.', () => {
     const app = new App();
-    const isDuplicateNumber = app.isDuplicateNumber;
+    const isUniqueNumber = app.isUniqueNumber;
 
-    expect(isDuplicateNumber(456)).toBeTruthy();
+    expect(isUniqueNumber(456)).toBeTruthy();
   });
 
   test('🖐 입력 값에 중복이 있으면 예외가 발생됩니다.', () => {
     const app = new App();
-    const isDuplicateNumber = app.isDuplicateNumber;
+    const isUniqueNumber = app.isUniqueNumber;
 
     expect(() => {
-      isDuplicateNumber(444);
-    }).toThrowError(`${DUPLICATE_ERROR_MESSAGE}`);
+      isUniqueNumber(444);
+    }).toThrowError(`${DUPLICATE_NUMERIC_ERROR_MESSAGE}`);
   });
 });
