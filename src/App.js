@@ -26,13 +26,16 @@ class App {
   }
   clearGame() {   
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.CLEAR, (submit) => {
-      GameUtils.Validator.isVaildRestartSubmit(submit);
-      if(+submit === 1) app.play();
-      if(+submit === 2) {
-        print.gameover();
-        MissionUtils.Console.close();
-      }
+      GameUtils.Validator.isVaildRestartSubmit(+submit);
+      this.isRestart(+submit)
     });
+  }
+  isRestart(submit) {    
+    if(+submit === 1) this.play();
+    if(+submit === 2) {
+      print.gameover();
+      MissionUtils.Console.close();
+    }
   }
 }
 
