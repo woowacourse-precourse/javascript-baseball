@@ -1,12 +1,12 @@
-const { threePitching } = require('./modules/generateNumbers')
+const { threePitchingBall } = require('./modules/generateNumbers')
 
 class App {
   play() {
-    threePitching();
+    threePitchingBall();
   }
 }
 
 const app = new App()
 app.play()
-console.log(threePitching())
+console.log(threePitchingBall())
 module.exports = App;
