@@ -123,12 +123,20 @@ class App {
       }
     );
 
+    this.isOptionError(option);
+
     if (option === "1") {
       return this.playGame();
     }
 
     if (option === "2") {
       MissionUtils.Console.print("게임 종료");
+    }
+  }
+
+  isOptionError(option) {
+    if (option !== "1" && option !== "2") {
+      throw "잘못된 옵션을 선택하였습니다.";
     }
   }
 }
