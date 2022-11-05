@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   constructor() {
-    this.computer = this.getRandomNumbers();
+    this.firstEnter = true;
   }
 
   getRandomNumbers() {
@@ -90,7 +90,14 @@ class App {
     return `${ball}볼 ${strike}스트라이크`;
   }
 
-  play() {}
+  play() {
+    if (this.firstEnter === true) {
+      MissionUtils.Console.print('게임을 시작합니다');
+      this.firstEnter = false;
+    }
+    this.computer = this.getRandomNumbers();
+    this.guessAnswer();
+  }
 }
 
 module.exports = App;
