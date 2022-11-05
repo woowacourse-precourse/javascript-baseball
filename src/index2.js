@@ -36,9 +36,9 @@ export default class BaseballGame {
     checkUserInputNumberRange(input) {
         for (let i = 0; i < 3; i++) {
             if (Number[input[i]] > 1 || Number[input[i]] < 9) {
-                return true
-            } else {
                 return false
+            } else {
+                return true
             }
         }
     }
@@ -52,6 +52,27 @@ export default class BaseballGame {
             return false;
         }
     }
+
+    // 사용자 입력 숫자 유효성 확인
+    checkUserInput(userInput) {
+        if (!this.checkUserInputLength(userInput)) {
+            console.log('길이가 3개가 아님');
+            return false;
+        }
+        if (!this.checkUserInputType(userInput)) {
+            console.log('타입이 숫자가 아님');
+            return false;
+        }
+        if (!this.checkUserInputNumberRange(userInput)) {
+            console.log('입력된 숫자가 1 ~ 9 사이가 아님');
+            return false;
+        }
+        if (!this.checkUserInputIsDiff(userInput)) {
+            console.log('중복된 숫자가 있음');
+            return false;
+        }
+        return true;
+    };
 
 }
 new BaseballGame();
