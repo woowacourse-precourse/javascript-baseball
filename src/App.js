@@ -14,7 +14,12 @@ class App {
 
       const checkResult = countBallAndStrike(computerNumber, userNumber);
 
-      printResult(checkResult);
+      const result = printResult(checkResult);
+
+      if (result === "end") {
+        let userChoiceNumber = await reStartOrEnd();
+        console.log(userChoiceNumber);
+      }
 
 
     }
@@ -142,7 +147,20 @@ function printResult(checkResult) {
   return;
 }
 
+// 기능 7
+function reStartOrEnd() {
+  let userChoiceNumber;
 
+  let promise = new Promise((resolve) => {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+      resolve(input);
+    });
+  });
+
+  userChoiceNumber = promise;
+
+  return userChoiceNumber;
+}
 
 const baseballGame = new App();
 baseballGame.play();
