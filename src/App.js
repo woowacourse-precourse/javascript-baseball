@@ -10,11 +10,13 @@ function checkUserNumber(user_number) {
 }
 
 function getComputerNumbers() {
-  const computer_numbers = MissionUtils.Random.pickUniqueNumbersInRange(
-    1,
-    9,
-    3
-  );
+  let computer_numbers = [];
+  while(computer_numbers.length != 3){
+    let computer_number = MissionUtils.Random.pickNumberInRange(1,9);
+    if(!computer_numbers.includes(computer_number)){
+      computer_numbers.push(computer_number)
+    }
+  }
   return computer_numbers;
 }
 
@@ -27,7 +29,7 @@ function game(computer_numbers) {
     if (strike == 0 && ball == 0) {
       MissionUtils.Console.print("낫싱");
     } else {
-      MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
     if (strike == 3) {
       return winGame();
@@ -43,7 +45,7 @@ function setgame() {
 
 function winGame() {
   MissionUtils.Console.readLine(
-    "정답입니다. 재시작은 1 종료는 2",
+    "게임 종료",
     (renumber) => {
       restart(renumber);
     }
@@ -55,7 +57,7 @@ function restart(renumber) {
     return setgame();
   }
   if (renumber == 2) {
-    MissionUtils.Console.close();
+    return MissionUtils.Console.close();
   }
   if (renumber != 1 || renumber != 2) {
     throw new Error("잘못된 번호");
@@ -85,5 +87,4 @@ class App {
     setgame();
   }
 }
-
 module.exports = App;
