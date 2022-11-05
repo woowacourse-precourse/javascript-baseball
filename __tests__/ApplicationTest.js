@@ -1,6 +1,11 @@
-const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const App = require("../src/App");
 
+/*
+ ** readLine() 호출 마다
+ ** answers["246", "135", "1", "597", "589", "2"]가 차례로 리턴되도록 만드는 함수
+ ** (비동기 호출에서 값을 확인하는데 사용)
+ */
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -10,13 +15,30 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+/*
+ ** pickNumberInRange() 호출 마다
+ ** randoms[1, 3, 5, 5, 8, 9]가 차례로 리턴되도록 만드는 함수
+ */
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickNumberInRange);
+  /*
+  jest.fn()
+  .mockReturnValueOnce(1)
+  .mockReturnValueOnce(3)
+  .mockReturnValueOnce(5)
+  .mockReturnValueOnce(5)
+  .mockReturnValueOnce(8)
+  .mockReturnValueOnce(9)
+  */
 };
 
+/*
+ ** jest.fn과 유사한 모의 함수를 생성하지만, MissionUtils.Console[print]에 대한 호출도 추적한다.
+ ** jest.spyOn(object, methodName);
+ */
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
