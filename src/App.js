@@ -15,6 +15,23 @@ class App {
     });
   }
 
+  isValidInputValueInGame(inputValue){
+    if(inputValue === undefined){return false;}
+    
+    const inputValueList = inputValue.toString().split('')
+    if(inputValueList.length !== 3){return false;}
+
+    const naturalRegex = /[1-9]/
+    let tempNum = [];
+    for( let value of inputValueList ){
+      if(tempNum.includes(value)){return false;}
+      if(naturalRegex.test(value) === false){return false;}
+      tempNum.push(value)
+    }
+    return true;
+  }
+
+
   getStrikeCount(randomNum, inputNum) {
     const randomNumList = randomNum.toString().split("");
     const inputNumList = inputNum.toString().split("");
