@@ -9,7 +9,7 @@ const {
   haveSameNumber,
   isValidRangeNumber,
   getRandomNumbers,
-} = require('./modules/index');
+} = require('./modules');
 
 class App {
   constructor() {

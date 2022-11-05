@@ -1,8 +1,8 @@
-module.exports.GAME_VALUE = {
+const GAME_VALUE = {
   restart: '1',
 };
 
-module.exports.GAME_MESSAGE = {
+const GAME_MESSAGE = {
   startNotification: '숫자 야구 게임을 시작합니다.',
   input: '숫자를 입력해주세요 : ',
   gameOver:
@@ -10,8 +10,14 @@ module.exports.GAME_MESSAGE = {
   exit: '게임을 종료합니다.',
 };
 
-module.exports.ERROR_MESSAGE = {
+const ERROR_MESSAGE = {
   duplicate: '중복 된 숫자를 입력할 수 없습니다',
   invalidValue: '1~9까지의 숫자 중 세개의 숫자를 입력해주세요',
   invalidRestartValue: '1과 2 중 하나의 숫자를 선택해야 합니다.',
+};
+
+module.exports = {
+  GAME_VALUE,
+  GAME_MESSAGE,
+  ERROR_MESSAGE,
 };
