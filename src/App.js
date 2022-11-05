@@ -88,10 +88,10 @@ class App {
   }
 
   check_restart_input_validation(input) {
-    if (input == 1) {
+    if (input === '1') {
       const app = new App();
       app.play_number_baseball_game();
-    } else if (input == 2) {
+    } else if (input === '2') {
       MissionUtils.Console.close();
     } else throw '잘못된 형식입니다';
   }
