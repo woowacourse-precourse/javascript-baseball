@@ -1,20 +1,17 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const checkException = require("./checkException");
 const Message = require("./message/message");
 const createResult = require("././createResult");
 
 function playGame(answer) {
-  MissionUtils.Console.readLine(
-    `${Message.START}\n${Message.INPUT}`,
-    (input) => {
-      console.log(input);
-      if (checkException(input)) {
-        throw Message.ERROR;
-        MissionUtils.Console.close();
-      }
+  let repeat = true;
+  while (repeat) {
+    const userInput = getUserInput();
+    const result = createResult(userInput, answer);
+    console.log(result);
+    if (result === Message.CORRECT) {
+      console.log(Message.FINISH);
+      repeat = false;
     }
-  );
-  return createResult(input, answer);
+  }
 }
 
 module.exports = playGame;

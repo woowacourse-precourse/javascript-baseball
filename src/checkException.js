@@ -1,5 +1,5 @@
 function isAllowed(nowCheckStr, exception) {
-  if (exception) return false;
+  if (!exception) return false;
   if (nowCheckStr === "0") return false;
   if (isNaN(nowCheckStr)) return false;
   return true;
@@ -7,7 +7,6 @@ function isAllowed(nowCheckStr, exception) {
 
 function checkException(input) {
   let allowed = true;
-
   if (input.length !== 3) {
     return false;
   }
@@ -16,7 +15,6 @@ function checkException(input) {
     .forEach((str) => {
       allowed = isAllowed(str, allowed);
     });
-
   return allowed;
 }
 
