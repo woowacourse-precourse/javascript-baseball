@@ -18,14 +18,36 @@ function checkVaildUserInputValue(userInput) {
   if (set.size !== userInput.length) {
     throw new Error("중복 숫자를 입력할 수 없습니다.");
   }
+  return true;
 }
 
 /**
  * @description 유저가 입력한 값이 답과 일치하는지 비교
  */
-function UserInputValueCompareToCPUAnswer(answerNumber, userInput) {
-  let splitAnswerNumber = [];
-  for (let i = 0; i < answerNumber.length; i++) {}
+function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
+  let splitCPUNumber = [];
+  let splitUserNumber = [];
+  let strike = 0;
+  let ball = 0;
+  let nothing = 0; // nothing이 3이면 낫싱처리
+  for (let i = 0; i < userInput.length; i++) {
+    // if (userInput[i].includes()) {
+    //   console.log("3스");
+    // }
+
+    if (!cpuNumber.includes(userInput[i])) {
+      nothing++;
+    }
+    if (cpuNumber.includes(userInput[i])) {
+      strike++;
+    }
+  }
+  if (nothing === 3) {
+    return "낫싱";
+  }
+  console.log(strike);
+  console.log(ball);
+  console.log(nothing);
 }
 
 /**
@@ -47,18 +69,22 @@ function cpuMakeAnswer() {
 class App {
   constructor() {}
   play() {
-    // const answerNumber = cpuMakeAnswer();
-    const answerNumber = [3, 2, 9];
-    const userInput = [1, 2, 3];
-    Console.print("숫자 야구게임을 시작합니다.");
-    checkVaildUserInputValue(userInput);
-    UserInputValueCompareToCPUAnswer(answerNumber, userInput);
-  }
+    // const cpuNumber = cpuMakeAnswer();
+    const cpuNumber = [3, 2, 9];
 
-  callResult() {}
+    // const userInput = [1, 2, 3];
+    // const userInput = [1, 2, 3]; // 1볼 1스트라이크
+    const userInput = [3, 2, 9]; // 3스트라크
+    // const userInput = [4, 8, 7]; // 낫싱
+    // const userInput = [9, 3, 2]; // 3볼
+    Console.print("숫자 야구게임을 시작합니다.");
+    if (checkVaildUserInputValue(userInput)) {
+      UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
+    }
+  }
 }
 
-const app = new App();
-app.play();
+const bullsAndCows = new App();
+bullsAndCows.play();
 
 module.exports = App;
