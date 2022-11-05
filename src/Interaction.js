@@ -22,6 +22,12 @@ class Interaction {
     });
   }
 
+  printPlayResult(resultMap) {
+    if (resultMap.strike === 3) {
+      Console.log('정답입니다.');
+    }
+  }
+
   checkValidNumberInput(inputNumber) {
     return new Promise((resolve, reject) => {
       console.log(this);

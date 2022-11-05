@@ -8,11 +8,12 @@ class Computer {
   }
   setInputNumber(inputNumber) {
     this.inputNumber = inputNumber;
+    this.resultMap;
   }
-  getResult() {
+  getResultMap() {
     const resultMap = {
-      strike: 0,
       ball: 0,
+      strike: 0,
     };
 
     [...this.inputNumber].forEach((digit) => {
@@ -29,6 +30,19 @@ class Computer {
     }
     return resultMap;
   }
+
+  computeResult(resultMap) {
+    if (resultMap.strike === 3) {
+      return '정답입니다.';
+    }
+
+    if (resultMap.strike === 0 && resultMap.ball === 0) {
+      return '낫싱';
+    }
+
+    return `${resultMap.ball}볼 ${resultMap.strike}스트라이크 입니다.`;
+  }
+
   initNumber() {
     const container = [Random.pickNumberInRange(1, 9)];
     while (container.length < 3) {

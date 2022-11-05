@@ -2,7 +2,7 @@ const Computer = require('./Computer');
 const Interaction = require('./Interaction');
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
-console.dir(MissionUtils);
+
 class App {
   play() {
     const computer = new Computer();
@@ -15,7 +15,10 @@ class App {
       .then((inputNumber) => {
         computer.setInputNumber(inputNumber);
         Console.print(computer.number);
-        Console.print(computer.getResult(inputNumber));
+        const resultMap = computer.getResultMap(inputNumber);
+        Console.print(resultMap);
+        const resultMessage = computer.computeResult(resultMap);
+        Console.print(resultMessage);
       })
       .catch((error) => {
         Console.print(error);
