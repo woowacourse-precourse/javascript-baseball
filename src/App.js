@@ -22,7 +22,7 @@ class App {
   requestAnswer(message) {
     Console.readLine(message, (answer) => {
       if (answer.length !== 3) throw new Error("입력 에러! 숫자 3자리를 입력해주세요!");
-      this.userAnswer = answer;
+      this.userAnswer = answer.split("");
     });
   }
 
