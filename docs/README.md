@@ -27,10 +27,13 @@
   - [x] endApp : app을 종료시킨다.
   - [x] askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
   - [x] compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
+  - [x] compareAnswerMapByCompareUserAndComputer: index를 비교해서 answerMap의 값을 셋팅
   - [x] initAnswerMap
   - [x] setAnswerMapByCompareUserAndComputer : user와 computer의 값을 바탕으로 answerMap의 값을 셋팅한다
   - [x] printResult: answerMap의 값을 바탕으로 비교 결과를 print 한다
   - [x] compareInputToRestart: input이 1이면 재시작, 2이면 프로세스를 종료한다.
+  - [x] setAnswerMapStrikePlusOne: answerMap의 strike ++ 기능
+  - [x] setAnswerMapBallPlusOne: answerMap의 ball++ 기능
 
 - [x]user
 
