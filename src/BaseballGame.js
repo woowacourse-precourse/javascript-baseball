@@ -13,6 +13,9 @@ class BaseballGame {
 
   static gameStart() {
     console.log("숫자 야구 게임을 시작합니다.");
+    BaseballGame.gameStartStepTwo();
+  }
+  static gameStartStepTwo() {
     this.baseballModel = new BaseballModel(BaseballGame.createRandom());
     userGuessNumber();
   }
@@ -32,9 +35,14 @@ class BaseballGame {
     willGameContinue(GameUtils.printFormat(score));
   }
 }
-// const willPlayMoreGame = () => {
-//   readLine("")
-// };
+
+const willPlayMoreGame = () => {
+  readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (answer) => {
+    //유저 대답 벨리데이션
+    if (answer === "1") BaseballGame.gameStartStepTwo();
+    if (answer === "2") MissionUtils.Console.close();
+  });
+};
 
 const willGameContinue = (result) => {
   if (result === ALL_STRIKE) {
@@ -61,7 +69,6 @@ const userGuessNumber = () => {
   readLine("3자리 숫자를 입력해 주세요 : ", (answer) => {
     Validate.userGuessNumbers(answer);
     BaseballGame.compareComputerAndUser(answer);
-    // MissionUtils.Console.close();
   });
 };
 
