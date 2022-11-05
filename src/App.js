@@ -20,7 +20,7 @@ class App {
       const userInput = await this.getPlayerInput(this.REQUEST_NUMBER);
       if (this.isValidInput(userInput)) this.userInput = userInput;
 
-      this.print(this.calculateCountWithUserInput(userInput));
+      this.print(this.calculateCount(userInput));
     }
 
     this.print(this.END);
@@ -31,7 +31,7 @@ class App {
     else Console.close();
   }
 
-  calculateCountWithUserInput(userInput) {
+  calculateCount(userInput) {
     let ball = 0,
       strike = 0;
 
