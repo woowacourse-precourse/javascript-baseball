@@ -12,8 +12,8 @@ class Input {
   }
 
   static hasDuplicates(numbers) {
-    const set = new Set(numbers);
-    return numbers.length !== set.size;
+    const numberSet = new Set(numbers);
+    return numbers.length !== numberSet.size;
   }
 
   static isValid(numbers) {
