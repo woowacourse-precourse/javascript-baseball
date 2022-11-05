@@ -14,7 +14,7 @@ class App {
   setInput(input) {
     input = Array.from(input.split(''), (num) => parseInt(num));
 
-    if (this.isValidInput(input)) {
+    if (App.isValidInput(input)) {
       this.input = input;
     }
 
@@ -55,15 +55,15 @@ class App {
     }
   }
 
-  print(message) {
+  static print(message) {
     MissionUtils.Console.print(message);
   }
 
-  close() {
+  static close() {
     MissionUtils.Console.close();
   }
 
-  isValidInput(input) {
+  static isValidInput(input) {
     if (input.includes(NaN)) throw '문자를 제외한 숫자만 입력하세요.';
     if (input.includes(0)) throw '1~9 사이의 숫자만 입력하세요.';
     if (input.length !== 3) throw '3개의 숫자만 입력하세요.';
@@ -80,7 +80,7 @@ class App {
   }
 
   success() {
-    this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    App.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     this.receive1Or2FromConsole();
   }
 
@@ -95,24 +95,22 @@ class App {
 
   selectReplayOrClose(selectedNum) {
     if (selectedNum == 1) return this.setAnswerAndreceiveInput();
-    if (selectedNum == 2) return this.close();
+    if (selectedNum == 2) return App.close();
 
     throw '1 또는 2만 입력해주세요.';
   }
 
   printHint() {
     if (this.hint['strike'] === 3) {
-      this.print('3스트라이크');
+      App.print('3스트라이크');
       return this.success();
     }
-    if (this.hint['nothing'] === 3) return this.print('낫싱');
-    if (this.hint['strike'] === 0) return this.print(`${this.hint['ball']}볼`);
+    if (this.hint['nothing'] === 3) return App.print('낫싱');
+    if (this.hint['strike'] === 0) return App.print(`${this.hint['ball']}볼`);
     if (this.hint['ball'] === 0)
-      return this.print(`${this.hint['strike']}스트라이크`);
+      return App.print(`${this.hint['strike']}스트라이크`);
 
-    return this.print(
-      `${this.hint['ball']}볼 ${this.hint['strike']}스트라이크`
-    );
+    return App.print(`${this.hint['ball']}볼 ${this.hint['strike']}스트라이크`);
   }
 
   setAnswerAndreceiveInput() {
@@ -121,7 +119,7 @@ class App {
   }
 
   play() {
-    this.print('숫자 야구 게임을 시작합니다.');
+    App.print('숫자 야구 게임을 시작합니다.');
     this.setAnswerAndreceiveInput();
   }
 }
