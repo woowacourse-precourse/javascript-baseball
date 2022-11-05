@@ -123,6 +123,20 @@ describe("App", () => {
     expect(app.isValidInput(VALID_NUMBER)).toBeTruthy();
   });
 
+  test("isGameEnd 메소드를 통해 게임이 종료되었는지 확인한다.", () => {
+    const app = new App();
+    app.answer = app.generateAnswer();
+    app.userInput = app.answer;
+
+    expect(app.isGameEnd()).toBeTruthy();
+
+    let wrongUserInput = "124";
+    if (app.answer === wrongUserInput) wrongUserInput = "123";
+    app.userInput = wrongUserInput;
+
+    expect(app.isGameEnd()).toBeFalsy();
+  });
+
   // test("getRandomNumber 메소드를 통해 랜덤한 숫자(1~9)를 생성한다.", () => {
   //   const app = new App();
 
