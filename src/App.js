@@ -12,7 +12,7 @@ class App {
   }
 
   setInput(input) {
-    input = input.split("").map((num) => parseInt(num));
+    input = Array.from(input.split(""), (num) => parseInt(num));
 
     if (this.isValidInput(input)) {
       this.input = input;
