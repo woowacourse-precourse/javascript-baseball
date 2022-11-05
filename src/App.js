@@ -98,9 +98,7 @@ function countBall(computerNumber, userNumber) {
   return ball;
 }
 
-function printResult(computerNumber, userNumber) {
-  const strike = countStrike(computerNumber, userNumber);
-  const ball = countBall(computerNumber, userNumber);
+function printResult(ball, strike) {
   let result = ``;
 
   if (ball) result += `${ball}볼`;
