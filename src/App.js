@@ -54,7 +54,7 @@ class App {
     } else if(BALL === 0 && STRIKE !== 0){
       result=`${STRIKE}스트라이크`;
     } else result = '낫싱'
-    this.result = result;
+    MissionUtils.Console.print(`${result}`);
     this.findAnswer(result);
   }
 
