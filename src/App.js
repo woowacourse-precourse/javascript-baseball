@@ -4,7 +4,6 @@ const game = new Game();
 
 class App {
   play() {
-    game.init();
     game.play();
   }
 }

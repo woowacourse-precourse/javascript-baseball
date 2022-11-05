@@ -1,21 +1,21 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { RANDOM_NUMBER, SCORE } = require('./constants');
+const { RANDOM_NUMBER, SCORE, GAME } = require('./constants');
 const { MESSAGE } = require('./constants');
 
 class Game {
   constructor() {
-    this.isCorrect;
+    this.isReplay = false;
     this.randomNumbers;
   }
 
-  init() {
-    this.print(MESSAGE.START);
-    this.randomNumbers = this.generateRandomNumber(1, 9, 3);
-    this.isCorrect = false;
+  play() {
+    this.init();
+    this.playRound(this.randomNumbers);
   }
 
-  play() {
-    this.playRound(this.randomNumbers);
+  init() {
+    if (!this.isReplay) this.print(MESSAGE.START);
+    this.randomNumbers = this.generateRandomNumber(1, 9, 3);
   }
 
   print(message) {
@@ -40,33 +40,22 @@ class Game {
   playRound(random) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
       const input = inputs.split(' ').join('');
-      this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
-
       const inputNumbers = [...input].map(Number);
       const { ball, strike } = this.countScore(inputNumbers, random);
+
+      this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
 
       this.printScore(ball, strike);
 
       if (strike === 3) {
-        this.isCorrect = true;
+        this.isReplay = true;
         this.print(MESSAGE.SUCCESS);
-        return;
+
+        return this.askPlayAgain();
       }
 
       return this.playRound(random);
     });
-  }
-
-  isValidInputNumber(numbers, validRange) {
-    const diversityOfNum = [...new Set(numbers)].length;
-
-    if (
-      numbers.length !== 3 ||
-      !validRange.test(numbers) ||
-      diversityOfNum !== 3
-    ) {
-      throw new Error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
-    }
   }
 
   countScore(inputNumbers, randomNumbers) {
@@ -104,6 +93,33 @@ class Game {
     }
 
     MissionUtils.Console.print(score);
+  }
+
+  askPlayAgain() {
+    MissionUtils.Console.readLine(MESSAGE.RESTART, (answers) => {
+      const answer = Number(answers.trim());
+      if (answer === GAME.START) {
+        return this.play();
+      }
+
+      if (answer === GAME.END) {
+        return MissionUtils.Console.close();
+      }
+
+      throw new Error('1 또는 2를 입력해주세요');
+    });
+  }
+
+  isValidInputNumber(numbers, validRange) {
+    const diversityOfNum = [...new Set(numbers)].length;
+
+    if (
+      numbers.length !== 3 ||
+      !validRange.test(numbers) ||
+      diversityOfNum !== 3
+    ) {
+      throw new Error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+    }
   }
 }
 
