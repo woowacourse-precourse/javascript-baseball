@@ -18,7 +18,6 @@ async function getInputValue(question) {
     throw new Error("입력한 값이 없습니다.");
   }
 
-  Console.close();
   return inputValue;
 }
 
@@ -47,4 +46,9 @@ function print(content) {
     `${ball ? `${ball}볼 ` : ""}${strike ? `${strike}스트라이크` : ""}`
   );
 }
-module.exports = { getInputValue, print };
+
+function consoleClose() {
+  Console.close();
+}
+
+module.exports = { getInputValue, print, consoleClose };
