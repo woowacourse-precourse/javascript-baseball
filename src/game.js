@@ -4,17 +4,27 @@ const exitOrRestart = require('./exitOrRestart');
 const game = (userNum, computerNum) => {
   let ballCount = 0;
   let strikeCount = 0;
-};
 
-const guessedCorrectly = () => {
-  MissionUtils.Console.print('3스트라이크');
-  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-  MissionUtils.Console.readLine(
-    '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-    (num) => {
-      exitOrRestart(num);
+  for (let i = 0; i < computerNum.length; i++) {
+    if (userNum.includes(computerNum[i])) {
+      ballCount += 1;
     }
-  );
+    if (userNum[i] === computerNum[i]) {
+      strikeCount += 1;
+    }
+  }
+
+  ballCount -= strikeCount;
+
+  const ballMessage = ballCount !== 0 ? `${ballCount}볼` : '';
+  const strikeMessage = strikeCount !== 0 ? `${strikeCount}스트라이크` : '';
+
+  MissionUtils.Console.print(`${ballMessage} ${strikeMessage}`);
+
+  if (strikeCount === 3) {
+    return true;
+  }
+  return false;
 };
 
 module.exports = game;
