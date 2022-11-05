@@ -42,4 +42,5 @@
 
 - [x] computer
 
-  - [x] setRandomComputerNumberArray
+  - [x] setRandomNumberArray
+  - [x] setRandomNumber
