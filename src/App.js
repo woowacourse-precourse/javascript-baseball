@@ -9,6 +9,7 @@ class App {
       
       restart = await this.game() === 1 ? true : false;
     }
+    MissionUtils.Console.print('게임 종료');
   }
   
   async game() {
@@ -20,52 +21,46 @@ class App {
     while(retry) {
       const countResult = await this.predict(computer);
       // step5
-      // const response = await this.result(countResult);
-      // MissionUtils.Console.print(response);
-      MissionUtils.Console.print(this.result(countResult));
+      // MissionUtils.Console.print(this.result(countResult));
       
       retry = countResult.strike === 3 ? false : true;
     }
     console.log('3개의 숫자를 모두 맞히셨습니다!');
-    MissionUtils.Console.print('게임 종료');
-
     // step6
     return await this.checkContinue();
   }
 
   async predict(computer) { 
     // step3
-    const input = await this.setUserNum();
-    const inputArray = this.checkInputError(input);
+    const inputArray = await this.setUserNum();
     // console.log(inputArray);
     // step4
     const countResult = this.countStrikeAndBall(inputArray, computer);
+    MissionUtils.Console.print(this.result(countResult));
+
+    // const countResult = await this.setUserNum(computer);
     return countResult;
   }
 
   async setUserNum() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
-      return input;
-    });
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+        const inputArray = input.split('').map(digit => parseInt(digit));
+        this.checkInputError(inputArray);
+        resolve(inputArray);
+      })
+    })
   }
 
-  checkInputError(input) {
-    const re = /^[1-9]{3}$/;
-    const inputArray = input.split('').map(num => parseInt(num));
-    let message;
+  checkInputError(inputArray) {
+    // const re = /^[1-9]{3}$/;
     if (inputArray.length !== 3) {
-      message = input + 'input length error';
-      throw new Error(message);
-    } else if(inputArray.length !== new Set(input).size) {
-      message = 'input overlap error';
-      throw new Error(message);
-    } else if (!re.test(input)) {
-      message = 'input 1~9 range & isDigit error';
-      throw new Error(message);
-    } else {
-      message = 'none';
+      throw new Error('input length error');
+    } else if(inputArray.length !== new Set(inputArray).size) {
+      throw new Error('input overlap error');
+    } else if (inputArray.some(digit => !Number.isInteger(digit) && digit == 0)) {
+      throw new Error('input 1~9 range & isDigit error');
     }
-    return inputArray;
   }
 
   setComputerNum() {
@@ -85,6 +80,7 @@ class App {
     const checkComp = [...computer];
 
     // index가 동일한 수 제거
+
     input.map((curr, idx) => {
       if(curr === checkComp[idx]){
         countS += 1;
@@ -105,25 +101,14 @@ class App {
   }
 
   result(countResult) {
-    // return new Promise(resolve => {
-    //   let res ='';
-    //   if(countResult.strike === 0 && countResult.ball === 0){
-    //     res = '낫싱';
-    //   } else {
-    //     res += countResult.ball>0 ? `${countResult.ball}볼`:'';
-    //     res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
-    //   }
-    //   resolve(res)
-    // });
-
-      let res ='';
-      if(countResult.strike === 0 && countResult.ball === 0){
-        res = '낫싱';
-      } else {
-        res += countResult.ball>0 ? `${countResult.ball}볼`:'';
-        res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
-      }
-      return res;
+    let res ='';
+    if(countResult.strike === 0 && countResult.ball === 0){
+      res = '낫싱';
+    } else {
+      res += countResult.ball>0 ? `${countResult.ball}볼`:'';
+      res += countResult.strike>0 ? ` ${countResult.strike}스트라이크`:'';
+    }
+    return res;
   }
 
   checkContinue() {
@@ -140,3 +125,4 @@ const app = new App();
 app.play();
 
 module.exports = App;
+
