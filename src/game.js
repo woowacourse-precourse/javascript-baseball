@@ -51,10 +51,25 @@ class NumericBaseballGame {
     );
   }
 
+  getResult(userInput, computerInput) {
+    const userScore = {
+      strikeCount: 0,
+      ballCount: 0,
+    };
+
+    userInput.forEach((value, idx) => {
+      if (value === computerInput[idx]) userScore.strikeCount += 1;
+    });
+
+    return userScore;
+  }
+
   async start() {
     MissionUtils.Console.print(GAME_MESSAGE.NOTIFY_START_MESSAGE);
     const numberFromComputer = this.getNumberFromComputer();
-    const numberFromUserInput = await this.getNumberFromUser();
+    while (true) {
+      let numberFromUserInput = await this.getNumberFromUser();
+    }
   }
 }
 module.exports = NumericBaseballGame;
