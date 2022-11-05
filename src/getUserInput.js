@@ -1,21 +1,22 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Message = require("./message/message");
+const $utils = MissionUtils.Console;
 const checkException = require("./checkException");
 
-function getUserInput() {
+const getUserInput = () => {
   const playingInput = 0;
   let userInput = "";
-  MissionUtils.Console.readLine(Message.INPUT, (input) => {
-    MissionUtils.Console.print(input);
+  $utils.readLine(Message.INPUT, (input) => {
+    $utils.print(input);
     if (!checkException(input, playingInput)) {
-      MissionUtils.Console.print(Message.ERROR);
+      $utils.print(Message.ERROR);
       throw Message.ERROR;
     }
     userInput = input;
-    MissionUtils.Console.close();
+    $utils.close();
   });
 
   return userInput;
-}
+};
 
 module.exports = getUserInput;

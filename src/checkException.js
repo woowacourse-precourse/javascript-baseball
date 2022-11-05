@@ -1,11 +1,11 @@
-function isAllowed(nowCheckStr, exception) {
+const isAllowed = (nowCheckStr, exception) => {
   if (!exception) return false;
   if (nowCheckStr === "0") return false;
   if (isNaN(nowCheckStr)) return false;
   return true;
-}
+};
 
-function checkException(input, checkStyle) {
+const checkException = (input, checkStyle) => {
   const playingInput = 0;
   const restartInput = 1;
   let allowed = true;
@@ -28,6 +28,6 @@ function checkException(input, checkStyle) {
     }
   }
   return allowed;
-}
+};
 
 module.exports = checkException;

@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-function createAnswer() {
+const createAnswer = () => {
   const computer = [];
   while (computer.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -9,6 +9,6 @@ function createAnswer() {
     }
   }
   return computer.join("");
-}
+};
 
 module.exports = createAnswer;

@@ -11,7 +11,7 @@ class App {
       const answer = getAnswer();
       playing = playGame(answer);
     }
-    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.print(Message.END);
   }
 }
 

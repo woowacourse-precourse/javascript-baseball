@@ -4,7 +4,7 @@ const createResult = require("././createResult");
 const getUserInput = require("././getUserInput");
 const checkException = require("././checkException");
 
-function restartGame() {
+const restartGame = () => {
   const restartInput = 1;
   const RESTART = true;
   const EXIT = false;
@@ -24,9 +24,9 @@ function restartGame() {
   } else if (result === "2") {
     return EXIT;
   }
-}
+};
 
-function playGame(answer) {
+const playGame = (answer) => {
   let repeat = true;
   let restart = false;
   while (repeat) {
@@ -40,6 +40,6 @@ function playGame(answer) {
     }
   }
   return restart;
-}
+};
 
 module.exports = playGame;

@@ -1,4 +1,4 @@
-function getBall(ball, inputNumber, answer, includeOfNum) {
+const getBall = (ball, inputNumber, answer, includeOfNum) => {
   inputNumber.forEach((num, idx) => {
     if (num !== answer[idx]) {
       if (includeOfNum[num]) {
@@ -8,9 +8,9 @@ function getBall(ball, inputNumber, answer, includeOfNum) {
   });
 
   return ball;
-}
+};
 
-function getStrike(strike, inputNumber, answer) {
+const getStrike = (strike, inputNumber, answer) => {
   inputNumber.forEach((num, idx) => {
     if (num === answer[idx]) {
       strike += 1;
@@ -18,9 +18,9 @@ function getStrike(strike, inputNumber, answer) {
   });
 
   return strike;
-}
+};
 
-function createResult(inputNumber, answer) {
+const createResult = (inputNumber, answer) => {
   if (inputNumber === "") return "낫싱";
   const includeOfNum = {};
   inputNumber = String(inputNumber).split("");
@@ -42,6 +42,6 @@ function createResult(inputNumber, answer) {
   if (ball === 0 && strike === 0) result = "낫싱";
 
   return result;
-}
+};
 
 module.exports = createResult;
