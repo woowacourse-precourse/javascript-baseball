@@ -6,11 +6,11 @@ class App {
     this.print(GAME_START_MESSAGE);
     this.initGame();
   }
-  async initGame() {
+  initGame() {
     const DIGITS = 3;
     const answer = this.generateRandomNumber(DIGITS);
-    await this.playRound(answer);
-    await this.selectRestartOrExit();
+    this.playRound(answer);
+    this.selectRestartOrExit();
   }
   playRound(answer) {
     const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
