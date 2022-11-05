@@ -79,11 +79,22 @@ class App {
 
       if (this.gameCount.strike === 3) {
         Console.print(message.CORRECT);
-        Console.close();
-        return;
+        this.readRestartInput();
       }
 
       this.readUserInput();
+    });
+  }
+
+  readRestartInput() {
+    Console.readLine(message.FINISH, (input) => {
+      if (input === '1') {
+        this.play();
+      }
+
+      if (input === '2') {
+        Console.close();
+      }
     });
   }
 }
