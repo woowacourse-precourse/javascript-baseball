@@ -25,7 +25,7 @@ class App {
     return String(number).split('').map((str) => Number(str));
   }
 
-  printDuplicateResult(result) {
+  printCompareResult(result) {
     if (result['strikeCount'] === 3) {
       Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
       return true;
@@ -43,7 +43,7 @@ class App {
     return false;
   }
 
-  duplicateNumber(userNumber, randomNumber) {
+  compareNumber(userNumber, randomNumber) {
     const result = { strikeCount: 0, ballCount: 0 };
 
     userNumber.forEach((number, index) => {
