@@ -47,11 +47,11 @@ class App {
     return [strikeCount, ballCount];
   }
   getGameResultMessage(strikeCount, ballCount) {
-    if (!strikeCount && !ballCount) return `낫싱`;
-    if (strikeCount && ballCount) return `${ballCount}볼 ${strikeCount}스트라이크`;
+    if (!strikeCount && ballCount) return `${ballCount}볼`;
     if (strikeCount && !ballCount) return `${strikeCount}스트라이크`;
+    if (strikeCount && ballCount) return `${ballCount}볼 ${strikeCount}스트라이크`;
 
-    return `${ballCount}볼`;
+    return "낫싱";
   }
 
   hasOnlyNumber(userInput) {
