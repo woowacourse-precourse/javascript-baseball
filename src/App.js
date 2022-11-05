@@ -21,6 +21,9 @@ class App {
     this.randomNumber = computer;
   } 
   
+  filterInput(number) {
+    return String(number).split('').map((str) => Number(str));
+  }
 
   duplicateNumber(userNumber, randomNumber) {
     const result = [0,0,0];
