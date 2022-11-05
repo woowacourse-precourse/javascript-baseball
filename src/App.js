@@ -64,7 +64,7 @@ class App {
     });
 
     if (isValid) {
-      this.printResult(playerInput);
+      this.printGameResult(playerInput);
     }
   }
 
@@ -111,6 +111,17 @@ class App {
     }
 
     return true;
+  }
+
+  countStrike(playerPickNumbers) {
+    let strike = 0;
+    playerPickNumbers.forEach((number, index) => {
+      if (number === this.randomNumbers[index]) {
+        strike += 1;
+      }
+    });
+
+    return strike;
   }
 }
 
