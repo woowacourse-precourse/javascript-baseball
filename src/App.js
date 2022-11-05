@@ -18,6 +18,13 @@ class App {
     return arr.length === set.size;
   }
 
+  setComputerNumber() {
+    while (this.computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computer.includes(number)) this.computer.push(number);
+    }
+  }
+
   inputUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputString = input + "";
@@ -29,15 +36,7 @@ class App {
     MissionUtils.Console.close();
   }
 
-  setComputerNumber() {
-    while (this.computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computer.includes(number)) this.computer.push(number);
-    }
-  }
-
   calcScore() {
-    console.log(`계산해봅시다. ${this.computer} vs ${this.user}`);
     this.user.forEach((digit, idx) => {
       if (digit === this.computer[idx]) this.score.strike++;
       else if (this.computer.includes(digit)) this.score.ball++;
