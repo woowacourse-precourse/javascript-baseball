@@ -15,6 +15,16 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
+  postEndMessage() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요',
+      answer => {
+        return answer;
+      },
+    );
+  }
+
   getUserAnswer(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
       const user = answer.split('').map(Number);
@@ -53,7 +63,8 @@ class App {
     else message = `낫싱`;
 
     MissionUtils.Console.print(message);
-    this.getUserAnswer(computer);
+    if (strike === 3) this.postEndMessage();
+    else this.getUserAnswer(computer);
   }
 
   play() {
