@@ -29,28 +29,29 @@ class BaseballValidator {
   checkBallState(computerNumbers, userNumbers) {
     const baseballDto = new BaseballDto();
     Array.from(userNumbers).forEach((userNumber, index) => {
-      if (this.isStrike(computerNumbers[index], userNumber)) {
+      if (this.#isStrike(computerNumbers[index], userNumber)) {
         baseballDto.addStrikeOne();
       }
-      if (this.isBall(computerNumbers, userNumber, index)) {
+      if (this.#isBall(computerNumbers, userNumber, index)) {
         baseballDto.addBallOne();
       }
     });
     return baseballDto;
   }
-  isStrike(computerNumber, userNumber) {
+  #isStrike(computerNumber, userNumber) {
     return computerNumber === +userNumber;
   }
-  isBall(computerNumbers, userNumber, userNumberIndex) {
+  #isBall(computerNumbers, userNumber, userNumberIndex) {
+    let isBall = false;
     computerNumbers.forEach((computerNumber, index) => {
       if (
-        !this.isStrike(computerNumber, userNumber) ||
+        this.#isStrike(computerNumber, userNumber) &&
         userNumberIndex !== index
       ) {
-        return true;
+        isBall = true;
       }
     });
-    return false;
+    return isBall;
   }
   isFinish(baseballDto) {
     return baseballDto.strike === 3;
