@@ -2,10 +2,6 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.setAnswer();
-    this.readInput();
-    this.setCount(this.answer, this.userInput);
-    this.setHint(this.count);
   }
 
   setAnswer() {
@@ -13,8 +9,11 @@ class App {
   }
 
   readInput() {
-    MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) => {
-      this.userInput = Array.from(input, Number);
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) => {
+        this.userInput = Array.from(input, Number);
+        resolve();
+      });
     });
   }
 
@@ -48,7 +47,12 @@ class App {
     this.hint.trimStart();
   }
 
-  play() {}
+  async play() {
+    this.setAnswer();
+    await this.readInput();
+    this.setCount(this.answer, this.userInput);
+    this.setHint(this.count);
+  }
 }
 
 module.exports = App;
