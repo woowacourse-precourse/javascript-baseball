@@ -13,7 +13,11 @@ const getCloseSpy = () => {
   return closeSpy;
 };
 
-describe('기능 테스트', () => {
+describe('숫자 야구 기능 테스트', () => {
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
+
   test('게임 시작 문구를 출력한다.', () => {
     const message = '숫자 야구 게임을 시작합니다.';
     const logSpy = getLogSpy();
@@ -24,22 +28,29 @@ describe('기능 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith(message);
   });
 
-  test('스트라이크와 볼의 갯수를 구한다.', () => {
+  test('스트라이크와 볼의 갯수 상태를 업데이트한다.', () => {
     const randoms = ['1', '3', '5'];
-    const answers = ['789', '123'];
+    const answers = [
+      ['7', '8', '9'],
+      ['1', '4', '3'],
+    ];
     const counts = [
       { strike: 0, ball: 0 },
       { strike: 1, ball: 1 },
     ];
 
     const app = new App();
+    app.computerNumbers = randoms;
 
-    counts.forEach((count, i) => {
-      expect(app.getStrikeBallCount(answers[i], randoms)).toStrictEqual(count);
+    answers.forEach((answer, i) => {
+      app.userNumbers = answer;
+      app.setStrikeBallCount();
+
+      expect(app.gameCount).toStrictEqual(counts[i]);
     });
   });
 
-  test('스트라이크 볼 결과 메세지를 구한다.', () => {
+  test('스트라이크 볼 결과 상태를 업데이트한다.', () => {
     const counts = [
       { strike: 0, ball: 0 },
       { strike: 1, ball: 1 },
@@ -50,8 +61,11 @@ describe('기능 테스트', () => {
 
     const app = new App();
 
-    messages.forEach((message, i) => {
-      expect(app.getResult(counts[i])).toEqual(message);
+    counts.forEach((count, i) => {
+      app.gameCount = count;
+      app.setResult();
+
+      expect(app.result).toEqual(messages[i]);
     });
   });
 
