@@ -37,6 +37,7 @@
 ### refactor
 
 - [✅] 상수를 담은 오브젝트들을 constants 파일로 분리
+- [✅] 함수들 modules 폴더의 index.js 파일로 분리
 
 ### 메모
 
