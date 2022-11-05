@@ -7,16 +7,11 @@ function startGame(){
 
 function makeProblem(NUMBER_LENGTH){
   // 2. 문제 생성
-  let problemNumbers = [];
+  const problemNumberList = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, NUMBER_LENGTH);
   let problem = 0;
-  let tempNumber;
-  while (problemNumbers.length < NUMBER_LENGTH){
-    tempNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-    if(!problemNumbers.includes(tempNumber)){
-      problemNumbers.push(tempNumber);
-      problem += 10**(problemNumbers.length-1)*tempNumber;
-    }
-  }
+  problemNumberList.forEach((problemNumber, index)=>{
+    problem += 10**index*problemNumber;
+  })
   return problem;
 }
 
