@@ -122,6 +122,7 @@ class App {
     );
 
     if (option === "1") {
+      return this.playGame();
     }
 
     if (option === "2") {
