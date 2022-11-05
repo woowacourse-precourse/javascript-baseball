@@ -25,6 +25,10 @@ class App {
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
   }
+
+  isVaildLength(target) {
+    return target.length === 3;
+  }
 }
 
 module.exports = App;
