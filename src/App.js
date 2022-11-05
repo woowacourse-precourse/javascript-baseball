@@ -5,7 +5,8 @@ class App {
     this.showMessage();
     this.userInput();
     this.computerRandomNumber();
-    this.closeConsole();
+    // this.compareNumbers()
+    // this.closeConsole();
   }
   showMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -20,8 +21,9 @@ class App {
       throw "1~9 사이의 숫자 3개만 입력해주세요 프로그램이 종료됩니다."
     }
     let stringUserNumber=userNumber.split('')
-    let userNumberArray=[...stringUserNumber]
-    return userNumberArray
+    let userNumberArray=[]
+    stringUserNumber.forEach((element)=>userNumberArray.push(Number(element)))
+    this.compareNumbers(userNumberArray)
   }
   computerRandomNumber() {
     const COMPUTER = [];
@@ -31,10 +33,30 @@ class App {
         COMPUTER.push(number);
       }
     }
-    return COMPUTER;
+    return COMPUTER
   }
-  compareNumbers(){
-    console.log('실행되나?');
+  compareNumbers(userNumberArray){
+    let computerNumber=this.computerRandomNumber()
+    console.log('사용자 :',userNumberArray);
+    console.log('컴퓨터: ',computerNumber);
+    let strike=0
+    let ball=0
+    for(let idx=0;idx<userNumberArray.length;idx++){
+      let findIndex=computerNumber.indexOf(userNumberArray[idx])
+      console.log(findIndex);
+      if(findIndex>-1){
+        if(findIndex===idx){
+          strike++
+        }
+        else{
+          ball++
+        }
+      }
+      console.log(strike,ball);
+    }
+    if(strike!==3){
+      this.userInput()
+    }
   }
   closeConsole(){
     MissionUtils.Console.close();
