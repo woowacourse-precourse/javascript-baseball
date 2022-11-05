@@ -23,6 +23,20 @@ class App {
   isEqual(a, b) {
     return a === b;
   }
+  isValidNumber(num, digits) {
+    if (isNaN(num)) return false;
+
+    const numList = num.split("");
+    if (!this.isEqual(numList.length, digits)) return false;
+
+    const numSet = numList.reduce((numSet, num) => {
+      return numSet.add(num);
+    }, new Set());
+    if (numSet.has("0")) return false;
+    if (!this.isEqual(numSet.size, digits)) return false;
+
+    return true;
+  }
 }
 const app = new App();
 app.play();
