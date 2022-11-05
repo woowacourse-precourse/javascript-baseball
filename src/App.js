@@ -1,7 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const getScore = require("./getScore");
-const getUserExecption = require("./getUserExecption");
 const makeAnswer = require("./makeNumber");
+const getUserExecption = require("./getUserExecption");
+const getScore = require("./getScore");
+const showMessage = require("./showMessage");
 
 class App {
   play() {
@@ -17,7 +18,6 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputArr = getUserExecption(input);
       const score = getScore(inputArr, answer);
-      console.log(score);
     });
   }
 }
