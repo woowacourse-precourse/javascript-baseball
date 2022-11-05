@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const generateNumber = require('./generateNumber');
 const validateInputValue = require('./validator');
+const compareTwoArrayResult = require('./compare');
 
 class App {
   play() {
@@ -18,6 +19,9 @@ class App {
       try {
         const { computerNumArr } = this;
         const isInputValidate = validateInputValue(input);
+        const inputNumArr = input.split('').map(element => +element);
+        const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
+        MissionUtils.Console.print(gameResult);
       } catch (error) {
         this.wrongInput(error);
       }
