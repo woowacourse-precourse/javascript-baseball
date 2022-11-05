@@ -5,7 +5,7 @@ const CheckBallCount = (targetNumber, userGuessedNumber) => {
   for (let idx = 0; idx < userGuessedNumber.length; idx++) {
     let isIncludes = targetNumber.includes(userGuessedNumber[idx]);
     let isBallOrStrike = targetNumber[idx] === userGuessedNumber[idx];
-    if (isIncludes) isBallOrStrike ? strike++ : ball++;
+    isIncludes ? (isBallOrStrike ? strike++ : ball++) : null;
   }
 
   return [ball, strike];

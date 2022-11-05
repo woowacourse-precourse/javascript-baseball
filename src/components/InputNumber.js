@@ -19,7 +19,12 @@ const guessNumber = (answer, targetNumber) => {
   let [ball, strike] = CheckBallCount(targetNumber, userGuessedNumber);
 
   PrintBallCount(ball, strike);
-  strike > 2 ? App.manageGame() : InputNumber(targetNumber);
+  strike > 2
+    ? (function () {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        App.manageGame();
+      })()
+    : InputNumber(targetNumber);
 };
 
 module.exports = InputNumber;
