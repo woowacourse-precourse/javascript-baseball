@@ -51,6 +51,16 @@ class App {
       let message = make_message(obj);
       return message;
     };
+
+    // 게임플레이어로부터 값을 입력받는 기능
+    const input = () => {
+      Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+        const cheked_answer = check_inputError(answer);
+        const message = check_match(cheked_answer);
+        Console.print(message);
+        nextLevel(message);
+      });
+    };
   }
 }
 
