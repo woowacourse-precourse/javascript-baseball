@@ -3,8 +3,8 @@ const { gameplay, gameStart } = require('./Game');
 
 function App() {
   this.play = () => {
-    gameplay();
-    createComputerNums();
+    gameStart();
+    gameplay(createComputerNums());
   };
 }
 
