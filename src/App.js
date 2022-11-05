@@ -39,11 +39,31 @@ class App {
     }
   }
 
-  getUserInput () {
+  detectError(user) {
+    if(detectStringError(user)) {
+      if (user.length != 3) {
+        throw new Error("유효하지 않은 값이 입력되었습니다.");
+      }
+      return 1;
+    }
+    return 0;
+  }
+  detectStringError(user) {
+    user = [...user];
+    user.forEach(element => {
+      if (!(element >= '1' && element <= '9')) { 
+        throw new Error("유효하지 않은 값이 입력되었습니다."); 
+      }
+    });
+    return 1;
+  }
+
+  getUserInput() {
     let userAnswer;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
       if (userValue) {
         userAnswer = userValue;
+        console.log(typeof userAnswer);
         MissionUtils.Console.print(`${userAnswer}`);
       }
     }); 
