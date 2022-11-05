@@ -120,7 +120,7 @@ export default class BaseballGame {
     };
 
     // 정답여부에 따른 판정 결과 문자열
-    showReulst(answer) {
+    showResult(answer) {
         const strike = this.checkStrike(answer);
         if (strike) {
             answer = "🎉우와 정답이에요!";
@@ -130,5 +130,11 @@ export default class BaseballGame {
         }
         return answer;
     };
+
+    // 정답결과문을 html로 출력하는 함수
+    printResult(result) {
+        const resultContainer = document.querySelector('#result');
+        resultContainer.innerHTML = this.showResult(result);
+    }
 }
 new BaseballGame();
