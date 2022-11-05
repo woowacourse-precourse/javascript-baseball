@@ -14,6 +14,21 @@ function askNumInput() {
   });
 }
 
+function getHint(answer, input) {
+  var { ballCount, strikeCount } = isBallOrStrike(answer, input);
+
+  if (ballCount === 0 && strikeCount === 0) {
+    printMsg("낫싱");
+    askNumInput();
+  } else if (strikeCount === 3) {
+    printMsg("3스트라이크");
+    askRematchOrExit();
+  } else {
+    printMsg(`${ballCount}볼 ${strikeCount}스트라이크`);
+    askNumInput();
+  }
+}
+
 function isBallOrStrike(answer, input) {
   var ballCount = 0;
   var strikeCount = 0;
