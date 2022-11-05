@@ -41,9 +41,19 @@ class Game {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (input) => {
-        // decide reset based on user input
+        this.restart(input);
       }
     );
+  }
+
+  restart(input) {
+    if (input === '1') {
+      this.start();
+    }
+
+    if (input === '2') {
+      MissionUtils.Console.close();
+    }
   }
 
   validateUserInputNumber(input) {
