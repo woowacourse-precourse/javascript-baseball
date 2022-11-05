@@ -1,10 +1,4 @@
 class Validation {
-  isValidation(answer) {
-    this.answer = answer;
-    this.isValidationSingleDigitNaturalNumber(answer);
-    this.isValidationNumberWithoutDuplicate(answer);
-  }
-
   isValidationSingleDigitNaturalNumber(answer) {
     const regexp = new RegExp("^[1-9]+$");
     if (!regexp.test(answer)) {
@@ -22,6 +16,11 @@ class Validation {
 
     if (wordLengthWidhoutDuplicate !== 3 || isValidation) {
       throw "서로 다른 3개의 숫자를 입력해주세요";
+    }
+  }
+  isValidationConfirmInput(answer) {
+    if (answer !== "1" || answer !== "2") {
+      throw "새로 시작할려면 1, 종료하려면 2를 입력해주세요.";
     }
   }
 }
