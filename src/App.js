@@ -29,6 +29,10 @@ class App {
   isVaildLength(target) {
     return target.length === 3;
   }
+
+  isVaildNumberFormat(target) {
+    return /^[1-9]{3}$/.test(target);
+  }
 }
 
 module.exports = App;
