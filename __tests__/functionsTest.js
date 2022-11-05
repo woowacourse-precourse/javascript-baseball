@@ -101,7 +101,9 @@ describe("야구 게임 테스트", () => {
     const app = new App();
     app.isAnswer(result);
 
-    expect(logSpy).toHaveBeenCalledWith("게임 종료");
+    expect(logSpy).toHaveBeenCalledWith(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
   });
 
   test("숫자 맞지 않음", () => {
@@ -110,7 +112,7 @@ describe("야구 게임 테스트", () => {
 
     const randoms = [1, 3, 5];
     const answers = ["246", "135"];
-    const messages = ["낫싱", "3스트라이크", "게임 종료"];
+    const messages = ["낫싱", "3스트라이크"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
