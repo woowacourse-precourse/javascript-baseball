@@ -1,4 +1,4 @@
-const Game = require("./Game");
+const Game = require('./Game');
 class App {
   play() {
     const GAME = new Game();

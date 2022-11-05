@@ -1,8 +1,8 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const gameControlValidation = require("./validation/gameControlValidation.js");
-const gameInputValidation = require("./validation/gameInputValidation.js");
+const MissionUtils = require('@woowacourse/mission-utils');
+const gameControlValidation = require('./validation/gameControlValidation.js');
+const gameInputValidation = require('./validation/gameInputValidation.js');
 
-const GAME_WIN = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+const GAME_WIN = '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 const RESTART = 1;
 module.exports = class Game {
   constructor() {
@@ -11,8 +11,8 @@ module.exports = class Game {
   }
 
   gameInit() {
-    this.computerNumbers = [...this.getRandomNumbers()].join("");
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.computerNumbers = [...this.getRandomNumbers()].join('');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getUserNumberInput();
   }
 
@@ -26,7 +26,7 @@ module.exports = class Game {
   }
 
   getUserNumberInput() {
-    MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (input) =>
+    MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) =>
       this.progressGame(input)
     );
   }
@@ -78,7 +78,7 @@ module.exports = class Game {
 
   getUserControlInput() {
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
       (input) => this.handleGame(input)
     );
   }

@@ -8,6 +8,6 @@ module.exports = function gameControlValidation(controlInput) {
 
 function checkOneOrTwo(controlInput) {
   if (controlInput != 1 && controlInput != 2) {
-    throw new Error("1 또는 2만 입력할 수 있습니다.");
+    throw new Error('1 또는 2만 입력할 수 있습니다.');
   }
 }
