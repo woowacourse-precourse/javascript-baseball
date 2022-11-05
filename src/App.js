@@ -61,9 +61,9 @@ class App {
 
   // 사용자가 입력한 값을 볼, 스트라이크로 판단하는 기능
   getBallAndStrikeMap() {
-    const BALL_STRIKE_MAP = this.#USER_INPUT.reduce((acc, cur, idx) => {
-      const IS_INCLUDED = this.#RANDOM_NUMBER.includes(cur);
-      const RANDOM_INDEX = this.#RANDOM_NUMBER.indexOf(cur);
+    const BALL_STRIKE_MAP = this.#USER_INPUT.reduce((acc, number, idx) => {
+      const IS_INCLUDED = this.#RANDOM_NUMBER.includes(number);
+      const RANDOM_INDEX = this.#RANDOM_NUMBER.indexOf(number);
       if (IS_INCLUDED && idx !== RANDOM_INDEX) {
         acc.set('BALL_COUNT', (acc.get('BALL_COUNT') || 0) + 1);
       }
