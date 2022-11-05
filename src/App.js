@@ -6,6 +6,8 @@ class App {
     this.isValidUserNumber = false;
     this.computerNumberArray = App.generateComputerNumberArray();
     this.userNumber = 0;
+    this.gameEndStatus = false;
+    this.gameOptionValue = 0;
   }
 
   play() {
@@ -28,6 +30,15 @@ class App {
     this.printResult(strikeCount, ballCount);
   }
 
+  getUserGameOptionValue() {
+    return MissionUtils.Console.readLine("게임이 종료되었습니다 다시시작은 1 , 종료는  2 를 입력해주세요: ", (input) => {
+      MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
+      this.gameOptionValue = input;
+      if (+this.gameOptionValue === 2) MissionUtils.Console.close();
+      if (+this.gameOptionValue === 1) this.play();
+    });
+  }
+
   validateUserInput(userNumber) {
     if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
     if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
@@ -38,23 +49,16 @@ class App {
   }
 
   printResult(strikeCount, ballCount) {
-    if (strikeCount === 3) MissionUtils.Console.print(`${strikeCount}스트라이크`);
-    if (strikeCount > 0 && ballCount > 0) {
-      MissionUtils.Console.print(`${strikeCount} 스트라이크 ${ballCount} 볼`);
-      this.getUserInputNumber();
-    }
-    if (strikeCount > 0 && ballCount === 0) {
+    if (strikeCount === 3) {
       MissionUtils.Console.print(`${strikeCount}스트라이크`);
-      this.getUserInputNumber();
+      this.gameEndStatus = true;
+      this.getUserGameOptionValue();
     }
-    if (ballCount > 0 && strikeCount === 0) {
-      MissionUtils.Console.print(`${ballCount} 볼`);
-      this.getUserInputNumber();
-    }
-    if (ballCount === 0 && strikeCount === 0) {
-      MissionUtils.Console.print("낫싱");
-      this.getUserInputNumber();
-    }
+    if (strikeCount > 0 && ballCount > 0) MissionUtils.Console.print(`${strikeCount} 스트라이크 ${ballCount} 볼`);
+    if (strikeCount > 0 && ballCount === 0) MissionUtils.Console.print(`${strikeCount}스트라이크`);
+    if (ballCount > 0 && strikeCount === 0) MissionUtils.Console.print(`${ballCount} 볼`);
+    if (ballCount === 0 && strikeCount === 0) MissionUtils.Console.print("낫싱");
+    if (this.gameEndStatus === false) this.getUserInputNumber();
   }
 
   convertUserNumberToArray() {
