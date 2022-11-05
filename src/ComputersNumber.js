@@ -1,9 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class ComputersNumber {
-  computersNumber() {
-    // console.log(MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3));
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  constructor() {
+      let correctAnswer = new Set();
+      
+      while (correctAnswer.size < 3) {
+        correctAnswer.add(MissionUtils.Random.pickNumberInRange(1, 9));
+      }
+  
+      MissionUtils.Console.print(correctAnswer);
+      return Array.from(correctAnswer);
   }
 }
 
