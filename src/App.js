@@ -22,6 +22,15 @@ class App {
     }
     return computerNumbers.join('');
   }
+
+  getUserNumbers() {
+    let userAnswer;
+
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (answer) => {
+      userAnswer = answer;
+    });
+    return userAnswer;
+  }
 }
 
 const app = new App();
