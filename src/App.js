@@ -22,34 +22,41 @@ class App {
     this.getThreeDigitsAnswer();
   }
 
-  handleUserInputException(userInput) {
-    const removeNaN = userInput.replace(/[^0-9]/g, '');
-    const removeDuplicates = [...new Set(removeNaN.split(''))];
+  handleUserInputException(userInput, inputType) {
+    if (inputType === 'getExpectedAnswer') {
+      const removeNaN = userInput.replace(/[^0-9]/g, '');
+      const removeDuplicates = [...new Set(removeNaN.split(''))];
 
-    if (removeNaN.length !== 3) {
-      throw new Error('3자리 숫자를 입력해주세요');
-    }
+      if (removeNaN.length !== 3) {
+        throw new Error('3자리 숫자를 입력해주세요');
+      }
 
-    for (const num of removeNaN) {
-      if (Number(num) <= 0) {
-        throw new Error('1에서 9 사이의 숫자를 입력해주세요');
+      for (const num of removeNaN) {
+        if (Number(num) <= 0) {
+          throw new Error('1에서 9 사이의 숫자를 입력해주세요');
+        }
+      }
+
+      if (removeDuplicates.length !== 3) {
+        throw new Error('각 자리에 중복되지 않은 숫자를 입력해주세요');
       }
     }
 
-    if (removeDuplicates.length !== 3) {
-      throw new Error('각 자리에 중복되지 않은 숫자를 입력해주세요');
+    if (inputType === 'getRestart') {
+      if (userInput !== '1' && userInput !== '2') {
+        throw new Error('1 또는 2 중에 선택해주세요');
+      }
     }
   }
 
   getExpectedAnswer() {
     Console.readLine('숫자를 입력해주세요 : ', (expectedAnswer) => {
       try {
-        this.handleUserInputException(expectedAnswer);
+        this.handleUserInputException(expectedAnswer, 'getExpectedAnswer');
         const userInput = expectedAnswer.split('').map(Number);
         this.checkAnswer(userInput);
       } catch (e) {
         throw e;
-        // Console.print(e.message);
       }
     });
   }
@@ -57,13 +64,17 @@ class App {
   getRestart() {
     console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     Console.readLine('', (isRestart) => {
-      if (isRestart === '1') {
-        this.play();
-      } else if (isRestart === '2') {
-        Console.print('게임 종료');
-        Console.close();
-      } else {
-        throw new Error('1 또는 2 중에 선택해주세요');
+      try {
+        this.handleUserInputException(isRestart, 'getRestart');
+
+        if (isRestart === '1') {
+          this.play();
+        } else {
+          Console.print('게임 종료');
+          Console.close();
+        }
+      } catch (e) {
+        throw e;
       }
     });
   }
