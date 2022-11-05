@@ -2,26 +2,35 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const BALL_COUNT = [1,2,3]; // 3자리 숫자 비교를 위한 횟수를 담은 배열 
 
-function inputNumber(){
- let inputNum =  MissionUtils.Console.readLine('숫자를 입력하세요 :',(answer)=>{return answer});
-  return inputNum;
+function MakeDef(def){
+while (def.length < 3) {
+  const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  if (!def.includes(number)) {
+    def.push(number);
+  }
+  }
+  return def;
 }
 
-function playBall(atkNum,defNum){
-  if(atkNum !== undefined){
-  if(defNum.indexOf(inputToList(atkNum)[BALL_COUNT.map(function Count(item){item})])===-1 ){
-    console.log("낫싱");
+function digit(atk, def,count) {
+  count=0;
+  for (let i = 0; i < 3; i++) {
+    if (def.includes(atk[i])) {
+      count++;
+    }
   }
+  console.log(count);
 }
-}
+
 class App {
   play() {
-    const DEF_NUM = MissionUtils.Random.pickUniqueNumbersInRange(1,9,3);
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    const DEF_NUM =[];
+    MakeDef(DEF_NUM);
     MissionUtils.Console.print(DEF_NUM);
-    let atkNum =[];
-    atkNum.push(inputNumber());
-    playBall(atkNum,DEF_NUM);
+    // const atkNum =[];
+    // while(atkNum.length <3){
+    //   const num = MissionUtils.Console.readLine((answer)=>{answer});
+    // }
   }
 }
 const app = new App();
