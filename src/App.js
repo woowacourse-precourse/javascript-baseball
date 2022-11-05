@@ -33,16 +33,17 @@ class App {
       }
     }
   }
-  async selectRestartOrExit() {
+  selectRestartOrExit() {
     const FINAL_MESSAGE =
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
     const ERROR_MESSAGE = "Invalid Input!";
     const RESTART = 1,
       EXIT = 2;
-    const command = await this.readLine(FINAL_MESSAGE);
-    if (!this.isValidCommand(command)) this.throwException(ERROR_MESSAGE);
-    if (command == RESTART) this.initGame();
-    if (command == EXIT) MissionUtils.Console.close();
+    MissionUtils.Console.readLine(FINAL_MESSAGE, (command) => {
+      if (!this.isValidCommand(command)) this.throwException(ERROR_MESSAGE);
+      if (command == RESTART) this.initGame();
+      if (command == EXIT) MissionUtils.Console.close();
+    });
   }
   generateRandomNumber(digits) {
     const START_INCLUSIVE = 1,
