@@ -1,13 +1,13 @@
 class Counter {
-  constructor(answer, computerNumberArr) {
-    this.answer = answer;
+  constructor(inputNumber, computerNumberArr) {
+    this.inputNumber = inputNumber;
     this.computerNumberArr = computerNumberArr;
   }
-  countStrike(answer, computerNumberArr) {
+  countStrike(inputNumber, computerNumberArr) {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfAnswer = Number(answer[index]);
-      if (oneLetterOfAnswer === comCurNum) {
+      const oneLetterOfInputNumber = Number(inputNumber[index]);
+      if (oneLetterOfInputNumber === comCurNum) {
         return count + 1;
       }
       return count;
@@ -15,11 +15,14 @@ class Counter {
     return totalCount;
   }
 
-  countBall(answer, computerNumberArr) {
+  countBall(inputNumber, computerNumberArr) {
     let totalCount = 0;
     totalCount = computerNumberArr.reduce((count, comCurNum, index) => {
-      const oneLetterOfAnswer = Number(answer[index]);
-      if (computerNumberArr.includes(oneLetterOfAnswer) && comCurNum !== oneLetterOfAnswer) {
+      const oneLetterOfInputNumber = Number(inputNumber[index]);
+      if (
+        computerNumberArr.includes(oneLetterOfInputNumber) &&
+        comCurNum !== oneLetterOfInputNumber
+      ) {
         return count + 1;
       }
       return count;

@@ -23,18 +23,18 @@ class App {
   }
 
   inputNumberFromUser() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       const validation = new Validation();
-      validation.isValidationSingleDigitNaturalNumber(answer);
-      validation.isValidationNumberWithoutDuplicate(answer);
-      this.playBaseBall(answer);
+      validation.isValidationSingleDigitNaturalNumber(inputNumber);
+      validation.isValidationNumberWithoutDuplicate(inputNumber);
+      this.playBaseBall(inputNumber);
     });
   }
 
-  playBaseBall(answer) {
+  playBaseBall(inputNumber) {
     const counter = new Counter();
-    const totalCountStrike = counter.countStrike(answer, this.computerNumberArr);
-    const totalCountBall = counter.countBall(answer, this.computerNumberArr);
+    const totalCountStrike = counter.countStrike(inputNumber, this.computerNumberArr);
+    const totalCountBall = counter.countBall(inputNumber, this.computerNumberArr);
     this.printNumberOfBallAndStrike(totalCountBall, totalCountStrike);
   }
 
@@ -42,23 +42,23 @@ class App {
     const print = new Print();
     print.printPlayGame(totalCountBall, totalCountStrike);
     if (totalCountBall === 0 && totalCountStrike === 3) {
-      return this.confirmExitOrReStart();
+      return this.inputExitOrReStart();
     }
     return this.inputNumberFromUser();
   }
 
-  confirmExitOrReStart() {
+  inputExitOrReStart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (answer) => {
-        if (answer === "1") {
+      (inputNumber) => {
+        if (inputNumber === "1") {
           this.computerNumberArr = this.getRandomNumber();
           return this.inputNumberFromUser();
-        } else if (answer === "2") {
+        } else if (inputNumber === "2") {
           return MissionUtils.Console.close();
         }
         const valiation = new Validation();
-        valiation.isValidationConfirmInput(answer);
+        valiation.isValidationConfirmInput(inputNumber);
       }
     );
   }
