@@ -30,10 +30,9 @@ class App {
 
   validateUserInput(userNumber) {
     if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
-    if (userNumber.toString().length > 3 || userNumber.toString().length < 3) {
-      throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
-    }
+    if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
     if (new Set([...this.convertUserNumberToArray()]).size !== 3) throw new Error("중복되지 않은 숫자 3자리를 입력해주세요");
+    if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error("소수점과 마이너스는 허용되지않습니다.");
     else this.isValidUserNumber = true;
     if (this.isValidUserNumber === true) this.compareNumber();
   }
