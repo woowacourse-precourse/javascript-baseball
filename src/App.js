@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const computerNumber = this.createComputerNumber();
+    MissionUtils.Console.print(computerNumber); //지우기
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     MissionUtils.Console.readLine("숫자를 입력해주세요:", (userInput) => {
       if (this.checkInputValidation(userInput)) {
@@ -33,6 +34,7 @@ class App {
   compareInputWithAnswer(computerNumber, userInput) {
     const strike = this.countStrike(computerNumber, userInput);
     const ball = this.countBall(computerNumber, userInput);
+    this.printResult(strike, ball);
   }
 
   countStrike(computerNumber, userInput) {
@@ -56,8 +58,22 @@ class App {
     }
     return ball;
   }
-}
 
+  printResult(strike, ball) {
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print("낫싱");
+    }
+    if (ball !== 0 && strike === 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+    }
+    if (ball === 0 && strike !== 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    }
+    if (ball !== 0 && strike !== 0) {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
+  }
+}
 const app = new App();
 app.play();
 
