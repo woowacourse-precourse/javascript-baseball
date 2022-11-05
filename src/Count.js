@@ -9,7 +9,9 @@ class Count {
   }
 
   static strike(computerNumbers, userNumbers) {
-    const strikes = computerNumbers.filter((number, index) => number === userNumbers[index]);
+    const strikes = computerNumbers.filter((number, index) => (
+      number === userNumbers[index]
+    ));
     return strikes.length;
   }
 }
