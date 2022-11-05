@@ -74,7 +74,7 @@ class App {
           this.Answer = this.makeComputerArr();
           this.makeInputNum();
         }
-        if (input === "2") return "게임 종료";
+        if (input === "2") process.exit();
         if (input < 1 || input > 2 || Number.isNaN(input))
           throw new Error("정해진 값을 입력해주세요.");
       }
@@ -83,8 +83,10 @@ class App {
 }
 
 // todo
-// 예외 사항 처리 기능
 // 게임 종료 기능
+// 변수 이름 고민하기
+// 기능 분리 다시 생각하기
+// 예외 처리 기능 분리해보기
 
 const app = new App();
 app.play();
