@@ -1,4 +1,5 @@
 const App = require('../src/App');
+const { handleUserInputException } = require('../src/exception');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -53,25 +54,41 @@ describe('숫자 야구 게임', () => {
       app.play();
     }).toThrow();
   });
+});
 
-  test('3자리가 아닌 입력값', () => {
-    expect(() => {
-      const app = new App();
-      app.handleUserInputException('1234');
-    }).toThrow('3자리 숫자를 입력해주세요');
+describe('사용자 입력값 예외처리', () => {
+  test('숫자가 아닌 값이 존재하는 경우', () => {
+    expect(() => handleUserInputException('1a2', 'getExpectedAnswer')).toThrow(
+      '숫자만 입력할 수 있습니다.'
+    );
+    expect(() => handleUserInputException('aaa', 'getExpectedAnswer')).toThrow(
+      '숫자만 입력할 수 있습니다.'
+    );
   });
 
-  test('0이 존재하는 입력값', () => {
-    expect(() => {
-      const app = new App();
-      app.handleUserInputException('012');
-    }).toThrow('1에서 9 사이의 숫자를 입력해주세요');
+  test('3자리가 아닌 경우', () => {
+    expect(() => handleUserInputException('12', 'getExpectedAnswer')).toThrow(
+      '3자리 숫자를 입력해주세요'
+    );
+    expect(() => handleUserInputException('12345', 'getExpectedAnswer')).toThrow(
+      '3자리 숫자를 입력해주세요'
+    );
   });
 
-  test('중복이 존재하는 입력값', () => {
-    expect(() => {
-      const app = new App();
-      app.handleUserInputException('112');
-    }).toThrow('각 자리에 중복되지 않은 숫자를 입력해주세요');
+  test('0이 존재하는 경우', () => {
+    expect(() => handleUserInputException('120', 'getExpectedAnswer')).toThrow(
+      '1에서 9 사이의 숫자를 입력해주세요'
+    );
+  });
+
+  test('중복이 존재하는 경우', () => {
+    expect(() => handleUserInputException('112', 'getExpectedAnswer')).toThrow(
+      '각 자리에 중복되지 않은 숫자를 입력해주세요'
+    );
+  });
+
+  test('1 또는 2 외의 값을 입력한 경우', () => {
+    expect(() => handleUserInputException('3', 'getRestart')).toThrow('1 또는 2 중에 선택해주세요');
+    expect(() => handleUserInputException('0', 'getRestart')).toThrow('1 또는 2 중에 선택해주세요');
   });
 });
