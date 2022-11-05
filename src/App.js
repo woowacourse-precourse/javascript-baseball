@@ -1,45 +1,41 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   constructor() {
-    this.end = false;
-    this.error = false;
+    this.answer = '';
   }
   play() {
     this.play_number_baseball_game();
-
-    /**while(True),
-     * 다 맞히면 게임 종료 후 1,2 선택 (1이면 재시작, 2면 애플리케이션을 종료)
-     * 입력값 잘못되면 throw 이용한 예외처리 => 얘는 애플리케이션을 종료
-     * **/
+  }
+  play_number_baseball_game() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.answer = this.computer_random_number();
+    console.log(this.answer);
+    this.receive_input();
   }
 
-  play_number_baseball_game() {
-    // MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    // const answer = this.computer_random_number();
-    // this.receive_input();
-    // MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input_num => {
-    //   MissionUtils.Console.close();
-    //   const compare_result = this.compare_and_give_hint(input_num, answer);
-    //   if (compare_result === '3스트라이크') {
-    //     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    //   } else {
-    //     MissionUtils.Console.print(compare_result);
-    //   }
-    // });
+  check_continue(input, answer) {
+    const compare_result = this.compare_and_give_hint(input, this.answer);
+    if (compare_result != '3스트라이크') {
+      MissionUtils.Console.print(compare_result);
+      this.receive_input();
+    } else {
+      MissionUtils.Console.print("'3개의 숫자를 모두 맞히셨습니다! 게임 종료'");
+      // MissionUtils.Console.close();
+    }
   }
 
   receive_input() {
+    // console.log(this.answer);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input_num => {
-      MissionUtils.Console.close();
       const validation = this.check_input_validation(input_num);
       if (!validation) {
         throw '잘못된 형식입니다';
       }
+      this.check_continue(input_num, this.answer);
     });
   }
 
   check_input_validation(input) {
-    let validation;
     const num_range = /^[0-9]+$/;
     let checkNum = num_range.test(input);
     let checkLength = input.length;
@@ -58,8 +54,7 @@ class App {
         number_list.push(single_digit);
       }
     }
-    const final_random_num = number_list.join('');
-    return final_random_num;
+    return number_list.join('');
   }
 
   compare_and_give_hint(input, answer) {
