@@ -21,6 +21,20 @@ class App {
       .then((hint) => console.log(hint));
   }
 
+  askGame() {
+    this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    return new Promise((resolve, reject) =>
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (userInputNumber) => {
+          if ((userInputNumber === "1") | (userInputNumber === "2"))
+            resolve(userInputNumber);
+          else reject("인풋 값이 유효하지 않습니다.");
+        }
+      )
+    );
+  }
+
   setRandomNumber() {
     this.randomNumber = generateRandomNumber({
       start: EXCEPTION.MIN_NUMBER,
