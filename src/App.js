@@ -42,6 +42,9 @@ function askRematchOrExit() {
           printMsg("게임을 종료합니다.");
           MissionUtils.Console.close();
           break;
+        default:
+          printMsg("1 또는 2를 입력하지 않았습니다.");
+          askRematchOrExit();
       }
     }
   );
