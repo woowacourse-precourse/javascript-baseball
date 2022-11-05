@@ -6,7 +6,7 @@ class App {
   }
   play() {
     this.gameStart();
-    this.count = this.generateCount();
+    this.count = this.generateCount(this.generateRandomList());
     this.getUserInput();
   }
 
@@ -14,11 +14,12 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
-  generateCount() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).reduce(
-      (acc, cur) => acc + cur,
-      ""
-    );
+  generateCount(numberList) {
+    return numberList.reduce((acc, cur) => acc + cur, "");
+  }
+
+  generateRandomList() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   getUserInput() {
