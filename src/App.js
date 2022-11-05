@@ -1,7 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameUtils = require("./gameUtils.js");
 const print = require("./print.js");
-const validator = require("./validator.js");
 const constants = require("./data/constants.js");
 
 class App {
@@ -15,7 +14,7 @@ class App {
     let userInput;
     MissionUtils.Console.readLine(constants.MESSAGE.INPUT, (input) => {
       userInput = input.trim().split('').map(number => +number);
-      validator.isVaild(userInput);
+      GameUtils.Validator.isVaildAnswer(userInput);
       const result = GameUtils.System.getResult(userInput, this.answer);
       print.result(result);
       if(result.strike !== 3) return this.submitInput();
@@ -24,7 +23,7 @@ class App {
   }
   clearGame() {   
     MissionUtils.Console.readLine(constants.MESSAGE.CLEAR, (submit) => {
-      validator.isVaildRestartSubmit(submit);
+      GameUtils.Validator.isVaildRestartSubmit(submit);
       if(+submit === 1) app.play();
       if(+submit === 2) {
         print.gameover();

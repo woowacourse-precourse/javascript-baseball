@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const constants = require("./data/constants.js");
 
 class System {
   static get answer() {
@@ -33,4 +34,32 @@ class System {
   }
 }
 
+class Validator {
+  static isVaildAnswer(value) {
+    if(value.length === 0) throw new Error(constants.MESSAGE.IS_BLANK);
+    if(Validator.#isNotThreeLength(value)) throw new Error(constants.MESSAGE.NOT_THREE_LENGTH);
+    if(Validator.#isOutOfRange(value)) throw new Error(constants.MESSAGE.NOT_NUMBER_RANGE);
+    if(Validator.#isDuplicated(value)) throw new Error(constants.MESSAGE.IS_DUPLICATED);
+  }
+  static #isNotThreeLength(value) {
+    if(value.length !== 3) return true;
+    return false;
+  }
+  static #isOutOfRange(value) {
+    let result = false;
+    value.forEach(Number => {
+      if(isNaN(+Number) || Number < 1) result = true;
+    });
+    return result;
+  }
+  static #isDuplicated(value) {
+    return ([...new Set(value)].length !== 3);
+  }
+
+  static isVaildRestartSubmit(value) {
+    if(![1, 2].includes(+value)) throw new Error(constants.MESSAGE.IS_INVALID_RESTART_SUBMIT);
+  }
+}
+
 exports.System = System;
+exports.Validator = Validator;
