@@ -10,12 +10,12 @@ class App {
       baseballOutput,
       baseballValidator
     );
-    let Finished = false;
-    while (!Finished) {
-      baseballOutput.start();
+    let finished = false;
+    baseballOutput.start();
+    while (!finished) {
       const userNumbers = baseballComputer.getUserNumbers();
       const baseballDto = baseballComputer.getBallState(userNumbers);
-      Finished = baseballComputer.isFinish(baseballDto);
+      finished = baseballComputer.isFinish(baseballDto);
     }
     if (baseballComputer.restart()) {
       this.play();
