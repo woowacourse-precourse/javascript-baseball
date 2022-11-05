@@ -4,6 +4,8 @@ const {
   MAX_NUMBER_LENGTH,
   MAX_NUMBER_RANGE,
   MIN_NUMBER_RANGE,
+  END_TRIGGER,
+  RESTART_TRIGGER,
 } = require("./constants/condition.js");
 
 class App {
@@ -28,7 +30,16 @@ class App {
         return;
       }
       Console.print(GAME_MESSAGE.GAME_OVER);
-      Console.close();
+      Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
+        if (trigger === RESTART_TRIGGER) {
+          this.computerInput = this.generateComputerInput();
+          this.play();
+          return;
+        }
+        if (trigger === END_TRIGGER) {
+          Console.close();
+        }
+      });
     });
   }
 
