@@ -1,8 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
-  initGame() {}
+  play() {
+    const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
+    this.print(GAME_START_MESSAGE);
+    this.initGame();
+  }
+  async initGame() {
+    const DIGITS = 3;
+    const answer = this.generateRandomNumber(DIGITS);
+    await this.playRound(answer);
+    await this.selectRestartOrExit();
+  }
   async playRound(answer) {
     const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
