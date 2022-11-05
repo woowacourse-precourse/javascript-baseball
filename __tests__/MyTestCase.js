@@ -83,31 +83,27 @@ describe("count_ball 테스트", () => {
         expect(result).toBeLessThanOrEqual(3);
     });
     test("볼이 0인 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
+        const result = count_strike([1,5,6],[0,3,8]);
         expect(result).toEqual(1);
     });
     test("볼이 1인 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
+        const result = count_strike([1,5,6],[5,3,8]);
         expect(result).toEqual(1);
     });
     test("볼이 2인 경우", () => {
-        const result = count_strike([1,5,6],[0,5,6]);
+        const result = count_strike([1,5,6],[5,6,3]);
         expect(result).toEqual(2);
     });
     test("볼이 3인 경우", () => {
-        const result = count_strike([1,5,6],[1,5,6]);
+        const result = count_strike([1,5,6],[5,6,1]);
         expect(result).toEqual(3);
     });
     test("볼이 0이면서 strike이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
+        const result = count_strike([1,5,6],[4,5,8]);
         expect(result).toEqual(1);
     });
     test("볼이 1이면서 strike이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
-        expect(result).toEqual(1);
-    });
-    test("볼이 2이면서 strike이 있는 경우", () => {
-        const result = count_strike([1,5,6],[0,5,8]);
+        const result = count_strike([1,5,6],[6,5,1]);
         expect(result).toEqual(1);
     });
 })
