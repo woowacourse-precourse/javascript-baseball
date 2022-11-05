@@ -38,7 +38,6 @@ class BaseballGame {
           this.initGame();
         } else if (answer === "2") {
           MissionUtils.Console.close();
-
         }
       }
     );
@@ -66,7 +65,7 @@ class BaseballGame {
     if (strike > 0) {
       resultMessage.push(`${strike}스트라이크`);
     }
-    return resultMessage.length === 0 ? '낫싱' : resultMessage.join(" ");
+    return resultMessage.length === 0 ? "낫싱" : resultMessage.join(" ");
   }
 }
 
