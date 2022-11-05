@@ -14,9 +14,10 @@ class App {
     while (user) {
       if(this.isStrikeOut(user, computer)) {
         MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        user = this.getUserInput(); // 1 or 2를 받을예정.
+        user = this.getUserInput("restart"); // 1 or 2를 받을예정.
 
         if (user === '1') {
+          MissionUtils.Console.print(`${user}`);
           MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
           user = this.getUserInput();
           computer = this.getComputerInput();
@@ -24,14 +25,14 @@ class App {
         }
 
         if (user === '2') {
+          MissionUtils.Console.print(`${user}`);
           MissionUtils.Console.print("게임 종료");
           MissionUtils.Console.close();
           break;
         }
-      
-        throw new Error("유효하지 않은 값이 입력되었습니다.");
-        
+        throw new Error("유효하지 않은 값이 입력되었습니다. 종료오류");
       }
+
       else{
         user = this.getUserInput();
         continue;
@@ -40,13 +41,11 @@ class App {
   }
 
   detectError(user) {
-    if(detectStringError(user)) {
+    if(this.detectStringError(user)) {
       if (user.length != 3) {
         throw new Error("유효하지 않은 값이 입력되었습니다.");
       }
-      return 1;
     }
-    return 0;
   }
   detectStringError(user) {
     user = [...user];
@@ -58,16 +57,21 @@ class App {
     return 1;
   }
 
-  getUserInput() {
+  getUserInput(gameStatus = "normal") {
+    // status가 1인 상황 기본적인 상황, 0인 상황은 게임이 다 끝나고 1,2를 받을때.
     let userAnswer;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
       if (userValue) {
         userAnswer = userValue;
-        console.log(typeof userAnswer);
-        MissionUtils.Console.print(`${userAnswer}`);
       }
     }); 
+
+    if (gameStatus === "normal") {
+      this.detectError(userAnswer);
+      MissionUtils.Console.print(`${userAnswer}`);
+    }
     return userAnswer;
+
   };
 
   getComputerInput() {
