@@ -60,7 +60,13 @@ class App {
   }
 
   printResult() {
-    // to be implemented
+    if (!this.ball && !this.strike) MissionUtils.Console.print('낫싱');
+    else {
+      MissionUtils.Console.print(
+        this.ball ? `${this.ball}볼` : '',
+        this.strike ? `${this.strike}스트라이크` : ''
+      );
+    }
   }
 
   resetScore() {
