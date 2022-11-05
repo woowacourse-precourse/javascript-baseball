@@ -21,7 +21,12 @@ class App {
     this.answer = newAnswer;
   }
 
-  checkValidQuery() {}
+  checkValidQuery(query) {
+    const threeNumberRegExp = /^[1-9]{3}$/;
+    if (!threeNumberRegExp.test(query)) {
+      throw new Error('길이 3의 숫자만 입력이 가능합니다.');
+    }
+  }
 
   checkValidRestartQuery() {}
 
@@ -93,12 +98,8 @@ class App {
   play() {
     Console.print(CONSOLE_MESSAGE.gameStart);
 
-    try {
-      this.resetAnswer();
-      this.repeatQuery();
-    } catch {
-      Console.close();
-    }
+    this.resetAnswer();
+    this.repeatQuery();
   }
 }
 
