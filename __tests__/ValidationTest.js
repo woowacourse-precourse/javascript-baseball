@@ -1,4 +1,9 @@
-const { validLength, validRange, duplication } = require('../src/Validation');
+const {
+  isValidInput,
+  validLength,
+  validRange,
+  duplication,
+} = require('../src/Validation');
 
 describe('길이 검사', () => {
   test('case1', () => {
@@ -39,5 +44,23 @@ describe('중복 검사', () => {
   });
   test('case3', () => {
     expect(duplication([1, 1, 1])).toEqual(true);
+  });
+});
+
+describe('유효값 검사', () => {
+  test('case1', () => {
+    expect(isValidInput([1, 2, 3])).toEqual(true);
+  });
+  test('case2', () => {
+    expect(isValidInput([1, 2, 2])).toEqual(false);
+  });
+  test('case3', () => {
+    expect(isValidInput(['a', 1])).toEqual(false);
+  });
+  test('case4', () => {
+    expect(isValidInput([0, 1, 2])).toEqual(false);
+  });
+  test('case5', () => {
+    expect(isValidInput([5, 1, 2, 4])).toEqual(false);
   });
 });
