@@ -20,6 +20,14 @@ class App {
     } 
     return true;
   }
+
+  static isAllDifferent(str) {
+    const setToCompare = new Set(str);
+    if (str.length !== setToCompare.size) {
+      return false;
+    }
+    return true;
+  }
   
   play() {
     App.printGameStart();
