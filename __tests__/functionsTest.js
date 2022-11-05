@@ -91,4 +91,16 @@ describe("야구 게임 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
   });
+
+  test("숫자 모두 맞음", () => {
+    const logSpy = jest.spyOn(console, "log");
+    logSpy.mockClear();
+
+    const result = "3스트라이크";
+
+    const app = new App();
+    app.isAnswer(result);
+
+    expect(logSpy).toHaveBeenCalledWith("게임 종료");
+  });
 });
