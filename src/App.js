@@ -1,75 +1,90 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 9;
+const RETURN_COUNT = 3;
 
 class App {
     play() {
         startGuidePrint();
-        numberInput();
+        const randomNumber = generateRandomNumber();
+        userInputNumber(randomNumber);
     }
 }
-
-const app = new App();
-app.play();
+const a = new App();
+a.play();
 
 function startGuidePrint() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 }
 
-function numberInput() {
-    MissionUtils.Console.readLine("세자리 숫자를 입력해주세요 : ", inputValidation);
+function generateRandomNumber() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, RETURN_COUNT);
+}
+
+
+function userInputNumber(randomNumber) {
+    MissionUtils.Console.readLine("세자리 숫자를 입력해주세요 : ", number => {
+        return gameStart(number, randomNumber)
+    });
+}
+
+function gameStart(number, randomNumber) {
+    const numberSplit = String(number).split("").map(Number);
+    inputValidation(numberSplit);
+    const [strikeCount, ballCount] = strikeBallCount(numberSplit, randomNumber);
+    resultPrint(strikeCount, ballCount);
 }
 
 function inputValidation(number) {
     threeDigitValidation(number);
     numberRangeValidation(number);
     reduplicationValidation(number);
-    const userNumber = String(number).split("").map(Number);
-    const computerNumber = pickRandomNumber();
-    strikeBallCount(userNumber, computerNumber);
 }
 
 function threeDigitValidation(number) {
-    const numberLength = String(number).length;
+    const numberLength = number.length;
     if (numberLength !== 3) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
 
 function numberRangeValidation(number) {
-    const numberSplit = String(number).split("").map(Number);
-    const isNumberBetween = numberSplit.every(eachDigit => eachDigit > 0 && eachDigit < 10);
+    const isNumberBetween = number.every(eachDigit => eachDigit > 0 && eachDigit < 10);
     if (!isNumberBetween) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
 
 function reduplicationValidation(number) {
-    const numberSplit = String(number).split("");
-    const isReduplication = new Set(numberSplit).size === 3;
+    const isReduplication = new Set(number).size === 3;
     if (!isReduplication) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
 
-function pickRandomNumber() {
-    const randomThreeNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return randomThreeNumber.map(Number);
-}
-
 function strikeBallCount(userNumber, computerNumber) {
     let strikeCount = 0;
     let ballCount = 0;
-    for (let index = 0; index < userNumber.length; index++) {
-        if (userNumber[index] === computerNumber[index]) {
+    userNumber.forEach((eachDigit, index) => {
+        if (eachDigit === computerNumber[index]) {
             strikeCount++;
-        } else if (computerNumber.includes(userNumber[index])) {
+        } else if (computerNumber.includes(eachDigit)) {
             ballCount++;
         }
-    }
-    if (strikeCount > 0 && ballCount === 0) {
+    })
+    return [strikeCount, ballCount];
+}
+
+function resultPrint(strikeCount, ballCount) {
+    if (strikeCount > 0 && ballCount > 0) {
+        MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    } else if (strikeCount > 0 && ballCount === 0) {
         MissionUtils.Console.print(`${strikeCount}스트라이크`);
     } else if (strikeCount === 0 && ballCount > 0) {
         MissionUtils.Console.print(`${ballCount}볼`);
-    } else if (strikeCount > 0 && ballCount > 0) {
-        MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    } else {
+        MissionUtils.Console.print(`낫싱`);
     }
 }
+
+module.exports = App;
