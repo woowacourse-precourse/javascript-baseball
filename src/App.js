@@ -4,7 +4,7 @@ const generateNumber = require('./generateNumber');
 class App {
   play() {
     this.start();
-    const computerSet = generateNumber();
+    this.computerNumArr = generateNumber();
   }
 
   start() {
