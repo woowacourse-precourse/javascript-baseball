@@ -40,7 +40,7 @@ class App {
   }
 
   getUserGameOptionValue() {
-    return MissionUtils.Console.readLine("게임이 종료되었습니다 다시시작은 1 , 종료는  2 를 입력해주세요: ", (input) => {
+    return MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.gameOptionValue = input;
       this.validateUserGameOptionValueInput();
@@ -68,13 +68,13 @@ class App {
 
   printResult(strikeCount, ballCount) {
     if (strikeCount === 3) {
-      MissionUtils.Console.print(`${strikeCount}스트라이크`);
+      MissionUtils.Console.print(`${strikeCount}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
       this.gameEndStatus = true;
       this.getUserGameOptionValue();
     }
-    if (strikeCount > 0 && ballCount > 0) MissionUtils.Console.print(`${strikeCount} 스트라이크 ${ballCount} 볼`);
+    if (strikeCount > 0 && ballCount > 0) MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크 `);
     if (strikeCount > 0 && ballCount === 0) MissionUtils.Console.print(`${strikeCount}스트라이크`);
-    if (ballCount > 0 && strikeCount === 0) MissionUtils.Console.print(`${ballCount} 볼`);
+    if (ballCount > 0 && strikeCount === 0) MissionUtils.Console.print(`${ballCount}볼`);
     if (ballCount === 0 && strikeCount === 0) MissionUtils.Console.print("낫싱");
     if (this.gameEndStatus === false) this.getUserInputNumber();
   }
