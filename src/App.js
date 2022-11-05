@@ -17,7 +17,7 @@ const MU = require("@woowacourse/mission-utils");
 const messages = {
   START: "숫자 야구 게임을 시작합니다.",
   INPUT_NUMBER: "숫자를 입력해주세요 :",
-  CLEAR: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  CLEAR: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료",
   EXIT_QUESTION: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
   STRIKE: "스트라이크",
   BALL: "볼",
@@ -31,7 +31,7 @@ class App {
   }
 
   play() {
-    const computer = [1, 3, 5];
+    let computer = this.setComputerNumber();
     let player = this.inputPlayerNumber();
 
     while (this.cleared !== true) {
@@ -41,7 +41,16 @@ class App {
   }
 
   setComputerNumber() {
-    return MU.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+
+    while (computer.length < 3) {
+      const number = MU.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+
+    return computer;
   }
 
   inputPlayerNumber() {
@@ -79,26 +88,30 @@ class App {
       this.cleared = true;
       this.exit();
     } else {
-      if (intersection.length === 0) console.log(messages.NOTHING);
+      if (intersection.length === 0) MU.Console.print(messages.NOTHING);
       else {
         intersection.forEach((el) => {
           computer.indexOf(el) === player.indexOf(el)
             ? (strike += 1)
             : (ball += 1);
         });
-        console.log(`${ball}${messages.BALL} ${strike}${messages.STRIKE}`);
+        MU.Console.print(
+          `${ball !== 0 ? ball + messages.BALL + " " : ""}${
+            strike !== 0 ? strike + messages.STRIKE : ""
+          }`
+        );
       }
     }
   }
 
   exit() {
     if (this.cleared) {
-      console.log(messages.CLEAR);
+      MU.Console.print(messages.CLEAR);
       MU.Console.readLine(messages.EXIT_QUESTION, (input) => {
         if (input === "1") {
           this.cleared = false;
           this.play();
-        } else console.log("게임 완전히 종료");
+        }
       });
     } else throw new Error("입력의 형태가 잘못되었습니다.");
   }
