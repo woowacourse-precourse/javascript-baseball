@@ -6,7 +6,7 @@ const {
   isValidUserAskInput,
   isValidUserInput,
 } = require("./utils/validator");
-const Console = require("./utils/console.js");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -41,13 +41,13 @@ class App {
   }
 
   endGame() {
-    Console.close();
+    MissionUtils.Console.close();
   }
 
   askGame() {
     this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     return new Promise((resolve) =>
-      Console.readLine(
+      MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (userInputNumber) => {
           if (!isValidUserAskInput(userInputNumber))
@@ -63,16 +63,19 @@ class App {
   }
 
   showMessage(message) {
-    Console.print(message);
+    MissionUtils.Console.print(message);
   }
 
   getUserInputNumber() {
     return new Promise((resolve) =>
-      Console.readLine("숫자를 입력해주세요 : ", (userInputNumber) => {
-        if (!isValidUserInput(userInputNumber))
-          throw new Error("인풋 값이 유효하지 않습니다.");
-        resolve(userInputNumber);
-      })
+      MissionUtils.Console.readLine(
+        "숫자를 입력해주세요 : ",
+        (userInputNumber) => {
+          if (!isValidUserInput(userInputNumber))
+            throw new Error("인풋 값이 유효하지 않습니다.");
+          resolve(userInputNumber);
+        }
+      )
     );
   }
 
