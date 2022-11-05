@@ -3,7 +3,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   constructor() {
     this.input;
-    this.answer = [];
+    this.answer;
     this.hint = {
       ball: 0,
       strike: 0,
@@ -26,7 +26,7 @@ class App {
 
     while (this.answer.length < 3) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.answer.includes(number)) {
+      if (!this.answers || !this.answers.includes(number)) {
         this.answer.push(number);
       }
     }
