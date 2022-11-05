@@ -17,9 +17,12 @@ class App {
       GameUtils.Validator.isVaildAnswer(userInput);
       const result = GameUtils.System.getResult(userInput, this.answer);
       print.result(result);
-      if(result.strike !== constants.CLEAR_CONDITION) return this.submitInput();
-      this.clearGame();
+      this.isClear(result.strike);
     });
+  }
+  isClear(score) {
+    if(score !== constants.CLEAR_CONDITION) this.submitInput();
+    this.clearGame();
   }
   clearGame() {   
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.CLEAR, (submit) => {
