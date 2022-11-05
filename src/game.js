@@ -38,7 +38,8 @@ class Game {
   }
 
   playRound(random) {
-    MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (input) => {
+    MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
+      const input = inputs.split(' ').join('');
       this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
 
       const inputNumbers = [...input].map(Number);
