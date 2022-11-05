@@ -1,4 +1,23 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+// const { ValidateUserInput } = require("./ValidateInput");
+
+function isValidUserInput(userInput) {
+  const ERROR_TEXT = new Error('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
+  const isNumberElement = (element) => (element >= '1' && element <= '9');
+  const userNumbers = [];
+  userInput
+    .split('')
+    .forEach(element => {
+      !userNumbers.includes(element) ? userNumbers.push(element) : ""
+    });
+
+  if (
+    userNumbers.length !== 3 ||
+    !(userNumbers).every(isNumberElement)
+  ) throw ERROR_TEXT;
+
+  return userNumbers.map(Number);
+}
 
 class RandomSelectNumbersByComputer {
   randomSelectComputerNumbers() {
@@ -10,31 +29,24 @@ class RandomSelectNumbersByComputer {
 
 module.exports = RandomSelectNumbersByComputer;
 
-class ValidateUserInput {
-  inputNumbers() {
-    Console.readLine("숫자를 입력해주세요 : ", this.validateUserInput);
-  }
-
-  validateUserInput(userInput) {
-    if (typeof userInput !== 'string') throw Error("Error");
-
-    Console.print(userInput);
-  }
-}
-
 class BaseballGame {
   constructor() {
     this.computerNumbers =
       new RandomSelectNumbersByComputer().randomSelectComputerNumbers();
-    this.validateUserInput = new ValidateUserInput();
   }
 
   playGame() {
     Console.print('숫자 야구 게임을 시작합니다.');
     Console.print(this.computerNumbers);
-    this.validateUserInput.inputNumbers();
-    // Console.print(this.computerNumbers);
-    // Console.close();
+    Console.readLine("숫자를 입력해주세요 : ", this.progressTurn);
+  }
+
+  progressTurn(userInput) {
+    const userNumbers = isValidUserInput(userInput);
+    console.log(userNumbers);
+
+    // this.validateUserInput.isValidUserInput(userInput);
+    // Console.print(this.validateUserInput.userNumbers);
   }
 
 }
@@ -49,32 +61,6 @@ class App {
   play() {
     this.baseballGame.playGame();
   }
-
-  // async startGame() {
-  //   Console.print("숫자 야구 게임을 시작합니다.");
-  //   await this.baseballGameStart();
-  //   const computerNumbers = await this.randomSelectComputerNumbers();
-
-  //   Console.close();
-  // }
-
-  // async baseballGameStart() {
-  //   const beforeValidNumbers = await inputNumbers("숫자를 입력해주세요 : ");
-  //   if (!validateNumbers(beforeValidNumbers)) Console.close();
-  //   Console.print('Valid Input');
-  // }
-
-  // randomSelectComputerNumbers() {
-  //   const computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
-  //   return computerNumbers;
-  // }
-
-  // validateNumbers(beforeValidNumbers) {
-  //   return (
-  //     typeof beforeValidNumbers !== 'string' ||
-  //     beforeValidNumbers.length !== 3
-  //   ) ? false : true;
-  // }
 }
 
 module.exports = App;
