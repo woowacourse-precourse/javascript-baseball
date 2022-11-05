@@ -4,8 +4,7 @@ class App {
   play() {
     this.startGame();
     const computer = this.selectComputer();
-    const user = this.selectUser();
-    this.countScore(computer, user);
+    this.solveNumber(computer);
   }
 
   startGame() {
@@ -26,6 +25,11 @@ class App {
     return computer.join("");
   }
 
+  solveNumber(computer) {
+    const user = this.selectUser();
+    this.countScore(computer, user);
+  }
+
   selectUser() {
     let user;
 
@@ -39,7 +43,7 @@ class App {
   countScore(computer, user) {
     this.isError(user);
     const score = this.calculateScore(computer, user);
-    this.printScore(score);
+    return this.printScore(score);
   }
 
   isError(number) {
@@ -89,6 +93,7 @@ class App {
     }
 
     MissionUtils.Console.print(result);
+    return result;
   }
 }
 
