@@ -1,6 +1,21 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const generateRandomComputerNumber = require('./generateRandomComputerNumber');
 
 class Game {
+  constructor() {
+    this.gameCount = 0;
+    this.computerNumber;
+  }
+
+  start() {
+    this.computerNumber = generateRandomComputerNumber();
+    this.gameCount += 1; 
+
+    if (this.gameCount === 1) MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+
+    this.getUserInputNumber();
+  }
+
   getUserInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.validateUserInputNumber(input);
