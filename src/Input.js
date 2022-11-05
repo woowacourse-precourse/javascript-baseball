@@ -18,9 +18,9 @@ class Input {
 
   static isValid(numbers) {
     return (
-      this.isLengthThree(numbers)
-      && this.isBetweenOneAndNine(numbers)
-      && !this.hasDuplicates(numbers)
+      Input.isLengthThree(numbers)
+      && Input.isBetweenOneAndNine(numbers)
+      && !Input.hasDuplicates(numbers)
     );
   }
 }
