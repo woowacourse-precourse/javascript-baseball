@@ -63,6 +63,9 @@ class App {
   startGameOption() {
     this.printStartSentence();
     this.setRandomNumber();
+    this.inputUserNumber("숫자를 입력하세요 :");  
+  }
+
   endGameOption() {
     Console.close();
   }
@@ -89,6 +92,22 @@ class App {
     if (number.length !== 3){
       throw new Error('3자리 수를 입력해야합니다');
     }
+  }
+
+  inputUserNumber (questionText) {
+    Console.readLine(questionText, (input) => {
+      this.isValidateInputNumber(input);
+
+      input = this.filterInput(input);
+      let result = this.duplicateNumber(input, this.randomNumber);
+      let now = this.calcResult(result);
+
+      if (now) {
+        this.gameOption('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
+      } else {
+        this.inputUserNumber(questionText);
+      }
+    })
   }
 
   play() {
