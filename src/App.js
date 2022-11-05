@@ -70,6 +70,15 @@ class App {
     }
   }
 
+  reStart(num){
+    if (Number(num) === 1) {
+      this.gameStart()
+    } 
+    if (Number(num) === 2) {
+      MissionUtils.Console.print("게임 종료");
+    }
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.computerInput();
