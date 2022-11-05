@@ -1,32 +1,19 @@
-const COMPUTERSTORE = (() => {
-    let computerStore = [];
+const computerStore = (() => {
+    let store = [];
 
-    const GETSTORE = () => computerStore;
-    const SETSTORE = (newStore) => {
-        computerStore.push(newStore)
+    const getStore = () => store;
+    const setStore = (newStore) => {
+        store.push(newStore)
     };
 
     return (newStore) => {
-        if (newStore) SETSTORE(newStore);
-        return [GETSTORE(), SETSTORE];
+        if (newStore) setStore(newStore);
+        return [getStore(), setStore];
     }
 })();
 
-const USERSTORE = (() => {
-    let userStore = [];
-
-    const GETSTORE = () => userStore;
-    const SETSTORE = (newStore) => [...userStore, ...newStore];
-
-    return (newStore) => {
-        SETSTORE(newStore);
-        return [GETSTORE(), SETSTORE];
-    }
-})
-
 const STORE = {
-    COMPUTERSTORE,
-    USERSTORE,
+    computerStore,
 }
 
 module.exports = STORE;
