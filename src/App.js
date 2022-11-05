@@ -1,17 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const getComputerInputOneByOne = () => {
-  let computerInput;
-  computerInput = MissionUtils.Random.pickNumberInRange();
-  return computerInput;
-}
-
 const getComputerInput = () => {
-  let inputString = "";
-  for (let i=0 ; i < 3 ; i++){
-    inputString += getComputerInputOneByOne();
+  let computerInput = [];
+  while (computerInput.length < 3) {
+    const randomNumber = MissionUtils.Random.pickNumberInRange(1,9);
+    if (!computerInput.includes(randomNumber)) {
+      computerInput.push(randomNumber);
+    }
   }
-  return inputString;
+  return computerInput.join("");
 }
 
 const getUserInput = () => {
