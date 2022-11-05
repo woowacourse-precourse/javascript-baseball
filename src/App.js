@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { isValidContinueOption } = require('./controllers/gameHandler');
 
 class App {
   play() {
@@ -35,13 +36,6 @@ class App {
     );
   }
 }
-
-const isValidContinueOption = (option) => {
-  if (option === '1') return true;
-  if (option === '2') return false;
-
-  throw new Error('1,2 이외의값');
-};
 
 const app = new App();
 app.play();
