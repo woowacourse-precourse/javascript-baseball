@@ -55,6 +55,19 @@ class App {
       result=`${STRIKE}스트라이크`;
     } else result = '낫싱'
     this.result = result;
+    this.findAnswer(result);
+  }
+
+  findAnswer(res) {
+    if(res !== '3스트라이크'){
+      this.userInput();
+    } else if(res === '3스트라이크'){
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+      MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+      MissionUtils.Console.readLine("", (num) => {
+        this.reStart(num);
+      });
+    }
   }
 
   play() {
