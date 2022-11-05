@@ -5,6 +5,7 @@ class App {
     this.showMessage();
     this.userInput();
     this.computerRandomNumber();
+    this.closeConsole();
   }
   showMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -20,7 +21,6 @@ class App {
     }
     let stringUserNumber=userNumber.split('')
     let userNumberArray=[...stringUserNumber]
-    console.log(userNumberArray);
     return userNumberArray
   }
   computerRandomNumber() {
@@ -31,7 +31,13 @@ class App {
         COMPUTER.push(number);
       }
     }
-    console.log(COMPUTER);
+    return COMPUTER;
+  }
+  compareNumbers(){
+    console.log('실행되나?');
+  }
+  closeConsole(){
+    MissionUtils.Console.close();
   }
   gameReplay() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
