@@ -35,6 +35,7 @@ class App {
 
       this.setBallStrikeCount();
       this.setResult();
+      Console.print(this.computerNumbers);
       Console.print(this.result);
 
       if (this.ballStrikeCount.strike === 3) {
@@ -93,11 +94,15 @@ class App {
     Console.readLine(message.FINISH, (input) => {
       if (input === '1') {
         this.play();
+        return;
       }
 
       if (input === '2') {
         Console.close();
+        return;
       }
+
+      throw new Error('유효하지 않은 값을 입력했습니다.');
     });
   }
 }
