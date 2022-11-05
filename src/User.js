@@ -45,9 +45,10 @@ class User extends Mission {
     const compare = new Compare(this.computerNumbers, userNumbers);
     if (compare.getResult() === true) {
       this.selectStartOrExit();
-    } else {
-      this.userInputStart();
+      return;
     }
+    this.userInputStart();
+    return;
   }
 
   selectStartOrExit() {
@@ -65,11 +66,13 @@ class User extends Mission {
       const newComputerNumbers = computer.getComputerNumbers();
       this.computerNumbers = newComputerNumbers;
       this.userInputStart();
-    } else if (answer === '2') {
-      this.mission.Console.close();
-    } else {
-      throw '1과 2만 입력 가능합니다. 잘못된 값이 입력 되었습니다.';
+      return;
     }
+    if (answer === '2') {
+      this.mission.Console.close();
+      return;
+    }
+    throw '1과 2만 입력 가능합니다. 잘못된 값이 입력 되었습니다.';
   }
 }
 
