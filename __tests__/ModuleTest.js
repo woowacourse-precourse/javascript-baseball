@@ -101,3 +101,9 @@ describe('결과 값에 따라 올바른 게임 결과 메시지를 반환', () 
     expect(getGameResultMessage(resultObj)).toBe('낫싱');
   });
 });
+
+test('1~9 중 중복되지 않는 세자리 랜덤 숫자를 반환', () => {
+  const numbers = getRandomNumbers(3, 1, 9);
+  haveSameNumber(numbers);
+  expect(numbers).toMatch(/^[1-9]{3}$/);
+});
