@@ -16,7 +16,7 @@ class App {
 
     console.log(this.answer);
 
-    while (this.isGameEnd()) {
+    while (!this.isGameEnd()) {
       const userInput = await this.getPlayerInput(this.REQUEST_NUMBER);
       if (this.isValidInput(userInput)) this.userInput = userInput;
 
@@ -59,7 +59,7 @@ class App {
   }
 
   isGameEnd() {
-    return this.answer !== this.userInput;
+    return this.answer === this.userInput;
   }
 
   generateAnswer() {
