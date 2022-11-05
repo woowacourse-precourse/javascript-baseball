@@ -105,8 +105,7 @@ class App {
     this.userInputExceptionHandler();
 
     const [BALL, STRIKE, NOTHING] = this.compareUserInputWithAnswer();
-    const OUTPUT_STRING = App.makeOutputString(BALL, STRIKE, NOTHING);
-    MissionUtils.Console.print(OUTPUT_STRING);
+    MissionUtils.Console.print(App.makeOutputString(BALL, STRIKE, NOTHING));
 
     const END_GAME = () => {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
