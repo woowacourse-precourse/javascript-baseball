@@ -20,7 +20,7 @@ pickNumberInRange(startInclusive, endInclusive): 숫자 범위를 지정하면 �
 
 </br>
 
-## [&nbsp; ] 기능 3: 숫자 입력받기
+## [✅] 기능 3: 숫자 입력받기
 **MissionUtils 라이브러리**에서 제공하는 `Console.readLine()`를 활용하여 사용자에게 숫자를 입력 받는다.  
 
 readLine(query, callback): 주어진 질문(query)을 화면에 출력하고, 사용자가 답변을 입력할 때까지 기다린 다음 입력된 답변을 인수로 전달하는 콜백 함수를 호출한다.
