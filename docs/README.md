@@ -5,7 +5,7 @@
 
 #### 유저의 수를 입력 받을 수 있다.
 - [x] 서로 다른 3자리의 수를 입력받는다.
-- [ ] 잘못된 값을 입력할 경우 throw 문을 사용해 예외를 발생시키고 종료한다.
+- [x] 잘못된 값을 입력할 경우 throw 문을 사용해 예외를 발생시키고 종료한다.
 - [x] 게임이 끝나면 1 또는 2로 재시작과 종료를 선택할 수 있다.
 
 #### 숫자 입력에 따른 올바른 값을 출력한다.
@@ -14,10 +14,14 @@
 - [x] 유저가 제시한 숫자와 컴퓨터가 보유한 숫자의 값이 일치하지 않을 시, 낫싱을 출력한다.
 
 #### 기타
-- [ ] Node.js 14 버전에서 작동한다.
-- [ ] JavaScript 코드 컨벤션을 지킨다.
+- [x] Node.js 14 버전에서 작동한다.
+- [x] JavaScript 코드 컨벤션을 지킨다.
 - [ ] indent depth가 3을 넘지 않는다.
-- [ ] 각 함수의 책임이 명확하게 분리된다.
+- [x] 각 함수의 책임이 명확하게 분리된다.
 - [ ] Jest를 활용한 테스트코드를 작성한다.
 
 ## 학습에 참고한 자료
+* [throw](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/throw)
+* [no-process-exit](https://runebook.dev/ko/docs/eslint/rules/no-process-exit)
+* [자바스크립트에서 비동기 처리 다루기](https://learnjs.vlpt.us/async/)
+* [Error 처리 - Unexpected token 'export'](https://pgramdiary.tistory.com/85)
