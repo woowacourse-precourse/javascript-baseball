@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 class Print {
   printPlayGame(totalCountBall, totalCountStrike) {
     this.printNothing(totalCountBall, totalCountStrike);
@@ -15,9 +16,7 @@ class Print {
   printStrike(totalCountBall, totalCountStrike) {
     if (totalCountBall === 0 && totalCountStrike === 3) {
       MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
-      return MissionUtils.Console.print(
-        "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-      );
+      return MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     } else if (totalCountBall === 0 && totalCountStrike) {
       return MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
     }
@@ -29,9 +28,7 @@ class Print {
   }
   printBallAndStrike(totalCountBall, totalCountStrike) {
     if (totalCountBall && totalCountStrike) {
-      return MissionUtils.Console.print(
-        `${totalCountBall}볼 ${totalCountStrike}스트라이크`
-      );
+      return MissionUtils.Console.print(`${totalCountBall}볼 ${totalCountStrike}스트라이크`);
     }
   }
 }
