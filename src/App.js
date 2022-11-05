@@ -34,19 +34,11 @@ function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
     if (!cpuNumber.includes(userInput[i])) {
       nothing++;
     }
-    if (cpuNumber.includes(userInput[i])) {
-      console.log("sdf");
-    }
     checkIndex[i] = cpuNumber.indexOf(userInput[i]);
-  }
-
-  for (let i = 0; i < checkIndex.length; i++) {
     if (checkIndex[i] == i) {
       strike++;
     }
   }
-
-  console.log(checkIndex);
 
   if (nothing === 3) {
     return "낫싱";
@@ -60,14 +52,15 @@ function UserInputValueCompareToCPUAnswer(cpuNumber, userInput) {
  * @description 컴퓨터가 랜덤으로 만든 정답값
  */
 function cpuMakeAnswer() {
-  // 입력받는 방법몰라서 임의값넣느라 미사용처리
   const computer = [];
   while (computer.length < 3) {
     const number = Random.pickNumberInRange(1, 9);
+
     if (!computer.includes(number)) {
       computer.push(number);
     }
   }
+  console.log(computer);
 
   return computer;
 }
@@ -75,14 +68,26 @@ function cpuMakeAnswer() {
 class App {
   constructor() {}
   play() {
-    // const cpuNumber = cpuMakeAnswer();
-    const cpuNumber = [3, 2, 9];
-    const userInput = [];
-    Console.readLine("숫자를 입력해주세요.", (userInput) => {
-      Console.print("숫자 야구게임을 시작합니다.");
+    const cpuNumber = cpuMakeAnswer();
+    // const cpuNumber = [3, 2, 9];
+    let userInput = [];
+    let gameResult = "";
+    Console.print("숫자 야구게임을 시작합니다.");
+
+    /**
+     * to-do readLine이 못맞추면 참 -> 숫자 계속입력 맞추면 폴스 -> 게임종료
+     */
+
+    Console.readLine("숫자를 입력해주세요.", (input) => {
+      userInput = Array.from(input);
+      for (let i = 0; i < userInput.length; i++) {
+        userInput[i] = parseInt(userInput[i]);
+      }
+
       Console.print(userInput);
       if (checkVaildUserInputValue(userInput)) {
-        UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
+        gameResult = UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
+        Console.print(gameResult);
       }
     });
 
