@@ -8,5 +8,4 @@ const ballCount = (numArr, answer) => {
   ).length;
 };
 
-console.log(ballCount([1, 2, 3], [2, 3, 1]));
-console.log(ballCount([1, 2, 3], [1, 2, 4]));
+const isNothing = (strikeCount, ballCount) => strikeCount + ballCount === 0;
