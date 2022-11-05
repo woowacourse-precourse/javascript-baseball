@@ -78,7 +78,7 @@ describe("유틸 함수 체크", () => {
     // when
     const result1 = makeReplyToReply(input1);
     // then
-    expect(result1).toBe("1볼 1스트라이크");
+    expect(result1).toEqual({ message: "1볼 1스트라이크", done: false });
 
     // given
     const input2 = {
@@ -88,9 +88,10 @@ describe("유틸 함수 체크", () => {
     // when
     const result2 = makeReplyToReply(input2);
     // then
-    expect(result2).toBe(
-      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-    );
+    expect(result2).toEqual({
+      message: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+      done: true,
+    });
 
     // given
     const input3 = {
@@ -100,7 +101,7 @@ describe("유틸 함수 체크", () => {
     // when
     const result3 = makeReplyToReply(input3);
     // then
-    expect(result3).toBe("낫싱");
+    expect(result3).toEqual({ message: "낫싱", done: false });
   });
 
   //   test("inputReply", () => {
