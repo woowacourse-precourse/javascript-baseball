@@ -34,7 +34,14 @@ class App {
   }
 
   makeRandomNumberArray() {
-    this.computerRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    this.computerRandomNumber = computer;
   }
 
   checkBallStrike(rn, input) {
@@ -67,8 +74,7 @@ class App {
     }
 
     if (strike === 3) {
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      MissionUtils.Console.close();
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.askReplayorClose();
     } else {
       this.inputUserAnswer();
