@@ -70,11 +70,7 @@ class App {
     return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.userNumber = input;
-      try {
-        this.validateUserInput(this.userNumber);
-      } catch (error) {
-        App.handleError(error);
-      }
+      this.validateUserInput(this.userNumber);
     });
   }
 
