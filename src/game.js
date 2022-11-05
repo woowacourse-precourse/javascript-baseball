@@ -79,9 +79,12 @@ class NumericBaseballGame {
       if (strikeCount === 3) {
         MissionUtils.Console.print("3개의 숫자를 모두 맞추셨습니다!");
       }
-
       if (strikeCount) {
         MissionUtils.Console.print(`${strikeCount}스트라이크`);
+        continue;
+      }
+      if (ballCount) {
+        MissionUtils.Console.print(`${ballCount}볼`);
         continue;
       }
     }
