@@ -73,7 +73,7 @@ describe("숫자 야구 게임", () => {
   });
   test("1~9가 아닌 숫자가 나올 시 예외 테스트", () => {
     const randoms = [1, 3, 5];
-    const answers = ["0"];
+    const answers = ["012"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -85,7 +85,7 @@ describe("숫자 야구 게임", () => {
   });
   test("숫자가 아닐 시 예외 테스트", () => {
     const randoms = [1, 3, 5];
-    const answers = ["가"];
+    const answers = ["가23"];
 
     mockRandoms(randoms);
     mockQuestions(answers);

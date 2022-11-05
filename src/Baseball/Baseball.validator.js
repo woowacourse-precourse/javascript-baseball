@@ -2,10 +2,10 @@ const BaseballDto = require("./Baseball.dto");
 
 class BaseballValidator {
   static checkNumericNumbers(numbers) {
-    const nonNuemrics = Array.from(numbers).filter(
+    const nonNumerics = Array.from(numbers).filter(
       (number) => "1" > number || number > "9"
     );
-    if (nonNuemrics > 0) {
+    if (nonNumerics > 0) {
       throw new Error("숫자가 아닌 값이 있습니다.");
     }
   }
