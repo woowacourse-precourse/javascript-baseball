@@ -9,15 +9,16 @@ class App {
         this.answer = '123';
     }
     play() {
-        console.log(GAME_START);
-        this.input();
+        MissionUtils.Console.print(GAME_START);
+        // this.input();
+        this.input2();
     }
     async input() {
         for await (const number of this.question('숫자를 입력하세요.')) {
             const comment = this.match(number);
-            console.log(comment);
+            MissionUtils.Console.print(comment);
             if (comment === THREE_STRIKE) {
-                console.log(GAME_OVER);
+                MissionUtils.Console.print(GAME_OVER);
                 break;
             }
         }
