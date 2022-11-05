@@ -10,7 +10,7 @@ class Game {
 
   play() {
     this.init();
-    this.playRound(this.randomNumbers);
+    this.getAnswer(this.randomNumbers);
   }
 
   init() {
@@ -37,7 +37,7 @@ class Game {
     return this.randomNumbers;
   }
 
-  playRound(random) {
+  getAnswer(random) {
     MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
       const input = inputs.split(' ').join('');
       const inputNumbers = [...input].map(Number);
@@ -54,7 +54,7 @@ class Game {
         return this.askPlayAgain();
       }
 
-      return this.playRound(random);
+      return this.getAnswer(random);
     });
   }
 
