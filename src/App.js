@@ -1,9 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+
 class App {
+  constructor() {
+    this.correct_answer;
+    this.user_input;
+  }
   play() {
     this.gamaStartAlram()
     this.createRandomNum()
+    this.getAnswer()
   }
 
   gamaStartAlram() {
@@ -17,6 +23,14 @@ class App {
     }
     return this.correct_answer = [...random_nums].join('')
   }
+
+  getAnswer() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      MissionUtils.Console.print(`입력한 숫자는 ${input} 입니다`)
+      this.user_input = input
+    })
+  }
+
 }
 
 const app = new App();
