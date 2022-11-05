@@ -80,6 +80,7 @@ describe("App", () => {
     const app = new App();
 
     app.print(MESSAGE);
+    MissionUtils.Console.close();
 
     expect(logSpy).toHaveBeenCalledWith(MESSAGE);
   });
@@ -93,17 +94,17 @@ describe("App", () => {
   //   expect(randomNumber).toBeLessThanOrEqual(9);
   // });
 
-  test("숫자 야구 게임의 정답을 만든다.", () => {
-    const app = new App();
+  // test("숫자 야구 게임의 정답을 만든다.", () => {
+  //   const app = new App();
 
-    const answer = app.makeBaseballGameAnswer();
+  //   const answer = app.makeBaseballGameAnswer();
 
-    expect(answer).toHaveLength(3);
-    expect(typeof answer).toBe("string");
-    expect(
-      Array.from(answer).every((number) => !isNaN(Number(number)))
-    ).toBeTruthy();
-  });
+  //   expect(answer).toHaveLength(3);
+  //   expect(typeof answer).toBe("string");
+  //   expect(
+  //     Array.from(answer).every((number) => !isNaN(Number(number)))
+  //   ).toBeTruthy();
+  // });
 
   // test("유저의 input이 올바르지 않을 경우 에러를 발생시킨다.", () => {
   //   const app = new App();
@@ -115,15 +116,15 @@ describe("App", () => {
   //   expect(result).toThrow(RangeError);
   // });
 
-  test("유저의 input과 정답을 비교해 결과를 출력한다.", () => {
-    const app = new App();
-    const logSpy = getLogSpy();
+  // test("유저의 input과 정답을 비교해 결과를 출력한다.", () => {
+  //   const app = new App();
+  //   const logSpy = getLogSpy();
 
-    const input = "123";
-    app.ANSWER = "456";
+  //   const input = "123";
+  //   app.ANSWER = "456";
 
-    app.print(app.compareUserInputWithAnswer(input));
+  //   app.print(app.compareUserInputWithAnswer(input));
 
-    expect(logSpy).toHaveBeenCalledWith("낫싱");
-  });
+  //   expect(logSpy).toHaveBeenCalledWith("낫싱");
+  // });
 });
