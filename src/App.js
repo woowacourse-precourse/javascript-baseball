@@ -41,6 +41,9 @@ class App {
     const commandList = ["1", "2"];
     return commandList.includes(command);
   }
+  throwException(message) {
+    throw new Error(message);
+  }
 }
 const app = new App();
 app.play();
