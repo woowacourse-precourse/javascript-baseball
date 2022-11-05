@@ -4,6 +4,7 @@ const { message, rule } = require('./constants');
 class App {
   constructor() {
     this.computerNumbers = [];
+    this.userNumbers = [];
     this.gameCount = {
       strike: 0,
       ball: 0,
@@ -12,12 +13,12 @@ class App {
   }
 
   play() {
-    this.computerNumbers = this.generateComputerNumbers();
+    this.setComputerNumbers();
     Console.print(message.START);
     this.readUserInput();
   }
 
-  generateComputerNumbers() {
+  setComputerNumbers() {
     const computerNumbers = new Set();
 
     while (computerNumbers.size < rule.LENGTH) {
@@ -25,57 +26,59 @@ class App {
       computerNumbers.add(String(number));
     }
 
-    return [...computerNumbers];
+    this.computerNumbers = [...computerNumbers];
   }
 
-  getStrikeBallCount(userNumber, computerNumbers) {
+  setStrikeBallCount() {
     const strikeBallCount = {
       strike: 0,
       ball: 0,
     };
 
-    [...userNumber].forEach((number, i) => {
-      if (number === computerNumbers[i]) {
+    this.userNumbers.forEach((number, i) => {
+      if (number === this.computerNumbers[i]) {
         strikeBallCount.strike += 1;
         return;
       }
 
-      if (computerNumbers.includes(number)) {
+      if (this.computerNumbers.includes(number)) {
         strikeBallCount.ball += 1;
       }
     });
 
-    return strikeBallCount;
+    this.gameCount = strikeBallCount;
   }
 
-  getResult({ strike, ball }) {
+  setResult() {
+    const { strike, ball } = this.gameCount;
     const ballMessage = `${ball}${message.BALL}`;
     const strikeMessage = `${strike}${message.STRIKE}`;
 
     if (ball === 0 && strike === 0) {
-      return message.NOTHING;
+      this.result = message.NOTHING;
+      return;
     }
 
     if (ball > 0 && strike === 0) {
-      return ballMessage;
+      this.result = ballMessage;
+      return;
     }
 
     if (ball === 0 && strike > 0) {
-      return strikeMessage;
+      this.result = strikeMessage;
+      return;
     }
 
-    return `${ballMessage} ${strikeMessage}`;
-  }
-
-  printResult() {
-    const result = this.getResult(this.gameCount);
-    Console.print(result);
+    this.result = `${ballMessage} ${strikeMessage}`;
   }
 
   readUserInput() {
     Console.readLine(message.INPUT, (number) => {
-      this.gameCount = this.getStrikeBallCount(number, this.computerNumbers);
-      this.printResult();
+      this.userNumbers = [...number];
+
+      this.setStrikeBallCount();
+      this.setResult();
+      Console.print(this.result);
 
       if (this.gameCount.strike === 3) {
         Console.print(message.CORRECT);
