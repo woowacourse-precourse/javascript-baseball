@@ -24,7 +24,10 @@ class BaseBallException {
   }
 
   #isNumber() {
-    return !!this.#input.match(exception.REGEX) && this.#input.match(exception.REGEX).length === this.#input.length;
+    return (
+      !!this.#input.match(exception.REGEX) &&
+      this.#input.match(exception.REGEX).length === this.#input.length
+    );
   }
 
   #is3DifferNumber() {
@@ -55,7 +58,7 @@ class RestartException {
   }
 
   occurError() {
-    if (!(this.#isRestart() && this.#isExit())) {
+    if (!(this.#isRestart() || this.#isExit())) {
       throw new Error(this.#errorMessage);
     }
   }
