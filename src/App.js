@@ -58,6 +58,15 @@ class App {
             if(OVERLAP_INDEX > -1 && OVERLAP_INDEX == idex) strike += 1;
             if(OVERLAP_INDEX > -1 && OVERLAP_INDEX !== idex) ball += 1;         
         }
+        return this.isProvideHints(ball,strike);
+    }
+
+    isProvideHints(ball,strike) {
+        const MISSION_UTILS = require("@woowacourse/mission-utils");
+        if(ball == 0 && strike == 0) return MISSION_UTILS.Console.print(`낫싱`);
+        if(ball == 0 && strike > 0)  return MISSION_UTILS.Console.print(`${strike}스트라이크`);
+        if(ball > 0 && strike == 0)  return MISSION_UTILS.Console.print(`${ball}볼`);
+        if(ball > 0 && strike > 0)  return MISSION_UTILS.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
 }
 module.exports = App;
