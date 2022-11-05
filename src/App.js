@@ -12,7 +12,7 @@ const {
 
 class App {
   constructor() {
-    this.randomNumbers = [];
+    this.randomNumbers = this.initRandomNumbers();
   }
 
   play() {
@@ -22,14 +22,10 @@ class App {
   }
 
   printStartMessage() {
-    Console.print(START_MESSAGE);
+    Console.print(`${START_MESSAGE}`);
   }
 
   initRandomNumbers() {
-    this.randomNumbers = this.makeRandomNumbers();
-  }
-
-  makeRandomNumbers() {
     const pickedNumbers = [];
 
     while (pickedNumbers.length < MAX_LENGTH) {
@@ -136,7 +132,6 @@ class App {
   }
 
   printGameResult(playerInput) {
-    console.log(`컴퓨터 숫자 : `, this.randomNumbers); // 컴퓨터 숫자 테스트용
     const playerPickedNumbers = playerInput.split('').map(Number);
     const strike = this.countStrike(playerPickedNumbers);
     const ball = this.countBall(playerPickedNumbers);
@@ -156,8 +151,9 @@ class App {
     Console.readLine(`${END_MESSAGE}\n`, (answer) => {
       const convertNumberInput = Number(answer);
       if (convertNumberInput == 1) {
-        this.play();
-      } else if (convertNumberInput == 2) {
+        return this.play();
+      }
+      if (convertNumberInput == 2) {
         return Console.close();
       }
     });
