@@ -168,4 +168,13 @@ describe("야구 게임 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("예외사항: 잘못된 옵션 선택", () => {
+    const option = "3";
+
+    expect(() => {
+      const app = new App();
+      app.isOptionError(option);
+    }).toThrow();
+  });
 });
