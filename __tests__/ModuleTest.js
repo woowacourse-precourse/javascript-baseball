@@ -1,3 +1,5 @@
+const App = require('../src/App');
+const { Console } = require('@woowacourse/mission-utils');
 const {
   isValidRestartInputValue,
   getGameResultMessage,
@@ -7,6 +9,10 @@ const {
   isValidRangeNumber,
   getRandomNumbers,
 } = require('../src/modules');
+
+afterAll(() => {
+  Console.close();
+});
 
 describe('1과 2가 아니라면 에러 발생', () => {
   test('case1', () => {
