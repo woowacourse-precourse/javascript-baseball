@@ -27,3 +27,33 @@ describe("입력이 올바른지 판단 테스트", () => {
         expect(RESULT).toEqual(false);
     })
 })
+
+describe("스트라이크와 볼 판단 테스트", () => {
+    const APP = new App();
+    const ANSWER = [3, 4, 5];
+
+    test("123은 1볼이다", () => {
+        const RESULT = APP.getResult("123", ANSWER);
+        expect(RESULT).toEqual({ strike: 0, ball: 1 });
+    })
+
+    test("389는 1스트라이크이다", () => {
+        const RESULT = APP.getResult("389", ANSWER);
+        expect(RESULT).toEqual({ strike: 1, ball: 0 });
+    })
+
+    test("356은 1볼 1스트라이크이다", () => {
+        const RESULT = APP.getResult("356", ANSWER);
+        expect(RESULT).toEqual({ strike: 1, ball: 1 });
+    })
+
+    test("543은 2볼 1스트라이크이다", () => {
+        const RESULT = APP.getResult("543", ANSWER);
+        expect(RESULT).toEqual({ strike: 1, ball: 2 });
+    })
+
+    test("678은 낫띵이다", () => {
+        const RESULT = APP.getResult("678", ANSWER);
+        expect(RESULT).toEqual({ strike: 0, ball: 0 });
+    })
+})

@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { isThreeDigitNumberWithoutZero, hasNoRedundancy } = require("./utils.js");
+const { updateStrikeOrBall } = require("./compare.js");
 
 class App {
   play() {
@@ -19,11 +20,30 @@ class App {
     return ANSWER;
   }
 
-  // 사용자의 입력이 올바른 입력인지 판단하는 함수
+  /**
+   * 사용자의 입력이 올바른 입력인지 판단하는 함수
+   * @param {*} input - input string
+   * @returns boolean
+   */
   isValidInput(input) {
     if (!isThreeDigitNumberWithoutZero(input)) return false;
 
     return hasNoRedundancy(input);
+  }
+
+  /**
+   * input과 정답을 비교하여 야구게임 결과를 반환하는 함수
+   * @param {*} input - input string
+   * @param {*} answer - answer array
+   */
+  getResult(input, answer) {
+    let result = { strike: 0, ball: 0 };
+
+    for (let i = 0; i < answer.length; i++) {
+      updateStrikeOrBall(input, i, answer, result);
+    }
+
+    return result;
   }
 }
 
