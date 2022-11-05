@@ -14,14 +14,20 @@ class App {
 
   play() {
     Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
-      Console.close();
       const { isValid, errorType } = this.isValidUserNumberInput(userInput);
       if (!isValid) {
+        Console.close();
         throw new Error(ERROR_MESSAGE[errorType]);
       }
       const [strikeCount, ballCount] = this.getStrikeBallCount(this.computerInput, userInput);
       const gameResultMessage = this.getGameResultMessage(strikeCount, ballCount);
       Console.print(gameResultMessage);
+
+      if (strikeCount !== MAX_NUMBER_LENGTH) {
+        this.play();
+        return;
+      }
+      Console.close();
     });
   }
 
