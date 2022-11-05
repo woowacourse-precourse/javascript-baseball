@@ -1,14 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
-  play() {
+  gameplay() {
     const ANSWER_NUMBER = this.makeAnswer();
     let isEnd = false;
-    // 미션 유틸 라이브러리에 있는 함수 pickUniqueNumbersInRange를 활용하여 1부터 9까지의 숫자 중 겹치지 않는 3개의 숫자를 반환.
-    // 출력값 예시)[ 3, 2, 8 ] or [ 2, 3, 4 ] 같이 배열로 반환됨.
+
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다."); // 게임 시작 문구 출력
 
     while (!isEnd) {
-      // Todo: 사용자가 정답을 맞출때 까지 숫자 입력 받아야함.
       const INPUT_NUM = this.customInput();
       this.checkValidInput(INPUT_NUM); // 입력이 오류이면 throw하여 프로그램 종료. 오류가 아니면 진행.
       const INPUT_NUM_ARR = this.numberToArray(INPUT_NUM);
@@ -16,17 +14,27 @@ class App {
       this.printHint(HINT_ARR);
       isEnd = this.checkEnd(HINT_ARR);
     }
-    this.selectEndState();
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    const SELECT_NUM = this.selectEndState();
+    return SELECT_NUM;
+  }
+
+  play() {
+    let select = this.gameplay();
+    while (select === 1) {
+      select = this.gameplay();
+    }
   }
 
   makeAnswer() {
-    let answer = [];
+    const answer = [];
     while (answer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!answer.includes(number)) answer.push(number);
     }
     return answer;
   }
+
   numberToArray(number) {
     // 숫자를 배열로 바꾸는 함수.
     const STR = String(number);
@@ -97,17 +105,17 @@ class App {
 
   selectEndState() {
     let selectNum = 0;
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (select) => {
         selectNum = select;
         MissionUtils.Console.close();
       }
     );
-    if (selectNum === 1) this.play();
-    else if (selectNum === 2) throw "프로그램이 종료되었습니다.";
-    else throw "잘못된 입력입니다. 애플리케이션을 종료합니다.";
+    return selectNum;
   }
 }
 
