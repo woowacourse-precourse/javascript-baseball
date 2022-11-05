@@ -20,9 +20,17 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요',
       answer => {
-        return answer;
+        if (this.testEndAnswer(answer)) {
+          return answer;
+        }
       },
     );
+  }
+
+  testEndAnswer(answer) {
+    const testType = /[1-2]/;
+    if (!testType.test(answer)) throw new Error('1, 2 중 입력하세요.');
+    return answer;
   }
 
   getUserAnswer(computer) {
