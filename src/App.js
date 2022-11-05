@@ -31,18 +31,57 @@ class App {
 
   checkValidRestartQuery() {}
 
+  getResultMessage(strikeCount, ballCount) {
+    switch (true) {
+      case strikeCount === 0 && ballCount === 0:
+        return '낫싱';
+      case strikeCount === 0:
+        return `${ballCount}볼`;
+      case ballCount === 0:
+        return `${strikeCount}스트라이크`;
+      default:
+        return `${strikeCount}스트라이크 ${ballCount}볼`;
+    }
+  }
+
+  getQueryResult(query) {
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let idx = 0; idx < 3; idx += 1) {
+      if (this.answer.includes(query[idx])) {
+        ballCount += 1;
+      }
+      if (query[idx] === this.answer[idx]) {
+        strikeCount += 1;
+      }
+    }
+
+    ballCount -= strikeCount;
+
+    const resultMessage = this.getResultMessage(strikeCount, ballCount);
+
+    return {
+      isGameEnd: query === this.answer,
+      resultMessage,
+    };
+  }
+
+  checkRestart() {}
+
   async repeatQuery() {
     while (true) {
       const query = await readLineAsync(CONSOLE_MESSAGE.getQuery);
       this.checkValidQuery(query);
 
-      Console.print(query);
+      const { isGameEnd, resultMessage } = await this.getQueryResult(query);
+      Console.print(resultMessage);
+
+      if (isGameEnd && !this.checkRestart()) {
+        break;
+      }
     }
   }
-
-  getQueryResult() {}
-
-  checkRestart() {}
 
   play() {
     Console.print(CONSOLE_MESSAGE.gameStart);
