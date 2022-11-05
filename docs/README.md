@@ -51,3 +51,27 @@ Input.isValid([4, 8]); // false
 Input.isValid([4, 8, 0]); // false
 Input.isValid([4, 8, 8]); // false
 ```
+
+### Count
+
+#### `ball(computerNumbers, userNumbers)`
+
+컴퓨터의 숫자 배열과 유저의 숫자 배열을 인수로 받아서 볼의 개수를 반환한다.
+
+```js
+Count.ball([4, 8, 6], [2, 3, 7]); // 0
+Count.ball([4, 8, 6], [2, 3, 8]); // 1
+Count.ball([4, 8, 6], [4, 6, 8]); // 2
+Count.ball([4, 8, 6], [6, 4, 8]); // 3
+```
+
+#### `strike(computerNumbers, userNumbers)`
+
+컴퓨터의 숫자 배열과 유저의 숫자 배열을 인수로 받아서 스트라이크의 개수를 반환한다.
+
+```js
+Count.strike([4, 8, 6], [2, 3, 7]); // 0
+Count.strike([4, 8, 6], [4, 6, 8]); // 1
+Count.strike([4, 8, 6], [4, 8, 9]); // 2
+Count.strike([4, 8, 6], [4, 8, 6]); // 3
+```
