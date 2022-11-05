@@ -18,7 +18,6 @@ class App {
   }
 
   checkIsvaild(num) {
-    // console.log(num)
     if(num === '') throw new Error('입력해주세요.');
     if((/[^0-9]/g).match === null) throw new Error('숫자를 입력해주세요.');
     if(num.length !== 3) throw new Error('숫자 3개가 입력되지 않았습니다.');
@@ -28,7 +27,6 @@ class App {
 
   userInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (number) => {
-      console.log(number)
       this.checkIsvaild(number);
       const userNum = number.split('').map(Number);
       this.checkAnswer(userNum);
@@ -40,9 +38,8 @@ class App {
     let BALL = 0;
     let result = '';
 
+    
     if(num === this.computer) result = '3스트라이크';
-    // console.log(this.computer)
-    // console.log(num)
     for(let i=0; i<num.length; i++){
       if(num[i] === this.computer[i]) STRIKE ++;
       else if(num.includes(this.computer[i])) BALL ++;
@@ -72,18 +69,22 @@ class App {
 
   reStart(num){
     if (Number(num) === 1) {
-      this.computerInput();
-      this.userInput();
+      this.gameStart()
     } 
     if (Number(num) === 2) {
       MissionUtils.Console.print("게임 종료");
+      MissionUtils.Console.close();
     }
+  }
+
+  gameStart(){
+    this.computerInput();
+    this.userInput();
   }
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.computerInput();
-    this.userInput();
+    this.gameStart();
   }
 }
 

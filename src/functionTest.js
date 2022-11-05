@@ -10,6 +10,13 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 describe('함수 기능 테스트', () => {
   test('숫자가 세자리가 맞는지 확인', () => {
     const app = new App();
@@ -18,13 +25,16 @@ describe('함수 기능 테스트', () => {
     expect(result).toEqual(3);
   });
   test("입력되지 않았을 때", () => {
+    const randoms = [1, 3, 5];
     const answers = [""];
 
+    mockRandoms(randoms);
     mockQuestions(answers);
 
     expect(() => {
+      const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow('입력해주세요.');
   });
 
   test("숫자가 아닐 때", () => {
