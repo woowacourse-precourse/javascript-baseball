@@ -65,4 +65,34 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
     const randomNum = app.makeRandomAnswer();
     expect(app.chkValidNumber(randomNum)).toEqual(true);
   });
+
+  test('스트라이크 & 볼 판별 로직', () => {
+    const gameAnswer = '369';
+    const inputs = [
+      '247',
+      '123',
+      '691',
+      '936',
+      '312',
+      '386',
+      '396',
+      '169',
+      '369'
+    ];
+    const outputs = [
+      { strike: 0, ball: 0 },
+      { strike: 0, ball: 1 },
+      { strike: 0, ball: 2 },
+      { strike: 0, ball: 3 },
+      { strike: 1, ball: 0 },
+      { strike: 1, ball: 1 },
+      { strike: 1, ball: 2 },
+      { strike: 2, ball: 0 },
+      { strike: 3, ball: 0 }
+    ];
+    const app = new App();
+    inputs.forEach((input, ind) => {
+      expect(app.getResult(input, gameAnswer)).toEqual(outputs[ind]);
+    });
+  });
 });
