@@ -9,7 +9,7 @@ describe.only("플레이어 입력 검증 테스트", () => {
 
     inputs.forEach((input) => {
       const result = app.validateInput(input);
-      expect(result).toBeFalsy();
+      expect(result).toBeTruthy();
     });
   });
 
