@@ -4,11 +4,11 @@ class App {
 
   constructor(){
     this.computerInput=[]
-    this.userInput=[]
   }
 
   play() {
     this.computerInput = this.randomMakeNumber();
+    this.userInputNumber();
   }
 
   randomMakeNumber(){
@@ -22,6 +22,13 @@ class App {
     return computer;
   }
 
+  userInputNumber(){
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      answer.split('')
+    });
+  }
 };
 
+const app = new App();
+app.play();
 module.exports = App;
