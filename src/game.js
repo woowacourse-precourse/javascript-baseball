@@ -73,6 +73,10 @@ class Game {
   printScore(ball, strike) {
     let score;
 
+    if (ball === 0 && strike === 0) {
+      score = SCORE.NOTHING;
+    }
+
     if (ball > 0) {
       score = `${ball}${SCORE.BALL}`;
     }
@@ -83,10 +87,6 @@ class Game {
 
     if (ball > 0 && strike > 0) {
       score = `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`;
-    }
-
-    if (ball === 0 || strike === 0) {
-      score = SCORE.NOTHING;
     }
 
     MissionUtils.Console.print(score);
