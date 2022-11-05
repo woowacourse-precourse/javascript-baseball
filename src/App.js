@@ -108,16 +108,16 @@ class App {
     const OUTPUT_STRING = App.makeOutputString(BALL, STRIKE, NOTHING);
     MissionUtils.Console.print(OUTPUT_STRING);
 
-    const endGame = () => {
+    const END_GAME = () => {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.gameRestartHandler();
     };
 
-    const restartGame = () => {
+    const RESTART_GAME = () => {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.userInputHandler);
     };
 
-    const nextEvent = STRIKE === 3 ? endGame : restartGame;
+    const nextEvent = STRIKE === 3 ? END_GAME : RESTART_GAME;
     nextEvent();
   };
 
