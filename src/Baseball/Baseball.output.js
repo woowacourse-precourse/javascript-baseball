@@ -18,10 +18,10 @@ class BaseBasllOutput {
   result(baseBallDto) {
     const { ball, strike } = baseBallDto;
     let returnString = "";
-    if (ball >= 0) {
+    if (ball > 0) {
       returnString += `${ball}볼 `;
     }
-    if (strike >= 0) {
+    if (strike > 0) {
       returnString += `${strike}스트라이크`;
     }
     if (returnString == "") {
