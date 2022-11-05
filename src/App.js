@@ -59,6 +59,14 @@ function printScore(scoreObject) {
   return resultMessage;
 }
 
+function readNumber() {
+  let answer = -1;
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    answer = input;
+  });
+  return answer;
+}
+
 class App {
   play() {}
 }
