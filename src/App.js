@@ -44,20 +44,20 @@ class App {
     const isNoNumber = isNaN(convertNumberPlayerInput);
 
     if (isNoNumber) {
-      throw `${INVALID_ERROR_MESSAGE}`;
+      throw new Error(`${INVALID_ERROR_MESSAGE}`);
     }
 
     if (convertStringPlayerInput.length !== 3) {
-      throw `${RANGE_ERROR_MESSAGE}`;
+      throw new Error(`${RANGE_ERROR_MESSAGE}`);
     }
 
     if (differentNumbers.length !== 3) {
-      throw `${DUPLICATE_ERROR_MESSAGE}`;
+      throw new Error(`${DUPLICATE_ERROR_MESSAGE}`);
     }
 
     const inputNumbers = convertStringPlayerInput.split('');
     if (inputNumbers.includes('0')) {
-      throw `${INVALID_ERROR_MESSAGE}`;
+      throw new Error(`${INVALID_ERROR_MESSAGE}`);
     }
   }
 
