@@ -42,6 +42,7 @@ class NumericBaseballGame {
   }
 
   checkArgNumberValid(number) {
+    const isInputNumberLengthEqualsThree = (input) => input.length === 3;
     const isConsistOfOnlyNumber = (input) => /^[0-9]*$/g.test(input);
   }
 
