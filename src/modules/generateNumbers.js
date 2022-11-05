@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-function threePitching() {
+function threePitchingBall() {
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -11,4 +11,4 @@ function threePitching() {
     return computer
 }
 
-exports.threePitching = threePitching
+exports.threePitchingBall = threePitchingBall
