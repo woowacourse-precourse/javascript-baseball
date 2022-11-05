@@ -44,7 +44,7 @@ class App {
     if (strike === 3) {
       this.printEndMessage();
     } else {
-      this.printResult(strike, ball);
+      this.printCompareResult(strike, ball);
       this.printInputMessage();
     }
   }
@@ -75,7 +75,7 @@ class App {
     return ball;
   }
 
-  printResult(strike, ball) {
+  printCompareResult(strike, ball) {
     if (ball === 0 && strike === 0) {
       MissionUtils.Console.print("낫싱");
     }
