@@ -43,7 +43,9 @@ class App {
     return result;
   }
 
-  executeError() {}
+  executeError() {
+    throw "유효하지 않는 숫자입니다.";
+  }
 
   play() {
     MissionUtils.Console.print("숫자게임을 시작합니다.");
@@ -51,7 +53,7 @@ class App {
     while (true) {
       MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
         this.isValidInput(input)
-          ? this.CompareInputWithComputer(input.computerNum)
+          ? printResult(this.CompareInputWithComputer(input.computerNum))
           : this.executeError;
       });
     }
