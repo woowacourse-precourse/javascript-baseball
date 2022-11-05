@@ -15,26 +15,12 @@ class App {
     while (!this.exit) {
       this.start();
       this.input();
-      console.log('게임 시작!', 'user', this.user, 'com', this.computer);
-
-      switch (this.code) {
-        case 'RESTART':
-          break;
-        case 'SUCCESS':
-          this.result();
-          break;
-        case 'EXIT':
-          this.exit = true;
-          MissionUtils.Console.print('게임 종료.');
-          break;
-        default:
-          break;
-      }
+      this.command();
     }
   }
 
   start() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.print('숫자 야구 게임을 시작합니다.');
   }
 
   pickRandomNumber() {
@@ -50,15 +36,36 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요.', (answer) => {
       this.code = this.checkValidation(answer);
       this.user = answer.split('').map((num) => parseInt(num, 10));
-      console.log('user', this.user, this.computer, this.code);
     });
+  }
+
+  command() {
+    switch (this.code) {
+      case 'RESTART':
+        break;
+      case 'SUCCESS':
+        this.result();
+        break;
+      case 'EXIT':
+        this.exit = true;
+        this.print('게임 종료.');
+        break;
+      default:
+        break;
+    }
   }
 
   checkValidation(answer) {
     if (answer.split('').length > 3) throw Error('유효하지 않은 입력입니다.');
-    else if (answer === '1') return VALIDATION_CODE[1];
-    else if (answer === '2') return VALIDATION_CODE[2];
-    else return VALIDATION_CODE[0];
+
+    switch (answer) {
+      case '1':
+        return VALIDATION_CODE[1];
+      case '2':
+        return VALIDATION_CODE[2];
+      default:
+        return VALIDATION_CODE[0];
+    }
   }
 
   checkStrike() {
@@ -85,24 +92,26 @@ class App {
   }
 
   victory() {
-    MissionUtils.Console.print('3스트라이크');
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.print(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
-    );
+    this.print('3스트라이크');
+    this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
   }
 
   result() {
     const { strike, ball } = this.compare();
 
     if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print('낫싱');
+      this.print('낫싱');
     } else if (strike === 3) {
       this.victory();
       this.pickRandomNumber();
-    } else if (ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
-    else if (strike === 0) MissionUtils.Console.print(`${ball}볼`);
-    else MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    } else if (ball === 0) this.print(`${strike}스트라이크`);
+    else if (strike === 0) this.print(`${ball}볼`);
+    else this.print(`${ball}볼 ${strike}스트라이크`);
+  }
+
+  print(string) {
+    MissionUtils.Console.print(string);
   }
 }
 
