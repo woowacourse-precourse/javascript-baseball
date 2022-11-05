@@ -16,7 +16,29 @@ class BaseballGame {
   }
 
   inputPlayerNumbers() {
-    this.console.readLine(QUESTION.inputNumber, this.player.setNumbers.bind(this));
+    this.console.readLine(QUESTION.inputNumber, this.answerPlayerNumbers.bind(this));
+  }
+
+  answerPlayerNumbers(answer) {
+    this.player.setNumbers(answer);
+
+    this.inputPlayerNumbers();
+  }
+
+  static countBallAndStrike({ computerNumbers, playerNumbers }) {
+    const result = { ball: 0, strike: 0 };
+
+    playerNumbers.forEach((playerNumber, index) => {
+      if (playerNumber === computerNumbers[index]) {
+        result.strike += 1;
+        return;
+      }
+      if (computerNumbers.includes(playerNumber)) {
+        result.ball += 1;
+      }
+    });
+
+    return result;
   }
 }
 
