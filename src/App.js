@@ -1,5 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { countBall, countStrike, printBallCount } = require('./utils/BallCount');
+const {
+	checkInputLength,
+	checkInputIsNumber,
+	checkInputExcludeCertainNumber,
+	checkInputDuplicateNumber,
+} = require('./utils/InputChecker');
 
 class App {
 	constructor() {
@@ -10,6 +16,7 @@ class App {
 
 	runTurn(computerNumbers) {
 		Console.readLine('숫자를 입력해주세요 : ', (input) => {
+			this.checkTurnInputIsValid(input);
 			const userNumbers = input.split('');
 			const ball = countBall(userNumbers, computerNumbers);
 			const strike = countStrike(userNumbers, computerNumbers);
@@ -19,6 +26,13 @@ class App {
 	}
 
 	quitGame() {}
+
+	checkTurnInputIsValid(input) {
+		checkInputLength(input, this.NUMBER_LENGTH);
+		checkInputIsNumber(input);
+		checkInputExcludeCertainNumber(input, 0);
+		checkInputDuplicateNumber(input);
+	}
 }
 
 module.exports = App;
