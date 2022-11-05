@@ -55,24 +55,6 @@ class App {
     }
   }
 
-  static print(message) {
-    MissionUtils.Console.print(message);
-  }
-
-  static close() {
-    MissionUtils.Console.close();
-  }
-
-  static isValidInput(input) {
-    if (input.includes(NaN)) throw '문자를 제외한 숫자만 입력하세요.';
-    if (input.includes(0)) throw '1~9 사이의 숫자만 입력하세요.';
-    if (input.length !== 3) throw '3개의 숫자만 입력하세요.';
-    if (input.length !== new Set(input).size)
-      throw '서로 다른 숫자를 입력하세요.';
-
-    return true;
-  }
-
   receiveInputFromConsole() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.setInput(input);
@@ -120,6 +102,24 @@ class App {
   play() {
     App.print('숫자 야구 게임을 시작합니다.');
     this.setAnswerAndreceiveInput();
+  }
+
+  static print(message) {
+    MissionUtils.Console.print(message);
+  }
+
+  static close() {
+    MissionUtils.Console.close();
+  }
+
+  static isValidInput(input) {
+    if (input.includes(NaN)) throw '문자를 제외한 숫자만 입력하세요.';
+    if (input.includes(0)) throw '1~9 사이의 숫자만 입력하세요.';
+    if (input.length !== 3) throw '3개의 숫자만 입력하세요.';
+    if (input.length !== new Set(input).size)
+      throw '서로 다른 숫자를 입력하세요.';
+
+    return true;
   }
 }
 
