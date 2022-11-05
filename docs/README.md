@@ -34,4 +34,4 @@
   - [x] getUserNumberFromInput
 
 - [x] computer
-  - [ ] setRandomComputerNumberArray
+  - [x] setRandomComputerNumberArray

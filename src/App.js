@@ -1,43 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-
-class User {
-  constructor() {
-    this.userNumberArray = [];
-  }
-  getUserNumberFromInput() {
-    let that = this;
-    return new Promise(function (resolve, reject) {
-      try {
-        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-          that.userNumberArray = [
-            ...input
-              .toString()
-              .split('')
-              .map(i => +i),
-          ];
-          resolve();
-        });
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
-}
-
-class Computer {
-  constructor() {
-    this.computerNumberArray = [];
-  }
-  setRandomComputerNumberArray() {
-    this.computerNumberArray = [];
-    while (this.computerNumberArray.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computerNumberArray.includes(number)) {
-        this.computerNumberArray.push(number);
-      }
-    }
-  }
-}
+const User = require('./User.js');
+const Computer = require('./Computer.js');
 
 class App {
   constructor() {
