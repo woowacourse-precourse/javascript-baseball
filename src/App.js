@@ -24,6 +24,7 @@ class App {
   inputUserAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.userAnswer = answer;
+      this.checkUserInputRedundancy(answer);
       if (answer.length !== 3) {
         throw new Error();
       } else {
@@ -41,6 +42,14 @@ class App {
       }
     }
     this.computerRandomNumber = computer;
+  }
+
+  checkUserInputRedundancy(answer) {
+    const checkSet = new Set(answer.split(""));
+
+    if ([...checkSet].length < 3) {
+      throw new Error();
+    }
   }
 
   checkBallStrike(rn, input) {
