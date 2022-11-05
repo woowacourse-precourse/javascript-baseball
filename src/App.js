@@ -61,7 +61,7 @@ class App {
   }
 
   async startOrRestartApp(start) {
-    if (start == 'restart' || start == 'start') {
+    if (start !== 'restart' && start !== 'start') {
       throw Error('start 명령을 잘못 입력했습니다.');
     }
     if (start === 'restart')
@@ -69,15 +69,16 @@ class App {
 
     this.initAnswerMap();
     try {
-      await this.user.getUserNumberFromInput();
+      await this.user.getNumberArrayFromInput();
     } catch (e) {
+      console.log('error');
       throw Error(e);
     }
     this.compareUserAndComputerNumber();
   }
 
   setAnswerMapByCompareUserAndComputer() {
-    this.user.userNumberArray.forEach((userNumber, userNumberArrayIndex) => {
+    this.user.numberArray.forEach((userNumber, userNumberArrayIndex) => {
       const index = this.computer.computerNumberArray.indexOf(userNumber);
       if (index === userNumberArrayIndex) {
         this.answerMap.set('strike', this.answerMap.get('strike') + 1);
