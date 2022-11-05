@@ -32,7 +32,7 @@ class App {
 			const ball = countBall(userNumbers, computerNumbers);
 			const strike = countStrike(userNumbers, computerNumbers);
 			printBallCount(ball, strike);
-			return strike === this.NUMBER_LENGTH ? this.quitGame() : this.runGame(computerNumbers);
+			return strike === this.NUMBER_LENGTH ? this.quitGame() : this.runTurn(computerNumbers);
 		});
 	}
 
