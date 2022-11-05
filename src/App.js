@@ -4,51 +4,68 @@ class App {
   async play() {
     // step1
     console.log('숫자 야구 게임을 시작합니다.');
-    let restart = true;
-    while(restart){
-      
-      restart = await this.game() === 1 ? true : false;
-    }
-    MissionUtils.Console.print('게임 종료');
+    this.game();
   }
   
-  async game() {
+  game() {
     // step2
     let computer = this.setComputerNum();
     // console.log(computer);
     
-    let retry = true;
-    while(retry) {
-      const countResult = await this.predict(computer);
-      // step5
-      // MissionUtils.Console.print(this.result(countResult));
+    // let retry = true;
+    // while(retry) {
+    //   const countResult = this.predict(computer);
+    //   // step5
+    //   // MissionUtils.Console.print(this.result(countResult));
       
-      retry = countResult.strike === 3 ? false : true;
-    }
-    console.log('3개의 숫자를 모두 맞히셨습니다!');
+    //   retry = countResult.strike === 3 ? false : true;
+    // }
+    this.predict(computer)
+    
     // step6
-    return await this.checkContinue();
   }
 
   async predict(computer) { 
     // step3
-    const inputArray = await this.setUserNum();
+    // const inputArray = this.setUserNum();
     // console.log(inputArray);
     // step4
-    const countResult = this.countStrikeAndBall(inputArray, computer);
-    MissionUtils.Console.print(this.result(countResult));
+    // const countResult = this.countStrikeAndBall(inputArray, computer);
+    // MissionUtils.Console.print(this.result(countResult));
 
     // const countResult = await this.setUserNum(computer);
-    return countResult;
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      const inputArray = input.split('').map(digit => parseInt(digit));
+      this.checkInputError(inputArray);
+      const countResult = this.countStrikeAndBall(inputArray, computer);
+      MissionUtils.Console.print(this.result(countResult));
+      if (countResult.strike !== 3){
+        this.predict(computer);
+      } else {
+        console.log('3개의 숫자를 모두 맞히셨습니다!');
+        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+          if (![1,2].includes(parseInt(input))) throw new Error('input error - should be 1 or 2');
+          else if(input === '1') this.game();
+          else MissionUtils.Console.print('게임 종료');
+        });
+      }
+    })
   }
 
-  async setUserNum() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
-        const inputArray = input.split('').map(digit => parseInt(digit));
-        this.checkInputError(inputArray);
-        resolve(inputArray);
-      })
+  async setUserNum(computer) {
+    // return new Promise((resolve, reject) => {
+    //   MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+    //     const inputArray = input.split('').map(digit => parseInt(digit));
+    //     this.checkInputError(inputArray);
+    //     resolve(inputArray);
+    //   })
+    // })
+    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
+      const inputArray = input.split('').map(digit => parseInt(digit));
+      this.checkInputError(inputArray);
+      const countResult = this.countStrikeAndBall(inputArray, computer);
+      MissionUtils.Console.print(this.result(countResult));
+      this.predict()
     })
   }
 
@@ -105,8 +122,8 @@ class App {
     if(countResult.strike === 0 && countResult.ball === 0){
       res = '낫싱';
     } else {
-      res += countResult.ball>0 ? `${countResult.ball}볼`:'';
-      res += countResult.strike>0 ? ` ${countResult.strike}스트라이크`:'';
+      res += countResult.ball>0 ? `${countResult.ball}볼 `:'';
+      res += countResult.strike>0 ? `${countResult.strike}스트라이크`:'';
     }
     return res;
   }
