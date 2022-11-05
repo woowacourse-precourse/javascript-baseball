@@ -21,7 +21,7 @@ class App {
   enterAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputs = input.split("").map((i) => Number(i));
-      if (!handleException(input)) throw "입력 형식이 잘못되었습니다.";
+      if (!handleException(inputs)) throw "입력 형식이 잘못되었습니다.";
       calculateScore(this.answer, inputs);
     });
   }
