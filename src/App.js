@@ -6,11 +6,6 @@ class App {
   #correct;
   #finish;
 
-  constructor() {
-    this.#correct = false;
-    this.#finish = false;
-  }
-
   startMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -18,9 +13,9 @@ class App {
   pickNumber() {
     const computer = [];
     while (computer.length < 3) {
-      const num = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(num)) {
-        computer.push(num);
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
       }
     }
 
@@ -45,16 +40,16 @@ class App {
   }
 
   checkInput(input) {
-    if (!this.checkLength(input)) throw "입력 길이 오류";
-    if (!this.checkIsNumber(input)) throw "숫자가 아닌 입력";
-    if (!this.checkDuplicate(input)) throw "중복 숫자 존재";
+    if (!this.checkLength(input)) throw "3자리 숫자를 입력해주세요.";
+    if (!this.checkIsNumber(input)) throw "숫자만 입력해주세요.";
+    if (!this.checkDuplicate(input)) throw "서로 다른 숫자를 입력해주세요.";
   }
 
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.#userInput = input;
+      MissionUtils.Console.close();
     });
-    console.log("숫자 입력값 : ", this.#userInput);
   }
 
   countStrike(answer, input) {
@@ -99,7 +94,8 @@ class App {
     const ballHint = ball > 0 ? `${ball}볼` : "";
     const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
 
-    MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
+    if (strike > 0 || ball > 0)
+      MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
   }
 
   game() {
@@ -114,14 +110,17 @@ class App {
   askRestart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (input) => this.checkRestartInput(input)
+      (input) => {
+        this.checkRestartInput(input);
+        MissionUtils.Console.close();
+      }
     );
   }
 
   checkRestartInput(input) {
-    console.log("재시작 입력 : ", input);
-    if (!["1", "2"].includes(input)) throw "잘못된 입력값입니다.";
+    if (!["1", "2"].includes(input)) throw "1 또는 2를 입력하세요.";
     if (input === "1") this.#correct = false;
+    if (input === "2") this.#finish = true;
   }
 
   play() {
@@ -132,5 +131,8 @@ class App {
     }
   }
 }
+
+// const app = new App();
+// app.play();
 
 module.exports = App;
