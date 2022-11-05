@@ -27,11 +27,25 @@ describe("유틸 함수 체크", () => {
     expect(trueResult).toBe(true);
 
     // given
-    const falseInput = "122";
+    const inputError1 = "122";
     // when
-    const falseResult = replyValidation(falseInput);
+    const resultError1 = () => replyValidation(inputError1);
     // then
-    expect(falseResult).toBe(false);
+    expect(resultError1).toThrow();
+
+    // given
+    const inputError2 = "12";
+    // when
+    const resultError2 = () => replyValidation(inputError2);
+    // then
+    expect(resultError2).toThrow();
+
+    // given
+    const inputError3 = "1234";
+    // when
+    const resultError3 = () => replyValidation(inputError3);
+    // then
+    expect(resultError3).toThrow();
   });
 
   test("replyCheckAnswer", () => {

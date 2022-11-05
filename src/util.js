@@ -3,9 +3,11 @@ const { Random } = require("@woowacourse/mission-utils");
 const makeAnswer = () => Random.pickUniqueNumbersInRange(1, 9, 3).join("");
 
 const replyValidation = (input) => {
+  const values = input.split("");
+  if (values.length !== 3) throw new Error("사용자 입력 오류");
   const map = {};
-  for (const value of input.split("")) {
-    if (map[value]) return false;
+  for (const value of values) {
+    if (map[value]) throw new Error("사용자 입력 오류");
     map[value] = value;
   }
   return true;
