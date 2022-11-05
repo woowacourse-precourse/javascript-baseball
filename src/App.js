@@ -4,7 +4,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    let playCount = 0;
+    let playCount = 0; // playCount값이 3인 경우 정상 종료, 4인 경우 비정상 종료 입니다.
     let computerNumber = [];
 
     for (playCount = 0; playCount < 3; playCount++) {
@@ -41,6 +41,7 @@ class App {
   }
 }
 
+// 프로그램 연산 기능
 const makeComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
@@ -56,25 +57,6 @@ const makeComputerNumber = () => {
   return computer_number;
 };
 
-const getUserInput = () => {
-  let inputArray = [];
-
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
-    if (isNaN(inputNumber) || inputNumber.length !== 3) {
-      return [];
-    }
-
-    inputArray = inputNumber.split("");
-    const input_set = new Set(inputArray);
-
-    if (inputArray.length !== input_set.size) {
-      return [];
-    }
-  });
-
-  return inputArray;
-};
-
 const calculateInputNumber = (computerNumber, userNumber) => {
   let strikeBallRecord = [0, 0];
 
@@ -88,20 +70,7 @@ const calculateInputNumber = (computerNumber, userNumber) => {
   return strikeBallRecord;
 };
 
-const askEndGame = () => {
-  let isQuit = -1;
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (isEnd) => {
-      if (isEnd === "2") {
-        MissionUtils.Console.print("게임 종료");
-        isQuit = 5;
-      }
-    }
-  );
-  return isQuit;
-};
-
+// 프로그램 출력 기능
 const printBallStrike = (strikeBallRecord) => {
   if (strikeBallRecord[0] === 3) {
     MissionUtils.Console.print(`${strikeBallRecord[0]}스트라이크`);
@@ -121,6 +90,40 @@ const printBallStrike = (strikeBallRecord) => {
   }
 
   return false;
+};
+
+// 유저 입력 기능
+const getUserInput = () => {
+  let inputArray = [];
+
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+    if (isNaN(inputNumber) || inputNumber.length !== 3) {
+      return [];
+    }
+
+    inputArray = inputNumber.split("");
+    const input_set = new Set(inputArray);
+
+    if (inputArray.length !== input_set.size) {
+      return [];
+    }
+  });
+
+  return inputArray;
+};
+
+const askEndGame = () => {
+  let isQuit = -1;
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (isEnd) => {
+      if (isEnd === "2") {
+        MissionUtils.Console.print("게임 종료");
+        isQuit = 2;
+      }
+    }
+  );
+  return isQuit;
 };
 
 module.exports = App;
