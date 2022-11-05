@@ -46,7 +46,7 @@ class App {
   }
 
   check_continue(input) {
-    const COMPARE_RESULT = this.compare_and_give_hint(input, this.answer);
+    const COMPARE_RESULT = this.return_hint(input, this.answer);
     MissionUtils.Console.print(COMPARE_RESULT);
     if (COMPARE_RESULT != '3스트라이크') {
       this.receive_guess_input();
@@ -56,7 +56,7 @@ class App {
     }
   }
 
-  compare_and_give_hint(input, answer) {
+  compare_and_count_strike_ball(input, answer) {
     let strike = 0;
     let ball = 0;
     for (let i = 0; i < 3; i++) {
@@ -65,6 +65,11 @@ class App {
         ball += 1;
       }
     }
+    return [strike, ball];
+  }
+
+  return_hint(input, answer) {
+    const [strike, ball] = this.compare_and_count_strike_ball(input, answer);
     if (ball === 0 && strike === 0) return '낫싱';
     else if (strike === 3) return '3스트라이크';
     else if (strike === 0) return `${ball}볼`;
