@@ -33,6 +33,15 @@ class App {
   isVaildNumberFormat(target) {
     return /^[1-9]{3}$/.test(target);
   }
+
+  isDuplicate(target) {
+    const charList = target.split("");
+    const firstLetter = charList.shift();
+    return (
+      charList.includes(firstLetter) ||
+      charList.reduce((acc, cur) => acc === cur)
+    );
+  }
 }
 
 module.exports = App;
