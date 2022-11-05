@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const App = require('../src/App');
+const BaseballComputer = require('../src/models/BaseballComputer');
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -19,10 +19,10 @@ describe('컴퓨터 숫자 생성', () => {
 
     mockRandoms(randoms);
 
-    const app = new App();
-    app.setComputerNumbers();
+    const computer = new BaseballComputer();
+    const result = computer.numbers;
 
-    expect(app.computerNumbers).toHaveLength(3);
+    expect(result).toHaveLength(3);
   });
 
   test('서로 다른 임의의 수로 구성되어 있다', () => {
@@ -30,9 +30,9 @@ describe('컴퓨터 숫자 생성', () => {
 
     mockRandoms(randoms);
 
-    const app = new App();
-    app.setComputerNumbers();
+    const computer = new BaseballComputer();
+    const result = computer.numbers;
 
-    expect(app.computerNumbers).toStrictEqual(['1', '4', '5']);
+    expect(result).toStrictEqual(['1', '4', '5']);
   });
 });
