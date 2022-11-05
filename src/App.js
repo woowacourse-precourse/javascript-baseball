@@ -14,6 +14,7 @@ class App {
 
   play() {
     Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
+      Console.close();
       const { isValid, errorType } = this.isValidUserNumberInput(userInput);
       if (!isValid) {
         throw new Error(ERROR_MESSAGE[errorType]);
