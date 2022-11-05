@@ -6,5 +6,4 @@ module.exports = {
   MAX_LENGTH,
   BEGIN_NUM,
   END_NUM,
-  GAME_RESULT,
 };

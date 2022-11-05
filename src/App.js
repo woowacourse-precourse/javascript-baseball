@@ -3,7 +3,7 @@ const { MAX_LENGTH, BEGIN_NUM, END_NUM } = require('./common/constants');
 const {
   START_MESSAGE,
   END_MESSAGE,
-  STRIKE_MESSAGE,
+  GAMEOVER_MESSAGE,
   INPUT_MESSGAE,
   INVALID_NUMERIC_ERROR_MESSAGE,
   DUPLICATE_NUMERIC_ERROR_MESSAGE,
@@ -113,9 +113,9 @@ class App {
     return true;
   }
 
-  countStrike(playerPickNumbers) {
+  countStrike(playerPickedNumbers) {
     let strike = 0;
-    playerPickNumbers.forEach((number, index) => {
+    playerPickedNumbers.forEach((number, index) => {
       if (number === this.randomNumbers[index]) {
         strike += 1;
       }
@@ -124,9 +124,9 @@ class App {
     return strike;
   }
 
-  countBall(playerPickNumbers) {
+  countBall(playerPickedNumbers) {
     let ball = 0;
-    playerPickNumbers.forEach((number, index) => {
+    playerPickedNumbers.forEach((number, index) => {
       if (number !== this.randomNumbers[index] && this.randomNumbers.includes(number)) {
         ball += 1;
       }
@@ -137,22 +137,34 @@ class App {
 
   printGameResult(playerInput) {
     console.log(`컴퓨터 숫자 : `, this.randomNumbers); // 컴퓨터 숫자 테스트용
-    const playerPickNumbers = playerInput.split('').map(Number);
-    const strike = this.countStrike(playerPickNumbers);
-    const ball = this.countBall(playerPickNumbers);
+    const playerPickedNumbers = playerInput.split('').map(Number);
+    const strike = this.countStrike(playerPickedNumbers);
+    const ball = this.countBall(playerPickedNumbers);
 
     if (strike === 3) {
       Console.print(`${strike}스트라이크`);
-      Console.print(`${STRIKE_MESSAGE}`);
-      Console.readLine(`${END_MESSAGE}\n`, (answer) => {
-        const convertNumberInput = Number(answer);
-        if (convertNumberInput == 1) {
-          this.play();
-        } else if (convertNumberInput == 2) {
-          return Console.close();
-        }
-      });
-    } else if (strike === 0 && ball === 0) {
+      this.gameOver();
+    } else {
+      this.printStrikeBall(strike, ball);
+    }
+
+    this.getPlayerInput();
+  }
+
+  gameOver() {
+    Console.print(`${GAMEOVER_MESSAGE}`);
+    Console.readLine(`${END_MESSAGE}\n`, (answer) => {
+      const convertNumberInput = Number(answer);
+      if (convertNumberInput == 1) {
+        this.play();
+      } else if (convertNumberInput == 2) {
+        return Console.close();
+      }
+    });
+  }
+
+  printStrikeBall(strike, ball) {
+    if (strike === 0 && ball === 0) {
       Console.print('낫싱');
     } else if (!strike && ball) {
       Console.print(`${ball}볼`);
@@ -161,8 +173,6 @@ class App {
     } else {
       Console.print(`${ball}볼 ${strike}스트라이크`);
     }
-
-    this.getPlayerInput();
   }
 }
 
