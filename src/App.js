@@ -89,17 +89,23 @@ class App {
       : "낫싱";
   }
 
-  play() {
-    let userNumber;
+  afterGameEnded() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        const parsedAnswer = parseInt(answer, 10);
 
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.setComputerNumber();
+        if (parsedAnswer === 1) {
+          this.setGame();
+          return;
+        }
 
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-      userNumber = parseInt(number, 10);
-      const hint = this.getHint(userNumber);
-      MissionUtils.Console.print(hint);
-    });
+        if (parsedAnswer === 2) return;
+
+        MissionUtils.Console.print("1 혹은 2만 입력하세요.");
+        this.afterGameEnded();
+      }
+    );
   }
 }
 
