@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class Computer {
     constructor(){
         this.balls=[];
