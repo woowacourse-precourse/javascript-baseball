@@ -39,18 +39,22 @@ class App {
       Console.print('낫싱');
       return;
     }
+    let text = '';
 
     for (let i = 0; i < 2; i++) {
       if (gameResult[i] === 0) continue;
 
+      text += gameResult[i];
       switch (i) {
         case 0:
-          Console.print(gameResult[i] + '볼 ');
+          text += '볼 ';
           break;
         case 1:
-          Console.print(gameResult[i] + '스트라이크');
+          text += '스트라이크';
       }
     }
+
+    Console.print(text);
   }
 
   calculateGameResult(result) {
