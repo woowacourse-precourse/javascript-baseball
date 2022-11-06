@@ -7,7 +7,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
     MakeQuizNumber() {
         let quizNumber = "";
-
         for (let i = 0; i < 3; i++) {
             let randomIntToString = MissionUtils.Random.pickNumberInRange(
                 1,
@@ -20,8 +19,21 @@ class App {
         return quizNumber;
     }
 
+    IsValidInput(input) {
+        return Number(input) >= 100 && Number(input) < 1000;
+    }
+
+    InputNumber() {
+        MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+            if (!this.IsValidInput(answer)) {
+                throw "잘못된 수를 입력하였습니다.";
+            }
+        });
+    }
+
     play() {
         this.MakeQuizNumber();
+        this.InputNumber();
     }
 }
 
