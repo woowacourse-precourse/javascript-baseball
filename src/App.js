@@ -19,11 +19,16 @@ class App {
     Console.print('숫자 야구 게임을 시작합니다.');
     try {
       // 게임 진행 콘솔
-      this.computer.createNumbers();
-      this.guess();
+      this.playGame();
     } catch (error) {
       Console.print(error);
     }
+  }
+
+  playGame() {
+    // 게임 진행 콘솔
+    this.computer.createNumbers();
+    this.guess();
   }
 
   guess() {
@@ -31,14 +36,15 @@ class App {
       // 문제 없는 값인지 체크
       isValidUserInput(userInput);
       this.user.setNumber(userInput);
-      const { strike, ball } = checkAnswer(this.user.number, this.computer.number);
+      const answerResult = checkAnswer(this.user.number, this.computer.number);
+      const resultPrint = parseResultToString(answerResult);
 
-      Console.print(`Strike : ${strike}, Ball : ${ball}`);
-      Console.print(this.computer.number);
-      Console.print(this.user.number);
+      Console.print(resultPrint);
+      // Console.print(this.computer.number);
+      // Console.print(this.user.number);
+
       // 게임끝 재시작 콘솔
-      if (strike === 3) return this.selectContinue();
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      if (answerResult.strike === 3) return this.selectContinue();
       this.guess();
     });
   }
@@ -49,15 +55,29 @@ class App {
   }
 
   selectContinue() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
-      Console.print(`input : ${userInput}`);
       const playContinue = isValidContinueOption(userInput);
-      if (playContinue) return this.play();
+      if (playContinue) return this.playGame();
 
       return this.end();
     });
   }
 }
+
+const parseResultToString = (answerResult) => {
+  const textArray = ['볼', '스트라이크'];
+  const answerArray = Object.entries(answerResult);
+  const answerStringArray = answerArray.map(([_, value], index) => {
+    if (!value) return;
+    return `${value}${textArray[index]}`;
+  });
+
+  const parsedResult = answerStringArray.filter((i) => i);
+  if (!parsedResult.length) return '낫싱';
+
+  return parsedResult.join(' ');
+};
 
 const app = new App();
 app.play();

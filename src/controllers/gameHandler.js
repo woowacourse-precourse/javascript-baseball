@@ -46,8 +46,8 @@ const isDuplicated = (userInput) => {
 
 /* Compare UserNumbers with ComputerNumbers */
 const checkAnswer = (userNumbers, computerNumbers) => {
-  let strike = 0;
   let ball = 0;
+  let strike = 0;
   userNumbers.forEach((number) => {
     const sameIndex = isSameIndex(number, userNumbers, computerNumbers);
     if (!computerNumbers.includes(number)) return;
@@ -57,7 +57,7 @@ const checkAnswer = (userNumbers, computerNumbers) => {
     ball += 1;
   });
 
-  return { strike, ball };
+  return { ball, strike };
 };
 
 const isSameIndex = (number, userNumbers, computerNumbers) => {
