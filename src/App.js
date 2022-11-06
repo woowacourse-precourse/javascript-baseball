@@ -24,6 +24,20 @@ const strike_cnt = (input_num, computer_num) => {
   return result_cnt
 }
 
+const gm_result = (input_num, computer_num) => {
+  let ball = ball_cnt(input_num, computer_num)
+  let strike = strike_cnt(input_num, computer_num)
+  if (ball === 0 && strike === 0){
+      return "낫싱"
+  } else if (ball !== 0 && strike === 0) {
+      return `${ball}볼`
+  } else if (ball === 0 && strike !== 0) {
+      return `${strike}스트라이크`
+  } else if (ball !== 0 && strike !== 0) {
+      return `${ball}볼 ${strike}스트라이크`
+  }
+}
+
 class App {
   play() {}
 }
