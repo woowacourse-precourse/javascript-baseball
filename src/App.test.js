@@ -85,3 +85,59 @@ describe('사용자 숫자 입력 검증', () => {
     }).not.toThrow();
   });
 });
+
+describe('볼 카운트 계산', () => {
+  test('낫싱', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '456';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 0, strike: 0 });
+  });
+
+  test('1스트라이크', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '156';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 0, strike: 1 });
+  });
+
+  test('1볼', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '451';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 1, strike: 0 });
+  });
+
+  test('1볼 1스트라이크', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '152';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 1, strike: 1 });
+  });
+
+  test('3스트라이크', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '123';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 0, strike: 3 });
+  });
+
+  test('3볼', () => {
+    const app = new App();
+    app.answer = '123';
+    app.guess = '312';
+    app.calculateBallCount();
+
+    expect(app.ballCount).toStrictEqual({ ball: 3, strike: 0 });
+  });
+});

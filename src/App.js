@@ -32,6 +32,20 @@ class App {
       throw new Error('잘못된 입력입니다.');
     }
   }
+
+  calculateBallCount() {
+    const ballCount = { ball: 0, strike: 0 };
+
+    [...this.guess].forEach((number, index) => {
+      if (this.answer.indexOf(number) === index) {
+        ballCount.strike += 1;
+      } else if (this.answer.includes(number)) {
+        ballCount.ball += 1;
+      }
+    });
+
+    this.ballCount = ballCount;
+  }
 }
 
 module.exports = App;
