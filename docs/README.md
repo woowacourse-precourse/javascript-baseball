@@ -1,3 +1,13 @@
+
+
+<div align="center">
+
+  ## 야구 게임 흐름도 
+
+  <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FkwNk2%2FbtrQuI2zrsE%2FZFE2W5brXV9r3Xkja5SoS1%2Fimg.png" width="500px">
+
+</div>
+
 ## 기능 목록 정리 
 
 1. 게임 처음 시작 초기화 및 안내 출력 기능
