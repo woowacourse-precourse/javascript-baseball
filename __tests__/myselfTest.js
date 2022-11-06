@@ -89,42 +89,68 @@ describe('숫자 야구 게임', () => {
     //   });
     // });
 
-    test("예외 테스트 1", () => {
-      const randoms = [3, 6, 9];
-      const answers = ["1234"];
+    // test("예외 테스트 1", () => {
+    //   const randoms = [3, 6, 9];
+    //   const answers = ["1234"];
   
-      mockRandoms(randoms);
-      mockQuestions(answers);
+    //   mockRandoms(randoms);
+    //   mockQuestions(answers);
   
-      expect(() => {
-        const app = new App();
-        app.play();
-      }).toThrow();
-    });
+    //   expect(() => {
+    //     const app = new App();
+    //     app.play();
+    //   }).toThrow();
+    // });
 
-    test("예외 테스트 2", () => {
-      const randoms = [3, 6, 9];
-      const answers = ["a23"];
+    // test("예외 테스트 2", () => {
+    //   const randoms = [3, 6, 9];
+    //   const answers = ["a23"];
   
-      mockRandoms(randoms);
-      mockQuestions(answers);
+    //   mockRandoms(randoms);
+    //   mockQuestions(answers);
   
-      expect(() => {
-        const app = new App();
-        app.play();
-      }).toThrow();
-    });
+    //   expect(() => {
+    //     const app = new App();
+    //     app.play();
+    //   }).toThrow();
+    // });
 
-    test("예외 테스트 3", () => {
-      const randoms = [3, 6, 9];
-      const answers = ["2"];
+    // test("예외 테스트 3", () => {
+    //   const randoms = [3, 6, 9];
+    //   const answers = ["2"];
+  
+    //   mockRandoms(randoms);
+    //   mockQuestions(answers);
+  
+    //   expect(() => {
+    //     const app = new App();
+    //     app.play();
+    //   }).toThrow();
+    // });
+
+    test("게임 종료 후 재시작", () => {
+      const randoms = [3, 6, 9, 7, 2, 1];
+      const answers = ["245", "135", "136", "368", "369", "1", "597", "721", "2"];
+      const logSpy = getLogSpy();
+      const messages = [
+        "낫싱",
+        "1볼",
+        "2볼",
+        "2스트라이크",
+        "3스트라이크",
+        "1볼",
+        "3스트라이크",
+        "게임 종료",
+      ];
   
       mockRandoms(randoms);
       mockQuestions(answers);
   
-      expect(() => {
-        const app = new App();
-        app.play();
-      }).toThrow();
+      const app = new App();
+      app.play();
+  
+      messages.forEach((output) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
     });
 })
