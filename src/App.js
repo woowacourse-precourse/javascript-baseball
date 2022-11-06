@@ -76,10 +76,11 @@ class App {
     exceptionHandler(userInput) {
         if (userInput.length !== 3) return 1
 
-        let isNumber = 0
+        let checkString=0
         userInput.map((user) => {
-            if (isNaN(Number(user))) return 1
+            if (isNaN(user)) checkString=1;
         })
+        if(checkString===1) return 1
 
         if (userInput.includes('0')) return 1
 
