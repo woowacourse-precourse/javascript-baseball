@@ -34,7 +34,6 @@ class App {
       console.log("입력: ", this.user.numbers);
 
       this.referee.judge(this.computer.numbers, this.user.numbers)
-      console.log(this.referee.ball, this.referee.strike)
 
       if (this.referee.strike === 3) {
         Console.print('3스트라이크');
@@ -43,6 +42,12 @@ class App {
         return;
       } else if (this.referee.strike === 0 && this.referee.ball === 0) {
         Console.print('낫싱');
+      } else if (this.referee.strike === 0) {
+        Console.print(`${this.referee.ball}볼`);
+      } else if (this.referee.ball === 0) {
+        Console.print(`${this.referee.strike}스트라이크`);
+      } else {
+        Console.print(`${this.referee.ball}볼 ${this.referee.strike}스트라이크`);
       }
 
       this.match();
