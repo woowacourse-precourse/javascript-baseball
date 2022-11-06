@@ -34,7 +34,6 @@ class App {
     console.log('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     Console.readLine('', (isRestart) => {
       handleUserInputException(isRestart, 'getRestart');
-
       if (isRestart === '1') {
         this.play();
       } else {
