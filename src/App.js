@@ -13,7 +13,6 @@ function init (MissionUtils){
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
     computer = checkarr(computer, number);
   }
-  MissionUtils.Console.print(computer);
   return computer
 }
 
@@ -122,8 +121,5 @@ function checkdiffnum(input) {
     throw new Error("3자리 숫자 모두 다르게 입력하세요");
   }
 }
-
-var a = new App();
-a.play();
 
 module.exports = App;
