@@ -1,4 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const MESSAGE = require("./constants/message");
 
 class App {
   constructor() {
@@ -22,7 +23,7 @@ class App {
 
   requestAnswer(message) {
     Console.readLine(message, (answer) => {
-      if (answer.length !== 3) throw new Error("입력 에러! 숫자 3자리를 입력해주세요!");
+      if (answer.length !== 3) throw new Error(MESSAGE.ERROR.ANSWER_LENGTH_MUST_BE_THREE);
       this.userAnswer = answer.split("").map(Number);
 
       this.compareAnswer(this.answer, this.userAnswer);
