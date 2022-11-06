@@ -38,3 +38,50 @@ describe('사용자 숫자 입력', () => {
     );
   });
 });
+
+describe('사용자 숫자 입력 검증', () => {
+  test('3자리가 아닌 숫자', () => {
+    const app = new App();
+    app.guess = '1234';
+
+    expect(() => {
+      app.checkGuess();
+    }).toThrow('잘못된 입력입니다.');
+  });
+
+  test('중복된 숫자', () => {
+    const app = new App();
+    app.guess = '111';
+
+    expect(() => {
+      app.checkGuess();
+    }).toThrow('잘못된 입력입니다.');
+  });
+
+  test('1~9가 아닌 숫자', () => {
+    const app = new App();
+    app.guess = '012';
+
+    expect(() => {
+      app.checkGuess();
+    }).toThrow('잘못된 입력입니다.');
+  });
+
+  test('숫자가 아닌 입력', () => {
+    const app = new App();
+    app.guess = 'abc';
+
+    expect(() => {
+      app.checkGuess();
+    }).toThrow('잘못된 입력입니다.');
+  });
+
+  test('올바른 입력', () => {
+    const app = new App();
+    app.guess = '123';
+
+    expect(() => {
+      app.checkGuess();
+    }).not.toThrow();
+  });
+});

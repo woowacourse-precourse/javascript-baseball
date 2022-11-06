@@ -22,6 +22,16 @@ class App {
       this.guess = input;
     });
   }
+
+  checkGuess() {
+    if (
+      this.guess.length !== 3
+      || new Set(this.guess).size !== 3
+      || [...this.guess].some((number) => number < '1' || number > '9')
+    ) {
+      throw new Error('잘못된 입력입니다.');
+    }
+  }
 }
 
 module.exports = App;
