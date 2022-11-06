@@ -23,6 +23,25 @@ class ErrorCheck {
   static isNothing(STRIKE, BALL) {
     return STRIKE === BASIC_NUMBER.INIT && BALL === BASIC_NUMBER.INIT;
   }
+
+  static guessError(userInput) {
+    if (this.isInvalidInputLength(userInput))
+      throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
+
+    if (this.notOnlyConsistOfNums(userInput))
+      throw new Error(ERROR_MESSAGE.TYPE_ERROR);
+
+    if (this.hasDuplication(userInput))
+      throw new Error(ERROR_MESSAGE.DUP_ERROR);
+
+    return true;
+  }
+
+  static replayError(userInput) {
+    if (this.isReplayError(userInput))
+      throw new Error(ERROR_MESSAGE.INVALID_NUM_ERROR);
+    return true;
+  }
 }
 
 exports.ErrorCheck = ErrorCheck;
