@@ -18,7 +18,7 @@ describe.only("게임 종료 테스트", () => {
   test("게임 종료 문구 출력 확인", () => {
     const logSpy = getLogSpy();
     const app = new App();
-    app.endPlayerTurn();
+    app.end();
 
     expect(logSpy).toHaveBeenCalledWith("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   });
@@ -28,7 +28,7 @@ describe.only("게임 종료 테스트", () => {
     const playSpy = jest.spyOn(app, "play");
 
     mockQuestion("1");
-    app.endPlayerTurn();
+    app.end();
 
     expect(playSpy).toBeCalled();
   });
@@ -38,7 +38,7 @@ describe.only("게임 종료 테스트", () => {
     const closeSpy = jest.spyOn(MissionUtils.Console, "close");
 
     mockQuestion("2");
-    app.endPlayerTurn();
+    app.end();
 
     expect(closeSpy).toBeCalled();
   });
@@ -48,7 +48,7 @@ describe.only("게임 종료 테스트", () => {
 
     expect(() => {
       const app = new App();
-      app.endPlayerTurn();
+      app.end();
     }).toThrow();
   });
 });

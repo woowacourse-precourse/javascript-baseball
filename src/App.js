@@ -1,38 +1,24 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
 const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
+const getThreeRandomNumbers = require("./ThreeRandomNumbers");
 
+const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT } = require("./constants/ConstantValues");
 const {
   START_MESSAGE,
-  END_MESSAGE,
   INPUT_NUMBER_MESSAGE,
-  INPUT_RESTART_OR_END_MESSAGE,
   WRONG_INPUT_ERROR_MESSAGE,
+  END_MESSAGE,
+  INPUT_RESTART_OR_END_MESSAGE,
 } = require("./constants/Messeages");
-const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH, RESTART_INPUT, END_INPUT } = require("./constants/ConstantValues");
 
 class App {
   constructor() {
+    this.threeRandomNumbers = getThreeRandomNumbers();
     MissionUtils.Console.print(START_MESSAGE);
   }
 
   play() {
-    this.threeRandomNumbers = this.drawThreeRandomNumbers();
-
-    this.startPlayerTurn();
-  }
-
-  drawThreeRandomNumbers() {
-    const threeRandomNumber = new Set();
-    while (threeRandomNumber.size < NUMBER_LENGTH) {
-      const newNumber = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
-      threeRandomNumber.add(newNumber);
-    }
-
-    return [...threeRandomNumber].join("");
-  }
-
-  startPlayerTurn() {
     MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       if (!validateInput(input)) {
         MissionUtils.Console.close();
@@ -45,15 +31,15 @@ class App {
       MissionUtils.Console.print(resultOutput);
 
       if (strikeCount === NUMBER_LENGTH) {
-        this.endPlayerTurn();
+        this.end();
       }
       if (strikeCount !== NUMBER_LENGTH) {
-        this.startPlayerTurn();
+        this.play();
       }
     });
   }
 
-  endPlayerTurn() {
+  end() {
     MissionUtils.Console.print(END_MESSAGE);
     MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, (input) => {
       if (input !== RESTART_INPUT && input !== END_INPUT) {
@@ -61,6 +47,7 @@ class App {
         throw new Error(WRONG_INPUT_ERROR_MESSAGE);
       }
       if (input === RESTART_INPUT) {
+        this.threeRandomNumbers = getThreeRandomNumbers();
         this.play();
       }
       if (input === END_INPUT) {
@@ -70,7 +57,7 @@ class App {
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;
