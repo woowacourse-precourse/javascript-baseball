@@ -10,15 +10,15 @@
 
 1. 사용자가 서로 다른 3자리 숫자를 입력한다.
 
-## ⚙ 숫자 비교 ( Game.compareNumber(computer, player) )
+## ⚙ 숫자 비교 ( Game.checkingResult(computer, player) )
 
 1. 사용자가 올바른 숫자를 입력한다. ( Game.isValidNumber(number) )
 
-   > 1.1 컴퓨터의 숫자와 사용자가 입력한 숫자 각 자리를 비교한다.
+   > 1.1 컴퓨터의 숫자와 사용자가 입력한 숫자 각 자리를 비교한다. ( Game.compareNumber(computer, player) )
 
-   > > 1.1.1 컴퓨터의 숫자와 같으면 "3스트라이크"와 게임 종료 문구 출력한다.
+   > > 1.1.1 컴퓨터의 숫자와 같으면 "3스트라이크"와 게임 종료 문구 출력한다. ( Game.displayResult(result) )
 
-   > > 1.1.2 컴퓨터의 숫자와 다르면 결과 문구 출력한다.
+   > > 1.1.2 컴퓨터의 숫자와 다르면 결과 문구 출력한다. ( Game.displayResult(result) )
 
    > > > 1.1.2.1 같은 자리에 같은 숫자가 있으면 스트라이크 + 1 을 한다.
 

@@ -4,15 +4,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const game = new Game();
-    const randomNumber = game.setRandomNumber();
+
     let isContinue = true;
 
-    MissionUtils.Console.print(randomNumber);
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
     while (isContinue) {
-      game.start(randomNumber);
-
-      isContinue = game.over();
+      const randomNumber = game.setRandomNumber();
+      isContinue = game.start(randomNumber);
     }
   }
 }

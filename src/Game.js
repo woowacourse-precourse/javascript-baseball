@@ -5,6 +5,31 @@ class Game {
     this.computer = [];
   }
 
+  start(randomNumber) {
+    let playerNumber;
+    let insertingNumber = true;
+
+    while (insertingNumber) {
+      MissionUtils.Console.readLine("", (inputNumber) => {
+        console.log(`숫자를 입력해주세요 : ${inputNumber}`);
+        playerNumber = inputNumber;
+      });
+      MissionUtils.Console.close();
+
+      if (this.isValidNumber(playerNumber)) {
+        var splittedNumber = Array.from(playerNumber + "");
+
+        insertingNumber = this.checkingResult(randomNumber, splittedNumber);
+      } else {
+        throw new Error("잘못된 입력으로 게임 종료");
+      }
+    }
+
+    return;
+  }
+
+  over() {}
+
   setRandomNumber() {
     while (this.computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -17,12 +42,31 @@ class Game {
     return this.computer;
   }
 
-  compareNumber(computer, player) {
-    if (this.isValidNumber(player)) {
-    } else {
-      throw new Error("잘못된 입력으로 게임 종료");
+  checkingResult(computer, player) {
+    let result = [];
+
+    for (
+      let computerIndex = 0;
+      computerIndex < computer.length;
+      computerIndex++
+    ) {
+      for (let playerIndex = 0; playerIndex < player.length; playerIndex++) {
+        result = this.compareNumber(
+          [computer[computerIndex], computerIndex],
+          [player[playerIndex], playerIndex],
+          result
+        );
+      }
     }
+
+    displayResult(result);
+
+    return result[0] === 3 ? false : true;
   }
+
+  displayResult(result) {}
+
+  compareNumber(computer, player, result) {}
 
   isValidNumber(number) {
     const isNum = !isNaN(number);
@@ -30,23 +74,6 @@ class Game {
 
     return isNum && checkLength;
   }
-
-  start(randomNumber) {
-    let playerNumber;
-
-    MissionUtils.Console.readLine(
-      "숫자 야구 게임을 시작합니다.",
-      (inputNumber) => {
-        console.log(`숫자를 입력해주세요 : ${inputNumber}`);
-        playerNumber = inputNumber;
-      }
-    );
-    MissionUtils.Console.close();
-
-    this.compareNumber(randomNumber, playerNumber);
-  }
-
-  over() {}
 }
 
 module.exports = Game;
