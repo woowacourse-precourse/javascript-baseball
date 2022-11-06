@@ -139,4 +139,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("재시작/종료 입력 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["246", "135", "3", "597", "589", "2"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
