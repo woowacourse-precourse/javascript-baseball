@@ -77,9 +77,17 @@ class App {
     const [ball, strike] = userInputResult;
     if (isNothing(userInputResult)) return CASE.NOTING;
     if (isAnswer(strike)) return CASE.ALL_STRIKE;
-    if (ball) message.push(`${ball}${CASE.BALL}`);
-    if (strike) message.push(`${strike}${CASE.STRIKE}`);
+    if (ball) message.push(this.getBallHintMessage(ball));
+    if (strike) message.push(this.getStrikeHintMessage(strike));
     return message.join(" ");
+  }
+
+  getBallHintMessage(ball) {
+    return `${ball}${CASE.BALL}`;
+  }
+
+  getStrikeHintMessage(strike) {
+    return `${strike}${CASE.STRIKE}`;
   }
 
   compareUserInput(acc, cur, index) {
