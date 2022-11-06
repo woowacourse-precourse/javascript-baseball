@@ -45,6 +45,23 @@ class App {
     return result;
   }
 
+  printResult(result) {
+    let statement = "";
+    if (!result.get("볼") && !result.get("스트라이크")) {
+      statement = "낫싱";
+    } else if (result.get("스트라이크") == 3) {
+      statement = "3스트라이크";
+    } else {
+      let ball = result.get("볼") != null ? result.get("볼") + "볼" : "";
+      let strike =
+        result.get("스트라이크") != null
+          ? result.get("스트라이크") + "스트라이크"
+          : "";
+      statement = ball ? ball.concat(strike ? " " + strike : "") : strike;
+    }
+    return statement;
+  }
+
   executeError() {
     throw "유효하지 않는 숫자입니다.";
   }
@@ -52,6 +69,7 @@ class App {
   play() {
     this.computerNum = this.selectNum();
     let inputNum = 0;
+    let flag = 1;
     let compareResult = "";
     while (flag) {
       MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
@@ -59,6 +77,7 @@ class App {
         this.isValidInput(input) ? "" : this.executeError();
       });
       compareResult = this.CompareInputWithComputer(inputNum, this.computerNum);
+      MissionUtils.Console.print(this.printResult(compareResult));
     }
     MissionUtils.Console.close();
   }
