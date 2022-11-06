@@ -36,6 +36,18 @@ class App {
       this.state.inputValue
     );
     if (isInputValueValid === false) this.error();
+
+    this.match();
+  }
+
+  match() {
+    if (this.state.inputValue === this.state.answer) {
+      this.success();
+    }
+  }
+
+  success() {
+    Console.print(MESSAGE.SUCCESS);
   }
 
   error() {
