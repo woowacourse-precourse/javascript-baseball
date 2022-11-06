@@ -30,8 +30,13 @@ class App {
   getInputNumber() {
     const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
     Console.readLine(INPUT_NUMBER_MESSAGE, (inputNumber) => {
+      this.handleGameException();
       this.inputNumber = inputNumber;
     });
+  }
+  handleGameException() {
+    let errorMessage = null;
+    throw new Error(errorMessage);
   }
 }
 
