@@ -11,34 +11,6 @@ function makeProblem(NUMBER_LENGTH){
   return problemNumberList;
 }
 
-function IsStrike(answer, problem){
-  // 4. 결과 계산 - 스트라이크 검사
-  let strike_count = 0;
-  const strikeResultList = problem.map((problemNumber, idx)=>{
-    if(String(problemNumber)===answer[idx]){
-      strike_count += 1;
-      return 0;
-    }
-    return problemNumber;
-  })
-  MissionUtils.Console.print(`${strike_count}스트라이크`)
-  return strikeResultList;
-}
-
-function IsBall(answer, problem){
-  // 4. 결과 계산 - 볼 검사
-  let ball_count = 0;
-  const ballResultList = problem.map((problemNumber)=>{
-    if([...answer].includes(String(problemNumber))){
-      ball_count+= 1;
-      return 0;
-    }
-    return problemNumber;
-  })
-  MissionUtils.Console.print(`${ball_count}볼`)
-  return ballResultList;
-}
-
 function makeResult(answer, problem){
   let ball_count = 0;
   let strike_count = 0;
@@ -60,9 +32,7 @@ function getResults(problem){
   MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
     const answer = input;
     // 4. 결과 계산
-    const strikeResult = IsStrike(answer, problem);
-    const ballResult = IsBall(answer, strikeResult);
-    MissionUtils.Console.print(ballResult);
+    const result = makeResult(answer, problem);
   })
 }
 
