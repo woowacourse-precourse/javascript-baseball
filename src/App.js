@@ -31,8 +31,15 @@ class App {
     const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
     Console.readLine(INPUT_NUMBER_MESSAGE, (inputNumber) => {
       this.handleGameException(inputNumber);
-      this.inputNumber = inputNumber;
+      const joinInputNumber = this.joinNumberToString(inputNumber);
+      this.inputNumber = joinInputNumber;
     });
+  }
+  joinNumberToString(inputNumber) {
+    const stringArr = inputNumber.map((number) => String(number));
+    const joinString = stringArr.join("");
+
+    return joinString;
   }
   handleGameException(inputNumber) {
     const NOT_A_NUMBER_EXCEPTION = "입력값이 숫자가 아닙니다.";
@@ -73,6 +80,12 @@ class App {
     const [first, second, third] = inputNumber;
 
     if (first === second || second === third || first === third) {
+      return true;
+    }
+    return false;
+  }
+  isInputNumberCorrect() {
+    if (this.answer === this.inputNumber) {
       return true;
     }
     return false;
