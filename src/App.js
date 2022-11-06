@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { message } = require('./constants');
+const { RULE, GAME_MESSAGE, ERROR_MESSAGE } = require('./constants/baseball');
 
 const BaseballComputer = require('./models/BaseballComputer');
 const BaseballUser = require('./models/BaseballUser');
@@ -19,12 +19,12 @@ class App {
 
   play() {
     this.#computer.setNumbers();
-    Console.print(message.START);
+    Console.print(GAME_MESSAGE.START);
     this.readUserInput();
   }
 
   readUserInput() {
-    Console.readLine(message.INPUT, (number) => {
+    Console.readLine(GAME_MESSAGE.INPUT, (number) => {
       this.#user.setNumbers(number);
       this.#setBallStrikeCount();
 
@@ -33,7 +33,7 @@ class App {
       Console.print(countMessage);
 
       if (this.#ballStrikeCount.strike === 3) {
-        Console.print(message.CORRECT);
+        Console.print(GAME_MESSAGE.CORRECT);
         this.readRestartInput();
       }
 
@@ -51,18 +51,18 @@ class App {
   }
 
   readRestartInput() {
-    Console.readLine(message.FINISH, (input) => {
-      if (input === '1') {
+    Console.readLine(GAME_MESSAGE.FINISH, (input) => {
+      if (input === RULE.RESTART) {
         this.play();
         return;
       }
 
-      if (input === '2') {
+      if (input === RULE.END) {
         Console.close();
         return;
       }
 
-      throw new Error('유효하지 않은 값을 입력했습니다.');
+      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
     });
   }
 }

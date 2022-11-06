@@ -1,4 +1,4 @@
-const { rule } = require('../constants');
+const { RULE, ERROR_MESSAGE } = require('../constants/baseball');
 
 class BaseballUser {
   constructor() {
@@ -13,15 +13,15 @@ class BaseballUser {
 
   static #validateNumber(numbers) {
     if (BaseballUser.#isIncludeCharacter(numbers) || BaseballUser.#isIncludeZero(numbers)) {
-      throw new Error('1-9의 숫자를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.EXTRA_CHARACTER);
     }
 
     if (BaseballUser.#isInvalidLength(numbers)) {
-      throw new Error('3자리의 숫자를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
     }
 
     if (BaseballUser.#isDuplicate(numbers)) {
-      throw new Error('중복된 값이 포함되어 있습니다.');
+      throw new Error(ERROR_MESSAGE.DUPLICATE);
     }
   }
 
@@ -34,7 +34,7 @@ class BaseballUser {
   }
 
   static #isInvalidLength(numbers) {
-    return numbers.length !== rule.LENGTH;
+    return numbers.length !== RULE.LENGTH;
   }
 
   static #isIncludeZero(numbers) {

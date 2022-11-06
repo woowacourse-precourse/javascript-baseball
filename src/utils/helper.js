@@ -1,4 +1,4 @@
-const { message } = require('../constants');
+const { GAME_MESSAGE } = require('../constants/baseball');
 
 class BaseballHelper {
   static calculateBallStrikeCount(computerNumbers, userNumbers) {
@@ -22,11 +22,11 @@ class BaseballHelper {
   }
 
   static getCountMessage({ ball, strike }) {
-    const ballMessage = `${ball}${message.BALL}`;
-    const strikeMessage = `${strike}${message.STRIKE}`;
+    const ballMessage = `${ball}${GAME_MESSAGE.BALL}`;
+    const strikeMessage = `${strike}${GAME_MESSAGE.STRIKE}`;
 
     if (ball === 0 && strike === 0) {
-      return message.NOTHING;
+      return GAME_MESSAGE.NOTHING;
     }
 
     if (ball > 0 && strike === 0) {

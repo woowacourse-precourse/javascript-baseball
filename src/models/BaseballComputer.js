@@ -1,5 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { rule } = require('../constants');
+const { RULE } = require('../constants/baseball');
 
 class BaseballComputer {
   constructor() {
@@ -9,8 +9,8 @@ class BaseballComputer {
   setNumbers() {
     const numbers = new Set();
 
-    while (numbers.size < rule.LENGTH) {
-      const number = Random.pickNumberInRange(rule.RANGE_START, rule.RANGE_END);
+    while (numbers.size < RULE.LENGTH) {
+      const number = Random.pickNumberInRange(RULE.RANGE_START, RULE.RANGE_END);
       numbers.add(String(number));
     }
 
