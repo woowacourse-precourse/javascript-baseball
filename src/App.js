@@ -5,9 +5,9 @@ class App {
   static hintString;
 
   play() {
-    MissionUtils.Console.print('숫자를 야구게임을 시작합니다.');
-    this.answer = this.pickComputerAnswer();
-    this.inputPlayerNum();
+    MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
+    this.answer = this.generateComputerAnswer();
+    this.inputPlayerNumber();
   }
 
   generateComputerAnswer(){
