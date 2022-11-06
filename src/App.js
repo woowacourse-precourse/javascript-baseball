@@ -28,6 +28,10 @@ class App {
     return userNumber.length === 3;
   }
 
+  checkRange(userNumber) {
+    return !userNumber.includes('0');
+  }
+
   play() {
     this.makeRandomNumbers();
     this.getUserNumbers();
