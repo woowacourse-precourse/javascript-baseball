@@ -45,10 +45,10 @@ class App {
   CompareNumber(My_Number,Computer_Number){
     let strike=0;
     let ball=0;
-    for(let i=0;i<3;i++){
-      const find1 = My_Number.indexOf(Computer_Number[i]);
-      if(find1>=0){
-        if(find1===i){
+    for(let place=0;place<3;place++){
+      const find = My_Number.indexOf(Computer_Number[place]);
+      if(find>=0){
+        if(find===place){
           strike++;
         }else{
           ball++;
@@ -63,6 +63,7 @@ class App {
   }
   AllCorrect(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      console.log("len",answer.length)
       answer=Number(answer)
       if(answer===1){
         this.Computer_Number=[]
