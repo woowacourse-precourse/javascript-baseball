@@ -160,4 +160,40 @@ describe("숫자 야구 게임", () => {
       app.gameOver();
     }).toThrow();
   });
+
+  test("입력값 중 2개의 숫자를 맞힌 경우, 2볼을 반환한다.", () => {
+    const app = new App();
+    app.computerNumber = ["4", "5", "2"];
+    app.playerNumber = ["2", "4", "3"];
+    const testResult = app.getHint();
+
+    expect(testResult).toContain("2볼");
+  });
+
+  test("입력값 중 1개의 자리와 숫자를 맞혔을 경우, 1스트라이크를 반환한다.", () => {
+    const app = new App();
+    app.computerNumber = [1, 5, 9];
+    app.playerNumber = [2, 3, 9];
+    const testResult = app.getHint();
+
+    expect(testResult).toContain("1스트라이크");
+  });
+
+  test("입력값 중 1개의 숫자와 1개의 자리, 숫자를 맞혔을 경우, 1볼 1스트라이크를 반환한다.", () => {
+    const app = new App();
+    app.computerNumber = [3, 5, 9];
+    app.playerNumber = [2, 3, 9];
+    const testResult = app.getHint();
+
+    expect(testResult).toContain("1볼", "1스트라이크");
+  });
+
+  test("입력값 중 하나도 맞히지 못한 경우, 낫싱을 반환한다.", () => {
+    const app = new App();
+    app.computerNumber = [3, 6, 9];
+    app.playerNumber = [2, 1, 4];
+    const testResult = app.getHint();
+
+    expect(testResult).toContain("낫싱");
+  });
 });
