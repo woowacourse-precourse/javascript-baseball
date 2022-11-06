@@ -20,7 +20,13 @@ const RESTART_OPTION = {
   end: '2',
 };
 
+const IS_ANSWER = {
+  wrong: false,
+  correct: true,
+};
+
 exports.NUMBER_LENGTH = NUMBER_LENGTH;
 exports.ERROR_MESSAGE = ERROR_MESSAGE;
 exports.GAME_MESSAGE = GAME_MESSAGE;
 exports.RESTART_OPTION = RESTART_OPTION;
+exports.IS_ANSWER = IS_ANSWER;

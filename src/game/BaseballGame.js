@@ -4,6 +4,7 @@ const {
   NUMBER_LENGTH,
   GAME_MESSAGE,
   RESTART_OPTION,
+  IS_ANSWER,
 } = require('../constant/constant');
 const inputValidator = require('../input/validator');
 const Calculator = require('./Calculator');
@@ -42,18 +43,18 @@ class BaseballGame {
     if (!ball && !strike) {
       Console.print(GAME_MESSAGE.nothing);
 
-      return false;
+      return IS_ANSWER.wrong;
     }
 
     if (strike === NUMBER_LENGTH) {
       Console.print(`${strikeMessage}\n` + GAME_MESSAGE.correct);
 
-      return true;
+      return IS_ANSWER.correct;
     }
 
     Console.print(`${ballMessage}${strikeMessage}`);
 
-    return false;
+    return IS_ANSWER.wrong;
   }
 
   askRestart() {
