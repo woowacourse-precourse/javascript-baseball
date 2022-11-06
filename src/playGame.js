@@ -16,7 +16,7 @@ const playGame = (computerNum) => {
     if(resultMSG === '3스트라이크') { // 정답일 때
         restartOrQuitGame();
     } else { // 정답이 아닐 때
-        playGame();
+        playGame(computerNum);
     }
 }
 
