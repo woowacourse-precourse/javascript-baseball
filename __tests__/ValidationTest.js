@@ -28,7 +28,7 @@ describe('입력값 유효성 검증 테스트', () => {
     mockQuestion('1234');
     expect(() => {
       const app = new App();
-      app.getUserInput();
+      app.askUserInput();
     }).toThrow();
   });
 });
