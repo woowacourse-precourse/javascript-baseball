@@ -34,6 +34,7 @@ class BaseballGame {
       this.user.saveUserInput(answer);
 
       this.exceptionHandler.checkUserInputRedundancy(answer);
+      this.exceptionHandler.checkInvalidNumber(answer);
 
       if (this.exceptionHandler.checkUserInputLength(answer)) {
         this.checkBallStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);

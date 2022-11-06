@@ -1,4 +1,4 @@
-const { USER_INPUT_LENGTH } = require("./Constant");
+const { USER_INPUT_LENGTH, INVALID } = require("./Constant");
 
 class ExceptionHandler {
   checkUserInputRedundancy(answer) {
@@ -19,6 +19,14 @@ class ExceptionHandler {
 
   checkValidInput(answer) {
     if (answer != 1 && answer != 2) throw new Error();
+  }
+
+  checkInvalidNumber(answer) {
+    answer.split("").forEach((digit) => {
+      if (digit == INVALID) {
+        throw new Error();
+      }
+    });
   }
 }
 
