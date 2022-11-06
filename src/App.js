@@ -11,8 +11,7 @@ class App {
   }
 
   play() {
-    const computerNumber = this.generateRandomNumber();
-    this.inputNumber(computerNumber);
+    this.gameStart();
   }
 
   generateRandomNumber() {
@@ -96,6 +95,11 @@ class App {
     return resultMessages.join(" ");
   }
 
+  gameStart() {
+    const computerNumber = this.generateRandomNumber();
+    this.inputNumber(computerNumber);
+  }
+
   gameOver() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     this.askRestart();
@@ -106,7 +110,7 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
         if (answer === "1") {
-          this.play();
+          this.gameStart();
           return;
         }
         if (answer === "2") {
