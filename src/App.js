@@ -1,9 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
+const GET_COMPUTER_NUM = require('./Baseball/computerNum');
 const inputCheck = require('./Baseball/inputCheck');
 
 class App {
   constructor() {
     this.userInputNum = '';
+    this.COMPUTER_NUM;
   }
 
   play() {
@@ -12,6 +14,11 @@ class App {
   }
 
   startGame() {
+    this.COMPUTER_NUM = GET_COMPUTER_NUM.getComputerRandomNum();
+    this.playGame();
+  }
+
+  playGame() {
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       this.userInputNum = answer;
       const IS_VALID_INPUT = inputCheck.checkInputValidation(this.userInputNum);
@@ -21,7 +28,7 @@ class App {
       }
 
       if (IS_VALID_INPUT) {
-        this.startGame();
+        this.playGame();
       }
     });
   }
@@ -30,4 +37,4 @@ class App {
 const NUM_BASEBALL = new App();
 NUM_BASEBALL.play();
 
-module.exports = App;
+module.exports = NUM_BASEBALL;
