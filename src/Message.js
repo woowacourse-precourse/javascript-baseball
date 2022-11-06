@@ -20,6 +20,10 @@ class Message {
   static printEnd() {
     Console.print(END_MESSAGE);
   }
+
+  static throwError() {
+    throw new Error(ERROR_MESSAGE);
+  }
 }
 
 module.exports = Message;
