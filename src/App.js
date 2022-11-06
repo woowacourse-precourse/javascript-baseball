@@ -50,8 +50,8 @@ class App {
       MissionUtils.Console.print(playerArr);
       const answer = this.makeRandomNumber();
       MissionUtils.Console.print(answer);
-      const gameResult = this.showGameResult(playerArr, answer)
-      
+      //const gameResult = this.showGameResult(playerArr, answer)
+      const gameResult = '3볼3스트라이크';
       MissionUtils.Console.print(gameResult);
       if(gameResult == '3볼3스트라이크') {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
