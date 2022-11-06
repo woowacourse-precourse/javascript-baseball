@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GAME_RESULT = require('./Baseball/gameResult');
 const GET_COMPUTER_NUM = require('./Baseball/computerNum');
-const inputCheck = require('./Baseball/inputCheck');
+const INPUT_CHECK = require('./Baseball/inputCheck');
 
 class App {
   constructor() {
@@ -22,7 +22,9 @@ class App {
   playGame() {
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       this.userInputNum = answer;
-      const IS_VALID_INPUT = inputCheck.checkInputValidation(this.userInputNum);
+      const IS_VALID_INPUT = INPUT_CHECK.checkInputValidation(
+        this.userInputNum
+      );
 
       if (IS_VALID_INPUT === false) {
         throw new Error('유효하지 않은 숫자를 입력했습니다.');

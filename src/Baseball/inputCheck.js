@@ -14,5 +14,5 @@ class inputValidation {
   }
 }
 
-const inputCheck = new inputValidation();
-module.exports = inputCheck;
+const INPUT_CHECK = new inputValidation();
+module.exports = INPUT_CHECK;
