@@ -93,41 +93,35 @@ class App {
     const RESTART = '1';
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-      try {
-        // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
-        if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
-        
-        score = App.calculateScore(computerNum, userInput);
-        
-        if (App.isThreeStrike(score)) {
-          MissionUtils.Console.readLine('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-            (selectInput) => {
-              try{
-                if (!App.isOneOrTwo(selectInput)) throw new Error('Input is invalid')
-                if (selectInput === RESTART) {
-                  App.restartGame();
-                  return;
-                }
-                App.finishGame();
-              } catch(error){
-                MissionUtils.Console.print('입력값이 1 또는 2가 아닙니다.');
-                App.finishGame();
-              }
-            });
-        }
+      // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
+      if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
 
-        if (!App.isThreeStrike(score)) {
-          const ZERO_SCORE_MESSAGE = '낫싱';
-          const SCORE_MESSAGE = `${score.ball}볼 ${score.strike}스트라이크`;
-          let resultMessage = App.isZeroScore(score) ? ZERO_SCORE_MESSAGE : SCORE_MESSAGE ;
-          MissionUtils.Console.print(resultMessage);
-          App.playGame(computerNum);
-          return;
-        }
+      score = App.calculateScore(computerNum, userInput);
       
-      } catch(error) {
-        MissionUtils.Console.print('입력값이 1부터 9까지 서로 다른 수로 이루어진 세 자릿수가 아닙니다.');
-        App.finishGame();
+      if (App.isThreeStrike(score)) {
+        MissionUtils.Console.readLine('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+          (selectInput) => {
+            try{
+              if (!App.isOneOrTwo(selectInput)) throw new Error('Input is invalid')
+              if (selectInput === RESTART) {
+                App.restartGame();
+                return;
+              }
+              App.finishGame();
+            } catch(error){
+              MissionUtils.Console.print('입력값이 1 또는 2가 아닙니다.');
+              App.finishGame();
+            }
+          });
+      }
+
+      if (!App.isThreeStrike(score)) {
+        const ZERO_SCORE_MESSAGE = '낫싱';
+        const SCORE_MESSAGE = `${score.ball}볼 ${score.strike}스트라이크`;
+        let resultMessage = App.isZeroScore(score) ? ZERO_SCORE_MESSAGE : SCORE_MESSAGE ;
+        MissionUtils.Console.print(resultMessage);
+        App.playGame(computerNum);
+        return;
       }
     });
   }
@@ -146,3 +140,5 @@ class App {
 }
 
 module.exports = App;
+const app = new App();
+app.play();
