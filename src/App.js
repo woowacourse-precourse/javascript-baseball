@@ -40,13 +40,13 @@ class App {
             this.user = userInput.split("");
             Console.print(this.user);
             this.isValidNumber(userInput);
-            this.throwingResult();
+            this.ballStrikeCount();
         });
     }
 
     isValidNumber(userInput) {
         Console.print("isValidNumber()-------------------");
-        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightlength(userInput)) {
+        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput)) {
             throw new Error(MESSAGE.ERROR);
         }
     }
@@ -63,8 +63,8 @@ class App {
         return userInput.length !== 3;
     }
 
-    throwingResult() {
-        Console.print("throwingResult()-----------------");
+    ballStrikeCount() {
+        Console.print("ballStrikeCount()-----------------");
         this.judgeStrike();
         this.judgeBall();
         const strikeCount = this.strike;
