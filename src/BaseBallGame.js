@@ -131,5 +131,4 @@ class BaseBallGame{
   }
 }
 
-export default BaseBallGame;
-
+module.exports = BaseBallGame;

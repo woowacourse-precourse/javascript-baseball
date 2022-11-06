@@ -1,4 +1,4 @@
-import BaseBallGame from "./BaseBallGame";
+const BaseBallGame = require('./BaseBallGame'); 
 
 class App {
   play() {
