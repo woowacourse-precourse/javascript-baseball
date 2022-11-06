@@ -59,4 +59,6 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  MissionUtils.Console.close();
 });
