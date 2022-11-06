@@ -32,7 +32,15 @@ class App {
       if (this.user.length !== 3) {
         throw Error("3글자로 입력해주세요.");
       }
+      this.checkResult();
     });
+  }
+  checkResult() {
+    const balls = this.countBalls();
+    const strikes = this.countStrikes();
+
+    this.result = this.computeResult(balls, strikes);
+    this.printResult(this.result);
   }
   countBalls() {
     let balls = 0;
