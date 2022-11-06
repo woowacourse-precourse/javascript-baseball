@@ -1,7 +1,7 @@
 const Render = require("./Render");
 const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
-const Computer = require("./ComputerInput");
+const ComputerInput = require("./ComputerInput");
 
 function numToArr(num) {
   return [...String(num)];
@@ -9,7 +9,7 @@ function numToArr(num) {
 
 class App {
   constructor() {
-    this.computer = Computer();
+    this.computerInput = ComputerInput();
     this.firstTry = true;
   }
 
@@ -35,7 +35,7 @@ class App {
 
       const gameJudgment = new GameJudgment({
         user: this.userNum,
-        computer: this.computer,
+        computerInput: this.computerInput,
       });
 
       const [ballCount, strikeCount] = gameJudgment.judgement();
@@ -60,7 +60,7 @@ class App {
 
           if (this.replayQnAResult === "1") {
             this.firstTry = true;
-            this.computer = Computer();
+            this.computerInput = ComputerInput();
             this.play();
           }
 
