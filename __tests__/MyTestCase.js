@@ -8,9 +8,9 @@ describe("build_answer 테스트", () => {
     });
     test("배열 객체의 타입이 숫자인지 확인", () => {
         const result = app.build_answer();
-        expect(result[0]).any(number);
-        expect(result[1]).any(number);
-        expect(result[2]).any(number);
+        expect(result[0]).toEqual(expect.any(Number));
+        expect(result[1]).toEqual(expect.any(Number));
+        expect(result[2]).toEqual(expect.any(Number));
     });
     test("중복없는 세자리 인지 확인", () => {
         const result = app.build_answer();
@@ -23,6 +23,10 @@ describe("build_answer 테스트", () => {
         expect(result[1]).toBeLessThan(10);
         expect(result[2]).toBeLessThan(10);
     });
+    test("첫 숫자가 0이 아닌지 확인", () => {
+        const result = app.build_answer();
+        expect(result[0]).not.toEqual(0);
+    });
 })
 describe("choice_answer 테스트", () => {
     test("3자리 배열 인지 확인", () => {
@@ -31,12 +35,9 @@ describe("choice_answer 테스트", () => {
     });
     test("배열 객체의 타입이 숫자인지 확인", () => {
         const result = app.choice_answer(123);
-        expect(result[0]).any(Number);
-        expect(result[1]).any(Number);
-        expect(result[2]).any(Number);
-    });
-    test("입력값이 중복있을떄 예외확인", () => {
-        expect(app.choice_answer(222)).toThrow();
+        expect(result[0]).toEqual(expect.any(Number));
+        expect(result[1]).toEqual(expect.any(Number));
+        expect(result[2]).toEqual(expect.any(Number));
     });
     test("각 개체가 한자리 숫자인지 확인", () => {
         const result = app.choice_answer(123);
