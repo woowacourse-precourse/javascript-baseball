@@ -4,20 +4,19 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 function App() {
   this.state = {
     computer: [],
-    isGameContinue: true,
   };
   this.play = () => {
+    const computer = setComputerNumber();
+    this.setState({ computer });
     Console.print("숫자 야구 게임을 시작합니다.");
     Console.readLine("숫자를 입력해주세요: ", userInputCallBack);
   };
 
   const userInputCallBack = (input) => {
     const [isValidate, message] = checkUserInputValidation(input); // 값 검사 여기서 막히면 error throw
-    if (!isValidate) {
-      throw new Error(message);
-    }
+    if (!isValidate) throw new Error(message);
 
-    const [strikeCount, ballCount] = compareInputWithComputer(input);
+    const [strikeCount, ballCount] = getStrikeAndBallCount(input);
 
     if (!strikeCount && !ballCount) Console.print("낫싱");
     else {
@@ -44,7 +43,7 @@ function App() {
       this.setState({ computer: setComputerNumber() });
       Console.readLine("숫자를 입력해주세요: ", userInputCallBack);
     } else if (result === "2") {
-      this.setState({ isGameContinue: false });
+      Console.print("게임을 종료합니다.");
       Console.close();
     }
   };
@@ -78,7 +77,7 @@ function App() {
     } else if (!userInputReg.test(userInput)) {
       message = "1-9 사이의 값을 입력해주세요.";
       result = false;
-    } else if (dupleSet.length !== 3) {
+    } else if (dupleSet.size !== 3) {
       message = "서로 다른 값을 입력해주세요";
       result = false;
     }
@@ -97,17 +96,15 @@ function App() {
       else return acc;
     }, 0);
   };
+  const convertStringToNumberArray = (string) => {
+    return string.split("").map((char) => +char);
+  };
 
-  const compareInputWithComputer = (input) => {
-    const userInput = input.split("").map((data) => +data);
+  const getStrikeAndBallCount = (input) => {
+    const userInput = convertStringToNumberArray(input);
     const strikeCount = getStrikeCount(userInput, this.state.computer);
     const ballCount = getBallCount(userInput, this.state.computer);
     return [strikeCount, ballCount];
-  };
-
-  this.init = () => {
-    const computer = setComputerNumber();
-    this.setState({ computer });
   };
 
   this.setState = (nextState) => {
@@ -116,10 +113,6 @@ function App() {
       ...nextState,
     };
   };
-
-  this.init();
 }
-const app = new App();
-app.play();
 
-// module.exports = App;
+module.exports = App;
