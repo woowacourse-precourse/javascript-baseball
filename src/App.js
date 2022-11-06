@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Console = MissionUtils.Console;
 
 class App {
   constructor() {
@@ -11,7 +12,7 @@ class App {
 
   play() {
     if (this.playFirstTime) {
-      MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+      Console.print('숫자 야구 게임을 시작합니다.');
     }
     this.createAnswerNumber();
     this.getUserNumber();
@@ -29,7 +30,7 @@ class App {
 
   getUserNumber() {
     this.USER_NUMBER = [];
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', userinput => {
+    Console.readLine('숫자를 입력해주세요 : ', userinput => {
       this.USER_NUMBER = userinput.split('').map(Number);
       errorCheck(this.USER_NUMBER);
       this.compareNumbers(this.USER_NUMBER);
@@ -64,8 +65,8 @@ class App {
     const isThreeStrike = this.strikeCount === 3;
 
     if (isThreeStrike) {
-      MissionUtils.Console.print('3스트라이크');
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      Console.print('3스트라이크');
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return this.askRestartOrExit();
     }
     return false;
@@ -75,7 +76,7 @@ class App {
     const isNoting = this.strikeCount === 0 && this.ballCount === 0;
 
     if (isNoting) {
-      MissionUtils.Console.print('낫싱');
+      Console.print('낫싱');
       return this.getUserNumber();
     }
     return false;
@@ -85,7 +86,7 @@ class App {
     const isBall = this.strikeCount === 0 && this.ballCount !== 0;
 
     if (isBall) {
-      MissionUtils.Console.print(`${this.ballCount}볼`);
+      Console.print(`${this.ballCount}볼`);
       return this.getUserNumber();
     }
     return false;
@@ -96,7 +97,7 @@ class App {
       this.strikeCount !== 0 && this.ballCount === 0 && this.strikeCount !== 3;
 
     if (isStrike) {
-      MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
+      Console.print(`${this.strikeCount}스트라이크`);
       return this.getUserNumber();
     }
     return false;
@@ -110,27 +111,23 @@ class App {
       this.strikeCount < 3;
 
     if (isStrikeAndBall) {
-      MissionUtils.Console.print(
-        `${this.ballCount}볼 ${this.strikeCount}스트라이크`,
-      );
+      Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
       return this.getUserNumber();
     }
     return false;
   }
 
   askRestartOrExit() {
-    MissionUtils.Console.print(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-    );
-    MissionUtils.Console.readLine('', userInput => {
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', userInput => {
       if (userInput === '1') {
         this.playFirstTime = false;
         return this.play();
       }
       if (userInput === '2') {
-        return MissionUtils.Console.close();
+        return Console.close();
       }
-      return MissionUtils.Console.close();
+      return Console.close();
     });
   }
 }
