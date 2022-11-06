@@ -1,5 +1,10 @@
 class App {
   play() {}
+  checkUserNumberAndCompare(userNumber, computerNumber) {
+    this.checkCorrectNumber(userNumber);
+    this.compareUserAndComputer (userNumber, computerNumber);
+  }
+  
   userInput(computerNumber) {
     STD.readLine('숫자를 입력해주세요 : ', userNumber => {
       this.checkUserNumberAndCompare(userNumber, computerNumber);
