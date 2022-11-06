@@ -14,6 +14,16 @@ function makeTarget(){
   return [...tempArr];
 }
 
+function readData(target){
+  let isAnswer = false;
+
+  while(!isAnswer){
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) =>{
+      isAnswer = handleData(answer, target);
+    });
+  }
+}
+
 
 
 
@@ -23,7 +33,10 @@ class App {
     let isRepeat = true;
 
     while(isRepeat){
-      const target = makeTarget(););
+      const target = makeTarget();
+      readData(target);
+
+
 
     }
   }
