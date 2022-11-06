@@ -25,8 +25,8 @@ class App {
   inputNumberFromUser() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       const validation = new Validation();
-      validation.isValidationSingleDigitNaturalNumber(inputNumber);
-      validation.isValidationNumberWithoutDuplicate(inputNumber);
+      validation.isSingleDigitNaturalNumber(inputNumber);
+      validation.isNumberWithoutDuplicate(inputNumber);
       this.playBaseBall(inputNumber);
     });
   }
@@ -64,7 +64,7 @@ class App {
     const valiation = new Validation();
     if (inputNumber === "1") return this.reStartGame(inputNumber);
     if (inputNumber === "2") return this.exitGame(inputNumber);
-    return valiation.isValidationConfirmInput();
+    return valiation.isConfirmInput();
   }
 
   reStartGame() {

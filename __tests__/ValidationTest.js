@@ -4,21 +4,21 @@ describe("예외 테스트", () => {
   test("예외테스트 : 중복되는 숫자가 있는 경우", () => {
     expect(() => {
       const valiation = new Validation();
-      valiation.isValidationNumberWithoutDuplicate("122");
+      valiation.isNumberWithoutDuplicate("122");
     }).toThrow("서로 다른 3개의 숫자를 입력해주세요");
   });
 
   test("예외테스트 : 빈 문자열이 있는 경우", () => {
     expect(() => {
       const valiation = new Validation();
-      valiation.isValidationSingleDigitNaturalNumber("12 ");
+      valiation.isSingleDigitNaturalNumber("12 ");
     }).toThrow("1에서 9까지의 자연수를 입력해주세요");
   });
 
   test("예외테스트 : 0이 포함될 경우", () => {
     expect(() => {
       const valiation = new Validation();
-      valiation.isValidationSingleDigitNaturalNumber("120");
+      valiation.isSingleDigitNaturalNumber("120");
     }).toThrow("1에서 9까지의 자연수를 입력해주세요");
   });
 
@@ -26,7 +26,7 @@ describe("예외 테스트", () => {
     expect(() => {
       const valiation = new Validation();
 
-      valiation.isValidationConfirmInput("3");
+      valiation.isConfirmInput("3");
     }).toThrow("새로 시작할려면 1, 종료하려면 2를 입력해주세요.");
   });
 });
