@@ -21,7 +21,6 @@ const ERROR = {
   NOTUNIQUE: '중복된 숫자가 없도록 입력해주세요. 게임 종료',
   NUMBER_RANGE: '1에서 9사이의 숫자만 입력해주세요. 게임 종료',
   RESTART_RANGE: '1 또는 2를 입력해주세요. 게임 종료',
-  DEFAULT: '잘못된 값을 입력하셨습니다. 게임 종료',
 };
 
 module.exports = { RESULT, END_OPTION, MESSAGE, ERROR };
