@@ -20,10 +20,26 @@ class App {
     sayStart();
 
     let computerInput = ComputerPicksNumber();
-    
+
+    function evaluateInput(input) {
+      let inputString = input.toString();
+      let inputLength = inputString.length;
+      let [a, b, c] = inputString.split("");
+      let isNumber = isNaN(input);
+      if (isNumber === true) {
+        return false;
+      }else if (inputLength !== 3) {
+        return false;
+      } else if (a === b || b === c || a === c) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
       const userInput = input;
-      const isUserInputValid = evaluateInput(userInput);
+      MissionUtils.Console.print(evaluateInput(userInput));
     });
   };
 };
