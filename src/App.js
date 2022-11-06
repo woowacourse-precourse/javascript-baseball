@@ -28,6 +28,11 @@ function isvalidation(userNum) {
   //중복된숫자는 없는지
 }
 
+function throwError() {
+  throw new Error("잘못된 값을 입력하였습니다.");
+  // 가능하면 try..catch..finally 로 수정
+}
+
       }
       }
   }
