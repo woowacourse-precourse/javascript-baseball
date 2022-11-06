@@ -7,28 +7,26 @@ class App {
   END = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
   AGAIN_OR_END = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
 
-  answer = "";
+  answer = [];
   userInput = "";
 
   play() {
-    if (this.answer === "") {
+    if (this.answer.length === 0) {
       this.print(this.START);
-      this.answer = this.generateAnswer();
-      console.log(this.answer);
+      this.generateAnswer();
     }
 
+    console.log(this.answer);
     this.getInput(this.REQUEST_NUMBER, (userInput) => {
       if (this.isValidInput(userInput)) {
         this.userInput = userInput;
         this.print(this.calculateCount(userInput));
       }
-
       if (this.isGameEnd()) {
         this.print(this.END);
         this.askPlayOrExit();
         return;
       }
-
       this.play();
     });
   }
@@ -37,11 +35,10 @@ class App {
     let ball = 0,
       strike = 0;
 
-    Array.from(userInput)
-    .forEach((number, index) => {
-      if (this.answer.indexOf(number) === index) {
+    Array.from(userInput).forEach((number, index) => {
+      if (this.answer.indexOf(Number(number)) === index) {
         strike += 1;
-      } else if (this.answer.includes(number)) {
+      } else if (this.answer.includes(Number(number))) {
         ball += 1;
       }
     });
@@ -58,14 +55,18 @@ class App {
   }
 
   isGameEnd() {
-    return this.answer === this.userInput;
+    return Array.from(this.userInput)
+      .map((char) => Number(char))
+      .every((number, index) => number === this.answer[index]);
   }
 
   generateAnswer() {
-    const numbers = new Set();
-    while (numbers.size < 3) numbers.add(Random.pickNumberInRange(1, 9));
+    while (this.answer.length !== 0) this.answer.shift();
 
-    return Array.from(numbers).join("");
+    while (this.answer.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!this.answer.includes(number)) this.answer.push(number);
+    }
   }
 
   getInput(question, callback) {
@@ -99,8 +100,10 @@ class App {
 
   askPlayOrExit() {
     this.getInput(this.AGAIN_OR_END, (userInput) => {
-      if (userInput === "1") this.play();
-      else Console.close();
+      if (userInput === "1") {
+        this.generateAnswer();
+        this.play();
+      } else Console.close();
     });
   }
 
@@ -109,11 +112,6 @@ class App {
   }
 }
 
-function startApp() {
-  const app = new App();
-  app.play();
-}
-
-startApp();
+// new App().play();
 
 module.exports = App;
