@@ -74,6 +74,16 @@ describe("야구 게임 테스트", () => {
     }).toThrow();
   });
 
+  test("예외사항: 0이 포함된 숫자를 입력함", () => {
+    const computer = "123";
+    const user = "012";
+
+    expect(() => {
+      const app = new App();
+      app.isError(user, computer);
+    }).toThrow();
+  });
+
   test("점수 카운트하기", () => {
     const computer = "589";
     const user = "597";
