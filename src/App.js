@@ -9,12 +9,6 @@ class App {
     this.createAnswer();
   }
 
-  judgeResult(threeStrike) {
-    if (threeStrike) return this.endingOption();
-    if (!threeStrike) return this.enterNumber();
-    throw new Error();
-  }
-
   createAnswer() {
     this.answer = [];
     while (this.answer.length < 3) {
@@ -27,6 +21,12 @@ class App {
     return this.enterNumber();
   }
 
+  enterNumber() {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      return this.inputCheck(input);
+    });
+  }
+
   inputCheck(inputNumber) {
     if (inputNumber.length !== 3) throw new Error();
     const INPUT_ARRAY = inputNumber.split("").map((x) => {
@@ -34,12 +34,6 @@ class App {
       return parseInt(x, 10);
     });
     return this.compare(INPUT_ARRAY);
-  }
-
-  enterNumber() {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      return this.inputCheck(input);
-    });
   }
 
   compare(numberArr) {
@@ -63,6 +57,12 @@ class App {
     Console.print(resultText);
     const RESULT = resultText === "3스트라이크";
     return this.judgeResult(RESULT);
+  }
+
+  judgeResult(threeStrike) {
+    if (threeStrike) return this.endingOption();
+    if (!threeStrike) return this.enterNumber();
+    throw new Error();
   }
 
   endingOption() {
