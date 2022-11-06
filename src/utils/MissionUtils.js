@@ -28,4 +28,12 @@ const validateLength = (target, setLength) => {
   return false;
 };
 
+const validateOverlapped = (target) => {
+  const setTarget = new Set(target);
+  if (target.length === setTarget.size) {
+    return true;
+  }
+  return false;
+};
+
 module.exports = { getComputerNumber };
