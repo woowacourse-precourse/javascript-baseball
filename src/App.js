@@ -7,6 +7,10 @@ const verifyInputNumber = require("./utils/verifyInputNumber");
 class App {
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.gamePrepare();
+  }
+
+  gamePrepare() {
     const randomNum = makeRandomNumber();
     this.gameStart(randomNum.toString());
   }
@@ -39,7 +43,7 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (userInput) => {
-        if (userInput === "1") return this.play();
+        if (userInput === "1") return this.gamePrepare();
         else if (userInput === "2") return Console.close();
         return this.inputErrorException();
       }
