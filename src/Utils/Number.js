@@ -20,6 +20,9 @@ class NumberUtils {
     if (new Set(this.NumberToArray(number)).size !== 3) {
       throw "중복되지 않는 숫자로 입력해주세요";
     }
+    if (this.NumberToArray(number).includes(0)) {
+      throw "1부터 9까지만 입력해주세요.";
+    }
   }
 
   getRandomBaseballNumber() {
