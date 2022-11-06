@@ -82,28 +82,33 @@ class App {
       );
     };
 
+    const printCount = (ball, strike) => {
+      if (ball === 0 && strike === 0) {
+        MissionUtils.Console.print('낫싱');
+        result();
+      }
+      if (ball > 0 && strike === 0) {
+        MissionUtils.Console.print(`${ball}볼`);
+        result();
+      }
+      if (ball === 0 && strike > 0 && strike < 3) {
+        MissionUtils.Console.print(`${strike}스트라이크`);
+        result();
+      }
+      if (ball > 0 && strike > 0) {
+        MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+        result();
+      }
+    };
+
     const result = () => {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
         const USER = condition(userInput);
         const BALL = countBall(COMPUTER, USER);
         const STRIKE = countStrike(COMPUTER, USER);
 
-        if (BALL === 0 && STRIKE === 0) {
-          MissionUtils.Console.print('낫싱');
-          result();
-        }
-        if (BALL > 0 && STRIKE === 0) {
-          MissionUtils.Console.print(`${BALL}볼`);
-          result();
-        }
-        if (BALL === 0 && STRIKE > 0 && STRIKE < 3) {
-          MissionUtils.Console.print(`${STRIKE}스트라이크`);
-          result();
-        }
-        if (BALL > 0 && STRIKE > 0) {
-          MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
-          result();
-        }
+        printCount(BALL, STRIKE);
+
         if (STRIKE === 3) {
           MissionUtils.Console.print(`${STRIKE}스트라이크\n🎉🥳정답입니다!🥳🎉 게임 종료.`);
           restartOrEnd();
