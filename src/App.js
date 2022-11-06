@@ -1,5 +1,4 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-// const { ValidateUserInput } = require("./ValidateInput");
 
 function isValidUserInput(userInput) {
   const ERROR_TEXT = new Error('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
@@ -19,36 +18,51 @@ function isValidUserInput(userInput) {
   return userNumbers.map(Number);
 }
 
-class RandomSelectNumbersByComputer {
+class BaseballGame {
+  constructor() {
+    this.isThreeStrike = false;
+  }
+
   randomSelectComputerNumbers() {
     const selectedNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
 
     return selectedNumber;
   }
-}
 
-module.exports = RandomSelectNumbersByComputer;
-
-class BaseballGame {
-  constructor() {
-    this.computerNumbers =
-      new RandomSelectNumbersByComputer().randomSelectComputerNumbers();
-  }
+  printResult(strikeCount, ballCount) {
+    if (strikeCount === 0 && ballCount === 0) Console.print("낫싱");
+    else if (strikeCount > 0 && ballCount === 0) Console.print(`${strikeCount}스트라이크`);
+    else if (ballCount > 0 && strikeCount === 0) Console.print(`${ballCount}볼`);
+    else Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+  };
 
   playGame() {
     Console.print('숫자 야구 게임을 시작합니다.');
-    Console.print(this.computerNumbers);
-    Console.readLine("숫자를 입력해주세요 : ", this.progressTurn);
+    const computerNumbers = this.randomSelectComputerNumbers();
+    Console.print(computerNumbers);
+    this.inputUserNumbers(computerNumbers);
   }
 
-  progressTurn(userInput) {
-    const userNumbers = isValidUserInput(userInput);
-    console.log(userNumbers);
-
-    // this.validateUserInput.isValidUserInput(userInput);
-    // Console.print(this.validateUserInput.userNumbers);
+  inputUserNumbers(computerNumbers) {
+    Console.readLine("숫자를 입력해주세요 : ", userInput => {
+      const userNumbers = isValidUserInput(userInput);
+      this.progressTurn(userNumbers, computerNumbers);
+    });
   }
 
+  progressTurn(userNumbers, computerNumbers) {
+    let strikeCount = 0;
+    let ballCount = 0;
+    userNumbers.map((number, index) => {
+      if (number === computerNumbers[index]) {
+        strikeCount++;
+      } else if (computerNumbers.includes(number)) {
+        ballCount++;
+      }
+    });
+    this.printResult(strikeCount, ballCount);
+    (strikeCount === 3) ? Console.close() : this.inputUserNumbers(computerNumbers);
+  }
 }
 
 module.exports = BaseballGame;
