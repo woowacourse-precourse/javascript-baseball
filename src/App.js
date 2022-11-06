@@ -33,8 +33,20 @@ function throwError() {
   // 가능하면 try..catch..finally 로 수정
 }
 
+function replay() {
+  Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+    (userNum) => {
+      if (userNum === "1") {
+        return play();
       }
+      if (userNum === "2") {
+        return exit();
       }
+    }
+  );
+}
+
   }
 
 class App {
