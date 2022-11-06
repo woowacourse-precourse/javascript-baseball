@@ -102,13 +102,13 @@ function notthing(ball_strike_result){
 }
 
 function restart(){
-  const app = new App();
-  
+  const APP = new App();
+
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(inputNumber) => {
     restartNumber = inputNumber;
   })
   if(restartNumber == 1){
-    return app.play();
+    return APP.play();
   }
   if(restartNumber == 2){
     MissionUtils.Console.print("게임 종료");
