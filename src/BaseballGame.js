@@ -59,23 +59,16 @@ class BaseballGame {
     } else throw new Error("1 또는 2만 입력해주세요.");
   };
 
-  playGame = (isThreeStrike) => {
+  playGame = () => {
+    let inputNumberComment = "숫자를 입력해주세요 : ";
+
     if (this.isFirstGame) {
       this.isFirstGame = false;
-      Console.readLine(
-        "숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ",
-        this.playTurn
-      );
+      inputNumberComment =
+        "숫자 야구 게임을 시작합니다.\n" + inputNumberComment;
     }
 
-    if (isThreeStrike) {
-      Console.readLine(
-        "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        this.inputRestartOrEnd
-      );
-    }
-
-    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
+    Console.readLine(inputNumberComment, this.playTurn);
   };
 }
 
