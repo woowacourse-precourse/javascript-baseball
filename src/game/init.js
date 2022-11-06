@@ -25,7 +25,45 @@ const judgeBalls = (computerNumber, userNumber) => {
         MissionUtils.Console.print('3스트라이크');
         return askReplay();
     }
+    const computerNumbersArray = computerNumber.split('');
+    const userNumbersArray = userNumber.split('');
+    printBallStrike(computerNumbersArray, userNumbersArray);
     playGame(computerNumber);
+}
+
+const printBallStrike = (computerNumbersArray, userNumbersArray) => {
+    let text = '';
+    let textArray = [];
+    let ball = 0;
+    let strike = 0;
+    for (let computerIndex = 0; computerIndex < 3; computerIndex++) {
+        for (let userIndex = 0; userIndex < 3; userIndex++) {
+            if (computerNumbersArray[computerIndex] === userNumbersArray[userIndex]) {
+                if (computerIndex === userIndex) {
+                    strike++;
+                }
+                else {
+                    ball++;
+                }
+            }
+        }
+    }
+
+    if (ball !== 0) {
+        textArray.push(`${ball}볼`)
+    }
+    if (strike !== 0) {
+        textArray.push(`${strike}스트라이크`)
+    }
+
+    if (textArray.length > 0) {
+        text = textArray.join(' ')
+    }
+    else {
+        text = '낫싱'
+    }
+    
+    MissionUtils.Console.print(text);
 }
 
 const isValidBallNumber = (answer) => {
