@@ -15,4 +15,15 @@ const startGame = () => {
   return;
 };
 
+const generateAnswer = (props) => {
+  const answer = [];
+  while (answer.length < 3) {
+    const num = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!answer.includes(num)) {
+      answer.push(num);
+    }
+  }
+  return answer.join("");
+};
+
 module.exports = App;
