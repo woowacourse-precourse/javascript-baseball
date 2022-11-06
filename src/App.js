@@ -41,6 +41,9 @@ class App {
                 this.process();
             } else if (number === '2') {
                 MissionUtils.Console.close();
+            } else {
+                const exception = new Exception(number);
+                exception.checkReplayInputException();
             }
         });
     }
@@ -72,7 +75,7 @@ class App {
     }
     verification(input) {
         const exception = new Exception(input);
-        exception.checkException();
+        exception.checkInputException();
     }
 }
 
