@@ -106,6 +106,13 @@ describe("숫자 야구 게임", () => {
     }
   );
 
+  test("isZeroScore", () => {
+    expect(App.isZeroScore({ ball: 0, strike: 0,})).toEqual(true);
+    expect(App.isZeroScore({ ball: 1, strike: 0,})).toEqual(false);
+    expect(App.isZeroScore({ ball: 0, strike: 3,})).toEqual(false);
+    expect(App.isZeroScore({ ball: 1, strike: 2,})).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
