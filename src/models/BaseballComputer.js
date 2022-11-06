@@ -2,9 +2,11 @@ const { Random } = require('@woowacourse/mission-utils');
 const { rule } = require('../constants');
 
 class BaseballComputer {
-  #numbers;
+  constructor() {
+    this.numbers = [];
+  }
 
-  #setNumbers() {
+  setNumbers() {
     const numbers = new Set();
 
     while (numbers.size < rule.LENGTH) {
@@ -12,15 +14,7 @@ class BaseballComputer {
       numbers.add(String(number));
     }
 
-    this.#numbers = [...numbers];
-  }
-
-  constructor() {
-    this.#setNumbers();
-  }
-
-  get numbers() {
-    return this.#numbers;
+    this.numbers = [...numbers];
   }
 }
 

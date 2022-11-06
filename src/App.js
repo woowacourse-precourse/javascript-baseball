@@ -8,6 +8,7 @@ class App {
   #computer;
 
   constructor() {
+    this.#computer = new BaseballComputer();
     this.userNumbers = [];
     this.ballStrikeCount = {
       ball: 0,
@@ -17,7 +18,7 @@ class App {
   }
 
   play() {
-    this.#computer = new BaseballComputer();
+    this.#computer.setNumbers();
     Console.print(message.START);
     this.readUserInput();
   }
