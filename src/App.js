@@ -39,36 +39,78 @@ function isValidInput(userInputArray) {
 }
 
 function numToArr(userInputNums) {
-  const userInputArray = userInputNums.split('');
+  const tmpArray = userInputNums.split('');
+  const userInputArray = tmpArray.map(element => Number(element));
   return userInputArray;
 }
 
+
+
 function userInputCallback(userInputNums, userInputArray) {
   userInputArray = numToArr(userInputNums);
-  console.log(userInputArray)
   const isValidFlag = isValidInput(userInputArray);
   if(!isValidFlag) throwError();
   return userInputArray;
 }
 
-function getUserInput() {
-  let userInputArray = []
-  try {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', async (answer) => {
-      userInputArray = await userInputCallback(answer, userInputArray)
-    })
-  } catch(error) {
-    throwError();
-  }
-  return userInputArray
+function getStrikeCount(computerRandNumsArray, userInputArray) {
+  let cnt = 0;
+  userInputArray.forEach((element, index) => {
+    if(computerRandNumsArray[index]===element) cnt += 1;
+  })
+  return cnt;
 }
 
-function getGameResult(computerRandNumsArray, userInputArray) { 
+function getBallCount(computerRandNumsArray, userInputArray) {
+  let cnt = 0;
+  userInputArray.forEach((element, index) => {
+    if(computerRandNumsArray[index]!==element
+      && computerRandNumsArray.includes(element)) cnt += 1;
+  })
+  return cnt;
+}
+
+function getGameResult(computerRandNumsArray, userInputArray) {
+  let ballCount = getBallCount(computerRandNumsArray, userInputArray);
+  let strikeCount = getStrikeCount(computerRandNumsArray, userInputArray);
+
+  console.log(computerRandNumsArray)
+  if(strikeCount === 3) {
+    MissionUtils.Console.print('3스트라이크');
+    return;
+  }
+  if(ballCount && strikeCount) {
+    MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    return;
+  }
+  if(ballCount) {
+    MissionUtils.Console.print(`${ballCount}볼`);
+    return;
+  }
+  if(strikeCount) {
+    MissionUtils.Console.print(`${strikeCount}스트라이크`);
+    return;
+  }
+  MissionUtils.Console.print('낫싱');
 }
 
 function playGame() {
   const computerRandNumsArray = makeComputerRandNums();
-  const userInputArray = getUserInput();
+  try {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', async (answer) => {
+      let userInputArray = [];
+      userInputArray = await userInputCallback(answer, userInputArray);
+      getGameResult(computerRandNumsArray, userInputArray);
+    })
+  } catch(error) {
+    throwError();
+  }
+  return
+}
+
+
+function playApp() {
+  const gameResult = playGame();
 }
 
 class App {
