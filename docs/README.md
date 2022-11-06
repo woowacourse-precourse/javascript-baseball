@@ -30,3 +30,15 @@
   - 1: 게임 다시 시작
   - 2: 종료
   - 이외의 값: throw Error
+
+<br />
+
+## 구현 방법
+
+<img src="https://imgur.com/egsbK17" />
+
+- App 클래스의 인스턴스 멤버 변수로 computer, user, game을 정의했고 각각은 Computer, User, Game 클래스의 인스턴스가 할당(바인딩) 되어있다.
+
+- Computer, User, Game 클래스는 숫자 야구 게임에서 사용되는 로직들을 모듈화한 컴포넌트들이다.
+
+- 인스턴스 메소드를 이용해 숫자 야구 게임을 구현하였다.
