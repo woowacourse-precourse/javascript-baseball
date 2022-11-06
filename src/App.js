@@ -62,9 +62,9 @@ class App {
     );
   }
 
-  errorChecker(userNumbersArr) {
+  errorChecker(usersInput) {
     for (const errorCheck in this.errorCheckList) {
-      this.errorCheckList[errorCheck](userNumbersArr);
+      this.errorCheckList[errorCheck](usersInput);
     }
   }
 

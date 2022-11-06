@@ -78,3 +78,25 @@ describe("판정 테스트", () => {
     });
   });
 });
+
+describe("예외 테스트", () => {
+  test("예외 테스트", () => {
+    const errorInputList = [
+      "1234",
+      "1",
+      "12",
+      "asd",
+      "ㅁㄴㅇ",
+      "1;2",
+      "1ㅏ2",
+      "1l2",
+    ];
+
+    errorInputList.map((errorInput) => {
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+  });
+});
