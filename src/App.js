@@ -32,15 +32,18 @@ class App {
         this.computerNumbers = parseInt(tempNumbers.join(''));
     }
 
-    isUserNumbers(computerNumbers) {
-        return Console.readLine('숫자를 입력해주세요 : ',(userNumbers) => {
-            if(isNaN(userNumbers)) throw new Error('숫자를 입력해주세요.');
-            if(userNumbers.toString().length !== MAX_SIZE) throw new Error('3자리 숫자를 입력해주세요.');
-            if(new Set(userNumbers).size !== MAX_SIZE) throw new Error('중복되지 않는 숫자를 입력해주세요.');
-            if(String(userNumbers).indexOf(0) !== -1) throw new Error('1부터 9의 숫자만 입력해주세요.');
-            parseInt(userNumbers);
-            this.isMatchNumbers(computerNumbers,userNumbers);
+    answerUserNumbers() {
+        return Console.readLine('숫자를 입력해주세요 : ',(input) => {
+            this.validateInput(input);
+            this.isMatchNumbers(parseInt(input));
         })
+    }
+
+    validateInput(input) {
+        if(isNaN(input)) throw new Error('숫자를 입력해주세요.');
+        if(input.toString().length !== MAX_SIZE) throw new Error('3자리 숫자를 입력해주세요.');
+        if(new Set(input).size !== MAX_SIZE) throw new Error('중복되지 않는 숫자를 입력해주세요.');
+        if(String(input).indexOf(0) !== -1) throw new Error('1부터 9의 숫자만 입력해주세요.');
     }
 
     isMatchNumbers(computerNumbers,userNumbers) {
@@ -51,14 +54,14 @@ class App {
         }
         if(computerNumbers !== userNumbers) {
             this.ballAndStrikeCalc(computerNumbers,userNumbers);
-            this.isUserNumbers(computerNumbers);
+            this.answerUserNumbers(computerNumbers);
         }
     }
 
     replayGame() {
         Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
         Console.readLine('', (answer) => {
-            if(answer == REPLAY_GAME_KEY) return this.isUserNumbers(this.isComputerNumbers());
+            if(answer == REPLAY_GAME_KEY) return this.answerUserNumbers(this.isComputerNumbers());
             if(answer == END_GAME_KEY) return Console.print('게임 종료');
             if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new Error('1 또는 2를 입력하세요.');
         })
