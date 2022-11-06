@@ -1,6 +1,11 @@
 const Io = require('./Io');
+const Computer = require('./player/Computer.js');
+const User = require('./player/User.js');
 class Game {
   constructor() {
+    this.io = Io;
+    this.computer = new Computer();
+    this.user = new User();
   }
 
   /**
@@ -10,7 +15,28 @@ class Game {
    * @return {} void
    * @description 게임을 시작한다. 클래스 외부에서 호출한다. 
    */
-  playCommand () {}
+  playCommand () {
+    this.computer.setNumber();
+    this.askNumber();
+  }
+
+  
+  askNumber () {
+    this.io.input('숫자를 입력해주세요 : ', this.attempt.bind(this));
+  }
+
+  attempt (input) {
+    this.user.setNumber(input);
+    const result = this.compare(this.computer.getNumber(), this.user.getNumber());
+    this.outputResult(result);
+    if (this.isEnd(result)) {
+      this.outputGameEnd();
+      this.askReplay();
+    } else {
+      this.retry();
+    }
+  }
+
   
   outputResult ({ strike, ball }) {
     if(strike === 3) {
@@ -27,9 +53,14 @@ class Game {
       this.io.output(`${ball}볼`);
     }
     if(strike !== 0 && ball !== 0) {
-      this.io.output(`${strike}스트라이크 ${ball}볼`);
+      this.io.output(`${ball}볼 ${strike}스트라이크 `);
     }
     return false;
+  }
+
+
+  outputGameEnd() {
+    this.io.output('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
   /**
@@ -55,6 +86,10 @@ class Game {
     return strike === 3;
   }
 
+  retry(){
+    this.askNumber();
+  }
+  
   askReplay () {
     this.io.input('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', this.decideReplay.bind(this));
   }
