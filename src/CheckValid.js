@@ -24,7 +24,7 @@ function checkBlank(userNum) {
   }
 }
 
-class CheckUserInput {
+class CheckInputValid {
   constructor({ userNum }) {
     this.userNum = userNum;
   }
@@ -46,4 +46,4 @@ class CheckUserInput {
     }
   }
 }
-module.exports = CheckUserInput;
+module.exports = CheckInputValid;
