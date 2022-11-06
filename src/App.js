@@ -14,6 +14,13 @@ class App {
 
   play() {
     this.computer = this.creatRandomNumber();
+    this.gameProgress();
+  }
+
+  gameProgress() {
+    this.readLine(TEXT.ENTER_NUMBER, (input) => {
+      inputValidation(input);
+    });
   }
 
   print(message) {
