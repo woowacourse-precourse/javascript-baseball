@@ -4,6 +4,7 @@ const User = require("./User");
 const { Referee } = require("./Referee");
 
 const isRangeError = (inputs) => inputs.length !== 3
+const isDuplicate = (inputs) => new Set(inputs).size !== inputs.length
 
 class App {
   user = new User();
@@ -32,11 +33,14 @@ class App {
 
   match () {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (isRangeError(input)) {
-        throw new Error("input must be length of 3")
-      }
-      
       this.user.numbers = input.split("")
+
+      if (isRangeError(input)) {
+        throw new Error("Input must be length of 3")
+      }
+      if (isDuplicate(input)) {
+        throw new Error("Each digit of input must be different")
+      }
 
       console.log("정답: ", this.computer.numbers);
       console.log("입력: ", this.user.numbers);
