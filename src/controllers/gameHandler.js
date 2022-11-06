@@ -3,7 +3,7 @@ const isValidContinueOption = (option) => {
   if (option === '1') return true;
   if (option === '2') return false;
 
-  throw new Error('1,2 이외의값');
+  throw new Error('옵션에 없는 값입니다.');
 };
 
 /* Check userInput is valid */

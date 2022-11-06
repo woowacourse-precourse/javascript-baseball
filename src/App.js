@@ -4,10 +4,12 @@ const {
   isValidUserInput,
 } = require('./controllers/gameHandler');
 const User = require('./players/User');
+const Computer = require('./players/Computer');
 
 class App {
   constructor() {
     this.user = new User();
+    this.computer = new Computer();
   }
 
   play() {
@@ -19,9 +21,8 @@ class App {
       Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
         // 문제 없는 값인지 체크
         isValidUserInput(userInput);
-        this.user.setUserNumber(userInput);
-        Console.print(1111111111111);
-        Console.print(this.user.number);
+        this.user.setNumber(userInput);
+        this.computer.createNumbers();
 
         // 게임끝 재시작 콘솔
         this.selectContinue();

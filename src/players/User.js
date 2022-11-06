@@ -3,11 +3,9 @@ class User {
     this.number = [];
   }
 
-  setUserNumber(userInput) {
+  setNumber(userInput) {
     this.number = userInput.split('');
   }
 }
-
-/// /////////////////////////
 
 module.exports = User;
