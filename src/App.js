@@ -6,18 +6,18 @@ class App {
   }
 
   play() {
-    this.Answer = this.makeComputerArr();
+    this.Answer = this.makeAnswer();
     console.log(this.Answer);
     this.makeInputNum();
   }
 
-  AnswerisRight(userAnswer) {
+  inputisCorrect(userAnswer) {
     if (userAnswer) return this.end();
     if (!userAnswer) return this.makeInputNum();
     throw new Error();
   }
 
-  makeComputerArr() {
+  makeAnswer() {
     this.computer = [];
     while (this.computer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
@@ -39,9 +39,9 @@ class App {
 
   makeInputNum() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      const inputArr = this.inputCheck(input);
-      const resultText = this.compare(inputArr);
-      this.AnswerisRight(resultText);
+      const inputArray = this.inputCheck(input);
+      const resultText = this.compare(inputArray);
+      this.inputisCorrect(resultText);
     });
   }
 
@@ -63,7 +63,7 @@ class App {
     return resultText === "3스트라이크";
   }
 
-  end() {
+  endOption() {
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
@@ -80,7 +80,7 @@ class App {
 }
 
 // todo
-// 변수 이름 고민하기
+// 이름 고민하기
 // 기능 분리 다시 생각하기
 // 예외 처리 기능 분리해보기
 
