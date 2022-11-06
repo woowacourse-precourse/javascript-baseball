@@ -19,7 +19,7 @@ class ExceptionHandler {
     if (answer != 1 && answer != 2) throw new Error("유효한 숫자를 입력해주세요");
   }
 
-  checkInvalidNumber(answer) {
+  checkInvalidDigit(answer) {
     answer.split("").forEach((digit) => {
       if (digit == INVALID) {
         throw new Error("1부터 9까지의 숫자를 입력해주세요");

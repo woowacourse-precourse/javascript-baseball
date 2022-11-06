@@ -76,6 +76,7 @@ class BaseballGame {
       this.askReplayorClose();
     } else {
       this.initializeBallandStrike();
+
       this.inputUserAnswer();
     }
   }
