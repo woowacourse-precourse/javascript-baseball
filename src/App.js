@@ -86,7 +86,7 @@ class App {
 
   async play() {
     this.generateThreeDigits();
-    this.runUntilGameOver();
+    await this.runUntilGameOver();
     if ((await this.askNewGame()) === "1") {
       return this.play();
     }
