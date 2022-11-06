@@ -44,6 +44,20 @@ class BaseballGame {
     return ball;
   }
 
+  isStrike(num, idx, randomNumber) {
+    return randomNumber.includes(num) && idx === [...randomNumber].indexOf(num);
+  }
+
+  countStrike(input, randomNumber) {
+    let strike = 0;
+
+    [...input].forEach((num, idx) => {
+      if (this.isStrike(num, idx, randomNumber)) strike++;
+    });
+
+    return strike;
+  }
+
   getResult(input) {
     const valid = inputValidator(input);
 
