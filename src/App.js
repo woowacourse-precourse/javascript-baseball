@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+
 class App {
   constructor() {
     this.computer = [];
@@ -6,6 +7,7 @@ class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.computer = this.setAnswer();
+    console.log(this.computer);
     this.input();
   }
 
@@ -24,9 +26,15 @@ class App {
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', userNumber => {
       const { strike, ball } = this.checkAnswer(userNumber);
-      console.log(strike, ball);
+      const IS_NOTHING = strike === 0 && ball === 0;
+      const IS_ANSWER = strike === 3;
+      if (IS_ANSWER) {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      } else if (IS_NOTHING) MissionUtils.Console.print('낫싱');
+      else MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     });
   }
+
   checkAnswer(userNumber) {
     const userNumberArr = userNumber.split('').map(Number);
     let [strike, ball] = [0, 0];
