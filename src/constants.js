@@ -23,9 +23,15 @@ const GAME = Object.freeze({
   END: 2,
 });
 
+const ERROR = Object.freeze({
+  ENTER_THREE_NUMBER: '1부터 9까지 서로 다른 숫자 3개를 입력해주세요',
+  PRESS_ONE_OR_TWO: '1 또는 2를 입력해주세요',
+});
+
 module.exports = {
   MESSAGE,
   SCORE,
   RANDOM_NUMBER,
   GAME,
+  ERROR,
 };

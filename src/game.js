@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { RANDOM_NUMBER, SCORE, GAME } = require('./constants');
+const { RANDOM_NUMBER, SCORE, GAME, ERROR } = require('./constants');
 const { MESSAGE } = require('./constants');
 
 class Game {
@@ -108,7 +108,7 @@ class Game {
         return Console.close();
       }
 
-      throw new Error('1 또는 2를 입력해주세요');
+      throw new Error(ERROR.PRESS_ONE_OR_TWO);
     });
   }
 
@@ -120,7 +120,7 @@ class Game {
       !validRange.test(numbers) ||
       diversityOfNum !== 3
     ) {
-      throw new Error('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+      throw new Error(ERROR.ENTER_THREE_NUMBER);
     }
   }
 }
