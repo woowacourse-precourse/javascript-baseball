@@ -46,7 +46,7 @@ describe("기능테스트", () => {
     const app = new App();
     const spyFn = jest.spyOn(app, "setBaseLine");
     app.continueAnswer("1");
-    expect(spyFn).toBeCalledTimes(1);
+    expect(spyFn).toBeCalled();
   });
 
   test("continueAnswer1", () => {
@@ -54,8 +54,8 @@ describe("기능테스트", () => {
     const spySetBaseLine = jest.spyOn(app, "setBaseLine");
     const spyProgressFn = jest.spyOn(app, "progress");
     app.continueAnswer("1");
-    expect(spySetBaseLine).toBeCalledTimes(1);
-    expect(spyProgressFn).toBeCalledTimes(1);
+    expect(spySetBaseLine).toBeCalled();
+    expect(spyProgressFn).toBeCalled();
   });
 
   test("continueAnswer2", () => {
@@ -63,8 +63,8 @@ describe("기능테스트", () => {
     const spySetBaseLine = jest.spyOn(app, "setBaseLine");
     const spyProgressFn = jest.spyOn(app, "progress");
     app.continueAnswer("2");
-    expect(spySetBaseLine).not.toBeCalledTimes(1);
-    expect(spyProgressFn).not.toBeCalledTimes(1);
+    expect(spySetBaseLine).not.toBeCalled();
+    expect(spyProgressFn).not.toBeCalled();
   });
 
   test("continueAnswerDefault", () => {
@@ -75,22 +75,29 @@ describe("기능테스트", () => {
   });
   test("continueQuestion", () => {
     const app = new App();
-    const spyConsole = jest.spyOn(MissionUtils.Console, "readLine");
+    const spyReadLine = jest.spyOn(MissionUtils.Console, "readLine");
     app.continueQuestion("1");
-    expect(spyConsole).toBeCalledTimes(1);
+    expect(spyReadLine).toBeCalled();
   });
 
   test("nextProgressTrue", () => {
     const app = new App();
     const spyContinueQuestion = jest.spyOn(app, "continueQuestion");
     app.nextProgress(true);
-    expect(spyContinueQuestion).toBeCalledTimes(1);
+    expect(spyContinueQuestion).toBeCalled();
   });
 
   test("nextProgressFalse", () => {
     const app = new App();
     const spyProgress = jest.spyOn(app, "progress");
     app.nextProgress(false);
-    expect(spyProgress).toBeCalledTimes(1);
+    expect(spyProgress).toBeCalled();
+  });
+
+  test("progress", () => {
+    const app = new App();
+    const spyReadLine = jest.spyOn(MissionUtils.Console, "readLine");
+    app.progress();
+    expect(spyReadLine).toBeCalled();
   });
 });
