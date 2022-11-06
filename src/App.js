@@ -30,66 +30,63 @@ function game(MissionUtils, computer) {
   MissionUtils.Console.readLine("숫자를 입력하세요 : ", function(input) { 
     check3num(input);
     checkdiffnum(input);
-  
-    for (var i = 0; i<3; i++){
-      if (computer[0] == input.charAt(i)){
-        if (i==0){
-          count[1]++;
-          break;
-        }
-        count[0]++;
-      }
-    }
-
-    for (var i = 0; i<3; i++){
-      if (computer[1] == input.charAt(i)){
-        if (i==1){
-          count[1]++;
-          break;
-        }
-        count[0]++;
-      }
-    }
-    for (var i = 0; i<3; i++){
-      if (computer[2] == input.charAt(i)){
-        if (i==2){
-          count[1]++;
-          break;
-        }
-        count[0]++;
-      }
-    }
-
-    if (count[0] == 0 && count[1] == 0){
-      MissionUtils.Console.print("낫싱");
-    }
-    else if (count[0]>0 && count[1] == 0){
-      MissionUtils.Console.print(count[0] + "볼");
-    }
-    else if (count[1]>0 && count[0] == 0){
-      MissionUtils.Console.print(count[1] + "스트라이크");
-      if (count[1] == 3){
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", function(restart) {
-          check1num(restart);
-          if (restart == 1){
-            game(MissionUtils, init(MissionUtils));
-          }
-          else if (restart == 2){
-            MissionUtils.Console.close();
-            return;
-          }
-          else{
-            throw new Error("1과 2만 입력 가능합니다");
-          }
-
-        });
-      }
-    }
-    else{
-      MissionUtils.Console.print(count[0] + "볼 " + count[1] + "스트라이크");
-    }
+    count = checknum(0, input, computer, count);
+    count = checknum(1, input, computer, count);
+    count = checknum(2, input, computer, count);
+    printball(count, MissionUtils);
     game(MissionUtils, computer);
+  });
+}
+
+function checknum(index, input, computer, count){
+  for (var i = 0; i<3; i++){
+    count = checkball(i, index, input, computer, count)
+  }
+  return count;
+}
+
+function checkball(i, index, input, computer, count){
+  if (computer[index] == input.charAt(i)){
+    count = checkstrike(i,index, count)
+  }
+  return count;
+}
+
+function checkstrike(i,index, count){
+  if (i==index){
+    count[1]++;
+  }
+  else{
+    count[0]++;
+  }
+  return count;
+}
+
+function printball(count, MissionUtils){
+  if (count[0] == 0 && count[1] == 0){
+    MissionUtils.Console.print("낫싱");
+  }
+  else if (count[0]>0 && count[1] == 0){
+    MissionUtils.Console.print(count[0] + "볼");
+  }
+  else if (count[1]>0 && count[0] == 0){
+    MissionUtils.Console.print(count[1] + "스트라이크");
+    if (count[1] == 3){
+      strike3(MissionUtils);
+    }
+
+  }
+  else{
+    MissionUtils.Console.print(count[0] + "볼 " + count[1] + "스트라이크");
+  }
+}
+
+function strike3(MissionUtils) {
+  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", function(restart) {
+    check1num(restart);
+    checkrestart(restart, MissionUtils);
+
   });
 
 }
@@ -98,6 +95,19 @@ function game(MissionUtils, computer) {
 function check1num(input) {
   if (isNaN(input) || input.length != 1){
     throw new Error("1자리 숫자를 입력하세요");
+  }
+}
+
+function checkrestart(restart, MissionUtils) {
+  if (restart == 1){
+    game(MissionUtils, init(MissionUtils));
+  }
+  else if (restart == 2){
+    MissionUtils.Console.close();
+    return;
+  }
+  else{
+    throw new Error("1과 2만 입력 가능합니다");
   }
 }
 
