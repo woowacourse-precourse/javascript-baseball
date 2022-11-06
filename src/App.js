@@ -11,8 +11,8 @@ class App {
   startGame(computerInput) {
     MissionUtils.Console.readLine(MESSAGE.INSERT_NUMBER, (userInput) => {
       if (this.checkInputValidation(userInput)) {
-        const computedResult = this.compute(computerInput, userInput);
-        MissionUtils.Console.print(computedResult);
+        const [strike, ball] = this.compute(computerInput, userInput);
+        MissionUtils.Console.print(this.showResult(strike, ball));
         if (this.isGameFinished(computerInput, userInput))
           this.restartOrExitGame();
         else this.startGame(computerInput);
@@ -73,8 +73,7 @@ class App {
   compute(computerInput, userInput) {
     const strikes = this.countStrikes(computerInput, userInput);
     const balls = this.countBalls(computerInput, userInput);
-    const result = this.showResult(strikes, balls);
-    return result;
+    return [strikes, balls];
   }
 
   restartOrExitGame() {
