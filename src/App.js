@@ -4,7 +4,13 @@ const CheckException = require('./utils');
 
 class App {
   randomArr() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3);
+    const randomNumbers = new Set();
+
+    while (randomNumbers.size < 3) {
+      randomNumbers.add(Random.pickNumberInRange(1, 9));
+    }
+
+    return [...randomNumbers];
   }
 
   askRestart() {
@@ -76,8 +82,5 @@ class App {
     return;
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
