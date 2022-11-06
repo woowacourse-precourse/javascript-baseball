@@ -11,6 +11,7 @@
 // - [x] 세개의 숫자가 모두 맞으면 종료한다.
 // - [x] 반복한다.
 // - [x] 입력 예외처리 추가
+// - [x] Missionutils 분리
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
@@ -48,30 +49,32 @@ function App() {
         ? "숫자를 입력해주세요 : "
         : "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
       (number) => {
-        if (number === "2" && this.endflag == true) {
-          MissionUtils.Console.print("게임종료");
-          MissionUtils.Console.close();
+        if (this.endflag === true) {
+          restartGame(number);
           return;
         }
-        if (number === "1" && this.endflag == true) {
-          createcomputerNumber();
-          this.endflag = undefined;
-          recursiveAsyncReadLine();
-
-          return;
-        }
-
         if (number.length !== 3) {
           throw new Error("올바른 입력이 아닙니다. 다시 입력해 주세요");
         }
-
         this.userNumber = number;
-
         checkNumber(this.computerNumber, this.userNumber);
-
         recursiveAsyncReadLine();
       }
     );
+  };
+
+  const restartGame = (number) => {
+    if (number === "2") {
+      MissionUtils.Console.print("게임종료");
+      MissionUtils.Console.close();
+      return;
+    }
+    if (number === "1") {
+      createcomputerNumber();
+      this.endflag = undefined;
+      recursiveAsyncReadLine();
+      return;
+    }
   };
 
   const createcomputerNumber = () => {
@@ -81,8 +84,6 @@ function App() {
       this.computerNumber += MissionUtils.Random.pickNumberInList([
         1, 2, 3, 4, 5, 6, 7, 8, 9,
       ]).toString();
-
-      console.log(this.computerNumber);
     }
     return;
   };
