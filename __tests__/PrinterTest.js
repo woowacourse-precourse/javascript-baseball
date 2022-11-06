@@ -15,6 +15,10 @@ describe("Printer 관련 Test", () => {
     printer = new Printer();
   });
 
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
+
   test("printNothing Test", () => {
     printer.printNothing(0, 0);
     expect(logSpy).toHaveBeenCalledWith("낫싱");
