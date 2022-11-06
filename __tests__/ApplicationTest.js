@@ -119,6 +119,14 @@ describe("숫자 야구 게임", () => {
     expect(App.isThreeStrike({ ball: 1, strike: 2,})).toEqual(false);
   });
 
+  test("isOneOrTwo", () => {
+    expect(App.isOneOrTwo('1')).toEqual(true);
+    expect(App.isOneOrTwo('2')).toEqual(true);
+    expect(App.isOneOrTwo('3')).toEqual(false);
+    expect(App.isOneOrTwo('12')).toEqual(false);
+    expect(App.isOneOrTwo('abc')).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
