@@ -26,9 +26,10 @@ class App {
         const tempNumbers = [];
         while (tempNumbers.length < MAX_SIZE) {
             const randomNumber = Random.pickNumberInRange(START_NUMBER, END_NUMBER);
-            if (!tempNumbers.includes(randomNumber)) tempNumbers.push(randomNumber);
+            if (tempNumbers.includes(randomNumber)) continue;
+            tempNumbers.push(randomNumber);
         }
-        return parseInt(tempNumbers.join(''));
+        this.computerNumbers = parseInt(tempNumbers.join(''));
     }
 
     isUserNumbers(computerNumbers) {
