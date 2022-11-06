@@ -29,10 +29,6 @@ class App {
   }
 
   solveNumber(computer) {
-    this.selectUser(computer);
-  }
-
-  selectUser(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
       this.isUserError(num, computer);
     });

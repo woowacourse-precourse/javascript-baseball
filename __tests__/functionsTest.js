@@ -49,7 +49,7 @@ describe("야구 게임 테스트", () => {
     mockQuestions(user);
 
     const app = new App();
-    app.selectUser(computer);
+    app.solveNumber(computer);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("3스트라이크"));
   });
