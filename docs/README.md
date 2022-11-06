@@ -75,3 +75,13 @@ Count.strike([4, 8, 6], [4, 6, 8]); // 1
 Count.strike([4, 8, 6], [4, 8, 9]); // 2
 Count.strike([4, 8, 6], [4, 8, 6]); // 3
 ```
+
+### `createRandomNumbers()`
+
+1부터 9까지 서로 다른 3개의 수를 배열로 반환한다.
+
+```js
+createRandomNumbers(); // [2, 7, 5]
+createRandomNumbers(); // [7, 2, 9]
+createRandomNumbers(); // [1, 3, 8]
+```
