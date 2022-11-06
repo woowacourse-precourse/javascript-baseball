@@ -25,10 +25,11 @@ class App {
       const gameResultMessage = this.getGameResultMessage(strikeCount, ballCount);
       Console.print(gameResultMessage);
 
-      if (strikeCount !== MAX_NUMBER_LENGTH) {
+      if (!this.isGameOver(strikeCount)) {
         this.play();
         return;
       }
+
       Console.print(GAME_MESSAGE.GAME_OVER);
       Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
         if (!this.isValidTrigger(trigger)) {
@@ -121,6 +122,10 @@ class App {
 
   quitGame() {
     Console.close();
+  }
+
+  isGameOver(strikeCount) {
+    return strikeCount === MAX_NUMBER_LENGTH;
   }
 }
 
