@@ -50,6 +50,28 @@ class App {
       else if (strike > 0) MissionUtils.Console.print(`${strike}스트라이크`);
       else if (ball > 0) MissionUtils.Console.print(`${ball}볼`);
       else MissionUtils.Console.print(`낫싱`);
+
+      if (strike === 3) {
+        // MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        // MissionUtils.Console.print(
+        // "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+        // );
+        let input;
+        MissionUtils.Console.readLine("", (x) => {
+          input = x;
+        });
+        MissionUtils.Console.close();
+        // MissionUtils.Console.print(`input ${input}`);
+
+        if (input.toString() === "2") {
+          MissionUtils.Console.print(`게임 종료`);
+          break;
+        } else {
+          computerNumber = getRandomNumber();
+          // MissionUtils.Console.print(`computerNumber ${computerNumber}`);
+        }
+        // break;
+      }
     }
   }
 }
