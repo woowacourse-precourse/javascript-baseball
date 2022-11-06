@@ -74,7 +74,7 @@ class App {
     this.answer = this.generateNumbers();
     this.utils.Console.print("숫자 야구 게임을 시작합니다.");
   }
-  start() {
+  input() {
     this.utils.Console.readLine("숫자를 입력해주세요: ", (inputs) => {
       this.inputs = inputs.split("").map((v) => parseInt(v));
       this.validateInput(this.inputs);
