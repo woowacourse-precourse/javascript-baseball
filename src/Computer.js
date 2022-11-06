@@ -1,4 +1,4 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class Computer {
   makeAnswer() {
@@ -10,6 +10,10 @@ class Computer {
       }
     }
     return randomNumList.join('');
+  }
+
+  getUserNumber() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {});
   }
 }
 
