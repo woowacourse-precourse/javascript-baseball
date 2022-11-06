@@ -70,6 +70,8 @@ class App {
   gameResult(strike,ball){
     if (strike == 3){
       MissionUtils.Console.print(`${strike}스트라이크`)
+      MissionUtils.Console.print(Notice.STRIKEOUT)
+      this.gameFinish()
     }
     else if (strike == 0 && ball == 0) {
       MissionUtils.Console.print("낫싱")
@@ -88,6 +90,22 @@ class App {
       this.start()
     }
   }
+  gameFinish(){
+    MissionUtils.Console.readLine(Notice.SELECTMODE,(input)=>{
+      this.Restart(input)
+    })
+  }
+  Restart(mode){
+    let num = parseInt(mode)
+    if (num == 1){
+      this.AnswerNumber = this.generateRandomnumber()
+      this.start()
+    }
+    else if(num == 2){
+      MissionUtils.Console.close()
+    }
+  }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
