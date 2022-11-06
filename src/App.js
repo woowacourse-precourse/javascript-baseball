@@ -44,6 +44,10 @@ class App {
       //볼
       const ball = []; //겹치는 수를 담을 배열
       Ball(random, input, ball);
+      //낫싱
+      if(cnt == 0 && ball == null){
+        MissionUtils.Console.print("낫싱")
+      }
     }
   }
 }
@@ -63,6 +67,14 @@ function Ball(array1, array2, n) {
     if( n != null){
       MissionUtils.Console.print('${n.length}볼 ');
     }
+}
+
+function numberToString(n, input){
+  do {
+    input.push(n % 10);
+    n = Math.floor(n / 10);
+  }while (n > 0);
+  return input;
 }
 
 module.exports = App;
