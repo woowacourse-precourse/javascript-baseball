@@ -6,9 +6,7 @@ class App {
   }
 
   play() {
-    this.Answer = this.createAnswer();
-    console.log(this.Answer);
-    this.enterNumber();
+    this.createAnswer();
   }
 
   judgeResult(threeStrike) {
@@ -20,21 +18,22 @@ class App {
   createAnswer() {
     this.answer = [];
     while (this.answer.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!this.answer.includes(number)) {
-        this.answer.push(number);
+      const NUMBER = Random.pickNumberInRange(1, 9);
+      if (!this.answer.includes(NUMBER)) {
+        this.answer.push(NUMBER);
       }
     }
-    return this.answer;
+    console.log(this.answer);
+    return this.enterNumber();
   }
 
   inputCheck(inputNumber) {
     if (inputNumber.length !== 3) throw new Error();
-    const numberArr = inputNumber.split("").map((x) => {
+    const INPUT_ARRAY = inputNumber.split("").map((x) => {
       if (Number.isNaN(x)) throw new Error();
       return parseInt(x, 10);
     });
-    return this.compare(numberArr);
+    return this.compare(INPUT_ARRAY);
   }
 
   enterNumber() {
@@ -44,13 +43,13 @@ class App {
   }
 
   compare(numberArr) {
-    const answerArr = this.Answer;
+    const ANSWER_ARRAY = this.answer;
     let ball = 0;
     let strike = 0;
     numberArr.map((number, index) => {
-      if (answerArr.includes(number)) {
-        if (number === answerArr[index]) strike += 1;
-        if (number !== answerArr[index]) ball += 1;
+      if (ANSWER_ARRAY.includes(number)) {
+        if (number === ANSWER_ARRAY[index]) strike += 1;
+        if (number !== ANSWER_ARRAY[index]) ball += 1;
       }
     });
     return this.compareResult(ball, strike);
@@ -62,8 +61,8 @@ class App {
     if (strike !== 0) resultText += `${strike}스트라이크`;
     if (resultText === "") resultText += `낫싱`;
     Console.print(resultText);
-    const result = resultText === "3스트라이크";
-    return this.judgeResult(result);
+    const RESULT = resultText === "3스트라이크";
+    return this.judgeResult(RESULT);
   }
 
   endingOption() {
