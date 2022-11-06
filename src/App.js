@@ -4,7 +4,8 @@ class App {
   play() {}
 
   playNewGame() {
-
+    const randomNum = this.getRandomThreeDigitsNumber();
+    this.readUserInputValue(randomNum);
   }
 
   readUserInputValue(randomNum){
