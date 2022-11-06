@@ -23,7 +23,7 @@ class App {
     }
     process() {
         MissionUtils.Console.readLine('숫자를 입력하세요.', (number) => {
-            this.verification(number);
+            this.verification(number, 1);
             const comment = this.match(number);
             MissionUtils.Console.print(comment);
             if (comment === THREE_STRIKE) {
@@ -42,8 +42,7 @@ class App {
             } else if (number === '2') {
                 MissionUtils.Console.close();
             } else {
-                const exception = new Exception(number);
-                exception.checkReplayInputException();
+                this.verification(number, 2);
             }
         });
     }
@@ -73,9 +72,13 @@ class App {
             return `${ball}볼 ${strike}스트라이크`;
         }
     }
-    verification(input) {
-        const exception = new Exception(input);
-        exception.checkInputException();
+    verification(input, type) {
+        const exception = new Exception(input, type);
+        if (type == 1) {
+            exception.checkInputException();
+        } else {
+            exception.checkReplayInputException();
+        }
     }
 }
 

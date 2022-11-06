@@ -24,7 +24,7 @@ const getLogSpy = () => {
     return logSpy;
 };
 
-describe('숫자 야구 게임', () => {
+describe.only('숫자 야구 게임', () => {
     test('게임 종료 후 재시작', () => {
         const randoms = [1, 3, 5, 5, 8, 9];
         const answers = ['246', '135', '1', '597', '589', '2'];
