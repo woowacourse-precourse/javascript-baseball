@@ -36,6 +36,14 @@ class App {
       .length;
   }
 
+  compareBall(input, computer) {
+    return computer.filter(
+      (value, index) =>
+        value !== Number(input[index]) &&
+        computer.includes(Number(input[index]))
+    ).length;
+  }
+
   creatRandomNumber() {
     const computer = [];
     while (computer.length < 3) {
