@@ -203,3 +203,16 @@ describe('볼 카운트 출력', () => {
     expect(spy).toHaveBeenCalledWith('3볼');
   });
 });
+
+describe('게임 종료 문구 출력', () => {
+  test('게임 종료 문구 출력', () => {
+    const spy = jest.spyOn(MissionUtils.Console, 'print');
+
+    const app = new App();
+    app.printGameEndMessage();
+
+    expect(spy).toHaveBeenCalledWith(
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+    );
+  });
+});

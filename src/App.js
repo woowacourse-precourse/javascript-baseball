@@ -60,6 +60,10 @@ class App {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
   }
+
+  printGameEndMessage() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
 }
 
 module.exports = App;
