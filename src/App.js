@@ -6,6 +6,13 @@ const MAX_VALID_NUMBER = 9;
 const MIN_VALID_NUMBER = 1;
 
 class App {
+  constructor() {
+    this.answer = undefined;
+    this.input = undefined;
+    this.ballCount = 0;
+    this.strikeCount = 0;
+  }
+
   play() {}
 
   static generateAnswer() {
@@ -59,6 +66,23 @@ class App {
       return false;
     }
     return true;
+  }
+
+  countResult() {
+    this.ballCount = 0;
+    this.strikeCount = 0;
+    for (let inputIndex = 0; inputIndex < GAME_ANSWER_LENGTH; inputIndex += 1) {
+      this.determineBallOrStrike(inputIndex);
+    }
+  }
+
+  determineBallOrStrike(index) {
+    const value = this.input[index];
+    if (this.answer[index] === value) {
+      this.strikeCount += 1;
+    } else if (this.answer.includes(value)) {
+      this.ballCount += 1;
+    }
   }
 }
 
