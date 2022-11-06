@@ -19,12 +19,25 @@ class App {
     return strikeCount;
   }
 
+  checkBall(userNumbers) {
+    let ballCount = 0;
+
+    for (let i = 0; i < PICK_LENGTH; i++) {
+      if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1) 
+        ballCount++;
+    }
+
+    return ballCount;
+  }
+
   setNumbers() {
     let strikeCount;
+    let ballCount;
     this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
       strikeCount = this.checkStrike(userNumbers);
+      ballCount = this.checkBall(userNumbers);
     });
   }
 
