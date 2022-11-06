@@ -10,6 +10,7 @@ class App {
   play() {
     this.gameStart();
     this.setComputerNum();
+    this.userInput();
   }
 
   gameStart() {
@@ -23,10 +24,14 @@ class App {
         ? ""
         : this.computerNum.push(randomNum);
     }
-    console.log(this.computerNum);
+  }
+
+  userInput() {
+    Console.readLine("숫자를 입력해주세요 : ", (inputNum) => {
+      this.userNum = inputNum;
+    });
   }
 }
-
 const app = new App();
 app.play();
 
