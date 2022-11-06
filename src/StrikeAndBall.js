@@ -9,7 +9,16 @@ function getBallCount(answer, input) {
 
   return ballCount;
 }
-function getStrikeCount(answer, input) {}
+function getStrikeCount(answer, input) {
+  let strikeCount = 0;
+  input.split("").forEach((eachNumber, index) => {
+    if (answer.includes(eachNumber) && answer.indexOf(eachNumber) === index) {
+      strikeCount++;
+    }
+  });
+
+  return strikeCount;
+}
 function getString(strike, ball) {}
 
 exports.getResult = getResult;
