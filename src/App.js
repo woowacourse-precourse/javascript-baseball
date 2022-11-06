@@ -13,9 +13,33 @@ class App {
   }
 
   startGame() {
-    let isCorrect = false;
-
     this.setRandomNumbers();
+    this.guessNumbers();
+
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        answer === "1" && this.startGame();
+      }
+    );
+  }
+
+  setRandomNumbers() {
+    const numbers = [];
+
+    while (numbers.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
+      if (!numbers.includes(number)) {
+        numbers.push(number);
+      }
+    }
+
+    this.computer = numbers;
+  }
+
+  guessNumbers() {
+    let isCorrect = false;
 
     while (!isCorrect) {
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
@@ -27,13 +51,14 @@ class App {
 
       isCorrect = memo.strike === 3;
     }
+  }
 
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (answer) => {
-        answer === "1" && this.startGame();
-      }
-    );
+  setUserNumbers(str) {
+    if (str.length > 3) {
+      throw new Error("error/over-length-user-input");
+    }
+
+    this.user = [...str].map((number) => Number(number));
   }
 
   count(computer, user) {
@@ -69,35 +94,6 @@ class App {
 
     if (memo.strike === 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    }
-  }
-
-  setRandomNumbers() {
-    this.computer = [];
-
-    while (this.computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      this.pushNumberToComputer(number);
-    }
-  }
-
-  setUserNumbers(str) {
-    if (str.length > 3) {
-      throw new Error("error/over-length-user-input");
-    }
-
-    const numbers = this.separateNumbers(str);
-    this.user = [...numbers];
-  }
-
-  separateNumbers(str) {
-    const numbers = [...str];
-    return numbers.map((number) => Number(number));
-  }
-
-  pushNumberToComputer(number) {
-    if (!this.computer.includes(number)) {
-      this.computer.push(number);
     }
   }
 }
