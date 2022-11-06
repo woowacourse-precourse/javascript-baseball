@@ -49,6 +49,22 @@ class App {
     }
   }
 
+  userInputNum() {
+    // 2. 유저가 숫자를 입력 () ~ 게임종료
+    // 3~5까지 과정 모두 포함
+    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (input) => {
+      let res = this.answer(this.checkNum(input, this.comNum));
+      MissionUtils.Console.print(res);
+      // 조건확인해서 재귀 만들기
+      // 숫자가 맞지않음 == 재귀, 숫자가 맞음 == 탈출
+      if (res != "3스트라이크") this.userInputNum();
+      else {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        return this.askRetry();
+      }
+    });
+  }
+
   play() {}
 }
 
