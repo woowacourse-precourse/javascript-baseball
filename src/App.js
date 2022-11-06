@@ -10,6 +10,14 @@ class App {
 
     render.getUser().then((num) => {
       this.num = numToArr(num);
+      const checkInputValid = new CheckInputValid({
+        userNum: this.userNum,
+      });
+      try {
+        checkInputValid.checkValidation();
+      } catch (error) {
+        throw new Error(error);
+      }
     });
   }
 }
