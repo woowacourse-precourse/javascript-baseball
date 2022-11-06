@@ -4,14 +4,14 @@
 // - [x] 랜덤수를 생성한다.
 // - [x] 숫자를 입력해주세요 메세지 출력.
 // - [x] 숫자를 입력받는다.
-// - [] 스트라이크인지 판별한다.
-// - [] 볼인지 판별한다.
-// - [] 낫싱인지 판별한다.
-// - [] 스트라이크 볼 낫싱을 출력한다.
+// - [x] 스트라이크인지 판별한다.
+// - [x] 볼인지 판별한다.
+// - [x] 낫싱인지 판별한다.
+// - [x] 스트라이크 볼 낫싱을 출력한다.
 // - [x] 세개의 숫자가 모두 맞으면 종료한다.
 // - [x] 반복한다.
 
-import MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 function App() {
   this.play = () => {
@@ -30,13 +30,22 @@ function App() {
         ? "숫자를 입력해주세요 : "
         : "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
       (number) => {
-        this.currentNumber = number;
-        this.endflag = checkNumber(this.randomNumber, this.currentNumber);
-
-        if (number === "2") {
+        if (number === "2" && this.endflag == true) {
+          MissionUtils.Console.print("게임종료");
           MissionUtils.Console.close();
           return;
         }
+        if (number === "1" && this.endflag == true) {
+          createRandomNumber();
+          this.endflag = undefined;
+          recursiveAsyncReadLine();
+
+          return;
+        }
+
+        this.currentNumber = number;
+
+        checkNumber(this.randomNumber, this.currentNumber);
 
         recursiveAsyncReadLine();
       }
@@ -55,17 +64,51 @@ function App() {
   };
 
   const checkNumber = (randomNumber, currentNumber) => {
-    console.log(randomNumber);
-
-    if (randomNumber === this.currentNumber) {
+    if (randomNumber === currentNumber) {
+      MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      return true;
+      this.endflag = true;
+      return;
     }
+
+    let strike = 0;
+    let ball = 0;
+
+    for (let index1 = 0; index1 < 3; index1++) {
+      for (let index2 = 0; index2 < 3; index2++) {
+        if (currentNumber[index1] === randomNumber[index2]) {
+          if (index1 === index2) strike++;
+          if (index1 !== index2) ball++;
+          if (index1 === index2 || index1 !== index2) {
+            this.strikecheck = true;
+            break;
+          }
+        }
+      }
+    }
+
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print("낫싱");
+      return;
+    }
+
+    let answer = "";
+
+    if (ball !== 0) {
+      answer += ball;
+      answer += "볼 ";
+    }
+    if (strike !== 0) {
+      answer += strike;
+      answer += "스트라이크";
+    }
+
+    MissionUtils.Console.print(answer);
+    return;
   };
 }
 
 const app = new App();
+app.play();
 
-app.init();
-
-//module.exports = App;
+module.exports = App;
