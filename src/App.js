@@ -24,7 +24,6 @@ class App {
       }
       computerNum.push(num);
     }
-    console.log(computerNum.join(""));
     return computerNum.join("");
   }
   getUserNum() {
