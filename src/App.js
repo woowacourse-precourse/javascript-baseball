@@ -27,7 +27,7 @@ class App {
       user_add.unshift(user_nums % 10);
       user_nums = Math.floor(user_nums/10);
     }while(user_nums != 0);
-    
+
     //중복없어야함
     let lenght_test = [...new Set(user_add)];
     if(lenght_test.length < 3){
@@ -35,6 +35,14 @@ class App {
     }
     return user_add;
   }
+  count_strike(answer, user_select) {
+    let strike = 0 ;
+    for (let i=0; i<3; i++) {
+      if(answer[i] == user_select[i]) {
+        strike = strike + 1;
+      }
+    } 
+    return strike
+  }
 }
-
 module.exports = App;
