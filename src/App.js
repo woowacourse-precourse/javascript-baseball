@@ -23,7 +23,7 @@ class App {
   }
 
   inputNumber(computerNumber) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (enteredNumber) => {
+    this.takeInput("숫자를 입력해주세요 : ", (enteredNumber) => {
       if (!this.isValidNumber(enteredNumber)) {
         throw new Error();
       }
@@ -108,7 +108,7 @@ class App {
   }
 
   askRestart() {
-    MissionUtils.Console.readLine(
+    this.takeInput(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
         if (answer === "1") {
@@ -126,6 +126,10 @@ class App {
 
   printMessage(message) {
     MissionUtils.Console.print(message);
+  }
+
+  takeInput(message, callbackFn) {
+    MissionUtils.Console.readLine(message, callbackFn);
   }
 }
 
