@@ -51,7 +51,7 @@ class App {
 
 	replayOrClose(input) {
 		checkInputIsOneOrTwo(input);
-		return input === this.RESTART ? this.createNewGame() : App.closeApp();
+		return input === this.RESTART ? this.createNewGame() : Console.close();
 	}
 
 	checkTurnInputIsValid(input) {
@@ -59,10 +59,6 @@ class App {
 		checkInputIsNumber(input);
 		checkInputExcludeCertainNumber(input, 0);
 		checkInputDuplicateNumber(input);
-	}
-
-	static closeApp() {
-		Console.close();
 	}
 }
 
