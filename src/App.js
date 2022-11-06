@@ -7,7 +7,7 @@ class App {
   NOTHING = "낫싱";
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.printMessage("숫자 야구 게임을 시작합니다.");
     this.gameStart();
   }
 
@@ -31,8 +31,7 @@ class App {
         computerNumber,
         enteredNumber
       );
-      const message = this.getResultMessage({ strike, ball });
-      MissionUtils.Console.print(message);
+      this.printMessage(this.getResultMessage({ strike, ball }));
       if (strike === 3) {
         this.gameOver();
         return;
@@ -104,7 +103,7 @@ class App {
   }
 
   gameOver() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     this.askRestart();
   }
 
@@ -123,6 +122,10 @@ class App {
         throw new Error();
       }
     );
+  }
+
+  printMessage(message) {
+    MissionUtils.Console.print(message);
   }
 }
 
