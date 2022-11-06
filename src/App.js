@@ -43,10 +43,14 @@ class GameLoop {
   constructor() {
     this.Opponent = new Computer();
     this.gameOver = false;
+    this.displayWelcomeMessage();
+  }
+
+  displayWelcomeMessage() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   start() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this._continue();
   }
 
@@ -117,5 +121,13 @@ class GameLoop {
     return false;
   }
 }
+
+function displayWelcomeMessage() {
+  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+}
+
+displayWelcomeMessage();
+const app = new App();
+app.play();
 
 module.exports = App;
