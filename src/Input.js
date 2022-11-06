@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Parse = require("./Parse");
 
 const ASK_ANSWER = "숫자를 입력해주세요 : ";
 
