@@ -157,3 +157,10 @@ userInputCompared = computerInput => {
 
 - 게임 실행 시 "숫자 야구 게임을 시작합니다." 문구 출력
 - 그 이후 userInputCompared 함수의 매개변수에 랜덤 값 넣기
+
+```
+play = () => {
+	MissionUtils.Console.print("숫자야구 게임을 시작합니다.");
+	this.userInputCompared(this.computerRandomInput());
+};
+```
