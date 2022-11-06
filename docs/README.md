@@ -14,3 +14,27 @@
   return str.length !== new Set(str).size;
   };
 ```
+
+## 2. InputValidation
+
+유저의 input 값 검사
+
+- 정수인지 확인
+- 3자리인지 확인
+- 0을 포함하는지 확인
+- 중복이 있는지 확인
+
+위의 조건이 아닐 경우 error 반환
+
+```
+inputValidation = str => {
+		if (
+			!Number.isInteger(Number(str)) ||
+			str.length !== 3 ||
+			str.includes(0) ||
+			this.isDuplicated(str)
+		) {
+			throw new Error();
+		}
+	};
+```
