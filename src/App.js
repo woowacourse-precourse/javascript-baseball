@@ -1,17 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const COMPUTER = [];
-while (COMPUTER.length < 3) {
-  const number = MissionUtils.Random.pickNumberInRange(1, 9);
-  if (!COMPUTER.includes(number)) {
-    COMPUTER.push(number);
+const generateComRandom = () => {
+  const COMPUTER = [];
+  while (COMPUTER.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!COMPUTER.includes(number)) {
+      COMPUTER.push(number);
+    }
   }
-}
-
+  return COMPUTER;
+};
+let COMPUTER = generateComRandom();
 class App {
   play() {
     this.showMessage();
     this.userInput();
+    COMPUTER = generateComRandom();
   }
   allInOne() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -128,8 +132,8 @@ class App {
   compareNumbers(userNumberArray) {
     console.log("사용자 :", userNumberArray);
     console.log("컴퓨터: ", COMPUTER);
-    let strike=0
-    let ball=0
+    let strike = 0;
+    let ball = 0;
     for (let idx = 0; idx < userNumberArray?.length; idx++) {
       let findIndex = COMPUTER.indexOf(userNumberArray[idx]);
       if (findIndex > -1) {
@@ -142,7 +146,7 @@ class App {
     }
     MissionUtils.Console.print(`스트라이크 : ${strike} 볼 : ${ball}`);
     if (strike === 3) {
-      this.gameReplay()
+      this.gameReplay();
     }
     this.userInput();
   }
@@ -157,14 +161,12 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (gameSetNumber) => {
-        if(gameSetNumber=== '1'){
-          this.play()
-        }
-        else if(gameSetNumber==='2'){
-          throw "게임을 종료합니다"
-        }
-        else{
-          throw "1,2가 아닌 입력 발생! 프로그램 종료!"
+        if (gameSetNumber === "1") {
+          this.play();
+        } else if (gameSetNumber === "2") {
+          throw "게임을 종료합니다";
+        } else {
+          throw "1,2가 아닌 입력 발생! 프로그램 종료!";
         }
       }
     );
