@@ -21,7 +21,7 @@ class App {
         this.quitGame();
         throw new Error(ERROR_MESSAGE[errorType]);
       }
-      const [strikeCount, ballCount] = this.getStrikeBallCount(this.computerInput, userInput);
+      const { strikeCount, ballCount } = this.getStrikeBallCount(this.computerInput, userInput);
       const gameResultMessage = this.getGameResultMessage(strikeCount, ballCount);
       Console.print(gameResultMessage);
 
@@ -71,7 +71,7 @@ class App {
     }
     ballCount -= strikeCount;
 
-    return [strikeCount, ballCount];
+    return { strikeCount, ballCount };
   }
   getGameResultMessage(strikeCount, ballCount) {
     if (!strikeCount && ballCount) return `${ballCount}볼`;
