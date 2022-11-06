@@ -18,7 +18,16 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputArr = getUserExecption(input);
       const score = getScore(inputArr, answer);
+      this.checkGame(score, answer);
     });
+  }
+  checkGame(score, answer) {
+    if (score.strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    } else {
+      showMessage(score);
+      this.userInput(answer);
+    }
   }
 }
 const app = new App();
