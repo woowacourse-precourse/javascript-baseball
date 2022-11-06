@@ -20,7 +20,11 @@ class App {
   getInput() {
     mConsole.readLine("숫자를 입력해주세요 : ", (pickedNumber) => {
       if (this.checkInputNumber(pickedNumber)) {
-        pickedNumber;
+        const checkedUser = pickedNumber.split("").map(Number);
+        const countResultArr = this.countInput(
+          this.computerInputNumber,
+          checkedUser
+        );
       }
     });
   }
@@ -61,6 +65,18 @@ class App {
       }
     }
     return [...computerNumber];
+  }
+
+  countInput(computerInput, userInput) {
+    let BALLS = 0;
+    let STRIKES = 0;
+    for (let idx = 0; idx < GAME_NUMBER_LENGTH; idx++) {
+      if (computerInput[idx] === userInput[idx]) STRIKES++;
+      else if (computerInput.includes(userInput[idx])) BALLS++;
+    }
+
+    let countArr = [BALLS, STRIKES];
+    return countArr;
   }
 }
 
