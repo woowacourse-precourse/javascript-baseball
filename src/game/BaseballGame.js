@@ -6,7 +6,6 @@ const Calculator = require('./Calculator');
 
 class BaseballGame {
   constructor() {
-    this.randomNumber = createRandomNumber();
     this.isCorrect = false;
     this.calculator = new Calculator();
   }
@@ -20,17 +19,14 @@ class BaseballGame {
     Console.print(GAME_MESSAGE.start);
   }
 
-  getResult(input) {
+  getResult(input, randomNumber) {
     const valid = inputValidator(input);
 
     if (!valid.isValid) {
       throw valid.message;
     }
 
-    const { ball, strike } = this.calculator.calcScore(
-      input,
-      this.randomNumber
-    );
+    const { ball, strike } = this.calculator.calcScore(input, randomNumber);
 
     this.printResult(ball, strike);
   }
@@ -56,9 +52,11 @@ class BaseballGame {
   }
 
   startGame() {
+    const randomNumber = createRandomNumber();
+
     while (!this.isCorrect) {
       Console.readLine(GAME_MESSAGE.input, (input) => {
-        this.getResult(input);
+        this.getResult(input, randomNumber);
       });
     }
 
