@@ -74,6 +74,24 @@ class App {
       return 'ball';
     }
   }
+
+  makeHintString(strike,ball){
+    let hintString;
+    if(strike==0 && ball==0){
+      hintString = '낫싱';
+    }
+    else if(strike==0){
+      hintString = `${ball}볼`;
+    }
+    else if(ball==0){
+      hintString = `${strike}스트라이크`;
+    }
+    else{
+      hintString = `${ball}볼 ${strike}스트라이크`
+    }
+    return hintString;
+  }
+
 }
 
 module.exports = App;
