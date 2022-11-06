@@ -10,18 +10,17 @@ class App {
   userInputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       this.NumberUtil.isBaseballNumber(number);
-      const result = this.compareUserAndComputerNumber(
-        number,
-        this.computerNumber
-      );
+      const result = this.compareNumber(number);
       MissionUtils.Console.print(result);
       MissionUtils.Console.close();
     });
   }
 
-  compareUserAndComputerNumber(userNumber, computerNumber) {
+  compareNumber(userNumber) {
     const userNumberArray = this.NumberUtil.NumberToArray(userNumber);
-    const computerNumberArray = this.NumberUtil.NumberToArray(computerNumber);
+    const computerNumberArray = this.NumberUtil.NumberToArray(
+      this.computerNumber
+    );
     let ball = 0;
     let strike = 0;
     const total =
