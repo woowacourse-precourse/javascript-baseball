@@ -23,11 +23,11 @@ class App {
   }
 
   play() {
+    print(this.#message.START);
     this.#gameStart();
   }
 
   #gameStart() {
-    print(this.#message.START);
     this.#setNbrOfComputer();
     this.#tryGuess();
   }
