@@ -39,6 +39,22 @@ function IsBall(answer, problem){
   return ballResultList;
 }
 
+function makeResult(answer, problem){
+  let ball_count = 0;
+  let strike_count = 0;
+  problem.forEach((problemNumber, idx)=>{
+    if([...answer].includes(String(problemNumber))){
+      ball_count += 1;
+    }
+    if(String(problemNumber)===answer[idx]){
+      strike_count += 1;
+    }
+  })
+  ball_count -= strike_count;
+  const result = [ball_count, strike_count];
+  return result;
+}
+
 function getResults(problem){
   // 3. 숫자 입력 받기
   MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
