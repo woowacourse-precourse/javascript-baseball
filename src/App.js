@@ -17,7 +17,6 @@ class BaseballGamee {
     if(userInput.includes(0)) return false;
   }
 
-
   userInput(){
     const MissionUtils = require("@woowacourse/mission-utils");
     let userInput = [];
