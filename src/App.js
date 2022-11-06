@@ -22,6 +22,42 @@ class App {
       array.push(number);
     }
   }
+
+  static getUserInput() {
+    let input;
+    MissionUtils.Console.readLine(
+      '숫자를 입력해주세요 : ',
+      (answer) => { input = answer.trim().split(''); },
+    );
+    MissionUtils.Console.close();
+
+    if (!App.isValidAnswerValue(input)) {
+      throw new Error('잘못된 입력입니다 !!');
+    }
+    return input.map(Number);
+  }
+
+  static isValidAnswerValue(array) {
+    let answer = array;
+
+    try {
+      answer = array.map(Number);
+    } catch (exception) {
+      return false;
+    }
+
+    if (!answer.reduce(
+      (prev, cur) => prev && (MIN_VALID_NUMBER <= cur) && (cur <= MAX_VALID_NUMBER),
+      true,
+    )) {
+      return false;
+    }
+
+    if (new Set(answer).size !== GAME_ANSWER_LENGTH) {
+      return false;
+    }
+    return true;
+  }
 }
 
 module.exports = App;
