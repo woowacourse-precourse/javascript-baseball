@@ -1,23 +1,35 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const { COMPUTERSTORE, USERSTORE } = require('./store');
+const { validateNumbers } = require('./error');
+const { compareNumbers } = require('./number');
+let { computerStore } = require('./store');
 
-const [STATE, SETSTATE] = COMPUTERSTORE();
+const [computerState, computerSetState] = computerStore();
 
 function extractComputerNumber() {
-    while (STATE.length < 3) {
+    while (computerState().length < 3) {
         const number = Random.pickNumberInRange(1, 9);
-        if (!STATE.includes(number)) {
-            SETSTATE(number);
+        if (!computerState().includes(number)) {
+            computerSetState(number);
         }
     }
 }
 
-function inputUserNumber() {
-    Console.readLine('숫자를 입력하세요.\n', (userNumber) => {
-        console.log(userNumber);
-        Console.close();
-    })
+function inputUserNumber(userNumber) {
+    const input = userNumber.split('').map(Number);
+    validateNumbers(input);
+
+    if (compareNumbers(input, computerState())) {
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    } else {
+        return baseballGameStart();
+    }
 }
 
-exports.extractComputerNumber = extractComputerNumber;
-exports.inputUserNumber = inputUserNumber;
+function baseballGameStart() {
+    Console.readLine('숫자를 입력해주세요 : ', inputUserNumber)
+}
+
+module.exports = {
+    extractComputerNumber,
+    baseballGameStart,
+}
