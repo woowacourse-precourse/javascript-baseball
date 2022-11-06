@@ -9,6 +9,7 @@ class Exception {
         this.isThreeLength(this.input);
         this.isDuplication(this.input);
         this.isHaveZero(this.input);
+        this.isNumber(this.input);
     }
     checkReplayInputException() {
         this.isOneOrTwo(this.input);
@@ -28,6 +29,11 @@ class Exception {
     }
     isOneOrTwo(input) {
         if (input !== '1' && input !== '2') throw new Error();
+    }
+    isNumber(input) {
+        const regex = /[^0-9]g/;
+
+        if (!regex.test(input)) throw new Error();
     }
 }
 
