@@ -38,6 +38,6 @@ describe('[S2] 유저는 올바른 게임 진행을 통해 재미를 느끼기 �
     mockQuestions(answer);
     const app = new App();
     app.play();
-    expect(userInput).toBe('123');
+    expect(app.userInput).toBe('123');
   });
 });
