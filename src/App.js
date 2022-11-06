@@ -22,7 +22,8 @@ class App {
     let ballCount = 0;
 
     for (let i = 0; i < PICK_LENGTH; i++) 
-      if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1) 
+      if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1 &&
+      this.computerNumbers.indexOf(parseInt(userNumbers[i])) != i) 
         ballCount++;
 
     return ballCount;
@@ -36,6 +37,7 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
       strikeCount = this.checkStrike(userNumbers);
       ballCount = this.checkBall(userNumbers);
+      this.printResult(strikeCount, ballCount);
     });
   }
 
