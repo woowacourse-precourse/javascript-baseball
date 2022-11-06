@@ -1,5 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { validate } = require('./utils/validation');
+const constants = require('./utils/constants');
 
 class BaseballGame {
   constructor() {
@@ -8,21 +9,21 @@ class BaseballGame {
   }
 
   start() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(constants.START_MESSAGE);
     this.computerNumber = this.createComputerNumber();
     this.getUserGuess();
   }
 
   end() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print(constants.END_MESSAGE);
     this.restart();
   }
 
   restart() {
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (choice) => {
+    Console.readLine(constants.RESTART_MESSAGE, (choice) => {
       if (/[^12]/.test(choice)) {
         Console.close();
-        throw new Error('잘못된 입력입니다.');
+        throw new Error(constants.WRONG_INPUT_ERROR);
       }
       if (choice == 1) {
         this.start();
@@ -33,7 +34,7 @@ class BaseballGame {
   }
 
   getUserGuess() {
-    Console.readLine('숫자를 입력해주세요 : ', (guess) => {
+    Console.readLine(constants.INPUT_MESSAGE, (guess) => {
       const userGuessToArray = guess.split('').map(Number);
       this.guess = userGuessToArray;
       validate(this.guess);
@@ -46,7 +47,7 @@ class BaseballGame {
     const resultMessage = this.createResultMessage(strike, ball);
     Console.print(resultMessage);
 
-    if (strike === 3) {
+    if (strike === constants.DIGIT) {
       this.end();
       return;
     }
@@ -74,15 +75,15 @@ class BaseballGame {
 
   createResultMessage(strike, ball) {
     let resultMessage = '';
-    if (strike === 0 && ball === 0) return '낫싱';
-    if (ball) resultMessage += `${ball}볼 `;
-    if (strike) resultMessage += `${strike}스트라이크`;
+    if (strike === 0 && ball === 0) return constants.NOTHING;
+    if (ball) resultMessage += `${ball}${constants.BALL} `;
+    if (strike) resultMessage += `${strike}${constants.STRIKE}`;
     return resultMessage;
   }
 
   createComputerNumber() {
     const computerNumber = new Set();
-    while (computerNumber.size < 3) {
+    while (computerNumber.size < constants.DIGIT) {
       computerNumber.add(Random.pickNumberInRange(1, 9));
     }
     return Array.from(computerNumber);

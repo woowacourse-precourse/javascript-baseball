@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const constants = require('./constants');
 
 const isNumber = (input) => {
   const isNaNArray = input.map((digit) => isNaN(digit));
@@ -7,7 +8,7 @@ const isNumber = (input) => {
 };
 
 const isThreeDigit = (input) => {
-  if (input.length === 3) return true;
+  if (input.length === constants.DIGIT) return true;
   return false;
 };
 
@@ -19,7 +20,7 @@ const isInRange = (input) => {
 const isDifferent = (input) => {
   const set = new Set();
   input.map((digit) => set.add(digit));
-  if (set.size === 3) return true;
+  if (set.size === constants.DIGIT) return true;
   return false;
 };
 
@@ -30,16 +31,16 @@ const throwError = (message) => {
 
 const validate = (input) => {
   if (!isNumber(input)) {
-    throwError('숫자를 입력하세요.');
+    throwError(constants.TYPE_ERROR);
   }
   if (!isThreeDigit(input)) {
-    throwError('세 자리 숫자를 입력하세요.');
+    throwError(constants.DIGIT_ERROR);
   }
   if (!isInRange(input)) {
-    throwError('1~9 사이의 숫자를 입력하세요.');
+    throwError(constants.RANGE_ERROR);
   }
   if (!isDifferent(input)) {
-    throwError('서로 다른 세 숫자를 입력하세요.');
+    throwError(constants.DUPLICATE_ERROR);
   }
 };
 
