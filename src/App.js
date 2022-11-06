@@ -38,6 +38,7 @@ class App {
     const userNumbers = userAnswer.split('').map((number) => parseInt(number, 10));
     this.isScopeUserNumber(userNumbers);
     this.isScopeLength(userNumbers);
+    this.isScopeDuplication(userNumbers);
   }
 
   isScopeUserNumber(userNumbers) {
@@ -50,7 +51,15 @@ class App {
 
   isScopeLength(userNumbers) {
     if (userNumbers.length !== 3) {
-      throw new Error('3자리의 숫자를 입력해주세요');
+      throw new Error('3자리의 숫자를 입력하세요');
+    }
+  }
+
+  isScopeDuplication(userNumbers) {
+    const isDuplication = new Set(userNumbers);
+
+    if (isDuplication.length < 3) {
+      throw new Error('중복이 없는 각기 다른 3자리 숫자를 입력하세요');
     }
   }
 }
