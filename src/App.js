@@ -61,11 +61,17 @@ class App {
     return false;
   }
 
-  async play() {
+  async runUntilGameOver() {
+    do {
+      await this.getUserDigits();
+      this.countScore();
+      this.printScore();
+    } while (!this.isGameOver());
+  }
+
+  play() {
     this.generateThreeDigits();
-    await this.getUserDigits();
-    this.countScore();
-    this.printScore();
+    this.runUntilGameOver();
   }
 }
 
