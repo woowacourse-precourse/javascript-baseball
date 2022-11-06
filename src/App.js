@@ -1,41 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const NumberUtils = require("./Utils/Number");
 
 class App {
-  constructor() {}
-  getRandomBaseballNumber() {
-    const computer = new Set();
-    while (computer.size < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      computer.add(number);
-    }
-    return Number(Array.from(computer).join(""));
-  }
-
-  isNumber(number) {
-    return !Number.isNaN(number) && typeof number === "number";
-  }
-
-  NumberToArray(number) {
-    return Array.from(String(number), (num) => Number(num));
-  }
-
-  isBaseballNumber(number) {
-    number = Number(number);
-    if (!this.isNumber(number)) {
-      throw "숫자만 입력해주세요";
-    }
-    if (number >= 1000 || number <= 99) {
-      throw "3개의 숫자만 입력해주세요";
-    }
-    if (new Set(this.NumberToArray(number)).size !== 3) {
-      throw "중복되지 않는 숫자로 입력해주세요";
-    }
+  constructor() {
+    this.NumberUtil = new NumberUtils();
   }
 
   userInputNumber() {
     let userInputNumber = 0;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-      this.isBaseballNumber(number);
+      this.NumberUtil.isBaseballNumber(number);
       userInputNumber = number;
       MissionUtils.Console.close();
     });
@@ -43,8 +17,8 @@ class App {
   }
 
   compareUserAndComputerNumber(userNumber, computerNumber) {
-    const userNumberArray = this.NumberToArray(userNumber);
-    const computerNumberArray = this.NumberToArray(computerNumber);
+    const userNumberArray = this.NumberUtil.NumberToArray(userNumber);
+    const computerNumberArray = this.NumberUtil.NumberToArray(computerNumber);
     let ball = 0;
     let strike = 0;
     const total =
@@ -64,7 +38,7 @@ class App {
   }
 
   play() {
-    const computerNumber = this.getRandomBaseballNumber();
+    const computerNumber = this.NumberUtil.getRandomBaseballNumber();
     const userNumber = this.userInputNumber();
     const result = this.compareUserAndComputerNumber(
       userNumber,
