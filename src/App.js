@@ -13,7 +13,16 @@ class App {
       }
       return computerNumber;
     }
-
+    InputUserNumber(){
+      let userInput=0;
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNum) => {
+          userInput=userNum;
+          if(userNum==1||userNum==2){
+            this.selectGameEnd
+          }
+    })
+      return userInput;
+    }
 }
 
 module.exports = App;
