@@ -28,6 +28,13 @@ class App {
     }
     return true;
   }
+
+  static isCorrectInput(str) {
+    if (App.isThreeDigit(str) && App.isAllDifferent(str)) {
+      return true;
+    }
+    return false;
+  }
   
   play() {
     App.printGameStart();
