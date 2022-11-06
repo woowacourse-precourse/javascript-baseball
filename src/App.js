@@ -57,9 +57,9 @@ class App {
     let nothing = true;
 
     for (let i = 0; i < ANSWER.length; i++) {
-      const LETTER = input[i];
-      if (ANSWER.includes(LETTER)) {
-        ANSWER[i] === LETTER ? strike++ : ball++;
+      const NUMBER = input[i];
+      if (ANSWER.includes(NUMBER)) {
+        ANSWER[i] === NUMBER ? strike++ : ball++;
         nothing = false;
       }
     }
