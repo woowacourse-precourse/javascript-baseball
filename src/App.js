@@ -2,8 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.init();
+    this.printStartingMessage();
+    this.getComputerNumber();
     this.getUserNumber();
   }
   init() {
@@ -11,7 +12,6 @@ class App {
     this.user = [];
     this.result = "";
     this.isCorrect = false;
-    this.getComputerNumber();
   }
   getComputerNumber() {
     while (this.computer.length < 3) {
@@ -87,6 +87,9 @@ class App {
   checkIsCorrect() {
     this.isCorrect ? this.requestRestart() : this.getUserNumber();
   }
+  printStartingMessage() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
   printResult() {
     MissionUtils.Console.print(this.result);
   }
@@ -99,7 +102,9 @@ class App {
         } else if (input === "2") {
           MissionUtils.Console.close();
         } else {
-          throw Error("잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+          throw Error(
+            "잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+          );
         }
       }
     );
