@@ -8,6 +8,17 @@ class App {
     this.userInput = "";
   }
 
+  createResult() {
+    if (this.userInput === "") return "낫싱";
+    const includeOfNum = Array.from({ length: 10 }).fill(false);
+    const result = "";
+
+    this.answer.forEach((num) => {
+      includeOfNum[num] = true;
+    });
+    return result;
+  }
+
   checkException(inputNum, allowed) {
     if (inputNum.length !== 3) {
       return false;
