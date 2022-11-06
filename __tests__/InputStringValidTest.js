@@ -1,7 +1,5 @@
-const App = require('../src/App');
 const Random = require('../src/Random');
 const MissionUtils = require('@woowacourse/mission-utils');
-const Input = require('../src/Input');
 
 const ANWERNUM = 3;
 function IsOverLap(InputStr) {

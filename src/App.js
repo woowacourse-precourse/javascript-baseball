@@ -1,34 +1,49 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const Random = require('./Random');
-/*
-const IsInputIsValid = require('./IsValidInput');
-*/
-const StartPrint = require('./StartPrint');
+const message = require('./MESSAGE');
 
 class App {
   constructor() {
-    this.Number = Random;
     this.strike = 0;
     this.ball = 0;
     this.RANGE = 3;
+    this.UserInputNumber = 'InitINPUT';
   }
-  UserInputNumber = '';
 
   Init() {
     this.ball = 0;
     this.strike = 0;
-    this.UserInputNumber = '';
   }
 
-  play() {
-    StartPrint;
-    this.Number = Random;
-  }
   input() {
-    MissionUtils.Console.readLine('숫자를 입력하세요 : ', (InputNumber) => {
+    MissionUtils.Console.readLine('숫자를입력하세요', (InputNumber) => {
+      MissionUtils.Console.print(InputNumber);
       this.UserInputNumber = InputNumber;
     });
+    this.ball = 0;
+    this.strike = 0;
   }
+
+  CreateRandom() {
+    const RandomArr = [];
+    while (RandomArr.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!RandomArr.includes(number)) {
+        RandomArr.push(number);
+      }
+    }
+    return RandomArr;
+  }
+
+  IfStrike() {
+    this.input();
+    if (this.UserInputNumber === '1') {
+      this.play();
+    } else {
+      MissionUtils.Console.print(message.END);
+      MissionUtils.Console.close();
+    }
+  }
+
   CheckInputIsValid() {
     const CheckSet = new Set();
     const UserInputArray = [...this.UserInputNumber];
@@ -42,7 +57,7 @@ class App {
   }
 
   StrikeBall() {
-    for (let i = 0; i < this.RANGE; i++) {
+    for (let i = 0; i < this.RANGE; i += 1) {
       if (this.Number[i] === this.UserInputNumber[i]) {
         this.strike += 1;
       } else if (
@@ -62,7 +77,31 @@ class App {
     } else if (this.strike === 0 && this.ball === 0) {
       MissionUtils.Console.print('낫싱');
     } else {
-      MissionUtils.Console.print(`${this.strike}스트라이크 ${this.ball}볼`);
+      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+    }
+  }
+
+  play() {
+    this.Number = this.CreateRandom().join('');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다!');
+    while (true) {
+      this.Init();
+      this.input();
+
+      if (this.CheckInputIsValid(this.UserInputNumber) === false) {
+        break;
+      }
+      this.StrikeBall();
+      this.PrintStrikeBall();
+      if (this.strike === 3) {
+        MissionUtils.Console.print(message.SUCCESS);
+        break;
+      }
+    }
+    if (this.strike === 3) {
+      this.IfStrike();
+    } else if (this.UserInputNumber !== 'InitINPUT') {
+      throw message.INPUTERROR;
     }
   }
 }
