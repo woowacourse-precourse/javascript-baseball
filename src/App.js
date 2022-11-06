@@ -5,6 +5,7 @@ const Constraints = require("./Constraints");
 class App {
   constructor() {
     this.showStartMessage();
+    this.constraints = new Constraints();
   }
 
   play() {
@@ -18,8 +19,7 @@ class App {
 
   getPlayerInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      const constraints = new Constraints();
-      constraints.checkConstraints(userInput);
+      this.constraints.checkConstraints(userInput);
 
       this.comparePlayerInputWithRandomNumber(userInput);
     });
@@ -94,8 +94,7 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
-        const constraints = new Constraints();
-        constraints.checkRePlayInput(userInput);
+        this.constraints.checkRePlayInput(userInput);
 
         this.decideReStart(userInput);
       }
