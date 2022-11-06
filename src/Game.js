@@ -1,12 +1,8 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const Verify = require('./Verify');
-const { MESSAGE, STATE, NUMBER } = require('./Const');
+const { MESSAGE, STATE, NUMBER, REG_EXP } = require('./Const');
+const verify = require('./Verify');
 
 class Game {
-  constructor() {
-    this.verify = new Verify();
-  }
-
   start() {
     this.state = STATE.DEFAULT;
     this.setAnswer();
@@ -27,11 +23,9 @@ class Game {
   }
 
   interaction() {
-    const { verify } = this;
-
-    Console.readLine(MESSAGE.READ_INPUT, (string) => {
-      this.userInput = Array.from(string, Number);
-      verify.userInput(this.userInput);
+    Console.readLine(MESSAGE.READ_NUMBER, (input) => {
+      verify(REG_EXP.NUMBER, input);
+      this.userInput = Array.from(input, Number);
       this.setCount();
       this.setHint();
       Console.print(this.hint);
@@ -100,12 +94,10 @@ class Game {
   }
 
   readState() {
-    const { verify } = this;
-
     Console.print(MESSAGE.GAME_END);
-    Console.readLine(MESSAGE.READ_STATE, (string) => {
-      this.state = Number(string);
-      verify.state(this.state);
+    Console.readLine(MESSAGE.READ_STATE, (input) => {
+      verify(REG_EXP.STATE, input);
+      this.state = Number(input);
       this.checkState();
     });
   }

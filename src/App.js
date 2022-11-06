@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('./Const');
 const Game = require('./Game');
-const MESSAGE = require('./Const');
 
 class App {
   constructor() {
