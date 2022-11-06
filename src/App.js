@@ -46,7 +46,7 @@ class App {
     }
     const answer = this.printBaseballCheck(strike, ball);
     MissionUtils.Console.print(answer);
-    return answer;
+    return strike;
   }
   printBaseballCheck(strike, ball){
     if(strike===0 && ball===0){
@@ -62,8 +62,9 @@ class App {
   isCorrect(strike){
     if(strike === 3){
       this.gameClearMessage();
+      return true;
     }else{
-
+      return false;
     }
   }
   gameClearMessage(){
@@ -86,10 +87,14 @@ class App {
     return number;
   }
   play() {
+    let correctState = false;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.makeRandomNumber();
-    this.receivePredictNum();
-    this.baseballCheck();
+    while(!correctState){
+      this.receivePredictNum();
+      const strikeCount = this.baseballCheck();
+      correctState = this.isCorrect(strikeCount);
+    }
   }
 }
 const app = new App();
