@@ -1,6 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this.correctAnswer = false;
+    this.init();
+  }
+
+  init() {
+    this.print(TEXT.START_MESSAGE);
+  }
+
+  play() {}
+
   print(message) {
     return MissionUtils.Console.print(message);
   }
