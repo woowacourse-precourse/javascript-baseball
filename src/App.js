@@ -71,9 +71,8 @@ class App {
   async startOrRestartApp(start) {
     this.validStartInput(start);
     this.initAnswerMap();
-    let something;
     try {
-      something = await this.user.getNumberArrayFromInput();
+      await this.user.getNumberArrayFromInput();
     } catch (error) {
       throw new Error(error);
     } finally {
@@ -106,16 +105,19 @@ class App {
   }
 
   endApp() {
-    MissionUtils.Console.print('게임종료');
+    MissionUtils.Console.print('게임 종료');
     MissionUtils.Console.close();
   }
 
-  play() {
+  async play() {
     this.computer.setRandomNumberArray();
-    this.startOrRestartApp('start').catch(error => {
+    try {
+      await this.startOrRestartApp('start');
+    } catch (error) {
       MissionUtils.Console.print(error);
       this.endApp();
-    });
+      throw new Error(error);
+    }
   }
 }
 

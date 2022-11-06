@@ -24,7 +24,7 @@ const getLogSpy = () => {
 };
 
 describe('숫자 야구 게임', () => {
-  test('게임 종료 후 재시작', () => {
+  test('게임 종료 후 재시작', async () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ['246', '135', '1', '597', '589', '2'];
     const logSpy = getLogSpy();
@@ -40,23 +40,23 @@ describe('숫자 야구 게임', () => {
     mockQuestions(answers);
 
     const app = new App();
-    app.play();
+    await app.play();
 
     messages.forEach(output => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 
-  test('예외 테스트', () => {
+  test('예외 테스트', async () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    expect(() => {
+    await expect(async () => {
       const app = new App();
-      app.play();
+      await app.play();
     }).toThrow();
   });
 });
