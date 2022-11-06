@@ -2,11 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
 const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
 const getThreeRandomNumbers = require("./ThreeRandomNumbers");
+const throwError = require("./ThrowError");
 const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT } = require("./constants/ConstantValues");
 const {
   START_MESSAGE,
   INPUT_NUMBER_MESSAGE,
-  WRONG_INPUT_ERROR_MESSAGE,
   END_MESSAGE,
   INPUT_RESTART_OR_END_MESSAGE,
 } = require("./constants/Messeages");
@@ -26,14 +26,9 @@ class App {
     MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, this.endGame.bind(this));
   }
 
-  throwError() {
-    MissionUtils.Console.close();
-    throw new Error(WRONG_INPUT_ERROR_MESSAGE);
-  }
-
   playGame(input) {
     if (!validateInput(input)) {
-      this.throwError();
+      throwError();
     }
 
     const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
@@ -48,7 +43,7 @@ class App {
 
   endGame(input) {
     if (input !== RESTART_INPUT && input !== END_INPUT) {
-      this.throwError();
+      throwError();
     }
 
     if (input === RESTART_INPUT) {
