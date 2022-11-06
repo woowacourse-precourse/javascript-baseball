@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   constructor() {
     this.threeDigits = [0, 0, 0];
