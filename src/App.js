@@ -10,25 +10,31 @@ class App {
   answer = "";
   userInput = "";
 
-  async play() {
+  play() {
     this.print(this.START);
     this.answer = this.generateAnswer();
 
     console.log(this.answer);
 
-    while (!this.isGameEnd()) {
-      const userInput = await this.getPlayerInput(this.REQUEST_NUMBER);
-      if (this.isValidInput(userInput)) this.userInput = userInput;
+    // while (!this.isGameEnd()) {
+    this.getInput(this.REQUEST_NUMBER, (userInput) => {
+      if (this.isValidInput(userInput)) {
+        this.userInput = userInput;
+        this.print(this.calculateCount(userInput));
+      }
 
-      this.print(this.calculateCount(userInput));
-    }
+      if (this.isGameEnd()) return;
+
+      this.play();
+    });
+    // }
 
     this.print(this.END);
 
-    const newGameOrEnd = await this.getPlayerInput(this.AGAIN_OR_END);
+    // const newGameOrEnd = await this.getPlayerInput(this.AGAIN_OR_END);
 
-    if (newGameOrEnd === "1") await this.play();
-    else Console.close();
+    // if (newGameOrEnd === "1") await this.play();
+    // else Console.close();
   }
 
   calculateCount(userInput) {
@@ -69,12 +75,16 @@ class App {
     return Array.from(numbers).join("");
   }
 
-  async getPlayerInput(question) {
-    return new Promise((resolve) => {
-      Console.readLine(question, (userInput) => {
-        resolve(userInput);
-      });
-    });
+  // async getPlayerInput(question) {
+  //   return new Promise((resolve) => {
+  //     Console.readLine(question, (userInput) => {
+  //       resolve(userInput);
+  //     });
+  //   });
+  // }
+
+  getInput(question, callback) {
+    Console.readLine(question, callback);
   }
 
   isValidInput(userInput) {
@@ -102,6 +112,13 @@ class App {
       throw new Error("1~9 사이의 숫자를 입력해주세요.");
   }
 
+  askPlayOrExit() {
+    Console.readLine(this.AGAIN_OR_END, (userInput) => {
+      if (userInput === "1") this.play();
+      else Console.close();
+    });
+  }
+
   isOneOrTwo(userInput) {}
 
   print(message) {
@@ -109,9 +126,9 @@ class App {
   }
 }
 
-async function startApp() {
+function startApp() {
   const app = new App();
-  await app.play();
+  app.play();
 }
 
 startApp();
