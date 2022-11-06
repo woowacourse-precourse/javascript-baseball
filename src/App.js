@@ -25,10 +25,12 @@ class App {
 
   static getUserInput() {
     let input;
-    MissionUtils.Console.readLine(
-      '숫자를 입력해주세요 : ',
-      (answer) => { input = answer.trim().split(''); },
-    );
+
+    function inputParser(inputString) {
+      input = inputString.trim().split('');
+    }
+
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', inputParser);
     MissionUtils.Console.close();
 
     if (!App.isValidAnswerValue(input)) {
