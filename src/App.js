@@ -42,7 +42,7 @@ class App {
 
     while (!isCorrect) {
       const userNumbers = this.writeUserNumbers();
-      const memo = this.mark(userNumbers);
+      const memo = this.mark(this.computer, userNumbers);
       this.printResultMessage(memo);
 
       isCorrect = memo.strike === 3;
@@ -67,13 +67,13 @@ class App {
     return [...str].map((digit) => Number(digit));
   }
 
-  mark(user) {
+  mark(computer, user) {
     const memo = { ball: 0, strike: 0 };
 
     user.forEach((userNumber, index) => {
-      if (userNumber === this.computer[index]) {
+      if (userNumber === computer[index]) {
         memo.strike += 1;
-      } else if (this.computer.includes(userNumber)) {
+      } else if (computer.includes(userNumber)) {
         memo.ball += 1;
       }
     });
