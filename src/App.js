@@ -4,7 +4,11 @@ class App {
   static answer;
   static hintString;
 
-  play() {}
+  play() {
+    MissionUtils.Console.print('숫자를 야구게임을 시작합니다.');
+    this.answer = this.pickComputerAnswer();
+    this.inputPlayerNum();
+  }
 
   generateComputerAnswer(){
     const COMPUTER_RANDOM_NUMBER = [];
@@ -100,7 +104,7 @@ class App {
       this.exitFunction();
     });
   }
-  
+
   exitFunction(){
     MissionUtils.Console.close();
   }
