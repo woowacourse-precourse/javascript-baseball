@@ -47,8 +47,40 @@ const gen_rand_num = () => {
   return result
 }
 
+const play_inst = (is_end, solution) => {  
+  MissionUtils.Console.readLine("숫자를 입력해 주세요", (answer)=>{    
+    console.log(answer, solution)
+    if (answer == solution) {
+      is_end[0] = true
+    } else if (answer.length <= 3) {
+      console.log(gm_result(answer, solution))
+      is_end[0] = false
+    } else if (answer.length > 3) {
+      throw new Error("Invalid Input to inference");
+    }
+
+    if (is_end[0]){
+      try {
+        play_again_test(is_end, play_inst)
+      } catch (e) {
+        throw e
+      }
+    } else {
+      play_inst(is_end, solution)
+    }
+  })  
+}
+
 class App {
-  play() {}
+  play() {
+    var is_end = [false]
+    console.log("숫자 야구 게임을 시작합니다.")    
+    try {
+      play_inst(is_end, gen_rand_num())              
+    } catch (e) {
+      throw e
+    }
+  }
 }
 
 module.exports = App;
