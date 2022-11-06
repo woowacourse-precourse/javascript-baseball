@@ -32,6 +32,9 @@ class BaseballGame {
   }
 
   printResult(ball, strike) {
+    const ballMessage = ball > 0 ? `${ball}볼 ` : '';
+    const strikeMessage = strike > 0 ? `${strike}스트라이크` : '';
+
     if (!ball && !strike) {
       Console.print(GAME_MESSAGE.nothing);
 
@@ -39,12 +42,12 @@ class BaseballGame {
     }
 
     if (strike === NUMBER_LENGTH) {
-      Console.print(`${strike}스트라이크`);
+      Console.print(`${strikeMessage}`);
 
       return true;
     }
 
-    Console.print(`${ball}볼 ${strike}스트라이크`);
+    Console.print(`${ballMessage}${strikeMessage}`);
 
     return false;
   }
