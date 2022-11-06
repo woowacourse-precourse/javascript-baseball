@@ -23,19 +23,7 @@ class App {
 
   end() {
     MissionUtils.Console.print(END_MESSAGE);
-    MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, (input) => {
-      if (input !== RESTART_INPUT && input !== END_INPUT) {
-        this.throwError();
-      }
-
-      if (input === RESTART_INPUT) {
-        this.threeRandomNumbers = getThreeRandomNumbers();
-        this.play();
-      }
-      if (input === END_INPUT) {
-        MissionUtils.Console.close();
-      }
-    });
+    MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, this.endGame.bind(this));
   }
 
   throwError() {
@@ -58,6 +46,20 @@ class App {
     }
 
     this.play();
+  }
+
+  endGame(input) {
+    if (input !== RESTART_INPUT && input !== END_INPUT) {
+      this.throwError();
+    }
+
+    if (input === RESTART_INPUT) {
+      this.threeRandomNumbers = getThreeRandomNumbers();
+      this.play();
+    }
+    if (input === END_INPUT) {
+      MissionUtils.Console.close();
+    }
   }
 }
 
