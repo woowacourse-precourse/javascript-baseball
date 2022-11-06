@@ -9,10 +9,30 @@ class App {
     this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  checkInputError(numbers) {
+    const newNumbers = new Set(numbers); // 중복된 숫자를 찾기위해 사용
+    if (isNaN(numbers)) {
+      throw '숫자 이외의 입력';
+    }
+
+    if (numbers.length !== 3) {
+      throw '3자리 숫자 이외의 입력';
+    }
+
+    if (newNumbers.size !== 3) {
+      throw '중복된 숫자 입력';
+    }
+  }
+
   userInputNumber() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
-      console.log(numbers);
-    });
+    try {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
+        this.checkInputError(numbers);
+        console.log(numbers);
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   gameStart() {
