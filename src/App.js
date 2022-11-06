@@ -51,6 +51,21 @@ function exit() {
   Console.close();
 }
 
+function proceedGame() {
+  Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
+    const validation = isvalidation(userNum);
+    if (validation === false) {
+      return throwError();
+    }
+    const [strike, ball] = isStrikeBall(userNum);
+    userMessage(strike, ball);
+    if (strike !== 3) {
+      return proceedGame();
+    }
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    replay();
+  });
+}
   }
 
 class App {
