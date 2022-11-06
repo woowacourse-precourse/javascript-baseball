@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const InputValidation = require("./inputValidation");
 const MIN_NUMBER = 1;
 const MAX_NUMBER = 9;
 const RETURN_COUNT = 3;
@@ -27,8 +28,6 @@ function generateRandomNumber() {
     }
     return computer;
 }
-const a = new App();
-a.play();
 
 function userInputNumber(computerNumber) {
     MissionUtils.Console.readLine('세자리 숫자를 입력해주세요 : ', userNumber => {
@@ -38,7 +37,7 @@ function userInputNumber(computerNumber) {
 }
 
 function gameStart(userNumber, computerNumber) {
-    inputValidation(userNumber);
+    InputValidation(userNumber);
     const { ballNumber, strikeNumber } = strikeBallNumber(userNumber, computerNumber);
     getHint(ballNumber, strikeNumber);
     hasThreeStrike(strikeNumber, computerNumber);
@@ -87,33 +86,6 @@ function endGame() {
 function faultNumberInput() {
     throw "잘못된 값을 입력하였습니다.";
 
-}
-
-function inputValidation(number) {
-    threeDigitValidation(number);
-    numberRangeValidation(number);
-    reduplicationValidation(number);
-}
-
-function threeDigitValidation(number) {
-    const numberLength = number.length;
-    if (numberLength !== 3) {
-        throw "잘못된 값을 입력하였습니다.";
-    }
-}
-
-function numberRangeValidation(number) {
-    const isNumberBetween = number.every(eachDigit => (eachDigit >= MIN_NUMBER && eachDigit <= MAX_NUMBER));
-    if (!isNumberBetween) {
-        throw "잘못된 값을 입력하였습니다.";
-    }
-}
-
-function reduplicationValidation(number) {
-    const isReduplication = (new Set(number).size === 3);
-    if (!isReduplication) {
-        throw "잘못된 값을 입력하였습니다.";
-    }
 }
 
 function strikeBallNumber(userNumber, computerNumber) {
