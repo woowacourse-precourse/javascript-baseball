@@ -93,6 +93,50 @@ describe("숫자 야구 게임", () => {
     expect(app.userNumber).toEqual(userNumber);
   });
 
+  test("숫자 이외의 문자 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = ["abc"];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("3자리를 초과하는 숫자 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = ["1234"];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("각 자리수 중 같은 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = ["133"];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("각 자리수 중 1~9를 벗어난 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = ["012"];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
