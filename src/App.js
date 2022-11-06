@@ -30,9 +30,25 @@ class App {
         });
       });
     }
-
+    // 게임 실행
+    function gamePlay() {
+      numbersInput();
+      // 3스트라이크일 경우
+      if (strikeCount === 3) {
+        MissionUtils.Console.print("3스트라이크");
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        return;
+      }
+      // 아무것도 해당이 안될 경우
+      else if (nothing === 3) {
+        MissionUtils.Console.print("낫싱");
+      } else if (ballCount > 0 || strikeCount > 0) {
+        MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+      }
+      return gamePlay();
+    }
     computerNumbers();
-    numbersInput();
+    gamePlay();
   }
 }
 
