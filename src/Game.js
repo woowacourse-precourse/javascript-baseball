@@ -50,6 +50,11 @@ class Game {
     }
     return { strike, ball };
   }
+
+  isEnd ({strike}) {
+    return strike === 3;
+  }
+
 }
 
 module.exports = Game;
