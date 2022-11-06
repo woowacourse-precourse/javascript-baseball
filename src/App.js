@@ -12,7 +12,7 @@ class App {
 
   playBaseballGame() {
     const computerInputNumbers = this.getComputerNumber();
-    this.getUserNumbers();
+    this.getUserNumbers(computerInputNumbers);
   }
 
   getComputerNumber() {
@@ -28,17 +28,19 @@ class App {
     return computerNumbers.join('');
   }
 
-  getUserNumbers() {
+  getUserNumbers(computerInputNumbers) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userAnswer) => {
-      this.isValidUserNumbers(userAnswer);
+      this.isValidUserNumbers(userAnswer, computerInputNumbers);
     });
   }
 
-  isValidUserNumbers(userAnswer) {
+  isValidUserNumbers(userAnswer, computerInputNumbers) {
     const userNumbers = userAnswer.split('').map((number) => parseInt(number, 10));
     this.isScopeUserNumber(userNumbers);
     this.isScopeLength(userNumbers);
     this.isScopeDuplication(userNumbers);
+
+    this.checkGameResult(computerInputNumbers, userNumbers);
   }
 
   isScopeUserNumber(userNumbers) {
@@ -61,6 +63,29 @@ class App {
     if (isDuplication.length < 3) {
       throw new Error('중복이 없는 각기 다른 3자리 숫자를 입력하세요');
     }
+  }
+
+  checkGameResult(computerInputNumbers, userNumbers) {
+    const gameScore = this.calculateGameScore(computerInputNumbers, userNumbers);
+    const gameResult = this.printGameScore(computerInputNumbers, userNumbers);
+  }
+
+  calculateGameScore(computerInputNumbers, userNumbers) {
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    const overlappingNumbers = [...computerInputNumbers].filter((number) =>
+      [...userNumbers].includes(number)
+    );
+    overlappingNumbers.forEach((number) => {
+      ballCount++;
+
+      if (computerInputNumbers.indexOf(number) === userNumbers.indexOf(number)) {
+        ballCount--;
+        strikeCount++;
+      }
+    });
+    return [ballCount, strikeCount];
   }
 }
 
