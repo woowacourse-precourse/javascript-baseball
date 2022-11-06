@@ -48,11 +48,22 @@ class App {
     this.randomNumber = Array.from(arr);
   }
 
+  isThreeStrike() {
+    let threeStrike = this.randomNumber.every(
+      (value, idx) => value === this.userInputNumber[idx]
+    );
+    if (threeStrike) {
+      MissionUtils.Console.print("3스트라이크");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+  }
+
   makeUserInputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.userInputNumber = [...inputNumber].map(Number);
       try {
         this.checkInputNumber();
+        this.isThreeStrike();
       } catch (e) {
         this.gameTerminate();
         throw e;
