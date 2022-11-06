@@ -26,9 +26,7 @@ function checkarr(computer, number) {
 
 
 function game(MissionUtils, computer) {
-  var ballcount = 0;
-  var strikecount = 0;
-  var check = true;
+  var count = [0,0];
   MissionUtils.Console.readLine("숫자를 입력하세요 : ", function(input) { 
     check3num(input);
     checkdiffnum(input);
@@ -36,41 +34,41 @@ function game(MissionUtils, computer) {
     for (var i = 0; i<3; i++){
       if (computer[0] == input.charAt(i)){
         if (i==0){
-          strikecount++;
+          count[1]++;
           break;
         }
-        ballcount++;
+        count[0]++;
       }
     }
 
     for (var i = 0; i<3; i++){
       if (computer[1] == input.charAt(i)){
         if (i==1){
-          strikecount++;
+          count[1]++;
           break;
         }
-        ballcount++;
+        count[0]++;
       }
     }
     for (var i = 0; i<3; i++){
       if (computer[2] == input.charAt(i)){
         if (i==2){
-          strikecount++;
+          count[1]++;
           break;
         }
-        ballcount++;
+        count[0]++;
       }
     }
 
-    if (ballcount == 0 && strikecount == 0){
+    if (count[0] == 0 && count[1] == 0){
       MissionUtils.Console.print("낫싱");
     }
-    else if (ballcount>0 && strikecount == 0){
-      MissionUtils.Console.print(ballcount + "볼");
+    else if (count[0]>0 && count[1] == 0){
+      MissionUtils.Console.print(count[0] + "볼");
     }
-    else if (strikecount>0 && ballcount == 0){
-      MissionUtils.Console.print(strikecount + "스트라이크");
-      if (strikecount == 3){
+    else if (count[1]>0 && count[0] == 0){
+      MissionUtils.Console.print(count[1] + "스트라이크");
+      if (count[1] == 3){
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", function(restart) {
           check1num(restart);
@@ -89,7 +87,7 @@ function game(MissionUtils, computer) {
       }
     }
     else{
-      MissionUtils.Console.print(ballcount + "볼 " + strikecount + "스트라이크");
+      MissionUtils.Console.print(count[0] + "볼 " + count[1] + "스트라이크");
     }
     game(MissionUtils, computer);
   });
