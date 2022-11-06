@@ -19,7 +19,7 @@ class App {
 
     startGame() {
         this.initComputerNumbers();
-        this.isUserNumbers();
+        this.answerUserNumbers();
     }
 
     initComputerNumbers() {
@@ -61,30 +61,30 @@ class App {
         })
     }
 
-    setUserNumbers() {
+    setUserNumbers(userNumbers) {
         this.userNumbers = userNumbers;
         if(this.userNumbers === this.computerNumbers) return this.finishGame();
-        
-        const { ball, strike } = this.ballAndStrikeCalc();
-        this.isProvideHints(ball, strike);
+
+        const { ball, strike } = this.calcBallAndStrike();
+        this.printResult(ball, strike);
         return this.answerUserNumbers();
     }
 
-    ballAndStrikeCalc(computerPickNumber,userNumbers){
+    calcBallAndStrike() {
         let ball = 0;
         let strike = 0;
-        for(let idex = 0; idex < String(computerPickNumber).length; idex++){
-            const OVERLAP_INDEX = String(computerPickNumber).indexOf(String(userNumbers)[idex]);
-            if(OVERLAP_INDEX > -1 && OVERLAP_INDEX == idex) strike += 1;
-            if(OVERLAP_INDEX > -1 && OVERLAP_INDEX !== idex) ball += 1;         
+        for(let index = 0; index < MAX_SIZE; index++) {
+            const overlapIndex = String(this.computerNumbers).indexOf(String(this.userNumbers)[index]);
+            if(overlapIndex > -1 && overlapIndex === index) strike += 1;
+            if(overlapIndex > -1 && overlapIndex !== index) ball += 1;         
         }
-        return this.isProvideHints(ball,strike);
+        return { ball, strike };
     }
 
-    isProvideHints(ball,strike) {
-        if(ball == 0 && strike == 0) return Console.print(`낫싱`);
-        if(ball == 0 && strike > 0)  return Console.print(`${strike}스트라이크`);
-        if(ball > 0 && strike == 0)  return Console.print(`${ball}볼`);
+    printResult(ball,strike) {
+        if(ball === 0 && strike === 0) return Console.print(`낫싱`);
+        if(ball === 0 && strike > 0)  return Console.print(`${strike}스트라이크`);
+        if(ball > 0 && strike === 0)  return Console.print(`${ball}볼`);
         if(ball > 0 && strike > 0)  return Console.print(`${ball}볼 ${strike}스트라이크`);
     }
 }
