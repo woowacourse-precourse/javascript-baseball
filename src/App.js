@@ -39,11 +39,6 @@ class App {
     });
   }
 
-  countScore(computer, user) {
-    const score = this.calculateScore(computer, user);
-    return this.printScore(score, computer);
-  }
-
   isUserError(user, computer) {
     this.checkOverlap(user);
     this.checkLength(user);
@@ -80,6 +75,12 @@ class App {
     }
   }
 
+  countScore(computer, user) {
+    const score = this.calculateScore(computer, user);
+    const result = this.printScore(score, computer);
+    return this.isAnswer(result, computer);
+  }
+
   calculateScore(computer, user) {
     let ball = 0;
     let strike = 0;
@@ -100,7 +101,7 @@ class App {
     return [ball, strike];
   }
 
-  printScore(score, computer) {
+  printScore(score) {
     const scoreList = [
       { name: "볼", score: score[0] },
       { name: "스트라이크", score: score[1] },
@@ -121,7 +122,7 @@ class App {
     }
 
     MissionUtils.Console.print(result);
-    return this.isAnswer(result, computer);
+    return result;
   }
 
   isAnswer(answer, computer) {
