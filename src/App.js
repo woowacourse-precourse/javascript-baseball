@@ -23,21 +23,21 @@ class App {
 
     // 입력값 예외 처리
     //숫자인지 체크
-    if(isNaN(user)){ 
-      throw new Error('에러');
-      console.log('숫자가 아님')
-    }
-    // 3자리인지 체크
-    if(user.length != 3){
-      throw new Error('에러');
-      console.log('3자리가 아님')
-    }
-    // 서로 다른 숫자인지 체크
-    let numberCheck = new Set(user);
-    if(numberCheck.size != user.length){
-      throw new Error('에러');
-      console.log('서로 다른 숫자가 아님')
-    }
+    // if(isNaN(user)){ 
+    //   throw new Error('에러');
+    //   console.log('숫자가 아님')
+    // }
+    // // 3자리인지 체크
+    // if(user.length != 3){
+    //   throw new Error('에러');
+    //   console.log('3자리가 아님')
+    // }
+    // // 서로 다른 숫자인지 체크
+    // let numberCheck = new Set(user);
+    // if(numberCheck.size != user.length){
+    //   throw new Error('에러');
+    //   console.log('서로 다른 숫자가 아님')
+    // }
 
     // 정답 숫자와 사용자의 입력값 체크
     let result = [0, 0]
@@ -64,6 +64,7 @@ class App {
     else{
       answer = `${result[1]}볼 ${result[0]}스트라이크`;
     }
+    MissionUtils.Console.print(answer);
 
   }
 }
