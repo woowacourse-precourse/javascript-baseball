@@ -18,9 +18,19 @@ function getUserInputNumber(computerNum) {
   });
 }
 
+function getStrikeCount(userNum, computerNum) {
+  return userNum.reduce((acc, num, i) => {
+    if (num === computerNum[i]) {
+      acc += 1;
+    }
+    return acc;
+  }, 0);
+}
+
 function getStrikeAndBallCount(userNum, computerNum) {
   const userNumArr = String(userNum).split('');
   const computerNumArr = computerNum.map(String);
+  const strikeCount = getStrikeCount(userNumArr, computerNumArr);
 }
 
 function getResult(count, computerNum) {
