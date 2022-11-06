@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const mode = require("./a.js");
-const Constants = require("./constants/Constants");
+const Constants = require("./utils/Constants");
 
 class App {
   play() {
