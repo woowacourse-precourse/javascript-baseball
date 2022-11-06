@@ -18,9 +18,9 @@ class App {
     }
     play() {
         MissionUtils.Console.print(GAME_START);
-        this.input();
+        this.process();
     }
-    input() {
+    process() {
         MissionUtils.Console.readLine('숫자를 입력하세요.', (number) => {
             this.verification(number);
             const comment = this.match(number);
