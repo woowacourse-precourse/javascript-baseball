@@ -8,12 +8,12 @@ describe("Compuer의 무작위 배열 추출 확인(길이3)", () => {
     expect(num).toContain(randomNumber);
   });
 
-  test("number를 Array로 변환", () => {
+  test("number를 String으로 변환", () => {
     const num = 143;
     function numToArray() {
-      return [...String(num)];
+      return String(num);
     }
-    expect(numToArray()).toEqual(["1", "4", "3"]);
+    expect(numToArray()).toEqual("143");
   });
 
   test("중복 없는 길이 3 배열 만들기", () => {
