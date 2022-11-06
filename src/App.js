@@ -15,6 +15,18 @@ class App {
 
   play() {}
 
+  playSingleGame() {
+    this.answer = App.generateAnswer();
+
+    while (this.strikeCount !== 3) {
+      this.input = App.getUserInput();
+      this.countResult();
+      this.printResult();
+    }
+
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  }
+
   static generateAnswer() {
     const answer = [];
     while (answer.length < GAME_ANSWER_LENGTH) {
