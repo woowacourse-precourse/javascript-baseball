@@ -1,1 +1,1 @@
-checkStrike(machineNum)
+'ba '
