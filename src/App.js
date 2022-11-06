@@ -51,8 +51,10 @@ class App {
       (number) => {
         number = Number(number);
         if (number === 1) this.game();
-        else if (number === 2) MissionUtils.Console.close();
-        else throw "1또는 2만 입력해주세요.";
+        else if (number === 2) {
+          MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
+        } else throw "1또는 2만 입력해주세요.";
       }
     );
   }
