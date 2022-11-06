@@ -4,6 +4,10 @@ class App {
   print(message) {
     return MissionUtils.Console.print(message);
   }
+
+  readLine(message, callback) {
+    return MissionUtils.Console.readLine(message, callback);
+  }
 }
 
 const app = new App();
