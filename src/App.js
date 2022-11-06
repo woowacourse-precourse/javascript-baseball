@@ -3,7 +3,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.ANSWER;
-    this.input;
   }
 
   play() {
