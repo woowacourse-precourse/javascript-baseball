@@ -12,8 +12,7 @@ class App {
   }
 
   setInput(input) {
-    input = Array.from(input.split(''), (num) => parseInt(num));
-
+    input = Array.from(input.split(''), (num) => Number(num));
     if (App.isValidInput(input)) this.input = input;
 
     this.setHint();
@@ -21,7 +20,6 @@ class App {
 
   setAnswer() {
     this.answer = [];
-
     while (this.answer.length < 3) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (this.answers === undefined || !this.answers.includes(number)) {
