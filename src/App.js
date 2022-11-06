@@ -22,7 +22,15 @@ class App {
   saveUserInputs() {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.userInputs = answer;
+      this.isValidNumber();
     });
+  }
+
+  // 유저 입력값 유효성 검사
+  isValidNumber() {
+    this.isRangeNumber();
+    this.isNumberLengthThree();
+    this.isOverLayRange();
   }
 
   // 1부터 9까지의 숫자인지 아닌지
