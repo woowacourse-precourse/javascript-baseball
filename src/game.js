@@ -38,8 +38,7 @@ class Game {
   }
 
   getAnswer(random) {
-    Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
-      const input = inputs.split(' ').join('');
+    Console.readLine(MESSAGE.ENTER_NUMBER, (input) => {
       const inputNumbers = [...input].map(Number);
       const { ball, strike } = this.countScore(inputNumbers, random);
 
@@ -98,7 +97,7 @@ class Game {
 
   askPlayAgain() {
     Console.readLine(MESSAGE.RESTART, (answers) => {
-      const answer = Number(answers.trim());
+      const answer = Number(answers);
 
       if (answer === GAME.START) {
         return this.play();
