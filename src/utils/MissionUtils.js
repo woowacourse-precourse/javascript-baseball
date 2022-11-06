@@ -21,10 +21,29 @@ const isSelectedNumber = (number, computer) => {
   }
 };
 
+const getUserNumber = (question) => {
+  MissionUtils.Console.readLine(question, (userInput) => {
+    validateUserNumber(userInput);
+  });
+};
+
+const validateUserNumber = (userInput) => {
+  const isOneToNine = validateOneToNine(userInput);
+  const isCorrectLength = validateLength(userInput, 3);
+  const isNotOverlapped = validateOverlapped(userInput);
+
+  if (isOneToNine && isCorrectLength && isNotOverlapped) {
+    return true;
+  } else {
+    console.log("에러 발생 후 종료");
+  }
+};
+
 const validateLength = (target, setLength) => {
   if (target.length === setLength) {
     return true;
   }
+
   return false;
 };
 
@@ -40,4 +59,4 @@ const validateOneToNine = (target) => {
   return NUMBER_ONE_TO_NINE.test(target);
 };
 
-module.exports = { getComputerNumber };
+module.exports = { getComputerNumber, getUserNumber };
