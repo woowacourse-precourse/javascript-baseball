@@ -28,16 +28,21 @@ class App {
   }
 
   input() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', userNumber => {
+    this.readLine('숫자를 입력해주세요 : ', userNumber => {
       const { strike, ball } = this.checkAnswer(userNumber);
       const IS_NOTHING = strike === 0 && ball === 0;
       const IS_ANSWER = strike === 3;
+
       if (IS_ANSWER) {
         this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         replay();
       } else {
-        if (IS_NOTHING) this.print('낫싱');
-        else this.print(`${ball}볼 ${strike}스트라이크`);
+        const BALL_STRIKTE_CONTENT = `${ball === 0 && `${ball}볼`} ${
+          strike === 0 && `${strike}스트라이크`
+        }`;
+        const CONTENT = IS_NOTHING ? '낫싱' : BALL_STRIKTE_CONTENT;
+
+        this.print(CONTENT);
         this.input();
       }
     });
@@ -57,18 +62,20 @@ class App {
   }
 
   replay() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      number => {
-        if (number === 1) this.start();
-        else if (number === 2) MissionUtils.Console.close();
-        else throw Error('잘못된 입력입니다.');
-      },
-    );
+    this.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', number => {
+      if (number === 1) this.start();
+      else if (number === 2) MissionUtils.Console.close();
+      else throw Error('잘못된 입력입니다.');
+    });
   }
 
   print(content) {
     MissionUtils.Console.print(content);
+  }
+
+  readLine(content, func) {
+    this.print(content);
+    func();
   }
 }
 
