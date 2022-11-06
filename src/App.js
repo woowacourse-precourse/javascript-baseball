@@ -19,11 +19,12 @@ class App {
     let num;
     for (let digit = 0; digit < 3; digit++) {
       num = this.pickSingleDigit();
-      while (computerNum.includes(num) === 0) {
+      while (computerNum.includes(num) === true) {
         num = this.pickSingleDigit();
       }
       computerNum.push(num);
     }
+    console.log(computerNum.join(""));
     return computerNum.join("");
   }
   getUserNum() {
