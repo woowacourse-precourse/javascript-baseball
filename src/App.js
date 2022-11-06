@@ -26,10 +26,11 @@ class App {
     const answer = [];
     const minNumber = this.gameSet.NUM_MIN;
     const maxNumber = this.gameSet.NUM_MAX;
+    const lengthNumber = this.gameSet.NUM_LENGTH;
     
     this.answer = answer;
 
-    while(answer.length < 3){
+    while(answer.length < lengthNumber){
       const randomNumber = Random.pickNumberInRange(minNumber, maxNumber);
       answer.includes(randomNumber) ? answer : answer.push(randomNumber);
     }
