@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
+  computerNum = 0;
+
   selectNum() {
     const computer = new Set();
     while (computer.size < 3) {
@@ -30,18 +32,16 @@ class App {
 
     let result = new Map();
 
-    result.set("stright", null);
-    result.set("ball", null);
-    result.set("nothing", null);
+    result.set("스트라이크", null);
+    result.set("볼", null);
 
     inputArray.forEach((e, idx) => {
       computerArray.indexOf(e) != -1
         ? computerArray.indexOf(e) == idx
-          ? result.set("stright", result.get("stright") + 1 ?? 1)
-          : result.set("ball", result.get("ball") + 1 ?? 1)
-        : result.set("nothing", result.get("nothing") + 1 ?? 1);
+          ? result.set("스트라이크", result.get("스트라이크") + 1 ?? 1)
+          : result.set("볼", result.get("볼") + 1 ?? 1)
+        : "";
     });
-    console.log(input, computer, result);
     return result;
   }
 
@@ -50,17 +50,17 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자게임을 시작합니다.");
-    let computerNum = this.selectNum();
-    while (true) {
+    this.computerNum = this.selectNum();
+    let inputNum = 0;
+    let compareResult = "";
+    while (flag) {
       MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
-        this.isValidInput(input)
-          ? printResult(this.CompareInputWithComputer(input, computerNum))
-          : this.executeError;
+        inputNum = input;
+        this.isValidInput(input) ? "" : this.executeError();
       });
-      MissionUtils.Console.clear();
-      break;
+      compareResult = this.CompareInputWithComputer(inputNum, this.computerNum);
     }
+    MissionUtils.Console.close();
   }
 }
 
