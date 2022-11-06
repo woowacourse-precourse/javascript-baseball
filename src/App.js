@@ -1,15 +1,20 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class BaseballGame {
-  constructor() {
-    this.isThreeStrike = false;
-  }
-
   randomSelectComputerNumbers() {
-    const selectedNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
+    const randomNumbers = [];
 
-    return selectedNumber;
+    while (randomNumbers.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+
+      if (randomNumbers.includes(number) === false) {
+        randomNumbers.push(number);
+      }
+    }
+
+    return randomNumbers.join('');
   }
+
 
   printResult(strikeCount, ballCount) {
     if (strikeCount === 0 && ballCount === 0) Console.print("낫싱");
@@ -30,18 +35,24 @@ class BaseballGame {
 
   inputUserNumbers(computerNumbers) {
     Console.readLine("숫자를 입력해주세요 : ", userInput => {
-      const userNumbers = this.isValidUserInput(userInput);
-      this.progressTurn(userNumbers, computerNumbers);
+      const validUserInput = this.isValidUserInput(userInput);
+      if (validUserInput === false) {
+        this.throwError('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
+      }
+
+      this.progressTurn(userInput, computerNumbers);
     });
   }
 
-  progressTurn(userNumbers, computerNumbers) {
+  progressTurn(userInput, computerNumbers) {
+    const computerNumbersArray = [...computerNumbers];
+    const userInputArray = [...userInput];
     let strikeCount = 0;
     let ballCount = 0;
-    userNumbers.map((number, index) => {
-      if (number === computerNumbers[index]) {
+    userInputArray.map((number, index) => {
+      if (number === computerNumbersArray[index]) {
         strikeCount++;
-      } else if (computerNumbers.includes(number)) {
+      } else if (computerNumbersArray.includes(number)) {
         ballCount++;
       }
     });
@@ -57,7 +68,7 @@ class BaseballGame {
       }
 
       if (number === '2') {
-        return Console.close();
+        return this.exitConsole();
       }
 
       return this.throwError('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
@@ -73,14 +84,14 @@ class BaseballGame {
         !userNumbers.includes(element) ? userNumbers.push(element) : ""
       });
 
-    if (
-      userNumbers.length !== 3 ||
-      !(userNumbers).every(isNumberElement)
-    ) {
-      return this.throwError('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
-    }
+    return (
+      userNumbers.length === 3 &&
+      (userNumbers).every(isNumberElement)
+    )
+  }
 
-    return userNumbers.map(Number);
+  exitConsole() {
+    Console.close();
   }
 
   throwError(messages) {
@@ -102,11 +113,6 @@ class App {
 
 module.exports = App;
 
-function check() {
-  const app = new App();
+const app = new App();
+app.play();
 
-  app.play();
-  return 0;
-}
-
-check();
