@@ -12,10 +12,10 @@ const checkOverlapNumbers = (userInput) => {
     return checkError;
 }
 
-const checkOnlyNumbers = (userInput) => userInput.every(v => +v || v === 0);
+const checkOnlyNumbers = (userInput) => userInput.every(v => v || v === 0);
 const checkNumbersLength = (userInput) => userInput.length !== 3;
 const checkZeroNumber = (userInput) => userInput.some(v => v === 0);
-const checkFloatNumbers = (userInput) => userInput.some(v => !Number.isInteger(+v));
+const checkFloatNumbers = (userInput) => userInput.some(v => !Number.isInteger(v));
 
 function validateNumbers(userInput) {
 
