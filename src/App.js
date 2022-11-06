@@ -43,6 +43,7 @@ class App {
   }
 
   play() {
+    this.print(COMMAND.START_MESSAGE);
     this.enter(RandomNumber.makeNew());
   }
 }
