@@ -46,12 +46,23 @@ class BaseballGame {
     return Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 
+  askRestart() {
+    Console.readLine(GAME_MESSAGE.restart, (answer) => {
+      if (answer === '1') {
+        this.isCorrect = false;
+        this.startGame();
+      }
+    });
+  }
+
   startGame() {
     while (!this.isCorrect) {
       Console.readLine(GAME_MESSAGE.input, (input) => {
         this.getResult(input);
       });
     }
+
+    this.askRestart();
   }
 }
 
