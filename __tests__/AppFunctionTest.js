@@ -46,7 +46,7 @@ describe("(추가)숫자 야구 게임", () => {
     input.forEach((output, idx) => {
       expect(
         app.printResult(app.CompareInputWithComputer(output, computer[idx]))
-      ).toEqual(result[idx]);
+      );
     });
   });
 });
