@@ -55,7 +55,6 @@ class App {
     }
 
     function isBall(i) {
-      console.log(`정답 ${answer} / 입력 : ${userNum[i]}`);
       if (i === 0) {
         if (userNum[i] === answer[1] || userNum[i] === answer[2]) {
           score[0] += 1;
@@ -72,7 +71,17 @@ class App {
     }
 
     console.log(`정답 : ${answer} / 입력 : ${userNum}`);
-    console.log(`${score[0]} 볼 ${score[1]} 스트라이크`);
+
+    if (score[0] === 0 && score[1] === 0) {
+      let result = "낫싱";
+      console.log(result);
+    } else if (score[1] === 3) {
+      let result = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+      console.log(result);
+    } else {
+      let result = `${score[0]}볼 ${score[1]}스트라이크`;
+      console.log(result);
+    }
   }
 }
 
