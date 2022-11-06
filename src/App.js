@@ -8,6 +8,7 @@ class App {
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     const randomNum = makeRandomNumber();
+    console.log(randomNum);
     this.gameStart(randomNum.toString());
   }
 
@@ -21,6 +22,11 @@ class App {
       const userResult = countBallAndStrike(userNumber, answer); // 볼 스트라이크 개수 세기
 
       printGameMessage(userResult.strike, userResult.ball); // 볼 스트라이크 출력
+
+      // 답이 틀렸다면
+      if (userResult.strike < 3) {
+        return this.gameStart(answer);
+      }
     });
   }
 

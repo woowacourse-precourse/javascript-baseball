@@ -7,8 +7,9 @@ const termintateGame = (reason) => {
   };
 
   MissionUtils.Console.print(TERMINATE_REASON[reason]);
+  MissionUtils.Console.close();
 
-  return MissionUtils.Console.close();
+  return reason;
 };
 
 module.exports = termintateGame;
