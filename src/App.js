@@ -7,6 +7,10 @@ function numToArr(num) {
 }
 
 class App {
+  constructor() {
+    this.computer = Computer();
+  }
+
   play() {
     const render = new Render();
 
