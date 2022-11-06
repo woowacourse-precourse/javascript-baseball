@@ -72,4 +72,10 @@ describe('User의 입력값 받기', () => {
     const testComputerSet = new Set(...userInput);
     expect(testComputerSet.size).toEqual(3);
   });
+  test('2-5. 입력된 값에 공백이 있을 경우', () => {
+    const userInput = ['34 5', '2 3 5'];
+    userInput.forEach((input) =>
+      expect(input.replace(/ /g, '').length).toBe(3),
+    );
+  });
 });
