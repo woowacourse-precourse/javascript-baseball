@@ -1,6 +1,10 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+afterAll(() => {
+  MissionUtils.Console.close();
+});
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();

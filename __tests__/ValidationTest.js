@@ -1,4 +1,9 @@
 const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
+
+afterAll(() => {
+  MissionUtils.Console.close();
+});
 
 describe("결과값 유효성 테스트", () => {
   test("숫자가 전부 일치하지 않는 경우", () => {
