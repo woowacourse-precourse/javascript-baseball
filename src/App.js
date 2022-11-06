@@ -64,12 +64,14 @@ class App {
     let ballCount = 0;
 
     for (let i = 0; i < MAX_NUMBER_LENGTH; i++) {
-      if (computerInput[i] === userInput[i]) strikeCount++;
+      if (computerInput[i] === userInput[i]) {
+        strikeCount++;
+        continue;
+      }
+      if (computerInput.includes(userInput[i])) {
+        ballCount++;
+      }
     }
-    for (let eachLetter of userInput) {
-      if (computerInput.includes(eachLetter)) ballCount++;
-    }
-    ballCount -= strikeCount;
 
     return { strikeCount, ballCount };
   }
