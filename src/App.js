@@ -5,7 +5,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const computerNumber = this.createComputerNumber();
     const userNumber = this.inputUserNumber(computerNumber);
-    // console.log(computerNumber, userNumber);
+    console.log(computerNumber, userNumber);
   }
 
   // 컴퓨터의 숫자 랜덤으로 생성한다. (1부터 9까지 서로 다른 수로 이루어진 3자리의 수)
@@ -23,40 +23,43 @@ class App {
 
   // 사용자에게 숫자를 입력 받는다.
   inputUserNumber(computerNumber) {
-    let user;
-
+    let userNumber;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
-      const checkNumber = this.isNumberVaild(num);
-      user = checkNumber;
-
-      const compareResults = this.compareNumbers(user, computerNumber);
+      this.isNumberVaild(num);
+      userNumber = num;
+      const compareResults = this.countBallAndStrike(
+        userNumber,
+        computerNumber
+      );
     });
-    return user;
+    return userNumber;
   }
 
   // 사용자가 입력한 숫자 유효성 검사
   isNumberVaild(number) {
-    const set = new Set(number);
-    const len = number.length;
-
-    //  입력한 수가 3자리 수인가
-    if (len !== 3) {
-      throw "3자리 수를 입력해주세요.";
-    }
-
-    // 서로 다른 숫자인가
-    if (len !== set.size) {
-      throw "서로 다른 수를 입력하세요.";
-    }
-
-    // 1 ~ 9 범위에 해당하는 수를 입력했는가
-    this.isNumberInRange(number);
-
+    this.checkNumberLength(number);
+    this.checkNumberDifferent(number);
+    this.checkNumberInRange(number);
     return number;
   }
 
+  // 유효성 검사: 입력한 수가 3자리 수인가
+  checkNumberLength(number) {
+    if (number.length !== 3) {
+      throw "3자리 수를 입력해주세요.";
+    }
+  }
+
+  // 유효성 검사: 입력한 수가 서로 다른 숫자인가
+  checkNumberDifferent(number) {
+    const removeDuplicates = new Set(number);
+    if (number.length !== removeDuplicates.size) {
+      throw "서로 다른 수를 입력하세요.";
+    }
+  }
+
   // 유효성 검사: 1 ~ 9 범위에 해당하는 수를 입력했는가
-  isNumberInRange(number) {
+  checkNumberInRange(number) {
     for (let i = 0; i < number.length; i++) {
       if (!(parseInt(number[i]) >= 1 && parseInt(number[i]) <= 9)) {
         throw "1 ~ 9 범위에 해당하는 숫자를 입력하세요.";
