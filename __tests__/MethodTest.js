@@ -22,4 +22,13 @@ describe('App 클래스 메서드 테스트', () => {
     expect(strike).not.toBe(2);
     expect(strike).not.toBe(3);
   });
+
+  test('ball 메서드', () => {
+    const input = [1, 2, 3];
+    const computer = [3, 2, 1];
+    const ball = app.compareBall(input, computer);
+    expect(ball).toBe(2);
+    expect(ball).not.toBe(3);
+    expect(ball).not.toBe(1);
+  });
 });
