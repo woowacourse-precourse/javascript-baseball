@@ -12,7 +12,11 @@ function App() {
   };
 
   const userInputCallBack = (input) => {
-    checkUserInputValidation(input); // 값 검사
+    const [isValidate, message] = checkUserInputValidation(input); // 값 검사 여기서 막히면 error throw
+    if (!isValidate) {
+      throw new Error(message);
+    }
+
     const [strikeCount, ballCount] = compareInputWithComputer(input);
 
     if (!strikeCount && !ballCount) Console.print("낫싱");
@@ -57,7 +61,9 @@ function App() {
   };
 
   const checkUserInputValidation = (userInput) => {
-    return;
+    const userInputReg = /[1-9]{3}/g;
+    let message = "";
+    const dupleSet = new Set([...userInput]);
     /**
      * 오류 입력 처리
      * 숫자가 1~9가 아닌 경우
@@ -65,6 +71,19 @@ function App() {
      * 입력값이 3자리가 아닌 경우
      *
      */
+    let result = true;
+    if (userInput.length !== 3) {
+      message = "3글자를 입력해주세요";
+      result = false;
+    } else if (!userInputReg.test(userInput)) {
+      message = "1-9 사이의 값을 입력해주세요.";
+      result = false;
+    } else if (dupleSet.length !== 3) {
+      message = "서로 다른 값을 입력해주세요";
+      result = false;
+    }
+
+    return [result, message];
   };
 
   const getStrikeCount = (user, computer) => {
