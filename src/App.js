@@ -69,7 +69,7 @@ class App {
     user.forEach((userNumber, index) => {
       if (userNumber === this.computer[index]) {
         memo.strike += 1;
-      } else if (this.computer.includes(userNumber, index + 1)) {
+      } else if (this.computer.includes(userNumber)) {
         memo.ball += 1;
       }
     });
