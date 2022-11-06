@@ -29,7 +29,29 @@ class App {
       if(set.size != input.size){ // 중복되는 수를 입력한 경우
         throw new Error('예외 발생- 서로 다른 3자리 수를 입력하세요');
       }
+      //스트라이크
+      let cnt = 0; //스트라이크 수를 세기 위한 count
+      Strike(random, input, cnt);
+      if(cnt == 3){
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (control) => {
+          console.log(`${control}`);
+          MissionUtils.Console.close();
+        });
+        if(control === 1) continue;
+        else if(control === 2) break;
+      }
     }
+  }
+}
+
+function Strike(array1, array2, n){
+  for(i=0; i<3; i++){
+    if(array1[i] == array2[i]) 
+      n++;
+  }
+  if(n != 0){
+    MissionUtils.Console.print('${n}스트라이크 ');
   }
 }
 
