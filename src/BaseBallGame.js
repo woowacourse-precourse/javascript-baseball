@@ -102,6 +102,21 @@ class BaseBallGame{
       if (answer == '2') Console.close();
     });
   }
+
+  askAnswer() {
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      const userAnswer = this.userAnswerToArray(answer);
+      
+      if (!this.validation(userAnswer)) return;
+      
+      const result = this.checkUserAnswer(this.gameAnswer, userAnswer);
+      
+      this.printResult(result.count);
+      
+      if (!result.victory) this.askAnswer();
+      if (result.victory) this.askReGame(); 
+    });
+  }
 }
 
 export default BaseBallGame;
