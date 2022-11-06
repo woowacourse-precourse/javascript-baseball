@@ -81,10 +81,12 @@ describe("기능 테스트", () => {
 
   test("스트라이크 카운트를 결정하는 기능", () => {
     const app = new App();
+    const case0 = app.decideStrikeCount("123", "456");
     const case1 = app.decideStrikeCount("123", "189");
     const case2 = app.decideStrikeCount("123", "129");
     const case3 = app.decideStrikeCount("123", "123");
 
+    expect(case0).toEqual(0);
     expect(case1).toEqual(1);
     expect(case2).toEqual(2);
     expect(case3).toEqual(3);
@@ -92,10 +94,12 @@ describe("기능 테스트", () => {
 
   test("볼 카운트를 결정하는 기능", () => {
     const app = new App();
+    const case0 = app.decideBallCount("123", "456");
     const case1 = app.decideBallCount("123", "914");
     const case2 = app.decideBallCount("123", "412");
     const case3 = app.decideBallCount("123", "312");
 
+    expect(case0).toEqual(0);
     expect(case1).toEqual(1);
     expect(case2).toEqual(2);
     expect(case3).toEqual(3);
