@@ -88,7 +88,7 @@ class App {
     if (input === 1) {
       this.COMPUTER_NUMBER = this.randomNum();
       this.playerInput();
-    } else if (input === 2) {
+    } else {
       Console.close();
     }
   }
