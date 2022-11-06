@@ -5,6 +5,21 @@ const { Random, Console } = MissionUtils;
 class App {
   constructor() {
     this.answer = [];
+    this.userInput = "";
+  }
+
+  startGame() {
+    this.createAnswer();
+    this.getUserInput();
+  }
+  getUserInput() {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!this.checkException(input, true)) {
+        throw "ERROR";
+      }
+      this.userInput = input;
+      Console.close();
+    });
   }
 
   createAnswer() {
