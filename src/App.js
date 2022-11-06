@@ -49,7 +49,7 @@ const gen_rand_num = () => {
 
 const play_inst = (is_end, solution) => {  
   MissionUtils.Console.readLine("숫자를 입력해 주세요", (answer)=>{    
-    console.log(answer, solution)
+    //console.log(answer, solution)
     if (answer == solution) {
       is_end[0] = true
     } else if (answer.length <= 3) {
@@ -69,6 +69,19 @@ const play_inst = (is_end, solution) => {
       play_inst(is_end, solution)
     }
   })  
+}
+
+const play_again_test = (is_end, callback)=> {
+  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (answer)=>{
+    if ([1, 2, "1", "2"].includes(answer) === false){
+      throw new Error("Invalid Input to restart");
+    } else if (answer == 1) {
+      is_end = [false]
+      callback(is_end, gen_rand_num())
+    } else if (answer == 2) {
+      console.log("game end")
+    }
+  })
 }
 
 class App {
