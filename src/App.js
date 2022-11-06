@@ -65,6 +65,15 @@ class App {
     hintString = this.makeHintString(strike,ball)
     return hintString;
   }
+
+  judgeStrikeOrBall(answer,inputNumber,idx){
+    const PLAYER_NUMBER_ARRAY = [...inputNumber];
+    if(answer.includes(parseInt(PLAYER_NUMBER_ARRAY[idx]))){
+      if (PLAYER_NUMBER_ARRAY[idx]==answer[idx]) 
+        return 'strike';
+      return 'ball';
+    }
+  }
 }
 
 module.exports = App;
