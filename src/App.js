@@ -35,7 +35,7 @@ class App {
     answerUserNumbers() {
         return Console.readLine('숫자를 입력해주세요 : ',(input) => {
             this.validateInput(input);
-            this.finishGame(parseInt(input));
+            this.setUserNumbers(parseInt(input));
         })
     }
 
@@ -59,6 +59,15 @@ class App {
             if(answer === END_GAME_KEY) return Console.print('게임 종료');
             if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new Error(`${REPLAY_GAME_KEY} 또는 ${END_GAME_KEY}를 입력하세요.`);
         })
+    }
+
+    setUserNumbers() {
+        this.userNumbers = userNumbers;
+        if(this.userNumbers === this.computerNumbers) return this.finishGame();
+        
+        const { ball, strike } = this.ballAndStrikeCalc();
+        this.isProvideHints(ball, strike);
+        return this.answerUserNumbers();
     }
 
     ballAndStrikeCalc(computerPickNumber,userNumbers){
