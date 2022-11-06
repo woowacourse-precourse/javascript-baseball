@@ -20,9 +20,9 @@ describe('컴퓨터 숫자 생성', () => {
     mockRandoms(randoms);
 
     const computer = new BaseballComputer();
-    const result = computer.numbers;
+    computer.setNumbers();
 
-    expect(result).toHaveLength(3);
+    expect(computer.numbers).toHaveLength(3);
   });
 
   test('서로 다른 임의의 수로 구성되어 있다', () => {
@@ -31,8 +31,8 @@ describe('컴퓨터 숫자 생성', () => {
     mockRandoms(randoms);
 
     const computer = new BaseballComputer();
-    const result = computer.numbers;
+    computer.setNumbers();
 
-    expect(result).toStrictEqual(['1', '4', '5']);
+    expect(computer.numbers).toStrictEqual(['1', '4', '5']);
   });
 });
