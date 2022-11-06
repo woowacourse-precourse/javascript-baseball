@@ -5,4 +5,4 @@ function generateComputerNum() {
     return RANDOM_NUM_ARR;
 }
 
-module.exports = generateComputerNum;
+module.exports.generateComputerNum = generateComputerNum;

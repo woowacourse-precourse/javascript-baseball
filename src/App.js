@@ -1,12 +1,12 @@
 const printMessage = require("./PrintMessage.js");
-const playGame = require("./PlayBaseball/js");
+const playGame = require("./PlayBaseball.js");
 
 class App {
   play() {
-    let playGame = true;
+    let isPlayGame = true;
     printMessage.printGameStart();
-    while(playGame){
-      playGame = playGame.playBaseballGame();
+    while(isPlayGame){
+      isPlayGame = playGame.playBaseballGame();
     }
   }
 }

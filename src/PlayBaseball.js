@@ -7,7 +7,7 @@ function playBaseballGame() {
     let isGamePlaying = true;
     while(isGamePlaying) {
         let userNum, numOfStrike = 0;
-        userNum = printMessage.printUserInput();
+        userNum = printMessage.printUserNumInput();
         //userNum 예외처리 조건 확인
         numOfStrike = getNumOfStrike(computerNum, userNum);
         if(numOfStrike == 3){
@@ -70,4 +70,4 @@ function getCompareResult(numOfBall, numOfStrike) {
     printMessage.printEndOfLine();
 }
 
-module.exports = playBaseballGame;
+module.exports.playBaseballGame = playBaseballGame;
