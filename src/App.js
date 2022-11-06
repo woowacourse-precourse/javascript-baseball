@@ -15,12 +15,16 @@ class App {
     }
   } 
 }
+
   CompareNumber(My_Number,Computer_Number){
     console.log(My_Number,Computer_Number)
     let strike=0;
     let ball=0;
-    My_Number.map((element, index) => { console.log(element,Computer_Number[index])})
     let cnt=0;
+    
+    for(let i=0;i<3;i++){
+
+    }
     for(let i=0;i<3;i++){
       if(My_Number[i]===Computer_Number[i]){
         cnt++;
@@ -30,15 +34,14 @@ class App {
       MissionUtils.Console.print("낫싱")
       this.Restart()
     }else if(cnt===1){
-      MissionUtils.Console.print("1볼 1스트라이크")
+      MissionUtils.Console.print(`${ball}볼+1스트라이크`)
       this.Restart()
     }else if(cnt===2){
-      MissionUtils.Console.print("1볼 2스트라이크료")
+      MissionUtils.Console.print(`${ball}볼+2스트라이크`)
       this.Restart()
     }else if(cnt===3){
       this.AllCorrect()
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-
     }  
   }
 
@@ -60,7 +63,12 @@ class App {
   Input(){
       MissionUtils.Console.readLine('번호를 입력해주세요.', (answer) => {
         let temp=answer.split(' ').join('').split('').map(Number)
-        if (temp.length<=3) {
+        for(let i=0;i<temp.length;i++){
+          if(isNaN(temp[i])){
+            throw("Request is failed")
+          }
+        }
+        if (temp.length===3) {
           this.CompareNumber(temp, this.Computer_Number)
         }else{
           throw("Request is failed")
