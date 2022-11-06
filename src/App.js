@@ -3,6 +3,45 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 const DUPLICATION_NUMBER_REGEXP = /([1-9])\1+/g
 const IS_ZERO_REGEXP = /([0])/g
 const NUMBER_REGEXP = /(\D)/g
+
+
+function stringToArray(number) {
+  return String(number).split('').map((str) => Number(str));
+}
+
+function printCompareResult(result) {
+  if (result['strikeCount'] === 3) {
+    Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+    return true;
+  }
+
+  if (result['strikeCount'] === 0 && result['ballCount'] === 0) {
+    Console.print("낫싱");
+  } else if (result['strikeCount'] === result['ballCount']) {
+    Console.print(`${result['strikeCount']}스트라이크`);
+  } else if (result['strikeCount'] === 0  && result['ballCount'] > 0) {
+    Console.print(`${result['ballCount']}볼`);
+  } else {
+    Console.print(`${result['ballCount'] - result['strikeCount']}볼 ${result['strikeCount']}스트라이크`);
+  }
+  return false;
+}
+
+function compareNumber(userNumber, randomNumber) {
+  const result = { strikeCount: 0, ballCount: 0 };
+
+  userNumber.forEach((number, index) => {
+    if (number === randomNumber[index]) {
+      result['strikeCount'] += 1;
+    }
+    if (randomNumber.indexOf(number) !== -1) {
+      result['ballCount'] += 1;
+    }
+  })
+
+  return printCompareResult(result);
+}
+
 class App {
   constructor() {
     this.userNumber = [0, 0, 0];
@@ -22,43 +61,6 @@ class App {
       }
     }
     this.randomNumber = computer;
-  } 
-  
-  stringToArray(number) {
-    return String(number).split('').map((str) => Number(str));
-  }
-
-  printCompareResult(result) {
-    if (result['strikeCount'] === 3) {
-      Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
-      return true;
-    }
-
-    if (result['strikeCount'] === 0 && result['ballCount'] === 0) {
-      Console.print("낫싱");
-    } else if (result['strikeCount'] === result['ballCount']) {
-      Console.print(`${result['strikeCount']}스트라이크`);
-    } else if (result['strikeCount'] === 0  && result['ballCount'] > 0) {
-      Console.print(`${result['ballCount']}볼`);
-    } else {
-      Console.print(`${result['ballCount'] - result['strikeCount']}볼 ${result['strikeCount']}스트라이크`);
-    }
-    return false;
-  }
-
-  compareNumber(userNumber, randomNumber) {
-    const result = { strikeCount: 0, ballCount: 0 };
-
-    userNumber.forEach((number, index) => {
-      if (number === randomNumber[index]) {
-        result['strikeCount'] += 1;
-      }
-      if (randomNumber.indexOf(number) !== -1) {
-        result['ballCount'] += 1;
-      }
-    })
-  
-    return this.printCompareResult(result);
   }
 
   restartGameOption() {
@@ -111,8 +113,8 @@ class App {
     Console.readLine(questionText, (input) => {
       this.isValidateInputNumber(input);
 
-      this.userNumber = this.stringToArray(input);
-      let result = this.compareNumber(this.userNumber, this.randomNumber);
+      this.userNumber = stringToArray(input);
+      let result = compareNumber(this.userNumber, this.randomNumber);
 
       if (result) {
         this.gameOption('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n');
