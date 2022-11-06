@@ -6,9 +6,8 @@ class App {
   }
 
   static isNumber(str) {
-    const NUMBER_REGEXP = /^[0-9]+$/;
-    const PREFIX_ZERO_REGEXP = /^[0]+[0-9]+$/;
-    if (PREFIX_ZERO_REGEXP.test(str) || !NUMBER_REGEXP.test(str)) {
+    const NUMBER_REGEXP = /^[1-9]+$/;
+    if (!NUMBER_REGEXP.test(str)) {
       return false;
     }
     return true;
@@ -127,7 +126,7 @@ class App {
         }
       
       } catch(error) {
-        MissionUtils.Console.print('입력값이 서로 다른 세 자릿수가 아닙니다.');
+        MissionUtils.Console.print('입력값이 1부터 9까지 서로 다른 수로 이루어진 세 자릿수가 아닙니다.');
         App.finishGame();
       }
     });
