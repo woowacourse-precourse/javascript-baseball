@@ -76,8 +76,10 @@ function cpuMakeAnswer() {
 }
 
 class App {
-  constructor(cpuNumber) {
+  constructor(cpuNumber, userInput, gameResult) {
     this.cpuNumber = cpuNumber;
+    this.userInput = userInput;
+    this.gameResult = gameResult;
   }
   play() {
     Console.print("숫자 야구게임을 시작합니다.");
@@ -89,49 +91,46 @@ class App {
   }
 
   gaming() {
-    let userInput = [];
-    let gameResult = "";
-
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      userInput = Array.from(input);
-      for (let i = 0; i < userInput.length; i++) {
-        userInput[i] = parseInt(userInput[i]);
+      this.userInput = Array.from(input);
+      for (let i = 0; i < this.userInput.length; i++) {
+        this.userInput[i] = parseInt(this.userInput[i]);
       }
 
-      Console.print(userInput);
-      if (checkVaildUserInputValue(userInput)) {
-        gameResult = UserInputValueCompareToCPUAnswer(
-          this.cpuNumber,
-          userInput
-        );
-        // Console.print(gameResult);
-        if (gameResult == "3스트라이크") {
-          Console.print(gameResult);
-
-          Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-          Console.readLine(
-            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-            (newGame) => {
-              if (newGame == 1) {
-                bullsAndCows.play();
-              } else if (newGame == 2) {
-                Console.print("게임이 종료되었습니다.");
-              } else {
-                throw new Error("잘못된 명령어를 입력했습니다.");
-              }
-            }
-          );
-        } else {
-          Console.print(gameResult);
-
-          bullsAndCows.gaming();
-        }
-      }
+      bullsAndCows.checking();
     });
   }
 
+  checking() {
+    if (checkVaildUserInputValue(this.userInput)) {
+      this.gameResult = UserInputValueCompareToCPUAnswer(
+        this.cpuNumber,
+        this.userInput
+      );
+      if (this.gameResult == "3스트라이크") {
+        Console.print(this.gameResult);
+        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        bullsAndCows.replay();
+      } else {
+        Console.print(this.gameResult);
+        bullsAndCows.gaming();
+      }
+    }
+  }
+
   replay() {
-    play();
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (newGame) => {
+        if (newGame == 1) {
+          bullsAndCows.play();
+        } else if (newGame == 2) {
+          Console.print("게임이 종료되었습니다.");
+        } else {
+          throw new Error("잘못된 명령어를 입력했습니다.");
+        }
+      }
+    );
   }
 }
 
