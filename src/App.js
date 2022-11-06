@@ -23,11 +23,11 @@ class App {
   getUserAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if (
-        answer.length !== 3 &&
-        [...new Set(answer.split(""))].length !== 3 &&
+        answer.length !== 3 ||
+        [...new Set(answer.split(""))].length !== 3 ||
         !/^\d+$/.test(answer)
       )
-        throw Error();
+        throw new Error();
 
       const RESULT = this.validateAnswer(answer);
       this.showResult(RESULT);
@@ -57,13 +57,13 @@ class App {
   }
 
   showResult(result) {
-    let result_sentence = "";
+    let result_sentence = [];
 
-    if (result.ball > 0) result_sentence = result.ball + "볼";
-    if (result.strike > 0) result_sentence += result.strike + "스트라이크";
-    if (result.ball + result.strike === 0) result_sentence = "낫싱";
+    if (result.ball > 0) result_sentence.push(result.ball + "볼");
+    if (result.strike > 0) result_sentence.push(result.strike + "스트라이크");
+    if (result.ball + result.strike === 0) result_sentence.push("낫싱");
 
-    MissionUtils.Console.print(result_sentence);
+    MissionUtils.Console.print(result_sentence.join(" "));
   }
 
   askRetry() {
@@ -77,7 +77,7 @@ class App {
         } else if (answer === "2") {
           MissionUtils.Console.close();
         } else {
-          throw Error();
+          throw new Error();
         }
       },
     );
