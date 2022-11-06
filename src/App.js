@@ -72,12 +72,18 @@ class App {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (num) => {},
+      (num) => {
+        if (num === '1') {
+          return this.play();
+        }
+        if (num === '2') {
+          process.exit();
+        }
+      },
     );
   }
 
   discriminationStrikeOrBall() {
-    Console.print(this.computerNumbers);
     const result = this.userNumbers.reduce((acc, cur, i) => {
       if (this.computerNumbers.includes(cur)) {
         if (this.computerNumbers[i] === cur) return acc + 10;
@@ -88,8 +94,8 @@ class App {
     }, 0);
 
     const isGameSet = this.calculateGameResult(result);
-    if (isGameSet) this.gameSet();
-    else this.userInputNumber();
+    if (isGameSet) return this.gameSet();
+    return this.userInputNumber();
   }
 
   userInputNumber() {
