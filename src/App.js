@@ -6,16 +6,16 @@ class App {
     this.userInputNumber;
     this.countStrike = 0;
     this.countBall = 0;
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   play() {
-    //MissionUtils.Console.print(this.computerNumber);
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+   // MissionUtils.Console.print(this.computerNumber);
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInputNumber) => {
       this.userInputNumber = userInputNumber;
       this.countMethod();
       this.printMessageMethod();
-    });
+        });
     // MissionUtils.Console.close();
   }
 
