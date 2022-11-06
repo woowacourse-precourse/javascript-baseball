@@ -1,4 +1,27 @@
 const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const mockQuestions = (inputs) => {
+  MissionUtils.Console.readLine = jest.fn();
+  inputs.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe("숫자 야구 게임", () => {
   test("주어진 메시지 출력", () => {
@@ -134,6 +157,25 @@ describe("숫자 야구 게임", () => {
     expectedResults.forEach((expectedResult, index) => {
       const result = app.isCorrectAnswer((strikeCounts = index), DIGITS);
       expect(result).toBe(expectedResult);
+    });
+  });
+
+  test("정답을 맞출 때까지 라운드 반복", () => {
+    const DIGITS = 3;
+    const randoms = [1, 3, 5];
+    const inputs = ["246", "135"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱", "3스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(inputs);
+
+    const app = new App();
+    const answer = app.generateRandomNumber(DIGITS);
+    app.playRound(answer);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 });
