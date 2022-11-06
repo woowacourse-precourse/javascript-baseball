@@ -6,7 +6,11 @@ class NumberBaseball {
   }
 
   inputValidCheck(strArray) {
-    if (this.inputLengthCheck(strArray)) {
+    if (
+      this.inputLengthCheck(strArray) &&
+      this.inputDuplicatedCheck(strArray) &&
+      this.inputNumCheck(strArray)
+    ) {
       return true;
     }
     return false;
@@ -17,7 +21,11 @@ class NumberBaseball {
   }
 
   inputDuplicatedCheck(strArray) {
-    return strArray.length === new Set(strArray).length;
+    return strArray.length === new Set(strArray).size;
+  }
+
+  inputNumCheck(strArray) {
+    return strArray.every((num) => CONSTANTS.NUMBERS.includes(num));
   }
 }
 
