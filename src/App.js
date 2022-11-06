@@ -12,9 +12,9 @@ class App {
   }
   submitInput() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.INPUT, (input) => {
-      const userInput = GameUtils.System.toFilterdArray(input);
-      GameUtils.Validator.isVaildAnswer(userInput);
-      const result = GameUtils.System.getResult(userInput, this.answer);
+      input = GameUtils.System.toFilterdArray(input);
+      GameUtils.Validator.isVaildAnswer(input);
+      const result = GameUtils.System.getResult(input, this.answer);
       Print.GameMessage.result(result);
       this.isClear(result.strike);
     });

@@ -8,10 +8,10 @@ class GameMessage {
   static gameover() {
     MissionUtils.Console.print(constants.GAME_MESSAGE.GAMEOVER);
   }
-  static result(resultValue) {
+  static result(score) {
     let resultMessage = '';
-    if(resultValue.ball) resultMessage += `${resultValue.ball}${constants.RESULT_COUNT.BALL} `;
-    if(resultValue.strike) resultMessage += `${resultValue.strike}${constants.RESULT_COUNT.STRIKE}`;
+    if(score.ball) resultMessage += `${score.ball}${constants.RESULT_COUNT.BALL} `;
+    if(score.strike) resultMessage += `${score.strike}${constants.RESULT_COUNT.STRIKE}`;
     if(resultMessage === '') resultMessage = constants.RESULT_COUNT.NOTHING;
     MissionUtils.Console.print(resultMessage);
   }
