@@ -4,14 +4,12 @@ const {
   NUMBER_LENGTH,
   GAME_MESSAGE,
   RESTART_OPTION,
-  IS_ANSWER,
 } = require('../constant/constant');
 const inputValidator = require('../input/validator');
 const Calculator = require('./Calculator');
 
 class BaseballGame {
   constructor() {
-    this.isStop = false;
     this.calculator = new Calculator();
   }
 
@@ -24,16 +22,24 @@ class BaseballGame {
     Console.print(GAME_MESSAGE.start);
   }
 
-  getResult(input, randomNumber) {
-    const valid = inputValidator(input);
+  getResult(randomNumber) {
+    Console.readLine(GAME_MESSAGE.input, (input) => {
+      const valid = inputValidator(input);
 
-    if (!valid.isValid) {
-      throw valid.message;
-    }
+      if (!valid.isValid) {
+        throw valid.message;
+      }
 
-    const { ball, strike } = this.calculator.calcScore(input, randomNumber);
+      const { ball, strike } = this.calculator.calcScore(input, randomNumber);
 
-    return this.printResult(ball, strike);
+      this.printResult(ball, strike);
+
+      if (strike !== NUMBER_LENGTH) {
+        this.getResult(randomNumber);
+      }
+
+      this.askRestart();
+    });
   }
 
   printResult(ball, strike) {
@@ -41,30 +47,24 @@ class BaseballGame {
     const strikeMessage = strike > 0 ? `${strike}스트라이크` : '';
 
     if (!ball && !strike) {
-      Console.print(GAME_MESSAGE.nothing);
-
-      return IS_ANSWER.wrong;
+      return Console.print(GAME_MESSAGE.nothing);
     }
 
     if (strike === NUMBER_LENGTH) {
-      Console.print(`${strikeMessage}\n` + GAME_MESSAGE.correct);
-
-      return IS_ANSWER.correct;
+      return Console.print(`${strikeMessage}\n` + GAME_MESSAGE.correct);
     }
 
-    Console.print(`${ballMessage}${strikeMessage}`);
-
-    return IS_ANSWER.wrong;
+    return Console.print(`${ballMessage}${strikeMessage}`);
   }
 
   askRestart() {
     Console.readLine(GAME_MESSAGE.restart, (answer) => {
       if (answer === RESTART_OPTION.restart) {
-        this.startGame();
+        return this.startGame();
       }
 
       if (answer === RESTART_OPTION.end) {
-        this.isStop = true;
+        return Console.close();
       }
     });
   }
@@ -72,15 +72,7 @@ class BaseballGame {
   startGame() {
     const randomNumber = createRandomNumber();
 
-    while (!this.isStop) {
-      Console.readLine(GAME_MESSAGE.input, (input) => {
-        const isCorrect = this.getResult(input, randomNumber);
-
-        if (isCorrect) {
-          this.askRestart();
-        }
-      });
-    }
+    this.getResult(randomNumber);
   }
 }
 
