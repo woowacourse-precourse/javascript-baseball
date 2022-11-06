@@ -53,6 +53,20 @@ class App {
     }
     return ball
   }
+  print_hint(strike,ball) {
+    let message = []
+    if(ball >= 1) {
+      message.push(ball+"볼");
+    }
+    if(strike >= 1) {
+      message.push(strike+"스트라이크")
+    }
+    if(message.length == 0) {
+      message.push("낫싱")
+    }
+
+    MissionUtils.Console.print(message.join(" "))
+  }
 }
 
 module.exports = App;
