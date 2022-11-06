@@ -6,6 +6,9 @@ class App {
     this.inputs = [];
     this.utils = MissionUtils;
   }
+  generateNumber() {
+    return this.utils.Random.pickNumberInRange(1, 9);
+  }
   play() {}
 }
 
