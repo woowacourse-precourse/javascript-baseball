@@ -10,7 +10,6 @@ const inputNumbers = () => {
         } 
         userNum = inputNum;
     });
-    MissionUtils.Console.close();
     return userNum;
 }
 
