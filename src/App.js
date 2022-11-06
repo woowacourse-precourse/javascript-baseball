@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const handleException = require("./handleException");
-const calculateScore = require("./calculateScore");
 
 class App {
   constructor() {
@@ -26,12 +25,22 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputs = input.split("").map((i) => Number(i));
       handleException(inputs);
-      const score = calculateScore(this.answer, inputs);
+      const score = this.calculateScore(this.answer, inputs);
       const print = this.printScore(score);
       MissionUtils.Console.print(print);
       if (this.isContinue) this.enterAnswer();
       else this.isContinueGame();
     });
+  }
+
+  calculateScore(answers, inputs) {
+    let strike = 0;
+    let ball = 0;
+    answers.forEach((_, i) => {
+      if (answers[i] === inputs[i]) strike += 1;
+      else if (answers.includes(inputs[i])) ball += 1;
+    });
+    return { strike, ball };
   }
 
   printScore({ strike, ball }) {
