@@ -65,6 +65,10 @@ class Game {
 
     return true;
   }
+
+  print(message) {
+    MissionUtils.Console.print(message);
+  }
 }
 
 module.exports = Game;
