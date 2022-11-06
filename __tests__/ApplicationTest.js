@@ -113,6 +113,12 @@ describe("숫자 야구 게임", () => {
     expect(App.isZeroScore({ ball: 1, strike: 2,})).toEqual(false);
   });
 
+  test("isThreeStrike", () => {
+    expect(App.isThreeStrike({ ball: 0, strike: 3,})).toEqual(true);
+    expect(App.isThreeStrike({ ball: 0, strike: 0,})).toEqual(false);
+    expect(App.isThreeStrike({ ball: 1, strike: 2,})).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
