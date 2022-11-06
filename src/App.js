@@ -74,6 +74,11 @@ class App {
     return false;
   }
 
+  static isThreeStrike(score) {
+    if (score.strike === 3) return true;
+    return false;
+  }
+
   static playGame(computerNum) {
     let score;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
