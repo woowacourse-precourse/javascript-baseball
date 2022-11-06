@@ -62,6 +62,7 @@ class App {
 
     if (strike !== 0 || ball !== 0) {
       this.sendMessage(`${ball ? `${ball}볼 ` : ""}${strike ? `${strike}스트라이크` : ""}`);
+      this.requestAnswer("숫자를 입력해주세요. : ");
       return;
     }
 
