@@ -1,7 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
-  let NUMBER = [];
+  NUMBER = [];
 
   play() {
     this.start();
@@ -18,9 +18,9 @@ class App {
   }
 
   playerInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.compareNumber(input);
-    })
+    });
   }
 }
 
