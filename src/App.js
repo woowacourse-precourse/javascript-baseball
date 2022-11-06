@@ -3,6 +3,7 @@ const { MESSAGE } = require("./constants/index");
 
 const Computer = require("./libs/Computer");
 const User = require("./libs/User");
+const Validator = require("./libs/Validator");
 
 const initialState = {
   answer: "",
@@ -15,18 +16,30 @@ class App {
 
     this.computer = new Computer();
     this.user = new User();
-  }
-
-  start() {
-    Console.print(MESSAGE.START);
-    this.state.answer = this.computer.getThreeUniqueNumbers();
-
-    this.state.inputValue = this.user.getInputValue();
-    Console.print(this.state.inputValue);
+    this.validator = new Validator();
   }
 
   play() {
+    Console.print(MESSAGE.START);
     this.start();
+  }
+
+  start() {
+    this.state.answer = this.computer.getThreeUniqueNumbers();
+    this.input();
+  }
+
+  input() {
+    this.state.inputValue = this.user.getInputValue();
+
+    const isInputValueValid = this.validator.checkInputValueValid(
+      this.state.inputValue
+    );
+    if (isInputValueValid === false) this.error();
+  }
+
+  error() {
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
