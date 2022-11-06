@@ -3,6 +3,27 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {}
 
+  playNewGame() {
+
+  }
+
+  readUserInputValue(randomNum){
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (value) => {
+      if(this.isValidInputValueInGame(value) === false){this.throwExceptionMessage(`세 자리의 숫자를 정확히 입력해주세요 : 입력한 값 ${value}`)};
+      const inputNum = Number(value);
+      if(this.isSameTwoNumber(randomNum,inputNum)){
+        this.printAllMatchMessage();
+        MissionUtils.Console.close();
+      };
+      
+      const strikeCount = this.getStrikeCount(randomNum,inputNum);
+      const ballCount = this.getBallCount(randomNum,inputNum);
+
+      if(ballCount === 0 && strikeCount === 0){ this.printNothingMessage(); }
+      if(ballCount > 0 || strikeCount > 0){ this.printBallAndStrikeCount(ballCount,strikeCount); }
+      this.readUserInputValue(randomNum)
+    });
+  }
 
   printGameStartMessgae(){
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
