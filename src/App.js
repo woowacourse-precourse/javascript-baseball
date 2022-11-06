@@ -85,6 +85,7 @@ class App {
       this.stopGameOrNot();
     } else {
       this.countBallOrStrikeOrNothing(this.randomNumber, this.userInputNumber);
+      this.makeUserInputNumber();
     }
   }
 
@@ -111,10 +112,26 @@ class App {
     return ball;
   }
 
+  printResult(strike, ball) {
+    let result = [];
+    if (ball > 0) {
+      result.push(`${ball}볼`);
+    }
+    if (strike > 0) {
+      result.push(`${strike}스트라이크`);
+    }
+    if (result.length > 0) {
+      MissionUtils.Console.print(result.join(" "));
+    } else {
+      MissionUtils.Console.print("낫싱");
+    }
+  }
+
   countBallOrStrikeOrNothing(randomNumber, userInputNumber) {
     // strike, ball 계산
     let strike = this.countStrike(randomNumber, userInputNumber);
     let ball = this.countBall(randomNumber, userInputNumber);
+    this.printResult(strike, ball);
   }
 
   makeUserInputNumber() {
