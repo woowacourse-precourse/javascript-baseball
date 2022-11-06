@@ -1,7 +1,4 @@
-const { COMPUTERSTORE } = require('./store');
 const { Console } = require('@woowacourse/mission-utils');
-
-const computer = COMPUTERSTORE()[0];
 
 function outputCompareNumbersResult(strike, ball) {
     if (!strike && !ball) {
@@ -16,7 +13,7 @@ function outputCompareNumbersResult(strike, ball) {
 }
 
 
-function compareNumbers(userInput) {
+function compareNumbers(userInput, computer) {
     let strike = 0;
     let ball = 0;
 
