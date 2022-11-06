@@ -35,7 +35,7 @@ class BaseballGame {
 
       this.exceptionHandler.checkUserInputLength(answer);
       this.exceptionHandler.checkUserInputRedundancy(answer);
-      this.exceptionHandler.checkInvalidNumber(answer);
+      this.exceptionHandler.checkInvalidDigit(answer);
 
       this.checkBall(this.computer.computerRandomNumberArray, this.user.userAnswer);
       this.checkStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);
