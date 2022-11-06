@@ -46,6 +46,26 @@ class App {
     });
   }
 
+  isInputValid (input) {
+    const isValid = input;
+
+    if (isValid === '1' || isValid === '2') return this.isGameEnd(isValid);
+
+    const lengthValid = this.gameSet.NUM_LENGTH;
+    if (isValid.length !== lengthValid ) this.error();
+
+    const numberRangeMin = this.gameSet.NUM_MIN;
+    const numberRangeMax = this.gameSet.NUM_MAX;
+    const numberRange = new RegExp(`[^${numberRangeMin}-${numberRangeMax}]`, 'g');
+    const isNumberValid = []
+    isValid.split('').forEach(number =>  {
+      if (numberRange.test(number)) return this.error();
+      isNumberValid.push(Number(number));
+    });
+
+    this.inputMatch(input);
+  }
+
   gameStart () {
     this.gameSet = this.gameSetting();
     this.printMsg('숫자 야구 게임을 시작합니다.');
