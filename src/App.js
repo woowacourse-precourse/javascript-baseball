@@ -91,6 +91,7 @@ class App {
 
   strikeAndBallCheck() {
     if (
+      this.ballCount !== 0 &&
       this.strikeCount !== 0 &&
       this.strikeCount > 0 &&
       this.strikeCount < 3
@@ -106,8 +107,8 @@ class App {
   result() {
     this.threeStrikeCheck();
     this.nothingCheck();
-    this.strikeCheck();
     this.ballCheck();
+    this.strikeCheck();
     this.strikeAndBallCheck();
   }
 
