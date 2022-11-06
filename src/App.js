@@ -108,7 +108,6 @@ class App {
     return;
   }
 
-  // - 결과에 따라 다른 기능을 호출하는 기능
   isPlayContinue(answer) {
     if (answer === "1") return this.play();
     if (answer === "2") return;
