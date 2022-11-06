@@ -22,6 +22,16 @@ class App {
       this.compareNumber(input);
     });
   }
+
+  compareNumber(input) {
+    let BALL = 0;
+    let STRIKE = 0;
+
+    for (let i = 0; i < this.NUMBER; i++) {
+      if (this.NUMBER[i] === input[i]) STRIKE++;
+      if (this.NUMBER.indexOf(input[i]) >= 0) BALL++;
+    }
+  }
 }
 
 module.exports = App;
