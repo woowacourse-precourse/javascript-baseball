@@ -8,13 +8,20 @@ const inputValidation = {
     return userInput.length == 3 ? true : false;
   },
 
-  checkNoZero(userInput) {},
+  checkNoOverlap(userInput) {},
 
-  checkNoOverlap(userInput) {
-      
+  checkOnlyNum(userInput) {
+    const userInputArr = [...userInput];
+    userInputArr.forEach((item) => {
+      return item == this.rotateOnetoNine(item) ? true : false;
+    });
   },
 
-  checkOnlyNum(userInput) {},
+  rotateOnetoNine(str) {
+    for (let num = 1; num < 10; num++) {
+      return num;
+    }
+  },
 };
 
 module.exports = inputValidation;
