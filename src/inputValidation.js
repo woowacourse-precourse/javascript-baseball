@@ -5,20 +5,25 @@ const inputValidation = {
 
   checkNoOverlap(userInput) {
     const userInputSet = new Set(userInput);
-    return userInput.length !== userInputSet.length ? false : true;
+    const userInputSetArr = [...userInputSet];
+    return userInput.length == userInputSetArr.length ? true : false;
   },
 
   checkOnlyNum(userInput) {
-    const userInputArr = [...userInput];
-    userInputArr.forEach((item) => {
-      return item == this.rotateOnetoNine(item) ? true : false;
-    });
+    for (let i = 0; i < userInput.length; i++) {
+      if (!this.rotateOnetoNine().includes(parseInt(userInput[i]))) {
+        return false;
+      }
+    }
+    return true;
   },
 
-  rotateOnetoNine(str) {
+  rotateOnetoNine() {
+    const rotateOnetoNineArr = [];
     for (let num = 1; num < 10; num++) {
-      return num;
+      rotateOnetoNineArr.push(num);
     }
+    return rotateOnetoNineArr;
   },
 };
 

@@ -14,29 +14,32 @@ class App {
 
   play() {
     this.randomNumber();
-    this.userInput().then(() => {
-      this.checkInputValidation();
-    });
+    this.userInput();
   }
 
-  async userInput() {
-    return new Promise((resolve) => {
-      readLine("숫자를 입력해주세요 : ", (input) => {
-        this.inputNum = input;
-        if (!this.checkInputValidation()) {
-          throw "잘못된 값을 입력하셨습니다.";
-        }
-        print(input);
-        close();
-        resolve(input);
-      });
+  userInput() {
+    readLine("숫자를 입력해주세요 : ", (input) => {
+      this.inputNum = input;
+      if (!this.checkInputValidation()) {
+        throw "잘못된 값을 입력하셨습니다.";
+      }
+      print(input);
+      close();
     });
   }
 
   checkInputValidation() {
-    inputValidation.checkNoOverlap(this.inputNum);
-    inputValidation.checkOnlyNum(this.inputNum);
-    inputValidation.checkThreeNum(this.inputNum);
+    const checkNoOverlap = inputValidation.checkNoOverlap(this.inputNum);
+    const checkOnlyNum = inputValidation.checkOnlyNum(this.inputNum);
+    const checkTreeNum = inputValidation.checkThreeNum(this.inputNum);
+    print(checkNoOverlap);
+    print(checkOnlyNum);
+    print(checkTreeNum);
+    if (!checkNoOverlap || !checkOnlyNum || !checkTreeNum) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   randomNumber() {
