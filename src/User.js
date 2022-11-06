@@ -47,6 +47,7 @@ class User extends Mission {
       this.selectStartOrExit();
       return;
     }
+
     this.userInputStart();
     return;
   }
@@ -68,6 +69,7 @@ class User extends Mission {
       this.userInputStart();
       return;
     }
+
     if (answer === '2') {
       this.mission.Console.close();
       return;
