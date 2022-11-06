@@ -1,9 +1,7 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const RandomNumber = require("../src/RandomNumber");
-const CheckConstraints = require("../src/CheckConstraints");
-const Player = require("../src/Player");
-const MissionUtils = require("@woowacourse/mission-utils");
-const ReStart = require("../src/ReStart");
+const Constraints = require("../src/Constraints");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -40,7 +38,7 @@ describe("숫자 야구 게임", () => {
   test("컴퓨터 랜덤 숫자 생성", () => {
     const randomSpy = jest.spyOn(MissionUtils.Random, "pickNumberInRange");
     const constraintsSpy = jest.spyOn(
-      CheckConstraints.prototype,
+      Constraints.prototype,
       "checkConstraints"
     );
 
@@ -55,12 +53,12 @@ describe("숫자 야구 게임", () => {
   test("플레이어 숫자 입력", () => {
     const readSpy = jest.spyOn(MissionUtils.Console, "readLine");
     const constraintsSpy = jest.spyOn(
-      CheckConstraints.prototype,
+      Constraints.prototype,
       "checkConstraints"
     );
 
-    const player = new Player();
-    player.getPlayerInput();
+    const app = new App();
+    app.getPlayerInput();
 
     expect(readSpy).toHaveBeenCalled();
     expect(readSpy).toHaveBeenCalledTimes(1);
@@ -70,67 +68,70 @@ describe("숫자 야구 게임", () => {
 
   test("점수 산정", () => {
     const logSpy = getLogSpy();
-    const player = new Player();
+    const app = new App();
 
-    player.COMPUTER = [1, 2, 3];
-    player.comparePlayerInputWithRadomNumber("123");
-    expect(player.strike).toEqual(3);
-    expect(player.ball).toEqual(0);
+    app.COMPUTER = [1, 2, 3];
+    app.comparePlayerInputWithRandomNumber("123");
+    expect(app.strike).toEqual(3);
+    expect(app.ball).toEqual(0);
     expect(logSpy).toHaveBeenCalledWith("3스트라이크");
     expect(logSpy).toHaveBeenCalledWith(
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
 
-    player.COMPUTER = [3, 2, 5];
-    player.comparePlayerInputWithRadomNumber("123");
-    expect(player.strike).toEqual(1);
-    expect(player.ball).toEqual(1);
+    app.COMPUTER = [3, 2, 5];
+    app.comparePlayerInputWithRandomNumber("123");
+    expect(app.strike).toEqual(1);
+    expect(app.ball).toEqual(1);
     expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
 
-    player.COMPUTER = [7, 2, 9];
-    player.comparePlayerInputWithRadomNumber("972");
-    expect(player.strike).toEqual(0);
-    expect(player.ball).toEqual(3);
+    app.COMPUTER = [7, 2, 9];
+    app.comparePlayerInputWithRandomNumber("972");
+    expect(app.strike).toEqual(0);
+    expect(app.ball).toEqual(3);
     expect(logSpy).toHaveBeenCalledWith("3볼");
 
-    player.COMPUTER = [7, 2, 9];
-    player.comparePlayerInputWithRadomNumber("136");
-    expect(player.strike).toEqual(0);
-    expect(player.ball).toEqual(0);
+    app.COMPUTER = [7, 2, 9];
+    app.comparePlayerInputWithRandomNumber("136");
+    expect(app.strike).toEqual(0);
+    expect(app.ball).toEqual(0);
     expect(logSpy).toHaveBeenCalledWith("낫싱");
   });
 
   test("게임 재시작 여부 질문", () => {
     const logSpy = getLogSpy();
-    const restartSpy = jest.spyOn(ReStart.prototype, "decideReStart");
+    const replaySpy = jest.spyOn(App.prototype, "getPlayerRePlayInput");
 
-    const player = new Player();
+    const app = new App();
 
-    player.COMPUTER = [1, 2, 3];
-    player.comparePlayerInputWithRadomNumber("123");
+    app.COMPUTER = [1, 2, 3];
+    app.comparePlayerInputWithRandomNumber("123");
 
-    expect(player.strike).toEqual(3);
-    expect(player.ball).toEqual(0);
+    expect(app.strike).toEqual(3);
+    expect(app.ball).toEqual(0);
     expect(logSpy).toHaveBeenCalledWith("3스트라이크");
     expect(logSpy).toHaveBeenCalledWith(
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
-    expect(restartSpy).toHaveBeenCalled();
-    expect(restartSpy).toHaveBeenCalledTimes(1);
+    expect(replaySpy).toHaveBeenCalled();
+    expect(replaySpy).toHaveBeenCalledTimes(1);
   });
 
   test("게임 재시작 입력값 제한 사항 준수", () => {
-    const restartCheckSpy = jest.spyOn(ReStart.prototype, "checkReStartInput");
+    const restartCheckSpy = jest.spyOn(
+      Constraints.prototype,
+      "checkRePlayInputConstraints"
+    );
 
-    const restart = new ReStart();
+    const constraints = new Constraints();
 
-    restart.checkReStartInput("1");
+    constraints.checkRePlayInputConstraints("1");
     expect(restartCheckSpy).toBeTruthy();
 
-    restart.checkReStartInput("2");
+    constraints.checkRePlayInputConstraints("2");
     expect(restartCheckSpy).toBeTruthy();
 
-    expect(() => restart.checkReStartInput("3")).toThrow(
+    expect(() => constraints.checkRePlayInputConstraints("3")).toThrow(
       "잘못된 입력입니다. 게임을 종료합니다."
     );
   });
