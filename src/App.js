@@ -1,6 +1,11 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
+  constructor() {
+    this.computerNum = [];
+    this.userNum;
+  }
+
   play() {
     this.gameStart();
   }
