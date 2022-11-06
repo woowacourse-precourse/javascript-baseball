@@ -12,6 +12,11 @@ const MESSAGE = {
   WRONG_INPUT: '잘못된 입력입니다.',
 };
 
+const GAME_END = {
+  RESTART: '1',
+  EXIT: '2',
+};
+
 class App {
   play() {
     this.printGameStartMessage();
@@ -107,15 +112,15 @@ class App {
   }
 
   checkGameEndInput() {
-    if (this.gameEnd !== '1' && this.gameEnd !== '2') {
+    if (!Object.values(GAME_END).includes(this.gameEnd)) {
       throw new Error(MESSAGE.WRONG_INPUT);
     }
   }
 
   handleGameEnd() {
-    if (this.gameEnd === '1') {
+    if (this.gameEnd === GAME_END.RESTART) {
       this.startGame();
-    } else if (this.gameEnd === '2') {
+    } else if (this.gameEnd === GAME_END.EXIT) {
       this.exitGame();
     }
   }
