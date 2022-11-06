@@ -4,7 +4,7 @@ const {
   MAX_NUMBER_LENGTH,
   MAX_NUMBER_RANGE,
   MIN_NUMBER_RANGE,
-  END_TRIGGER,
+  QUIT_TRIGGER,
   RESTART_TRIGGER,
 } = require("./constants/condition.js");
 
@@ -40,7 +40,7 @@ class App {
           this.play();
           return;
         }
-        if (trigger === END_TRIGGER) {
+        if (trigger === QUIT_TRIGGER) {
           Console.close();
         }
       });
@@ -116,7 +116,7 @@ class App {
     return { isValid: true };
   }
   isValidTrigger(trigger) {
-    return trigger === RESTART_TRIGGER || trigger === END_TRIGGER;
+    return trigger === RESTART_TRIGGER || trigger === QUIT_TRIGGER;
   }
 }
 
