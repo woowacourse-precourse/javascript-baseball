@@ -15,7 +15,7 @@ function printUserInput() {
 
 function printNumOfStrike(numOfStrike){
     const NUM_OF_STRIKE_MESSAGE = `${numOfStrike}스트라이크\n`;
-    MissionUtils.Console.readLine(NUM_OF_STRIKE_MESSAGE);
+    MissionUtils.Console.print(NUM_OF_STRIKE_MESSAGE);
 }
 
 function printGameWin() {
@@ -26,3 +26,4 @@ function printGameWin() {
 module.exports.printGameStart = printGameStart;
 module.exports.printUserInput = printUserInput;
 module.exports.printGameWin = printGameWin;
+module.exports.printNumOfStrike = printNumOfStrike;
