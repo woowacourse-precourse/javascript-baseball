@@ -15,7 +15,26 @@ class App {
     });
   }
 
-  checkAnswer(userNumber) {}
+  checkAnswer(userNumber) {
+    const userNumbers = userNumber.split("").map(Number);
+    const computerNumbers = this.createComputerNumber();
+
+    if (isNaN(userNumber) === true) {
+      throw "숫자를 입력해주세요.";
+    }
+    if (userNumber.length !== 3) {
+      throw "3자리로 입력해주세요.";
+    }
+    if (new Set(userNumbers).size !== 3) {
+      throw "서로 다른 값을 입력해주세요";
+    }
+
+    return this.compareNumber(userNumbers, computerNumbers);
+  }
+
+  compareNumber(userNumbers, computerNumbers) {
+    const ball = this.countBall(userNumbers, computerNumbers);
+  }
 
   createComputerNumber() {
     const computer = [];
@@ -29,6 +48,18 @@ class App {
     }
 
     return computer;
+  }
+
+  countBall(userNumbers, computerNumbers) {
+    let count = 0;
+
+    userNumbers.forEach((value, index) => {
+      if (computerNumbers.includes(value) && computerNumbers[index] !== value) {
+        count += 1;
+      }
+    });
+
+    return count;
   }
 }
 
