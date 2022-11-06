@@ -1,7 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    this.printGameStartMessgae();
+    this.playNewGame();
+  }
 
   playNewGame() {
     const randomNum = this.getRandomThreeDigitsNumber();
