@@ -39,6 +39,8 @@ describe("User로부터 입력받은 후 타당성 체크", () => {
         return false;
       }
       expect(checkNumRange("12340")).toEqual(false);
+      expect(checkNumRange("1234@")).toEqual(false);
+      expect(checkNumRange("-123")).toEqual(false);
     }
   });
 
