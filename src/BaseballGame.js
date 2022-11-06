@@ -1,6 +1,7 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { validate } = require('./utils/validation');
 const constants = require('./utils/constants');
+const { convertToNumberArray } = require('./utils/gameUtil');
 
 class BaseballGame {
   constructor() {
@@ -35,8 +36,7 @@ class BaseballGame {
 
   getUserGuess() {
     Console.readLine(constants.INPUT_MESSAGE, (guess) => {
-      const userGuessToArray = guess.split('').map(Number);
-      this.guess = userGuessToArray;
+      this.guess = convertToNumberArray(guess);
       validate(this.guess);
       this.playGame();
     });
