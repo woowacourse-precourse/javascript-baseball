@@ -49,11 +49,8 @@ class App {
     let resultText = "";
     userInput.map((num, i) => {
       if (answerArr.includes(num)) {
-        if (num === answerArr[i]) {
-          strike += 1;
-        } else {
-          ball += 1;
-        }
+        if (num === answerArr[i]) strike += 1;
+        if (num !== answerArr[i]) ball += 1;
       }
     });
     if (ball !== 0) resultText += `${ball}볼 `;
@@ -71,7 +68,7 @@ class App {
         if (input === "1") {
           return this.restart();
         }
-        if (input === "2") process.exit("");
+        if (input === "2") process.exit();
         if (input < 1 || input > 2 || Number.isNaN(input))
           throw new Error("정해진 값을 입력해주세요.");
       }
