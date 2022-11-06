@@ -1,14 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const COMPUTER = [];
+while (COMPUTER.length < 3) {
+  const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  if (!COMPUTER.includes(number)) {
+    COMPUTER.push(number);
+  }
+}
+
 class App {
-  constructor() {}
   play() {
     this.showMessage();
-    this.userInput()
-    // let user=this.checkUserInputValue()
-    // let computer=this.computerRandomNumber()
-    // console.log(user,computer);
-    // this.compareNumbers(user,computer)
+    this.userInput();
   }
   allInOne() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -88,70 +91,64 @@ class App {
 
   showMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    console.log(strike, ball);
   }
+
   userInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", async(userNumber) => {
-      await this.checkUserInputValue(userNumber)
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
+      this.checkUserInputValue(userNumber);
     });
   }
+
   checkUserInputValue(userNumber) {
     let regex = /[^1-9]/g;
     const userNumberLen = userNumber.length;
     if (regex.test(userNumber) || userNumberLen !== 3) {
       throw "1~9 사이의 숫자 3개만 입력해주세요 프로그램이 종료됩니다.";
     }
-    let stringUserNumber = userNumber.split("").map((element)=>{
-      return Number(element)
+    let stringUserNumber = userNumber.split("").map((element) => {
+      return Number(element);
     });
     let userNumberArray = [];
-    console.log(stringUserNumber);
-    stringUserNumber.forEach((element) =>{
-      if(!userNumberArray.includes(element)){
-        userNumberArray.push(Number(element))
+    stringUserNumber.forEach((element) => {
+      if (!userNumberArray.includes(element)) {
+        userNumberArray.push(Number(element));
+      } else {
+        console.log("중복된 수가 있습니다. 다시 입력하세요!");
+        this.userInput();
       }
-      else{
-        console.log('중복된 수가 있습니다. 다시 입력하세요!');
-        this.userInput()
-      }
-    }
-    );
-    return userNumberArray
+    });
+    this.getBothArrays(userNumberArray);
   }
-  computerRandomNumber() {
-    const COMPUTER = [];
-    while (COMPUTER.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!COMPUTER.includes(number)) {
-        COMPUTER.push(number);
-      }
-    }
-    return COMPUTER;
+  computerRandomNumber() {}
+  getBothArrays(userNumberArray) {
+    let userArray = userNumberArray;
+    this.compareNumbers(userArray);
   }
 
   compareNumbers(userNumberArray) {
-    let computerNumber=this.computerRandomNumber()
-    if (userNumberArray !== undefined && userNumberArray.length === 3) {
-      console.log("사용자 :", userNumberArray);
-      console.log("컴퓨터: ", computerNumber);
-      let strike = 0;
-      let ball = 0;
-      for (let idx = 0; idx < userNumberArray.length; idx++) {
-        let findIndex = computerNumber.indexOf(userNumberArray[idx]);
-        console.log(findIndex);
-        if (findIndex > -1) {
-          if (findIndex === idx) {
-            strike++;
-          } else {
-            ball++;
-          }
+    console.log("사용자 :", userNumberArray);
+    console.log("컴퓨터: ", COMPUTER);
+
+    for (let idx = 0; idx < userNumberArray?.length; idx++) {
+      let findIndex = COMPUTER.indexOf(userNumberArray[idx]);
+      console.log(findIndex);
+      if (findIndex > -1) {
+        if (findIndex === idx) {
+          strike++;
+        } else {
+          ball++;
         }
-        console.log(strike, ball);
       }
-      if (strike !== 3) {
-        this.userInput();
-      }
+      console.log(strike, ball);
+    }
+    if (strike !== 3) {
+      this.userInput();
     }
   }
+
+  checkStrikeBall() {}
+
   closeConsole() {
     MissionUtils.Console.close();
   }
