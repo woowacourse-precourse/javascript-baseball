@@ -47,16 +47,16 @@ class App {
     });
 
     if (strike === 3) {
-      this.sendMessage("3스트라이크");
-      this.sendMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (answer) => {
+      this.sendMessage(MESSAGE.COMPARE_ANSWER.THREE_STRIKE);
+      this.sendMessage(MESSAGE.GAME_PROGRESS.END);
+      Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => {
         if (answer === "1") {
           this.play();
           return;
         }
 
         if (answer === "2") {
-          Console.print("게임을 종료합니다");
+          Console.print(MESSAGE.GAME_PROGRESS.SHUTDOWN);
           Console.close();
         }
       });
@@ -66,18 +66,19 @@ class App {
 
     if (strike !== 0 || ball !== 0) {
       this.sendMessage(`${ball ? `${ball}볼 ` : ""}${strike ? `${strike}스트라이크` : ""}`);
-      this.requestAnswer("숫자를 입력해주세요. : ");
+      this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
       return;
     }
 
     this.sendMessage("낫싱");
-    this.requestAnswer("숫자를 입력해주세요. : ");
+    this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
   }
 
   play() {
-    this.sendMessage("숫자 야구 게임을 시작합니다.");
+    this.sendMessage(MESSAGE.GAME_PROGRESS.START);
     this.initAnswer();
-    this.requestAnswer("숫자를 입력해주세요. : ");
+    this.sendMessage(this.answer);
+    this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
   }
 }
 
