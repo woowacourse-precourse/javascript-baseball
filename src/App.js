@@ -26,6 +26,7 @@ class App {
   }
 
   setUserNumber(numbers) {
+    this.userNumbers = [];
     while (numbers !== 0) {
       this.userNumbers.push(numbers % 10);
       numbers = parseInt(numbers / 10);
