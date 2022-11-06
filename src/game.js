@@ -1,5 +1,4 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const exitOrRestart = require('./exitOrRestart');
 
 const game = (userNum, computerNum) => {
   let ballCount = 0;
