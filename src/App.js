@@ -22,26 +22,24 @@ class App {
 
   getBalls(inputNumber) {
     let ball = 0;
-    for (let i = 0; i < inputNumber.length; i++) {
-      const NUMBER = Number(inputNumber[i]);
+    inputNumber.forEach((num, idx) => {
       if (
-        this.computer.includes(NUMBER) &&
-        this.computer.indexOf(NUMBER) !== i
+        this.computer.includes(Number(num)) &&
+        this.computer.indexOf(Number(num)) !== idx
       ) {
         ball++;
       }
-    }
+    });
     return ball;
   }
 
   getStrikes(inputNumber) {
     let strike = 0;
-    for (let i = 0; i < inputNumber.length; i++) {
-      const NUMBER = Number(inputNumber[i]);
-      if (NUMBER === this.computer[i]) {
+    inputNumber.forEach((num, idx) => {
+      if (Number(num) === this.computer[idx]) {
         strike++;
       }
-    }
+    });
     return strike;
   }
 
