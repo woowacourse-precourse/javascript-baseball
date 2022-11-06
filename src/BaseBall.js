@@ -28,9 +28,14 @@ class BaseBall {
     return ballCount > 0 ? `${ballCount}${BASEBALL.BALL}` : '';
   }
 
+  getNumArrayFor(input) {
+    return input.split('').map((value) => +value);
+  }
+
   getResultToString(random, input) {
-    const ball = this.countBall(random, input);
-    const strike = this.countStrike(random, input);
+    const inputNumArray = this.getNumArrayFor(input);
+    const ball = this.countBall(random, inputNumArray);
+    const strike = this.countStrike(random, inputNumArray);
 
     if (ball === 0 && strike === 0) return `${BASEBALL.NOTHING}`;
 
@@ -38,7 +43,7 @@ class BaseBall {
   }
 
   isStrikeOut(random, input) {
-    return this.countStrike(random, input) === 3;
+    return this.countStrike(random, this.getNumArrayFor(input)) === 3;
   }
 }
 
