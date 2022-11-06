@@ -132,3 +132,11 @@ printResult = (userInput, computerInput) => {
 		);
 	};
 ```
+
+## 6. UserInputCompared
+
+유저의 input 값을 입력 받고, 값을 비교하며 게임을 진행
+
+- 유저의 input 값의 유효성 검사
+- 유저의 input 값과 랜덤 값을 비교
+- 재실행
