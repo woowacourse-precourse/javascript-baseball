@@ -50,6 +50,7 @@ class App {
   gameResult(numArr) {
     if (numArr[1] === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.checkRestart();
     } else {
       if (numArr[0] === 0 && numArr[1] === 0) {
         Console.print("낫싱");
@@ -59,6 +60,26 @@ class App {
         ${numArr[1] > 0 ? numArr[1] + "스트라이크" : ""}`
       );
       this.playerInput();
+    }
+  }
+
+  checkRestart() {
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.readLine("", (input) => {
+      if (Number(input) < 1 || Number(input) > 2) {
+        throw "1또는 2만 입력 가능합니다.";
+      }
+      if (isNaN(input)) throw "숫자만 입력 가능합니다.";
+      else this.restart(Number(input));
+    });
+  }
+
+  restart(input) {
+    if (input === 1) {
+      this.COMPUTER_NUMBER = this.randomNum();
+      this.playerInput();
+    } else if (input === 2) {
+      Console.close();
     }
   }
 }
