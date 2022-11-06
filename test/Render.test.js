@@ -40,4 +40,13 @@ describe("게임 결과에 따라 유저에게 입력받기", () => {
     expect(checkNumLength(["1", "2"])).toEqual(false);
     expect(checkNumLength(["1"])).toEqual(true);
   });
+
+  test("false 시 에러문구 보내기 검사", () => {
+    function errorCatch(boolean) {
+      if (boolean === false) {
+        throw new Error("Invalid");
+      }
+    }
+    expect(() => errorCatch(false)).toThrow("Invalid");
+  });
 });
