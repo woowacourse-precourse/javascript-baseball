@@ -1,87 +1,95 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this.answer = '';
+  }
+
   play() {
-    this.start();
-    this.createComputerNumber();
-    this.input();
+    this.gameStart().createAnswer().inputUserNumber();
   }
 
-  input() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      const user = answer.split('').map((num) => parseInt(num, 10));
-      const inputState = this.checkInputValidation(answer);
-      this.checkState(inputState, false);
-      const state = this.result(user, this.computer);
-      this.checkState(state, true);
+  gameStart() {
+    this.print('숫자 야구 게임을 시작합니다.');
+    return this;
+  }
+
+  createAnswer() {
+    const pick = [];
+    while (pick.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!pick.includes(number)) pick.push(number);
+    }
+    this.answer = pick;
+    return this;
+  }
+
+  inputUserNumber() {
+    Console.readLine('숫자를 입력해주세요 : ', (userInputValue) => {
+      const userNumber = userInputValue
+        .split('')
+        .map((num) => parseInt(num, 10));
+      this.validateUserInput(userInputValue, false);
+      console.log('input', userNumber, this.answer);
+      this.printMessage(userNumber);
+      this.isGuessSuccess(userNumber);
     });
+    return this;
   }
 
-  restart() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  validateUserInput(userInput, isThreeStrike) {
+    // 3스트라이크가 나왔을 때
+    if (isThreeStrike) {
+      // 1 or 2만 입력받을 수 있음
+      switch (userInput) {
+        case '1':
+          return true;
+        case '2':
+          return true;
+        default:
+          throw Error('1 또는 2 이외의 입력은 유효하지 않습니다.');
+      }
+    } else {
+      // 3스트라이크가 나오지 않았을 때
+      // 123같은 3자리 수만 입력 가능
+      if (userInput.length === 3) return true;
+      throw Error('입력값이 3자리 수가 아닙니다.');
+    }
+  }
+
+  guessSuccess() {
+    return this.askRestart();
+  }
+
+  guessFali() {
+    return this.inputUserNumber();
+  }
+
+  isGuessSuccess(userNumber) {
+    const { strike } = this.getResult(userNumber, this.answer);
+    if (strike === 3) return this.askRestart();
+    return this.inputUserNumber();
+  }
+
+  askRestart() {
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        const state = this.checkInputValidation(answer);
-        this.checkState(state, true);
+        this.validateUserInput(answer, true);
+        if (answer === '1') this.gameRestart();
+        else this.gameExit();
       }
     );
   }
 
-  checkState(state, isGameover) {
-    const token = ['RESTART', 'EXIT', 'GUESS_SUCCESSFUL'];
-    if (!isGameover && token.includes(state)) throw Error('잘못된 입력입니다.');
-    switch (state) {
-      case 'EXIT':
-        this.print('게임 종료');
-        MissionUtils.Console.close();
-        break;
-      case 'RESTART':
-        this.createComputerNumber();
-        this.input();
-        break;
-      case 'GUESS_SUCCESSFUL':
-        this.restart();
-        break;
-      case 'GUESS_FAIL':
-        this.input();
-        break;
-      case 'SUCCESS':
-        break;
-      default:
-        throw Error('유효하지 않은 입력입니다.');
-    }
+  gameRestart() {
+    this.createAnswer();
+    this.inputUserNumber();
   }
 
-  start() {
-    this.print('숫자 야구 게임을 시작합니다.');
-  }
-
-  createComputerNumber() {
-    const pick = [];
-    while (pick.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!pick.includes(number)) pick.push(number);
-    }
-    this.computer = pick;
-  }
-
-  checkInputValidation(answer) {
-    const { length } = answer.split('');
-    // 길이가 1이면 게임 종료 후 재시작/종료(1 or 2)인지 체크
-    if (length === 1) return this.checkRestart(answer);
-    if (length === 3) return 'SUCCESS';
-    throw Error('에러');
-  }
-
-  checkRestart(answer) {
-    switch (answer) {
-      case '1':
-        return 'RESTART';
-      case '2':
-        return 'EXIT';
-      default:
-        throw Error('잘못된 입력입니다.');
-    }
+  gameExit() {
+    this.print('게임 종료');
+    Console.close();
   }
 
   countStrike(user, computer) {
@@ -107,30 +115,20 @@ class App {
     return { strike, ball };
   }
 
-  correctAnswer() {
-    this.print('3스트라이크');
-    this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-  }
+  printMessage(userNumber) {
+    const { strike, ball } = this.getResult(userNumber, this.answer);
 
-  result(user, computer) {
-    const { strike, ball } = this.getResult(user, computer);
     if (strike === 3) {
-      this.correctAnswer();
-      return 'GUESS_SUCCESSFUL';
-    }
-    this.output(strike, ball);
-    return 'GUESS_FAIL';
-  }
-
-  output(strike, ball) {
-    if (strike === 0 && ball === 0) this.print('낫싱');
+      this.print('3스트라이크');
+      this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    } else if (strike === 0 && ball === 0) this.print('낫싱');
     else if (strike === 0) this.print(`${ball}볼`);
     else if (ball === 0) this.print(`${strike}스트라이크`);
     else this.print(`${ball}볼 ${strike}스트라이크`);
   }
 
   print(string) {
-    MissionUtils.Console.print(string);
+    Console.print(string);
   }
 }
 
