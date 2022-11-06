@@ -1,6 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
 describe("숫자 값을 비교하기", () => {
   test("숫자가 다를 경우 false를 반환", () => {
     const app = new App();
