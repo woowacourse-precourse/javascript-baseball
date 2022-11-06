@@ -15,7 +15,7 @@ class App {
     return new Promise((resolve, reject) => {
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
         this.checkInputValidity(userInput);
-        this.userDigits = [...userInput];
+        this.userDigits = [...userInput].map(Number);
         resolve();
       });
     });
