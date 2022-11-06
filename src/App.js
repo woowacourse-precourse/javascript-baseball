@@ -4,12 +4,12 @@ const handleException = require("./handleException");
 class App {
   constructor() {
     this.answer = this.makeRandomNumber();
-    this.isContinue = true;
+    this.isTyping = true;
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.enterAnswer();
+    this.compareAnswer();
   }
 
   makeRandomNumber() {
@@ -21,14 +21,14 @@ class App {
     return results;
   }
 
-  enterAnswer() {
+  compareAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputs = input.split("").map((i) => Number(i));
-      handleException(inputs);
       const score = this.calculateScore(this.answer, inputs);
       const print = this.printScore(score);
+      handleException(inputs);
       MissionUtils.Console.print(print);
-      if (this.isContinue) this.enterAnswer();
+      if (this.isTyping) this.compareAnswer();
       else this.isContinueGame();
     });
   }
@@ -45,7 +45,7 @@ class App {
 
   printScore({ strike, ball }) {
     if (strike === 3) {
-      this.isContinue = false;
+      this.isTyping = false;
       return `${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
     }
     if (strike !== 0 && ball === 0) return `${strike}스트라이크`;
@@ -63,9 +63,9 @@ class App {
 
   continueOrEnd(input) {
     if (input === 1) {
-      this.isContinue = true;
+      this.isTyping = true;
       this.answer = this.makeRandomNumber();
-      this.enterAnswer();
+      this.compareAnswer();
     }
     if (input === 2) {
       MissionUtils.Console.print("게임을 종료합니다.");
