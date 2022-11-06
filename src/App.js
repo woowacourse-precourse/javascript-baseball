@@ -14,6 +14,26 @@ class App {
     return [...set];
   }
 
+  checkNum(input, comNum) {
+    // 3. ball/strike 세기
+    // 인수: input - User입력, comNum - com 랜덤숫자[0,0,0]
+    // return: [ball의 갯수, strike의 갯수]
+    let answerCount = [0, 0];
+    if (input.length !== 3) throw new Error("잘못된 입력입니다.");
+
+    for (let i = 0; i < 3; i++) {
+      let val = +input[i];
+      if (!(1 <= val && val <= 9)) {
+        throw new Error("잘못된 입력입니다.");
+      } else if (comNum[i] == val) {
+        answerCount[1]++;
+      } else if (comNum.indexOf(val) !== -1) {
+        answerCount[0]++;
+      }
+    }
+    return answerCount;
+  }
+
   play() {}
 }
 
