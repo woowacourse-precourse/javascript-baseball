@@ -30,12 +30,23 @@ class App {
   getInputNumber() {
     const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
     Console.readLine(INPUT_NUMBER_MESSAGE, (inputNumber) => {
-      this.handleGameException();
+      this.handleGameException(inputNumber);
       this.inputNumber = inputNumber;
     });
   }
-  handleGameException() {
+  handleGameException(inputNumber) {
+    const NOT_A_NUMBER_EXCEPTION = "입력값이 숫자가 아닙니다.";
+    const NOT_INTEGER_EXCEPTION = "입력값이 정수가 아닙니다.";
+    const NUMBER_OF_DIGITS_EXCEPTION = "입력값이 3자리의 수가 아닙니다.";
+    const SAME_NUMBER_EXCEPTION = "입력한 3자리의 수 중 같은 수가 존재합니다.";
+
     let errorMessage = null;
+
+    if (isNaN(inputNumber)) {
+      errorMessage = NOT_A_NUMBER_EXCEPTION;
+    } else {
+      return;
+    }
     throw new Error(errorMessage);
   }
 }
