@@ -47,6 +47,10 @@ function replay() {
   );
 }
 
+function exit() {
+  Console.close();
+}
+
   }
 
 class App {
