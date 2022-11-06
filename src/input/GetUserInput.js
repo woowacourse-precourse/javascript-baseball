@@ -8,7 +8,6 @@ class GetUserInput extends Mission {
   }
 
   init(computerNumbers, userNumbers) {
-    console.log(computerNumbers, userNumbers);
     if (this.checkInputValueValid(userNumbers)) {
       return this.getScoreMessage(computerNumbers, userNumbers);
     }
