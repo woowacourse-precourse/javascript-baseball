@@ -8,7 +8,6 @@ class App {
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     const randomNum = makeRandomNumber();
-    console.log(randomNum);
     this.gameStart(randomNum.toString());
   }
 
@@ -20,18 +19,31 @@ class App {
       }
 
       const userResult = countBallAndStrike(userNumber, answer); // 볼 스트라이크 개수 세기
-
       printGameMessage(userResult.strike, userResult.ball); // 볼 스트라이크 출력
 
-      // 답이 틀렸다면
       if (userResult.strike < 3) {
         return this.gameStart(answer);
       }
+
+      this.gameRestartCheck();
     });
   }
 
   inputErrorException() {
     throw new Error("잘못된 값을 입력하셨습니다! 게임이 종료됩니다.");
+  }
+
+  // 게임 재시작 여부 입력
+  gameRestartCheck() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (userInput) => {
+        if (userInput === "1") return this.play();
+        else if (userInput === "2") return Console.close();
+        return this.inputErrorException();
+      }
+    );
   }
 }
 
