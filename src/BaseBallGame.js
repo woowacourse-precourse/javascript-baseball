@@ -84,6 +84,13 @@ class BaseBallGame{
       return;
     }
   }
+
+  userAnswerToArray(answer) {
+    return [...answer]
+      .filter(char => char !== ' ' )
+      .filter(char => char !== ',')
+      .map(char => Number(char));
+  }
 }
 
 export default BaseBallGame;
