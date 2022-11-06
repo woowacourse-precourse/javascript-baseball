@@ -11,6 +11,8 @@ class App {
     this.readUserInputValue(randomNum);
   }
 
+  // 📌 [ReadMethods]
+
   readUserInputValue(randomNum){
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (value) => {
       if(this.isValidInputValueInGame(value) === false){this.throwExceptionMessage(`세 자리의 숫자를 정확히 입력해주세요 : 입력한 값 ${value}`)};
@@ -37,10 +39,10 @@ class App {
       if(answer !== '1' && answer !=='2'){this.throwExceptionMessage(`정확한 값을 입력해주세요 : 입력한 내용 ${answer}`); }
       if(answer === '1'){ this.playNewGame(); }
       if(answer === '2'){ MissionUtils.Console.close(); }
-      
-
     })
   }
+
+  // 📌 [MessageMethods]
 
   printGameStartMessgae(){
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -66,6 +68,7 @@ class App {
     throw message
   }
 
+  // 📌 [GameMethods]
 
   getRandomThreeDigitsNumber() {
     const number = [];
@@ -77,8 +80,6 @@ class App {
     }
     return number.join('');
   }
-
-
 
   isValidInputValueInGame(inputValue){
     if(inputValue === undefined){return false;}
