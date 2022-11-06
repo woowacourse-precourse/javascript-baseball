@@ -52,7 +52,11 @@ class App {
     } else if (strikeCount === 3) {
       this.isThreeStrike();
     } else {
-      this.printMsg(`${ballCount}볼 ${strikeCount}스트라이크`);
+      ballCount
+        ? strikeCount
+          ? this.printMsg(`${ballCount}볼 ${strikeCount}스트라이크`)
+          : this.printMsg(`${ballCount}볼`)
+        : this.printMsg(`${strikeCount}스트라이크`);
       this.askNumInput();
     }
   }
