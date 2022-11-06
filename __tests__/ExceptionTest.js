@@ -1,4 +1,7 @@
-const { Exception, BaseBallException, NextException } = require('../src/Exception');
+const BaseBallException = require('../src/exception/BaseBall');
+const NextException = require('../src/exception/BaseBall');
+
+const Exception = require('../src/exception');
 
 describe('Exception클래스 - 숫자야구 예외 처리 로직', () => {
   test('(입력값 "1345"', () => {
