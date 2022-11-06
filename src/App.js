@@ -31,16 +31,20 @@ class App {
       this.user.numbers = input.split("")
 
       console.log("정답: ", this.computer.numbers);
-      console.log("플레이어 입력값", this.user.numbers);
-      this.referee.ball = isBall(this.computer.numbers, this.user.numbers)
-      console.log("볼", this.referee.ball);
+      console.log("입력: ", this.user.numbers);
 
-  
-      if(String(this.computer.numbers) === String(this.user.numbers)) {
-        Console.print("게임종료")
+      this.referee.judge(this.computer.numbers, this.user.numbers)
+      console.log(this.referee.ball, this.referee.strike)
+
+      if (this.referee.strike === 3) {
+        Console.print('3스트라이크');
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         Console.close();
         return;
+      } else if (this.referee.strike === 0 && this.referee.ball === 0) {
+        Console.print('낫싱');
       }
+
       this.match();
     });
   }

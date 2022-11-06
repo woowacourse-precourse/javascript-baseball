@@ -1,3 +1,5 @@
+const {Console, Random} = require("@woowacourse/mission-utils");
+
 const isStrike = (answers, inputs) => {
   let count = 0;
   for (let i = 0; i < 3; i++) {
@@ -34,6 +36,10 @@ class Referee {
   }
   set strike(value) {
     this._strike = value
+  }
+  judge (answers, inputs) {
+    this.strike = isStrike(answers, inputs);
+    this.ball = isBall(answers, inputs) - this.strike;
   }
 }
 
