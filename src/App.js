@@ -17,8 +17,6 @@ class App {
   }
 
   getPlayerInput() {
-    console.log("computer", this.COMPUTER);
-
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       const constraints = new Constraints();
       constraints.checkConstraints(userInput);
