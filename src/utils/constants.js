@@ -14,3 +14,6 @@ exports.DIGIT_ERROR = '세 자리 숫자를 입력하세요.';
 exports.RANGE_ERROR = '1~9 사이의 숫자를 입력하세요.';
 exports.DUPLICATE_ERROR = '서로 다른 세 숫자를 입력하세요.';
 exports.WRONG_INPUT_ERROR = '잘못된 입력입니다.';
+
+exports.WRONG_CHOICE = /[^12]/;
+exports.RESTART = 1;

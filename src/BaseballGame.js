@@ -22,11 +22,11 @@ class BaseballGame {
 
   restart() {
     Console.readLine(constants.RESTART_MESSAGE, (choice) => {
-      if (/[^12]/.test(choice)) {
+      if (constants.WRONG_CHOICE.test(choice)) {
         Console.close();
         throw new Error(constants.WRONG_INPUT_ERROR);
       }
-      if (choice == 1) {
+      if (choice == constants.RESTART) {
         this.start();
         return;
       }
