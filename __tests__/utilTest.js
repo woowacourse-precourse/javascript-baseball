@@ -21,7 +21,7 @@ describe("유틸함수 동작 테스트", () => {
   });
 
   test("볼 스트라이크 출력 함수 테스트", () => {
-    expect(printGameMessage(1, 2)).toBe("1스트라이크 2볼");
+    expect(printGameMessage(1, 2)).toBe("2볼 1스트라이크");
     expect(printGameMessage(1, 0)).toBe("1스트라이크");
     expect(printGameMessage(0, 2)).toBe("2볼");
     expect(printGameMessage(3, 0)).toBe("3스트라이크");
