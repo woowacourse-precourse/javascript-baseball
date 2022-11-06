@@ -4,6 +4,7 @@ const { MESSAGE, PLAYING } = require("./Message");
 class App {
     constructor() {
         this.computer = [];
+        this.user = [];
     }
 
     play() {
@@ -34,7 +35,28 @@ class App {
 
     questionNumber() {
         Console.print("questionNumber()-----------------");
-        Console.readLine(MESSAGE.NUMBERQUESTION, (numberInput) => {});
+        Console.readLine(MESSAGE.NUMBERQUESTION, (numberInput) => {
+            this.user = numberInput.split("");
+            Console.print(this.user);
+            this.isValidNumber(numberInput);
+            this.checkExistNumber();
+        });
+    }
+
+    isValidNumber(numberInput) {
+        Console.print("isValidNumber()-------------------");
+        if (this.hasZero(numberInput) || this.hasSameNumber(numberInput)) {
+            throw new Error(MESSAGE.ERROR);
+        }
+    }
+    hasZero(numberInput) {
+        Console.print("hasZero()-----------------");
+        return numberInput.includes("0");
+    }
+    hasSameNumber(numberInput) {
+        Console.print("hasSameNumber()-----------------");
+        const setInput = new Set(numberInput);
+        return setInput.size !== this.user.length;
     }
 
     gameFinish() {
