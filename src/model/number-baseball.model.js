@@ -1,13 +1,23 @@
+const CONSTANTS = require('../constant');
+
 class NumberBaseball {
-  inputValidCheck(strNum) {
-    if (this.inputLengthCheck(strNum)) {
+  splitNumber(num) {
+    return num.split('');
+  }
+
+  inputValidCheck(strArray) {
+    if (this.inputLengthCheck(strArray)) {
       return true;
     }
     return false;
   }
 
-  inputLengthCheck(strNum) {
-    return strNum.length === 3;
+  inputLengthCheck(strArray) {
+    return strArray.length === CONSTANTS.INPUT_LENGTH;
+  }
+
+  inputDuplicatedCheck(strArray) {
+    return strArray.length === new Set(strArray).length;
   }
 }
 
