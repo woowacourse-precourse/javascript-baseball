@@ -33,6 +33,15 @@ class App {
     }
     return true;
   }
+
+  // 입력한 값이 3개인지
+  isNumberLengthThree() {
+    const answerToArray = [...this.userInputs];
+    if (answerToArray.length !== 3) {
+      throw new Error("숫자는 3개만 입력할 수 있습니다.");
+    }
+    return true;
+  }
 }
 
 const app = new App();
