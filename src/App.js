@@ -10,34 +10,6 @@ class App {
 
     let user = this.getUserInput();
     let computer = this.getComputerInput();
-
-    while (user) {
-      if(this.isStrikeOut(user, computer)) {
-        MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        user = this.getUserInput("restart"); // 1 or 2를 받을예정.
-
-        if (user === '1') {
-          MissionUtils.Console.print(`${user}`);
-          MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-          user = this.getUserInput();
-          computer = this.getComputerInput();
-          continue;
-        }
-
-        if (user === '2') {
-          MissionUtils.Console.print(`${user}`);
-          MissionUtils.Console.print("게임 종료");
-          MissionUtils.Console.close();
-          break;
-        }
-        throw new Error("유효하지 않은 값이 입력되었습니다. 종료오류");
-      }
-
-      else{
-        user = this.getUserInput();
-        continue;
-      }
-    }
   }
 
   detectError(user) {
@@ -57,22 +29,11 @@ class App {
     return 1;
   }
 
-  getUserInput(gameStatus = "normal") {
-    // status가 1인 상황 기본적인 상황, 0인 상황은 게임이 다 끝나고 1,2를 받을때.
-    let userAnswer;
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
-      if (userValue) {
-        userAnswer = userValue;
-      }
-    }); 
-
-    if (gameStatus === "normal") {
-      this.detectError(userAnswer);
-      MissionUtils.Console.print(`${userAnswer}`);
+  detectReStartError(user) {
+    if (!(user === '1' || user === '2')) {
+      throw new Error("유효하지 않은 값이 입력되었습니다. 종료오류");
     }
-    return userAnswer;
-
-  };
+  }
 
   getComputerInput() {
     let computerInput = [];
@@ -85,9 +46,27 @@ class App {
     return computerInput.join("");
   }
 
-  compareUserAndComputer(user, computer) {
+  compareUserAndComputer(computer) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userValue) => {
+        let isUserInputValid = this.detectError(userValue);
+
+        if (isUserInputValid) {
+            let [strike, ball] = this.countStrikeAndBall(userValue, computer);
+            if (this.isStrikeOut(strike, ball)){
+                this.reGame();
+            }
+            else{
+                this.compareUserAndComputer(computer);
+            }
+        }
+
+    }); 
+  }
+
+  countStrikeAndBall(user, computer) {
     user = [...user];
     computer = [...computer];
+
     let i = 0;
     let strike = 0;
     let ball = 0;
@@ -98,13 +77,10 @@ class App {
       }
       i += 1;
     });
-  
     return [strike, ball];
   }
   
-  isStrikeOut(user, computer) {
-    let [strike, ball] = this.compareUserAndComputer(user, computer);
-  
+  isStrikeOut(user, computer) {  
     if (strike === 0 && ball === 0) { MissionUtils.Console.print("낫싱")};
     if (strike === 1 && ball === 0) { MissionUtils.Console.print("1스트라이크")};
     if (strike === 2 && ball === 0) { MissionUtils.Console.print("2스트라이크")};
@@ -121,8 +97,10 @@ class App {
   
     return 0;
   }
-
-  
 }
+
+
+const game = new App();
+game.play();
 
 module.exports = App;
