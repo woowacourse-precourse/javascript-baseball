@@ -15,18 +15,6 @@ describe("기능 테스트", () => {
     expect(result).toEqual("135");
   });
 
-  test("입력 길이가 3으로 유효하면 true 반환", () => {
-    const app = new App();
-    const result = app.isVaildLength("123");
-    expect(result).toEqual(true);
-  });
-
-  test("입력 길이가 3이 아니면 false 반환", () => {
-    const app = new App();
-    const result = app.isVaildLength("1213");
-    expect(result).toEqual(false);
-  });
-
   test("입력이 1부터 9까지로 이루어진 유효하면 true 반환", () => {
     const app = new App();
     const result = app.isVaildNumberFormat("123");
