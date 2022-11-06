@@ -13,7 +13,15 @@ class App {
     this.strikeCount = 0;
   }
 
-  play() {}
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+
+    let isGameEnd = false;
+    while (!isGameEnd) {
+      this.playSingleGame();
+      isGameEnd = App.getGameEndStatus();
+    }
+  }
 
   playSingleGame() {
     this.answer = App.generateAnswer();
@@ -119,6 +127,19 @@ class App {
     this.input = undefined;
     this.ballCount = 0;
     this.strikeCount = 0;
+  }
+
+  static getGameEndStatus() {
+    let input;
+    function inputParser(inputString) {
+      input = Number(inputString.trim());
+    }
+
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', inputParser);
+
+    if (input === 1) return false;
+    if (input === 2) return true;
+    throw new Error('잘못된 입력입니다 !!');
   }
 }
 
