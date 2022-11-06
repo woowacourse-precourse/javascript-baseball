@@ -3,6 +3,15 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   play() {}
 
+  startGame() {
+    this.generateAnswer();
+    this.processGuess();
+  }
+
+  exitGame() {
+    MissionUtils.Console.close();
+  }
+
   printGameStartMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
@@ -86,6 +95,14 @@ class App {
   checkNewGame() {
     if (this.newGame !== '1' && this.newGame !== '2') {
       throw new Error('잘못된 입력입니다.');
+    }
+  }
+
+  handleNewGame() {
+    if (this.newGame === '1') {
+      this.startGame();
+    } else if (this.newGame === '2') {
+      this.exitGame();
     }
   }
 }
