@@ -1,15 +1,14 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const {Console} = require("@woowacourse/mission-utils");
  
 class UserNumber{
     constructor(){
-        MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-        MissionUtils.Console.readLine('숫자를 입력해주세요 :' , (answer) => {
+        Console.print('숫자 야구 게임을 시작합니다.');
+        Console.readLine('숫자를 입력해주세요 :' , (answer) => {
         this.threeDigitsError(answer);
         this.includeZeroError(answer);
         this.isNotNumberError(answer);
         this.overlapNumberError(answer);
-        });
-        return answer.split("");
+        } );
     }
 
     threeDigitsError(answer){
