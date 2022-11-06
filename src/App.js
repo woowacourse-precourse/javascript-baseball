@@ -6,6 +6,8 @@ class App {
   constructor() {
     this.computerNum = [];
     this.userInput = '';
+    this.strike = 0;
+    this.ball = 0;
   }
 
   play() {}
@@ -16,7 +18,6 @@ class App {
       randomNumberSet.add(Random.pickNumberInRange(1, 9));
     }
     this.computerNum = [...randomNumberSet].join('');
-    console.log(this.computerNum);
     return this.computerNum;
   }
 
@@ -30,27 +31,36 @@ class App {
 
   isStrike() {
     const { computerNum, userInput } = this;
-    let strike = 0;
     computerNum.split('').forEach((num, idx) => {
       if (computerNum[idx] === userInput[idx]) {
-        strike += 1;
+        this.strike += 1;
       }
     });
-    return strike || 0;
+    return this.strike || 0;
   }
 
   isBall() {
     const { computerNum, userInput } = this;
-    let ball = 0;
     computerNum.split('').forEach((num, idx) => {
       if (
         computerNum[idx] !== userInput[idx] &&
         userInput.includes(computerNum[idx])
       ) {
-        ball += 1;
+        this.ball += 1;
       }
     });
-    return ball || 0;
+    return this.ball || 0;
+  }
+
+  getAnswer() {
+    this.isStrike();
+    this.isBall();
+    const strikeText = this.strike ? `${this.strike}스트라이크` : '';
+    const ballText = this.ball ? `${this.ball}볼` : '';
+    if (strikeText || ballText) {
+      return `${ballText} ${strikeText}`.trim();
+    }
+    return '낫싱';
   }
 }
 
