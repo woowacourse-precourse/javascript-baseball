@@ -64,17 +64,12 @@ class App {
   }
 
   play() {
-    try {
-      const computerNumber = this.getRandomBaseballNumber();
-      const userNumber = this.userInputNumber();
-      const result = this.compareUserAndComputerNumber(
-        userNumber,
-        computerNumber
-      );
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+    const computerNumber = this.getRandomBaseballNumber();
+    const userNumber = this.userInputNumber();
+    const result = this.compareUserAndComputerNumber(
+      userNumber,
+      computerNumber
+    );
   }
 }
 
