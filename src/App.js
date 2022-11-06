@@ -76,17 +76,19 @@ function cpuMakeAnswer() {
 }
 
 class App {
-  constructor() {
-    this.cpuNumber = cpuMakeAnswer();
+  constructor(cpuNumber) {
+    this.cpuNumber = cpuNumber;
   }
   play() {
     Console.print("숫자 야구게임을 시작합니다.");
-    // const cpuNumber = cpuMakeAnswer();
+    bullsAndCows.createNumber();
+  }
+  createNumber() {
+    this.cpuNumber = cpuMakeAnswer();
     bullsAndCows.gaming();
   }
-  gaming() {
-    // const cpuNumber = cpuMakeAnswer();
 
+  gaming() {
     let userInput = [];
     let gameResult = "";
 
