@@ -11,6 +11,7 @@ function playBaseballGame() {
         //userNum 예외처리 조건 확인
         numOfStrike = getNumOfStrike(computerNum, userNum);
         if(numOfStrike == 3){
+            printMessage.printNumOfStrike(numOfStrike);
             printMessage.printGameWin();
             //게임 재시작 or 종료 메세지 출력
             //사용자 1 or 2 입력

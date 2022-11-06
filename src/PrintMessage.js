@@ -14,8 +14,10 @@ function printUserInput() {
 }
 
 function printNumOfStrike(numOfStrike){
-    const NUM_OF_STRIKE_MESSAGE = `${numOfStrike}스트라이크\n`;
-    MissionUtils.Console.print(NUM_OF_STRIKE_MESSAGE);
+    if(numOfStrike > 0) {
+        const NUM_OF_STRIKE_MESSAGE = `${numOfStrike}스트라이크\n`;
+        MissionUtils.Console.print(NUM_OF_STRIKE_MESSAGE);
+    }
 }
 
 function printGameWin() {
