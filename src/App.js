@@ -37,7 +37,6 @@ class App {
 
   printMsg(msg) {
     Console.print(msg);
-    Console.close();
   }
 
   gameStart () {
