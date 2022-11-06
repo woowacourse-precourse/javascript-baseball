@@ -67,15 +67,22 @@ class App {
 
   strikeBallCountAlram() {
     if (this.ball === 0 && this.strike === 0) {
-      MissionUtils.Console.print('낫싱');
+      this.nothing();
     } else {
       MissionUtils.Console.print(`입력한 수: ${this.userInput}, ${this.ball}볼 ${this.strike}스트라이크`);
     }
     this.strikeBallChecking();
+  }
 
+  strikeBallChecking() {
+    if (this.strike !== 3) {
+      this.getAnswer();
+    } else {
+      this.win();
+      this.restartOrEnd();
+    }
   }
 }
-
 const app = new App();
 app.play();
 module.exports = App;
