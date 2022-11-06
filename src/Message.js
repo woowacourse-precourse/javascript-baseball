@@ -37,6 +37,10 @@ class Message {
     }
     Console.print(`${ballCount}${BALL} ${strikeCount}${STRIKE}`);
   }
+
+  static requestInput(callback) {
+    Console.readLine(REQUEST_MESSAGE, callback);
+  }
 }
 
 module.exports = Message;
