@@ -45,13 +45,14 @@ class App extends GameUtil{
 
   correctAnswer() { 
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (decision) => {
-      if (Number(decision) === 1) {
-        this.restart()   
-      } else if (Number(decision) === 2) {
-        this.terminate()
-      } else {
-        this.correctAnswer();
-      }
+      switch (Number(decision)) {
+        case 1:
+          return this.restart();
+        case 2:
+          return this.terminate();
+        default:
+          return this.correctAnswer();
+      };
     });
   }
 
