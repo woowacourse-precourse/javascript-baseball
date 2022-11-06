@@ -1,8 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
 class App {
-  user_number;
-  computer_number;
+  userNumber;
+  computerNumber;
 
   getRandomNumber() {
     let computer_arr = [];
@@ -13,7 +13,7 @@ class App {
       }
     }
 
-    this.computer_number = computer_arr.join('');
+    this.computerNumber = computer_arr.join('');
   }
 
   getUserNumber() {
@@ -26,8 +26,8 @@ class App {
         String(input).length === 3 &&
         repeatInput.length === 3
       ) {
-        this.user_number = input;
-        this.compareNumbers(this.computer_number, this.user_number);
+        this.userNumber = input;
+        this.compareNumbers(this.computerNumber, this.userNumber);
       } else {
         throw new Error('잘못된 입력입니다.');
       }
@@ -35,16 +35,16 @@ class App {
   }
 
   compareNumbers(computerNumber, userNumber) {
-    const computerList = this.computer_number.split('');
-    const userList = this.user_number.split('');
+    const computerList = this.computerNumber.split('');
+    const userList = this.userNumber.split('');
     let strike = 0;
     let ball = 0;
 
     for (let i = 0; i < 3; i++) {
       if (computerList.indexOf(userList[i]) === i) {
-        strike++;
+        strike += 1;
       } else if (computerList.includes(userList[i])) {
-        ball++;
+        ball += 1;
       }
     }
     this.displayResult(strike, ball);
