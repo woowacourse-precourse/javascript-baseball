@@ -9,16 +9,16 @@ class User {
     return new Promise((resolve, reject) => this.getInput(resolve, reject));
   }
 
-  getInput(resolve) {
+  getInput(resolve, reject) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-      this.setNumberArray(input);
-      resolve();
+      this.setNumberArray(input, reject);
+      resolve(input);
     });
   }
 
-  setNumberArray(input) {
+  setNumberArray(input, reject) {
     if (!this.validInput(input)) {
-      throw new Error('입력값이 잘못되었습니다.');
+      reject('입력값이 잘못되었습니다.');
     }
 
     const inputArray = this.makeInputToArray(input);

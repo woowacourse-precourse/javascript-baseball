@@ -46,17 +46,18 @@ class App {
     const ball = this.answerMap.get('ball');
 
     if (strike === 3) {
+      MissionUtils.Console.print('3스트라이크');
       return this.askRestartApp();
     }
 
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print('낫싱');
     } else if (ball === 0) {
-      MissionUtils.Console.print(`${strike} 스트라이크`);
+      MissionUtils.Console.print(`${strike}스트라이크`);
     } else if (strike === 0) {
-      MissionUtils.Console.print(`${ball} 볼`);
+      MissionUtils.Console.print(`${ball}볼`);
     } else {
-      MissionUtils.Console.print(`${ball} 볼 ${strike} 스트라이크`);
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
   }
 
@@ -70,12 +71,14 @@ class App {
   async startOrRestartApp(start) {
     this.validStartInput(start);
     this.initAnswerMap();
+    let something;
     try {
-      await this.user.getNumberArrayFromInput();
+      something = await this.user.getNumberArrayFromInput();
     } catch (error) {
       throw new Error(error);
+    } finally {
+      this.compareUserAndComputerNumber();
     }
-    this.compareUserAndComputerNumber();
   }
 
   setAnswerMapByCompareUserAndComputer() {
