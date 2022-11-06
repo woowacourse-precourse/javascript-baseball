@@ -1,28 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
-
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
-};
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
-
 describe("기능테스트", () => {
   test("setBaseLine", () => {
     const app = new App();
@@ -70,7 +48,7 @@ describe("기능테스트", () => {
     app.continueAnswer("1");
     expect(spyFn).toBeCalledTimes(1);
   });
-  
+
   test("continueAnswer1", () => {
     const app = new App();
     const spySetBaseLine = jest.spyOn(app, "setBaseLine");
@@ -79,7 +57,7 @@ describe("기능테스트", () => {
     expect(spySetBaseLine).toBeCalledTimes(1);
     expect(spyProgressFn).toBeCalledTimes(1);
   });
-  
+
   test("continueAnswer2", () => {
     const app = new App();
     const spySetBaseLine = jest.spyOn(app, "setBaseLine");
@@ -87,13 +65,18 @@ describe("기능테스트", () => {
     app.continueAnswer("2");
     expect(spySetBaseLine).not.toBeCalledTimes(1);
     expect(spyProgressFn).not.toBeCalledTimes(1);
-  }); 
-  
+  });
+
   test("continueAnswerDefault", () => {
     expect(() => {
       const app = new App();
-      app.continueAnswer("3")
+      app.continueAnswer("3");
     }).toThrow();
-  }); 
-  
+  });
+  test("continueQuestion", () => {
+    const app = new App();
+    const spyConsole = jest.spyOn(MissionUtils.Console, "readLine");
+    app.continueQuestion("1");
+    expect(spyConsole).toBeCalledTimes(1);
+  });
 });
