@@ -1,4 +1,4 @@
-class CheckConstraints {
+class Constraints {
   checkNumberRange(inputData) {
     const regex = /^[1-9]+$/;
 
@@ -62,4 +62,4 @@ class CheckConstraints {
   }
 }
 
-module.exports = CheckConstraints;
+module.exports = Constraints;
