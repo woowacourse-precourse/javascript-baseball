@@ -61,7 +61,15 @@ class App {
     }
 
     this.printGameResult(gameResult);
-    return gameResult;
+    return gameResult[1] === 3 ? true : false;
+  }
+
+  gameSet() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (num) => {},
+    );
   }
 
   discriminationStrikeOrBall() {
@@ -75,7 +83,9 @@ class App {
       return acc + 1;
     }, 0);
 
-    const calculatedResult = this.calculateGameResult(result);
+    const isGameSet = this.calculateGameResult(result);
+    if (isGameSet) this.gameSet();
+    else this.userInputNumber();
   }
 
   userInputNumber() {
