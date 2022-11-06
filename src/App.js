@@ -23,6 +23,10 @@ class RandomNumber {
 }
 
 class BaseBallPlay {
+  constructor() {
+    this.victoryCheck = false;
+  }
+
   start() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -54,6 +58,7 @@ class BaseBallPlay {
     let ball = this.ball(computer, user);
 
     if (strike === 3) {
+      this.victoryCheck = true;
       return `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
     }
     if (strike === 0 && ball === 0) return `낫싱`;
@@ -66,6 +71,9 @@ class BaseBallPlay {
   userInputHandler(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (input) => {
       MissionUtils.Console.print(this.judgement(computer, input));
+
+      if(this.victoryCheck) return this.reset();
+      if(!this.victoryCheck) return this.userInputHandler(computer);
     });
   }
 
@@ -73,6 +81,20 @@ class BaseBallPlay {
     const computerAnswer = new RandomNumber();
     const computer = computerAnswer.getNumber();
     this.userInputHandler(computer);
+  }
+
+  reset() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+      if(input === '1') {
+        this.victoryCheck = false;
+        return this.repeatContext();
+      }
+
+      if(input === '2') {
+        return MissionUtils.Console.close();
+      }
+    })
+
   }
 }
 
