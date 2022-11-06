@@ -37,25 +37,30 @@ class BaseballGame {
       this.exceptionHandler.checkUserInputRedundancy(answer);
       this.exceptionHandler.checkInvalidNumber(answer);
 
-      this.checkBallStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);
+      this.checkBall(this.computer.computerRandomNumberArray, this.user.userAnswer);
+      this.checkStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);
       this.printBallStrike();
     });
   }
 
-  checkBallStrike(computerRandomNumberArray, userAnswer) {
-    for (let i = 0; i < userAnswer.length; i++) {
+  checkBall(computerRandomNumberArray, userAnswer) {
+    userAnswer.split("").forEach((digit, index) => {
       if (
-        computerRandomNumberArray.includes(parseInt(userAnswer[i])) &&
-        computerRandomNumberArray[i] == userAnswer[i]
-      ) {
-        this.strike++;
-      } else if (
-        computerRandomNumberArray.includes(parseInt(userAnswer[i])) &&
-        computerRandomNumberArray[i] != userAnswer[i]
-      ) {
+        computerRandomNumberArray.includes(parseInt(digit)) &&
+        computerRandomNumberArray.indexOf(parseInt(digit)) !== index
+      )
         this.ball++;
-      }
-    }
+    });
+  }
+
+  checkStrike(computerRandomNumberArray, userAnswer) {
+    userAnswer.split("").forEach((digit, index) => {
+      if (
+        computerRandomNumberArray.includes(parseInt(digit)) &&
+        computerRandomNumberArray.indexOf(parseInt(digit)) === index
+      )
+        this.strike++;
+    });
   }
 
   initializeBallandStrike() {

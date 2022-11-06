@@ -13,8 +13,6 @@ class ExceptionHandler {
     if (answer.length !== USER_INPUT_LENGTH) {
       throw new Error("세자리 숫자를 입력해주세요.");
     }
-
-    return true;
   }
 
   checkValidInput(answer) {
