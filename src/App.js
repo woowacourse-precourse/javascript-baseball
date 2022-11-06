@@ -2,6 +2,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Utils = require("./Utils");
 
 class App {
+  BALL = "볼";
+  STRIKE = "스트라이크";
+  NOTHING = "낫싱";
+
   play() {
     const computerNumber = this.generateRandomNumber();
     this.inputNumber(computerNumber);
@@ -54,6 +58,30 @@ class App {
       }
       return counter;
     }, initialCounter);
+  }
+
+  printMessage({ strike, ball }) {
+    const messageMap = [
+      {
+        type: this.BALL,
+        count: ball,
+      },
+      {
+        type: this.STRIKE,
+        count: strike,
+      },
+    ];
+    const resultMessages = messageMap.reduce((messages, { type, count }) => {
+      if (count > 0) {
+        messages.push(`${count}${type}`);
+      }
+      return messages;
+    }, []);
+
+    if (resultMessages.length === 0) {
+      return this.NOTHING;
+    }
+    return resultMessages.join(" ");
   }
 }
 
