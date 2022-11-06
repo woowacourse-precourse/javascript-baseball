@@ -33,13 +33,12 @@ class BaseballGame {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.user.saveUserInput(answer);
 
+      this.exceptionHandler.checkUserInputLength(answer);
       this.exceptionHandler.checkUserInputRedundancy(answer);
       this.exceptionHandler.checkInvalidNumber(answer);
 
-      if (this.exceptionHandler.checkUserInputLength(answer)) {
-        this.checkBallStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);
-        this.printBallStrike();
-      }
+      this.checkBallStrike(this.computer.computerRandomNumberArray, this.user.userAnswer);
+      this.printBallStrike();
     });
   }
 
