@@ -1,6 +1,10 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { createRandomNumber } = require('../computer/computer');
-const { NUMBER_LENGTH, GAME_MESSAGE } = require('../constant/constant');
+const {
+  NUMBER_LENGTH,
+  GAME_MESSAGE,
+  RESTART_OPTION,
+} = require('../constant/constant');
 const inputValidator = require('../input/validator');
 const Calculator = require('./Calculator');
 
@@ -54,11 +58,11 @@ class BaseballGame {
 
   askRestart() {
     Console.readLine(GAME_MESSAGE.restart, (answer) => {
-      if (answer === '1') {
+      if (answer === RESTART_OPTION.restart) {
         this.startGame();
       }
 
-      if (answer === '2') {
+      if (answer === RESTART_OPTION.end) {
         this.isStop = true;
       }
     });

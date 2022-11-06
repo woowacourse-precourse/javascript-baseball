@@ -15,6 +15,12 @@ const GAME_MESSAGE = {
   restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 };
 
+const RESTART_OPTION = {
+  restart: '1',
+  end: '2',
+};
+
 exports.NUMBER_LENGTH = NUMBER_LENGTH;
 exports.ERROR_MESSAGE = ERROR_MESSAGE;
 exports.GAME_MESSAGE = GAME_MESSAGE;
+exports.RESTART_OPTION = RESTART_OPTION;
