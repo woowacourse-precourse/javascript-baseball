@@ -196,4 +196,37 @@ describe("숫자 야구 게임", () => {
 
     expect(testResult).toContain("낫싱");
   });
+
+  test("힌트가 3스트라이크인 경우, 게임이 종료 된다.", () => {
+    const answers = ["2"];
+    const logSpy = getLogSpy();
+    const messages = ["게임 종료"];
+    const hint = ["3스트라이크"];
+
+    mockQuestions(answers);
+
+    const app = new App();
+    app.decideWin(hint);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("힌트가 3스트라이크가 아닌 경우, 게임이 계속 진행된다.", () => {
+    const answers = ["123", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["게임 종료"];
+    const hint = ["1볼"];
+
+    mockQuestions(answers);
+
+    const app = new App();
+    app.computerNumber = [1, 2, 3];
+    app.decideWin(hint);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
