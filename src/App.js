@@ -31,6 +31,23 @@ class App {
     return MissionUtils.Console.readLine(message, callback);
   }
 
+  compare(input, computer) {
+    const strike = this.compareStrike(input, computer);
+    const ball = this.compareBall(input, computer);
+    if (strike === 3) {
+      this.correctAnswer = true;
+      return `${strike}${TEXT.STRIKE}`;
+    } else if (!strike && !ball) {
+      return TEXT.NOTHING;
+    } else if (strike && ball) {
+      return `${ball}${TEXT.BALL} ${strike}${TEXT.STRIKE}`;
+    } else if (strike && !ball) {
+      return `${strike}${TEXT.STRIKE}`;
+    } else if (!strike && ball) {
+      return `${ball}${TEXT.BALL}`;
+    }
+  }
+
   compareStrike(input, computer) {
     return computer.filter((value, index) => value === Number(input[index]))
       .length;
