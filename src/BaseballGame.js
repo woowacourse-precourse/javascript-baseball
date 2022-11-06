@@ -1,4 +1,4 @@
-const { REPLAY, CLOSE, STRIKE_OUT } = require("./Constant");
+const { REPLAY, CLOSE, STRIKE_OUT, INVALID } = require("./Constant");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const User = require("./User");
@@ -76,11 +76,11 @@ class BaseballGame {
   }
 
   printBallStrike() {
-    if (this.ball === 0 && this.strike !== 0) {
+    if (this.ball === INVALID && this.strike !== INVALID) {
       MissionUtils.Console.print(`${this.strike}스트라이크`);
-    } else if (this.strike === 0 && this.ball !== 0) {
+    } else if (this.strike === INVALID && this.ball !== INVALID) {
       MissionUtils.Console.print(`${this.ball}볼`);
-    } else if (this.strike !== 0 && this.ball !== 0) {
+    } else if (this.strike !== INVALID && this.ball !== INVALID) {
       MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
     } else {
       MissionUtils.Console.print("낫싱");
