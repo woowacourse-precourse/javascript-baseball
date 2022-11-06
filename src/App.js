@@ -1,8 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const GameMessage = require('./Constants/gameMessage');
 class App {
+  #answer = '';
+  userInput = '';
+
   constructor() {
-    this.userInput = '';
     this.answer = '';
     this.result = '';
   }
@@ -23,9 +25,20 @@ class App {
     this.answer = randomNumber.join('');
   }
 
+  getUserInput() {
+    MissionUtils.Console.readLine(GameMessage.QUESTION_MESSAGE, (input) => {
+      this.userInput = input;
+    });
+  }
+
+  get userInput() {
+    return this.userInput;
+  }
+
   play() {
     this.printWelcomeMessage();
     this.answerGenerator();
+    this.getUserInput();
   }
 }
 
