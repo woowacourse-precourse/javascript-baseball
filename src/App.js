@@ -34,11 +34,20 @@ class App {
     }
     return false;
   }
+  isInRange(inputs) {
+    for (let i = 0; i < inputs.length; i++) {
+      const digit = inputs[i];
+      if (digit <= 0 || digit >= 10) return false;
+    }
+    return true;
+  }
   validateInput(inputs) {
     //음수나, 9초과의 수가 입력된다면 숫자 길이에서 걸러지기 때문에 별도의 처리를 하지 않았습니다.
     if (inputs.length !== 3) throw new Error("세자리의 수를 입력해주세요.");
     if (isNaN(inputs.join(""))) throw new Error("숫자가 아닙니다.");
     if (this.isRepeated(inputs)) throw new Error("반복되는 숫자가 있습니다.");
+    if (!this.isInRange(this.input))
+      throw new Error("범위를 초과한 숫자입니다.");
   }
   isSameNumber(answer, input) {
     return answer === input;
@@ -74,6 +83,7 @@ class App {
   init() {
     this.answer = this.generateAnswer();
     this.utils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.input();
   }
   input() {
     this.utils.Console.readLine("숫자를 입력해주세요: ", (inputs) => {
@@ -112,7 +122,6 @@ class App {
   }
   play() {
     this.init();
-    this.input();
   }
 }
 
