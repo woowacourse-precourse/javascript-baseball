@@ -12,7 +12,7 @@ class App {
   }
 
   inputisCorrect(userAnswer) {
-    if (userAnswer) return this.end();
+    if (userAnswer) return this.endOption();
     if (!userAnswer) return this.makeInputNum();
     throw new Error();
   }
