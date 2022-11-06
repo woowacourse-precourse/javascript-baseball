@@ -20,7 +20,7 @@ class Game {
         return this.resultMessage(howManyStrike, howManyBall);
     }
     
-    // 입력된 숫자 대조 결과 리턴
+    // 입력된 숫자 대조 결과 출력
     resultMessage(howManyStrike, howManyBall) {
         if (howManyStrike && !howManyBall) return MissionUtils.Console.print(`${howManyStrike}스트라이크`);
         if (!howManyStrike && howManyBall) return MissionUtils.Console.print(`${howManyBall}볼`);
@@ -34,8 +34,11 @@ class Game {
             usersNumber = [...usersNumber].map(idx => parseInt(idx));
             console.log(usersNumber);
 
+            // 볼 스트라이크 갯수 구하기, resultMessage함수 결과 출력
             this.getStrikeAndBall(this.computersNumber, usersNumber);
-                       
+            
+
+            
             return ;
         });
 
