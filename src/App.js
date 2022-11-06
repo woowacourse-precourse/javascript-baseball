@@ -81,12 +81,22 @@ class App {
 
   static playGame(computerNum) {
     let score;
+
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       try {
         // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
         if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
         
         score = App.calculateScore(computerNum, userInput);
+        
+        if (!App.isThreeStrike(score)) {
+          const ZERO_SCORE_MESSAGE = '낫싱';
+          const SCORE_MESSAGE = `${score.ball}볼 ${score.strike}스트라이크`;
+          let resultMessage = App.isZeroScore(score) ? ZERO_SCORE_MESSAGE : SCORE_MESSAGE ;
+          MissionUtils.Console.print(resultMessage);
+          App.playGame(computerNum);
+          return;
+        }
       
       } catch(error) {
         MissionUtils.Console.print('입력값이 서로 다른 세 자릿수가 아닙니다.');
