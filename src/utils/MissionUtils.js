@@ -36,4 +36,8 @@ const validateOverlapped = (target) => {
   return false;
 };
 
+const validateOneToNine = (target) => {
+  return NUMBER_ONE_TO_NINE.test(target);
+};
+
 module.exports = { getComputerNumber };
