@@ -38,6 +38,7 @@ class App {
       Console.print(this.user.number);
       // 게임끝 재시작 콘솔
       if (strike === 3) return this.selectContinue();
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.guess();
     });
   }

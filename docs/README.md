@@ -20,21 +20,27 @@
 
 4. 값 비교
 
-   - [ ] user의 값과 computer의 값을 비교하는 함수 생성.
+   - [x] user의 값과 computer의 값을 비교하는 함수 생성.
      - 비교하는 value가 computer의 정답 Array에 존재하는 경우 .
        - index가 같은 경우 strike += 1
        - index가 다른 경우 ball += 1
 
 5. 결과값 출력
-   - [ ] `Console.print();`를 이용해, 결과값을 출력하는 함수 구현.
+   - [x] `Console.print();`를 이용해, 결과값을 출력하는 함수 구현.
      - strike = 3일 경우 정답 return
      - strike + ball = 0일 경우 `낫싱` return
 
 ---
 
+# fix
+
+- [ ] 결과물 출력 방식 변경. 낫싱 추가.
+- [x] 게임 종료 텍스트 추가.
+
 # refactor
 
 - [ ] try 내부 코드들 전부 함수화.
+- [ ] 콘솔 메서드화 해도 괜찮을듯?
 
 ---
 
