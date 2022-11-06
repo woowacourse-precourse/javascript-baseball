@@ -1,6 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const { Random } = MissionUtils;
+const { Random, Console } = MissionUtils;
+const STRIKE = 1;
+const BALL = 0;
 class App {
   play() {}
 
@@ -42,6 +44,12 @@ class App {
 
   getQueryArrFromQuery(query) {
     return query.toString().split('');
+  }
+
+  printFeedback(score) {
+    const ballFeedback = (score[BALL] && `${score[BALL]}볼 `) || '';
+    const strikeFeedback = (score[STRIKE] && `${score[STRIKE]}스트라이크`) || '';
+    Console.print(ballFeedback + strikeFeedback || '낫싱');
   }
 }
 
