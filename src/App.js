@@ -21,7 +21,7 @@ class App {
 
   getUserInput() {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.userInput = input;
+      this.userInput = input.replace(/ /g, '');
       Console.print(this.userInput);
     });
     return this.userInput;
