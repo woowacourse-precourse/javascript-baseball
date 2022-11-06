@@ -14,15 +14,19 @@ class App {
     };
 
     function sayStart() {
-      console.log('숫자 야구 게임을 시작합니다.');
+      MissionUtils.Console.print('숫자 야구  시작합니다.');
     };
 
     sayStart();
 
-    let NumberPickedByComputer = ComputerPicksNumber();
-    console.log("컴퓨터 픽 넘버는?: " + NumberPickedByComputer);
-  }
-}
+    let computerInput = ComputerPicksNumber();
+    
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+      const userInput = input;
+      const isUserInputValid = evaluateInput(userInput);
+    });
+  };
+};
 
 let app = new App();
 app.play();
