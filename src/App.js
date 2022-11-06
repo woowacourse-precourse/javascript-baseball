@@ -3,10 +3,8 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 class BaseballGame {
   randomSelectComputerNumbers() {
     const randomNumbers = [];
-
     while (randomNumbers.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
-
       if (randomNumbers.includes(number) === false) {
         randomNumbers.push(number);
       }
@@ -39,7 +37,6 @@ class BaseballGame {
       if (validUserInput === false) {
         this.throwError('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
       }
-
       this.progressTurn(userInput, computerNumbers);
     });
   }
@@ -66,12 +63,10 @@ class BaseballGame {
       if (number === '1') {
         return this.playGame();
       }
-
       if (number === '2') {
         return this.exitConsole();
       }
-
-      return this.throwError('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
+      this.throwError('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
     });
   }
 
