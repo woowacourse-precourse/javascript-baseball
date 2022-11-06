@@ -25,7 +25,6 @@ class App {
     while (computerRandomNums.size < 3) {
       computerRandomNums.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    MissionUtils.Console.print(computerRandomNums);
     return this.correctAnswer = [...computerRandomNums].join('');
   }
 
@@ -60,6 +59,10 @@ class App {
       }
     });
     return this.ball;
+  }
+
+  nothing() {
+    MissionUtils.Console.print('낫싱');
   }
 
   strikeBallCountAlram() {
