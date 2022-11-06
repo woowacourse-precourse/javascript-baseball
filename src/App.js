@@ -50,18 +50,7 @@ class App {
     if (strike === 3) {
       this.sendMessage(MESSAGE.COMPARE_ANSWER.THREE_STRIKE);
       this.sendMessage(MESSAGE.GAME_PROGRESS.END);
-      Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => {
-        if (answer === "1") {
-          this.play();
-          return;
-        }
-
-        if (answer === "2") {
-          Console.print(MESSAGE.GAME_PROGRESS.SHUTDOWN);
-          Console.close();
-        }
-      });
-
+      Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => this.isContinue(answer));
       return;
     }
 
@@ -73,6 +62,18 @@ class App {
 
     this.sendMessage(MESSAGE.COMPARE_ANSWER.NOTHING);
     this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
+  }
+
+  isContinue(answer) {
+    if (answer === "1") {
+      this.play();
+      return;
+    }
+
+    if (answer === "2") {
+      Console.print(MESSAGE.GAME_PROGRESS.SHUTDOWN);
+      Console.close();
+    }
   }
 
   play() {
