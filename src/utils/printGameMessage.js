@@ -12,7 +12,7 @@ const printGameMessage = (strike, ball) => {
     resultMessage = "낫싱";
   } else {
     resultMessage =
-      `${message.strikePrint[strike]} ${message.ballPrint[ball]}`.trim();
+      `${message.ballPrint[ball]} ${message.strikePrint[strike]}`.trim();
   }
 
   Console.print(resultMessage);
