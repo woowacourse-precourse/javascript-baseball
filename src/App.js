@@ -47,6 +47,35 @@ class App {
 
   }
 
+  printAndDecide(computerNumber, strike, ball) {
+
+    if (strike && ball) {
+      STD.print(`${ball}볼 ${strike}스트라이크`);
+      this.userInput(computerNumber);
+    }
+
+    if (strike && strike !==3 && !ball) {
+      STD.print(`${strike}스트라이크`);
+      this.userInput(computerNumber);
+    }
+
+    if (!strike && ball) {
+      STD.print(`${ball}볼`);
+      this.userInput(computerNumber);
+    }
+
+    if (!strike && !ball) {
+      STD.print(`낫싱`);
+      this.userInput(computerNumber);
+    }
+
+    if (strike === 3 ) {
+      STD.print(`3스트라이크`);
+     this.whenThreeStrike();
+    }
+
+  }
+
   compareUserAndComputer(userNumber, computerNumber) {
     const splitUserNumber = userNumber.split("");
     const splitComputerNumber = computerNumber.split("");
