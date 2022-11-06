@@ -6,7 +6,7 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userMessage) => {
       const userMessageArray = stringToArray(userMessage).map(Number);
-      startBaseballGame(userMessageArray, [1, 2, 3]);
+      startBaseballGame(userMessageArray, computerAnswer);
     });
   }
 }
@@ -33,7 +33,7 @@ function stringToArray(string) {
 function startBaseballGame(userMessage, computerAnswer) {
   const ballCount = checkBall(userMessage, computerAnswer);
   const strikeCount = checkStrike(userMessage, computerAnswer);
-  playBaseballGame(ballCount, strikeCount);
+  playBaseballGame(ballCount, strikeCount, computerAnswer);
 }
 
 function checkBall(userMessage, computerAnswer) {
@@ -52,12 +52,12 @@ function checkStrike(userMessage, computerAnswer) {
   return result.length;
 }
 
-function playBaseballGame(ballCount, strikeCount) {
+function playBaseballGame(ballCount, strikeCount, computerAnswer) {
   if (strikeCount === 3) {
-    gameClear();
+    gameClear(ballCount, strikeCount);
   }
   if (strikeCount !== 3) {
-    console.log('아직 못맞춤!');
+    gameNotCleared(ballCount, strikeCount, computerAnswer);
   }
 }
 function gameClear() {
@@ -66,10 +66,10 @@ function gameClear() {
   MissionUtils.Console.print(
     '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
   );
-  playNewGame();
+  playNewGameOrQuit();
 }
 
-function playNewGame() {
+function playNewGameOrQuit() {
   MissionUtils.Console.readLine('', (newGameOrQuit) => {
     const newOrQuit = stringToArray(newGameOrQuit).map(Number);
     if (newOrQuit == 1) {
@@ -86,6 +86,29 @@ function playNewGame() {
       return;
     }
   });
+}
+
+function gameNotCleared(ballCount, strikeCount, computerAnswer) {
+  if (strikeCount > 0 && ballCount > strikeCount) {
+    MissionUtils.Console.print(
+      ballCount - strikeCount + '볼 ' + strikeCount + '스트라이크'
+    );
+  }
+  if (strikeCount !== 0 && strikeCount == ballCount) {
+    MissionUtils.Console.print(strikeCount + '스트라이크');
+  }
+  if (ballCount !== 0 && strikeCount == 0) {
+    MissionUtils.Console.print(ballCount + '볼');
+  } else {
+    MissionUtils.Console.print('낫싱');
+  }
+  MissionUtils.Console.readLine(
+    '숫자를 입력해주세요 : ',
+    (newGameUserMessage) => {
+      const userMessageArray = stringToArray(newGameUserMessage).map(Number);
+      startBaseballGame(userMessageArray, computerAnswer);
+    }
+  );
 }
 
 module.exports = App;
