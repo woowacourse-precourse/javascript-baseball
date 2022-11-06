@@ -61,7 +61,9 @@ class App {
   }
 
   threeStrikeCheck() {
-    if (this.strikeCount === 3) {
+    const isThreeStrike = this.strikeCount === 3;
+
+    if (isThreeStrike) {
       MissionUtils.Console.print('3스트라이크');
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return this.askRestartOrExit();
@@ -70,7 +72,9 @@ class App {
   }
 
   nothingCheck() {
-    if (this.strikeCount === 0 && this.ballCount === 0) {
+    const isNoting = this.strikeCount === 0 && this.ballCount === 0;
+
+    if (isNoting) {
       MissionUtils.Console.print('낫싱');
       return this.getUserNumber();
     }
@@ -78,7 +82,9 @@ class App {
   }
 
   ballCheck() {
-    if (this.strikeCount === 0 && this.ballCount !== 0) {
+    const isBall = this.strikeCount === 0 && this.ballCount !== 0;
+
+    if (isBall) {
       MissionUtils.Console.print(`${this.ballCount}볼`);
       return this.getUserNumber();
     }
@@ -86,11 +92,10 @@ class App {
   }
 
   strikeCheck() {
-    if (
-      this.strikeCount !== 0 &&
-      this.ballCount === 0 &&
-      this.strikeCount !== 3
-    ) {
+    const isStrike =
+      this.strikeCount !== 0 && this.ballCount === 0 && this.strikeCount !== 3;
+
+    if (isStrike) {
       MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
       return this.getUserNumber();
     }
@@ -98,12 +103,13 @@ class App {
   }
 
   strikeAndBallCheck() {
-    if (
+    const isStrikeAndBall =
       this.ballCount !== 0 &&
       this.strikeCount !== 0 &&
       this.strikeCount > 0 &&
-      this.strikeCount < 3
-    ) {
+      this.strikeCount < 3;
+
+    if (isStrikeAndBall) {
       MissionUtils.Console.print(
         `${this.ballCount}볼 ${this.strikeCount}스트라이크`,
       );
