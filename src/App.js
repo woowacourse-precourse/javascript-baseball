@@ -27,8 +27,6 @@ class App {
   enter(random) {
     Console.readLine(COMMAND.QUESTION, (input) => {
       this.#exception.checkErrorFor(new BaseBallException(input));
-      input = input.split('').map((inputItem) => +inputItem);
-
       this.print(this.#baseball.getResultToString(random, input));
 
       this.#baseball.isStrikeOut(random, input) ? this.doNext() : this.enter(random);
