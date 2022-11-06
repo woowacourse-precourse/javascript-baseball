@@ -35,6 +35,22 @@ class App {
       }
     }
   }
+
+  printMessageMethod() {
+    if ( this.countStrike > 0 && this.countBall === 0 ) {
+      Console.print(`${this.countStrike}스트라이크`)
+    }
+    else if ( this.countStrike === 0 && this.countBall > 0 ) {
+      Console.print(`${this.countBall}볼`)
+    }
+    else if (this.countStrike > 0 && this.countBall > 0) {
+      Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`)
+    }
+    else if ( this.countStrike + this.countBall === 0) {
+      Console.print('낫싱');
+    }
+ }   
+
 }
 
 module.exports = App;
