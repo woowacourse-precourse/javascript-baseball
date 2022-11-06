@@ -79,15 +79,16 @@ class App {
   getHintOfAnswer(result) {
     if (result.ball === 0 && result.strike === 0) {
       MissionUtils.Console.print("낫싱");
-      return MissionUtils.Console.close();
+      this.isPlaying = true;
+      return this.isPlaying;
     }
     if (result.ball === 0 && result.strike === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      return MissionUtils.Console.close();
+      return this.checkIfRestartGame();
     }
     MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크 `);
-    return MissionUtils.Console.close();
+    return this.isPlaying;
   }
 
   scoreUserInput(answerArr, userInputArr) {
