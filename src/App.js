@@ -11,8 +11,15 @@ class App {
     this.threeDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  getUserDigits() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.userDigits = [...answer];
+    });
+  }
+
   play() {
     this.generateThreeDigits();
+    this.getUserDigits();
   }
 }
 
