@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const CheckConstraints = require("./CheckConstraints");
+const Constraints = require("./Constraints");
 
 class RandomNumber {
   static makeRandomNumber() {
@@ -13,8 +13,8 @@ class RandomNumber {
       }
     }
 
-    const checkConstraints = new CheckConstraints();
-    checkConstraints.checkConstraints(COMPUTER);
+    const constraints = new Constraints();
+    constraints.checkConstraints(COMPUTER);
 
     return COMPUTER;
   }
