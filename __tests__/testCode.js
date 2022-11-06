@@ -43,8 +43,8 @@ describe("숫자 야구 게임", () => {
     const logSpy = getLogSpy();
     const messages = [
       "낫싱",
-      "1스트라이크",
       "2볼",
+      "2스트라이크",
       "3스트라이크",
       "1스트라이크",
       "낫싱",

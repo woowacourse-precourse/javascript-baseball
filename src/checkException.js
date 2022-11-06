@@ -1,5 +1,4 @@
-const checkPlayingNum = (inputNum) => {
-  let allowed = true;
+const checkPlayingNum = (allowed, inputNum) => {
   if (inputNum.length !== 3) {
     return false;
   }
@@ -31,7 +30,7 @@ const checkException = (input, checkStyle) => {
   const playingInput = 0;
   const restartInput = 1;
   if (checkStyle === playingInput) {
-    return checkPlayingNum(input);
+    return checkPlayingNum(true, input);
   } else if (checkStyle === restartInput) {
     return checkRestartNum(input);
   }
