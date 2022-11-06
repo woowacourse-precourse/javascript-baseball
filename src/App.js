@@ -12,8 +12,7 @@ class App {
   }
   submitInput() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.INPUT, (input) => {
-      const noSpaceInput = input.replace(/\s/g,'');
-      const userInput = noSpaceInput.split('').map(number => +number);
+      const userInput = GameUtils.System.toFilterdArray(input);
       GameUtils.Validator.isVaildAnswer(userInput);
       const result = GameUtils.System.getResult(userInput, this.answer);
       Print.GameMessage.result(result);
@@ -27,7 +26,7 @@ class App {
   clearGame() {   
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.CLEAR, (submit) => {
       GameUtils.Validator.isVaildRestartSubmit(+submit);
-      this.isRestart(+submit)
+      this.isRestart(+submit);
     });
   }
   isRestart(submit) {    

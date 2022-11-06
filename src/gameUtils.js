@@ -14,6 +14,12 @@ class System {
     if(numbers.size < 3) System.#addNumber(numbers);
   }
 
+  static toFilterdArray(input) {
+    input = input.replace(/[\s,]/g, '');
+    const arrayInput = input.split('').map(number => Number(number));
+    return arrayInput;
+  }
+
   static getResult(input, answer) {
     const result = {
       strike: 0,
