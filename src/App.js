@@ -65,8 +65,14 @@ class App {
 
     throwingResult() {
         Console.print("throwingResult()-----------------");
+        this.judgeStrike();
         this.judgeBall();
+        const strikeCount = this.strike;
         const ballCount = this.ball;
+    }
+    judgeStrike() {
+        Console.print("judgeStrike()-----------------");
+        this.strike = this.computer.filter((el, idx) => el.toString() === this.user[idx]).length;
     }
     judgeBall() {
         Console.print("judgeBall()-----------------");
