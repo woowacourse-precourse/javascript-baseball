@@ -32,11 +32,16 @@ const computerNumbersMaking = () => {
 
 const playerNumbersInput = () => {
   let input;
+  let inspect;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
     input = answer;
   });
   if(input.length != 3){
-    throw "숫자 개수가 맞지 않습니다.";
+    throw "숫자 개수 에러";
+  }
+  inspect = Number(input);
+  if (isNaN(inspect)){
+    throw "숫자가 아님";
   }
   return input;
 };
@@ -63,7 +68,6 @@ const oneGame = (computerNumbers) => {
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
-  console.log(computerNumbers, playerNumbers);
   let strike = 0;
   let ball = 0;
   for (i = 0; i < 3; i++) {
