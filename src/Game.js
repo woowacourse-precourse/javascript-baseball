@@ -62,8 +62,10 @@ class Game {
   decideReplay (input) {
     if(input === '1') {
       this.replay();
+      return;
     } else if(input === '2') {
       this.exit();
+      return;
     } 
     throw new Error('잘못된 입력입니다.');
   }
