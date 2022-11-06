@@ -71,6 +71,31 @@ class GameLoop {
 
     return message;
   }
+
+  _respond(ball, strike) {
+    if (ball == 0 && strike == 0) {
+      MissionUtils.Console.print("낫싱");
+    }
+
+    if (ball == 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    }
+
+    if (strike == 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+    }
+
+    if (strike != 3) {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
+
+    if (strike == 3) {
+      MissionUtils.Console.print("3스트라이크");
+      return true;
+    }
+
+    return false;
+  }
 }
 
 module.exports = App;
