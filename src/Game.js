@@ -1,6 +1,11 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
+const Verify = require('./Verify');
 
 class Game {
+  constructor() {
+    this.verify = new Verify();
+  }
+
   start() {
     this.state = -1;
     this.setAnswer();
@@ -21,28 +26,16 @@ class Game {
   }
 
   interaction() {
+    const { verify } = this;
+
     Console.readLine('숫자를 입력해 주세요 : ', (string) => {
       this.userInput = Array.from(string, Number);
-      this.verifyInput();
+      verify.userInput(this.userInput);
       this.setCount();
       this.setHint();
       Console.print(this.hint);
       this.checkState();
     });
-  }
-
-  verifyInput() {
-    const { userInput } = this;
-    const inputSet = new Set(userInput);
-
-    if (
-      inputSet.size !== userInput.length
-      || inputSet.size > 3
-      || inputSet.has(NaN)
-      || inputSet.has(0)
-    ) {
-      throw new Error('잘못된 값을 입력하셨습니다.');
-    }
   }
 
   setCount() {
@@ -106,23 +99,17 @@ class Game {
   }
 
   readState() {
+    const { verify } = this;
+
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (string) => {
         this.state = Number(string);
-        this.verifyState();
+        verify.state(this.state);
         this.checkState();
       }
     );
-  }
-
-  verifyState() {
-    const { state } = this;
-
-    if (state !== 1 && state !== 2) {
-      throw new Error('잘못된 값을 입력하셨습니다.');
-    }
   }
 }
 
