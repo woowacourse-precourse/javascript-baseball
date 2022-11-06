@@ -62,3 +62,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 		return computer.join("");
 	};
 ```
+
+## 4. printResult
+
+유저의 input과 컴퓨터의 input을 비교해서 결과를 나타낸다.
+
+- 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱으로 결과를 보여준다.
+- 3개 다 맞추면 성공 메시지를 나타낸다.
