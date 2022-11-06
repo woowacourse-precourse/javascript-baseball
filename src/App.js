@@ -23,11 +23,10 @@ class App {
   }
 
   async play() {
-    //todo : 나중에 삭제
     switch (this.game) {
       case GAME.PLAY:
         await this.playGame();
-        this.endGame();
+        if (!this.game) this.endGame();
         break;
       case GAME.STOP:
         await this.askUser();
@@ -43,6 +42,7 @@ class App {
     const anwser = this.startGame().createAnswer();
     while (this.game === GAME.PLAY) {
       await this.checkUserGameAnswer();
+      if (this.game === GAME.EXIT) break;
       const result = this.compareUserAnswer(anwser);
       this.resultPrint(result);
     }
