@@ -47,17 +47,16 @@ describe('숫자 야구 게임', () => {
     });
   });
 
-  test('예외 테스트', async () => {
+  test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    await expect(async () => {
+    expect(async () => {
       const app = new App();
-
       await app.play();
-    }).toThrow();
+    }).rejects.toThrow();
   });
 });

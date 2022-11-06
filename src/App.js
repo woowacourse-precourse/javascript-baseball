@@ -116,7 +116,6 @@ class App {
     } catch (error) {
       MissionUtils.Console.print(error);
       this.endApp();
-      throw new Error(error);
     }
   }
 }

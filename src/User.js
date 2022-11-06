@@ -25,8 +25,7 @@ class User {
   }
 
   validInput(input) {
-    if (input.length > 3) return false;
-    const validRegex = /^[1-9]*$/;
+    const validRegex = /^[1-9]{3}$/;
     return validRegex.test(input);
   }
 
