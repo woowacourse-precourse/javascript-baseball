@@ -1,5 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./Validate");
+const {
+  BALL,
+  STRIKE,
+  NOTHING,
+  CORRECT_MESSAGE,
+  ASK_RESTART_MESSAGE,
+  GET_USER_INPUT_MESSAGE,
+} = require("./Constants");
 
 let answer;
 
@@ -36,13 +44,13 @@ const countBall = (input) => {
 
 const checkNothing = (strike, ball) => {
   if (strike === 0 && ball === 0) {
-    MissionUtils.Console.print("낫싱");
+    MissionUtils.Console.print(NOTHING);
   }
 };
 
 const printHint = (strike, ball) => {
-  const ballHint = ball > 0 ? `${ball}볼` : "";
-  const strikeHint = strike > 0 ? `${strike}스트라이크` : "";
+  const ballHint = ball > 0 ? `${ball}${BALL}` : "";
+  const strikeHint = strike > 0 ? `${strike}${STRIKE}` : "";
 
   if (strike > 0 || ball > 0)
     MissionUtils.Console.print(`${ballHint} ${strikeHint}`.trim());
@@ -50,18 +58,15 @@ const printHint = (strike, ball) => {
 
 const checkCorrect = (strike) => {
   if (strike === 3) {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(CORRECT_MESSAGE);
     askRestart();
   } else getUserInput();
 };
 
 const askRestart = () => {
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (input) => {
-      checkRestartInput(input);
-    }
-  );
+  MissionUtils.Console.readLine(ASK_RESTART_MESSAGE, (input) => {
+    checkRestartInput(input);
+  });
 };
 
 const checkRestartInput = (input) => {
@@ -80,7 +85,7 @@ const compareInputAnswer = (input) => {
 };
 
 const getUserInput = () => {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+  MissionUtils.Console.readLine(GET_USER_INPUT_MESSAGE, (input) => {
     validateInput(input);
     compareInputAnswer(input);
   });
