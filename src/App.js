@@ -32,10 +32,9 @@ class App {
 
       if (strikeCount === NUMBER_LENGTH) {
         this.end();
+        return;
       }
-      if (strikeCount !== NUMBER_LENGTH) {
-        this.play();
-      }
+      this.play();
     });
   }
 
