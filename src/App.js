@@ -6,11 +6,8 @@ class App {
   STRIKE = "스트라이크";
   NOTHING = "낫싱";
 
-  constructor() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-  }
-
   play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.gameStart();
   }
 
