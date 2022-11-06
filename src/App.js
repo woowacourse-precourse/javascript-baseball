@@ -46,13 +46,13 @@ class GameLoop {
     let Opponent = new Computer();
     let gameOver = false;
 
-    while (!this.gameOver) {
+    while (!gameOver) {
       let message = MissionUtils.Console.readLine(
         "숫자를 입력해주세요 : ",
         this._validate
       );
       let [ball, strike] = Opponent.judge(message);
-      this.gameOver = this._respond(ball, strike);
+      gameOver = this._respond(ball, strike);
     }
 
     this.restart();
@@ -76,6 +76,10 @@ class GameLoop {
   _validate(message) {
     if (typeof message != "string") {
       throw new Error("문자열을 입력해야 합니다");
+    }
+
+    if (!/^\d+$/.test(message)) {
+      throw new Error("숫자를 입력해야 합니다");
     }
 
     if (message.length != 3) {
