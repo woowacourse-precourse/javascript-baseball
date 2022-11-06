@@ -3,6 +3,10 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 class App {
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
+    this.playGame();
+  }
+
+  playGame() {
     const computer = this.createUniqueNumbers(1, 9, 3);
     this.guess(computer);
   }
@@ -82,7 +86,7 @@ class App {
     Console.readLine('', (input) => {
       switch (input) {
         case '1':
-          return this.play();
+          return this.playGame();
         case '2':
           return Console.close();
         default:
