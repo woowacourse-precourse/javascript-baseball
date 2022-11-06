@@ -5,28 +5,31 @@ class App {
     let computer = [];
     computer = computer_randomnumber();
 
-    let user = ""
-    user = user_inputnumber();
+    let strike = 0;
+    while(strike != 3){
+      let user = ""
+      user = user_inputnumber();
 
-    if(user == 1){
-      throw "is not three numbers";
+      if(user == 1){
+        throw "is not three numbers";
+      }
+
+      if(user == 2){
+        throw "is not number";
+      }
+
+      if(user == 3){
+        throw "is not a number from 1 to 9";
+      }
+
+      let ball_strike_result = [0, 0];
+      for(let i = 0; i < 3; i++){
+        ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
+        ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
+      }
+
+      strike = notthing(ball_strike_result);
     }
-
-    if(user == 2){
-      throw "is not number";
-    }
-
-    if(user == 3){
-      throw "is not a number from 1 to 9";
-    }
-
-    let ball_strike_result = [0, 0];
-    for(let i = 0; i < 3; i++){
-      ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
-      ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
-    }
-
-    notthing(ball_strike_result);
   }
 }
 
@@ -91,10 +94,10 @@ function ball_strike_check(i, number_of_digits){
 function notthing(ball_strike_result){
   if(ball_strike_result[0] == 0 && ball_strike_result[1] == 0) {
     MissionUtils.Console.print("낫싱");
-    return;
+    return ball_strike_result[1];
   }
   MissionUtils.Console.print(`${ball_strike_result[0]}볼 ${ball_strike_result[1]}스트라이크`);
-  return;
+  return ball_strike_result[1];;
 }
 
 module.exports = App;
