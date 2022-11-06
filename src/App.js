@@ -84,6 +84,22 @@ class App {
       this.ballCount += 1;
     }
   }
+
+  printResult() {
+    const result = [];
+
+    if (this.ballCount > 0) {
+      result.push(`${this.ballCount}볼`);
+    }
+    if (this.strikeCount > 0) {
+      result.push(`${this.strikeCount}스트라이크`);
+    }
+    if (result.length === 0) {
+      result.push('낫싱');
+    }
+
+    MissionUtils.Console.print(result.join(' '));
+  }
 }
 
 module.exports = App;
