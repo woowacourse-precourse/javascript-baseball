@@ -29,13 +29,9 @@ class App {
 
       const tryNumArr = tryNum.split("");
       const BallStrikeResult = tryNumArr.map((tryNumEle, tryNumEleIdx) =>
-        this.comparetryNumAndAnswer(
-          Number(tryNumEle),
-          tryNumEleIdx,
-          this.answer
-        )
+        App.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
       );
-      const resultSentence = this.getResultSentence(BallStrikeResult);
+      const resultSentence = App.getResultSentence(BallStrikeResult);
       if (!resultSentence) {
         MissionUtils.Console.print("낫싱");
       } else {
@@ -100,7 +96,7 @@ class App {
     );
   }
 
-  comparetryNumAndAnswer(tryNumEle, tryNumEleIdx, answer) {
+  static comparetryNumAndAnswer(tryNumEle, tryNumEleIdx, answer) {
     const IS_INCLUDE = answer.includes(tryNumEle);
     if (IS_INCLUDE) {
       const answerIdx = answer.indexOf(tryNumEle);
@@ -115,7 +111,7 @@ class App {
     return "낫싱";
   }
 
-  getResultSentence(BallStrikeResult) {
+  static getResultSentence(BallStrikeResult) {
     const ballCount = BallStrikeResult.filter(
       (result) => result === "ball"
     ).length;
