@@ -12,6 +12,8 @@ const compareWithInput = (computerNum, userNum) => {
     }
 
     ballCount -= strikeCount;
+
+    return [ballCount, strikeCount];
 }
 
 module.exports = compareWithInput;
