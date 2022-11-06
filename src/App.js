@@ -19,6 +19,9 @@ class App {
     }
     return randomNumber;
   }
+  isvalidation(userNum) {
+    return true; //일단 과정검사
+  }
 }
 
 module.exports = App;
