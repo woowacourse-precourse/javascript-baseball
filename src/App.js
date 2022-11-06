@@ -1,4 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
+const GAMEFLAG_CONTINUE = 0;
+const GAMEFLAG_START = 1;
+const GAMEFLAG_END = 2;
+
 class App {
   print(message) {
     MissionUtils.Console.print(message);
@@ -61,7 +66,7 @@ class App {
     return this.updateGameFlag(resultSring);
   }
   updateGameFlag(resultSring) {
-    let gameFlag = 0;
+    let gameFlag = GAMEFLAG_CONTINUE;
     if (resultSring === "3스트라이크") {
       this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
@@ -83,7 +88,12 @@ class App {
   }
   validateRestartNum(answer) {
     let trimedanswer = this.deleteSpace(answer);
-    if (!(trimedanswer === "1" || trimedanswer === "2")) {
+    if (
+      !(
+        trimedanswer === GAMEFLAG_START.toString() ||
+        trimedanswer === GAMEFLAG_END.toString()
+      )
+    ) {
       throw new Error("1 과 2 중 하나를 입력해주세요");
     }
     return trimedanswer;
@@ -116,13 +126,13 @@ class App {
   }
   play() {
     this.printStartMsg();
-    let gameFlag = 1; // 0: continue 1: restart, 2: end
+    let gameFlag = GAMEFLAG_START; // 0: continue 1: start, 2: end
     let computerNum;
     let userNum;
-    while (gameFlag === 1) {
+    while (gameFlag === GAMEFLAG_START) {
       computerNum = this.pickComputerNum();
-      gameFlag = 0;
-      while (gameFlag === 0) {
+      gameFlag = GAMEFLAG_CONTINUE;
+      while (gameFlag === GAMEFLAG_CONTINUE) {
         userNum = this.getUserNum();
         gameFlag = this.createResult(computerNum, userNum);
       }
