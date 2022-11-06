@@ -5,6 +5,8 @@ const mRandom = MissionUtils.Random;
 const GAME_NUMBER_LENGTH = 3;
 
 class App {
+  computerInputNumber = [];
+
   play() {
     this.startGame();
     this.getInput();
@@ -12,6 +14,7 @@ class App {
 
   startGame() {
     mConsole.print("숫자 야구 게임을 시작합니다.");
+    this.computerInputNumber = this.getComputerNumber();
   }
 
   getInput() {
@@ -47,6 +50,17 @@ class App {
     this.checkDuplicatedInput(input);
 
     return true;
+  }
+
+  getComputerNumber() {
+    const computerNumber = new Set();
+    while (computerNumber.size < GAME_NUMBER_LENGTH) {
+      const newNumber = mRandom.pickNumberInRange(1, 9);
+      if (!computerNumber.has(newNumber)) {
+        computerNumber.add(newNumber);
+      }
+    }
+    return [...computerNumber];
   }
 }
 
