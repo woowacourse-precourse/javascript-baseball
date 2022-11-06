@@ -13,6 +13,11 @@ function printUserInput() {
     return userInputNum;
 }
 
+function printNumOfStrike(numOfStrike){
+    const NUM_OF_STRIKE_MESSAGE = `${numOfStrike}스트라이크\n`;
+    MissionUtils.Console.readLine(NUM_OF_STRIKE_MESSAGE);
+}
+
 function printGameWin() {
     const GAME_WIN_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n";
     MissionUtils.Console.print(GAME_WIN_MESSAGE);
@@ -20,3 +25,4 @@ function printGameWin() {
 
 module.exports.printGameStart = printGameStart;
 module.exports.printUserInput = printUserInput;
+module.exports.printGameWin = printGameWin;

@@ -8,7 +8,20 @@ function playBaseballGame() {
     while(isGamePlaying) {
         let userNum, numOfStrike = 0;
         userNum = printMessage.printUserInput();
+        //userNum 예외처리 조건 확인
         numOfStrike = getNumOfStrike(computerNum, userNum);
+        if(numOfStrike == 3){
+            printMessage.printGameWin();
+            //게임 재시작 or 종료 메세지 출력
+            //사용자 1 or 2 입력
+            //1일 경우 true flag 리턴
+            //2일 경우 false flag 리턴
+        }
+        else{
+            let numOfBall;
+            numOfBall = getNumOfBall(computerNum, userNum);
+            //볼의 갯수 + 스트라이크 갯수 출력
+        }
     }
 }
 

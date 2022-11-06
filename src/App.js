@@ -3,8 +3,11 @@ const playGame = require("./PlayBaseball/js");
 
 class App {
   play() {
+    let playGame = true;
     printMessage.printGameStart();
-    playGame.playBaseballGame();
+    while(playGame){
+      playGame = playGame.playBaseballGame();
+    }
   }
 }
 
