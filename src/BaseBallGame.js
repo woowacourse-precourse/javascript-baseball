@@ -1,3 +1,4 @@
+const { Console, Random } = require("@woowacourse/mission-utils");
 import { isDuplicated } from "./utils";
 
 class BaseBallGame{
@@ -50,6 +51,31 @@ class BaseBallGame{
     if (res.count.스트라이크 === 3) res.victory = true;
 
     return res;
+  }
+
+  printResult(count) {
+    const {
+      스트라이크,
+      볼,
+      낫싱
+    } = count;
+
+    if (낫싱 === 3) {
+      Console.print('낫싱');
+      return;
+    }
+    if (볼 && 스트라이크) {
+      Console.print(`${볼}볼 ${스트라이크}스트라이크`);
+      return;
+    }
+    if (볼) {
+      Console.print(`${볼}볼`);
+      return;
+    }
+    if (스트라이크) {
+      Console.print(`${스트라이크}스트라이크`);
+      return;
+    }
   }
 }
 
