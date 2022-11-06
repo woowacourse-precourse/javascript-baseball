@@ -26,19 +26,23 @@ class App {
 
   playerInput() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      this.checkNumber(input);
+      this.checkNumber(String(input).split(""), true);
     });
   }
 
-  checkNumber(input) {
-    if (input.length !== 3) throw `숫자를 3개만 입력해 주세요.`;
+  checkNumber(input, isTrying) {
+    if (isTrying && input.length !== 3) throw `숫자를 3개만 입력해 주세요.`;
     if (
-      input.length === 3 &&
+      isTrying &&
       (input[0] === input[1] || input[0] === input[2] || input[1] === input[2])
     )
       throw `서로 다른 숫자 3개를 입력해 주세요.`;
-    if (isNaN(input)) throw `숫자 값만 입력 가능해요.`;
-    if (input.length === 3) this.compareNumber(input);
+    if (isTrying && isNaN(Number(input.join(""))))
+      throw `숫자 값만 입력 가능해요.`;
+    if (isTrying === false && (Number(input) < 1 || Number(input) > 2))
+      throw `1또는 2를 입력하세요.`;
+    if (isTrying) this.compareNumber(input.map((str) => Number(str)));
+    else this.restart(Number(input));
   }
 
   compareNumber(input) {
@@ -72,11 +76,7 @@ class App {
   checkRestart() {
     Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     Console.readLine("", (input) => {
-      if (Number(input) < 1 || Number(input) > 2) {
-        throw "1또는 2만 입력 가능합니다.";
-      }
-      if (isNaN(input)) throw "숫자만 입력 가능합니다.";
-      else this.restart(Number(input));
+      this.checkNumber(input, false);
     });
   }
 
