@@ -93,11 +93,9 @@ function gameNotCleared(ballCount, strikeCount, computerAnswer) {
     MissionUtils.Console.print(
       ballCount - strikeCount + '볼 ' + strikeCount + '스트라이크'
     );
-  }
-  if (strikeCount !== 0 && strikeCount == ballCount) {
+  } else if (strikeCount !== 0 && strikeCount == ballCount) {
     MissionUtils.Console.print(strikeCount + '스트라이크');
-  }
-  if (ballCount !== 0 && strikeCount == 0) {
+  } else if (ballCount !== 0 && strikeCount == 0) {
     MissionUtils.Console.print(ballCount + '볼');
   } else {
     MissionUtils.Console.print('낫싱');
