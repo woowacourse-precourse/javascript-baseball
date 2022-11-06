@@ -49,12 +49,12 @@ const getBall = (computer, user) => {
 };
 
 const checkResult = (computer, userNumber) => {
-  const user = userNumber.split('').map((a) => Number(a));
+  const user = userNumber.split('').map((num) => Number(num)).filter((num) => num > 0);
   const strike = getStrike(computer, user);
   const ball = getBall(computer, user);
 
-  if (userNumber.length !== 3) {
-    throw new Error('서로 다른 세 자리 수를 입력해주세요.');
+  if (user.length !== 3) {
+    throw new Error('올바르지 않은 입력입니다.');
   }
 
   if (strike === 3) {
