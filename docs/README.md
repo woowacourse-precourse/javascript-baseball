@@ -38,9 +38,9 @@
 
 ### 숫자 상수
 
-- [ ] CORRECT_NUMBER: 3
-- [ ] PLAY_AGAIN: 1
-- [ ] EXIT: 2
+- [x] PLAY_AGAIN: `1`
+- [x] EXIT: `2`
+- [x] CORRECT_NUMBER: 3
 
 ## 임시 기능 목록
 
