@@ -6,7 +6,8 @@ class App {
     gameStartingText();
     while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
-      oneGame(computerNumbers);
+      const errorFlag = oneGame(computerNumbers);
+      if (errorFlag == 1) throw new Error("입력 숫자 개수가 맞지 않습니다.");
       gameAgain = askGameAgain();
     }
     gameCompleteEndText();
@@ -34,14 +35,23 @@ const playerNumbersInput = () => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
     input = answer;
   });
+  if(input.length != 3){
+    throw "숫자 개수가 맞지 않습니다.";
+  }
   return input;
 };
 
 const oneGame = (computerNumbers) => {
   let strikeBall = {};
   let playerNumbers;
+  let errorFlag = 0;
   while (1) {
-    playerNumbers = playerNumbersInput();
+    try{
+      playerNumbers = playerNumbersInput();
+    }catch(error){
+      errorFlag = 1;
+      return errorFlag;
+    }
     strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
     if (strikeBall.strike == 3) {
@@ -49,6 +59,7 @@ const oneGame = (computerNumbers) => {
       break;
     }
   }
+  return errorFlag;
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {

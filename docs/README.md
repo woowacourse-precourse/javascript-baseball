@@ -46,5 +46,7 @@
 5. computer와 player의 숫자 비교 검사하여 strike와 ball 산출하는 함수(compareComputerAndPlayer)
 6. strike와 ball 개수에 맞게 출력하는 함수(printStrikeAndBall)
 7. 게임 종료 조건 검사하는 조건문
-8. 게임 재시작할지 입력받는 함수(askGameAgain)
-9. 게임 재시작 조건 검사 또는 변수 할당
+8. 게임 종료 문구 출력 함수(gameEndingText)
+9. 게임 재시작할지 입력받는 함수(askGameAgain)
+10. 게임 재시작 조건 검사 또는 변수 할당
+11. 게임이 완전 끝났을 때 문구 출력 함수(gameCompleteEndText)
