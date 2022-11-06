@@ -45,6 +45,14 @@ class App {
     return ballCnt;
   }
 
+  checkStrike(comNum, userNum) {
+    let strikeCnt = 0;
+    if (comNum[0] == userNum[0]) strikeCnt++;
+    if (comNum[1] == userNum[1]) strikeCnt++;
+    if (comNum[2] == userNum[2]) strikeCnt++;
+    return strikeCnt;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     const comNum = this.makeComputerNumber();
@@ -52,6 +60,7 @@ class App {
       this.checkError(num);
       const userNum = String(num).split("");
       const ballCnt = this.checkBall(comNum, userNum);
+      const strikeCnt = this.checkStrike(comNum, userNum);
     });
   }
 }
