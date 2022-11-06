@@ -10,7 +10,7 @@ class App {
     console.log("answer:", answer);
 
     function selectNumber() {
-      let num_candidate = MissionUtils.Random.pickNumberInRange(1, 999);
+      let num_candidate = MissionUtils.Random.pickNumberInRange(100, 999);
       num_candidate = num_candidate.toString();
       if (
         num_candidate[0] !== num_candidate[1] &&
