@@ -40,14 +40,18 @@ describe("야구 게임 테스트", () => {
   });
 
   test("사용자 숫자 입력 받기", () => {
-    const userNumber = ["456"];
+    const logSpy = jest.spyOn(console, "log");
+    logSpy.mockClear();
 
-    mockQuestions(userNumber);
+    const computer = "123";
+    const user = ["123"];
+
+    mockQuestions(user);
 
     const app = new App();
-    const result = app.selectUser();
+    app.selectUser(computer);
 
-    expect(result).toEqual("456");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("3스트라이크"));
   });
 
   test("예외사항: 사용자 숫자 길이가 올바르지 않음", () => {
@@ -56,7 +60,7 @@ describe("야구 게임 테스트", () => {
 
     expect(() => {
       const app = new App();
-      app.countScore(computer, user);
+      app.isError(user, computer);
     }).toThrow();
   });
 
@@ -66,7 +70,7 @@ describe("야구 게임 테스트", () => {
 
     expect(() => {
       const app = new App();
-      app.countScore(computer, user);
+      app.isError(user, computer);
     }).toThrow();
   });
 
