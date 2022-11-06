@@ -1,12 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const mode = require("./a.js");
-const { START_NUMBER, END_NUMBER, START_GAME } = require("./utils/Constants");
-const { getComputerNumber } = require("./utils/MissionUtils");
+const {
+  START_NUMBER,
+  END_NUMBER,
+  START_GAME,
+  REQUIRE_NUMBER,
+} = require("./utils/Constants");
+const { getComputerNumber, getUserNumber } = require("./utils/MissionUtils");
 
 class App {
   play() {
     MissionUtils.Console.print(START_GAME);
     const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
+    getUserNumber(REQUIRE_NUMBER);
   }
 }
 
