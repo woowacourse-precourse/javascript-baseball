@@ -31,8 +31,10 @@ function stringToArray(string) {
 }
 
 function playBaseballGame(userMessage, computerAnswer) {
+  console.log('메세지:' + userMessage + '정답:' + computerAnswer);
   const ballCount = checkBall(userMessage, computerAnswer);
-  // const strike = checkStrike();
+  const strikeCount = checkStrike(userMessage, computerAnswer);
+  console.log('볼' + ballCount + '스트라이크' + strikeCount);
 }
 
 function checkBall(userMessage, computerAnswer) {
@@ -40,6 +42,15 @@ function checkBall(userMessage, computerAnswer) {
     computerAnswer.includes(message)
   );
   return result.length;
+}
+
+function checkStrike(userMessage, computerAnswer) {
+  const result = userMessage.filter(
+    (message) =>
+      computerAnswer.includes(message) &&
+      computerAnswer.indexOf(message) === userMessage.indexOf(message)
+  );
+  return result;
 }
 
 module.exports = App;
