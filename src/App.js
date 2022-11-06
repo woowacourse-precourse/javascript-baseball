@@ -50,21 +50,21 @@ class BaseballGame {
   }
 
   restartOrEndGame() {
-    const ERROR_TEXT = new Error('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (number) => {
       if (number === '1') {
-        this.playGame();
-      } else if (number === '2') {
-        Console.close();
-      } else {
-        throw ERROR_TEXT;
+        return this.playGame();
       }
+
+      if (number === '2') {
+        return Console.close();
+      }
+
+      return this.throwError('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
     });
   }
 
   isValidUserInput(userInput) {
-    const ERROR_COMMENT = new Error('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
     const isNumberElement = (element) => (element >= '1' && element <= '9');
     const userNumbers = [];
     userInput
@@ -77,10 +77,14 @@ class BaseballGame {
       userNumbers.length !== 3 ||
       !(userNumbers).every(isNumberElement)
     ) {
-      throw ERROR_COMMENT;
+      return this.throwError('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
     }
 
     return userNumbers.map(Number);
+  }
+
+  throwError(messages) {
+    throw new Error(messages);
   }
 }
 
