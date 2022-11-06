@@ -85,6 +85,7 @@ class App {
       mConsole.print(
         `${GAME_NUMBER_LENGTH}스트라이크\n${GAME_NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
+      this.checkRetry();
     } else {
       if (count[0] === 0 && count[1] === 0) mConsole.print("낫싱");
       else
@@ -93,6 +94,31 @@ class App {
             count[1] > 0 ? count[1] + "스트라이크" : ""
           }`.trim()
         );
+      this.getInput();
+    }
+  }
+
+  checkRetry() {
+    mConsole.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    mConsole.readLine("", (restartInput) => {
+      this.checkRestartNumber(restartInput);
+    });
+  }
+
+  checkRestartNumber(restartInput) {
+    if (Number(restartInput) < 1 || Number(restartInput) > 2)
+      throw "1 또는 2를 입력해주세요.";
+    if (isNaN(restartInput)) throw "숫자를 입력해주세요.";
+    else this.restartGame(Number(restartInput));
+  }
+
+  restartGame(restartInput) {
+    if (restartInput === 1) {
+      this.computerInputNumber = this.getComputerNumber();
+      this.getInput();
+    }
+    if (restartInput === 2) {
+      mConsole.close();
     }
   }
 }
