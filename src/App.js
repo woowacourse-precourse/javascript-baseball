@@ -1,5 +1,11 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const STD = MissionUtils.Console; 
+const RANDOM = MissionUtils.Random;
+
 class App {
-  play() {}
+  constructor(){
+  }
+
    checkThreeLength(number) {
     const numberLength = String(number).length;
 
@@ -158,5 +164,7 @@ class App {
    }
  
 }
+
+const app = new App();
 
 module.exports = App;
