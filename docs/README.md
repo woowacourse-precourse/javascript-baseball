@@ -17,7 +17,7 @@
 ├── README.md
 ├── package-rock.json
 ├── package.json
-├── docs ----> 구현할 기능 목록을 모아놓은 폴더
+├── docs ----------> 구현할 기능 목록을 모아놓은 폴더
 │   └── README.md -> 구현할 기능 목록을 작성하는 문서
 ├── src
     │
@@ -97,3 +97,13 @@
     - 2. 컴퓨터의 숫자와 유저의 숫자를 통해 결과를 도출하는 기능
     - 3. 정답을 맞혔을 시, 재시작 여부를 묻는 기능
     - 4. 재시작 의사가 있을 경우, 새로운 게임을 위한 컴퓨터의 숫자를 받는 기능
+
+<br>
+
+- **✔️ 7. 재사용성을 위한 상속받는 기능**
+
+  - 새로운 class `Mission`을 만들어, `@woowacourse/Mission-utils` 라이브러리에 대한 재사용성을 증대시키는 기능.
+
+  - `@woowacourse/Mission-utils`의 특성상, 다양한 곳에서 새롭게 호출하여 사용해야할 빈도가 잦음.
+
+  - 따라서, `Mission` 클래스의 생성자에 `Mission.Random`과 `Mission.Console`을 작성하여 재사용성을 증대.
