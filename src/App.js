@@ -49,6 +49,10 @@ class App {
       throw "3자리 숫자를 입력해주세요.";
     }
 
+    if (user.includes("0")) {
+      throw "1과 9 사이의 숫자 3개를 입력해주세요.";
+    }
+
     this.countScore(computer, user);
   }
 
