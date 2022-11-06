@@ -17,7 +17,7 @@ function checkLength(gameInput) {
 }
 
 function checkNumber(gameInput) {
-  if (gameInput != Number(gameInput)) {
+  if (isNaN(Number(gameInput))) {
     throw new Error('입력은 숫자만 가능합니다.');
   }
 }
