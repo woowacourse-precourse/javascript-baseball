@@ -72,6 +72,20 @@ class App {
       MissionUtils.Console.print(`${ball}ball`);
     else MissionUtils.Console.print(`낫싱`);
   }
+  restartAndEed() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (String(answer) === "1") {
+          MissionUtils.Console.print("1");
+          this.play();
+        } else if (String(answer) === "2") {
+          MissionUtils.Console.print("게임 종료");
+          this.game = false;
+        }
+      }
+    );
+  }
 }
 
 module.exports = App;
