@@ -1,7 +1,28 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  constructor() {
+    this.isPlaying = false;
+    this.isFirstPlay = true;
+  }
+
+  start() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.isFirstPlay = false;
+  }
+
+  async play() {
+    if (this.isFirstPlay) {
+      this.start();
+    }
+    this.isPlaying = true;
+    const COMPUTER_ANSWER = this.generateDifferRandomNumArr(3);
+    while (this.isPlaying) {
+      const USER_INPUT = await this.getUserInputArr();
+      const RESULT = this.scoreUserInput(COMPUTER_ANSWER, USER_INPUT);
+      this.getHintOfAnswer(RESULT);
+    }
+  }
 
   generateDifferRandomNumArr(numOfDigits) {
     const DIFFER_RANDOM_NUM_ARR = [];
@@ -101,3 +122,5 @@ class App {
 }
 
 module.exports = App;
+const app = new App();
+app.play();
