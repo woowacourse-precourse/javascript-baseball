@@ -1,49 +1,59 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  constructor() {
-    this.state = '';
-    this.user = '';
-    this.computer = '';
-  }
-
   play() {
     this.start();
     this.pickRandomNumber();
-    while (this.state !== 'EXIT') {
-      this.input('숫자를 입력해주세요.');
-      this.result();
-      this.checkState();
-    }
+    this.inputs();
   }
 
-  checkState() {
-    switch (this.state) {
+  inputs() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      const user = answer.split('').map((num) => parseInt(num, 10));
+      const inputState = this.checkInputValidation(answer);
+      this.checkState(inputState, false);
+      const state = this.result(user, this.computer);
+      this.checkState(state, true);
+    });
+  }
+
+  restart() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (answer) => {
+        const state = this.checkInputValidation(answer);
+        this.checkState(state, true);
+      }
+    );
+  }
+
+  checkState(state, isGameover) {
+    const token = ['RESTART', 'EXIT', 'WIN'];
+    if (!isGameover && token.includes(state)) throw Error('잘못된 입력입니다.');
+    switch (state) {
       case 'EXIT':
         this.print('게임 종료');
         MissionUtils.Console.close();
         break;
       case 'RESTART':
         this.pickRandomNumber();
+        this.inputs();
+        break;
+      case 'WIN':
+        this.restart();
+        break;
+      case 'LOSE':
+        this.inputs();
+        break;
+      case 'SUCCESS':
         break;
       default:
-        break;
+        throw Error('유효하지 않은 입력입니다.');
     }
-  }
-
-  setState(nextState) {
-    this.state = nextState;
   }
 
   start() {
     this.print('숫자 야구 게임을 시작합니다.');
-  }
-
-  input(message) {
-    MissionUtils.Console.readLine(message, (answer) => {
-      this.user = answer.split('').map((num) => parseInt(num, 10));
-      this.checkInputValidation(answer);
-    });
   }
 
   pickRandomNumber() {
@@ -58,9 +68,9 @@ class App {
   checkInputValidation(answer) {
     const { length } = answer.split('');
     // 길이가 1이면 게임 종료 후 재시작/종료(1 or 2)인지 체크
-    if (length === 1) this.setState(this.checkRestart(answer));
-    else if (length === 3) this.setState('SUCCESS');
-    else throw Error('에러');
+    if (length === 1) return this.checkRestart(answer);
+    if (length === 3) return 'SUCCESS';
+    throw Error('에러');
   }
 
   checkRestart(answer) {
@@ -74,41 +84,42 @@ class App {
     }
   }
 
-  countStrike() {
+  countStrike(user, computer) {
     let strike = 0;
-    this.user.forEach((number, i) => {
-      if (number === this.computer[i]) strike += 1;
+    user.forEach((number, i) => {
+      if (number === computer[i]) strike += 1;
     });
     return strike;
   }
 
-  countBall() {
+  countBall(user, computer) {
     let ball = 0;
-    this.user.forEach((number, i) => {
-      if (this.computer.includes(number) && this.computer[i] !== number)
-        ball += 1;
+    user.forEach((number, i) => {
+      if (computer.includes(number) && computer[i] !== number) ball += 1;
     });
     return ball;
   }
 
-  compare() {
-    const strike = this.countStrike();
-    const ball = this.countBall();
+  compare(user, computer) {
+    const strike = this.countStrike(user, computer);
+    const ball = this.countBall(user, computer);
+
     return { strike, ball };
   }
 
   victory() {
     this.print('3스트라이크');
     this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    this.state = 'WIN';
   }
 
-  result() {
-    const { strike, ball } = this.compare();
+  result(user, computer) {
+    const { strike, ball } = this.compare(user, computer);
     if (strike === 3) {
       this.victory();
-      this.input('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    } else this.output(strike, ball);
+      return 'WIN';
+    }
+    this.output(strike, ball);
+    return 'LOSE';
   }
 
   output(strike, ball) {
