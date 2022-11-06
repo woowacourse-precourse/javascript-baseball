@@ -1,4 +1,4 @@
-const { EXCEPTION } = require("../constants/index.js");
+const { EXCEPTION, CASE } = require("../constants/index.js");
 
 const isValidUserInput = (input) => {
   if (input.length !== EXCEPTION.VALID_NUMBER_LENGTH) return false;
@@ -8,8 +8,8 @@ const isValidUserInput = (input) => {
 };
 
 const isValidUserAskInput = (input) => {
-  if (input === "1") return true;
-  if (input === "2") return true;
+  if (input === CASE.RESTART) return true;
+  if (input === CASE.END) return true;
   return false;
 };
 

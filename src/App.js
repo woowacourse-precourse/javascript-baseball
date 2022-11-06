@@ -28,7 +28,7 @@ class App {
     const [_, strike] = userInputResult;
     const hint = this.getHintMessage(userInputResult);
     this.showMessage(hint);
-    if (isAnswer(strike)) return this.askGame();
+    if (isAnswer(strike)) return this.askRestartOrEndGame();
     return this.requestUserInputNumber();
   }
 
@@ -43,7 +43,7 @@ class App {
       (userInputNumber) => {
         if (!isValidUserAskInput(userInputNumber))
           throw new Error("인풋 값이 유효하지 않습니다.");
-        if (userInputNumber === "1") this.startGame();
+        if (userInputNumber === CASE.RESTART) this.startGame();
         else this.endGame();
       }
     );
@@ -76,7 +76,7 @@ class App {
     const message = [];
     const [ball, strike] = userInputResult;
     if (isNothing(userInputResult)) return CASE.NOTING;
-    if (isAnswer(strike)) return "3스트라이크";
+    if (isAnswer(strike)) return CASE.ALL_STRIKE;
     if (ball) message.push(`${ball}${CASE.BALL}`);
     if (strike) message.push(`${strike}${CASE.STRIKE}`);
     return message.join(" ");
