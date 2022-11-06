@@ -4,11 +4,12 @@ const playGame = require('./playGame');
 
 class App {
   play() {
-    // 게임 준비
     printGameStart();
-    const computerNum = createRandomNumbers();
-    playGame(computerNum);
+    playGame(createRandomNumbers());
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
