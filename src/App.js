@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 const changeToArray = (number) => {
     return number
         .toString()
@@ -6,14 +7,12 @@ const changeToArray = (number) => {
         .map((num) => parseInt(num), 10);
 };
 class App {
+    printStartMassage() {
+        MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
+    }
     play() {
         const createAnswer = () => {
             return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
-        };
-
-        let isFirstStart = true;
-        const printStartMassage = () => {
-            isFirstStart && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
         };
 
         const isCorrect = (userInput, answer) => {
@@ -75,8 +74,7 @@ class App {
         const choosesNextStep = () => {
             MissionUtils.Console.readLine("", (number) => {
                 if (number === "1") {
-                    isFirstStart = false;
-                    return playGame();
+                    playGame();
                 }
                 if (number === "2") {
                     MissionUtils.Console.close();
@@ -85,10 +83,11 @@ class App {
         };
 
         const getUserInput = (answer) => {
-            // console.log(answer);
+            console.log(answer);
 
             MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
                 if (isCorrect(input, answer)) {
+                    MissionUtils.Console.close();
                     printEndMessage();
                     return choosesNextStep();
                 }
@@ -100,7 +99,6 @@ class App {
         const playGame = () => {
             let computerAnswer = createAnswer();
 
-            printStartMassage();
             getUserInput(computerAnswer);
         };
 
@@ -109,6 +107,8 @@ class App {
 }
 
 const app = new App();
+
+app.printStartMassage();
 app.play();
 
 module.exports = App;
