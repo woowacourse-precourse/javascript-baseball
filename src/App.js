@@ -32,6 +32,15 @@ class App {
       this.strikeCount = strikeCount;
 
       render.result({ ballCount: this.ball, strikeCount: this.strikeCount });
+
+      if (this.strikeCount !== 3) {
+        this.play();
+      }
+      if (this.strikeCount === 3) {
+        render.replayQnA().then((userSelection) => {
+          this.replayQnAResult = userSelection;
+        });
+      }
     });
   }
 }
