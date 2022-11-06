@@ -6,31 +6,31 @@ class App {
   }
 
   play() {
-    this.Answer = this.makeAnswer();
+    this.Answer = this.createAnswer();
     console.log(this.Answer);
     this.enterNumber();
   }
 
-  inputisCorrect(allCorrect) {
-    if (allCorrect) return this.endOption();
-    if (!allCorrect) return this.enterNumber();
+  judgeResult(threeStrike) {
+    if (threeStrike) return this.endingOption();
+    if (!threeStrike) return this.enterNumber();
     throw new Error();
   }
 
-  makeAnswer() {
-    this.computer = [];
-    while (this.computer.length < 3) {
+  createAnswer() {
+    this.answer = [];
+    while (this.answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
-      if (!this.computer.includes(number)) {
-        this.computer.push(number);
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
       }
     }
-    return this.computer;
+    return this.answer;
   }
 
-  inputCheck(inputString) {
-    if (inputString.length !== 3) throw new Error();
-    const numberArr = inputString.split("").map((x) => {
+  inputCheck(inputNumber) {
+    if (inputNumber.length !== 3) throw new Error();
+    const numberArr = inputNumber.split("").map((x) => {
       if (Number.isNaN(x)) throw new Error();
       return parseInt(x, 10);
     });
@@ -43,14 +43,14 @@ class App {
     });
   }
 
-  compare(userInput) {
+  compare(numberArr) {
     const answerArr = this.Answer;
     let ball = 0;
     let strike = 0;
-    userInput.map((num, i) => {
-      if (answerArr.includes(num)) {
-        if (num === answerArr[i]) strike += 1;
-        if (num !== answerArr[i]) ball += 1;
+    numberArr.map((number, index) => {
+      if (answerArr.includes(number)) {
+        if (number === answerArr[index]) strike += 1;
+        if (number !== answerArr[index]) ball += 1;
       }
     });
     return this.compareResult(ball, strike);
@@ -63,10 +63,10 @@ class App {
     if (resultText === "") resultText += `낫싱`;
     Console.print(resultText);
     const result = resultText === "3스트라이크";
-    return this.inputisCorrect(result);
+    return this.judgeResult(result);
   }
 
-  endOption() {
+  endingOption() {
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
