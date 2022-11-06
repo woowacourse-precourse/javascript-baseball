@@ -71,13 +71,16 @@ function printball(count, MissionUtils){
   }
   else if (count[1]>0 && count[0] == 0){
     MissionUtils.Console.print(count[1] + "스트라이크");
-    if (count[1] == 3){
-      strike3(MissionUtils);
-    }
-
+    strike3check(MissionUtils, count);
   }
   else{
     MissionUtils.Console.print(count[0] + "볼 " + count[1] + "스트라이크");
+  }
+}
+
+function strike3check(MissionUtils, count) {
+  if (count[1] == 3){
+    strike3(MissionUtils);
   }
 }
 
@@ -86,11 +89,8 @@ function strike3(MissionUtils) {
   MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", function(restart) {
     check1num(restart);
     checkrestart(restart, MissionUtils);
-
   });
-
 }
-
 
 function check1num(input) {
   if (isNaN(input) || input.length != 1){
@@ -125,6 +125,5 @@ function checkdiffnum(input) {
 
 var a = new App();
 a.play();
-
 
 module.exports = App;
