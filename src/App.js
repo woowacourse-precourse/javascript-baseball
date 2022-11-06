@@ -11,6 +11,7 @@ class App {
       strike: 0,
       ball: 0,
     }
+    this.playing = 0;
   }
 
   gameSetting (min = 1, max = 9, length = 3) {
