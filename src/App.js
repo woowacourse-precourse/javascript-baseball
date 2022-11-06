@@ -43,9 +43,25 @@ class App {
     return `${ballMessage} ${strikeMessage}`.trim();
   }
 
+  inputRestartGame() {
+    MissionUtils.Console.print(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+    );
+    MissionUtils.Console.readLine('', (input) => {
+      this.validateRestartGameInput(input);
+      this.restartGameByInput(input);
+    });
+  }
+
   validateRestartGameInput(input) {
     if (input !== '1' && input !== '2') {
       throw new Error('Input must be 1 or 2.');
+    }
+  }
+
+  restartGameByInput(input) {
+    if (input === '1') {
+      this.startGame();
     }
   }
 }
