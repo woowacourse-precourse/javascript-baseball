@@ -53,6 +53,10 @@ class App {
     return strikeCnt;
   }
 
+  checkNothing(ballCnt, strikeCnt) {
+    if (ballCnt == 0 && strikeCnt == 0) return 1;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     const comNum = this.makeComputerNumber();
