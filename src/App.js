@@ -35,6 +35,23 @@ class App {
       Console.close();
     });
   }
+
+  isStrikeBall(userNum, computerNum) {
+    let strike = 0;
+    let ball = 0;
+    userNum.split("").forEach((item, idx) => {
+      const index = computerNum.indexOf(item);
+      if (computerNum[idx] === item && index > -1) {
+        return (strike += 1);
+      }
+      if (index > -1) {
+        return (ball += 1);
+      }
+    });
+    return [strike, ball];
+  }
 }
 
+const baseBallGame = new App();
+baseBallGame.start();
 module.exports = App;
