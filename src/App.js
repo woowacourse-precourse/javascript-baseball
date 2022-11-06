@@ -1,5 +1,4 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const RegExpUtil = require('./RegExpUtil');
 
 const CONSOLE_MESSAGE = {
   start: '숫자 야구 게임을 시작합니다.',
@@ -13,15 +12,12 @@ const ERROR_MESSAGE = {
   restartQuery: '"1" 또는 "2"만 입력할 수 있습니다.',
 };
 
-const baseBallRegExp = new RegExpUtil({
-  regExp: /^[1-9]{3}$/,
-  errorMessage: ERROR_MESSAGE.baseballQuery,
-});
-
-const restartRegExp = new RegExpUtil({
-  regExp: /^[1|2]$/,
-  errorMessage: ERROR_MESSAGE.restartQuery,
-});
+function createValidateFunc({ regExp, errorMessage }) {
+  return (query) => {
+    if (regExp.test(query)) return;
+    throw new Error(errorMessage);
+  };
+}
 
 function getRandomAnswer() {
   let newAnswer = '';
@@ -50,6 +46,16 @@ function convertCountToMessage({ strike, ball }) {
 class App {
   answer = '';
 
+  validateRestartQuery = createValidateFunc({
+    regExp: /^[1|2]$/,
+    errorMessage: ERROR_MESSAGE.restartQuery,
+  });
+
+  validateBaseballQuery = createValidateFunc({
+    regExp: /^[1-9]{3}$/,
+    errorMessage: ERROR_MESSAGE.baseballQuery,
+  });
+
   getBaseballResult(query) {
     const {
       strike,
@@ -72,11 +78,12 @@ class App {
   confirmBaseballEnd() {
     Console.print(CONSOLE_MESSAGE.end);
     Console.readLine(CONSOLE_MESSAGE.restart, (restartQuery) => {
-      restartRegExp.validate(restartQuery);
+      this.validateRestartQuery(restartQuery);
 
       if (restartQuery === '1') {
         this.startNewBaseball();
-      } else {
+      }
+      if (restartQuery === '2') {
         Console.close();
       }
     });
@@ -84,15 +91,15 @@ class App {
 
   repeatQuery() {
     Console.readLine(CONSOLE_MESSAGE.getQuery, (query) => {
-      baseBallRegExp.validate(query);
+      this.validateBaseballQuery(query);
 
       const result = this.getBaseballResult(query);
       Console.print(result);
 
-      if (query === this.answer) {
-        this.confirmBaseballEnd();
-      } else {
+      if (query !== this.answer) {
         this.repeatQuery();
+      } else {
+        this.confirmBaseballEnd();
       }
     });
   }
