@@ -21,7 +21,7 @@ function playBaseballGame() {
         else{
             let numOfBall;
             numOfBall = getNumOfBall(computerNum, userNum);
-            getGameResult(numOfBall, numOfStrike);
+            getCompareResult(numOfBall, numOfStrike);
         }
     }
 }
@@ -53,7 +53,7 @@ function isBall(compareIter, computerNum, userNum) {
     return 0;
 }
 
-function getGameResult(numOfBall, numOfStrike) {
+function getCompareResult(numOfBall, numOfStrike) {
     let isBothExist = false;
     if(numOfBall > 0 && numOfStrike > 0) {
         isBothExist = true;
