@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 // game setting
 const START_GAME_NUM = 1;
 const END_GAME_NUM = 9;
+
 const GAME_NUM_SIZE = 3;
 
 function generateNumberList(size) {
@@ -57,7 +58,6 @@ function printScore(scoreObject) {
     resultMessage = "낫싱";
   }
   MissionUtils.Console.print(resultMessage);
-  // return resultMessage;
 }
 
 function readNumber() {
@@ -82,7 +82,7 @@ function readControlNumber() {
   return answer;
 }
 
-function validNumberCheck(inputList) {
+function isValidNumberCheck(inputList) {
   const inputNumbers = [];
 
   if (inputList.length !== GAME_NUM_SIZE) {
@@ -101,7 +101,7 @@ function validNumberCheck(inputList) {
   return 1;
 }
 
-function validControlCheck(input) {
+function isValidControlCheck(input) {
   if (input !== 1 && input !== 2) {
     return 0;
   }
@@ -119,22 +119,24 @@ class App {
 
     while (control === 1) {
       userNumber = readNumber();
-      if (validNumberCheck(userNumber) !== 1) {
+      console.log("userNumber", userNumber);
+      if (isValidNumberCheck(userNumber) !== 1) {
         throw "숫자가 유효하지 않습니다.";
       }
 
       scoreObject = compareNumber(computerNumber, userNumber);
       printScore(scoreObject);
 
-      if (scoreObject.strike === 3) {
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      if (scoreObject.strike === GAME_NUM_SIZE) {
+        MissionUtils.Console.print(
+          `${GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+        );
         control = readControlNumber();
       }
-
-      if (validControlCheck(control) !== 1) {
+      if (isValidControlCheck(control) !== 1) {
         throw "입력값이 유효하지 않습니다.";
       }
-      if (scoreObject.strike === 3 && control === 1) {
+      if (scoreObject.strike === GAME_NUM_SIZE && control === 1) {
         computerNumber = generateNumberList(GAME_NUM_SIZE);
       }
     }
