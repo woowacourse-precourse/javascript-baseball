@@ -62,35 +62,42 @@ describe.only('Test', () => {
     test('입력 받은 수가 세자리 수가 아닌 경우(2자리)', () => {
         expect(() => {
             const exception = new Exception('12');
-            exception.checkException();
+            exception.checkInputException();
         }).toThrow('3자리 숫자를 입력해주세요.');
     });
 
     test('입력 받은 수가 세자리 수가 아닌 경우(4자리)', () => {
         expect(() => {
             const exception = new Exception('1234');
-            exception.checkException();
+            exception.checkInputException();
         }).toThrow('3자리 숫자를 입력해주세요.');
     });
 
     test('입력 받은 수가 세자리 수가 아닌 경우(5자리)', () => {
         expect(() => {
             const exception = new Exception('12345');
-            exception.checkException();
+            exception.checkInputException();
         }).toThrow('3자리 숫자를 입력해주세요.');
     });
 
     test('입력 받은 수가 서로 다른 수가 아닌 경우', () => {
         expect(() => {
             const exception = new Exception('112');
-            exception.checkException();
+            exception.checkInputException();
         }).toThrow('서로 다른 수를 입력해주세요.');
     });
 
     test('입력 받은 수에 0이 포함된 경우', () => {
         expect(() => {
             const exception = new Exception('120');
-            exception.checkException();
+            exception.checkInputException();
         }).toThrow('1 ~ 9 사이에 숫자를 입력해주세요.');
+    });
+
+    test('재시작 여부 확인 시 1또는 2이외의 값이 입력될 경우', () => {
+        expect(() => {
+            const exception = new Exception('3');
+            exception.checkReplayInputException();
+        }).toThrow('1 또는 2를 입력해주세요.');
     });
 });
