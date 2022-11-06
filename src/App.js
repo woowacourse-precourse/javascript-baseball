@@ -76,12 +76,19 @@ class App {
 
   strikeBallChecking() {
     if (this.strike !== 3) {
+      this.countReset();
       this.getAnswer();
     } else {
       this.win();
       this.restartOrEnd();
     }
   }
+
+  countReset() {
+    this.strike = 0;
+    this.ball = 0;
+  }
+
 }
 const app = new App();
 app.play();
