@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Counter = require("./Counter");
-const Print = require("./Printer");
+const Printer = require("./Printer");
 const Validation = require("./Validation");
 
 class App {
@@ -40,7 +40,7 @@ class App {
   }
 
   printNumberOfBallAndStrike(totalCountBall, totalCountStrike) {
-    const print = new Print();
+    const print = new Printer();
     print.printPlayGame(totalCountBall, totalCountStrike);
   }
 

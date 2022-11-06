@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-class Print {
+class Printer {
   printPlayGame(totalCountBall, totalCountStrike) {
     this.printNothing(totalCountBall, totalCountStrike);
     this.printStrike(totalCountBall, totalCountStrike);
@@ -35,4 +35,4 @@ class Print {
     }
   }
 }
-module.exports = Print;
+module.exports = Printer;
