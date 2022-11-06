@@ -20,8 +20,7 @@ class App {
   play() {
     MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       if (!validateInput(input)) {
-        MissionUtils.Console.close();
-        throw new Error(WRONG_INPUT_ERROR_MESSAGE);
+        this.throwError();
       }
 
       const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
@@ -41,8 +40,7 @@ class App {
     MissionUtils.Console.print(END_MESSAGE);
     MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, (input) => {
       if (input !== RESTART_INPUT && input !== END_INPUT) {
-        MissionUtils.Console.close();
-        throw new Error(WRONG_INPUT_ERROR_MESSAGE);
+        this.throwError();
       }
 
       if (input === RESTART_INPUT) {
@@ -53,6 +51,10 @@ class App {
         MissionUtils.Console.close();
       }
     });
+  }
+  throwError() {
+    MissionUtils.Console.close();
+    throw new Error(WRONG_INPUT_ERROR_MESSAGE);
   }
 }
 
