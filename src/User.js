@@ -18,6 +18,10 @@ class User{
         this.input=input;
     }
 
+    getInput(){
+        return this.input.split('').map((element)=>Number(element));
+    }
+
     findErrorInGame(input){
         const INPUT_LENGTH = input.replace(/[^0-9]/g,'').length;
         if(INPUT_LENGTH===3){
