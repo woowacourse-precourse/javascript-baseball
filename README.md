@@ -119,8 +119,8 @@ npm test
 **예시**
 
 ```javascript
-const app = new App();
-app.play();
+const app = new App()
+app.play()
 ```
 
 - `package.json`을 변경할 수 없고 외부 라이브러리(jQuery, Lodash 등)를 사용하지 않는다. 순수 Vanilla JS로만 구현한다.
@@ -147,11 +147,11 @@ app.play();
 #### 사용 예시
 
 ```javascript
-const computer = [];
+const computer = []
 while (computer.length < 3) {
-  const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  const number = MissionUtils.Random.pickNumberInRange(1, 9)
   if (!computer.includes(number)) {
-    computer.push(number);
+    computer.push(number)
   }
 }
 ```
