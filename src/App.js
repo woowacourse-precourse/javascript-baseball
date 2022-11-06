@@ -36,7 +36,7 @@ class App {
 	}
 
 	runTurn(computerNumbers, input) {
-		this.checkTurnInputIsValid(input);
+		this.checkInputIsValid(input);
 		const userNumbers = input.split('');
 		const ball = countBall(userNumbers, computerNumbers);
 		const strike = countStrike(userNumbers, computerNumbers);
@@ -54,7 +54,7 @@ class App {
 		return input === this.RESTART ? this.createNewGame() : Console.close();
 	}
 
-	checkTurnInputIsValid(input) {
+	checkInputIsValid(input) {
 		checkInputLength(input, this.NUMBER_LENGTH);
 		checkInputIsNumber(input);
 		checkInputExcludeCertainNumber(input, 0);
