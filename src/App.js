@@ -62,6 +62,25 @@ class App {
     return statement;
   }
 
+  isRetry() {
+    let inputanswer = 0;
+    MissionUtils.Console.readLine(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        inputanswer = input;
+      }
+    );
+    if (inputanswer == 1) {
+      this.computerNum = this.selectNum();
+      return 1;
+    } else if (inputanswer == 2) {
+      MissionUtils.Console.print("게임 종료");
+      return 0;
+    } else {
+      throw "유효하지 않은 입력값입니다.";
+    }
+  }
+
   executeError() {
     throw "유효하지 않는 숫자입니다.";
   }
@@ -77,7 +96,8 @@ class App {
         this.isValidInput(input) ? "" : this.executeError();
       });
       compareResult = this.CompareInputWithComputer(inputNum, this.computerNum);
-      MissionUtils.Console.print(this.printResult(compareResult));
+      tMissionUtils.Console.print(this.printResult(compareResult));
+      flag = compareResult.get("스트라이크") == 3 ? this.isRetry() : 1;
     }
     MissionUtils.Console.close();
   }
