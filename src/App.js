@@ -13,7 +13,8 @@ class App {
   submitInput() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.input, (input) => {
       input = GameUtils.System.toFilterdArray(input);
-      GameUtils.Validator.isVaildAnswer(input);
+      const errorMessage = GameUtils.Validator.isInvaildAnswer(input);
+      if(errorMessage) Print.GameMessage.error(errorMessage);
       const result = GameUtils.System.getResult(input, this.answer);
       Print.GameMessage.result(result);
       this.isClear(result.strike);
@@ -25,7 +26,8 @@ class App {
   }
   clearGame() {   
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.clear, (submit) => {
-      GameUtils.Validator.isVaildRestartSubmit(Number(submit));
+      const errorMessage = GameUtils.Validator.isInvaildRestartSubmit(Number(submit));
+      if(errorMessage) Print.GameMessage.error(errorMessage);
       this.isRestart(Number(submit));
     });
   }

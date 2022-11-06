@@ -15,6 +15,9 @@ class GameMessage {
     if(resultMessage === '') resultMessage = constants.RESULT_COUNT.nothing;
     MissionUtils.Console.print(resultMessage);
   }
+  static error(messege) {
+    throw new Error(messege);
+  }  
 }
 
 exports.GameMessage = GameMessage;

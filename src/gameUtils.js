@@ -39,10 +39,11 @@ class System {
 }
 
 class Validator {
-  static isVaildAnswer(value) {
-    if(Validator.#isNotThreeLength(value)) throw new Error(constants.ERROR_MESSAGE.notThreeLength);
-    if(Validator.#isOutOfRange(value)) throw new Error(constants.ERROR_MESSAGE.notNumberRange);
-    if(Validator.#isDuplicated(value)) throw new Error(constants.ERROR_MESSAGE.isDuplicated);
+  static isInvaildAnswer(value) {
+    if(Validator.#isNotThreeLength(value)) return constants.ERROR_MESSAGE.notThreeLength;
+    if(Validator.#isOutOfRange(value)) return constants.ERROR_MESSAGE.notNumberRange;
+    if(Validator.#isDuplicated(value)) return constants.ERROR_MESSAGE.isDuplicated;
+    return false;
   }
   static #isNotThreeLength(value) {
     if(value.length !== 3) return true;
@@ -60,9 +61,10 @@ class Validator {
     const removeDuplicatedValue = [...new Set(value)];
     return (removeDuplicatedValue.length !== 3);
   }
-  static isVaildRestartSubmit(value) {
+  static isInvaildRestartSubmit(value) {
     const possibleValue = [1, 2];
-    if(!possibleValue.includes(value)) throw new Error(constants.ERROR_MESSAGE.isInvalidRestartSubmit);
+    if(!possibleValue.includes(value)) return constants.ERROR_MESSAGE.isInvalidRestartSubmit;
+    return false;
   }
 }
 
