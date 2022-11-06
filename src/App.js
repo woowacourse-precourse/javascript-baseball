@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
@@ -10,23 +10,23 @@ class App {
     this.playing = 0;
   }
 
-  gameSetting (min = 1, max = 9, length = 3) {
+  gameSetting(min = 1, max = 9, length = 3) {
     return {
-      NUM_MIN : min,
-      NUM_MAX : max,
-      NUM_LENGTH : length,
+      NUM_MIN: min,
+      NUM_MAX: max,
+      NUM_LENGTH: length,
     };
   }
 
-  choiceNumber () {
+  choiceNumber() {
     const answer = [];
     const minNumber = this.gameSet.NUM_MIN;
     const maxNumber = this.gameSet.NUM_MAX;
     const lengthNumber = this.gameSet.NUM_LENGTH;
-    
+
     this.answer = answer;
 
-    while(answer.length < lengthNumber){
+    while (answer.length < lengthNumber) {
       const randomNumber = Random.pickNumberInRange(minNumber, maxNumber);
       answer.includes(randomNumber) ? answer : answer.push(randomNumber);
     }
@@ -42,19 +42,19 @@ class App {
     });
   }
 
-  isInputValid (input) {
+  isInputValid(input) {
     const isValid = input;
 
-    if (isValid === '1' || isValid === '2') return this.isGameEnd(isValid);
+    if (isValid === "1" || isValid === "2") return this.isGameEnd(isValid);
 
     const lengthValid = this.gameSet.NUM_LENGTH;
-    if (isValid.length !== lengthValid ) this.error();
+    if (isValid.length !== lengthValid) this.error();
 
     const numberRangeMin = this.gameSet.NUM_MIN;
     const numberRangeMax = this.gameSet.NUM_MAX;
-    const numberRange = new RegExp(`[^${numberRangeMin}-${numberRangeMax}]`, 'g');
-    const isNumberValid = []
-    isValid.split('').forEach(number =>  {
+    const numberRange = new RegExp(`[^${numberRangeMin}-${numberRangeMax}]`, "g");
+    const isNumberValid = [];
+    isValid.split("").forEach((number) => {
       if (numberRange.test(number)) return this.error();
       isNumberValid.push(Number(number));
     });
@@ -62,57 +62,57 @@ class App {
     this.inputMatch(input);
   }
 
-  inputMatch (input) {
+  inputMatch(input) {
     const playerInput = input;
     const answer = this.answer;
 
     let ball = 0;
     let strike = 0;
-    let msg = '';
+    let msg = "";
 
     answer.forEach((number, index) => {
-      if (playerInput.indexOf(number) === index){
-        strike ++;
+      if (playerInput.indexOf(number) === index) {
+        strike++;
       } else if (playerInput.includes(number)) {
-        ball ++;
+        ball++;
       }
     });
 
     if (ball === 0 && strike === 0) {
-      this.printMsg('낫싱')
-      return this.inputNumber('숫자를 입력하세요.');
+      this.printMsg("낫싱");
+      return this.inputNumber("숫자를 입력하세요.");
     }
     if (strike === 3) return this.gameEnd();
     if (ball !== 0) msg += `${ball}볼`;
-    if (strike !== 0) msg += ` ${strike}스트라이크`
+    if (strike !== 0) msg += ` ${strike}스트라이크`;
 
     this.printMsg(msg);
-    this.inputNumber('숫자를 입력하세요.');
+    this.inputNumber("숫자를 입력하세요.");
   }
 
-  isGameEnd (endNumber) {
+  isGameEnd(endNumber) {
     const isPlaying = this.playing;
 
     if (isPlaying === 1) return this.error();
 
-    if (endNumber === '1') return this.reStart();
-    if (endNumber === '2') return Console.close();
+    if (endNumber === "1") return this.reStart();
+    if (endNumber === "2") return Console.close();
   }
 
-  gameStart () {
+  gameStart() {
     this.gameSet = this.gameSetting();
-    this.printMsg('숫자 야구 게임을 시작합니다.');
+    this.printMsg("숫자 야구 게임을 시작합니다.");
   }
 
-  gameEnd () {
+  gameEnd() {
     this.playing = 0;
-    this.printMsg('3스트라이크')
-    this.printMsg('3개의 숫자를 모두 맞히셨습니다. 게임 종료');
-    this.inputNumber('게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.');
+    this.printMsg("3스트라이크");
+    this.printMsg("3개의 숫자를 모두 맞히셨습니다. 게임 종료");
+    this.inputNumber("게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.");
   }
 
   reStart() {
-    this.round ++;
+    this.round++;
     this.play();
   }
 
@@ -122,14 +122,13 @@ class App {
     if (this.round == 0) this.gameStart();
 
     this.choiceNumber();
-    this.inputNumber('숫자를 입력하세요.');
-
+    this.inputNumber("숫자를 입력하세요.");
   }
 
   error() {
     this.round = 0;
     Console.close();
-    throw new Error('잘못된 입력입니다.')
+    throw new Error("잘못된 입력입니다.");
   }
 }
 
