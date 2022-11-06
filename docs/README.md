@@ -88,8 +88,7 @@ printResult = (userInput, computerInput) => {
 		}
 
 		if (nothing) {
-			MissionUtils.Console.print("낫싱");
-			return;
+			return MissionUtils.Console.print("낫싱");
 		}
 
 		let result = "";
