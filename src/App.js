@@ -7,10 +7,6 @@ class App {
     this.gameSet = {};
     this.answer = [];
     this.round = 0;
-    this.score = {
-      strike: 0,
-      ball: 0,
-    }
     this.playing = 0;
   }
 
@@ -64,6 +60,34 @@ class App {
     });
 
     this.inputMatch(input);
+  }
+
+  inputMatch (input) {
+    const playerInput = input;
+    const answer = this.answer;
+
+    let ball = 0;
+    let strike = 0;
+    let msg = '';
+
+    answer.forEach((number, index) => {
+      if (playerInput.indexOf(number) === index){
+        strike ++;
+      } else if (playerInput.includes(number)) {
+        ball ++;
+      }
+    });
+
+    if (ball === 0 && strike === 0) {
+      this.printMsg('낫싱')
+      return this.inputNumber('숫자를 입력하세요.');
+    }
+    if (strike === 3) return this.gameEnd();
+    if (ball !== 0) msg += `${ball}볼`;
+    if (strike !== 0) msg += ` ${strike}스트라이크`
+
+    this.printMsg(msg);
+    this.inputNumber('숫자를 입력하세요.');
   }
 
   gameStart () {
