@@ -1,5 +1,12 @@
+const playing = require("./Play");
+
 class App {
-  play() {}
+  play() {
+    playing();
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
