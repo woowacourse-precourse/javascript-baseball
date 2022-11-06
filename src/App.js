@@ -20,6 +20,14 @@ function MakeNum() {
   return randomNumber;
 }
 
+function isvalidation(userNum) {
+  return true;
+  //값에 0을 포함하는지
+  //입력받은 데이터값에 문자가 포함되어있지 않은지
+  //number_max가 3인지
+  //중복된숫자는 없는지
+}
+
       }
       }
   }
