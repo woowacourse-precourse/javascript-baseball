@@ -40,6 +40,26 @@ class App {
     if (isNaN(inputs.join(""))) throw new Error("숫자가 아닙니다.");
     if (this.isRepeated(inputs)) throw new Error("반복되는 숫자가 있습니다.");
   }
+  isSameNumber(answer, input) {
+    return answer === input;
+  }
+  compareToAnswer(answers, inputs) {
+    const result = { strike: 0, ball: 0 };
+
+    answers.forEach((answer, answerIdx) => {
+      inputs.forEach((input, inputIdx) => {
+        if (!this.isSameNumber(answer, input)) return;
+        // 만약 수가 같을 떄, 인덱스의 값 또한 같다면
+        if (this.isSameNumber(answerIdx, inputIdx)) {
+          result.strike += 1;
+        } else {
+          result.ball += 1;
+        }
+      });
+    });
+    return result;
+  }
+
   play() {}
 }
 
