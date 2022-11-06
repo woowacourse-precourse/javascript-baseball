@@ -5,7 +5,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
-    this.generateComputerAnswer();
+    this.answer = this.generateComputerAnswer();
     this.playTheGame();
   }
 
@@ -17,15 +17,16 @@ class App {
         COMPUTER_ANSWER.push(RANDOM_NUMBER);
       }
     }
-    this.answer = COMPUTER_ANSWER;
+    return COMPUTER_ANSWER;
   }
 
   playTheGame() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요:', inputNumber => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요:', (inputNumber) => {
       this.getHintOrThrowError(inputNumber);
+      MissionUtils.Console.print(this.hintString);
+      this.checkCorrectAnswer();
     });
-    MissionUtils.Console.print(this.hintString);
-    this.checkCorrectAnswer();
+    
   }
 
   getHintOrThrowError(inputNumber) {
@@ -100,7 +101,7 @@ class App {
     );
     MissionUtils.Console.readLine('', choice => {
       if (choice == 1) this.play();
-      this.exitFunction();
+      else this.exitFunction();
     });
   }
 
