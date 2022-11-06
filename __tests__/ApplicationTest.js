@@ -109,4 +109,19 @@ describe("숫자 야구 게임", () => {
     app.makeUserInputNumber();
     expect(app.userInputNumber).toEqual([4, 5, 6]);
   });
+
+  test("countBall 정상 작동 테스트", () => {
+    const randoms = [5, 8, 1];
+    const answers = ["158"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.makeRandomNumber();
+    app.makeUserInputNumber();
+
+    const ball = app.countBall(app.randomNumber, app.userInputNumber);
+    expect(ball).toBe(3);
+  });
 });
