@@ -47,6 +47,22 @@ class App {
       }
     });
   }
+  ballStrikeCount(computerInput, userInput){
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for(let i = 0; i < computerInput.length; i++){
+      if(computerInput[i] === userInput[i]){
+        strikeCount++;
+      }
+    }
+    for(let number of computerInput){
+      if(userInput.includes(number)){
+        ballCount++;
+      }
+    }
+    return [strikeCount, ballCount];
+  }
 }
 
 const app = new App();
