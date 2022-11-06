@@ -47,6 +47,31 @@ class App {
 
   }
 
+  compareUserAndComputer(userNumber, computerNumber) {
+    const splitUserNumber = userNumber.split("");
+    const splitComputerNumber = computerNumber.split("");
+    
+    let strike = 0;
+    let ball = 0;
+
+    for( let i = 0; i < splitUserNumber.length; i++ ) {
+      const userNumberIndexOfComputerNumber = splitComputerNumber.indexOf(splitUserNumber[i]);
+
+      if (userNumberIndexOfComputerNumber == i) {
+        strike++;
+        continue;
+      }
+
+      if (userNumberIndexOfComputerNumber >= 0) {
+        ball++;
+        continue;
+      }
+
+    }
+    
+    this.printAndDecide(computerNumber, strike, ball);
+  }
+
   checkUserNumberAndCompare(userNumber, computerNumber) {
     this.checkCorrectNumber(userNumber);
     this.compareUserAndComputer (userNumber, computerNumber);
