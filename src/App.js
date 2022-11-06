@@ -76,7 +76,12 @@ class App {
     },
     inputValueStringCheck: (usersInput) => {
       if (isNaN(usersInput)) {
-        throw "숫자만 입력해주세요";
+        throw "숫자만 입력해주세요.";
+      }
+    },
+    inputValueEmptyCheck: (usersInput) => {
+      if (usersInput.indexOf(" ") !== -1) {
+        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
       }
     },
   };
