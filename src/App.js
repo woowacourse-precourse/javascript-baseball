@@ -50,6 +50,21 @@ class App {
       }
     }
 
+    // 결과 출력
+    let answer = '';
+    if(result[0] == 0 && result[1] == 0){
+      answer = "낫싱";
+    }
+    else if (result[0] === 0 && result[1] > 0){
+      answer = `${result[1]}볼`;
+    }
+    else if(result[0] > 0 && result[1] === 0){
+      answer = `${result[0]}스트라이크`;
+    }
+    else{
+      answer = `${result[1]}볼 ${result[0]}스트라이크`;
+    }
+
   }
 }
 
