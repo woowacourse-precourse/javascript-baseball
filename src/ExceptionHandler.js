@@ -16,6 +16,10 @@ class ExceptionHandler {
 
     return true;
   }
+
+  checkValidInput(answer) {
+    if (answer != 1 && answer != 2) throw new Error();
+  }
 }
 
 module.exports = ExceptionHandler;
