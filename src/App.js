@@ -3,11 +3,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     let computerNumber = setComputerNumber();
+    let restart = "";
 
     while (true) {
       let userNumber = setUserNumber();
       let compareResult = compareNumbers(computerNumber, userNumber);
-
+      restart = restartGame(compareResult);
+      if (restart == "1") computerNumber = setComputerNumber();
+      else if (restart == "2") break;
+      else continue;
     }
   }
 }
@@ -63,6 +67,21 @@ function printResult(result) {
   if (result == "3스트라이크") {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
+}
+
+function restartGame(compareResult) {
+  if (compareResult == "3스트라이크") {
+    MissionUtils.Console.print(
+      "게임을 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
+
+    let restart = "";
+    MissionUtils.Console.readLine("", (answer) => {
+      restart = answer;
+    });
+
+    return restart;
+  } else return;
 }
 
 module.exports = App;
