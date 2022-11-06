@@ -19,7 +19,9 @@ class App {
 
   gameProgress() {
     this.readLine(TEXT.ENTER_NUMBER, (input) => {
-      inputValidation(input);
+      inputValidation(input)
+        ? this.compareResult(this.compare(input, this.computer))
+        : this.gameClose(TEXT.ERROR_MESSAGE);
     });
   }
 
@@ -36,6 +38,14 @@ class App {
       throw message;
     } else {
       return MissionUtils.Console.close();
+    }
+  }
+
+  compareResult(message) {
+    this.print(message);
+    if (this.correctAnswer) {
+    } else {
+      this.gameProgress();
     }
   }
 
