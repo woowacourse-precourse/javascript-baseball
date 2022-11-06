@@ -41,6 +41,9 @@ class App {
         if(control === 1) continue;
         else if(control === 2) break;
       }
+      //볼
+      const ball = []; //겹치는 수를 담을 배열
+      Ball(random, input, ball);
     }
   }
 }
@@ -53,6 +56,13 @@ function Strike(array1, array2, n){
   if(n != 0){
     MissionUtils.Console.print('${n}스트라이크 ');
   }
+}
+
+function Ball(array1, array2, n) {
+  n = array1.filter(it => array2.includes(it));
+    if( n != null){
+      MissionUtils.Console.print('${n.length}볼 ');
+    }
 }
 
 module.exports = App;
