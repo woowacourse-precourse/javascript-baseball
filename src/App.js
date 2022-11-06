@@ -41,6 +41,8 @@ function getCount(userNum, computerNum) {
   const computerNumArr = computerNum.map(String);
   const strikeCount = getStrikeCount(userNumArr, computerNumArr);
   const ballCount = getBallCount(userNumArr, computerNumArr);
+
+  return [strikeCount, ballCount];
 }
 
 module.exports = App;
