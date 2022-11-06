@@ -8,6 +8,9 @@ const NOTTHING = "낫싱";
 const BALL = "볼";
 const STRIKE = "스트라이크";
 
+const START_NUMBER = 1;
+const END_NUMBER = 9;
+
 module.exports = {
   START_GAME,
   GAME_END,
@@ -16,4 +19,6 @@ module.exports = {
   NOTTHING,
   BALL,
   STRIKE,
+  START_NUMBER,
+  END_NUMBER,
 };
