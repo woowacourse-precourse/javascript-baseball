@@ -40,15 +40,15 @@ class App {
     }
 
     validateInput(input) {
-        if(isNaN(input)) throw new Error('숫자를 입력해주세요.');
-        if(input.toString().length !== MAX_SIZE) throw new Error('3자리 숫자를 입력해주세요.');
-        if(new Set(input).size !== MAX_SIZE) throw new Error('중복되지 않는 숫자를 입력해주세요.');
-        if(String(input).indexOf(0) !== -1) throw new Error('1부터 9의 숫자만 입력해주세요.');
+        if(isNaN(input)) throw new RangeError('숫자를 입력해주세요.');
+        if(input.toString().length !== MAX_SIZE) throw new RangeError(`${MAX_SIZE}자리 숫자를 입력해주세요.`);
+        if(new Set(input).size !== MAX_SIZE) throw new RangeError('중복되지 않는 숫자를 입력해주세요.');
+        if(String(input).indexOf(0) !== -1) throw new RangeError(`${START_NUMBER}부터 ${END_NUMBER}의 숫자만 입력해주세요.`);
     }
 
     finishGame() {
-        Console.print('3스트라이크');
-        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        Console.print(`${MAX_SIZE}스트라이크`);
+        Console.print(`${MAX_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
         return this.answerReplayGame();
     }
 
@@ -57,7 +57,7 @@ class App {
         Console.readLine('', (answer) => {
             if(answer === REPLAY_GAME_KEY) return this.startGame();
             if(answer === END_GAME_KEY) return Console.print('게임 종료');
-            if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new Error(`${REPLAY_GAME_KEY} 또는 ${END_GAME_KEY}를 입력하세요.`);
+            if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new RangeError(`${REPLAY_GAME_KEY} 또는 ${END_GAME_KEY}를 입력하세요.`);
         })
     }
 
