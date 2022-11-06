@@ -53,4 +53,39 @@ describe('숫자 야구 게임', () => {
 			app.play();
 		}).toThrow();
 	});
+
+	test('게임 종료 후 입력값에 대해 예외 테스트', () => {
+		const randoms = [3, 1, 8];
+		const answers = ['318', '3'];
+		const messages = ['3스트라이크'];
+		const logSpy = getLogSpy();
+
+		mockRandoms(randoms);
+		mockQuestions(answers);
+
+		expect(() => {
+			const app = new App();
+			app.play();
+		}).toThrow();
+
+		messages.forEach((output) => {
+			expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+		});
+	});
+
+	test('게임 종료 후 프로그램 종료', () => {
+		const randoms = [5, 6, 7];
+		const answers = ['543', '321', '756', '576', '567', '2'];
+		const messages = ['1스트라이크', '낫싱', '3볼', '2볼 1스트라이크', '3스트라이크', '게임 종료'];
+		const logSpy = getLogSpy();
+
+		mockRandoms(randoms);
+		mockQuestions(answers);
+
+		const app = new App();
+		app.play();
+		messages.forEach((output) => {
+			expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+		});
+	});
 });
