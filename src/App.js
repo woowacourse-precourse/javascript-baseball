@@ -63,6 +63,17 @@ class App {
         return userInput.length !== 3;
     }
 
+    throwingResult() {
+        Console.print("throwingResult()-----------------");
+        this.judgeBall();
+        const ballCount = this.ball;
+    }
+    judgeBall() {
+        Console.print("judgeBall()-----------------");
+        const ball = this.computer.filter((el) => this.user.includes(el.toString()));
+        this.ball = ball.length;
+    }
+
     gameFinish() {
         Console.print("gameFinish()-------------------");
         this.questionFinish();
