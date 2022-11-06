@@ -1,4 +1,5 @@
 const Mission = require('./Mission');
+const constants = require('./constants/constants');
 
 class Compare extends Mission {
   constructor(computerNumbers, userNumbers) {
@@ -31,9 +32,9 @@ class Compare extends Mission {
   }
 
   consoleCompareResult(strike, ball) {
-    if (strike === 3) {
+    if (strike === constants.MAX_STRIKE) {
       this.mission.Console.print(
-        '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+        `${constants.MAX_STRIKE}스트라이크\n${constants.INPUT_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
     }
 
@@ -55,7 +56,7 @@ class Compare extends Mission {
   }
 
   returnResult(strike) {
-    if (strike === 3) {
+    if (strike === constants.MAX_STRIKE) {
       return true;
     }
 

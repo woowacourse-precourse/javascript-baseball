@@ -1,6 +1,7 @@
 const Mission = require('./Mission');
 const Compare = require('./Compare');
 const Computer = require('./Computer');
+const constants = require('./constants/constants');
 
 class User extends Mission {
   constructor(computerNumbers) {
@@ -22,8 +23,8 @@ class User extends Mission {
   }
 
   checkUserNumber(userArr) {
-    if (userArr.length !== 3) {
-      throw '입력할 수 있는 길이는 3입니다. 종료합니다.';
+    if (userArr.length !== constants.INPUT_SIZE) {
+      throw `입력할 수 있는 길이는 ${constants.INPUT_SIZE}입니다. 종료합니다.`;
     }
 
     userArr.forEach((item) => {
@@ -31,8 +32,11 @@ class User extends Mission {
         throw '숫자만 입력 가능합니다. 종료합니다.';
       }
 
-      if (item < 1 || item > 9) {
-        throw '1-9 범위만 입력 가능합니다. 종료합니다.';
+      if (
+        item < constants.MIN_INPUT_NUMBER ||
+        item > constants.MAX_INPUT_NUMBER
+      ) {
+        throw `${constants.INPUT_SIZE}~${constants.MAX_INPUT_NUMBER} 범위만 입력 가능합니다. 종료합니다.`;
       }
     });
 
@@ -54,7 +58,7 @@ class User extends Mission {
 
   selectRestartOrExit() {
     this.mission.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      `게임을 새로 시작하려면 ${constants.GAME_RESTART}, 종료하려면 ${constants.GAME_END}를 입력하세요.\n`,
       (answer) => {
         this.checkRestartOrExit(answer);
       }
@@ -62,16 +66,17 @@ class User extends Mission {
   }
 
   checkRestartOrExit(answer) {
-    if (answer === '1') {
+    if (Number(answer) === constants.GAME_RESTART) {
       this.gameRestart();
       return;
     }
 
-    if (answer === '2') {
+    if (Number(answer) === constants.GAME_END) {
       this.mission.Console.close();
       return;
     }
-    throw '1과 2만 입력 가능합니다. 잘못된 값이 입력 되었습니다.';
+
+    throw `${constants.GAME_RESTART}과 ${constants.GAME_END}만 입력 가능합니다. 잘못된 값이 입력 되었습니다.`;
   }
 
   gameRestart() {
