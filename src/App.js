@@ -24,21 +24,23 @@ class App {
   }
 
   readUserInput() {
-    Console.readLine(GAME_MESSAGE.INPUT, (number) => {
-      this.#user.setNumbers(number);
-      this.#setBallStrikeCount();
+    Console.readLine(GAME_MESSAGE.INPUT, this.#progress.bind(this));
+  }
 
-      const countMessage = BaseballHelper.getCountMessage(this.#ballStrikeCount);
-      Console.print(this.#computer.numbers);
-      Console.print(countMessage);
+  #progress(number) {
+    this.#user.setNumbers(number);
+    this.#setBallStrikeCount();
 
-      if (this.#ballStrikeCount.strike === 3) {
-        Console.print(GAME_MESSAGE.CORRECT);
-        this.readRestartInput();
-      }
+    const countMessage = BaseballHelper.getCountMessage(this.#ballStrikeCount);
+    Console.print(this.#computer.numbers);
+    Console.print(countMessage);
 
-      this.readUserInput();
-    });
+    if (this.#ballStrikeCount.strike === RULE.LENGTH) {
+      Console.print(GAME_MESSAGE.CORRECT);
+      this.readRestartInput();
+    }
+
+    this.readUserInput();
   }
 
   #setBallStrikeCount() {
@@ -51,19 +53,21 @@ class App {
   }
 
   readRestartInput() {
-    Console.readLine(GAME_MESSAGE.FINISH, (input) => {
-      if (input === RULE.RESTART) {
-        this.play();
-        return;
-      }
+    Console.readLine(GAME_MESSAGE.FINISH, this.#selectRestartOrEnd.bind(this));
+  }
 
-      if (input === RULE.END) {
-        Console.close();
-        return;
-      }
+  #selectRestartOrEnd(input) {
+    if (input === RULE.RESTART) {
+      this.play();
+      return;
+    }
 
-      throw new Error(ERROR_MESSAGE.INVALID_INPUT);
-    });
+    if (input === RULE.END) {
+      Console.close();
+      return;
+    }
+
+    throw new Error(ERROR_MESSAGE.INVALID_INPUT);
   }
 }
 
