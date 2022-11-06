@@ -1,8 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 9;
+const MIN_ANSWER = "102";
+const MAX_ANSWER = "987";
+const NUMBER_LENGTH = 3;
+
 class App {
   makeAnswer = () => {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+    return MissionUtils.Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH).join("");
   };
 
   isDuplicated = (input) => {
@@ -12,11 +18,11 @@ class App {
   };
 
   containsThreeNumbers = (input) => {
-    return input.length === 3;
+    return input.length === NUMBER_LENGTH;
   };
 
   containsOnlyNumbers = (input) => {
-    return input >= "102" && input <= "987";
+    return input >= MIN_ANSWER && input <= MAX_ANSWER;
   };
 
   isValid = (input) => {
