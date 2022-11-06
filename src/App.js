@@ -2,14 +2,16 @@ const { Console } = require('@woowacourse/mission-utils');
 const { message } = require('./constants');
 
 const BaseballComputer = require('./models/BaseballComputer');
-const isValidUserNumbers = require('./utils/validate');
+const BaseballUser = require('./models/BaseballUser');
 
 class App {
   #computer;
 
+  #user;
+
   constructor() {
     this.#computer = new BaseballComputer();
-    this.userNumbers = [];
+    this.#user = new BaseballUser();
     this.ballStrikeCount = {
       ball: 0,
       strike: 0,
@@ -25,11 +27,7 @@ class App {
 
   readUserInput() {
     Console.readLine(message.INPUT, (number) => {
-      this.userNumbers = [...number];
-
-      if (!isValidUserNumbers(this.userNumbers)) {
-        throw new Error('유효하지 않은 값을 입력했습니다.');
-      }
+      this.#user.setNumbers(number);
 
       this.setBallStrikeCount();
       this.setResult();
@@ -51,7 +49,7 @@ class App {
       strike: 0,
     };
 
-    this.userNumbers.forEach((number, i) => {
+    this.#user.numbers.forEach((number, i) => {
       if (number === this.#computer.numbers[i]) {
         ballStrikeCount.strike += 1;
         return;
