@@ -6,12 +6,12 @@
   - 3-1. [x] 같은 수가 같은 자리에 있으면 1스트라이크
   - 3-2. [x] 같은 수가 다른 자리에 있으면 1볼
   - 3-3. [x] 같은 수가 전혀 없으면 낫싱
-- 4. [ ] 3개의 숫자를 모두 맞추면 게임이 종료된다.
-  - 4-1. [ ] 게임을 다시 시작하거나, 완전히 종료한다.
+- 4. [x] 3개의 숫자를 모두 맞추면 게임이 종료된다.
+  - 4-1. [x] 게임을 다시 시작하거나, 완전히 종료한다.
 
   ## 요구사항 
 - [ ] indent depth 2 (함수 분리, 한가지 일만)
 - [ ] Jest로 테스크 코드 작성
 - [ ] MissonUtils 라이브러리의 `Random`, `Console API` 사용
   - [x] Random값 추출: Random.pickNumberInRange() 
-  - [xs] 사용자값 입력,출력: Console.readLine, Console.print
+  - [x] 사용자값 입력,출력: Console.readLine, Console.print

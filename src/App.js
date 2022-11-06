@@ -71,7 +71,18 @@ function provideHint(computer, guess, MissionUtils){
     hint = "낫싱";
   }
   MissionUtils.Console.print(hint);
-  
+  // 4. 3개의 숫자를 모두 맞추면 게임이 종료된다.
+  if(strikeCnt == 3){
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    // 4-1. 게임을 다시 시작하거나, 완전히 종료한다.
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+      if(input==1){
+        return 'restart';
+      }else if(input==2){
+        return 'end';
+      }
+    });
+  }
 }
 class App {
   play() {
@@ -85,6 +96,12 @@ class App {
         const guess = guessNumber(MissionUtils);
         // 3. 힌트를 제공한다.
         let ret = provideHint(computer,guess, MissionUtils);
+        if(ret=='restart'){
+          continue start;
+          break;
+        }else if(ret=='end'){
+          return;
+        }
       }
     }
   }
