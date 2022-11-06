@@ -103,7 +103,7 @@ describe("숫자 야구 게임 단위 테스트", () => {
     });
   });
 
-  test("printMessage 메서드로 스트라이크, 볼, 낫싱을 출력", () => {
+  test("getResultMessage 메서드로 스트라이크, 볼, 낫싱을 출력", () => {
     const app = new App();
 
     const TEST_CASE = [
@@ -130,7 +130,7 @@ describe("숫자 야구 게임 단위 테스트", () => {
     ];
 
     TEST_CASE.forEach(({ strike, ball, result }) => {
-      const message = app.printMessage({ strike, ball });
+      const message = app.getResultMessage({ strike, ball });
       expect(message).toBe(result);
     });
   });

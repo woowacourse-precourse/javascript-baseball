@@ -31,7 +31,7 @@ class App {
         computerNumber,
         enteredNumber
       );
-      const message = this.printMessage({ strike, ball });
+      const message = this.getResultMessage({ strike, ball });
       MissionUtils.Console.print(message);
       if (strike === 3) {
         this.gameOver();
@@ -71,7 +71,7 @@ class App {
     }, initialCounter);
   }
 
-  printMessage({ strike, ball }) {
+  getResultMessage({ strike, ball }) {
     const messageMap = [
       {
         type: this.BALL,
