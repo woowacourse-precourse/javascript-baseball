@@ -67,8 +67,24 @@ class App {
     userInputNumber() {
         MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
             this.userInput = answer.split('')
+            const validation = this.exceptionHandler(this.userInput)
+            if (validation) throw new Error()
             this.compareNumber(this.userInput)
         })
+    }
+
+    exceptionHandler(userInput) {
+        if (userInput.length !== 3) return 1
+
+        let isNumber = 0
+        userInput.map((user) => {
+            if (isNaN(Number(user))) return 1
+        })
+
+        if (userInput.includes('0')) return 1
+
+        const repeatCheck = new Set(userInput)
+        if (repeatCheck.size !== 3) return 1
     }
 }
 

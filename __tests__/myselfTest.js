@@ -88,4 +88,43 @@ describe('숫자 야구 게임', () => {
     //     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     //   });
     // });
+
+    test("예외 테스트 1", () => {
+      const randoms = [3, 6, 9];
+      const answers = ["1234"];
+  
+      mockRandoms(randoms);
+      mockQuestions(answers);
+  
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
+    test("예외 테스트 2", () => {
+      const randoms = [3, 6, 9];
+      const answers = ["a23"];
+  
+      mockRandoms(randoms);
+      mockQuestions(answers);
+  
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
+    test("예외 테스트 3", () => {
+      const randoms = [3, 6, 9];
+      const answers = ["2"];
+  
+      mockRandoms(randoms);
+      mockQuestions(answers);
+  
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
 })
