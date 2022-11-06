@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Console = MissionUtils.Console;
 
 class App {
   user_number;
@@ -15,6 +16,7 @@ class App {
 
     this.computer_number = computer_arr.join('');
   }
+
   getUserNumber() {
     Console.readLine('숫자를 입력해주세요 : ', input => {
       const repeatInput = [...new Set(input)];
@@ -26,9 +28,7 @@ class App {
         repeatInput.length === 3
       ) {
         this.user_number = input;
-
-        //compare numbers
-        this.compareNumbers(this.computer_number, this.user_number);
+        // TODO compare numbers function
       } else {
         throw new Error('잘못된 입력입니다.');
       }
