@@ -38,6 +38,8 @@ class App {
     for (let i = 0; i < 3; i++) {
       this.checkOne(inputArr, i, count);
     }
+
+    this.saveCountMent(count);
   }
 
   checkOne(inputArr, i, count) {
@@ -45,6 +47,18 @@ class App {
       count[1]++;
     } else if (randomArr.includes(inputArr[i])) {
       count[0]++;
+    }
+  }
+
+  saveCountMent(count) {
+    if (count[0] === 0 && count[1] === 0) {
+      Console.print("낫싱");
+    } else if (count[1] === 0) {
+      Console.print(count[0] + "볼");
+    } else if (count[0] === 0) {
+      Console.print(count[1] + "스트라이크");
+    } else {
+      Console.print(count[0] + "볼 " + count[1] + "스트라이크");
     }
   }
 }
