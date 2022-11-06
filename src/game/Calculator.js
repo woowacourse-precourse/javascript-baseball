@@ -3,12 +3,7 @@ class Calculator {
     const ball = this.countBall(input, randomNumber);
     const strike = this.countStrike(input, randomNumber);
 
-    if (!ball && !strike) return '낫싱';
-    if (strike === 3) {
-      this.isCorrect = true;
-      return `${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
-    }
-    return `${ball}볼 ${strike}스트라이크`;
+    return { ball, strike };
   }
 
   countBall(input, randomNumber) {

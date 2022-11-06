@@ -26,12 +26,21 @@ class BaseballGame {
       throw valid.message;
     }
 
-    const result = this.calculator.calcScore(
+    const { ball, strike } = this.calculator.calcScore(
       input,
-      this.randomNumber,
-      this.isCorrect
+      this.randomNumber
     );
-    Console.print(result);
+
+    if (!ball && !strike) Console.print('낫싱');
+    if (strike === 3) {
+      this.isCorrect = true;
+      Console.print(
+        `${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
+      );
+    }
+    if (strike !== 3) {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
   }
 
   startGame() {
