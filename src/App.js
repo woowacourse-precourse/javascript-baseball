@@ -14,6 +14,7 @@ class App {
       this.num = numToArr(num);
       const checkInputValid = new CheckInputValid({
         userNum: this.userNum,
+        retryNum: this.replayQnAResult,
       });
 
       try {
@@ -39,6 +40,12 @@ class App {
       if (this.strikeCount === 3) {
         render.replayQnA().then((userSelection) => {
           this.replayQnAResult = userSelection;
+
+          try {
+            checkInputValid.checkRetryInput();
+          } catch (error) {
+            throw new Error(error);
+          }
 
           if (this.replayQnAResult === "1") {
             this.computer = Computer();
