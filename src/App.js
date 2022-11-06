@@ -15,7 +15,7 @@ class App {
   }
 
   startGame() {
-    this.setRandomNumber();
+    this.setRandomNumber(generateRandomNumber());
     this.requestUserInputNumber();
   }
 
@@ -47,8 +47,8 @@ class App {
     });
   }
 
-  setRandomNumber() {
-    this.randomNumber = generateRandomNumber();
+  setRandomNumber(randomNumber) {
+    this.randomNumber = randomNumber;
   }
 
   showMessage(message) {
