@@ -2,13 +2,11 @@ const App = require("../src/App");
 const validateInput = require("../src/ValidateInput");
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const mockQuestions = (answers) => {
+const mockQuestion = (answer) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
+  MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
+    callback(answer);
+  });
 };
 
 describe.only("플레이어 입력 검증 테스트", () => {
@@ -37,9 +35,9 @@ describe.only("플레이어 입력 검증 테스트", () => {
   });
 
   test("잘못된 입력시 throw 예외 처리", () => {
-    const answers = ["1234"];
+    const answers = "1234";
 
-    mockQuestions(answers);
+    mockQuestion(answers);
 
     expect(() => {
       const app = new App();
