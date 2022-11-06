@@ -3,11 +3,11 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   play() {
     this.start();
-    this.pickRandomNumber();
-    this.inputs();
+    this.createComputerNumber();
+    this.input();
   }
 
-  inputs() {
+  input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const user = answer.split('').map((num) => parseInt(num, 10));
       const inputState = this.checkInputValidation(answer);
@@ -28,7 +28,7 @@ class App {
   }
 
   checkState(state, isGameover) {
-    const token = ['RESTART', 'EXIT', 'WIN'];
+    const token = ['RESTART', 'EXIT', 'GUESS_SUCCESSFUL'];
     if (!isGameover && token.includes(state)) throw Error('잘못된 입력입니다.');
     switch (state) {
       case 'EXIT':
@@ -36,14 +36,14 @@ class App {
         MissionUtils.Console.close();
         break;
       case 'RESTART':
-        this.pickRandomNumber();
-        this.inputs();
+        this.createComputerNumber();
+        this.input();
         break;
-      case 'WIN':
+      case 'GUESS_SUCCESSFUL':
         this.restart();
         break;
-      case 'LOSE':
-        this.inputs();
+      case 'GUESS_FAIL':
+        this.input();
         break;
       case 'SUCCESS':
         break;
@@ -56,7 +56,7 @@ class App {
     this.print('숫자 야구 게임을 시작합니다.');
   }
 
-  pickRandomNumber() {
+  createComputerNumber() {
     const pick = [];
     while (pick.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -100,26 +100,26 @@ class App {
     return ball;
   }
 
-  compare(user, computer) {
+  getResult(user, computer) {
     const strike = this.countStrike(user, computer);
     const ball = this.countBall(user, computer);
 
     return { strike, ball };
   }
 
-  victory() {
+  correctAnswer() {
     this.print('3스트라이크');
     this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
   result(user, computer) {
-    const { strike, ball } = this.compare(user, computer);
+    const { strike, ball } = this.getResult(user, computer);
     if (strike === 3) {
-      this.victory();
-      return 'WIN';
+      this.correctAnswer();
+      return 'GUESS_SUCCESSFUL';
     }
     this.output(strike, ball);
-    return 'LOSE';
+    return 'GUESS_FAIL';
   }
 
   output(strike, ball) {
