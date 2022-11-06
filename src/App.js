@@ -100,6 +100,10 @@ class App {
       this.exitFunction();
     });
   }
+  
+  exitFunction(){
+    MissionUtils.Console.close();
+  }
 }
 
 module.exports = App;
