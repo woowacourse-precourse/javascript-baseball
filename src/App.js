@@ -22,34 +22,41 @@ class App {
 
     const anwser = this.startGame().createAnswer();
 
-    while (this.game) {
-      try {
-        await this.inputUserAnswer();
-        if (this.checkUserGameAnswer()) throw new Error("out of range");
-        const result = this.compareUserAnswer(anwser);
-        this.resultPrint(result);
-      } catch (e) {
-        this.exceptionEnd();
-      }
-    }
+    // while (this.game) {
+    //   try {
+    //     await this.inputUserAnswer();
+    //     if (this.checkUserGameAnswer()) throw new Error("out of range");
+    //     const result = this.compareUserAnswer(anwser);
+    //     this.resultPrint(result);
+    //   } catch (e) {
+    //     this.exceptionEnd();
+    //   }
+    // }
 
-    if (!this.game) {
-      this.endGame();
-      try {
-        await this.userProgressInput();
-        if (this.checkUserProgressInput()) throw new Error("out of range");
-      } catch (e) {
-        console.log(e);
-        this.exceptionEnd();
-      }
-    }
-    this.isPlayContinue(this.userAnswer);
+    // if (!this.game) {
+    //   this.endGame();
+    //   try {
+    //     await this.userProgressInput();
+    //     if (this.checkUserProgressInput()) throw new Error("out of range");
+    //   } catch (e) {
+    //     console.log(e);
+    //     this.exceptionEnd();
+    //   }
+    // }
+    // this.isPlayContinue(this.userAnswer);
 
     return;
   }
 
   createAnswer() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const answer = [];
+    while (answer < 3) {
+      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(num)) {
+        answer.push(num);
+      }
+    }
+    return answer;
   }
 
   startGame() {
