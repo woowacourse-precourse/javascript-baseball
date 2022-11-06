@@ -1,12 +1,13 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.answer = [];
+    this.computerNumbers = [];
+    this.userNumbers = [];
   }
 
   getRandomNumbers() {
-    this.answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   checkInputError(numbers) {
@@ -24,11 +25,35 @@ class App {
     }
   }
 
+  setUserNumber(numbers) {
+    while (numbers !== 0) {
+      this.userNumbers.push(numbers % 10);
+      numbers = parseInt(numbers / 10);
+    }
+
+    this.userNumbers.reverse();
+  }
+
+  discriminationStrikeOrBall() {
+    Console.print(this.computerNumbers);
+    const result = this.userNumbers.reduce((acc, cur, i) => {
+      if (this.computerNumbers.includes(cur)) {
+        if (this.computerNumbers[i] === cur) return acc + 100;
+        else return acc + 10;
+      }
+
+      return acc + 1;
+    }, 0);
+
+    Console.print(result);
+  }
+
   userInputNumber() {
     try {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
+      Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
         this.checkInputError(numbers);
-        console.log(numbers);
+        this.setUserNumber(numbers);
+        return this.discriminationStrikeOrBall();
       });
     } catch (e) {
       console.error(e);
@@ -36,7 +61,7 @@ class App {
   }
 
   gameStart() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print('숫자 야구 게임을 시작합니다.');
     this.getRandomNumbers();
     this.userInputNumber();
   }
