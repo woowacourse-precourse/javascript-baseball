@@ -65,7 +65,7 @@ describe("숫자 야구 게임 단위 테스트", () => {
     });
   });
 
-  test("getResult 메서드로 스트라이크, 볼 정보를 반환", () => {
+  test("countStrikeAndBall 메서드로 스트라이크, 볼 개수를 반환", () => {
     const app = new App();
 
     const TEST_CASE = [
@@ -94,7 +94,10 @@ describe("숫자 야구 게임 단위 테스트", () => {
     TEST_CASE.forEach(({ inputs, results }) => {
       const [computerNumber, enteredNumber] = inputs;
       const [strikeCount, ballCount] = results;
-      const { strike, ball } = app.getResult(computerNumber, enteredNumber);
+      const { strike, ball } = app.countStrikeAndBall(
+        computerNumber,
+        enteredNumber
+      );
       expect(strike).toBe(strikeCount);
       expect(ball).toBe(ballCount);
     });

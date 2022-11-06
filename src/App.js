@@ -27,7 +27,10 @@ class App {
       if (!this.isValidNumber(enteredNumber)) {
         throw new Error();
       }
-      const { strike, ball } = this.getResult(computerNumber, enteredNumber);
+      const { strike, ball } = this.countStrikeAndBall(
+        computerNumber,
+        enteredNumber
+      );
       const message = this.printMessage({ strike, ball });
       MissionUtils.Console.print(message);
       if (strike === 3) {
@@ -51,7 +54,7 @@ class App {
     return true;
   }
 
-  getResult(computerNumber, enteredNumber) {
+  countStrikeAndBall(computerNumber, enteredNumber) {
     const initialCounter = {
       strike: 0,
       ball: 0,
