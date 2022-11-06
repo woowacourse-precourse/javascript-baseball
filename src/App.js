@@ -29,12 +29,21 @@ class App {
         const result = this.compareUserAnswer(anwser);
         this.resultPrint(result);
       } catch (e) {
-        console.log(e);
         this.exceptionEnd();
       }
     }
 
-    if (!this.game) this.endGame();
+    if (!this.game) {
+      this.endGame();
+      try {
+        await this.userProgressInput();
+        if (this.checkUserProgressInput()) throw new Error("out of range");
+      } catch (e) {
+        console.log(e);
+        this.exceptionEnd();
+      }
+    }
+    this.isPlayContinue(this.userAnswer);
 
     return;
   }
@@ -75,7 +84,6 @@ class App {
     return obj;
   }
 
-  // - 결과를 출력하는 기능
   resultPrint({ ball, strike }) {
     let resultMent;
     switch (strike) {
@@ -94,15 +102,31 @@ class App {
       default:
         break;
     }
+
     MissionUtils.Console.print(resultMent);
-    if (strike === 3) this.game = gameStatus.stop;
+
     return;
   }
+
   // - 결과에 따라 다른 기능을 호출하는 기능
-  //   1. 사용자 입력을 받는 기능으로 돌아가기
-  //   2. 사용자 질문을 받는 기능
-  // - 사용자 입력 예외처리하는 기능 ( 게임 진행 완료 후 )
-  checkUserProgressInput() {}
+  isPlayContinue(answer) {
+    if (answer === "1") return this.play();
+    if (answer === "2") return;
+  }
+
+  async userProgressInput() {
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine(ment.reStart, (answer) => {
+        this.userAnswer = answer;
+        resolve();
+      });
+    });
+  }
+
+  checkUserProgressInput() {
+    if (this.userAnswer === 1 || this.userAnswer === 2) return true;
+    return false;
+  }
 
   exceptionEnd() {
     this.game = gameStatus.stop;

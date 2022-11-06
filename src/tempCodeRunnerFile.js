@@ -1,1 +1,1 @@
-userAnswer
+        await this.userProgressInput();
