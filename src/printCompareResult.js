@@ -8,9 +8,9 @@ const printCompareResult = (ballCount, strikeCount) => {
     } else if (ballCount !== 0  && strikeCount === 0) {
         resultMSG = `${ballCount}볼`;
     } else if (ballCount === 0 && strikeCount !== 0) {
-        resultMSG = `${strikeCount}}스트라이크`;
+        resultMSG = `${strikeCount}스트라이크`;
     } else {
-        resultMSG = `${ballCount}볼 ${strikeCount}}스트라이크`;
+        resultMSG = `${ballCount}볼 ${strikeCount}스트라이크`;
     }
 
     MissionUtils.Console.print(resultMSG);
