@@ -8,6 +8,19 @@ const END = '2';
 class App {
   play() {}
 
+  startQuery(answer) {
+    Console.readLine('숫자를 입력해주세요 : ', (query) => {
+      this.checkError(query);
+      const score = this.getScore(answer, query);
+      this.printFeedback(score);
+      if (this.isFinish(score)) {
+        this.replayOrQuit();
+      } else {
+        this.startQuery(answer);
+      }
+    });
+  }
+
   randomGenerator() {
     const ret = [];
     while (ret.length < 3) {
