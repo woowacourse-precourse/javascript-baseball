@@ -5,14 +5,27 @@ const messages = {
   inputLessMsg: "글자 덜 입력하셨습니다.",
   duplicatedMsg:
     "숫자끼리 중복되어서는 안됩니다.\n세 자리 모두 다른 수를 입력해주세요.",
+  hasZeroMsg: "숫자 0이 포함되었습니다. ",
+  isNotANumberMsg: "는 숫자가 아닙니다. ",
 };
 
 const inputMore = (length) => {
   return length - 3 + messages.inputMoreMsg + messages.guideMsg;
 };
-
 const inputLess = (length) => {
-  return length - 3 + messages.inputLessMsg + messages.guideMsg;
+  return 3 - length + messages.inputLessMsg + messages.guideMsg;
+};
+const throwErrorMsg = (typeOfError, length) => {
+  if (length === 3) {
+    throw new Error(typeOfError + messages.guideMsg);
+  }
+  length > 3
+    ? (function () {
+        throw new Error(typeOfError + inputMore(length));
+      })()
+    : (function () {
+        throw new Error(typeOfError + inputLess(length));
+      })();
 };
 
 const CheckValidation = (answer) => {
@@ -21,7 +34,6 @@ const CheckValidation = (answer) => {
 
   hasZero(answer, length);
   length > 1 ? checkDuplicated(splitAnswer) : "";
-
   containNotANumber(splitAnswer, length);
   length === 3 ? "" : notRightLength(length);
 };
@@ -32,16 +44,7 @@ const hasZero = (answer, length) => {
   zeroRegex.test(answer) ? (isZero = true) : (isZero = false);
 
   if (!isZero) return;
-  if (length === 3 && isZero) {
-    throw new Error(`숫자 0이 포함되었습니다.${messages.guideMsg}`);
-  }
-  length > 3
-    ? (function () {
-        throw new Error(`숫자 0이 포함되었으며, ${inputMore(length)}`);
-      })()
-    : (function () {
-        throw new Error(`숫자 0이 포함되었으며, ${inputLess(length)}`);
-      })();
+  throwErrorMsg(messages.hasZeroMsg, length);
 };
 
 const checkDuplicated = (splitAnswer) => {
@@ -50,7 +53,7 @@ const checkDuplicated = (splitAnswer) => {
     splitAnswer[1] == splitAnswer[2] ||
     splitAnswer[0] == splitAnswer[2]
   ) {
-    throw new Error(duplicatedMsg);
+    throw new Error(messages.duplicatedMsg);
   }
 };
 
@@ -69,30 +72,11 @@ const containNotANumber = (splitAnswer, length) => {
   let hasNotANumber = notANumberList.length !== 0;
 
   if (!hasNotANumber) return;
-  if (length === 3) {
-    throw new Error(`${isNotANumber}는 숫자가 아닙니다.${messages.guideMsg}`);
-  }
-  length > 3
-    ? (function () {
-        throw new Error(
-          `${isNotANumber}는 숫자가 아니며, ${inputMore(length)}`
-        );
-      })()
-    : (function () {
-        throw new Error(
-          `${isNotANumber}는 숫자가 아니며, ${inputLess(length)}`
-        );
-      })();
+  throwErrorMsg(isNotANumber + messages.isNotANumberMsg, length);
 };
 
 const notRightLength = (length) => {
-  length > 3
-    ? (function () {
-        throw new Error(`${inputMore(length)}`);
-      })()
-    : (function () {
-        throw new Error(`${inputLess(length)}`);
-      })();
+  throwErrorMsg("", length);
 };
 
 module.exports = CheckValidation;
