@@ -4,6 +4,7 @@ class App {
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.createUniqueNumbers(1, 9, 3);
+    this.guess(computer);
   }
 
   createUniqueNumbers(start, end, count) {
@@ -15,6 +16,12 @@ class App {
     }
 
     return [...numberSet];
+  }
+
+  guess(computer) {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      const player = Array.from(input, Number);
+    });
   }
 }
 
