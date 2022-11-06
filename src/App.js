@@ -63,11 +63,16 @@ class App {
     if(strike === 3){
       this.gameClearMessage();
     }else{
-      
+
     }
   }
   gameClearMessage(){
     return MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  }
+  wantRegame() {
+    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
+      return inputNum;
+    });
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
