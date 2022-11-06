@@ -91,6 +91,17 @@ class BaseBallGame{
       .filter(char => char !== ',')
       .map(char => Number(char));
   }
+
+  askReGame() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+
+    Console.readLine('', (answer) => {
+      if (answer !== '1' && answer !== '2') this.askReGame();
+      if (answer == '1') this.reStart();
+      if (answer == '2') Console.close();
+    });
+  }
 }
 
 export default BaseBallGame;
