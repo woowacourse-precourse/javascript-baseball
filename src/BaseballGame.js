@@ -1,4 +1,4 @@
-const { REPLAY, CLOSE } = require("./Constant");
+const { REPLAY, CLOSE, STRIKE_OUT } = require("./Constant");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const User = require("./User");
@@ -64,7 +64,7 @@ class BaseballGame {
   }
 
   gameContinueorEnd(strike) {
-    if (strike === 3) {
+    if (strike === STRIKE_OUT) {
       this.initializeBallandStrike();
 
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
