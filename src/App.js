@@ -76,16 +76,19 @@ function cpuMakeAnswer() {
 }
 
 class App {
-  constructor() {}
+  constructor() {
+    this.cpuNumber = cpuMakeAnswer();
+  }
   play() {
-    const cpuNumber = cpuMakeAnswer();
+    Console.print("숫자 야구게임을 시작합니다.");
+    // const cpuNumber = cpuMakeAnswer();
+    bullsAndCows.gaming();
+  }
+  gaming() {
+    // const cpuNumber = cpuMakeAnswer();
+
     let userInput = [];
     let gameResult = "";
-    Console.print("숫자 야구게임을 시작합니다.");
-
-    /**
-     * to-do readLine이 못맞추면 참 -> 숫자 계속입력 맞추면 폴스 -> 게임종료
-     */
 
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
       userInput = Array.from(input);
@@ -95,10 +98,12 @@ class App {
 
       Console.print(userInput);
       if (checkVaildUserInputValue(userInput)) {
-        gameResult = UserInputValueCompareToCPUAnswer(cpuNumber, userInput);
+        gameResult = UserInputValueCompareToCPUAnswer(
+          this.cpuNumber,
+          userInput
+        );
         Console.print(gameResult);
-        if (gameResult == "3스트라이크");
-        {
+        if (gameResult == "3스트라이크") {
           Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임종료`);
           Console.readLine(
             "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ",
@@ -112,10 +117,13 @@ class App {
               }
             }
           );
+        } else {
+          bullsAndCows.gaming();
         }
       }
     });
   }
+
   replay() {
     play();
   }
