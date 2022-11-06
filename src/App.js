@@ -25,9 +25,7 @@ class App {
         this.inputErrorException();
       }
       const userResult = countBallAndStrike(userNumber, answer); // 볼 스트라이크 개수 세기
-
       printGameMessage(userResult.strike, userResult.ball); // 볼 스트라이크 출력
-
       if (userResult.strike < ANSWER_LENGTH) {
         return this.gameStart(answer);
       }
