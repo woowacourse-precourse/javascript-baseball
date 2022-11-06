@@ -36,17 +36,21 @@ class App {
   gameOverPhase() {
     Console.print(GAME_MESSAGE.GAME_OVER);
     Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
-      if (trigger === RESTART_TRIGGER) {
-        this.computerInput = this.generateComputerInput();
-        this.play();
-        return;
+      switch (trigger) {
+        case RESTART_TRIGGER: {
+          this.computerInput = this.generateComputerInput();
+          this.play();
+          return;
+        }
+        case QUIT_TRIGGER: {
+          this.quitGame();
+          return;
+        }
+        default: {
+          this.quitGame();
+          throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
+        }
       }
-      if (trigger === QUIT_TRIGGER) {
-        this.quitGame();
-        return;
-      }
-      this.quitGame();
-      throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
     });
   }
 
