@@ -21,12 +21,26 @@ function App() {
     recursiveAsyncReadLine();
   };
 
-  this.init = () => {
-    this.play();
-  };
+  const findBall = (userNumber, computerNumber) => {
+    let ball = 0;
+    for (let index = 0; index < 3; index++) {
+      if (computerNumber.search(userNumber[index]) > -1) {
+        ball++;
+      }
+    }
 
-  const findBall = (userNumber, computerNumber) => {};
-  const findStrike = (userNumber, computerNumber) => {};
+    return ball;
+  };
+  const findStrike = (userNumber, computerNumber) => {
+    let strike = 0;
+    for (let index = 0; index < 3; index++) {
+      if (userNumber[index] === computerNumber[index]) {
+        strike++;
+      }
+    }
+
+    return strike;
+  };
 
   const recursiveAsyncReadLine = () => {
     MissionUtils.Console.readLine(
@@ -75,21 +89,8 @@ function App() {
       return;
     }
 
-    let strike = 0;
-    let ball = 0;
-
-    for (let index1 = 0; index1 < 3; index1++) {
-      for (let index2 = 0; index2 < 3; index2++) {
-        if (userNumber[index1] === computerNumber[index2]) {
-          if (index1 === index2) strike++;
-          if (index1 !== index2) ball++;
-          if (index1 === index2 || index1 !== index2) {
-            this.strikecheck = true;
-            break;
-          }
-        }
-      }
-    }
+    let ball = findBall(this.userNumber, this.computerNumber);
+    let strike = findStrike(this.userNumber, this.computerNumber);
 
     if (ball === 0 && strike === 0) {
       MissionUtils.Console.print("낫싱");
@@ -98,8 +99,8 @@ function App() {
 
     let answer = "";
 
-    if (ball !== 0) {
-      answer += ball + "볼 ";
+    if (ball - strike !== 0) {
+      answer += ball - strike + "볼 ";
     }
     if (strike !== 0) {
       answer += strike + "스트라이크";
