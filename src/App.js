@@ -5,7 +5,14 @@ class App {
     MissionUtils.Console.print(Notice.START_GAME)
     this.AnswerNumber = this.generateRandomnumber()
   }
-  play() {}
+  play() {
+    this.start()
+  }
+  start(){
+    MissionUtils.Console.readLine(Notice.INPUT_NUM,(input) => {
+      
+    });
+  }
   generateRandomnumber(){
     const Randomnumber = [];
     while (Randomnumber.length < 3) {
