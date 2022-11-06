@@ -4,14 +4,45 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 function App() {
   this.state = {
     computer: [],
-    user: [],
-    result: "",
+    isGameContinue: true,
   };
   this.play = () => {
     Console.print("숫자 야구 게임을 시작합니다.");
-    Console.readLine("숫자를 입력해주세요: ", (input) => {
-      compareInputWithComputer(input);
-    });
+    Console.readLine("숫자를 입력해주세요: ", userInputCallBack);
+  };
+
+  const userInputCallBack = (input) => {
+    checkUserInputValidation(input); // 값 검사
+    const [strikeCount, ballCount] = compareInputWithComputer(input);
+
+    if (!strikeCount && !ballCount) Console.print("낫싱");
+    else {
+      Console.print(
+        ` ${ballCount ? `${ballCount}볼` : ""} ${
+          strikeCount ? `${strikeCount}스트라이크` : ""
+        }`,
+      );
+    }
+
+    if (strikeCount === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        userResultCallBack,
+      );
+    } else {
+      Console.readLine("숫자를 입력해주세요: ", userInputCallBack);
+    }
+  };
+
+  const userResultCallBack = (result) => {
+    if (result === "1") {
+      this.setState({ computer: setComputerNumber() });
+      Console.readLine("숫자를 입력해주세요: ", userInputCallBack);
+    } else if (result === "2") {
+      this.setState({ isGameContinue: false });
+      Console.close();
+    }
   };
 
   const setComputerNumber = () => {
@@ -26,6 +57,7 @@ function App() {
   };
 
   const checkUserInputValidation = (userInput) => {
+    return;
     /**
      * 오류 입력 처리
      * 숫자가 1~9가 아닌 경우
@@ -48,9 +80,10 @@ function App() {
   };
 
   const compareInputWithComputer = (input) => {
-    const userInput = input.split("");
+    const userInput = input.split("").map((data) => +data);
     const strikeCount = getStrikeCount(userInput, this.state.computer);
     const ballCount = getBallCount(userInput, this.state.computer);
+    return [strikeCount, ballCount];
   };
 
   this.init = () => {
