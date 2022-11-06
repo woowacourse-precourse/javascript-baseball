@@ -30,6 +30,7 @@ class App {
 
       strike = notthing(ball_strike_result);
     }
+    restart();
   }
 }
 
@@ -98,6 +99,21 @@ function notthing(ball_strike_result){
   }
   MissionUtils.Console.print(`${ball_strike_result[0]}볼 ${ball_strike_result[1]}스트라이크`);
   return ball_strike_result[1];;
+}
+
+function restart(){
+  const app = new App();
+  
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(inputNumber) => {
+    restartNumber = inputNumber;
+  })
+  if(restartNumber == 1){
+    return app.play();
+  }
+  if(restartNumber == 2){
+    MissionUtils.Console.print("게임 종료");
+    return;
+  }
 }
 
 module.exports = App;
