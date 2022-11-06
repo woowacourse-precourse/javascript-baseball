@@ -95,6 +95,13 @@ class App {
       const strikeCount = this.baseballCheck();
       correctState = this.isCorrect(strikeCount);
     }
+    const REGAMENUMBER = this.wantRegame();
+    if(REGAMENUMBER===1){
+      this.play();
+    }else{
+      MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+      return 0;
+    }
   }
 }
 const app = new App();
