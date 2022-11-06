@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Notice = require("../const/Printexplain.js")
+const Notice = require("../const/NoticeMessage.js")
 class App {
   constructor(){
     MissionUtils.Console.print(Notice.START_GAME)
