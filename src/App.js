@@ -41,9 +41,24 @@ class App {
     }
   }
 
+  finish() {
+    this.print(TEXT.FINISH_MESSAGE);
+    this.readLine('', (input) => {
+      if (Number(input) === 1) {
+        this.correctAnswer = false;
+        this.play();
+      } else if (Number(input) === 2) {
+        this.gameClose();
+      } else {
+        this.gameClose(TEXT.ERROR_MESSAGE);
+      }
+    });
+  }
+
   compareResult(message) {
     this.print(message);
     if (this.correctAnswer) {
+      this.finish();
     } else {
       this.gameProgress();
     }
