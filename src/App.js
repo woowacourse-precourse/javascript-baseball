@@ -4,33 +4,13 @@ class App {
   play() {
     PrintGameStartPhrase();
     StartGame();
-
   }
 }
 
-
 // 기능 2 ~ 8 
-async function StartGame() {
+function StartGame() {
   const computerNumber = makeComputerNumber();
-  console.log(computerNumber);
-
-  let isGameEnd = false;
-  while (isGameEnd === false) {
-    const userNumber = await getUserNumber();
-    checkValidityUserNumber(userNumber);
-
-    const checkResult = countBallAndStrike(computerNumber, userNumber);
-
-    const result = printResult(checkResult);
-
-    if (result === "end") {
-      let userChoiceNumber = await reStartOrEnd();
-      console.log(userChoiceNumber);
-
-      isGameEnd = checkUserChoiceNumber(isGameEnd, userChoiceNumber);
-
-    }
-  }
+  getUserNumber(computerNumber);
 }
 
 // 기능 1
@@ -54,18 +34,23 @@ function makeComputerNumber() {
 }
 
 // 기능 3
-function getUserNumber() {
-  let userNumber;
+function getUserNumber(computerNumber) {
 
-  let promise = new Promise((resolve) => {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      resolve(input);
-    });
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
+    checkValidityUserNumber(userNumber);
+
+    const checkResult = countBallAndStrike(computerNumber, userNumber);
+
+    const result = printResult(checkResult);
+    console.log(result);
+
+    if (result === "end") {
+      reStartOrEnd();
+    }
+
+    getUserNumber(computerNumber);
+
   });
-
-  userNumber = promise;
-
-  return userNumber;
 }
 
 // 기능 4
@@ -76,22 +61,22 @@ function checkValidityUserNumber(userNumber) {
   const secondNumber = Number(userNumberList[1]);
   const thirdNumber = Number(userNumberList[2]);
 
-  console.log(firstNumber, secondNumber, thirdNumber);
+  // console.log(firstNumber, secondNumber, thirdNumber);
 
   if (!(userNumberList.length === 3)) {
-    throw Error ("3자리의 숫자를 입력하지 않아 에러가 발생하였습니다.");
+    throw new Error("3자리의 숫자를 입력하지 않아 에러가 발생하였습니다.");
   }
 
   if ((isNaN(firstNumber) == true) || (isNaN(secondNumber) == true) || (isNaN(thirdNumber) == true)) {
-    throw Error ("숫자를 입력하지 않아 에러가 발생하였습니다.");
+    throw new Error("숫자를 입력하지 않아 에러가 발생하였습니다.");
   }
 
   if (!((firstNumber !== secondNumber) && (secondNumber !== thirdNumber) && (thirdNumber !== firstNumber))) {
-    throw Error ("중복되는 숫자가 있어 에러가 발생하였습니다.");
+    throw new Error("중복되는 숫자가 있어 에러가 발생하였습니다.");
   }
 
   if (firstNumber === 0 || secondNumber === 0 || thirdNumber === 0) {
-    throw Error ("1부터 9사이의 숫자가 아닌 0이 포함되어 있어 에러가 발생하였습니다.");
+    throw new Error("1부터 9사이의 숫자가 아닌 0이 포함되어 있어 에러가 발생하였습니다.");
   }
 }
 
@@ -155,36 +140,27 @@ function printResult(checkResult) {
 
 // 기능 7
 function reStartOrEnd() {
-  let userChoiceNumber;
-
-  let promise = new Promise((resolve) => {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
-      resolve(input);
-    });
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userChoiceNumber) => {
+    checkUserChoiceNumber(userChoiceNumber);
   });
 
-  userChoiceNumber = promise;
-
-  return userChoiceNumber;
 }
 
 // 기능 8
-function checkUserChoiceNumber(isGameEnd, userChoiceNumber) {
-
-  isGameEnd = true;
+function checkUserChoiceNumber(userChoiceNumber) {
 
   if (userChoiceNumber === '1') {
     StartGame();
-    return isGameEnd;
+    return;
   }
   
   if (userChoiceNumber === '2') {
     MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
     MissionUtils.Console.close();
-    return isGameEnd;
+    return;
   }
 
-  throw Error ("잘못된 값을 입력하여 에러가 발생하였습니다.");
+  throw new Error("잘못된 값을 입력하여 에러가 발생하였습니다.");
 }
 
 const baseballGame = new App();
