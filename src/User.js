@@ -44,7 +44,7 @@ class User extends Mission {
   compareNumbers(userNumbers) {
     const compare = new Compare(this.computerNumbers, userNumbers);
     if (compare.getResult() === true) {
-      this.selectStartOrExit();
+      this.selectRestartOrExit();
       return;
     }
 
@@ -52,16 +52,16 @@ class User extends Mission {
     return;
   }
 
-  selectStartOrExit() {
+  selectRestartOrExit() {
     this.mission.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        this.checkAnswer(answer);
+        this.checkRestartOrExit(answer);
       }
     );
   }
 
-  checkAnswer(answer) {
+  checkRestartOrExit(answer) {
     if (answer === '1') {
       this.gameRestart();
       return;
