@@ -16,10 +16,12 @@ class App {
     this.#computerNumber = "";
     this.getScore = [];
   }
+
   // 게임 시작 출력
   printStart() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
+
   // 플레이어 3개의 숫자 입력
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
@@ -34,16 +36,18 @@ class App {
     });
     this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
   }
+
   // 컴퓨터 랜덤 숫자 생성
   makeComputerRandomNumbers() {
     this.#computerNumber = [...this.#computerNumber];
-    while (this.#randomNumber.length < 3) {
+    while (this.#computerNumber.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
-      if (!this.#randomNumber.includes(number))
-        this.#randomNumber += `${number}`;
+      if (!this.#computerNumber.includes(number))
+        this.#computerNumber += `${number}`;
     }
-    this.#randomNumber = [...this.#randomNumber];
+    this.#computerNumber = [...this.#computerNumber];
   }
+
   // 결과 출력
   printResult() {
     const { ball, strike } = this.getScore;
@@ -57,11 +61,32 @@ class App {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     else this.getUserInput();
   }
+
+  // 재시작
+  restart() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => {
+        if (input === "1") {
+          this.#computerNumber = "";
+          this.gameStart();
+          return;
+        }
+        if (input === "2") {
+          Console.print("게임 종료");
+          return;
+        }
+        throw new Error("잘못된 값을 입력하셨습니다.");
+      }
+    );
+  }
+
   // 게임 시작 - 랜덤 숫자 생성, 플레이어 숫자 입력
   gameStart() {
     this.makeComputerRandomNumbers();
     this.getUserInput();
   }
+
   // 플레이 - 시작문 출력, 게임 시작
   play() {
     this.printStart();
