@@ -7,6 +7,9 @@ const GAME_OVER = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 const REPLAY = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
 
 class App {
+    constructor() {
+        this.answer = this.setAnswer();
+    }
     setAnswer() {
         let answer = new Set();
         while (answer.size < 3) {
@@ -15,28 +18,27 @@ class App {
         return [...answer].join('');
     }
     play() {
-        const answer = this.setAnswer();
         MissionUtils.Console.print(GAME_START);
-        this.process(answer);
+        this.process();
     }
-    process(answer) {
+    process() {
         MissionUtils.Console.readLine('숫자를 입력하세요.', (number) => {
             this.verification(number, 1);
-            const comment = this.match(number, answer);
+            const comment = this.match(number);
             MissionUtils.Console.print(comment);
             if (comment === THREE_STRIKE) {
                 MissionUtils.Console.print(GAME_OVER);
                 this.replay();
             } else {
-                this.process(answer);
+                this.process();
             }
         });
     }
     replay() {
         MissionUtils.Console.readLine(REPLAY, (number) => {
             if (number === '1') {
-                const newAnswer = this.setAnswer();
-                this.process(newAnswer);
+                this.answer = this.setAnswer();
+                this.process();
             } else if (number === '2') {
                 MissionUtils.Console.close();
             } else {
@@ -44,12 +46,12 @@ class App {
             }
         });
     }
-    match(number, answer) {
+    match(number) {
         let ball = 0;
         let strike = 0;
 
-        for (let index = 0; index < answer.length; index++) {
-            const check = number.indexOf(answer[index]);
+        for (let index = 0; index < this.answer.length; index++) {
+            const check = number.indexOf(this.answer[index]);
             // 분리할것!
             if (check > -1) {
                 if (check === index) {
