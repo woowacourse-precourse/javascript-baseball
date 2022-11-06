@@ -35,7 +35,7 @@
 
 ## 구현 방법
 
-<img src="https://imgur.com/egsbK17" />
+<img src="https://imgur.com/egsbK17.png" />
 
 - App 클래스의 인스턴스 멤버 변수로 computer, user, game을 정의했고 각각은 Computer, User, Game 클래스의 인스턴스가 할당(바인딩) 되어있다.
 
