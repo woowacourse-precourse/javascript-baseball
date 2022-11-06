@@ -7,3 +7,10 @@
 - 0번 째 index 1번 째 index
 - 1번 째 index 2번 째 index
 - 0번 째 index 2번 째 index
+
+```
+  isDuplicated = str => {
+  // 문자열 길이와 str 안의 값을 new Set(str)로 넣어서 사이즈가 다르면 중복
+  return str.length !== new Set(str).size;
+  };
+```
