@@ -28,9 +28,9 @@ class App {
   }
 
   inputCheck(inputNumber) {
-    if (inputNumber.length !== 3) throw new Error();
+    if (inputNumber.length !== 3) throw new Error("정해진 값을 입력해주세요.");
     const INPUT_ARRAY = inputNumber.split("").map((x) => {
-      if (Number.isNaN(x)) throw new Error();
+      if (Number.isNaN(x)) throw new Error("정해진 값을 입력해주세요.");
       return parseInt(x, 10);
     });
     return this.compare(INPUT_ARRAY);
@@ -38,21 +38,21 @@ class App {
 
   compare(numberArr) {
     const ANSWER_ARRAY = this.answer;
-    let ball = 0;
-    let strike = 0;
+    this.ball = 0;
+    this.strike = 0;
     numberArr.map((number, index) => {
-      if (ANSWER_ARRAY.includes(number)) {
-        if (number === ANSWER_ARRAY[index]) strike += 1;
-        if (number !== ANSWER_ARRAY[index]) ball += 1;
-      }
+      if (ANSWER_ARRAY.includes(number) && number === ANSWER_ARRAY[index])
+        this.strike += 1;
+      if (ANSWER_ARRAY.includes(number) && number !== ANSWER_ARRAY[index])
+        this.ball += 1;
     });
-    return this.compareResult(ball, strike);
+    return this.compareResult();
   }
 
-  compareResult(ball, strike) {
+  compareResult() {
     let resultText = "";
-    if (ball !== 0) resultText += `${ball}볼 `;
-    if (strike !== 0) resultText += `${strike}스트라이크`;
+    if (this.ball !== 0) resultText += `${this.ball}볼 `;
+    if (this.strike !== 0) resultText += `${this.strike}스트라이크`;
     if (resultText === "") resultText += `낫싱`;
     Console.print(resultText);
     const RESULT = resultText === "3스트라이크";
@@ -62,7 +62,7 @@ class App {
   judgeResult(threeStrike) {
     if (threeStrike) return this.endingOption();
     if (!threeStrike) return this.enterNumber();
-    throw new Error();
+    throw new Error("정해진 값을 입력해주세요.");
   }
 
   endingOption() {
@@ -70,12 +70,9 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
-        if (input === "1") {
-          return this.play();
-        }
-        if (input === "2") process.exit();
-        if (input < 1 || input > 2 || Number.isNaN(input))
-          throw new Error("정해진 값을 입력해주세요.");
+        if (input === "1") return this.play();
+        if (input === "2") return process.exit();
+        throw new Error("정해진 값을 입력해주세요.");
       }
     );
   }
