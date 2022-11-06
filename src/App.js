@@ -3,6 +3,13 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {}
 
+  playNewGame() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (value) => {
+      //TODO - 입력한 값이 유효한지 확인하는 기능
+      return value;
+    });
+  }
+
   printGameStartMessgae(){
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -33,12 +40,7 @@ class App {
     return Number(number.join(""));
   }
 
-  readUserInputValue() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (value) => {
-      //TODO - 입력한 값이 유효한지 확인하는 기능
-      return value;
-    });
-  }
+
 
   isValidInputValueInGame(inputValue){
     if(inputValue === undefined){return false;}
