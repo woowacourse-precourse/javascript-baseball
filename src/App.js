@@ -10,6 +10,8 @@ class App {
 
   #message;
 
+  #score;
+
   constructor() {
     this.#nbrOfComputer = [];
     this.#nbrOfTryGuess = [];
@@ -20,6 +22,7 @@ class App {
       ASK_RESTART_OR_QUIT:
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
     };
+    this.#score = { ballCount: 0, strikeCount: 0, isNothing: false };
   }
 
   play() {
@@ -46,21 +49,34 @@ class App {
 
   #tryGuess() {
     readLine(this.#message.ASK_TRY_GUESS, (answer) => {
-      this.#setNbrOfTryGuess(answer);
-
-      const score = calculateScore(this.#nbrOfComputer, this.#nbrOfTryGuess);
-      scoreToJudgeMessageMap.setProperty({ ...score });
-      print(scoreToJudgeMessageMap.getJudgeMessage());
-
-      if (scoreToJudgeMessageMap.strikeCount === 3) this.#gameClear();
-      else this.#tryGuess();
+      this.#judge(answer);
     });
+  }
+
+  #judge(answer) {
+    this.#setScore(answer);
+
+    scoreToJudgeMessageMap.setProperty({ ...this.#score });
+    print(scoreToJudgeMessageMap.getJudgeMessage());
+
+    if (this.#isThreeStrike()) this.#gameClear();
+    else this.#tryGuess();
+  }
+
+  #setScore(answer) {
+    this.#setNbrOfTryGuess(answer);
+
+    this.#score = calculateScore(this.#nbrOfComputer, this.#nbrOfTryGuess);
   }
 
   #setNbrOfTryGuess(answer) {
     checkGuessInput(answer);
 
     this.#nbrOfTryGuess = answer.split("").map((nbr) => parseInt(nbr, 10));
+  }
+
+  #isThreeStrike() {
+    return this.#score.strikeCount === 3;
   }
 
   #gameClear() {
@@ -79,6 +95,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();

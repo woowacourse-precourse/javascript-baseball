@@ -10,6 +10,7 @@ module.exports = {
     ecmaVersion: "latest",
   },
   rules: {
+    "max-depth": ["error", 2],
     "prettier/prettier": [
       "error",
       {
