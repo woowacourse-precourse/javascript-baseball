@@ -116,7 +116,7 @@ class App {
           return;
         }
         if (answer === "2") {
-          MissionUtils.Console.close();
+          this.gameExit();
           return;
         }
         throw new Error();
@@ -130,6 +130,10 @@ class App {
 
   takeInput(message, callbackFn) {
     MissionUtils.Console.readLine(message, callbackFn);
+  }
+
+  gameExit() {
+    MissionUtils.Console.close();
   }
 }
 
