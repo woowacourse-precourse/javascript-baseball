@@ -216,3 +216,46 @@ describe('게임 종료 문구 출력', () => {
     );
   });
 });
+
+describe('게임 재시작 여부 입력', () => {
+  test('게임 재시작 여부 입력', () => {
+    const spy = jest.spyOn(MissionUtils.Console, 'readLine');
+
+    const app = new App();
+    app.getNewGame();
+
+    expect(spy).toHaveBeenCalledWith(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      expect.any(Function),
+    );
+  });
+});
+
+describe('게임 재시작 여부 검증', () => {
+  test('잘못된 입력', () => {
+    const app = new App();
+    app.newGame = '3';
+
+    expect(() => {
+      app.checkNewGame();
+    }).toThrowError('잘못된 입력입니다.');
+  });
+
+  test('게임 재시작', () => {
+    const app = new App();
+    app.newGame = '1';
+
+    expect(() => {
+      app.checkNewGame();
+    }).not.toThrow();
+  });
+
+  test('게임 종료', () => {
+    const app = new App();
+    app.newGame = '2';
+
+    expect(() => {
+      app.checkNewGame();
+    }).not.toThrow();
+  });
+});
