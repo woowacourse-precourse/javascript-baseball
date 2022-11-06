@@ -20,9 +20,9 @@ class App {
     process() {
         MissionUtils.Console.readLine(constant.INPUT_QUESTIONS, (number) => {
             this.verification(number, 1);
-            const comment = this.match(number);
-            MissionUtils.Console.print(comment);
-            if (comment === constant.THREE_STRIKE) {
+            const judgement = this.judge(number);
+            MissionUtils.Console.print(judgement);
+            if (judgement === constant.THREE_STRIKE) {
                 MissionUtils.Console.print(constant.GAME_OVER);
                 this.replay();
             } else {
@@ -42,7 +42,7 @@ class App {
             }
         });
     }
-    match(number) {
+    judge(number) {
         let ball = 0;
         let strike = 0;
 
