@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { createRandomNumber } = require('../computer/computer');
-const { NUMBER_LENGTH } = require('../constant/constant');
+const { NUMBER_LENGTH, GAME_MESSAGE } = require('../constant/constant');
 const inputValidator = require('../input/validator');
 const Calculator = require('./Calculator');
 
@@ -17,7 +17,7 @@ class BaseballGame {
   }
 
   printStartMessage() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(GAME_MESSAGE.start);
   }
 
   getResult(input) {
@@ -36,13 +36,11 @@ class BaseballGame {
   }
 
   printResult(ball, strike) {
-    if (!ball && !strike) return Console.print('낫싱');
+    if (!ball && !strike) return Console.print(GAME_MESSAGE.nothing);
 
     if (strike === NUMBER_LENGTH) {
       this.isCorrect = true;
-      return Console.print(
-        `${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
-      );
+      return Console.print(`${strike}스트라이크`);
     }
 
     return Console.print(`${ball}볼 ${strike}스트라이크`);
@@ -50,7 +48,7 @@ class BaseballGame {
 
   startGame() {
     while (!this.isCorrect) {
-      Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      Console.readLine(GAME_MESSAGE.input, (input) => {
         this.getResult(input);
       });
     }
