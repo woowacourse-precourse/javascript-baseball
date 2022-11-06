@@ -3,6 +3,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const { Random, Console } = MissionUtils;
 const STRIKE = 1;
 const BALL = 0;
+const END = '2';
+
 class App {
   play() {}
 
@@ -55,6 +57,24 @@ class App {
   isFinish(score) {
     if (score[STRIKE] === 3) return true;
     return false;
+  }
+
+  replayOrQuit() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+      (input) => {
+        if (input === END) {
+          this.quitGame();
+        } else {
+          this.play();
+        }
+      },
+    );
+  }
+
+  quitGame() {
+    Console.close();
   }
 }
 
