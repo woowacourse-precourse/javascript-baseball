@@ -73,9 +73,23 @@ class App {
     } while (!this.isGameOver());
   }
 
-  play() {
+  askNewGame() {
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (userInput) => {
+          resolve(userInput);
+        }
+      );
+    });
+  }
+
+  async play() {
     this.generateThreeDigits();
     this.runUntilGameOver();
+    if ((await this.askNewGame()) === "1") {
+      return this.play();
+    }
   }
 }
 
