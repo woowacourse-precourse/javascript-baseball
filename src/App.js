@@ -9,7 +9,7 @@ const GAME = {
 const ment = {
   start: "숫자 야구 게임을 시작합니다.",
   end: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  reStart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  reStart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
   input: "숫자를 입력해주세요 : ",
   ball: "볼",
   strike: "스트라이크",
@@ -23,6 +23,7 @@ class App {
   }
 
   async play() {
+    //todo : 나중에 삭제
     switch (this.game) {
       case GAME.PLAY:
         await this.playGame();
@@ -32,40 +33,20 @@ class App {
         await this.askUser();
         this.play();
         break;
-      case GMAE.EXIT:
-        this.exceptionEnd();
-        break;
+      case GAME.EXIT:
+        MissionUtils.Console.close();
+        return;
     }
-
-    return;
   }
 
   async playGame() {
-    this.game = GAME.PLAY;
     const anwser = this.startGame().createAnswer();
-    while (this.game) {
-      try {
-        await this.inputUserAnswer();
-        if (this.checkUserGameAnswer()) throw new Error("out of range");
-        const result = this.compareUserAnswer(anwser);
-        this.resultPrint(result);
-      } catch (e) {
-        this.exceptionEnd();
-      }
+    while (this.game === GAME.PLAY) {
+      await this.checkUserGameAnswer();
+      const result = this.compareUserAnswer(anwser);
+      this.resultPrint(result);
     }
     return;
-  }
-
-  async askUser() {
-    try {
-      await this.inputUserAnswer();
-      // if (a) throw new Error("out of range");
-      MissionUtils.Console.print("재시작좀 하자 ", this.userAnswer);
-    } catch (e) {
-      this.exceptionEnd();
-    }
-    if (this.isPlayContinue(this.userAnswer)) this.game = gameStatus.play;
-    return this;
   }
 
   createAnswer() {
@@ -85,22 +66,53 @@ class App {
     return this;
   }
 
-  inputUserAnswer() {
+  inputUserAnswer(ment) {
     return new Promise((resolve) => {
-      MissionUtils.Console.readLine(ment.input, (answer) => {
-        this.userAnswer = answer;
+      MissionUtils.Console.readLine(ment, (answer) => {
+        this.userAnswer = parseInt(answer);
         resolve();
       });
     });
   }
 
-  checkUserGameAnswer() {
-    if (this.userAnswer < 100 || this.userAnswer > 999) return true;
-    return false;
+  async checkUserGameAnswer() {
+    try {
+      await this.inputUserAnswer(ment.input);
+      if (this.userAnswer < 100 || this.userAnswer > 999)
+        throw new Error("out of range");
+    } catch (e) {
+      this.exceptionEnd();
+    }
+    return;
+  }
+
+  async isPlayContinue() {
+    try {
+      await this.inputUserAnswer(ment.reStart);
+    } catch (e) {
+      this.exceptionEnd();
+    }
+
+    switch (this.userAnswer) {
+      case 1:
+        return true;
+      case 2:
+        return false;
+      default:
+        this.exceptionEnd();
+    }
+  }
+
+  async askUser() {
+    const result = await this.isPlayContinue();
+
+    if (result) this.game = GAME.PLAY;
+    if (!result) this.game = GAME.EXIT;
+    return;
   }
 
   compareUserAnswer(answer) {
-    const user = this.userAnswer.split("");
+    const user = String(this.userAnswer).split("");
     const obj = { ball: 0, strike: 0 };
     user.map((n, i) => {
       const num = parseInt(n);
@@ -138,28 +150,15 @@ class App {
     return;
   }
 
-  isPlayContinue(answer) {
-    if (answer === "1") return true;
-    if (answer === "2") return false;
-  }
-
-  checkUserProgressInput() {
-    console.log("이게 맞나", this.userAnswer === "1");
-    if (this.userAnswer === "1" || this.userAnswer === "2") return true;
-    return false;
-  }
-
   exceptionEnd() {
     this.game = GAME.EXIT;
     MissionUtils.Console.print(ment.exception);
-    MissionUtils.Console.close();
     return;
   }
 
   endGame() {
     this.game = GAME.STOP;
     MissionUtils.Console.print(ment.end);
-    MissionUtils.Console.close();
     this.play();
     return;
   }
