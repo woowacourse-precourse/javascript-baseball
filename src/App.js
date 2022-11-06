@@ -39,9 +39,7 @@ class App {
   isValidInput(inputNumber) {
     let numberArray = [...inputNumber];
     if (numberArray.length == 0 || numberArray.length != 3) return false;
-    numberArray.forEach(function (ele) {
-      if (isNaN(ele)) return false;
-    });
+    if (!Number(inputNumber)) return false;
     if (numberArray.includes('0')) return false;
     if (
       numberArray[0] == numberArray[1] ||
