@@ -66,7 +66,15 @@ function proceedGame() {
     replay();
   });
 }
+
+function userMessage(strike, ball) {
+  if (strike === 0 && ball === 0) {
+    return Console.print("낫싱");
   }
+  Console.print(ball + "" + "볼 " + strike + "" + "스트라이크");
+  //0개는 출력물로 처리하면 안됨.
+}
+
 
 class App {
   start() {
