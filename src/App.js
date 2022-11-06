@@ -53,6 +53,10 @@ const judgeAnswer = (answer, number) => {
 };
 
 const printJudgeResult = (strike, ball, answer) => {
+  if (strike == 3) {
+    announceEnd();
+  }
+
   if (strike == 0 && ball == 0) {
     MissionUtils.Console.print("낫싱");
     inputNumber(answer);
@@ -63,6 +67,21 @@ const printJudgeResult = (strike, ball, answer) => {
 
   MissionUtils.Console.print(strikeAns + ballAns);
   inputNumber(answer);
+
+  return;
+};
+
+const announceEnd = () => {
+  MissionUtils.Console.print("3스트라이크");
+  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하시려면 1, 종료하려면 2를 눌러주세요:",
+    (number) => {
+      if (number == 1) {
+        startGame();
+      }
+    }
+  );
 
   return;
 };
