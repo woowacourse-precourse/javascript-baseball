@@ -1,4 +1,4 @@
-const { USER_INPUT_LENGTH } = require("./Constant");
+const { REPLAY, CLOSE } = require("./Constant");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const User = require("./User");
@@ -93,9 +93,9 @@ class BaseballGame {
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
       this.exceptionHandler.checkValidInput(answer);
 
-      if (answer == 2) {
+      if (answer == CLOSE) {
         MissionUtils.Console.close();
-      } else if (answer == 1) {
+      } else if (answer == REPLAY) {
         this.replay();
       } else throw new Error();
     });
