@@ -4,15 +4,15 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    const RANDOM_NUMBER = this.GET_RANDOM_NUMBER();
-    this.IN_GAME(RANDOM_NUMBER);
+    let random_number = this.GET_RANDOM_NUMBER();
+    this.IN_GAME(random_number);
   }
 
   GET_RANDOM_NUMBER() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3); //ex - [2,5,6]
   }
 
-  IN_GAME(CORRECT_NUMBER) {
+  IN_GAME(correct_number) {
     let correct = false;
     let user_input_number = null;
 
@@ -26,13 +26,13 @@ class App {
       }
       //제대로 된 값 입력
       if (
-        user_input_number[0] === CORRECT_NUMBER[0] &&
-        user_input_number[1] === CORRECT_NUMBER[1] &&
-        user_input_number[2] === CORRECT_NUMBER[2]
+        user_input_number[0] === correct_number[0] &&
+        user_input_number[1] === correct_number[1] &&
+        user_input_number[2] === correct_number[2]
       ) {
         correct = true;
       } else {
-        this.HINT(user_input_number, CORRECT_NUMBER);
+        this.HINT(user_input_number, correct_number);
       }
     }
   }
