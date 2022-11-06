@@ -31,6 +31,17 @@ class App {
         });
     }
 
+    checkStrikeBalls(quizNumber, input) {
+        let score = { strike: 0, ball: 0 };
+        for (let i = 0; i < 3; i++) {
+            if (quizNumber[i] === input[i]) {
+                score.strike += 1;
+            } else if (quizNumber.indexOf(input[i]) !== -1) {
+                score.ball += 1;
+            }
+        }
+    }
+
     play() {
         this.MakeQuizNumber();
         this.InputNumber();
