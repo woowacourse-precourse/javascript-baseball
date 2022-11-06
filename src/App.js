@@ -16,6 +16,12 @@ class App {
 
     return NUMBER;
   }
+
+  playerInput() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.compareNumber(input);
+    })
+  }
 }
 
 module.exports = App;
