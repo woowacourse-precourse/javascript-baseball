@@ -71,8 +71,10 @@ describe("숫자 야구 게임", () => {
     const messages = [
       "낫싱",
       "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
       "1볼 1스트라이크",
       "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
       "게임 종료",
     ];
 
@@ -84,6 +86,23 @@ describe("숫자 야구 게임", () => {
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("볼 === 0이고 스트라이크 !== 0인 경우 볼 표시하지 않음", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["169", "135", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["볼"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+    
+    messages.forEach((output) => {
+      expect(logSpy).not.toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 
