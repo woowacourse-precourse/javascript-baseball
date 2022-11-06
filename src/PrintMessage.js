@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 function printGameStart() {
-    const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
+    const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.\n";
     MissionUtils.Console.print(GAME_START_MESSAGE);
 }
 
@@ -11,6 +11,11 @@ function printUserInput() {
         console.log(` : ${userInputNum}`);
     });
     return userInputNum;
+}
+
+function printGameWin() {
+    const GAME_WIN_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n";
+    MissionUtils.Console.print(GAME_WIN_MESSAGE);
 }
 
 module.exports.printGameStart = printGameStart;

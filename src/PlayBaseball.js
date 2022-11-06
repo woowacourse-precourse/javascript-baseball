@@ -6,8 +6,9 @@ function playBaseballGame() {
     console.log(computerNum);
     let isGamePlaying = true;
     while(isGamePlaying) {
-        let userNum;
+        let userNum, numOfStrike = 0;
         userNum = printMessage.printUserInput();
+        numOfStrike = getNumOfStrike(computerNum, userNum);
     }
 }
 
