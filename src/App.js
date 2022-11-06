@@ -20,6 +20,17 @@ class App {
     return true;
   }
   
+  checkUniqueNumber(number) {
+    const splitNumber = number.split("");
+    const uniqueNumber = [...new Set(splitNumber)];
+
+    if (uniqueNumber.length !== 3) {
+      return false;
+    }
+
+    return true;
+  }
+
   checkCorrectNumber(number) {
 
     if (!this.checkThreeLength(number)) {
