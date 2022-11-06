@@ -18,17 +18,17 @@ class App {
     }
 
     startGame() {
-        this.isComputerNumbers();
+        this.initComputerNumbers();
         this.isUserNumbers();
     }
 
-    isComputerNumbers() {
-        const COMPUTER_NUMBERS = [];
-        while (COMPUTER_NUMBERS.length < MAX_SIZE) {
-            const RANDOM_NUMBER = Random.pickNumberInRange(START_NUMBER, END_NUMBER);
-            if (!COMPUTER_NUMBERS.includes(RANDOM_NUMBER)) COMPUTER_NUMBERS.push(RANDOM_NUMBER);
+    initComputerNumbers() {
+        const tempNumbers = [];
+        while (tempNumbers.length < MAX_SIZE) {
+            const randomNumber = Random.pickNumberInRange(START_NUMBER, END_NUMBER);
+            if (!tempNumbers.includes(randomNumber)) tempNumbers.push(randomNumber);
         }
-        return parseInt(COMPUTER_NUMBERS.join(''));
+        return parseInt(tempNumbers.join(''));
     }
 
     isUserNumbers(computerNumbers) {
