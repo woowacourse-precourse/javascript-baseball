@@ -53,6 +53,8 @@ class App {
   decideCount(computerCount, userCount) {
     let strikeCount = this.decideStrikeCount(computerCount, userCount);
     let ballCount = this.decideBallCount(computerCount, userCount);
+
+    return { strikeCount, ballCount };
   }
 
   decideStrikeCount(computerCount, userCount) {
