@@ -1,101 +1,68 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require('@woowacourse/mission-utils');
 
-const NUMBER_LENGTH = 3;
+const Computer = require('./Computer');
+
+const COMMAND = {
+  RESTART: 1,
+  QUIT: 2,
+};
 
 class App {
-  constructor() {}
+  play() {
+    this.printGameStart();
+    this.initGame();
+  }
 
   printGameStart() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  setComputerNumber() {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
+  initGame() {
+    this.computer = new Computer();
+    this.run();
+  }
+
+  run() {
+    Console.readLine('숫자를 입력해주세요 : ', input => {
+      const { numberOfStrike, hintString } = this.computer.processInput(input);
+      Console.print(hintString);
+
+      if (numberOfStrike !== 3) {
+        this.run();
+      } else {
+        this.printPlayerWinGame();
+        this.askRestartOrTerminate();
       }
-    }
-    return computer;
-  }
-
-  getNumberFromPlayer() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-        resolve(String(number));
-      });
     });
-  }
-
-  isValid(input) {
-    const trimmedInput = input.trim();
-    const numbers = [...trimmedInput].map((input) => Number(input));
-
-    if (numbers.some((number) => isNaN(number))) {
-      return false;
-    }
-
-    if (numbers.length !== NUMBER_LENGTH) {
-      return false;
-    }
-
-    if (numbers.includes(0)) {
-      return false;
-    }
-
-    if (new Set(numbers).size !== NUMBER_LENGTH) {
-      return false;
-    }
-
-    return true;
-  }
-
-  countBall(computerNumber, playerNumber) {
-    return playerNumber.filter((number, index) => {
-      return (
-        computerNumber[index] !== number && computerNumber.includes(number)
-      );
-    }).length;
-  }
-
-  countStrike(computerNumber, playerNumber) {
-    return playerNumber.filter((number, index) => {
-      return (
-        computerNumber[index] === number && computerNumber.includes(number)
-      );
-    }).length;
-  }
-
-  makeHintString(numberOfBall, numberOfStrike) {
-    const hint = [];
-
-    if (numberOfBall) {
-      hint.push(`${numberOfBall}볼`);
-    }
-    if (numberOfStrike) {
-      hint.push(`${numberOfStrike}스트라이크`);
-    }
-
-    return hint.length ? hint.join(" ") : "낫싱";
   }
 
   printPlayerWinGame() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
   askRestartOrTerminate() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        (number) => {
-          resolve(number);
-        }
-      );
-    });
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      input => {
+        const command = Number(input.trim());
+        this.handleCommand(command);
+      },
+    );
   }
 
-  play() {}
+  handleCommand(command) {
+    if (command === COMMAND.RESTART) {
+      this.initGame();
+    } else if (command === COMMAND.QUIT) {
+      this.quit();
+    } else {
+      throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.');
+    }
+  }
+
+  quit() {
+    Console.close();
+  }
 }
 
 const app = new App();
