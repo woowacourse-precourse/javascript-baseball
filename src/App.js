@@ -9,10 +9,15 @@ function numToArr(num) {
 class App {
   constructor() {
     this.computer = Computer();
+    this.firstTry = true;
   }
 
   play() {
     const render = new Render();
+
+    if (this.firstTry === true) {
+      render.startment();
+    }
 
     render.getUser().then((num) => {
       this.num = numToArr(num);
@@ -39,6 +44,7 @@ class App {
       render.result({ ballCount: this.ball, strikeCount: this.strikeCount });
 
       if (this.strikeCount !== 3) {
+        this.firstTry = false;
         this.play();
       }
       if (this.strikeCount === 3) {
@@ -52,7 +58,6 @@ class App {
           }
 
           if (this.replayQnAResult === "1") {
-            this.computer = Computer();
             this.play();
           }
 
