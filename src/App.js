@@ -104,7 +104,7 @@ class App {
       return Number(element)
     });
     let userNumberArray = [];
-    
+    console.log(stringUserNumber);
     stringUserNumber.forEach((element) =>{
       if(!userNumberArray.includes(element)){
         userNumberArray.push(Number(element))
