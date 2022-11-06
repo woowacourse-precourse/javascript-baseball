@@ -48,17 +48,25 @@ class App {
     var { ballCount, strikeCount } = this.countBallOrStrike(input);
 
     if (ballCount === 0 && strikeCount === 0) {
-      this.printMsg("낫싱");
-      this.askNumInput();
+      this.isNothing();
     } else if (strikeCount === 3) {
-      this.printMsg("3스트라이크");
-      this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.ANSWER = [];
-      this.askRematchOrExit();
+      this.isThreeStrike();
     } else {
       this.printMsg(`${ballCount}볼 ${strikeCount}스트라이크`);
       this.askNumInput();
     }
+  }
+
+  isNothing() {
+    this.printMsg("낫싱");
+    this.askNumInput();
+  }
+
+  isThreeStrike() {
+    this.printMsg("3스트라이크");
+    this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.ANSWER = [];
+    this.askRematchOrExit();
   }
 
   countBallOrStrike(input) {
