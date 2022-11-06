@@ -22,22 +22,29 @@ class App {
     });
 
     // 입력값 예외 처리
-    //숫자인지 체크
-    // if(isNaN(user)){ 
-    //   throw new Error('에러');
-    //   console.log('숫자가 아님')
-    // }
-    // // 3자리인지 체크
-    // if(user.length != 3){
-    //   throw new Error('에러');
-    //   console.log('3자리가 아님')
-    // }
-    // // 서로 다른 숫자인지 체크
-    // let numberCheck = new Set(user);
-    // if(numberCheck.size != user.length){
-    //   throw new Error('에러');
-    //   console.log('서로 다른 숫자가 아님')
-    // }
+    // 숫자인지 체크
+    if(isNaN(user)){ 
+      throw new Error('에러');
+      console.log('숫자가 아님')
+    }
+    // 3자리인지 체크
+    if(user.length != 3){
+      throw new Error('에러');
+      console.log('3자리가 아님')
+    }
+    // 서로 다른 숫자인지 체크
+    let numberCheck = new Set(user);
+    if(numberCheck.size != user.length){
+      throw new Error('에러');
+      console.log('서로 다른 숫자가 아님')
+    }
+    // 1 ~ 9사이의 숫자인지 체크
+    for (let i = 0; i < 3; i++){
+      if(1 > Number(input[i]) || Number(input[i])>9){
+        throw new Error('에러');
+        console.log('1 ~ 9 사이의 숫자가 아님');
+      }
+    }
 
     // 정답 숫자와 사용자의 입력값 체크
     let result = [0, 0]
@@ -66,6 +73,7 @@ class App {
     }
     MissionUtils.Console.print(answer);
 
+    
   }
 }
 
