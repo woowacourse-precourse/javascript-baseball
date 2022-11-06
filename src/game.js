@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 const { RANDOM_NUMBER, SCORE, GAME } = require('./constants');
 const { MESSAGE } = require('./constants');
 
@@ -19,33 +19,36 @@ class Game {
   }
 
   print(message) {
-    MissionUtils.Console.print(message);
+    return Console.print(message);
   }
 
   generateRandomNumber(min, max, length) {
     this.randomNumbers = [];
 
     while (this.randomNumbers.length < length) {
-      const number = MissionUtils.Random.pickNumberInRange(min, max);
+      const number = Random.pickNumberInRange(min, max);
       if (!this.randomNumbers.includes(number)) {
         this.randomNumbers.push(number);
       }
     }
 
-    console.log(this.randomNumbers);
+    console.log(this.randomNumbers); // ⚠️⚠️⚠️ 삭제 ⚠️⚠️⚠️
 
     return this.randomNumbers;
   }
 
   getAnswer(random) {
-    MissionUtils.Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
+    Console.readLine(MESSAGE.ENTER_NUMBER, (inputs) => {
       const input = inputs.split(' ').join('');
       const inputNumbers = [...input].map(Number);
       const { ball, strike } = this.countScore(inputNumbers, random);
 
       this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
-
       this.printScore(ball, strike);
+
+      if (strike !== 3) {
+        return this.getAnswer(random);
+      }
 
       if (strike === 3) {
         this.isReplay = true;
@@ -53,8 +56,6 @@ class Game {
 
         return this.askPlayAgain();
       }
-
-      return this.getAnswer(random);
     });
   }
 
@@ -92,18 +93,19 @@ class Game {
       score = `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`;
     }
 
-    MissionUtils.Console.print(score);
+    return Console.print(score);
   }
 
   askPlayAgain() {
-    MissionUtils.Console.readLine(MESSAGE.RESTART, (answers) => {
+    Console.readLine(MESSAGE.RESTART, (answers) => {
       const answer = Number(answers.trim());
+
       if (answer === GAME.START) {
         return this.play();
       }
 
       if (answer === GAME.END) {
-        return MissionUtils.Console.close();
+        return Console.close();
       }
 
       throw new Error('1 또는 2를 입력해주세요');
