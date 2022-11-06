@@ -1,4 +1,11 @@
 const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe("기능 목록 테스트", () => {
   test("컴퓨터가 랜덤 숫자 배열을 얻음", () => {
@@ -29,8 +36,10 @@ describe("기능 목록 테스트", () => {
   test("사용자가 입력한 숫자와 컴퓨터의 랜덤 숫자를 비교하여 볼과 스트라이크를 계산", () => {
     const computerInputs = [
       [1, 2, 3],
+      [1, 2, 3],
       [1, 2, 4],
       [1, 4, 5],
+      [2, 4, 5],
       [1, 3, 4],
       [1, 3, 2],
       [1, 3, 4],
@@ -38,6 +47,8 @@ describe("기능 목록 테스트", () => {
     ];
 
     const userInputs = [
+      [4, 5, 6],
+      [1, 2, 3],
       [1, 2, 3],
       [1, 2, 3],
       [1, 2, 3],
@@ -48,9 +59,11 @@ describe("기능 목록 테스트", () => {
     ];
 
     const answers = [
+      { strike: 0, ball: 0 },
       { strike: 3, ball: 0 },
       { strike: 2, ball: 0 },
       { strike: 1, ball: 0 },
+      { strike: 0, ball: 1 },
       { strike: 1, ball: 1 },
       { strike: 1, ball: 2 },
       { strike: 0, ball: 2 },
@@ -63,6 +76,44 @@ describe("기능 목록 테스트", () => {
       const result = app.mark(computer, userInputs[index]);
 
       expect(result).toEqual(answers[index]);
+    });
+  });
+
+  test("볼과 스트라이크의 개수로 사용자에게 결과를 알림", () => {
+    const memos = [
+      { strike: 0, ball: 0 },
+      { strike: 3, ball: 0 },
+      { strike: 2, ball: 0 },
+      { strike: 1, ball: 0 },
+      { strike: 0, ball: 1 },
+      { strike: 1, ball: 1 },
+      { strike: 1, ball: 2 },
+      { strike: 0, ball: 2 },
+      { strike: 0, ball: 3 },
+    ];
+
+    const messages = [
+      "낫싱",
+      "3스트라이크",
+      "2스트라이크",
+      "1스트라이크",
+      "1볼",
+      "1볼 1스트라이크",
+      "2볼 1스트라이크",
+      "2볼",
+      "3볼",
+    ];
+
+    const logSpy = getLogSpy();
+
+    const app = new App();
+
+    memos.forEach((memo) => {
+      app.printResultMessage(memo);
+    });
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 });
