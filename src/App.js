@@ -116,6 +116,12 @@ class App {
     this.play();
   }
 
+
+  error() {
+    this.round = 0;
+    Console.close();
+    throw new Error('잘못된 입력입니다.')
+  }
 }
 
 module.exports = App;
