@@ -1,71 +1,82 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {}
 
-  //build_answer
-  build_answer() {
+  // build_answer
+  buildAnswer() {
     let answer;
-    do{
+    do {
       answer = MissionUtils.Random.pickUniqueNumbersInRange(0, 9, 3);
-      //첫 숫자가 0인경우 재생성
-    }while(answer[0] == 0);
+      // 첫 숫자가 0인경우 재생성
+    } while (answer[0] === 0);
+    this.answer = answer;
     return answer;
   }
-  choice_answer(user_nums) {
-    //숫자이어야함
-    if(!Number.isInteger(user_nums)) {
-      throw 'user_nums가 정수가 아님'
+
+  choiceAnswer(userNums) {
+    // 숫자이어야함
+    if (!Number.isInteger(userNums)) {
+      throw new Error('user_Nums가 정수가 아님');
     }
-    //3자리어야함
-    if(user_nums <= 99 && user_nums >= 1000) {
-      throw 'user_nums가 세자리가 아님'
+    // 3자리어야함
+    if (userNums <= 99 && userNums >= 1000) {
+      throw new Error('userNums가 세자리가 아님');
     }
-    let user_add = []
+    const userSelect = [];
+    let currNum = userNums;
     do {
-      user_add.unshift(user_nums % 10);
-      user_nums = Math.floor(user_nums/10);
-    }while(user_nums != 0);
+      userSelect.unshift(currNum % 10);
+      currNum = Math.floor(currNum / 10);
+    } while (currNum !== 0);
 
-    //중복없어야함
-    let lenght_test = [...new Set(user_add)];
-    if(lenght_test.length < 3){
-      throw '중복 숫자가 존재합니다.'
-    }
-    return user_add;
-  }
-  count_strike(answer, user_select) {
-    let strike = 0 ;
-    for (let i=0; i<3; i++) {
-      if(answer[i] == user_select[i]) {
-        strike = strike + 1;
-      }
-    } 
-    return strike
-  }
-  count_ball(answer, user_select) {
-    let ball = 0 ;
-    for (let i=0; i<3; i++) {
-      let index = user_select.indexOf(answer[i]);
-      if( index!= -1 && index!= i ) {
-        ball = ball + 1;
-      }
-    }
-    return ball
-  }
-  print_hint(strike,ball) {
-    let message = []
-    if(ball >= 1) {
-      message.push(ball+"볼");
-    }
-    if(strike >= 1) {
-      message.push(strike+"스트라이크")
-    }
-    if(message.length == 0) {
-      message.push("낫싱")
+    // 중복없어야함
+    const lenghtTest = [...new Set(userSelect)];
+    if (lenghtTest.length < 3) {
+      throw new Error('중복 숫자가 존재합니다.');
     }
 
-    MissionUtils.Console.print(message.join(" "))
+    this.userSelect = userSelect;
+    return userSelect;
+  }
+
+  countStrike() {
+    let strike = 0;
+    for (let i = 0; i < 3; i += 1) {
+      if (this.answer[i] === this.userSelect[i]) {
+        strike += 1;
+      }
+    }
+
+    this.strike = strike;
+    return strike;
+  }
+
+  countBall() {
+    let ball = 0;
+    for (let i = 0; i < 3; i += 1) {
+      const index = this.userSelect.indexOf(this.answer[i]);
+      if (index !== -1 && index !== i) {
+        ball += 1;
+      }
+    }
+    this.ball = ball;
+    return ball;
+  }
+
+  printHint() {
+    const message = [];
+    if (this.ball >= 1) {
+      message.push(`${this.ball}볼`);
+    }
+    if (this.strike >= 1) {
+      message.push(`${this.strike}스트라이크`);
+    }
+    if (message.length === 0) {
+      message.push('낫싱');
+    }
+
+    MissionUtils.Console.print(message.join(' '));
   }
 }
 
