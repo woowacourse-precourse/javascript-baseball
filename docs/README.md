@@ -1,5 +1,5 @@
 - [X] 게임을 시작한다는 문구 출력
-- [ ] computer는 randomNumber 생성
+- [X] computer는 randomNumber 생성
 - [ ] player는 입력을 받아옴
 - [ ] judge가 입력값이 유효한지 판단
   - [ ] 입력값이 숫자로만 이루어져있는지 확인
