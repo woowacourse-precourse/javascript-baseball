@@ -7,15 +7,14 @@ function getComputerNumbers() {
         if (!computer.includes(number)) computer.push(number);
     }
     console.log(computer)
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     return computer;
 }
 
 function gameProcess() {
-    getComputerNumbers();
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-        countResult(answer);
-    });
+        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+            countResult(answer);
+        });
 }
 
 function countResult(answer) {
@@ -33,14 +32,15 @@ function countResult(answer) {
 function getHint(ball,strike) {
     let hintMessage = '';
 
-    (ball&&strike) ? hintMessage += `${ball}볼 ${strike}스트라이크`
-    : ball ? hintMessage += `${ball}볼`
-    : strike ? hintMessage += `${strike}스트라이크`
-    : hintMessage += `낫싱`
-
-    console.log(hintMessage);
+    (ball&&strike) ? hintMessage = `${ball}볼 ${strike}스트라이크`
+    : ball ? hintMessage = `${ball}볼`
+    : strike ? hintMessage = `${strike}스트라이크`
+    : hintMessage = `낫싱`
     
-    return hintMessage;
+    MissionUtils.Console.print(hintMessage);
+
+    return (strike !== 3) ? gameProcess() : hintMessage;
 }
 
+getComputerNumbers();
 gameProcess();
