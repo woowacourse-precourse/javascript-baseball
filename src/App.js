@@ -1,9 +1,6 @@
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
-
-
-
 // 1. 컴퓨터의 수 3자리 구하기.
 let machineNum = [];
 while (machineNum.length < 3) {
@@ -74,14 +71,31 @@ class App {
       }
     });
   }
+  // 5. 사용자가 잘못된 값을 입력한 경우 `throw`문을 사용해 예외를 발생시킨후 애플리케이션은 종료되어야 한다.
+  exception(inputNum) {
+    for (let i = 0; i < inputNum.length; i++) {
+      if (inputNum[i] === 0) {
+        throw 'never input 0';
+      }
+    }
+    if (inputNum.length !== 3) {
+      throw 'You have to input 3 length';
+    }
+    if (inputNum[0] === inputNum[1] || inputNum[0] === inputNum[1] || inputNum[1] === inputNum[2]) {
+      throw 'Input diffrent numbers!'
+    }
+  }
+
   //게임을 시작합니다를 프린트 하지 않기위한 play 함수
   newplay() {
+    console.log(this._arr);
     // 2. 게임 플레이어는 컴퓨터가 생각하고 있는 서로 다른 3개의 숫자를 입력
     MissionUtils.Console.readLine('서로 다른 숫자를 3개 입력하시오.', (answer) => {
       const num = answer;
-      for (let i = 0; this.inputNum.length < 3; i++) {
-        this.inputNum.push(parseInt(num[i]));
+      for (let i = 0; this.inputNum.length < num.length; i++) {
+        this.inputNum.push(num[i]);
       }
+      this.exception(this.inputNum);
       const strike = this.checkStrike(this._arr);
       const ball = this.checkball(this._arr);
       if (strike === 3) {
