@@ -70,12 +70,12 @@ class App {
   }
 
   return_hint(input, answer) {
-    const [strike, ball] = this.compare_and_count_strike_ball(input, answer);
-    if (ball === 0 && strike === 0) return '낫싱';
-    else if (strike === 3) return '3스트라이크';
-    else if (strike === 0) return `${ball}볼`;
-    else if (ball === 0) return `${strike}스트라이크`;
-    return `${ball}볼 ${strike}스트라이크`;
+    const [STRIKE, BALL] = this.compare_and_count_strike_ball(input, answer);
+    if (BALL === 0 && STRIKE === 0) return '낫싱';
+    else if (STRIKE === 3) return '3스트라이크';
+    else if (STRIKE === 0) return `${BALL}볼`;
+    else if (BALL === 0) return `${STRIKE}스트라이크`;
+    return `${BALL}볼 ${STRIKE}스트라이크`;
   }
 
   receive_restart_input() {
