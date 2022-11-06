@@ -10,7 +10,8 @@ class App {
   }
   start(){
     MissionUtils.Console.readLine(Notice.INPUT_NUM,(input) => {
-      
+      this.exceptionThrow(input)
+
     });
   }
   generateRandomnumber(){
@@ -22,6 +23,21 @@ class App {
         }
       }
       return [...Randomnumber].join("");
+  }
+  exceptionThrow(num){
+    if (num.length !=3){
+      throw Notice.THROW_NOTICE
+    }
+    else if(num.match(/0/)){
+      throw Notice.THROW_NOTICE
+    }
+    else if (num.match(/D/)){
+      throw Notice.THROW_NOTICE
+    }
+    else if (new Set(num).size!=3){
+      throw Notice.THROW_NOTICE
+    }
+    return true
   }
 }
 
