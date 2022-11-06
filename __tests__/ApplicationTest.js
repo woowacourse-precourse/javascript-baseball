@@ -90,4 +90,14 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("makeUserInputNumber 예외 테스트", () => {
+    const answers = ["1234"];
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.makeUserInputNumber();
+    }).toThrow("세자리 숫자가 아닙니다!");
+  });
 });
