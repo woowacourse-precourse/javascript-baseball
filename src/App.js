@@ -71,8 +71,8 @@ class App {
     }, initialCounter);
   }
 
-  getResultMessage({ strike, ball }) {
-    const messageMap = [
+  createMessageOrder = ({ strike, ball }) => {
+    return [
       {
         type: this.BALL,
         count: ball,
@@ -82,17 +82,20 @@ class App {
         count: strike,
       },
     ];
-    const resultMessages = messageMap.reduce((messages, { type, count }) => {
-      if (count > 0) {
-        messages.push(`${count}${type}`);
-      }
-      return messages;
-    }, []);
+  };
 
-    if (resultMessages.length === 0) {
+  getResultMessage({ strike, ball }) {
+    if (strike === 0 && ball === 0) {
       return this.NOTHING;
     }
-    return resultMessages.join(" ");
+    return this.createMessageOrder({ strike, ball })
+      .reduce((messages, { type, count }) => {
+        if (count > 0) {
+          messages.push(`${count}${type}`);
+        }
+        return messages;
+      }, [])
+      .join(" ");
   }
 
   gameStart() {
