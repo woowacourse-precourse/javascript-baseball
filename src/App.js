@@ -35,23 +35,27 @@ class Computer {
       ball -= 1;
     }
 
-    return [strike, ball];
+    return [ball, strike];
   }
 }
 
 class GameLoop {
-  constructor() {
-    this.Opponent = new Computer();
-    this.gameOver = false;
-    this.displayWelcomeMessage();
-  }
-
-  displayWelcomeMessage() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-  }
+  constructor() {}
 
   start() {
-    this._continue();
+    let Opponent = new Computer();
+    let gameOver = false;
+
+    while (!this.gameOver) {
+      let message = MissionUtils.Console.readLine(
+        "숫자를 입력해주세요 : ",
+        this._validate
+      );
+      let [ball, strike] = Opponent.judge(message);
+      this.gameOver = this._respond(ball, strike);
+    }
+
+    this.restart();
   }
 
   restart() {
@@ -63,21 +67,10 @@ class GameLoop {
         }
       }
     );
+
     if (gameEnd === "1") {
       this.start();
     }
-  }
-
-  _continue() {
-    while (!this.gameOver) {
-      let message = MissionUtils.Console.readLine(
-        "숫자를 입력해주세요 : ",
-        this._validate
-      );
-      this.gameOver = this._respond(message);
-    }
-
-    this.restart();
   }
 
   _validate(message) {
