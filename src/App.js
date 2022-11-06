@@ -19,22 +19,25 @@ class App {
 
   play() {
     Console.print(MESSAGE.START);
+
     this.start();
   }
 
   start() {
     this.state.answer = this.computer.getThreeUniqueNumbers();
+
     this.input();
   }
 
   input() {
     Console.readLine(MESSAGE.INPUT, (inputValue) => {
-      this.state.inputValue = inputValue;
+      const isInputValueValid = this.validator.checkInputValueValid(inputValue);
 
-      const isInputValueValid = this.validator.checkInputValueValid(
-        this.state.inputValue
-      );
-      if (isInputValueValid === false) return this.error();
+      if (isInputValueValid === false) {
+        return this.error();
+      }
+
+      this.state.inputValue = inputValue;
 
       this.match();
     });
@@ -45,6 +48,7 @@ class App {
       this.state.inputValue,
       this.state.answer
     );
+
     Console.print(hint);
 
     if (this.state.inputValue === this.state.answer) {

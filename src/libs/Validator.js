@@ -23,7 +23,7 @@ class Validator {
   }
 
   checkInputValueDupicated(inputValue) {
-    return inputValue.length === new Set([...inputValue.split("")]).size;
+    return inputValue.length === new Set([...inputValue]).size;
   }
 }
 
