@@ -14,8 +14,12 @@ class App {
     }
     MissionUtils.Console.print(computer);
       
-    MissionUtils.Console.readLine("숫자를 입력하세요 : ", function(x) {
-      console.log(x);
+    MissionUtils.Console.readLine("숫자를 입력하세요 : ", function(input) {
+      if (isNaN(input) || input.length != 3){
+        throw new Error("3자리 숫자를 입력하세요");
+      }
+      
+      MissionUtils.Console.print("성공");
     });
 
   }
