@@ -52,6 +52,8 @@ class App {
       this.askNumInput();
     } else if (strikeCount === 3) {
       this.printMsg("3스트라이크");
+      this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.ANSWER = [];
       this.askRematchOrExit();
     } else {
       this.printMsg(`${ballCount}볼 ${strikeCount}스트라이크`);
@@ -84,7 +86,7 @@ class App {
             this.play();
             break;
           case "2":
-            this.printMsg("게임을 종료합니다.");
+            this.printMsg("게임 종료");
             MissionUtils.Console.close();
             break;
           default:
@@ -113,5 +115,7 @@ class App {
     return true;
   }
 }
+const app = new App();
+app.play();
 
 module.exports = App;
