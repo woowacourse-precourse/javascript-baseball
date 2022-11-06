@@ -55,6 +55,26 @@ class Game {
     return strike === 3;
   }
 
+  askReplay () {
+    this.io.input('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', this.decideReplay.bind(this));
+  }
+
+  decideReplay (input) {
+    if(input === '1') {
+      this.replay();
+    } else if(input === '2') {
+      this.exit();
+    } 
+    throw new Error('잘못된 입력입니다.');
+  }
+
+  replay () {
+    this.playCommand();
+  }
+  
+  exit () {
+    this.io.close(); 
+  }
 }
 
 module.exports = Game;
