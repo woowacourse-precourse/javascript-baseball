@@ -24,6 +24,19 @@ class Message {
   static throwError() {
     throw new Error(ERROR_MESSAGE);
   }
+
+  static printResult(ballCount, strikeCount) {
+    if (ballCount === 0 && strikeCount === 0) {
+      return Console.print(NOTHING);
+    }
+    if (ballCount === 0) {
+      return Console.print(`${strikeCount}${STRIKE}`);
+    }
+    if (strikeCount === 0) {
+      return Console.print(`${ballCount}${BALL}`);
+    }
+    Console.print(`${ballCount}${BALL} ${strikeCount}${STRIKE}`);
+  }
 }
 
 module.exports = Message;
