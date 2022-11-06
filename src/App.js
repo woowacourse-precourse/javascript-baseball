@@ -71,7 +71,7 @@ class App {
   }
   //아래에서 부터는 유저 시나리오와 관련된 로직
   init() {
-    this.answer = this.generateNumbers();
+    this.answer = this.generateAnswer();
     this.utils.Console.print("숫자 야구 게임을 시작합니다.");
   }
   input() {
@@ -115,3 +115,6 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
