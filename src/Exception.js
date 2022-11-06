@@ -31,9 +31,9 @@ class Exception {
         if (input !== '1' && input !== '2') throw new Error();
     }
     isNumber(input) {
-        const regex = /[^0-9]g/;
-
-        if (!regex.test(input)) throw new Error();
+        [...input].forEach((num) => {
+            if (isNaN(+num)) throw new Error();
+        });
     }
 }
 
