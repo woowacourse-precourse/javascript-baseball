@@ -17,7 +17,7 @@ class Game {
             if (number !== computersNumber[idx] && computersNumber.includes(number)) howManyBall++;
         });
 
-        return this.resultMessage(howManyStrike, howManyBall);
+        return [howManyStrike, howManyBall];
     }
     
     // 입력된 숫자 대조 결과 출력
@@ -35,9 +35,11 @@ class Game {
             console.log(usersNumber);
 
             // 볼 스트라이크 갯수 구하기, resultMessage함수 결과 출력
-            this.getStrikeAndBall(this.computersNumber, usersNumber);
+            const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
+            this.resultMessage(howManyStrike, howManyBall);
             
-
+            if (howManyStrike !== 3) this.playGame();
+            
             
             return ;
         });
