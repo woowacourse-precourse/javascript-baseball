@@ -34,6 +34,7 @@ class App {
 
   compareNumber(userNumbers, computerNumbers) {
     const ball = this.countBall(userNumbers, computerNumbers);
+    const strike = this.countStrike(userNumbers, computerNumbers);
   }
 
   createComputerNumber() {
@@ -58,6 +59,18 @@ class App {
         count += 1;
       }
     });
+
+    return count;
+  }
+
+  countStrike(userNumbers, computerNumbers) {
+    let count = 0;
+
+    for (let i = 0; i < userNumbers.length; i++) {
+      if (userNumbers[i] === computerNumbers[i]) {
+        count += 1;
+      }
+    }
 
     return count;
   }
