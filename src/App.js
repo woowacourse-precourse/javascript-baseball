@@ -46,7 +46,7 @@ class App {
 
   isError(user, computer) {
     if (user.length !== 3 || isNaN(user)) {
-      throw "Parameter is not a number!";
+      throw "3자리 숫자를 입력해주세요.";
     }
 
     this.countScore(computer, user);
