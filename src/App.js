@@ -49,6 +49,20 @@ class App {
       charList.reduce((acc, cur) => acc === cur)
     );
   }
+
+  decideCount(computerCount, userCount) {
+    let strikeCount = this.decideStrikeCount(computerCount, userCount);
+  }
+
+  decideStrikeCount(computerCount, userCount) {
+    let count = 0;
+    for (let i = 0; i < computerCount.length; i++) {
+      if (computerCount[i] === userCount[i]) {
+        count++;
+      }
+    }
+    return count;
+  }
 }
 
 module.exports = App;
