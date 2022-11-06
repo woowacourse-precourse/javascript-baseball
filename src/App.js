@@ -35,7 +35,7 @@ class App {
 
       const gameJudgment = new GameJudgment({
         user: this.userNum,
-        computerInput: this.computerInput,
+        computer: this.computerInput,
       });
 
       const [ballCount, strikeCount] = gameJudgment.judgement();
