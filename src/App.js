@@ -12,7 +12,27 @@ class App {
         computer_arr.push(randomNumber);
       }
     }
+
     this.computer_number = computer_arr.join('');
+  }
+  getUserNumber() {
+    Console.readLine('숫자를 입력해주세요 : ', input => {
+      const repeatInput = [...new Set(input)];
+      if (
+        input > 0 &&
+        !input.includes(0) &&
+        !isNaN(input) &&
+        String(input).length === 3 &&
+        repeatInput.length === 3
+      ) {
+        this.user_number = input;
+
+        //compare numbers
+        this.compareNumbers(this.computer_number, this.user_number);
+      } else {
+        throw new Error('잘못된 입력입니다.');
+      }
+    });
   }
   play() {}
 }
