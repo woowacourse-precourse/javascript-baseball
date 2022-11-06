@@ -73,7 +73,19 @@ class App {
     return this.userInput(computer);
   }
 
-  selectReplay() {}
+  selectReplay() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (answer === "1") return this.play();
+        if (answer === "2") {
+          Console.close();
+          return;
+        }
+        throw "올바르지 않은 입력값 입니다.";
+      }
+    );
+  }
 }
 
 const app = new App();
