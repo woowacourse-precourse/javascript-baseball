@@ -62,11 +62,11 @@ class App {
   showResult(strike, ball) {
     if (strike === 0 && ball === 0) return RESULT.NOTHING;
     if (strike === 3) {
-      return `${strike}` + RESULT.STRIKE + `\n` + RESULT.GAME_END;
+      return `${strike} ${RESULT.STRIKE} \n${RESULT.GAME_END}`;
     }
-    if (ball === 0) return `${strike + RESULT.STRIKE}`;
-    if (strike === 0) return `${ball + RESULT.BALL}`;
-    return `${ball + RESULT.BALL} ${strike + RESULT.STRIKE}`;
+    if (ball === 0) return `${strike} ${RESULT.STRIKE}`;
+    if (strike === 0) return `${ball} ${RESULT.BALL}`;
+    return `${ball} ${RESULT.BALL} ${strike} ${RESULT.STRIKE}`;
   }
 
   compute(computerInput, userInput) {
@@ -85,7 +85,7 @@ class App {
         MissionUtils.Console.close();
       }
       if (userSelection !== "1" && userSelection !== "2") {
-        throw RROR.WRONG_SELECTION;
+        throw ERROR.WRONG_SELECTION;
       }
     });
   }
