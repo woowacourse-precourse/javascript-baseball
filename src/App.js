@@ -9,21 +9,24 @@ class App {
     this.user = new User();
   }
 
-  compareInputToRestart(input) {
+  compareInputToRestart(input, resolve, reject) {
+    if (input !== '1' && input !== '2') {
+      return reject('잘못된 숫자를 입력하였습니다.');
+    }
+
     if (input === '1') {
       this.startOrRestartApp('restart');
     } else if (input === '2') {
       this.endApp();
-    } else {
-      throw new Error('잘못된 번호를 입력하였습니다.');
     }
   }
 
   askRestartApp() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
-      input => this.compareInputToRestart(input),
+    return new Promise((resolve, reject) =>
+      MissionUtils.Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+        input => this.compareInputToRestart(input, resolve, reject),
+      ),
     );
   }
 
@@ -35,19 +38,20 @@ class App {
     this.answerMap = map;
   }
 
-  compareUserAndComputerNumber() {
+  async compareUserAndComputerNumber() {
     this.setAnswerMapByCompareUserAndComputer();
-    this.printResult();
+    await this.printResult();
     this.startOrRestartApp('start');
   }
 
-  printResult() {
+  async printResult() {
     const strike = this.answerMap.get('strike');
     const ball = this.answerMap.get('ball');
 
     if (strike === 3) {
       MissionUtils.Console.print('3스트라이크');
-      return this.askRestartApp();
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      await this.askRestartApp();
     }
 
     if (strike === 0 && ball === 0) {
@@ -65,19 +69,15 @@ class App {
     if (start !== 'restart' && start !== 'start') {
       throw new Error('start 명령을 잘못 입력했습니다.');
     }
+
     if (start === 'restart') this.computer.setRandomNumberArray();
   }
 
   async startOrRestartApp(start) {
     this.validStartInput(start);
     this.initAnswerMap();
-    try {
-      await this.user.getNumberArrayFromInput();
-    } catch (error) {
-      throw new Error(error);
-    } finally {
-      this.compareUserAndComputerNumber();
-    }
+    await this.user.getNumberArrayFromInput();
+    await this.compareUserAndComputerNumber();
   }
 
   setAnswerMapByCompareUserAndComputer() {

@@ -10,18 +10,18 @@ class User {
   }
 
   getInput(resolve, reject) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-      this.setNumberArray(input, reject);
-      resolve(input);
-    });
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input =>
+      this.setNumberArray(input, resolve, reject),
+    );
   }
 
-  setNumberArray(input, reject) {
+  setNumberArray(input, resolve, reject) {
     if (!this.validInput(input)) {
       reject('입력값이 잘못되었습니다.');
     }
 
     this.numberArray = [...this.makeInputToArray(input)];
+    resolve(this.numberArray);
   }
 
   validInput(input) {

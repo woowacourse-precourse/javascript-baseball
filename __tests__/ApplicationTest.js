@@ -4,8 +4,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
+    return acc.mockImplementationOnce(async (question, callback) => {
+      await callback(input);
     });
   }, MissionUtils.Console.readLine);
 };
@@ -56,6 +56,7 @@ describe('숫자 야구 게임', () => {
 
     await expect(async () => {
       const app = new App();
+
       await app.play();
     }).toThrow();
   });
