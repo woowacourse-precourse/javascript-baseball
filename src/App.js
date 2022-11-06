@@ -29,22 +29,25 @@ class App {
         this.play();
         return;
       }
+      this.gameOverPhase();
+    });
+  }
 
-      Console.print(GAME_MESSAGE.GAME_OVER);
-      Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
-        if (!this.isValidTrigger(trigger)) {
-          this.quitGame();
-          throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
-        }
-        if (trigger === RESTART_TRIGGER) {
-          this.computerInput = this.generateComputerInput();
-          this.play();
-          return;
-        }
-        if (trigger === QUIT_TRIGGER) {
-          this.quitGame();
-        }
-      });
+  gameOverPhase() {
+    Console.print(GAME_MESSAGE.GAME_OVER);
+    Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
+      if (!this.isValidTrigger(trigger)) {
+        this.quitGame();
+        throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
+      }
+      if (trigger === RESTART_TRIGGER) {
+        this.computerInput = this.generateComputerInput();
+        this.play();
+        return;
+      }
+      if (trigger === QUIT_TRIGGER) {
+        this.quitGame();
+      }
     });
   }
 
