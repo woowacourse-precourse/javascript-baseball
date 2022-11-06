@@ -107,7 +107,6 @@ class App {
 
   play() {
     this.makeAnswer();
-    console.log(this.answer);
     this.start();
   }
 }
