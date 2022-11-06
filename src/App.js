@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputValidation = require("./inputValidation");
 const GenerateRandomNumber = require("./generateRandomNumber");
+const StrikeBallNumber = require("./strikeBallCheck");
 
 class App {
     play() {
@@ -27,7 +28,7 @@ function userInputNumber(computerNumber) {
 
 function gameStart(userNumber, computerNumber) {
     InputValidation(userNumber);
-    const { ballNumber, strikeNumber } = strikeBallNumber(userNumber, computerNumber);
+    const { ballNumber, strikeNumber } = StrikeBallNumber(userNumber, computerNumber);
     getHint(ballNumber, strikeNumber);
     hasThreeStrike(strikeNumber, computerNumber);
 }
@@ -74,22 +75,6 @@ function endGame() {
 
 function faultNumberInput() {
     throw "잘못된 값을 입력하였습니다.";
-
-}
-
-function strikeBallNumber(userNumber, computerNumber) {
-    const strikeNumber = countStrike(userNumber, computerNumber);
-    const ballNumber = countBall(userNumber, computerNumber);
-    return { ballNumber, strikeNumber };
-}
-
-function countStrike(userNumber, computerNumber) {
-    return userNumber.filter((eachDigit, index) => eachDigit === computerNumber[index]).length;
-}
-
-function countBall(userNumber, computerNumber) {
-    const countIncludedNumber = userNumber.filter(eachDigit => computerNumber.includes(eachDigit)).length;
-    return (countIncludedNumber - countStrike(userNumber, computerNumber));
 }
 
 function getHint(ballCount, strikeCount) {
