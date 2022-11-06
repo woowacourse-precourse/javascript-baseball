@@ -15,3 +15,14 @@
 - MissionUtils 라이브러리에서 제공하는 Random 및 Console API를 사용하여 구현해야 한다.
 - Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
 - 사용자의 값을 입력 받고 출력하기 위해서는 MissionUtils 라이브러리에서 제공하는 Console.readLine, Console.print를 활용한다.
+
+## 3. 컴퓨터의 랜덤 값과 사용자의 입력 값을 비교하기
+
+컴퓨터의 랜덤 값과 사용자의 입력 값을 비교하여 힌트 문자열을 만든다.
+
+- strike, ball, 낫싱에 따라 힌트를 주는 문자열을 생성한다.
+  - 단 ball - strike 순서로 힌트를 나타낸다.
+- strike는 같은 수가 같은 자리에 있다면 1이 증가한다.
+- ball은 같은 수가 다른 자리에 있다면 1이 증가한다.
+- 낫싱은 strike와 ball의 값이 0이라면 낫싱에 해당한다.
+- 한편 컴퓨터의 랜덤 값과 사용자의 입력 값이 일치한다면 성공을 의미하는 문자열을 반환한다.
