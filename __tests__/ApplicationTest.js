@@ -100,4 +100,13 @@ describe("숫자 야구 게임", () => {
       app.makeUserInputNumber();
     }).toThrow("세자리 숫자가 아닙니다!");
   });
+
+  test("makeUserInputNumber 정상 작동 테스트", () => {
+    const answers = ["456"];
+    mockQuestions(answers);
+
+    const app = new App();
+    app.makeUserInputNumber();
+    expect(app.userInputNumber).toEqual([4, 5, 6]);
+  });
 });
