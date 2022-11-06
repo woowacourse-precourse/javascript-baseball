@@ -21,14 +21,21 @@ class App {
         computerInput.push(randomNum);
       }
     }
+    MissionUtils.Console.print(computerInput);
+    this.startGame(computerInput)
   }
 
-  startGame() {
+  startGame(computerInput) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       if (this.isValidNum(userInput)) {
-        this.compareNum(userInput)
+        userInput = userInput.split("")
+        this.compareNum(computerInput, userInput)
       }
     });
+  }
+
+  compareNum(computerInput,userInput){
+    console.log(computerInput,userInput)
   }
 
   //[예외처리] 잘못된 값 입력시 오류 처리 기능
@@ -55,5 +62,5 @@ class App {
 
 }
 const app = new App();
-app.createRandomNum()
+app.play()
 // module.exports = App;
