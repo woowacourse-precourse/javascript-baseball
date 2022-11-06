@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
 const getComputerNumber = (start, end) => {
   const computer = [];
@@ -18,6 +19,13 @@ const isSelectedNumber = (number, computer) => {
   if (!computer.includes(number)) {
     computer.push(number);
   }
+};
+
+const validateLength = (target, setLength) => {
+  if (target.length === setLength) {
+    return true;
+  }
+  return false;
 };
 
 module.exports = { getComputerNumber };
