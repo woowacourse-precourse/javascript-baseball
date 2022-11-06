@@ -8,9 +8,6 @@ class App {
         gameStartGiude();
         userInputNumber(GenerateRandomNumber());
     }
-    restart() {
-        userInputNumber(GenerateRandomNumber());
-    }
 }
 const app = new App();
 app.play();
@@ -64,8 +61,7 @@ function whetherGameEndsNot(number) {
 }
 
 function newGame() {
-    const app = new App();
-    app.restart();
+    userInputNumber(GenerateRandomNumber());
 }
 
 function endGame() {
