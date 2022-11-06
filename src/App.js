@@ -10,13 +10,13 @@ class App {
     }
 
     play() {
-        Console.print("play()-------------------");
+        // Console.print("play()-------------------");
         Console.print(MESSAGE.START);
         this.gameStart();
     }
 
     gameStart() {
-        Console.print("gameStart()-------------------");
+        // Console.print("gameStart()-------------------");
         this.makeRandomNumber();
         this.questionNumber();
         this.gameFinish();
@@ -30,46 +30,46 @@ class App {
                 this.computer.push(number);
             }
         }
-        Console.print("makeRandomNumber()-----------------");
-        Console.print(this.computer);
+        // Console.print("makeRandomNumber()-----------------");
+        // Console.print(this.computer);
     }
 
     questionNumber() {
-        Console.print("questionNumber()-----------------");
+        // Console.print("questionNumber()-----------------");
         Console.readLine(MESSAGE.NUMBERQUESTION, (userInput) => {
             this.user = userInput.split("");
-            Console.print(this.user);
+            // Console.print(this.user);
             this.isValidNumber(userInput);
             this.ballStrikeCount();
         });
     }
 
     isValidNumber(userInput) {
-        Console.print("isValidNumber()-------------------");
+        // Console.print("isValidNumber()-------------------");
         if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput) || this.hasWrongWord(userInput)) {
             throw new Error(MESSAGE.ERROR);
         }
     }
     hasZero(userInput) {
-        Console.print("hasZero()-----------------");
+        // Console.print("hasZero()-----------------");
         return userInput.includes("0");
     }
     hasSameNumber(userInput) {
-        Console.print("hasSameNumber()-----------------");
+        // Console.print("hasSameNumber()-----------------");
         const setInput = new Set(userInput);
         return setInput.size !== this.user.length;
     }
     hasRightLength(userInput) {
-        Console.print("hasRightLength()-----------------");
+        // Console.print("hasRightLength()-----------------");
         return userInput.length !== 3;
     }
     hasWrongWord(userInput) {
-        Console.print("hasWrongWord()-----------------");
+        // Console.print("hasWrongWord()-----------------");
         return !(userInput > 122);
     }
 
     ballStrikeCount() {
-        Console.print("ballStrikeCount()-----------------");
+        // Console.print("ballStrikeCount()-----------------");
         this.judgeStrike();
         this.judgeBall();
         const strikeCount = this.strike;
@@ -77,11 +77,11 @@ class App {
         this.printResult(strikeCount, ballCount);
     }
     judgeStrike() {
-        Console.print("judgeStrike()-----------------");
+        // Console.print("judgeStrike()-----------------");
         this.strike = this.computer.filter((el, idx) => el.toString() === this.user[idx]).length;
     }
     judgeBall() {
-        Console.print("judgeBall()-----------------");
+        // Console.print("judgeBall()-----------------");
         const ball = this.computer.filter((el) => this.user.includes(el.toString()));
         this.ball = ball.length;
     }
@@ -92,6 +92,7 @@ class App {
             return this.questionNumber();
         }
         if (strikeCount === 3) {
+            Console.print(strikeCount + PLAYING.STRIKE);
             Console.print(MESSAGE.CLEAR);
             return this.questionFinish();
         }
@@ -110,12 +111,12 @@ class App {
     }
 
     gameFinish() {
-        Console.print("gameFinish()-------------------");
+        // Console.print("gameFinish()-------------------");
         this.questionFinish();
     }
 
     questionFinish() {
-        Console.print("questionFinish()-------------------");
+        // Console.print("questionFinish()-------------------");
         Console.readLine(MESSAGE.FINISHQUESTION, (finishInput) => {
             if (this.restartGame(finishInput)) {
                 return this.gameStart();
@@ -127,11 +128,11 @@ class App {
         });
     }
     restartGame(finishInput) {
-        Console.print("restartGame()-------------------");
+        // Console.print("restartGame()-------------------");
         return finishInput === "1";
     }
     finishGame(finishInput) {
-        Console.print("finishGame()-------------------");
+        // Console.print("finishGame()-------------------");
         return finishInput === "2";
     }
 }
