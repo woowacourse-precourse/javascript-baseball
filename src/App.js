@@ -12,7 +12,12 @@ class App {
       this.NumberUtil.isBaseballNumber(number);
       const result = this.compareNumber(number);
       MissionUtils.Console.print(result);
-      MissionUtils.Console.close();
+      if (result !== "3스트라이크") {
+        this.userInputNumber();
+      }
+      if (result === "3스트라이크") {
+        this.isReStart();
+      }
     });
   }
 
@@ -39,6 +44,17 @@ class App {
     return `${ball}볼 ${strike}스트라이크`;
   }
 
+  isReStart() {
+    MissionUtils.Console.readLine(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (number) => {
+        number = Number(number);
+        if (number === 1) this.play();
+        else if (number === 2) MissionUtils.Console.close();
+        else throw "1또는 2만 입력해주세요.";
+      }
+    );
+  }
   play() {
     this.computerNumber = this.NumberUtil.getRandomBaseballNumber();
     this.userInputNumber();
