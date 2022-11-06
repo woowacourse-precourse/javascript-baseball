@@ -15,6 +15,29 @@ class App {
       //   `guessNumber는 ${guessNumber}, computerNumber는 ${computerNumber}`
       // );
       MissionUtils.Console.close();
+
+      // const strike = computerNumber.filter(
+      //   (num, index) => num === guessNumber[index]
+      // ).length;
+      let strike = 0;
+      computerNumber.forEach((num, index) => {
+        if (num.toString() === guessNumber[index]) strike++;
+        // MissionUtils.Console.print(
+        //   `num ${num}, guessNumber[index] ${guessNumber[index]}`
+        // );
+      });
+
+      let ball = 0;
+      computerNumber.forEach((computerNum) => {
+        if (guessNumber.includes(computerNum.toString())) {
+          ball++;
+        }
+      });
+      ball -= strike;
+
+      // MissionUtils.Console.print(`strike ${strike}, ball ${ball}`);
+
+      if (strike === 0 && ball === 0) MissionUtils.Console.print(`낫싱`);
     }
   }
 }
