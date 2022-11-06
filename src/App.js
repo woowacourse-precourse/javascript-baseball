@@ -17,22 +17,23 @@ const ment = {
 };
 
 class App {
-  play() {
+  async play() {
     this.game = gameStatus.play;
 
-    const anwser = this.startGame().createAnwser();
-    //정답
-    console.log(anwser);
+    const anwser = this.startGame().createAnswer();
 
-    this.inputUserAnwser();
-    if (this.checkUserGameAnwser()) this.compareUserAnwser();
-
-    // while (this.game) {}
-
-    if (!this.game) this.endGame();
+    while (this.game) {
+      await this.inputUserAnswer();
+      if (this.checkUserGameAnswer()) {
+        this.compareUserAnswer(anwser);
+      } else {
+        this.endGame();
+      }
+    }
+    if (this.game) this.endGame();
   }
 
-  createAnwser() {
+  createAnswer() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
@@ -41,21 +42,26 @@ class App {
     return this;
   }
 
-  // - 사용자 입력을 받는 기능
-  inputUserAnwser() {
-    MissionUtils.Console.readLine(ment.input, (answer) => {
-      this.userAnwser = answer;
+  inputUserAnswer() {
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine(ment.input, (answer) => {
+        this.answer = answer;
+        resolve();
+      });
     });
   }
 
-  checkUserGameAnwser() {
-    if (typeof this.userAnwser !== "number") return false;
-    if (this.userAnwser < 100 || this.userAnwser > 999) return false;
+  checkUserGameAnswer() {
+    if (typeof this.userAnswer !== "number") return false;
+    if (this.userAnswer < 100 || this.userAnswer > 999) return false;
     return true;
   }
 
   // - 입력값과 컴퓨터 값을 비교하는 기능
-  compareUserAnwser(user, answer) {}
+  compareUserAnwser(answer) {
+    MissionUtils.Console.print(answer, this.userAnswer);
+  }
+
   // - 결과를 출력하는 기능
   resultPrint(ball = 0, strike = 0) {}
   // - 결과에 따라 다른 기능을 호출하는 기능
