@@ -3,46 +3,44 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    getComputerNumber();
+    this.getComputerNumbers();
   }
-}
 
-function getComputerNumber() {
-  const computerNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  getUserInputNumber(computerNum);
-}
+  getComputerNumbers() {
+    const computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.getUserNumbers(computerNumbers);
+  }
 
-function getUserInputNumber(computerNum) {
-  MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
-    getStrikeAndBallCount(answer, computerNum);
-  });
-}
+  getUserNumbers(computerNumbers) {
+    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
+      this.getCount(answer, computerNumbers);
+    });
+  }
 
-function getStrikeCount(userNum, computerNum) {
-  return userNum.reduce((acc, num, i) => {
-    if (num === computerNum[i]) {
-      acc += 1;
-    }
-    return acc;
-  }, 0);
-}
+  getStrikeCount(userNumArr, computerNumArr) {
+    return userNumArr.reduce((acc, num, i) => {
+      if (num === computerNumArr[i]) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+  }
 
-function getBallCount(userNum, computerNum) {
-  return userNum.reduce((acc, num, i) => {
-    if (computerNum.includes(num) === true && num !== computerNum[i]) {
-      acc += 1;
-    }
-    return acc;
-  }, 0);
-}
+  getBallCount(userNumArr, computerNumArr) {
+    return userNumArr.reduce((acc, num, i) => {
+      if (computerNumArr.includes(num) === true && num !== computerNumArr[i]) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+  }
 
-function getCount(userNum, computerNum) {
-  const userNumArr = String(userNum).split('');
-  const computerNumArr = computerNum.map(String);
-  const strikeCount = getStrikeCount(userNumArr, computerNumArr);
-  const ballCount = getBallCount(userNumArr, computerNumArr);
-
-  return [strikeCount, ballCount];
+  getCount(userNumbers, computerNumbers) {
+    const userNumArr = String(userNumbers).split('');
+    const computerNumArr = computerNumbers.map(String);
+    const strikeCount = this.getStrikeCount(userNumArr, computerNumArr);
+    const ballCount = this.getBallCount(userNumArr, computerNumArr);
+  }
 }
 
 module.exports = App;
