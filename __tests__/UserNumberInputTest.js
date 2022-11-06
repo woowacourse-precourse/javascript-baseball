@@ -1,6 +1,10 @@
 const App = require("../src/App.js");
+const { Console } = require("@woowacourse/mission-utils");
 
 describe("사용자 숫자 유효성 검사 메서드 테스트", () => {
+  afterEach(() => {
+    Console.close();
+  });
   test(`hasOnlyNumber메서드를 'abc' 인자로 호출하면 false를 return한다.`, () => {
     const app = new App();
     const input = "abc";

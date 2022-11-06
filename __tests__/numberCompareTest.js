@@ -1,6 +1,10 @@
 const App = require("../src/App.js");
+const { Console } = require("@woowacourse/mission-utils");
 
 describe("숫자 비교 결과 출력 기능 테스트", () => {
+  afterEach(() => {
+    Console.close();
+  });
   test(`getStrikeBallCount 메서드를 testInput으로 실행하면 result를 return해야함`, () => {
     const app = new App();
     const testInput = [

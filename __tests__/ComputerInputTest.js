@@ -1,8 +1,12 @@
 const App = require("../src/App.js");
 const condition = require("../src/constants/condition.js");
+const { Console } = require("@woowacourse/mission-utils");
 const app = new App();
 
 describe("컴퓨터 랜덤 숫자 생성 메서드 테스트", () => {
+  afterEach(() => {
+    Console.close();
+  });
   test(`숫자의 길이는 ${condition.MAX_NUMBER_LENGTH}이여야 함`, () => {
     const computerInput = app.generateComputerInput();
     const numberLength = computerInput.length;
