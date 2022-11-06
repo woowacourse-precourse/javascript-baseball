@@ -44,10 +44,28 @@ class App {
 
     if (isNaN(inputNumber)) {
       errorMessage = NOT_A_NUMBER_EXCEPTION;
-    } else {
+    } else if (this.isNotInteger(inputNumber)) {
+      errorMessage = NOT_INTEGER_EXCEPTION;
+    } else if (this.isIncorrectNumberOfDigits(inputNumber)) {
+      errorMessage = NUMBER_OF_DIGITS_EXCEPTION;
+    }
+
+    if (errorMessage === null) {
       return;
     }
     throw new Error(errorMessage);
+  }
+  isNotInteger(inputNumber) {
+    if (Number.isInteger(inputNumber)) {
+      return false;
+    }
+    return true;
+  }
+  isIncorrectNumberOfDigits(inputNumber) {
+    if (inputNumber.length === this.NUMBER_OF_DIGITS) {
+      return false;
+    }
+    return true;
   }
 }
 
