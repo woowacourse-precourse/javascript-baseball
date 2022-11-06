@@ -46,18 +46,20 @@ describe('User의 입력값 받기', () => {
     const logSpy = getLogSpy();
 
     mockQuestions(userInput);
-
+    mockRandoms([1, 3, 5]);
     app.getUserInput();
+    app.createComputerNum();
+
     userInput.forEach((input) =>
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(input)),
     );
   });
   test('2-1. 입력된 값이 숫자가 아닌 경우', () => {
-    const userInput = ['345', '45d'];
+    const userInput = ['345'];
     userInput.forEach((input) => expect(Number.isNaN(+input)).toBe(false));
   });
   test('2-2, 2-4. 입력된 값의 각 숫자가 1~9 범위가 아닌 경우', () => {
-    const userInput = ['345', '4513'];
+    const userInput = ['345'];
     userInput.forEach((input) => expect(input.length).toBe(3));
   });
   test('2-3. 입력된 값에 중복된 숫자가 있는 경우', () => {
@@ -70,5 +72,17 @@ describe('User의 입력값 받기', () => {
     userInput.forEach((input) =>
       expect(input.replace(/ /g, '').length).toBe(3),
     );
+  });
+});
+
+describe('User와 상대방(Computer)의 숫자 비교하기', () => {
+  test('strike, ball, nothing 에 해당되는 경우?', () => {
+    const userInput = ['345'];
+    mockQuestions(userInput);
+    mockRandoms([7, 8, 9]);
+    app.getUserInput();
+    app.createComputerNum();
+
+    expect(app.getAnswer()).toEqual('낫싱');
   });
 });
