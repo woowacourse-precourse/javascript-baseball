@@ -31,6 +31,11 @@ class App {
     return MissionUtils.Console.readLine(message, callback);
   }
 
+  compareStrike(input, computer) {
+    return computer.filter((value, index) => value === Number(input[index]))
+      .length;
+  }
+
   creatRandomNumber() {
     const computer = [];
     while (computer.length < 3) {
