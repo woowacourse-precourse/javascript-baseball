@@ -18,14 +18,13 @@ class App {
 
   selectComputer() {
     const computer = [];
-
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
       if (!computer.includes(number)) {
         computer.push(number);
       }
     }
-
     return computer.join("");
   }
 
@@ -51,7 +50,6 @@ class App {
   checkOverlap(number) {
     const numberList = number.split("").sort();
     const validNumber = [...new Set(numberList)];
-
     if (validNumber.length < 3) {
       throw "중복되지 않은 숫자 3개를 입력해주세요.";
     }
@@ -84,7 +82,6 @@ class App {
   calculateScore(computer, user) {
     let ball = 0;
     let strike = 0;
-
     const intersection = [...computer].filter((number) =>
       [...user].includes(number)
     );
@@ -97,7 +94,6 @@ class App {
         strike++;
       }
     });
-
     return [ball, strike];
   }
 
@@ -106,15 +102,12 @@ class App {
       { name: "볼", score: score[0] },
       { name: "스트라이크", score: score[1] },
     ];
-
     let newScoreList = scoreList.filter((item) => {
       return item.score >= 1;
     });
-
     let result = newScoreList.map((item) => {
       return `${item.score}${item.name}`;
     });
-
     result = result.join(" ");
 
     if (result.length === 0) {
