@@ -24,12 +24,10 @@ class App {
 
     while (this.game) {
       await this.inputUserAnswer();
-      if (this.checkUserGameAnswer()) {
-        this.compareUserAnswer(anwser);
-      } else {
-        this.endGame();
-      }
+      if (this.checkUserGameAnswer()) this.exceptionEnd();
+      this.compareUserAnswer(anwser);
     }
+
     if (this.game) this.endGame();
   }
 
@@ -45,20 +43,20 @@ class App {
   inputUserAnswer() {
     return new Promise((resolve, reject) => {
       MissionUtils.Console.readLine(ment.input, (answer) => {
-        this.answer = answer;
+        this.userAnswer = answer;
         resolve();
       });
     });
   }
 
   checkUserGameAnswer() {
-    if (typeof this.userAnswer !== "number") return false;
-    if (this.userAnswer < 100 || this.userAnswer > 999) return false;
-    return true;
+    if (typeof this.userAnswer !== "number") return true;
+    if (this.userAnswer < 100 || this.userAnswer > 999) return true;
+    return false;
   }
 
   // - 입력값과 컴퓨터 값을 비교하는 기능
-  compareUserAnwser(answer) {
+  compareUserAnswer(answer) {
     MissionUtils.Console.print(answer, this.userAnswer);
   }
 
@@ -69,6 +67,13 @@ class App {
   //   2. 사용자 질문을 받는 기능
   // - 사용자 입력 예외처리하는 기능 ( 게임 진행 완료 후 )
   checkUserProgressInput() {}
+
+  exceptionEnd() {
+    this.game = gameStatus.stop;
+    MissionUtils.Console.print(ment.exception);
+    MissionUtils.Console.close();
+    return;
+  }
 
   endGame() {
     this.game = gameStatus.stop;
