@@ -13,8 +13,8 @@ class App {
       if (this.checkInputValidation(userInput)) {
         const computedResult = this.compute(computerInput, userInput);
         MissionUtils.Console.print(computedResult);
-        const gameEnd = this.isGameFinished(computerInput, userInput);
-        if (gameEnd) this.restartOrExitGame();
+        if (this.isGameFinished(computerInput, userInput))
+          this.restartOrExitGame();
         else this.startGame(computerInput);
       } else {
         throw ERROR.WRONG_INPUT;
