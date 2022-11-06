@@ -1,26 +1,19 @@
-// 요구사항
-// indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
-// 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
-// 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
-// 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
-
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   computerNum() {
-    const computer = [];
-    while (computer.length < 3) {
+    const COMPUTER = [];
+    while (COMPUTER.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
+      if (!COMPUTER.includes(number)) {
+        COMPUTER.push(number);
       }
     }
-    return computer   
+    return COMPUTER   
   }
   
   userNum() {
     let USER_NUM = 0
-    // 숫자 READLINE
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
       console.log(`숫자를 입력해주세요 : ${number}`)
       USER_NUM = number
@@ -70,6 +63,7 @@ class App {
       if(number === '1') {
         return this.play()
       } else if(number === '2') {
+        MissionUtils.Console.print('게임 종료')
         MissionUtils.Console.close()
       }
     });
@@ -77,12 +71,9 @@ class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.')
   
-    // 컴퓨터의 수 가져오기
     const COMPUTER_NUM = this.computerNum()
 
-    // 유저가 맞출 때 까지 while문 반복
     while (true) {
-      // BALL , STRIKE
       let BALL = 0
       let STRIKE  = 0
 
@@ -92,7 +83,7 @@ class App {
       STRIKE = this.checkStrike(COMPUTER_NUM , USER_NUM)
       
       
-      // 출력 부
+      // 출력 
       if (BALL === 0 && STRIKE === 0) {
         MissionUtils.Console.print(`낫싱`)
       } else if (BALL !== 0 && STRIKE === 0){
@@ -110,7 +101,7 @@ class App {
       
     }
     // Check
-    MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
+    MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다!`)
     this.checkRestart()
   }
 }
