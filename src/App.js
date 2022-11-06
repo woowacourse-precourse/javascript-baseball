@@ -20,30 +20,31 @@ class App {
     }
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (tryNum) => {
-      this.checktryNum(tryNum);
+      this.checkValid(tryNum);
+
+      const IS_ANSWER = this.checkAnswer(tryNum, this.answer);
+      if (IS_ANSWER) {
+        return;
+      }
+
+      const tryNumArr = tryNum.split("");
+      const BallStrikeResult = tryNumArr.map((tryNumEle, tryNumEleIdx) =>
+        this.comparetryNumAndAnswer(
+          Number(tryNumEle),
+          tryNumEleIdx,
+          this.answer
+        )
+      );
+      const resultSentence = this.getResultSentence(BallStrikeResult);
+      if (!resultSentence) {
+        MissionUtils.Console.print("낫싱");
+      } else {
+        MissionUtils.Console.print(resultSentence);
+      }
+
+      this.IS_NEWGAME = false;
+      this.startGame();
     });
-  }
-
-  checktryNum(tryNum) {
-    this.checkValid(tryNum);
-    const IS_ANSWER = this.checkAnswer(tryNum, this.answer);
-    if (IS_ANSWER) {
-      return;
-    }
-    const tryNumArr = tryNum.split("");
-    const BallStrikeResult = tryNumArr.map((tryNumEle, tryNumEleIdx) =>
-      this.comparetryNumAndAnswer(Number(tryNumEle), tryNumEleIdx, this.answer)
-    );
-
-    const resultSentence = this.getResultSentence(BallStrikeResult);
-
-    if (!resultSentence) {
-      MissionUtils.Console.print("낫싱");
-    } else {
-      MissionUtils.Console.print(resultSentence);
-    }
-    this.IS_NEWGAME = false;
-    this.startGame();
   }
 
   checkValid(tryNum) {
@@ -129,3 +130,6 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
