@@ -6,6 +6,10 @@ class User{
         this.input='';
     }
 
+    print(msg){
+        MissionUtils.Console.print(msg);
+    }
+
     scan(){
         const MESSAGE = (this.state==='INGAME') ? '숫자를 입력해주세요 : ' : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ';//좀 더 고려해보기.
         MissionUtils.Console.readLine(MESSAGE, (answer)=>{
