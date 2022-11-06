@@ -60,4 +60,21 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("정상 종료 예제", () => {
+    const randoms = [1, 6, 5];
+    const answers = ["246", "135", "165", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["1볼", "2스트라이크", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
