@@ -44,41 +44,42 @@ class App {
 
   // 사용자가 입력한 값을 판단하여 결과를 출력하는 기능
   getComputerOutput(userInput) {
-    const ballStrikeMap = this.getBallAndStrikeMap(userInput);
-    const ball = ballStrikeMap.get('BALL');
-    const strike = ballStrikeMap.get('STRIKE');
+    const [balls, strikes] = this.countBallsAndStrikes(userInput);
     let result = '';
-    if (!ballStrikeMap.size) {
+    if (!balls && !strikes) {
       result = '낫싱';
     }
-    if (ballStrikeMap.size === 1) {
-      if (strike) {
-        result = `${strike}스트라이크`;
+    if (balls || strikes) {
+      if (balls) {
+        result = `${balls}볼`;
       }
-      if (ball) {
-        result = `${ball}볼`;
+      if (strikes) {
+        result = `${strikes}스트라이크`;
       }
     }
-    if (ballStrikeMap.size === 2) {
-      result = `${ball}볼 ${strike}스트라이크`;
+    if (balls && strikes) {
+      result = `${balls}볼 ${strikes}스트라이크`;
     }
     MissionUtils.Console.print(result);
   }
 
   // 사용자가 입력한 값을 볼, 스트라이크로 판단하는 기능
-  getBallAndStrikeMap(userInput) {
-    const ballStrikeMap = userInput.reduce((acc, number, idx) => {
-      const isIncluded = this.#randomNumber.includes(number);
-      const targetIndex = this.#randomNumber.indexOf(number);
-      if (isIncluded && idx !== targetIndex) {
-        acc.set('BALL', (acc.get('BALL') || 0) + 1);
-      }
-      if (isIncluded && idx === targetIndex) {
-        acc.set('STRIKE', (acc.get('STRIKE') || 0) + 1);
-      }
-      return acc;
-    }, new Map());
-    return ballStrikeMap;
+  countBallsAndStrikes(userInput) {
+    return userInput.reduce(
+      (acc, number, idx) => {
+        const [balls, strikes] = acc;
+        const isIncluded = this.#randomNumber.includes(number);
+        const targetIndex = this.#randomNumber.indexOf(number);
+        if (isIncluded && idx !== targetIndex) {
+          return [balls + 1, strikes];
+        }
+        if (isIncluded && idx === targetIndex) {
+          return [balls, strikes + 1];
+        }
+        return [balls, strikes];
+      },
+      [0, 0],
+    );
   }
 }
 
