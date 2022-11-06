@@ -21,7 +21,7 @@ class App extends GameUtil{
   validateInput(playerInput) {
     const result = super.validateInput(playerInput);
     if (result === 'PASS') return this.rightInput(playerInput);
-    
+
     throw new Error(result);  
   }
 
@@ -38,8 +38,8 @@ class App extends GameUtil{
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return this.correctAnswer();
     }
-    
-    Console.print(super.showHint(ball, strike))
+
+    Console.print(super.showHint(ball, strike));
     this.play();
   }
 
