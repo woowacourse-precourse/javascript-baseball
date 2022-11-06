@@ -57,6 +57,10 @@ class BaseballGame {
       if (answer === '1') {
         this.startGame();
       }
+
+      if (answer === '2') {
+        this.isStop = true;
+      }
     });
   }
 
