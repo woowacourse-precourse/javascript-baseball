@@ -6,6 +6,11 @@
 * ```const app = new App(); app.play();``` 로 실행해야함. 
 * Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.<br/>
 * 사용자의 값을 입력 받고 출력하기 위해서는 MissionUtils 라이브러리에서 제공하는 Console.readLine, Console.print를 활용한다.<br/>
+* indent(인덴트, 들여쓰기) depth를 3이 넘지 않도록 구현한다. 2까지만 허용한다.
+* 예를 들어 while문 안에 if문이 있으면 들여쓰기는 2이다.
+* 힌트: indent(인덴트, 들여쓰기) depth를 줄이는 좋은 방법은 함수(또는 메소드)를 분리하면 된다.
+* 함수(또는 메서드)가 한 가지 일만 하도록 최대한 작게 만들어라.
+
 
 <hr/>
 
