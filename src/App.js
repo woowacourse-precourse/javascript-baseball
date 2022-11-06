@@ -26,7 +26,12 @@ class App {
   getUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.user = input.split("");
-      console.log(this.user);
+      if (this.user.filter((number) => number.match(/[^1-9]/g)).length) {
+        throw Error("1부터 9까지의 숫자만 입력해주세요.");
+      }
+      if (this.user.length !== 3) {
+        throw Error("3글자로 입력해주세요.");
+      }
     });
   }
 }
