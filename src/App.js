@@ -1,5 +1,21 @@
 class App {
   play() {}
+  checkCorrectNumber(number) {
+
+    if (!this.checkThreeLength(number)) {
+      throw "세글자가 아닙니다";
+    }
+
+    if (!this.checkComposeOneToNine(number)) {
+      throw "1~9가 아닌 다른걸로 이루어져있습니다";
+    }
+
+    if (!this.checkUniqueNumber(number)) {
+      throw "중복되는 숫자가 있습니다";
+    }
+
+  }
+
   checkUserNumberAndCompare(userNumber, computerNumber) {
     this.checkCorrectNumber(userNumber);
     this.compareUserAndComputer (userNumber, computerNumber);
