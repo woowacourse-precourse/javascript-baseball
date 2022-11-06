@@ -43,4 +43,4 @@ const validate = (input) => {
   }
 };
 
-module.exports = { validate };
+module.exports = { isNumber, isThreeDigit, isInRange, isDifferent, validate };
