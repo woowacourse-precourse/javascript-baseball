@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const { getBallsAndStrikes } = require('./utils');
 
 class GameDataStore {
   #gameData;
@@ -29,7 +29,7 @@ class GameDataStore {
 
   setInput(newInput) {
     this.#gameData.input = newInput;
-    this.#gameData.ballsAndStrikes = utils.getBallsAndStrikes(
+    this.#gameData.ballsAndStrikes = getBallsAndStrikes(
       this.#gameData.target,
       this.#gameData.input,
     );

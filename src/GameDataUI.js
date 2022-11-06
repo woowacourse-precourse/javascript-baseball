@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const utils = require('./utils');
+const { getUniqueNumberCount, getGuessResult } = require('./utils');
 
 class GameDataUI {
   #action;
@@ -23,7 +23,7 @@ class GameDataUI {
         this.#inputError();
       }
 
-      if (utils.getUniqueNumberCount(input) !== 3) {
+      if (getUniqueNumberCount(input) !== 3) {
         this.#inputError();
       }
 
@@ -63,7 +63,7 @@ class GameDataUI {
       return;
     }
 
-    Console.print(utils.getGuessResult(balls, strikes));
+    Console.print(getGuessResult(balls, strikes));
     if (strikes === 3) {
       this.gameOver();
     } else {

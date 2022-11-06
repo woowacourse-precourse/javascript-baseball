@@ -4,7 +4,7 @@ const GameDataStore = require('./GameDataStore');
 const GameDataUI = require('./GameDataUI');
 const GameStatusStore = require('./GameStatusStore');
 const GameStatusUI = require('./GameStatusUI');
-const utils = require('./utils');
+const { makeTarget } = require('./utils');
 
 class App {
   play() {
@@ -29,7 +29,7 @@ class App {
 
     dispatcher.register((payload) => {
       if (payload.type === 'game-start' || payload.type === 'game-restart') {
-        gameDataStore.setTarget(utils.makeTarget());
+        gameDataStore.setTarget(makeTarget());
       }
     });
 
