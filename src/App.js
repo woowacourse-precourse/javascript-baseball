@@ -27,12 +27,30 @@ function makeResult(answer, problem){
   return result;
 }
 
+function showResult(ball_count, strike_count){
+  if (ball_count+strike_count===0){
+    MissionUtils.Console.print('낫싱');
+    return;
+  }
+  let resultPrint = '';
+  if (ball_count){
+    resultPrint += `${ball_count}볼 `
+  }
+  if (strike_count){
+    resultPrint += `${strike_count}스트라이크`
+  }
+  MissionUtils.Console.print(resultPrint);
+}
+
 function getResults(problem){
   // 3. 숫자 입력 받기
   MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
     const answer = input;
     // 4. 결과 계산
     const result = makeResult(answer, problem);
+    const [ball_count, strike_count] = result;
+    // 5. 결과 출력
+    showResult(ball_count, strike_count);
   })
 }
 
