@@ -1,6 +1,7 @@
 const GAME_VALUE = {
   restart: '1',
   exit: '2',
+  win: 3,
 };
 
 const GAME_MESSAGE = {

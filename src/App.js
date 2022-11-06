@@ -20,7 +20,6 @@ class App {
 
   offerComputerRandomNumbers() {
     this.computerNumbers = getRandomNumbers(3, 1, 9);
-    console.log(this.computerNumbers);
   }
 
   initGameResult() {
@@ -62,7 +61,7 @@ class App {
   }
 
   isUserWin() {
-    this.gameResult.strike === 3 ? this.gameOver() : this.retry();
+    this.gameResult.strike === GAME_VALUE.win ? this.gameOver() : this.retry();
   }
 
   retry() {
