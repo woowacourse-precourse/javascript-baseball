@@ -2,9 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   answer;
+  numberInput;
 
   play() {
-    this.gameStartMessage()
+    this.gameStartMessage();
+    this.computerRandomNumber();
+    this.getUserNumberInput();
   }
 
   gameStartMessage() {
@@ -24,11 +27,15 @@ class App {
     this.answer = Number(nonDuplicateNumbers.join(""));
     return this.answer;
   }
+
+  getUserNumberInput() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numberInput) => {
+      this.userNumberInput = numberInput;
+    });
+  }
 }
 
 const app = new App();
 app.play();
-
-console.log(app.computerRandomNumber());
 
 module.exports = App;
