@@ -10,8 +10,6 @@ class App {
 
   #user;
 
-  #ballStrikeCount;
-
   constructor() {
     this.#computer = new BaseballComputer();
     this.#user = new BaseballUser();
@@ -29,27 +27,22 @@ class App {
 
   #progress(number) {
     this.#user.setNumbers(number);
-    this.#setBallStrikeCount();
 
-    const countMessage = BaseballHelper.getCountMessage(this.#ballStrikeCount);
+    const computerNumbers = this.#computer.numbers;
+    const userNumbers = this.#user.numbers;
+
+    const ballStrikeCount = BaseballHelper.calculateBallStrikeCount(computerNumbers, userNumbers);
+    const countMessage = BaseballHelper.getCountMessage(ballStrikeCount);
+
     Console.print(this.#computer.numbers);
     Console.print(countMessage);
 
-    if (this.#ballStrikeCount.strike === RULE.LENGTH) {
+    if (ballStrikeCount.strike === RULE.LENGTH) {
       Console.print(GAME_MESSAGE.CORRECT);
       this.readRestartInput();
     }
 
     this.readUserInput();
-  }
-
-  #setBallStrikeCount() {
-    const computerNumbers = this.#computer.numbers;
-    const userNumbers = this.#user.numbers;
-
-    const ballStrikeCount = BaseballHelper.calculateBallStrikeCount(computerNumbers, userNumbers);
-
-    this.#ballStrikeCount = ballStrikeCount;
   }
 
   readRestartInput() {
