@@ -20,39 +20,42 @@ class App {
   play() {
     this.game = gameStatus.play;
 
-    while (this.game) {
-      this.startPrint();
-      const anwser = this.createAnwser();
-      console.log(anwser);
+    const anwser = this.startGame().createAnwser();
+    //정답
+    console.log(anwser);
 
-      this.endGamePrint();
-    }
+    this.inputUserAnwser();
+    if (this.checkUserGameAnwser()) this.compareUserAnwser();
+
+    // while (this.game) {}
+
+    if (!this.game) this.endGame();
   }
 
   createAnwser() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
-  startPrint() {
+  startGame() {
     MissionUtils.Console.print(ment.start);
-    MissionUtils.Console.close();
-    return;
+    return this;
   }
-  // - 사용자 입력을 받는 기능
-  inputUserAnwser() {}
 
-  // - 입력 예외처리 하는 기능 ( 게임 진행 중 )
-  checkUserGameAnwser(anwser) {
-    try {
-      if (typeof anwser !== "number") throw new Error("Not number");
-      if (anwser < 100 || anwser > 999) throw new Error("Out of range");
-    } catch (error) {
-      return false;
-    }
+  // - 사용자 입력을 받는 기능
+  inputUserAnwser() {
+    MissionUtils.Console.readLine(ment.input, (answer) => {
+      this.userAnwser = answer;
+    });
+  }
+
+  checkUserGameAnwser() {
+    if (typeof this.userAnwser !== "number") return false;
+    if (this.userAnwser < 100 || this.userAnwser > 999) return false;
     return true;
   }
+
   // - 입력값과 컴퓨터 값을 비교하는 기능
-  compareUserAnwser() {}
+  compareUserAnwser(user, answer) {}
   // - 결과를 출력하는 기능
   resultPrint(ball = 0, strike = 0) {}
   // - 결과에 따라 다른 기능을 호출하는 기능
@@ -61,7 +64,7 @@ class App {
   // - 사용자 입력 예외처리하는 기능 ( 게임 진행 완료 후 )
   checkUserProgressInput() {}
 
-  endGamePrint() {
+  endGame() {
     this.game = gameStatus.stop;
     MissionUtils.Console.print(ment.end);
     MissionUtils.Console.close();
