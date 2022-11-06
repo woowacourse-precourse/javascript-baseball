@@ -1,5 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const MESSAGE = {
+  GAME_START: '숫자 야구 게임을 시작합니다.',
+  INPUT_GUESS: '숫자를 입력해주세요 : ',
+  NOTHING: '낫싱',
+  STRIKE: (strike) => `${strike}스트라이크`,
+  BALL: (ball) => `${ball}볼`,
+  BALL_STRIKE: (ball, strike) => `${ball}볼 ${strike}스트라이크`,
+  GAME_END: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  INPUT_NEW_GAME: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  WRONG_INPUT: '잘못된 입력입니다.',
+};
+
 class App {
   play() {
     this.printGameStartMessage();
@@ -16,7 +28,7 @@ class App {
   }
 
   printGameStartMessage() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(MESSAGE.GAME_START);
   }
 
   generateAnswer() {
@@ -30,7 +42,7 @@ class App {
   }
 
   processGuess() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    MissionUtils.Console.readLine(MESSAGE.INPUT_GUESS, (input) => {
       this.guess = input;
       this.checkGuess();
       this.calculateBallCount();
@@ -50,7 +62,7 @@ class App {
       || new Set(this.guess).size !== 3
       || [...this.guess].some((number) => number < '1' || number > '9')
     ) {
-      throw new Error('잘못된 입력입니다.');
+      throw new Error(MESSAGE.WRONG_INPUT);
     }
   }
 
@@ -72,34 +84,31 @@ class App {
     const { ball, strike } = this.ballCount;
 
     if (ball === 0 && strike === 0) {
-      MissionUtils.Console.print('낫싱');
+      MissionUtils.Console.print(MESSAGE.NOTHING);
     } else if (ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
+      MissionUtils.Console.print(MESSAGE.STRIKE(strike));
     } else if (strike === 0) {
-      MissionUtils.Console.print(`${ball}볼`);
+      MissionUtils.Console.print(MESSAGE.BALL(ball));
     } else {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      MissionUtils.Console.print(MESSAGE.BALL_STRIKE(ball, strike));
     }
   }
 
   printGameEndMessage() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.print(MESSAGE.GAME_END);
   }
 
   processNewGame() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (input) => {
-        this.newGame = input;
-        this.checkNewGame();
-        this.handleNewGame();
-      },
-    );
+    MissionUtils.Console.readLine(MESSAGE.INPUT_NEW_GAME, (input) => {
+      this.newGame = input;
+      this.checkNewGame();
+      this.handleNewGame();
+    });
   }
 
   checkNewGame() {
     if (this.newGame !== '1' && this.newGame !== '2') {
-      throw new Error('잘못된 입력입니다.');
+      throw new Error(MESSAGE.WRONG_INPUT);
     }
   }
 
