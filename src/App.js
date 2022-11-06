@@ -50,6 +50,17 @@ class App {
     return numbersNumberArray;
   }
 
+  strikeCountter = (userNumbersArray, refNumbersArray) => {
+    let strikeCount = 0;
+
+    userNumbersArray.map((userNumber, index) => {
+      strikeCount =
+        userNumber === refNumbersArray[index] ? strikeCount + 1 : strikeCount;
+    });
+
+    return strikeCount;
+  };
+
   discriminator(userNumbersArray, refNumbersArray) {
     let discrimination = "";
     let strikeCount = 0;
