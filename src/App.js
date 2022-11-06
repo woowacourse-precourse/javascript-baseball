@@ -15,9 +15,10 @@ class App {
   }
 
   receiveNumber() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      throwException(input);
-    });
+    MissionUtils.Console.readLine(
+      '숫자를 입력해주세요 : ',
+      this.compareNumbers.bind(this)
+    );
   }
 
   throwException(input) {
@@ -28,10 +29,25 @@ class App {
     }, '');
   }
 
+  compareNumbers(input) {
+    this.throwException(input);
+    const answerNumberList = this.createNumberList();
+    const inputNumberList = input.split('').map((number) => Number(number));
+    const result = { 볼: 0, 스트라이크: 0 };
+
+    inputNumberList.forEach((number, idx) => {
+      if (number === answerNumberList[idx]) result.스트라이크 += 1;
+      else if (answerNumberList.includes(number)) result.볼 += 1;
+    });
+  }
+
   play() {
     this.printStartPhrase();
     this.receiveNumber();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
