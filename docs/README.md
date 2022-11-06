@@ -140,3 +140,13 @@ printResult = (userInput, computerInput) => {
 - 유저의 input 값의 유효성 검사
 - 유저의 input 값과 랜덤 값을 비교
 - 재실행
+
+```
+userInputCompared = computerInput => {
+		MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", userInput => {
+			this.inputValidation(userInput);
+			this.printResult(userInput, computerInput);
+			this.userInputCompared(computerInput);
+		});
+	};
+```
