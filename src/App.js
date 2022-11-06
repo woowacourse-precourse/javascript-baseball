@@ -40,15 +40,28 @@ class App {
       MissionUtils.Console.print(resultOutput);
 
       if (strikeCount === 3) {
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        MissionUtils.Console.close();
+        this.endPlayerTurn();
       }
       if (strikeCount !== 3) {
         this.startPlayerTurn();
       }
     });
   }
-  endPlayerTurn() {}
+  endPlayerTurn() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+      if (input !== "1" && input !== "2") {
+        MissionUtils.Console.close();
+        throw new Error("잘못된 입력입니다.");
+      }
+      if (input === "1") {
+        this.play();
+      }
+      if (input === "2") {
+        MissionUtils.Console.close();
+      }
+    });
+  }
 }
 
 const app = new App();
