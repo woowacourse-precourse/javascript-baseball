@@ -1,12 +1,31 @@
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const destroyGame = () => {
+    MissionUtils.Console.close();
+}
+
+const askReplay = () => {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (replay) => {
+        if (replay === "1") {
+            return init();
+        }
+        else if (replay === "2") {
+            return destroyGame();
+        }
+        else {
+            throw new Error();
+        }
+    });
+}
+
 const judgeBalls = (computerNumber, userNumber) => {
-    if(computerNumber===userNumber){
+    if (computerNumber === userNumber) {
         MissionUtils.Console.print('3스트라이크');
-        return;
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        return askReplay();
     }
-    MissionUtils.Console.print(`${computerNumber}, ${userNumber}`);
+    playGame(computerNumber);
 }
 
 const isValidBallNumber = (answer) => {
@@ -23,12 +42,11 @@ const isValidBallNumber = (answer) => {
 }
 
 const playGame = (computerNumber) => {
-    MissionUtils.Console.readLine(computerNumber+'숫자를 입력해주세요 : ', (userNumber) => {
+    MissionUtils.Console.readLine(computerNumber + '숫자를 입력해주세요 : ', (userNumber) => {
         if (!isValidBallNumber(userNumber)) {
             throw new Error();
         }
         judgeBalls(computerNumber, userNumber);
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     });
 }
 
