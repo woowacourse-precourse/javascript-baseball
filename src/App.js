@@ -36,7 +36,7 @@ class App {
   }
 
   check_input_validation(input) {
-    const NUM_RANGE = /^[0-9]+$/;
+    const NUM_RANGE = /^[1-9]+$/;
     let checkNum = NUM_RANGE.test(input);
     let checkLength = input.length;
     const SET = new Set(input);
