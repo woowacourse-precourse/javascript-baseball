@@ -12,7 +12,6 @@ class App {
   }
 
   makeAnswer() {
-    console.log("makeAnswer 실행됨");
     const randomNumbersSet = new Set();
     while (randomNumbersSet.size < 3) {
       const randomNumber = Random.pickNumberInRange(1, 9);
@@ -92,8 +91,8 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (userInput) => {
-        this.initScore();
         if (userInput === "1") {
+          this.initScore();
           this.isRestart = false;
           this.start();
         } else if (userInput === "2") {
