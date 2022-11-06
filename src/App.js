@@ -1,7 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Game = new GameLoop();
+    Game.start();
+  }
 }
 
 class Computer {
@@ -119,11 +123,6 @@ class GameLoop {
   }
 }
 
-function displayWelcomeMessage() {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-}
-
-displayWelcomeMessage();
 const app = new App();
 app.play();
 
