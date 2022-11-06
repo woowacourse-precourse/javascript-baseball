@@ -47,6 +47,18 @@ class App {
 
   }
 
+  newGame(input) {
+
+    if (input == 1) {
+      this.getComputerAndUser();
+    }
+
+    if (input == 2) {
+      STD.close();
+    }
+
+  }
+
   whenThreeStrike() {
     STD.print(`3개의 스트라이크를 모두 맞히셨습니다! 게임 종료`);
     STD.readLine(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : `, input => 
