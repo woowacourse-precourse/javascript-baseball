@@ -1,10 +1,8 @@
 const App = require("../src/App");
 
 describe("기능테스트", () => {
-
   test("setBaseLine", () => {
     const app = new App();
-
     const before = app.getBaseLine();
     let after = null;
 
@@ -13,26 +11,33 @@ describe("기능테스트", () => {
 
     after = app.getBaseLine();
     expect(after.length).toEqual(3);
-
   });
 
   test("inputTestData", () => {
     const app = new App();
-    const testData = app.inputToTestData("123")
+    const testData = app.inputToTestData("123");
+
     expect(testData[0]).toEqual(1);
     expect(testData[1]).toEqual(2);
     expect(testData[2]).toEqual(3);
     expect(() => {
       const app = new App();
-      app.inputToTestData("0")
+      app.inputToTestData("0");
     }).toThrow();
     expect(() => {
       const app = new App();
-      app.inputToTestData("12")
+      app.inputToTestData("12");
     }).toThrow();
     expect(() => {
       const app = new App();
-      app.inputToTestData("111")
+      app.inputToTestData("111");
     }).toThrow();
+  });
+
+  test("compare", () => {
+    const app = new App();
+    app.setBaseLine();
+    const answer = app.compare([1, 2, 3])
+    expect(typeof answer).toEqual("boolean");
   });
 });
