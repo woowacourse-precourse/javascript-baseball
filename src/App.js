@@ -2,11 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const COMPUTER = makeRandomNumber();
-    result();
-
-    function makeRandomNumber() {
+    const makeRandomNumber = () => {
       const COMPUTER_NUMBER = [];
 
       while (COMPUTER_NUMBER.length < 3) {
@@ -18,9 +14,73 @@ class App {
       }
 
       return COMPUTER_NUMBER;
-    }
+    };
 
-    function result() {
+    const findDuplicate = (numberArr) => {
+      const UNIQUE_ARRAY = new Set(numberArr);
+
+      if (numberArr.length !== UNIQUE_ARRAY.size) return true;
+
+      return false;
+    };
+
+    const condition = (input) => {
+      const USER_NUMBER = input.split('');
+
+      for (let index = 0; index < USER_NUMBER.length; index += 1) {
+        if (USER_NUMBER[index] < '1' || USER_NUMBER[index] > '9') {
+          throw '1~9 사이의 숫자를 입력해 주세요!';
+        }
+      }
+
+      if (USER_NUMBER.length !== 3) throw '3자리 숫자를 입력해주세요!';
+
+      if (findDuplicate(USER_NUMBER)) throw '중복되지 않은 숫자를 입력해 주세요!';
+
+      return USER_NUMBER;
+    };
+
+    const countBall = (computerNumber, userNumber) => {
+      let ballNumber = 0;
+
+      for (let index = 0; index < computerNumber.length; index += 1) {
+        if (
+          computerNumber[index] !== userNumber[index] &&
+          computerNumber.includes(userNumber[index])
+        ) {
+          ballNumber += 1;
+        }
+      }
+
+      return ballNumber;
+    };
+
+    const countStrike = (computerNumber, userNumber) => {
+      let strikeNumber = 0;
+
+      for (let index = 0; index < computerNumber.length; index += 1) {
+        if (computerNumber[index] === userNumber[index]) {
+          strikeNumber += 1;
+        }
+      }
+
+      return strikeNumber;
+    };
+
+    const restartOrEnd = () => {
+      MissionUtils.Console.readLine(
+        '게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.',
+        (number) => {
+          if (number === '1') app.play();
+
+          if (number === '2') MissionUtils.Console.close();
+
+          if (number !== '1' && number !== '2') restartOrEnd();
+        }
+      );
+    };
+
+    const result = () => {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
         const USER = condition(userInput);
         const BALL = countBall(COMPUTER, USER);
@@ -47,71 +107,11 @@ class App {
           restartOrEnd();
         }
       });
-    }
+    };
 
-    function condition(input) {
-      const USER_NUMBER = input.split('');
-
-      for (let index = 0; index < USER_NUMBER.length; index += 1) {
-        if (USER_NUMBER[index] < '1' || USER_NUMBER[index] > '9') {
-          throw '1~9 사이의 숫자를 입력해 주세요!';
-        }
-      }
-
-      if (USER_NUMBER.length !== 3) throw '3자리 숫자를 입력해주세요!';
-
-      if (findDuplicate(USER_NUMBER)) throw '중복되지 않은 숫자를 입력해 주세요!';
-
-      return USER_NUMBER;
-    }
-
-    function findDuplicate(numberArr) {
-      const UNIQUE_ARRAY = new Set(numberArr);
-
-      if (numberArr.length !== UNIQUE_ARRAY.size) return true;
-
-      return false;
-    }
-
-    function countBall(computerNumber, userNumber) {
-      let ballNumber = 0;
-
-      for (let index = 0; index < computerNumber.length; index += 1) {
-        if (
-          computerNumber[index] !== userNumber[index] &&
-          computerNumber.includes(userNumber[index])
-        ) {
-          ballNumber += 1;
-        }
-      }
-
-      return ballNumber;
-    }
-
-    function countStrike(computerNumber, userNumber) {
-      let strikeNumber = 0;
-
-      for (let index = 0; index < computerNumber.length; index += 1) {
-        if (computerNumber[index] === userNumber[index]) {
-          strikeNumber += 1;
-        }
-      }
-
-      return strikeNumber;
-    }
-
-    function restartOrEnd() {
-      MissionUtils.Console.readLine(
-        '게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.',
-        (number) => {
-          if (number === '1') app.play();
-
-          if (number === '2') MissionUtils.Console.close();
-
-          if (number !== '1' && number !== '2') restartOrEnd();
-        }
-      );
-    }
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    const COMPUTER = makeRandomNumber();
+    result();
   }
 }
 
