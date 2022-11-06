@@ -35,7 +35,32 @@ class App {
   compareNumber(userNumbers, computerNumbers) {
     const ball = this.countBall(userNumbers, computerNumbers);
     const strike = this.countStrike(userNumbers, computerNumbers);
+    let message = "";
+
+    if (strike === 3) {
+      message += strike + "스트라이크";
+      Console.print(message);
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return this.gameFinishOption();
+    } else {
+      if (ball === 0 && strike === 0) {
+        message = "낫싱";
+      }
+      if (ball > 0) {
+        message = ball + "볼" + " ";
+      }
+      if (strike > 0) {
+        message += strike + "스트라이크";
+      }
+
+      Console.print(message);
+      Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+        return this.checkAnswer(answer);
+      });
+    }
   }
+
+  gameFinishOption() {}
 
   createComputerNumber() {
     const computer = [];
