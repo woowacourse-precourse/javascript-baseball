@@ -47,6 +47,13 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("isNumber", () => {
+    expect(App.isNumber('1')).toEqual(true);
+    expect(App.isNumber('123')).toEqual(true);
+    expect(App.isNumber('01')).toEqual(false);
+    expect(App.isNumber('abc')).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
