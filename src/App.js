@@ -49,7 +49,10 @@ const getBall = (computer, user) => {
 };
 
 const checkResult = (computer, userNumber) => {
-  const user = userNumber.split('').map((num) => Number(num)).filter((num) => num > 0);
+  const user = userNumber
+    .split('')
+    .map((element) => Number(element))
+    .filter((element, idx) => element > 0 && userNumber.indexOf(element) === idx);
   const strike = getStrike(computer, user);
   const ball = getBall(computer, user);
 
