@@ -5,6 +5,8 @@ class App {
     constructor() {
         this.computer = [];
         this.user = [];
+        this.strike = 0;
+        this.ball = 0;
     }
 
     play() {
@@ -17,7 +19,6 @@ class App {
         Console.print("gameStart()-------------------");
         this.makeRandomNumber();
         this.questionNumber();
-
         this.gameFinish();
     }
 
@@ -35,28 +36,31 @@ class App {
 
     questionNumber() {
         Console.print("questionNumber()-----------------");
-        Console.readLine(MESSAGE.NUMBERQUESTION, (numberInput) => {
-            this.user = numberInput.split("");
+        Console.readLine(MESSAGE.NUMBERQUESTION, (userInput) => {
+            this.user = userInput.split("");
             Console.print(this.user);
-            this.isValidNumber(numberInput);
-            this.checkExistNumber();
+            this.isValidNumber(userInput);
+            this.throwingResult();
         });
     }
 
-    isValidNumber(numberInput) {
+    isValidNumber(userInput) {
         Console.print("isValidNumber()-------------------");
-        if (this.hasZero(numberInput) || this.hasSameNumber(numberInput)) {
+        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightlength(userInput)) {
             throw new Error(MESSAGE.ERROR);
         }
     }
-    hasZero(numberInput) {
+    hasZero(userInput) {
         Console.print("hasZero()-----------------");
-        return numberInput.includes("0");
+        return userInput.includes("0");
     }
-    hasSameNumber(numberInput) {
+    hasSameNumber(userInput) {
         Console.print("hasSameNumber()-----------------");
-        const setInput = new Set(numberInput);
+        const setInput = new Set(userInput);
         return setInput.size !== this.user.length;
+    }
+    hasRightLength(userInput) {
+        return userInput.length !== 3;
     }
 
     gameFinish() {
@@ -76,7 +80,6 @@ class App {
             throw new Error(MESSAGE.ERROR);
         });
     }
-
     restartGame(finishInput) {
         Console.print("restartGame()-------------------");
         return finishInput === "1";
