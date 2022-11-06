@@ -72,13 +72,23 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     const comNum = this.makeComputerNumber();
-    MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
-      this.checkError(num);
-      const userNum = String(num).split("");
-      const ballCnt = this.checkBall(comNum, userNum);
-      const strikeCnt = this.checkStrike(comNum, userNum);
-      this.printResult(ballCnt, strikeCnt);
-    });
+    const clear = true;
+
+    while (clear) {
+      MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
+        this.checkError(num);
+        const userNum = String(num).split("");
+        const ballCnt = this.checkBall(comNum, userNum);
+        const strikeCnt = this.checkStrike(comNum, userNum);
+        this.printResult(ballCnt, strikeCnt);
+        if (strikeCnt == 3) {
+          MissionUtils.Console.print(
+            "3개의 숫자를 모두 맞히셨습니다! 게임종료\n"
+          );
+          clear = false;
+        }
+      });
+    }
   }
 }
 
