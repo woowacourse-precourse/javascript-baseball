@@ -8,7 +8,6 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
     this.createRandomNum();
-    this.startGame();
   }
 
   // 컴퓨터 랜덤값 생성 기능
@@ -21,9 +20,6 @@ class App {
         computerInput.push(randomNum);
       }
     }
-    MissionUtils.Console.print(computerInput);
-
-    
     this.startGame(computerInput)
   }
 
@@ -43,7 +39,7 @@ class App {
     for (let i = 0; i < computerInput.length; i++){
       if (computerInput[i] === userInput[i]){
         strike+=1;
-      } else {
+      } else if (computerInput.includes(userInput[i])) {
         ball+=1;
       }
     }
@@ -62,26 +58,31 @@ class App {
     } else if (strike < 3 && strike > 0 && ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
       return this.startGame(computerInput)
-    } else if (ball === 3) {
+    } else if (ball === 0 && strike ===0) {
       MissionUtils.Console.print('낫싱');
       return this.startGame(computerInput)
     }
     
     if (strike === 3) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      // this.reStart();
+      this.reStart();
     }
   }
 
   // 게임 재시작 및 종료 기능
-  // reStart() {
-  //   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (insertCoin) => {
-  //     if (this.isValidCoin(insertCoin)) {
-  //       this.startGame();
-  //     }
-  //   });
-  // }
-  
+  reStart() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (insertCoin) => {
+      if (insertCoin === '1') {
+        return this.createRandomNum();
+      } else if (insertCoin === '2'){
+        MissionUtils.Console.close();
+      } else {
+        throw '올바른 숫자를 입력해주세요.'
+      }
+    });
+  }
+
   //[예외처리] 잘못된 값 입력시 오류 처리 기능
   isValidNum(userInput) {
     if (userInput.length !== 3){
@@ -102,9 +103,7 @@ class App {
     return true
   }
 
-  
-
 }
 const app = new App();
-app.play()
-// module.exports = App;
+app.play();
+module.exports = App;
