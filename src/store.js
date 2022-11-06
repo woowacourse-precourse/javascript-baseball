@@ -16,8 +16,8 @@ const computerStore = (() => {
     }
 })();
 
-const STORE = {
+const store = {
     computerStore,
 }
 
-module.exports = STORE;
+module.exports = store;

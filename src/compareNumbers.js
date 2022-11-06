@@ -3,10 +3,10 @@ const { Console } = require('@woowacourse/mission-utils');
 function outputCompareNumbersResult(strike, ball) {
     if (!strike && !ball) {
         Console.print('낫싱');
-    } else if (strike === 0 && ball > 0) {
-        Console.print(`${ball}볼`);
     } else if (strike > 0 && ball === 0) {
         Console.print(`${strike}스트라이크`);
+    } else if (strike === 0 && ball > 0) {
+        Console.print(`${ball}볼`);
     } else {
         Console.print(`${ball}볼 ${strike}스트라이크`);
     }

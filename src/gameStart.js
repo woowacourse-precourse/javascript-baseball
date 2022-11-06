@@ -1,6 +1,6 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const { validateNumbers } = require('./error');
-const { compareNumbers } = require('./number');
+const { validateNumbers } = require('./errorHandling');
+const { compareNumbers } = require('./compareNumbers');
 let { computerStore } = require('./store');
 
 const [computerState, computerSetState, resetStore] = computerStore();
@@ -32,6 +32,7 @@ function baseballGameReset() {
 function inputUserNumber(userNumber) {
     const input = userNumber.split('').map(Number);
     validateNumbers(input);
+    extractComputerNumber();
 
     if (compareNumbers(input, computerState())) {
         Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');

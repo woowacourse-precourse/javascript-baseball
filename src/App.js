@@ -1,8 +1,7 @@
-const { extractComputerNumber, baseballGameStart } = require('./input');
+const { baseballGameStart } = require('./gameStart');
 
 class App {
   play() {
-    extractComputerNumber();
     baseballGameStart();
   }
 }
