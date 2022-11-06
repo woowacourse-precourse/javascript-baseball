@@ -19,8 +19,16 @@ const COMMAND = Object.freeze({
   EXIT: '2',
 });
 
+const EXCEPTION = Object.freeze({
+  REGEX: /[1-9]/g,
+  RESTART: 1,
+  EXIT: 2,
+  LENGTH: 3,
+});
+
 module.exports = {
   RANDOMLIST,
   BASEBALL,
   COMMAND,
+  EXCEPTION,
 };
