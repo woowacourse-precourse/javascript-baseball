@@ -54,11 +54,11 @@ class CheckConstraints {
   }
 
   checkRePlayInputConstraints(userInput) {
-    if (userInput === "1" || userInput === "2") {
-      return true;
+    if (userInput !== "1" && userInput !== "2") {
+      throw new Error("잘못된 입력입니다. 게임을 종료합니다.");
     }
 
-    throw new Error("잘못된 입력입니다. 게임을 종료합니다.");
+    return true;
   }
 }
 
