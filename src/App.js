@@ -1,12 +1,33 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
-import {
-  isNumber,
-  isOneToNine,
-  isThree,
-  isAllDifferent,
-} from "./utils/inputCheck.js";
-import { isCompare } from "./utils/compareNumber.js";
+
+const isNumber = (input) => {
+  return Number.isInteger(input) ? true : false;
+};
+const isOneToNine = (input) => {
+  for (let i = 0; i < input.length; i++) {
+    if (Number(input[i]) > 0 && Number(input[i]) < 10) return true;
+  }
+  return false;
+};
+const isThree = (input) => {
+  return input.length === 3 ? true : false;
+};
+const isAllDifferent = (input) => {
+  const unique = new Set(input);
+  return unique.size === input.length ? true : false;
+};
+const isCompare = (computerNumber, playerNumber) => {
+  let score = [0, 0]; // [볼, 스트라이크]
+  for (let i = 0; i < 3; i++) {
+    if (computerNumber[i] === playerNumber[i]) {
+      score[0] += 1;
+    } else if (computerNumber.includes(playerNumber[i])) {
+      score[1] += 1;
+    }
+  }
+  return score;
+};
 class App {
   #userNumber;
   #computerNumber;
@@ -33,8 +54,9 @@ class App {
       )
         Console.print("잘못된 숫자를 입력하였습니다.");
       this.#userNumber = [...input];
+      this.getScore = [];
+      this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
     });
-    this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
   }
 
   // 컴퓨터 랜덤 숫자 생성
