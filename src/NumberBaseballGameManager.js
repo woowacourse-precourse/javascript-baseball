@@ -62,7 +62,7 @@ class NumberBaseballGameManager {
       (prevBallCounts, userNumber, idx) => {
         const [strikeCount, ballCount] = prevBallCounts;
 
-        if (this.isStrike(computerNumbers[idx], userNumber)) {
+        if (this.isStrike({ computerNumbers, userNumbers, idx })) {
           return [strikeCount + 1, ballCount];
         }
 
@@ -76,8 +76,8 @@ class NumberBaseballGameManager {
     );
   }
 
-  isStrike(computerNumber, userNumber) {
-    return computerNumber === userNumber;
+  isStrike({ computerNumbers, userNumbers, idx }) {
+    return computerNumbers[idx] === userNumbers[idx];
   }
 
   isBall(computerNumbers, userNumber) {
