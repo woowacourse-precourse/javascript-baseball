@@ -41,6 +41,10 @@ class Message {
   static requestInput(callback) {
     Console.readLine(REQUEST_MESSAGE, callback);
   }
+
+  static requestRestart(callback) {
+    Console.readLine(RESTART_MESSAGE, callback);
+  }
 }
 
 module.exports = Message;
