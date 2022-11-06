@@ -17,8 +17,14 @@ const REGEX = {
   CHOICE: /^[12]$/,
 };
 
+const CHOICE = {
+  PLAY_AGAIN: '1',
+  EXIT: '2',
+};
+
 module.exports = {
   MESSAGE,
   CONSTANT,
   REGEX,
+  CHOICE,
 };
