@@ -21,8 +21,7 @@ class User {
       reject('입력값이 잘못되었습니다.');
     }
 
-    const inputArray = this.makeInputToArray(input);
-    this.numberArray = [...inputArray];
+    this.numberArray = [...this.makeInputToArray(input)];
   }
 
   validInput(input) {
