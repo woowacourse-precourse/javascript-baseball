@@ -56,7 +56,8 @@ function printScore(scoreObject) {
   if (!scoreObject.ball && !scoreObject.strike) {
     resultMessage = "낫싱";
   }
-  return resultMessage;
+  MissionUtils.Console.print(resultMessage);
+  // return resultMessage;
 }
 
 function readNumber() {
