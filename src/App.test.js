@@ -25,20 +25,6 @@ describe('정답 생성', () => {
   });
 });
 
-describe('사용자 숫자 입력', () => {
-  test('사용자 숫자 입력', () => {
-    const spy = jest.spyOn(MissionUtils.Console, 'readLine');
-
-    const app = new App();
-    app.getGuess();
-
-    expect(spy).toHaveBeenCalledWith(
-      '숫자를 입력해주세요 : ',
-      expect.any(Function),
-    );
-  });
-});
-
 describe('사용자 숫자 입력 검증', () => {
   test('3자리가 아닌 숫자', () => {
     const app = new App();

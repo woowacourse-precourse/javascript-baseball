@@ -17,9 +17,18 @@ class App {
     }
   }
 
-  getGuess() {
+  processGuess() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.guess = input;
+      this.checkGuess();
+      this.calculateBallCount();
+      this.printBallCount();
+      if (this.ballCount.strike === 3) {
+        this.printGameEndMessage();
+        this.processNewGame();
+        return;
+      }
+      this.processGuess();
     });
   }
 
