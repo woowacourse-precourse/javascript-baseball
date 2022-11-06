@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {}
+  constructor() { }
 
   computerPick() { // 컴퓨터가 1부터 9 사이의 서로다른 3개의 숫자를 정하는 메서드
     const COMPUTER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
@@ -16,11 +16,8 @@ class App {
       if (!result) {
         this.playerPick(computer);
       } else if (result) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-        MissionUtils.Console.close();
+        this.checkReplay();
       }
-      return true;
     });
   }
   checkNumber(num) { // 플레이어가 입력한 숫자가 서로 다른 3개의 숫자인지 확인하는 메서드
@@ -74,6 +71,35 @@ class App {
       return 2;
     }
     return;
+  }
+  checkReplay() { // 게임의 재시작 여부를 묻는 메서드
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (replayInput) => {
+      const REPLAY = this.replay(replayInput);
+      if (REPLAY) {
+        MissionUtils.Console.close();
+      }
+    });
+  }
+  replay(input) { // 게임을 재시작하는 메서드
+    if (!this.checkReplayInput(input)) {
+      throw new Error();
+    } else if (input === '1') {
+      const COMPUTER_NUM = this.computerPick();
+      try {
+        this.playerPick(COMPUTER_NUM);
+      } catch (error) {
+        throw new Error();
+      }
+    } else if (input === "2") {
+      return true;
+    }
+  }
+  checkReplayInput(num) { // 게임 종료 후 재시작 여부에 대한 입력값을 확인하는 메서드
+    if ((num === '1') || (num === '2')) {
+      return true;
+    }
+    return false;
   }
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
