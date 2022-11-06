@@ -17,6 +17,7 @@ function App() {
   this.play = () => {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     createRandomNumber();
+    console.log(this.randomNumber);
     recursiveAsyncReadLine();
   };
 
@@ -95,12 +96,10 @@ function App() {
     let answer = "";
 
     if (ball !== 0) {
-      answer += ball;
-      answer += "볼 ";
+      answer += ball + "볼 ";
     }
     if (strike !== 0) {
-      answer += strike;
-      answer += "스트라이크";
+      answer += strike + "스트라이크";
     }
 
     MissionUtils.Console.print(answer);
