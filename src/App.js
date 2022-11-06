@@ -1,8 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constants/index");
+const { MESSAGE, SELECT } = require("./constants/index");
 
 const Computer = require("./libs/Computer");
-const User = require("./libs/User");
 const Validator = require("./libs/Validator");
 
 const initialState = {
@@ -15,7 +14,6 @@ class App {
     this.state = initialState;
 
     this.computer = new Computer();
-    this.user = new User();
     this.validator = new Validator();
   }
 
@@ -30,14 +28,16 @@ class App {
   }
 
   input() {
-    this.state.inputValue = this.user.getInputValue();
+    Console.readLine(MESSAGE.INPUT, (inputValue) => {
+      this.state.inputValue = inputValue;
 
-    const isInputValueValid = this.validator.checkInputValueValid(
-      this.state.inputValue
-    );
-    if (isInputValueValid === false) this.error();
+      const isInputValueValid = this.validator.checkInputValueValid(
+        this.state.inputValue
+      );
+      if (isInputValueValid === false) return this.error();
 
-    this.match();
+      this.match();
+    });
   }
 
   match() {
@@ -48,7 +48,7 @@ class App {
     Console.print(hint);
 
     if (this.state.inputValue === this.state.answer) {
-      this.success();
+      return this.success();
     }
 
     this.input();
@@ -56,6 +56,28 @@ class App {
 
   success() {
     Console.print(MESSAGE.SUCCESS);
+
+    Console.readLine(MESSAGE.SELECT, (inputValue) => {
+      if (inputValue === SELECT.RESTART) {
+        return this.restart();
+      }
+
+      if (inputValue === SELECT.EXIT) {
+        return this.exit();
+      }
+
+      return this.error();
+    });
+  }
+
+  restart() {
+    this.state = initialState;
+
+    this.start();
+  }
+
+  exit() {
+    Console.close();
   }
 
   error() {
