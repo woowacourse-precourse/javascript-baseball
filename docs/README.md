@@ -14,6 +14,6 @@
    - [x] 자릿값은 틀렸으나 정답중에 존재한다면 ball += 1
 
 4. strike와 ball 프로퍼티의 값을 통해 Print할 메세지를 반환하는 메서드 **createResultMessage**를 만든다.
-5. 유저의 점수를 통해 계속 게임을 진행할지 다시 시작할 것일지 판단하는 메서드 **decideContinueGameByUserScore**를 만든다.
-6. 게임을 다시 시작할 것인지 물어보는 메서드 **askRestartGame**를 만든다
+5. 유저의 점수를 통해 계속 게임을 진행할지 다시 시작할 것일지 판단하는 메서드 **decideContinuation**를 만든다.
+6. 게임을 다시 시작할 것인지 판단하는 메서드 **decideContinuation**를 만든다
 7. 게임이 다시 실행될 때 값이 초기화 될 수 있도록 메서드 **initScore**를 만든다.
