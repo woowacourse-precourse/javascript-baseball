@@ -1,15 +1,34 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-function startGame(){
+function startMessage(){//시작 문구 출력
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 }
 
-function makeProblem(NUMBER_LENGTH){
+function playGame(){ //문제 생성 - 게임 종료 옵션
+  const NUMBER_LENGTH = 3;
+  const problem = makeProblem(NUMBER_LENGTH);
+  playOneRound(problem);
+}
+
+function makeProblem(NUMBER_LENGTH){//문제 생성 함수
   const problemNumberList = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, NUMBER_LENGTH);
   return problemNumberList;
 }
 
-function makeResult(answer, problem){
+function playOneRound(problem){//한 라운드 함수
+  MissionUtils.Console.readLine("숫자를 입력해 주세요. : ", (input)=>{
+    const answer = input;
+    const result = makeResult(answer, problem);
+    const [ball_count, strike_count] = result;
+    showResult(ball_count, strike_count);
+    if(strike_count!==3){
+      return playOneRound(problem);
+    }
+    quitOptions();
+  })
+}
+
+function makeResult(answer, problem){//결과 계산 함수
   let ball_count = 0;
   let strike_count = 0;
   problem.forEach((problemNumber, idx)=>{
@@ -25,7 +44,7 @@ function makeResult(answer, problem){
   return result;
 }
 
-function showResult(ball_count, strike_count){
+function showResult(ball_count, strike_count){//결과 출력 함수
   if (ball_count+strike_count===0){
     MissionUtils.Console.print('낫싱');
     return;
@@ -40,52 +59,24 @@ function showResult(ball_count, strike_count){
   MissionUtils.Console.print(resultPrint);
 }
 
-function isSuccess(strike_count){
-  return strike_count===3;
-}
-
-function playOneRound(problem){
-  MissionUtils.Console.readLine("숫자를 입력해 주세요. : ", (input)=>{
-    const answer = input;
-    const result = makeResult(answer, problem);
-    const [ball_count, strike_count] = result;
-    showResult(ball_count, strike_count);
-    if(!isSuccess(strike_count)){
-      return playOneRound(problem);
-    }
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    restartGame();
-  })
-}
-
-function playGame(){
-  const NUMBER_LENGTH = 3;
-  const problem = makeProblem(NUMBER_LENGTH);
-
-  playOneRound(problem);
-}
-
-function restartGame(){
+function quitOptions(){
+  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
   MissionUtils.Console.readLine("",(input)=>{
-    if(input==='1'){
-      playGame();
-    }
-    if(input==='2'){
-      MissionUtils.Console.close();
+    switch(input){
+      case '1':
+        playGame();
+      case '2':
+        MissionUtils.Console.close();
     }
   })
 }
-
 
 class App {
   play() {
-    startGame();
+    startMessage();
     playGame();
   }
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
