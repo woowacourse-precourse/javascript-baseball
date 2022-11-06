@@ -1,17 +1,6 @@
-const { Console, Random } = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { validationNumbers } = require('./validation');
-
-function generateRandomNumbers(gameData) {
-  const generatedRandomNumbers = [];
-  while (generatedRandomNumbers.length < 3) {
-    const randomNumber = Random.pickNumberInRange(1, 9);
-    if (!generatedRandomNumbers.includes(randomNumber)) {
-      generatedRandomNumbers.push(randomNumber);
-    }
-  }
-  gameData.setComputerRandomNumbers(generatedRandomNumbers);
-  return gameData;
-}
+const { generateRandomNumbers } = require('./generateRandomNumbers');
 
 function pitchAnalysis(gameData, userNumbers, computerNumbers) {
   const notStrikeNumbers = userNumbers.filter(
@@ -82,5 +71,4 @@ function gameStart(gameData) {
   });
 }
 
-exports.generateRandomNumbers = generateRandomNumbers;
 exports.gameStart = gameStart;

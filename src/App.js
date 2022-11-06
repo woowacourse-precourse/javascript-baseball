@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { gameStart, generateRandomNumbers } = require('./gameStart');
+const { gameStart } = require('./gameStart');
+const { generateRandomNumbers } = require('./generateRandomNumbers');
 const GameData = require('./GameData');
 
 class App {
