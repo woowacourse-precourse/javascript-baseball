@@ -52,12 +52,26 @@ class App {
 
   decideCount(computerCount, userCount) {
     let strikeCount = this.decideStrikeCount(computerCount, userCount);
+    let ballCount = this.decideBallCount(computerCount, userCount);
   }
 
   decideStrikeCount(computerCount, userCount) {
     let count = 0;
     for (let i = 0; i < computerCount.length; i++) {
       if (computerCount[i] === userCount[i]) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  decideBallCount(computerCount, userCount) {
+    let count = 0;
+    for (let i = 0; i < computerCount.length; i++) {
+      if (
+        userCount.includes(computerCount[i]) &&
+        computerCount[i] !== userCount[i]
+      ) {
         count++;
       }
     }
