@@ -124,9 +124,6 @@ class App {
         this.isFirstPlay = false;
         return this.play();
       }
-      if (userInput === '2') {
-        return Console.close();
-      }
       return Console.close();
     });
   }
