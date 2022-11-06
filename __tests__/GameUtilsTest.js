@@ -3,10 +3,14 @@ const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 const gameManager = new NumberBaseballGameManager();
 
 describe('게임 기능 테스트', () => {
-  test('컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
-    const result = gameManager.getRandomNumberArray();
+  test('인자로 전달받은 개수만큼 컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
+    const randomNumberCounts = [3, 4];
+    const randomNumberArrays = randomNumberCounts.map(
+      gameManager.getRandomNumberArray,
+    );
+    const result = randomNumberArrays.map(arr => arr.length);
 
-    expect(result).toHaveLength(3);
+    expect(result).toEqual([3, 4]);
   });
 
   test('스트라이크, 볼의 개수를 구한다.', () => {
