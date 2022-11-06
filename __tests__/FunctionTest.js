@@ -53,4 +53,29 @@ describe("기능 테스트", () => {
 
     expect(case1).toEqual(false);
   });
+
+  test("유효한 입력일 경우 에러 반환없이 통과", () => {
+    const app = new App();
+    const case1 = app.vaildInput("123");
+
+    expect(case1).toEqual("123");
+  });
+
+  test("유효하지 않은 입력일 경우 에러를 반환", () => {
+    try {
+      const app = new App();
+      app.vaildInput("a1234");
+    } catch (err) {
+      expect(err).toEqual(new Error("형식이 잘못되었습니다."));
+    }
+  });
+
+  test("중복된 입력일 경우 에러를 반환", () => {
+    try {
+      const app = new App();
+      app.vaildInput("122");
+    } catch (err) {
+      expect(err).toEqual(new Error("중복된 숫자가 존재합니다."));
+    }
+  });
 });
