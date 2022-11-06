@@ -36,7 +36,7 @@ function getBallCount(userNum, computerNum) {
   }, 0);
 }
 
-function getStrikeAndBallCount(userNum, computerNum) {
+function getCount(userNum, computerNum) {
   const userNumArr = String(userNum).split('');
   const computerNumArr = computerNum.map(String);
   const strikeCount = getStrikeCount(userNumArr, computerNumArr);
