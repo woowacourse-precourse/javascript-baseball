@@ -7,7 +7,7 @@ class GetUserInput extends Mission {
     this.score = require("../play/GetScore");
   }
 
-  init(computerNumbers, userNumbers) {
+  countingScore(computerNumbers, userNumbers) {
     if (this.checkInputValueValid(userNumbers)) {
       return this.getScoreMessage(computerNumbers, userNumbers);
     }
