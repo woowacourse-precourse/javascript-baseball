@@ -30,6 +30,20 @@ class BaseballGame {
     return `${ball}볼 ${strike}스트라이크`;
   }
 
+  isBall(num, idx, randomNumber) {
+    return randomNumber.includes(num) && idx !== [...randomNumber].indexOf(num);
+  }
+
+  countBall(input, randomNumber) {
+    let ball = 0;
+
+    [...input].forEach((num, idx) => {
+      if (this.isBall(num, idx, randomNumber)) ball++;
+    });
+
+    return ball;
+  }
+
   getResult(input) {
     const valid = inputValidator(input);
 
