@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  errorCheckList = {
+  userInputErrorCheckList = {
     inputNumberLengthCheck: (usersInput) => {
       if (usersInput.length !== 3) {
         throw "3자리의 숫자를 입력해주세요.";
@@ -19,9 +19,9 @@ class App {
     },
   };
 
-  totalErrorChecker(usersInput) {
-    for (const errorCheck in this.errorCheckList) {
-      this.errorCheckList[errorCheck](usersInput);
+  totalUserInputErrorChecker(usersInput) {
+    for (const errorCheck in this.userInputErrorCheckList) {
+      this.userInputErrorCheckList[errorCheck](usersInput);
     }
   }
 
@@ -107,7 +107,7 @@ class App {
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const usersInput = answer.trim();
-      this.totalErrorChecker(usersInput);
+      this.totalUserInputErrorChecker(usersInput);
       const userNumbersArray = this.stringToArrConverter(usersInput);
       let discrimination = this.discriminator(
         userNumbersArray,
