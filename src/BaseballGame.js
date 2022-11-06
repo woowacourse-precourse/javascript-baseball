@@ -68,13 +68,15 @@ class BaseballGame {
   inputRestartOrEnd = (selectedNumber) => {
     selectedNumber = Number(selectedNumber);
 
+    this.validateUserInput.validateOneOrTwo(selectedNumber);
+
     if (selectedNumber === 1) {
       this.init(false);
       this.playGame();
     } else if (selectedNumber === 2) {
       Console.print("게임 종료");
       Console.close();
-    } else throw new Error("1 또는 2만 입력해주세요.");
+    }
   };
 }
 
