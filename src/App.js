@@ -83,11 +83,13 @@ class App {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
-  getNewGame() {
+  processNewGame() {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (input) => {
         this.newGame = input;
+        this.checkNewGame();
+        this.handleNewGame();
       },
     );
   }
