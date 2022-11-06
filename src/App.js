@@ -55,7 +55,7 @@ class App {
     return `${this.ball}볼 ${this.strike}스트라이크 `;
   }
 
-  decideContinue() {
+  decideContinuation() {
     if (this.strike === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.isRestart = true;
@@ -77,7 +77,7 @@ class App {
       this.checkUserInput(userInput);
       this.compareScore(userInput);
       Console.print(this.createResultMessage());
-      this.decideContinue();
+      this.decideContinuation();
 
       if (this.isRestart) {
         this.restart();
