@@ -74,7 +74,7 @@ class App {
         switch (input) {
           case "1":
             this.printMsg("재경기를 진행합니다.");
-            this.askNumInput();
+            this.play();
             break;
           case "2":
             this.printMsg("게임을 종료합니다.");
