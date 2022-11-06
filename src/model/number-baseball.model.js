@@ -47,6 +47,12 @@ class NumberBaseballModel {
     }
     return this;
   }
+
+  getScore(strArray) {}
+
+  getBalls() {}
+
+  getStrikes() {}
 }
 
 module.exports = NumberBaseballModel;
