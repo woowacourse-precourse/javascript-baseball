@@ -1,7 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-
   constructor() {
     this.Computer_Number=[]
     this.Input_Number;
@@ -15,34 +14,55 @@ class App {
     }
   } 
 }
-
+  Printlog(strike,ball){
+    console.log("prtlog",strike,ball)
+    if(strike===0){
+      if(ball===0)
+        MissionUtils.Console.print("낫싱")
+      else{
+        MissionUtils.Console.print(`${ball}볼`)  
+      }
+      this.Restart()
+    }else if( strike===1){
+      MissionUtils.Console.print(`${ball}볼1 스트라이크`)
+      this.Restart()
+    }else if(strike===2){
+      MissionUtils.Console.print(`${ball}볼2 스트라이크`)
+      this.Restart()
+    }else if(strike===3){
+      this.AllCorrect()
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
+    }  
+  }
   CompareNumber(My_Number,Computer_Number){
     console.log(My_Number,Computer_Number)
     let strike=0;
     let ball=0;
-    let cnt=0;
-    
-    for(let i=0;i<3;i++){
-
-    }
-    for(let i=0;i<3;i++){
-      if(My_Number[i]===Computer_Number[i]){
-        cnt++;
+    const find1 = My_Number.indexOf(Computer_Number[0]);
+    const find2 = My_Number.indexOf(Computer_Number[1]);
+    const find3 = My_Number.indexOf(Computer_Number[2]);
+    if(find1>=0){
+      if(find1===0){
+        strike++;
+      }else{
+        ball++;
       }
     }
-    if(cnt===0){
-      MissionUtils.Console.print("낫싱")
-      this.Restart()
-    }else if(cnt===1){
-      MissionUtils.Console.print(`${ball}볼+1스트라이크`)
-      this.Restart()
-    }else if(cnt===2){
-      MissionUtils.Console.print(`${ball}볼+2스트라이크`)
-      this.Restart()
-    }else if(cnt===3){
-      this.AllCorrect()
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-    }  
+    if(find2>=0){
+      if(find2===1){
+        strike++;
+      }else{
+        ball++;
+      }
+    }
+    if(find3>=0){
+      if(find3===2){
+        strike++;
+      }else{
+        ball++;
+      }
+    }
+    this.Printlog(strike,ball)
   }
 
   Restart(){
