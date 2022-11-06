@@ -129,13 +129,38 @@ class App {
       }
 
       this.userNumber = input.split("").map(Number);
+      // 메서드 호출 위치이동 필요
+      this.compareNumbers();
     });
+  }
+
+  compareNumbers() {
+    let sameDigitCount = 0;
+    let sameNumberCount = 0;
+
+    this.userNumber?.forEach((number, idx) => {
+      if (number === this.gameNumber[idx]) {
+        sameDigitCount++;
+        sameNumberCount++;
+        return;
+      }
+
+      if (this.gameNumber.includes(number)) {
+        sameNumberCount++;
+      }
+    });
+
+    console.log(sameDigitCount, sameNumberCount);
+    return { sameDigitCount, sameNumberCount };
   }
 
   startGame() {
     this.printMessage(this.MESSAGES.START);
     this.createGameNumbers();
     this.inputUserNumbers();
+    // if (this.inputUserNumbers()) {
+    //   this.compareNumbers();
+    // }
   }
 
   play() {
