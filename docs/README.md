@@ -1,13 +1,14 @@
 ## feature1 요구 사항 - 랜덤으로 값 생성하기
 
 -   [ ] 1부터 9의 수로 이루어진 3자리의 수를 랜덤으로 생성한다.
-    -   [ ] MissonUtils 라이브러리의 Console.readLine를 활용한다.
+    -   [ ] MissonUtils 라이브러리의 Random.pickUniqueNumbersInRange()를 활용한다.
 
 ## feature2 요구 사항 - 사용자 입력받기
 
 -   [ ] 게임 시작 문구를 출력한다.
-    -   [ ] MissonUtils 라이브러리의 Console.print를 활용한다.
+    -   [ ] MissonUtils 라이브러리의 Console.print()를 활용한다.
 -   [ ] 숫자를 입력받는다.
+    -   [ ] MissonUtils 라이브러리의 Console.readLine()를 활용한다.
 
 ## feature3 요구 사항 - 입력에 대한 결과 출력하기
 
