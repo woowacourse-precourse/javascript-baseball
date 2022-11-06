@@ -13,7 +13,7 @@ class App {
   }
 
   randomNum() {
-    COMPUTER_NUMBER = pickUniqueNumbersInRange(1, 9, 3);
+    COMPUTER_NUMBER = Random.pickUniqueNumbersInRange(1, 9, 3);
 
     return COMPUTER_NUMBER;
   }
