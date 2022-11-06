@@ -28,7 +28,9 @@ class App {
       const USER_NUMBER = input.split('');
 
       for (let index = 0; index < USER_NUMBER.length; index += 1) {
-        if (USER_NUMBER[index] < '1' || USER_NUMBER[index] > '9') {
+        const ASCII = USER_NUMBER[index].charCodeAt();
+
+        if (ASCII < 48 || ASCII > 57) {
           throw '1~9 사이의 숫자를 입력해 주세요!';
         }
       }
