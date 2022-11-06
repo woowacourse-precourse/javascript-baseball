@@ -46,20 +46,22 @@ class App {
   }
 
   printResult(result) {
-    let statement = "";
+    // 볼, 스트라이크가 둘 다 null인 경우
     if (!result.get("볼") && !result.get("스트라이크")) {
-      statement = "낫싱";
+      MissionUtils.Console.print("낫싱");
+      // 모두 맞춘 경우
     } else if (result.get("스트라이크") == 3) {
-      statement = "3스트라이크";
+      MissionUtils.Console.print("3스트라이크");
     } else {
       let ball = result.get("볼") != null ? result.get("볼") + "볼" : "";
       let strike =
         result.get("스트라이크") != null
           ? result.get("스트라이크") + "스트라이크"
           : "";
-      statement = ball ? ball.concat(strike ? " " + strike : "") : strike;
+      MissionUtils.Console.print(
+        ball ? ball.concat(strike ? " " + strike : "") : strike
+      );
     }
-    return statement;
   }
 
   isRetry() {
@@ -96,7 +98,7 @@ class App {
         this.isValidInput(input) ? "" : this.executeError();
       });
       compareResult = this.CompareInputWithComputer(inputNum, this.computerNum);
-      tMissionUtils.Console.print(this.printResult(compareResult));
+      this.printResult(compareResult);
       flag = compareResult.get("스트라이크") == 3 ? this.isRetry() : 1;
     }
     MissionUtils.Console.close();
