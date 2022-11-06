@@ -1,6 +1,6 @@
 - [X] 게임을 시작한다는 문구 출력
 - [X] computer는 randomNumber 생성
-- [ ] player는 입력을 받아옴
+- [X] player는 입력을 받아옴
 - [ ] judge가 입력값이 유효한지 판단
   - [ ] 입력값이 숫자로만 이루어져있는지 확인
   - [ ] 입력 길이 확인
@@ -17,6 +17,7 @@
 - START_MESSAGE = "숫자 야구 게임을 시작합니다."
 - FINISH_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
 - RESTART_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요"
+- INPUT_MESSAGE = "숫자를 입력하세요."
 - BALL = "볼"
 - STRIKE = "스트라이크"
 - NOTHING = "낫싱"
