@@ -57,6 +57,7 @@ class App {
         }
       });
     });
+
     return score;
   }
   printScore(score) {
@@ -79,7 +80,8 @@ class App {
       this.inputs = inputs.split("").map((v) => parseInt(v));
       this.validateInput(this.inputs);
 
-      return this.compareToAnswer(this.answer, this.inputs);
+      const score = this.compareToAnswer(this.answer, this.inputs);
+      this.process(score);
     });
   }
   process(score) {
@@ -110,7 +112,7 @@ class App {
   }
   play() {
     this.init();
-    this.process(this.input());
+    this.input();
   }
 }
 
