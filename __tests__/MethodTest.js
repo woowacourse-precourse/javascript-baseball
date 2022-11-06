@@ -31,4 +31,24 @@ describe('App 클래스 메서드 테스트', () => {
     expect(ball).not.toBe(3);
     expect(ball).not.toBe(1);
   });
+
+  test('compare 메서드', () => {
+    const input = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 2, 3],
+    ];
+    const computer = [
+      [1, 2, 3],
+      [5, 4, 6],
+      [9, 7, 8],
+      [7, 8, 9],
+    ];
+    const messages = ['3스트라이크', '2볼 1스트라이크', '3볼', '낫싱'];
+    messages.forEach((output, index) => {
+      const result = app.compare(input[index], computer[index]);
+      expect(result).toBe(output);
+    });
+  });
 });
