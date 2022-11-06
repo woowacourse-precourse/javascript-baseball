@@ -163,3 +163,11 @@ play = () => {
 	this.userInputCompared(this.computerRandomInput());
 };
 ```
+
+## 8. constants
+
+메시지 등을 한 곳에 관리
+
+- 여러 상황의 메시지
+- 결과 값 메시지(볼, 스트라이크, 낫싱)
+- 게임 종료 시 상황 메시지
