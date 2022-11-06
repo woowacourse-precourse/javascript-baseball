@@ -1,4 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE, GAME_PROGRESS, ANSWER_LENGTH } = require("./constants/constants");
 const countBallAndStrike = require("./utils/countBallAndStrike");
 const makeRandomNumber = require("./utils/makeRandomNumber");
 const printGameMessage = require("./utils/printGameMessage");
@@ -6,7 +7,7 @@ const verifyInputNumber = require("./utils/verifyInputNumber");
 
 class App {
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(MESSAGE.START_GAME);
     this.gamePrepare();
   }
 
@@ -16,7 +17,7 @@ class App {
   }
 
   gameStart(answer) {
-    Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
+    Console.readLine(MESSAGE.INPUT_NUMBER, (userNumber) => {
       // 사용자 입력값 유효 여부 확인
       if (!verifyInputNumber(userNumber)) {
         this.inputErrorException();
@@ -25,7 +26,7 @@ class App {
       const userResult = countBallAndStrike(userNumber, answer); // 볼 스트라이크 개수 세기
       printGameMessage(userResult.strike, userResult.ball); // 볼 스트라이크 출력
 
-      if (userResult.strike < 3) {
+      if (userResult.strike < ANSWER_LENGTH) {
         return this.gameStart(answer);
       }
 
@@ -34,20 +35,17 @@ class App {
   }
 
   inputErrorException() {
-    throw new Error("잘못된 값을 입력하셨습니다! 게임이 종료됩니다.");
+    throw new Error(MESSAGE.INPUT_EXCEPTION);
   }
 
   // 게임 재시작 여부 입력
   gameRestartCheck() {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (userInput) => {
-        if (userInput === "1") return this.gamePrepare();
-        else if (userInput === "2") return Console.close();
-        return this.inputErrorException();
-      }
-    );
+    Console.print(MESSAGE.STRIKE_OUT);
+    Console.readLine(MESSAGE.RESTART_OR_TERMINATE, (userInput) => {
+      if (userInput === GAME_PROGRESS.RESTART) return this.gamePrepare();
+      else if (userInput === GAME_PROGRESS.TERMINATE) return Console.close();
+      return this.inputErrorException();
+    });
   }
 }
 
