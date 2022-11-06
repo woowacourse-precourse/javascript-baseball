@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { Output } = require("../src/Output");
+const Input = require("../src/Input");
 const Parse = require("../src/Parse");
+const { Output } = require("../src/Output");
 
 const getPrintLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -22,5 +23,17 @@ describe("기능 테스트", () => {
     const number = 123;
     const parsed = Parse.numberToArray(number);
     expect(parsed).toEqual([1, 2, 3]);
+  });
+
+  test("사용자 답 받아오기", () => {
+    const answer = 351;
+
+    MissionUtils.Console.readLine = jest.fn((ask, callback) => {
+      callback(answer);
+    });
+
+    const userAnswer = Input.getUserAnswer();
+
+    expect(userAnswer).toEqual([3, 5, 1]);
   });
 });
