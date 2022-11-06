@@ -1,21 +1,16 @@
-const { CASE } = require("./constants/index.js");
-const { generateRandomNumber } = require("./utils/number.js");
-const {
-  isAnswer,
-  isNothing,
-  isValidUserAskInput,
-  isValidUserInput,
-} = require("./utils/validator");
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
+const { CASE } = require('./constants/index');
+const { generateRandomNumber } = require('./utils/number');
+const { isAnswer, isNothing, isValidUserAskInput, isValidUserInput } = require('./utils/validator');
 
 class App {
   constructor() {
-    this.randomNumber;
-    this.userInputNumber;
+    this.randomNumber = null;
+    this.userInputNumber = null;
   }
 
   play() {
-    this.showMessage("숫자 야구 게임을 시작합니다.");
+    this.showMessage('숫자 야구 게임을 시작합니다.');
     this.startGame();
   }
 
@@ -25,7 +20,7 @@ class App {
   }
 
   proceedGame(userInputResult) {
-    const [_, strike] = userInputResult;
+    const [, strike] = userInputResult;
     const hint = this.getHintMessage(userInputResult);
     this.showMessage(hint);
     if (isAnswer(strike)) return this.askRestartOrEndGame();
@@ -37,27 +32,19 @@ class App {
   }
 
   askRestartOrEndGame() {
-    this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (userInputNumber) => {
-        if (!isValidUserAskInput(userInputNumber))
-          throw new Error("인풋 값이 유효하지 않습니다.");
-        if (userInputNumber === CASE.RESTART) this.startGame();
-        else this.endGame();
-      }
-    );
+    this.showMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userInputNumber) => {
+      if (!isValidUserAskInput(userInputNumber)) throw new Error('인풋 값이 유효하지 않습니다.');
+      if (userInputNumber === CASE.RESTART) this.startGame();
+      else this.endGame();
+    });
   }
 
   requestUserInputNumber() {
-    MissionUtils.Console.readLine(
-      "숫자를 입력해주세요 : ",
-      (userInputNumber) => {
-        if (!isValidUserInput(userInputNumber))
-          throw new Error("인풋 값이 유효하지 않습니다.");
-        this.proceedGame(this.getUserInputResult(userInputNumber));
-      }
-    );
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInputNumber) => {
+      if (!isValidUserInput(userInputNumber)) throw new Error('인풋 값이 유효하지 않습니다.');
+      this.proceedGame(this.getUserInputResult(userInputNumber));
+    });
   }
 
   setRandomNumber() {
@@ -69,7 +56,7 @@ class App {
   }
 
   getUserInputResult(input) {
-    return input.split("").reduce(this.compareUserInput.bind(this), [0, 0]);
+    return input.split('').reduce(this.compareUserInput.bind(this), [0, 0]);
   }
 
   getHintMessage(userInputResult) {
@@ -79,7 +66,7 @@ class App {
     if (isAnswer(strike)) return CASE.ALL_STRIKE;
     if (ball) message.push(this.getBallHintMessage(ball));
     if (strike) message.push(this.getStrikeHintMessage(strike));
-    return message.join(" ");
+    return message.join(' ');
   }
 
   getBallHintMessage(ball) {
