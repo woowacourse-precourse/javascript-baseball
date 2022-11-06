@@ -81,6 +81,32 @@ function readControlNumber() {
   return answer;
 }
 
+function validNumberCheck(inputList) {
+  const inputNumbers = [];
+
+  if (inputList.length !== GAME_NUM_SIZE) {
+    return 0;
+  }
+
+  for (let i = 0; i < GAME_NUM_SIZE; i++) {
+    if (!(inputList[i] >= 1 && inputList[i] <= 9)) {
+      return 0;
+    }
+    if (inputNumbers.includes(inputList[i])) {
+      return 0;
+    }
+    inputNumbers.push(inputList[i]);
+  }
+  return 1;
+}
+
+function validControlCheck(input) {
+  if (input !== 1 && input !== 2) {
+    return 0;
+  }
+  return 1;
+}
+
 class App {
   play() {}
 }
