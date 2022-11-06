@@ -46,7 +46,7 @@ class Baseball {
     const strikeMessage = STRIKE ? `${STRIKE}${GAME_MESSAGE.STRIKE}` : '';
     const resultMessage = nothing
       ? GAME_MESSAGE.NOTHING
-      : ballMessage + strikeMessage;
+      : `${ballMessage + strikeMessage}`;
 
     Console.print(resultMessage);
 
