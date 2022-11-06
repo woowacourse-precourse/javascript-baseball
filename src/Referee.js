@@ -1,3 +1,13 @@
+const isStrike = (answers, inputs) => {
+  let count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (answers[i] === inputs[i]) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
 const isBall = (answers, inputs) => {
   let count = 0;
   inputs.map (input => {
@@ -27,4 +37,4 @@ class Referee {
   }
 }
 
-module.exports = {Referee, isBall};
+module.exports = {Referee, isBall, isStrike};
