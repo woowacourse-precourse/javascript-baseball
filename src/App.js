@@ -1,5 +1,12 @@
+const Message = require('./Message');
+
 class App {
-  play() {}
+  constructor() {}
+
+  play() {
+    Message.printStart();
+    App.start();
+  }
 }
 
 module.exports = App;
