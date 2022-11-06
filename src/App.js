@@ -29,11 +29,9 @@ class App {
     const validLength = () => userValue.length === 3;
     const validRange = () => userValue.match(/[1-9]{3}/g) != null;
     const checkOverlap = () => new Set(userValue.split("")).size === 3;
-    if (validLength() && validRange() && checkOverlap()) {
-      return true;
-    } else {
-      throw "올바른 입력값이 아닙니다.";
-    }
+
+    if (validLength() && validRange() && checkOverlap()) return true;
+    throw "올바른 입력값이 아닙니다.";
   }
 
   countStrike(computer, userValue) {
@@ -42,6 +40,14 @@ class App {
       if (computer[i] === userValue[i]) strike += 1;
     }
     return strike;
+  }
+
+  countBall(computer, userValue) {
+    let ball = 0;
+    for (let i = 0; i < 3; i++) {
+      if (computer.split("").includes(userValue[i])) ball += 1;
+    }
+    return ball;
   }
 
   gameResult(computer, userValue) {}
