@@ -60,15 +60,18 @@ class App {
 
   gameResult(numArr) {
     if (numArr[1] === 3) {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      Console.print(`3스트라이크
+      3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
       this.checkRestart();
     } else {
       if (numArr[0] === 0 && numArr[1] === 0) {
         Console.print("낫싱");
+        this.playerInput();
       }
       Console.print(
-        `${numArr[0] > 0 ? numArr[0] + "볼 " : ""}
-        ${numArr[1] > 0 ? numArr[1] + "스트라이크" : ""}`
+        `${numArr[0] > 0 ? numArr[0] + "볼 " : ""}${
+          numArr[1] > 0 ? numArr[1] + "스트라이크" : ""
+        }`
       );
       this.playerInput();
     }
