@@ -50,7 +50,10 @@ class GameLoop {
   }
 
   _continue() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", this._validate);
+    let message = MissionUtils.Console.readLine(
+      "숫자를 입력해주세요 : ",
+      this._validate
+    );
   }
 
   _validate(message) {
@@ -65,6 +68,8 @@ class GameLoop {
     if (new Set(message).length != 3) {
       throw new Error("서로 다른 숫자를 입력해야 합니다");
     }
+
+    return message;
   }
 }
 
