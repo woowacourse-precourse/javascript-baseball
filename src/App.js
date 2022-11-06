@@ -11,6 +11,7 @@ class App {
   start(){
     MissionUtils.Console.readLine(Notice.INPUT_NUM,(input) => {
       this.exceptionThrow(input)
+      const Strike = this.caculateStrike(this.AnswerNumber,input)
 
     });
   }
@@ -39,6 +40,17 @@ class App {
     }
     return true
   }
+  caculateStrike(computernum, inputnum){
+    let strikeCnt = 0;
+    const arrcomputernum = [...computernum]
+    const arrinputnum = [...inputnum]
+    arrcomputernum.forEach((arrcomputernum, idx) => {
+      if (arrcomputernum === arrinputnum[idx]) {
+        strikeCnt += 1;
+      }
+    });
+    return strikeCnt;
+  };
 }
 
 module.exports = App;
