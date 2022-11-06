@@ -71,8 +71,19 @@ class App {
   }
   wantRegame() {
     MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
-      return inputNum;
+      const checkedInputNum = this.regameValidCheck(inputNum);
+      return checkedInputNum;
     });
+  }
+  regameValidCheck(number){
+    const isntNum = /[^1|2]/g;
+    if(number.length!==1){
+      throw new Error("1자리 숫자 (1 or 2) 를 입력해주세요");
+    }
+    if(isntNum.test(number)){
+      throw new Error("숫자만 입력해주세요(1 or 2)");
+    }
+    return number;
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
