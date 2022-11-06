@@ -24,6 +24,10 @@ class App {
     }
   }
 
+  checkLength(userNumber) {
+    return userNumber.length === 3;
+  }
+
   play() {
     this.makeRandomNumbers();
     this.getUserNumbers();
