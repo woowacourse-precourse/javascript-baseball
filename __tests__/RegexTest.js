@@ -23,6 +23,15 @@ describe('정규식 테스트', () => {
     expect(result).toEqual([true, true]);
   });
 
+  test('중복된 숫자가 존재하는 경우 true를 반환해야 한다.', () => {
+    const inputValues = ['122', '455', '699', '333'];
+    const result = inputValues.map(inputValue =>
+      DUPLICATE_CHARACTER_REGEX.test(inputValue),
+    );
+
+    expect(result).toEqual([true, true, true, true]);
+  });
+
   test('숫자가 아닌 문자가 포함된 경우 false를 반환해야 한다.', () => {
     const inputValues = ['asdf', 'asd120', 'a1b2c3'];
     const result = inputValues.map(inputValue =>
@@ -39,14 +48,5 @@ describe('정규식 테스트', () => {
     );
 
     expect(result).toEqual([false, false, false]);
-  });
-
-  test('중복된 숫자가 존재하는 경우 true를 반환해야 한다.', () => {
-    const inputValues = ['122', '455', '699', '333'];
-    const result = inputValues.map(inputValue =>
-      DUPLICATE_CHARACTER_REGEX.test(inputValue),
-    );
-
-    expect(result).toEqual([true, true, true, true]);
   });
 });
