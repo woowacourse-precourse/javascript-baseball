@@ -18,7 +18,7 @@ class User extends Player {
    * @param {string} string - 문자열숫자
    */
   setNumber(string) {
-    if(this.validator.validate(string)){
+    if(this.isValidate(string)){
       this.number = this.parseInput(string);
     } else {
       throw new Error('유효하지 않은 입력입니다.');
