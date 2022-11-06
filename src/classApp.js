@@ -8,6 +8,22 @@ class App {
     this.userInput = "";
   }
 
+  checkException(inputNum, allowed) {
+    if (inputNum.length !== 3) {
+      return false;
+    }
+    if (inputNum.includes(0)) {
+      return false;
+    }
+    String(inputNum)
+      .split("")
+      .forEach((str) => {
+        allowed = !isNaN(str) && allowed;
+      });
+
+    return allowed;
+  }
+
   startGame() {
     this.createAnswer();
     this.getUserInput();
