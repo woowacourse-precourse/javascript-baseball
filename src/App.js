@@ -1,5 +1,6 @@
-class App {
-  play() {}
-}
+class App {}
+
+const app = new App();
+app.play();
 
 module.exports = App;
