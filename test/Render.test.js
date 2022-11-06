@@ -15,4 +15,29 @@ describe("게임 결과에 따라 유저에게 입력받기", () => {
     }
     expect(numToArr(123)).toEqual(["1", "2", "3"]);
   });
+
+  test("유저가 1과 2의 숫자만을 입력했는지 확인", () => {
+    function checkNumRange(userNum) {
+      if (/^[1-2]*$/g.test(userNum.join("")) === false) {
+        return false;
+      } else if (/^[1-2]*$/g.test(userNum.join("")) === true) {
+        return true;
+      }
+    }
+    expect(checkNumRange(["1", "2", "3"])).toEqual(false);
+    expect(checkNumRange(["1", "2"])).toEqual(true);
+    expect(checkNumRange(["@"])).toEqual(false);
+  });
+
+  test("유저의 입력값이 한 개 인지 확인 ", () => {
+    function checkNumLength(userNum) {
+      if (userNum.length !== 1) {
+        return false;
+      } else if (userNum.length === 1) {
+        return true;
+      }
+    }
+    expect(checkNumLength(["1", "2"])).toEqual(false);
+    expect(checkNumLength(["1"])).toEqual(true);
+  });
 });
