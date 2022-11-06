@@ -50,15 +50,15 @@ class App {
     return numbersNumberArray;
   }
 
-  discriminator(userNumbers, refNumbers) {
+  discriminator(userNumbersArray, refNumbersArray) {
     let discrimination = "";
     let strikeCount = 0;
     let ballCount = 0;
 
     for (let i = 0; i < 3; i++) {
-      if (refNumbers.indexOf(userNumbers[i]) === i) {
+      if (refNumbersArray.indexOf(userNumbersArray[i]) === i) {
         strikeCount = strikeCount + 1;
-      } else if (refNumbers.includes(userNumbers[i])) {
+      } else if (refNumbersArray.includes(userNumbersArray[i])) {
         ballCount = ballCount + 1;
       }
     }
@@ -92,8 +92,11 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const usersInput = answer.trim();
       this.totalErrorChecker(usersInput);
-      const userNumbersArr = this.stringToArrConverter(usersInput);
-      let discrimination = this.discriminator(userNumbersArr, refNumbersArray);
+      const userNumbersArray = this.stringToArrConverter(usersInput);
+      let discrimination = this.discriminator(
+        userNumbersArray,
+        refNumbersArray
+      );
       this.consolePrinter(discrimination);
 
       if (discrimination !== "3스트라이크") {
