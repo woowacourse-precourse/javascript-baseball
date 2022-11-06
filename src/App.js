@@ -65,7 +65,26 @@ class App {
     });
   }
 
-  play() {}
+  askRetry() {
+    // 6. 종료 및 재시작 묻기
+    // 1 ==  재귀(재시작), 2 == 탈출 (종료)
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (ask) => {
+        if (ask == "1") this.play();
+        else if (!(ask == "2")) throw new Error("잘못된 입력입니다.");
+        else {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
+
+  play() {
+    // 모든 게임 과정 포함
+    this.comNum = this.makeComNum();
+    return this.userInputNum();
+  }
 }
 
 module.exports = App;
