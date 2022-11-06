@@ -1,5 +1,15 @@
 class App {
   play() {}
+   checkThreeLength(number) {
+    const numberLength = String(number).length;
+
+    if (numberLength !== 3) {
+      return false;
+    }
+
+    return true;
+  }
+
   checkCorrectNumber(number) {
 
     if (!this.checkThreeLength(number)) {
