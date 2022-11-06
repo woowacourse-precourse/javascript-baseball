@@ -20,8 +20,25 @@ class App {
 
   guess(computer) {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if (!this.validateUserGuess(input)) {
+        throw new Error('1부터 9까지 서로 다른 3자리 숫자를 입력해주세요.');
+      }
+
       const player = Array.from(input, Number);
     });
+  }
+
+  validateUserGuess(input) {
+    if (input.length !== 3) return false;
+
+    const inputNumbers = Array.from(input, Number);
+    if (inputNumbers.some((number) => !Number.isInteger(number))) return false;
+    if (inputNumbers.some((number) => number === 0)) return false;
+
+    const inputNumberSet = new Set(inputNumbers);
+    if (inputNumberSet.size !== 3) return false;
+
+    return true;
   }
 }
 
