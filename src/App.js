@@ -8,7 +8,7 @@ const MESSAGE = {
   BALL: (ball) => `${ball}볼`,
   BALL_STRIKE: (ball, strike) => `${ball}볼 ${strike}스트라이크`,
   GAME_END: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  INPUT_NEW_GAME: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  INPUT_GAME_END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
   WRONG_INPUT: '잘못된 입력입니다.',
 };
 
@@ -44,19 +44,19 @@ class App {
   processGuess() {
     MissionUtils.Console.readLine(MESSAGE.INPUT_GUESS, (input) => {
       this.guess = input;
-      this.checkGuess();
+      this.checkGuessInput();
       this.calculateBallCount();
       this.printBallCount();
       if (this.ballCount.strike === 3) {
         this.printGameEndMessage();
-        this.processNewGame();
+        this.processGameEnd();
         return;
       }
       this.processGuess();
     });
   }
 
-  checkGuess() {
+  checkGuessInput() {
     if (
       this.guess.length !== 3
       || new Set(this.guess).size !== 3
@@ -98,24 +98,24 @@ class App {
     MissionUtils.Console.print(MESSAGE.GAME_END);
   }
 
-  processNewGame() {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_NEW_GAME, (input) => {
-      this.newGame = input;
-      this.checkNewGame();
-      this.handleNewGame();
+  processGameEnd() {
+    MissionUtils.Console.readLine(MESSAGE.INPUT_GAME_END, (input) => {
+      this.gameEnd = input;
+      this.checkGameEndInput();
+      this.handleGameEnd();
     });
   }
 
-  checkNewGame() {
-    if (this.newGame !== '1' && this.newGame !== '2') {
+  checkGameEndInput() {
+    if (this.gameEnd !== '1' && this.gameEnd !== '2') {
       throw new Error(MESSAGE.WRONG_INPUT);
     }
   }
 
-  handleNewGame() {
-    if (this.newGame === '1') {
+  handleGameEnd() {
+    if (this.gameEnd === '1') {
       this.startGame();
-    } else if (this.newGame === '2') {
+    } else if (this.gameEnd === '2') {
       this.exitGame();
     }
   }

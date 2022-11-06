@@ -31,7 +31,7 @@ describe('사용자 숫자 입력 검증', () => {
     app.guess = '1234';
 
     expect(() => {
-      app.checkGuess();
+      app.checkGuessInput();
     }).toThrow('잘못된 입력입니다.');
   });
 
@@ -40,7 +40,7 @@ describe('사용자 숫자 입력 검증', () => {
     app.guess = '111';
 
     expect(() => {
-      app.checkGuess();
+      app.checkGuessInput();
     }).toThrow('잘못된 입력입니다.');
   });
 
@@ -49,7 +49,7 @@ describe('사용자 숫자 입력 검증', () => {
     app.guess = '012';
 
     expect(() => {
-      app.checkGuess();
+      app.checkGuessInput();
     }).toThrow('잘못된 입력입니다.');
   });
 
@@ -58,7 +58,7 @@ describe('사용자 숫자 입력 검증', () => {
     app.guess = 'abc';
 
     expect(() => {
-      app.checkGuess();
+      app.checkGuessInput();
     }).toThrow('잘못된 입력입니다.');
   });
 
@@ -67,7 +67,7 @@ describe('사용자 숫자 입력 검증', () => {
     app.guess = '123';
 
     expect(() => {
-      app.checkGuess();
+      app.checkGuessInput();
     }).not.toThrow();
   });
 });
@@ -206,28 +206,28 @@ describe('게임 종료 문구 출력', () => {
 describe('게임 재시작 여부 검증', () => {
   test('잘못된 입력', () => {
     const app = new App();
-    app.newGame = '3';
+    app.gameEnd = '3';
 
     expect(() => {
-      app.checkNewGame();
+      app.checkGameEndInput();
     }).toThrowError('잘못된 입력입니다.');
   });
 
   test('게임 재시작', () => {
     const app = new App();
-    app.newGame = '1';
+    app.gameEnd = '1';
 
     expect(() => {
-      app.checkNewGame();
+      app.checkGameEndInput();
     }).not.toThrow();
   });
 
   test('게임 종료', () => {
     const app = new App();
-    app.newGame = '2';
+    app.gameEnd = '2';
 
     expect(() => {
-      app.checkNewGame();
+      app.checkGameEndInput();
     }).not.toThrow();
   });
 });
