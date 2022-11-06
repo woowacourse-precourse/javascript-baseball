@@ -69,9 +69,18 @@ class App {
     const str = ballStr + " " + strikeStr;
     this.utils.Console.print(str.trim());
   }
+  //아래에서 부터는 유저 시나리오와 관련된 로직
   init() {
     this.answer = this.generateNumbers();
     this.utils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
+  start() {
+    this.utils.Console.readLine("숫자를 입력해주세요: ", (inputs) => {
+      this.inputs = inputs.split("").map((v) => parseInt(v));
+      this.validateInput(this.inputs);
+
+      const score = this.compareNumbers(this.answer, this.inputs);
+    });
   }
   play() {}
 }
