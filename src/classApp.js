@@ -54,7 +54,7 @@ class App {
     } else this.getUserInput();
   }
 
-  checkException(inputNum, checkStyle) {
+  checkPlayingNum(inputNum, allowed) {
     if (inputNum.length !== 3) {
       return false;
     }
@@ -66,21 +66,46 @@ class App {
       .forEach((str) => {
         allowed = !isNaN(str) && allowed;
       });
-
     return allowed;
+  }
+
+  checkRestartNum(inputNum) {
+    const RESTART = "1";
+    const EXIT = "2";
+    if (inputNum.length !== 1) {
+      return false;
+    }
+    if (inputNum !== RESTART && inputNum !== EXIT) {
+      return false;
+    }
+    return true;
+  }
+
+  checkException(inputNum, checkStyle) {
+    const playingInput = 0;
+    const restartInput = 1;
+    if (checkStyle === playingInput) {
+      return this.checkPlayingNum(inputNum, true);
+    } else if (checkStyle === restartInput) {
+      return this.checkRestartNum(inputNum);
+    }
   }
 
   restartQuestion() {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
-        if (!checkException(input, 1)) {
+        if (!this.checkException(input, 1)) {
           throw "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.";
         }
         this.restartInput = input;
+        if (this.restartInput === "1") this.startGame();
+        else if (this.restartInput === "2") {
+          Console.print("게임 종료");
+          Console.close();
+        }
       }
     );
-    if (this.restartInput === "1") this.startGame();
   }
 
   startGame() {
