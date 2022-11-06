@@ -78,4 +78,15 @@ describe("기능 테스트", () => {
       expect(err).toEqual(new Error("중복된 숫자가 존재합니다."));
     }
   });
+
+  test("스트라이크 카운트를 결정하는 기능", () => {
+    const app = new App();
+    const case1 = app.decideStrikeCount("123", "189");
+    const case2 = app.decideStrikeCount("123", "129");
+    const case3 = app.decideStrikeCount("123", "123");
+
+    expect(case1).toEqual(1);
+    expect(case2).toEqual(2);
+    expect(case3).toEqual(3);
+  });
 });
