@@ -28,6 +28,8 @@ class App {
 
   input() {
     this.readLine('숫자를 입력해주세요 : ', userNumber => {
+      this.validate(userNumber);
+
       const { strike, ball } = this.checkAnswer(userNumber);
       const IS_ANSWER = strike === 3;
 
@@ -44,8 +46,6 @@ class App {
   checkAnswer(userNumber) {
     const userNumberArr = userNumber.split('').map(Number);
     let [strike, ball] = [0, 0];
-
-    if (userNumber.length !== 3) throw Error('잘못된 입력입니다.');
 
     userNumberArr.forEach((number, idx) => {
       const findIndex = this.computer.indexOf(number);
@@ -85,6 +85,17 @@ class App {
   readLine(content, func) {
     MissionUtils.Console.readLine(content, func);
   }
+
+  validate(userNumber) {
+    const IS_WRONG_INPUT = isNaN(userNumber) || userNumber.length !== 3;
+    const HAS_SAME_NUMBER =
+      userNumber[0] === userNumber[1] ||
+      userNumber[1] === userNumber[2] ||
+      userNumber[2] === userNumber[0];
+
+    if (IS_WRONG_INPUT || HAS_SAME_NUMBER) throw new Error('잘못된 입력입니다.');
+  }
 }
 
+new App().play();
 module.exports = App;
