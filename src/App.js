@@ -75,6 +75,20 @@ function userMessage(strike, ball) {
   //0개는 출력물로 처리하면 안됨.
 }
 
+function isStrikeBall(userNum) {
+  let strike = 0;
+  let ball = 0;
+  userNum.split("").forEach((item, idx) => {
+    const index = computerNum.indexOf(item);
+    if (computerNum[idx] === item && index > -1) {
+      return (strike += 1);
+    }
+    if (index > -1) {
+      return (ball += 1);
+    }
+  });
+  return [strike, ball];
+}
 
 class App {
   start() {
