@@ -23,9 +23,14 @@ class App {
     const anwser = this.startGame().createAnswer();
 
     while (this.game) {
-      await this.inputUserAnswer();
-      if (this.checkUserGameAnswer()) this.exceptionEnd();
-      this.compareUserAnswer(anwser);
+      try {
+        await this.inputUserAnswer();
+        if (this.checkUserGameAnswer()) throw new Error("out of range");
+        this.compareUserAnswer(anwser);
+      } catch (e) {
+        console.log(e);
+        this.exceptionEnd();
+      }
     }
 
     if (this.game) this.endGame();
@@ -50,14 +55,20 @@ class App {
   }
 
   checkUserGameAnswer() {
-    if (typeof this.userAnswer !== "number") return true;
     if (this.userAnswer < 100 || this.userAnswer > 999) return true;
     return false;
   }
 
-  // - 입력값과 컴퓨터 값을 비교하는 기능
   compareUserAnswer(answer) {
-    MissionUtils.Console.print(answer, this.userAnswer);
+    const user = this.userAnswer.split("");
+    const obj = { ball: 0, strike: 0 };
+    user.map((n, i) => {
+      const num = parseInt(n);
+      if (answer[i] !== num && answer.includes(num)) obj.ball += 1;
+      if (answer[i] === num) obj.strike += 1;
+    });
+
+    return obj;
   }
 
   // - 결과를 출력하는 기능
