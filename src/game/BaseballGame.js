@@ -42,7 +42,7 @@ class BaseballGame {
     }
 
     if (strike === NUMBER_LENGTH) {
-      Console.print(`${strikeMessage}`);
+      Console.print(`${strikeMessage}\n` + GAME_MESSAGE.correct);
 
       return true;
     }
