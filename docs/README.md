@@ -43,6 +43,8 @@
 - [x] `App` 내부에서 `Input`, `Guess` 기능 구현.
 - [x] `CheckValidation` 예외 처리는 `App.js`에서 분리.
 - [x] 볼카운트 판단 및 출력 함수를 `App.js`에서 분리.
+- [x] 인덱스와 원소 모두를 사용하는 for문은 forEach문으로 대체.
+- [x] true or falsy로 갈리는 다수의 if문은 삼항연산자 지향.
 
 ### 유의 사항
 
