@@ -14,6 +14,7 @@ class App {
 
       this.changeUserNumbersToArray(userNumber);
       this.getScore(this.computerNumberArray, this.userNumberArray);
+      this.getScoreResult(this.score);
     });
   }
 
@@ -61,6 +62,18 @@ class App {
     }
 
     this.score = score;
+  }
+
+  getScoreResult(score) {
+    let scoreResult = '';
+
+    if (score[0] === 0 && score[1] === 0) scoreResult = '낫싱';
+    if (score[0] === 0 && score[1] > 0) scoreResult = `${score[1]}볼`;
+    if (score[0] > 0 && score[1] === 0) scoreResult = `${score[0]}스트라이크`;
+    if (score[0] > 0 && score[1] > 0)
+      scoreResult = `${score[1]}볼 ${score[0]}스트라이크`;
+
+    this.scoreResult = scoreResult;
   }
 
   play() {
