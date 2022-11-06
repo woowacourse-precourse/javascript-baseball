@@ -76,19 +76,10 @@ class App {
   };
 
   discriminator(userNumbersArray, refNumbersArray) {
-    let discrimination = "";
-    let strikeCount = 0;
-    let ballCount = 0;
+    const strikeCount = this.strikeCountter(userNumbersArray, refNumbersArray);
+    const ballCount = this.ballCounter(userNumbersArray, refNumbersArray);
 
-    for (let i = 0; i < 3; i++) {
-      if (refNumbersArray.indexOf(userNumbersArray[i]) === i) {
-        strikeCount = strikeCount + 1;
-      } else if (refNumbersArray.includes(userNumbersArray[i])) {
-        ballCount = ballCount + 1;
-      }
-    }
-
-    discrimination =
+    const discrimination =
       ballCount && strikeCount
         ? `${ballCount}볼 ${strikeCount}스트라이크`
         : (ballCount ? `${ballCount}볼` : "") +
