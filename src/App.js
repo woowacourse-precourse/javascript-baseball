@@ -36,8 +36,8 @@ class App {
 
   isValidUserNumbers(userAnswer) {
     const userNumbers = userAnswer.split('').map((number) => parseInt(number, 10));
-    isScopeUserNumber(userNumbers);
-    isScopeLength(userNumbers);
+    this.isScopeUserNumber(userNumbers);
+    this.isScopeLength(userNumbers);
   }
 
   isScopeUserNumber(userNumbers) {
@@ -45,6 +45,12 @@ class App {
 
     if (!isScope) {
       throw new Error('1 ~ 9까지의 숫자만 입력하세요');
+    }
+  }
+
+  isScopeLength(userNumbers) {
+    if (userNumbers.length !== 3) {
+      throw new Error('3자리의 숫자를 입력해주세요');
     }
   }
 }
