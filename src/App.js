@@ -19,8 +19,19 @@ class App {
 
   playerInput() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      this.compareNumber(input);
+      this.checkNumber(input);
     });
+  }
+
+  checkNumber(input) {
+    if (input.length !== 3) throw `숫자를 3개만 입력해 주세요.`;
+    if (
+      input.length === 3 &&
+      (input[0] === input[1] || input[0] === input[2] || input[1] === input[2])
+    )
+      throw `서로 다른 숫자 3개를 입력해 주세요.`;
+    if (isNaN(input)) throw `숫자 값만 입력 가능해요.`;
+    if (input.length === 3) this.compareNumber(input);
   }
 
   compareNumber(input) {
