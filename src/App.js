@@ -11,7 +11,6 @@ class App {
 
   start() {
     this.computer = this.setAnswer();
-    console.log(this.computer);
     this.input();
   }
 
@@ -51,6 +50,8 @@ class App {
   checkAnswer(userNumber) {
     const userNumberArr = userNumber.split('').map(Number);
     let [strike, ball] = [0, 0];
+
+    if (userNumber.length !== 3) throw Error('잘못된 입력입니다.');
 
     userNumberArr.forEach((number, idx) => {
       const findIndex = this.computer.indexOf(number);
