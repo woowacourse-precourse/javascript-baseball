@@ -49,11 +49,12 @@ class App {
     let BALL = 0;
     let STRIKE = 0;
 
-    for (let i = 0; i < this.COMPUTER_NUMBER; i++) {
+    for (let i = 0; i < 3; i++) {
       if (this.COMPUTER_NUMBER[i] === input[i]) STRIKE++;
       if (this.COMPUTER_NUMBER.indexOf(input[i]) >= 0) BALL++;
     }
 
+    BALL = BALL - STRIKE;
     this.gameResult([BALL, STRIKE]);
   }
 
