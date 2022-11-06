@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GameUtils = require("./GameUtils.js");
-const Print = require("./Print.js");
-const constants = require("./data/constants.js");
+const GameUtils = require("./GameUtils");
+const Print = require("./Print");
+const constants = require("./data/constants");
 
 class App {
   play() {
@@ -11,7 +11,7 @@ class App {
     this.submitInput();
   }
   submitInput() {
-    MissionUtils.Console.readLine(constants.GAME_MESSAGE.INPUT, (input) => {
+    MissionUtils.Console.readLine(constants.GAME_MESSAGE.input, (input) => {
       input = GameUtils.System.toFilterdArray(input);
       GameUtils.Validator.isVaildAnswer(input);
       const result = GameUtils.System.getResult(input, this.answer);
@@ -24,14 +24,15 @@ class App {
     this.clearGame();
   }
   clearGame() {   
-    MissionUtils.Console.readLine(constants.GAME_MESSAGE.CLEAR, (submit) => {
-      GameUtils.Validator.isVaildRestartSubmit(+submit);
-      this.isRestart(+submit);
+    MissionUtils.Console.readLine(constants.GAME_MESSAGE.clear, (submit) => {
+      GameUtils.Validator.isVaildRestartSubmit(Number(submit));
+      this.isRestart(Number(submit));
     });
   }
-  isRestart(submit) {    
-    if(+submit === 1) this.play();
-    if(+submit === 2) {
+  isRestart(submit) {  
+    submit = Number(submit);  
+    if(submit === 1) this.play();
+    if(submit === 2) {
       Print.GameMessage.gameover();
       MissionUtils.Console.close();
     }
