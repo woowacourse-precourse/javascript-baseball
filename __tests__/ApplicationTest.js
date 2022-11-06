@@ -79,6 +79,20 @@ describe("숫자 야구 게임", () => {
     expect(App.isAllDifferent('12bb')).toEqual(false);
   });
 
+  test("isCorrectInput", () => {
+    // 1부터 9까지 서로 다른 수로 이루어진 세 자릿수인지 테스트
+    expect(App.isCorrectInput('123')).toEqual(true);
+    expect(App.isCorrectInput('135')).toEqual(true);
+    expect(App.isCorrectInput('987')).toEqual(true);
+    expect(App.isCorrectInput('1234')).toEqual(false);
+    expect(App.isCorrectInput('012')).toEqual(false);
+    expect(App.isCorrectInput('203')).toEqual(false);
+    expect(App.isCorrectInput('1203')).toEqual(false);
+    expect(App.isCorrectInput('abc')).toEqual(false);
+    expect(App.isCorrectInput('1abc')).toEqual(false);
+    expect(App.isCorrectInput('@#$')).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
