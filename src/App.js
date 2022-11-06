@@ -42,6 +42,7 @@ class Computer {
 class GameLoop {
   constructor() {
     this.Opponent = new Computer();
+    this.gameOver = false;
   }
 
   start() {
@@ -50,10 +51,15 @@ class GameLoop {
   }
 
   _continue() {
-    let message = MissionUtils.Console.readLine(
-      "숫자를 입력해주세요 : ",
-      this._validate
-    );
+    while (!this.gameOver) {
+      let message = MissionUtils.Console.readLine(
+        "숫자를 입력해주세요 : ",
+        this._validate
+      );
+      this.gameOver = this._respond(message);
+    }
+
+    this.restart();
   }
 
   _validate(message) {
