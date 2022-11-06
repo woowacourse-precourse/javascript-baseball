@@ -14,9 +14,8 @@ class App {
     if (this.answer === "") {
       this.print(this.START);
       this.answer = this.generateAnswer();
+      console.log(this.answer);
     }
-
-    console.log(this.answer);
 
     this.getInput(this.REQUEST_NUMBER, (userInput) => {
       if (this.isValidInput(userInput)) {
@@ -25,14 +24,13 @@ class App {
       }
 
       if (this.isGameEnd()) {
+        this.print(this.END);
         this.askPlayOrExit();
-        console.log("??");
+        return;
       }
 
       this.play();
     });
-
-    // this.print(this.END);
   }
 
   calculateCount(userInput) {
@@ -40,16 +38,13 @@ class App {
       strike = 0;
 
     Array.from(userInput)
-      .filter((number) => {
-        if (this.answer.includes(number)) return number;
-      })
-      .forEach((number, index) => {
-        if (this.answer.indexOf(number) === index) {
-          strike += 1;
-        } else {
-          ball += 1;
-        }
-      });
+    .forEach((number, index) => {
+      if (this.answer.indexOf(number) === index) {
+        strike += 1;
+      } else if (this.answer.includes(number)) {
+        ball += 1;
+      }
+    });
 
     if (strike === 0 && ball === 0) {
       return "낫싱";
@@ -103,13 +98,11 @@ class App {
   }
 
   askPlayOrExit() {
-    Console.readLine(this.AGAIN_OR_END, (userInput) => {
+    this.getInput(this.AGAIN_OR_END, (userInput) => {
       if (userInput === "1") this.play();
       else Console.close();
     });
   }
-
-  isOneOrTwo(userInput) {}
 
   print(message) {
     Console.print(message);
