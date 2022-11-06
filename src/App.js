@@ -43,20 +43,7 @@ class App {
         });
     }
     judge(number) {
-        let ball = 0;
-        let strike = 0;
-
-        for (let index = 0; index < this.answer.length; index++) {
-            const check = number.indexOf(this.answer[index]);
-            // 분리할것!
-            if (check > -1) {
-                if (check === index) {
-                    strike++;
-                } else {
-                    ball++;
-                }
-            }
-        }
+        const [ball, strike] = this.countBallAndStrike(number);
 
         if (!strike && !ball) {
             return '낫싱';
@@ -67,6 +54,17 @@ class App {
         } else {
             return `${ball}볼 ${strike}스트라이크`;
         }
+    }
+    countBallAndStrike(number) {
+        let ball = 0;
+        let strike = 0;
+
+        for (let index = 0; index < this.answer.length; index++) {
+            const check = number.indexOf(this.answer[index]);
+            if (check > -1) check === index ? strike++ : ball++;
+        }
+
+        return [ball, strike];
     }
     verification(input, type) {
         const exception = new Exception(input, type);
