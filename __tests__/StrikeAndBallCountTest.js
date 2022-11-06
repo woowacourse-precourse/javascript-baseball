@@ -17,4 +17,19 @@ describe.only("스트라이크 볼 카운트 테스트", () => {
       expect(result).toEqual(strikeAndBallCount);
     });
   });
+
+  test("스트라이크 볼 결과를 문자열로 바꿔주는 함수", () => {
+    const inputs = [
+      [3, 0, "3스트라이크"],
+      [1, 1, "1볼 1스트라이크"],
+      [0, 2, "2볼"],
+      [1, 2, "2볼 1스트라이크"],
+      [0, 0, "낫싱"],
+    ];
+
+    inputs.forEach(([strike, ball, resultString]) => {
+      const result = StrikeAndBall.getString(strike, ball);
+      expect(result).toEqual(resultString);
+    });
+  });
 });
