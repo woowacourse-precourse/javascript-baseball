@@ -63,6 +63,18 @@ class BaseballGame {
     this.strike = 0;
   }
 
+  gameContinueorEnd(strike) {
+    if (strike === 3) {
+      this.initializeBallandStrike();
+
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.askReplayorClose();
+    } else {
+      this.initializeBallandStrike();
+      this.inputUserAnswer();
+    }
+  }
+
   printBallStrike() {
     if (this.ball === 0 && this.strike !== 0) {
       MissionUtils.Console.print(`${this.strike}스트라이크`);
@@ -74,15 +86,7 @@ class BaseballGame {
       MissionUtils.Console.print("낫싱");
     }
 
-    if (this.strike === 3) {
-      this.initializeBallandStrike();
-
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.askReplayorClose();
-    } else {
-      this.initializeBallandStrike();
-      this.inputUserAnswer();
-    }
+    this.gameContinueorEnd(this.strike);
   }
 
   askReplayorClose() {
