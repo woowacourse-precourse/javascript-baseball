@@ -62,25 +62,6 @@ class App {
     );
   }
 
-  gameStarter(refNumbersArr) {
-    let discrimination = "";
-
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      const usersInput = answer.trim();
-      this.errorChecker(usersInput);
-      const userNumbersArr = this.stringToArrConverter(usersInput);
-      let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
-      this.printer(discrimination);
-
-      if (discrimination !== "3스트라이크") {
-        this.gameStarter(refNumbersArr);
-      } else if (discrimination === "3스트라이크") {
-        this.printer("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        this.reStartSelector();
-      }
-    });
-  }
-
   errorChecker(userNumbersArr) {
     for (const errorCheck in this.errorCheckList) {
       this.errorCheckList[errorCheck](userNumbersArr);
@@ -99,6 +80,25 @@ class App {
       }
     },
   };
+
+  gameStarter(refNumbersArr) {
+    let discrimination = "";
+
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      const usersInput = answer.trim();
+      this.errorChecker(usersInput);
+      const userNumbersArr = this.stringToArrConverter(usersInput);
+      let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
+      this.printer(discrimination);
+
+      if (discrimination !== "3스트라이크") {
+        this.gameStarter(refNumbersArr);
+      } else if (discrimination === "3스트라이크") {
+        this.printer("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.reStartSelector();
+      }
+    });
+  }
 
   play() {
     this.printer("숫자 야구 게임을 시작합니다.");
