@@ -23,8 +23,7 @@ function getStrikeCount(answer, input) {
 }
 function getString(strike, ball) {
   if (strike === 0 && ball === 0) return "낫싱";
-  const output =
-    (ball ? `${ball}볼 ` : ``) + (strike ? `${strike}스트라이크` : ``);
+  const output = (ball ? `${ball}볼 ` : ``) + (strike ? `${strike}스트라이크` : ``);
 
   return output.trim();
 }

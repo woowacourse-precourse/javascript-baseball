@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
+const StrikeAndBall = require("./StrikeAndBall");
 
 class App {
   constructor() {
@@ -31,6 +32,19 @@ class App {
       if (!validateInput(input)) {
         MissionUtils.Console.close();
         throw new Error("잘못된 입력입니다.");
+      }
+
+      const [strikeCount, ballCount] = StrikeAndBall.getResult(this.threeRandomNumbers, input);
+      const resultOutput = StrikeAndBall.getString(strikeCount, ballCount);
+
+      MissionUtils.Console.print(resultOutput);
+
+      if (strikeCount === 3) {
+        MissionUtils.Console.print("게임 종료");
+        MissionUtils.Console.close();
+      }
+      if (strikeCount !== 3) {
+        this.startPlayerTurn();
       }
     });
   }

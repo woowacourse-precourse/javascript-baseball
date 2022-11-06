@@ -1,5 +1,6 @@
 const App = require("../src/App");
 const StrikeAndBall = require("../src/StrikeAndBall");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
