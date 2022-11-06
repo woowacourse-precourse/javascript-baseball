@@ -12,5 +12,5 @@ const GAME_MESSAGE = Object.freeze({
   CORRECT: '3스트라이크',
 });
 
-module.exports = SYSTEM_MESSAGE;
-module.exports = GAME_MESSAGE;
+exports.SYSTEM_MESSAGE = SYSTEM_MESSAGE;
+exports.GAME_MESSAGE = GAME_MESSAGE;

@@ -7,4 +7,4 @@ const ERROR_MESSAGE = Object.freeze({
   INVALID_NUM_ERROR: `숫자로 ${KEEP_PLAY} 혹은 ${EXIT}를 입력해주세요.`,
 });
 
-module.exports = ERROR_MESSAGE;
+exports.ERROR_MESSAGE = ERROR_MESSAGE;

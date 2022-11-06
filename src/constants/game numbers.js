@@ -8,7 +8,7 @@ const BASIC_NUMBER = Object.freeze({
 const PICK_NUMBER = Object.freeze({
   MIN: 1,
   MAX: 9,
-  PICK_NUMBER: 3,
+  PICK: 3,
 });
 
 const REPLAY_NUMBER = Object.freeze({
@@ -16,6 +16,6 @@ const REPLAY_NUMBER = Object.freeze({
   EXIT: '2',
 });
 
-module.exports = BASIC_NUMBER;
-module.exports = PICK_NUMBER;
-module.exports = REPLAY_NUMBER;
+exports.BASIC_NUMBER = BASIC_NUMBER;
+exports.PICK_NUMBER = PICK_NUMBER;
+exports.REPLAY_NUMBER = REPLAY_NUMBER;
