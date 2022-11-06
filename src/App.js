@@ -39,6 +39,17 @@ class App {
       console.log('서로 다른 숫자가 아님')
     }
 
+    // 정답 숫자와 사용자의 입력값 체크
+    let result = [0, 0]
+    for(let i = 0; i < 3; i++){
+      if(user[i] === computer[i]){
+        result[0] += 1;
+      }
+      else if(computer.includes(user[i])){
+        result[1] += 1;
+      }
+    }
+
   }
 }
 
