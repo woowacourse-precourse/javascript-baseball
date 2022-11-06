@@ -45,28 +45,14 @@ class App {
   CompareNumber(My_Number,Computer_Number){
     let strike=0;
     let ball=0;
-    const find1 = My_Number.indexOf(Computer_Number[0]);
-    const find2 = My_Number.indexOf(Computer_Number[1]);
-    const find3 = My_Number.indexOf(Computer_Number[2]);
-    if(find1>=0){
-      if(find1===0){
-        strike++;
-      }else{
-        ball++;
-      }
-    }
-    if(find2>=0){
-      if(find2===1){
-        strike++;
-      }else{
-        ball++;
-      }
-    }
-    if(find3>=0){
-      if(find3===2){
-        strike++;
-      }else{
-        ball++;
+    for(let i=0;i<3;i++){
+      const find1 = My_Number.indexOf(Computer_Number[i]);
+      if(find1>=0){
+        if(find1===i){
+          strike++;
+        }else{
+          ball++;
+        }
       }
     }
     this.Printlog(strike,ball)
@@ -88,19 +74,19 @@ class App {
   })
   }
   Input(){
-      MissionUtils.Console.readLine('번호를 입력해주세요.', (answer) => {
-        let temp=answer.split(' ').join('').split('').map(Number)
-        const set = new Set(temp);
-        if(set.size!==temp.length){
+      MissionUtils.Console.readLine('번호를 입력해주세요.', (input) => {
+        let Input_Arr=input.split(' ').join('').split('').map(Number)
+        const overlap = new Set(Input_Arr);
+        if(overlap.size!==Input_Arr.length){
           throw("Request is failed")
         }
-        for(let i=0;i<temp.length;i++){
-          if(isNaN(temp[i])){
+        for(let i=0;i<Input_Arr.length;i++){
+          if(isNaN(Input_Arr[i])){
             throw("Request is failed")
           }
         }
-        if (temp.length===3) {
-          this.CompareNumber(temp, this.Computer_Number)
+        if (Input_Arr.length===3) {
+          this.CompareNumber(Input_Arr, this.Computer_Number)
         }else{
           throw("Request is failed")
         }
