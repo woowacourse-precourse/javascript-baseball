@@ -91,7 +91,6 @@ class App {
 
   showMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    console.log(strike, ball);
   }
 
   userInput() {
@@ -129,10 +128,10 @@ class App {
   compareNumbers(userNumberArray) {
     console.log("사용자 :", userNumberArray);
     console.log("컴퓨터: ", COMPUTER);
-
+    let strike=0
+    let ball=0
     for (let idx = 0; idx < userNumberArray?.length; idx++) {
       let findIndex = COMPUTER.indexOf(userNumberArray[idx]);
-      console.log(findIndex);
       if (findIndex > -1) {
         if (findIndex === idx) {
           strike++;
@@ -140,11 +139,12 @@ class App {
           ball++;
         }
       }
-      console.log(strike, ball);
     }
-    if (strike !== 3) {
-      this.userInput();
+    MissionUtils.Console.print(`스트라이크 : ${strike} 볼 : ${ball}`);
+    if (strike === 3) {
+      this.gameReplay()
     }
+    this.userInput();
   }
 
   checkStrikeBall() {}
