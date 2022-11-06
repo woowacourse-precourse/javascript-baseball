@@ -1,10 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const BaseBall = require('./BaseBall');
+
 const RandomNumber = require('./RandomNumber');
 
+const Exception = require('./exception');
+const BaseBallException = require('./exception/BaseBall');
+const NextException = require('./exception/Next');
+
 const { COMMAND } = require('./utils/constants');
-const { Exception, NextException, BaseBallException } = require('./Exception');
 
 class App {
   #exception;
