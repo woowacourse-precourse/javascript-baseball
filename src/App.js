@@ -38,6 +38,15 @@ const gm_result = (input_num, computer_num) => {
   }
 }
 
+const gen_rand_num = () => {
+  result = 0
+  for (let i = 0; i < 3; i++){
+    temp = MissionUtils.Random.pickNumberInRange(1, 9)*(10**i)
+    result = result + temp
+  }  
+  return result
+}
+
 class App {
   play() {}
 }
