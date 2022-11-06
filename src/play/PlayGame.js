@@ -8,6 +8,10 @@ class PlayGame extends Mission {
     this.pcNumber = require("../input/GetComputerInput");
   }
 
+  gameReady() {
+    this.gameStart(new this.pcNumber().makeRandomNumbers());
+  }
+
   gameStart(computerInputNumbers) {
     const scoreMessage = new this.userNumber();
     this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
