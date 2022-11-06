@@ -12,6 +12,12 @@ class App {
       correctNumbers.add(Random.pickNumberInRange(1, 9));
     }
   }
+
+  askForNumbers() {
+    Console.readLine("숫자를 입력해주세요 : ", (receivedNumbers) => {
+      // receivedNumbers의 유효성 검사하기
+    });
+  }
 }
 
 const app = new App();
