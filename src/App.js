@@ -71,14 +71,6 @@ class App {
     return Array.from(numbers).join("");
   }
 
-  // async getPlayerInput(question) {
-  //   return new Promise((resolve) => {
-  //     Console.readLine(question, (userInput) => {
-  //       resolve(userInput);
-  //     });
-  //   });
-  // }
-
   getInput(question, callback) {
     Console.readLine(question, callback);
   }
