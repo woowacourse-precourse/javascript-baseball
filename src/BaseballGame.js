@@ -20,6 +20,10 @@ class BaseballGame {
 
   restart() {
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (choice) => {
+      if (/[^12]/.test(choice)) {
+        Console.close();
+        throw new Error('잘못된 입력입니다.');
+      }
       if (choice == 1) {
         this.start();
         return;
