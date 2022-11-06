@@ -7,8 +7,12 @@ class App {
     while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
       const errorFlag = oneGame(computerNumbers);
-      if (errorFlag == 1) throw new Error("입력 숫자 개수가 맞지 않습니다.");
+      if (errorFlag == 1) throw new Error("입력 숫자 개수 에러");
       gameAgain = askGameAgain();
+      if (gameAgain != 1 && gameAgain != 2) {
+        console.log("[Error]재시작? - 입력 값이 1이나 2가 아닙니다.");
+        throw new Error("입력 값이 1이나 2가 아님");
+      };
     }
     gameCompleteEndText();
   }
@@ -36,12 +40,14 @@ const playerNumbersInput = () => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
     input = answer;
   });
-  if(input.length != 3){
-    throw "숫자 개수 에러";
-  }
   inspect = Number(input);
   if (isNaN(inspect)){
-    throw "숫자가 아님";
+    console.log("[Error]입력이 숫자가 아닙니다.");
+    throw "입력이 숫자가 아님";
+  }
+  if(input.length != 3){
+    console.log("[Error]입력 숫자 개수가 맞지 않습니다");
+    throw "입력 숫자 개수 에러";
   }
   return input;
 };
@@ -55,7 +61,7 @@ const oneGame = (computerNumbers) => {
       playerNumbers = playerNumbersInput();
     }catch(error){
       errorFlag = 1;
-      return errorFlag;
+      break;
     }
     strikeBall = compareComputerAndPlayer(computerNumbers, playerNumbers);
     printStrikeAndBall(strikeBall);
