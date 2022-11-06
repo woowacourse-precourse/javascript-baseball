@@ -7,9 +7,6 @@ class App {
   }
 }
 
-module.exports = App;
-
-
 class ComputerRandomNumber {
   randomNumber() {
     const number = [];
@@ -142,3 +139,9 @@ const NUMBER_CONSTANTS = {
   END: '2',
   MAX_SCORE: 3,
 };
+
+module.exports = {
+  App,
+  ComputerRandomNumber,
+  BaseballPlayTool,
+}
