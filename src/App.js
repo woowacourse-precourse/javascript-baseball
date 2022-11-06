@@ -105,7 +105,7 @@ class App {
             return this.questionNumber();
         }
         if (ballCount !== 0 && strikeCount !== 0) {
-            Console.print(`${ballCount + PLAYING.BALL} ${strikeCount + PLAYING.STRIKE}`);
+            Console.print(`${ballCount - strikeCount + PLAYING.BALL} ${strikeCount + PLAYING.STRIKE}`);
             return this.questionNumber();
         }
     }
