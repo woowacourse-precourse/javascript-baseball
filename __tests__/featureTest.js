@@ -63,4 +63,8 @@ describe('User의 입력값 받기', () => {
     const userInput = ['345', '45d'];
     userInput.forEach((input) => expect(Number.isNaN(+input)).toBe(false));
   });
+  test('2-2. 입력된 값의 각 숫자가 1~9 범위가 아닌 경우', () => {
+    const userInput = ['345', '4513'];
+    userInput.forEach((input) => expect(input.length).toBe(3));
+  });
 });
