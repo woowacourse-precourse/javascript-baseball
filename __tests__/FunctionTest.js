@@ -104,4 +104,23 @@ describe("기능 테스트", () => {
     expect(case2).toEqual(2);
     expect(case3).toEqual(3);
   });
+
+  test("카운트 결과를 사용자에게 보여주는 기능", () => {
+    const app = new App();
+    const case0 = app.makeCountMessage(app.decideCount("123", "456")); // 낫싱
+    const case1 = app.makeCountMessage(app.decideCount("123", "156")); // 1스트라이크
+    const case2 = app.makeCountMessage(app.decideCount("123", "126")); // 2스트라이크
+    const case3 = app.makeCountMessage(app.decideCount("123", "123")); // 3스크라이크
+    const case4 = app.makeCountMessage(app.decideCount("123", "152")); // 1볼 1스트라이크
+    const case5 = app.makeCountMessage(app.decideCount("123", "132")); // 2볼 1스트라이크
+    const case6 = app.makeCountMessage(app.decideCount("123", "231")); // 3볼
+
+    expect(case0).toEqual("낫싱");
+    expect(case1).toEqual("1스트라이크");
+    expect(case2).toEqual("2스트라이크");
+    expect(case3).toEqual("3스트라이크");
+    expect(case4).toEqual("1볼 1스트라이크");
+    expect(case5).toEqual("2볼 1스트라이크");
+    expect(case6).toEqual("3볼");
+  });
 });
