@@ -10,6 +10,7 @@ class App {
         randoms.push(randomNumber);
       }
     }
+
     return randoms.join('');
   };
 
@@ -19,8 +20,8 @@ class App {
 
   isUniqueThreeNumber(numbers) {
     return (numbers.length === 3) 
-            && (numbers.length === new Set(numbers).size)
-            && !(/[^1-9]/g.test(numbers));
+      && (numbers.length === new Set(numbers).size)
+      && !(/[^1-9]/g.test(numbers));
   };
 
   getBallStrike(numbers, answers) {
@@ -31,6 +32,7 @@ class App {
       if (number === answers[idx]) strike++;
       else if (answers.includes(number)) ball++;
     })
+
     return [ball, strike];
   };
 
@@ -62,7 +64,7 @@ class App {
       if (this.isUniqueThreeNumber(numbers)) {
         this.printResult(numbers, answers);
       } else {
-        throw new Error('입력 형식에 맞지 않습니다.')
+        throw new Error('입력 형식에 맞지 않습니다.');
       }
     });
   }
