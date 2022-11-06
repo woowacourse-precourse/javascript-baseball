@@ -6,6 +6,10 @@ class User{
         this.input='';
     }
 
+    setState(state){
+        this.state=state;
+    }
+
     print(msg){
         MissionUtils.Console.print(msg);
     }
