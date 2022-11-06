@@ -41,5 +41,8 @@
 
 ```
 // ex
-refactor: reverseAlphabet 메서드 분리
+feat: getResultMessage 함수 구현
+
+사용자의 입력 숫자에 대한 힌트와 결과(스트라이크, 볼, 낫싱) 출력함
+이 과정을 반복해 컴퓨터가 선택한 3개의 숫자를 모두 맞히면 게임을 종료함
 ```
