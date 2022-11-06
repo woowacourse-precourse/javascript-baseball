@@ -5,17 +5,17 @@ const MissionUtils = require("@woowacourse/mission-utils");
 function makeRandom() {
   let answer = new Array();
 
-  while (true) {
-    while (answer.length < 3) {
-      let number = MissionUtils.Random.pickNumberInRange(1, 9);
+ 
+  while (answer.length < 3) {
+    let number = MissionUtils.Random.pickNumberInRange(1, 9);
 
-      if (!answer.includes(number)) {
-        answer.push(number);
-      }
+    if (!answer.includes(number)) {
+      answer.push(number);
     }
-    return answer;
   }
+  return answer;
 }
+
 
 console.log(makeRandom());
 
