@@ -116,6 +116,15 @@ class App {
     this.play();
   }
 
+  play() {
+    this.playing = 1;
+
+    if (this.round == 0) this.gameStart();
+
+    this.choiceNumber();
+    this.inputNumber('숫자를 입력하세요.');
+
+  }
 
   error() {
     this.round = 0;
