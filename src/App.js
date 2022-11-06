@@ -27,6 +27,10 @@ class App {
       const player = Array.from(input, Number);
       const result = this.getResult(computer, player);
       Console.print(result);
+
+      if (result !== '3스트라이크') {
+        this.guess(computer);
+      }
     });
   }
 
