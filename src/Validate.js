@@ -15,10 +15,10 @@ const checkDuplicate = (input) => {
   return true;
 };
 
-const checkInput = (input) => {
+const validateInput = (input) => {
   if (!checkLength(input)) throw "3자리 숫자를 입력해주세요.";
   if (!checkIsNumber(input)) throw "숫자만 입력해주세요.";
   if (!checkDuplicate(input)) throw "서로 다른 숫자를 입력해주세요.";
 };
 
-module.exports = checkInput;
+module.exports = validateInput;
