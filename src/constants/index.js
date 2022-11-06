@@ -5,6 +5,13 @@ const MESSAGE = Object.freeze({
   SUCCESS: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
 });
 
+const HINT = Object.freeze({
+  BALL: "볼",
+  STRIKE: "스트라이크",
+  NOTHING: "낫싱",
+});
+
 module.exports = {
   MESSAGE,
+  HINT,
 };

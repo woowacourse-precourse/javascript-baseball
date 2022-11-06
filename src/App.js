@@ -41,9 +41,17 @@ class App {
   }
 
   match() {
+    const hint = this.computer.getHint(
+      this.state.inputValue,
+      this.state.answer
+    );
+    Console.print(hint);
+
     if (this.state.inputValue === this.state.answer) {
       this.success();
     }
+
+    this.input();
   }
 
   success() {
