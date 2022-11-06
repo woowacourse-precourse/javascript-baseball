@@ -12,7 +12,13 @@ const CONSTANT = {
   DIGIT_LIMIT: 3,
 };
 
+const REGEX = {
+  GUESS: /^[1-9]{3}$/,
+  CHOICE: /^[12]$/,
+};
+
 module.exports = {
   MESSAGE,
   CONSTANT,
+  REGEX,
 };
