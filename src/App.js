@@ -5,9 +5,15 @@ class App {
   BALL = "볼";
   STRIKE = "스트라이크";
   NOTHING = "낫싱";
+  MESSAGES = {
+    GREET: "숫자 야구 게임을 시작합니다.",
+    PLEASE_NUMBER: "숫자를 입력해주세요 : ",
+    GAME_SET: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ASK_RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+  };
 
   play() {
-    this.printMessage("숫자 야구 게임을 시작합니다.");
+    this.printMessage(this.MESSAGES.GREET);
     this.gameStart();
   }
 
@@ -23,7 +29,7 @@ class App {
   }
 
   inputNumber(computerNumber) {
-    this.takeInput("숫자를 입력해주세요 : ", (enteredNumber) => {
+    this.takeInput(this.MESSAGES.PLEASE_NUMBER, (enteredNumber) => {
       if (!this.isValidNumber(enteredNumber)) {
         throw new Error();
       }
@@ -103,25 +109,22 @@ class App {
   }
 
   gameOver() {
-    this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.printMessage(this.MESSAGES.GAME_SET);
     this.askRestart();
   }
 
   askRestart() {
-    this.takeInput(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (answer) => {
-        if (answer === "1") {
-          this.gameStart();
-          return;
-        }
-        if (answer === "2") {
-          this.gameExit();
-          return;
-        }
-        throw new Error();
+    this.takeInput(this.MESSAGES.ASK_RESTART, (answer) => {
+      if (answer === "1") {
+        this.gameStart();
+        return;
       }
-    );
+      if (answer === "2") {
+        this.gameExit();
+        return;
+      }
+      throw new Error();
+    });
   }
 
   printMessage(message) {
