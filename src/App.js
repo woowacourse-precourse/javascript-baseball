@@ -31,6 +31,14 @@ class App {
     return MissionUtils.Console.readLine(message, callback);
   }
 
+  gameClose(message = null) {
+    if (message) {
+      throw message;
+    } else {
+      return MissionUtils.Console.close();
+    }
+  }
+
   compare(input, computer) {
     const strike = this.compareStrike(input, computer);
     const ball = this.compareBall(input, computer);
