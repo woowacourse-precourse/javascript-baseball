@@ -1,5 +1,22 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 class App {
-  play() {}
+  play() {    
+    let computerRandomNum = this.createRandomNumber();
+    let userInputNum=this.InputUserNumber();
+
+    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.ball(computerRandomNum, userInputNum)==0&&this.checkUserNumVaildation(userInputNum)){
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+     }
+    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+    }
+    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){
+      userInputNum=this.InputUserNumber();
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+     }
+    if(this.checkThreeStrike(computerRandomNum, userInputNum)){
+      this.selectGameEnd(userInputNum);
+    }}
 
   createRandomNumber() {
     let computerNumber="";
