@@ -16,6 +16,9 @@ class App {
     return new Promise((resolve) => {
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
         this.inputNum = input;
+        if(!this.checkInputValidation()){
+          throw "잘못된 값을 입력하셨습니다."
+        }
         MissionUtils.Console.print(input);
         MissionUtils.Console.close();
         resolve(input);
