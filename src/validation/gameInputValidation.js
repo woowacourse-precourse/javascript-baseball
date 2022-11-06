@@ -1,4 +1,4 @@
-module.exports = function GameInputValidation(gameInput) {
+module.exports = function gameInputValidation(gameInput) {
   try {
     checkLength(gameInput);
     checkNumber(gameInput);
