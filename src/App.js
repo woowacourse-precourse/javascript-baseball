@@ -67,6 +67,15 @@ class App {
       }
       return answer;
       }
+        /*3스트라이크 인지 확인하는 기능*/
+  checkThreeStrike(computerRandomNum, userInputNum){
+    if(this.strike(computerRandomNum, userInputNum)==3){
+      MissionUtils.Console.print("3개를 모두 맞히셨습니다! 게임 종료");
+      userInputNum=this.InputUserNumber();
+      this.selectGameEnd(userInputNum);
+    }
+    return false;
+  }
           /*유저가 입력한 수의 길이가 유효한지 확인하는 기능*/
     checkUserNumLength(userInputNum){
       if(userInputNum==1||userInputNum==2){
