@@ -1,6 +1,5 @@
 const GameControl = require('./Controller.js');
 
-
 class App {
   play() {
     let game = new GameControl();
@@ -10,6 +9,4 @@ class App {
 
 module.exports = App;
 
-// const app = new App();
-// app.play();
 
