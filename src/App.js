@@ -10,6 +10,16 @@ class App {
     return true;
   }
 
+  checkComposeOneToNine(number) {
+    const regexedNumber = String(number).match(/[1-9]/g);
+
+    if (regexedNumber == null || regexedNumber.length !== 3) {
+      return false;
+    }
+
+    return true;
+  }
+  
   checkCorrectNumber(number) {
 
     if (!this.checkThreeLength(number)) {
