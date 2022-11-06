@@ -44,20 +44,20 @@ class App {
     return answer === input;
   }
   compareToAnswer(answers, inputs) {
-    const result = { strike: 0, ball: 0 };
+    const score = { strike: 0, ball: 0 };
 
     answers.forEach((answer, answerIdx) => {
       inputs.forEach((input, inputIdx) => {
         if (!this.isSameNumber(answer, input)) return;
         // 만약 수가 같을 떄, 인덱스의 값 또한 같다면
         if (this.isSameNumber(answerIdx, inputIdx)) {
-          result.strike += 1;
+          score.strike += 1;
         } else {
-          result.ball += 1;
+          score.ball += 1;
         }
       });
     });
-    return result;
+    return score;
   }
 
   play() {}
