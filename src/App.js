@@ -39,6 +39,15 @@ class App {
       if (this.strikeCount === 3) {
         render.replayQnA().then((userSelection) => {
           this.replayQnAResult = userSelection;
+
+          if (this.replayQnAResult === "1") {
+            this.computer = Computer();
+            this.play();
+          }
+
+          if (this.replayQnAResult === "2") {
+            MissionUtils.Console.print("수고하셨습니다!🎉");
+          }
         });
       }
     });
