@@ -3,20 +3,18 @@ const { message } = require('./constants');
 
 const BaseballComputer = require('./models/BaseballComputer');
 const BaseballUser = require('./models/BaseballUser');
+const BaseballHelper = require('./utils/helper');
 
 class App {
   #computer;
 
   #user;
 
+  #ballStrikeCount;
+
   constructor() {
     this.#computer = new BaseballComputer();
     this.#user = new BaseballUser();
-    this.ballStrikeCount = {
-      ball: 0,
-      strike: 0,
-    };
-    this.result = '';
   }
 
   play() {
@@ -28,13 +26,13 @@ class App {
   readUserInput() {
     Console.readLine(message.INPUT, (number) => {
       this.#user.setNumbers(number);
+      this.#setBallStrikeCount();
 
-      this.setBallStrikeCount();
-      this.setResult();
+      const countMessage = BaseballHelper.getCountMessage(this.#ballStrikeCount);
       Console.print(this.#computer.numbers);
-      Console.print(this.result);
+      Console.print(countMessage);
 
-      if (this.ballStrikeCount.strike === 3) {
+      if (this.#ballStrikeCount.strike === 3) {
         Console.print(message.CORRECT);
         this.readRestartInput();
       }
@@ -43,47 +41,13 @@ class App {
     });
   }
 
-  setBallStrikeCount() {
-    const ballStrikeCount = {
-      ball: 0,
-      strike: 0,
-    };
+  #setBallStrikeCount() {
+    const computerNumbers = this.#computer.numbers;
+    const userNumbers = this.#user.numbers;
 
-    this.#user.numbers.forEach((number, i) => {
-      if (number === this.#computer.numbers[i]) {
-        ballStrikeCount.strike += 1;
-        return;
-      }
+    const ballStrikeCount = BaseballHelper.calculateBallStrikeCount(computerNumbers, userNumbers);
 
-      if (this.#computer.numbers.includes(number)) {
-        ballStrikeCount.ball += 1;
-      }
-    });
-
-    this.ballStrikeCount = ballStrikeCount;
-  }
-
-  setResult() {
-    const { ball, strike } = this.ballStrikeCount;
-    const ballMessage = `${ball}${message.BALL}`;
-    const strikeMessage = `${strike}${message.STRIKE}`;
-
-    if (ball === 0 && strike === 0) {
-      this.result = message.NOTHING;
-      return;
-    }
-
-    if (ball > 0 && strike === 0) {
-      this.result = ballMessage;
-      return;
-    }
-
-    if (ball === 0 && strike > 0) {
-      this.result = strikeMessage;
-      return;
-    }
-
-    this.result = `${ballMessage} ${strikeMessage}`;
+    this.#ballStrikeCount = ballStrikeCount;
   }
 
   readRestartInput() {
