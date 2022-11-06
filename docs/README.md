@@ -11,34 +11,34 @@
 
 # 👀️ 필요 기능
 
-- printMsg
+- **printMsg**
   - 문구 출력하기
-- greetingMsg
+- **greetingMsg**
   - 게임 시작 알리기
-- setAnswer
+- **setAnswer**
   - 임의의 세 자리 숫자를 정답으로 정하기
   - @returns {number[]} 세 개의 숫자 배열
-- askNumInput
+- **askNumInput**
   - 게임 진행을 위해 유저에게 숫자 입력 받기
   - 입력 받은 후 콜백 함수(isValidInput/getHint) 호출
   - @param {string} 세 자리 문자열 '123'
-- isValidInput
+- **isValidInput**
   - 유저가 입력한 숫자 확인하기
-    - isNumber : 숫자만 입력했는지
-    - isVaildLength : 세 자리인지
-    - isAllDiffNum : 1부터 9 중에서 서로 다른 수로 이루어졌는지
+    - **isNumber** : 숫자만 입력했는지
+    - **isVaildLength** : 세 자리인지
+    - **isAllDiffNum** : 1부터 9 중에서 서로 다른 수로 이루어졌는지
   - 유효한 값이 아니면 toThrow 호출
-- toThrow
+- **toThrow**
   - throw 문으로 애플리케이션 종료
-- getHint
+- **getHint**
   - 입력한 숫자를 검증 후 보여 줄 힌트 메세지 반환하기
-  - isNothing : 하나도 없는 경우
-  - isThreeStrike : 3개의 숫자를 모두 맞힐 경우
+  - **isNothing** : 하나도 없는 경우
+  - **isThreeStrike** : 3개의 숫자를 모두 맞힐 경우
   - 그 외 : 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시
   - @returns {string} 낫싱/3스트라이크/1볼1스트라이크/2볼
-- countBallOrStrike
+- **countBallOrStrike**
   - ball 과 strike 갯수 카운트 하기
   - @returns {{ ballCount : number, strikeCount : number }}
-- askRematchOrExit
+- **askRematchOrExit**
   - 재경기 혹은 게임 종료를 원하는지 묻기
   - @param {number} 1,2
