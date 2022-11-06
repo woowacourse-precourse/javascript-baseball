@@ -104,6 +104,13 @@ class App {
     this.printMsg('숫자 야구 게임을 시작합니다.');
   }
 
+  gameEnd () {
+    this.playing = 0;
+    this.printMsg('3스트라이크')
+    this.printMsg('3개의 숫자를 모두 맞히셨습니다. 게임 종료');
+    this.inputNumber('게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.');
+  }
+
 }
 
 module.exports = App;
