@@ -23,14 +23,14 @@ function checkBlank(userNum) {
     return false;
   }
 }
-function checkRangeOfRetryUserInput(userNum) {
-  if (/^[1-2]*$/g.test(userNum.join("")) === false) {
+function checkRangeOfRetryUserInput(retryNum) {
+  if (/^[1-2]*$/g.test(retryNum.join("")) === false) {
     return false;
   }
 }
 
-function checkLengthOfRetryUserInput(userNum) {
-  if (userNum.length !== 1) {
+function checkLengthOfRetryUserInput(retryNum) {
+  if (retryNum.length !== 1) {
     return false;
   }
 }
@@ -38,6 +38,7 @@ function checkLengthOfRetryUserInput(userNum) {
 class CheckInputValid {
   constructor({ userNum, retryNum }) {
     this.userNum = userNum;
+    this.retryNum = retryNum;
   }
 
   checkValidation() {

@@ -21,7 +21,7 @@ class App {
     }
 
     render.getUser().then((num) => {
-      this.num = numToArr(num);
+      this.userNum = numToArr(num);
       const checkInputValid = new CheckInputValid({
         userNum: this.userNum,
         retryNum: this.replayQnAResult,
