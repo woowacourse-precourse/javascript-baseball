@@ -27,6 +27,22 @@ class App {
     if (querySet.size !== 3) return true;
     return false;
   }
+
+  getScore(answer, query) {
+    const queryArr = this.getQueryArrFromQuery(query);
+    let strike = 0;
+    let ball = 0;
+    answer.forEach((num, idx) => {
+      const hasNumber = queryArr.indexOf(num.toString());
+      if (hasNumber === idx) strike += 1;
+      else if (hasNumber !== -1) ball += 1;
+    });
+    return [ball, strike];
+  }
+
+  getQueryArrFromQuery(query) {
+    return query.toString().split('');
+  }
 }
 
 module.exports = App;
