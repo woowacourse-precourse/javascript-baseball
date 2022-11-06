@@ -29,6 +29,8 @@ class App {
       const convertedNumber = prediction.split('').map(Number);
       console.log(convertedNumber);
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
+        Console.print('3스트라이크');
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         Console.close();
       } else if (this.isNothing(randomNumber, convertedNumber)) {
         Console.print('낫싱');
