@@ -5,7 +5,7 @@ class App {
     this.startGame();
   }
   startGame() {
-    this.generateComputerRandomNumbers();  
+    this.generateComputerRandomNumbers();
   }
   printStartMessage() {
     MissionUtils.Console.print('숫자 야구게임을 시작합니다');
@@ -17,6 +17,21 @@ class App {
       ComputerRandomNumbers.add(MissionUtils.Random.pickNumberInRange(1,9));
     }
     return [...ComputerRandomNumbers].join('');
+  }
+  isValidInputNumbers(number){
+    let noDuplication = new Set([...number])
+
+    if(number < 100 || number >= 1000){
+      return false; 
+    }
+    else if((number+'').includes('0')){
+      return false;
+    }
+    else if(noDuplication.size !== number.length){
+      return false;
+    }
+    else
+      return true;
   }
 }
 
