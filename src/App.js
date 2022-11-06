@@ -1,7 +1,7 @@
 const { print, readLine, close, pickNumberInRange } = require("./Utils");
 const { checkGuessInput, checkRestartOrQuitInput } = require("./Validation");
 const calculateScore = require("./CalculateScore");
-const scoreToJudgeMessageMap = require("./scoreToMessageMap");
+const scoreToJudgeMessageMap = require("./ScoreToJudgeMessageMap");
 
 class App {
   #nbrOfComputer;

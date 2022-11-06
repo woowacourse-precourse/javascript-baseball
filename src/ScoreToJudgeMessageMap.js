@@ -1,4 +1,4 @@
-const scoreToMessageMap = {
+const scoreToJudgeMessageMap = {
   BALL_MSG: "볼",
   STRIKE_MSG: "스트라이크",
   NOTHING_MSG: "낫싱",
@@ -21,4 +21,4 @@ const scoreToMessageMap = {
   },
 };
 
-module.exports = scoreToMessageMap;
+module.exports = scoreToJudgeMessageMap;
