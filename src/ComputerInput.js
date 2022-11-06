@@ -4,14 +4,14 @@ function numToString(num) {
   return String(num);
 }
 
-function Computer() {
+function ComputerInput() {
   const computer = [];
   while (computer.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (computer.includes(numToArr(number)) === false) {
+    if (computer.includes(numToString(number)) === false) {
       computer.push(numToString(number));
     }
   }
   return computer;
 }
-module.exports = Computer;
+module.exports = ComputerInput;
