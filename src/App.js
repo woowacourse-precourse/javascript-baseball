@@ -8,11 +8,11 @@ const REPLAY = '게임을 새로 시작하려면 1, 종료하려면 2를 입력�
 
 class App {
     setAnswer() {
-        let answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
-            ''
-        );
-
-        return answer;
+        let answer = new Set();
+        while (answer.size < 3) {
+            answer.add(MissionUtils.Random.pickNumberInRange(1, 9));
+        }
+        return [...answer].join('');
     }
     play() {
         const answer = this.setAnswer();
