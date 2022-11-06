@@ -45,9 +45,25 @@ class App {
         ball+=1;
       }
     }
-    
+    this.printScore(strike, ball);
   }
 
+  // 결과에 따른 값 출력 기능(낫싱,볼/스트라이크,승리)
+  printScore(strike, ball) {
+    if (strike > 0 && ball > 0) {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    } else if (strike === 0 && ball > 0 && ball < 3) {
+      MissionUtils.Console.print(`${ball}볼`);
+    } else if (strike > 0 && ball === 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    } else if (ball === 3) {
+      MissionUtils.Console.print('낫싱');
+    } 
+    
+    if (strike === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
+  }
   //[예외처리] 잘못된 값 입력시 오류 처리 기능
   isValidNum(userInput) {
     if (userInput.length !== 3){
