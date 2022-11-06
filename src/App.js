@@ -3,7 +3,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.computer = [];
-    this.user = [];
   }
 
   play() {
@@ -42,32 +41,35 @@ class App {
     let isCorrect = false;
 
     while (!isCorrect) {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-        this.setUserNumbers(answer);
-      });
-
-      const memo = this.count(this.computer, this.user);
+      const userNumbers = this.writeUserNumbers();
+      const memo = this.mark(userNumbers);
       this.printResultMessage(memo);
 
       isCorrect = memo.strike === 3;
     }
   }
 
-  setUserNumbers(str) {
-    if (str.length > 3) {
-      throw new Error("error/over-length-user-input");
-    }
+  writeUserNumbers() {
+    let userNumbers = [];
 
-    this.user = [...str].map((number) => Number(number));
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      if (answer.length > 3) {
+        throw new Error("error/over-length-user-input");
+      }
+
+      userNumbers = [...answer].map((digit) => Number(digit));
+    });
+
+    return userNumbers;
   }
 
-  count(computer, user) {
+  mark(user) {
     const memo = { ball: 0, strike: 0 };
 
     user.forEach((userNumber, index) => {
-      if (userNumber === computer[index]) {
+      if (userNumber === this.computer[index]) {
         memo.strike += 1;
-      } else if (computer.includes(userNumber, index + 1)) {
+      } else if (this.computer.includes(userNumber, index + 1)) {
         memo.ball += 1;
       }
     });
