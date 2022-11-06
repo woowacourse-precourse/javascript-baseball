@@ -86,4 +86,4 @@ test("사용자 숫자 상대방 숫자 비교4", () => {
   });
 });
 
-// test : git ignore test1
+// test : git ignore test2
