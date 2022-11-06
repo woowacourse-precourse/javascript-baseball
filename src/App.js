@@ -16,6 +16,7 @@ class App {
         }
       }
     }
+
     // 숫자 입력
     function numbersInput() {
       MissionUtils.Console.readLine("숫자를 입력해주세요", (answer) => {
@@ -30,6 +31,7 @@ class App {
         });
       });
     }
+
     // 게임 실행
     function gamePlay() {
       numbersInput();
@@ -47,8 +49,28 @@ class App {
       }
       return gamePlay();
     }
+
+    // 게임 재실행, 종료
+    function gameRestart() {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요",
+        (answer) => {
+          if (parseInt(answer) === 1) {
+            computer.splice(0, computer.length);
+            computerNumbers();
+            gamePlay();
+            gameRestart();
+          } else if (parseInt(answer) === 2) {
+            MissionUtils.Console.print("게임 종료");
+            return;
+          }
+        }
+      );
+    }
+
     computerNumbers();
     gamePlay();
+    gameRestart();
   }
 }
 
