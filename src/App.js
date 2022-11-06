@@ -41,7 +41,10 @@ class App {
 
     this.result = this.computeResult(balls, strikes);
     this.printResult(this.result);
+
+    this.checkIsCorrect();
   }
+
   countBalls() {
     let balls = 0;
     this.user.forEach((value, index) => {
@@ -60,6 +63,7 @@ class App {
     });
     return strikes;
   }
+
   computeResult(balls, strikes) {
     let result = "";
     if (balls && !strikes) {
@@ -80,13 +84,13 @@ class App {
     }
     return result;
   }
+  checkIsCorrect() {
+    this.isCorrect ? this.requestRestart() : this.getUserNumber();
+  }
   printResult() {
     MissionUtils.Console.print(this.result);
   }
-  checkIsCorrect() {
-    this.isCorrect ? this.checkRetry() : this.getUserNumber();
-  }
-  checkRetry() {
+  requestRestart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
