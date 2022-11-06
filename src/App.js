@@ -59,8 +59,8 @@ class App {
   compare_and_count_strike_ball(input, answer) {
     let strike = 0;
     let ball = 0;
-    const input_num = [...input];
-    input_num.map((input, i) => {
+    const INPUT_NUM = [...input];
+    INPUT_NUM.map((input, i) => {
       if (input === answer[i]) strike += 1;
       else if (answer.indexOf(input) > -1 && answer.indexOf(input) < 3) {
         ball += 1;
@@ -98,5 +98,3 @@ class App {
 }
 
 module.exports = App;
-const app = new App();
-app.play();
