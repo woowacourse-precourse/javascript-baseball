@@ -97,8 +97,8 @@ describe('baseball 클래스 - countBall()', () => {
 
 describe('baseball 클래스 - getResultToString()', () => {
   test('2볼 1스트라이크 상황', () => {
+    const input = '123';
     const random = [2, 1, 3];
-    const input = [1, 2, 3];
 
     const baseball = new BaseBall();
 
@@ -106,8 +106,8 @@ describe('baseball 클래스 - getResultToString()', () => {
   });
 
   test('노볼 노스트라이크 상황', () => {
+    const input = '456';
     const random = [1, 2, 3];
-    const input = [4, 5, 6];
 
     const baseball = new BaseBall();
 
@@ -115,8 +115,8 @@ describe('baseball 클래스 - getResultToString()', () => {
   });
 
   test('3스트라이크 상황', () => {
+    const input = '123';
     const random = [1, 2, 3];
-    const input = [1, 2, 3];
 
     const baseball = new BaseBall();
 
@@ -124,8 +124,8 @@ describe('baseball 클래스 - getResultToString()', () => {
   });
 
   test('2볼 상황', () => {
+    const input = '214';
     const random = [1, 2, 3];
-    const input = [2, 1, 4];
 
     const baseball = new BaseBall();
 
@@ -135,8 +135,8 @@ describe('baseball 클래스 - getResultToString()', () => {
 
 describe('baseball 클래스 - isStrikeOut()', () => {
   test('3볼일 때', () => {
+    const input = '321';
     const random = [2, 1, 3];
-    const input = [3, 2, 1];
 
     const baseball = new BaseBall();
 
@@ -144,8 +144,8 @@ describe('baseball 클래스 - isStrikeOut()', () => {
   });
 
   test('2스트라이크 노볼 상황', () => {
+    const input = '143';
     const random = [1, 2, 3];
-    const input = [1, 4, 3];
 
     const baseball = new BaseBall();
 
@@ -153,8 +153,8 @@ describe('baseball 클래스 - isStrikeOut()', () => {
   });
 
   test('3스트라이크일 때', () => {
+    const input = '123';
     const random = [1, 2, 3];
-    const input = [1, 2, 3];
 
     const baseball = new BaseBall();
 
