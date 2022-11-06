@@ -3,10 +3,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.answer = null;
+    this.inputNumber = null;
   }
   play() {
     this.getAnswerNumber();
     this.printGameStartMessage();
+    this.getInputNumber();
   }
   getAnswerNumber() {
     const RANGE_START_NUMBER = 1;
@@ -24,6 +26,12 @@ class App {
   printGameStartMessage() {
     const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
     Console.print(GAME_START_MESSAGE);
+  }
+  getInputNumber() {
+    const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
+    Console.readLine(INPUT_NUMBER_MESSAGE, (inputNumber) => {
+      this.inputNumber = inputNumber;
+    });
   }
 }
 
