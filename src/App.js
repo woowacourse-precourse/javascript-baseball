@@ -94,7 +94,7 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
-        this.constraints.checkRePlayInput(userInput);
+        this.constraints.checkRePlayInputConstraints(userInput);
 
         this.decideReStart(userInput);
       }
