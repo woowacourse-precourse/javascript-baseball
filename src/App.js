@@ -6,6 +6,7 @@ class App {
   }
   play() {
     this.getAnswerNumber();
+    this.printGameStartMessage();
   }
   getAnswerNumber() {
     const RANGE_START_NUMBER = 1;
@@ -19,6 +20,10 @@ class App {
     );
 
     this.answer = ANSWER;
+  }
+  printGameStartMessage() {
+    const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
+    Console.print(GAME_START_MESSAGE);
   }
 }
 
