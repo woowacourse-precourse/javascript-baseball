@@ -45,14 +45,14 @@ class App {
       ball: 0,
     };
 
-    return [...enteredNumber].reduce((resultObj, eachEnteredNumber, index) => {
+    return [...enteredNumber].reduce((counter, eachEnteredNumber, index) => {
       if (computerNumber[index] === eachEnteredNumber) {
-        return { ...resultObj, strike: resultObj.strike + 1 };
+        return { ...counter, strike: counter.strike + 1 };
       }
       if (computerNumber.includes(eachEnteredNumber)) {
-        return { ...resultObj, ball: resultObj.ball + 1 };
+        return { ...counter, ball: counter.ball + 1 };
       }
-      return resultObj;
+      return counter;
     }, initialCounter);
   }
 }
