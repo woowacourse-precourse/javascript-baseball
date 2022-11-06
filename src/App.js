@@ -7,7 +7,8 @@ class App {
   }
 
   play() {
-    this.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
     this.startGame();
   }
 
@@ -17,7 +18,7 @@ class App {
     this.setRandomNumbers();
 
     while (!isCorrect) {
-      this.readLine("숫자를 입력해주세요 : ", (answer) => {
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
         this.setUserNumbers(answer);
       });
 
@@ -27,7 +28,7 @@ class App {
       isCorrect = memo.strike === 3;
     }
 
-    this.readLine(
+    MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         answer === "1" && this.startGame();
@@ -64,26 +65,18 @@ class App {
       resultMessage = "낫싱";
     }
 
-    this.print(resultMessage.trim());
+    MissionUtils.Console.print(resultMessage.trim());
 
     if (memo.strike === 3) {
-      this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
-  }
-
-  print(str) {
-    MissionUtils.Console.print(str);
-  }
-
-  readLine(query, callback) {
-    MissionUtils.Console.readLine(query, callback);
   }
 
   setRandomNumbers() {
     this.computer = [];
 
     while (this.computer.length < 3) {
-      const number = this.getRandomNumber();
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
       this.pushNumberToComputer(number);
     }
   }
@@ -102,18 +95,10 @@ class App {
     return numbers.map((number) => Number(number));
   }
 
-  getRandomNumber() {
-    return MissionUtils.Random.pickNumberInRange(1, 9);
-  }
-
   pushNumberToComputer(number) {
-    if (this.isValidNumber(number)) {
+    if (!this.computer.includes(number)) {
       this.computer.push(number);
     }
-  }
-
-  isValidNumber(number) {
-    return !this.computer.includes(number);
   }
 }
 
