@@ -1,6 +1,12 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
 class Game {
+  start() {
+    this.state = -1;
+    this.setAnswer();
+    this.interaction();
+  }
+
   setAnswer() {
     let answer = [];
 
@@ -14,8 +20,33 @@ class Game {
     this.answer = answer;
   }
 
-  setCount(userInput) {
-    const { answer } = this;
+  interaction() {
+    Console.readLine('숫자를 입력해 주세요 : ', (string) => {
+      this.userInput = Array.from(string, Number);
+      this.verifyInput();
+      this.setCount();
+      this.setHint();
+      Console.print(this.hint);
+      this.checkState();
+    });
+  }
+
+  verifyInput() {
+    const { userInput } = this;
+    const inputSet = new Set(userInput);
+
+    if (
+      inputSet.size !== userInput.length
+      || inputSet.size > 3
+      || inputSet.has(NaN)
+      || inputSet.has(0)
+    ) {
+      throw new Error('잘못된 값을 입력하셨습니다.');
+    }
+  }
+
+  setCount() {
+    const { answer, userInput } = this;
     let count = {
       ball: 0,
       strike: 0,
@@ -30,6 +61,9 @@ class Game {
         count.ball += 1;
       }
     });
+    if (count.strike === 3) {
+      this.state = 0;
+    }
     this.count = count;
   }
 
@@ -49,20 +83,41 @@ class Game {
     this.hint = hint.trimStart();
   }
 
-  readState() {
-    return new Promise((resolve) => {
-      Console.readLine(
-        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-        (string) => {
-          this.state = Number(string);
-          this.checkState();
-          resolve();
-        }
-      );
-    });
+  checkState() {
+    const { state } = this;
+
+    switch (state) {
+      case 0: {
+        this.readState();
+        break;
+      }
+      case 1: {
+        this.start();
+        break;
+      }
+      case 2: {
+        Console.close();
+        break;
+      }
+      default: {
+        this.interaction();
+      }
+    }
   }
 
-  checkState() {
+  readState() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (string) => {
+        this.state = Number(string);
+        this.verifyState();
+        this.checkState();
+      }
+    );
+  }
+
+  verifyState() {
     const { state } = this;
 
     if (state !== 1 && state !== 2) {
