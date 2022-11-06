@@ -83,6 +83,5 @@ class App {
     MissionUtils.Console.readLine(content, func);
   }
 }
-// const app = new App();
-// app.play();
+
 module.exports = App;
