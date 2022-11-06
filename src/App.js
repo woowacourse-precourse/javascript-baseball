@@ -67,6 +67,7 @@ class App {
     }
 
     this.sendMessage("낫싱");
+    this.requestAnswer("숫자를 입력해주세요. : ");
   }
 
   play() {
