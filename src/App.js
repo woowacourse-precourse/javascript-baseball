@@ -3,11 +3,13 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.count = "";
+    this.input;
   }
   play() {
     this.gameStart();
     this.count = this.generateCount(this.generateRandomList());
-    this.getUserInput();
+    this.input = this.getUserInput();
+    this.vaildInput(this.input);
   }
 
   gameStart() {
@@ -26,6 +28,15 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
   }
 
+  vaildInput(input) {
+    if (!this.isVaildNumberFormat(input)) {
+      throw new Error("형식이 잘못되었습니다.");
+    }
+    if (this.isDuplicate(input)) {
+      throw new Error("중복된 숫자가 존재합니다.");
+    }
+    return input;
+  }
   isVaildNumberFormat(target) {
     return /^[1-9]{3}$/.test(target);
   }
