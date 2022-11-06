@@ -22,6 +22,8 @@ class App {
       }
     }
     MissionUtils.Console.print(computerInput);
+
+    
     this.startGame(computerInput)
   }
 
@@ -45,25 +47,41 @@ class App {
         ball+=1;
       }
     }
-    this.printScore(strike, ball);
+    this.printScore(computerInput, strike, ball);
   }
 
   // 결과에 따른 값 출력 기능(낫싱,볼/스트라이크,승리)
-  printScore(strike, ball) {
+  printScore(computerInput, strike, ball) {
+    
     if (strike > 0 && ball > 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      return this.startGame(computerInput)
     } else if (strike === 0 && ball > 0 && ball < 3) {
       MissionUtils.Console.print(`${ball}볼`);
-    } else if (strike > 0 && ball === 0) {
+      return this.startGame(computerInput)
+    } else if (strike < 3 && strike > 0 && ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
+      return this.startGame(computerInput)
     } else if (ball === 3) {
       MissionUtils.Console.print('낫싱');
-    } 
+      return this.startGame(computerInput)
+    }
     
     if (strike === 3) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      // this.reStart();
     }
   }
+
+  // 게임 재시작 및 종료 기능
+  // reStart() {
+  //   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (insertCoin) => {
+  //     if (this.isValidCoin(insertCoin)) {
+  //       this.startGame();
+  //     }
+  //   });
+  // }
+  
   //[예외처리] 잘못된 값 입력시 오류 처리 기능
   isValidNum(userInput) {
     if (userInput.length !== 3){
