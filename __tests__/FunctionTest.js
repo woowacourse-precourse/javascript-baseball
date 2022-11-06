@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Input = require("../src/Input");
 const Parse = require("../src/Parse");
+const Question = require("../src/Question");
 const { Output } = require("../src/Output");
 
 const getPrintLogSpy = () => {
@@ -63,5 +64,19 @@ describe("기능 테스트", () => {
 
     expect(logSpy).toBeCalledWith("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     expect(userWantsReplay).toBe(false);
+  });
+
+  test("문제 내기", () => {
+    const question = Question.create();
+
+    expect(question.length).toBe(3);
+    for (let i = 0; i < 3; i++) {
+      expect(question[i]).toBeGreaterThan(0);
+      expect(question[i]).toBeLessThan(10);
+      expect(Math.floor(question[i])).toBe(question[i]);
+    }
+    expect(question[0]).not.toBe(question[1]);
+    expect(question[0]).not.toBe(question[2]);
+    expect(question[1]).not.toBe(question[2]);
   });
 });
