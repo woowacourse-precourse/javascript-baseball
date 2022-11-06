@@ -19,6 +19,10 @@ class App {
       throw new Error('Input string must be number.');
     }
   }
+
+  convertInputStringToArray(input) {
+    return input.split('').map((character) => Number(character));
+  }
 }
 
 module.exports = App;
