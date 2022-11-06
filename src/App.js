@@ -1,16 +1,13 @@
 const printGameStart = require('./printGameStart');
 const createRandomNumbers = require('./createRandomNumbers');
-const inputNumbers = require('./inputNumbers');
-const MissionUtils = require("@woowacourse/mission-utils");
-const compareWithInput = require('./compareWithInput');
+const playGame = require('./playGame');
 
 class App {
   play() {
+    // 게임 준비
     printGameStart();
-    createRandomNumbers();
-    inputNumbers();
-    const result = compareWithInput(123, '246');
-    printCompareResult(result);
+    const computerNum = createRandomNumbers();
+    playGame(computerNum);
   }
 }
 
