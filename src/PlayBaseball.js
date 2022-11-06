@@ -21,7 +21,7 @@ function playBaseballGame() {
         else{
             let numOfBall;
             numOfBall = getNumOfBall(computerNum, userNum);
-            //볼의 갯수 + 스트라이크 갯수 출력
+            getGameResult(numOfBall, numOfStrike);
         }
     }
 }
@@ -51,6 +51,23 @@ function isBall(compareIter, computerNum, userNum) {
         }
     }
     return 0;
+}
+
+function getGameResult(numOfBall, numOfStrike) {
+    let isBothExist = false;
+    if(numOfBall > 0 && numOfStrike > 0) {
+        isBothExist = true;
+    }
+    if(numOfBall > 0) {
+        printMessage.printNumOfBall(numOfBall);
+    }
+    if(isBothExist) {
+        printMessage.printSpace();
+    }
+    if(numOfStrike > 0) {
+        printMessage.printNumOfStrike(numOfStrike);
+    }
+    printMessage.printEndOfLine();
 }
 
 module.exports = playBaseballGame;

@@ -27,7 +27,11 @@ function printNumOfBall(numOfBall) {
     }
 }
 
-function printEndOfLine(){
+function printSpace() {
+    MissionUtils.Console.print(" ");
+}
+
+function printEndOfLine() {
     MissionUtils.Console.print("\n");
 }
 
@@ -36,9 +40,12 @@ function printGameWin() {
     MissionUtils.Console.print(GAME_WIN_MESSAGE);
 }
 
-module.exports.printGameStart = printGameStart;
-module.exports.printUserInput = printUserInput;
-module.exports.printGameWin = printGameWin;
-module.exports.printNumOfStrike = printNumOfStrike;
-module.exports.printNumOfBall = printNumOfBall;
-module.exports.printEndOfLine = printEndOfLine;
+module.exports = {
+    printGameStart,
+    printUserInput,
+    printNumOfStrike,
+    printNumOfBall,
+    printSpace,
+    printEndOfLine,
+    printGameWin
+}
