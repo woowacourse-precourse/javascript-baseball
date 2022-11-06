@@ -26,6 +26,17 @@ class App {
     });
     return this.userInput;
   }
+
+  isStrike() {
+    const { computerNum, userInput } = this;
+    let strike = 0;
+    computerNum.split('').forEach((num, idx) => {
+      if (computerNum[idx] === userInput[idx]) {
+        strike += 1;
+      }
+    });
+    return `${strike}스트라이크`;
+  }
 }
 
 module.exports = App;
