@@ -103,7 +103,7 @@ describe('숫자 야구 게임', () => {
   test('다시 시작 / 종료 입력 예외 테스트', () => {
     expect(() => {
       const randoms = [1, 3, 5];
-      const answers = ['012'];
+      const answers = ['135', '3'];
 
       mockRandoms(randoms);
       mockQuestions(answers);
