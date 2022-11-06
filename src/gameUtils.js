@@ -57,10 +57,12 @@ class Validator {
     return result;
   }
   static #isDuplicated(value) {
-    return ([...new Set(value)].length !== 3);
+    const removeDuplicatedValue = [...new Set(value)];
+    return (removeDuplicatedValue.length !== 3);
   }
   static isVaildRestartSubmit(value) {
-    if(![1, 2].includes(value)) throw new Error(constants.ERROR_MESSAGE.isInvalidRestartSubmit);
+    const possibleValue = [1, 2];
+    if(!possibleValue.includes(value)) throw new Error(constants.ERROR_MESSAGE.isInvalidRestartSubmit);
   }
 }
 
