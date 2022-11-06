@@ -31,7 +31,7 @@ class App {
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
         Console.print('3스트라이크');
         Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        Console.close();
+        this.getUsersNextAction();
       } else if (this.isNothing(randomNumber, convertedNumber)) {
         Console.print('낫싱');
         this.getUsersPrediction(randomNumber);
@@ -73,6 +73,18 @@ class App {
     } else {
       Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
     }
+  }
+
+  getUsersNextAction() {
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
+      if (userInput === '1') {
+        const randomNumber = this.makeRandomNumber();
+        console.log(randomNumber)
+        this.getUsersPrediction(randomNumber);
+      } else if (userInput === '2') {
+        Console.close();
+      }
+    })
   }
 }
 
