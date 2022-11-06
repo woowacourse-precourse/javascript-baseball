@@ -18,6 +18,12 @@ class App {
     this.userNumberArray = Array.from(userNumber, changeNumber);
   }
 
+  checkTypeNumber(userNumber) {
+    for (let i = 0; i < 3; i++) {
+      return !isNaN(Number(userNumber[i]));
+    }
+  }
+
   play() {
     this.makeRandomNumbers();
     this.getUserNumbers();
