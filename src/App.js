@@ -1,4 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  GAME_STATE_MESSAGE,
+  GAME_RESULT_MESSAGE,
+  ERROR_MESSAGE,
+} = require("./Constants/Message");
 const NumberUtils = require("./Utils/Number");
 
 class App {
@@ -8,7 +13,7 @@ class App {
   }
 
   userInputNumber() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+    MissionUtils.Console.readLine(GAME_STATE_MESSAGE.ENTER_NUMBER, (number) => {
       this.NumberUtil.isBaseballNumber(number);
       const result = this.compareNumber(number);
       MissionUtils.Console.print(result);
@@ -31,7 +36,7 @@ class App {
     const total =
       6 - new Set([...userNumberArray, ...computerNumberArray]).size;
 
-    if (total === 0) return `낫싱`;
+    if (total === 0) return GAME_RESULT_MESSAGE.NOTHING;
 
     for (let index = 0; index < 3; index++) {
       if (userNumberArray[index] === computerNumberArray[index]) {
@@ -39,23 +44,20 @@ class App {
       }
     }
     ball = total - strike;
-    if (ball === 0) return `${strike}스트라이크`;
-    if (strike === 0) return `${ball}볼`;
-    return `${ball}볼 ${strike}스트라이크`;
+    if (ball === 0) return `${strike}${GAME_RESULT_MESSAGE.STRIKE}`;
+    if (strike === 0) return `${ball}${GAME_RESULT_MESSAGE.BALL}`;
+    return `${ball}${GAME_RESULT_MESSAGE.BALL} ${strike}${GAME_RESULT_MESSAGE.STRIKE}`;
   }
 
   isReStart() {
-    MissionUtils.Console.readLine(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (number) => {
-        number = Number(number);
-        if (number === 1) this.game();
-        else if (number === 2) {
-          MissionUtils.Console.print("게임 종료");
-          MissionUtils.Console.close();
-        } else throw "1또는 2만 입력해주세요.";
-      }
-    );
+    MissionUtils.Console.readLine(GAME_STATE_MESSAGE.WIN, (number) => {
+      number = Number(number);
+      if (number === 1) this.game();
+      else if (number === 2) {
+        MissionUtils.Console.print(GAME_STATE_MESSAGE.END);
+        MissionUtils.Console.close();
+      } else throw ERROR_MESSAGE.ONLY_ONE_TWO;
+    });
   }
 
   game() {
@@ -63,7 +65,7 @@ class App {
     this.userInputNumber();
   }
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(GAME_STATE_MESSAGE.START);
     this.game();
   }
 }

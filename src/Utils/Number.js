@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { ERROR_MESSAGE } = require("../Constants/Message");
 
 class NumberUtils {
   isNumber = (number) => {
@@ -12,16 +13,16 @@ class NumberUtils {
   isBaseballNumber(number) {
     number = Number(number);
     if (!this.isNumber(number)) {
-      throw "숫자만 입력해주세요";
+      throw ERROR_MESSAGE.NOT_NUMBER;
     }
     if (number >= 1000 || number <= 99) {
-      throw "3개의 숫자만 입력해주세요";
+      throw ERROR_MESSAGE.NOT_THREE_LENGTH;
     }
     if (new Set(this.NumberToArray(number)).size !== 3) {
-      throw "중복되지 않는 숫자로 입력해주세요";
+      throw ERROR_MESSAGE.NOT_DUPLICATED;
     }
     if (this.NumberToArray(number).includes(0)) {
-      throw "1부터 9까지만 입력해주세요.";
+      throw ERROR_MESSAGE.NOT_ZERO;
     }
   }
 
