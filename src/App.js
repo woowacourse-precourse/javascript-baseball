@@ -61,6 +61,20 @@ class App {
     return strikeCount;
   };
 
+  ballCounter = (userNumbersArray, refNumbersArray) => {
+    let ballCount = 0;
+
+    userNumbersArray.map((userNumber, index) => {
+      ballCount =
+        refNumbersArray.indexOf(userNumber) !== index &&
+        refNumbersArray.includes(userNumber)
+          ? ballCount + 1
+          : ballCount;
+    });
+
+    return ballCount;
+  };
+
   discriminator(userNumbersArray, refNumbersArray) {
     let discrimination = "";
     let strikeCount = 0;
