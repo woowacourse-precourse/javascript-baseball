@@ -80,7 +80,9 @@ class App {
 
   getUsersNextAction() {
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
-      if (userInput === '1') {
+      if (!this.validateNextAction(userInput)) {
+        throw '잘못된 값을 입력했습니다!'
+      } else if (userInput === '1') {
         const randomNumber = this.makeRandomNumber();
         console.log(randomNumber)
         this.getUsersPrediction(randomNumber);
@@ -106,6 +108,12 @@ class App {
       return true;
     }
     
+  }
+
+  validateNextAction(userInput) {
+    if (!userInput === '1' || !userInput === '2') {
+      return false;
+    }
   }
 }
 
