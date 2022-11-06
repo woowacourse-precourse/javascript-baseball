@@ -10,6 +10,7 @@
 // - [x] 스트라이크 볼 낫싱을 출력한다.
 // - [x] 세개의 숫자가 모두 맞으면 종료한다.
 // - [x] 반복한다.
+// - [] 입력 예외처리 추가
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
@@ -17,7 +18,6 @@ function App() {
   this.play = () => {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     createcomputerNumber();
-    console.log(this.computerNumber);
     recursiveAsyncReadLine();
   };
 
