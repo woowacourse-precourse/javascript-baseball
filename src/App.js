@@ -5,6 +5,7 @@ class App {
 
   play() {
     this.start();
+    this.playerInput();
   }
 
   start() {
@@ -41,6 +42,23 @@ class App {
     for (let i = 0; i < this.COMPUTER_NUMBER; i++) {
       if (this.COMPUTER_NUMBER[i] === input[i]) STRIKE++;
       if (this.COMPUTER_NUMBER.indexOf(input[i]) >= 0) BALL++;
+    }
+
+    this.gameResult([BALL, STRIKE]);
+  }
+
+  gameResult(numArr) {
+    if (numArr[1] === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    } else {
+      if (numArr[0] === 0 && numArr[1] === 0) {
+        Console.print("낫싱");
+      }
+      Console.print(
+        `${numArr[0] > 0 ? numArr[0] + "볼 " : ""}
+        ${numArr[1] > 0 ? numArr[1] + "스트라이크" : ""}`
+      );
+      this.playerInput();
     }
   }
 }
