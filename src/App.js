@@ -18,6 +18,9 @@ class App {
         console.log(`${answer}`);
         MissionUtils.Console.close();
       });
+      //입력받은 숫자 한자리씩 배열에 저장
+      let input = [];
+      numberToString(answer, input);
     }
   }
 }
