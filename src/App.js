@@ -18,7 +18,7 @@ class App {
     Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
       const { isValid, errorType } = this.isValidUserNumberInput(userInput);
       if (!isValid) {
-        Console.close();
+        this.quitGame();
         throw new Error(ERROR_MESSAGE[errorType]);
       }
       const [strikeCount, ballCount] = this.getStrikeBallCount(this.computerInput, userInput);
@@ -32,7 +32,7 @@ class App {
       Console.print(GAME_MESSAGE.GAME_OVER);
       Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
         if (!this.isValidTrigger(trigger)) {
-          Console.close();
+          this.quitGame();
           throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
         }
         if (trigger === RESTART_TRIGGER) {
@@ -41,7 +41,7 @@ class App {
           return;
         }
         if (trigger === QUIT_TRIGGER) {
-          Console.close();
+          this.quitGame();
         }
       });
     });
@@ -117,6 +117,10 @@ class App {
   }
   isValidTrigger(trigger) {
     return trigger === RESTART_TRIGGER || trigger === QUIT_TRIGGER;
+  }
+
+  quitGame() {
+    Console.close();
   }
 }
 
