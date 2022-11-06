@@ -11,7 +11,9 @@ class App {
     Console.readLine('숫자를 입력해주세요 :', (userNumber) => {
       if (!this.checkValidation(userNumber))
         throw new Error('형식에 맞는 숫자를 입력해주세요.');
+
       this.changeUserNumbersToArray(userNumber);
+      this.getScore(this.computerNumberArray, this.userNumberArray);
     });
   }
 
@@ -48,6 +50,17 @@ class App {
   checkDuplication(userNumber) {
     const splitNumber = userNumber.split('');
     return new Set(splitNumber).size === 3;
+  }
+
+  getScore(computerNumber, userNumber) {
+    const score = [0, 0];
+
+    for (let i = 0; i < 3; i++) {
+      if (computerNumber[i] === userNumber[i]) score[0]++;
+      else if (computerNumber.includes(userNumber[i])) score[1]++;
+    }
+
+    this.score = score;
   }
 
   play() {
