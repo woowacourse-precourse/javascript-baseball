@@ -42,6 +42,16 @@ class App {
     }
     return true;
   }
+
+  // 중복된 값이 있는지
+  isOverLayRange() {
+    const answerToArray = [...this.userInputs];
+    const answerToSet = new Set(answerToArray);
+    if (answerToArray.length !== answerToSet.size){
+      throw new Error("중복된 값을 입력하였습니다.");
+    }
+    return true;
+  }
 }
 
 const app = new App();
