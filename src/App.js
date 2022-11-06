@@ -4,7 +4,7 @@ class App {
   }
   play() {
     const gameInit = new this.playGame();
-    gameInit.gameStart();
+    gameInit.gameReady();
   }
 }
 
