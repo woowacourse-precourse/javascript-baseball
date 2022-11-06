@@ -12,6 +12,26 @@ class Game {
    */
   playCommand () {}
   
+  outputResult ({ strike, ball }) {
+    if(strike === 3) {
+      this.io.output('3스트라이크');
+      return true;
+    }
+    if(strike === 0 && ball === 0) {
+      this.io.output('낫싱');
+    }
+    if(strike !== 0 && ball === 0) {
+      this.io.output(`${strike}스트라이크`);
+    }
+    if(strike === 0 && ball !== 0) {
+      this.io.output(`${ball}볼`);
+    }
+    if(strike !== 0 && ball !== 0) {
+      this.io.output(`${strike}스트라이크 ${ball}볼`);
+    }
+    return false;
+  }
+
   /**
    * - 두 숫자배열을 비교한다.
    * @param {[number, number, number]} computerNumber 
