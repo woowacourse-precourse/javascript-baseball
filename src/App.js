@@ -79,6 +79,14 @@ class App {
     return false;
   }
 
+  static isOneOrTwo(str){
+    const ONE_TWO_REGEXP = /^[1,2]$/;
+    if (ONE_TWO_REGEXP.test(str)) {
+      return true;
+    }
+    return false;
+  }
+
   static playGame(computerNum) {
     let score;
     const RESTART = '1';
@@ -93,11 +101,17 @@ class App {
         if (App.isThreeStrike(score)) {
           MissionUtils.Console.readLine('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
             (selectInput) => {
-              if (selectInput === RESTART) {
-                App.restartGame();
-                return;
+              try{
+                if (!App.isOneOrTwo(selectInput)) throw new Error('Input is invalid')
+                if (selectInput === RESTART) {
+                  App.restartGame();
+                  return;
+                }
+                App.finishGame();
+              } catch(error){
+                MissionUtils.Console.print('입력값이 1 또는 2가 아닙니다.');
+                App.finishGame();
               }
-              App.finishGame();
             });
         }
 
