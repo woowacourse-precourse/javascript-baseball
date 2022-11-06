@@ -5,7 +5,9 @@ class App {
     this.baseballGame = new BaseballGame();
   }
 
-  play() {}
+  play() {
+    this.baseballGame.init();
+  }
 }
 
 module.exports = App;
