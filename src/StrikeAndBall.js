@@ -1,4 +1,6 @@
-function getResult(answer, input) {}
+function getResult(answer, input) {
+  return [getStrikeCount(answer, input), getBallCount(answer, input)];
+}
 function getBallCount(answer, input) {
   let ballCount = 0;
   input.split("").forEach((eachNumber, index) => {
