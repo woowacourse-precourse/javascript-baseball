@@ -1,8 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const gameStatus = {
-  play: true,
-  stop: false,
+const GAME = {
+  PLAY: true,
+  STOP: false,
+  EXIT: -1,
 };
 
 const ment = {
@@ -17,45 +18,65 @@ const ment = {
 };
 
 class App {
+  constructor() {
+    this.game = GAME.PLAY;
+  }
+
   async play() {
-    this.game = gameStatus.play;
-
-    const anwser = this.startGame().createAnswer();
-
-    // while (this.game) {
-    //   try {
-    //     await this.inputUserAnswer();
-    //     if (this.checkUserGameAnswer()) throw new Error("out of range");
-    //     const result = this.compareUserAnswer(anwser);
-    //     this.resultPrint(result);
-    //   } catch (e) {
-    //     this.exceptionEnd();
-    //   }
-    // }
-
-    // if (!this.game) {
-    //   this.endGame();
-    //   try {
-    //     await this.userProgressInput();
-    //     if (this.checkUserProgressInput()) throw new Error("out of range");
-    //   } catch (e) {
-    //     console.log(e);
-    //     this.exceptionEnd();
-    //   }
-    // }
-    // this.isPlayContinue(this.userAnswer);
+    switch (this.game) {
+      case GAME.PLAY:
+        await this.playGame();
+        this.endGame();
+        break;
+      case GAME.STOP:
+        await this.askUser();
+        this.play();
+        break;
+      case GMAE.EXIT:
+        this.exceptionEnd();
+        break;
+    }
 
     return;
   }
 
+  async playGame() {
+    this.game = GAME.PLAY;
+    const anwser = this.startGame().createAnswer();
+    while (this.game) {
+      try {
+        await this.inputUserAnswer();
+        if (this.checkUserGameAnswer()) throw new Error("out of range");
+        const result = this.compareUserAnswer(anwser);
+        this.resultPrint(result);
+      } catch (e) {
+        this.exceptionEnd();
+      }
+    }
+    return;
+  }
+
+  async askUser() {
+    try {
+      await this.inputUserAnswer();
+      // if (a) throw new Error("out of range");
+      MissionUtils.Console.print("재시작좀 하자 ", this.userAnswer);
+    } catch (e) {
+      this.exceptionEnd();
+    }
+    if (this.isPlayContinue(this.userAnswer)) this.game = gameStatus.play;
+    return this;
+  }
+
   createAnswer() {
     const answer = [];
-    while (answer < 3) {
+    while (answer.length < 3) {
       const num = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!answer.includes(num)) {
         answer.push(num);
       }
     }
+    MissionUtils.Console.print(answer);
     return answer;
   }
 
@@ -65,7 +86,7 @@ class App {
   }
 
   inputUserAnswer() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       MissionUtils.Console.readLine(ment.input, (answer) => {
         this.userAnswer = answer;
         resolve();
@@ -112,39 +133,34 @@ class App {
 
     MissionUtils.Console.print(resultMent);
 
+    if (strike === 3) this.game = GAME.STOP;
+
     return;
   }
 
   isPlayContinue(answer) {
-    if (answer === "1") return this.play();
-    if (answer === "2") return;
-  }
-
-  async userProgressInput() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(ment.reStart, (answer) => {
-        this.userAnswer = answer;
-        resolve();
-      });
-    });
+    if (answer === "1") return true;
+    if (answer === "2") return false;
   }
 
   checkUserProgressInput() {
-    if (this.userAnswer === 1 || this.userAnswer === 2) return true;
+    console.log("이게 맞나", this.userAnswer === "1");
+    if (this.userAnswer === "1" || this.userAnswer === "2") return true;
     return false;
   }
 
   exceptionEnd() {
-    this.game = gameStatus.stop;
+    this.game = GAME.EXIT;
     MissionUtils.Console.print(ment.exception);
     MissionUtils.Console.close();
     return;
   }
 
   endGame() {
-    this.game = gameStatus.stop;
+    this.game = GAME.STOP;
     MissionUtils.Console.print(ment.end);
     MissionUtils.Console.close();
+    this.play();
     return;
   }
 }
