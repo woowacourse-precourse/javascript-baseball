@@ -9,7 +9,7 @@ class Exception{
     if (String(input).length !== 3){
       return constant.ERROR.INPUT_LENGTH;
     }
-    if (Array.from(new Set(Array.from(input))).length !== 3){
+    if ((new Set(Array.from(input))).size !== 3){
       return constant.ERROR.INPUT_DUPLICATE;
     }
     return false;
