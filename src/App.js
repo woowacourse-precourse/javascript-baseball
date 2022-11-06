@@ -42,6 +42,12 @@ class App {
 
     return `${ballMessage} ${strikeMessage}`.trim();
   }
+
+  validateRestartGameInput(input) {
+    if (input !== '1' && input !== '2') {
+      throw new Error('Input must be 1 or 2.');
+    }
+  }
 }
 
 module.exports = App;
