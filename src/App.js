@@ -1,14 +1,19 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const MIN_NUMBER = 1;
-const MAX_NUMBER = 9;
 const MIN_ANSWER = "102";
 const MAX_ANSWER = "987";
 const NUMBER_LENGTH = 3;
 
 class App {
   makeAnswer = () => {
-    return MissionUtils.Random.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH).join("");
+    const randomNumbers = [];
+
+    while (randomNumbers.length < NUMBER_LENGTH) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!randomNumbers.includes(randomNumber)) randomNumbers.push(randomNumber);
+    }
+
+    return randomNumbers.join("");
   };
 
   isDuplicated = (input) => {
