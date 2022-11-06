@@ -40,6 +40,12 @@ class App {
     Console.print(msg);
   }
 
+  inputNumber(msg) {
+    Console.readLine(msg, (input) => {
+      this.isInputValid(input);
+    });
+  }
+
   gameStart () {
     this.gameSet = this.gameSetting();
     this.printMsg('숫자 야구 게임을 시작합니다.');
