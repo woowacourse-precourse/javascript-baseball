@@ -13,7 +13,6 @@ class App {
     return answer;
   }
   choice_answer(user_nums) {
-    console.log(user_nums)
     //숫자이어야함
     if(!Number.isInteger(user_nums)) {
       throw 'user_nums가 정수가 아님'
@@ -44,5 +43,16 @@ class App {
     } 
     return strike
   }
+  count_ball(answer, user_select) {
+    let ball = 0 ;
+    for (let i=0; i<3; i++) {
+      let index = user_select.indexOf(answer[i]);
+      if( index!= -1 && index!= i ) {
+        ball = ball + 1;
+      }
+    }
+    return ball
+  }
 }
+
 module.exports = App;
