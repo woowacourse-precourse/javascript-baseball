@@ -1,3 +1,5 @@
+const { MESSAGE, STATE, NUMBER } = require('./Const');
+
 class MyError extends Error {
   constructor(message) {
     super(message);
@@ -13,17 +15,17 @@ class Verify {
 
     if (
       inputSet.size !== input.length
-      || inputSet.size > 3
+      || inputSet.size > NUMBER.COUNT
       || inputSet.has(NaN)
       || inputSet.has(0)
     ) {
-      throw new InputError('잘못된 값을 입력하셨습니다.');
+      throw new InputError(MESSAGE.INPUT_ERROR);
     }
   }
 
   state(state) {
-    if (state !== 1 && state !== 2) {
-      throw new InputError('잘못된 값을 입력하셨습니다.');
+    if (state !== STATE.RESTART && state !== STATE.EXIT) {
+      throw new InputError(MESSAGE.INPUT_ERROR);
     }
   }
 }

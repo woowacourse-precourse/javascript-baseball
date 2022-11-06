@@ -1,5 +1,6 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 const Verify = require('./Verify');
+const { MESSAGE, STATE, NUMBER } = require('./Const');
 
 class Game {
   constructor() {
@@ -7,7 +8,7 @@ class Game {
   }
 
   start() {
-    this.state = -1;
+    this.state = STATE.DEFAULT;
     this.setAnswer();
     this.interaction();
   }
@@ -15,8 +16,8 @@ class Game {
   setAnswer() {
     let answer = [];
 
-    while (answer.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
+    while (answer.length < NUMBER.COUNT) {
+      const number = Random.pickNumberInRange(NUMBER.MIN, NUMBER.MAX);
 
       if (!answer.includes(number)) {
         answer.push(number);
@@ -28,7 +29,7 @@ class Game {
   interaction() {
     const { verify } = this;
 
-    Console.readLine('숫자를 입력해 주세요 : ', (string) => {
+    Console.readLine(MESSAGE.READ_INPUT, (string) => {
       this.userInput = Array.from(string, Number);
       verify.userInput(this.userInput);
       this.setCount();
@@ -55,7 +56,7 @@ class Game {
       }
     });
     if (count.strike === 3) {
-      this.state = 0;
+      this.state = STATE.END;
     }
     this.count = count;
   }
@@ -65,13 +66,13 @@ class Game {
     let hint = '';
 
     if (count.ball > 0) {
-      hint = `${count.ball}볼`;
+      hint = `${count.ball}${MESSAGE.BALL}`;
     }
     if (count.strike > 0) {
-      hint += ` ${count.strike}스트라이크`;
+      hint += ` ${count.strike}${MESSAGE.STRIKE}`;
     }
     if (hint === '') {
-      hint = '낫싱';
+      hint = MESSAGE.NOTHING;
     }
     this.hint = hint.trimStart();
   }
@@ -80,15 +81,15 @@ class Game {
     const { state } = this;
 
     switch (state) {
-      case 0: {
+      case STATE.END: {
         this.readState();
         break;
       }
-      case 1: {
+      case STATE.RESTART: {
         this.start();
         break;
       }
-      case 2: {
+      case STATE.EXIT: {
         Console.close();
         break;
       }
@@ -101,15 +102,12 @@ class Game {
   readState() {
     const { verify } = this;
 
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (string) => {
-        this.state = Number(string);
-        verify.state(this.state);
-        this.checkState();
-      }
-    );
+    Console.print(MESSAGE.GAME_END);
+    Console.readLine(MESSAGE.READ_STATE, (string) => {
+      this.state = Number(string);
+      verify.state(this.state);
+      this.checkState();
+    });
   }
 }
 
