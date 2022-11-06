@@ -83,7 +83,24 @@ class App {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.stopGameOrNot();
+    } else {
+      this.countBallOrStrikeOrNothing(this.randomNumber, this.userInputNumber);
     }
+  }
+
+  countStrike(randomNumber, userInputNumber) {
+    let strike = 0;
+    for (let [index] of Object.entries(userInputNumber)) {
+      if (randomNumber[index] === userInputNumber[index]) {
+        strike += 1;
+      }
+    }
+    return strike;
+  }
+
+  countBallOrStrikeOrNothing(randomNumber, userInputNumber) {
+    // strike 계산
+    let strike = this.countStrike(randomNumber, userInputNumber);
   }
 
   makeUserInputNumber() {
