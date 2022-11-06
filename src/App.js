@@ -31,7 +31,9 @@ class App {
     const didUserWin = this.computeResult(userInput);
     if (didUserWin) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return;
     }
+    this.askUserInput();
   }
 
   static isValidUserInput(input) {
