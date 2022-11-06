@@ -52,6 +52,14 @@ class App {
     this.result();
   }
 
+  result() {
+    this.threeStrikeCheck();
+    this.nothingCheck();
+    this.ballCheck();
+    this.strikeCheck();
+    this.strikeAndBallCheck();
+  }
+
   threeStrikeCheck() {
     if (this.strikeCount === 3) {
       MissionUtils.Console.print('3스트라이크');
@@ -102,14 +110,6 @@ class App {
       return this.getUserNumber();
     }
     return false;
-  }
-
-  result() {
-    this.threeStrikeCheck();
-    this.nothingCheck();
-    this.ballCheck();
-    this.strikeCheck();
-    this.strikeAndBallCheck();
   }
 
   askRestartOrExit() {
