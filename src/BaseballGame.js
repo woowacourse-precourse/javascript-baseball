@@ -10,8 +10,7 @@ class BaseballGame {
 
   init(isFirstGame) {
     this.isFirstGame = isFirstGame;
-    this.pickedNumberByComputer =
-      new PickedNumberByComputer().randomNumInRange();
+    this.pickedNumberByComputer = PickedNumberByComputer.randomNumInRange();
   }
 
   countStrikeBallNothing = (pickedNumberByUser, pickedNumberByComputer) => {

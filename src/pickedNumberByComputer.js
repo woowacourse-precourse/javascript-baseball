@@ -1,7 +1,7 @@
 const { Random } = require("@woowacourse/mission-utils");
 
 class PickedNumberByComputer {
-  randomNumInRange() {
+  static randomNumInRange() {
     let pickedNumber = [];
     while (pickedNumber.length < 3) {
       let number = Random.pickNumberInRange(1, 9);
