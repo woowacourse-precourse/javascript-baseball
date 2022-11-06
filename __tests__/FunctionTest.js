@@ -23,26 +23,26 @@ describe("숫자 야구 게임 시작 문구", () => {
 
 describe("목표값 테스트", () => {
   test("목표값 개수", () => {
-    const refNumbersArr = app.refNumbersGetter();
-    expect(refNumbersArr.length).toEqual(3);
+    const refNumbersArray = app.refNumbersArrayGetter();
+    expect(refNumbersArray.length).toEqual(3);
   });
 
   test("목표값 내 중복 확인", () => {
-    const refNumbersArr = app.refNumbersGetter();
+    const refNumbersArray = app.refNumbersArrayGetter();
 
     let duplicateChecker;
-    refNumbersArr.map((number, index) => {
+    refNumbersArray.map((number, index) => {
       duplicateChecker =
-        refNumbersArr.indexOf(number) === index ? "clear" : "duplicate";
+        refNumbersArray.indexOf(number) === index ? "clear" : "duplicate";
     });
     expect(duplicateChecker).toEqual("clear");
   });
 
   test("목표값 숫자 범위 1~9 확인", () => {
-    const refNumbersArr = app.refNumbersGetter();
+    const refNumbersArray = app.refNumbersArrayGetter();
 
     let rangeChecker;
-    refNumbersArr.map((number, index) => {
+    refNumbersArray.map((number, index) => {
       rangeChecker =
         Number.isInteger(number) && number < 10 && number > 0
           ? "clear"

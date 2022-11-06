@@ -29,7 +29,7 @@ class App {
     MissionUtils.Console.print(message);
   }
 
-  refNumbersGetter() {
+  refNumbersArrayGetter() {
     const refNumbers = [];
 
     while (refNumbers.length < 3) {
@@ -77,8 +77,8 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         if (answer === "1") {
-          const refNumbersArr = this.refNumbersGetter();
-          this.gameStarter(refNumbersArr);
+          const refNumbersArray = this.refNumbersArrayGetter();
+          this.gameStarter(refNumbersArray);
         } else if (answer === "2") {
           MissionUtils.Console.close();
         }
@@ -86,18 +86,18 @@ class App {
     );
   }
 
-  gameStarter(refNumbersArr) {
+  gameStarter(refNumbersArray) {
     let discrimination = "";
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const usersInput = answer.trim();
       this.totalErrorChecker(usersInput);
       const userNumbersArr = this.stringToArrConverter(usersInput);
-      let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
+      let discrimination = this.discriminator(userNumbersArr, refNumbersArray);
       this.consolePrinter(discrimination);
 
       if (discrimination !== "3스트라이크") {
-        this.gameStarter(refNumbersArr);
+        this.gameStarter(refNumbersArray);
       } else if (discrimination === "3스트라이크") {
         this.consolePrinter("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         this.reStartSelector();
@@ -107,8 +107,8 @@ class App {
 
   play() {
     this.consolePrinter("숫자 야구 게임을 시작합니다.");
-    const refNumbersArr = this.refNumbersGetter();
-    this.gameStarter(refNumbersArr);
+    const refNumbersArray = this.refNumbersArrayGetter();
+    this.gameStarter(refNumbersArray);
   }
 }
 
