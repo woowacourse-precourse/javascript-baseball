@@ -69,6 +69,7 @@ class App {
         this.judgeBall();
         const strikeCount = this.strike;
         const ballCount = this.ball;
+        this.printResult(strikeCount, ballCount);
     }
     judgeStrike() {
         Console.print("judgeStrike()-----------------");
@@ -78,6 +79,29 @@ class App {
         Console.print("judgeBall()-----------------");
         const ball = this.computer.filter((el) => this.user.includes(el.toString()));
         this.ball = ball.length;
+    }
+
+    printResult(strikeCount, ballCount) {
+        if (ballCount === 0 && strikeCount === 0) {
+            Console.print(PLAYING.OUT);
+            return this.questionNumber();
+        }
+        if (strikeCount === 3) {
+            Console.print(MESSAGE.CLEAR);
+            return this.questionFinish();
+        }
+        if (strikeCount === 0) {
+            Console.print(ballCount + PLAYING.BALL);
+            return this.questionNumber();
+        }
+        if (strikeCount - ballCount === 0) {
+            Console.print(strikeCount + PLAYING.STRIKE);
+            return this.questionNumber();
+        }
+        if (ballCount !== 0 && strikeCount !== 0) {
+            Console.print(`${ballCount + PLAYING.BALL} ${strikeCount + PLAYING.STRIKE}`);
+            return this.questionNumber();
+        }
     }
 
     gameFinish() {
