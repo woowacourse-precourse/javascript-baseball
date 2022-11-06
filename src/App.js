@@ -34,18 +34,48 @@ class App {
     this.userNumbers.reverse();
   }
 
+  printGameResult(gameResult) {
+    if (gameResult[2] === 3) {
+      Console.print('낫싱');
+      return;
+    }
+
+    for (let i = 0; i < 2; i++) {
+      if (gameResult[i] === 0) continue;
+
+      switch (i) {
+        case 0:
+          Console.print(gameResult[i] + '볼 ');
+          break;
+        case 1:
+          Console.print(gameResult[i] + '스트라이크');
+      }
+    }
+  }
+
+  calculateGameResult(result) {
+    const gameResult = [];
+    for (let i = 100; i !== 0; i = parseInt(i / 10)) {
+      gameResult.push(parseInt(result / i));
+      result %= i;
+    }
+
+    this.printGameResult(gameResult);
+    return gameResult;
+  }
+
   discriminationStrikeOrBall() {
     Console.print(this.computerNumbers);
     const result = this.userNumbers.reduce((acc, cur, i) => {
       if (this.computerNumbers.includes(cur)) {
-        if (this.computerNumbers[i] === cur) return acc + 100;
-        else return acc + 10;
+        if (this.computerNumbers[i] === cur) return acc + 10;
+        else return acc + 100;
       }
 
       return acc + 1;
     }, 0);
 
-    Console.print(result);
+    const calculatedResult = this.calculateGameResult(result);
   }
 
   userInputNumber() {
