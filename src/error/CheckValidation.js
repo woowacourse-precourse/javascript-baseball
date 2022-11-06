@@ -4,11 +4,11 @@ const inputMore = "글자 더 입력하셨습니다.";
 const inputLess = "글자 덜 입력하셨습니다.";
 
 const checkDuplicated = (splitAnswer) => {
-  return splitAnswer[0] == splitAnswer[1] ||
+  return (
+    splitAnswer[0] == splitAnswer[1] ||
     splitAnswer[1] == splitAnswer[2] ||
     splitAnswer[0] == splitAnswer[2]
-    ? true
-    : false;
+  );
 };
 
 const CheckError = (answer) => {
@@ -16,7 +16,9 @@ const CheckError = (answer) => {
 
   hasZero(answer);
   if (checkDuplicated(splitAnswer) && splitAnswer.length > 1) {
-    throw "숫자끼리 중복되어서는 안됩니다.\n세 자리 모두 다른 수를 입력해주세요.";
+    throw new Error(
+      "숫자끼리 중복되어서는 안됩니다.\n세 자리 모두 다른 수를 입력해주세요."
+    );
   }
   containNotANumber(splitAnswer, answer);
   notRightLength(answer.length);
@@ -27,17 +29,17 @@ const hasZero = (answer) => {
   const zeroRegex = /[0]/;
   zeroRegex.test(answer) ? (isZero = true) : (isZero = false);
   if (answer.length === 3 && isZero) {
-    throw `숫자 0이 포함되었습니다.${guideMessage}`;
+    throw new Error(`숫자 0이 포함되었습니다.${guideMessage}`);
   }
   if (answer.length > 3 && isZero) {
-    throw `숫자 0이 포함되었으며, ${
-      answer.length - 3 + inputMore + guideMessage
-    }`;
+    throw new Error(
+      `숫자 0이 포함되었으며, ${answer.length - 3 + inputMore + guideMessage}`
+    );
   }
   if (answer.length < 3 && isZero) {
-    throw `숫자 0이 포함되었으며, ${
-      3 - answer.length + inputLess + guideMessage
-    }`;
+    throw new Error(
+      `숫자 0이 포함되었으며, ${3 - answer.length + inputLess + guideMessage}`
+    );
   }
 };
 
@@ -59,26 +61,30 @@ const containNotANumber = (splitAnswer, answer) => {
   let isNotANumber = `${notANumberList.join(",")}번째 문자`;
 
   if (hasNotANumber && answer.length === 3) {
-    throw `${isNotANumber}는 숫자가 아닙니다.${guideMessage}`;
+    throw new Error(`${isNotANumber}는 숫자가 아닙니다.${guideMessage}`);
   }
   if (hasNotANumber && answer.length > 3) {
-    throw `${isNotANumber}는 숫자가 아니며, ${
-      answer.length - 3 + inputMore + guideMessage
-    }`;
+    throw new Error(
+      `${isNotANumber}는 숫자가 아니며, ${
+        answer.length - 3 + inputMore + guideMessage
+      }`
+    );
   }
   if (hasNotANumber && answer.length < 3) {
-    throw `${isNotANumber}는 숫자가 아니며, ${
-      3 - answer.length + inputLess + guideMessage
-    }`;
+    throw new Error(
+      `${isNotANumber}는 숫자가 아니며, ${
+        3 - answer.length + inputLess + guideMessage
+      }`
+    );
   }
 };
 
 const notRightLength = (length) => {
   if (length > 3) {
-    throw `${length - 3 + inputMore + guideMessage}`;
+    throw new Error(`${length - 3 + inputMore + guideMessage}`);
   }
   if (length < 3) {
-    throw `${3 - length + inputLess + guideMessage}`;
+    throw new Error(`${3 - length + inputLess + guideMessage}`);
   }
 };
 
