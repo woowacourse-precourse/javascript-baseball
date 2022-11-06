@@ -71,11 +71,11 @@ class App {
 
   return_hint(input, answer) {
     const [STRIKE, BALL] = this.compare_and_count_strike_ball(input, answer);
+    const HINT = [];
     if (BALL === 0 && STRIKE === 0) return '낫싱';
-    else if (STRIKE === 3) return '3스트라이크';
-    else if (STRIKE === 0) return `${BALL}볼`;
-    else if (BALL === 0) return `${STRIKE}스트라이크`;
-    return `${BALL}볼 ${STRIKE}스트라이크`;
+    if (BALL > 0) HINT.push(`${BALL}볼`);
+    if (STRIKE > 0) HINT.push(`${STRIKE}스트라이크`);
+    return HINT.join(' ');
   }
 
   receive_restart_input() {
