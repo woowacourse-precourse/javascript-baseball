@@ -1,6 +1,30 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  errorCheckList = {
+    inputNumberLengthCheck: (usersInput) => {
+      if (usersInput.length !== 3) {
+        throw "3자리의 숫자를 입력해주세요.";
+      }
+    },
+    inputValueStringCheck: (usersInput) => {
+      if (isNaN(usersInput)) {
+        throw "숫자만 입력해주세요.";
+      }
+    },
+    inputValueEmptyCheck: (usersInput) => {
+      if (usersInput.indexOf(" ") !== -1) {
+        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
+      }
+    },
+  };
+
+  totalErrorChecker(usersInput) {
+    for (const errorCheck in this.errorCheckList) {
+      this.errorCheckList[errorCheck](usersInput);
+    }
+  }
+
   printer(message) {
     MissionUtils.Console.print(message);
   }
@@ -62,36 +86,12 @@ class App {
     );
   }
 
-  errorChecker(usersInput) {
-    for (const errorCheck in this.errorCheckList) {
-      this.errorCheckList[errorCheck](usersInput);
-    }
-  }
-
-  errorCheckList = {
-    inputNumberLengthCheck: (usersInput) => {
-      if (usersInput.length !== 3) {
-        throw "3자리의 숫자를 입력해주세요.";
-      }
-    },
-    inputValueStringCheck: (usersInput) => {
-      if (isNaN(usersInput)) {
-        throw "숫자만 입력해주세요.";
-      }
-    },
-    inputValueEmptyCheck: (usersInput) => {
-      if (usersInput.indexOf(" ") !== -1) {
-        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
-      }
-    },
-  };
-
   gameStarter(refNumbersArr) {
     let discrimination = "";
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const usersInput = answer.trim();
-      this.errorChecker(usersInput);
+      this.totalErrorChecker(usersInput);
       const userNumbersArr = this.stringToArrConverter(usersInput);
       let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
       this.printer(discrimination);
