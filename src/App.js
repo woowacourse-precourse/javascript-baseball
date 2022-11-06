@@ -48,6 +48,8 @@ class App {
       errorMessage = NOT_INTEGER_EXCEPTION;
     } else if (this.isIncorrectNumberOfDigits(inputNumber)) {
       errorMessage = NUMBER_OF_DIGITS_EXCEPTION;
+    } else if (this.hasSameNumber(inputNumber)) {
+      errorMessage = SAME_NUMBER_EXCEPTION;
     }
 
     if (errorMessage === null) {
@@ -66,6 +68,14 @@ class App {
       return false;
     }
     return true;
+  }
+  hasSameNumber(inputNumber) {
+    const [first, second, third] = inputNumber;
+
+    if (first === second || second === third || first === third) {
+      return true;
+    }
+    return false;
   }
 }
 
