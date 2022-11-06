@@ -99,4 +99,17 @@ describe('숫자 야구 게임', () => {
       app.play();
     }).toThrow(ERROR.NUMBER_RANGE);
   });
+
+  test('다시 시작 / 종료 입력 예외 테스트', () => {
+    expect(() => {
+      const randoms = [1, 3, 5];
+      const answers = ['012'];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.RESTART_RANGE);
+  });
 });
