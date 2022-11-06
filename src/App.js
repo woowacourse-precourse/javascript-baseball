@@ -2,12 +2,16 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
+    // 게임 시작
+    gameStart();
     // 컴퓨터 랜덤 값 생성
     const computerNumber = RandomChoice();
-    MissionUtils.Console.print(computerNumber);
-    MissionUtils.Console.close();
   }
 }
+
+const gameStart = () => {
+  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+};
 
 const RandomChoice = () => {
   const randomNumber = [];
