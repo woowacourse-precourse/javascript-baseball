@@ -2,6 +2,7 @@ const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
+  // 입력한 값들.
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((question, callback) => {
