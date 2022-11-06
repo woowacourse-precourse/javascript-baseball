@@ -78,11 +78,6 @@ class App {
   }
 }
 
-// todo
-// 이름 고민하기
-// 기능 분리 다시 생각하기
-// 예외 처리 기능 분리해보기
-
 const app = new App();
 app.play();
 module.exports = App;
