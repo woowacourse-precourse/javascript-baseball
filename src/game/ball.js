@@ -21,8 +21,7 @@ const countBallStrike = (computerNumbersArray, userNumbersArray) => {
             if (computerNumbersArray[computerIndex] === userNumbersArray[userIndex]) {
                 if (computerIndex === userIndex) {
                     strike++;
-                }
-                else {
+                } else {
                     ball++;
                 }
             }
