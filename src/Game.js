@@ -9,9 +9,21 @@ class Game {
       let result = getResultMessage(this.random, input);
       Console.print(result);
       if (input === this.random) {
-        //게임 종료
+        this.finishGame();
       } else {
         this.getUserAnswer();
+      }
+    });
+  }
+
+  finishGame() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.readLine("", (cmd) => {
+      if (cmd === "1") {
+        this.start();
+      } else {
+        Console.close();
       }
     });
   }
