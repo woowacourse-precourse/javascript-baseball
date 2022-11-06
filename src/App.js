@@ -4,15 +4,21 @@ class App {
   constructor() { }
 
   computerPick() { // 컴퓨터가 1부터 9 사이의 서로다른 3개의 숫자를 정하는 메서드
-    const COMPUTER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return COMPUTER;
+    let computer = [];
+    while (computer.length < 3) {
+      let random = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(random)) {
+        computer.push(random);
+      }
+    }
+    return computer;
   }
   playerPick(computer) { // 게임 플레이어의 입력을 받고, 컴퓨터와 비교하는 메서드
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       if (!this.checkNumber(input)) {
         throw new Error();
       }
-      const result = this.baseball(computer, input);
+      const result = this.baseballGame(computer, input);
       if (!result) {
         this.playerPick(computer);
       } else if (result) {
@@ -30,7 +36,7 @@ class App {
     }
     return true;
   }
-  baseball(computer, player) { // 플레이어가 입력한 숫자와 컴퓨터의 숫자를 비교하여 결과를 출력하는 메서드
+  baseballGame(computer, player) { // 플레이어가 입력한 숫자와 컴퓨터의 숫자를 비교하여 결과를 출력하는 메서드
     let strike = 0;
     let ball = 0;
     const PLAYER = [];
