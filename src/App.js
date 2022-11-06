@@ -28,25 +28,23 @@ class App {
     });
   }
 
-  isValid(number) {
-    if (!Number(number)) {
+  isValid(input) {
+    const trimmedInput = input.trim();
+    const numbers = [...trimmedInput].map((input) => Number(input));
+
+    if (numbers.some((number) => isNaN(number))) {
       return false;
     }
 
-    if (number.length !== NUMBER_LENGTH) {
+    if (numbers.length !== NUMBER_LENGTH) {
       return false;
     }
 
-    if (number.includes("0")) {
+    if (numbers.includes(0)) {
       return false;
     }
 
-    const hasDuplicate = [...number].some((item) => {
-      const regex = new RegExp(`[${item}]`, "g");
-      return number.match(regex)?.length > 1;
-    });
-
-    if (hasDuplicate) {
+    if (new Set(numbers).size !== NUMBER_LENGTH) {
       return false;
     }
 
