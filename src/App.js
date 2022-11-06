@@ -67,13 +67,33 @@ class BaseBallPlay {
 
     return `${ball}볼 ${strike}스트라이크`;
   }
+  userInputErrorHandler(input) {
+    if (Number.isNaN(input)) {
+      this.victoryCheck = true;
+      throw "숫자가 아닌값이 포함되있습니다";
+    }
+    if (input.includes(" ")) {
+      this.victoryCheck = true;
+      throw "공백이 포함되있습니다";
+    }
+    if (/[^1-9]/g.test(input)) {
+      this.victoryCheck = true;
+      throw "1~9가 아닌 수가 포함되있습니다.";
+    }
+    if (new Set(input).size !== 3) {
+      this.victoryCheck = true;
+      throw "중복된 숫자가 포함되있습니다";
+    }
+
+    return true;
+  }
 
   userInputHandler(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (input) => {
       MissionUtils.Console.print(this.judgement(computer, input));
-
-      if(this.victoryCheck) return this.reset();
-      if(!this.victoryCheck) return this.userInputHandler(computer);
+      this.userInputErrorHandler(input);
+      if (this.victoryCheck) return this.reset();
+      if (!this.victoryCheck) return this.userInputHandler(computer);
     });
   }
 
@@ -84,17 +104,19 @@ class BaseBallPlay {
   }
 
   reset() {
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
-      if(input === '1') {
-        this.victoryCheck = false;
-        return this.repeatContext();
-      }
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (input === "1") {
+          this.victoryCheck = false;
+          return this.repeatContext();
+        }
 
-      if(input === '2') {
-        return MissionUtils.Console.close();
+        if (input === "2") {
+          return MissionUtils.Console.close();
+        }
       }
-    })
-
+    );
   }
 }
 
