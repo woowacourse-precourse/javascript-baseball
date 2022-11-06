@@ -1,4 +1,5 @@
 const { countBall, countStrike, printBallCount } = require('../src/utils/BallCount');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 describe('볼 카운트 테스트', () => {
 	test('볼의 수 세기', () => {
@@ -22,7 +23,7 @@ describe('볼 카운트 테스트', () => {
 		const computerNumbers = ['1', '3', '6'];
 		const ball = countBall(userNumbers, computerNumbers);
 		const strike = countStrike(userNumbers, computerNumbers);
-		const logSpy = jest.spyOn(console, 'log');
+		const logSpy = jest.spyOn(MissionUtils.Console, 'print');
 		printBallCount(ball, strike);
 		expect(logSpy).toHaveBeenCalledWith('1볼 1스트라이크');
 	});
