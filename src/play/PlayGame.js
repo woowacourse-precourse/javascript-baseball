@@ -15,7 +15,7 @@ class PlayGame extends Mission {
   gameStart(computerInputNumbers) {
     const scoreMessage = new this.userNumber();
     this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
-      this.printMessage(scoreMessage.init(computerInputNumbers, userInputNumbers), computerInputNumbers);
+      this.printMessage(scoreMessage.countingScore(computerInputNumbers, userInputNumbers), computerInputNumbers);
     });
     computerInputNumbers;
   }
