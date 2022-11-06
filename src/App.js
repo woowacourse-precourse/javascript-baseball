@@ -1,5 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const Console = MissionUtils.Console;
+const {
+  Console,
+  THREE,
+  GAME_START_TEXT,
+  PLZ_NUMBER_INPUT,
+  ERROR_TEXT,
+  STRIKE,
+  BALL,
+  MISSION_COMPLETE,
+  GAME_RESTART,
+} = require('./Constant');
 class App {
   userNumber;
   computerNumber;
@@ -17,19 +27,19 @@ class App {
   }
 
   getUserNumber() {
-    Console.readLine('숫자를 입력해주세요 : ', input => {
+    Console.readLine(PLZ_NUMBER_INPUT, input => {
       const repeatInput = [...new Set(input)];
       if (
         input > 0 &&
         !input.includes(0) &&
         !isNaN(input) &&
-        String(input).length === 3 &&
-        repeatInput.length === 3
+        String(input).length === THREE &&
+        repeatInput.length === THREE
       ) {
         this.userNumber = input;
         this.compareNumbers(this.computerNumber, this.userNumber);
       } else {
-        throw new Error('잘못된 입력입니다.');
+        throw new Error(ERROR_TEXT);
       }
     });
   }
@@ -40,7 +50,7 @@ class App {
     let strike = 0;
     let ball = 0;
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < THREE; i++) {
       if (computerList.indexOf(userList[i]) === i) {
         strike += 1;
       } else if (computerList.includes(userList[i])) {
@@ -57,19 +67,19 @@ class App {
       result = '낫싱';
     } else {
       if (ball > 0) {
-        result += `${ball}볼 `;
+        result += `${ball}${BALL} `;
       }
       if (strike > 0) {
-        result += `${strike}스트라이크`;
+        result += `${strike}${STRIKE}`;
       }
-      if (strike === 3) {
-        result = '3스트라이크';
+      if (strike === THREE) {
+        result = `3${STRIKE}`;
       }
     }
     Console.print(result);
 
-    if (result === '3스트라이크') {
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    if (result === `3${STRIKE}`) {
+      Console.print(MISSION_COMPLETE);
       this.restartGameCheck();
     } else {
       this.getUserNumber();
@@ -77,7 +87,7 @@ class App {
   }
 
   restartGameCheck() {
-    Console.readLine('게임을 재시작 하려면 1, 종료하려면 2를 입력하세요.', number => {
+    Console.readLine(GAME_RESTART, number => {
       if (Number(number) === 1) {
         this.gameStart();
       }
@@ -88,12 +98,12 @@ class App {
   }
 
   gameStart() {
-    this.getRandomNumber(); // computer number get
-    this.getUserNumber(); //user nubmer get
+    this.getRandomNumber();
+    this.getUserNumber();
   }
 
   play() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(GAME_START_TEXT);
     this.gameStart();
   }
 }
