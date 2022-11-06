@@ -94,8 +94,7 @@ describe("예외 테스트", () => {
 
     errorInputList.map((errorInput) => {
       expect(() => {
-        const app = new App();
-        app.play();
+        app.errorChecker(errorInput);
       }).toThrow();
     });
   });
