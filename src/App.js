@@ -79,8 +79,7 @@ class App {
   restartGameCheck() {
     Console.readLine('게임을 재시작 하려면 1, 종료하려면 2를 입력하세요.', number => {
       if (Number(number) === 1) {
-        this.getRandomNumber();
-        this.getUserNumber();
+        this.gameStart();
       }
       if (Number(number) === 2) {
         Console.close();
@@ -88,7 +87,15 @@ class App {
     });
   }
 
-  play() {}
+  gameStart() {
+    this.getRandomNumber(); // computer number get
+    this.getUserNumber(); //user nubmer get
+  }
+
+  play() {
+    Console.print('숫자 야구 게임을 시작합니다.');
+    this.gameStart();
+  }
 }
 
 module.exports = App;
