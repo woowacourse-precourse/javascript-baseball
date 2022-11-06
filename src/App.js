@@ -24,6 +24,16 @@ class App {
     }
     return computer;
   }
+  compare(computer) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요", (answer) => {
+      const userNumber = this.checkNumber(answer);
+      console.log(`숫자를 입력해주세요 : ${answer}`);
+
+      const { ball, strike } = this.strikeCounter(computer, userNumber);
+
+      this.counterConsole(ball, strike);
+    });
+  }
 }
 
 module.exports = App;
