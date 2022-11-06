@@ -32,15 +32,15 @@ class App {
   calcResult() {
     this.ball = 0;
     this.strike = 0;
-    for (let i = 0; i < this.targetNumber.length; i += 1) {
-      const idx = this.userNumber.indexOf(this.targetNumber[i]);
+    this.targetNumber.forEach((num, idx) => {
+      const cur = this.userNumber.indexOf(num);
 
-      if (idx === i) {
+      if (cur === idx) {
         this.strike += 1;
-      } else if (idx !== -1) {
+      } else if (cur !== -1) {
         this.ball += 1;
       }
-    }
+    })
   }
 
   printResult() {
