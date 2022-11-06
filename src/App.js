@@ -13,18 +13,60 @@ class App {
   }
 
   IN_GAME(CORRECT_NUMBER) {
-    const CORRECT = false;
-    const USER_INPUT_NUMBER = null;
+    let correct = false;
+    let user_input_number = null;
 
-    while (!CORRECT) {
-      USER_INPUT_NUMBER = this.INPUT_NUMBER();
+    while (!correct) {
+      user_input_number = this.INPUT_NUMBER();
 
       try {
-        this.VALIDATE_NUMBER(USER_INPUT_NUMBER);
+        this.VALIDATE_NUMBER(user_input_number);
       } catch (e) {
         console.error(e);
       }
       //제대로 된 값 입력
+      if (
+        user_input_number[0] === CORRECT_NUMBER[0] &&
+        user_input_number[1] === CORRECT_NUMBER[1] &&
+        user_input_number[2] === CORRECT_NUMBER[2]
+      ) {
+        correct = true;
+      } else {
+        this.HINT(user_input_number, CORRECT_NUMBER);
+      }
+    }
+  }
+
+  HINT(user, correct) {
+    let strike = 0;
+    let ball = 0;
+    if (user[0] === correct[0]) {
+      strike += 1;
+    }
+    if (user[1] === correct[1]) {
+      strike += 1;
+    }
+    if (user[2] === correct[2]) {
+      strike += 1;
+    }
+    if (user[0] !== correct[0] && correct.includes(user[0])) {
+      ball += 1;
+    }
+    if (user[1] !== correct[1] && correct.includes(user[1])) {
+      ball += 1;
+    }
+    if (user[2] !== correct[2] && correct.includes(user[2])) {
+      ball += 1;
+    }
+
+    if (strike === 0 && ball === 0) {
+      MissionUtils.Console.print("낫싱");
+    } else if (strike !== 0 && ball === 0) {
+      MissionUtils.Console.print(strike + "스트라이크");
+    } else if (strike === 0 && ball !== 0) {
+      MissionUtils.Console.print(ball + "볼");
+    } else {
+      MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
     }
   }
 
