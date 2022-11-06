@@ -1,15 +1,25 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
-    
   }
+}
+
+function pickRandomNumbers() {
+  const computer = [];
+    while(computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if(!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+  return computer;
 }
 
 
 function comparingNumbers(inputNum, randomNum) {
   const result = [0, 0];
   const inputNumbers = inputNum.split('').map(item => +item);
-  const randomNumbers = String(randomNum).split('').map(item => +item);
-  randomNumbers.forEach((number, index) => {
+  randomNum.forEach((number, index) => {
     const inputNumIndex = inputNumbers.indexOf(number);
     if(inputNumIndex === -1) {
       result[0] += 0;
@@ -69,6 +79,3 @@ function judgeInputNumber(inputNumber) {
 const app = new App();
 app.play();
 module.exports = App;
-
-
-
