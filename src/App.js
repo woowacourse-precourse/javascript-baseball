@@ -33,6 +33,7 @@ class App {
 
     userNumberArr.forEach((number, idx) => {
       const findIndex = this.computer.indexOf(number);
+
       if (findIndex === idx) strike += 1;
       else if (findIndex !== -1) ball += 1;
     });
