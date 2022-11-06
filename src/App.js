@@ -4,6 +4,7 @@ class App {
   play() {
     this.showStartMessage();
     console.log(this.makeRandomNumber());
+    this.getUsersPrediction();
   }
 
   showStartMessage() {
@@ -19,6 +20,12 @@ class App {
       }
     }
     return randomNumber;
+  }
+
+  getUsersPrediction() {
+    Console.readLine('숫자를 입력해주세요 : ', (prediction) => {
+      console.log(prediction);
+    })
   }
 }
 
