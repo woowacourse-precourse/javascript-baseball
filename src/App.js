@@ -6,7 +6,7 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userMessage) => {
       const userMessageArray = stringToArray(userMessage).map(Number);
-      playBaseballGame(userMessageArray, computerAnswer);
+      startBaseballGame(userMessageArray, [1, 2, 3]);
     });
   }
 }
@@ -30,11 +30,10 @@ function stringToArray(string) {
   return array;
 }
 
-function playBaseballGame(userMessage, computerAnswer) {
-  console.log('메세지:' + userMessage + '정답:' + computerAnswer);
+function startBaseballGame(userMessage, computerAnswer) {
   const ballCount = checkBall(userMessage, computerAnswer);
   const strikeCount = checkStrike(userMessage, computerAnswer);
-  console.log('볼' + ballCount + '스트라이크' + strikeCount);
+  playBaseballGame(ballCount, strikeCount);
 }
 
 function checkBall(userMessage, computerAnswer) {
@@ -50,7 +49,43 @@ function checkStrike(userMessage, computerAnswer) {
       computerAnswer.includes(message) &&
       computerAnswer.indexOf(message) === userMessage.indexOf(message)
   );
-  return result;
+  return result.length;
+}
+
+function playBaseballGame(ballCount, strikeCount) {
+  if (strikeCount === 3) {
+    gameClear();
+  }
+  if (strikeCount !== 3) {
+    console.log('아직 못맞춤!');
+  }
+}
+function gameClear() {
+  MissionUtils.Console.print('3스트라이크');
+  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  MissionUtils.Console.print(
+    '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+  );
+  playNewGame();
+}
+
+function playNewGame() {
+  MissionUtils.Console.readLine('', (newGameOrQuit) => {
+    const newOrQuit = stringToArray(newGameOrQuit).map(Number);
+    if (newOrQuit == 1) {
+      MissionUtils.Console.readLine(
+        '숫자를 입력해주세요 : ',
+        (newGameUserMessage) => {
+          const newComputerAnswer = makeComputerAnswer();
+          const userMessageArray =
+            stringToArray(newGameUserMessage).map(Number);
+          startBaseballGame(userMessageArray, newComputerAnswer);
+        }
+      );
+    } else if (newOrQuit == 2) {
+      return;
+    }
+  });
 }
 
 module.exports = App;
