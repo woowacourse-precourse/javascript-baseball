@@ -8,7 +8,15 @@
 2. 컴퓨터는 문제로 낼 난수를 각 자리수를 나눠서 길이가 3인 배열로 생성한다.
 
 ```javascript
-Random.pickUniqueNumbersInRange(1, 9, 3);
+const computer = [];
+
+while (computer.length < 3) {
+  const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
+  if (!computer.includes(number)) {
+    computer.push(number);
+  }
+}
 ```
 
 3. 사용자의 입력을 받는다.

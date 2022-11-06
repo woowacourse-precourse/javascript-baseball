@@ -24,7 +24,9 @@ class App {
   inputUserAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.userAnswer = answer;
+
       this.checkUserInputRedundancy(answer);
+
       if (answer.length !== 3) {
         throw new Error();
       } else {
@@ -35,12 +37,15 @@ class App {
 
   makeRandomNumberArray() {
     const computer = [];
+
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
       if (!computer.includes(number)) {
         computer.push(number);
       }
     }
+
     this.computerRandomNumber = computer;
   }
 
@@ -88,6 +93,7 @@ class App {
       this.inputUserAnswer();
     }
   }
+
   askReplayorClose() {
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
       if (answer == 2) {
