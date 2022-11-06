@@ -50,11 +50,32 @@ class App {
     MissionUtils.Console.close();
   }
 
-  static playGame() {
+  static calculateScore(computerNum, userInput) {
+    const computerNumArr = [...computerNum];
+    const userInputArr = [...userInput];
+    let score = { ball: 0, strike: 0, };
+
+    for (let idx = 0; idx < userInputArr.length; idx++) {
+      if (computerNumArr[idx] === userInputArr[idx]){
+        score.strike = score.strike + 1;
+        continue;
+      }
+      if (computerNumArr.includes(userInputArr[idx])) {
+        score.ball = score.ball + 1;
+      }
+    }
+    return score;
+  }
+
+  static playGame(computerNum) {
+    let score;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       try {
-      // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
-      if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
+        // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
+        if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
+        
+        score = App.calculateScore(computerNum, userInput);
+      
       } catch(error) {
         MissionUtils.Console.print('입력값이 서로 다른 세 자릿수가 아닙니다.');
         App.finishGame();
@@ -64,8 +85,8 @@ class App {
 
   play() {
     App.printGameStart();
-    let computerNum = App.getComputerNumber();
-    App.playGame();
+    const computerNum = App.getComputerNumber();
+    App.playGame(computerNum);
   }
 }
 
