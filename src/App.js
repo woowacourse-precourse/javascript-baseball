@@ -40,6 +40,17 @@ class App {
       this.userInputNum.split('').map(Number),
       this.COMPUTER_NUM
     );
+
+    if (GAME_RESULT.strikeNum >= 3) {
+      Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+        (userSelect) => {
+          const USER_SELECT_NUM = Number(userSelect);
+          if (USER_SELECT_NUM === 1) this.startGame();
+          if (USER_SELECT_NUM === 2) Console.close();
+        }
+      );
+    }
   }
 }
 
