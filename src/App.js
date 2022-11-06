@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Exception = require('../src/Exception');
 
 const GAME_START = '숫자 야구 게임을 시작합니다.';
 const THREE_STRIKE = '3스트라이크';
@@ -21,6 +22,7 @@ class App {
     }
     input() {
         MissionUtils.Console.readLine('숫자를 입력하세요.', (number) => {
+            this.verification(number);
             const comment = this.match(number);
             MissionUtils.Console.print(comment);
             if (comment === THREE_STRIKE) {
@@ -56,6 +58,10 @@ class App {
         } else {
             return `${ball}볼 ${strike}스트라이크`;
         }
+    }
+    verification(input) {
+        const exception = new Exception(input);
+        exception.checkException();
     }
 }
 
