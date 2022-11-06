@@ -51,6 +51,11 @@ class App {
     const strikeFeedback = (score[STRIKE] && `${score[STRIKE]}스트라이크`) || '';
     Console.print(ballFeedback + strikeFeedback || '낫싱');
   }
+
+  isFinish(score) {
+    if (score[STRIKE] === 3) return true;
+    return false;
+  }
 }
 
 module.exports = App;
