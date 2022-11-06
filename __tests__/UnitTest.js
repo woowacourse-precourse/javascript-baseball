@@ -56,3 +56,34 @@ describe('검증 함수 테스트', () => {
     expect(result).toBeFalsy();
   });
 });
+
+describe('결과 메시지 테스트', () => {
+  test('결과 메시지 테스트1', () => {
+    const baseballGame = new BaseballGame();
+    const result = baseballGame.createResultMessage(2, 1);
+
+    expect(result).toContain('2스트라이크');
+    expect(result).toContain('1볼');
+  });
+
+  test('결과 메시지 테스트2', () => {
+    const baseballGame = new BaseballGame();
+    const result = baseballGame.createResultMessage(0, 0);
+
+    expect(result).toBe('낫싱');
+  });
+
+  test('결과 메시지 테스트3', () => {
+    const baseballGame = new BaseballGame();
+    const result = baseballGame.createResultMessage(1, 0);
+
+    expect(result).toContain('1스트라이크');
+  });
+
+  test('결과 메시지 테스트4', () => {
+    const baseballGame = new BaseballGame();
+    const result = baseballGame.createResultMessage(0, 2);
+
+    expect(result).toContain('2볼');
+  });
+});
