@@ -89,6 +89,10 @@ class App {
     this.ball = 0;
   }
 
+  win() {
+    MissionUtils.Console.print(`3스트라이크! 정답은 : ${this.correctAnswer} 입니다`);
+  }
+
 }
 const app = new App();
 app.play();
