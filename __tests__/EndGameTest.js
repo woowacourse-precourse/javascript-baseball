@@ -27,24 +27,24 @@ describe.only("게임 종료 테스트", () => {
     const app = new App();
     const playSpy = jest.spyOn(app, "play");
 
+    mockQuestion("1");
     app.endPlayerTurn();
-    mockQuestion(1);
 
-    expect(playSpy).toHaveBeenCalled();
+    expect(playSpy).toBeCalled();
   });
 
   test("프로그램 종료", () => {
     const app = new App();
     const closeSpy = jest.spyOn(MissionUtils.Console, "close");
 
+    mockQuestion("2");
     app.endPlayerTurn();
-    mockQuestion(2);
 
-    expect(closeSpy).toHaveBeenCalled();
+    expect(closeSpy).toBeCalled();
   });
 
   test("입력 예외 처리", () => {
-    mockQuestion(3);
+    mockQuestion("3");
 
     expect(() => {
       const app = new App();
