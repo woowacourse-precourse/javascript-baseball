@@ -152,10 +152,10 @@ class App {
     })
   }
 
-  getComputerAndUser() {
+  getNumberComputerAndUser() {
     const computerNumber = this.recieveComputer();
     this.checkCorrectNumber(computerNumber);
-    this.userInput(computerNumber)
+    this.userInput(computerNumber);
   }
 
   play() {
