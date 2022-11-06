@@ -1,5 +1,14 @@
+const { extractComputerNumber, baseballGameStart } = require('./input');
+
 class App {
-  play() {}
+  play() {
+    extractComputerNumber();
+    baseballGameStart();
+  }
 }
+
+
+const app = new App();
+app.play();
 
 module.exports = App;
