@@ -59,6 +59,16 @@ class App {
     });
     return score;
   }
+  printScore(score) {
+    const { strike, ball } = score;
+    if (strike === 0 && ball === 0) this.utils.Console.print("낫싱");
+
+    const ballStr = ball > 0 ? `${ball}볼` : "";
+    const strikeStr = strike > 0 ? `${strike}스트라이크` : "";
+
+    const str = ballStr + " " + strikeStr;
+    this.utils.Console.print(str.trim());
+  }
 
   play() {}
 }
