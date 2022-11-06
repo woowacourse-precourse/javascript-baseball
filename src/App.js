@@ -21,6 +21,14 @@ class App {
       //입력받은 숫자 한자리씩 배열에 저장
       let input = [];
       numberToString(answer, input);
+      //잘못된 값을 입력한 경우 throw문을 사용하여 예외 발생 -> 종료
+      if(answer.length > 3 || typeof answer !== 'number'){ //3자리 수 이상 혹은 숫자가 아닌 값을 입력한 경우
+        throw new Error('예외 발생- 서로 다른 3자리 수를 입력하세요');
+      }
+      const set = new Set(input);
+      if(set.size != input.size){ // 중복되는 수를 입력한 경우
+        throw new Error('예외 발생- 서로 다른 3자리 수를 입력하세요');
+      }
     }
   }
 }
