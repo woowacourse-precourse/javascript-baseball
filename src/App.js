@@ -10,6 +10,7 @@ class App {
     this.count = this.generateCount(this.generateRandomList());
     this.input = this.getUserInput();
     this.vaildInput(this.input);
+    this.printCount(this.decideCount(this.count, this.input));
   }
 
   gameStart() {
@@ -78,6 +79,23 @@ class App {
       }
     }
     return count;
+  }
+
+  makeCountMessage(counts) {
+    if (counts.strikeCount === 0 && counts.ballCount === 0) {
+      return "낫싱";
+    }
+    if (counts.strikeCount === 0) {
+      return `${counts.ballCount}볼`;
+    }
+    if (counts.ballCount === 0) {
+      return `${counts.strikeCount}스트라이크`;
+    }
+    return `${counts.ballCount}볼 ${counts.strikeCount}스트라이크`;
+  }
+
+  printCount(counts) {
+    MissionUtils.Console.print(this.makeCountMessage(counts));
   }
 }
 
