@@ -10,7 +10,6 @@ class App {
   userInputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       this.NumberUtil.isBaseballNumber(number);
-      console.log(this.computerNumber);
       const result = this.compareNumber(number);
       MissionUtils.Console.print(result);
       if (result !== "3스트라이크") {
