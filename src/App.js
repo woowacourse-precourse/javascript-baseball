@@ -6,10 +6,10 @@ class App {
   }
   play() {
     this.print('숫자 야구 게임을 시작합니다.');
-    this.start();
+    this.gameStart();
   }
 
-  start() {
+  gameStart() {
     this.computer = this.setAnswer();
     this.input();
   }
@@ -72,7 +72,7 @@ class App {
       const REPLAY_GAME = number === '1';
       const END_GAME = number === '2';
 
-      if (REPLAY_GAME) this.start();
+      if (REPLAY_GAME) this.gameStart();
       else if (END_GAME) MissionUtils.Console.close();
       else throw Error('잘못된 입력입니다.');
     });
