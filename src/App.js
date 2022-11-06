@@ -1,11 +1,12 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-const MESSAGE = require("./constant/message.js");
+const MESSAGE = require("../constant/message");
 const UserInput = require("./UserInput");
+const Solution = require("./Solution");
 
 class App {
   constructor() {
     this.print(MESSAGE.GAME_START);
-    this.userinput = this.readInput();
+    this.solution = new Solution();
   }
 
   print(message) {
@@ -16,23 +17,23 @@ class App {
     return Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
-  readInput() {
+  readInput(solution) {
     Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
-      Console.close();
       const inputError = new UserInput(userinput);
       if (!inputError.checkAllUserInput) {
         return this.throwError();
       }
+      Console.close();
     });
   }
 
   play() {
-    this.inGame();
-    return;
+    const solution = this.solution.pickNumbers();
+    this.readInput(solution);
   }
 
   throwError() {
-    throw new Error();
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
