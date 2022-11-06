@@ -18,6 +18,17 @@ class App {
     return ballCnt;
   }
 
+  getStrike() {
+    let strikeCnt = 0;
+    [...this.userInput].forEach((num, idx) => {
+      if (+num === this.answer[idx]) {
+        strikeCnt += 1;
+      }
+    });
+
+    return strikeCnt;
+  }
+
   createResult() {
     if (this.userInput === "") return "낫싱";
     const includeOfNum = Array.from({ length: 10 }).fill(false);
