@@ -42,6 +42,10 @@ function showResult(ball_count, strike_count){
   MissionUtils.Console.print(resultPrint);
 }
 
+function isSuccess(strike_count){
+  return strike_count===3;
+}
+
 function getResults(problem){
   // 3. 숫자 입력 받기
   MissionUtils.Console.readLine("숫자를 입력해 주세요. :", (input)=>{
@@ -51,6 +55,12 @@ function getResults(problem){
     const [ball_count, strike_count] = result;
     // 5. 결과 출력
     showResult(ball_count, strike_count);
+    // 6. 결과 반영
+    if(!isSuccess(strike_count)){
+      return getResults(problem);
+    }
+    MissionUtils.Console.close(); // 결과 반영 제대로 되었는지 테스트
+    // 3 스트라이크 -> 콘솔 close
   })
 }
 
@@ -64,8 +74,8 @@ class App {
     // 2. 문제 생성
     const NUMBER_LENGTH = 3;
     let problem = makeProblem(NUMBER_LENGTH);
-    
-    getResults([1,2,3]);
+
+    getResults(problem);
   }
 }
 
