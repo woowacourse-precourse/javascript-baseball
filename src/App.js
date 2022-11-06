@@ -29,19 +29,13 @@ class App {
   input() {
     this.readLine('숫자를 입력해주세요 : ', userNumber => {
       const { strike, ball } = this.checkAnswer(userNumber);
-      const IS_NOTHING = strike === 0 && ball === 0;
       const IS_ANSWER = strike === 3;
 
+      this.printBallStrike(ball, strike);
       if (IS_ANSWER) {
         this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.replay();
       } else {
-        const BALL_STRIKTE_CONTENT = `${ball === 0 ? '' : `${ball}볼 `}${
-          strike === 0 ? '' : `${strike}스트라이크`
-        }`;
-        const CONTENT = IS_NOTHING ? '낫싱' : BALL_STRIKTE_CONTENT;
-
-        this.print(CONTENT);
         this.input();
       }
     });
@@ -63,6 +57,16 @@ class App {
     return { strike, ball };
   }
 
+  printBallStrike(ball, strike) {
+    const IS_NOTHING = strike === 0 && ball === 0;
+    const BALL_STRIKTE_CONTENT = `${ball === 0 ? '' : `${ball}볼 `}${
+      strike === 0 ? '' : `${strike}스트라이크`
+    }`;
+    const CONTENT = IS_NOTHING ? '낫싱' : BALL_STRIKTE_CONTENT;
+
+    this.print(CONTENT);
+  }
+
   replay() {
     this.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', number => {
       if (number === '1') this.start();
@@ -79,7 +83,6 @@ class App {
     MissionUtils.Console.readLine(content, func);
   }
 }
-
-const app = new App();
-app.play();
-// module.exports = App;
+// const app = new App();
+// app.play();
+module.exports = App;
