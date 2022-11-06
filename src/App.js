@@ -14,13 +14,14 @@ class App {
           MissionUtils.Console.close();
           return;
         }
+        const compareNumberArr = comparingNumbers(answer, computer);
+        const result = returnResult(compareNumberArr);
+        MissionUtils.Console.print(result);
         
         game();
       });
     };
-    
     game();
-    
   }
 }
 
