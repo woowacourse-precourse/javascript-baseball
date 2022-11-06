@@ -23,4 +23,4 @@ class UserInput {
   }
 }
 
-module.exports = User;
+module.exports = UserInput;
