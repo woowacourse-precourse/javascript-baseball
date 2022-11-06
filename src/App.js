@@ -33,9 +33,19 @@ class App {
       }
     });
   }
+  //컴퓨터 숫자와 비교 기능
+  compareNum(computerInput, userInput){
+    let strike = 0;
+    let ball = 0;
 
-  compareNum(computerInput,userInput){
-    console.log(computerInput,userInput)
+    for (let i = 0; i < computerInput.length; i++){
+      if (computerInput[i] === userInput[i]){
+        strike+=1;
+      } else {
+        ball+=1;
+      }
+    }
+    
   }
 
   //[예외처리] 잘못된 값 입력시 오류 처리 기능
