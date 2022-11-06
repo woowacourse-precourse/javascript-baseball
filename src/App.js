@@ -79,7 +79,7 @@ class App {
   }
 
   print(content) {
-    MissionUtils.Console.print(content);
+    MissionUtils.Console.print(content.trim());
   }
 
   readLine(content, func) {
