@@ -39,39 +39,55 @@ function userInputNumber(computerNumber) {
 
 function gameStart(userNumber, computerNumber) {
     inputValidation(userNumber);
-    getHint(countBall(userNumber, computerNumber), countStrike(userNumber, computerNumber));
-    if (countStrike(userNumber, computerNumber) !== 3) {
+    const strikeNumber = countStrike(userNumber, computerNumber);
+    const ballNumber = countBall(userNumber, computerNumber);
+    getHint(ballNumber, strikeNumber);
+    isThreeStrike(strikeNumber, computerNumber);
+}
+
+function isThreeStrike(strikeNumber, computerNumber) {
+    notThreeStrike(strikeNumber, computerNumber);
+    threeStrike(strikeNumber);
+}
+
+function notThreeStrike(strikeNumber, computerNumber) {
+    if (strikeNumber !== 3) {
         userInputNumber(computerNumber);
-    } else {
+    }
+}
+
+function threeStrike(strikeNumber) {
+    if (strikeNumber === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', whetherGameEndsNot);
     }
 }
 
 function whetherGameEndsNot(number) {
-    newGame(number);
-    endGame(number);
-    faultNumberInput(number);
-}
-
-function newGame(number) {
     if (number === '1') {
-        const app = new App();
-        app.restart();
+        newGame();
     }
-}
-
-function endGame(number) {
     if (number === '2') {
-        MissionUtils.Console.print('게임을 완전히 종료합니다');
-        MissionUtils.Console.close();
+        endGame();
+    }
+    if (number !== '1' && number !== '2') {
+        faultNumberInput();
     }
 }
 
-function faultNumberInput(number) {
-    if (number !== '1' && number !== '2') {
-        throw "잘못된 값을 입력하였습니다.";
-    }
+function newGame() {
+    const app = new App();
+    app.restart();
+}
+
+function endGame() {
+    MissionUtils.Console.print('게임을 완전히 종료합니다');
+    MissionUtils.Console.close();
+}
+
+function faultNumberInput() {
+    throw "잘못된 값을 입력하였습니다.";
+
 }
 
 
