@@ -63,10 +63,7 @@ class User extends Mission {
 
   checkAnswer(answer) {
     if (answer === '1') {
-      const computer = new Computer();
-      const newComputerNumbers = computer.getComputerNumbers();
-      this.computerNumbers = newComputerNumbers;
-      this.userInputStart();
+      this.gameRestart();
       return;
     }
 
@@ -75,6 +72,13 @@ class User extends Mission {
       return;
     }
     throw '1과 2만 입력 가능합니다. 잘못된 값이 입력 되었습니다.';
+  }
+
+  gameRestart() {
+    const computer = new Computer();
+    const newComputerNumbers = computer.getComputerNumbers();
+    this.computerNumbers = newComputerNumbers;
+    this.userInputStart();
   }
 }
 
