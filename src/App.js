@@ -45,6 +45,13 @@ class App {
   }
 
   isError(user, computer) {
+    const numberList = user.split("").sort();
+    const validNumber = [...new Set(numberList)];
+
+    if (validNumber.length < 3) {
+      throw "중복되지 않은 숫자 3개를 입력해주세요.";
+    }
+
     if (user.length !== 3 || isNaN(user)) {
       throw "3자리 숫자를 입력해주세요.";
     }
