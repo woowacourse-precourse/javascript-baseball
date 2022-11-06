@@ -11,8 +11,10 @@ class App {
   userInput = "";
 
   play() {
-    if (this.answer === "") this.print(this.START);
-    this.answer = this.generateAnswer();
+    if (this.answer === "") {
+      this.print(this.START);
+      this.answer = this.generateAnswer();
+    }
 
     console.log(this.answer);
 
