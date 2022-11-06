@@ -27,9 +27,13 @@
     │   ├── Play.js --------> 게임을 진행하는 클래스
     │   └── GetScore.js ----> 게임의 결과(볼/스트라이크)를 카운트하는 클래스
     │
-    └── input ---------------------> Computer/USER의 인풋과 관련된 클래스(모듈)를 모아놓은 폴더
-        ├── GetComputerInput.js ---> Computer의 입력값을 생성하는 클래스
-        └── UserInputValid.js -----> User의 입력값에 대해 올바른지 확인하는 클래스
+    ├── input ---------------------> Computer/USER의 인풋과 관련된 클래스(모듈)를 모아놓은 폴더
+    │   ├── GetComputerInput.js ---> Computer의 입력값을 생성하는 클래스
+    │   ├── GetUserInput.js -------> User의 입력값을 이용하여 점수를 판별하는 클래스
+    │   └── UserInputValid.js -----> User의 입력값에 대해 올바른지 확인하는 클래스
+    │
+    └── utils --------------> MissionUtils에 관련된 폴더
+        └── Mission.js -----> MissionUtils의 상속을 통해 재사용성을 증대시키기 위한 클래스
 ...
 ```
 
