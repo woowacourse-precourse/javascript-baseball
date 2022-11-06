@@ -3,8 +3,9 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 class App {
   play() {
     this.showStartMessage();
-    console.log(this.makeRandomNumber());
-    this.getUsersPrediction();
+    const randomNumber = this.makeRandomNumber();
+    console.log(randomNumber);
+    this.getUsersPrediction(randomNumber);
   }
 
   showStartMessage() {
@@ -22,10 +23,19 @@ class App {
     return randomNumber;
   }
 
-  getUsersPrediction() {
+  getUsersPrediction(randomNumber) {
     Console.readLine('숫자를 입력해주세요 : ', (prediction) => {
       console.log(prediction);
+      const convertedNumber = prediction.split('').map(Number);
+      console.log(convertedNumber);
+      if (this.isRightAnswer(randomNumber, convertedNumber)) {
+        Console.close();
+      }
     })
+  }
+
+  isRightAnswer(randomNumber, userInput) {
+    return randomNumber.join('') === userInput.join('');
   }
 }
 
