@@ -4,6 +4,11 @@ const { Random } = require("@woowacourse/mission-utils");
 class App {
   play() {}
 
+  start() {
+    const computerNum = this.MakeNum();
+    this.proceedGame(computerNum);
+  }
+
   MakeNum() {
     const randomNumber = [];
     while (randomNumber.length < 3) {
