@@ -109,7 +109,7 @@ class App {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
       const userNumbersArray = this.stringToArrConverter(usersInput);
-      let discrimination = this.discriminator(
+      const discrimination = this.discriminator(
         userNumbersArray,
         refNumbersArray
       );
