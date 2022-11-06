@@ -35,7 +35,7 @@ class App {
 
   selectUser(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (num) => {
-      this.isError(num, computer);
+      this.isUserError(num, computer);
     });
   }
 
@@ -44,23 +44,40 @@ class App {
     return this.printScore(score, computer);
   }
 
-  isError(user, computer) {
-    const numberList = user.split("").sort();
+  isUserError(user, computer) {
+    this.checkOverlap(user);
+    this.checkLength(user);
+    this.checkNumber(user);
+    this.checkRange(user);
+
+    this.countScore(computer, user);
+  }
+
+  checkOverlap(number) {
+    const numberList = number.split("").sort();
     const validNumber = [...new Set(numberList)];
 
     if (validNumber.length < 3) {
       throw "중복되지 않은 숫자 3개를 입력해주세요.";
     }
+  }
 
-    if (user.length !== 3 || isNaN(user)) {
+  checkLength(number) {
+    if (number.length !== 3) {
       throw "3자리 숫자를 입력해주세요.";
     }
+  }
 
-    if (user.includes("0")) {
+  checkNumber(number) {
+    if (isNaN(number)) {
+      throw "3자리 숫자를 입력해주세요.";
+    }
+  }
+
+  checkRange(number) {
+    if (number.includes("0")) {
       throw "1과 9 사이의 숫자 3개를 입력해주세요.";
     }
-
-    this.countScore(computer, user);
   }
 
   calculateScore(computer, user) {
