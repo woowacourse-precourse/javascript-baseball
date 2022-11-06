@@ -30,12 +30,20 @@ class App {
       console.log(convertedNumber);
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
         Console.close();
+      } else if (this.isNothing(randomNumber, convertedNumber)) {
+        Console.print('낫싱');
+        this.getUsersPrediction(randomNumber);
       }
     })
   }
 
   isRightAnswer(randomNumber, userInput) {
     return randomNumber.join('') === userInput.join('');
+  }
+
+  isNothing(randomNumber, userInput) {
+    const union = new Set([...randomNumber, ...userInput]);
+    return union.size === 6;
   }
 }
 
