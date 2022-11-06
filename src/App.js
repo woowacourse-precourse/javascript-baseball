@@ -113,6 +113,8 @@ class App {
   validateNextAction(userInput) {
     if (!userInput === '1' || !userInput === '2') {
       return false;
+    } else {
+      return true;
     }
   }
 }
