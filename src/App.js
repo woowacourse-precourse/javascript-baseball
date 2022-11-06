@@ -15,7 +15,7 @@ class App {
     while (randomNumberSet.size < 3) {
       randomNumberSet.add(Random.pickNumberInRange(1, 9));
     }
-    this.computerNum = [...randomNumberSet];
+    this.computerNum = [...randomNumberSet].join('');
     return this.computerNum;
   }
 
