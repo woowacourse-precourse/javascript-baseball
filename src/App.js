@@ -67,6 +67,13 @@ class App {
     return score;
   }
 
+  static isZeroScore(score) {
+    if ((score.ball === 0) && (score.strike === 0)) {
+      return true;
+    }
+    return false;
+  }
+
   static playGame(computerNum) {
     let score;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
