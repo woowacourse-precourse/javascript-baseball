@@ -79,4 +79,11 @@ describe.only('Test', () => {
             exception.checkException();
         }).toThrow('3자리 숫자를 입력해주세요.');
     });
+
+    test('입력 받은 수가 서로 다른 수가 아닌 경우', () => {
+        expect(() => {
+            const exception = new Exception('112');
+            exception.checkException();
+        }).toThrow('서로 다른 수를 입력해주세요.');
+    });
 });
