@@ -4,6 +4,7 @@ const isValidUserInput = (input) => {
   if (input.length !== EXCEPTION.VALID_NUMBER_LENGTH) return false;
   if (isNaN(input)) return false;
   if (input.includes('0')) return false;
+  if ([...new Set(input)].length !== EXCEPTION.VALID_NUMBER_LENGTH) return false;
   return true;
 };
 
