@@ -178,4 +178,21 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("커맨드를 입력 받아 1이면 재시작", () => {
+    const randoms = [1, 3, 5];
+    const inputs = ["1", "246", "135"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱", "3스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(inputs);
+
+    const app = new App();
+    app.selectRestartOrExit();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
