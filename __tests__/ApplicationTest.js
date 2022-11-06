@@ -1,4 +1,5 @@
 const App = require('../src/App');
+const Exception = require('../src/Exception');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -57,4 +58,25 @@ describe('숫자 야구 게임', () => {
     });
 });
 
-describe.only('Test', () => {});
+describe.only('Test', () => {
+    test('입력 받은 수가 세자리 수가 아닌 경우(2자리)', () => {
+        expect(() => {
+            const exception = new Exception('12');
+            exception.checkException();
+        }).toThrow('3자리 숫자를 입력해주세요.');
+    });
+
+    test('입력 받은 수가 세자리 수가 아닌 경우(4자리)', () => {
+        expect(() => {
+            const exception = new Exception('1234');
+            exception.checkException();
+        }).toThrow('3자리 숫자를 입력해주세요.');
+    });
+
+    test('입력 받은 수가 세자리 수가 아닌 경우(5자리)', () => {
+        expect(() => {
+            const exception = new Exception('12345');
+            exception.checkException();
+        }).toThrow('3자리 숫자를 입력해주세요.');
+    });
+});
