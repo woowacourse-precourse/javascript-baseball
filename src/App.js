@@ -122,6 +122,7 @@ class App {
       if (userinput === '2') {
         return MissionUtils.Console.close();
       }
+      return MissionUtils.Console.close();
     });
   }
 }
