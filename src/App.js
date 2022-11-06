@@ -2,19 +2,30 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const MIN_RANGE = 1
 const MAX_RANGE = 9
-const HOW_MANY_PICK = 3
+const PICK_LENGTH = 3
 
 class App {
   constructor() {
-    this.userNumbers = null;
     this.computerNumbers = null;
   }
 
+  checkStrike(userNumbers) {
+    let strikeCount = 0;
+
+    for (let i = 0; i < PICK_LENGTH; i++) {
+      if (this.computerNumbers[i] == userNumbers[i]) strikeCount++;
+    }
+
+    return strikeCount;
+  }
+
   setNumbers() {
-    this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, HOW_MANY_PICK);
+    let strikeCount;
+    this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
+
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
-      console.log(userNumbers);
-     });
+      strikeCount = this.checkStrike(userNumbers);
+    });
   }
 
   play() {

@@ -11,3 +11,16 @@ test("MissionUtils를 통한 출력 확인", () => {
       console.log(`숫자: ${answers}`);
     });
 });
+
+test("strike 개수 count", () => {
+  computerNumbers = [1, 3, 5];
+  userNumbers = [1, 2, 5];
+
+  let strikeCount = 0;
+
+  for (let i = 0; i < 3; i++) {
+    if (computerNumbers[i] == userNumbers[i]) strikeCount++;
+  }
+
+  MissionUtils.Console.print(strikeCount);  //2가 출력되면 성공
+})
