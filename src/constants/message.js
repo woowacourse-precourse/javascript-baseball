@@ -6,6 +6,7 @@ const MESSAGE = {
 
   COMPARE_ANSWER: {
     THREE_STRIKE: "3스트라이크",
+    NOTHING: "낫싱",
   },
 
   REQUEST: {

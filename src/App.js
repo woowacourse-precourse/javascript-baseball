@@ -71,7 +71,7 @@ class App {
       return;
     }
 
-    this.sendMessage("낫싱");
+    this.sendMessage(MESSAGE.COMPARE_ANSWER.NOTHING);
     this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
   }
 
