@@ -43,9 +43,14 @@ class GameLoop {
   constructor() {
     this.Opponent = new Computer();
   }
+
   start() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this._continue();
+  }
+
+  _continue() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", this.validate);
   }
 }
 
