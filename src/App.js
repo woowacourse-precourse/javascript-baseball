@@ -28,8 +28,8 @@ class App {
       if (validation === false) {
         return this.throwError();
       }
-      const StrikeBallCount = this.isStrikeBall(userNum, computerNum);
-      if (StrikeBallCount[0] !== 3) {
+      const [strike, ball] = this.isStrikeBall(userNum, computerNum);
+      if (strike !== 3) {
         return this.proceedGame(computerNum);
       }
       Console.close();
