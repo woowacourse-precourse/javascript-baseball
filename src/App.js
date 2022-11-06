@@ -2,7 +2,7 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    const computer = this.createNumber().join("");
+    const computer = this.createNumber();
     this.userInput(computer);
   }
 
@@ -14,8 +14,20 @@ class App {
         computer.push(number);
       }
     }
-    return computer;
+    return computer.join("");
   }
+
+  userInput(computer) {
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      if (this.validUserInput(answer)) {
+        this.gameResult(computer, answer);
+      }
+    });
+  }
+
+  validUserInput(userValue) {}
+
+  gameResult(computer, userValue) {}
 }
 
 const app = new App();
