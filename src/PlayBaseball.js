@@ -13,10 +13,19 @@ function playBaseballGame() {
         if(numOfStrike == 3){
             printMessage.printNumOfStrike(numOfStrike);
             printMessage.printGameWin();
-            //게임 재시작 or 종료 메세지 출력
-            //사용자 1 or 2 입력
-            //1일 경우 true flag 리턴
-            //2일 경우 false flag 리턴
+            let userContinueSelect;
+            const PLAY_AGAIN = 1;
+            const QUIT_GAME = 2;
+            userContinueSelect = printMessage.printUserContinueInput();
+            if(userContinueSelect == PLAY_AGAIN){
+                return true;
+            }
+            else if(userContinueSelect == QUIT_GAME){
+                return false;
+            }
+            else{//예외처리전 게임이 종료되도록
+                return false;
+            }
         }
         else{
             let numOfBall;
