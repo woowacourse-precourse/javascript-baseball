@@ -14,13 +14,6 @@ class App {
   startGame() {
     this.setRandomNumbers();
     this.guessNumbers();
-
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (answer) => {
-        answer === "1" && this.startGame();
-      }
-    );
   }
 
   setRandomNumbers() {
@@ -38,29 +31,26 @@ class App {
   }
 
   guessNumbers() {
-    let isCorrect = false;
-
-    while (!isCorrect) {
-      const userNumbers = this.writeUserNumbers();
-      const memo = this.mark(this.computer, userNumbers);
-      this.printResultMessage(memo);
-
-      isCorrect = memo.strike === 3;
-    }
-  }
-
-  writeUserNumbers() {
-    let userNumbers = [];
-
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if (answer.length > 3) {
         throw new Error("error/over-length-user-input");
       }
 
-      userNumbers = this.separateNumbers(answer);
-    });
+      const userNumbers = this.separateNumbers(answer);
+      const memo = this.mark(this.computer, userNumbers);
+      this.printResultMessage(memo);
 
-    return userNumbers;
+      memo.strike !== 3 ? this.guessNumbers() : this.replay();
+    });
+  }
+
+  replay() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        answer === "1" ? this.startGame() : MissionUtils.Console.close();
+      }
+    );
   }
 
   separateNumbers(str) {
