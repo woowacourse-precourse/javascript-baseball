@@ -5,30 +5,27 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
-    this.answer = this.generateComputerAnswer();
-    this.inputPlayerNumber();
+    this.generateComputerAnswer();
+    this.playTheGame();
   }
 
   generateComputerAnswer() {
-    const COMPUTER_RANDOM_NUMBER = [];
-    while (COMPUTER_RANDOM_NUMBER.length < 3) {
+    const COMPUTER_ANSWER = [];
+    while (COMPUTER_ANSWER.length < 3) {
       const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!COMPUTER_RANDOM_NUMBER.includes(RANDOM_NUMBER)) {
-        COMPUTER_RANDOM_NUMBER.push(RANDOM_NUMBER);
+      if (!COMPUTER_ANSWER.includes(RANDOM_NUMBER)) {
+        COMPUTER_ANSWER.push(RANDOM_NUMBER);
       }
     }
-    return COMPUTER_RANDOM_NUMBER;
+    this.answer = COMPUTER_ANSWER;
   }
 
-  inputPlayerNumber() {
+  playTheGame() {
     MissionUtils.Console.readLine('숫자를 입력해주세요:', inputNumber => {
       this.getHintOrThrowError(inputNumber);
-      MissionUtils.Console.print(this.hintString);
-      if (this.hintString == '3스트라이크') {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        this.checkRestart();
-      } else this.inputPlayerNumber();
     });
+    MissionUtils.Console.print(this.hintString);
+    this.checkCorrectAnswer();
   }
 
   getHintOrThrowError(inputNumber) {
@@ -88,6 +85,13 @@ class App {
       hintString = `${ball}볼 ${strike}스트라이크`;
     }
     return hintString;
+  }
+
+  checkCorrectAnswer(){
+    if (this.hintString == '3스트라이크') {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.checkRestart();
+    } else this.playTheGame();
   }
 
   checkRestart() {
