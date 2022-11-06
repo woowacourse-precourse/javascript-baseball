@@ -90,6 +90,15 @@ class App {
     this.inputNumber('숫자를 입력하세요.');
   }
 
+  isGameEnd (endNumber) {
+    const isPlaying = this.playing;
+
+    if (isPlaying === 1) return this.error();
+
+    if (endNumber === '1') return this.reStart();
+    if (endNumber === '2') return Console.close();
+  }
+
   gameStart () {
     this.gameSet = this.gameSetting();
     this.printMsg('숫자 야구 게임을 시작합니다.');
