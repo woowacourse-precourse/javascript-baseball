@@ -18,9 +18,8 @@ class Printer {
     if (totalCountBall === 0 && totalCountStrike) {
       MissionUtils.Console.print(`${totalCountStrike}스트라이크`);
     }
-    totalCountStrike === 3
-      ? MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-      : "";
+    totalCountStrike === 3 &&
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 
   printBall(totalCountBall, totalCountStrike) {

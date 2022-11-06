@@ -61,10 +61,10 @@ class App {
   }
 
   checkExitOrRestart(inputNumber) {
-    const valiation = new Validation();
     if (inputNumber === "1") return this.reStartGame(inputNumber);
     if (inputNumber === "2") return this.exitGame(inputNumber);
-    return valiation.isConfirmInput();
+    const validation = new Validation();
+    return validation.isConfirmInput();
   }
 
   reStartGame() {
