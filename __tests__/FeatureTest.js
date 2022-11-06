@@ -15,4 +15,14 @@ describe("기능 목록 테스트", () => {
     expect(first !== third).toBeTruthy();
     expect(second !== third).toBeTruthy();
   });
+
+  test("사용자가 입력한 문자열 숫자를 숫자 배열로 변환", () => {
+    const input = "123";
+
+    const app = new App();
+    const result = app.separateNumbers(input);
+
+    expect(result).toContain(2, 1, 3);
+    expect(result).toContainEqual(1, 2, 3);
+  });
 });

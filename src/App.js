@@ -57,10 +57,14 @@ class App {
         throw new Error("error/over-length-user-input");
       }
 
-      userNumbers = [...answer].map((digit) => Number(digit));
+      userNumbers = this.separateNumbers(answer);
     });
 
     return userNumbers;
+  }
+
+  separateNumbers(str) {
+    return [...str].map((digit) => Number(digit));
   }
 
   mark(user) {
