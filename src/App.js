@@ -21,7 +21,7 @@ class App {
 
   startGame() {
     this.setRandomNumber();
-    this.getUserInputNumber();
+    this.requestUserInputNumber();
   }
 
   proceedGame(userInputResult) {
@@ -29,14 +29,14 @@ class App {
     const hint = this.getHintMessage(userInputResult);
     this.showMessage(hint);
     if (isAnswer(strike)) return this.askGame();
-    return this.getUserInputNumber();
+    return this.requestUserInputNumber();
   }
 
   endGame() {
     MissionUtils.Console.close();
   }
 
-  askGame() {
+  askRestartOrEndGame() {
     this.showMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
@@ -49,24 +49,23 @@ class App {
     );
   }
 
+  requestUserInputNumber() {
+    MissionUtils.Console.readLine(
+      "숫자를 입력해주세요 : ",
+      (userInputNumber) => {
+        if (!isValidUserInput(userInputNumber))
+          throw new Error("인풋 값이 유효하지 않습니다.");
+        this.proceedGame(this.getUserInputResult(userInputNumber));
+      }
+    );
+  }
+
   setRandomNumber() {
     this.randomNumber = generateRandomNumber();
   }
 
   showMessage(message) {
     MissionUtils.Console.print(message);
-  }
-
-  getUserInputNumber() {
-    MissionUtils.Console.readLine(
-      "숫자를 입력해주세요 : ",
-      (userInputNumber) => {
-        if (!isValidUserInput(userInputNumber))
-          throw new Error("인풋 값이 유효하지 않습니다.");
-        const userInputResult = this.getUserInputResult(userInputNumber);
-        this.proceedGame(userInputResult);
-      }
-    );
   }
 
   getUserInputResult(input) {
