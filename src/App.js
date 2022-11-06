@@ -79,10 +79,23 @@ class App {
       this.inputs = inputs.split("").map((v) => parseInt(v));
       this.validateInput(this.inputs);
 
-      const score = this.compareNumbers(this.answer, this.inputs);
+      return this.compareNumbers(this.answer, this.inputs);
     });
   }
-  play() {}
+  process(score) {
+    const { strike } = score;
+    this.printScore(score);
+
+    if (strike === 3) {
+      this.utils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    } else {
+      this.input();
+    }
+  }
+  play() {
+    this.init();
+    this.process(this.input());
+  }
 }
 
 module.exports = App;
