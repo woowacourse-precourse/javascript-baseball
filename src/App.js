@@ -1,4 +1,5 @@
 const inputValidation = require('./validation/validation.js');
+const TEXT = require('./constants/constants.js');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
