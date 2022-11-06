@@ -18,10 +18,10 @@ class App {
   play() {
     this.#computer.setDigits();
     Console.print(GAME_MESSAGE.START);
-    this.readUserInput();
+    this.#readUserNumber();
   }
 
-  readUserInput() {
+  #readUserNumber() {
     Console.readLine(GAME_MESSAGE.INPUT, this.#progress.bind(this));
   }
 
@@ -39,13 +39,13 @@ class App {
 
     if (ballStrikeCount.strike === RULE.LENGTH) {
       Console.print(GAME_MESSAGE.CORRECT);
-      this.readRestartInput();
+      this.#readRestartInput();
     }
 
-    this.readUserInput();
+    this.#readUserNumber();
   }
 
-  readRestartInput() {
+  #readRestartInput() {
     Console.readLine(GAME_MESSAGE.FINISH, this.#selectRestartOrEnd.bind(this));
   }
 
