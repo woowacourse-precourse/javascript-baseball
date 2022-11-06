@@ -1,7 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  play() {}
+  play() {
+    this.printGameStartMessage();
+    this.startGame();
+  }
 
   startGame() {
     this.generateAnswer();
