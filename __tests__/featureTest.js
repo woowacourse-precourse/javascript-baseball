@@ -63,8 +63,13 @@ describe('User의 입력값 받기', () => {
     const userInput = ['345', '45d'];
     userInput.forEach((input) => expect(Number.isNaN(+input)).toBe(false));
   });
-  test('2-2. 입력된 값의 각 숫자가 1~9 범위가 아닌 경우', () => {
+  test('2-2, 2-4. 입력된 값의 각 숫자가 1~9 범위가 아닌 경우', () => {
     const userInput = ['345', '4513'];
     userInput.forEach((input) => expect(input.length).toBe(3));
+  });
+  test('2-3. 입력된 값에 중복된 숫자가 있는 경우', () => {
+    const userInput = ['345'];
+    const testComputerSet = new Set(...userInput);
+    expect(testComputerSet.size).toEqual(3);
   });
 });
