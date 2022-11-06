@@ -91,6 +91,8 @@ class App {
           this.play();
         } else if (input === "2") {
           MissionUtils.Console.close();
+        } else {
+          throw Error("잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         }
       }
     );
