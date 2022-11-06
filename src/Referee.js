@@ -41,6 +41,20 @@ class Referee {
     this.strike = isStrike(answers, inputs);
     this.ball = isBall(answers, inputs) - this.strike;
   }
+
+  printScore () {
+    if (this.strike === 3) {
+      Console.print('3스트라이크');
+    } else if (this.strike === 0 && this.ball === 0) {
+      Console.print('낫싱');
+    } else if (this.strike === 0) {
+      Console.print(`${this.ball}볼`);
+    } else if (this.ball === 0) {
+      Console.print(`${this.strike}스트라이크`);
+    } else {
+      Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+    }
+  }
 }
 
 module.exports = {Referee, isBall, isStrike};
