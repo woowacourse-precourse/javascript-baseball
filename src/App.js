@@ -1,32 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputValidation = require("./inputValidation");
-const MIN_NUMBER = 1;
-const MAX_NUMBER = 9;
-const RETURN_COUNT = 3;
+const GenerateRandomNumber = require("./generateRandomNumber");
 
 class App {
     play() {
         gameStartGiude();
-        userInputNumber(generateRandomNumber());
+        userInputNumber(GenerateRandomNumber());
     }
     restart() {
-        userInputNumber(generateRandomNumber());
+        userInputNumber(GenerateRandomNumber());
     }
 }
+const app = new App();
+app.play();
 
 function gameStartGiude() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-}
-
-function generateRandomNumber() {
-    const computer = [];
-    while (computer.length < RETURN_COUNT) {
-        const number = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
-        if (!computer.includes(number)) {
-            computer.push(number);
-        }
-    }
-    return computer;
 }
 
 function userInputNumber(computerNumber) {
