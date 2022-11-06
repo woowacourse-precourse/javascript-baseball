@@ -34,6 +34,21 @@ class App {
     return answerCount;
   }
 
+  answer(answerCount) {
+    // 4. print 문구 만들기
+    // 인수: answerCount - [ball의 갯수, strike의 갯수]
+    // return: ex. "낫싱", "1스트라이크"...
+    if (answerCount[0] == 0 && answerCount[1] == 0) {
+      return "낫싱";
+    } else if (answerCount[0] == 0) {
+      return `${answerCount[1]}스트라이크`;
+    } else if (answerCount[1] == 0) {
+      return `${answerCount[0]}볼`;
+    } else {
+      return `${answerCount[0]}볼 ${answerCount[1]}스트라이크`;
+    }
+  }
+
   play() {}
 }
 
