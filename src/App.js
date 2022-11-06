@@ -67,6 +67,60 @@ class App {
       }
       return answer;
       }
+          /*유저가 입력한 수의 길이가 유효한지 확인하는 기능*/
+    checkUserNumLength(userInputNum){
+      if(userInputNum==1||userInputNum==2){
+        return true;
+      }
+      if(userInputNum.length==3){
+        return true;
+      }
+      return false;
+    }
+    /*유저가 입력한 수가 숫자가 맞는지 확인하는 기능*/
+    checkUserNumIsNum(userInputNum){
+      if(userInputNum==1||userInputNum==2){
+        return true;
+      }
+      if(userInputNum>99&&userInputNum<1000){
+        return true;
+      }
+      return false;
+    }
+      /*유저가 입력한 수가 서로 다른 수 인지 확인하는 기능*/
+    checkUserNumIsDifferent(userInputNum){
+      if(userInputNum==1||userInputNum==2){
+        return true;
+      }
+      if(userInputNum.charAt(0).includes(userInputNum.charAt(1))){
+        return false;
+      }
+      if(userInputNum.charAt(0).includes(userInputNum.charAt(2))){
+        return false;
+      }
+      if(userInputNum.charAt(1).includes(userInputNum.charAt(2))){
+        return false;
+      }
+      return true;
+    }
+    /*입력 수가 유효한지 확인하는 기능*/
+    checkUserNumVaildation(userInputNum){
+      try{
+        if(!this.checkUserNumLength(userInputNum)){
+          throw "입력이 잘못되었습니다";
+        }
+        if(!this.checkUserNumIsNum(userInputNum)){
+          throw "입력이 잘못되었습니다";
+        }
+        if(!this.checkUserNumIsDifferent(userInputNum)){
+          throw "입력이 잘못되었습니다";
+      }
+    }catch(e){
+        MissionUtils.Console.print("입력이 잘못되었습니다. 게임 종료");
+        throw "게임 종료"
+      }
+      return true;
+    }
 }
 
 module.exports = App;
