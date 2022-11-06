@@ -25,7 +25,10 @@ class App {
 
   checkInputValidation() {
     MissionUtils.Console.print(this.inputNum + "232345");
-    inputValidation.checkNoOverlap();
+    inputValidation.checkNoOverlap(this.inputNum);
+    inputValidation.checkNoZero(this.inputNum);
+    inputValidation.checkOnlyNum(this.inputNum);
+    inputValidation.checkThreeNum(this.inputNum);
   }
 }
 const startGame = new App();
