@@ -4,16 +4,19 @@ const NumberUtils = require("./Utils/Number");
 class App {
   constructor() {
     this.NumberUtil = new NumberUtils();
+    this.computerNumber = 0;
   }
 
   userInputNumber() {
-    let userInputNumber = 0;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       this.NumberUtil.isBaseballNumber(number);
-      userInputNumber = number;
+      const result = this.compareUserAndComputerNumber(
+        number,
+        this.computerNumber
+      );
+      MissionUtils.Console.print(result);
       MissionUtils.Console.close();
     });
-    return userInputNumber;
   }
 
   compareUserAndComputerNumber(userNumber, computerNumber) {
@@ -38,12 +41,8 @@ class App {
   }
 
   play() {
-    const computerNumber = this.NumberUtil.getRandomBaseballNumber();
-    const userNumber = this.userInputNumber();
-    const result = this.compareUserAndComputerNumber(
-      userNumber,
-      computerNumber
-    );
+    this.computerNumber = this.NumberUtil.getRandomBaseballNumber();
+    this.userInputNumber();
   }
 }
 
