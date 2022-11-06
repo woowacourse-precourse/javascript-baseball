@@ -17,6 +17,11 @@ class App {
     this.gameStart();
   }
 
+  gameStart() {
+    const computerNumber = this.generateRandomNumber();
+    this.inputNumber(computerNumber);
+  }
+
   generateRandomNumber() {
     const computerNumbers = [];
     while (computerNumbers.length < 3) {
@@ -101,11 +106,6 @@ class App {
         return messages;
       }, [])
       .join(" ");
-  }
-
-  gameStart() {
-    const computerNumber = this.generateRandomNumber();
-    this.inputNumber(computerNumber);
   }
 
   gameOver() {
