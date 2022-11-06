@@ -1,20 +1,21 @@
-const Computer = require("../src/Computer");
-const User = require("../src/User")
+const { isBall } = require("../src/Referee");
 
-describe("Computer", () => {
-  test("case1", () => {
-    const computer = new Computer;
+describe("Referee Test", () => {
+  test("다른 자리에 있는 숫자의 수를 세야한다.", () => {
+    const answer = [1, 2, 3];
+    const input = [3, 5, 1];
     
-    const computerTest = computer.getNumbers(); 
-    expect(computerTest.length).toEqual(3);
+    expect(
+      isBall(answer, input)
+    ).toEqual(2);
   });
-});
 
-describe("User", () => {
-  test("case1", () => {
-    const user = new User;
+  test("겹치는 수가 없는 경우 0을 반환한다.", () => {
+    const answer = [1, 2, 3];
+    const input = [4, 5, 6];
     
-    const computerTest = user.getNumbers(); 
-    expect(computerTest.length).toEqual(3);
+    expect(
+      isBall(answer, input)
+    ).toEqual(0);
   });
 });
