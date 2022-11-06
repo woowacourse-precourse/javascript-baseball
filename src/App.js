@@ -1,6 +1,6 @@
 const Console = require("@woowacourse/mission-utils").Console;
 const Random = require("@woowacourse/mission-utils").Random;
-const CheckValidation = require("./error/CheckValidation");
+const CheckValidation = require("./components/CheckValidation");
 const CheckBallCount = require("./components/CheckBallCount");
 const PrintBallCount = require("./components/PrintBallCount");
 
