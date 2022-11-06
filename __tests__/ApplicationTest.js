@@ -24,14 +24,47 @@ const getLogSpy = () => {
 };
 
 describe('숫자 야구 게임', () => {
-    // test('게임 종료 후 재시작', () => {
-    //     const randoms = [1, 3, 5, 5, 8, 9];
-    //     const answers = ['246', '135', '1', '597', '589', '2'];
+    test('게임 종료 후 재시작', () => {
+        const randoms = [1, 3, 5, 5, 8, 9];
+        const answers = ['246', '135', '1', '597', '589', '2'];
+        const logSpy = getLogSpy();
+        const messages = [
+            '낫싱',
+            '3스트라이크',
+            '1볼 1스트라이크',
+            '3스트라이크',
+            '게임 종료',
+        ];
+        mockRandoms(randoms);
+        mockQuestions(answers);
+        const app = new App();
+        app.play();
+        messages.forEach((output) => {
+            expect(logSpy).toHaveBeenCalledWith(
+                expect.stringContaining(output)
+            );
+        });
+    });
+    test('예외 테스트', () => {
+        const randoms = [1, 3, 5];
+        const answers = ['1234'];
+        mockRandoms(randoms);
+        mockQuestions(answers);
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
+});
+
+describe.only('숫자 야구 게임', () => {
+    // test('정답이 123일 경우', () => {
+    //     const randoms = [1, 2, 3];
+    //     const answers = ['456', '132', '123'];
     //     const logSpy = getLogSpy();
     //     const messages = [
     //         '낫싱',
-    //         '3스트라이크',
-    //         '1볼 1스트라이크',
+    //         '2볼 1스트라이크',
     //         '3스트라이크',
     //         '게임 종료',
     //     ];
@@ -39,34 +72,31 @@ describe('숫자 야구 게임', () => {
     //     mockQuestions(answers);
     //     const app = new App();
     //     app.play();
-    //     messages.forEach((output) => {
+    //     messages.forEach((output, index) => {
     //         expect(logSpy).toHaveBeenCalledWith(
     //             expect.stringContaining(output)
     //         );
     //     });
     // });
 
-    // test('예외 테스트', () => {
-    //     const randoms = [1, 3, 5];
-    //     const answers = ['1234'];
-    //     mockRandoms(randoms);
-    //     mockQuestions(answers);
-    //     expect(() => {
-    //         const app = new App();
-    //         app.play();
-    //     }).toThrow();
-    // });
+    test('정답이 랜덤일 경우', () => {
+        const randoms = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        MissionUtils.Console.close();
 
-    test('정답이 123일 경우', () => {
-        const randoms = [1, 2, 3];
-        const answers = ['456', '132', '123'];
+        const answer = randoms.join('');
+        let wrong = '';
+        for (let i = 1; i < 9; i++) {
+            if (wrong.length >= 3) break;
+            if (!randoms.includes(i)) {
+                wrong += i;
+            }
+        }
+
+        console.log(`answer : ${answer}\n wrong : ${wrong}`);
+
+        const answers = [wrong, answer];
         const logSpy = getLogSpy();
-        const messages = [
-            '낫싱',
-            '2볼 1스트라이크',
-            '3스트라이크',
-            '게임 종료',
-        ];
+        const messages = ['낫싱', '3스트라이크', '게임 종료'];
 
         mockRandoms(randoms);
         mockQuestions(answers);
@@ -74,7 +104,7 @@ describe('숫자 야구 게임', () => {
         const app = new App();
         app.play();
 
-        messages.forEach((output, index) => {
+        messages.forEach((output) => {
             expect(logSpy).toHaveBeenCalledWith(
                 expect.stringContaining(output)
             );
