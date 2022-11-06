@@ -6,7 +6,14 @@ const GAME_OVER = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 
 class App {
     constructor() {
-        this.answer = '123';
+        this.answer = this.setAnswer();
+    }
+    setAnswer() {
+        let answer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
+            ''
+        );
+
+        return answer;
     }
     play() {
         MissionUtils.Console.print(GAME_START);
