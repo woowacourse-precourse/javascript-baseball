@@ -13,10 +13,6 @@ class App {
     return Console.print(message);
   }
 
-  pickNumbers() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3);
-  }
-
   readInput(solution) {
     Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
       const inputError = new UserInput(userinput);
