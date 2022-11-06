@@ -10,7 +10,9 @@ class App {
     this.print(TEXT.START_MESSAGE);
   }
 
-  play() {}
+  play() {
+    this.computer = this.creatRandomNumber();
+  }
 
   print(message) {
     return MissionUtils.Console.print(message);
@@ -18,6 +20,18 @@ class App {
 
   readLine(message, callback) {
     return MissionUtils.Console.readLine(message, callback);
+  }
+
+  creatRandomNumber() {
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+
+    return computer;
   }
 }
 
