@@ -12,8 +12,6 @@ describe.only("게임 시작 문구 테스트", () => {
     const logSpy = getLogSpy();
     const app = new App();
 
-    app.printGameStartPhrase();
-
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
 });

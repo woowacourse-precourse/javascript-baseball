@@ -4,7 +4,7 @@ const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
 
 class App {
   constructor() {
-    this.printGameStartPhrase();
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   play() {
@@ -21,10 +21,6 @@ class App {
     }
 
     return [...threeRandomNumber].join("");
-  }
-
-  printGameStartPhrase() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   startPlayerTurn() {
