@@ -92,6 +92,14 @@ class App {
     return hintString;
   }
 
+  checkRestart(){
+    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.readLine("",(choice)=>{
+      if(choice==1)
+        this.play();
+      this.exitFunction();
+    });
+  }
 }
 
 module.exports = App;
