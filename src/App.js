@@ -111,6 +111,11 @@ class App {
     this.inputNumber('게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.');
   }
 
+  reStart() {
+    this.round ++;
+    this.play();
+  }
+
 }
 
 module.exports = App;
