@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const isVaildEndOption = require("./isVaildEndOption");
 const createRandomNumbers = require("./createRandomNumbers");
 
 const restartOrQuitGame = () => {
@@ -7,7 +8,7 @@ const restartOrQuitGame = () => {
             throw new Error('잘못된 값입니다. 1 또는 2를 입력해주세요.');
         } 
     });
-
+   
      // 다시 시작
     if(endOption == 1) {
         const computerNum = createRandomNumbers();

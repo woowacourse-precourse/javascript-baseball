@@ -13,6 +13,7 @@ const playGame = (computerNum) => {
     // 3. 결과 출력
     const resultMSG = printCompareResult(...comparedResult);
     
+    // MissionUtils.Console.print(resultMSG);
     if(resultMSG === '3스트라이크') { // 정답일 때
         restartOrQuitGame();
     } else { // 정답이 아닐 때
