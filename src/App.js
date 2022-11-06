@@ -1,17 +1,9 @@
-const User = require('./User');
-const GameInitMessage = require('./GameInitMessage');
-const Computer = require('./Computer');
+const Game = require('./Game');
 
 class App {
   play() {
-    const gameInitMessage = new GameInitMessage();
-    gameInitMessage.initPrint();
-
-    const computer = new Computer();
-    const computerNumbers = computer.getComputerNumbers();
-
-    const user = new User(computerNumbers);
-    user.userInputStart();
+    const game = new Game();
+    game.start();
   }
 }
 
