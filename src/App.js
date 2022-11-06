@@ -6,7 +6,7 @@ class App {
   }
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    start();
+    this.start();
   }
 
   start() {
@@ -33,9 +33,13 @@ class App {
       const IS_NOTHING = strike === 0 && ball === 0;
       const IS_ANSWER = strike === 3;
       if (IS_ANSWER) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      } else if (IS_NOTHING) MissionUtils.Console.print('낫싱');
-      else MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+        this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        replay();
+      } else {
+        if (IS_NOTHING) this.print('낫싱');
+        else this.print(`${ball}볼 ${strike}스트라이크`);
+        this.input();
+      }
     });
   }
 
@@ -61,6 +65,10 @@ class App {
         else throw Error('잘못된 입력입니다.');
       },
     );
+  }
+
+  print(content) {
+    MissionUtils.Console.print(content);
   }
 }
 
