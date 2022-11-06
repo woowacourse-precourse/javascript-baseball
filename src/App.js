@@ -1,15 +1,27 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+let randomNumber;
 
 class App {
-  async play() {
+  play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    let randomNumber = this.setRandomNumber();
+    this.start();
+  }
+  async start() {
+    randomNumber = this.setRandomNumber();
     console.log(randomNumber);
-    MissionUtils.Console.print(GAMEOVER);
     while (true) {
       let userInput = await this.userInput('숫자를 입력해주세요: ');
+      try {
+        let checkUserNumber = this.checkUserInput(userInput); 
+        if (checkUserNumber) {
+          this.gameResult(checkUserNumber, randomNumber);
+        } 
+      } catch(e) {
+        MissionUtils.Console.print(e);
+        MissionUtils.Console.close();
+        return 0;
+      }
       let checkUserNumber = this.checkUserInput(userInput);
-      MissionUtils.Console.print(userInput);
       if (checkUserNumber) {
         this.gameResult(checkUserNumber, randomNumber);
       }
@@ -23,10 +35,11 @@ class App {
   }
 
   checkUserInput(userInput) {
+    const regex = /[^1-9]/g;
+    userInput = userInput.replace(regex, "");
     const userInputToArr = [...new Set(userInput)];
     if (userInputToArr.length !== 3) {
-      MissionUtils.Console.print('조건에 맞게 숫자를 입력해주세요!');
-      return 0;
+      throw '조건에 맞게 숫자를 입력하지않아 게임을 종료합니다.';
     }
     const userInputToNumberArr = userInputToArr.map((item) => Number(item));
     return userInputToNumberArr;
@@ -58,7 +71,7 @@ class App {
     return ballCount;
   }
 
-  gameResult(userNumbers, randomNumbers) {
+  async gameResult(userNumbers, randomNumbers) {
     let strikes = this.countStrickes(userNumbers, randomNumbers);
     let balls = this.countBalls(userNumbers, randomNumbers);
 
@@ -68,14 +81,32 @@ class App {
       MissionUtils.Console.print('3스트라이크');
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-      this.continueOrEnd();
+      // this.continueOrEnd();
+      try {
+        const blank = await this.continueOrEnd();
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        MissionUtils.Console.close();
+        return 0;
+      }
     } else if (strikes == 0) {
       MissionUtils.Console.print(`${balls}볼`);
     } else if (balls == 0) {
-      MissionUtils.Console.print(`${balls}스트라이크`);
+      MissionUtils.Console.print(`${strikes}스트라이크`);
     } else {
       MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
     }
+  }
+
+  async continueOrEnd() {
+    const userInput = await this.userInput('');
+    if (userInput == 1) {
+      app.start();
+    } else if (userInput == 2) {
+      throw '게임을 종료합니다.';
+    } else {
+      throw '1또는 2를 입력하지 않아 게임을 종료합니다.';
+    } 
   }
 }
 
