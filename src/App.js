@@ -30,6 +30,9 @@ class App {
 
       if (result !== '3스트라이크') {
         this.guess(computer);
+      } else {
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        Console.close();
       }
     });
   }
