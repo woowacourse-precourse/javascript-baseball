@@ -28,8 +28,9 @@ class App {
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {      
       if(answer !== '1' && answer !=='2'){this.throwExceptionMessage(`정확한 값을 입력해주세요 : 입력한 내용 ${answer}`); }
       if(answer === '1'){ this.playNewGame(); }
-      if(answer === '2'){ }
-      MissionUtils.Console.close();
+      if(answer === '2'){ MissionUtils.Console.close(); }
+      
+      
     })
   }
 
@@ -118,7 +119,5 @@ class App {
   }
 }
 
-const app = new App;
-app.readUserContinueAnswer()
 
 module.exports = App;
