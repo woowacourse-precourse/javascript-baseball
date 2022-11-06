@@ -16,14 +16,17 @@ const MissionUtils = require("@woowacourse/mission-utils");
 function App() {
   this.play = () => {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    createRandomNumber();
-    console.log(this.randomNumber);
+    createcomputerNumber();
+    console.log(this.computerNumber);
     recursiveAsyncReadLine();
   };
 
   this.init = () => {
     this.play();
   };
+
+  const findBall = (userNumber, computerNumber) => {};
+  const findStrike = (userNumber, computerNumber) => {};
 
   const recursiveAsyncReadLine = () => {
     MissionUtils.Console.readLine(
@@ -37,35 +40,35 @@ function App() {
           return;
         }
         if (number === "1" && this.endflag == true) {
-          createRandomNumber();
+          createcomputerNumber();
           this.endflag = undefined;
           recursiveAsyncReadLine();
 
           return;
         }
 
-        this.currentNumber = number;
+        this.userNumber = number;
 
-        checkNumber(this.randomNumber, this.currentNumber);
+        checkNumber(this.computerNumber, this.userNumber);
 
         recursiveAsyncReadLine();
       }
     );
   };
 
-  const createRandomNumber = () => {
-    this.randomNumber = "";
+  const createcomputerNumber = () => {
+    this.computerNumber = "";
 
     for (let index = 0; index < 3; index++) {
-      this.randomNumber += MissionUtils.Random.pickNumberInList([
+      this.computerNumber += MissionUtils.Random.pickNumberInList([
         1, 2, 3, 4, 5, 6, 7, 8, 9,
       ]).toString();
     }
     return;
   };
 
-  const checkNumber = (randomNumber, currentNumber) => {
-    if (randomNumber === currentNumber) {
+  const checkNumber = (computerNumber, userNumber) => {
+    if (computerNumber === userNumber) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.endflag = true;
@@ -77,7 +80,7 @@ function App() {
 
     for (let index1 = 0; index1 < 3; index1++) {
       for (let index2 = 0; index2 < 3; index2++) {
-        if (currentNumber[index1] === randomNumber[index2]) {
+        if (userNumber[index1] === computerNumber[index2]) {
           if (index1 === index2) strike++;
           if (index1 !== index2) ball++;
           if (index1 === index2 || index1 !== index2) {
