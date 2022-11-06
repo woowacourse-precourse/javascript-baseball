@@ -4,7 +4,7 @@ class App {
   play() {
     const com = new Opponent();
     com.setAnswerWith3RandomNumbers();
-    console.log(com.getAnswer());
+    console.log(com.getAnswerString());
   }
 }
 
