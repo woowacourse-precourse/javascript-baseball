@@ -4,13 +4,12 @@ class App {
   constructor() {
     this.count = "";
     this.input;
+    this.countResult;
   }
   play() {
     this.gameStart();
     this.count = this.generateCount(this.generateRandomList());
-    this.input = this.getUserInput();
-    this.vaildInput(this.input);
-    this.printCount(this.decideCount(this.count, this.input));
+    this.getUserInput();
   }
 
   gameStart() {
@@ -26,7 +25,23 @@ class App {
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.input = this.vaildInput(answer);
+      this.countResult = this.decideCount(this.count, this.input);
+      this.printCount(this.countResult);
+      if (this.countResult.strikeCount !== 3) {
+        this.getUserInput();
+      } else {
+        this.printWinMessage();
+      }
+    });
+  }
+
+  printWinMessage() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
   }
 
   vaildInput(input) {
