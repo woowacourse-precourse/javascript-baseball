@@ -3,7 +3,7 @@ const { validateNumbers } = require('./error');
 const { compareNumbers } = require('./number');
 let { computerStore } = require('./store');
 
-const [computerState, computerSetState] = computerStore();
+const [computerState, computerSetState, resetStore] = computerStore();
 
 function extractComputerNumber() {
     while (computerState().length < 3) {
@@ -16,8 +16,11 @@ function extractComputerNumber() {
 
 function resetAllInputNumbers(isRestart) {
     if (isRestart === '1') {
+        resetStore();
+        extractComputerNumber();
         baseballGameStart();
     } else {
+        computerStore = null;
         Console.close();
     }
 }
