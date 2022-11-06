@@ -39,9 +39,8 @@ function userInputNumber(computerNumber) {
 
 function gameStart(userNumber, computerNumber) {
     inputValidation(userNumber);
-    const [countBall, countStrike] = strikeBallCount(userNumber, computerNumber);
-    getHint(countBall, countStrike);
-    if (countStrike !== 3) {
+    getHint(countBall(userNumber, computerNumber), countStrike(userNumber, computerNumber));
+    if (countStrike(userNumber, computerNumber) !== 3) {
         userInputNumber(computerNumber);
     } else {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
@@ -88,21 +87,13 @@ function reduplicationValidation(number) {
     }
 }
 
-function strikeBallCount(userNumber, computerNumber) {
-    let strikeCount = 0;
-    let ballCount = 0;
-    145
-    userNumber.forEach((eachDigit, index) => {
-        if (eachDigit === computerNumber[index]) {
-            strikeCount += 1;
-            return 0;
-        }
-        if (computerNumber.includes(eachDigit)) {
-            ballCount += 1;
-            return 0;
-        }
-    })
-    return [ballCount, strikeCount];
+function countStrike(userNumber, computerNumber) {
+    return userNumber.filter((eachDigit, index) => eachDigit === computerNumber[index]).length;
+}
+
+function countBall(userNumber, computerNumber) {
+    const countIncludedNumber = userNumber.filter(eachDigit => computerNumber.includes(eachDigit)).length;
+    return (countIncludedNumber - countStrike(userNumber, computerNumber));
 }
 
 
