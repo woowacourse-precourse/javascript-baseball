@@ -21,9 +21,11 @@ class App {
   }
 
   getNumberFromPlayer() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
-      String(number)
-    );
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+        resolve(String(number));
+      });
+    });
   }
 
   isValid(number) {
@@ -91,10 +93,14 @@ class App {
   }
 
   askRestartOrTerminate() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (number) => number
-    );
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (number) => {
+          resolve(number);
+        }
+      );
+    });
   }
 
   play() {}
