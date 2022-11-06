@@ -68,6 +68,7 @@ class App {
   checkGameResult(computerInputNumbers, userNumbers) {
     const gameScore = this.calculateGameScore(computerInputNumbers, userNumbers);
     const gameResult = this.printGameScore(gameScore);
+    return this.checkThreeStrike(gameResult, computerInputNumbers);
   }
 
   calculateGameScore(computerInputNumbers, userNumbers) {
@@ -107,6 +108,20 @@ class App {
     }
     MissionUtils.Console.print(gameOutcome);
     return gameOutcome;
+  }
+
+  checkThreeStrike(gameResult, computerInputNumbers) {
+    if (gameResult.includes('3스트라이크')) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return this.choiceRestartAndEnd();
+    }
+  }
+
+  choiceRestartAndEnd() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (answer) => {}
+    );
   }
 }
 
