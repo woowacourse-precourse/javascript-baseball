@@ -15,7 +15,6 @@ class App {
   } 
 }
   Printlog(strike,ball){
-    console.log("prtlog",strike,ball)
     if(strike===0){
       if(ball===0)
         MissionUtils.Console.print("낫싱")
@@ -23,19 +22,27 @@ class App {
         MissionUtils.Console.print(`${ball}볼`)  
       }
       this.Restart()
-    }else if( strike===1){
-      MissionUtils.Console.print(`${ball}볼1 스트라이크`)
+    }else if(strike===1){
+      if(ball===0)
+        MissionUtils.Console.print(`1스트라이크`)
+      else{
+        MissionUtils.Console.print(`${ball}볼 1스트라이크`)
+      }
       this.Restart()
     }else if(strike===2){
-      MissionUtils.Console.print(`${ball}볼2 스트라이크`)
+      if(ball===0)
+        MissionUtils.Console.print(`2스트라이크`)
+      else{
+        MissionUtils.Console.print(`${ball}볼 2스트라이크`)
+      }
       this.Restart()
     }else if(strike===3){
-      this.AllCorrect()
+      MissionUtils.Console.print("3스트라이크")
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
+      this.AllCorrect()
     }  
   }
   CompareNumber(My_Number,Computer_Number){
-    console.log(My_Number,Computer_Number)
     let strike=0;
     let ball=0;
     const find1 = My_Number.indexOf(Computer_Number[0]);
@@ -83,6 +90,10 @@ class App {
   Input(){
       MissionUtils.Console.readLine('번호를 입력해주세요.', (answer) => {
         let temp=answer.split(' ').join('').split('').map(Number)
+        const set = new Set(temp);
+        if(set.size!==temp.length){
+          throw("Request is failed")
+        }
         for(let i=0;i<temp.length;i++){
           if(isNaN(temp[i])){
             throw("Request is failed")
