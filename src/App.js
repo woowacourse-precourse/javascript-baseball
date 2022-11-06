@@ -31,6 +31,7 @@ class App {
     const didUserWin = this.computeResult(userInput);
     if (didUserWin) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.askRestartOrEnd();
       return;
     }
     this.askUserInput();
@@ -74,6 +75,31 @@ class App {
     if (balls && strikes) return `${balls}볼 ${strikes}스트라이크`;
     if (balls) return `${balls}볼`;
     return `${strikes}스트라이크`;
+  }
+
+  askRestartOrEnd() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      this.handleMenuInput.bind(this),
+    );
+  }
+
+  handleMenuInput(answer) {
+    if (!App.isValidMenuInput(answer)) {
+      throw new Error('잘못된 값을 입력하였습니다!');
+    }
+    if (answer === '1') {
+      this.play();
+      return;
+    }
+    MissionUtils.Console.close();
+  }
+
+  static isValidMenuInput(input) {
+    if (input === '1' || input === '2') {
+      return true;
+    }
+    return false;
   }
 }
 
