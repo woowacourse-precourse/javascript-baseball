@@ -35,6 +35,22 @@ class App {
     }
     this.hintString = this.getHint(this.answer,inputNumber);
   }
+
+  isValidInput(inputNumber){
+    let numberArray = [...inputNumber];
+    if(numberArray.length==0 || numberArray.length!=3)
+      return false;
+    numberArray.forEach(function(ele)
+    {
+      if(isNaN(ele)) return false;
+    });
+    if(numberArray.includes("0")) 
+      return false; 
+    if(numberArray[0]==numberArray[1]||numberArray[0]==numberArray[2]
+      ||numberArray[1]==numberArray[2])
+      return false;
+    return true;
+  }
 }
 
 module.exports = App;
