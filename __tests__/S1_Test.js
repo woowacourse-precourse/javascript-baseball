@@ -13,8 +13,6 @@ describe('[S1] 유저는 게임이 진행되었는지 한 눈에 딱 알 수 있
     expect(GameMessage.QUESTION_MESSAGE).toEqual('숫자를 입력해주세요. : ');
   });
   test('[T1-2] 게임 시작 시 문구 출력 기능', () => {
-    const answers = ['1234'];
-
     const logSpy = getLogSpy();
     const app = new App();
     app.play();
