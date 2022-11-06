@@ -37,8 +37,8 @@ class App {
         this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         replay();
       } else {
-        const BALL_STRIKTE_CONTENT = `${ball === 0 && `${ball}볼`} ${
-          strike === 0 && `${strike}스트라이크`
+        const BALL_STRIKTE_CONTENT = `${ball === 0 ? '' : `${ball}볼 `}${
+          strike === 0 ? '' : `${strike}스트라이크`
         }`;
         const CONTENT = IS_NOTHING ? '낫싱' : BALL_STRIKTE_CONTENT;
 
@@ -74,8 +74,7 @@ class App {
   }
 
   readLine(content, func) {
-    this.print(content);
-    func();
+    MissionUtils.Console.readLine(content, func);
   }
 }
 
