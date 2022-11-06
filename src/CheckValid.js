@@ -24,11 +24,10 @@ function checkBlank(userNum) {
   }
 }
 function checkRangeOfRetryUserInput(retryNum) {
-  if (/^[1-2]*$/g.test(retryNum.join("")) === false) {
+  if (/^[1-2]*$/g.test(retryNum) === false) {
     return false;
   }
 }
-
 function checkLengthOfRetryUserInput(retryNum) {
   if (retryNum.length !== 1) {
     return false;
@@ -59,17 +58,16 @@ class CheckInputValid {
   }
 
   checkRetryInput() {
-    if (checkLengthOfRetryUserInput(this.retryNum) === false) {
-      throw new Error("입력은 1 혹은 2 둘 중 한가지만 가능합니다.");
-    }
-
     if (checkRangeOfRetryUserInput(this.retryNum) === false) {
       throw new Error(
         "입력은 1또는 2만 가능합니다. 2개 이상 입력할 수 없습니다."
       );
     }
-    if (checkBlank(String(this.retryNum)) === false) {
+    if (checkBlank(this.retryNum) === false) {
       throw new Error("공백은 입력할 수 없습니다");
+    }
+    if (checkLengthOfRetryUserInput(this.retryNum) === false) {
+      throw new Error("숫자가 2개 이상 입력되었습니다.");
     }
   }
 }
