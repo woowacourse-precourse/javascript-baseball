@@ -49,4 +49,18 @@ describe("게임 결과에 따라 유저에게 입력받기", () => {
     }
     expect(() => errorCatch(false)).toThrow("Invalid");
   });
+
+  test("1,2의 선택에 따라 재시작/종료 요청", () => {
+    function replayOrEnd(userChoice) {
+      if (userChoice === 1) {
+        return "재시작함수";
+      }
+      if (userChoice === 2) {
+        return "종료함수";
+      }
+    }
+
+    expect(replayOrEnd(1)).toBe("재시작함수");
+    expect(replayOrEnd(2)).toBe("종료함수");
+  });
 });
