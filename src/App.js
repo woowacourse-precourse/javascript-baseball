@@ -12,9 +12,8 @@ class App {
   checkStrike(userNumbers) {
     let strikeCount = 0;
 
-    for (let i = 0; i < PICK_LENGTH; i++) {
+    for (let i = 0; i < PICK_LENGTH; i++) 
       if (this.computerNumbers[i] == userNumbers[i]) strikeCount++;
-    }
 
     return strikeCount;
   }
@@ -22,10 +21,9 @@ class App {
   checkBall(userNumbers) {
     let ballCount = 0;
 
-    for (let i = 0; i < PICK_LENGTH; i++) {
+    for (let i = 0; i < PICK_LENGTH; i++) 
       if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1) 
         ballCount++;
-    }
 
     return ballCount;
   }
