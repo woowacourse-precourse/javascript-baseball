@@ -11,7 +11,7 @@ const checkDuplicated = (splitAnswer) => {
   );
 };
 
-const CheckError = (answer) => {
+const CheckValidation = (answer) => {
   let splitAnswer = answer.split("");
 
   hasZero(answer);
@@ -88,4 +88,4 @@ const notRightLength = (length) => {
   }
 };
 
-module.exports = CheckError;
+module.exports = CheckValidation;
