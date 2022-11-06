@@ -60,7 +60,20 @@ class App {
     }
   }
 
-  gameFinishOption() {}
+  gameFinishOption() {
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.readLine("", (number) => {
+      if (number === "1") {
+        return this.getUserInput();
+      }
+      if (number === "2") {
+        Console.print("게임 종료");
+        Console.close();
+        return;
+      }
+      throw new Error("옳바른 값을 입력해주세요");
+    });
+  }
 
   createComputerNumber() {
     const computer = [];
