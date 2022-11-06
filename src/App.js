@@ -24,6 +24,7 @@ class App {
       this.printResult();
     }
 
+    this.resetGameData();
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
@@ -111,6 +112,13 @@ class App {
     }
 
     MissionUtils.Console.print(result.join(' '));
+  }
+
+  resetGameData() {
+    this.answer = undefined;
+    this.input = undefined;
+    this.ballCount = 0;
+    this.strikeCount = 0;
   }
 }
 
