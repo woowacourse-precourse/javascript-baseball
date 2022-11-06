@@ -45,7 +45,7 @@ class App {
   }
 
   getHint(input) {
-    var { ballCount, strikeCount } = this.isBallOrStrike(input);
+    var { ballCount, strikeCount } = this.countBallOrStrike(input);
 
     if (ballCount === 0 && strikeCount === 0) {
       this.printMsg("낫싱");
@@ -61,7 +61,7 @@ class App {
     }
   }
 
-  isBallOrStrike(input) {
+  countBallOrStrike(input) {
     var ballCount = 0;
     var strikeCount = 0;
 
