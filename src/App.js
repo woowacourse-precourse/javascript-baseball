@@ -69,8 +69,11 @@ class App {
 
   replay() {
     this.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', number => {
-      if (number === '1') this.start();
-      else if (number === '2') MissionUtils.Console.close();
+      const REPLAY_GAME = number === '1';
+      const END_GAME = number === '2';
+
+      if (REPLAY_GAME) this.start();
+      else if (END_GAME) MissionUtils.Console.close();
       else throw Error('잘못된 입력입니다.');
     });
   }
