@@ -121,6 +121,18 @@ class App {
       }
       return true;
     }
+    /*게임 종료 여부 선택하는 기능*/
+    selectGameEnd(userInputNum){
+      console.log(userInputNum);
+      if(userInputNum==1){
+        MissionUtils.Console.print("게임 재시작");
+        this.play();
+        }
+      if(userInputNum==2){
+        MissionUtils.Console.print("게임 종료");
+
+      }
+    }
 }
 
 module.exports = App;
