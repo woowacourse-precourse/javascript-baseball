@@ -1,10 +1,7 @@
-const { Random, Console } = require('@woowacourse/mission-utils');
-const { Exception, BaseBallException, RestartException } = require('./Exception');
+const { Console } = require('@woowacourse/mission-utils');
 
-const RANDOMLIST = Object.freeze({
-  STARTPOINT: 1,
-  ENDPOINT: 9,
-});
+const RandomNumber = require('./RandomNumber');
+const { Exception, BaseBallException, RestartException } = require('./Exception');
 
 const BASEBALL = Object.freeze({
   STRIKE: '스트라이크',
@@ -23,27 +20,10 @@ const COMMAND = Object.freeze({
 });
 
 class App {
-  #random;
   #exception;
 
   constructor() {
-    this.#random = this.#makeRandomNumber();
     this.#exception = new Exception();
-  }
-
-  get3RandomNumbers() {
-    return this.#random;
-  }
-
-  #makeRandomNumber() {
-    const result = [];
-
-    while (result.length < 3) {
-      const randomNum = Random.pickNumberInRange(RANDOMLIST.STARTPOINT, RANDOMLIST.ENDPOINT);
-      !result.includes(randomNum) && result.push(randomNum);
-    }
-
-    return result;
   }
 
   isStrike(randomItem, inputItem) {
@@ -112,16 +92,13 @@ class App {
       this.print(COMMAND.STRIKEOUT);
       this.#exception.checkErrorFor(new RestartException(input));
 
-      input === COMMAND.RESTART ? this.enter(this.#makeRandomNumber()) : this.end();
+      input === COMMAND.RESTART ? this.enter(RandomNumber.makeNew()) : this.end();
     });
   }
 
   play() {
-    this.enter(this.get3RandomNumbers());
+    this.enter(RandomNumber.makeNew());
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
