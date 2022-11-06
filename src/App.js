@@ -34,10 +34,28 @@ class App {
     }
   }
 
+  printScore() {
+    let scoreSentence = "";
+    if (this.score.balls) {
+      scoreSentence += `${this.score.balls}볼`;
+    }
+    if (this.score.strikes) {
+      if (scoreSentence) {
+        scoreSentence += " ";
+      }
+      scoreSentence += `${this.score.strikes}스트라이크`;
+    }
+    if (!scoreSentence) {
+      scoreSentence = "낫싱";
+    }
+    MissionUtils.Console.print(scoreSentence);
+  }
+
   play() {
     this.generateThreeDigits();
     this.getUserDigits();
     this.countScore();
+    this.printScore();
   }
 }
 
