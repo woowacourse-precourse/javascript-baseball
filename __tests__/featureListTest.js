@@ -26,13 +26,12 @@ const getLogSpy = () => {
 };
 
 describe('기능 구현 목록 테스트', () => {
-  let game;
-
-  beforeEach(() => {
-    game = new Game();
+  afterEach(() => {
+    MissionUtils.Console.close();
   });
 
   test('시작 문구 출력', () => {
+    const game = new Game();
     const logSpy = getLogSpy();
 
     game.init();
@@ -41,6 +40,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('1에서 9까지 서로 다른 세자리 수 생성', () => {
+    const game = new Game();
     const random = game.generateRandomNumber(1, 9, 3);
 
     random.forEach((num) => {
@@ -52,6 +52,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('유효하지 않은 값이 들어 왔을 때 에러처리', () => {
+    const game = new Game();
     const numbers = '1230';
 
     expect(() => {
@@ -60,6 +61,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('랜덤 값과 사용자 입력한 값 비교', () => {
+    const game = new Game();
     const random = [2, 4, 6];
     const answers = [2, 6, 4];
 
@@ -70,6 +72,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('볼, 스트라이크 점수 결과 출력', () => {
+    const game = new Game();
     const logSpy = getLogSpy();
 
     game.printScore(1, 2);
@@ -85,11 +88,11 @@ describe('기능 구현 목록 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith('2스트라이크');
   });
 
-  test('3스트라이크가 아닐 때 playRound 함수 반복', () => {
-    const randoms = [1, 3, 5];
-    const answers = ['246', '153', '351', '135'];
+  test('3스트라이크가 아닐 때 getAnswer 함수 반복', () => {
     const logSpy = getLogSpy();
-    const messages = ['낫싱', '2볼 1스트라이크', '3볼', '3스트라이크'];
+    const randoms = [2, 3, 5];
+    const answers = ['246', '253', '352', '235'];
+    const messages = ['1스트라이크', '2볼 1스트라이크', '3볼', '3스트라이크'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -103,6 +106,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('정답시 출력 문구 확인', () => {
+    const game = new Game();
     const logSpy = getLogSpy();
     const randoms = [1, 3, 5];
     const answers = ['135'];
@@ -110,8 +114,7 @@ describe('기능 구현 목록 테스트', () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    const app = new App();
-    app.play();
+    game.play();
 
     expect(logSpy).toHaveBeenCalledWith(
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
