@@ -70,10 +70,22 @@ class App {
 
     if (result === '3스트라이크') {
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      // TODO game restart check function
+      this.restartGameCheck();
     } else {
       this.getUserNumber();
     }
+  }
+
+  restartGameCheck() {
+    Console.readLine('게임을 재시작 하려면 1, 종료하려면 2를 입력하세요.', number => {
+      if (Number(number) === 1) {
+        this.getRandomNumber();
+        this.getUserNumber();
+      }
+      if (Number(number) === 2) {
+        Console.close();
+      }
+    });
   }
 
   play() {}
