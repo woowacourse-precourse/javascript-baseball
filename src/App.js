@@ -40,7 +40,7 @@ class App {
       MissionUtils.Console.print(resultOutput);
 
       if (strikeCount === 3) {
-        MissionUtils.Console.print("게임 종료");
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         MissionUtils.Console.close();
       }
       if (strikeCount !== 3) {
@@ -48,6 +48,7 @@ class App {
       }
     });
   }
+  endPlayerTurn() {}
 }
 
 const app = new App();
