@@ -16,6 +16,19 @@ class App {
         }
       }
     }
+    // 숫자 입력
+    MissionUtils.Console.readLine("숫자를 입력해주세요", (answer) => {
+      strikeCount = 0;
+      ballCount = 0;
+      nothing = 0;
+
+      // 스트라이크, 볼, 낫싱 체크
+      computer.map((e, i) => {
+        if (answer.includes(e)) {
+          return answer.indexOf(e) === i ? strikeCount++ : ballCount++;
+        } else nothing++;
+      });
+    });
 
     computerNumbers();
   }
