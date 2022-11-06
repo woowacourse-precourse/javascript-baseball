@@ -3,10 +3,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   getSumOfBallAndStrike(computerNum, userNum) {
-    const overlappingNumArr = userNum.filter((num) => {
-      computerNum.includes(num);
-    });
-    return overlappingNumArr.length;
+    const overlappingNum = userNum.reduce((acc, cur) => {
+      return acc + (computerNum.includes(cur) | 0);
+    }, 0);
+    return overlappingNum;
   }
   getStrikeCnt(computerNum, userNum) {
     let strikeCnt = 0;
@@ -21,13 +21,10 @@ class App {
     MissionUtils.Console.readLine(
       "각 자리 숫자가 1에서 9 사이인 서로 다른 세자리 숫자를 입력해주세요 : ",
       (userInput) => {
-        const userNum = userInput.split("");
+        const userNum = userInput.split("").map((numStr) => parseInt(numStr));
         const validator = new Validator(userNum);
         if (!validator.isValidInput()) throw new Error("입력값을 확인하세요.");
-        const ballAndStrikeCnt = this.getSumOfBallAndStrike(
-          computerNum,
-          userNum
-        );
+        const ballAndStrikeCnt = this.getSumOfBallAndStrike(computerNum, userNum);
         const strikeCnt = this.getStrikeCnt(computerNum, userNum);
       }
     );
