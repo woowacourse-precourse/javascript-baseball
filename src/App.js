@@ -1,34 +1,39 @@
 
 const MissionUtils = require("@woowacourse/mission-utils");
 
-// 1. 컴퓨터의 수 3자리 구하기.
-let machineNum = [];
-while (machineNum.length < 3) {
-  let number = MissionUtils.Random.pickNumberInRange(1, 9);
-  if (!machineNum.includes(number)) {
-    machineNum.push(number);
-  }
-}
+// // 1. 컴퓨터의 수 3자리 구하기.
+// let machineNum = [];
+// while (machineNum.length < 3) {
+//   let number = MissionUtils.Random.pickNumberInRange(1, 9);
+//   if (!machineNum.includes(number)) {
+//     machineNum.push(number);
+//   }
+// }
 
 class App {
-  constructor(arr) {
-    this.arr = arr;
+  constructor() {
+
+    let machineNum = [];
+    while (machineNum.length < 3) {
+      let number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!machineNum.includes(number)) {
+        machineNum.push(number);
+      }
+    }
+
+    this.arr = machineNum;
     this.inputNum = [];
     this.checkBallArray = [];
     this.strike = 0;
     this.ball = 0;
+
   }
-  get arr() {
-    return this._arr
-  }
-  set arr(value) {
-    this._arr = value
-  }
+
   // 3. 3. 컴퓨터와 플레이어의 값을 비교해 스트라이크,볼의 값을 구함.
   // strike 갯수 확인 함수
-  checkStrike(_arr) {
-    for (let j = 0; j < _arr.length; j++) {
-      if (_arr[j] !== this.inputNum[j]) {
+  checkStrike(arr) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[j] !== this.inputNum[j]) {
         this.checkBallArray.push(this.inputNum[j]);
       } else {
         this.strike += 1;
@@ -37,9 +42,9 @@ class App {
     return this.strike
   }
   // 볼 갯수 확인 함수
-  checkball(_arr) {
+  checkBall(arr) {
     for (let i = 0; i < this.checkBallArray.length; i++) {
-      if (_arr.includes(this.checkBallArray[i])) {
+      if (arr.includes(this.checkBallArray[i])) {
         this.ball += 1
       }
     }
@@ -58,11 +63,11 @@ class App {
   rePlay() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       if (answer === '1') {
-        machineNum.length = 0;
-        while (machineNum.length < 3) {
+        this.arr.length = 0;
+        while (this.arr.length < 3) {
           let number = MissionUtils.Random.pickNumberInRange(1, 9);
-          if (!machineNum.includes(number)) {
-            machineNum.push(number);
+          if (!this.arr.includes(number)) {
+            this.arr.push(number);
           }
         }
         this.newplay();
@@ -88,48 +93,57 @@ class App {
 
   //게임을 시작합니다를 프린트 하지 않기위한 play 함수
   newplay() {
-    console.log(this._arr);
     // 2. 게임 플레이어는 컴퓨터가 생각하고 있는 서로 다른 3개의 숫자를 입력
     MissionUtils.Console.readLine('서로 다른 숫자를 3개 입력하시오.', (answer) => {
       const num = answer;
       for (let i = 0; this.inputNum.length < num.length; i++) {
-        this.inputNum.push(num[i]);
+        this.inputNum.push(num[i] * 1);
       }
       this.exception(this.inputNum);
-      const strike = this.checkStrike(this._arr);
-      const ball = this.checkball(this._arr);
+      const strike = this.checkStrike(this.arr);
+      const ball = this.checkBall(this.arr);
       if (strike === 3) {
+        MissionUtils.Console.print(strike + "스트라이크");
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
         this.reSet();
         this.rePlay();
       } else if (strike > 0 && ball === 0) {
         MissionUtils.Console.print(strike + '스트라이크');
-        this.reSet();
-        this.newplay();
+
+        this.play();
       } else if (ball > 0 && strike === 0) {
         MissionUtils.Console.print(ball + '볼');
-        this.reSet();
-        this.newplay();
+
+        this.play();
       } else if (strike === 0 && ball === 0) {
         MissionUtils.Console.print('낫싱');
-        this.reSet();
-        this.newplay();
-      } else {
-        MissionUtils.Console.print(strike + '스트라이크' + ball + '볼');
-        this.reSet();
-        this.newplay();
+
+        this.play();
+      } else if (strike > 0 && ball > 0) {
+        MissionUtils.Console.print(ball + '볼 ' + strike + '스트라이크');
+
+        this.play();
       }
     });
   }
 
   play() {
+    console.log(this.arr);
     // 2. 게임 플레이어는 컴퓨터가 생각하고 있는 서로 다른 3개의 숫자를 입력
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
-    this.newplay();
+    if (this.inputNum.length === 0) {
+      MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
+      this.reSet();
+      this.newplay();
+    }
+    else {
+      this.reSet();
+      this.newplay();
+    }
   }
 }
 
-const app = new App(machineNum);
+const app = new App();
 
 app.play();
 
