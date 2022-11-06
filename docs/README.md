@@ -22,3 +22,5 @@
 6. replayOrQuit: 게임이 끝난후에 다시 시작할지, 종료할지 결정하는 함수
 
    - quitGame: 게임을 끝내는 함수
+
+7. startQuery: 정답인 answer 배열생성 이후 사용자의 입력(query)부터 게임을 담당하는 함수
