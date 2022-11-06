@@ -26,6 +26,9 @@ class App {
   getUsersPrediction(randomNumber) {
     Console.readLine('숫자를 입력해주세요 : ', (prediction) => {
       console.log(prediction);
+      if (!this.validateThreeFigures(prediction)) {
+        throw '잘못된 값을 입력했습니다!';
+      }
       const convertedNumber = prediction.split('').map(Number);
       console.log(convertedNumber);
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
@@ -85,6 +88,24 @@ class App {
         Console.close();
       }
     })
+  }
+
+  validateThreeFigures(userInput) {
+    // 'asd' '1234' '122'
+    const regex = /[^1-9]/g;
+    if (userInput.length !== 3) {
+      // 3자리가 아닌경우 asdf 1234
+      return false;
+    } else if (new Set(userInput).size !== 3) {
+      // 중복숫자가있는경우 113
+      return false;
+    } else if (regex.test(userInput)) {
+      // 숫자가아닌 문자열이 있는 경우
+      return false;
+    } else {
+      return true;
+    }
+    
   }
 }
 
