@@ -85,3 +85,5 @@ test("사용자 숫자 상대방 숫자 비교4", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
 });
+
+// test : git ignore test1
