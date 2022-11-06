@@ -72,6 +72,9 @@ class App {
     }
     return result;
   }
+  printResult() {
+    MissionUtils.Console.print(this.result);
+  }
 }
 const app = new App();
 app.play();
