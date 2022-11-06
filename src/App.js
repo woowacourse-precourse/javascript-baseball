@@ -51,7 +51,7 @@ class App {
       (input) => {
         if (Number(input) === 1) {
           this.isContinue = true;
-          this.makeRandomNumber();
+          this.answer = this.makeRandomNumber();
           this.enterAnswer();
         }
         if (Number(input) === 2) {
