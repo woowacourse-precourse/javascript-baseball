@@ -32,13 +32,20 @@ class App {
     return message;
   };
 
-  printResult = (ANSWER, input) => {
-    if (ANSWER === input) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      MissionUtils.Console.close();
-      return;
-    }
+  handleSuccess = () => {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (input) => {
+      if (input === "1") this.play();
+      if (input === "2") {
+        MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+        MissionUtils.Console.close();
+        return;
+      }
+    });
+  };
+
+  printResult = (ANSWER, input) => {
     let strike = 0;
     let ball = 0;
     let nothing = true;
@@ -53,6 +60,11 @@ class App {
 
     const resultMessage = this.getResultMessage(strike, ball, nothing);
     MissionUtils.Console.print(resultMessage);
+
+    if (strike === 3) {
+      this.handleSuccess();
+    }
+
     this.getInputAndCompare(ANSWER);
   };
 
