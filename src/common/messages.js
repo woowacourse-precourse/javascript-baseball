@@ -1,4 +1,4 @@
-const CLOSE_GAME_MESSAGE = '★ 게임 종료';
+const CLOSE_GAME_MESSAGE = '게임 종료';
 const START_MESSAGE = '숫자 야구 게임을 시작합니다.';
 const INPUT_MESSGAE = '숫자를 입력해주세요 : ';
 const GAMEOVER_MESSAGE = `3개의 숫자를 모두 맞히셨습니다! ${CLOSE_GAME_MESSAGE}`;

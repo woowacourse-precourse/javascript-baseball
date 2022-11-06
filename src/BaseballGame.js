@@ -23,6 +23,11 @@ class BaseballGame {
     this.getPlayerInput();
   }
 
+  restartGame() {
+    this.randomNumbers = this.initRandomNumbers();
+    this.startGame();
+  }
+
   initRandomNumbers() {
     const pickedNumbers = [];
 
@@ -54,7 +59,7 @@ class BaseballGame {
     Console.readLine(`${END_MESSAGE}\n`, (answer) => {
       const convertNumberInput = Number(answer);
       if (convertNumberInput == 1) {
-        return this.startGame();
+        return this.restartGame();
       }
       if (convertNumberInput == 2) {
         return Console.close();
