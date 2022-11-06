@@ -50,6 +50,20 @@ class GameLoop {
     this._continue();
   }
 
+  restart() {
+    const gameEnd = MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (message) => {
+        if (message != "1" || message != "2") {
+          throw new Error("1이나 2를 입력해야 합니다");
+        }
+      }
+    );
+    if (gameEnd === "1") {
+      this.start();
+    }
+  }
+
   _continue() {
     while (!this.gameOver) {
       let message = MissionUtils.Console.readLine(
