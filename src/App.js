@@ -36,10 +36,6 @@ class App {
   gameOverPhase() {
     Console.print(GAME_MESSAGE.GAME_OVER);
     Console.readLine(GAME_MESSAGE.GAME_RESTART_REQUEST, (trigger) => {
-      if (!this.isValidTrigger(trigger)) {
-        this.quitGame();
-        throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
-      }
       if (trigger === RESTART_TRIGGER) {
         this.computerInput = this.generateComputerInput();
         this.play();
@@ -47,7 +43,10 @@ class App {
       }
       if (trigger === QUIT_TRIGGER) {
         this.quitGame();
+        return;
       }
+      this.quitGame();
+      throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
     });
   }
 
@@ -120,9 +119,6 @@ class App {
     }
 
     return { isValid: true };
-  }
-  isValidTrigger(trigger) {
-    return trigger === RESTART_TRIGGER || trigger === QUIT_TRIGGER;
   }
 
   quitGame() {
