@@ -17,23 +17,23 @@ class App {
 
   checkUserInputValid(userInputArr) {
     if (!userInputArr) {
-      return false;
+      throw new Error();
     }
     if (
       !userInputArr.every((num) => {
         return Number.isInteger(num) && num > 0;
       })
     ) {
-      return false;
+      throw new Error();
     }
     if (userInputArr.length !== 3) {
-      return false;
+      throw new Error();
     }
     if (userInputArr.includes(0)) {
-      return false;
+      throw new Error();
     }
     if (new Set(userInputArr).size !== userInputArr.length) {
-      return false;
+      throw new Error();
     }
     return true;
   }
