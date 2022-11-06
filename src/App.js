@@ -33,6 +33,8 @@ class App {
       } else if (this.isNothing(randomNumber, convertedNumber)) {
         Console.print('낫싱');
         this.getUsersPrediction(randomNumber);
+      } else {
+        console.log(this.calculateCount(randomNumber, convertedNumber));
       }
     })
   }
@@ -44,6 +46,19 @@ class App {
   isNothing(randomNumber, userInput) {
     const union = new Set([...randomNumber, ...userInput]);
     return union.size === 6;
+  }
+
+  calculateCount(randomNumber, userInput) {
+    let ballCount = 0;
+    let strikeCount = 0;
+    randomNumber.forEach((number, index) => {
+      if (userInput.includes(number) && index !== userInput.indexOf(number)) {
+        ballCount++;
+      } else if(userInput[index] === number) {
+        strikeCount++;
+      }
+    });
+    return [ballCount, strikeCount];
   }
 }
 
