@@ -40,6 +40,11 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (num) => {
         num = Number(num);
+        if (num === 1 || num === 2) {
+          return num;
+        } else {
+          throw "1 또는 2만 입력할 수 있습니다.";
+        }
       }
     );
   }
