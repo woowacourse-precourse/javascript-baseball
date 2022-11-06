@@ -6,6 +6,7 @@ class App {
   constructor() {
     this.answer = [];
     this.userInput = "";
+    this.restartInput = "";
   }
   getBall(includeOfNum) {
     let ballCnt = 0;
@@ -41,15 +42,19 @@ class App {
     const ball = this.getBall(includeOfNum);
     const strike = this.getStrike();
 
-    if (ball === 0 && strike === 0) return "낫싱";
+    if (ball === 0 && strike === 0) result = "낫싱";
     if (ball > 0) result += `${ball}볼`;
     if (ball > 0 && strike > 0) result += " ";
     if (strike > 0) result += `${strike}스트라이크`;
 
-    return result;
+    Console.print(result);
+    if (result === "3스트라이크") {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.restartQuestion();
+    } else this.getUserInput();
   }
 
-  checkException(inputNum, allowed) {
+  checkException(inputNum, checkStyle) {
     if (inputNum.length !== 3) {
       return false;
     }
@@ -65,18 +70,31 @@ class App {
     return allowed;
   }
 
+  restartQuestion() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => {
+        if (!checkException(input, 1)) {
+          throw "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.";
+        }
+        this.restartInput = input;
+      }
+    );
+    if (this.restartInput === "1") this.startGame();
+  }
+
   startGame() {
     this.createAnswer();
     this.getUserInput();
+    this.restartQuestion();
   }
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!this.checkException(input, true)) {
-        throw "ERROR";
+      if (!this.checkException(input, 0)) {
+        throw "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.";
       }
       this.userInput = input;
-      console.log(this.createResult());
-      Console.close();
+      this.createResult();
     });
   }
 
