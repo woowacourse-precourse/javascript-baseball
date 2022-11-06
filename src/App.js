@@ -28,7 +28,6 @@ class App {
 
   discriminator(userNumbers, refNumbers) {
     let discrimination = "";
-
     let strikeCount = 0;
     let ballCount = 0;
 
@@ -67,7 +66,8 @@ class App {
     let discrimination = "";
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      const usersInput = answer;
+      const usersInput = answer.trim();
+      this.errorChecker(usersInput);
       const userNumbersArr = this.stringToArrConverter(usersInput);
       let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
       this.printer(discrimination);
@@ -81,8 +81,27 @@ class App {
     });
   }
 
+  errorChecker(userNumbersArr) {
+    for (const errorCheck in this.errorCheckList) {
+      this.errorCheckList[errorCheck](userNumbersArr);
+    }
+  }
+
+  errorCheckList = {
+    inputNumberLengthCheck: (usersInput) => {
+      if (usersInput.length !== 3) {
+        throw "3자리의 숫자를 입력해주세요.";
+      }
+    },
+    inputValueStringCheck: (usersInput) => {
+      if (isNaN(usersInput)) {
+        throw "숫자만 입력해주세요";
+      }
+    },
+  };
+
   play() {
-    console.log("숫자 야구 게임을 시작합니다.");
+    this.printer("숫자 야구 게임을 시작합니다.");
     const refNumbersArr = this.refNumbersGetter();
     this.gameStarter(refNumbersArr);
   }
