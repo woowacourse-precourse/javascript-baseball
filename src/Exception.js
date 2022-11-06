@@ -36,7 +36,7 @@ class BaseBallException {
   }
 }
 
-class RestartException {
+class NextException {
   #input;
   #errorMessage = '재시작(1), 종료(2)를 눌러야 됩니다!!';
 
@@ -62,5 +62,5 @@ class RestartException {
 module.exports = {
   Exception,
   BaseBallException,
-  RestartException,
+  NextException,
 };
