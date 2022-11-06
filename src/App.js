@@ -35,7 +35,7 @@ class App {
     answerUserNumbers() {
         return Console.readLine('숫자를 입력해주세요 : ',(input) => {
             this.validateInput(input);
-            this.isMatchNumbers(parseInt(input));
+            this.finishGame(parseInt(input));
         })
     }
 
@@ -46,24 +46,18 @@ class App {
         if(String(input).indexOf(0) !== -1) throw new Error('1부터 9의 숫자만 입력해주세요.');
     }
 
-    isMatchNumbers(computerNumbers,userNumbers) {
-        if(computerNumbers == userNumbers) {
-            Console.print('3스트라이크');
-            Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-            return this.replayGame();
-        }
-        if(computerNumbers !== userNumbers) {
-            this.ballAndStrikeCalc(computerNumbers,userNumbers);
-            this.answerUserNumbers(computerNumbers);
-        }
+    finishGame() {
+        Console.print('3스트라이크');
+        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        return this.answerReplayGame();
     }
 
-    replayGame() {
-        Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    answerReplayGame() {
+        Console.print(`게임을 새로 시작하려면 ${REPLAY_GAME_KEY}, 종료하려면 ${END_GAME_KEY}를 입력하세요.`);
         Console.readLine('', (answer) => {
-            if(answer == REPLAY_GAME_KEY) return this.answerUserNumbers(this.isComputerNumbers());
-            if(answer == END_GAME_KEY) return Console.print('게임 종료');
-            if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new Error('1 또는 2를 입력하세요.');
+            if(answer === REPLAY_GAME_KEY) return this.startGame();
+            if(answer === END_GAME_KEY) return Console.print('게임 종료');
+            if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new Error(`${REPLAY_GAME_KEY} 또는 ${END_GAME_KEY}를 입력하세요.`);
         })
     }
 
