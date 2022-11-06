@@ -31,7 +31,7 @@ class App {
     this.USER_NUMBER = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', userinput => {
       this.USER_NUMBER = userinput.split('').map(Number);
-      this.errorCheck();
+      errorCheck(this.USER_NUMBER);
       this.compareNumbers(this.USER_NUMBER);
     });
   }
@@ -127,21 +127,21 @@ class App {
       return MissionUtils.Console.close();
     });
   }
+}
 
-  errorCheck() {
-    if (
-      this.USER_NUMBER.length === 0 ||
-      [...new Set(this.USER_NUMBER)].length !== 3 ||
-      this.USER_NUMBER.length !== 3 ||
-      this.USER_NUMBER.includes(0) ||
-      isNaN(this.USER_NUMBER.join(''))
-    ) {
-      throw new Error(
-        '잘못된 값을 입력하셨습니다. 1~9까지의 세개의 다른 숫자를 입력해주세요',
-      );
-    }
-    return this.USER_NUMBER;
+function errorCheck(userInput) {
+  if (
+    userInput.length === 0 ||
+    [...new Set(userInput)].length !== 3 ||
+    userInput.length !== 3 ||
+    userInput.includes(0) ||
+    isNaN(userInput.join(''))
+  ) {
+    throw new Error(
+      '잘못된 값을 입력하셨습니다. 1~9까지의 세개의 다른 숫자를 입력해주세요',
+    );
   }
+  return userInput;
 }
 
 module.exports = App;
