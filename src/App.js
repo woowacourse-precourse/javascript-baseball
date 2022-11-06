@@ -16,6 +16,7 @@ class App {
       randomNumberSet.add(Random.pickNumberInRange(1, 9));
     }
     this.computerNum = [...randomNumberSet].join('');
+    console.log(this.computerNum);
     return this.computerNum;
   }
 
@@ -35,7 +36,21 @@ class App {
         strike += 1;
       }
     });
-    return `${strike}스트라이크`;
+    return strike || 0;
+  }
+
+  isBall() {
+    const { computerNum, userInput } = this;
+    let ball = 0;
+    computerNum.split('').forEach((num, idx) => {
+      if (
+        computerNum[idx] !== userInput[idx] &&
+        userInput.includes(computerNum[idx])
+      ) {
+        ball += 1;
+      }
+    });
+    return ball || 0;
   }
 }
 
