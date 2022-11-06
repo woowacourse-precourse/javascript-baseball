@@ -22,9 +22,21 @@ class Computer extends App {
 class User extends App {
   getUserLs () {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      if (answer.length !== 3){
+        throw '3자리 수를 입력하세요.'
+      }
+      else if (this.duplicationCheck(answer) == false){
+        throw '서로 중복되지 않는 수를 입력하세요'
+      }
       MissionUtils.Console.close();
       return answer
     });
+  }
+
+  duplicationCheck (numForCheck){
+    if (numForCheck[0] == numForCheck [1]) return false
+    else if (numForCheck[1] == numForCheck[2]) return false
+    else if (numForCheck[0] == numForCheck[2]) return false
   }
 }
 
