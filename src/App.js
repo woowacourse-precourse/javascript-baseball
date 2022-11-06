@@ -34,12 +34,24 @@ class App {
     this.checkOverlap(num);
   }
 
+  checkBall(comNum, userNum) {
+    let ballCnt = 0;
+    if (comNum[0] == userNum[1]) ballCnt++;
+    if (comNum[0] == userNum[2]) ballCnt++;
+    if (comNum[1] == userNum[0]) ballCnt++;
+    if (comNum[1] == userNum[2]) ballCnt++;
+    if (comNum[2] == userNum[0]) ballCnt++;
+    if (comNum[2] == userNum[1]) ballCnt++;
+    return ballCnt;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
-    const comNumber = this.makeComputerNumber();
+    const comNum = this.makeComputerNumber();
     MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
       this.checkError(num);
       const userNum = String(num).split("");
+      const ballCnt = this.checkBall(comNum, userNum);
     });
   }
 }
