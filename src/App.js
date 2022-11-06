@@ -40,8 +40,7 @@ class App {
   makeInputNum() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputArray = this.inputCheck(input);
-      const resultText = this.compare(inputArray);
-      this.inputisCorrect(resultText);
+      return this.compare(inputArray);
     });
   }
 
@@ -49,18 +48,23 @@ class App {
     const answerArr = this.Answer;
     let ball = 0;
     let strike = 0;
-    let resultText = "";
     userInput.map((num, i) => {
       if (answerArr.includes(num)) {
         if (num === answerArr[i]) strike += 1;
         if (num !== answerArr[i]) ball += 1;
       }
     });
+    return this.compareResult(ball, strike);
+  }
+
+  compareResult(ball, strike) {
+    let resultText = "";
     if (ball !== 0) resultText += `${ball}볼 `;
     if (strike !== 0) resultText += `${strike}스트라이크`;
     if (resultText === "") resultText += `낫싱`;
     Console.print(resultText);
-    return resultText === "3스트라이크";
+    const result = resultText === "3스트라이크";
+    return this.inputisCorrect(result);
   }
 
   endOption() {
