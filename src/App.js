@@ -44,6 +44,11 @@ class App {
       }
     }
   }
+  
+  static finishGame() {
+    MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
+    MissionUtils.Console.close();
+  }
 
   play() {
     App.printGameStart();
