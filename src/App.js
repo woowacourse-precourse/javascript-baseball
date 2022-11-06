@@ -4,6 +4,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.init();
+    this.getUserNumber();
   }
   init() {
     this.computer = [];
@@ -21,6 +22,12 @@ class App {
       }
     }
     MissionUtils.Console.print(this.computer);
+  }
+  getUserNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.user = input.split("");
+      console.log(this.user);
+    });
   }
 }
 const app = new App();
