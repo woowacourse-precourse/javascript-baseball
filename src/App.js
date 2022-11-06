@@ -81,7 +81,7 @@ class App {
 
   getInputAndCompare = (ANSWER) => {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!this.isValid(input)) throw "Invalid input!"; // TODO: or this.checkIsValid() 하고 함수 안에서 throw?
+      if (!this.isValid(input)) throw "Invalid input!";
       this.printResult(ANSWER, input);
     });
   };
