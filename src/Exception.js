@@ -1,9 +1,4 @@
-const exception = Object.freeze({
-  REGEX: /[1-9]/g,
-  RESTART: 1,
-  EXIT: 2,
-  LENGTH: 3,
-});
+const { EXCEPTION } = require('./utils/constants');
 
 class Exception {
   checkErrorFor(errorInstance) {
@@ -25,13 +20,13 @@ class BaseBallException {
 
   #isNumber() {
     return (
-      !!this.#input.match(exception.REGEX) &&
-      this.#input.match(exception.REGEX).length === this.#input.length
+      !!this.#input.match(EXCEPTION.REGEX) &&
+      this.#input.match(EXCEPTION.REGEX).length === this.#input.length
     );
   }
 
   #is3DifferNumber() {
-    return [...new Set(this.#input.split(''))].length === exception.LENGTH;
+    return [...new Set(this.#input.split(''))].length === EXCEPTION.LENGTH;
   }
 
   occurError() {
@@ -50,11 +45,11 @@ class RestartException {
   }
 
   #isRestart() {
-    return this.#input == exception.RESTART;
+    return this.#input == EXCEPTION.RESTART;
   }
 
   #isExit() {
-    return this.#input == exception.EXIT;
+    return this.#input == EXCEPTION.EXIT;
   }
 
   occurError() {
