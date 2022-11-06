@@ -2,13 +2,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     startGame();
+    MissionUtils.Console.print("게임 종료");
     MissionUtils.Console.close();
   }
 }
 
 const startGame = () => {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   const answer = generateAnswer();
   inputNumber(answer);
 
@@ -28,17 +29,39 @@ const generateAnswer = (props) => {
 
 const inputNumber = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 :", (number) => {
-    judgeAnswer(answer, number);
+    const isValidInput = checkExpect(number);
+    if (isValidInput == true) {
+      MissionUtils.Console.print("입력" + number);
+      judgeAnswer(answer, number);
+    } else {
+      MissionUtils.Console.close();
+    }
   });
 
   return;
+};
+
+const checkExpect = (number) => {
+  const numArr = number.split("");
+  const numSet = new Set(numArr);
+
+  if (numArr.length !== numSet.size) {
+    throw "duplicated character";
+    return false;
+  }
+  if (number.length !== 3) {
+    throw "invalid input length";
+    return false;
+  }
+
+  return true;
 };
 
 const judgeAnswer = (answer, number) => {
   let strike = 0;
   let ball = 0;
 
-  for (let i; i < 3; i++) {
+  for (let i = 0; i < 3; i++) {
     if (answer[i] == number[i]) {
       strike += 1;
     }
@@ -64,8 +87,6 @@ const printJudgeResult = (strike, ball, answer) => {
 
   const strikeAns = strike == 0 ? "" : `${strike}스트라이크`;
   const ballAns = ball == 0 ? "" : `${ball}볼 `;
-
-  MissionUtils.Console.print(strikeAns + ballAns);
   inputNumber(answer);
 
   return;
