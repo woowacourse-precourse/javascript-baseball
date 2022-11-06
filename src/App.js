@@ -54,12 +54,11 @@ class App {
   }
 
   countBall(computerNumber, playerNumber) {
-    return playerNumber.reduce((acc, cur) => {
-      if (computerNumber.includes(cur)) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0);
+    return playerNumber.filter((number, index) => {
+      return (
+        computerNumber[index] !== number && computerNumber.includes(number)
+      );
+    }).length;
   }
 
   countStrike(computerNumber, playerNumber) {
