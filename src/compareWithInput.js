@@ -6,7 +6,7 @@ const compareWithInput = (computerNum, userNum) => {
         if (userNum.includes(computerNum[i])) {
           ballCount++;
         }
-        if (userNum[i] === computerNum[i]) {
+        if (userNum[i] == computerNum[i]) {
           strikeCount++;
       }
     }
