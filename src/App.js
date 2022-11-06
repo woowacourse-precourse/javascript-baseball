@@ -4,7 +4,14 @@ class App {
 
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   
-    const computer = [];
+    
+    const computer = init(MissionUtils);
+    game(MissionUtils, computer);
+  }
+}
+
+function init (MissionUtils){
+  const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
@@ -13,9 +20,7 @@ class App {
       }
     }
     MissionUtils.Console.print(computer);
-    
-    game(MissionUtils, computer);
-  }
+    return computer
 }
 
 function game(MissionUtils, computer) {
