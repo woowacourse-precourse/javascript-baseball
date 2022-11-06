@@ -42,7 +42,6 @@ function getUserNumber(computerNumber) {
     const checkResult = countBallAndStrike(computerNumber, userNumber);
 
     const result = printResult(checkResult);
-    console.log(result);
 
     if (result === "end") {
       reStartOrEnd();
@@ -60,8 +59,6 @@ function checkValidityUserNumber(userNumber) {
   const firstNumber = Number(userNumberList[0]);
   const secondNumber = Number(userNumberList[1]);
   const thirdNumber = Number(userNumberList[2]);
-
-  // console.log(firstNumber, secondNumber, thirdNumber);
 
   if (!(userNumberList.length === 3)) {
     throw new Error("3자리의 숫자를 입력하지 않아 에러가 발생하였습니다.");
