@@ -39,6 +39,21 @@ class App {
       if (number === answerNumberList[idx]) result.스트라이크 += 1;
       else if (answerNumberList.includes(number)) result.볼 += 1;
     });
+
+    this.printResult(result);
+  }
+
+  printResult({ 볼: BALL_COUNT, 스트라이크: STRIKE_COUNT }) {
+    const RESULT_BALL = BALL_COUNT === 0 ? '' : `${BALL_COUNT}볼 `;
+    const RESULT_STRIKE = STRIKE_COUNT === 0 ? '' : `${STRIKE_COUNT}스트라이크`;
+    const RESULT_MESSAGE =
+      BALL_COUNT === 0 && STRIKE_COUNT === 0
+        ? '낫싱'
+        : RESULT_BALL + RESULT_STRIKE;
+
+    MissionUtils.Console.print(RESULT_MESSAGE);
+    if (STRIKE_COUNT === 3)
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
   play() {
