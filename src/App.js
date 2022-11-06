@@ -47,6 +47,21 @@ class App {
 
   }
 
+  recieveComputer() {
+    let computerNumber = [];
+
+    while (computerNumber.length < 3) {
+      const number = RANDOM.pickNumberInRange(1, 9);
+
+      if (!computerNumber.includes(number)) {
+        computerNumber.push(number);
+      }
+
+    } 
+
+    return computerNumber.join("");
+  }
+
   newGame(input) {
 
     if (input == 1) {
