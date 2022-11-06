@@ -23,6 +23,16 @@ class App {
   convertInputStringToArray(input) {
     return input.split('').map((character) => Number(character));
   }
+
+  judgeStrikeBall(guessed, target) {
+    const strike = guessed.filter(
+      (number, index) => number === target[index]
+    ).length;
+    const ball =
+      guessed.filter((number) => target.includes(number)).length - strike;
+
+    return { strike, ball };
+  }
 }
 
 module.exports = App;
