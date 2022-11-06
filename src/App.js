@@ -6,6 +6,21 @@ class App {
     this.inputNumber = [];
   }
 
+  restartOrExit() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (number) => {
+        if (number === "1") {
+          this.selectComputerNumber = [];
+          this.selectRandomNum();
+          this.inputNum();
+        } else if (number === "2") {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
+
   getHint() {
     let strike = 0;
     let ball = 0;
@@ -39,6 +54,7 @@ class App {
       } else {
         MissionUtils.Console.print(`${strike}스트라이크`);
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.restartOrExit();
       }
     } else if (strike === 0 && ball !== 0) {
       MissionUtils.Console.print(`${ball}볼`);
