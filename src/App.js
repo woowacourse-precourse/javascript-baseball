@@ -4,6 +4,7 @@ class App {
   play() {}
 
   playNewGame() {
+
   }
 
   readUserInputValue(randomNum){
@@ -12,7 +13,8 @@ class App {
       const inputNum = Number(value);
       if(this.isSameTwoNumber(randomNum,inputNum)){
         this.printAllMatchMessage();
-        MissionUtils.Console.close();
+        this.readUserContinueAnswer();
+        return;
       };
       
       const strikeCount = this.getStrikeCount(randomNum,inputNum);
@@ -30,7 +32,7 @@ class App {
       if(answer === '1'){ this.playNewGame(); }
       if(answer === '2'){ MissionUtils.Console.close(); }
       
-      
+
     })
   }
 
