@@ -12,7 +12,7 @@ class Game {
     this.computerNumber = generateRandomComputerNumber();
     this.gameCount += 1;
 
-    if (this.gameCount === 1) MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    if (this.gameCount === 1) this.print('숫자 야구 게임을 시작합니다.');
 
     this.getUserInputNumber();
   }
@@ -27,10 +27,10 @@ class Game {
   getResult(userInputNumber) {
     const gameCalculator = new CalculateGame(this.computerNumber, userInputNumber);
 
-    MissionUtils.Console.print(gameCalculator.getResult());
+    this.print(gameCalculator.getResult());
 
     if (gameCalculator.checkSuccess()) {
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.askRestart();
     } else {
       this.getUserInputNumber();
