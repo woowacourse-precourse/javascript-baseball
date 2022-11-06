@@ -6,6 +6,55 @@ class App {
     this.inputNumber = [];
   }
 
+  getHint() {
+    let strike = 0;
+    let ball = 0;
+    for (let number of this.selectComputerNumber) {
+      // 스트라이크
+      if (
+        this.inputNumber.includes(number) &&
+        this.selectComputerNumber.indexOf(number) ===
+          this.inputNumber.indexOf(number)
+      ) {
+        strike += 1;
+      }
+      // 볼
+      else if (
+        this.inputNumber.includes(number) &&
+        this.selectComputerNumber.indexOf(number) !==
+          this.inputNumber.indexOf(number)
+      ) {
+        ball += 1;
+      }
+    }
+    this.printHint(strike, ball);
+  }
+
+  printHint(strike, ball) {
+    if (ball === 0 && strike !== 0) {
+      if (strike !== 3) {
+        MissionUtils.Console.print(`${strike}스트라이크`);
+        this.inputNumber = [];
+        this.inputNum();
+      } else {
+        MissionUtils.Console.print(`${strike}스트라이크`);
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      }
+    } else if (strike === 0 && ball !== 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+      this.inputNumber = [];
+      this.inputNum();
+    } else if (strike === 0 && ball === 0) {
+      MissionUtils.Console.print("낫싱");
+      this.inputNumber = [];
+      this.inputNum();
+    } else {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      this.inputNumber = [];
+      this.inputNum();
+    }
+  }
+
   inputNum() {
     // 사용자의 숫자 입력
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
@@ -19,6 +68,9 @@ class App {
           throw "서로 다른 3자리수를 입력하세요.";
         }
       }
+
+      // 힌트 출력
+      this.getHint();
     });
   }
 
