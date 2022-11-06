@@ -47,31 +47,33 @@ class App {
             return strike;
         };
 
-        const printInputResult = (userInput, answer) => {
+        const printMassage = (massage) => {
+            return MissionUtils.Console.print(massage);
+        };
+
+        const inputResult = (userInput, answer) => {
             const BALL = getBallCount(userInput, answer);
             const STRIKE = getStrikeCount(userInput, answer);
             if (BALL === 0 && STRIKE === 0) {
-                return MissionUtils.Console.print("낫싱");
+                return printMassage("낫싱");
             }
             if (BALL === 0) {
-                return MissionUtils.Console.print(`${STRIKE}스트라이크`);
+                return printMassage(`${STRIKE}스트라이크`);
             }
             if (STRIKE === 0) {
-                return MissionUtils.Console.print(`${BALL}볼`);
-            }
-            if (STRIKE === 3) {
-                return MissionUtils.Console.print(`${STRIKE}스트라이크`);
+                return printMassage(`${BALL}볼`);
             }
 
-            return MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+            return printMassage(`${BALL}볼 ${STRIKE}스트라이크`);
         };
 
         const printEndMessage = () => {
-            MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-            MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            printMassage(`3스트라이크`);
+            printMassage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         };
 
         const choosesNextStep = () => {
+            printMassage("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
             MissionUtils.Console.readLine("", (number) => {
                 if (number === "1") {
                     playGame();
@@ -83,15 +85,14 @@ class App {
         };
 
         const getUserInput = (answer) => {
-            console.log(answer);
+            // console.log(answer);
 
             MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
                 if (isCorrect(input, answer)) {
-                    MissionUtils.Console.close();
                     printEndMessage();
                     return choosesNextStep();
                 }
-                printInputResult(input, answer);
+                inputResult(input, answer);
                 getUserInput(answer);
             });
         };
