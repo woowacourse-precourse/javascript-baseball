@@ -7,15 +7,34 @@ class App {
     this.answer = [];
     this.userInput = "";
   }
+  getBall(includeOfNum) {
+    let ballCnt = 0;
+    [...this.userInput].forEach((num, idx) => {
+      if (+num !== this.answer[idx] && includeOfNum[num]) {
+        ballCnt += 1;
+      }
+    });
+
+    return ballCnt;
+  }
 
   createResult() {
     if (this.userInput === "") return "낫싱";
     const includeOfNum = Array.from({ length: 10 }).fill(false);
-    const result = "";
+    let result = "";
 
     this.answer.forEach((num) => {
       includeOfNum[num] = true;
     });
+
+    const ball = this.getBall(includeOfNum);
+    const strike = this.getStrike();
+
+    if (ball === 0 && strike === 0) return "낫싱";
+    if (ball > 0) result += `${ball}볼`;
+    if (ball > 0 && strike > 0) result += " ";
+    if (strike > 0) result += `${strike}스트라이크`;
+
     return result;
   }
 
@@ -45,6 +64,7 @@ class App {
         throw "ERROR";
       }
       this.userInput = input;
+      console.log(this.createResult());
       Console.close();
     });
   }
