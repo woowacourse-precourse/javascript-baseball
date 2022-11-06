@@ -21,4 +21,6 @@ const GAME_PROGRESS = {
   TERMINATE: "2",
 };
 
-module.exports = { MESSAGE, BALL_COUNT, GAME_PROGRESS };
+const ANSWER_LENGTH = 3;
+
+module.exports = { MESSAGE, BALL_COUNT, GAME_PROGRESS, ANSWER_LENGTH };
