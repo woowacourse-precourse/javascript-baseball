@@ -40,10 +40,10 @@ class BaseballGame {
     const playerInput = (answer) => {
       const isThreeStrike = this.gameHint.checkPlayerInput(this.randomNumbers, answer);
       if (isThreeStrike) {
-        this.gameOver();
-      } else {
-        this.getPlayerInput();
+        return this.gameOver();
       }
+
+      this.getPlayerInput();
     };
 
     Console.readLine(`${INPUT_MESSGAE}`, playerInput);
