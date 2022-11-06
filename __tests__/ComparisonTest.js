@@ -34,7 +34,7 @@ describe("숫자 값을 비교하기", () => {
     const answers = [1, 2, 3];
 
     let inputs = [1, 3, 2];
-    const result = app.compareNumbers(answers, inputs);
+    const result = app.compareToAnswer(answers, inputs);
     expect(result).toEqual({ strike: 1, ball: 2 });
   });
 });
