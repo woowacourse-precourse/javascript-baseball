@@ -12,9 +12,12 @@ class App {
   }
 
   getUserDigits() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.checkInputValidity(userInput);
-      this.userDigits = [...userInput];
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+        this.checkInputValidity(userInput);
+        this.userDigits = [...userInput];
+        resolve();
+      });
     });
   }
 
@@ -51,9 +54,9 @@ class App {
     MissionUtils.Console.print(scoreSentence);
   }
 
-  play() {
+  async play() {
     this.generateThreeDigits();
-    this.getUserDigits();
+    await this.getUserDigits();
     this.countScore();
     this.printScore();
   }
