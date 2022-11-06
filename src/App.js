@@ -57,6 +57,18 @@ class App {
     if (ballCnt == 0 && strikeCnt == 0) return 1;
   }
 
+  printResult(ballCnt, strikeCnt) {
+    if (this.checkNothing(ballCnt, strikeCnt)) {
+      MissionUtils.Console.print("낫싱\n");
+    } else if (ballCnt != 0 && strikeCnt != 0) {
+      MissionUtils.Console.print(`${ballCnt}볼 ${strikeCnt}스트라이크\n`);
+    } else if (ballCnt == 0 && strikeCnt != 0) {
+      MissionUtils.Console.print(`${strikeCnt}스트라이크\n`);
+    } else if (ballCnt != 0 && strikeCnt == 0) {
+      MissionUtils.Console.print(`${ballCnt}볼\n`);
+    }
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     const comNum = this.makeComputerNumber();
@@ -65,6 +77,7 @@ class App {
       const userNum = String(num).split("");
       const ballCnt = this.checkBall(comNum, userNum);
       const strikeCnt = this.checkStrike(comNum, userNum);
+      this.printResult(ballCnt, strikeCnt);
     });
   }
 }
