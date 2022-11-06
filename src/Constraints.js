@@ -53,7 +53,7 @@ class CheckConstraints {
     return true;
   }
 
-  checkRePlayInput(userInput) {
+  checkRePlayInputConstraints(userInput) {
     if (userInput === "1" || userInput === "2") {
       return true;
     }
