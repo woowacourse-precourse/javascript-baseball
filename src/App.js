@@ -15,6 +15,7 @@ class App {
     gameStart() {
         Console.print("gameStart()-------------------");
         this.makeRandomNumber();
+        this.questionNumber();
 
         this.gameFinish();
     }
@@ -31,6 +32,11 @@ class App {
         Console.print(this.computer);
     }
 
+    questionNumber() {
+        Console.print("questionNumber()-----------------");
+        Console.readLine(MESSAGE.NUMBERQUESTION, (numberInput) => {});
+    }
+
     gameFinish() {
         Console.print("gameFinish()-------------------");
         this.questionFinish();
@@ -38,24 +44,24 @@ class App {
 
     questionFinish() {
         Console.print("questionFinish()-------------------");
-        Console.readLine(MESSAGE.FINISHQUESTION, (userInput) => {
-            if (this.restartGame(userInput)) {
+        Console.readLine(MESSAGE.FINISHQUESTION, (finishInput) => {
+            if (this.restartGame(finishInput)) {
                 return this.gameStart();
             }
-            if (this.finishGame(userInput)) {
+            if (this.finishGame(finishInput)) {
                 return Console.close();
             }
             throw new Error(MESSAGE.ERROR);
         });
     }
 
-    restartGame(userInput) {
+    restartGame(finishInput) {
         Console.print("restartGame()-------------------");
-        return userInput === "1";
+        return finishInput === "1";
     }
-    finishGame(userInput) {
+    finishGame(finishInput) {
         Console.print("finishGame()-------------------");
-        return userInput === "2";
+        return finishInput === "2";
     }
 }
 
