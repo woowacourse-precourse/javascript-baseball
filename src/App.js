@@ -9,6 +9,8 @@ class App {
 
   getUserNumbers() {
     Console.readLine('숫자를 입력해주세요 :', (userNumber) => {
+      if (!this.checkValidation(userNumber))
+        throw new Error('형식에 맞는 숫자를 입력해주세요.');
       this.changeUserNumbersToArray(userNumber);
     });
   }
@@ -16,6 +18,17 @@ class App {
   changeUserNumbersToArray(userNumber) {
     const changeNumber = (string) => Number(string);
     this.userNumberArray = Array.from(userNumber, changeNumber);
+  }
+
+  checkValidation(userNumber) {
+    if (
+      !this.checkTypeNumber(userNumber) ||
+      !this.checkLength(userNumber) ||
+      !this.checkRange(userNumber) ||
+      !this.checkDuplication(userNumber)
+    )
+      return false;
+    return true;
   }
 
   checkTypeNumber(userNumber) {
