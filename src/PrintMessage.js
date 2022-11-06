@@ -20,6 +20,13 @@ function printNumOfStrike(numOfStrike){
     }
 }
 
+function printNumOfBall(numOfBall) {
+    if(numOfBall > 0) {
+        const NUM_OF_BALL_MESSAGE = `${numOfBall}볼\n`;
+        MissionUtils.Console.print(NUM_OF_BALL_MESSAGE);
+    }
+}
+
 function printGameWin() {
     const GAME_WIN_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n";
     MissionUtils.Console.print(GAME_WIN_MESSAGE);
