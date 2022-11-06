@@ -4,7 +4,7 @@ const BaseBall = require('./BaseBall');
 const RandomNumber = require('./RandomNumber');
 
 const { COMMAND } = require('./utils/constants');
-const { Exception, BaseBallException, RestartException } = require('./Exception');
+const { Exception, NextException, BaseBallException } = require('./Exception');
 
 class App {
   #exception;
@@ -36,7 +36,7 @@ class App {
   doNext() {
     Console.readLine(`${COMMAND.NEXT_QUESTION}\n`, (input) => {
       this.print(COMMAND.STRIKEOUT);
-      this.#exception.checkErrorFor(new RestartException(input));
+      this.#exception.checkErrorFor(new NextException(input));
 
       input === COMMAND.RESTART ? this.enter(RandomNumber.makeNew()) : this.end();
     });
