@@ -1,7 +1,11 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const { MESSAGE, PLAYING } = require("./Message");
 
 class App {
+    constructor() {
+        this.computer = [];
+    }
+
     play() {
         Console.print("play()-------------------");
         Console.print(MESSAGE.START);
@@ -10,18 +14,31 @@ class App {
 
     gameStart() {
         Console.print("gameStart()-------------------");
+        this.makeRandomNumber();
+
         this.gameFinish();
+    }
+
+    makeRandomNumber() {
+        this.computer = [];
+        while (this.computer.length < 3) {
+            const number = Random.pickNumberInRange(1, 9);
+            if (!this.computer.includes(number)) {
+                this.computer.push(number);
+            }
+        }
+        Console.print("makeRandomNumber()-----------------");
+        Console.print(this.computer);
     }
 
     gameFinish() {
         Console.print("gameFinish()-------------------");
-        Console.print(MESSAGE.FINISH);
         this.questionFinish();
     }
 
     questionFinish() {
         Console.print("questionFinish()-------------------");
-        Console.readLine(MESSAGE.FINISH, (userInput) => {
+        Console.readLine(MESSAGE.FINISHQUESTION, (userInput) => {
             if (this.restartGame(userInput)) {
                 return this.gameStart();
             }
@@ -33,9 +50,11 @@ class App {
     }
 
     restartGame(userInput) {
+        Console.print("restartGame()-------------------");
         return userInput === "1";
     }
     finishGame(userInput) {
+        Console.print("finishGame()-------------------");
         return userInput === "2";
     }
 }
