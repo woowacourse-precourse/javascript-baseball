@@ -1,6 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
 
+const GAME_MESSAGE = {
+  START: '숫자 야구 게임을 시작합니다.',
+  INPUT_NUMBER: '숫자를 입력해주세요 : ',
+  GUESS_ALL_NUMBER: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  RESTART_OR_END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  ERROR:
+    '잘못된 값을 입력하셨습니다. 1~9까지의 세개의 다른 숫자를 입력해주세요',
+};
+
 class App {
   constructor() {
     this.ANSWER_NUMBER = [];
@@ -12,7 +21,7 @@ class App {
 
   play() {
     if (this.isFirstPlay) {
-      Console.print('숫자 야구 게임을 시작합니다.');
+      Console.print(GAME_MESSAGE.START);
     }
     this.createAnswerNumber();
     this.getUserNumber();
@@ -30,7 +39,7 @@ class App {
 
   getUserNumber() {
     this.USER_NUMBER = [];
-    Console.readLine('숫자를 입력해주세요 : ', userinput => {
+    Console.readLine(GAME_MESSAGE.INPUT_NUMBER, userinput => {
       this.USER_NUMBER = userinput.split('').map(Number);
       errorCheck(this.USER_NUMBER);
       this.compareNumbers(this.USER_NUMBER);
@@ -66,7 +75,7 @@ class App {
 
     if (isThreeStrike) {
       Console.print('3스트라이크');
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      Console.print(GAME_MESSAGE.GUESS_ALL_NUMBER);
       return this.askRestartOrExit();
     }
     return false;
@@ -118,7 +127,7 @@ class App {
   }
 
   askRestartOrExit() {
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.print(GAME_MESSAGE.RESTART_OR_END);
     Console.readLine('', userInput => {
       if (userInput === '1') {
         this.isFirstPlay = false;
@@ -137,9 +146,7 @@ function errorCheck(userInput) {
     userInput.includes(0) ||
     isNaN(userInput.join(''))
   ) {
-    throw new Error(
-      '잘못된 값을 입력하셨습니다. 1~9까지의 세개의 다른 숫자를 입력해주세요',
-    );
+    throw new Error(GAME_MESSAGE.ERROR);
   }
   return userInput;
 }
