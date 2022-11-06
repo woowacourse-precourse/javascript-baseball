@@ -89,8 +89,14 @@ const playGame = (computerNumber) => {
 }
 
 const generateRandomBallNumber = () => {
-    const computerAnswer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return computerAnswer.join('');
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer.join('');
 }
 
 const init = () => {
