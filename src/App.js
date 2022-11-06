@@ -12,6 +12,7 @@ class App {
     MissionUtils.Console.readLine(Notice.INPUT_NUM,(input) => {
       this.exceptionThrow(input)
       const Strike = this.caculateStrike(this.AnswerNumber,input)
+      const Ball = this.cacluateBall(this.AnswerNumber,input)
 
     });
   }
@@ -24,7 +25,7 @@ class App {
         }
       }
       return [...Randomnumber].join("");
-  }
+  };
   exceptionThrow(num){
     if (num.length !=3){
       throw Notice.THROW_NOTICE
@@ -50,7 +51,22 @@ class App {
       }
     });
     return strikeCnt;
-  };
+  }
+  cacluateBall(computernum, inputnum){
+    let ballCnt = 0;
+    const arrcomputernum = [...computernum]
+    const arrinputnum = [...inputnum]
+    arrcomputernum.forEach((arrcomputernum, idx) => {
+      if (
+        arrcomputernum !== arrinputnum[idx] &&
+        arrinputnum.includes(arrcomputernum)
+      ) {
+        ballCnt += 1;
+      }
+    });
+  
+    return ballCnt;
+  }
 }
 
 module.exports = App;
