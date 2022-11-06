@@ -68,8 +68,14 @@ class App {
 
 
   getRandomThreeDigitsNumber() {
-    const number = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return Number(number.join(""));
+    const number = [];
+    while (number.length < 3) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!number.includes(randomNum)) {
+        number.push(randomNum);
+      }
+    }
+    return number.join('');
   }
 
 
