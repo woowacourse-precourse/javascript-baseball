@@ -229,4 +229,20 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("initialize 메서드 실행 시 computerNumber가 초기화된다.", () => {
+    const app = new App();
+    app.computerNumber = [1, 2, 3];
+    app.initialize();
+
+    expect(app.computerNumber).toEqual([]);
+  });
+
+  test("initialize 메서드 실행 시 playerNumber가 초기화된다.", () => {
+    const app = new App();
+    app.playerNumber = [1, 2, 3];
+    app.initialize();
+
+    expect(app.playerNumber).not.toEqual([1, 2, 3]);
+  });
 });
