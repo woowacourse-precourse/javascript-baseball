@@ -19,6 +19,22 @@ describe('정답 생성', () => {
 
     expect(app.answer.length).toBe(3);
     expect(new Set(app.answer).size).toBe(3);
-    expect([...app.answer].every((number) => number >= 1 && number <= 9)).toBe(true);
+    expect([...app.answer].every((number) => number >= 1 && number <= 9)).toBe(
+      true,
+    );
+  });
+});
+
+describe('사용자 숫자 입력', () => {
+  test('사용자 숫자 입력', () => {
+    const spy = jest.spyOn(MissionUtils.Console, 'readLine');
+
+    const app = new App();
+    app.getGuess();
+
+    expect(spy).toHaveBeenCalledWith(
+      '숫자를 입력해주세요 : ',
+      expect.any(Function),
+    );
   });
 });

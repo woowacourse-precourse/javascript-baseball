@@ -16,6 +16,12 @@ class App {
       }
     }
   }
+
+  getGuess() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.guess = input;
+    });
+  }
 }
 
 module.exports = App;
