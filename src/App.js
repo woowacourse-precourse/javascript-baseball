@@ -23,6 +23,10 @@ class App {
         strikeCount = 0;
         ballCount = 0;
         nothing = 0;
+        // 예외 처리
+        if (answer.length > 3) {
+          throw "잘못된 값 입력";
+        }
         // 스트라이크, 볼, 낫싱 체크
         computer.map((e, i) => {
           if (answer.includes(e)) {
