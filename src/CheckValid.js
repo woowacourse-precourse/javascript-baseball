@@ -68,7 +68,7 @@ class CheckInputValid {
         "입력은 1또는 2만 가능합니다. 2개 이상 입력할 수 없습니다."
       );
     }
-    if (checkBlank(this.retryNum) === false) {
+    if (checkBlank(String(this.retryNum)) === false) {
       throw new Error("공백은 입력할 수 없습니다");
     }
   }

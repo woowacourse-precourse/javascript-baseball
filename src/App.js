@@ -43,6 +43,7 @@ class App {
       this.strikeCount = strikeCount;
 
       render.result({ ballCount: this.ball, strikeCount: this.strikeCount });
+      console.log(this.computerInput);
 
       if (this.strikeCount !== 3) {
         this.firstTry = false;
@@ -50,21 +51,26 @@ class App {
       }
       if (this.strikeCount === 3) {
         render.replayQnA().then((userSelection) => {
-          this.replayQnAResult = userSelection;
+          this.replayQnAResult = numToArr(userSelection);
+
+          const checkRetry = new CheckInputValid({
+            userNum: this.userNum,
+            retryNum: this.replayQnAResult,
+          });
 
           try {
-            checkInputValid.checkRetryInput();
+            checkRetry.checkRetryInput();
           } catch (error) {
             throw new Error(error);
           }
 
-          if (this.replayQnAResult === "1") {
+          if (this.replayQnAResult === ["1"]) {
             this.firstTry = true;
             this.computerInput = ComputerInput();
             this.play();
           }
 
-          if (this.replayQnAResult === "2") {
+          if (this.replayQnAResult === ["2"]) {
             MissionUtils.Console.print("수고하셨습니다!🎉");
           }
         });
