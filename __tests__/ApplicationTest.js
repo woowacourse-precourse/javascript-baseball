@@ -58,7 +58,7 @@ describe('숫자 야구 게임', () => {
     });
 });
 
-describe.only('Test', () => {
+describe('Test', () => {
     test('입력 받은 수가 세자리 수가 아닌 경우(2자리)', () => {
         expect(() => {
             const exception = new Exception('12');
