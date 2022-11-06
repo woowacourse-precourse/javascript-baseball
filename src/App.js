@@ -77,9 +77,12 @@ class App {
         if (num === '1') {
           return this.play();
         }
+
         if (num === '2') {
           process.exit();
         }
+
+        throw '잘못된 숫자 입력';
       },
     );
   }
