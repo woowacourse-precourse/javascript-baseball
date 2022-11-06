@@ -3,15 +3,13 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   #randomNumber = [];
 
-  #userInput = [];
-
   play() {
-    this.#randomNumber = App.getRandomNumber();
-    this.getUserInput();
+    this.#randomNumber = App.generateRandomNumber();
+    this.askUserInput();
   }
 
   // 컴퓨터가 사용할 랜덤한 숫자를 구하는 기능
-  static getRandomNumber() {
+  static generateRandomNumber() {
     const randomSet = new Set();
     while (randomSet.size < 3) {
       randomSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
@@ -20,14 +18,19 @@ class App {
   }
 
   // 사용자의 입력을 받는 기능
-  getUserInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
-      if (!App.isValidUserInput(answer)) {
-        throw new Error('잘못된 값을 입력하였습니다!');
-      }
-      this.#userInput = [...answer].map(number => +number);
-      this.getComputerOutput();
-    });
+  askUserInput() {
+    MissionUtils.Console.readLine(
+      '숫자를 입력해주세요 : ',
+      this.handleUserInput.bind(this),
+    );
+  }
+
+  handleUserInput(answer) {
+    if (!App.isValidUserInput(answer)) {
+      throw new Error('잘못된 값을 입력하였습니다!');
+    }
+    const userInput = [...answer].map(number => +number);
+    this.getComputerOutput(userInput);
   }
 
   // 사용자가 입력한 값이 적절한지 검증하는 기능
@@ -40,8 +43,8 @@ class App {
   }
 
   // 사용자가 입력한 값을 판단하여 결과를 출력하는 기능
-  getComputerOutput() {
-    const ballStrikeMap = this.getBallAndStrikeMap();
+  getComputerOutput(userInput) {
+    const ballStrikeMap = this.getBallAndStrikeMap(userInput);
     const ball = ballStrikeMap.get('BALL');
     const strike = ballStrikeMap.get('STRIKE');
     let result = '';
@@ -63,15 +66,15 @@ class App {
   }
 
   // 사용자가 입력한 값을 볼, 스트라이크로 판단하는 기능
-  getBallAndStrikeMap() {
-    const ballStrikeMap = this.#userInput.reduce((acc, number, idx) => {
+  getBallAndStrikeMap(userInput) {
+    const ballStrikeMap = userInput.reduce((acc, number, idx) => {
       const isIncluded = this.#randomNumber.includes(number);
       const targetIndex = this.#randomNumber.indexOf(number);
       if (isIncluded && idx !== targetIndex) {
-        acc.set('BALL_COUNT', (acc.get('BALL_COUNT') || 0) + 1);
+        acc.set('BALL', (acc.get('BALL') || 0) + 1);
       }
       if (isIncluded && idx === targetIndex) {
-        acc.set('STRIKE_COUNT', (acc.get('STRIKE_COUNT') || 0) + 1);
+        acc.set('STRIKE', (acc.get('STRIKE') || 0) + 1);
       }
       return acc;
     }, new Map());
