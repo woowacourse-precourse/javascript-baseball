@@ -23,8 +23,12 @@ describe('1과 2가 아니라면 에러 발생', () => {
     expect(() => isValidRestartInputValue('qwe')).toThrow();
   });
 
-  test('case1', () => {
+  test('case3', () => {
     expect(() => isValidRestartInputValue('@')).toThrow();
+  });
+
+  test('case4', () => {
+    expect(() => isValidRestartInputValue('')).toThrow();
   });
 });
 
@@ -43,6 +47,10 @@ describe('1~9에 속한 세자리 숫자가 아니라면 에러 발생', () => {
 
   test('case4', () => {
     expect(() => isValidRangeNumber('12#')).toThrow();
+  });
+
+  test('case5', () => {
+    expect(() => isValidRangeNumber('')).toThrow();
   });
 });
 
