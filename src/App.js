@@ -1,5 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./data/constants');
+const CheckException = require('./utils');
 
 class App {
   randomArr() {
@@ -8,6 +9,7 @@ class App {
 
   recursiveInput() {
     Console.readLine(MESSAGE.INPUT, inputNum => {
+      CheckException(inputNum, 3);
       this.restart();
     });
   }
