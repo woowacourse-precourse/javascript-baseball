@@ -35,9 +35,19 @@ class App {
     }
     return false;
   }
-  
+
+  static getComputerNumber() {
+    while (1) {
+      let computerNum = String(MissionUtils.Random.pickNumberInRange(100, 999));
+      if (App.isCorrectInput(computerNum)) {
+        return computerNum;
+      }
+    }
+  }
+
   play() {
     App.printGameStart();
+    let computerNum = App.getComputerNumber();
   }
 }
 
