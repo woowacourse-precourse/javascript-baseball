@@ -6,6 +6,7 @@ import {
   isThree,
   isAllDifferent,
 } from "./utils/inputCheck.js";
+import { isCompare } from "./utils/compareNumber.js";
 class App {
   #userNumber;
   #computerNumber;
@@ -13,6 +14,7 @@ class App {
   constructor() {
     this.#userNumber = "";
     this.#computerNumber = "";
+    this.getScore = [];
   }
   // 게임 시작 출력
   printStart() {
@@ -30,6 +32,7 @@ class App {
         Console.print("잘못된 숫자를 입력하였습니다.");
       this.#userNumber = [...input];
     });
+    this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
   }
   // 컴퓨터 랜덤 숫자 생성
   makeComputerRandomNumbers() {
@@ -41,10 +44,28 @@ class App {
     }
     this.#randomNumber = [...this.#randomNumber];
   }
+  // 결과 출력
+  printResult() {
+    const { ball, strike } = this.getScore;
 
-  // 게임 플레이
+    const ballMessage = `${ball ? `${ball}볼 ` : ""}`;
+    const strikeMessage = `${strike ? `${strike}스트라이크 ` : ""}`;
+    const nothingMessage = `${!strike && !ball ? "낫싱" : ""}`;
+
+    Console.print(ballMessage + strikeMessage + nothingMessage);
+    if (strike === 3)
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    else this.getUserInput();
+  }
+  // 게임 시작 - 랜덤 숫자 생성, 플레이어 숫자 입력
+  gameStart() {
+    this.makeComputerRandomNumbers();
+    this.getUserInput();
+  }
+  // 플레이 - 시작문 출력, 게임 시작
   play() {
     this.printStart();
+    this.gameStart();
   }
 }
 
