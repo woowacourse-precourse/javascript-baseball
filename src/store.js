@@ -6,9 +6,13 @@ const computerStore = (() => {
         store.push(newStore)
     };
 
+    const resetStore = () => {
+        store = [];
+    }
+
     return (newStore) => {
         if (newStore) setStore(newStore);
-        return [getStore(), setStore];
+        return [getStore, setStore, resetStore];
     }
 })();
 
