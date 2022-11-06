@@ -113,19 +113,33 @@ class App {
   checkThreeStrike(gameResult, computerInputNumbers) {
     if (gameResult.includes('3스트라이크')) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      return this.choiceRestartAndEnd();
+      return this.getUserAnswer();
     }
   }
 
-  choiceRestartAndEnd() {
+  getUserAnswer() {
     MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (answer) => {}
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (userAnswer) => {
+        this.choiceRestartAndEnd(userAnswer);
+      }
     );
+  }
+
+  choiceRestartAndEnd(userAnswer) {
+    if (userAnswer !== 1 || userAnswer !== 2) {
+      throw '숫자 1과 2중 하나만 입력해주세요';
+    }
+    if (userAnswer === 1) {
+      return this.playBaseballGame();
+    }
+    if (userAnswer === 2) {
+      return MissionUtils.Console.print('게임 종료');
+    }
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
