@@ -51,6 +51,20 @@ class App {
       return false;
     return true;
   }
+
+  getHint(answer,inputNumber){
+    let strike = 0;
+    let ball = 0;
+    let result='';
+    for(let idx=0;idx<answer.length;idx++){
+      result = this.judgeStrikeOrBall(answer,inputNumber,idx)
+      if(result=='strike') strike+=1
+      else if(result=='ball') ball+=1
+    }
+    let hintString='';
+    hintString = this.makeHintString(strike,ball)
+    return hintString;
+  }
 }
 
 module.exports = App;
