@@ -21,7 +21,23 @@ class App {
       user = answer
     });
 
-    console.log(user)
+    // 입력값 예외 처리
+    //숫자인지 체크
+    if(isNaN(user)){ 
+      throw new Error('에러');
+      console.log('숫자가 아님')
+    }
+    // 3자리인지 체크
+    if(user.length != 3){
+      throw new Error('에러');
+      console.log('3자리가 아님')
+    }
+    // 서로 다른 숫자인지 체크
+    let numberCheck = new Set(user);
+    if(numberCheck.size != user.length){
+      throw new Error('에러');
+      console.log('서로 다른 숫자가 아님')
+    }
 
   }
 }
