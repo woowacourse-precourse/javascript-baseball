@@ -1,4 +1,8 @@
 class Computer {
+    constructor(){
+        this.balls=[];
+        this.setBalls();
+    }
 
     setBalls(){
         while (this.balls.length < 3) {
@@ -9,6 +13,9 @@ class Computer {
         }
     }
 
+    getBalls(){
+        return this.balls;
+    }
 }
 
 module.exports = Computer;
