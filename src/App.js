@@ -96,12 +96,12 @@ class App {
       (userInput) => {
         this.constraints.checkRePlayInputConstraints(userInput);
 
-        this.decideReStart(userInput);
+        this.decideRePlay(userInput);
       }
     );
   }
 
-  decideReStart(userInput) {
+  decideRePlay(userInput) {
     if (userInput === "1") {
       this.play();
 
