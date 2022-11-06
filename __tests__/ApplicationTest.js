@@ -86,4 +86,11 @@ describe.only('Test', () => {
             exception.checkException();
         }).toThrow('서로 다른 수를 입력해주세요.');
     });
+
+    test('입력 받은 수에 0이 포함된 경우', () => {
+        expect(() => {
+            const exception = new Exception('120');
+            exception.checkException();
+        }).toThrow('1 ~ 9 사이에 숫자를 입력해주세요.');
+    });
 });
