@@ -67,7 +67,7 @@ class App {
 
   checkGameResult(computerInputNumbers, userNumbers) {
     const gameScore = this.calculateGameScore(computerInputNumbers, userNumbers);
-    const gameResult = this.printGameScore(computerInputNumbers, userNumbers);
+    const gameResult = this.printGameScore(gameScore);
   }
 
   calculateGameScore(computerInputNumbers, userNumbers) {
@@ -86,6 +86,27 @@ class App {
       }
     });
     return [ballCount, strikeCount];
+  }
+
+  printGameScore(gameScore) {
+    const scoreBallAndStrike = [
+      { name: 볼, score: gameScore[0] },
+      { name: 스트라이크, score: gameScore[1] },
+    ];
+
+    let checkedScore = scoreBallAndStrike.filter((item) => {
+      return item.gameScore >= 1;
+    });
+
+    let gameOutcome = checkedScore.map((item) => {
+      return `${item.score} ${item.name}`;
+    });
+
+    if (gameOutcome.length === 0) {
+      gameOutcome = '낫싱';
+    }
+    MissionUtils.Console.print(gameOutcome);
+    return gameOutcome;
   }
 }
 
