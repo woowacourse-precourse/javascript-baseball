@@ -6,7 +6,7 @@ const inputNumbers = () => {
         if (!isVaildNumber(inputNum)) { 
             throw new Error('잘못된 값입니다. 1부터 9까지 서로 다른 3자리 수를 입력하세요.');
         } 
-        return String(inputNum).split('');
+        return inputNum;
     });
     MissionUtils.Console.close();
 }
