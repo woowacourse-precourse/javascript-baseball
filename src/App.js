@@ -28,6 +28,13 @@ class App {
       else this.inputPlayerNumber();
     });
   }
+
+  getHintOrThrowError(inputNumber){
+    if(!this.isValidInput(inputNumber)){
+      throw new Error('입력이 잘못되었습니다. 애플리케이션을 종료합니다.');
+    }
+    this.hintString = this.getHint(this.answer,inputNumber);
+  }
 }
 
 module.exports = App;
