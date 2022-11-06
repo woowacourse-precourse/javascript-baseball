@@ -15,14 +15,14 @@ class NumberBaseballGameManager {
   }
 
   reset() {
-    this.computerNumbers = this.getRandomNumberArray();
+    this.computerNumbers = this.getRandomNumberArray(RANDOM_NUMBER_COUNT);
     this.isGameOver = false;
   }
 
-  getRandomNumberArray() {
+  getRandomNumberArray(arrayLength) {
     const numberSet = new Set();
 
-    while (numberSet.size !== RANDOM_NUMBER_COUNT) {
+    while (numberSet.size !== arrayLength) {
       numberSet.add(
         Random.pickNumberInRange(
           MIN_RANDOM_NUMBER_LIMIT,
