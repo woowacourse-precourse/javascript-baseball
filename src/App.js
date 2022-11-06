@@ -21,23 +21,16 @@ class App {
       else{
         MissionUtils.Console.print(`${ball}볼`)  
       }
-      this.Restart()
-    }else if(strike===1){
+      this.Input();
+    }else if(strike!==3){
       if(ball===0)
-        MissionUtils.Console.print(`1스트라이크`)
+        MissionUtils.Console.print(`${strike}스트라이크`)
       else{
-        MissionUtils.Console.print(`${ball}볼 1스트라이크`)
+        MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
       }
-      this.Restart()
-    }else if(strike===2){
-      if(ball===0)
-        MissionUtils.Console.print(`2스트라이크`)
-      else{
-        MissionUtils.Console.print(`${ball}볼 2스트라이크`)
-      }
-      this.Restart()
+      this.Input();
     }else if(strike===3){
-      MissionUtils.Console.print("3스트라이크")
+      MissionUtils.Console.print(`${strike}스트라이크`)
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
       this.AllCorrect()
     }  
@@ -58,9 +51,6 @@ class App {
     this.Printlog(strike,ball)
   }
 
-  Restart(){
-    this.Input();
-  }
   AllCorrect(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       if(answer.length!==1)throw("Request is failed")
@@ -100,8 +90,5 @@ class App {
       this.Input()
     }
 }
-
-let N=new App()
-N.play()
 
 module.exports = App;
