@@ -28,6 +28,9 @@ class App {
   }
 
   countScore() {
+    this.score.strikes = 0;
+    this.score.balls = 0;
+
     for (let i = 0; i < 3; i++) {
       if (this.threeDigits[i] === this.userDigits[i]) {
         this.score.strikes += 1;
