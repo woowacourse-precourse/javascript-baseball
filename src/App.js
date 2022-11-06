@@ -47,6 +47,7 @@ class App {
     });
     this.getBothArrays(userNumberArray);
   }
+  
   getBothArrays(userNumberArray) {
     let userArray = userNumberArray;
     this.compareNumbers(userArray);
