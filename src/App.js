@@ -98,7 +98,7 @@ class App {
         if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
         
         score = App.calculateScore(computerNum, userInput);
-        console.log(computerNum);
+        
         if (App.isThreeStrike(score)) {
           MissionUtils.Console.readLine('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
             (selectInput) => {
