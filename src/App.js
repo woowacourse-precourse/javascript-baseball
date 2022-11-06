@@ -32,8 +32,12 @@ class App {
       !this.isVaildLength(input) ||
       !this.isAllDiffNum(input)
     ) {
-      throw new Error("유효한 값이 아니므로 게임을 종료합니다.");
+      this.toThrow();
     }
+  }
+
+  toThrow() {
+    throw new Error("유효한 값이 아니므로 게임을 종료합니다.");
   }
 
   getHint(input) {
