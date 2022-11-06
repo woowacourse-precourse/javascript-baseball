@@ -34,7 +34,9 @@ class App {
         Console.print('낫싱');
         this.getUsersPrediction(randomNumber);
       } else {
-        console.log(this.calculateCount(randomNumber, convertedNumber));
+        const [ballCount, strikeCount] = this.calculateCount(randomNumber, convertedNumber);
+        this.showCountMessage(ballCount, strikeCount);
+        this.getUsersPrediction(randomNumber);
       }
     })
   }
@@ -59,6 +61,16 @@ class App {
       }
     });
     return [ballCount, strikeCount];
+  }
+
+  showCountMessage(ballCount, strikeCount) {
+    if (ballCount === 0) {
+      Console.print(`${strikeCount}스트라이크`);
+    } else if (strikeCount === 0) {
+      Console.print(`${ballCount}볼`);
+    } else {
+      Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    }
   }
 }
 
