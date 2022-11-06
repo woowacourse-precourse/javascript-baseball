@@ -12,6 +12,8 @@ const MESSAGE = {
   WRONG_INPUT: '잘못된 입력입니다.',
 };
 
+const ANSWER_LENGTH = 3;
+
 const GAME_END = {
   RESTART: '1',
   EXIT: '2',
@@ -38,7 +40,7 @@ class App {
 
   generateAnswer() {
     this.answer = '';
-    while (this.answer.length < 3) {
+    while (this.answer.length < ANSWER_LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
         this.answer += number;
@@ -52,7 +54,7 @@ class App {
       this.checkGuessInput();
       this.calculateBallCount();
       this.printBallCount();
-      if (this.ballCount.strike === 3) {
+      if (this.ballCount.strike === ANSWER_LENGTH) {
         this.printGameEndMessage();
         this.processGameEnd();
         return;
@@ -63,8 +65,8 @@ class App {
 
   checkGuessInput() {
     if (
-      this.guess.length !== 3
-      || new Set(this.guess).size !== 3
+      this.guess.length !== ANSWER_LENGTH
+      || new Set(this.guess).size !== ANSWER_LENGTH
       || [...this.guess].some((number) => number < '1' || number > '9')
     ) {
       throw new Error(MESSAGE.WRONG_INPUT);
