@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { createRandomNumber } = require('../computer/computer');
+const { NUMBER_LENGTH } = require('../constant/constant');
 const inputValidator = require('../input/validator');
 const Calculator = require('./Calculator');
 
@@ -31,16 +32,20 @@ class BaseballGame {
       this.randomNumber
     );
 
-    if (!ball && !strike) Console.print('낫싱');
-    if (strike === 3) {
+    this.printResult(ball, strike);
+  }
+
+  printResult(ball, strike) {
+    if (!ball && !strike) return Console.print('낫싱');
+
+    if (strike === NUMBER_LENGTH) {
       this.isCorrect = true;
-      Console.print(
+      return Console.print(
         `${strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
     }
-    if (strike !== 3) {
-      Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
+
+    return Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 
   startGame() {
