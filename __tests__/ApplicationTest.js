@@ -54,6 +54,19 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
+  test('게임 재시작 답변에 대한 예외 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '3'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test('범위 안에 있는 숫자인지에 대한 예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['012'];
