@@ -1,19 +1,19 @@
 const { GAME_MESSAGE } = require('../constants/baseball');
 
 class BaseballHelper {
-  static calculateBallStrikeCount(computerNumbers, userNumbers) {
+  static countBallAndStrike(computerDigits, userDigits) {
     const ballStrikeCount = {
       ball: 0,
       strike: 0,
     };
 
-    userNumbers.forEach((number, i) => {
-      if (number === computerNumbers[i]) {
+    userDigits.forEach((digit, i) => {
+      if (digit === computerDigits[i]) {
         ballStrikeCount.strike += 1;
         return;
       }
 
-      if (computerNumbers.includes(number)) {
+      if (computerDigits.includes(digit)) {
         ballStrikeCount.ball += 1;
       }
     });

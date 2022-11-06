@@ -16,7 +16,7 @@ class App {
   }
 
   play() {
-    this.#computer.setNumbers();
+    this.#computer.setDigits();
     Console.print(GAME_MESSAGE.START);
     this.readUserInput();
   }
@@ -26,15 +26,15 @@ class App {
   }
 
   #progress(number) {
-    this.#user.setNumbers(number);
+    this.#user.setDigits(number);
 
-    const computerNumbers = this.#computer.numbers;
-    const userNumbers = this.#user.numbers;
+    const computerDigits = this.#computer.digits;
+    const userDigits = this.#user.digits;
 
-    const ballStrikeCount = BaseballHelper.calculateBallStrikeCount(computerNumbers, userNumbers);
+    const ballStrikeCount = BaseballHelper.countBallAndStrike(computerDigits, userDigits);
     const countMessage = BaseballHelper.getCountMessage(ballStrikeCount);
 
-    Console.print(this.#computer.numbers);
+    Console.print(this.#computer.digits);
     Console.print(countMessage);
 
     if (ballStrikeCount.strike === RULE.LENGTH) {

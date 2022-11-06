@@ -3,18 +3,18 @@ const { RULE } = require('../constants/baseball');
 
 class BaseballComputer {
   constructor() {
-    this.numbers = [];
+    this.digits = [];
   }
 
-  setNumbers() {
-    const numbers = new Set();
+  setDigits() {
+    const digits = new Set();
 
-    while (numbers.size < RULE.LENGTH) {
-      const number = Random.pickNumberInRange(RULE.RANGE_START, RULE.RANGE_END);
-      numbers.add(String(number));
+    while (digits.size < RULE.LENGTH) {
+      const digit = Random.pickNumberInRange(RULE.RANGE_START, RULE.RANGE_END);
+      digits.add(String(digit));
     }
 
-    this.numbers = [...numbers];
+    this.digits = [...digits];
   }
 }
 

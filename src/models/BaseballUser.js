@@ -2,43 +2,43 @@ const { RULE, ERROR_MESSAGE } = require('../constants/baseball');
 
 class BaseballUser {
   constructor() {
-    this.numbers = [];
+    this.digits = [];
   }
 
-  setNumbers(number) {
-    const numbers = [...number];
-    BaseballUser.#validateNumber(numbers);
-    this.numbers = numbers;
+  setDigits(number) {
+    const digits = [...number];
+    BaseballUser.#validateNumber(digits);
+    this.digits = digits;
   }
 
-  static #validateNumber(numbers) {
-    if (BaseballUser.#isIncludeCharacter(numbers) || BaseballUser.#isIncludeZero(numbers)) {
+  static #validateNumber(digits) {
+    if (BaseballUser.#isIncludeCharacter(digits) || BaseballUser.#isIncludeZero(digits)) {
       throw new Error(ERROR_MESSAGE.EXTRA_CHARACTER);
     }
 
-    if (BaseballUser.#isInvalidLength(numbers)) {
+    if (BaseballUser.#isInvalidLength(digits)) {
       throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
     }
 
-    if (BaseballUser.#isDuplicate(numbers)) {
+    if (BaseballUser.#isDuplicate(digits)) {
       throw new Error(ERROR_MESSAGE.DUPLICATE);
     }
   }
 
-  static #isIncludeCharacter(numbers) {
-    return numbers.find((number) => isNaN(parseInt(number, 10)));
+  static #isIncludeCharacter(digits) {
+    return digits.find((number) => isNaN(parseInt(number, 10)));
   }
 
-  static #isDuplicate(numbers) {
-    return numbers.length !== new Set(numbers).size;
+  static #isDuplicate(digits) {
+    return digits.length !== new Set(digits).size;
   }
 
-  static #isInvalidLength(numbers) {
-    return numbers.length !== RULE.LENGTH;
+  static #isInvalidLength(digits) {
+    return digits.length !== RULE.LENGTH;
   }
 
-  static #isIncludeZero(numbers) {
-    return numbers.includes('0');
+  static #isIncludeZero(digits) {
+    return digits.includes('0');
   }
 }
 
