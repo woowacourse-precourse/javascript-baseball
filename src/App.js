@@ -39,13 +39,12 @@ function userInputNumber(computerNumber) {
 
 function gameStart(userNumber, computerNumber) {
     inputValidation(userNumber);
-    const strikeNumber = countStrike(userNumber, computerNumber);
-    const ballNumber = countBall(userNumber, computerNumber);
+    const { ballNumber, strikeNumber } = strikeBallNumber(userNumber, computerNumber);
     getHint(ballNumber, strikeNumber);
-    isThreeStrike(strikeNumber, computerNumber);
+    hasThreeStrike(strikeNumber, computerNumber);
 }
 
-function isThreeStrike(strikeNumber, computerNumber) {
+function hasThreeStrike(strikeNumber, computerNumber) {
     notThreeStrike(strikeNumber, computerNumber);
     threeStrike(strikeNumber);
 }
@@ -90,7 +89,6 @@ function faultNumberInput() {
 
 }
 
-
 function inputValidation(number) {
     threeDigitValidation(number);
     numberRangeValidation(number);
@@ -116,6 +114,12 @@ function reduplicationValidation(number) {
     if (!isReduplication) {
         throw "잘못된 값을 입력하였습니다.";
     }
+}
+
+function strikeBallNumber(userNumber, computerNumber) {
+    const strikeNumber = countStrike(userNumber, computerNumber);
+    const ballNumber = countBall(userNumber, computerNumber);
+    return { ballNumber, strikeNumber };
 }
 
 function countStrike(userNumber, computerNumber) {
