@@ -12,9 +12,16 @@ class App {
   }
 
   getUserDigits() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      this.userDigits = [...answer];
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.checkInputValidity(userInput);
+      this.userDigits = [...userInput];
     });
+  }
+
+  checkInputValidity(userInput) {
+    if (userInput != parseInt(userInput) || userInput.length !== 3) {
+      throw new Error("input should be three digits");
+    }
   }
 
   play() {
