@@ -27,35 +27,20 @@ function getStrikeCount(userNum, computerNum) {
   }, 0);
 }
 
+function getBallCount(userNum, computerNum) {
+  return userNum.reduce((acc, num, i) => {
+    if (computerNum.includes(num) === true && num !== computerNum[i]) {
+      acc += 1;
+    }
+    return acc;
+  }, 0);
+}
+
 function getStrikeAndBallCount(userNum, computerNum) {
   const userNumArr = String(userNum).split('');
   const computerNumArr = computerNum.map(String);
   const strikeCount = getStrikeCount(userNumArr, computerNumArr);
-}
-
-function getResult(count, computerNum) {
-  const { strike, ball } = count;
-
-  if (strike >= 2) {
-    MissionUtils.Console.print(`${strike}스트라이크`);
-    if (strike === 3) {
-      askRestart();
-    }
-  } else if (strike === 1) {
-    if (ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
-    } else {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
-  } else if (strike === 0) {
-    if (ball === 0) {
-      MissionUtils.Console.print('낫싱');
-    } else {
-      MissionUtils.Console.print(`${ball}볼`);
-    }
-  }
-
-  getUserInputNumber(computerNum);
+  const ballCount = getBallCount(userNumArr, computerNumArr);
 }
 
 module.exports = App;
