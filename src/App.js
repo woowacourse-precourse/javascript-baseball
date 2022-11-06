@@ -32,6 +32,16 @@ class App {
     }
     Message.requestInput(App.handleInput);
   }
+
+  static handleRestart(input) {
+    if (input === '1') {
+      return App.start();
+    }
+    if (input === '2') {
+      return Message.close();
+    }
+    Message.requestRestart(App.handleRestart);
+  }
 }
 
 module.exports = App;
