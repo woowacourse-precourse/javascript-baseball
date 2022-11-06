@@ -98,9 +98,23 @@ class App {
     return strike;
   }
 
+  countBall(randomNumber, userInputNumber) {
+    let ball = 0;
+    for (let [index] of Object.entries(userInputNumber)) {
+      if (
+        randomNumber.includes(userInputNumber[index]) &&
+        randomNumber[index] !== userInputNumber[index]
+      ) {
+        ball += 1;
+      }
+    }
+    return ball;
+  }
+
   countBallOrStrikeOrNothing(randomNumber, userInputNumber) {
-    // strike 계산
+    // strike, ball 계산
     let strike = this.countStrike(randomNumber, userInputNumber);
+    let ball = this.countBall(randomNumber, userInputNumber);
   }
 
   makeUserInputNumber() {
