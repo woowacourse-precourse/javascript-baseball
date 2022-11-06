@@ -109,7 +109,36 @@ function validControlCheck(input) {
 }
 
 class App {
-  play() {}
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    let computerNumber = generateNumberList(GAME_NUM_SIZE);
+    let control = 1;
+    let userNumber = 0;
+    let scoreObject = {};
+
+    while (control === 1) {
+      userNumber = readNumber();
+      if (validNumberCheck(userNumber) !== 1) {
+        throw "숫자가 유효하지 않습니다.";
+      }
+
+      scoreObject = compareNumber(computerNumber, userNumber);
+      printScore(scoreObject);
+
+      if (scoreObject.strike === 3) {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        control = readControlNumber();
+      }
+
+      if (validControlCheck(control) !== 1) {
+        throw "입력값이 유효하지 않습니다.";
+      }
+      if (scoreObject.strike === 3 && control === 1) {
+        computerNumber = generateNumberList(GAME_NUM_SIZE);
+      }
+    }
+  }
 }
 
 module.exports = App;
