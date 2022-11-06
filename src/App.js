@@ -1,6 +1,6 @@
 class App {
   play() {
-
+    
   }
 }
 
@@ -44,22 +44,22 @@ function returnResult(result) {
 function judgeInputNumber(inputNumber) {
   const numbers = inputNumber.split('').map(item => +item);
   if(3 < numbers.length) {
-    return -1;
+    throw '잘못된 값입니다.';
   } 
 
   const set = new Set(numbers);
   const numberArr = [...set];
   if(numberArr.length < 3) {
-    return -1;
+    throw '잘못된 값입니다.';
   }
 
   for(let i = 0; i < numbers.length; i++) {
     if(numbers[i] < 1 || numbers[i] > 9) {
-      return -1;
+      throw '잘못된 값입니다.';
     }
   
     if(/\D/g.test(numbers[i])) {
-      return -1;
+      throw '잘못된 값입니다.';
     }
   }
 
