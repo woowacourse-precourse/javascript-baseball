@@ -15,9 +15,13 @@ class App {
   }
 
   randomNum() {
-    this.COMPUTER_NUMBER = Random.pickUniqueNumbersInRange(1, 9, 3);
+    const numArr = [];
 
-    return this.COMPUTER_NUMBER;
+    for (let i = 0; i < 3; i++) {
+      numArr.push(Random.pickNumberInRange(1, 9));
+    }
+
+    return numArr;
   }
 
   playerInput() {
