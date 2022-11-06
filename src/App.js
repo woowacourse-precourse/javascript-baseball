@@ -43,6 +43,26 @@ class App {
     return `${ballMessage} ${strikeMessage}`.trim();
   }
 
+  guessNumber(target) {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.validateGuessedNumber(input);
+      this.checkResult(this.convertInputStringToArray(input), target);
+    });
+  }
+
+  checkResult(input, target) {
+    const { strike, ball } = this.judgeStrikeBall(input, target);
+    const message = this.scoreMessage(strike, ball);
+
+    MissionUtils.Console.print(message);
+    if (strike === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.inputRestartGame();
+    } else {
+      this.guessNumber(target);
+    }
+  }
+
   inputRestartGame() {
     MissionUtils.Console.print(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
@@ -67,6 +87,8 @@ class App {
 
   startGame() {
     const target = this.generateTargetNumber();
+
+    this.guessNumber(target);
   }
 
   play() {
