@@ -7,6 +7,7 @@ class App {
   }
 
   initAnswer() {
+    this.answer = [];
     while (this.answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
@@ -50,7 +51,9 @@ class App {
       Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (answer) => {
         if (answer === "1") {
           this.play();
+          return;
         }
+
         if (answer === "2") {
           Console.print("게임을 종료합니다");
           Console.close();
