@@ -58,11 +58,11 @@ class App {
 
     var answerSet = new Set(this.ANSWER);
     for (var idx in input) {
-      if (this.ANSWER[idx] === input[idx]) {
+      if (this.ANSWER[idx] === +input[idx]) {
         strikeCount += 1;
         continue;
       }
-      if (answerSet.has(input[idx])) ballCount += 1;
+      if (answerSet.has(+input[idx])) ballCount += 1;
     }
     return { ballCount, strikeCount };
   }
