@@ -2,7 +2,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
 const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
 const getThreeRandomNumbers = require("./ThreeRandomNumbers");
-
 const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT } = require("./constants/ConstantValues");
 const {
   START_MESSAGE,
@@ -34,6 +33,7 @@ class App {
         this.end();
         return;
       }
+
       this.play();
     });
   }
@@ -45,6 +45,7 @@ class App {
         MissionUtils.Console.close();
         throw new Error(WRONG_INPUT_ERROR_MESSAGE);
       }
+
       if (input === RESTART_INPUT) {
         this.threeRandomNumbers = getThreeRandomNumbers();
         this.play();
@@ -56,7 +57,7 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
