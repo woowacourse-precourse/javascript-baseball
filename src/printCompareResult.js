@@ -14,6 +14,7 @@ const printCompareResult = (ballCount, strikeCount) => {
     }
 
     MissionUtils.Console.print(resultMSG);
+    return resultMSG;
 }
 
 module.exports = printCompareResult;
