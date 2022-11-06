@@ -23,7 +23,7 @@ describe.only("게임 종료 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   });
 
-  test("재시작 테스트", () => {
+  test("게임 재시작", () => {
     const app = new App();
     const playSpy = jest.spyOn(app, "play");
 
@@ -33,7 +33,7 @@ describe.only("게임 종료 테스트", () => {
     expect(playSpy).toHaveBeenCalled();
   });
 
-  test("프로그램 종료 테스트", () => {
+  test("프로그램 종료", () => {
     const app = new App();
     const closeSpy = jest.spyOn(MissionUtils.Console, "close");
 
@@ -41,5 +41,14 @@ describe.only("게임 종료 테스트", () => {
     mockQuestion(2);
 
     expect(closeSpy).toHaveBeenCalled();
+  });
+
+  test("입력 예외 처리", () => {
+    mockQuestion(3);
+
+    expect(() => {
+      const app = new App();
+      app.endPlayerTurn();
+    }).toThrow();
   });
 });
