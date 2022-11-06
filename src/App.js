@@ -5,9 +5,10 @@ class App {
   }
   play() {
     this.printStartMessage();
-    this.startGame();
+    this.getUserInput();
   }
   startGame() {
+    this.ballStrikeCount();
   }
   printStartMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -34,6 +35,17 @@ class App {
     }
     else
       return true;
+  }
+  getUserInput(){
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if(this.isValidInputNumbers(input)){
+        this.userInput = input;
+        this.startGame();
+      }
+      else{
+        throw new Error('조건에 맞는 수를 입력하세요!')
+      }
+    });
   }
 }
 
