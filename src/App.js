@@ -54,6 +54,13 @@ class App {
     MissionUtils.Console.print(scoreSentence);
   }
 
+  isGameOver() {
+    if (this.score.strikes === 3) {
+      return true;
+    }
+    return false;
+  }
+
   async play() {
     this.generateThreeDigits();
     await this.getUserDigits();
