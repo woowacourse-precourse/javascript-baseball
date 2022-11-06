@@ -17,9 +17,19 @@ class Game {
     return this.computer;
   }
 
-  compareNumber(computer, player) {}
+  compareNumber(computer, player) {
+    if (this.isValidNumber(player)) {
+    } else {
+      throw new Error("잘못된 입력으로 게임 종료");
+    }
+  }
 
-  isValidNumber(number) {}
+  isValidNumber(number) {
+    const isNum = !isNaN(number);
+    const checkLength = Array.from(number + "").length === 3;
+
+    return isNum && checkLength;
+  }
 
   start(randomNumber) {
     let playerNumber;
@@ -28,7 +38,7 @@ class Game {
       "숫자 야구 게임을 시작합니다.",
       (inputNumber) => {
         console.log(`숫자를 입력해주세요 : ${inputNumber}`);
-        playerNumber = Array.from(inputNumber);
+        playerNumber = inputNumber;
       }
     );
     MissionUtils.Console.close();
