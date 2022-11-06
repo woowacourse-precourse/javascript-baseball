@@ -1,4 +1,4 @@
-const { USER_INPUT_LENGTH, INVALID } = require("./Constant");
+const { USER_INPUT_LENGTH, INVALID, REPLAY, CLOSE } = require("./Constant");
 
 class ExceptionHandler {
   checkUserInputRedundancy(answer) {
@@ -16,7 +16,7 @@ class ExceptionHandler {
   }
 
   checkValidInput(answer) {
-    if (answer != 1 && answer != 2) throw new Error("유효한 숫자를 입력해주세요");
+    if (answer != REPLAY && answer != CLOSE) throw new Error("유효한 숫자를 입력해주세요");
   }
 
   checkInvalidDigit(answer) {
