@@ -13,7 +13,7 @@ module.exports = App;
 class ComputerRandomNumber {
   randomNumber() {
     const number = [];
-    while (number.length < 3) {
+    while (number.length < NUMBER_CONSTANTS.MAX_SCORE) {
       const numberInput = MissionUtils.Random.pickNumberInRange(1,9);
       if (!number.includes(numberInput)) {
         number.push(numberInput);
@@ -29,7 +29,7 @@ class BaseballPlayTool {
   }
 
  startText() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(TOOL_CONSTANTS.DEFAULT_START);
   }
 
   ballCount(computer, user) {
@@ -52,41 +52,41 @@ class BaseballPlayTool {
   }
   gameRule(computer, user) {
     let ballScore = this.ballCount(computer, user);
-    let strikeScorer = this.strikeCount(computer, user);
-    if (strikeScorer === 3) {
+    let strikeScore = this.strikeCount(computer, user);
+    if (strikeScore === NUMBER_CONSTANTS.MAX_SCORE) {
       this.answerCheck = true ; 
-      return "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+      return TOOL_CONSTANTS.ANSWER;
     }
-    if (ballScore === 0 && strikeScorer === 0) {
-      return "낫싱";
+    if (ballScore === 0 && strikeScore === 0) {
+      return TOOL_CONSTANTS.NOTHING;
     }
-    if (strikeScorer === 0) {
-      return `${ballScore}볼`;
+    if (strikeScore === 0) {
+      return `${ballScore}${TOOL_CONSTANTS.BALL}`;
     }
     if (ballScore === 0) {
-      return `${strikeScorer}스트라이크`;
+      return `${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
     }
-    return `${ballScore}볼 ${strikeScorer}스트라이크`;
+    return `${ballScore}${TOOL_CONSTANTS.BALL} ${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
   }
 
   userInputError(userInput) {
-    if (userInput.length !== 3) {
+    if (userInput.length !== NUMBER_CONSTANTS.MAX_SCORE) {
       this.answerCheck = true ; 
-      throw ('3자리의 수를 입력하세요.');
+      throw ERROR_CONSTANTS.LENGTH;
     }
-    if (new Set(userInput).size !== 3) {
-      throw ('중복된 수가 없는지 확인해주세요.');
+    if (new Set(userInput).size !== NUMBER_CONSTANTS.MAX_SCORE) {
+      throw ERROR_CONSTANTS.OVERLAP;
     }
     if (userInput.includes('0')) {
-      throw ('1~9까지의 숫자만 입력해주세요.');
+      throw ERROR_CONSTANTS.SCOPE;
     }
     if (Number.isNaN(userInput) || userInput.includes(' ')) {
-      throw ('숫자만 입력해주세요.');
+      throw ERROR_CONSTANTS.ISNAN;
     }
     return true;
   }
   userInputHandler(computer) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInput) => {
+    MissionUtils.Console.readLine(TOOL_CONSTANTS.GAME_START, (userInput) => {
       this.userInputError(userInput);
       MissionUtils.Console.print(this.gameRule(computer, userInput));
       if (!this.answerCheck) {
@@ -102,17 +102,43 @@ class BaseballPlayTool {
   gameRepeat() {
     const computerInput = new ComputerRandomNumber();
     const computer = computerInput.randomNumber();
+    console.log(computer)
     this.userInputHandler(computer);
   }
   gameReset() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
-      if (userInput === '1') {
+    MissionUtils.Console.readLine(TOOL_CONSTANTS.GAMESET, (userInput) => {
+      if (userInput === NUMBER_CONSTANTS.RE_START) {
+        MissionUtils.Console.print(NUMBER_CONSTANTS.RE_START);
         this.answerCheck = false;
         return this.gameRepeat();
       }
-      if (userInput === '2') {
+      if (userInput === NUMBER_CONSTANTS.END) {
+        MissionUtils.Console.print(NUMBER_CONSTANTS.END);
         return MissionUtils.Console.close();
       }
+      throw ERROR_CONSTANTS.SET_INPUT;
     });
   }
 }
+
+const TOOL_CONSTANTS = {
+  DEFAULT_START: '숫자 야구 게임을 시작합니다.',
+  GAME_START: '숫자를 입력해주세요 : ',
+  BALL: '볼',
+  STRIKE: '스트라이크',
+  NOTHING: '낫싱',
+  ANSWER: '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  GAMESET: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+};
+const ERROR_CONSTANTS = {
+  LENGTH: '3자리의 수를 입력해야합니다.',
+  OVERLAP: '중복된 수가 없는지 확인해야합니다.',
+  SCOPE: '1~9까지의 숫자만 입력해야합니다',
+  ISNAN: '숫자만 입력해야합니다.',
+  SET_INPUT: '1과 2중 하나만 입력해야합니다.'
+};
+const NUMBER_CONSTANTS = {
+  RE_START: '1',
+  END: '2',
+  MAX_SCORE: 3,
+};
