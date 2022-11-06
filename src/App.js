@@ -7,13 +7,26 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
+    this.createRandomNum();
     this.startGame();
+  }
+
+  // 컴퓨터 랜덤값 생성 기능
+  createRandomNum() {
+    const computerInput = [];
+    while (computerInput.length < 3){
+      let randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      randomNum = randomNum.toString();
+      if (!computerInput.includes(randomNum)){
+        computerInput.push(randomNum);
+      }
+    }
   }
 
   startGame() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       if (this.isValidNum(userInput)) {
-        this.compareNum(computerInput, userInput)
+        this.compareNum(userInput)
       }
     });
   }
@@ -37,7 +50,10 @@ class App {
     }
     return true
   }
+
+  
+
 }
 const app = new App();
-app.play()
+app.createRandomNum()
 // module.exports = App;
