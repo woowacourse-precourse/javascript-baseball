@@ -62,12 +62,11 @@ class App {
   }
 
   countStrike(computerNumber, playerNumber) {
-    return playerNumber.reduce((acc, cur, idx) => {
-      if (cur === computerNumber[idx]) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0);
+    return playerNumber.filter((number, index) => {
+      return (
+        computerNumber[index] === number && computerNumber.includes(number)
+      );
+    }).length;
   }
 
   printHint(numberOfBall, numberOfStrike) {
