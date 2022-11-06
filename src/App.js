@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
 
 const isNumber = (input) => {
-  return Number.isInteger(input) ? true : false;
+  return Number.isInteger(Number(input)) ? true : false;
 };
 const isOneToNine = (input) => {
   for (let i = 0; i < input.length; i++) {
@@ -17,8 +17,9 @@ const isAllDifferent = (input) => {
   const unique = new Set(input);
   return unique.size === input.length ? true : false;
 };
+
 const isCompare = (computerNumber, playerNumber) => {
-  let score = [0, 0]; // [볼, 스트라이크]
+  let score = [0, 0]; // [스트라이크, 볼]
   for (let i = 0; i < 3; i++) {
     if (computerNumber[i] === playerNumber[i]) {
       score[0] += 1;
@@ -28,6 +29,7 @@ const isCompare = (computerNumber, playerNumber) => {
   }
   return score;
 };
+
 class App {
   #userNumber;
   #computerNumber;
@@ -52,16 +54,16 @@ class App {
         !isThree(input) ||
         !isAllDifferent(input)
       )
-        Console.print("잘못된 숫자를 입력하였습니다.");
+        throw new Error("잘못된 숫자를 입력하였습니다.");
       this.#userNumber = [...input];
       this.getScore = [];
       this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
+      this.printResult();
     });
   }
 
   // 컴퓨터 랜덤 숫자 생성
   makeComputerRandomNumbers() {
-    this.#computerNumber = [...this.#computerNumber];
     while (this.#computerNumber.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.#computerNumber.includes(number))
@@ -72,16 +74,18 @@ class App {
 
   // 결과 출력
   printResult() {
-    const { ball, strike } = this.getScore;
+    const [strike, ball] = this.getScore;
 
     const ballMessage = `${ball ? `${ball}볼 ` : ""}`;
     const strikeMessage = `${strike ? `${strike}스트라이크 ` : ""}`;
     const nothingMessage = `${!strike && !ball ? "낫싱" : ""}`;
 
     Console.print(ballMessage + strikeMessage + nothingMessage);
-    if (strike === 3)
+    // Console.print(this.#computerNumber);
+    if (strike === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    else this.getUserInput();
+      this.restart();
+    } else this.getUserInput();
   }
 
   // 재시작
@@ -116,6 +120,4 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
 module.exports = App;
