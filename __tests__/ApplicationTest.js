@@ -66,6 +66,19 @@ describe("숫자 야구 게임", () => {
     expect(App.isThreeDigit('abc')).toEqual(false);
   });
 
+  test("isAllDifferent", () => {
+    expect(App.isAllDifferent('123')).toEqual(true);
+    expect(App.isAllDifferent('12')).toEqual(true);
+    expect(App.isAllDifferent('1')).toEqual(true);
+    expect(App.isAllDifferent('1abc')).toEqual(true);
+    expect(App.isAllDifferent('abcd')).toEqual(true);
+    expect(App.isAllDifferent('11')).toEqual(false);
+    expect(App.isAllDifferent('112')).toEqual(false);
+    expect(App.isAllDifferent('222')).toEqual(false);
+    expect(App.isAllDifferent('aaaa')).toEqual(false);
+    expect(App.isAllDifferent('12bb')).toEqual(false);
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
