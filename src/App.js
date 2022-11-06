@@ -36,6 +36,14 @@ class App {
     }
   }
 
+  countStrike(computer, userValue) {
+    let strike = 0;
+    for (let i = 0; i < 3; i++) {
+      if (computer[i] === userValue[i]) strike += 1;
+    }
+    return strike;
+  }
+
   gameResult(computer, userValue) {}
 }
 
