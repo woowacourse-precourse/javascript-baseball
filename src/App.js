@@ -1,6 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Notice = require("../const/Printexplain.js")
 class App {
+  constructor(){
+    MissionUtils.Console.print(Notice.START_GAME)
+    this.AnswerNumber = this.generateRandomnumber()
+  }
   play() {}
   generateRandomnumber(){
     const Randomnumber = [];
