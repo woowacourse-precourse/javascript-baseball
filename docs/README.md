@@ -69,3 +69,36 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 - 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱으로 결과를 보여준다.
 - 3개 다 맞추면 성공 메시지를 나타낸다.
+
+```
+printResult = (userInput, computerInput) => {
+		let strike = 0;
+		let ball = 0;
+		let nothing = true;
+
+		for (let i = 0; i < computerInput.length; i++) {
+			if (computerInput.includes(userInput[i])) {
+				nothing = false;
+				if (userInput[i] === computerInput[i]) {
+					strike++;
+				} else {
+					ball++;
+				}
+			}
+		}
+
+		if (nothing) {
+			MissionUtils.Console.print("낫싱");
+			return;
+		}
+
+		let result = "";
+
+		if (ball) result += `${ball}볼 `;
+		if (strike) result += `${strike}스트라이크`;
+
+		MissionUtils.Console.print(result);
+		strike === 3 && 성공 메시지
+	};
+
+```
