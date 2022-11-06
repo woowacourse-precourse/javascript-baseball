@@ -14,6 +14,10 @@ class App {
     }
     MissionUtils.Console.print(computer);
       
+    MissionUtils.Console.readLine("숫자를 입력하세요 : ", function(x) {
+      console.log(x);
+    });
+
   }
 }
 
