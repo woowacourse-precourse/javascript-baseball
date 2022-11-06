@@ -1,23 +1,23 @@
 const computerStore = (() => {
-    let store = [];
+  let store = [];
 
-    const getStore = () => store;
-    const setStore = (newStore) => {
-        store.push(newStore)
-    };
+  const getStore = () => store;
+  const setStore = newStore => {
+    store.push(newStore);
+  };
 
-    const resetStore = () => {
-        store = [];
-    }
+  const resetStore = () => {
+    store = [];
+  };
 
-    return (newStore) => {
-        if (newStore) setStore(newStore);
-        return [getStore, setStore, resetStore];
-    }
+  return newStore => {
+    if (newStore) setStore(newStore);
+    return [getStore, setStore, resetStore];
+  };
 })();
 
 const store = {
-    computerStore,
-}
+  computerStore,
+};
 
 module.exports = store;

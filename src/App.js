@@ -1,11 +1,10 @@
 const { baseballGameStart } = require('./gameStart');
 
 class App {
-  play() {
+  static play() {
     baseballGameStart();
   }
 }
-
 
 const app = new App();
 app.play();
