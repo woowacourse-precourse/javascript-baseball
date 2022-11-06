@@ -32,6 +32,11 @@ class App {
     return !userNumber.includes('0');
   }
 
+  checkDuplication(userNumber) {
+    const splitNumber = userNumber.split('');
+    return new Set(splitNumber).size === 3;
+  }
+
   play() {
     this.makeRandomNumbers();
     this.getUserNumbers();
