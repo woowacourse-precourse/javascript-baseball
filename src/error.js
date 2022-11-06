@@ -12,9 +12,9 @@ const checkOverlapNumbers = (userInput) => {
     return checkError;
 }
 
-const checkOnlyNumbers = (userInput) => userInput.every(v => +v || v === '0');
-const checkNumbersLength = (userInput) => userInput.length > 3;
-const checkZeroNumber = (userInput) => userInput.some(v => v === '0');
+const checkOnlyNumbers = (userInput) => userInput.every(v => +v || v === 0);
+const checkNumbersLength = (userInput) => userInput.length !== 3;
+const checkZeroNumber = (userInput) => userInput.some(v => v === 0);
 const checkFloatNumbers = (userInput) => userInput.some(v => !Number.isInteger(+v));
 
 function validateNumbers(userInput) {
@@ -40,7 +40,7 @@ function validateNumbers(userInput) {
     }
 
     if (checkNumbersLength(userInput)) {
-        Console.print("3개 이상의 숫자를 입력하셨습니다. 게임을 다시 시작해주세요.");
+        Console.print("3개의 숫자를 입력해야 됩니다. 게임을 다시 시작해주세요.");
         throw Error("Over Length");
     }
 }
