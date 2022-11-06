@@ -25,7 +25,16 @@ class App {
     });
   }
 
-  validUserInput(userValue) {}
+  validUserInput(userValue) {
+    const validLength = () => userValue.length === 3;
+    const validRange = () => userValue.match(/[1-9]{3}/g) != null;
+    const checkOverlap = () => new Set(userValue.split("")).size === 3;
+    if (validLength() && validRange() && checkOverlap()) {
+      return true;
+    } else {
+      throw "올바른 입력값이 아닙니다.";
+    }
+  }
 
   gameResult(computer, userValue) {}
 }
