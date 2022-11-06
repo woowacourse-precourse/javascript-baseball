@@ -1,11 +1,26 @@
-import * as MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
+    let num;
+    let random_number;
+    let repeat = true;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    let random_number = this.GET_RANDOM_NUMBER();
-    this.IN_GAME(random_number);
+    while (repeat) {
+      random_number = this.GET_RANDOM_NUMBER();
+      try {
+        num = this.IN_GAME(random_number);
+      } catch (e) {
+        console.error(e);
+        return;
+      }
+      if (num === 1) {
+        continue;
+      } else if (num === 2) {
+        return;
+      }
+    }
   }
 
   GET_RANDOM_NUMBER() {
@@ -14,7 +29,7 @@ class App {
 
   IN_GAME(correct_number) {
     let correct = false;
-    let user_input_number = null;
+    let user_input_number;
 
     while (!correct) {
       user_input_number = this.INPUT_NUMBER();
@@ -23,6 +38,7 @@ class App {
         this.VALIDATE_NUMBER(user_input_number);
       } catch (e) {
         console.error(e);
+        throw "";
       }
       //제대로 된 값 입력
       if (
