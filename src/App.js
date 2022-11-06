@@ -70,20 +70,16 @@ class App {
   }
 
   printHint(numberOfBall, numberOfStrike) {
-    let hint = "";
+    const hint = [];
 
     if (numberOfBall) {
-      hint += `${numberOfBall}볼`;
+      hint.push(`${numberOfBall}볼`);
     }
-
     if (numberOfStrike) {
-      if (hint) {
-        hint += " ";
-      }
-      hint += `${numberOfStrike}스트라이크`;
+      hint.push(`${numberOfStrike}스트라이크`);
     }
 
-    return hint ? hint : "낫싱";
+    return hint.length ? hint.join(" ") : "낫싱";
   }
 
   printPlayerWinGame() {
