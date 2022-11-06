@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const inputValidation = require("./inputValidation");
+const outputValidation = require("./outputValidation");
 
 class App {
   constructor(inputNum) {
@@ -27,7 +28,6 @@ class App {
   }
 
   checkInputValidation() {
-    MissionUtils.Console.print(this.inputNum + "232345");
     inputValidation.checkNoOverlap(this.inputNum);
     inputValidation.checkOnlyNum(this.inputNum);
     inputValidation.checkThreeNum(this.inputNum);
