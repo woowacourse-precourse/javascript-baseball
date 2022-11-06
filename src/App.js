@@ -1,9 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_SENTENCE, GAME, ERROR, ANSWER } = require('./Constants');
-const {
-  isMatchAnswer,
-  calculateResult,
-} = require('./ControlAnswer/CheckAnswer');
+const { isMatchAnswer, printHint } = require('./ControlAnswer/CheckAnswer');
 const { generateAnswer } = require('./ControlAnswer/GenerateAnswer');
 const { stringToNumArr } = require('./Utils');
 const { isValidInput } = require('./Validation');
@@ -29,7 +26,7 @@ class App {
 
   checkAnswer(numArr) {
     if (isMatchAnswer(numArr, this.answer)) this.askPlayMore();
-    else this.printResult(numArr);
+    else this.tryMore(numArr);
   }
 
   askPlayMore() {
@@ -45,9 +42,8 @@ class App {
     });
   }
 
-  // 평가 결과를 출력하고, 다시 입력받기
-  printResult(numArr) {
-    calculateResult(numArr, this.answer);
+  tryMore(numArr) {
+    printHint(numArr, this.answer);
     this.receiveInput();
   }
 }
