@@ -22,7 +22,7 @@ const getLogSpy = () => {
 };
 
 describe('출력값 테스트', () => {
-  test('getComputerOuput 메서드로 입력 값을 판단하여 결과를 출력', () => {
+  test('입력 값을 볼, 스트라이크로 판단하여 결과를 출력', () => {
     const logSpy = getLogSpy();
     mockQuestion('135');
     mockRandoms([1, 3, 5]);
@@ -31,5 +31,16 @@ describe('출력값 테스트', () => {
     app.play();
 
     expect(logSpy).toHaveBeenCalledWith('3스트라이크');
+  });
+
+  test('3개의 숫자를 모두 맞힐 경우 게임을 종료', () => {
+    const logSpy = getLogSpy();
+    mockQuestion('123');
+    mockRandoms([1, 2, 3]);
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
 });
