@@ -39,7 +39,11 @@ class App {
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
       const userInput = input;
-      MissionUtils.Console.print(evaluateInput(userInput));
+      const isUserInputValid = evaluateInput(userInput);
+
+      if (isUserInputValid === false) {
+        throw userInput;
+      }
     });
   };
 };
