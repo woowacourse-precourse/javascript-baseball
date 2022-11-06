@@ -24,6 +24,15 @@ class App {
       this.userInputs = answer;
     });
   }
+
+  // 1부터 9까지의 숫자인지 아닌지
+  isRangeNumber() {
+    const isNumberRegExp = /^[1-9]+$/;
+    if (!isNumberRegExp.test(this.userInputs)) {
+      throw new Error("1부터 9까지의 숫자만 가능합니다.");
+    }
+    return true;
+  }
 }
 
 const app = new App();
