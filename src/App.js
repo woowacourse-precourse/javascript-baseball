@@ -13,8 +13,7 @@ class App {
       if (this.checkInputValidation(userInput)) {
         const [strike, ball] = this.compute(computerInput, userInput);
         MissionUtils.Console.print(this.showResult(strike, ball));
-        if (this.isGameFinished(computerInput, userInput))
-          this.restartOrExitGame();
+        if (this.isGameFinished(strike)) this.restartOrExitGame();
         else this.startGame(computerInput);
       } else {
         throw ERROR.WRONG_INPUT;
@@ -91,9 +90,8 @@ class App {
     });
   }
 
-  isGameFinished(computerInput, userInput) {
-    const isThreeStrike =
-      this.countStrikes(computerInput, userInput) === 3 ? true : false;
+  isGameFinished(strikeCount) {
+    const isThreeStrike = strikeCount === 3 ? true : false;
     return isThreeStrike;
   }
 }
