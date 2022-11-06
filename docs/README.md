@@ -8,7 +8,7 @@
 
 ## ⚙ 숫자 입력 ( Game.start(randomNumber) )
 
-1. 사용자가 서로 다른 3자리 숫자 입력한다.
+1. 사용자가 서로 다른 3자리 숫자를 입력한다.
 
 ## ⚙ 숫자 비교 ( Game.compareNumber(computer, player) )
 

@@ -21,7 +21,20 @@ class Game {
 
   isValidNumber(number) {}
 
-  start(randomNumber) {}
+  start(randomNumber) {
+    let playerNumber;
+
+    MissionUtils.Console.readLine(
+      "숫자 야구 게임을 시작합니다.",
+      (inputNumber) => {
+        console.log(`숫자를 입력해주세요 : ${inputNumber}`);
+        playerNumber = Array.from(inputNumber);
+      }
+    );
+    MissionUtils.Console.close();
+
+    this.compareNumber(randomNumber, playerNumber);
+  }
 
   over() {}
 }
