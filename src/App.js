@@ -1,27 +1,29 @@
 class App {
   play() {
     const MissionUtils = require("@woowacourse/mission-utils");
-
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-  
-    
-    const computer = init(MissionUtils);
+    var computer = init(MissionUtils);
     game(MissionUtils, computer);
   }
 }
 
 function init (MissionUtils){
-  const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-        
-      }
-    }
-    MissionUtils.Console.print(computer);
-    return computer
+  var computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    computer = checkarr(computer, number);
+  }
+  MissionUtils.Console.print(computer);
+  return computer
 }
+
+function checkarr(computer, number) {
+  if (!computer.includes(number)) {
+    computer.push(number);    
+  }
+  return computer;
+}
+
 
 function game(MissionUtils, computer) {
   var ballcount = 0;
@@ -40,6 +42,7 @@ function game(MissionUtils, computer) {
         ballcount++;
       }
     }
+
     for (var i = 0; i<3; i++){
       if (computer[1] == input.charAt(i)){
         if (i==1){
@@ -92,6 +95,8 @@ function game(MissionUtils, computer) {
   });
 
 }
+
+
 function check1num(input) {
   if (isNaN(input) || input.length != 1){
     throw new Error("1자리 숫자를 입력하세요");
