@@ -64,6 +64,15 @@ class App {
       this.startGame();
     }
   }
+
+  startGame() {
+    const target = this.generateTargetNumber();
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.startGame();
+  }
 }
 
 module.exports = App;
