@@ -24,6 +24,23 @@ class App {
     }
   }
 
+  checkIfRestartGame() {
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        (userInput) => {
+          if (userInput == 1) {
+            resolve(this.play());
+          }
+          if (userInput == 2) {
+            this.isPlaying = false;
+            resolve(MissionUtils.Console.close());
+          }
+        }
+      );
+    });
+  }
+
   generateDifferRandomNumArr(numOfDigits) {
     const DIFFER_RANDOM_NUM_ARR = [];
     let randomNum;
