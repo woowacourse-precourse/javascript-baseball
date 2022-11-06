@@ -10,14 +10,15 @@ describe("숫자 비교 결과 출력 기능 테스트", () => {
       ["123", "132"],
     ];
     const result = [
-      [3, 0],
-      [0, 0],
-      [0, 3],
-      [1, 2],
+      { strikeCount: 3, ballCount: 0 },
+      { strikeCount: 0, ballCount: 0 },
+      { strikeCount: 0, ballCount: 3 },
+      { strikeCount: 1, ballCount: 2 },
     ];
 
     testInput.forEach(([computerInput, userInput], idx) => {
       const methodResult = app.getStrikeBallCount(computerInput, userInput);
+
       expect(methodResult).toEqual(result[idx]);
     });
   });
