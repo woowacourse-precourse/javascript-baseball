@@ -1,5 +1,5 @@
 const App = require("../src/App");
-const StrikeAndBall = require("../src/StrikeAndBall");
+const { getStrikeAndBall, getStrikeAndBallText } = require("../src/StrikeAndBall");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -36,7 +36,7 @@ describe.only("스트라이크 볼 카운트 테스트", () => {
     ];
 
     inputs.forEach(([input, strikeAndBallCount]) => {
-      const result = StrikeAndBall.getResult(answerNumber, input);
+      const result = getStrikeAndBall(answerNumber, input);
       expect(result).toEqual(strikeAndBallCount);
     });
   });
@@ -51,7 +51,7 @@ describe.only("스트라이크 볼 카운트 테스트", () => {
     ];
 
     inputs.forEach(([strike, ball, resultString]) => {
-      const result = StrikeAndBall.getString(strike, ball);
+      const result = getStrikeAndBallText(strike, ball);
       expect(result).toEqual(resultString);
     });
   });

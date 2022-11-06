@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
-const StrikeAndBall = require("./StrikeAndBall");
+const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
 
 class App {
   constructor() {
@@ -34,8 +34,8 @@ class App {
         throw new Error("잘못된 입력입니다.");
       }
 
-      const [strikeCount, ballCount] = StrikeAndBall.getResult(this.threeRandomNumbers, input);
-      const resultOutput = StrikeAndBall.getString(strikeCount, ballCount);
+      const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
+      const resultOutput = getStrikeAndBallText(strikeCount, ballCount);
 
       MissionUtils.Console.print(resultOutput);
 
@@ -64,7 +64,7 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
