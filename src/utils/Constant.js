@@ -13,9 +13,14 @@ const BALL_STATUS = {
 
 const NOTHING = '낫싱';
 
+const ERROR = {
+  INPUT_VALID: '1~9 사이의 3자리 숫자가 아닙니다',
+};
+
 module.exports = {
   RESTART,
   MSG,
   BALL_STATUS,
   NOTHING,
+  ERROR,
 };
