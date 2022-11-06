@@ -11,30 +11,26 @@ class App {
   userInput = "";
 
   play() {
-    this.print(this.START);
+    if (this.answer === "") this.print(this.START);
     this.answer = this.generateAnswer();
 
     console.log(this.answer);
 
-    // while (!this.isGameEnd()) {
     this.getInput(this.REQUEST_NUMBER, (userInput) => {
       if (this.isValidInput(userInput)) {
         this.userInput = userInput;
         this.print(this.calculateCount(userInput));
       }
 
-      if (this.isGameEnd()) return;
+      if (this.isGameEnd()) {
+        this.askPlayOrExit();
+        console.log("??");
+      }
 
       this.play();
     });
-    // }
 
-    this.print(this.END);
-
-    // const newGameOrEnd = await this.getPlayerInput(this.AGAIN_OR_END);
-
-    // if (newGameOrEnd === "1") await this.play();
-    // else Console.close();
+    // this.print(this.END);
   }
 
   calculateCount(userInput) {
