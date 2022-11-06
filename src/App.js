@@ -46,7 +46,7 @@ class App {
 
     isValidNumber(userInput) {
         Console.print("isValidNumber()-------------------");
-        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput)) {
+        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput) || this.hasWrongWord(userInput)) {
             throw new Error(MESSAGE.ERROR);
         }
     }
@@ -60,7 +60,12 @@ class App {
         return setInput.size !== this.user.length;
     }
     hasRightLength(userInput) {
+        Console.print("hasRightLength()-----------------");
         return userInput.length !== 3;
+    }
+    hasWrongWord(userInput) {
+        Console.print("hasWrongWord()-----------------");
+        return !(userInput > 122);
     }
 
     ballStrikeCount() {
