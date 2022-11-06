@@ -13,6 +13,31 @@ class BaseballGame {
     this.pickedNumberByComputer = PickedNumberByComputer.randomNumInRange();
   }
 
+  playGame = () => {
+    if (this.isFirstGame) Console.print("숫자 야구 게임을 시작합니다.");
+    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
+  };
+
+  playTurn = (pickedNumberByUser) => {
+    this.validateUserInput.validate(pickedNumberByUser);
+
+    let [strike, ball, nothing] = this.countStrikeBallNothing(
+      pickedNumberByUser,
+      this.pickedNumberByComputer
+    );
+    this.printResultsForCount(strike, ball, nothing);
+
+    if (strike === 3) {
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        this.inputRestartOrEnd
+      );
+      return;
+    }
+
+    this.playGame();
+  };
+
   countStrikeBallNothing = (pickedNumberByUser, pickedNumberByComputer) => {
     let strike = 0;
     let ball = 0;
@@ -50,31 +75,6 @@ class BaseballGame {
       Console.print("게임 종료");
       Console.close();
     } else throw new Error("1 또는 2만 입력해주세요.");
-  };
-
-  playGame = () => {
-    if (this.isFirstGame) Console.print("숫자 야구 게임을 시작합니다.");
-    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
-  };
-
-  playTurn = (pickedNumberByUser) => {
-    this.validateUserInput.validate(pickedNumberByUser);
-
-    let [strike, ball, nothing] = this.countStrikeBallNothing(
-      pickedNumberByUser,
-      this.pickedNumberByComputer
-    );
-    this.printResultsForCount(strike, ball, nothing);
-
-    if (strike === 3) {
-      Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        this.inputRestartOrEnd
-      );
-      return;
-    }
-
-    this.playGame();
   };
 }
 
