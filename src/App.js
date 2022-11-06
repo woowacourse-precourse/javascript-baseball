@@ -25,7 +25,7 @@ class App {
     }
   }
 
-  printer(message) {
+  consolePrinter(message) {
     MissionUtils.Console.print(message);
   }
 
@@ -94,19 +94,19 @@ class App {
       this.totalErrorChecker(usersInput);
       const userNumbersArr = this.stringToArrConverter(usersInput);
       let discrimination = this.discriminator(userNumbersArr, refNumbersArr);
-      this.printer(discrimination);
+      this.consolePrinter(discrimination);
 
       if (discrimination !== "3스트라이크") {
         this.gameStarter(refNumbersArr);
       } else if (discrimination === "3스트라이크") {
-        this.printer("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.consolePrinter("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         this.reStartSelector();
       }
     });
   }
 
   play() {
-    this.printer("숫자 야구 게임을 시작합니다.");
+    this.consolePrinter("숫자 야구 게임을 시작합니다.");
     const refNumbersArr = this.refNumbersGetter();
     this.gameStarter(refNumbersArr);
   }
