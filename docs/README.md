@@ -9,14 +9,14 @@
 2. Player 구현
 
    - [x] User Class 구현.
-   - [ ] Computer Class 구현.
-     - [ ] 랜덤 값 뽑는 메서드 구현.
+   - [x] Computer Class 구현.
+     - [x] 랜덤 값 뽑는 메서드 구현.
 
 3. 게임시작
 
    - [x] Console.readLine으로 user의 정답 받기.
      - [x] 숫자 이외는 예외처리.
-   - [ ] `pickUniqueNumbersInRange`를 이용해 computer 값 생성.
+   - [x] `pickUniqueNumbersInRange`를 이용해 computer 값 생성.
 
 4. 값 비교
 

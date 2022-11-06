@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const {
   isValidContinueOption,
   isValidUserInput,
+  checkAnswer,
 } = require('./controllers/gameHandler');
 const User = require('./players/User');
 const Computer = require('./players/Computer');
@@ -13,23 +14,32 @@ class App {
   }
 
   play() {
+    // 구현이 끝난 뒤, 전부 함수화함으로써 depth indent 줄이기.
+    // 게임 시작 콘솔
+    Console.print('숫자 야구 게임을 시작합니다.');
     try {
-      // 구현이 끝난 뒤, 전부 함수화함으로써 depth indent 줄이기.
-      // 게임 시작 콘솔
-      Console.print('숫자 야구 게임을 시작합니다.');
       // 게임 진행 콘솔
-      Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-        // 문제 없는 값인지 체크
-        isValidUserInput(userInput);
-        this.user.setNumber(userInput);
-        this.computer.createNumbers();
-
-        // 게임끝 재시작 콘솔
-        this.selectContinue();
-      });
+      this.computer.createNumbers();
+      this.guess();
     } catch (error) {
       Console.print(error);
     }
+  }
+
+  guess() {
+    Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      // 문제 없는 값인지 체크
+      isValidUserInput(userInput);
+      this.user.setNumber(userInput);
+      const { strike, ball } = checkAnswer(this.user.number, this.computer.number);
+
+      Console.print(`Strike : ${strike}, Ball : ${ball}`);
+      Console.print(this.computer.number);
+      Console.print(this.user.number);
+      // 게임끝 재시작 콘솔
+      if (strike === 3) return this.selectContinue();
+      this.guess();
+    });
   }
 
   end() {
@@ -38,16 +48,13 @@ class App {
   }
 
   selectContinue() {
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (userInput) => {
-        Console.print(`input : ${userInput}`);
-        const playContinue = isValidContinueOption(userInput);
-        if (playContinue) return this.play();
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
+      Console.print(`input : ${userInput}`);
+      const playContinue = isValidContinueOption(userInput);
+      if (playContinue) return this.play();
 
-        return this.end();
-      },
-    );
+      return this.end();
+    });
   }
 }
 

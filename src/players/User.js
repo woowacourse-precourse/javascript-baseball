@@ -4,7 +4,8 @@ class User {
   }
 
   setNumber(userInput) {
-    this.number = userInput.split('');
+    const stringArray = userInput.split('');
+    this.number = stringArray.map((string) => Number(string));
   }
 }
 

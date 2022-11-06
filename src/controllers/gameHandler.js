@@ -44,4 +44,26 @@ const isDuplicated = (userInput) => {
   throw new Error('중복된 숫자는 사용할 수 없습니다.');
 };
 
-module.exports = { isValidContinueOption, isValidUserInput };
+/* Compare UserNumbers with ComputerNumbers */
+const checkAnswer = (userNumbers, computerNumbers) => {
+  let strike = 0;
+  let ball = 0;
+  userNumbers.forEach((number) => {
+    const sameIndex = isSameIndex(number, userNumbers, computerNumbers);
+    if (!computerNumbers.includes(number)) return;
+
+    if (sameIndex) return (strike += 1);
+
+    ball += 1;
+  });
+
+  return { strike, ball };
+};
+
+const isSameIndex = (number, userNumbers, computerNumbers) => {
+  const resultValue = userNumbers.indexOf(number) === computerNumbers.indexOf(number);
+
+  return resultValue;
+};
+
+module.exports = { isValidContinueOption, isValidUserInput, checkAnswer };
