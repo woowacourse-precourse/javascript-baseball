@@ -28,7 +28,10 @@ class App {
       throw new Error('잘못된 값을 입력하였습니다!');
     }
     const userInput = [...answer].map(number => +number);
-    this.getComputerOutput(userInput);
+    const didUserWin = this.computeResult(userInput);
+    if (didUserWin) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
   }
 
   static isValidUserInput(input) {
@@ -39,10 +42,11 @@ class App {
     return false;
   }
 
-  getComputerOutput(userInput) {
+  computeResult(userInput) {
     const [balls, strikes] = this.countBallsAndStrikes(userInput);
     const result = App.createResultText(balls, strikes);
     MissionUtils.Console.print(result);
+    return strikes === 3;
   }
 
   countBallsAndStrikes(userInput) {
