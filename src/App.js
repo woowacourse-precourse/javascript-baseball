@@ -19,6 +19,7 @@ class App {
       this.PlayerInput.push(Number(ans[i]))
     }
     return this.PlayerInput
+
   }
 
   start(){
@@ -26,7 +27,7 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요:', (answer) => {
     this.resetComInput()
     this.setComInput()
-    console.log(this.setPlayerInput(answer))
+    this.setPlayerInput(answer)
     });
   }
 
