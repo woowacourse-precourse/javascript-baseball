@@ -6,7 +6,7 @@ const Calculator = require('./Calculator');
 
 class BaseballGame {
   constructor() {
-    this.isCorrect = false;
+    this.isStop = false;
     this.calculator = new Calculator();
   }
 
@@ -35,7 +35,7 @@ class BaseballGame {
     if (!ball && !strike) return Console.print(GAME_MESSAGE.nothing);
 
     if (strike === NUMBER_LENGTH) {
-      this.isCorrect = true;
+      this.isStop = true;
       return Console.print(`${strike}스트라이크`);
     }
 
@@ -45,7 +45,7 @@ class BaseballGame {
   askRestart() {
     Console.readLine(GAME_MESSAGE.restart, (answer) => {
       if (answer === '1') {
-        this.isCorrect = false;
+        this.isStop = false;
         this.startGame();
       }
     });
@@ -54,7 +54,7 @@ class BaseballGame {
   startGame() {
     const randomNumber = createRandomNumber();
 
-    while (!this.isCorrect) {
+    while (!this.isStop) {
       Console.readLine(GAME_MESSAGE.input, (input) => {
         this.getResult(input, randomNumber);
       });
