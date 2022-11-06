@@ -24,6 +24,7 @@ class App {
   requestAnswer(message) {
     Console.readLine(message, (answer) => {
       if (answer.length !== 3) throw new Error(MESSAGE.ERROR.ANSWER_LENGTH_MUST_BE_THREE);
+      if (answer.length !== [...new Set(answer)].length) throw new Error(MESSAGE.ERROR.ANSWER_IS_MUST_BE_DIFFERENT_EACH_NUMBER);
       this.userAnswer = answer.split("").map(Number);
 
       this.compareAnswer(this.answer, this.userAnswer);
