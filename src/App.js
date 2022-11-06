@@ -26,14 +26,17 @@ class App {
       try {
         await this.inputUserAnswer();
         if (this.checkUserGameAnswer()) throw new Error("out of range");
-        this.compareUserAnswer(anwser);
+        const result = this.compareUserAnswer(anwser);
+        this.resultPrint(result);
       } catch (e) {
         console.log(e);
         this.exceptionEnd();
       }
     }
 
-    if (this.game) this.endGame();
+    if (!this.game) this.endGame();
+
+    return;
   }
 
   createAnswer() {
@@ -67,12 +70,34 @@ class App {
       if (answer[i] !== num && answer.includes(num)) obj.ball += 1;
       if (answer[i] === num) obj.strike += 1;
     });
-
+    //todo: 나중에 지우기
+    MissionUtils.Console.print(answer);
     return obj;
   }
 
   // - 결과를 출력하는 기능
-  resultPrint(ball = 0, strike = 0) {}
+  resultPrint({ ball, strike }) {
+    let resultMent;
+    switch (strike) {
+      case 0:
+        ball >= 1
+          ? (resultMent = `${ball}${ment.ball}`)
+          : (resultMent = ment.nothing);
+        break;
+      case 1:
+      case 2:
+      case 3:
+        ball >= 1
+          ? (resultMent = `${ball}${ment.ball} ${strike}${ment.strike}`)
+          : (resultMent = `${strike}${ment.strike}`);
+        break;
+      default:
+        break;
+    }
+    MissionUtils.Console.print(resultMent);
+    if (strike === 3) this.game = gameStatus.stop;
+    return;
+  }
   // - 결과에 따라 다른 기능을 호출하는 기능
   //   1. 사용자 입력을 받는 기능으로 돌아가기
   //   2. 사용자 질문을 받는 기능
