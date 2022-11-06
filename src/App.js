@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const User = require('./lib/User');
-const Computer = require('./lib/Computer');
-const Game = require('./lib/Game');
+const User = require('./components/User');
+const Computer = require('./components/Computer');
+const Game = require('./components/Game');
 const { NUMBER_LIMIT, MESSAGE, OPTION } = require('./constant/baseball');
 
 class App {
