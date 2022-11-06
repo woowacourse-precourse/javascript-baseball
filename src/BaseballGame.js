@@ -4,8 +4,12 @@ const ValidateUserInput = require("./ValidateUserInput");
 
 class BaseballGame {
   constructor() {
-    this.isFirstGame = true;
     this.validateUserInput = new ValidateUserInput();
+    this.init(true);
+  }
+
+  init(isFirstGame) {
+    this.isFirstGame = isFirstGame;
     this.pickedNumberByComputer =
       new PickedNumberByComputer().randomNumInRange();
   }
@@ -39,8 +43,8 @@ class BaseballGame {
     selectedNumber = Number(selectedNumber);
 
     if (selectedNumber === 1) {
-      this.isFirstGame = false;
-      new BaseballGame().playGame(false);
+      this.init(false);
+      this.playGame();
     } else if (selectedNumber === 2) {
       Console.print("게임 종료");
       Console.close();
