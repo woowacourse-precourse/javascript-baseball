@@ -1,8 +1,11 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  constructor() {
     Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
+  play() {
     this.Answer = this.makeComputerArr();
     console.log(this.Answer);
     this.makeInputNum();
@@ -66,19 +69,13 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (input === "1") {
-          return this.restart();
+          return this.play();
         }
         if (input === "2") process.exit();
         if (input < 1 || input > 2 || Number.isNaN(input))
           throw new Error("정해진 값을 입력해주세요.");
       }
     );
-  }
-
-  restart() {
-    this.Answer = this.makeComputerArr();
-    console.log(this.Answer);
-    this.makeInputNum();
   }
 }
 
