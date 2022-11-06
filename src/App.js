@@ -9,10 +9,9 @@ class App {
     return overlappingNum;
   }
   getStrikeCnt(computerNum, userNum) {
-    let strikeCnt = 0;
-    for (let i = 0; i < 3; i++) {
-      if (computerNum[i] === userNum[i]) strikeCnt++;
-    }
+    const strikeCnt = userNum.reduce((acc, cur, idx) => {
+      return acc + ((computerNum[idx] === cur) | 0);
+    }, 0);
     return strikeCnt;
   }
   play() {
