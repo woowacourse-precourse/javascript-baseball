@@ -15,6 +15,7 @@ class App {
       this.changeUserNumbersToArray(userNumber);
       this.getScore(this.computerNumberArray, this.userNumberArray);
       this.getScoreResult(this.score);
+      this.printScoreResult(this.scoreResult);
     });
   }
 
@@ -74,6 +75,13 @@ class App {
       scoreResult = `${score[1]}볼 ${score[0]}스트라이크`;
 
     this.scoreResult = scoreResult;
+  }
+
+  printScoreResult(scoreResult) {
+    Console.print(scoreResult);
+    if (scoreResult === '3스트라이크')
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    else this.getUserNumbers();
   }
 
   play() {
