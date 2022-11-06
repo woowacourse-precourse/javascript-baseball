@@ -131,34 +131,33 @@ develop ______________ * __________ * _______ ...
 
 ```
 + src
-  + baseball
-    + models
-      └ gong.js
-        - class Gong
-          - #values: [number, number, number]
-          - static fromRandom(): Gong
-          - valueOf(): [number, number, number]
-      └ opponent.js
-        - class Opponent
-          - #gong: Gong
-          - guessGong(gong: Gong): { strike: number, ball: number }
-    └ index.js
-      - async play(): void
-    └ input.js
-      - async read(): string
-      - write(text: string): void
-      - asGong(input: string): Gong
-      - asEndSelect(input: string): END_SELECT
-    └ constants.js
-      - END_SELECT.RETRY = 1
-      - END_SELECT.SHUTDOWN = 2
-      - MESSAGE.GAME_START = '숫자 야구 게임을 시작합니다.'
-      - MESSAGE.INPUT_YOUR_GONG = '숫자를 입력하세요 : '
-      - MESSAGE.INVALID_GONG_FORMAT = '서로 다른 3개의 숫자를 입력해야합니다.'
-      - MESSAGE.GUESS_GONG_RESULT_BALL = '볼'
-      - MESSAGE.GUESS_GONG_RESULT_STRIKE = '스트라이크'
-      - MESSAGE.GUESS_GONG_RESULT_NOTHING = '낫싱'
-      - MESSAGE.GUESS_GONG_RESULT_SUCCESS = '3개의 숫자를 모두 맞혔습니다! 게임 종료'
-      - MESSAGE.END_SELECT = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+  + models
+    └ gong.js
+      - class Gong
+        - #values: [number, number, number]
+        - static fromRandom(): Gong
+        - valueOf(): [number, number, number]
+    └ opponent.js
+      - class Opponent
+        - #gong: Gong
+        - guessGong(gong: Gong): { strike: number, ball: number }
+  └ input.js
+    - async read(query: string): string
+    - print(message: string): void
+    - asGong(input: string): Gong
+    - asEndSelect(input: string): END_SELECT
+  └ constants.js
+    - EndSelect.RETRY = 1
+    - EndSelect.SHUTDOWN = 2
+  └ messages.js
+    - Messages.GAME_START = '숫자 야구 게임을 시작합니다.'
+    - Messages.INPUT_YOUR_GONG = '숫자를 입력하세요 : '
+    - Messages.INVALID_GONG_FORMAT = '서로 다른 3개의 숫자를 입력해야합니다.'
+    - Messages.GUESS_GONG_RESULT_BALL = '볼'
+    - Messages.GUESS_GONG_RESULT_STRIKE = '스트라이크'
+    - Messages.GUESS_GONG_RESULT_NOTHING = '낫싱'
+    - Messages.GUESS_GONG_RESULT_SUCCESS = '3개의 숫자를 모두 맞혔습니다! 게임 종료'
+    - Messages.END_SELECT = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
   └ App.js
+    - async play(): void
 ```
