@@ -84,11 +84,18 @@ class App {
     return result;
   }
   getUserInputArr() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      MissionUtils.Console.close();
-      let userInputArr = Array.from(String(userInput));
-      userInputArr = userInputArr.map((num) => Number(num));
-      return userInputArr;
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine(
+        "숫자를 입력해주세요 : ",
+        (userInputArr) => {
+          userInputArr = Array.from(String(userInputArr));
+          userInputArr = userInputArr.map((num) => Number(num));
+          resolve(userInputArr);
+          if (this.checkUserInputValid(userInputArr)) {
+            return userInputArr;
+          }
+        }
+      );
     });
   }
 }
