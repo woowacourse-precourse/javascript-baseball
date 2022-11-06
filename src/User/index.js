@@ -1,3 +1,5 @@
+const Validate = require('../utils/Validate');
+
 class User {
   #InputNums;
 
