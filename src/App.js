@@ -8,12 +8,12 @@ class App {
   play() {
     this.Answer = this.makeAnswer();
     console.log(this.Answer);
-    this.makeInputNum();
+    this.enterNumber();
   }
 
-  inputisCorrect(userAnswer) {
-    if (userAnswer) return this.endOption();
-    if (!userAnswer) return this.makeInputNum();
+  inputisCorrect(allCorrect) {
+    if (allCorrect) return this.endOption();
+    if (!allCorrect) return this.enterNumber();
     throw new Error();
   }
 
@@ -34,13 +34,12 @@ class App {
       if (Number.isNaN(x)) throw new Error();
       return parseInt(x, 10);
     });
-    return numberArr;
+    return this.compare(numberArr);
   }
 
-  makeInputNum() {
+  enterNumber() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      const inputArray = this.inputCheck(input);
-      return this.compare(inputArray);
+      return this.inputCheck(input);
     });
   }
 
