@@ -50,7 +50,30 @@ class App {
     return ball;
   }
 
-  gameResult(computer, userValue) {}
+  gameResult(computer, userValue) {
+    const STRIKE = this.countStrike(computer, userValue);
+    const BALL = this.countBall(computer, userValue) - STRIKE;
+    if (STRIKE + BALL === 0) {
+      Console.print("낫싱");
+      return this.userInput(computer);
+    }
+    if (STRIKE === 3) {
+      Console.print("3스트라이크");
+      return this.selectReplay();
+    }
+    if (STRIKE === 0) {
+      Console.print(`${BALL}볼`);
+      return this.userInput(computer);
+    }
+    if (BALL === 0) {
+      Console.print(`${STRIKE}스트라이크`);
+      return this.userInput(computer);
+    }
+    Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+    return this.userInput(computer);
+  }
+
+  selectReplay() {}
 }
 
 const app = new App();
