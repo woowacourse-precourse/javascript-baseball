@@ -1,6 +1,7 @@
 const Render = require("./Render");
 const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
+const Computer = require("./ComputerInput");
 
 function numToArr(num) {
   return [...String(num)];
@@ -58,6 +59,8 @@ class App {
           }
 
           if (this.replayQnAResult === "1") {
+            this.firstTry = true;
+            this.computer = Computer();
             this.play();
           }
 
