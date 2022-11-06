@@ -101,7 +101,9 @@ class App {
     return duplicateCheckSet.size === MAX_NUMBER_LENGTH;
   }
   hasOnlyValidRangeNumber(userInput) {
-    const isValidRangeNumber = (number) => MIN_NUMBER_RANGE <= number && number <= MAX_NUMBER_RANGE;
+    const isValidRangeNumber = (number) => {
+      return MIN_NUMBER_RANGE <= number && number <= MAX_NUMBER_RANGE;
+    };
 
     return userInput
       .split("")
