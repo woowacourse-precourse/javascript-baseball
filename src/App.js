@@ -2,7 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]));
+    // 3개의 랜덤숫자 생성
+    let RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 }
 
