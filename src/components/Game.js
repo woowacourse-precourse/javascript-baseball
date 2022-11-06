@@ -25,11 +25,11 @@ class Game {
   }
 
   getResult(userInputNumber) {
-    const gameCalculator = new CalculateGame(this.computerNumber, userInputNumber);
+    const calculator = new CalculateGame(this.computerNumber, userInputNumber);
 
-    this.print(gameCalculator.getResult());
+    this.print(calculator.getResult());
 
-    if (gameCalculator.checkSuccess()) {
+    if (calculator.checkSuccess()) {
       this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.askRestart();
     } else {
