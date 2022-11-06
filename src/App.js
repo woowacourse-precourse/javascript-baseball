@@ -24,26 +24,29 @@ class App {
   }
 
   #isAvailableValue(value) {
-    let stringValue = value + '';
+    const uniqueValue = [...new Set(value)].join('');
 
-    return stringValue.length === 3 && /^[1-9]{3}$/.test([...new Set(stringValue)].join(''));
+    return value.length === 3 && /^[1-9]{3}$/.test(uniqueValue);
   }
 
   #gameOver() {
+    this.#isPlaying = false;
     this.#computerValue = '';
     this.#userValue = '';
 
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        if (answer === '1') this.play();
-        else if (answer === '2') this.#isPlaying = false;
+        if (answer === '1') {
+          this.#isPlaying = true;
+          this.play();
+        } else if (answer === '2') MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
         else this.#gameOver();
       }
     );
   }
 
-  #getResult() {
+  #printResult() {
     let ball = 0;
     let strike = 0;
 
@@ -67,8 +70,14 @@ class App {
   #setUserValue(value) {
     if (this.#isAvailableValue(value)) {
       this.#userValue = value;
-      this.#getResult();
-    } else throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+      this.#printResult();
+    } else {
+      this.#isPlaying = false;
+      this.#computerValue = '';
+      this.#userValue = '';
+
+      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    }
   }
 
   #readUserValue() {
@@ -76,9 +85,10 @@ class App {
   }
 
   play() {
-    if (!this.#isPlaying) MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.#isPlaying = true;
-
+    if (!this.#isPlaying) {
+      MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+      this.#isPlaying = true;
+    }
     this.#setRandomComputerValue();
     this.#readUserValue();
   }
