@@ -34,6 +34,17 @@ class App {
       this.counterConsole(ball, strike);
     });
   }
+  checkNumber(answer) {
+    let userNumber = String(answer);
+    if (userNumber.length !== 3) throw "예외";
+
+    let check = /^[1-9]+$/;
+    for (let i = 0; i < userNumber.length; i++) {
+      if (!check.test(userNumber[i])) throw "예외";
+    }
+
+    return userNumber;
+  }
 }
 
 module.exports = App;
