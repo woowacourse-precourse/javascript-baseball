@@ -32,7 +32,18 @@ class App {
       if (this.user.length !== 3) {
         throw Error("3글자로 입력해주세요.");
       }
+      this.countBalls();
     });
+  }
+  countBalls() {
+    let balls = 0;
+    this.user.forEach((value, index) => {
+      if (this.computer.includes(+value) && this.computer[index] !== +value) {
+        balls += 1;
+      }
+    });
+    console.log(balls);
+    return balls;
   }
 }
 const app = new App();
