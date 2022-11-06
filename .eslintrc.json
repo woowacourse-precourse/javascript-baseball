@@ -15,7 +15,6 @@
     "no-console": "off",
     "no-unused-vars": "error",
     "no-restricted-globals": "off",
-    "class-methods-use-this": "off",
     "no-new": "off",
     "no-undef": "off",
     "import/extensions": [
