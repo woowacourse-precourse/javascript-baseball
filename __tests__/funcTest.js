@@ -79,4 +79,18 @@ describe("기능테스트", () => {
     app.continueQuestion("1");
     expect(spyConsole).toBeCalledTimes(1);
   });
+
+  test("nextProgressTrue", () => {
+    const app = new App();
+    const spyContinueQuestion = jest.spyOn(app, "continueQuestion");
+    app.nextProgress(true);
+    expect(spyContinueQuestion).toBeCalledTimes(1);
+  });
+
+  test("nextProgressFalse", () => {
+    const app = new App();
+    const spyProgress = jest.spyOn(app, "progress");
+    app.nextProgress(false);
+    expect(spyProgress).toBeCalledTimes(1);
+  });
 });
