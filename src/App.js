@@ -17,7 +17,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 function App() {
   this.play = () => {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    createcomputerNumber();
+    createComputerNumber();
     recursiveAsyncReadLine();
   };
 
@@ -38,7 +38,6 @@ function App() {
         strike++;
       }
     }
-
     return strike;
   };
 
@@ -90,7 +89,7 @@ function App() {
       return;
     }
     if (number === "1") {
-      createcomputerNumber();
+      createComputerNumber();
       this.endflag = undefined;
       recursiveAsyncReadLine();
       return;
@@ -117,7 +116,7 @@ function App() {
     );
   };
 
-  const createcomputerNumber = () => {
+  const createComputerNumber = () => {
     this.computerNumber = "";
 
     for (let index = 0; index < 3; index++) {
