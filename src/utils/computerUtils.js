@@ -23,7 +23,7 @@ const getRandomNumber = () => {
   return Random.pickUniqueNumbersInRange(
     COMPUTER.START_NUMBER,
     COMPUTER.END_NUMBER,
-    COMPUTER.COUNT
+    COMPUTER.ANSWER_LENGTH
   );
 };
 
@@ -33,7 +33,7 @@ const generateHint = (inputNumbers, answers) => {
     ball: 0,
   };
 
-  for (let index = 0; index < COMPUTER.COUNT; index++) {
+  for (let index = 0; index < COMPUTER.ANSWER_LENGTH; index++) {
     const inputNumber = inputNumbers[index];
 
     score.strike += countStrike(inputNumber, answers[index]);

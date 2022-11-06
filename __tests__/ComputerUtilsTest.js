@@ -5,7 +5,7 @@ describe('서로 다른 임의의 수 3개 생성 테스트', () => {
   const randomNumbers = computerUtils.getRandomNumber();
 
   test('중복 숫자 포함 확인', () => {
-    expect([...new Set(randomNumbers)]).toHaveLength(COMPUTER.COUNT);
+    expect([...new Set(randomNumbers)]).toHaveLength(COMPUTER.ANSWER_LENGTH);
   });
 
   test('배열 안에 포함된 값은 1이상 9이하', () => {

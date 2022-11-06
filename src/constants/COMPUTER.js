@@ -1,9 +1,9 @@
 const START_NUMBER = 1;
 const END_NUMBER = 9;
-const COUNT = 3;
+const ANSWER_LENGTH = 3;
 
 module.exports = {
   START_NUMBER,
   END_NUMBER,
-  COUNT,
+  ANSWER_LENGTH,
 };

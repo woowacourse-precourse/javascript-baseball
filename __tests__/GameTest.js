@@ -17,7 +17,7 @@ describe('Game test', () => {
 
     app.play();
 
-    expect(app.answer).toHaveLength(COMPUTER.COUNT);
+    expect(app.answer).toHaveLength(COMPUTER.ANSWER_LENGTH);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INIT_MESSAGE));
   });
 });
