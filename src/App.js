@@ -11,6 +11,7 @@ class App {
   AnswerisRight(userAnswer) {
     if (userAnswer) return this.end();
     if (!userAnswer) return this.makeInputNum();
+    throw new Error();
   }
 
   makeComputerArr() {
@@ -68,9 +69,9 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (input === "1") {
-          this.restart();
+          return this.restart();
         }
-        if (input === "2") process.exit();
+        if (input === "2") process.exit("");
         if (input < 1 || input > 2 || Number.isNaN(input))
           throw new Error("정해진 값을 입력해주세요.");
       }
