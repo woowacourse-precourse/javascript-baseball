@@ -15,6 +15,15 @@ class App {
       //   `guessNumber는 ${guessNumber}, computerNumber는 ${computerNumber}`
       // );
       MissionUtils.Console.close();
+      try {
+        if (guessNumber.length !== 3) {
+          throw new Error("예외");
+        }
+      } catch (e) {
+        // console.log();
+        // MissionUtils.Console.print(e);
+        // break;
+      }
 
       // const strike = computerNumber.filter(
       //   (num, index) => num === guessNumber[index]
