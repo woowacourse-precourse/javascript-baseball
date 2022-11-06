@@ -89,4 +89,15 @@ describe("기능 테스트", () => {
     expect(case2).toEqual(2);
     expect(case3).toEqual(3);
   });
+
+  test("볼 카운트를 결정하는 기능", () => {
+    const app = new App();
+    const case1 = app.decideBallCount("123", "914");
+    const case2 = app.decideBallCount("123", "412");
+    const case3 = app.decideBallCount("123", "312");
+
+    expect(case1).toEqual(1);
+    expect(case2).toEqual(2);
+    expect(case3).toEqual(3);
+  });
 });
