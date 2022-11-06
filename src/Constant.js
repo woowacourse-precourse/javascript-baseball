@@ -8,6 +8,11 @@ const MESSAGE = {
   THREE_STRIKE: '3스트라이크',
 };
 
+const CONSTANT = {
+  DIGIT_LIMIT: 3,
+};
+
 module.exports = {
   MESSAGE,
+  CONSTANT,
 };
