@@ -6,13 +6,17 @@ class App {
   }
 
   play() {
-    this.printMsg("숫자 야구 게임을 시작합니다.");
+    this.greetingMsg();
     this.ANSWER = this.setAnswer();
     this.askNumInput();
   }
 
   printMsg(message) {
     MissionUtils.Console.print(message);
+  }
+
+  greetingMsg() {
+    this.printMsg("숫자 야구 게임을 시작합니다.");
   }
 
   setAnswer() {
