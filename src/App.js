@@ -1,23 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
-function isValidUserInput(userInput) {
-  const ERROR_TEXT = new Error('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
-  const isNumberElement = (element) => (element >= '1' && element <= '9');
-  const userNumbers = [];
-  userInput
-    .split('')
-    .forEach(element => {
-      !userNumbers.includes(element) ? userNumbers.push(element) : ""
-    });
-
-  if (
-    userNumbers.length !== 3 ||
-    !(userNumbers).every(isNumberElement)
-  ) throw ERROR_TEXT;
-
-  return userNumbers.map(Number);
-}
-
 class BaseballGame {
   constructor() {
     this.isThreeStrike = false;
@@ -44,7 +26,7 @@ class BaseballGame {
 
   inputUserNumbers(computerNumbers) {
     Console.readLine("숫자를 입력해주세요 : ", userInput => {
-      const userNumbers = isValidUserInput(userInput);
+      const userNumbers = this.isValidUserInput(userInput);
       this.progressTurn(userNumbers, computerNumbers);
     });
   }
@@ -73,9 +55,30 @@ class BaseballGame {
       } else if (number === '2') {
         Console.close();
       } else {
+        Console.close();
         throw ERROR_TEXT;
       }
     });
+  }
+
+  isValidUserInput(userInput) {
+    const ERROR_COMMENT = new Error('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
+    const isNumberElement = (element) => (element >= '1' && element <= '9');
+    const userNumbers = [];
+    userInput
+      .split('')
+      .forEach(element => {
+        !userNumbers.includes(element) ? userNumbers.push(element) : ""
+      });
+
+    if (
+      userNumbers.length !== 3 ||
+      !(userNumbers).every(isNumberElement)
+    ) {
+      throw ERROR_COMMENT;
+    }
+
+    return userNumbers.map(Number);
   }
 }
 
