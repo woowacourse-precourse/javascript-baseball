@@ -14,7 +14,7 @@ class App {
   // 게임 준비 (정답 준비)
   gamePrepare() {
     const randomNum = makeRandomNumber();
-    this.gameStart(randomNum.toString());
+    this.gameStart(randomNum);
   }
 
   // 게임 시작
