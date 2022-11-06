@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-// import { init } from './game/init';
 const init = require('./game/init');
 
 class App {

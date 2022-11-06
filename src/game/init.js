@@ -1,5 +1,11 @@
 
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+    generateRandomBallNumber,
+    countBallStrike,
+    printBallStrike
+} = require("./ball");
+const { isValidBallNumber } = require("./validation");
 
 const destroyGame = () => {
     MissionUtils.Console.close();
@@ -20,83 +26,25 @@ const askReplay = () => {
     });
 }
 
-const judgeBalls = (computerNumber, userNumber) => {
+const ballManager = (computerNumber, userNumber) => {
     if (computerNumber === userNumber) {
         MissionUtils.Console.print('3스트라이크');
         return askReplay();
     }
     const computerNumbersArray = computerNumber.split('');
     const userNumbersArray = userNumber.split('');
-    printBallStrike(computerNumbersArray, userNumbersArray);
+    const { ball, strike } = countBallStrike(computerNumbersArray, userNumbersArray);
+    printBallStrike(ball, strike);
     playGame(computerNumber);
 }
 
-const printBallStrike = (computerNumbersArray, userNumbersArray) => {
-    let text = '';
-    let textArray = [];
-    let ball = 0;
-    let strike = 0;
-    for (let computerIndex = 0; computerIndex < 3; computerIndex++) {
-        for (let userIndex = 0; userIndex < 3; userIndex++) {
-            if (computerNumbersArray[computerIndex] === userNumbersArray[userIndex]) {
-                if (computerIndex === userIndex) {
-                    strike++;
-                }
-                else {
-                    ball++;
-                }
-            }
-        }
-    }
-
-    if (ball !== 0) {
-        textArray.push(`${ball}볼`)
-    }
-    if (strike !== 0) {
-        textArray.push(`${strike}스트라이크`)
-    }
-
-    if (textArray.length > 0) {
-        text = textArray.join(' ')
-    }
-    else {
-        text = '낫싱'
-    }
-    
-    MissionUtils.Console.print(text);
-}
-
-const isValidBallNumber = (answer) => {
-    if (answer.length !== 3) {
-        return false
-    }
-    if (answer[0] === answer[1] || answer[1] === answer[2] || answer[2] === answer[0]) {
-        return false
-    }
-    if (isNaN(Number(answer))) {
-        return false
-    }
-    return true
-}
-
 const playGame = (computerNumber) => {
-    MissionUtils.Console.readLine(computerNumber + '숫자를 입력해주세요 : ', (userNumber) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
         if (!isValidBallNumber(userNumber)) {
             throw new Error();
         }
-        judgeBalls(computerNumber, userNumber);
+        ballManager(computerNumber, userNumber);
     });
-}
-
-const generateRandomBallNumber = () => {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
-    return computer.join('');
 }
 
 const init = () => {
