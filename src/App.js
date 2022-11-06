@@ -1,9 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 
-function getInput(){
-  MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
-  MissionUtils.Console.close();
+function makeTarget(){
+  const tempArr = [];
+
+  while(tempArr.length<3){
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if(!tempArr.includes(number)){
+      tempArr.push(number);
+    }
+  }
+
+  return [...tempArr];
 }
 
 
@@ -11,7 +19,13 @@ function getInput(){
 
 class App {
   play() {
-    getInput();
+    MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
+    let isRepeat = true;
+
+    while(isRepeat){
+      const target = makeTarget(););
+
+    }
   }
 }
 
