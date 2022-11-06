@@ -61,6 +61,10 @@ function App() {
           return;
         }
 
+        if (number.length !== 3) {
+          throw new Error("올바른 입력이 아닙니다. 다시 입력해 주세요");
+        }
+
         this.userNumber = number;
 
         checkNumber(this.computerNumber, this.userNumber);
