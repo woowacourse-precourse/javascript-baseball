@@ -69,7 +69,10 @@ class App {
     const str = ballStr + " " + strikeStr;
     this.utils.Console.print(str.trim());
   }
-
+  init() {
+    this.answer = this.generateNumbers();
+    this.utils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
   play() {}
 }
 
