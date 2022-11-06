@@ -79,7 +79,7 @@ class App {
       this.inputs = inputs.split("").map((v) => parseInt(v));
       this.validateInput(this.inputs);
 
-      return this.compareNumbers(this.answer, this.inputs);
+      return this.compareToAnswer(this.answer, this.inputs);
     });
   }
   process(score) {
