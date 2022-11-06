@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { Computer } = require('../functions/Computer');
 const { ErrorCheck } = require('../functions/ErrorCheck');
-const { SYSTEM_MESSAGE } = require('../constants/system message');
+const { SYSTEM_MESSAGE, GAME_MESSAGE } = require('../constants/system message');
 
 class Baseball {
   constructor() {
@@ -35,6 +35,25 @@ class Baseball {
       });
 
     this.printStrikeBallCountMessage(STRIKE, BALL);
+  }
+
+  printStrikeBallCountMessage(STRIKE, BALL) {
+    let nothing = false;
+    if (ErrorCheck.isNothing(STRIKE, BALL)) nothing = true;
+
+    const ballMessage = BALL ? `${BALL}${GAME_MESSAGE.BALL}` : '';
+    const strikeMessage = STRIKE ? `${STRIKE}${GAME_MESSAGE.STRIKE}` : '';
+    const resultMessage = nothing
+      ? GAME_MESSAGE.NOTHING
+      : ballMessage + strikeMessage;
+
+    Console.print(resultMessage);
+
+    if (resultMessage !== GAME_MESSAGE.CORRECT_MESSAGE) this.getUserNumber();
+    else {
+      Console.print(SYSTEM_MESSAGE.END);
+      this.getReplayNumber();
+    }
   }
 }
 
