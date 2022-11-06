@@ -1,6 +1,12 @@
 const NumberBaseball = require('../src/model/number-baseball.model');
 
 describe('1~9까지 서로 다른 3자리 숫자 입력 받기', () => {
+  test('숫자가 입력되면 이를 split해 문자열 배열로 반환한다.', () => {
+    const numberBaseball = new NumberBaseball();
+    const input = '123';
+    const result = numberBaseball.splitNumber(input);
+    expect(result).toEqual(['1', '2', '3']);
+  });
   test('3자리 숫자가 정상적으로 입력되면 true를 반환한다.', () => {
     const numberBaseball = new NumberBaseball();
     const input = '123';
