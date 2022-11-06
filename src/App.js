@@ -17,12 +17,8 @@ class App {
     // 구현이 끝난 뒤, 전부 함수화함으로써 depth indent 줄이기.
     // 게임 시작 콘솔
     Console.print('숫자 야구 게임을 시작합니다.');
-    try {
-      // 게임 진행 콘솔
-      this.playGame();
-    } catch (error) {
-      Console.print(error);
-    }
+    // 게임 진행 콘솔
+    this.playGame();
   }
 
   playGame() {
@@ -38,10 +34,7 @@ class App {
       this.user.setNumber(userInput);
       const answerResult = checkAnswer(this.user.number, this.computer.number);
       const resultPrint = parseResultToString(answerResult);
-
       Console.print(resultPrint);
-      // Console.print(this.computer.number);
-      // Console.print(this.user.number);
 
       // 게임끝 재시작 콘솔
       if (answerResult.strike === 3) return this.selectContinue();
@@ -79,6 +72,4 @@ const parseResultToString = (answerResult) => {
   return parsedResult.join(' ');
 };
 
-const app = new App();
-app.play();
 module.exports = App;

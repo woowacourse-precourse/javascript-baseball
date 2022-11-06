@@ -6,7 +6,14 @@ class Computer {
   }
 
   createNumbers() {
-    const computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computerNumbers = [];
+    while (computerNumbers.length !== 3) {
+      const randomNumber = Random.pickNumberInRange(1, 9);
+      if (!computerNumbers.includes(randomNumber)) {
+        computerNumbers.push(randomNumber);
+      }
+    }
+
     this.number = computerNumbers;
   }
 }
