@@ -67,7 +67,7 @@ class App {
     }).length;
   }
 
-  printHint(numberOfBall, numberOfStrike) {
+  makeHintString(numberOfBall, numberOfStrike) {
     const hint = [];
 
     if (numberOfBall) {
