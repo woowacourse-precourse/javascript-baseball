@@ -8,7 +8,7 @@ class App {
 
   GenerageNumber(){
   while (this.Computer_Number.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    const number = MissionUtils.Random.pickNumberInRange(1,9);
     if (!this.Computer_Number.includes(number)) {
       this.Computer_Number.push(number);
     }
@@ -46,7 +46,7 @@ class App {
     let strike=0;
     let ball=0;
     for(let place=0;place<3;place++){
-      const find = My_Number.indexOf(Computer_Number[place]);
+      let find = My_Number.indexOf(Computer_Number[place]);
       if(find>=0){
         if(find===place){
           strike++;
@@ -63,8 +63,9 @@ class App {
   }
   AllCorrect(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
-      console.log("len",answer.length)
+      if(answer.length!==1)throw("Request is failed")
       answer=Number(answer)
+      if(answer!==1&&answer!==2)throw("Request is failed")
       if(answer===1){
         this.Computer_Number=[]
         this.GenerageNumber();
