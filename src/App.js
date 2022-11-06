@@ -33,6 +33,15 @@ class App {
 
     return { strike, ball };
   }
+
+  scoreMessage(strike, ball) {
+    if (strike === 0 && ball === 0) return '낫싱';
+
+    const strikeMessage = strike ? `${strike}스트라이크` : '';
+    const ballMessage = ball ? `${ball}볼` : '';
+
+    return `${ballMessage} ${strikeMessage}`.trim();
+  }
 }
 
 module.exports = App;
