@@ -1,6 +1,8 @@
+const utils = require("./utlils");
+
 class BaseballGame {
   constructor() {
-    //this.targetNumber = getTargetNumber();
+    this.targetNumber = utils.getTargetNumber();
   }
 
   startGame() {
