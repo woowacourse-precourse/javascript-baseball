@@ -34,4 +34,37 @@ const inputNumber = (answer) => {
   return;
 };
 
+const judgeAnswer = (answer, number) => {
+  let strike = 0;
+  let ball = 0;
+
+  for (let i; i < 3; i++) {
+    if (answer[i] == number[i]) {
+      strike += 1;
+    }
+    if (answer[i] != number[i] && answer.includes(number[i])) {
+      ball += 1;
+    }
+  }
+
+  printJudgeResult(strike, ball, answer);
+
+  return;
+};
+
+const printJudgeResult = (strike, ball, answer) => {
+  if (strike == 0 && ball == 0) {
+    MissionUtils.Console.print("낫싱");
+    inputNumber(answer);
+  }
+
+  const strikeAns = strike == 0 ? "" : `${strike}스트라이크`;
+  const ballAns = ball == 0 ? "" : `${ball}볼 `;
+
+  MissionUtils.Console.print(strikeAns + ballAns);
+  inputNumber(answer);
+
+  return;
+};
+
 module.exports = App;
