@@ -16,6 +16,10 @@ class Message {
   static printStart() {
     Console.print(START_MESSAGE);
   }
+
+  static printEnd() {
+    Console.print(END_MESSAGE);
+  }
 }
 
 module.exports = Message;
