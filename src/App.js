@@ -31,6 +31,14 @@ class App {
       if (!this.isValidNumber(enteredNumber)) {
         throw new Error();
       }
+      const { strike, ball } = this.getResult(computerNumber, enteredNumber);
+      const message = this.printMessage({ strike, ball });
+      MissionUtils.Console.print(message);
+      if (strike === 3) {
+        this.gameOver();
+        return;
+      }
+      this.inputNumber(computerNumber);
     });
   }
 
