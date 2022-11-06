@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const GAME_RESULT = require('./Baseball/gameResult');
 const GET_COMPUTER_NUM = require('./Baseball/computerNum');
 const inputCheck = require('./Baseball/inputCheck');
 
@@ -28,9 +29,17 @@ class App {
       }
 
       if (IS_VALID_INPUT) {
+        this.gameRule();
         this.playGame();
       }
     });
+  }
+
+  gameRule() {
+    GAME_RESULT.getGameHint(
+      this.userInputNum.split('').map(Number),
+      this.COMPUTER_NUM
+    );
   }
 }
 
