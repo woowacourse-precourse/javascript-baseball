@@ -48,6 +48,33 @@ class App {
     this.randomNumber = Array.from(arr);
   }
 
+  checkStopGameOrNotInput(keepGameOrNot) {
+    //게임 계속
+    if (keepGameOrNot === "1") {
+      this.play();
+    }
+    //게임 종료.
+    else if (keepGameOrNot === "2") {
+      this.gameTerminate();
+    } else {
+      throw "잘못된 입력.";
+    }
+  }
+
+  stopGameOrNot() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.\n",
+      (keepGameOrNot) => {
+        try {
+          this.checkStopGameOrNotInput(keepGameOrNot);
+        } catch (err) {
+          this.gameTerminate();
+          throw err;
+        }
+      }
+    );
+  }
+
   isThreeStrike() {
     let threeStrike = this.randomNumber.every(
       (value, idx) => value === this.userInputNumber[idx]
@@ -55,6 +82,7 @@ class App {
     if (threeStrike) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.stopGameOrNot();
     }
   }
 
