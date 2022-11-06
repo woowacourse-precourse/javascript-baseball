@@ -25,11 +25,11 @@ class App {
       const gameResultMessage = this.getGameResultMessage(strikeCount, ballCount);
       Console.print(gameResultMessage);
 
-      if (!this.isGameOver(strikeCount)) {
-        this.play();
+      if (this.isGameOver(strikeCount)) {
+        this.gameOverPhase();
         return;
       }
-      this.gameOverPhase();
+      this.play();
     });
   }
 
