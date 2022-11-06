@@ -44,21 +44,36 @@ function gameStart(userNumber, computerNumber) {
         userInputNumber(computerNumber);
     } else {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', selectNewGame);
+        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', whetherGameEndsNot);
     }
 }
 
-function selectNewGame(number) {
-    const num = Number(number);
-    if (num === 1) {
+function whetherGameEndsNot(number) {
+    newGame(number);
+    endGame(number);
+    faultNumberInput(number);
+}
+
+function newGame(number) {
+    if (number === '1') {
         const app = new App();
         app.restart();
-    } else if (num === 2) {
+    }
+}
+
+function endGame(number) {
+    if (number === '2') {
+        MissionUtils.Console.print('게임을 완전히 종료합니다');
         MissionUtils.Console.close();
-    } else {
+    }
+}
+
+function faultNumberInput(number) {
+    if (number !== '1' && number !== '2') {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
+
 
 function inputValidation(number) {
     threeDigitValidation(number);
@@ -95,7 +110,6 @@ function countBall(userNumber, computerNumber) {
     const countIncludedNumber = userNumber.filter(eachDigit => computerNumber.includes(eachDigit)).length;
     return (countIncludedNumber - countStrike(userNumber, computerNumber));
 }
-
 
 function getHint(ballCount, strikeCount) {
     let hint = '';
