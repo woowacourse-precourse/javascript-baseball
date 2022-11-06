@@ -1,5 +1,4 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-import { isDuplicated } from "./utils";
 
 class BaseBallGame{
   constructor() {
@@ -16,6 +15,14 @@ class BaseBallGame{
 
     this.gameAnswer = answer;
   }
+
+  isDuplicated(arr) {
+    const elements = new Set();
+    arr.forEach(a => elements.add(a));
+  
+    if (arr.length !== elements.size) return true;
+    return false;
+  }
   
   validation(answer) {
     if (answer.some(v => isNaN(v))) {
@@ -27,7 +34,7 @@ class BaseBallGame{
     if (answer.some(v => v > 9) || answer.some(v => v < 1)) {
       throw new Error('1부터 9까지의 숫자만 입력 가능합니다.');
     }
-    if (isDuplicated(answer)) {
+    if (this.isDuplicated(answer)) {
       throw new Error('입력 숫자가 중복되었습니다.');
     }
 
