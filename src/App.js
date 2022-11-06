@@ -1,3 +1,4 @@
+const inputValidation = require('./validation/validation.js');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
