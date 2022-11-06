@@ -2,9 +2,18 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
 const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
 
+const {
+  START_MESSAGE,
+  END_MESSAGE,
+  INPUT_NUMBER_MESSAGE,
+  INPUT_RESTART_OR_END_MESSAGE,
+  WRONG_INPUT_ERROR_MESSAGE,
+} = require("./constants/Messeages");
+const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH, RESTART_INPUT, END_INPUT } = require("./constants/ConstantValues");
+
 class App {
   constructor() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(START_MESSAGE);
   }
 
   play() {
@@ -15,8 +24,8 @@ class App {
 
   drawThreeRandomNumbers() {
     const threeRandomNumber = new Set();
-    while (threeRandomNumber.size < 3) {
-      const newNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (threeRandomNumber.size < NUMBER_LENGTH) {
+      const newNumber = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
       threeRandomNumber.add(newNumber);
     }
 
@@ -24,10 +33,10 @@ class App {
   }
 
   startPlayerTurn() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       if (!validateInput(input)) {
         MissionUtils.Console.close();
-        throw new Error("잘못된 입력입니다.");
+        throw new Error(WRONG_INPUT_ERROR_MESSAGE);
       }
 
       const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
@@ -35,26 +44,26 @@ class App {
 
       MissionUtils.Console.print(resultOutput);
 
-      if (strikeCount === 3) {
+      if (strikeCount === NUMBER_LENGTH) {
         this.endPlayerTurn();
       }
-      if (strikeCount !== 3) {
+      if (strikeCount !== NUMBER_LENGTH) {
         this.startPlayerTurn();
       }
     });
   }
 
   endPlayerTurn() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
-      if (input !== "1" && input !== "2") {
+    MissionUtils.Console.print(END_MESSAGE);
+    MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, (input) => {
+      if (input !== RESTART_INPUT && input !== END_INPUT) {
         MissionUtils.Console.close();
-        throw new Error("잘못된 입력입니다.");
+        throw new Error(WRONG_INPUT_ERROR_MESSAGE);
       }
-      if (input === "1") {
+      if (input === RESTART_INPUT) {
         this.play();
       }
-      if (input === "2") {
+      if (input === END_INPUT) {
         MissionUtils.Console.close();
       }
     });
