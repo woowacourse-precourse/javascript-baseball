@@ -4,8 +4,6 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     startGame();
-    MissionUtils.Console.print("게임 종료");
-    MissionUtils.Console.close();
   }
 }
 
@@ -29,9 +27,8 @@ const generateAnswer = (props) => {
 
 const inputNumber = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 :", (number) => {
-    const isValidInput = checkExpect(number);
+    const isValidInput = checkExcept(number);
     if (isValidInput == true) {
-      MissionUtils.Console.print("입력" + number);
       judgeAnswer(answer, number);
     } else {
       MissionUtils.Console.close();
@@ -41,7 +38,7 @@ const inputNumber = (answer) => {
   return;
 };
 
-const checkExpect = (number) => {
+const checkExcept = (number) => {
   const numArr = number.split("");
   const numSet = new Set(numArr);
 
@@ -69,7 +66,6 @@ const judgeAnswer = (answer, number) => {
       ball += 1;
     }
   }
-
   printJudgeResult(strike, ball, answer);
 
   return;
@@ -78,15 +74,18 @@ const judgeAnswer = (answer, number) => {
 const printJudgeResult = (strike, ball, answer) => {
   if (strike == 3) {
     announceEnd();
+    return;
   }
-
   if (strike == 0 && ball == 0) {
     MissionUtils.Console.print("낫싱");
     inputNumber(answer);
+    return;
   }
 
   const strikeAns = strike == 0 ? "" : `${strike}스트라이크`;
   const ballAns = ball == 0 ? "" : `${ball}볼 `;
+
+  MissionUtils.Console.print(ballAns + strikeAns);
   inputNumber(answer);
 
   return;
@@ -100,6 +99,9 @@ const announceEnd = () => {
     (number) => {
       if (number == 1) {
         startGame();
+      }
+      if (number == 2) {
+        MissionUtils.Console.close();
       }
     }
   );
