@@ -50,9 +50,22 @@ class App {
     MissionUtils.Console.close();
   }
 
+  static playGame() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      try {
+      // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
+      if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
+      } catch(error) {
+        MissionUtils.Console.print('입력값이 서로 다른 세 자릿수가 아닙니다.');
+        App.finishGame();
+      }
+    });
+  }
+
   play() {
     App.printGameStart();
     let computerNum = App.getComputerNumber();
+    App.playGame();
   }
 }
 
