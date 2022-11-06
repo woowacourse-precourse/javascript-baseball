@@ -93,6 +93,19 @@ describe("숫자 야구 게임", () => {
     expect(App.isCorrectInput('@#$')).toEqual(false);
   });
 
+  const scoreTestCase = [
+    ['123', '478', { ball: 0, strike: 0,}],
+    ['456', '495', { ball: 1, strike: 1,}],
+    ['789', '769', { ball: 0, strike: 2,}],
+    ['135', '513', { ball: 3, strike: 0,}],
+    ['543', '543', { ball: 0, strike: 3,}],
+  ];
+  test.each(scoreTestCase)(
+    "calculateScore", (computerNum, userInput, answer) => {
+      expect(App.calculateScore(computerNum, userInput)).toEqual(answer);
+    }
+  );
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
