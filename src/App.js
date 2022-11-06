@@ -1,6 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
-
 class App {
   user_number;
   computer_number;
@@ -28,12 +27,29 @@ class App {
         repeatInput.length === 3
       ) {
         this.user_number = input;
-        // TODO compare numbers function
+        this.compareNumbers(this.computer_number, this.user_number);
       } else {
         throw new Error('잘못된 입력입니다.');
       }
     });
   }
+
+  compareNumbers(computerNumber, userNumber) {
+    const computerList = this.computer_number.split('');
+    const userList = this.user_number.split('');
+    let strike = 0;
+    let ball = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (computerList.indexOf(userList[i]) === i) {
+        strike++;
+      } else if (computerList.includes(userList[i])) {
+        ball++;
+      }
+    }
+    // TODO result display function
+  }
+
   play() {}
 }
 
