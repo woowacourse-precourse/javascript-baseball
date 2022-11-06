@@ -32,6 +32,21 @@ class App {
     const inputArr = inputStr.split("").map(Number);
     return inputArr;
   }
+
+  checkCount(inputArr) {
+    let count = [0, 0];
+    for (let i = 0; i < 3; i++) {
+      this.checkOne(inputArr, i, count);
+    }
+  }
+
+  checkOne(inputArr, i, count) {
+    if (randomArr[i] === inputArr[i]) {
+      count[1]++;
+    } else if (randomArr.includes(inputArr[i])) {
+      count[0]++;
+    }
+  }
 }
 
 const numberBaseball = new App();
