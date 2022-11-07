@@ -12,8 +12,18 @@ class App {
   }
 
   // 입력 값과 컴퓨터 숫자 비교
-  playBaseball() {
+  playBaseball(user) {
+    let ball = 0;
+    let strike = 0;
 
+    if (user === this.computer) {
+      strike = 3;
+    }
+    for (let i = 0; i < this.computer.length; i++) {
+      if (user[i] === this.computer[i]) strike++;
+      else if (this.computer.includes(user[i])) ball++;
+    }
+    this.printResult(ball, strike);
   }
 
   // 입력값 확인
