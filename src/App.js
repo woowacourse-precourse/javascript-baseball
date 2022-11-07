@@ -30,6 +30,7 @@ function usersNumbers(){
     try {
       NumberCheck.isThreeWord();
       NumberCheck.isContainsBlank();
+      NumberCheck.isNumber();
     } catch (error) {
       console.log(error);
       MissionUtils.Console.close();
@@ -47,7 +48,7 @@ class NumberCheck{
     this.input = input;
   }
 
-  // 예외처리 1. 길이가 3이 아닐 때
+  // 예외처리 1. 길이가 3이 아닐 때s
   isThreeWord(){
     if(this.input.length != 3){
       throw "3자리 숫자가 아닙니다.";
@@ -62,7 +63,19 @@ class NumberCheck{
     }
   }
 
+  // 사용자의 수 예외처리 3 - 숫자가 아니면 예외발생
+  isNumber(){
+    if(!isNaN(this.input)){
+      throw "숫자가 아닙니다.";
+    }
+  }
 
+  // 사용자의 수 예외처리 4 - 음수인 경우 (필요한지?)
+  isMinus(){
+    if(this.input < 0){
+      throw "음수를 입력했습니다.";
+    }
+  }
 
 
 // 입력받은 수를 배열로 
