@@ -3,24 +3,26 @@ class App {
   play() {    
     let computerRandomNum = this.createRandomNumber();
     let userInputNum=this.InputUserNumber();
-
+    console.log(userInputNum);
     while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
-      if(this.ball(computerRandomNum, userInputNum)==0){
-        console.log(userInputNum+"di");
-        MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
-      }
-      //console.log(userInputNum);
+      console.log(userInputNum+"di");
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+
+      let lastNum=userInputNum;
+      console.log(userInputNum);
       if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
-        MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
+        
         userInputNum=this.InputUserNumber();
         console.log(userInputNum+" 3");
       }
-      
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
 
-    }
-    if(this.checkThreeStrike(computerRandomNum, userInputNum)){
-      this.selectGameEnd(userInputNum);
-    }
+      }
+
+    
+    // if(this.checkThreeStrike(computerRandomNum, userInputNum)){
+    //   this.selectGameEnd(userInputNum);
+    // }
   
   }
 
@@ -91,7 +93,7 @@ class App {
       MissionUtils.Console.print("3개를 모두 맞히셨습니다! 게임 종료");
   
       //userInputNum=this.InputUserNumber();
-      //this.selectGameEnd(userInputNum);
+      this.selectGameEnd(userInputNum);
       return true;
     }
     return false;
@@ -156,11 +158,12 @@ class App {
     if(userInputNum==1){
       MissionUtils.Console.print("게임 재시작");
       this.play();
-      return userInputNum;
+      
+      return true;
       }
     if(userInputNum==2){
       MissionUtils.Console.print("게임 종료");
-      return userInputNum;
+      return false;
       }
     }
 }
