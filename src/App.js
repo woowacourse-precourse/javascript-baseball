@@ -13,8 +13,26 @@ function App () {
     printNewGameInterface();
     startGame();
     getUserAnswer();
-  }
+  };
   
+  function printNewGameInterface () {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  }
+
+  function startGame () {
+    this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
+  }
+
+  function getUserAnswer () {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      if(isValidInput(answer)){
+        getScore(matchNumber(answer, this.randomNumber));
+        return;
+      }
+      throw '올바른 값을 입력하세요.';
+    });
+  }
+
   function matchNumber (num1, num2) {
     let strike = 0;
     let ball = 0;
@@ -73,24 +91,6 @@ function App () {
 
     MissionUtils.Console.print (`${ball}볼 ${strike}스트라이크`);
     getUserAnswer();
-  }
-
-  function printNewGameInterface () {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-  }
-
-  function startGame () {
-    this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
-  }
-
-  function getUserAnswer () {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      if(isValidInput(answer)){
-        getScore(matchNumber(answer, this.randomNumber));
-        return;
-      }
-      throw '올바른 값을 입력하세요.';
-    });
   }
 }
 
