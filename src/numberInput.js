@@ -20,4 +20,6 @@ const validate = (num) => {
   }
 };
 
-module.exports = numberInput;
+exports.numberInput = numberInput;
+exports.validate = validate;
+
