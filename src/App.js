@@ -70,25 +70,27 @@ class App {
     }
   }
 
+  GameResult(STRIKE_CNT) {
+    if (STRIKE_CNT == 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+      return true;
+    } else return false;
+  }
+
   play() {
     let playing = true;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     while (playing) {
       const COM_NUMBER = this.makeComputerNumber();
-      let clear = true;
-      while (clear) {
+      let clear = false;
+      while (!clear) {
         MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
           this.checkError(num);
           const USER_NUMBER = num.split("");
           const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
           const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
           this.printResult(BALL_CNT, STRIKE_CNT);
-          if (STRIKE_CNT == 3) {
-            MissionUtils.Console.print(
-              "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n"
-            );
-            clear = false;
-          }
+          clear = this.GameResult(STRIKE_CNT);
         });
       }
       MissionUtils.Console.readLine(
