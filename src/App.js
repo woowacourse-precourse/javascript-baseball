@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const PLAYER_MESSAGE = "숫자를 입력해주세요 : ";
 const START_MESSAGE = "숫자 야구 게임을 시작합니다.";
 
 const printGameStart = () => {
@@ -15,6 +16,12 @@ const createComputerNumber = () => {
     }
   }
   return [...computer.join("").toString()];
+};
+
+const game = () => {
+  MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
+    let playerNumber = num;
+  });
 };
 
 class App {
