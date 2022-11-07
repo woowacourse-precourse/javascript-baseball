@@ -4,7 +4,7 @@ class Input {
 
     const userInputArr = Array.from(userInput);
     userInputArr.every((char) => this.checkNumber(Number(char)));
-    userInputArr.every((char) => this.checkRange(Number(char)));
+    userInputArr.every((char) => this.checkZero(Number(char)));
 
     const numbers = new Set();
     userInputArr.forEach((number) => {
@@ -17,14 +17,17 @@ class Input {
 
   static checkNumber(number) {
     if (isNaN(number)) throw new Error("숫자를 입력해주세요.");
+
+    return true;
   }
 
-  static checkRange(number) {
-    if (number < 1 || number > 9)
-      throw new Error("1~9 사이의 숫자를 입력해주세요.");
+  static checkZero(number) {
+    if (number === 0) throw new Error("0을 입력할 수 없습니다.");
+
+    return true;
   }
 
-  static isOneOrTwo(userInput) {
+  static checkIsOneOrTwo(userInput) {
     if (userInput !== "1" && userInput !== "2")
       throw new Error("1 또는 2를 입력해주세요.");
 
