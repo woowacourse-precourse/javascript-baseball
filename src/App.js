@@ -5,6 +5,7 @@ class App {
     let random_number;
     let finish;
     let repeat = true;
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.\n');
 
     while (repeat) {
       random_number = this.GET_RANDOM_NUMBER();
@@ -16,8 +17,6 @@ class App {
         continue;
       } else if (finish) {
         repeat = false;
-        // MissionUtils.Console.print('게임 종료');
-        // MissionUtils.Console.close();
       }
     }
   }
@@ -80,6 +79,7 @@ class App {
       }
     }
     MissionUtils.Console.print('3스트라이크');
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   }
 
   GAME_END() {
@@ -93,7 +93,6 @@ class App {
           finish = false;
         } else if (num === 2) {
           finish = true;
-          MissionUtils.Console.print('게임 종료');
           MissionUtils.Console.close();
         } else {
           throw '1 또는 2만 입력할 수 있습니다.';
