@@ -62,8 +62,8 @@ class GameLoop {
     while (!gameOver) {
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (message) => {
         message = this._validate(message);
-        let [ball, strike] = Opponent.judge(message);
-        gameOver = this._respond(ball, strike);
+        let [balls, strikes] = Opponent.judge(message);
+        gameOver = this._respond(balls, strikes);
       });
     }
 
@@ -121,24 +121,24 @@ class GameLoop {
     return message;
   }
 
-  _respond(ball, strike) {
-    if (ball == 0 && strike == 0) {
+  _respond(balls, strikes) {
+    if (balls === 0 && strikes === 0) {
       MissionUtils.Console.print("낫싱");
     }
 
-    if (ball == 0 && strike != 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
+    if (balls === 0 && strikes != 0) {
+      MissionUtils.Console.print(`${strikes}스트라이크`);
     }
 
-    if (ball != 0 && strike == 0) {
-      MissionUtils.Console.print(`${ball}볼`);
+    if (balls != 0 && strikes === 0) {
+      MissionUtils.Console.print(`${balls}볼`);
     }
 
-    if (ball != 0 && strike != 0) {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    if (balls != 0 && strikes != 0) {
+      MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
     }
 
-    if (strike == 3) {
+    if (strikes === 3) {
       MissionUtils.Console.print("3스트라이크");
       return true;
     }
