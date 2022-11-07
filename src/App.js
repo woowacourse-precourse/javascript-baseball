@@ -17,6 +17,7 @@ class App {
     if(this.checkThreeStrike(computerRandomNum, userInputNum)){
       this.selectGameEnd(userInputNum);
     }
+  
   }
 
   createRandomNumber() {
@@ -71,7 +72,7 @@ class App {
     if(score[0]==0&&score[1] >0){
       answer=`${score[1]}볼`;
     }
-    if(score[0]>0&&score[1]==0){
+    if(score[0]>0&&score[1]==0&&!score[0]==3){
       answer=`${score[0]}스트라이크`;
     }
     if(score[0]>0&&score[1]>0){
@@ -82,6 +83,7 @@ class App {
   /*3스트라이크 인지 확인하는 기능*/
   checkThreeStrike(computerRandomNum, userInputNum){
     if(this.strike(computerRandomNum, userInputNum)==3){
+      MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개를 모두 맞히셨습니다! 게임 종료");
       userInputNum=this.InputUserNumber();
       this.selectGameEnd(userInputNum);
@@ -113,13 +115,13 @@ class App {
     if(userInputNum==1||userInputNum==2){
       return true;
     }
-    if(userInputNum.charAt(0).includes(userInputNum.charAt(1))){
+    if(userInputNum.charAt(0)==(userInputNum.charAt(1))){
       return false;
     }
-    if(userInputNum.charAt(0).includes(userInputNum.charAt(2))){
+    if(userInputNum.charAt(0)==(userInputNum.charAt(2))){
       return false;
     }
-    if(userInputNum.charAt(1).includes(userInputNum.charAt(2))){
+    if(userInputNum.charAt(1)==(userInputNum.charAt(2))){
       return false;
     }
     return true;
@@ -137,7 +139,7 @@ class App {
           throw "입력이 잘못되었습니다";
       }
     }catch(e){
-        MissionUtils.Console.print("입력이 잘못되었습니다. 게임 종료");
+        MissionUtils.Console.print("입력이 잘못되었습니다.");
         throw "게임 종료"
       }
       return true;
@@ -150,7 +152,6 @@ class App {
       }
     if(userInputNum==2){
       MissionUtils.Console.print("게임 종료");
-
       }
     }
 }
