@@ -1,22 +1,22 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 
-const mockQuestions = answers => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce(
     (acc, input) =>
       acc.mockImplementationOnce((question, callback) => {
         callback(input);
       }),
-    MissionUtils.Console.readLine,
+    MissionUtils.Console.readLine
   );
 };
 
-const mockRandoms = numbers => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce(
     (acc, number) => acc.mockReturnValueOnce(number),
-    MissionUtils.Random.pickNumberInRange,
+    MissionUtils.Random.pickNumberInRange
   );
 };
 
