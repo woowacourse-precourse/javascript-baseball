@@ -42,6 +42,17 @@ class GameLogic {
       return false;
     }
   }
+
+  select() {
+    MissionUtils.Console.readLine(INGAME_MESSAGE.ASK, (input) => {
+      if (input === RESPONSE.RESTART) {
+        const app = new App();
+        app.play();
+      } else if (input === RESPONSE.FINISH) {
+        MissionUtils.Console.close();
+      }
+    });
+  }
 }
 
 module.exports = GameLogic;
