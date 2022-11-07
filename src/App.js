@@ -27,8 +27,8 @@ class App {
   getUserNumberInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       const userNumArr = userInput.split("").map(Number);
-      this.checkError(userInput);
-      this.checkAnswer(userInput);
+      this.checkError(userNumArr);
+      this.checkAnswer(userNumArr);
     });
   }
 
