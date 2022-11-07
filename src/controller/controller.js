@@ -9,6 +9,14 @@ class Controller {
     this.userGivenNumber = new UserGivenNumber();
     this.isFirstGame = !!isFirstGame;
   }
+
+  /**
+   * 유저가 제시한 수를 저장한다(update).
+   * @param {string[]} userGivenNumber [유저가 제시한 수]
+   */
+  updateUserGivenNumber(userGivenNumber) {
+    this.userGivenNumber.setState(userGivenNumber);
+  }
 }
 
 module.exports = Controller;
