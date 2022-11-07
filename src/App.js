@@ -15,7 +15,8 @@ class App {
     //사용자 숫자 입력
     MissionUtils.Console.readLine(Game.MESSAGE.INPUT, (userInput) => {
       //입력이 형식에 맞는지 유효성 검사
-      const userInputValidation = this.user.validateInput(userInput);
+      const userNumber = Number(userInput);
+      const userInputValidation = this.user.validateInput(userNumber);
       if (userInputValidation === Game.NUMBER.FAIL) {
         throw new Error(Game.MESSAGE.ERROR);
       }
