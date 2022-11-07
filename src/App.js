@@ -19,7 +19,7 @@ class App {
   }
 
   start() {
-    this.getUserInput();
+    this.getUserAnswer();
   }
 
   getUserAnswer() {
