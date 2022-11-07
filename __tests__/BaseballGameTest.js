@@ -72,7 +72,7 @@ describe("숫자 야구 유닛 테스트", () => {
     );
   });
 
-  test("1 ~ 9가 아닌 다른 문자열 입력 시 throw", () => {
+  test("1 또는 2가 아닌 값 입력 시 throw", () => {
     const baseballGame = new BaseballGame();
     const input = "*";
 
