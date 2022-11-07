@@ -1,6 +1,7 @@
 const { print, close, readLine, pickNumberInRange } = require("./Utils");
 const ExceptionCheck = require("./ExceptionCheck");
 const { GAME_MSG, BASEBALL_MSG } = require("./Message");
+const Counter = require("./Counter");
 
 class App {
   constructor() {
@@ -30,43 +31,32 @@ class App {
 
   setComputerNums() {
     this.#computerNums = this.createRandomNum();
+    print(this.#computerNums);
   }
 
   getAnswer() {
-    readLine('숫자를 입력해주세요 :', (userInput) => {
+    readLine(GAME_MSG.NUM_REQUEST, (userInput) => {
       this.userInputAnalysis(userInput);
     });
   }
 
   userInputAnalysis(userInput) {
     const exceptionCheck = new ExceptionCheck();
-    exceptionCheck.UserInputCheck(userInput);
-    this.userInput = userInput;
-    this.strikeCount();
-    this.ballCount();
+    if (exceptionCheck.UserInputCheck(userInput)) {
+      this.#userInputNums = userInput;
+      this.baseBall();
+    }
+  }
+
+  baseBall() {
+    const count = new Counter();
+    const ball = count.ball(this.#userInputNums, this.#computerNums);
+    const strike = count.strike(this.#userInputNums, this.#computerNums);
+    if (strike === 3) {
+      this.win();
+    }
     this.strikeBallCountAlram();
-    return this.#userInputNums = userInput;
-
-  }
-
-  strikeCount() {
-    const correctAnswerArr = this.#computerNums.split('');
-    correctAnswerArr.map((number, index) => {
-      if (number === this.userInput[index]) {
-        this.strike += 1;
-      }
-    });
-    return this.strike;
-  }
-
-  ballCount() {
-    const correctAnswerArr = this.#computerNums.split('');
-    correctAnswerArr.map((number, index) => {
-      if (number !== this.userInput[index] && this.userInput.includes(number)) {
-        this.ball += 1;
-      }
-    });
-    return this.ball;
+    this.getAnswer();
   }
 
   nothing() {
@@ -102,12 +92,12 @@ class App {
   }
 
   restartOrEnd() {
-    readLine(`1 을 입력하면 종료, 2 를 입력하면 게임을 재시작 합니다`, (answer) => {
+    readLine(GAME_MSG.RESTART_ASK, (answer) => {
       if (answer == 2) {
         this.countReset();
         app.play();
       } else if (answer == 1) {
-        print('게임을 종료합니다');
+        print(GAME_MSG.END);
         close();
       } else {
         print('1 과 2 둘중 하나만 선택하세요');
