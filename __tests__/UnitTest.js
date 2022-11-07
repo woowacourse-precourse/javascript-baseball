@@ -49,7 +49,7 @@ const getLogSpy = () => {
 };
 
 describe("숫자 랜덤 생성 테스트", () => {
-  test("case1", () => {
+  test("서로 다른 세 자리 숫자 생성", () => {
     const app = new App();
     const randoms = app.getThreeRandom()
 
@@ -59,7 +59,7 @@ describe("숫자 랜덤 생성 테스트", () => {
 });
 
 describe("시작 문구 출력 테스트", () => {
-  test("case1", () => {
+  test("console에 시작 문구 출력", () => {
     const logSpy = getLogSpy();
 
     const app = new App();
@@ -70,7 +70,7 @@ describe("시작 문구 출력 테스트", () => {
 });
 
 describe("세 자리 숫자 입력 테스트", () => {
-  test("case1", () => {
+  test("서로 다른 세 자리 숫자 입력 1", () => {
     const logSpy = getLogSpy();
     const answer = '123';
     const input = '123';
@@ -83,7 +83,7 @@ describe("세 자리 숫자 입력 테스트", () => {
     expect(logSpy).toHaveBeenCalled();
   });
 
-  test("case2", () => {
+  test("서로 다른 세 자리 숫자 입력 2", () => {
     const logSpy = getLogSpy();
     const answer = '123';
     const input = '132';
@@ -96,7 +96,7 @@ describe("세 자리 숫자 입력 테스트", () => {
     expect(logSpy).toHaveBeenCalled();
   });
 
-  test("case3", () => {
+  test("문자 입력 시 에러 처리", () => {
     const answer = '123';
     const input = 'ddd';
 
@@ -108,7 +108,7 @@ describe("세 자리 숫자 입력 테스트", () => {
     }).toThrow();
   });
 
-  test("case4", () => {
+  test("1-9 사이의 숫자가 아닐 경우 에러 처리", () => {
     const answer = '123';
     const input = '012';
 
@@ -122,7 +122,7 @@ describe("세 자리 숫자 입력 테스트", () => {
 });
 
 describe("결과 출력 테스트", () => {
-  test("case1", () => {
+  test("서로 다른 세 자리 숫자 입력 시 결과 출력 1", () => {
     const logSpy = getLogSpy();
     const answer = '123';
     const input = '132';
@@ -133,7 +133,7 @@ describe("결과 출력 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('2볼 1스트라이크'));
   });
 
-  test("case2", () => {
+  test("서로 다른 세 자리 숫자 입력 시 결과 출력 2", () => {
     const logSpy = getLogSpy();
     const answer = '123';
     const input = '325';
@@ -144,7 +144,7 @@ describe("결과 출력 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1볼 1스트라이크'));
   });
 
-  test("case3", () => {
+  test("서로 다른 세 자리 숫자 입력 시 결과 출력 3", () => {
     const logSpy = getLogSpy();
     const answer = '123';
     const input = '123';
@@ -158,7 +158,7 @@ describe("결과 출력 테스트", () => {
 });
 
 describe("한 자리 숫자 입력 테스트", () => {
-  test("case1", () => {
+  test("1을 입력해 게임 재시작", () => {
     const logSpy = getLogSpy();
     const input = '1';
 
@@ -170,7 +170,7 @@ describe("한 자리 숫자 입력 테스트", () => {
     expect(logSpy).toBeCalledTimes(2);
   });
 
-  test("case2", () => {
+  test("2를 입력해 게임 종료", () => {
     const logSpy = getLogSpy();
     const input = '2';
 
@@ -182,7 +182,7 @@ describe("한 자리 숫자 입력 테스트", () => {
     expect(logSpy).not.toBeCalledTimes(2);
   });
 
-  test("case3", () => {
+  test("입력 값이 1과 2가 아닐 때 에러 처리", () => {
     const input = '0';
 
     mockQuestions(input);
@@ -193,7 +193,7 @@ describe("한 자리 숫자 입력 테스트", () => {
     }).toThrow();
   });
 
-  test("case4", () => {
+  test("입력 값이 한 자리 수가 아닐 때 에러 처리", () => {
     const input = '11';
 
     mockQuestions(input);
@@ -204,7 +204,7 @@ describe("한 자리 숫자 입력 테스트", () => {
     }).toThrow();
   });
 
-  test("case5", () => {
+  test("입력값이 숫자가 아닐 때 에러 처리", () => {
     const input = 'd';
 
     mockQuestions(input);
