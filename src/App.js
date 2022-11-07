@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const ValidationCheck = require('./ValidationCheck');
 
 const RESTART = '1';
 const GAME_START_MESSAGE = '숫자 야구 게임을 시작합니다.';
@@ -16,36 +17,6 @@ class App {
     MissionUtils.Console.print(GAME_START_MESSAGE);
   }
 
-  static consistsOfPositiveNumber(str) {
-    const NUMBER_REGEXP = /^[1-9]+$/;
-    if (!NUMBER_REGEXP.test(str)) {
-      return false;
-    }
-    return true;
-  }
-
-  static isThreeDigit(str) {
-    if (!App.consistsOfPositiveNumber(str) || str.length !== 3) {
-      return false;
-    } 
-    return true;
-  }
-
-  static isAllDifferent(str) {
-    const setToCompare = new Set(str);
-    if (str.length !== setToCompare.size) {
-      return false;
-    }
-    return true;
-  }
-
-  static isCorrectInput(str) {
-    if (App.isThreeDigit(str) && App.isAllDifferent(str)) {
-      return true;
-    }
-    return false;
-  }
-
   static getComputerNumber() {
     const computer = [];
     while (computer.length < 3) {
@@ -55,11 +26,6 @@ class App {
       }
     }
     return computer.join('');
-  }
-  
-  static finishGame() {
-    MissionUtils.Console.print(GAME_FINISH_MESSAGE);
-    MissionUtils.Console.close();
   }
 
   static calculateScore(computerNum, userInput) {
@@ -79,29 +45,9 @@ class App {
     return score;
   }
 
-  static isZeroScore(score) {
-    if ((score.ball === 0) && (score.strike === 0)) {
-      return true;
-    }
-    return false;
-  }
-
-  static isThreeStrike(score) {
-    if (score.strike === 3) return true;
-    return false;
-  }
-
-  static isOneOrTwo(str){
-    const ONE_TWO_REGEXP = /^[1,2]$/;
-    if (ONE_TWO_REGEXP.test(str)) {
-      return true;
-    }
-    return false;
-  }
-
   static printScoreResult(score) {
     let resultMessage;
-    if (App.isZeroScore(score)) resultMessage = ZERO_SCORE_MESSAGE;
+    if (ValidationCheck.isZeroScore(score)) resultMessage = ZERO_SCORE_MESSAGE;
     if (score.ball > 0 && score.strike > 0) resultMessage = `${score.ball}${BALL_MESSAGE} ${score.strike}${STRIKE_MESSAGE}`;
     if (score.ball > 0 && score.strike === 0) resultMessage = `${score.ball}${BALL_MESSAGE}`;
     if (score.ball === 0 && score.strike > 0) resultMessage = `${score.strike}${STRIKE_MESSAGE}`;
@@ -113,16 +59,16 @@ class App {
 
     MissionUtils.Console.readLine(ENTER_YOUR_NUMBER_MESSAGE, (userInput) => {
       // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
-      if (!App.isCorrectInput(userInput)) throw new Error(INPUT_ERROR_MESSAGE)
+      if (!ValidationCheck.isCorrectInput(userInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
       score = App.calculateScore(computerNum, userInput);
 
       App.printScoreResult(score);
       
-      if (App.isThreeStrike(score)) {
+      if (ValidationCheck.isThreeStrike(score)) {
         MissionUtils.Console.print(THREE_STRIKE_MESSAGE);
         MissionUtils.Console.readLine(ANSWER_RESTART_OR_FINISH, (selectInput) => {
-            if (!App.isOneOrTwo(selectInput)) throw new Error(INPUT_ERROR_MESSAGE)
+            if (!ValidationCheck.isOneOrTwo(selectInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
             if (selectInput === RESTART) {
               App.restartGame();
@@ -133,7 +79,7 @@ class App {
         });
       }
 
-      if (!App.isThreeStrike(score)) {
+      if (!ValidationCheck.isThreeStrike(score)) {
         App.playGame(computerNum);
         return;
       }
@@ -144,6 +90,11 @@ class App {
     const computerNum = App.getComputerNumber();
     App.playGame(computerNum);
     return;
+  }
+
+  static finishGame() {
+    MissionUtils.Console.print(GAME_FINISH_MESSAGE);
+    MissionUtils.Console.close();
   }
 
   play() {
