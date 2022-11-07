@@ -25,18 +25,18 @@ class App {
 
     const overlapReg = /(.)\1+/;
     if (overlapReg.test(value))
-      throw new Error(NOT_OVERLAP_NUMBER);
+      throw new Error(ERROR.NOT_OVERLAP_NUMBER);
 
     const differenceReg = /(.)\d\1/;
     if (differenceReg.test(value)) {
-      throw new Error(NOT_DIFFERENCE_NUMBER);
+      throw new Error(ERROR.NOT_DIFFERENCE_NUMBER);
     }
   }
 
   isCorrectRestartInput(value) {
     const regExp = /^[1-2]{1}$/;
     if (!regExp.test(value))
-      throw new Error(INVAID_RESTART_TYPE);
+      throw new Error(ERROR.INVAID_RESTART_TYPE);
   }
 
   stringToAnswerType(value) {
