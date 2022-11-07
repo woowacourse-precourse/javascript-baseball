@@ -10,16 +10,62 @@ class App {
 
     // 컴퓨터의 수 선택
     this.computer = computersNumbers();
+    console.log(this.computer);
 
     // 사용자의 수 선택
     var userNum = usersNumbers();
     
-    
-   
-    
+    // 컴퓨터의 수와 사용자의 수 비교
+    var result = gameResult(this.computer, userNum);
 
+    // 게임 결과 출력
+    var resultStr = printGameResult(resultArr);
+
+    // 
 
   }
+}
+
+function printGameResult(resultArr){
+  resultArr.forEach((result, i)=>{
+    if(result != 0){
+
+    }
+  })
+}
+
+function gameResult(computer, user){
+  var computerArr = Array.from(computer);
+  var userArr = Array.from(user);
+
+  var result = [0, 0, 0]; // B, S, N
+  userArr.forEach( (unum, i) => {
+    var tmpIdx = computerArr.indexOf(unum);
+    if(tmpIdx == i){
+      // 스트라이크
+      result[1] += 1;
+    } else if (tmpIdx > -1){
+      // 볼
+      result[0] += 1;
+    } else {
+      // 없음
+      result[2] += 1;
+    }
+  })
+
+  if(result[2] == 3){
+    return "낫싱";
+  }
+
+  var resultStr = "";
+  var type = ['볼', '스트라이크'];
+  result.forEach((cnt, i)=>{
+    if(cnt > 0){
+      resultStr += cnt + type[i];
+    }
+  })
+
+  return resultStr;
 }
 
 function usersNumbers(){
