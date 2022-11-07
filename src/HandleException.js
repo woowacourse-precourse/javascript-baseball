@@ -9,14 +9,14 @@ function handleException(userNum) {
 }
 
 function checkIsNum(userNum) {
-    if(Number(userNum) == NaN) {
+    if(isNaN(userNum)) {
         throw new Error("숫자만 입력해주세요.");
     }
 }
 
 function checkIsLength(userNum) {
     if(userNum.length !== 3) {
-        throw new Error("숫자 3개만 입력해주세요.");
+        throw new Error("숫자 3개를 입력해주세요.");
     }
 
 }
@@ -33,7 +33,7 @@ function setMap(userNumMap, userNum) {
 }
 
 function checkIsZero(userNumMap) {
-    if(userNumMap.has(0)) {
+    if(userNumMap.has('0')) {
         throw new Error("0을 제외한 1~9 까지의 숫자만 입력해주세요.");
     }
 }
