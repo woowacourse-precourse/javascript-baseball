@@ -1,5 +1,5 @@
 class Game {
-  static GAME_MESSAGE = {
+  static MESSAGE = {
     START: "숫자 야구 게임을 시작합니다.",
     INPUT: "숫자를 입력해주세요 : ",
     END: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
@@ -13,7 +13,7 @@ class Game {
     NOTHING: "낫싱",
   };
 
-  static GAME_NUMBER = {
+  static NUMBER = {
     RESTART: 1,
     EXIT: 2,
     FAIL: 0,
