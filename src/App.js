@@ -1,10 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { isThreeDigitNumberWithoutZero, hasNoRedundancy } = require("./utils.js");
+const { isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole } = require("./utils.js");
 const { updateStrikeOrBall } = require("./compare.js");
 
 class App {
-  play() {
-
+  async play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   // 정답이 될 무작위 난수를 배열로서 생성하는 함수
@@ -48,5 +48,6 @@ class App {
 }
 
 const app = new App();
+app.play();
 
 module.exports = App;

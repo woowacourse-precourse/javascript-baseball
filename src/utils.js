@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 // 주어진 입력이 0 없는 3자리 숫자인지 판단하는 함수
 function isThreeDigitNumberWithoutZero(input) {
     const REGEX = /[1-9]{3}/;
@@ -10,6 +12,15 @@ function hasNoRedundancy(input) {
         && input.charAt(2) !== input.charAt(0));
 }
 
+// 콘솔에 입력을 받아 그 값을 반환해주는 promise 함수
+async function getInputFromConsole(message) {
+    return new Promise((resolve, reject) => {
+        MissionUtils.Console.readLine(message, function (input) {
+            resolve(input);
+        })
+    })
+}
+
 module.exports = {
-    isThreeDigitNumberWithoutZero, hasNoRedundancy
+    isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole
 }
