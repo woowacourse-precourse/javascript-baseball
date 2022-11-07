@@ -110,6 +110,8 @@ class App {
         if (number === '1') {
           this.makeRandomNumber();
           this.progressGame();
+        } else {
+          MissionUtils.Console.close();
         }
       }
     );
