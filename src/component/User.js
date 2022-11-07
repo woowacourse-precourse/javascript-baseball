@@ -12,4 +12,8 @@ class User {
 
     return isNumber(setInputToNum);
   }
+  checkInputZero(userInput) {
+    const isZeroExist = [...userInput].includes("0");
+    return isZeroExist === false;
+  }
 }
