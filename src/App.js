@@ -5,7 +5,10 @@ class App {
         this.computerNumberArray = [];
     }
     play() {
-        this.compareUserAndComputer();
+        MissionUtils.Console.print('숫자 야구 게임을 시작합니다');
+        this.computerNumberArray = this.pickRandomThreeNumbers();
+        console.log(this.computerNumberArray);
+        this.pickRandomNumberUser();
     }
 
     // 랜덤한 3개의 숫자를 뽑는 함수
@@ -14,7 +17,6 @@ class App {
         while (numberSet.size !== 3) {
             numberSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
         }
-        console.log(Array.from(numberSet));
         return Array.from(numberSet);
     }
 
@@ -22,10 +24,8 @@ class App {
     pickRandomNumberUser() {
         MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
             console.log(this.changeStringToArray(answer));
-            return (
-                this.changeStringToArray(answer),
-                this.validateArray(this.changeStringToArray(answer))
-            );
+            this.validateArray(this.changeStringToArray(answer));
+            this.countStrikeAndBall(this.changeStringToArray(answer));
         });
     }
 
@@ -51,40 +51,26 @@ class App {
             userNumberArray.length !== 3 ||
             !this.validateMultyArray(userNumberArray) ||
             !this.validateNumberArray(userNumberArray)
-        ) {
-            console.log('잘못되었습니다.');
-        }
+        )
+            throw '오류입니다 종료합니다. ';
     }
-    // 같은 자리에 있는지 포함하고 있는지 알려주는 함수
-    checkSameOrInclude(array1, array2) {
-        let same = 0;
-        let include = 0;
-        for (let i = 0; i < 3; i++) {
-            if (array1[i] === array2[i]) same += 1;
-            else if (array1[1].include(array2[i])) include += 1;
-        }
-        console.log(same, include);
-        return same, include;
-    }
-    // 컴퓨터 값과 유저 값 비교 함수
-    compareUserAndComputer() {
-        this.pickRandomThreeNumbers();
-        this.pickRandomNumberUser();
-    }
-    // 게임 시작 함수
-    start(computerNumberArray, userNumberArray) {
+    // 점수 계산 함수
+    countStrikeAndBall(userNumberArray) {
         let strike = 0,
             ball = 0;
         for (let i = 0; i < 3; i++) {
-            if (userNumberArray[i] === computerNumberArray[i]) {
+            if (userNumberArray[i] === this.computerNumberArray[i]) {
                 strike += 1;
-            } else if (computerNumberArray.include(userNumberArray[i])) {
+            } else if (this.computerNumberArray.includes(userNumberArray[i])) {
                 ball += 1;
             }
-            const resultStrike = strike ? `${strike}스트라이크` : '';
-            const resultBall = ball ? `${ball}볼` : '';
-            return !ball && !strike ? '낫싱' : `${resultBall} ${resultStrike}`;
         }
+        const resultStrike = strike ? `${strike}스트라이크` : '';
+        const resultBall = ball ? `${ball}볼` : '';
+
+        console.log(
+            !ball && !strike ? '낫싱' : `${resultBall} ${resultStrike}`
+        );
     }
 }
 let app = new App();
