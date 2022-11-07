@@ -25,4 +25,9 @@ function printGameover() {
   gameover.print();
 }
 
-module.exports = { printStart, printGameover };
+function printIsRestart() {
+  const restart = new printMessage().setMessage(Message.restart);
+  restart.print();
+}
+
+module.exports = { printStart, printGameover, printIsRestart };
