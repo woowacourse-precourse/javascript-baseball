@@ -41,3 +41,14 @@ describe('start()', () => {
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 });
+
+describe('end()', () => {
+  test('3개의 숫자를 모두 맞히셨습니다! 게임 종료. 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.end());
+
+    expect(logSpy).toHaveBeenCalledWith('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  });
+});
