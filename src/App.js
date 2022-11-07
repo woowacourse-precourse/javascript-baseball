@@ -56,6 +56,10 @@ class App {
   }
 
   // 숫자 야구 게임 logic
+  gameRule() {
+    const score = [];
+  }
+
   nothing() {
     for (let index = 0; index < 3; index++) {
       this.inputNum[index] == this.randomNum[index];
@@ -65,15 +69,24 @@ class App {
   }
 
   ball() {
+    let count;
     userInputArr = [...this.inputNum];
-    if()
+    for (let index = 0; index < 3; index++) {
+      if (
+        userInputArr.includes(String(this.randomNum[index])) &&
+        this.inputNum[index] != this.randomNum[index]
+      ) {
+        count++;
+      }
+    }
+    return count;
   }
 
   strike() {
     let count;
-    for(let index=0; index<3;index++){
-      if(this.inputNum[index] == this.randomNum){
-        count ++;
+    for (let index = 0; index < 3; index++) {
+      if (this.inputNum[index] == this.randomNum[index]) {
+        count++;
       }
     }
     return count;
