@@ -10,13 +10,13 @@ function handleException(userNum) {
 
 function checkIsNum(userNum) {
     if(Number(userNum) == NaN) {
-        throw new Error();
+        throw new Error("숫자만 입력해주세요.");
     }
 }
 
 function checkIsLength(userNum) {
-    if(userNum.length != 3) {
-        throw new Error();
+    if(userNum.length !== 3) {
+        throw new Error("숫자 3개만 입력해주세요.");
     }
 
 }
@@ -34,14 +34,14 @@ function setMap(userNumMap, userNum) {
 
 function checkIsZero(userNumMap) {
     if(userNumMap.has(0)) {
-        throw new Error();
+        throw new Error("0을 제외한 1~9 까지의 숫자만 입력해주세요.");
     }
 }
 
 function checkIsOverlap(userNumMap, userNum) {
     for(let i = 0; i < userNum.length; i++) {
         if(userNumMap.get(userNum[i]) > 1) {
-            throw new Error();
+            throw new Error("중복되는 숫자를 제외해주세요.");
         }
     }
 }
