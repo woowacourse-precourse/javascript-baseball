@@ -23,8 +23,7 @@ class App {
         this.startGame(this.makeRandomNum());
       }else if(wantGame === '2'){
         return MISSIONUTILS.Console.close();
-      }//else throw '다시하기_ 잘못된 입력입니다.';
-      
+      }else throw '다시하기_ 잘못된 입력입니다.';
     })
   }
 
@@ -39,15 +38,14 @@ class App {
   }
 
   checkNum(RANDOM,num) {
-    console.log(`입력값확인 랜덤: ${RANDOM} 입력: ${num}`);
     let bucketNum = [];
+    if(num.length != 3) throw '숫자입력_ 범위 밖 입력';
     for(let i = 2; i >= 0; i--) {
-     // if(num % 10 === 0) throw '입력범위 아님_ 0 입력';
+      if(num % 10 === 0) throw '입력범위_ 0 입력';
       bucketNum[i] = num % 10;
       num = parseInt(num /10); 
     }
-    //if(this.duplicateCheck(bucketNum)) throw '중복 값 or 범위 밖 입력';
-
+    if(this.duplicateCheck(bucketNum)) throw '숫자입력_ 중복 값 입력';
     let strike = [];
     let j = -1;
     for(let i = 0; i < bucketNum.length; i++) {
@@ -55,10 +53,8 @@ class App {
         strike[++j] = bucketNum[i];
       }
     }
-
     let ball = RANDOM.filter(x => bucketNum.includes(x)).filter(x => !strike.includes(x));
     this.print(strike.length, ball.length);
-
     if(strike.length === 3)
       return 1;
     else
