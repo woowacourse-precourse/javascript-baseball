@@ -26,39 +26,39 @@ class App {
   }
 
   compare(userValue, computerValue) {
-    let strike = 0;
-    let ball = 0;
+    let strikeCount = 0;
+    let ballCount = 0;
     const INCLUDED_VALUE = computerValue.filter((num) =>
       userValue.includes(num)
     );
     for (let index = 0; index < 3; index++) {
       if (userValue[index] === computerValue[index]) {
-        strike++;
+        strikeCount++;
       }
-      if (INCLUDED_VALUE.length !== strike) {
-        ball = INCLUDED_VALUE.length - strike;
+      if (INCLUDED_VALUE.length !== strikeCount) {
+        ballCount = INCLUDED_VALUE.length - strikeCount;
       }
     }
-    return this.result(strike, ball);
+    return this.result(strikeCount, ballCount);
   }
 
-  result(strike, ball) {
-    if (strike === 3) {
-      CONSOLE_UTIL.print(`${strike}스트라이크`);
+  result(strikeCount, ballCount) {
+    if (strikeCount === 3) {
+      CONSOLE_UTIL.print(`${strikeCount}스트라이크`);
       CONSOLE_UTIL.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.endGame();
     }
-    if (strike && strike !== 3) {
-      if (!ball) CONSOLE_UTIL.print(`${strike}스트라이크`);
+    if (strikeCount && strikeCount !== 3) {
+      if (!ballCount) CONSOLE_UTIL.print(`${strikeCount}스트라이크`);
       else {
-        CONSOLE_UTIL.print(`${ball}볼 ${strike}스트라이크`);
+        CONSOLE_UTIL.print(`${ballCount}볼 ${strikeCount}스트라이크`);
       }
       return this.acceptUserNumber();
     }
-    if (!strike) {
-      if (!ball) CONSOLE_UTIL.print("낫싱");
+    if (!strikeCount) {
+      if (!ballCount) CONSOLE_UTIL.print("낫싱");
       else {
-        CONSOLE_UTIL.print(`${ball}볼`);
+        CONSOLE_UTIL.print(`${ballCount}볼`);
       }
       return this.acceptUserNumber();
     }
