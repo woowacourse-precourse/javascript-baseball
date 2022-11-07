@@ -9,6 +9,7 @@ class App {
     this.round(randomNumber);
   }
 
+  // 컴퓨터가 랜덤한 세 자리 숫자를 생성하는 함수
   getRandomNumber() {
     const computer = [];
 
@@ -22,6 +23,7 @@ class App {
     return computer;
   }
 
+  // 사용자의 입력값을 확인하고, 올바른 숫자를 입력한 경우 정답을 확인하는 함수로 전달하는 함수
   round(computerNumber) {
     return MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
       if (
@@ -35,6 +37,7 @@ class App {
     });
   }
 
+  // 사용자의 입력값 중 중복값이 존재하는지 확인하는 함수
   checkDuplicate(num) {
     const set = new Set();
 
@@ -49,6 +52,7 @@ class App {
     }
   }
 
+  // 컴퓨터의 정답과 사용자의 입력값을 전달받아 결과를 확인하는 함수
   checkForAnswer(computerNumber, answer) {
     let result = this.myResult(computerNumber, answer);
 
@@ -60,6 +64,7 @@ class App {
     }
   }
 
+  // 사용자의 입력값을 확인하여 스트라이크, 볼 카운트를 확인하는 함수
   myResult(computer, input) {
     const myNumber = this.changeToArr(input);
     const answer = this.countStrikeAndBall(computer, myNumber);
@@ -75,6 +80,7 @@ class App {
     return this.countResult(ballCount, strikeCount);
   }
 
+  // 문자열로 입력받은 사용자의 숫자 입력값을 배열로 전환하는 함수
   changeToArr(num) {
     let myArr = [];
 
@@ -85,6 +91,7 @@ class App {
     return myArr;
   }
 
+  // 스트라이크, 볼 카운트를 계산하는 함수
   countStrikeAndBall(computerNumber, myNumber) {
     let answer = {
       strike: 0,
@@ -106,6 +113,7 @@ class App {
     return answer;
   }
 
+  // 스트라이크, 볼 카운트 결과에 따라 결과값을 리턴하는 함수
   countResult(ball, strike) {
     if (!ball && !strike) {
       return "낫싱";
@@ -121,6 +129,7 @@ class App {
     return `${ball} ${strike}`;
   }
 
+  // 정답을 맞춘 경우(3 스트라이크) 게임을 종료하고, 재시작을 확인하는 함수
   correctAnswer(result) {
     MissionUtils.Console.print(result);
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -131,6 +140,7 @@ class App {
     );
   }
 
+  // 사용자의 입력값에 따라 재시작 혹은 종료를 리턴하는 함수
   restart(num) {
     if (num === "1") {
       app.play();
