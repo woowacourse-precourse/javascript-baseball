@@ -45,7 +45,6 @@ function getResult(answer, userInput) {
   const strike = countStrike(answer, userInputArr);
   const ball = countBall(answer, userInputArr);
   const result = makeResultStr(strike, ball);
-
   return result;
 }
 

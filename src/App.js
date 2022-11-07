@@ -3,6 +3,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
 const checkException = require("./checkException");
 const getResult = require("./getResult");
+const { printStart } = require("./printMessage");
 
 class App {
   constructor() {
@@ -10,6 +11,7 @@ class App {
   }
 
   play() {
+    printStart();
     this.getUserInput();
   }
 
