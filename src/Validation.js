@@ -13,6 +13,12 @@ class Validation {
       throw INGAME_MESSAGE.ERROR;
     }
   }
+
+  checkLength(input) {
+    if (input.length !== 3) {
+      throw INGAME_MESSAGE.ERROR;
+    }
+  }
 }
 
 module.exports = Validation;
