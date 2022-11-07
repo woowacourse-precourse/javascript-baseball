@@ -5,37 +5,27 @@ class App {
   play() {
 
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    let continueGame = this.startGame();
-    if(continueGame != 0) {
-       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (reStart) => {
-        console.log('12312');
-        continueGame = reStart;
-        MissionUtils.Console.close();
-    })
-    }
+    const RANDOM = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(RANDOM); // 콘솔
+    let continueGame = this.startGame(RANDOM);
+    // if(continueGame != 0) {
+    //    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (reStart) => {
+    //     console.log('12312');
+    //     continueGame = reStart;
+    //     MissionUtils.Console.close();
+    // })
+    //}
   }
   
-  startGame() {
-    const RAMDOM = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    console.log(RAMDOM);
-    let user;
+  startGame(RANDOM){ 
+        
     MissionUtils.Console.readLine('숫자를 입력해주세요', (user_num) => {
-      user = user_num;
-      let flag = this.checkNum(RAMDOM,user);
-      if(flag === -1) {
-        return 0;
-      }
-      else if(flag === 0){
-        return 1;
-      }
-      else if(flag) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        return 1;
-      }
-      MissionUtils.Console.close();
+      let flag = this.checkNum(RANDOM,user_num);
+      if(flag)
+        MissionUtils.Console.close();
     })
-    
   }
+
   checkNum(RANDOM,num) {
     let bucketNum = [];
     for(let i = 2; i >= 0; i--){
@@ -44,31 +34,31 @@ class App {
     }
     let strike = [];
     let j = -1;
-    console.log(bucketNum);
+    console.log(bucketNum); // 콘솔
     for(let i = 0; i < bucketNum.length; i++){
       if(bucketNum[i] === RANDOM[i]){
         strike[++j] = bucketNum[i];
       }
     }
-    console.log(strike);
+    console.log(strike); // 콘솔
     let ball = RANDOM.filter(x => bucketNum.includes(x)).filter(x => !strike.includes(x));
     this.print(strike.length, ball.length);
+
     if(strike.length === 3)
       return 1;
-    return 0;
+    else
+      this.startGame(RANDOM);
   }
+
   print(strike, ball){
     if(ball != 0){
       MissionUtils.Console.print(`${ball}볼 `);
-      MissionUtils.Console.close();
     }
     if(strike != 0){
       MissionUtils.Console.print(`${strike}스트라이크`);
-      MissionUtils.Console.close();
     }
     if(ball === 0 && strike === 0){
       MissionUtils.Console.print('낫싱');
-      MissionUtils.Console.close();
     }
   }
   
