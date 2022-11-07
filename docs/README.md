@@ -1,4 +1,4 @@
-## 기능 명세서
+## ✒ 기능 명세서
 
 - [x] 게임 시작 시 "숫자 야구 게임을 시작합니다" 문구를 띄운다.
 
@@ -33,12 +33,45 @@
 
 <br />
 
-## 구현 방법
+## ✨ 파일 구조
+
+```
+javascript-baseball
+┣ src
+┃ ┣ components
+┃ ┃ ┣ Computer.js
+┃ ┃ ┣ User.js
+┃ ┃ ┗ Game.js
+┃ ┣ constant
+┃ ┃ ┗ baseball.js
+┗ ┗ App.js
+```
+
+<br />
+
+## 🎨 각 파일들의 역할
 
 <img src="https://imgur.com/egsbK17.png" />
 
-- App 클래스의 인스턴스 멤버 변수로 computer, user, game을 정의했고 각각은 Computer, User, Game 클래스의 인스턴스가 할당(바인딩) 되어있다.
+### App.js
 
+- 숫자 야구를 진행하는 App 클래스가 있는 파일
+- App 클래스에는 인스턴스 멤버 변수로 computer, user, game을 정의했고 각각은 Computer, User, Game 클래스의 인스턴스가 할당(바인딩) 되어있다.
 - Computer, User, Game 클래스는 숫자 야구 게임에서 사용되는 로직들을 모듈화한 컴포넌트들이다.
+- 바인딩된 인스턴스의 메서드를 이용해 숫자 야구를 진행하는 메서드를 구현하였다.
 
-- 인스턴스 메소드를 이용해 숫자 야구 게임을 구현하였다.
+### components/Computer.js
+
+숫자 야구를 진행할 컴퓨터 숫자를 만드는 모듈
+
+### components/User.js
+
+유저가 입력한 숫자의 유효성을 판별하는 모듈
+
+### components/Game.js
+
+유저의 입력값에 대한 결과를 출력하는 모듈
+
+### constant/baseball.js
+
+숫자 야구를 할 때 사용되는 상수들을 모아둔 파일
