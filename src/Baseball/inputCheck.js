@@ -1,10 +1,10 @@
 class inputValidation {
   checkInputValidation(userInputNum) {
-    const [CHECKED_NUM_LENGTH, CHECKED_IS_NUMBER, CHECKED_NUM_OVERLAP] = ([
+    const [CHECKED_NUM_LENGTH, CHECKED_IS_NUMBER, CHECKED_NUM_OVERLAP] = [
       this.checkNumLength(userInputNum),
       this.checkIsNumber(userInputNum),
       this.checkNumOverlap(userInputNum),
-    ]);
+    ];
 
     if (CHECKED_NUM_LENGTH && CHECKED_IS_NUMBER && CHECKED_NUM_OVERLAP) {
       return true;
@@ -20,7 +20,7 @@ class inputValidation {
   }
 
   checkIsNumber(input) {
-    if (!isNaN(input)) {
+    if (/^[1-9]*$/g.test(input)) {
       return true;
     }
     return false;
