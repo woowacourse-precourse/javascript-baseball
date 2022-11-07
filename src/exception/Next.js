@@ -4,6 +4,7 @@ const { EXCEPTION } = require('../utils/constants');
 
 class NextException extends Exception {
   #input;
+
   #errorMessage = '재시작(1), 종료(2)를 눌러야 됩니다!!';
 
   constructor(input) {
@@ -13,11 +14,11 @@ class NextException extends Exception {
   }
 
   #isRestart() {
-    return this.#input == EXCEPTION.RESTART;
+    return this.#input === EXCEPTION.RESTART;
   }
 
   #isExit() {
-    return this.#input == EXCEPTION.EXIT;
+    return this.#input === EXCEPTION.EXIT;
   }
 
   occurError() {
