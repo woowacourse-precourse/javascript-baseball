@@ -45,6 +45,18 @@ class App {
     else return ball + "볼 " + strike + "스트라이크";
   }
 
+  makeNotice() {
+    Console.readLine(Console.END_NOTICE, (input) => {
+      Input.checkOneOrTwo(input);
+      if (input === "1") {
+        this.makeAnswer();
+        this.play();
+      } else {
+        Console.close();
+      }
+    });
+  }
+
   isGameOver() {
     return this.input
       .split("")
