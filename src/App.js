@@ -16,12 +16,7 @@ class App {
 
   askForNumbers() {
     Console.readLine("숫자를 입력해주세요 : ", (receivedNumbers) => {
-      if (this.isValidInput(receivedNumbers)) {
-        const correctNumbers = this.makeRandomNumber();
-        // receivedNumbers와 correctNumbers를 결과 출력 함수의 인자로 전달
-      } else {
-        throw "잘못된 입력입니다.";
-      }
+      this.stirUp(receivedNumbers);
     });
   }
 
@@ -37,6 +32,19 @@ class App {
     else if (!Number(input)) return false;
     else if (new Set(numberArr).size !== 3) return false;
     else return true;
+  }
+
+  /**
+   * 입력된 숫자를 받아 유효 여부에 따라 분기를 나눕니다.
+   * @param {string} receivedNumbers - 유저가 입력한 문자열 형식의 숫자
+   */
+  stirUp(receivedNumbers) {
+    if (this.isValidInput(receivedNumbers)) {
+      const correctNumbers = this.makeRandomNumber();
+      // receivedNumbers와 correctNumbers를 결과 출력 함수의 인자로 전달
+    } else {
+      throw "잘못된 입력입니다.";
+    }
   }
 }
 
