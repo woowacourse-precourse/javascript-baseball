@@ -6,11 +6,6 @@ const hint = require("./hint.js");
 
 class App {
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.startGame();
-  }
-
-  startGame() {
     const computerNums = pickNumber.pickComputerNum();
 
     let isFinish = false;
@@ -35,7 +30,7 @@ class App {
 
   pickRestartOrEnd = (number) => {
     if (number === "1") {
-      this.startGame();
+      this.play();
     } else {
       MissionUtils.Console.print("게임 종료");
     }
