@@ -1,17 +1,18 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
 const changeToArray = (number) => {
     return number
         .toString()
         .split("")
         .map((num) => parseInt(num), 10);
 };
+const printMassage = (message) => {
+    return MissionUtils.Console.print(message);
+};
 class App {
     printStartMassage() {
         MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
     }
     play() {
-        this.printEndMessage();
         let answer = this.createAnswer();
         // console.log(answer);
         this.getUserInput(answer);
@@ -46,33 +47,29 @@ class App {
         return strike;
     }
 
-    printMassage(massage) {
-        return MissionUtils.Console.print(massage);
-    }
-
     inputResult(userInput, answer) {
         const BALL = this.getBallCount(userInput, answer);
         const STRIKE = this.getStrikeCount(userInput, answer);
         if (BALL === 0 && STRIKE === 0) {
-            return this.printMassage("낫싱");
+            return printMassage("낫싱");
         }
         if (BALL === 0) {
-            return this.printMassage(`${STRIKE}스트라이크`);
+            return printMassage(`${STRIKE}스트라이크`);
         }
         if (STRIKE === 0) {
-            return this.printMassage(`${BALL}볼`);
+            return printMassage(`${BALL}볼`);
         }
 
-        return this.printMassage(`${BALL}볼 ${STRIKE}스트라이크`);
+        return printMassage(`${BALL}볼 ${STRIKE}스트라이크`);
     }
 
     printEndMessage() {
-        this.printMassage(`3스트라이크`);
-        this.printMassage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        printMassage(`3스트라이크`);
+        printMassage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
 
     choosesNextStep() {
-        this.printMassage("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        printMassage("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         MissionUtils.Console.readLine("", (number) => {
             if (number === "1") {
                 this.play();
