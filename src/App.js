@@ -40,19 +40,19 @@ class App {
   }
 
   askReplay() {
-    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-    MissionUtils.Console.readLine("", (isRestart) => {
-      if (isRestart === "1"){
-        return this.play();
-      }
-      if (isRestart === "2") {
-        return this.exitGame();
-      }
-      else {
-        throw new Error("입력값이 잘못되었습니다. 프로그램을 종료합니다.");
-      }
-    });
-  }
+  MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+  MissionUtils.Console.readLine("", (isRestart) => {
+    if (isRestart === "1"){
+      return this.play();
+    }
+    if (isRestart === "2") {
+      return this.exitGame();
+    }
+    else {
+      throw new Error("입력값이 잘못되었습니다. 프로그램을 종료합니다.");
+    }
+  });
+}
 
   cntStikeAndBall(computerNum, userNum) {
     let strike = 0, ball = 0;
@@ -67,6 +67,22 @@ class App {
       }
     });
     return {strike, ball};
+  }
+
+  resultMsg(strike, ball) {
+    let msg = '';
+    if (strike === 0 && ball === 0) {
+      return msg = '낫싱';
+    }
+    if (strike === 0) {
+      return msg += `${ball}볼`;
+    }
+    if (ball === 0) {
+      return msg += `${strike}스트라이크`;
+    }
+    else {
+      return msg = `${ball}볼 ${strike}스트라이크`;
+    }
   }
 
 }
