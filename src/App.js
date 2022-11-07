@@ -24,6 +24,14 @@ class App {
     }
   }
 
+  checkChoiceException(number){
+    if(number === "1" || number === "2"){
+      return 1;
+    } else {
+      throw new Error("1 또는 2를 입력하세요.");
+    }
+  }
+
   getUserNum(com_num){
     let user_num;
     do{
@@ -80,7 +88,6 @@ class App {
 
   playGame() {
     let game = "1";
-
     while(game === "1"){
       let com = this.getRandomNum();
       this.getUserNum(com);
@@ -88,6 +95,7 @@ class App {
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) =>{
         game = answer;
       });
+      this.checkChoiceException(game);
     }
   }
 }
