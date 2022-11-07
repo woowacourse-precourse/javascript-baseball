@@ -34,7 +34,7 @@ describe('기능 목록 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 
-  test('컴퓨터의 3자리 수 생성 테스트', () => {
+  test('컴퓨터의 3자리 수 생성', () => {
     const game = new Game();
     const numberArr = game.generateThreeDigitNumber();
     const numberStr = numberArr.join('');
