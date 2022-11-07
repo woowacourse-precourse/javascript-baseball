@@ -12,6 +12,11 @@ describe("입력값 테스트", () => {
       userinput.checkLength(["12"]);
     }).toThrow();
   });
+  test("중복값이 있는 지 확인", () => {
+    expect(() => {
+      userinput.checkDuplicate("112");
+    }).toThrow();
+  });
   test("범위 밖의 입력값 확인 case 1", () => {
     expect(() => {
       userinput.checkRange(["120"]);
