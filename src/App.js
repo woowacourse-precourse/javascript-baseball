@@ -21,6 +21,7 @@ class App {
         this.makeNotice();
         return;
       }
+      this.play();
     });
   }
 
