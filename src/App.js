@@ -36,7 +36,9 @@ class App {
 
       if (!this.isGameFinished) this.gameStart();
 
-      MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {});
+      MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
+        if (input !== 1 && input !== 2) throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
+      });
     });
   }
 
