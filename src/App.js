@@ -77,9 +77,7 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
-        if (userInput !== "1" && userInput !== "2") {
-          this.throwError("failReset");
-        }
+        this.findResetError(userInput);
 
         userInput === "1" ? this.play() : Console.close();
       }
@@ -94,6 +92,10 @@ class App {
       userInput.includes("0")
     )
       this.throwError("failCompare");
+  }
+
+  findResetError(userInput) {
+    if (userInput !== "1" && userInput !== "2") this.throwError("failReset");
   }
 
   throwError(errorCase) {
