@@ -1,5 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { NOTTHING, STRIKE, BALL, GAME_END } = require("./Constants.js");
+const {
+  NOTTHING,
+  STRIKE,
+  BALL,
+  GAME_END,
+  REQUIRE_NUMBER,
+} = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
 const getComputerNumber = (start, end) => {
@@ -76,7 +82,7 @@ const gamePlay = (computers, user) => {
     countStrike = isStrike(number, index, computers, countStrike);
     countBall = isBall(number, index, computers, countBall);
   });
-  printGameResult(countStrike, countBall);
+  printGameResult(countStrike, countBall, computers);
 };
 
 const isStrike = (number, index, computers, countStrike) => {
@@ -96,15 +102,19 @@ const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
 
-const printGameResult = (countStrike, countBall) => {
+const printGameResult = (countStrike, countBall, computers) => {
   if (countStrike === 0 && countBall === 0) {
     printMessage(NOTTHING);
+    getUserNumber(computers, REQUIRE_NUMBER);
   } else if (3 > countStrike > 0 && countBall === 0) {
     printMessage(countStrike + STRIKE);
+    getUserNumber(computers, REQUIRE_NUMBER);
   } else if (countStrike === 0 && countBall > 0) {
     printMessage(countBall + BALL);
+    getUserNumber(computers, REQUIRE_NUMBER);
   } else if (3 > countStrike > 0 && countBall > 0) {
     printMessage(`${countBall + BALL} ${countStrike + STRIKE}`);
+    getUserNumber(computers, REQUIRE_NUMBER);
   } else if (countStrike === 3) {
     printMessage(GAME_END);
   }
