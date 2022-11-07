@@ -28,7 +28,7 @@ class App {
       let digit = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNumber.includes(digit)) computerNumber += digit;
     }
-    return Number(computerNumber);
+    return computerNumber;
   }
 
   gameStart() {
@@ -39,7 +39,15 @@ class App {
   }
 
   getUserNumber(input) {
-    this.userNumber = Number(input);
+    this.userNumber = input;
+  }
+
+  isValidUserNumber(number) {
+    return this.isThreeDigits(number) && this.isCorrectDigits(number) && this.isNotDuplicate;
+  }
+
+  isThreeDigits(number) {
+    return number.length !== 3;
   }
 }
 const app = new App();
