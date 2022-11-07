@@ -15,14 +15,15 @@ class App {
     //사용자 숫자 입력
     MissionUtils.Console.readLine(Game.MESSAGE.INPUT, (userInput) => {
       //입력이 형식에 맞는지 유효성 검사
-      const userNumber = Number(userInput);
+      const userNumber = this.user.makeUserNumber(userInput);
       const userInputValidation = this.user.validateInput(userNumber);
       if (userInputValidation === Game.NUMBER.FAIL) {
         throw new Error(Game.MESSAGE.ERROR);
       }
-    });
 
-    //사용자가 입력한 숫자에 대한 결과 출력
+      //사용자가 입력한 숫자에 대한 결과 출력
+      MissionUtils.Console.print(Game.ballCount(userNumber, computerNumber));
+    });
 
     //컴퓨터가 선택한 숫자 3개 모두 맞출 시 게임 종료 문구 출력 후 게임 종료
 
