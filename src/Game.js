@@ -5,7 +5,7 @@ class Game{
 
     computer = new Computer();
 
-    play(){
+    gamePlay(){
         this.loadComputerNumbers();
         this.getUserInput();
     }
@@ -21,7 +21,7 @@ class Game{
 
 
     getUserInput() {
-        MissionUtils.Console.readLine("숫자를 입력해주세요 :", (numbers) => {
+        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (numbers) => {
             this.checkValidationUserInput(numbers);
         });
     }
@@ -92,20 +92,17 @@ class Game{
     }
 
     afterGameEnd(num){
-        if(num === '1'){
-            this.play();
+        if(num == '1'){
+            this.gamePlay();
         }
-        else if(num === '2'){
+        else if(num == '2'){
             MissionUtils.Console.print("게임 종료");
             MissionUtils.Console.close();
         }
         else{
-            throw "1또는 2를 입력 해주세요."
+            throw "1 또는 2를 입력 해주세요."
         }
     }
 }
-
-const game = new Game();
-game.play();
 
 module.exports = Game;
