@@ -29,7 +29,13 @@ class App {
       }
     });
   }
-  compareAnswerAndInput(answer, userInput) {}
+  compareAnswerAndInput(answer, userInput) {
+    const [strike, ball] = this.getStrikeBall(answer, userInput);
+    this.printCompareResult(strike, ball);
+
+    if (this.isAnswer(strike, ball)) this.restartGame();
+    else this.getInput(answer);
+  }
   getStrikeBall(answer, userInput) {}
 
   printCompareResult(strike, ball) {}
