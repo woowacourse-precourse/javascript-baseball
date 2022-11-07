@@ -8,7 +8,8 @@ class App {
     this.maxNum = maxNum;
     this.MESSAGES = {
       START: "숫자 야구 게임을 시작합니다.",
-      END: "게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      END: "게임 종료",
+      RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       INSERT_NUMBER: `${this.count}자리 숫자(각 자리 수: ${this.minNum}~${this.maxNum})를 입력해주세요 : `,
       ERROR: {
         INSERT: "올바르지 않은 입력입니다.\n",
@@ -129,19 +130,41 @@ class App {
     this.isPlaying = true;
   }
 
+  restart(input) {
+    const COMMANDS = {
+      1: this.newGame.bind(this),
+      2: this.exitGame.bind(this),
+    };
+
+    console.log(input, "restart");
+    COMMANDS[input]();
+  }
+
+  confirmRestart() {
+    Console.print(this.MESSAGES.END);
+    Console.readLine(this.MESSAGES.RESTART, this.restart.bind(this));
+  }
+
   continueGame(input) {
     this.inputUserNumbers(input);
     this.compareNumbers();
-    if (this.isPlaying) {
-      this.runGame();
+    console.log(this.gameNumber);
+
+    if (!this.isPlaying) {
+      this.confirmRestart();
       return;
     }
 
-    Console.print("게임 종료");
+    this.runGame();
   }
 
   runGame() {
     Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+  }
+
+  exitGame() {
+    console.log("종료 테스트");
+    return true;
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
