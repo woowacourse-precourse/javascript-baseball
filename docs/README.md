@@ -1,6 +1,6 @@
 # todo
 
-- [ ] eslint airbnb style 적용한다.
+- [x] eslint airbnb style 적용한다.
 
 - [ ] while 반복문 flag 변수를 let으로 정의하고 true로 초기화한다.
 - [ ] while 반복문을 실행한다.
