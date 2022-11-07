@@ -42,22 +42,18 @@ class App {
     });
   }
 
-  checkVaild() {
-    const checkInputValid = new CheckInputValid({
-      userNum: this.userNum, //그 값을 받아오자 무슨값? 그 Check한 값
-    });
-  }
-
-  play() {
-    const render = new Render({
-      errorResult: this.errorResult,
-      errorRetryResult: this.errorRetryResult,
-    });
+  getMention() {
+    const render = new Render();
 
     if (this.firstTry === true) {
       render.startment();
     }
-    console.log(this.computerInput);
+  }
+
+  play() {
+    this.getMention();
+    this.getUser();
+
     render.getUser().then((num) => {
       this.userNum = this.numToArr(num);
       const checkInputValid = new CheckInputValid({
