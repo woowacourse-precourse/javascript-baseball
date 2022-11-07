@@ -83,4 +83,16 @@ describe("기능 테스트", () => {
       expect.stringContaining('1볼 2스트라이크')
     );
   });
+
+  test("기능 8, 사용자에게 입력받은 값 확인하기 - 2 입력", () => {
+    const logSpy = getLogSpy();
+    const userChoiceNumber = '2';
+
+    const app = new App();
+    app.checkUserChoiceNumber(userChoiceNumber);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('숫자 야구 게임을 종료합니다.')
+    );
+  });
 });
