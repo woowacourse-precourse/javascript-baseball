@@ -1,10 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Exception = require("./components/Exception");
 const Count = require("./components/Count");
+const Result = require("./components/Result");
 
 class App {
   constructor() {
     this.exception = new Exception();
+    this.Count = new Count();
+    this.result = new Result();
   }
 
   play() {
@@ -26,24 +29,10 @@ class App {
       }
 
       const [strikeCount, ballCount] = this.count.get(userInput, computerNumbers);
-    });
-  }
+      const result = this.result.get(strikeCount, ballCount);
 
-  getResult(strike, ball, computerNumbers) {
-    let result = '';
-    if (strike === 3) {
-      result = 'answer';
-    } else if (strike === 0 && ball === 0) {
-      result = 'nothing';
-    } else if (strike === 0 && ball !== 0) {
-      result = `${ball}볼`;
-    } else if (strike !== 0 && ball === 0) {
-      result = `${strike}스트라이크`;
-    } else if (strike !== 0 && ball !== 0) {
-      result = `${ball}볼 ${strike}스트라이크`;
-    }
-    
-    return this.printResult(result, computerNumbers);
+      return this.printMessage(result, computerNumbers);
+    });
   }
 
   printResult(result, computerNumbers) {
@@ -75,4 +64,7 @@ class App {
   }
 }
 
-module.exports = App;
+const app = new App();
+app.play();
+
+//module.exports = App;
