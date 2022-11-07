@@ -53,12 +53,6 @@ class App {
       if (strUserNum.length !== 3) {
         throw new Error("세 자리 숫자를 입력해주세요.");
       }
-      if (isNaN(userNumber) === true) {
-        throw new Error("숫자를 입력해주세요.");
-      }
-      if (userNumber <= 0) {
-        throw new Error("0과 음수를 제외한 숫자를 입력해주세요.");
-      }
       for (let i = 0; i < strRandomNum.length; i++) {
         if (strRandomNum[i] === strUserNum[i]) {
           strikeCount++;
