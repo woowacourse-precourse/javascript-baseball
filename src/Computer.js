@@ -1,20 +1,26 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 
 class Computer {
   constructor() {
-    this.numberArray = [];
+    this.selectedNumber = '';
+  }
+
+  getRandomNumber() {
+    const numberArray = this.selectedNumber
+      .toString()
+      .split('')
+      .map(number => +number);
+    const number = Random.pickNumberInRange(1, 9);
+    if (!numberArray.includes(number)) {
+      return number;
+    }
+    return this.getRandomNumber();
   }
 
   setRandomNumber() {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!this.numberArray.includes(number)) {
-      this.numberArray.push(number);
-    }
-  }
-  setRandomNumberArray() {
-    this.numberArray = [];
-    while (this.numberArray.length < 3) {
-      this.setRandomNumber();
+    this.selectedNumber = '';
+    while (this.selectedNumber.length < 3) {
+      this.selectedNumber += this.getRandomNumber();
     }
   }
 }
