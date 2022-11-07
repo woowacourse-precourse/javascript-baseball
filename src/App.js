@@ -25,6 +25,7 @@ class App {
         this.answer.push(ANSWER);
       }
     }
+    console.log(this.answer);
     return this.enterNumber();
   }
 
@@ -87,14 +88,17 @@ class App {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (input) => {
-        if (input === '1') return this.play();
-        if (input === '2') return Console.close();
-        throw new Error('정해진 값을 입력해주세요.');
+        return this.selectOption(input);
       }
     );
-    Console.print('');
+  }
+
+  selectOption(input) {
+    if (input === '1') return this.play();
+    if (input === '2') return Console.close();
+    throw new Error('정해진 값을 입력해주세요.');
   }
 }
 const app = new App();
-app.endingOption();
+app.play();
 module.exports = App;
