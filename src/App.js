@@ -2,6 +2,13 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const { Random, Console } = MissionUtils;
 
+const START_MESSAGE = '숫자 야구 게임을 시작합니다.';
+const USERINPUT_MESSAGE = '숫자를 입력해주세요 : ';
+const ERROR_MESSAGE = '잘못된 입력입니다.';
+const GAMEEND_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+const ASKTORESTART_MESSAGE =
+  '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ';
+
 class App {
   constructor() {
     this.computerNum = [];
@@ -11,35 +18,9 @@ class App {
   }
 
   play() {
-    Console.print('게임을 시작합니다.');
+    Console.print(START_MESSAGE);
     this.createComputerNum();
     this.start();
-  }
-
-  start() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      if (!this.isValidUserInput(input)) {
-        this.isError();
-      }
-      Console.print(`숫자를 입력해주세요 : ${this.userInput}`);
-      this.strike = 0;
-      this.ball = 0;
-      this.getAnswer();
-
-      if (this.strike !== 3) {
-        return this.start();
-      }
-      return this.askUserToRestart();
-    });
-  }
-
-  isValidUserInput(input) {
-    input.replace(/ /g, '');
-    if (input.length !== 3 || Number.isNaN(+input)) {
-      return false;
-    }
-    this.userInput = input;
-    return true;
   }
 
   createComputerNum() {
@@ -48,30 +29,54 @@ class App {
       randomNumberSet.add(Random.pickNumberInRange(1, 9));
     }
     this.computerNum = [...randomNumberSet].join('');
-    return this.computerNum;
+  }
+
+  start() {
+    Console.readLine(USERINPUT_MESSAGE, (userInput) => {
+      if (!this.isValidUserInput(userInput)) {
+        this.isError();
+      }
+      Console.print(`${USERINPUT_MESSAGE}${this.userInput}`);
+      this.strike = 0;
+      this.ball = 0;
+      this.getAnswer();
+
+      if (this.strike !== 3) {
+        return this.start();
+      }
+
+      this.askUserToRestart();
+    });
+  }
+
+  isValidUserInput(input) {
+    input.replace(/ /g, '');
+
+    if (input.length !== 3 || Number.isNaN(+input)) {
+      return false;
+    }
+    this.userInput = input;
+
+    return true;
   }
 
   isStrike() {
-    const { computerNum, userInput } = this;
-    computerNum.split('').forEach((num, idx) => {
-      if (computerNum[idx] === userInput[idx]) {
+    this.computerNum.split('').forEach((num, idx) => {
+      if (this.computerNum[idx] === this.userInput[idx]) {
         this.strike += 1;
       }
     });
-    return this.strike || 0;
   }
 
   isBall() {
-    const { computerNum, userInput } = this;
-    computerNum.split('').forEach((num, idx) => {
+    this.computerNum.split('').forEach((num, idx) => {
       if (
-        computerNum[idx] !== userInput[idx] &&
-        userInput.includes(computerNum[idx])
+        this.computerNum[idx] !== this.userInput[idx] &&
+        this.userInput.includes(this.computerNum[idx])
       ) {
         this.ball += 1;
       }
     });
-    return this.ball || 0;
   }
 
   getAnswer() {
@@ -95,27 +100,25 @@ class App {
   }
 
   isError() {
-    throw new Error('잘못된 입력입니다.');
+    throw new Error(ERROR_MESSAGE);
   }
 
   askUserToRestart() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ');
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
-      (input) => {
-        if (input === '1') {
-          Console.print(input);
-          this.isRestart();
-          return;
-        }
-        if (input === '2') {
-          this.isExit();
-        } else {
-          this.isError();
-        }
-      },
-    );
+    Console.print(GAMEEND_MESSAGE);
+    Console.print(ASKTORESTART_MESSAGE);
+    Console.readLine(ASKTORESTART_MESSAGE, (userInput) => {
+      if (userInput === '1') {
+        Console.print(userInput);
+        this.isRestart();
+        return;
+      }
+      if (userInput === '2') {
+        Console.print(userInput);
+        this.isExit();
+      } else {
+        this.isError();
+      }
+    });
   }
 }
 
