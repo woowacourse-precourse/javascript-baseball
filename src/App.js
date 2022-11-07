@@ -9,31 +9,30 @@ class App {
 
   play() {
     const computer = new Computer();
-    // Console.print(computer.number);
-    this.playSetOfGame(computer);
+    this.playMatch(computer);
   }
 
-  playSetOfGame(computer) {
+  playMatch(computer) {
     Console.readLine(MESSAGE.PLAYONE, (inputNumber) => {
       computer.checkValidationSetGameInput(inputNumber);
-      const resultMap = computer.getResultMap(inputNumber);
-      const result = computer.getResultMessage(resultMap);
-      Console.print(result);
-      if (result === MESSAGE.ENDGAME) {
+      const resultMessage = computer.computeMatchInput(inputNumber).getResultMessage();
+      Console.print(resultMessage);
+
+      if (resultMessage === MESSAGE.ENDGAME) {
         this.askNewGame(computer);
       }
-      return this.playSetOfGame(computer);
+
+      return this.playMatch(computer);
     });
   }
 
   askNewGame(computer) {
     Console.readLine(MESSAGE.NEWGAME, (inputAnswer) => {
       computer.checkValidationNewGameInput(inputAnswer);
-      if (inputAnswer === '1') {
-        this.play();
-      } else {
-        Console.close();
-      }
+
+      if (inputAnswer === '1') this.play();
+
+      Console.close();
     });
   }
 }

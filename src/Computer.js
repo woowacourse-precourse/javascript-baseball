@@ -5,8 +5,10 @@ const { setGameInputError, newGameInputError } = require('./Error');
 class Computer {
   constructor() {
     this.number = this.initNumber();
+    this.resultMap;
   }
-  getResultMap(inputNumber) {
+
+  computeMatchInput(inputNumber) {
     const resultMap = {
       ball: 0,
       strike: 0,
@@ -24,35 +26,37 @@ class Computer {
         resultMap.strike += 1;
       }
     }
-    return resultMap;
+    this.resultMap = resultMap;
+    return this;
   }
 
-  getResultMessage(resultMap) {
-    if (resultMap.strike === 3) {
+  getResultMessage() {
+    if (this.resultMap.strike === 3) {
       return MESSAGE.ENDGAME;
     }
 
-    if (resultMap.strike === 0 && resultMap.ball === 0) {
-      return '낫싱';
+    if (this.resultMap.strike === 0 && this.resultMap.ball === 0) {
+      return MESSAGE.NOTTHING;
     }
 
-    const ballMessage = resultMap.ball !== 0 ? `${resultMap.ball}볼 ` : '';
-    const strikeMessage = resultMap.strike !== 0 ? `${resultMap.strike}스트라이크` : '';
+    const ballMessage = this.resultMap.ball !== 0 ? `${this.resultMap.ball}볼 ` : '';
+    const strikeMessage = this.resultMap.strike !== 0 ? `${this.resultMap.strike}스트라이크` : '';
     return ballMessage + strikeMessage;
   }
 
   initNumber() {
-    const container = [Random.pickNumberInRange(1, 9)];
+    const randomNumbers = [Random.pickNumberInRange(1, 9)];
 
-    while (container.length < 3) {
+    while (randomNumbers.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
-      if (container.includes(number)) {
+
+      if (randomNumbers.includes(number)) {
         continue;
       }
 
-      container.push(number);
+      randomNumbers.push(number);
     }
-    return container.join('');
+    return randomNumbers.join('');
   }
 
   checkValidationSetGameInput(inputNumber) {
