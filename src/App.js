@@ -1,12 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-// const config = require("./config/config");
+const config = require("./config/config");
 
 class App {
   constructor() {
     this.computerNum = [];
-    this.START_GAME_NUM = 1;
-    this.END_GAME_NUM = 9;
-    this.GAME_NUM_SIZE = 3;
   }
 
   play() {
@@ -15,18 +12,17 @@ class App {
   }
 
   start() {
-    this.generateNum(this.GAME_NUM_SIZE);
+    this.generateNum(config.GAME_NUM_SIZE);
     this.round();
   }
 
   round() {
     const userNum = this.readNum();
     // console.log("userNum", userNum);
-
     const scoreObject = this.compareNum(this.computerNum, userNum);
     this.printScore(scoreObject);
 
-    if (scoreObject.strike === this.GAME_NUM_SIZE) {
+    if (scoreObject.strike === config.GAME_NUM_SIZE) {
       this.win();
     } else {
       this.round();
@@ -35,19 +31,17 @@ class App {
 
   win() {
     MissionUtils.Console.print(
-      `${this.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료\n`
+      `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료\n`
     );
-    if (this.replay() === 1) {
-      this.start();
-    }
+    this.replay();
   }
 
   generateNum() {
     const result = [];
-    while (result.length < this.GAME_NUM_SIZE) {
+    while (result.length < config.GAME_NUM_SIZE) {
       const number = MissionUtils.Random.pickNumberInRange(
-        this.START_GAME_NUM,
-        this.END_GAME_NUM
+        config.START_GAME_NUM,
+        config.END_GAME_NUM
       );
       if (!result.includes(number)) {
         result.push(number);
@@ -60,7 +54,7 @@ class App {
     let strike = 0;
     let ball = 0;
 
-    for (let i = 0; i < this.GAME_NUM_SIZE; i++) {
+    for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
       if (computer[i] === user[i]) {
         strike++;
         ball--;
@@ -106,25 +100,26 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
         answer = parseInt(input);
+        this.isValidControl(answer);
         if (answer !== 1) {
           MissionUtils.Console.close();
+        } else {
+          this.start();
         }
-        this.isValidControl(answer);
       }
     );
     return answer;
   }
 
   isValidNum(inputList) {
-    if (inputList.length !== this.GAME_NUM_SIZE) {
+    if (inputList.length !== config.GAME_NUM_SIZE) {
       throw "숫자가 유효하지 않습니다.";
     }
-
     const result = inputList.filter(
-      (input) => input >= this.START_GAME_NUM && input <= this.END_GAME_NUM
+      (input) => input >= config.START_GAME_NUM && input <= config.END_GAME_NUM
     );
     if (result.length !== inputList.length) {
-      throw "숫자 범위가 유효하지 않습니다.";
+      throw "숫자가 유효하지 않습니다.";
     }
 
     if (new Set(inputList).size !== inputList.length) {
