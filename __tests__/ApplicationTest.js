@@ -222,6 +222,20 @@ describe("숫자 야구 게임", () => {
     );
   });
 
+  test("게임 재시작 테스트", () => {
+    const playSpy = jest.spyOn(App.prototype, "play");
+    const closeSpy = jest.spyOn(MissionUtils.Console, "close");
+    const app = new App();
+
+    app.decideRePlay("1");
+    expect(playSpy).toHaveBeenCalled();
+    expect(playSpy).toHaveBeenCalledTimes(1);
+
+    app.decideRePlay("2");
+    expect(closeSpy).toHaveBeenCalled();
+    expect(closeSpy).toHaveBeenCalledTimes(1);
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
