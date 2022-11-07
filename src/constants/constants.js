@@ -9,4 +9,11 @@ const TEXT = {
   ERROR_MESSAGE: '입력이 잘못되어 종료합니다',
 };
 
-module.exports = TEXT;
+const NUMBER = {
+  THREE_STRIKE: 3,
+  RETRY: 1,
+  FINISH: 2,
+};
+
+exports.TEXT = TEXT;
+exports.NUMBER = NUMBER;

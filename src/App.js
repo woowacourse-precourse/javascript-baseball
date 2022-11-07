@@ -1,5 +1,5 @@
 const inputValidation = require('./validation/validation.js');
-const TEXT = require('./constants/constants.js');
+const { TEXT, NUMBER } = require('./constants/constants.js');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
@@ -44,10 +44,10 @@ class App {
   finish() {
     this.print(TEXT.FINISH_MESSAGE);
     this.readLine('', (input) => {
-      if (Number(input) === 1) {
+      if (Number(input) === NUMBER.RETRY) {
         this.correctAnswer = false;
         this.play();
-      } else if (Number(input) === 2) {
+      } else if (Number(input) === NUMBER.FINISH) {
         this.gameClose();
       } else {
         this.gameClose(TEXT.ERROR_MESSAGE);
@@ -67,7 +67,7 @@ class App {
   compare(input, computer) {
     const strike = this.compareStrike(input, computer);
     const ball = this.compareBall(input, computer);
-    if (strike === 3) {
+    if (strike === NUMBER.THREE_STRIKE) {
       this.correctAnswer = true;
       return `${strike}${TEXT.STRIKE}`;
     } else if (!strike && !ball) {
