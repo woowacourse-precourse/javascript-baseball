@@ -10,6 +10,21 @@ const GAME = {
     SUCCESS,
 };
 
+const WRONG_LENGTH = "ERROR : 숫자의 길이가 올바르지 않습니다.";
+const DUPLICATION = "ERROR : 숫자가 중복되었습니다.";
+const ISNAN = "ERROR : 숫자를 입력해주세요.";
+const ONE_TO_NINE = "ERROR : 1 ~ 9 사이의 값을 입력해주세요.";
+const WRONG_CHOICE = "ERROR : 값이 유효하지 않습니다.";
+
+const ERROR = {
+    WRONG_LENGTH,
+    DUPLICATION,
+    ISNAN,
+    ONE_TO_NINE,
+    WRONG_CHOICE,
+};
+
 module.exports = {
     GAME,
+    ERROR,
 };
