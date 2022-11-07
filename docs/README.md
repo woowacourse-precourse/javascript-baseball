@@ -56,9 +56,9 @@
 <hr>
 
 ## 📍 **추가 요구 사항**
-- #### 1. indent의 depth는 2 이하
-- #### 2. 함수는 한 가지의 일만 하도록
-- #### 3. Jest를 통해 기능 테스트
+- #### 1. indent의 depth는 2 이하로 구현
+- #### 2. 함수는 한 가지의 일만 하도록 구현
+- #### 3. Jest를 통해 기능 테스트 진행
 
 <br>
 <hr>
@@ -73,6 +73,6 @@
     🔍 test - 테스트 사항
     🎸 chore - 기타 사항
 
-    ex1) ➕ feat plusMyNumber - add new feature plus my number
-    ex2) ➕ docs - edit docs
+    ex1) ➕ feat - add new feature plus my number
+    ex2) 🗒️ docs - edit docs
 
