@@ -18,6 +18,10 @@ class App {
       numberOfStrike
     );
     this.printGameResultMessage(numberOfStrike, numberOfBall);
+
+    if (this.isInputNumberCorrect(numberOfStrike)) {
+      printGameEndMessage();
+    }
   }
   getAnswerNumber() {
     const answer = MissionUtils.Random.pickUniqueNumbersInRange(
@@ -125,6 +129,10 @@ class App {
   printGameResultMessage(numberOfStrike, numberOfBall) {
     const GAME_RESULT_MESSAGE = `${numberOfBall}볼 ${numberOfStrike}스트라이크`;
     Console.print(GAME_RESULT_MESSAGE);
+  }
+  printGameEndMessage() {
+    const GAME_END_MESSAGE = `${this.NUMBER_OF_DIGITS}개의 숫자를 모두 맞히셨습니다! 게임 종료`;
+    Console.print(GAME_END_MESSAGE);
   }
 }
 
