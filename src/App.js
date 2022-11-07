@@ -43,6 +43,10 @@ class App {
     return score;
   }
 
+  printHint(hint) {
+    MissionUtils.Console.print(hint);
+  }
+
   createHint(input, currentAnswer) {
     const score = this.checkInputIsCorrect(input, currentAnswer);
     let hint;
@@ -56,6 +60,7 @@ class App {
           ? (hint = `${score.strike}스트라이크`)
           : (hint = `${score.ball}볼 ${score.strike}스트라이크`);
     }
+    this.printHint(hint);
   }
 
   play() {
