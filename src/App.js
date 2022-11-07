@@ -76,8 +76,7 @@ class App {
       MissionUtils.Console.close();
     }
     if (input !== 1 && input !== 2) {
-      MissionUtils.Console.print("1 또는 2만 입력해주세요.");
-      this.isContinueGame();
+      throw "1 또는 2만 입력할 수 있습니다.";
     }
   }
 }
