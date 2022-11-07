@@ -1,38 +1,27 @@
 const generateComputerNum = require("./GenerateRandomNumber.js");
 const printMessage = require("./PrintMessage.js");
+const exception = require("./HandleException.js");
 
 function playBaseballGame() {
     const computerNum = generateComputerNum();
-    console.log(computerNum);
     let isGamePlaying = true;
-    while(isGamePlaying) {
-        let userNum, numOfStrike = 0;
-        userNum = printMessage.printUserNumInput();
-        //userNum 예외처리 조건 확인
-        numOfStrike = getNumOfStrike(computerNum, userNum);
-        if(numOfStrike == 3){
-            printMessage.printNumOfStrike(numOfStrike);
-            printMessage.printGameWin();
-            let userContinueSelect;
-            const PLAY_AGAIN = 1;
-            const QUIT_GAME = 2;
-            userContinueSelect = printMessage.printUserContinueInput();
-            if(userContinueSelect == PLAY_AGAIN){
-                return true;
+    //while(isGamePlaying) {
+        printMessage.printUserNumInput().then(userNum => {
+            exception.handleException(userNum);
+            let numOfStrike;
+            numOfStrike = getNumOfStrike(computerNum, userNum);
+            console.log(`num of strike is ${numOfStrike}`);
+            console.log(computerNum);
+            if(numOfStrike == 3){
+                isGamePlaying = gameWin(numOfStrike);
             }
-            else if(userContinueSelect == QUIT_GAME){
-                return false;
+            else{
+                let numOfBall;
+                numOfBall = getNumOfBall(computerNum, userNum);
+                getCompareResult(numOfBall, numOfStrike);
             }
-            else{//예외처리전 게임이 종료되도록
-                return false;
-            }
-        }
-        else{
-            let numOfBall;
-            numOfBall = getNumOfBall(computerNum, userNum);
-            getCompareResult(numOfBall, numOfStrike);
-        }
-    }
+        });
+    //}
 }
 
 function getNumOfStrike(computerNum, userNum){
@@ -43,6 +32,23 @@ function getNumOfStrike(computerNum, userNum){
         }
     }
     return numOfStrike;
+}
+
+function gameWin(numOfStrike) {
+    printMessage.printNumOfStrike(numOfStrike);
+    printMessage.printGameWin().then(userInput => {
+        const PLAY_AGAIN = 1;
+        const QUIT_GAME = 2;
+        if(userInput == PLAY_AGAIN) {
+            return true;
+        }
+        else if(userInput == QUIT_GAME) {
+            return false;
+        }
+        else{
+            throw new Error();
+        }
+    });
 }
 
 function getNumOfBall(computerNum, userNum) {
@@ -76,7 +82,9 @@ function getCompareResult(numOfBall, numOfStrike) {
     if(numOfStrike > 0) {
         printMessage.printNumOfStrike(numOfStrike);
     }
-    printMessage.printEndOfLine();
+    if(numOfBall == 0 && numOfStrike == 0){
+        printMessage.printNothing();
+    }
 }
 
 module.exports.playBaseballGame = playBaseballGame;

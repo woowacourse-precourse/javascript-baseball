@@ -5,14 +5,14 @@ function printGameStart() {
     MissionUtils.Console.print(GAME_START_MESSAGE);
 }
 
-function printUserNumInput() {
-    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요";
-    let userInputNum = "";
-    MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInputNum) => {
-        console.log(` : ${userInputNum}`);
+const printUserNumInput = () => {
+    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+    return new Promise(resolve => {
+        MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
+            MissionUtils.Console.close();
+            resolve(userInput);
+        });
     });
-    MissionUtils.Console.close();
-    return userInputNum;
 }
 
 function printNumOfStrike(numOfStrike){
@@ -22,14 +22,12 @@ function printNumOfStrike(numOfStrike){
     }
 }
 
-function printUserContinueInput() {
+const printUserContinueInput = () => {
     const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
-    let userInputContinue;
-    MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, (userInputContinue) => {
-        console.log(userInputContinue);
+    MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
+        MissionUtils.Console.close();
+        resolve(userInput);
     });
-    MissionUtils.Console.close();
-    return userInputContinue;
 }
 
 function printNumOfBall(numOfBall) {
@@ -39,12 +37,13 @@ function printNumOfBall(numOfBall) {
     }
 }
 
-function printSpace() {
-    MissionUtils.Console.print(" ");
+function printNothing(){
+    const NOTHINGCORRECT = "낫싱";
+    MissionUtils.Console.print(NOTHINGCORRECT);
 }
 
-function printEndOfLine() {
-    MissionUtils.Console.print("\n");
+function printSpace() {
+    MissionUtils.Console.print(" ");
 }
 
 function printGameWin() {
@@ -58,6 +57,7 @@ module.exports = {
     printNumOfStrike,
     printUserContinueInput,
     printNumOfBall,
+    printNothing,
     printSpace,
     printEndOfLine,
     printGameWin
