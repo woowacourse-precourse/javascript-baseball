@@ -2,55 +2,67 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
 
 class App {
+  constructor() {
+    this.computerRandomNumber = "";
+  }
+
   getUserInput() {
+    console.log(this.computerRandomNumber);
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       const validation = new Validation(userInput);
       if (validation.isValidInput()) {
-        return userInput;
+        this.doGame(userInput);
       }
     });
   }
 
-  doGame(computerRandomNumber) {
-    const userNumber = this.getUserInput();
+  doGame(userInput) {
     let strikeCount = 0;
     let ballCount = 0;
-    for (let idx = 0; idx < 3; i++) {
-      if (computerRandomNumber[idx] === userNumber[idx]) strikeCount++;
-      else if (userNumber.includes(computerRandomNumber[idx])) {
+    for (let idx = 0; idx < 3; idx++) {
+      if (this.computerRandomNumber[idx] === userInput[idx]) strikeCount++;
+      else if (userInput.includes(this.computerRandomNumber[idx])) {
         ballCount += 1;
       }
     }
-    return { strikeCount, ballCount };
+    const result = { strikeCount, ballCount };
+    this.checkGameResult(result);
   }
 
-  printGameResult(strikeCount, ballCount) {
-    if (strikeCount === 0 && ballCount === 0) return Console.print("낫싱");
-    const strikeCount = strikeCount === 0 ? "" : `${strikeCount}스트라이크`;
-    const ballCount = ballCount === 0 ? "" : `${ballCount}볼 `;
-    return Console.print(`${ballCount}${strikeCount}`);
+  printGameResult(strikeCnt, ballCnt) {
+    if (strikeCnt === 0 && ballCnt === 0) return Console.print("낫싱");
+    const strike = strikeCnt === 0 ? "" : `${strikeCnt}스트라이크`;
+    const ball = ballCnt === 0 ? "" : `${ballCnt}볼 `;
+    return Console.print(`${ball}${strike}`);
   }
 
-  askRestart() {}
+  askRestart() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (restart) => {
+        if (restart === "1") this.gameStart();
+        else Console.close();
+      }
+    );
+  }
 
   checkGameResult(result) {
     const { strikeCount, ballCount } = result;
     this.printGameResult(strikeCount, ballCount);
-    if (strikeCount !== 3) return this.doGame();
+    if (strikeCount !== 3) return this.getUserInput();
     return this.askRestart();
   }
 
   gameStart() {
-    Console.print("숫자 야구 게임을 시작합니다.");
-    const computerRandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3).join(
-      ""
-    );
-    const result = this.doGame(computerRandomNumber);
-    this.checkGameResult(result);
+    const RandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+    this.computerRandomNumber = RandomNumber;
+    this.getUserInput();
   }
 
   play() {
-    gameStart();
+    Console.print("숫자 야구 게임을 시작합니다.");
+    this.gameStart();
   }
 }
 
