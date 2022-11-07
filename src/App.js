@@ -34,10 +34,12 @@ class App {
       }
       MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
 
-      if (!this.isGameFinished) this.gameStart();
+      if (!this.isGameFinished) this.playGame();
 
       MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
-        if (input !== 1 && input !== 2) throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
+        let restartNumber = +input;
+        if (restartNumber !== 1 && restartNumber !== 2)
+          throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
       });
     });
   }
