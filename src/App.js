@@ -8,10 +8,8 @@ class App {
 
     while (repeat) {
       random_number = this.GET_RANDOM_NUMBER();
-      console.log("random_number:", random_number);
 
       restart_number = this.IN_GAME(random_number);
-      console.log(restart_number);
 
       if (restart_number === 1) {
         continue;
@@ -57,8 +55,6 @@ class App {
       //동일한 숫자 입력
       throw "입력값은 서로 다른 숫자여야 합니다!";
     }
-
-    console.log("validate pass");
   }
 
   IN_GAME(correct_number) {
@@ -68,7 +64,6 @@ class App {
 
     while (!correct) {
       user_input_number = this.INPUT_NUMBER();
-      console.log("user_input_number:", user_input_number);
 
       this.VALIDATE_NUMBER(user_input_number);
 
@@ -88,7 +83,6 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (num) => {
-        console.log("종료", num);
         num = Number(num);
         if (num === 1 || num === 2) {
           finish_number = num;
