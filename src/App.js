@@ -41,7 +41,7 @@ class App {
       if (!userNumberArray.includes(element)) {
         userNumberArray.push(Number(element));
       } else {
-        throw "중복된 수가 있습니다. 다시 입력하세요!"
+        throw "중복된 수가 있습니다. 프로그램이 종료됩니다."
       }
     });
     this.getBothArrays(userNumberArray);
@@ -67,21 +67,24 @@ class App {
         }
       }
     }
-    MissionUtils.Console.print(`스트라이크 : ${strike} 볼 : ${ball}`);
+    if(strike===0 && ball===0){
+      MissionUtils.Console.print('낫싱')
+    }
+    MissionUtils.Console.print(`볼 : ${ball} 스트라이크 : ${strike} `);
     if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.gameReplay();
     }
     this.userInput();
   }
 
   gameReplay() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (gameSetNumber) => {
-        if (gameSetNumber === "1") {
+        if (+gameSetNumber === 1) {
           this.play();
-        } else if (gameSetNumber === "2") {
+        } else if (+gameSetNumber === 2) {
           throw "게임을 종료합니다";
         } else {
           throw "1,2가 아닌 입력 발생! 프로그램 종료!";
