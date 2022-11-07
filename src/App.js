@@ -45,7 +45,6 @@ class App {
     if (input !== RESTART_INPUT && input !== END_INPUT) {
       throwError();
     }
-
     if (input === RESTART_INPUT) {
       this.threeRandomNumbers = getThreeRandomNumbers();
       this.play();
@@ -55,8 +54,5 @@ class App {
     }
   }
 }
-
-// const app = new App();
-// app.play();
 
 module.exports = App;
