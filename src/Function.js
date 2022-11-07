@@ -9,9 +9,9 @@ class Function {
   }
 
   static validDuplicate(input) {
-    const setInputLength = new Set(...input.toString().split('')).size;
-    if (input.length !== setInputLength) return false;
-    return true;
+    const setInputLength = new Set(input.toString().split('')).size;
+    if (input.length !== setInputLength) return true;
+    return false;
   }
 
   static validInput(input) {
