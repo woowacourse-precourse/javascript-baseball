@@ -13,7 +13,7 @@ class Computer {
     };
 
     [...inputNumber].forEach((digit) => {
-      if (this.number.includes(digit)) {
+      if ([...this.number].includes(digit)) {
         resultMap.ball += 1;
       }
     });
@@ -36,10 +36,9 @@ class Computer {
       return '낫싱';
     }
 
-    const message = '입니다.';
-    const ballMessage = resultMap.ball !== '0' ? `${resultMap.ball}볼 ` : '';
-    const strikeMessage = resultMap.strike !== '0' ? `${resultMap.strike}스트라이크` : '';
-    return ballMessage + strikeMessage + message;
+    const ballMessage = resultMap.ball !== 0 ? `${resultMap.ball}볼 ` : '';
+    const strikeMessage = resultMap.strike !== 0 ? `${resultMap.strike}스트라이크` : '';
+    return ballMessage + strikeMessage;
   }
 
   initNumber() {
