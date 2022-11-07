@@ -99,11 +99,19 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
     );
     MissionUtils.Console.readLine('', choice => {
-      if (choice == 1) this.play();
-      else this.exitFunction();
+      try{
+        this.restartOrExit(choice);
+      } catch (err) {
+        this.exitFunction();
+        throw err;
+      }
     });
   }
-
+  restartOrExit(choice){
+    if (choice == 1) this.play();
+    else if(choice == 2) this.exitFunction();
+    else throw "잘못된 입력입니다.";
+  }
   exitFunction() {
     MissionUtils.Console.close();
   }
