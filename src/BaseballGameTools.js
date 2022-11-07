@@ -22,6 +22,12 @@ class BaseballGameTools {
       throw Error(MESSAGE.FORMAT_ERROR_GUESS);
     }
   }
+
+  static errorIfInvalidChoiceFormat(playerChoice) {
+    if (!REGEX.CHOICE.test(playerChoice)) {
+      throw Error(MESSAGE.FORMAT_ERROR_CHOICE);
+    }
+  }
 }
 
 module.exports = BaseballGameTools;
