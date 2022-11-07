@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const isValidUser = require("./isValidUser.js");
 const getComputerNumber = require("./getComputerNumber.js");
+const countInput = require("./countInput.js");
 
 const mConsole = MissionUtils.Console;
 const GAME_NUMBER_LENGTH = 3;
@@ -22,25 +23,13 @@ class App {
     mConsole.readLine("숫자를 입력해주세요 : ", (pickedNumber) => {
       if (isValidUser(pickedNumber)) {
         const checkedUser = pickedNumber.split("").map(Number);
-        const countResultArr = this.countInput(
+        const countResultArr = countInput(
           this.computerInputNumber,
           checkedUser
         );
         this.printResult(countResultArr);
       }
     });
-  }
-
-  countInput(computerInput, userInput) {
-    let BALLS = 0;
-    let STRIKES = 0;
-    for (let idx = 0; idx < GAME_NUMBER_LENGTH; idx++) {
-      if (computerInput[idx] === userInput[idx]) STRIKES++;
-      else if (computerInput.includes(userInput[idx])) BALLS++;
-    }
-
-    let countArr = [BALLS, STRIKES];
-    return countArr;
   }
 
   printResult(count) {
