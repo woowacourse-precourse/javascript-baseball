@@ -50,12 +50,26 @@ class App {
     return result;
   }
 
+  printResult(result) {
+    if (result.strike === 3) {
+      MissionUtils.Console.print("3스트라이크");
+      return;
+    }
+    if (result.nothing === 3) {
+      MissionUtils.Console.print("낫싱");
+      return;
+    }
+    MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크`);
+
+
+  }
+
   guessAnswer(answer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.isCorrectInput(input);
       input = this.stringToAnswerType(input);
-      console.log(input);
       let result = this.compare(answer, input);
+      this.printResult(result);
 
     });
 
@@ -66,9 +80,6 @@ class App {
     let answer = this.makeAnswer();
     console.log(answer);
     this.guessAnswer(answer)
-
-
-    // MissionUtils.Console.close();
   }
 }
 
