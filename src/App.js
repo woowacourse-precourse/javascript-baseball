@@ -70,10 +70,10 @@ class App {
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         inputanswer = input;
+        MissionUtils.Console.close();
       }
     );
     if (inputanswer == 1) {
-      this.computerNum = this.selectNum();
       return 1;
     } else if (inputanswer == 2) {
       MissionUtils.Console.print("게임 종료");
@@ -83,25 +83,33 @@ class App {
     }
   }
 
-  executeError() {
+  getUserInput() {
+    let inputNum = 0;
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
+      if (!this.isValidInput(input)) {
+        this.executeError(input);
+      }
+      inputNum = input;
+    });
+    return inputNum;
+  }
+
+  executeError(input) {
+    console.log(`input >> ${input}`);
     throw "유효하지 않는 숫자입니다.";
   }
 
   play() {
-    this.computerNum = this.selectNum();
-    let inputNum = 0;
+    let computerNum = this.selectNum();
     let flag = 1;
-    let compareResult = "";
     while (flag) {
-      MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
-        inputNum = input;
-        this.isValidInput(input) ? "" : this.executeError();
-      });
-      compareResult = this.CompareInputWithComputer(inputNum, this.computerNum);
+      let inputNum = this.getUserInput();
+      let compareResult = this.CompareInputWithComputer(inputNum, computerNum);
       this.printResult(compareResult);
-      flag = compareResult.get("스트라이크") == 3 ? this.isRetry() : 1;
+      if (compareResult.get("스트라이크") == 3) {
+        this.isRetry() ? (computerNum = this.selectNum()) : (flag = 0);
+      }
     }
-    MissionUtils.Console.close();
   }
 }
 
