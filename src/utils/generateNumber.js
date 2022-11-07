@@ -1,5 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { NUMBER } = require('./constants');
+const { NUMBER } = require('../constants');
 
 const { NUMBER_RANGE_START, NUMBER_RANGE_END, NUMBER_LENGTH } = NUMBER;
 

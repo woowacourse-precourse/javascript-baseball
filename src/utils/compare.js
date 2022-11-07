@@ -1,4 +1,4 @@
-const { COUNT_MESSAGE } = require('./constants');
+const { COUNT_MESSAGE } = require('../constants');
 
 const { STRIKE, BALL, NOTHING } = COUNT_MESSAGE;
 

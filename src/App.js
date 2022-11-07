@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const generateNumber = require('./generateNumber');
-const validateInputValue = require('./validator');
-const compareTwoArrayResult = require('./compare');
+const generateNumber = require('./utils/generateNumber');
+const validateInputValue = require('./utils/validator');
+const compareTwoArrayResult = require('./utils/compare');
 const { MESSAGE, COUNT_MESSAGE, ERROR_MESSAGE, GAME_PROGRESS } = require('./constants');
 
 class App {

@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, NUMBER } = require('./constants');
+const { ERROR_MESSAGE, NUMBER } = require('../constants');
 
 function isNumInRange(str) {
   const regExp = /[1-9]/g;
