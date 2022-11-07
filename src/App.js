@@ -4,7 +4,7 @@ const isNumber = require("../src/IsNumber")
 class App {
   play() {
     const computer = this.computerRandomNumber();
-    this.getUserInput()
+    this.getUserInput(computer)
   }
 
   computerRandomNumber() {
@@ -19,13 +19,30 @@ class App {
     return computer;
   }
 
-  getUserInput() {
+  getUserInput(computer) {
     MissionUtils.Console.readLine(`숫자를 입력해주세요 : `, number => {
       if(isNumber(number)) {
-        MissionUtils.Console.print("숫자 입니다.")
+        this.checkStrike(computer, number)
       }
     });
   }
+
+  checkStrike(computer, user) {
+    let countStrike = 0;
+  
+    Array.from(user, Number).map((currentValue, index) => {
+      if (
+        computer.includes(currentValue) 
+        && computer.indexOf(currentValue) === index
+      ) {
+        countStrike += 1;
+      }
+  
+      return countStrike;
+    });
+  
+    return MissionUtils.Console.print(countStrike)
+  };
 }
 
 module.exports = App;
