@@ -43,6 +43,11 @@ class App {
       if (!check.test(userNumber[i])) throw "예외";
     }
 
+    for (let i = 0; i < userNumber.length - 1; i++) {
+      if (userNumber[i] === userNumber[i + 1]) throw "예외";
+      if (userNumber[i] === userNumber[i + 2]) throw "예외";
+    }
+
     return userNumber;
   }
   strikeCounter(computer, userNumber) {
