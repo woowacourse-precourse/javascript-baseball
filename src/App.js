@@ -1,4 +1,4 @@
-import MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 const MESSAGES = {
   start: "숫자 야구 게임을 시작합니다.",
   end: "숫자 야구 게임을 종료합니다.",
@@ -19,4 +19,4 @@ class App {
 }
 const app = new App();
 app.play();
-// module.exports = App;
+module.exports = App;
