@@ -14,8 +14,11 @@ class App {
       if (!isCorrectInput(answer)) {
         throw new Error("잘못된 입력: 서로 다른 3자리의 수를 입력하세요.");
       }
+      const isThreeStrikes = checkHint(computerNumber.join(""), answer);
+      isThreeStrikes ? this.finishGame() : this.playing(computerNumber);
     });
   }
+  finishGame() {}
 }
 function createComputerNumber() {
   const computer = [];
