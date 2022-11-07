@@ -3,7 +3,14 @@ const config = require('./config');
 
 const generateTargetNumber = () => {
     const { RANGE_MIN, RANGE_MAX, NUM_LENGTH } = config.GAME_RANGE;
-    return Random.pickUniqueNumbersInRange(RANGE_MIN, RANGE_MAX, NUM_LENGTH).join('');
+    const targetNumberArr = [];
+
+    while (targetNumberArr.length < NUM_LENGTH) {
+        const randNum = Random.pickNumberInRange(RANGE_MIN, RANGE_MAX);
+        if (!targetNumberArr.includes(randNum)) targetNumberArr.push(randNum);
+        if (targetNumberArr.length === NUM_LENGTH) break;
+    }
+    return targetNumberArr.join('');
 };
 
 const findStrikeBall = (target, input) => {
@@ -24,7 +31,7 @@ const makePhrase = (strike, ball) => {
     if (strike === 0) return `${ball}${BALL}`;
     if (ball === 0) return `${strike}${STRIKE}`;
 
-    return `${strike}${STRIKE} ${ball}${BALL}`;
+    return `${ball}${BALL} ${strike}${STRIKE}`;
 };
 
 const printPhrase = (catchPhrase) => Console.print(catchPhrase);
