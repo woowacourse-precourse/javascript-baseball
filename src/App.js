@@ -51,8 +51,7 @@ class App {
   };
 
   isValid = (input) => {
-    if (!this.containsThreeNumbers(input) || !this.containsOnlyNumbers(input) || this.isDuplicated(input)) return false;
-    return true;
+    return this.containsThreeNumbers(input) && this.containsOnlyNumbers(input) && !this.isDuplicated(input);
   };
 
   getResultMessage = (strike, ball, nothing) => {
