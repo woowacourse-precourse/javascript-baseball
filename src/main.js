@@ -1,12 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const exceptionHandling = require('./exceptionHandling');
-const game = require('./game');
+const exceptionHandlers = require('./exceptionHandlers');
+const is3Strike = require('./is3Strike');
 
 const main = () => {
-  receiveNumber(makeRandomNums());
+  getNumber(makeRandomNumber());
 };
 
-const makeRandomNums = () => {
+const makeRandomNumber = () => {
   const arr = [];
 
   while (arr.length < 3) {
@@ -19,15 +19,15 @@ const makeRandomNums = () => {
   return arr;
 };
 
-const receiveNumber = (computerNumsArr) => {
+const getNumber = (randomNumberArr) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (num) => {
     if (wrongNumber(num)) {
-      exceptionHandling();
+      exceptionHandlers.errorGetNumber();
     }
-    if (game(num, computerNumsArr.join(''))) {
+    if (is3Strike(num, randomNumberArr.join(''))) {
       guessedCorrectly();
     } else {
-      receiveNumber(computerNumsArr);
+      getNumber(randomNumberArr);
     }
   });
 };
@@ -52,14 +52,18 @@ const guessedCorrectly = () => {
       exitOrRestart(num);
     }
   );
-  return true;
 };
 
 const exitOrRestart = (num) => {
   if (num === '1') {
-    receiveNumber(makeRandomNums());
+    main();
   }
-  if (num === '2') exit();
+  if (num === '2') {
+    exit();
+  }
+  if (num !== '1' && num !== '2') {
+    exceptionHandlers.errorExitOrRestart();
+  }
 };
 
 const exit = () => {
