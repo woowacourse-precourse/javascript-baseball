@@ -13,8 +13,12 @@ const RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART_CODE}, 종�
 class App {
   play() {
     let answer = this.getRandomNumber();
-    MissionUtils.Console.print(START_MESSAGE);
+    this.printMessage(START_MESSAGE);
     this.PlayerInput();
+  }
+
+  printMessage(message) {
+    MissionUtils.Console.print(message);
   }
 
   getRandomNumber() {
