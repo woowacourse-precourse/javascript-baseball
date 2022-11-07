@@ -2,7 +2,12 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { Random, Console } = MissionUtils;
 
 class App {
-  #RANDOM_NUM_LENGTH = 3;
+  #NUMERIC_CONSTANTS = {
+    maxLength: 3,
+    min: 1,
+    max: 9,
+    initResult: 0,
+  };
   #ERROR_CASES = {
     reset: "failReset",
     compare: "failCompare",
@@ -23,13 +28,13 @@ class App {
   createRandomNum() {
     this.#randomNum = [];
 
-    Array.from({ length: this.#RANDOM_NUM_LENGTH }).forEach(
-      () =>
-        (this.#randomNum = [
-          ...this.#randomNum,
-          Random.pickNumberInRange(1, 9) + "",
-        ])
-    );
+    const { maxLength, min, max } = this.#NUMERIC_CONSTANTS;
+
+    while (this.#randomNum.length < maxLength) {
+      this.#randomNum = Array.from(
+        new Set([...this.#randomNum, Random.pickNumberInRange(min, max) + ""])
+      );
+    }
   }
 
   startGame() {
@@ -49,7 +54,8 @@ class App {
 
     userInput = userInput.split("");
 
-    const results = { ball: 0, strike: 0 };
+    const { initResult } = this.#NUMERIC_CONSTANTS;
+    const results = { ball: initResult, strike: initResult };
 
     userInput.forEach((num, index) => {
       if (this.#randomNum.includes(num)) {
@@ -73,7 +79,8 @@ class App {
 
     if (ball && strike) Console.print(`${ball}볼 ${strike}스트라이크`);
 
-    strike === 3 ? this.resetGame() : this.getInput();
+    const { maxLength } = this.#NUMERIC_CONSTANTS;
+    strike === maxLength ? this.resetGame() : this.getInput();
   }
 
   resetGame() {
@@ -89,13 +96,16 @@ class App {
   }
 
   findInputError(userInput) {
+    const { maxLength } = this.#NUMERIC_CONSTANTS;
+
     if (
       typeof +userInput !== "number" ||
-      userInput.length !== 3 ||
+      userInput.length !== maxLength ||
       userInput.length !== new Set(userInput).size ||
       userInput.includes("0")
     ) {
       const { reset } = this.#ERROR_CASES;
+
       this.throwError(reset);
     }
   }
@@ -103,6 +113,7 @@ class App {
   findResetError(userInput) {
     if (userInput !== "1" && userInput !== "2") {
       const { compare } = this.#ERROR_CASES;
+
       this.throwError(compare);
     }
   }
