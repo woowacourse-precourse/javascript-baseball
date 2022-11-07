@@ -4,7 +4,6 @@ class App {
   constructor() {
     this.userNumber = '';
     this.computerNumber = '';
-    this.isGameRestart = true;
   }
 
   play() {
@@ -40,6 +39,11 @@ class App {
         let restartNumber = +input;
         if (restartNumber !== 1 && restartNumber !== 2)
           throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
+        if (restartNumber === 1) {
+          this.isGameFinished = false;
+          this.init();
+          this.playGame();
+        }
       });
     });
   }
@@ -105,7 +109,6 @@ class App {
     } else {
       if (numberOfStrikes === 0) return `${numberOfBalls}볼`;
       return `${numberOfBalls}볼 ${numberOfStrikes}스트라이크`;
-      ㅑ;
     }
   }
 
