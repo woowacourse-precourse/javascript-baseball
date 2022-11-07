@@ -40,7 +40,7 @@
 
 ### 📝 ActionTest.js
 
-- [-] UserInterface 가 Dispatcher에게 정상적으로 Action을 보내는지 테스트
+- [o] UserInterface 가 Dispatcher에게 정상적으로 Action을 보내는지 테스트
 
 ---
 
@@ -73,4 +73,4 @@
 
 ### 📝 ActionTest.js
 
-- [-] UserInterface 와 Dispatcher 의존성 주입 테스트
+- [o] UserInterface 와 Dispatcher 의존성 주입 테스트
