@@ -32,6 +32,8 @@ class App {
       if (!this.isValidUserNumber(this.userNumber)) {
         throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
       }
+      MissionUtils.Console.print(this.printCountResult(this.computerNumber, this.userNumber));
+      if (!this.isGameFinished) this.gameStart();
     });
   }
 
@@ -83,6 +85,25 @@ class App {
         numberOfStrikes += 1;
     });
     return numberOfStrikes;
+  }
+
+  printCountResult(computerNumber, userNumber) {
+    let numberOfBalls = this.getNumberOfBalls(computerNumber, userNumber);
+    let numberOfStrikes = this.getNumberOfStrikes(computerNumber, userNumber);
+
+    if (numberOfBalls === 0 && numberOfStrikes === 0) return messages.NONE_MATCHING_MESSAGE;
+    if (numberOfBalls === 0) {
+      if (numberOfStrikes === 3) {
+        this.isGameFinished = true;
+        return `${numberOfStrikes}스트라이크\n` + messages.GAME_FINISH_MESSAGE;
+      }
+
+      return `${numberOfStrikes}스트라이크`;
+    } else {
+      if (numberOfStrikes === 0) return `${numberOfBalls}볼`;
+      return `${numberOfBalls}볼 ${numberOfStrikes}스트라이크`;
+      ㅑ;
+    }
   }
 }
 const app = new App();
