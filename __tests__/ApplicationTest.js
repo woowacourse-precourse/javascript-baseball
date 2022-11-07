@@ -59,4 +59,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("1부터 9 사이의 값만 입력받도록 함", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["012"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
