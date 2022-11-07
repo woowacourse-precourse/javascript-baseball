@@ -33,7 +33,7 @@ class App {
     const answer = [];
     while (answer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!answer.includes(number)) answer.push(number);
+      if (!answer.includes(number)) answer.push(number); // answer에 중복된 숫자가 없다면 push!
     }
     return answer;
   }
@@ -85,9 +85,9 @@ class App {
     let sameNumberNum = 0; // 전체 배열에서 같은 숫자의 개수 세는 변수.
 
     for (let i = 0; i < 3; i++) if (answer[i] === number[i]) hintArr[0]++; // 같은 자리의 숫자 같으면 스트라이크 + 1
-    for (let i = 0; i < 3; i++) if (answer.includes(number[i])) sameNumberNum++;
+    for (let i = 0; i < 3; i++) if (answer.includes(number[i])) sameNumberNum++; // 겹치는 숫자 카운트
 
-    hintArr[1] = sameNumberNum - hintArr[0];
+    hintArr[1] = sameNumberNum - hintArr[0]; // 볼 수 = 겹치는 숫자 - 스트라이크 수
 
     return hintArr;
   }
@@ -97,12 +97,15 @@ class App {
     const STRIKE_NUM = hint[0];
     const BALL_NUM = hint[1];
 
-    if (STRIKE_NUM + BALL_NUM === 0) MissionUtils.Console.print("낫싱");
+    if (STRIKE_NUM + BALL_NUM === 0)
+      MissionUtils.Console.print("낫싱"); // 0스트라이크 0볼
     else if (STRIKE_NUM === 0 && BALL_NUM > 0)
+      // 스트라이크 = 0, 볼 만 있을 때
       MissionUtils.Console.print(`${BALL_NUM}볼`);
     else if (BALL_NUM === 0 && STRIKE_NUM > 0)
+      // 볼 = 0, 스트라이크만 있을 때
       MissionUtils.Console.print(`${STRIKE_NUM}스트라이크`);
-    else MissionUtils.Console.print(`${BALL_NUM}볼 ${STRIKE_NUM}스트라이크`);
+    else MissionUtils.Console.print(`${BALL_NUM}볼 ${STRIKE_NUM}스트라이크`); // 둘 다 있을 때.
   }
 
   checkEnd(hint) {
