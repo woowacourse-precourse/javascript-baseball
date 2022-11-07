@@ -5,7 +5,12 @@ class App {
     this.computerRandomNumbers = [];
   }
   play() {
+    this.gameStart();
+  }
+
+  gameStart() {
     this.createOpponentRandomNumber();
+    this.userInputNumber();
   }
 
   createOpponentRandomNumber() {
@@ -16,6 +21,12 @@ class App {
     }
   
     this.computerRandomNumbers = [...computer];
+  }
+
+  userInputNumber() {
+    return MissonUtils.Console.readLine('숫자를 입력해주세요 : ', userInput => {
+      MissonUtils.Console.print(userInput);
+    });
   }
 }
 
