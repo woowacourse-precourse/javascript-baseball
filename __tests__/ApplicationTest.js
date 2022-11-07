@@ -49,13 +49,14 @@ const isRightRangeNumber = (array) =>
   );
 
 describe("숫자 야구 게임", () => {
-  test("게임 시작 문구를 화면에 출력한다.", () => {
+  test.only("게임 시작 문구를 화면에 출력한다.", () => {
+    const START_MESSAGE = "숫자 야구 게임을 시작합니다.";
     const logSpy = getLogSpy();
 
     const app = new App();
     app.play();
 
-    expect(logSpy).toBeCalledWith("숫자 야구 게임을 시작합니다.");
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(START_MESSAGE));
   });
 
   test("게임에 사용할 3자리 수를 생성한다.", () => {
@@ -137,7 +138,7 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test.only("숫자비교 : 어떤 자릿수, 숫자도 불일치시 낫싱 표시", () => {
+  test("숫자비교 : 어떤 자릿수, 숫자도 불일치시 낫싱 표시", () => {
     const randoms = [1, 2, 3];
     const answers = ["456", "789"];
     const logSpy = getLogSpy();

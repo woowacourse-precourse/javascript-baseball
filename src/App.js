@@ -1,8 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const {
-  Console: { print, readLine },
-  Random,
-} = MissionUtils;
+const { Console, Random } = MissionUtils;
 
 class App {
   constructor(count = 3, minNum = 1, maxNum = 9) {
@@ -23,9 +20,7 @@ class App {
       },
       RESULT: {
         NOTHING: "낫싱",
-        CORRECT(num) {
-          return `${num}개의 숫자를 모두 맞히셨습니다!`;
-        },
+        CORRECT: `${this.count}개의 숫자를 모두 맞히셨습니다!`,
         BALL(num) {
           return (num && `${num}볼`) || "";
         },
@@ -34,6 +29,14 @@ class App {
         },
       },
     };
+  }
+
+  set isPlaying(boolean) {
+    this._isPlaying = boolean;
+  }
+
+  get isPlaying() {
+    return this._isPlaying;
   }
 
   set gameNumber(number) {
@@ -123,6 +126,7 @@ class App {
     }
 
     this.userNumber = input.split("").map(Number);
+    this.isPlaying = true;
   }
 
   continueGame(input) {
@@ -131,7 +135,7 @@ class App {
   }
 
   runGame() {
-    readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+    Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
@@ -140,6 +144,7 @@ class App {
     }
 
     if (sameDigitCount === this.count && sameNumberCount === this.count) {
+      this.isPlaying = false;
       return this.MESSAGES.RESULT.CORRECT();
     }
 
@@ -164,7 +169,10 @@ class App {
       }
     });
 
-    print(this.getGameResult({ sameDigitCount, sameNumberCount }));
+    Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
+    if (this.isPlaying) {
+      this.runGame();
+    }
   }
 
   newGame() {
@@ -174,7 +182,7 @@ class App {
 
   startGame() {
     // TODO: 첫 게임에만 MESSAGES.START표시하기
-    print(this.MESSAGES.START);
+    Console.print(this.MESSAGES.START);
     this.newGame();
   }
 
