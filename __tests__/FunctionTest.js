@@ -12,7 +12,7 @@ describe("기능 테스트", () => {
     const logSpy = getLogSpy();
 
     const app = new App();
-    app.PrintGameStartPhrase();
+    app.printGameStartPhrase();
 
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining('숫자 야구 게임을 시작합니다.')

@@ -4,18 +4,18 @@ const { NUMBER } = require("./constants/Constants");
 
 class App {
   play() {
-    this.PrintGameStartPhrase();
-    this.StartGame();
+    this.printGameStartPhrase();
+    this.startGame();
   }
 
   // 기능 2 ~ 8 
-  StartGame() {
+  startGame() {
     const computerNumber = this.makeComputerNumber();
     this.getUserNumber(computerNumber);
   }
 
   // 기능 1
-  PrintGameStartPhrase() {
+  printGameStartPhrase() {
     MissionUtils.Console.print(MESSAGE.START);
   }
 
@@ -40,7 +40,6 @@ class App {
       this.checkValidityUserNumber(userNumber);
 
       const checkResult = this.countBallAndStrike(computerNumber, userNumber);
-
       const result = this.printResult(checkResult);
 
       if (result === "end") {
@@ -110,6 +109,7 @@ class App {
         strike += 1;
       }
     }
+
     const ball = ballOrStrike - strike;
 
     return [ball, strike];
@@ -155,7 +155,7 @@ class App {
   // 기능 8
   checkUserChoiceNumber(userChoiceNumber) {
     if (Number(userChoiceNumber) === NUMBER.RESTART) {
-      this.StartGame();
+      this.startGame();
       return;
     }
     
@@ -172,4 +172,4 @@ class App {
 const baseballGame = new App();
 baseballGame.play();
 
-module.exports = App;
+module.exports = App; 
