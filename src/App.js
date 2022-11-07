@@ -13,7 +13,8 @@ class App {
   }
 
   startGame() {
-
+    const computerNum = this.computer.makeRandNum();
+    this.getUserGuess(computerNum);
   }
 
   getUserGuess(computerNum) {
