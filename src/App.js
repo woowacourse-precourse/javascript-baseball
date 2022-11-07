@@ -130,11 +130,11 @@ class App {
     let answerDictinary = {};
     let numberOfBall = 0;
 
-    for (value of answer) {
+    for (const value of answer) {
       answerDictinary[value] = true;
     }
 
-    for (value of inputNumber) {
+    for (const value of inputNumber) {
       if (answerDictinary[value]) {
         numberOfBall += 1;
       }
