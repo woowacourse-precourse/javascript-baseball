@@ -27,28 +27,25 @@ class GameControl{
   userInput(){
     MissionUtils.Console.readLine(constant.GAME.INPUT, (input) => {
       this.validation.checkErrorofInput(input, 0);
-      this.result(input);
+      this.printGameResult(input);
     });
   }
 
-  
-
-  result(input){
-    if (this.validation.isThreeStrike(this.userOutput(input))){
-      this.restartCheck();
+  printGameResult(input){
+    if (this.validation.isThreeStrike(this.resultForInput(input))){
+      this.checkForNeedRestart();
     }
     else{
-      MissionUtils.Console.print(printAnswer(this.userOutput(input)));
+      MissionUtils.Console.print(printAnswer(this.resultForInput(input)));
       this.userInput();
     }
   }
 
-  userOutput(number){
+  resultForInput(number){
     const game = new GameCalc(this.answerNum, number);
-    const resultList = game.totalCount();
-    return resultList;
+    const resultOfStrikeAndBalls = game.totalCount();
+    return resultOfStrikeAndBalls;
   }
-
   
   restartGame(input){  
     if (String(input) === '1'){
@@ -59,7 +56,7 @@ class GameControl{
     }
   }
 
-  restartCheck(){
+  checkForNeedRestart(){
     MissionUtils.Console.readLine(constant.GAME.RESTART+'\n', (input) => {
       this.validation.checkErrorofInput(input, 1);
       this.restartGame(input);
