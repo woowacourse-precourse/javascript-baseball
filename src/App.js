@@ -1,7 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const CheckValidation = require("./components/checkValidation");
-const CheckBallCount = require("./components/checkBallCount");
-const PrintBallCount = require("./components/printBallCount");
+const CheckValidation = require("./CheckValidation");
+const CheckBallCount = require("./CheckBallCount");
+const PrintBallCount = require("./PrintBallCount");
 const { GUIDE_MESSAGE } = require("./constants");
 
 class App {
