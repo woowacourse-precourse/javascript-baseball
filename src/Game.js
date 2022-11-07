@@ -1,6 +1,6 @@
 const Computer = require('./Computer');
 const { Console } = require('@woowacourse/mission-utils');
-const { ANSWER } = require('./constants/constants');
+const { ANSWER, OPTION } = require('./constants/constants');
 
 class Game {
   constructor() {
@@ -27,9 +27,9 @@ class Game {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (userInput) => {
-        if (parseInt(userInput) === 1) {
+        if (userInput === OPTION.RESTART) {
           return this.start();
-        } else if (parseInt(userInput) === 2) {
+        } else if (userInput === OPTION.END) {
           return this.end();
         } else {
           throw new Error('유효하지 않은 값이 입력되어 게임이 종료됩니다.');
