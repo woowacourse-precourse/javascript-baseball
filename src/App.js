@@ -7,7 +7,6 @@ class User {
   }
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
-      this.game.getStrikeCount(inputAnswer);
     })
   }
 }
@@ -24,14 +23,22 @@ class BaseBallGame {
     return Array.from(inputAnswer.toString(),(num)=>Number(num));
   }
   getStrikeCount(inputAnswer){
-    const inputAnswerArray = this.numberToArray(inputAnswer);
-    const strikeCount = 0;
-    inputAnswerArray.forEach((number,index) => {
+    let strikeCount = 0;
+    this.numberToArray(inputAnswer).forEach((number,index) => {
       if(number === this.answer[index]){
         strikeCount = strikeCount + 1;
       }
     })
     return strikeCount;
+  }
+  getBallCount(inputAnswer){
+    let ballCount = 0;
+    this.numberToArray(inputAnswer).forEach((number) => {
+      if(this.answer.includes(number)){
+        ballCount = ballCount + 1;
+      }
+    })
+    return ballCount;
   }
 }
 
@@ -42,4 +49,5 @@ class App {
   }
 }
 
+new App().play();
 module.exports = App;
