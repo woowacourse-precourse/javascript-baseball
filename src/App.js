@@ -2,7 +2,18 @@ const MissonUtils = require("@woowacourse/mission-utils");
 
 class App {
   #RANDOM_NUM_LENGTH = 3;
+  #ERROR_CASES = {
+    reset: "초기화 실패",
+    compare: "비교 실패",
+  };
+
   #randomNum = [];
+
+  play() {
+    this.createRandomNum();
+
+    this.startGame();
+  }
 
   createRandomNum() {
     this.#randomNum = [];
@@ -29,7 +40,10 @@ class App {
   }
 
   compareResults(userInput) {
-    if (userInput.length !== 3) this.throwError("비교 실패");
+    if (userInput.length !== 3) {
+      const { compare } = this.#ERROR_CASES;
+      this.throwError(compare);
+    }
 
     userInput = userInput.split("");
 
@@ -68,8 +82,10 @@ class App {
     MissonUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
-        if (userInput !== "1" && userInput !== "2")
-          this.throwError("초기화 실패");
+        if (userInput !== "1" && userInput !== "2") {
+          const { reset } = this.#ERROR_CASES;
+          this.throwError(reset);
+        }
 
         userInput === "1" ? this.play() : MissonUtils.Console.close();
       }
@@ -77,21 +93,17 @@ class App {
   }
 
   throwError(errorCase) {
-    if (errorCase === "초기화 실패") {
+    const { reset, compare } = this.#ERROR_CASES;
+
+    if (errorCase === reset) {
       MissonUtils.Console.close();
       throw "1 또는 2를 입력해야 합니다.";
     }
 
-    if (errorCase === "비교 실패") {
+    if (errorCase === compare) {
       MissonUtils.Console.close();
       throw "3자리의 숫자를 입력해야 합니다.";
     }
-  }
-
-  play() {
-    this.createRandomNum();
-
-    this.startGame();
   }
 }
 
