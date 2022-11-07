@@ -32,8 +32,6 @@ class Game {
       }
     }
 
-    console.log(this.randomNumbers); // ⚠️⚠️⚠️ 삭제 ⚠️⚠️⚠️
-
     return this.randomNumbers;
   }
 
