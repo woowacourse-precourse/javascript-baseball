@@ -2,6 +2,9 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 const GAME_START_COMMENT = '숫자 야구 게임을 시작합니다.';
 const INPUT_NUMBER = '숫자를 입력해주세요 : ';
+const STRIKE = '스트라이크';
+const BALL = '볼';
+const NOTHING = '낫싱';
 
 const ERROR_MESSAGE = {
   TYPE: '숫자가 아닙니다',
@@ -13,6 +16,7 @@ class App {
   #answer;
   strike;
   ball;
+  result;
 
   constructor() {
     MissionUtils.Console.print(GAME_START_COMMENT);
@@ -48,10 +52,28 @@ class App {
     });
   }
 
+  getWrongAnswer() {
+    if (this.strike === 0 && this.ball === 0) {
+      this.result = `${NOTHING}`;
+    } else {
+      this.result = [
+        `${this.ball === 0 ? '' : `${this.ball}${BALL}`}`,
+        `${this.strike === 0 ? '' : `${this.strike}${STRIKE}`}`,
+      ].join(' ');
+    }
+  }
+
+  printResult() {
+    this.getWrongAnswer();
+    MissionUtils.Console.print(this.result);
+    this.play();
+  }
+
   play() {
     MissionUtils.Console.readLine(INPUT_NUMBER, (value) => {
       this.isValidNumber(value);
       this.checkStirkeOrBall(value);
+      this.printResult();
     });
   }
 }
