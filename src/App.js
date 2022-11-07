@@ -13,6 +13,10 @@ class App {
       GAME_OVER : "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
       USER_SELECT : "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
     }
+    this.FLAG = {
+      RESTART : '1',
+      FINISH : '2'
+    }
   }
 
   play() {
@@ -47,8 +51,8 @@ class App {
 
   getUserSelect() {
     Console.readLine(this.MESSAGE.USER_SELECT, (input) => {
-      if (input === '1') this.restart();
-      else if (input === '2') this.finish();
+      if (input === this.FLAG.RESTART) this.restart();
+      else if (input === this.FLAG.FINISH) this.finish();
       else throw INPUT_ERROR;
     });
   }
