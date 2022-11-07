@@ -24,4 +24,13 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe('기능 목록 테스트', () => {});
+describe('기능 목록 테스트', () => {
+  test('게임 시작 문구 출력', () => {
+    const logSpy = getLogSpy();
+
+    const game = new Game();
+    game.init();
+
+    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+});
