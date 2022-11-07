@@ -28,6 +28,7 @@ class Game {
       const guess = this.isValidInput(inputStr);
       const { ball, strike } = this.judgeBallStrike(guess, this.answer);
       this.printHint(ball, strike);
+      if (strike !== 3) this.pitchNumber();
     });
   }
 
