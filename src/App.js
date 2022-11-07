@@ -92,6 +92,14 @@ class App {
       }
     );
   }
+
+  chooseRestartEnd(restartEndNumber) {
+    if (restartEndNumber == 1) {
+      COMPUTER_NUMBER.length = 0;
+      this.randomComputerNumber();
+      this.userInputNumber(COMPUTER_NUMBER);
+    }
+  }
 }
 
 module.exports = App;
