@@ -88,6 +88,24 @@ class App {
       }
     });
   }
+
+  printScoreMessage() {
+    const message = this.scoreMessage();
+    Console.print(message);
+  }
+
+  scoreMessage() {
+    const BALL = this.score.BALL;
+    const STRIKE = this.score.STRIKE;
+
+    if (!BALL && !STRIKE) return `낫싱`;
+
+    if (!BALL && STRIKE) return `${STRIKE} 스트라이크`;
+
+    if (BALL && !STRIKE) return `${BALL} 볼`;
+
+    if (BALL && STRIKE) return `${BALL}볼 ${STRIKE}스트라이크`;
+  }
 }
 
 const app = new App();
