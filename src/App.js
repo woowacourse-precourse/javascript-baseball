@@ -28,6 +28,24 @@ class App {
       this.userScore();
     });
   }
+
+  checkValidity(value) {
+    let userAnswerArr = value.split('');
+    if (userAnswerArr.length !== 3) throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+    userAnswerArr.forEach(value => {
+      if (isNaN(Number(value)) === true) {
+        throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+      }
+      if (Number(value) > 9) {
+        throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+      }
+    });
+    const inputValueSet = new Set([...userAnswerArr]);
+    if (inputValueSet.size !== 3) {
+      throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+    }
+    this.userAnswerArr = userAnswerArr.map((pickNum) => +pickNum);
+  }
 }
 
 module.exports = App;
