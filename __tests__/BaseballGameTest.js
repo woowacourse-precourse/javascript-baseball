@@ -1,5 +1,11 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  print,
+  isEqual,
+  throwException,
+  generateRandomNumber,
+} = require("../src/Util");
 
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -28,8 +34,7 @@ describe("숫자 야구 게임", () => {
     const message = "test message";
     const logSpy = jest.spyOn(console, "log");
 
-    const app = new App();
-    app.print(message);
+    print(message);
 
     expect(logSpy).toHaveBeenCalledWith(message);
   });
@@ -37,9 +42,7 @@ describe("숫자 야구 게임", () => {
   test("서로 다른 세 자리 수를 랜덤으로 생성", () => {
     const DIGITS = 3;
     const set = new Set();
-
-    const app = new App();
-    const randomNumber = app.generateRandomNumber(DIGITS);
+    const randomNumber = generateRandomNumber(DIGITS);
 
     randomNumber.forEach((num) => {
       expect(num.toString()).toMatch(/[1-9]/);
@@ -55,10 +58,9 @@ describe("숫자 야구 게임", () => {
       num1 = 1,
       num2 = 2;
 
-    const app = new App();
-    const result1 = app.isEqual(char1, char2),
-      result2 = app.isEqual(char1, num1),
-      result3 = app.isEqual(num1, num2);
+    const result1 = isEqual(char1, char2),
+      result2 = isEqual(char1, num1),
+      result3 = isEqual(num1, num2);
 
     expect(result1).toBe(true);
     expect(result2).toBe(false);
@@ -95,8 +97,7 @@ describe("숫자 야구 게임", () => {
   test("예외 테스트", () => {
     const MESSAGE = "Error Test";
     expect(() => {
-      const app = new App();
-      app.throwException(MESSAGE);
+      throwException(MESSAGE);
     }).toThrow();
   });
 
@@ -171,7 +172,7 @@ describe("숫자 야구 게임", () => {
     mockQuestions(inputs);
 
     const app = new App();
-    const answer = app.generateRandomNumber(DIGITS);
+    const answer = generateRandomNumber(DIGITS);
     app.playRound(answer);
 
     messages.forEach((output) => {
