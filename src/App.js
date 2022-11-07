@@ -7,6 +7,7 @@ function checkLength(answer) {
 function checkNumber(answer) {
   if (!parseInt(answer)) throw new Error('숫자만 입력해주세요.');
 }
+
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
@@ -28,8 +29,9 @@ class App {
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       try {
-        checkNumber(answer);
-        checkLength(answer);
+        const removeSpace = answer.replace(/ /g, '');
+        checkNumber(removeSpace);
+        checkLength(removeSpace);
       } catch (error) {
         console.log(error);
       }
