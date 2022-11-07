@@ -263,7 +263,4 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
-
-
-
 });
