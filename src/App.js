@@ -14,6 +14,12 @@ const ERROR_MESSAGE = {
   GAME_END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 };
 
+const GAME_OVER = '게임 종료';
+const GAME = {
+  RESTART: 1,
+  OVER: 2,
+};
+
 class App {
   #answer;
   strike;
@@ -55,7 +61,13 @@ class App {
   }
 
   gameClear(value) {
-    // 게임 클리어시
+    if (Number(value) === GAME.RESTART) {
+      this.makeAnswer();
+      this.play();
+    } else if (Number(value) === GAME.OVER) {
+      MissionUtils.Console.print(GAME_OVER);
+      MissionUtils.Console.close();
+    } else throw Error(ERROR_MESSAGE.GAME_END);
   }
 
   getCorrectAnswer() {
