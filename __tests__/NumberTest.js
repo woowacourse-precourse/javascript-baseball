@@ -201,4 +201,13 @@ describe('숫자 야구 게임', () => {
       app.postEndMessage(answers);
     }).toThrow();
   });
+
+  test('게임 종료 예외 테스트 4', () => {
+    const answers = '';
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.postEndMessage(answers);
+    }).toThrow();
+  });
 });
