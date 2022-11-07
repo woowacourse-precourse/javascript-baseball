@@ -5,7 +5,6 @@ const { updateStrikeOrBall } = require("./compare.js");
 class App {
   async play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-
   }
 
   // 정답이 될 무작위 난수를 배열로서 생성하는 함수
@@ -59,6 +58,28 @@ class App {
     if (message.length === 0) message = "낫싱";
 
     MissionUtils.Console.print(message);
+  }
+
+  /**
+   * 게임이 모두 끝나면, 새로 시작할지 종료할지를 입력받아 반환하는 함수
+   * @returns 새로 시작하는지 여부
+   */
+  async chooseProceedOrExit() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    const INPUT = await getInputFromConsole("");
+
+    switch (INPUT) {
+      case "1":
+        return true;
+
+      case "2":
+        return false;
+
+      default:
+        MissionUtils.Console.close();
+        throw new Error("improper input!");
+    }
   }
 }
 
