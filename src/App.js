@@ -83,7 +83,16 @@ class App {
     );
   }
 
-  detectInputError(userInput) {}
+  detectInputError(userInput) {
+    userInput = this.removeRepeatInputValue(userInput);
+    if (this.isInputValueError(userInput))
+      throw new Error("유효하지 않은 값이 입력되었습니다.");
+
+    if (userInput.length != 3)
+      throw new Error("유효하지 않은 값이 입력되었습니다.");
+
+    return 0;
+  }
 
   isInputValueError(userInput) {}
 
