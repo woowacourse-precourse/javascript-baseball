@@ -10,7 +10,17 @@ class App {
     const answer = this.getAnswer();
     this.getInput(answer);
   }
-  getAnswer() {}
+  getAnswer() {
+    const answer = [];
+    while (answer.length < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(randomNumber)) {
+        answer.push(randomNumber);
+      }
+    }
+
+    return answer.join("");
+  }
   getInput(answer) {}
   compareAnswerAndInput(answer, userInput) {}
   getStrikeBall(answer, userInput) {}
