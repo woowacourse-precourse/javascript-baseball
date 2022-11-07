@@ -28,7 +28,7 @@ const computerNumber = () => {
 };
 
 const gameStart = (USER) => {
-  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  startMessage();
   let COMPUTER_NUMBER = computerNumber();
   let USER_NUMBER;
   let USER_SELECT = "1";
@@ -53,6 +53,10 @@ const throwHandling = (length) => {
   if (length !== 3) {
     throw MissionUtils.Console.close();
   }
+}
+
+const startMessage = () => {
+  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 }
 
 const numberCompare = (computer, user) => {
