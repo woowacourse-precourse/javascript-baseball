@@ -1,5 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { RANDOMLIST } = require('../src/utils/constants');
+const { RANDOMLIST } = require('./utils/constants');
 
 class RandomNumber {
   static makeNew() {
@@ -7,7 +7,7 @@ class RandomNumber {
 
     while (result.length < 3) {
       const randomNum = Random.pickNumberInRange(RANDOMLIST.STARTPOINT, RANDOMLIST.ENDPOINT);
-      !result.includes(randomNum) && result.push(randomNum);
+      if (!result.includes(randomNum)) result.push(randomNum);
     }
 
     return result;
