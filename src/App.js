@@ -29,19 +29,43 @@ class App {
     return value.split('').map(Number);
   }
 
-  guessAnswer() {
+  compare(answer, input) {
+    let result = {
+      strike: 0,
+      ball: 0,
+      nothing: 0,
+    }
+
+    for (let index = 0; index < input.length; index++) {
+      if (input[index] === answer[index]) {
+        result.strike += 1;
+        continue;
+      }
+      if (answer.includes(input[index])) {
+        result.ball += 1;
+        continue;
+      }
+      result.nothing += 1;
+    }
+    return result;
+  }
+
+  guessAnswer(answer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.isCorrectInput(input);
-      input = stringToAnswer(input);
+      input = this.stringToAnswerType(input);
+      console.log(input);
+      let result = this.compare(answer, input);
+
     });
 
   }
 
   play() {
-    // this.printStart();
-
+    this.printStart();
     let answer = this.makeAnswer();
-    this.guessAnswer()
+    console.log(answer);
+    this.guessAnswer(answer)
 
 
     // MissionUtils.Console.close();
