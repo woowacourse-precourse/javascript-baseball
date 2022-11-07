@@ -2,8 +2,16 @@ class App {
   computer = [];  // 컴퓨터의 수
 
   play() {
+    // 게임 시작 문구 출력
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
     // 컴퓨터의 수 선택
     this.computer = computersNumbers();
+
+    // 사용자의 수 입력받기
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      console.log("입력받은 수" + answer);
+    });
 
 
 
@@ -24,6 +32,7 @@ function computersNumbers(){
   }
   return computer;
 }
+
 
 const app = new App();
 app.play();
