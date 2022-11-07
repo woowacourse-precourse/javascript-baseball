@@ -18,7 +18,6 @@ class App {
         this.answer.push(ANSWER);
       }
     }
-    console.log(this.answer);
     return this.enterNumber();
   }
 
