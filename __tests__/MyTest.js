@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const Computer = require('../src/Computer');
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -32,4 +33,14 @@ describe("게임 시작", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("숫자 야구 게임을 시작합니다."));
   });
+  test("컴퓨터 숫자 1~9 인지 확인", () => {
+    const computer = new Computer();
+    computer.setComputerNumbers();
+    [...computer.getComputerNumbers()].forEach((number) => {
+        expect(number).toBeGreaterThanOrEqual(1);
+        expect(number).toBeLessThanOrEqual(9);
+    })
+  });
+
+  
 });
