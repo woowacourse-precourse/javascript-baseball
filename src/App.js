@@ -13,9 +13,16 @@ const isValidNumber = value => {
   return value;
 };
 
+const computer = [];
+while (computer.length < 3) {
+  const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  if (!computer.includes(number)) {
+    computer.push(number);
+  }
+}
+
 class App {
   play() {}
 }
-
 
 module.exports = App;
