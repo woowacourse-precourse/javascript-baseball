@@ -23,8 +23,20 @@ class Game {
   askRestart() {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (userInput) => {}
+      (userInput) => {
+        if (parseInt(userInput) === 1) {
+          return this.start();
+        } else if (parseInt(userInput) === 2) {
+          return this.end();
+        } else {
+          throw new Error('유효하지 않은 값이 입력되어 게임이 종료됩니다.');
+        }
+      }
     );
+  }
+
+  end() {
+    Console.close();
   }
 }
 
