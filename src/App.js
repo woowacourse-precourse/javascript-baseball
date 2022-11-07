@@ -16,6 +16,7 @@ class ComputerRandomNumber {
         number.push(numberInput);
       }
     }
+
     return number;
   }
 }
@@ -36,6 +37,7 @@ class BaseballPlayTool {
         count += 1;
       }
     },0)
+
     return count;
   }
   strikeCount(computer, user) {
@@ -45,6 +47,7 @@ class BaseballPlayTool {
         count += 1;
       }
     },0)
+
     return count;
   }
   gameRule(computer, user) {
@@ -54,15 +57,19 @@ class BaseballPlayTool {
       this.answerCheck = true ; 
       return TOOL_CONSTANTS.ANSWER;
     }
+
     if (ballScore === 0 && strikeScore === 0) {
       return TOOL_CONSTANTS.NOTHING;
     }
+
     if (strikeScore === 0) {
       return `${ballScore}${TOOL_CONSTANTS.BALL}`;
     }
+
     if (ballScore === 0) {
       return `${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
     }
+    
     return `${ballScore}${TOOL_CONSTANTS.BALL} ${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
   }
 
@@ -71,15 +78,19 @@ class BaseballPlayTool {
       this.answerCheck = true ; 
       throw ERROR_CONSTANTS.LENGTH;
     }
+
     if (new Set(userInput).size !== NUMBER_CONSTANTS.MAX_SCORE) {
       throw ERROR_CONSTANTS.OVERLAP;
     }
+
     if (userInput.includes('0')) {
       throw ERROR_CONSTANTS.SCOPE;
     }
+
     if (Number.isNaN(userInput) || userInput.includes(' ')) {
       throw ERROR_CONSTANTS.ISNAN;
     }
+
     return true;
   }
   userInputHandler(computer) {
@@ -97,7 +108,6 @@ class BaseballPlayTool {
   gameRepeat() {
     const computerInput = new ComputerRandomNumber();
     const computer = computerInput.randomNumber();
-    console.log(computer)
     this.userInputHandler(computer);
   }
   gameReset() {
@@ -107,6 +117,7 @@ class BaseballPlayTool {
         this.answerCheck = false;
         return this.gameRepeat();
       }
+
       if (userInput === NUMBER_CONSTANTS.END) {
         MissionUtils.Console.print(NUMBER_CONSTANTS.END);
         return MissionUtils.Console.close();
