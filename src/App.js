@@ -56,8 +56,8 @@ class App {
     if(strike==3){
       this.endGame();
     }
-    if((strike!=0&&ball==0)||strike==0&&ball!=0){
-      this.resultStrikeOrBall(strike,ball);
+    if(strike==0&&ball!=0){
+      this.resultBall(ball);
     }
     if(strike==0&&ball==0){
       this.resultNothing();
@@ -77,6 +77,7 @@ class App {
       }
     });
   }
+
 }
 const app = new App;
 app.play();
