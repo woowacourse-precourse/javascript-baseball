@@ -34,6 +34,11 @@ class App {
   gameStart() {
     MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
       this.getUserNumber(input);
+      if (!this.isValidUserNumber(this.userNumber)) {
+        throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
+      } else {
+        MissionUtils.Console.print('hi');
+      }
     });
   }
 
