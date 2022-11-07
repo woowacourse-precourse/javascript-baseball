@@ -136,6 +136,8 @@ class App {
       this.runGame();
       return;
     }
+
+    Console.print("게임 종료");
   }
 
   runGame() {
@@ -157,9 +159,13 @@ class App {
       return result;
     }
 
-    return `${this.MESSAGES.RESULT.BALL(
-      sameNumberCount
-    )} ${this.MESSAGES.RESULT.STRIKE(sameDigitCount)}`;
+    let result = `${this.MESSAGES.RESULT.BALL(sameNumberCount)}`;
+    if (sameNumberCount && sameDigitCount) {
+      result += " ";
+    }
+    result += `${this.MESSAGES.RESULT.STRIKE(sameDigitCount)}`;
+
+    return result;
   }
 
   compareNumbers() {
@@ -169,7 +175,6 @@ class App {
     this.userNumber.forEach((number, idx) => {
       if (number === this.gameNumber[idx]) {
         sameDigitCount++;
-        sameNumberCount++;
         return;
       }
 
