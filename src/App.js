@@ -43,11 +43,11 @@ class App {
   startASet(computer){
     MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (player)=>{
       if(!this.isVaildPlayer(player)) throw 'player error'
-      this.playASet(computer, player);
+      this.playASet(player, computer);
     })
   }
 
-  playASet(computer, player){
+  playASet(player, computer){
     const strike = this.countStrike(player, computer);
     const ball = this.countBall(player, computer, strike);
     this.showResult(ball, strike);
