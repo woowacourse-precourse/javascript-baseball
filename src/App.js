@@ -32,13 +32,15 @@ class App {
     const render = new Render();
     const checkVaild = new CheckInputValid();
 
-    const checkUserInputValid = checkVaild.checkUserInput();
     render.getUser().then((num) => {
+      this.userNum = this.numToArr(num);
+      const checkUserInputValid = checkVaild.checkUserInput(this.userNum);
+
       if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
         render.errorThrow(checkUserInputValid);
       }
 
-      return numToArr(num);
+      return this.userNum;
     });
   }
 
@@ -72,12 +74,16 @@ class App {
     }
     if (strikeCount === 3) {
       render.replayQnA().then((userInput) => {
-        const checkUserRetryInputValid = checkVaild.checkRetryInput();
+        this.userRetryNum = this.numToArr(userInput);
+
+        const checkUserRetryInputValid = checkVaild.checkRetryInput(
+          this.numToArr(userInput)
+        );
         if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
           render.errorRetryResult;
         }
 
-        return this.numToArr(userInput);
+        return this.userRetryNum;
       });
     }
   }
@@ -98,6 +104,7 @@ class App {
   play() {
     this.getMention();
     this.getUser();
+    this.retryOrEnd();
   }
 }
 
