@@ -57,7 +57,20 @@ class App {
       return 1;
     return 0;
   }
-  
+  print(strike, ball){
+    if(ball != 0){
+      MissionUtils.Console.print(`${ball}볼 `);
+      MissionUtils.Console.close();
+    }
+    if(strike != 0){
+      MissionUtils.Console.print(`${strike}스트라이크`);
+      MissionUtils.Console.close();
+    }
+    if(ball === 0 && strike === 0){
+      MissionUtils.Console.print('낫싱');
+      MissionUtils.Console.close();
+    }
+  }
   
 }
 const app = new App();
