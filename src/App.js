@@ -90,7 +90,7 @@ class App {
     throw new Error(errorMessage);
   }
   isNotInteger(inputNumber) {
-    if (Number.isInteger(inputNumber)) {
+    if (Number.isInteger(Number(inputNumber))) {
       return false;
     }
     return true;
