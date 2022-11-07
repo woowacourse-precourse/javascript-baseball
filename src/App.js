@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const MESSAGE = require('./message.js');
+const ERROR = require('./error.js');
 
 class App {
   constructor() {
@@ -60,7 +61,7 @@ class App {
     } else if (answer === '2') {
       MissionUtils.Console.close();
     } else {
-      throw new Error('잘못된 입력입니다.');
+      throw new Error(ERROR.INVAILD_INPUT);
     }
   };
   inputSignal() {
@@ -69,10 +70,10 @@ class App {
 
   vaildInput(input) {
     if (!this.isVaildNumberFormat(input)) {
-      throw new Error('형식이 잘못되었습니다.');
+      throw new Error(ERROR.INVAILD_FORMAT);
     }
     if (this.isDuplicate(input)) {
-      throw new Error('중복된 숫자가 존재합니다.');
+      throw new Error(ERROR.DUPLICATE_NUMBER);
     }
     return input;
   }
