@@ -119,6 +119,30 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('입력값, 정답값, 힌트값을 나타내는 인스턴스 프로퍼티가 제대로 저장되는지 확인2', () => {
+    const randoms = [2, 9, 6];
+    const answers = ['137'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(app.input).toHaveLength(3);
+    expect(app.input).toEqual([1, 3, 7]);
+    expect(App.isValidInput(app.input)).toEqual(true);
+
+    expect(app.answer).toHaveLength(3);
+    expect(app.answer).toEqual([2, 9, 6]);
+
+    expect(app.hint).toEqual({
+      ball: 0,
+      strike: 0,
+      nothing: 3,
+    });
+  });
+
   test('예외 테스트: 입력값의 길이가 3이 아닌 경우', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
