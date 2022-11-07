@@ -20,6 +20,11 @@ class App {
 
   vaildation(inputNumber) {
     if(inputNumber.length != 3) return false;
+
+    for(const item of inputNumber) {
+      if(isNaN(item)) return false;
+    }
+
     return true;
   }
 }
