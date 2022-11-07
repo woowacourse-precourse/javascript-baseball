@@ -84,16 +84,9 @@ class App {
     return 0;
   }
 
-  play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.\n');
-    const stringComputerNumArr = this.computerNum().map(function (element) {
-      return element.toString();
-    });
-    console.log(stringComputerNumArr);
-
+  userPickNum(stringComputerNumArr) {
     this.readInput('숫자를 입력해주세요 : ', (Input) => {
       let stringUserNumArr = Array.from(Input.toString());
-      console.log(stringUserNumArr);
       try {
         this.isThreeDifferNum(stringUserNumArr);
       } catch (e) {
@@ -105,9 +98,21 @@ class App {
       this.printBallCount(ballCount);
       if (ballCount.strike === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
-        this.restartOrExit();
+        return this.restartOrExit();
+      }else{
+        this.userPickNum(stringComputerNumArr);
       }
     });
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.\n');
+    const stringComputerNumArr = this.computerNum().map(function (element) {
+      return element.toString();
+    });
+    console.log(stringComputerNumArr);
+
+    this.userPickNum(stringComputerNumArr);
   }
 }
 new App();
