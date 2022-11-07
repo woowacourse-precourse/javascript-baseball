@@ -43,6 +43,57 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('1게임 후 종료', () => {
+    const randoms = [8, 1, 2];
+    const answers = ['123', '217', '412', '812', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '2볼',
+      '1볼 1스트라이크',
+      '2스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('3게임 후 종료', () => {
+    const randoms = [8, 1, 2, 5, 6, 2, 9, 2, 3];
+    const answers = ['123', '217', '412', '812', '1', '561', '562', '1', '192', '921', '923', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '2볼',
+      '1볼 1스트라이크',
+      '2스트라이크',
+      '3스트라이크',
+      '2스트라이크',
+      '3스트라이크',
+      '2볼',
+      '2스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('게임 재시작 입력값 1 또는 2가 아닌 경우', () => {
     const randoms = [2, 4, 5];
     const answers = ['245', '3'];
