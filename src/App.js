@@ -9,6 +9,7 @@ class App {
   gameStart() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.computerNumber = this.pickRandomNumber();
+    this.input();
   }
 
   pickRandomNumber() {
@@ -20,6 +21,28 @@ class App {
       }
     }
     return randomNumber;
+  }
+
+  input() {
+    Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      this.checkInputNumber(inputNumber);
+    });
+  }
+
+  checkInputNumber(inputNumber) {
+    const isDuplicateNumber =
+      inputNumber[0] === inputNumber[1] ||
+      inputNumber[1] === inputNumber[2] ||
+      inputNumber[0] === inputNumber[2];
+
+    //잘못된 입력 찾기
+    if (
+      Number.isNaN(inputNumber) ||
+      inputNumber.length !== 3 ||
+      isDuplicateNumber
+    ) {
+      throw new Error("잘못된 입력 값입니다.");
+    }
   }
 }
 
