@@ -7,24 +7,32 @@ class App {
     this.NUMBER_OF_DIGITS = 3;
   }
   play() {
-    const answer = this.getAnswerNumber();
-    this.printGameStartMessage();
-    let inputNumber;
+    let gameStart = true;
+    while (gameStart) {
+      const answer = this.getAnswerNumber();
+      this.printGameStartMessage();
+      let inputNumber;
 
-    while (true) {
-      inputNumber = this.getInputNumber();
+      let gameContinue = true;
+      while (gameContinue) {
+        inputNumber = this.getInputNumber();
 
-      const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
-      const numberOfBall = this.getNumberOfBall(
-        answer,
-        inputNumber,
-        numberOfStrike
-      );
-      this.printGameResultMessage(numberOfStrike, numberOfBall);
+        const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
+        const numberOfBall = this.getNumberOfBall(
+          answer,
+          inputNumber,
+          numberOfStrike
+        );
+        this.printGameResultMessage(numberOfStrike, numberOfBall);
 
-      if (this.isInputNumberCorrect(numberOfStrike)) {
-        printGameEndMessage();
-        break;
+        if (this.isInputNumberCorrect(numberOfStrike)) {
+          printGameEndMessage();
+          gameContinue = false;
+        }
+      }
+
+      if (!this.getInputRestart()) {
+        gameStart = false;
       }
     }
   }
@@ -153,7 +161,10 @@ class App {
       inputRestart = input;
     });
 
-    return inputRestart;
+    if (inputRestart === RESTART) {
+      return true;
+    }
+    return false;
   }
   handleRestartException(inputRestart, RESTART, EXIT) {
     const NOT_A_NUMBER_EXCEPTION = "입력값이 숫자가 아닙니다.";
