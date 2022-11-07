@@ -24,21 +24,20 @@ class App {
     this.try = 1;
   }
 
-  async play() {
-    if (this.try === 1) this.startGame();
+  play() {
+    if (this.try === 1) {
+      this.anwser = this.createAnswer();
+      this.startPrint();
+    }
     switch (this.game) {
       case GAME.PLAY:
         this.try += 1;
-        await this.playGame();
-        if (!this.game) this.endGame();
+        this.inputUserAnswer();
         break;
       case GAME.STOP:
-        await this.askUser();
-        this.play();
+        this.inputUserProgress();
         break;
       case GAME.EXIT:
-        MissionUtils.Console.print(ment.gameEnd);
-        MissionUtils.Console.close();
         return;
     }
   }
@@ -54,17 +53,18 @@ class App {
     return answer;
   }
 
-  startGame() {
+  startPrint() {
     MissionUtils.Console.print(ment.start);
     return;
   }
 
-  inputUserAnswer(ment) {
-    MissionUtils.Console.readLine(ment, (answer) => {
+  inputUserAnswer() {
+    MissionUtils.Console.readLine(ment.input, (answer) => {
       this.userAnswer = parseInt(answer);
-      checkUserGameAnswer();
-      const result = this.compareUserAnswer(anwser);
+      this.checkUserGameAnswer();
+      const result = this.compareUserAnswer();
       this.resultPrint(result);
+      this.play();
     });
   }
 
@@ -85,13 +85,26 @@ class App {
     return true;
   }
 
-  async isPlayContinue() {
-    try {
-      await this.inputUserAnswer(ment.reStart);
-    } catch (e) {
-      this.exceptionEnd();
-    }
+  inputUserProgress() {
+    MissionUtils.Console.readLine(ment.reStart, (answer) => {
+      this.userAnswer = parseInt(answer);
+      this.askUser();
+      this.play();
+    });
+  }
 
+  askUser() {
+    const result = this.isPlayContinue();
+
+    if (result) {
+      this.game = GAME.PLAY;
+      this.createAnswer();
+    }
+    if (!result) this.game = GAME.EXIT;
+    return;
+  }
+
+  isPlayContinue() {
     switch (this.userAnswer) {
       case 1:
         return true;
@@ -102,15 +115,8 @@ class App {
     }
   }
 
-  async askUser() {
-    const result = await this.isPlayContinue();
-
-    if (result) this.game = GAME.PLAY;
-    if (!result) this.game = GAME.EXIT;
-    return;
-  }
-
-  compareUserAnswer(answer) {
+  compareUserAnswer() {
+    const answer = this.anwser;
     const user = String(this.userAnswer).split("");
     const obj = { ball: 0, strike: 0 };
     user.map((n, i) => {
