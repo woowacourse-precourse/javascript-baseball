@@ -42,7 +42,7 @@
 - [x] 2. 숫자 배열로 변환(`String.prototype.split`, `Array.prototype.map`, `Number`을 이용)
 - [x] 3. 입력 유효성 검사([`checkUserNumbersInputValidity`](#3-2-세자리-숫자-유효성-검사-기능checkusernumbersinputvalidity-구현))
   - [x] 3.1 catch에서 [`#handleException`](#9-에러-처리-기능handleexception-구현) 호출
-- [x] 4. 입력 받은 숫자 배열 return
+- [x] 4. 입력 받은 숫자 배열 `userNumbers`에 할당
 
 ### 3-2. 세자리 숫자 유효성 검사 기능(checkUserNumbersInputValidity) 구현
 
@@ -105,7 +105,7 @@
 
 ## 11. 게임 지속 기능(#continueGame) 구현
 
-- [ ] 1. `userNumbers`에 [`#takeUserNumbersInput`](#3-1-사용자로부터-입력받는-기능takeusernumbersinput-구현) 호출 할당
+- [ ] 1. [`#takeUserNumbersInput`](#3-1-사용자로부터-입력받는-기능takeusernumbersinput-구현) 호출
 - [ ] 2. [`#compareEachNumbers`](#4-사용자-입력-값과-상대방컴퓨터의-숫자-비교하는-기능compareeachnumbers-구현)에 `#getComputerNumbers`, `userNumbers` 인자로 넘기며 호출, 결과 배열 받음
 - [ ] 3. 받은 결과 배열을 [`#getResult`](#5-결과값을-반환하는-기능getresult-구현)에 넘기며 호출, 결과 문자열 받음
 - [ ] 4. 받은 결과 문자열을 [`#printResult`](#6-결과값을-출력하는-기능printresult-구현)에 넘기며 결과 출력

@@ -60,7 +60,7 @@ class App {
       const inputNumberArr = input.trim().split("").map(Number);
       try {
         checkUserNumbersInputValidity(inputNumberArr);
-        return inputNumberArr;
+        this.userNumbers = inputNumberArr;
       } catch (e) {
         this.#handleException(e);
       }
