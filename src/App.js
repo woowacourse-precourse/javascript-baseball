@@ -39,7 +39,7 @@ class App {
     return count;  
   }
   
-  printCount(ball, strike) {
+  static printCount(ball, strike) {
     if (ball > 0 && strike > 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
       return ;
@@ -68,7 +68,7 @@ class App {
     this.printCount(ball, strike);
   }
 
-  checkInputValid(input) {
+  static checkInputValid(input) {
     const numbers = /[^1-9]/;
     if (numbers.test(input)) {
       throw "ERROR: Invalid input \n[ Valid Input : three digit number from 1 to 9 ]";
@@ -125,3 +125,6 @@ class App {
 }
 
 module.exports = App;
+
+// const app = new App();
+// app.play();
