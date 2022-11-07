@@ -16,6 +16,25 @@ class App {
     Console.readLine(`${MESSAGE.GETINPUT}`, input => {
       Function.throwInvalidInputError(input);
       this.resetCountBoard();
+      this.compareUserAndComputer(input);
+    });
+  }
+
+  compareUserAndComputer(user) {
+    const userNumberArray = user.toString().split('');
+    const computerNumberArry = this.computer.selectedNumber
+      .toString()
+      .split('');
+    userNumberArray.forEach((number, numberIndex) => {
+      const index = computerNumberArry.indexOf(number);
+      if (index < 0) {
+        return;
+      }
+      if (index === numberIndex) {
+        this.countBoard.strike += 1;
+      } else {
+        this.countBoard.ball += 1;
+      }
     });
   }
 
