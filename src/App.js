@@ -62,14 +62,20 @@ gameRender(){
 const render = new Render()
 
 const [userBallCount,userStrikeCount] = this.gamePlay()
-render.result(userBallCount,user)
+render.result(userBallCount,userStrikeCount)
 
 if (strikeCount !== 3) {
   this.notThreeStrike();
 }
 if (strikeCount === 3) {
-  render.replayQnA().then((retryOrEnd) => {
-  
+  render.replayQnA().then((userInput) => {
+    const checkUserRetryInputValid = checkVaild.checkRetryInput();
+if(checkUserRetryInputValid!==ERROR.USER_INPUT_PASS){
+render.errorRetryResult
+
+}
+
+    return this.numToArr(userInput)
 
 })}
 }
