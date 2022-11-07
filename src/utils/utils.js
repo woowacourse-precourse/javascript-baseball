@@ -80,6 +80,24 @@ class Utils {
       computerRandomNumbers.includes(number)
     );
   }
+
+  static returnStringResult(strikeBallCount) {
+    let result = [];
+    if (Utils.#isEmptyObject(strikeBallCount)) return "낫싱";
+    else {
+      if (strikeBallCount["ball"] !== undefined) {
+        result.push(`${strikeBallCount["ball"]}볼`);
+      }
+      if (strikeBallCount["strike"] !== undefined) {
+        result.push(`${strikeBallCount["strike"]}스트라이크`);
+      }
+      return result.join(" ");
+    }
+  }
+
+  static #isEmptyObject(param) {
+    return Object.keys(param).length === 0 && param.constructor === Object;
+  }
 }
 
 module.exports = Utils;
