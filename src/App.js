@@ -1,8 +1,8 @@
-const NUMBER_BASEBALL = require('./NumberBaseball');
+const NumberBaseball = require('./NumberBaseball');
 
 class App {
   play() {
-    this.numberBaseball = new NUMBER_BASEBALL();
+    this.numberBaseball = new NumberBaseball();
     this.numberBaseball.gameStart();
   }
 }
