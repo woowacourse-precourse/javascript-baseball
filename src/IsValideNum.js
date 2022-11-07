@@ -14,9 +14,7 @@ function duplicateCheck(data) {
   return false;
 }
 
-function isValidNum(number) {
-  const data = Array.from(String(number), Number);
-
+function isValidNum(data) {
   if (numberCheck(data) && lengthCheck(data) && duplicateCheck(data))
     return true;
 

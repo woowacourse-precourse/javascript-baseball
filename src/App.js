@@ -18,7 +18,8 @@ class App {
 
   inputAnswer() {
     Console.readLine(GAME_MESSAGE.INPUT_MESSAGE, (input) => {
-      this.checkInput(input);
+      this.userInput = Array.from(String(input), Number);
+      this.checkInput(this.userInput);
     });
   }
 
