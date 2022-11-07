@@ -7,6 +7,7 @@ class App {
       return arr.push(num);
     }
   }
+
   getRandomComputerArray() {
     let randomComputerArray = [];
     while (randomComputerArray.length < 3) {
@@ -15,23 +16,23 @@ class App {
     }
     return randomComputerArray;
   }
+
   pushUserInput(arr, num) {
     for (let i = 0; i < 3; i++) {
       arr.push(num[i]);
     }
   }
-  getUserInputArray() {
+
+  responseUserInput() {
     let userInputArray = [];
-    MissionUtils.Console.readLine("숫자를 입력하세요:", (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력하세요: ", (answer) => {
       this.pushUserInput(userInputArray, answer);
     });
-
-    return userInputArray;
   }
 
   play() {}
 }
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;

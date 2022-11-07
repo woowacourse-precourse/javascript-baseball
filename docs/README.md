@@ -7,6 +7,6 @@
 - getRandomComputerArray()로 컴퓨터의 random array만들기
 - pushUniqueNumber()을 통해 난수를 중복되지 않게 string으로 push하기
 
-2. 유저의 input 받아서 저장하기
+2. 유저의 input 에 응답하기
 
-- pushUserInput()으로 숫자 하나씩 userInputArray에 push하기
+- 유저의 input과 randomComputerArray 비교하여 응답하기
