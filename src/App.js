@@ -18,11 +18,16 @@ class App {
   isCorrectInput(value) {
     const regExp = /^[1-9]{3}$/;
     if (!regExp.test(value))
-      throw new Error("길이에러, 숫자가 아닌 값");
+      throw new Error("입력값은 0이 아닌 숫자로 구성된 3자리 수이어야 합니다.");
 
-    let overlapReg = new RegExp(/(.)\1+/g);
+    const overlapReg = /(.)\1+/;
     if (overlapReg.test(value))
-      throw new Error("중복된 값");
+      throw new Error("연속된 숫자는 포함될 수 없습니다.");
+
+    const differenceReg = /(.)\d\1/;
+    if (differenceReg.test(value)) {
+      throw new Error("세자리 수는 모두 다른 수여야합니다.");
+    }
   }
 
   isCorrectRestartInput(value) {
@@ -30,7 +35,6 @@ class App {
     if (!regExp.test(value))
       throw new Error("잘못된 재시작 값");
   }
-
 
   stringToAnswerType(value) {
     return value.split('').map(Number);
