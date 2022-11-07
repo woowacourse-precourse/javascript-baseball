@@ -59,4 +59,44 @@ describe('숫자 야구 게임', () => {
       app.play();
     }).toThrow('입력은 3자리만 가능합니다.');
   });
+
+  test('예외테스트 : 서로 같은 숫자의 예외', () => {
+    const randoms = [4, 3, 6];
+    const answers = ['445'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('입력 숫자가 중복되었습니다.');
+  });
+
+  test('예외테스트 : 숫자가 아닌경우', () => {
+    const randoms = [4, 3, 6];
+    const answers = ['abc'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('입력은 숫자만 가능합니다.');
+  });
+
+  test('예외테스트 : 0이 들어가있는 경우', () => {
+    const randoms = [4, 3, 6];
+    const answers = ['012'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('입력숫자의 각 자리는 1~9까지의 숫자여야 합니다.');
+  });
+  
 });
