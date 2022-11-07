@@ -9,6 +9,16 @@ const messages = {
   isNotANumberMsg: "는 숫자가 아닙니다. ",
 };
 
+const CheckValidation = (answer) => {
+  let splitAnswer = answer.split("");
+  let length = answer.length;
+
+  hasZero(answer, length);
+  length > 1 ? checkDuplicated(splitAnswer) : "";
+  containNotANumber(splitAnswer, length);
+  length === 3 ? "" : notRightLength(length);
+};
+
 const inputMore = (length) => {
   return length - 3 + messages.inputMoreMsg + messages.guideMsg;
 };
@@ -26,16 +36,6 @@ const throwErrorMsg = (typeOfError, length) => {
     : (function () {
         throw new Error(typeOfError + inputLess(length));
       })();
-};
-
-const CheckValidation = (answer) => {
-  let splitAnswer = answer.split("");
-  let length = answer.length;
-
-  hasZero(answer, length);
-  length > 1 ? checkDuplicated(splitAnswer) : "";
-  containNotANumber(splitAnswer, length);
-  length === 3 ? "" : notRightLength(length);
 };
 
 const hasZero = (answer, length) => {
