@@ -10,7 +10,9 @@ function createAnswer() {
   }
   return computer.join('');
 }
-
+function askRestart() {
+  MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+}
 class App {
   constructor() {
     this.answer = undefined;
@@ -50,7 +52,8 @@ class App {
     this.ball = 0;
     this.strike = 0;
     if (this.answer === this.input) {
-      return MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다!');
+      MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다!');
+      return askRestart();
     }
     for (let index = 0; index < 3; index += 1) {
       this.countBallOrStrike(index);
