@@ -50,6 +50,9 @@ class App {
 
     const { strike, ball } = compareResults;
 
+    // console.log(this.#randomNum, compareResults);
+    // console.log(strike, ball);
+
     if (ball && !strike) MissonUtils.Console.print(`${ball}볼`);
 
     if (!ball && strike) MissonUtils.Console.print(`${strike}스트라이크`);
@@ -58,6 +61,19 @@ class App {
       MissonUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
 
     strike === 3 ? this.resetGame() : this.getInput();
+  }
+
+  resetGame() {
+    MissonUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissonUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (userInput) => {
+        if (userInput !== "1" && userInput !== "2")
+          this.throwError("초기화 실패");
+
+        userInput === "1" ? this.startGame() : MissonUtils.Console.close();
+      }
+    );
   }
 
   play() {
