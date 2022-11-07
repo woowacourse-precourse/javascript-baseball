@@ -23,6 +23,10 @@ const isThreeDigitNumber = (num) => {
   else return false;
 };
 
+const isOneToNine = (num) => {
+  return /^[1-9]+$/.test(num);
+};
+
 const game = () => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = num;
