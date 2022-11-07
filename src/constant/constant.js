@@ -17,6 +17,12 @@ const ERROR_MESSAGE = {
 
 const ANNOUNCEMENT_MESSAGE = {
   INPUT: "세자리 숫자를 입력해주세요.",
+  RESTART: {
+    MESSAGE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    START: "1",
+    FINISH: "2",
+  },
+  END: "게임 종료",
 };
 
 module.exports = {
