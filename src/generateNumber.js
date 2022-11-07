@@ -1,11 +1,14 @@
 const { Random } = require('@woowacourse/mission-utils');
+const { NUMBER } = require('./constants');
+
+const { NUMBER_RANGE_START, NUMBER_RANGE_END, NUMBER_LENGTH } = NUMBER;
 
 function generateNumber() {
   const computerNumArr = [];
   let computerNumArrLength = 0;
 
-  while (computerNumArrLength < 3) {
-    const tempNumber = Random.pickNumberInRange(0, 9);
+  while (computerNumArrLength < NUMBER_LENGTH) {
+    const tempNumber = Random.pickNumberInRange(NUMBER_RANGE_START, NUMBER_RANGE_END);
     if (computerNumArr.indexOf(tempNumber) === -1) {
       computerNumArr.push(tempNumber);
       computerNumArrLength += 1;

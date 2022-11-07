@@ -1,10 +1,14 @@
+const { COUNT_MESSAGE } = require('./constants');
+
+const { STRIKE, BALL, NOTHING } = COUNT_MESSAGE;
+
 function compareDigit(number, index, arr) {
   if (number === arr[index]) {
-    return '스트라이크';
+    return STRIKE;
   }
 
   if (number !== arr[index] && arr.includes(number)) {
-    return '볼';
+    return BALL;
   }
 
   return 'nothing';
@@ -18,13 +22,13 @@ function compareArrResult(comArr, userArr) {
     result[strikeOrBall] += 1;
   });
 
-  let strikeCount = result['스트라이크'];
-  let ballCount = result['볼'];
+  let strikeCount = result[STRIKE];
+  let ballCount = result[BALL];
 
-  if (ballCount > 0 && strikeCount > 0) return `${ballCount}볼 ${strikeCount}스트라이크`;
-  if (ballCount === 0 && strikeCount > 0) return `${strikeCount}스트라이크`;
-  if (ballCount > 0 && strikeCount === 0) return `${ballCount}볼`;
-  return '낫싱';
+  if (ballCount > 0 && strikeCount > 0) return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
+  if (ballCount === 0 && strikeCount > 0) return `${strikeCount}${STRIKE}`;
+  if (ballCount > 0 && strikeCount === 0) return `${ballCount}${BALL}`;
+  return NOTHING;
 }
 
 module.exports = compareArrResult;

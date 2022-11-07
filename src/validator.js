@@ -1,3 +1,5 @@
+const { ERROR_MESSAGE, NUMBER } = require('./constants');
+
 function isNumInRange(str) {
   const regExp = /[1-9]/g;
   const matchArr = str.match(regExp);
@@ -5,7 +7,7 @@ function isNumInRange(str) {
 }
 
 function isLengthEqualsThree(str) {
-  return str.length === 3;
+  return str.length === NUMBER.NUMBER_LENGTH;
 }
 
 function isAllDifferent(str) {
@@ -15,13 +17,13 @@ function isAllDifferent(str) {
 
 function isInputValidate(str) {
   if (!isLengthEqualsThree(str)) {
-    return '입력한 값이 3자리가 아니에요!';
+    return ERROR_MESSAGE.LENGTH_ERROR;
   }
   if (!isAllDifferent(str)) {
-    return '서로 다른 수가 아니에요!';
+    return ERROR_MESSAGE.DIFFERENT_DIGITS_ERROR;
   }
   if (!isNumInRange(str)) {
-    return '각 자리 수 중 1부터 9로 이루어지지 않은 수가 있어요!';
+    return ERROR_MESSAGE.NUM_IN_RANGE_ERROR;
   }
 
   return true;

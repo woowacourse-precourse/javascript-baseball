@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const generateNumber = require('./generateNumber');
 const validateInputValue = require('./validator');
 const compareTwoArrayResult = require('./compare');
+const { MESSAGE, COUNT_MESSAGE, ERROR_MESSAGE, GAME_PROGRESS } = require('./constants');
 
 class App {
   play() {
@@ -15,11 +16,11 @@ class App {
   }
 
   startMessage() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MESSAGE.START_GAME);
   }
 
   getInputAndCompare() {
-    Console.readLine('숫자를 입력해주세요 : ', input => {
+    Console.readLine(MESSAGE.INPUT_NUMBER, input => {
       const { computerNumArr } = this;
       const isInputValidate = validateInputValue(input);
       if (typeof isInputValidate !== 'boolean') return this.wrongInput(isInputValidate);
@@ -31,15 +32,15 @@ class App {
   }
 
   isGameOver(result) {
-    if (result !== '3스트라이크') {
+    if (result !== COUNT_MESSAGE.CORRECT_ANSWER) {
       return this.getInputAndCompare();
     }
     return this.endOrRetry();
   }
 
   endOrRetryMessage() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.print(MESSAGE.STRIKE_OUT);
+    Console.print(MESSAGE.RETRY_OR_END);
   }
 
   endOrRetry() {
@@ -50,13 +51,13 @@ class App {
   }
 
   checkOneOrTwo(answer) {
-    if (answer === '1') {
+    if (answer === GAME_PROGRESS.RESTART) {
       return this.makeComputerNumArr();
     }
-    if (answer === '2') {
+    if (answer === GAME_PROGRESS.TERMINATE) {
       return this.close();
     }
-    return this.wrongInput('1또는 2를 입력해주세요!');
+    return this.wrongInput(ERROR_MESSAGE.NOT_ONE_OR_TWO_ERROR);
   }
 
   wrongInput(errMessage) {
