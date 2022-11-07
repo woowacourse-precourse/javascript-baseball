@@ -7,7 +7,6 @@
 ## 컴퓨터 랜덤 숫자 생성
 - generateComRandom
 
-
 ## 출력
 - showMessage
 
@@ -31,3 +30,9 @@
 2. 함수 자체가 초기화됨 -> 함수 내부에서 동작할 수 있게 만들어야함
 [@] 해결완료 
 
+## npm test 동작확인
+- Tests: 1 failed, 6 passed
+틀린 부분 : 숫자 야구 게임 › 게임 종료 후 재시작(?)
+
+## 코드 수정
+1. console.log로 된 부분중에서 필요한 부분을 MissionUtils.Console.print()로 바꾸기
