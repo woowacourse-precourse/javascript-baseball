@@ -10,7 +10,7 @@ class Computer {
   }
 
   makeAnswer() {
-    return Random.pickUniqueNumbersInRange(MINIMUM_RANGE, MINIMUM_RANGE, ANSWER_LENGTH);
+    return Random.pickUniqueNumbersInRange(MINIMUM_RANGE, MAXIMUM_RANGE, ANSWER_LENGTH);
   }
 
   get answer() {
