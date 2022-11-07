@@ -31,7 +31,7 @@ class App {
         .map((num) => parseInt(num, 10));
       this.validateUserInput(userInputValue, false);
       console.log('input', userNumber, this.answer);
-      this.printMessage(userNumber);
+      this.printResultMessage(userNumber);
       this.isGuessSuccess(userNumber);
     });
     return this;
@@ -57,18 +57,10 @@ class App {
     }
   }
 
-  guessSuccess() {
-    return this.askRestart();
-  }
-
-  guessFali() {
-    return this.inputUserNumber();
-  }
-
   isGuessSuccess(userNumber) {
-    const { strike } = this.getResult(userNumber, this.answer);
-    if (strike === 3) return this.askRestart();
-    return this.inputUserNumber();
+    const { strike } = this.getGameResult(userNumber, this.answer);
+    if (strike === 3) this.askRestart();
+    else this.inputUserNumber();
   }
 
   askRestart() {
@@ -108,15 +100,15 @@ class App {
     return ball;
   }
 
-  getResult(user, computer) {
+  getGameResult(user, computer) {
     const strike = this.countStrike(user, computer);
     const ball = this.countBall(user, computer);
 
     return { strike, ball };
   }
 
-  printMessage(userNumber) {
-    const { strike, ball } = this.getResult(userNumber, this.answer);
+  printResultMessage(userNumber) {
+    const { strike, ball } = this.getGameResult(userNumber, this.answer);
 
     if (strike === 3) {
       this.print('3스트라이크');
