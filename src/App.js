@@ -3,7 +3,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
 const checkException = require("./checkException");
 const getResult = require("./getResult");
-const { printStart } = require("./printMessage");
+const { printStart, printGameover } = require("./printMessage");
 
 class App {
   constructor() {
@@ -23,9 +23,19 @@ class App {
     });
   }
 
+  checkCorrect(result) {
+    return result === Message.strike_3;
+  }
+
   printResult(userInput) {
     const result = getResult(this.answer, userInput);
     console.log(result);
+    if (this.checkCorrect(result)) this.gameOver();
+    else this.getUserInput();
+  }
+
+  gameOver() {
+    printGameover();
   }
 }
 
