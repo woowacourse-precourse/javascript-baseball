@@ -40,7 +40,9 @@ class App {
   validUserInput(str) {
     const reg = /^[0-9]+$/;
 
-    return str.length == 3 && reg.test(str);
+    const userInputSet = new Set(str);
+
+    return str.length == 3 && reg.test(str) && str.length == userInputSet.size;
   }
 
   strToIntArr(str) {
