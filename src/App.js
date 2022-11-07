@@ -38,7 +38,7 @@ const GameStart = (USER) => {
       USER_NUMBER = USER.Number;
     });
     if (USER_NUMBER.length !== 3) {
-      throw '3자리 숫자가 아닙니다.\n애플리케이션을 종료하겠습니다.';
+      throw MissionUtils.Console.close();
     }
     if (NumberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
