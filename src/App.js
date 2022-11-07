@@ -100,10 +100,14 @@ class App {
         if (userInput === this.NEW_GAME) {
           return this.startNewGame();
         }
-        Console.print("숫자 야구 게임이 종료되었습니다.");
-        return Console.close();
+        return App.finishGame();
       }
     );
+  }
+
+  static finishGame() {
+    Console.print("숫자 야구 게임이 종료되었습니다.");
+    return Console.close();
   }
 }
 
