@@ -7,12 +7,16 @@ const Computer = require("./computer");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  constructor() {
+    this.$console = MissionUtils.Console;
+  }
+
   play() {
     const computer = Computer();
 
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.$console.print("숫자 야구 게임을 시작합니다.");
 
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
+    this.$console.readLine("숫자를 입력해주세요 : ", (number) =>
       this.playOneRound(computer, number)
     );
 
@@ -21,19 +25,39 @@ class App {
 
   playOneRound(computer, number) {
     const { isEnd, print } = computer.checkGameResult(number);
-    MissionUtils.Console.print(print);
+    this.$console.print(print);
 
     switch (isEnd) {
       case true:
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.$console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.endGame();
         break;
 
       case false:
-        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
+        this.$console.readLine("숫자를 입력해주세요 : ", (number) =>
           this.playOneRound(computer, number)
         );
         break;
     }
+
+    return this;
+  }
+
+  endGame() {
+    this.$console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+
+    this.$console.readLine("", (number) => {
+      switch (number) {
+        case "1":
+          this.play();
+          break;
+        case "2":
+          this.$console.close();
+        default:
+          new Error("올바르지 못한 값을 입력하였습니다.");
+          break;
+      }
+    });
 
     return this;
   }
