@@ -47,6 +47,30 @@ describe('숫자 야구 게임', () => {
         expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
       });
     });
+
+    test('게임 종료 이후 완전히 종료 및 각종 힌트가 올바르게 출력되는지 테스트', () => {
+      const randoms = [1, 3, 5];
+      const answers = ['246', '345', '513', '134', '135', '2'];
+      const logSpy = getLogSpy();
+      const messages = [
+        '낫싱',
+        '1볼 1스트라이크',
+        '3볼',
+        '2스트라이크',
+        '3스트라이크',
+        '게임 종료',
+      ];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      const app = new App();
+      app.play();
+
+      messages.forEach(output => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
+    });
   });
 
   describe('잘못된 입력값에 대한 예외 테스트', () => {
