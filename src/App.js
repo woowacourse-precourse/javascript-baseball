@@ -1,10 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const [Console, Random] = [MissionUtils.Console,MissionUtils.Random];
 
 function makeTarget() {
   const tempArr = [];
 
   while (tempArr.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    const number = Random.pickNumberInRange(1, 9);
     if (!tempArr.includes(number)) {
       tempArr.push(number);
     }
@@ -17,7 +18,7 @@ function readData(targetArr) {
   let isAnswer = false;
 
   while (!isAnswer) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
 
       const inputArr = [...input].map(Number);
 
@@ -57,14 +58,14 @@ class App {
   play() {
 
     try {
-      MissionUtils.Console.print('숫자 야구게임을 시작합니다.');
+      Console.print('숫자 야구게임을 시작합니다.');
       let isRepeat = true;
 
       while (isRepeat) {
         const targetArr = makeTarget();
         readData(targetArr);
         isRepeat =false;
-        MissionUtils.Console.close();
+        Console.close();
       }
     } catch (err) {
 
