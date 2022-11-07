@@ -29,7 +29,8 @@ const validateRestartInput = (input) => {
     const isNumberInput = !isNaN(input);
     const isInRange = +input === RESTART || +input === END;
 
-    if (!isNumberInput || !isInRange) throw new Error(INVALID_RESTART_INPUT);
+    if (!isNumberInput) throw new Error(INVALID_RESTART_INPUT);
+    if (!isInRange) throw new Error(INVALID_RESTART_INPUT);
 };
 
 module.exports = { validateGameInput, validateRestartInput };
