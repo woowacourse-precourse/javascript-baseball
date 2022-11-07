@@ -111,9 +111,10 @@ class App {
    * @returns {boolean}
    */
   isInvalidGuess(guess) {
-    const inputValidationExpression = new RegExp(`^\\d{${this.ballCount}}$`)
+    const inputValidationExpression = new RegExp(`^[1-9]{${this.ballCount}}$`)
+    const areDifferentCharacters = new Set(guess).size === guess.length
 
-    return !inputValidationExpression.test(guess)
+    return !inputValidationExpression.test(guess) || !areDifferentCharacters
   }
 
   close() {
