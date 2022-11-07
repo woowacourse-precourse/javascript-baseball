@@ -1,10 +1,27 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
+const Computer = require('./Computer');
 
 class Game{
 
+    computer = new Computer();
+
+    play(){
+        this.loadComputerNumbers();
+        this.getUserInput();
+    }
+
+    constructor(){
+        this.computerNumbers = [];
+    }
+
+    loadComputerNumbers(){
+        this.computer.setComputerNumbers();
+        this.computerNumbers = this.computer.getComputerNumbers();
+    }
+
 
     getUserInput() {
+        
         MissionUtils.Console.readLine("숫자를 입력해주세요 :", (numbers) => {
             this.checkValidationUserInput(numbers);
         });
@@ -23,7 +40,23 @@ class Game{
         if(userNumber.includes('0') === true){
             throw "0은 입력하면 안됩니다.";
         }
+        this.isStrike(userNumber);
     }
+
+    isStrike(userNumbers){
+        let count = 0;
+
+        for(let i = 0;i < 3;i++){
+            if(parseInt(userNumbers[i]) === this.computerNumbers[i]){
+                count++;
+            }
+        }
+        console.log(this.computerNumbers);
+        console.log(userNumbers)
+        console.log(count);
+    }
+
+    
 
     
    
@@ -32,6 +65,6 @@ class Game{
 }
 
 const game = new Game();
-game.getUserInput();
+game.play();
 
 module.exports = Game;
