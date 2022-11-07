@@ -1,34 +1,43 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+
 class App {
   constructor() {
     this.computerRandomNumbers = this.generateComputerRandomNumbers();
   }
+
   play() {
     this.printStartMessage();
     this.getUserInput();
   }
+
   printStartMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
+
   generateComputerRandomNumbers() {
-    let ComputerRandomNumbers = new Set();
+    const ComputerRandomNumbers = new Set();
 
     while (ComputerRandomNumbers.size !== 3) {
       ComputerRandomNumbers.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
     return [...ComputerRandomNumbers].join('');
   }
+
   isValidInputNumbers(number) {
-    let noDuplication = new Set([...number]);
+    const noDuplication = new Set([...number]);
 
     if (number < 100 || number >= 1000) {
       return false;
-    } else if ((number + '').includes('0')) {
+    }
+    if (`${number}`.includes('0')) {
       return false;
-    } else if (noDuplication.size !== number.length) {
+    }
+    if (noDuplication.size !== number.length) {
       return false;
-    } else return true;
+    }
+    return true;
   }
+
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       if (this.isValidInputNumbers(userInput)) {
@@ -38,23 +47,24 @@ class App {
       }
     });
   }
+
   ballStrikeCount(computerInput, userInput) {
     let ballCount = 0;
     let strikeCount = 0;
 
-    for (let i = 0; i < computerInput.length; i++) {
+    for (let i = 0; i < computerInput.length; i += 1) {
       if (computerInput[i] === userInput[i]) {
-        strikeCount++;
+        strikeCount += 1;
       }
     }
-    for (let number of computerInput) {
+    for (const number of computerInput) {
       if (userInput.includes(number)) {
-        ballCount++;
+        ballCount += 1;
       }
     }
     ballCount -= strikeCount;
 
-    let gameResult = this.getGameResult(strikeCount, ballCount);
+    const gameResult = this.getGameResult(strikeCount, ballCount);
 
     MissionUtils.Console.print(gameResult);
 
@@ -65,17 +75,20 @@ class App {
       this.resumeOrQuitGame();
     }
   }
+
   getGameResult(strikeCount, ballCount) {
     if (strikeCount && ballCount) {
       return `${ballCount}볼 ${strikeCount}스트라이크`;
-    } else if (strikeCount && !ballCount) {
-      return `${strikeCount}스트라이크`;
-    } else if (!strikeCount && ballCount) {
-      return `${ballCount}볼`;
-    } else {
-      return '낫싱';
     }
+    if (strikeCount && !ballCount) {
+      return `${strikeCount}스트라이크`;
+    }
+    if (!strikeCount && ballCount) {
+      return `${ballCount}볼`;
+    }
+    return '낫싱';
   }
+
   resumeOrQuitGame() {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
