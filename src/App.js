@@ -1,5 +1,9 @@
 // 모듈 선언
 const { Console, Random } = require('@woowacourse/mission-utils');
+// 상수 선언
+const INPUT_LENGTH = 3;
+const START_DIGIT = 1;
+const END_DIGIT = 9;
 
 class App {
   setRandomDigit() {

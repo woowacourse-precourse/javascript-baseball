@@ -31,4 +31,12 @@ describe('기능 단위 목록별 테스트', () => {
     app.showStartMessage();
     expect(printSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
+
+  test('기능2 랜덤 숫자 생성 테스트 (setRandomDigit 메소드)', () => {
+    const randoms = [1, 5, 5, 5, 8, 9];
+    mockRandoms(randoms);
+
+    const app = new App();
+    expect(app.setRandomDigit()).toEqual([1, 5, 8]);
+  });
 });
