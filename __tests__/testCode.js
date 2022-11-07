@@ -37,6 +37,19 @@ describe("숫자 야구 게임", () => {
     }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
   });
 
+  test("세번째 입력값 예외처리 테스트", () => {
+    const randoms = [3, 4, 7];
+    const answers = ["123", "357", "5"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+  });
+
   test("게임 종료 테스트", () => {
     const randoms = [7, 5, 4];
     const answers = ["346", "654", "754", "2"];
