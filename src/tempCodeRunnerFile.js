@@ -15,19 +15,15 @@ function makeTarget() {
 }
 
 function readData(targetArr) {
+
   let isAnswer = false;
 
-  Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    const inputArr = [...input].map(Number);
-    isAnswer = handleData(inputArr, targetArr);
-    if (!isAnswer) readData(targetArr);
-    else {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
-      repeatGame();
-    }
-  });
- 
-
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {    
+      const inputArr = [...input].map(Number);
+      isAnswer = handleData(inputArr, targetArr);
+      if(!isAnswer) readData(targetArr);
+    });
+  
 }
 
 
@@ -69,37 +65,38 @@ function printResult(countArr) {
   }
 }
 
-
-function repeatGame() {
-  Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ", (input) => {
-    if (input === "1") playGame();
-    else if (input === "2") {
-      Console.print("게임종료");
-      Console.close();
-    }
-    else {
-      throw new Error("1,2 이외의 숫자가 입력되었습니다.")
-    }
-  });
-}
-
-function playGame() {
+function playGame(){
   const targetArr = makeTarget();
   console.log(targetArr);
   readData(targetArr);
+  Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
 }
+
+function repeatGame(){
+  Console.readLine("숫자를 입력해주세요 : ", (input) => {    
+    const inputArr = [...input].map(Number);
+    isAnswer = handleData(inputArr, targetArr);
+    if(!isAnswer) readData(targetArr);
+  });
+}
+
 
 
 class App {
   play() {
+
     try {
       Console.print('숫자 야구게임을 시작합니다.');
       playGame();
-      
+      Console.close();
+
     } catch (err) {
-      Console.print(err.message);
+      Console.print(err);
       Console.close();
     }
+
+
+
   }
 }
 
