@@ -36,7 +36,7 @@ class User extends Mission {
         item < constants.MIN_INPUT_NUMBER ||
         item > constants.MAX_INPUT_NUMBER
       ) {
-        throw `${constants.INPUT_SIZE}~${constants.MAX_INPUT_NUMBER} 범위만 입력 가능합니다. 종료합니다.`;
+        throw `${constants.MIN_INPUT_NUMBER}~${constants.MAX_INPUT_NUMBER} 범위만 입력 가능합니다. 종료합니다.`;
       }
     });
 
