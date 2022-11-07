@@ -25,12 +25,19 @@ class App {
     this.#takeGuess()
   }
 
+  /**
+   * @returns {number[]}
+   */
   #generateAnswer() {
-    return Random.pickUniqueNumbersInRange(
-      this.#from,
-      this.#to,
-      this.#ballCount
-    )
+    const answer = new Set()
+
+    while (answer.size !== this.#ballCount) {
+      const randomNumber = Random.pickNumberInRange(this.#from, this.#to)
+
+      answer.add(randomNumber)
+    }
+
+    return [...answer]
   }
 
   #takeGuess() {
