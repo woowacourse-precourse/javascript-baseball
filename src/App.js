@@ -106,6 +106,10 @@ class App {
       }
     });
   }
+  #handleException(error) {
+    Console.print(error);
+    this.#exitApp();
+  }
   play() {}
 }
 

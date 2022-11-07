@@ -96,8 +96,8 @@
 
 ## 9. 에러 처리 기능(#handleException) 구현
 
-- [ ] 1. (추가구현)catch에서 error 출력(`Console.print` 이용)
-- [ ] 2. [`#exitApp`](#10-앱-종료-기능exitapp-구현) 호출
+- [x] 1. (추가구현)catch에서 error 출력(`Console.print` 이용)
+- [x] 2. [`#exitApp`](#10-앱-종료-기능exitapp-구현) 호출
 
 ## 10. 앱 종료 기능(#exitApp) 구현
 
