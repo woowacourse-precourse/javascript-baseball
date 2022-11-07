@@ -58,12 +58,11 @@ class GameLoop {
     let gameOver = false;
 
     while (!gameOver) {
-      let message = MissionUtils.Console.readLine(
-        "숫자를 입력해주세요 : ",
-        this._validate
-      );
-      let [ball, strike] = Opponent.judge(message);
-      gameOver = this._respond(ball, strike);
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (message) => {
+        message = this._validate(message);
+        let [ball, strike] = Opponent.judge(message);
+        gameOver = this._respond(ball, strike);
+      });
     }
 
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
