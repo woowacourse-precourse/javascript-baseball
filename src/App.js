@@ -98,6 +98,7 @@ class App {
 
   getRetryInput() {
     MissionUtils.Console.readLine("", (answer) => {
+      this.Error.validateRetryInput(answer);
       switch (answer) {
         case "1":
           this.retryGame();
