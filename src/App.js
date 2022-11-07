@@ -94,7 +94,15 @@ class App {
     return 0;
   }
 
-  isInputValueError(userInput) {}
+  isInputValueError(userInput) {
+    [...userInput].forEach((value) => {
+      if (value < "1" || value > "9") {
+        return 1;
+      }
+    });
+
+    return 0;
+  }
 
   removeRepeatInputValue(userInput) {}
 }
