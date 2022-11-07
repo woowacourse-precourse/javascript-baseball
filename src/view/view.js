@@ -24,6 +24,29 @@ class View {
       this.controller.checkIsUserInputValid();
     });
   }
+
+  /**
+   * strike, ball 결과를 받아 결과 문자열을 출력한다.
+   * @param {number} strike [strike 개수]
+   * @param {number} ball [ball 개수]
+   */
+  printSingleTryResult([strike, ball]) {
+    let singleTryResultComment = "";
+
+    if (!strike && !ball) {
+      singleTryResultComment += "낫싱";
+    }
+
+    if (ball) {
+      singleTryResultComment += `${ball}볼 `;
+    }
+    if (strike) {
+      singleTryResultComment += `${strike}스트라이크`;
+    }
+
+    Console.print(singleTryResultComment);
+    this.controller.checkIsGameFinished(singleTryResultComment);
+  }
 }
 
 module.exports = View;
