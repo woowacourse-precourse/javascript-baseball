@@ -71,28 +71,27 @@ class App {
   }
 
   inputUserAnswer(ment) {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(ment, (answer) => {
-        this.userAnswer = parseInt(answer);
-        if (this.answerChecker(this.userAnswer)) resolve();
-        if (!this.answerChecker(this.userAnswer)) reject();
-      });
+    MissionUtils.Console.readLine(ment, (answer) => {
+      this.userAnswer = parseInt(answer);
+      resolve("input");
     });
   }
 
   async checkUserGameAnswer() {
     try {
       await this.inputUserAnswer(ment.input);
-      // await this.answerChecker();
+      await this.answerChecker();
     } catch (e) {
       this.exceptionEnd();
     }
     return;
   }
 
-  answerChecker(answer) {
-    if (answer < 100 || answer > 999) return false;
-    if (new Set(String(answer).split("")).size !== 3) return false;
+  answerChecker() {
+    if (this.userAnswer < 100 || this.userAnswer > 999)
+      throw new Error("not number");
+    if (new Set(String(this.userAnswer).split("")).size !== 3)
+      throw new Error("not number");
     return true;
   }
 
@@ -161,6 +160,7 @@ class App {
   exceptionEnd() {
     this.game = GAME.EXIT;
     MissionUtils.Console.print(ment.exception);
+    MissionUtils.Console.close();
     return;
   }
 
