@@ -10,18 +10,15 @@ selectOption = () => {
 isOptionError = (option) => {
   const RESTART = OPTIONS.RESTART;
   const END = OPTIONS.END;
-
-  if (option !== RESTART && option !== END) {
-    throw ERRORS.OPTION;
-  }
-
   if (option === RESTART) {
     return playGame();
   }
-
   if (option === END) {
     MissionUtils.Console.print(MESSAGES.END);
+    return;
   }
+
+  throw ERRORS.OPTION;
 };
 
 exports.selectOption = selectOption;
