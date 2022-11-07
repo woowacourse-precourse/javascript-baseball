@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const MIN_ANSWER = "102";
-const MAX_ANSWER = "987";
+const MIN_ANSWER = 102;
+const MAX_ANSWER = 987;
 const MIN_NUMBER = 1;
 const MAX_NUMBER = 9;
 const NUMBER_LENGTH = 3;
@@ -47,11 +47,15 @@ class App {
   };
 
   containsOnlyNumbers = (input) => {
-    return input >= MIN_ANSWER && input <= MAX_ANSWER;
+    return !isNaN(input);
+  };
+
+  isValidRange = (input) => {
+    return Number(input) >= MIN_ANSWER && Number(input) <= MAX_ANSWER;
   };
 
   isValidInput = (input) => {
-    return this.containsThreeNumbers(input) && this.containsOnlyNumbers(input) && !this.isDuplicated(input);
+    return this.containsThreeNumbers(input) && this.containsOnlyNumbers(input) && this.isValidRange(input) && !this.isDuplicated(input);
   };
 
   getResultMessage = (strike, ball, nothing) => {
