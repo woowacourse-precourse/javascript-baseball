@@ -3,7 +3,7 @@ const { Random, Console } = MissionUtils;
 
 class App {
   #NUMERIC_CONSTANTS = {
-    maxLength: 3,
+    correctCounts: 3,
     min: 1,
     max: 9,
     initResult: 0,
@@ -28,9 +28,9 @@ class App {
   createRandomNum() {
     this.#randomNum = [];
 
-    const { maxLength, min, max } = this.#NUMERIC_CONSTANTS;
+    const { correctCounts, min, max } = this.#NUMERIC_CONSTANTS;
 
-    while (this.#randomNum.length < maxLength) {
+    while (this.#randomNum.length < correctCounts) {
       this.#randomNum = Array.from(
         new Set([...this.#randomNum, Random.pickNumberInRange(min, max) + ""])
       );
@@ -79,8 +79,8 @@ class App {
 
     if (ball && strike) Console.print(`${ball}볼 ${strike}스트라이크`);
 
-    const { maxLength } = this.#NUMERIC_CONSTANTS;
-    strike === maxLength ? this.resetGame() : this.getInput();
+    const { correctCounts } = this.#NUMERIC_CONSTANTS;
+    strike === correctCounts ? this.resetGame() : this.getInput();
   }
 
   resetGame() {
@@ -96,11 +96,11 @@ class App {
   }
 
   findInputError(userInput) {
-    const { maxLength } = this.#NUMERIC_CONSTANTS;
+    const { correctCounts } = this.#NUMERIC_CONSTANTS;
 
     if (
       typeof +userInput !== "number" ||
-      userInput.length !== maxLength ||
+      userInput.length !== correctCounts ||
       userInput.length !== new Set(userInput).size ||
       userInput.includes("0")
     ) {
