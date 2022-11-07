@@ -16,4 +16,10 @@ describe('Function 테스트', () => {
     const message = input.map(el => validDuplicate(el));
     expect(message).toStrictEqual(answer);
   });
+
+  test('validInput 테스트', () => {
+    expect(() => {
+      validInput('124');
+    }).toThrow();
+  });
 });
