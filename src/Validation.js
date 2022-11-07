@@ -11,15 +11,16 @@ class Validation {
 
     if (Number.isNaN(Number(input))) return [false, new Error(ErrorMsg.NaN)];
 
-    if (input.length !== this.length)
+    if (input.length !== this.length) {
       return [false, new Error(ErrorMsg.differentDigit)];
+    }
 
     if (new Set(input).size !== this.length)
       return [false, new Error(ErrorMsg.duplicated)];
 
     if (parseInt(input) < 0) return [false, new Error(ErrorMsg.NonNegative)];
 
-    return true;
+    return [true, ""];
   }
 }
 
