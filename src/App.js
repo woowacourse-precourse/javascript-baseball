@@ -58,16 +58,32 @@ const ComputerInput=this.computerInput
 return [userBallCount,userStrikeCount]
 }
 
+gameRender(){
+const render = new Render()
+
+const [userBallCount,userStrikeCount] = this.gamePlay()
+render.result(userBallCount,user)
+
+if (strikeCount !== 3) {
+  this.notThreeStrike();
+}
+if (strikeCount === 3) {
+  render.replayQnA().then((retryOrEnd) => {
+  
+
+})}
+}
+
+
   play() {
+
+
     this.getMention();
     this.getUser();
 
-    
+  }
 
-      const gameJudgment = new GameJudgment({
-        user: this.userNum,
-        computer: this.computerInput,
-      });
+     
 
       const [ballCount, strikeCount] = gameJudgment.judgement();
       this.ball = ballCount;
