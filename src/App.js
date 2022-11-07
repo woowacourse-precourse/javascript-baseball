@@ -1,12 +1,13 @@
-class BaseballGamee {
+const { Random, Console } = require("@woowacourse/mission-utils");
+class App {
+
+  constructor() {
+    this.computerInput = [];
+    this.userInput = [];
+  }
   
   computerInput(){
-    const MissionUtils = require("@woowacourse/mission-utils");
-
-    let computerInput = [];
-    computerInput = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-
-    return computerInput;
+    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   checkUserInput(userInput){
@@ -18,27 +19,20 @@ class BaseballGamee {
   }
 
   userInput(){
-    const MissionUtils = require("@woowacourse/mission-utils");
-    let userInput = [];
-    MissionUtils.Console.readLine ('line : ', (answer) => {
-      userInput = answer.toString().split('').map(e => e = parseInt(e));
-      const isValid = this.checkUserInput(userInput);
-      
-      if(isValid==false){
-        throw "잘못된 값을 입력했습니다.";
-      }
-    });
-    return userInput;
+    return Console.readLine('숫자를 입력해주세요 : ',(input) => {
+      this.checkUserInput(input);
+      this.compareInputNum(input);
+      Console.close();
+      })
   }
 
-  
 
   play(){
-    
-    console.log("숫자 야구 게임을 시작합니다.");
-    
-    const userInput = this.userInput();
+    Console.print("숫자 야구 게임을 시작합니다.");
+    this.computerInput();
+    this.userInput();
+
   }
 }
 
-module.exports = BaseballGamee;
+module.exports = App;
