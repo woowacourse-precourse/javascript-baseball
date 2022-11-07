@@ -26,4 +26,4 @@
 
 ## 🍌 기타
 
-[1주차 미션 정리하기](https://jade-gasoline-2a3.notion.site/6b1b05ed691b451b8665a492c74f1b78)
+[2주차 미션 정리하기](https://jade-gasoline-2a3.notion.site/6b1b05ed691b451b8665a492c74f1b78)
