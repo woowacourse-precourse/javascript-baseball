@@ -64,6 +64,24 @@ class App {
     }
   }
 
+  endGame() {
+    CONSOLE_UTIL.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        answer = Number(answer);
+        if (answer !== 1 && answer !== 2) {
+          throw new Error("1 또는 2를 입력하세요");
+        }
+        if (answer === 1) {
+          this.computerValue = [];
+          CONSOLE_UTIL.print("숫자 야구 게임을 시작합니다.");
+          this.play();
+        }
+        return CONSOLE_UTIL.close();
+      }
+    );
+  }
+
   play() {}
 }
 
