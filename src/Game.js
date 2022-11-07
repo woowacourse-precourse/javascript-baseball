@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const { exception, pickedWrongChoice } = require("./Exception");
+const { GAME } = require("./setting/message");
 
 const START_VALUE = 0;
 const STRIKE_VALUE = 3;
@@ -9,7 +10,8 @@ const GAME_EXIT = "2";
 
 class Game {
     constructor() {
-        this.startMessage = new Computer().startMessage();
+        // this.startMessage = new Computer().startMessage();
+        Console.print(GAME.START);
         this.computersNumber = new Computer().pickedNum();
     }
 
@@ -35,11 +37,10 @@ class Game {
     }
 
     playGame() {    
-        Console.readLine("숫자를 입력해주세요 : ", usersNumber => {
+        Console.readLine(GAME.INPUT_NUMBER, usersNumber => {
             exception(usersNumber);
             usersNumber = this.usersArray(usersNumber);
   
-            // 볼 스트라이크 갯수 구하기, resultMessage함수 결과 출력
             const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
             this.resultMessage(howManyStrike, howManyBall);
             
@@ -49,8 +50,8 @@ class Game {
     }
     
     gameOver() {
-        new Computer().successMessage();
-        Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
+        Console.print(GAME.SUCCESS);
+        Console.readLine(GAME.RESTART_OR_EXIT, (choice) => {
             if (choice === GAME_RESTART) return this.pickedRestart();
             if (choice === GAME_EXIT) return this.pickedClose();
             return pickedWrongChoice();
