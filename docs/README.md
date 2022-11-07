@@ -17,24 +17,24 @@
     - [x] 종료한다고 하면 즉시 실행 종료
     - [x] 새로운 게임을 시작하면 다시 상대방(컴퓨터)의 3자리 숫자를 랜덤으로 받아오고 게임진행 
 
-# 파일설명
+# 함수설명
 
-## ComputerNumber.js
+## computerNumber
 - 랜덤으로 숫자를 받아올 때 길이가 3이 되면 즉시 종료하며 랜덤으로 받은 3자리 숫자를 반환하는 함수
 
-## GameStart.js
+## gameStart
 - 게임 실행을 위한 startMessage 와 selectGame를 require를 통해 가져오는 함수
 
-## NumberCompare.js
+## numberCompare
 - 컴퓨터와 유저의 숫자를 비교하여 볼과 스트라이크 숫자를 카운팅 후 그 결과를 반환해주는 함수
 
-## SelectGame.js
+## selectGame
 - 사용자의 숫자를 입력받고 입력받은 숫자가 미리 설정한 예외처리를 통과하는지를 판별 후 numberCompare 함수를 통해 3스트라이크가 나오면 재시작 여부를 묻고 선택된 결과에 따라 재시작 혹은 종료를 하는 함수
 
-## StartMessage.js
+## startMessage
 - 게임 시작을 알리는 메시지를 출력하는 함수
 
-## ThrowHandling.js
+## throwHandling
 - 예외처리하는 함수로 사용자가 3자릿수를 초과하는 숫자를 입력하는 경우, 사용자가 줄복된 숫자를 입력한 경우, 0을 포함하여 입력한 경우로 예외처리를 하게 만들었다.
 
 ## UserData.js
