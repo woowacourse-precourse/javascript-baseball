@@ -18,7 +18,28 @@ class App {
       this.resetCountBoard();
       this.compareUserAndComputer(input);
       this.makeResult();
+      this.decideReprocess();
     });
+  }
+
+  restartOrEnd() {
+    Console.readLine(MESSAGE.RESTARTOREND, input => {
+      Function.validOneOrTwo(input);
+      if (input === '1') {
+        this.play();
+      } else {
+        Function.endApp();
+      }
+    });
+  }
+
+  decideReprocess() {
+    if (this.countBoard.strike === 3) {
+      Console.print(MESSAGE.THREESTRIKE);
+      this.restartOrEnd();
+    } else {
+      this.process();
+    }
   }
 
   makeResult() {
