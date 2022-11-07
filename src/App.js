@@ -15,7 +15,6 @@ class App {
   play() {
     this.gamaStartAlram();
     this.createRandomNum();
-    this.setComputerNums();
     this.getAnswer();
   }
 
@@ -25,10 +24,6 @@ class App {
       computerRandomNums.add(pickNumberInRange(1, 9));
     }
     return this.#computerNums = [...computerRandomNums].join('');
-  }
-
-  setComputerNums() {
-    this.#computerNums = this.createRandomNum();
   }
 
   getAnswer() {
