@@ -39,12 +39,13 @@ class App {
   getInputNumber() {
     const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
 
-    Console.readLine(INPUT_NUMBER_MESSAGE, (inputNumber) => {
-      this.handleGameException(inputNumber);
-      const joinInputNumber = this.joinNumberToString(inputNumber);
-
-      return joinInputNumber;
+    let inputNumber;
+    Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
+      this.handleGameException(input);
+      inputNumber = this.joinNumberToString(input);
     });
+
+    return inputNumber;
   }
   joinNumberToString(inputNumber) {
     const stringArr = inputNumber.map((number) => String(number));
