@@ -53,15 +53,19 @@ class App {
     return this.endOrRetry();
   }
 
+  endOrRetry() {
+    return this.endOrRetryMessage().getInputOneOrTwo();
+  }
+
   endOrRetryMessage() {
     Console.print(MESSAGE.STRIKE_OUT);
     Console.print(MESSAGE.RETRY_OR_END);
+    return this;
   }
 
-  endOrRetry() {
-    this.endOrRetryMessage();
+  getInputOneOrTwo() {
     Console.readLine('', input => {
-      this.checkOneOrTwo(input);
+      return this.checkOneOrTwo(input);
     });
   }
 
