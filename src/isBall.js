@@ -6,7 +6,12 @@ const isBall = (initNum, userNum) => {
       ? ball++
       : null;
   });
-  return ball;
+
+  if (ball === 0) {
+    return null;
+  } else {
+    return `${ball}볼`;
+  }
 };
 
 module.exports = isBall;
