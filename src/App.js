@@ -16,6 +16,17 @@ class App {
 
   }
 
+  getUserGuess(computerNum) {
+    Console.readLine("숫자를 입력해주세요 : ", (userGuess) => {
+      const [ballCnt, strCnt] = this.getGuessRst(userGuess, computerNum);
+      const rstMsg = this.getRstMsg(ballCnt, strCnt);
+      Console.print(rstMsg);
+
+      if(strCnt === 3) this.askRestart();
+      if(strCnt !== 3) this.getUserGuess;
+    })
+  }
+
   exitGame() {
     Console.print("게임을 종료합니다.");
     Console.close();
