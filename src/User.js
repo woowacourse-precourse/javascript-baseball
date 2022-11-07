@@ -1,3 +1,5 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 class User {
   guessNum() {
     Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
@@ -37,3 +39,5 @@ class User {
     throw new Error("적절한 입력이 아닙니다. 게임을 종료합니다.");
   }
 }
+
+module.exports = User;

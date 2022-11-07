@@ -1,11 +1,11 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { Computer } = require("./Computer");
-const { User } = require("./User");
+const Computer = require("./Computer");
+const User = require("./User");
 
 class App {
   constructor() {
-    this.computer = new Computer();
     this.user = new User();
+    this.computer = new Computer();
   }
 
   play() {

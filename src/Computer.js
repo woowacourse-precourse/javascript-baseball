@@ -6,3 +6,5 @@ class Computer {
     return random3.join("");
   }
 }
+
+module.exports = Computer;
