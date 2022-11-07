@@ -86,6 +86,9 @@ class App {
         MissionUtils.Console.close();
         MissionUtils.Console.print('게임 종료');
       }
+      if (Number(inputNum) !== 1 && Number(inputNum) !== 2) {
+        throw new Error('재시작은 1, 종료는 2를 눌러주세요.');
+      }
     });
   }
 
