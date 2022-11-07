@@ -58,7 +58,7 @@ class Game {
         });
     }
 
-    usersArray(usersNumber) {
+    getUsersArray(usersNumber) {
         return [...usersNumber].map(idx => parseInt(idx));
     }
 
