@@ -33,6 +33,7 @@ function baseBall(answers){
   Console.readLine('숫자를 입력해주세요 : ', (inputNums) => {
     exceptionHandling(inputNums);
     nothing = isNothing(answers, inputNums);
+    if(!nothing) countStrike = isStrike(answers, inputNums);
   });
 }
 
@@ -55,6 +56,17 @@ function isNothing(answers, input){
   if(boolNothing) Console.print('낫싱');
 
   return boolNothing;
+}
+
+function isStrike(answers, input){
+  input = Array.from(input);
+  let cnt = 0;
+  for(let i=0; i<3; ++i) {
+    let singleNum = input.pop();
+    singleNum = Number(singleNum);
+    if(answers.indexOf(singleNum) == 2-i) cnt++;
+  }
+  return cnt;
 }
 
 module.exports = App;
