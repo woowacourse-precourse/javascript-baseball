@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const pickNumber = require("./pickNumber.js");
+const numberInput = require("./numberInput.js");
 
 class App {
   play() {
@@ -9,6 +10,10 @@ class App {
 
   gameStart() {
     const computerNums = pickNumber.pickComputerNum();
+
+    while (true) {
+      const inputNumber = numberInput();
+    }
   }
 }
 
