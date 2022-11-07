@@ -15,7 +15,7 @@
   - 게임 결과(#GAME_RESULT) 메세지(STRIKE: `스트라이크`, BALL: `볼`, NOTHING: `낫싱`) 선언, 할당
   - (추가구현)에러(#ERROR_MSG) 메세지(ONLY_NUMBERS: `숫자만 입력해주세요.`, INVALID_LENGTH: `반드시 3개의 숫자를 입력해주세요.`, DUPLICATE_NUMBERS: `서로 다른 3개의 숫자를 입력해주세요.`, ONLY_ONE_OR_TWO: `1 또는 2를 입력해주세요.`) 선언, 할당
 
-- [ ] 2. 생성자 메서드(constructor) 초기화
+- [x] 2. 생성자 메서드(constructor) 초기화
   - 사용자의 3자리 숫자를 담을 변수(`userNumbers`) 선언
   - 상대방(컴퓨터)의 3자리 숫자를 담을 private 변수(`#computerNumbers`) 선언
   - 사용자 승리 상태를 담을 변수(`#isUserWinned`) 선언, false 할당

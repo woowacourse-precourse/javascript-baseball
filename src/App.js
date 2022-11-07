@@ -12,6 +12,12 @@ class App {
     DUPLICATE_NUMBERS: "서로 다른 3개의 숫자를 입력해주세요.",
     ONLY_ONE_OR_TWO: "1 또는 2를 입력해주세요.",
   };
+  constructor() {
+    this.userNumbers = null;
+    this.#computerNumbers = null;
+    this.#isUserWinned = false;
+    this.#isStartGame = true;
+  }
   play() {}
 }
 
