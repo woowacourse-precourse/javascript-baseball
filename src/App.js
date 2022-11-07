@@ -7,12 +7,16 @@ class App {
   }
 
   play() {
+    console.log("숫자 야구 게임을 시작합니다.");
     this.computerInput = this.selectRandomNumber();
-    this.userInput = [1, 2, 3]; // 디버깅용
-    // this.userInputNumber();
+    console.log(`정답: ${this.computerInput}`);
 
-    console.log(`정답: ${this.computerInput} / 입력: ${this.userInput}`);
-    this.compareNumber(this.userInput);
+    this.userInputNumber();
+
+    // this.computerInput = [1, 2, 3]; // 디버깅용
+    // this.userInput = [1, 1, 1]; // 디버깅용
+
+    // this.compareNumber(this.userInput);
 
     return;
   }
@@ -29,12 +33,16 @@ class App {
     return randomNumber;
   }
 
-  // userInputNumber() {
-  //   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-  //     this.userInput = answer.split("");
-  //   });
-  //   this.compareNumber(this.userInput);
-  // }
+  userInputNumber() {
+    // MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    //   this.userInput = answer.split("");
+    // });
+    this.userInput = [1, 2, 3];
+    console.log(this.userInput);
+
+    this.isValidate(this.userInput);
+    this.compareNumber(this.userInput);
+  }
 
   compareNumber() {
     let score = [0, 0]; //[ 볼, 스트라이크]
@@ -44,16 +52,19 @@ class App {
     if (score[0] === 0 && score[1] === 0) {
       result = "낫싱";
     } else if (score[1] === 3) {
-      result = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+      result = "3스트라이크";
     } else {
       result = `${score[0]}볼 ${score[1]}스트라이크`;
     }
 
     console.log(result);
+
+    if (score[1] === 3) {
+      this.finishOrRestart();
+    }
   }
 
   isStrike(ans, input, score) {
-    console.log(ans, input);
     for (let i = 0; i < 3; i++) {
       if (input[i] === ans[i]) {
         score[1] += 1;
@@ -76,6 +87,33 @@ class App {
         score[0] += 1;
       }
     }
+  }
+  finishOrRestart() {
+    console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+
+    let selected = 2;
+    if (selected === 1) {
+      this.play();
+    } else if (selected === 2) {
+      MissionUtils.Console.close();
+    } else {
+      console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    }
+  }
+  isValidate(input) {
+    input.map((num) => {
+      if (typeof num !== "number") {
+        throw new Error("숫자를 입력하세요");
+      }
+      if (input.includes(`${num}`) === true) {
+        throw new Error("서로 다른 3자리 숫자를 입력하세요");
+      }
+    });
+    if (input.length !== 3) {
+      throw new Error("3자리 숫자를 입력하세요");
+    }
+    // - 반복되는 숫자가 존재할 시
   }
 }
 
