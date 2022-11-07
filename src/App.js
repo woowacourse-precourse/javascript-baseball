@@ -76,7 +76,7 @@ class App {
     if(MenuNum==='1'){
       this.play();
     }else{
-      MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+      MissionUtils.Console.print("숫자 야구 프로그램을 종료합니다");
       MissionUtils.Console.close();
     }
   }
