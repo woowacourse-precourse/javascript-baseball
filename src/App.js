@@ -87,21 +87,25 @@ class App {
   }
 
   handleGameException(inputNumber) {
-    const NOT_A_NUMBER_EXCEPTION = '입력값이 숫자가 아닙니다.';
-    const NOT_INTEGER_EXCEPTION = '입력값이 정수가 아닙니다.';
-    const NUMBER_OF_DIGITS_EXCEPTION = `입력값이 ${this.NUMBER_OF_DIGITS}자리의 수가 아닙니다.`;
-    const SAME_NUMBER_EXCEPTION = '입력한 3자리의 수 중 같은 수가 존재합니다.';
+    const GAME_EXCEPTION = {
+      NOT_A_NUMBER: '입력값이 숫자가 아닙니다.',
+      NOT_INTEGER: '입력값이 정수가 아닙니다.',
+      NUMBER_OF_DIGITS: `입력값이 ${this.NUMBER_OF_DIGITS}자리의 수가 아닙니다.`,
+      SAME_NUMBER: '입력한 3자리의 수 중 같은 수가 존재합니다.',
+    };
+
+    Object.freeze(GAME_EXCEPTION);
 
     let errorMessage = null;
 
     if (isNaN(inputNumber)) {
-      errorMessage = NOT_A_NUMBER_EXCEPTION;
+      errorMessage = GAME_EXCEPTION.NOT_A_NUMBER;
     } else if (this.isNotInteger(inputNumber)) {
-      errorMessage = NOT_INTEGER_EXCEPTION;
+      errorMessage = GAME_EXCEPTION.NOT_INTEGER;
     } else if (this.isIncorrectNumberOfDigits(inputNumber)) {
-      errorMessage = NUMBER_OF_DIGITS_EXCEPTION;
+      errorMessage = GAME_EXCEPTION.NUMBER_OF_DIGITS;
     } else if (this.hasSameNumber(inputNumber)) {
-      errorMessage = SAME_NUMBER_EXCEPTION;
+      errorMessage = GAME_EXCEPTION.SAME_NUMBER;
     }
 
     if (errorMessage === null) {
@@ -176,19 +180,24 @@ class App {
   }
 
   printGameResultMessage(numberOfStrike, numberOfBall) {
-    const BALL_MESSAGE = `${numberOfBall}볼`;
-    const STRIKE_MESSAGE = `${numberOfStrike}스트라이크`;
-    const BOTH_MESSAGE = `${BALL_MESSAGE} ${STRIKE_MESSAGE}`;
-    const NOTHING_MESSAGE = '낫싱';
+    const MESSAGE = {
+      BALL: `${numberOfBall}볼`,
+      STRIKE: `${numberOfStrike}스트라이크`,
+      NOTHING: '낫싱',
+    };
+
+    Object.freeze(MESSAGE);
+
+    const MESSAGE_BOTH = `${MESSAGE.BALL} ${MESSAGE.STRIKE}`;
 
     if (numberOfBall && numberOfStrike) {
-      Console.print(BOTH_MESSAGE);
+      Console.print(MESSAGE_BOTH);
     } else if (numberOfBall) {
-      Console.print(BALL_MESSAGE);
+      Console.print(MESSAGE.BALL);
     } else if (numberOfStrike) {
-      Console.print(STRIKE_MESSAGE);
+      Console.print(MESSAGE.STRIKE);
     } else {
-      Console.print(NOTHING_MESSAGE);
+      Console.print(MESSAGE.NOTHING);
     }
   }
 
@@ -218,15 +227,19 @@ class App {
   }
 
   handleRestartException(inputRestart, RESTART, EXIT) {
-    const NOT_A_NUMBER_EXCEPTION = '입력값이 숫자가 아닙니다.';
-    const NOT_CORRECT_NUMBER = `입력값이 ${RESTART} 또는 ${EXIT}이(가) 아닙니다.`;
+    const RESTART_EXCEPTION = {
+      NOT_A_NUMBER: '입력값이 숫자가 아닙니다.',
+      NOT_CORRECT_NUMBER: `입력값이 ${RESTART} 또는 ${EXIT}이(가) 아닙니다.`,
+    };
+
+    Object.freeze(RESTART_EXCEPTION);
 
     let errorMessage = null;
 
     if (isNaN(inputRestart)) {
-      errorMessage = NOT_A_NUMBER_EXCEPTION;
+      errorMessage = RESTART_EXCEPTION.NOT_A_NUMBER;
     } else if (inputRestart !== RESTART && inputRestart !== EXIT) {
-      errorMessage = NOT_CORRECT_NUMBER;
+      errorMessage = RESTART_EXCEPTION.NOT_CORRECT_NUMBER;
     }
 
     if (errorMessage === null) {
