@@ -14,20 +14,11 @@ class App {
   }
 
   play() {
-    do {
-      this.randomNumber();
-      this.userInput();
-    } while (this.strike() != "3스트라이크");
-    if (this.strike() == 3) {
-      print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-      readLine((overInput) => {
-        this.overInputNum = overInput;
-        this.overChoice();
-      });
-    }
+    this.randomNumber();
+    this.userInput();
   }
 
+  // userInput logic
   userInit() {
     if (this.inputNum == null) print("숫자 야구 게임을 시작합니다.");
   }
@@ -37,7 +28,7 @@ class App {
     readLine("숫자를 입력해주세요 : ", (input) => {
       this.inputNum = input;
       if (!this.checkInputValidation()) {
-        throw "잘못된 값을 입력하셨습니다.";
+        throw new Error("잘못된 값을 입력하셨습니다.");
       }
       this.game();
       close();
@@ -69,6 +60,11 @@ class App {
   }
 
   // 종료 후 logic
+  overMessage() {
+    print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+  }
+
   overChoice() {}
 
   // 숫자 야구 게임 logic
