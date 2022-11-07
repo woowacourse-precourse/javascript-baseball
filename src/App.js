@@ -25,7 +25,7 @@ class App {
 		this.printMessage(GAME_MESSAGES.START_MESSAGE);
 		this.playMainGame();
 		this.printMessage(GAME_MESSAGES.GAME_RESTART_MESSAGE);
-		this.checkRestart();
+		this.checkRestart(this.getRestartAnswer());
 	}
 
 	playMainGame() {
@@ -40,19 +40,29 @@ class App {
 		}
 	}
 
-	checkRestart() {
+	getRestartAnswer() {
+		let restartAnswer;
 		MissionUtils.Console.readLine(GAME_MESSAGES.GAME_RESTART_MESSAGE, answer => {
-			if (!(answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO)) {
+			if (!this.validateRestartAnswer(answer)) {
 				this.closeConsole();
 				throw new Error(GAME_MESSAGES.RESTART_ERROR_MESSAGE);
 			}
-			if (answer === RESTART_ANSWER.YES) {
-				this.printMessage(answer);
-				this.playMainGame();
-				return;
-			}
-			this.closeConsole();
+			restartAnswer = answer;
 		});
+		return restartAnswer;
+	}
+
+	validateRestartAnswer(answer) {
+		return answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO;
+	}
+
+	checkRestart(answer) {
+		if (answer === RESTART_ANSWER.YES) {
+			this.printMessage(answer);
+			this.playMainGame();
+			return;
+		}
+		this.closeConsole();
 	}
 
 	closeConsole() {
@@ -89,10 +99,7 @@ class App {
 		if (userNumberSet.size !== NUMBER_LENGTH) {
 			return false;
 		}
-		if (userNumberSet.has(SHOULD_NOT_INCLUDE_NUMBER)) {
-			return false;
-		}
-		return true;
+		return !userNumberSet.has(SHOULD_NOT_INCLUDE_NUMBER);
 	}
 
 	getCompareResult(computerNumber, userNumber) {
