@@ -29,4 +29,10 @@ describe('getThreeRandomArray()', () => {
       expect(target >= 1 && target <= 9).toBeTruthy();
     });
   });
+
+  test('첫번째 요소는 1부터 3까지 범위의 값을 반환한다.', () => {
+    const random = new Random();
+    const target = random.getThreeRandomArray()[0];
+    expect(target >= 1 && target <= 3).toBeTruthy();
+  });
 });
