@@ -26,7 +26,7 @@ class Constraints {
       inputData = inputData.split("");
     }
 
-    for (let i = 0; i < inputData.length; i++) {
+    for (let i = 0; i < inputData.length - 1; i++) {
       if (
         inputData.indexOf(inputData[i]) !== inputData.lastIndexOf(inputData[i])
       ) {
