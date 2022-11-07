@@ -55,19 +55,24 @@ class App {
       this.endGame();
     }
     if (strikeCount && strikeCount !== 3) {
-      !ballCount
-        ? CONSOLE_UTIL.print(`${strikeCount}스트라이크`)
-        : CONSOLE_UTIL.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-
-      return this.acceptUserNumber();
+      this.strikeOrBallStrike(strikeCount, ballCount);
+      this.acceptUserNumber();
     }
     if (!strikeCount) {
-      !ballCount
-        ? CONSOLE_UTIL.print("낫싱")
-        : CONSOLE_UTIL.print(`${ballCount}볼`);
-
-      return this.acceptUserNumber();
+      this.nothingOrBall(ballCount);
+      this.acceptUserNumber();
     }
+  }
+
+  strikeOrBallStrike(ballCount, strikeCount) {
+    !ballCount
+      ? CONSOLE_UTIL.print(`${strikeCount}스트라이크`)
+      : CONSOLE_UTIL.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+  }
+  nothingOrBall(ballCount) {
+    !ballCount
+      ? CONSOLE_UTIL.print("낫싱")
+      : CONSOLE_UTIL.print(`${ballCount}볼`);
   }
 
   endGame() {
