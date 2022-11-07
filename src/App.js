@@ -20,7 +20,20 @@ class App {
   }
 
   getUserNum() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (number) => {});
+    console.log("시작1");
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+      if (!this.isUserNumValid(number)) throw "입력값이 잘못되었습니다.";
+    });
+  }
+
+  isUserNumValid(userNum) {
+    var userNumArr = userNum.split("");
+    var userNumSet = new Set(userNumArr);
+    if (userNumSet.size !== userNumArr.length) return false;
+    else if (userNum.length !== 3) return false;
+    else if (userNum >= "100" && userNum <= "999") return false;
+    else if (userNumArr.includes(0)) return false;
+    else return true;
   }
 }
 
