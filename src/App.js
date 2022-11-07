@@ -5,21 +5,28 @@ class App {
   answers = [];
   userInputs = [];
 
-  play() {
-    this.answers = computerUtils.getRandomNumber();
-    Console.print('숫자 야구 게임을 시작합니다.');
+  handleInput = (input) => {
+    computerUtils.validateInput(input);
+    this.userInputs = input.split('').map((input) => Number(input));
 
-    const handleInput = (input) => {
-      computerUtils.validateInput(input);
-      this.userInputs = input.split('').map((input) => Number(input));
-      Console.print(computerUtils.generateHint(this.userInputs, this.answers));
-    };
+    const hint = computerUtils.generateHint(this.userInputs, this.answers);
+    Console.print(hint);
 
-    this.readLine(handleInput);
-  }
+    this.readLine(this.handleInput);
+  };
 
   readLine(handleInputCallback) {
     Console.readLine('숫자를 입력해주세요 : ', (input) => handleInputCallback(input));
+  }
+
+  init() {
+    this.answers = computerUtils.getRandomNumber();
+    Console.print('숫자 야구 게임을 시작합니다.');
+  }
+
+  play() {
+    this.init();
+    this.readLine(this.handleInput);
   }
 }
 
