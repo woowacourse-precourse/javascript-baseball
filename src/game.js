@@ -12,6 +12,17 @@ class Game {
   }
   init() {
     this.print(MESSAGE.START);
+    this.answerNumber = this.createRandomNumber();
+  }
+  createRandomNumber() {
+    let ramdomNumberArr = [];
+    while (this.ramdomNumberArr.length < LENGTH) {
+      const N = Random.piickNumberInRange(MIN, MAX);
+      if (!ramdomNumberArr.includes(N)) {
+        ramdomNumberArr.push(N);
+      }
+    }
+    return ramdomNumberArr;
   }
   print(message) {
     return Console.log(print(message));
