@@ -1,4 +1,8 @@
 {
   "extends": ["airbnb", "plugin:prettier/recommended"],
-  "rules": { "prettier/prettier": "error", "import/extensions": "off" }
+  "rules": {
+    "prettier/prettier": "error",
+    "import/extensions": "off",
+    "no-undef": "off"
+  }
 }
