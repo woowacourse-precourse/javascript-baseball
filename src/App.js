@@ -101,6 +101,15 @@ class App {
       this.askForNumbers();
     }
   }
+
+  askRestart() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        // 게임 재시작 여부 답변 핸들링 함수로 전달
+      }
+    );
+  }
 }
 
 const app = new App();
