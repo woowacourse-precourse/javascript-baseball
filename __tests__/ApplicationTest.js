@@ -49,7 +49,7 @@ describe("숫자 야구 게임", () => {
 
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const answers = ["1234", "122", "abc", "1 2 3", "12", "120"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
