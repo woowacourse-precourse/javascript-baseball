@@ -2,35 +2,39 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {
-    const computer_nums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.generate_computerNums();
 
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
-    this.match(computer_nums);
+    this.match(this.computerNums);
   }
 
-  match(computer_nums) {
+  generate_computerNums() {
+    this.computerNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
+
+  match() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      const player_nums = answer.split('').map(Number);
+      const playerNums = answer.split('').map(Number);
 
       try {
-        this.vaildation_player_nums(player_nums);
+        this.vaildation_playerNums(playerNums);
       } catch (e) {
-        MissionUtils.Console.close();
         console.error(e);
+        MissionUtils.Console.close();
         return; 
       }
 
-      if(this.compare(computer_nums, player_nums)) {
+      if(this.compare(playerNums)) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.ask_restart();
       } else {
-        this.match(computer_nums);
+        this.match();
       }
     });
   }
 
-  vaildation_player_nums(nums) {
+  vaildation_playerNums(nums) {
     if (nums.length !== 3) {
       throw 'Invaild Value: answer of length is not 3!';
     }
@@ -51,23 +55,20 @@ class App {
     }
   }
 
- compare(computer_nums, player_nums) {
+ compare(playerNums) {
     let strike = 0;
     let ball = 0;
 
-    player_nums.forEach((item, idx) => {
-      if (computer_nums.indexOf(item) == idx) strike += 1;
-      else if (computer_nums.indexOf(item) > -1) ball += 1;
+    playerNums.forEach((item, idx) => {
+      if (this.computerNums.indexOf(item) == idx) strike += 1;
+      else if (this.computerNums.indexOf(item) > -1) ball += 1;
     });
 
-    if(ball <= 0 && strike <= 0) {
-      MissionUtils.Console.print('낫싱');
-      return false;
-    }
-
-    let result = '';
-    if (ball > 0) result += `${ball}볼 `;
-    if (strike > 0) result += `${strike}스트라이크`;
+    let result;
+    if (ball > 0 && strike > 0) result = `${ball}볼 ${strike}스트라이크`;
+    else if (ball > 0) result = `${ball}볼`;
+    else if (strike > 0) result = `${strike}스트라이크`;
+    else result = '낫싱';
 
     MissionUtils.Console.print(result);
 
@@ -78,7 +79,8 @@ class App {
   ask_restart() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => { 
       if(answer === '1') {
-        this.play();
+        this.generate_computerNums();
+        this.match();
       } else if (answer === '2') {
         MissionUtils.Console.close();
       }
