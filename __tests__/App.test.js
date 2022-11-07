@@ -112,4 +112,15 @@ describe('userInteraction()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('2볼 1스트라이크');
   });
+
+  test('하나도 없는 경우 낫싱 문구를 출력한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+    const userInputArray = [1, 2, 3];
+    const computerInputArray = [4, 5, 6];
+
+    app.userInteraction(userInputArray, computerInputArray);
+
+    expect(logSpy).toHaveBeenCalledWith('낫싱');
+  });
 });
