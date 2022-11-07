@@ -14,6 +14,19 @@ const getRandomNumber = () => {
 };
 
 /**
+ * 사용자가 숫자 3개를 입력한다
+ * @returns {number[]} 사용자가 입력한 숫자
+ */
+const guessUserNumber = () => {
+  let guessNumber;
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (x) => {
+    guessNumber = x;
+  });
+  MissionUtils.Console.close();
+  return guessNumber.split('');
+};
+
+/**
  * strike 개수를 구한다
  * @param {number[]} computerNumber - 컴퓨터가 고른 숫자
  * @param {string[]} guessNumber - 사용자가 예상한 숫자
@@ -60,20 +73,36 @@ const getResult = (strike, ball) => {
   return '낫싱';
 };
 
+/**
+ * 게임을 계속할지 그만둘지 선택한다
+ * @returns {string} 계속할지 그만둘지 입력한 결과
+ */
+const continueOrFinish = () => {
+  let input;
+  MissionUtils.Console.readLine(
+    '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+    (x) => {
+      input = x;
+    },
+  );
+  MissionUtils.Console.close();
+  return input;
+};
+
+const inputException = (guessNumber) => {
+  if (guessNumber.length !== 3) throw new Error('예외');
+};
+
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     let computerNumber = getRandomNumber();
     const IS_PLAYING = true;
     while (IS_PLAYING) {
-      let guessNumber;
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (x) => {
-        guessNumber = x;
-      });
-      this.guessNumber = guessNumber.split(''); // expected 'this' to be used by class method 'play'. 해결 위함
-      MissionUtils.Console.close();
+      const guessNumber = guessUserNumber();
+
       try {
-        if (guessNumber.length !== 3) throw new Error('예외');
+        inputException(this.guessNumber);
       } catch (e) {
         // console.log();
         // MissionUtils.Console.print(e);
@@ -85,14 +114,7 @@ class App {
       MissionUtils.Console.print(getResult(strike, ball));
 
       if (strike === 3) {
-        let input;
-        MissionUtils.Console.readLine(
-          '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-          (x) => {
-            input = x;
-          },
-        );
-        MissionUtils.Console.close();
+        const input = continueOrFinish();
 
         if (input.toString() === '2') {
           MissionUtils.Console.print('게임 종료');
