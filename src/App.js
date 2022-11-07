@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -6,8 +6,7 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.startGame();
   }
 
@@ -20,8 +19,7 @@ class App {
     const numbers = [];
 
     while (numbers.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-
+      const number = Random.pickNumberInRange(1, 9);
       if (!numbers.includes(number)) {
         numbers.push(number);
       }
@@ -31,7 +29,7 @@ class App {
   }
 
   guessNumbers() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if (answer.length > 3) {
         throw new Error("error/over-length-user-input");
       }
@@ -45,10 +43,10 @@ class App {
   }
 
   replay() {
-    MissionUtils.Console.readLine(
+    Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
-        answer === "1" ? this.startGame() : MissionUtils.Console.close();
+        answer === "1" ? this.startGame() : Console.close();
       }
     );
   }
@@ -82,14 +80,14 @@ class App {
       resultMessage += ` ${memo.strike}스트라이크`;
     }
 
-    if (!resultMessage) {
+    if (memo.ball === 0 && memo.strike === 0) {
       resultMessage = "낫싱";
     }
 
-    MissionUtils.Console.print(resultMessage.trim());
+    Console.print(resultMessage.trim());
 
     if (memo.strike === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
   }
 }
