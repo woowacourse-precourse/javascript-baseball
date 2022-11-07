@@ -11,14 +11,6 @@ class App {
     this.askNumInput();
   }
 
-  printMsg(message) {
-    MissionUtils.Console.print(message);
-  }
-
-  greetingMsg() {
-    this.printMsg("숫자 야구 게임을 시작합니다.");
-  }
-
   setAnswer() {
     const answer = [];
     while (answer.length < 3) {
@@ -88,18 +80,6 @@ class App {
     }
   }
 
-  isNothing() {
-    this.printMsg("낫싱");
-    this.askNumInput();
-  }
-
-  isThreeStrike() {
-    this.printMsg("3스트라이크");
-    this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    this.ANSWER = [];
-    this.askRematchOrExit();
-  }
-
   countBallOrStrike(input) {
     var ballCount = 0;
     var strikeCount = 0;
@@ -113,6 +93,18 @@ class App {
       if (answerSet.has(+input[idx])) ballCount += 1;
     }
     return { ballCount, strikeCount };
+  }
+
+  isNothing() {
+    this.printMsg("낫싱");
+    this.askNumInput();
+  }
+
+  isThreeStrike() {
+    this.printMsg("3스트라이크");
+    this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.ANSWER = [];
+    this.askRematchOrExit();
   }
 
   askRematchOrExit() {
@@ -134,6 +126,14 @@ class App {
         }
       }
     );
+  }
+
+  printMsg(message) {
+    MissionUtils.Console.print(message);
+  }
+
+  greetingMsg() {
+    this.printMsg("숫자 야구 게임을 시작합니다.");
   }
 }
 
