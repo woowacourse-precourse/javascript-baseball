@@ -29,7 +29,7 @@ class App {
   askRestartOrQuit(){
     Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     Console.readLine('', (answer) => {
-      if(answer == 1) return this.play();
+      if(answer == 1) return this.startGame();
       if(answer == 2) return Console.print("게임 종료");
     })
   }
@@ -75,9 +75,12 @@ class App {
 
   play(){
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.startGame();
+  }
+
+  startGame(){
     this.computerInput();
     this.userInput();
-
   }
 }
 
