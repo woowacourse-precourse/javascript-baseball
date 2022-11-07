@@ -59,6 +59,7 @@ class App {
     for (let idx = 0; idx < this.userAnswer.length; idx++) {
       let userNum = this.userAnswer[idx];
       if (userNum === this.computerRandomNumber[idx]) this.strike++;
+      else if (this.computerRandomNumber.includes(userNum)) this.ball++;
     }
 
   }
