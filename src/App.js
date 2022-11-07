@@ -20,7 +20,14 @@ class App {
   }
 
   setAnswer() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const answer = [];
+    while (answer.length < 3) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(randomNum)) {
+        answer.push(randomNum);
+      }
+    }
+    return answer;
   }
 
   askNumInput() {
