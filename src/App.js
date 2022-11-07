@@ -11,7 +11,7 @@ class App {
     MissionUtils.Console.print(message);
   }
 
-  createComputerNumber() {
+  generateComputerNumber() {
     const computerNumber = [];
 
     while (computerNumber.length < 3) {
@@ -141,7 +141,7 @@ class App {
   }
 
   startNewGame() {
-    this.createComputerNumber();
+    this.generateComputerNumber();
     this.tryGetAnswer();
   }
 
