@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const pickNumber = require("./pickNumber.js");
 const numberInput = require("./numberInput.js");
 const compare = require("./compare.js");
+const hint = require("./hint.js");
 
 class App {
   play() {
@@ -15,6 +16,7 @@ class App {
     while (true) {
       const inputNumber = numberInput();
       const compare_value = compare(inputNumber, computerNums);
+      const result = hint(compare_value);
     }
   }
 }
