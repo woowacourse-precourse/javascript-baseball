@@ -11,6 +11,7 @@ class App {
     while (correctNumbers.size < 3) {
       correctNumbers.add(Random.pickNumberInRange(1, 9));
     }
+    return [...correctNumbers];
   }
 
   askForNumbers() {
