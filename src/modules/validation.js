@@ -16,10 +16,10 @@ const validateThreeFigures = (userInput) => {
 };
 
 const validateNextAction = (userInput) => {
-  if (!userInput === '1' || !userInput === '2') {
-    return false;
-  } else {
+  if (userInput === '1' || userInput === '2') {
     return true;
+  } else {
+    return false;
   }
 }
 
