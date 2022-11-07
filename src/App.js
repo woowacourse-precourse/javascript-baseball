@@ -8,6 +8,7 @@ class App {
     while (computer.size < 3) {
       computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
+
     return Number([...computer].join(""));
   }
 
@@ -24,11 +25,13 @@ class App {
       numArray.unshift(number % 10);
       number = parseInt(number / 10);
     }
+
     return numArray;
   }
 
   CompareInputWithComputer(input, computer) {
     let inputArray = this.NumberToArray(input);
+
     let computerArray = this.NumberToArray(computer);
 
     let result = new Map();
@@ -45,6 +48,7 @@ class App {
         result.set("볼", result.get("볼") + 1 ?? 1);
       }
     });
+
     this.gameResult = result;
     this.printResult();
   }
@@ -74,6 +78,7 @@ class App {
     let userQuestion =
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료" +
       "n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+
     MissionUtils.Console.readLine(userQuestion, (input) => {
       if (input == 1) {
         return this.play();
