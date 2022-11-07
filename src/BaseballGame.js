@@ -21,7 +21,6 @@ class BaseballGame {
         computerArr.push(randomNumber);
       }
     }
-
     this.computerNumber = computerArr.join('');
   }
 
@@ -39,7 +38,6 @@ class BaseballGame {
     const userList = this.userNumber.split('');
     let strike = 0;
     let ball = 0;
-
     computerList.map(x => {
       if (computerList.indexOf(x) === userList.indexOf(x)) {
         strike += 1;
@@ -47,13 +45,11 @@ class BaseballGame {
         ball += 1;
       }
     });
-
     this.displayResult(strike, ball);
   }
 
   displayResult(strike, ball) {
     let result = '';
-
     if (strike === 0 && ball === 0) {
       result = '낫싱';
     } else {
@@ -68,7 +64,6 @@ class BaseballGame {
       }
     }
     Console.print(result);
-
     if (result === `3${STRIKE}`) {
       Console.print(MISSION_COMPLETE);
       this.restartGameCheck();
