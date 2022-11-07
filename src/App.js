@@ -43,6 +43,8 @@ class App {
           this.isGameFinished = false;
           this.init();
           this.playGame();
+        } else {
+          MissionUtils.Console.close();
         }
       });
     });
