@@ -35,6 +35,8 @@ class App {
 
       playOptionNum = this.inputReplayNum();
     }
+
+    MissionUtils.Console.close();
   }
 
   start(computerNum) {
