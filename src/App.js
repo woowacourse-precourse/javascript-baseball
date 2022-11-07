@@ -9,6 +9,9 @@ class App {
     const computerNumber = createComputerNumber();
     this.playing(computerNumber);
   }
+  playing(computerNumber) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {});
+  }
 }
 function createComputerNumber() {
   const computer = [];
