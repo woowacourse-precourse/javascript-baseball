@@ -22,6 +22,15 @@ class App {
     });
   }
 
+  checkNumber(answerList) {
+    for (const i of answerList) {
+      if (isNaN(i)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // 사용자가 잘못된 값을 입력했는지 확인
   checkUserAnswer(answerList) {
     if(answerList.includes(0)) {
