@@ -37,13 +37,21 @@ class App {
     }
   }
   getAnswerNumber() {
-    const answer = MissionUtils.Random.pickUniqueNumbersInRange(
+    let answer = MissionUtils.Random.pickUniqueNumbersInRange(
       this.RANGE_START_NUMBER,
       this.RANGE_END_NUMBER,
       this.NUMBER_OF_DIGITS
     );
 
+    answer = this.joinNumberToString(answer);
+
     return answer;
+  }
+  joinNumberToString(numberArr) {
+    const stringArr = numberArr.map((number) => String(number));
+    const joinString = stringArr.join("");
+
+    return joinString;
   }
   printGameStartMessage() {
     const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
@@ -55,16 +63,10 @@ class App {
     let inputNumber;
     MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       this.handleGameException(input);
-      inputNumber = this.joinNumberToString(input);
+      inputNumber = input;
     });
 
     return inputNumber;
-  }
-  joinNumberToString(inputNumber) {
-    const stringArr = inputNumber.map((number) => String(number));
-    const joinString = stringArr.join("");
-
-    return joinString;
   }
   handleGameException(inputNumber) {
     const NOT_A_NUMBER_EXCEPTION = "입력값이 숫자가 아닙니다.";
