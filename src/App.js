@@ -68,6 +68,10 @@ class App {
     } else if (strikeBallCount[0] == 0 && strikeBallCount[1] == 0) {
       result = "낫싱";
     }
+    strikeBallCount[0] = 0;
+    strikeBallCount[1] = 0;
+    MissionUtils.Console.print(result);
+    this.startEnd(result);
   }
 }
 
