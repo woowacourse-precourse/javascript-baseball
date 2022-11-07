@@ -1,12 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { GAME_MESSAGES, RANGE_NUMBER, ERROR_MESSAGES } = require("./Constant");
 
-console.log(ERROR_MESSAGES);
-
 class App {
-  constructor() {
-    this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-  }
   play() {
     MissionUtils.Console.print(GAME_MESSAGES.START);
     App.startGame();
@@ -102,7 +97,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-
-console.log(app.play());
