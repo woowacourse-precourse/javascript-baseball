@@ -19,7 +19,6 @@ class App {
     Console.readLine(`${Message.input}`, (userInput) => {
       checkException(userInput);
       this.printResult(userInput);
-      Console.close();
     });
   }
 
