@@ -1,6 +1,6 @@
 const constant = require('../Constants');
 
-class Exception{
+class ExceptionCheck{
 
   inputError(input){
     if (!/[0-9]+/g.test(input) || String(input).includes('0')){
@@ -22,4 +22,4 @@ class Exception{
   }
 }
 
-module.exports = Exception;
+module.exports = ExceptionCheck;

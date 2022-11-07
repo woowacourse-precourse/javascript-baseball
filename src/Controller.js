@@ -4,12 +4,12 @@ const GameCalc = require('./model/Game');
 const randomNum = require('./model/Random');
 const printAnswer = require('./utils/Print');
 const Validation = require('./utils/validation');
-const Exception = require('./utils/Exception');
+const ExceptionCheck = require('./utils/Exception');
 
 class GameControl{
   constructor(){
     this.gamecount = 0;
-    this.error = new Exception();
+    this.error = new ExceptionCheck();
     this.validation = new Validation();
     this.answerNum;
   }

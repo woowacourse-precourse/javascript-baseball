@@ -1,5 +1,5 @@
-const Exception = require('./Exception');
-const error = new Exception();
+const ExceptionCheck = require('./Exception');
+const error = new ExceptionCheck();
 
 exports.inputError = (input) => {
   if(error.inputError(input) != false){
