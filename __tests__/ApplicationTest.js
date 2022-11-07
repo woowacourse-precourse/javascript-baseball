@@ -46,6 +46,7 @@ describe('숫자 야구 게임', () => {
             );
         });
     });
+
     test('게임 종료 후 종료', () => {
         const randoms = [1, 3, 5];
         const answers = ['246', '513', '135', '2'];
@@ -61,6 +62,7 @@ describe('숫자 야구 게임', () => {
             );
         });
     });
+
     test('나올 수 있는 모든 경우 확인', () => {
         const randoms = [1, 3, 5];
         const answers = [
@@ -98,6 +100,7 @@ describe('숫자 야구 게임', () => {
             );
         });
     });
+
     test('예외 테스트', () => {
         const randoms = [1, 3, 5];
         const answers = ['1234'];
@@ -108,6 +111,7 @@ describe('숫자 야구 게임', () => {
             app.play();
         }).toThrow();
     });
+
     test('예외 테스트2', () => {
         const randoms = [1, 3, 5];
         const answers = ['1123'];
@@ -118,6 +122,7 @@ describe('숫자 야구 게임', () => {
             app.play();
         }).toThrow();
     });
+
     test('예외 테스트3', () => {
         const randoms = [1, 3, 5];
         const answers = ['240'];
@@ -128,6 +133,7 @@ describe('숫자 야구 게임', () => {
             app.play();
         }).toThrow();
     });
+
     test('예외 테스트4', () => {
         const randoms = [1, 3, 5];
         const answers = ['abc'];
