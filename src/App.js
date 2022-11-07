@@ -1,5 +1,10 @@
+const BaseBallGame = require('./BaseBallGame'); 
+
 class App {
-  play() {}
+  play() {
+    const baseBallGame = new BaseBallGame();
+    baseBallGame.start();
+  }
 }
 
 module.exports = App;
