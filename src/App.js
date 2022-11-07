@@ -9,30 +9,30 @@ class App {
   play() {
     let gameStart = true;
     while (gameStart) {
-      const answer = this.getAnswerNumber();
-      this.printGameStartMessage();
-      let inputNumber;
+      this.startGame();
+      gameStart = this.getInputRestart();
+    }
+  }
+  startGame() {
+    const answer = this.getAnswerNumber();
+    this.printGameStartMessage();
+    let inputNumber;
 
-      let gameContinue = true;
-      while (gameContinue) {
-        inputNumber = this.getInputNumber();
+    let gameContinue = true;
+    while (gameContinue) {
+      inputNumber = this.getInputNumber();
 
-        const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
-        const numberOfBall = this.getNumberOfBall(
-          answer,
-          inputNumber,
-          numberOfStrike
-        );
-        this.printGameResultMessage(numberOfStrike, numberOfBall);
+      const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
+      const numberOfBall = this.getNumberOfBall(
+        answer,
+        inputNumber,
+        numberOfStrike
+      );
+      this.printGameResultMessage(numberOfStrike, numberOfBall);
 
-        if (this.isInputNumberCorrect(numberOfStrike)) {
-          printGameEndMessage();
-          gameContinue = false;
-        }
-      }
-
-      if (!this.getInputRestart()) {
-        gameStart = false;
+      gameContinue = !this.isInputNumberCorrect(numberOfStrike);
+      if (!gameContinue) {
+        printGameEndMessage();
       }
     }
   }
