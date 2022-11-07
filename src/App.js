@@ -8,13 +8,13 @@ class App {
     }
   }
 
-  getRandomComputerArray() {
-    let randomComputerArray = [];
-    while (randomComputerArray.length < 3) {
+  getRandomComputerArr() {
+    let randomComputerArr = [];
+    while (randomComputerArr.length < 3) {
       let randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      this.pushUniqueNumber(randomComputerArray, randomNumber);
+      this.pushUniqueNumber(randomComputerArr, randomNumber);
     }
-    return randomComputerArray;
+    return randomComputerArr;
   }
 
   pushUserInput(arr, num) {
@@ -24,11 +24,17 @@ class App {
   }
 
   responseUserInput() {
-    let userInputArray = [];
+    const comArr = this.getRandomComputerArr();
+    console.log(comArr);
+    let userInputArr = [];
     MissionUtils.Console.readLine("숫자를 입력하세요: ", (answer) => {
-      this.pushUserInput(userInputArray, answer);
-      //판별함수
-      //재시작, 종료
+      this.pushUserInput(userInputArr, answer);
+      const countedStrikeArr = this.countStrike(comArr, userInputArr);
+      const countedBallArr = this.countBall(
+        comArr,
+        userInputArr,
+        countedStrikeArr
+      );
     });
   }
 
@@ -36,11 +42,23 @@ class App {
     const countedStrikeArr = comArr.filter((element, index, array) => {
       return array[index] === userArr[index];
     });
-    const COUNTED_STRIKE = countedStrikeArr.length;
-    return COUNTED_STRIKE;
+    return countedStrikeArr;
   }
 
-  play() {}
+  countBall(comArr, userArr, countedStrikeArr) {
+    const comArrWithoutStrike = comArr.filter((element) => {
+      return !countedStrikeArr.includes(element);
+    });
+    const countedBallArr = comArrWithoutStrike.filter((element) => {
+      return userArr.includes(element);
+    });
+
+    return countedBallArr;
+  }
+
+  play() {
+    this.responseUserInput();
+  }
 }
 const app = new App();
 app.play();
