@@ -11,4 +11,15 @@ const pickComputerNum = () => {
   return computerNums;
 };
 
+const pickNewOrEnd = (pickOneOrTwo) => {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (number) => {
+          MissionUtils.Console.print(number);
+        pickOneOrTwo(number);
+      }
+    );
+  };
+
 exports.pickComputerNum = pickComputerNum;
+exports.pickNewOrEnd = pickNewOrEnd;
