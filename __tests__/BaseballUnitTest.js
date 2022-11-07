@@ -1,4 +1,5 @@
 const isNumber = require('../src/IsNumber');
+const checkStrike = require('../src/CountStrike')
 
 describe('사용자의 입력 값 확인', () => {
   test('입력 값 정상범위 확인', () => {
@@ -29,3 +30,10 @@ describe('사용자의 입력 값 확인', () => {
     }).toThrow('중복되지 않는 3자리의 숫자를 입력해주세요.');
   });
 });
+
+describe("스트라이크 여부 확인", () => {
+  test("스트라이크 개수", () => {
+    expect(checkStrike([4, 1, 6], [4, 5, 6])).toEqual(2);
+  });
+});
+

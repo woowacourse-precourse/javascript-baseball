@@ -1,5 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-
 const checkStrike = (computer, user) => {
   let countStrike = 0;
 
@@ -14,7 +12,7 @@ const checkStrike = (computer, user) => {
     return countStrike;
   });
 
-  return MissionUtils.Console.print(countStrike)
+  return countStrike
 };
 
 module.exports = checkStrike;
