@@ -1,6 +1,9 @@
+// modules
 const { Console, Random } = require('@woowacourse/mission-utils');
 const InputError = require('./InputError');
 const ValidationError = require('./ValidationError');
+
+// constants
 const { GAME_SETTING, RESULT } = require('./utils/constants');
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT } = GAME_SETTING;
 const { NOTHING, BALL, STRIKE } = RESULT;
