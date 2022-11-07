@@ -1,4 +1,3 @@
-const App = require('../src/App');
 const { checkError } = require('../src/util');
 
 describe('Error 테스트', () => {
