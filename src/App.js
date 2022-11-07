@@ -24,7 +24,6 @@ function printBeginGame() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 }
 
-// check if an array contains duplicates (true if duplicate exists)
 function checkDuplicates(array) {
   return new Set(array).size !== array.length;
 }
