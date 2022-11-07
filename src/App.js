@@ -30,7 +30,6 @@ class App {
         .split('')
         .map((num) => parseInt(num, 10));
       this.validateUserInput(userInputValue, false);
-      console.log('input', userNumber, this.answer);
       this.printResultMessage(userNumber);
       this.isGuessSuccess(userNumber);
     });
