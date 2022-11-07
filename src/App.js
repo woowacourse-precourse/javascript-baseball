@@ -3,11 +3,12 @@ const Render = require("./Render");
 const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
 const ComputerInput = require("./ComputerInput");
-
+const { ERROR } = require("./constants");
 class App {
   constructor() {
     this.computerInput = ComputerInput();
     this.firstTry = true;
+    this.errorResult = "123";
   }
 
   numToArr(num) {
@@ -34,15 +35,17 @@ class App {
 
     render.getUser().then((num) => {
       this.userNum = this.numToArr(num);
+
       const checkInputValid = new CheckInputValid({
         userNum: this.userNum,
-        retryNum: this.replayQnAResult,
       });
 
-      try {
-        checkInputValid.checkValidation();
-      } catch (error) {
-        throw new Error(error);
+      const errorResult = checkInputValid.checkValidation();
+
+      this.errorResult = errorResult;
+
+      if (this.errorResult !== ERROR.USER_INPUT_PASS) {
+        render.errorThrow(this.errorResult);
       }
 
       const gameJudgment = new GameJudgment({

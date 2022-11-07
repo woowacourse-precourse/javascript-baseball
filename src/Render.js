@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GAME = require("./constants");
+const { GAME } = require("./constants");
+const { ERROR } = require("./constants");
 
 class Render {
   constructor() {}
@@ -14,6 +15,10 @@ class Render {
         resolve(number);
       });
     });
+  }
+
+  errorThrow(errorResult) {
+    throw new Error(errorResult);
   }
 
   result({ ballCount, strikeCount }) {
