@@ -57,12 +57,24 @@ const getGameResult = (playerArr, computerArr) => {
   return [strike, ball];
 };
 
+const printResultMessage = ([strike, ball]) => {
+  let message = "";
+
+  (message = strike === 3 && "3스트라이크") ||
+    (message = strike !== 0 && ball !== 0 && `${ball}볼 ${strike}스트라이크`) ||
+    (message = strike === 0 && ball !== 0 && `${ball}볼`) ||
+    (message = strike !== 0 && ball === 0 && `${strike}스트라이크`) ||
+    (message = strike === 0 && ball === 0 && "낫싱");
+
+  return MissionUtils.Console.print(message);
+};
+
 const game = (computerNumber) => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = [...String(num)];
     let result = getGameResult(playerNumber, computerNumber);
 
-    validatePlayerNumber(num);
+    validatePlayerNumber(num) && printResultMessage(result);
   });
 };
 
