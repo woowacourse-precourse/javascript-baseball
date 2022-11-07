@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   computer = [];  // 컴퓨터의 수
 
@@ -11,15 +12,49 @@ class App {
     // 사용자의 수 입력받기
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       console.log("입력받은 수" + answer);
+
+      try {
+        // 3자리인지 확인
+        isThreeWord(answer);
+        
+        // 3자리가 모두 숫자인지 확인
+        console.log(typeof answer);
+
+
+        // 배열로 변환-
+        var arr = getArrFromInput(answer);
+
+
+      } catch (error) {
+        console.log(error);
+        MissionUtils.Console.close();
+      }
+      
+
     });
-
-
+    
 
 
   }
+}
+
+// 입력받은 수를 배열로 
+function getArrFromInput(input){
+  var arr = Array.from(input);
+  return arr;
+}
+
+// 사용자의 수 예외처리 1 - 길이가 3이 아니면 예외발생
+function isThreeWord(input){
+  if(input.length != 3){
+    throw "3자리 숫자가 아닙니다.";
+  }
+}
+
+// 사용자의 수 예외처리 2 - 숫자가 아니면 예외발생
+function isNumbers(input){
 
 }
-const MissionUtils = require("@woowacourse/mission-utils");
 
 // 컴퓨터의 수 선택
 function computersNumbers(){
