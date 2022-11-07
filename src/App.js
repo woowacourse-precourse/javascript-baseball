@@ -96,6 +96,7 @@ class App {
       this.proceedGame();
     } else {
       this.printMessage(result);
+      this.gameCourse();
     }
   }
   proceedGame() {
