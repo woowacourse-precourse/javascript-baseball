@@ -8,6 +8,8 @@ const Message = {
   strike: "스트라이크",
   ball: "볼",
   nothing: "낫싱",
+
+  strike_3: "3스트라이크",
 };
 
 module.exports = Message;
