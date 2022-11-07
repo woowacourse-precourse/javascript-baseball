@@ -61,9 +61,9 @@ class App {
     }
 
     if (
-      (isNaN(firstNumber) === true)
-      || (isNaN(secondNumber) === true)
-      || (isNaN(thirdNumber) === true)
+      (Number.isNaN(firstNumber) === true)
+      || (Number.isNaN(secondNumber) === true)
+      || (Number.isNaN(thirdNumber) === true)
     ) {
       throw new Error(ERROR_MESSAGE.TYPE_ERROR);
     }
