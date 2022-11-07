@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { OUTPUT_MESSAGE, ERROR_MESSAGE, GENERATE_RANGE } = require('./constant');
 class App {
   constructor() {
     this.firstEnter = true;
@@ -6,8 +7,11 @@ class App {
 
   getRandomNumbers() {
     const Numbers = [];
-    while (Numbers.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (Numbers.length < GENERATE_RANGE.MAX_SIZE) {
+      const number = MissionUtils.Random.pickNumberInRange(
+        GENERATE_RANGE.MINIMUM_VALUE,
+        GENERATE_RANGE.MAXIMUM_VALUE
+      );
       if (!Numbers.includes(number)) {
         Numbers.push(number);
       }
@@ -17,9 +21,9 @@ class App {
   }
 
   guessAnswer() {
-    MissionUtils.Console.readLine('숫자를 입력하세요 : ', (answer) => {
+    MissionUtils.Console.readLine(OUTPUT_MESSAGE.ENTER_NUMBER, (answer) => {
       this.guessAnswerValidate(answer);
-      if (this.outputResult(answer) === '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
+      if (this.outputResult(answer) === OUTPUT_MESSAGE.CORRECT_ANSWER) {
         MissionUtils.Console.print(this.outputResult(answer));
         this.restartEndGameAnswer();
         return;
@@ -32,39 +36,36 @@ class App {
   guessAnswerValidate(answer) {
     const duplicate = new Set(answer);
     if (answer.length !== 3) {
-      throw '서로다른 3자리 숫자를 입력해주세요';
+      throw ERROR_MESSAGE.DIFFERENT_NUMBERS;
     }
     if (answer.length !== duplicate.size) {
-      throw '서로다른 3자리 숫자를 입력해주세요';
+      throw ERROR_MESSAGE.DIFFERENT_NUMBERS;
     }
     if (
       !answer.split('').every((number) => number.charCodeAt() >= 49 && number.charCodeAt() <= 57)
     ) {
-      throw '범위에 벗어난 숫자입니다';
+      throw ERROR_MESSAGE.OUT_OF_RANGE;
     }
   }
 
   restartEndGameAnswer() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n',
-      (answer) => {
-        this.restartEndGameAnswerValidator(answer);
-        if (answer === '1') {
-          this.play();
-          return;
-        }
-        MissionUtils.Console.close();
+    MissionUtils.Console.readLine(OUTPUT_MESSAGE.RESTART_ENDGAME_ENTER_NUMBER, (answer) => {
+      this.restartEndGameAnswerValidator(answer);
+      if (answer === '1') {
+        this.play();
         return;
       }
-    );
+      MissionUtils.Console.close();
+      return;
+    });
   }
 
   restartEndGameAnswerValidator(answer) {
     if (answer.length !== 1) {
-      throw '한 개의 숫자만 입력해주세요';
+      throw ERROR_MESSAGE.ONLY_NUMBER;
     }
     if (!(answer.charCodeAt() >= 49 && answer.charCodeAt() <= 50)) {
-      throw '범위에 벗어난 숫자입니다';
+      throw ERROR_MESSAGE.OUT_OF_RANGE;
     }
   }
 
@@ -87,25 +88,25 @@ class App {
 
   scoreConversion(strike, ball) {
     if (strike === 0 && ball === 0) {
-      return '낫싱';
+      return OUTPUT_MESSAGE.NOTHING;
     }
     if (strike === 3) {
-      return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+      return OUTPUT_MESSAGE.CORRECT_ANSWER;
     }
     if (ball > 0 && strike > 0) {
-      return `${ball}볼 ${strike}스트라이크`;
+      return `${ball}${OUTPUT_MESSAGE.BALL} ${strike}${OUTPUT_MESSAGE.STRIKE}`;
     }
     if (ball > 0 && strike === 0) {
-      return `${ball}볼`;
+      return `${ball}${OUTPUT_MESSAGE.BALL}`;
     }
     if (strike > 0 && ball === 0) {
-      return `${strike}스트라이크`;
+      return `${strike}${OUTPUT_MESSAGE.STRIKE}`;
     }
   }
 
   play() {
     if (this.firstEnter === true) {
-      MissionUtils.Console.print('게임을 시작합니다');
+      MissionUtils.Console.print(OUTPUT_MESSAGE.START_GAME);
       this.firstEnter = false;
     }
     this.computer = this.getRandomNumbers();
