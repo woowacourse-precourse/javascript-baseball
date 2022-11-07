@@ -33,7 +33,7 @@ describe("컴퓨터가 1~9 범위내에서 서로 다른 3가지 수 뽑기", ()
       expect(pickThreeRandomNumFrom1To9.size()).toBe(3);
     });
 
-    it("뽑은 숫자들이 서로 다른 3가지 인가?", () => {
+    it("뽑은 숫자들이 서로 다른 3자리의 수인가?", () => {
       const checkNums = new Set(
         pickThreeRandomNumFrom1To9.returnNumsWithoutDuplication()
       );
