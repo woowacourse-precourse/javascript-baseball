@@ -2,12 +2,12 @@ const { COUNT_MESSAGE } = require('../constants');
 
 const { STRIKE, BALL, NOTHING } = COUNT_MESSAGE;
 
-function compareDigit(number, index, arr) {
-  if (number === arr[index]) {
+function compareDigit(number, inputArrIndex, inputArr) {
+  if (number === inputArr[inputArrIndex]) {
     return STRIKE;
   }
 
-  if (number !== arr[index] && arr.includes(number)) {
+  if (number !== inputArr[inputArrIndex] && inputArr.includes(number)) {
     return BALL;
   }
 
@@ -25,9 +25,15 @@ function compareArrResult(comArr, userArr) {
   let strikeCount = result[STRIKE];
   let ballCount = result[BALL];
 
-  if (ballCount > 0 && strikeCount > 0) return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
-  if (ballCount === 0 && strikeCount > 0) return `${strikeCount}${STRIKE}`;
-  if (ballCount > 0 && strikeCount === 0) return `${ballCount}${BALL}`;
+  if (ballCount > 0 && strikeCount > 0) {
+    return `${ballCount}${BALL} ${strikeCount}${STRIKE}`;
+  }
+  if (ballCount === 0 && strikeCount > 0) {
+    return `${strikeCount}${STRIKE}`;
+  }
+  if (ballCount > 0 && strikeCount === 0) {
+    return `${ballCount}${BALL}`;
+  }
   return NOTHING;
 }
 
