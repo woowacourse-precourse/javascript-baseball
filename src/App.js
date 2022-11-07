@@ -1,7 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 function checkLength(answer) {
-  if (answer.length !== 3) throw new Error('숫자 세 개를 입력해주세요.')
+  if (answer.length !== 3) throw new Error('숫자 세 개를 입력해주세요.');
+}
+
+function checkNumber(answer) {
+  if (!parseInt(answer)) throw new Error('숫자만 입력해주세요.');
 }
 class App {
   constructor() {
@@ -24,6 +28,7 @@ class App {
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       try {
+        checkNumber(answer);
         checkLength(answer);
       } catch (error) {
         console.log(error);
