@@ -150,8 +150,4 @@ const NUMBER_CONSTANTS = {
   MAX_SCORE: 3,
 };
 
-module.exports = {
-  App,
-  ComputerRandomNumber,
-  BaseballPlayTool,
-}
+module.exports = App;
