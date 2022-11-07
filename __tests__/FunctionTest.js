@@ -1,6 +1,12 @@
 const App = require("../src/App");
-
 const app = new App();
+
+const mockErrorInputs = (errorInputList) => {
+  app.totalUserInputErrorChecker = jest.fn();
+  errorInputList.reduce((acc, errorInput) => {
+    return acc.mockReturnValueOnce(errorInput);
+  }, app.totalUserInputErrorChecker);
+};
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(console, "log");
@@ -115,7 +121,7 @@ describe("판정 테스트", () => {
 });
 
 describe("예외 테스트", () => {
-  test("예외 테스트", () => {
+  test("사용자 숫자 입력 입력 예외 테스트", () => {
     const errorInputList = [
       "1234",
       "1",
@@ -127,10 +133,21 @@ describe("예외 테스트", () => {
       "1l2",
     ];
 
-    errorInputList.map((errorInput) => {
-      expect(() => {
-        app.errorChecker(errorInput);
-      }).toThrow();
+    const errorOutputList = [
+      "3자리의 숫자를 입력해주세요.",
+      "3자리의 숫자를 입력해주세요.",
+      "3자리의 숫자를 입력해주세요.",
+      "숫자만 입력해주세요.",
+      "숫자만 입력해주세요.",
+      "숫자만 입력해주세요.",
+      "숫자만 입력해주세요.",
+      "숫자만 입력해주세요.",
+    ];
+
+    errorInputList.map((errorInput, index) => {
+      expect(() => app.totalUserInputErrorChecker(errorInput)).toThrow(
+        errorOutputList[index]
+      );
     });
   });
 });
