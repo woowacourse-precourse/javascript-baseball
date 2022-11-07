@@ -21,16 +21,22 @@ function MakeNum() {
 }
 
 function isvalidation(userNum) {
-  return true;
-  //값에 0을 포함하는지
-  //입력받은 데이터값에 문자가 포함되어있지 않은지
-  //number_max가 3인지
-  //중복된숫자는 없는지
-}
-
-function throwError() {
-  throw new Error("잘못된 값을 입력하였습니다.");
-  // 가능하면 try..catch..finally 로 수정
+  userNumArray = userNum.split("");
+  const setUserName = new Set(userNumArray);
+  userNum = [...setUserName];
+  if (userNum.length !== 3) {
+    throw new Error("중복없는 3자리의 숫자를 입력하세요");
+  }
+  if (userNum.includes("0")) {
+    throw new Error("0을 제외한 숫자를 입력하세요");
+  }
+  if (
+    !userNum.every(
+      (number) => number.charCodeAt() >= 49 && number.charCodeAt() <= 57
+    )
+  ) {
+    throw new Error("올바른 숫자값을 입력해주세요");
+  }
 }
 
 function replay() {
@@ -53,10 +59,7 @@ function exit() {
 
 function proceedGame() {
   Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
-    const validation = isvalidation(userNum);
-    if (validation === false) {
-      return throwError();
-    }
+    isvalidation(userNum);
     const [strike, ball] = isStrikeBall(userNum);
     userMessage(strike, ball);
     if (strike !== 3) {
