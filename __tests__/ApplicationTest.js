@@ -60,4 +60,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("예외 테스트2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
