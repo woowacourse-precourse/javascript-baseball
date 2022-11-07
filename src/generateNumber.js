@@ -1,8 +1,20 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 
 function generateNumber() {
-  const uniqueNumArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  return uniqueNumArr;
+  const computerNumArr = [];
+  let computerNumArrLength = 0;
+
+  while (computerNumArrLength < 3) {
+    const tempNumber = Random.pickNumberInRange(0, 9);
+    if (computerNumArr.indexOf(tempNumber) === -1) {
+      computerNumArr.push(tempNumber);
+      computerNumArrLength += 1;
+    }
+  }
+
+  return computerNumArr;
 }
+
+console.log(generateNumber());
 
 module.exports = generateNumber;
