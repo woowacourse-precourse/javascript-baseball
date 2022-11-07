@@ -52,6 +52,13 @@ class View {
   printGameFinished() {
     Console.print(this.GAME_FINISHED_COMMENT);
   }
+
+  // 게임이 끝났을 때 유저의 재시작 의사를 받는다
+  getRestartInput() {
+    Console.readLine(this.RESTART_COMMENT, (restartUserInput) =>
+      this.controller.checkIsRestartUserInputValid(restartUserInput)
+    );
+  }
 }
 
 module.exports = View;
