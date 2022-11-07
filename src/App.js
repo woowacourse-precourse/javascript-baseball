@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const { ERROR_MSG, GAME_STATE_MSG } = require("./errorMsg");
+
 class App {
 	get getComNum() {
 		let arr = [];
@@ -16,7 +18,7 @@ class App {
 		this.gameStart(comNumber);
 	}
 	gameStart(comNumber) {
-		MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+		MissionUtils.Console.readLine(GAME_STATE_MSG.READY, (userInput) => {
 			const arr = userInput.split("").map((ele) => Number(ele));
 			const userNumber = this.inputValidFn(arr);
 			const [ball, strike] = this.gameResult(comNumber, userNumber);
@@ -35,30 +37,30 @@ class App {
 	}
 
 	inputValidFn(input) {
-		this.multiDataCheckFn(input, "유저 입력 데이터 중복 에러");
-		this.totalLenCheckFn(3, input, "computer 랜덤 데이터 에러");
+		this.multiDataCheckFn(input);
+		this.totalLenCheckFn(3, input);
 
 		input.forEach((data) => {
-			this.isNumberCheckFn(data, "숫자가 아닌 다른 데이터 에러");
+			this.isNumberCheckFn(data);
 		});
 
 		return input;
 	}
 
-	isNumberCheckFn(data, errMsg) {
+	isNumberCheckFn(data) {
 		if (!(data >= 1 && data <= 9)) {
-			throw new Error(errMsg);
+			throw new Error(ERROR_MSG.TYPE_ERR);
 		}
 	}
-	multiDataCheckFn(data, errMsg) {
+	multiDataCheckFn(data) {
 		const arr = new Set(data);
 		if (data.length !== [...arr].length) {
-			throw new Error(errMsg);
+			throw new Error(ERROR_MSG.MULTI_ERR);
 		}
 	}
-	totalLenCheckFn(len, data, errMsg) {
+	totalLenCheckFn(len, data) {
 		if (data.length !== len) {
-			throw new Error(errMsg);
+			throw new Error(ERROR_MSG.LEN_ERR);
 		}
 	}
 }
