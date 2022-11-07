@@ -12,6 +12,8 @@ class App {
 
   gameCourse() {
     this.getUserNumber();
+    this.strike = this.gameResultCount(this.answerNum, this.randomList).strike;
+    this.ball = this.gameResultCount(this.answerNum, this.randomList).ball;
   }
 
   gameStartMsg() {
@@ -50,6 +52,27 @@ class App {
     }
 
     return answer;
+  }
+
+  gameResultCount(answer, random) {
+    const userNumber = String(answer).split('').map(Number);
+    const result = {
+      strike: 0,
+      ball: 0,
+    };
+
+    for (let num = 0; num < 3; num++) {
+      let index = userNumber.indexOf(random[num]);
+      if (index > -1) {
+        if (index === num) {
+          result.strike += 1;
+        } else {
+          result.ball += 1;
+        }
+      }
+    }
+
+    return result;
   }
 
 }
