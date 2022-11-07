@@ -31,7 +31,7 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
       let validatedAnswer = this.validateUserNum(answer); // answer validation
       userNum = validatedAnswer;
-      this.print(`숫자를 입력해주세요 : ${validatedAnswer}`);
+      // this.print(`숫자를 입력해주세요 : ${validatedAnswer}`);
     });
     return userNum;
   }
@@ -80,7 +80,7 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         let validatedAnswer = this.validateRestartNum(answer); //answer validation
-        this.print(`${validatedAnswer}`);
+        // this.print(`${validatedAnswer}`);
         gameFlag = parseInt(validatedAnswer);
       }
     );
@@ -137,6 +137,7 @@ class App {
         gameFlag = this.createResult(computerNum, userNum);
       }
     }
+    MissionUtils.Console.close();
   }
 }
 
