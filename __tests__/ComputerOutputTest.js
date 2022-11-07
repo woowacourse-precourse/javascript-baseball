@@ -37,13 +37,16 @@ describe('출력값 테스트', () => {
 
   test('입력 값을 볼, 스트라이크로 판단하여 결과를 출력', () => {
     const logSpy = getLogSpy();
-    mockQuestions(['135']);
+    const messages = ['1볼 1스트라이크', '1볼', '낫싱'];
+    mockQuestions(['123', '456', '789']);
     mockRandoms([1, 3, 5]);
 
     const app = new App();
     app.play();
 
-    expect(logSpy).toHaveBeenCalledWith('3스트라이크');
+    messages.forEach(message =>
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message)),
+    );
   });
 
   test('3개의 숫자를 모두 맞힐 경우 게임을 종료', () => {
