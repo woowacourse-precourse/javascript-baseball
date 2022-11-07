@@ -23,6 +23,12 @@ class App {
     if (splited[0] === splited[1] || splited[1] === splited[2] || splited[0] === splited[2]) {
       throw "잘못된 값을 입력하였습니다. 3자리의 수는 각각 서로 다른 숫자여야 합니다."
     }
+
+    for (let i=0; i<3; i++) {
+      if (Number(splited[i]) < 1 || Number(splited[i]) > 9) {
+        throw "잘못된 값을 입력하였습니다. 1부터 9까지의 수만 입력할 수 있습니다.";
+      }
+    }
   }
 
   /* 사용자 입력 처리 */
