@@ -20,7 +20,7 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
     const computer = [];
-    while (computer.length < 3) {
+    for (; computer.length < 3; ) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
 
       if (!computer.includes(number)) {
@@ -58,20 +58,21 @@ class App {
     return;
   }
 
-  //input값을 받은 후의 행동
   #inputAfterAcion(answer) {
     let input = answer;
 
-    //예외 발생 시 다시 입력 처리
-    if (this.#inputExcept(input) === ERROR) {
+    //예외 처리
+    this.#inputExcept(input);
+    /*try {
+      this.#inputExcept(input);
+    } catch (e) {
       return this.#inputFromUser();
-    }
+    }*/
 
     this.#userInput = this.#inputToArray(input);
     this.#compareTwoArray();
     this.#printStrikeBall();
 
-    //스트라이크 3개가 아니면 반복
     if (this.#strikeCount !== 3) {
       return this.#inputFromUser();
     }
@@ -80,23 +81,19 @@ class App {
     this.#gameEnd();
   }
 
-  //스트라이크/볼 개수를 출력
   #printStrikeBall() {
-    const strikeStr = this.#strikeCount + ' 스트라이크';
-    const ballStr = this.#ballCount + ' 볼';
-    const outStr = '아웃';
+    const strikeStr = this.#strikeCount + '스트라이크';
+    const ballStr = this.#ballCount + '볼';
+    const outStr = '낫싱';
 
     if (this.#ballCount === 0 && this.#strikeCount !== 0) {
       MissionUtils.Console.print(strikeStr);
-    } 
-    else if (this.#ballCount !== 0 && this.#strikeCount === 0) {
+    } else if (this.#ballCount !== 0 && this.#strikeCount === 0) {
       MissionUtils.Console.print(ballStr);
-    } 
-    else if (this.#ballCount === 0 && this.#strikeCount === 0) {
+    } else if (this.#ballCount === 0 && this.#strikeCount === 0) {
       MissionUtils.Console.print(outStr);
-    } 
-    else {
-      MissionUtils.Console.print(strikeStr + ballStr);
+    } else {
+      MissionUtils.Console.print(ballStr+" "+strikeStr);
     }
     return;
   }
@@ -104,22 +101,23 @@ class App {
   #compareTwoArray() {
     for (let comIdx = 0; comIdx < this.#computerAnswer.length; comIdx++) {
       for (let userIdx = 0; userIdx < this.#userInput.length; userIdx++) {
-  
         this.#compareTwoNumber(comIdx, userIdx);
       }
     }
     return;
   }
 
-  //두 수를 비교하고 스트라이크/볼 카운터를 올린다
   #compareTwoNumber(comIdx, userIdx) {
-    if (comIdx === userIdx &&
-      this.#computerAnswer[comIdx] === this.#userInput[userIdx]) {
+    if (
+      comIdx === userIdx &&
+      this.#computerAnswer[comIdx] === this.#userInput[userIdx]
+    ) {
       this.#strikeCount++;
     }
-
-    if (comIdx !== userIdx &&
-      this.#computerAnswer[comIdx] === this.#userInput[userIdx]) {
+    if (
+      comIdx !== userIdx &&
+      this.#computerAnswer[comIdx] === this.#userInput[userIdx]
+    ) {
       this.#ballCount++;
     }
     return;
@@ -129,28 +127,23 @@ class App {
     return input.split('').map((arrData) => Number(arrData));
   }
 
-  //예외사항
   #inputExcept(input = '') {
     if (input == '') {
       MissionUtils.Console.print('입력값이 없습니다.');
-      return ERROR;
+      throw new ERROR();
     }
 
     let numReg = /[0-9]/g;
     if (input.match(numReg) == null) {
       MissionUtils.Console.print('숫자가 아닙니다. ');
-      return ERROR;
+      throw new ERROR();
     }
 
     if (input.length != 3) {
       MissionUtils.Console.print('세자리 숫자가 아닙니다. ');
-      return ERROR;
+      throw new ERROR();
     }
-    return 0;
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
