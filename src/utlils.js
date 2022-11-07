@@ -8,4 +8,11 @@ function getTargetNumber() {
   ].join("");
 }
 
+function getBallCount(userInputNumber, targetNumber) {
+  return [...targetNumber].filter(
+    (number, index) =>
+      [...userInputNumber].includes(number) &&
+      number !== [...userInputNumber][index]
+  ).length;
+}
 module.exports.getTargetNumber = getTargetNumber;
