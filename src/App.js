@@ -10,6 +10,7 @@ class App {
       let gameResult = game.battle(game.userInput(),computerNumber)
       if(game.message(gameResult) === "게임 종료") break;
       }
+    if(game.restart() === 1) this.play();
   }
 }
 
