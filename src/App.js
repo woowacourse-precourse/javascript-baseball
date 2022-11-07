@@ -43,9 +43,24 @@ const validatePlayerNumber = (num) => {
   else throw PLAYER_ERROR_MESSAGE;
 };
 
-const game = () => {
+const getGameResult = (playerArr, computerArr) => {
+  let strike = 0;
+  let ball = 0;
+
+  for (let i = 0; i < 3; i++) {
+    (playerArr[i] === computerArr[i] && strike++) ||
+      (playerArr[i] !== computerArr[i] &&
+        playerArr.includes(computerArr[i]) &&
+        ball++);
+  }
+
+  return [strike, ball];
+};
+
+const game = (computerNumber) => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
-    let playerNumber = num;
+    let playerNumber = [...String(num)];
+    let result = getGameResult(playerNumber, computerNumber);
 
     validatePlayerNumber(num);
   });
