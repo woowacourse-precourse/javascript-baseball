@@ -43,4 +43,32 @@ describe('기능 목록 테스트', () => {
     expect(/^[1-9]{3}$/.test(numberStr)).toBe(true);
     expect(numberSet.size).toEqual(3);
   });
+
+  test('잘못된 값을 입력한 경우 에러처리', () => {
+    const game = new Game();
+
+    guesses = [
+      // 3자리 수가 아닐 경우
+      '1234',
+      '12',
+      '-12',
+      '0.1',
+      // 중복된 수가 있는 경우
+      '121',
+      // 0을 포함할 경우
+      '012',
+      // 숫자가 아닐 경우
+      'abc',
+      '일이삼',
+      '!@#',
+    ];
+
+    guesses.forEach((guess) => {
+      expect(() => {
+        game.isValidGuess(guess);
+      }).toThrow(
+        '각 자리가 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력하세요.'
+      );
+    });
+  });
 });
