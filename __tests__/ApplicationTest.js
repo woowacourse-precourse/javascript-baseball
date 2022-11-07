@@ -90,9 +90,35 @@ describe('숫자 야구 게임', () => {
     })
   })
 
-  test('예외 테스트', () => {
+  test('answer보다 긴 입력에 대한 예외', () => {
     const randoms = [1, 3, 5]
     const answers = ['1234']
+
+    mockRandoms(randoms)
+    mockQuestions(answers)
+
+    expect(() => {
+      const app = new App()
+      app.play()
+    }).toThrow()
+  })
+
+  test('digit이 아닌 입력에 대한 예외', () => {
+    const randoms = [1, 3, 5]
+    const answers = ['a12']
+
+    mockRandoms(randoms)
+    mockQuestions(answers)
+
+    expect(() => {
+      const app = new App()
+      app.play()
+    }).toThrow()
+  })
+
+  test('같은 digit 입력에 대한 예외', () => {
+    const randoms = [1, 3, 5]
+    const answers = ['133']
 
     mockRandoms(randoms)
     mockQuestions(answers)
