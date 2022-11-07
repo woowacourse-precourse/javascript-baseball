@@ -16,6 +16,9 @@ class User {
 
   checkValidation(userNum) {
     if (!this.checkLength3(userNum)) return false;
+    if (!this.checkOnlyNaturalNum(userNum)) return false;
+    if (!this.checkNoDuplicate(userNum)) return false;
+    return true;
   }
 
   checkLength3(userNum) {
