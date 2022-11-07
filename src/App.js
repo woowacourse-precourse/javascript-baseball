@@ -14,6 +14,13 @@ class App {
     const result = this.scoreCounter(user, computer);
     const answer = this.printScore(result);
     MissionUtils.Console.print(answer);
+    if(answer === '3스트라이크'){
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.restartOrQuit();
+    }
+    else{
+      this.gameStart();
+    }
   }
 
   // 정답 숫자 선정
@@ -102,7 +109,7 @@ class App {
   // 결과 출력
   printScore(result) {
     let answer = '';
-    if(result[0] == 0 && result[1] == 0){
+    if(result[0] === 0 && result[1] == 0){
       answer = "낫싱";
     }
     else if (result[0] === 0 && result[1] > 0){
@@ -115,6 +122,18 @@ class App {
       answer = `${result[1]}볼 ${result[0]}스트라이크`;
     }
     return answer;
+  }
+
+  // 프로그램 종료 및 재시작
+  restartOrQuit() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      if(answer == '1'){
+        this.play();
+      }
+      else{
+        MissionUtils.Console.close();
+      }
+    });
   }
 }
 
