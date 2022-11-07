@@ -100,22 +100,22 @@ class App {
 
   inputException(number) {
     if (number.includes("-")) {
-      throw "입력 오류(양수만)";
+      throw new Error("입력 오류(양수만)");
     }
     if (number.length !== 3) {
-      throw "입력 오류(3글자)";
+      throw new Error("입력 오류(3글자)");
     }
     if (isNaN(number)) {
-      throw "입력 오류(숫자만)";
+      throw new Error("입력 오류(숫자만)");
     }
     if (number.includes("0")) {
-      throw "입력 오류(0은 제외)";
+      throw new Error("입력 오류(0은 제외)");
     }
     for (let i = 0; i < number.length; i++) {
       if (!this.inputNumber.includes(Number(number[i]))) {
         this.inputNumber.push(Number(number[i]));
       } else {
-        throw "입력 오류(서로 다른 3자리수)";
+        throw new Error("입력 오류(서로 다른 3자리수)");
       }
     }
   }
