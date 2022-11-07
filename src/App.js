@@ -21,6 +21,15 @@ class User {
   checkLength3(userNum) {
     return userNum.length === 3;
   }
+
+  checkOnlyNaturalNum(userNum) {
+    if (isNaN(userNum)) return false;
+    if (!Number.isInteger(userNum)) return false;
+    const userNumList = [...userNum];
+    if (userNumList.includes("0")) return false;
+    if (userNumList.includes("-")) return false;
+    return true;
+  }
 }
 
 class App {
