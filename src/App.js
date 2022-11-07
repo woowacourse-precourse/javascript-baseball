@@ -40,7 +40,7 @@ class App {
   isNumber() {
     for (let number of this.userNumber) {
       if (!(1 <= number && number <= 9)) {
-        return false;
+        throw new Error('유효한 숫자가 아닙니다');
       }
     }
 
@@ -48,19 +48,20 @@ class App {
   }
 
   isLength3() {
-    return this.userNumber.length === 3;
+    if (this.userNumber.length !== 3) throw new Error('길이가 3이 아닙니다');
   }
 
   isDuplicated() {
     const userNumberSet = new Set(this.userNumber);
 
-    return userNumberSet.size === this.userNumber.length;
+    if (userNumberSet.size !== this.userNumber.length)
+      throw new Error('중복된 숫자가 있습니다');
   }
 
   userNumberException() {
-    if (!(this.isNumber() && this.isLength3() && this.isDuplicated())) {
-      throw new Error('Invalid number..!');
-    }
+    this.isNumber();
+    this.isLength3();
+    this.isDuplicated();
   }
 
   countStrike() {
@@ -104,7 +105,7 @@ class App {
 
   selectedNumberException(selectedNumber) {
     if (!(selectedNumber === 1 || selectedNumber === 2)) {
-      throw new Error('Invalid number..!');
+      throw new Error('유효한 숫자가 아닙니다');
     }
   }
 
