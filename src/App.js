@@ -8,7 +8,7 @@ printMessage.printGameStart();
 class App {
   constructor() {
     this.userNum = "";
-    this.computerNum = [];
+    this.computerNum = "";
   }
 
   play() {

@@ -18,7 +18,6 @@ function checkIsLength(userNum) {
     if(userNum.length !== 3) {
         throw new Error("숫자 3개를 입력해주세요.");
     }
-
 }
 
 function setMap(userNumMap, userNum) {

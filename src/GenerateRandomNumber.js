@@ -1,8 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 function generateComputerNum() {
-    const RANDOM_NUM_ARR = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    return RANDOM_NUM_ARR;
+    const computerNum = [];
+    while(computerNum.length < 3) {
+        const num  = MissionUtils.Random.pickNumberInRange(1,9);
+        if(!computerNum.includes(num)) {
+            computerNum.push(num);
+        }
+    }
+    return computerNum.join('');
 }
 
 module.exports.generateComputerNum = generateComputerNum;
