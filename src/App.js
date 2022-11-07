@@ -48,6 +48,30 @@ class App {
         }
       }
     }
+    this.result(computer, strike, ball);
+  }
+  result(computer, strike, ball) {
+    if (strike === 3) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+      MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+      return this.restartOrEnd();
+    }
+    if (strike === 0 && ball === 0) {
+      MissionUtils.Console.print("낫싱");
+      return this.playerInput(computer);
+    } 
+    else if (strike === 0 && ball !== 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+      return this.playerInput(computer);
+    } 
+    else if (strike !== 0 && ball === 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+      return this.playerInput(computer);
+    } 
+    else {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      return this.playerInput(computer);
+    }
   }
 }
 
