@@ -14,6 +14,13 @@ class App {
     return computerNumber;
   };
 
+  checkUserInputType(userInput) {
+    for (let i = 0; i < 3; i++) {
+      if (isNaN(Number(userInput[i]))) {
+        throw new Error('숫자로 입력해주세요.');
+      }
+    }
+  };
 }
 
 module.exports = App;
