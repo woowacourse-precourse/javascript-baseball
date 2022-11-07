@@ -21,15 +21,15 @@ class BaseballGame{
         let message = ``;
 
         if(ball){ 
-        message += `${ball}${GAME.BALL} `; 
+            message += `${ball}${GAME.BALL} `; 
         }
 
         if(strike){ 
-        message += `${strike}${GAME.STRIKE}`; 
+            message += `${strike}${GAME.STRIKE}`; 
         }
 
         if(!ball && !strike){ 
-        message += `${GAME.NOTHING}`; 
+            message += `${GAME.NOTHING}`; 
         }
 
         Console.print(message);
@@ -40,9 +40,9 @@ class BaseballGame{
         let ball = 0;
         
         [...inputNumber].forEach((number, index) => {
-        if(number !== answer[index] && answer.includes(number)){
-            ball++;
-        }
+            if(number !== answer[index] && answer.includes(number)){
+                ball++;
+            }
         });
 
         return ball;
@@ -52,9 +52,9 @@ class BaseballGame{
         let strike = 0;
         
         [...inputNumber].forEach((number, index) => {
-        if(number === answer[index]) {
-            strike++;
-        }
+            if(number === answer[index]) {
+                strike++;
+            }
         });
 
         return strike;
@@ -64,11 +64,11 @@ class BaseballGame{
         const answer = [];
 
         while (answer.length < NUMBER.DIGIT) {
-        const number = Random.pickNumberInRange(NUMBER.MINIMUM_RANGE, NUMBER.MAXIMUM_RANGE);
+            const number = Random.pickNumberInRange(NUMBER.MINIMUM_RANGE, NUMBER.MAXIMUM_RANGE);
 
-        if (!answer.includes(number)) {
-            answer.push(number);
-        }
+            if (!answer.includes(number)) {
+                answer.push(number);
+            }
         }
 
         return answer.join('');
@@ -76,11 +76,24 @@ class BaseballGame{
 
     inputNumber(answer) {
         Console.readLine(MESSAGE.INPUT, (inputNumber) => {
-        this.validateInputNumber(inputNumber);
-        this.resultMessage(answer, inputNumber);
+            this.validateInputNumber(inputNumber);
+            this.resultMessage(answer, inputNumber);
         });
     }
 
+    inputRestartOrEnd() {
+        Console.readLine(MESSAGE.OPTION, (inputNumber) => {
+            if(inputNumber === '1'){
+                this.start();
+            }
+            if(inputNumber === '2'){
+                Console.close();
+            }
+            if(inputNumber !== '1' && inputNumber !== '2')
+                throw new Error(MESSAGE.ERROR);
+        });
+    }
+    
 }
 
 module.exports = BaseballGame;
