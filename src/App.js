@@ -73,8 +73,4 @@ class App {
   }
 }
 
-const test = new App();
-
-test.play();
-
 module.exports = App;
