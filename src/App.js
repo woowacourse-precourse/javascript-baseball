@@ -90,6 +90,8 @@ class App {
     if ((await this.askNewGame()) === "1") {
       return this.play();
     }
+    MissionUtils.Console.print("숫자 야구 게임이 종료되었습니다.");
+    return MissionUtils.Console.close();
   }
 }
 
