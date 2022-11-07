@@ -81,8 +81,8 @@ function ball_and_strike(computer, to_array, number_of_digits){
 }
 
 function ball_strike_check(i, number_of_digits){
-  ball = 0;
-  strike = 0;
+  let ball = 0;
+  let strike = 0;
 
   if(i == number_of_digits) {
     strike++;
