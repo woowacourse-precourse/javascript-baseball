@@ -4,14 +4,12 @@ class App {
   answer = [];
   userAnswer = 0;
   isRight = false;
-
   strike = 0;
   ball = 0;
 
   constructor() {
     this.answer = this.createAnswer();
     this.isRight = false;
-
     this.strike = 0;
     this.ball = 0;
   }
@@ -60,7 +58,6 @@ class App {
     while (true) {
       this.initializer();
       await this.doBaseBall();
-
       if (this.isRight && (await this.checkRestartGame())) {
         break;
       } else if (this.isRight) {
@@ -69,21 +66,19 @@ class App {
     }
   }
 
-  duplicateCheck(answer, val) {
+  duplicateCheck = (answer, val) => {
     return answer.every((e) => val !== e);
-  }
+  };
 
   reGame = () => {
     this.answer = this.createAnswer();
     this.isRight = false;
-
     this.strike = 0;
     this.ball = 0;
   };
 
   initializer = () => {
     this.isRight = false;
-
     this.strike = 0;
     this.ball = 0;
   };
@@ -139,12 +134,31 @@ class App {
   };
 
   checkBallValidity = () => {
+    this.isNumber();
+    this.isThreeDigit();
+    this.checkMyDuplicate();
+  };
+
+  isNumber = () => {
     if (isNaN(parseInt(this.userAnswer))) {
       throw new Error("숫자를 입력하세요!");
     }
+  };
+
+  isThreeDigit = () => {
     if ([...this.userAnswer].length !== 3) {
       throw new Error("3자리 숫자를 입력하세요!");
     }
+  };
+
+  checkMyDuplicate = () => {
+    [...this.userAnswer].map((userValue, idx) => {
+      const checkValue = [...this.userAnswer];
+      checkValue.splice(idx, 1);
+      if (checkValue.includes(userValue)) {
+        throw new Error("중복되지 않은 값을 입력하시오");
+      }
+    });
   };
 
   input = () => {
