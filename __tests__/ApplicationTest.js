@@ -15,18 +15,6 @@ const mockRandoms = (numbers) => {
     numbers.reduce((acc, number) => {
         return acc.mockReturnValueOnce(number);
     }, MissionUtils.Random.pickNumberInRange);
-
-    // MissionUtils.Random.pickUniqueNumbersInRange 경우도 호환 가능
-    const divisions = [];
-    const number_clone = [...numbers];
-    for(let i = 0; i < numbers.length/3; i++) {
-        divisions.push(number_clone.splice(0, 3));
-    }
-
-    MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
-    divisions.reduce((acc, numbers) => {
-        return acc.mockReturnValueOnce(numbers);
-    }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
 const getLogSpy = () => {
