@@ -10,7 +10,7 @@ function exception(userNum) {
     // 길이가 3자리인지 확인, 3자리 전부 일의 자리 숫자인지 확인 가능.
     if (userNum.length !== THREE_DIGITS) {
         MissionUtils.Console.close();
-        throw "ERROR : 잘못 입력하셨습니다.";
+        throw "ERROR : 숫자의 길이가 올바르지 않습니다.";
     }
     // 서로 다른 수인지 확인
     if (userNum[FIRST_PLACE] === userNum[SECONED_PLACE] || userNum[SECONED_PLACE] === userNum[THIRD_PLACE] || userNum[FIRST_PLACE] === userNum[THIRD_PLACE]) {
