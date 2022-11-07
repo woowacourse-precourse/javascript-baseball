@@ -27,7 +27,7 @@ describe('[S2] 유저는 올바른 게임 진행을 통해 재미를 느끼기 �
     const test_generator_number = app.answer;
     expect(test_generator_number.length).toBe(length);
 
-    [...test_generator_number].map((value) => {
+    test_generator_number.map((value) => {
       const number = parseInt(value);
       expect(number).toBeGreaterThanOrEqual(firstRange);
       expect(number).toBeLessThanOrEqual(lastRange);
