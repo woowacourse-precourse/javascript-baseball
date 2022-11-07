@@ -6,7 +6,6 @@ const constants = require("./data/constants");
 class App {
   play() {
     this.answer = GameUtils.System.getRandomAnswer();
-    console.log(this.answer);
     Print.GameMessage.start();
     this.#submitInput();
   }
