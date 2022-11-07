@@ -59,7 +59,7 @@ class App {
   }
 
   isThreeDigits(number) {
-    return number.length === 3;
+    return number.split('').filter((digit) => !isNaN(Number(digit))).length === 3;
   }
 
   isCorrectRangeDigits(number) {
@@ -104,7 +104,6 @@ class App {
         this.isGameFinished = true;
         return `${numberOfStrikes}스트라이크\n` + messages.GAME_FINISH_MESSAGE;
       }
-
       return `${numberOfStrikes}스트라이크`;
     } else {
       if (numberOfStrikes === 0) return `${numberOfBalls}볼`;
