@@ -10,7 +10,7 @@
 
 컴퓨터는 1에서 9까지 서로 다른 임의의 수 3개를 선택
 
-- 임의의 수는 [MissionUtils 라이브러리]에서 제공하는 `Random.pickUniqueNumberInRange()` 메서드를 사용
+- 임의의 수는 [MissionUtils 라이브러리]에서 제공하는 `Random.pickNumberInRange()` 메서드를 사용
 
 ## [✅] 기능 3 - 숫자 입력 문구 출력 및 사용자 입력 값을 받는 함수 구현
 
