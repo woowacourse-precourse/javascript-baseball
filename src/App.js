@@ -1,4 +1,5 @@
 function App () {
+  this.randomNumber;
   this.play = () => {
     const getRandomNumber = (MIN_RANDOM_NUIMBER, MAX_RANDOM_NUMBER) => {
       const randomNumberArray = [];
@@ -63,7 +64,11 @@ function App () {
     function printNewGameInterface () {
       MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     }
-    
+
+    function startGame () {
+      this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
+    }
+
   }
 }
 
