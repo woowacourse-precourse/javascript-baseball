@@ -72,7 +72,9 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("숫자만 입력할 수 있습니다.");
   });
+});
 
+describe("예외 테스트", () => {
   test("중복 숫자 입력 시", () => {
     const randoms = [1, 3, 5];
     const answers = ["113"];
