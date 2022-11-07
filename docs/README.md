@@ -32,9 +32,9 @@
   - throw 문으로 게임 종료
 - **getHint**
   - 입력한 숫자를 검증 후 보여 줄 힌트 메세지 반환하기
-  - **isNothing** : 하나도 없는 경우
-  - **isThreeStrike** : 3개의 숫자를 모두 맞힐 경우
-  - **그 외** : 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시
+    - **isNothing** : 하나도 없는 경우
+    - **isThreeStrike** : 3개의 숫자를 모두 맞힐 경우
+    - **그 외** : 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시
   - @returns {string} 낫싱/3스트라이크/1볼1스트라이크/2볼
 - **countBallOrStrike**
   - ball 과 strike 갯수 카운트 하기
@@ -65,7 +65,7 @@
 - 사용법을 알려줘도 어떻게 사용해야 할지 막연한 두려움이 있었는데, 이번에 극복했다.
 - 코드를 작성하다가 궁금한 점이 몇 가지 생겼는데!
 
-### 1. contructor 는 전역변수 관리하는 곳인가?
+### 1. constructor 는 전역변수 관리하는 곳인가?
 
 - answer는 전역적으로 사용하기에 this.ANSWER로 할당했다.
 - input의 경우 매번 변경되는 데 this.input으로 관리가 필요한가?
@@ -83,6 +83,6 @@
 #### 👉 method ordering conventions? [stackoverflow](https://stackoverflow.com/questions/4668218/are-there-any-java-method-ordering-conventions)
 
 - 자바 기준으로 작성된 글이지만, 자바스크립트에 적용해 보면..
-  - constructors 가장 먼저
+  - constructor 가장 먼저
   - main method 그리고 관련 있는 method끼리 그룹핑.
   - standard methods like toString, equals and hashcode 서브 메서드 마지막.
