@@ -16,12 +16,13 @@ class BaseballGame {
 
   start(answer = START_RULES.start) {
     BaseballGame.validateStartRules(answer);
-    if (BaseballGame.isExit(answer)) {
+    if (answer === START_RULES.exit) {
       this.exit();
-      return;
     }
-    this.computer.setRandomNumbers();
-    this.inputPlayerNumbers();
+    if (answer === START_RULES.start) {
+      this.computer.setRandomNumbers();
+      this.inputPlayerNumbers();
+    }
   }
 
   inputPlayerNumbers() {
@@ -66,10 +67,6 @@ class BaseballGame {
 
   static isIncludeInStartRules(value) {
     return Object.values(START_RULES).includes(value);
-  }
-
-  static isExit(value) {
-    return value === START_RULES.exit;
   }
 
   static isGameOver(strike) {
