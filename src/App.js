@@ -10,7 +10,11 @@ class App {
     this.playing(computerNumber);
   }
   playing(computerNumber) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {});
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      if (!isCorrectInput(answer)) {
+        throw new Error("잘못된 입력: 서로 다른 3자리의 수를 입력하세요.");
+      }
+    });
   }
 }
 function createComputerNumber() {
