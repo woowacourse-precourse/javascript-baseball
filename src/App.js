@@ -44,16 +44,11 @@ function createComputerNumber() {
   return computer;
 }
 function isCorrectInput(input) {
-  const changeInputToNumber = Number(input);
-  if (changeInputToNumber === NaN) return false;
-  if (changeInputToNumber < 123) return false;
-  if (changeInputToNumber > 987) return false;
-  if (input.length != 3) return false;
+  const regex = /^[1-9]{3}$/;
+  if (!regex.test(input)) return false;
   if (input[0] === input[1]) return false;
   if (input[1] === input[2]) return false;
-  if (input[0] === input[2]) return false;
-  if (input[1] === "0") return false;
-  if (input[2] === "0") return false;
+  if (input[2] === input[0]) return false;
   return true;
 }
 function checkHint(computerNumber, userNumber) {
