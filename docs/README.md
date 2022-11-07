@@ -23,10 +23,10 @@
     게임을 시작
     1.2 getComputerNumber()
     서로다른 임의의 수 3개 저장
-    1.3 compare()
+    1.3 playerInput()
     사용자의 입력값을 입력 받음
     1.4 playerNumbercheck()
-    compare에서 입력 받은 입력값이 올바른지 검사
+    playerInput에서 입력 받은 입력값이 올바른지 검사
     1.5 conutBallStrike()
     입력받은 값이 true일 경우 computerNumber와 사용자의 값을 비교해
     ball과 strike의 갯수를 카운트

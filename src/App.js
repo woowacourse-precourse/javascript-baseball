@@ -1,53 +1,48 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
+const START_MESSAGE="숫자 야구 게임을 시작합니다."
+const INPUT_MESSAGE="숫자를 입력해주세요 :"
+const ERORR_MESSAGE="잘못된 입력입니다."
 class App {
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(START_MESSAGE);
     this.getComputerNumber();
   }
-  
   getComputerNumber() {
     const computer = [];
     while (computer.length < 3) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
       number = number.toString();
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
+      if (!computer.includes(number)) computer.push(number);
     }
     MissionUtils.Console.print(computer);
     this.playerInput(computer);
   }
   playerInput(computer) {
-    MissionUtils.Console.readLine("숫자를 입력해 주세요 :", (input) => {
-      if (this.playerNumberCheck(input)) {
-        this.countBallStrike(computer, input);
-      }
+    MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
+      if (this.playerNumberCheck(input)) this.countBallStrike(computer, input);
     });
   }
   playerNumberCheck(input) {
     if (input.length !== 3) {
-      throw new Error("잘못된 입력입니다.");
+      throw new Error(ERORR_MESSAGE);
     }
     if (new Set(input).size !== 3) {
-      throw new Error("잘못된 입력입니다.");
+      throw new Error(ERORR_MESSAGE);
     }
     return true;
   }
   countBallStrike(computer, input) {
     let strike = 0;
     let ball = 0;
-
     for (let i = 0; i < input.length; i++) {
       if (computer.includes(input[i])) {
-        if(computer[i]===input[i]){
-          strike += 1;
-        }
-        else {
-          ball += 1;
-        }
+        ball += 1;
+      }
+      if(computer[i]===input[i]){
+        strike += 1;
       }
     }
+    ball=ball-strike;
     this.result(computer, strike, ball);
   }
   result(computer, strike, ball) {
@@ -74,20 +69,17 @@ class App {
     }
   }
   restartOrEnd() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (restart) => {
-        if (restart == 1) {
-          return this.getComputerNumber();
-        } 
-        else if (restart == 2) {
-          MissionUtils.Console.close();
-        } 
-        else {
-          throw new Error("잘못된 입력입니다.");
-        }
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",(restart) => {
+      if (restart == 1) {
+        return this.getComputerNumber();
+      } 
+      else if (restart == 2) {
+        MissionUtils.Console.close();
+      } 
+      else {
+        throw new Error(ERORR_MESSAGE);
       }
-    );
+    });
   }
 }
 
