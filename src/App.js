@@ -37,11 +37,6 @@ class App {
     return randomNumbers.join("");
   };
 
-  isDuplicated = (input) => {
-    const inputSet = new Set([...input]);
-    return input.length !== inputSet.size;
-  };
-
   containsThreeNumbers = (input) => {
     return input.length === NUMBER_LENGTH;
   };
@@ -54,21 +49,13 @@ class App {
     return Number(input) >= MIN_ANSWER && Number(input) <= MAX_ANSWER;
   };
 
+  isDuplicated = (input) => {
+    const inputSet = new Set([...input]);
+    return input.length !== inputSet.size;
+  };
+
   isValidInput = (input) => {
     return this.containsThreeNumbers(input) && this.containsOnlyNumbers(input) && this.isValidRange(input) && !this.isDuplicated(input);
-  };
-
-  getResultMessage = (strike, ball, nothing) => {
-    let message = "";
-    if (nothing) message = RESULT.NOTHING;
-    if (ball) message += `${ball}${RESULT.BALL} `;
-    if (strike) message += `${strike}${RESULT.STRIKE}`;
-    return message;
-  };
-
-  exit = () => {
-    MissionUtils.Console.print(MESSAGE.EXIT);
-    MissionUtils.Console.close();
   };
 
   askUserRestartOrExit = () => {
@@ -82,6 +69,14 @@ class App {
   handleSuccess = () => {
     MissionUtils.Console.print(MESSAGE.SUCCESS);
     return this.askUserRestartOrExit();
+  };
+
+  getResultMessage = (strike, ball, nothing) => {
+    let message = "";
+    if (nothing) message = RESULT.NOTHING;
+    if (ball) message += `${ball}${RESULT.BALL} `;
+    if (strike) message += `${strike}${RESULT.STRIKE}`;
+    return message;
   };
 
   getResult = (ANSWER, input) => {
@@ -118,6 +113,11 @@ class App {
       if (!this.isValidInput(input)) throw new Error(ERROR.INVALID_INPUT);
       this.printResult(ANSWER, input);
     });
+  };
+
+  exit = () => {
+    MissionUtils.Console.print(MESSAGE.EXIT);
+    MissionUtils.Console.close();
   };
 
   play = () => {
