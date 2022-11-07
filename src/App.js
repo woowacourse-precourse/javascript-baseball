@@ -36,6 +36,7 @@ class App {
   return Console.readLine('숫자를 입력해주세요 : ',(input) => {
     this.validateInput(input);
     this.setUserNumbers(parseInt(input));
+    Console.close();
     })
   }
 
