@@ -23,7 +23,6 @@ class App {
       if (!this.checkInputValidation()) {
         throw "잘못된 값을 입력하셨습니다.";
       }
-      print(input);
       this.game();
       close();
     });
@@ -33,9 +32,6 @@ class App {
     const checkNoOverlap = inputValidation.checkNoOverlap(this.inputNum);
     const checkOnlyNum = inputValidation.checkOnlyNum(this.inputNum);
     const checkTreeNum = inputValidation.checkThreeNum(this.inputNum);
-    print(checkNoOverlap);
-    print(checkOnlyNum);
-    print(checkTreeNum);
     if (!checkNoOverlap || !checkOnlyNum || !checkTreeNum) {
       return false;
     } else {
