@@ -1,7 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-// let landomNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
-
 let landomNum;
 function makeComputerNum() {
   let computerNum = [];
@@ -69,30 +67,22 @@ function answerCheck(userAnswer) {
 
 function question() {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    // let trimedanswer = answer.trim();
-    // if (trimedanswer.length === 0) {
-    //   throw new Error("숫자를 입력해주세요");
-    // } else if (isNaN(parseInt(trimedanswer))) {
-    //   throw new Error("문자를 제외한 숫자만을 입력해주세요");
-    // } else if (trimedanswer.length !== 3) {
-    //   throw new Error("입력한 숫자가 3 자리가 아닙니다");
-    // }
-    // let answerArr = trimedanswer.split("");
-    // let duplicates = answerArr.filter((value, index) => {
-    //   return index !== answerArr.indexOf(value);
-    // });
-    // if (duplicates.length !== 0) {
-    //   throw new Error("입력한 숫자에 중복된 숫자가 존재합니다");
-    // }
-
-    // MissionUtils.Console.print(`${answer}`);
+    if (
+      isNaN(parseInt(answer)) ||
+      parseInt(answer).toString().length !== answer.length
+    ) {
+      throw new Error("문자를 제외한 숫자만을 입력해주세요");
+    }
+    let answerArr = answer.split("");
+    let duplication = answerArr.filter((value, index) => {
+      return index !== answerArr.indexOf(value);
+    });
+    if (duplication.length !== 0) {
+      throw new Error("입력한 숫자값에 중복이 있습니다");
+    }
     userAnswer = answer;
-    console.log(landomNum);
-    if (answer.length < 3) {
-      question();
-      // MissionUtils.Console.close();
-    } else if (answer.length > 3) {
-      throw new Error();
+    if (answer.length !== 3) {
+      throw new Error("숫자가 세글자가 아닙니다");
     } else {
       answerCheck(userAnswer);
     }
