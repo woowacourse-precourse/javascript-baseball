@@ -4,18 +4,27 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const computer = this.computerInput();
-    console.log(computer);
-    this.sendValue(computer);
+    this.gameManager(computer);
   }
 
-  sendValue(computer) {
+  computerInput() {
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number))
+        computer.push(number);
+    }
+    return computer;
+  }
+
+  gameManager(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (player) => {
       this.playerCheck(player);
       let [strikeCount, ballCount] = this.checkBallCounts(computer, player.split("").map(Number));
       this.printBallCounts(strikeCount, ballCount);
       
       if(!this.isClear(strikeCount))
-        this.sendValue(computer);
+        this.gameManager(computer);
       else
         this.sendRetry();
     });
@@ -43,36 +52,27 @@ class App {
     this.isNumberRepeat(number);
   }
 
-  computerInput() {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number))
-        computer.push(number);
-    }
-    return computer;
-  }
 
   isNumber(value) {
     const RegExp = /[1-9]/g;
     if(RegExp.test(value) === false)
-      throw Error();
+      throw Error("1~9 사이의 숫자를 입력해주세요 !");
   }
 
   isCorrectNumber(value) {
     if(value.length !== 3)
-      throw Error();
+      throw Error("1~9 사이의 숫자를 3개 입력해주세요 !");
   }
 
   isNumberRepeat(value) {
     let valueSet = new Set(value);
     if(value.length !== valueSet.size)
-      throw Error();
+      throw Error("반복되는 숫자는 입력할 수 없습니다 !");
   }
 
   isOneOrTwo(value) {
     if(!(value === "1" || value === "2"))
-      throw Error();
+      throw Error("시작하거나 종료하기 위해서는 1 또는 2를 입력하여야 합니다 !");
   }
 
   isClear(strikeCount) {
@@ -82,8 +82,6 @@ class App {
     }
     return false;
   }
-
-  
 
   printBallCounts(strikeCount, ballCount) {
     if(strikeCount >= 1 && ballCount >= 1)
@@ -109,15 +107,15 @@ class App {
 
   checkStrikeCount(computer, player) {
     let strikeCount = 0;
-    let alreadyStrike = [];
+    let strikeArray = [];
     for(let i = 0; i < computer.length; i++) {
       if(computer[i] === player[i]) {
         strikeCount += 1;
-        alreadyStrike.push(computer[i]);
+        strikeArray.push(computer[i]);
       }
     }
 
-    return [strikeCount, alreadyStrike];
+    return [strikeCount, strikeArray];
   }
 
   checkBallCount(computer, player, strikeArray) {
