@@ -51,4 +51,13 @@ class Umpire {
   }
 }
 
+function winAndRestart() {
+  printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  Console.readLine('게임을 새로 시작하시려면 1, 종료하려면 2를 입력하세요.\n', (oneOrtwo) => {
+    if (Number(oneOrtwo) === 1) new App().play();
+    else if (Number(oneOrtwo) === 2) Console.close();
+    else throw new Error('1 또는 2만 입력하세요.')
+  })
+}
+
 module.exports = App;
