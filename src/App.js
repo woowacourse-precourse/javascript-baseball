@@ -53,6 +53,13 @@ function printResult(countArr) {
   }
 }//ball, strike count에 따라 결과 출력
 
+function isValidInput(input){
+  const regex = /^[0-9]+$/;
+  if(!regex.test(input) || input.length !==3){
+    throw new Error("유효한 입력값이 아닙니다.");
+  }
+}
+
 
 function playGame() {
   const targetArr = makeTarget();
@@ -63,6 +70,7 @@ function readData(targetArr) {
   let isAnswer = false;
 
   Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    isValidInput(input);
     const inputArr = [...input].map(Number);
     isAnswer = handleData(inputArr, targetArr);
     if (!isAnswer) readData(targetArr);
@@ -81,7 +89,7 @@ function isRepeatGame() {
       Console.close();
     }
     else {
-      throw new Error("1,2 이외의 숫자가 입력되었습니다.")
+      throw new Error("1,2 이외의 숫자가 입력되었습니다.");
     }
   });
 }
