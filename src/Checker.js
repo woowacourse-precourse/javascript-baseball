@@ -8,17 +8,20 @@ class Checker {
       return true;
     }
 
-    const strike = this.checkStrike(targetNum, userNum);
+    const [strike, ball] = this.checkStrikeAndBall(targetNum, userNum);
   }
 
-  checkStrike(targetNum, userNum) {
+  checkStrikeAndBall(targetNum, userNum) {
     let strike = 0;
-    for (let i = 0; i < 3; i++) {
-      if (targetNum[i] === userNum[i]) {
+    let ball = 0;
+    [...targetNum].forEach((n, i) => {
+      if (n === userNum[i]) {
         strike++;
+        ball--;
       }
-    }
-    return strike;
+      if (userNum.includes(n)) ball++;
+    });
+    return [strike, ball];
   }
 }
 
