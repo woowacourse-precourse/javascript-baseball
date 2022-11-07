@@ -28,7 +28,7 @@ class App {
   }
   checkGame(score, answer) {
     if (score.strike === 3) {
-      MissionUtils.Console.print("3스트라이크");
+      showMessage(score);
       MissionUtils.Console.print(this.MESSAGES.END);
       this.restart();
     } else {
