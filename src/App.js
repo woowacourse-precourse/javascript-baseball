@@ -3,17 +3,17 @@ class App {
   play() {    
     let computerRandomNum = this.createRandomNumber();
     let userInputNum=this.InputUserNumber();
-    console.log(userInputNum);
+    //console.log(userInputNum);
     while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
-      console.log(userInputNum+"di");
+     // console.log(userInputNum+"di");
       MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
 
-      let lastNum=userInputNum;
-      console.log(userInputNum);
+      //let lastNum=userInputNum;
+      //console.log(userInputNum);
       if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
         
         userInputNum=this.InputUserNumber();
-        console.log(userInputNum+" 3");
+        //console.log(userInputNum+" 3");
       }
       MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
 
@@ -90,7 +90,7 @@ class App {
   checkThreeStrike(computerRandomNum, userInputNum){
     if(this.strike(computerRandomNum, userInputNum)==3){
       MissionUtils.Console.print("3스트라이크");
-      MissionUtils.Console.print("3개를 모두 맞히셨습니다! 게임 종료");
+      console.log("3개를 모두 맞히셨습니다! 게임 종료");
   
       //userInputNum=this.InputUserNumber();
       this.selectGameEnd(userInputNum);
@@ -136,7 +136,7 @@ class App {
     }
   /*입력 수가 유효한지 확인하는 기능*/
   checkUserNumVaildation(userInputNum){
-    try{
+    // try{
         if(!this.checkUserNumLength(userInputNum)){
           throw "입력이 잘못되었습니다";
         }
@@ -146,19 +146,18 @@ class App {
         if(!this.checkUserNumIsDifferent(userInputNum)){
           throw "입력이 잘못되었습니다";
       }
-    }catch(e){
-        MissionUtils.Console.print("입력이 잘못되었습니다.");
-        throw "게임 종료"
-      }
+    // }catch(e){
+    //     MissionUtils.Console.print("입력이 잘못되었습니다.");
+    //     throw "게임 종료"
+    //   }
       return true;
     }
   /*게임 종료 여부 선택하는 기능*/
   selectGameEnd(userInputNum){
     userInputNum=this.InputUserNumber();
     if(userInputNum==1){
-      MissionUtils.Console.print("게임 재시작");
+      console.log("게임 재시작");
       this.play();
-      
       return true;
       }
     if(userInputNum==2){
