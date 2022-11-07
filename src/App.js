@@ -35,6 +35,7 @@ function baseBall(answers){
     nothing = isNothing(answers, inputNums);
     if(!nothing) countStrike = isStrike(answers, inputNums);
     if(!nothing) countBall = isBall(answers, inputNums, countStrike);
+    printResult(countBall, countStrike);
   });
 }
 
@@ -80,6 +81,21 @@ function isBall(answers, input, countStrike){
   }
   if(countStrike) cnt -= countStrike;
   return cnt;
+}
+
+function printResult(countBall, countStrike){
+  if(countBall && countStrike) {
+    Console.print(countBall+"볼 "+countStrike+"스트라이크");
+    return;
+  }
+  if(countBall) {
+    Console.print(countBall+"볼");
+    return;
+  }
+  if(countStrike) {
+    Console.print(countStrike+"스트라이크");
+  }
+  if(countStrike===3) Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 }
 
 module.exports = App;
