@@ -25,6 +25,17 @@ function baseBallGame() {
   }
 }
 
+function guessNumber(computer) {
+  let number;
+  do {
+    MissionUtils.Console.readLine("", (answer) => {
+      number = answer;
+      console.log("숫자를 입력해주세요 : " + number);
+    });
+    checkException(number);
+  } while (!checkResult(computer, number));
+}
+
 function checkResult(computer, number) {
   let ball = 0;
   let strike = 0;
