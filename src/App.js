@@ -25,11 +25,11 @@ class App {
 
   input() {
     Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
-      this.checkInputNumber(inputNumber);
+      this.checkErrorInputNumber(inputNumber);
     });
   }
 
-  checkInputNumber(inputNumber) {
+  checkErrorInputNumber(inputNumber) {
     const isDuplicateNumber =
       inputNumber[0] === inputNumber[1] ||
       inputNumber[1] === inputNumber[2] ||
