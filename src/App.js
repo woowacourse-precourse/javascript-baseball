@@ -7,7 +7,7 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     this.start();
   }
 
@@ -32,7 +32,7 @@ class App {
 
   win() {
     MissionUtils.Console.print(
-      `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+      `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료\n`
     );
     if (this.replay() === 1) {
       this.start();
@@ -82,7 +82,7 @@ class App {
     if (!scoreObject.ball && !scoreObject.strike) {
       resultMessage = "낫싱";
     }
-    MissionUtils.Console.print(resultMessage);
+    MissionUtils.Console.print(resultMessage + "\n");
   }
 
   readNum() {
@@ -100,7 +100,7 @@ class App {
   replay() {
     let answer = -1;
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
         answer = parseInt(input);
         if (answer !== 1) {
@@ -127,15 +127,12 @@ class App {
     if (new Set(inputList).size !== inputList.length) {
       throw "숫자가 유효하지 않습니다.";
     }
-
-    return true;
   }
 
   isValidControl(input) {
     if (input !== 1 && input !== 2) {
       throw "입력값이 유효하지 않습니다.";
     }
-    return true;
   }
 }
 
