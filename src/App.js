@@ -15,16 +15,12 @@ class App {
     this.#numberSize = numberSize;
     this.#computerNumber = null;
     this.#userNumber = null;
-    this.#strike = 0;
-    this.#ball = 0;
   }
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.makeRandomNumber();
-    console.log(this.getComputerNumber());
     this.progressGame();
-    // MissionUtils.Console.close();
   }
 
   progressGame() {
@@ -32,6 +28,11 @@ class App {
       this.setUserNumber(number);
       this.compareNumbers();
       this.printCompareResult();
+      if (this.getBall() === 0 && this.getStrike() === this.getNumberSize()) {
+        this.finishGame();
+        return;
+      }
+      this.progressGame();
     });
   }
 
@@ -52,6 +53,9 @@ class App {
     const userNumber = this.getUserNumber();
     const notStrikePositions = [];
     const notStrikeNumbers = {};
+
+    this.setBall(0);
+    this.setStrike(0);
 
     [...computerNumber].forEach((number, index) => {
       if (number === userNumber[index]) {
@@ -93,6 +97,21 @@ class App {
 
     MissionUtils.Console.print(
       `${this.getBall()}볼 ${this.getStrike()}스트라이크`
+    );
+  }
+
+  finishGame() {
+    MissionUtils.Console.print(
+      `${this.getNumberSize()}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+    );
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ',
+      (number) => {
+        if (number === '1') {
+          this.makeRandomNumber();
+          this.progressGame();
+        }
+      }
     );
   }
 
