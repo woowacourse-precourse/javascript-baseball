@@ -30,19 +30,18 @@ class Computer {
   }
 
   judge(userInput) {
-    const userInputList = userInput.split("").map((num) => Number(num));
-    const notStrikeList = [];
-    let balls = 0;
-    let strikes = 0;
+    let balls = 0,
+      strikes = 0;
 
-    userInputList.forEach((num, index) => {
-      if (num === this._digits[index]) strikes++;
-      else notStrikeList.push(num);
-    });
-
-    notStrikeList.forEach((num) => {
-      if (this._digits.includes(num)) balls++;
-    });
+    for (let i = 0; i < userInput.length; i++) {
+      if (this._digits.includes(Number(userInput[i]))) {
+        balls++;
+      }
+      if (this._digits[i] === Number(userInput[i])) {
+        balls--;
+        strikes++;
+      }
+    }
 
     return [balls, strikes];
   }
