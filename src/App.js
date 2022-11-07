@@ -70,9 +70,10 @@ class App {
         if (input === GAME.RESTART) {
           this.createNumberList();
           this.receiveNumber();
-        }
-        if (input === GAME.EXIT) {
+        } else if (input === GAME.EXIT) {
           MissionUtils.Console.close();
+        } else {
+          MissionUtils.Console.print(PHRASE.ERROR2);
         }
       });
     } else {
