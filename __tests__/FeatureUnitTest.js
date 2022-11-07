@@ -113,4 +113,20 @@ describe('기능 단위 목록별 테스트', () => {
       expect(app.isThreeStrike(board)).toEqual(result[idx]);
     });
   });
+
+  test('기능6 3스트라이크시 게임종료 안내 (isThreeStrike 메소드)', () => {
+    const printSpy = getPrintSpy();
+
+    const answers = ['135'];
+    const messages = ['게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'];
+
+    mockQuestions(answers);
+
+    const app = new App();
+    app.setUserInput([1, 3, 5]);
+
+    messages.forEach(output => {
+      expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
