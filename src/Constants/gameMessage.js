@@ -7,6 +7,10 @@ class GameMessage {
   static RESTART_INPUT = '1';
   static GAMEOVER_INPUT = '2';
   static GAMEOVER_MESSAGE = '게임 종료';
+  static BALL = '볼';
+  static STRIKE = '스트라이크';
+  static NOTHING = '낫싱';
+  static GAMEOVER_STRIKE_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 }
 
 module.exports = GameMessage;
