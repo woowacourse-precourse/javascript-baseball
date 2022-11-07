@@ -30,9 +30,15 @@ class Controller {
     const strikeBallCount = [0, 0];
 
     for (let i = 0; i < userGivenNumber.length; i++) {
+      // 숫자와 자리까지 같다면 (스트라이크)
       if (userGivenNumber[i] === computerGivenNumber[i]) {
         strikeBallCount[0]++;
-      } else if (computerGivenNumber.includes(userGivenNumber[i])) {
+      }
+      // 숫자만 있다면 (볼)
+      if (
+        userGivenNumber[i] !== computerGivenNumber[i] &&
+        computerGivenNumber.includes(userGivenNumber[i])
+      ) {
         strikeBallCount[1]++;
       }
     }
