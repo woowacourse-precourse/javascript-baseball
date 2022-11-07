@@ -1,8 +1,9 @@
-const compareWithInput = (computerNumArr, inputNum) => {
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const compareWithInput = (computerNumArr, userNum) => {
     let ballCount = 0;
     let strikeCount = 0;
     const computerNum = computerNumArr.join('');
-    const userNum = toString(inputNum);
 
     for(let i = 0; i < computerNum.length; i++) {
         if (userNum.includes(computerNum[i])) {
@@ -12,7 +13,7 @@ const compareWithInput = (computerNumArr, inputNum) => {
           strikeCount++;
       }
     }
-
+    
     ballCount -= strikeCount;
 
     return [ballCount, strikeCount];

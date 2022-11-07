@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const inputNumbers = require('./inputNumbers');
 const compareWithInput = require('./compareWithInput');
 const printCompareResult = require('./printCompareResult');
@@ -13,8 +14,8 @@ const playGame = (computerNum) => {
     // 3. 결과 출력
     const resultMSG = printCompareResult(...comparedResult);
     
-    // MissionUtils.Console.print(resultMSG);
-    if(resultMSG === '3스트라이크') { // 정답일 때
+    if(resultMSG) { // 정답일 때
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         restartOrQuitGame();
     } else { // 정답이 아닐 때
         playGame(computerNum);

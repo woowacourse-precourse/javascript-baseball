@@ -14,7 +14,10 @@ const printCompareResult = (ballCount, strikeCount) => {
     }
 
     MissionUtils.Console.print(resultMSG);
-    return resultMSG;
+    if (strikeCount === 3) {
+        return true;
+    }
+    return false;
 }
 
 module.exports = printCompareResult;
