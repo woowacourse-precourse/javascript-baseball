@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const { ERROR_MSG, GAME_STATE_MSG } = require("./errorMsg");
+const { ERROR_MSG, GAME_STATE_MSG, GAME_STATE } = require("./errorMsg");
 
 class App {
 	constructor() {
@@ -9,7 +9,6 @@ class App {
 
 	play() {
 		this.comNumber = this.makeComNum();
-
 		this.gameStart(this.comNumber);
 	}
 	makeComNum() {
@@ -23,11 +22,32 @@ class App {
 
 	gameStart(comNumber) {
 		MissionUtils.Console.readLine(GAME_STATE_MSG.READY, (userInput) => {
-			const arr = userInput.split("").map((ele) => Number(ele));
-			const userNumber = this.inputValidFn(arr);
-			console.log(comNumber, arr);
+			const userData = userInput.split("").map((ele) => Number(ele));
+			const userNumber = this.inputValidFn(userData);
 			const [ball, strike] = this.gameResult(comNumber, userNumber);
+
+			const gameOver = this.gamePrint(ball, strike);
 		});
+	}
+
+	gamePrint(ball, strike) {
+		let gameOver = false;
+		if (ball === 0 && strike === 0)
+			MissionUtils.Console.print(GAME_STATE.NOTTHING);
+		else if (strike === 3) {
+			gameOver = true;
+			MissionUtils.Console.print(`${strike}${GAME_STATE.STRIKE}`);
+		} else if (strike === 0 && ball !== 0) {
+			MissionUtils.Console.print(`${ball}${GAME_STATE.BALL}`);
+		} else if (ball === 0 && strike !== 0) {
+			MissionUtils.Console.print(`${strike}${GAME_STATE.BALL}`);
+		} else {
+			MissionUtils.Console.print(
+				`${ball}${GAME_STATE.BALL} ${strike}${GAME_STATE.STRIKE}`
+			);
+		}
+
+		return gameOver;
 	}
 
 	gameResult(com, user) {
