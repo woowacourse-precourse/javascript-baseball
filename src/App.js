@@ -31,9 +31,15 @@ function baseBall(answers){
   let countStrike;
   
   Console.readLine('숫자를 입력해주세요 : ', (inputNums) => {
-
+    exceptionHandling(inputNums);
     
   });
+}
+
+function exceptionHandling(input){
+  if(input.length != 3 || isNaN(input) || input[0]=='-') throw "Exception1 : Wrong Input!";
+  if(input.indexOf('0')>=0) throw "Exception2 : Cannot Enter Zero!";
+  if(input[0]==input[1] || input[1]==input[2] || input[0]==input[2]) throw "Exception3 : Duplicate Input!";
 }
 
 module.exports = App;
