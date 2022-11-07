@@ -1,6 +1,7 @@
 const Messages = require('./messages');
-const {print} = require('./input');
+const {print, read} = require('./input');
 const Game = require('./game');
+const {parseEndSelect, EndSelect} = require('./constants');
 
 class App {
   // eslint-disable-next-line class-methods-use-this
@@ -10,6 +11,12 @@ class App {
     while (true) {
       const game = new Game();
       await game.play();
+
+      print(Messages.END_SELECT);
+      const endSelect = parseEndSelect(await read());
+      if (endSelect === EndSelect.SHUTDOWN) {
+        break;
+      }
     }
   }
 }
