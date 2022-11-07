@@ -4,5 +4,6 @@ const GAME_MESSAGE = Object.freeze({
   FINSH_GAME_MESSAGE: "숫자 야구 게임을 종료합니다.",
   ASK_GAME_CONTINUE_OR_EXIT: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
   NOTIFY_INPUT_WRONG_NUMBER: "1또는 2만 입력해주세요.",
+  NOTIFY_GAME_CLEAR: `3개의 숫자를 모두 맞히셨습니다 ! 게임 종료`,
 });
 module.exports = GAME_MESSAGE;
