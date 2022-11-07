@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const IsVaildNumber = require("../src/IsVaildNumber");
 
 class App{
   constructor(){
@@ -20,21 +21,12 @@ class App{
   
   userInput(){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(userInputValue)=>{
-      this.isVaildUserInput(userInputValue);
+      IsVaildNumber.isVaildUserInput(userInputValue);
       const InputNumber = userInputValue.split('').map((v)=>parseInt(v));
       this.getHintCount(InputNumber);
     });
   }
-  
-  isVaildUserInput(number){
-    if(number.length !== 3){
-      throw new Error("숫자 세자리 수를 입력하세요.");
-    }
-    const uniqueUserNum = new Set(number);
-    if(uniqueUserNum.size !== number.length){
-      throw new Error("중복되지 않는 숫자를 입력하세요.");
-    }
-  }
+
 
   getHintCount(userInput){
     let COUNT_STRIKE = 0;
@@ -73,6 +65,7 @@ class App{
   isSuccessGame(strike){
     if(strike ===3){
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',(optionNumber)=>{
+        IsVaildNumber.IsVaildOptionNumber(optionNumber);
         this.reStart(optionNumber);
         this.gameExit(optionNumber);
       });
@@ -100,6 +93,7 @@ class App{
   play(){
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getRandumNumber();
+    MissionUtils.Console.print(this.uniqueNumberList)
     this.userInput();
   
   }
