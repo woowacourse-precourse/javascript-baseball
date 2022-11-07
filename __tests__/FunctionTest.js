@@ -82,3 +82,20 @@ describe("채점 테스트", () => {
     expect(app.score.strikes).toEqual(0);
   });
 });
+
+describe("게임 종료 요건 테스트", () => {
+  const app = new App();
+
+  test("3스트라이크이면 게임 종료 true", () => {
+    app.score.strikes = 3;
+
+    expect(app.checkGameOver()).toBeTruthy();
+  });
+
+  test("3스트라이크가 아니면 게임 종료 false", () => {
+    app.score.strikes = 2;
+    app.score.balls = 1;
+
+    expect(app.checkGameOver()).toBeFalsy();
+  });
+});
