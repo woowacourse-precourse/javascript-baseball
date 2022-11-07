@@ -48,6 +48,17 @@ class App {
       : (arr.includes(randNo) || arr.push(randNo),
         this.#initComputerNumbers(arr));
   }
+  #takeUserNumbersInput() {
+    Console.readLine(this.#GAME_MSG.PLEASE_INPUT, (input) => {
+      const inputNumberArr = input.trim().split("").map(Number);
+      try {
+        checkUserNumbersInputValidity(inputNumberArr);
+        return inputNumberArr;
+      } catch (e) {
+        this.#handleException(e);
+      }
+    });
+  }
   play() {}
 }
 

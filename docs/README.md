@@ -38,11 +38,11 @@
 
 ### 3-1. 사용자로부터 입력받는 기능(#takeUserNumbersInput) 구현
 
-- [ ] 1. #GAME_MSG.PLEASE_INPUT 출력하며 사용자의 값을 입력(`Console.readLine`을 이용) 받음
-- [ ] 2. 숫자 배열로 변환(`String.prototype.split`, `Array.prototype.map`, `Number`을 이용)
-- [ ] 3. 입력 유효성 검사([`checkUserNumbersInputValidity`](#3-2-세자리-숫자-유효성-검사-기능checkusernumbersinputvalidity-구현))
-  - [ ] 3.1 catch에서 [`#handleException`](#9-에러-처리-기능handleexception-구현) 호출
-- [ ] 4. 입력 받은 숫자 배열 return
+- [x] 1. #GAME_MSG.PLEASE_INPUT 출력하며 사용자의 값을 입력(`Console.readLine`을 이용) 받음
+- [x] 2. 숫자 배열로 변환(`String.prototype.split`, `Array.prototype.map`, `Number`을 이용)
+- [x] 3. 입력 유효성 검사([`checkUserNumbersInputValidity`](#3-2-세자리-숫자-유효성-검사-기능checkusernumbersinputvalidity-구현))
+  - [x] 3.1 catch에서 [`#handleException`](#9-에러-처리-기능handleexception-구현) 호출
+- [x] 4. 입력 받은 숫자 배열 return
 
 ### 3-2. 세자리 숫자 유효성 검사 기능(checkUserNumbersInputValidity) 구현
 
