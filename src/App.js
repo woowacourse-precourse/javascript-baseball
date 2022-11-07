@@ -3,18 +3,19 @@ class App {
   play() {    
     let computerRandomNum = this.createRandomNumber();
     let userInputNum=this.InputUserNumber();
+    MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
     //console.log(userInputNum);
     while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
      // console.log(userInputNum+"di");
-      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+      
 
       //let lastNum=userInputNum;
       //console.log(userInputNum);
-      if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
+      //if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
         
         userInputNum=this.InputUserNumber();
         //console.log(userInputNum+" 3");
-      }
+      //}
       MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
 
       }
@@ -160,7 +161,7 @@ class App {
       this.play();
       return true;
       }
-    if(userInputNum==2){
+    else if(userInputNum==2){
       MissionUtils.Console.print("게임 종료");
       return false;
       }
