@@ -92,10 +92,10 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
-        if (answer === "1") {
+        if (answer.trim() === "1") {
           const newRefNumbersArray = this.refNumbersArrayGetter();
           this.gameStarter(newRefNumbersArray);
-        } else if (answer === "2") {
+        } else if (answer.trim() === "2") {
           MissionUtils.Console.close();
         } else {
           throw "1또는 2만 입력할 수 있습니다.";
