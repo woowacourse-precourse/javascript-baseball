@@ -6,6 +6,8 @@ const STRIKE = "스트라이크";
 const BALL = "볼";
 
 const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 :";
+const CHECK_REPLAY_OR_EXIT_MESSAGE =
+  "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
 
 const LENGTH_ERROR_MESSAGE = "3자리의 수를 입력해주세요.";
 const RANGE_ERROR_MESSAGE = "1부터 9까지의 수만 입력해주세요.";
@@ -46,6 +48,16 @@ class App {
     });
 
     return playerNum;
+  }
+
+  inputReplayNum() {
+    let replayNum;
+
+    MissionUtils.Console.readLine(CHECK_REPLAY_OR_EXIT_MESSAGE, (input) => {
+      replayNum = parseInt(input);
+    });
+
+    return replayNum;
   }
 
   isValidPlayerInput(playerNum) {
