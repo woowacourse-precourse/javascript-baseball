@@ -14,6 +14,7 @@ class App {
     this.getUserNumber();
     this.strike = this.gameResultCount(this.answerNum, this.randomList).strike;
     this.ball = this.gameResultCount(this.answerNum, this.randomList).ball;
+    this.printGameMessage(this.strike, this.ball);
   }
 
   gameStartMsg() {
@@ -73,6 +74,20 @@ class App {
     }
 
     return result;
+  }
+
+  printGameMessage(strike, ball) {
+    let text = '';
+    if (strike === 0 && ball === 0) {
+      text = '낫싱';
+    } else if (strike === 0 && ball !== 0) {
+      text = `${ball}볼`;
+    } else if (strike !== 0 && ball === 0) {
+      text = `${strike}스트라이크`;
+    } else {
+      text = `${ball}볼 ${strike}스트라이크`;
+    }
+    return text;
   }
 
 }
