@@ -65,7 +65,7 @@ class App {
 
   printResult() {
     let printStatement = '';
-    if (this.ball > 0) printStatement = this.ball + BALL_PHRASE;
+    if (this.ball > 0) printStatement = this.ball + BALL_PHRASE + ' ';
     if (this.strike > 0) printStatement += this.strike + STRIKE_PHRASE;
     if (printStatement.length === 0) printStatement = NOTHING_PHRASE;
     MissionUtils.Console.print(printStatement);
