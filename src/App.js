@@ -88,4 +88,6 @@ class App {
     if(ball > 0 && strike > 0)  return Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 }
+const app = new App();
+app.play();
 module.exports = App;
