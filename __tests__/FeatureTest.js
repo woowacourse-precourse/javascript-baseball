@@ -149,4 +149,33 @@ describe("기능 목록 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("사용자 숫자를 입력할 때 잘못된 입력이 들어왔을 때 예외를 발생", () => {
+    const answers = ["1234", "abc"];
+    const messages = [
+      "guessNumbers/invalid-length",
+      "guessNumbers/invalid-user-input",
+    ];
+
+    mockQuestions(answers);
+
+    const app = new App();
+
+    messages.forEach((message) => {
+      expect(() => {
+        app.guessNumbers();
+      }).toThrow(message);
+    });
+  });
+
+  test("사용자 숫자를 입력할 때 잘못된 입력이 들어왔을 때 예외를 발생", () => {
+    const answers = ["3"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.replay();
+    }).toThrow("replay/invalid-user-input");
+  });
 });

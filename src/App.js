@@ -30,8 +30,12 @@ class App {
 
   guessNumbers() {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      if (answer.length > 3) {
-        throw new Error("error/over-length-user-input");
+      if (answer.length !== 3) {
+        throw new Error("guessNumbers/invalid-length");
+      }
+
+      if (isNaN(answer)) {
+        throw new Error("guessNumbers/invalid-user-input");
       }
 
       const userNumbers = this.separateNumbers(answer);
@@ -46,6 +50,10 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
+        if (answer !== "1" && answer !== "2") {
+          throw new Error("replay/invalid-user-input");
+        }
+
         answer === "1" ? this.startGame() : Console.close();
       }
     );
