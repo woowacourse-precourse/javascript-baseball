@@ -10,10 +10,9 @@ class Computer {
     this.ComputerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1,9,3);
   }
 
-  get getComputerNumbers(){
+  getComputerNumbers(){
     return this.ComputerNumbers;
   }
-
 
 }
 
