@@ -6,7 +6,6 @@ class App {
 
   play() {
     this.gameStartMessage();
-    this.computerRandomNumber();
     this.getUserNumberInput();
   }
 
@@ -27,18 +26,18 @@ class App {
   }
 
   getUserNumberInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numberInput) => {
-      this.userNumberInput = numberInput;
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      this.checkError(userInput);
     });
   }
 
-  checkError(numberInput) {
+  checkError(userInput) {
     const NUMBERS = /^[1-9]+$/
-    if(!NUMBERS.test(numberInput)) throw new Error('숫자가 입력되지 않았습니다');
+    if(!NUMBERS.test(userInput)) throw new Error('숫자가 입력되지 않았습니다');
     
-    if(numberInput.length !== 3) throw new Error('3개의 글자가 아닙니다.');
+    if(userInput.length !== 3) throw new Error('3개의 글자가 아닙니다.');
 
-    if(new Set(numberInput).size !== 3) throw new Error('중복된 숫자가 있습니다.');
+    if(new Set(userInput).size !== 3) throw new Error('중복된 숫자가 있습니다.');
   }
 }
 
