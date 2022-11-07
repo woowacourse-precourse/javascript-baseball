@@ -72,4 +72,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("숫자만 입력할 수 있습니다.");
   });
+
+  test("중복 숫자 입력 시", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["113"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("중복된 수는 입력할 수 없습니다.");
+  });
 });
