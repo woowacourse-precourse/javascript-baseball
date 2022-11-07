@@ -31,19 +31,32 @@ class App {
 
   playTurn() {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.checkUserDigitsValidity(userInput);
-      const userDigits = [...userInput].map(Number);
+      let userDigits;
+      if (this.checkUserDigitsValidity(userInput)) {
+        userDigits = [...userInput].map(Number);
+      }
       return this.referee(userDigits);
     });
   }
 
   checkUserDigitsValidity(userInput) {
-    if (
-      userInput != parseInt(userInput, 10) ||
-      userInput.length !== this.DIGITS_LENGTH
-    ) {
-      throw new Error("input should be three digits");
+    if (userInput != parseInt(userInput, 10)) {
+      return App.throwError("The input value must contain only numbers");
     }
+    if (userInput.length !== this.DIGITS_LENGTH) {
+      return App.throwError("The input value must be three digits");
+    }
+    if (userInput.includes("0")) {
+      return App.throwError("The input value must not contain zero");
+    }
+    if (new Set(userInput).size !== this.DIGITS_LENGTH) {
+      return App.throwError("Input value must not contain duplicate numbers");
+    }
+    return true;
+  }
+
+  static throwError(errorMessage) {
+    throw new Error(errorMessage);
   }
 
   referee(userDigits) {
