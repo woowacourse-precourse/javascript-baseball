@@ -7,7 +7,7 @@ class App {
   }
 
   start() {
-    this.computerNumber = 0;
+    this.computerNumber = this.getRandomComputerNumber();
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
@@ -15,6 +15,19 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       String(input).split('');
     });
+  }
+
+  getRandomComputerNumber() {
+    const randomArray = [];
+
+    while (this.randomArray.length < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+
+      if (!randomArray.includes(randomNumber)) {
+        randomArray.push(randomNumber);
+      }
+    }
+    return randomArray.join('');
   }
 
   play() {
