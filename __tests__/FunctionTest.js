@@ -12,20 +12,24 @@ describe("야구게임 함수 테스트", () => {
   });
 
   test("유효한 숫자를 입력했는지 확인", () => {
-    const wrong1 = [2, 3, 2];
-    const wrong2 = [2, 3, 9, 0];
-    const wrong3 = [1];
+    const repeat = [2, 3, 2];
+    const overNumber = [2, 3, 9, 0];
+    const underNumber = [1];
+    const hasZero = [0, 1, 2];
     const right = [1, 2, 3];
 
     expect(() => {
-      app.checkValidity(wrong1);
+      app.checkValidity(repeat);
     }).toThrow(ERROR_MESSAGE.REPEAT);
     expect(() => {
-      app.checkValidity(wrong2);
+      app.checkValidity(overNumber);
     }).toThrow(ERROR_MESSAGE.QUANTITY);
     expect(() => {
-      app.checkValidity(wrong3);
+      app.checkValidity(underNumber);
     }).toThrow(ERROR_MESSAGE.QUANTITY);
+    expect(() => {
+      app.checkValidity(hasZero);
+    }).toThrow(ERROR_MESSAGE.HAS_ZERO);
     expect(() => {
       app.checkValidity(right);
     }).toBeTruthy();
@@ -33,15 +37,16 @@ describe("야구게임 함수 테스트", () => {
 
   test("스트라이크와 볼 갯수 옳게 출력하는 지 확인", () => {
     const computer = [1, 2, 3];
-    const user = [1, 8, 2];
-    const answer = { ballNum: 1, strikeNum: 1 };
 
-    expect(app.getResult(computer, user)).toEqual(answer);
-    expect(app.getResult([1, 2, 3], [4, 5, 6])).toEqual({
+    expect(app.getResult(computer, [1, 8, 2])).toEqual({
+      ballNum: 1,
+      strikeNum: 1,
+    });
+    expect(app.getResult(computer, [4, 5, 6])).toEqual({
       ballNum: 0,
       strikeNum: 0,
     });
-    expect(app.getResult([1, 2, 3], [3, 1, 2])).toEqual({
+    expect(app.getResult(computer, [3, 1, 2])).toEqual({
       ballNum: 3,
       strikeNum: 0,
     });
