@@ -1,6 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this._randomNumber = undefined;
+  }
+
   play() {
     this.startGame();
   }
@@ -11,7 +15,15 @@ class App {
     this.inputUserNumber();
   }
 
-  setRandomNumber() {}
+  setRandomNumber() {
+    const threeNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      9,
+      3,
+    );
+    const randomNumber = MissionUtils.Random.shuffle(threeNumberArray);
+    this.randomNumber = randomNumber;
+  }
 
   inputUserNumber() {}
 
