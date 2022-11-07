@@ -1,16 +1,18 @@
+const { ANSWER_LENGTH } = require("./constants");
+
 class Controller {
   isValidInput(input) {
     return this.isRightLength(input) && this.hasDuplicateNumbers(input);
   }
 
   isRightLength(input) {
-    return input.length === 3;
+    return input.length === ANSWER_LENGTH;
   }
 
   hasDuplicateNumbers(input) {
     return input.filter(function (number, index) {
       return input.indexOf(number) === index;
-    }).length === 3;
+    }).length === ANSWER_LENGTH;
   }
 
   compareAnswer(input, answer) {
@@ -43,7 +45,7 @@ class Controller {
   }
 
   isFinish(strikes) {
-    return strikes === 3;
+    return strikes === ANSWER_LENGTH;
   }
 
   makeHint(strikes, balls) {
