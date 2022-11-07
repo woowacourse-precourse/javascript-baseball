@@ -19,13 +19,14 @@ class App {
   }
 
   setAnswer() {
-    this.answer = [];
-    while (this.answer.length < 3) {
-      let number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (this.answers === undefined || !this.answers.includes(number)) {
-        this.answer.push(number);
+    const answer = [];
+    while (answer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!answer.includes(number)) {
+        answer.push(number);
       }
     }
+    this.answer = [...answer];
   }
 
   setHint() {
