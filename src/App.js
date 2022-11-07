@@ -2,7 +2,6 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.isFirstPlay = true;
     this.isRestart = false;
 
     this.strike = 0;
