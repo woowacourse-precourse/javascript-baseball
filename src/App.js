@@ -73,13 +73,21 @@ class App{
   isSuccessGame(strike){
     if(strike ===3){
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',(optionNumber)=>{
-   
+        this.reStart(optionNumber);
+ 
       });
     } else this.userInput();
     
       
   }
 
+  reStart(reStartNumber){
+    const RESTART_NUMBER = '1';
+    if(reStartNumber === RESTART_NUMBER){
+      this.getRandumNumber();
+      this.userInput();
+    }
+  }
 
 
   play(){
