@@ -1,15 +1,13 @@
 function compareDigit(number, index, arr) {
-  let result;
-
   if (number === arr[index]) {
-    result = '스트라이크';
+    return '스트라이크';
   }
 
   if (number !== arr[index] && arr.includes(number)) {
-    result = '볼';
+    return '볼';
   }
 
-  return result;
+  return 'nothing';
 }
 
 function compareArrResult(comArr, userArr) {
