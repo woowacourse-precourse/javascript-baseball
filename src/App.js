@@ -18,6 +18,7 @@ function checkDuplicate(answer) {
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
+    this.userAnswer = [];
   }
 
   createRandomNumber() {
@@ -31,6 +32,12 @@ class App {
     return computerRandomNumber;
   }
 
+  setUserAnswer(answerArray) {
+    for (let number of answerArray) {
+      this.userAnswer.push(parseInt(number));
+    }
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
@@ -39,13 +46,14 @@ class App {
         const removeSpace = answer.replace(/ /g, '');
         checkNumber(removeSpace);
         checkLength(removeSpace);
-        const answerArray = answer.split('');
+        const answerArray = removeSpace.split('');
         checkDuplicate(answerArray);
-
+        this.setUserAnswer(removeSpace.split(''));
       } catch (error) {
         console.log(error);
       }
     });
+
   }
 }
 const app = new App();
