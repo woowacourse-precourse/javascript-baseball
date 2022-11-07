@@ -18,9 +18,9 @@ class App {
     let user = [];
     let result = "";
     MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-      if (this.isValid.isValid(answer) === true) {
+      if (this.isValid.isValid(answer)) {
         answer.split("").forEach((x) => user.push(+x));
-        result = this.compare.compare(computer, user);
+        result = this.compare.printHint(computer, user);
         MissionUtils.Console.print(result);
         if (result.split("\n")[1] == this.CORRECT) {
           this.restartOrShutdown();
