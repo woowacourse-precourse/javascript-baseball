@@ -28,27 +28,30 @@ function game(computer) {
     const result = returnResult(compareNumberArr);
     MissionUtils.Console.print(result);
 
-    
     if(compareNumberArr[1] === 3) {
       askGamePlay();
+    } else {
+      game(computer);
     }
-    
-    game(computer);
   });
 };
 
 
 function askGamePlay() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
-    if(answer == 1) {
-      const computer = pickRandomNumbers();
-      game(computer);
-    } else if(answer == 2) {
-      MissionUtils.Console.print('게임 종료');
-      return MissionUtils.Console.close();
-    } else {
-      MissionUtils.Console.print('잘못된 값 입력. 게임 종료');
-      return MissionUtils.Console.close();
+    try {
+      if(answer == 1) {
+        const computer = pickRandomNumbers();
+        game(computer);
+      } else if(answer == 2) {
+        MissionUtils.Console.print('게임 종료');
+        return MissionUtils.Console.close();
+      } else {
+        MissionUtils.Console.close();
+        throw '잘못된 값 입력. 게임 종료';
+      }
+    } catch(error) {
+      MissionUtils.Console.print(error);
     }
   });
 }
