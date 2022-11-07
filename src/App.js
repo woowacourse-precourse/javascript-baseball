@@ -50,7 +50,6 @@ class App {
     let inputNumber;
     MissionUtils.Console.readLine("숫자를 입력해 주세요. : ", (number) => {
       inputNumber = number;
-      MissionUtils.Console.close();
     });
     return inputNumber;
   }
@@ -67,14 +66,13 @@ class App {
       throw new Error(
         "길이가 3인 숫자를 입력해야합니다. 프로그램을 종료합니다."
       );
-    if (INPUT_NUM_ARR.includes(0))
-      throw new Error(
-        "0은 입력값에 포함 될 수 없습니다. 프로그램을 종료합니다."
-      );
     if (INPUT_NUM_ARR.length !== INPUT_NUM_SET.size)
+      // 중복된 숫자면 error throw.
       throw new Error(
         "각각 다른 숫자를 입력해야합니다. 프로그램을 종료합니다."
       );
+    if (!inputNum.match(/[1-9]{3}/))
+      throw new Error("유효한 입력이 아닙니다. 프로그램을 종료합니다.");
   }
 
   compareTwoNumbers(answer, number) {
