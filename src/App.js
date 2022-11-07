@@ -97,6 +97,10 @@ class App {
   }
 
   isValidPlayerInput(playerNum) {
+    if (isNaN(parseInt(playerNum))) {
+      throw new Error(NOT_A_NUMBER_ERROR_MESSAGE);
+    }
+
     if (!this.isValidLength(playerNum)) {
       throw new Error(LENGTH_ERROR_MESSAGE);
     }
@@ -107,10 +111,6 @@ class App {
 
     if (!this.isValidDuplicated(playerNum)) {
       throw new Error(DUPLICATED_ERROR_MESSAGE);
-    }
-
-    if (isNaN(parseInt(playerNum))) {
-      throw new Error(NOT_A_NUMBER_ERROR_MESSAGE);
     }
 
     return true;
