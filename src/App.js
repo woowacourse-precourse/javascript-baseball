@@ -12,31 +12,31 @@ class App {
     this.cpuNum = (num1.toString()+num2.toString()+num3.toString());
   }
   receivePredictNum() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
-      this.validCheck(inputNum);
-      this.baseballCheck(this.cpuNum, inputNum);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputPredictNum) => {
+      this.PredictNumvalidCheck(inputPredictNum);
+      this.baseballCheck(this.cpuNum, inputPredictNum);
     });
     
   }
-  validCheck(number){
-    let numberIsDiff = new Set(number).size;
-    let isntNum = /[^0-9]/g;
-    if(number.length!==3){
+  PredictNumvalidCheck(predictNum){
+    let numberIsDiff = new Set(predictNum).size;
+    const IS_NOT_NUMBER = /[^1-9]/g;
+    if(predictNum.length!==3){
       throw new Error("3자리 숫자를 입력해주세요");
     }
-    if(numberIsDiff!==3){
+    if(predictNum.length!==numberIsDiff){
       throw new Error("서로 다른 숫자를 입력해주세요");
     }
-    if(isntNum.test(number)){
-      throw new Error("숫자만 입력해주세요(0~9)");
+    if(IS_NOT_NUMBER.test(predictNum)){
+      throw new Error("숫자만 입력해주세요(1~9)");
     }
   }
-  baseballCheck(COMPUTER_NUMBERS, USER_PREDICT_NUMBERS){
+  baseballCheck(cpuNumber, userPredictNumber){
     let strike = 0, ball = 0;
     for(let sequenceNumber=0;sequenceNumber<3;sequenceNumber++){
-      if(COMPUTER_NUMBERS[sequenceNumber] === USER_PREDICT_NUMBERS[sequenceNumber]){
+      if(cpuNumber[sequenceNumber] === userPredictNumber[sequenceNumber]){
         strike+=1;
-      }else if(COMPUTER_NUMBERS.includes(USER_PREDICT_NUMBERS[sequenceNumber])){
+      }else if(cpuNumber.includes(userPredictNumber[sequenceNumber])){
         ball+=1;
       }
     }
@@ -67,9 +67,9 @@ class App {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
   wantRegame() {
-    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
-      this.regameValidCheck(inputNum);
-      if(inputNum==='1'){
+    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputMenuNum) => {
+      this.regameValidCheck(inputMenuNum);
+      if(inputMenuNum==='1'){
         this.play();
       }else{
         MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
@@ -77,15 +77,15 @@ class App {
       }
     });
   }
-  regameValidCheck(number){
-    let isntNum = /[^1|2]/g;
-    if(number.length!==1){
+  regameValidCheck(MenuNum){
+    const IS_NOT_ONE_OR_TWO = /[^1|2]/g;
+    if(MenuNum.length!==1){
       throw new Error("1자리 숫자 (1 or 2) 를 입력해주세요");
     }
-    if(isntNum.test(number)){
+    if(IS_NOT_ONE_OR_TWO.test(MenuNum)){
       throw new Error("숫자만 입력해주세요(1 or 2)");
     }
-    return number;
+    return MenuNum;
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
