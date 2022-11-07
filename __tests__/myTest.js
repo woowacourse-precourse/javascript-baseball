@@ -6,7 +6,7 @@ const getLogSpy = () => {
     return logSpy;
   };
 
-describe("printAndDecide", () => {
+describe("myTest", () => {
     const App = require("../src/App");
     const app = new App();
     const logSpy = getLogSpy();
