@@ -117,10 +117,12 @@ class App {
     return result;
   }
 
-  // 숫자를 모두 맞춘 경우
+  // 숫자를 모두 맞춘 경우, 숫자를 다 맞추지 못한 경우
   checkThreeStrikes(result, computer) {
     if (result === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료.");
+    } else {
+      this.inputUserNumber(computer);
     }
   }
 }
