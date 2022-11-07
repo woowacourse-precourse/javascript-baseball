@@ -17,10 +17,35 @@ class App {
 
   play() {
     this.answer = this.generateAnswer()
+    this.getInput()
   }
 
   generateAnswer() {
     return Random.pickUniqueNumbersInRange(this.from, this.to, this.ballCount)
+  }
+
+  getInput() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if (this.isInvalidInput(input)) {
+        throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.')
+      }
+
+      const numbers = Array.from(input).map((digit) => parseInt(digit))
+      const gameResult = {}
+
+      // 게임 끝나지 않았으면 다시 getInput 호출
+      // 게임 끝났으면 1, 2 선택할 수 있는 메서드 호출
+    })
+  }
+
+  /**
+   * @param {string} input
+   * @returns {boolean}
+   */
+  isInvalidInput(input) {
+    const inputValidationExpression = new RegExp(`^\\d{${this.ballCount}}$`)
+
+    return !inputValidationExpression.test(input)
   }
 
   close() {
