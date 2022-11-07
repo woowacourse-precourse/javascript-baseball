@@ -155,7 +155,7 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test.only("게임종료 테스트", () => {
+  test("게임종료 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["246", "124", "145", "315", "351", "135"];
     const logSpy = getLogSpy();
@@ -178,6 +178,19 @@ describe("숫자 야구 게임", () => {
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(output));
     });
+  });
+
+  test.only("게임 종료 후 재시작 여부 확인시 잘못된 입력이 있으면 예외가 발생되며 종료된다.", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123", "a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
   });
 
   test("게임 종료 후 재시작", () => {
