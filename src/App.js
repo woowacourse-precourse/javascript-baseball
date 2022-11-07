@@ -16,6 +16,10 @@ function checkDuplicate(answer) {
   if (set.size !== 3) throw new Error('서로 다른 수를 입력해주세요.');
 }
 
+function checkZero(answer) {
+  if (answer.includes('0')) throw new Error('1~9 사이 수를 입력해주세요.');
+}
+
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
@@ -43,6 +47,7 @@ class App {
       checkLength(removeSpace);
       const answerArray = removeSpace.split('');
       checkDuplicate(answerArray);
+      checkZero(answerArray);
       this.compareTwoArray(answerArray);
     });
   }
