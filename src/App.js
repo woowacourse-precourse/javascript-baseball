@@ -74,7 +74,7 @@ class App{
     if(strike ===3){
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',(optionNumber)=>{
         this.reStart(optionNumber);
- 
+        this.gameExit(optionNumber);
       });
     } else this.userInput();
     
@@ -89,6 +89,13 @@ class App{
     }
   }
 
+  gameExit(exitNumber){
+    const EXIT_NUMBER = '2';
+    if(exitNumber === EXIT_NUMBER){
+      MissionUtils.Console.print('게임 종료');
+      MissionUtils.Console.close();
+    }
+  }
 
   play(){
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
