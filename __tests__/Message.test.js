@@ -30,3 +30,14 @@ describe('print()', () => {
     }).toThrow();
   });
 });
+
+describe('start()', () => {
+  test('숫자 야구 게임을 시작합니다. 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.start());
+
+    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+});
