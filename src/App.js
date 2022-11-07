@@ -3,11 +3,12 @@ const { Console } = require('@woowacourse/mission-utils');
 const InputError = require('./InputError');
 const ValidationError = require('./ValidationError');
 const Computer = require('./Computer');
+const Judge = require('./Judge');
 
 // constants
 const { GAME_SETTING, RESULT } = require('./utils/constants');
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT } = GAME_SETTING;
-const { NOTHING, BALL, STRIKE } = RESULT;
+const { STRIKE } = RESULT;
 
 class App {
   play() {
@@ -34,7 +35,7 @@ class App {
       }
 
       const player = Array.from(input, Number);
-      const result = this.getResult(computer, player);
+      const result = Judge.getResult(computer, player);
       Console.print(result);
 
       if (result !== `${NUMBER_COUNT}${STRIKE}`) {
@@ -62,33 +63,6 @@ class App {
     if (inputNumberSet.size !== NUMBER_COUNT) {
       throw new ValidationError('서로 다른 숫자만 입력하세요.');
     }
-  }
-
-  countExist(computer, player) {
-    const computerSet = new Set(computer);
-    const exists = player.filter((guess) => computerSet.has(guess));
-    return exists.length;
-  }
-
-  countStrike(computer, player) {
-    const strikes = player.filter((guess, i) => guess === computer[i]);
-    return strikes.length;
-  }
-
-  getResult(computer, player) {
-    const exist = this.countExist(computer, player);
-    const strike = this.countStrike(computer, player);
-    const ball = exist - strike;
-
-    if (exist === 0) {
-      return `${NOTHING}`;
-    } else if (strike === 0) {
-      return `${ball}${BALL}`;
-    } else if (ball === 0) {
-      return `${strike}${STRIKE}`;
-    }
-
-    return `${ball}${BALL} ${strike}${STRIKE}`;
   }
 
   askPlayAgain() {
