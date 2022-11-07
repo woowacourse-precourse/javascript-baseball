@@ -1,12 +1,26 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const MissionUtils = require("@woowacourse/mission-utils");
 const { Random, Console } = MissionUtils;
 class App {
   randomNumbers;
+
   userInputs;
+
+  score = {
+    STRIKE: 0,
+    BALL: 0,
+  };
 
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.saveRandomNumbers();
     this.saveUserInputs();
+  }
+
+  resetScore(){
+    this.score = {
+      STRIKE: 0,
+      BALL: 0
+    };
   }
 
   saveRandomNumbers() {
@@ -23,6 +37,7 @@ class App {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.userInputs = answer;
       this.isValidNumber();
+      this.calculationScore();
     });
   }
 
@@ -55,10 +70,23 @@ class App {
   isOverLayRange() {
     const answerToArray = [...this.userInputs];
     const answerToSet = new Set(answerToArray);
-    if (answerToArray.length !== answerToSet.size){
+    if (answerToArray.length !== answerToSet.size) {
       throw new Error("중복된 값을 입력하였습니다.");
     }
     return true;
+  }
+
+  // 점수 계산기
+  calculationScore() {
+    this.resetScore();
+    [...String(this.userInputs)].map((inputString, index) => {
+      const inputNumber = Number(inputString);
+      if (inputNumber === this.randomNumbers[index]) {
+        this.score.STRIKE += 1;
+      } else if (this.randomNumbers.includes(inputNumber)) {
+        this.score.BALL += 1;
+      }
+    });
   }
 }
 
