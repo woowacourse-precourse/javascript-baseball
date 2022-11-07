@@ -153,22 +153,20 @@ describe("기능 목록 테스트", () => {
   test("사용자 숫자를 입력할 때 잘못된 입력이 들어왔을 때 예외를 발생", () => {
     const answers = ["1234", "abc"];
     const messages = [
-      "guessNumbers/invalid-length",
-      "guessNumbers/invalid-user-input",
+      "separateNumbers/invalid-length",
+      "separateNumbers/invalid-user-input",
     ];
-
-    mockQuestions(answers);
 
     const app = new App();
 
-    messages.forEach((message) => {
+    messages.forEach((message, index) => {
       expect(() => {
-        app.guessNumbers();
+        app.separateNumbers(answers[index]);
       }).toThrow(message);
     });
   });
 
-  test("사용자 숫자를 입력할 때 잘못된 입력이 들어왔을 때 예외를 발생", () => {
+  test("재시작에 대해 잘못된 입력이 들어왔을 때 예외를 발생", () => {
     const answers = ["3"];
 
     mockQuestions(answers);

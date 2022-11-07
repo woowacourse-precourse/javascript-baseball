@@ -30,14 +30,6 @@ class App {
 
   guessNumbers() {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      if (answer.length !== 3) {
-        throw new Error("guessNumbers/invalid-length");
-      }
-
-      if (isNaN(answer)) {
-        throw new Error("guessNumbers/invalid-user-input");
-      }
-
       const userNumbers = this.separateNumbers(answer);
       const memo = this.mark(this.computer, userNumbers);
       this.printResultMessage(memo);
@@ -60,6 +52,14 @@ class App {
   }
 
   separateNumbers(str) {
+    if (str.length !== 3) {
+      throw new Error("separateNumbers/invalid-length");
+    }
+
+    if (isNaN(str)) {
+      throw new Error("separateNumbers/invalid-user-input");
+    }
+
     return [...str].map((digit) => Number(digit));
   }
 
