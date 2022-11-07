@@ -1,3 +1,9 @@
+const NUMBER = {
+    DIGIT: 3,
+    MINIMUM_RANGE: 1,
+    MAXIMUM_RANGE: 9
+};
+
 const MESSAGE = {
     START: '숫자 야구 게임을 시작합니다.',
     INPUT: '숫자를 입력해주세요 : ',
@@ -6,5 +12,6 @@ const MESSAGE = {
 };
 
 module.exports = {
+    NUMBER,
     MESSAGE
 }
