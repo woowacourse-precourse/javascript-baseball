@@ -64,6 +64,8 @@ class App {
       result = strikeBallCount[0] + "스트라이크";
     } else if (strikeBallCount[1] > 0 && strikeBallCount[0] == 0) {
       result = strikeBallCount[1] + "볼";
+    } else if (strikeBallCount[0] > 0 && strikeBallCount[1] > 0) {
+      result = strikeBallCount[1] + "볼 " + strikeBallCount[0] + "스트라이크";
     }
   }
 }
