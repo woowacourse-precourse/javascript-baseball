@@ -32,36 +32,37 @@ class App {
     let computerArray = this.NumberToArray(computer);
 
     let result = new Map();
-
     result.set("스트라이크", null);
     result.set("볼", null);
 
     inputArray.forEach((e, idx) => {
-      computerArray.indexOf(e) != -1
-        ? computerArray.indexOf(e) == idx
-          ? result.set("스트라이크", result.get("스트라이크") + 1 ?? 1)
-          : result.set("볼", result.get("볼") + 1 ?? 1)
-        : "";
+      // 같은 자리수의 숫자일때, 스트라이크
+      if (computerArray.indexOf(e) == idx) {
+        result.set("스트라이크", result.get("스트라이크") + 1 ?? 1);
+      }
+      // 같은 숫자가 다른 자리수일때, 볼
+      else if (computerArray.indexOf(e) != -1) {
+        result.set("볼", result.get("볼") + 1 ?? 1);
+      }
     });
     this.gameResult = result;
     this.printResult();
   }
 
   printResult() {
+    let result = this.gameResult;
+
     // 볼, 스트라이크가 둘 다 null인 경우
-    if (!this.gameResult.get("볼") && !this.gameResult.get("스트라이크")) {
+    if (!result.get("볼") && !result.get("스트라이크")) {
       MissionUtils.Console.print("낫싱");
       // 모두 맞춘 경우
-    } else if (this.gameResult.get("스트라이크") == 3) {
+    } else if (result.get("스트라이크") == 3) {
       MissionUtils.Console.print("3스트라이크");
     } else {
-      let ball =
-        this.gameResult.get("볼") != null
-          ? this.gameResult.get("볼") + "볼"
-          : "";
+      let ball = result.get("볼") != null ? result.get("볼") + "볼" : "";
       let strike =
-        this.gameResult.get("스트라이크") != null
-          ? this.gameResult.get("스트라이크") + "스트라이크"
+        result.get("스트라이크") != null
+          ? result.get("스트라이크") + "스트라이크"
           : "";
       MissionUtils.Console.print(
         ball ? ball.concat(strike ? " " + strike : "") : strike
