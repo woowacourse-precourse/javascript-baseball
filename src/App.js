@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const [Console, Random] = [MissionUtils.Console,MissionUtils.Random];
+const [Console, Random] = [MissionUtils.Console, MissionUtils.Random];
 
 function makeTarget() {
   const tempArr = [];
@@ -15,55 +15,54 @@ function makeTarget() {
 }
 
 function readData(targetArr) {
+
   let isAnswer = false;
 
-  while (!isAnswer) {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
-
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {    
       const inputArr = [...input].map(Number);
-
       isAnswer = handleData(inputArr, targetArr);
+      if(!isAnswer) readData(targetArr);
     });
-  }
+  
 }
 
-function handleData(inputArr, targetArr) {
-  let [strike, ball] = [0,0];
 
-  inputArr.forEach((input,idx)=>{
+function handleData(inputArr, targetArr) {
+  let [strike, ball] = [0, 0];
+
+  inputArr.forEach((input, idx) => {
     const targetIdx = targetArr.findIndex(target => target === input);
-    if(targetIdx === idx){
+    if (targetIdx === idx) {
       strike += 1;
     }
-    else if(targetIdx !== -1){
+    else if (targetIdx !== -1) {
       ball += 1;
     }
   })
 
-  return printResult([strike,ball]);
+  return printResult([strike, ball]);
 }
 
-function printResult(countArr){
+function printResult(countArr) {
   const [strike, ball] = countArr;
 
-  if(strike === 0 && ball===0){
+  if (strike === 0 && ball === 0) {
     Console.print("낫싱");
     return false;
   }
-  else if(ball !==0 && strike===0){
+  else if (ball !== 0 && strike === 0) {
     Console.print(`${ball}볼`);
     return false;
   }
-  else if(ball ===0 && strike !==0){
+  else if (ball === 0 && strike !== 0) {
     Console.print(`${strike}스트라이크`);
-    if(strike === 3) return true;
+    if (strike === 3) return true;
     else return false;
   }
-  else if(ball !==0 && strike !==0){
+  else if (ball !== 0 && strike !== 0) {
     Console.print(`${ball}볼 ${strike}스트라이크`);
     return false;
   }
-
 }
 
 
@@ -77,13 +76,13 @@ class App {
 
       while (isRepeat) {
         const targetArr = makeTarget();
+        console.log(targetArr);
         readData(targetArr);
-        isRepeat =false;
-        Console.close();
+        isRepeat = false;
       }
     } catch (err) {
       Console.print(err);
-      process.exit();
+      Console.close();
     }
 
 
