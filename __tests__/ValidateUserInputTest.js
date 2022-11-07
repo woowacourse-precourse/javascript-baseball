@@ -2,18 +2,15 @@ const { Console } = require("@woowacourse/mission-utils");
 const ValidateUserInput = require("../src/baseball/ValidateUserInput");
 
 describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
-  // isThreeDigitsNumberInRange
   test("1 ~ 9가 아닌 다른 문자열 입력 시 throw", () => {
-    // given
     const randoms = "ab*";
 
-    // then
     expect(() => {
       ValidateUserInput.isThreeDigitsNumberInRange(randoms);
     }).toThrow();
   });
 
-  test("3자리수가 아니면 throw", () => {
+  test("3자리 수가 아니면 throw", () => {
     const randoms = "1234";
 
     expect(() => {
@@ -45,7 +42,6 @@ describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
     }).not.toThrow();
   });
 
-  // isOneOrTwo
   test("1 또는 2 외의 문자열 입력 시 throw", () => {
     const input = "3";
 
