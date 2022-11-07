@@ -6,7 +6,7 @@ class App {
   }
 
   play() {
-    this.baseballGame.play();
+    this.baseballGame.start();
   }
 }
 

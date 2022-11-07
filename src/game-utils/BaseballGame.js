@@ -14,9 +14,10 @@ class BaseballGame {
     else Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
   };
 
-  play() {
+  start() {
     Console.print('숫자 야구 게임을 시작합니다.');
-    this.playGame();
+
+    return this.playGame();
   }
 
   playGame() {
