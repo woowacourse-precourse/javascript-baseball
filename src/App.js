@@ -2,7 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const COMPUTER_NUMBER = [];
 
 class App {
-  play() {}
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.randomComputerNumber();
+    this.userInputNumber(COMPUTER_NUMBER);
+  }
 
   randomComputerNumber() {
     while (COMPUTER_NUMBER.length < 3) {
