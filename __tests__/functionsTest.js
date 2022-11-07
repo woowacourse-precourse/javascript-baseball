@@ -97,14 +97,32 @@ describe("야구 게임 테스트", () => {
     const app = new App();
     const result = app.calculateScore(computer, user);
 
-    expect(result).toEqual([1, 1]);
+    expect(result).toEqual([
+      {
+        name: "볼",
+        score: 1,
+      },
+      {
+        name: "스트라이크",
+        score: 1,
+      },
+    ]);
   });
 
   test("점수 출력", () => {
     const logSpy = jest.spyOn(console, "log");
     logSpy.mockClear();
 
-    const score = [1, 1];
+    const score = [
+      {
+        name: "볼",
+        score: 1,
+      },
+      {
+        name: "스트라이크",
+        score: 1,
+      },
+    ];
 
     const app = new App();
     app.printScore(score);

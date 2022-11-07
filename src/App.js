@@ -91,14 +91,19 @@ class App {
         strike++;
       }
     });
-    return [ball, strike];
+    return [
+      {
+        name: "볼",
+        score: ball,
+      },
+      {
+        name: "스트라이크",
+        score: strike,
+      },
+    ];
   }
 
-  printScore(score) {
-    const scoreList = [
-      { name: "볼", score: score[0] },
-      { name: "스트라이크", score: score[1] },
-    ];
+  printScore(scoreList) {
     let newScoreList = scoreList.filter((item) => {
       return item.score >= 1;
     });
