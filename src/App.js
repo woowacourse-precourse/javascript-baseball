@@ -9,7 +9,7 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.compareAnswer();
+    this.enterAnswer();
   }
 
   makeRandomNumber() {
@@ -21,16 +21,20 @@ class App {
     return results;
   }
 
-  compareAnswer() {
+  enterAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputs = input.split("").map((i) => Number(i));
-      const score = this.calculateScore(this.answer, inputs);
-      const print = this.printScore(score);
       handleException(inputs);
-      MissionUtils.Console.print(print);
-      if (this.isTyping) this.compareAnswer();
-      else this.isContinueGame();
+      this.compareAnswer(inputs);
     });
+  }
+
+  compareAnswer(inputs) {
+    const score = this.calculateScore(this.answer, inputs);
+    const print = this.printScore(score);
+    MissionUtils.Console.print(print);
+    if (this.isTyping) this.enterAnswer();
+    else this.isContinueGame();
   }
 
   calculateScore(answers, inputs) {
@@ -65,7 +69,7 @@ class App {
     if (input === 1) {
       this.isTyping = true;
       this.answer = this.makeRandomNumber();
-      this.compareAnswer();
+      this.enterAnswer();
     }
     if (input === 2) {
       MissionUtils.Console.print("게임을 종료합니다.");
