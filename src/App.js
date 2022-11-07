@@ -85,7 +85,7 @@ class App {
           this.printResult(BALL_CNT, STRIKE_CNT);
           if (STRIKE_CNT == 3) {
             MissionUtils.Console.print(
-              "3개의 숫자를 모두 맞히셨습니다! 게임종료\n"
+              "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n"
             );
             clear = false;
           }
