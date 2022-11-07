@@ -97,6 +97,17 @@ describe("Game Methods Test", () => {
 
   })
 
+  test.each([
+    [123,456,0],
+    [312,432,1],
+    [412,123,2],
+    [123,312,3],
+  ])('case 4) Get Ball Count Test', (randomNum,inputNum,count) => {
+  
+    const app = new App();
+    expect(app.getBallCount(randomNum,inputNum)).toBe(count);
+
+  })
 
 })
 
