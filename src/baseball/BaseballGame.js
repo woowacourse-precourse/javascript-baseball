@@ -19,7 +19,7 @@ class BaseballGame {
   };
 
   playTurn = (pickedNumberByUser) => {
-    this.validateUserInput.validate(pickedNumberByUser);
+    this.validateUserInput.isThreeDigitsNumberInRange(pickedNumberByUser);
 
     let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
