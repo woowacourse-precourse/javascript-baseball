@@ -29,7 +29,7 @@ class App {
         );
         this.printResult(countResultArr);
         if (countResultArr[1] === GAME_NUMBER_LENGTH) this.checkRestart();
-        this.getInput();
+        else this.getInput();
       }
     });
   }
@@ -53,13 +53,13 @@ class App {
   checkRestart() {
     mConsole.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     mConsole.readLine("", (restartInput) => {
-      if (this.checkRestartNumber(restartInput)) {
+      if (this.isRestartNumber(restartInput)) {
         this.restartGame(Number(restartInput));
       }
     });
   }
 
-  checkRestartNumber(restartInput) {
+  isRestartNumber(restartInput) {
     if (Number(restartInput) < 1 || Number(restartInput) > 2)
       throw "1 또는 2를 입력해주세요.";
     if (isNaN(restartInput)) throw "숫자를 입력해주세요.";
