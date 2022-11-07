@@ -95,12 +95,12 @@ function playNewGameOrQuit() {
 function gameNotCleared(ballCount, strikeCount, computerAnswer) {
   if (strikeCount > 0 && ballCount > strikeCount) {
     MissionUtils.Console.print(
-      ballCount - strikeCount + '볼 ' + strikeCount + '스트라이크'
+      `${ballCount - strikeCount}볼 ${strikeCount}스트라이크`
     );
   } else if (strikeCount !== 0 && strikeCount == ballCount) {
-    MissionUtils.Console.print(strikeCount + '스트라이크');
+    MissionUtils.Console.print(`${strikeCount}스트라이크`);
   } else if (ballCount !== 0 && strikeCount == 0) {
-    MissionUtils.Console.print(ballCount + '볼');
+    MissionUtils.Console.print(`${ballCount}볼`);
   } else {
     MissionUtils.Console.print('낫싱');
   }
