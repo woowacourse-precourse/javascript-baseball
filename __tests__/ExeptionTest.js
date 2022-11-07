@@ -25,4 +25,10 @@ describe("유저 입력 숫자 테스트", () => {
     const input = '1';
     expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
   });
+
+  test("user의 input에 0이 포함될때 에러뜨는지 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = '012';
+    expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
+  });
 });
