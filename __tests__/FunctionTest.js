@@ -1,5 +1,4 @@
 const App = require("../src/App");
-const MissionUtils = require("@woowacourse/mission-utils");
 
 const app = new App();
 
