@@ -40,20 +40,21 @@ class App {
         ball+=1;
       }
     }
-    let answer = this.printBaseballCheck(strike, ball);
-    MissionUtils.Console.print(answer);
+    this.printBaseballCheck(strike, ball);
     this.isCorrect(strike);
   }
   printBaseballCheck(strike, ball){
+    let answer = '';
     if(strike===0 && ball===0){
-      return '낫싱'
+      answer = '낫싱';
     }else if(strike===0){
-      return ball+'볼';
+      answer = ball+'볼';
     }else if(ball===0){
-      return strike+'스트라이크';
+      answer = strike+'스트라이크';
     }else{
-      return ball+'볼 '+strike+'스트라이크';
+      answer = ball+'볼 '+strike+'스트라이크';
     }
+    MissionUtils.Console.print(answer);
   }
   isCorrect(strike){
     if(strike === 3){
@@ -85,7 +86,6 @@ class App {
     if(IS_NOT_ONE_OR_TWO.test(MenuNum)){
       throw new Error("숫자만 입력해주세요(1 or 2)");
     }
-    return MenuNum;
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
