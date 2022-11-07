@@ -1,4 +1,8 @@
 const { Random } = require("@woowacourse/mission-utils");
+const { ANSWER_LENGTH } = require("./constants");
+
+const MINIMUM_RANGE = 1;
+const MAXIMUM_RANGE = 9;
 
 class Computer {
   constructor() {
@@ -6,7 +10,7 @@ class Computer {
   }
 
   makeAnswer() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3);
+    return Random.pickUniqueNumbersInRange(MINIMUM_RANGE, MINIMUM_RANGE, ANSWER_LENGTH);
   }
 
   get answer() {
