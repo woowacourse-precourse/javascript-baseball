@@ -69,6 +69,15 @@ function App () {
       this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
     }
 
+    function getUserAnswer () {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+        if(isValidInput(answer)){
+          getScore(matchNumber(answer, this.randomNumber));
+          return;
+        } throw '올바른 값을 입력하세요.';
+      })
+    }
+    
   }
 }
 
