@@ -1,27 +1,28 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+let MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   cpuNum;
   predictNum;
   makeRandomNumber() {
-    const num1 = MissionUtils.Random.pickNumberInRange(0, 10);
+    let num1 = MissionUtils.Random.pickNumberInRange(1, 9);
     let num2 =0, num3 = 0;
-    do{ num2 = MissionUtils.Random.pickNumberInRange(0, 10);}
+    do{ num2 = MissionUtils.Random.pickNumberInRange(1, 9);}
       while(num2 === num1);
-    do{ num3 = MissionUtils.Random.pickNumberInRange(0, 10);}
+    do{ num3 = MissionUtils.Random.pickNumberInRange(1, 9);}
       while(num3 === num2 && num3 === num1 );
-
-    return this.cpuNum = num1.toString()+num2.toString()+num3.toString();
+    this.cpuNum = num1.toString()+num2.toString()+num3.toString();
   }
   receivePredictNum() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
-      const checkedInputNum = this.validCheck(inputNum);
-      return this.predictNum = checkedInputNum;
+      this.validCheck(inputNum);
+      this.predictNum = inputNum;
+      this.baseballCheck();
     });
+    
   }
   validCheck(number){
-    const numberIsDiff = new Set(number).size;
-    const isntNum = /[^0-9]/g;
+    let numberIsDiff = new Set(number).size;
+    let isntNum = /[^0-9]/g;
     if(number.length!==3){
       throw new Error("3자리 숫자를 입력해주세요");
     }
@@ -31,11 +32,10 @@ class App {
     if(isntNum.test(number)){
       throw new Error("숫자만 입력해주세요(0~9)");
     }
-    return number;
   }
   baseballCheck(){
-    const COMPUTER_NUMBERS = this.cpuNum.split("");
-    const USER_PREDICT_NUMBERS = this.predictNum.split("");
+    let COMPUTER_NUMBERS = this.cpuNum.split("");
+    let USER_PREDICT_NUMBERS = this.predictNum.split("");
     let strike = 0, ball = 0;
     for(let sequenceNumber=0;sequenceNumber<3;sequenceNumber++){
       if(COMPUTER_NUMBERS[sequenceNumber] === USER_PREDICT_NUMBERS[sequenceNumber]){
@@ -44,9 +44,9 @@ class App {
         ball+=1;
       }
     }
-    const answer = this.printBaseballCheck(strike, ball);
+    let answer = this.printBaseballCheck(strike, ball);
     MissionUtils.Console.print(answer);
-    return strike;
+    this.isCorrect(strike);
   }
   printBaseballCheck(strike, ball){
     if(strike===0 && ball===0){
@@ -62,7 +62,14 @@ class App {
   isCorrect(strike){
     if(strike === 3){
       this.gameClearMessage();
-      return true;
+      let REGAMENUMBER = this.wantRegame();
+      if(REGAMENUMBER===1){
+        this.play();
+      }else{
+        MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+        MissionUtils.Console.close();
+        return 0;
+      }
     }else{
       return false;
     }
@@ -72,12 +79,12 @@ class App {
   }
   wantRegame() {
     MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
-      const checkedInputNum = this.regameValidCheck(inputNum);
+      let checkedInputNum = this.regameValidCheck(inputNum);
       return checkedInputNum;
     });
   }
   regameValidCheck(number){
-    const isntNum = /[^1|2]/g;
+    let isntNum = /[^1|2]/g;
     if(number.length!==1){
       throw new Error("1자리 숫자 (1 or 2) 를 입력해주세요");
     }
@@ -87,23 +94,10 @@ class App {
     return number;
   }
   play() {
-    let correctState = false;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.makeRandomNumber();
-    while(!correctState){
-      this.receivePredictNum();
-      const strikeCount = this.baseballCheck();
-      correctState = this.isCorrect(strikeCount);
-    }
-    const REGAMENUMBER = this.wantRegame();
-    if(REGAMENUMBER===1){
-      this.play();
-    }else{
-      MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
-      return 0;
-    }
+    this.receivePredictNum();
   }
 }
-const app = new App();
-app.play();
+
 module.exports = App;
