@@ -1,38 +1,38 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { MESSAGE, PLAYING } = require("./Message");
+const { NOTICE, HINT } = require("./notice");
 
 class App {
     constructor() {
-        this.computer = [];
-        this.user = [];
+        this.computerNumber = [];
+        this.guess = [];
         this.strike = 0;
         this.ball = 0;
     }
 
     play() {
-        Console.print(MESSAGE.START);
+        Console.print(NOTICE.START);
         this.gameStart();
     }
 
     gameStart() {
         this.makeRandomNumber();
-        this.questionNumber();
+        this.guessNumber();
         this.gameFinish();
     }
 
     makeRandomNumber() {
-        this.computer = [];
-        while (this.computer.length < 3) {
+        this.computerNumber = [];
+        while (this.computerNumber.length < 3) {
             const number = Random.pickNumberInRange(1, 9);
-            if (!this.computer.includes(number)) {
-                this.computer.push(number);
+            if (!this.computerNumber.includes(number)) {
+                this.computerNumber.push(number);
             }
         }
     }
 
-    questionNumber() {
-        Console.readLine(MESSAGE.NUMBERQUESTION, (userInput) => {
-            this.user = userInput.split("");
+    guessNumber() {
+        Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
+            this.guess = userInput.split("");
             this.isValidNumber(userInput);
             this.ballStrikeCount();
         });
@@ -40,7 +40,7 @@ class App {
 
     isValidNumber(userInput) {
         if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput) || this.hasWrongWord(userInput)) {
-            throw new Error(MESSAGE.ERROR);
+            throw new Error(NOTICE.ERROR);
         }
     }
     hasZero(userInput) {
@@ -48,7 +48,7 @@ class App {
     }
     hasSameNumber(userInput) {
         const setInput = new Set(userInput);
-        return setInput.size !== this.user.length;
+        return setInput.size !== this.guess.length;
     }
     hasRightLength(userInput) {
         return userInput.length !== 3;
@@ -65,34 +65,34 @@ class App {
         this.printResult(strikeCount, ballCount);
     }
     judgeStrike() {
-        this.strike = this.computer.filter((el, idx) => el.toString() === this.user[idx]).length;
+        this.strike = this.computerNumber.filter((el, idx) => el.toString() === this.guess[idx]).length;
     }
     judgeBall() {
-        const ball = this.computer.filter((el) => this.user.includes(el.toString()));
+        const ball = this.computerNumber.filter((el) => this.guess.includes(el.toString()));
         this.ball = ball.length;
     }
 
     printResult(strikeCount, ballCount) {
         if (ballCount === 0 && strikeCount === 0) {
-            Console.print(PLAYING.OUT);
-            return this.questionNumber();
+            Console.print(HINT.OUT);
+            return this.guessNumber();
         }
         if (strikeCount === 3) {
-            Console.print(strikeCount + PLAYING.STRIKE);
-            Console.print(MESSAGE.CLEAR);
+            Console.print(strikeCount + HINT.STRIKE);
+            Console.print(NOTICE.CLEAR);
             return this.questionFinish();
         }
         if (strikeCount === 0) {
-            Console.print(ballCount + PLAYING.BALL);
-            return this.questionNumber();
+            Console.print(ballCount + HINT.BALL);
+            return this.guessNumber();
         }
         if (strikeCount - ballCount === 0) {
-            Console.print(strikeCount + PLAYING.STRIKE);
-            return this.questionNumber();
+            Console.print(strikeCount + HINT.STRIKE);
+            return this.guessNumber();
         }
         if (ballCount !== 0 && strikeCount !== 0) {
-            Console.print(`${ballCount - strikeCount + PLAYING.BALL} ${strikeCount + PLAYING.STRIKE}`);
-            return this.questionNumber();
+            Console.print(`${ballCount - strikeCount + HINT.BALL} ${strikeCount + HINT.STRIKE}`);
+            return this.guessNumber();
         }
     }
 
@@ -101,14 +101,14 @@ class App {
     }
 
     questionFinish() {
-        Console.readLine(MESSAGE.FINISHQUESTION, (finishInput) => {
+        Console.readLine(NOTICE.FINISH_QUESTION, (finishInput) => {
             if (this.restartGame(finishInput)) {
                 return this.gameStart();
             }
             if (this.finishGame(finishInput)) {
                 return Console.close();
             }
-            throw new Error(MESSAGE.ERROR);
+            throw new Error(NOTICE.ERROR);
         });
     }
     restartGame(finishInput) {
