@@ -17,7 +17,8 @@ class App {
   askForNumbers() {
     Console.readLine("숫자를 입력해주세요 : ", (receivedNumbers) => {
       if (this.isValidInput(receivedNumbers)) {
-        // this.makeRandomNumber()
+        const correctNumbers = this.makeRandomNumber();
+        // receivedNumbers와 correctNumbers를 결과 출력 함수의 인자로 전달
       } else {
         throw "잘못된 입력입니다.";
       }
