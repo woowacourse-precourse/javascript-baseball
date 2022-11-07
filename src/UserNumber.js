@@ -9,7 +9,7 @@ class UserNumber{
     }
 
     threeDigitsError(answer){
-    if(answer.length !==3){
+    if(answer.length !== 3){
         throw "Error (숫자의 길이가 3이 아닙니다.)" ;
     }
 }
