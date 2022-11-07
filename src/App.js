@@ -51,11 +51,11 @@ class App {
     return userNumber;
   }
 
-  strikeCounter(computer, userNumber) {
+  strikeCounter(computerNumber, userNumber) {
     let strike = 0;
     let ball = 0;
-    for (let idx = 0; idx < computer.length; idx++) {
-      let index = userNumber.indexOf(computer[idx]);
+    for (let idx = 0; idx < computerNumber.length; idx++) {
+      let index = userNumber.indexOf(computerNumber[idx]);
       if (index !== -1 && index === idx) strike++;
       else if (index !== -1 && index !== idx) ball++;
     }
