@@ -12,8 +12,10 @@ class App {
   }
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
-      this.userInput = ans.split("").map((v) => +v);
-      this.chekUserInput();
+      if (this.handleUserNumException(ans)) {
+        this.userInput = ans.split("").map((v) => +v);
+        this.chekUserInput();
+      }
     });
   }
   chekUserInput() {
@@ -34,7 +36,7 @@ class App {
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
         (ans) => {
           Console.print(typeof ans);
-          ans = Number(ans);
+          ans = this.handleGameEndException(ans);
           if (ans === 1) {
             this.play();
           } else if (ans === 2) {
@@ -64,7 +66,19 @@ class App {
     }
     throw "exception";
   }
-  handleUserNumException() {}
+  //depth 확인
+  handleUserNumException(ans) {
+    if (ans.length !== 3) throw "exception";
+    else {
+      let isException = false;
+      for (let i = 0; i < ans.length; i++) {
+        let ansAscii = ans.charCodeAt(i);
+        if (ansAscii >= 49 && ansAscii <= 57) isException = true;
+      }
+      if (isException) throw "exception";
+    }
+    return true;
+  }
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.createRandomNumber();
