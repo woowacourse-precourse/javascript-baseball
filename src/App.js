@@ -3,9 +3,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const GAME_START_KEY = "1";
 const GAME_EXIT_KEY = "2";
 
-const MIN_RANDOM_NUIMBER = 1
-const MAX_RANDOM_NUMBER = 9
-const VALID_NUMBER_LENGTH = 3
+const MIN_RANDOM_NUIMBER = 1;
+const MAX_RANDOM_NUMBER = 9;
+const VALID_NUMBER_LENGTH = 3;
 
 const isValidInput = (input) => {
   if (!isValidLength(input)) {
