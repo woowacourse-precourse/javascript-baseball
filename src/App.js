@@ -18,10 +18,14 @@ class App {
   getUserInput() {
     Console.readLine(`${Message.input}`, (userInput) => {
       checkException(userInput);
-      const result = getResult(this.answer, userInput);
-      console.log(result);
+      this.printResult(userInput);
       Console.close();
     });
+  }
+
+  printResult(userInput) {
+    const result = getResult(this.answer, userInput);
+    console.log(result);
   }
 }
 
