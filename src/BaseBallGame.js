@@ -26,7 +26,7 @@ class BaseBallGame{
     }
 
     isThreeUniqueNumber = (userInput) => {
-        return true ? userInput.length === 3 && new Set(userInput).size === 3 : false;
+        return userInput.length === 3 && new Set(userInput).size === 3? true : false;
     }
 
     isEachVaildNumber = (userInput) => {
@@ -39,7 +39,7 @@ class BaseBallGame{
     }
 
     isVaildInput = (userInput) => {
-        return true ? (this.isThreeUniqueNumber(userInput) && this.isEachVaildNumber(userInput)) : false;
+        return (this.isThreeUniqueNumber(userInput) && this.isEachVaildNumber(userInput))? true : false;
     }
 
     enterUserInput = () => {
@@ -102,7 +102,7 @@ class BaseBallGame{
 
     selectedMessage = () => {
         let message = "";
-        
+
         if (!(this.score["strike"] + this.score["ball"])) message = "낫싱";
     
         if (this.score["strike"] === 3) message = `${this.score["strike"]}스트라이크`;
