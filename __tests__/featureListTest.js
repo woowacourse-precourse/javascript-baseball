@@ -121,4 +121,17 @@ describe('기능 구현 목록 테스트', () => {
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
     );
   });
+
+  test('게임 종료 후 1, 2 외의 숫자 입력시 에러처리', () => {
+    const game = new Game();
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['246', '135', '3'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      game.play();
+    }).toThrow();
+  });
 });
