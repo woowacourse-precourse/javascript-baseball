@@ -81,10 +81,10 @@ const playGame = (computerNumArr) => {
     // 1. 숫자 입력
     const userNum = inputNumbers(); 
 
-    // 2. 비교 
+    // 2. 숫자 비교 
     const comparedResult = compareWithInput(computerNumArr, userNum);
 
-    // 3. 결과 출력
+    // 3. 결과 정답 여부
     const isAnswer = printCompareResult(...comparedResult);
     
     if(isAnswer) { // 정답일 때
