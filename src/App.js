@@ -18,8 +18,7 @@ class App {
     Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
       const { isValid, errorType } = this.isValidUserNumberInput(userInput);
       if (!isValid) {
-        this.quitGame();
-        throw new Error(ERROR_MESSAGE[errorType]);
+        this.handleInputError(errorType);
       }
       const { strikeCount, ballCount } = this.getStrikeBallCount(this.computerInput, userInput);
       const gameResultMessage = this.getGameResultMessage(strikeCount, ballCount);
@@ -47,8 +46,7 @@ class App {
           return;
         }
         default: {
-          this.quitGame();
-          throw new Error(ERROR_MESSAGE.INVALID_TRIGGER);
+          this.handleInputError(ERROR_MESSAGE.INVALID_TRIGGER);
         }
       }
     });
@@ -86,6 +84,10 @@ class App {
     return "낫싱";
   }
 
+  handleInputError(errorType) {
+    this.quitGame();
+    throw new Error(ERROR_MESSAGE[errorType]);
+  }
   hasOnlyNumber(userInput) {
     return userInput
       .split("")
