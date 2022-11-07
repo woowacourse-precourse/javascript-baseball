@@ -67,6 +67,15 @@ class App {
 
     MissionUtils.Console.print(`${result}`);
   }
+
+  gameEndMessage() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userInput) => {
+      if (userInput === '1') app.play();
+      else if (userInput === '2') MissionUtils.Console.close();
+      else throw new Error('다른 값을 입력하셨습니다');
+    });
+  };
 }
 
 const app = new App();
