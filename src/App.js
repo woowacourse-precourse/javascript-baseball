@@ -1,6 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Exception = require("./components/Exception");
 
 class App {
+  constructor() {
+    this.exception = new Exception();
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getComputerNumbers();
@@ -12,8 +17,14 @@ class App {
   }
 
   getUserNumbers(computerNumbers) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (answer) => {
-      this.getCount(answer, computerNumbers);
+    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (userInput) => {
+      const isUserInputError = this.exception.checkError(userInput);
+
+      if (isUserInputError === true) {
+        throw new Error('잘못된 값을 입력하셨습니다. 게임 종료');
+      }
+
+      return this.getCount(answer, computerNumbers);
     });
   }
 
