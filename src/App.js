@@ -14,7 +14,6 @@ class App {
 	constructor() {
 		this.computerNumber = '';
 		this.gameEnd = false;
-		this.quitGame = false;
 	}
 
 	initializeGame() {
