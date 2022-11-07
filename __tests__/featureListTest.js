@@ -89,6 +89,7 @@ describe('기능 구현 목록 테스트', () => {
   });
 
   test('3스트라이크가 아닐 때 getAnswer 함수 반복', () => {
+    const app = new App();
     const logSpy = getLogSpy();
     const randoms = [2, 3, 5];
     const answers = ['246', '253', '352', '235'];
@@ -97,7 +98,6 @@ describe('기능 구현 목록 테스트', () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    const app = new App();
     app.play();
 
     messages.forEach((output) => {
