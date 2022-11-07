@@ -28,6 +28,15 @@ describe("Print Message Test", () => {
     expect(logSpy).toHaveBeenCalledWith(expected);
   });
 
+  test("case 3) All Match Message Test", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.printAllMatchMessage();
+      
+    expect(logSpy).toHaveBeenCalled();
+    
+  });
 
 });
 
