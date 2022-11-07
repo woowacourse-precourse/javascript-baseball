@@ -16,6 +16,7 @@ class ExceptionCheck {
     if (userInput.includes('0')) {
       throw new Error("1~9사이의 숫자만 입력해주세요");
     }
+    return true;
   }
 
   /// 1, 2 에 대한 예외처리도 여기로
