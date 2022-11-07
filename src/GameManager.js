@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-// const ComputerModel = require("./ComputerModel");
 const GAME_MESSAGE = require("./constants/message");
 
 class GameManager {

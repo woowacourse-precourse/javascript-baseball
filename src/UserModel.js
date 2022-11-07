@@ -1,3 +1,5 @@
+const GAME_VALUE = require("./constants/values");
+
 class UserModel {
   convertStringToArray(input) {
     const convertArgsStringToInt = (arg) => Number(arg);
@@ -5,7 +7,7 @@ class UserModel {
   }
 
   isLengthEqualsThree(input) {
-    return input.length !== 3;
+    return input.length !== GAME_VALUE.MAX_NUMBER_LENGTH;
   }
 
   isConsistOfOnlyNumber(input) {
