@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const isValidUser = require("./isValidUser.js");
 
 const mConsole = MissionUtils.Console;
 const mRandom = MissionUtils.Random;
@@ -19,7 +20,7 @@ class App {
 
   getInput() {
     mConsole.readLine("숫자를 입력해주세요 : ", (pickedNumber) => {
-      if (this.checkInputNumber(pickedNumber)) {
+      if (isValidUser(pickedNumber)) {
         const checkedUser = pickedNumber.split("").map(Number);
         const countResultArr = this.countInput(
           this.computerInputNumber,
@@ -28,33 +29,6 @@ class App {
         this.printResult(countResultArr);
       }
     });
-  }
-
-  checkScope(input) {
-    if (input.includes(0)) throw "0이 아닌 1~9 사이 숫자를 입력해주세요.";
-  }
-
-  checkType(input) {
-    if (isNaN(input)) throw "숫자를 입력해주세요.";
-  }
-
-  checkLength(input) {
-    if (input.length !== GAME_NUMBER_LENGTH)
-      throw `${GAME_NUMBER_LENGTH}개의 숫자를 입력해주세요.`;
-  }
-
-  checkDuplicatedInput(input) {
-    if (input.length !== new Set(input).size)
-      throw "서로 다른 숫자를 입력해주세요.";
-  }
-
-  checkInputNumber(input) {
-    this.checkScope(input);
-    this.checkType(input);
-    this.checkLength(input);
-    this.checkDuplicatedInput(input);
-
-    return true;
   }
 
   getComputerNumber() {
