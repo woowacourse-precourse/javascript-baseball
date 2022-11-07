@@ -42,6 +42,18 @@ class App {
       }
     }
   };
+
+  checkingScore(userInputNumber, computerNumber) {
+    let score = [0, 0];
+    for (let i = 0; i < 3; i++) {
+      if (computerNumber[i] == userInputNumber[i]) { // 스트라이크
+        score[0] += 1;
+      } else if (computerNumber.includes(Number(userInputNumber[i]))) { // 볼
+        score[1] += 1;
+      }
+    }
+    return score;
+  };
 }
 
 module.exports = App;
