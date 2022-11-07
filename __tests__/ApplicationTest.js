@@ -102,4 +102,17 @@ describe("예외 테스트", () => {
       app.play();
     }).toThrow("0은 입력할 수 없습니다.");
   });
+
+  test("게임 재시작 시", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "9"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1 또는 2만 입력할 수 있습니다.");
+  });
 });
