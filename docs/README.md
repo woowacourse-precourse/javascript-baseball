@@ -16,6 +16,8 @@ const IS_LEFT = true;
 -기능 목록-
 play() - 게임의 시작
 
+makeRandomNum() - 랜덤 숫자 생성 함수
+
 reGame() - 게임의 반복을 컨트롤 하는 함수 
 /예외처리: 1,2 이외의 숫자가 입력될 경우
 
