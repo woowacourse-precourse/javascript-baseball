@@ -52,13 +52,17 @@ class App {
   }
 
   separateNumbers(str) {
-    if (str.length !== 3) {
+    const characters = [...str];
+
+    if (characters.length !== 3) {
       throw new Error("separateNumbers/invalid-length");
     }
 
-    if (isNaN(str)) {
-      throw new Error("separateNumbers/invalid-user-input");
-    }
+    characters.forEach((character) => {
+      if (isNaN(character)) {
+        throw new Error("separateNumbers/invalid-user-input");
+      }
+    });
 
     return [...str].map((digit) => Number(digit));
   }

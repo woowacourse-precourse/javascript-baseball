@@ -29,14 +29,15 @@ describe("기능 목록 테스트", () => {
     app.setRandomNumbers();
 
     app.computer.forEach((number) => {
-      expect(number >= 1 && number <= 9).toBeTruthy();
+      expect(number).toBeGreaterThanOrEqual(1);
+      expect(number).toBeLessThanOrEqual(9);
     });
 
     const [first, second, third] = app.computer;
 
-    expect(first !== second).toBeTruthy();
-    expect(first !== third).toBeTruthy();
-    expect(second !== third).toBeTruthy();
+    expect(first).not.toEqual(second);
+    expect(first).not.toEqual(third);
+    expect(second).not.toEqual(third);
   });
 
   test("사용자가 입력한 문자열 숫자를 숫자 배열로 변환", () => {
@@ -151,9 +152,10 @@ describe("기능 목록 테스트", () => {
   });
 
   test("사용자 숫자를 입력할 때 잘못된 입력이 들어왔을 때 예외를 발생", () => {
-    const answers = ["1234", "abc"];
+    const answers = ["1234", "abc", "0.5"];
     const messages = [
       "separateNumbers/invalid-length",
+      "separateNumbers/invalid-user-input",
       "separateNumbers/invalid-user-input",
     ];
 
