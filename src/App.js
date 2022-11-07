@@ -43,7 +43,7 @@ class App {
       this.userAnswer = parseInt(answer);
       try {
         this.answerChecker(this.userAnswer);
-        this.resultPrint(this.compareUserAnswer());
+        this.resultPrint(this.compareUserAnswer(this.userAnswer));
         this.play();
       } catch (e) {
         this.exceptionEnd();
@@ -61,13 +61,13 @@ class App {
   inputUserProgress() {
     Console.readLine(MENT.RE_START, (answer) => {
       this.userAnswer = parseInt(answer);
-      this.askUser();
+      this.askUser(this.userAnswer);
       this.play();
     });
   }
 
-  askUser() {
-    const result = this.isPlayContinue();
+  askUser(answer) {
+    const result = this.isPlayContinue(answer);
 
     if (result) {
       this.game = GAME.PLAY;
@@ -80,8 +80,8 @@ class App {
     return;
   }
 
-  isPlayContinue() {
-    switch (this.userAnswer) {
+  isPlayContinue(answer) {
+    switch (answer) {
       case 1:
         return true;
       case 2:
@@ -91,14 +91,15 @@ class App {
     }
   }
 
-  compareUserAnswer() {
-    const answer = this.answer;
-    const user = String(this.userAnswer).split("");
+  compareUserAnswer(answer) {
+    const computerAnswer = this.answer;
+    const user = String(answer).split("");
     const obj = { ball: 0, strike: 0 };
     user.map((n, i) => {
       const num = parseInt(n);
-      if (answer[i] !== num && answer.includes(num)) obj.ball += 1;
-      if (answer[i] === num) obj.strike += 1;
+      if (computerAnswer[i] !== num && computerAnswer.includes(num))
+        obj.ball += 1;
+      if (computerAnswer[i] === num) obj.strike += 1;
     });
     return obj;
   }
