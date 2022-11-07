@@ -9,7 +9,5 @@ class App {
     this.game.gamePlay();
   }  
 }
-const app = new App();
-app.play();
 
 module.exports = App;
