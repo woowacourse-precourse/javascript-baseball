@@ -97,6 +97,23 @@ class App {
     }
     return numberOfStrike;
   }
+  getNumberOfBall(answer, inputNumber, numberOfStrike) {
+    let answerDictinary = {};
+    let numberOfBall = 0;
+
+    for (value of answer) {
+      answerDictinary[value] = true;
+    }
+
+    for (value of inputNumber) {
+      if (answerDictinary[value]) {
+        numberOfBall += 1;
+      }
+    }
+    numberOfBall -= numberOfStrike;
+
+    return numberOfBall;
+  }
 }
 
 module.exports = App;
