@@ -4,7 +4,6 @@ const ValidateUserInput = require("./ValidateUserInput");
 
 class BaseballGame {
   constructor() {
-    this.validateUserInput = new ValidateUserInput();
     this.init(true);
   }
 
@@ -19,7 +18,7 @@ class BaseballGame {
   };
 
   playTurn = (pickedNumberByUser) => {
-    this.validateUserInput.isThreeDigitsNumberInRange(pickedNumberByUser);
+    ValidateUserInput.isThreeDigitsNumberInRange(pickedNumberByUser);
 
     let [strike, ball, nothing] = this.countStrikeBallNothing(
       pickedNumberByUser,
@@ -68,7 +67,7 @@ class BaseballGame {
   inputRestartOrEnd = (selectedNumber) => {
     selectedNumber = Number(selectedNumber);
 
-    this.validateUserInput.isOneOrTwo(selectedNumber);
+    ValidateUserInput.isOneOrTwo(selectedNumber);
 
     if (selectedNumber === 1) {
       this.init(false);

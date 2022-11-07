@@ -1,11 +1,8 @@
 class ValidateUserInput {
-  constructor() {
-    this.numberInRange = /^[1-9]+$/;
-  }
-
-  isThreeDigitsNumberInRange = (pickedNumberByUser) => {
-    const pickedNumber = [];
+  static isThreeDigitsNumberInRange(pickedNumberByUser) {
+    const NUMBER_IN_RANGE = /^[1-9]+$/;
     const ERROR_COMMENT = "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자를 입력해주세요.";
+    const pickedNumber = [];
 
     // 서로 다른 3자리 수를 입력하지 않은 경우
     pickedNumberByUser
@@ -18,19 +15,19 @@ class ValidateUserInput {
     if (
       pickedNumberByUser.length !== 3 ||
       // 1 ~ 9가 아닌 다른 값을 입력한 경우
-      !this.numberInRange.test(pickedNumberByUser)
+      !NUMBER_IN_RANGE.test(pickedNumberByUser)
     ) {
       throw new Error(ERROR_COMMENT);
     }
-  };
+  }
 
-  isOneOrTwo = (selectedNumber) => {
+  static isOneOrTwo(selectedNumber) {
     selectedNumber = Number(selectedNumber);
 
     if (selectedNumber !== 1 && selectedNumber !== 2) {
       throw new Error("1 또는 2만 입력해주세요.");
     }
-  };
+  }
 }
 
 module.exports = ValidateUserInput;
