@@ -14,6 +14,25 @@ function App () {
       return randomNumberArray.join('');
     }
 
+    function matchNumber (num1, num2) {
+      let strike = 0;
+      let ball = 0;
+      const userInput = num1.split('').map(char => Number(char));
+      const computerInput = num2.split('').map(char => Number(char));
+  
+      userInput.forEach((element, index) => {
+        if (computerInput[index] === element) {
+          strike += 1;
+          return;
+        }
+        if (computerInput.includes(element)){
+            ball += 1;
+        }
+      })
+      let result = [ball, strike];
+      return result;
+    }
+    
   }
 }
 
