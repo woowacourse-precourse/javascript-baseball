@@ -18,4 +18,8 @@ describe("숫자 야구 게임 테스트", () => {
       expect(app.checkSameNumber(app.getRandomNumber)).toEqual(false);
     }
   });
+
+  test("3스트라이크 테스트", () => {
+    expect(app.checkResult("123", "123")).toEqual(true);
+  });
 });
