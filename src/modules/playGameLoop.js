@@ -14,12 +14,10 @@ const makeRandomNumber = () => {
 
 const getUsersPrediction = (randomNumber) => {
   Console.readLine(MESSAGE.GAME_QUESTION, (prediction) => {
-    console.log(prediction);
     if (!validateThreeFigures(prediction)) {
       throw MESSAGE.INPUT_INVALID;
     }
     const convertedNumber = prediction.split('').map(Number);
-    console.log(convertedNumber);
     if (isRightAnswer(randomNumber, convertedNumber)) {
       showCorrectMessage();
       getUsersNextAction();
@@ -27,11 +25,11 @@ const getUsersPrediction = (randomNumber) => {
       showNothingMessage();
       getUsersPrediction(randomNumber);
     } else {
-      const [ballCount, strikeCount] = calculateCount(randomNumber, convertedNumber);
+      const { ballCount, strikeCount } = calculateCount(randomNumber, convertedNumber);
       showCountMessage(ballCount, strikeCount);
       getUsersPrediction(randomNumber);
     }
-  })
+  });
 }
 
 const isRightAnswer = (randomNumber, userInput) => {
@@ -53,7 +51,7 @@ const calculateCount = (randomNumber, userInput) => {
       strikeCount++;
     }
   });
-  return [ballCount, strikeCount];
+  return { ballCount, strikeCount };
 }
 
 const getUsersNextAction = () => {
@@ -62,12 +60,11 @@ const getUsersNextAction = () => {
       throw MESSAGE.INPUT_INVALID
     } else if (userInput === GAME.RESTART) {
       const randomNumber = makeRandomNumber();
-      console.log(randomNumber)
       getUsersPrediction(randomNumber);
     } else if (userInput === GAME.QUIT) {
       Console.close();
     }
-  })
+  });
 }
 
 module.exports = {
