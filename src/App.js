@@ -1,6 +1,9 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
+  constructor() {
+    this.correctNumber = null;
+  }
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.askForNumbers();
@@ -11,10 +14,11 @@ class App {
     while (correctNumbers.size < 3) {
       correctNumbers.add(Random.pickNumberInRange(1, 9));
     }
-    return [...correctNumbers].join("");
+    this.correctNumber = [...correctNumbers].join("");
   }
 
   askForNumbers() {
+    this.makeRandomNumber();
     Console.readLine("숫자를 입력해주세요 : ", (receivedNumbers) => {
       this.stirUp(receivedNumbers);
     });
@@ -41,7 +45,7 @@ class App {
    */
   stirUp(receivedNumbers) {
     if (this.isValidInput(receivedNumbers)) {
-      const correctNumbers = this.makeRandomNumber();
+      const correctNumbers = this.correctNumber;
       this.gradeInput(correctNumbers, receivedNumbers);
     } else {
       throw "잘못된 입력입니다.";
