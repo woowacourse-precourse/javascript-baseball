@@ -25,6 +25,18 @@ class App {
       }
     );
   }
+
+  occurredError(userNumberInput) {
+    if (userNumberInput.length != 3) {
+      throw new Error("숫자는 3자리로 입력해야합니다.");
+    }
+    if (new Set(userNumberInput).size != 3) {
+      throw new Error("서로 다른 숫자여야 합니다");
+    }
+    if (/[^1-9]/g.test(userNumberInput)) {
+      throw new Error("1~9 숫자만 입력해주세요");
+    }
+  }
 }
 
 module.exports = App;
