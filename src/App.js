@@ -68,9 +68,9 @@ class App {
   }
   endGame(){
     MissionUtils.Console.print('3스트라이크\n'+'3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (number) => {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
       if(number==1){
-
+        this.getUserInputNumber();
       }
       if(number==2){
         MissionUtils.Console.close();
