@@ -5,6 +5,7 @@ class Game {
     END: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
     SELECT: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
     ERROR: "입력 형식이 잘못되었습니다. 서로 다른 3개의 숫자를 입력하세요.",
+    OUT: "3스트라이크",
   };
 
   static BALLCOUNT_HINT = {
@@ -35,14 +36,14 @@ class Game {
       if (computerNum[index] !== number && computerNum.includes(number))
         count++;
     });
-    if (count > 0) return `${count}${this.BALLCOUNT_HINT.STRIKE}`;
+    if (count > 0) return `${count}${this.BALLCOUNT_HINT.STRIKE} `;
   }
 
   ballCount(userNum, computerNum) {
     const countBall = this.countBall(userNum, computerNum, NUMBER.LENGTH);
     const countStrike = this.countStrike(userNum, computerNum);
 
-    const hint = countBall + " " + countStrike;
+    const hint = countBall + countStrike;
     return hint;
   }
 }
