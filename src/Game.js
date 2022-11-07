@@ -22,12 +22,41 @@ class Game {
     this.printIntro();
 
     this.user.readAnswer(MESSAGE.READ_ANSWER, (answer) => {
-      console.log(answer);
+      const correct = this.checkAnswer(answer);
+
+      if (!correct) this.start();
     });
+  }
+
+  checkAnswer(answer) {
+    const [ball, strike] = this.computer.calcCount(answer);
+
+    this.printResult(ball, strike);
+
+    if (strike === 3) {
+      this.printOutro();
+      return true;
+    }
+
+    return false;
   }
 
   printIntro() {
     this.printMessage(MESSAGE.INTRO);
+  }
+
+  printOutro() {
+    this.printMessage(MESSAGE.OUTRO);
+  }
+
+  printResult(ball, strike) {
+    if (ball === 0 && strike > 0) {
+      this.printMessage(MESSAGE.STRIKE[strike]);
+    } else {
+      this.printMessage(
+        `${MESSAGE.BALL[ball]} ${MESSAGE.STRIKE[strike]}`.trim()
+      );
+    }
   }
 
   printMessage(message) {
