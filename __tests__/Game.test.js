@@ -15,4 +15,14 @@ describe('calculate()', () => {
 
     expect(game.calculate(userInput)).toHaveLength(2);
   });
+
+  test('반환되는 배열의 요소는 모두 숫자 타입이다.', () => {
+    const computerInput = [1, 2, 3];
+    const userInput = [1, 2, 3];
+    const game = new Game(computerInput);
+
+    game.calculate(userInput).forEach((target) => {
+      expect(typeof target).toBe('number');
+    });
+  });
 });
