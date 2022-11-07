@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const { NUMBER, SCORES, MESSAGES } = require("../constants");
 const { selectComputer } = require("./selectComputer");
 const { isUserError } = require("./isUserError");
@@ -10,7 +10,7 @@ playGame = () => {
 };
 
 solveNumber = (computer) => {
-  MissionUtils.Console.readLine(MESSAGES.INPUT_NUMBER, (num) => {
+  Console.readLine(MESSAGES.INPUT_NUMBER, (num) => {
     isUserError(num);
     countScore(computer, num);
   });
@@ -53,13 +53,13 @@ printScore = ({ ball, strike }) => {
   }
   result = result.join(" ");
 
-  MissionUtils.Console.print(result);
+  Console.print(result);
   return result;
 };
 
 isAnswer = (answer, computer) => {
   if (answer.includes(`${NUMBER.LENGTH}${SCORES.STRIKE}`)) {
-    MissionUtils.Console.print(MESSAGES.SUCCESS);
+    Console.print(MESSAGES.SUCCESS);
     return selectOption();
   }
 

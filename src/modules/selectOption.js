@@ -1,8 +1,8 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGES, ERRORS, OPTIONS } = require("../constants");
 
 selectOption = () => {
-  MissionUtils.Console.readLine(MESSAGES.INPUT_OPTION, (num) => {
+  Console.readLine(MESSAGES.INPUT_OPTION, (num) => {
     isOptionError(num);
   });
 };
@@ -14,7 +14,7 @@ isOptionError = (option) => {
     return playGame();
   }
   if (option === END) {
-    MissionUtils.Console.print(MESSAGES.END);
+    Console.print(MESSAGES.END);
     return;
   }
 
