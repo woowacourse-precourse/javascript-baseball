@@ -2,37 +2,51 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const config = require("./config/config");
 
 class App {
+  constructor() {
+    this.computerNumber = [];
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    let computerNumber = this.generateNumber(config.GAME_NUM_SIZE);
-    let userNumber = [];
-    let scoreObject = {};
-    let control = 1;
+    this.start();
+  }
 
-    while (control === 1) {
-      userNumber = this.readNumber();
-      this.isValidNumber(userNumber);
-      // console.log("userNumber", userNumber);
+  start() {
+    this.generateNumber(config.GAME_NUM_SIZE);
+    this.round();
+  }
 
-      scoreObject = this.compareNumber(computerNumber, userNumber);
-      this.printScore(scoreObject);
+  round() {
+    const userNumber = this.readNumber();
+    this.isValidNumber(userNumber);
+    // console.log("userNumber", userNumber);
 
-      if (scoreObject.strike === config.GAME_NUM_SIZE) {
-        MissionUtils.Console.print(
-          `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
-        );
-        control = this.readControl();
-        this.isValidControl(control);
-      }
-      if (scoreObject.strike === config.GAME_NUM_SIZE && control === 1) {
-        computerNumber = this.generateNumber(config.GAME_NUM_SIZE);
-      }
+    const scoreObject = this.compareNumber(this.computerNumber, userNumber);
+    this.printScore(scoreObject);
+
+    if (scoreObject.strike === config.GAME_NUM_SIZE) {
+      this.win();
+    } else {
+      this.round();
     }
   }
 
-  generateNumber(size) {
+  win() {
+    MissionUtils.Console.print(
+      `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+    );
+
+    const control = this.readControl();
+    this.isValidControl(control);
+
+    if (control === 1) {
+      this.start();
+    }
+  }
+
+  generateNumber() {
     const result = [];
-    while (result.length < size) {
+    while (result.length < config.GAME_NUM_SIZE) {
       const number = MissionUtils.Random.pickNumberInRange(
         config.START_GAME_NUM,
         config.END_GAME_NUM
@@ -41,13 +55,13 @@ class App {
         result.push(number);
       }
     }
-    return result;
+    this.computerNumber = result;
   }
 
-  getStrikeCount(computerNumber, userNumber) {
+  getStrikeCount(computer, user) {
     let count = 0;
     for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
-      if (computerNumber[i] === userNumber[i]) {
+      if (computer[i] === user[i]) {
         count++;
       }
     }
@@ -67,8 +81,9 @@ class App {
   compareNumber(computerNumber, userNumber) {
     const strike = this.getStrikeCount(computerNumber, userNumber);
     const sameNumber = this.getSameNumberCount(computerNumber, userNumber);
+    const scoreObject = { strike: strike, ball: sameNumber - strike };
 
-    return { strike: strike, ball: sameNumber - strike };
+    return scoreObject;
   }
 
   printScore(scoreObject) {
