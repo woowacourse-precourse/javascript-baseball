@@ -18,7 +18,6 @@ class App {
 
   round() {
     const userNumber = this.readNumber();
-    this.isValidNumber(userNumber);
     // console.log("userNumber", userNumber);
 
     const scoreObject = this.compareNumber(this.computerNumber, userNumber);
@@ -37,7 +36,6 @@ class App {
     );
 
     const control = this.readControl();
-    this.isValidControl(control);
 
     if (control === 1) {
       this.start();
@@ -110,6 +108,7 @@ class App {
         answerList.push(parseInt(number));
       });
     });
+    this.isValidNumber(answerList);
     return answerList;
   }
 
@@ -121,6 +120,7 @@ class App {
         answer = parseInt(input);
       }
     );
+    this.isValidControl(answer);
     return answer;
   }
 
