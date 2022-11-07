@@ -106,9 +106,18 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
-        // 게임 재시작 여부 답변 핸들링 함수로 전달
+        handleRestart(answer);
       }
     );
+  }
+
+  /**
+   * 유저에게 입력받은 재시작 여부 값에 따라 실행 함수를 설정합니다.
+   * @param {number} answer - 게임 재시작 여부에 대한 유저의 입력 값
+   */
+  handleRestart(answer) {
+    if (answer === 1) this.askForNumbers();
+    else return;
   }
 }
 
