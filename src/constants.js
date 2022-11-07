@@ -15,7 +15,14 @@ const WRONG_INPUT_ALERT = {
   NOT_ONE_OR_TWO : '잘못된 입력입니다.\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 }
 
+const GAME_SCORE_WORD = {
+  NOTHING : '낫싱',
+  BALL : '볼',
+  STRIKE : '스트라이크',
+}
+
 module.exports = {
   GAME_ANNOUNCEMENT_MESSAGE,
   WRONG_INPUT_ALERT,
+  GAME_SCORE_WORD,
 };

@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { GAME_ANNOUNCEMENT_MESSAGE, WRONG_INPUT_ALERT, } = require('./constants.js');
+const { GAME_ANNOUNCEMENT_MESSAGE, WRONG_INPUT_ALERT, GAME_SCORE_WORD } = require('./constants.js');
 
 class Score {
   constructor(ball, strike){
@@ -15,7 +15,6 @@ function initialGameSettings () {
   Console.print(GAME_ANNOUNCEMENT_MESSAGE.GAME_START);
   const answer = Random.pickUniqueNumbersInRange(1, 9, 3);
   return answer;
-
 }
 
 function getUserInput (answer) {
@@ -37,15 +36,25 @@ function checkInput (input) {
 function compareNumber (answer, input) {
   let userScore = Score.makeScoreZero();
   let inputArr = input.split('').map(Number);
-
   inputArr.forEach((input,idx) => {
     if (answer.indexOf(input) === -1) "";
     else if (answer.indexOf(input) === idx) userScore.strike += 1;
     else userScore.ball += 1;
   });
+
+  getBaseballGameResult (answer, userScore)
 }
 
-function getBaseballGameResult () {
+function getBaseballGameResult (answer, userScore) {
+  let resultMessage = '';
+  if (userScore.ball === 3) return userScore.ball + GAME_SCORE_WORD.BALL;
+  else if (userScore.strike === 3) return userScore.strike + GAME_SCORE_WORD.STRIKE;
+  else if (userScore.ball === 0 && userScore.strike === 0 ) return GAME_SCORE_WORD.NOTHING;
+  if (userScore.ball > 0) resultMessage += (userScore.ball + GAME_SCORE_WORD.BALL);
+  if (userScore.strike > 0) resultMessage += (userScore.strike + GAME_SCORE_WORD.STRIKE);
+  Console.print(resultMessage)
+
+  userScore.strike === 3 ? checkRestart() : getUserInput(answer);
 }
 
 function checkRestart () {
