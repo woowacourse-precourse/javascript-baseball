@@ -23,7 +23,7 @@ class App {
     Console.readLine(MESSAGE.INPUT_NUMBER, input => {
       const { computerNumArr } = this;
       const isInputValidate = validateInputValue(input);
-      if (typeof isInputValidate !== 'boolean') return this.wrongInput(isInputValidate);
+      if (typeof isInputValidate !== 'boolean') return this.throwInputError(isInputValidate);
       const inputNumArr = input.split('').map(element => +element);
       const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
       Console.print(gameResult);
@@ -57,10 +57,10 @@ class App {
     if (answer === GAME_PROGRESS.TERMINATE) {
       return this.close();
     }
-    return this.wrongInput(ERROR_MESSAGE.NOT_ONE_OR_TWO_ERROR);
+    return this.throwInputError(ERROR_MESSAGE.NOT_ONE_OR_TWO_ERROR);
   }
 
-  wrongInput(errMessage) {
+  throwInputError(errMessage) {
     throw new Error(errMessage);
   }
 
