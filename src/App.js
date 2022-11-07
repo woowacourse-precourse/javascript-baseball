@@ -75,8 +75,8 @@ function proceedGame() {
 function userMessage(strike, ball) {
   nothingMessage = !ball && !strike ? "낫싱" : "";
   strikeMessage = strike ? `${strike}스트라이크` : "";
-  ballMessage = ball ? `${ball}볼` : "";
-  Console.print(nothingMessage + strikeMessage + ballMessage);
+  ballMessage = ball ? `${ball}볼 ` : "";
+  Console.print(nothingMessage + ballMessage + strikeMessage);
 }
 
 function isStrikeBall(userNum) {
