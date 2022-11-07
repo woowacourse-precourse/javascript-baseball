@@ -34,6 +34,14 @@ class App {
       throw new Error('중복없이 숫자를 입력해주세요.');
     }
   };
+
+  checkUserInputNumberRange(userInput) {
+    for (let i = 0; i < 3; i++) {
+      if (Number[userInput[i]] > 1 || Number[userInput[i]] < 9) {
+        throw new Error('1 ~ 9 사이의 숫자를 입력해주세요.');
+      }
+    }
+  };
 }
 
 module.exports = App;
