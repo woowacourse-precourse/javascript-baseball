@@ -7,6 +7,7 @@ class App {
 
     getCompNumArray(compNumArr);
     printBeginGame();
+    getUserGuess(userNumArr, compNumArr); // get user's guess and check against computer's number
   }
 }
 module.exports = App;
@@ -26,4 +27,21 @@ function printBeginGame() {
 
 function checkDuplicates(array) {
   return new Set(array).size !== array.length;
+}
+
+function getUserGuess(userNumArr, compNumArr) {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+    for (let i = 0; i < userInput.length; i += 1) {
+      if (
+        userInput.length !== 3 ||
+        checkDuplicates(userInput) ||
+        userInput.includes("0")
+      ) {
+        throw new Error("입력값은 중복이 없는 1-9 사이 3개의 숫자여야 합니다.");
+      } else {
+        userNumArr.push(parseInt(userInput[i], 10));
+      }
+    }
+    compareUserGuessToCompNum(userNumArr, compNumArr);
+  });
 }
