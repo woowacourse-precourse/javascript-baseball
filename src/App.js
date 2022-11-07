@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./Constant');
+const { MESSAGE, CHOICE } = require('./Constant');
 const BaseballGameTools = require('./BaseballGameTools');
 
 class App {
@@ -23,6 +23,21 @@ class App {
         this.enterReplayChooseMode();
       } else {
         this.enterGuessMode();
+      }
+    });
+  }
+
+  enterReplayChooseMode() {
+    Console.readLine(MESSAGE.ASK_RESTART, (playerChoice) => {
+      BaseballGameTools.errorIfInvalidChoiceFormat(playerChoice);
+
+      if (playerChoice === CHOICE.PLAY_AGAIN) {
+        this.shuffleNumber();
+        this.enterGuessMode();
+      } else if (playerChoice === CHOICE.EXIT) {
+        Console.close();
+      } else {
+        throw Error(MESSAGE.FORMAT_ERROR_CHOICE);
       }
     });
   }
