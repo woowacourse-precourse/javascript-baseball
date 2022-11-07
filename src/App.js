@@ -12,9 +12,9 @@ class App {
   createAnswer() {
     this.answer = [];
     while (this.answer.length < 3) {
-      const NUMBER = Random.pickNumberInRange(1, 9);
-      if (!this.answer.includes(NUMBER)) {
-        this.answer.push(NUMBER);
+      const ANSWER = Random.pickNumberInRange(1, 9);
+      if (!this.answer.includes(ANSWER)) {
+        this.answer.push(ANSWER);
       }
     }
     console.log(this.answer);
@@ -71,13 +71,13 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         if (input === "1") return this.play();
-        if (input === "2") return process.exit();
+        if (input === "2") throw new Error("게임 종료");
         throw new Error("정해진 값을 입력해주세요.");
       }
     );
   }
 }
-
 const app = new App();
 app.play();
+
 module.exports = App;
