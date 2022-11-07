@@ -86,13 +86,11 @@ class BaseballPlayTool {
     MissionUtils.Console.readLine(TOOL_CONSTANTS.GAME_START, (userInput) => {
       this.userInputError(userInput);
       MissionUtils.Console.print(this.gameRule(computer, userInput));
-      if (!this.answerCheck) {
-        return this.userInputHandler(computer);
-      }
-
-      if (this.answerCheck) {
+      if(this.answerCheck) {
         return this.gameReset();
       }
+
+      return this.userInputHandler(computer);
     });
   }
 
@@ -113,6 +111,7 @@ class BaseballPlayTool {
         MissionUtils.Console.print(NUMBER_CONSTANTS.END);
         return MissionUtils.Console.close();
       }
+
       throw ERROR_CONSTANTS.SET_INPUT;
     });
   }
@@ -132,7 +131,7 @@ const ERROR_CONSTANTS = {
   OVERLAP: '중복된 수가 없는지 확인해야합니다.',
   SCOPE: '1~9까지의 숫자만 입력해야합니다',
   ISNAN: '숫자만 입력해야합니다.',
-  SET_INPUT: '1과 2중 하나만 입력해야합니다.'
+  SET_INPUT: '1과 2중 하나만 입력해야합니다.',
 };
 const NUMBER_CONSTANTS = {
   RE_START: '1',
