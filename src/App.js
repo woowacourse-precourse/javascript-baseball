@@ -3,8 +3,12 @@ const { Console, Random } = MissionUtils;
 
 class App {
   makeRandomNumbers() {
-    const computerNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
-    this.computerNumberArray = computerNumber;
+    const randomNumberArray = [];
+    for (let i = 0; i < 3; i++) {
+      let randomNumber = Random.pickNumberInRange(1, 9);
+      randomNumberArray.push(randomNumber);
+    }
+    this.computerNumberArray = randomNumberArray;
   }
 
   getUserNumbers() {
@@ -55,6 +59,7 @@ class App {
   }
 
   getScore(computerNumber, userNumber) {
+    console.log(computerNumber, userNumber);
     const score = [0, 0];
 
     for (let i = 0; i < 3; i++) {
