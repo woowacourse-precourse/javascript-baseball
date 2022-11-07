@@ -4,14 +4,14 @@ class App {
   answer = [];
   userAnswer = 0;
   isRight = false;
-  err = false;
+
   strike = 0;
   ball = 0;
 
   constructor() {
     this.answer = this.createAnswer();
     this.isRight = false;
-    this.err = false;
+
     this.strike = 0;
     this.ball = 0;
   }
@@ -61,9 +61,6 @@ class App {
       this.initializer();
       await this.doBaseBall();
 
-      if (this.err) {
-        throw new Error("3자리 숫자를 입력하세요!");
-      }
       if (this.isRight && (await this.checkRestartGame())) {
         break;
       } else if (this.isRight) {
@@ -79,14 +76,14 @@ class App {
   reGame = () => {
     this.answer = this.createAnswer();
     this.isRight = false;
-    this.err = false;
+
     this.strike = 0;
     this.ball = 0;
   };
 
   initializer = () => {
     this.isRight = false;
-    this.err = false;
+
     this.strike = 0;
     this.ball = 0;
   };
@@ -94,11 +91,9 @@ class App {
   async doBaseBall() {
     this.userAnswer = await this.input();
     this.checkBallValidity();
-    if (!this.err) {
-      this.judgeResult();
-      this.printResult();
-      this.checkWin();
-    }
+    this.judgeResult();
+    this.printResult();
+    this.checkWin();
   }
 
   async checkWin() {
@@ -145,10 +140,10 @@ class App {
 
   checkBallValidity = () => {
     if (isNaN(parseInt(this.userAnswer))) {
-      this.err = true;
+      throw new Error("숫자를 입력하세요!");
     }
     if ([...this.userAnswer].length !== 3) {
-      this.err = true;
+      throw new Error("3자리 숫자를 입력하세요!");
     }
   };
 
