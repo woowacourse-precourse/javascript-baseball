@@ -56,6 +56,26 @@ class App {
     } else if (strike !== 0 && ball !== 0) {
       result = `${ball}볼 ${strike}스트라이크`;
     }
+    
+    return this.printResult(result, computerNumbers);
+  }
+
+  printResult(result, computerNumbers) {
+    if (result === 'answer') {
+      MissionUtils.Console.print('3스트라이크');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+
+      return this.askRestart();
+    }
+    if (result === 'nothing') {
+      MissionUtils.Console.print('낫싱');
+
+      return this.getUserNumbers(computerNumbers);
+    }
+
+    MissionUtils.Console.print(result);
+    
+    return this.getUserNumbers(computerNumbers);
   }
 }
 
