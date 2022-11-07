@@ -8,10 +8,11 @@ class BaseballGame {
   }
 
   printResult(strikeCount, ballCount) {
-    if (strikeCount === 0 && ballCount === 0) Console.print("낫싱");
-    else if (strikeCount > 0 && ballCount === 0) Console.print(`${strikeCount}스트라이크`);
-    else if (ballCount > 0 && strikeCount === 0) Console.print(`${ballCount}볼`);
-    else Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    if (strikeCount === 0 && ballCount === 0) {
+      return Console.print("낫싱");
+    }
+    const strikeCountComment = (strikeCount > 0) ? `${strikeCount}스트라이크` : '';
+    (ballCount === 0) ? Console.print(`${strikeCountComment}`) : Console.print(`${ballCount}볼 ${strikeCountComment}`);
   };
 
   start() {
@@ -22,7 +23,8 @@ class BaseballGame {
 
   playGame() {
     this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
-    this.inputUserNumbers(this.computerNumbers);
+
+    return this.inputUserNumbers(this.computerNumbers);
   }
 
   inputUserNumbers(computerNumbers) {
