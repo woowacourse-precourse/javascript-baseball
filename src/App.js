@@ -27,7 +27,7 @@ class App {
   getUserNumber() {
     Console.readLine(GET_USER_NUMBER_SENTENCE, (userNumber) => {
       this.userNumber = userNumber.split('').map(Number);
-      
+
       this.validateUserNumber();
       this.compareNumbers();
     });
@@ -64,7 +64,7 @@ class App {
       }
     }
 
-    this.setHint(ball, strike);
+    this.printHint(ball, strike);
 
     if (strike === 3) {
       this.askRestart();
@@ -73,7 +73,7 @@ class App {
     }
   }
 
-  setHint(ball, strike) {
+  printHint(ball, strike) {
     if (strike === 3) {
       Console.print('3스트라이크');
     }else if (ball === 0 && strike === 0) {
