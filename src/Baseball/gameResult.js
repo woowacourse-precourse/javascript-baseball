@@ -28,8 +28,7 @@ class getGameResult {
     if (BALL === 0 && STRIKE === 0) Console.print('낫싱');
     else if (BALL !== 0 && STRIKE === 0) Console.print(`${BALL}볼`);
     else if (BALL === 0 && STRIKE !== 0) Console.print(`${STRIKE}스트라이크`);
-    else if (BALL !== 0 && STRIKE <= 2)
-      Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+    else if (BALL !== 0 && STRIKE <= 2) Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
     else if (STRIKE === 3) {
       Console.print('3스트라이크');
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
