@@ -87,4 +87,11 @@ describe("기능 테스트", () => {
     const ballCount = new BallCount(question, answer);
     expect(ballCount.strikes).toBe(2);
   });
+
+  test("볼 개수 세기", () => {
+    const question = [1, 2, 3];
+    const answer = [2, 3, 1];
+    const ballCount = new BallCount(question, answer);
+    expect(ballCount.balls).toBe(3);
+  });
 });
