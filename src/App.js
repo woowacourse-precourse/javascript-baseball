@@ -39,6 +39,7 @@ class Computer {
       if (this._digits.includes(Number(userInput[i]))) {
         balls++;
       }
+
       if (this._digits[i] === Number(userInput[i])) {
         balls--;
         strikes++;
