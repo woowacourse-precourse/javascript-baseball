@@ -3,6 +3,10 @@ const { Random, Console } = MissionUtils;
 
 class App {
   #RANDOM_NUM_LENGTH = 3;
+  #ERROR_MESSAGES = {
+    failReset: "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다.",
+    failCompare: "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다.",
+  };
 
   #randomNum = [];
 
@@ -74,7 +78,7 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
         if (userInput !== "1" && userInput !== "2") {
-          this.throwError("Fail to reset");
+          this.throwError("failReset");
         }
 
         userInput === "1" ? this.play() : Console.close();
@@ -89,23 +93,12 @@ class App {
       userInput.length !== new Set(userInput).size ||
       userInput.includes("0")
     )
-      this.throwError("Fail to compare");
+      this.throwError("failCompare");
   }
 
   throwError(errorCase) {
-    if (errorCase === "Fail to reset") {
-      Console.close();
-      throw new TypeError(
-        "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다."
-      );
-    }
-
-    if (errorCase === "Fail to compare") {
-      Console.close();
-      throw new TypeError(
-        "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다."
-      );
-    }
+    Console.close();
+    throw new TypeError(this.#ERROR_MESSAGES[errorCase]);
   }
 }
 
