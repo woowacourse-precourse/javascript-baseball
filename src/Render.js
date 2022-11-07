@@ -18,11 +18,19 @@ class Render {
   }
 
   result(ballCount, strikeCount) {
+    if (ballCount === 0 && strikeCount === 0) {
+      MissionUtils.Console.print(GAME.GAME_NOTHING);
+    }
     if (strikeCount === 3) {
       MissionUtils.Console.print(GAME.GAME_THREE_STRIKE);
-    } else if (strikeCount === 0 && ballCount === 0) {
-      MissionUtils.Console.print(GAME.GAME_NOTHING);
-    } else if (strikeCount !== 0 && ballCount !== 0) {
+    }
+    if (ballCount === 0 && strikeCount !== 0 && strikeCount !== 3) {
+      MissionUtils.Console.print(`${strikeCount}스트라이크`);
+    }
+    if (strikeCount === 0 && ballCount !== 0) {
+      MissionUtils.Console.print(`${ballCount}볼`);
+    }
+    if (ballCount !== 0 && strikeCount !== 0) {
       MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
     }
   }
