@@ -58,6 +58,12 @@ function getBaseballGameResult (answer, userScore) {
 }
 
 function checkRestart () {
+  Console.print(GAME_ANNOUNCEMENT_MESSAGE.GAME_OVER);
+  Console.readLine(GAME_ANNOUNCEMENT_MESSAGE.REPLAY, (input) => {
+    if (+input === 1) app.play();
+    else if (+input === 2) Console.close();
+    else throw WRONG_INPUT_ALERT.NOT_ONE_OR_TWO;
+  })
 }
 
 class App {
