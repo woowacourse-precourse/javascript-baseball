@@ -84,8 +84,8 @@ class App {
     }
     return false;
   }
-  isInputNumberCorrect() {
-    if (this.answer === this.inputNumber) {
+  isInputNumberCorrect(numberOfStrike) {
+    if (numberOfStrike === this.NUMBER_OF_DIGITS) {
       return true;
     }
     return false;
