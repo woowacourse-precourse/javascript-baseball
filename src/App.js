@@ -29,8 +29,6 @@ class App {
 
   start() {
     this.randomNumber = this.setRandomNumber();
-    console.log(this.randomNumber);
-    
     this.userInput();
   }
 
@@ -59,7 +57,6 @@ class App {
   }
 
   setRandomNumber() {
-    // return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -125,7 +122,5 @@ class App {
   }
 }
 
-// const app = new App();
-// app.play();
 
 module.exports = App;
