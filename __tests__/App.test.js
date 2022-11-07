@@ -13,3 +13,10 @@ describe('isStart()', () => {
     expect(typeof app.isStart()).toBe('boolean');
   });
 });
+
+describe('isFinish()', () => {
+  test('boolean 타입을 반환한다.', () => {
+    const app = new App();
+    expect(typeof app.isFinish()).toBe('boolean');
+  });
+});
