@@ -19,4 +19,35 @@ describe('Application Unit Test', () => {
       });
     });
   });
+
+  describe('checkUserInput method test', () => {
+    test('correct num', () => {
+      const num = 123;
+      expect(() => {
+        const app = new App();
+        app.checkUserInput(num);
+      }).not.toThrow();
+    });
+    test('it must be throw error, if include not digit', () => {
+      const num = '5a6';
+      expect(() => {
+        const app = new App();
+        app.checkUserInput(num);
+      }).toThrow();
+    });
+    test('it must be throw error, if include duplicate digit', () => {
+      const num = '121';
+      expect(() => {
+        const app = new App();
+        app.checkUserInput(num);
+      }).toThrow();
+    });
+    test("it must be throw error, if it's length not equal 3", () => {
+      const num = 1124;
+      expect(() => {
+        const app = new App();
+        app.checkUserInput(num);
+      }).toThrow();
+    });
+  });
 });
