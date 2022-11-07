@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { getPrint } = require("../util/computer/print");
 
 function Computer() {
   const computer = [];
@@ -26,14 +27,6 @@ function Computer() {
   }
 
   return { computerNumberStr, checkGameResult };
-}
-
-function getPrint(ball, strike) {
-  if (ball === 0 && strike === 0) return "낫싱";
-  if (ball && strike === 0) return `${ball}볼`;
-  if (ball === 0 && strike) return `${strike}스트라이크`;
-  if (ball && strike) return `${ball}볼 ${strike}스트라이크`;
-  return null;
 }
 
 module.exports = Computer;
