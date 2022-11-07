@@ -81,7 +81,7 @@ class App {
     MissionUtils.Console.readLine('', (input) => {
       if (input === '1') {
         const newRandomList = this.createRandomList();
-        this.question(newRandomList);
+        this.guess(newRandomList);
       } else if (input === '2') {
         MissionUtils.Console.close();
       } else {
