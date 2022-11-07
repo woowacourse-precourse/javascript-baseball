@@ -1,23 +1,37 @@
+const {Console} = require('@woowacourse/mission-utils');
 const Messages = require('./messages');
-const {print, read} = require('./input');
 const Game = require('./game');
 const {parseEndSelect, EndSelect} = require('./constants');
 
 class App {
   // eslint-disable-next-line class-methods-use-this
-  async play() {
-    print(Messages.GAME_START);
+  play() {
+    Console.print(Messages.GAME_START);
+    this.#startGame();
+  }
 
-    while (true) {
-      const game = new Game();
-      await game.play();
+  #startGame() {
+    const game = new Game();
+    game.onEnd(() => this.#onGameEnd());
+    game.play();
+  }
 
-      print(Messages.END_SELECT);
-      const endSelect = parseEndSelect(await read());
-      if (endSelect === EndSelect.SHUTDOWN) {
-        break;
+  // eslint-disable-next-line class-methods-use-this
+  #onGameEnd() {
+    Console.print(Messages.END_SELECT);
+    Console.readLine('', (text) => {
+      const endSelect = parseEndSelect(text);
+      if (endSelect === EndSelect.RETRY) {
+        this.#startGame();
+      } else if (endSelect === EndSelect.SHUTDOWN) {
+        this.#shutdown();
       }
-    }
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  #shutdown() {
+    Console.close();
   }
 }
 

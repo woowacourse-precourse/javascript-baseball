@@ -1,4 +1,4 @@
-const {print, read} = require('./input');
+const {Console} = require('@woowacourse/mission-utils');
 const Messages = require('./messages');
 const Gong = require('./models/gong');
 const Opponent = require('./models/opponent');
@@ -10,39 +10,68 @@ class Game {
   /** @type {Opponent} */
   #opponent;
 
+  /** @type {() => void} */
+  #endCallback;
+
   /**
    * @param {Opponent} opponent
    */
   constructor(opponent = null) {
     this.#opponent = opponent ?? new Opponent();
-    Object.freeze(this);
   }
 
   /**
-   * 한 판의 게임이 실행되며, 제어가 넘어간다.
-   * 호출한 측에서는 await 을 사용하여 게임이 끝날 때까지 기다릴 수 있다.
+   * 게임이 종료될 때 주어진 콜백이 호출된다.
+   * @param {() => void} callback
    */
-  async play() {
-    while (true) {
-      const gong = Gong.parseGong(await read(Messages.INPUT_YOUR_GONG));
-      const {ball, strike} = this.#opponent.guessGong(gong);
+  onEnd(callback = null) {
+    this.#endCallback = callback;
+  }
 
-      const guessResult =
-        [
-          [ball, Messages.GUESS_GONG_RESULT_BALL],
-          [strike, Messages.GUESS_GONG_RESULT_STRIKE],
-        ]
-          .filter(([count]) => count > 0)
-          .map(([count, suffix]) => `${count}${suffix}`)
-          .join(' ') || Messages.GUESS_GONG_RESULT_NOTHING;
+  /**
+   * 한 판의 게임이 실행된다.
+   */
+  play() {
+    this.#readGong();
+  }
 
-      print(guessResult);
-
-      if (strike === 3) {
-        print(Messages.GUESS_GONG_RESULT_SUCCESS);
-        break;
+  /**
+   * 플레이어로부터 공을 입력받는다.
+   */
+  #readGong() {
+    Console.readLine(Messages.INPUT_YOUR_GONG, (text) => {
+      const gong = Gong.parseGong(text);
+      if (!this.#guess(gong)) {
+        this.#readGong();
+        return;
       }
+      this.#endCallback?.();
+    });
+  }
+
+  /**
+   * 상대방이 들고있는 공을 추측한다.
+   * @param {Gong} gong
+   * @returns {boolean} 공을 맞췄는지 여부를 반환한다.
+   */
+  #guess(gong) {
+    const {ball, strike} = this.#opponent.guessGong(gong);
+    const guessResult =
+      [
+        [ball, Messages.GUESS_GONG_RESULT_BALL],
+        [strike, Messages.GUESS_GONG_RESULT_STRIKE],
+      ]
+        .filter(([count]) => count > 0)
+        .map(([count, suffix]) => `${count}${suffix}`)
+        .join(' ') || Messages.GUESS_GONG_RESULT_NOTHING;
+
+    Console.print(guessResult);
+
+    if (strike === 3) {
+      Console.print(Messages.GUESS_GONG_RESULT_SUCCESS);
+      return true;
     }
+    return false;
   }
 }
 
