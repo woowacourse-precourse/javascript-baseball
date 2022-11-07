@@ -1,24 +1,24 @@
 class GameCalc{
   constructor(answerNum, inputNum){
     this.resultCnt = [0, 0]; //[strike, ball]
-    this.answerNum = (answerNum+'').split('');
-    this.inputNum = (inputNum+'').split('');
+    this.answerNums = (answerNum+'').split('');
+    this.inputNums = (inputNum+'').split('');
   }
 
-  strikeCount(){
+  calcCountofStrike(){
     let cnt = 0;
-    this.answerNum.map((value, idx) => {
-      if (this.inputNum[idx] === value){
+    this.answerNums.map((value, idx) => {
+      if (this.inputNums[idx] === value){
         cnt += 1;
       }
     })
     this.resultCnt[0] = cnt;
   }
 
-  ballCount(){
+  calcCountofBall(){
     let cnt = 0;
-    this.answerNum.map((value, idx) => {
-      if (this.inputNum[idx] !== value && this.inputNum.includes(value)){
+    this.answerNums.map((value, idx) => {
+      if (this.inputNums[idx] !== value && this.inputNums.includes(value)){
         cnt += 1;
       }
     })
@@ -26,8 +26,8 @@ class GameCalc{
   }
 
   totalCount(){
-    this.strikeCount();
-    this.ballCount();
+    this.calcCountofStrike();
+    this.calcCountofBall();
     return this.resultCnt;
   }
   
