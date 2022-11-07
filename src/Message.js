@@ -22,6 +22,10 @@ class Message {
   static confirm() {
     return '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n';
   }
+
+  static input() {
+    return '숫자를 입력해 주세요 : ';
+  }
 }
 
 module.exports = Message;
