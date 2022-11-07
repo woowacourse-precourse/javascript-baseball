@@ -52,7 +52,28 @@ class App {
     if (this.answer === this.input) {
       return MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다!');
     }
+    for (let index = 0; index < 3; index += 1) {
+      this.countBallOrStrike(index);
+    }
+    this.printResult();
     return this.getUserInput();
+  }
+
+  countBallOrStrike(index) {
+    if (this.answer[index] === this.input[index]) {
+      this.strike += 1;
+    } else if (this.answer.includes(this.input[index])) {
+      this.ball += 1;
+    }
+  }
+
+  printResult() {
+    let message = '';
+    if (this.ball === 0 && this.strike === 0) message = '낫싱';
+    if (this.ball > 0) message += `${this.ball}볼`;
+    if (this.ball > 0 && this.strike > 0) message += ' ';
+    if (this.strike > 0) message += `${this.strike}스트라이크`;
+    MissionUtils.Console.print(message);
   }
 }
 const app = new App();
