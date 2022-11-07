@@ -32,7 +32,7 @@ function stringToArray(string) {
 }
 
 function startBaseballGame(userMessage, computerAnswer) {
-  if (userMessage.length !== 3 || typeof userMessage !== 'number') {
+  if (userMessage.length !== 3 || userMessage.includes(NaN)) {
     throw new Error('올바른 입력이 아닙니다. 3자리의 숫자를 입력해주세요.');
   }
   const ballCount = checkBall(userMessage, computerAnswer);
