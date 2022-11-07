@@ -28,13 +28,7 @@ describe("숫자 야구 게임", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
-    const messages = [
-      "낫싱",
-      "3스트라이크",
-      "1볼 1스트라이크",
-      "3스트라이크",
-      "게임 종료",
-    ];
+    const messages = ["낫싱", "3스트라이크", "1볼 1스트라이크", "3스트라이크", "게임 종료"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -58,5 +52,15 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+
+  test("getRandomNumbers메서드로 서로다른 임의의 수 3개 반환", () => {
+    const randoms = [5, 5, 3, 4];
+    mockRandoms(randoms);
+
+    const app = new App();
+    const result = app.getRandomNumbers();
+
+    expect(result).toEqual([5, 3, 4]);
   });
 });
