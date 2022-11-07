@@ -33,7 +33,6 @@ class BaseballGame {
       );
       return;
     }
-
     this.playGame();
   };
 
@@ -66,7 +65,6 @@ class BaseballGame {
 
   inputRestartOrEnd = (selectedNumber) => {
     selectedNumber = Number(selectedNumber);
-
     ValidateUserInput.isOneOrTwo(selectedNumber);
 
     if (selectedNumber === 1) {
