@@ -27,8 +27,7 @@ class App {
   createRandomNumber() {
     const computerRandomNumber = [];
     while (computerRandomNumber.length < 3) {
-      let number = MissionUtils.Random.pickNumberInRange(1, 9);
-      number = number.toString();
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerRandomNumber.includes(number)) {
         computerRandomNumber.push(number);
       }
@@ -39,16 +38,12 @@ class App {
 
   getUserNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      try {
-        const removeSpace = answer.replace(/ /g, '');
-        checkNumber(removeSpace);
-        checkLength(removeSpace);
-        const answerArray = removeSpace.split('');
-        checkDuplicate(answerArray);
-        this.compareTwoArray(answerArray);
-      } catch (error) {
-        console.log(error);
-      }
+      const removeSpace = answer.replace(/ /g, '');
+      checkNumber(removeSpace);
+      checkLength(removeSpace);
+      const answerArray = removeSpace.split('');
+      checkDuplicate(answerArray);
+      this.compareTwoArray(answerArray);
     });
   }
 
@@ -57,7 +52,7 @@ class App {
     this.ball = 0;
 
     for (let idx = 0; idx < userAnswer.length; idx++) {
-      let userNum = userAnswer[idx];
+      let userNum = parseInt(userAnswer[idx]);
       if (userNum === this.computerRandomNumber[idx]) this.strike++;
       else if (this.computerRandomNumber.includes(userNum)) this.ball++;
     }
