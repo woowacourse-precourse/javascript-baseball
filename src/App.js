@@ -23,7 +23,6 @@ class App {
     // 유저의 숫자를 입력받는 함수
     pickRandomNumberUser() {
         MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-            console.log(this.changeStringToArray(answer));
             this.validateArray(this.changeStringToArray(answer));
             this.countStrikeAndBall(this.changeStringToArray(answer));
         });
@@ -65,12 +64,27 @@ class App {
                 ball += 1;
             }
         }
-        const resultStrike = strike ? `${strike}스트라이크` : '';
-        const resultBall = ball ? `${ball}볼` : '';
+        this.resultOfStrikeAndBall([ball, strike]);
+    }
 
-        console.log(
-            !ball && !strike ? '낫싱' : `${resultBall} ${resultStrike}`
-        );
+    // 점수 출력 함수
+    resultOfStrikeAndBall(result) {
+        if (result[1] === 3) {
+            MissionUtils.Console.print(
+                '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+            );
+        } else {
+            if (result[0] === 0 && result[1] === 0) {
+                MissionUtils.Console.print('낫싱');
+            } else {
+                MissionUtils.Console.print(
+                    `${result[0] > 0 ? result[0] + '볼 ' : ''}${
+                        result[1] > 0 ? result[1] + '스트라이크' : ''
+                    }`
+                );
+            }
+        }
+        this.pickRandomNumberUser();
     }
 }
 let app = new App();
