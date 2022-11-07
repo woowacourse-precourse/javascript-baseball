@@ -37,19 +37,33 @@ class App {
   // }
 
   compareNumber() {
-    console.log("비교할게!");
     let score = [0, 0]; //[ 볼, 스트라이크]
-    this.isStrike(this.computerInput, this.userInput);
+    this.isStrike(this.computerInput, this.userInput, score);
     console.log(`${score[0]} 볼 ${score[1]} 스트라이크`);
   }
 
-  isStrike(ans, input) {
+  isStrike(ans, input, score) {
     console.log(ans, input);
     for (let i = 0; i < 3; i++) {
       if (input[i] === ans[i]) {
         score[1] += 1;
       } else {
-        console.log("볼 체크");
+        this.isBall(i, ans, input, score);
+      }
+    }
+  }
+  isBall(i, ans, input, score) {
+    if (i === 0) {
+      if (input[i] === ans[1] || input[i] === ans[2]) {
+        score[0] += 1;
+      }
+    } else if (i === 1) {
+      if (input[i] === ans[2] || input[i] === ans[0]) {
+        score[0] += 1;
+      }
+    } else if (i === 2) {
+      if (input[i] === ans[0] || input[i] === ans[1]) {
+        score[0] += 1;
       }
     }
   }
