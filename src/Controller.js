@@ -45,9 +45,9 @@ class Controller {
   }
 
   makeHint(strikes, balls) {
-    const strikeHint = strikes > 0 ? `${strikes}스트라이크 ` : NO_MESSAGE;
-    const ballHint = balls > 0 ? `${balls}볼` : NO_MESSAGE;
-    return (strikeHint + ballHint).trim();
+    const ballHint = balls > 0 ? `${balls}볼 ` : NO_MESSAGE;
+    const strikeHint = strikes > 0 ? `${strikes}스트라이크` : NO_MESSAGE;
+    return (ballHint + strikeHint).trim();
   }
 }
 
