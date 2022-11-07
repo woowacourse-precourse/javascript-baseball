@@ -25,6 +25,8 @@ const GAME_ERROR_MESSAGE = {
   DUPLICATE_NUMBER: '중복된 숫자가 존재합니다.',
 };
 
-exports.GAME_RULE = GAME_RULE;
-exports.GAME_MESSAGE = GAME_MESSAGE;
-exports.GAME_ERROR_MESSAGE = GAME_ERROR_MESSAGE;
+module.exports = {
+  GAME_RULE,
+  GAME_MESSAGE,
+  GAME_ERROR_MESSAGE,
+};

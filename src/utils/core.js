@@ -36,6 +36,8 @@ const getBall = (computerValue, userValue) => {
   return ball ? `${ball}${GAME_MESSAGE.BALL}` : '';
 };
 
-exports.getRandomNumbers = getRandomNumbers;
-exports.getStrike = getStrike;
-exports.getBall = getBall;
+module.exports = {
+  getRandomNumbers,
+  getStrike,
+  getBall,
+};

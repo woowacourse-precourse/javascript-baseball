@@ -23,5 +23,7 @@ const isValidateNumber = (value) => {
   return true;
 };
 
-exports.isValidateNumbers = isValidateNumbers;
-exports.isValidateNumber = isValidateNumber;
+module.exports = {
+  isValidateNumbers,
+  isValidateNumber,
+};
