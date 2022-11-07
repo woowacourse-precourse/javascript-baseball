@@ -4,7 +4,7 @@ class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const randomList = this.createRandomList();
-    this.question(randomList);
+    this.guess(randomList);
   }
 
   createRandomList() {
@@ -19,7 +19,7 @@ class App {
     return randomList;
   }
 
-  question(randomList) {
+  guess(randomList) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.check(input);
       const inputList = this.createInputList(input);
@@ -30,9 +30,9 @@ class App {
 
       if (resultString === '3스트라이크') {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        this.questionReplay();
+        this.replay();
       } else {
-        this.question(randomList);
+        this.guess(randomList);
       }
     });
   }
@@ -74,7 +74,7 @@ class App {
     return `${ball}볼 ${strike}스트라이크`;
   }
 
-  questionReplay() {
+  replay() {
     MissionUtils.Console.print(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
     );

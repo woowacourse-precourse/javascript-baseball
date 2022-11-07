@@ -8,7 +8,7 @@ describe('함수 테스트', () => {
     const set = new Set(randomList);
 
     expect(set.size).toEqual(3);
-    set.forEach((number) => {
+    randomList.forEach((number) => {
       expect(number).not.toEqual(0);
     });
   });
