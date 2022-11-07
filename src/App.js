@@ -28,7 +28,19 @@ class App {
           countStrike += 1;
         }
       });
-      this.print(`${COMPUTER} ${countBall}볼 ${countStrike}스트라이크`);
+
+      if (countBall === 0 && countStrike === 0) {
+        this.print(`${COMPUTER} 낫싱`);
+      }
+      if (countBall === 0 && countStrike !== 0) {
+        this.print(`${COMPUTER} ${countStrike}스트라이크`);
+      }
+      if (countBall !== 0 && countStrike === 0) {
+        this.print(`${COMPUTER} ${countBall}볼`);
+      }
+      if (countBall !== 0 && countStrike !== 0) {
+        this.print(`${COMPUTER} ${countBall}볼 ${countStrike}스트라이크`);
+      }
     });
   }
 
