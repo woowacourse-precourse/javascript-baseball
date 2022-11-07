@@ -144,10 +144,28 @@ class App {
 
     let inputRestart;
     Console.readLine(INPUT_RESTART_MESSAGE, (input) => {
+      this.handleRestartException(input);
       inputRestart = input;
     });
 
     return inputRestart;
+  }
+  handleRestartException(inputRestart, RESTART, EXIT) {
+    const NOT_A_NUMBER_EXCEPTION = "입력값이 숫자가 아닙니다.";
+    const NOT_CORRECT_NUMBER = `입력값이 ${RESTART} 또는 ${EXIT}이(가) 아닙니다.`;
+
+    let errorMessage = null;
+
+    if (isNaN(inputRestart)) {
+      errorMessage = NOT_A_NUMBER_EXCEPTION;
+    } else if (inputRestart !== RESTART && inputRestart !== EXIT) {
+      errorMessage = NOT_CORRECT_NUMBER;
+    }
+
+    if (errorMessage === null) {
+      return;
+    }
+    throw new Error(errorMessage);
   }
 }
 
