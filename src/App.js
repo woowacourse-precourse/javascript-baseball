@@ -7,6 +7,7 @@ const COMPUTER_NUMBER_LENGTH = 3;
 const STRIKE = "스트라이크";
 const BALL = "볼";
 
+const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
 const GAME_END_MESSAGE =
   "3개의 숫자를 모두 맞히셨습니다! 게임 종료 게임을 시작합니다.";
 
@@ -24,12 +25,7 @@ class App {
   play() {}
 
   isAllStrike(strike) {
-    if (strike === COMPUTER_NUMBER_LENGTH) {
-      this.printGameMsg(GAME_END_MESSAGE);
-
-      return true;
-    }
-    return false;
+    return strike === COMPUTER_NUMBER_LENGTH;
   }
 
   getRandomNum() {
