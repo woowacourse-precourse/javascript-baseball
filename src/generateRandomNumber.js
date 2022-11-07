@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
 const MIN_NUMBER = 1;
 const MAX_NUMBER = 9;
 const RETURN_COUNT = 3;
