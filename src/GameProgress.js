@@ -8,6 +8,28 @@ class GameProgress{
         this.userNumber = new UserNumber();
     }
 
+    gameStart(){
+        Console.readLine('숫자를 입력해주세요' , (userPickNumber) => {
+            this.userNumber.exception(userPickNumber);
+            this.userComputerCompare(userPickNumber, this.createNumber.pickedComputerNumber());
+            this.gameSelection();
+            })
+    }
+
+    gameSelection(){
+        Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' , (answer) => {
+        if(answer == 1){
+            this.app.play();
+        }
+        if(answer == 2){
+            Console.close();
+        }
+        else{
+            throw "Error (1과 2중에 선택해주세요)";
+        }
+    })
+}
+
     userComputerCompare(userNumber, createNumber){
         let strike = 0;
         let ball = 0;
