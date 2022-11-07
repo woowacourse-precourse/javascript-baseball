@@ -29,6 +29,7 @@ class Judge {
         this.performOneGame("523");
       } else if (input === "2") {
         //finish
+        Console.close();
       } else {
         throw "INPUT IS INVALID";
       }
