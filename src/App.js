@@ -50,7 +50,20 @@ class App {
       }
     })
   }
-  
+  resultGame(){
+    if(strike==3){
+      this.resultEndGame();
+    }
+    if((strike!=0&&ball==0)||strike==0&&ball!=0){
+      this.resultStrikeOrBall();
+    }
+    if(strike==0&&ball==0){
+      this.resultNothing();
+    }
+    if(strike!=0&&ball!=0){
+      this.resultStrikeAndBall();
+    }
+  }
 }
 const app = new App;
 app.play();
