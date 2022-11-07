@@ -32,13 +32,13 @@ class CalculateGame {
       return `${this.strike}스트라이크`;
     } else if (this.strike === 0 && this.ball !== 0) {
       return `${this.ball}볼`;
-    } 
+    }
 
     return '낫싱';
   }
 
   checkSuccess() {
-    return this.strike === 3; 
+    return this.strike === 3;
   }
 }
 

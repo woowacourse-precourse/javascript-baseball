@@ -1,4 +1,4 @@
-const Game = require("./components/Game");
+const Game = require('./components/Game');
 
 class App {
   play() {
