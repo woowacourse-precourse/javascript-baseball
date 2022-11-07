@@ -15,33 +15,37 @@ class App {
   computerNumber;
 
   getRandomNumber() {
-    let computer_arr = [];
-    while (computer_arr.length < 3) {
+    let computerArr = [];
+    while (computerArr.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer_arr.includes(randomNumber)) {
-        computer_arr.push(randomNumber);
+      if (!computerArr.includes(randomNumber)) {
+        computerArr.push(randomNumber);
       }
     }
 
-    this.computerNumber = computer_arr.join('');
+    this.computerNumber = computerArr.join('');
   }
 
   getUserNumber() {
     Console.readLine(PLZ_NUMBER_INPUT, input => {
-      const repeatInput = [...new Set(input)];
-      if (
-        input > 0 &&
-        !input.includes(0) &&
-        !isNaN(input) &&
-        String(input).length === THREE &&
-        repeatInput.length === THREE
-      ) {
-        this.userNumber = input;
-        this.compareNumbers(this.computerNumber, this.userNumber);
-      } else {
-        throw new Error(ERROR_TEXT);
-      }
+      this.userNumberIsValid(input);
+      console.log(this.computerNumber);
+      this.userNumber = input;
+      this.compareNumbers(this.computerNumber, this.userNumber);
     });
+  }
+
+  userNumberIsValid(input) {
+    const repeatInput = [...new Set(input)];
+    if (
+      input < 0 ||
+      input.includes(0) ||
+      isNaN(input) ||
+      String(input).length !== THREE ||
+      repeatInput.length !== THREE
+    ) {
+      throw new Error(ERROR_TEXT);
+    } else return;
   }
 
   compareNumbers(computerNumber, userNumber) {
