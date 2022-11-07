@@ -52,3 +52,14 @@ describe('end()', () => {
     expect(logSpy).toHaveBeenCalledWith('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   });
 });
+
+describe('confirm()', () => {
+  test('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.confirm());
+
+    expect(logSpy).toHaveBeenCalledWith('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n');
+  });
+});
