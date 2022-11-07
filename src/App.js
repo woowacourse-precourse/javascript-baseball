@@ -66,15 +66,6 @@ class App {
     return pickedNumber;
   }
 
-  createGameNumbers() {
-    const gameNumbers = Array.from({ length: this.count }).reduce(
-      (prev) => [...prev, this.createUniqueNumberInList(prev)],
-      []
-    );
-
-    this.gameNumber = gameNumbers;
-  }
-
   isValidDigit(numbers) {
     return numbers.length === this.count;
   }
@@ -136,19 +127,16 @@ class App {
       2: this.exitGame.bind(this),
     };
 
-    console.log(input, "restart");
     COMMANDS[input]();
   }
 
   confirmRestart() {
-    Console.print(this.MESSAGES.END);
     Console.readLine(this.MESSAGES.RESTART, this.restart.bind(this));
   }
 
   continueGame(input) {
     this.inputUserNumbers(input);
     this.compareNumbers();
-    console.log(this.gameNumber);
 
     if (!this.isPlaying) {
       this.confirmRestart();
@@ -156,15 +144,6 @@ class App {
     }
 
     this.runGame();
-  }
-
-  runGame() {
-    Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
-  }
-
-  exitGame() {
-    Console.print("exitGame");
-    Console.close();
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
@@ -178,6 +157,7 @@ class App {
       let result = this.MESSAGES.RESULT.STRIKE(sameDigitCount);
       result += "\n";
       result += this.MESSAGES.RESULT.CORRECT;
+      result += this.MESSAGES.END;
 
       return result;
     }
@@ -207,6 +187,24 @@ class App {
     });
 
     Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
+  }
+
+  createGameNumbers() {
+    const gameNumbers = Array.from({ length: this.count }).reduce(
+      (prev) => [...prev, this.createUniqueNumberInList(prev)],
+      []
+    );
+
+    this.gameNumber = gameNumbers;
+  }
+
+  runGame() {
+    Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+  }
+
+  exitGame() {
+    Console.print(this.MESSAGES.END);
+    Console.close();
   }
 
   newGame() {
