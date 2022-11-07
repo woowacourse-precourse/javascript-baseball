@@ -8,15 +8,13 @@ class App {
   }
 
   playOneRound(computer) {
-    let strike = 0;
-    let ball = 0;
-    let numbers = "";
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (num) => {
-      numbers = num;
-      this.checkUserNumber(numbers);
-      numbers = [...numbers].map(Number);
-      strike = this.checkStrike(computer, numbers);
-      ball = this.checkBall(computer, numbers);
+      this.checkUserNumber(num);
+      const [strike, ball] = this.checkStrikeAndBall(
+        computer,
+        [...num].map(Number)
+      );
+
       this.printStrikeBall(strike, ball);
 
       if (this.checkGameFinish(strike)) {
@@ -26,6 +24,14 @@ class App {
       }
     });
   }
+
+  checkStrikeAndBall(computer, numbers) {
+    return [
+      this.checkStrike(computer, numbers),
+      this.checkBall(computer, numbers),
+    ];
+  }
+
   checkGameFinish(strike) {
     if (strike === 3) {
       return true;
@@ -64,7 +70,7 @@ class App {
 
   checkUserNumber(numbers) {
     if (numbers.length !== 3) {
-      throw new Error(`3자리 숫자만 입력 가능합니다. abc${numbers}abc`);
+      throw new Error(`3자리 숫자만 입력 가능합니다.`);
     } else if (Number(numbers) < 0)
       throw new Error("음수는 입력할 수 없습니다.");
     else if (typeof Number(numbers) !== "number")
