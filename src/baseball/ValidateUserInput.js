@@ -8,15 +8,9 @@ class ValidateUserInput {
     pickedNumberByUser
       .split("")
       .forEach((el) => (!pickedNumber.includes(el) ? pickedNumber.push(el) : ""));
-    if (pickedNumber.length !== 3) {
-      throw new Error(ERROR_COMMENT);
-    }
+    if (pickedNumber.length !== 3) throw new Error(ERROR_COMMENT);
 
-    if (
-      pickedNumberByUser.length !== 3 ||
-      // 1 ~ 9가 아닌 다른 값을 입력한 경우
-      !NUMBER_IN_RANGE.test(pickedNumberByUser)
-    ) {
+    if (pickedNumberByUser.length !== 3 || !NUMBER_IN_RANGE.test(pickedNumberByUser)) {
       throw new Error(ERROR_COMMENT);
     }
   }
@@ -24,9 +18,7 @@ class ValidateUserInput {
   static isOneOrTwo(selectedNumber) {
     selectedNumber = Number(selectedNumber);
 
-    if (selectedNumber !== 1 && selectedNumber !== 2) {
-      throw new Error("1 또는 2만 입력해주세요.");
-    }
+    if (selectedNumber !== 1 && selectedNumber !== 2) throw new Error("1 또는 2만 입력해주세요.");
   }
 }
 
