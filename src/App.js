@@ -5,8 +5,6 @@ class App {
     constructor() {
         this.computerNumber = [];
         this.guess = [];
-        this.strike = 0;
-        this.ball = 0;
     }
 
     play() {
@@ -34,7 +32,9 @@ class App {
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
             this.guess = userInput.split("");
             this.isValidNumber(userInput);
-            this.ballStrikeCount();
+            const strikeCount = this.countStrike();
+            const ballCount = this.countBall();
+            this.printResult(strikeCount, ballCount);
         });
     }
 
@@ -57,16 +57,11 @@ class App {
         return !(userInput > 122);
     }
 
-    ballStrikeCount() {
-        const ballCount = this.judgeBall();
-        const strikeCount = this.judgeStrike();
-        this.printResult(strikeCount, ballCount);
-    }
-    judgeStrike() {
+    countStrike() {
         const strike = this.computerNumber.filter((el, idx) => el.toString() === this.guess[idx]).length;
         return strike;
     }
-    judgeBall() {
+    countBall() {
         const ball = this.computerNumber.filter((el) => this.guess.includes(el.toString()));
         return ball.length;
     }
