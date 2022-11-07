@@ -34,4 +34,11 @@ describe("문자열 테스트", () => {
 
     expect(result).toThrow(RangeError);
   });
+
+  test("배열의 길이 확인", () => {
+    const input = [1, 2, 3];
+    const result = input.length;
+
+    expect(result).toBe(3);
+  });
 });
