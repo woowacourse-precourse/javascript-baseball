@@ -39,8 +39,7 @@ class App {
       if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
         render.errorThrow(checkUserInputValid);
       }
-
-      return this.userNum;
+      this.retryOrEnd();
     });
   }
 
@@ -53,7 +52,7 @@ class App {
   }
 
   gamePlay() {
-    const UserInput = this.getUser();
+    const UserInput = this.userNum;
     const ComputerInput = this.computerInput;
     const gameJudgment = new GameJudgment();
     const [userBallCount, userStrikeCount] = gameJudgment.judgement(
@@ -69,10 +68,10 @@ class App {
     const [userBallCount, userStrikeCount] = this.gamePlay();
     render.result(userBallCount, userStrikeCount);
 
-    if (strikeCount !== 3) {
+    if (userStrikeCount !== 3) {
       this.notThreeStrike();
     }
-    if (strikeCount === 3) {
+    if (userStrikeCount === 3) {
       render.replayQnA().then((userInput) => {
         this.userRetryNum = this.numToArr(userInput);
 
@@ -104,7 +103,6 @@ class App {
   play() {
     this.getMention();
     this.getUser();
-    this.retryOrEnd();
   }
 }
 
