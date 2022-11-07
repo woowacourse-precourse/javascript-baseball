@@ -40,7 +40,6 @@ class App {
   getUserNumber() {
     Console.readLine(PLZ_NUMBER_INPUT, input => {
       this.userNumberIsValid(input);
-      console.log(this.computerNumber);
       this.userNumber = input;
       this.compareNumbers(this.computerNumber, this.userNumber);
     });
