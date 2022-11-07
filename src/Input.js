@@ -1,4 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Validation = require("../src/Validation");
+
 const {
   GAME_CONFIG,
   ERROR_CHECK,
@@ -20,7 +22,14 @@ class Input {
       }
     }
   }
-  user() {}
+
+  user() {
+    MissionUtils.Console.readLine(INGAME_MESSAGE.INPUT_NUMBER, (string) => {
+      const validation = new Validation();
+      const stringToArray = string.split("");
+      if (validation.checkAll(stringToArray)) return stringToArray;
+    });
+  }
 }
 
 module.exports = Input;
