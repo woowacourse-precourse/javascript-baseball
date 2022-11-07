@@ -50,7 +50,7 @@ class App {
     return numbersNumberArray;
   }
 
-  strikeCounter = (userNumbersArray, refNumbersArray) => {
+  strikeCounter(userNumbersArray, refNumbersArray) {
     let strikeCount = 0;
 
     userNumbersArray.map((userNumber, index) => {
@@ -59,9 +59,9 @@ class App {
     });
 
     return strikeCount;
-  };
+  }
 
-  ballCounter = (userNumbersArray, refNumbersArray) => {
+  ballCounter(userNumbersArray, refNumbersArray) {
     let ballCount = 0;
 
     userNumbersArray.map((userNumber, index) => {
@@ -73,7 +73,7 @@ class App {
     });
 
     return ballCount;
-  };
+  }
 
   discriminator(strikeCount, ballCount) {
     const discrimination =
