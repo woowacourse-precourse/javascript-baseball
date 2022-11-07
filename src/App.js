@@ -20,7 +20,7 @@ class App {
     this.compare();
   }
   compare(){
-    this.userNum = inputMyNumber();
+    this.inputUserNumber();
     compareBothNumber(this.computerNum, this.userNum);
     this.compareResult();
   }
@@ -33,8 +33,20 @@ class App {
       this.compare();
     }
   }
+  inputUserNumber(){
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      if(validateNumber(userInput)){
+        userNum = userInput;
+      }
+    });
+  }
   finishInput() {
-    this.result = finishCheck();
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (number) => {
+      if(validateResult(number)){
+        this.result = number;
+      }
+    });
+
     if(this.result == 1){
       this.reset();
       this.random();
@@ -59,27 +71,23 @@ class App {
 }
 
 function validateResult(number){
-  let backSign;
-  let check = /^[1-2]+$/;
-
-  if(!check.test(number)){
-    backSign = false;
-    throw new Error("올바른 숫자가 아닙니다(1과 2만 입력하시오).");
-  }else{
-    backSign = true;
+  if(number != 1 && number != 2){
+    throw "올바른 숫자가 아닙니다(1과 2만 입력하시오).";
   }
-
-  return backSign;
+  return true;
 }
-function finishCheck(){
-  let resultNum;
-  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (result) => {
-    if(validateResult(result)){
-      resultNum = result;
-    }
-  });
-
-  return resultNum;
+function validateNumber(number){
+  let checkStr = /^[1-9]+$/;
+  if(number.length !== 3){
+    throw "올바른 숫자를 입력해주세요(3자리 수).";
+  }
+  if(!checkStr.test(number)){
+    throw "올바른 숫자를 입력해주세요(1-9 사이, 문자 제외).";
+  }
+  if(new Set(number).size !== 3){
+    throw "올바른 숫자를 입력해주세요(중복 제외).";
+  }
+  return true;
 }
 
 function setRandomNumberComputer(){
@@ -129,33 +137,6 @@ function compareBothNumber(randomNumber, userNumber){
   setApp.ball = ball;
   setApp.none = notting;
   setApp.check = check;
-}
-
-function validateNumber(number){
-  let backSign;
-  let checkStr = /^[1-9]+$/;
-  if(number.length !== 3){
-    backSign = false;
-    throw new Error("올바른 숫자가 아닙니다.");
-  }else{
-    backSign = true;
-  }
-  if(!checkStr.test(number)){
-    backSign = false;
-    throw new Error("올바른 숫자가 아닙니다.");
-  }else{
-    backSign = true;
-  }
-
-  return backSign;
-}
-function inputMyNumber(){
-  let myNumber;
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-    if(validateNumber(number)) myNumber = number;
-  });
-
-  return myNumber;
 }
 
 function outputResultCompare(strike, ball, notting, check){
