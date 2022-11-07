@@ -93,6 +93,21 @@ class App {
     MissionUtils.Console.print(`3스트라이크! 정답은 : ${this.correctAnswer} 입니다`);
   }
 
+  restartOrEnd() {
+    MissionUtils.Console.readLine(`1 을 입력하면 종료, 2 를 입력하면 게임을 재시작 합니다`, (answer) => {
+      if (answer == 2) {
+        this.countReset();
+        app.play();
+      } else if (answer == 1) {
+        MissionUtils.Console.print('게임을 종료합니다');
+        MissionUtils.Console.close();
+      } else {
+        MissionUtils.Console.print('1 과 2 둘중 하나만 선택하세요');
+        this.restartOrEnd();
+      }
+    });
+  }
+
 }
 const app = new App();
 app.play();
