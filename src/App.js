@@ -61,6 +61,22 @@ class App {
     }
     return score;
   };
+
+  checkResultScore(score) {
+
+    let answer = "";
+
+    if (score[0] == 0 && score[1] == 0) {
+      answer = "낫싱";
+    } else if (score[0] > 0 && score[1] == 0) {
+      answer = `${score[0]}스트라이크`;
+    } else if (score[0] == 0 && score[1] > 0) {
+      answer = `${score[1]}볼`;
+    } else if (score[0] > 0 && score[1] > 0) {
+      answer = `${score[1]}볼 ${score[0]}스트라이크`
+    }
+    return answer;
+  };
 }
 
 module.exports = App;
