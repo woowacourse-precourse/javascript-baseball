@@ -79,6 +79,7 @@ class App {
     this.init();
     this.guessingNumber();
     this.confirmExit();
+    MissionUtils.Console.close();
   }
 }
 
