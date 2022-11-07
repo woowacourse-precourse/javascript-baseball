@@ -39,8 +39,12 @@ const throwHandling = (user) => {
     throw MissionUtils.Console.close();
   };
   if(userSet.size !== user.length){
+    
     throw MissionUtils.Console.close();
   };
+  if(user.indexOf("0")>=0){
+    throw MissionUtils.Console.close();
+  }
 };
 
 const startMessage = () => {
