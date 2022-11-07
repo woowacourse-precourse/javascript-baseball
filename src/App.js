@@ -4,8 +4,8 @@ class App {
   START_NUM = 1;
   END_NUM = 9;
 
-  play() {
-    let randomNums = [1, 2, 3];
+  generateRandomNums() {
+    let randomNums = [];
 
     while (randomNums.length !== 3) {
       let randomNum = MissionUtils.Random.pickNumberInRange(
@@ -17,26 +17,22 @@ class App {
         randomNums = [...randomNums, randomNum];
       }
     }
+    return randomNums;
+  }
 
-    let isFinished = false;
-    while (!isFinished) {
-      let input = "";
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answers) => {
-        input = answers;
-      });
+  compareToUserInput(randomNums) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answers) => {
       let result = {};
 
       randomNums.forEach((randomNum, i) => {
-        if (randomNum === +input[i]) {
+        if (randomNum === +answers[i]) {
           result.strike = (result.strike ?? 0) + 1;
-        } else if (randomNums.includes(+input[i])) {
+        } else if (randomNums.includes(+answers[i])) {
           result.ball = (result.ball ?? 0) + 1;
         }
       });
 
       let str = "";
-      MissionUtils.Console.print(input);
-      MissionUtils.Console.print(result);
       if (result.strike && result.ball) {
         str = `${result.strike}스트라이크 ${result.ball}볼`;
       } else if (result.strike && !result.ball) {
@@ -48,9 +44,21 @@ class App {
       }
 
       MissionUtils.Console.print(str);
-      if (result.strike === 3) isFinished = true;
-    }
-    MissionUtils.Console.close();
+      if (result.strike === 3) {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        MissionUtils.Console.close();
+      } else {
+        this.compareToUserInput(randomNums);
+      }
+    });
+  }
+
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    const randomNums = this.generateRandomNums();
+
+    this.compareToUserInput(randomNums);
   }
 }
 
