@@ -48,17 +48,17 @@ class App {
       CONSOLE_UTIL.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.endGame();
     }
-    if (strike === 0) {
-      if (ball === 0) CONSOLE_UTIL.print("낫싱");
+    if (strike && strike !== 3) {
+      if (!ball) CONSOLE_UTIL.print(`${strike}스트라이크`);
       else {
-        CONSOLE_UTIL.print(`${ball}볼`);
+        CONSOLE_UTIL.print(`${ball}볼 ${strike}스트라이크`);
       }
       return this.acceptUserNumber();
     }
-    if (strike !== 0 && strike !== 3) {
-      if (ball === 0) CONSOLE_UTIL.print(`${strike}스트라이크`);
+    if (!strike) {
+      if (!ball) CONSOLE_UTIL.print("낫싱");
       else {
-        CONSOLE_UTIL.print(`${ball}볼 ${strike}스트라이크`);
+        CONSOLE_UTIL.print(`${ball}볼`);
       }
       return this.acceptUserNumber();
     }
