@@ -51,20 +51,21 @@ javascript-baseball
 
 ## 🎨 각 파일들의 역할
 
-<img src="https://imgur.com/egsbK17.png" />
+<img src="https://imgur.com/wxdpoXY.png" />
 
 ### App.js
 
-- 숫자 야구를 진행하는 App 클래스가 있는 파일
-- App 클래스에는 인스턴스 멤버 변수로 computer, user, game을 정의했고 각각은 Computer, User, Game 클래스의 인스턴스가 할당(바인딩) 되어있다.
-- Computer, User, Game 클래스는 숫자 야구 게임에서 사용되는 로직들을 모듈화한 컴포넌트들이다.
-- 바인딩된 인스턴스의 메서드를 이용해 숫자 야구를 진행하는 메서드를 구현하였다.
+- 애플리케이션 실행(=시동)부
+- 숫자 야구를 진행하는 Game 인터페이스를 di받는다.
+- App.play()시 di받은 Game 인터페이스 구현체의 게임 시작 메서드를 호출한다.
+
+### components/Game.js
+
+- 숫자 야구 게임 프로세스 수행부
+- 게임 실행/재실행/게임종료/메세지 렌더링 등 실제 게임과 관련된 프로세스를 수행한다.
+- Computer, User 인터페이스를 di받아 야구 게임 진행 관련 프로세스를 수행한다.
 
 ### components/Computer.js
-
-숫자 야구를 진행할 컴퓨터 숫자를 만드는 모듈
-
-### components/User.js
 
 유저가 입력한 숫자의 유효성을 판별하는 모듈
 
