@@ -12,23 +12,7 @@ function makeTarget() {
   }
 
   return [...tempArr];
-}
-
-function readData(targetArr) {
-  let isAnswer = false;
-
-  Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    const inputArr = [...input].map(Number);
-    isAnswer = handleData(inputArr, targetArr);
-    if (!isAnswer) readData(targetArr);
-    else {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
-      repeatGame();
-    }
-  });
- 
-
-}
+}//random한 3개의 숫자를 배열형태로 return
 
 
 function handleData(inputArr, targetArr) {
@@ -45,7 +29,7 @@ function handleData(inputArr, targetArr) {
   })
 
   return printResult([strike, ball]);
-}
+}//target과 input의 ball, strike를 return함.
 
 function printResult(countArr) {
   const [strike, ball] = countArr;
@@ -67,10 +51,29 @@ function printResult(countArr) {
     Console.print(`${ball}볼 ${strike}스트라이크`);
     return false;
   }
-}
+}//ball, strike count에 따라 결과 출력
 
 
-function repeatGame() {
+function playGame() {
+  const targetArr = makeTarget();
+  readData(targetArr);
+}//게임로직
+
+function readData(targetArr) {
+  let isAnswer = false;
+
+  Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    const inputArr = [...input].map(Number);
+    isAnswer = handleData(inputArr, targetArr);
+    if (!isAnswer) readData(targetArr);
+    else {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+      isRepeatGame();
+    }
+  });
+}//입력을 받아서 로직을 처리하는 부분
+
+function isRepeatGame() {
   Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ", (input) => {
     if (input === "1") playGame();
     else if (input === "2") {
@@ -81,12 +84,6 @@ function repeatGame() {
       throw new Error("1,2 이외의 숫자가 입력되었습니다.")
     }
   });
-}
-
-function playGame() {
-  const targetArr = makeTarget();
-  console.log(targetArr);
-  readData(targetArr);
 }
 
 
