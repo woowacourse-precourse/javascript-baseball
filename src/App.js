@@ -77,7 +77,10 @@ function App () {
         } throw '올바른 값을 입력하세요.';
       })
     }
-    
+
+    printNewGameInterface();
+    startGame();
+    getUserAnswer();
   }
 }
 
