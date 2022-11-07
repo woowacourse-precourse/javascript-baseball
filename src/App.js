@@ -91,6 +91,7 @@ const continueOrFinish = () => {
 
 const inputException = (guessNumber) => {
   if (guessNumber.length !== 3) throw new Error('예외');
+  if (guessNumber.filter((num) => Number.isNaN(num)).length > 0) throw new Error('예외');
 };
 
 class App {
@@ -103,25 +104,25 @@ class App {
 
       try {
         inputException(this.guessNumber);
+
+        const strike = countStrike(computerNumber, guessNumber);
+        const ball = countBall(computerNumber, guessNumber);
+        MissionUtils.Console.print(getResult(strike, ball));
+
+        if (strike === 3) {
+          const input = continueOrFinish();
+
+          if (input.toString() === '2') {
+            MissionUtils.Console.print('게임 종료');
+            break;
+          } else {
+            computerNumber = getRandomNumber();
+          }
+        }
       } catch (e) {
         // console.log();
         // MissionUtils.Console.print(e);
         // break;
-      }
-
-      const strike = countStrike(computerNumber, guessNumber);
-      const ball = countBall(computerNumber, guessNumber);
-      MissionUtils.Console.print(getResult(strike, ball));
-
-      if (strike === 3) {
-        const input = continueOrFinish();
-
-        if (input.toString() === '2') {
-          MissionUtils.Console.print('게임 종료');
-          break;
-        } else {
-          computerNumber = getRandomNumber();
-        }
       }
     }
   }
