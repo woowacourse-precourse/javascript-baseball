@@ -40,13 +40,24 @@ class App {
       if (numberInputSet.size < 3) {
         throw new Error('입력이 서로 다른 3자리 숫자가 아닙니다.');
       }
+      this.judgeInput(numberInput);
     } catch (e) {
       MissionUtils.Console.print(`잘못된 입력입니다. ${e.message}`);
       this.endGame();
     }
   }
 
-  judgeInput() {}
+  judgeInput(numberInput) {
+    const strikeCount = this.calcStrike(numberInput);
+    const ballCount = this.calcBall(numberInput);
+    let output = '';
+    if (ballCount === 0 && strikeCount === 0) output = '낫싱';
+    if (ballCount > 0) output += `${ballCount}볼 `;
+    if (strikeCount > 0) output += `${strikeCount}스트라이크`;
+
+    MissionUtils.Console.print(output);
+    this.endGame();
+  }
 
   calcStrike() {}
 
