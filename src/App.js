@@ -117,6 +117,15 @@ class App {
     if (selectedNumber === 1) this.startNewGame();
   }
 
+  checkAnswer(strike) {
+    if (strike === 3) {
+      this.printMessage(Constants.WIN_MESSAGE);
+      this.askReGame();
+    } else {
+      this.tryGetAnswer();
+    }
+  }
+
   async tryGetAnswer() {
     this.userNumber = await this.inputNumber(Constants.INPUT_NUMBER_MESSAGE);
     this.userNumberException();
@@ -125,17 +134,7 @@ class App {
     const ball = this.countBall();
     this.printResult(ball, strike);
 
-    if (this.isAnswer(strike)) {
-      this.printMessage(Constants.WIN_MESSAGE);
-      const selectedNumber = Number(
-        await this.inputNumber(Constants.END_MESSAGE)
-      );
-      this.selectedNumberException(selectedNumber);
-
-      if (selectedNumber === 1) {
-        this.startNewGame();
-      }
-    }
+    this.checkAnswer(strike);
   }
 
   startNewGame() {
