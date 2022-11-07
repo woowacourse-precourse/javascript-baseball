@@ -28,7 +28,7 @@ class App {
   isDuplicated(input) {
     const numberSet = new Set([...input]);
 
-    return numberSet.size === 3;
+    return numberSet.size === input.length;
   }
 
   evaluate(input) {}
