@@ -8,7 +8,13 @@ class App {
   }
 
   generateThreeDigits() {
-    this.threeDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.threeDigits = [];
+    while (this.threeDigits.length < 3) {
+      const newDigit = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.threeDigits.includes(newDigit)) {
+        this.threeDigits.push(newDigit);
+      }
+    }
   }
 
   getUserDigits() {
