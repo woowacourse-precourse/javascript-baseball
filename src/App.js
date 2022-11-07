@@ -46,6 +46,24 @@ class App {
     }
     this.userAnswerArr = userAnswerArr.map((pickNum) => +pickNum);
   }
+
+  userScore() {
+    let strikeCount = 0;
+    let ballCount = 0;
+    this.computerAnswerArr.forEach((computerAnswerItem, index) => {
+      if (computerAnswerItem === this.userAnswerArr[index]) {
+        strikeCount++;
+      } else {
+        if (this.userAnswerArr.includes(computerAnswerItem)) ballCount++;
+      }
+    })
+    if (strikeCount === 3) this.gameResult("3스트라이크");
+    if (strikeCount === 0 && ballCount === 0) this.gameResult("낫싱");
+    if (strikeCount > 0 && ballCount > 0) this.gameResult(`${ballCount}볼 ${strikeCount}스트라이크`);
+    if (strikeCount > 0 && ballCount === 0) this.gameResult(`${strikeCount}스트라이크`);
+    if (ballCount > 0 && strikeCount === 0) this.gameResult(`${ballCount}볼`);
+  }
+
 }
 
 module.exports = App;
