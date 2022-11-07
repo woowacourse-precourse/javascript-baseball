@@ -143,6 +143,34 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+    expect(App.isValidInput([1, 2, 3])).toEqual(true);
+  });
+
+  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+    expect(() => {
+      App.isValidInput([1, NaN, 2]);
+    }).toThrow('문자를 제외한 숫자만 입력하세요.');
+  });
+
+  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+    expect(() => {
+      App.isValidInput([1, 0, 9]);
+    }).toThrow('1~9 사이의 숫자만 입력하세요.');
+  });
+
+  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+    expect(() => {
+      App.isValidInput([1, 9]);
+    }).toThrow('3개의 숫자들을 입력하세요.');
+  });
+
+  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+    expect(() => {
+      App.isValidInput([4, 7, 7]);
+    }).toThrow('서로 다른 숫자를 입력하세요.');
+  });
+
   test('예외 테스트: 입력값의 길이가 3이 아닌 경우', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
