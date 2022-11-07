@@ -58,23 +58,28 @@ class App {
     if (ballCnt == 0 && strikeCnt == 0) return 1;
   }
 
-  printResult(ballCnt, strikeCnt) {
-    if (this.checkNothing(ballCnt, strikeCnt)) {
-      MissionUtils.Console.print("낫싱\n");
-    } else if (ballCnt != 0 && strikeCnt != 0) {
-      MissionUtils.Console.print(`${ballCnt}볼 ${strikeCnt}스트라이크\n`);
-    } else if (ballCnt == 0 && strikeCnt != 0) {
-      MissionUtils.Console.print(`${strikeCnt}스트라이크\n`);
-    } else if (ballCnt != 0 && strikeCnt == 0) {
-      MissionUtils.Console.print(`${ballCnt}볼\n`);
-    }
-  }
-
-  GameResult(STRIKE_CNT) {
+  gameResult(STRIKE_CNT) {
     if (STRIKE_CNT == 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
       return true;
     } else return false;
+  }
+
+  printResult(COM_NUMBER, USER_NUMBER) {
+    const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
+    const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
+
+    if (this.checkNothing(BALL_CNT, STRIKE_CNT)) {
+      MissionUtils.Console.print("낫싱\n");
+    } else if (BALL_CNT != 0 && STRIKE_CNT != 0) {
+      MissionUtils.Console.print(`${BALL_CNT}볼 ${STRIKE_CNT}스트라이크\n`);
+    } else if (BALL_CNT == 0 && STRIKE_CNT != 0) {
+      MissionUtils.Console.print(`${STRIKE_CNT}스트라이크\n`);
+    } else if (BALL_CNT != 0 && STRIKE_CNT == 0) {
+      MissionUtils.Console.print(`${BALL_CNT}볼\n`);
+    }
+
+    return this.gameResult(STRIKE_CNT);
   }
 
   play() {
@@ -87,10 +92,7 @@ class App {
         MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
           this.checkError(num);
           const USER_NUMBER = num.split("");
-          const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
-          const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
-          this.printResult(BALL_CNT, STRIKE_CNT);
-          clear = this.GameResult(STRIKE_CNT);
+          clear = this.printResult(COM_NUMBER, USER_NUMBER);
         });
       }
       MissionUtils.Console.readLine(
