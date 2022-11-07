@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 function App () {
   this.randomNumber;
   this.play = () => {
