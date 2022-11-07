@@ -54,8 +54,7 @@ class App {
         case "2":
           this.$console.close();
         default:
-          new Error("올바르지 못한 값을 입력하였습니다.");
-          break;
+          throw "올바르지 못한 값을 입력하였습니다.";
       }
     });
 
