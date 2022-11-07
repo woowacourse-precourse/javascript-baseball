@@ -27,6 +27,14 @@ class App {
     }
     return [ballCnt, strCnt];
   }
+
+  getRstMsg(ballCnt, strCnt) {
+    if(ballCnt === 0 && strCnt === 0) return '낫싱';
+    if(ballCnt === 0) return strCnt+'스트라이크';
+    if(strCnt === 0) return ballCnt+'볼';
+
+    return ballCnt+'볼 '+strCnt+'스트라이크';
+}
   
 }
 
