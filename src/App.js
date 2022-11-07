@@ -24,7 +24,6 @@ class App {
   }
   playGame() {
     this.makeRandomNumbers();
-    console.log(this.targetNumber); // 필히 삭제
     this.inputNumber(this.targetNumber);
   }
 
@@ -34,6 +33,7 @@ class App {
       this.guessNumber(answer, targetNumber);
     });
   }
+
   guessNumber(answer, targetNumber) {
     let userGuessedNumber = answer.split("").map((v) => +v);
     let [ball, strike] = CheckBallCount(targetNumber, userGuessedNumber);
@@ -53,7 +53,7 @@ class App {
           this.exit();
           break;
         default:
-          this.manageGame();
+          throw new Error(GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG);
       }
     });
   }
