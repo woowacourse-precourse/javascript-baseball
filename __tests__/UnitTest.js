@@ -54,6 +54,28 @@ describe("Throw Error Test", () => {
 })
 
 
+describe("Game Methods Test", () => {
+  
+  test.each([
+    [[1,2,3],true],
+    [[1,0,3],false],
+    [[1,1,3],false],
+    [[9,8,3],true],
+    [["a",8,"c"],false],
+  ])('case 1) Get Random Three Digits Number Valid Test', (randoms,boolean) => {
+  
+    mockRandoms(randoms);
+
+    const app = new App();
+    const number = app.getRandomThreeDigitsNumber()
+
+    expect(app.isValidInputValueInGame(number)).toBe(boolean)
+  })
+  
+
+})
+
+
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
