@@ -27,6 +27,7 @@ class App {
    */
   isValidInput(input) {
     if (typeof input !== "string") return false;
+    if (input.indexOf("0") >= 0) return false;
     const numberArr = input.split("");
     if (input.length !== 3) return false;
     else if (!Number(input)) return false;
