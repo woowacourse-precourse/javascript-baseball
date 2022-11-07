@@ -51,7 +51,7 @@ class App {
             !this.validateMultyArray(userNumberArray) ||
             !this.validateNumberArray(userNumberArray)
         )
-            throw '오류입니다 종료합니다. ';
+            throw '오류입니다.';
     }
     // 점수 계산 함수
     countStrikeAndBall(userNumberArray) {
@@ -73,6 +73,7 @@ class App {
             MissionUtils.Console.print(
                 '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
             );
+            this.retryCheck();
         } else {
             if (result[0] === 0 && result[1] === 0) {
                 MissionUtils.Console.print('낫싱');
@@ -85,6 +86,22 @@ class App {
             }
         }
         this.pickRandomNumberUser();
+    }
+
+    // 재시작 질문 함수
+    retryCheck() {
+        MissionUtils.Console.print(
+            '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+        );
+        MissionUtils.Console.readLine('', (number) => {
+            this.checkRetry(number, 1);
+        });
+    }
+
+    // 재시작 예외 처리
+    checkRetry(number, length) {
+        if (length === 1 && (Number(number) < 1 || Number(number) > 2))
+            throw '오류입니다.';
     }
 }
 let app = new App();
