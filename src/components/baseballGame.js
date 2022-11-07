@@ -19,6 +19,18 @@ class BaseballGame{
     return ball;
   }
 
+  getStrike(answer, inputNumber){
+    let strike = 0;
+    
+    [...inputNumber].forEach((number, index) => {
+      if(number === answer[index]) {
+        strike++;
+      }
+    });
+
+    return strike;
+  }
+
   createAnswer() {
     const answer = [];
 
