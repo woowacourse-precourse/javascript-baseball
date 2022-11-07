@@ -98,6 +98,21 @@ class Utils {
   static #isEmptyObject(param) {
     return Object.keys(param).length === 0 && param.constructor === Object;
   }
+
+  static askGameAgain() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (userInpuOneorTwo) => {
+        if (userInpuOneorTwo === "1") {
+          let computerRandomNumber = Utils.setComputerNumber();
+          Utils.startGame(computerRandomNumber);
+        } else {
+          Console.print("게임 종료");
+          Console.close();
+        }
+      }
+    );
+  }
 }
 
 module.exports = Utils;
