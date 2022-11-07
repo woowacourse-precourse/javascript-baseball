@@ -30,7 +30,27 @@ class App {
     );
   }
 
+  setRandomNumber() {
+    while (this.enemy.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (this.enemy.indexOf(number) === -1) this.enemy += `${number}`;
+    }
+    this.enemy = [...this.enemy];
+  }
+
+  getUserInputData() {
+    this.strikes = 0;
+    this.balls = 0;
+    Console.readLine("숫자를 입력해주세요. : ", (answer) => {
+      if (this.checkValidData(answer))
+        throw new Error("잘못된 값이 입력되었습니다.");
+      this.userInputArr = [...answer];
+    });
+  }
+
   gameStart() {
+    this.setRandomNumber();
+    this.getUserInputData();
   }
 
   play() {
