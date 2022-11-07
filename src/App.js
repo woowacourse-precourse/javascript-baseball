@@ -1,16 +1,9 @@
 const Console = require("@woowacourse/mission-utils").Console;
 const Random = require("@woowacourse/mission-utils").Random;
-const CheckValidation = require("./components/CheckValidation");
-const CheckBallCount = require("./components/CheckBallCount");
-const PrintBallCount = require("./components/PrintBallCount");
-
-const guideMessage = {
-  startMsg: "숫자 야구 게임을 시작합니다.",
-  processMsg: "숫자를 입력해주세요 : ",
-  correctMsg: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  manageGameMsg: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-  finishMsg: "게임 종료",
-};
+const CheckValidation = require("./components/checkValidation");
+const CheckBallCount = require("./components/checkBallCount");
+const PrintBallCount = require("./components/printBallCount");
+const { GUIDE_MESSAGE } = require("./constants");
 
 class App {
   constructor() {
@@ -26,7 +19,7 @@ class App {
     }
   }
   play() {
-    Console.print(guideMessage.startMsg);
+    Console.print(GUIDE_MESSAGE.START_MSG);
     this.playGame();
   }
   playGame() {
@@ -36,7 +29,7 @@ class App {
   }
 
   inputNumber(targetNumber) {
-    Console.readLine(guideMessage.processMsg, (answer) => {
+    Console.readLine(GUIDE_MESSAGE.PROCESS_MSG, (answer) => {
       CheckValidation(answer);
       this.guessNumber(answer, targetNumber);
     });
@@ -46,12 +39,12 @@ class App {
     let [ball, strike] = CheckBallCount(targetNumber, userGuessedNumber);
     PrintBallCount(ball, strike);
     strike > 2
-      ? (Console.print(guideMessage.correctMsg), this.manageGame())
+      ? (Console.print(GUIDE_MESSAGE.CORRECT_MSG), this.manageGame())
       : this.inputNumber(targetNumber);
   }
 
   manageGame() {
-    Console.readLine(guideMessage.manageGameMsg, (answer) => {
+    Console.readLine(GUIDE_MESSAGE.MANAGE_GAME_MSG, (answer) => {
       switch (answer) {
         case "1":
           this.reset();
@@ -68,7 +61,7 @@ class App {
     this.playGame();
   }
   exit() {
-    Console.print(guideMessage.finishMsg);
+    Console.print(GUIDE_MESSAGE.FINISH_MSG);
     Console.close();
   }
 }

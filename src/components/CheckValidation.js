@@ -1,13 +1,4 @@
-const messages = {
-  guideMsg:
-    "\n1 ~ 9로 구성되고, 3자리가 모두 다른 숫자 3개를 입력해주세요.\n게임 종료",
-  inputMoreMsg: "글자 더 입력하셨습니다.",
-  inputLessMsg: "글자 덜 입력하셨습니다.",
-  duplicatedMsg:
-    "숫자끼리 중복되어서는 안됩니다.\n세 자리 모두 다른 수를 입력해주세요.",
-  hasZeroMsg: "숫자 0이 포함되었습니다. ",
-  isNotANumberMsg: "는 숫자가 아닙니다. ",
-};
+const { ERROR_MESSAGE } = require("../constants");
 
 const CheckValidation = (answer) => {
   let splitAnswer = answer.split("");
@@ -20,14 +11,14 @@ const CheckValidation = (answer) => {
 };
 
 const inputMore = (length) => {
-  return length - 3 + messages.inputMoreMsg + messages.guideMsg;
+  return length - 3 + ERROR_MESSAGE.INPUT_MORE_MSG + ERROR_MESSAGE.GUIDE_MSG;
 };
 const inputLess = (length) => {
-  return 3 - length + messages.inputLessMsg + messages.guideMsg;
+  return 3 - length + ERROR_MESSAGE.INPUT_LESS_MSG + ERROR_MESSAGE.GUIDE_MSG;
 };
 const throwErrorMsg = (typeOfError, length) => {
   if (length === 3) {
-    throw new Error(typeOfError + messages.guideMsg);
+    throw new Error(typeOfError + ERROR_MESSAGE.GUIDE_MSG);
   }
   length > 3
     ? (function () {
@@ -44,7 +35,7 @@ const hasZero = (answer, length) => {
   zeroRegex.test(answer) ? (isZero = true) : (isZero = false);
 
   if (!isZero) return;
-  throwErrorMsg(messages.hasZeroMsg, length);
+  throwErrorMsg(ERROR_MESSAGE.HAS_ZERO_MSG, length);
 };
 
 const checkDuplicated = (splitAnswer) => {
@@ -53,7 +44,7 @@ const checkDuplicated = (splitAnswer) => {
     splitAnswer[1] == splitAnswer[2] ||
     splitAnswer[0] == splitAnswer[2]
   ) {
-    throw new Error(messages.duplicatedMsg);
+    throw new Error(ERROR_MESSAGE.DUPLICATED_MSG);
   }
 };
 
@@ -72,7 +63,7 @@ const containNotANumber = (splitAnswer, length) => {
   let hasNotANumber = notANumberList.length !== 0;
 
   if (!hasNotANumber) return;
-  throwErrorMsg(isNotANumber + messages.isNotANumberMsg, length);
+  throwErrorMsg(isNotANumber + ERROR_MESSAGE.IS_NOT_A_NUMBER_MSG, length);
 };
 
 const notRightLength = (length) => {
