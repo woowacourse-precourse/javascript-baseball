@@ -21,18 +21,18 @@ class App {
   receiveNumber() {
     return new Promise((resolve, reject) => {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-        this.throwException(input);
-        resolve(input);
+        this.throwException(input).then(resolve);
       });
     });
   }
 
-  throwException(input) {
+  async throwException(input) {
     if (input.length !== 3 || isNaN(input)) throw 'Error';
     input.split('').reduce((acc, cur) => {
       if (acc.includes(cur)) throw 'Error';
       return acc + cur;
     }, '');
+    return input;
   }
 
   async compareNumbers(input) {
@@ -46,7 +46,7 @@ class App {
     return result;
   }
 
-  printResult({ 볼: BALL_COUNT, 스트라이크: STRIKE_COUNT }) {
+  async printResult({ 볼: BALL_COUNT, 스트라이크: STRIKE_COUNT }) {
     const RESULT_BALL = BALL_COUNT === 0 ? '' : `${BALL_COUNT}볼 `;
     const RESULT_STRIKE = STRIKE_COUNT === 0 ? '' : `${STRIKE_COUNT}스트라이크`;
     const RESULT_MESSAGE =
@@ -57,14 +57,27 @@ class App {
     MissionUtils.Console.print(RESULT_MESSAGE);
     if (STRIKE_COUNT === 3)
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+
+    return STRIKE_COUNT;
+  }
+
+  process() {
+    this.receiveNumber()
+      .then(this.compareNumbers.bind(this))
+      .then(this.printResult)
+      .then(this.end.bind(this));
+  }
+
+  end(strike) {
+    if (strike !== 3) {
+      this.process();
+    }
   }
 
   play() {
     this.printStartPhrase();
     this.createNumberList();
-    this.receiveNumber()
-      .then(this.compareNumbers.bind(this))
-      .then(this.printResult);
+    this.process();
   }
 }
 
