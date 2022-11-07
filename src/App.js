@@ -74,14 +74,15 @@ class App {
 
   nothing() {
     for (let index = 0; index < 3; index++) {
-      this.inputNum[index] == this.randomNum[index];
-      return false;
+      if(this.inputNum[index] == this.randomNum[index]){
+        return false;
+      }
     }
     return true;
   }
 
   ball() {
-    let count;
+    let count = 0;
     userInputArr = [...this.inputNum];
     for (let index = 0; index < 3; index++) {
       if (
@@ -95,7 +96,7 @@ class App {
   }
 
   strike() {
-    let count;
+    let count = 0;
     for (let index = 0; index < 3; index++) {
       if (this.inputNum[index] == this.randomNum[index]) {
         count++;
