@@ -2,26 +2,23 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const gameConstant = require('./GameConstant');
 const compareNumber = require('./CompareFunctions');
 
-class BaseballGame {
-  constructor() {
-    this.answer = this.setAnswer();
-    this.startMessage = gameConstant.START_MESSAGE;
-  }
+const setAnswer = () => {
+  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
+};
 
-  setAnswer() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
-  }
+const printStartMessage = () => {
+  MissionUtils.Console.print(gameConstant.START_MESSAGE);
+};
 
-  printStartMessage() {
-    MissionUtils.Console.print(this.startMessage);
-  }
+const startGame = () => {
+  const answer = setAnswer();
+  printStartMessage();
+  MissionUtils.Console.readLine(
+    gameConstant.INPUT_ORDER_MESSAGE,
+    playerInput => {
+      compareNumber(answer, playerInput);
+    },
+  );
+};
 
-  startGame() {
-    this.printStartMessage();
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', playerInput => {
-      compareNumber(this.answer, playerInput);
-    });
-  }
-}
-
-module.exports = BaseballGame;
+module.exports = startGame;
