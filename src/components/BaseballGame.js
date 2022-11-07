@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const gameConstant = require('./GameConstant');
+const compareNumber = require('./CompareFunctions');
 
 class BaseballGame {
   constructor() {
@@ -13,6 +14,13 @@ class BaseballGame {
 
   printStartMessage() {
     MissionUtils.Console.print(this.startMessage);
+  }
+
+  startGame() {
+    this.printStartMessage();
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', playerInput => {
+      compareNumber(this.answer, playerInput);
+    });
   }
 }
 
