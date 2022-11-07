@@ -4,15 +4,6 @@ class Validator {
     max: 987,
   };
 
-  static checkUserAnswer(userAnswer, userAnswerArray) {
-    return (
-      this.checkTruthy(userAnswer) &&
-      this.checkType(userAnswer) &&
-      this.checkRange(userAnswer) &&
-      this.checkDuplication(userAnswerArray)
-    );
-  }
-
   static checkTruthy(userAnswer) {
     return Boolean(userAnswer);
   }
@@ -25,8 +16,8 @@ class Validator {
     return userAnswer >= this.checker.min && userAnswer <= this.checker.max;
   }
 
-  static checkDuplication(userAnswer) {
-    return userAnswer.every((num, i, array) => array.indexOf(num) === i);
+  static checkDuplication(userAnswerArray) {
+    return userAnswerArray.every((num, i, array) => array.indexOf(num) === i);
   }
 }
 

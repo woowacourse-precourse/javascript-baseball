@@ -7,7 +7,7 @@ class Message {
     return this.message;
   }
 
-  isNothing(ball, strike) {
+  isNothing(strike, ball) {
     if (ball === ZERO && strike === ZERO) {
       this.message = '낫싱';
     }
@@ -15,7 +15,7 @@ class Message {
     return this;
   }
 
-  isOnlyBall(ball, strike) {
+  isOnlyBall(strike, ball) {
     if (ball !== ZERO && strike === ZERO) {
       this.message = `${ball}볼`;
     }
@@ -23,7 +23,7 @@ class Message {
     return this;
   }
 
-  isOnlyStrike(ball, strike) {
+  isOnlyStrike(strike, ball) {
     if (ball === ZERO && strike !== ZERO) {
       this.message = `${strike}스트라이크`;
     }
@@ -31,7 +31,7 @@ class Message {
     return this;
   }
 
-  isBallAndStrike(ball, strike) {
+  isBallAndStrike(strike, ball) {
     if (ball !== ZERO && strike !== ZERO) {
       this.message = `${ball}볼 ${strike}스트라이크`;
     }
