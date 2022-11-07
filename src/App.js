@@ -3,7 +3,7 @@ const { Random } = require("@woowacourse/mission-utils");
 
 let computerNum = [];
 
-function play() {
+function start() {
   Console.print("숫자 야구 게임을 시작합니다.");
   computerNum = MakeNum();
   proceedGame(computerNum);
@@ -90,11 +90,11 @@ function isStrikeBall(userNum) {
 }
 
 class App {
-  start() {
-    play();
+  play() {
+    start();
   }
 }
 
-const baseBallGame = new App();
-baseBallGame.start();
+const app = new App();
+app.play();
 module.exports = App;
