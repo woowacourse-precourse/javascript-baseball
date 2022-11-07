@@ -113,6 +113,9 @@ class App {
     if (input.length !== 3) {
       throw new Error("3자리 숫자를 입력하세요");
     }
+    if (input.includes("0")) {
+      throw new Error("1~9 사이의 숫자로 이루어진 숫자를 입력하세요");
+    }
     // - 반복되는 숫자가 존재할 시
   }
 }
