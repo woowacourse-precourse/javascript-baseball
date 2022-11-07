@@ -48,6 +48,25 @@ class App {
       this.toThrow("같은 숫자가 중복되었습니다. 다른 숫자 3개를 입력해주세요.");
     }
   }
+
+  isNumber(input) {
+    const NUM_REG = /[1-9]/g;
+    var remainNotNum = input.replace(NUM_REG, "");
+    if (remainNotNum) return false;
+    return true;
+  }
+
+  isVaildLength(input) {
+    if (input.length !== 3) return false;
+    return true;
+  }
+
+  isAllDiffNum(input) {
+    const setInput = new Set(input.split(""));
+    if (setInput.size !== 3) return false;
+    return true;
+  }
+
   toThrow(errorMsg) {
     throw new Error(errorMsg);
   }
@@ -116,25 +135,8 @@ class App {
       }
     );
   }
-
-  isNumber(input) {
-    const NUM_REG = /[1-9]/g;
-    var remainNotNum = input.replace(NUM_REG, "");
-    if (remainNotNum) return false;
-    return true;
-  }
-
-  isVaildLength(input) {
-    if (input.length !== 3) return false;
-    return true;
-  }
-
-  isAllDiffNum(input) {
-    const setInput = new Set(input.split(""));
-    if (setInput.size !== 3) return false;
-    return true;
-  }
 }
+
 const app = new App();
 app.play();
 
