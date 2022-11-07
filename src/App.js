@@ -18,7 +18,6 @@ class App {
   startCountingBallAndStrike(userValue) {
     isAnswer(countBallAndStrike(this.randomValue, userValue));
   };
-  
 };
 
 const app = new App();
@@ -73,7 +72,6 @@ function countBallAndStrike(randomValue, userValue) {
   if (BALL !== 0 && STRIKE !== 0) {
     return `${BALL}볼 ${STRIKE}스트라이크`;
   };
-
 };
 
 function countBall(randomValue, userValue) {
@@ -95,7 +93,6 @@ function isAnswer(numberOfBallAndStrike) {
   if (numberOfBallAndStrike !== `3스트라이크`) {
     makeUserValue();
   };
-
 };
 
 function askRegameOrNot() {
@@ -105,7 +102,6 @@ function askRegameOrNot() {
 };
 
 function checkRegameRequest(regameRequest) {
-
   if (regameRequest !== '1' && regameRequest !== '2') {
     throw '잘못된 형식을 입력하였습니다. 게임을 종료합니다.';
   };
@@ -118,7 +114,6 @@ function checkRegameRequest(regameRequest) {
     MISSION_UTILS.Console.print('게임 종료');
     MISSION_UTILS.Console.close();
   };
-
 };
 
 module.exports = App;
