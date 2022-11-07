@@ -4,6 +4,8 @@ class App {
   play() {
     let computerNumber = this.setComputerNumber();
 
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
     while (true) {
       let userNumber = this.setUserNumber();
       let compareResult = this.compareNumbers(computerNumber, userNumber);
@@ -32,8 +34,7 @@ class App {
       userNumber = answer;
     });
 
-    if (userNumber.length > 3) throw "입력된 숫자의 자릿수가 많습니다";
-    else if (userNumber.length < 3) throw "입력된 숫자의 자릿수가 적습니다";
+    if (userNumber.length !== 3) throw "숫자 입력은 3자리만 가능합니다";
     else if (isNaN(userNumber)) throw "숫자가 아닙니다";
     else if (Number(userNumber) < 0) throw "음수를 입력했습니다";
     else return userNumber;
@@ -86,6 +87,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
