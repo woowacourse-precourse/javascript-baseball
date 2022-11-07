@@ -93,15 +93,15 @@ class App {
   isValidInput(input) {
     const numbers = input.split("").map(Number);
 
-    if (!this.isValidDigit(numbers)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.DIGIT}${this.MESSAGES.ERROR.END}`
-      );
-    }
-
     if (!numbers.every(this.isNumber)) {
       throw new TypeError(
         `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.TYPE}${this.MESSAGES.ERROR.END}`
+      );
+    }
+
+    if (!this.isValidDigit(numbers)) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.DIGIT}${this.MESSAGES.ERROR.END}`
       );
     }
 
@@ -132,6 +132,10 @@ class App {
   continueGame(input) {
     this.inputUserNumbers(input);
     this.compareNumbers();
+    if (this.isPlaying) {
+      this.runGame();
+      return;
+    }
   }
 
   runGame() {
@@ -175,9 +179,6 @@ class App {
     });
 
     Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
-    if (this.isPlaying) {
-      this.runGame();
-    }
   }
 
   newGame() {
