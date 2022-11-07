@@ -61,15 +61,29 @@ class App {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
     }
 
-    if ((isNaN(firstNumber) === true) || (isNaN(secondNumber) === true) || (isNaN(thirdNumber) === true)) {
+    if (
+      (isNaN(firstNumber) === true)
+      || (isNaN(secondNumber) === true)
+      || (isNaN(thirdNumber) === true)
+    ) {
       throw new Error(ERROR_MESSAGE.TYPE_ERROR);
     }
 
-    if (!((firstNumber !== secondNumber) && (secondNumber !== thirdNumber) && (thirdNumber !== firstNumber))) {
+    if (
+      !(
+        (firstNumber !== secondNumber)
+        && (secondNumber !== thirdNumber)
+        && (thirdNumber !== firstNumber)
+      )
+    ) {
       throw new Error(ERROR_MESSAGE.OVERLAP_ERROR);
     }
 
-    if (firstNumber === NUMBER.ZERO || secondNumber === NUMBER.ZERO || thirdNumber === NUMBER.ZERO) {
+    if (
+      firstNumber === NUMBER.ZERO
+      || secondNumber === NUMBER.ZERO
+      || thirdNumber === NUMBER.ZERO
+    ) {
       throw new Error(ERROR_MESSAGE.ZERO_ERROR);
     }
   }
