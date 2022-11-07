@@ -1,5 +1,9 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
-  play() {}
+  play() {
+
+  }
   
   checkException(num){
     if(isNaN(num)){
@@ -15,6 +19,17 @@ class App {
     }else if(num.charAt(0) == num.charAt(1) || num.charAt(0) == num.charAt(2) || num.charAt(1) == num.charAt(2)){
       throw new Error("중복되지 않는 숫자를 입력하세요.");
     }
+  }
+
+  getRandomNum(){
+    const com_num = [];
+    while(com_num.length < 3){
+      const randomNum = MissionUtils.Random.pickNumberInRange(1,9);
+      if(!com_num.includes(randomNum)){
+        com_num.push(randomNum);
+      }
+    }
+    return com_num;
   }
 
 }
