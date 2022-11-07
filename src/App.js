@@ -10,8 +10,10 @@ class App {
     this.#answer = "";
     this.score = {};
   }
-
   play() {}
+  startMent() {
+    Console.print("숫자 야구 게임을 시작합니다.");
+  }
 }
 
 const app = new App();
