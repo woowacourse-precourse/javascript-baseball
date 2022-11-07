@@ -10,6 +10,11 @@ class App {
   play() {
     const computerNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     MissionUtils.Console.print(MESSAGES.start);
+    let inputNum;
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
+      inputNum = input;
+      console.log(inputNum);
+    });
   }
 }
 const app = new App();
