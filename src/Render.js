@@ -1,9 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { GAME } = require("./constants");
-const { ERROR } = require("./constants");
-
+const { GAME } = require("./data/Constants");
+const { ERROR } = require("./data/Constants");
 class Render {
-  constructor() {}
+  constructor({ errorResult, errorRetryResult }) {
+    this.errorResult = errorResult;
+    this.errorRetryResult = errorRetryResult;
+  }
 
   startment() {
     MissionUtils.Console.print(GAME.START_MENTION);
@@ -17,20 +19,23 @@ class Render {
     });
   }
 
-  errorThrow(errorResult) {
-    throw new Error(errorResult);
+  errorThrow(errorMessege) {
+    throw new Error(errorMessege);
+  }
+  errorRetryThrow(errorMessege) {
+    throw new Error(errorMessege);
   }
 
-  result({ ballCount, strikeCount }) {
-    if (strikeCount !== 3) {
-      MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-    }
+  result(ballCount, strikeCount) {
     if (strikeCount === 3) {
+      MissionUtils.Console.print(GAME.GAME_THREE_STRIKE);
       MissionUtils.Console.print(GAME.GAME_END_MENTION);
     }
 
     if (ballCount === 0 && strikeCount === 0) {
       MissionUtils.Console.print(GAME.GAME_NOTHING);
+    } else {
+      MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
     }
   }
 
@@ -44,6 +49,7 @@ class Render {
 
   end() {
     MissionUtils.Console.print(GAME.END_MENTION);
+    MissionUtils.Console.close();
   }
 }
 module.exports = Render;
