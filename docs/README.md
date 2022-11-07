@@ -35,8 +35,8 @@
 
 ### 📝 GameDataUITest.js
 
-- [-] GameDataUI.newGuess 메소드 테스트 (에러처리 포함)
-- [-] GameDataUI.gameOver 메소드 테스트 (에러처리 포함)
+- [o] 3자리 숫자 입력 에러처리 테스트
+- [o] 게임 종료시 input이 1, 2 가 아닐 때 에러처리
 
 ### 📝 ActionTest.js
 
