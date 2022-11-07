@@ -68,11 +68,10 @@ function proceedGame() {
 }
 
 function userMessage(strike, ball) {
-  if (strike === 0 && ball === 0) {
-    return Console.print("낫싱");
-  }
-  Console.print(ball + "" + "볼 " + strike + "" + "스트라이크");
-  //0개는 출력물로 처리하면 안됨.
+  nothingMessage = !ball && !strike ? "낫싱" : "";
+  strikeMessage = strike ? `${strike}스트라이크` : "";
+  ballMessage = ball ? `${ball}볼` : "";
+  Console.print(nothingMessage + strikeMessage + ballMessage);
 }
 
 function isStrikeBall(userNum) {
