@@ -9,7 +9,8 @@ const ERROR_CHECK = {
 };
 
 const INGAME_MESSAGE = {
-  ERROR: "잘못된 값을 입력했습니다. Required : 중복되지 않은 숫자 1~9 (3자리)",
+  ERROR: "입력값은 중복되지 않은 숫자 3자리여야 합니다. (1~9)",
+  ERROR_ZERO: "입력값은 숫자 1~9만 사용 가능합니다.",
   START: "숫자 야구 게임을 시작합니다.",
   INPUT_NUMBER: "숫자를 입력해주세요 : ",
   END: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",

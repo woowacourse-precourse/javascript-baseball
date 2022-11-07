@@ -1,10 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const {
-  ERROR_CHECK,
-  GAME_GUIDE_MESSAGE,
-  INGAME_MESSAGE,
-} = require("../src/Constant");
+const { ERROR_CHECK, INGAME_MESSAGE } = require("../src/Constant");
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -57,8 +53,8 @@ describe("게임 문구 테스트", () => {
 describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크1", () => {
     const app = new App();
-    expect(() => "...").toThrow(
-      GAME_GUIDE_MESSAGE.ERROR,
+    expect(() => app.numberCheck(1)).toThrow(
+      INGAME_MESSAGE.ERROR,
       " 타입은 number여야 합니다."
     );
   });
@@ -66,23 +62,20 @@ describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크2", () => {
     const app = new App();
     expect(() => "...").toThrow(
-      GAME_GUIDE_MESSAGE.ERROR,
+      INGAME_MESSAGE.ERROR,
       "은 1~9사이 숫자여야 합니다."
     );
   });
 
   test("플레이어 숫자 입력 체크3", () => {
     const app = new App();
-    expect(() => "...").toThrow(
-      GAME_GUIDE_MESSAGE.ERROR,
-      "은 3자리여야 합니다."
-    );
+    expect(() => "...").toThrow(INGAME_MESSAGE.ERROR, "은 3자리여야 합니다.");
   });
 
   test("플레이어 숫자 입력 체크4", () => {
     const app = new App();
     expect(() => "...").toThrow(
-      GAME_GUIDE_MESSAGE.ERROR,
+      INGAME_MESSAGE.ERROR,
       "은 중복되지 않은 숫자로 이루어져야 합니다."
     );
   });

@@ -7,8 +7,12 @@ const {
   RESPONSE,
 } = require("./Constant");
 
-class App {
-  play() {}
+class Validation {
+  checkNumber(value) {
+    if (![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(value)) {
+      throw INGAME_MESSAGE.ERROR;
+    }
+  }
 }
 
-module.exports = App;
+module.exports = Validation;
