@@ -20,12 +20,23 @@ class App {
   getGuessFromUser() {
     Console.readLine(this.inputPhrase, (input) => {
       validateGameInput(input);
+      this.judgeGuess(input);
+
+      if (this.isGameEnd) {
+        this.getRestartFromUser();
+      } else {
+        this.getGuessFromUser();
+      }
     });
   }
 
   getRestartFromUser() {
     Console.readLine(this.restartPhrase, (input) => {
       validateRestartInput(input);
+      if (+input === config.RESTART_INPUT.RESTART) {
+        this.restartGame();
+        this.play();
+      }
     });
   }
 
@@ -40,5 +51,8 @@ class App {
     this.isGameEnd = false;
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
