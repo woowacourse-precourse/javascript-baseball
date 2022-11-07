@@ -28,9 +28,13 @@ class CalculateGame {
 
     if (this.strike !== 0 && this.ball !== 0) {
       return `${this.ball}볼 ${this.strike}스트라이크`;
-    } else if (this.strike !== 0 && this.ball === 0) {
+    }
+
+    if (this.strike !== 0 && this.ball === 0) {
       return `${this.strike}스트라이크`;
-    } else if (this.strike === 0 && this.ball !== 0) {
+    }
+
+    if (this.strike === 0 && this.ball !== 0) {
       return `${this.ball}볼`;
     }
 
