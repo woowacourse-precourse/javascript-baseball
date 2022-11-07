@@ -78,7 +78,7 @@ class App {
       while (clear) {
         MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
           this.checkError(num);
-          const USER_NUMBER = String(num).split("");
+          const USER_NUMBER = num.split("");
           const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
           const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
           this.printResult(BALL_CNT, STRIKE_CNT);
