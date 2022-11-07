@@ -11,6 +11,10 @@ class App {
     this.computerNumbers = [];
   }
 
+  clearComputerNumbers() {
+    this.computerNumbers = [];
+  }
+
   setComputerNumbers() {
     for (let i = 0; i < PICK_LENGTH; i++) 
       this.computerNumbers.push(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
@@ -54,8 +58,8 @@ class App {
   }
 
   startGame() {
-    let strikeCount;
-    let ballCount;
+    let strikeCount = 0;
+    let ballCount = 0;
     let resultComment; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
@@ -66,7 +70,7 @@ class App {
       MissionUtils.Console.print(resultComment);
       if (resultComment == ALL_STRIKE)
         this.checkGameEnd();
-      else
+      else 
         this.startGame();
     });
   }
@@ -75,6 +79,7 @@ class App {
     console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (isContinue) => {
       if (isContinue == 1) {
+        this.clearComputerNumbers();
         this.setComputerNumbers();
         this.startGame();
       }
@@ -87,8 +92,6 @@ class App {
     this.setComputerNumbers();
 
     this.startGame();
-
-    MissionUtils.Console.close();
   }
 }
 
