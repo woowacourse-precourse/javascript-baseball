@@ -68,8 +68,6 @@ class App {
     const result = new Set();
     while (result.size < 3) {
       result.add(MissionUtils.Random.pickNumberInRange(1, 9));
-      console.log('result : ', result);
-      console.log('generateComputerNumber while');
     }
     return Array.from(result);
   }
@@ -89,11 +87,10 @@ class App {
 
     // start;
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    let flag = '1';
     let user = null;
     let result = [];
 
-    while (flag === '1') {
+    while (true) {
       // depth 1
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
         // depth 2
@@ -121,7 +118,7 @@ class App {
         MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         result[0] = 0;
         result[1] = 0;
-        flag = this.replay();
+        if (this.replay() === '2') break;
 
         // 컴퓨터 제시 숫자 재설정
         computer = this.generateComputerNumber();
@@ -130,8 +127,7 @@ class App {
         MissionUtils.Console.print('낫싱');
       }
     }
-    MissionUtils.Console.print('게임 종료');
-    return 0;
+    MissionUtils.Console.close();
   }
 }
 
