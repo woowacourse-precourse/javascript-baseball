@@ -17,6 +17,7 @@ class App {
       } else if (restart_number === 2) {
         repeat = false;
         MissionUtils.Console.print('게임 종료');
+        MissionUtils.Console.close();
       }
     }
   }
