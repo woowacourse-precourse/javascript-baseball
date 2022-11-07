@@ -78,6 +78,24 @@ class App {
 
     return set.size === COMPUTER_NUMBER_LENGTH;
   }
+
+  getHint(computerNum, playerNum) {
+    let ball = 0;
+    let strike = 0;
+
+    let playerNumArr = Array.from(playerNum);
+
+    playerNumArr.forEach((num, idx) => {
+      if (Number(num) === Number(computerNum[idx])) {
+        strike++;
+        return;
+      }
+
+      if (computerNum.includes(Number(num))) ball++;
+    });
+
+    return { ball, strike };
+  }
 }
 
 module.exports = App;
