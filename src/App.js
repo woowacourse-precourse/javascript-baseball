@@ -1,12 +1,50 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
+
   play() {
+    MissionUtils.Console.print('숫자 게임을 시작 합니다');
+    while(true) {
+      this.buildAnswer();
+      let strike = 0;
+      let input;
+      while(strike != 3){
+          MissionUtils.Console.readLine(
+            '숫자를 입력해주세요 : ',
+            (_input) => {
+              input = _input;
+            }
+          );
+          MissionUtils.Console.close()
+          console.log("user input",input);
+          this.choiceAnswer(input);
+          console.log("list user", this.userSelect);
+          this.countStrike();
+          console.log("user, com", this.userSelect, this.answer);
+          console.log("strike", this.strike);
+          strike = this.strike;
+  
+          this.countBall();
+          console.log("ball", this.ball);
+  
+          this.printHint();
+      }
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      
+      let select;
       MissionUtils.Console.readLine(
-        '숫자를 입력해주세요 : ', 
-        this.choiceAnswer
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+        (start) => {
+          select = start;
+        }
       );
-        
+      MissionUtils.Console.close()
+      console.log("스타터",select)
+      if(select == "2") {
+        break;
+      }
+
+    }
   }
   // build_answer
   buildAnswer() {
@@ -28,14 +66,17 @@ class App {
     if (userNums.length != 3) {
       throw new Error('userNums가 세자리가 아님');
     }
-    const userSelect = [...userNums].map(Number);
+    let userSelect = [...userNums].map(Number);
 
     // 중복없어야함
     const lenghtTest = [...new Set(userSelect)];
     if (lenghtTest.length < 3) {
       throw new Error('중복 숫자가 존재합니다.');
     }
+    
+    this.userSelect;
     this.userSelect = userSelect;
+    
     return userSelect;
   }
 
