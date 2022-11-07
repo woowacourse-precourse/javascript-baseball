@@ -7,7 +7,7 @@ const MESSAGE = {
   STRIKE: '스트라이크',
   NOTHING: '낫싱',
   GAMERESTART: '1',
-  INITINPUT: 'INITSTR',
+  INITINPUT: '',
   INPUTQA: '숫자를 입력하세요:',
   THREESTRIKE: 3,
 };
