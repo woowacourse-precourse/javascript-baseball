@@ -85,6 +85,19 @@ describe("Game Methods Test", () => {
 
   })
 
+  test.each([
+    [123,456,0],
+    [591,567,1],
+    [132,432,2],
+    [123,123,3]
+  ])('case 3) Get Strike Count Test', (randomNum,inputNum,count) => {
+  
+    const app = new App();
+    expect(app.getStrikeCount(randomNum,inputNum)).toBe(count);
+
+  })
+
+
 })
 
 
