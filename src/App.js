@@ -43,17 +43,6 @@ class App {
     }
   }
 
-  async playGame() {
-    const anwser = this.createAnswer();
-    while (this.game === GAME.PLAY) {
-      await this.checkUserGameAnswer();
-      if (this.game === GAME.EXIT) break;
-      const result = this.compareUserAnswer(anwser);
-      this.resultPrint(result);
-    }
-    return;
-  }
-
   createAnswer() {
     const answer = [];
     while (answer.length < 3) {
@@ -73,14 +62,15 @@ class App {
   inputUserAnswer(ment) {
     MissionUtils.Console.readLine(ment, (answer) => {
       this.userAnswer = parseInt(answer);
-      resolve("input");
+      checkUserGameAnswer();
+      const result = this.compareUserAnswer(anwser);
+      this.resultPrint(result);
     });
   }
 
-  async checkUserGameAnswer() {
+  checkUserGameAnswer() {
     try {
-      await this.inputUserAnswer(ment.input);
-      await this.answerChecker();
+      this.answerChecker();
     } catch (e) {
       this.exceptionEnd();
     }
