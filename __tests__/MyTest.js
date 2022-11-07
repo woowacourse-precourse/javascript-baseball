@@ -1,5 +1,7 @@
 const { isBall, isStrike } = require("../src/Referee");
 const validateUserInput = require("../src/utils");
+const User = require("../src/User");
+const Computer = require("../src/Computer");
 
 describe("Referee Test", () => {
   test("다른 자리에 있는 숫자의 수를 세야한다.", () => {
@@ -20,7 +22,7 @@ describe("Referee Test", () => {
     ).toEqual(0);
   });
 
-  test("isStrike: 같은 수가 같은 자리에 있으면 스트라이크", () => {
+  test("같은 수가 같은 자리에 있으면 스트라이크", () => {
     const answer = [1, 2, 3];
     const input = [1, 5, 6];
     
@@ -62,4 +64,25 @@ describe("utils Test", () => {
       validateUserInput(input);
     }).toThrow();
   });
+});
+
+describe("Getter and Setter Test", () => {
+  test("User", () => {
+    const input = [1, 5, 6];
+
+    const user = new User();
+    user.numbers = input;
+
+    expect(user.numbers).toEqual(input);
+  });
+
+  test("Computer", () => {
+    const input = [1, 5, 6];
+
+    const computer = new Computer();
+    computer.numbers = input;
+
+    expect(computer.numbers).toEqual(input);
+  });
+  
 });
