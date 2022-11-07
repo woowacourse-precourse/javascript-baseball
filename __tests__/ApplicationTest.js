@@ -49,7 +49,7 @@ const isRightRangeNumber = (array) =>
   );
 
 describe("숫자 야구 게임", () => {
-  test.only("게임 시작 문구를 화면에 출력한다.", () => {
+  test("게임 시작 문구를 화면에 출력한다.", () => {
     const START_MESSAGE = "숫자 야구 게임을 시작합니다.";
     const logSpy = getLogSpy();
 
@@ -152,6 +152,31 @@ describe("숫자 야구 게임", () => {
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test.only("게임종료 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["246", "124", "145", "315", "351", "135"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "1스트라이크",
+      "2스트라이크",
+      "2볼 1스트라이크",
+      "3볼",
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다!",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(output));
     });
   });
 
