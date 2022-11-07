@@ -2,6 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const exception = require("./Exception");
 
+const START_VALUE = 0;
+const STRIKE_VALUE = 3;
+const GAME_RESTART = "1";
+const GAME_EXIT = "2";
+
 class Game {
     constructor() {
         this.startMessage = new Computer().startMessage();
@@ -10,8 +15,8 @@ class Game {
 
     // 유저와 컴퓨터 대조해서 스트라이크 볼 갯수 리턴
     getStrikeAndBall(computersNumber, usersNumber) {
-        let howManyStrike = 0;
-        let howManyBall = 0;
+        let howManyStrike = START_VALUE;
+        let howManyBall = START_VALUE;
 
         usersNumber.forEach((number, idx) => {
             if (number === computersNumber[idx]) howManyStrike++;
@@ -41,16 +46,16 @@ class Game {
             const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
             this.resultMessage(howManyStrike, howManyBall);
             
-            if (howManyStrike !== 3) this.playGame();
-            if (howManyStrike === 3) this.getRightAnswer();
+            if (howManyStrike !== STRIKE_VALUE) this.playGame();
+            if (howManyStrike === STRIKE_VALUE) this.getRightAnswer();
         });
     }
     
     getRightAnswer() {
         new Computer().successMessage();
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
-            if (choice === "1") this.pickedRestart();
-            if (choice === "2") this.pickedClose();
+            if (choice === GAME_RESTART) this.pickedRestart();
+            if (choice === GAME_EXIT) this.pickedClose();
             // this.pickedWrongChoice();
         });
     }
