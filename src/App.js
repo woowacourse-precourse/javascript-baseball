@@ -1,4 +1,4 @@
-const GameControl = require('./Controller.js');
+const GameControl = require('./Controller');
 
 class App {
   play() {

@@ -1,4 +1,4 @@
-const Exception = require('../model/Exception');
+const Exception = require('./Exception');
 const error = new Exception();
 
 exports.inputError = (input) => {

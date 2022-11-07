@@ -2,9 +2,9 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const constant = require('./Constants');
 const GameCalc = require('./model/Game');
 const randomNum = require('./model/Random');
-const printAnswer = require('./model/Print');
+const printAnswer = require('./utils/Print');
 const Validation = require('./utils/validation');
-const Exception = require('./model/Exception');
+const Exception = require('./utils/Exception');
 
 class GameControl{
   constructor(){
