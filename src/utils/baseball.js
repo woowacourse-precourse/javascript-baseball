@@ -1,6 +1,6 @@
 const { GAME_MESSAGE } = require('../constants/baseball');
 
-class BaseballHelper {
+class BaseballUtils {
   static countBallAndStrike(computerDigits, userDigits) {
     const ballStrikeCount = {
       ball: 0,
@@ -41,4 +41,4 @@ class BaseballHelper {
   }
 }
 
-module.exports = BaseballHelper;
+module.exports = BaseballUtils;

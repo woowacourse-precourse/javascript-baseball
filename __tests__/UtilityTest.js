@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const BaseballHelper = require('../src/utils/helper');
+const BaseballUtils = require('../src/utils/baseball');
 
 describe('숫자 야구 유틸 테스트', () => {
   afterEach(() => {
@@ -18,7 +18,7 @@ describe('숫자 야구 유틸 테스트', () => {
     ];
 
     answers.forEach((answer, i) => {
-      const ballStrikeCount = BaseballHelper.countBallAndStrike(randoms, answer);
+      const ballStrikeCount = BaseballUtils.countBallAndStrike(randoms, answer);
       expect(ballStrikeCount).toStrictEqual(counts[i]);
     });
   });
@@ -33,7 +33,7 @@ describe('숫자 야구 유틸 테스트', () => {
     const messages = ['낫싱', '1볼 1스트라이크', '3볼', '1스트라이크'];
 
     counts.forEach((count, i) => {
-      const countMessage = BaseballHelper.getCountMessage(count);
+      const countMessage = BaseballUtils.getCountMessage(count);
       expect(countMessage).toEqual(messages[i]);
     });
   });

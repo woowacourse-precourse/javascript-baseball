@@ -3,7 +3,7 @@ const { RULE, GAME_MESSAGE, ERROR_MESSAGE } = require('./constants/baseball');
 
 const BaseballComputer = require('./models/BaseballComputer');
 const BaseballUser = require('./models/BaseballUser');
-const BaseballHelper = require('./utils/helper');
+const BaseballUtils = require('./utils/baseball');
 
 class App {
   #computer;
@@ -31,8 +31,8 @@ class App {
     const computerDigits = this.#computer.digits;
     const userDigits = this.#user.digits;
 
-    const ballStrikeCount = BaseballHelper.countBallAndStrike(computerDigits, userDigits);
-    const countMessage = BaseballHelper.getCountMessage(ballStrikeCount);
+    const ballStrikeCount = BaseballUtils.countBallAndStrike(computerDigits, userDigits);
+    const countMessage = BaseballUtils.getCountMessage(ballStrikeCount);
 
     Console.print(this.#computer.digits);
     Console.print(countMessage);
