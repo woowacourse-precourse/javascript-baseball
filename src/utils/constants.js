@@ -22,8 +22,8 @@ const COMMAND = Object.freeze({
 
 const EXCEPTION = Object.freeze({
   REGEX: /[1-9]/g,
-  RESTART: 1,
-  EXIT: 2,
+  RESTART: '1',
+  EXIT: '2',
   LENGTH: 3,
 });
 
