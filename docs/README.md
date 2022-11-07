@@ -2,13 +2,12 @@
 
 ## _Features_
 
-- [ ] class Computer
-  - [ ] Method 1: \_initialize: Create three digits
-  - [ ] Method 2: judge: Read valid user input.
-- [ ] class GameLoop
-  - [ ] Method 1: start: Start new game. (initialize computer)
-  - [ ] Method 2: continue: Throw game if invalid user input. Otherwise feed user input to Computer.
-    - [ ] Method 2.1: guess: Prompt user and receive user input
-    - [ ] Method 2.2: \_validify: Check validity of user input
-    - [ ] Method 2.3: respond: Print out computer response
-  - [ ] Method 3: restart: Prompt user new game message. Call GameMaster.halt if invalid user input
+- [x] class Computer
+  - [x] Method 1: \_initialize: Create three digits
+  - [x] Method 2: judge: Read valid user input.
+- [x] class GameLoop
+  - [x] Method 1: start: Start new game. (initialize computer)
+    - [x] game loop: Throw game if invalid user input. Otherwise feed user input to Computer.
+    - [x] Method 1.1: \_validate: Check validity of user input
+    - [x] Method 1.2: \_respond: Print out computer response
+  - [x] Method 2: end: Prompt user new game message. Call GameMaster.halt if invalid user input
