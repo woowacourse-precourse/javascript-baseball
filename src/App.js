@@ -60,7 +60,21 @@ class App {
     return result;
   }
 
+  /**
+   * @return Random한 숫자 배열 return
+   * */
+  generateComputerNumber() {
+    const result = [];
+    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
+    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
+    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
+    return result;
+  }
+
   play() {
+    let computer = this.generateComputerNumber();
+    computer = computer.join('');
+
     // start;
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const flag = 1;
