@@ -24,14 +24,14 @@ class GameProgress{
     gameSelection(){
         Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' , (answer) => {
             if(answer == 1){
-                this.app.play();
+                this.createNumber.pickNumber.splice(0);
+                return this.gameStart();
             }
             if(answer == 2){
-                Console.close();
+                Console.print('게임 종료');
+                return Console.close();
             }
-            else{
-                throw "Error (1과 2중에 선택해주세요)"
-            }
+                throw "Error (1과 2중에 선택해주세요)";
         })
     }
 
