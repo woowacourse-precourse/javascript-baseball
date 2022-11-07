@@ -8,6 +8,13 @@ function checkNumber(answer) {
   if (!parseInt(answer)) throw new Error('숫자만 입력해주세요.');
 }
 
+function checkDuplicate(answer) {
+  while (answer.length > 1) {
+    let target = answer.pop();
+    if (answer.includes(target)) throw new Error('서로 다른 수를 입력해주세요.');
+  }
+}
+
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
@@ -32,6 +39,9 @@ class App {
         const removeSpace = answer.replace(/ /g, '');
         checkNumber(removeSpace);
         checkLength(removeSpace);
+        const answerArray = answer.split('');
+        checkDuplicate(answerArray);
+
       } catch (error) {
         console.log(error);
       }
