@@ -1,10 +1,15 @@
-/* eslint-disable class-methods-use-this */
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  play() {}
+  play() {
+    this.startGame();
+  }
 
-  startGame() {}
+  startGame() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.setRandomNumber();
+    this.inputUserNumber();
+  }
 
   setRandomNumber() {}
 
@@ -20,5 +25,8 @@ class App {
 
   endGame() {}
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
