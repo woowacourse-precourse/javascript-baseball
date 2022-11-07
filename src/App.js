@@ -14,24 +14,37 @@ class App {
     return computer;
   }
 
-  checkInputValue(input){
-    
-    // 숫자가 세자리가 아닐 때
+  checkInputSize(input){
+    let is_three = 1;
     if(input.length != 3){
+      is_three = 0;
       throw "세자리 숫자를 입력해주세요."
     }
-    
-    // 양수가 아닌 값을 입력 받았을 때
-    let is_inteager = 1;
+    return is_three;
+  }
+
+  checkInputInteger(input){
+    let is_integer = 1;
     for(let i=0; i<input.length; i++){
       if(!Number.isInteger(input.charAt(i))){
-        is_inteager = 0;
+        is_integer = 0;
       }
     }
-    if(!is_inteager){
+    if(!is_integer){
+      is_integer = 0;
       throw "양수 세자리를 입력해주세요."
     }
+    return is_integer;
+  }
 
+  checkInputValue(input){
+    
+    // 양수가 아닌 값을 입력 받았을 때
+    this.checkInputInteger(input);
+
+    // 숫자가 세자리가 아닐 때
+    this.checkInputSize(input);
+        
   }
 
 
