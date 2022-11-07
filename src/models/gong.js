@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const {Random} = require('@woowacourse/mission-utils');
 const Messages = require('../messages');
 
 /**
@@ -39,7 +39,13 @@ class Gong {
    * @returns {Gong}
    */
   static fromRandom() {
-    const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const numbers = [];
+    while (numbers.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!numbers.includes(number)) {
+        numbers.push(number);
+      }
+    }
     return new Gong(numbers);
   }
 
