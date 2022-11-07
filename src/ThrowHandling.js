@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 const throwHandling = (user) => {
   const userSet = new Set(user);
   if (user.length !== 3) {
