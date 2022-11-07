@@ -51,10 +51,6 @@ function printNothing(){
     MissionUtils.Console.print(NOTHINGCORRECT);
 }
 
-function printSpace() {
-    MissionUtils.Console.print(" ");
-}
-
 function printGameWin() {
     const GAME_WIN_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n";
     MissionUtils.Console.print(GAME_WIN_MESSAGE);
@@ -62,12 +58,7 @@ function printGameWin() {
 
 module.exports = {
     printGameStart,
-    printUserNumInput,
-    printBoth,
-    printNumOfStrike,
+    printBallAndStrike,
     printUserContinueInput,
-    printNumOfBall,
-    printNothing,
-    printSpace,
     printGameWin
 }
