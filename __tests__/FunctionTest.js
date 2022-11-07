@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Input = require("../src/Input");
 const Parse = require("../src/Parse");
 const Question = require("../src/Question");
+const BallCount = require("../src/BallCount");
 const { Output } = require("../src/Output");
 
 const getPrintLogSpy = () => {
@@ -78,5 +79,12 @@ describe("기능 테스트", () => {
     expect(question[0]).not.toBe(question[1]);
     expect(question[0]).not.toBe(question[2]);
     expect(question[1]).not.toBe(question[2]);
+  });
+
+  test("스트라이크 개수 세기", () => {
+    const question = [1, 2, 3];
+    const answer = [1, 2, 4];
+    const ballCount = new BallCount(question, answer);
+    expect(ballCount.strikes).toBe(2);
   });
 });
