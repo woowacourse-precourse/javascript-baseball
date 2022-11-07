@@ -40,6 +40,30 @@ class App {
     return [strike, ball];
   }
 
+  /* (숫자를 모두 맞힐 때까지 반복되는) 사용자 입력에 대한 재귀 호출 함수 */ 
+  processInput(input) {
+    try {
+      this.validateInput(input);
+      const [strike, ball] = this.checkStrikeBall(input);
+
+      if (strike === 3) { // 게임 종료
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        return; 
+      }
+      else { // 결과(힌트) 출력
+        if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
+        else MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
+
+        // 숫자를 모두 맞힐 때까지 반복
+        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+          this.processInput(input);
+        });
+      }  
+    } catch(e) {
+      console.error(e);
+    }
+  }
+
   /* 게임 플레이 */
   play() {
     this.pickRandomNumbers();
@@ -47,18 +71,8 @@ class App {
 
     // 게임 시작 문구 출력
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      try {
-        this.validateInput(answer);
-        const [strike, ball] = this.checkStrikeBall(answer);
-
-        // 결과(힌트) 출력
-        strike === 0 && ball === 0
-          ? MissionUtils.Console.print("낫싱")
-          : MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
-      } catch(e) {
-        console.error(e);
-      }
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.processInput(input);
     });
   }
 }
