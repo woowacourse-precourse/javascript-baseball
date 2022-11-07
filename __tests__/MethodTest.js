@@ -25,5 +25,20 @@ describe("구현 기능 목록 테스트", () => {
       const app = new App();
       expect(app.caculateStrike("123", "678")).toEqual(0);
     });  
-    
+    test("모두 같은자리 같은숫자일 때", () => {
+      const app = new App();
+      expect(app.cacluateBall("123", "123")).toEqual(0);
+    });
+    test("세 개의 숫자 중 하나의 숫자만 포함되고 자리가 다를 때 ", () => {
+      const app = new App();
+      expect(app.cacluateBall("467", "341")).toEqual(1);
+    });
+    test("세 개의 숫자 중 두개의 숫자가 포함되고 자리가 다를 때", () => {
+        const app = new App();
+        expect(app.cacluateBall("196", "621")).toEqual(2);
+    });
+    test("모두 다른자리 같은숫자일 때", () => {
+      const app = new App();
+      expect(app.cacluateBall("123", "312")).toEqual(3);
+    });  
   });
