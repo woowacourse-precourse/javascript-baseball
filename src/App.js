@@ -24,8 +24,9 @@ class App {
 
   getBothArrays(userNumber,COMPUTER) {
     let cleanUserNumber=this.checkUserInputValue(userNumber)
-    console.log(cleanUserNumber,COMPUTER);
+    this.compareNumbers(cleanUserNumber,COMPUTER)
   }
+
   checkUserInputValue(userNumber) {
     let userNumberArray=userNumber.split("").map((element)=>{
       return Number(element)
@@ -34,53 +35,56 @@ class App {
     if(userNumberArray.includes(0)) throw "1~10사이의 숫자만 가능합니다"
     if(userNumberArray.length !==3) throw "3자리 숫자를 입력해주세요"
     if(new Set(userNumberArray).size !==3 ) throw "중복 값이 있습니다."
-    return userNumber
+    return userNumberArray
   }
 
-  compareNumbers(userNumberArray) {
-    console.log("사용자 :", userNumberArray);
+  compareNumbers(userNumber,COMPUTER) {
+    console.log("사용자 :", userNumber);
     console.log("컴퓨터: ", COMPUTER);
     let strike = 0;
     let ball = 0;
-    for (let idx = 0; idx < userNumberArray?.length; idx++) {
-      let findIndex = COMPUTER.indexOf(userNumberArray[idx]);
+    for (let idx = 0; idx < userNumber.length; idx++) {
+      let findIndex = COMPUTER.indexOf(userNumber[idx]);
       if (findIndex > -1) {
-        if (findIndex === idx) {
-          strike++;
-        } else {
-          ball++;
-        }
+        (findIndex === idx) ? strike++ : ball++;  
       }
     }
-    if(strike===0 && ball===0){
-      MissionUtils.Console.print('낫싱')
-    }
-    else{
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
-    if (strike === 3) {
-      MissionUtils.Console.print(`${strike} 스트라이크`)
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.gameReplay();
-    }
-    this.userInput();
+    this.strikeBallCount(strike,ball,COMPUTER)
   }
 
+  strikeBallCount(strike,ball,COMPUTER){
+    if(strike+ball === 0) MissionUtils.Console.print('낫싱')
+    if(strike===0 && ball>0) MissionUtils.Console.print(`${ball}볼`)
+    if(strike>0 && ball===0) MissionUtils.Console.print(`${strike}스트라이크`)
+    if((strike>0 && strike!==3) && ball>0) MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
+    if(strike === 3) {
+      MissionUtils.Console.print(`3 스트라이크`)
+      this.gameChoice();
+    }
+    this.userInput(COMPUTER)
+  }
+  gameChoice(){
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+    this.gameReplay()
+  }
   gameReplay() {
-    MissionUtils.Console.readLine(
-      "게임을 재시작하려면 1, 종료하려면 2를 입력하세요.",
+    MissionUtils.Console.print("게임을 재시작하려면 1, 종료하려면 2를 입력하세요.")
+    MissionUtils.Console.readLine("",
       (gameSetNumber) => {
-        if (+gameSetNumber === 1) {
-          count--
-          this.play();
-        } else if (+gameSetNumber === 2) {
-          MissionUtils.Console.close()
-          throw "게임을 종료합니다";
-        } else {
-          throw "1,2가 아닌 입력 발생! 프로그램 종료!";
-        }
+        this.selectGamePlay(gameSetNumber)
       }
     );
+  }
+  selectGamePlay(gameSetNumber){
+    if(gameSetNumber==='1'){
+      this.play()
+    }
+    else if(gameSetNumber ==='2'){
+      MissionUtils.Console.close()
+    }
+    else{
+      throw "1,2만 입력가능합니다."
+    }
   }
 }
 
