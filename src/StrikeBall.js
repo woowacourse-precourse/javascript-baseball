@@ -1,11 +1,12 @@
-const message = require('./MESSAGE');
 const MissionUtils = require('@woowacourse/mission-utils');
+const message = require('./MESSAGE');
 
 class StrikeBall {
   constructor() {
     this.Strike = 0;
     this.Ball = 0;
     this.RANGE = 3;
+    this.UserInputNumber = '';
   }
 
   InitStrikeBall() {
@@ -48,6 +49,16 @@ class StrikeBall {
           message.STRIKE
       );
     }
+  }
+
+  IfStrike() {
+    MissionUtils.Console.readLine('숫자를 입력하세요', (InputNumber) => {
+      this.UserInputNumber = InputNumber;
+    });
+    if (this.UserInputNumber === '1') {
+      return true;
+    }
+    return false;
   }
 }
 
