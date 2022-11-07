@@ -1,5 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const MIN_RANDOM_NUIMBER = 1
+const MAX_RANDOM_NUMBER = 9
+const VALID_NUMBER_LENGTH = 3
+
 function App () {
   this.randomNumber;
   this.play = () => {
