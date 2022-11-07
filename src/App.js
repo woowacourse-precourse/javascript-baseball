@@ -4,7 +4,6 @@ const Game = require('./game');
 const {parseEndSelect, EndSelect} = require('./constants');
 
 class App {
-  // eslint-disable-next-line class-methods-use-this
   play() {
     Console.print(Messages.GAME_START);
     this.#startGame();
@@ -16,7 +15,6 @@ class App {
     game.play();
   }
 
-  // eslint-disable-next-line class-methods-use-this
   #onGameEnd() {
     Console.print(Messages.END_SELECT);
     Console.readLine('', (text) => {
