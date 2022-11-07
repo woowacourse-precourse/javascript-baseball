@@ -43,55 +43,39 @@ describe("Calculate Score Test", () => {
 });
 
 describe("Score To Message Map Test", () => {
-  test("set property test", () => {
-    const score = { strikeCount: 1, ballCount: 2, isNothing: false };
-
-    scoreToJudgeMessageMap.setProperty({ ...score });
-
-    expect(scoreToJudgeMessageMap).toHaveProperty("strikeCount", 1);
-    expect(scoreToJudgeMessageMap).toHaveProperty("ballCount", 2);
-    expect(scoreToJudgeMessageMap).toHaveProperty("isNothing", false);
-  });
-
   test("get judge message test 1", () => {
     const score = { strikeCount: 1, ballCount: 2, isNothing: false };
-
-    scoreToJudgeMessageMap.setProperty({ ...score });
 
     const getJudgeMessage = jest.fn(() => "2볼 1스트라이크");
 
     getJudgeMessage();
 
     expect(getJudgeMessage).toHaveReturnedWith(
-      scoreToJudgeMessageMap.getJudgeMessage(),
+      scoreToJudgeMessageMap.getJudgeMessage({ ...score }),
     );
   });
 
   test("get judge message test 2", () => {
     const score = { strikeCount: 0, ballCount: 0, isNothing: true };
 
-    scoreToJudgeMessageMap.setProperty({ ...score });
-
     const getJudgeMessage = jest.fn(() => "낫싱");
 
     getJudgeMessage();
 
     expect(getJudgeMessage).toHaveReturnedWith(
-      scoreToJudgeMessageMap.getJudgeMessage(),
+      scoreToJudgeMessageMap.getJudgeMessage({ ...score }),
     );
   });
 
   test("get judge message test 3", () => {
     const score = { strikeCount: 3, ballCount: 0, isNothing: false };
 
-    scoreToJudgeMessageMap.setProperty({ ...score });
-
     const getJudgeMessage = jest.fn(() => "3스트라이크");
 
     getJudgeMessage();
 
     expect(getJudgeMessage).toHaveReturnedWith(
-      scoreToJudgeMessageMap.getJudgeMessage(),
+      scoreToJudgeMessageMap.getJudgeMessage({ ...score }),
     );
   });
 });

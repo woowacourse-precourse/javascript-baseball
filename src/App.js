@@ -56,8 +56,7 @@ class App {
   #judge(answer) {
     this.#setScore(answer);
 
-    scoreToJudgeMessageMap.setProperty({ ...this.#score });
-    print(scoreToJudgeMessageMap.getJudgeMessage());
+    print(scoreToJudgeMessageMap.getJudgeMessage({ ...this.#score }));
 
     if (this.#isThreeStrike()) this.#gameClear();
     else this.#tryGuess();
