@@ -21,7 +21,6 @@ class Game{
 
 
     getUserInput() {
-        
         MissionUtils.Console.readLine("숫자를 입력해주세요 :", (numbers) => {
             this.checkValidationUserInput(numbers);
         });
@@ -40,7 +39,7 @@ class Game{
         if(userNumber.includes('0') === true){
             throw "0은 입력하면 안됩니다.";
         }
-        this.isStrike(userNumber);
+        this.compareNumber(userNumber);
     }
 
     isStrike(userNumbers){
@@ -51,18 +50,43 @@ class Game{
                 count++;
             }
         }
+        return count;
     }
 
     isBall(userNumbers){
-        const userNumber = [...userNumbers];
         let count = 0;
-        userNumber.forEach((number,index) => {
+        userNumbers.forEach((number,index) => {
             if (this.computerNumbers.includes(parseInt(number)) && this.computerNumbers[index] !== parseInt(number)) {
                 count++;
             }
-    
         })
+        return count;
     }
+
+    compareNumber(userNumber) {
+        const userNumbers = [...userNumber];
+        const strike = this.isStrike(userNumbers);
+        const ball = this.isBall(userNumbers);
+        let message = "";
+    
+        if (ball === 0 && strike === 0) {
+            message = "낫싱";
+        }
+        if (ball > 0) {
+            message = ball + "볼" + " ";
+        }
+        if (strike > 0) {
+            message += strike + "스트라이크";
+        }
+        MissionUtils.Console.print(message);
+        if (strike === 3) {
+            MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        }
+        else{
+            this.getUserInput();
+        }
+    }
+
 
 
     
