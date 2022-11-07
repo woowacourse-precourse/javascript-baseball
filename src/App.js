@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const isNumber = require("../src/IsNumber")
+const checkStrike = require('../src/CountStrike')
 
 class App {
   play() {
@@ -22,27 +23,10 @@ class App {
   getUserInput(computer) {
     MissionUtils.Console.readLine(`숫자를 입력해주세요 : `, number => {
       if(isNumber(number)) {
-        this.checkStrike(computer, number)
+        checkStrike(computer, number)
       }
     });
   }
-
-  checkStrike(computer, user) {
-    let countStrike = 0;
-  
-    Array.from(user, Number).map((currentValue, index) => {
-      if (
-        computer.includes(currentValue) 
-        && computer.indexOf(currentValue) === index
-      ) {
-        countStrike += 1;
-      }
-  
-      return countStrike;
-    });
-  
-    return MissionUtils.Console.print(countStrike)
-  };
 }
 
 module.exports = App;
