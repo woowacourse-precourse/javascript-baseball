@@ -11,7 +11,7 @@ class App {
     while (correctNumbers.size < 3) {
       correctNumbers.add(Random.pickNumberInRange(1, 9));
     }
-    return [...correctNumbers];
+    return [...correctNumbers].join("");
   }
 
   askForNumbers() {
@@ -41,11 +41,18 @@ class App {
   stirUp(receivedNumbers) {
     if (this.isValidInput(receivedNumbers)) {
       const correctNumbers = this.makeRandomNumber();
-      // receivedNumbers와 correctNumbers를 결과 출력 함수의 인자로 전달
+      this.gradeInput(correctNumbers, receivedNumbers);
     } else {
       throw "잘못된 입력입니다.";
     }
   }
+
+  /**
+   * 사용자가 입력한 값을 평가합니다.
+   * @param {string} correctNumbers
+   * @param {string} receivedNumbers
+   */
+  gradeInput(correctNumbers, receivedNumbers) {}
 }
 
 const app = new App();
