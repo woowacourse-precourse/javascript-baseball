@@ -21,7 +21,7 @@ class App {
   play() {
     // try{
       // 그냥 입력값 리드라인 콘솔만 해서 오류만 던지는 모듈 넣기 // 에러파일 확인하기
-      // GameStartMsg() 
+      GameStartMsg() 
       // const GetError = require("./GetError");
       // GetError.userInputNum 
   }
