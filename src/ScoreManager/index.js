@@ -1,8 +1,36 @@
+const { Console } = require('@woowacourse/mission-utils');
+const {
+  BALL_STATUS,
+  NOTHING,
+  ROUND_CONTINUE,
+  ROUND_END,
+} = require('../utils/Constant');
+
 class ScoreManager {
   #userScore;
 
   constructor() {
     this.resetScoreManager();
+  }
+
+  isEndRound() {
+    return this.#userScore.STRIKE === 3 ? ROUND_END : ROUND_CONTINUE;
+  }
+
+  getUserScoreStr() {
+    let result = '';
+    Object.keys(this.#userScore).forEach((scoreUnit) => {
+      result += this.getMessage(
+        this.#userScore[scoreUnit],
+        BALL_STATUS[scoreUnit]
+      );
+    });
+    Console.print(result !== '' ? result.trim() : NOTHING);
+  }
+
+  getMessage(count, scoreUnit) {
+    if (count === 0) return '';
+    else return `${count}${scoreUnit} `;
   }
 
   calScore(targetNums, userNums) {
