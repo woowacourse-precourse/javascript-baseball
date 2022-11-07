@@ -2,14 +2,35 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const MIN_ANSWER = "102";
 const MAX_ANSWER = "987";
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 9;
 const NUMBER_LENGTH = 3;
+const OPTION = {
+  RESTART: "1",
+  EXIT: "2",
+};
+const MESSAGE = {
+  START: "숫자 야구 게임을 시작합니다.",
+  INPUT: "숫자를 입력해주세요 : ",
+  SUCCESS: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  RESTART_OR_EXIT: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+  EXIT: "숫자 야구 게임을 종료합니다.",
+};
+const RESULT = {
+  BALL: "볼",
+  STRIKE: "스트라이크",
+  NOTHING: "낫싱",
+};
+const ERROR = {
+  INVALID_INPUT: "유효하지 않은 입력값입니다. 게임을 종료합니다.",
+};
 
 class App {
   makeAnswer = () => {
     const randomNumbers = [];
 
     while (randomNumbers.length < NUMBER_LENGTH) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      const randomNumber = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
       if (!randomNumbers.includes(randomNumber)) randomNumbers.push(randomNumber);
     }
 
@@ -36,19 +57,19 @@ class App {
 
   getResultMessage = (strike, ball, nothing) => {
     let message = "";
-    if (nothing) message = "낫싱";
-    if (ball) message += `${ball}볼 `;
-    if (strike) message += `${strike}스트라이크`;
+    if (nothing) message = RESULT.NOTHING;
+    if (ball) message += `${ball}${RESULT.BALL} `;
+    if (strike) message += `${strike}${RESULT.STRIKE}`;
     return message;
   };
 
   handleSuccess = () => {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(MESSAGE.SUCCESS);
 
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (input) => {
-      if (input === "1") this.play();
-      if (input === "2") {
-        MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+    MissionUtils.Console.readLine(MESSAGE.RESTART_OR_EXIT, (input) => {
+      if (input === OPTION.RESTART) this.play();
+      if (input === OPTION.EXIT) {
+        MissionUtils.Console.print(MESSAGE.EXIT);
         MissionUtils.Console.close();
         return;
       }
@@ -71,7 +92,7 @@ class App {
     const resultMessage = this.getResultMessage(strike, ball, nothing);
     MissionUtils.Console.print(resultMessage);
 
-    if (strike === 3) {
+    if (strike === NUMBER_LENGTH) {
       this.handleSuccess();
     }
 
@@ -79,14 +100,14 @@ class App {
   };
 
   getInputAndCompare = (ANSWER) => {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!this.isValid(input)) throw "Invalid input!";
+    MissionUtils.Console.readLine(MESSAGE.INPUT, (input) => {
+      if (!this.isValid(input)) throw ERROR.INVALID_INPUT;
       this.printResult(ANSWER, input);
     });
   };
 
   play = () => {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.START);
     const ANSWER = this.makeAnswer();
     this.getInputAndCompare(ANSWER);
   };
