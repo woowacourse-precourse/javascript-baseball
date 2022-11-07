@@ -1,3 +1,5 @@
+const Message = require("./Message");
+
 function checkStrike(answer, cur, idx) {
   return cur === answer[idx];
 }
@@ -26,11 +28,21 @@ function countBall(answer, userInputArr) {
   return ball;
 }
 
+function checkNothing(strike, ball) {
+  return !strike && !ball;
+}
+
+function makeResultStr(strike, ball) {
+  if (checkNothing(strike, ball)) return Message.nothing;
+  return result.join(" ");
+}
+
 function getResult(answer, userInput) {
-  let result = "";
   const userInputArr = userInput.split("");
   const strike = countStrike(answer, userInputArr);
   const ball = countBall(answer, userInputArr);
+  const result = makeResultStr(strike, ball);
+
   return result;
 }
 
