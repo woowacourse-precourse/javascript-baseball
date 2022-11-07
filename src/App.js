@@ -110,12 +110,6 @@ class App {
     if (repeatCheck.size !== 3) {
       throw new Error("서로 다른 3자리 숫자를 입력하세요");
     }
-    // input.map((num) => {
-    //   console.log(num, typeof num);
-    //   if (typeof num !== "number") {
-    //     throw new Error("숫자를 입력하세요");
-    //   }
-    // });
     let checkString = 0;
     input.map((user) => {
       if (isNaN(user)) checkString = 1;
