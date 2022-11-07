@@ -12,7 +12,7 @@ class UserModel {
   }
 
   isDuplicatedInNumber(input) {
-    return [...new Set(input)].join("").length === input.length;
+    return [...new Set(input)].join("").length !== input.length;
   }
 
   isInputNumbersValid(numberFromUser) {
