@@ -29,6 +29,21 @@ class App {
     });
   }
 
+  cntStikeAndBall(computerNum, usernum) {
+    let strike = 0, ball = 0;
+    const computerArray = [...computerNum];
+    const userArray = [...usernum];
+
+    computerArray.forEach((num, idx) => {
+      if (idx === userArray.indexOf(num)) {
+        strike += 1;
+      } else if (userArray.includes(num)) {
+        ball += 1;
+      }
+    });
+    return {strike, ball};
+  }
+
 }
 
 module.exports = App;
