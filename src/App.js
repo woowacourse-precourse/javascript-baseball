@@ -1,7 +1,8 @@
 // modules
-const { Console, Random } = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const InputError = require('./InputError');
 const ValidationError = require('./ValidationError');
+const Computer = require('./Computer');
 
 // constants
 const { GAME_SETTING, RESULT } = require('./utils/constants');
@@ -15,19 +16,8 @@ class App {
   }
 
   playGame() {
-    const computer = this.createUniqueNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
+    const computer = Computer.createUniqueNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
     this.guess(computer);
-  }
-
-  createUniqueNumbers(start, end, count) {
-    const numberSet = new Set();
-
-    while (numberSet.size !== count) {
-      const number = Random.pickNumberInRange(start, end);
-      if (!numberSet.has(number)) numberSet.add(number);
-    }
-
-    return [...numberSet];
   }
 
   guess(computer) {
