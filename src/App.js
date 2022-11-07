@@ -22,6 +22,27 @@ class App {
     });
   }
 
+  // 사용자가 잘못된 값을 입력했는지 확인
+  checkUserAnswer(answerList) {
+    if(answerList.includes(0)) {
+      // 값에 0이 포함되어 있는 경우
+      return false;
+    } else if(answerList.length < 3) {
+      // 입력받은 값의 길이가 3보다 적은 경우
+      return false;
+    } else if(answerList.length > 3) {
+      // 입력받은 값의 길이가 3보다 긴 경우
+      return false;
+    } else if(!this.checkNumber(answerList)) {
+      // 입력받은 값이 숫자가 아닌 경우
+      return false;
+    } else if(new Set(answerList).size < 3) {
+      // 서로 다른 숫자로 이루어지지 않은 경우
+      return false;
+    }
+    return true;
+  }
+
   // 입력받은 숫자를 판단하는 함수
   referee(answerList, computerRandomNumber) {
     // 사용자가 잘못된 값을 입력했는지 확인
