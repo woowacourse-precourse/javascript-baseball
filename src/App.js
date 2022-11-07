@@ -3,7 +3,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   printStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.close();
   }
   makeAnswer() {
     const answer = [];
@@ -16,10 +15,34 @@ class App {
     return answer;
   }
 
-  play() {
-    this.printStart();
-    let answer = this.makeAnswer();
+  isCorrectInput(value) {
+    const regExp = /^[1-9]{3}$/;
+    if (!regExp.test(value))
+      throw new Error("길이에러, 숫자가 아닌 값");
 
+    let overlapReg = new RegExp(/(.)\1+/g);
+    if (overlapReg.test(value))
+      throw new Error("중복된 값");
+
+  }
+
+
+
+  guessAnswer() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.isCorrectInput(input);
+    });
+
+  }
+
+  play() {
+    // this.printStart();
+
+    let answer = this.makeAnswer();
+    this.guessAnswer()
+
+
+    // MissionUtils.Console.close();
   }
 }
 
