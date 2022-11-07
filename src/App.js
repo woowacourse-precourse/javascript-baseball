@@ -66,6 +66,10 @@ class App {
     if(strikeCount !== 3){
       this.getUserInput();
     }
+    else {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.resumeOrQuitGame();
+    }
   }
   getGameResult(strikeCount, ballCount) {
     if(strikeCount && ballCount) {
@@ -80,6 +84,19 @@ class App {
     else {
       return '낫싱'
     }
+  }
+  resumeOrQuitGame(){
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      if (answer === '1') {
+        this.getUserInput();
+      }
+      else if (answer === '2') {
+        MissionUtils.Console.close();
+      }
+      else {
+      throw new Error('1 혹은 2를 입력하세요!');
+      }
+    });
   }
 }
 
