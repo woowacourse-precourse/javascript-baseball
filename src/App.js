@@ -81,7 +81,8 @@ const isCorrect = ([strike, ball]) => {
 
 const printRestartMessage = () => {
   MissionUtils.Console.readLine(RESTART_MESSAGE, (code) => {
-    code === RESTART_CODE && game(createComputerNumber());
+    (code === RESTART_CODE && game(createComputerNumber())) ||
+      (code === EXIT_CODE && exitGame());
   });
 };
 
