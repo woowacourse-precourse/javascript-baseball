@@ -26,6 +26,22 @@ class Message {
   static input() {
     return '숫자를 입력해 주세요 : ';
   }
+
+  static count(ball = 0, strike = 0) {
+    if (ball && !strike) {
+      return `${ball}볼`;
+    }
+
+    if (!ball && strike) {
+      return `${strike}스트라이크`;
+    }
+
+    if (ball && strike) {
+      return `${ball}볼 ${strike}스트라이크`;
+    }
+
+    return '낫싱';
+  }
 }
 
 module.exports = Message;
