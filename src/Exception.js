@@ -10,28 +10,28 @@ function exception(userNum) {
     // 길이가 3자리인지 확인, 3자리 전부 일의 자리 숫자인지 확인 가능.
     if (userNum.length !== THREE_DIGITS) {
         MissionUtils.Console.close();
-        throw "잘못 입력하셨습니다.";
+        throw "ERROR : 잘못 입력하셨습니다.";
     }
     // 서로 다른 수인지 확인
     if (userNum[FIRST_PLACE] === userNum[SECONED_PLACE] || userNum[SECONED_PLACE] === userNum[THIRD_PLACE] || userNum[FIRST_PLACE] === userNum[THIRD_PLACE]) {
         MissionUtils.Console.close();
-        throw "중복되지 않는 숫자를 입력해주세요.";
+        throw "ERROR : 중복되지 않는 숫자를 입력해주세요.";
     }
     // 숫자가 아닐경우
     if (isNaN(userNum)) {
         MissionUtils.Console.close();
-        throw "숫자를 입력해주세요."
+        throw "ERROR : 숫자를 입력해주세요."
     }
     // 0을 넣었을 경우
     if (userNum.includes(ZERO)) {
         MissionUtils.Console.close();
-        throw "1 ~ 9 사이의 값을 입력해주세요.";
+        throw "ERROR : 1 ~ 9 사이의 값을 입력해주세요.";
     }
 }
 
 function pickedWrongChoice() {
     MissionUtils.Console.close();
-    throw "잘못된 수를 입력하셨습니다.";
+    throw "ERROR : 잘못된 수를 입력하셨습니다.";
 }
 
 module.exports = {
