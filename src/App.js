@@ -55,9 +55,7 @@ class App {
   readInput(solution) {
     Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
       const inputError = new UserInput(userinput);
-      if (!inputError.checkAllUserInput()) {
-        return this.throwError();
-      }
+      inputError.checkAllUserInput();
       const { strike, ball } = this.getStrikeBallCount(solution, userinput);
       this.print(this.getResultMessage(strike, ball));
 
