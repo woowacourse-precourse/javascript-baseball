@@ -13,30 +13,54 @@ class App {
     return computer; 
   }
 
+  numberValidation (arrToValidate) {
+    //kiy 를 입력하면 ['k','i', 'y']로 배열에 저장 => Number형으로 변환 시 [NaN, NaN, NaN] 이 됨.
+    if(isNaN(arrToValidate[0]) == true ||  isNaN(arrToValidate[1]) == true || isNaN(arrToValidate[2]) == true ){ //숫
+      return true;
+    }
+  }
+  duplicateValidation (arrToValidate){
+    const setCollection = new Set(arrToValidate); //배열을 집합으로 변환
+    const IS_DUPLICATE = setCollection.size < arrToValidate.length; //배열의 원소 중복 여부
+
+    return IS_DUPLICATE;
+  }
   //플레이어의 입력값 유효성 판단하기 (숫자를 3개 입력하지 않는 경우 등)
   //올바른 입력값은 '1-9 사이의 숫자 3개'
   validationTest(playerGuess) { 
     const guessArr = Array.from(playerGuess).map((i) => Number(i)); //문자열을 Number형 배열로 변환
-    //console.log(typeof guessArr[0]);
-    const setCollection = new Set(guessArr); //배열을 집합으로 변환
-    const IS_DUPLICATE = setCollection.size < guessArr.length; //배열의 원소 중복 여부
 
-    if(isNaN(guessArr[0]) == true ||  isNaN(guessArr[1]) == true || isNaN(guessArr[2]) == true ){ //숫자 이외의 값이 입력된 경우
-      throw '숫자만 입력해주세요'
+    if(this.numberValidation(guessArr)){ //숫자 이외의 값이 입력된 경우
+      throw '숫자만 입력해주세요';
     } else if (guessArr.length != 3) { //숫자 개수가 3이 아닌 경우
-      throw '3개의 숫자를 입력해주세요'
+      throw '3개의 숫자를 입력해주세요';
     } else if(guessArr.includes(0)){ //1-9 외에 0이 입력된 경우
-      throw '1부터 9까지 숫자만 입력해주세요'
-    } else if(IS_DUPLICATE) { //3개의 숫자 중 서로 중복된 값이 있는 경우 (예. 122)
-      throw '서로 다른 수를 입력해주세요'
+      throw '1부터 9까지 숫자만 입력해주세요';
+    } else if(this.duplicateValidation(guessArr)) { //3개의 숫자 중 서로 중복된 값이 있는 경우 (예. 122)
+      throw '서로 다른 수를 입력해주세요';
     }
   }  
+  /*
+  //결과 문구 반환하기
+  showResultPhrase(ball, strike) {
 
+    let resultPhrase;
+
+    if (ball == 0 && strike == 0) resultPhrase = '낫싱';
+    if(ball == 0 && strike != 0) resultPhrase = `${strike}스트라이크`;
+    if(ball !=0 && strike == 0) resultPhrase = `${ball}볼`;
+    if(ball == 0 && strike == 3) resultPhrase = `3스트라이크`;
+    if(ball !=0 && strike !=0) resultPhrase = `${ball}볼 ${strike}스트라이크`;
+
+    return resultPhrase;
+
+  }
+*/
   //플레이어가 추측한 값(입력값)과 컴퓨터의 정답을 비교하여 추측 결과 알려주기
   showGuessResult(answer, player) {
     let ball = 0;
     let strike = 0;
-    let guessResult = [];
+    let resultPhrase = '';
 
     for (var i=0; i<player.length; i++){
       if (answer.includes(player[i])){
@@ -44,14 +68,15 @@ class App {
         else ball+=1
       }
     }
+    //console.log(ball,strike)
+    //guessResult = this.showResultPhrase(ball, strike); //결과 문구(예. 1볼 1스트라이크) 저장
+    if (ball == 0 && strike == 0) resultPhrase = '낫싱';
+    if(ball == 0 && strike != 0) resultPhrase = `${strike}스트라이크`;
+    if(ball !=0 && strike == 0) resultPhrase = `${ball}볼`;
+    if(ball == 0 && strike == 3) resultPhrase = `3스트라이크`;
+    if(ball !=0 && strike !=0) resultPhrase = `${ball}볼 ${strike}스트라이크`;
 
-    if (ball == 0 && strike == 0) guessResult = '낫싱';
-    if(ball == 0 && strike != 0) guessResult = `${strike}스트라이크`;
-    if(ball !=0 && strike == 0) guessResult = `${ball}볼`;
-    if(ball == 0 && strike == 3) guessResult = `3스트라이크`;
-    if(ball !=0 && strike !=0) guessResult = `${ball}볼 ${strike}스트라이크`;
-    
-    return guessResult;
+    return resultPhrase;
   }
   
   //게임 재시작 여부 결정하기
