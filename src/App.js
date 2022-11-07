@@ -30,6 +30,14 @@ class App {
     }
   }
 
+  makeUserNumbers(randomNumber) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      this.validateUserNumbers(inputNumber);
+      let userNumber = inputNumber.split("")
+      this.countStrikeAndBall(userNumber, randomNumber);
+    });
+  }
+
   makeRandom() {
     let randomArray = new Array();
 
