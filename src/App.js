@@ -3,6 +3,13 @@ const GAME_START = '숫자 야구 게임을 시작합니다.';
 const RESTART = '숫자 야구 게임을 재시작합니다.';
 
 class App {
+  // 사용자 입력 숫자 생성
+  generateNumber(randomNumber) {
+    const userNumber = this.userInputNumber();
+
+    this.getResult(userNumber, randomNumber);
+  }
+
   // 랜덤 숫자 발생
   numberRandom() {
     const computer = [];
@@ -14,7 +21,7 @@ class App {
     }
     return computer.join("");
   }
-  
+
   // 게임 실행 (랜덤 숫자 생성)
   startGame() {
     const randomNumber = this.numberRandom();
