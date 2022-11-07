@@ -14,7 +14,6 @@ const findStrikeBall = (target, input) => {
         if (target[i] === input[i]) strike += 1;
         else if (target.includes(input[i])) ball += 1;
     }
-    console.log(strike, ball);
     return { strike, ball };
 };
 
@@ -30,4 +29,6 @@ const makePhrase = (strike, ball) => {
 
 const printPhrase = (catchPhrase) => Console.print(catchPhrase);
 
-module.exports = { findStrikeBall, makePhrase };
+module.exports = {
+    generateTargetNumber, findStrikeBall, makePhrase, printPhrase
+};
