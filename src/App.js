@@ -19,6 +19,8 @@ class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
     this.userAnswer = [];
+    this.strike = 0;
+    this.ball = 0;
   }
 
   createRandomNumber() {
@@ -53,6 +55,11 @@ class App {
         console.log(error);
       }
     });
+
+    for (let idx = 0; idx < this.userAnswer.length; idx++) {
+      let userNum = this.userAnswer[idx];
+      if (userNum === this.computerRandomNumber[idx]) this.strike++;
+    }
 
   }
 }
