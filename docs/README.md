@@ -87,11 +87,11 @@
 ┃ ┃ ┣ 📜README.md
 ┣ 📂src
 ┃ ┣ 📁model
-┃ ┃ ┣ 📜Exception.js
 ┃ ┃ ┣ 📜Game.js
-┃ ┃ ┣ 📜Print.js
 ┃ ┃ ┗ 📜Random.js
 ┃ ┣ 📁utils
+┃ ┃ ┣ 📜AnswerPhase.js
+┃ ┃ ┣ 📜Exception.js
 ┃ ┃ ┣ 📜throw-error.js
 ┃ ┃ ┗ 📜validation.js
 ┃ ┣ 📜App.js
@@ -99,7 +99,9 @@
 ┃ ┗ 📜Controller.js
 ┣ 📜package-lock.json
 ┣ 📜package.json
-┗ 📜README.md</pre>
+┗ 📜README.md
+  </pre>
+</details>
 <br>
 
 ## 🧐 실행결과
