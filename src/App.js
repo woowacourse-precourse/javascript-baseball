@@ -123,6 +123,12 @@ class App {
     this.#printResult(rstStr);
     this.#handleGameOver(rstStr);
   }
+  #startGame() {
+    this.#initComputerNumbers();
+    while (!this.getIsUserWon()) this.#continueGame();
+    Console.print(this.#GAME_MSG.QUIT);
+    this.#askRestart();
+  }
   play() {}
 }
 

@@ -113,11 +113,11 @@
 
 ## 12. 게임 시작 기능(#startGame) 구현
 
-- [ ] 1. [`#initComputerNumbers`](#2-상대방컴퓨터의-3자리-숫자-생성하는-기능initcomputernumbers-구현) 호출
-- [ ] 2. `getIsUserWon`가 false일 동안 [`#continueGame`](#11-게임-지속-기능continuegame-구현) 호출
-- [ ] 3. `getIsUserWon`가 true일 경우 탈출
-  - [ ] 3.1 #GAME_MSG.QUIT 출력(`Console.print` 이용)
-  - [ ] 3.2 [`#askRestart`](#8-재시작-묻는-기능askrestart-구현) 호출
+- [x] 1. [`#initComputerNumbers`](#2-상대방컴퓨터의-3자리-숫자-생성하는-기능initcomputernumbers-구현) 호출
+- [x] 2. `getIsUserWon`가 false일 동안 [`#continueGame`](#11-게임-지속-기능continuegame-구현) 호출
+- [x] 3. `getIsUserWon`가 true일 경우 탈출
+  - [x] 3.1 #GAME_MSG.QUIT 출력(`Console.print` 이용)
+  - [x] 3.2 [`#askRestart`](#8-재시작-묻는-기능askrestart-구현) 호출
 
 ## 13. 게임 실행 기능(play) 구현
 
