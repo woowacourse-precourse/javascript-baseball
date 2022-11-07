@@ -40,9 +40,20 @@ class App {
         if (out === 3) result += `낫싱`;
         MissionUtils.Console.print(result);
 
-        if (strike !== 3) this.inputUser(computer);
-        else {
-          MissionUtils.Console.print(Messages.GAME_OVER);
+        if (strike !== 3) {
+          this.inputUser(computer);
+        } else {
+          MissionUtils.Console.print(Messages.RESULT);
+          MissionUtils.Console.readLine(Messages.RESTART_OR_EXIT, (choose) => {
+            if (choose === '1') {
+              this.play();
+            } else if (choose === '2') {
+              MissionUtils.Console.print(Messages.GAME_OVER);
+              MissionUtils.Console.close();
+            } else {
+              throw new Error(Messages.ERROR.CHOOSE_RANGE);
+            }
+          });
         }
       }
     });
