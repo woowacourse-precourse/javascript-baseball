@@ -16,9 +16,7 @@ function gameplay(computerNums) {
     Console.print(compareInputNum(computerNums, userNums));
     if (computerNums !== userNums) return gameplay(computerNums);
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (userNums) => {
+    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",(userNums) => {
         if (!(userNums === "1" || userNums === "2")) throw "잘못된 입력입니다.";
         if (userNums === "1") return gameplay(createComputerNums());
         Console.close();
