@@ -33,12 +33,12 @@ class App {
   askUserRestartOrNot() {
     const RESTART = "1";
     const EXIT = "2";
-    const inputNotOneOrTwo = (response) => response !== RESTART && response !== EXIT;
+    const isInputNotValid = (input) => input !== RESTART && input !== EXIT;
 
     readLine(GAME_MESSAGE.ASK_GAME_CONTINUE_OR_EXIT, (response) => {
       if (response === RESTART) this.play();
       if (response === EXIT) close();
-      if (inputNotOneOrTwo(response)) throw Error(GAME_MESSAGE.NOTIFY_INPUT_WRONG_NUMBER);
+      if (isInputNotValid(response)) throw Error(GAME_MESSAGE.NOTIFY_INPUT_WRONG_NUMBER);
     });
   }
 }
