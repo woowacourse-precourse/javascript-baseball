@@ -18,7 +18,17 @@ describe('내가 구현한 기능 테스트',()=>{
     expect(testResult6).toEqual(true);
 
   });
-  test("다른 자리 같은 수 일 때, hint 볼이 나오는지 테스트",()=>{
+
+  test('getHint 내부 함수 호출 테스트 코드',()=>{
+    const app = new App();
+    const spyJudge = jest.spyOn(app, 'judgeStrikeOrBall');
+    const spyMakeHint = jest.spyOn(app,'makeHintString');
+    app.getHint([4,5,6],'345');
+    expect(spyJudge).toBeCalledTimes(3);
+    expect(spyMakeHint).toBeCalledTimes(1);
+  });
+
+  test("getHint 함수 return값 테스트 코드(볼)",()=>{
     const app = new App();
     const testResult1 = app.getHint([1,2,3],'451');
     expect(testResult1).toEqual('1볼');
@@ -27,7 +37,7 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult3 = app.getHint([1, 2, 3], '312');
     expect(testResult3).toEqual('3볼');
   });
-  test('같은 자리 같은 수 일 때, hint strike가 나오는지 테스트', () => {
+  test('getHint 함수 return값 테스트 코드(스트라이크)', () => {
     const app = new App();
     const testResult1 = app.getHint([1, 2, 3], '145');
     expect(testResult1).toEqual('1스트라이크');
@@ -36,7 +46,7 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult3 = app.getHint([1, 2, 3], '123');
     expect(testResult3).toEqual('3스트라이크');
   });
-  test('strike,ball 같이 있을 때 hint가 맞는지 테스트', () => {
+  test('getHint 함수 return값 테스트 코드(N스트라이크 M볼)', () => {
     const app = new App();
     const testResult1 = app.getHint([1, 2, 3], '134');
     expect(testResult1).toEqual('1볼 1스트라이크');
@@ -87,7 +97,7 @@ describe('내가 구현한 기능 테스트',()=>{
 
     expect(() => {
       const app = new App();
-      app.restartOrExit(3);
+      app.restartOrExit('aba');
     }).toThrow();
 
   });
@@ -101,7 +111,7 @@ describe('내가 구현한 기능 테스트',()=>{
     app.checkCorrectAnswer();
     expect(spyCheck).toBeCalledTimes(1);
     expect(spyPlay).toBeCalledTimes(0);
-    
+
     spyCheck.mockClear();
     spyPlay.mockClear();
 
@@ -112,6 +122,7 @@ describe('내가 구현한 기능 테스트',()=>{
     
     MissionUtils.Console.close();
   });
+
 })
 
 
