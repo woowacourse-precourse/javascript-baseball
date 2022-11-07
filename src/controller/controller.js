@@ -19,6 +19,18 @@ class Controller {
   updateUserGivenNumber(userGivenNumber) {
     this.userGivenNumber.setState(userGivenNumber);
   }
+
+  // 유저가 제시한 수에 문제가 없는지 확인한다.
+  checkIsUserInputValid() {
+    const isUserInputValid = this.validation.getIsUserGuessInputValid(
+      this.userGivenNumber.getState()
+    );
+
+    // 문제가 있다면 throw Error
+    if (!isUserInputValid) {
+      throw new Error(this.view.WRONG_COMMENT);
+    }
+  }
 }
 
 module.exports = Controller;
