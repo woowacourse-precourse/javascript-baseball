@@ -19,10 +19,9 @@
 
 #### 게임 결과 판단
 
-- 사용자 입력 문자열을 순회
-- strike 확인
-- ball 확인
-- nothing 확인
+- strike 카운트
+- ball 카운트
+- nothing 카운트
 
 #### 결과 문자열 만들기
 
