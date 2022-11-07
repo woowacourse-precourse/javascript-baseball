@@ -63,3 +63,23 @@ function gameResult(randomNum,userNumber){
   }
   return answer;
 }
+
+function checkGameResult(answer){
+  if(answer=="3스트라이크"){
+      return true;
+  }
+  return false;
+}
+
+function printGameResult(answer){
+  const win = checkGameResult(answer);
+  if(win){
+      answer="3개의 숫자를 모두 맞히셨습니다! 게임 종료"; //+다시할지물어보는 함수
+      return answer;
+  }
+  else{
+      answer="틀렸어요" //+다시 사용자의 입력을 받아야함
+      return answer;
+  }
+}
+
