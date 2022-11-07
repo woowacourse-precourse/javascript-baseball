@@ -1,3 +1,5 @@
+const config = require('./config');
+
 const findStrikeBall = (target, input) => {
     let strike = 0;
     let ball = 0;

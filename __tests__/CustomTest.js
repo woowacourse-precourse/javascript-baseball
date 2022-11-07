@@ -1,4 +1,4 @@
-const findStrikeBall = require('../src/gameUtils');
+const { findStrikeBall, makePhrase } = require('../src/gameUtils');
 
 describe('사용자 추측으로 볼 / 스트라이크 / 낫싱 판단 테스트', () => {
     test('123과 456 테스트', () => {
@@ -16,5 +16,28 @@ describe('사용자 추측으로 볼 / 스트라이크 / 낫싱 판단 테스트
     test('583과 532 테스트', () => {
         const { strike, ball } = findStrikeBall('583', '532');
         expect(strike === 1 && ball === 1).toBeTruthy();
+    });
+});
+
+describe('볼 / 스트라이크로 힌트 문구 도출 테스트', () => {
+    test('낫싱 테스트', () => {
+        const phrase = makePhrase(0, 0);
+        expect(phrase).toBe('낫싱');
+    });
+    test('1볼 테스트', () => {
+        const phrase = makePhrase(0, 1);
+        expect(phrase).toBe('1볼');
+    });
+    test('1스트라이크 테스트', () => {
+        const phrase = makePhrase(1, 0);
+        expect(phrase).toBe('1스트라이크');
+    });
+    test('2볼 1스트라이크 테스트', () => {
+        const phrase = makePhrase(1, 2);
+        expect(phrase).toBe('1스트라이크 2볼');
+    });
+    test('3스트라이크 테스트', () => {
+        const phrase = makePhrase(3, 0);
+        expect(phrase).toBe('3스트라이크');
     });
 });
