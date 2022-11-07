@@ -63,7 +63,7 @@ class App {
   showGuessResult(answer, player) {
     let ball = 0;
     let strike = 0;
-    let guessResult = '';
+    let guessResult = ''; //추측한 결과 
 
     for (var i=0; i<player.length; i++){
       if (answer.includes(player[i])){ //플레이어가 추측한 숫자가 정답 중에 있다면
