@@ -14,8 +14,14 @@ const MESSAGE = {
 
 const NUMBER_COUNT = 3;
 
+const CHOOSE = {
+  RESTART: "1",
+  EXIT: "2",
+};
+
 module.exports = {
   RESULT,
   MESSAGE,
   NUMBER_COUNT,
+  CHOOSE,
 };

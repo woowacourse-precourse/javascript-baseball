@@ -1,7 +1,11 @@
 const Computer = require("./component/Computer");
 const Play = require("./component/Play");
 const User = require("./component/User");
-const { MESSAGE, NUMBER_COUNT } = require("./constant/message.constant");
+const {
+  MESSAGE,
+  NUMBER_COUNT,
+  CHOOSE,
+} = require("./constant/message.constant");
 const { Console } = require("@woowacourse/mission-utils");
 class App {
   constructor() {
@@ -45,11 +49,11 @@ class App {
     Console.print(MESSAGE.SUCCESS);
 
     Console.readLine(MESSAGE.END, (userInput) => {
-      if (userInput === 1) {
+      if (userInput === CHOOSE.RESTART) {
         return this.restart();
       }
 
-      if (userInput === 2) {
+      if (userInput === CHOOSE.EXIT) {
         return this.exit();
       }
 
