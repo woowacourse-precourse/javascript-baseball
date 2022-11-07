@@ -10,4 +10,8 @@ const checkValidNumber = inputArray => {
   return regExp.test(inputString);
 };
 
+const checkDigit = (inputArray, digit) => {
+  return inputArray.length !== digit;
+};
+
 module.exports = handleException;
