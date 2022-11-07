@@ -86,14 +86,15 @@ class App {
       (num, idx, arr) => arr.indexOf(num) === arr.lastIndexOf(num)
     );
     if (
-      inputNumber.includes('0') ||
-      inputNumber.length !== 3 ||
-      Number(inputNumber.join('')) === NaN ||
-      NUMBER.length !== 3
+      !inputNumber.includes('0') &&
+      !inputNumber.includes(' ') &&
+      inputNumber.length === 3 &&
+      !isNaN(Number(inputNumber.join(''))) &&
+      NUMBER.length === 3
     ) {
-      throw '입력값이 잘못되었습니다.';
-    } else {
       this.getHintMessage(inputNumber);
+    } else {
+      throw '입력값이 잘못되었습니다.';
     }
   }
 
