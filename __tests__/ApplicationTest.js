@@ -111,4 +111,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("스트라이크, 볼, 낫싱 계산 확인 테스트", () => {
+    const answers = ["145", "152"];
+    const logSpy = getLogSpy();
+    const messages = ["1볼 1스트라이크"];
+
+    const app = new App();
+    app.checkStrikeAndBall(answers[0], answers[1]);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
