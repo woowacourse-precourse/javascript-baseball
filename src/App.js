@@ -52,6 +52,17 @@ class App {
     return true;
   }
 
+  // strike 의 개수 찾기
+  findStrike(input, computerRandomNumber) {
+    let count = 0;
+    for(let i=0; i < input.length; i++) {
+      if(input[i] == computerRandomNumber[i]) {
+        count += 1;
+      }
+    }
+    return count;
+  }
+
   // 입력받은 숫자를 판단하는 함수
   referee(answerList, computerRandomNumber) {
     // 사용자가 잘못된 값을 입력했는지 확인
