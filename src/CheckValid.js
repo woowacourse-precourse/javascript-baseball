@@ -57,6 +57,7 @@ class CheckInputValid {
     if (checkBlank(this.userNum) === false) {
       return ERROR.USER_INPUT_BLANK;
     }
+    return ERROR.USER_INPUT_PASS;
   }
 
   checkRetryInput() {
@@ -69,6 +70,7 @@ class CheckInputValid {
     if (checkLengthOfRetryUserInput(this.retryNum) === false) {
       return ERROR.USER_RETRY_INPUT_LENGTH;
     }
+    return ERROR.USER_INPUT_PASS;
   }
 }
 module.exports = CheckInputValid;
