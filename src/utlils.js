@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
 
 function getTargetNumber() {
   return [
@@ -22,6 +22,17 @@ function getStrikeCount(userInputNumber, targetNumber) {
   ).length;
 }
 
+function printHint(ballCount, strikeCount) {
+  if (ballCount === 0 && strikeCount === 0) return Console.print("낫싱");
+
+  const ballMessage = ballCount !== 0 ? `${ballCount}볼` : "";
+  const strikeMessage = strikeCount !== 0 ? `${strikeCount}스트라이크` : "";
+  const gameMessage = `${ballMessage} ${strikeMessage}`;
+
+  Console.print(gameMessage);
+}
+
 module.exports.getTargetNumber = getTargetNumber;
 module.exports.getBallCount = getBallCount;
 module.exports.getStrikeCount = getStrikeCount;
+module.exports.printHint = printHint;
