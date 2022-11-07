@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GAME_START = '숫자 야구 게임을 시작합니다.';
-const RESTART = '숫자 야구 게임을 재시작합니다.';
+const { GAME_START, RESTART } = require('./constant/constant');
 
 class App {
   // 게임 재시작 입력 오류
