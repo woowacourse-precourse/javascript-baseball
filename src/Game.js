@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const { exception, pickedWrongChoice } = require("./Exception");
 
@@ -28,14 +28,14 @@ class Game {
     
     // 입력된 숫자 대조 결과 출력
     resultMessage(howManyStrike, howManyBall) {
-        if (howManyStrike && !howManyBall) return MissionUtils.Console.print(`${howManyStrike}스트라이크`);
-        if (!howManyStrike && howManyBall) return MissionUtils.Console.print(`${howManyBall}볼`);
-        if (howManyStrike && howManyBall) return MissionUtils.Console.print(`${howManyBall}볼 ${howManyStrike}스트라이크`);
-        return MissionUtils.Console.print("낫싱");
+        if (howManyStrike && !howManyBall) return Console.print(`${howManyStrike}스트라이크`);
+        if (!howManyStrike && howManyBall) return Console.print(`${howManyBall}볼`);
+        if (howManyStrike && howManyBall) return Console.print(`${howManyBall}볼 ${howManyStrike}스트라이크`);
+        return Console.print("낫싱");
     }
 
     playGame() {    
-        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", usersNumber => {
+        Console.readLine("숫자를 입력해주세요 : ", usersNumber => {
             exception(usersNumber);
 
             // console.log(this.computersNumber);
@@ -53,7 +53,7 @@ class Game {
     
     getRightAnswer() {
         new Computer().successMessage();
-        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
+        Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
             if (choice === GAME_RESTART) return this.pickedRestart();
             if (choice === GAME_EXIT) return this.pickedClose();
             return pickedWrongChoice();
@@ -67,13 +67,10 @@ class Game {
     }
 
     pickedClose() {
-        MissionUtils.Console.close();
+        Console.close();
         return ;
     }
 
 }
-
-const game = new Game;
-game.playGame();
 
 module.exports = Game;
