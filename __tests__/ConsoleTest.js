@@ -5,7 +5,8 @@ const { MESSAGE } = require('../src/static/constants');
 describe('Console', () => {
   test('print', () => {
     const myConsole = new Console();
-    const myConsoleSpy = jest.spyOn(MissionUtils.Console, 'print');
+    const myConsoleSpy = jest.spyOn(MissionUtils.Console, "print");
+    myConsoleSpy.mockClear();
     const messages = ['숫자 야구 게임을 시작합니다.'];
     Object.values(MESSAGE).forEach((message) => {
       myConsole.print(message);
