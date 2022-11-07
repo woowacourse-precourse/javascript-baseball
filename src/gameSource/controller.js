@@ -1,24 +1,25 @@
-//게임 시작 및 재시작
 const MissionUtils = require("@woowacourse/mission-utils");
 const GAMELOGICS = require('./gameLogic');
 const VALIDATIONCHECK = require('./inputCheck');
 
 class GameStartOrRestart {
+
   makeAnswerWithThreeUniqueNumbers() {
     let threeUniqueNumbers = []
     while (threeUniqueNumbers.length < 3) {
       const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
       threeUniqueNumbers = this.checkRepeatedElementOfArray(threeUniqueNumbers, RANDOM_NUMBER);
     }
+
     return threeUniqueNumbers[0] * 100 + threeUniqueNumbers[1] * 10 + threeUniqueNumbers[2] * 1;
   }
 
   checkRepeatedElementOfArray(array, target) {
     const ARRAY_COPIED = [...array];
     if (!array.includes(target)) ARRAY_COPIED.push(target)
+
     return ARRAY_COPIED;
   }
-
 
   launchNewGame() {
     const ANSWER = this.makeAnswerWithThreeUniqueNumbers();
@@ -43,6 +44,7 @@ class GameStartOrRestart {
     });
   }
 }
+
 const GAMESTART_OR_RESTART = new GameStartOrRestart();
 module.exports = GAMESTART_OR_RESTART;
 

@@ -7,6 +7,5 @@ class App {
     GAMESTART_OR_RESTART.launchNewGame();
   }
 }
-const app = new App();
-app.play();
+
 module.exports = App;

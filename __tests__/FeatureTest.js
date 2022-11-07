@@ -6,6 +6,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 
 describe('기능 목록 테스트', () => {
+  
   test('컴퓨터(상대방)의 숫자 생성 체크', () => {
     const RESULT = CONTROLLER.makeAnswerWithThreeUniqueNumbers();
     expect(/[123456789]{3}/.test(String(RESULT))).toEqual(true);
