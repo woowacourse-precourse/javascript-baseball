@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor(computerNum, userNum, strike, ball, none, check, pass){
+  constructor(computerNum, userNum, strike, ball, none, check, pass, result){
     this.computerNum = computerNum;
     this.userNum = userNum;
     this.strike = strike;
@@ -9,6 +9,7 @@ class App {
     this.none = none;
     this.check = check;
     this.pass = pass;
+    this.result = result;
   }
   play() { 
     this.random();
@@ -20,6 +21,29 @@ class App {
     this.userNum = inputMyNumber();
     compareBothNumber(this.computerNum, this.userNum);
   }
+  finish(res) {
+    this.result = res;
+  }
+  reset(){
+    this.computerNum = 0;
+    this.userNum = 0;
+    this.strike = 0;
+    this.ball = 0;
+    this.none = false;
+    this.check = false;
+    this.result = 1;
+    this.pass = false;
+  }
+}
+
+function finishCheck(){
+  let resultNum;
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (result) => {
+    //유효한 종료 방법인지 체크
+  });
+
+  return resultNum;
+
 }
 
 function setRandomNumberComputer(){
@@ -123,10 +147,11 @@ while(isFinish == 1){
     outputResultCompare();
     pass = app.pass;
   }
-
+  isFinish = app.finish;
+  app.reset();
 }
 
 //종료
-
+MissionUtils.Console.close();
 
 module.exports = App;
