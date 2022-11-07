@@ -14,10 +14,12 @@ class Game {
   };
 
   static NUMBER = {
+    START: 1,
+    END: 9,
+    LENGTH: 3,
     RESTART: 1,
     EXIT: 2,
     FAIL: 0,
-    LENGTH: 3,
   };
 }
 
