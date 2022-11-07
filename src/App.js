@@ -3,12 +3,12 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 const GAME_START_SENTENCE = '숫자 야구 게임을 시작합니다.';
 const GET_USER_NUMBER_SENTENCE = '숫자를 입력해주세요 : ';
 const GAME_END_SENTENCE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
-const GAME_RESTART_SENTENCE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
+const GAME_RESTART_SENTENCE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
 
 class App {
   constructor() {
-    this.computerNumber = [];
-    this.userNumber = [];
+    this.computerNumber;
+    this.userNumber;
   }
 
   getComputerNumber() {
@@ -28,9 +28,6 @@ class App {
     Console.readLine(GET_USER_NUMBER_SENTENCE, (userNumber) => {
       this.userNumber = userNumber.split('').map(Number);
 
-      Console.print(this.computerNumber);
-      Console.print(this.userNumber);
-
       this.compareNumbers(this.computerNumber, this.userNumber);
     });
   }
@@ -47,9 +44,10 @@ class App {
     }
 
     this.setHint(ball, strike);
+
     if (strike === 3) {
-      Console.print('정답');
-      Console.close();
+      Console.print(GAME_END_SENTENCE);
+      this.askRestart();
     } else {
       this.getUserNumber();
     }
@@ -69,7 +67,19 @@ class App {
     }
   }
 
+  askRestart() {
+    Console.readLine(GAME_RESTART_SENTENCE, (answer) => {
+      if (answer === '1') {
+        this.play();
+      } else {
+        Console.close();
+      }
+    });
+  }
+
   play() {
+    Console.print(GAME_START_SENTENCE);
+
     this.getComputerNumber();
     this.getUserNumber();
   }
