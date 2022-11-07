@@ -121,6 +121,6 @@
 
 ## 13. 게임 실행 기능(play) 구현
 
-- [ ] 1. #GAME_MSG.START 출력(`Console.print` 이용)
-- [ ] 2. `getIsStartGame`가 true일 동안 [`#startGame`](#12-게임-시작-기능startgame-구현) 호출
-- [ ] 3. `getIsStartGame`가 false일 경우 탈출, [`#exitApp`](#10-앱-종료-기능exitapp-구현) 호출
+- [x] 1. #GAME_MSG.START 출력(`Console.print` 이용)
+- [x] 2. `getIsStartGame`가 true일 동안 [`#startGame`](#12-게임-시작-기능startgame-구현) 호출
+- [x] 3. `getIsStartGame`가 false일 경우 탈출, [`#exitApp`](#10-앱-종료-기능exitapp-구현) 호출

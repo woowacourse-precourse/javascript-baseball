@@ -129,7 +129,13 @@ class App {
     Console.print(this.#GAME_MSG.QUIT);
     this.#askRestart();
   }
-  play() {}
+  play() {
+    Console.print(this.#GAME_MSG.START);
+    while (this.getIsStartGame()) {
+      this.#startGame();
+    }
+    this.#exitApp();
+  }
 }
 
 module.exports = App;
