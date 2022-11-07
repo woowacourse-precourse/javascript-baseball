@@ -14,11 +14,11 @@ ex) const FIREFOX = 1;
 const IS_LEFT = true;
 
 필요한 것:
-play() - 게임의 시작, 종료를 판단하는 함수
+play() - 게임의 시작
 
 startGame() - 게임을 진행하는 함수
 
-readUserNum() - 사용자 입력 받는 함수, 잘못된 값 입력 시 예외 처리 후 종료
-
 checkNum() - 사용자가 입력한 숫자를 판별하는 함수
 반환 값: 1 세개 다 맞춤, 0 틀림, -1 예외발생
+
+print() - 라운드 결과를 프린트하는 함수
