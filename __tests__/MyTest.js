@@ -32,4 +32,9 @@ describe("기능 테스트", () => {
 
     expect(checkComputerRandomArray(testArray)).toBe(true);
   });
+
+  test("사용자 입력 예외처리 테스트", () => {
+    const answer = "12";
+    baseballGame.inputUserAnswer();
+  });
 });
