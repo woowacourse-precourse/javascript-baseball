@@ -27,6 +27,8 @@ class App {
     MissionUtils.Console.readLine(MESSAGES.INPUT, (input) => {
       this.exceptionHandling(input);
 
+      const inputArr = [...input];
+
     });
   }
 
@@ -44,7 +46,7 @@ class App {
       throw(ERROR.DUPLICATE);
     }  
   }
-  
+
 }
 
 const app = new App();
