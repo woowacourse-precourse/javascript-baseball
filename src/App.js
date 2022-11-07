@@ -21,14 +21,25 @@ class App {
 
   getInputAndCompare() {
     Console.readLine(MESSAGE.INPUT_NUMBER, input => {
-      const { computerNumArr } = this;
-      const isInputValidate = validateInputValue(input);
-      if (typeof isInputValidate !== 'boolean') return this.throwInputError(isInputValidate);
-      const inputNumArr = input.split('').map(element => +element);
-      const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
-      Console.print(gameResult);
+      let gameResult = this.checkInputNumberValidate(input).checkGameResult(input);
       return this.isGameOver(gameResult);
     });
+  }
+
+  checkInputNumberValidate(input) {
+    const isInputValidate = validateInputValue(input);
+    if (typeof isInputValidate !== 'boolean') {
+      return this.throwInputError(isInputValidate);
+    }
+    return this;
+  }
+
+  checkGameResult(input) {
+    const inputNumArr = input.split('').map(element => +element);
+    const { computerNumArr } = this;
+    const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
+    Console.print(gameResult);
+    return gameResult;
   }
 
   isGameOver(result) {
