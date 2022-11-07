@@ -49,6 +49,14 @@ class App {
   isThreeDigits(number) {
     return number.length !== 3;
   }
+
+  isCorrectDigits(number) {
+    const possibleDigits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    number.split('').forEach((digit) => {
+      if (!possibleDigits.includes(+digit)) return false;
+    });
+    return true;
+  }
 }
 const app = new App();
 app.play();
