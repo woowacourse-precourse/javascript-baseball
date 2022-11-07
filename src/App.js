@@ -14,7 +14,7 @@ class App {
   play() {
     let answer = this.getRandomNumber();
     this.printMessage(START_MESSAGE);
-    this.PlayerInput();
+    this.playerInput();
   }
 
   printMessage(message) {
@@ -22,17 +22,15 @@ class App {
   }
 
   getRandomNumber() {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
+    const computer = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      9,
+      NUMBER_LENGTH
+    );
     return computer;
   }
 
-  PlayerInput() {
+  playerInput() {
     MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
       this.checkInput(input);
     });
