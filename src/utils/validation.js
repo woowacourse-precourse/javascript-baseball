@@ -32,6 +32,16 @@ class Validation {
     this.checkUserGuessInputValid(userGuessInput);
     return this.isUserGuessInputValid;
   }
+
+  /**
+   * 유저 재시작 여부 input 이 유효한지 확인 후 유효하지 않다면 상태를 변경한다.
+   * @param {string} UserRestartInput [유저 재시작 여부 input]
+   */
+  CheckUserRestartInputValid(UserRestartInput) {
+    if (UserRestartInput !== "1" && UserRestartInput !== "2") {
+      this.isUserRestartInputValid = false;
+    }
+  }
 }
 
 module.exports = Validation;
