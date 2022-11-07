@@ -10,6 +10,12 @@ class Function {
     if (input.length !== setInputLength) return false;
     return true;
   }
+
+  static validInput(input) {
+    if (this.validByRegex(input)) return false;
+    if (this.validDuplicate(input)) return false;
+    return true;
+  }
 }
 
 module.exports = Function;
