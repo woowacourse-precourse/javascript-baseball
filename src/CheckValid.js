@@ -12,7 +12,7 @@ function checkDuplicates(userNum) {
     checkArr.push(userNum[i]);
   }
 }
-function checkZero(userNum) {
+function checkRange(userNum) {
   if (/^[1-9]*$/g.test(userNum.join("")) === false) {
     return false;
   }
@@ -49,7 +49,7 @@ class CheckInputValid {
       throw new Error("숫자에 중복이 있습니다");
     }
 
-    if (checkZero(this.userNum) === false) {
+    if (checkRange(this.userNum) === false) {
       throw new Error("숫자 1~9까지만 입력이 가능합니다");
     }
     if (checkBlank(this.userNum) === false) {
