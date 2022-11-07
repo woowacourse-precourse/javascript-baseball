@@ -1,5 +1,3 @@
-const { END_NOTICE } = require("./Console");
-
 class Input {
   isValidInput(input) {
     if (!this.isLengthThree(input))
@@ -39,7 +37,8 @@ class Input {
   }
 
   checkOneOrTwo(input) {
-    if (input !== "1" && input !== "2") throw new Error(END_NOTICE);
+    if (input !== "1" && input !== "2")
+      throw new Error("1 또는 2를 입력해야 합니다.");
   }
 }
 
