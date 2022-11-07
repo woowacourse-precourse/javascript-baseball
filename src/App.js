@@ -21,6 +21,16 @@ while (computer.length < 3) {
   }
 }
 
+const parser = num => {
+  const value = [];
+  do {
+    (digit = num % 10), value.push(digit);
+    num = parseInt(num / 10);
+  } while (num > 0);
+  value.sort();
+  return value;
+};
+
 class App {
   play() {}
 }
