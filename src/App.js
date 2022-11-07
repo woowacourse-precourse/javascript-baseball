@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const System = require("./System");
 const User = require("./User");
 class App {

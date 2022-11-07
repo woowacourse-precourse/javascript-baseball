@@ -1,5 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
 class System {
   constructor() {
     this.numberArray;
