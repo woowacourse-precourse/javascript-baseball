@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const {
-  GAME_CONFIG_NUMBER,
+  GAME_CONFIG,
   ERROR_CHECK,
   INGAME_MESSAGE,
   GAME_RESULT,
