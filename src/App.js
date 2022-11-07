@@ -10,19 +10,17 @@ const VALID_NUMBER_LENGTH = 3;
 function App () {
   this.randomNumber;
   this.play = () => {
-    const getRandomNumber = (MIN_RANDOM_NUIMBER, MAX_RANDOM_NUMBER) => {
+    const getRandomNumber = (min, max) => {
       const randomNumberArray = [];
+
       while (randomNumberArray.length < VALID_NUMBER_LENGTH) {
-        const randomNumber = MissionUtils.Random.pickNumberInRange(
-          MIN_RANDOM_NUIMBER,
-          MAX_RANDOM_NUMBER
-        );
+        const randomNumber = MissionUtils.Random.pickNumberInRange(min, max);
         if (!randomNumberArray.includes(randomNumber)) {
           randomNumberArray.push(randomNumber);
         }
       }
       return randomNumberArray.join('');
-    }
+    };
 
     function matchNumber (num1, num2) {
       let strike = 0;
