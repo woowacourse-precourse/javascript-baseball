@@ -61,7 +61,6 @@ class App {
         this.strike += 1;
       if (ANSWER_ARRAY.includes(number) && number !== ANSWER_ARRAY[index])
         this.ball += 1;
-      return this.strike;
     });
     return this.compareResult();
   }
