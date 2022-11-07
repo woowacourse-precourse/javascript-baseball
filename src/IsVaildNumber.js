@@ -11,10 +11,9 @@ class IsvaildNumber{
     if(numPattern.test(number)) throw new Error("숫자만 입력하세요.");
   }
 
-  IsVaildOptionNumber(optionnum){
-    if(optionnum !== '1' || optionnum !== '2'){
-      throw new Error("1 또는 2 만 입력 가능합니다.");
-    }
+  IsVaildOptionNumber(optionNum){
+    const optionPattern = /[^1-2]/g;
+    if(optionPattern.test(optionNum)) throw new Error("1 또는 2 만 입력 가능합니다.");
   }
 }
 
