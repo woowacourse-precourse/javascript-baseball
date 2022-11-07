@@ -12,6 +12,11 @@ class App {
     this.getUserInput();
   }
 
+  replay() {
+    this.count = this.generateCount(this.generateRandomList());
+    this.getUserInput();
+  }
+
   gameStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -21,27 +26,50 @@ class App {
   }
 
   generateRandomList() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const result = [];
+    while (result.length < 3) {
+      const n = MissionUtils.Random.pickNumberInRange(1, 9, 3);
+      if (!result.includes(n)) {
+        result.push(n);
+      }
+    }
+    return result;
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      this.input = this.vaildInput(answer);
-      this.countResult = this.decideCount(this.count, this.input);
-      this.printCount(this.countResult);
-      if (this.countResult.strikeCount !== 3) {
-        this.getUserInput();
-      } else {
-        this.printWinMessage();
-      }
-    });
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", this.handleGame);
   }
+
+  handleGame = (answer) => {
+    this.input = this.vaildInput(answer);
+    this.countResult = this.decideCount(this.count, this.input);
+    this.printCount(this.countResult);
+    if (this.countResult.strikeCount !== 3) {
+      this.getUserInput();
+    } else {
+      this.printWinMessage();
+      this.inputSignal();
+    }
+  };
 
   printWinMessage() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
+  }
+
+  handleRestart = (answer) => {
+    if (answer === "1") {
+      this.replay();
+    } else if (answer === "2") {
+      MissionUtils.Console.close();
+    } else {
+      throw new Error("잘못된 입력입니다.");
+    }
+  };
+  inputSignal() {
+    MissionUtils.Console.readLine("", this.handleRestart);
   }
 
   vaildInput(input) {
