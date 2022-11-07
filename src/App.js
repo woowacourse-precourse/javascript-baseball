@@ -1,13 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-
   play() {
     console.log("숫자 야구 게임");
     let isPlaying = true;
 
     while (isPlaying) {
-      this.callGameSequence(); 
+      this.callGameSequence();
       if (!this.askRestart()) {
         isPlaying = false;
       }
@@ -18,19 +17,19 @@ class App {
   callGameSequence() {
     this.gameStatus = true;
     // 1. computer값을 생성한다
-    const answerMap = this.initGameSetting(); 
+    const answerMap = this.initGameSetting();
     // 스트라이크까지 2,3번 반복
     while (this.gameStatus) {
       // 2. user값을 받아와 검사한다
       const userNumber = this.getUserNumber();
       // 3. computer & user 값을 비교한다
-      if (this.compareWithAnswer(answerMap, userNumber)){ 
+      if (this.compareWithAnswer(answerMap, userNumber)) {
         this.gameStatus = false;
-      } 
+      }
     }
   }
 
-  initGameSetting() { // 컴퓨터 숫자 생성, map 생성
+  initGameSetting() {
     const answer = [];
     const answerMap = {};
 
@@ -40,7 +39,7 @@ class App {
         answer.push(num);
       }
     }
-  
+
     for (let idx = 0; idx < answer.length; idx++) {
       const num = answer[idx];
       answerMap[num] = idx;
@@ -50,35 +49,38 @@ class App {
   }
 
   getUserNumber() {
-    const userNumber = []; 
-    
+    const userNumber = [];
+
     MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-      answer.split("").forEach(e => userNumber.push(e));
+      answer.split("").forEach((e) => userNumber.push(e));
     });
     MissionUtils.Console.close();
     // 예외 처리
     this.checkUserNumber(userNumber);
-    
+
     return userNumber;
   }
 
   checkUserNumber(value) {
     const valueSet = new Set(value);
 
-    if (value.length !== 3) { // 길이 검사
+    if (value.length !== 3) {
+      // 길이 검사
       throw `잘못된 형식 입력, 입력값의 길이는 3이어야 합니다. 입력된 길이: ${value.length}`;
     }
 
-    if (valueSet.size !== 3) { // 중복 숫자 검사
+    if (valueSet.size !== 3) {
+      // 중복 숫자 검사
       throw `잘못된 형식 입력, 중복 숫자 존재, 입력된 value: ${value}`;
     }
 
-    value.map(element => { // 숫자 검사
+    value.map((element) => {
+      // 숫자 검사
       element = Number(element);
       if (Number.isNaN(element)) {
         throw `잘못된 형식 입력, 숫자로 변환 불가능한 문자 존재, 입력된 value: ${value}`;
       }
-    })
+    });
   }
 
   compareWithAnswer(answerMap, userNumber) {
@@ -97,7 +99,8 @@ class App {
   }
 
   printResult(strike, ball) {
-    if (strike === 0 && ball === 0) {  // 주석 추가
+    if (strike === 0 && ball === 0) {
+      // 주석 추가
       MissionUtils.Console.print("낫싱");
     } else if (ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
@@ -110,22 +113,22 @@ class App {
 
   askRestart() {
     let isRestart;
-    
+
     MissionUtils.Console.readLine(
       `3개의 숫자를 모두 맞히셨습니다! 게임 종료\n
       게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n
        > `,
       (answer) => {
-        if (answer === '1' || answer === '2') {
+        if (answer === "1" || answer === "2") {
           isRestart = answer;
         } else {
-          throw `잘못된 입력 값 (재시작:1 , 게임종료:2) : ${answer}`
+          throw `잘못된 입력 값 (재시작:1 , 게임종료:2) : ${answer}`;
         }
       }
-    )
+    );
     MissionUtils.Console.close();
 
-    return isRestart === '1' ? true : false;
+    return isRestart === "1" ? true : false;
   }
 }
 
