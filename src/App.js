@@ -34,7 +34,6 @@ class App {
       if (Number.isNaN(number)) throw new Error('숫자를 입력해주세요.');
       return parseInt(number, 10);
     });
-
     const SET = new Set(INPUT_ARRAY);
     const DEDUPLICATION = [...SET];
 
