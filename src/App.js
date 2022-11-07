@@ -50,7 +50,7 @@ class App {
     const computerNumbers = this.#getComputerNumbers();
     const ballStrikeArr = this.compareEachNumbers(computerNumbers, userNumbers);
     checkIsCorrect(this.#getResult(ballStrikeArr))
-      ? this.#askRestart()
+      ? (Console.print(GAME_MSG.correct), this.#askRestart())
       : this.#takeUserNumbersInput();
   }
   #getResult([ballCnt, strikeCnt]) {
