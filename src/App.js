@@ -12,12 +12,12 @@ class App {
   }
 
   getUserDigits() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-        this.checkInputValidity(userInput);
-        this.userDigits = [...userInput].map(Number);
-        resolve();
-      });
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.checkInputValidity(userInput);
+      this.userDigits = [...userInput].map(Number);
+      this.countScore();
+      this.printScore();
+      this.isGameOver();
     });
   }
 
@@ -60,38 +60,31 @@ class App {
   isGameOver() {
     if (this.score.strikes === 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      return true;
+      return this.askNewGame();
     }
-    return false;
-  }
-
-  async runUntilGameOver() {
-    do {
-      await this.getUserDigits();
-      this.countScore();
-      this.printScore();
-    } while (!this.isGameOver());
+    return this.getUserDigits();
   }
 
   askNewGame() {
-    return new Promise((resolve, reject) => {
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        (userInput) => {
-          resolve(userInput);
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (userInput) => {
+        if (userInput === "1") {
+          return this.play();
         }
-      );
-    });
+        return this.finishGame();
+      }
+    );
   }
 
-  async play() {
-    this.generateThreeDigits();
-    await this.runUntilGameOver();
-    if ((await this.askNewGame()) === "1") {
-      return this.play();
-    }
+  finishGame() {
     MissionUtils.Console.print("숫자 야구 게임이 종료되었습니다.");
     return MissionUtils.Console.close();
+  }
+
+  play() {
+    this.generateThreeDigits();
+    this.getUserDigits();
   }
 }
 
