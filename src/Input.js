@@ -2,7 +2,7 @@ const { END_NOTICE } = require("./Console");
 
 class Input {
   isValidInput(input) {
-    if (this.isLengthThree(input))
+    if (!this.isLengthThree(input))
       throw new Error("3자리 숫자를 입력해주세요.");
     const numArr = input.split("").map(Number);
     if (!this.isAllNum(numArr) || !this.isAllValidNum(numArr)) return;
