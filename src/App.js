@@ -11,7 +11,17 @@ class App {
 }
 
 function gameStart(){
-  
+  let answers = makeRandom();
+}
+
+function makeRandom(){
+  const computerNums = [];
+  while (computerNums.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computerNums.includes(number)) computerNums.push(number);
+  }
+  console.log(computerNums);
+  return computerNums;
 }
 
 module.exports = App;
