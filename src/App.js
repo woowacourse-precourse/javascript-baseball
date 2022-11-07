@@ -12,7 +12,6 @@ class App {
 
   play() {
     const computerRandomNumber = this.getComputerNumber();
-    console.log(computerRandomNumber)
     MissionUtils.Console.print(this.GAME_MESSAGE.INIT_MESSAGE);
     this.baseballGame(computerRandomNumber);
   }
