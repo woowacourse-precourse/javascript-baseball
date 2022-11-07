@@ -55,23 +55,23 @@ function countBallAndStrike(randomValue, userValue) {
   const BALL = countBall(randomValue, userValue) - STRIKE;
 
   if (STRIKE === 3) {
-    return (`3스트라이크`);
+    return `3스트라이크`;
   };
 
   if (BALL === 0 && STRIKE === 0) {
-    return (`낫싱`);
+    return `낫싱`;
   };
 
   if (BALL === 0 && STRIKE !== 0) {
-    return (`${STRIKE}스트라이크`);
+    return `${STRIKE}스트라이크`;
   };
 
   if (BALL !== 0 && STRIKE === 0) {
-    return (`${BALL}볼`);
+    return `${BALL}볼`;
   };
 
   if (BALL !== 0 && STRIKE !== 0) {
-    return (`${BALL}볼 ${STRIKE}스트라이크`);
+    return `${BALL}볼 ${STRIKE}스트라이크`;
   };
 
 };
