@@ -71,11 +71,15 @@ class App {
             userNum: this.userNum,
             retryNum: this.replayQnAResult,
           });
-          try {
-            checkRetry.checkRetryInput();
-          } catch (error) {
-            throw new Error(error);
+
+          const errorReTryResult = checkRetry.checkRetryInput();
+
+          this.errorRetryResult = errorReTryResult;
+
+          if (this.errorRetryResult !== ERROR.USER_INPUT_PASS) {
+            render.errorThrow(this.errorRetryResult);
           }
+
           if (this.replayQnAResult === "1") {
             this.setAndReplay();
           }
