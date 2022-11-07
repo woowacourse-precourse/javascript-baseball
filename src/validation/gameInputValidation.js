@@ -33,9 +33,6 @@ function checkDuplicate(gameInput) {
 }
 
 function checkZero(gameInput) {
-  for (let x of gameInput) {
-    if (x == 0) {
-      throw new Error('입력숫자의 각 자리는 1~9까지의 숫자여야 합니다.');
-    }
-  }
+  if (gameInput.includes('0'))
+    throw new Error('입력숫자의 각 자리는 1~9까지의 숫자여야 합니다.');
 }
