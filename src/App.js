@@ -80,6 +80,9 @@ class App {
   resultBall(ball){
       MissionUtils.Console.print(`${ball}볼`);
   }
+  resultNothing(){
+    MissionUtils.Console.print('낫싱');
+  }
 }
 const app = new App;
 app.play();
