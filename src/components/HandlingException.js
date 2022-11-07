@@ -1,4 +1,9 @@
-const handleException = (inputArray, digit) => {};
+const handleException = (inputArray, digit) => {
+  if (isException(inputArray, digit)) {
+    const ERROR_MESSAGE = '잘못된 입력입니다. 게임을 종료합니다.';
+    throw ERROR_MESSAGE;
+  }
+};
 
 const isException = (inputArray, digit) => {
   if (checkDuplicate(inputArray, digit)) return true;
