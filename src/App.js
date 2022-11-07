@@ -38,6 +38,20 @@ class App {
     this.enemy = [...this.enemy];
   }
 
+  countingBallOrStrike(target) {
+    if (this.userInputArr.indexOf(target) !== -1) {
+      if (this.enemy.indexOf(target) === this.userInputArr.indexOf(target))
+        this.strikes++;
+      else this.balls++;
+    }
+  }
+
+  checkBallOrStrike() {
+    this.enemy.map((target) => {
+      this.countingBallOrStrike(target);
+    });
+  }
+
   getUserInputData() {
     this.strikes = 0;
     this.balls = 0;
@@ -45,6 +59,7 @@ class App {
       if (this.checkValidData(answer))
         throw new Error("잘못된 값이 입력되었습니다.");
       this.userInputArr = [...answer];
+      this.checkBallOrStrike();
     });
   }
 
