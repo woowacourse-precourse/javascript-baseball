@@ -55,7 +55,7 @@ class App {
   // 기능 4
   checkValidityUserNumber(userNumber) {
 
-    const userNumberList = Array.from(userNumber);
+    const userNumberList = [...userNumber];
     const firstNumber = Number(userNumberList[0]);
     const secondNumber = Number(userNumberList[1]);
     const thirdNumber = Number(userNumberList[2]);
