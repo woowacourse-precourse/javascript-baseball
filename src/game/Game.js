@@ -1,6 +1,6 @@
-const Mission = require('./Mission');
-const Computer = require('./Computer');
-const User = require('./User');
+const Mission = require('../utils/Mission');
+const Computer = require('../input/Computer');
+const User = require('../input/User');
 
 class Game extends Mission {
   constructor() {

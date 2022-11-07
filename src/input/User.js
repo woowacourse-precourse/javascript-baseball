@@ -1,7 +1,7 @@
-const Mission = require('./Mission');
-const Compare = require('./Compare');
+const Mission = require('../utils/Mission');
+const Compare = require('../utils/Compare');
 const Computer = require('./Computer');
-const constants = require('./constants/constants');
+const constants = require('../constants/constants');
 
 class User extends Mission {
   constructor(computerNumbers) {

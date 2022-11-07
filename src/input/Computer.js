@@ -1,5 +1,5 @@
-const constants = require('./constants/constants');
-const Mission = require('./Mission');
+const constants = require('../constants/constants');
+const Mission = require('../utils/Mission');
 
 class Computer extends Mission {
   constructor() {
