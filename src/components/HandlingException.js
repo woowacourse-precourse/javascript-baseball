@@ -1,5 +1,11 @@
 const handleException = (inputArray, digit) => {};
 
+const isException = (inputArray, digit) => {
+  if (checkDuplicate(inputArray, digit)) return true;
+  if (checkValidNumber(inputArray)) return true;
+  if (checkDigit(inputArray, digit)) return true;
+};
+
 const checkDuplicate = (inputArray, digit) => {
   return [...new Set(inputArray)].length !== digit;
 };
