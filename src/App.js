@@ -3,6 +3,7 @@ const isValidUser = require("./isValidUser.js");
 const getComputerNumber = require("./getComputerNumber.js");
 const countInput = require("./countInput.js");
 const printResult = require("./printResult.js");
+const isRestartNumber = require("./isRestartNumber.js");
 
 const mConsole = MissionUtils.Console;
 const GAME_NUMBER_LENGTH = 3;
@@ -38,17 +39,10 @@ class App {
   checkRestart() {
     mConsole.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     mConsole.readLine("", (restartInput) => {
-      if (this.isRestartNumber(restartInput)) {
+      if (isRestartNumber(restartInput)) {
         this.restartGame(Number(restartInput));
       }
     });
-  }
-
-  isRestartNumber(restartInput) {
-    if (Number(restartInput) < 1 || Number(restartInput) > 2)
-      throw "1 또는 2를 입력해주세요.";
-    if (isNaN(restartInput)) throw "숫자를 입력해주세요.";
-    return true;
   }
 
   restartGame(restartInput) {
