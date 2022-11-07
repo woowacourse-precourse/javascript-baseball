@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { getUniqueNumberCount, getGuessResult } = require('../utils/utils');
+const { getUniqueNumberCount } = require('../utils/utils');
 
 class GameDataUI {
   #dispatcher;
@@ -16,12 +16,14 @@ class GameDataUI {
       return;
     }
 
-    Console.print(getGuessResult(balls, strikes));
+    Console.print(this.getGuessResult(balls, strikes));
+
     if (strikes === 3) {
       this.gameOver();
-    } else {
-      this.newGuess();
+      return;
     }
+
+    this.newGuess();
   };
 
   #inputError() {
@@ -64,6 +66,35 @@ class GameDataUI {
 
       this.#inputError();
     });
+  }
+
+  getGuessResult(ball, strike) {
+    if (ball + strike === 0) {
+      return '낫싱';
+    }
+
+    const ballString = this.getBallString(ball);
+    const strikeString = this.getStrikeString(strike);
+
+    if (ballString === '') {
+      return strikeString;
+    }
+
+    return `${ballString} ${strikeString}`;
+  }
+
+  getBallString(ball) {
+    if (ball !== 0) {
+      return `${ball}볼`;
+    }
+    return '';
+  }
+
+  getStrikeString(strike) {
+    if (strike !== 0) {
+      return `${strike}스트라이크`;
+    }
+    return '';
   }
 
   injection(newDispatcher) {

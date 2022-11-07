@@ -1,4 +1,4 @@
-const { getBallsAndStrikes } = require('../utils/utils');
+const { pickUniqueNumbersInRange } = require('../utils/utils');
 
 class GameDataStore {
   #gameData;
@@ -7,28 +7,53 @@ class GameDataStore {
   constructor() {
     this.#gameData = {
       target: [],
-      input: '',
       ballsAndStrikes: {},
     };
     this.#gameDataUI = {};
   }
 
-  setTarget(newTarget) {
-    this.#gameData = {
-      target: newTarget,
-      input: '',
-      ballsAndStrikes: {},
-    };
+  initializeGameData() {
+    this.#gameData = this.makeInitGameData();
     this.#gameDataUI.update(this.#gameData);
   }
 
-  setInput(newInput) {
-    this.#gameData.input = newInput;
-    this.#gameData.ballsAndStrikes = getBallsAndStrikes(
+  setInput(input) {
+    this.#gameData.ballsAndStrikes = this.calcBallsAndStrikes(
       this.#gameData.target,
-      this.#gameData.input,
+      input,
     );
     this.#gameDataUI.update(this.#gameData);
+  }
+
+  makeInitGameData() {
+    const target = pickUniqueNumbersInRange(1, 9, 3).map(String);
+
+    return {
+      target,
+      ballsAndStrikes: {},
+    };
+  }
+
+  calcBallsAndStrikes(target, input) {
+    const inputArray = Array.from(input);
+    const initialValue = {
+      balls: 0,
+      strikes: 0,
+    };
+
+    return inputArray.reduce((acc, cur, idx) => {
+      if (cur === target[idx]) {
+        acc.strikes += 1;
+        return acc;
+      }
+
+      if (target.includes(cur)) {
+        acc.balls += 1;
+        return acc;
+      }
+
+      return acc;
+    }, initialValue);
   }
 
   injection(GameDataUI) {

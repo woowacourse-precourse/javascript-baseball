@@ -3,7 +3,6 @@ const GameDataStore = require('./stores/GameDataStore');
 const GameDataUI = require('./userInterfaces/GameDataUI');
 const GameStatusStore = require('./stores/GameStatusStore');
 const GameStatusUI = require('./userInterfaces/GameStatusUI');
-const { pickUniqueNumbersInRange } = require('./utils/utils');
 
 class GameService {
   constructor() {
@@ -40,7 +39,7 @@ class GameService {
 
     this.dispatcher.register((action) => {
       if (action.type === 'game-start' || action.type === 'game-restart') {
-        this.gameDataStore.setTarget(this.makeTarget());
+        this.gameDataStore.initializeGameData();
       }
     });
 
@@ -49,11 +48,6 @@ class GameService {
         this.gameDataStore.setInput(action.input);
       }
     });
-  }
-
-  makeTarget() {
-    const numbers = pickUniqueNumbersInRange(1, 9, 3).map(String);
-    return numbers;
   }
 }
 
