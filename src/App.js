@@ -11,9 +11,9 @@ class App {
   }
 
   checkUserInput(userInput){
-    const isValidArr = userInput.map(e => e=Number.isNaN(e));
+    //const isValidArr = userInput.map(e => e=Number.isNaN(e));
     if(userInput.length!==3) return false;
-    if(isValidArr.includes(true)) return false;
+    //if(isValidArr.includes(true)) return false;
     if(new Set(userInput).size!==3) return false;
     if(userInput.includes(0)) return false;
   }
@@ -21,7 +21,7 @@ class App {
   userInput(){
     return Console.readLine('숫자를 입력해주세요 : ',(input) => {
       this.checkUserInput(input);
-      this.compareInputNum(input);
+      this.compareInput(input);
       Console.close();
       })
   }
@@ -34,9 +34,11 @@ class App {
     })
   }
 
+
+
   compareInput(userInput){
     this.userInputNums = userInput;
-    const subtractArr = this.computerInput.map((x,y) => x-userInput[y]);
+    const subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
     const zeroCount = subtractArr.reduce((count, data) => data == 0 ? count + 1 : count, 0);
     if(zeroCount == 3){
       Console.print("3스트라이크");
@@ -44,9 +46,29 @@ class App {
       return this.askRestartOrQuit();
     }
 
-    //this.getResult();
+    this.getHint();
 
     return this.userInput();
+
+  }
+
+  getHint(){
+    let strikeCount = 0;
+    let ballCount = 0;
+
+    let subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
+    let zeroCount = subtractArr.reduce((count, data) => data == 0 ? count + 1 : count, 0);
+
+    let difference = this.computerInputNums.filter(x => !this.userInputNums.includes(x));
+
+    strikeCount = zeroCount;
+    ballCount = 3-strikeCount-difference.length;
+
+    if(ballCount != 0 && strikeCount !=0) return Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    if(ballCount != 0 && strikeCount == 0) return Console.print(`${ballCount}볼`);
+    if(ballCount == 0 && strikeCount != 0) return Console.print(`${strikeCount}스트라이크`);
+    
+    return Console.print("낫싱");
 
   }
 
