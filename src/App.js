@@ -38,7 +38,20 @@ class App {
     MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
       this.checkInput(input);
       this.checkAnswer(input, answer);
+      this.printScore();
     });
+  }
+
+  printScore() {
+    if (!this.score.ball && !this.score.strike) {
+      this.printMessage(NOTHING_STRING);
+    }
+    if (this.score.ball) {
+      this.printMessage(this.score.ball.toString() + BALL_STRING);
+    }
+    if (this.score.strike) {
+      this.printMessage(this.score.strike.toString() + STRIKE_STRING);
+    }
   }
 
   checkAnswer(input, answer) {
