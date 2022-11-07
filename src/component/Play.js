@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-
+const { RESULT } = require("../constant/message.constant");
 class Play {
   setResult(computerNum, userInput) {
     const splitComputerNum = [...computerNum];
@@ -28,7 +28,7 @@ class Play {
 
   printMessage(countStrike, countBall) {
     if (countStrike === 0 && countBall === 0) {
-      return Console.print("낫싱");
+      return Console.print(RESULT.NOTHING);
     }
   }
 }
