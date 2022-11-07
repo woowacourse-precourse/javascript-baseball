@@ -37,6 +37,20 @@ class App {
     return computerRandomNumber;
   }
 
+  getUserNumber() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      try {
+        const removeSpace = answer.replace(/ /g, '');
+        checkNumber(removeSpace);
+        checkLength(removeSpace);
+        const answerArray = removeSpace.split('');
+        checkDuplicate(answerArray);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
+
   setUserAnswer(answerArray) {
     for (let number of answerArray) {
       this.userAnswer.push(parseInt(number));
@@ -53,19 +67,6 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      try {
-        const removeSpace = answer.replace(/ /g, '');
-        checkNumber(removeSpace);
-        checkLength(removeSpace);
-        const answerArray = removeSpace.split('');
-        checkDuplicate(answerArray);
-        this.setUserAnswer(removeSpace.split(''));
-      } catch (error) {
-        console.log(error);
-      }
-    });
 
     for (let idx = 0; idx < this.userAnswer.length; idx++) {
       let userNum = this.userAnswer[idx];
