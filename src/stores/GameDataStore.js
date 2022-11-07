@@ -1,4 +1,4 @@
-const { getBallsAndStrikes } = require('./utils');
+const { getBallsAndStrikes } = require('../utils/utils');
 
 class GameDataStore {
   #gameData;

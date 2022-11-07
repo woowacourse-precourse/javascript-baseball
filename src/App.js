@@ -1,9 +1,9 @@
 const Dispatcher = require('./Dispatcher');
-const GameDataStore = require('./GameDataStore');
-const GameDataUI = require('./GameDataUI');
-const GameStatusStore = require('./GameStatusStore');
-const GameStatusUI = require('./GameStatusUI');
-const { makeTarget } = require('./utils');
+const GameDataStore = require('./stores/GameDataStore');
+const GameDataUI = require('./userInterfaces/GameDataUI');
+const GameStatusStore = require('./stores/GameStatusStore');
+const GameStatusUI = require('./userInterfaces/GameStatusUI');
+const { makeTarget } = require('./utils/utils');
 
 class App {
   play() {

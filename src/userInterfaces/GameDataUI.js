@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { getUniqueNumberCount, getGuessResult } = require('./utils');
+const { getUniqueNumberCount, getGuessResult } = require('../utils/utils');
 
 class GameDataUI {
   #dispatcher;
