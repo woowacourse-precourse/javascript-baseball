@@ -12,21 +12,19 @@ class App {
     }
     play() {
         const createAnswer = () => {
-            return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+            return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
         };
 
         const isCorrect = (userInput, answer) => {
-            return userInput === answer;
+            return userInput.join("") === answer.join("");
         };
 
         const getBallCount = (userInput, answer) => {
-            const USER_INPUT = changeToArray(userInput);
-            const COMPUTER_ANSWER = changeToArray(answer);
-            const IS_TRUE = USER_INPUT.map((num, index) => num === COMPUTER_ANSWER[index]);
+            const IS_TRUE = userInput.map((num, index) => num === answer[index]);
 
             let ball = 0;
-            USER_INPUT.forEach((num, index) => {
-                if (!IS_TRUE[index] && COMPUTER_ANSWER.includes(num)) {
+            userInput.forEach((num, index) => {
+                if (!IS_TRUE[index] && answer.includes(num)) {
                     ball += 1;
                 }
             });
@@ -34,12 +32,9 @@ class App {
         };
 
         const getStrikeCount = (userInput, answer) => {
-            const USER_INPUT = changeToArray(userInput);
-            const COMPUTER_ANSWER = changeToArray(answer);
-
             let strike = 0;
-            USER_INPUT.forEach((num, index) => {
-                if (num === COMPUTER_ANSWER[index]) {
+            userInput.forEach((num, index) => {
+                if (num === answer[index]) {
                     strike += 1;
                 }
             });
@@ -79,7 +74,7 @@ class App {
                     playGame();
                 }
                 if (number === "2") {
-                    MissionUtils.Console.close();
+                    rl.Console.close();
                 }
             });
         };
@@ -88,11 +83,12 @@ class App {
             // console.log(answer);
 
             MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-                if (isCorrect(input, answer)) {
+                const INPUT_ARRAY = changeToArray(input);
+                if (isCorrect(INPUT_ARRAY, answer)) {
                     printEndMessage();
                     return choosesNextStep();
                 }
-                inputResult(input, answer);
+                inputResult(INPUT_ARRAY, answer);
                 getUserInput(answer);
             });
         };
