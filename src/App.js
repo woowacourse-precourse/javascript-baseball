@@ -3,9 +3,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
 
   throwError(input) {
-    let inputArr = Array.from(String(input));
 
-    if (inputArr.length !== 3) {
+
+    if (input.length !== 3) {
       throw new Error("3자리 숫자만 입력 가능합니다.")
     }
 
@@ -13,7 +13,7 @@ class App {
       throw new Error("0은 포함될 수 없습니다.")
     }
 
-    let inputSet = new Set(inputArr);
+    let inputSet = new Set(input);
 
     if (inputSet.size < 3) {
       throw new Error("중복되지 않은 숫자 3개만 입력 가능합니다.")
