@@ -2,12 +2,17 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   resultNumbers;
+  gameResult;
+
   constructor() {
-    this.setNumbers();
+    this.setRandomNumbers();
   }
 
-  // 숫자인지, 겹치는게 없는지, 3개만 입력했는지, 
-  checkNumbers(inputNumber){
+  setRandomNumbers() {
+    this.resultNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
+
+  inputExceptionHandling(inputNumber){
     if (isNaN(inputNumber)) {
       throw "숫자가 아닙니다.";
     }
@@ -19,17 +24,30 @@ class App {
       throw "중복되는 숫자가 입력되었습니다.";
     }
   }
-  
-  setNumbers() {
-    this.resultNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+
+  checkInputNumbers(inputNumbers, resultNumbers){
+    const inputNumbersArray = inputNumbers.split("").map(Number);
+    let strikeCount = 0;
+    let ballCount = 0;
+
+    inputNumbersArray.map((value,index)=>{
+      value === resultNumbers[index]
+        ? (strikeCount += 1)
+        : resultNumbers.includes(value)
+        ? (ballCount += 1)
+        : null;
+    })
+
+    return [ballCount, strikeCount]
   }
+
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-      this.checkNumbers(answer);
+      this.inputExceptionHandling(answer);
     });
-
+  
   }
 }
 
