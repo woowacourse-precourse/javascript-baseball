@@ -95,6 +95,21 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('입력값이 제대로 저장되는지 확인', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['123'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(app.input).toHaveLength(3);
+    expect(app.input).toEqual([1, 2, 3]);
+    expect(App.isValidInput(app.input)).toEqual(true);
+  });
+
   test('예외 테스트: 입력값의 길이가 3이 아닌 경우', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
