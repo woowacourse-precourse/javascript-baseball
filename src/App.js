@@ -64,15 +64,13 @@ class App {
     if (result === 'answer') {
       MissionUtils.Console.print('3스트라이크');
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-
       return this.askRestart();
     }
     if (result === 'nothing') {
       MissionUtils.Console.print('낫싱');
-
       return this.getUserNumbers(computerNumbers);
     }
-
+    
     MissionUtils.Console.print(result);
 
     return this.getUserNumbers(computerNumbers);
