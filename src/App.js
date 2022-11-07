@@ -31,7 +31,21 @@ class App {
         });
     }
 
-    checkStrikeBalls(quizNumber, input) {
+    PrintStrikeBall(score) {
+        if (score.strike > 0 && score.ball > 0) {
+            MissionUtils.Console.print(
+                `${score.ball}볼 ${score.strike}스트라이크`
+            );
+        } else if (score.strike === 0 && score.ball === 0) {
+            MissionUtils.Console.print(`낫싱`);
+        } else if (score.strike > 0) {
+            MissionUtils.Console.print(`${score.strike}스트라이크`);
+        } else if (score.ball > 0) {
+            MissionUtils.Console.print(`${score.ball}볼`);
+        }
+    }
+
+    CheckStrikeBalls(quizNumber, input) {
         let score = { strike: 0, ball: 0 };
         for (let i = 0; i < 3; i++) {
             if (quizNumber[i] === input[i]) {
@@ -40,6 +54,7 @@ class App {
                 score.ball += 1;
             }
         }
+        this.PrintStrikeBall(score);
     }
 
     play() {
