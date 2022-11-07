@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const GAME_PLAY_NUM = 1;
+const GAME_EXIT_NUM = 2;
 const COMPUTER_NUMBER_LENGTH = 3;
 
 const STRIKE = "스트라이크";
@@ -13,6 +15,7 @@ const LENGTH_ERROR_MESSAGE = "3자리의 수를 입력해주세요.";
 const RANGE_ERROR_MESSAGE = "1부터 9까지의 수만 입력해주세요.";
 const DUPLICATED_ERROR_MESSAGE = "서로 다른 3자리를 입력해주세요.";
 const NOT_A_NUMBER_ERROR_MESSAGE = "숫자로만 입력해주세요.";
+const GAME_REPLAY_NUMBER_ERROR_MESSAGE = "1 또는 2를 입력하세요.";
 
 class App {
   play() {}
@@ -54,7 +57,7 @@ class App {
     let replayNum;
 
     MissionUtils.Console.readLine(CHECK_REPLAY_OR_EXIT_MESSAGE, (input) => {
-      replayNum = parseInt(input);
+      if (this.isValidReplayNum(input)) replayNum = parseInt(input);
     });
 
     return replayNum;
@@ -92,6 +95,14 @@ class App {
     const set = new Set(playerNum);
 
     return set.size === COMPUTER_NUMBER_LENGTH;
+  }
+
+  isValidReplayNum(answer) {
+    if (Number(answer) !== GAME_PLAY_NUM && Number(answer) !== GAME_EXIT_NUM) {
+      throw new Error(GAME_REPLAY_NUMBER_ERROR_MESSAGE);
+    }
+
+    return true;
   }
 
   getHint(computerNum, playerNum) {
