@@ -45,24 +45,6 @@ class BaseBall {
   #getNumArrayFor(input) {
     return input.split('').map((value) => +value);
   }
-
-  /* tho code below are getter functions for only testing private method */
-
-  getIsStrikeResult(randomItem, inputItem) {
-    return this.#isStrike(randomItem, inputItem);
-  }
-
-  getCountStrikeResult(random, input) {
-    return this.#countStrike(random, input);
-  }
-
-  getIsBallResult(random, input, numberIndex) {
-    return this.#isBall(random, input, numberIndex);
-  }
-
-  getCountBallResult(random, input) {
-    return this.#countBall(random, input);
-  }
 }
 
 module.exports = BaseBall;
