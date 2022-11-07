@@ -70,6 +70,7 @@ class App {
       this.userInput();
     } else if (strikeCount === 3) {
       Console.print("3스트라이크");
+      this.winGame();
     } else if (strikeCount > 0 && strikeCount < 3) {
       {
         ballCount > 0
@@ -85,6 +86,10 @@ class App {
       }
       this.userInput();
     }
+  }
+
+  winGame() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
   }
 }
 const app = new App();
