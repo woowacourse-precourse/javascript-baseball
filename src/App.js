@@ -1,10 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor() {
-    this.play();
-  }
-
   computerNum() {
     const computerTheeDifferNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     return computerTheeDifferNum;
@@ -22,7 +18,7 @@ class App {
     if (isNumber && (numArr.length === 3) && (numArr.length === set.size)) {
       return true;
     } else {
-      throw('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
+      throw ('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
     }
   }
 
@@ -63,7 +59,8 @@ class App {
   restartOrExit() {
     this.readInput('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
       if (answer === 1) {
-        return new App();
+        const app = new App();
+        return app.play();
       } else if (answer === 2) {
         return this.gameExit();
       } else {
@@ -74,7 +71,7 @@ class App {
 
 
   gameExit() {
-    throw('게임을 종료합니다.\n');
+    throw ('게임을 종료합니다.\n');
   }
 
   userPickNum(stringComputerNumArr) {
@@ -106,6 +103,7 @@ class App {
     this.userPickNum(stringComputerNumArr);
   }
 }
-new App();
+const app = new App();
+app.play();
 
 module.exports = App;
