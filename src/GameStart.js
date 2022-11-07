@@ -1,4 +1,3 @@
-
 const startMessage = require('./StartMessage');
 const selectGame = require('./SelectGame');
 const gameStart = (USER) => {
