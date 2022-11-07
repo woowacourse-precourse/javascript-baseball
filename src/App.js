@@ -18,17 +18,18 @@ class App {
     this.isValidUserNumber = false;
   }
 
-  static compareNumber(userNumber) {
+  static compareNumber(userNumber, computerNumber) {
     const userNumberArray = App.convertUserNumberToArray(userNumber).map((number) => +number);
     let strikeCount = 0;
     let ballCount = 0;
 
     userNumberArray.forEach((userNumber, index) => {
-      if (this.computerNumberArray.includes(userNumber)) {
-        if (this.computerNumberArray[index] === userNumber) strikeCount += 1;
+      if (computerNumber.includes(userNumber)) {
+        if (computerNumber[index] === userNumber) strikeCount += 1;
         else ballCount += 1;
       }
     });
+    // return { strikeCount, ballCount }; 테스트를 위한 리턴 값
     App.printResult(strikeCount, ballCount);
   }
 
@@ -48,7 +49,7 @@ class App {
     if (new Set([...App.convertUserNumberToArray(userNumber)]).size !== 3) throw new Error(ERROR_MESSAGES.NOT_DUPLICATE);
     if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error(ERROR_MESSAGES.NOT_DECIMAL_AND_MINUS);
     else this.isValidUserNumber = true;
-    if (this.isValidUserNumber === true) App.compareNumber(userNumber);
+    if (this.isValidUserNumber === true) App.compareNumber(userNumber, this.computerNumberArray);
   }
 
   static printResult(strikeCount, ballCount) {
