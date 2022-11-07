@@ -74,4 +74,5 @@ feat : 예외처리 함수 추가
   - [ ] : 기본은 throw "에러메세지" 이다.
   - [ ] : 하지만 대부분 throw new Error("에러메세지")를 사용하여 에러 객체를 보낸다.
   - [ ] : 이렇게 하는 이점은 어디서 에러가 발생했는지 확인할 수 있다.
-- [ ] : throw 사용하고 npm test 가 throw를 catch하지 못함
+- [x] : throw 사용하고 npm test 가 throw를 catch하지 못함
+- [ ] : jest 사용 방법 익히기 TDD 익숙해지기
