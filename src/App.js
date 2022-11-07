@@ -18,6 +18,7 @@ class App {
         if(random_num.includes(number)) continue;
         random_num.push(number);        
     }
+    const computerNum = random_num.join('');
   }
 
   getUserNum() {
@@ -29,10 +30,14 @@ class App {
     });
   }
 
-  cntStikeAndBall(computerNum, usernum) {
+  successMsg() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  }
+
+  cntStikeAndBall(computerNum, userNum) {
     let strike = 0, ball = 0;
     const computerArray = [...computerNum];
-    const userArray = [...usernum];
+    const userArray = [...userNum];
 
     computerArray.forEach((num, idx) => {
       if (idx === userArray.indexOf(num)) {
