@@ -25,7 +25,7 @@ class BaseballGame {
       userInput,
       this.computerNumbers
     );
-    //프린트 출력
+    this.printResultCount(strike, ball, nothing);
     // console.log(typeof strike);
     if (strike == 3) {
       Console.readline(
@@ -35,5 +35,22 @@ class BaseballGame {
       return;
     }
     this.playGame();
+  };
+
+  StrikeCount = (userInput, computerNumbers) => {
+    let strike = 0;
+    let ball = 0;
+    let nothing = 0;
+    computerNumbers.forEach((number, idx) => {
+      if (!computerNumbers.includes(Number(userInput[idx]))) {
+        nothing++;
+        return;
+      }
+      if (number === Number(userInput[idx])) {
+        strike++;
+      }
+      ball++;
+    });
+    return [strike, ball, nothing];
   };
 }
