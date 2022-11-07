@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGE, ERROR_MESSAGE, RESULT_MESSAGE } = require("./constants/MessageConstants");
+const { NUMBER } = require("./constants/Constants");
 
 class App {
   play() {
@@ -22,8 +23,8 @@ class App {
   makeComputerNumber() {
     const computerNumberList = [];
 
-    while (computerNumberList.length < 3) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (computerNumberList.length < NUMBER.THREE_DIGIT) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(NUMBER.RANGE_START, NUMBER.RANGE_END);
 
       if (!(computerNumberList.includes(randomNumber))) {
         computerNumberList.push(randomNumber);
@@ -59,7 +60,7 @@ class App {
     const secondNumber = Number(userNumberList[1]);
     const thirdNumber = Number(userNumberList[2]);
 
-    if (!(userNumberList.length === 3)) {
+    if (!(userNumberList.length === NUMBER.THREE_DIGIT)) {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
     }
 
@@ -71,7 +72,7 @@ class App {
       throw new Error(ERROR_MESSAGE.OVERLAP_ERROR);
     }
 
-    if (firstNumber === 0 || secondNumber === 0 || thirdNumber === 0) {
+    if (firstNumber === NUMBER.ZERO || secondNumber === NUMBER.ZERO || thirdNumber === NUMBER.ZERO) {
       throw new Error(ERROR_MESSAGE.ZERO_ERROR);
     }
   }
@@ -81,9 +82,9 @@ class App {
     const computerNumberList = Array.from(computerNumber);
     const userNumberList = Array.from(userNumber);
 
-    let ballOrStrike = 0;
-    let ball = 0;
-    let strike = 0;
+    let ballOrStrike = NUMBER.ZERO;
+    let ball = NUMBER.ZERO;
+    let strike = NUMBER.ZERO;
 
     for (let userNumber of userNumberList) {
       if (computerNumberList.includes(userNumber)) {
@@ -91,12 +92,12 @@ class App {
       }
     }
 
-    if (ballOrStrike === 0) {
+    if (ballOrStrike === NUMBER.ZERO) {
       return "nothing";
     }
 
-    for (let i = 0; i < 3; i++) {
-      if (computerNumberList[i] === userNumberList[i]) {
+    for (let index = NUMBER.ZERO; index < NUMBER.THREE_DIGIT; index++) {
+      if (computerNumberList[index] === userNumberList[index]) {
         strike += 1;
       }
     }
@@ -115,17 +116,17 @@ class App {
       return;
     }
 
-    if (strike === 3) {
+    if (strike === NUMBER.THREE_DIGIT) {
       MissionUtils.Console.print(RESULT_MESSAGE.SUCCESS);
       return "end";
     }
 
-    if (ball === 0) {
+    if (ball === NUMBER.ZERO) {
       MissionUtils.Console.print(`${strike}` + RESULT_MESSAGE.STRIKE);
       return;
     }
 
-    if (strike === 0) {
+    if (strike === NUMBER.ZERO) {
       MissionUtils.Console.print(`${ball}` + RESULT_MESSAGE.BALL);
       return;
     }
@@ -145,12 +146,12 @@ class App {
   // 기능 8
   checkUserChoiceNumber(userChoiceNumber) {
 
-    if (userChoiceNumber === '1') {
+    if (userChoiceNumber == NUMBER.RESTART) {
       this.StartGame();
       return;
     }
     
-    if (userChoiceNumber === '2') {
+    if (userChoiceNumber == NUMBER.END) {
       MissionUtils.Console.print(MESSAGE.END);
       MissionUtils.Console.close();
       return;
