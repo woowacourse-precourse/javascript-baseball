@@ -61,6 +61,36 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult3 = app.judgeStrikeOrBall([1, 2, 3], '142', 2);
     expect(testResult3).toEqual('ball');
   });
+
+  test('makeHintString 테스트 코드', () => {
+    const app = new App();
+    const testResult = app.makeHintString(0,0);
+    expect(testResult).toEqual('낫싱');
+    const testResult2 = app.makeHintString(0, 1);
+    expect(testResult2).toEqual('1볼');
+    const testResult3 = app.makeHintString(2, 0);
+    expect(testResult3).toEqual('2스트라이크');
+    const testResult4 = app.makeHintString(1, 1);
+    expect(testResult4).toEqual('1볼 1스트라이크');
+  });
+
+  test('restartOrExit 테스트 코드',()=>{
+    const app = new App();
+    const spyPlay = jest.spyOn(app, 'play');
+    const spyEnd = jest.spyOn(app, 'exitFunction');
+    app.restartOrExit(1);
+    expect(spyPlay).toBeCalledTimes(1);
+    MissionUtils.Console.close();
+
+    app.restartOrExit(2);
+    expect(spyEnd).toBeCalledTimes(1);
+
+    expect(() => {
+      const app = new App();
+      app.restartOrExit(3);
+    }).toThrow();
+    
+  });
 })
 
 
