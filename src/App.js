@@ -10,6 +10,14 @@ class App {
     const answer = this.getAnswerNumber();
     this.printGameStartMessage();
     let inputNumber = this.getInputNumber();
+
+    const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
+    const numberOfBall = this.getNumberOfBall(
+      answer,
+      inputNumber,
+      numberOfStrike
+    );
+    this.printGameResultMessage(numberOfStrike, numberOfBall);
   }
   getAnswerNumber() {
     const answer = MissionUtils.Random.pickUniqueNumbersInRange(
@@ -113,6 +121,10 @@ class App {
     numberOfBall -= numberOfStrike;
 
     return numberOfBall;
+  }
+  printGameResultMessage(numberOfStrike, numberOfBall) {
+    const GAME_RESULT_MESSAGE = `${numberOfBall}볼 ${numberOfStrike}스트라이크`;
+    Console.print(GAME_RESULT_MESSAGE);
   }
 }
 
