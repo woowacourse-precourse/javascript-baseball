@@ -30,6 +30,11 @@ class App {
 
   makeResult(input) {
     const scoreBoard = { strike: 0, ball: 0 };
+
+    input.split("").forEach((num, idx) => {
+      if (this.answer[idx] === num) scoreBoard.strike += 1;
+      else if (this.answer.includes(num)) scoreBoard.ball += 1;
+    });
   }
 
   isGameOver() {
