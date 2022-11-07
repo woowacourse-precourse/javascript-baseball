@@ -8,9 +8,17 @@ class App {
     const result = [];
     for (let i = 0; i < 3; i++) {
       let num = MissionUtils.Random.pickNumberInRange(1, 9);
-      result.includes(num) ? i-- : result.push(num);
+      result.includes(num)?i--:result.push(num)
     }
-    return result;
+    this.randomNumbers = result;
+  }
+
+  getInputNumbers() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.inputExceptionHandling(userInput);
+      const inputNumbers = userInput.split("").map(Number);
+      this.checkInputNumbers(inputNumbers, this.randomNumbers);
+    });
   }
 
   inputExceptionHandling(inputNumber) {
@@ -26,8 +34,7 @@ class App {
     }
   }
 
-  checkInputNumbers(userInput, randomNumbers) {
-    let inputNumbers = userInput.split("").map(Number);
+  checkInputNumbers(inputNumbers, randomNumbers) {
     this.strikeCount = 0;
     let ballCount = 0;
 
@@ -39,27 +46,35 @@ class App {
         : null;
     });
 
-    return [ballCount, this.strikeCount];
+    return this.makeCheckedResult([ballCount, this.strikeCount]);
   }
 
   makeCheckedResult([ballCount, strikeCount]) {
     if (ballCount == 0 && strikeCount == 0) {
-      return "낫싱";
+      return this.showCheckedResult("낫싱");
     }
 
     const strikeResult = `${strikeCount}스트라이크`;
     const ballResult = `${ballCount}볼`;
 
     if (ballCount > 0 && strikeCount == 0) {
-      return ballResult;
+      return this.showCheckedResult(ballResult);
     }
     if (ballCount == 0 && strikeCount > 0) {
-      return strikeResult;
+      return this.showCheckedResult(strikeResult);
     }
-    return ballResult + " " + strikeResult;
+    return this.showCheckedResult(ballResult + " " + strikeResult);
   }
 
-  showGameEndMessage() {
+  showCheckedResult(result) {
+    MissionUtils.Console.print(result);
+    if (this.strikeCount == 3) {
+      this.checkGameEndMessage();
+    }
+    this.getInputNumbers();
+  }
+
+  checkGameEndMessage() {
     MissionUtils.Console.print(
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
@@ -67,32 +82,18 @@ class App {
       if (answer == "1") {
         this.play();
       }
-      MissionUtils.Console.print("게임 종료");
-      MissionUtils.Console.close();
-    });
-  }
-
-  startBaseball() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.inputExceptionHandling(userInput);
-      const ballStrikeCount = this.checkInputNumbers(
-        userInput,
-        this.randomNumbers
-      );
-      const result = this.makeCheckedResult(ballStrikeCount);
-      MissionUtils.Console.print(result);
-      if (this.strikeCount === 3) {
-        this.showGameEndMessage();
+      if (answer == "2") {
+        MissionUtils.Console.print("게임 종료");
+        MissionUtils.Console.close();
       }
-      this.startBaseball();
     });
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.randomNumbers = this.setRandomNumbers();
-    this.startBaseball();
+    this.setRandomNumbers();
+    this.getInputNumbers();
   }
 }
-const app = new App();
-app.play();
+
+module.exports = App;
