@@ -1,10 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Computer = require("./Computer");
 const { Random, Console } = MissionUtils;
 
 const Validation = require("./Validatoin");
 class App {
+  computer = new Computer();
   validation = new Validation();
-  randomNumbers;
 
   userInputs;
 
@@ -17,9 +18,9 @@ class App {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.gameStart();
   }
-
+  
   gameStart() {
-    this.saveRandomNumbers();
+    this.computer.setRandomNumbers();
     this.saveUserInputs();
   }
 
@@ -28,17 +29,6 @@ class App {
       STRIKE: 0,
       BALL: 0
     };
-  }
-
-  saveRandomNumbers() {
-    this.randomNumbers = [];
-    while (this.randomNumbers.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!this.randomNumbers.includes(number)) {
-        this.randomNumbers.push(number);
-      }
-    }
-    console.log(this.randomNumbers);
   }
 
   saveUserInputs() {
@@ -54,9 +44,9 @@ class App {
     this.resetScore();
     [...String(this.userInputs)].map((inputString, index) => {
       const inputNumber = Number(inputString);
-      if (inputNumber === this.randomNumbers[index]) {
+      if (inputNumber === this.computer.randomNumbers[index]) {
         this.score.STRIKE += 1;
-      } else if (this.randomNumbers.includes(inputNumber)) {
+      } else if (this.computer.randomNumbers.includes(inputNumber)) {
         this.score.BALL += 1;
       }
     });
