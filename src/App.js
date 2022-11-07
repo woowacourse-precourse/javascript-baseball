@@ -8,7 +8,7 @@ class App {
   play() {
     this.computorInput = this.selectNumber();
 
-    let score = [0, 0]; // [볼, 스트라이크]
+    // let score = [0, 0]; // [볼, 스트라이크]
   }
 
   selectNumber() {
@@ -19,7 +19,7 @@ class App {
       num_candidate[1] !== num_candidate[2] &&
       num_candidate[2] !== num_candidate[0]
     ) {
-      answer = num_candidate;
+      let answer = num_candidate;
       return answer;
     } else {
       selectNumber();
