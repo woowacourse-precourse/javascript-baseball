@@ -80,6 +80,7 @@ class App {
     Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       this.handleGameException(input);
       inputNumber = input;
+      Console.close();
     });
 
     return inputNumber;
@@ -206,6 +207,7 @@ class App {
     Console.readLine(INPUT_RESTART_MESSAGE, (input) => {
       this.handleRestartException(input, RESTART, EXIT);
       inputRestart = input;
+      Console.close();
     });
 
     if (inputRestart === RESTART) {
