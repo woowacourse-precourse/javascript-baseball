@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Validation = require("./Validation.js");
 
 const LENGTH = 3;
 
@@ -15,6 +16,7 @@ class App {
     this.io.print(QuestionText.startText);
     this.userInputArray = [];
     this.target = this.setTarget();
+    this.validation = new Validation(LENGTH);
   }
 
   play() {
@@ -40,8 +42,7 @@ class App {
   }
 
   onGame(input) {
-    this.validation(parseInt(input));
-    // console.log(this.userInputArray);
+    this.userInputArray = this.validation.validation(parseInt(input));
 
     let ball = this.countBall();
     let strike = this.countStrike();
@@ -58,7 +59,9 @@ class App {
   isRestart(input) {
     let value = parseInt(input);
     if (isNaN(value))
-      throw Error("경고:게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+      throw new Error(
+        "경고:게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+      );
 
     switch (value) {
       case 1:
@@ -71,41 +74,6 @@ class App {
       default:
         throw new Error("Not valid value");
     }
-  }
-
-  // 유효성 검사
-  validation(input) {
-    if (isNaN(input)) throw new Error("정수 값을 입력해주세요!");
-
-    const len = Math.ceil(Math.log10(input + 1));
-    if (len !== 3) throw new Error("서로 다른 3자리의 수를 입력해주세요!");
-
-    this.isDuplicate(input);
-
-    if (input < 0) throw new Error("음수가 아닌 값을 입력해주세요.");
-  }
-
-  isDuplicate(input) {
-    const checkArray = Array(10).fill(false);
-    this.userInputArray = this.inputToArray(input);
-
-    for (let i = 0; i < LENGTH; i++) {
-      let idx = this.userInputArray[i];
-      if (checkArray[idx]) throw new Error("중복이 있습니다.");
-
-      checkArray[idx] = true;
-    }
-  }
-
-  inputToArray(input) {
-    const array = [];
-
-    while (input > 0) {
-      array.unshift(input % 10);
-      input = Math.floor(input / 10);
-    }
-
-    return array;
   }
 
   setTarget() {
