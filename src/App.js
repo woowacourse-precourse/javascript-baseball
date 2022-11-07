@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const MESSAGE = require('./message.js');
 
 class App {
   constructor() {
@@ -7,7 +8,7 @@ class App {
     this.countResult;
   }
   play() {
-    this.gameStart();
+    this.printMessage(MESSAGE.START);
     this.count = this.generateCount(this.generateRandomList());
     this.getUserInput();
   }
@@ -17,8 +18,8 @@ class App {
     this.getUserInput();
   }
 
-  gameStart() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  printMessage(message) {
+    MissionUtils.Console.print(message);
   }
 
   generateCount(numberList) {
@@ -43,21 +44,15 @@ class App {
   handleGame = (answer) => {
     this.input = this.vaildInput(answer);
     this.countResult = this.decideCount(this.count, this.input);
-    this.printCount(this.countResult);
+    this.printMessage(this.makeCountMessage(this.countResult));
     if (this.countResult.strikeCount !== 3) {
       this.getUserInput();
     } else {
-      this.printWinMessage();
+      this.printMessage(MESSAGE.WIN);
+      this.printMessage(MESSAGE.RESTART);
       this.inputSignal();
     }
   };
-
-  printWinMessage() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.print(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
-    );
-  }
 
   handleRestart = (answer) => {
     if (answer === '1') {
@@ -135,10 +130,6 @@ class App {
       return `${counts.strikeCount}스트라이크`;
     }
     return `${counts.ballCount}볼 ${counts.strikeCount}스트라이크`;
-  }
-
-  printCount(counts) {
-    MissionUtils.Console.print(this.makeCountMessage(counts));
   }
 }
 
