@@ -22,8 +22,7 @@ describe("야구 게임 테스트", () => {
     const logSpy = jest.spyOn(console, "log");
     logSpy.mockClear();
 
-    const app = new App();
-    app.startGame();
+    startGame();
 
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
