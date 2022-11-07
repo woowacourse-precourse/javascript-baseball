@@ -83,7 +83,7 @@ describe("숫자 야구 게임", () => {
       expect(rangeSpy(item)).toBeTruthy();
     });
 
-    const falsyInput = ["012", "qwe", "106"[(4, 0, 9)]];
+    const falsyInput = ["012", "qwe", "106", [4, 0, 9]];
 
     falsyInput.forEach((item) => {
       expect(rangeSpy(item)).not.toBeTruthy();
