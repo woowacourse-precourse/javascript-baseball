@@ -79,18 +79,28 @@ console.log(ballCount.balls); // 1
 
 #### `countStrikes(question, answer)`
 
-문제와 사용자의 답을 토대로 스트라이크의 개수를 세어 반환한다.
+이 함수는 호출하지 마십시오. strikes를 대신 사용하는 것을 권장합니다.
+
+문제와 사용자의 답을 토대로 스트라이크의 개수를 세어 반환한다. BallCount 인스턴스 생성 시 strikes의 값을 구하는 내부 함수의 역할을 한다.
 
 ```js
-BallCount.countStrikes([1, 3, 4], [4, 3, 2]); // 1
+const ballCount = new BallCount([1, 3, 4], [4, 3, 2]);
+ballCount.countStrikes([1, 3, 4], [4, 3, 2]); // 1
+
+console.log(ballCount.strikes); // 1
 ```
 
 #### `countBalls(question, answer, strikes)`
 
-문제와 사용자의 답을 토대로 볼의 개수를 세어 반환한다.
+이 함수는 호출하지 마십시오. balls를 대신 사용하는 것을 권장합니다.
+
+문제와 사용자의 답을 토대로 볼의 개수를 세어 반환한다. BallCount 인스턴스 생성 시 balls의 값을 구하는 내부 함수의 역할을 한다.
 
 ```js
-BallCount.countBalls([1, 3, 4], [4, 3, 2]); // 1
+const ballCount = new BallCount([1, 3, 4], [4, 3, 2]);
+ballCount.countBalls([1, 3, 4], [4, 3, 2]); // 1
+
+console.log(ballCount.balls); // 1
 ```
 
 #### `toString()`
@@ -122,4 +132,12 @@ console.log(ballCount2.isThreeStrikes()); // true
 
 ```js
 Parse.numberToArray(312); // [3, 1, 2]
+```
+
+### Exceptions
+
+#### `include(answer)`
+
+```
+
 ```
