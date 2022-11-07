@@ -20,4 +20,9 @@ function printStart() {
   start.print();
 }
 
-module.exports = { printStart };
+function printGameover() {
+  const gameover = new printMessage().setMessage(Message.correct);
+  gameover.print();
+}
+
+module.exports = { printStart, printGameover };
