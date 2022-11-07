@@ -49,6 +49,7 @@ class App {
         this.#initComputerNumbers(arr));
   }
   #takeUserNumbersInput() {
+    const checkUnique = (arr) => new Set(arr).size === 3;
     const checkUserNumbersInputValidity = (arr) => {
       if (arr.every((el) => !Number.isInteger(el) || el > 9 || el < 1))
         throw this.#ERROR_MSG.ONLY_NUMBERS;
