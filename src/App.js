@@ -108,18 +108,21 @@ class App {
       this.input();
     }
   }
+  askUserToContinue(input) {
+    if (input === "1") {
+      this.play();
+    } else if (input === "2") {
+      this.utils.Console.print("게임을 종료합니다.");
+      return;
+    } else {
+      throw new Error("예상치 못한 명령어입니다.");
+    }
+  }
   restart() {
     this.utils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
-        if (input === "1") {
-          this.play();
-        } else if (input === "2") {
-          this.utils.Console.print("게임을 종료합니다.");
-          return;
-        } else {
-          throw new Error("예상치 못한 명령어입니다.");
-        }
+        this.askUserToContinue(input);
       }
     );
   }
