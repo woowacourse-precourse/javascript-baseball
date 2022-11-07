@@ -27,6 +27,12 @@ const isOneToNine = (num) => {
   return /^[1-9]+$/.test(num);
 };
 
+const isDifferentDigitNumber = (num) => {
+  const numArr = [...String(num)];
+
+  return new Set(numArr).size == numArr.length ? true : false;
+};
+
 const game = () => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = num;
