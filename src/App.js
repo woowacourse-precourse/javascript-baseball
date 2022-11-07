@@ -1,11 +1,15 @@
+/* eslint-disable class-methods-use-this */
 const MissionUtils = require('@woowacourse/mission-utils');
 
-
 class App {
-  constructor () {}
+  constructor() {
+    this.computerNumber = 0;
+  }
 
-  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-  
+  start() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  }
+
   play() {}
 }
 
