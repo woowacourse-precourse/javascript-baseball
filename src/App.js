@@ -55,17 +55,17 @@ class App {
       this.endGame();
     }
     if (strikeCount && strikeCount !== 3) {
-      if (!ballCount) CONSOLE_UTIL.print(`${strikeCount}스트라이크`);
-      else {
-        CONSOLE_UTIL.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-      }
+      !ballCount
+        ? CONSOLE_UTIL.print(`${strikeCount}스트라이크`)
+        : CONSOLE_UTIL.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+
       return this.acceptUserNumber();
     }
     if (!strikeCount) {
-      if (!ballCount) CONSOLE_UTIL.print("낫싱");
-      else {
-        CONSOLE_UTIL.print(`${ballCount}볼`);
-      }
+      !ballCount
+        ? CONSOLE_UTIL.print("낫싱")
+        : CONSOLE_UTIL.print(`${ballCount}볼`);
+
       return this.acceptUserNumber();
     }
   }
@@ -76,7 +76,7 @@ class App {
       (answer) => {
         answer = Number(answer);
         if (answer !== 1 && answer !== 2) {
-          throw new Error("1 또는 2를 입력하세요");
+          throw new Error("1 또는 2를 입력하세요.");
         }
         if (answer === 1) {
           this.computerValue = [];
