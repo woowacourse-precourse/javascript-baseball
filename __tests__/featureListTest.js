@@ -1,6 +1,6 @@
 const App = require('../src/App');
 const Game = require('../src/game');
-const { RANDOM_NUMBER, MESSAGE } = require('../src/constants');
+const { RANDOM_NUMBER } = require('../src/constants');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -53,10 +53,25 @@ describe('기능 구현 목록 테스트', () => {
 
   test('유효하지 않은 값이 들어 왔을 때 에러처리', () => {
     const game = new Game();
-    const numbers = '1230';
+    const overlength = '1230';
+    const duplicatedNumber = '333';
+    const string = 'abc';
+    const includeZero = '072';
 
     expect(() => {
-      game.isValidInputNumber(numbers, RANDOM_NUMBER.RANGE);
+      game.isValidInputNumber(overlength, RANDOM_NUMBER.RANGE);
+    }).toThrow('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+
+    expect(() => {
+      game.isValidInputNumber(duplicatedNumber, RANDOM_NUMBER.RANGE);
+    }).toThrow('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+
+    expect(() => {
+      game.isValidInputNumber(string, RANDOM_NUMBER.RANGE);
+    }).toThrow('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
+
+    expect(() => {
+      game.isValidInputNumber(includeZero, RANDOM_NUMBER.RANGE);
     }).toThrow('1부터 9까지 서로 다른 숫자 3개를 입력해주세요');
   });
 
