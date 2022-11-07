@@ -113,6 +113,16 @@ class App {
   #exitApp() {
     Console.close();
   }
+  #continueGame() {
+    this.#takeUserNumbersInput();
+    const rstArr = this.#compareEachNumbers(
+      this.#getComputerNumbers(),
+      this.userNumbers
+    );
+    const rstStr = this.#getResult(rstArr);
+    this.#printResult(rstStr);
+    this.#handleGameOver(rstStr);
+  }
   play() {}
 }
 

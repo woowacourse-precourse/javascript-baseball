@@ -105,11 +105,11 @@
 
 ## 11. 게임 지속 기능(#continueGame) 구현
 
-- [ ] 1. [`#takeUserNumbersInput`](#3-1-사용자로부터-입력받는-기능takeusernumbersinput-구현) 호출
-- [ ] 2. [`#compareEachNumbers`](#4-사용자-입력-값과-상대방컴퓨터의-숫자-비교하는-기능compareeachnumbers-구현)에 `#getComputerNumbers`, `userNumbers` 인자로 넘기며 호출, 결과 배열 받음
-- [ ] 3. 받은 결과 배열을 [`#getResult`](#5-결과값을-반환하는-기능getresult-구현)에 넘기며 호출, 결과 문자열 받음
-- [ ] 4. 받은 결과 문자열을 [`#printResult`](#6-결과값을-출력하는-기능printresult-구현)에 넘기며 결과 출력
-- [ ] 5. 받은 결과 문자열을 [`#handleGameOver`](#7-게임-종료-기능handlegameover-구현)의 인자로 넘기며 호출
+- [x] 1. [`#takeUserNumbersInput`](#3-1-사용자로부터-입력받는-기능takeusernumbersinput-구현) 호출
+- [x] 2. [`#compareEachNumbers`](#4-사용자-입력-값과-상대방컴퓨터의-숫자-비교하는-기능compareeachnumbers-구현)에 `#getComputerNumbers`, `userNumbers` 인자로 넘기며 호출, 결과 배열 받음
+- [x] 3. 받은 결과 배열을 [`#getResult`](#5-결과값을-반환하는-기능getresult-구현)에 넘기며 호출, 결과 문자열 받음
+- [x] 4. 받은 결과 문자열을 [`#printResult`](#6-결과값을-출력하는-기능printresult-구현)에 넘기며 결과 출력
+- [x] 5. 받은 결과 문자열을 [`#handleGameOver`](#7-게임-종료-기능handlegameover-구현)의 인자로 넘기며 호출
 
 ## 12. 게임 시작 기능(#startGame) 구현
 
