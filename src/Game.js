@@ -28,7 +28,8 @@ class Game {
     for (let i = 0; i < length; i++) {
       if (userNum[i] === computerNum[i]) count++;
     }
-    if (count > 0) return `${count}${this.BALLCOUNT_HINT.BALL}`;
+
+    if (count > 0) return count;
   }
   countStrike(userNum, computerNum) {
     let count = 0;
@@ -36,14 +37,29 @@ class Game {
       if (computerNum[index] !== number && computerNum.includes(number))
         count++;
     });
-    if (count > 0) return `${count}${this.BALLCOUNT_HINT.STRIKE} `;
+
+    if (count > 0) return count;
   }
 
   ballCount(userNum, computerNum) {
+    let hint = this.BALLCOUNT_HINT.NOTHING;
     const countBall = this.countBall(userNum, computerNum, NUMBER.LENGTH);
     const countStrike = this.countStrike(userNum, computerNum);
 
-    const hint = countBall + countStrike;
+    if (countBall && countStrike) {
+      hint = `${countBall}${this.BALLCOUNT_HINT.BALL} ${countStrike}${this.BALLCOUNT_HINT.STRIKE}`;
+      return hint;
+    }
+
+    if (countBall) {
+      hint = `${countBall}${this.BALLCOUNT_HINT.BALL}`;
+      return hint;
+    }
+    if (countStrike) {
+      hint = `${countStrike}${this.BALLCOUNT_HINT.BALL}`;
+      return hint;
+    }
+
     return hint;
   }
 }
