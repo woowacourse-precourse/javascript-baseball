@@ -47,7 +47,7 @@ class App {
   }
 
   checkStrikeAndBallInputNumber(inputNumber) {
-    let [strike, ball] = [0.0];
+    let [strike, ball] = [0, 0];
     let splitInputNumber = [...inputNumber];
     splitInputNumber.forEach((number, index) => {
       const computerNumberIndex = this.computerNumber.indexOf(number);
