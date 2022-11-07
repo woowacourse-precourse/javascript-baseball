@@ -40,7 +40,7 @@ class App {
       MissionUtils.Console.print("낫싱");
   }
 
-  setNumbers() {
+  startGame() {
     let strikeCount;
     let ballCount;
     this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
@@ -54,7 +54,7 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.setNumbers();
+    this.startGame();
   }
 }
 
