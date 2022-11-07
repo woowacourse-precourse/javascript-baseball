@@ -85,3 +85,15 @@ describe("user Input Valid 에러 테스트", () => {
     });
   });
 });
+
+describe("game option validate 테스트", () => {
+  test("1,2 이 아닌 문자,숫자가 들어올경우", () => {
+    const inputs = [3, 4, 5, 7, 8, 9, "sqw", "aszcx", "h", -1, 0, 1.23];
+
+    inputs.map((input) => {
+      expect(() => {
+        App.validateUserGameOptionValueInput(input);
+      }).toThrow(ERROR_MESSAGES.ONLY_NUMBER_1_AND_2);
+    });
+  });
+});
