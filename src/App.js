@@ -66,7 +66,6 @@ class App {
     this.setHint(ball, strike);
 
     if (strike === 3) {
-      Console.print(GAME_END_SENTENCE);
       this.askRestart();
     } else {
       this.getUserNumber();
@@ -88,6 +87,7 @@ class App {
   }
 
   askRestart() {
+    Console.print(GAME_END_SENTENCE);
     Console.readLine(GAME_RESTART_SENTENCE, (answer) => {
       if (answer === '1') {
         this.play();
