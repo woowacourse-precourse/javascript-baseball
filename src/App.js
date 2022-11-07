@@ -1,5 +1,4 @@
-const Console = require("@woowacourse/mission-utils").Console;
-const Random = require("@woowacourse/mission-utils").Random;
+const { Console, Random } = require("@woowacourse/mission-utils");
 const CheckValidation = require("./components/checkValidation");
 const CheckBallCount = require("./components/checkBallCount");
 const PrintBallCount = require("./components/printBallCount");
@@ -65,5 +64,8 @@ class App {
     Console.close();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
