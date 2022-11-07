@@ -52,6 +52,21 @@ class Controller {
     // 문제가 없다면 다음 단계로
     this.getSingleTryResult();
   }
+
+  /**
+   * 결과값을 받아 게임이 끝났는지 확인한다.
+   * @param {string} singleTryResultComment [결과 string]
+   */
+  checkIsGameFinished(singleTryResultComment) {
+    // 정답이라면 정답이라 말하고 재시작 의사 input 을 받는다.
+    if (singleTryResultComment === "3스트라이크") {
+      this.view.printGameFinished();
+      this.view.getRestartInput();
+    }
+
+    // 정답이 아니라면 유저에게 다른 수 제시를 요구한다.
+    this.view.getUserGuessInput();
+  }
 }
 
 module.exports = Controller;
