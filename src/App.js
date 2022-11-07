@@ -118,7 +118,6 @@ class BaseballPlayTool {
       }
 
       if (userInput === NUMBER_CONSTANTS.END) {
-        MissionUtils.Console.print(NUMBER_CONSTANTS.END);
         return MissionUtils.Console.close();
       }
 
