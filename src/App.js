@@ -11,10 +11,13 @@ const generateComRandom = () => {
   return COMPUTER;
 };
 let COMPUTER
+let count=1
 
 class App {
   play() {
-    this.showMessage();
+    if(count===1){
+      this.showMessage();
+    }
     this.userInput();
     COMPUTER = generateComRandom();
   }
@@ -32,15 +35,16 @@ class App {
     let stringUserNumber = userNumber.split("").map((element) => {
       return Number(element);
     });
-    if (stringUserNumber.includes(NaN)) {
-        throw "숫자 입력해주세요";
+    if (stringUserNumber.includes(0) || stringUserNumber.includes(NaN) || stringUserNumber.length!==3) {
+      throw "1~9사이의 정수 입력해주세요"
     }
     let userNumberArray = [];
+    console.log(stringUserNumber);
     stringUserNumber.forEach((element) => {
       if (!userNumberArray.includes(element)) {
         userNumberArray.push(element);
       } else {
-        throw "중복된 수가 있습니다. 다시 입력하세요!";
+        throw "중복된 수가 있습니다";
       }
     });
     this.getBothArrays(userNumberArray);
@@ -82,9 +86,10 @@ class App {
 
   gameReplay() {
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 재시작하려면 1, 종료하려면 2를 입력하세요.",
       (gameSetNumber) => {
         if (+gameSetNumber === 1) {
+          count--
           this.play();
         } else if (+gameSetNumber === 2) {
           MissionUtils.Console.close()
