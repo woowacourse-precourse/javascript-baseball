@@ -26,7 +26,15 @@ class App {
     }
     ball -= strike;
 
-    return [strike, ball];
+    return { strike, ball };
+  }
+
+  getResultMessage(strike, ball) {
+    if (!strike && ball) return `${ball}"볼"`;
+    if (strike && !ball) return `${strike}"스트라이크`;
+    if (strike && ball) return `${strike}"스트라이크"${ball}"볼"`;
+
+    return "낫싱";
   }
 
   readInput(solution) {
