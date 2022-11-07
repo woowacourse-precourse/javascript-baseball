@@ -2,6 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const COMPUTER_NUMBER_LENGTH = 3;
 
+const STRIKE = "스트라이크";
+const BALL = "볼";
+
 const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 :";
 
 const LENGTH_ERROR_MESSAGE = "3자리의 수를 입력해주세요.";
@@ -95,6 +98,26 @@ class App {
     });
 
     return { ball, strike };
+  }
+
+  printHint(ball, strike) {
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print("낫싱");
+      return;
+    }
+
+    if (ball > 0 && strike === 0) {
+      MissionUtils.Console.print(`${ball}${BALL}`);
+      return;
+    }
+
+    if (ball === 0 && strike > 0) {
+      MissionUtils.Console.print(`${strike}${STRIKE}`);
+      return;
+    }
+
+    if (ball > 0 && strike > 0)
+      MissionUtils.Console.print(`${ball}${BALL} ${strike}${STRIKE}`);
   }
 }
 
