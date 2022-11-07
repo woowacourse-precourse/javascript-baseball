@@ -5,10 +5,26 @@ class App {
         this.computerNumberArray = [];
     }
     play() {
+        this.startGame();
+        this.restartFinishGame();
+    }
+
+    // 게임 시작 함수
+    startGame() {
         MissionUtils.Console.print('숫자 야구 게임을 시작합니다');
         this.computerNumberArray = this.pickRandomThreeNumbers();
-        console.log(this.computerNumberArray);
         this.pickRandomNumberUser();
+    }
+
+    // 재시작 함수
+    restartFinishGame(number) {
+        if (number === 1) {
+            this.computerNumberArray = this.pickRandomThreeNumbers();
+            this.pickRandomNumberUser();
+        }
+        if (number === 2) {
+            MissionUtils.Console.close();
+        }
     }
 
     // 랜덤한 3개의 숫자를 뽑는 함수
@@ -102,6 +118,7 @@ class App {
     checkRetry(number, length) {
         if (length === 1 && (Number(number) < 1 || Number(number) > 2))
             throw '오류입니다.';
+        else this.restartFinishGame(Number(number));
     }
 }
 let app = new App();
