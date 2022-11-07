@@ -84,4 +84,12 @@ describe('isStrike()', () => {
 
     expect(app.isFinish()).toBeFalsy();
   });
+
+  test('3을 제외한 나머지를 전달하면 false를 반환한다.', () => {
+    const app = new App();
+
+    expect(app.isStrike(1)).toBeFalsy();
+    expect(app.isStrike(2)).toBeFalsy();
+    expect(app.isStrike(4)).toBeFalsy();
+  });
 });
