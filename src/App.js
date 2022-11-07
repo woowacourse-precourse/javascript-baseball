@@ -11,6 +11,8 @@ class App {
   #gameState;
   #computerAnswer = [];
   #userInput;
+  #strikeCount=0
+  #ballCount=0
 
   constructor() {
     this.#gameState = GAME_START;
@@ -21,8 +23,6 @@ class App {
     console.log(this.#computerAnswer);
 
     this.#inputFromUser();
-
-    //MissionUtils.Console.close();
   }
 
   //private 처리
@@ -54,9 +54,7 @@ class App {
         return this.#inputFromUser();
       }
 
-      this.#userInput = this.#inputToArray(input)
-
-      
+      this.#userInput = this.#inputToArray(input);
 
       MissionUtils.Console.close();
     });
@@ -64,7 +62,27 @@ class App {
     return;
   }
 
-  #
+  #compareTwoArray(){
+    [this.#strikeCount,this.#ballCount]=[0,0]
+    
+    for(let comIdx=0; comIdx<#computerAnswer.length;comIdx++){
+      for(let userIdx=0; userIdx<#userInput.length;userIdx++){
+
+        this.#compareTwoNumber(comIdx,userIdx)
+      }
+    }
+  }
+
+  #compareTwoNumber(comIdx, userIdx){
+    if(comIdx===userIdx
+      &&this.#computerAnswer[comIdx]===this.#userInput[userIdx]){
+        this.#strikeCount++;
+    }
+    if(comIdx!==userIdx
+      &&this.#computerAnswer[comIdx]===this.#userInput[userIdx]){
+        this.#ballCount++;
+      }
+  }
 
   #inputToArray(input) {
     return input.split('');
@@ -90,5 +108,7 @@ class App {
   }
 }
 
+const app = new App();
+app.play();
 
 module.exports = App;
