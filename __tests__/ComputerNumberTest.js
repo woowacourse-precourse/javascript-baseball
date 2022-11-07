@@ -1,4 +1,4 @@
-const getComputerNumber = require("../src/modules/getComputerNumber.js");
+const getComputerNumber = require("../src/modules/getComputerNumber");
 const GAME_NUMBER_LENGTH = 3;
 
 describe("컴퓨터 입력값 유효성 검사 테스트", () => {

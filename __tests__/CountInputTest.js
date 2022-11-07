@@ -1,5 +1,4 @@
-const countInput = require("../src/modules/countInput.js");
-const App = require("../src/App.js");
+const countInput = require("../src/modules/countInput");
 
 describe("스트라이크와 볼 갯수 카운트 기능 테스트", () => {
   test(`countInput 볼 카운트 확인`, () => {

@@ -1,9 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const isValidUser = require("./modules/isValidUser.js");
-const getComputerNumber = require("./modules/getComputerNumber.js");
-const countInput = require("./modules/countInput.js");
-const printResult = require("./modules/printResult.js");
-const isRestartNumber = require("./modules/isRestartNumber.js");
+const isValidUser = require("./modules/isValidUser");
+const getComputerNumber = require("./modules/getComputerNumber");
+const countInput = require("./modules/countInput");
+const printResult = require("./modules/printResult");
+const isRestartNumber = require("./modules/isRestartNumber");
 
 const mConsole = MissionUtils.Console;
 const GAME_NUMBER_LENGTH = 3;
