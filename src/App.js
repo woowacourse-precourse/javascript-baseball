@@ -1,94 +1,118 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-let CORRECT_NUMBER = [];
-
-function makeCorrectNumber() {
-  CORRECT_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-}
-
-let ANSWER_NUMBER = [];
-
-function putNumber() {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-    ANSWER_NUMBER = answer.split("").map(Number);
-    numberValidate(answer);
-    comparingNumber(answer);
-  });
-}
-
-function numberValidate(number) {
-  if (number.length !== 3) {
-    throw "정확한 값을 입력하세요!";
-  } else if (ANSWER_NUMBER.includes(0)) {
-    throw "정확한 값을 입력하세요!";
-  }
-}
-
-function comparingNumber() {
-  if (JSON.stringify(ANSWER_NUMBER) === JSON.stringify(CORRECT_NUMBER)) {
-    MissionUtils.Console.print("3스트라이크");
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    gameWin();
-  } else {
-    notWin();
-  }
-}
-
-function gameWin() {
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (answer) => {
-      if (answer === "1") {
-        makeCorrectNumber();
-        console.log(CORRECT_NUMBER);
-        putNumber();
-      } else if (answer === "2") {
-        MissionUtils.Console.print("게임 종료");
-      }
-    }
-  );
-}
-
-function notWin() {
-  let STRIKE_NUMBER = [];
-  let BALL_NUMBER = [];
-
-  ANSWER_NUMBER.map((el, index) => {
-    findBallandStrike(el, index);
-  });
-
-  if (STRIKE_NUMBER.length === 0 && BALL_NUMBER.length === 0) {
-    MissionUtils.Console.print("낫싱");
-  } else if (STRIKE_NUMBER.length !== 0 && BALL_NUMBER.length === 0) {
-    MissionUtils.Console.print(`${STRIKE_NUMBER.length} 스트라이트`);
-  } else if (STRIKE_NUMBER.length == 0 && BALL_NUMBER.length !== 0) {
-    MissionUtils.Console.print(`${BALL_NUMBER.length} 볼`);
-  } else {
-    MissionUtils.Console.print(
-      `${BALL_NUMBER.length} 볼 ${STRIKE_NUMBER.length} 스트라이트`
-    );
-  }
-  STRIKE_NUMBER = [];
-  BALL_NUMBER = [];
-  putNumber();
-}
-
-function findBallandStrike(el, index) {
-  if (ANSWER_NUMBER[index] === CORRECT_NUMBER[index]) {
-    STRIKE_NUMBER.push(el);
-  } else if (
-    CORRECT_NUMBER.filter((el) => el !== CORRECT_NUMBER[index]).includes(el)
-  ) {
-    BALL_NUMBER.push(el);
-  }
-}
+const START_FLAG = "1";
+const END_FLAG = "2";
 
 class App {
+  constructor() {
+    this.computerNumber = [];
+    this.userNumber = [];
+    this.strikeNumber = [];
+    this.ballNumber = [];
+  }
+
+  startGame() {
+    this.makeCorrectNumber();
+    console.log(this.computerNumber);
+    this.putNumber();
+  }
+
+  makeCorrectNumber() {
+    this.computerNumber = [];
+    while (this.computerNumber.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computerNumber.includes(number)) {
+        this.computerNumber.push(number);
+      }
+    }
+  }
+
+  putNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
+      this.userNumber = answer.split("").map(Number);
+      this.numberValidate(answer);
+      this.comparingNumber();
+    });
+  }
+
+  numberValidate(answer) {
+    if (
+      this.userNumber.length !== 3 &&
+      answer !== START_FLAG &&
+      answer !== END_FLAG
+    ) {
+      throw "3개의 숫자만 입력하세요";
+    }
+    if (this.userNumber.includes(0)) {
+      throw "0이 아닌수를 입력하세요!";
+    }
+    if (new Set(this.userNumber).size < this.userNumber.length) {
+      throw "서로다른 수를 입력하세요!";
+    }
+  }
+
+  comparingNumber() {
+    if (
+      JSON.stringify(this.userNumber) === JSON.stringify(this.computerNumber)
+    ) {
+      this.gameWin();
+    } else {
+      this.notWin();
+    }
+  }
+
+  gameWin() {
+    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (answer === START_FLAG) {
+          this.startGame();
+        } else if (answer === END_FLAG) {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
+
+  notWin() {
+    this.userNumber.map((el, index) => {
+      this.findBallandStrike(el, index);
+    });
+
+    if (this.strikeNumber.length === 0 && this.ballNumber.length === 0) {
+      MissionUtils.Console.print("낫싱");
+    } else if (this.strikeNumber.length !== 0 && this.ballNumber.length === 0) {
+      MissionUtils.Console.print(`${this.strikeNumber.length}스트라이크`);
+    } else if (this.strikeNumber.length === 0 && this.ballNumber.length !== 0) {
+      MissionUtils.Console.print(`${this.ballNumber.length}볼`);
+    } else {
+      MissionUtils.Console.print(
+        `${this.ballNumber.length}볼 ${this.strikeNumber.length}스트라이크`
+      );
+    }
+    this.strikeNumber = [];
+    this.ballNumber = [];
+    this.putNumber();
+  }
+
+  findBallandStrike(el, index) {
+    if (this.userNumber[index] === this.computerNumber[index]) {
+      this.strikeNumber.push(el);
+    } else if (
+      this.computerNumber
+        .filter((el) => el !== this.computerNumber[index])
+        .includes(el)
+    ) {
+      this.ballNumber.push(el);
+    }
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    makeCorrectNumber();
-    console.log(CORRECT_NUMBER);
-    putNumber();
+
+    this.startGame();
   }
 }
 
