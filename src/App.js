@@ -32,13 +32,16 @@ class App {
   }
 
   askUserRestartOrNot() {
-    const isInputNotValid = (input) => input !== GAME_VALUE.RESTART && input !== GAME_VALUE.EXIT;
-
     readLine(GAME_MESSAGE.ASK_GAME_CONTINUE_OR_EXIT, (response) => {
-      if (response === GAME_VALUE.RESTART) this.play();
-      if (response === GAME_VALUE.EXIT) close();
-      if (isInputNotValid(response)) throw Error(GAME_MESSAGE.NOTIFY_INPUT_WRONG_NUMBER);
+      this.updateNextPhaseDependingResponse(response);
     });
+  }
+
+  updateNextPhaseDependingResponse(response) {
+    const isInputNotValid = (input) => input !== GAME_VALUE.RESTART && input !== GAME_VALUE.EXIT;
+    if (response === GAME_VALUE.RESTART) this.play();
+    if (response === GAME_VALUE.EXIT) close();
+    if (isInputNotValid(response)) throw Error(GAME_MESSAGE.NOTIFY_INPUT_WRONG_NUMBER);
   }
 }
 
