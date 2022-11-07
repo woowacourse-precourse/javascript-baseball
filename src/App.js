@@ -87,7 +87,7 @@ class App {
   }
 
   validate(userNumber) {
-    const IS_WRONG_INPUT = isNaN(userNumber) || userNumber.length !== 3;
+    const IS_WRONG_INPUT = Number.isNaN(userNumber) || userNumber.length !== 3;
     const HAS_SAME_NUMBER =
       userNumber[0] === userNumber[1] ||
       userNumber[1] === userNumber[2] ||
