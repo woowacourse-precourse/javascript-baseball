@@ -58,7 +58,14 @@ function isValidInput(input) {
   if (!regex.test(input) || input.length !== 3) {
     throw new Error("유효한 입력값이 아닙니다.");
   }
+
+  const array = [...input];
+  const arraySet = new Set(array);
+  if (array.length !== arraySet.size) {
+    throw new Error("입력에 중복값이 포함되어 있습니다.");
+  }
 }
+
 
 
 function playGame() {
