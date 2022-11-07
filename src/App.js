@@ -20,6 +20,15 @@ function checkException(number) {
   }
 }
 
+function checkSameNumber(number) {
+  for (let i = 1; i < number.length; i++) {
+    if (number.indexOf(number.charAt(i)) != i) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function getRandomNumber() {
   const computer = [];
   while (computer.length < 3) {
