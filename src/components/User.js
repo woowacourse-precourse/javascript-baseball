@@ -1,32 +1,14 @@
+const { Console } = require('@woowacourse/mission-utils');
 const { NUMBER_LIMIT } = require('../constant/baseball');
 
 class User {
   validateInput(userInput) {
-    return (
-      this.validateInputLength(userInput) &&
-      this.validateInputType(userInput) &&
-      this.validateInputRange(userInput) &&
-      this.validateInputDuplicated(userInput)
-    );
-  }
+    const isInputLengthValid = userInput.length === NUMBER_LIMIT;
+    const isInputTypeValid = /\d/.test(userInput);
+    const isInputRangeValid = /[1-9]/g.test(userInput);
+    const isInputNotDuplicated = new Set([...userInput]).size === NUMBER_LIMIT;
 
-  validateInputLength(userInput) {
-    return userInput.length === NUMBER_LIMIT;
-  }
-
-  validateInputType(userInput) {
-    const typeRegex = /\d/;
-    return typeRegex.test(userInput);
-  }
-
-  validateInputRange(userInput) {
-    const rangeRegex = /[1-9]/g;
-    return rangeRegex.test(userInput);
-  }
-
-  validateInputDuplicated(userInput) {
-    const isDuplicated = new Set([...userInput]).size !== NUMBER_LIMIT;
-    return isDuplicated === false;
+    return isInputLengthValid && isInputTypeValid && isInputRangeValid && isInputNotDuplicated;
   }
 }
 
