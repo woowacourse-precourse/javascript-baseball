@@ -106,6 +106,16 @@ class App {
       }
     });
   };
+
+  gameRestart() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+      if (input == 1) {
+        this.play();
+      } else if (input == 2) {
+        MissionUtils.Console.close();
+      }
+    });
+  };
 }
 
 module.exports = App;
