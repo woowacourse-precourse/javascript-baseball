@@ -41,6 +41,11 @@ describe("게임 시작", () => {
         expect(number).toBeLessThanOrEqual(9);
     })
   });
+  test("컴퓨터 숫자 중복 존재 여부 확인", () => {
+    const computer = new Computer();
+    computer.setComputerNumbers();
+    expect([...new Set(computer.getComputerNumbers())]).toHaveLength(3);
+  });
 
   
 });
