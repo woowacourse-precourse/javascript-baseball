@@ -45,3 +45,26 @@ function getUserGuess(userNumArr, compNumArr) {
     compareUserGuessToCompNum(userNumArr, compNumArr);
   });
 }
+
+function compareUserGuessToCompNum(userNumArr, compNumArr) {
+  let strike = 0;
+  let ball = 0;
+  for (let i = 0; i < userNumArr.length; i += 1) {
+    if (userNumArr[i] === compNumArr[i]) {
+      strike += 1;
+    } else if (compNumArr.includes(userNumArr[i])) {
+      ball += 1;
+    }
+  }
+  if (strike === 3) {
+    MissionUtils.Console.print(
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+    getUserReplayOrFinish(); // "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+  } else if (ball === 0 && strike === 0) {
+    MissionUtils.Console.print("낫싱");
+  } else {
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+  }
+  getUserGuess([], compNumArr); // "숫자를 입력해주세요 : "
+}
