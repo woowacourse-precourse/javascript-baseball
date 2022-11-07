@@ -96,30 +96,21 @@ class App {
         strike++;
       }
     });
-    return [
-      {
-        name: SCORES.BALL,
-        score: ball,
-      },
-      {
-        name: SCORES.STRIKE,
-        score: strike,
-      },
-    ];
+    return { ball, strike };
   }
 
-  printScore(scoreList) {
-    let newScoreList = scoreList.filter((item) => {
-      return item.score >= 1;
-    });
-    let result = newScoreList.map((item) => {
-      return `${item.score}${item.name}`;
-    });
-    result = result.join(" ");
-
-    if (result.length === 0) {
-      result = SCORES.NOTHING;
+  printScore({ ball, strike }) {
+    let result = [];
+    if (ball > 0) {
+      result.push(`${ball}${SCORES.BALL}`);
     }
+    if (strike > 0) {
+      result.push(`${strike}${SCORES.STRIKE}`);
+    }
+    if (result.length === 0) {
+      result.push(SCORES.NOTHING);
+    }
+    result = result.join(" ");
 
     MissionUtils.Console.print(result);
     return result;
