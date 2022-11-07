@@ -10,14 +10,15 @@ class App {
   }
 
   getUserInput() {
+    const computerNumbers = this.createComputerNumber();
+
     Console.readLine("숫자를 입력해주세요 :", (answer) => {
-      return this.checkAnswer(answer);
+      return this.checkAnswer(answer, computerNumbers);
     });
   }
 
-  checkAnswer(userNumber) {
+  checkAnswer(userNumber, computerNumbers) {
     const userNumbers = userNumber.split("").map(Number);
-    const computerNumbers = this.createComputerNumber();
 
     if (isNaN(userNumber) === true) {
       throw "숫자를 입력해주세요.";
@@ -26,7 +27,7 @@ class App {
       throw "3자리로 입력해주세요.";
     }
     if (new Set(userNumbers).size !== 3) {
-      throw "서로 다른 값을 입력해주세요";
+      throw "서로 다른 값을 입력해주세요.";
     }
 
     return this.compareNumber(userNumbers, computerNumbers);
@@ -55,7 +56,7 @@ class App {
 
       Console.print(message);
       Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-        return this.checkAnswer(answer);
+        return this.checkAnswer(answer, computerNumbers);
       });
     }
   }
@@ -71,7 +72,7 @@ class App {
         Console.close();
         return;
       }
-      throw new Error("옳바른 값을 입력해주세요");
+      throw new Error("옳바른 값을 입력해주세요.");
     });
   }
 
