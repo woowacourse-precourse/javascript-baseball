@@ -1,9 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  answer;
-  numberInput;
-
   play() {
     this.gameStartMessage();
     this.computerRandomNumber();
@@ -66,6 +63,15 @@ class App {
     }
 
     MissionUtils.Console.print(`${result}`);
+  }
+
+  resultAnswer(result) {
+    MissionUtils.Console.print(result);
+    if (result !== "3스트라이크") {
+      this.getUserNumberInput();
+    } else if (result === "3스트라이크") {
+      this.gameEndMessage();
+    }
   }
 
   gameEndMessage() {
