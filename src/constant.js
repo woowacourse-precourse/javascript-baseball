@@ -11,7 +11,7 @@ const OUTPUT_MESSAGE = Object.freeze({
   BALL: '볼',
   STRIKE: '스트라이크',
   RESTART_ENDGAME_ENTER_NUMBER: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n',
-  START_GAME: '게임을 시작합니다',
+  START_GAME: '숫자 야구 게임을 시작합니다',
 });
 
 const GENERATE_RANGE = Object.freeze({
