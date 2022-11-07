@@ -27,9 +27,19 @@ class App {
     return inputList;
   }
 
+  setIsValid(inputList) {
+    const inputListLength = inputList.length;
+    const firstCondition = /^[1-9]+$/.test(inputList.join(''));
+    const secondCondition = inputListLength !== new Set(inputList).size;
+    const thirdCondition = inputListLength === MAX_ANSWER_COUNT;
+    return firstCondition && secondCondition && thirdCondition;
+  }
+
   startGame(answer) {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const inputList = this.getPlayerInputList();
+    const isValid = this.setIsValid(inputList);
+    if (!isValid) throw new Error('유효하지 않은 입력입니다.');
   }
 }
 
