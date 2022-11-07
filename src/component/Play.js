@@ -25,6 +25,12 @@ class Play {
 
     return { countStrike, countBall };
   }
+
+  printMessage(countStrike, countBall) {
+    if (countStrike === 0 && countBall === 0) {
+      return Console.print("낫싱");
+    }
+  }
 }
 
 module.exports = Play;
