@@ -19,6 +19,13 @@ class Validation {
       throw INGAME_MESSAGE.ERROR;
     }
   }
+
+  checkRepeat(input) {
+    const noRepeat = [...new Set(input)];
+    if (noRepeat.length != 3) {
+      throw INGAME_MESSAGE.ERROR;
+    }
+  }
 }
 
 module.exports = Validation;
