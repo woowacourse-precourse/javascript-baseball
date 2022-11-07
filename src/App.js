@@ -19,6 +19,7 @@ function checkDuplicate(answer) {
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
+    this.userAnswer = [];
     this.strike = 0;
     this.ball = 0;
   }
@@ -26,7 +27,8 @@ class App {
   createRandomNumber() {
     const computerRandomNumber = [];
     while (computerRandomNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      let number = MissionUtils.Random.pickNumberInRange(1, 9);
+      number = number.toString();
       if (!computerRandomNumber.includes(number)) {
         computerRandomNumber.push(number);
       }
