@@ -75,6 +75,15 @@ class App {
     });
     return numberOfBalls;
   }
+
+  getNumberOfStrikes(computerNumber, userNumber) {
+    let numberOfStrikes = 0;
+    computerNumber.split('').forEach((digit, idx) => {
+      if (userNumber.includes(digit) && computerNumber[idx] === userNumber[idx])
+        numberOfStrikes += 1;
+    });
+    return numberOfStrikes;
+  }
 }
 const app = new App();
 app.play();
