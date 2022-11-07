@@ -59,4 +59,13 @@ describe('isStrike()', () => {
 
     expect(app.isStrike(3)).toBeTruthy();
   });
+
+  test('3을 전달하면 3개의 숫자를 모두 맞히셨습니다! 게임 종료 문구를 출력한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+
+    app.isStrike(3);
+
+    expect(logSpy).toHaveBeenCalledWith('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  });
 });
