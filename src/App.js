@@ -93,9 +93,15 @@ class App {
   checkGameResult(result) {
     if (result === '3스트라이크') {
       this.printWinMessage(result);
+      this.proceedGame();
     } else {
       this.printMessage(result);
     }
+  }
+  proceedGame() {
+    MissionUtils.Console.readLine('', answer => {
+      MissionUtils.Console.print(answer);
+    });
   }
 
   printWinMessage(result) {
