@@ -3,14 +3,15 @@ const printMessage = require("./PrintMessage.js");
 const generateRandNum = require("./GenerateRandomNumber");
 const exception = require("./HandleException.js");
 
+printMessage.printGameStart();
+
 class App {
   constructor() {
-    this.userNum;
-    this.computerNum;
+    this.userNum = "";
+    this.computerNum = [];
   }
 
   play() {
-    printMessage.printGameStart();
     this.GenerateComputerNum();
     this.getUserInputNum();
   }
@@ -70,14 +71,14 @@ class App {
   gameRestartOrEnd() {
     const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
     MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
-      if(userInput == 1) {
+      if(userInput === '1') {
         this.play();
       }
-      else if(userInput == 2) {
+      else if(userInput === '2') {
         MissionUtils.Console.close();
       }
       else{
-        throw new Error("1 또는 2가 입력되지 않았습니다.")
+        throw new Error("1 또는 2가 입력되지 않았습니다.");
       }
     });
   }
