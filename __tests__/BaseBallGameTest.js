@@ -66,4 +66,13 @@ describe("숫자 야구 게임 메서드 테스트", () => {
       }
     );
   });
+
+  test('유저 응답 필터링 하여 배열로 반환', () => {
+    const { userAnswerToArray } = baseBallGame;
+
+    expect(userAnswerToArray('1 2   3')).toEqual([1,2,3]);
+    expect(userAnswerToArray('1,2,3')).toEqual([1,2,3]);
+    expect(userAnswerToArray('a,b,c')).toEqual([NaN,NaN,NaN]);
+    expect(userAnswerToArray('1,2,3 4')).toEqual([1,2,3,4]);  
+  });
 })
