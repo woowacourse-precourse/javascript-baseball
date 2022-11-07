@@ -101,6 +101,14 @@ class App {
   proceedGame() {
     MissionUtils.Console.readLine('', answer => {
       MissionUtils.Console.print(answer);
+      if (answer === '1') {
+        this.randomList = this.makeRandomNumber();
+        this.gameCourse();
+      } else if (answer === '2') {
+        MissionUtils.Console.close();
+      } else {
+        throw new Error('잘못된 입력입니다.');
+      }
     });
   }
 
