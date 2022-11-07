@@ -14,7 +14,12 @@ class App {
   enterUserInput(computerValue) {
     Console.readLine("숫자를 입력해주세요 : ", (userInputValue) => {
       // 여기서 입력된 값을 비교하는 함수를 따로 만든다.
-      this.getStrikeAndBall(computerValue, userInputValue);
+      const checkNum = /^[1-9]{3}/;
+      if (!checkNum.test(userInputValue)) {
+        throw new Error("잘못된 값 입니다.");
+      } else {
+        this.getStrikeAndBall(computerValue, userInputValue);
+      }
     });
   }
 
@@ -27,8 +32,10 @@ class App {
         (userChoiceInput) => {
           if (userChoiceInput == "1") {
             this.play();
-          } else {
+          } else if (userChoiceInput == "2") {
             Console.close();
+          } else {
+            throw new Error("잘못된 값 입니다.");
           }
         }
       );
