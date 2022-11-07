@@ -2,7 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
 
 class App {
-  play() { }
+  play() {
+    printMessage('숫자 야구 게임을 시작합니다.');
+    let answer = generateAnswer();
+    game(answer);
+  }
 }
 
 function printMessage(sentence) {
