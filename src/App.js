@@ -105,6 +105,10 @@ class App {
     if (input === '2') {
       MissionUtils.Console.close();
     }
+
+    if (input !== '1' || '2') {
+      throw Error('입력값이 잘못되었습니다.');
+    }
   }
 
   play() {
