@@ -3,8 +3,8 @@ const {
   Console: { readLine, print, close },
   Random,
 } = MissionUtils;
-const inputValidation = require("./inputValidation");
-const outputValidation = require("./outputValidation");
+const inputValidation = require("./validation/inputValidation");
+const outputValidation = require("./validation/outputValidation");
 
 class App {
   constructor(inputNum, randomNum) {
@@ -54,7 +54,24 @@ class App {
     }
     return this.randomNum;
   }
+
+  nothing() {
+    for (let index = 0; index < 3; index++) {
+      this.inputNum[index] != this.randomNum[index];
+      return false;
+    }
+    return true;
+  }
+
+  ball() {
+
+  }
+
+  strike() {
+    
+  }
 }
+
 const startGame = new App();
 startGame.play();
 
