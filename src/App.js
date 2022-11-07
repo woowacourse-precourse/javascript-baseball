@@ -10,18 +10,7 @@ function createAnswer() {
   }
   return computer.join('');
 }
-function askRestart() {
-  MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-  MissionUtils.Console.readLine('', select => {
-    if (select === '1') {
-      return;
-    }
-    if (select === '2') {
-      return;
-    }
-    throw Object.assign(new Error(), { message: '잘못된 입력입니다. 1 또는 2만 입력 가능합니다.' });
-  });
-}
+
 class App {
   constructor() {
     this.answer = undefined;
@@ -32,8 +21,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.answer = createAnswer();
-    return this.getUserInput();
+    this.start();
   }
 
   getUserInput() {
@@ -62,7 +50,7 @@ class App {
     this.strike = 0;
     if (this.answer === this.input) {
       MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다!');
-      return askRestart();
+      return this.askRestart();
     }
     for (let index = 0; index < 3; index += 1) {
       this.countBallOrStrike(index);
@@ -86,6 +74,29 @@ class App {
     if (this.ball > 0 && this.strike > 0) message += ' ';
     if (this.strike > 0) message += `${this.strike}스트라이크`;
     MissionUtils.Console.print(message);
+  }
+
+  askRestart() {
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.readLine('', select => {
+      if (select === '1') {
+        return this.start();
+      }
+      if (select === '2') {
+        return App.end();
+      }
+      throw Object.assign(new Error(), { message: '잘못된 입력입니다. 1 또는 2만 입력 가능합니다.' });
+    });
+  }
+
+  start() {
+    this.answer = createAnswer();
+    return this.getUserInput();
+  }
+
+  static end() {
+    MissionUtils.Console.print('게임 종료');
+    MissionUtils.Console.close();
   }
 }
 const app = new App();
