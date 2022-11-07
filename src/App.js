@@ -27,10 +27,10 @@ class App {
           return `${num}개의 숫자를 모두 맞히셨습니다!`;
         },
         BALL(num) {
-          return `${num}볼`;
+          return (num && `${num}볼`) || "";
         },
         STRIKE(num) {
-          return `${num}스트라이크`;
+          return (num && `${num}스트라이크`) || "";
         },
       },
     };
@@ -130,8 +130,22 @@ class App {
     this.compareNumbers();
   }
 
-  runGames() {
+  runGame() {
     readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+  }
+
+  getGameResult({ sameDigitCount, sameNumberCount }) {
+    if (!sameDigitCount && !sameNumberCount) {
+      return this.MESSAGES.RESULT.NOTHING;
+    }
+
+    if (sameDigitCount === this.count && sameNumberCount === this.count) {
+      return this.MESSAGES.RESULT.CORRECT();
+    }
+
+    return `${this.MESSAGES.RESULT.BALL(
+      sameNumberCount
+    )} ${this.MESSAGES.RESULT.STRIKE(sameDigitCount)}`;
   }
 
   compareNumbers() {
@@ -150,13 +164,12 @@ class App {
       }
     });
 
-    console.log(sameDigitCount, sameNumberCount);
-    return { sameDigitCount, sameNumberCount };
+    print(this.getGameResult({ sameDigitCount, sameNumberCount }));
   }
 
   newGame() {
     this.createGameNumbers();
-    this.runGames();
+    this.runGame();
   }
 
   startGame() {
