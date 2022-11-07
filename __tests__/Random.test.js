@@ -21,4 +21,12 @@ describe('getThreeRandomArray()', () => {
       expect(typeof target).toBe('number');
     });
   });
+
+  test('1부터 9까지 범위의 값을 반환한다.', () => {
+    const random = new Random();
+
+    random.getThreeRandomArray().forEach((target) => {
+      expect(target >= 1 && target <= 9).toBeTruthy();
+    });
+  });
 });
