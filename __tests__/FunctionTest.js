@@ -105,7 +105,7 @@ describe("기능 테스트", () => {
     expect(case3).toEqual(3);
   });
 
-  test("카운트 결과를 사용자에게 보여주는 기능", () => {
+  test("사용자에게 보여줄 기능", () => {
     const app = new App();
     const case0 = app.makeCountMessage(app.decideCount("123", "456")); // 낫싱
     const case1 = app.makeCountMessage(app.decideCount("123", "156")); // 1스트라이크
