@@ -37,6 +37,14 @@ class App {
     return "낫싱";
   }
 
+  askRestart() {
+    Console.readLine(MESSAGE.RESTART, (userinput) => {
+      if (userinput !== 1 || userinput !== 2) {
+        return this.throwError();
+      }
+    });
+  }
+
   readInput(solution) {
     Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
       const inputError = new UserInput(userinput);
@@ -50,6 +58,7 @@ class App {
         this.readInput(solution);
       }
       this.print(MESSAGE.GAME_END);
+
       Console.close();
     });
   }
