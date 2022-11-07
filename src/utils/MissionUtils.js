@@ -121,6 +121,7 @@ const printGameResult = (countStrike, countBall, computers) => {
     printMessage(`${countBall + BALL} ${countStrike + STRIKE}`);
     getUserNumber(computers, REQUIRE_NUMBER);
   } else if (countStrike === 3) {
+    printMessage(countStrike + STRIKE);
     printMessage(GAME_END);
     printMessage(RETRY_OR_END);
     retryOrEnd();
