@@ -94,6 +94,18 @@ class App {
   #handleGameOver(str) {
     this.#setIsUserWon(str === "3스트라이크");
   }
+  #askRestart() {
+    Console.readLine(this.#GAME_MSG.ASK_RESTART, (input) => {
+      try {
+        const trimmed = +input.trim();
+        if (trimmed !== 1 && trimmed !== 2)
+          throw this.#ERROR_MSG.ONLY_ONE_OR_TWO;
+        this.#setIsStartGame(trimmed === 1);
+      } catch (e) {
+        this.#handleException(e);
+      }
+    });
+  }
   play() {}
 }
 

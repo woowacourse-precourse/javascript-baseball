@@ -88,11 +88,11 @@
 
 ## 8. 재시작 묻는 기능(#askRestart) 구현
 
-- [ ] 1. #GAME_MSG.ASK_RESTART 출력하며 1 or 2 입력(`Console.readLine`을 이용) 받음
-  - [ ] 1.1 1일 경우 `#setIsStartGame` true
-  - [ ] 1.1 2일 경우 `#setIsStartGame` false
-- [ ] 2. 입력 예외 사항(1,2 이외의 값일 경우)일 경우 `throw` #ERROR_MSG.ONLY_ONE_OR_TWO
-  - [ ] 2.1 catch에서 [`#handleException`](#9-에러-처리-기능handleexception-구현) 호출
+- [x] 1. #GAME_MSG.ASK_RESTART 출력하며 1 or 2 입력(`Console.readLine`을 이용) 받음
+  - [x] 1.1 1일 경우 `#setIsStartGame` true
+  - [x] 1.1 2일 경우 `#setIsStartGame` false
+- [x] 2. 입력 예외 사항(1,2 이외의 값일 경우)일 경우 `throw` #ERROR_MSG.ONLY_ONE_OR_TWO
+  - [x] 2.1 catch에서 [`#handleException`](#9-에러-처리-기능handleexception-구현) 호출
 
 ## 9. 에러 처리 기능(#handleException) 구현
 
