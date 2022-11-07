@@ -4,17 +4,17 @@ const calculateScore = require("./CalculateScore");
 const scoreToJudgeMessageMap = require("./ScoreToJudgeMessageMap");
 
 class App {
-  #nbrOfComputer;
+  #numberOfComputer;
 
-  #nbrOfTryGuess;
+  #numberOfTryGuess;
 
   #message;
 
   #score;
 
   constructor() {
-    this.#nbrOfComputer = [];
-    this.#nbrOfTryGuess = [];
+    this.#numberOfComputer = [];
+    this.#numberOfTryGuess = [];
     this.#message = {
       START: "숫자 야구 게임을 시작합니다.",
       ASK_TRY_GUESS: "숫자를 입력해주세요 : ",
@@ -43,7 +43,7 @@ class App {
       tempNumber = pickNumberInRange(1, 9);
       if (!nbrOfComputer.includes(tempNumber)) nbrOfComputer.push(tempNumber);
     }
-    this.#nbrOfComputer = [...nbrOfComputer];
+    this.#numberOfComputer = [...nbrOfComputer];
   }
 
   #tryGuess() {
@@ -64,13 +64,16 @@ class App {
   #setScore(answer) {
     this.#setNbrOfTryGuess(answer);
 
-    this.#score = calculateScore(this.#nbrOfComputer, this.#nbrOfTryGuess);
+    this.#score = calculateScore(
+      this.#numberOfComputer,
+      this.#numberOfTryGuess,
+    );
   }
 
   #setNbrOfTryGuess(answer) {
     checkGuessInput(answer);
 
-    this.#nbrOfTryGuess = answer.split("").map((nbr) => parseInt(nbr, 10));
+    this.#numberOfTryGuess = answer.split("").map((nbr) => parseInt(nbr, 10));
   }
 
   #isThreeStrike() {
