@@ -46,6 +46,10 @@ class App {
   }
 
   decideSystemRestart(userRestartInput) {
+    if (userRestartInput !== "1" && userRestartInput !== "2") {
+      throw new Error(Message.error);
+    }
+
     if (userRestartInput === "1") {
       this.answer = getNewAnswer();
       this.getUserInput();
