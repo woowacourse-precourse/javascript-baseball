@@ -11,12 +11,6 @@ function pickUniqueNumbersInRange(start, end, count) {
   return targat;
 }
 
-function makeTarget() {
-  const numbers = pickUniqueNumbersInRange(1, 9, 3).map(String);
-
-  return numbers;
-}
-
 function getBallString(ball) {
   if (ball !== 0) {
     return `${ball}볼`;
@@ -76,7 +70,7 @@ function getUniqueNumberCount(string) {
 }
 
 module.exports = {
-  makeTarget,
+  pickUniqueNumbersInRange,
   getGuessResult,
   getBallsAndStrikes,
   getUniqueNumberCount,
