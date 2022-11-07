@@ -26,11 +26,11 @@ class App {
       throw 'Invaild Value: answer of length is not 3!';
     }
 
-    for (const item of nums) {
+    nums.forEach((item) => {
       if (isNaN(item)) {
         throw 'Invaild Value: answer includes Not-A-Number value';
       }
-    }
+    })
 
     if (nums.includes(0)) {
       throw 'Invaild Value: answer includes 0';
@@ -44,5 +44,3 @@ class App {
 }
 
 module.exports = App;
-
-new App().play();
