@@ -13,7 +13,7 @@ function makeTarget() {
 
 function getBallString(ball) {
   if (ball !== 0) {
-    return `${ball}볼 `;
+    return `${ball}볼`;
   }
   return '';
 }
@@ -26,15 +26,18 @@ function getStrikeString(strike) {
 }
 
 function getGuessResult(ball, strike) {
-  const ballString = getBallString(ball);
-  const strikeString = getStrikeString(strike);
-  const result = ballString + strikeString;
-
-  if (result.length === 0) {
+  if (ball + strike === 0) {
     return '낫싱';
   }
 
-  return result;
+  const ballString = getBallString(ball);
+  const strikeString = getStrikeString(strike);
+
+  if (ballString === '') {
+    return strikeString;
+  }
+
+  return `${ballString} ${strikeString}`;
 }
 
 function getBallsAndStrikes(target, input) {
