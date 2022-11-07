@@ -38,16 +38,18 @@
 3. 사용자가 입력한 수의 유효성을 판별한다. (getStrikeAndBall)
 
    3-1. 유효하면 continue 후
-   a. 스트라이크, 볼, 낫싱 판별 (정답이 아닐 경우 힌트를 주고 다시 enteruserinput() 실행하도록 한다 . )
-   b. 정답을 맞추면 3 과정으로 넘어감 (만약에 정답이 나오게 된다면 console.log 띄우고 재시작 여부 물어봄)
+   a. 스트라이크, 볼, 낫싱 판별 (정답이 아닐 경우 힌트를 주고 다시 enteruserinput() 실행하도록 한다 .) (checkStrikeAndBall)
 
    3-2. 유효하지않으면 throw error
    정규식 사용해서 숫자 3개만 받을 수 있도록 생성
 
-4. 모두 맞췄을 경우 게임을 다시 할 지(1) 종료할 지(2) 선택한다.
+4. 모두 맞췄을 경우 게임을 다시 할 지(1) 종료할 지(2) 선택한다. (gameRestart)
 
 ---
 
 리펙토링
 
 1. getStrikeAndBall 계산 출력 나누기
+   getStrikeAndBall ==> gameRestart, checkStrikeAndBall
+   gameRestart : 정답 맞췄을 때 재시작 또는 종료
+   checkStrikeAndBall : 오답일 때 스트라이크, 볼, 낫싱 판별
