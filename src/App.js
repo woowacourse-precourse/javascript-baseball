@@ -36,15 +36,14 @@ class App {
   }
 
   #setNbrOfComputer() {
-    this.#nbrOfComputer = [];
+    const nbrOfComputer = [];
     let tempNumber;
 
-    while (this.#nbrOfComputer.length < 3) {
+    while (nbrOfComputer.length < 3) {
       tempNumber = pickNumberInRange(1, 9);
-      if (!this.#nbrOfComputer.includes(tempNumber)) {
-        this.#nbrOfComputer.push(tempNumber);
-      }
+      if (!nbrOfComputer.includes(tempNumber)) nbrOfComputer.push(tempNumber);
     }
+    this.#nbrOfComputer = [...nbrOfComputer];
   }
 
   #tryGuess() {
