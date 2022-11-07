@@ -18,7 +18,7 @@ const isMatchAnswer = (numArr, answer) => {
   return strikeCnt === ANSWER.LENGTH;
 };
 
-const calculateResult = (numArr, answer) => {
+const printHint = (numArr, answer) => {
   const strikeCnt = strikeCount(numArr, answer);
   const ballCnt = ballCount(numArr, answer);
 
@@ -30,7 +30,7 @@ const calculateResult = (numArr, answer) => {
 };
 
 module.exports = {
-  calculateResult,
+  printHint,
   isMatchAnswer,
   strikeCount,
   ballCount,
