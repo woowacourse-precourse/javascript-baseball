@@ -49,3 +49,36 @@ describe("유효하지 않은 입력값 예외 처리 테스트", () => {
     }).toThrow();
   });
 });
+
+describe("채점 테스트", () => {
+  const app = new App();
+  app.computerDigits = [3, 5, 8];
+
+  test("3스트라이크", () => {
+    app.countScore([3, 5, 8]);
+
+    expect(app.score.balls).toEqual(0);
+    expect(app.score.strikes).toEqual(3);
+  });
+
+  test("2볼 1스트라이크", () => {
+    app.countScore([5, 3, 8]);
+
+    expect(app.score.balls).toEqual(2);
+    expect(app.score.strikes).toEqual(1);
+  });
+
+  test("1볼", () => {
+    app.countScore([5, 9, 1]);
+
+    expect(app.score.balls).toEqual(1);
+    expect(app.score.strikes).toEqual(0);
+  });
+
+  test("낫싱", () => {
+    app.countScore([4, 7, 2]);
+
+    expect(app.score.balls).toEqual(0);
+    expect(app.score.strikes).toEqual(0);
+  });
+});
