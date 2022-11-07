@@ -83,6 +83,16 @@ describe("숫자 야구 게임", () => {
     app.userInput = "321";
     expect(app.isGameEnd("456")).toBe(false);
   });
+
+  test("generateAnswer", () => {
+    const randoms = [1, 3, 5];
+    mockRandoms(randoms);
+
+    const app = new App();
+    app.generateAnswer();
+
+    expect(app.answer).toEqual([1, 3, 5]);
+  });
 });
 
 describe("Input", () => {
