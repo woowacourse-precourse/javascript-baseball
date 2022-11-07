@@ -5,11 +5,15 @@ const {
   START_MESSAGE,
   END_MESSAGE,
   GAMEOVER_MESSAGE,
-  INPUT_MESSGAE,
+  INPUT_MESSAGE,
 } = require('./common/messages');
 
 const printStartMessage = () => {
   Console.print(`${START_MESSAGE}`);
+};
+
+const printEndMessage = () => {
+  Console.print(`${GAMEOVER_MESSAGE}`);
 };
 
 class BaseballGame {
@@ -42,29 +46,40 @@ class BaseballGame {
   }
 
   getPlayerInput() {
+    Console.readLine(`${INPUT_MESSAGE}`, this.checkPlayerInput());
+  }
+
+  checkPlayerInput() {
     const playerInput = (answer) => {
       const isThreeStrike = this.gameHint.checkPlayerInput(this.randomNumbers, answer);
       if (isThreeStrike) {
         return this.gameOver();
       }
-
       this.getPlayerInput();
     };
 
-    Console.readLine(`${INPUT_MESSGAE}`, playerInput);
+    return playerInput;
   }
 
   gameOver() {
-    Console.print(`${GAMEOVER_MESSAGE}`);
-    Console.readLine(`${END_MESSAGE}\n`, (answer) => {
+    printEndMessage();
+    this.getGameOverInput();
+  }
+
+  getGameOverInput() {
+    const playerAnswer = (answer) => {
       const convertNumberInput = Number(answer);
-      if (convertNumberInput == 1) {
+      if (convertNumberInput === 1) {
         return this.restartGame();
       }
-      if (convertNumberInput == 2) {
+      if (convertNumberInput === 2) {
         return Console.close();
       }
-    });
+
+      throw new Error('잘못된 입력');
+    };
+
+    Console.readLine(`${END_MESSAGE}\n`, playerAnswer);
   }
 }
 
