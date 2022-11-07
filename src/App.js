@@ -9,6 +9,10 @@ class App {
     this.computerNumbers = null;
   }
 
+  setComputerNumbers() {
+    this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
+  }
+
   checkStrike(userNumbers) {
     let strikeCount = 0;
 
@@ -30,31 +34,50 @@ class App {
   }
 
   printResult(strikeCount, ballCount) {
-    if (ballCount != 0 && strikeCount != 0)
-      MissionUtils.Console.print(ballCount + "볼" + strikeCount + "스트라이크 ");
+    if (ballCount != 0 && strikeCount != 0) 
+      return ballCount + "볼" + strikeCount + "스트라이크 ";
     else if (ballCount != 0)
-      MissionUtils.Console.print(ballCount + "볼");
+      return ballCount + "볼";
     else if (strikeCount != 0)
-      MissionUtils.Console.print(strikeCount + "스트라이크");
+      return strikeCount + "스트라이크 ";
     else if (strikeCount == 0 && ballCount == 0)
-      MissionUtils.Console.print("낫싱");
+      return "낫싱";
   }
 
   startGame() {
     let strikeCount;
     let ballCount;
-    this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
+    let resultComment; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
       strikeCount = this.checkStrike(userNumbers);
       ballCount = this.checkBall(userNumbers);
-      this.printResult(strikeCount, ballCount);
+
+      MissionUtils.Console.print(resultComment = this.printResult(strikeCount, ballCount));
+      return resultComment;
+    });
+  }
+
+  checkGameEnd() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (isContinue) => {
+      if (isContinue == 1) this.startGame();
+      else if (isContinue == 2) return;
     });
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.startGame();
+    this.setComputerNumbers();
+
+    let gameResult = this.startGame();
+    MissionUtils.Console.print(gameResult);
+
+    if (gameResult == "3스트라이크")
+      this.checkGameEnd();
+    else {
+      this.startGame();
+    }
   }
 }
 
