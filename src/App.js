@@ -16,14 +16,12 @@ class App {
 
   callGameSequence() {
     this.gameStatus = true;
-    // 1. computer값을 생성한다
-    const answerMap = this.initGameSetting();
-    // 스트라이크까지 2,3번 반복
+    
+    const answerMap = this.initGameSetting(); // 1. computer값을 생성한다
+    
     while (this.gameStatus) {
-      // 2. user값을 받아와 검사한다
-      const userNumber = this.getUserNumber();
-      // 3. computer & user 값을 비교한다
-      if (this.compareWithAnswer(answerMap, userNumber)) {
+      const userNumber = this.getUserNumber();  // 2. user값을 받아와 검사한다
+      if (this.compareWithAnswer(answerMap, userNumber)) {  // 3. computer & user 값을 비교한다
         this.gameStatus = false;
       }
     }
@@ -55,7 +53,7 @@ class App {
       answer.split("").forEach((e) => userNumber.push(e));
     });
     MissionUtils.Console.close();
-    // 예외 처리
+
     this.checkUserNumber(userNumber);
 
     return userNumber;
@@ -64,18 +62,15 @@ class App {
   checkUserNumber(value) {
     const valueSet = new Set(value);
 
-    if (value.length !== 3) {
-      // 길이 검사
+    if (value.length !== 3) { // 길이 검사
       throw `잘못된 형식 입력, 입력값의 길이는 3이어야 합니다. 입력된 길이: ${value.length}`;
     }
 
-    if (valueSet.size !== 3) {
-      // 중복 숫자 검사
+    if (valueSet.size !== 3) {  // 중복 숫자 검사
       throw `잘못된 형식 입력, 중복 숫자 존재, 입력된 value: ${value}`;
     }
 
-    value.map((element) => {
-      // 숫자 검사
+    value.map((element) => {  // 숫자 검사
       element = Number(element);
       if (Number.isNaN(element)) {
         throw `잘못된 형식 입력, 숫자로 변환 불가능한 문자 존재, 입력된 value: ${value}`;
@@ -100,7 +95,6 @@ class App {
 
   printResult(strike, ball) {
     if (strike === 0 && ball === 0) {
-      // 주석 추가
       MissionUtils.Console.print("낫싱");
     } else if (ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
