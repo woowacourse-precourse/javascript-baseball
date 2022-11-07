@@ -11,20 +11,24 @@ const {
 
 class GameLogic {
   judge(userInput, computerInput) {
-    const strikeBallNothing = [0, 0, 0];
+    const ballStrike = [0, 0];
 
     userInput.forEach((el, index) => {
       if (el === computerInput[index]) {
-        strikeBallNothing[0] += 1;
+        ballStrike[1] += 1;
       } else if (computerInput.includes(Number(el))) {
-        strikeBallNothing[1] += 1;
+        ballStrike[0] += 1;
       }
     });
 
-    return strikeBallNothing;
+    return ballStrike;
   }
 
-  result() {}
+  result(gameResult) {
+    if (gameResult[1] === 3) {
+      MissionUtils.Console.print(INGAME_MESSAGE.END);
+    }
+  }
 }
 
 module.exports = GameLogic;
