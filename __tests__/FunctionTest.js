@@ -1,4 +1,9 @@
-const { validByRegex, validDuplicate, validInput } = require('../src/Function');
+const {
+  validByRegex,
+  validDuplicate,
+  validInput,
+  validOneOrTwo,
+} = require('../src/Function');
 
 describe('Function 테스트', () => {
   test('validByRegex 테스트', () => {
@@ -20,6 +25,12 @@ describe('Function 테스트', () => {
   test('validInput 테스트', () => {
     expect(() => {
       validInput('124');
+    }).toThrow();
+  });
+
+  test('validOneOrTwo 테스트', () => {
+    expect(() => {
+      validOneOrTwo('2');
     }).toThrow();
   });
 });
