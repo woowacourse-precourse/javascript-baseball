@@ -4,14 +4,14 @@ const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
 const ComputerInput = require("./ComputerInput");
 
-function numToArr(num) {
-  return [...String(num)];
-}
-
 class App {
   constructor() {
     this.computerInput = ComputerInput();
     this.firstTry = true;
+  }
+
+  numToArr(num) {
+    return [...String(num)];
   }
 
   play() {
@@ -22,7 +22,7 @@ class App {
     }
 
     render.getUser().then((num) => {
-      this.userNum = numToArr(num);
+      this.userNum = this.numToArr(num);
       const checkInputValid = new CheckInputValid({
         userNum: this.userNum,
         retryNum: this.replayQnAResult,
