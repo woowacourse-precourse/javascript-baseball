@@ -6,7 +6,7 @@ const Result = require("./components/Result");
 class App {
   constructor() {
     this.exception = new Exception();
-    this.Count = new Count();
+    this.count = new Count();
     this.result = new Result();
   }
 
@@ -35,7 +35,7 @@ class App {
     });
   }
 
-  printResult(result, computerNumbers) {
+  printMessage(result, computerNumbers) {
     if (result === 'answer') {
       MissionUtils.Console.print('3스트라이크');
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
@@ -66,4 +66,6 @@ class App {
   }
 }
 
-module.exports = App;
+const app = new App();
+app.play();
+
