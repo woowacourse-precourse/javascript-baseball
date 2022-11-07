@@ -46,18 +46,19 @@ class App {
     let ball = this.countBall();
     let strike = this.countStrike();
 
+    this.io.print(this.showResult(ball, strike));
+
     if (strike === LENGTH) {
-      this.io.print(this.showResult(ball, strike));
       this.finish();
-    } else {
-      this.io.print(this.showResult(ball, strike));
-      this.onInput(QuestionText.inputText, this.onGame);
     }
+
+    this.onInput(QuestionText.inputText, this.onGame);
   }
 
   isRestart(input) {
     let value = parseInt(input);
-    if (isNaN(value)) throw Error();
+    if (isNaN(value))
+      throw Error("경고:게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
 
     switch (value) {
       case 1:
@@ -74,7 +75,7 @@ class App {
 
   // 유효성 검사
   validation(input) {
-    if (isNaN(input)) new Error("정수 값을 입력해주세요!");
+    if (isNaN(input)) throw new Error("정수 값을 입력해주세요!");
 
     const len = Math.ceil(Math.log10(input + 1));
     if (len !== 3) throw new Error("서로 다른 3자리의 수를 입력해주세요!");
@@ -113,7 +114,7 @@ class App {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) computer.push(number);
     }
-    // console.log(computer);
+    console.log(computer);
     return computer;
   }
 
