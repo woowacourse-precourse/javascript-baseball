@@ -25,4 +25,10 @@ describe("구현 기능 목록 Test", () => {
     expect(computerNumArr).toHaveLength(3); // 3자리인지
     expect(Array.from(set)).toHaveLength(3); // 서로 다른 수인지
   });
+
+  test("힌트를 얻는 경우", () => {
+    expect(app.getHint("123", "123")).toEqual({ ball: 0, strike: 3 });
+    expect(app.getHint("831", "583")).toEqual({ ball: 2, strike: 0 });
+    expect(app.getHint("159", "419")).toEqual({ ball: 1, strike: 1 });
+  });
 });
