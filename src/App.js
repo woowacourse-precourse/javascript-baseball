@@ -16,7 +16,16 @@ class App {
     });
   }
 
-  printResult(strike, ball, randomNumber) {
+  correctAnswer(strike, randomNumber) {
+    if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.showCommand();
+    } else {
+      this.makeUserNumbers(randomNumber);
+    }
+  }
+
+  printStrikeAndBall(strike,ball){
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
@@ -25,13 +34,6 @@ class App {
       MissionUtils.Console.print(`${strike}스트라이크`);
     } else if (ball > 0) {
       MissionUtils.Console.print(`${ball}볼`);
-    }
-
-    if (strike === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.showCommand();
-    } else {
-      this.makeUserNumbers(randomNumber);
     }
   }
 
@@ -49,7 +51,8 @@ class App {
         }
       });
 
-      this.printResult(strike, ball, randomNumber);
+      this.printStrikeAndBall(strike,ball);
+      this.correctAnswer(strike, randomNumber);
     }
   }
 
