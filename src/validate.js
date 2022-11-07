@@ -21,4 +21,15 @@ const validateGameInput = (input) => {
     if (duplicateExists) throw new Error(DUPLICATE_INPUT);
 };
 
-module.exports = { validateGameInput };
+
+const validateRestartInput = (input) => {
+    const { RESTART, END } = config.RESTART_INPUT;
+    const { INVALID_RESTART_INPUT } = config.RESTART_INPUT_ERRORS;
+
+    const isNumberInput = !isNaN(input);
+    const isInRange = +input === RESTART || +input === END;
+
+    if (!isNumberInput || !isInRange) throw new Error(INVALID_RESTART_INPUT);
+};
+
+module.exports = { validateGameInput, validateRestartInput };
