@@ -1,3 +1,5 @@
+const { Random } = require("@woowacourse/mission-utils");
+
 // 컴퓨터가 설정한 수
 class ComputerNumber {
   constructor() {
@@ -18,6 +20,21 @@ class ComputerNumber {
    */
   setState(newState) {
     this.number = newState;
+  }
+
+  // 컴퓨터가 3개의 범위안 숫자를 임의로 골라 상태값에 저장한다.
+  setRandomNumber() {
+    const randomNumberArray = [];
+
+    while (randomNumberArray.length < 3) {
+      const temporaryNumber = Random.pickNumberInRange(1, 9);
+
+      if (!randomNumberArray.includes(temporaryNumber))
+        randomNumberArray.push(temporaryNumber);
+    }
+    this.setState(
+      randomNumberArray.map((singleNumber) => singleNumber.toString())
+    );
   }
 }
 
