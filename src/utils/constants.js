@@ -7,6 +7,7 @@ const BASEBALL = Object.freeze({
   STRIKE: '스트라이크',
   BALL: '볼',
   NOTHING: '낫싱',
+  STRIKE_COUNT: 3,
 });
 
 const COMMAND = Object.freeze({
