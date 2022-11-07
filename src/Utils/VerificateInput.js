@@ -9,7 +9,7 @@ function VerificateInput(input){
   userNum.map((value)=>{
     if(value < 1 || value > 9) throw new Error ('잘못된 입력값입니다 (입력값은 1 ~ 9 여야 합니다)');
   })
-
+  
   return true;
 }
 module.exports = VerificateInput;
