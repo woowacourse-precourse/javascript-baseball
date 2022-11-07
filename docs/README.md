@@ -1,5 +1,20 @@
 # ⚾️ 숫자 야구 게임 기능 명세서 📖
 
+## 🛠 메서드
+
+- `gaemStart()`: 게임을 시작하는 메서드
+- `createAnswer()`: 정답으로 사용할 컴퓨터의 3자리 숫자를 만드는 함수
+- `inputUserNumber()`: 유저에게 입력을 받는 함수
+- `validateUserInput(userInput, isThreeStrike)`: 유저 입력과 3스트라이크 여부를 인자로 받아서 유저 입력에 대해 유효성을 검증하는 함수
+- `isGuessSuccess(userNumber)`: 유저 입력을 받아서 정답을 맞췄는지 아닌지 결정하는 함수
+- `askRestart()`: 3스트라이크가 나왔을 때 게임을 재시작할 것인지 물어보는 함수
+- `gameRestart()`: 게임을 재시작하는 함수
+- `gameExit()`: 게임을 종료하는 함수
+- `countStrike()`: 스트라이크를 계산하는 함수
+- `countBall()`: 볼을 계산하는 함수
+- `printResultMessage()`: 유저 입력을 받아서 정답과 비교하여 결과를 출력하는 함수
+- `print()`: `Console.print()`를 담은 출력 유틸 함수
+
 ## 🚀 입출력
 
 - [x] 게임 시작 문구 출력하기
@@ -25,4 +40,4 @@
 - [ ] 자바스크립트 코드 컨벤션 지켰는지 확인하기
 - [ ] indent depth 2 이하로 작성하기
 - [ ] 함수가 한 가지 일만 잘 하도록 작게 만들기
-- [ ] Jest 이해하기
+- [x] Jest 이해하기
