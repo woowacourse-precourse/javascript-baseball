@@ -12,6 +12,11 @@ const ERROR_MESSAGE = {
   restartQuery: '"1" 또는 "2"만 입력할 수 있습니다.',
 };
 
+const RESTART_KEY = {
+  restart: '1',
+  end: '2',
+};
+
 function createValidateFunc({ regExp, errorMessage }) {
   return (query) => {
     if (regExp.test(query)) return;
@@ -80,10 +85,10 @@ class App {
     Console.readLine(CONSOLE_MESSAGE.restart, (restartQuery) => {
       this.validateRestartQuery(restartQuery);
 
-      if (restartQuery === '1') {
+      if (restartQuery === RESTART_KEY.restart) {
         this.startNewBaseball();
       }
-      if (restartQuery === '2') {
+      if (restartQuery === RESTART_KEY.end) {
         Console.close();
       }
     });
