@@ -4,7 +4,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
-    // acc 누적값 input 현재값
     return acc.mockImplementationOnce((question, callback) => {
       callback(input);
     });
