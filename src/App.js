@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    MissionUtils.Console.print(START_MESSAGE);
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getComputerNumber();
   }
   
@@ -72,6 +72,22 @@ class App {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
       return this.playerInput(computer);
     }
+  }
+  restartOrEnd() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (restart) => {
+        if (restart == 1) {
+          return this.getComputerNumber();
+        } 
+        else if (restart == 2) {
+          MissionUtils.Console.close();
+        } 
+        else {
+          throw new Error("잘못된 입력입니다.");
+        }
+      }
+    );
   }
 }
 
