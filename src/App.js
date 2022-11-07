@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  answer = [];
+  
   userNumber = [];
   ballCount = 0;
   strikeCount = 0;
@@ -9,13 +9,15 @@ class App {
 
   play() {}
 
-  createAnswer() {
-    while (this.answer.length < 3) {
+  setComputerNumbers() {
+    let computerNumbers = [];
+    while (computerNumbers.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.answer.includes(number)) {
-        this.answer.push(number);
+      if (!computerNumbers.includes(number)) {
+        computerNumbers.push(number);
       }
     }
+    return computerNumbers;
   }
 
   userInputAnswer() {
@@ -121,6 +123,10 @@ class App {
 
   startNewGame() {
     this.play();
+  }
+
+  gameEnd() {
+    
   }
 }
 
