@@ -115,7 +115,7 @@ describe("숫자 야구 게임", () => {
   });
 
   test("입력값 중복 숫자 검증", () => {
-    const lengthSpy = jest.spyOn(Constraints.prototype, "checkNoSameNumber");
+    const sameSpy = jest.spyOn(Constraints.prototype, "checkNoSameNumber");
 
     const truthyInput = [
       "123",
@@ -128,13 +128,13 @@ describe("숫자 야구 게임", () => {
     ];
 
     truthyInput.forEach((item) => {
-      expect(lengthSpy(item)).toBeTruthy();
+      expect(sameSpy(item)).toBeTruthy();
     });
 
     const falsyInput = ["111", "113", "112", "646", [1, 3, 3], [1, 2, 2]];
 
     falsyInput.forEach((item) => {
-      expect(lengthSpy(item)).not.toBeTruthy();
+      expect(sameSpy(item)).not.toBeTruthy();
     });
   });
 
