@@ -43,7 +43,7 @@ class Game {
   }
 
   checkingResult(computer, player) {
-    let result = [];
+    let result = [0, 0];
 
     for (
       let computerIndex = 0;
@@ -66,7 +66,19 @@ class Game {
 
   displayResult(result) {}
 
-  compareNumber(computer, player, result) {}
+  compareNumber(computer, player, result) {
+    let score = result;
+
+    if (computer[0] === player[0]) {
+      if (computer[1] === player[1]) {
+        score[0] = score[0] + 1;
+      } else {
+        score[1] = score[1] + 1;
+      }
+    }
+
+    return result;
+  }
 
   isValidNumber(number) {
     const isNum = !isNaN(number);

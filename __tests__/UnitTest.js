@@ -33,4 +33,15 @@ describe("Game 메서드 테스트", () => {
     expect(result5).toEqual(false);
     expect(result6).toEqual(false);
   });
+
+  test("숫자 비교 결과 테스트", () => {
+    const game = new Game();
+    const result1 = game.compareNumber([1, 0], [1, 0], [0, 0]);
+    const result2 = game.compareNumber([9, 0], [9, 1], [0, 0]);
+    const result3 = game.compareNumber([5, 0], [3, 2], [0, 0]);
+
+    expect(result1).toEqual([1, 0]);
+    expect(result2).toEqual([0, 1]);
+    expect(result3).toEqual([0, 0]);
+  });
 });
