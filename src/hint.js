@@ -22,12 +22,12 @@ const addStrikeUnit = (number, strikeAndBall) => {
   }
 };
 
-const result = (array) => {
-    if(array.join(" ") !== "") {
-        return array.join(" ");
-    } else {
-        return "낫싱";
-    }
-}
+const result = (wordArr) => {
+  if (wordArr.join(" ") !== "") {
+    return wordArr.join(" ");
+  } else {
+    return "낫싱";
+  }
+};
 
 module.exports = hint;
