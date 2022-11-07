@@ -1,8 +1,8 @@
 const isNothing = (initNum, userNum) => {
-  let answer = false;
+  let answer = true;
 
   initNum.forEach((number, index) => {
-    userNum.indexOf(number) === -1 ? (answer = true) : null;
+    userNum.indexOf(number) !== -1 ? (answer = false) : null;
   });
 
   if (answer === true) return "낫싱";
