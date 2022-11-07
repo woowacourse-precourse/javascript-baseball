@@ -116,6 +116,7 @@ describe('기능 구현 목록 테스트', () => {
 
     game.play();
 
+    expect(game.isReplay).toBeTruthy();
     expect(logSpy).toHaveBeenCalledWith(
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
     );
