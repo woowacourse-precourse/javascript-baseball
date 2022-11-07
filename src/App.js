@@ -70,10 +70,13 @@ class App {
     if(strike===0 && ball===0){
       MissionUtils.Console.print('낫싱')
     }
-    MissionUtils.Console.print(`볼 : ${ball} 스트라이크 : ${strike} `);
-    if (strike === 3) {
+    else if (strike === 3) {
+      MissionUtils.Console.print(`${strike} 스트라이크`)
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.gameReplay();
+    }
+    else{
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
     this.userInput();
   }
