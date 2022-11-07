@@ -9,14 +9,14 @@ class App {
 
 class User {
   constructor() {
-    this.Number;
-    this.Select_Number;
+    this.number;
+    this.select;
   };
   getNumber() {
-    return this.Number;
+    return this.number;
   };
   getSelect() {
-    return this.Select_Number;
+    return this.select;
   };
 };
 const computerNumber = () => {
@@ -34,14 +34,14 @@ const gameStart = (USER) => {
   let USER_SELECT = "1";
   while (USER_SELECT !== "2") {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-      USER.Number = String(number).split("");
+      USER.number = String(number).split("");
       USER_NUMBER = USER.getNumber();
     });
     throwHandling(USER_NUMBER.length);
     if (numberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (select) => {
-        USER.Select_Number = select;
+        USER.select = select;
         USER_SELECT = USER.getSelect();
       });
       COMPUTER_NUMBER = computerNumber();
