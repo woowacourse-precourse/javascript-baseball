@@ -1,64 +1,135 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
-  printMessage(situation) {
-    if (situation == "START")
-      console.log("숫자 야구 게임을 시작합니다.\n");
-    if (situation == "END")
-      console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n");
-    if (situation == "CORRECT")
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    if (situation == "GUIDE")
-      console.log("숫자를 입력해주세요 : ");
+  constructor() {
+    this.computerNum = [];
+    this.threeStrike = false;
   }
 
-  printStrikeResult(count) {
-    switch(count) {
-      case 1:
-        console.log(" 1스트라이크");
-        break;
-      case 2:
-        console.log(" 2스트라이크");
-        break;
-      case 3:
-        this.printMessage("CORRECT");
-        break;
-      default:
-        console.log("\n");
-        break;
+  setComputerNum() {
+    while (this.computerNum.length < 3) {
+      let number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!this.computerNum.includes(number)) {
+      this.computerNum.push(number);
+      }
+    }
+  }
+  
+  ballCounting(input) {
+    let count = 0;
+    
+    for (let i = 0; i < 3; i++) {
+      let found = this.computerNum.indexOf(parseInt(input[i]));
+      if (found != -1 && found != i) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  strikeCounting(input) {
+    let count = 0;
+    
+    for (let i = 0; i < 3; i++) {
+      let found = this.computerNum.indexOf(parseInt(input[i]));
+      if (found != -1 && found == i) {
+        count++;
+      }
+    }
+    return count;  
+  }
+  
+  printCount(ball, strike) {
+    if (ball > 0 && strike > 0) {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      return ;
+    }
+    if (ball > 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+    }
+    if (strike > 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    }
+    if (strike == 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+    if (ball == 0 && strike == 0) {
+      MissionUtils.Console.print("낫싱");
     }
   }
 
-  printBallResult(count) {
-    switch(count) {
-      case 1:
-        console.log("1볼");
-        break;
-      case 2:
-        console.log("2볼");
-        break;
-      case 3:
-        console.log("3볼");
-        break;
-      default:
-        break;
+  checkAndPrintCount(input) {
+    let ball = this.ballCounting(input);
+    let strike = this.strikeCounting(input);
+
+    if (strike == 3) {
+      this.threeStrike = true;
     }
+    this.printCount(ball, strike);
   }
 
-  printCountResult(strike, ball) {
-    if (strike == 0 && ball == 0) {
-      console.log("낫싱\n");
-      return;
+  checkInputValid(input) {
+    const numbers = /[1-9]{3}/;
+    if (!numbers.test(input)) {
+      throw "ERROR: Invalid input \n[ Valid Input : three digit number from 1 to 9 ]";
     }
-    this.printBallResult(ball);
-    this.printStrikeResult(strike);
+    if (input.length != 3) {
+      throw "ERROR: Invalid length \n[ Valid Input : three digit number from 1 to 9 ]";
+    }
+    const dupleCheck = new Set(input);
+    if (dupleCheck.size != 3) {
+      throw "ERROR: Duplicated numbers \n[ Valid Input : three digit number from 1 to 9 ]";
+    }
+
+    return true;
+  }
+
+  inGame() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.checkInputValid(input);
+
+      this.checkAndPrintCount(input);
+      if (this.threeStrike) {
+        this.endOrReplay();
+      }
+      this.inGame();
+    });
+  }
+
+  endOrReplay() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
+      if (input != 1 && input != 2) {
+        throw "ERROR: Invalid input\n [ Valid Input : 1 or 2 ]";
+      }
+
+      if (input == 1) {
+        this.computerNum.length = 0;
+        this.threeStrike = false;
+        this.newGame();
+      }
+      if (input == 2) {
+        MissionUtils.Console.close();
+      }
+    });
+  }
+
+  newGame() {
+    try {
+      this.setComputerNum();
+      this.inGame();
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   play() {
-    this.printMessage("START");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.newGame();
   }
 }
 
 // module.exports = App;
 
-//NOTE - App 클래스 내에서 모두 구현하는게 옳은걸까
-// 클래스 외부 함수를 만드는게 나은걸까
-// 일단 시작은 모두 내부 메소드로 작성하는 걸로 한다.
+  const app = new App();
+  app.play();
+//TODO this 바인딩 공부
