@@ -9,7 +9,7 @@ class App {
 
   play() {
     const computer = new Computer();
-    Console.print(computer.number);
+    // Console.print(computer.number);
     this.playSetOfGame(computer);
   }
 
