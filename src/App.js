@@ -30,11 +30,17 @@ class App {
 
   makeResult(input) {
     const scoreBoard = { strike: 0, ball: 0 };
+    const { strike, ball } = scoreBoard;
 
     input.split("").forEach((num, idx) => {
       if (this.answer[idx] === num) scoreBoard.strike += 1;
       else if (this.answer.includes(num)) scoreBoard.ball += 1;
     });
+
+    if (!strike && !ball) return "낫싱";
+    else if (!strike) return ball + "볼";
+    else if (!ball) return strike + "스트라이크";
+    else return ball + "볼 " + strike + "스트라이크";
   }
 
   isGameOver() {
