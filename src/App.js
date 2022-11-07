@@ -1,50 +1,24 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
-const GAME_MESSAGE = Object.freeze({
-  START: "숫자 야구 게임을 시작합니다.",
-  INPUT: "숫자를 입력해주세요 : ",
-});
-
-const GAME_ERROR_MESSAGE = Object.freeze({
-  BLANK: "아무것도 입력되지 않았습니다.",
-  THREE_DIGIT: "숫자 3개가 입력되지 않았습니다.",
-  DUPLICATE: "중복된 숫자가 있습니다.",
-  NOT_NUMBER: "1 ~ 9 사이의 숫자를 입력하지 않았습니다.",
-});
+const userInputCheck = require("./userInputCheck.js");
+const gameCommentPrint = require("./gameCommentPrint.js");
+const { GAME_MESSAGE } = require("./constants.js");
 
 class App {
   constructor() {
-    this.number = "";
-  }
-  getUserInput() {
-    MissionUtils.Console.readLine(GAME_MESSAGE.INPUT, (number) => {
-      this.number = number;
-      this.isInputValid();
-      this.getUserInput();
-    });
-  }
-
-  isInputValid() {
-    if (this.number === "") 
-      throw new Error(GAME_ERROR_MESSAGE.BLANK);
-
-    if (/[^1-9]/g.test(this.number))
-      throw new Error(GAME_ERROR_MESSAGE.NOT_NUMBER);
-
-    if (this.number.length !== 3)
-      throw new Error(GAME_ERROR_MESSAGE.THREE_DIGIT);
-
-    if ([...new Set(this.number.split(""))].length !== 3)
-      throw new Error(GAME_ERROR_MESSAGE.DUPLICATE);
-  }
-
-  printGameStartMessage() {
-    MissionUtils.Console.print(GAME_MESSAGE.START);
-    this.getUserInput();
+    this.userInput = "";
   }
 
   play() {
-    this.printGameStartMessage();
+    gameCommentPrint.printGameStartMessage();
+    this.readUserInput();
+  }
+
+  readUserInput() {
+    MissionUtils.Console.readLine(GAME_MESSAGE.INPUT, (userInput) => {
+      this.userInput = userInput;
+      userInputCheck(this.userInput);
+      this.readUserInput();
+    });
   }
 }
 
