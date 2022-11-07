@@ -63,4 +63,14 @@ describe("숫자 야구 게임", () => {
 
     expect(result).toEqual([5, 3, 4]);
   });
+
+  test("getStats메서드로 정확한 stats반환  ", () => {
+    const input = "135";
+    const randoms = [5, 3, 2];
+
+    const app = new App();
+    const result = app.getStats(input, randoms);
+
+    expect(result).toEqual({ ball: 1, strike: 1 });
+  });
 });
