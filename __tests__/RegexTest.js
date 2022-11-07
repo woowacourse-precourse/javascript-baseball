@@ -32,6 +32,13 @@ describe('정규식 테스트', () => {
     expect(result).toEqual([true, true, true, true]);
   });
 
+  test('0이 포함된 경우 false를 반환해야 한다.', () => {
+    const inputValue = '012';
+    const result = THREE_DIGIT_NUMBER_REGEX.test(inputValue);
+
+    expect(result).toEqual(false);
+  });
+
   test('숫자가 아닌 문자가 포함된 경우 false를 반환해야 한다.', () => {
     const inputValues = ['asdf', 'asd120', 'a1b2c3'];
     const result = inputValues.map(inputValue =>
