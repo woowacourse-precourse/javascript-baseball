@@ -9,11 +9,11 @@ const getSpy = () => {
 
 describe("숫자 야구 게임", () => {
   test("print 메소드로 받은값을 출력", () => {
-    const logSpy = getSpy();
+    const Spy = getSpy();
     const app = new App();
     const input = "test";
     app.print(input);
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(input));
+    expect(Spy).toHaveBeenCalledWith(expect.stringContaining(input));
   });
 });

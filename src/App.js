@@ -12,13 +12,14 @@ class App {
   }
   play() {
     this.print(MESSAGES.start);
-    this.computerNum = getComputerNum();
+    this.computerNum = this.getComputerNum();
   }
   print(message) {
     MissionUtils.Console.print(message);
   }
   getComputerNum() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+    let computerNumArr = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    return computerNumArr.join("");
   }
 }
 const app = new App();
