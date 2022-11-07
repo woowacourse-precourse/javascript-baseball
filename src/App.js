@@ -84,6 +84,10 @@ class BaseBallPlay {
       this.victoryCheck = true;
       throw "중복된 숫자가 포함되있습니다";
     }
+    if (input.length !== 3) {
+      this.victoryCheck = true;
+      throw "3자리의 수를 입력해주세요"
+    }
 
     return true;
   }
