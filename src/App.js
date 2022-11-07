@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const makeAnswer = require("./makeNumber");
-const getUserExecption = require("./getUserExecption");
-const getScore = require("./getScore");
-const showMessage = require("./showMessage");
+const makeAnswer = require("./utils/makeNumber");
+const getUserExecption = require("./utils/getUserExecption");
+const getScore = require("./utils/getScore");
+const showMessage = require("./utils/showMessage");
 
 class App {
   MESSAGES = {

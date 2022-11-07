@@ -1,4 +1,4 @@
-const getUserExecption = require("../src/getUserExecption");
+const getUserExecption = require("../src/utils/getUserExecption");
 
 describe("입력 예외처리 테스트", () => {
   test("입력 잘 된 경우1", () => {

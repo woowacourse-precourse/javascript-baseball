@@ -1,4 +1,4 @@
-const getScore = require("../src/getScore");
+const getScore = require("../src/utils/getScore");
 
 describe("점수 테스트", () => {
   test("1볼 1스트라이크", () => {
