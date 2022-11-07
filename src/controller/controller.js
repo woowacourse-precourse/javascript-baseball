@@ -92,6 +92,13 @@ class Controller {
     Console.print(this.view.CLOSING_COMMENT);
     Console.close();
   }
+
+  // 게임 초기 실행
+  init() {
+    if (this.isFirstGame) Console.print(this.view.WELCOME_COMMENT);
+    this.computerNumber.setRandomNumber();
+    this.view.getUserGuessInput();
+  }
 }
 
 module.exports = Controller;
