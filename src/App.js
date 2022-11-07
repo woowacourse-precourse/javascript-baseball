@@ -30,7 +30,7 @@ class App {
       if (!this.isValidUserNumber(input)) {
         throw new Error('잘못된 값을 입력하였습니다.');
       }
-      this.compareNumber(this.computerNumber, this.stringToNumberArray(input))
+      this.handleGameProcess(this.stringToNumberArray(input));
     });
   }
 
@@ -46,6 +46,16 @@ class App {
     return [...string].map(char => Number(char));
   }
 
+  handleGameProcess(userNumber) {
+    const result = this.compareNumber(this.computerNumber, userNumber);
+    this.printResult(result);
+    if (this.isCorrectAnswer(result)) {
+      this.askRetry();
+      return;
+    }
+    this.getUserNumber();
+  }
+  
   compareNumber(computerNumber, userNumber) {
     const result = {
       ball: 0,
@@ -56,11 +66,11 @@ class App {
       if (num === computerNumber[index]) result.strike += 1;
       else if (computerNumber.includes(num)) result.ball += 1;
     });
-    this.printResult(result.strike, result.ball);
-    this.isCorrectAnswer(result);
+    return result;
   }
   
-  printResult(strike, ball) {
+  printResult(result) {
+    const {strike, ball} = result;
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print('낫싱');
       return;
@@ -75,10 +85,9 @@ class App {
   isCorrectAnswer(result) {
     if (result.strike === 3){
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.askRetry();
-      return;
+      return true;
     }
-    this.getUserNumber();
+    return false;
   }
 
   askRetry() {
