@@ -138,6 +138,22 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("입력값 제한 조건 통합 검증", () => {
+    const constraints = new Constraints();
+
+    expect(constraints.checkConstraints("123")).toBeTruthy();
+
+    expect(() => constraints.checkConstraints("333")).toThrow(
+      "잘못된 값이 생성되었습니다. 게임을 종료합니다."
+    );
+    expect(() => constraints.checkConstraints("1234")).toThrow(
+      "잘못된 값이 생성되었습니다. 게임을 종료합니다."
+    );
+    expect(() => constraints.checkConstraints("qwe")).toThrow(
+      "잘못된 값이 생성되었습니다. 게임을 종료합니다."
+    );
+  });
+
   test("점수 산정", () => {
     const logSpy = getLogSpy();
     const app = new App();
