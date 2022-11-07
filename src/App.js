@@ -39,6 +39,13 @@ class App {
 
     return [strike, ball];
   }
+  
+  /* 종료 또는 재시작 */
+  exitOrRestart(flag) {
+    if (flag == 1) this.play();
+    else if (flag == 2) return;
+    else throw "잘못된 값을 입력하였습니다. 1 또는 2만 입력할 수 있습니다."
+  }  
 
   /* (숫자를 모두 맞힐 때까지 반복되는) 사용자 입력에 대한 재귀 호출 함수 */ 
   processInput(input) {
@@ -48,7 +55,9 @@ class App {
 
       if (strike === 3) { // 게임 종료
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        return; 
+        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (flag) => {
+          this.exitOrRestart(flag);
+        });
       }
       else { // 결과(힌트) 출력
         if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
@@ -67,7 +76,7 @@ class App {
   /* 게임 플레이 */
   play() {
     this.pickRandomNumbers();
-    // console.log("numbers: ", this.numbers);
+    console.log("numbers: ", this.numbers);
 
     // 게임 시작 문구 출력
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
