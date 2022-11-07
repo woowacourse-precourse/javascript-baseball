@@ -108,6 +108,15 @@ class App {
     }
   }
 
+  async askReGame() {
+    const selectedNumber = Number(
+      await this.inputNumber(Constants.END_MESSAGE)
+    );
+    this.selectedNumberException(selectedNumber);
+
+    if (selectedNumber === 1) this.startNewGame();
+  }
+
   async tryGetAnswer() {
     this.userNumber = await this.inputNumber(Constants.INPUT_NUMBER_MESSAGE);
     this.userNumberException();
