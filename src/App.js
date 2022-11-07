@@ -77,7 +77,9 @@ class App {
       }
     });
   }
-
+  resultBall(ball){
+      MissionUtils.Console.print(`${ball}볼`);
+  }
 }
 const app = new App;
 app.play();
