@@ -31,7 +31,6 @@ describe("숫자 야구 게임", () => {
     const messages = [
       "낫싱",
       "3스트라이크",
-      "1볼 1스트라이크",
       "3스트라이크",
       "게임 종료",
     ];
@@ -41,7 +40,6 @@ describe("숫자 야구 게임", () => {
 
     const app = new App();
     app.play();
-
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
