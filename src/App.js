@@ -1,13 +1,15 @@
 const System = require("./System");
 const User = require("./User");
 class App {
-  play() {
+  async play() {
     const NumberBaseBallSystem = new System();
     const PlayingUser = new User();
 
     NumberBaseBallSystem.getStarted();
     NumberBaseBallSystem.createAnswerNumber();
-    console.log(NumberBaseBallSystem.getNumber);
+    // console.log(NumberBaseBallSystem.getNumber);
+    const guessNumber = await PlayingUser.enterGuessNumber();
+    // console.log(guessNumber);
   }
 }
 
