@@ -2,7 +2,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const RESTART_CODE = "1";
 const EXIT_CODE = "2";
-
 const PLAYER_MESSAGE = "숫자를 입력해주세요 : ";
 const PLAYER_ERROR_MESSAGE = "올바른 숫자를 입력해주세요.";
 const START_MESSAGE = "숫자 야구 게임을 시작합니다.";
