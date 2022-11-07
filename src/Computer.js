@@ -18,6 +18,11 @@ class Computer {
     getBalls(){
         return this.balls;
     }
+
+    reset(){
+        this.balls=[];
+        this.setBalls();
+    }
 }
 
 module.exports = Computer;
