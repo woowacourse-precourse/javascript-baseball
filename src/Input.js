@@ -26,8 +26,11 @@ class Input {
   user() {
     MissionUtils.Console.readLine(INGAME_MESSAGE.INPUT_NUMBER, (string) => {
       const validation = new Validation();
-      const stringToArray = string.split("");
-      if (validation.checkAll(stringToArray)) return stringToArray;
+      const stringToArray = string.split("").map((el) => Number(el));
+
+      if (validation.checkAll(stringToArray)) {
+        return stringToArray;
+      }
     });
   }
 }

@@ -1,4 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Input = require("../src/Input");
+
 const {
   GAME_CONFIG,
   ERROR_CHECK,
@@ -8,7 +10,14 @@ const {
 } = require("./Constant");
 
 class App {
-  play() {}
+  play() {
+    const input = new Input();
+    const userNumber = input.user();
+    
+  }
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
