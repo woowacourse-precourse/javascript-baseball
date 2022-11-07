@@ -10,6 +10,8 @@ class App {
     this.getUserNum();
     var strike = this.countStrike(answer, this.userNumber);
     var ball = this.countBall(answer, this.userNumber);
+    var result = this.printResult(strike, ball);
+    MissionUtils.Console.print(result);
   }
 
   getThreeNum() {
@@ -58,6 +60,13 @@ class App {
         ballCount += 1;
     }
     return ballCount;
+  }
+
+  printResult(strikes, balls) {
+    if (strikes === 0 && balls === 0) return "낫싱";
+    else if (strikes === 0) return `${balls}볼`;
+    else if (balls === 0) return `${strikes}스트라이크`;
+    else return `${balls}볼 ${strikes}스트라이크`;
   }
 }
 
