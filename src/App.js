@@ -52,15 +52,15 @@ class App {
     Console.print(hint);
 
     if (this.state.inputValue === this.state.answer) {
-      return this.success();
+      Console.print(MESSAGE.SUCCESS);
+
+      return this.select();
     }
 
     this.input();
   }
 
-  success() {
-    Console.print(MESSAGE.SUCCESS);
-
+  select() {
     Console.readLine(MESSAGE.SELECT, (inputValue) => {
       if (inputValue === SELECT.RESTART) {
         return this.restart();

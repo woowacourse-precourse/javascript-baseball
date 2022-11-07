@@ -4,7 +4,7 @@ class Validator {
       this.checkInputValueType(inputValue) &&
       this.checkInputValueLength(inputValue) &&
       this.checkInputValueRange(inputValue) &&
-      this.checkInputValueDupicated(inputValue)
+      this.checkInputValueDuplicated(inputValue)
     );
   }
 
@@ -22,7 +22,7 @@ class Validator {
     return inputValue.split("").includes("0") === false;
   }
 
-  checkInputValueDupicated(inputValue) {
+  checkInputValueDuplicated(inputValue) {
     return inputValue.length === new Set([...inputValue]).size;
   }
 }
