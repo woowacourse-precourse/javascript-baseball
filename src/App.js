@@ -20,6 +20,8 @@ class App {
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
       this.checkInputNum(inputNum);
+      let [strike, ball] = this.checkStrikeAndBall(inputNum);
+      this.printStrikeAndBall(strike, ball);
     });
   }
 
@@ -32,6 +34,27 @@ class App {
     if (Number.isNaN(inputNum) || inputNum.length !== 3 || duplicate) {
       throw new Error('잘못된 입력값입니다.');
     }
+  }
+
+  checkStrikeAndBall(inputNum) {
+    let [strike, ball] = [0, 0];
+    let splitInputNum = [...inputNum];
+    splitInputNum.forEach((number, index) => {
+      let computerIndex = this.computer.indexOf(Number(number));
+      if (computerIndex === index) strike++;
+      else if (computerIndex !== -1) ball++;
+    });
+    return [strike, ball];
+  }
+
+  printStrikeAndBall(strike, ball) {
+    if (strike === 0 && ball === 0) MissionUtils.Console.print('낫싱');
+    else if (strike === 3) MissionUtils.Console.print('${strike}스트라이크');
+    else if (strike > 0 && ball === 0)
+      MissionUtils.Console.print('${strike}스트라이크');
+    else if (strike === 0 && ball > 0)
+      MissionUtils.Console.print('${strike}스트라이크');
+    else MissionUtils.Console.print('${ball}볼 ${strike}스트라이크');
   }
 
   play() {
