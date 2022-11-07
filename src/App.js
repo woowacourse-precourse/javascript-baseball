@@ -7,6 +7,10 @@ class App {
     this.strikes = 0;
     this.balls = 0;
   }
+
+  printMessage(message) {
+    Console.print(message);
+  }
   play() {}
 }
 
