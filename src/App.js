@@ -27,8 +27,9 @@ class App {
   getUserNumber() {
     Console.readLine(GET_USER_NUMBER_SENTENCE, (userNumber) => {
       this.userNumber = userNumber.split('').map(Number);
+      
       this.validateUserNumber();
-      this.compareNumbers(this.computerNumber, this.userNumber);
+      this.compareNumbers();
     });
   }
 
@@ -52,13 +53,13 @@ class App {
     }
   }
 
-  compareNumbers(computerNumber, userNumber) {
+  compareNumbers() {
     let [ball, strike] = [0, 0];
 
     for (let i = 0; i < 3; i++) {
-      if (computerNumber[i] === userNumber[i]) {
+      if (this.computerNumber[i] === this.userNumber[i]) {
         strike++;
-      } else if (userNumber.includes(computerNumber[i])) {
+      } else if (this.userNumber.includes(this.computerNumber[i])) {
         ball++;
       }
     }
