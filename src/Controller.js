@@ -19,13 +19,9 @@ class Controller {
     const strikes = this.getStrikes(input, answer);
     const balls = this.getBalls(input, answer);
 
-    if (this.isFinish(strikes) === true) {
-      return NO_MESSAGE;
-    }
-
     const hint = strikes === 0 && balls === 0
       ? '낫싱' : this.makeHint(strikes, balls);
-    return hint;
+    return [hint, this.isFinish(strikes)];
   }
 
   getStrikes(input, answer) {

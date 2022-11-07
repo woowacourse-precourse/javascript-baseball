@@ -35,8 +35,8 @@ class App {
     Console.readLine(this.MESSAGE.USER_ANSWER, (input) => {
       const numbers = this.splitInput(input);
       this.validateInput(numbers);
-      const hint = this._controller.compareAnswer(numbers, this._computer.answer);
-      this.validateHint(hint);
+      const [hint, isFinish] = this._controller.compareAnswer(numbers, this._computer.answer);
+      this.validateHint(hint, isFinish);
     });
   }
 
@@ -46,12 +46,12 @@ class App {
     };
   }
 
-  validateHint(hint) {
-    if (hint === NO_MESSAGE) {
+  validateHint(hint, isFinish) {
+    this.printMessage(hint);
+    if (isFinish === true) {
       this.printMessage(this.MESSAGE.GAME_OVER);
       this.getUserSelect();
     } else {
-      this.printMessage(hint);
       this.start();
     }
   }

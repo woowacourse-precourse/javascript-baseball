@@ -10,7 +10,14 @@ class Computer {
   }
 
   makeAnswer() {
-    return Random.pickUniqueNumbersInRange(MINIMUM_RANGE, MAXIMUM_RANGE, ANSWER_LENGTH);
+    const answer = [];
+    while (answer.length < ANSWER_LENGTH) {
+      const number = Random.pickNumberInRange(MINIMUM_RANGE, MAXIMUM_RANGE);
+      if (answer.includes(number) === false) {
+        answer.push(number);
+      }
+    }
+    return answer;
   }
 
   get answer() {
