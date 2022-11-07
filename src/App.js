@@ -19,15 +19,31 @@ class App {
         random_num.push(number);        
     }
     const computerNum = random_num.join('');
+    this.getUserNum(computerNum);
   }
 
-  getUserNum() {
+  getUserNum(computerNum) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
       const isValid = this.user.isValid(userNum);
       if (!isValid) {
         throw new Error("입력값이 잘못되었습니다. 프로그램을 종료합니다.");
       }
+      this.compareNum(computerNum, userNum);
     });
+  }
+
+  compareNum(computerNum, userNum) {
+    const {strike, ball} = this.cntStikeAndBall(computerNum, userNum);
+    const result = this.resultMsg(strike, ball);
+    MissionUtils.Console.print(result);
+
+    if (strike === 3){
+      this.successMsg();
+      this.askReplay();
+    }
+    if (strike !== 3) {
+      this.getUserNum(computerNum);
+    }
   }
 
   successMsg() {
