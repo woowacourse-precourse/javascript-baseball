@@ -136,4 +136,14 @@ describe('숫자 야구 게임', () => {
 			}
 		});
 	});
+
+	test('validateRestartAnswer 메소드에 1 또는 2를 넣었을 때 true, 이외의 경우 false 를 반환', () => {
+		const answers = ['1', '2', '3'];
+		const expectResults = [true, true, false];
+		answers.forEach((answer, index) => {
+			const app = new App();
+			const result = app.validateRestartAnswer(answer);
+			expect(result).toEqual(expectResults[index]);
+		});
+	});
 });
