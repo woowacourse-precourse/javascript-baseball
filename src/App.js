@@ -4,16 +4,20 @@ class App {
     let computerRandomNum = this.createRandomNumber();
     let userInputNum=this.InputUserNumber();
 
-    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.ball(computerRandomNum, userInputNum)==0&&this.checkUserNumVaildation(userInputNum)){
-      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
-     }
-    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){
-      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+    while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
+      if(this.ball(computerRandomNum, userInputNum)==0){
+        console.log(userInputNum+"di");
+        MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+      }
+      //console.log(userInputNum);
+      if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
+        MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
+        userInputNum=this.InputUserNumber();
+        console.log(userInputNum+" 3");
+      }
+      
+
     }
-    if(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){
-      userInputNum=this.InputUserNumber();
-      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
-     }
     if(this.checkThreeStrike(computerRandomNum, userInputNum)){
       this.selectGameEnd(userInputNum);
     }
@@ -85,8 +89,10 @@ class App {
     if(this.strike(computerRandomNum, userInputNum)==3){
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개를 모두 맞히셨습니다! 게임 종료");
-      userInputNum=this.InputUserNumber();
-      this.selectGameEnd(userInputNum);
+  
+      //userInputNum=this.InputUserNumber();
+      //this.selectGameEnd(userInputNum);
+      return true;
     }
     return false;
   }
@@ -146,12 +152,15 @@ class App {
     }
   /*게임 종료 여부 선택하는 기능*/
   selectGameEnd(userInputNum){
+    userInputNum=this.InputUserNumber();
     if(userInputNum==1){
       MissionUtils.Console.print("게임 재시작");
       this.play();
+      return userInputNum;
       }
     if(userInputNum==2){
       MissionUtils.Console.print("게임 종료");
+      return userInputNum;
       }
     }
 }
