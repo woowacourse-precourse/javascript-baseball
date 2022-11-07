@@ -10,7 +10,7 @@ class App {
   play() {
     this.printGameStartMessage();
     this.init();
-    this.gameStart();
+    this.playGame();
   }
 
   init() {
@@ -26,13 +26,13 @@ class App {
     this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
   }
 
-  gameStart() {
+  playGame() {
     MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
       this.getUserNumber(input);
       if (!this.isValidUserNumber(this.userNumber)) {
         throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
       }
-      MissionUtils.Console.print(this.printCountResult(this.computerNumber, this.userNumber));
+      MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
 
       if (!this.isGameFinished) this.gameStart();
 
@@ -86,7 +86,7 @@ class App {
     return numberOfStrikes;
   }
 
-  printCountResult(computerNumber, userNumber) {
+  getCountResult(computerNumber, userNumber) {
     let numberOfBalls = this.getNumberOfBalls(computerNumber, userNumber);
     let numberOfStrikes = this.getNumberOfStrikes(computerNumber, userNumber);
 
