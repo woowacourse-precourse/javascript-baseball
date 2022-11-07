@@ -29,7 +29,7 @@ const mockRandoms = numbers => {
 describe('숫자 야구 게임', () => {
 	test('게임 종료 후 2회 이상 재시작', () => {
 		const randoms = [1, 3, 5, 5, 8, 9, 1, 3, 5, 5, 8, 9, 1, 3, 5];
-		const answers = ['135', '1', '589', '1', '135', '1', '589', '1', '568', '135', '2'];
+		const answers = ['135', '1', '589', '1', '135', '1', '589', '1', '968', '135', '2'];
 		const logSpy = getLogSpy();
 		const messages = ['3스트라이크', '낫싱'];
 
