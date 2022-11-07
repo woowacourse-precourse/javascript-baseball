@@ -20,7 +20,7 @@ class App {
   letUserInput() {
     Console.print("숫자 야구 게임을 시작합니다.");
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      let errorCheck = new InputCheck(answer);
+      let errorCheck = new CheckInput(answer);
       if(!errorCheck.isValid(answer)) {
         throw new Error("올바르지 않은 입력값입니다.")
       }
@@ -29,7 +29,7 @@ class App {
   }
 }
 
-class InputCheck {
+class CheckInput {
 
   isValid(answer) {
     this.answer = answer;
@@ -56,5 +56,7 @@ class InputCheck {
   } 
   
 }
+
+
 
 module.exports = App;
