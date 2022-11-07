@@ -7,40 +7,42 @@ class App {
   }
 
   play() {
+    Console.print('숫자 야구 게임을 시작합니다.');
     this.gameStart();
   }
 
   gameStart() {
-    Console.print('숫자 야구 게임을 시작합니다.');
-    return this.getRandomNumbers();
+    this.computerNumbers = this.getRandomNumbers();
+    this.userInputNumber();
   }
 
   getRandomNumbers() {
-    this.computerNumbers = Random.pickUniqueNumbersInRange(1, 9, 3);
-    return this.userInputNumber();
+    return Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   userInputNumber() {
     Console.readLine('숫자를 입력해주세요 : ', (numbers) => {
-      return this.checkInputError(numbers);
+      if (!this.checkInputError(numbers)) {
+        Console.print(`숫자를 입력해주세요 : ${numbers}`);
+        this.setUserNumber(numbers);
+      } else {
+        Console.close();
+        this.throwError('잘못 입력하셨습니다');
+      }
     });
   }
 
   checkInputError(numbers) {
     const newNumbers = new Set(numbers); // 중복된 숫자를 찾기위해 사용
-    if (isNaN(numbers)) {
-      throw new Error('숫자 이외의 입력');
-    }
+    let isError = false;
 
-    if (numbers.length !== 3) {
-      throw new Error();
-    }
+    if (isNaN(numbers)) isError = true;
 
-    if (newNumbers.size !== 3) {
-      throw new Error();
-    }
+    if (numbers.length !== 3) isError = true;
 
-    return this.setUserNumber(numbers);
+    if (newNumbers.size !== 3) isError = true;
+
+    return isError;
   }
 
   setUserNumber(numbers) {
@@ -120,9 +122,13 @@ class App {
 
     Console.print(text);
   }
+
+  throwError(message) {
+    throw new Error(message);
+  }
 }
 
-const baseball = new App();
-baseball.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
