@@ -54,15 +54,11 @@ function isCorrectInput(input) {
 function printHint(computerNumber, userNumber) {
   let strikeCount = 0;
   let ballCount = 0;
-  if (computerNumber[0] === userNumber[0]) strikeCount++;
-  if (computerNumber[1] === userNumber[1]) strikeCount++;
-  if (computerNumber[2] === userNumber[2]) strikeCount++;
-  if (computerNumber[0] === userNumber[1]) ballCount++;
-  if (computerNumber[0] === userNumber[2]) ballCount++;
-  if (computerNumber[1] === userNumber[0]) ballCount++;
-  if (computerNumber[1] === userNumber[2]) ballCount++;
-  if (computerNumber[2] === userNumber[0]) ballCount++;
-  if (computerNumber[2] === userNumber[1]) ballCount++;
+  for (let index = 0; index < 3; index++) {
+    let posSameNumber = userNumber.indexOf(computerNumber[index]);
+    if (posSameNumber === index) strikeCount++;
+    else if (posSameNumber != -1) ballCount++;
+  }
   let result = "";
   if (ballCount === 0) {
     if (strikeCount === 0) result = "낫싱";
