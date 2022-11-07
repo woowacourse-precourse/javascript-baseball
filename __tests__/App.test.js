@@ -161,4 +161,13 @@ describe('userConfirm()', () => {
 
     expect(app.isFinish()).toBeFalsy();
   });
+
+  test('2을 전달하면 게임 종료 문구를 출력한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+
+    app.userConfirm(2);
+
+    expect(logSpy).toHaveBeenCalledWith('게임 종료');
+  });
 });
