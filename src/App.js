@@ -62,13 +62,13 @@ class App {
       MU.Console.close();
     });
 
-    if (this.validateInput(input)) {
+    if (this.verifyInput(input)) {
       return input.split("").map((el) => +el);
     } else this.exit();
   }
 
-  // validateInput() : 사용자의 입력이 올바른지 검증
-  validateInput(input) {
+  // verifyInput() : 사용자의 입력이 올바른지 검증
+  verifyInput(input) {
     const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     if (input.length !== 3) return false;
