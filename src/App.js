@@ -1,14 +1,15 @@
 const Messages = require('./messages');
 const {print} = require('./input');
+const Game = require('./game');
 
 class App {
   // eslint-disable-next-line class-methods-use-this
-  play() {
-    while (true) {
-      print(Messages.GAME_START);
-      // TODO: 숫자 야구 게임 구현
+  async play() {
+    print(Messages.GAME_START);
 
-      break;
+    while (true) {
+      const game = new Game();
+      await game.play();
     }
   }
 }
