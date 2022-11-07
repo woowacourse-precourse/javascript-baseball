@@ -1,9 +1,17 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const {
   validByRegex,
   validDuplicate,
   validInput,
   validOneOrTwo,
+  endApp,
 } = require('../src/Function');
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe('Function 테스트', () => {
   test('validByRegex 테스트', () => {
@@ -30,7 +38,13 @@ describe('Function 테스트', () => {
 
   test('validOneOrTwo 테스트', () => {
     expect(() => {
-      validOneOrTwo('2');
+      validOneOrTwo('3');
     }).toThrow();
+  });
+
+  test('endApp 테스트', () => {
+    const logSpy = getLogSpy();
+    endApp();
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
 });
