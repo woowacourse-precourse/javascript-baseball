@@ -6,9 +6,13 @@ class Game {
   }
 
   play() {
+    this.init();
+    this.pitchNumber();
+  }
+
+  init() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.answer = this.generateThreeDigitNumber();
-    this.pitchNumber();
   }
 
   generateThreeDigitNumber() {
