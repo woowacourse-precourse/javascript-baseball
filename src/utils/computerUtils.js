@@ -22,11 +22,21 @@ const countBall = (inputNumber, answers, index) => {
 const isNotNumber = (charCode) => charCode < 49 || charCode > 57;
 
 const getRandomNumber = () => {
-  return Random.pickUniqueNumbersInRange(
-    COMPUTER.START_NUMBER,
-    COMPUTER.END_NUMBER,
-    COMPUTER.ANSWER_LENGTH
-  );
+  const randomNumbers = [];
+  const map = {};
+
+  while (true) {
+    const num = Random.pickNumberInRange(COMPUTER.START_NUMBER, COMPUTER.END_NUMBER);
+
+    if (map[num]) continue;
+
+    map[num] = true;
+    randomNumbers.push(num);
+
+    if (randomNumbers.length === COMPUTER.ANSWER_LENGTH) break;
+  }
+
+  return randomNumbers;
 };
 
 const generateHint = (inputNumbers, answers) => {
