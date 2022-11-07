@@ -17,9 +17,8 @@ class App {
   };
 
   isDuplicated = (input) => {
-    const inputArray = input.split("");
-    const inputSet = new Set(inputArray);
-    return inputArray.length !== inputSet.size;
+    const inputSet = new Set([...input]);
+    return input.length !== inputSet.size;
   };
 
   containsThreeNumbers = (input) => {
