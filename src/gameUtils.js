@@ -1,4 +1,4 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 const config = require('./config');
 
 const generateTargetNumber = () => {
@@ -27,4 +27,7 @@ const makePhrase = (strike, ball) => {
 
     return `${strike}${STRIKE} ${ball}${BALL}`;
 };
+
+const printPhrase = (catchPhrase) => Console.print(catchPhrase);
+
 module.exports = { findStrikeBall, makePhrase };
