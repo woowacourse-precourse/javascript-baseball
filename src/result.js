@@ -37,3 +37,15 @@ exports.printResult = function printResult(result) {
     MissionUtils.Console.print(RESULT_SUCCESS);
   }
 };
+
+exports.checkStop = function checkStop() {
+  var state;
+
+  MissionUtils.Console.print(STOP_CHECKING);
+  MissionUtils.Console.readLine("", (answer) => {
+    state = answer;
+    console.log(state);
+  });
+
+  return state;
+};
