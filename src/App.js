@@ -9,14 +9,33 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const computer = Computer();
-    const answer = computer.computerNumberStr;
+
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    console.log(computer.checkGameResult("123"));
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
+      this.playOneRound(computer, number)
+    );
+
+    return this;
   }
 
-  playOneRound() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {});
+  playOneRound(computer, number) {
+    const { isEnd, print } = computer.checkGameResult(number);
+    MissionUtils.Console.print(print);
+
+    switch (isEnd) {
+      case true:
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        break;
+
+      case false:
+        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) =>
+          this.playOneRound(computer, number)
+        );
+        break;
+    }
+
+    return this;
   }
 }
 
