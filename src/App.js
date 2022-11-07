@@ -1,8 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
+  constructor() {
+    this.baseballGame = new BaseballPlayTool();
+  }
   play() {
-    const baseballGame = new BaseballPlayTool();
-    baseballGame.gameRepeat();
+    this.baseballGame.gameRepeat();
   }
 }
 
@@ -22,6 +24,7 @@ class ComputerRandomNumber {
 
 class BaseballPlayTool {
  constructor() {
+   this.computerInput = new ComputerRandomNumber();
    this.answerCheck = false;
    this.startText();
   }
@@ -105,8 +108,7 @@ class BaseballPlayTool {
   }
 
   gameRepeat() {
-    const computerInput = new ComputerRandomNumber();
-    const computer = computerInput.randomNumber();
+    const computer = this.computerInput.randomNumber();
     this.userInputHandler(computer);
   }
   gameReset() {
