@@ -59,4 +59,16 @@ describe("기능 테스트", () => {
       expect.stringContaining('낫싱')
     );
   });
+
+  test("기능 6, 결과 출력하기 - 3스트라이크", () => {
+    const logSpy = getLogSpy();
+    const checkResult = [0, 3];
+
+    const app = new App();
+    app.printResult(checkResult);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('3스트라이크 \n3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+    );
+  });
 });
