@@ -2,44 +2,76 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    let num;
+    let restart_number;
     let random_number;
     let repeat = true;
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
     while (repeat) {
       random_number = this.GET_RANDOM_NUMBER();
-      try {
-        num = this.IN_GAME(random_number);
-      } catch (e) {
-        console.error(e);
-        return;
-      }
-      if (num === 1) {
+      console.log("random_number:", random_number);
+
+      restart_number = this.IN_GAME(random_number);
+      console.log(restart_number);
+
+      if (restart_number === 1) {
         continue;
-      } else if (num === 2) {
-        return;
+      } else if (restart_number === 2) {
+        repeat = false;
+        MissionUtils.Console.print("게임 종료");
       }
     }
   }
 
   GET_RANDOM_NUMBER() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3); //ex - [2,5,6]
+    const RANDOM_NUMBER_LIST = [];
+    RANDOM_NUMBER_LIST.push(MissionUtils.Random.pickNumberInRange());
+    RANDOM_NUMBER_LIST.push(MissionUtils.Random.pickNumberInRange());
+    RANDOM_NUMBER_LIST.push(MissionUtils.Random.pickNumberInRange());
+    return RANDOM_NUMBER_LIST;
+  }
+
+  INPUT_NUMBER() {
+    let user_input_list;
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      user_input_list = String(answer)
+        .split("")
+        .map((e) => Number(e));
+    });
+    return user_input_list;
+  }
+
+  VALIDATE_NUMBER(NUMBER_LIST) {
+    if (NUMBER_LIST.includes(NaN)) {
+      //문자열 입력
+      throw "입력값은 문자열이 될 수 없습니다!";
+    }
+    if (NUMBER_LIST.includes(0)) {
+      //0입력
+      throw "입력값은 1~9사이의 숫자여야 합니다!";
+    }
+    if (NUMBER_LIST.length !== 3) {
+      //3자리가 아닌 숫자 입력
+      throw "입력값은 세 자리 숫자여야 합니다!";
+    }
+    if (NUMBER_LIST.length !== new Set(NUMBER_LIST).size) {
+      //동일한 숫자 입력
+      throw "입력값은 서로 다른 숫자여야 합니다!";
+    }
+
+    console.log("validate pass");
   }
 
   IN_GAME(correct_number) {
     let correct = false;
     let user_input_number;
+    let finish_number;
 
     while (!correct) {
       user_input_number = this.INPUT_NUMBER();
+      console.log("user_input_number:", user_input_number);
 
-      try {
-        this.VALIDATE_NUMBER(user_input_number);
-      } catch (e) {
-        console.error(e);
-        throw "";
-      }
+      this.VALIDATE_NUMBER(user_input_number);
+
       //제대로 된 값 입력
       if (
         user_input_number[0] === correct_number[0] &&
@@ -51,18 +83,21 @@ class App {
         this.HINT(user_input_number, correct_number);
       }
     }
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    Console.readLine(
+    MissionUtils.Console.print("3스트라이크");
+
+    MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (num) => {
+        console.log("종료", num);
         num = Number(num);
         if (num === 1 || num === 2) {
-          return num;
+          finish_number = num;
         } else {
           throw "1 또는 2만 입력할 수 있습니다.";
         }
       }
     );
+    return finish_number;
   }
 
   HINT(user, correct) {
@@ -95,35 +130,6 @@ class App {
       MissionUtils.Console.print(ball + "볼");
     } else {
       MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
-    }
-  }
-
-  INPUT_NUMBER() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-      const NUMBER_LIST = String(answer)
-        .split("")
-        .map((e) => Number(e));
-
-      return NUMBER_LIST;
-    });
-  }
-
-  VALIDATE_NUMBER(list) {
-    if (NUMBER_LIST.includes(NaN)) {
-      //문자열 입력
-      throw "입력값은 문자열이 될 수 없습니다!";
-    }
-    if (NUMBER_LIST.includes(0)) {
-      //0입력
-      throw "입력값은 1~9사이의 숫자여야 합니다!";
-    }
-    if (NUMBER_LIST.length !== 3) {
-      //3자리가 아닌 숫자 입력
-      throw "입력값은 세 자리 숫자여야 합니다!";
-    }
-    if (NUMBER_LIST.length !== new Set(NUMBER_LIST).length) {
-      //동일한 숫자 입력
-      throw "입력값은 서로 다른 숫자여야 합니다!";
     }
   }
 }
