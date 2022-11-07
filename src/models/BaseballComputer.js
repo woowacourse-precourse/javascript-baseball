@@ -11,7 +11,7 @@ class BaseballComputer {
 
     while (digits.size < RULE.LENGTH) {
       const digit = Random.pickNumberInRange(RULE.RANGE_START, RULE.RANGE_END);
-      digits.add(String(digit));
+      digits.add(digit.toString());
     }
 
     this.digits = [...digits];
