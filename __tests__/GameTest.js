@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const { ERROR_CHECK, INGAME_MESSAGE } = require("../src/Constant");
+const Validation = require("../src/Validation");
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -52,10 +53,10 @@ describe("게임 문구 테스트", () => {
 
 describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크1", () => {
-    const app = new App();
-    expect(() => app.numberCheck(1)).toThrow(
+    const validation = new Validation();
+    expect(() => validation.checkLength([1, 2, 3, 4])).toThrow(
       INGAME_MESSAGE.ERROR,
-      " 타입은 number여야 합니다."
+      "입력값은 3자리여야 합니다."
     );
   });
 
