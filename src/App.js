@@ -30,10 +30,6 @@ class App {
   }
 
   playTurn() {
-    this.askUserDigits();
-  }
-
-  askUserDigits() {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       this.checkUserDigitsValidity(userInput);
       const userDigits = [...userInput].map(Number);
@@ -57,16 +53,17 @@ class App {
   }
 
   countScore(userDigits) {
-    this.score.strikes = 0;
-    this.score.balls = 0;
-
+    let strikes = 0;
+    let balls = 0;
     for (let i = 0; i < this.DIGITS_LENGTH; i++) {
       if (this.computerDigits[i] === userDigits[i]) {
-        this.score.strikes += 1;
+        strikes += 1;
       } else if (this.computerDigits.includes(userDigits[i])) {
-        this.score.balls += 1;
+        balls += 1;
       }
     }
+    this.score.strikes = strikes;
+    this.score.balls = balls;
   }
 
   printScore() {
