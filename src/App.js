@@ -19,6 +19,7 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (input) => {
       this.checkUserInput(input);
       if (ISANSWER) {
+        ISANSWER = 0;
         this.continueOrEnd();
       } else {
         this.userInput();
@@ -39,7 +40,15 @@ class App {
   }
 
   setRandomNumber() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    // return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
   }
 
   countStrickes(userNumbers, randomNumbers) {
@@ -87,7 +96,7 @@ class App {
   continueOrEnd() {
     MissionUtils.Console.readLine('', (input) => {
       if (input == 1) {
-        app.start();
+        this.start();
       } else if (input == 2) {
         MissionUtils.Console.close();
       } else {
@@ -97,7 +106,7 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
