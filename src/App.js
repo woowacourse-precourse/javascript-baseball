@@ -1,7 +1,7 @@
-const Message = require('./Message');
-const Input = require('./Input');
-const Count = require('./Count');
-const createRandomNumbers = require('./createRandomNumbers');
+const Message = require('./components/Message');
+const Input = require('./components/Input');
+const Count = require('./components/Count');
+const createRandomNumbers = require('./utils/createRandomNumbers');
 
 class App {
   constructor() {}
