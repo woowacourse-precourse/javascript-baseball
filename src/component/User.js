@@ -6,4 +6,10 @@ class User {
     const isExist = new Set([...userInput]).size !== 3;
     return isExist === false;
   }
+  checkInputNum(userInput) {
+    const setInputToNum = Number(userInput);
+    const isNumber = (num) => !Number.isNaN(num) && typeof num === "number";
+
+    return isNumber(setInputToNum);
+  }
 }
