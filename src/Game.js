@@ -1,7 +1,4 @@
-const {
-  Console: { print, readLine, close },
-  Random: { pickNumberInRange },
-} = require('@woowacourse/mission-utils');
+const MissionUtils = require('@woowacourse/mission-utils');
 const gameControlValidation = require('./validation/gameControlValidation.js');
 const gameInputValidation = require('./validation/gameInputValidation.js');
 
@@ -15,27 +12,29 @@ module.exports = class Game {
 
   gameInit() {
     this.computerNumbers = [...this.getRandomNumbers()].join('');
-    print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getUserNumberInput();
   }
 
   getRandomNumbers() {
     const computerNumbers = new Set();
     while (computerNumbers.size < 3) {
-      const number = pickNumberInRange(1, 9);
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNumbers.has(number)) computerNumbers.add(number);
     }
     return computerNumbers;
   }
 
   getUserNumberInput() {
-    readLine('숫자를 입력해 주세요 : ', (input) => this.progressGame(input));
+    MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) =>
+      this.progressGame(input)
+    );
   }
 
   progressGame(userNumberInput) {
     gameInputValidation(userNumberInput);
     const gameResultString = this.getGameResultString(userNumberInput);
-    print(gameResultString);
+    MissionUtils.Console.print(gameResultString);
     if (gameResultString == GAME_WIN) this.getUserControlInput();
     this.getUserNumberInput();
   }
@@ -78,14 +77,15 @@ module.exports = class Game {
   }
 
   getUserControlInput() {
-    readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (input) =>
-      this.handleGame(input)
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+      (input) => this.handleGame(input)
     );
   }
 
   handleGame(userControlInput) {
     gameControlValidation(userControlInput);
     if (userControlInput == RESTART) this.gameInit();
-    else close();
+    else MissionUtils.Console.close();
   }
 };
