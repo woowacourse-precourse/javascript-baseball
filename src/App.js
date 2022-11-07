@@ -59,7 +59,10 @@ class App {
         throw Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
 
       this.#userInput = input;
+      this.result = {};
 
+      this.assertRule();
+      this.printResult();
       this.end();
     });
   }
