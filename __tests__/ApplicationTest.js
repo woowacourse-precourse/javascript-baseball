@@ -47,9 +47,61 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("자릿 수 초과 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("자릿 수 미만 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("문자열 입력 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["ab2"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("숫자 범위 외 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["035"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("숫자 중복 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["225"];
 
     mockRandoms(randoms);
     mockQuestions(answers);

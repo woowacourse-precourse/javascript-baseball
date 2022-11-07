@@ -14,7 +14,9 @@ class App {
   enterUserInput(computerValue) {
     Console.readLine("숫자를 입력해주세요 : ", (userInputValue) => {
       const checkNum = /^[1-9]{3,3}$/;
-      if (!checkNum.test(userInputValue)) {
+      const testNumSet = new Set(userInputValue);
+
+      if (testNumSet.size !== 3 || !checkNum.test(userInputValue)) {
         throw new Error("잘못된 값 입니다.");
       } else {
         this.getStrikeAndBall(computerValue, userInputValue);
