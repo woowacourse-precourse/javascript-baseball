@@ -31,7 +31,7 @@
 ### 📝 utilsTest.js
 
 - [o] utils.getBallsAndStrikes 함수 테스트
-- [-] utils.getGuessResult 함수 테스트
+- [o] utils.getGuessResult 함수 테스트
 
 ### 📝 GameDataUITest.js
 
