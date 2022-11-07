@@ -1,55 +1,67 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const play = function() {
-      const computer = pickRandomNumbers();
-      
-      const game = function() {
-        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-          try{
-            judgeInputNumber(answer);
-          } catch(error) {
-            MissionUtils.Console.print(error);
-            MissionUtils.Console.print('게임 종료');
-            MissionUtils.Console.close();
-            return;
-          }
-  
-          const compareNumberArr = comparingNumbers(answer, computer);
-          const result = returnResult(compareNumberArr);
-          MissionUtils.Console.print(result);
-          
-          if(compareNumberArr[1] == 3) {
-            MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
-              if(answer == 1) {
-                play();
-              } else if(answer == 2) {
-                MissionUtils.Console.print('게임 종료');
-                return MissionUtils.Console.close();
-              } else {
-                MissionUtils.Console.print('잘못된 값 입력. 게임 종료');
-                return MissionUtils.Console.close();
-              }
-            });
-          } 
-          game();
-        });
-      };
-      game();
-    };
-    play();
-  }
+    const computer = pickRandomNumbers();
+    game(computer);
+  };
 }
+
+const app = new App();
+app.play();
+module.exports = App;
+
+
+function game(computer) {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    try{
+      judgeInputNumber(answer);
+    } catch(error) {
+      MissionUtils.Console.print(error);
+      MissionUtils.Console.print('게임 종료');
+      MissionUtils.Console.close();
+      return;
+    }
+    
+    const compareNumberArr = comparingNumbers(answer, computer);
+    const result = returnResult(compareNumberArr);
+    MissionUtils.Console.print(result);
+
+    
+    if(compareNumberArr[1] === 3) {
+      askGamePlay();
+    }
+    
+    game(computer);
+  });
+};
+
+
+function askGamePlay() {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
+    if(answer == 1) {
+      const computer = pickRandomNumbers();
+      game(computer);
+    } else if(answer == 2) {
+      MissionUtils.Console.print('게임 종료');
+      return MissionUtils.Console.close();
+    } else {
+      MissionUtils.Console.print('잘못된 값 입력. 게임 종료');
+      return MissionUtils.Console.close();
+    }
+  });
+}
+
 
 function pickRandomNumbers() {
   const computer = [];
-    while(computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if(!computer.includes(number)) {
-        computer.push(number);
-      }
+  while(computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if(!computer.includes(number)) {
+      computer.push(number);
     }
+  }
   return computer;
 }
 
@@ -112,7 +124,3 @@ function judgeInputNumber(inputNumber) {
 
   return inputNumber;
 }
-
-const app = new App();
-app.play();
-module.exports = App;
