@@ -24,6 +24,7 @@ class App {
   getUserInput(currentAnswer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.createHint(answer, currentAnswer);
+      this.isDone ? this.getRetryInput() : this.getUserInput(currentAnswer);
     });
   }
 
@@ -81,6 +82,28 @@ class App {
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
+  }
+
+  retryGame() {
+    this.createRandom();
+    this.getUserInput(this.answer);
+  }
+
+  finishGame() {
+    MissionUtils.Console.close();
+  }
+
+  getRetryInput() {
+    MissionUtils.Console.readLine("", (answer) => {
+      switch (answer) {
+        case "1":
+          this.retryGame();
+          break;
+        case "2":
+          this.finishGame();
+          break;
+      }
+    });
   }
 
   play() {
