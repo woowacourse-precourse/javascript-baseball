@@ -53,17 +53,11 @@ class App {
     return strike === COMPUTER_NUMBER_LENGTH;
   }
 
-  getRandomNum() {
-    return MissionUtils.Random.pickNumberInRange(1, 9);
-  }
-
   getComputerNum() {
-    let computerNum = [];
-
-    let num;
+    const computerNum = [];
 
     while (computerNum.length < 3) {
-      num = this.getRandomNum();
+      const num = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNum.includes(num)) {
         computerNum.push(num);
       }

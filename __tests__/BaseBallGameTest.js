@@ -50,7 +50,7 @@ describe("게임 플러이어 입력 예외 처리 Test", () => {
   const app = new App();
 
   test("숫자가 아닌 문자가 입력으로 들어오는 경우 ", () => {
-    expect(() => app.isValidPlayerInput("이삼오")).toThrow(
+    expect(() => app.isValidPlayerInput("이삼5")).toThrow(
       "숫자로만 입력해주세요."
     );
     expect(() => app.isValidPlayerInput("/+*'~")).toThrow(
