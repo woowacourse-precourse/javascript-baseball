@@ -58,7 +58,7 @@ class App {
     if (BALL_CNT == 0 && STRIKE_CNT == 0) return 1;
   }
 
-  gameResult(STRIKE_CNT) {
+  gameClear(STRIKE_CNT) {
     if (STRIKE_CNT == 3) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
       return true;
@@ -79,7 +79,7 @@ class App {
       MissionUtils.Console.print(`${BALL_CNT}볼\n`);
     }
 
-    return this.gameResult(STRIKE_CNT);
+    return this.gameClear(STRIKE_CNT);
   }
 
   askReplay() {
