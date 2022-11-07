@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const { ERROR_MESSAGE } = require("../src/Constants");
 
 describe("야구게임 함수 테스트", () => {
   const app = new App();
@@ -18,13 +19,13 @@ describe("야구게임 함수 테스트", () => {
 
     expect(() => {
       app.checkValidity(wrong1);
-    }).toThrow("서로 다른 숫자 3개를 입력해야 합니다.");
+    }).toThrow(ERROR_MESSAGE.REPEAT);
     expect(() => {
       app.checkValidity(wrong2);
-    }).toThrow("숫자 3개를 입력해야 합니다.");
+    }).toThrow(ERROR_MESSAGE.QUANTITY);
     expect(() => {
       app.checkValidity(wrong3);
-    }).toThrow("숫자 3개를 입력해야 합니다.");
+    }).toThrow(ERROR_MESSAGE.QUANTITY);
     expect(() => {
       app.checkValidity(right);
     }).toBeTruthy();
@@ -44,17 +45,5 @@ describe("야구게임 함수 테스트", () => {
       ballNum: 3,
       strikeNum: 0,
     });
-  });
-
-  test("메세지 올바르게 출력되는 지 확인", () => {
-    const result1 = { ballNum: 2, strikeNum: 1 };
-    const result2 = { ballNum: 0, strikeNum: 3 };
-    const result3 = { ballNum: 3, strikeNum: 0 };
-    const result4 = { ballNum: 0, strikeNum: 0 };
-
-    expect(app.showMessage(result1)).toBe("2볼 1스트라이크");
-    expect(app.showMessage(result2)).toBe("3스트라이크");
-    expect(app.showMessage(result3)).toBe("3볼");
-    expect(app.showMessage(result4)).toBe("낫싱");
   });
 });

@@ -1,33 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
-const REPLY = {
-  REPLAY: "1",
-  GAMEEND: "2",
-};
-
-const MESSAGE = {
-  GAMESTART: "숫자 야구 게임을 시작합니다.",
-  ASKREPLAY: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
-  GAMEEND: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  ASKNUMBER: "숫자를 입력해주세요 : \n",
-};
-
-const ERROR_MESSAGE = {
-  REPEAT: "서로 다른 숫자 3개를 입력해야 합니다.",
-  QUANTITY: "숫자 3개를 입력해야 합니다.",
-  NOTNUMBER: "숫자만 입력해야 합니다.",
-  WRONG_REPLY: "잘못된 값을 입력하셨습니다.",
-};
-
-const BASEBALL_TERM = {
-  STRIKE: "스트라이크",
-  BALL: "볼",
-  NOTHING: "낫싱",
-};
+const { REPLY, MESSAGE, ERROR_MESSAGE, BASEBALL_TERM } = require("./Constants");
 
 class App {
   constructor() {
     this.computerNumber = null;
+  }
+
+  showMessage(message) {
+    MissionUtils.Console.print(message);
   }
 
   generateComputerNumber() {
@@ -47,13 +27,13 @@ class App {
   }
 
   getUserNumber() {
-    MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
+    MissionUtils.Console.readLine(MESSAGE.ASK_NUMBER, (inputNumber) => {
       const userNumber = Array.from(inputNumber, Number);
       try {
         this.checkValidity(userNumber);
         this.compareNumbers(this.computerNumber, userNumber);
       } catch (e) {
-        MissionUtils.Console.print(e);
+        this.showMessage(e);
         MissionUtils.Console.close();
       }
     });
@@ -69,7 +49,7 @@ class App {
     }
 
     if (!userNumber.every((num) => Number.isInteger(num))) {
-      throw new Error(ERROR_MESSAGE.NOTNUMBER);
+      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
   }
 
@@ -83,7 +63,7 @@ class App {
     return { ballNum, strikeNum };
   }
 
-  showMessage(matchNum) {
+  showResult(matchNum) {
     const { ballNum, strikeNum } = matchNum;
 
     let message = `${ballNum === 0 ? "" : ballNum + BASEBALL_TERM.BALL} ${
@@ -94,14 +74,14 @@ class App {
       message = BASEBALL_TERM.NOTHING;
     }
 
-    MissionUtils.Console.print(message.trim());
+    this.showMessage(message.trim());
   }
 
   askToPlayAgain() {
-    MissionUtils.Console.readLine(MESSAGE.ASKREPLAY, (reply) => {
+    MissionUtils.Console.readLine(MESSAGE.ASK_REPLAY, (reply) => {
       if (reply === REPLY.REPLAY) {
         this.playNewGame();
-      } else if (reply === REPLY.GAMEEND) {
+      } else if (reply === REPLY.GAME_END) {
         MissionUtils.Console.close();
       } else {
         throw new Error(ERROR_MESSAGE.WRONG_REPLY);
@@ -111,10 +91,10 @@ class App {
 
   compareNumbers(computer, user) {
     const result = this.getResult(computer, user);
-    this.showMessage(result);
+    this.showResult(result);
 
     if (result.strikeNum === 3) {
-      MissionUtils.Console.print(MESSAGE.GAMEEND);
+      this.showMessage(MESSAGE.GAME_END);
       this.askToPlayAgain();
     } else {
       this.getUserNumber();
@@ -127,9 +107,9 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print(MESSAGE.GAMESTART);
+    this.showMessage(MESSAGE.GAME_START);
     this.playNewGame();
   }
 }
-
+new App().play();
 module.exports = App;
