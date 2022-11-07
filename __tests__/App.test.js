@@ -68,4 +68,12 @@ describe('isStrike()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   });
+
+  test('3을 전달하면 this.#isFinish 속성의 값이 true이다.', () => {
+    const app = new App();
+
+    app.isStrike(3);
+
+    expect(app.isFinish()).toBeTruthy();
+  });
 });
