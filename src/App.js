@@ -8,9 +8,10 @@ class App {
 }
 
 // 플레이어 숫자 입력
-function playerInputNumbers() {
+function playerInputNumbers(computerNumber) {
   MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
     const playerNumber = isValid(answer);
+    const gameState = compare(playerNumber, computerNumber);
   });
 }
 
@@ -24,6 +25,18 @@ function computerNumbers() {
     }
   }
   return computer.join("");
+}
+
+// 입력받은 숫자 비교
+function compare(playerNumber, computerNumber) {
+  const strike = strikeCheck(playerNumber, computerNumber);
+  const ball = ballCheck(playerNumber, computerNumber) - strike;
+
+  if (strike + ball === 0) return "낫싱";
+  if (strike === 3) return "3스트라이크";
+  if (strike === 0) return `${ball}볼`;
+  if (ball === 0) return `${strike}스트라이크`;
+  if (true) return `${ball}볼 ${strike}스트라이크`;
 }
 
 // 유효성 검사
