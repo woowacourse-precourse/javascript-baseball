@@ -9,8 +9,17 @@ function checkIsDigitInRange(input) {
   return !regexp.test(input);
 }
 
+function checkIsDiffEachOther(input) {
+  const duplicateNum = new Set(input).size;
+  return duplicateNum !== 3;
+}
+
 function checkException(input) {
-  if (checkInputLength(input) | checkIsDigitInRange(input)) {
+  if (
+    checkInputLength(input) |
+    checkIsDigitInRange(input) |
+    checkIsDiffEachOther(input)
+  ) {
     throw new Error(`${Message.error}`);
   }
 }
