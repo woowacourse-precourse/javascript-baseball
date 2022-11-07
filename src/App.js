@@ -82,6 +82,10 @@ class App {
         MissionUtils.Console.close();
         this.startGame();
       }
+      if (Number(inputNum) === 2) {
+        MissionUtils.Console.close();
+        MissionUtils.Console.print('게임 종료');
+      }
     });
   }
 
