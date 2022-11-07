@@ -4,9 +4,8 @@ var strike;
 var ball;
 var resultString = "";
 var input;
-var randomNumber;
-class App {
-  randomNumber = createRandomNumber();
+var randomNumber = createRandomNumber();
+class App { 
   play() {
     
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -19,16 +18,11 @@ function createRandomNumber() {
   for(var i = 0; i < 3; i++) {
     randomNumber[i] = MissionUtils.Random.pickNumberInRange(1, 9);
   }
-
-  return randomNumber;
 }
 function setInput() {
-  var inputNumber;
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
-    console.log(`입력한 숫자 : ${inputNumber}`);
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    numberCheck(input);
   });
-  input = inputNumber;
-  numberCheck(input);
 }
 
 function numberCheck(input) {
