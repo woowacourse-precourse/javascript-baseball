@@ -10,6 +10,10 @@ const VALID_NUMBER_LENGTH = 3;
 function App () {
   this.randomNumber;
   this.play = () => {
+    printNewGameInterface();
+    startGame();
+    getUserAnswer();
+  }
     function matchNumber (num1, num2) {
       let strike = 0;
       let ball = 0;
@@ -85,10 +89,7 @@ function App () {
       })
     }
 
-    printNewGameInterface();
-    startGame();
-    getUserAnswer();
-  }
+
 }
 
 module.exports = App;
