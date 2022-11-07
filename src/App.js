@@ -3,7 +3,7 @@ const config = require("./config/config");
 
 class App {
   constructor() {
-    this.computerNumber = [];
+    this.computerNum = [];
   }
 
   play() {
@@ -12,15 +12,15 @@ class App {
   }
 
   start() {
-    this.generateNumber(config.GAME_NUM_SIZE);
+    this.generateNum(config.GAME_NUM_SIZE);
     this.round();
   }
 
   round() {
-    const userNumber = this.readNumber();
-    // console.log("userNumber", userNumber);
+    const userNum = this.readNum();
+    // console.log("userNum", userNum);
 
-    const scoreObject = this.compareNumber(this.computerNumber, userNumber);
+    const scoreObject = this.compareNum(this.computerNum, userNum);
     this.printScore(scoreObject);
 
     if (scoreObject.strike === config.GAME_NUM_SIZE) {
@@ -34,15 +34,12 @@ class App {
     MissionUtils.Console.print(
       `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
     );
-
-    const control = this.readControl();
-
-    if (control === 1) {
+    if (this.replay() === 1) {
       this.start();
     }
   }
 
-  generateNumber() {
+  generateNum() {
     const result = [];
     while (result.length < config.GAME_NUM_SIZE) {
       const number = MissionUtils.Random.pickNumberInRange(
@@ -53,10 +50,10 @@ class App {
         result.push(number);
       }
     }
-    this.computerNumber = result;
+    this.computerNum = result;
   }
 
-  compareNumber(computer, user) {
+  compareNum(computer, user) {
     let strike = 0;
     let ball = 0;
 
@@ -88,7 +85,7 @@ class App {
     MissionUtils.Console.print(resultMessage);
   }
 
-  readNumber() {
+  readNum() {
     let answerList = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const inputList = Array.from(input);
@@ -96,11 +93,11 @@ class App {
         answerList.push(parseInt(number));
       });
     });
-    this.isValidNumber(answerList);
+    this.isValidNum(answerList);
     return answerList;
   }
 
-  readControl() {
+  replay() {
     let answer = -1;
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
@@ -112,7 +109,7 @@ class App {
     return answer;
   }
 
-  isValidNumber(inputList) {
+  isValidNum(inputList) {
     if (inputList.length !== config.GAME_NUM_SIZE) {
       throw "숫자가 유효하지 않습니다.";
     }
