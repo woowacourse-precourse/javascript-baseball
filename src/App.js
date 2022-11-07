@@ -56,9 +56,7 @@ class App {
   checkValidityUserNumber(userNumber) {
 
     const userNumberList = [...userNumber];
-    const firstNumber = Number(userNumberList[0]);
-    const secondNumber = Number(userNumberList[1]);
-    const thirdNumber = Number(userNumberList[2]);
+    const [firstNumber, secondNumber, thirdNumber] = userNumberList;
 
     if (!(userNumberList.length === NUMBER.THREE_DIGIT)) {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
@@ -72,7 +70,7 @@ class App {
       throw new Error(ERROR_MESSAGE.OVERLAP_ERROR);
     }
 
-    if (firstNumber === NUMBER.ZERO || secondNumber === NUMBER.ZERO || thirdNumber === NUMBER.ZERO) {
+    if (firstNumber == NUMBER.ZERO || secondNumber == NUMBER.ZERO || thirdNumber == NUMBER.ZERO) {
       throw new Error(ERROR_MESSAGE.ZERO_ERROR);
     }
   }
