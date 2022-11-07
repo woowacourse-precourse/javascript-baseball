@@ -113,6 +113,7 @@ class App {
       this.play();
     } else if (input === "2") {
       this.utils.Console.print("게임을 종료합니다.");
+      this.utils.Console.close();
       return;
     } else {
       throw new Error("예상치 못한 명령어입니다.");
