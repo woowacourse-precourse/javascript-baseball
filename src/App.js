@@ -1,4 +1,3 @@
-
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const GAME_START = 1;
@@ -51,30 +50,37 @@ class App {
   #inputFromUser() {
     //출력 중간에 입력값이 보이는 에러가 있어 개행문자를 추가했습니다.
     //ex) 숫자를 입력해345요
-    let input = 0;
     [this.#strikeCount, this.#ballCount] = [0, 0];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : \n', (answer) => {
-      input = answer;
-
-      //예외 발생 시 다시 입력 처리
-      if (this.#inputExcept(input) === ERROR) {
-        return this.#inputFromUser();
-      }
-
-      this.#userInput = this.#inputToArray(input);
-      this.#compareTwoArray();
-      this.#printStrikeBall();
-      if (this.#strikeCount !== 3) {
-        return this.#inputFromUser();
-      }
-
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.#gameEnd();
+      this.#inputAfterAcion(answer);
     });
 
     return;
   }
 
+  //input값을 받은 후의 행동
+  #inputAfterAcion(answer) {
+    let input = answer;
+
+    //예외 발생 시 다시 입력 처리
+    if (this.#inputExcept(input) === ERROR) {
+      return this.#inputFromUser();
+    }
+
+    this.#userInput = this.#inputToArray(input);
+    this.#compareTwoArray();
+    this.#printStrikeBall();
+
+    //스트라이크 3개가 아니면 반복
+    if (this.#strikeCount !== 3) {
+      return this.#inputFromUser();
+    }
+
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.#gameEnd();
+  }
+
+  //스트라이크/볼 개수를 출력
   #printStrikeBall() {
     const strikeStr = this.#strikeCount + ' 스트라이크';
     const ballStr = this.#ballCount + ' 볼';
@@ -82,11 +88,14 @@ class App {
 
     if (this.#ballCount === 0 && this.#strikeCount !== 0) {
       MissionUtils.Console.print(strikeStr);
-    } else if (this.#ballCount !== 0 && this.#strikeCount === 0) {
+    } 
+    else if (this.#ballCount !== 0 && this.#strikeCount === 0) {
       MissionUtils.Console.print(ballStr);
-    } else if (this.#ballCount === 0 && this.#strikeCount === 0) {
+    } 
+    else if (this.#ballCount === 0 && this.#strikeCount === 0) {
       MissionUtils.Console.print(outStr);
-    } else {
+    } 
+    else {
       MissionUtils.Console.print(strikeStr + ballStr);
     }
     return;
@@ -95,23 +104,22 @@ class App {
   #compareTwoArray() {
     for (let comIdx = 0; comIdx < this.#computerAnswer.length; comIdx++) {
       for (let userIdx = 0; userIdx < this.#userInput.length; userIdx++) {
+  
         this.#compareTwoNumber(comIdx, userIdx);
       }
     }
     return;
   }
 
+  //두 수를 비교하고 스트라이크/볼 카운터를 올린다
   #compareTwoNumber(comIdx, userIdx) {
-    if (
-      comIdx === userIdx &&
-      this.#computerAnswer[comIdx] === this.#userInput[userIdx]
-    ) {
+    if (comIdx === userIdx &&
+      this.#computerAnswer[comIdx] === this.#userInput[userIdx]) {
       this.#strikeCount++;
     }
-    if (
-      comIdx !== userIdx &&
-      this.#computerAnswer[comIdx] === this.#userInput[userIdx]
-    ) {
+
+    if (comIdx !== userIdx &&
+      this.#computerAnswer[comIdx] === this.#userInput[userIdx]) {
       this.#ballCount++;
     }
     return;
@@ -121,6 +129,7 @@ class App {
     return input.split('').map((arrData) => Number(arrData));
   }
 
+  //예외사항
   #inputExcept(input = '') {
     if (input == '') {
       MissionUtils.Console.print('입력값이 없습니다.');
