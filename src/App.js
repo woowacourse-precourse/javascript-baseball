@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const Render = require("./Render");
 const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
@@ -29,7 +29,7 @@ class App {
     this.play();
   }
 
-  getMention() {
+  startMention() {
     const render = new Render();
 
     if (this.firstTry === true) {
@@ -38,10 +38,9 @@ class App {
   }
 
   getUser() {
-    this.getMention();
+    this.startMention();
 
-    const checkVaild = new CheckInputValid();
-    MissionUtils.Console.readLine(GAME.START_GETNUMBER, (num) => {
+    Console.readLine(GAME.START_GETNUMBER, (num) => {
       this.userNum = this.numToArr(num);
       this.checkVaild();
     });
@@ -50,15 +49,15 @@ class App {
   checkVaild() {
     const render = new Render();
 
-    const checkVaild = new CheckInputValid();
-    const checkUserInputValid = checkVaild.checkUserInput(this.userNum);
+    const checkNumVaild = new CheckInputValid();
+    const checkUserInputValid = checkNumVaild.checkUserInput(this.userNum);
     if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
       render.errorThrow(checkUserInputValid);
     }
     this.gameRender();
   }
 
-  gamePlay() {
+  gameResult() {
     const UserInput = this.userNum;
     const ComputerInput = this.computerInput;
     const gameJudgment = new GameJudgment();
@@ -71,27 +70,33 @@ class App {
 
   gameRender() {
     const render = new Render();
-    const checkVaild = new CheckInputValid();
-    const [userBallCount, userStrikeCount] = this.gamePlay();
+    const [userBallCount, userStrikeCount] = this.gameResult();
+
     render.result(userBallCount, userStrikeCount);
 
     if (userStrikeCount !== 3) {
       this.notThreeStrike();
     }
     if (userStrikeCount === 3) {
-      render.replayQnA().then((userInput) => {
+      Console.readLine(GAME.END_RETRY_MENTION, (userInput) => {
         this.userRetryNum = userInput;
-
-        const checkUserRetryInputValid = checkVaild.checkUserRetryInput(
-          this.numToArr(userInput)
-        );
-        if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
-          render.errorThrow(checkUserRetryInputValid);
-        }
-        this.retryOrEnd();
+        this.checkRetryNumVaild(this.userRetryNum);
       });
     }
   }
+
+  checkRetryNumVaild() {
+    const render = new Render();
+    const checkRetryNumVaild = new CheckInputValid();
+    const checkUserRetryInputValid = checkRetryNumVaild.checkUserRetryInput(
+      this.userRetryNum
+    );
+    if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
+      render.errorThrow(checkUserRetryInputValid);
+    }
+    this.retryOrEnd();
+  }
+
   retryOrEnd() {
     const render = new Render();
     const userRetryNumber = this.userRetryNum;
@@ -102,7 +107,7 @@ class App {
 
     if (userRetryNumber === "2") {
       render.end();
-      MissionUtils.Console.close();
+      Console.close();
     }
   }
 
