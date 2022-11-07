@@ -39,7 +39,7 @@ class Game {
     playGame() {    
         Console.readLine(GAME.INPUT_NUMBER, usersNumber => {
             exception(usersNumber);
-            usersNumber = this.usersArray(usersNumber);
+            usersNumber = this.getUsersArray(usersNumber);
   
             const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
             this.resultMessage(howManyStrike, howManyBall);
