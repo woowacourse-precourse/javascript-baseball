@@ -14,7 +14,7 @@ class App {
       if (!isCorrectInput(answer)) {
         throw new Error("잘못된 입력: 서로 다른 3자리의 수를 입력하세요.");
       }
-      const isThreeStrikes = checkHint(computerNumber.join(""), answer);
+      const isThreeStrikes = printHint(computerNumber.join(""), answer);
       isThreeStrikes ? this.finishGame() : this.playing(computerNumber);
     });
   }
@@ -51,7 +51,7 @@ function isCorrectInput(input) {
   if (input[2] === input[0]) return false;
   return true;
 }
-function checkHint(computerNumber, userNumber) {
+function printHint(computerNumber, userNumber) {
   let strikeCount = 0;
   let ballCount = 0;
   if (computerNumber[0] === userNumber[0]) strikeCount++;
