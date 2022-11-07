@@ -18,7 +18,9 @@ class App {
       isThreeStrikes ? this.finishGame() : this.playing(computerNumber);
     });
   }
-  finishGame() {}
+  finishGame() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  }
 }
 function createComputerNumber() {
   const computer = [];
