@@ -1,13 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class User {
   game;
+  isPlay = true;
   constructor() {
     this.game = new BaseBallGame();
     this.input();
   }
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
-      console.log(this.game.answer);
+      this.game.output(inputAnswer);
     })
   }
 }
@@ -44,6 +45,27 @@ class BaseBallGame {
       }
     })
     return ballCount;
+  }
+  output(inputAnswer){
+    const strikeCount = this.getStrikeCount(inputAnswer);
+    const ballCount = this.getBallCount(inputAnswer) - strikeCount;
+
+    if(strikeCount === 3){
+      MissionUtils.Console.print('3스트라이크');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return false;
+    }
+    if(strikeCount === 0 && ballCount === 0){
+      MissionUtils.Console.print('낫싱');
+      return true;
+    }
+    if(strikeCount === 0 || ballCount === 0){
+      MissionUtils.Console.print(strikeCount ? `${strikeCount}스트라이크` : `${ballCount}볼`);
+      return true;
+    }
+
+    MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    return true;
   }
 }
 
