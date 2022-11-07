@@ -75,6 +75,20 @@ class App {
     return strikeCnt
   }
 
+  gameResult(balls, strikes) {
+    if (balls === 0 && strikes === 0) {
+      return '낫싱'
+    } else if (strikes === 3) {
+      return '3스트라이크'
+    } else if (balls === 0) {
+      return `${strikes}스트라이크`
+    } else if (strikes === 0) {
+      return `${balls}볼`
+    } else {
+      return `${balls}볼 ${strikes}스트라이크`
+    }
+  }
+
   gameStart() {
     this.computerInput()
 
@@ -83,6 +97,8 @@ class App {
 
       const balls = this.countBalls(this.computerInputNumbers, this.userInputNumbers)
       const strikes = this.countStrikes(this.computerInputNumbers, this.userInputNumbers)
+
+      let result = this.gameResult(balls, strikes)
     }
   }
 
