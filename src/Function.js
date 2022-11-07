@@ -25,6 +25,12 @@ class Function {
       throw new Error(`${MESSAGE.INPUTERROR}`);
     }
   }
+
+  static validOneOrTwo(input) {
+    if (input !== '1' && input !== '2') {
+      throw new Error(`${MESSAGE.INPUTERROR}`);
+    }
+  }
 }
 
 module.exports = Function;
