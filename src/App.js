@@ -50,88 +50,54 @@ class App {
     }
   }
 
-gamePlay(){
-const UserInput =this.getUser()
-const ComputerInput=this.computerInput
- const gameJudgment = new GameJudgment();
- const [userBallCount,userStrikeCount]= gameJudgment.judgement(UserInput,ComputerInput)
-return [userBallCount,userStrikeCount]
-}
+  gamePlay() {
+    const UserInput = this.getUser();
+    const ComputerInput = this.computerInput;
+    const gameJudgment = new GameJudgment();
+    const [userBallCount, userStrikeCount] = gameJudgment.judgement(
+      UserInput,
+      ComputerInput
+    );
+    return [userBallCount, userStrikeCount];
+  }
 
-gameRender(){
-const render = new Render()
+  gameRender() {
+    const render = new Render();
 
-const [userBallCount,userStrikeCount] = this.gamePlay()
-render.result(userBallCount,userStrikeCount)
+    const [userBallCount, userStrikeCount] = this.gamePlay();
+    render.result(userBallCount, userStrikeCount);
 
-if (strikeCount !== 3) {
-  this.notThreeStrike();
-}
-if (strikeCount === 3) {
-  render.replayQnA().then((userInput) => {
-    const checkUserRetryInputValid = checkVaild.checkRetryInput();
-if(checkUserRetryInputValid!==ERROR.USER_INPUT_PASS){
-render.errorRetryResult
+    if (strikeCount !== 3) {
+      this.notThreeStrike();
+    }
+    if (strikeCount === 3) {
+      render.replayQnA().then((userInput) => {
+        const checkUserRetryInputValid = checkVaild.checkRetryInput();
+        if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
+          render.errorRetryResult;
+        }
 
-}
+        return this.numToArr(userInput);
+      });
+    }
+  }
+  retryOrEnd() {
+    const render = new Render();
+    const userRetryNumber = this.gameRender();
 
-    return this.numToArr(userInput)
+    if (userRetryNumber === "1") {
+      this.setAndReplay();
+    }
 
-})}
-}
-
+    if (userRetryNumber === "2") {
+      render.end();
+      MissionUtils.Console.close();
+    }
+  }
 
   play() {
-
-
     this.getMention();
     this.getUser();
-
-  }
-
-     
-
-      const [ballCount, strikeCount] = gameJudgment.judgement();
-      this.ball = ballCount;
-      this.strikeCount = strikeCount;
-
-      render.result({ ballCount: this.ball, strikeCount: this.strikeCount });
-
-      if (this.strikeCount !== 3) {
-        this.notThreeStrike();
-      }
-      if (this.strikeCount === 3) {
-        render.replayQnA().then((retryOrEnd) => {
-          this.replayQnAResult = retryOrEnd;
-
-          const checkRetry = new CheckInputValid({
-            userNum: this.userNum,
-            retryNum: this.replayQnAResult,
-          });
-
-          this.errorRetryResult = checkRetry.checkRetryInput();
-
-          if (this.errorRetryResult !== ERROR.USER_INPUT_PASS) {
-            this.errorResult();
-          }
-
-          if (this.replayQnAResult === "1") {
-            this.setAndReplay();
-          }
-
-          if (this.replayQnAResult === "2") {
-            render.end();
-            MissionUtils.Console.close();
-          }
-        });
-      }
-    });
-  }
-  error() {
-    throw new Error(this.errorResult);
-  }
-  errorRetry() {
-    throw new Error(this.errorRetryResult);
   }
 }
 
