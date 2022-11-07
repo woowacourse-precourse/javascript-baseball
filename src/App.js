@@ -45,11 +45,11 @@ class App {
 
   getInput() {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) =>
-      this.compareResults(userInput)
+      this.compareNums(userInput)
     );
   }
 
-  compareResults(userInput) {
+  compareNums(userInput) {
     this.findInputError(userInput);
 
     userInput = userInput.split("");
