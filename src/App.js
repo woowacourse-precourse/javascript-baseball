@@ -43,10 +43,23 @@ class App {
         checkLength(removeSpace);
         const answerArray = removeSpace.split('');
         checkDuplicate(answerArray);
+        this.compareTwoArray(answerArray);
       } catch (error) {
         console.log(error);
       }
     });
+  }
+
+  compareTwoArray(userAnswer) {
+    this.strike = 0;
+    this.ball = 0;
+
+    for (let idx = 0; idx < userAnswer.length; idx++) {
+      let userNum = userAnswer[idx];
+      if (userNum === this.computerRandomNumber[idx]) this.strike++;
+      else if (this.computerRandomNumber.includes(userNum)) this.ball++;
+    }
+    this.printResult();
   }
 
   setUserAnswer(answerArray) {
