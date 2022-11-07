@@ -61,4 +61,6 @@ describe("기능별 테스트", () => {
   });
 });
 
-MissionUtils.Console.close();
+afterAll(() => {
+  MissionUtils.Console.close();
+})
