@@ -34,24 +34,39 @@ class App {
     return cnt;
   }
 
+  finished(cnt) {
+    if (cnt == 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      let answer;
+      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (order) => {
+        answer = order;
+      })
+      return answer;
+    }
+    else {
+      return -1;
+    }
+
+  }
+
   close() {
     MissionUtils.close();
   }
 
   play() {
     let intro = 0;
-
-    let flag = 0;
+    let flag=0;
+    let order=-1;
     if (intro == 0) {
       MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
       intro = 1;
     }
-    let finished=0;
+    let finished = 0;
     // 숫자 랜덤화
     let computerAnswer = this.computerMakeNum();
 
 
-    while (flag == 0) {
+    while (finished == 0) {
 
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
         // 예외사항들 
@@ -77,32 +92,42 @@ class App {
 
         //메세지 출력
         let printMessage = "";
-        if (cntBall) printMessage += `${cntBall}볼`;
-        if (cntStrike) printMessage += ` ${cntStrike}스트라이크`;
+        if (cntBall) printMessage += `${cntBall}볼 `;
+        if (cntStrike) printMessage += `${cntStrike}스트라이크`;
 
         if (printMessage == "") {
           MissionUtils.Console.print("낫싱");
         }
+
         else {
           MissionUtils.Console.print(printMessage);
         }
+        if(cntStrike ==3){
+          order = this.finished(cntStrike);
+          flag=1;
+        }
+        else{
+          flag=0;
+        }
 
-        if (cntStrike == 3) {
-          finished=1;
-          MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-          MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (order) => {
-            if (order == 1) {
-              computerAnswer = this.computerMakeNum();
-              flag = 0;
-            }
-            else {
-              flag = 1;
-            }
-          })
+       // MissionUtils.Console.print(`order 값은 : ${order}`);
+
+        if (order == 1 && flag==1) {
+          computerAnswer = this.computerMakeNum();
+          finished=0;
+          flag=0;
+        }
+
+        else if(flag ==1 && order==2) {
+          finished = 1;
+          flag=0;
+        }
+
+        else if (flag ==1){
+          throw(order);
         }
 
       });
-
     }
   }
 
