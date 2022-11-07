@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    userNumber = "";
+    this.userNumber = "";
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -24,17 +24,21 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       if (!this.isUserNumValid(number)) throw "입력값이 잘못되었습니다.";
       this.userNumber = number;
+      MissionUtils.Console.close();
     });
   }
 
   isUserNumValid(userNum) {
     var userNumArr = userNum.split("");
     var userNumSet = new Set(userNumArr);
+
     if (userNumSet.size !== userNumArr.length) return false;
+    else if (userNumSet.size !== 3) return false;
     else if (userNum.length !== 3) return false;
-    else if (userNum >= "100" && userNum <= "999") return false;
+    else if (userNum <= "100" && userNum >= "999") return false;
     else if (userNumArr.includes(0)) return false;
-    else return true;
+
+    return true;
   }
 
   countStrike(computerNum, userNum) {
@@ -91,8 +95,5 @@ class App {
     }
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
