@@ -5,6 +5,18 @@ class App {
     MissionUtils.Console.close();
     return computer;
   }
+
+  userPick() {
+    const user = MissionUtils.Console.readLine(
+      "숫자를 입력해주세요.",
+      (input) => {
+        console.log(`숫자: ${input}`);
+      }
+    );
+    MissionUtils.Console.close();
+    return user;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임 시작!");
   }
