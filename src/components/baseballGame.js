@@ -21,4 +21,11 @@ class BaseballGame{
     return answer.join('');
   }
 
+  inputNumber(answer) {
+    Console.readLine(MESSAGE.INPUT, (inputNumber) => {
+      this.validateInputNumber(inputNumber);
+      this.resultMessage(answer, inputNumber);
+    });
+  }
+
 }
