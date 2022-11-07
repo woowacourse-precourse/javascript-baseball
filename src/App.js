@@ -41,8 +41,19 @@ class App {
 
   getUserRestartInput() {
     Console.readLine(`${Message.restart}`, (userRestartInput) => {
-      console.log(userRestartInput);
+      this.decideSystemRestart(userRestartInput);
     });
+  }
+
+  decideSystemRestart(userRestartInput) {
+    if (userRestartInput === "1") {
+      this.answer = getNewAnswer();
+      this.getUserInput();
+    }
+
+    if (userRestartInput === "2") {
+      Console.print("게임 종료");
+    }
   }
 }
 
