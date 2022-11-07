@@ -24,6 +24,16 @@ class Judge {
     }
     return true;
   }
+
+  findStrikeAndBallCnt(computerRandomNum, playerInput) {
+    let strikeCnt = 0;
+    let ballCnt = 0;
+    for (let i = 0; i < LENGTH; i++) {
+      if (computerRandomNum[i] === playerInput[i]) strikeCnt++;
+      else if (playerInput.indexOf(computerRandomNum[i]) !== -1) ballCnt++;
+    }
+    return { strikeCnt, ballCnt };
+  }
 }
 
 module.exports = Judge;
