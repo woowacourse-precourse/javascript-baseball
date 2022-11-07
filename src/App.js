@@ -22,6 +22,39 @@ class App {
     });
   }
 
+  // 입력받은 숫자를 판단하는 함수
+  referee(answerList, computerRandomNumber) {
+    // 사용자가 잘못된 값을 입력했는지 확인
+    if (!this.checkUserAnswer(answerList)) {
+      throw new Error("잘못된 값을 입력했습니다.");
+    }
+
+    let ball = 0;
+    let strike = 0;
+    let result = "";
+
+    // 여기에 ball과 strike 개수를 판단
+    strike = this.findStrike(answerList, computerRandomNumber);
+    ball = this.findIntersection(answerList, computerRandomNumber) - strike;
+
+    if(ball > 0 && strike > 0) {
+      result += `${ball}볼 ${strike}스트라이크`
+    } else if(ball > 0 && strike === 0) {
+      result += `${ball}볼`;
+    } else if(ball === 0 && strike > 0) {
+      result += `${strike}스트라이크`;
+    } else if(ball === 0 && strike === 0) {
+      result += "낫싱";
+    }
+    MissionUtils.Console.print(result);
+    if(strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (option) => this.replay(option));
+    }
+    
+    this.getUserAnswer(computerRandomNumber);
+  }
+
   play() {
     // 1. 게임 시작 문구 출력
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
