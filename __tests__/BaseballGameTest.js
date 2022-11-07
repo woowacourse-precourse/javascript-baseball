@@ -57,3 +57,14 @@ test('strike,ball 같이 있을 때 hint가 맞는지 테스트', () => {
   const testResult2 = app.getHint([1, 2, 3], '321');
   expect(testResult2).toEqual('2볼 1스트라이크');
 });
+
+test('사용자 입력시, isValidInput, getHint 실행 여부 확인', () => {
+  const app = new App();
+  const spyValidInput = jest.spyOn(app, "isValidInput");
+  const spyGetHint = jest.spyOn(app,"getHint");
+  app.answer = [1,2,3]
+  app.getHintOrThrowError('123');
+  expect(spyValidInput).toBeCalledTimes(1);
+  expect(spyGetHint).toBeCalledTimes(1);
+});
+
