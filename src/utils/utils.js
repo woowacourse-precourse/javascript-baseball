@@ -101,7 +101,7 @@ class Utils {
 
   static askGameAgain() {
     Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInpuOneorTwo) => {
         if (userInpuOneorTwo === "1") {
           let computerRandomNumber = Utils.setComputerNumber();
@@ -112,6 +112,26 @@ class Utils {
         }
       }
     );
+  }
+
+  static startGame(computerRandomNumber) {
+    Console.readLine("숫자를 입력하세요 : ", (userInput) => {
+      let NumberUserInput = Number(userInput);
+      if (Utils.checkNumberisOk(NumberUserInput)) {
+        let strikeBallObject = Utils.compareNumbers(
+          computerRandomNumber,
+          NumberUserInput
+        );
+        let result = Utils.returnStringResult(strikeBallObject);
+        Console.print(result);
+        if (result !== "3스트라이크") {
+          this.startGame(computerRandomNumber);
+        } else {
+          Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+          Utils.askGameAgain();
+        }
+      }
+    });
   }
 }
 
