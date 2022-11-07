@@ -10,7 +10,6 @@ const GAME_EXIT = "2";
 
 class Game {
     constructor() {
-        // this.startMessage = new Computer().startMessage();
         Console.print(GAME.START);
         this.computersNumber = new Computer().pickedNum();
     }
