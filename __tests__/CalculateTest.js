@@ -28,6 +28,9 @@ describe("컴퓨터의 숫자와 유저의 입력값을 비교하는 테스트",
 
     expect(result1).toEqual(false);
     expect(result2).toEqual(false);
-    expect(result3).toEqual([2, 1]);
+    expect(result3).toEqual({
+      ballCount: 2,
+      strikeCount: 1
+    });
   });
 });
