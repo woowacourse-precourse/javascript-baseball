@@ -30,6 +30,15 @@ class App {
     }
   }
 
+
+  validateUserNumbers(inputNumber) {
+    if (inputNumber.length < 3 || inputNumber.includes("0")) {
+      // throw 오류
+      throw new Error("잘못입력.");
+    }
+  }
+
+  
   makeUserNumbers(randomNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.validateUserNumbers(inputNumber);
