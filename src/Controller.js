@@ -26,7 +26,7 @@ class GameControl{
 
   userInput(){
     MissionUtils.Console.readLine(constant.GAME.INPUT, (input) => {
-      this.validation.checkInput(input, 0);
+      this.validation.checkErrorofInput(input, 0);
       this.result(input);
     });
   }
@@ -34,7 +34,7 @@ class GameControl{
   
 
   result(input){
-    if (this.validation.checkSuccess(this.userOutput(input))){
+    if (this.validation.isThreeStrike(this.userOutput(input))){
       this.restartCheck();
     }
     else{
@@ -61,7 +61,7 @@ class GameControl{
 
   restartCheck(){
     MissionUtils.Console.readLine(constant.GAME.RESTART+'\n', (input) => {
-      this.validation.checkInput(input, 1);
+      this.validation.checkErrorofInput(input, 1);
       this.restartGame(input);
     });
   }

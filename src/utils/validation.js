@@ -5,7 +5,7 @@ const errorthrow = require('./throw-error');
 
 class Validation{
 
-  checkInput(input, startOrrestart){
+  checkErrorofInput(input, startOrrestart){
     if (startOrrestart === 0){
       errorthrow.inputError(input);
     }
@@ -14,7 +14,7 @@ class Validation{
     }
   }
 
-  checkSuccess(resultarray){
+  isThreeStrike(resultarray){
     if (resultarray[0] === constant.GAME.THREENUMBER){
       MissionUtils.Console.print(constant.GAME.ANSWER);
       MissionUtils.Console.print(constant.GAME.ANSWER_NEXT);
