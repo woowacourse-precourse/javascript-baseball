@@ -120,7 +120,7 @@ class App {
    * @param {number} answer - 게임 재시작 여부에 대한 유저의 입력 값
    */
   handleRestart(answer) {
-    if (answer === 1) {
+    if (answer === "1") {
       this.makeRandomNumber();
       this.askForNumbers();
     } else Console.close();
