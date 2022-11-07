@@ -32,8 +32,6 @@ class App {
       Console.print(this.userNumber);
 
       this.compareNumbers(this.computerNumber, this.userNumber);
-
-      Console.close();
     });
   }
 
@@ -49,6 +47,12 @@ class App {
     }
 
     this.setHint(ball, strike);
+    if (strike === 3) {
+      Console.print('정답');
+      Console.close();
+    } else {
+      this.getUserNumber();
+    }
   }
 
   setHint(ball, strike) {
