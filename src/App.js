@@ -37,10 +37,19 @@ class App {
     this.userRandomNumbers = userNumber;
     const gameResult = checkBallAndStrike(this.computerRandomNumbers, this.userRandomNumbers);
     if (gameResult) {
-      MissonUtils.Console.close();
+      this.chooseRestartGame();
     } else if (!gameResult) {
       return this.userInputNumber();
     }
+  }
+
+  chooseRestartGame() {
+    MissonUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissonUtils.Console.readLine('', chooseNumber => {
+      if (chooseNumber === '1') this.gameStart();
+      if (chooseNumber === '2') MissonUtils.Console.close();
+      if (chooseNumber !== '1' && chooseNumber !== '2') throw '게임 시작은 1, 종료는 2를 입력하셔야 합니다.';
+    })
   }
 }
 
