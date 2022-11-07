@@ -8,22 +8,22 @@ class App {
   play() {
     if (this.repit) MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.repit = false;
-    const computer = this.computerNumber();
+    const computer = this.getComputerNumber();
     while (this.game) {
       this.compare(computer);
     }
   }
 
-  computerNumber() {
-    const computer = [];
-    while (computer.length < 3) {
+  getComputerNumber() {
+    const computerNumber = [];
+    while (computerNumber.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(String(number))) {
-        computer.push(String(number));
+      if (!computerNumber.includes(String(number))) {
+        computerNumber.push(String(number));
       }
     }
 
-    return computer;
+    return computerNumber;
   }
 
   compare(computer) {
