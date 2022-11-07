@@ -27,9 +27,29 @@ class App {
   getUserNumber() {
     Console.readLine(GET_USER_NUMBER_SENTENCE, (userNumber) => {
       this.userNumber = userNumber.split('').map(Number);
-
+      this.validateUserNumber();
       this.compareNumbers(this.computerNumber, this.userNumber);
     });
+  }
+
+  validateUserNumber() {
+    if (this.userNumber.length !== 3) {
+      throw new Error('입력이 3자리수가 아닙니다.');
+    }
+
+    if (
+      this.userNumber[0] === this.userNumber[1]
+      || this.userNumber[1] === this.userNumber[2]
+      || this.userNumber[0] === this.userNumber[2]
+    ) {
+      throw new Error('입력에 중복된 수가 있습니다.');
+    }
+
+    const strUserNumber = this.userNumber.join('');
+    const regex = /^[0-9]+$/;
+    if (!regex.test(strUserNumber)) {
+      throw new Error('입력이 숫자가 아닙니다.');
+    }
   }
 
   compareNumbers(computerNumber, userNumber) {
