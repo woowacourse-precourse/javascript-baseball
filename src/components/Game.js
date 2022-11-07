@@ -4,15 +4,15 @@ const generateRandomComputerNumber = require('./generateRandomComputerNumber');
 
 class Game {
   constructor() {
-    this.gameCount = 0;
+    this.count = 0;
     this.computerNumber = null;
   }
 
   start() {
     this.computerNumber = generateRandomComputerNumber();
-    this.gameCount += 1;
+    this.count += 1;
 
-    if (this.gameCount === 1) this.print('숫자 야구 게임을 시작합니다.');
+    if (this.count === 1) this.print('숫자 야구 게임을 시작합니다.');
 
     this.getUserInputNumber();
   }
