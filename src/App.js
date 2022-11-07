@@ -70,20 +70,38 @@ class App {
     this.decideReplay();
   }
 
+
   decideReplay() {
     if (this.strike === 3) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.decideRestart();
     }
     else {
       this.getUserNumber();
     }
   }
 
-
+  decideRestart() {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
+      try {
+        checkNumber(answer);
+        if (answer === '2') MissionUtils.Console.close();
+        if (answer === '1') {
+          this.computerRandomNumber = this.createRandomNumber();
+          this.getUserNumber();
+        }
+        else {
+          throw new Error('1 또는 2만 입력해주세요.');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-
+    this.getUserNumber();
   }
 }
 const app = new App();
