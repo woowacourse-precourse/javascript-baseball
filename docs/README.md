@@ -63,7 +63,7 @@
 [x] 게임 시작문 출력
 [x] 랜덤함수 생성 후 randomNumArr 배열로 저장(MissionUtils - pickNumberInRange)
 ㄴ [x] 중복값이 없는지 확인
-[] 입력값 받기 (MissionUtils - Console.readLine)
+[x] 입력값 받기 (MissionUtils - Console.readLine)
 [] 받은 입력값 split("")해서 inputNumArr 배열로 저장
 [] 입력값 예외처리
 ㄴ [] 숫자인지 확인

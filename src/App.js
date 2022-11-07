@@ -1,9 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  play() {
+  constructor() {
+    this.randomNums = [];
+    this.inputNums = [];
+  }
+
+  async play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.randomNums = this.makeRandomNums();
+    this.makeRandomNums();
+    await this.getInputNum();
   }
 
   makeRandomNums() {
@@ -12,7 +18,16 @@ class App {
       const num = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!randomNums.includes(num)) randomNums.push(num);
     }
-    return randomNums;
+    this.randomNums = randomNums;
+  }
+
+  getInputNum() {
+    return new Promise((resolve) => {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+        this.inputNums = input;
+        resolve();
+      });
+    });
   }
 }
 
