@@ -20,9 +20,14 @@ class App {
     this.answer = numbers;
   }
 
+  getUserInput(currentAnswer) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
+  }
+
   play() {
     this.startGame();
     this.createRandom();
+    this.getUserInput(this.answer);
   }
 }
 
