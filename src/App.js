@@ -7,8 +7,22 @@ class App {
   }
 
   startgame(){
-    const RandomNumber = makeNumber();
-    inputNum(num) = RandomNumber
+    const RandomNumber = MakeNumber();
+    inputNum(num) = RandomNumber;
+  }
+
+  //Make random number
+  MakeNumber(){
+    const RandomNumber = [];
+    while(RandomNumber.length < 3){
+      const numbers = MissionUtils.Random.pickNumberInRange(1,9);
+      
+      //Check for duplicates
+      if(!random.includes(numbers)){
+        RandomNumber.push(numbers);
+      }
+    }
+    return RandomNumber.join("");
   }
 }
 // module.exports = App;
