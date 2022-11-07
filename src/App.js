@@ -1,17 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { render } = require("node-sass");
 
 class App {
   randomNumbers;
   strikeCount;
 
   setRandomNumbers() {
-    this.randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const result = [];
+    for (let i = 0; i < 3; i++) {
+      let num = MissionUtils.Random.pickNumberInRange(1, 9);
+      result.includes(num)?i--:result.push(num)
+    }
+    this.randomNumbers = result;
   }
 
-  getInputNumber() {
+  getInputNumbers() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      inputExceptionHandling(userInput);
+      this.inputExceptionHandling(userInput);
       const inputNumbers = userInput.split("").map(Number);
       this.checkInputNumbers(inputNumbers, this.randomNumbers);
     });
@@ -19,14 +23,14 @@ class App {
 
   inputExceptionHandling(inputNumber) {
     if (isNaN(inputNumber)) {
-      throw "숫자가 아닙니다.";
+      throw new Error("숫자가 아닙니다.");
     }
     if (inputNumber.length > 3) {
       throw new Error("숫자가 초과했습니다.(3개만 입력)");
     }
     if ([...new Set(inputNumber.split(""))].length !== 3) {
       console.log([...new Set(inputNumber.split[""])]);
-      throw "중복되는 숫자가 입력되었습니다.";
+      throw new Error("중복되는 숫자가 입력되었습니다.");
     }
   }
 
@@ -42,7 +46,7 @@ class App {
         : null;
     });
 
-    return makeCheckedResult([ballCount, this.strikeCount]);
+    return this.makeCheckedResult([ballCount, this.strikeCount]);
   }
 
   makeCheckedResult([ballCount, strikeCount]) {
@@ -65,7 +69,7 @@ class App {
   showCheckedResult(result) {
     MissionUtils.Console.print(result);
     if (this.strikeCount == 3) {
-      this.checkEndMessage();
+      this.checkGameEndMessage();
     }
     this.getInputNumbers();
   }
