@@ -153,6 +153,44 @@ describe("숫자 야구 게임", () => {
   });
 
 
+  test("예외 테스트: 입력값에 숫자가 중복으로 들어가는 경우 1", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["112"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOT_OVERLAP_NUMBER);
+  });
+
+  test("예외 테스트: 입력값에 숫자가 중복으로 들어가는 경우 2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOT_OVERLAP_NUMBER);
+  });
+
+  test("예외 테스트: 입력값에 숫자가 중복으로 들어가는 경우 3", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["333"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOT_OVERLAP_NUMBER);
+  });
 
 
 
