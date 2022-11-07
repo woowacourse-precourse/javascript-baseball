@@ -21,6 +21,20 @@ class App {
     }
     this.#answer = [...this.#answer];
   }
+  inputUserAnswer() {
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      if (
+        !answer.length === 3 ||
+        !Number.isInteger(+answer) ||
+        !Math.sign(answer) === -1 ||
+        !(+answer >= 123 && +answer <= 987)
+      )
+        throw new Error("잘못된 값을 입력하셨습니다.");
+
+      this.#userAnswer = [...answer];
+      this.score = {};
+    });
+  }
 }
 
 const app = new App();
