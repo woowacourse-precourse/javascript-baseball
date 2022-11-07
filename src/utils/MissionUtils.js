@@ -75,6 +75,7 @@ const gamePlay = (computers, user) => {
     countStrike = isStrike(number, index, computers, countStrike);
     countBall = isBall(number, index, computers, countBall);
   });
+  printGameResult(countStrike, countBall);
 };
 
 const isStrike = (number, index, computers, countStrike) => {
@@ -88,6 +89,10 @@ const isBall = (number, index, computers, countBall) => {
     countBall += 1;
   }
   return countBall;
+};
+
+const printMessage = (message) => {
+  MissionUtils.Console.print(message);
 };
 
 module.exports = { getComputerNumber, getUserNumber };
