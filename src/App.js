@@ -26,7 +26,21 @@ class App {
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', input => {
       this.input = input;
+      return this.checkInput();
     });
+  }
+
+  checkInput() {
+    if (Number.isNaN(parseFloat(this.input))) {
+      throw Object.assign(new Error(), { message: '잘못된 입력입니다.숫자를 입력해주세요. ' });
+    }
+    if (this.input.length !== 3) {
+      throw Object.assign(new Error(), { message: '잘못된 입력입니다. 3자리 수를 입력해주세요. ' });
+    }
+    const inputDigit = this.input.split('').map(Number);
+    if (new Set(inputDigit) !== 3) {
+      throw Object.assign(new Error(), { message: '잘못된 입력입니다. 서로 다른 3자리 수를 입력해주세요. ' });
+    }
   }
 }
 const app = new App();
