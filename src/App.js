@@ -23,7 +23,7 @@ class App {
     return computer.join('');
   }
 
-  proceedGame(){
+  proceedGame() {
     MissionUtils.Console.readLine(MESSAGES.INPUT, (input) => {
       this.exceptionHandling(input);
 
@@ -34,6 +34,7 @@ class App {
       if (strike !== REQUIREMENT.LENGTH) return this.proceedGame(); 
 
       MissionUtils.Console.print(MESSAGES.SUCCESS);
+      this.playNewGame();
     });
   }
 
@@ -77,6 +78,18 @@ class App {
     } else {
       MissionUtils.Console.print(`${ball}${HINT.BALL} ${strike}${HINT.STRIKE}`);
     }
+  }
+
+  playNewGame() {
+    MissionUtils.Console.readLine(MESSAGES.RESTART, (input) => {
+      if (input === REQUIREMENT.RESTART) {
+        this.play();
+      } else if (input === REQUIREMENT.TERMINATE) {
+        MissionUtils.Console.close();
+      } else {
+        throw(ERROR.NUMBER);
+      }
+    });
   }
 
 }
