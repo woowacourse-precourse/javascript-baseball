@@ -36,16 +36,16 @@ class App {
   }
 
   checkNumber(answer) {
-    let userNumber = String(answer);
+    const userNumber = String(answer);
     if (userNumber.length !== 3) throw "예외";
-    let check = /^[1-9]+$/;
-    for (let i = 0; i < userNumber.length; i++) {
-      if (!check.test(userNumber[i])) throw "예외";
+    const check = /^[1-9]+$/;
+    for (let idx = 0; idx < userNumber.length; idx++) {
+      if (!check.test(userNumber[idx])) throw "예외";
     }
 
-    for (let i = 0; i < userNumber.length - 1; i++) {
-      if (userNumber[i] === userNumber[i + 1]) throw "예외";
-      if (userNumber[i] === userNumber[i + 2]) throw "예외";
+    for (let idx = 0; idx < userNumber.length - 1; idx++) {
+      if (userNumber[idx] === userNumber[idx + 1]) throw "예외";
+      if (userNumber[idx] === userNumber[idx + 2]) throw "예외";
     }
 
     return userNumber;
