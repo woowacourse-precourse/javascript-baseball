@@ -14,6 +14,21 @@ class App {
     return computer;
   }
 
+  checkInputInteger(input){
+    let is_integer = 1;
+    if(isNaN(input)){
+      is_integer = 0;
+    }
+    if(input < 0){ // 숫자야구게임에서 음수를 입력 받을 수 없음
+      is_integer = 0;
+    }
+
+    if(!is_integer){
+      throw "양수 세자리를 입력해주세요."
+    }
+    return is_integer;
+  }
+
   checkInputSize(input){
     let is_three = 1;
     if(input.length != 3){
@@ -23,19 +38,6 @@ class App {
     return is_three;
   }
 
-  checkInputInteger(input){
-    let is_integer = 1;
-    for(let i=0; i<input.length; i++){
-      if(!Number.isInteger(input.charAt(i))){
-        is_integer = 0;
-      }
-    }
-    if(!is_integer){
-      is_integer = 0;
-      throw "양수 세자리를 입력해주세요."
-    }
-    return is_integer;
-  }
 
   checkInputValue(input){
     
@@ -77,7 +79,7 @@ class App {
       })
 
       // this.getGameResult(computer_num, game_num);
-      // is_game_over = 1;
+      is_game_over = 1;
     }
 
   }
