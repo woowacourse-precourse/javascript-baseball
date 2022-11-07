@@ -1,4 +1,7 @@
-const NUMBER_LENGTH = 3;
+const NUMBER = {
+  LENGTH: 3,
+  NOT_INCLUDE: "0",
+};
 
 const SCORES = {
   BALL: "볼",
@@ -28,7 +31,7 @@ const OPTIONS = {
 };
 
 module.exports = {
-  NUMBER_LENGTH,
+  NUMBER,
   SCORES,
   MESSAGES,
   ERRORS,
