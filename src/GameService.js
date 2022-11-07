@@ -1,16 +1,17 @@
 const Dispatcher = require('./Dispatcher');
 const GameDataStore = require('./stores/GameDataStore');
-const GameDataUI = require('./userInterfaces/GameDataUI');
+const GameDataView = require('./views/GameDataView');
 const GameStatusStore = require('./stores/GameStatusStore');
-const GameStatusUI = require('./userInterfaces/GameStatusUI');
+const GameStatusView = require('./views/GameStatusView');
+const { ACTION_TYPE, GAME_STATUS } = require('./utils/constants');
 
 class GameService {
   constructor() {
     this.dispatcher = new Dispatcher();
     this.gameDataStore = new GameDataStore();
-    this.gameDataUI = new GameDataUI();
+    this.gameDataView = new GameDataView();
     this.gameStatusStore = new GameStatusStore();
-    this.gameStatusUI = new GameStatusUI();
+    this.gameStatusView = new GameStatusView();
   }
 
   startGame() {
@@ -18,33 +19,40 @@ class GameService {
     this.registerCallbacks();
 
     this.dispatcher.dispatch({
-      type: 'game-start',
+      type: ACTION_TYPE.GAME_START,
     });
   }
 
   injectDependencies() {
-    this.gameDataStore.injection(this.gameDataUI);
-    this.gameStatusStore.injection(this.gameStatusUI);
+    this.gameDataStore.injection(this.gameDataView);
+    this.gameStatusStore.injection(this.gameStatusView);
 
-    this.gameDataUI.injection(this.dispatcher);
-    this.gameStatusUI.injection(this.dispatcher);
+    this.gameDataView.injection(this.dispatcher);
+    this.gameStatusView.injection(this.dispatcher);
   }
 
   registerCallbacks() {
     this.dispatcher.register((action) => {
-      if (action.type === 'game-start') {
-        this.gameStatusStore.setGameStatus('START');
+      if (action.type === ACTION_TYPE.GAME_START) {
+        this.gameStatusStore.setGameStatus(GAME_STATUS.STARTED);
       }
     });
 
     this.dispatcher.register((action) => {
-      if (action.type === 'game-start' || action.type === 'game-restart') {
+      if (action.type === ACTION_TYPE.GAME_START
+          || action.type === ACTION_TYPE.GAME_RESTART) {
         this.gameDataStore.initializeGameData();
       }
     });
 
     this.dispatcher.register((action) => {
-      if (action.type === 'new-guess') {
+      if (action.type === ACTION_TYPE.GAME_OVER) {
+        this.gameStatusStore.setGameStatus(action.input);
+      }
+    });
+
+    this.dispatcher.register((action) => {
+      if (action.type === ACTION_TYPE.NEW_GUESS) {
         this.gameDataStore.setInput(action.input);
       }
     });
