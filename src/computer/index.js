@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { checkIncorrectNumber } = require("../util/computer/check");
 const { getPrint } = require("../util/computer/print");
 
 function Computer() {
@@ -12,6 +13,9 @@ function Computer() {
   const computerNumberStr = computerNumberArr.join("");
 
   function checkGameResult(numberStr) {
+    if (checkIncorrectNumber(numberStr))
+      return new Error("올바르지 않은 입력값입니다.");
+
     let ball = 0;
     let strike = 0;
 
