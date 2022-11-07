@@ -79,6 +79,10 @@ const isCorrect = ([strike, ball]) => {
   return strike === 3 && ball === 0;
 };
 
+const exitGame = () => {
+  return MissionUtils.Console.close();
+};
+
 const printRestartMessage = () => {
   MissionUtils.Console.readLine(RESTART_MESSAGE, (code) => {
     (code === RESTART_CODE && game(createComputerNumber())) ||
