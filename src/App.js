@@ -14,7 +14,7 @@ class App {
   }
 
   init() {
-    this.computerNumber = this.createComputerNumber();
+    this.createComputerNumber();
     this.isGameFinished = false;
   }
 
@@ -23,12 +23,8 @@ class App {
   }
 
   createComputerNumber() {
-    let computerNumber = '';
-    while (computerNumber.length !== 3) {
-      let digit = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerNumber.includes(digit)) computerNumber += digit;
-    }
-    return computerNumber;
+    this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
+    MissionUtils.Console.print(this.computerNumber);
   }
 
   gameStart() {
