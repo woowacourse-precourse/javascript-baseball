@@ -3,7 +3,7 @@
 ## 0. 환경 설정
 
 - [x] 1. 구현 기능 목록 정리
-- [ ] 2. 필요한 모듈(jest, MissionUtils) 설치(`npm install`)
+- [x] 2. 필요한 모듈(jest, MissionUtils) 설치(`npm install`)
 
 ## 1. 초기화 기능 구현
 
