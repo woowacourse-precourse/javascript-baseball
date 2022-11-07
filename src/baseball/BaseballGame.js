@@ -41,14 +41,15 @@ class BaseballGame {
     let ball = 0;
     let nothing = 0;
     pickedNumberByComputer.forEach((num, idx) => {
-      // 같은 수이고,
-      if (pickedNumberByComputer.includes(Number(pickedNumberByUser[idx]))) {
-        // 같은 자리일 때
-        if (num === Number(pickedNumberByUser[idx])) strike += 1;
-        // 다른 자리일 때
-        else ball += 1;
-        // 같은 수가 없을 때
-      } else nothing += 1;
+      // 같은 수가 없을 때
+      if (!pickedNumberByComputer.includes(Number(pickedNumberByUser[idx]))) {
+        nothing += 1;
+        return;
+      }
+
+      // 같은 수 일 때
+      if (num === Number(pickedNumberByUser[idx])) strike += 1;
+      else ball += 1;
     });
 
     return [strike, ball, nothing];
