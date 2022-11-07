@@ -44,8 +44,6 @@ function numToArr(userInputNums) {
   return userInputArray;
 }
 
-
-
 function userInputCallback(userInputNums, userInputArray) {
   userInputArray = numToArr(userInputNums);
   const isValidFlag = isValidInput(userInputArray);
@@ -74,33 +72,47 @@ function getGameResult(computerRandNumsArray, userInputArray) {
   let ballCount = getBallCount(computerRandNumsArray, userInputArray);
   let strikeCount = getStrikeCount(computerRandNumsArray, userInputArray);
 
-  console.log(computerRandNumsArray)
+  // console.log(computerRandNumsArray)
   if(strikeCount === 3) {
     MissionUtils.Console.print('3스트라이크');
-    return;
+    return false;
   }
   if(ballCount && strikeCount) {
     MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-    return;
+    return true;
   }
   if(ballCount) {
     MissionUtils.Console.print(`${ballCount}볼`);
-    return;
+    return true;
   }
   if(strikeCount) {
     MissionUtils.Console.print(`${strikeCount}스트라이크`);
-    return;
+    return true;
   }
   MissionUtils.Console.print('낫싱');
+  return true;
 }
 
-function playGame() {
-  const computerRandNumsArray = makeComputerRandNums();
+function restartGame() {
+  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', 
+    async (answer) => {
+      const computerRandNumsArray = makeComputerRandNums();
+      if(answer === '1') playGame(computerRandNumsArray);
+      else if(answer === '2') MissionUtils.Console.close();
+      else throwError();
+  })
+}
+
+function playGame(computerRandNumsArray) {
   try {
+    let gameMustGoOn = true;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', async (answer) => {
       let userInputArray = [];
       userInputArray = await userInputCallback(answer, userInputArray);
-      getGameResult(computerRandNumsArray, userInputArray);
+      gameMustGoOn = getGameResult(computerRandNumsArray, userInputArray);
+      if(gameMustGoOn) playGame(computerRandNumsArray);
+      else restartGame();
     })
   } catch(error) {
     throwError();
@@ -115,13 +127,15 @@ function playApp() {
 
 class App {
   constructor() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.')
   }
 
   play() {
-    playGame()
+    const computerRandNumsArray = makeComputerRandNums();
+    playGame(computerRandNumsArray)
   }
 }
 
 module.exports = App;
-const a = new App()
-a.play();
+// const a = new App()
+// a.play();
