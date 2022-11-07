@@ -3,6 +3,21 @@ const GAME_START = '숫자 야구 게임을 시작합니다.';
 const RESTART = '숫자 야구 게임을 재시작합니다.';
 
 class App {
+  // 게임 결과
+  getResult(userNumber, randomNumber) {
+    const strike = this.strikeCheck(userNumber, randomNumber);
+    const ball = this.ballCheck(userNumber, randomNumber)
+    const resultMessage = this.compareNumber(strike, ball);
+
+    MissionUtils.Console.print(resultMessage);
+    if (strike !== 3) {
+      this.generateNumber(randomNumber);
+    } else {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.restartGame();
+    }
+  }
+
   // 사용자 입력 숫자 문제점 체크
   userInputCheck(userInputNumber) {
     this.numberLengthCheck(userInputNumber);
