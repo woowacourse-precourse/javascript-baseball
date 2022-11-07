@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-class NewGame {
+class BaseballGame {
   computerAnswer;
 
   constructor() {
@@ -19,11 +19,11 @@ class NewGame {
     }
     this.computerAnswer = Number(computerNumberList.join(""));
   }
-
   getUserAnswer() {
     Console.readLine("숫자를 입력해주세요 : ", (userAnswer) => {
-      console.log(userAnswer, "플레이어 입력값");
-      console.log(this.computerAnswer, "컴퓨터 입력값");
+      if (userAnswer.length !== 3) {
+        throw "숫자를 잘못 입력하셨어요!";
+      }
       this.compareNumber(this.computerAnswer, userAnswer);
       this.getUserAnswer();
       //숫자 비교하기 함수
@@ -60,15 +60,14 @@ class NewGame {
   baseballReferee(computerAnswerObject, userAnswerObject) {
     let strike = 0;
     let ballCount = 0;
-    console.log(userAnswerObject, computerAnswerObject);
     if (
       JSON.stringify(computerAnswerObject) === JSON.stringify(userAnswerObject)
     ) {
       strike = 3;
       return [strike, ballCount];
     }
-    const checkBallStrike = Object.values(userAnswerObject).reduce(
-      (checkBallStrike, userNumber, numberIndex) => {
+    const checkBallStrike = Object.values(userAnswerObject).map(
+      (userNumber, numberIndex) => {
         const sameNumberCount =
           Object.values(computerAnswerObject).indexOf(userNumber);
         if (sameNumberCount === -1) {
@@ -77,10 +76,9 @@ class NewGame {
           numberIndex === sameNumberCount ? (strike += 1) : (ballCount += 1);
         }
         return [strike, ballCount];
-      },
-      {}
+      }
     );
-    return checkBallStrike;
+    return checkBallStrike[checkBallStrike.length - 1];
   }
 
   gameRestart() {
@@ -95,18 +93,12 @@ class NewGame {
       }
     );
   }
-  /*
-    스트라이크 = 같은 숫자, 같은 자리
-    볼 = 같은 숫자, 다른 자리
-    낫싱 = 같은 숫자가 1개도 없을 경우
-
-    1. 스트라이크 === 3
-        => 게임 재시작문 출력
-    2. 볼 > 0 || 스트라이크 > 0  ?볼 ?스트라이크 출력
-        => 단, 둘 중 하나가 0개인 경우 0개 인것을 제외하고 출력
-            ex) 볼 1, 스트라이크 0 => 1 볼
-    3. 볼 & 스트라이크 === 0 일때 낫싱 출력
-    */
 }
 
-module.exports = NewGame;
+/*
+예외처리 
+  1. 입력 숫자 3개 이외 갯수 오류 처리
+  2. 같은 숫자 없어야 하고
+  3. 숫자만 받아야하고 0제외
+*/
+module.exports = BaseballGame;
