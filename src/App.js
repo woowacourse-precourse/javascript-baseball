@@ -31,7 +31,7 @@ class App {
     let regex = /[^1-9]/g;
     const userNumberLen = userNumber.length;
     if (regex.test(userNumber) || userNumberLen !== 3) {
-      throw "1~9 사이의 숫자 3개만 입력해주세요 프로그램이 종료됩니다.";
+      throw "1~9 사이의 숫자 3개만 입력해주세요";
     }
     let stringUserNumber = userNumber.split("").map((element) => {
       return Number(element);
