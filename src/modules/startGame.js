@@ -5,4 +5,4 @@ startGame = () => {
   Console.print(MESSAGES.START);
 };
 
-exports.startGame = startGame;
+module.exports.startGame = startGame;

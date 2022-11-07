@@ -13,4 +13,4 @@ selectComputer = () => {
   return computer.join("");
 };
 
-exports.selectComputer = selectComputer;
+module.exports.selectComputer = selectComputer;

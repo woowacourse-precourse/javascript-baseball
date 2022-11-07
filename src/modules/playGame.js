@@ -66,4 +66,4 @@ isAnswer = (answer, computer) => {
   solveNumber(computer);
 };
 
-exports.playGame = playGame;
+module.exports.playGame = playGame;

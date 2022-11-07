@@ -33,4 +33,4 @@ checkRange = (number) => {
   }
 };
 
-exports.isUserError = isUserError;
+module.exports.isUserError = isUserError;
