@@ -33,6 +33,16 @@ class App {
 
       this.#userAnswer = [...answer];
       this.score = {};
+      this.getScore();
+    });
+  }
+  getScore() {
+    const { score } = this;
+
+    this.#userAnswer.forEach((num, idx) => {
+      if (this.#answer[idx] === num) score.strike = score.strike + 1 || 1;
+      if (this.#answer[idx] !== num && this.#answer.includes(num))
+        score.ball = score.ball + 1 || 1;
     });
   }
 }
