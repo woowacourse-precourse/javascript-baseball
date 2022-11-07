@@ -10,7 +10,44 @@ class App {
     this.ball = 0;
   }
 
-  play() {}
+  play() {
+    Console.print('게임을 시작합니다.');
+    this.createComputerNum();
+    this.start();
+  }
+
+  start() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if (!this.isValidUserInput(input)) {
+        throw new Error('잘못된 입력입니다.');
+      }
+      Console.print(`숫자를 입력해주세요 : ${this.userInput}`);
+      this.strike = 0;
+      this.ball = 0;
+      this.getAnswer();
+
+      if (this.strike !== 3) {
+        return this.start();
+      }
+      return this.askUserToRestart();
+    });
+  }
+
+  getUserInput() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.userInput = input.replace(/ /g, '');
+
+      Console.print(`숫자를 입력해주세요 : ${this.userInput}`);
+    });
+    return this.userInput;
+  }
+
+  isValidUserInput(input) {
+    input.replace(/ /g, '');
+    if (input.length !== 3 || Number.isNaN(+input)) return false;
+    this.userInput = input;
+    return true;
+  }
 
   createComputerNum() {
     const randomNumberSet = new Set();
@@ -19,14 +56,6 @@ class App {
     }
     this.computerNum = [...randomNumberSet].join('');
     return this.computerNum;
-  }
-
-  getUserInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.userInput = input.replace(/ /g, '');
-      Console.print(this.userInput);
-    });
-    return this.userInput;
   }
 
   isStrike() {
@@ -57,10 +86,39 @@ class App {
     this.isBall();
     const strikeText = this.strike ? `${this.strike}스트라이크` : '';
     const ballText = this.ball ? `${this.ball}볼` : '';
-    if (strikeText || ballText) {
-      return `${ballText} ${strikeText}`.trim();
+    if (this.strike || this.ball) {
+      Console.print(`${ballText} ${strikeText}`.trim());
+      return;
     }
-    return '낫싱';
+    Console.print('낫싱');
+  }
+
+  isRestart() {
+    this.play();
+  }
+
+  isExit() {
+    Console.close();
+  }
+
+  askUserToRestart() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ');
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+      (input) => {
+        if (input === '1') {
+          Console.print(input);
+          this.isRestart();
+          return;
+        }
+        if (input === '2') {
+          this.isExit();
+        } else {
+          throw new Error('잘못된 입력입니다');
+        }
+      },
+    );
   }
 }
 
