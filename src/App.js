@@ -10,7 +10,7 @@ class App {
   };
   #GAME_RESULT = { STRIKE: "스트라이크", BALL: "볼", NOTHING: "낫싱" };
   #ERROR_MSG = {
-    ONLY_NUMBERS: "숫자만 입력해주세요.",
+    ONLY_NUMBERS: "숫자(1이상 9이하)만 입력해주세요.",
     INVALID_LENGTH: "반드시 3개의 숫자를 입력해주세요.",
     DUPLICATE_NUMBERS: "서로 다른 3개의 숫자를 입력해주세요.",
     ONLY_ONE_OR_TWO: "1 또는 2를 입력해주세요.",
@@ -49,6 +49,12 @@ class App {
         this.#initComputerNumbers(arr));
   }
   #takeUserNumbersInput() {
+    const checkUserNumbersInputValidity = (arr) => {
+      if (arr.every((el) => !Number.isInteger(el) || el > 9 || el < 1))
+        throw this.#ERROR_MSG.ONLY_NUMBERS;
+      if (arr.length !== 3) throw this.#ERROR_MSG.INVALID_LENGTH;
+      if (!checkUnique(arr)) throw this.#ERROR_MSG.DUPLICATE_NUMBERS;
+    };
     Console.readLine(this.#GAME_MSG.PLEASE_INPUT, (input) => {
       const inputNumberArr = input.trim().split("").map(Number);
       try {

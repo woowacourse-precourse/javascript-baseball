@@ -46,9 +46,9 @@
 
 ### 3-2. 세자리 숫자 유효성 검사 기능(checkUserNumbersInputValidity) 구현
 
-- [ ] 1. 1 ~ 9 숫자 외의 값이 입력될 경우(`Array.prototype.every`, `Number.isInteger` 이용) `throw` #ERROR_MSG.ONLY_NUMBERS
-- [ ] 2. 입력된 숫자의 자릿수(배열의 길이)가 3보다 작거나 클 경우 `throw` #ERROR_MSG.INVALID_LENGTH
-- [ ] 3. 입력된 3자리 수가 서로 다르지([`checkUnique`](#3-3-3자리-숫자-다른지-확인하는-기능checkunique-구현)) 않을 경우 `throw` #ERROR_MSG.DUPLICATE_NUMBERS
+- [x] 1. 1 ~ 9 숫자 외의 값이 입력될 경우(`Array.prototype.every`, `Number.isInteger` 이용) `throw` #ERROR_MSG.ONLY_NUMBERS
+- [x] 2. 입력된 숫자의 자릿수(배열의 길이)가 3보다 작거나 클 경우 `throw` #ERROR_MSG.INVALID_LENGTH
+- [x] 3. 입력된 3자리 수가 서로 다르지([`checkUnique`](#3-3-3자리-숫자-다른지-확인하는-기능checkunique-구현)) 않을 경우 `throw` #ERROR_MSG.DUPLICATE_NUMBERS
 
 ### 3-3. 3자리 숫자 다른지 확인하는 기능(checkUnique) 구현
 
