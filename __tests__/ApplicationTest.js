@@ -25,16 +25,18 @@ const getLogSpy = () => {
 
 describe("숫자 야구 게임", () => {
   test("메서드 테스트", () => {
+    mockRandoms([1, 9, 2]);
+    mockQuestions(["123", "1", "2"]);
+    const logSpy = getLogSpy();
+
     const app = new App();
 
     expect(app.checkDistinct("123")).toEqual(true);
     expect(app.checkDistinct("454")).toEqual(false);
 
-    mockQuestions(["123"]);
     app.inputUserNumber();
     expect(app.user).toEqual([1, 2, 3]);
 
-    mockRandoms([1, 9, 2]);
     app.setComputerNumber();
     expect(app.computer).toEqual([1, 9, 2]);
 
@@ -42,11 +44,9 @@ describe("숫자 야구 게임", () => {
     expect(app.score.strike).toBe(1);
     expect(app.score.ball).toBe(1);
 
-    const logSpy = getLogSpy();
     app.printResult();
     expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
 
-    mockQuestions(["1", "2"]);
     app.setIsContinued();
     expect(app.isContinued).toEqual(true);
     app.setIsContinued();
@@ -80,9 +80,35 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트 : 범위를 넘는 사용자 수 입력", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 : 중복이 포함된 사용자 수 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["131"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 : 잘못된 재시작 여부 응답", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
