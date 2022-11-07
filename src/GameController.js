@@ -3,23 +3,25 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const GAME_MESSAGE = require("./constants/message");
 
 class GameController {
-  start(numberFromUser, numberFromComputer) {
-    const getResult = (userInput, computerInput) => {
-      const isStrike = (userValue, index) => userValue === computerInput[index];
-      const userScore = {
-        strikeCount: 0,
-        ballCount: 0,
-        nothingCount: 0,
-      };
-
-      userInput.forEach((userValue, idx) => {
-        if (isStrike(userValue, idx)) userScore.strikeCount += 1;
-        else if (computerInput.includes(userValue)) userScore.ballCount += 1;
-        else userScore.nothingCount += 1;
-      });
-      return userScore;
+  getResult(userInput, computerInput) {
+    const isStrike = (userValue, index) => userValue === computerInput[index];
+    const userScore = {
+      strikeCount: 0,
+      ballCount: 0,
+      nothingCount: 0,
     };
-    const { strikeCount, ballCount, nothingCount } = getResult(
+
+    userInput.forEach((userValue, idx) => {
+      if (isStrike(userValue, idx)) userScore.strikeCount += 1;
+      else if (computerInput.includes(userValue)) userScore.ballCount += 1;
+      else userScore.nothingCount += 1;
+    });
+    return userScore;
+  }
+
+  start(numberFromUser, numberFromComputer) {
+    const getResult = (userInput, computerInput) => {};
+    const { strikeCount, ballCount, nothingCount } = this.getResult(
       numberFromUser,
       numberFromComputer
     );
