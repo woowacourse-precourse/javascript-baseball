@@ -9,8 +9,8 @@ const utils = {
     MissionUtils.Console.Close();
   },
 
-  readline(question, callback) {
-    MissionUtils.Console.ReadLine(question, callback);
+  readLine(question, callback) {
+    MissionUtils.Console.readLine(question, callback);
   },
 
   pickNumberInRange(startInclusive, endInclusive) {
