@@ -1,7 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { render } = require("node-sass");
 
 class App {
   randomNumbers;
+  inputNumbers;
+  strikeCount;
   gameResult;
 
   constructor() {
@@ -10,6 +13,14 @@ class App {
 
   setRandomNumbers() {
     this.randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
+
+  getInputNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      inputExceptionHandling(userInput);
+      this.inputNumbers = userInput.split("").map(Number);
+      return this.inputNumbers
+    });
   }
 
   inputExceptionHandling(inputNumber) {
@@ -27,18 +38,18 @@ class App {
 
   checkInputNumbers(inputNumbers, randomNumbers) {
     const inputNumbers = inputNumbers.split("").map(Number);
-    let strikeCount = 0;
+    this.strikeCount = 0;
     let ballCount = 0;
 
     inputNumbers.map((value, index) => {
       value === randomNumbers[index]
-        ? (strikeCount += 1)
+        ? (this.strikeCount += 1)
         : randomNumbers.includes(value)
         ? (ballCount += 1)
         : null;
     });
 
-    return [ballCount, strikeCount];
+    return [ballCount, this.strikeCount];
   }
 
   showNumberResult([ballCount, strikeCount]) {
@@ -57,10 +68,22 @@ class App {
     return ballResult + " " + strikeResult;
   }
 
+  checkGameEndMessage() {
+    MissionUtils.Console.print(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
+    MissionUtils.Console.readLine("", (answer) => {
+      if (answer == "1") {
+        render();
+      }
+      if (answer == "2") {
+      }
+    });
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    let inputNum = this.getInputNumbers();
-    this.checkInputNumbers(inputNum);
+
   }
 }
 
