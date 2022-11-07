@@ -7,6 +7,13 @@ class App {
   }
 
   play() {}
+
+  isGameOver() {
+    return this.input
+      .split("")
+      .map(Number)
+      .every((num, idx) => num === this.answer[idx]);
+  }
 }
 
 module.exports = App;
