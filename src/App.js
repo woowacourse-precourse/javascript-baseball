@@ -36,7 +36,19 @@ class App {
     this.getNumOfStrike();
     printMessage.printBallAndStrike(ball, strike);
     if(strike === 3) {
+      printMessage.printGameWin();
       this.gameWin();
+    }
+    else{
+      this.getUserInputNum();
+    }
+  }
+
+  getNumOfBall() {
+    for(let i = 0; i < computerNum.length; i++) {
+      if(this.userNum.includes(this.computerNum[i])){
+        ball++;
+      }
     }
   }
 
@@ -48,12 +60,10 @@ class App {
     }
   }
 
-  getNumOfBall() {
-    for(let i = 0; i < computerNum.length; i++) {
-      if(this.userNum.includes(this.computerNum[i])){
-        ball++;
-      }
-    }
+  gameRestartOrEnd() {
+    const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
+    MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
+    });
   }
 }
 

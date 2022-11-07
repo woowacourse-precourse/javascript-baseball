@@ -33,12 +33,6 @@ function printNumOfStrike(numOfStrike) {
     }
 }
 
-const printUserContinueInput = () => {
-    const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
-    MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
-    });
-}
-
 function printNumOfBall(numOfBall) {
     if(numOfBall > 0) {
         const NUM_OF_BALL_MESSAGE = `${numOfBall}볼`;
