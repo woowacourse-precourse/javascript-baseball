@@ -21,7 +21,6 @@ class App {
         this.computer.push(number);
       }
     }
-    MissionUtils.Console.print(this.computer);
   }
   getUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
@@ -67,20 +66,20 @@ class App {
   computeResult(balls, strikes) {
     let result = "";
     if (balls && !strikes) {
-      result += balls + "볼";
+      result = balls + "볼";
     }
     if (strikes && !balls) {
-      result += strikes + "스트라이크";
+      result = strikes + "스트라이크";
       if (strikes === 3) {
         this.isCorrect = true;
         result += "\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
       }
     }
     if (balls && strikes) {
-      result += balls + "볼 " + strikes + "스트라이크";
+      result = balls + "볼 " + strikes + "스트라이크";
     }
     if (!balls && !strikes) {
-      result += "낫싱";
+      result = "낫싱";
     }
     return result;
   }
@@ -99,9 +98,11 @@ class App {
       (input) => {
         if (input === "1") {
           this.play();
-        } else if (input === "2") {
+        } 
+        else if (input === "2") {
           MissionUtils.Console.close();
-        } else {
+        } 
+        else {
           throw Error(
             "잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
           );
