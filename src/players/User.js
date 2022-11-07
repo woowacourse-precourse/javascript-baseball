@@ -1,6 +1,7 @@
 class User {
   constructor() {
     this.number = [];
+    this.score = {};
   }
 
   setNumber(userInput) {

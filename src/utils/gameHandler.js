@@ -11,7 +11,7 @@ const isValidContinueOption = (option) => {
 };
 
 /* Check userInput is valid */
-const isValidUserInput = (userInput) => {
+const checkValidUserInput = (userInput) => {
   isValidLength(userInput);
   isValidNumber(userInput);
   isValidRange(userInput);
@@ -74,4 +74,4 @@ const isSameIndex = (number, userNumbers, computerNumbers) => {
   return resultValue;
 };
 
-module.exports = { isValidContinueOption, isValidUserInput, checkAnswer };
+module.exports = { isValidContinueOption, checkValidUserInput, checkAnswer };

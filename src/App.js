@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const User = require('./players/User');
 const Computer = require('./players/Computer');
-const { isValidContinueOption, isValidUserInput, checkAnswer } = require('./utils/gameHandler');
+const { isValidContinueOption, checkValidUserInput, checkAnswer } = require('./utils/gameHandler');
 const { MESSAGE, RESULT } = require('./utils/constant');
 
 class App {
@@ -22,15 +22,23 @@ class App {
 
   guess() {
     Console.readLine(MESSAGE.GUESS, (userInput) => {
-      isValidUserInput(userInput);
+      checkValidUserInput(userInput);
       this.user.setNumber(userInput);
-      const answerResult = checkAnswer(this.user.number, this.computer.number);
-      const resultPrint = parseResultToString(answerResult);
-      Console.print(resultPrint);
+      this.setUserScore();
+      this.printScore();
 
-      if (answerResult.strike === 3) return this.selectContinue();
+      if (this.user.score.strike === 3) return this.selectContinue();
       this.guess();
     });
+  }
+
+  setUserScore() {
+    this.user.score = checkAnswer(this.user.number, this.computer.number);
+  }
+
+  printScore() {
+    const resultPrint = parseResultToString(this.user.score);
+    Console.print(resultPrint);
   }
 
   end() {
@@ -54,14 +62,24 @@ const parseResultToString = (answerResult) => {
   const answerArray = Object.entries(answerResult);
   const answerStringArray = answerArray.map(([_, value], index) => {
     if (!value) return;
-    const resultString = `${value}${textArray[index]}`;
-    return resultString;
+
+    return `${value}${textArray[index]}`;
   });
 
-  const parsedResult = answerStringArray.filter((i) => i);
-  if (!parsedResult.length) return RESULT.NOTHING;
+  const parsedResultArray = answerStringArray.filter((result) => result);
+  const nothing = checkNothing(parsedResultArray);
+  if (nothing) return RESULT.NOTHING;
 
-  return parsedResult.join(' ');
+  return parsedResultArray.join(' ');
 };
+
+const checkNothing = (parsedResultArray) => {
+  if (parsedResultArray.length === 0) return true;
+
+  return false;
+};
+
+const app = new App();
+app.play();
 
 module.exports = App;
