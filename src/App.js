@@ -60,10 +60,18 @@ class App {
     else this.getUserInputData();
   }
 
+  clearData() {
+    this.enemy = [];
+    this.userInputArr = [];
+    this.strikes = 0;
+    this.balls = 0;
+  }
+
   restart() {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n", (answer) => {
         if (answer === "1") {
+          this.clearData();
           this.gameStart();
           return;
         } else if (answer === "2") {
