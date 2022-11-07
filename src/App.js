@@ -10,7 +10,7 @@ const generateComRandom = () => {
   }
   return COMPUTER;
 };
-let COMPUTER = generateComRandom();
+let COMPUTER 
 class App {
   play() {
     this.showMessage();
