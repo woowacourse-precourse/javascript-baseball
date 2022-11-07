@@ -49,7 +49,7 @@ class App {
       if (strike !== 3) {
         this.readInput(solution);
       }
-
+      this.print(MESSAGE.GAME_END);
       Console.close();
     });
   }
