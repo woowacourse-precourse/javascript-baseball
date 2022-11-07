@@ -20,6 +20,10 @@ class App {
 
   getUserGuess(computerNum) {
     Console.readLine("숫자를 입력해주세요 : ", (userGuess) => {
+      const isValid = this.user.isInputValid(userGuess);
+      if(!isValid) {
+        throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
+      }
       const [ballCnt, strCnt] = this.getGuessRst(userGuess, computerNum);
       const rstMsg = this.getRstMsg(ballCnt, strCnt);
       Console.print(rstMsg);
@@ -28,7 +32,7 @@ class App {
         this.correctAns();
         this.askRestart();
       }
-      if(strCnt !== 3) this.getUserGuess();
+      if(strCnt !== 3) this.getUserGuess(computerNum);
     })
   }
 
