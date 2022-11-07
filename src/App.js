@@ -13,7 +13,7 @@ class App {
 
     if (isAnswer(strike)) {
       printMessage(Constants.WIN_MESSAGE);
-      const selectedNumber = await inputNumber(Constants.END_MESSAGE);
+      const selectedNumber = Number(await inputNumber(Constants.END_MESSAGE));
       selectedNumberException(selectedNumber);
     }
   }
