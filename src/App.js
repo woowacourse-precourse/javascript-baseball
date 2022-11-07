@@ -31,7 +31,20 @@ class App {
     });
   }
 
-  checkInputCorret() {}
+  checkInputCorret(numberInput) {
+    try {
+      if (!/[1-9]{3}/.test(numberInput)) {
+        throw new Error('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
+      }
+      const numberInputSet = new Set(numberInput.split(''));
+      if (numberInputSet.size < 3) {
+        throw new Error('입력이 서로 다른 3자리 숫자가 아닙니다.');
+      }
+    } catch (e) {
+      MissionUtils.Console.print(`잘못된 입력입니다. ${e.message}`);
+      this.endGame();
+    }
+  }
 
   judgeInput() {}
 
