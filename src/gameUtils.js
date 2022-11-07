@@ -10,6 +10,14 @@ const findStrikeBall = (target, input) => {
     return { strike, ball };
 };
 
-findStrikeBall('123', '456');
+const makePhrase = (strike, ball) => {
+    const { NOTHING, BALL, STRIKE } = config.MATCH_TYPE;
 
-module.exports = findStrikeBall;
+    if (strike === 0 && ball === 0) return NOTHING;
+    if (strike === 0) return `${ball}${BALL}`;
+    if (ball === 0) return `${strike}${STRIKE}`;
+
+    return `${strike}${STRIKE} ${ball}${BALL}`;
+};
+
+module.exports = { findStrikeBall, makePhrase };
