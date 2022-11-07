@@ -1,9 +1,11 @@
 module.exports = {
   env: {
     node: true,
+    commonjs: true,
+    jest: true,
   },
   parserOptions: {
     ecmaVersion: 2022,
   },
-  extends: ['airbnb', 'plugin:jest/recommended', 'plugin:prettier/recommended'],
+  extends: ['airbnb', 'plugin:prettier/recommended'],
 };
