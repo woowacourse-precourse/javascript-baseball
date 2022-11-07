@@ -77,8 +77,7 @@ class App {
   replay() {
     let result = 0;
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => result = input);
-
-    if (result !== '1' || result !== '2') {
+    if (result !== '1' && result !== '2') {
       throw new Error();
     }
     return result;
