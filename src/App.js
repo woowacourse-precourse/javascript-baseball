@@ -15,7 +15,11 @@ class App {
     }
 
     Console.readLine(Console.INPUT, (input) => {
-      if (Input.isValidInput(input)) Console.print(this.makeAnswer(input));
+      if (Input.isValidInput(input)) {
+        this.input = input;
+        Console.print(this.makeResult(input));
+      }
+
       if (this.isGameOver()) {
         Console.print(Console.END);
         this.makeNotice();
@@ -41,7 +45,6 @@ class App {
       if (this.answer[idx] === num) scoreBoard.strike += 1;
       else if (this.answer.includes(num)) scoreBoard.ball += 1;
     });
-
     if (!strike && !ball) return "낫싱";
     else if (!strike) return ball + "볼";
     else if (!ball) return strike + "스트라이크";
@@ -61,10 +64,7 @@ class App {
   }
 
   isGameOver() {
-    return this.input
-      .split("")
-      .map(Number)
-      .every((num, idx) => num === this.answer[idx]);
+    return this.input.split("").every((num, idx) => num === this.answer[idx]);
   }
 }
 
