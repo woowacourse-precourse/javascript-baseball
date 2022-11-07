@@ -1,5 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
+const {
+  Console: { print, readLine },
+  Random,
+} = MissionUtils;
 
 class App {
   constructor(count = 3, minNum = 1, maxNum = 9) {
@@ -47,14 +50,6 @@ class App {
 
   get userNumber() {
     return this._userNumber;
-  }
-
-  printMessage(msg) {
-    return Console.print(msg);
-  }
-
-  readLine(msg, callback) {
-    return Console.readLine(msg, callback);
   }
 
   createUniqueNumberInList(array) {
@@ -136,7 +131,7 @@ class App {
   }
 
   runGames() {
-    this.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+    readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
   }
 
   compareNumbers() {
@@ -166,7 +161,7 @@ class App {
 
   startGame() {
     // TODO: 첫 게임에만 MESSAGES.START표시하기
-    this.printMessage(this.MESSAGES.START);
+    print(this.MESSAGES.START);
     this.newGame();
   }
 
