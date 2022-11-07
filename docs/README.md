@@ -62,13 +62,13 @@
 
 ## 구현할 기능 목록
 
-- [ ] app
+- [x] app
 
-  - [ ] resetCountBoard: countboard를 0,0 으로 초기화 시킨다
-  - [ ] compareUserAndComputer: user의 값과 computer의 값을 비교하여, countBoard 최신화
-  - [ ] makeResult: countboard를 바탕으로 결과를 나타낸다
-  - [ ] decideReprocess: 3스트라이크 여부를 판단하여, process를 다시 돌려야하는지 판단한다.
-  - [ ] process: 전체적인 일련의 과정을 나타낸다.
+  - [x] resetCountBoard: countboard를 0,0 으로 초기화 시킨다
+  - [x] compareUserAndComputer: user의 값과 computer의 값을 비교하여, countBoard 최신화
+  - [x] makeResult: countboard를 바탕으로 결과를 나타낸다
+  - [x] decideReprocess: 3스트라이크 여부를 판단하여, process를 다시 돌려야하는지 판단한다.
+  - [x] process: 전체적인 일련의 과정을 나타낸다.
 
 - [x] computer
 
