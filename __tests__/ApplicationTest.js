@@ -1,5 +1,5 @@
-const App = require("../src/App");
-const MissionUtils = require("@woowacourse/mission-utils");
+const App = require('../src/App');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -18,23 +18,17 @@ const mockRandoms = (numbers) => {
 };
 
 const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
 
-describe("숫자 야구 게임", () => {
-  test("게임 종료 후 재시작", () => {
+describe('숫자 야구 게임', () => {
+  test('게임 종료 후 재시작', () => {
     const randoms = [1, 3, 5, 5, 8, 9];
-    const answers = ["246", "135", "1", "597", "589", "2"];
+    const answers = ['246', '135', '1', '597', '589', '2'];
     const logSpy = getLogSpy();
-    const messages = [
-      "낫싱",
-      "3스트라이크",
-      "1볼 1스트라이크",
-      "3스트라이크",
-      "게임 종료",
-    ];
+    const messages = ['낫싱', '3스트라이크', '1볼 1스트라이크', '3스트라이크', '게임 종료'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -47,32 +41,23 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("게임 종료 후 재시작 예외 - 1 또는 2 이외의 문자", () => {
+  test('게임 종료 후 재시작 예외 - 1 또는 2 이외의 문자', () => {
     const randoms = [1, 3, 5, 3, 2, 4];
-    const answers = ["246", "135", "종료", "1", "342", "324", "4", "2"];
+    const answers = ['246', '135', '종료'];
+
     const logSpy = getLogSpy();
-    const messages = [
-      "낫싱",
-      "3스트라이크",
-      "2볼 1스트라이크",
-      "3스트라이크",
-      "게임종료",
-    ];
-
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    const app = new App();
-    app.play();
-
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
   });
 
-  test("예외 테스트1 - 3개이상의 숫자", () => {
+  test('예외 테스트1 - 3개이상의 숫자', () => {
     const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const answers = ['1234'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -83,9 +68,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트2 - 음수일 경우", () => {
+  test('예외 테스트2 - 음수일 경우', () => {
     const randoms = [1, 3, 5];
-    const answers = ["-12"];
+    const answers = ['-12'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -96,9 +81,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트3 - 반복된 숫자", () => {
+  test('예외 테스트3 - 반복된 숫자', () => {
     const randoms = [1, 3, 5];
-    const answers = ["114"];
+    const answers = ['114'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -109,9 +94,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트4 - 숫자가 아닌 영어", () => {
+  test('예외 테스트4 - 숫자가 아닌 영어', () => {
     const randoms = [1, 3, 5];
-    const answers = ["aaa"];
+    const answers = ['aaa'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -122,9 +107,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트5 - 숫자가 아닌 한글", () => {
+  test('예외 테스트5 - 숫자가 아닌 한글', () => {
     const randoms = [1, 3, 5];
-    const answers = ["삼이일"];
+    const answers = ['삼이일'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -135,9 +120,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트6 - 특수문자", () => {
+  test('예외 테스트6 - 특수문자', () => {
     const randoms = [1, 3, 5];
-    const answers = ["&^%"];
+    const answers = ['&^%'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -148,9 +133,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트7 - 연산기호", () => {
+  test('예외 테스트7 - 연산기호', () => {
     const randoms = [1, 3, 5];
-    const answers = ["10+208"];
+    const answers = ['10+208'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -161,9 +146,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트8 - 공백", () => {
+  test('예외 테스트8 - 공백', () => {
     const randoms = [1, 3, 5];
-    const answers = ["   "];
+    const answers = ['   '];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -174,9 +159,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트9 - 1~9사이 숫자인지", () => {
+  test('예외 테스트9 - 1~9사이 숫자인지', () => {
     const randoms = [1, 3, 5];
-    const answers = ["074"];
+    const answers = ['074'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -187,9 +172,9 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("예외 테스트10 - 소수인 경우", () => {
+  test('예외 테스트10 - 소수인 경우', () => {
     const randoms = [1, 3, 5];
-    const answers = ["1.5"];
+    const answers = ['1.5'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
