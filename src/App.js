@@ -70,6 +70,7 @@ class App {
       if (PLAYER_NUMBER_ARRAY[idx] == answer[idx]) return 'strike';
       return 'ball';
     }
+    return '';
   }
 
   makeHintString(strike, ball) {
@@ -107,5 +108,4 @@ class App {
     MissionUtils.Console.close();
   }
 }
-
 module.exports = App;
