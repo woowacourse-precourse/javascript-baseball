@@ -94,4 +94,20 @@ describe("기능 테스트", () => {
     const ballCount = new BallCount(question, answer);
     expect(ballCount.balls).toBe(3);
   });
+
+  test("삼진 아웃 검증하기", () => {
+    const question = [1, 2, 3];
+
+    const answer1 = [1, 2, 3];
+    const answer2 = [1, 2, 4];
+
+    const ballCount1 = new BallCount(question, answer1);
+    const ballCount2 = new BallCount(question, answer2);
+
+    const isThreeStrikes1 = ballCount1.isThreeStrikes();
+    const isThreeStrikes2 = ballCount2.isThreeStrikes();
+
+    expect(isThreeStrikes1).toBe(true);
+    expect(isThreeStrikes2).toBe(false);
+  });
 });
