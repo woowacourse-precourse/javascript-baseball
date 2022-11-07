@@ -1,11 +1,9 @@
-const { Random, Console } = require("@woowacourse/mission-utils");
+const getNewAnswer = require("./getNewAnswer");
 
 class App {
-  getRandomValue() {
-    return Random.pickNumberInRange(1, 9);
+  play() {
+    const answer = getNewAnswer();
   }
-
-  play() {}
 }
 
 const app = new App();
