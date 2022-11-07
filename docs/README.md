@@ -18,13 +18,13 @@
 - [x] 2. 생성자 메서드(constructor) 초기화
   - 사용자의 3자리 숫자를 담을 변수(`userNumbers`) 선언
   - 상대방(컴퓨터)의 3자리 숫자를 담을 private 변수(`#computerNumbers`) 선언
-  - 사용자 승리 상태를 담을 변수(`#isUserWinned`) 선언, false 할당
+  - 사용자 승리 상태를 담을 변수(`#isUserWon`) 선언, false 할당
   - 게임 시작 상태를 담을 변수(`#isStartGame`) 선언, true 할당(기본적으로 게임 시작)
 
 ### 1-2. 상태 변수 관리 함수(getter, setter) 구현
 
 - [ ] 1. `#computerNumbers`의 getter, setter(`#getComputerNumbers`,`#setComputerNumbers`)
-- [ ] 2. `#isUserWinned`의 getter, setter(`getIsUserWinned`, `#setIsUserWinned`)
+- [ ] 2. `#isUserWon`의 getter, setter(`getIsUserWon`, `#setIsUserWon`)
 - [ ] 3. `#isStartGame`의 getter, setter(`getIsStartGame`, `#setIsStartGame`)
 
 ## 2. 상대방(컴퓨터)의 3자리 숫자 생성하는 기능(#initComputerNumbers) 구현
@@ -83,8 +83,8 @@
 ## 7. 게임 종료 기능(#handleGameOver) 구현
 
 - [ ] 1. 문자열을 인자로 받음
-- [ ] 2. `3스트라이크`일 경우 `#setIsUserWinned` true
-- [ ] 3. 그 외 경우 `#setIsUserWinned` false
+- [ ] 2. `3스트라이크`일 경우 `#setIsUserWon` true
+- [ ] 3. 그 외 경우 `#setIsUserWon` false
 
 ## 8. 재시작 묻는 기능(#askRestart) 구현
 
@@ -114,8 +114,8 @@
 ## 12. 게임 시작 기능(#startGame) 구현
 
 - [ ] 1. [`#initComputerNumbers`](#2-상대방컴퓨터의-3자리-숫자-생성하는-기능initcomputernumbers-구현) 호출
-- [ ] 2. `getIsUserWinned`가 false일 동안 [`#continueGame`](#11-게임-지속-기능continuegame-구현) 호출
-- [ ] 3. `getIsUserWinned`가 true일 경우 탈출
+- [ ] 2. `getIsUserWon`가 false일 동안 [`#continueGame`](#11-게임-지속-기능continuegame-구현) 호출
+- [ ] 3. `getIsUserWon`가 true일 경우 탈출
   - [ ] 3.1 #GAME_MSG.QUIT 출력(`Console.print` 이용)
   - [ ] 3.2 [`#askRestart`](#8-재시작-묻는-기능askrestart-구현) 호출
 
