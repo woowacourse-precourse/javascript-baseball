@@ -7,10 +7,10 @@ class Validation{
 
   checkErrorofInput(input, startOrrestart){
     if (startOrrestart === 0){
-      errorthrow.inputError(input);
+      errorthrow.inputErrorThrow(input);
     }
     if (startOrrestart === 1){
-      errorthrow.restartError(input);
+      errorthrow.restartErrorThrow(input);
     }
   }
 
