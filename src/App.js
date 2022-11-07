@@ -41,6 +41,9 @@ class App {
         MissionUtils.Console.print(result);
 
         if (strike !== 3) this.inputUser(computer);
+        else {
+          MissionUtils.Console.print(Messages.GAME_OVER);
+        }
       }
     });
   }
