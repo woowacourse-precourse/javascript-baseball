@@ -25,6 +25,7 @@ const getLogSpy = () => {
 
 describe("숫자 야구 게임", () => {
   test("게임 종료 후 재시작", () => {
+    // 기존 테스트 케이스.
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
@@ -48,8 +49,23 @@ describe("숫자 야구 게임", () => {
   });
 
   test("예외 테스트", () => {
+    // 기존 테스트 케이스.
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 - 숫자 이외의 문자 입력", () => {
+    // 새로 추가한 테스트 케이스
+    const randoms = [1, 3, 5];
+    const answers = ["abc"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
