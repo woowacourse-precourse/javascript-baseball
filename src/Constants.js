@@ -14,6 +14,7 @@ const ERROR_MESSAGE = Object.freeze({
   REPEAT: "서로 다른 숫자 3개를 입력해야 합니다.",
   QUANTITY: "숫자 3개를 입력해야 합니다.",
   NOT_NUMBER: "숫자만 입력해야 합니다.",
+  HAS_ZERO: "숫자 0은 입력할 수 없습니다.",
   WRONG_REPLY: "잘못된 값을 입력하셨습니다.",
 });
 

@@ -51,6 +51,10 @@ class App {
     if (!userNumber.every((num) => Number.isInteger(num))) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
+
+    if (userNumber.includes(0)) {
+      throw new Error(ERROR_MESSAGE.HAS_ZERO);
+    }
   }
 
   getResult(computer, user) {
