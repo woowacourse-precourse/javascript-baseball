@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputValidation = require("./inputValidation");
 const GenerateRandomNumber = require("./generateRandomNumber");
-const StrikeBallNumber = require("./strikeBallCheck");
+const ballStrikeCheck = require("./ballStrikeCheck");
 
 class App {
     play() {
@@ -9,8 +9,6 @@ class App {
         userInputNumber(GenerateRandomNumber());
     }
 }
-const app = new App();
-app.play();
 
 function gameStartGiude() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -19,13 +17,13 @@ function gameStartGiude() {
 function userInputNumber(computerNumber) {
     MissionUtils.Console.readLine('세자리 숫자를 입력해주세요 : ', userNumber => {
         const toArrUserNumber = String(userNumber).split("").map(Number);
-        return gameStart(toArrUserNumber, computerNumber)
+        return gameStart(toArrUserNumber, computerNumber);
     });
 }
 
 function gameStart(userNumber, computerNumber) {
     InputValidation(userNumber);
-    const { ballNumber, strikeNumber } = StrikeBallNumber(userNumber, computerNumber);
+    const { ballNumber, strikeNumber } = ballStrikeCheck(userNumber, computerNumber);
     getHint(ballNumber, strikeNumber);
     hasThreeStrike(strikeNumber, computerNumber);
 }
