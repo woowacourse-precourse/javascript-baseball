@@ -29,25 +29,24 @@ class App {
   }
 
   calculateCount(userInput) {
-    let ball = 0,
-      strike = 0;
+    const count = { strike: 0, ball: 0 };
 
     Array.from(userInput).forEach((number, index) => {
       if (this.answer.indexOf(Number(number)) === index) {
-        strike += 1;
+        count.strike += 1;
       } else if (this.answer.includes(Number(number))) {
-        ball += 1;
+        count.ball += 1;
       }
     });
 
-    if (strike === 0 && ball === 0) {
+    if (count.strike === 0 && count.ball === 0) {
       return "낫싱";
-    } else if (strike === 0) {
-      return `${ball}볼`;
-    } else if (ball === 0) {
-      return `${strike}스트라이크`;
+    } else if (count.strike === 0) {
+      return `${count.ball}볼`;
+    } else if (count.ball === 0) {
+      return `${count.strike}스트라이크`;
     } else {
-      return `${ball}볼 ${strike}스트라이크`;
+      return `${count.ball}볼 ${count.strike}스트라이크`;
     }
   }
 
