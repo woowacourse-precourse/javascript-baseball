@@ -28,6 +28,10 @@ class App {
     }
   }
 
+  makeResult(input) {
+    const scoreBoard = { strike: 0, ball: 0 };
+  }
+
   isGameOver() {
     return this.input
       .split("")
