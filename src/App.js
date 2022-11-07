@@ -15,6 +15,7 @@ class App {
     this.strike = this.gameResultCount(this.answerNum, this.randomList).strike;
     this.ball = this.gameResultCount(this.answerNum, this.randomList).ball;
     this.printGameMessage(this.strike, this.ball);
+    this.checkGameResult(this.printGameMessage(this.strike, this.ball));
   }
 
   gameStartMsg() {
@@ -89,6 +90,22 @@ class App {
     }
     return text;
   }
+  checkGameResult(result) {
+    if (result === '3스트라이크') {
+      this.printWinMessage(result);
+    } else {
+      this.printMessage(result);
+    }
+  }
+
+  printWinMessage(result) {
+    MissionUtils.Console.print(result);
+  }
+
+  printMessage(result) {
+    MissionUtils.Console.print(result);
+  }
+
 
 }
 
