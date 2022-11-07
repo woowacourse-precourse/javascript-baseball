@@ -121,7 +121,7 @@ class App {
   checkThreeStrikes(result, computer) {
     if (result === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료.");
-      this.endOrRestartGame();
+      this.selectAfterAction();
     } else {
       this.inputUserNumber(computer);
     }
@@ -140,8 +140,11 @@ class App {
   selectEndOrRestartGame(option) {
     if (option === "1") {
       this.playGame();
-  } else if (option === "2") {
-    MissionUtils.Console.close();
+    } else if (option === "2") {
+      MissionUtils.Console.close();
+    } else {
+      throw "1 또는 2 이외의 다른 값이 입력되었습니다.";
+    }
   }
 }
 
