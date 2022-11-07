@@ -23,12 +23,13 @@ class BaseballGame {
   }
 
   startGame() {
+    printStartMessage();
     this.getPlayerInput();
   }
 
   restartGame() {
     this.randomNumbers = this.initRandomNumbers();
-    this.startGame();
+    this.getPlayerInput();
   }
 
   initRandomNumbers() {
