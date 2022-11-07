@@ -15,9 +15,7 @@ class GameStatusView {
         break;
 
       case GAME_STATUS.RESTARTED:
-        this.#dispatcher.dispatch({
-          type: ACTION_TYPE.GAME_RESTART,
-        });
+        this.#dispatcher.dispatch({ type: ACTION_TYPE.GAME_RESTART });
         break;
 
       case GAME_STATUS.FINISHED:

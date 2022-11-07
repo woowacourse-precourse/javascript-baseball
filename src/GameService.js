@@ -18,9 +18,7 @@ class GameService {
     this.injectDependencies();
     this.registerCallbacks();
 
-    this.dispatcher.dispatch({
-      type: ACTION_TYPE.GAME_START,
-    });
+    this.dispatcher.dispatch({ type: ACTION_TYPE.GAME_START });
   }
 
   injectDependencies() {
