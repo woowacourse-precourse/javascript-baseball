@@ -90,6 +90,18 @@ class BaseballGame{
         });
     }
 
+    validateInputNumber(number) {
+        if (!(typeof Number(number) === "number")) {
+            throw new Error("숫자를 입력하세요.");
+        }
+        if ([...new Set(number)].length !== NUMBER.DIGIT){
+            throw new Error("중복되지 않은 수를 입력하세요.");
+        }
+        if (number.length !== NUMBER.DIGIT) {
+            throw new Error("3자리 수를 입력하세요.");
+        }
+    }
+
     inputRestartOrEnd() {
         Console.readLine(MESSAGE.OPTION, (inputNumber) => {
             if(inputNumber === '1'){
