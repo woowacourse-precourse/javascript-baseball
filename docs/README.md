@@ -50,6 +50,7 @@
 - [x] 인덱스와 원소 모두를 사용하는 for문은 forEach문으로 대체.
 - [x] true or falsy로 갈리는 다수의 if문은 삼항연산자 지향.
 - [x] 메시지 관련 상수, 하나의 파일로 분리.
+- [x] 오류 메시지 간소화 위해 `checkValidation`함수에서 `inputMore`, `inputLess` 기능 삭제
 
 ### 🦺유의 사항
 
