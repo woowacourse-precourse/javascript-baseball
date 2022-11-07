@@ -8,6 +8,8 @@ const {
   RETRY_OR_END,
   RETRY_VALUE,
   END_VALUE,
+  START_NUMBER,
+  END_NUMBER,
 } = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
@@ -126,12 +128,17 @@ const printGameResult = (countStrike, countBall, computers) => {
   }
 };
 
+const playAgain = () => {
+  const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
+  getUserNumber(computerNumbers, REQUIRE_NUMBER);
+};
+
 const retryOrEnd = () => {
-  MissionUtils.Console.readLine("", (userInput) => {
+  MissionUtils.Console.readLine("wefwefwef", (userInput) => {
     if (userInput === RETRY_VALUE) {
-      printMessage("1입력");
+      playAgain();
     } else if (userInput === END_VALUE) {
-      printMessage("2입력");
+      throw new Error("게임을 종료합니다");
     }
   });
 };
