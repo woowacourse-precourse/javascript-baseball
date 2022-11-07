@@ -1,4 +1,5 @@
-const { AnswerError, ERROR_CODE } = require("./Error");
+const { AnswerError, FlagError, ERROR_CODE } = require("./Error");
+const { FLAG } = require("./lib/constants");
 
 class Validator {
   static answer(answer) {
@@ -19,6 +20,14 @@ class Validator {
     }
 
     return answer;
+  }
+
+  static flag(flag) {
+    if (flag !== FLAG.REPLAY && flag !== FLAG.EXIT) {
+      throw new FlagError(ERROR_CODE.WRONG_FLAG, flag);
+    }
+
+    return flag;
   }
 }
 

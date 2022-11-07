@@ -25,6 +25,10 @@ class Game {
       const correct = this.checkAnswer(answer);
 
       if (!correct) this.start();
+      else
+        this.user.readFlag(MESSAGE.REPLAY, (answer) => {
+          console.log(answer);
+        });
     });
   }
 

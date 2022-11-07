@@ -7,6 +7,12 @@ class User {
       callback(Validator.answer(answer));
     });
   }
+
+  readFlag(query, callback) {
+    MissionUtils.Console.readLine(query, (answer) => {
+      callback(Validator.flag(answer));
+    });
+  }
 }
 
 module.exports = User;
