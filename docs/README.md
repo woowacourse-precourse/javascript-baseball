@@ -31,7 +31,7 @@
 - [] '숫자 야구 게임을 시작합니다.' 메시지 출력 후 게임 진행 : runGame
 - [] 랜덤숫자 생성 후 숫자입력, 비교, 결과출력 프로세스를 반복해서 진행 : process
   - [] 랜덤 수 생성 : getRandomNumber
-  - [] "숫자를 입력해주세요 : " 메시지 출력 후 입력 받기 : inputNumber
+  - [] "숫자를 입력해주세요 : " 메시지 출력 후 입력 받기 : inputAnswer
   - [] 게임 결과 출력 및 메시지 리턴 : printResult
     - [] 랜덤생성한 수와 입력한 수를 비교하여 결과 구하기 : getResult
   - [] 결과가 3스트라이크인지 확인 : isNotThreeStrike
