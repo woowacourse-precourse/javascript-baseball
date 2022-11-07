@@ -6,17 +6,17 @@ const { MESSAGE, COUNT_MESSAGE, ERROR_MESSAGE, GAME_PROGRESS } = require('./cons
 
 class App {
   play() {
-    this.startMessage();
-    this.makeComputerNumArr();
+    return this.startMessage().makeComputerNumArr().getInputAndCompare();
   }
 
   makeComputerNumArr() {
     this.computerNumArr = generateNumber();
-    this.getInputAndCompare();
+    return this;
   }
 
   startMessage() {
     Console.print(MESSAGE.START_GAME);
+    return this;
   }
 
   getInputAndCompare() {
