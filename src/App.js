@@ -23,14 +23,16 @@ class App {
     let overlapReg = new RegExp(/(.)\1+/g);
     if (overlapReg.test(value))
       throw new Error("중복된 값");
-
   }
 
-
+  stringToAnswerType(value) {
+    return value.split('').map(Number);
+  }
 
   guessAnswer() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.isCorrectInput(input);
+      input = stringToAnswer(input);
     });
 
   }
