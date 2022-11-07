@@ -3,7 +3,7 @@ const Render = require("./Render");
 const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
 const ComputerInput = require("./ComputerInput");
-const { ERROR } = require("./constants");
+const { ERROR } = require("./data/Constants");
 class App {
   constructor() {
     this.computerInput = ComputerInput();
@@ -40,9 +40,7 @@ class App {
         userNum: this.userNum,
       });
 
-      const errorResult = checkInputValid.checkValidation();
-
-      this.errorResult = errorResult;
+      this.errorResult = checkInputValid.checkValidation();
 
       if (this.errorResult !== ERROR.USER_INPUT_PASS) {
         render.errorThrow(this.errorResult);
@@ -64,17 +62,15 @@ class App {
         this.notThreeStrike();
       }
       if (this.strikeCount === 3) {
-        render.replayQnA().then((userSelection) => {
-          this.replayQnAResult = userSelection;
+        render.replayQnA().then((retryOrEnd) => {
+          this.replayQnAResult = retryOrEnd;
 
           const checkRetry = new CheckInputValid({
             userNum: this.userNum,
             retryNum: this.replayQnAResult,
           });
 
-          const errorReTryResult = checkRetry.checkRetryInput();
-
-          this.errorRetryResult = errorReTryResult;
+          this.errorRetryResult = checkRetry.checkRetryInput();
 
           if (this.errorRetryResult !== ERROR.USER_INPUT_PASS) {
             render.errorThrow(this.errorRetryResult);
