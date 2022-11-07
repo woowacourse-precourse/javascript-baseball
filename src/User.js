@@ -10,6 +10,14 @@ class User{
         this.state=state;
     }
 
+    setInput(input){
+        this.input=input;
+    }
+
+    getInput(){
+        return this.input.split('').map((element)=>Number(element));
+    }
+
     print(msg){
         MissionUtils.Console.print(msg);
     }
@@ -22,14 +30,6 @@ class User{
         });
     }
 
-    setInput(input){
-        this.input=input;
-    }
-
-    getInput(){
-        return this.input.split('').map((element)=>Number(element));
-    }
-
     findErrorInGame(input){
         const INPUT_LENGTH = input.replace(/[^0-9]/g,'').length;
         if(INPUT_LENGTH===3){
@@ -40,7 +40,7 @@ class User{
     }
 
     findErrorOutGame(input){
-        if(input===1 || input===2){
+        if(Number(input)===1 || Number(input)===2){
             this.setInput(input);
         }else{
             throw new Error('잘못된 값이 입력되었습니다.');
