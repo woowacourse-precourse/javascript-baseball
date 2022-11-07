@@ -58,6 +58,12 @@ class View {
       this.controller.checkIsRestartUserInputValid(restartUserInput)
     );
   }
+
+  // 게임 완전 종료
+  finishGame() {
+    Console.print(this.CLOSING_COMMENT);
+    Console.close();
+  }
 }
 
 module.exports = View;

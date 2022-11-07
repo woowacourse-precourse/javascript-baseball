@@ -114,8 +114,7 @@ class Controller {
     }
 
     // 2번이라면 게임 완전히 종료
-    Console.print(this.view.CLOSING_COMMENT);
-    Console.close();
+    this.view.finishGame();
   }
 
   // 게임 초기 실행
