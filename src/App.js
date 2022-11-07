@@ -3,6 +3,16 @@ const GAME_START = '숫자 야구 게임을 시작합니다.';
 const RESTART = '숫자 야구 게임을 재시작합니다.';
 
 class App {
+  // 게임 재시작
+  restartGame() {
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.readLine('', (input) => {
+      this.wrongInput(input);
+      if (input === '1') this.startGame();
+      if (input === '2') MissionUtils.Console.close();
+    });
+  }
+
   // 볼, 스트라이크 출력
   compareNumber(strike, ball) {
     if (strike === 0 && ball === 0) return '낫싱';
@@ -10,7 +20,7 @@ class App {
     if (strike > 0 && ball === 0) return `${strike}스트라이크`;
     return `${ball}볼 ${strike}스트라이크`;
   }
-  
+
   // 볼 체크
   ballCheck(user, random) {
     let ball = 0;
