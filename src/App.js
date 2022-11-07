@@ -33,15 +33,28 @@ const isDifferentDigitNumber = (num) => {
   return new Set(numArr).size == numArr.length ? true : false;
 };
 
+const validatePlayerNumber = (num) => {
+  if (
+    isThreeDigitNumber(num) &&
+    isOneToNine(num) &&
+    isDifferentDigitNumber(num)
+  )
+    return true;
+  else throw PLAYER_ERROR_MESSAGE;
+};
+
 const game = () => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = num;
+
+    validatePlayerNumber(num);
   });
 };
 
 class App {
   play() {
     printGameStart();
+    game();
   }
 }
 
