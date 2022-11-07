@@ -5,6 +5,7 @@ class App {
   constructor() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
+
   play() {
     const computerValue = this.makeRandomNum();
     this.enterUserInput(computerValue);
@@ -21,7 +22,16 @@ class App {
     if (userValue == computerValue) {
       // 만약에 같은 수가 나오게 된다면 console.log 띄우고 재시작 여부 물어봄
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (userChoiceInput) => {
+          if (userChoiceInput == "1") {
+            this.play();
+          } else {
+            Console.close();
+          }
+        }
+      );
     } else {
       let strike = 0;
       let ball = 0;
