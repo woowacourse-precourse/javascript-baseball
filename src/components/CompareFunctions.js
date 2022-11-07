@@ -1,6 +1,12 @@
+const gameConstant = require('./GameConstant');
+
+const limitSize = gameConstant.LIMIT_NUMBER_SIZE;
+
 const compareNumber = (answer, playerInput) => {
   const inputArray = playerInput.split('');
+
   const strikes = getStrikes(answer, inputArray);
+  const balls = getBalls(answer, inputArray);
 };
 
 const countStrikes = (number, index, answer) => {
@@ -17,6 +23,31 @@ const getStrikes = (answer, inputArray) => {
     strike += countStrikes(number, index, answer);
   });
   return strike;
+};
+
+const createBallArray = (size, answer) => {
+  const ballArray = new Array(size).fill(false);
+  answer.split('').forEach(number => {
+    ballArray[number] = true;
+  });
+  return ballArray;
+};
+
+const countBalls = (number, index, answer, ballArray) => {
+  let ball = 0;
+  if (number !== answer[index] && !!ballArray[number]) {
+    ball += 1;
+  }
+  return ball;
+};
+
+const getBalls = (answer, inputArray) => {
+  let ball = 0;
+  const ballArray = createBallArray(limitSize, answer);
+  inputArray.forEach((number, index) => {
+    ball += countBalls(number, index, answer, ballArray);
+  });
+  return ball;
 };
 
 module.exports = compareNumber;
