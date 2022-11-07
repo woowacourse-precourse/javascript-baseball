@@ -1,8 +1,8 @@
 기능 목록
 
-[] 컴퓨터가 랜덤한 세 자리 숫자를 생성하는 기능
-    [] 1~9까지의 서로 다른 숫자를 생성한다
-    [] MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다
+[v] 컴퓨터가 랜덤한 세 자리 숫자를 생성하는 기능
+    [v] 1~9까지의 서로 다른 숫자를 생성한다
+    [v] MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다
 
 [] 사용자가 숫자를 입력하는 기능
     [] 사용자는 세 자리 숫자를 입력한다
