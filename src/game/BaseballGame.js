@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { createRandomNumber } = require('../computer/computer');
+const Computer = require('../computer/Computer');
 const {
   NUMBER_LENGTH,
   GAME_MESSAGE,
@@ -10,6 +10,7 @@ const Calculator = require('./Calculator');
 
 class BaseballGame {
   constructor() {
+    this.computer = new Computer();
     this.calculator = new Calculator();
   }
 
@@ -70,7 +71,7 @@ class BaseballGame {
   }
 
   startGame() {
-    const randomNumber = createRandomNumber();
+    const randomNumber = this.computer.createRandomNumber();
 
     this.getResult(randomNumber);
   }
