@@ -29,12 +29,8 @@ class App {
   getUserNumber() {
     MissionUtils.Console.readLine(MESSAGE.ASK_NUMBER, (inputNumber) => {
       const userNumber = Array.from(inputNumber, Number);
-      try {
-        this.checkValidity(userNumber);
+      if (this.checkValidity(userNumber)) {
         this.compareNumbers(this.computerNumber, userNumber);
-      } catch (e) {
-        this.showMessage(e);
-        MissionUtils.Console.close();
       }
     });
   }
@@ -55,6 +51,8 @@ class App {
     if (userNumber.includes(0)) {
       throw new Error(ERROR_MESSAGE.HAS_ZERO);
     }
+
+    return true;
   }
 
   getResult(computer, user) {
@@ -67,8 +65,8 @@ class App {
     return { ballNum, strikeNum };
   }
 
-  showResult(matchNum) {
-    const { ballNum, strikeNum } = matchNum;
+  showResult(result) {
+    const { ballNum, strikeNum } = result;
 
     let message = `${ballNum === 0 ? "" : ballNum + BASEBALL_TERM.BALL} ${
       strikeNum === 0 ? "" : strikeNum + BASEBALL_TERM.STRIKE
