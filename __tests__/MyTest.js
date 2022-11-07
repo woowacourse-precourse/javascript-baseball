@@ -39,6 +39,24 @@ describe("Controller 클래스 기능 테스트", () => {
     expect(result).toEqual(true);
   });
 
+  test("올바른 입력인가 1", () => {
+    const controller = new Controller();
+    const result = controller.isValidInput([1,2,0]);
+    expect(result).toEqual(false);
+  });
+
+  test("올바른 입력인가 2", () => {
+    const controller = new Controller();
+    const result = controller.isValidInput([1,2,'-']);
+    expect(result).toEqual(false);
+  });
+
+  test("올바른 입력인가 3", () => {
+    const controller = new Controller();
+    const result = controller.isValidInput(['a','b','c']);
+    expect(result).toEqual(false);
+  });
+
   test("strike 수와 ball 수로 적절한 hint를 만드는가 1", () => {
     const controller = new Controller();
     const result = controller.makeHint(1,2);
