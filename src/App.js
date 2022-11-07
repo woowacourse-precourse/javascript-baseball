@@ -21,11 +21,14 @@ const ment = {
 class App {
   constructor() {
     this.game = GAME.PLAY;
+    this.try = 1;
   }
 
   async play() {
+    if (this.try === 1) this.startGame();
     switch (this.game) {
       case GAME.PLAY:
+        this.try += 1;
         await this.playGame();
         if (!this.game) this.endGame();
         break;
@@ -41,7 +44,7 @@ class App {
   }
 
   async playGame() {
-    const anwser = this.startGame().createAnswer();
+    const anwser = this.createAnswer();
     while (this.game === GAME.PLAY) {
       await this.checkUserGameAnswer();
       if (this.game === GAME.EXIT) break;
@@ -59,13 +62,12 @@ class App {
         answer.push(num);
       }
     }
-    MissionUtils.Console.print(answer);
     return answer;
   }
 
   startGame() {
     MissionUtils.Console.print(ment.start);
-    return this;
+    return;
   }
 
   inputUserAnswer(ment) {
@@ -82,6 +84,8 @@ class App {
       await this.inputUserAnswer(ment.input);
       if (this.userAnswer < 100 || this.userAnswer > 999)
         throw new Error("out of range");
+      if (new Set(String(this.userAnswer).split("")).size !== 3)
+        throw new Error("same number");
     } catch (e) {
       this.exceptionEnd();
     }
@@ -121,8 +125,6 @@ class App {
       if (answer[i] !== num && answer.includes(num)) obj.ball += 1;
       if (answer[i] === num) obj.strike += 1;
     });
-    //todo: 나중에 지우기
-    MissionUtils.Console.print(answer);
     return obj;
   }
 
@@ -155,6 +157,7 @@ class App {
   exceptionEnd() {
     this.game = GAME.EXIT;
     MissionUtils.Console.print(ment.exception);
+    MissionUtils.Console.close();
     return;
   }
 
@@ -167,6 +170,7 @@ class App {
 }
 
 const app = new App();
+
 app.play();
 
 module.exports = App;
