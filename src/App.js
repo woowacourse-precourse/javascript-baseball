@@ -1,5 +1,9 @@
 class App {
-  play() {}
+  #isStart = false;
+
+  isStart() {
+    return this.#isStart;
+  }
 }
 
 module.exports = App;
