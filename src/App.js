@@ -1,4 +1,19 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
+const ERROR_MESSAGE = {
+  InputError: '올바르지 못한 입력 값 입니다.',
+}
+
+function exceptionHandle(inputAnswer) {
+  const inputAnswerArray = Array.from(inputAnswer);
+  if(inputAnswerArray.includes('0')) return true;
+  if(inputAnswerArray.length !== 3) return true;
+  if(new Set(inputAnswerArray).size !== 3) return true;
+  if(isNaN(+inputAnswer)) return true;
+
+  return false;
+}
+
 class User {
   game;
   constructor() {
@@ -7,22 +22,26 @@ class User {
   }
   play() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
+      if(exceptionHandle(inputAnswer))  throw ERROR_MESSAGE.InputError;
       const isPlay = this.game.output(inputAnswer);
       if(isPlay){
         this.play();
       }
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.selectRePlay();
     });
   }
   selectRePlay(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (selectReplay) => {
-      if(selectReplay === '1'){
+      if(Number(selectReplay) === 1){
+        this.game.getRandomNumber();
         this.play();
       }
-      if(selectReplay === '2'){
+      if(Number(selectReplay) === 2){
         this.finish();
+        return;
       }
-      this.selectRePlay();
+      throw ERROR_MESSAGE.InputError;
     })
   }
   finish(){
@@ -31,7 +50,7 @@ class User {
 }
 
 class BaseBallGame {
-  answer = [];
+  answer;
   constructor() {
     this.getRandomNumber();
   }
@@ -43,9 +62,9 @@ class BaseBallGame {
     this.answer = [...answerSet]
   }
   numberToArray(inputAnswer) {
-    return Array.from(inputAnswer.toString(),(num)=>Number(num));
+    return Array.from(inputAnswer,(num)=>Number(num));
   }
-  getStrikeCount(inputAnswer){
+  getStrikeCount(inputAnswer) {
     let strikeCount = 0;
     this.numberToArray(inputAnswer).forEach((number,index) => {
       if(number === this.answer[index]){
@@ -54,7 +73,7 @@ class BaseBallGame {
     })
     return strikeCount;
   }
-  getBallCount(inputAnswer){
+  getBallCount(inputAnswer) {
     let ballCount = 0;
     this.numberToArray(inputAnswer).forEach((number) => {
       if(this.answer.includes(number)){
@@ -63,13 +82,12 @@ class BaseBallGame {
     })
     return ballCount;
   }
-  output(inputAnswer){
+  output(inputAnswer) {
     const strikeCount = this.getStrikeCount(inputAnswer);
     const ballCount = this.getBallCount(inputAnswer) - strikeCount;
 
     if(strikeCount === 3){
       MissionUtils.Console.print('3스트라이크');
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return false;
     }
     if(strikeCount === 0 && ballCount === 0){
