@@ -1,6 +1,22 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
   logSpy.mockClear();
@@ -111,6 +127,23 @@ describe("기능 목록 테스트", () => {
     memos.forEach((memo) => {
       app.printResultMessage(memo);
     });
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 재시작 혹은 종료 입력을 얻음", () => {
+    const randoms = [5, 8, 9];
+    const answers = ["1", "589", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.replay();
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
