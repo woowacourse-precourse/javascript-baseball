@@ -66,6 +66,30 @@ describe("숫자 야구 게임", () => {
     expect(constraintsSpy).toHaveBeenCalledTimes(1);
   });
 
+  test("입력값 숫자 범위 검증", () => {
+    const rangeSpy = jest.spyOn(Constraints.prototype, "checkNumberRange");
+
+    const truthyInput = [
+      "123",
+      "491",
+      "698",
+      "574",
+      "346",
+      [1, 2, 3],
+      [4, 7, 9],
+    ];
+
+    truthyInput.forEach((item) => {
+      expect(rangeSpy(item)).toBeTruthy();
+    });
+
+    const falsyInput = ["012", "qwe", "106"[(4, 0, 9)]];
+
+    falsyInput.forEach((item) => {
+      expect(rangeSpy(item)).not.toBeTruthy();
+    });
+  });
+
   test("점수 산정", () => {
     const logSpy = getLogSpy();
     const app = new App();
