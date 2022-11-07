@@ -8,8 +8,7 @@ const STRIKE = "스트라이크";
 const BALL = "볼";
 
 const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-const GAME_END_MESSAGE =
-  "3개의 숫자를 모두 맞히셨습니다! 게임 종료 게임을 시작합니다.";
+const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 
 const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 :";
 const CHECK_REPLAY_OR_EXIT_MESSAGE =
