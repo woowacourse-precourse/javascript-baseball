@@ -3,10 +3,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.opponent = new Opponent(); //상대방 등장
-    this.opponent.setRandomNumber(); //상대방이 숫자를 랜덤으로 지정
+    this.opponent.setRandomNumber(); //상대방 숫자 지정
   }
   play() {
-    MissionUtils.Console.print(`상대방의 숫자는 ${this.opponent.number} 입니다`);
+    this.gameStart();
+    // MissionUtils.Console.print(`상대방의 숫자는 ${this.opponent.number} 입니다`);
+  }
+  gameStart() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 }
 
