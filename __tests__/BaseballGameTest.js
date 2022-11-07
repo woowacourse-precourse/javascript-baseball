@@ -25,6 +25,17 @@ describe('내가 구현한 기능 테스트',()=>{
     expect(testResult).toHaveLength(3);
   });
 
+  test('play 함수 테스트 코드',()=>{
+    const app = new App();
+    const spyPrint = jest.spyOn(MissionUtils.Console, 'print');
+    const spyAnswer = jest.spyOn(app, 'generateComputerAnswer');
+    const spyPlayGame = jest.spyOn(app,'playTheGame');
+    app.play();
+    expect(spyPrint).toBeCalledTimes(1);
+    expect(spyAnswer).toBeCalledTimes(1);
+    expect(spyPlayGame).toBeCalledTimes(1);
+  });
+
   test('getHint 내부 함수 호출 테스트 코드',()=>{
     const app = new App();
     const spyJudge = jest.spyOn(app, 'judgeStrikeOrBall');
