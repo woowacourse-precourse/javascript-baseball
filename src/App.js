@@ -4,11 +4,11 @@ class App {
   // 프로그램 시작
   play() {
     console.log(`숫자 야구 게임을 시작합니다.`);
-    this.gameStart()
+    const computer = this.pickComputerNumber;
+    this.gameStart(computer)
   }
 
-  gameStart() {
-    const computer = this.pickComputerNumber;
+  gameStart(computer) {
     const user = this.pickUserNumber;
     this.checkUser(user);
     const result = this.scoreCounter(user, computer);
