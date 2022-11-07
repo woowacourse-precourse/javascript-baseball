@@ -12,10 +12,10 @@ class App {
 
   checkUserInput(userInput){
     //const isValidArr = userInput.map(e => e=Number.isNaN(e));
-    if(userInput.length!==3) return false;
+    if(userInput.length!==3) throw new Error("3자리의 수를 입력해주세요.");
     //if(isValidArr.includes(true)) return false;
-    if(new Set(userInput).size!==3) return false;
-    if(userInput.includes(0)) return false;
+    if(new Set(userInput).size!==3) throw new Error("중복된 숫자가 없도록 입력해주세요.");
+    if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
   }
 
   userInput(){
