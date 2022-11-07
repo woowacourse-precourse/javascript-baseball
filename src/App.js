@@ -98,9 +98,9 @@ function isValidNumber(inputList) {
 
 function isValidControl(input) {
   if (input !== 1 && input !== 2) {
-    return 0;
+    throw "입력값이 유효하지 않습니다.";
   }
-  return 1;
+  return true;
 }
 
 class App {
@@ -126,9 +126,7 @@ class App {
         );
         control = readControl();
       }
-      if (isValidControl(control) !== 1) {
-        throw "입력값이 유효하지 않습니다.";
-      }
+      isValidControl(control);
       if (scoreObject.strike === config.GAME_NUM_SIZE && control === 1) {
         computerNumber = generateNumberList(config.GAME_NUM_SIZE);
       }
