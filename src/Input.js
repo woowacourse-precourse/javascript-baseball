@@ -4,12 +4,15 @@ class Input {
   isValidInput(input) {
     if (!this.isLengthThree(input))
       throw new Error("3자리 숫자를 입력해주세요.");
+
     const numArr = input.split("").map(Number);
     if (!this.isAllNum(numArr) || !this.isAllValidNum(numArr)) return;
 
     const numSet = [...new Set(numArr)];
     if (numSet.length !== 3)
       throw new Error("중복되지 않는 서로 다른 숫자 3개를 입력해주세요.");
+
+    return true;
   }
 
   isAllNum(numArr) {
