@@ -72,6 +72,17 @@ describe("숫자 야구 게임", () => {
     expect(app.calculateCount("312")).toBe("3볼");
     expect(app.calculateCount("132")).toBe("2볼 1스트라이크");
   });
+
+  test("isGameEnd", () => {
+    const app = new App();
+    app.answer = [1, 2, 3];
+
+    app.userInput = "123";
+    expect(app.isGameEnd()).toBe(true);
+
+    app.userInput = "321";
+    expect(app.isGameEnd("456")).toBe(false);
+  });
 });
 
 describe("Input", () => {
