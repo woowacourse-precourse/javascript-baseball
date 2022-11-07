@@ -25,13 +25,44 @@ class App {
     Console.readLine('숫자를 입력해주세요 : ', cbFn);
   }
 
+  terminate() {
+    // 게임을 종료 메시지를 발생시킨다.
+  }
+
   isDuplicated(input) {
     const numberSet = new Set([...input]);
 
     return numberSet.size === input.length;
   }
 
-  evaluate(input) {}
+  isStrike(number, idx) {
+    return this.answer[idx] === number;
+  }
+
+  isBall(number, idx) {
+    return this.answer[idx] !== number && this.answer.includes(number);
+  }
+
+  evaluate(input) {
+    if (this.answer === input) {
+      // 게임 종료.
+      this.terminate();
+      return;
+    }
+
+    const cnt = {
+      strike: 0,
+      ball: 0,
+    };
+
+    for (let i = 0; i < 3; i++) {
+      if (this.isStrike(input[i], i)) {
+        cnt.strike += 1;
+      } else if (this.isBall(input[i], i)) {
+        cnt.ball += 1;
+      }
+    }
+  }
 
   validate(input) {
     const regExp = new RegExp(/^[1-9]{1,3}$/);
