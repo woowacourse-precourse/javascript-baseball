@@ -114,6 +114,30 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("입력값 중복 숫자 검증", () => {
+    const lengthSpy = jest.spyOn(Constraints.prototype, "checkNoSameNumber");
+
+    const truthyInput = [
+      "123",
+      "491",
+      "698",
+      "574",
+      "346",
+      [1, 2, 3],
+      [4, 7, 9],
+    ];
+
+    truthyInput.forEach((item) => {
+      expect(lengthSpy(item)).toBeTruthy();
+    });
+
+    const falsyInput = ["111", "113", "112", "646", [1, 3, 3], [1, 2, 2]];
+
+    falsyInput.forEach((item) => {
+      expect(lengthSpy(item)).not.toBeTruthy();
+    });
+  });
+
   test("점수 산정", () => {
     const logSpy = getLogSpy();
     const app = new App();
