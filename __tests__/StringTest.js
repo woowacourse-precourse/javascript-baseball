@@ -57,4 +57,11 @@ describe('배열 테스트', () => {
 
     expect(input).toEqual([1, 2]);
   });
+
+  test('Array.from 메서드로 배열의 모든 요소 조회', () => {
+    const input = ['1', '2', '3'];
+    const result = Array.from(input, (num) => Number(num));
+
+    expect(result).toEqual([1, 2, 3]);
+  });
 });
