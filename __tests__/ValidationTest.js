@@ -1,15 +1,4 @@
-// const App = require("../src/App");
-// const MissionUtils = require("@woowacourse/mission-utils");
 const { validateThreeFigures, validateNextAction } = require("../src/modules/validation");
-// const { showCountMessage, showCorrectMessage, showNothingMessage } = require("../src/modules/showMessage");
-// const {
-//   makeRandomNumber,
-//   getUsersPrediction,
-//   isRightAnswer,
-//   isNothing,
-//   calculateCount,
-//   getUsersNextAction
-// } = require("../src/modules/playGameLoop");
 
 describe("(임의의 세자리 숫자) 유저 입력값 유효성 검사", () => {
   test("세자리 아닌 경우 검사", () => {
