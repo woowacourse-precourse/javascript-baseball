@@ -131,7 +131,6 @@ describe('기능 구현 목록 테스트', () => {
 
     game.play();
 
-    expect(game.isReplay).toBeTruthy();
     expect(logSpy).toHaveBeenCalledWith(
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
     );
@@ -148,5 +147,30 @@ describe('기능 구현 목록 테스트', () => {
     expect(() => {
       game.play();
     }).toThrow();
+  });
+
+  test('', () => {
+    const game = new Game();
+    const logSpy = getLogSpy();
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['246', '135', '1', '597', '589', '2'];
+    const messages = [
+      '낫싱',
+      '3스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    game.play();
+
+    expect(game.isReplay).toBeTruthy();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });

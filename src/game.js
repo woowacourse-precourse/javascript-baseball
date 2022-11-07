@@ -48,10 +48,10 @@ class Game {
       }
 
       if (strike === 3) {
-        this.isReplay = true;
         this.print(MESSAGE.SUCCESS);
+        this.askPlayAgain();
 
-        return this.askPlayAgain();
+        return;
       }
     });
   }
@@ -98,7 +98,10 @@ class Game {
       const answer = Number(answers);
 
       if (answer === GAME.START) {
-        return this.play();
+        this.isReplay = true;
+        this.play();
+
+        return;
       }
 
       if (answer === GAME.END) {
