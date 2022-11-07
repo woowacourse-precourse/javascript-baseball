@@ -33,7 +33,10 @@ class App {
         throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
       }
       MissionUtils.Console.print(this.printCountResult(this.computerNumber, this.userNumber));
+
       if (!this.isGameFinished) this.gameStart();
+
+      MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {});
     });
   }
 
@@ -63,7 +66,6 @@ class App {
         usedDigits.push(+digit);
       }
     });
-    MissionUtils.Console.print(usedDigits);
     return usedDigits.length === 3;
   }
 
@@ -102,6 +104,8 @@ class App {
       ㅑ;
     }
   }
+
+  print;
 }
 const app = new App();
 app.play();
