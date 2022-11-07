@@ -11,9 +11,18 @@ class App {
   }
 
   runGame() {
+    let result;
     Console.readLine("숫자를 입력해주세요: ", (inputStr) => {
       const inputArr = this.validateInput(inputStr);
+      result = this.checkCount(inputArr);
+      this.checkResult(result);
     });
+  }
+
+  checkResult(result) {
+    if (!result) {
+      this.runGame();
+    }
   }
 
   getRandomNumber() {
@@ -40,6 +49,9 @@ class App {
     }
 
     this.saveCountMent(count);
+
+    if (count[1] === 3) return true;
+    return false;
   }
 
   checkOne(inputArr, i, count) {
