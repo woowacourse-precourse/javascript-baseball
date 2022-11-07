@@ -12,6 +12,7 @@ class App {
 
 function gameStart(){
   let answers = makeRandom();
+  baseBall(answers);
 }
 
 function makeRandom(){
@@ -22,6 +23,17 @@ function makeRandom(){
   }
   console.log(computerNums);
   return computerNums;
+}
+
+function baseBall(answers){
+  let nothing;
+  let countBall;
+  let countStrike;
+  
+  Console.readLine('숫자를 입력해주세요 : ', (inputNums) => {
+
+    
+  });
 }
 
 module.exports = App;
