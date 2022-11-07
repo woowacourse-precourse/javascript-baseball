@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-
 class App {
 
   selectComputerNum(){
@@ -70,39 +69,55 @@ class App {
   }
 
 
-  getGameResult(){
+  getGameResult(computer_num, game_num){
+
+    // [0]strike_cnt  [1]ball_cnt
+    const result = [0, 0];
+
+    let idx;
+    for(let i=0; i<game_num.length; i++){
+      idx = computer_num.findIndex( x => x === game_num[i]); // 포함하지 않을 경우 -1 return
+
+      if(idx === -1) continue;
+      else if(idx === i) result[0]++;
+      else if(idx !== i) result[1]++;
+    }
     
+    return result;
   }
 
 
   play() {
 
     const computer_num = this.selectComputerNum();
-
+    let game_num;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    
+
 
     let is_game_over = 0;
     while(!is_game_over){
 
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
         console.log(input);
-        MissionUtils.Console.close();
-        
-        try {
-          const game_num = this.checkInputValue(input);
-        } catch(e) {
-          console.error(e);
-        }
-
+        // MissionUtils.Console.close();
       })
 
-      // this.getGameResult(computer_num, game_num);
+      try {
+        game_num = this.checkInputValue(input);
+      } catch(e) {
+        console.error(e);
+      }
+      
+      if(game_num !== undefined) {
+        const result = this.getGameResult(computer_num, game_num);
+        if(result[0] === 3) {
+          is_game_over = 1;
+        }
+        // printResult(result);
+      }
       // is_game_over = 1;
     }
-
   }
-
 }
 
 module.exports = App;
