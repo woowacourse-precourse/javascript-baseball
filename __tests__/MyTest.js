@@ -75,12 +75,15 @@ test("예외 테스트", () => {
 
 test("사용자 숫자 상대방 숫자 비교4", () => {
   const randoms = [1, 2, 3];
-  const answers = [1, 2, 3];
+  const answers = ["124"];
   const logSpy = getLogSpy();
-  const messages = ["3스트라이크"];
+  const messages = ["2스트라이크"];
+
   mockRandoms(randoms);
+  mockQuestions(answers);
+
   const app = new App();
-  app.compare(answers);
+  app.play();
   messages.forEach((output) => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
