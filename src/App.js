@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const generateNumber = require('./generateNumber');
 const validateInputValue = require('./validator');
 const compareTwoArrayResult = require('./compare');
@@ -15,17 +15,17 @@ class App {
   }
 
   startMessage() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   getInputAndCompare() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+    Console.readLine('숫자를 입력해주세요 : ', input => {
       const { computerNumArr } = this;
       const isInputValidate = validateInputValue(input);
       if (typeof isInputValidate !== 'boolean') return this.wrongInput(isInputValidate);
       const inputNumArr = input.split('').map(element => +element);
       const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
-      MissionUtils.Console.print(gameResult);
+      Console.print(gameResult);
       return this.isGameOver(gameResult);
     });
   }
@@ -38,9 +38,9 @@ class App {
   }
 
   endOrRetry() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    MissionUtils.Console.readLine('', input => {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', input => {
       const endOrRetryInput = this.isValidEndOrRetryInput(input);
       if (endOrRetryInput === 1) {
         return this.makeComputerNumArr();
@@ -64,7 +64,7 @@ class App {
   }
 
   close() {
-    MissionUtils.Console.close();
+    Console.close();
   }
 }
 
