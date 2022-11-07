@@ -21,3 +21,31 @@ describe("서로 다른 임의의 3자리 수 생성 테스트", () => {
 
   App.finishGame();
 });
+
+describe("유효하지 않은 입력값 예외 처리 테스트", () => {
+  const app = new App();
+
+  test("숫자가 아닌 문자열을 포함할 경우 예외를 발생시킨다.", () => {
+    expect(() => {
+      app.checkUserDigitsValidity("1a2");
+    }).toThrow();
+  });
+
+  test("입력값의 길이가 3이 아닐 경우 예외를 발생시킨다.", () => {
+    expect(() => {
+      app.checkUserDigitsValidity("1234");
+    }).toThrow();
+  });
+
+  test("숫자 0을 포함할 경우 예외를 발생시킨다.", () => {
+    expect(() => {
+      app.checkUserDigitsValidity("102");
+    }).toThrow();
+  });
+
+  test("중복된 숫자가 있는 경우 예외를 발생시킨다.", () => {
+    expect(() => {
+      app.checkUserDigitsValidity("112");
+    }).toThrow();
+  });
+});
