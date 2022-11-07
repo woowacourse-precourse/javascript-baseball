@@ -3,6 +3,7 @@ const { print, readLine, close } = require("./utils");
 const ComputerModel = require("./ComputerModel");
 const GameManager = require("./GameManager");
 const UserModel = require("./UserModel");
+const GAME_MESSAGE = require("./constants/message");
 
 class App {
   constructor() {
@@ -12,14 +13,14 @@ class App {
   }
 
   play() {
-    print("숫자 야구 게임을 시작합니다.");
+    print(GAME_MESSAGE.NOTIFY_START_MESSAGE);
 
     const numberFromComputer = this.computerModel.getNumberFromComputer();
     this.try(numberFromComputer);
   }
 
   try(numberFromComputer) {
-    readLine("숫자를 입력해주세요 : ", (numberFromUser) => {
+    readLine(GAME_MESSAGE.ASK_INPUT_MESSAGE, (numberFromUser) => {
       const validNumberFromUser = this.userModel.convertStringToArray(
         this.userModel.isInputNumbersValid(numberFromUser)
       );
@@ -34,10 +35,10 @@ class App {
     const EXIT = "2";
     const inputNotOneOrTwo = (response) => response !== RESTART && response !== EXIT;
 
-    readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (response) => {
+    readLine(GAME_MESSAGE.ASK_GAME_CONTINUE_OR_EXIT, (response) => {
       if (response === RESTART) this.play();
       if (response === EXIT) close();
-      if (inputNotOneOrTwo(response)) throw Error("1또는 2만 입력해주세요.");
+      if (inputNotOneOrTwo(response)) throw Error(GAME_MESSAGE.NOTIFY_INPUT_WRONG_NUMBER);
     });
   }
 }
