@@ -47,6 +47,11 @@ class View {
     Console.print(singleTryResultComment);
     this.controller.checkIsGameFinished(singleTryResultComment);
   }
+
+  // 게임이 끝났을 때 상응하는 메세지를 출력한다.
+  printGameFinished() {
+    Console.print(this.GAME_FINISHED_COMMENT);
+  }
 }
 
 module.exports = View;
