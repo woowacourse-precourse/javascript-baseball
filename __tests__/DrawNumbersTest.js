@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const getThreeRandomNumbers = require("../src/ThreeRandomNumbers");
-const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("../src/constants/constantValues");
+const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("../src/constants/ConstantValues");
 
 afterEach(() => {
   MissionUtils.Console.close();

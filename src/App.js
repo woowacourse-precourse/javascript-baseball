@@ -9,7 +9,7 @@ const {
   INPUT_NUMBER_MESSAGE,
   END_MESSAGE,
   INPUT_RESTART_OR_END_MESSAGE,
-} = require("./constants/Messeages");
+} = require("./constants/Messages");
 
 class App {
   constructor() {

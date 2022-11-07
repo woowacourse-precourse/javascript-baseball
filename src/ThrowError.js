@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { WRONG_INPUT_ERROR_MESSAGE } = require("./constants/Messeages");
+const { WRONG_INPUT_ERROR_MESSAGE } = require("./constants/Messages");
 
 const throwError = () => {
   MissionUtils.Console.close();

@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("./constants/constantValues");
+const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("./constants/ConstantValues");
 
 const getThreeRandomNumbers = () => {
   const threeRandomNumber = new Set();
