@@ -1,14 +1,17 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   constructor() {
     this.randomList = this.makeRandomNumber();
   }
-  
+
   play() {
     this.gameStartMsg();
+    this.getUserNumber();
   }
 
   gameStartMsg() {
-    console.log('숫자 야구 게임을 시작합니다.');
+    console.log("숫자 야구 게임을 시작합니다.");
   }
 
   makeRandomNumber() {
@@ -20,6 +23,13 @@ class App {
       }
     }
     return randomArr;
+  }
+
+  getUserNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.answerNum = answer;
+      MissionUtils.Console.print(`숫자를 입력해주세요 : ${this.answerNum}`);
+    });
   }
 }
 
