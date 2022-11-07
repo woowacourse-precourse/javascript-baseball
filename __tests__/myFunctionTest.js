@@ -2,6 +2,8 @@ const App = require('../src/App');
 const Game = require('../src/game/Game');
 const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('../src/input/Computer');
+const User = require('../src/input/User');
+const constants = require('../src/constants/constants');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -56,6 +58,52 @@ describe('숫자 야구 게임 시작 테스트', () => {
       }
     });
     expect(testData.length).toEqual(3);
+  });
+
+  test('사용자의 입력값의 길이 테스트', () => {
+    const user = new User();
+    const userTestNumberArray = [
+      [1],
+      [1, 2],
+      [1, 2, 3, 4],
+      [1, 2, 3, 4, 5],
+      [1, 2, 3, 4, 5, 6],
+    ];
+    userTestNumberArray.forEach((item) => {
+      expect(() => user.checkUserNumber(item)).toThrow(
+        `입력할 수 있는 길이는 ${constants.INPUT_SIZE}입니다. 종료합니다.`
+      );
+    });
+  });
+
+  test('사용자의 입력값 중복 테스트', () => {
+    const user = new User();
+    const userTestNumberArray = [
+      [1, 1, 2],
+      [3, 1, 3],
+      [9, 9, 1],
+      [5, 5, 5],
+      [2, 8, 8],
+    ];
+    userTestNumberArray.forEach((item) => {
+      expect(() => user.checkUserNumber(item)).toThrow(
+        '중복되었습니다. 종료합니다.'
+      );
+    });
+  });
+
+  test('사용자의 입력값 범위 테스트', () => {
+    const user = new User();
+    const userTestNumberArray = [
+      [1, 0, 3],
+      [0, 1, 2],
+      [0, 1, 8],
+    ];
+    userTestNumberArray.forEach((item) => {
+      expect(() => user.checkUserNumber(item)).toThrow(
+        `${constants.MIN_INPUT_NUMBER}~${constants.MAX_INPUT_NUMBER} 범위만 입력 가능합니다. 종료합니다.`
+      );
+    });
   });
 
   test('예외 테스트', () => {
