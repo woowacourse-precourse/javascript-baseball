@@ -1,9 +1,11 @@
 const MissonUtils = require("@woowacourse/mission-utils");
+const checkBallAndStrike = require("./BaseballGame");
 const checkUserInput = require("./ExceptionUserInput");
 
 class App {
   constructor() {
     this.computerRandomNumbers = [];
+    this.userRandomNumbers = [];
   }
   play() {
     this.gameStart();
@@ -26,8 +28,18 @@ class App {
 
   userInputNumber() {
     return MissonUtils.Console.readLine('숫자를 입력해주세요 : ', userInput => {
-      if (checkUserInput(userInput)) MissonUtils.Console.print(userInput.split('').map(Number));
+      if (checkUserInput(userInput)) this.baseballGame(userInput.split('').map(Number));
     });
+  }
+
+  baseballGame(userNumber) {
+    this.userRandomNumbers = userNumber;
+    const gameResult = checkBallAndStrike(this.computerRandomNumbers, this.userRandomNumbers);
+    if (gameResult) {
+      MissonUtils.Console.close();
+    } else if (!gameResult) {
+      return this.userInputNumber();
+    }
   }
 }
 
