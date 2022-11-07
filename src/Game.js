@@ -62,7 +62,7 @@ class Game {
   onGame(input) {
     const isValid = this.validation.checkValidation(input);
 
-    if (!isValid && !isValid[0]) throw isValid[1];
+    if (!isValid[0]) throw isValid[1];
 
     this.userInputArray = this.inputToArray(input);
 
@@ -96,7 +96,6 @@ class Game {
     }
   }
 
-  // game 관련
   countStrike() {
     let strike = 0;
 
@@ -133,7 +132,7 @@ class Game {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) computer.push(number);
     }
-    console.log(computer);
+
     return computer;
   }
 
