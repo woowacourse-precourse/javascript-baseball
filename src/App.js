@@ -20,9 +20,7 @@ class App {
 
       const strikeCount = this.getStrikeCount(randomNum,inputNum);
       const ballCount = this.getBallCount(randomNum,inputNum);
-
-      if(ballCount === 0 && strikeCount === 0){ this.printNothingMessage(); }
-      if(ballCount > 0 || strikeCount > 0){ this.printBallAndStrikeCount(ballCount,strikeCount); }
+      this.printBallAndStrikeCount(ballCount,strikeCount);
       
       if(this.isSameTwoNumber(randomNum,inputNum)){
         this.printAllMatchMessage();
@@ -50,15 +48,11 @@ class App {
 
   printBallAndStrikeCount(ballCount,strikeCount){
     const outputMessageList = [];
+    if(ballCount === 0 && strikeCount === 0){outputMessageList.push(`낫싱`);}
     if(ballCount > 0){outputMessageList.push(`${ballCount}볼`);}
     if(strikeCount > 0){outputMessageList.push(`${strikeCount}스트라이크`);}
     MissionUtils.Console.print(outputMessageList.join(' '));
   }
-
-  printNothingMessage(){
-    MissionUtils.Console.print('낫싱');
-  }
-
 
   printAllMatchMessage(){
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
