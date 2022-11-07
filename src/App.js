@@ -122,23 +122,28 @@ class App {
     return true;
   }
 
-  inputUserNumbers() {
-    this.readLine(this.MESSAGES.INSERT_NUMBER, (input) => {
-      if (!this.isValidInput(input)) {
-        return;
-      }
+  inputUserNumbers(input) {
+    if (!this.isValidInput(input)) {
+      return;
+    }
 
-      this.userNumber = input.split("").map(Number);
-      // 메서드 호출 위치이동 필요
-      this.compareNumbers();
-    });
+    this.userNumber = input.split("").map(Number);
+  }
+
+  continueGame(input) {
+    this.inputUserNumbers(input);
+    this.compareNumbers();
+  }
+
+  runGames() {
+    this.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
   }
 
   compareNumbers() {
     let sameDigitCount = 0;
     let sameNumberCount = 0;
 
-    this.userNumber?.forEach((number, idx) => {
+    this.userNumber.forEach((number, idx) => {
       if (number === this.gameNumber[idx]) {
         sameDigitCount++;
         sameNumberCount++;
@@ -154,13 +159,15 @@ class App {
     return { sameDigitCount, sameNumberCount };
   }
 
-  startGame() {
-    this.printMessage(this.MESSAGES.START);
+  newGame() {
     this.createGameNumbers();
-    this.inputUserNumbers();
-    // if (this.inputUserNumbers()) {
-    //   this.compareNumbers();
-    // }
+    this.runGames();
+  }
+
+  startGame() {
+    // TODO: 첫 게임에만 MESSAGES.START표시하기
+    this.printMessage(this.MESSAGES.START);
+    this.newGame();
   }
 
   play() {
