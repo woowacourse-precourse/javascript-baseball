@@ -1,10 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Game = require("./Game");
 const Computer = require("./Computer");
+const User = require("./User");
 
 class App {
   constructor() {
     this.computer = new Computer();
+    this.user = new User();
   }
 
   start() {
@@ -13,6 +15,10 @@ class App {
     //사용자 숫자 입력
     MissionUtils.Console.readLine(Game.MESSAGE.INPUT, (userInput) => {
       //입력이 형식에 맞는지 유효성 검사
+      const userInputValidation = this.user.validateInput(userInput);
+      if (userInputValidation === Game.NUMBER.FAIL) {
+        throw new Error(Game.MESSAGE.ERROR);
+      }
     });
 
     //사용자가 입력한 숫자에 대한 결과 출력
