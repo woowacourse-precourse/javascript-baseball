@@ -123,7 +123,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(ERROR.NOT_THREE_NUMBER);
   });
 
   test("예외 테스트: 입력값이 숫자와 문자가 섞인 경우 2", () => {
@@ -136,7 +136,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(ERROR.NOT_THREE_NUMBER);
   });
 
   test("예외 테스트: 입력값이 숫자와 문자가 섞인 경우 3", () => {
@@ -149,8 +149,10 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(ERROR.NOT_THREE_NUMBER);
   });
+
+
 
 
 
