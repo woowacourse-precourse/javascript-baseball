@@ -58,12 +58,12 @@
 
 ## 4. 사용자 입력 값과 상대방(컴퓨터)의 숫자 비교하는 기능(#compareEachNumbers) 구현
 
-- [ ] 1. 길이가 3인 숫자 배열 2개(`computerNumbers`, `userNumbers`)를 인자로 받음
-- [ ] 2. 볼, 스트라이크 개수를 담을 변수(ballCnt, strikeCnt) 선언, 각각 0 할당
-- [ ] 3. `userNumbers`를 순회
-  - [ ] 3.1 서로 같을 경우 `strikeCnt++`
-  - [ ] 3.2 요소가 computerNumbers에 포함되어 있으면 `ballCnt++`
-- [ ] 4. [ballCnt, strikeCnt]를 return
+- [x] 1. 길이가 3인 숫자 배열 2개(`computerNumbers`, `userNumbers`)를 인자로 받음
+- [x] 2. 볼, 스트라이크 개수를 담을 변수(ballCnt, strikeCnt) 선언, 각각 0 할당
+- [x] 3. `userNumbers`를 순회
+  - [x] 3.1 서로 같을 경우 `strikeCnt++`
+  - [x] 3.2 요소가 computerNumbers에 포함되어 있으면 `ballCnt++`
+- [x] 4. [ballCnt, strikeCnt]를 return
 
 ## 5. 결과값을 반환하는 기능(#getResult) 구현
 

@@ -66,6 +66,17 @@ class App {
       }
     });
   }
+  #compareEachNumbers(computerNumbers, userNumbers) {
+    return userNumbers.reduce(
+      ([ballCnt, strikeCnt], userNo, i) => {
+        userNo === computerNumbers[i]
+          ? strikeCnt++
+          : computerNumbers.includes(userNo) && ballCnt++;
+        return [ballCnt, strikeCnt];
+      },
+      [0, 0]
+    );
+  }
   play() {}
 }
 
