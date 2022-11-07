@@ -6,6 +6,7 @@ const {
   replyValidation,
 } = require("./util.js");
 
+const REPLAY = "1";
 const EXIT = "2";
 class App {
   play() {
@@ -31,7 +32,11 @@ class App {
   exit() {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => (input === EXIT ? this.close() : this.play())
+      (input) => {
+        if (input !== REPLAY && input !== EXIT)
+          throw new Error("사용자 입력 오류");
+        input === EXIT ? this.close() : this.play();
+      }
     );
   }
 
