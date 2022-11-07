@@ -26,7 +26,7 @@ class GameControl{
 
   userInput(){
     MissionUtils.Console.readLine(constant.GAME.INPUT, (input) => {
-      this.validation.checkErrorofInput(input, 0);
+      this.validation.checkErrorofInput(input, 'start');
       this.printGameResult(input);
     });
   }
@@ -58,7 +58,7 @@ class GameControl{
 
   checkForNeedRestart(){
     MissionUtils.Console.readLine(constant.GAME.RESTART+'\n', (input) => {
-      this.validation.checkErrorofInput(input, 1);
+      this.validation.checkErrorofInput(input, 'restart');
       this.restartGame(input);
     });
   }

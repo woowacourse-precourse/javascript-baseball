@@ -6,10 +6,10 @@ const errorthrow = require('./throw-error');
 class Validation{
 
   checkErrorofInput(input, startOrrestart){
-    if (startOrrestart === 0){
+    if (startOrrestart === 'start'){
       errorthrow.inputErrorThrow(input);
     }
-    if (startOrrestart === 1){
+    if (startOrrestart === 'restart'){
       errorthrow.restartErrorThrow(input);
     }
   }
