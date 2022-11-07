@@ -34,6 +34,7 @@ class App {
      */
     Console.readLine(this.MESSAGE.USER_ANSWER, (input) => {
       const numbers = this.splitInput(input);
+      console.log(numbers);
       this.validateInput(numbers);
       const [hint, isFinish] = this._controller.compareAnswer(numbers, this._computer.answer);
       this.validateHint(hint, isFinish);
