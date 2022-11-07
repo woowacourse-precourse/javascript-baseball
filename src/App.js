@@ -24,6 +24,17 @@ const GAME_REPLAY_NUMBER_ERROR_MESSAGE = "1 또는 2를 입력하세요.";
 class App {
   play() {}
 
+  start(computerNum) {
+    while (true) {
+      let playerNum = this.inputPlayerNum();
+
+      const { ball, strike } = this.getHint(computerNum, playerNum);
+      this.printHint(ball, strike);
+
+      if (this.isAllStrike(strike)) return;
+    }
+  }
+
   isAllStrike(strike) {
     return strike === COMPUTER_NUMBER_LENGTH;
   }
