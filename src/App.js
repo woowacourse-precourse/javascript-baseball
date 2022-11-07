@@ -3,7 +3,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.userInput();
+    const COMPUTER=this.generateComRandom()
+    this.userInput(COMPUTER)
   }
   generateComRandom(){
     const COMPUTER = [];
@@ -15,34 +16,25 @@ class App {
     }
     return COMPUTER
   }
-  userInput() {
+  userInput(COMPUTER) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
-      this.checkUserInputValue(Number(userNumber));
+      this.getBothArrays(userNumber,COMPUTER);
     });
   }
 
-  checkUserInputValue(userNumber) {
-    let stringUserNumber = userNumber.split("").map((element) => {
-      return Number(element);
-    });
-    if (stringUserNumber.includes(0) || stringUserNumber.includes(NaN) || stringUserNumber.length!==3) {
-      throw "1~9사이의 정수 입력해주세요"
-    }
-    let userNumberArray = [];
-    console.log(stringUserNumber);
-    stringUserNumber.forEach((element) => {
-      if (!userNumberArray.includes(element)) {
-        userNumberArray.push(element);
-      } else {
-        throw "중복된 수가 있습니다";
-      }
-    });
-    this.getBothArrays(userNumberArray);
+  getBothArrays(userNumber,COMPUTER) {
+    let cleanUserNumber=this.checkUserInputValue(userNumber)
+    console.log(cleanUserNumber,COMPUTER);
   }
-  
-  getBothArrays(userNumberArray) {
-    let userArray = userNumberArray;
-    this.compareNumbers(userArray);
+  checkUserInputValue(userNumber) {
+    let userNumberArray=userNumber.split("").map((element)=>{
+      return Number(element)
+    })
+    if(userNumberArray.includes(NaN)) throw "문자는 불가능 합니다."
+    if(userNumberArray.includes(0)) throw "1~10사이의 숫자만 가능합니다"
+    if(userNumberArray.length !==3) throw "3자리 숫자를 입력해주세요"
+    if(new Set(userNumberArray).size !==3 ) throw "중복 값이 있습니다."
+    return userNumber
   }
 
   compareNumbers(userNumberArray) {
