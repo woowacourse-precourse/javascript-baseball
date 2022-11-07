@@ -1,8 +1,15 @@
 const System = require("./System");
 const User = require("./User");
 class App {
-  play() {}
+  play() {
+    const NumberBaseBallSystem = new System();
+    const PlayingUser = new User();
+
+    NumberBaseBallSystem.getStarted();
+  }
 }
+
+App.prototype.play();
 
 // const readLine = (question) => {
 //   return new Promise((resolve) => {
@@ -17,6 +24,6 @@ class App {
 //   console.log(guessNumber);
 // };
 
-a();
+// a();
 
 module.exports = App;

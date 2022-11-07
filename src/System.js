@@ -1,3 +1,5 @@
+const { Console } = require("./Utilitys");
+
 class System {
   constructor() {
     this.numberArray;
@@ -9,6 +11,10 @@ class System {
 
   get getNumber() {
     return this.numberArray;
+  }
+
+  getStarted() {
+    Console.print("숫자 야구 게임을 시작합니다.");
   }
 }
 
