@@ -1,6 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
-const { ERROR_MSG, GAME_STATE_MSG, GAME_STATE } = require("./errorMsg");
+const { Random, Console } = require("@woowacourse/mission-utils");
+const { ERROR_MSG, GAME_STATE_MSG } = require("./errorMsg");
+const { GAME_STATE, TOTAL_LEN, GAME, USER_DATA } = require("./state");
 
 class App {
 	constructor() {
@@ -9,61 +9,79 @@ class App {
 
 	play() {
 		this.comNumber = this.makeComNum();
-		this.gameStart(this.comNumber);
+		this.gameStart();
 	}
 	makeComNum() {
 		let arr = [];
 		for (let count = 0; count < 3; count++) {
-			let num = MissionUtils.Random.pickNumberInRange(1, 9);
+			let num = Random.pickNumberInRange(USER_DATA.MIN, USER_DATA.MAX);
 			if (!arr.includes(num)) arr.push(num);
 		}
 		return arr;
 	}
 
-	gameStart(comNumber) {
-		MissionUtils.Console.readLine(GAME_STATE_MSG.READY, (userInput) => {
+	gameStart() {
+		Console.readLine(GAME_STATE_MSG.READY, (userInput) => {
 			const userData = userInput.split("").map((ele) => Number(ele));
-			const userNumber = this.inputValidFn(userData);
-			const [ball, strike] = this.gameResult(comNumber, userNumber);
+			const userNumber = this.inputValidFn(TOTAL_LEN.INPUT, userData);
+			const [ball, strike] = this.gameResult(userNumber);
 
 			const gameOver = this.gamePrint(ball, strike);
+
+			if (gameOver) {
+				Console.print(`${GAME_STATE_MSG.SUCCESS}`);
+				this.gameSelect();
+			} else {
+				this.gameStart();
+			}
+		});
+	}
+
+	gameSelect() {
+		Console.readLine(GAME_STATE_MSG.NEWGAME, (modeInput) => {
+			const userData = modeInput.split("").map((ele) => Number(ele));
+			const [modeInputValid] = this.inputValidFn(TOTAL_LEN.MODE, userData);
+
+			if (modeInputValid === GAME.NEW) {
+				this.play();
+			} else if (modeInputValid === GAME.END) {
+				Console.print(GAME_STATE_MSG.END);
+				Console.close();
+			}
 		});
 	}
 
 	gamePrint(ball, strike) {
 		let gameOver = false;
-		if (ball === 0 && strike === 0)
-			MissionUtils.Console.print(GAME_STATE.NOTTHING);
+		if (ball === 0 && strike === 0) Console.print(GAME_STATE.NOTTHING);
 		else if (strike === 3) {
 			gameOver = true;
-			MissionUtils.Console.print(`${strike}${GAME_STATE.STRIKE}`);
+			Console.print(`${strike}${GAME_STATE.STRIKE}`);
 		} else if (strike === 0 && ball !== 0) {
-			MissionUtils.Console.print(`${ball}${GAME_STATE.BALL}`);
+			Console.print(`${ball}${GAME_STATE.BALL}`);
 		} else if (ball === 0 && strike !== 0) {
-			MissionUtils.Console.print(`${strike}${GAME_STATE.BALL}`);
+			Console.print(`${strike}${GAME_STATE.BALL}`);
 		} else {
-			MissionUtils.Console.print(
-				`${ball}${GAME_STATE.BALL} ${strike}${GAME_STATE.STRIKE}`
-			);
+			Console.print(`${ball}${GAME_STATE.BALL} ${strike}${GAME_STATE.STRIKE}`);
 		}
 
 		return gameOver;
 	}
 
-	gameResult(com, user) {
+	gameResult(user) {
 		let ball = 0,
 			strike = 0;
 
 		user.forEach((score, index) => {
-			if (score === com[index]) strike++;
-			else if (com.includes(score)) ball++;
+			if (score === this.comNumber[index]) strike++;
+			else if (this.comNumber.includes(score)) ball++;
 		});
 		return [ball, strike];
 	}
 
-	inputValidFn(input) {
+	inputValidFn(lenCheck, input) {
 		this.multiDataCheckFn(input);
-		this.totalLenCheckFn(3, input);
+		this.totalLenCheckFn(lenCheck, input);
 
 		input.forEach((data) => {
 			this.isNumberCheckFn(data);
