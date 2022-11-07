@@ -1,3 +1,5 @@
+const { PHRASE, BASEBALL, GAME } = require('./constants');
+
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
@@ -6,72 +8,73 @@ class App {
   }
 
   printStartPhrase() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(PHRASE.START);
   }
 
   createNumberList() {
     this.answerNumberList.splice(0);
-    while (this.answerNumberList.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (this.answerNumberList.length < GAME.NUMBER_COUNT) {
+      const number = MissionUtils.Random.pickNumberInRange(
+        GAME.MIN_NUMBER,
+        GAME.MAX_NUMBER
+      );
       if (!this.answerNumberList.includes(number))
         this.answerNumberList.push(number);
     }
   }
 
   receiveNumber() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    MissionUtils.Console.readLine(PHRASE.INPUT, (input) => {
       this.throwException(input);
       this.compareNumbers(input);
     });
   }
 
   throwException(input) {
-    if (input.length !== 3 || isNaN(input)) throw 'Error';
+    if (input.length !== GAME.NUMBER_COUNT || isNaN(input))
+      throw new Error(PHRASE.ERROR);
     input.split('').reduce((acc, cur) => {
-      if (acc.includes(cur)) throw 'Error';
+      if (acc.includes(cur)) throw new Error(PHRASE.ERROR);
       return acc + cur;
     }, '');
   }
 
   compareNumbers(input) {
-    const result = { 볼: 0, 스트라이크: 0 };
+    const result = { ball: 0, strike: 0 };
     const inputNumberList = input.split('').map((number) => Number(number));
 
     inputNumberList.forEach((number, idx) => {
-      if (number === this.answerNumberList[idx]) result.스트라이크 += 1;
-      else if (this.answerNumberList.includes(number)) result.볼 += 1;
+      if (number === this.answerNumberList[idx]) result.strike += 1;
+      else if (this.answerNumberList.includes(number)) result.ball += 1;
     });
     this.printResult(result);
-    this.processResult(result.스트라이크);
+    this.processResult(result.strike);
   }
 
-  printResult({ 볼: BALL_COUNT, 스트라이크: STRIKE_COUNT }) {
-    const RESULT_BALL = BALL_COUNT === 0 ? '' : `${BALL_COUNT}볼 `;
-    const RESULT_STRIKE = STRIKE_COUNT === 0 ? '' : `${STRIKE_COUNT}스트라이크`;
+  printResult({ ball, strike }) {
+    const RESULT_BALL = ball === 0 ? '' : ball + BASEBALL.BALL;
+    const RESULT_STRIKE = strike === 0 ? '' : strike + BASEBALL.STRIKE;
     const RESULT_MESSAGE =
-      BALL_COUNT === 0 && STRIKE_COUNT === 0
-        ? '낫싱'
-        : RESULT_BALL + RESULT_STRIKE;
+      ball === 0 && strike === 0
+        ? BASEBALL.NOTHING
+        : RESULT_BALL + ' ' + RESULT_STRIKE;
 
     MissionUtils.Console.print(RESULT_MESSAGE);
-    if (STRIKE_COUNT === 3)
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    if (strike === GAME.CORRECT_COUNT)
+      MissionUtils.Console.print(PHRASE.CORRECT);
   }
 
   processResult(strike) {
-    if (strike === 3) {
-      MissionUtils.Console.readLine(
-        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-        (input) => {
-          if (input === '1') {
-            this.createNumberList();
-            this.receiveNumber();
-          }
-          if (input === '2') {
-            MissionUtils.Console.close();
-          }
+    if (strike === GAME.CORRECT_COUNT) {
+      MissionUtils.Console.readLine(PHRASE.RESTART, (input) => {
+        if (input === GAME.RESTART) {
+          this.createNumberList();
+          this.receiveNumber();
         }
-      );
+        if (input === GAME.EXIT) {
+          MissionUtils.Console.close();
+        }
+      });
     } else {
       this.receiveNumber();
     }
