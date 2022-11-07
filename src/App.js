@@ -1,5 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const config = require("./config/config");
+// const config = require("./config/config");
+const config = {
+  START_GAME_NUM: 1,
+  END_GAME_NUM: 9,
+  GAME_NUM_SIZE: 3,
+};
 
 class App {
   constructor() {
