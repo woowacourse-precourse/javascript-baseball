@@ -1,3 +1,6 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Random, Console } = MissionUtils;
+
 class App {
   #GAME_MSG = {
     START: "숫자 야구 게임을 시작합니다.",
@@ -38,6 +41,12 @@ class App {
   }
   #setIsStartGame(bool) {
     this.#isStartGame = bool;
+  }
+  #initComputerNumbers(arr = [], randNo = Random.pickNumberInRange(1, 9)) {
+    arr.length === 3
+      ? this.#setComputerNumbers(arr)
+      : (arr.includes(randNo) || arr.push(randNo),
+        this.#initComputerNumbers(arr));
   }
   play() {}
 }

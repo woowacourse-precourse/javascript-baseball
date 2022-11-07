@@ -29,10 +29,10 @@
 
 ## 2. 상대방(컴퓨터)의 3자리 숫자 생성하는 기능(#initComputerNumbers) 구현
 
-- [ ] 1. 배열를 인자로 받음(default는 [])
-- [ ] 2. `Random.pickNumberInRange`를 이용해 Random 값 추출
-  - [ ] 2.1 1 ~ 9 사이에서 배열에 존재하지 않으면(`Array.prototype.includes` 이용) push하고 인자로 넘김
-- [ ] 3. 배열의 길이가 3이 되면 해당 배열을 `#setComputerNumbers`로 할당, return
+- [x] 1. 배열를 인자로 받음(default는 [])
+- [x] 2. `Random.pickNumberInRange`를 이용해 Random 값 추출
+  - [x] 2.1 1 ~ 9 사이에서 배열에 존재하지 않으면(`Array.prototype.includes` 이용) push하고 인자로 넘김
+- [x] 3. 배열의 길이가 3이 되면 해당 배열을 `#setComputerNumbers`로 할당, return
 
 ## 3. 사용자 입력 기능 구현
 
