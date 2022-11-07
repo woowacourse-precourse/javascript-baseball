@@ -136,15 +136,18 @@ class App {
   }
 
   isOptionError(option) {
-    if (option !== "1" && option !== "2") {
+    const RESTART = "1";
+    const END = "2";
+
+    if (option !== RESTART && option !== END) {
       throw "잘못된 옵션을 선택하였습니다.";
     }
 
-    if (option === "1") {
+    if (option === RESTART) {
       return this.playGame();
     }
 
-    if (option === "2") {
+    if (option === END) {
       MissionUtils.Console.print("게임 종료");
     }
   }
