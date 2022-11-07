@@ -1,6 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+
+    constructor(){
+      this.computer_number=0;
+    }
     initGame() {
         MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
         this.selectComputerNumber();
