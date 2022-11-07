@@ -5,7 +5,7 @@ const Message = require('./Message');
 const InValidInputError = require('./error/InValidInputError');
 
 class Game {
-  constructor() {
+  constructor () {
     this.io = Io;
     this.computer = new Computer();
     this.user = new User();
@@ -13,17 +13,16 @@ class Game {
 
   /**
    * 커맨드를 실행한다.
-   * @public 
+   * @public
    * @method
    * @return {} void
-   * @description 게임을 시작한다. 클래스 외부에서 호출한다. 
+   * @description 게임을 시작한다. 클래스 외부에서 호출한다.
    */
   playCommand () {
     this.computer.setNumber();
     this.askNumber();
   }
 
-  
   askNumber () {
     this.io.input(Message.PLEASE_INPUT_NUMBER, this.attempt.bind(this));
   }
@@ -40,64 +39,62 @@ class Game {
     }
   }
 
-  
   outputResult ({ strike, ball }) {
-    this.io.output(Message.gameResult({strike, ball}));
+    this.io.output(Message.gameResult({ strike, ball }));
   }
 
-
-  outputGameEnd() {
+  outputGameEnd () {
     this.io.output(Message.GAME_END);
   }
 
   /**
    * - 두 숫자배열을 비교한다.
-   * @param {[number, number, number]} computerNumber 
-   * @param {[number, number, number]} input 
+   * @param {[number, number, number]} computerNumber
+   * @param {[number, number, number]} input
    * @return {{strike:number, ball:number}}
    */
   compare (computerNumber, input) {
     let strike = 0;
     let ball = 0;
     for (let i = 0; i < computerNumber.length; i++) {
-      if(computerNumber[i] === input[i]) {
+      if (computerNumber[i] === input[i]) {
         strike++;
-      }else if(computerNumber.includes(input[i])) {
+      } else if (computerNumber.includes(input[i])) {
         ball++;
       }
     }
     return { strike, ball };
   }
 
-  isEnd ({strike}) {
+  isEnd ({ strike }) {
     return strike === 3;
   }
 
-  retry(){
+  retry () {
     this.askNumber();
   }
-  
+
   askReplay () {
     this.io.input(Message.ASK_REPLAY, this.decideReplay.bind(this));
   }
 
   decideReplay (input) {
-    if(Number(input) === Message.REPLAY) {
+    if (Number(input) === Message.REPLAY) {
       this.replay();
       return;
-    } else if(Number(input) === Message.NO_REPLAY) {
+    } if (Number(input) === Message.NO_REPLAY) {
       this.exit();
       return;
-    } 
+    }
     throw new InValidInputError();
   }
 
   replay () {
     this.playCommand();
   }
-  
+
   exit () {
-    this.io.close(); 
+    this.io.close();
   }
 }
 

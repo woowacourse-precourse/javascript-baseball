@@ -1,14 +1,14 @@
 class Player {
-  constructor() {
+  constructor () {
     this.number = null;
   }
 
   /** abstract method */
-  getNumber() {
+  getNumber () {
     throw new Error('Not Implemented');
   }
   /** abstract method */
-  setNumber() {
+  setNumber () {
     throw new Error('Not Implemented');
   }
 }
