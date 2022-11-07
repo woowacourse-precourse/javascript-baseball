@@ -1,6 +1,4 @@
 class Exception {
-    /** @typedef {('process' | 'replay')} type */
-    /** @type {function (string, type) : void} */
     constructor(input, type) {
         this.input = input;
         this.type = type;

@@ -73,6 +73,8 @@ class App {
         return [ball, strike];
     }
 
+    /** @typedef {('process' | 'replay')} type */
+    /** @type {function (string, type) : void} */
     verification(input, type) {
         const exception = new Exception(input, type);
         if (type === 'process') {
