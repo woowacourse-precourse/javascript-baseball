@@ -9,7 +9,7 @@
     "jest": "^29.0.3"
   },
   "scripts": {
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "repository": {
     "type": "git",
