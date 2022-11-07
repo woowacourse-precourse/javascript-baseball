@@ -75,6 +75,14 @@ function ballCheck(playerNumber, computerNumber) {
   return count;
 }
 
+// 게임 다시시작
+function gameRestart() {
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (input) => {}
+  );
+}
+
 const app = new App();
 app.play();
 
