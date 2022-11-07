@@ -1,4 +1,5 @@
-const handleException = (inputArray, digit) => {
+const handleException = (playerInput, digit) => {
+  const inputArray = playerInput.split('');
   if (isException(inputArray, digit)) {
     const ERROR_MESSAGE = '잘못된 입력입니다. 게임을 종료합니다.';
     throw ERROR_MESSAGE;

@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const gameConstant = require('./GameConstant');
 const compareNumber = require('./CompareFunctions');
+const handleException = require('./HandlingException');
 
 const setAnswer = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
@@ -12,6 +13,7 @@ const printStartMessage = () => {
 
 const inputNumber = playerInput => {
   const answer = setAnswer();
+  handleException(playerInput, gameConstant.DIGIT);
   compareNumber(answer, playerInput);
 };
 
