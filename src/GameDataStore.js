@@ -2,7 +2,6 @@ const { getBallsAndStrikes } = require('./utils');
 
 class GameDataStore {
   #gameData;
-
   #gameDataUI;
 
   constructor() {
@@ -12,10 +11,6 @@ class GameDataStore {
       ballsAndStrikes: {},
     };
     this.#gameDataUI = {};
-  }
-
-  injection(GameDataUI) {
-    this.#gameDataUI = GameDataUI;
   }
 
   setTarget(newTarget) {
@@ -34,6 +29,10 @@ class GameDataStore {
       this.#gameData.input,
     );
     this.#gameDataUI.update(this.#gameData);
+  }
+
+  injection(GameDataUI) {
+    this.#gameDataUI = GameDataUI;
   }
 }
 

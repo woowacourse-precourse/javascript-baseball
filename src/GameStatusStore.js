@@ -1,6 +1,5 @@
 class GameStatusStore {
   #gameStatus;
-
   #gameStatusUI;
 
   constructor() {
@@ -8,13 +7,13 @@ class GameStatusStore {
     this.#gameStatusUI = {};
   }
 
-  injection(GameStatusUI) {
-    this.#gameStatusUI = GameStatusUI;
-  }
-
   setGameStatus(newGameStatus) {
     this.#gameStatus = newGameStatus;
     this.#gameStatusUI.update(this.#gameStatus);
+  }
+
+  injection(GameStatusUI) {
+    this.#gameStatusUI = GameStatusUI;
   }
 }
 

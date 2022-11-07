@@ -8,13 +8,25 @@ class GameDataUI {
     this.#dispatcher = {};
   }
 
+  update = ({ ballsAndStrikes }) => {
+    const { balls, strikes } = ballsAndStrikes;
+
+    if (balls === undefined) {
+      this.newGuess();
+      return;
+    }
+
+    Console.print(getGuessResult(balls, strikes));
+    if (strikes === 3) {
+      this.gameOver();
+    } else {
+      this.newGuess();
+    }
+  };
+
   #inputError() {
     Console.close();
     throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
-  }
-
-  injection(newDispatcher) {
-    this.#dispatcher = newDispatcher;
   }
 
   newGuess() {
@@ -54,21 +66,9 @@ class GameDataUI {
     });
   }
 
-  update = ({ ballsAndStrikes }) => {
-    const { balls, strikes } = ballsAndStrikes;
-
-    if (balls === undefined) {
-      this.newGuess();
-      return;
-    }
-
-    Console.print(getGuessResult(balls, strikes));
-    if (strikes === 3) {
-      this.gameOver();
-    } else {
-      this.newGuess();
-    }
-  };
+  injection(newDispatcher) {
+    this.#dispatcher = newDispatcher;
+  }
 }
 
 module.exports = GameDataUI;
