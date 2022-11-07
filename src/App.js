@@ -42,7 +42,7 @@ class App {
 
   validateInput(numbers) {
     if (this._controller.isValidInput(numbers) === false) {
-      throw INPUT_ERROR;
+      throw new Error(INPUT_ERROR);
     };
   }
 
@@ -60,7 +60,7 @@ class App {
     Console.readLine(this.MESSAGE.USER_SELECT, (input) => {
       if (input === this.FLAG.RESTART) this.restart();
       else if (input === this.FLAG.FINISH) this.finish();
-      else throw INPUT_ERROR;
+      else throw new Error(INPUT_ERROR);
     });
   }
 
