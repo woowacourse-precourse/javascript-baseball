@@ -17,6 +17,10 @@ class BaseBallGame{
         this.answer = this.makeThreeUniqueRandomNumber();
     }
 
+    setScore = () => {
+        this.score = {"strike" : 0, "ball" : 0};
+    }
+    
     setUserAnswer = (userInput) => {
         this.userAnswer = userInput;
     }
@@ -42,7 +46,9 @@ class BaseBallGame{
         MissionUtils.Console.readLine("숫자를 입력해주세요", (input) => {
             let userInput = input.split("").map((item) => parseInt(item));
             if (this.isVaildInput(userInput)){
+                this.setScore();
                 this.setUserAnswer(userInput);
+                this.compareUserWithAnswer();
             }else {
                 throw new Error("올바르지 않은 값이 입력됐습니다.");
             }
@@ -61,6 +67,19 @@ class BaseBallGame{
         return pickNumberList;
     }
 
+    countResult = (result) => {
+        this.score[result] += 1;
+    }
+
+    compareUserWithAnswer = () => {
+        for (let idx=0; idx<3; idx++){
+            if (this.answer[idx] === this.userAnswer[idx]){
+                this.countResult("strike");
+            }else if (this.answer.includes(this.userAnswer[idx])){
+                this.countResult("ball");
+            }
+        };
+    }
 }
 
 module.exports = BaseBallGame
