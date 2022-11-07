@@ -1,6 +1,5 @@
 const App = require("../src/App.js");
 
-
 describe("랜덤 숫자 테스트", () => {
   test("랜덤으로 만든 숫자의 길이가 3인지", () => {
     const app = new App();
@@ -26,6 +25,13 @@ describe("랜덤 숫자 테스트", () => {
       .length;
     const randomNumsLength = 3;
     expect(onlyNumberOfRandomNumLength).toBe(randomNumsLength);
+  });
+
+  test("랜덤으로 만든 숫자에 중복 숫자 있는지 테스트", () => {
+    const app = new App();
+    const randomNumLength = app.createRandomNum().length;
+    const randomNumSetSize = new Set(app.createRandomNum()).size;
+    expect(randomNumLength).toBe(randomNumSetSize);
   });
 })
 
