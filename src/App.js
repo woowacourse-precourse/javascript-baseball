@@ -30,36 +30,40 @@ class App {
   }
 
   getResultMessage(strike, ball) {
-    if (!strike && ball) return `${ball}"볼"`;
-    if (strike && !ball) return `${strike}"스트라이크`;
-    if (strike && ball) return `${strike}"스트라이크"${ball}"볼"`;
+    if (!strike && ball) return `${ball}볼`;
+    if (strike && !ball) return `${strike}스트라이크`;
+    if (strike && ball) return `${ball}볼 ${strike}스트라이크`;
 
     return "낫싱";
   }
 
   askRestart() {
+    this.print(MESSAGE.GAME_END);
+
     Console.readLine(MESSAGE.RESTART, (userinput) => {
       if (userinput !== 1 || userinput !== 2) {
         return this.throwError();
       }
+      if (userinput === 1) {
+        return this.play();
+      }
+      return Console.close();
     });
   }
 
   readInput(solution) {
     Console.readLine(MESSAGE.USER_INPUT_REQUEST, (userinput) => {
       const inputError = new UserInput(userinput);
-      if (!inputError.checkAllUserInput) {
+      if (!inputError.checkAllUserInput()) {
         return this.throwError();
       }
       const { strike, ball } = this.getStrikeBallCount(solution, userinput);
       this.print(this.getResultMessage(strike, ball));
 
       if (strike !== 3) {
-        this.readInput(solution);
+        return this.readInput(solution);
       }
-      this.print(MESSAGE.GAME_END);
-
-      Console.close();
+      this.askRestart();
     });
   }
 
