@@ -1,4 +1,5 @@
 const { BASIC_NUMBER, REPLAY_NUMBER } = require('../constants/game numbers');
+const { ERROR_MESSAGE } = require('../constants/error message');
 
 class ErrorCheck {
   static isInvalidInputLength(userInput) {
@@ -25,21 +26,22 @@ class ErrorCheck {
   }
 
   static guessError(userInput) {
-    if (this.isInvalidInputLength(userInput))
+    if (this.isInvalidInputLength(userInput)) {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
-
-    if (this.notOnlyConsistOfNums(userInput))
+    }
+    if (this.notOnlyConsistOfNums(userInput)) {
       throw new Error(ERROR_MESSAGE.TYPE_ERROR);
-
-    if (this.hasDuplication(userInput))
+    }
+    if (this.hasDuplication(userInput)) {
       throw new Error(ERROR_MESSAGE.DUP_ERROR);
-
+    }
     return true;
   }
 
   static replayError(userInput) {
-    if (this.isReplayError(userInput))
+    if (this.isReplayError(userInput)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUM_ERROR);
+    }
     return true;
   }
 }
