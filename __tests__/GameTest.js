@@ -60,11 +60,19 @@ describe("플레이어 입력 테스트", () => {
     );
   });
 
-  test("플레이어 숫자 입력 체크2", () => {
-    const app = new App();
-    expect(() => "...").toThrow(
+  test("플레이어 숫자 입력 체크2-1", () => {
+    const validation = new Validation();
+    expect(() => validation.checkNumber([1, 2, "a"])).toThrow(
       INGAME_MESSAGE.ERROR,
-      "은 1~9사이 숫자여야 합니다."
+      "입력값은 1~9사이의 '숫자'여야 합니다."
+    );
+  });
+
+  test("플레이어 숫자 입력 체크2-2", () => {
+    const validation = new Validation();
+    expect(() => validation.checkNumber([1, 2, 0])).toThrow(
+      INGAME_MESSAGE.ERROR,
+      "입력값에 0이 포함될 수 없습니다."
     );
   });
 
