@@ -67,7 +67,21 @@ class App {
     if (strike === 3 && ball === 0) return 1;
     else return 0;
   }
-  restartGame() {}
+  restartGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
+      (userInput) => {
+        if (userInput === "1") {
+          const answer = this.getAnswer();
+          this.getInput(answer);
+        } else if (userInput === "2") {
+          MissionUtils.Console.close();
+        } else {
+          throw new Error("유효하지 않은 값이 입력되었습니다.");
+        }
+      }
+    );
+  }
 
   detectInputError(userInput) {}
 
