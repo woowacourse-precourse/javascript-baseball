@@ -2,19 +2,31 @@ const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
+    MissionUtils.Console.readLine = jest.fn();
+    answers.reduce((acc, input) => {
+        return acc.mockImplementationOnce((question, callback) => {
+        callback(input);
+        });
+    }, MissionUtils.Console.readLine);
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
+    MissionUtils.Random.pickNumberInRange = jest.fn();
+    numbers.reduce((acc, number) => {
+        return acc.mockReturnValueOnce(number);
+    }, MissionUtils.Random.pickNumberInRange);
+
+    // MissionUtils.Random.pickUniqueNumbersInRange 경우도 호환 가능
+    const divisions = [];
+    const number_clone = [...numbers];
+    for(let i = 0; i < numbers.length/3; i++) {
+        divisions.push(number_clone.splice(0, 3));
+    }
+
+    MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+    divisions.reduce((acc, numbers) => {
+        return acc.mockReturnValueOnce(numbers);
+    }, MissionUtils.Random.pickUniqueNumbersInRange);
 };
 
 const getLogSpy = () => {
