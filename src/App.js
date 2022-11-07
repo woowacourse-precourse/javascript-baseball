@@ -13,15 +13,13 @@ class App {
   }
 
   static init() {
-    this.userNumber = 0;
     this.gameEndStatus = false;
-    this.gameOptionValue = 0;
     this.computerNumberArray = App.generateComputerNumberArray();
     this.isValidUserNumber = false;
   }
 
-  static compareNumber() {
-    const userNumberArray = App.convertUserNumberToArray().map((number) => +number);
+  static compareNumber(userNumber) {
+    const userNumberArray = App.convertUserNumberToArray(userNumber).map((number) => +number);
     let strikeCount = 0;
     let ballCount = 0;
 
@@ -37,28 +35,27 @@ class App {
   static getUserGameOptionValue() {
     return MissionUtils.Console.readLine(GAME_MESSAGES.END_OPTION, (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
-      this.gameOptionValue = input;
-      App.validateUserGameOptionValueInput();
+      App.validateUserGameOptionValueInput(input);
     });
   }
 
-  static runByGameOptionValue() {
-    if (+this.gameOptionValue === 2) MissionUtils.Console.close();
-    if (+this.gameOptionValue === 1) App.startGame();
+  static runByGameOptionValue(userInput) {
+    if (+userInput === 2) MissionUtils.Console.close();
+    if (+userInput === 1) App.startGame();
   }
 
-  static validateUserGameOptionValueInput() {
-    if (+this.gameOptionValue !== 1 && +this.gameOptionValue !== 2) throw new Error(ERROR_MESSAGES.ONLY_NUMBER_1_AND_2);
-    else App.runByGameOptionValue();
+  static validateUserGameOptionValueInput(userInput) {
+    if (+userInput !== 1 && +userInput !== 2) throw new Error(ERROR_MESSAGES.ONLY_NUMBER_1_AND_2);
+    else App.runByGameOptionValue(userInput);
   }
 
   static validateUserInput(userNumber) {
     if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error(ERROR_MESSAGES.ONLY_NUMBER);
     if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error(ERROR_MESSAGES.ONLY_THREE_LENGTH_NUMBER);
-    if (new Set([...App.convertUserNumberToArray()]).size !== 3) throw new Error(ERROR_MESSAGES.NOT_DUPLICATE);
+    if (new Set([...App.convertUserNumberToArray(userNumber)]).size !== 3) throw new Error(ERROR_MESSAGES.NOT_DUPLICATE);
     if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error(ERROR_MESSAGES.NOT_DECIMAL_AND_MINUS);
     else this.isValidUserNumber = true;
-    if (this.isValidUserNumber === true) App.compareNumber();
+    if (this.isValidUserNumber === true) App.compareNumber(userNumber);
   }
 
   static printResult(strikeCount, ballCount) {
@@ -74,15 +71,14 @@ class App {
     if (this.gameEndStatus === false) this.getUserInputNumber();
   }
 
-  static convertUserNumberToArray() {
-    return this.userNumber.toString().split("");
+  static convertUserNumberToArray(userNumber) {
+    return userNumber.toString().split("");
   }
 
   static getUserInputNumber() {
     return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
-      this.userNumber = input;
-      App.validateUserInput(this.userNumber);
+      App.validateUserInput(input);
     });
   }
 
