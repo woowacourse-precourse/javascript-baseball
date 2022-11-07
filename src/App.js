@@ -1,8 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-let ISANSWER = 0;
+
+const STATUS = {
+  Started: 1,
+  Finished: 0,
+}
 
 class App {
   randomNumber;
+  gameStatus = STATUS.Start;
   
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -19,8 +24,8 @@ class App {
   userInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (input) => {
       this.checkUserInput(input);
-      if (ISANSWER) {
-        ISANSWER = 0;
+      if (this.gameStatus === STATUS.Finished) {
+        this.gameStatus = STATUS.Started;
         this.continueOrEnd();
       } else {
         this.userInput();
@@ -84,7 +89,7 @@ class App {
       MissionUtils.Console.print('3스트라이크');
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-      ISANSWER = 1;
+      this.gameStatus = STATUS.Finished;
     } else if (strikes == 0) {
       MissionUtils.Console.print(`${balls}볼`);
     } else if (balls == 0) {
