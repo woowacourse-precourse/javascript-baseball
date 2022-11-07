@@ -1,3 +1,5 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 const View = require("../view/view");
 const ComputerNumber = require("../model/computerNumber");
 const UserGivenNumber = require("../model/userGivenNumber");
