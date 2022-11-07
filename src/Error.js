@@ -1,9 +1,8 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const { Console, Random } = MissionUtils;
+const REGEX = /^[1-9]{3}$/;
 
 const error = {
   isValidResponse(answer) {
-    return this.isNumberType(answer) && this.isDuplicate(answer) && this.isNumberType(answer);
+    return this.isNumberType(answer) && this.isNotDuplicated(answer) && this.isThreeDigit(answer);
   },
 
   isNumberType(answer) {
@@ -11,12 +10,11 @@ const error = {
   },
 
   isThreeDigit(answer) {
-    return answer.length === 3;
+    return REGEX.test(answer);
   },
 
-  isDuplicate(answer) {
+  isNotDuplicated(answer) {
     return [...String(answer)].length === new Set([...String(answer)]).size;
   },
 };
-
 module.exports = error;

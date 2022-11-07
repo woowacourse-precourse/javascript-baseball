@@ -28,14 +28,16 @@ class Computer {
 
   computeResult(resultMap) {
     if (resultMap.strike === 3) {
-      return '정답입니다.';
+      return '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     }
 
     if (resultMap.strike === 0 && resultMap.ball === 0) {
       return '낫싱';
     }
-
-    return `${resultMap.ball}볼 ${resultMap.strike}스트라이크 입니다.`;
+    const message = '입니다.';
+    const ballMessage = resultMap.ball !== '0' ? `${resultMap.ball}볼 ` : '';
+    const strikeMessage = resultMap.strike !== '0' ? `${resultMap.strike}스트라이크` : '';
+    return ballMessage + strikeMessage + message;
   }
 
   initNumber() {

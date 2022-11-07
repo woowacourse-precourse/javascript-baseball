@@ -1,15 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { message } = require('prompt');
 const { Console, Random } = MissionUtils;
+const MESSAGE = require('./Message');
 const error = require('./Error');
 
 class Interaction {
   constructor() {
     this.answer;
-  }
-
-  printtMessage(message) {
-    Console.print(message);
   }
 
   printPlayInputMessage() {
@@ -31,7 +27,8 @@ class Interaction {
 
   checkValidNumberInput(inputNumber) {
     if (!error.isValidResponse(inputNumber)) {
-      throw new Error('숫자 세자리이상');
+      Console.close();
+      throw new Error(MESSAGE.ERROR);
     }
   }
 }
