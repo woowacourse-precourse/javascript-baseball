@@ -63,7 +63,10 @@ class App {
     }
   }
 
-  isAnswer(strike, ball) {}
+  isAnswer(strike, ball) {
+    if (strike === 3 && ball === 0) return 1;
+    else return 0;
+  }
   restartGame() {}
 
   detectInputError(userInput) {}
