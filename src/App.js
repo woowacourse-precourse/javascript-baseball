@@ -1,10 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Validator = require('./Validator');
 
 class App {
   #randomNumber = [];
 
   play() {
     this.#randomNumber = App.generateRandomNumber();
+    console.log(this.#randomNumber);
     this.askUserInput();
   }
 
@@ -24,9 +26,7 @@ class App {
   }
 
   handleUserInput(answer) {
-    if (!App.isValidUserInput(answer)) {
-      throw new Error('잘못된 값을 입력하였습니다!');
-    }
+    Validator.validate(answer, Validator.numberInputValidator);
     const userInput = [...answer].map(number => +number);
     const didUserWin = this.computeResult(userInput);
     if (didUserWin) {
@@ -35,14 +35,6 @@ class App {
       return;
     }
     this.askUserInput();
-  }
-
-  static isValidUserInput(input) {
-    const REGEX = /^[1-9]{3}$/;
-    if (REGEX.test(input) && new Set(input).size === 3) {
-      return true;
-    }
-    return false;
   }
 
   computeResult(userInput) {
@@ -85,21 +77,12 @@ class App {
   }
 
   handleMenuInput(answer) {
-    if (!App.isValidMenuInput(answer)) {
-      throw new Error('잘못된 값을 입력하였습니다!');
-    }
+    Validator.validate(answer, Validator.menuInputValidator);
     if (answer === '1') {
       this.play();
       return;
     }
     MissionUtils.Console.close();
-  }
-
-  static isValidMenuInput(input) {
-    if (input === '1' || input === '2') {
-      return true;
-    }
-    return false;
   }
 }
 
