@@ -175,4 +175,13 @@ describe("Utils.askGameAgain", () => {
     //then
     expect(spyLog).toHaveBeenCalledWith("게임 종료");
   });
+
+  test("1 또는 2가 아닌 다른 숫자를 입력했을 때는 예외가 발생해야 한다.", () => {
+    //given
+    const notOneOrTwo = "3";
+    mockInput(notOneOrTwo);
+    //when
+    //then
+    expect(() => Utils.askGameAgain()).toThrow();
+  });
 });
