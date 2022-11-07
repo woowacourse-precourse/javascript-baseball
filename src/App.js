@@ -7,15 +7,22 @@ class App {
 
   #numberSize;
 
+  #strike;
+
+  #ball;
+
   constructor(numberSize = 3) {
     this.#numberSize = numberSize;
     this.#computerNumber = null;
     this.#userNumber = null;
+    this.#strike = 0;
+    this.#ball = 0;
   }
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.makeRandomNumber();
+    console.log(this.getComputerNumber());
     this.progressGame();
     // MissionUtils.Console.close();
   }
@@ -23,8 +30,8 @@ class App {
   progressGame() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
       this.setUserNumber(number);
-      const result = this.compareNumbers();
-      console.log(result);
+      this.compareNumbers();
+      this.printCompareResult();
     });
   }
 
@@ -45,14 +52,10 @@ class App {
     const userNumber = this.getUserNumber();
     const notStrikePositions = [];
     const notStrikeNumbers = {};
-    let ball = 0;
-    let strike = 0;
-
-    if (computerNumber === userNumber) return [0, 3];
 
     [...computerNumber].forEach((number, index) => {
       if (number === userNumber[index]) {
-        strike += 1;
+        this.setStrike(this.getStrike() + 1);
         return;
       }
       if (notStrikeNumbers[number] === undefined) {
@@ -68,13 +71,30 @@ class App {
       if (notStrikeNumbers[userNumber[position]] === undefined) return;
 
       notStrikeNumbers[userNumber[position]] -= 1;
-      ball += 1;
+      this.setBall(this.getBall() + 1);
     });
-
-    return [ball, strike];
   }
 
-  printCompareResult(result) {}
+  printCompareResult() {
+    this.getComputerNumber();
+    if (this.getBall() === 0 && this.getStrike() === 0) {
+      MissionUtils.Console.print('낫싱');
+      return;
+    }
+    if (this.getBall() === 0 && this.getStrike() !== 0) {
+      MissionUtils.Console.print(`${this.getStrike()}스트라이크`);
+      return;
+    }
+
+    if (this.getBall() !== 0 && this.getStrike() === 0) {
+      MissionUtils.Console.print(`${this.getBall()}볼`);
+      return;
+    }
+
+    MissionUtils.Console.print(
+      `${this.getBall()}볼 ${this.getStrike()}스트라이크`
+    );
+  }
 
   setNumberSize(size) {
     this.#numberSize = size;
@@ -98,6 +118,22 @@ class App {
 
   getComputerNumber() {
     return this.#computerNumber;
+  }
+
+  setBall(ball) {
+    this.#ball = ball;
+  }
+
+  getBall() {
+    return this.#ball;
+  }
+
+  setStrike(strike) {
+    this.#strike = strike;
+  }
+
+  getStrike() {
+    return this.#strike;
   }
 }
 
