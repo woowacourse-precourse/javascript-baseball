@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
-const { INPUT_ERROR } = require("./constants");
+const { INPUT_ERROR, NO_MESSAGE } = require("./constants");
 const Controller = require("./Controller");
 
 class App {
@@ -35,7 +35,7 @@ class App {
         throw INPUT_ERROR;
       };
       const hint = this._controller.compareAnswer(numbers, this._computer.answer);
-      if (hint.length === 0) {
+      if (hint === NO_MESSAGE) {
         this.printMessage(this.MESSAGE.GAME_OVER);
         this.getUserSelect();
       } else {

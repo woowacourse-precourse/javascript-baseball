@@ -1,4 +1,4 @@
-const { ANSWER_LENGTH } = require("./constants");
+const { ANSWER_LENGTH, NO_MESSAGE } = require("./constants");
 
 class Controller {
   isValidInput(input) {
@@ -20,7 +20,7 @@ class Controller {
     const balls = this.getBalls(input, answer);
 
     if (this.isFinish(strikes) === true) {
-      return '';
+      return NO_MESSAGE;
     }
 
     const hint = strikes === 0 && balls === 0
@@ -49,8 +49,8 @@ class Controller {
   }
 
   makeHint(strikes, balls) {
-    const strikeHint = strikes > 0 ? `${strikes}스트라이크 ` : '';
-    const ballHint = balls > 0 ? `${balls}볼` : '';
+    const strikeHint = strikes > 0 ? `${strikes}스트라이크 ` : NO_MESSAGE;
+    const ballHint = balls > 0 ? `${balls}볼` : NO_MESSAGE;
     return (strikeHint + ballHint).trim();
   }
 }
