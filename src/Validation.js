@@ -1,4 +1,4 @@
-const { INGAME_MESSAGE } = require("./Constant");
+const { ERROR_MESSAGE } = require("./Constant");
 
 class Validation {
   checkAll(inputArray) {
@@ -9,7 +9,7 @@ class Validation {
 
   checkLength(inputArray) {
     if (inputArray.length !== 3) {
-      throw INGAME_MESSAGE.ERROR;
+      throw ERROR_MESSAGE.INPUT;
     }
   }
 
@@ -19,7 +19,7 @@ class Validation {
       ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[1]) ||
       ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[2])
     ) {
-      throw INGAME_MESSAGE.ERROR;
+      throw ERROR_MESSAGE.INPUT;
     }
   }
 
@@ -29,7 +29,7 @@ class Validation {
       inputArray[1] === inputArray[2] ||
       inputArray[2] === inputArray[0]
     ) {
-      throw INGAME_MESSAGE.ERROR;
+      throw ERROR_MESSAGE.INPUT;
     }
   }
 }

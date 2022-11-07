@@ -3,9 +3,8 @@ const Input = require("../src/Input");
 
 const {
   GAME_CONFIG,
-  ERROR_CHECK,
+  ERROR_MESSAGE,
   INGAME_MESSAGE,
-  GAME_RESULT,
   RESPONSE,
 } = require("./Constant");
 

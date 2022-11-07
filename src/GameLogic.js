@@ -3,9 +3,8 @@ const Validation = require("../src/Validation");
 
 const {
   GAME_CONFIG,
-  ERROR_CHECK,
+  ERROR_MESSAGE,
   INGAME_MESSAGE,
-  GAME_RESULT,
   RESPONSE,
 } = require("./Constant");
 
@@ -28,7 +27,7 @@ class GameLogic {
     if (ballStrike[1] === 3) {
       MissionUtils.Console.print(INGAME_MESSAGE.END);
     } else if (ballStrike[0] === 0 && ballStrike[1] === 0) {
-        MissionUtils.Console.print()
+      MissionUtils.Console.print();
     }
   }
 }
