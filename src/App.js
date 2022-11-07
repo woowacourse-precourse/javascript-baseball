@@ -13,7 +13,6 @@ class App {
   play() {
     const input = new Input();
     const userNumber = input.user();
-    
   }
 }
 
