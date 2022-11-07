@@ -25,8 +25,16 @@ function exception(userNum) {
     // 0을 넣었을 경우
     if (userNum.includes(ZERO)) {
         MissionUtils.Console.close();
-        throw "1 ~ 9 사이의 값을 입력해주세요."
+        throw "1 ~ 9 사이의 값을 입력해주세요.";
     }
 }
 
-module.exports = exception;
+function pickedWrongChoice() {
+    MissionUtils.Console.close();
+    throw "잘못된 수를 입력하셨습니다.";
+}
+
+module.exports = {
+    exception,
+    pickedWrongChoice,
+}

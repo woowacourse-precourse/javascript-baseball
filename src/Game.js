@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
-const exception = require("./Exception");
+const { exception, pickedWrongChoice } = require("./Exception");
 
 const START_VALUE = 0;
 const STRIKE_VALUE = 3;
@@ -54,15 +54,14 @@ class Game {
     getRightAnswer() {
         new Computer().successMessage();
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
-            if (choice === GAME_RESTART) this.pickedRestart();
-            if (choice === GAME_EXIT) this.pickedClose();
-            // this.pickedWrongChoice();
+            if (choice === GAME_RESTART) return this.pickedRestart();
+            if (choice === GAME_EXIT) return this.pickedClose();
+            return pickedWrongChoice();
         });
     }
 
     pickedWrongChoice() {
-        MissionUtils.Console.close();
-        throw new Error("잘못된 수를 입력하셨습니다.")
+        
     }
 
     pickedRestart() {
