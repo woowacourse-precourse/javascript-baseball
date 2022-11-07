@@ -9,8 +9,10 @@ class App {
   }
 
   play() {
+    this.resetGame();
     this.startGame();
     while (this.strike !== LENGTH) this.playGame();
+    this.endGame();
   }
 
   startGame() {
@@ -28,15 +30,14 @@ class App {
         throw new TypeError();
       }
 
+      this.resetScore();
       this.setScore();
       this.printResult();
-      this.resetScore();
 
       if (this.strike === LENGTH) {
         MissionUtils.Console.print(
           `${LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
         );
-        this.endGame();
       } else {
         this.playGame();
       }
@@ -44,6 +45,7 @@ class App {
   }
 
   setComputer() {
+    this.computer = '';
     while (this.computer.length < LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9) + '';
       if (!this.computer.includes(number)) {
@@ -63,8 +65,9 @@ class App {
     if (!this.ball && !this.strike) MissionUtils.Console.print('낫싱');
     else {
       MissionUtils.Console.print(
-        this.ball ? `${this.ball}볼` : '',
-        this.strike ? `${this.strike}스트라이크` : ''
+        `${this.ball ? this.ball + '볼 ' : ''}${
+          this.strike ? this.strike + '스트라이크' : ''
+        }`
       );
     }
   }
@@ -72,6 +75,12 @@ class App {
   resetScore() {
     this.strike = 0;
     this.ball = 0;
+  }
+
+  resetGame() {
+    this.computer = '';
+    this.user = '';
+    this.resetScore();
   }
 
   endGame() {
