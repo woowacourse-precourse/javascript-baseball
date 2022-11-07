@@ -2,8 +2,8 @@
 class Validation {
   constructor() {
     this.numberRangeRegex = /^\d+$/;
-    this.isUserInputValid = true;
-    this.isRestartUserInputValid = true;
+    this.isUserGuessInputValid = true;
+    this.isUserRestartInputValid = true;
   }
 }
 
