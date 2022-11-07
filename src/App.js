@@ -101,6 +101,10 @@ class App {
     } else if (restartEndNumber == 2) {
       result = "게임 종료";
       MissionUtils.Console.print(result);
+    } else {
+      throw new Error(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력해야합니다"
+      );
     }
   }
 }
