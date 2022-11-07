@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const COMPUTER_NUMBER = [];
+let strikeBallCount = [0, 0];
+
 class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -36,6 +38,24 @@ class App {
     if (/[^1-9]/g.test(userNumberInput)) {
       throw new Error("1~9 숫자만 입력해주세요");
     }
+  }
+
+  checkNumbers(COMPUTER_NUMBER, userNumberInput) {
+    for (
+      let userNumberCipher = 0;
+      userNumberCipher < userNumberInput.length;
+      userNumberCipher++
+    ) {
+      const COMPARE = userNumberInput.indexOf(
+        COMPUTER_NUMBER[userNumberCipher]
+      );
+      if (COMPARE > -1 && COMPARE === userNumberCipher) {
+        strikeBallCount[0] += 1;
+      } else if (COMPARE > -1 && COMPARE != userNumberCipher) {
+        strikeBallCount[1] += 1;
+      }
+    }
+    this.strikeBallResult(strikeBallCount);
   }
 }
 
