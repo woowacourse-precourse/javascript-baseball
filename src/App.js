@@ -10,7 +10,10 @@ class App {
     this.#answer = "";
     this.score = {};
   }
-  play() {}
+  play() {
+    this.startMent();
+    this.start();
+  }
   startMent() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -77,6 +80,10 @@ class App {
         throw new Error("잘못된 값을 입력하셨습니다.");
       }
     );
+  }
+  start() {
+    this.pickRandomAnswer();
+    this.inputUserAnswer();
   }
 }
 
