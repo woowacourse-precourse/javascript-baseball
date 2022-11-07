@@ -35,6 +35,20 @@ class App {
   }
   changeUserNumberToArray(input_num){
     this.user_number = (input_num + '').split('');
+    this.findEqualNumber();
+  }
+
+  findEqualNumber(){
+    let strike=0;
+    let ball=0;
+    this.user_number.forEach((number,index)=>{
+      if(this.computer_number[index]===number){
+        strike+=1;
+      }
+      if(this.computer_number[index]!==number&&this.computer_number.includes(number)){
+        ball+=1;
+      }
+    })
   }
   
 }
