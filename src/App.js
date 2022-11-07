@@ -1,19 +1,28 @@
 const System = require("./System");
 const User = require("./User");
+const { Console } = require("./Utilitys");
 class App {
   async play() {
     const NumberBaseBallSystem = new System();
     const PlayingUser = new User();
 
     NumberBaseBallSystem.getStarted();
-    NumberBaseBallSystem.createAnswerNumber();
-    console.log(NumberBaseBallSystem.getNumber);
-    // console.log(NumberBaseBallSystem.getNumber);
-    const guessNumber = await PlayingUser.enterGuessNumber();
-    const scoreboard = NumberBaseBallSystem.isStrike(guessNumber);
-    NumberBaseBallSystem.notifyGuessResult(scoreboard);
-    const replay = await PlayingUser.isReplay();
-    // console.log(replay);
+
+    let replay = 1;
+    let reGuess = true;
+    do {
+      NumberBaseBallSystem.createAnswerNumber();
+      console.log(NumberBaseBallSystem.getNumber);
+      do {
+        const guessNumber = await PlayingUser.enterGuessNumber();
+        const scoreboard = NumberBaseBallSystem.isStrike(guessNumber);
+        NumberBaseBallSystem.notifyGuessResult(scoreboard);
+        if (scoreboard.strike === 3) reGuess = false;
+        else reGuess = true;
+      } while (reGuess);
+      replay = await PlayingUser.isReplay();
+    } while (replay !== "2");
+    Console.closeConsole();
   }
 }
 
