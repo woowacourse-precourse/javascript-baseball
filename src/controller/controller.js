@@ -67,6 +67,29 @@ class Controller {
     // 정답이 아니라면 유저에게 다른 수 제시를 요구한다.
     this.view.getUserGuessInput();
   }
+
+  /**
+   * 유저 재시작 의사 input 이 유효한 수인지 확인한다.
+   * @param {string} restartUserInput [유저 input]
+   */
+  checkIsRestartUserInputValid(restartUserInput) {
+    const isRestartUserInputValid =
+      this.validation.getIsUserRestartInputValid(restartUserInput);
+
+    // 유효하지 않다면 throw error
+    if (!isRestartUserInputValid) {
+      throw new Error(this.view.RESTART_INVALID_INPUT_COMMENT);
+    }
+
+    // 1번이라면 게임 재시작
+    if (restartUserInput === "1") {
+      new Controller(false).init();
+    }
+
+    // 2번이라면 게임 완전히 종료
+    Console.print(this.view.CLOSING_COMMENT);
+    Console.close();
+  }
 }
 
 module.exports = Controller;
