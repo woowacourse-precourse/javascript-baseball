@@ -19,10 +19,24 @@ class App {
       assertBall: (number, index) =>
         this.#answer[index] !== number && this.#answer.includes(number),
     };
+
     this.inputAssert = {
-      assertLength: (input) => input.length === length,
+      assertLength: (input) => {
+        return input.length === length;
+      },
       assertInteger: (input) => Number.isInteger(+input),
+      assertOverlap: (input) => {
+        const inputArray = [...input];
+        const inputSet = new Set(inputArray);
+        return inputSet.size < inputArray.length;
+      },
       assertPositive: (input) => Math.sign(input) === 1,
+      assertRange: (input) => {
+        const inputArray = [...input];
+        inputArray.map((number) => {
+          return +number > 0 && +number < 10;
+        });
+      },
     };
   }
 
@@ -39,24 +53,33 @@ class App {
   }
 
   answerGenerator() {
-    const randomNumber = MissionUtils.Random.pickUniqueNumbersInRange(
-      firstRange,
-      lastRange,
-      length
-    );
-    this.#answer = randomNumber.join('');
+    while (this.#answer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.#answer.includes(number)) this.#answer += `${number}`;
+    }
+    this.#answer = [...this.#answer];
   }
 
   getUserInput() {
     MissionUtils.Console.readLine(GameMessage.QUESTION_MESSAGE, (input) => {
-      const { assertLength, assertInteger, assertPositive } = this.inputAssert;
+      const {
+        assertLength,
+        assertInteger,
+        assertPositive,
+        assertOverlap,
+        assertRange,
+      } = this.inputAssert;
 
+      if (assertRange(input))
+        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+      if (assertOverlap(input))
+        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
       if (!assertLength(input))
-        throw Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
       if (!assertInteger(input))
-        throw Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
       if (!assertPositive(input))
-        throw Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
 
       this.#userInput = input;
       this.result = {};
@@ -101,10 +124,12 @@ class App {
           this.start();
           break;
         case GameMessage.GAMEOVER_INPUT:
+          MissionUtils.Console.close();
           MissionUtils.Console.print(GameMessage.GAMEOVER_MESSAGE);
           break;
         default:
-          throw Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+          MissionUtils.Console.close();
+          throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
       }
     });
   }
