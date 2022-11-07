@@ -2,20 +2,22 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.playGame();
   }
+  
   checkException(num){
     if(isNaN(num)){
       throw new Error("숫자를 입력하세요.");
     }else if(num<0){
       throw new Error("양수를 입력하세요.");
-    }else if(num.charAt(0) == 0 || num.charAt(1) == 0 || num.charAt(1)){
+    }else if(num.charAt(0) === 0 || num.charAt(1) === 0 || num.charAt(1) === 0){
       throw new Error("1-9 사이의 숫자로 이루어진 세자리 숫자를 입력하세요.");
-    }else if(num.charAt(0) == " " ||num.charAt(1) == " " || num.charAt(3) == " "){
+    }else if(num.charAt(0) === " " ||num.charAt(1) === " " || num.charAt(3) === " "){
       throw new Error("공백을 포함하지 않는 숫자를 입력하세요.")
     }else if(num.length !== 3){
       throw new Error("3자리 숫자를 입력하세요.");
-    }else if(num.charAt(0) == num.charAt(1) || num.charAt(0) == num.charAt(2) || num.charAt(1) == num.charAt(2)){
+    }else if(num.charAt(0) === num.charAt(1) || num.charAt(0) === num.charAt(2) || num.charAt(1) === num.charAt(2)){
       throw new Error("중복되지 않는 숫자를 입력하세요.");
     }else{
       return 1;
@@ -46,7 +48,7 @@ class App {
         ball += 1;
       }
     }
-
+    this.printStrikeBall(strike, ball);
     if(strike === 3){
       return 1;
     }
@@ -55,7 +57,7 @@ class App {
 
   printStrikeBall(strike, ball){
     if(ball === 0 && strike === 0){
-      MissionUtils.Console.print("낫싱");
+      MissionUtils.Console.print('낫싱');
     } else if(ball === 0){
       MissionUtils.Console.print(`${strike}스트라이크`);
     } else if(strike === 0){
@@ -77,12 +79,12 @@ class App {
   }
 
   playGame() {
-    let game = 1;
+    let game = "1";
 
-    while(game === 1){
+    while(game === "1"){
       let com = this.getRandomNum();
       this.getUserNum(com);
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다!');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) =>{
         game = answer;
       });
