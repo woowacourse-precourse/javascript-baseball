@@ -117,4 +117,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+  test("예외 테스트 - 0 입력", () => {
+    // 새로 추가한 테스트 케이스
+    const randoms = [1, 3, 5];
+    const answers = ["109"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
