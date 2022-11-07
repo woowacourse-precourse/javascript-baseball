@@ -10,7 +10,6 @@ class App {
   gameStartMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.')
   };
-  
 
   computerRandomNumber() {
     const nonDuplicateNumbers = [];
@@ -41,31 +40,31 @@ class App {
     if (new Set(userNumArr).size !== 3) throw new Error("중복된 숫자가 있습니다.");
   }
 
-  checkAnswer(userInput){
+  checkAnswer(userNumArr) {
     let STRIKE = 0;
     let BALL = 0;
     let result = '';
 
-    for(let i=0; i<userInput.length; i++){
-      if(userInput[i] === this.nonDuplicateNumbers[i]) STRIKE ++;
-      else if(userInput.includes(this.nonDuplicateNumbers[i])) BALL ++;
+    for (let i = 0; i < userNumArr.length; i++) {
+      if (userNumArr[i] === this.nonDuplicateNumbers[i]) STRIKE++;
+      else if (userNumArr.includes(this.nonDuplicateNumbers[i])) BALL++;
     }
 
-    if(BALL === 0 && STRIKE === 0) {
-      result = '낫싱'
-    } else if(BALL === 0 && STRIKE !== 0) {
-      result =`${STRIKE}스트라이크`;
-    } else if(BALL !== 0 && STRIKE === 0) {
-      result =`${BALL}볼`;
-    } else if(BALL !== 0 && STRIKE !== 0) {
-      result=`${BALL}볼 ${STRIKE}스트라이크`;
+    if (BALL === 0 && STRIKE === 0) {
+      result = '낫싱';
+    } else if (BALL === 0 && STRIKE !== 0) {
+      result = `${STRIKE}스트라이크`;
+    } else if (BALL !== 0 && STRIKE === 0) {
+      result = `${BALL}볼`;
+    } else if (BALL !== 0 && STRIKE !== 0) {
+      result = `${BALL}볼 ${STRIKE}스트라이크`;
     } else {
       result = '3스트라이크';
     }
 
-    MissionUtils.Console.print(`${result}`);
+    this.resultAnswer(result);
   }
-
+ 
   resultAnswer(result) {
     MissionUtils.Console.print(result);
     if (result !== "3스트라이크") {
