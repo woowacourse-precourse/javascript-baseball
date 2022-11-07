@@ -15,15 +15,13 @@ class User {
   }
 
   validateInputType(userInput) {
-    const inputCastToNumber = Number(userInput);
-    const isNumber = num => !Number.isNaN(num) && typeof num === 'number';
-
-    return isNumber(inputCastToNumber);
+    const typeRegex = /\d/;
+    return typeRegex.test(userInput);
   }
 
   validateInputRange(userInput) {
-    const isZeroContain = [...userInput].includes('0');
-    return isZeroContain === false;
+    const rangeRegex = /[1-9]/g;
+    return rangeRegex.test(userInput);
   }
 
   validateInputDuplicated(userInput) {
