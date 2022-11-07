@@ -15,8 +15,7 @@ class App {
     }
 
     Console.readLine(Console.INPUT, (input) => {
-      if (Input.isValidInput(input)) {
-      }
+      if (Input.isValidInput(input)) Console.print(this.makeAnswer(input));
     });
   }
 
