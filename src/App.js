@@ -75,10 +75,7 @@ class App {
     return ballCount;
   };
 
-  discriminator(userNumbersArray, refNumbersArray) {
-    const strikeCount = this.strikeCounter(userNumbersArray, refNumbersArray);
-    const ballCount = this.ballCounter(userNumbersArray, refNumbersArray);
-
+  discriminator(strikeCount, ballCount) {
     const discrimination =
       ballCount && strikeCount
         ? `${ballCount}볼 ${strikeCount}스트라이크`
@@ -109,10 +106,9 @@ class App {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
       const userNumbersArray = this.stringToNumberArrayConverter(usersInput);
-      const discrimination = this.discriminator(
-        userNumbersArray,
-        refNumbersArray
-      );
+      const strikeCount = this.strikeCounter(userNumbersArray, refNumbersArray);
+      const ballCount = this.ballCounter(userNumbersArray, refNumbersArray);
+      const discrimination = this.discriminator(strikeCount, ballCount);
       this.consolePrinter(discrimination);
 
       if (discrimination !== "3스트라이크") {
