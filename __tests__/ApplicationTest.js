@@ -95,7 +95,7 @@ describe('숫자 야구 게임', () => {
     });
   });
 
-  test('입력값과 정답값이 해당 인스턴스 프로퍼티에 제대로 저장되는지 확인', () => {
+  test('입력값, 정답값, 힌트값을 나타내는 인스턴스 프로퍼티가 제대로 저장되는지 확인', () => {
     const randoms = [1, 3, 5];
     const answers = ['123'];
 
@@ -108,8 +108,15 @@ describe('숫자 야구 게임', () => {
     expect(app.input).toHaveLength(3);
     expect(app.input).toEqual([1, 2, 3]);
     expect(App.isValidInput(app.input)).toEqual(true);
+
     expect(app.answer).toHaveLength(3);
     expect(app.answer).toEqual([1, 3, 5]);
+
+    expect(app.hint).toEqual({
+      ball: 1,
+      strike: 1,
+      nothing: 1,
+    });
   });
 
   test('예외 테스트: 입력값의 길이가 3이 아닌 경우', () => {
@@ -122,7 +129,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow('3개의 숫자만 입력하세요.');
+    }).toThrow('3개의 숫자들을 입력하세요.');
   });
 
   test('예외 테스트: 입력값에 서로 동일한 숫자가 포함된 경우', () => {
