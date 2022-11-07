@@ -18,6 +18,35 @@ class User {
     return this.select;
   };
 };
+const gameStart = (USER) => {
+  startMessage();
+  selectGame(USER);
+};
+
+const startMessage = () => {
+  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+};
+
+const selectGame = (USER) => {
+  let COMPUTER_NUMBER = computerNumber();
+  let USER_NUMBER;
+  let USER_SELECT = "1";
+  while (USER_SELECT !== "2") {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
+          USER.number = String(number).split("");
+          USER_NUMBER = USER.getNumber();
+      });
+      throwHandling(USER_NUMBER);
+      if (numberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
+          MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+          MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (select) => {
+              USER.select = select;
+              USER_SELECT = USER.getSelect();
+          });
+          COMPUTER_NUMBER = computerNumber();
+      };
+  };
+};
 
 const computerNumber = () => {
   const NUMBER = [];
@@ -27,9 +56,17 @@ const computerNumber = () => {
   return NUMBER;
 };
 
-const gameStart = (USER) => {
-  startMessage();
-  selectGame(USER);
+const throwHandling = (user) => {
+  const userSet = new Set(user);
+  if (user.length !== 3) {
+    throw MissionUtils.Console.close();
+  };
+  if (userSet.size !== user.length) {
+    throw MissionUtils.Console.close();
+  };
+  if (user.indexOf("0") >= 0) {
+    throw MissionUtils.Console.close();
+  };
 };
 
 const numberCompare = (computer, user) => {
@@ -63,41 +100,4 @@ const numberCompare = (computer, user) => {
   return false;
 };
 
-const selectGame = (USER) => {
-  let COMPUTER_NUMBER = computerNumber();
-  let USER_NUMBER;
-  let USER_SELECT = "1";
-  while (USER_SELECT !== "2") {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-          USER.number = String(number).split("");
-          USER_NUMBER = USER.getNumber();
-      });
-      throwHandling(USER_NUMBER);
-      if (numberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
-          MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-          MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (select) => {
-              USER.select = select;
-              USER_SELECT = USER.getSelect();
-          });
-          COMPUTER_NUMBER = computerNumber();
-      };
-  };
-}
-
-const startMessage = () => {
-  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-};
-
-const throwHandling = (user) => {
-  const userSet = new Set(user);
-  if (user.length !== 3) {
-    throw MissionUtils.Console.close();
-  };
-  if (userSet.size !== user.length) {
-    throw MissionUtils.Console.close();
-  };
-  if (user.indexOf("0") >= 0) {
-    throw MissionUtils.Console.close();
-  };
-};
 module.exports = App;
