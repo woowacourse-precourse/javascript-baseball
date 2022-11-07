@@ -10,7 +10,7 @@ class App {
   play() {
     this.printGameStartMessage();
     this.init();
-    this.GameStart();
+    this.gameStart();
   }
 
   init() {
@@ -31,10 +31,15 @@ class App {
     return Number(computerNumber);
   }
 
-  GameStart() {
+  gameStart() {
     MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
+      this.getUserNumber(input);
       MissionUtils.Console.close();
     });
+  }
+
+  getUserNumber(input) {
+    this.userNumber = Number(input);
   }
 }
 const app = new App();
