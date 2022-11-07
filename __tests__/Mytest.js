@@ -1,4 +1,23 @@
 const Utils = require("../src/utils/utils.js");
+
+expect.extend({
+  toBeDistinct(received) {
+    const pass =
+      Array.isArray(received) && new Set(received).size === received.length;
+    if (pass) {
+      return {
+        message: () => `expected [${received}] array is unique`,
+        pass: true,
+      };
+    } else {
+      return {
+        message: () => `expected [${received}] array is not to unique`,
+        pass: false,
+      };
+    }
+  },
+});
+
 describe("Utils.checkNumberisOk", () => {
   test("문자가 섞여있으면 예외가 발생해야 한다", () => {
     //given
@@ -49,4 +68,13 @@ describe("Utils.checkNumberisOk", () => {
       new Error("0을 입력하였습니다!")
     );
   });
+});
+
+describe("Utils.setComputerNumber", () => {
+  //given
+  //when
+  const randomNumber = Utils.setComputerNumber();
+  //then
+  expect(randomNumber).toHaveLength(3);
+  expect(randomNumber).toBeDistinct();
 });
