@@ -29,18 +29,16 @@ class App {
   }
 
   checkUserInputValue(userNumber) {
-    let regex = /[^1-9]/g;
-    const userNumberLen = userNumber.length;
-    if (regex.test(userNumber) || userNumberLen !==3) {
-      throw "1~9 사이의 숫자 3개만 입력해주세요";
-    }
     let stringUserNumber = userNumber.split("").map((element) => {
       return Number(element);
     });
+    if (stringUserNumber.includes(NaN)) {
+        throw "숫자 입력해주세요";
+    }
     let userNumberArray = [];
     stringUserNumber.forEach((element) => {
       if (!userNumberArray.includes(element)) {
-        userNumberArray.push(Number(element));
+        userNumberArray.push(element);
       } else {
         throw "중복된 수가 있습니다. 다시 입력하세요!";
       }
@@ -89,6 +87,7 @@ class App {
         if (+gameSetNumber === 1) {
           this.play();
         } else if (+gameSetNumber === 2) {
+          MissionUtils.Console.close()
           throw "게임을 종료합니다";
         } else {
           throw "1,2가 아닌 입력 발생! 프로그램 종료!";
