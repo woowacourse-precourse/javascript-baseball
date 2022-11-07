@@ -14,7 +14,9 @@ class BallCount {
 
   toString() {}
 
-  isThreeStrikes() {}
+  isThreeStrikes() {
+    return this.strikes === 3;
+  }
 }
 
 module.exports = BallCount;
