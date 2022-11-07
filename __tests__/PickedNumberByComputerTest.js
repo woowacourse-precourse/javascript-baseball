@@ -19,7 +19,7 @@ describe("랜덤 숫자 테스트", () => {
     expect(randomNumbers.length).toEqual(3);
   });
 
-  test("랜덤으로 뽑은 숫자 3개 중복 안됨", () => {
+  test("랜덤으로 뽑은 서로 다른 3개의 숫자", () => {
     const randoms = [1, 2, 2, 2, 9];
     mockRandoms(randoms);
 
