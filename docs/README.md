@@ -9,3 +9,8 @@
 7. 게임 재경기 묻는 askReGame 메서드 생성
 8. 유저에게 응답 묻는 askAnswer 메서드 생성
 9. 게임 시작 및 재게임 start, reStart 메서드 생성
+10. 테스트 케이스 작성
+  1. isDuplicated
+  2. validation
+  3. checkUserAnswer
+  4. userAnswerToArray
