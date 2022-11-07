@@ -29,6 +29,20 @@ const computerNumber = () => {
 
 const gameStart = (USER) => {
   startMessage();
+  selectGame(USER);
+};
+
+const throwHandling = (length) => {
+  if (length !== 3) {
+    throw MissionUtils.Console.close();
+  };
+};
+
+const startMessage = () => {
+  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+};
+
+const selectGame = (USER) => {
   let COMPUTER_NUMBER = computerNumber();
   let USER_NUMBER;
   let USER_SELECT = "1";
@@ -47,17 +61,7 @@ const gameStart = (USER) => {
       COMPUTER_NUMBER = computerNumber();
     };
   };
-};
-
-const throwHandling = (length) => {
-  if (length !== 3) {
-    throw MissionUtils.Console.close();
-  };
-};
-
-const startMessage = () => {
-  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-};
+}
 
 const numberCompare = (computer, user) => {
   let BALL_SCORE = 0;
