@@ -110,6 +110,9 @@ class App {
     Console.print(error);
     this.#exitApp();
   }
+  #exitApp() {
+    Console.close();
+  }
   play() {}
 }
 

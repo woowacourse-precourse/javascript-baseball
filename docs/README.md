@@ -101,7 +101,7 @@
 
 ## 10. 앱 종료 기능(#exitApp) 구현
 
-- [ ] 1. `Console.close`를 호출해 입력 종료
+- [x] 1. `Console.close`를 호출해 입력 종료
 
 ## 11. 게임 지속 기능(#continueGame) 구현
 
