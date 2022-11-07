@@ -35,7 +35,7 @@ class App {
     this.checkOverlap(number);
   }
 
-  checkBall(COMNUM, USERNUM) {
+  countBall(COMNUM, USERNUM) {
     let ballCnt = 0;
     if (COMNUM[0] == USERNUM[1]) ballCnt++;
     if (COMNUM[0] == USERNUM[2]) ballCnt++;
@@ -46,7 +46,7 @@ class App {
     return ballCnt;
   }
 
-  checkStrike(COMNUM, USERNUM) {
+  countStrike(COMNUM, USERNUM) {
     let strikeCnt = 0;
     if (COMNUM[0] == USERNUM[0]) strikeCnt++;
     if (COMNUM[1] == USERNUM[1]) strikeCnt++;
@@ -66,8 +66,8 @@ class App {
   }
 
   printResult(COM_NUMBER, USER_NUMBER) {
-    const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
-    const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
+    const BALL_CNT = this.countBall(COM_NUMBER, USER_NUMBER);
+    const STRIKE_CNT = this.countStrike(COM_NUMBER, USER_NUMBER);
 
     if (this.checkNothing(BALL_CNT, STRIKE_CNT)) {
       MissionUtils.Console.print("낫싱\n");
