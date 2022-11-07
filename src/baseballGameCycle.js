@@ -10,6 +10,7 @@ function baseballGameCycle(randomNumbers) {
     if (!checkInputAvailable(answer)) {
       throw new Error("잘못된 값을 입력했습니다.");
     }
+
     const result = getResult(randomNumbers, answer);
     MissionUtils.Console.print(result);
     result.length > 10 ? getRestartOption() : baseballGameCycle(randomNumbers);
