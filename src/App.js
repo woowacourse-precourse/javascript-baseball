@@ -3,28 +3,14 @@ class App {
   play() {    
     let computerRandomNum = this.createRandomNumber();
     let userInputNum=this.InputUserNumber();
-    MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
-    //console.log(userInputNum);
-    while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
-     // console.log(userInputNum+"di");
-      
 
-      //let lastNum=userInputNum;
-      //console.log(userInputNum);
-      //if(!this.checkThreeStrike(computerRandomNum, userInputNum)){
-        
-        userInputNum=this.InputUserNumber();
-        //console.log(userInputNum+" 3");
-      //}
-      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));    
-
-      }
-
+    if(this.checkUserNumVaildation(userInputNum)){
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+    }
     
-    // if(this.checkThreeStrike(computerRandomNum, userInputNum)){
-    //   this.selectGameEnd(userInputNum);
-    // }
-  
+    while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
+      userInputNum=this.InputUserNumber();  
+      }
   }
 
   createRandomNumber() {
@@ -42,9 +28,7 @@ class App {
     let userInput=0;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNum) => {
       userInput=userNum;
-      if(userNum==1||userNum==2){
-        this.selectGameEnd
-      }})
+    })
       return userInput;
     }
       /*스트라이크인지 점수를 계산하는 기능*/
@@ -92,8 +76,6 @@ class App {
     if(this.strike(computerRandomNum, userInputNum)==3){
       MissionUtils.Console.print("3스트라이크");
       console.log("3개를 모두 맞히셨습니다! 게임 종료");
-  
-      //userInputNum=this.InputUserNumber();
       this.selectGameEnd(userInputNum);
       return true;
     }
@@ -137,21 +119,16 @@ class App {
     }
   /*입력 수가 유효한지 확인하는 기능*/
   checkUserNumVaildation(userInputNum){
-    // try{
-        if(!this.checkUserNumLength(userInputNum)){
-          throw "입력이 잘못되었습니다";
-        }
-        if(!this.checkUserNumIsNum(userInputNum)){
-          throw "입력이 잘못되었습니다";
-        }
-        if(!this.checkUserNumIsDifferent(userInputNum)){
-          throw "입력이 잘못되었습니다";
-      }
-    // }catch(e){
-    //     MissionUtils.Console.print("입력이 잘못되었습니다.");
-    //     throw "게임 종료"
-    //   }
-      return true;
+    if(!this.checkUserNumLength(userInputNum)){
+      throw "입력이 잘못되었습니다";
+    }
+    if(!this.checkUserNumIsNum(userInputNum)){
+      throw "입력이 잘못되었습니다";
+    }
+    if(!this.checkUserNumIsDifferent(userInputNum)){
+      throw "입력이 잘못되었습니다";
+    }
+    return true;
     }
   /*게임 종료 여부 선택하는 기능*/
   selectGameEnd(userInputNum){
