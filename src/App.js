@@ -24,6 +24,9 @@ class App {
     while (select === "1") {
       select = this.gameplay();
     }
+    if (select === "2") MissionUtils.Console.close(); // 프로그램 종료.
+    else if (select !== "1" && select !== "2")
+      throw new Error("잘못된 입력입니다. 프로그램을 종료합니다.");
   }
 
   makeAnswer() {
@@ -116,7 +119,6 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (select) => {
         selectNum = select;
-        MissionUtils.Console.close();
       }
     );
     return selectNum;
