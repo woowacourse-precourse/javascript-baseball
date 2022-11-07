@@ -36,7 +36,6 @@ class App {
 
   // 기능 3
   getUserNumber(computerNumber) {
-
     MissionUtils.Console.readLine(MESSAGE.INPUT, (userNumber) => {
       this.checkValidityUserNumber(userNumber);
 
@@ -54,7 +53,6 @@ class App {
 
   // 기능 4
   checkValidityUserNumber(userNumber) {
-
     const userNumberList = [...userNumber];
     const [firstNumber, secondNumber, thirdNumber] = userNumberList;
 
@@ -79,9 +77,7 @@ class App {
   countBallAndStrike(computerNumber, userNumber) {
     const computerNumberList = Array.from(computerNumber);
     const userNumberList = Array.from(userNumber);
-
     let ballOrStrike = NUMBER.ZERO;
-    let ball = NUMBER.ZERO;
     let strike = NUMBER.ZERO;
 
     userNumberList.forEach((userNumber) => {
@@ -99,7 +95,7 @@ class App {
         strike += 1;
       }
     }
-    ball = ballOrStrike - strike;
+    const ball = ballOrStrike - strike;
 
     return [ball, strike];
   }
@@ -143,7 +139,6 @@ class App {
 
   // 기능 8
   checkUserChoiceNumber(userChoiceNumber) {
-
     if (userChoiceNumber == NUMBER.RESTART) {
       this.StartGame();
       return;
