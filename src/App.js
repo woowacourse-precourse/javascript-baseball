@@ -1,5 +1,13 @@
+const BaseballGameTools = require('./BaseballGameTools');
+
 class App {
-  play() {}
+  constructor() {
+    this.answerArray = [];
+  }
+
+  shuffleNumber() {
+    this.answerArray = BaseballGameTools.getThreeNumber();
+  }
 }
 
 module.exports = App;
