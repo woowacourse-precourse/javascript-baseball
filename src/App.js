@@ -78,6 +78,8 @@ class App {
       throw new Error("숫자를 입력해야 합니다.");
     } else if (number.length !== 3) {
       throw new Error("세자리 숫자를 입력해야 합니다.");
+    } else if (number.includes("0")) {
+      throw new Error("1 부터 9까지 숫자여야 합니다.");
     } else if (this.checkSameNumber(number)) {
       throw new Error("서로 다른 숫자를 입력해야 합니다.");
     }
