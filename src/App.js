@@ -72,11 +72,8 @@ class App {
     MissionUtils.Console.print(MESSAGE.SUCCESS);
 
     MissionUtils.Console.readLine(MESSAGE.RESTART_OR_EXIT, (input) => {
-      if (input === OPTION.RESTART) this.play();
-      if (input === OPTION.EXIT) {
-        this.exit();
-        return;
-      }
+      if (input === OPTION.RESTART) return this.play();
+      if (input === OPTION.EXIT) return this.exit();
       if (input !== (OPTION.RESTART || OPTION.EXIT)) throw new Error(ERROR.INVALID_INPUT);
     });
   };
