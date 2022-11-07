@@ -3,14 +3,14 @@ class GetComputerInput {
     this.missionRandom = require("@woowacourse/mission-utils").Random;
   }
   makeRandomNumbers() {
-    const newArr = [];
+    const storeNumberArray = [];
     while (newArr.length < 3) {
-      const i = this.missionRandom.pickNumberInRange(1, 9);
-      if (!newArr.includes(i)) {
-        newArr.push(i);
+      const storeNumber = this.missionRandom.pickNumberInRange(1, 9);
+      if (!storeNumberArray.includes(storeNumber)) {
+        storeNumberArray.push(storeNumber);
       }
     }
-    return newArr.join("");
+    return storeNumberArray.join("");
   }
 }
 
