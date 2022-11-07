@@ -7,7 +7,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("게임 로직 테스트", () => {
+describe("게임 문구 테스트", () => {
   test("시작 문구", () => {
     const app = new App();
     expect(() => "...").toThrow("시작 문구가 나오지 않음");
@@ -27,7 +27,9 @@ describe("게임 로직 테스트", () => {
     const app = new App();
     expect(() => "...").toThrow("종료 문구가 나오지 않음");
   });
+});
 
+describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크1", () => {
     const app = new App();
     expect(() => "...").toThrow("입력 input의 타입은 number여야 합니다.");
@@ -49,7 +51,9 @@ describe("게임 로직 테스트", () => {
       "입력 input은 중복되지 않은 숫자로 이루어져야 합니다."
     );
   });
+});
 
+describe("게임 로직 테스트", () => {
   test("게임 : 판별로직1", () => {
     const app = new App();
     expect(() => "...").toEqual("3 스트라이크");
@@ -94,7 +98,9 @@ describe("게임 로직 테스트", () => {
     const app = new App();
     expect(() => "...").toEqual("1스트라이크 1볼 1낫싱");
   });
+});
 
+describe("종료/재시작 테스트", () => {
   test("종료 후 선택 : 재시작", () => {
     "재시작";
   });
