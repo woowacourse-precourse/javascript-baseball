@@ -36,4 +36,11 @@ describe('init()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
+
+  test('길이가 3인 배열을 생성한다.', () => {
+    const app = new App();
+    const threeRandomArray = app.init();
+
+    expect(threeRandomArray).toHaveLength(3);
+  });
 });
