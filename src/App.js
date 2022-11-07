@@ -13,6 +13,7 @@ class App {
     this.answer = [];
     while (this.answer.length < 3) {
       const ANSWER = Random.pickNumberInRange(1, 9);
+
       if (!this.answer.includes(ANSWER)) {
         this.answer.push(ANSWER);
       }
@@ -37,6 +38,7 @@ class App {
 
     const SET = new Set(INPUT_ARRAY);
     const DEDUPLICATION = [...SET];
+
     if (DEDUPLICATION.length !== 3)
       throw new Error('중복된 값은 입력할 수 없습니다.');
 
@@ -61,6 +63,7 @@ class App {
     let resultText = '';
     const BALL = this.ball;
     const STRIKE = this.strike;
+
     if (BALL !== 0) resultText += `${BALL}볼 `;
     if (STRIKE !== 0) resultText += `${STRIKE}스트라이크`;
     if (resultText === '') resultText += '낫싱';
@@ -80,13 +83,11 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (input) => {
         if (input === '1') return this.play();
-        if (input === '2') throw new Error('게임 종료');
+        if (input === '2') return Console.close();
         throw new Error('정해진 값을 입력해주세요.');
       }
     );
   }
 }
-const app = new App();
-app.play();
 
 module.exports = App;
