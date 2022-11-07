@@ -55,7 +55,9 @@ function gameResult(computerNumber, userNumber) {
   const strike = countStrike(computerNumber, userNumber);
   const ball = countBall(computerNumber, userNumber);
   if (strike === 3) {
-    //
+    MissionUtils.Console.print("3스트라이크");
+    // 게임 종료 후 재시작 여부 알기
+    reStart();
   }
   if ((strike === 0) & (ball === 0)) {
     MissionUtils.Console.print("낫싱");
@@ -81,5 +83,7 @@ function countBall(computerNumber, userNumber) {
   return [...computerNumber].filter((element) => userNumber.includes(element))
     .length;
 }
+
+function reStart() {}
 
 module.exports = App;
