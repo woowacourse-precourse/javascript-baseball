@@ -56,5 +56,5 @@
 ### 🖥️ printResult()
 - compare()에서 만들어 낸 값에 따라 출력한다.
     - 스트라이크, 볼, 낫싱 수 출력
-### 🖥️ game(answer)
+### 🖥️ newGame(answer)
 - 새 답안을 만들고 게임을 시작한다.
