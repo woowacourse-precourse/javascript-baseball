@@ -24,7 +24,7 @@ class Controller {
     }
 
     const hint = strikes === 0 && balls === 0
-      ? this.makeHint(strikes, balls) : '낫싱';
+      ? '낫싱' : this.makeHint(strikes, balls);
     return hint;
   }
 
