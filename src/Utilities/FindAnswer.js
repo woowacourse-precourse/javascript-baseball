@@ -11,8 +11,7 @@ class FindAnswer {
   getAnswer(computerNum, userInput) {
     this.strike = 0;
     this.ball = 0;
-    this.isStrike(computerNum, userInput);
-    this.isBall(computerNum, userInput);
+    this.isStrikeOrBall(computerNum, userInput);
 
     const strikeText = this.strike ? `${this.strike}스트라이크` : '';
     const ballText = this.ball ? `${this.ball}볼` : '';
@@ -26,20 +25,13 @@ class FindAnswer {
     return { strike: this.strike, ball: this.ball };
   }
 
-  isStrike(computerNum, userInput) {
+  isStrikeOrBall(computerNum, userInput) {
     computerNum.split('').forEach((num, idx) => {
       if (computerNum[idx] === userInput[idx]) {
         this.strike += 1;
+        return;
       }
-    });
-  }
-
-  isBall(computerNum, userInput) {
-    computerNum.split('').forEach((num, idx) => {
-      if (
-        computerNum[idx] !== userInput[idx] &&
-        userInput.includes(computerNum[idx])
-      ) {
+      if (userInput.includes(computerNum[idx])) {
         this.ball += 1;
       }
     });
