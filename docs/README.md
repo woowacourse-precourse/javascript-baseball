@@ -14,12 +14,12 @@
 
 # ✅ 체크 사항
 
-- [ ] **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가했는가
-- [ ] **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가했는가
-- [ ] [JavaScript 코드 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type)을 지켰는가
-- [ ] indent depth가 3을 넘는 것이 있는가
-- [ ] 함수가 한 가지 일만 하는가
-- [ ] Jest를 이용하여 기능 목록을 테스트하였는가
+- [x] **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가했는가
+- [x] **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가했는가
+- [x] [JavaScript 코드 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type)을 지켰는가
+- [x] indent depth가 3을 넘는 것이 있는가
+- [x] 함수가 한 가지 일만 하는가
+- [x] Jest를 이용하여 기능 목록을 테스트하였는가
 
 # 📑 학습 정리, 트러블 슈팅, 회고
 
