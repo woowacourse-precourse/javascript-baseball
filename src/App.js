@@ -27,7 +27,17 @@ class App {
     let userInputArray = [];
     MissionUtils.Console.readLine("숫자를 입력하세요: ", (answer) => {
       this.pushUserInput(userInputArray, answer);
+      //판별함수
+      //재시작, 종료
     });
+  }
+
+  countStrike(comArr, userArr) {
+    const countedStrikeArr = comArr.filter((element, index, array) => {
+      return array[index] === userArr[index];
+    });
+    const COUNTED_STRIKE = countedStrikeArr.length;
+    return COUNTED_STRIKE;
   }
 
   play() {}

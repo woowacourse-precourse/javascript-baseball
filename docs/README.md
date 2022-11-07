@@ -10,3 +10,7 @@
 2. 유저의 input 에 응답하기
 
 - 유저의 input과 randomComputerArray 비교하여 응답하기
+
+3. strike 를 판별하기
+
+- 유저의 input과 randomComputerArray를 비교하여 스트라이크를 판별하여 count
