@@ -126,4 +126,23 @@ function selectedNumberException(selectedNumber) {
   }
 }
 
+async function getAnswer(computerNumber) {
+  const userNumber = await inputNumber(Constants.INPUT_NUMBER_MESSAGE);
+  userNumberException(userNumber);
+
+  const strike = countStrike(computerNumber, userNumber);
+  const ball = countBall(computerNumber, userNumber);
+  printResult(ball, strike);
+
+  if (isAnswer(strike)) {
+    printMessage(Constants.WIN_MESSAGE);
+    const selectedNumber = Number(await inputNumber(Constants.END_MESSAGE));
+    selectedNumberException(selectedNumber);
+
+    if (selectedNumber === 1) {
+      // 새로운 게임 시작
+    }
+  }
+}
+
 module.exports = App;
