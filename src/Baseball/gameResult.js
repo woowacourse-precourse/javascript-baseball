@@ -5,28 +5,22 @@ class getGameResult {
     this.strikeNum = 0;
   }
 
-  BallCounter(userInputNum, COMPUTER_NUM) {
+  gameCounter(userInputNum, COMPUTER_NUM) {
     let ball = 0;
-    userInputNum.forEach((curValue) => {
-      if (COMPUTER_NUM.includes(curValue)) ball += 1;
-    });
-
-    return ball;
-  }
-
-  StrikeCounter(userInputNum, COMPUTER_NUM) {
     let strike = 0;
+
     userInputNum.forEach((curValue, index) => {
       if (curValue === COMPUTER_NUM[index]) strike += 1;
+      else if (COMPUTER_NUM.includes(curValue)) ball += 1;
     });
 
-    return strike;
+    return [ball, strike];
   }
 
   getGameHint(userInputNum, COMPUTER_NUM) {
     const [BALL, STRIKE] = [
-      this.BallCounter(userInputNum, COMPUTER_NUM),
-      this.StrikeCounter(userInputNum, COMPUTER_NUM),
+      this.gameCounter(userInputNum, COMPUTER_NUM)[0],
+      this.gameCounter(userInputNum, COMPUTER_NUM)[1],
     ];
 
     this.strikeNum = STRIKE;
