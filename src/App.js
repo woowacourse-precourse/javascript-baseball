@@ -38,15 +38,15 @@ class App {
 
     if (ballStrikeCount.strike === RULE.LENGTH) {
       Console.print(GAME_MESSAGE.CORRECT);
-      this.#readRestartInput();
+      this.#readRestartOrEndInput();
       return;
     }
 
     this.#readUserNumber();
   }
 
-  #readRestartInput() {
-    Console.readLine(GAME_MESSAGE.FINISH, this.#selectRestartOrEnd.bind(this));
+  #readRestartOrEndInput() {
+    Console.readLine(GAME_MESSAGE.RESTART_OR_END, this.#selectRestartOrEnd.bind(this));
   }
 
   #selectRestartOrEnd(input) {

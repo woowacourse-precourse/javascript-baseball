@@ -13,7 +13,7 @@ class BaseballUser {
 
   static #validateNumber(digits) {
     if (BaseballUser.#isIncludeCharacter(digits) || BaseballUser.#isIncludeZero(digits)) {
-      throw new Error(ERROR_MESSAGE.EXTRA_CHARACTER);
+      throw new Error(ERROR_MESSAGE.INVALID_CHARACTER);
     }
 
     if (BaseballUser.#isInvalidLength(digits)) {
