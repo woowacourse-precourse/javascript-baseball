@@ -1,12 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
-const IsValid = require("./IsValid");
+const EdgeCase = require("./EdgeCase");
 const Compare = require("./Compare");
 class App {
   constructor() {
     this.CORRECT = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
     this.computer = new Computer().createNumber();
-    this.isValid = new IsValid();
+    this.edgeCase = new EdgeCase();
     this.compare = new Compare();
   }
   play() {
@@ -18,7 +18,7 @@ class App {
     let user = [];
     let result = "";
     MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-      if (this.isValid.isValid(answer)) {
+      if (this.edgeCase.isValid(answer)) {
         answer.split("").forEach((x) => user.push(+x));
         result = this.compare.printHint(computer, user);
         MissionUtils.Console.print(result);
