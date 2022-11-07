@@ -4,6 +4,7 @@ const { EXCEPTION } = require('../utils/constants');
 
 class BaseBallException extends Exception {
   #input;
+
   #errorMessage = '임의의 다른 세 가지 숫자를 해야합니다!!';
 
   constructor(input) {
