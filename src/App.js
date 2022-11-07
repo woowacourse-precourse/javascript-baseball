@@ -1,20 +1,26 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  INPUT_ERROR_MESSAGE,
+  RESTART_MESSAGE,
+  BASE_MESSAGE,
+  JUDGE_MESSAGE,
+} = require("./constant");
 
 class App {
   userInputErrorCheckList = {
     inputValueEmptyCheck: (usersInput) => {
       if (usersInput.indexOf(" ") !== -1) {
-        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
+        throw INPUT_ERROR_MESSAGE.NO_EMPTY;
       }
     },
     inputNumberLengthCheck: (usersInput) => {
       if (usersInput.length !== 3) {
-        throw "3자리의 숫자를 입력해주세요.";
+        throw INPUT_ERROR_MESSAGE.ONLY_THREE;
       }
     },
     inputValueStringCheck: (usersInput) => {
       if (isNaN(usersInput)) {
-        throw "숫자만 입력해주세요.";
+        throw INPUT_ERROR_MESSAGE.ONLY_NUMBER;
       }
     },
   };
@@ -78,31 +84,31 @@ class App {
   discriminator(strikeCount, ballCount) {
     const discrimination =
       ballCount && strikeCount
-        ? `${ballCount}볼 ${strikeCount}스트라이크`
-        : (ballCount ? `${ballCount}볼` : "") +
-            (strikeCount ? `${strikeCount}스트라이크` : "") || "낫싱";
+        ? `${ballCount + JUDGE_MESSAGE.BALL} ${
+            strikeCount + JUDGE_MESSAGE.STRIKE
+          }`
+        : (ballCount ? `${ballCount + JUDGE_MESSAGE.BALL}` : "") +
+            (strikeCount ? `${strikeCount + JUDGE_MESSAGE.STRIKE}` : "") ||
+          JUDGE_MESSAGE.NOTHING;
 
     return discrimination;
   }
 
   reStartSelector() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (answer) => {
-        if (answer.trim() === "1") {
-          const newRefNumbersArray = this.refNumbersArrayGetter();
-          this.gameStarter(newRefNumbersArray);
-        } else if (answer.trim() === "2") {
-          MissionUtils.Console.close();
-        } else {
-          throw "1또는 2만 입력할 수 있습니다.";
-        }
+    MissionUtils.Console.readLine(RESTART_MESSAGE.QUESTION, (answer) => {
+      if (answer.trim() === "1") {
+        const newRefNumbersArray = this.refNumbersArrayGetter();
+        this.gameStarter(newRefNumbersArray);
+      } else if (answer.trim() === "2") {
+        MissionUtils.Console.close();
+      } else {
+        throw RESTART_MESSAGE.ERROR;
       }
-    );
+    });
   }
 
   gameStarter(refNumbersArray) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    MissionUtils.Console.readLine(BASE_MESSAGE.INPUT_REQUEST, (answer) => {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
       const userNumbersArray = this.stringToNumberArrayConverter(usersInput);
@@ -111,17 +117,17 @@ class App {
       const discrimination = this.discriminator(strikeCount, ballCount);
       this.consolePrinter(discrimination);
 
-      if (discrimination !== "3스트라이크") {
+      if (discrimination !== JUDGE_MESSAGE.THREE_STRIKE) {
         this.gameStarter(refNumbersArray);
-      } else if (discrimination === "3스트라이크") {
-        this.consolePrinter("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      } else if (discrimination === JUDGE_MESSAGE.THREE_STRIKE) {
+        this.consolePrinter(BASE_MESSAGE.END);
         this.reStartSelector();
       }
     });
   }
 
   play() {
-    this.consolePrinter("숫자 야구 게임을 시작합니다.");
+    this.consolePrinter(BASE_MESSAGE.START);
     const refNumbersArray = this.refNumbersArrayGetter();
     this.gameStarter(refNumbersArray);
   }
