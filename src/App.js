@@ -85,6 +85,27 @@ class App {
       return false;
     }
   };
+
+  gameStart(COMPUTER_NUMBER) {
+    MissionUtils.Console.readLine('숫자를 입력해주세요.', (input) => {
+
+      let userInput = input.split('');
+
+      this.checkUserInput(userInput);
+
+      const SCORE = this.checkingScore(userInput, COMPUTER_NUMBER);
+      const ANSWER = this.checkResultScore(SCORE);
+
+      MissionUtils.Console.print(ANSWER);
+
+      if (this.checkStrike(SCORE)) {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        this.gameRestart();
+      } else {
+        this.gameStart(COMPUTER_NUMBER);
+      }
+    });
+  };
 }
 
 module.exports = App;
