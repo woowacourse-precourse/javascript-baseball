@@ -33,8 +33,8 @@ class App {
   }
   #isRestart(submit) {
     submit = Number(submit);  
-    if(submit === 1) this.play();
-    if(submit === 2) {
+    if(submit === constants.RESTART_CODES.restart) this.play();
+    if(submit === constants.RESTART_CODES.end) {
       Print.GameMessage.gameover();
       MissionUtils.Console.close();
     }

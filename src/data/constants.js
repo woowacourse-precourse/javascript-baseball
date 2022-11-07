@@ -17,7 +17,12 @@ const RESULT_COUNT = {
   strike: '스트라이크',
   ball: '볼',
   nothing: '낫싱',
-};
+}
+
+const RESTART_CODES = {
+  restart: 1,
+  end: 2,
+}
 
 const CLEAR_CONDITION = 3;
 
@@ -25,3 +30,4 @@ exports.ERROR_MESSAGE = ERROR_MESSAGE;
 exports.GAME_MESSAGE = GAME_MESSAGE;
 exports.RESULT_COUNT = RESULT_COUNT;
 exports.CLEAR_CONDITION = CLEAR_CONDITION;
+exports.RESTART_CODES = RESTART_CODES;
