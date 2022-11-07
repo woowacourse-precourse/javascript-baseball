@@ -47,13 +47,13 @@ class App {
   }
   printGameStartMessage() {
     const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-    Console.print(GAME_START_MESSAGE);
+    MissionUtils.Console.print(GAME_START_MESSAGE);
   }
   getInputNumber() {
     const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 : ";
 
     let inputNumber;
-    Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
+    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       this.handleGameException(input);
       inputNumber = this.joinNumberToString(input);
     });
@@ -146,14 +146,14 @@ class App {
     const NOTHING_MESSAGE = "낫싱";
 
     if (numberOfBall || numberOfStrike) {
-      Console.print(GAME_RESULT_MESSAGE);
+      MissionUtils.Console.print(GAME_RESULT_MESSAGE);
     } else {
-      Console.print(NOTHING_MESSAGE);
+      MissionUtils.Console.print(NOTHING_MESSAGE);
     }
   }
   printGameEndMessage() {
     const GAME_END_MESSAGE = `${this.NUMBER_OF_DIGITS}개의 숫자를 모두 맞히셨습니다! 게임 종료`;
-    Console.print(GAME_END_MESSAGE);
+    MissionUtils.Console.print(GAME_END_MESSAGE);
   }
   getInputRestart() {
     const RESTART = 1;
@@ -162,7 +162,7 @@ class App {
     const INPUT_RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART}, 종료하려면 ${EXIT}${POSTPOSITION} 입력하세요.\n`;
 
     let inputRestart;
-    Console.readLine(INPUT_RESTART_MESSAGE, (input) => {
+    MissionUtils.Console.readLine(INPUT_RESTART_MESSAGE, (input) => {
       this.handleRestartException(input);
       inputRestart = input;
     });
