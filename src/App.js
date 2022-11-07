@@ -34,7 +34,7 @@ class App {
   }
 
   inputNumber(computerNumber) {
-    this.takeInput(this.MESSAGES.PLEASE_NUMBER, (enteredNumber) => {
+    const takeInputCallback = (enteredNumber) => {
       if (!this.isValidNumber(enteredNumber)) {
         throw new Error();
       }
@@ -48,7 +48,9 @@ class App {
         return;
       }
       this.inputNumber(computerNumber);
-    });
+    };
+
+    this.takeInput(this.MESSAGES.PLEASE_NUMBER, takeInputCallback);
   }
 
   isValidNumber(enteredNumber) {
@@ -114,7 +116,7 @@ class App {
   }
 
   askRestart() {
-    this.takeInput(this.MESSAGES.ASK_RESTART, (answer) => {
+    const takeInputCallback = (answer) => {
       if (answer === "1") {
         this.gameStart();
         return;
@@ -124,7 +126,9 @@ class App {
         return;
       }
       throw new Error();
-    });
+    };
+
+    this.takeInput(this.MESSAGES.ASK_RESTART, takeInputCallback);
   }
 
   printMessage(message) {
