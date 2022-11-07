@@ -33,6 +33,7 @@ class App {
         computerRandomNumber.push(number);
       }
     }
+    MissionUtils.Console.print(computerRandomNumber);
     return computerRandomNumber;
   }
 
@@ -88,7 +89,7 @@ class App {
       try {
         checkNumber(answer);
         if (answer === '2') MissionUtils.Console.close();
-        if (answer === '1') {
+        else if (answer === '1') {
           this.computerRandomNumber = this.createRandomNumber();
           this.getUserNumber();
         }
