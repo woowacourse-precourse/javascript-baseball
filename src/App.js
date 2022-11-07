@@ -19,6 +19,7 @@ class User {
     return this.select;
   };
 };
+
 const computerNumber = () => {
   const NUMBER = [];
   while (NUMBER.length !== 3) {
@@ -32,8 +33,12 @@ const gameStart = (USER) => {
   selectGame(USER);
 };
 
-const throwHandling = (length) => {
-  if (length !== 3) {
+const throwHandling = (user) => {
+  const userSet = new Set(user);
+  if (user.length !== 3) {
+    throw MissionUtils.Console.close();
+  };
+  if(userSet.size !== user.length){
     throw MissionUtils.Console.close();
   };
 };
@@ -51,7 +56,7 @@ const selectGame = (USER) => {
       USER.number = String(number).split("");
       USER_NUMBER = USER.getNumber();
     });
-    throwHandling(USER_NUMBER.length);
+    throwHandling(USER_NUMBER);
     if (numberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (select) => {
@@ -92,5 +97,5 @@ const numberCompare = (computer, user) => {
   };
   MissionUtils.Console.print(`${BALL_SCORE - STRIKE_SCORE}볼 ${STRIKE_SCORE}스트라이크`);
   return false;
-}
+};
 module.exports = App;
