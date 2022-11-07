@@ -63,27 +63,27 @@ describe("Controller 클래스 기능 테스트", () => {
   test("입력과 정답 비교 1", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([1,2,3],[1,2,3]);
-    expect(result).toEqual('');
+    expect(result).toEqual(['3스트라이크', true]);
   });
   test("입력과 정답 비교 2", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([3,2,1],[1,2,3]);
-    expect(result).toEqual('1스트라이크 2볼');
+    expect(result).toEqual(['1스트라이크 2볼', false]);
   });
   test("입력과 정답 비교 3", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([4,5,6],[1,2,3]);
-    expect(result).toEqual('낫싱');
+    expect(result).toEqual(['낫싱', false]);
   });
   test("입력과 정답 비교 4", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([4,5,6],[1,2,4]);
-    expect(result).toEqual('1볼');
+    expect(result).toEqual(['1볼', false]);
   });
   test("입력과 정답 비교 4", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([4,5,6],[4,2,1]);
-    expect(result).toEqual('1스트라이크');
+    expect(result).toEqual(['1스트라이크', false]);
   });
   Console.close();
 });
