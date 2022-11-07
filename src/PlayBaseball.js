@@ -69,20 +69,16 @@ function isBall(compareIter, computerNum, userNum) {
 }
 
 function getCompareResult(numOfBall, numOfStrike) {
-    let isBothExist = false;
     if(numOfBall > 0 && numOfStrike > 0) {
-        isBothExist = true;
+        printMessage.printBoth(numOfBall, numOfStrike);
     }
-    if(numOfBall > 0) {
+    else if(numOfBall > 0) {
         printMessage.printNumOfBall(numOfBall);
     }
-    if(isBothExist) {
-        printMessage.printSpace();
-    }
-    if(numOfStrike > 0) {
+    else if(numOfStrike > 0) {
         printMessage.printNumOfStrike(numOfStrike);
     }
-    if(numOfBall == 0 && numOfStrike == 0){
+    else if(numOfBall == 0 && numOfStrike == 0){
         printMessage.printNothing();
     }
 }

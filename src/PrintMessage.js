@@ -15,7 +15,13 @@ const printUserNumInput = () => {
     });
 }
 
-function printNumOfStrike(numOfStrike){
+function printBoth(numOfBall, numOfStrike) {
+    const NUM_OF_BALL = `${numOfBall}볼`;
+    const NUM_OF_STRIKE = `${numOfStrike}스트라이크`;
+    MissionUtils.Console.print(`${NUM_OF_BALL} ${NUM_OF_STRIKE}`);
+}
+
+function printNumOfStrike(numOfStrike) {
     if(numOfStrike > 0) {
         const NUM_OF_STRIKE_MESSAGE = `${numOfStrike}스트라이크`;
         MissionUtils.Console.print(NUM_OF_STRIKE_MESSAGE);
@@ -54,6 +60,7 @@ function printGameWin() {
 module.exports = {
     printGameStart,
     printUserNumInput,
+    printBoth,
     printNumOfStrike,
     printUserContinueInput,
     printNumOfBall,
