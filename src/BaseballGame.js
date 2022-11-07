@@ -1,7 +1,11 @@
-const { Console, Random } = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { validate } = require('./utils/validation');
 const constants = require('./utils/constants');
-const { convertToNumberArray } = require('./utils/gameUtil');
+const {
+  convertToNumberArray,
+  createResultMessage,
+  createComputerNumber,
+} = require('./utils/gameUtil');
 
 class BaseballGame {
   constructor() {
@@ -11,7 +15,7 @@ class BaseballGame {
 
   start() {
     Console.print(constants.START_MESSAGE);
-    this.computerNumber = this.createComputerNumber();
+    this.computerNumber = createComputerNumber();
     this.getUserGuess();
   }
 
@@ -44,7 +48,7 @@ class BaseballGame {
 
   playGame() {
     const { strike, ball } = this.getResult();
-    const resultMessage = this.createResultMessage(strike, ball);
+    const resultMessage = createResultMessage(strike, ball);
     Console.print(resultMessage);
 
     if (strike === constants.DIGIT) {
@@ -71,22 +75,6 @@ class BaseballGame {
       return indexOfComputerNumber !== -1 && indexOfComputerNumber !== idx;
     });
     return ball.length;
-  }
-
-  createResultMessage(strike, ball) {
-    let resultMessage = '';
-    if (strike === 0 && ball === 0) return constants.NOTHING;
-    if (ball) resultMessage += `${ball}${constants.BALL} `;
-    if (strike) resultMessage += `${strike}${constants.STRIKE}`;
-    return resultMessage;
-  }
-
-  createComputerNumber() {
-    const computerNumber = new Set();
-    while (computerNumber.size < constants.DIGIT) {
-      computerNumber.add(Random.pickNumberInRange(1, 9));
-    }
-    return Array.from(computerNumber);
   }
 }
 
