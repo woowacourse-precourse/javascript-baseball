@@ -38,6 +38,7 @@
 - New Failed occur : expect(jest.fn()).toHaveBeenCalledWith(...expected)
   Expected: StringContaining "낫싱"
   Received: "숫자 야구 게임을 시작합니다."
+[@] 해답? : 아마 숫자 야구 게임을 시작합니다 라는 문자가 한번더 나와서 오류가 발생하는듯 싶다. 이 로직 수정
 
 
 ## 코드 수정
