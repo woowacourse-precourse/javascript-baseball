@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { MESSAGE, ERROR_MESSAGE, RESULT_MESSAGE } = require("./constants/MessageConstants");
 
 class App {
   play() {
@@ -14,7 +15,7 @@ class App {
 
   // 기능 1
   PrintGameStartPhrase() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.START);
   }
 
   // 기능 2
@@ -35,7 +36,7 @@ class App {
   // 기능 3
   getUserNumber(computerNumber) {
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
+    MissionUtils.Console.readLine(MESSAGE.INPUT, (userNumber) => {
       this.checkValidityUserNumber(userNumber);
 
       const checkResult = this.countBallAndStrike(computerNumber, userNumber);
@@ -59,19 +60,19 @@ class App {
     const thirdNumber = Number(userNumberList[2]);
 
     if (!(userNumberList.length === 3)) {
-      throw new Error("3자리의 숫자를 입력하지 않아 에러가 발생하였습니다.");
+      throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
     }
 
     if ((isNaN(firstNumber) == true) || (isNaN(secondNumber) == true) || (isNaN(thirdNumber) == true)) {
-      throw new Error("숫자를 입력하지 않아 에러가 발생하였습니다.");
+      throw new Error(ERROR_MESSAGE.TYPE_ERROR);
     }
 
     if (!((firstNumber !== secondNumber) && (secondNumber !== thirdNumber) && (thirdNumber !== firstNumber))) {
-      throw new Error("중복되는 숫자가 있어 에러가 발생하였습니다.");
+      throw new Error(ERROR_MESSAGE.OVERLAP_ERROR);
     }
 
     if (firstNumber === 0 || secondNumber === 0 || thirdNumber === 0) {
-      throw new Error("1부터 9사이의 숫자가 아닌 0이 포함되어 있어 에러가 발생하였습니다.");
+      throw new Error(ERROR_MESSAGE.ZERO_ERROR);
     }
   }
 
@@ -110,32 +111,32 @@ class App {
     const strike = checkResult[1];
 
     if (checkResult === "nothing") {
-      MissionUtils.Console.print('낫싱');
+      MissionUtils.Console.print(RESULT_MESSAGE.NOTHING);
       return;
     }
 
     if (strike === 3) {
-      MissionUtils.Console.print("3스트라이크 \n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.print(RESULT_MESSAGE.SUCCESS);
       return "end";
     }
 
     if (ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
+      MissionUtils.Console.print(`${strike}` + RESULT_MESSAGE.STRIKE);
       return;
     }
 
     if (strike === 0) {
-      MissionUtils.Console.print(`${ball}볼`);
+      MissionUtils.Console.print(`${ball}` + RESULT_MESSAGE.BALL);
       return;
     }
 
-    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    MissionUtils.Console.print(`${ball}` + RESULT_MESSAGE.BALL + ` ${strike}` + RESULT_MESSAGE.STRIKE);
     return;
   }
 
   // 기능 7
   reStartOrEnd() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (userChoiceNumber) => {
+    MissionUtils.Console.readLine(MESSAGE.RESTARTOREND, (userChoiceNumber) => {
       this.checkUserChoiceNumber(userChoiceNumber);
     });
 
@@ -150,12 +151,12 @@ class App {
     }
     
     if (userChoiceNumber === '2') {
-      MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+      MissionUtils.Console.print(MESSAGE.END);
       MissionUtils.Console.close();
       return;
     }
 
-    throw new Error("잘못된 값을 입력하여 에러가 발생하였습니다.");
+    throw new Error(ERROR_MESSAGE.WRONG_INPUT_ERROR);
   }
 }
 
