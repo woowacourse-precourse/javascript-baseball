@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Exception = require("./components/Exception");
+const Count = require("./components/Count");
 
 class App {
   constructor() {
@@ -24,34 +25,8 @@ class App {
         throw new Error('잘못된 값을 입력하셨습니다. 게임 종료');
       }
 
-      return this.getCount(answer, computerNumbers);
+      const [strikeCount, ballCount] = this.count.get(userInput, computerNumbers);
     });
-  }
-
-  getStrikeCount(userNumArr, computerNumArr) {
-    return userNumArr.reduce((acc, num, i) => {
-      if (num === computerNumArr[i]) {
-        acc += 1;
-      }
-      return acc;
-    }, 0);
-  }
-
-  getBallCount(userNumArr, computerNumArr) {
-    return userNumArr.reduce((acc, num, i) => {
-      if (computerNumArr.includes(num) === true && num !== computerNumArr[i]) {
-        acc += 1;
-      }
-      return acc;
-    }, 0);
-  }
-
-  getCount(userNumbers, computerNumbers) {
-    const userNumArr = String(userNumbers).split('');
-    const computerNumArr = computerNumbers.map(String);
-    const strikeCount = this.getStrikeCount(userNumArr, computerNumArr);
-    const ballCount = this.getBallCount(userNumArr, computerNumArr);
-    this.getResult(strikeCount, ballCount, computerNumbers);
   }
 
   getResult(strike, ball, computerNumbers) {
