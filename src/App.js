@@ -1,13 +1,20 @@
 const getNewAnswer = require("./getNewAnswer");
 const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
+const checkException = require("./checkException");
 
 class App {
   play() {
+    Console.print(`${Message.start}`);
     const answer = getNewAnswer();
-    const userInput = Console.readLine(`${Message.input}`, (value) =>
-      console.log(value)
-    );
+    this.getUserInput();
+  }
+
+  getUserInput() {
+    Console.readLine(`${Message.input}`, (value) => {
+      checkException(value);
+      Console.close();
+    });
   }
 }
 
