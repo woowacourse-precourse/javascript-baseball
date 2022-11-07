@@ -1,4 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  printMessage,
+  printWinMessage,
+  printGameMessage,
+  gameStartMsg,
+} = require("./Utils");
 
 class App {
   constructor() {
@@ -6,7 +12,7 @@ class App {
   }
 
   play() {
-    this.gameStartMsg();
+    gameStartMsg();
     this.gameCourse();
   }
 
@@ -14,12 +20,8 @@ class App {
     this.getUserNumber();
     this.strike = this.gameResultCount(this.answerNum, this.randomList).strike;
     this.ball = this.gameResultCount(this.answerNum, this.randomList).ball;
-    this.printGameMessage(this.strike, this.ball);
-    this.checkGameResult(this.printGameMessage(this.strike, this.ball));
-  }
-
-  gameStartMsg() {
-    console.log("숫자 야구 게임을 시작합니다.");
+    printGameMessage(this.strike, this.ball);
+    this.checkGameResult(printGameMessage(this.strike, this.ball));
   }
 
   makeRandomNumber() {
@@ -42,22 +44,24 @@ class App {
   }
 
   exceptionAnwser(answer) {
-    const userNumber = String(answer).split('').map(Number);
+    const userNumber = String(answer).split("").map(Number);
 
-    if (userNumber.length !== 3) throw new Error('세자리 숫자만 입력해주세요.');
+    if (userNumber.length !== 3) throw new Error("세자리 숫자만 입력해주세요.");
 
     const checkDuplication = new Set(userNumber);
-    if (userNumber.length !== checkDuplication.size) throw new Error('중복된 숫자가 있습니다.');
+    if (userNumber.length !== checkDuplication.size)
+      throw new Error("중복된 숫자가 있습니다.");
 
     for (let strNum = 0; strNum < userNumber.length; strNum++) {
-      if (Number(userNumber[strNum]) === 0) throw new Error('1~9 범위의 숫자만 입력해주세요.');
+      if (Number(userNumber[strNum]) === 0)
+        throw new Error("1~9 범위의 숫자만 입력해주세요.");
     }
 
     return answer;
   }
 
   gameResultCount(answer, random) {
-    const userNumber = String(answer).split('').map(Number);
+    const userNumber = String(answer).split("").map(Number);
     const result = {
       strike: 0,
       ball: 0,
@@ -77,53 +81,28 @@ class App {
     return result;
   }
 
-  printGameMessage(strike, ball) {
-    let text = '';
-    if (strike === 0 && ball === 0) {
-      text = '낫싱';
-    } else if (strike === 0 && ball !== 0) {
-      text = `${ball}볼`;
-    } else if (strike !== 0 && ball === 0) {
-      text = `${strike}스트라이크`;
-    } else {
-      text = `${ball}볼 ${strike}스트라이크`;
-    }
-    return text;
-  }
   checkGameResult(result) {
-    if (result === '3스트라이크') {
-      this.printWinMessage(result);
+    if (result === "3스트라이크") {
+      printWinMessage(result);
       this.proceedGame();
     } else {
-      this.printMessage(result);
+      printMessage(result);
       this.gameCourse();
     }
   }
   proceedGame() {
-    MissionUtils.Console.readLine('', answer => {
+    MissionUtils.Console.readLine("", (answer) => {
       MissionUtils.Console.print(answer);
-      if (answer === '1') {
+      if (answer === "1") {
         this.randomList = this.makeRandomNumber();
         this.gameCourse();
-      } else if (answer === '2') {
+      } else if (answer === "2") {
         MissionUtils.Console.close();
       } else {
-        throw new Error('잘못된 입력입니다.');
+        throw new Error("잘못된 입력입니다.");
       }
     });
   }
-
-  printWinMessage(result) {
-    MissionUtils.Console.print(result);
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');  
-  }
-
-  printMessage(result) {
-    MissionUtils.Console.print(result);
-  }
-
-
 }
 
 module.exports = App;
