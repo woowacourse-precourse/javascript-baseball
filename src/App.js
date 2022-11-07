@@ -7,15 +7,7 @@ const MESSAGES = {
   restart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 class App {
-  play() {
-    const computerNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    MissionUtils.Console.print(MESSAGES.start);
-    let inputNum;
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
-      inputNum = input;
-      console.log(inputNum);
-    });
-  }
+  play() {}
 }
 const app = new App();
 app.play();
