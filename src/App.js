@@ -1,5 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+function checkLength(answer) {
+  if (answer.length !== 3) throw new Error('숫자 세 개를 입력해주세요.')
+}
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
@@ -18,7 +21,14 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    console.log(this.computerRandomNumber);
+
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      try {
+        checkLength(answer);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 }
 const app = new App();
