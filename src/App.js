@@ -14,6 +14,7 @@ class App {
 	constructor() {
 		this.computerNumber = '';
 		this.gameEnd = false;
+		this.quitGame = false;
 	}
 
 	initializeGame() {
@@ -24,8 +25,6 @@ class App {
 	play() {
 		this.printMessage(GAME_MESSAGES.START_MESSAGE);
 		this.playMainGame();
-		this.printMessage(GAME_MESSAGES.GAME_RESTART_MESSAGE);
-		this.checkRestart(this.getRestartAnswer());
 	}
 
 	playMainGame() {
@@ -38,6 +37,17 @@ class App {
 				this.printMessage(GAME_MESSAGES.GAME_END_MESSAGE);
 			}
 		}
+		this.printMessage(GAME_MESSAGES.GAME_RESTART_MESSAGE);
+		this.checkRestart(this.getRestartAnswer());
+	}
+
+	checkRestart(answer) {
+		if (answer === RESTART_ANSWER.YES) {
+			this.printMessage(answer);
+			this.playMainGame();
+			return;
+		}
+		this.closeConsole();
 	}
 
 	getRestartAnswer() {
@@ -54,15 +64,6 @@ class App {
 
 	validateRestartAnswer(answer) {
 		return answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO;
-	}
-
-	checkRestart(answer) {
-		if (answer === RESTART_ANSWER.YES) {
-			this.printMessage(answer);
-			this.playMainGame();
-			return;
-		}
-		this.closeConsole();
 	}
 
 	closeConsole() {
