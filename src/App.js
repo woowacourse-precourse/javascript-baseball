@@ -42,8 +42,8 @@ class App {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다. 3자리 수를 입력해주세요. ' });
     }
     const inputDigit = this.input.split('').map(Number);
-    if (new Set(inputDigit).size !== 3) {
-      throw Object.assign(new Error(), { message: '잘못된 입력입니다. 서로 다른 3자리 수를 입력해주세요. ' });
+    if (new Set(inputDigit).size !== 3 || this.input.includes('0')) {
+      throw Object.assign(new Error(), { message: '잘못된 입력입니다. 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요. ' });
     }
     return this.getResult();
   }
