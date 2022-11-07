@@ -31,7 +31,9 @@ class App {
       const { ball, strike } = this.countBS(inputArr);
       
       this.printResult(ball, strike);
+      if (strike !== REQUIREMENT.LENGTH) return this.proceedGame(); 
 
+      MissionUtils.Console.print(MESSAGES.SUCCESS);
     });
   }
 
