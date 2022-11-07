@@ -22,7 +22,7 @@ class App {
     if (isNumber && (numArr.length === 3) && (numArr.length === set.size)) {
       return true;
     } else {
-      throw ('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
+      throw('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
     }
   }
 
@@ -74,8 +74,7 @@ class App {
 
 
   gameExit() {
-    MissionUtils.Console.print('게임을 종료합니다.\n');
-    return 0;
+    throw('게임을 종료합니다.\n');
   }
 
   userPickNum(stringComputerNumArr) {
@@ -84,8 +83,7 @@ class App {
       try {
         this.isThreeDifferNum(stringUserNumArr);
       } catch (e) {
-        MissionUtils.Console.print(e);
-        return this.gameExit();
+        throw e;
       }
 
       let ballCount = this.compareNum(stringUserNumArr, stringComputerNumArr);
