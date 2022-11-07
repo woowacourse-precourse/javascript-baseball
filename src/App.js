@@ -51,9 +51,26 @@ class App {
     })
   }
 
+  countBalls(computerInputNumbers, userInputNumbers) {
+    let ballCnt = 0
+    for (let i = 0; i < 3; i++) {
+      let user = userInputNumbers[i]
+      let com = computerInputNumbers[i]
+      if (parseInt(user) !== parseInt(com) && userInputNumbers.includes(com)) {
+        ballCnt += 1
+      }
+    }
+    return ballCnt
+  }
+
   gameStart() {
     this.computerInput()
-    this.userInput()
+
+    while (true) {
+      this.userInput()
+
+      const balls = this.countBalls(this.computerInputNumbers, this.userInputNumbers)
+    }
   }
 
   play() {
