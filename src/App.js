@@ -23,7 +23,6 @@ class App {
     let isTrue = false;
     if (result === "3스트라이크") {
       isTrue = true;
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
     return isTrue;
   }
