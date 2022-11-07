@@ -9,7 +9,8 @@ class App {
     while (repeat) {
       random_number = this.GET_RANDOM_NUMBER();
 
-      restart_number = this.IN_GAME(random_number);
+      this.COMPARE(random_number);
+      restart_number = this.GAME_END();
 
       if (restart_number === 1) {
         continue;
@@ -57,10 +58,9 @@ class App {
     }
   }
 
-  IN_GAME(correct_number) {
+  COMPARE(correct_number) {
     let correct = false;
     let user_input_number;
-    let finish_number;
 
     while (!correct) {
       user_input_number = this.INPUT_NUMBER();
@@ -79,6 +79,10 @@ class App {
       }
     }
     MissionUtils.Console.print('3스트라이크');
+  }
+
+  GAME_END() {
+    let finish_number;
 
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
