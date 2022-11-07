@@ -32,16 +32,22 @@ class App {
 
       gameContinue = !this.isInputNumberCorrect(numberOfStrike);
       if (!gameContinue) {
-        printGameEndMessage();
+        this.printGameEndMessage();
       }
     }
   }
   getAnswerNumber() {
-    let answer = MissionUtils.Random.pickUniqueNumbersInRange(
-      this.RANGE_START_NUMBER,
-      this.RANGE_END_NUMBER,
-      this.NUMBER_OF_DIGITS
-    );
+    let answer = [];
+
+    while (answer.length < this.NUMBER_OF_DIGITS) {
+      const number = MissionUtils.Random.pickNumberInRange(
+        this.RANGE_START_NUMBER,
+        this.RANGE_END_NUMBER
+      );
+      if (!answer.includes(number)) {
+        answer.push(number);
+      }
+    }
 
     answer = this.joinNumberToString(answer);
 
@@ -164,14 +170,14 @@ class App {
     MissionUtils.Console.print(GAME_END_MESSAGE);
   }
   getInputRestart() {
-    const RESTART = 1;
-    const EXIT = 2;
+    const RESTART = "1";
+    const EXIT = "2";
     const POSTPOSITION = "를"; // EXIT의 받침 여부에 따라 을 또는 를
     const INPUT_RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART}, 종료하려면 ${EXIT}${POSTPOSITION} 입력하세요.\n`;
 
     let inputRestart;
     MissionUtils.Console.readLine(INPUT_RESTART_MESSAGE, (input) => {
-      this.handleRestartException(input);
+      this.handleRestartException(input, RESTART, EXIT);
       inputRestart = input;
     });
 
