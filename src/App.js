@@ -54,6 +54,7 @@ class App {
         this.progress();
         break;
       case "2":
+        wConsole.close();
         break;
       default:
         throw new Error();
