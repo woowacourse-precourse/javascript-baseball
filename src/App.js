@@ -126,10 +126,6 @@ class GameLoop {
       MissionUtils.Console.print("낫싱");
     }
 
-    if (balls === 0 && strikes != 0 && strikes != 3) {
-      MissionUtils.Console.print(`${strikes}스트라이크`);
-    }
-
     if (balls != 0 && strikes === 0) {
       MissionUtils.Console.print(`${balls}볼`);
     }
@@ -138,9 +134,11 @@ class GameLoop {
       MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
     }
 
-    if (strikes === 3) {
-      MissionUtils.Console.print("3스트라이크");
-      return true;
+    if (balls === 0 && strikes != 0) {
+      MissionUtils.Console.print(`${strikes}스트라이크`);
+      if (strikes === 3) {
+        return true;
+      }
     }
 
     return false;
