@@ -61,9 +61,30 @@ class App {
         ballCount++;
       }
     }
+    this.compareResultPrint(strikeCount, ballCount);
+  }
 
-    // Console.print(strikeCount);
-    // Console.print(ballCount);
+  compareResultPrint(strikeCount, ballCount) {
+    if (strikeCount + ballCount === 0) {
+      Console.print("낫싱");
+      this.userInput();
+    } else if (strikeCount === 3) {
+      Console.print("3스트라이크");
+    } else if (strikeCount > 0 && strikeCount < 3) {
+      {
+        ballCount > 0
+          ? Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
+          : Console.print(`${strikeCount}스트라이크`);
+      }
+      this.userInput();
+    } else if (ballCount > 0) {
+      {
+        strikeCount > 0
+          ? Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
+          : Console.print(`${ballCount}볼`);
+      }
+      this.userInput();
+    }
   }
 }
 const app = new App();
