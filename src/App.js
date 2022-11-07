@@ -22,7 +22,7 @@ class App {
       3,
     );
     const randomNumber = MissionUtils.Random.shuffle(threeNumberArray);
-    this.randomNumber = randomNumber;
+    this._randomNumber = randomNumber;
   }
 
   inputUserNumber() {
@@ -69,7 +69,16 @@ class App {
     return strikeCount;
   }
 
-  calcBall() {}
+  calcBall(numberInput) {
+    let ballCount = 0;
+    for (let i = 0; i < 3; i += 1) {
+      const findIndexofInput = this._randomNumber.indexOf(numberInput[i]);
+      if (findIndexofInput !== -1 && findIndexofInput !== i) {
+        ballCount += 1;
+      }
+    }
+    return ballCount;
+  }
 
   endGame() {}
 }
