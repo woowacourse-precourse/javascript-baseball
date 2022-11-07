@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const GAMELOGICS = require('./gameLogic');
-const VALIDATIONCHECK = require('./inputCheck');
+const GameLogics = require('./gameLogic');
+const ValidationCheck = require('./inputCheck');
 
 class GameStartOrRestart {
 
@@ -28,12 +28,12 @@ class GameStartOrRestart {
 
   gamePlayApplication(answer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-      GAMELOGICS.getHintFromInput(userInput, answer);
+      GameLogics.getHintFromInput(userInput, answer);
     });
   }
 
   restartGame(userInput) {
-    if (!VALIDATIONCHECK.checkUserInputAfterGameOver(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
+    if (!ValidationCheck.checkUserInputAfterGameOver(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
     if (+userInput === 1) this.launchNewGame();
     if (+userInput === 2) MissionUtils.Console.close();
   }

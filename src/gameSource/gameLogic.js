@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const VALIDATIONCHECK = require('./inputCheck');
+const ValidationCheck = require('./inputCheck');
 
 class GameLogics {
 
@@ -26,7 +26,7 @@ class GameLogics {
   getHintFromInput(userInput, answer) {
     const GAMESTART_OR_RESTART = require('./controller');
 
-    if (!VALIDATIONCHECK.checkUserInputDuringGamePlay(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
+    if (!ValidationCheck.checkUserInputDuringGamePlay(userInput)) throw new Error("잘못된 숫자를 입력하였습니다.");
     const strikes = this.numberOfStrikes(userInput, answer);
     const balls = this.numberOfBalls(userInput, answer);
 
