@@ -1,6 +1,9 @@
 class User {
   guessNum() {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
+      if (!this.checkValidation(userNum)) {
+        this.sayError();
+      }
       return input;
     });
   }
@@ -28,5 +31,9 @@ class User {
   checkNoDuplicate(userNum) {
     const userNumSet = new Set([...userNum]);
     return userNumSet.size === 3;
+  }
+
+  sayError() {
+    throw new Error("적절한 입력이 아닙니다. 게임을 종료합니다.");
   }
 }
