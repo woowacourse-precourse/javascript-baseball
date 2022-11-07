@@ -42,3 +42,12 @@ describe('문자열 테스트', () => {
     expect(result).toThrow(RangeError);
   });
 });
+
+describe('배열 테스트', () => {
+  test('includes 메서드로 특정 숫자가 배열에 포함되었는지 확인', () => {
+    const input = [1, 4];
+    const result = input.includes(1);
+
+    expect(result).toEqual(true);
+  });
+});
