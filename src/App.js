@@ -69,8 +69,8 @@ class App {
   }
 
   checkInputValid(input) {
-    const numbers = /[1-9]{3}/;
-    if (!numbers.test(input)) {
+    const numbers = /[^1-9]/;
+    if (numbers.test(input)) {
       throw "ERROR: Invalid input \n[ Valid Input : three digit number from 1 to 9 ]";
     }
     if (input.length != 3) {
@@ -114,12 +114,8 @@ class App {
   }
 
   newGame() {
-    try {
-      this.setComputerNum();
-      this.inGame();
-    } catch(e) {
-      console.error(e);
-    }
+    this.setComputerNum();
+    this.inGame();
   }
 
   play() {
@@ -128,8 +124,4 @@ class App {
   }
 }
 
-// module.exports = App;
-
-  const app = new App();
-  app.play();
-//TODO this 바인딩 공부
+module.exports = App;
