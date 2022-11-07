@@ -40,26 +40,28 @@ class App {
 
   // 입력값 예외 처리
   checkUser(user) {
-    // checkIfNumber(user);
-    // checkIfThreeDigit(user);
-    // checkIfDiff(user);
-    // checkIfnotZero(user);
+    this.checkIfNumber(user);
+    this.checkIfThreeDigit(user);
+    this.checkIfDiff(user);
+    this.checkIfnotZero(user);
     return true;
   }
 
   // 숫자인지 체크
   checkIfNumber(user) {
     if(isNaN(user)){ 
-      throw new Error('에러');
-      console.log('숫자가 아님')
+      MissionUtils.Console.close()
+      throw new Error ('숫자가 아님');
+      
     }
   }
   
   // 3자리인지 체크
   checkIfThreeDigit(user) {
     if(user.length != 3){
-      throw new Error('에러');
-      console.log('3자리가 아님')
+      MissionUtils.Console.close()
+      throw new Error ('3자리가 아님');
+      
     }
   }
   
@@ -67,8 +69,9 @@ class App {
   checkIfDiff(user) {
     let numberCheck = new Set(user);
     if(numberCheck.size != user.length){
-      throw new Error('에러');
-      console.log('서로 다른 숫자가 아님')
+      MissionUtils.Console.close()
+      throw new Error ('서로 다른 숫자가 아님');
+      
     }
   }
   
@@ -76,8 +79,8 @@ class App {
   checkIfnotZero(user) {
     for (let i = 0; i < 3; i++){
       if(1 > Number(input[i]) || Number(input[i])>9){
-        throw new Error('에러');
-        console.log('1 ~ 9 사이의 숫자가 아님');
+        MissionUtils.Console.close()       
+        throw new Error ('1 ~ 9 사이의 숫자가 아님');
       }
     }
   }
