@@ -17,36 +17,39 @@ class App {
     });
   }
 
-  isThreeDifferNum(number) {
-    const stringNum = number.toString();
-    const numArr = Array.from(stringNum);
-    console.log(numArr);
+  isThreeDifferNum(numArr) {
     const set = new Set(numArr);
+    const isNumber = Number(numArr.join(''));
     console.log(set);
-    if ((stringNum != NaN) && (stringNum.length === 3) && (stringNum.length === set.size)) {
-      return number;
+    if (isNumber && (numArr.length === 3) && (numArr.length === set.size)) {
+      return true;
     } else {
       throw ('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
     }
   }
 
-  compareNum(userNum, computerNum) {
+  compareNum(userNumArr, computerNumArr) {
     let ballCount = {
       strike: 0,
       ball: 0,
       nothing: 0,
     };
-    const stringUserNum = userNum;
-    const stringComputerNum = computerNum.toString();
+
+    //match함수를 사용하기 위해 computerNum을 문자열로 변경
+    const stringComputerNum = computerNumArr.join('');
+    console.log(stringComputerNum);
     for (let index = 0; index < 3; index++) {
-      if (userNum[index] === computerNum[index]) {
+      if (userNumArr[index] === computerNumArr[index]) {
         ballCount.strike++;
+        console.log("스트라이크" + ballCount.strike);
         continue;
-      } else if (stringComputerNum.match(stringUserNum[index]) === stringUserNum[index]) {
+      } else if (stringComputerNum.match(userNumArr[index]) === userNumArr[index]) {
         ballCount.ball++;
+        console.log("볼" + ballCount.ball);
         continue;
       }
       ballCount.nothing++;
+      console.log("낫싱" + ballCount.nothing);
     }
 
     return ballCount;
@@ -54,10 +57,10 @@ class App {
 
   printBallCount(ballCount) {
     if (ballCount.strike > 0) {
-      MissionUtils.Console.print('${ballCount.strike}스트라이크');
+      MissionUtils.Console.print(ballCount.strike + ' 스트라이크');
     }
     if (ballCount.ball > 0) {
-      MissionUtils.Console.print('${ballCount.ball}볼');
+      MissionUtils.Console.print(ballCount.ball + ' 볼');
     }
     if (ballCount.nothing === 3) {
       MissionUtils.Console.print('낫싱');
@@ -66,15 +69,15 @@ class App {
   }
 
   restartOrExit() {
-    Console.readLine('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
-      answer = Number(answer);
+    this.readInput('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
       if (answer === 1) {
         return new App();
       } else if (answer === 2) {
-        gameEixt();
+        return this.gameExit();
       }
-    })
+    });
   }
+
 
   gameExit() {
     MissionUtils.Console.print('게임을 종료합니다.\n');
@@ -83,24 +86,26 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.\n');
-    const computerNumCopy = this.computerNum();
-    console.log(computerNumCopy);
-    
+    const stringComputerNumArr = this.computerNum().map(function (element) {
+      return element.toString();
+    });
+    console.log(stringComputerNumArr);
+
     this.readInput('숫자를 입력해주세요 : ', (Input) => {
-      let userNumCopy = Input;
-      console.log(userNumCopy);
+      let stringUserNumArr = Array.from(Input.toString());
+      console.log(stringUserNumArr);
       try {
-        this.isThreeDifferNum(userNumCopy);
+        this.isThreeDifferNum(stringUserNumArr);
       } catch (e) {
         MissionUtils.Console.print(e);
-        this.gameExit();
+        return this.gameExit();
       }
 
-      let ballCount = this.compareNum(userNumCopy, computerNumCopy);
+      let ballCount = this.compareNum(stringUserNumArr, stringComputerNumArr);
       this.printBallCount(ballCount);
       if (ballCount.strike === 3) {
-        console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
-        restartOrExit();
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+        this.restartOrExit();
       }
     });
   }
