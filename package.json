@@ -6,7 +6,7 @@
     "@woowacourse/mission-utils": "^1.0.6"
   },
   "devDependencies": {
-    "jest": "^29.0.3"
+    "jest": "^24.9.0"
   },
   "scripts": {
     "test": "jest"
