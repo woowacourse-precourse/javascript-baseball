@@ -23,9 +23,9 @@
 
 ### 1-2. 상태 변수 관리 함수(getter, setter) 구현
 
-- [ ] 1. `#computerNumbers`의 getter, setter(`#getComputerNumbers`,`#setComputerNumbers`)
-- [ ] 2. `#isUserWon`의 getter, setter(`getIsUserWon`, `#setIsUserWon`)
-- [ ] 3. `#isStartGame`의 getter, setter(`getIsStartGame`, `#setIsStartGame`)
+- [x] 1. `#computerNumbers`의 getter, setter(`#getComputerNumbers`,`#setComputerNumbers`)
+- [x] 2. `#isUserWon`의 getter, setter(`getIsUserWon`, `#setIsUserWon`)
+- [x] 3. `#isStartGame`의 getter, setter(`getIsStartGame`, `#setIsStartGame`)
 
 ## 2. 상대방(컴퓨터)의 3자리 숫자 생성하는 기능(#initComputerNumbers) 구현
 
