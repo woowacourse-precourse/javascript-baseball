@@ -29,5 +29,23 @@ describe("기능 테스트", () => {
     expect(app.countBallAndStrike(computerNumber, userNumber)).toEqual("nothing");
   });
 
+  // 볼 또는 스트라이크가 존재하는 경우: [ball, strike] 리턴
+  test("기능 5, 결과 분석하기 - [ball, strike] (1)", () => {
+    const computerNumber = "123";
+    const userNumber = "138";
+
+    const app = new App();
+          
+    expect(app.countBallAndStrike(computerNumber, userNumber)).toEqual([1, 1]);
+  });
+
+  test("기능 5, 결과 분석하기 - [ball, strike] (2)", () => {
+    const computerNumber = "159";
+    const userNumber = "195";
+
+    const app = new App();
+          
+    expect(app.countBallAndStrike(computerNumber, userNumber)).toEqual([2, 1]);
+  });
 
 });
