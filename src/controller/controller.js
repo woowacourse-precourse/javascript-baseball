@@ -22,25 +22,43 @@ class Controller {
     this.userGivenNumber.setState(userGivenNumber);
   }
 
+  /**
+   * 유저가 제시한 수의 각 숫자에 따른 스트라이크, 볼, 낫싱 여부를 return 한다.
+   * @param {string[]} userGivenNumber [유저가 제시한 수]
+   * @param {string[]} computerGivenNumber [컴퓨터가 생성한 수]
+   * @param {number} index [순회문의 index]
+   * @return {string} [결과 값]
+   */
+  isStrikeBallNothing(userGivenNumber, computerGivenNumber, index) {
+    // 숫자와 자리까지 같다면 (스트라이크)
+    if (userGivenNumber[index] === computerGivenNumber[index]) {
+      return "strike";
+    }
+    // 숫자만 있다면 (볼)
+    if (
+      userGivenNumber[index] !== computerGivenNumber[index] &&
+      computerGivenNumber.includes(userGivenNumber[index])
+    ) {
+      return "ball";
+    }
+
+    return "noting";
+  }
+
   // 유저가 제시한 수에 따라 결과를 도출한다.
   getSingleTryResult() {
     const userGivenNumber = this.userGivenNumber.getState();
     const computerGivenNumber = this.computerNumber.getState();
-
     const strikeBallCount = [0, 0];
 
     for (let i = 0; i < userGivenNumber.length; i++) {
-      // 숫자와 자리까지 같다면 (스트라이크)
-      if (userGivenNumber[i] === computerGivenNumber[i]) {
-        strikeBallCount[0]++;
-      }
-      // 숫자만 있다면 (볼)
-      if (
-        userGivenNumber[i] !== computerGivenNumber[i] &&
-        computerGivenNumber.includes(userGivenNumber[i])
-      ) {
-        strikeBallCount[1]++;
-      }
+      const singleDigitResult = this.isStrikeBallNothing(
+        userGivenNumber,
+        computerGivenNumber,
+        i
+      );
+      if (singleDigitResult === "strike") strikeBallCount[0]++;
+      if (singleDigitResult === "ball") strikeBallCount[1]++;
     }
 
     this.view.printSingleTryResult(strikeBallCount);
