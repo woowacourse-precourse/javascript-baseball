@@ -1,6 +1,10 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+
 const Message = require('./Message');
 const Random = require('./Random');
 const Game = require('./Game');
+
+const { close } = MissionUtils.Console;
 
 class App {
   #isStart = false;
@@ -57,6 +61,33 @@ class App {
     }
 
     return [ball, strike];
+  }
+
+  userConfirm(confirmNumber) {
+    const ONE = 1;
+    const TWO = 2;
+
+    switch (confirmNumber) {
+      case ONE: {
+        this.#isStart = false;
+        this.#isFinish = false;
+
+        this.play();
+
+        break;
+      }
+
+      case TWO: {
+        this.#mesage.print('게임 종료');
+        close();
+
+        break;
+      }
+
+      default: {
+        throw new Error('잘못된 입력을 하였습니다.');
+      }
+    }
   }
 }
 
