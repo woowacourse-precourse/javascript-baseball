@@ -1,6 +1,6 @@
-const GAME_CONFIG_NUMBER = {
-  START: 1,
-  END: 9,
+const GAME_CONFIG = {
+  START_NUMBER: 1,
+  END_NUMBER: 9,
   COUNT: 3,
 };
 
@@ -8,7 +8,7 @@ const ERROR_CHECK = {
   MESSAGE: "문구가 나오지 않음 : ",
 };
 
-const GAME_GUIDE_MESSAGE = {
+const INGAME_MESSAGE = {
   ERROR: "잘못된 값을 입력했습니다 : 입력값",
   START: "숫자 야구 게임을 시작합니다.",
   INPUT_NUMBER: "숫자를 입력해주세요 : ",
@@ -28,9 +28,9 @@ const RESPONSE = {
 };
 
 module.exports = {
+  GAME_CONFIG,
   ERROR_CHECK,
-  GAME_CONFIG_NUMBER,
-  GAME_GUIDE_MESSAGE,
+  INGAME_MESSAGE,
   GAME_RESULT,
   RESPONSE,
 };
