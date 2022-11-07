@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { ANSWER } = require('../Constants');
+const ANSWER = require('../Constants/Answer');
 
 const generateAnswer = () => {
   const answerArr = [];

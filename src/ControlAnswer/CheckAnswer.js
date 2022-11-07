@@ -1,4 +1,6 @@
-const { GAME, ANSWER } = require('../Constants');
+const GAME = require('../Constants/Game');
+const ANSWER = require('../Constants/Answer');
+
 const { Console } = require('@woowacourse/mission-utils');
 
 const strikeCount = (numArr, answer) => {

@@ -1,8 +1,8 @@
 const App = require('../src/App');
 const { mockQuestions, mockRandoms, getLogSpy } = require('./ApplicationTest');
 
-const mockConstants = jest.requireMock('../src/constants');
-jest.mock('../src/constants');
+const mockAnswer = jest.requireMock('../src/constants/answer');
+jest.mock('../src/Constants/Answer');
 
 describe('3자릿수가 아닌 자릿수의 숫자야구 게임 해보기', () => {
   test('4자릿수의 숫자 야구', () => {
@@ -18,7 +18,7 @@ describe('3자릿수가 아닌 자릿수의 숫자야구 게임 해보기', () =
 
     mockQuestions(answers);
     mockRandoms(randoms);
-    mockConstants.ANSWER.LENGTH = 4;
+    mockAnswer.LENGTH = 4;
 
     const app = new App();
     app.play();

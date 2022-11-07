@@ -5,7 +5,7 @@ const {
   duplication,
 } = require('../src/Validation');
 
-const { ERROR } = require('../src/Constants');
+const ERROR = require('../src/Constants/Error');
 
 describe('길이 검사', () => {
   test('case1', () => {
