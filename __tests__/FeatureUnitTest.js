@@ -44,20 +44,20 @@ describe('기능 단위 목록별 테스트', () => {
     const printSpy = getPrintSpy();
     const answers = ['246', '513', '152', '125', '135'];
     const messages = [
-      [2, 4, 6],
-      [5, 1, 3],
-      [1, 5, 2],
-      [1, 2, 5],
-      [1, 3, 5],
+      '낫싱',
+      '3볼',
+      '1볼 1스트라이크',
+      '2스트라이크',
+      '3스트라이크',
     ];
 
     mockQuestions(answers);
 
     const app = new App();
+    app.setUserInput([1, 3, 5]);
 
     messages.forEach(output => {
-      app.setUserInput();
-      expect(printSpy).toHaveBeenCalledWith(expect.arrayContaining(output));
+      expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 
