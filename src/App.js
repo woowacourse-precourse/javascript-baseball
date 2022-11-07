@@ -1,5 +1,12 @@
+const GameControl = require('./Controller');
+
 class App {
-  play() {}
+  play() {
+    let game = new GameControl();
+    game.startGame();
+  }
 }
 
 module.exports = App;
+
+
