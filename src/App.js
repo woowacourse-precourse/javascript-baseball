@@ -48,22 +48,23 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
 
-    MissionUtils.Console.readLine("", this.replayByNumer.bind(this));
+    MissionUtils.Console.readLine("", this.replayByNumber.bind(this));
 
     return this;
   }
 
-  replayByNumer(number) {
+  replayByNumber(number) {
     switch (number) {
       case "1":
         this.play();
         break;
       case "2":
         MissionUtils.Console.close();
-      default:
-        throw "올바르지 못한 값을 입력하였습니다.";
     }
   }
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
