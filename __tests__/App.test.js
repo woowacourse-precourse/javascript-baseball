@@ -52,3 +52,11 @@ describe('init()', () => {
     expect(app.isStart()).toBeTruthy();
   });
 });
+
+describe('isStrike()', () => {
+  test('3을 전달하면 true를 반환한다.', () => {
+    const app = new App();
+
+    expect(app.isStrike(3)).toBeTruthy();
+  });
+});
