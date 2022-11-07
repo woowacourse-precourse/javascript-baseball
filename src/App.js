@@ -41,6 +41,12 @@ class App {
       }
     });
   }
+
+  play() {
+    Console.print(MESSAGE.GAME_START);
+    this.shuffleNumber();
+    this.enterGuessMode();
+  }
 }
 
 module.exports = App;
