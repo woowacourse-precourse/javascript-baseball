@@ -15,7 +15,6 @@ const compareComputer = ComputerNum.randomNumArr[0];
 class UserInput {
   constructor() {
     this.answerBox = [];
-
   }
   userInputfunc() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
@@ -54,14 +53,7 @@ class UserInput {
         .length === 0
     ) {
       MissionUtils.Console.print("낫싱");
-      // this.answerBox = [];
       this.userInputfunc(this.answerBox);
-      // this.userInputfunc(this.callback);
-      // MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      //   this.answerBox = [];
-      //   this.answerBox.push(answer.split("").map(Number));
-      //   this.userInputfunc(this.answerBox[0]);
-      // });
     }
   }
   isBall() {
@@ -72,8 +64,11 @@ class UserInput {
         strikeCount++;
       }
     }
-    if (strikeCount === 0 && userNum.filter((duplicated) => compareComputer.includes(duplicated))
-    .length !== 0) {
+    if (
+      strikeCount === 0 &&
+      userNum.filter((duplicated) => compareComputer.includes(duplicated))
+        .length !== 0
+    ) {
       const dupNum = userNum.filter((duplicated) =>
         compareComputer.includes(duplicated)
       ).length;
@@ -100,15 +95,12 @@ class UserInput {
     }
     if (strikeCount !== 0) {
       MissionUtils.Console.print(`${strikeCount}스트라이크`);
-      this.userInputfunc(this.answerBox);
     }
   }
   isCorrect() {
     const userNum = this.answerBox[0];
     if (userNum.toString() === compareComputer.toString()) {
-      MissionUtils.Console.print(
-        `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
-      );
+      MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
     }
   }
   reGame() {
@@ -117,15 +109,15 @@ class UserInput {
       MissionUtils.Console.print(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
       );
-      MissionUtils.Console.readLine("재시작? :", (answer) => {
-        if (answer === "2") {
-          MissionUtils.Console.close();
-        }
-        if(answer === "1"){
-          this.reGame(this.reGame);
-        }
-      });
     }
+    MissionUtils.Console.readLine("", (reGameAnswer) => {
+      if (reGameAnswer === "2") {
+        MissionUtils.Console.close();
+      }
+      if (reGameAnswer === "1") {
+        this.userInputfunc(this.answerBox);
+      }
+    });
   }
   // 배열 초기화?
   // ballAndStrike(){

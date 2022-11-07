@@ -16,7 +16,7 @@ const errorCondition =  function () {
           console.log(userInputArr.length)
         throw new Error("세개만 입력부탁한다!!!!!!!!");
       }
-      if (userInputArr[0].every((elem, index, arr) => isNaN(elem) === true)) { // false?
+      if (userInputArr[0].every((elem, index, arr) => isNaN(elem) === false)) { // false?
         throw new Error("숫자만 입력부탁쓰.");
       }
     // });
