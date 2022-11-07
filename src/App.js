@@ -34,6 +34,11 @@ class App {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 
+  exitGame() {
+    MissionUtils.Console.print("게임을 종료합니다.");
+    MissionUtils.Console.close();
+  }
+
   cntStikeAndBall(computerNum, userNum) {
     let strike = 0, ball = 0;
     const computerArray = [...computerNum];
