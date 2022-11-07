@@ -34,14 +34,36 @@ class BaseballGame {
     });
   }
 
+  countStrikeBall(inputUser, computer) {
+    let strike = 0;
+    let ball = 0;
+    for (let i = 0; i < inputUser.length; i++) {
+      const index = inputUser.indexOf(computer[i]);
+      if (index <= -1) {
+        continue;
+      }
+      if (index === i) {
+        strike += 1;
+      } else {
+        ball += 1;
+      }
+    }
+    return { ball, strike };
+  }
+
   getMessage(computerNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      const { ball, strike } = this.countStrikeBall(
+        input.split("").map(Number),
+        this.computerNumber
+      );
       this.checkValidation(input);
     });
   }
 
   play() {
     this.init();
+    this.getMessage(this.computerNumber);
   }
 }
 module.exports = BaseballGame;
