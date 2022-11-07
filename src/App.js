@@ -51,6 +51,30 @@ class App {
       this.countingBallOrStrike(target);
     });
   }
+  printResult() {
+    const printBallCount = `${this.balls !== 0 ? `${this.balls}볼` : ""}`;
+    const printStrikeCount = `${this.strikes !== 0 ? `${this.strikes}스트라이크` : ""}`;
+    const printNothing = `${this.strikes === 0 && this.balls === 0 ? "낫싱" : ""}`;
+    this.printMessage(`${printBallCount} ${printStrikeCount} ${printNothing}`);
+    if (this.strikes === 3) this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    else this.getUserInputData();
+  }
+
+  restart() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n", (answer) => {
+        if (answer === "1") {
+          this.gameStart();
+          return;
+        } else if (answer === "2") {
+          this.printMessage("게임 종료");
+          MissionUtils.Console.close();
+          return;
+        }
+        throw new Error("잘못된 값을 입력하셨습니다.");
+      }
+    );
+  }
 
   getUserInputData() {
     this.strikes = 0;
@@ -60,6 +84,8 @@ class App {
         throw new Error("잘못된 값이 입력되었습니다.");
       this.userInputArr = [...answer];
       this.checkBallOrStrike();
+      this.printResult();
+      this.restart();
     });
   }
 
