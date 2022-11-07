@@ -28,11 +28,18 @@ class App {
   }
 
   inputCheck(inputNumber) {
-    if (inputNumber.length !== 3) throw new Error("정해진 값을 입력해주세요.");
-    const INPUT_ARRAY = inputNumber.split("").map((x) => {
-      if (Number.isNaN(x)) throw new Error("정해진 값을 입력해주세요.");
-      return parseInt(x, 10);
+    if (inputNumber.length !== 3) throw new Error("숫자 3자리를 입력해주세요.");
+
+    const INPUT_ARRAY = inputNumber.split("").map((number) => {
+      if (Number.isNaN(number)) throw new Error("숫자를 입력해주세요.");
+      return parseInt(number, 10);
     });
+
+    const SET = new Set(INPUT_ARRAY);
+    const DEDUPLICATION = [...SET];
+    if (DEDUPLICATION.length !== 3)
+      throw new Error("중복된 값은 입력할 수 없습니다.");
+
     return this.compare(INPUT_ARRAY);
   }
 
@@ -81,3 +88,6 @@ const app = new App();
 app.play();
 
 module.exports = App;
+
+// 추가해야되는 것들
+// 중복값 입력 제한 기능 추가
