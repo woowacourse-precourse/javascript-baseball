@@ -59,4 +59,9 @@ const validateOneToNine = (target) => {
   return NUMBER_ONE_TO_NINE.test(target);
 };
 
+const makeNumberToArray = (target) => {
+  const arrayTarget = target.split("").map((item) => Number(item));
+  return arrayTarget;
+};
+
 module.exports = { getComputerNumber, getUserNumber };
