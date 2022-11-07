@@ -2,12 +2,12 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 
 class Game {
   constructor() {
-    this.correctNumber;
+    this.answer;
   }
 
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
-    this.correctNumber = this.generateThreeDigitNumber();
+    this.answer = this.generateThreeDigitNumber();
     this.pitchNumber();
   }
 
@@ -26,6 +26,7 @@ class Game {
   pitchNumber() {
     Console.readLine('숫자를 입력해주세요 : ', (inputStr) => {
       const guess = this.isValidInput(inputStr);
+      const { ball, strike } = this.judgeBallStrike(guess, this.answer);
     });
   }
 
@@ -39,6 +40,28 @@ class Game {
     }
 
     return inputArr;
+  }
+
+  judgeBallStrike(guess, answer) {
+    let ball = 0;
+    let strike = 0;
+
+    const isBall = (guessNumber) => {
+      return answer.includes(guessNumber);
+    };
+
+    const isStrike = (guessNumber) => {
+      return guess.indexOf(guessNumber) === answer.indexOf(guessNumber);
+    };
+
+    guess.map((guessNumber) => {
+      if (isBall(guessNumber)) {
+        if (isStrike(guessNumber)) strike += 1;
+        else ball += 1;
+      }
+    });
+
+    return { ball, strike };
   }
 }
 
