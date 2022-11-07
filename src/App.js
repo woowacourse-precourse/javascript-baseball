@@ -13,7 +13,8 @@ class App {
 
     // 사용자의 수 선택
     var userNum = usersNumbers();
-    // 사용자의 수 입력받기
+    
+    
    
     
 
@@ -31,6 +32,9 @@ function usersNumbers(){
       NumberCheck.isThreeWord();
       NumberCheck.isContainsBlank();
       NumberCheck.isNumber();
+      NumberCheck.isDuple();
+
+      console.log("에러가없엉");
     } catch (error) {
       console.log(error);
       MissionUtils.Console.close();
@@ -65,8 +69,9 @@ class NumberCheck{
 
   // 사용자의 수 예외처리 3 - 숫자가 아니면 예외발생
   isNumber(){
-    if(!isNaN(this.input)){
-      throw "숫자가 아닙니다.";
+    var regexp = /^[1-9]+$/g;
+    if(!regexp.test(this.input)){
+      console.log("숫자가 아닙니다.");
     }
   }
 
@@ -77,28 +82,21 @@ class NumberCheck{
     }
   }
 
+  // 사용자의 수 예외처리 5 - 중복된 수가 있는 경우
+  isDuple(){
+    var thisInput = this.input;
+    var inputArr = Array.from(this.input);
 
-// 입력받은 수를 배열로 
-  getArrFromInput(input){
-    var arr = Array.from(input);
-    return arr;
+    var inputSet = new Set();
+    inputArr.forEach( (num) => {
+      inputSet.add(num);
+    })
+
+    if(thisInput.length != inputSet.length){
+      throw "중복된 숫자가 있습니다.";
+    }
+
   }
-}
-// 입력받은 수를 배열로 
-// function getArrFromInput(input){
-//   var arr = Array.from(input);
-//   return arr;
-// }
-
-
-
-// 사용자의 수 예외처리 2 - 숫자가 아니면 예외발생
-function isNumbers(arr){
-  try {
-    
-  } catch (error) {
-    throw error;
-  }  
 }
 
 // 컴퓨터의 수 선택
