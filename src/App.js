@@ -88,6 +88,9 @@ class App {
           .map((line) => line.join(""))
           .join(" ");
   }
+  #printResult(str) {
+    Console.print(str);
+  }
   play() {}
 }
 

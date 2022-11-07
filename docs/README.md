@@ -77,8 +77,8 @@
 
 ## 6. 결과값을 출력하는 기능(#printResult) 구현
 
-- [ ] 1. 문자열을 인자로 받음
-- [ ] 2. 결과 출력(`Console.print`을 이용)
+- [x] 1. 문자열을 인자로 받음
+- [x] 2. 결과 출력(`Console.print`을 이용)
 
 ## 7. 게임 종료 기능(#handleGameOver) 구현
 
