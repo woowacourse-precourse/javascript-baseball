@@ -7,10 +7,20 @@ class App {
   }
 
   start() {
+    this.computerNumber = 0;
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  play() {}
+  getInputNumber() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      String(input).split('');
+    });
+  }
+
+  play() {
+    this.start();
+    this.getInputNumber();
+  }
 }
 
 module.exports = App;
