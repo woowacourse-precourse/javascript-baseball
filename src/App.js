@@ -63,10 +63,6 @@ class App {
     }
   }
 
-  isAnswer(strike) {
-    return strike === 3;
-  }
-
   countStrike() {
     let strike = 0;
 
