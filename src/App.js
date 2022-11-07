@@ -43,15 +43,15 @@ class App {
   }
 
   isValidUserNumber(number) {
-    return this.isThreeDigits(number) && this.isCorrectDigits(number) && this.isNotDuplicate;
+    return this.isThreeDigits(number) && this.isCorrectRangeDigits(number) && this.isNotDuplicate;
   }
 
   isThreeDigits(number) {
     return number.length === 3;
   }
 
-  isCorrectDigits(number) {
-    const possibleDigits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  isCorrectRangeDigits(number) {
+    const possibleDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 9);
     number.split('').forEach((digit) => {
       if (!possibleDigits.includes(+digit)) return false;
     });
