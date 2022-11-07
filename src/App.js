@@ -16,27 +16,37 @@ class App{
     return uniqueNumberList
   }
   
+  
   userInput(){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(userInputValue)=>{
+      this.isVaildUserInput(userInputValue);
       const InputNumber = userInputValue.split('').map((v)=>parseInt(v))
-      this.userInput();
+      
     });
   }
   
   
-  isVaildUserInput(userInput){
-    if(userInput.length === 0){
-      throw new Error("숫자를 입력하세요")
+  isVaildUserInput(userInputValue){
+    if(userInputValue.length <= 0 || userInputValue.length >3){
+      throw new Error("숫자 세자리 수를 입력하세요.");
     }
-    
+    const uniqueUserNum = new Set(userInputValue);
+    if(uniqueUserNum.size !== userInputValue.length){
+      throw new Error("중복되지 않는 숫자를 입력하세요.");
+    }
   }
+
+
+
   play(){
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getRandumNumber();
     this.userInput();
+  
   }
   
 }
 const app= new App();
-console.log(app.play())
+app.play()
 
 module.exports = App;
