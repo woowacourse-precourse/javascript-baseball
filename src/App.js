@@ -71,6 +71,9 @@ function compareAnswer(playerAnswer) {
   if (strike()) {
     MissionUtils.Console.print(strikeArray.length + "스트라이크");
   }
+  if (!creatComputerAnswer.some((number) => playerAnswer.includes(number))) {
+    MissionUtils.Console.print("낫싱");
+  }
 }
 
 function startGame() {
