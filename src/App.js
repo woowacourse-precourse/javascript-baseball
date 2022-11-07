@@ -55,29 +55,38 @@ class App {
   }
 
   // 숫자 비교
-compareNum(com_num, user_num){
-  let strike = 0;
-  let ball = 0;
+  compareNum(com_num, user_num){
+    let strike = 0;
+    let ball = 0;
 
-  for(let i = 0; i < 3; i ++){
-    let index = com_num.indexOf(user_num.charAt(i));
-    if(index === -1){
-      continue;
-    } else if(index === i){
-      strike += 1;
-    } else{
-      ball += 1;
+    for(let i = 0; i < 3; i ++){
+      let index = com_num.indexOf(user_num.charAt(i));
+      if(index === -1){
+        continue;
+      } else if(index === i){
+        strike += 1;
+      } else{
+        ball += 1;
+      }
+    }
+    this.printResult(strike, ball);
+    if(strike === 3){
+      return true;
+    } else {
+      return false;
     }
   }
-  this.printResult(strike, ball);
-  if(strike === 3){
-    return true;
-  } else {
-    return false;
+
+  // 사용자 input 받기
+  getUserNum(computer){
+    let user;
+    do{
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_number)=> {
+        user = input_number;
+      });
+      this.checkExceptionOne(user);
+    } while(!this.compareNum(computer, user));
   }
-}
-
-
 
 }
 
