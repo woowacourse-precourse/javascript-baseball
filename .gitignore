@@ -1,1 +1,7 @@
 node_modules
+.eslintrc.yml
+.prettierrc.yml
+package.json
+package-lock.json
+
+
