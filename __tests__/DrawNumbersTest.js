@@ -1,8 +1,13 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 const getThreeRandomNumbers = require("../src/ThreeRandomNumbers");
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("../src/constants/constantValues");
 
-describe.only("숫자 뽑기 테스트", () => {
+afterEach(() => {
+  MissionUtils.Console.close();
+});
+
+describe("숫자 뽑기 테스트", () => {
   test("숫자 개수가 3개인지 확인", () => {
     const threeRandomNumber = getThreeRandomNumbers();
 
