@@ -21,6 +21,12 @@ class App {
       }
     }
   };
+
+  checkUserInputLength(userInput) {
+    if (userInput.length !== 3) {
+      throw new Error('3자리로 입력해주세요.');
+    }
+  };
 }
 
 module.exports = App;
