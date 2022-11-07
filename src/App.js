@@ -85,8 +85,10 @@ class App {
       }
       if (answer === '2') {
         this.print('게임 종료');
+        Console.close();
         return;
       }
+      Console.close();
       throw new Error('잘못된 값을 입력하셨습니다.');
     });
   }
