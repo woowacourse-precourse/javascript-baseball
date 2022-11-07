@@ -49,11 +49,8 @@ class BaseballGame {
     let strikeCount = 0;
     let ballCount = 0;
     userInputArray.map((number, index) => {
-      if (number === computerNumbersArray[index]) {
-        strikeCount++;
-      } else if (computerNumbersArray.includes(number)) {
-        ballCount++;
-      }
+      (number === computerNumbersArray[index]) ? strikeCount++ :
+        (computerNumbersArray.includes(number)) ? ballCount++ : 0;
     });
     return { strikeCount, ballCount };
   }
