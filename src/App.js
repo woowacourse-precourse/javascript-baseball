@@ -1,4 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  isInvalidLength,
+  isDuplicated,
+  isNaN,
+  includeSpace,
+} = require("../src/inputValidation");
 
 class App {
   play() {}
