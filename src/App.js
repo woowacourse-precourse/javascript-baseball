@@ -38,6 +38,7 @@ class App {
         }
         if (answer === "2") {
           MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
         }
         if (answer !== "1" && answer !== "2") this.restartOrShutdown();
       }
