@@ -25,6 +25,13 @@ class App {
       throw new Error("중복된 값");
   }
 
+  isCorrectRestartInput(value) {
+    const regExp = /^[1-2]{1}$/;
+    if (!regExp.test(value))
+      throw new Error("잘못된 재시작 값");
+  }
+
+
   stringToAnswerType(value) {
     return value.split('').map(Number);
   }
@@ -69,6 +76,7 @@ class App {
   askRestart() {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+      this.isCorrectRestartInput(input);
       if (input === "1") { // 재시작
         this.newGame();
       }
