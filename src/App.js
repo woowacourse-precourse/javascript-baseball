@@ -8,9 +8,7 @@ const pickRandomNumber = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
 };
 
-let answer = pickRandomNumber();
-
-const getUserInput = () => {
+const getUserInput = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
     validateUserInput(input);
     evaluateUserInput(answer, input);
@@ -65,13 +63,14 @@ const gameEnd = (answer, input) => {
 
   if (strike === 3)
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-  else return getUserInput();
+  else return getUserInput(answer);
 };
 
 class App {
   play() {
+    let answer = pickRandomNumber()
     gameStart();
-    getUserInput();
+    getUserInput(answer);
   }
 }
 
