@@ -21,7 +21,6 @@ function checkball(randomNum,userNumber){
   var randomNum =String(randomNum);
   var userNumber =String(userNumber);
   var ball=0;
-
   //리스트로 값 이동
   for(let i=0; i<3; i++){
       randomNumList.push(randomNum[i]);
@@ -34,4 +33,13 @@ function checkball(randomNum,userNumber){
       }
   }
   return ball;
+}
+
+function checkNothing(strike,ball){
+  var nothing;
+  if(strike==0 && ball==0){
+      nothing=1;
+  }
+  else{ nothing=0;}
+  return nothing;
 }
