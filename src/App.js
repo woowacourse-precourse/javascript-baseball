@@ -1,13 +1,11 @@
-const { print, close, readline, pickNumberInRange } = require("./Utils");
+const { print, close, readLine, pickNumberInRange } = require("./Utils");
 const ExceptionCheck = require("./ExceptionCheck");
 
 class App {
-  constructor() {
-    //게임 정보
-    this.correctAnswer;
-    this.userInput;
-    this.ball = 0;
-    this.strike = 0;
+  #computerNums;
+
+  gamaStartAlram() {
+    print("게임을 시작합니다");
   }
 
   play() {
@@ -16,16 +14,12 @@ class App {
     this.getAnswer();
   }
 
-  gamaStartAlram() {
-    print("게임을 시작합니다");
-  }
-
   createRandomNum() {
     let computerRandomNums = new Set();
     while (computerRandomNums.size < 3) {
       computerRandomNums.add(pickNumberInRange(1, 9));
     }
-    return this.correctAnswer = [...computerRandomNums].join('');
+    return this.#computerNums = [...computerRandomNums].join('');
   }
 
   getAnswer() {
