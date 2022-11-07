@@ -23,19 +23,19 @@ class PlayGame extends Mission {
   printMessage(scoreMessage, computerNumbers) {
     this.missionConsole.print(scoreMessage);
 
-    if (scoreMessage === "3스트라이크") {
-      this.missionConsole.print(this.messageForVictory());
+    if (scoreMessage === this.MESSAGE_FOR_VICTORY_SCORE) {
+      this.missionConsole.print(this.MESSAGE_FOR_VICTORY);
       this.askOpinionForRestart();
       return;
     }
-    if (scoreMessage !== "3스트라이크") {
+    if (scoreMessage !== this.MESSAGE_FOR_VICTORY_SCORE) {
       this.gameStart(computerNumbers);
       return;
     }
   }
 
   askOpinionForRestart() {
-    this.missionConsole.readLine(this.messageForRestart(), (opinion) => {
+    this.missionConsole.readLine(this.MESSAGE_FOR_RESTART, (opinion) => {
       if (opinion === "1") {
         this.gameReady();
         return;
@@ -44,20 +44,8 @@ class PlayGame extends Mission {
         this.missionConsole.close();
         return;
       }
-      throw this.messageForRestartInput();
+      throw this.MESSAGE_FOR_RESTART_WRONG_INPUT;
     });
-  }
-
-  messageForRestartInput() {
-    return "잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
-  }
-
-  messageForVictory() {
-    return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-  }
-
-  messageForRestart() {
-    return "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
   }
 }
 
