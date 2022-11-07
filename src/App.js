@@ -99,6 +99,15 @@ class App {
     return false;
   }
 
+  static printScoreResult(score) {
+    let resultMessage;
+    if (App.isZeroScore(score)) resultMessage = ZERO_SCORE_MESSAGE;
+    if (score.ball > 0 && score.strike > 0) resultMessage = `${score.ball}${BALL_MESSAGE} ${score.strike}${STRIKE_MESSAGE}`;
+    if (score.ball > 0 && score.strike === 0) resultMessage = `${score.ball}${BALL_MESSAGE}`;
+    if (score.ball === 0 && score.strike > 0) resultMessage = `${score.strike}${STRIKE_MESSAGE}`;
+    MissionUtils.Console.print(resultMessage);
+  }
+
   static playGame(computerNum) {
     let score;
 
@@ -107,12 +116,12 @@ class App {
       if (!App.isCorrectInput(userInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
       score = App.calculateScore(computerNum, userInput);
+
+      App.printScoreResult(score);
       
       if (App.isThreeStrike(score)) {
-        MissionUtils.Console.print(`${score.strike}${STRIKE_MESSAGE}`);
         MissionUtils.Console.print(THREE_STRIKE_MESSAGE);
-        MissionUtils.Console.readLine(ANSWER_RESTART_OR_FINISH,
-          (selectInput) => {
+        MissionUtils.Console.readLine(ANSWER_RESTART_OR_FINISH, (selectInput) => {
             if (!App.isOneOrTwo(selectInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
             if (selectInput === RESTART) {
@@ -121,17 +130,10 @@ class App {
             }
             
             App.finishGame();
-          });
+        });
       }
 
-      if (!App.isThreeStrike(score)) {        
-        let resultMessage;
-        if (App.isZeroScore(score)) resultMessage = ZERO_SCORE_MESSAGE;
-        if (score.ball > 0 && score.strike > 0) resultMessage = `${score.ball}${BALL_MESSAGE} ${score.strike}${STRIKE_MESSAGE}`;
-        if (score.ball > 0 && score.strike === 0) resultMessage = `${score.ball}${BALL_MESSAGE}`;
-        if (score.ball === 0 && score.strike > 0) resultMessage = `${score.strike}${STRIKE_MESSAGE}`;
-        
-        MissionUtils.Console.print(resultMessage);
+      if (!App.isThreeStrike(score)) {
         App.playGame(computerNum);
         return;
       }
