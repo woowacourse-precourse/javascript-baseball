@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { GAME_ANNOUNCEMENT_MESSAGE, } = require('./constants.js');
+const { GAME_ANNOUNCEMENT_MESSAGE, WRONG_INPUT_ALERT, } = require('./constants.js');
 
 class Score {
   constructor(ball, strike){
@@ -24,7 +24,13 @@ function getUserInput() {
   })
 }
 
-function checkInput () {
+function checkInput (input) {
+  let inputArr = input.toString().split('');
+  if (!Number(input)) throw WRONG_INPUT_ALERT.NOT_NUMBER
+  else if (input < 0) throw WRONG_INPUT_ALERT.NOT_POSITIVE
+  else if (inputArr.length !== 3) throw WRONG_INPUT_ALERT.NOT_THREE_DIGITS
+  else if (new Set(inputArr).size !== 3) throw WRONG_INPUT_ALERT.NOT_UNIQUE_NUMBER
+  else if (inputArr.includes('0')) throw WRONG_INPUT_ALERT.INCLUDES_ZERO
 }
 
 function compareNumber () {
