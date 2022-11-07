@@ -24,7 +24,6 @@ class App {
 
   createComputerNumber() {
     this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
-    MissionUtils.Console.print(this.computerNumber);
   }
 
   gameStart() {
@@ -32,8 +31,6 @@ class App {
       this.getUserNumber(input);
       if (!this.isValidUserNumber(this.userNumber)) {
         throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
-      } else {
-        MissionUtils.Console.print('hi');
       }
     });
   }
@@ -69,6 +66,14 @@ class App {
       }
     });
     return true;
+  }
+
+  getNumberOfBalls(computerNumber, userNumber) {
+    let numberOfBalls = 0;
+    computerNumber.split('').forEach((digit, idx) => {
+      if (userNumber.includes(digit) && computerNumber[idx] !== userNumber[idx]) numberOfBalls += 1;
+    });
+    return numberOfBalls;
   }
 }
 const app = new App();
