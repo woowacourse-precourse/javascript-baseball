@@ -24,7 +24,9 @@ class App {
   }
 
   proceedGame(){
-    console.log(this.computer);
+    MissionUtils.Console.readLine(MESSAGES.INPUT, (input) => {
+      console.log(input);
+    });
   }
 }
 
