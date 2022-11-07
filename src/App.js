@@ -36,7 +36,6 @@ class App {
   return Console.readLine('숫자를 입력해주세요 : ',(input) => {
     this.validateInput(input);
     this.setUserNumbers(parseInt(input));
-    Console.close();
     })
   }
 
@@ -56,10 +55,16 @@ class App {
   answerReplayGame() {
     Console.print(`게임을 새로 시작하려면 ${REPLAY_GAME_KEY}, 종료하려면 ${END_GAME_KEY}를 입력하세요.`);
     Console.readLine('', (answer) => {
+
       if(answer === REPLAY_GAME_KEY) return this.startGame();
-      if(answer === END_GAME_KEY) return Console.print('게임 종료');
+      if(answer === END_GAME_KEY) return this.EndGame();
       if(answer !== REPLAY_GAME_KEY && answer !== END_GAME_KEY) throw new RangeError(`${REPLAY_GAME_KEY} 또는 ${END_GAME_KEY}를 입력하세요.`);
     })
+  }
+
+  EndGame(){
+    Console.print('게임 종료');
+    Console.close();
   }
 
   setUserNumbers(userNumbers) {
