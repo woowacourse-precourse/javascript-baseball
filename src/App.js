@@ -21,7 +21,6 @@ function makeRandom(){
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!computerNums.includes(number)) computerNums.push(number);
   }
-  console.log(computerNums);
   return computerNums;
 }
 
@@ -36,7 +35,14 @@ function baseBall(answers){
     if(!nothing) countStrike = isStrike(answers, inputNums);
     if(!nothing) countBall = isBall(answers, inputNums, countStrike);
     printResult(countBall, countStrike);
+
+    if (countStrike===3) {
+      console.log("count strike : ",countStrike);
+      if(isRestart()) Console.close();
+    }
+    else baseBall(answers);
   });
+  return countStrike;
 }
 
 function exceptionHandling(input){
@@ -96,6 +102,14 @@ function printResult(countBall, countStrike){
     Console.print(countStrike+"스트라이크");
   }
   if(countStrike===3) Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+}
+
+function isRestart(){
+  Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (boolRestart) => {
+    if(boolRestart == 2) Console.close();
+    else if(boolRestart == 1) gameStart();
+    else throw new Error();
+  });
 }
 
 module.exports = App;
