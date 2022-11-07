@@ -13,21 +13,26 @@ const generateRandomBallNumber = () => {
 }
 
 const countBallStrike = (computerNumbersArray, userNumbersArray) => {
-    // 코드 분리가 필요한 부분
-    let ball = 0;
-    let strike = 0;
+    const count = {
+        ball: 0,
+        strike: 0,
+    };
     for (let computerIndex = 0; computerIndex < 3; computerIndex++) {
         for (let userIndex = 0; userIndex < 3; userIndex++) {
-            if (computerNumbersArray[computerIndex] === userNumbersArray[userIndex]) {
-                if (computerIndex === userIndex) {
-                    strike++;
-                } else {
-                    ball++;
-                }
-            }
+            countAfterCompareNumbers(count, computerNumbersArray, computerIndex, userNumbersArray, userIndex);
         }
     }
-    return { ball, strike }
+    return count;
+}
+
+const countAfterCompareNumbers = (count, computerNumbersArray, computerIndex, userNumbersArray, userIndex) => {
+    if (computerNumbersArray[computerIndex] === userNumbersArray[userIndex]) {
+        if (computerIndex === userIndex) {
+            count.strike++;
+        } else {
+            count.ball++;
+        }
+    }
 }
 
 const printBallStrike = (ball, strike) => {
