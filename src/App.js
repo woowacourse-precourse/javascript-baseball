@@ -2,14 +2,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   makeComputerNumber() {
-    const computer = [];
-    while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
+    const COMPUTER_NUMBER = [];
+    while (COMPUTER_NUMBER.length < 3) {
+      const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!COMPUTER_NUMBER.includes(NUMBER)) {
+        COMPUTER_NUMBER.push(NUMBER);
       }
     }
-    return computer.join("");
+    return COMPUTER_NUMBER.join("");
   }
 
   checkType(num) {
@@ -19,11 +19,11 @@ class App {
     if (num < 123 || num > 987) throw "자릿수 오류";
   }
   checkOverlap(num) {
-    const number = String(num).split("");
+    const NUMBER = String(num).split("");
     if (
-      number[0] == number[1] ||
-      number[0] == number[2] ||
-      number[1] == number[2]
+      NUMBER[0] == NUMBER[1] ||
+      NUMBER[0] == NUMBER[2] ||
+      NUMBER[1] == NUMBER[2]
     )
       throw "입력값 중복 발생";
   }
@@ -35,27 +35,27 @@ class App {
     this.checkOverlap(number);
   }
 
-  checkBall(comNum, userNum) {
+  checkBall(COMNUM, USERNUM) {
     let ballCnt = 0;
-    if (comNum[0] == userNum[1]) ballCnt++;
-    if (comNum[0] == userNum[2]) ballCnt++;
-    if (comNum[1] == userNum[0]) ballCnt++;
-    if (comNum[1] == userNum[2]) ballCnt++;
-    if (comNum[2] == userNum[0]) ballCnt++;
-    if (comNum[2] == userNum[1]) ballCnt++;
+    if (COMNUM[0] == USERNUM[1]) ballCnt++;
+    if (COMNUM[0] == USERNUM[2]) ballCnt++;
+    if (COMNUM[1] == USERNUM[0]) ballCnt++;
+    if (COMNUM[1] == USERNUM[2]) ballCnt++;
+    if (COMNUM[2] == USERNUM[0]) ballCnt++;
+    if (COMNUM[2] == USERNUM[1]) ballCnt++;
     return ballCnt;
   }
 
-  checkStrike(comNum, userNum) {
+  checkStrike(COMNUM, USERNUM) {
     let strikeCnt = 0;
-    if (comNum[0] == userNum[0]) strikeCnt++;
-    if (comNum[1] == userNum[1]) strikeCnt++;
-    if (comNum[2] == userNum[2]) strikeCnt++;
+    if (COMNUM[0] == USERNUM[0]) strikeCnt++;
+    if (COMNUM[1] == USERNUM[1]) strikeCnt++;
+    if (COMNUM[2] == USERNUM[2]) strikeCnt++;
     return strikeCnt;
   }
 
-  checkNothing(ballCnt, strikeCnt) {
-    if (ballCnt == 0 && strikeCnt == 0) return 1;
+  checkNothing(BALL_CNT, STRIKE_CNT) {
+    if (BALL_CNT == 0 && STRIKE_CNT == 0) return 1;
   }
 
   gameResult(STRIKE_CNT) {
@@ -83,8 +83,9 @@ class App {
   }
 
   play() {
-    let playing = true;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
+    let playing = true;
+
     while (playing) {
       const COM_NUMBER = this.makeComputerNumber();
       let clear = false;
