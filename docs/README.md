@@ -13,9 +13,9 @@
 
 ---
 
-- [] 컴퓨터가 임의의 숫자 생성한다
-  - [] 서로 다른 임의수 3개 생성
-  - [] MissionUtils 라이브러리 Random.pickNumberInRange() 사용한다.
+- [x] 컴퓨터가 임의의 숫자 생성한다
+  - [x] 서로 다른 임의수 3개 생성
+  - [x] MissionUtils 라이브러리 Random.pickNumberInRange() 사용한다.
 - [] 사용자의 입력을 받는다.
   - [] 입력한 값이 숫자 인지 판단한다
   - [] 숫자가 아니라면 throw문을 통해 에러 발생 후 어플리케이션 종료
