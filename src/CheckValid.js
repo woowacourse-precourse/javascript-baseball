@@ -1,4 +1,4 @@
-const { ERROR } = require("./constants");
+const { ERROR } = require("./data/constants");
 
 function checkLength(userNum) {
   if (userNum.length !== 3) {
@@ -37,37 +37,32 @@ function checkLengthOfRetryUserInput(retryNum) {
 }
 
 class CheckInputValid {
-  constructor({ userNum, retryNum }) {
-    this.userNum = userNum;
-    this.retryNum = retryNum;
-  }
-
-  checkValidation() {
-    if (checkLength(this.userNum) === false) {
+  checkUserInput(userNum) {
+    if (checkLength(userNum) === false) {
       return ERROR.USER_INPUT_LENGTH;
     }
 
-    if (checkDuplicates(this.userNum) === false) {
+    if (checkDuplicates(userNum) === false) {
       return ERROR.USER_INPUT_DUPLICATES;
     }
 
-    if (checkRange(this.userNum) === false) {
+    if (checkRange(userNum) === false) {
       return ERROR.USER_INPUT_RANGE;
     }
-    if (checkBlank(this.userNum) === false) {
+    if (checkBlank(userNum) === false) {
       return ERROR.USER_INPUT_BLANK;
     }
     return ERROR.USER_INPUT_PASS;
   }
 
-  checkRetryInput() {
-    if (checkRangeOfRetryUserInput(this.retryNum) === false) {
+  checkUserRetryInput(retryNum) {
+    if (checkRangeOfRetryUserInput(retryNum) === false) {
       return ERROR.USER_RETRY_INPUT_RANGE;
     }
-    if (checkBlank(this.retryNum) === false) {
+    if (checkBlank(retryNum) === false) {
       return ERROR.USER_RETRY_INPUT_BLANK;
     }
-    if (checkLengthOfRetryUserInput(this.retryNum) === false) {
+    if (checkLengthOfRetryUserInput(retryNum) === false) {
       return ERROR.USER_RETRY_INPUT_LENGTH;
     }
     return ERROR.USER_INPUT_PASS;
