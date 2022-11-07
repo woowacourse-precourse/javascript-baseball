@@ -10,7 +10,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.computerNumber();
-    this.start();
+    this.inputNumber();
   }
 
   computerNumber() {
@@ -23,25 +23,24 @@ class App {
     }
   }
 
-  start() {
+  inputNumber() {
     this.ball = 0;
     this.strike = 0;
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      const regExp = /^[1-9]{3}$/;
-      if (regExp.test(answer)) {
-        this.ballAndStrikeCount(answer);
-        MissionUtils.Console.print(this.ballAndStrikeMessage());
-
-        if (this.strike === 3) {
-          this.endMessage();
-        } else {
-          this.start();
-        }
-      } else {
-        throw new Error();
-      }
+      this.process(answer);
     });
+  }
+
+  process(answer) {
+    const regExp = /^[1-9]{3}$/;
+    if (regExp.test(answer)) {
+      this.ballAndStrikeCount(answer);
+      MissionUtils.Console.print(this.ballAndStrikeMessage());
+      this.threeStrikeCheck();
+    } else {
+      throw new Error();
+    }
   }
 
   ballAndStrikeCount(answer) {
@@ -65,21 +64,33 @@ class App {
     }
   }
 
+  threeStrikeCheck() {
+    if (this.strike === 3) {
+      this.endMessage();
+    } else {
+      this.inputNumber();
+    }
+  }
+
   endMessage() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
     MissionUtils.Console.readLine("", (answer) => {
-      if (answer === "1") {
-        this.computerNumber();
-        this.start();
-      } else if (answer === "2") {
-        MissionUtils.Console.close();
-      } else {
-        throw new Error();
-      }
+      this.gameOrEnd(answer);
     });
+  }
+
+  gameOrEnd(answer) {
+    if (answer === "1") {
+      this.computerNumber();
+      this.inputNumber();
+    } else if (answer === "2") {
+      MissionUtils.Console.close();
+    } else {
+      throw new Error();
+    }
   }
 }
 module.exports = App;
