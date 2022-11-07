@@ -7,6 +7,7 @@ const {
   OPTIONS,
 } = require("./constants");
 const { selectComputer } = require("./modules/selectComputer");
+const { isUserError } = require("./modules/isUserError");
 
 class App {
   play() {
@@ -25,43 +26,9 @@ class App {
 
   solveNumber(computer) {
     MissionUtils.Console.readLine(MESSAGES.INPUT_NUMBER, (num) => {
-      this.isUserError(num, computer);
+      isUserError(num);
+      this.countScore(computer, num);
     });
-  }
-
-  isUserError(user, computer) {
-    this.checkOverlap(user);
-    this.checkLength(user);
-    this.checkNumber(user);
-    this.checkRange(user);
-
-    this.countScore(computer, user);
-  }
-
-  checkOverlap(number) {
-    const numberList = number.split("").sort();
-    const validNumber = [...new Set(numberList)];
-    if (validNumber.length < 3) {
-      throw ERRORS.OVERLAP;
-    }
-  }
-
-  checkLength(number) {
-    if (number.length !== NUMBER_LENGTH) {
-      throw ERRORS.LENGTH;
-    }
-  }
-
-  checkNumber(number) {
-    if (isNaN(number)) {
-      throw ERRORS.TYPE;
-    }
-  }
-
-  checkRange(number) {
-    if (number.includes("0")) {
-      throw ERRORS.RANGE;
-    }
   }
 
   countScore(computer, user) {
