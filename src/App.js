@@ -43,6 +43,12 @@ class App {
       if (!inputError.checkAllUserInput) {
         return this.throwError();
       }
+      const { strike, ball } = this.getStrikeBallCount(solution, userinput);
+      this.print(this.getResultMessage(strike, ball));
+
+      if (strike !== 3) {
+        this.readInput(solution);
+      }
 
       Console.close();
     });
