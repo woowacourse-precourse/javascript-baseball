@@ -4,7 +4,6 @@ class App {
   play() {
 
   }
-  
   checkException(num){
     if(isNaN(num)){
       throw new Error("숫자를 입력하세요.");
@@ -23,14 +22,47 @@ class App {
     }
   }
 
-  getUserNum(){
+  getUserNum(com_num){
     let user_num;
     do{
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
         user_num = input;
       });        
       this.checkException(user_num);
-    } while();
+    } while(!this.compareNum(com_num, user_num));
+  }
+
+  compareNum(com_num, user_num){
+    let strike = 0;
+    let ball = 0;
+
+    for(let i = 0; i < 3; i++){
+      let index = com_num.indexOf(user_num.charAt(i));
+      if(index === -1){
+        continue;
+      } else if (index === i){
+        strike += 1;
+      } else {
+        ball += 1;
+      }
+    }
+
+    if(strike === 3){
+      return 1;
+    }
+    return 0;
+  }
+
+  printStrikeBall(strike, ball){
+    if(ball === 0 && strike === 0){
+      MissionUtils.Console.print("낫싱");
+    } else if(ball === 0){
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    } else if(strike === 0){
+      MissionUtils.Console.print(`${ball}볼`);
+    } else{
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
   }
 
   getRandomNum(){
