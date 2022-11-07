@@ -67,13 +67,13 @@
 
 ## 5. 결과값을 반환하는 기능(#getResult) 구현
 
-- [ ] 1. [ballCnt, strikeCnt] 배열을 인자로 받음
-- [ ] 2. 배열 값이 모두 0일 경우 #GAME_RESULT.NOTHING return
-- [ ] 3. 0이 아닌 값이 있을 경우
-  - [ ] 3.1 [#GAME_RESULT.BALL, #GAME_RESULT.STRIKE]과 합쳐서 2차원 배열화
-  - [ ] 3.2 요소 개수에 따라 string array로 변환(`Array.prototype.filter`, `Array.prototype.map` 이용)
-  - [ ] 3.3 출력할 string으로 변환(`Array.prototype.join`을 이용)
-- [ ] 4. 해당 문자열 return
+- [x] 1. [ballCnt, strikeCnt] 배열을 인자로 받음
+- [x] 2. 배열 값이 모두 0일 경우 #GAME_RESULT.NOTHING return
+- [x] 3. 0이 아닌 값이 있을 경우
+  - [x] 3.1 [#GAME_RESULT.BALL, #GAME_RESULT.STRIKE]과 합쳐서 2차원 배열화
+  - [x] 3.2 요소 개수에 따라 string array로 변환(`Array.prototype.filter`, `Array.prototype.map` 이용)
+  - [x] 3.3 출력할 string으로 변환(`Array.prototype.join`을 이용)
+- [x] 4. 해당 문자열 return
 
 ## 6. 결과값을 출력하는 기능(#printResult) 구현
 

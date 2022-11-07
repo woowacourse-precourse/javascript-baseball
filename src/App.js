@@ -77,6 +77,17 @@ class App {
       [0, 0]
     );
   }
+  #getResult([ballCnt, strikeCnt]) {
+    return ballCnt === 0 && strikeCnt === 0
+      ? this.#GAME_RESULT.NOTHING
+      : [
+          [ballCnt, this.#GAME_RESULT.BALL],
+          [strikeCnt, this.#GAME_RESULT.STRIKE],
+        ]
+          .filter(([cnt]) => cnt > 0)
+          .map((line) => line.join(""))
+          .join(" ");
+  }
   play() {}
 }
 
