@@ -13,9 +13,8 @@ class App {
   }
 
   userInputProcess() {
-    Console.readLine('숫자를 입력해주세요.', (inputNum) => {
+    Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
       if (this.userInputvalidation(inputNum)) {
-        console.log(`숫자를 입력해주세요 : ${inputNum}`);
         this.showResult(inputNum);
       } else {
         Console.print(`${inputNum}는(은) 유효하지 않는 값입니다. 게임 종료`);
@@ -59,8 +58,7 @@ class App {
 
   gameEnd() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (endNum) => {
-      console.log(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ${endNum}`);
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (endNum) => {
       this.gameEndvalidation(endNum);
     });
   }
@@ -72,12 +70,12 @@ class App {
         break;
       }
       case '2': {
-        Console.print('게임종료');
         Console.close();
         break;
       }
       default: {
-        this.gameEnd();
+        Console.close();
+        this.throwError();
         break;
       }
     }
