@@ -1,5 +1,5 @@
-const MissonUtils = require("@woowacourse/mission-utils");
-const { Random, Console } = MissonUtils;
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Random, Console } = MissionUtils;
 
 class App {
   #RANDOM_NUM_LENGTH = 3;
