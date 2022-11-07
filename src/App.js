@@ -3,17 +3,22 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    console.log("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
   }
   play() {
-    // console.log(MissionUtils.Random.pickNumberInList([1, 2, 3]), "ㄴㄹㅁㄴㄹ");
-    // // 입력
-    // Console.readLine("닉네임을 입력해주세요.", (answer) => {
-    //   console.log(`닉네임: ${answer}`);
-    // });
-    // // 출력
-    // Console.print("안녕하세요.");
-    // Console.close();
+    this.makeRandomNum();
+    this.enterUserInput();
+  }
+
+  enterUserInput() {
+    Console.readLine("숫자를 입력해주세요 : ", (userInputValue) => {
+      // 여기서 입력된 값을 비교하는 함수를 따로 만든다.
+      this.getStrikeAndBall(userInputValue);
+    });
+  }
+
+  getStrikeAndBall(userValue) {
+    const computerValue = this.makeRandomNum();
   }
 
   makeRandomNum() {
@@ -25,12 +30,12 @@ class App {
       }
     }
 
-    console.log(computerRandomNum.join(""));
+    console.log(computerRandomNum.join("")); // ❌
 
     return computerRandomNum.join("");
   }
 }
 const app = new App();
-app.makeRandomNum();
+app.play();
 
 module.exports = App;
