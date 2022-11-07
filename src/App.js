@@ -37,6 +37,17 @@ function strikeCheck(playerNumber, computerNumber) {
   return count;
 }
 
+// 볼 카운트
+function ballCheck(playerNumber, computerNumber) {
+  let count = 0;
+  computerNumber.split("").forEach((num) => {
+    if (playerNumber.includes(num)) {
+      count++;
+    }
+  });
+  return count;
+}
+
 const app = new App();
 app.play();
 
