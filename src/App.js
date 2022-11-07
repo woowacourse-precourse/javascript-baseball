@@ -32,7 +32,7 @@ class App {
   }
 
   async inputNumber(message) {
-    const number = await input(message);
+    const number = await this.input(message);
 
     return [...number].map((num) => Number(num));
   }
