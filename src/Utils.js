@@ -1,6 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MISSION_UTILS = require("@woowacourse/mission-utils");
 
-const consoleUtil = MissionUtils.Console;
-const randomUtil = MissionUtils.Random;
+const CONSOLE_UTIL = MISSION_UTILS.Console;
+const RANDOM_UTIL = MISSION_UTILS.Random;
 
-module.exports = { consoleUtil, randomUtil };
+module.exports = { CONSOLE_UTIL, RANDOM_UTIL };
