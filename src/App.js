@@ -1,8 +1,19 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const RESTART = '1';
+const GAME_START_MESSAGE = '숫자 야구 게임을 시작합니다.';
+const GAME_FINISH_MESSAGE = '숫자 야구 게임을 종료합니다.';
+const ENTER_YOUR_NUMBER_MESSAGE = '숫자를 입력해주세요 : ';
+const ZERO_SCORE_MESSAGE = '낫싱';
+const BALL_MESSAGE = '볼';
+const STRIKE_MESSAGE = '스트라이크';
+const THREE_STRIKE_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+const ANSWER_RESTART_OR_FINISH ='게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
+const INPUT_ERROR_MESSAGE = 'Input is invalid';
+
 class App {
   static printGameStart() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(GAME_START_MESSAGE);
   }
 
   static isNumber(str) {
@@ -47,7 +58,7 @@ class App {
   }
   
   static finishGame() {
-    MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
+    MissionUtils.Console.print(GAME_FINISH_MESSAGE);
     MissionUtils.Console.close();
   }
 
@@ -90,19 +101,19 @@ class App {
 
   static playGame(computerNum) {
     let score;
-    const RESTART = '1';
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    MissionUtils.Console.readLine(ENTER_YOUR_NUMBER_MESSAGE, (userInput) => {
       // 사용자가 잘못된 값을 입력한 경우 애플리케이션 종료
-      if (!App.isCorrectInput(userInput)) throw new Error('Input is invalid')
+      if (!App.isCorrectInput(userInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
       score = App.calculateScore(computerNum, userInput);
       
       if (App.isThreeStrike(score)) {
-        MissionUtils.Console.print('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+        MissionUtils.Console.print(`${score.strike}${STRIKE_MESSAGE}`);
+        MissionUtils.Console.print(THREE_STRIKE_MESSAGE);
+        MissionUtils.Console.readLine(ANSWER_RESTART_OR_FINISH,
           (selectInput) => {
-            if (!App.isOneOrTwo(selectInput)) throw new Error('Input is invalid')
+            if (!App.isOneOrTwo(selectInput)) throw new Error(INPUT_ERROR_MESSAGE)
 
             if (selectInput === RESTART) {
               App.restartGame();
@@ -113,10 +124,13 @@ class App {
           });
       }
 
-      if (!App.isThreeStrike(score)) {
-        const ZERO_SCORE_MESSAGE = '낫싱';
-        const SCORE_MESSAGE = `${score.ball}볼 ${score.strike}스트라이크`;
-        let resultMessage = App.isZeroScore(score) ? ZERO_SCORE_MESSAGE : SCORE_MESSAGE ;
+      if (!App.isThreeStrike(score)) {        
+        let resultMessage;
+        if (App.isZeroScore(score)) resultMessage = ZERO_SCORE_MESSAGE;
+        if (score.ball > 0 && score.strike > 0) resultMessage = `${score.ball}${BALL_MESSAGE} ${score.strike}${STRIKE_MESSAGE}`;
+        if (score.ball > 0 && score.strike === 0) resultMessage = `${score.ball}${BALL_MESSAGE}`;
+        if (score.ball === 0 && score.strike > 0) resultMessage = `${score.strike}${STRIKE_MESSAGE}`;
+        
         MissionUtils.Console.print(resultMessage);
         App.playGame(computerNum);
         return;
@@ -136,5 +150,8 @@ class App {
     App.playGame(computerNum);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
