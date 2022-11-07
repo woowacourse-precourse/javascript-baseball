@@ -12,9 +12,9 @@ class App {
 
   randomComputerNumber() {
     while (COMPUTER_NUMBER.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!COMPUTER_NUMBER.includes(number)) {
-        COMPUTER_NUMBER.push(number);
+      const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!COMPUTER_NUMBER.includes(NUMBER)) {
+        COMPUTER_NUMBER.push(NUMBER);
       }
     }
   }
@@ -72,10 +72,10 @@ class App {
     strikeBallCount[0] = 0;
     strikeBallCount[1] = 0;
     MissionUtils.Console.print(result);
-    this.startEnd(result);
+    this.checkResult(result);
   }
 
-  startEnd(result) {
+  checkResult(result) {
     if (result == "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.restartEnd();
