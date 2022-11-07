@@ -58,18 +58,17 @@ class App {
     }
 
     ballStrikeCount() {
-        this.judgeStrike();
-        this.judgeBall();
-        const strikeCount = this.strike;
-        const ballCount = this.ball;
+        const ballCount = this.judgeBall();
+        const strikeCount = this.judgeStrike();
         this.printResult(strikeCount, ballCount);
     }
     judgeStrike() {
-        this.strike = this.computerNumber.filter((el, idx) => el.toString() === this.guess[idx]).length;
+        const strike = this.computerNumber.filter((el, idx) => el.toString() === this.guess[idx]).length;
+        return strike;
     }
     judgeBall() {
         const ball = this.computerNumber.filter((el) => this.guess.includes(el.toString()));
-        this.ball = ball.length;
+        return ball.length;
     }
 
     printResult(strikeCount, ballCount) {
