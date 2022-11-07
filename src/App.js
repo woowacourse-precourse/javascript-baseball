@@ -50,6 +50,30 @@ class App {
       return false;
     };
 
+    const checkNumbers = (answer) => {
+      let strike = 0;
+      let ball = 0;
+      let result = "낫싱";
+
+      for (let i = 0; i < answer.length; i++) {
+        const index = targetNums.indexOf(answer[i]);
+        if (index === i) {
+          strike += 1;
+        }
+        if (index > -1 && index !== i) {
+          ball += 1;
+        }
+      }
+
+      tries.push(answer);
+
+      if (strike !== 0 || ball !== 0) {
+        result = `${ball}볼 ${strike}스트라이크`;
+      }
+
+      return result;
+    };
+
     const startGame = () => {
       targetNums = randomPick();
       enterNumber();
