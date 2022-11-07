@@ -1,17 +1,15 @@
 const { NUMBER, ERRORS } = require("../constants");
 
 isUserError = (user) => {
-  checkOverlap(user);
-  checkLength(user);
   checkNumber(user);
+  checkLength(user);
+  checkOverlap(user);
   checkRange(user);
 };
 
-checkOverlap = (number) => {
-  const numberList = number.split("").sort();
-  const validNumber = [...new Set(numberList)];
-  if (validNumber.length < NUMBER.LENGTH) {
-    throw ERRORS.OVERLAP;
+checkNumber = (number) => {
+  if (isNaN(number)) {
+    throw ERRORS.TYPE;
   }
 };
 
@@ -21,9 +19,11 @@ checkLength = (number) => {
   }
 };
 
-checkNumber = (number) => {
-  if (isNaN(number)) {
-    throw ERRORS.TYPE;
+checkOverlap = (number) => {
+  const numberList = number.split("").sort();
+  const validNumber = [...new Set(numberList)];
+  if (validNumber.length < NUMBER.LENGTH) {
+    throw ERRORS.OVERLAP;
   }
 };
 
