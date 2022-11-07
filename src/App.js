@@ -93,8 +93,8 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         if (answer === "1") {
-          const refNumbersArray = this.refNumbersArrayGetter();
-          this.gameStarter(refNumbersArray);
+          const newRefNumbersArray = this.refNumbersArrayGetter();
+          this.gameStarter(newRefNumbersArray);
         } else if (answer === "2") {
           MissionUtils.Console.close();
         } else {
