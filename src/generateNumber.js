@@ -15,6 +15,4 @@ function generateNumber() {
   return computerNumArr;
 }
 
-console.log(generateNumber());
-
 module.exports = generateNumber;
