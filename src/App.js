@@ -64,7 +64,10 @@ const gameEnd = (answer, input) => {
   if (strike === 3)
     MissionUtils.Console.readLine(
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => validateRestartInput(input)
+      (input) => {
+        validateRestartInput(input);
+        evaluateRestartInput(answer, input);
+      }
     );
   else return getUserInput(answer);
 };
@@ -74,6 +77,14 @@ const validateRestartInput = (input) => {
     throw new Error("Invalid RestartInput");
 
   return true;
+};
+
+const evaluateRestartInput = (answer, input) => {
+  if (input === "1") {
+    answer = pickRandomNumber();
+    return getUserInput(answer);
+  }
+  if (input === "2") MissionUtils.Console.close();
 };
 
 class App {
