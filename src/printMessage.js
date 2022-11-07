@@ -8,10 +8,12 @@ class printMessage {
 
   setMessage(message) {
     this.message = message;
+    return this;
   }
 
   print() {
     Console.print(this.message);
+    return this;
   }
 }
 
