@@ -24,6 +24,14 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+  test("랜덤 숫자 중복 체크", () => {
+    const app = new App();
+    app.play();
+    const answer = app.answer;
+
+    expect(answer.length).toBe(new Set(answer).size);
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "753", "135", "1", "597", "789", "589", "2"];
