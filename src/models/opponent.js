@@ -14,6 +14,18 @@ class Opponent {
     this.#gong = gong ?? Gong.fromRandom();
     Object.freeze(this);
   }
+
+  /**
+   * 들고 있는 공을 추측합니다. 볼과 스트라이크 갯수를 반환합니다.
+   * @param {Gong} gong
+   * @returns {{ ball: number, strike: number }} 볼과 스트라이크의 갯수
+   */
+  guessGong(gong) {
+    return {
+      ball: this.#gong.countBall(gong),
+      strike: this.#gong.countStrike(gong),
+    };
+  }
 }
 
 module.exports = Opponent;

@@ -42,6 +42,36 @@ class Gong {
     const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     return new Gong(numbers);
   }
+
+  /**
+   * 주어진 공의 스트라이크 갯수를 구합니다.
+   * @param {Gong} otherGong
+   * @returns {number} 스트라이크 갯수
+   */
+  countStrike(otherGong) {
+    return this.#numbers.reduce(
+      (count, number, index) =>
+        count +
+        // 숫자와 인덱스가 모두 같은 경우 +1
+        (otherGong.#numbers[index] === number ? 1 : 0),
+      0,
+    );
+  }
+
+  /**
+   * 주어진 공의 볼 갯수를 구합니다.
+   * @param {Gong} otherGong
+   * @returns {number} 볼 갯수
+   */
+  countBall(otherGong) {
+    return this.#numbers.reduce(
+      (count, number, index) =>
+        count +
+        // 숫자는 포함하되 동일한 인덱스에 있지 않은 경우 +1
+        (otherGong.#numbers[index] !== number && otherGong.#numbers.includes(number) ? 1 : 0),
+      0,
+    );
+  }
 }
 
 module.exports = Gong;
