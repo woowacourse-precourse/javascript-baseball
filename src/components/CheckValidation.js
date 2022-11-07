@@ -5,13 +5,13 @@ const CheckValidation = (answer) => {
   let length = answer.length;
 
   hasZero(answer, length);
-  length > 1 ? checkDuplicated(splitAnswer) : "";
+  if (length > 1) checkDuplicated(splitAnswer);
   containNotANumber(splitAnswer, length);
-  length === 3 ? "" : notRightLength(length);
+  if (length !== 3) notRightLength(length);
 };
 
 const throwErrorMsg = (typeOfError) => {
-  throw new Error(typeOfError + ERROR_MESSAGE.GUIDE_MSG);
+  throw typeOfError + ERROR_MESSAGE.GUIDE_MSG;
 };
 
 const hasZero = (answer) => {

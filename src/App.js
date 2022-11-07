@@ -52,7 +52,7 @@ class App {
           this.exit();
           break;
         default:
-          throw new Error(GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG);
+          throw GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG;
       }
     });
   }
