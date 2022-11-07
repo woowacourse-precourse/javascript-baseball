@@ -15,7 +15,7 @@ class Validation{
   }
 
   checkSuccess(resultarray){
-    if (resultarray[0] === 3){
+    if (resultarray[0] === constant.GAME.THREENUMBER){
       MissionUtils.Console.print(constant.GAME.ANSWER);
       MissionUtils.Console.print(constant.GAME.ANSWER_NEXT);
       return true;

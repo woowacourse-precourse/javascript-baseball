@@ -1,3 +1,4 @@
+
 const ERROR = Object.freeze({
   INPUT_FORMAT: '각 자릿수가 1-9인 숫자를 입력해주세요',
   INPUT_LENGTH : '숫자는 서로 다른 세 자릿수를 입력해주세요',
@@ -12,6 +13,7 @@ const RESULTS = Object.freeze({
 })
 
 const GAME = Object.freeze({
+  THREENUMBER : 3,
   INPUT : '숫자를 입력해주세요 : ',
   RESTART : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
   START : '숫자 야구 게임을 시작합니다.',

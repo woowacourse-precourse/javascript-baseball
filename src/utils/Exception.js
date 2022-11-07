@@ -6,10 +6,10 @@ class ExceptionCheck{
     if (!/[0-9]+/g.test(input) || String(input).includes('0')){
       return constant.ERROR.INPUT_FORMAT;
     }
-    if (String(input).length !== 3){
+    if (String(input).length !== constant.GAME.THREENUMBER){
       return constant.ERROR.INPUT_LENGTH;
     }
-    if ((new Set(Array.from(input))).size !== 3){
+    if ((new Set(Array.from(input))).size !== constant.GAME.THREENUMBER){
       return constant.ERROR.INPUT_DUPLICATE;
     }
     return false;
