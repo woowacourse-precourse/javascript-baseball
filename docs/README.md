@@ -20,3 +20,15 @@
   - ball, strike 둘 다 0이면 "낫싱" 출력
   - strike가 3이면 게임 종료 출력
   - ball과 strike 개수만큼 출력
+
+5. 새 게임을 시작하는 함수
+  - newGame()
+
+6. 게임을 진행하는 함수
+  - startGame(computer)
+
+7. 새로 시작할지 종료할지 판단하는 함수
+  - checkContinue()
+
+8. 사용자에게 입력받은 숫자 에러 체크하는 함수
+  - checkError()
