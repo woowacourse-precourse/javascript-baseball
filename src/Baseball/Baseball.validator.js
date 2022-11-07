@@ -2,6 +2,12 @@ const BaseballDto = require("./Baseball.dto");
 
 class BaseballValidator {
   static checkNumericNumbers(numbers) {
+    if (numbers === undefined) {
+      throw new Error("알 수 없는 입력값입니다.");
+    }
+    if (isNaN(+numbers)) {
+      throw new Error("숫자가 아닌 입력값입니다.");
+    } 
     const nonNumerics = Array.from(numbers).filter(
       (number) => "1" > number || number > "9"
     );
@@ -10,9 +16,6 @@ class BaseballValidator {
     }
   }
   static checkNumbersLength(numbers) {
-    if (numbers === undefined) {
-      throw new Error("알 수 없는 입력값입니다.");
-    }
     if (numbers.length !== 3) {
       throw new Error("글자가 3개가 아닙니다.");
     }
