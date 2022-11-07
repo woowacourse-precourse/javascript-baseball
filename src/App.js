@@ -6,12 +6,12 @@ class App {
   }
 
   play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.setRandomNumber();
     this.startGame();
   }
 
   startGame() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.setRandomNumber();
     this.inputUserNumber();
   }
 
@@ -55,8 +55,12 @@ class App {
     if (ballCount > 0) output += `${ballCount}볼 `;
     if (strikeCount > 0) output += `${strikeCount}스트라이크`;
 
-    MissionUtils.Console.print(output);
-    this.endGame();
+    MissionUtils.Console.print(output.trim());
+    if (strikeCount === 3) {
+      this.endGame();
+    } else {
+      this.startGame();
+    }
   }
 
   calcStrike(numberInput) {
@@ -72,7 +76,9 @@ class App {
   calcBall(numberInput) {
     let ballCount = 0;
     for (let i = 0; i < 3; i += 1) {
-      const findIndexofInput = this._randomNumber.indexOf(numberInput[i]);
+      const findIndexofInput = this._randomNumber.indexOf(
+        parseInt(numberInput[i], 10),
+      );
       if (findIndexofInput !== -1 && findIndexofInput !== i) {
         ballCount += 1;
       }
