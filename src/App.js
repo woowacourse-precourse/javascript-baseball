@@ -43,6 +43,21 @@ class App {
     return score;
   }
 
+  createHint(input, currentAnswer) {
+    const score = this.checkInputIsCorrect(input, currentAnswer);
+    let hint;
+
+    switch (score.strike === 0) {
+      case true:
+        score.ball === 0 ? (hint = "낫싱") : (hint = `${score.ball}볼`);
+        break;
+      case false:
+        score.ball === 0
+          ? (hint = `${score.strike}스트라이크`)
+          : (hint = `${score.ball}볼 ${score.strike}스트라이크`);
+    }
+  }
+
   play() {
     this.startGame();
     this.createRandom();
