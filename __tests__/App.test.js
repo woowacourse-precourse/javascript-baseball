@@ -43,4 +43,12 @@ describe('init()', () => {
 
     expect(threeRandomArray).toHaveLength(3);
   });
+
+  test('this.#isStart 속성의 값이 true이다.', () => {
+    const app = new App();
+
+    app.init();
+
+    expect(app.isStart()).toBeTruthy();
+  });
 });
