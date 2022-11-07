@@ -110,7 +110,7 @@ class App {
 
   async askReGame() {
     const selectedNumber = Number(
-      await this.inputNumber(Constants.END_MESSAGE)
+      await this.inputNumber(Constants.REGAME_MESSAGE)
     );
     this.selectedNumberException(selectedNumber);
 
@@ -147,4 +147,5 @@ class App {
     this.startNewGame();
   }
 }
+
 module.exports = App;
