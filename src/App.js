@@ -1,11 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const User = require("./User");
+const Checker = require("./Checker");
 
 class App {
   constructor() {
     this.user = new User();
     this.computer = new Computer();
+    this.checker = new Checker();
   }
 
   play() {
@@ -16,20 +18,10 @@ class App {
   startGame() {
     const targetNum = this.computer.createRandomNum();
     while (true) {
-      if (this.checkComplete(targetNum)) break;
+      userNum = this.user.guessNum();
+      if (this.checker.checkCorrect(targetNum, userNum)) break;
     }
-    this.sayCorrect();
     this.askRestart();
-  }
-
-  checkComplete(targetNum) {
-    const userNum = this.user.guessNum();
-    if (targetNum === userNum) return true;
-  }
-
-  sayCorrect() {
-    Console.print("3스트라이크");
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 
   askRestart() {
