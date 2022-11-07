@@ -42,7 +42,6 @@ class App {
       // 3스트라이크일 경우
       if (strikeCount === 3) {
         MissionUtils.Console.print("3스트라이크");
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         return;
       }
       // 아무것도 해당이 안될 경우
@@ -66,7 +65,7 @@ class App {
             gameRestart();
           } else if (parseInt(answer) === 2) {
             MissionUtils.Console.print("게임 종료");
-            return;
+            return MissionUtils.Console.close();
           }
         }
       );
