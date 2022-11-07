@@ -72,4 +72,10 @@ describe("숫자 야구 게임", () => {
 
     expect(() => checkException(input)).toThrow();
   });
+
+  test("입력 서로 다른 수 예외 테스트", () => {
+    const input = "994";
+
+    expect(() => checkException(input)).toThrow();
+  });
 });
