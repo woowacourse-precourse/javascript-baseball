@@ -11,9 +11,25 @@ class App {
     this.user.getInput();
     this.user.checkValidation();
     this.user.changeToNumbers();
+    const ballAndStrike = this.compareNumbers(this.opponent.number, this.user.input);
+
+    // MissionUtils.Console.print(`OPP: ${this.opponent.number}`);
+    // MissionUtils.Console.print(`USER: ${this.user.input}`);
+    // MissionUtils.Console.print(`Balls And Strikes: ${ballAndStrike}`);
   }
   gameStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
+  compareNumbers(opponentArr, userArr) {
+    let ball = 0,
+      strike = 0;
+    for (let index = 0; index < 3; index++) {
+      if (userArr.includes(opponentArr[index])) {
+        if (opponentArr[index] !== userArr[index]) ball++;
+        else strike++;
+      }
+    }
+    return [ball, strike];
   }
 }
 
