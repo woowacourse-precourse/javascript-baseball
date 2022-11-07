@@ -2,6 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   computer = [];  // 컴퓨터의 수
 
+
+
   play() {
     // 게임 시작 문구 출력
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -9,51 +11,81 @@ class App {
     // 컴퓨터의 수 선택
     this.computer = computersNumbers();
 
+    // 사용자의 수 선택
+    var userNum = usersNumbers();
     // 사용자의 수 입력받기
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      console.log("입력받은 수" + answer);
-
-      try {
-        // 3자리인지 확인
-        isThreeWord(answer);
-        
-        // 3자리가 모두 숫자인지 확인
-        console.log(typeof answer);
-
-
-        // 배열로 변환-
-        var arr = getArrFromInput(answer);
-
-
-      } catch (error) {
-        console.log(error);
-        MissionUtils.Console.close();
-      }
-      
-
-    });
+   
     
 
 
   }
 }
 
-// 입력받은 수를 배열로 
-function getArrFromInput(input){
-  var arr = Array.from(input);
-  return arr;
+function usersNumbers(){
+  var usersNumbers;
+
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    
+    NumberCheck = new NumberCheck(answer);
+    try {
+      NumberCheck.isThreeWord();
+      NumberCheck.isContainsBlank();
+    } catch (error) {
+      console.log(error);
+      MissionUtils.Console.close();
+    }
+
+  });
+
+  return usersNumbers;
 }
 
-// 사용자의 수 예외처리 1 - 길이가 3이 아니면 예외발생
-function isThreeWord(input){
-  if(input.length != 3){
-    throw "3자리 숫자가 아닙니다.";
+
+class NumberCheck{
+  constructor(input){
+    console.log("class NumberCheck input setting : " + input);
+    this.input = input;
+  }
+
+  // 예외처리 1. 길이가 3이 아닐 때
+  isThreeWord(){
+    if(this.input.length != 3){
+      throw "3자리 숫자가 아닙니다.";
+    }
+  }
+
+  // 사용자의 수 예외처리 2 - 공백이 포함되면 예외발생
+  isContainsBlank(){
+    var inputStr = this.input;
+    if(inputStr.indexOf(" ") > -1){
+      throw "공백을 입력했습니다.";
+    }
+  }
+
+
+
+
+// 입력받은 수를 배열로 
+  getArrFromInput(input){
+    var arr = Array.from(input);
+    return arr;
   }
 }
+// 입력받은 수를 배열로 
+// function getArrFromInput(input){
+//   var arr = Array.from(input);
+//   return arr;
+// }
+
+
 
 // 사용자의 수 예외처리 2 - 숫자가 아니면 예외발생
-function isNumbers(input){
-
+function isNumbers(arr){
+  try {
+    
+  } catch (error) {
+    throw error;
+  }  
 }
 
 // 컴퓨터의 수 선택
