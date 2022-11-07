@@ -6,37 +6,36 @@ const { Console, Random } = MissionUtils;
 const error = require('./Error');
 
 class App {
-  play() {
-    const [computer, interaction] = this.start();
+  constructor() {
     Console.print(MESSAGE.STARTGAME);
-    Console.print(computer.number);
-    this.playOneSet(computer, interaction);
-    this.AskNewGame();
+  }
+
+  play() {
+    const computer = this.start();
+    this.playSetOfGame(computer);
   }
 
   start() {
-    const computer = new Computer();
-    const interaction = new Interaction();
-    return [computer, interaction];
+    return new Computer();
   }
 
-  playOneSet(computer, interaction) {
+  playSetOfGame(computer) {
     Console.readLine(MESSAGE.PLAYONE, (inputNumber) => {
-      interaction.checkValidNumberInput(inputNumber);
-      Console.print('passed');
+      computer.checkValidationSetGameInput(inputNumber);
+      // Console.print(computer.number);
       const resultMap = computer.getResultMap(inputNumber);
-      Console.print(resultMap);
       const result = computer.getResultMessage(resultMap);
       Console.print(result);
       if (result === MESSAGE.ENDGAME) {
-        this.AskNewGame();
+        this.AskNewGame(computer);
       }
-      return this.playOneSet(computer, interaction);
+      return this.playSetOfGame(computer);
     });
   }
 
-  AskNewGame() {
+  AskNewGame(computer) {
     Console.readLine(MESSAGE.NEWGAME, (inputAnswer) => {
+      computer.checkValidationNewGameInput(inputAnswer);
       if (inputAnswer === '1') {
         this.play();
       } else {

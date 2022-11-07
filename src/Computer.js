@@ -1,6 +1,6 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-const { Console, Random } = MissionUtils;
+const { Console, Random } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./Message');
+const { setGameInputError, newGameInputError } = require('./Error');
 
 class Computer {
   constructor() {
@@ -52,6 +52,19 @@ class Computer {
       container.push(number);
     }
     return container.join('');
+  }
+
+  checkValidationSetGameInput(inputNumber) {
+    if (!setGameInputError.isValid(inputNumber)) {
+      Console.close();
+      throw new Error(MESSAGE.ERROR);
+    }
+  }
+  checkValidationNewGameInput(inputAnswer) {
+    if (!newGameInputError.isValid(inputAnswer)) {
+      Console.close();
+      throw new Error(MESSAGE.ERROR);
+    }
   }
 }
 
