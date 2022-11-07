@@ -3,42 +3,17 @@ const { isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole } = 
 const { updateStrikeOrBall } = require("./compare.js");
 
 class App {
-  // async play() {
-  //   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-  //   let proceeding = true;
-  //   let answer = this.generateRandomAnswer();
-  //   console.log("정답은", answer)
-
-  //   while (proceeding) {
-  //     const INPUT = await getInputFromConsole("숫자를 입력해주세요 : ");
-  //     console.log("입력은", INPUT);
-  //     if (!this.isValidInput(INPUT)) { // 올바르지 않은 입력 예외처리
-  //       MissionUtils.Console.close();
-  //       throw new Error("improper input!");
-  //     }
-
-  //     const COMPARE_RESULT = this.getResult(INPUT, answer); // 비교 결과
-  //     this.printCompareResult(COMPARE_RESULT);
-
-  //     if (COMPARE_RESULT["strike"] === 3) {
-  //       answer = this.generateRandomAnswer(); // 정답 재생성
-  //       console.log("정답은", answer)
-  //       proceeding = await this.chooseProceedOrExit();
-  //     }
-  //   }
-
-  //   MissionUtils.Console.print("게임 종료");
-  //   MissionUtils.Console.close();
-  // }
-
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    let answer = this.generateRandomAnswer();
+    const ANSWER = this.generateRandomAnswer();
 
-    this.proceedOneTurn(answer);
+    this.proceedOneTurn(ANSWER);
   }
 
-  // 정답이 될 무작위 난수를 배열로서 생성하는 함수
+  /**
+   * 정답이 될 무작위 난수를 배열로서 생성하는 함수
+   * @returns 컴퓨터가 정한 정답을 자리수별로 담은 배열
+   */
   generateRandomAnswer() {
     const ANSWER = [];
 
@@ -106,37 +81,33 @@ class App {
       this.printCompareResult(COMPARE_RESULT);
 
       if (COMPARE_RESULT["strike"] === 3) {
-        answer = this.generateRandomAnswer(); // 정답 재생성
-        // TODO: 게임 재시작 처리
-
-        MissionUtils.Console.close();
+        this.chooseProceedOrExit(); // 게임 재시작 혹은 프로그램 종료
       }
       else this.proceedOneTurn(answer);
     })
   }
 
   /**
-   * 게임이 모두 끝나면, 새로 시작할지 종료할지를 입력받아 반환하는 함수
-   * @returns 새로 시작하는지 여부
+   * 정답을 맞춘 후에 게임을 새로 시작할지 종료할지 정하고 진행하는 함수
    */
-  async chooseProceedOrExit() {
+  chooseProceedOrExit() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-    const INPUT = await getInputFromConsole("");
 
-    switch (INPUT) {
-      case "1":
-        return true;
-
-      case "2":
-        return false;
-
-      default:
+    MissionUtils.Console.readLine("", (input) => {
+      if (input === "1") {
+        const ANSWER = this.generateRandomAnswer();
+        this.proceedOneTurn(ANSWER);
+      }
+      else if (input === "2") {
+        MissionUtils.Console.close();
+      }
+      else {
         MissionUtils.Console.close();
         throw new Error("improper input!");
-    }
+      }
+    })
   }
-
 }
 
 const app = new App();
