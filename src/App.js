@@ -1,3 +1,4 @@
+const getComputerRandNum = require("./getComputerRandNum.js");
 const Validator = require("./validator.js");
 const MissionUtils = require("@woowacourse/mission-utils");
 
@@ -50,8 +51,7 @@ class App {
   startNewGameOrQuit() {
     MissionUtils.Console.readLine("", (restartOrQuit) => {
       if (parseInt(restartOrQuit) === 1) {
-        const computerNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-        MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+        const computerNum = getComputerRandNum();
         this.startGame(computerNum);
       } else if (parseInt(restartOrQuit) === 2) {
         MissionUtils.Console.print("게임 종료");
@@ -69,7 +69,7 @@ class App {
   }
 
   play() {
-    const computerNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computerNum = getComputerRandNum();
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.startGame(computerNum);
   }
