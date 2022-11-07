@@ -36,7 +36,18 @@ class App {
     if (this.isAnswer(strike, ball)) this.restartGame();
     else this.getInput(answer);
   }
-  getStrikeBall(answer, userInput) {}
+  getStrikeBall(answer, userInput) {
+    const result = [0, 0];
+    answer = [...answer];
+    userInput = [...userInput];
+
+    answer.forEach((value, idx) => {
+      if (value === userInput[idx]) result[STRIKE]++;
+      else if (userInput.includes(value) && value != userInput[idx])
+        result[BALL]++;
+    });
+    return result;
+  }
 
   printCompareResult(strike, ball) {}
 
