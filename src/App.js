@@ -36,10 +36,7 @@ function baseBall(answers){
     if(!nothing) countBall = isBall(answers, inputNums, countStrike);
     printResult(countBall, countStrike);
 
-    if (countStrike===3) {
-      console.log("count strike : ",countStrike);
-      if(isRestart()) Console.close();
-    }
+    if(countStrike===3 && isRestart()) Console.close();
     else baseBall(answers);
   });
   return countStrike;
@@ -61,7 +58,7 @@ function isNothing(answers, input){
     if(answers.indexOf(singleNum) < 0) cnt++;
   }
   cnt == 3 ? boolNothing = 1 : boolNothing = 0;
-  if(boolNothing) Console.print('낫싱');
+  if(boolNothing) Console.print("낫싱");
 
   return boolNothing;
 }
