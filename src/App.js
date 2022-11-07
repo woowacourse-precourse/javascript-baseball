@@ -1,16 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-let randomNumber;
 let ISANSWER = 0;
 
 class App {
+  randomNumber;
+  
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.start();
   }
 
   start() {
-    randomNumber = this.setRandomNumber();
-    console.log(randomNumber);
+    this.randomNumber = this.setRandomNumber();
+    console.log(this.randomNumber);
     
     this.userInput();
   }
@@ -36,7 +37,7 @@ class App {
       throw new Error('조건에 맞게 숫자를 입력하지 않아 게임을 종료합니다.');
     }
     const userInputToNumberArr = userInputToArr.map((item) => Number(item));
-    return this.gameResult(userInputToNumberArr, randomNumber);
+    return this.gameResult(userInputToNumberArr);
   }
 
   setRandomNumber() {
@@ -51,10 +52,10 @@ class App {
     return computer;
   }
 
-  countStrickes(userNumbers, randomNumbers) {
+  countStrickes(userNumbers) {
     let strikeCount = 0;
     userNumbers.forEach((userNumber, index) => {
-      let randomNumber = randomNumbers[index];
+      let randomNumber = this.randomNumber[index];
       if (userNumber == randomNumber) {
         strikeCount += 1;
       }
@@ -62,20 +63,20 @@ class App {
     return strikeCount;
   }
 
-  countBalls(userNumbers, randomNumbers) {
+  countBalls(userNumbers) {
     let ballCount = 0;
     userNumbers.forEach((userNumber, index) => {
-      let randomNumber = randomNumbers[index];
-      if (userNumber != randomNumber && randomNumbers.includes(userNumber)) {
+      let randomNumber = this.randomNumber[index];
+      if (userNumber != randomNumber && this.randomNumber.includes(userNumber)) {
         ballCount += 1;
       }
     });
     return ballCount;
   }
 
-  gameResult(userNumbers, randomNumbers) {
-    let strikes = this.countStrickes(userNumbers, randomNumbers);
-    let balls = this.countBalls(userNumbers, randomNumbers);
+  gameResult(userNumbers) {
+    let strikes = this.countStrickes(userNumbers);
+    let balls = this.countBalls(userNumbers);
 
     if (strikes == 0 && balls == 0) {
       MissionUtils.Console.print('낫싱');
