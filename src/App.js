@@ -12,6 +12,8 @@ class App {
     const guessNumber = await PlayingUser.enterGuessNumber();
     const scoreboard = NumberBaseBallSystem.isStrike(guessNumber);
     NumberBaseBallSystem.notifyGuessResult(scoreboard);
+    const replay = await PlayingUser.isReplay();
+    // console.log(replay);
   }
 }
 
