@@ -102,4 +102,13 @@ describe('count()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('1볼 1스트라이크');
   });
+
+  test('낫싱 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.count(0, 0));
+
+    expect(logSpy).toHaveBeenCalledWith('낫싱');
+  });
 });
