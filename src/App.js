@@ -31,8 +31,7 @@ class App{
   getHintCount(userInput){
     let COUNT_STRIKE = 0;
     let COUNT_DUPLICATION= 0;
-    let COUNT_BALL = 0;
-
+    
     if(this.uniqueNumberList === userInput) COUNT_STRIKE = 3;
     
     
@@ -40,25 +39,18 @@ class App{
       if(this.uniqueNumberList[index] === userInput[index]) COUNT_STRIKE++
       if(userInput.includes(this.uniqueNumberList[index])) COUNT_DUPLICATION++
     }
-    COUNT_BALL = COUNT_DUPLICATION - COUNT_STRIKE ;
+    const COUNT_BALL = COUNT_DUPLICATION - COUNT_STRIKE ;
     this.printResult(COUNT_STRIKE,COUNT_BALL);
   }
 
   printResult(countStrike,countBall){
-  if(countStrike===3)
-    MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-  if(countStrike ===0 && countBall ===0){
-    MissionUtils.Console.print('낫싱');
-  }
-  if(countStrike > 0 && countBall >0){
-    MissionUtils.Console.print(`${countBall}볼 ${countStrike}스트라이크`);
-  }
-  if((countStrike > 0 && countBall ===0) && countStrike !==3){
-    MissionUtils.Console.print(`${countStrike}스트라이크`);
-  }
-  if(countStrike === 0 && countBall >0){
-    MissionUtils.Console.print(`${countBall}볼`);
-  }
+  const printMessage = MissionUtils.Console.print;
+  if(countStrike===3) printMessage('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  if(countStrike ===0 && countBall ===0) printMessage('낫싱');
+  if(countStrike > 0 && countBall >0) printMessage(`${countBall}볼 ${countStrike}스트라이크`);
+  if((countStrike > 0 && countBall ===0) && countStrike !==3) printMessage(`${countStrike}스트라이크`);
+  if(countStrike === 0 && countBall >0) printMessage(`${countBall}볼`);
+
   this.isSuccessGame(countStrike)
 }
 
