@@ -90,12 +90,20 @@ class App {
   askRestart() {
     Console.print(GAME_END_SENTENCE);
     Console.readLine(GAME_RESTART_SENTENCE, (answer) => {
+      this.validateAnswer(answer);
+
       if (answer === '1') {
         this.play();
-      } else {
+      } else if (answer === '2') {
         Console.close();
       }
     });
+  }
+
+  validateAnswer(answer) {
+    if (!['1', '2'].includes(answer)) {
+      throw new Error('올바른 대답이 아닙니다.');
+    }
   }
 
   play() {
