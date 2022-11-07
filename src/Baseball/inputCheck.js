@@ -35,6 +35,16 @@ class inputValidation {
     }
     return false;
   }
+
+  checkUserSelect(value) {
+    const CHECKED_SELECT_LENGTH = value.length === 1;
+    const CHECKED_SELECT_NUM = /^[1-2]*$/g.test(value);
+
+    if (CHECKED_SELECT_LENGTH && CHECKED_SELECT_NUM) {
+      return true;
+    }
+    return false;
+  }
 }
 
 const INPUT_CHECK = new inputValidation();

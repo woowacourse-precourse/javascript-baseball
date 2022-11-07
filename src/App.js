@@ -43,20 +43,25 @@ class App {
       this.COMPUTER_NUM
     );
 
-    if (GAME_RESULT.strikeNum >= 3) {
+    if (GAME_RESULT.strikeNum === 3) {
       Console.readLine(
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
         (userSelect) => {
-          const USER_SELECT_NUM = Number(userSelect);
-          if (USER_SELECT_NUM === 1) this.startGame();
-          if (USER_SELECT_NUM === 2) Console.close();
+          const IS_VALID_SELECT = INPUT_CHECK.checkUserSelect(userSelect);
+
+          if (IS_VALID_SELECT === false) {
+            throw new Error('유효하지 않은 숫자를 입력했습니다.');
+          }
+
+          if (userSelect === '1') this.startGame();
+          if (userSelect === '2') {
+            Console.print('게임 종료');
+            Console.close();
+          }
         }
       );
     }
   }
 }
 
-const NUM_BASEBALL = new App();
-NUM_BASEBALL.play();
-
-module.exports = NUM_BASEBALL;
+module.exports = App;
