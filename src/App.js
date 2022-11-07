@@ -24,11 +24,18 @@ class App {
       const rstMsg = this.getRstMsg(ballCnt, strCnt);
       Console.print(rstMsg);
 
-      if(strCnt === 3) this.askRestart();
-      if(strCnt !== 3) this.getUserGuess;
+      if(strCnt === 3){
+        this.correctAns();
+        this.askRestart();
+      }
+      if(strCnt !== 3) this.getUserGuess();
     })
   }
 
+  correctAns() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  }
+  
   exitGame() {
     Console.print("게임을 종료합니다.");
     Console.close();
