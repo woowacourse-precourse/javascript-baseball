@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 function getBall(computerAnswer, userAnswer) {
   let ball = 0;
   computerAnswer.forEach((num) => {
@@ -11,11 +13,11 @@ function getBall(computerAnswer, userAnswer) {
 
 function getStrike(computerAnswer, userAnswer) {
   let strike = 0;
-  for (let i = 0; i < 3; i++) {
-    if (computerAnswer[i] === userAnswer[i]) {
+  computerAnswer.forEach((item, idx) => {
+    if (computerAnswer[idx] === userAnswer[idx]) {
       strike += 1;
     }
-  }
+  });
 
   return strike;
 }
@@ -25,20 +27,21 @@ function createResult(computerAnswer, userAnswer) {
   const ball = getBall(computerAnswer, userAnswer) - strike;
   let result = "";
 
+  if (ball === 0 && strike === 0) {
+    result = "낫싱";
+  }
   if (ball > 0) {
     result += `${ball}볼`;
   }
-  if (ball > 0 && strike && 0) {
+  if (ball > 0 && strike > 0) {
     result += " ";
   }
   if (strike > 0) {
     result += `${strike}스트라이크`;
   }
-  if (ball === 0 && strike === 0) {
-    result = "낫싱";
-  }
+  MissionUtils.Console.print(result);
 
-  return result;
+  return strike === 3;
 }
 
 module.exports = createResult;
