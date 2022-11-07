@@ -13,4 +13,16 @@ describe("유저 입력 숫자 테스트", () => {
     const input = 'asb';
     expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
   });
+
+  test("user가 3개 이상의 숫자 입력했을시 에러뜨는지 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = '1234';
+    expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
+  });
+
+  test("user가 3개 이하의 숫자 입력했을시 에러뜨는지 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = '1';
+    expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
+  });
 });
