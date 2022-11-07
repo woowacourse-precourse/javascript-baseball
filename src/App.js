@@ -25,6 +25,8 @@ class App {
       if(isNaN(item)) return false;
     }
 
+    if(inputNumber.includes(0)) return false;
+
     return true;
   }
 }
