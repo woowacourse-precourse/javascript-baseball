@@ -60,4 +60,15 @@ function winAndRestart() {
   })
 }
 
+function game(ansNum) {
+  Console.readLine('숫자를 입력해주세요 : ', input => {
+    throwError(input);
+    let umpire = new Umpire(input, ansNum);
+    let decision = umpire.decision;
+    printMessage(decision);
+    if (umpire.strike === 3) winAndRestart();
+    else game(ansNum);
+  })
+}
+
 module.exports = App;
