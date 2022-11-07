@@ -7,6 +7,10 @@ class App {
 
   play() {
     this.gameStartMsg();
+    this.gameCourse();
+  }
+
+  gameCourse() {
     this.getUserNumber();
   }
 
