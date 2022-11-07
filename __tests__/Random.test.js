@@ -13,4 +13,12 @@ describe('getThreeRandomArray()', () => {
 
     expect(random.getThreeRandomArray()).toHaveLength(3);
   });
+
+  test('3개의 요소 모두 숫자 타입이다.', () => {
+    const random = new Random();
+
+    random.getThreeRandomArray().forEach((target) => {
+      expect(typeof target).toBe('number');
+    });
+  });
 });
