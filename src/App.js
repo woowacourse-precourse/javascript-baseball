@@ -1,8 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  play() {}
-
+  play() {
+      MissionUtils.Console.readLine(
+        '숫자를 입력해주세요 : ', 
+        this.choiceAnswer
+      );
+        
+  }
   // build_answer
   buildAnswer() {
     let answer;
@@ -16,26 +21,20 @@ class App {
 
   choiceAnswer(userNums) {
     // 숫자이어야함
-    if (!Number.isInteger(userNums)) {
-      throw new Error('user_Nums가 정수가 아님');
+    if (isNaN(userNums)) {
+      throw new Error('userNums가 정수가 아님');
     }
     // 3자리어야함
-    if (userNums <= 99 && userNums >= 1000) {
+    if (userNums.length != 3) {
       throw new Error('userNums가 세자리가 아님');
     }
-    const userSelect = [];
-    let currNum = userNums;
-    do {
-      userSelect.unshift(currNum % 10);
-      currNum = Math.floor(currNum / 10);
-    } while (currNum !== 0);
+    const userSelect = [...userNums].map(Number);
 
     // 중복없어야함
     const lenghtTest = [...new Set(userSelect)];
     if (lenghtTest.length < 3) {
       throw new Error('중복 숫자가 존재합니다.');
     }
-
     this.userSelect = userSelect;
     return userSelect;
   }
@@ -79,5 +78,6 @@ class App {
     MissionUtils.Console.print(message.join(' '));
   }
 }
+
 
 module.exports = App;

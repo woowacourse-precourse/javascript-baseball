@@ -30,23 +30,23 @@ describe("build_answer 테스트", () => {
 })
 describe("choice_answer 테스트", () => {
     test("3자리 배열 인지 확인", () => {
-        const result = app.choiceAnswer(123);
+        const result = app.choiceAnswer('123');
         expect(result).toHaveLength(3);
     });
     test("배열 객체의 타입이 숫자인지 확인", () => {
-        const result = app.choiceAnswer(123);
+        const result = app.choiceAnswer('123');
         expect(result[0]).toEqual(expect.any(Number));
         expect(result[1]).toEqual(expect.any(Number));
         expect(result[2]).toEqual(expect.any(Number));
     });
     test("각 개체가 한자리 숫자인지 확인", () => {
-        const result = app.choiceAnswer(123);
+        const result = app.choiceAnswer('123');
         expect(result[0]).toBeLessThan(10);
         expect(result[1]).toBeLessThan(10);
         expect(result[2]).toBeLessThan(10);
     });
     test("입력 받은 숫자가 정상 출력 되는지 확인", () => {
-        const result = app.choiceAnswer(123);
+        const result = app.choiceAnswer('123');
         const exp = [1,2,3]
         expect(result).toEqual(exp);
     });
