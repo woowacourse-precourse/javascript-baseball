@@ -76,4 +76,12 @@ describe('isStrike()', () => {
 
     expect(app.isFinish()).toBeTruthy();
   });
+
+  test('3을 제외한 나머지를 전달하면 this.#isFinish 속성의 값이 false이다.', () => {
+    const app = new App();
+
+    app.isStrike(2);
+
+    expect(app.isFinish()).toBeFalsy();
+  });
 });
