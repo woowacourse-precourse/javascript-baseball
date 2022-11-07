@@ -9,10 +9,10 @@ function printBallAndStrike(ball, strike){
     if(ball > 0 && strike > 0){
         printBoth(ball, strike);
     }
-    else if(ball > 0){
+    else if(ball > 0 && strike === 0){
         printNumOfBall(ball);
     }
-    else if(strike > 0){
+    else if(strike > 0 && ball === 0){
         printNumOfStrike(strike);
     }
     else if(ball === 0 && strike === 0){
