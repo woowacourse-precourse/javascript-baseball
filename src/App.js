@@ -1,14 +1,19 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-function makeRandomNumber() {
-  let computer = []; //정답 숫자들 배열
-  computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  return computer;
-}
+
 
 
 class App {
   //컴퓨터가 정답 생성하기
-
+  makeRandomNumber() {
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
+  }
 
   //플레이어의 입력값 유효성 판단하기 (숫자를 3개 입력하지 않는 경우 등)
   //올바른 입력값은 '1-9 사이의 숫자 3개'
@@ -37,6 +42,13 @@ class App {
     let strike = 0;
     let guessResult = [];
 
+    for (var i=0; i<player.length; i++){
+      if (answer.includes(player[i])){
+        if(player[i]==answer[i]) strike+=1
+        else ball+=1
+      }
+    }
+/*
     if (answer[0]==player[0]) strike += 1
     else if (answer[0]==player[1]) ball += 1
     else if(answer[0]==player[2]) ball += 1
@@ -48,21 +60,22 @@ class App {
     if (answer[2]==player[2]) strike += 1
     else if (answer[2]==player[0]) ball += 1
     else if(answer[2]==player[1]) ball += 1
-    
+    */
     if (ball == 0 && strike == 0) guessResult = '낫싱';
-    else if(ball == 0) guessResult = `${strike}스트라이크`;
-    else if(strike == 0) guessResult = `${ball}볼`;
-    else if(ball == 3 && strike == 3) guessResult = `3스트라이크`;
-    else guessResult = `${ball}볼 ${strike}스트라이크`;
+    if(ball == 0 && strike != 0) guessResult = `${strike}스트라이크`;
+    if(ball !=0 && strike == 0) guessResult = `${ball}볼`;
+    if(ball == 0 && strike == 3) guessResult = `3스트라이크`;
+    if(ball !=0 && strike !=0) guessResult = `${ball}볼 ${strike}스트라이크`;
     
     return guessResult;
   }
   
   //게임 재시작 여부 결정하기
   restartOrNot () {
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('',(continueInput) => {
-      if (continueInput == '1') this.play(); //게임 새로 시작하기
-      else if (continueInput == '2') MissionUtils.Console.close(); //종료하기
+      if (continueInput == 1) this.play(); //게임 새로 시작하기
+      else if (continueInput == 2) MissionUtils.Console.close(); //종료하기
     });
   }
 
@@ -91,7 +104,7 @@ class App {
   }
   //게임 시작 (입출력은 이 함수 내에서)
   play() { 
-    this.answer = makeRandomNumber(); 
+    this.answer = this.makeRandomNumber(); 
     //console.log("랜덤으로 생성한 숫자 3개는... ", this.answer);
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.guessAnswer(this.answer);
