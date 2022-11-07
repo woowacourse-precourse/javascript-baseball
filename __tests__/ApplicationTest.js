@@ -46,7 +46,18 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+  test("게임 진행하다가 게임 재시작 입력 오류", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["246", "135", "3"];
 
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
