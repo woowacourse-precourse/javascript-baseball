@@ -36,12 +36,19 @@ class App {
 
   end() {
     MissionUtils.Console.print(Game.MESSAGE.END);
-    MissionUtils.Console.print(Game.MESSAGE.SELECT);
+    MissionUtils.Console.readLine(Game.MESSAGE.SELECT, (userInput) => {
+      if (userInput === Game.NUMBER.RESTART) return this.restart();
+      if (userInput === Game.NUMBER.EXIT) return this.exit();
+    });
   }
 
-  restart() {}
+  restart() {
+    this.playBall();
+  }
 
-  exit() {}
+  exit() {
+    MissionUtils.Console.close();
+  }
 
   playBall() {
     MissionUtils.Console.print(Game.MESSAGE.START);
