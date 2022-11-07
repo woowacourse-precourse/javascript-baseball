@@ -30,6 +30,13 @@ class Play {
     if (countStrike === 0 && countBall === 0) {
       return Console.print(RESULT.NOTHING);
     }
+
+    const strikeMessage =
+      countStrike !== 0 ? `${countStrike}${RESULT.STRIKE}` : "";
+    const ballMessage = countBall !== 0 ? `${countBall}${RESULT.BALL}` : "";
+    const playMessage = `${ballMessage} ${strikeMessage}`;
+
+    Console.print(playMessage);
   }
 }
 
