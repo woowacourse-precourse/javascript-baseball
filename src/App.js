@@ -3,6 +3,15 @@ const GAME_START = '숫자 야구 게임을 시작합니다.';
 const RESTART = '숫자 야구 게임을 재시작합니다.';
 
 class App {
+  // 볼 체크
+  ballCheck(user, random) {
+    let ball = 0;
+    for (let i = 0; i < 3; i++) {
+      if (random[i] !== user[i] && random.includes(user[i])) ball++;
+    }
+
+    return ball;
+  }
 
   // 스트라이크 체크
   strikeCheck(user, random) {
@@ -13,7 +22,7 @@ class App {
 
     return strike;
   }
-  
+
   // 게임 결과
   getResult(userNumber, randomNumber) {
     const strike = this.strikeCheck(userNumber, randomNumber);
