@@ -43,6 +43,21 @@ class App {
         }
         return true;
     }
+
+    countStrike() {
+        let strike = 0;
+        this.gamePlayerNumber.forEach((number,index) => {
+            if(this.computerNumber.includes(number)) {
+                if(this.computerNumber[index] !== number) {
+                    strike++;
+                } 
+            }
+        })
+
+        if(strike !== 0) {
+            MissionUtils.Console.print(`${strike}스트라이크`);
+        }
+    }
 }
 
 module.exports = App;
