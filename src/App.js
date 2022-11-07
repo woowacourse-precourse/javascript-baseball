@@ -4,6 +4,7 @@ const CheckInputValid = require("./CheckValid");
 const GameJudgment = require("./GameJudgment");
 const ComputerInput = require("./ComputerInput");
 const { ERROR } = require("./data/Constants");
+const { GAME } = require("./data/Constants");
 
 class App {
   constructor() {
@@ -29,17 +30,14 @@ class App {
   }
 
   getUser() {
-    const render = new Render();
     const checkVaild = new CheckInputValid();
-
-    render.getUser().then((num) => {
+    MissionUtils.Console.readLine(GAME.START_GETNUMBER, (num) => {
       this.userNum = this.numToArr(num);
       const checkUserInputValid = checkVaild.checkUserInput(this.userNum);
-
       if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
-        render.errorThrow(checkUserInputValid);
+        throw checkUserInputValid;
       }
-      this.retryOrEnd();
+      this.gameRender();
     });
   }
 
@@ -64,7 +62,7 @@ class App {
 
   gameRender() {
     const render = new Render();
-
+    const checkVaild = new CheckInputValid();
     const [userBallCount, userStrikeCount] = this.gamePlay();
     render.result(userBallCount, userStrikeCount);
 
@@ -73,22 +71,21 @@ class App {
     }
     if (userStrikeCount === 3) {
       render.replayQnA().then((userInput) => {
-        this.userRetryNum = this.numToArr(userInput);
+        this.userRetryNum = userInput;
 
-        const checkUserRetryInputValid = checkVaild.checkRetryInput(
+        const checkUserRetryInputValid = checkVaild.checkUserRetryInput(
           this.numToArr(userInput)
         );
         if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
-          render.errorRetryResult;
+          throw checkUserRetryInputValid;
         }
-
-        return this.userRetryNum;
+        this.retryOrEnd();
       });
     }
   }
   retryOrEnd() {
     const render = new Render();
-    const userRetryNumber = this.gameRender();
+    const userRetryNumber = this.userRetryNum;
 
     if (userRetryNumber === "1") {
       this.setAndReplay();
