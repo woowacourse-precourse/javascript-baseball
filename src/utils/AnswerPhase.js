@@ -1,6 +1,6 @@
 const constant = require('../Constants');
 
-function printAnswer(resultList){
+function answerPhase(resultList){
     const [strike, ball] = resultList;
     
     if (strike === 0 && ball === 0){
@@ -15,4 +15,4 @@ function printAnswer(resultList){
     return String(ball)+constant.RESULTS.BALL+' '+String(strike)+constant.RESULTS.STRIKE;
 }
 
-module.exports = printAnswer;
+module.exports = answerPhase;

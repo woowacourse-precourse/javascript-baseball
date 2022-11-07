@@ -2,7 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const constant = require('./Constants');
 const GameCalc = require('./model/Game');
 const randomNum = require('./model/Random');
-const printAnswer = require('./utils/Print');
+const answerPhase = require('./utils/AnswerPhase');
 const Validation = require('./utils/validation');
 const ExceptionCheck = require('./utils/Exception');
 
@@ -36,7 +36,7 @@ class GameControl{
       this.checkForNeedRestart();
     }
     else{
-      MissionUtils.Console.print(printAnswer(this.resultForInput(input)));
+      MissionUtils.Console.print(answerPhase(this.resultForInput(input)));
       this.userInput();
     }
   }
