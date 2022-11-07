@@ -66,13 +66,13 @@ class App {
     let strike = 0;
     let ball = 0;
 
-    for (let i = 0; i < THREE; i++) {
-      if (computerNumberList.indexOf(userNumberList[i]) === i) {
+    computerNumberList.map(x => {
+      if (computerNumberList.indexOf(x) === userNumberList.indexOf(x)) {
         strike += 1;
-      } else if (computerNumberList.includes(userNumberList[i])) {
+      } else if (userList.includes(x)) {
         ball += 1;
       }
-    }
+    });
     this.displayResult(strike, ball);
   }
 
