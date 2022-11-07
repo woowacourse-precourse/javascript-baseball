@@ -44,7 +44,7 @@ describe('숫자 야구 게임', () => {
 		});
 	});
 
-	test('printMessage 메소드로 받은값을 출력', () => {
+	test('printMessage 메소드를 실행하얐을 때, 입력값을 콘솔에 출력', () => {
 		const logSpy = getLogSpy();
 		const app = new App();
 		const input = '테스트용 메세지를 출력합니다';
@@ -53,7 +53,7 @@ describe('숫자 야구 게임', () => {
 		expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(input));
 	});
 
-	test('getComputerNumber 메서드로 0을 포함하지 않는 3자리 랜덤값을 반환', () => {
+	test('getComputerNumber 메서드를 실행했을 때, 0과 중복값을 포함하지 않는 3자리 랜덤값을 반환', () => {
 		const randoms = [1, 3, 5, 5, 8, 9];
 		mockRandoms(randoms);
 		const app = new App();
@@ -64,7 +64,7 @@ describe('숫자 야구 게임', () => {
 		expect(result).toHaveLength(3);
 	});
 
-	test('getUserNumber 메서드로 받아온 userNumber 가 0을 포함할 경우 에러 발생', () => {
+	test('getUserNumber 메서드를 실행하였을 때 메소드로 받아온 userNumber 가 0을 포함할 경우 에러 발생', () => {
 		const answer = ['012'];
 		const app = new App();
 		mockQuestions(answer);
@@ -74,7 +74,7 @@ describe('숫자 야구 게임', () => {
 		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
-	test('getUserNumber 메서드로 받아온 userNumber 의 숫자가 중복될 경우 에러 발생', () => {
+	test('getUserNumber 메서드를 실행하였을 때 메소드로 받아온 userNumber 의 숫자가 중복될 경우 에러 발생', () => {
 		const answer = ['112'];
 		const app = new App();
 		mockQuestions(answer);
@@ -84,7 +84,7 @@ describe('숫자 야구 게임', () => {
 		}).toThrow('알맞은 숫자를 입력하지않아 프로그램을 종료합니다');
 	});
 
-	test('getCompareResult 메소드로 비교한 결과를 반환', () => {
+	test('getCompareResult 메소드를 실행하였을 때, 두 입력값을 비교한 결과를 반환', () => {
 		const app = new App();
 		const results = [
 			app.getCompareResult('135', '678'),
@@ -101,7 +101,7 @@ describe('숫자 야구 게임', () => {
 		});
 	});
 
-	test('initializeGame 메소드로 초기값 설정', () => {
+	test('initializeGame 메소드를 실행하였을 때, 게임 초기값 설정', () => {
 		const randoms = [1, 3, 5, 5, 8, 9];
 		mockRandoms(randoms);
 		const app = new App();
@@ -111,7 +111,7 @@ describe('숫자 야구 게임', () => {
 		expect(app.computerNumber).toEqual('135');
 	});
 
-	test('getBallAndStrike 메소드로 볼과 스트라이크를 합한 개수 반환', () => {
+	test('getBallAndStrike 메소드를 실행하였을 때, 입력받은 두 값의 볼과 스트라이크를 합한 개수 반환', () => {
 		const app = new App();
 		const result = app.getBallAndStrikeScore('135', '312');
 		expect(result).toEqual(2);
@@ -119,7 +119,7 @@ describe('숫자 야구 게임', () => {
 		expect(result).not.toEqual(3);
 	});
 
-	test('게임 종료 후 재시작시 알맞지않은 입력을 할 경우 에러를 반환', () => {
+	test('게임 종료 후 재시작시 1과 2 이외의 다른값을 입력을 할 경우 에러를 반환', () => {
 		const randoms = [1, 3, 5, 5, 8, 9];
 		const answers = ['246', '135', '3'];
 		const messages = ['낫싱', '3스트라이크', '1 또는 2를 입력하세요'];
