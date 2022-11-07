@@ -1,5 +1,9 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
+const KEY = {
+  RESTART: '1',
+  EXIT: '2',
+};
 class App {
   constructor() {
     this.answer = '';
@@ -41,9 +45,9 @@ class App {
     if (isThreeStrike) {
       // 1 or 2만 입력받을 수 있음
       switch (userInput) {
-        case '1':
+        case KEY.RESTART:
           return true;
-        case '2':
+        case KEY.EXIT:
           return true;
         default:
           throw Error('1 또는 2 이외의 입력은 유효하지 않습니다.');
@@ -67,7 +71,7 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
         this.validateUserInput(answer, true);
-        if (answer === '1') this.gameRestart();
+        if (answer === KEY.RESTART) this.gameRestart();
         else this.gameExit();
       }
     );
