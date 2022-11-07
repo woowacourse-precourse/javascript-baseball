@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const pickNumber = require("./pickNumber.js");
-const numberInput = require("./numberInput.js");
+const userNumberInput = require("./numberInput.js");
 const compare = require("./compare.js");
 const hint = require("./hint.js");
 
@@ -15,13 +15,13 @@ class App {
 
     let isFinish = false;
     while (!isFinish) {
-      const inputNumber = numberInput.numberInput();
-      const compare_value = compare(inputNumber, computerNums);
+      const userNumber = userNumberInput.inputNumber();
+      const compare_value = compare(userNumber, computerNums);
       const result = hint(compare_value);
 
       isFinish = this.EndGame(result);
     }
-    pickNumber.pickNewOrEnd(this.pickOneOrTwo);
+    pickNumber.pickNewOrEnd(this.pickRestartOrEnd);
   }
 
   EndGame(result) {
@@ -33,7 +33,7 @@ class App {
     return isTrue;
   }
 
-  pickOneOrTwo = (number) => {
+  pickRestartOrEnd = (number) => {
     if (number === "1") {
       this.startGame();
     } else {

@@ -1,12 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const numberInput = () => {
-  let inputNumber;
-  MissionUtils.Console.readLine("숫자를 입력해주세요 :", (input) => {
-    validate(input);
-    inputNumber = input;
+const inputNumber = () => {
+  let input;
+  MissionUtils.Console.readLine("숫자를 입력해주세요 :", (number) => {
+    validate(number);
+    input = number;
   });
-  return inputNumber;
+  return input;
 };
 
 const validate = (num) => {
@@ -20,6 +20,6 @@ const validate = (num) => {
   }
 };
 
-exports.numberInput = numberInput;
+exports.inputNumber = inputNumber;
 exports.validate = validate;
 
