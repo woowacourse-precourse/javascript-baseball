@@ -145,4 +145,9 @@ async function getAnswer(computerNumber) {
   }
 }
 
+function startNewGame() {
+  const computerNumber = createComputerNumber();
+  getAnswer();
+}
+
 module.exports = App;
