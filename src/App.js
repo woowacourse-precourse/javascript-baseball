@@ -23,7 +23,7 @@ const computerNumber = () => {
   const NUMBER = [];
   while (NUMBER.length !== 3) {
     NUMBER.push(String(MissionUtils.Random.pickNumberInRange(1, 9)));
-  }
+  };
   return NUMBER;
 };
 
@@ -45,19 +45,19 @@ const gameStart = (USER) => {
         USER_SELECT = USER.getSelect();
       });
       COMPUTER_NUMBER = computerNumber();
-    }
-  }
+    };
+  };
 };
 
 const throwHandling = (length) => {
   if (length !== 3) {
     throw MissionUtils.Console.close();
-  }
-}
+  };
+};
 
 const startMessage = () => {
   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-}
+};
 
 const numberCompare = (computer, user) => {
   let BALL_SCORE = 0;
@@ -65,11 +65,11 @@ const numberCompare = (computer, user) => {
   for (let index = 0; index < computer.length; index++) {
     if (computer[index] === user[index]) {
       STRIKE_SCORE += 1;
-    }
+    };
     if (computer.indexOf(user[index]) >= 0) {
       BALL_SCORE += 1;
-    }
-  }
+    };
+  };
   if (STRIKE_SCORE === 0 && BALL_SCORE === 0) {
     MissionUtils.Console.print('낫싱');
     return false;
