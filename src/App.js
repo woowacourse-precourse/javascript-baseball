@@ -1,6 +1,6 @@
 const { PHRASE, BASEBALL, GAME } = require('./constants');
 
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -8,23 +8,20 @@ class App {
   }
 
   printStartPhrase() {
-    MissionUtils.Console.print(PHRASE.START);
+    Console.print(PHRASE.START);
   }
 
   createNumberList() {
     this.answerNumberList.splice(0);
     while (this.answerNumberList.length < GAME.NUMBER_COUNT) {
-      const number = MissionUtils.Random.pickNumberInRange(
-        GAME.MIN_NUMBER,
-        GAME.MAX_NUMBER
-      );
+      const number = Random.pickNumberInRange(GAME.MIN_NUMBER, GAME.MAX_NUMBER);
       if (!this.answerNumberList.includes(number))
         this.answerNumberList.push(number);
     }
   }
 
   receiveNumber() {
-    MissionUtils.Console.readLine(PHRASE.INPUT, (input) => {
+    Console.readLine(PHRASE.INPUT, (input) => {
       this.throwException(input);
       this.compareNumbers(input);
     });
@@ -59,21 +56,20 @@ class App {
         ? BASEBALL.NOTHING
         : RESULT_BALL + ' ' + RESULT_STRIKE;
 
-    MissionUtils.Console.print(RESULT_MESSAGE);
-    if (strike === GAME.CORRECT_COUNT)
-      MissionUtils.Console.print(PHRASE.CORRECT);
+    Console.print(RESULT_MESSAGE);
+    if (strike === GAME.CORRECT_COUNT) Console.print(PHRASE.CORRECT);
   }
 
   processResult(strike) {
     if (strike === GAME.CORRECT_COUNT) {
-      MissionUtils.Console.readLine(PHRASE.RESTART, (input) => {
+      Console.readLine(PHRASE.RESTART, (input) => {
         if (input === GAME.RESTART) {
           this.createNumberList();
           this.receiveNumber();
         } else if (input === GAME.EXIT) {
-          MissionUtils.Console.close();
+          Console.close();
         } else {
-          MissionUtils.Console.print(PHRASE.ERROR2);
+          Console.print(PHRASE.ERROR2);
         }
       });
     } else {
@@ -87,8 +83,5 @@ class App {
     this.receiveNumber();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
