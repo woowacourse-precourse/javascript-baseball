@@ -6,8 +6,17 @@ function compare(computer_num, user_num) {
   let ball = 0;
 
   //input 값 배열에 저장
-  const user_choice = [];
-  user_choice.push(user_num);
+  const userNumArr = [];
+  userNumArr.push(user_num);
+
+  //스트라이크
+  for (i = 0; i < 3; i++) {
+    if (computer_num[i] == userNumArr[i]) {
+      strike += 1;
+    }
+  }
+  return strike;
+  
 }
 
 class App {
@@ -21,6 +30,8 @@ class App {
       user_num = number;
       console.print(user_num);
     });
+
+
   }
 }
 
