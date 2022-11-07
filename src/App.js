@@ -24,17 +24,17 @@ class App {
         ? ""
         : this.computerNum.push(randomNum);
     }
+    Console.print(this.computerNum);
   }
 
   userInput() {
     Console.readLine("숫자를 입력해주세요 : ", (inputNum) => {
-      this.userNum = inputNum;
-      this.isValid(this.userNum);
+      this.isValid(inputNum);
     });
   }
 
   isValid(num) {
-    const inputNumArr = Array.from(num);
+    const inputNumArr = Array.from(String(num), (arg) => Number(arg));
     const inputNunSet = new Set(inputNumArr);
 
     if (inputNumArr.length !== NUMBERLENGTH) {
@@ -46,6 +46,24 @@ class App {
     if (isNaN(num)) {
       throw "숫자가 아님";
     }
+
+    this.compareNum(inputNumArr, this.computerNum);
+  }
+
+  compareNum(inputNumArr, computerNum) {
+    let strikeCount = 0;
+    let ballCount = 0;
+    for (var index = 0; index < NUMBERLENGTH; index++) {
+      let sameFind = inputNumArr.indexOf(computerNum[index]);
+      if (sameFind >= 0 && sameFind === index) {
+        strikeCount++;
+      } else if (sameFind >= 0 && sameFind !== index) {
+        ballCount++;
+      }
+    }
+
+    // Console.print(strikeCount);
+    // Console.print(ballCount);
   }
 }
 const app = new App();
