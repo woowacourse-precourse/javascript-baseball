@@ -21,10 +21,10 @@ class App {
 
   play() {
     this.Number = this.CreateRandom().join('');
-    MissionUtils.Console.print(message.START);
     let strikeball = new StrikeBall();
-    const userinput = new UserInput();
+    let userinput;
     while (true) {
+      userinput = new UserInput();
       userinput.GetInput();
       if (userinput.CheckInputIsValid(userinput.UserInputNumber) === false) {
         break;
@@ -51,6 +51,7 @@ class App {
   }
 }
 
+MissionUtils.Console.print(message.START);
 const app = new App();
 app.play();
 module.exports = App;
