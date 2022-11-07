@@ -10,7 +10,7 @@ class App {
   #collectCalculatorFn;
 
   constructor() {
-    this.#collectValidationFn = {
+    this.#collectValidationFn = Object.freeze({
       isNotThreeDigit: inputDigit => inputDigit.length !== INPUT_LENGTH,
       isNotOneToNineDigit: inputDigit =>
         isNaN(inputDigit) || inputDigit.toString().includes('0'),
@@ -19,13 +19,13 @@ class App {
         const setForCheck = new Set(arrForCheck);
         return arrForCheck.length !== setForCheck.size;
       },
-    };
-    this.#collectCalculatorFn = {
+    });
+    this.#collectCalculatorFn = Object.freeze({
       isBall: (randomDigit, digit, idx) =>
         randomDigit.includes(digit) && randomDigit[idx] !== digit,
       isStrike: (randomDigit, digit, idx) =>
         randomDigit.includes(digit) && randomDigit[idx] === digit,
-    };
+    });
   }
 
   setRandomDigit() {
@@ -48,7 +48,7 @@ class App {
 
   getRestartInput() {
     Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    Console.readLine('\n', isRestart => {
+    Console.readLine('', isRestart => {
       if (isRestart === '1') return this.gameStart();
       else if (isRestart === '2') return this.gameEnd();
       else throw new Error('잘못된 값 입력됨');
