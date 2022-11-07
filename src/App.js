@@ -60,8 +60,10 @@ class App {
       return;
     }
     MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크`);
+  }
 
-
+  isAnswer(result) {
+    return result.strike === 3;
   }
 
   guessAnswer(answer) {
@@ -70,6 +72,7 @@ class App {
       input = this.stringToAnswerType(input);
       let result = this.compare(answer, input);
       this.printResult(result);
+      this.isAnswer(result) ? console.log("정답") : console.log("틀림");
 
     });
 
