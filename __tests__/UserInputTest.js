@@ -24,12 +24,12 @@ describe("입력값 테스트", () => {
   });
   test("범위 밖의 입력값 확인 case 2", () => {
     expect(() => {
-      userinput.checkRange(["1", "2", "a"]);
+      userinput.checkRange(["12a"]);
     }).toThrow();
   });
   test("범위 밖의 입력값 확인 case 3", () => {
     expect(() => {
-      userinput.checkRange(["1", "2", "-1"]);
+      userinput.checkRange(["-1-8-2"]);
     }).toThrow();
   });
 });
