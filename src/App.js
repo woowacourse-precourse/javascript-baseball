@@ -43,6 +43,13 @@ class App {
     }
   };
 
+  checkUserInput(userInput) {
+    this.checkUserInputType(userInput);
+    this.checkUserInputLength(userInput);
+    this.checkUserInputIsDiff(userInput);
+    this.checkUserInputNumberRange(userInput);
+  };
+
   checkingScore(userInputNumber, computerNumber) {
     let score = [0, 0];
     for (let i = 0; i < 3; i++) {
