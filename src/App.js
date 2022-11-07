@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const NUMBER_LENGTH = 3;
 
 class App {
   play() {
@@ -13,7 +14,7 @@ class App {
 
 function makeComputerAnswer() {
   const computer = [];
-  while (computer.length < 3) {
+  while (computer.length < NUMBER_LENGTH) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!computer.includes(number)) {
       computer.push(number);
@@ -31,6 +32,9 @@ function stringToArray(string) {
 }
 
 function startBaseballGame(userMessage, computerAnswer) {
+  if (userMessage.length !== 3 || typeof userMessage !== 'number') {
+    throw new Error('올바른 입력이 아닙니다. 3자리의 숫자를 입력해주세요.');
+  }
   const ballCount = checkBall(userMessage, computerAnswer);
   const strikeCount = checkStrike(userMessage, computerAnswer);
   playBaseballGame(ballCount, strikeCount, computerAnswer);
@@ -53,10 +57,10 @@ function checkStrike(userMessage, computerAnswer) {
 }
 
 function playBaseballGame(ballCount, strikeCount, computerAnswer) {
-  if (strikeCount === 3) {
+  if (strikeCount === NUMBER_LENGTH) {
     gameClear(ballCount, strikeCount);
   }
-  if (strikeCount !== 3) {
+  if (strikeCount !== NUMBER_LENGTH) {
     gameNotCleared(ballCount, strikeCount, computerAnswer);
   }
 }
