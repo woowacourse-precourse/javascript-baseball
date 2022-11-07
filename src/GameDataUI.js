@@ -36,23 +36,22 @@ class GameDataUI {
 
   gameOver() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (answer) => {
-        if (answer === '1') {
-          this.#dispatcher.dispatch({
-            type: 'game-restart',
-          });
-          return;
-        }
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', (answer) => {
+      if (answer === '1') {
+        this.#dispatcher.dispatch({
+          type: 'game-restart',
+        });
+        return;
+      }
 
-        if (answer === '2') {
-          Console.close();
-          return;
-        }
-        this.#inputError();
-      },
-    );
+      if (answer === '2') {
+        Console.close();
+        return;
+      }
+
+      this.#inputError();
+    });
   }
 
   update = ({ ballsAndStrikes }) => {
