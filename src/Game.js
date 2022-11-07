@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validation = require("./Validation.js");
+const ErrorMsg = require("./ErrorMsg.js");
 
 const QuestionText = Object.freeze({
   startText: "숫자 야구 게임을 시작합니다.",
@@ -54,12 +55,16 @@ class Game {
       this.io.print(QuestionText.endText);
       this.start(QuestionText.redoText, this.isRestart);
     } catch {
-      new Error("경고:게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+      new Error(ErrorMsg.WarningEndMessage);
     }
   }
 
   onGame(input) {
-    this.userInputArray = this.validation.validation(parseInt(input));
+    const isValid = this.validation.checkValidation(input);
+
+    if (!isValid && !isValid[0]) throw isValid[1];
+
+    this.userInputArray = this.inputToArray(input);
 
     const ball = this.countBall();
     const strike = this.countStrike();
@@ -77,10 +82,7 @@ class Game {
 
   isRestart(input) {
     let value = parseInt(input);
-    if (isNaN(value))
-      throw new Error(
-        "경고:게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-      );
+    if (isNaN(value)) throw new Error(ErrorMsg.WarningEndMessage);
 
     switch (value) {
       case 1:
@@ -90,7 +92,7 @@ class Game {
         this.io.close();
         break;
       default:
-        throw new Error("Not valid value");
+        throw new Error(ErrorMsg.NotValidValue);
     }
   }
 
@@ -127,12 +129,23 @@ class Game {
 
   setTarget() {
     const computer = [];
-    while (computer.length < 3) {
+    while (computer.length < this.targetLength) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) computer.push(number);
     }
     console.log(computer);
     return computer;
+  }
+
+  inputToArray(input) {
+    const array = [];
+
+    while (input > 0) {
+      array.unshift(input % 10);
+      input = Math.floor(input / 10);
+    }
+
+    return array;
   }
 }
 

@@ -1,42 +1,25 @@
+const ErrorMsg = require("./ErrorMsg.js");
+
 class Validation {
   constructor(length) {
-    this.length = length;
+    this.length = length; // user input max length
     this.array = [];
   }
 
-  validation(input) {
-    if (isNaN(input)) throw new Error("정수 값을 입력해주세요!");
+  checkValidation(input) {
+    if (input.includes("0")) return [false, new Error(ErrorMsg.NoZero)];
 
-    const len = Math.ceil(Math.log10(input + 1));
-    if (len !== 3) throw new Error("서로 다른 3자리의 수를 입력해주세요!");
+    if (Number.isNaN(Number(input))) return [false, new Error(ErrorMsg.NaN)];
 
-    this.isDuplicate(input);
+    if (input.length !== this.length)
+      return [false, new Error(ErrorMsg.differentDigit)];
 
-    if (input < 0) throw new Error("음수가 아닌 값을 입력해주세요.");
-    return this.array;
-  }
+    if (new Set(input).size !== this.length)
+      return [false, new Error(ErrorMsg.duplicated)];
 
-  isDuplicate(input) {
-    const checkArray = Array(10).fill(false);
-    this.array = this.inputToArray(input);
+    if (parseInt(input) < 0) return [false, new Error(ErrorMsg.NonNegative)];
 
-    for (let i = 0; i < this.length; i++) {
-      let idx = this.array[i];
-      if (checkArray[idx]) throw new Error("중복이 있습니다.");
-
-      checkArray[idx] = true;
-    }
-  }
-
-  inputToArray(input) {
-    const array = [];
-
-    while (input > 0) {
-      array.unshift(input % 10);
-      input = Math.floor(input / 10);
-    }
-
-    return array;
+    return true;
   }
 }
 
