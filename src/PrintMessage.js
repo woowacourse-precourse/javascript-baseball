@@ -5,12 +5,6 @@ function printGameStart() {
     MissionUtils.Console.print(GAME_START_MESSAGE);
 }
 
-const printUserNumInput = () => {
-    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
-    MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
-    });
-}
-
 function printBoth(numOfBall, numOfStrike) {
     const NUM_OF_BALL = `${numOfBall}볼`;
     const NUM_OF_STRIKE = `${numOfStrike}스트라이크`;

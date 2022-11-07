@@ -1,6 +1,8 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const printMessage = require("./PrintMessage.js");
-const NumGenerator = require("./GenerateRandomNumber");
+const generateComNum = require("./GenerateRandomNumber");
 const playGame = require("./PlayBaseball.js");
+const exception = require("./HandleException.js");
 
 class App {
   constructor() {
@@ -8,9 +10,18 @@ class App {
     this.isPlayGame = true;
   }
   play() {
+    printMessage.printGameStart();
+    this.GenerateComputerNum();
   }
   GenerateComputerNum() {
-    this.computerNum = NumGenerator.generateComputerNum();
+    this.computerNum = generateComNum.generateComputerNum();
+  }
+  getUserInputNum() {
+    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+    MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
+      exception.handleException(userInput);
+      
+    });
   }
 }
 
