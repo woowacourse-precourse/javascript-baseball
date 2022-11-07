@@ -26,6 +26,12 @@ class App {
       }
     );
   }
+
+  occurredError(userNumberInput) {
+    if (userNumberInput.length != 3) {
+      throw new Error("숫자는 3자리로 입력해야합니다.");
+    }
+  }
 }
 
 module.exports = App;
