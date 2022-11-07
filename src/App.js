@@ -38,6 +38,57 @@ class App {
     } else { this.getInterimOutcome(input); }
   }
 
+  getInterimOutcome(input) {
+    const BALL = this.getBall(input);
+    const STRIKE = this.getStrike(input);
+    if (STRIKE === 3) {
+      this.getAnswer();
+    } else if (BALL && !STRIKE) {
+      MissionUtils.Console.print(`${BALL}볼`);
+      this.getInputNumber();
+    } else if (!BALL && STRIKE) {
+      MissionUtils.Console.print();
+      this.getInputNumber(`${STRIKE}스트라이크`);
+    } else if (BALL && STRIKE) {
+      MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+      this.getInputNumber();
+    } else if (!BALL && !STRIKE) {
+      MissionUtils.Console.print('낫싱');
+      this.getInputNumber();
+    }
+  }
+
+  getBall(input) {
+    let ball = 0;
+    input.forEach((num, idx) => {
+      if (
+        this.randomArray.includes(Number(num))
+        && this.randomArray.indexOf(Number(num)) !== idx
+      ) {
+        ball += 1;
+      }
+    });
+    return ball;
+  }
+
+  getStrike(input) {
+    let strike = 0;
+    input.forEach((num, idx) => {
+      if (Number(num) === this.randomArray[idx]) {
+        strike += 1;
+      }
+    });
+    return strike;
+  }
+
+  getAnswer() {
+    MissionUtils.Console.print('3스트라이크');
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.restart();
+  }
+
+
+
   play() {
     this.start();
     this.getInputNumber();
