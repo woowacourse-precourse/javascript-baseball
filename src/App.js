@@ -88,8 +88,16 @@ class App {
   }
 
   retryOrExit(answer) {
-    if (answer === '1') this.play();
-    if (answer === '2') MissionUtils.Console.close(); 
+    if (answer === '1') {
+      this.play();
+      return;
+    }
+    if (answer === '2') {
+      MissionUtils.Console.close(); 
+      return;
+    }
+    MissionUtils.Console.print('잘못 입력하였습니다. 다시 입력해주세요.');
+    this.askRetry();
   }
 }
 
