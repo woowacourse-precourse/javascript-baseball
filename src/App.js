@@ -12,6 +12,15 @@ function createAnswer() {
 }
 function askRestart() {
   MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+  MissionUtils.Console.readLine('', select => {
+    if (select === '1') {
+      return;
+    }
+    if (select === '2') {
+      return;
+    }
+    throw Object.assign(new Error(), { message: '잘못된 입력입니다. 1 또는 2만 입력 가능합니다.' });
+  });
 }
 class App {
   constructor() {
