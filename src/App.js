@@ -71,18 +71,18 @@ class App {
   }
 
   isRetry() {
-    MissionUtils.Console.readLine(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료 \n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => {
-        if (input == 1) {
-          return this.play();
-        } else if (input == 2) {
-          MissionUtils.Console.print("게임 종료");
-        } else {
-          throw "유효하지 않은 입력값 입니다.";
-        }
+    let userQuestion =
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료" +
+      "n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+    MissionUtils.Console.readLine(userQuestion, (input) => {
+      if (input == 1) {
+        return this.play();
+      } else if (input == 2) {
+        MissionUtils.Console.print("게임 종료");
+      } else {
+        throw "유효하지 않은 입력값 입니다.";
       }
-    );
+    });
   }
 
   gameStart(computer) {
