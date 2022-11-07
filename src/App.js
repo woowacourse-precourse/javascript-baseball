@@ -36,7 +36,37 @@ class App {
       if (countStrike !== NUMBER_COUNT) {
         return this.match(computerNum);
       }
+
+      this.checkToRestart();
     });
+  }
+
+  checkToRestart() {
+    Console.print(MESSAGE.SUCCESS);
+
+    Console.readLine(MESSAGE.END, (userInput) => {
+      if (userInput === 1) {
+        return this.restart();
+      }
+
+      if (userInput === 2) {
+        return this.exit();
+      }
+
+      this.throwError();
+    });
+  }
+
+  restart() {
+    this.start();
+  }
+
+  exit() {
+    Console.close();
+  }
+
+  throwError() {
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
