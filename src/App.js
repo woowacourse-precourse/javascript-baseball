@@ -28,11 +28,11 @@ class App {
   compareWithUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       if (number.length > 3 || number.length < 3)
-        throw new Error("3자리의 숫자를 입력해주세요.");
+        throw new RangeError("3자리의 숫자를 입력해주세요.");
 
       const userNumber = parseInt(number, 10);
 
-      // if (!Number.isNaN(userNumber)) throw new RangeError();
+      if (Number.isNaN(userNumber)) throw new TypeError("숫자를 입력해주세요");
 
       const scoreObject = this.getScoreObject(userNumber);
       const hint = this.getHint(scoreObject);
@@ -61,7 +61,9 @@ class App {
   }
 
   splitNumber(number) {
-    return (number + "").split("").map((element) => parseInt(element, 10));
+    return (number + "") //
+      .split("")
+      .map((element) => parseInt(element, 10));
   }
 
   getScore(userNumberArray, computerNumberIndex, scoreObject, ...scoreName) {
@@ -80,13 +82,21 @@ class App {
   }
 
   getHint(scoreObject) {
-    return scoreObject.ball > 0 && scoreObject.strike === 0
-      ? `${scoreObject.ball}볼`
-      : scoreObject.ball === 0 && scoreObject.strike > 0
-      ? `${scoreObject.strike}스트라이크`
-      : scoreObject.ball > 0 && scoreObject.strike > 0
-      ? `${scoreObject.ball}볼 ${scoreObject.strike}스트라이크`
-      : "낫싱";
+    const { ball, strike } = scoreObject;
+
+    const ballAndStrike =
+      scoreObject.ball > 0 && strike > 0
+        ? `${ball}볼 ${strike}스트라이크`
+        : "낫싱";
+
+    const strikeOnly =
+      ball === 0 && strike > 0 ? `${strike}스트라이크` : ballAndStrike;
+
+    const ballOnly = ball > 0 && strike === 0 ? `${ball}볼` : strikeOnly;
+
+    const hintTernaryExpression = ballOnly;
+
+    return hintTernaryExpression;
   }
 
   afterGameEnded() {
