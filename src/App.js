@@ -1,7 +1,7 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
-const GAME_START_KEY = "1";
-const GAME_EXIT_KEY = "2";
+const GAME_START_KEY = '1';
+const GAME_EXIT_KEY = '2';
 
 const MIN_RANDOM_NUIMBER = 1;
 const MAX_RANDOM_NUMBER = 9;
@@ -16,7 +16,7 @@ function App () {
   };
   
   function printNewGameInterface () {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   function startGame () {
@@ -24,12 +24,12 @@ function App () {
   }
 
   function getUserAnswer () {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       if(isValidInput(answer)){
         getScore(matchNumber(answer, this.randomNumber));
         return;
       }
-      throw "올바른 값을 입력하세요.";
+      throw '올바른 값을 입력하세요.';
     });
   }
 
@@ -37,10 +37,10 @@ function App () {
     let strike = 0;
     let ball = 0;
     const userInput = num1
-      .split("")
+      .split('')
       .map(char => Number(char));
     const computerInput = num2
-      .split("")
+      .split('')
       .map(char => Number(char));
 
     userInput.forEach((element, index) => {
@@ -63,7 +63,7 @@ function App () {
 
     if (strike === ANSWER_STRIKE_COUNT){
       MissionUtils.Console.print (
-        "3스트라이크 \n 3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+        '3스트라이크 \n 3개의 숫자를 모두 맞히셨습니다! 게임 종료'
       );
       MissionUtils.Console.readLine(
         `게임을 새로 시작하려면 ${GAME_START_KEY}, 종료하려면 ${GAME_EXIT_KEY}를 입력하세요.\n`, 
@@ -77,14 +77,14 @@ function App () {
             MissionUtils.Console.close();
             return;
           } 
-          throw "올바른 값을 입력하세요.";
+          throw '올바른 값을 입력하세요.';
         }
       );
       return;
     }
 
     if (strike === 0 && ball === 0){
-      MissionUtils.Console.print ("낫싱");
+      MissionUtils.Console.print ('낫싱');
       getUserAnswer();
       return;
     }
@@ -105,7 +105,7 @@ const getRandomNumber = (min, max) => {
       randomNumberArray.push(randomNumber);
     }
   }
-  return randomNumberArray.join("");
+  return randomNumberArray.join('');
 };
 
 
