@@ -51,21 +51,26 @@ const play_inst = (is_end, solution) => {
   MissionUtils.Console.readLine("숫자를 입력해 주세요", (answer)=>{    
     //console.log(answer, solution)
     if (answer == solution) {
+      //case when answer is exactly same with solution
       is_end[0] = true
     } else if (answer.length <= 3) {
+      //case answer is valid but not solution
       console.log(gm_result(answer, solution))
       is_end[0] = false
     } else if (answer.length > 3) {
+      //case answer is invalid, throw error and shut down program
       throw new Error("Invalid Input to inference");
     }
 
     if (is_end[0]){
+      //case when game is end
       try {
         play_again_test(is_end, play_inst)
       } catch (e) {
         throw e
       }
     } else {
+      //case when game is not end and all recursive call function itself
       play_inst(is_end, solution)
     }
   })  
@@ -74,11 +79,14 @@ const play_inst = (is_end, solution) => {
 const play_again_test = (is_end, callback)=> {
   MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (answer)=>{
     if ([1, 2, "1", "2"].includes(answer) === false){
+      //case when invalid restart input
       throw new Error("Invalid Input to restart");
     } else if (answer == 1) {
+      //case when restart another game
       is_end = [false]
       callback(is_end, gen_rand_num())
     } else if (answer == 2) {
+      //case when game is end and just print game end to console
       console.log("game end")
     }
   })
