@@ -68,4 +68,5 @@
 |:heavy_minus_sign:|입력이 3자리가 아닌 경우||
 |:heavy_minus_sign:|입력이 숫자로만 구성되어 있지 않은 경우||
 |:heavy_minus_sign:|입력된 3자리 중 중복된 숫자가 있는 경우||
+|:heavy_check_mark:|정답 시 재개 또는 종료 확인에서 1 또는 2 이외를 입력한 경우||
 

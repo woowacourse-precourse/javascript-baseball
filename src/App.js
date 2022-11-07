@@ -50,12 +50,17 @@ class App {
     Console.readLine("", (isRestart) => {
       if (isRestart === "1") return this.startGame();
       if (isRestart === "2") return this.endGame();
+      this.sayError();
     });
   }
 
   endGame() {
     Console.print("게임을 종료합니다.");
     Console.close();
+  }
+
+  sayError() {
+    throw new Error("적절한 입력이 아닙니다. 게임을 종료합니다.");
   }
 }
 
