@@ -42,7 +42,9 @@ class App {
   }
 
   isValidUserNumber(number) {
-    return this.isThreeDigits(number) && this.isCorrectRangeDigits(number) && this.isNotDuplicate;
+    return (
+      this.isThreeDigits(number) && this.isCorrectRangeDigits(number) && this.isNotDuplicate(number)
+    );
   }
 
   isThreeDigits(number) {
@@ -51,23 +53,18 @@ class App {
 
   isCorrectRangeDigits(number) {
     const possibleDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 9);
-    number.split('').forEach((digit) => {
-      if (!possibleDigits.includes(+digit)) return false;
-    });
-    return true;
+    return number.split('').filter((digit) => possibleDigits.includes(+digit)).length === 3;
   }
 
   isNotDuplicate(number) {
-    const possibleDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 9);
     let usedDigits = [];
     number.split('').forEach((digit) => {
-      if (usedDigits.includes(+digit)) {
-        return false;
-      } else {
+      if (!usedDigits.includes(+digit)) {
         usedDigits.push(+digit);
       }
     });
-    return true;
+    MissionUtils.Console.print(usedDigits);
+    return usedDigits.length === 3;
   }
 
   getNumberOfBalls(computerNumber, userNumber) {
