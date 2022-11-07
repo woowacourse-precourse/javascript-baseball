@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-class User{
+class Player{
     constructor(){
         this.state='INGAME';
         this.input='';
@@ -48,4 +48,4 @@ class User{
     }
 }
 
-module.exports = User;
+module.exports = Player;
