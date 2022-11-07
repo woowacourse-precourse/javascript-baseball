@@ -21,6 +21,7 @@ class App {
 
   printMessage(message) {
     MissionUtils.Console.print(message);
+    return this;
   }
 
   generateCount(numberList) {
@@ -52,8 +53,7 @@ class App {
     if (this.countResult.strikeCount !== 3) {
       this.getUserInput();
     } else {
-      this.printMessage(MESSAGE.WIN);
-      this.printMessage(MESSAGE.RESTART);
+      this.printMessage(MESSAGE.WIN).printMessage(MESSAGE.RESTART);
       this.inputSignal();
     }
   }
