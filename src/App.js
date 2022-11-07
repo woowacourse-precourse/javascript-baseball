@@ -18,9 +18,10 @@ function initialGameSettings () {
 
 }
 
-function getUserInput() {
+function getUserInput (answer) {
   Console.readLine(GAME_ANNOUNCEMENT_MESSAGE.INPUT, (input) => {
     checkInput(input)
+    compareNumber(answer, input)
   })
 }
 
@@ -33,7 +34,15 @@ function checkInput (input) {
   else if (inputArr.includes('0')) throw WRONG_INPUT_ALERT.INCLUDES_ZERO
 }
 
-function compareNumber () {
+function compareNumber (answer, input) {
+  let userScore = Score.makeScoreZero();
+  let inputArr = input.split('').map(Number);
+
+  inputArr.forEach((input,idx) => {
+    if (answer.indexOf(input) === -1) "";
+    else if (answer.indexOf(input) === idx) userScore.strike += 1;
+    else userScore.ball += 1;
+  });
 }
 
 function getBaseballGameResult () {
