@@ -93,3 +93,12 @@ describe('isStrike()', () => {
     expect(app.isStrike(4)).toBeFalsy();
   });
 });
+
+describe('userInteraction()', () => {
+  test('길이가 2인 배열을 반환한다.', () => {
+    const app = new App();
+    const userInputArray = [1, 2, 3];
+
+    expect(app.userInteraction(userInputArray)).toHaveLength(2);
+  });
+});
