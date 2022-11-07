@@ -4,12 +4,17 @@ const computer = require('./Answer');
 class App {
   play() {
     this.print('숫자 야구 게임을 시작합니다.');
-    this.print(computer);
-    this.close();
+    this.readLine();
   }
 
   print(msg) {
     Console.print(msg);
+  }
+
+  readLine() {
+    Console.readLine(`숫자를 입력해주세요 : `, (answer) => {
+      this.print(`입력한 숫자: ${answer}`);
+    });
   }
 
   close() {
