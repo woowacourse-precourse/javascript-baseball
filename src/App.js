@@ -35,6 +35,8 @@ const isValidLength = (input) => {
   return true;
 };
 
+const isDuplicated = (input) => input.length !== new Set(input).size;
+
 function App () {
   this.randomNumber;
   this.play = () => {
