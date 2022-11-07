@@ -24,16 +24,33 @@ class App {
     return { strikeCount, ballCount };
   }
 
-  start() {
+  printGameResult(strikeCount, ballCount) {
+    if (strikeCount === 0 && ballCount === 0) return Console.print("낫싱");
+    const strikeCount = strikeCount === 0 ? "" : `${strikeCount}스트라이크`;
+    const ballCount = ballCount === 0 ? "" : `${ballCount}볼 `;
+    return Console.print(`${ballCount}${strikeCount}`);
+  }
+
+  askRestart() {}
+
+  checkGameResult(result) {
+    const { strikeCount, ballCount } = result;
+    this.printGameResult(strikeCount, ballCount);
+    if (strikeCount !== 3) return this.doGame();
+    return this.askRestart();
+  }
+
+  gameStart() {
     Console.print("숫자 야구 게임을 시작합니다.");
     const computerRandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3).join(
       ""
     );
-    this.doGame(computerRandomNumber);
+    const result = this.doGame(computerRandomNumber);
+    this.checkGameResult(result);
   }
 
   play() {
-    this.start();
+    gameStart();
   }
 }
 
