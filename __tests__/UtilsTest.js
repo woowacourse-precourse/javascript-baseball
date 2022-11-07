@@ -1,10 +1,11 @@
-const { pickNumberInRange } = require("../src/Utils");
+const { print, close, readLine, pickNumberInRange } = require("../src/Utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 
-describe("유틸 정상 출력 테스트", () => {
-  test(("pickNumberInRange 정상작동 확인"), () => {
-    const random = pickNumberInRange(1, 9);
-    const oneToNine = [...Array(9)].map((number, index) => index + 1);
-    expect(oneToNine).toContain(random);
+describe("utils 정상 작동 테스트", () => {
+  test("print 출력 테스트", () => {
+    const printTest = jest.spyOn(MissionUtils.Console, "print");
+    print("안녕하세여");
+    expect(printTest).toBeCalledWith("안녕하세여");
   });
 });
