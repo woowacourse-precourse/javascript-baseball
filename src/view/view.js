@@ -15,6 +15,16 @@ class View {
     this.CLOSING_COMMENT = "게임 종료";
   }
 
+  /**
+   * 첫 게임이라면 환영 메세지를 출력한다.
+   * @param {boolean} isFirstGame [첫 개임인지 여부]
+   */
+  printWelcomeMessage(isFirstGame) {
+    if (isFirstGame) {
+      Console.print(this.WELCOME_COMMENT);
+    }
+  }
+
   // 유저로부터 숫자를 제시받는다.
   getUserGuessInput() {
     Console.readLine(this.GET_INPUT_COMMET, (userGivenString) => {

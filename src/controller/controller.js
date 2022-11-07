@@ -1,5 +1,3 @@
-const { Console } = require("@woowacourse/mission-utils");
-
 const View = require("../view/view");
 const ComputerNumber = require("../model/computerNumber");
 const UserGivenNumber = require("../model/userGivenNumber");
@@ -119,7 +117,7 @@ class Controller {
 
   // 게임 초기 실행
   init() {
-    if (this.isFirstGame) Console.print(this.view.WELCOME_COMMENT);
+    this.view.printWelcomeMessage(this.isFirstGame);
     this.computerNumber.setRandomNumber();
     this.view.getUserGuessInput();
   }
