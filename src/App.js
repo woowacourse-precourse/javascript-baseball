@@ -27,6 +27,13 @@ class App {
       throw new Error('3자리로 입력해주세요.');
     }
   };
+
+  checkUserInputIsDiff(userInput) {
+    let uniqueNumber = new Set(userInput);
+    if (uniqueNumber.size !== userInput.length) {
+      throw new Error('중복없이 숫자를 입력해주세요.');
+    }
+  };
 }
 
 module.exports = App;
