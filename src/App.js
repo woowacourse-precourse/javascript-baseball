@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.computerInputNumbers = ''
+    this.userInputNumbers = ''
   }
 
   computerInput() {
@@ -16,8 +17,15 @@ class App {
     this.computerInputNumbers = computer
   }
 
+  userInput() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (number) => {
+      this.userInputNumbers = number
+    })
+  }
+
   gameStart() {
     this.computerInput()
+    this.userInput()
   }
 
   play() {
