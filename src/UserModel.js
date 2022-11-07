@@ -8,7 +8,7 @@ class UserModel {
   }
 
   isNumberRangeOneToNine(input) {
-    return /^[1-9]/g.test(input);
+    return /[^1-9]/g.test(input);
   }
 
   isDuplicatedInNumber(input) {
