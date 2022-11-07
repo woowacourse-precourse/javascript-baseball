@@ -10,7 +10,7 @@ class App {
 // 플레이어 숫자 입력
 function playerInputNumbers() {
   MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-    const playerNumber = answer;
+    const playerNumber = isValid(answer);
   });
 }
 
@@ -24,6 +24,20 @@ function computerNumbers() {
     }
   }
   return computer.join("");
+}
+
+// 유효성 검사
+function isValid(numbers) {
+  if (!String(numbers).match(/[1-9]/g)) {
+    throw new Error("숫자만 입력해주세요.");
+  }
+  if (numbers.length !== 3) {
+    throw new Error("3자리 숫자를 입력해주세요.");
+  }
+  if (new Set(numbers).size !== 3) {
+    throw new Error("중복된 숫자가 있습니다.");
+  }
+  return numbers;
 }
 
 // 스트라이크 카운트
