@@ -29,12 +29,12 @@
     - **isAllDiffNum** : 1부터 9 중에서 서로 다른 수로 이루어졌는지
   - 유효한 값이 아니면 toThrow 호출
 - **toThrow**
-  - throw 문으로 애플리케이션 종료
+  - throw 문으로 게임 종료
 - **getHint**
   - 입력한 숫자를 검증 후 보여 줄 힌트 메세지 반환하기
   - **isNothing** : 하나도 없는 경우
   - **isThreeStrike** : 3개의 숫자를 모두 맞힐 경우
-  - 그 외 : 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시
+  - **그 외** : 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시
   - @returns {string} 낫싱/3스트라이크/1볼1스트라이크/2볼
 - **countBallOrStrike**
   - ball 과 strike 갯수 카운트 하기
