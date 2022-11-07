@@ -1,4 +1,5 @@
 const { findStrikeBall, makePhrase } = require('../src/gameUtils');
+const { validateGameInput } = require('../src/validate');
 
 describe('사용자 추측으로 볼 / 스트라이크 / 낫싱 판단 테스트', () => {
     test('123과 456 테스트', () => {
@@ -39,5 +40,28 @@ describe('볼 / 스트라이크로 힌트 문구 도출 테스트', () => {
     test('3스트라이크 테스트', () => {
         const phrase = makePhrase(3, 0);
         expect(phrase).toBe('3스트라이크');
+    });
+});
+
+describe('사용자 추측 검증 테스트', () => {
+    test('숫자가 아닌 입력 테스트', () => {
+        expect(() => {
+            validateGameInput('abc');
+        }).toThrow();
+    });
+    test('3자리가 아닌 입력 테스트', () => {
+        expect(() => {
+            validateGameInput('1234');
+        }).toThrow();
+    });
+    test('범위 밖 숫자 입력 테스트', () => {
+        expect(() => {
+            validateGameInput('101');
+        }).toThrow();
+    });
+    test('중복된 숫자 입력 테스트', () => {
+        expect(() => {
+            validateGameInput('111');
+        }).toThrow();
     });
 });
