@@ -1,6 +1,20 @@
 const App = require("../src/App")
 const MissionUtils = require("@woowacourse/mission-utils")
 
+describe("Print Message Test", () => {
+
+  test("case 1) Game Start Message Test", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.printGameStartMessgae();
+      
+    expect(logSpy).toHaveBeenCalled();
+    
+  });
+
+});
+
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
