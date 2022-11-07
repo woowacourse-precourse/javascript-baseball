@@ -1,3 +1,5 @@
+const { MESSAGE } = require('./Const');
+
 const VALID_REGEX = /^[1-9]{3}$/;
 
 class Function {
@@ -15,6 +17,13 @@ class Function {
     if (this.validByRegex(input)) return false;
     if (this.validDuplicate(input)) return false;
     return true;
+  }
+
+  static throwInvalidInputError(input) {
+    if (!this.validInput(input)) {
+      this.endApp();
+      throw new Error(`${MESSAGE.INPUTERROR}`);
+    }
   }
 }
 
