@@ -14,6 +14,7 @@ class App {
     return computer;
   }
 
+  
   checkInputInteger(input){
     let is_integer = 1;
     if(isNaN(input)){
@@ -56,18 +57,16 @@ class App {
     return isNot_dupli;
   }
 
-  
+
   checkInputValue(input){
     
-    // 양수가 아닌 값을 입력 받았을 때
-    this.checkInputInteger(input);
-
-    // 숫자가 세자리가 아닐 때
-    this.checkInputSize(input);
-
-    // 중복된 숫자 포함하여 입력 받았을 때
-    this.checkDuplication(input);
-        
+    const game_num = [];
+    if(this.checkInputInteger(input) && this.checkInputSize(input) && this.checkDuplication(input)){
+      for(let i=0; i<input.length; i++){
+        game_num.push(parseInt(input.charAt(i)));
+      }
+    }
+    return game_num;
   }
 
 
@@ -86,13 +85,12 @@ class App {
     let is_game_over = 0;
     while(!is_game_over){
 
-      const game_num = [];
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
         console.log(input);
         MissionUtils.Console.close();
-
+        
         try {
-          this.checkInputValue(input);
+          const game_num = this.checkInputValue(input);
         } catch(e) {
           console.error(e);
         }
@@ -100,7 +98,7 @@ class App {
       })
 
       // this.getGameResult(computer_num, game_num);
-      is_game_over = 1;
+      // is_game_over = 1;
     }
 
   }
