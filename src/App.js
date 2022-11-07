@@ -58,6 +58,12 @@ class App {
       strikeBallCount[1] += 1;
     }
   }
+
+  strikeBallResult(strikeBallCount) {
+    if (strikeBallCount[0] > 0 && strikeBallCount[1] == 0) {
+      result = strikeBallCount[0] + "스트라이크";
+    }
+  }
 }
 
 module.exports = App;
