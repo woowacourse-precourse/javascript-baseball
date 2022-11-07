@@ -26,6 +26,17 @@ function computerNumbers() {
   return computer.join("");
 }
 
+// 스트라이크 카운트
+function strikeCheck(playerNumber, computerNumber) {
+  let count = 0;
+  for (let i = 0; i < 3; i++) {
+    if (playerNumber[i] === computerNumber[i]) {
+      count++;
+    }
+  }
+  return count;
+}
+
 const app = new App();
 app.play();
 
