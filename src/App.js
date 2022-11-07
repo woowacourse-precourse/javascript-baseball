@@ -1,9 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const InputError = require("./utils/Error");
 
 class App {
-  constructor(answer) {
-    this.answer = answer;
+  constructor() {
+    this.answer = null;
     this.isDone = false;
+    this.Error = new InputError();
   }
 
   startGame() {
@@ -23,6 +25,7 @@ class App {
 
   getUserInput(currentAnswer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.Error.validateUserInput(answer);
       this.createHint(answer, currentAnswer);
       this.isDone ? this.getRetryInput() : this.getUserInput(currentAnswer);
     });
@@ -112,5 +115,8 @@ class App {
     this.getUserInput(this.answer);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
