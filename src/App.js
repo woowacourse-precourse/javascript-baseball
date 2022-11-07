@@ -73,6 +73,7 @@ class App {
         MissionUtils.Console.close();
         return;
       }
+      if (input !== (OPTION.RESTART || OPTION.EXIT)) throw new Error(ERROR.INVALID_INPUT);
     });
   };
 
@@ -101,7 +102,7 @@ class App {
 
   getInputAndCompare = (ANSWER) => {
     MissionUtils.Console.readLine(MESSAGE.INPUT, (input) => {
-      if (!this.isValid(input)) throw ERROR.INVALID_INPUT;
+      if (!this.isValid(input)) throw new Error(ERROR.INVALID_INPUT);
       this.printResult(ANSWER, input);
     });
   };
