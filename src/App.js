@@ -1,46 +1,68 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.threeDigits = [0, 0, 0];
-    this.userDigits = [0, 0, 0];
+    this.NEW_GAME = "1";
+    this.DIGITS_LENGTH = 3;
+    this.computerDigits = [];
     this.score = { strikes: 0, balls: 0 };
   }
 
-  generateThreeDigits() {
-    this.threeDigits = [];
-    while (this.threeDigits.length < 3) {
-      const newDigit = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.threeDigits.includes(newDigit)) {
-        this.threeDigits.push(newDigit);
-      }
-    }
+  play() {
+    this.startNewGame();
   }
 
-  getUserDigits() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.checkInputValidity(userInput);
-      this.userDigits = [...userInput].map(Number);
-      this.countScore();
-      this.printScore();
-      this.isGameOver();
+  startNewGame() {
+    this.generateComputerDigits();
+    this.playTurn();
+  }
+
+  generateComputerDigits() {
+    const randomDigits = [];
+    while (randomDigits.length < this.DIGITS_LENGTH) {
+      const newDigit = Random.pickNumberInRange(1, 9);
+      if (!randomDigits.includes(newDigit)) {
+        randomDigits.push(newDigit);
+      }
+    }
+    this.computerDigits = randomDigits;
+  }
+
+  playTurn() {
+    this.askUserDigits();
+  }
+
+  askUserDigits() {
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.checkUserDigitsValidity(userInput);
+      const userDigits = [...userInput].map(Number);
+      return this.referee(userDigits);
     });
   }
 
-  checkInputValidity(userInput) {
-    if (userInput != parseInt(userInput) || userInput.length !== 3) {
+  checkUserDigitsValidity(userInput) {
+    if (
+      userInput != parseInt(userInput, 10) ||
+      userInput.length !== this.DIGITS_LENGTH
+    ) {
       throw new Error("input should be three digits");
     }
   }
 
-  countScore() {
+  referee(userDigits) {
+    this.countScore(userDigits);
+    this.printScore();
+    return this.checkGameOver() ? this.askNewGame() : this.playTurn();
+  }
+
+  countScore(userDigits) {
     this.score.strikes = 0;
     this.score.balls = 0;
 
-    for (let i = 0; i < 3; i++) {
-      if (this.threeDigits[i] === this.userDigits[i]) {
+    for (let i = 0; i < this.DIGITS_LENGTH; i++) {
+      if (this.computerDigits[i] === userDigits[i]) {
         this.score.strikes += 1;
-      } else if (this.threeDigits.includes(this.userDigits[i])) {
+      } else if (this.computerDigits.includes(userDigits[i])) {
         this.score.balls += 1;
       }
     }
@@ -60,37 +82,30 @@ class App {
     if (!scoreSentence) {
       scoreSentence = "낫싱";
     }
-    MissionUtils.Console.print(scoreSentence);
+    Console.print(scoreSentence);
   }
 
-  isGameOver() {
-    if (this.score.strikes === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      return this.askNewGame();
+  checkGameOver() {
+    if (this.score.strikes === this.DIGITS_LENGTH) {
+      Console.print(
+        `${this.DIGITS_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+      );
+      return true;
     }
-    return this.getUserDigits();
+    return false;
   }
 
   askNewGame() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    Console.readLine(
+      `게임을 새로 시작하려면 ${this.NEW_GAME}, 종료하려면 2를 입력하세요.\n`,
       (userInput) => {
-        if (userInput === "1") {
-          return this.play();
+        if (userInput === this.NEW_GAME) {
+          return this.startNewGame();
         }
-        return this.finishGame();
+        Console.print("숫자 야구 게임이 종료되었습니다.");
+        return Console.close();
       }
     );
-  }
-
-  finishGame() {
-    MissionUtils.Console.print("숫자 야구 게임이 종료되었습니다.");
-    return MissionUtils.Console.close();
-  }
-
-  play() {
-    this.generateThreeDigits();
-    this.getUserDigits();
   }
 }
 
