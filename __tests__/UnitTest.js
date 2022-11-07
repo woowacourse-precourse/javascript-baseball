@@ -2,8 +2,7 @@ const App = require("../src/App")
 const MissionUtils = require("@woowacourse/mission-utils")
 
 
-describe.only("Read Methods Test", () => {
-
+describe("Read Methods Test", () => {
 
   test.each([
     [123,[123,'2'],["3스트라이크"]],
@@ -21,8 +20,24 @@ describe.only("Read Methods Test", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   })
-  
 
+  test.each([
+    '1',
+    '2',
+  ])("case 2) Read User Continue Answer", (answer) => {
+    const logSpy = getLogSpy();
+    
+    const app = new App();
+    MissionUtils.Console.readLine = jest.fn();
+    MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
+      callback(answer);
+    })
+
+    app.readUserContinueAnswer()
+    if( answer === 1 ){ expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("숫자를 입력해주세요 :"))};
+    if( answer === 2 ){};
+
+  })
 })
 
 
@@ -33,7 +48,6 @@ describe("Print Message Test", () => {
 
     const app = new App();
     app.printGameStartMessgae();
-      
     expect(logSpy).toHaveBeenCalled();
     
   });
@@ -64,6 +78,7 @@ describe("Print Message Test", () => {
   });
 
 });
+
 
 describe("Throw Error Test", () => {
   test.each([
