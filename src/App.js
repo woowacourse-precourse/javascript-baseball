@@ -43,7 +43,17 @@ class App {
   }
 
   getRandomNumber() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    randomArr[0] = MissionUtils.Random.pickNumberInRange(1, 9);
+    randomArr[1] = MissionUtils.Random.pickNumberInRange(1, 9);
+    randomArr[2] = MissionUtils.Random.pickNumberInRange(1, 9);
+
+    while (randomArr[0] == randomArr[1]) {
+      randomArr[1] = MissionUtils.Random.pickNumberInRange(1, 9);
+    }
+    while (randomArr[1] == randomArr[2] || randomArr[0] == randomArr[2]) {
+      randomArr[2] = MissionUtils.Random.pickNumberInRange(1, 9);
+    }
+    return randomArr;
   }
 
   validateInput(inputStr) {
