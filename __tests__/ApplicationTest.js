@@ -47,11 +47,11 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("isNumber", () => {
-    expect(App.isNumber('1')).toEqual(true);
-    expect(App.isNumber('123')).toEqual(true);
-    expect(App.isNumber('01')).toEqual(false);
-    expect(App.isNumber('abc')).toEqual(false);
+  test("consistsOfPositiveNumber", () => {
+    expect(App.consistsOfPositiveNumber('1')).toEqual(true);
+    expect(App.consistsOfPositiveNumber('123')).toEqual(true);
+    expect(App.consistsOfPositiveNumber('01')).toEqual(false);
+    expect(App.consistsOfPositiveNumber('abc')).toEqual(false);
   });
 
   test("isThreeDigit", () => {

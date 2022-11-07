@@ -16,7 +16,7 @@ class App {
     MissionUtils.Console.print(GAME_START_MESSAGE);
   }
 
-  static isNumber(str) {
+  static consistsOfPositiveNumber(str) {
     const NUMBER_REGEXP = /^[1-9]+$/;
     if (!NUMBER_REGEXP.test(str)) {
       return false;
@@ -25,7 +25,7 @@ class App {
   }
 
   static isThreeDigit(str) {
-    if (!App.isNumber(str) || str.length !== 3) {
+    if (!App.consistsOfPositiveNumber(str) || str.length !== 3) {
       return false;
     } 
     return true;
