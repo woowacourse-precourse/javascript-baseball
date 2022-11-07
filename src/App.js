@@ -14,9 +14,7 @@ class App {
 
   play() {
     this.randomNumber();
-    this.userInput().then(() => {
-      this.game();
-    });
+    this.userInput();
   }
 
   userInput() {
@@ -26,6 +24,7 @@ class App {
         throw "잘못된 값을 입력하셨습니다.";
       }
       print(input);
+      this.game();
       close();
     });
   }
@@ -58,23 +57,23 @@ class App {
   }
 
   // 숫자 야구 게임 logic
-  async game() {
-    return new Promise((resolve) => {
-      const score = "";
-      if (this.nothing()) {
-        return "낫싱";
-      } else if (this.ball() != 0) {
-        score += `${this.ball()}볼`;
-      } else if (this.strike() != 0) {
-        score += `${this.strike()}스트라이크`;
-      }
-      resolve(score);
-    });
+  game() {
+    let score = "";
+    print(this.randomNum);
+    if (this.nothing()) {
+      print("낫싱");
+    } else if (!this.nothing() && this.ball() > 0) {
+      score += `${this.ball()}볼`;
+    } else if (!this.nothing() && this.strike() > 0) {
+      score += `${this.strike()}스트라이크`;
+    }
+    print(score);
   }
 
   nothing() {
+    const userInputArr = [...this.inputNum];
     for (let index = 0; index < 3; index++) {
-      if(this.inputNum[index] == this.randomNum[index]){
+      if (userInputArr.includes(String(this.randomNum[index]))) {
         return false;
       }
     }
@@ -83,7 +82,7 @@ class App {
 
   ball() {
     let count = 0;
-    userInputArr = [...this.inputNum];
+    const userInputArr = [...this.inputNum];
     for (let index = 0; index < 3; index++) {
       if (
         userInputArr.includes(String(this.randomNum[index])) &&
