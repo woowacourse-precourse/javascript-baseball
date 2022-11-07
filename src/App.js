@@ -38,17 +38,18 @@ class App {
   }
 
   isValidInput(input) {
-    if (
-      !this.isNumber(input) ||
-      !this.isVaildLength(input) ||
-      !this.isAllDiffNum(input)
-    ) {
-      this.toThrow();
+    if (!this.isNumber(input)) {
+      this.toThrow("숫자 입력만 가능합니다.");
+    }
+    if (!this.isVaildLength(input)) {
+      this.toThrow("숫자 3개를 입력해주세요.");
+    }
+    if (!this.isAllDiffNum(input)) {
+      this.toThrow("같은 숫자가 중복되었습니다. 다른 숫자 3개를 입력해주세요.");
     }
   }
-
-  toThrow() {
-    throw new Error("유효한 값이 아니므로 게임을 종료합니다.");
+  toThrow(errorMsg) {
+    throw new Error(errorMsg);
   }
 
   getHint(input) {
