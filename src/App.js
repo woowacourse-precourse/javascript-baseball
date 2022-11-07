@@ -39,6 +39,22 @@ class App {
     this.printResults(compareResults);
   }
 
+  printResults(compareResults) {
+    if (Object.keys(compareResults).length === 0)
+      MissonUtils.Console.print("낫싱");
+
+    const { strike, ball } = compareResults;
+
+    if (ball && !strike) MissonUtils.Console.print(`${ball}볼`);
+
+    if (!ball && strike) MissonUtils.Console.print(`${strike}스트라이크`);
+
+    if (ball && strike)
+      MissonUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+
+    strike === 3 ? this.resetGame() : this.compareResults();
+  }
+
   play() {
     this.createRandomNum();
 
