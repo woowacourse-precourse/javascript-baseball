@@ -1,5 +1,5 @@
 const Mission = require("../utils/Mission");
-const UserInputValid = require("./UserInputValid");
+const UserInputValidation = require("./UserInputValidation");
 const GetScore = require("../play/GetScore");
 
 class GetUserInput extends Mission {
@@ -14,7 +14,7 @@ class GetUserInput extends Mission {
   }
 
   checkInputValueValid(userInputValue) {
-    return new UserInputValid(userInputValue).checkValid();
+    return new UserInputValidation(userInputValue).checkValid();
   }
 
   getScoreMessage(computerNumbers, userNumbers) {
