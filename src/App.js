@@ -7,17 +7,22 @@ class User {
   }
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
+      console.log(this.game.answer);
     })
   }
 }
 
 class BaseBallGame {
-  answer;
+  answer = [];
   constructor() {
-    this.init();
+    this.getRandomNumber();
   }
-  init() {
-    this.answer = Array.from(Array(3),() => MissionUtils.Random.pickNumberInRange(1, 9));
+  getRandomNumber() {
+    const answerSet = new Set();
+    while(answerSet.size < 3){
+      answerSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    }
+    this.answer = [...answerSet]
   }
   numberToArray(inputAnswer) {
     return Array.from(inputAnswer.toString(),(num)=>Number(num));
