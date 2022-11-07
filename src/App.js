@@ -24,6 +24,25 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
   }
 
+  addScore(obj, position) {
+    obj[position] += 1;
+  }
+
+  checkInputIsCorrect(userInput, currentAnswer) {
+    const score = {
+      strike: 0,
+      ball: 0,
+    };
+    for (let i = 0; i < 3; i++) {
+      if (Number(userInput[i]) === currentAnswer[i]) {
+        this.addScore(score, "strike");
+      } else if (currentAnswer.includes(Number(userInput[i]))) {
+        this.addScore(score, "ball");
+      }
+    }
+    return score;
+  }
+
   play() {
     this.startGame();
     this.createRandom();
