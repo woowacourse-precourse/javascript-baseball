@@ -121,9 +121,27 @@ class App {
   checkThreeStrikes(result, computer) {
     if (result === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료.");
+      this.endOrRestartGame();
     } else {
       this.inputUserNumber(computer);
     }
+  }
+
+  selectAfterAction() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (option) => {
+        this.selectEndOrRestartGame(option);
+      }
+    );
+  }
+
+  // 게임 종료 및 재시작 선택
+  selectEndOrRestartGame(option) {
+    if (option === "1") {
+      this.playGame();
+  } else if (option === "2") {
+    MissionUtils.Console.close();
   }
 }
 
