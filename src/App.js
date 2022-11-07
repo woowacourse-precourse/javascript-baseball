@@ -43,27 +43,29 @@ class App {
     return this.compare(INPUT_ARRAY);
   }
 
-  compare(numberArr) {
+  compare(inputArr) {
     const ANSWER_ARRAY = this.answer;
     this.ball = 0;
     this.strike = 0;
-    numberArr.map((number, index) => {
+    inputArr.map((number, index) => {
       if (ANSWER_ARRAY.includes(number) && number === ANSWER_ARRAY[index])
         this.strike += 1;
       if (ANSWER_ARRAY.includes(number) && number !== ANSWER_ARRAY[index])
         this.ball += 1;
+      return this.strike;
     });
     return this.compareResult();
   }
 
   compareResult() {
     let resultText = '';
-    if (this.ball !== 0) resultText += `${this.ball}볼 `;
-    if (this.strike !== 0) resultText += `${this.strike}스트라이크`;
+    const BALL = this.ball;
+    const STRIKE = this.strike;
+    if (BALL !== 0) resultText += `${BALL}볼 `;
+    if (STRIKE !== 0) resultText += `${STRIKE}스트라이크`;
     if (resultText === '') resultText += '낫싱';
     Console.print(resultText);
-    const RESULT = resultText === '3스트라이크';
-    return this.judgeResult(RESULT);
+    return this.judgeResult(STRIKE === 3);
   }
 
   judgeResult(threeStrike) {
@@ -88,6 +90,3 @@ const app = new App();
 app.play();
 
 module.exports = App;
-
-// 추가해야되는 것들
-// 중복값 입력 제한 기능 추가
