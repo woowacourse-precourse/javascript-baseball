@@ -13,11 +13,9 @@ class App {
       if (user == 1){
         throw "is not three numbers";
       }
-
       if (user == 2){
         throw "is not number";
       }
-
       if (user == 3){
         throw "is not a number from 1 to 9";
       }
