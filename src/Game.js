@@ -7,12 +7,12 @@ const RESTART = 1;
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.gameInit();
   }
 
   gameInit() {
     this.computerNumbers = [...this.getRandomNumbers()].join('');
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getUserNumberInput();
   }
 
