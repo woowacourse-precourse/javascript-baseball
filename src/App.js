@@ -3,21 +3,21 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   play() {
     let random_number;
-    let restart_number;
+    let finish;
     let repeat = true;
 
     while (repeat) {
       random_number = this.GET_RANDOM_NUMBER();
 
       this.COMPARE(random_number);
-      restart_number = this.GAME_END();
+      finish = this.GAME_END();
 
-      if (restart_number === 1) {
+      if (finish === false) {
         continue;
-      } else if (restart_number === 2) {
+      } else if (finish) {
         repeat = false;
-        MissionUtils.Console.print('게임 종료');
-        MissionUtils.Console.close();
+        // MissionUtils.Console.print('게임 종료');
+        // MissionUtils.Console.close();
       }
     }
   }
@@ -83,20 +83,24 @@ class App {
   }
 
   GAME_END() {
-    let finish_number;
+    let finish;
 
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (num) => {
         num = Number(num);
-        if (num === 1 || num === 2) {
-          finish_number = num;
+        if (num === 1) {
+          finish = false;
+        } else if (num === 2) {
+          finish = true;
+          MissionUtils.Console.print('게임 종료');
+          MissionUtils.Console.close();
         } else {
           throw '1 또는 2만 입력할 수 있습니다.';
         }
       }
     );
-    return finish_number;
+    return finish;
   }
 
   HINT(user, correct) {
