@@ -19,7 +19,7 @@ function App () {
       let ball = 0;
       const userInput = num1.split('').map(char => Number(char));
       const computerInput = num2.split('').map(char => Number(char));
-  
+
       userInput.forEach((element, index) => {
         if (computerInput[index] === element) {
           strike += 1;
@@ -33,6 +33,33 @@ function App () {
       return result;
     }
     
+    function getScore (matchResult){
+      const [ball, strike] = matchResult
+      const ANSWER_STRIKE_COUNT = 3
+      if (strike === ANSWER_STRIKE_COUNT){
+        MissionUtils.Console.print ("3스트라이크 \n\ 3개의 숫자를 모두 맞히셨습니다! 게임 종료")
+        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
+          if(answer === '1'){
+            startGame();
+            getUserAnswer();
+            return;
+          }
+          if(answer === '2'){
+            MissionUtils.Console.close();
+            return;
+          } throw '올바른 값을 입력하세요.';
+        })
+        return;
+      }
+      if (strike === 0 && ball === 0){
+        MissionUtils.Console.print ("낫싱")
+        getUserAnswer();
+        return;
+      }
+      MissionUtils.Console.print (`${ball}볼 ${strike}스트라이크`);
+      getUserAnswer();
+    }
+
   }
 }
 
