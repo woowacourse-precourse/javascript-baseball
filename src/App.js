@@ -34,7 +34,6 @@ class App {
   gameStart() {
     MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
       this.getUserNumber(input);
-      MissionUtils.Console.close();
     });
   }
 
@@ -47,13 +46,26 @@ class App {
   }
 
   isThreeDigits(number) {
-    return number.length !== 3;
+    return number.length === 3;
   }
 
   isCorrectDigits(number) {
     const possibleDigits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     number.split('').forEach((digit) => {
       if (!possibleDigits.includes(+digit)) return false;
+    });
+    return true;
+  }
+
+  isNotDuplicate(number) {
+    const possibleDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 9);
+    let usedDigits = [];
+    number.split('').forEach((digit) => {
+      if (usedDigits.includes(+digit)) {
+        return false;
+      } else {
+        usedDigits.push(+digit);
+      }
     });
     return true;
   }
