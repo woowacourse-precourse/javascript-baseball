@@ -74,8 +74,20 @@ class App {
     }
 
     MissionUtils.Console.print(result);
-    
+
     return this.getUserNumbers(computerNumbers);
+  }
+
+  askRestart() {
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.readLine('',(answer) => {
+      if (answer === '1') {
+        return this.play();
+      }
+      if (answer === '2') {
+        return MissionUtils.Console.close();
+      }
+    });
   }
 }
 
