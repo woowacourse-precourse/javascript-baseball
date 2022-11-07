@@ -6,7 +6,7 @@ const utils = {
   },
 
   close() {
-    MissionUtils.Console.Close();
+    MissionUtils.Console.close();
   },
 
   readLine(question, callback) {
