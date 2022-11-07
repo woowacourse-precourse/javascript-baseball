@@ -13,6 +13,26 @@ describe('게임 기능 테스트', () => {
     expect(result).toEqual([3, 4]);
   });
 
+  test('컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크인지 판단한다.', () => {
+    const computerNumbers = [1, 2, 3];
+    const userNumbers = [1, 2, 4];
+    const result = computerNumbers.map((_, idx) =>
+      gameManager.isStrike({ computerNumbers, userNumbers, idx }),
+    );
+
+    expect(result).toEqual([true, true, false]);
+  });
+
+  test('컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 볼인지 판단한다.', () => {
+    const computerNumbers = [4, 5, 6];
+    const userNumbers = [1, 2, 4];
+    const result = userNumbers.map(userNumber =>
+      gameManager.isBall(computerNumbers, userNumber),
+    );
+
+    expect(result).toEqual([false, false, true]);
+  });
+
   test('스트라이크, 볼의 개수를 구한다.', () => {
     const inputValues = ['123', '456', '312', '132'];
     const computerNumbers = [1, 2, 3];
