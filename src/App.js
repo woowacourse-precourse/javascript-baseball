@@ -58,6 +58,21 @@ class App {
             MissionUtils.Console.print(`${strike}스트라이크`);
         }
     }
+
+    countBall() {
+        let ball = 0;
+        this.gamePlayerNumber.forEach((number,index) => {
+            if(this.computerNumber.includes(number)) {
+                if(this.computerNumber[index] !== number) {
+                    ball++;
+                } 
+            }
+        })
+
+        if(ball !== 0) {
+            MissionUtils.Console.print(`${ball}볼`);
+        }
+    }
 }
 
 module.exports = App;
