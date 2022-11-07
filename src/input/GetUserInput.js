@@ -1,10 +1,10 @@
 const Mission = require("../utils/Mission");
+const UserInputValid = require("./UserInputValid");
+const GetScore = require("../play/GetScore");
 
 class GetUserInput extends Mission {
   constructor() {
     super();
-    this.valid = require("./UserInputValid");
-    this.score = require("../play/GetScore");
   }
 
   countingScore(computerNumbers, userNumbers) {
@@ -14,11 +14,11 @@ class GetUserInput extends Mission {
   }
 
   checkInputValueValid(userInputValue) {
-    return new this.valid(userInputValue).checkValid();
+    return new UserInputValid(userInputValue).checkValid();
   }
 
   getScoreMessage(computerNumbers, userNumbers) {
-    const scoreMessage = new this.score(computerNumbers, userNumbers).compare();
+    const scoreMessage = new GetScore(computerNumbers, userNumbers).compare();
     return scoreMessage;
   }
 }

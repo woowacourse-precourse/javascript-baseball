@@ -1,23 +1,22 @@
 const Mission = require("../utils/Mission");
+const GetUserInput = require("../input/GetUserInput");
+const GetComputerInput = require("../input/GetComputerInput");
 
 class PlayGame extends Mission {
   constructor() {
     super();
     this.missionConsole.print("숫자 야구 게임을 시작합니다");
-    this.userNumber = require("../input/GetUserInput");
-    this.pcNumber = require("../input/GetComputerInput");
   }
 
   gameReady() {
-    this.gameStart(new this.pcNumber().makeRandomNumbers());
+    this.gameStart(new GetComputerInput().makeRandomNumbers());
   }
 
   gameStart(computerInputNumbers) {
-    const scoreMessage = new this.userNumber();
+    const scoreMessage = new GetUserInput();
     this.missionConsole.readLine("숫자를 입력해주세요 : ", (userInputNumbers) => {
       this.printMessage(scoreMessage.countingScore(computerInputNumbers, userInputNumbers), computerInputNumbers);
     });
-    computerInputNumbers;
   }
 
   printMessage(scoreMessage, computerNumbers) {

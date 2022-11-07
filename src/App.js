@@ -1,9 +1,7 @@
+const playGame = require("./play/PlayGame");
 class App {
-  constructor() {
-    this.playGame = require("./play/PlayGame");
-  }
   play() {
-    const gameInit = new this.playGame();
+    const gameInit = new playGame();
     gameInit.gameReady();
   }
 }
