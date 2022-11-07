@@ -51,6 +51,20 @@ class BaseballGame {
     return { ball, strike };
   }
 
+  printStrikeBall(ball, strike) {
+    let message;
+    if (strike === 0 && ball === 0) {
+      message = "낫싱";
+    } else if (strike === 0 && ball > 0) {
+      message = `${ball}볼`;
+    } else if (strike > 0 && ball === 0) {
+      message = `${strike}스트라이크`;
+    } else if (strike > 0 && ball > 0) {
+      message = `${ball}볼 ${strike}스트라이크`;
+    }
+    return MissionUtils.Console.print(message);
+  }
+
   getMessage(computerNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const { ball, strike } = this.countStrikeBall(
@@ -58,6 +72,7 @@ class BaseballGame {
         this.computerNumber
       );
       this.checkValidation(input);
+      this.printStrikeBall(ball, strike);
     });
   }
 
