@@ -72,6 +72,18 @@ describe("Game Methods Test", () => {
     expect(app.isValidInputValueInGame(number)).toBe(boolean)
   })
   
+  test.each([
+    [1,2,false],
+    [3,4,false],
+    [112,432,false],
+    [123,123,true],
+    [567,567,true],
+  ])('case 2) Same Number Check Test', (randomNum,inputNum,boolean) => {
+  
+    const app = new App();
+    expect(app.isSameTwoNumber(randomNum,inputNum)).toBe(boolean)
+
+  })
 
 })
 
