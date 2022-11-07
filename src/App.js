@@ -21,6 +21,13 @@ class App {
     }
     this.computerAnswerArr = computerAnswerArr;
   }
+
+  inputUserAnswer() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요.', (value) => {
+      this.checkValidity(value);
+      this.userScore();
+    });
+  }
 }
 
 module.exports = App;
