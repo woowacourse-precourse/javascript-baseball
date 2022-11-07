@@ -51,10 +51,19 @@ class Game{
                 count++;
             }
         }
-        console.log(this.computerNumbers);
-        console.log(userNumbers)
-        console.log(count);
     }
+
+    isBall(userNumbers){
+        const userNumber = [...userNumbers];
+        let count = 0;
+        userNumber.forEach((number,index) => {
+            if (this.computerNumbers.includes(parseInt(number)) && this.computerNumbers[index] !== parseInt(number)) {
+                count++;
+            }
+    
+        })
+    }
+
 
     
 
