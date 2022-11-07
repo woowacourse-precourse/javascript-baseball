@@ -32,6 +32,13 @@ class InputError {
     }
   }
 
+  validateRetryInput(input) {
+    const possibleValue = ["1", "2"];
+    if (!possibleValue.includes(input)) {
+      throw "1혹은 2를 입력해주세요.";
+    }
+  }
+
   validateUserInput(input) {
     this.validateInputExist(input);
     this.validateInputLength(input);
