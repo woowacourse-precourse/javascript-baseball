@@ -1,12 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const { exception, pickedWrongChoice } = require("./Exception");
-const { GAME } = require("./setting/message");
-
-const START_VALUE = 0;
-const STRIKE_VALUE = 3;
-const GAME_RESTART = "1";
-const GAME_EXIT = "2";
+const { GAME, SET } = require("./constants/setting");
 
 class Game {
     constructor() {
@@ -16,8 +11,8 @@ class Game {
 
     // 유저와 컴퓨터 대조해서 스트라이크 볼 갯수 리턴
     getStrikeAndBall(computersNumber, usersNumber) {
-        let howManyStrike = START_VALUE;
-        let howManyBall = START_VALUE;
+        let howManyStrike = SET.START_VAL;
+        let howManyBall = SET.START_VAL;
 
         usersNumber.forEach((number, idx) => {
             if (number === computersNumber[idx]) howManyStrike++;
@@ -43,16 +38,16 @@ class Game {
             const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
             this.resultMessage(howManyStrike, howManyBall);
             
-            if (howManyStrike !== STRIKE_VALUE) this.playGame();
-            if (howManyStrike === STRIKE_VALUE) this.gameOver();
+            if (howManyStrike !== SET.STRIKE) this.playGame();
+            if (howManyStrike === SET.STRIKE) this.gameOver();
         });
     }
     
     gameOver() {
         Console.print(GAME.SUCCESS);
         Console.readLine(GAME.RESTART_OR_EXIT, (choice) => {
-            if (choice === GAME_RESTART) return this.pickedRestart();
-            if (choice === GAME_EXIT) return this.pickedClose();
+            if (choice === SET.RESTART) return this.pickedRestart();
+            if (choice === SET.EXIT) return this.pickedClose();
             return pickedWrongChoice();
         });
     }
