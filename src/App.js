@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const COMPUTER_NUMBER = [];
 let strikeBallCount = [0, 0];
+let result = "";
 
 class App {
   play() {
