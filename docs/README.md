@@ -67,9 +67,9 @@
 	  - [x] isStart()
 		  - [x] this.#isStart 상태를 반환한다.
 		  - [x] boolean 타입을 반환한다.
-	  - [ ] isFinish()
-		  - [ ] this.#isFinish 상태를 반환한다.
-		  - [ ] boolean 타입을 반환한다.
+	  - [x] isFinish()
+		  - [x] this.#isFinish 상태를 반환한다.
+		  - [x] boolean 타입을 반환한다.
 	  - [ ] play()
 		  - [ ] 게임을 실행되는 진입점으로 만든다.
 		  - [ ] 사용자의 입력을 받아서 결과를 출력한다.
