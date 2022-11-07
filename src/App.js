@@ -74,7 +74,7 @@ class App {
           }
 
           if (this.replayQnAResult === "2") {
-            MissionUtils.Console.print("수고하셨습니다.");
+            render.end();
             MissionUtils.Console.close();
           }
         });

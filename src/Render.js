@@ -3,8 +3,9 @@ const {
   START_MENTION,
   START_GETNUMBER,
   GAME_NOTHING,
-  END_MENTION,
+  GAME_END_MENTION,
   END_RETRY_MENTION,
+  END_MENTION,
 } = require("./constants");
 
 class Render {
@@ -27,7 +28,7 @@ class Render {
       MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
     }
     if (strikeCount === 3) {
-      MissionUtils.Console.print(END_MENTION);
+      MissionUtils.Console.print(GAME_END_MENTION);
     }
 
     if (ballCount === 0 && strikeCount === 0) {
@@ -41,6 +42,10 @@ class Render {
         resolve(number);
       });
     });
+  }
+
+  end() {
+    MissionUtils.Console.print(END_MENTION);
   }
 }
 module.exports = Render;
