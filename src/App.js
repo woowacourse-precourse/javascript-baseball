@@ -16,6 +16,11 @@ class App {
 
   startGame() {
     MissonUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    this.getInput();
+  }
+
+  getInput() {
     MissonUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) =>
       this.compareResults(userInput)
     );
@@ -52,7 +57,7 @@ class App {
     if (ball && strike)
       MissonUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
 
-    strike === 3 ? this.resetGame() : this.compareResults();
+    strike === 3 ? this.resetGame() : this.getInput();
   }
 
   play() {
