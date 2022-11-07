@@ -6,6 +6,27 @@ class App {
   }
 }
 
+function checkResult(computer, number) {
+  let ball = 0;
+  let strike = 0;
+
+  for (let i = 0; i < 3; i++) {
+    let index = computer.indexOf(number.charAt(i));
+    if (index === -1) {
+      continue;
+    } else if (index === i) {
+      strike += 1;
+    } else {
+      ball += 1;
+    }
+  }
+
+  if (strike === 3) {
+    return true;
+  }
+  return false;
+}
+
 function checkException(number) {
   if (number === undefined) {
     throw new Error("undefined");
