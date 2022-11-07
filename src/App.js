@@ -49,13 +49,27 @@ function ball() {
       ballArray.push(i);
     }
   }
-  return ballArr.length > 0 === true;
+  return ballArray.length > 0 === true;
+}
+
+function strike() {
+  const strikeArray = [];
+  for (let i = 0; i < creatComputerAnswer.length; i++) {
+    if (creatComputerAnswer[i] === playerAnswer[i]) {
+      strikeArray.push(i);
+    }
+  }
+  return (
+    strikeArray.length > 0 && strikeArray.length > creatComputerAnswer === true
+  );
 }
 
 function compareAnswer(playerAnswer) {
-  //1. 볼 (같은 수 && 다른 자리)
   if (ball()) {
     MissionUtils.Console.print(ballArray + "볼");
+  }
+  if (strike()) {
+    MissionUtils.Console.print(strikeArray.length + "스트라이크");
   }
 }
 
