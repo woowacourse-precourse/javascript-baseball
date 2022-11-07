@@ -5,6 +5,8 @@ class App {
   #randomNum = [];
 
   createRandomNum() {
+    this.#randomNum = [];
+
     Array.from({ length: this.#RANDOM_NUM_LENGTH }).forEach(
       () =>
         (this.#randomNum = [
@@ -29,29 +31,25 @@ class App {
   compareResults(userInput) {
     userInput = userInput.split("");
 
-    const compareResults = {};
+    const results = { ball: 0, strike: 0 };
 
     userInput.forEach((num, index) => {
       if (this.#randomNum.includes(num)) {
-        if (num === this.#randomNum[index]) {
-          compareResults.strike += 1;
-        } else {
-          compareResults.ball += 1;
-        }
+        num === this.#randomNum[index]
+          ? (results.strike += 1)
+          : (results.ball += 1);
       }
     });
 
-    this.printResults(compareResults);
+    this.printResults(results);
   }
 
   printResults(compareResults) {
-    if (Object.keys(compareResults).length === 0)
-      MissonUtils.Console.print("낫싱");
-
     const { strike, ball } = compareResults;
 
-    // console.log(this.#randomNum, compareResults);
-    // console.log(strike, ball);
+    console.log(this.#randomNum, compareResults);
+
+    if (!ball && !strike) MissonUtils.Console.print("낫싱");
 
     if (ball && !strike) MissonUtils.Console.print(`${ball}볼`);
 
@@ -66,12 +64,12 @@ class App {
   resetGame() {
     MissonUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissonUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
         if (userInput !== "1" && userInput !== "2")
           this.throwError("초기화 실패");
 
-        userInput === "1" ? this.startGame() : MissonUtils.Console.close();
+        userInput === "1" ? this.play() : MissonUtils.Console.close();
       }
     );
   }
