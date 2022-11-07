@@ -1,5 +1,11 @@
+const { startGame } = require("./modules/startGame");
+const { playGame } = require("./modules/playGame");
+
 class App {
-  play() {}
+  play() {
+    startGame();
+    playGame();
+  }
 }
 
 module.exports = App;
