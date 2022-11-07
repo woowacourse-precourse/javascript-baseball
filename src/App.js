@@ -84,8 +84,9 @@ class App {
 
   readNum() {
     let answerList = [];
+    let inputList = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      const inputList = Array.from(input);
+      inputList = Array.from(input);
       inputList.map((number) => {
         answerList.push(parseInt(number));
       });
