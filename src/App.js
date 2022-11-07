@@ -12,11 +12,11 @@ class App {
       RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       INSERT_NUMBER: `${this.count}자리 숫자(각 자리 수: ${this.minNum}~${this.maxNum})를 입력해주세요 : `,
       ERROR: {
-        INSERT: "올바르지 않은 입력입니다.\n",
-        RANGE: `각 자리의 수는 ${this.minNum}부터 ${this.maxNum}까지 입력할 수 있습니다.`,
-        TYPE: "숫자만 입력할 수 있습니다.",
-        DIGIT: `${this.count}자리 수가 입력되어야 합니다.`,
-        DUPLICATE: "각 자리의 수는 중복되지 않아야 합니다.",
+        INSERT: "올바르지 않은 입력입니다.",
+        RANGE: `\n각 자리의 수는 ${this.minNum}부터 ${this.maxNum}까지 입력할 수 있습니다.`,
+        TYPE: "\n숫자만 입력할 수 있습니다.",
+        DIGIT: `\n${this.count}자리 수가 입력되어야 합니다.`,
+        DUPLICATE: "\n각 자리의 수는 중복되지 않아야 합니다.",
         END: "\n프로그램을 종료합니다.",
       },
       RESULT: {
@@ -82,7 +82,7 @@ class App {
     return [...new Set(list)].length !== list.length;
   }
 
-  isValidInput(input) {
+  isValidUserNumberInput(input) {
     const numbers = input.split("").map(Number);
 
     if (!numbers.every(this.isNumber)) {
@@ -113,7 +113,7 @@ class App {
   }
 
   inputUserNumbers(input) {
-    if (!this.isValidInput(input)) {
+    if (!this.isValidUserNumberInput(input)) {
       return;
     }
 
@@ -127,6 +127,11 @@ class App {
       2: this.exitGame.bind(this),
     };
 
+    if (!COMMANDS[input]) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.END}`
+      );
+    }
     COMMANDS[input]();
   }
 
@@ -147,6 +152,7 @@ class App {
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
+    console.log(this.gameNumber);
     if (!sameDigitCount && !sameNumberCount) {
       return this.MESSAGES.RESULT.NOTHING;
     }
