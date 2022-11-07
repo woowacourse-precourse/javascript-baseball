@@ -19,4 +19,15 @@ describe("기능 테스트", () => {
     );
   });
 
+  // 볼과 스트라이크 모두 0인 경우: "nothing" 리턴
+  test("기능 5, 결과 분석하기 - nothing", () => {
+    const computerNumber = "123";
+    const userNumber = "456";
+
+    const app = new App();
+       
+    expect(app.countBallAndStrike(computerNumber, userNumber)).toEqual("nothing");
+  });
+
+
 });
