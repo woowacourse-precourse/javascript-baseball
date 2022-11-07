@@ -84,11 +84,11 @@ class App {
     let ball = NUMBER.ZERO;
     let strike = NUMBER.ZERO;
 
-    for (let userNumber of userNumberList) {
+    userNumberList.forEach((userNumber) => {
       if (computerNumberList.includes(userNumber)) {
         ballOrStrike += 1;
       }
-    }
+    });
 
     if (ballOrStrike === NUMBER.ZERO) {
       return "nothing";
