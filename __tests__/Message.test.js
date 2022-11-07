@@ -22,4 +22,11 @@ describe('print()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('Original Data');
   });
+
+  test('빈 문자열을 전달하면 에러가 발생한다.', () => {
+    expect(() => {
+      const message = new Message();
+      message.print('');
+    }).toThrow();
+  });
 });
