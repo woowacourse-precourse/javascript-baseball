@@ -23,7 +23,6 @@ class BaseballGame {
   }
 
   startGame() {
-    printStartMessage();
     this.getPlayerInput();
   }
 
