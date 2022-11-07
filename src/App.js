@@ -7,15 +7,11 @@ class App {
   }
 
   play() {
-    console.log("숫자 야구 게임을 시작합니다.");
     this.computerInput = this.selectRandomNumber();
-    console.log(`정답: ${this.computerInput}`);
-
+    console.log("정답", this.computerInput);
     this.userInputNumber();
-
-    // this.computerInput = [1, 2, 3]; // 디버깅용
-    // this.userInput = [1, 1, 1]; // 디버깅용
-
+    // this.userInput = [1, 2, 3];
+    // this.isValidate(this.userInput);
     // this.compareNumber(this.userInput);
 
     return;
@@ -24,24 +20,22 @@ class App {
   selectRandomNumber() {
     const randomNumber = [];
     while (randomNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      let number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!randomNumber.includes(number)) {
+        number = number.toString();
         randomNumber.push(number);
       }
     }
-
     return randomNumber;
   }
 
   userInputNumber() {
-    // MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-    //   this.userInput = answer.split("");
-    // });
-    this.userInput = [1, 2, 3];
-    console.log(this.userInput);
-
-    this.isValidate(this.userInput);
-    this.compareNumber(this.userInput);
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.userInput = answer.split("");
+      console.log(this.userInput);
+      this.isValidate(this.userInput);
+      this.compareNumber(this.userInput);
+    });
   }
 
   compareNumber() {
@@ -57,10 +51,12 @@ class App {
       result = `${score[0]}볼 ${score[1]}스트라이크`;
     }
 
-    console.log(result);
+    MissionUtils.Console.print(result);
 
     if (score[1] === 3) {
       this.finishOrRestart();
+    } else {
+      this.userInputNumber();
     }
   }
 
@@ -72,6 +68,7 @@ class App {
         this.isBall(i, ans, input, score);
       }
     }
+    return score;
   }
   isBall(i, ans, input, score) {
     if (i === 0) {
@@ -89,37 +86,52 @@ class App {
     }
   }
   finishOrRestart() {
-    console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 
-    let selected = 2;
-    if (selected === 1) {
-      this.play();
-    } else if (selected === 2) {
-      MissionUtils.Console.close();
-    } else {
-      console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-    }
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (Number(answer) === 1) {
+          this.play();
+        } else if (Number(answer) === 2) {
+          MissionUtils.Console.print("게임을 종료합니다.");
+          MissionUtils.Console.close();
+        } else {
+          MissionUtils.Console.print(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+          );
+        }
+      }
+    );
   }
+
   isValidate(input) {
-    input.map((num) => {
-      if (typeof num !== "number") {
-        throw new Error("숫자를 입력하세요");
-      }
-      if (input.includes(`${num}`) === true) {
-        throw new Error("서로 다른 3자리 숫자를 입력하세요");
-      }
+    const repeatCheck = new Set(input);
+    if (repeatCheck.size !== 3) {
+      throw new Error("서로 다른 3자리 숫자를 입력하세요");
+    }
+    // input.map((num) => {
+    //   console.log(num, typeof num);
+    //   if (typeof num !== "number") {
+    //     throw new Error("숫자를 입력하세요");
+    //   }
+    // });
+    let checkString = 0;
+    input.map((user) => {
+      if (isNaN(user)) checkString = 1;
     });
+    if (checkString === 1) {
+      throw new Error("숫자를 입력하세요");
+    }
     if (input.length !== 3) {
       throw new Error("3자리 숫자를 입력하세요");
     }
     if (input.includes("0")) {
       throw new Error("1~9 사이의 숫자로 이루어진 숫자를 입력하세요");
     }
-    // - 반복되는 숫자가 존재할 시
   }
 }
 
 const app = new App();
 app.play();
-// module.exports = App;
+module.exports = App;
