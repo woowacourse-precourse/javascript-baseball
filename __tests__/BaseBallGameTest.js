@@ -31,4 +31,17 @@ describe("구현 기능 목록 Test", () => {
     expect(app.getHint("831", "583")).toEqual({ ball: 2, strike: 0 });
     expect(app.getHint("159", "419")).toEqual({ ball: 1, strike: 1 });
   });
+
+  test("힌트를 출력하는 경우", () => {
+    const logSpy = getLogSpy();
+
+    app.printHint(1, 1);
+    expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
+    app.printHint(0, 3);
+    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
+    app.printHint(2, 1);
+    expect(logSpy).toHaveBeenCalledWith("2볼 1스트라이크");
+    app.printHint(0, 0);
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
+  });
 });
