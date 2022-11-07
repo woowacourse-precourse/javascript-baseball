@@ -90,6 +90,15 @@ class App {
     }
     return false;
   }
+  getNumberOfStrike() {
+    let numberOfStrike = 0;
+    for (let i = 0; i < this.NUMBER_OF_DIGITS; i++) {
+      if (this.answer[i] === this.inputNumber[i]) {
+        numberOfStrike += 1;
+      }
+    }
+    return numberOfStrike;
+  }
 }
 
 module.exports = App;
