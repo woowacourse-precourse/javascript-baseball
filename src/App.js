@@ -17,10 +17,10 @@ class App {
       RESTART : '1',
       FINISH : '2'
     }
+    this.printMessage(this.MESSAGE.START);
   }
 
   play() {
-    this.printMessage(this.MESSAGE.START);
     this.start();
   }
 
