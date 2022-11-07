@@ -41,6 +41,17 @@ const game = {
       else if(score.ball === 0 && score.strike !== 0) return `${score.strike}스트라이크`
       else if(score.ball !== 0 && score.strike !== 0) return `${score.ball}볼 ${score.strike}스트라이크`
       },
+
+      message(battleResult){
+        if(battleResult === "3스트라이크"){
+          MissionUtils.Console.print(battleResult)
+          MissionUtils.Console.print(battleResult+"\n"+'3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+          return "게임 종료"
+        }else{
+          MissionUtils.Console.print(battleResult)
+          return "재입력"
+        }
+      },
 }
 
 
