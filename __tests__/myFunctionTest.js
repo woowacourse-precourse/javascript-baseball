@@ -1,5 +1,7 @@
+const App = require('../src/App');
 const Game = require('../src/game/Game');
 const MissionUtils = require('@woowacourse/mission-utils');
+const Computer = require('../src/input/Computer');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -31,6 +33,29 @@ describe('숫자 야구 게임 시작 테스트', () => {
     game.initPrint();
 
     expect(log).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+
+  test('컴퓨터 난수 길이 테스트', () => {
+    const computer = new Computer();
+    const computerNumbers = computer.getComputerNumbers();
+    expect(computerNumbers.length).toEqual(3);
+  });
+
+  test('컴퓨터의 숫자가 중복값이 있는지 테스트', () => {
+    const computer = new Computer();
+    const computerNumbers = computer.getComputerNumbers();
+    expect([...new Set(computerNumbers)].length).toEqual(3);
+  });
+
+  test('컴퓨터 난수 범위 테스트', () => {
+    const computer = new Computer();
+    const computerNumbers = computer.getComputerNumbers();
+    const testData = computerNumbers.map((item) => {
+      if (item >= 1 && item <= 9) {
+        return item;
+      }
+    });
+    expect(testData.length).toEqual(3);
   });
 
   test('예외 테스트', () => {
