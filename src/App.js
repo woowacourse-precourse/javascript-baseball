@@ -4,7 +4,6 @@ class App {
   constructor() {
     MISSION_UTILS.Console.print('숫자 야구 게임을 시작합니다.');
     this.randomValue = '';
-    this.userValue = '';
   };
 
   play() {
@@ -14,12 +13,10 @@ class App {
 
   setRandomValue(randomValue) {
     this.randomValue = randomValue;
-    // MISSION_UTILS.Console.print(this.randomValue);
   };
 
-  setUserValueAndCountStart(userValue) {
-    this.userValue = userValue;
-    isAnswer(countBallAndStrike(this.randomValue, this.userValue));
+  startCountingBallAndStrike(userValue) {
+    isAnswer(countBallAndStrike(this.randomValue, userValue));
   };
   
 };
@@ -50,7 +47,7 @@ function isValidUserInput(userValue) {
     throw '잘못된 형식을 입력하였습니다. 서로 다른 숫자 3가지를 입력하세요';
   };
   
-  app.setUserValueAndCountStart(userValue)
+  app.startCountingBallAndStrike(userValue)
 };
 
 function countBallAndStrike(randomValue, userValue) {
