@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const ValidateUserInput = require("../src/baseball/ValidateUserInput");
 
 describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
+  // isThreeDigitsNumberInRange
   test("1 ~ 9가 아닌 다른 문자열 입력 시 throw", () => {
     // given
     const validateUserInput = new ValidateUserInput();
@@ -49,6 +50,7 @@ describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
     }).not.toThrow();
   });
 
+  // isOneOrTwo
   test("1 또는 2 외의 문자열 입력 시 throw", () => {
     const validateUserInput = new ValidateUserInput();
     const input = "3";
