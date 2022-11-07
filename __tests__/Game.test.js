@@ -32,4 +32,17 @@ describe('calculate()', () => {
       game.calculate([]);
     }).toThrow('입력값이 없으면 안됩니다.');
   });
+
+  test('입력 길이가 3보다 작거나 크면 에러가 발생한다.', () => {
+    const game = new Game();
+    const ERROR_TEXT = '입력의 길이는 1 이상 3 이하의 길이만 가능합니다.';
+
+    expect(() => {
+      game.calculate([1, 2, 3, 4]);
+    }).toThrow(ERROR_TEXT);
+
+    expect(() => {
+      game.calculate([1, 2]);
+    }).toThrow(ERROR_TEXT);
+  });
 });
