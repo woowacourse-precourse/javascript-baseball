@@ -1,4 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const PROGRESS = 0;
+const END = 1;
 
 class App {
   #computerNumber;
@@ -15,6 +17,8 @@ class App {
     this.#numberSize = numberSize;
     this.#computerNumber = null;
     this.#userNumber = null;
+    this.#strike = 0;
+    this.#ball = 0;
   }
 
   play() {
@@ -25,6 +29,7 @@ class App {
 
   progressGame() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
+      this.checkInputValid(number, PROGRESS);
       this.setUserNumber(number);
       this.compareNumbers();
       this.printCompareResult();
@@ -32,6 +37,7 @@ class App {
         this.finishGame();
         return;
       }
+
       this.progressGame();
     });
   }
@@ -80,7 +86,6 @@ class App {
   }
 
   printCompareResult() {
-    this.getComputerNumber();
     if (this.getBall() === 0 && this.getStrike() === 0) {
       MissionUtils.Console.print('낫싱');
       return;
@@ -115,6 +120,28 @@ class App {
         }
       }
     );
+  }
+
+  checkInputValid(input, type) {
+    if (type === PROGRESS && input.length !== this.getNumberSize()) {
+      throw new Error('user number length error');
+    }
+
+    if (type === END && input.length !== 1) {
+      throw new Error('user command length error');
+    }
+
+    if ([...input].length !== new Set([...input]).size) {
+      throw new Error('input duplicated error');
+    }
+
+    if (Number.isNaN(input)) {
+      throw new Error('input is not number error');
+    }
+
+    if (input.includes('0')) {
+      throw new Error('input includes 0 error');
+    }
   }
 
   setNumberSize(size) {
