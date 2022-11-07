@@ -15,7 +15,13 @@ class App {
     Console.print('숫자 야구 게임을 시작합니다.')
   }
 
-  play() {}
+  play() {
+    this.answer = this.generateAnswer()
+  }
+
+  generateAnswer() {
+    return Random.pickUniqueNumbersInRange(this.from, this.to, this.ballCount)
+  }
 
   close() {
     Console.close()
