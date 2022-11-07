@@ -95,10 +95,30 @@ function compareBothNumber(randomNumber, userNumber){
   setApp.check = check;
 }
 
+function validateNumber(number){
+  let backSign;
+  let checkStr = /^[1-9]+$/;
+  if(number.length !== 3){
+    backSign = false;
+    throw new Error("올바른 숫자가 아닙니다.");
+  }else{
+    backSign = true;
+  }
+  if(!checkStr.test(number)){
+    backSign = false;
+    throw new Error("올바른 숫자가 아닙니다.");
+  }else{
+    backSign = true;
+  }
+
+  return backSign;
+}
 function inputMyNumber(){
   let myNumber;
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-    //유효한 숫자인지 체크
+    if(validateNumber(number)){
+      myNumber = number;
+    }
   });
 
   return myNumber;
