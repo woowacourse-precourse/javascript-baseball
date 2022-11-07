@@ -12,10 +12,8 @@ function checkNumber(answer) {
 }
 
 function checkDuplicate(answer) {
-  while (answer.length > 1) {
-    let target = answer.pop();
-    if (answer.includes(target)) throw new Error('서로 다른 수를 입력해주세요.');
-  }
+  const set = new Set(answer);
+  if (set.size !== 3) throw new Error('서로 다른 수를 입력해주세요.');
 }
 
 class App {
