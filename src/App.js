@@ -32,6 +32,7 @@ class App {
   }
   changeComputerNumberToArray(random_number){
     this.computer_number = (random_number + '').split(',');
+    console.log(this.computer_number);
   }
   changeUserNumberToArray(input_num){
     this.user_number = (input_num + '').split('');
@@ -49,20 +50,32 @@ class App {
         ball+=1;
       }
     })
+    this.resultGame(strike,ball);
   }
-  resultGame(){
+  resultGame(strike,ball){
     if(strike==3){
-      this.resultEndGame();
+      this.endGame();
     }
     if((strike!=0&&ball==0)||strike==0&&ball!=0){
-      this.resultStrikeOrBall();
+      this.resultStrikeOrBall(strike,ball);
     }
     if(strike==0&&ball==0){
       this.resultNothing();
     }
     if(strike!=0&&ball!=0){
-      this.resultStrikeAndBall();
+      this.resultStrikeAndBall(strike,ball);
     }
+  }
+  endGame(){
+    MissionUtils.Console.print('3스트라이크\n'+'3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (number) => {
+      if(number==1){
+
+      }
+      if(number==2){
+        MissionUtils.Console.close();
+      }
+    });
   }
 }
 const app = new App;
