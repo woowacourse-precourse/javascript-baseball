@@ -11,3 +11,5 @@ class Computer {
         return ret.join('');
     }
 }
+
+module.exports = Computer;
