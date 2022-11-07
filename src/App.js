@@ -2,7 +2,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     const baseballGame = new BaseballPlayTool();
-    baseballGame.startText();
     baseballGame.gameRepeat();
   }
 }
@@ -24,6 +23,7 @@ class ComputerRandomNumber {
 class BaseballPlayTool {
  constructor() {
    this.answerCheck = false;
+   this.startText();
   }
 
  startText() {
@@ -69,13 +69,12 @@ class BaseballPlayTool {
     if (ballScore === 0) {
       return `${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
     }
-    
+
     return `${ballScore}${TOOL_CONSTANTS.BALL} ${strikeScore}${TOOL_CONSTANTS.STRIKE}`;
   }
 
   userInputError(userInput) {
     if (userInput.length !== NUMBER_CONSTANTS.MAX_SCORE) {
-      this.answerCheck = true ; 
       throw ERROR_CONSTANTS.LENGTH;
     }
 
