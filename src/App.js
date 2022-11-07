@@ -1,6 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const GAME_START_COMMENT = '숫자 야구 게임을 시작합니다.';
+const GAME_END = `3개의 숫자를 모두 맞히셨습니다! 게임 종료
+게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`;
 const INPUT_NUMBER = '숫자를 입력해주세요 : ';
 const STRIKE = '스트라이크';
 const BALL = '볼';
@@ -52,6 +54,20 @@ class App {
     });
   }
 
+  gameClear(value) {
+    // 게임 클리어시
+  }
+
+  getCorrectAnswer() {
+    if (this.strike === 3 && this.ball === 0) {
+      this.result = `${this.strike}${STRIKE}`;
+      MissionUtils.Console.print(this.result);
+      MissionUtils.Console.readLine(GAME_END, (value) => {
+        this.gameClear(value);
+      });
+    }
+  }
+
   getWrongAnswer() {
     if (this.strike === 0 && this.ball === 0) {
       this.result = `${NOTHING}`;
@@ -64,6 +80,7 @@ class App {
   }
 
   printResult() {
+    this.getCorrectAnswer();
     this.getWrongAnswer();
     MissionUtils.Console.print(this.result);
     this.play();
