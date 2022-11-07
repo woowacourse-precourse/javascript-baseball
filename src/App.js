@@ -7,7 +7,7 @@ class App {
 
   // 사용자 입력 받기 1 예외처리
   checkExceptionOne(num){
-    if(isNan(num)){
+    if(isNaN(num)){
       throw new Error("숫자를 입력하세요.");
     }else if(num.charAt(0) === 0 || num.charAt(1) === 0 || num.charAt(2) === 0){
       throw new Error("1-9 사이의 숫자를 3번 입력하세요.");
@@ -34,7 +34,7 @@ class App {
   getRandomNum(){
     const computer = [];
     while(computer.length < 3){
-      const number = MissionUtils.Random.picNumberInRange(1, 9);
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if(!computer.includes(number)){
         computer.push(number);
       }
@@ -48,7 +48,7 @@ class App {
       MissionUtils.Console.print('낫싱');
     } else if(ball === 0){
       MissionUtils.Console.print(`${strike}스트라이크`);
-    } else if(stirkew === 0){
+    } else if(strike === 0){
       MissionUtils.Console.print(`${ball}볼`);
     } else {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
@@ -91,7 +91,7 @@ class App {
 
   //게임 진행
   playGame(){
-    game_status = "1";
+    let game_status = "1";
     while(game_status === "1"){
       let com_num = this.getRandomNum();
       this.getUserNum(com_num);
