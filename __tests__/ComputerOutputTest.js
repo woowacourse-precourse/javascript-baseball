@@ -24,6 +24,17 @@ const getLogSpy = () => {
 };
 
 describe('출력값 테스트', () => {
+  test('게임 시작 메시지 출력', () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('숫자 야구 게임을 시작합니다'),
+    );
+  });
+
   test('입력 값을 볼, 스트라이크로 판단하여 결과를 출력', () => {
     const logSpy = getLogSpy();
     mockQuestions(['135']);
@@ -46,7 +57,7 @@ describe('출력값 테스트', () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
 
-  test('게임이 종료 되었을 때 게임을 다시 시작하거나 완전히 종료', () => {
+  test('게임이 종료되었을 때 게임을 다시 시작하거나 완전히 종료', () => {
     mockQuestions(['123', '1', '456', '2']);
     mockRandoms([1, 2, 3, 4, 5, 6]);
 
