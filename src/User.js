@@ -1,10 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
 class User {
-  constructor() {
-    this.userInput;
-  }
-
   checkUserInputValid(userInputArr) {
     if (!userInputArr) {
       this.errorMessage = "입력 값이 없음";
@@ -28,12 +22,6 @@ class User {
       throw new Error("서로 다른 수가 아님");
     }
     return true;
-  }
-
-  convertStrToArr(str) {
-    let arr = [...str];
-    arr = arr.map((str) => Number(str));
-    return arr;
   }
 }
 
