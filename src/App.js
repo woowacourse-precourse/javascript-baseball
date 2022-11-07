@@ -7,14 +7,17 @@ const inputValidation = require("./validation/inputValidation");
 const outputValidation = require("./validation/outputValidation");
 
 class App {
-  constructor(inputNum, randomNum) {
+  constructor(inputNum, randomNum, overInputNum) {
     this.inputNum = inputNum;
     this.randomNum = randomNum;
+    this.overInputNum = overInputNum;
   }
 
   play() {
-    this.randomNumber();
-    this.userInput();
+    do {
+      this.randomNumber();
+      this.userInput();
+    } while (this.strike() != 3);
   }
 
   userInit() {
@@ -56,6 +59,9 @@ class App {
     }
     return this.randomNum;
   }
+
+  // 종료 후 logic
+  overChoice() {}
 
   // 숫자 야구 게임 logic
   game() {
