@@ -2,8 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 // const ComputerModel = require("./ComputerModel");
 const GAME_MESSAGE = require("./constants/message");
 
-class GameController {
-  getResult(userInput, computerInput) {
+class GameManager {
+  getStrikeBallCount(userInput, computerInput) {
     const isStrike = (userValue, index) => userValue === computerInput[index];
     const userScore = {
       strikeCount: 0,
@@ -19,11 +19,7 @@ class GameController {
     return userScore;
   }
 
-  start(numberFromUser, numberFromComputer) {
-    const { strikeCount, ballCount, nothingCount } = this.getResult(
-      numberFromUser,
-      numberFromComputer
-    );
+  getResult({ strikeCount, ballCount, nothingCount }) {
     if (strikeCount === 3) {
       MissionUtils.Console.print(`${strikeCount}스트라이크`);
       MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다 ! 게임 종료`);
@@ -43,6 +39,15 @@ class GameController {
     }
     return false;
   }
+
+  start(numberFromUser, numberFromComputer) {
+    const { strikeCount, ballCount, nothingCount } = this.getStrikeBallCount(
+      numberFromUser,
+      numberFromComputer
+    );
+    let isGameEnd = this.getResult({ strikeCount, ballCount, nothingCount });
+    return isGameEnd;
+  }
 }
 
-module.exports = GameController;
+module.exports = GameManager;
