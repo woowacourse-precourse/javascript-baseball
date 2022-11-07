@@ -14,8 +14,11 @@ function countStrikeAndBall(user, computer) {
 }
 
 class GameJudgment {
-  judgement(userBallCount, userStrikeCount) {
-    const [ballCount, strikeCount] = countStrikeAndBall(ballCount, strikeCount);
+  judgement(ballCount, strikeCount) {
+    const [userBallCount, userStrikeCount] = countStrikeAndBall(
+      ballCount,
+      strikeCount
+    );
     return [userBallCount, userStrikeCount];
   }
 }
