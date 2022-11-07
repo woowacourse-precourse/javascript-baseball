@@ -27,8 +27,13 @@ class App {
 
     if(inputNumber.includes(0)) return false;
 
+    const filtered = inputNumber.filter((item, index) => inputNumber.indexOf(item) === index);
+    if(filtered.length != 3) return false;
+
     return true;
   }
 }
 
 module.exports = App;
+
+new App().play();
