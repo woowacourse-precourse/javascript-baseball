@@ -21,7 +21,7 @@ const isSelectedNumber = (number, computer) => {
   }
 };
 
-const getUserNumber = (question) => {
+const getUserNumber = (computer, question) => {
   MissionUtils.Console.readLine(question, (userInput) => {
     validateUserNumber(userInput);
   });

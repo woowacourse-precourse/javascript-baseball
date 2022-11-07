@@ -11,7 +11,7 @@ class App {
   play() {
     MissionUtils.Console.print(START_GAME);
     const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
-    getUserNumber(REQUIRE_NUMBER);
+    getUserNumber(computerNumbers, REQUIRE_NUMBER);
   }
 }
 
