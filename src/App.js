@@ -22,6 +22,8 @@ class App {
   }
 
   getUserInputNum() {
+    this.ball = 0;
+    this.strike = 0;
     const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
       this.userNum = userInput;
@@ -45,7 +47,7 @@ class App {
 
   getNumOfBall() {
     for(let i = 0; i < this.computerNum.length; i++) {
-      if(this.userNum.includes(this.computerNum[i])){
+      if((this.computerNum[i] !== this.userNum[i]) && (this.userNum.includes(this.computerNum[i]))){
         this.ball++;
       }
     }
@@ -63,8 +65,6 @@ class App {
     const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
     MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
       if(userInput == 1) {
-        this.strike = 0;
-        this.ball = 0;
         this.play();
       }
       else if(userInput == 2) {
@@ -76,5 +76,8 @@ class App {
     });
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
