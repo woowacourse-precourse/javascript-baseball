@@ -79,7 +79,4 @@ const checkNothing = (parsedResultArray) => {
   return false;
 };
 
-const app = new App();
-app.play();
-
 module.exports = App;
