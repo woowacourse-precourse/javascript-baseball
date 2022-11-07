@@ -74,6 +74,11 @@ function compareAnswer(playerAnswer) {
   if (!creatComputerAnswer.some((number) => playerAnswer.includes(number))) {
     MissionUtils.Console.print("낫싱");
   }
+  if (creatComputerAnswer.every((num) => playerAnswer.includes(num))) {
+    const gameEndString = `3 스트라이크
+    3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
+    MissionUtils.Console.print(gameEndString);
+  }
 }
 
 function startGame() {
