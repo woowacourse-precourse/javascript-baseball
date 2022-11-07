@@ -1,5 +1,5 @@
 const { findStrikeBall, makePhrase } = require('../src/gameUtils');
-const { validateGameInput } = require('../src/validate');
+const { validateGameInput, validateRestartInput } = require('../src/validate');
 
 describe('사용자 추측으로 볼 / 스트라이크 / 낫싱 판단 테스트', () => {
     test('123과 456 테스트', () => {
@@ -63,5 +63,28 @@ describe('사용자 추측 검증 테스트', () => {
         expect(() => {
             validateGameInput('111');
         }).toThrow();
+    });
+});
+
+describe('재시작 입력 검증 테스트', () => {
+    test('숫자가 아닌 입력 테스트', () => {
+        expect(() => {
+            validateRestartInput('yes');
+        }).toThrow();
+    });
+    test('범위 밖 입력 테스트', () => {
+        expect(() => {
+            validateRestartInput('3');
+        }).toThrow();
+    });
+    test('정상 케이스, 재시작', () => {
+        expect(() => {
+            validateRestartInput('1');
+        }).toBeTruthy();
+    });
+    test('정상 케이스, 끝', () => {
+        expect(() => {
+            validateRestartInput('2');
+        }).toBeTruthy();
     });
 });
