@@ -20,16 +20,13 @@ class App {
 
   getInputAndCompare() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
-      try {
-        const { computerNumArr } = this;
-        const isInputValidate = validateInputValue(input);
-        const inputNumArr = input.split('').map(element => +element);
-        const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
-        MissionUtils.Console.print(gameResult);
-        this.isGameOver(gameResult);
-      } catch (error) {
-        this.wrongInput(error);
-      }
+      const { computerNumArr } = this;
+      const isInputValidate = validateInputValue(input);
+      if (typeof isInputValidate !== 'boolean') return this.wrongInput(isInputValidate);
+      const inputNumArr = input.split('').map(element => +element);
+      const gameResult = compareTwoArrayResult(computerNumArr, inputNumArr);
+      MissionUtils.Console.print(gameResult);
+      return this.isGameOver(gameResult);
     });
   }
 
@@ -44,17 +41,14 @@ class App {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', input => {
-      try {
-        const endOrRetryInput = this.isValidEndOrRetryInput(input);
-        if (endOrRetryInput === 1) {
-          this.makeComputerNumArr();
-        }
-        if (endOrRetryInput === 2) {
-          this.close();
-        }
-      } catch (error) {
-        this.wrongInput(error);
+      const endOrRetryInput = this.isValidEndOrRetryInput(input);
+      if (endOrRetryInput === 1) {
+        return this.makeComputerNumArr();
       }
+      if (endOrRetryInput === 2) {
+        return this.close();
+      }
+      return this.wrongInput(endOrRetryInput);
     });
   }
 
@@ -62,12 +56,11 @@ class App {
     if (answer === '1' || answer === '2') {
       return Number(answer);
     }
-    throw new Error('1또는 2를 입력해주세요.');
+    return '1또는 2를 입력해주세요.';
   }
 
-  wrongInput(err) {
-    MissionUtils.Console.print(err);
-    MissionUtils.Console.close();
+  wrongInput(errMessage) {
+    throw new Error(errMessage);
   }
 
   close() {
