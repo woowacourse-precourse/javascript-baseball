@@ -3,7 +3,7 @@ const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 const gameManager = new NumberBaseballGameManager();
 
 describe('게임 기능 테스트', () => {
-  test('인자로 전달받은 개수만큼 컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
+  test('getRandomNumberArray 메서드는 인자로 전달받은 개수만큼 컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
     const randomNumberCounts = [3, 4];
     const randomNumberArrays = randomNumberCounts.map(
       gameManager.getRandomNumberArray,
@@ -13,7 +13,7 @@ describe('게임 기능 테스트', () => {
     expect(result).toEqual([3, 4]);
   });
 
-  test('컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크인지 판단한다.', () => {
+  test('isStrike 메서드는 컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크인지 판단한다.', () => {
     const computerNumbers = [1, 2, 3];
     const userNumbers = [1, 2, 4];
     const result = computerNumbers.map((_, idx) =>
@@ -23,7 +23,7 @@ describe('게임 기능 테스트', () => {
     expect(result).toEqual([true, true, false]);
   });
 
-  test('컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 볼인지 판단한다.', () => {
+  test('isBall 메서드는 컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 볼인지 판단한다.', () => {
     const computerNumbers = [4, 5, 6];
     const userNumbers = [1, 2, 4];
     const result = userNumbers.map(userNumber =>
@@ -33,7 +33,7 @@ describe('게임 기능 테스트', () => {
     expect(result).toEqual([false, false, true]);
   });
 
-  test('스트라이크, 볼의 개수를 구한다.', () => {
+  test('getBallCounts 메서드는 컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크, 볼의 개수를 구한다.', () => {
     const inputValues = ['123', '456', '312', '132'];
     const computerNumbers = [1, 2, 3];
     const result = inputValues.map(inputValue =>
@@ -48,7 +48,7 @@ describe('게임 기능 테스트', () => {
     ]);
   });
 
-  test('스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환한다.', () => {
+  test('getHintType 메서드는 스트라이크, 볼의 개수를 기반으로 힌트의 유형을 반환한다.', () => {
     const counts = [
       [1, 0],
       [0, 1],
@@ -68,7 +68,7 @@ describe('게임 기능 테스트', () => {
     ]);
   });
 
-  test('스트라이크, 볼의 개수를 기반으로 힌트를 생성한다.', () => {
+  test('getHint 메서드는 스트라이크, 볼의 개수를 기반으로 힌트를 생성한다.', () => {
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
     const hints = inputValues.map(inputValue =>
