@@ -89,7 +89,6 @@ class App {
 
   setAnswerAndreceiveInput() {
     this.setAnswer();
-    console.log(this.answer);
     this.receiveInputFromConsole();
   }
 
