@@ -1,15 +1,20 @@
 class BaseBall {
     constructor(){
+        this.reset();
+    }
+
+    reset(){
         this.strike=0;
         this.ball=0;
     }
 
     referee(player, balls){
-        player.forEach((element)=>{
-            for(const BALL of balls){
-                if(balls.includes(element) && BALL===element){
+        player.forEach((element, idx)=>{
+            for(let index=0; index<balls.length; index++){
+                const BALL = balls[index];
+                if(idx===index && BALL===element){
                     this.strike+=1;
-                }else if(balls.includes(element) && BALL!==element){
+                }else if(idx!==index && BALL===element){
                     this.ball+=1;
                 }
             }
@@ -21,6 +26,10 @@ class BaseBall {
         else if(this.strike===0 && this.ball!==0) return `${this.ball}볼`;
         else if(this.strike!==0 && this.ball===0) return `${this.strike}스트라이크`;
         else return '낫싱';
+    }
+
+    isEnded(){
+        return (this.strike===3);
     }
 }
 
