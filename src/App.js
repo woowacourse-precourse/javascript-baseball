@@ -24,6 +24,9 @@ class App {
       if (userInput.length !== [...new Set(USER_VALUE_ARRAY)].length) {
         throw new Error("서로 다른 3개의 숫자를 입력해 주세요.");
       }
+      if (USER_VALUE_ARRAY.includes(0)) {
+        throw new Error("1 ~ 9 사이의 숫자 3개를 골라주세요.");
+      }
       return this.compare(USER_VALUE_ARRAY, this.computerValue);
     });
   }
