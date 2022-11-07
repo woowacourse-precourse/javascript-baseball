@@ -59,10 +59,8 @@ class BaseballGame {
     this.restart = true;
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (number) => {
-      if (number !== '1' && number !== '2') {
-        return this.throwError('잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.');
-      }
-      (number === '1') ? this.playGame() : this.exitConsole();
+      (number !== '1' && number !== '2') ? this.throwError('잘못된 값을 입력하셨습니다. 1또는 2를 입력해주세요.') :
+        (number === '1') ? this.playGame() : this.exitConsole();
     });
   }
 
