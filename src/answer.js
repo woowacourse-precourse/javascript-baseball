@@ -10,3 +10,9 @@ exports.inputAnswer = function inputAnswer() {
 
   return input;
 };
+
+exports.isRightAnswer = function isRightAnswer(answer) {
+  let answerArr = [...answer].map((item) => Number(item));
+
+  if (answerArr.length != 3) throw "잘못된 입력입니다";
+};
