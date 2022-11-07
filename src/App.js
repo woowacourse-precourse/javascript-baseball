@@ -4,10 +4,12 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     const Game = new GameLoop();
+
     while (Game.continues) {
       Game.start();
       Game.end();
     }
+
     MissionUtils.Console.print("게임 종료");
     MissionUtils.Console.close();
   }
@@ -73,7 +75,7 @@ class GameLoop {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
 
-    const gameEnd = MissionUtils.Console.readLine("", (message) => {
+    MissionUtils.Console.readLine("", (message) => {
       if (message === "2") {
         this.continues = false;
         return;
@@ -102,7 +104,7 @@ class GameLoop {
 
     if (message.includes("0")) {
       MissionUtils.Console.close();
-      throw new Error("1에서 9 사이 숫자를 입력해야합니다.");
+      throw new Error("1에서 9 사이 숫자를 입력해야 합니다.");
     }
 
     if (message.length != 3) {
