@@ -25,7 +25,11 @@ class App {
     this.randomNumber = randomNumber;
   }
 
-  inputUserNumber() {}
+  inputUserNumber() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numberInput) => {
+      this.checkInputCorret(numberInput);
+    });
+  }
 
   checkInputCorret() {}
 
