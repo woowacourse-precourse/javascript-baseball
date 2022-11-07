@@ -87,6 +87,19 @@ describe('숫자 야구 게임', () => {
       }).toThrow();
     });
 
+    test('0이 포함된 경우 예외를 throw해야 한다.', () => {
+      const randoms = [1, 3, 5];
+      const answers = ['012'];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
     test('숫자가 아닌 문자가 포함된 경우 예외를 throw해야 한다.', () => {
       const randoms = [1, 3, 5];
       const answers = ['a12'];
