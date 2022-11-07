@@ -6,6 +6,7 @@ class Judge {
   checkIsValidInput(player_input) {
     if (!player_input) throw "Player Input Is Invalid!";
   }
+
   performOneGame(opponentInput) {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
       Console.print(opponentInput);
@@ -13,13 +14,27 @@ class Judge {
       this.printBS(ball, strike);
       if (strike === TOTAL_COUNT) {
         //종료할지 다시할지 물어보기
-        
+        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.askReplay();
       } else {
         this.performOneGame(opponentInput);
       }
     });
   }
-  
+
+  askReplay() {
+    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
+      if (input === "1") {
+        //init and perform one game
+        this.performOneGame("523");
+      } else if (input === "2") {
+        //finish
+      } else {
+        throw "INPUT IS INVALID";
+      }
+    });
+  }
+
   printBS(ball, strike) {
     if (ball + strike === 0) {
       Console.print("낫싱");
