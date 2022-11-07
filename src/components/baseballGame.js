@@ -1,10 +1,32 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { NUMBER, MESSAGE } = require('../constant/baseballGame');
+const { NUMBER, MESSAGE, GAME } = require('../constant/baseballGame');
 
 class BaseballGame{
   
   startMessage() {
     Console.print(MESSAGE.START);
+  }
+
+  resultMessage(answer, inputNumber) {
+    const ball = this.getBall(answer, inputNumber);
+    const strike = this.getStrike(answer, inputNumber);
+
+    let message = ``;
+
+    if(ball){ 
+      message += `${ball}${GAME.BALL} `; 
+    }
+
+    if(strike){ 
+      message += `${strike}${GAME.STRIKE}`; 
+    }
+
+    if(!ball && !strike){ 
+      message += `${GAME.NOTHING}`; 
+    }
+
+    Console.print(message);
+    this.progress(answer, strike);
   }
 
   getBall(answer, inputNumber){

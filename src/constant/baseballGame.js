@@ -11,7 +11,14 @@ const MESSAGE = {
     OPTION: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
 };
 
+const GAME = {
+    BALL: '볼',
+    STRIKE: '스트라이크',
+    NOTHING: '낫싱'
+}
+
 module.exports = {
     NUMBER,
-    MESSAGE
+    MESSAGE,
+    GAME
 }
