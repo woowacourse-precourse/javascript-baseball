@@ -1,6 +1,9 @@
 const Io = require('./Io');
 const Computer = require('./player/Computer.js');
 const User = require('./player/User.js');
+const Message = require('./Message');
+const InValidInputError = require('./error/InValidInputError');
+
 class Game {
   constructor() {
     this.io = Io;
@@ -22,7 +25,7 @@ class Game {
 
   
   askNumber () {
-    this.io.input('숫자를 입력해주세요 : ', this.attempt.bind(this));
+    this.io.input(Message.PLEASE_INPUT_NUMBER, this.attempt.bind(this));
   }
 
   attempt (input) {
@@ -39,28 +42,12 @@ class Game {
 
   
   outputResult ({ strike, ball }) {
-    if(strike === 3) {
-      this.io.output('3스트라이크');
-      return true;
-    }
-    if(strike === 0 && ball === 0) {
-      this.io.output('낫싱');
-    }
-    if(strike !== 0 && ball === 0) {
-      this.io.output(`${strike}스트라이크`);
-    }
-    if(strike === 0 && ball !== 0) {
-      this.io.output(`${ball}볼`);
-    }
-    if(strike !== 0 && ball !== 0) {
-      this.io.output(`${ball}볼 ${strike}스트라이크 `);
-    }
-    return false;
+    this.io.output(Message.gameResult({strike, ball}));
   }
 
 
   outputGameEnd() {
-    this.io.output('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.io.output(Message.GAME_END);
   }
 
   /**
@@ -91,18 +78,18 @@ class Game {
   }
   
   askReplay () {
-    this.io.input('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', this.decideReplay.bind(this));
+    this.io.input(Message.ASK_REPLAY, this.decideReplay.bind(this));
   }
 
   decideReplay (input) {
-    if(input === '1') {
+    if(Number(input) === Message.REPLAY) {
       this.replay();
       return;
-    } else if(input === '2') {
+    } else if(Number(input) === Message.NO_REPLAY) {
       this.exit();
       return;
     } 
-    throw new Error('잘못된 입력입니다.');
+    throw new InValidInputError();
   }
 
   replay () {

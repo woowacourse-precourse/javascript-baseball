@@ -1,7 +1,12 @@
+const { INVALID_INPUT_ERROR } = require("./error.constants");
+
 class InValidInputError extends Error {
   constructor(message) {
+    if(!message) {
+      message = INVALID_INPUT_ERROR.MESSAGE;
+    }
     super(message);
-    this.name = 'InValidInputError';
+    this.name = INVALID_INPUT_ERROR.TITLE;
   }
 }
 
