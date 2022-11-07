@@ -9,7 +9,7 @@ class App {
         computer.push(number);
       }
     }
-    return computer;
+    return computer.join("");
   }
 
   checkType(num) {
