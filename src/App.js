@@ -69,7 +69,7 @@ class App {
     computerNumberList.map(x => {
       if (computerNumberList.indexOf(x) === userNumberList.indexOf(x)) {
         strike += 1;
-      } else if (userList.includes(x)) {
+      } else if (userNumberList.includes(x)) {
         ball += 1;
       }
     });
