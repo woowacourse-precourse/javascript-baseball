@@ -59,4 +59,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("1-9 숫자 외 입력하면 예외발생", () => {
+    const randoms = [4, 7, 8];
+    const answers = ["078"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
