@@ -11,7 +11,7 @@ class System {
   static #addNumber(numbers) {
     const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
     numbers.add(randomNumber);
-    if(numbers.size < 3) System.#addNumber(numbers);
+    if(numbers.size < constants.CLEAR_CONDITION) System.#addNumber(numbers);
   }
   static toFilterdArray(input) {
     input = input.replace(/[\s,]/g, '');
