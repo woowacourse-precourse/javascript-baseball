@@ -1,3 +1,5 @@
+const { NUMBER_COUNT } = require("../constant/message.constant");
+
 class User {
   checkInput(userInput) {
     return (
@@ -9,11 +11,11 @@ class User {
   }
 
   checkInputLength(userInput) {
-    return userInput.length === 3;
+    return userInput.length === NUMBER_COUNT;
   }
 
   checkInputExist(userInput) {
-    const isExist = new Set([...userInput]).size !== 3;
+    const isExist = new Set([...userInput]).size !== NUMBER_COUNT;
     return isExist === false;
   }
 
