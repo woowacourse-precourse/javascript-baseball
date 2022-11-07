@@ -36,6 +36,8 @@ const checkResult = (result) => {
 
 const checkAgain = (input) => {
   if (input == 1) {
+    getRandomNumber();
+    runGame();
   } else if (input == 2) {
     return;
   }
