@@ -4,7 +4,11 @@ const isStrike = (initNum, userNum) => {
     initNum[i] === userNum[i] ? strike++ : null;
   }
 
-  return strike;
+  if (strike === 0) {
+    return null;
+  } else {
+    return `${strike}스트라이크`;
+  }
 };
 
 module.exports = isStrike;
