@@ -79,8 +79,20 @@ function ballCheck(playerNumber, computerNumber) {
 function gameRestart() {
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (input) => {}
+    (answer) => {}
   );
+}
+
+// 게임 다시시작 선택
+function selectGameRestart(answer) {
+  if (answer === "1") {
+    const computerNumber = computerNumbers();
+    playerInputNumbers(computerNumber);
+  } else if (answer === "2") {
+    MissionUtils.Console.close();
+  } else {
+    throw new Error("1이나 2가 아닌 다른 숫자가 입력되었습니다.");
+  }
 }
 
 const app = new App();
