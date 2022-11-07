@@ -40,6 +40,7 @@ class App {
       return;
     }
     if (compareResult === GAME_MESSAGE.WIN) {
+      Console.print(ANNOUNCEMENT_MESSAGE.WIN);
       this.baseballGameWin();
     } else {
       this.getUserNumbers();
@@ -56,8 +57,11 @@ class App {
 
   play() {
     this.init();
+    Console.print(ANNOUNCEMENT_MESSAGE.START);
     this.getUserNumbers();
   }
 }
+const baseballGame = new App();
+baseballGame.play();
 
 module.exports = App;
