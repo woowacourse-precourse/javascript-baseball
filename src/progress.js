@@ -1,22 +1,20 @@
 const computerAnswer = require("./makeComputerAnswer.js");
-const vaildUserAnswer = require("./getUserAnswer.js");
 const createResult = require("./createResult.js");
+const checkVaildData = require("./checkVaildData.js");
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 
-const progress = async () => {
-  const ANSWER_NUMBER = computerAnswer();
-  let isEnd = false;
-  while (!isEnd) {
-    const USER_ANSWER = await vaildUserAnswer();
-    const GAME_RESULT = createResult(ANSWER_NUMBER, USER_ANSWER);
+const progress = (computerAnswer) => {
+  Console.readLine("숫자를 입력해 주세요 : ", (userAnswer) => {
+    const GAME_RESULT = createResult(
+      computerAnswer,
+      checkVaildData(userAnswer)
+    );
+    if (!GAME_RESULT === true) return progress(computerAnswer);
     if (GAME_RESULT === true) {
       checkProgress(GAME_RESULT);
-      isEnd = true;
     }
-  }
-
-  return isEnd;
+  });
 };
 
 const checkProgress = (end) => {
@@ -40,7 +38,7 @@ const isContinue = () => {
 const continueAnswer = (answer) => {
   switch (answer) {
     case "1":
-      progress();
+      progress(computerAnswer());
       break;
     case "2":
       Console.close();
