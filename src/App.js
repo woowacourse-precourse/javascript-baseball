@@ -21,7 +21,7 @@ class User {
 };
 const computerNumber = () => {
   const NUMBER = [];
-  while(NUMBER.length !==3){
+  while (NUMBER.length !== 3) {
     NUMBER.push(String(MissionUtils.Random.pickNumberInRange(1, 9)));
   }
   return NUMBER;
@@ -35,21 +35,25 @@ const gameStart = (USER) => {
   while (USER_SELECT !== "2") {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
       USER.Number = String(number).split("");
-      USER_NUMBER = USER.Number;
+      USER_NUMBER = USER.getNumber();
     });
-    if (USER_NUMBER.length !== 3) {
-      throw MissionUtils.Console.close();
-    }
+    throwHandling(USER_NUMBER.length);
     if (numberCompare(COMPUTER_NUMBER, USER_NUMBER)) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (select) => {
         USER.Select_Number = select;
-        USER_SELECT = USER.Select_Number;
+        USER_SELECT = USER.getSelect();
       });
       COMPUTER_NUMBER = computerNumber();
     }
   }
 };
+
+const throwHandling = (length) => {
+  if (length !== 3) {
+    throw MissionUtils.Console.close();
+  }
+}
 
 const numberCompare = (computer, user) => {
   let BALL_SCORE = 0;
