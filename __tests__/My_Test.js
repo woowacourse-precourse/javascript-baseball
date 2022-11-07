@@ -9,12 +9,22 @@ const getLogSpy = () => {
 };
 
 describe("게임 메세지 테스트 ", () => {
-  test("", () => {
+  test("게임 시작 메세지 테스트", () => {
     const logSpy = getLogSpy();
 
     const app = new App();
     app.play();
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(GAME_MESSAGES.START));
+  });
+});
+
+describe("기능 테스트", () => {
+  test("입력받은 문자 배열로 만드는 기능", () => {
+    const input = 123;
+    const result = JSON.stringify(App.convertUserNumberToArray(input));
+    const answer = ["1", "2", "3"];
+
+    expect(result).toEqual(JSON.stringify(answer));
   });
 });
