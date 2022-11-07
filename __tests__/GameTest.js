@@ -1,6 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const { ERROR_CHECK, GAME_GUIDE_MESSAGE } = require("../src/Constant");
+const {
+  ERROR_CHECK,
+  GAME_GUIDE_MESSAGE,
+  INGAME_MESSAGE,
+} = require("../src/Constant");
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -11,22 +15,42 @@ const getLogSpy = () => {
 describe("게임 문구 테스트", () => {
   test("시작 문구", () => {
     const app = new App();
-    expect(() => "...").toThrow("시작", ERROR_CHECK);
+    const logSpy = getLogSpy();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(INGAME_MESSAGE.START)
+    );
   });
 
   test("입력 문구", () => {
     const app = new App();
-    expect(() => "...").toThrow("입력", ERROR_CHECK);
-  });
+    const logSpy = getLogSpy();
+    app.play();
 
-  test("재시작 문구", () => {
-    const app = new App();
-    expect(() => "...").toThrow("재시작", ERROR_CHECK);
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(INGAME_MESSAGE.INPUT_NUMBER)
+    );
   });
 
   test("종료 문구", () => {
     const app = new App();
-    expect(() => "...").toThrow("종료", ERROR_CHECK);
+    const logSpy = getLogSpy();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(INGAME_MESSAGE.END)
+    );
+  });
+
+  test("재시작 문구", () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(INGAME_MESSAGE.ASK)
+    );
   });
 });
 
