@@ -1,1 +1,1 @@
-    // console.log(this.compareComputer)
+    // this.compareComputer.length = 1;

@@ -41,14 +41,14 @@ class UserInput {
   computerSelect(){
     let pickedNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     this.compareComputer.push(pickedNum)
-    // console.log(this.compareComputer)
+    console.log(this.compareComputer)
     this.compareComputer.length = 1;
 
-    this.isNothing(this.compareComputer);
-    this.isBall(this.compareComputer);
-    this.isStrike(this.compareComputer);
-    this.isCorrect(this.compareComputer);
-    this.reGame(this.compareComputer);
+    // this.isNothing(this.compareComputer);
+    // this.isBall(this.compareComputer);
+    // this.isStrike(this.compareComputer);
+    // this.isCorrect(this.compareComputer);
+    // this.reGame(this.compareComputer);
   }
   isError() {
     if (this.answerBox[0].length !== 3) {
@@ -128,11 +128,13 @@ class UserInput {
       MissionUtils.Console.readLine("", (reGameAnswer) => {
       if (reGameAnswer === "2") {MissionUtils.Console.close();}
       if (reGameAnswer === "1") {
-        this.compareComputer.length = 0;
-        let pickedNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-        this.compareComputer.push(pickedNum)
+
+        // let pickedNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        // this.compareComputer.length = 1;
+        // this.compareComputer.push(pickedNum)
         // this.computerSelect(this.compareComputer)
         this.userInputfunc(this.answerBox);
+        this.computerSelect()
         // console.log(this.compareComputer)
         // this.userInputfunc(this.compareComputer.splice(0, 3))
         // console.log(this.compareComputer)
