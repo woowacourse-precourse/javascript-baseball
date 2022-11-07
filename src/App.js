@@ -49,7 +49,19 @@ class App {
     return result;
   }
 
-  printCompareResult(strike, ball) {}
+  printCompareResult(strike, ball) {
+    if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
+    else if (strike === 0 && 1 <= ball && ball <= 3)
+      MissionUtils.Console.print(`${ball}볼`);
+    else if (1 <= strike && strike <= 2 && ball === 0)
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    else if (1 <= strike && strike <= 2 && 1 <= ball && ball <= 2)
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    else if (strike === 3 && ball === 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+  }
 
   isAnswer(strike, ball) {}
   restartGame() {}
