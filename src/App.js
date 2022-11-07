@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 :";
+
 class App {
   play() {}
 
@@ -24,6 +26,16 @@ class App {
 
   printGameMsg(message) {
     MissionUtils.Console.print(message);
+  }
+
+  inputPlayerNum() {
+    let playerNum;
+
+    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
+      playerNum = input;
+    });
+
+    return playerNum;
   }
 }
 
