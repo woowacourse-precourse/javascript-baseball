@@ -135,3 +135,14 @@ describe('userInteraction()', () => {
     expect(logSpy).toHaveBeenCalledWith('3스트라이크');
   });
 });
+
+describe('userConfirm()', () => {
+  test('1을 전달하면 숫자 야구 게임을 시작합니다. 문구를 출력한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+
+    app.userConfirm(1);
+
+    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+});
