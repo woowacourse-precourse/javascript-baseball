@@ -104,7 +104,10 @@ class App {
     return 0;
   }
 
-  removeRepeatInputValue(userInput) {}
+  removeRepeatInputValue(userInput) {
+    const userInputSet = new Set([...userInput]);
+    return [...userInputSet];
+  }
 }
 
 const game = new App();
