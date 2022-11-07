@@ -59,7 +59,7 @@ class App {
   isCorrect(strike){
     if(strike === 3){
       this.gameClearMessage();
-      this.wantRegame();
+      this.showRegameMenu();
     }else{
       this.receivePredictNum();
     }
@@ -67,16 +67,19 @@ class App {
   gameClearMessage(){
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
-  wantRegame() {
+  showRegameMenu() {
     MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputMenuNum) => {
       this.regameValidCheck(inputMenuNum);
-      if(inputMenuNum==='1'){
-        this.play();
-      }else{
-        MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
-        MissionUtils.Console.close();
-      }
+      this.selectMenu(inputMenuNum);
     });
+  }
+  selectMenu(MenuNum){
+    if(MenuNum==='1'){
+      this.play();
+    }else{
+      MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+      MissionUtils.Console.close();
+    }
   }
   regameValidCheck(MenuNum){
     const IS_NOT_ONE_OR_TWO = /[^1|2]/g;
