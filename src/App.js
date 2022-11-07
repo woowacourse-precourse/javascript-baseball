@@ -69,7 +69,7 @@ function getResult(result) {
     resultMessage += `${result.ball}볼`;
   }
   if (result.strike) {
-    resultMessage += `${result.strike}스트라이크`;
+    resultMessage += ` ${result.strike}스트라이크`;
   }
   if (resultMessage === "") {
     resultMessage = "낫싱";
