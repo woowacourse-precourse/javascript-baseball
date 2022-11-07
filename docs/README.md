@@ -1,6 +1,6 @@
 **숫자 야구 기능 목록**
  1. Random class
-	 - [ ] getThreeRandomArray()
+	 - [x] getThreeRandomArray()
 		 - [x] 길이가 3인 배열을 반환한다.
 		 - [x] 3개의 요소 모두 숫자 타입이다.
 		 - [x] 1부터 9까지 범위의 값을 반환한다.
