@@ -1,10 +1,11 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { ANSWER } = require('./constants/constants');
 
 class Computer {
   makeAnswer() {
     const randomNumList = [];
-    while (randomNumList.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
+    while (randomNumList.length < ANSWER.LENGTH) {
+      const number = Random.pickNumberInRange(ANSWER.MIN, ANSWER.MAX);
       if (!randomNumList.includes(number)) {
         randomNumList.push(number);
       }
@@ -14,9 +15,9 @@ class Computer {
 
   validateInput(userInput) {
     return (
-      userInput.length === 3 &&
+      userInput.length === ANSWER.LENGTH &&
       Boolean(userInput.match(/^[1-9]+$/)) &&
-      new Set(userInput.split('')).size === 3
+      new Set(userInput.split('')).size === ANSWER.LENGTH
     );
   }
 
