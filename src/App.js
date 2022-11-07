@@ -16,7 +16,7 @@ class App {
 
       isFinish = this.EndGame(result);
     }
-    pickNumber.pickNewOrEnd(this.pickRestartOrEnd);
+    this.pickNewOrEnd();
   }
 
   EndGame(result) {
@@ -27,13 +27,20 @@ class App {
     return isTrue;
   }
 
-  pickRestartOrEnd = (number) => {
-    if (number === "1") {
-      this.play();
-    } else {
-      MissionUtils.Console.print("게임 종료");
-    }
+  pickNewOrEnd() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (number) => {
+        if (number === "1") {
+          this.play();
+        } else {
+          MissionUtils.Console.close();
+          MissionUtils.Console.print("게임 종료");
+        }
+      }
+    );
   };
+
 }
 
 module.exports = App;
