@@ -21,6 +21,10 @@ class App {
 
     return computerNum;
   }
+
+  printGameMsg(message) {
+    MissionUtils.Console.print(message);
+  }
 }
 
 module.exports = App;
