@@ -18,12 +18,19 @@ class App {
       throw new Error("3자리 숫자를 입력하세요.");
     }else if(num.charAt(0) == num.charAt(1) || num.charAt(0) == num.charAt(2) || num.charAt(1) == num.charAt(2)){
       throw new Error("중복되지 않는 숫자를 입력하세요.");
+    }else{
+      return 1;
     }
   }
 
   getUserNum(){
-    
-
+    let user_num;
+    do{
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+        user_num = input;
+      });        
+      this.checkException(user_num);
+    } while();
   }
 
   getRandomNum(){
@@ -36,8 +43,6 @@ class App {
     }
     return com_num.join("");
   }
-
-
 
 }
 
