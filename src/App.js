@@ -12,10 +12,7 @@ class App {
     this.user.checkValidation();
     this.user.changeToNumbers();
     const ballAndStrike = this.compareNumbers(this.opponent.number, this.user.input);
-
-    // MissionUtils.Console.print(`OPP: ${this.opponent.number}`);
-    // MissionUtils.Console.print(`USER: ${this.user.input}`);
-    // MissionUtils.Console.print(`Balls And Strikes: ${ballAndStrike}`);
+    this.printResult(ballAndStrike);
   }
   gameStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -30,6 +27,14 @@ class App {
       }
     }
     return [ball, strike];
+  }
+  printResult(ballAndStrike) {
+    const ball = ballAndStrike[0];
+    const strike = ballAndStrike[1];
+    if (ball > 0 && strike > 0) MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    else if (ball === 0 && strike > 0) MissionUtils.Console.print(`${strike}스트라이크`);
+    else if (ball > 0 && strike === 0) MissionUtils.Console.print(`${ball}볼`);
+    else if (ball === 0 && strike === 0) MissionUtils.Console.print("낫싱");
   }
 }
 
