@@ -4,15 +4,17 @@ const Message = require("./Message");
 const checkException = require("./checkException");
 
 class App {
+  constructor() {
+    this.answer = getNewAnswer();
+  }
+
   play() {
-    Console.print(`${Message.start}`);
-    const answer = getNewAnswer();
     this.getUserInput();
   }
 
   getUserInput() {
-    Console.readLine(`${Message.input}`, (value) => {
-      checkException(value);
+    Console.readLine(`${Message.input}`, (userInput) => {
+      checkException(userInput);
       Console.close();
     });
   }
