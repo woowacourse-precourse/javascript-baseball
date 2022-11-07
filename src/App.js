@@ -21,8 +21,11 @@ class App {
         return; 
       }
 
-      this.compare(computer_nums, player_nums);
-      MissionUtils.Console.close();
+      if(this.compare(computer_nums, player_nums)) {
+        MissionUtils.Console.close();
+      } else {
+        this.match(computer_nums);
+      }
     });
   }
 
@@ -47,7 +50,7 @@ class App {
     }
   }
 
-  compare(computer_nums, player_nums) {
+ compare(computer_nums, player_nums) {
     let strike = 0;
     let ball = 0;
 
@@ -58,6 +61,7 @@ class App {
 
     if(ball <= 0 && strike <= 0) {
       MissionUtils.Console.print('낫싱');
+      return false;
     }
 
     let result = '';
@@ -65,6 +69,9 @@ class App {
     if (strike > 0) result += `${strike}스트라이크`;
 
     MissionUtils.Console.print(result);
+
+    if (strike == 3) return true;
+    else return false;
   }
 }
 
