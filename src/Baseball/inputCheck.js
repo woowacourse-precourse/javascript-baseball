@@ -1,13 +1,36 @@
 class inputValidation {
   checkInputValidation(userInputNum) {
-    const SET = new Set(userInputNum);
+    const [CHECKED_NUM_LENGTH, CHECKED_IS_NUMBER, CHECKED_NUM_OVERLAP] = ([
+      this.checkNumLength(userInputNum),
+      this.checkIsNumber(userInputNum),
+      this.checkNumOverlap(userInputNum),
+    ]);
+
+    if (CHECKED_NUM_LENGTH && CHECKED_IS_NUMBER && CHECKED_NUM_OVERLAP) {
+      return true;
+    }
+    return false;
+  }
+
+  checkNumLength(input) {
+    if (input.length === 3) {
+      return true;
+    }
+    return false;
+  }
+
+  checkIsNumber(input) {
+    if (!isNaN(input)) {
+      return true;
+    }
+    return false;
+  }
+
+  checkNumOverlap(input) {
+    const SET = new Set(input);
     const UNIQUE_ELEMENTS = [...SET];
 
-    const CHECK_NUM_LENGTH = userInputNum.length === 3;
-    const CHECK_IS_NUMBER = !isNaN(userInputNum);
-    const CHECK_NUM_OVERLAP = UNIQUE_ELEMENTS.length === 3;
-
-    if (CHECK_NUM_LENGTH && CHECK_IS_NUMBER && CHECK_NUM_OVERLAP) {
+    if (UNIQUE_ELEMENTS.length === 3) {
       return true;
     }
     return false;
