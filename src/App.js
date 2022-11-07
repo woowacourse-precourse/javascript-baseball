@@ -17,21 +17,24 @@ class App {
 
   // 2. 사용자에게 숫자 3개 받는 함수
   readNums() {
-    let user = ""
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", answer => {
+    let user = "";
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.checkError(answer);
-      user = [...answer].map(num => Number(num))
+      user = [...answer].map((num) => Number(num));
     });
-    
+
     return user;
   }
 
   // 8. 사용자에게 입력받은 숫자 에러 체크하는 함수
   checkError(answer) {
+    let set = new Set([...answer])
+
     if (
       isNaN(Number(answer)) ||
       answer.includes(0) ||
-      answer.length !== 3
+      answer.length !== 3 ||
+      answer.length !== set.size
     ) {
       throw new Error();
     }
@@ -87,10 +90,10 @@ class App {
     let score = this.compareNums(computer, user);
     let result = this.printResult(score);
     if (!result) this.startGame(computer);
-    
+
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
-      answer => {
+      (answer) => {
         this.checkContinue(answer);
       }
     );
@@ -106,7 +109,6 @@ class App {
     } else {
       throw new Error();
     }
-
   }
 
   play() {

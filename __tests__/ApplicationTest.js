@@ -111,18 +111,18 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  // test("예외 테스트(같은 숫자)", () => {
-  //   const randoms = [1, 3, 5];
-  //   const answers = ["225"];
+  test("예외 테스트(같은 숫자)", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["225"];
 
-  //   mockRandoms(randoms);
-  //   mockQuestions(answers);
+    mockRandoms(randoms);
+    mockQuestions(answers);
 
-  //   expect(() => {
-  //     const app = new App();
-  //     app.play();
-  //   }).toThrow();
-  // });
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 
   test("예외 테스트(게임 종료할지 선택할 때 1,2말고 다른거 선택)", () => {
     const randoms = [1, 3, 5];
