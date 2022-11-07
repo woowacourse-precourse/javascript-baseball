@@ -1,6 +1,7 @@
 const App = require('../src/App');
 const MissionUtils = require('@woowacourse/mission-utils');
 const TEXT = require('../src/constants/constants');
+const validation = require('../src/validation/validation');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -59,5 +60,70 @@ describe('숫자 야구 게임', () => {
       const app = new App();
       app.play();
     }).toThrow(TEXT.ERROR_MESSAGE);
+  });
+});
+
+describe('validation 함수 테스트', () => {
+  test('validation', () => {
+    expect(validation('123')).toBeTruthy();
+    expect(validation('456')).toBeTruthy();
+    expect(validation('112')).not.toBeTruthy();
+    expect(validation('120')).not.toBeTruthy();
+    expect(validation('sdf')).not.toBeTruthy();
+    expect(validation('1234')).not.toBeTruthy();
+    expect(validation(' ')).not.toBeTruthy();
+    expect(validation('[]')).not.toBeTruthy();
+    expect(validation('')).not.toBeTruthy();
+  });
+});
+
+describe('App 클래스 메서드 테스트', () => {
+  test('화면 출력 메서드', () => {
+    const app = new App();
+
+    console.log = jest.fn();
+    app.print('hello');
+    expect(console.log).toHaveBeenCalledWith('hello');
+  });
+
+  test('strike 메서드', () => {
+    const app = new App();
+    const input = [1, 2, 3];
+    const computer = [3, 2, 1];
+    const strike = app.compareStrike(input, computer);
+    expect(strike).toBe(1);
+    expect(strike).not.toBe(2);
+    expect(strike).not.toBe(3);
+  });
+
+  test('ball 메서드', () => {
+    const app = new App();
+    const input = [1, 2, 3];
+    const computer = [3, 2, 1];
+    const ball = app.compareBall(input, computer);
+    expect(ball).toBe(2);
+    expect(ball).not.toBe(3);
+    expect(ball).not.toBe(1);
+  });
+
+  test('compare 메서드', () => {
+    const app = new App();
+    const input = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 2, 3],
+    ];
+    const computer = [
+      [1, 2, 3],
+      [5, 4, 6],
+      [9, 7, 8],
+      [7, 8, 9],
+    ];
+    const messages = ['3스트라이크', '2볼 1스트라이크', '3볼', '낫싱'];
+    messages.forEach((output, index) => {
+      const result = app.compare(input[index], computer[index]);
+      expect(result).toBe(output);
+    });
   });
 });
