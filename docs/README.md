@@ -2,7 +2,7 @@
 
 ## 기능 목록
 
-1~3번의 기능은 `src/utils`에 작성했습니다.
+1~3번의 기능은 `src/utils`에 작성했습니다.  
 테스트 코드들은 `__test__`에 작성했습니다.
 
 #### 1. 컴퓨터 숫자값을 구하기 위한 함수 구현
@@ -32,24 +32,32 @@
 
 #### 4. 게임 한턴 실행
 
-- [x] 숫자를 입력받는 `runGame`
-- [x] 볼카운트를 체크, 출력, 3스크라이크인지 확인하는 `runTurn`
+- [x] 숫자를 입력받는 `run`
+- [x] 볼카운트를 체크, 출력, 3스크라이크인지 확인하는 `turn`
   - 이 과정을 한턴이라고 보았다.
 - [x] 한턴을 실행할 때 입력되는 값에 대해 유효성 확인하는 `checkInputIsValid`
 
 #### 5. 새로운 게임 생성
 
-- [x] 컴퓨터 숫자값(서로 다른 3자리수)을 가져와서 `runGame`을 실행하는 `createNewGame`
+- [x] 컴퓨터 숫자값(서로 다른 3자리수)을 가져와서 `run`을 실행하는 `create`
 
 #### 6. 게임 종료
 
-- [x] 종료 안내 문구를 출력하고 입력값을 받아 `replayOrClose`로 전달하는 `quitGame`
+- [x] 종료 안내 문구를 출력하고 입력값을 받아 `replayOrClose`로 전달하는 `quit`
 - [x] 입력값이 유효한지 확인한 후 재시작, 프로그램 종료, 예외를 `throw`하는 `replayOrClose`
 - [x] 게임을 종료 여부에 입력되는 값이 `'1'` 혹은 `'2'`인지 확인하는 `checkInputIsOneOrTwo`
 
 #### 7. play 메서드 구현
 
-- [x] 게임 시작 안내 문구를 출력하고 `createNewGame()`을 실행
+- [x] BaseBallGame 클래스로 baseBallGame 객체를 만들고 `baseBallGame.create`를 실행
+
+#### 8. 리펙토링
+
+리펙토링을 진행하면서 추가/변경된 사항입니다.
+
+- [x] 프로그램에서 사용할 상수들을 `Constant.js`에 묶어주기
+- [x] App에서 게임에 관한 모든 기능을 BaseBallGame.js로 분리, BaseBallGame 클래스 추가
+  - [x] 이에 따른 메서드 이름 수정
 
 ---
 
