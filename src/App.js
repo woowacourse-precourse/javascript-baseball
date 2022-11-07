@@ -6,6 +6,7 @@ class App {
     constructor() {
         this.answer = this.setAnswer();
     }
+
     setAnswer() {
         let answer = new Set();
         while (answer.size < 3) {
@@ -13,10 +14,12 @@ class App {
         }
         return [...answer].join('');
     }
+
     play() {
         MissionUtils.Console.print(constant.GAME_START);
         this.process();
     }
+
     process() {
         MissionUtils.Console.readLine(constant.INPUT_QUESTIONS, (number) => {
             this.verification(number, 'process');
@@ -30,6 +33,7 @@ class App {
             }
         });
     }
+
     replay() {
         MissionUtils.Console.readLine(constant.REPLAY_QUESTIONS, (number) => {
             if (number === '1') {
@@ -42,6 +46,7 @@ class App {
             }
         });
     }
+
     judge(number) {
         const [ball, strike] = this.countBallAndStrike(number);
 
@@ -55,6 +60,7 @@ class App {
             return `${ball}볼 ${strike}스트라이크`;
         }
     }
+
     countBallAndStrike(number) {
         let ball = 0;
         let strike = 0;
@@ -66,6 +72,7 @@ class App {
 
         return [ball, strike];
     }
+
     verification(input, type) {
         const exception = new Exception(input, type);
         if (type === 'process') {
