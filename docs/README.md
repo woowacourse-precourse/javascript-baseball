@@ -70,15 +70,15 @@
   - [ ] decideReprocess: 3스트라이크 여부를 판단하여, process를 다시 돌려야하는지 판단한다.
   - [ ] process: 전체적인 일련의 과정을 나타낸다.
 
-- [ ] computer
+- [x] computer
 
-  - [ ] getRandomNumber: computer의 Number를 설정하기 위해, RandomNumber를 selectedNumber에 없는 것으로 return 한다.
-  - [ ] setRandomNumber: computer의 selectedNumber를 setting 한다.
+  - [x] getRandomNumber: computer의 Number를 설정하기 위해, RandomNumber를 selectedNumber에 없는 것으로 return 한다.
+  - [x] setRandomNumber: computer의 selectedNumber를 setting 한다.
 
-- [ ] Function
+- [x] Function
 
-  - [ ] validByRegex: 정규식에 의해 1에서9까지의 수 3자리가 맞는지 확인한다.
-  - [ ] validDuplicate: 곂치는 수가 없는지 확인한다.
-  - [ ] validInput: 정규식에 의해 확이낳고, 곂치는 수에 의해 확인하여 false, true를 return 한다.
-  - [ ] throwInvalidInputError: 올바르지 않은 input 값이라면 throw error를 한다.
-  - [ ] validOneOrTwo: 1과 2중에 값이 있는지 확인한다.
+  - [x] validByRegex: 정규식에 의해 1에서9까지의 수 3자리가 맞는지 확인한다.
+  - [x] validDuplicate: 곂치는 수가 없는지 확인한다.
+  - [x] validInput: 정규식에 의해 확이낳고, 곂치는 수에 의해 확인하여 false, true를 return 한다.
+  - [x] throwInvalidInputError: 올바르지 않은 input 값이라면 throw error를 한다.
+  - [x] validOneOrTwo: 1과 2중에 값이 있는지 확인한다.
