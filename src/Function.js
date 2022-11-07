@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./Const');
 
 const VALID_REGEX = /^[1-9]{3}$/;
@@ -30,6 +31,11 @@ class Function {
     if (input !== '1' && input !== '2') {
       throw new Error(`${MESSAGE.INPUTERROR}`);
     }
+  }
+
+  static endApp() {
+    Console.close();
+    Console.print('게임 종료');
   }
 }
 
