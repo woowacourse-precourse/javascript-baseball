@@ -15,7 +15,10 @@ class App {
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (input) => {
       this.wrongInput(input);
-      if (input === '1') this.startGame();
+      if (input === '1') {
+        MissionUtils.Console.print(RESTART);
+        this.startGame();
+      }
       if (input === '2') MissionUtils.Console.close();
     });
   }
