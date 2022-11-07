@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
+const { INPUT_ERROR } = require("./constants");
 const Controller = require("./Controller");
 
 class App {
@@ -31,7 +32,7 @@ class App {
     Console.readLine(this.MESSAGE.USER_ANSWER, (input) => {
       const numbers = this.splitInput(input);
       if (this._controller.isValidInput(numbers) === false) {
-        throw "잘못된 입력입니다.";
+        throw INPUT_ERROR;
       };
       const hint = this._controller.compareAnswer(numbers, this._computer.answer);
       if (hint.length === 0) {
@@ -48,7 +49,7 @@ class App {
     Console.readLine(this.MESSAGE.USER_SELECT, (input) => {
       if (input === '1') this.restart();
       else if (input === '2') this.finish();
-      else throw "잘못된 입력입니다.";
+      else throw INPUT_ERROR;
     });
   }
 
