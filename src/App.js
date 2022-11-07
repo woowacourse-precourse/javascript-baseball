@@ -120,6 +120,29 @@ class App {
 
     return `${ball} ${strike}`;
   }
+
+  correctAnswer(result) {
+    MissionUtils.Console.print(result);
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      `게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.
+`,
+      this.restart
+    );
+  }
+
+  restart(num) {
+    if (num === "1") {
+      app.play();
+    } else if (num === "2") {
+      MissionUtils.Console.close();
+    } else {
+      throw new Error("잘못된 값을 입력하여 게임을 종료합니다.");
+    }
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
