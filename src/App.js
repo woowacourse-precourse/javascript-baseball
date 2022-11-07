@@ -10,6 +10,7 @@ class App {
     this.target = generateTargetNumber();
     this.isGameEnd = false;
     this.inputPhrase = config.PHRASE.INPUT;
+    this.endPhrase = this.target.length + config.PHRASE.END;
     this.restartPhrase = config.PHRASE.RESTART;
   }
 
@@ -21,8 +22,8 @@ class App {
     Console.readLine(this.inputPhrase, (input) => {
       validateGameInput(input);
       this.judgeGuess(input);
-
       if (this.isGameEnd) {
+        printPhrase(this.endPhrase);
         this.getRestartFromUser();
       } else {
         this.getGuessFromUser();
@@ -36,6 +37,8 @@ class App {
       if (+input === config.RESTART_INPUT.RESTART) {
         this.restartGame();
         this.play();
+      } else {
+        Console.close();
       }
     });
   }
@@ -43,6 +46,7 @@ class App {
   judgeGuess(guess) {
     const { strike, ball } = findStrikeBall(this.target, guess);
     this.isGameEnd = strike === this.target.length;
+    console.log(this.isGameEnd, strike, this.target.length);
     printPhrase(makePhrase(strike, ball));
   }
 
