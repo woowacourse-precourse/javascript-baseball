@@ -18,4 +18,19 @@ describe("checkNumber() 테스트", () => {
     const app = new App();
     expect(() => app.checkNumber(userNumber)).toThrow();
   });
+  test("예외-서로다른 숫자1", () => {
+    const userNumber = ["113"];
+    const app = new App();
+    expect(() => app.checkNumber(userNumber)).toThrow();
+  });
+  test("예외-서로다른 숫자2", () => {
+    const userNumber = ["121"];
+    const app = new App();
+    expect(() => app.checkNumber(userNumber)).toThrow();
+  });
+  test("예외-서로다른 숫자3", () => {
+    const userNumber = ["122"];
+    const app = new App();
+    expect(() => app.checkNumber(userNumber)).toThrow();
+  });
 });
