@@ -1,4 +1,11 @@
 const Utils = require("../src/utils/utils.js");
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
 
 expect.extend({
   toBeDistinct(received) {
@@ -78,5 +85,36 @@ describe("Utils.setComputerNumber", () => {
     //then
     expect(randomNumber).toHaveLength(3);
     expect(randomNumber).toBeDistinct();
+  });
+});
+
+describe("Utils.compareNumbers", () => {
+  test("컴퓨터 랜덤숫자와 사용자 입력숫자를 비교한다.", () => {
+    //given
+    const randomNumbers = [
+      [2, 4, 6],
+      [4, 6, 5],
+      [1, 3, 2],
+      [5, 9, 8],
+      [3, 7, 5],
+    ];
+    const userInput = ["157", "457", "132", "859", "357"];
+    const results = [
+      {},
+      { strike: 1, ball: 1 },
+      { strike: 3 },
+      { ball: 3 },
+      { strike: 1, ball: 2 },
+    ];
+
+    for (const index in userInput) {
+      //when
+      let strikeBall = Utils.compareNumbers(
+        randomNumbers[index],
+        userInput[index]
+      );
+      //then
+      expect(strikeBall).toStrictEqual(results[index]);
+    }
   });
 });
