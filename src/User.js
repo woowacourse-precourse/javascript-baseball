@@ -13,12 +13,6 @@ class User {
   get getGuessNumber() {
     return this.guessNumber;
   }
-
-  responseSendNumber(object) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) =>
-      object.isStrike(answer)
-    );
-  }
 }
 
 module.exports = User;
