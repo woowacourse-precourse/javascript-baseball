@@ -1,17 +1,21 @@
-// MissionUtils 라이브러리에서 제공하는 Random 및 Console API를 사용하여 구현해야 한다.
-// Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
-// 사용자의 값을 입력 받고 출력하기 위해서는 MissionUtils 라이브러리에서 제공하는 Console.readLine, Console.print를 활용한다.
-
 const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = MissionUtils;
 
 class App {
-    MakeQuizNumber() {
+    constructor() {
+        this.quizNumber = "";
+    }
+
+    play() {
+        this.quizNumber = this.makeQuizNumber();
+        this.makeQuizNumber();
+        this.startGame();
+    }
+
+    makeQuizNumber() {
         let quizNumber = "";
         for (let i = 0; i < 3; i++) {
-            let randomIntToString = MissionUtils.Random.pickNumberInRange(
-                1,
-                9
-            ).toString();
+            let randomIntToString = Random.pickNumberInRange(1, 3).toString();
             quizNumber.includes(randomIntToString)
                 ? i - 1
                 : (quizNumber += randomIntToString);
@@ -19,47 +23,73 @@ class App {
         return quizNumber;
     }
 
-    IsValidInput(input) {
-        return Number(input) >= 100 && Number(input) < 1000;
+    isValidInput(input) {
+        return input.length === 3 && !isNaN(Number(input)) && input[0] !== "0";
     }
 
-    InputNumber() {
-        MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-            if (!this.IsValidInput(answer)) {
-                throw "잘못된 수를 입력하였습니다.";
+    printMessage(message) {
+        Console.print(message);
+    }
+
+    startGame() {
+        this.printMessage("숫자 야구 게임을 시작합니다");
+        this.inputNumber();
+    }
+
+    inputNumber() {
+        Console.readLine("숫자를 입력해주세요.", (answer) => {
+            this.checkStrikeBalls(this.quizNumber, answer);
+            if (!this.isValidInput(answer)) {
+                throw new Error("잘못된 수를 입력하였습니다.");
             }
         });
     }
 
-    PrintStrikeBall(score) {
-        if (score.strike > 0 && score.ball > 0) {
-            MissionUtils.Console.print(
-                `${score.ball}볼 ${score.strike}스트라이크`
-            );
-        } else if (score.strike === 0 && score.ball === 0) {
-            MissionUtils.Console.print(`낫싱`);
-        } else if (score.strike > 0) {
-            MissionUtils.Console.print(`${score.strike}스트라이크`);
-        } else if (score.ball > 0) {
-            MissionUtils.Console.print(`${score.ball}볼`);
-        }
-    }
-
-    CheckStrikeBalls(quizNumber, input) {
-        let score = { strike: 0, ball: 0 };
+    checkStrike(quizNumber, input) {
+        let strike = 0;
         for (let i = 0; i < 3; i++) {
             if (quizNumber[i] === input[i]) {
-                score.strike += 1;
-            } else if (quizNumber.indexOf(input[i]) !== -1) {
-                score.ball += 1;
-            }
+                strike += 1;
+            } else continue;
         }
-        this.PrintStrikeBall(score);
+        return strike;
     }
 
-    play() {
-        this.MakeQuizNumber();
-        this.InputNumber();
+    checkBall(quizNumber, input) {
+        let ball = 0;
+        for (let i = 0; i < 3; i++) {
+            if (
+                quizNumber[i] !== input[i] &&
+                quizNumber.indexOf(input[i]) !== -1
+            )
+                ball += 1;
+        }
+        return ball;
+    }
+
+    checkStrikeBalls(quizNumber, input) {
+        let ball = this.checkBall(quizNumber, input);
+        let strike = this.checkStrike(quizNumber, input);
+        let score = { strike: strike, ball: ball };
+        return this.printStrikeBall(score);
+    }
+
+    printStrikeBall(score) {
+        if (score.strike > 0 && score.ball > 0) {
+            Console.print(`${score.ball}볼 ${score.strike}스트라이크`);
+            this.inputNumber();
+        } else if (score.strike === 0 && score.ball === 0) {
+            Console.print(`낫싱`);
+            this.inputNumber();
+        } else if (score.strike > 0) {
+            Console.print(`${score.strike}스트라이크`);
+            this.inputNumber();
+        } else if (score.ball > 0) {
+            Console.print(`${score.ball}볼`);
+            this.inputNumber();
+        } else if (score.strike === 3) {
+            this.printMessage("성공!");
+        }
     }
 }
 
