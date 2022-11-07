@@ -68,10 +68,7 @@ class App{
 
   reStart(reStartNumber){
     const RESTART_NUMBER = '1';
-    if(reStartNumber === RESTART_NUMBER){
-      this.getRandumNumber();
-      this.userInput();
-    }
+    if(reStartNumber === RESTART_NUMBER) this.startGame();
   }
 
   gameExit(exitNumber){
@@ -81,18 +78,18 @@ class App{
       MissionUtils.Console.close();
     }
   }
+  
+  startGame(){
+    this.getRandumNumber();
+    this.userInput(); 
+  }
 
   play(){
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.getRandumNumber();
-    MissionUtils.Console.print(this.uniqueNumberList)
-    this.userInput();
-  
+    this.startGame();
   }
   
 }
 
-const app = new App();
-app.play();
 
 module.exports = App;
