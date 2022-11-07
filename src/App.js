@@ -6,18 +6,42 @@ class App {
     console.log('숫자 야구 게임을 시작합니다.')
     // 1.컴퓨터 리스트 생성
     const computerLs = new Computer();
-    computerLs.makeComNumLs();
+    const computer = computerLs.makeComNumLs();
     // 2.유저 리스트 입력
     const userLs = new User();
-    userLs.getUserLs();
+    const user = userLs.getUserLs();
+
+    checkGameResult(computer, user)
   }
 }
 
 class Computer extends App {
-  makeComNumLs(){
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  makeComNumLs() {
+    return String(MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3));
   }
+
+  checkGameResult(computerNum, userNum) {
+    let strike = this.countStrike(computerNum, userNum);
+    let ball = this.countBall(computerNum, userNum, strike[1]);
+
+    
+  }
+
+  countStrike(computerNum, userNum) {
+    let strike = 0;
+    let strikeIndex = [];
+    for (let i = 0; i < 3; i++) {
+      if (computerNum[i] == userNum[i]) {
+        strike += 1;
+        strikeIndex.push(i);
+      }
+
+    }
+    return [strike, strikeIndex]
+  }
+    
 }
+
 
 class User extends App {
   getUserLs () {
@@ -41,12 +65,8 @@ class User extends App {
 }
 
 module.exports = App;
+module.exports = Computer;
+module.exports = User;
 
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> test <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<??
-const app = new App();
-const computerLs = new Computer();
-const userLs = new User();
-
-userLs.getUserLs()
 
 // console.log(computerLs.makeComNumLs());
