@@ -4,6 +4,13 @@ const ERROR_MESSAGE = {
   InputError: '올바르지 못한 입력 값 입니다.',
 }
 
+const CONSOLE_MESSAGE = {
+  StartGame: '숫자 야구 게임을 시작합니다.',
+  GetInputAnswer: '숫자를 입력해주세요 : ',
+  EndGame: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  SelectReplay: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+}
+
 function exceptionHandle(inputAnswer) {
   const inputAnswerArray = Array.from(inputAnswer);
   if(inputAnswerArray.includes('0')) return true;
@@ -21,19 +28,19 @@ class User {
     this.play();
   }
   play() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.GetInputAnswer, (inputAnswer) => {
       if(exceptionHandle(inputAnswer))  throw ERROR_MESSAGE.InputError;
       const isPlay = this.game.output(inputAnswer);
       if(isPlay){
         this.play();
         return;
       }
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.print(CONSOLE_MESSAGE.EndGame);
       this.selectRePlay();
     });
   }
   selectRePlay(){
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (selectReplay) => {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.SelectReplay, (selectReplay) => {
       if(selectReplay === '1'){
         this.game.getRandomNumber();
         this.play();
@@ -107,7 +114,7 @@ class BaseBallGame {
 
 class App {
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(CONSOLE_MESSAGE.StartGame);
     new User();
   }
 }
