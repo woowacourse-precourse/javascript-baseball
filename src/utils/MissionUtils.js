@@ -5,6 +5,9 @@ const {
   BALL,
   GAME_END,
   REQUIRE_NUMBER,
+  RETRY_OR_END,
+  RETRY_VALUE,
+  END_VALUE,
 } = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
@@ -103,6 +106,7 @@ const printMessage = (message) => {
 };
 
 const printGameResult = (countStrike, countBall, computers) => {
+  console.log(computers);
   if (countStrike === 0 && countBall === 0) {
     printMessage(NOTTHING);
     getUserNumber(computers, REQUIRE_NUMBER);
@@ -117,7 +121,19 @@ const printGameResult = (countStrike, countBall, computers) => {
     getUserNumber(computers, REQUIRE_NUMBER);
   } else if (countStrike === 3) {
     printMessage(GAME_END);
+    printMessage(RETRY_OR_END);
+    retryOrEnd();
   }
+};
+
+const retryOrEnd = () => {
+  MissionUtils.Console.readLine("", (userInput) => {
+    if (userInput === RETRY_VALUE) {
+      printMessage("1입력");
+    } else if (userInput === END_VALUE) {
+      printMessage("2입력");
+    }
+  });
 };
 
 module.exports = { getComputerNumber, getUserNumber };
