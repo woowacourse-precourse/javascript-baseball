@@ -13,10 +13,10 @@ class App {
   }
 
   checkType(num) {
-    if (typeof num != "Number") throw -1;
+    if (typeof num != "number") throw "입력값 숫자 아님";
   }
   checkDigit(num) {
-    if (num < 123 || num > 987) throw -1;
+    if (num < 123 || num > 987) throw "자릿수 오류";
   }
   checkOverlap(num) {
     const number = String(num).split("");
@@ -25,10 +25,11 @@ class App {
       number[0] == number[2] ||
       number[1] == number[2]
     )
-      throw -1;
+      throw "입력값 중복 발생";
   }
 
   checkError(num) {
+    let number = Number(num);
     this.checkType(num);
     this.checkDigit(num);
     this.checkOverlap(num);
