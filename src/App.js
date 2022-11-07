@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { COMMAND, MESSAGES } = require('./constant/constant');
 
+const { COMMAND, MESSAGES } = require('./lib/constants');
 const Computer = require('./Computer');
 
 class App {
@@ -57,8 +57,5 @@ class App {
     Console.close();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;

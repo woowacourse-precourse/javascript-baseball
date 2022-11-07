@@ -1,5 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { NUMBER_LENGTH, HINTS, MESSAGES } = require('./constant/constant');
+
+const { NUMBER_LENGTH, HINTS, MESSAGES } = require('./lib/constants');
 
 class Computer {
   #numbers;
@@ -12,8 +13,6 @@ class Computer {
         numbers.push(number);
       }
     }
-    //TODO: console.log 삭제
-    console.log(numbers);
 
     this.#numbers = numbers;
   }
@@ -69,7 +68,7 @@ class Computer {
 
   countStrike(playerNumbers) {
     return playerNumbers.filter((number, index) => {
-      return this.#numbers[index] === number && this.#numbers.includes(number);
+      return this.#numbers[index] === number;
     }).length;
   }
 
