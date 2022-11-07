@@ -4,10 +4,6 @@ const { mockQuestions, mockRandoms, getLogSpy } = require('./ApplicationTest');
 const mockConstants = jest.requireMock('../src/constants');
 jest.mock('../src/constants');
 
-afterAll(() => {
-  jest.resetModules();
-});
-
 describe('3자릿수가 아닌 자릿수의 숫자야구 게임 해보기', () => {
   test('4자릿수의 숫자 야구', () => {
     const randoms = [1, 2, 3, 4];
