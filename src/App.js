@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { GAME_ANNOUNCEMENT_MESSAGE } = require('./constants.js');
+const { GAME_ANNOUNCEMENT_MESSAGE, } = require('./constants.js');
 
 class Score {
   constructor(ball, strike){
@@ -14,11 +14,14 @@ class Score {
 function initialGameSettings () {
   Console.print(GAME_ANNOUNCEMENT_MESSAGE.GAME_START);
   const answer = Random.pickUniqueNumbersInRange(1, 9, 3);
-  let userScore = Score.makeScoreZero();
-  return [answer,userScore];
+  return answer;
+
 }
 
 function getUserInput() {
+  Console.readLine(GAME_ANNOUNCEMENT_MESSAGE.INPUT, (input) => {
+    checkInput(input)
+  })
 }
 
 function checkInput () {
@@ -35,7 +38,8 @@ function checkRestart () {
 
 class App {
   play() {
-    initialGameSettings();
+    let answer = initialGameSettings();
+    getUserInput(answer);
   }
 }
 
