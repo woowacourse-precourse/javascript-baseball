@@ -1,4 +1,10 @@
+const { Random } = require('@woowacourse/mission-utils');
 const config = require('./config');
+
+const generateTargetNumber = () => {
+    const { RANGE_MIN, RANGE_MAX, NUM_LENGTH } = config.GAME_RANGE;
+    return Random.pickUniqueNumbersInRange(RANGE_MIN, RANGE_MAX, NUM_LENGTH).join('');
+};
 
 const findStrikeBall = (target, input) => {
     let strike = 0;
@@ -21,5 +27,4 @@ const makePhrase = (strike, ball) => {
 
     return `${strike}${STRIKE} ${ball}${BALL}`;
 };
-
 module.exports = { findStrikeBall, makePhrase };
