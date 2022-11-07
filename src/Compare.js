@@ -8,8 +8,6 @@ class Compare {
     let result = "";
     const NOTHING = "낫싱";
     computer.forEach((element, index) => {
-      // element === +user[index] && strike++;
-      // element !== +user[index] && computer.includes(+user[index]) && ball++;
       if (element === +user[index]) {
         strike += 1;
       }
