@@ -7,40 +7,30 @@ class User {
 
   checkUserInputValid(userInputArr) {
     if (!userInputArr) {
-      throw new Error();
+      return false;
     }
     if (
       !userInputArr.every((num) => {
         return Number.isInteger(num) && num > 0;
       })
     ) {
-      throw new Error();
+      return false;
     }
     if (userInputArr.length !== 3) {
-      throw new Error();
+      return false;
     }
     if (userInputArr.includes(0)) {
-      throw new Error();
+      return false;
     }
     if (new Set(userInputArr).size !== userInputArr.length) {
-      throw new Error();
+      return false;
     }
     return true;
   }
 
-  getUserInput() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-        resolve((userInput = this.convertNumToArr(userInput)));
-        if (this.checkUserInputValid(userInput)) {
-          return userInput;
-        }
-      });
-    });
-  }
-
   convertNumToArr(num) {
-    const ARR = Array.from(String(num)).map((num) => Number(num));
+    let ARR = [...num];
+    ARR = ARR.map((num) => Number(num));
     return ARR;
   }
 }

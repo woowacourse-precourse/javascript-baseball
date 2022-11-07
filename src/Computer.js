@@ -18,27 +18,27 @@ class Computer {
   }
 
   getHintOfAnswer(result) {
-    this.isPlaying = true;
+    this.isUserWrong = true;
     if (result.ball === 0 && result.strike === 0) {
       MissionUtils.Console.print("낫싱");
-      return this.isPlaying;
+      return this.isUserWrong;
     }
     if (result.ball === 0 && result.strike === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.isPlaying = false;
-      return this.isPlaying;
+      this.isUserWrong = false;
+      return this.isUserWrong;
     }
     if (result.ball > 0 && result.strike === 0) {
       MissionUtils.Console.print(`${result.ball}볼`);
-      return this.isPlaying;
+      return this.isUserWrong;
     }
     if (result.ball === 0 && result.strike > 0) {
       MissionUtils.Console.print(`${result.strike}스트라이크`);
-      return this.isPlaying;
+      return this.isUserWrong;
     }
     MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크`);
-    return this.isPlaying;
+    return this.isUserWrong;
   }
 
   scoreUserInput(answerArr, userInputArr) {

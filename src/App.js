@@ -4,8 +4,18 @@ const Computer = require("./Computer");
 
 class App {
   constructor() {
-    this.isPlaying = false;
+    this.isUserWrong = false;
     this.isFirstPlay = true;
+    this.user = new User();
+    this.computer = new Computer();
+  }
+
+  play() {
+    if (this.isFirstPlay) {
+      this.start();
+    }
+    this.computerAnswer = this.computer.generateDifferRandomNumArr(3);
+    this.askUser();
   }
 
   start() {
@@ -13,37 +23,38 @@ class App {
     this.isFirstPlay = false;
   }
 
-  async play() {
-    if (this.isFirstPlay) {
-      this.start();
-    }
-    this.isPlaying = true;
-    const USER = new User();
-    const COMPUTER = new Computer();
-    const COMPUTER_ANSWER = COMPUTER.generateDifferRandomNumArr(3);
-    while (this.isPlaying) {
-      const USER_INPUT = await USER.getUserInput();
-      const RESULT = COMPUTER.scoreUserInput(COMPUTER_ANSWER, USER_INPUT);
-      this.isPlaying = COMPUTER.getHintOfAnswer(RESULT);
-    }
-    this.checkIfRestartGame();
+  askUser() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      const USER_INPUT_ARR = this.user.convertNumToArr(userInput);
+      const IS_USER_INPUT_VALID = this.user.checkUserInputValid(USER_INPUT_ARR);
+      if (IS_USER_INPUT_VALID === false) {
+        throw new Error();
+      }
+      const SCORE = this.computer.scoreUserInput(
+        this.computerAnswer,
+        USER_INPUT_ARR
+      );
+      this.isUserWrong = this.computer.getHintOfAnswer(SCORE);
+      if (this.isUserWrong) {
+        return this.askUser();
+      }
+      this.checkIfRestartGame();
+    });
   }
 
   checkIfRestartGame() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
-        (userInput) => {
-          if (userInput == 1) {
-            resolve(this.play());
-          }
-          if (userInput == 2) {
-            this.isPlaying = false;
-            resolve(MissionUtils.Console.close());
-          }
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
+      (userInput) => {
+        if (userInput === "1") {
+          return this.play();
         }
-      );
-    });
+        if (userInput === "2") {
+          this.isPlaying = false;
+          return MissionUtils.Console.close();
+        }
+      }
+    );
   }
 }
 
