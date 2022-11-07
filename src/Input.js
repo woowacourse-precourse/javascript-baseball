@@ -1,5 +1,5 @@
 class Input {
-  isValidInput(input) {
+  static isValidInput(input) {
     if (!this.isLengthThree(input))
       throw new Error("3자리 숫자를 입력해주세요.");
 
@@ -36,7 +36,7 @@ class Input {
     return true;
   }
 
-  checkOneOrTwo(input) {
+  static checkOneOrTwo(input) {
     if (input !== "1" && input !== "2")
       throw new Error("1 또는 2를 입력해야 합니다.");
   }
