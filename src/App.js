@@ -36,6 +36,7 @@ class App {
     if (!/^[1-9]+$/g.test(input) || setInput.size !== 3 || input.length !== 3) {
       throw Error('입력값이 잘못되었습니다.');
     } else { this.getInterimOutcome(input); }
+    return true;
   }
 
   getInterimOutcome(input) {
@@ -84,10 +85,27 @@ class App {
   getAnswer() {
     MissionUtils.Console.print('3스트라이크');
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    this.restart();
+    this.questionRestart();
   }
 
+  questionRestart() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (number) => {
+        this.restart(number);
+      },
+    );
+  }
 
+  restart(input) {
+    if (input === '1') {
+      this.start();
+      this.getInputNumber();
+    }
+    if (input === '2') {
+      MissionUtils.Console.close();
+    }
+  }
 
   play() {
     this.start();
