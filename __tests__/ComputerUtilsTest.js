@@ -39,3 +39,32 @@ describe('유저의 입력에 따른 힌트 테스트', () => {
     expect(computerUtils.generateHint(userInput, answer)).toBe('3스트라이크');
   });
 });
+
+describe('입력값 검증 테스트', () => {
+  test('입력값의 자릿수가 잘못된 경우', () => {
+    const userInput = '1234';
+    const lengthError = new Error(COMPUTER.LENGTH_ERROR);
+
+    expect(() => computerUtils.validateInput(userInput)).toThrowError(lengthError);
+  });
+
+  test('숫자를 제외한 문자를 입력한 경우', () => {
+    const userInput = '12a';
+    const characterError = new Error(COMPUTER.CHARACTER_ERROR);
+
+    expect(() => computerUtils.validateInput(userInput)).toThrowError(characterError);
+  });
+
+  test('같은 숫자를 입력한 경우', () => {
+    const userInput = '112';
+    const sameNumberError = new Error(COMPUTER.SAME_ERROR);
+
+    expect(() => computerUtils.validateInput(userInput)).toThrowError(sameNumberError);
+  });
+
+  test('정상 통과', () => {
+    const userInput = '123';
+
+    expect(computerUtils.validateInput(userInput)).toBeUndefined();
+  });
+});
