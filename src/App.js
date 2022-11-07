@@ -10,7 +10,8 @@ const generateComRandom = () => {
   }
   return COMPUTER;
 };
-let COMPUTER 
+let COMPUTER
+
 class App {
   play() {
     this.showMessage();
@@ -30,7 +31,7 @@ class App {
   checkUserInputValue(userNumber) {
     let regex = /[^1-9]/g;
     const userNumberLen = userNumber.length;
-    if (regex.test(userNumber) || userNumberLen !== 3) {
+    if (regex.test(userNumber) || userNumberLen !==3) {
       throw "1~9 사이의 숫자 3개만 입력해주세요";
     }
     let stringUserNumber = userNumber.split("").map((element) => {
@@ -41,7 +42,7 @@ class App {
       if (!userNumberArray.includes(element)) {
         userNumberArray.push(Number(element));
       } else {
-        throw "중복된 수가 있습니다. 프로그램이 종료됩니다."
+        throw "중복된 수가 있습니다. 다시 입력하세요!";
       }
     });
     this.getBothArrays(userNumberArray);
