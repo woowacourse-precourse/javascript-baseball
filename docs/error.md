@@ -1,0 +1,1 @@
+* pickNumberInRange 함수를 사용해야 하는데 pickUniqueNumbersInRange 함수를 사용함 (주의사항을 정독하자!!)
