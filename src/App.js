@@ -14,9 +14,15 @@ class App {
     return computer;
   }
 
+  checkInput(input){
+    if(input.length != 3){
+      throw "세자리 숫자를 입력해주세요."
+    }
+  }
+
 
   getGameResult(){
-
+    
   }
 
 
@@ -25,13 +31,27 @@ class App {
     const computer_num = this.selectComputerNum();
 
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      console.log(input);
-      MissionUtils.Console.close();
-    })
     
-    // while(getGameResult(input)){}
+    
+    let is_game_over = 0;
+    while(!is_game_over){
+
+      const game_num = [];
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+        console.log(input);
+        MissionUtils.Console.close();
+
+        try {
+          this.checkInput(input);
+        } catch(e) {
+          console.error(e);
+        }
+
+      })
+
+      // this.getGameResult(computer_num, game_num);
+      // is_game_over = 1;
+    }
 
   }
 
