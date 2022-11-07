@@ -90,8 +90,8 @@ class App {
 
   // 기능 5
   countBallAndStrike(computerNumber, userNumber) {
-    const computerNumberList = Array.from(computerNumber);
-    const userNumberList = Array.from(userNumber);
+    const computerNumberList = [...computerNumber];
+    const userNumberList = [...userNumber];
     let ballOrStrike = NUMBER.ZERO;
     let strike = NUMBER.ZERO;
 
