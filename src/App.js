@@ -10,20 +10,31 @@ const {
   MISSION_COMPLETE,
   GAME_RESTART,
 } = require('./Constant');
+
 class App {
   userNumber;
   computerNumber;
 
+  play() {
+    Console.print(GAME_START_TEXT);
+    this.gameStart();
+  }
+
+  /** gameStart()를 따로 메소드로 뺀 이유는 재시작할 때, "숫자 야구 게임을 시작합니다."라는 문구를 요구사항 예시에 맞게 제외하고 시작하기 위해  */
+  gameStart() {
+    this.getRandomNumber();
+    this.getUserNumber();
+  }
+
   getRandomNumber() {
-    let computerArr = [];
-    while (computerArr.length < 3) {
+    let computerNumberArr = [];
+    while (computerNumberArr.length < THREE) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerArr.includes(randomNumber)) {
-        computerArr.push(randomNumber);
+      if (!computerNumberArr.includes(randomNumber)) {
+        computerNumberArr.push(randomNumber);
       }
     }
-
-    this.computerNumber = computerArr.join('');
+    this.computerNumber = computerNumberArr.join('');
   }
 
   getUserNumber() {
@@ -35,29 +46,30 @@ class App {
     });
   }
 
+  // * 사용자 수가 옳은 입력인지 확인
   userNumberIsValid(input) {
-    const repeatInput = [...new Set(input)];
+    const duplicateRemoveArr = [...new Set(input)];
     if (
       input < 0 ||
       input.includes(0) ||
       isNaN(input) ||
       String(input).length !== THREE ||
-      repeatInput.length !== THREE
+      duplicateRemoveArr.length !== THREE
     ) {
       throw new Error(ERROR_TEXT);
     } else return;
   }
 
   compareNumbers(computerNumber, userNumber) {
-    const computerList = this.computerNumber.split('');
-    const userList = this.userNumber.split('');
+    const computerNumberList = this.computerNumber.split('');
+    const userNumberList = this.userNumber.split('');
     let strike = 0;
     let ball = 0;
 
     for (let i = 0; i < THREE; i++) {
-      if (computerList.indexOf(userList[i]) === i) {
+      if (computerNumberList.indexOf(userNumberList[i]) === i) {
         strike += 1;
-      } else if (computerList.includes(userList[i])) {
+      } else if (computerNumberList.includes(userNumberList[i])) {
         ball += 1;
       }
     }
@@ -66,7 +78,6 @@ class App {
 
   displayResult(strike, ball) {
     let result = '';
-
     if (strike === 0 && ball === 0) {
       result = '낫싱';
     } else {
@@ -91,24 +102,14 @@ class App {
   }
 
   restartGameCheck() {
-    Console.readLine(GAME_RESTART, number => {
-      if (Number(number) === 1) {
+    Console.readLine(GAME_RESTART, option => {
+      if (Number(option) === 1) {
         this.gameStart();
       }
-      if (Number(number) === 2) {
+      if (Number(option) === 2) {
         Console.close();
       }
     });
-  }
-
-  gameStart() {
-    this.getRandomNumber();
-    this.getUserNumber();
-  }
-
-  play() {
-    Console.print(GAME_START_TEXT);
-    this.gameStart();
   }
 }
 
