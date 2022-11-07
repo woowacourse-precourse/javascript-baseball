@@ -36,6 +36,13 @@ class App {
 
   gameOver() {
     printGameover();
+    this.getUserRestartInput();
+  }
+
+  getUserRestartInput() {
+    Console.readLine(`${Message.restart}`, (userRestartInput) => {
+      console.log(userRestartInput);
+    });
   }
 }
 
