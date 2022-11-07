@@ -22,6 +22,16 @@ class Validation {
       this.isUserGuessInputValid = false;
     }
   }
+
+  /**
+   * 유저가 제시한 수가 valid 한지 여부를 return 한다.
+   * @param {string[]} userGuessInput [유저가 제시한 수]
+   * @return {boolean} [valid 여부]
+   */
+  getIsUserGuessInputValid(userGuessInput) {
+    this.checkUserGuessInputValid(userGuessInput);
+    return this.isUserGuessInputValid;
+  }
 }
 
 module.exports = Validation;
