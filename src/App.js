@@ -57,6 +57,7 @@ class App {
 
     if (userRestartInput === "2") {
       Console.print("게임 종료");
+      Console.close();
     }
   }
 }
