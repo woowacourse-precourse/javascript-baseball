@@ -1,6 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  // 입력값 확인
+  checkAnswer(user) {
+    if (user.length !== 3) throw new Error("입력 개수는 3개입니다!");
+    else if ([...new Set(user)] !== 3) throw new Error("중복 입력입니다!");
+  }
+
+  // 사용자 입력
+  userPlay() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      const user = answer.split('');
+      this.checkAnswer(user);
+      user.map(e => this.user.push(parseInt(e)));
+    });
+  }
+
   // 컴퓨터 랜덤으로 서로 다른 세 숫자 받기
   computerSet() {
     const computer = [];
