@@ -49,10 +49,26 @@ class App {
 
   /**
    * 사용자가 입력한 값을 평가합니다.
-   * @param {string} correctNumbers
-   * @param {string} receivedNumbers
+   * @param {string} correct
+   * @param {string} received
    */
-  gradeInput(correctNumbers, receivedNumbers) {}
+  gradeInput(correct, received) {
+    // 볼, 스트라이크 점수를 담을 배열
+    let points = [0, 0];
+
+    // 정답일 경우
+    if (correct === received) {
+      // 메시지 출력 함수로 [0, 3] 인자 전달;
+    }
+
+    // 같은 수가 존재하는 경우
+    for (let i = 0; i < 3; i++) {
+      if (correct[i] === received[i]) points[1]++;
+      else if (received.indexOf(correct[i]) >= 0) points[0]++;
+    }
+
+    // 메시지 출력 함수로 points를 인자로 전달
+  }
 }
 
 const app = new App();
