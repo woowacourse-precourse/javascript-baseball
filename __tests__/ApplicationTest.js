@@ -4,8 +4,8 @@ const App = require('../src/App');
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce(async (question, callback) => {
-      await callback(input);
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
     });
   }, MissionUtils.Console.readLine);
 };
@@ -54,9 +54,9 @@ describe('숫자 야구 게임', () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    expect(async () => {
+    expect(() => {
       const app = new App();
-      await app.play();
-    }).rejects.toThrow();
+      app.play();
+    }).toThrow();
   });
 });
