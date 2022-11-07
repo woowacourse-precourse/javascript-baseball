@@ -69,7 +69,20 @@ class App {
   }
 
   end(strike) {
-    if (strike !== 3) {
+    if (strike === 3) {
+      MissionUtils.Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+        (input) => {
+          if (input === '1') {
+            this.createNumberList();
+            this.process();
+          }
+          if (input === '2') {
+            MissionUtils.Console.close();
+          }
+        }
+      );
+    } else {
       this.process();
     }
   }
