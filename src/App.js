@@ -27,6 +27,8 @@ class App {
   takeGuess() {
     Console.readLine('숫자를 입력해주세요 : ', (guess) => {
       if (this.isInvalidGuess(guess)) {
+        this.close()
+
         throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.')
       }
 
