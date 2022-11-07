@@ -53,7 +53,7 @@ class BaseBallGame{
                 throw new Error("올바르지 않은 값이 입력됐습니다.");
             }
         });
-    };
+    }
 
     makeThreeUniqueRandomNumber = () => {
         let pickNumber;
@@ -100,28 +100,23 @@ class BaseBallGame{
         });
     }
 
-    printResult = () => {
+    selectedMessage = () => {
         let message = "";
-        if (this.score["strike"] === 3){
-            MissionUtils.Console.print(`${this.score["strike"]}스트라이크`);
-            this.printCorrectMessage();
-        }else {
-            if (!(this.score["strike"] + this.score["ball"])){
-                message = "낫싱";
-            }
-            
-            if (this.score["ball"] && this.score["strike"]){
-                message = `${this.score["ball"]}볼 `;
-            }else if(this.score["ball"] && !this.score["strike"]){
-                message = `${this.score["ball"]}볼`;
-            }
-            
-            if (this.score["strike"]){
-                message += `${this.score["strike"]}스트라이크`;
-            }
-            MissionUtils.Console.print(message);
-            this.enterUserInput();
-        }
+        
+        if (!(this.score["strike"] + this.score["ball"])) message = "낫싱";
+    
+        if (this.score["strike"] === 3) message = `${this.score["strike"]}스트라이크`;
+        
+        if (this.score["ball"]) message = `${this.score["ball"]}볼 `;
+       
+        if (this.score["strike"]) message += `${this.score["strike"]}스트라이크`;
+        
+        return message;
+    }
+
+    printResult = () => {
+        MissionUtils.Console.print(this.selectedMessage());
+        this.score["strike"] === 3 ? this.printCorrectMessage() : this.enterUserInput();
     }
 }
 
