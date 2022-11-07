@@ -25,6 +25,23 @@ class App {
     });
   }
 
+  compare(userValue, computerValue) {
+    let strike = 0;
+    let ball = 0;
+    const INCLUDED_VALUE = computerValue.filter((num) =>
+      userValue.includes(num)
+    );
+    for (let index = 0; index < 3; index++) {
+      if (userValue[index] === computerValue[index]) {
+        strike++;
+      }
+      if (INCLUDED_VALUE.length !== strike) {
+        ball = INCLUDED_VALUE.length - strike;
+      }
+    }
+    return this.result(strike, ball);
+  }
+
   play() {}
 }
 
