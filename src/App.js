@@ -10,7 +10,7 @@ class App {
     this.repit = false;
     const computer = this.getComputerNumber();
     while (this.game) {
-      this.compare(computer);
+      this.compareNumber(computer);
     }
   }
 
@@ -26,7 +26,7 @@ class App {
     return computerNumber;
   }
 
-  compare(computer) {
+  compareNumber(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요", (answer) => {
       const userNumber = this.checkNumber(answer);
       MissionUtils.Console.print(`숫자를 입력해주세요 : ${answer}`);
