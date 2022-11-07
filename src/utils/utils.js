@@ -47,6 +47,39 @@ class Utils {
     }
     return Array.from(randomNumberSet);
   }
+
+  static compareNumbers(computerRandomNumbers, userInputNumber) {
+    let arrUserInputNumber = Array.from(String(userInputNumber), Number);
+    this.strikeBallCount = arrUserInputNumber.reduce((strikeBall, number) => {
+      if (Utils.#isStrike(computerRandomNumbers, arrUserInputNumber, number)) {
+        strikeBall["strike"] = (strikeBall["strike"] ?? 0) + 1;
+        return strikeBall;
+      } else if (
+        Utils.#isBall(computerRandomNumbers, arrUserInputNumber, number)
+      ) {
+        strikeBall["ball"] = (strikeBall["ball"] ?? 0) + 1;
+        return strikeBall;
+      } else {
+        return strikeBall;
+      }
+    }, {});
+    return this.strikeBallCount;
+  }
+
+  static #isStrike(computerRandomNumbers, arrUserInputNumber, number) {
+    return (
+      computerRandomNumbers.indexOf(number) ===
+      arrUserInputNumber.indexOf(number)
+    );
+  }
+
+  static #isBall(computerRandomNumbers, arrUserInputNumber, number) {
+    return (
+      computerRandomNumbers.indexOf(number) !==
+        arrUserInputNumber.indexOf(number) &&
+      computerRandomNumbers.includes(number)
+    );
+  }
 }
 
 module.exports = Utils;
