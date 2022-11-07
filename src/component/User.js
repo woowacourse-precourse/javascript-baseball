@@ -29,3 +29,5 @@ class User {
     return isZeroExist === false;
   }
 }
+
+module.exports = User;
