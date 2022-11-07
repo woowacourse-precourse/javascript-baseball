@@ -59,4 +59,53 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("예외 테스트2", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["121"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("랜덤 숫자 중복 테스트", () => {
+    const randoms = [1, 2, 2, 1, 2, 9];
+    const answers = ["987", "259", "329", "129", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "1볼",
+      "1볼 1스트라이크",
+      "2스트라이크",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("재시작 예외 테스트", () => {
+    const randoms = [3, 4, 5];
+    const answers = ["345", '3'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
