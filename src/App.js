@@ -47,16 +47,18 @@ class App {
       userNumberCipher < userNumberInput.length;
       userNumberCipher++
     ) {
-      const COMPARE = userNumberInput.indexOf(
-        COMPUTER_NUMBER[userNumberCipher]
-      );
-      if (COMPARE > -1 && COMPARE === userNumberCipher) {
-        strikeBallCount[0] += 1;
-      } else if (COMPARE > -1 && COMPARE != userNumberCipher) {
-        strikeBallCount[1] += 1;
-      }
+      this.countStrikeBall(COMPUTER_NUMBER, userNumberInput, userNumberCipher);
     }
     this.strikeBallResult(strikeBallCount);
+  }
+
+  countStrikeBall(COMPUTER_NUMBER, userNumberInput, userNumberCipher) {
+    const COMPARE = userNumberInput.indexOf(COMPUTER_NUMBER[userNumberCipher]);
+    if (COMPARE > -1 && COMPARE === userNumberCipher) {
+      strikeBallCount[0] += 1;
+    } else if (COMPARE > -1 && COMPARE != userNumberCipher) {
+      strikeBallCount[1] += 1;
+    }
   }
 
   strikeBallResult(strikeBallCount) {
