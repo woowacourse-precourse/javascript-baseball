@@ -60,10 +60,6 @@ class Game {
         });
     }
 
-    pickedWrongChoice() {
-        
-    }
-
     pickedRestart() {
         this.computersNumber = new Computer().pickedNum();
         this.playGame();
