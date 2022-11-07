@@ -41,12 +41,13 @@ class App {
     this.print(MESSAGE.GAME_END);
 
     Console.readLine(MESSAGE.RESTART, (userinput) => {
-      if (userinput !== 1 || userinput !== 2) {
+      if (userinput !== "1" && userinput !== "2") {
         return this.throwError();
       }
-      if (userinput === 1) {
+      if (userinput === "1") {
         return this.play();
       }
+      this.print(MESSAGE.END);
       return Console.close();
     });
   }
