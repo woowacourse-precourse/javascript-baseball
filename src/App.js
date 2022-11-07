@@ -33,6 +33,7 @@ class App {
       Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
         (ans) => {
+          Console.print(typeof ans);
           ans = Number(ans);
           if (ans === 1) {
             this.play();
@@ -53,11 +54,17 @@ class App {
     return ballString + strikeString;
   }
   /**
-   * 
+   * 사용자 입력이 3자리이고, 모두 숫자일때(아스키코드)
+   * 정답 맞췄을 때, 입력 숫자가 1자리이고, 숫자일 때
    */
-  handleException() {
-
+  handleGameEndException(ans) {
+    let ansAscii = ans.charCodeAt(0);
+    if (ansAscii === 49 || ansAscii === 48) {
+      return Number(ans);
+    }
+    throw "exception";
   }
+  handleUserNumException() {}
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.createRandomNumber();
