@@ -42,7 +42,7 @@ class App {
     Console.readLine(MENT.INPUT, (answer) => {
       this.userAnswer = parseInt(answer);
       try {
-        this.answerChecker();
+        this.answerChecker(this.userAnswer);
         this.resultPrint(this.compareUserAnswer());
         this.play();
       } catch (e) {
@@ -52,10 +52,9 @@ class App {
     });
   }
 
-  answerChecker() {
-    if (this.userAnswer < 100 || this.userAnswer > 999) throw "not number";
-    if (new Set(String(this.userAnswer).split("")).size !== 3)
-      throw "not number";
+  answerChecker(answer) {
+    if (answer < 100 || answer > 999) throw "not number";
+    if (new Set(String(answer).split("")).size !== 3) throw "not number";
     return;
   }
 
