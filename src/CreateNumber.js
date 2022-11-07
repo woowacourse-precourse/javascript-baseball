@@ -1,15 +1,16 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const {Random} = require("@woowacourse/mission-utils");
 
 class CreateNumber {
+  constructor(){
+    this.pickNumber = [];
+  }
  pickedComputerNumber() {
-    let pickNumber = [];
-    while (pickNumber.length < 3) {
-      let computerNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!pickNumber.includes(computerNumber)){
-        pickNumber.push(computerNumber);
+    while (this.pickNumber.length < 3) {
+      let computerNumber = Random.pickNumberInRange(1, 9);
+      if (!this.pickNumber.includes(computerNumber)){
+        this.pickNumber.push(computerNumber);
     }
   }
-  return pickNumber;
   }
 }
 
