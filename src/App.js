@@ -15,6 +15,8 @@ class App {
   constructor() {
     this.answer = undefined;
     this.input = undefined;
+    this.ball = 0;
+    this.strike = 0;
   }
 
   play() {
@@ -38,9 +40,19 @@ class App {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다. 3자리 수를 입력해주세요. ' });
     }
     const inputDigit = this.input.split('').map(Number);
-    if (new Set(inputDigit) !== 3) {
+    if (new Set(inputDigit).size !== 3) {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다. 서로 다른 3자리 수를 입력해주세요. ' });
     }
+    return this.getResult();
+  }
+
+  getResult() {
+    this.ball = 0;
+    this.strike = 0;
+    if (this.answer === this.input) {
+      return MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다!');
+    }
+    return this.getUserInput();
   }
 }
 const app = new App();
