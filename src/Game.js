@@ -8,6 +8,7 @@ class Game {
   start(randomNumber) {
     let playerNumber;
     let insertingNumber = true;
+    let isContinue = true;
 
     while (insertingNumber) {
       MissionUtils.Console.readLine("", (inputNumber) => {
@@ -25,7 +26,9 @@ class Game {
       }
     }
 
-    return;
+    isContinue = this.over();
+
+    return isContinue;
   }
 
   over() {}
@@ -64,7 +67,17 @@ class Game {
     return result[0] === 3 ? false : true;
   }
 
-  displayResult(result) {}
+  displayResult(result) {
+    if (result[1] > 0 && result[0] > 0) {
+      MissionUtils.Console.print(result[1] + "볼 " + result[0] + "스트라이크");
+    } else if (result[0] > 0) {
+      MissionUtils.Console.print(result[0] + "스트라이크");
+    } else if (result[1] > 0) {
+      MissionUtils.Console.print(result[1] + "볼 ");
+    } else {
+      MissionUtils.Console.print("낫싱");
+    }
+  }
 
   compareNumber(computer, player, result) {
     let score = result;
