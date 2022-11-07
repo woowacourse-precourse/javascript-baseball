@@ -12,7 +12,13 @@ class App {
   constructor() {
     this.#userInput = '';
     this.#answer = '';
+    this.result = {};
 
+    this.resultAssert = {
+      assertStrike: (number, index) => this.#answer[index] === number,
+      assertBall: (number, index) =>
+        this.#answer[index] !== number && this.#answer.includes(number),
+    };
     this.inputAssert = {
       assertLength: (input) => input.length === length,
       assertInteger: (input) => Number.isInteger(+input),
