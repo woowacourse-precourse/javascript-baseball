@@ -1,14 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class User {
-  inputValue;
   game;
   constructor() {
-    this.input();
     this.game = new BaseBallGame();
+    this.input();
   }
   input() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      this.inputValue = answer;
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
+      this.game.getStrikeCount(inputAnswer);
     })
   }
 }
@@ -21,8 +20,18 @@ class BaseBallGame {
   init() {
     this.answer = Array.from(Array(3),() => MissionUtils.Random.pickNumberInRange(1, 9));
   }
-  numberToArray(inputValue) {
-    return Array.from(inputValue.toString(),(num)=>Number(num));
+  numberToArray(inputAnswer) {
+    return Array.from(inputAnswer.toString(),(num)=>Number(num));
+  }
+  getStrikeCount(inputAnswer){
+    const inputAnswerArray = this.numberToArray(inputAnswer);
+    const strikeCount = 0;
+    inputAnswerArray.forEach((number,index) => {
+      if(number === this.answer[index]){
+        strikeCount = strikeCount + 1;
+      }
+    })
+    return strikeCount;
   }
 }
 
@@ -33,5 +42,4 @@ class App {
   }
 }
 
-new App().play();
 module.exports = App;
