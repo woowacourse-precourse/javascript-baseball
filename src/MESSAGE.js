@@ -6,5 +6,8 @@ const MESSAGE = {
   BALL: '볼',
   STRIKE: '스트라이크',
   NOTHING: '낫싱',
+  GAMERESTART: '1',
+  INITINPUT: 'INITSTR',
+  INPUTQA: '숫자를 입력하세요:',
 };
 module.exports = MESSAGE;
