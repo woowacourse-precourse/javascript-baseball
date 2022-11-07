@@ -77,6 +77,14 @@ class App {
     }
     return answer;
   };
+
+  checkStrike(score) {
+    if (score[0] == 3) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 }
 
 module.exports = App;
