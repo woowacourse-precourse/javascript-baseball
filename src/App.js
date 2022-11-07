@@ -65,7 +65,7 @@ function createResultString() {
     result += (result) + "볼 ";
   if(strike === 0 && ball === 0)
     result += "낫싱";
-  result = result.slice(0, -1);
+  result = result.replace(/\s*$/, "");
   announceResult();
 }
 
