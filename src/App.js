@@ -24,9 +24,30 @@ class App {
     MissionUtils.Console.readLine(`숫자를 입력해주세요 : `, number => {
       if(isNumber(number)) {
         checkStrike(computer, number)
+        this.checkBall(computer, number)
       }
     });
   }
+
+  checkBall(computer, user) {
+    let countBall = 0;
+  
+    Array.from(user, Number).map((currentValue, index) => {
+      if (
+        computer.includes(currentValue) &&
+        computer.indexOf(currentValue) !== index
+      ) {
+        countBall += 1;
+      }
+  
+      return countBall;
+    });
+  
+    return MissionUtils.Console.print(countBall);
+  };
 }
+
+const app = new App()
+app.play()
 
 module.exports = App;
