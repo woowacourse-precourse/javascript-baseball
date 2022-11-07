@@ -56,32 +56,20 @@ class App {
     this.computerNumber = result;
   }
 
-  getStrikeCount(computer, user) {
-    let count = 0;
+  compareNumber(computer, user) {
+    let strike = 0;
+    let ball = 0;
+
     for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
       if (computer[i] === user[i]) {
-        count++;
+        strike++;
+        ball--;
+      }
+      if (user.includes(computer[i])) {
+        ball++;
       }
     }
-    return count;
-  }
-
-  getSameNumberCount(computerNumber, userNumber) {
-    let count = 0;
-    for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
-      if (userNumber.includes(computerNumber[i])) {
-        count++;
-      }
-    }
-    return count;
-  }
-
-  compareNumber(computerNumber, userNumber) {
-    const strike = this.getStrikeCount(computerNumber, userNumber);
-    const sameNumber = this.getSameNumberCount(computerNumber, userNumber);
-    const scoreObject = { strike: strike, ball: sameNumber - strike };
-
-    return scoreObject;
+    return { strike: strike, ball: ball };
   }
 
   printScore(scoreObject) {
