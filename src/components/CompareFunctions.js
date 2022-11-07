@@ -11,6 +11,10 @@ const compareNumber = (answer, playerInput) => {
   const balls = getBalls(answer, inputArray);
 };
 
+const isAnswer = (answer, playerInput) => {
+  return answer === playerInput;
+};
+
 const countStrikes = (number, index, answer) => {
   let strike = 0;
   if (number === answer[index]) {
