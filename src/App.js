@@ -79,7 +79,7 @@ class App {
     return message;
   };
 
-  getResult = (ANSWER, input) => {
+  getResultScore = (ANSWER, input) => {
     let strike = 0;
     let ball = 0;
     let nothing = true;
@@ -96,7 +96,7 @@ class App {
   };
 
   printResult = (ANSWER, input) => {
-    const [strike, ball, nothing] = this.getResult(ANSWER, input);
+    const [strike, ball, nothing] = this.getResultScore(ANSWER, input);
 
     const resultMessage = this.getResultMessage(strike, ball, nothing);
     MissionUtils.Console.print(resultMessage);
