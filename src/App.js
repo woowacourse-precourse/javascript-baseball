@@ -22,17 +22,7 @@ class App {
       }
       else if (this.countStrike === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n', (userResponse)=>{
-          if (userResponse === '1') {
-            this.countStrike = 0;
-            this.countBall = 0;
-            this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-            this.play();
-          }
-          else if (userResponse === '2') {
-            MissionUtils.Console.close();
-          }
-        });
+        this.gameRestart();
       }
     });
   }
@@ -64,7 +54,21 @@ class App {
     else if ( this.countStrike + this.countBall === 0) {
       MissionUtils.Console.print('낫싱');
     }
- }   
+ }
+
+ gameRestart(){
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n', (userResponse)=>{
+    if (userResponse === '1') {
+      this.countStrike = 0;
+      this.countBall = 0;
+      this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+      this.play();
+    }
+    else if (userResponse === '2') {
+      MissionUtils.Console.close();
+    }
+  });
+ }
 
 }
 
