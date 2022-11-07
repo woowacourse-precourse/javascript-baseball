@@ -5,6 +5,21 @@ function printGameStart() {
     MissionUtils.Console.print(GAME_START_MESSAGE);
 }
 
+function printBallAndStrike(ball, strike){
+    if(ball > 0 && strike > 0){
+        printBoth(ball, strike);
+    }
+    else if(ball > 0){
+        printNumOfBall(ball);
+    }
+    else if(strike > 0){
+        printNumOfStrike(strike);
+    }
+    else if(ball === 0 && strike === 0){
+        printNothing();
+    }
+}
+
 function printBoth(numOfBall, numOfStrike) {
     const NUM_OF_BALL = `${numOfBall}볼`;
     const NUM_OF_STRIKE = `${numOfStrike}스트라이크`;
