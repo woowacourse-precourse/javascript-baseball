@@ -1,3 +1,6 @@
+const COUNT_WORDS = ["볼", "스트라이크"];
+const NOTHING = "낫싱";
+
 class BallCount {
   constructor(question, answer) {
     this.strikes = this.countStrikes(question, answer);
@@ -12,7 +15,17 @@ class BallCount {
     return answer.filter((value) => question.includes(value)).length - strikes;
   }
 
-  toString() {}
+  toString() {
+    const ballCount = [this.balls, this.strikes];
+
+    return (
+      ballCount
+        .map((count, index) => [count, COUNT_WORDS[index]])
+        .filter(([count, _]) => count !== 0)
+        .map(([count, word]) => `${count}${word}`)
+        .join(" ") || NOTHING
+    );
+  }
 
   isThreeStrikes() {
     return this.strikes === 3;
