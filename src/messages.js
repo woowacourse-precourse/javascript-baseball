@@ -8,6 +8,7 @@ const Messages = Object.freeze({
   GUESS_GONG_RESULT_BALL: '볼',
   GUESS_GONG_RESULT_STRIKE: '스트라이크',
   GUESS_GONG_RESULT_NOTHING: '낫싱',
+  GUESS_GONG_RESULT_SUCCESS: '3개의 숫자를 모두 맞혔습니다! 게임 종료',
 });
 
 module.exports = Messages;

@@ -37,6 +37,11 @@ class Game {
           .join(' ') || Messages.GUESS_GONG_RESULT_NOTHING;
 
       print(guessResult);
+
+      if (strike === 3) {
+        print(Messages.GUESS_GONG_RESULT_SUCCESS);
+        break;
+      }
     }
   }
 }
