@@ -10,8 +10,15 @@ function createAnswer() {
   }
   return computer.join('');
 }
+
 class App {
+  constructor() {
+    this.answer = undefined;
+    this.input = undefined;
+  }
+
   play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.answer = createAnswer();
   }
 }
