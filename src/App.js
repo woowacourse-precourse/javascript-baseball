@@ -39,7 +39,17 @@ class App {
   compareNumber() {
     let score = [0, 0]; //[ 볼, 스트라이크]
     this.isStrike(this.computerInput, this.userInput, score);
-    console.log(`${score[0]} 볼 ${score[1]} 스트라이크`);
+
+    let result = "";
+    if (score[0] === 0 && score[1] === 0) {
+      result = "낫싱";
+    } else if (score[1] === 3) {
+      result = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    } else {
+      result = `${score[0]}볼 ${score[1]}스트라이크`;
+    }
+
+    console.log(result);
   }
 
   isStrike(ans, input, score) {
