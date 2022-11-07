@@ -59,7 +59,15 @@ class App {
     this.endGame();
   }
 
-  calcStrike() {}
+  calcStrike(numberInput) {
+    let strikeCount = 0;
+    this._randomNumber.forEach((randomNumberEach, idx) => {
+      if (randomNumberEach === parseInt(numberInput[idx], 10)) {
+        strikeCount += 1;
+      }
+    });
+    return strikeCount;
+  }
 
   calcBall() {}
 
