@@ -1,5 +1,9 @@
 const { Random } = require("@woowacourse/mission-utils");
-const { MAX_NUMBER, ERROR_MESSAGE } = require("../constant/constant");
+const {
+  MAX_NUMBER,
+  ERROR_MESSAGE,
+  GAME_MESSAGE,
+} = require("../constant/constant");
 
 module.exports = {
   computerUniqueThreeNumbers() {
@@ -25,4 +29,40 @@ module.exports = {
       throw ERROR_MESSAGE.IS_REPETITION;
     }
   },
+  compareComputerAndUser(computerNum, userNum) {
+    const toStringComputerNum = String(computerNum).replaceAll(",", "");
+    const toStringUserNum = String(userNum);
+    let strike = 0;
+    let ball = 0;
+    for (
+      let userNumberIndex = 0;
+      userNumberIndex < toStringUserNum.length;
+      userNumberIndex++
+    ) {
+      if (
+        toStringComputerNum.indexOf(toStringUserNum[userNumberIndex]) === -1
+      ) {
+        continue;
+      }
+      if (
+        toStringUserNum[userNumberIndex] ===
+        toStringComputerNum[userNumberIndex]
+      ) {
+        strike++;
+      } else {
+        ball++;
+      }
+    }
+    if (strike === 0 && ball === 0) return GAME_MESSAGE.NOTHING;
+    const context = makeWords(strike, ball);
+    return context;
+  },
 };
+
+//내부 로직 함수
+function makeWords(strike, ball) {
+  const ballText = ball > 0 ? `${ball}${GAME_MESSAGE.BALL}` : "";
+  const strikeText = strike > 0 ? `${strike}${GAME_MESSAGE.STRIKE}` : "";
+  const space = ball > 0 && strike > 0 ? " " : "";
+  return ballText + space + strikeText;
+}

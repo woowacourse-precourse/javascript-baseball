@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const utilFun = require("./utils/utils");
-const { ANNOUNCEMENT_MESSAGE } = require("./constant/constant");
+const { ANNOUNCEMENT_MESSAGE, GAME_MESSAGE } = require("./constant/constant");
 
 class App {
   constructor() {
@@ -12,7 +12,24 @@ class App {
     this.computerRandomThreeNumber = utilFun.computerUniqueThreeNumbers();
   }
 
-  baseballGameStart() {}
+  baseballGameWin() {}
+
+  baseballGameStart() {
+    const compareResult = utilFun.compareComputerAndUser(
+      this.computerRandomThreeNumber,
+      this.userRandomThreeNumber
+    );
+    MissionUtils.Console.print(compareResult);
+    if (compareResult === GAME_MESSAGE.NOTHING) {
+      this.getUserNumbers();
+      return;
+    }
+    if (compareResult === GAME_MESSAGE.WIN) {
+      this.baseballGameWin();
+    } else {
+      this.getUserNumbers();
+    }
+  }
 
   getUserNumbers() {
     Console.readLine(ANNOUNCEMENT_MESSAGE.INPUT, (userAnswer) => {
