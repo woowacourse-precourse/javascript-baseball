@@ -1,14 +1,19 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+var strike;
+var ball;
+var resultString = "";
+var input;
+var randomNumber;
 class App {
+  
   play() {
-    var strike;
-    var ball;
-    
-    var input = setInput();
-    var randomNumber = createRandomNumber();
+    input = setInput();
+    randomNumber = createRandomNumber();
     numberCheck(input);
     judgement(input);
+    createResultString();
+    announceResult();
   }
 }
 
@@ -58,5 +63,14 @@ function ballCompare(input) {
   for(var i = 0; i < 3; i++) {
     if(randomString.includes(input)) ball++;
   }
+}
+
+function createResultString() {
+  if(strike > 0)
+    result += (result) + "스트라이크 ";
+  if(ball > 0)
+    result += (result) + "볼 ";
+  if(strike === 0 && ball === 0)
+    result += "낫싱";
 }
 module.exports = App;
