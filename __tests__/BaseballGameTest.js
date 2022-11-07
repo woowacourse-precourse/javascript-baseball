@@ -1,70 +1,60 @@
 const App = require("../src/App")
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const mockQuestions = (answers) => {
-    MissionUtils.Console.readLine = jest.fn();
-    answers.reduce((acc, input) => {
-      return acc.mockImplementationOnce((question, callback) => {
-        callback(input);
-      });
-    }, MissionUtils.Console.readLine);
-};
-  
-const mockRandoms = (numbers) => {
-    MissionUtils.Random.pickNumberInRange = jest.fn();
-    numbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
-    }, MissionUtils.Random.pickNumberInRange);
-};
+describe('내가 구현한 기능 테스트',()=>{
+  test("사용자 입력받기 예외 테스트 5가지", () => {
+    const app = new App();
+    const testResult1 = app.isValidInput('');
+    expect(testResult1).toEqual(false);
+    const testResult2 = app.isValidInput('1234');
+    expect(testResult2).toEqual(false);
+    const testResult3 = app.isValidInput('1d2');
+    expect(testResult3).toEqual(false);
+    const testResult4 = app.isValidInput('203');
+    expect(testResult4).toEqual(false);
+    const testResult5 = app.isValidInput('242');
+    expect(testResult5).toEqual(false);
+    const testResult6 = app.isValidInput('258');
+    expect(testResult6).toEqual(true);
 
-test("사용자 입력받기 예외 테스트 5가지", () => {
-    const randoms = [1, 3, 5];
-    const answers = ["","a12","112","102","1234"];
+  });
+  test("다른 자리 같은 수 일 때, hint 볼이 나오는지 테스트",()=>{
+    const app = new App();
+    const testResult1 = app.getHint([1,2,3],'451');
+    expect(testResult1).toEqual('1볼');
+    const testResult2 = app.getHint([1, 2, 3], '431');
+    expect(testResult2).toEqual('2볼');
+    const testResult3 = app.getHint([1, 2, 3], '312');
+    expect(testResult3).toEqual('3볼');
+  });
 
-    mockRandoms(randoms);
-    mockQuestions(answers);
+  test('같은 자리 같은 수 일 때, hint strike가 나오는지 테스트', () => {
+    const app = new App();
+    const testResult1 = app.getHint([1, 2, 3], '145');
+    expect(testResult1).toEqual('1스트라이크');
+    const testResult2 = app.getHint([1, 2, 3], '127');
+    expect(testResult2).toEqual('2스트라이크');
+    const testResult3 = app.getHint([1, 2, 3], '123');
+    expect(testResult3).toEqual('3스트라이크');
+  });
 
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
-});
-  
-test("다른 자리 같은 수 일 때, hint 볼이 나오는지 테스트",()=>{
-  const app = new App();
-  const testResult1 = app.getHint([1,2,3],'451');
-  expect(testResult1).toEqual('1볼');
-  const testResult2 = app.getHint([1, 2, 3], '431');
-  expect(testResult2).toEqual('2볼');
-  const testResult3 = app.getHint([1, 2, 3], '312');
-  expect(testResult3).toEqual('3볼');
-});
+  test('strike,ball 같이 있을 때 hint가 맞는지 테스트', () => {
+    const app = new App();
+    const testResult1 = app.getHint([1, 2, 3], '134');
+    expect(testResult1).toEqual('1볼 1스트라이크');
+    const testResult2 = app.getHint([1, 2, 3], '321');
+    expect(testResult2).toEqual('2볼 1스트라이크');
+  });
 
-test('같은 자리 같은 수 일 때, hint strike가 나오는지 테스트', () => {
-  const app = new App();
-  const testResult1 = app.getHint([1, 2, 3], '145');
-  expect(testResult1).toEqual('1스트라이크');
-  const testResult2 = app.getHint([1, 2, 3], '127');
-  expect(testResult2).toEqual('2스트라이크');
-  const testResult3 = app.getHint([1, 2, 3], '123');
-  expect(testResult3).toEqual('3스트라이크');
-});
+  test('사용자 입력시, isValidInput, getHint 실행 여부 확인', () => {
+    const app = new App();
+    const spyValidInput = jest.spyOn(app, "isValidInput");
+    const spyGetHint = jest.spyOn(app,"getHint");
+    app.answer = [1,2,3]
+    app.getHintOrThrowError('123');
+    expect(spyValidInput).toBeCalledTimes(1);
+    expect(spyGetHint).toBeCalledTimes(1);
+  });
+})
 
-test('strike,ball 같이 있을 때 hint가 맞는지 테스트', () => {
-  const app = new App();
-  const testResult1 = app.getHint([1, 2, 3], '134');
-  expect(testResult1).toEqual('1볼 1스트라이크');
-  const testResult2 = app.getHint([1, 2, 3], '321');
-  expect(testResult2).toEqual('2볼 1스트라이크');
-});
-
-test('사용자 입력시, isValidInput, getHint 실행 여부 확인', () => {
-  const app = new App();
-  const spyValidInput = jest.spyOn(app, "isValidInput");
-  const spyGetHint = jest.spyOn(app,"getHint");
-  app.answer = [1,2,3]
-  app.getHintOrThrowError('123');
-  expect(spyValidInput).toBeCalledTimes(1);
-  expect(spyGetHint).toBeCalledTimes(1);
-});
 
