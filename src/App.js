@@ -23,17 +23,19 @@ class App {
         random_number.push(selected_number);
       }
     }
-    this.computer_number = random_number;
+    this.changeComputerNumberToArray(random_number);
   }
   getUserInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_num) => {
       this.changeUserNumberToArray(input_num);
     });
   }
+  changeComputerNumberToArray(random_number){
+    this.computer_number = (random_number + '').split(',');
+  }
   changeUserNumberToArray(input_num){
     this.user_number = (input_num + '').split('');
   }
-
   
 }
 const app = new App;
