@@ -26,7 +26,7 @@ class App {
   input() {
     Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.checkErrorInputNumber(inputNumber);
-      this.checkStrikeInputNumber(inputNumber);
+      this.checkStrikeAndBallInputNumber(inputNumber);
     });
   }
 
@@ -46,12 +46,15 @@ class App {
     }
   }
 
-  checkStrikeInputNumber(inputNumber) {
-    let strike = 0;
+  checkStrikeAndBallInputNumber(inputNumber) {
+    let [strike, ball] = [0.0];
     let splitInputNumber = [...inputNumber];
-    splitInputNumber.forEach((ball) => {
-      if (this.computerNumber.includes(Number(ball))) {
+    splitInputNumber.forEach((number, index) => {
+      const computerNumberIndex = this.computerNumber.indexOf(number);
+      if (computerNumberIndex === index) {
         strike += 1;
+      } else if (computerNumberIndex !== -1) {
+        ball += 1;
       }
     });
   }
