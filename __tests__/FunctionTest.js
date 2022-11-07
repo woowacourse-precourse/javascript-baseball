@@ -1,14 +1,14 @@
 const App = require("../src/App");
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const app = new App();
 
 const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
+  Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((question, callback) => {
       callback(input);
     });
-  }, MissionUtils.Console.readLine);
+  }, Console.readLine);
 };
 
 const getLogSpy = () => {

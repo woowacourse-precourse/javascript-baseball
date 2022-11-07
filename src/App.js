@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const {
   INPUT_ERROR_MESSAGE,
   RESTART_MESSAGE,
@@ -32,14 +32,14 @@ class App {
   }
 
   consolePrinter(message) {
-    MissionUtils.Console.print(message);
+    Console.print(message);
   }
 
   refNumbersArrayGetter() {
     const refNumbers = [];
 
     while (refNumbers.length < 3) {
-      const targetNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      const targetNumber = Random.pickNumberInRange(1, 9);
       if (!refNumbers.includes(targetNumber)) {
         refNumbers.push(targetNumber);
       }
@@ -95,12 +95,12 @@ class App {
   }
 
   reStartSelector() {
-    MissionUtils.Console.readLine(RESTART_MESSAGE.QUESTION, (answer) => {
+    Console.readLine(RESTART_MESSAGE.QUESTION, (answer) => {
       if (answer.trim() === "1") {
         const newRefNumbersArray = this.refNumbersArrayGetter();
         this.gameStarter(newRefNumbersArray);
       } else if (answer.trim() === "2") {
-        MissionUtils.Console.close();
+        Console.close();
       } else {
         throw RESTART_MESSAGE.ERROR;
       }
@@ -108,7 +108,7 @@ class App {
   }
 
   gameStarter(refNumbersArray) {
-    MissionUtils.Console.readLine(BASE_MESSAGE.INPUT_REQUEST, (answer) => {
+    Console.readLine(BASE_MESSAGE.INPUT_REQUEST, (answer) => {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
       const userNumbersArray = this.stringToNumberArrayConverter(usersInput);
