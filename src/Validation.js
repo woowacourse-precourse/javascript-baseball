@@ -1,40 +1,33 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const {
-  GAME_CONFIG_NUMBER,
-  ERROR_CHECK,
-  INGAME_MESSAGE,
-  GAME_RESULT,
-  RESPONSE,
-} = require("./Constant");
+const { INGAME_MESSAGE } = require("./Constant");
 
 class Validation {
-  checkAll(input) {
-    this.checkNumber(input);
-    this.checkLength(input);
-    this.checkRepeat(input);
+  checkAll(inputArray) {
+    this.checkNumber(inputArray);
+    this.checkLength(inputArray);
+    this.checkRepeat(inputArray);
   }
 
-  checkLength(input) {
-    if (input.length !== 3) {
+  checkLength(inputArray) {
+    if (inputArray.length !== 3) {
       throw INGAME_MESSAGE.ERROR;
     }
   }
 
-  checkNumber(input) {
+  checkNumber(inputArray) {
     if (
-      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(input[0]) ||
-      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(input[1]) ||
-      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(input[2])
+      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[0]) ||
+      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[1]) ||
+      ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[2])
     ) {
       throw INGAME_MESSAGE.ERROR;
     }
   }
 
-  checkRepeat(input) {
+  checkRepeat(inputArray) {
     if (
-      input[0] === input[1] ||
-      input[1] === input[2] ||
-      input[2] === input[0]
+      inputArray[0] === inputArray[1] ||
+      inputArray[1] === inputArray[2] ||
+      inputArray[2] === inputArray[0]
     ) {
       throw INGAME_MESSAGE.ERROR;
     }
