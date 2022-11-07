@@ -144,11 +144,17 @@ class App {
     return numberOfBall;
   }
   printGameResultMessage(numberOfStrike, numberOfBall) {
-    const GAME_RESULT_MESSAGE = `${numberOfBall}볼 ${numberOfStrike}스트라이크`;
+    const BALL_MESSAGE = `${numberOfBall}볼`;
+    const STRIKE_MESSAGE = `${numberOfStrike}스트라이크`;
+    const BOTH_MESSAGE = `${BALL_MESSAGE} ${STRIKE_MESSAGE}`;
     const NOTHING_MESSAGE = "낫싱";
 
-    if (numberOfBall || numberOfStrike) {
-      MissionUtils.Console.print(GAME_RESULT_MESSAGE);
+    if (numberOfBall && numberOfStrike) {
+      MissionUtils.Console.print(BOTH_MESSAGE);
+    } else if (numberOfBall) {
+      MissionUtils.Console.print(BALL_MESSAGE);
+    } else if (numberOfStrike) {
+      MissionUtils.Console.print(STRIKE_MESSAGE);
     } else {
       MissionUtils.Console.print(NOTHING_MESSAGE);
     }
