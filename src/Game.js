@@ -81,20 +81,28 @@ class Game{
         MissionUtils.Console.print(message);
         if (strike === 3) {
             MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            MissionUtils.Console.readLine("",(num) => {
+                this.afterGameEnd(num);
+            })
         }
         else{
             this.getUserInput();
         }
     }
 
-
-
-    
-
-    
-   
-    
-    
+    afterGameEnd(num){
+        if(num === '1'){
+            this.play();
+        }
+        else if(num === '2'){
+            MissionUtils.Console.print("게임 종료");
+            MissionUtils.Console.close();
+        }
+        else{
+            throw "1또는 2를 입력 해주세요."
+        }
+    }
 }
 
 const game = new Game();
