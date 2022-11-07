@@ -47,9 +47,48 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트 (세 자릿수가 아닐 경우)", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 (숫자가 아닐 경우)", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["string"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 (1보다 작을 경우)", () => {
+    const randoms = [1, 3, 5];
+    const answers = [-123];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 (0이 포함될 경우)", () => {
+    const randoms = [1, 3, 5];
+    const answers = [102];
 
     mockRandoms(randoms);
     mockQuestions(answers);
