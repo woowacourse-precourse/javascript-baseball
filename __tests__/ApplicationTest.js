@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const Console = require("../src/Console");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -60,12 +61,34 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 });
-// test("게임이 실행되면 '숫자 야구 게임을 시작합니다.'라는 문구를 출력한다.", () => {
-//   const logSpy = getLogSpy();
-//   const app = new App();
-//   app.play();
-//   expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
-// });
+
+describe("Console", () => {
+  test("readLine", () => {
+    const readLineSpy = jest.spyOn(MissionUtils.Console, "readLine");
+    const callback = jest.fn();
+
+    Console.readLine("question", callback);
+
+    expect(readLineSpy).toHaveBeenCalledWith("question", callback);
+  });
+
+  test("print", () => {
+    const printSpy = jest.spyOn(MissionUtils.Console, "print");
+
+    Console.print("message");
+
+    expect(printSpy).toHaveBeenCalledWith("message");
+  });
+
+  test("close", () => {
+    const closeSpy = jest.spyOn(MissionUtils.Console, "close");
+
+    Console.close();
+
+    expect(closeSpy).toHaveBeenCalled();
+  });
+});
+
 // test("게임이 실행되면 숫자 야구 게임의 정답을 생성한다.", () => {
 //   const app = new App();
 //   const answer = app.ANSWER;

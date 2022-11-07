@@ -59,7 +59,6 @@ class App {
 
   generateAnswer() {
     while (this.answer.length !== 0) this.answer.shift();
-
     while (this.answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) this.answer.push(number);
@@ -79,7 +78,5 @@ class App {
     });
   }
 }
-
-// new App().play();
 
 module.exports = App;
