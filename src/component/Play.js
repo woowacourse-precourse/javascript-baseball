@@ -14,6 +14,14 @@ class Play {
       },
       0
     );
+
+    const countBall = splitComputerNum.reduce((countBall, currNum, index) => {
+      const currNumIndex = splitUserInput.indexOf(currNum);
+      const isBall = currNumIndex !== -1 && currNumIndex !== index;
+      if (isBall) countBall += 1;
+
+      return countBall;
+    }, 0);
   }
 }
 
