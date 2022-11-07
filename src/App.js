@@ -16,7 +16,7 @@ function App () {
   };
   
   function printNewGameInterface () {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   function startGame () {
@@ -24,12 +24,12 @@ function App () {
   }
 
   function getUserAnswer () {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if(isValidInput(answer)){
         getScore(matchNumber(answer, this.randomNumber));
         return;
       }
-      throw '올바른 값을 입력하세요.';
+      throw "올바른 값을 입력하세요.";
     });
   }
 
@@ -37,10 +37,10 @@ function App () {
     let strike = 0;
     let ball = 0;
     const userInput = num1
-      .split('')
+      .split("")
       .map(char => Number(char));
     const computerInput = num2
-      .split('')
+      .split("")
       .map(char => Number(char));
 
     userInput.forEach((element, index) => {
@@ -77,7 +77,7 @@ function App () {
             MissionUtils.Console.close();
             return;
           } 
-          throw '올바른 값을 입력하세요.';
+          throw "올바른 값을 입력하세요.";
         }
       );
       return;
@@ -105,7 +105,7 @@ const getRandomNumber = (min, max) => {
       randomNumberArray.push(randomNumber);
     }
   }
-  return randomNumberArray.join('');
+  return randomNumberArray.join("");
 };
 
 
