@@ -72,6 +72,7 @@ class App {
 
     if (input == 1) {
       this.getComputerAndUser();
+      this.getNumberComputerAndUser();
     }
 
     if (input == 2) {
@@ -161,6 +162,7 @@ class App {
   play() {
     STD.print(`숫자 야구 게임을 시작합니다.`);
     this.getComputerAndUser();
+    this.getNumberComputerAndUser();
    }
  
 }
