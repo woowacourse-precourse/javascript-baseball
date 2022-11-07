@@ -28,20 +28,20 @@ class User {
     return true;
   }
 
-  getUserInputArr() {
+  getUserInput() {
     return new Promise((resolve) => {
-      MissionUtils.Console.readLine(
-        "숫자를 입력해주세요 : ",
-        (userInputArr) => {
-          userInputArr = Array.from(String(userInputArr));
-          userInputArr = userInputArr.map((num) => Number(num));
-          resolve(userInputArr);
-          if (this.checkUserInputValid(userInputArr)) {
-            return userInputArr;
-          }
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+        resolve((userInput = this.convertNumToArr(userInput)));
+        if (this.checkUserInputValid(userInput)) {
+          return userInput;
         }
-      );
+      });
     });
+  }
+
+  convertNumToArr(num) {
+    const ARR = Array.from(String(num)).map((num) => Number(num));
+    return ARR;
   }
 }
 

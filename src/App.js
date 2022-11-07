@@ -22,7 +22,7 @@ class App {
     const COMPUTER = new Computer();
     const COMPUTER_ANSWER = COMPUTER.generateDifferRandomNumArr(3);
     while (this.isPlaying) {
-      const USER_INPUT = await USER.getUserInputArr();
+      const USER_INPUT = await USER.getUserInput();
       const RESULT = COMPUTER.scoreUserInput(COMPUTER_ANSWER, USER_INPUT);
       this.isPlaying = COMPUTER.getHintOfAnswer(RESULT);
     }
