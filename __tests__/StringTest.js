@@ -34,4 +34,18 @@ describe("문자열 테스트", () => {
 
     expect(result).toThrow(RangeError);
   });
+
+  test("문자형 숫자를 숫자 배열로 변환", () => {
+    let input = "123";
+    const result = Array.from(input, Number);
+
+    expect(result).toEqual([1, 2, 3]);
+  });
+
+  test("중복 값 제거", () => {
+    const input = [1, 2, 3, 3];
+    const result = [...new Set(input)];
+
+    expect(result).toEqual([1, 2, 3]);
+  });
 });
