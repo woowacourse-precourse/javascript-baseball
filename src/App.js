@@ -1,16 +1,13 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { validateThreeFigures, validateNextAction } = require("./modules/validation");
+const { showStartMessage, showCountMessage, showCorrectMessage, showNothingMessage } = require("./modules/showMessage");
 
 class App {
   play() {
-    this.showStartMessage();
+    showStartMessage();
     const randomNumber = this.makeRandomNumber();
     console.log(randomNumber);
     this.getUsersPrediction(randomNumber);
-  }
-
-  showStartMessage() {
-    Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   makeRandomNumber() {
@@ -33,14 +30,14 @@ class App {
       const convertedNumber = prediction.split('').map(Number);
       console.log(convertedNumber);
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
-        this.showCorrectMessage();
+        showCorrectMessage();
         this.getUsersNextAction();
       } else if (this.isNothing(randomNumber, convertedNumber)) {
-        this.showNothingMessage();
+        showNothingMessage();
         this.getUsersPrediction(randomNumber);
       } else {
         const [ballCount, strikeCount] = this.calculateCount(randomNumber, convertedNumber);
-        this.showCountMessage(ballCount, strikeCount);
+        showCountMessage(ballCount, strikeCount);
         this.getUsersPrediction(randomNumber);
       }
     })
@@ -66,16 +63,6 @@ class App {
       }
     });
     return [ballCount, strikeCount];
-  }
-
-  showCountMessage(ballCount, strikeCount) {
-    if (ballCount === 0) {
-      Console.print(`${strikeCount}스트라이크`);
-    } else if (strikeCount === 0) {
-      Console.print(`${ballCount}볼`);
-    } else {
-      Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-    }
   }
 
   getUsersNextAction() {
