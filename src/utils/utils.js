@@ -12,8 +12,8 @@ function pickUniqueNumbersInRange(start, end, count) {
 }
 
 function getUniqueNumberCount(string) {
-  const matchs = string.match(/[1-9]/g) || [];
-  const uniqueNumberCount = [...new Set(matchs)].length;
+  const matches = string.match(/[1-9]/g) || [];
+  const uniqueNumberCount = [...new Set(matches)].length;
 
   return uniqueNumberCount;
 }
