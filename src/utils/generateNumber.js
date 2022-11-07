@@ -9,7 +9,7 @@ function generateNumber() {
 
   while (computerNumArrLength < NUMBER_LENGTH) {
     const tempNumber = Random.pickNumberInRange(NUMBER_RANGE_START, NUMBER_RANGE_END);
-    if (computerNumArr.indexOf(tempNumber) === -1) {
+    if (!computerNumArr.includes(tempNumber)) {
       computerNumArr.push(tempNumber);
       computerNumArrLength += 1;
     }
