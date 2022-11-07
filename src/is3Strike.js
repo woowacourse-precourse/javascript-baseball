@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const game = (userNum, computerNum) => {
+const is3Strike = (userNum, computerNum) => {
   let ballCount = 0;
   let strikeCount = 0;
 
@@ -18,7 +18,11 @@ const game = (userNum, computerNum) => {
   const ballMessage = ballCount !== 0 ? `${ballCount}볼` : '';
   const strikeMessage = strikeCount !== 0 ? `${strikeCount}스트라이크` : '';
 
-  MissionUtils.Console.print(`${ballMessage} ${strikeMessage}`);
+  if (ballMessage === '' && strikeMessage === '') {
+    MissionUtils.Console.print('낫싱');
+  } else {
+    MissionUtils.Console.print(`${ballMessage} ${strikeMessage}`);
+  }
 
   if (strikeCount === 3) {
     return true;
@@ -26,4 +30,4 @@ const game = (userNum, computerNum) => {
   return false;
 };
 
-module.exports = game;
+module.exports = is3Strike;
