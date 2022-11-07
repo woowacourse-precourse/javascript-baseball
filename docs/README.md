@@ -64,9 +64,9 @@
 		  - [ ] 1을 전달하면 isFinish 상태가 false 이다.
 		  - [ ] 2을 전달하면 게임 종료 문구를 출력한다.
 		  - [ ] 1과 2를 제외한 나머지를 전달하면 예외가 발생한다.
-	  - [ ] isStart()
-		  - [ ] this.#isStart 상태를 반환한다.
-		  - [ ] boolean 타입을 반환한다.
+	  - [x] isStart()
+		  - [x] this.#isStart 상태를 반환한다.
+		  - [x] boolean 타입을 반환한다.
 	  - [ ] isFinish()
 		  - [ ] this.#isFinish 상태를 반환한다.
 		  - [ ] boolean 타입을 반환한다.
