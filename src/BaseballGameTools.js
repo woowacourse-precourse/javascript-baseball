@@ -1,5 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { CONSTANT } = require('./Constant');
+const { MESSAGE, CONSTANT, REGEX } = require('./Constant');
 
 class BaseballGameTools {
   static getThreeNumber() {
@@ -15,6 +15,12 @@ class BaseballGameTools {
     }
 
     return randomNumberArray;
+  }
+
+  static errorIfInvalidGuessFormat(playerGuess) {
+    if (!REGEX.GUESS.test(playerGuess) || new Set(playerGuess.split('')).size !== 3) {
+      throw Error(MESSAGE.FORMAT_ERROR_GUESS);
+    }
   }
 }
 
