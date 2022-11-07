@@ -21,6 +21,30 @@ class Game {
     EXIT: 2,
     FAIL: 0,
   };
+
+  countBall(userNum, computerNum, length) {
+    let count = 0;
+    for (let i = 0; i < length; i++) {
+      if (userNum[i] === computerNum[i]) count++;
+    }
+    if (count > 0) return `${count}${this.BALLCOUNT_HINT.BALL}`;
+  }
+  countStrike(userNum, computerNum) {
+    let count = 0;
+    userNum.map((number, index) => {
+      if (computerNum[index] !== number && computerNum.includes(number))
+        count++;
+    });
+    if (count > 0) return `${count}${this.BALLCOUNT_HINT.STRIKE}`;
+  }
+
+  ballCount(userNum, computerNum) {
+    const countBall = this.countBall(userNum, computerNum, NUMBER.LENGTH);
+    const countStrike = this.countStrike(userNum, computerNum);
+
+    const hint = countBall + " " + countStrike;
+    return hint;
+  }
 }
 
 module.exports = Game;
