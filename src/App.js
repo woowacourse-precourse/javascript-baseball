@@ -143,9 +143,14 @@ class App {
       return this.MESSAGES.RESULT.NOTHING;
     }
 
-    if (sameDigitCount === this.count && sameNumberCount === this.count) {
+    if (sameDigitCount === this.count) {
       this.isPlaying = false;
-      return this.MESSAGES.RESULT.CORRECT();
+
+      let result = this.MESSAGES.RESULT.STRIKE(sameDigitCount);
+      result += "\n";
+      result += this.MESSAGES.RESULT.CORRECT;
+
+      return result;
     }
 
     return `${this.MESSAGES.RESULT.BALL(
