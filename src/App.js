@@ -64,11 +64,14 @@ class App {
    * @return Random한 숫자 배열 return
    * */
   generateComputerNumber() {
-    const result = [];
-    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
-    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
-    result.push(MissionUtils.Random.pickNumberInRange(1, 9));
-    return result;
+    // 서로다른 자릿수이어야 한다.
+    const result = new Set();
+    while (result.size < 3) {
+      result.add(MissionUtils.Random.pickNumberInRange(1, 9));
+      console.log('result : ', result);
+      console.log('generateComputerNumber while');
+    }
+    return Array.from(result);
   }
 
   replay() {
@@ -87,7 +90,7 @@ class App {
 
     // start;
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const flag = 1;
+    let flag = '1';
     let user = null;
     let result = [];
 
@@ -129,6 +132,7 @@ class App {
       }
     }
     MissionUtils.Console.print('게임 종료');
+    return 0;
   }
 }
 
