@@ -108,7 +108,6 @@ const printMessage = (message) => {
 };
 
 const printGameResult = (countStrike, countBall, computers) => {
-  console.log(computers);
   if (countStrike === 0 && countBall === 0) {
     printMessage(NOTTHING);
     getUserNumber(computers, REQUIRE_NUMBER);
@@ -134,11 +133,13 @@ const playAgain = () => {
 };
 
 const retryOrEnd = () => {
-  MissionUtils.Console.readLine("wefwefwef", (userInput) => {
+  MissionUtils.Console.readLine("", (userInput) => {
     if (userInput === RETRY_VALUE) {
       playAgain();
     } else if (userInput === END_VALUE) {
-      throw new Error("게임을 종료합니다");
+      MissionUtils.Console.close();
+    } else {
+      throw new Error("게임 종료");
     }
   });
 };
