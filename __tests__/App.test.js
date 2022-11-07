@@ -153,4 +153,12 @@ describe('userConfirm()', () => {
 
     expect(app.isStart()).toBeTruthy();
   });
+
+  test('1을 전달하면 isFinish 상태가 false 이다.', () => {
+    const app = new App();
+
+    app.userConfirm(1);
+
+    expect(app.isFinish()).toBeFalsy();
+  });
 });
