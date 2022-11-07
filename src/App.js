@@ -5,7 +5,13 @@ const gameStart = () => {
 };
 
 const pickRandomNumber = () => {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
+  const numberArr = [];
+  while (numberArr.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!numberArr.includes(number)) numberArr.push(number);
+  }
+
+  return Number(numberArr.join(""));
 };
 
 const getUserInput = (answer) => {
@@ -30,9 +36,11 @@ const validateUserInput = (input) => {
 const countStrike = (answer, input) => {
   let strike = 0;
 
-  answer.split("").forEach((el, i) => {
-    if (el === input[i]) strike++;
-  });
+  String(answer)
+    .split("")
+    .forEach((el, i) => {
+      if (el === input[i]) strike++;
+    });
 
   return strike;
 };
@@ -40,9 +48,11 @@ const countStrike = (answer, input) => {
 const countBall = (answer, input) => {
   let ball = 0;
 
-  answer.split("").forEach((el, i) => {
-    if (input.includes(el) && input[i] !== el) ball++;
-  });
+  String(answer)
+    .split("")
+    .forEach((el, i) => {
+      if (input.includes(el) && input[i] !== el) ball++;
+    });
 
   return ball;
 };
@@ -61,15 +71,18 @@ const evaluateUserInput = (answer, input) => {
 const gameEnd = (answer, input) => {
   const strike = countStrike(answer, input);
 
-  if (strike === 3)
+  if (strike === 3) {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
         validateRestartInput(input);
         evaluateRestartInput(answer, input);
       }
     );
-  else return getUserInput(answer);
+  }
+  
+  return getUserInput(answer);
 };
 
 const validateRestartInput = (input) => {
