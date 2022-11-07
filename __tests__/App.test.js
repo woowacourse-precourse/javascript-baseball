@@ -145,4 +145,12 @@ describe('userConfirm()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
+
+  test('1을 전달하면 isStart 상태가 true 이다.', () => {
+    const app = new App();
+
+    app.userConfirm(1);
+
+    expect(app.isStart()).toBeTruthy();
+  });
 });
