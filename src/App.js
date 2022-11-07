@@ -29,7 +29,9 @@ class App {
 
       const inputArr = [...input];
       const { ball, strike } = this.countBS(inputArr);
-      console.log(this.computer, ball, strike);
+      
+      this.printResult(ball, strike);
+
     });
   }
 
@@ -61,6 +63,18 @@ class App {
     });
 
     return { ball, strike };
+  }
+
+  printResult(ball, strike){
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print(HINT.NOTHING); 
+    } else if (ball === 0) {
+      MissionUtils.Console.print(`${strike}${HINT.STRIKE}`);
+    } else if (strike === 0) {
+      MissionUtils.Console.print(`${ball}${HINT.BALL}`);
+    } else {
+      MissionUtils.Console.print(`${ball}${HINT.BALL} ${strike}${HINT.STRIKE}`);
+    }
   }
 
 }
