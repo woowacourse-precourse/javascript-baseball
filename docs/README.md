@@ -30,10 +30,6 @@
     <summary>eslint 사용</summary>
 
     `npm install --save-dev eslint` 로 설치하고 .eslintrc.js 파일을 생성하여 코드 스타일을 정의한다.
-
-    추가로, `test`, `describe` 와 같은 jest 함수를 인식하지 못하기 때문에 `npm install --save-dev eslint-plugin-jest` 명령으로 eslint 플러그인을 설치한다.
-
-    .eslintrc.js의 `extends: [...]` 에 `'plugin:jest/recommended'` 를 추가한다.
   </details>
 
   - <details>
