@@ -1,6 +1,8 @@
-class GetComputerInput {
+const Mission = require("../utils/Mission");
+
+class GetComputerInput extends Mission {
   constructor() {
-    this.missionRandom = require("@woowacourse/mission-utils").Random;
+    super();
   }
   makeRandomNumbers() {
     const storeNumberArray = [];
