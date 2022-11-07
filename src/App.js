@@ -2,7 +2,6 @@ let MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   cpuNum;
-  predictNum;
   makeRandomNumber() {
     let num1 = MissionUtils.Random.pickNumberInRange(1, 9);
     let num2 =0, num3 = 0;
@@ -10,13 +9,12 @@ class App {
       while(num2 === num1);
     do{ num3 = MissionUtils.Random.pickNumberInRange(1, 9);}
       while(num3 === num2 && num3 === num1 );
-    this.cpuNum = num1.toString()+num2.toString()+num3.toString();
+    this.cpuNum = (num1.toString()+num2.toString()+num3.toString());
   }
   receivePredictNum() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
       this.validCheck(inputNum);
-      this.predictNum = inputNum;
-      this.baseballCheck();
+      this.baseballCheck(this.cpuNum, inputNum);
     });
     
   }
@@ -33,9 +31,7 @@ class App {
       throw new Error("숫자만 입력해주세요(0~9)");
     }
   }
-  baseballCheck(){
-    let COMPUTER_NUMBERS = this.cpuNum.split("");
-    let USER_PREDICT_NUMBERS = this.predictNum.split("");
+  baseballCheck(COMPUTER_NUMBERS, USER_PREDICT_NUMBERS){
     let strike = 0, ball = 0;
     for(let sequenceNumber=0;sequenceNumber<3;sequenceNumber++){
       if(COMPUTER_NUMBERS[sequenceNumber] === USER_PREDICT_NUMBERS[sequenceNumber]){
@@ -62,25 +58,23 @@ class App {
   isCorrect(strike){
     if(strike === 3){
       this.gameClearMessage();
-      let REGAMENUMBER = this.wantRegame();
-      if(REGAMENUMBER===1){
+      this.wantRegame();
+    }else{
+      this.receivePredictNum();
+    }
+  }
+  gameClearMessage(){
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  }
+  wantRegame() {
+    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
+      this.regameValidCheck(inputNum);
+      if(inputNum==='1'){
         this.play();
       }else{
         MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
         MissionUtils.Console.close();
-        return 0;
       }
-    }else{
-      return false;
-    }
-  }
-  gameClearMessage(){
-    return MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-  }
-  wantRegame() {
-    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (inputNum) => {
-      let checkedInputNum = this.regameValidCheck(inputNum);
-      return checkedInputNum;
     });
   }
   regameValidCheck(number){
