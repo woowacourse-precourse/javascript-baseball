@@ -9,6 +9,10 @@ class App {
     return this.startMessage().makeComputerNumArr().getInputAndCompare();
   }
 
+  retry() {
+    return this.makeComputerNumArr().getInputAndCompare();
+  }
+
   makeComputerNumArr() {
     this.computerNumArr = generateNumber();
     return this;
@@ -63,7 +67,7 @@ class App {
 
   checkOneOrTwo(answer) {
     if (answer === GAME_PROGRESS.RETRY) {
-      return this.makeComputerNumArr();
+      return this.retry();
     }
     if (answer === GAME_PROGRESS.END) {
       return this.close();
