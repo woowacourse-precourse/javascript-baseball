@@ -50,7 +50,7 @@ class App {
     return input >= MIN_ANSWER && input <= MAX_ANSWER;
   };
 
-  isValid = (input) => {
+  isValidInput = (input) => {
     return this.containsThreeNumbers(input) && this.containsOnlyNumbers(input) && !this.isDuplicated(input);
   };
 
@@ -108,7 +108,7 @@ class App {
 
   getInputAndCompare = (ANSWER) => {
     MissionUtils.Console.readLine(MESSAGE.INPUT, (input) => {
-      if (!this.isValid(input)) throw new Error(ERROR.INVALID_INPUT);
+      if (!this.isValidInput(input)) throw new Error(ERROR.INVALID_INPUT);
       this.printResult(ANSWER, input);
     });
   };
