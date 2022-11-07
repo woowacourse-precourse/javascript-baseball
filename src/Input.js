@@ -13,24 +13,24 @@ class Input {
     return true;
   }
 
-  isAllNum(numArr) {
+  static isAllNum(numArr) {
     return numArr.every((num) => this.checkNum(num));
   }
 
-  isAllValidNum(numArr) {
+  static isAllValidNum(numArr) {
     return numArr.every((num) => this.checkZero(num));
   }
 
-  isLengthThree(input) {
+  static isLengthThree(input) {
     return input.length === 3;
   }
 
-  checkNum(number) {
+  static checkNum(number) {
     if (isNaN(number)) throw new Error("숫자를 입력해주세요.");
     return true;
   }
 
-  checkZero(number) {
+  static checkZero(number) {
     if (number === 0)
       throw new Error("1 ~ 9 사이의 숫자만 입력할 수 있습니다.");
     return true;
