@@ -88,6 +88,20 @@ class App {
     } while(!this.compareNum(computer, user));
   }
 
+  //게임 진행
+  playGame(){
+    game_status = "1";
+    while(game_status === "1"){
+      let com_num = this.getRandomNum();
+      this.getUserNum(com_num);
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer)=>{
+        game_status = answer;
+      });
+      this.checkExceptionTwo(game_status);
+    }
+  }
+
 }
 
 module.exports = App;
