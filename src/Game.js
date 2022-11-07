@@ -9,6 +9,7 @@ const MESSAGE = {
   RESTART_INPUT: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
 };
 const RESTART = 1;
+const END = 2;
 
 module.exports = class Game {
   constructor() {
@@ -91,6 +92,10 @@ module.exports = class Game {
   handleGame(userControlInput) {
     gameControlValidation(userControlInput);
     if (userControlInput == RESTART) this.gameInit();
-    else MissionUtils.Console.close();
+    if (userControlInput == END) this.endGame();
+  }
+
+  endGame() {
+    MissionUtils.Console.close();
   }
 };
