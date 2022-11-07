@@ -8,26 +8,19 @@ class App {
     this.userInput = "";
   }
 
-  getBallCnt(includeOfNum) {
+  getCnt(includeOfNum) {
     let ballCnt = 0;
+    let strikeCnt = 0;
     [...this.userInput].forEach((num, idx) => {
       if (+num !== this.answer[idx] && includeOfNum[num]) {
         ballCnt += 1;
       }
-    });
-
-    return ballCnt;
-  }
-
-  getStrikeCnt() {
-    let strikeCnt = 0;
-    [...this.userInput].forEach((num, idx) => {
       if (+num === this.answer[idx]) {
         strikeCnt += 1;
       }
     });
 
-    return strikeCnt;
+    return [ballCnt, strikeCnt];
   }
 
   createResult() {
@@ -38,8 +31,7 @@ class App {
       includeOfNum[num] = true;
     });
 
-    const ball = this.getBallCnt(includeOfNum);
-    const strike = this.getStrikeCnt();
+    const [ball, strike] = this.getCnt(includeOfNum);
 
     if (ball === 0 && strike === 0) result = "낫싱";
     if (ball > 0) result += `${ball}볼`;
