@@ -1,6 +1,9 @@
 const { END_NOTICE } = require("./Console");
 
 class Input {
+  isLengthThree(input) {
+    return input.length === 3;
+  }
   checkNum(number) {
     if (isNaN(number)) throw new Error("숫자를 입력해주세요.");
     return true;
