@@ -14,17 +14,9 @@ function countStrikeAndBall(user, computer) {
 }
 
 class GameJudgment {
-  constructor({ user, computer }) {
-    this.user = user;
-    this.computer = computer;
-  }
-
-  judgement() {
-    const [ballCount, strikeCount] = countStrikeAndBall(
-      this.user,
-      this.computer
-    );
-    return [ballCount, strikeCount];
+  judgement(userBallCount, userStrikeCount) {
+    const [ballCount, strikeCount] = countStrikeAndBall(ballCount, strikeCount);
+    return [userBallCount, userStrikeCount];
   }
 }
 module.exports = GameJudgment;
