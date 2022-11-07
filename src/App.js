@@ -18,6 +18,11 @@ const createComputerNumber = () => {
   return [...computer.join("").toString()];
 };
 
+const isThreeDigitNumber = (num) => {
+  if (!isNaN(num)) return num.length === 3 ? true : false;
+  else return false;
+};
+
 const game = () => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = num;
