@@ -39,6 +39,21 @@ class App {
     MissionUtils.Console.close();
   }
 
+  askReplay() {
+    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.readLine("", (isRestart) => {
+      if (isRestart === "1"){
+        return this.play();
+      }
+      if (isRestart === "2") {
+        return this.exitGame();
+      }
+      else {
+        throw new Error("입력값이 잘못되었습니다. 프로그램을 종료합니다.");
+      }
+    });
+  }
+
   cntStikeAndBall(computerNum, userNum) {
     let strike = 0, ball = 0;
     const computerArray = [...computerNum];
