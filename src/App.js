@@ -28,12 +28,20 @@ class App {
     this.play();
   }
 
+  showError(errorMessege) {
+    throw new Error(errorMessege);
+  }
+
   getUser() {
     const render = new Render();
     const checkVaild = new CheckInputValid();
 
-    const checkUserInput = checkVaild.checkUserInput();
+    const passOrNotUserInput = checkVaild.checkUserInput();
     render.getUser().then((num) => {
+      if (passOrNotUserInput !== ERROR.USER_INPUT_PASS) {
+        this.showError(passOrNotUserInput);
+      }
+
       return numToArr(num);
     });
   }
