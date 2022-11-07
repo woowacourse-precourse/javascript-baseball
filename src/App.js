@@ -45,22 +45,18 @@ class App {
   endOrRetry() {
     this.endOrRetryMessage();
     Console.readLine('', input => {
-      const endOrRetryInput = this.isValidEndOrRetryInput(input);
-      if (endOrRetryInput === 1) {
-        return this.makeComputerNumArr();
-      }
-      if (endOrRetryInput === 2) {
-        return this.close();
-      }
-      return this.wrongInput(endOrRetryInput);
+      this.checkOneOrTwo(input);
     });
   }
 
-  isValidEndOrRetryInput(answer) {
-    if (answer === '1' || answer === '2') {
-      return Number(answer);
+  checkOneOrTwo(answer) {
+    if (answer === '1') {
+      return this.makeComputerNumArr();
     }
-    return '1또는 2를 입력해주세요.';
+    if (answer === '2') {
+      return this.close();
+    }
+    return this.wrongInput('1또는 2를 입력해주세요!');
   }
 
   wrongInput(errMessage) {
