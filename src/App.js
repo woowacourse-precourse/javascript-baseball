@@ -3,8 +3,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    Game = new GameLoop();
-    Game.start();
+    const Game = new GameLoop();
+    while (Game.continues) {
+      Game.start();
+      Game.restart();
+    }
   }
 }
 
@@ -29,7 +32,7 @@ class Computer {
       strike = 0;
 
     for (let i = 0; i < 3; i++) {
-      if (!this._digits.includes(message[i])) continue;
+      if (!this._digits.includes(message.at(i))) continue;
       ball += 1;
     }
 
@@ -44,10 +47,12 @@ class Computer {
 }
 
 class GameLoop {
-  constructor() {}
+  constructor() {
+    this.continues = true;
+  }
 
   start() {
-    let Opponent = new Computer();
+    const Opponent = new Computer();
     let gameOver = false;
 
     while (!gameOver) {
@@ -59,22 +64,27 @@ class GameLoop {
       gameOver = this._respond(ball, strike);
     }
 
-    this.restart();
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    return;
   }
 
   restart() {
-    const gameEnd = MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (message) => {
-        if (message != "1" || message != "2") {
-          throw new Error("1이나 2를 입력해야 합니다");
-        }
-      }
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
+    const gameEnd = MissionUtils.Console.readLine();
 
     if (gameEnd === "1") {
-      this.start();
+      return;
     }
+
+    if (gameEnd === "2") {
+      this.continues = false;
+      MissionUtils.Console.print("게임 종료");
+      return;
+    }
+
+    throw new Error("1이나 2를 입력해야합니다");
   }
 
   _validate(message) {
@@ -90,9 +100,9 @@ class GameLoop {
       throw new Error("세자리 숫자를 입력해야 합니다");
     }
 
-    if (new Set(message).length != 3) {
-      throw new Error("서로 다른 숫자를 입력해야 합니다");
-    }
+    // if (new Set(message).length != 3) {
+    //   throw new Error("서로 다른 숫자를 입력해야 합니다");
+    // }
 
     return message;
   }
