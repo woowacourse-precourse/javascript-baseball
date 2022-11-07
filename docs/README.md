@@ -123,37 +123,15 @@ develop ______________ * __________ * _______ ...
 * 기능 그룹이 완성되면 `develop` 브랜치에 병합한다.
 * 애플리케이션이 완성되면 `develop` 브랜치를 메인 브랜치에 병합한다.
 
-## 디렉토리 구조 및 클래스, 함수 목록
+## 디렉토리 구조와 역할
 
 ```
 + src
-  + models
-    └ gong.js
-      - class Gong
-        - #values: [number, number, number]
-        - static fromRandom(): Gong
-        - valueOf(): [number, number, number]
-    └ opponent.js
-      - class Opponent
-        - #gong: Gong
-        - guessGong(gong: Gong): { strike: number, ball: number }
-  └ input.js
-    - async read(query: string): string
-    - print(message: string): void
-    - asGong(input: string): Gong
-    - asEndSelect(input: string): END_SELECT
-  └ constants.js
-    - EndSelect.RETRY = 1
-    - EndSelect.SHUTDOWN = 2
-  └ messages.js
-    - Messages.GAME_START = '숫자 야구 게임을 시작합니다.'
-    - Messages.INPUT_YOUR_GONG = '숫자를 입력하세요 : '
-    - Messages.INVALID_GONG_FORMAT = '서로 다른 3개의 숫자를 입력해야합니다.'
-    - Messages.GUESS_GONG_RESULT_BALL = '볼'
-    - Messages.GUESS_GONG_RESULT_STRIKE = '스트라이크'
-    - Messages.GUESS_GONG_RESULT_NOTHING = '낫싱'
-    - Messages.GUESS_GONG_RESULT_SUCCESS = '3개의 숫자를 모두 맞혔습니다! 게임 종료'
-    - Messages.END_SELECT = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
-  └ App.js
-    - async play(): void
+  + models  --------- 엔티티를 모아둔 폴더
+    └ gong.js  ------ 서로 다른 숫자 3개를 하나의 개념으로 취급하기 위한 엔티티
+    └ opponent.js  -- 상대방(컴퓨터)을 정의한 엔티티
+  └ App.js  --------- 프로그램의 진입점(entrypoint)이며 각 게임 실행의 책임을 맡음
+  └ constants.js  --- 런타임 중 사용되는 상수들을 관리
+  └ game.js  -------- 한 차례의 게임 중 사용되는 로직을 책임짐
+  └ messages.js  ---- 런타임 중 사용되는 메세지들을 관리
 ```
