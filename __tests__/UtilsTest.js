@@ -14,4 +14,11 @@ describe("utils 정상 작동 테스트", () => {
     close();
     expect(closeMocking).toBeCalledWith();
   });
+
+  test("readLine 작동 테스트", () => {
+    const readLineMocking = jest.spyOn(MissionUtils.Console, "readLine");
+    const callback = (input) => input;
+    readLine("숫자를 입력해주세요", callback);
+    expect(readLineMocking).toBeCalledWith("숫자를 입력해주세요", callback);
+  });
 });
