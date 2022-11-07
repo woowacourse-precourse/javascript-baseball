@@ -31,8 +31,11 @@ class Validation {
   }
 
   checkRepeat(input) {
-    const noRepeat = [...new Set(input)];
-    if (noRepeat.length != 3) {
+    if (
+      input[0] === input[1] ||
+      input[1] === input[2] ||
+      input[2] === input[0]
+    ) {
       throw INGAME_MESSAGE.ERROR;
     }
   }

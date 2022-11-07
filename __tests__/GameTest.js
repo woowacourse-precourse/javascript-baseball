@@ -52,7 +52,7 @@ describe("게임 문구 테스트", () => {
 });
 
 describe("플레이어 입력 테스트", () => {
-  test("플레이어 숫자 입력 체크1", () => {
+  test("플레이어 숫자 입력 체크1 : 자릿수", () => {
     const validation = new Validation();
     expect(() => validation.checkLength([1, 2, 3, 4])).toThrow(
       INGAME_MESSAGE.ERROR,
@@ -60,7 +60,7 @@ describe("플레이어 입력 테스트", () => {
     );
   });
 
-  test("플레이어 숫자 입력 체크2-1", () => {
+  test("플레이어 숫자 입력 체크2 : 숫자", () => {
     const validation = new Validation();
     expect(() => validation.checkNumber([1, 2, "a"])).toThrow(
       INGAME_MESSAGE.ERROR,
@@ -68,7 +68,7 @@ describe("플레이어 입력 테스트", () => {
     );
   });
 
-  test("플레이어 숫자 입력 체크2-2", () => {
+  test("플레이어 숫자 입력 체크3 : 숫자 (0제외)", () => {
     const validation = new Validation();
     expect(() => validation.checkNumber([1, 2, 0])).toThrow(
       INGAME_MESSAGE.ERROR,
@@ -76,16 +76,11 @@ describe("플레이어 입력 테스트", () => {
     );
   });
 
-  test("플레이어 숫자 입력 체크3", () => {
-    const app = new App();
-    expect(() => "...").toThrow(INGAME_MESSAGE.ERROR, "은 3자리여야 합니다.");
-  });
-
   test("플레이어 숫자 입력 체크4", () => {
-    const app = new App();
-    expect(() => "...").toThrow(
+    const validation = new Validation();
+    expect(() => validation.checkRepeat([1, 2, 2])).toThrow(
       INGAME_MESSAGE.ERROR,
-      "은 중복되지 않은 숫자로 이루어져야 합니다."
+      "입력값은 중복되지 않은 숫자로 이루어져야 합니다."
     );
   });
 });
