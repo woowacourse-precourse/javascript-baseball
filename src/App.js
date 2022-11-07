@@ -38,6 +38,7 @@ class App {
         this.inputUserProgress();
         break;
       case GAME.EXIT:
+        MissionUtils.Console.close();
         return;
     }
   }
@@ -61,20 +62,14 @@ class App {
   inputUserAnswer() {
     MissionUtils.Console.readLine(ment.input, (answer) => {
       this.userAnswer = parseInt(answer);
-      this.checkUserGameAnswer();
-      const result = this.compareUserAnswer();
-      this.resultPrint(result);
-      this.play();
+      try {
+        this.answerChecker();
+        this.resultPrint(this.compareUserAnswer());
+        this.play();
+      } catch (e) {
+        this.exceptionEnd();
+      }
     });
-  }
-
-  checkUserGameAnswer() {
-    try {
-      this.answerChecker();
-    } catch (e) {
-      this.exceptionEnd();
-    }
-    return;
   }
 
   answerChecker() {
@@ -89,8 +84,8 @@ class App {
     MissionUtils.Console.readLine(ment.reStart, (answer) => {
       this.userAnswer = parseInt(answer);
       this.askUser();
-      this.play();
     });
+    this.play();
   }
 
   askUser() {
@@ -156,7 +151,6 @@ class App {
   exceptionEnd() {
     this.game = GAME.EXIT;
     MissionUtils.Console.print(ment.exception);
-    MissionUtils.Console.close();
     return;
   }
 
