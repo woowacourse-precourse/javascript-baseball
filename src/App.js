@@ -30,9 +30,9 @@ class App {
 
   checkError(num) {
     let number = Number(num);
-    this.checkType(num);
-    this.checkDigit(num);
-    this.checkOverlap(num);
+    this.checkType(number);
+    this.checkDigit(number);
+    this.checkOverlap(number);
   }
 
   checkBall(comNum, userNum) {
@@ -94,7 +94,7 @@ class App {
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (answer) => {
-          if (answer == 2) playing = false;
+          if (answer === "2") playing = false;
         }
       );
     }
