@@ -153,3 +153,28 @@ test('endingOption 메서드 다시 시작하기 테스트(1)', () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
 });
+
+test('endingOption 메서드 다시 시작하기 테스트(1)', () => {
+  const randoms = [2, 6, 7, 7, 8, 9];
+  const answers = ['134', '267', '1', '597', '789', '2'];
+  const logSpy = getLogSpy();
+  const messages = ['낫싱', '3스트라이크', '2볼', '3스트라이크', '게임 종료'];
+
+  mockRandoms(randoms);
+  mockQuestions(answers);
+
+  const app = new App();
+  app.play();
+  messages.forEach((output) => {
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+  });
+});
+
+test('endingOption 입력값 예외사항 체크', () => {
+  const answers = ['4'];
+  mockQuestions(answers);
+  expect(() => {
+    const app = new App();
+    app.endingOption(answers);
+  }).toThrow();
+});
