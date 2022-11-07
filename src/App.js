@@ -6,6 +6,7 @@ class App {
   }
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.makeRandomNumber();
     this.askForNumbers();
   }
 
@@ -18,7 +19,6 @@ class App {
   }
 
   askForNumbers() {
-    this.makeRandomNumber();
     Console.readLine("숫자를 입력해주세요 : ", (receivedNumbers) => {
       this.stirUp(receivedNumbers);
     });
@@ -120,8 +120,10 @@ class App {
    * @param {number} answer - 게임 재시작 여부에 대한 유저의 입력 값
    */
   handleRestart(answer) {
-    if (answer === 1) this.askForNumbers();
-    else Console.close();
+    if (answer === 1) {
+      this.makeRandomNumber();
+      this.askForNumbers();
+    } else Console.close();
   }
 }
 
