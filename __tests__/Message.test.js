@@ -93,4 +93,13 @@ describe('count()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('2스트라이크');
   });
+
+  test('1볼 1스트라이크 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.count(1, 1));
+
+    expect(logSpy).toHaveBeenCalledWith('1볼 1스트라이크');
+  });
 });
