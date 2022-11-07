@@ -28,6 +28,34 @@ class BaseballGameTools {
       throw Error(MESSAGE.FORMAT_ERROR_CHOICE);
     }
   }
+
+  static getBaseballResultMessage(answerArray, playerInput) {
+    const playerGuessArray = playerInput.split('').map((digit) => Number(digit));
+    let [strike, ball] = [0, 0];
+    let baseballResult;
+
+    playerGuessArray.forEach((currentDigit, index) => {
+      const searchResult = answerArray.indexOf(currentDigit);
+
+      if (searchResult === index) {
+        strike += 1;
+      } else if (searchResult !== -1) {
+        ball += 1;
+      }
+    });
+
+    if (strike > 0 && ball > 0) {
+      baseballResult = `${ball}볼 ${strike}스트라이크`;
+    } else if (strike > 0) {
+      baseballResult = `${strike}스트라이크`;
+    } else if (ball > 0) {
+      baseballResult = `${ball}볼`;
+    } else {
+      baseballResult = '낫싱';
+    }
+
+    return baseballResult;
+  }
 }
 
 module.exports = BaseballGameTools;
