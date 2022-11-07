@@ -24,7 +24,7 @@ describe("플레이어 입력 검증 테스트", () => {
   });
 
   test("입력 검증 함수 잘못된 입력", () => {
-    const inputs = [
+    const inputsAndReturns = [
       ["123", true],
       ["445", false],
       ["4513", false],
@@ -32,16 +32,16 @@ describe("플레이어 입력 검증 테스트", () => {
       ["de2", false],
     ];
 
-    inputs.forEach(([input, answer]) => {
+    inputsAndReturns.forEach(([input, answer]) => {
       const result = validateInput(input);
       expect(result).toEqual(answer);
     });
   });
 
   test("잘못된 입력시 throw 예외 처리", () => {
-    const answers = "1234";
+    const input = "1234";
 
-    mockQuestion(answers);
+    mockQuestion(input);
 
     expect(() => {
       const app = new App();
