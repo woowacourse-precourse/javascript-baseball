@@ -9,7 +9,7 @@ class App {
       () =>
         (this.#randomNum = [
           ...this.#randomNum,
-          MissonUtils.Random.pickNumberInRange(1, 9),
+          MissonUtils.Random.pickNumberInRange(1, 9) + "",
         ])
     );
   }
@@ -17,8 +17,26 @@ class App {
   startGame() {
     MissonUtils.Console.print("숫자 야구 게임을 시작합니다.");
     MissonUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) =>
-      compareResults(userInput)
+      this.compareResults(userInput)
     );
+  }
+
+  compareResults(userInput) {
+    userInput = userInput.split("");
+
+    const compareResults = {};
+
+    userInput.forEach((num, index) => {
+      if (this.#randomNum.includes(num)) {
+        if (num === this.#randomNum[index]) {
+          compareResults.strike += 1;
+        } else {
+          compareResults.ball += 1;
+        }
+      }
+    });
+
+    this.printResults(compareResults);
   }
 
   play() {
