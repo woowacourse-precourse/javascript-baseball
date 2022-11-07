@@ -10,15 +10,14 @@ const printStartMessage = () => {
   MissionUtils.Console.print(gameConstant.START_MESSAGE);
 };
 
-const startGame = () => {
+const inputNumber = playerInput => {
   const answer = setAnswer();
+  compareNumber(answer, playerInput);
+};
+
+const startGame = () => {
   printStartMessage();
-  MissionUtils.Console.readLine(
-    gameConstant.INPUT_ORDER_MESSAGE,
-    playerInput => {
-      compareNumber(answer, playerInput);
-    },
-  );
+  MissionUtils.Console.readLine(gameConstant.INPUT_ORDER_MESSAGE, inputNumber);
 };
 
 module.exports = startGame;
