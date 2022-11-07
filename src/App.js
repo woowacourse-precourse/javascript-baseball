@@ -14,10 +14,24 @@ class App {
     return computer;
   }
 
-  checkInput(input){
+  checkInputValue(input){
+    
+    // 숫자가 세자리가 아닐 때
     if(input.length != 3){
       throw "세자리 숫자를 입력해주세요."
     }
+    
+    // 양수가 아닌 값을 입력 받았을 때
+    let is_inteager = 1;
+    for(let i=0; i<input.length; i++){
+      if(!Number.isInteger(input.charAt(i))){
+        is_inteager = 0;
+      }
+    }
+    if(!is_inteager){
+      throw "양수 세자리를 입력해주세요."
+    }
+
   }
 
 
@@ -32,7 +46,7 @@ class App {
 
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     
-    
+
     let is_game_over = 0;
     while(!is_game_over){
 
@@ -42,7 +56,7 @@ class App {
         MissionUtils.Console.close();
 
         try {
-          this.checkInput(input);
+          this.checkInputValue(input);
         } catch(e) {
           console.error(e);
         }
