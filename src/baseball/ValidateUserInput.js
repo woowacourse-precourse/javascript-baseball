@@ -24,7 +24,7 @@ class ValidateUserInput {
     }
   };
 
-  validateOneOrTwo = (selectedNumber) => {
+  isOneOrTwo = (selectedNumber) => {
     selectedNumber = Number(selectedNumber);
 
     if (selectedNumber !== 1 && selectedNumber !== 2) {
