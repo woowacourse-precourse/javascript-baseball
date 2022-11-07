@@ -1,4 +1,4 @@
-/*describe("문자열 테스트", () => {
+describe("문자열 테스트", () => {
   test("split 메서드로 주어진 값을 구분", () => {
     const input = "1,2";
     const result = input.split(",");
@@ -35,4 +35,3 @@
     expect(result).toThrow(RangeError);
   });
 });
-*/
