@@ -12,6 +12,7 @@ const { COMMAND } = require('./utils/constants');
 
 class App {
   #exception;
+
   #baseball;
 
   constructor() {
@@ -33,7 +34,8 @@ class App {
       this.#exception.checkErrorFor(new BaseBallException(input));
       this.print(this.#baseball.getResultToString(random, input));
 
-      this.#baseball.isStrikeOut(random, input) ? this.doNext() : this.enter(random);
+      if (this.#baseball.isStrikeOut(random, input)) this.doNext();
+      this.enter(random);
     });
   }
 
@@ -42,7 +44,8 @@ class App {
       this.print(COMMAND.STRIKEOUT);
       this.#exception.checkErrorFor(new NextException(input));
 
-      input === COMMAND.RESTART ? this.enter(RandomNumber.makeNew()) : this.end();
+      if (input === COMMAND.RESTART) this.enter(RandomNumber.makeNew());
+      this.end();
     });
   }
 
