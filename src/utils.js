@@ -15,7 +15,7 @@ function hasNoRedundancy(input) {
 // 콘솔에 입력을 받아 그 값을 반환해주는 promise 함수
 async function getInputFromConsole(message) {
     return new Promise((resolve, reject) => {
-        MissionUtils.Console.readLine(message, function (input) {
+        MissionUtils.Console.readLine(message, (input) => {
             resolve(input);
         })
     })

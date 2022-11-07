@@ -3,8 +3,39 @@ const { isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole } = 
 const { updateStrikeOrBall } = require("./compare.js");
 
 class App {
-  async play() {
+  // async play() {
+  //   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  //   let proceeding = true;
+  //   let answer = this.generateRandomAnswer();
+  //   console.log("정답은", answer)
+
+  //   while (proceeding) {
+  //     const INPUT = await getInputFromConsole("숫자를 입력해주세요 : ");
+  //     console.log("입력은", INPUT);
+  //     if (!this.isValidInput(INPUT)) { // 올바르지 않은 입력 예외처리
+  //       MissionUtils.Console.close();
+  //       throw new Error("improper input!");
+  //     }
+
+  //     const COMPARE_RESULT = this.getResult(INPUT, answer); // 비교 결과
+  //     this.printCompareResult(COMPARE_RESULT);
+
+  //     if (COMPARE_RESULT["strike"] === 3) {
+  //       answer = this.generateRandomAnswer(); // 정답 재생성
+  //       console.log("정답은", answer)
+  //       proceeding = await this.chooseProceedOrExit();
+  //     }
+  //   }
+
+  //   MissionUtils.Console.print("게임 종료");
+  //   MissionUtils.Console.close();
+  // }
+
+  play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    let answer = this.generateRandomAnswer();
+
+    this.proceedOneTurn(answer);
   }
 
   // 정답이 될 무작위 난수를 배열로서 생성하는 함수
@@ -61,6 +92,30 @@ class App {
   }
 
   /**
+   * 사용자의 입력을 받으면서 게임 한 턴을 진행하는 함수
+   * @param {*} answer 컴퓨터가 가지고 있는 정답
+   */
+  proceedOneTurn(answer) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!this.isValidInput(input)) { // 올바르지 않은 입력 예외처리
+        MissionUtils.Console.close();
+        throw new Error("improper input!");
+      }
+
+      const COMPARE_RESULT = this.getResult(input, answer); // 비교 결과
+      this.printCompareResult(COMPARE_RESULT);
+
+      if (COMPARE_RESULT["strike"] === 3) {
+        answer = this.generateRandomAnswer(); // 정답 재생성
+        // TODO: 게임 재시작 처리
+
+        MissionUtils.Console.close();
+      }
+      else this.proceedOneTurn(answer);
+    })
+  }
+
+  /**
    * 게임이 모두 끝나면, 새로 시작할지 종료할지를 입력받아 반환하는 함수
    * @returns 새로 시작하는지 여부
    */
@@ -81,6 +136,7 @@ class App {
         throw new Error("improper input!");
     }
   }
+
 }
 
 const app = new App();
