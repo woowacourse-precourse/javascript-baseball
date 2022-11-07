@@ -5,8 +5,6 @@ const exception = require("./HandleException.js");
 
 class App {
   constructor() {
-    this.ball = 0;
-    this.strike = 0;
     this.userNum;
     this.computerNum;
   }
@@ -22,8 +20,6 @@ class App {
   }
 
   getUserInputNum() {
-    this.ball = 0;
-    this.strike = 0;
     const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
       this.userNum = userInput;
@@ -33,10 +29,11 @@ class App {
   }
 
   getCompareResult() {
-    this.getNumOfBall();
-    this.getNumOfStrike();
-    printMessage.printBallAndStrike(this.ball, this.strike);
-    if(this.strike === 3) {
+    let ball = 0, strike = 0;
+    ball = this.getNumOfBall(ball);
+    strike = this.getNumOfStrike(strike);
+    printMessage.printBallAndStrike(ball, strike);
+    if(strike === 3) {
       printMessage.printGameWin();
       this.gameRestartOrEnd();
     }
@@ -45,20 +42,29 @@ class App {
     }
   }
 
-  getNumOfBall() {
+  getNumOfBall(ball) {
     for(let i = 0; i < this.computerNum.length; i++) {
-      if((this.computerNum[i] !== this.userNum[i]) && (this.userNum.includes(this.computerNum[i]))){
-        this.ball++;
-      }
+      ball += this.isBall(i);
     }
+    return ball;
   }
 
-  getNumOfStrike() {
+  isBall(compareIter){
     for(let i = 0; i < this.computerNum.length; i++) {
-      if(this.computerNum[i] == this.userNum[i]) {
-          this.strike++;
+      if((compareIter !== i) && (this.computerNum[compareIter] == this.userNum[i])) {
+          return 1;
       }
     }
+    return 0;
+  }
+
+  getNumOfStrike(strike) {
+    for(let i = 0; i < this.computerNum.length; i++) {
+      if(this.computerNum[i] == this.userNum[i]) {
+          strike++;
+      }
+    }
+    return strike;
   }
 
   gameRestartOrEnd() {
