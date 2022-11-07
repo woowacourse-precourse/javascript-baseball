@@ -18,7 +18,7 @@ class System {
   }
 
   createAnswerNumber() {
-    this.setNumber = Random.pickUniqueNumbersInRange(1, 10, 3);
+    this.setNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
   isStrike(guessNumber) {
@@ -35,7 +35,24 @@ class System {
       }
     });
 
-    Console.print(`strike : ${scoreboard.strike}, ball : ${scoreboard.ball}`);
+    return scoreboard;
+  }
+
+  notifyGuessResult(scoreboard) {
+    if (scoreboard.strike) {
+      Console.print(`${scoreboard.strike}스트라이크`);
+      if (scoreboard.strike === 3) {
+        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      }
+    }
+
+    if (scoreboard.ball) {
+      Console.print(`${scoreboard.ball}볼`);
+    }
+
+    if (!scoreboard.strike && !scoreboard.ball) {
+      Console.print("낫싱");
+    }
   }
 }
 

@@ -7,9 +7,11 @@ class App {
 
     NumberBaseBallSystem.getStarted();
     NumberBaseBallSystem.createAnswerNumber();
+    console.log(NumberBaseBallSystem.getNumber);
     // console.log(NumberBaseBallSystem.getNumber);
     const guessNumber = await PlayingUser.enterGuessNumber();
-    NumberBaseBallSystem.isStrike(guessNumber);
+    const scoreboard = NumberBaseBallSystem.isStrike(guessNumber);
+    NumberBaseBallSystem.notifyGuessResult(scoreboard);
   }
 }
 
