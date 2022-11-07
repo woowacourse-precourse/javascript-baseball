@@ -67,7 +67,19 @@ class App {
     if (this.strike > 0) printStatement += this.strike + STRIKE_PHRASE;
     if (printStatement.length === 0) printStatement = NOTHING_PHRASE;
     MissionUtils.Console.print(printStatement);
+    this.decideReplay();
   }
+
+  decideReplay() {
+    if (this.strike === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
+    else {
+      this.getUserNumber();
+    }
+  }
+
+
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
