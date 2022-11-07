@@ -32,4 +32,23 @@ function throwError(input) {
   }
 }
 
+class Umpire {
+  constructor(num1, num2) {
+    let num1Arr = Array.from(String(num1));
+    let num2Arr = Array.from(String(num2));
+    let unionSet = new Set(num1Arr.concat(num2Arr));
+    let strikeNums = num1Arr.filter((x, i) => x === num2Arr[i]);
+    let ballNums = num1Arr.filter((x, i) => x !== num2Arr[i] && num2Arr.includes(x));
+    let miss = unionSet.size;
+    this.strike = strikeNums.length;
+    this.ball = ballNums.length;
+    let decision;
+    if (miss === 6) decision = '낫싱';
+    if (this.strike === 3) decision = '3스트라이크';
+    if (this.ball === 3) decision = '3볼';
+    if (miss !== 6 && this.strike !== 3 && this.ball !== 3) decision = `${this.ball}볼 ${this.strike}스트라이크`;
+    this.decision = decision;
+  }
+}
+
 module.exports = App;
