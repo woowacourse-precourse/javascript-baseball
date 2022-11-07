@@ -4,8 +4,6 @@ class App {
 
 module.exports = App;
 
-matchNumber()
-
 /**
  * 숫자, 숫자의 위치 일치여부 가려내는 기능
  * @param {Array} userNums
