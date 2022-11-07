@@ -19,6 +19,12 @@ describe('내가 구현한 기능 테스트',()=>{
 
   });
 
+  test("컴퓨터가 만든 임의의 수 테스트",()=>{
+    const app = new App();
+    const testResult = app.generateComputerAnswer();
+    expect(testResult).toHaveLength(3);
+  });
+
   test('getHint 내부 함수 호출 테스트 코드',()=>{
     const app = new App();
     const spyJudge = jest.spyOn(app, 'judgeStrikeOrBall');
