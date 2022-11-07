@@ -12,7 +12,7 @@ class BaseBall {
   }
 
   isStrikeOut(random, input) {
-    return this.#countStrike(random, this.#getNumArrayFor(input)) === 3;
+    return this.#countStrike(random, this.#getNumArrayFor(input)) === BASEBALL.STRIKE_COUNT;
   }
 
   #isStrike(randomItem, inputItem) {
