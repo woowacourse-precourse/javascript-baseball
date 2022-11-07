@@ -21,17 +21,13 @@ const ment = {
 class App {
   constructor() {
     this.game = GAME.PLAY;
-    this.try = 1;
+    this.anwser = this.createAnswer();
+    this.startPrint();
   }
 
   play() {
-    if (this.try === 1) {
-      this.anwser = this.createAnswer();
-      this.startPrint();
-    }
     switch (this.game) {
       case GAME.PLAY:
-        this.try += 1;
         this.inputUserAnswer();
         break;
       case GAME.STOP:
@@ -68,24 +64,24 @@ class App {
         this.play();
       } catch (e) {
         this.exceptionEnd();
+        throw e;
       }
     });
   }
 
   answerChecker() {
-    if (this.userAnswer < 100 || this.userAnswer > 999)
-      throw new Error("not number");
+    if (this.userAnswer < 100 || this.userAnswer > 999) throw "not number";
     if (new Set(String(this.userAnswer).split("")).size !== 3)
-      throw new Error("not number");
-    return true;
+      throw "not number";
+    return;
   }
 
   inputUserProgress() {
     MissionUtils.Console.readLine(ment.reStart, (answer) => {
       this.userAnswer = parseInt(answer);
       this.askUser();
+      this.play();
     });
-    this.play();
   }
 
   askUser() {
@@ -95,7 +91,10 @@ class App {
       this.game = GAME.PLAY;
       this.createAnswer();
     }
-    if (!result) this.game = GAME.EXIT;
+    if (!result) {
+      this.game = GAME.EXIT;
+      MissionUtils.Console.print(ment.gameEnd);
+    }
     return;
   }
 
@@ -157,7 +156,6 @@ class App {
   endGame() {
     this.game = GAME.STOP;
     MissionUtils.Console.print(ment.end);
-    this.play();
     return;
   }
 }
