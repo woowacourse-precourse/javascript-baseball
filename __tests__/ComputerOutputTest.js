@@ -42,7 +42,7 @@ describe('출력값 테스트', () => {
     mockRandoms([1, 3, 5]);
 
     const app = new App();
-    app.play();
+    app.startNewGame();
 
     messages.forEach(message =>
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message)),
@@ -55,7 +55,7 @@ describe('출력값 테스트', () => {
     mockRandoms([1, 2, 3]);
 
     const app = new App();
-    app.play();
+    app.startNewGame();
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
@@ -66,7 +66,7 @@ describe('출력값 테스트', () => {
 
     const app = new App();
     const handleMenuInputSpy = jest.spyOn(app, 'handleMenuInput');
-    app.play();
+    app.startNewGame();
 
     expect(handleMenuInputSpy).toHaveBeenCalledWith('1');
     expect(handleMenuInputSpy).toHaveBeenCalledWith('2');
