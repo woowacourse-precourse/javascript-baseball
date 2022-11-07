@@ -1,7 +1,38 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RESULT } = require('../constant/baseball');
+const User = require('./User');
+const Computer = require('./Computer');
+const { NUMBER_LIMIT, MESSAGE, OPTION, RESULT } = require('../constant/baseball');
 
 class Game {
+  constructor() {
+    this.computer = new Computer();
+    this.user = new User();
+  }
+
+  start() {
+    const computerNum = this.computer.makeNumbers();
+    this.match(computerNum);
+  }
+
+  match(computerNum) {
+    Console.readLine(MESSAGE.INPUT, userInput => {
+      const isUserInputValid = this.user.validateInput(userInput);
+
+      if (isUserInputValid === false) {
+        return this.throwError();
+      }
+
+      const { ballCount, strikeCount } = this.getGameResult(computerNum, userInput);
+      this.renderGameMessage(ballCount, strikeCount);
+
+      if (strikeCount !== NUMBER_LIMIT) {
+        return this.match(computerNum);
+      }
+
+      this.askUserToRestart();
+    });
+  }
+
   getGameResult(computerNum, userInput) {
     const splittedComputerNum = [...computerNum];
     const splittedUserInput = [...userInput];
@@ -34,6 +65,34 @@ class Game {
     const gameMessage = `${ballMessage} ${strikeMessage}`;
 
     Console.print(gameMessage);
+  }
+
+  askUserToRestart() {
+    Console.print(MESSAGE.SUCCESS);
+
+    Console.readLine(MESSAGE.END, userInput => {
+      if (userInput === OPTION.RESTART) {
+        return this.replay();
+      }
+
+      if (userInput === OPTION.EXIT) {
+        return this.exit();
+      }
+
+      this.throwError();
+    });
+  }
+
+  replay() {
+    this.start();
+  }
+
+  exit() {
+    Console.close();
+  }
+
+  throwError() {
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
