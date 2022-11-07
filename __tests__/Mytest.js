@@ -1,4 +1,5 @@
 const Utils = require("../src/utils/utils.js");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 expect.extend({
   toBeDistinct(received) {
@@ -17,6 +18,19 @@ expect.extend({
     }
   },
 });
+
+const mockInput = (userInput) => {
+  MissionUtils.Console.readLine = jest.fn();
+  MissionUtils.Console.readLine.mockImplementationOnce((question, callback) => {
+    callback(userInput);
+  });
+};
+
+const getSpyLog = (name) => {
+  const logSpy = jest.spyOn(MissionUtils.Console, name);
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe("Utils.checkNumberisOk", () => {
   test("문자가 섞여있으면 예외가 발생해야 한다", () => {
@@ -136,5 +150,29 @@ describe("Utils.returnStringResult", () => {
       //then
       expect(strikeBall).toEqual(results[index]);
     }
+  });
+});
+
+describe("Utils.askGameAgain", () => {
+  test("사용자가 1을 입력하면 게임 다시 시작", () => {
+    //given
+    const gameAgain = "1";
+    mockInput(gameAgain);
+    //when
+    Utils.startGame = jest.fn();
+    Utils.askGameAgain();
+    //then
+    expect(Utils.startGame.mock.calls.length).toBe(1);
+  });
+
+  test("사용자가 2를 입락하면 게임 종료", () => {
+    //given
+    const stopGame = "2";
+    const spyLog = getSpyLog("print");
+    mockInput(stopGame);
+    //when
+    Utils.askGameAgain();
+    //then
+    expect(spyLog).toHaveBeenCalledWith("게임 종료");
   });
 });
