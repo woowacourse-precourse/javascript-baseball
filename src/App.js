@@ -44,6 +44,12 @@ class App {
     return number;
   }
 
+  // 유효성 검사: 입력한 수가 숫자인가
+  checkInputisNumber(number) {
+    if (!isNaN(number)) {
+      throw "숫자를 입력해주세요.";
+    }
+  }
   // 유효성 검사: 입력한 수가 3자리 수인가
   checkNumberLength(number) {
     if (number.length !== 3) {
@@ -61,10 +67,10 @@ class App {
 
   // 유효성 검사: 1 ~ 9 범위에 해당하는 수를 입력했는가
   checkNumberInRange(number) {
-    for (let i = 0; i < number.length; i++) {
-      if (!(parseInt(number[i]) >= 1 && parseInt(number[i]) <= 9)) {
-        throw "1 ~ 9 범위에 해당하는 숫자를 입력하세요.";
-      }
+    if (number.includes(0)) {
+      throw new Error(
+        "0은 입력할 수 없는 숫자입니다. 1 ~ 9 범위에 해당하는 수를 입력해주세요."
+      );
     }
   }
 
