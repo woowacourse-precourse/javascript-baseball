@@ -40,7 +40,7 @@ class Game {
       const inputNumbers = [...input].map(Number);
       const { ball, strike } = this.countScore(inputNumbers, random);
 
-      this.isValidInputNumber(input, RANDOM_NUMBER.RANGE);
+      this.isValidInputNumber(input);
       this.printScore(ball, strike);
 
       if (strike !== 3) {
@@ -112,12 +112,12 @@ class Game {
     });
   }
 
-  isValidInputNumber(numbers, validRange) {
+  isValidInputNumber(numbers) {
     const diversityOfNum = [...new Set(numbers)].length;
 
     if (
       numbers.length !== 3 ||
-      !validRange.test(numbers) ||
+      !RANDOM_NUMBER.RANGE.test(numbers) ||
       diversityOfNum !== 3
     ) {
       throw new Error(ERROR.ENTER_THREE_NUMBER);
