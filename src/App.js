@@ -53,9 +53,9 @@ function printResult(countArr) {
   }
 }//ball, strike count에 따라 결과 출력
 
-function isValidInput(input){
+function isValidInput(input) {
   const regex = /^[0-9]+$/;
-  if(!regex.test(input) || input.length !==3){
+  if (!regex.test(input) || input.length !== 3) {
     throw new Error("유효한 입력값이 아닙니다.");
   }
 }
@@ -85,7 +85,7 @@ function isRepeatGame() {
   Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ", (input) => {
     if (input === "1") playGame();
     else if (input === "2") {
-      Console.print("게임종료");
+      Console.print("게임 종료");
       Console.close();
     }
     else {
@@ -97,14 +97,8 @@ function isRepeatGame() {
 
 class App {
   play() {
-    try {
-      Console.print('숫자 야구게임을 시작합니다.');
-      playGame();
-      
-    } catch (err) {
-      Console.print(err.message);
-      Console.close();
-    }
+    Console.print('숫자 야구게임을 시작합니다.');
+    playGame();
   }
 }
 
