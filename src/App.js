@@ -5,7 +5,7 @@ class App {
     this.game = true;
   }
   play() {
-    if (this.repit) console.log("숫자 야구 게임을 시작합니다.");
+    if (this.repit) MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.repit = false;
 
     const computer = this.computerNumber();
@@ -18,7 +18,7 @@ class App {
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
+      if (!computer.includes(String(number))) {
         computer.push(String(number));
       }
     }
@@ -27,7 +27,7 @@ class App {
   compare(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요", (answer) => {
       const userNumber = this.checkNumber(answer);
-      console.log(`숫자를 입력해주세요 : ${answer}`);
+      MissionUtils.Console.print(`숫자를 입력해주세요 : ${answer}`);
 
       const { ball, strike } = this.strikeCounter(computer, userNumber);
 
