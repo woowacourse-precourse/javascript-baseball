@@ -29,14 +29,41 @@ test('1 = 1', () => {
 
 test('상대방 배열 생성', () => {
   const app = new App();
-  const ComputerArr = app.createAnswer();
-  expect(ComputerArr).toHaveLength(3);
+  app.createAnswer();
+  expect(app.answer).toHaveLength(3);
 });
 
-test('입력값 제한 사항 체크', () => {
-  const app = new App();
-  const startText = app.inputCheck('123');
-  expect(startText).toEqual([1, 2, 3]);
+test('입력값 제한 사항 예외사항 체크', () => {
+  const answers = ['1234'];
+
+  mockQuestions(answers);
+
+  expect(() => {
+    const app = new App();
+    app.inputCheck(answers);
+  }).toThrow();
+});
+
+test('입력값 제한 사항 예외사항 체크2', () => {
+  const answers = ['감사합니다.'];
+
+  mockQuestions(answers);
+
+  expect(() => {
+    const app = new App();
+    app.inputCheck(answers);
+  }).toThrow();
+});
+
+test('입력값 제한 사항 예외사항 체크3', () => {
+  const answers = ['111'];
+
+  mockQuestions(answers);
+
+  expect(() => {
+    const app = new App();
+    app.inputCheck(answers);
+  }).toThrow();
 });
 
 test('사용자 숫자 상대방 숫자 비교', () => {
@@ -129,3 +156,16 @@ test('judgeResult 메서드 return 테스트(false)', () => {
   app.judgeResult(false);
   expect(SPYFunction).toBeCalled();
 });
+
+// test('endingOption 메서드 다시 시작하기 테스트(1)', () => {
+//   const app = new App();
+//   const SPYFunction = jest.spyOn(app, 'play');
+//   const answers = ['1'];
+//   mockQuestions(answers);
+
+//   app.endingOption();
+//   expect(SPYFunction).toBeCalled();
+//   messages.forEach((output) => {
+//     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+//   });
+// });
