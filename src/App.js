@@ -40,6 +40,22 @@ class App {
     const computerNumArr = computerNumbers.map(String);
     const strikeCount = this.getStrikeCount(userNumArr, computerNumArr);
     const ballCount = this.getBallCount(userNumArr, computerNumArr);
+    this.getResult(strikeCount, ballCount, computerNumbers);
+  }
+
+  getResult(strike, ball, computerNumbers) {
+    let result = '';
+    if (strike === 3) {
+      result = 'answer';
+    } else if (strike === 0 && ball === 0) {
+      result = 'nothing';
+    } else if (strike === 0 && ball !== 0) {
+      result = `${ball}볼`;
+    } else if (strike !== 0 && ball === 0) {
+      result = `${strike}스트라이크`;
+    } else if (strike !== 0 && ball !== 0) {
+      result = `${ball}볼 ${strike}스트라이크`;
+    }
   }
 }
 
