@@ -13,12 +13,15 @@ class App {
     return computer; 
   }
 
+  //숫자만 입력했는지 유효성 검사
   numberValidation (arrToValidate) {
     //kiy 를 입력하면 ['k','i', 'y']로 배열에 저장 => Number형으로 변환 시 [NaN, NaN, NaN] 이 됨.
     if(isNaN(arrToValidate[0]) == true ||  isNaN(arrToValidate[1]) == true || isNaN(arrToValidate[2]) == true ){ //숫
       return true;
     }
   }
+
+  //배열 내 원소 중복 여부 검사
   duplicateValidation (arrToValidate){
     const setCollection = new Set(arrToValidate); //배열을 집합으로 변환
     const IS_DUPLICATE = setCollection.size < arrToValidate.length; //배열의 원소 중복 여부
@@ -40,11 +43,11 @@ class App {
       throw '서로 다른 수를 입력해주세요';
     }
   }  
-  /*
+
   //결과 문구 반환하기
   showResultPhrase(ball, strike) {
 
-    let resultPhrase;
+    let resultPhrase = '';
 
     if (ball == 0 && strike == 0) resultPhrase = '낫싱';
     if(ball == 0 && strike != 0) resultPhrase = `${strike}스트라이크`;
@@ -55,28 +58,23 @@ class App {
     return resultPhrase;
 
   }
-*/
+
   //플레이어가 추측한 값(입력값)과 컴퓨터의 정답을 비교하여 추측 결과 알려주기
   showGuessResult(answer, player) {
     let ball = 0;
     let strike = 0;
-    let resultPhrase = '';
+    let guessResult = '';
 
     for (var i=0; i<player.length; i++){
-      if (answer.includes(player[i])){
-        if(player[i]==answer[i]) strike+=1
-        else ball+=1
+      if (answer.includes(player[i])){ //플레이어가 추측한 숫자가 정답 중에 있다면
+        if(player[i] == answer[i]) strike += 1 //위치까지 같다면 스트라이크
+        else ball += 1 //위치는 틀리면 볼
       }
     }
-    //console.log(ball,strike)
-    //guessResult = this.showResultPhrase(ball, strike); //결과 문구(예. 1볼 1스트라이크) 저장
-    if (ball == 0 && strike == 0) resultPhrase = '낫싱';
-    if(ball == 0 && strike != 0) resultPhrase = `${strike}스트라이크`;
-    if(ball !=0 && strike == 0) resultPhrase = `${ball}볼`;
-    if(ball == 0 && strike == 3) resultPhrase = `3스트라이크`;
-    if(ball !=0 && strike !=0) resultPhrase = `${ball}볼 ${strike}스트라이크`;
 
-    return resultPhrase;
+    guessResult = this.showResultPhrase(ball, strike) //결과 문구(예. 1볼 1스트라이크) 저장
+   
+    return guessResult;
   }
   
   //게임 재시작 여부 결정하기
