@@ -192,6 +192,19 @@ describe("숫자 야구 게임", () => {
     }).toThrow(ERROR.NOT_OVERLAP_NUMBER);
   });
 
+  test("예외 테스트: 입력값에 같은 숫자가 포함된 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["121"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOT_DIFFERENCE_NUMBER);
+  });
+
 
 
 });
