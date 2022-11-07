@@ -12,41 +12,47 @@ const getReadLineSpy = () => {
   return logSpy;
 };
 
+const getPrintSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe("볼,스트라이크 개수가 주어졌을 때 올바르게 출력되는 지 체크", () => {
   test("볼 0개 ,스트라이크 0개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(0, 0);
-    expect(console.log).toHaveBeenCalledWith("낫싱");
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
   });
   test("볼 1개 ,스트라이크 0개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(0, 1);
-    expect(console.log).toHaveBeenCalledWith("1볼");
+    expect(logSpy).toHaveBeenCalledWith("1볼");
   });
   test("볼 2개 ,스트라이크 0개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(0, 2);
-    expect(console.log).toHaveBeenCalledWith("2볼");
+    expect(logSpy).toHaveBeenCalledWith("2볼");
   });
   test("볼 1개 ,스트라이크 1개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(1, 1);
-    expect(console.log).toHaveBeenCalledWith("1볼 1스트라이크");
+    expect(logSpy).toHaveBeenCalledWith("1볼 1스트라이크");
   });
   test("볼 0개 ,스트라이크 1개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(1, 0);
-    expect(console.log).toHaveBeenCalledWith("1스트라이크");
+    expect(logSpy).toHaveBeenCalledWith("1스트라이크");
   });
   test("볼 2개 ,스트라이크 1개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(1, 2);
-    expect(console.log).toHaveBeenCalledWith("2볼 1스트라이크");
+    expect(logSpy).toHaveBeenCalledWith("2볼 1스트라이크");
   });
   test("스트라이크 3개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameResultOutput(3, 0);
-    expect(console.log).toHaveBeenCalledWith(
+    expect(logSpy).toHaveBeenCalledWith(
       `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
     );
   });
@@ -54,9 +60,9 @@ describe("볼,스트라이크 개수가 주어졌을 때 올바르게 출력되�
 
 describe("시작 문구 출력 정상적으로 나오는 지 테스트", () => {
   test("볼 0개 ,스트라이크 0개", () => {
-    console.log = jest.fn();
+    const logSpy = getPrintSpy();
     gameStartPhrase();
-    expect(console.log).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
+    expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
 });
 
