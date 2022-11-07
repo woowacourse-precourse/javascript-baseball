@@ -16,8 +16,8 @@ class App {
   }
 
   play() {
-    this.#computer.setDigits();
     Console.print(GAME_MESSAGE.START);
+    this.#computer.setDigits();
     this.#readUserNumber();
   }
 
@@ -34,12 +34,12 @@ class App {
     const ballStrikeCount = BaseballUtils.countBallAndStrike(computerDigits, userDigits);
     const countMessage = BaseballUtils.getCountMessage(ballStrikeCount);
 
-    Console.print(this.#computer.digits);
     Console.print(countMessage);
 
     if (ballStrikeCount.strike === RULE.LENGTH) {
       Console.print(GAME_MESSAGE.CORRECT);
       this.#readRestartInput();
+      return;
     }
 
     this.#readUserNumber();

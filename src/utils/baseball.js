@@ -2,10 +2,7 @@ const { GAME_MESSAGE } = require('../constants/baseball');
 
 class BaseballUtils {
   static countBallAndStrike(computerDigits, userDigits) {
-    const ballStrikeCount = {
-      ball: 0,
-      strike: 0,
-    };
+    const ballStrikeCount = { ball: 0, strike: 0 };
 
     userDigits.forEach((digit, i) => {
       if (digit === computerDigits[i]) {
