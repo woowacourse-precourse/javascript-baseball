@@ -1,5 +1,6 @@
 const Message = require('./Message');
 const Random = require('./Random');
+const Game = require('./Game');
 
 class App {
   #isStart = false;
@@ -11,6 +12,8 @@ class App {
   #random = new Random();
 
   #mesage = new Message();
+
+  #game = new Game();
 
   isStart() {
     return this.#isStart;
@@ -41,6 +44,19 @@ class App {
     }
 
     return false;
+  }
+
+  userInteraction(userInputArray, computerInputArray) {
+    const [ball, strike] = this.#game.calculate(userInputArray, computerInputArray);
+
+    this.#mesage.print(Message.count(ball, strike));
+    this.isStrike(strike);
+
+    if (!this.isFinish()) {
+      this.play();
+    }
+
+    return [ball, strike];
   }
 }
 
