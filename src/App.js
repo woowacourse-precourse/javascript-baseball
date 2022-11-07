@@ -1,29 +1,23 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Random } = require("@woowacourse/mission-utils");
+const Console = require("./Console");
 
 class App {
-  START = "숫자 야구 게임을 시작합니다.";
-  REQUEST_NUMBER = "숫자를 입력해주세요 : ";
-  THREE_STRIKE = "3스트라이크";
-  END = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-  AGAIN_OR_END = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
-
   answer = [];
   userInput = "";
 
   play() {
     if (this.answer.length === 0) {
-      this.print(this.START);
+      Console.print(Console.START);
       this.generateAnswer();
     }
 
-    console.log(this.answer);
-    this.getInput(this.REQUEST_NUMBER, (userInput) => {
+    Console.readline(Console.REQUEST_NUMBER, (userInput) => {
       if (this.isValidInput(userInput)) {
         this.userInput = userInput;
-        this.print(this.calculateCount(userInput));
+        Console.print(this.calculateCount(userInput));
       }
       if (this.isGameEnd()) {
-        this.print(this.END);
+        Console.print(Console.END);
         this.askPlayOrExit();
         return;
       }
@@ -69,10 +63,6 @@ class App {
     }
   }
 
-  getInput(question, callback) {
-    Console.readLine(question, callback);
-  }
-
   isValidInput(userInput) {
     if (userInput.length !== 3) throw new Error("3자리 숫자를 입력해주세요.");
 
@@ -99,16 +89,14 @@ class App {
   }
 
   askPlayOrExit() {
-    this.getInput(this.AGAIN_OR_END, (userInput) => {
+    Console.readline(Console.AGAIN_OR_END, (userInput) => {
       if (userInput === "1") {
         this.generateAnswer();
         this.play();
-      } else Console.close();
+      } else {
+        Console.close();
+      }
     });
-  }
-
-  print(message) {
-    Console.print(message);
   }
 }
 
