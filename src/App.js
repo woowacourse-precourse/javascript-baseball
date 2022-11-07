@@ -25,6 +25,9 @@ class App {
   getUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.user = input.split("");
+      if([...new Set(this.user)].length < 3){
+        throw Error('중복된 숫자는 입력할 수 없어요.');
+      }
       if (this.user.filter((number) => number.match(/[^1-9]/g)).length) {
         throw Error("1부터 9까지의 숫자만 입력해주세요.");
       }
