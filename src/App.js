@@ -1,9 +1,9 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {
-    let restart_number;
     let random_number;
+    let restart_number;
     let repeat = true;
 
     while (repeat) {
@@ -15,7 +15,7 @@ class App {
         continue;
       } else if (restart_number === 2) {
         repeat = false;
-        MissionUtils.Console.print("게임 종료");
+        MissionUtils.Console.print('게임 종료');
       }
     }
   }
@@ -29,31 +29,31 @@ class App {
   }
 
   INPUT_NUMBER() {
-    let user_input_list;
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-      user_input_list = String(answer)
-        .split("")
-        .map((e) => Number(e));
+    const USER_INPUT_LIST = [];
+    MissionUtils.Console.readLine('숫자를 입력해주세요.', (answer) => {
+      for (let i = 0; i < answer.length; i++) {
+        USER_INPUT_LIST.push(Number(answer[i]));
+      }
     });
-    return user_input_list;
+    return USER_INPUT_LIST;
   }
 
   VALIDATE_NUMBER(NUMBER_LIST) {
     if (NUMBER_LIST.includes(NaN)) {
       //문자열 입력
-      throw "입력값은 문자열이 될 수 없습니다!";
+      throw '입력값은 문자열이 될 수 없습니다!';
     }
     if (NUMBER_LIST.includes(0)) {
       //0입력
-      throw "입력값은 1~9사이의 숫자여야 합니다!";
+      throw '입력값은 1~9사이의 숫자여야 합니다!';
     }
     if (NUMBER_LIST.length !== 3) {
       //3자리가 아닌 숫자 입력
-      throw "입력값은 세 자리 숫자여야 합니다!";
+      throw '입력값은 세 자리 숫자여야 합니다!';
     }
     if (NUMBER_LIST.length !== new Set(NUMBER_LIST).size) {
       //동일한 숫자 입력
-      throw "입력값은 서로 다른 숫자여야 합니다!";
+      throw '입력값은 서로 다른 숫자여야 합니다!';
     }
   }
 
@@ -78,16 +78,16 @@ class App {
         this.HINT(user_input_number, correct_number);
       }
     }
-    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print('3스트라이크');
 
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (num) => {
         num = Number(num);
         if (num === 1 || num === 2) {
           finish_number = num;
         } else {
-          throw "1 또는 2만 입력할 수 있습니다.";
+          throw '1 또는 2만 입력할 수 있습니다.';
         }
       }
     );
@@ -117,13 +117,13 @@ class App {
     }
 
     if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print("낫싱");
+      MissionUtils.Console.print('낫싱');
     } else if (strike !== 0 && ball === 0) {
-      MissionUtils.Console.print(strike + "스트라이크");
+      MissionUtils.Console.print(strike + '스트라이크');
     } else if (strike === 0 && ball !== 0) {
-      MissionUtils.Console.print(ball + "볼");
+      MissionUtils.Console.print(ball + '볼');
     } else {
-      MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
+      MissionUtils.Console.print(ball + '볼 ' + strike + '스트라이크');
     }
   }
 }
