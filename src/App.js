@@ -1,5 +1,7 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
+const INVALID_INPUT_ERR = 'invalid input error';
+
 class App {
   play() {
     this.answer = this._getRandomsStr([1, 2, 3, 4, 5, 6, 7, 8, 9], 3);
@@ -40,8 +42,14 @@ class App {
         this.evaluate(input);
       } else {
         // 입력이 잘못되었다면 예외를 발생시키고 게임을 종료시킨다.
+        throw new Error(INVALID_INPUT_ERR);
       }
-    } catch (e) {}
+    } catch (e) {
+      if (e.message === INVALID_INPUT_ERR) {
+        Console.print('유효하지 않은 입력입니다. 3자리 중복되지 않은 숫자를 입력하세요.\n게임을 종료합니다.');
+        Console.close();
+      }
+    }
   }
 }
 
