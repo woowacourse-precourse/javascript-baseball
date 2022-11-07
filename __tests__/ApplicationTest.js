@@ -98,5 +98,23 @@ describe('숫자 야구 게임', () => {
       app.play();
     }).toThrow('입력숫자의 각 자리는 1~9까지의 숫자여야 합니다.');
   });
-  
+
+  test('예외테스트 : 게임 종료 후 재시작 예외', () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['246', '135', '3'];
+    const logSpy = getLogSpy();
+    const messages = ['낫싱', '3스트라이크'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('1 또는 2만 입력할 수 있습니다.');
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
