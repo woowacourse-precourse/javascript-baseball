@@ -159,11 +159,19 @@ describe("기능 목록 테스트", () => {
       "separateNumbers/invalid-user-input",
     ];
 
+    mockQuestions(answers);
+
     const app = new App();
 
     messages.forEach((message, index) => {
       expect(() => {
         app.separateNumbers(answers[index]);
+      }).toThrow(message);
+    });
+
+    messages.forEach((message) => {
+      expect(() => {
+        app.guessNumbers();
       }).toThrow(message);
     });
   });
