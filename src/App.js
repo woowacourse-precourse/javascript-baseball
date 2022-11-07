@@ -87,7 +87,10 @@ class App {
 
   checkSameNumber(number) {
     for (let i = 1; i < number.length; i++) {
-      if (number.indexOf(number.charAt(i)) != i) {
+      if (
+        number.indexOf(number.charAt(i)) !==
+        number.lastIndexOf(number.charAt(i))
+      ) {
         return true;
       }
     }
