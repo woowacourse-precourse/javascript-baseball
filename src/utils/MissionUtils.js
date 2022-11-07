@@ -48,7 +48,7 @@ const validateUserNumber = (userInput) => {
   if (isOneToNine && isCorrectLength && isNotOverlapped) {
     return true;
   } else {
-    console.log("에러 발생 후 종료");
+    throw new Error("에러 발생 후 종료");
   }
 };
 
