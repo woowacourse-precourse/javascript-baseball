@@ -117,10 +117,39 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
   test("예외 테스트 - 0 입력", () => {
     // 새로 추가한 테스트 케이스
     const randoms = [1, 3, 5];
     const answers = ["109"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 - 게임 종료 후 재시작 질문 시 1, 2가 아닌 다른 숫자 입력", () => {
+    // 새로 추가한 테스트 케이스
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 - 게임 종료 후 재시작 질문 시 1, 2가 아닌 다른 문자 입력", () => {
+    // 새로 추가한 테스트 케이스
+    const randoms = [1, 3, 5];
+    const answers = ["135", "a"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
