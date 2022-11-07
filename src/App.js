@@ -20,6 +20,15 @@ class App {
       this.computerNumbers.push(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
   }
 
+  userNumbersValid(userNumbers) {
+    let removeDuplicateNumbers = new Set(userNumbers);
+
+    if (userNumbers.length != PICK_LENGTH) throw "error";   //숫자를 3개 입력하지 않은 경우
+    if (userNumbers.length != removeDuplicateNumbers.size) throw "error";   //중복 숫자 입력이 있는지 검사
+
+    return 1;
+  }
+
   checkStrike(userNumbers) {
     let strikeCount = 0;
 
@@ -63,6 +72,8 @@ class App {
     let resultComment; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
+      this.userNumbersValid(userNumbers);
+
       strikeCount = this.checkStrike(userNumbers);
       ballCount = this.checkBall(userNumbers);
 
