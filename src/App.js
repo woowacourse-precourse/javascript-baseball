@@ -1,12 +1,11 @@
-const playing = require("./Play");
+const { CONSOLE_UTIL, RANDOM_UTIL } = require("./Utils");
 
 class App {
-  play() {
-    playing();
+  constructor() {
+    this.computerValue = [];
   }
-}
 
-const app = new App();
-app.play();
+  play() {}
+}
 
 module.exports = App;
