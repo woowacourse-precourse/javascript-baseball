@@ -11,6 +11,13 @@ class App {
     } else if (ball > 0) {
       console.log(`${ball}볼`);
     }
+
+    if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.showCommand();
+    } else {
+      this.makeUserNumbers(randomNumber);
+    }
   }
 
   countStrikeAndBall(userNumber, randomNumber) {
@@ -38,7 +45,7 @@ class App {
     }
   }
 
-  
+
   makeUserNumbers(randomNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.validateUserNumbers(inputNumber);
