@@ -60,11 +60,10 @@ class App {
       if (answer === '2') {
         return MissionUtils.Console.close();
       }
+
+      throw new Error('잘못된 수를 입력하셨습니다.');
     });
   }
 }
 
-const app = new App();
-app.play();
-
-//module.exports = App;
+module.exports = App;
