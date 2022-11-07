@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { error, Console } = require("console");
 
 class App {
   play() {
@@ -28,14 +27,14 @@ const duplicateNumber = (playerAnswerElement, index) =>
 
 function verifyPlayerAnswer(playerAnswer) {
   if (
-    isNaN(playerAnswer) ||
-    playerAnswer.length !== creatComputerAnswer.length ||
-    playerAnswer.some(isNumberRange) ||
-    0 < playerAnswer.filter(duplicateNumber).length
+    !isNaN(playerAnswer) ||
+    playerAnswer.length === creatComputerAnswer.length ||
+    playerAnswer.every(isNumberRange) ||
+    0 === playerAnswer.filter(duplicateNumber).length
   ) {
-    throw new Error("잘못된 값을 입력했습니다.");
-  } else {
     compareAnswer(playerAnswer);
+  } else {
+    throw new Error("잘못된 값을 입력했습니다.");
   }
 }
 
