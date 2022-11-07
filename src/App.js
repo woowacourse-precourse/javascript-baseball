@@ -28,7 +28,7 @@ class App {
 
   printResult(userInput) {
     const result = getResult(this.answer, userInput);
-    console.log(result);
+    Console.log(result);
     if (this.checkCorrect(result)) this.gameOver();
     else this.getUserInput();
   }

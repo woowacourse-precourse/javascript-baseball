@@ -12,7 +12,7 @@ class printMessage {
   }
 
   print() {
-    Console.print(this.message);
+    console.log(this.message);
     return this;
   }
 }
