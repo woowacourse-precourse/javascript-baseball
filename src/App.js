@@ -31,8 +31,38 @@ class App {
       Console.print(this.computerNumber);
       Console.print(this.userNumber);
 
+      this.compareNumbers(this.computerNumber, this.userNumber);
+
       Console.close();
     });
+  }
+
+  compareNumbers(computerNumber, userNumber) {
+    let [ball, strike] = [0, 0];
+
+    for (let i = 0; i < 3; i++) {
+      if (computerNumber[i] === userNumber[i]) {
+        strike++;
+      } else if (userNumber.includes(computerNumber[i])) {
+        ball++;
+      }
+    }
+
+    this.setHint(ball, strike);
+  }
+
+  setHint(ball, strike) {
+    if (strike === 3) {
+      Console.print('3스트라이크');
+    }else if (ball === 0 && strike === 0) {
+      Console.print('낫싱');
+    } else if (ball > 0 && strike === 0) {
+      Console.print(`${ball}볼`);
+    } else if (ball > 0 && strike > 0) {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    } else {
+      Console.print(`${strike}스트라이크`);
+    }
   }
 
   play() {
@@ -40,5 +70,8 @@ class App {
     this.getUserNumber();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;

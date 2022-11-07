@@ -4,7 +4,7 @@
      - MissionUtils 라이브러리의 Console.readLine
 - [x] 컴퓨터의 숫자를 랜덤으로 생성한다.
      - MissionUtils 라이브러리의 Random.pickNumberInRange() 사용
-- [ ] 사용자에게 제공할 힌트를 계산한다.
+- [x] 사용자에게 제공할 힌트를 계산한다.
 - [ ] 정답을 맞출 때까지 2-3번을 반복한다.
 - [ ] 정답을 맞췄다면, 재시작 여부를 묻는다
      - 재시작이면 1-5번 반복
