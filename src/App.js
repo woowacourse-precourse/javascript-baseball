@@ -10,18 +10,6 @@ const VALID_NUMBER_LENGTH = 3;
 function App () {
   this.randomNumber;
   this.play = () => {
-    const getRandomNumber = (min, max) => {
-      const randomNumberArray = [];
-
-      while (randomNumberArray.length < VALID_NUMBER_LENGTH) {
-        const randomNumber = MissionUtils.Random.pickNumberInRange(min, max);
-        if (!randomNumberArray.includes(randomNumber)) {
-          randomNumberArray.push(randomNumber);
-        }
-      }
-      return randomNumberArray.join('');
-    };
-
     function matchNumber (num1, num2) {
       let strike = 0;
       let ball = 0;
@@ -104,6 +92,19 @@ function App () {
 }
 
 module.exports = App;
+
+const getRandomNumber = (min, max) => {
+  const randomNumberArray = [];
+
+  while (randomNumberArray.length < VALID_NUMBER_LENGTH) {
+    const randomNumber = MissionUtils.Random.pickNumberInRange(min, max);
+    if (!randomNumberArray.includes(randomNumber)) {
+      randomNumberArray.push(randomNumber);
+    }
+  }
+  return randomNumberArray.join('');
+};
+
 
 const isValidInput = (input) => {
   if (!isValidLength(input)) {
