@@ -60,3 +60,5 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 });
+
+module.exports = { mockQuestions, mockRandoms, getLogSpy };
