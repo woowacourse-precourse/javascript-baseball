@@ -35,18 +35,26 @@ class App {
      */
     Console.readLine(this.MESSAGE.USER_ANSWER, (input) => {
       const numbers = this.splitInput(input);
-      if (this._controller.isValidInput(numbers) === false) {
-        throw INPUT_ERROR;
-      };
+      this.validateInput(numbers);
       const hint = this._controller.compareAnswer(numbers, this._computer.answer);
-      if (hint === NO_MESSAGE) {
-        this.printMessage(this.MESSAGE.GAME_OVER);
-        this.getUserSelect();
-      } else {
-        this.printMessage(hint);
-        this.start();
-      }
+      this.validateHint(hint);
     });
+  }
+
+  validateInput(numbers) {
+    if (this._controller.isValidInput(numbers) === false) {
+      throw INPUT_ERROR;
+    };
+  }
+
+  validateHint(hint) {
+    if (hint === NO_MESSAGE) {
+      this.printMessage(this.MESSAGE.GAME_OVER);
+      this.getUserSelect();
+    } else {
+      this.printMessage(hint);
+      this.start();
+    }
   }
 
   getUserSelect() {
