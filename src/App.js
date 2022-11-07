@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor(answer) {
     this.answer = answer;
+    this.isDone = false;
   }
 
   startGame() {
@@ -21,7 +22,9 @@ class App {
   }
 
   getUserInput(currentAnswer) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {});
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.createHint(answer, currentAnswer);
+    });
   }
 
   addScore(obj, position) {
@@ -61,6 +64,16 @@ class App {
           : (hint = `${score.ball}볼 ${score.strike}스트라이크`);
     }
     this.printHint(hint);
+    if (hint === "3스트라이크") {
+      this.printGameOver();
+      return;
+    }
+    this.isDone = false;
+  }
+
+  printGameOver() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.isDone = true;
   }
 
   play() {
