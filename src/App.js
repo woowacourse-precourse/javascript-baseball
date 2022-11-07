@@ -21,7 +21,7 @@ const ment = {
 class App {
   constructor() {
     this.game = GAME.PLAY;
-    this.anwser = this.createAnswer();
+    this.answer = this.createAnswer();
     this.startPrint();
   }
 
@@ -89,7 +89,7 @@ class App {
 
     if (result) {
       this.game = GAME.PLAY;
-      this.createAnswer();
+      this.answer = this.createAnswer();
     }
     if (!result) {
       this.game = GAME.EXIT;
@@ -110,7 +110,7 @@ class App {
   }
 
   compareUserAnswer() {
-    const answer = this.anwser;
+    const answer = this.answer;
     const user = String(this.userAnswer).split("");
     const obj = { ball: 0, strike: 0 };
     user.map((n, i) => {
