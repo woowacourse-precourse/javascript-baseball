@@ -62,9 +62,11 @@ class App {
     print(this.randomNum);
     if (this.nothing()) {
       print("낫싱");
-    } else if (!this.nothing() && this.ball() > 0) {
+    }
+    if (!this.nothing() && this.ball() > 0) {
       score += `${this.ball()}볼`;
-    } else if (!this.nothing() && this.strike() > 0) {
+    }
+    if (!this.nothing() && this.strike() > 0) {
       score += `${this.strike()}스트라이크`;
     }
     print(score);
