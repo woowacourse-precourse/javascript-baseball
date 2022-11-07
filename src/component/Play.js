@@ -22,6 +22,8 @@ class Play {
 
       return countBall;
     }, 0);
+
+    return { countStrike, countBall };
   }
 }
 
