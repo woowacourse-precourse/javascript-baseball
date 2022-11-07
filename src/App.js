@@ -19,7 +19,7 @@ class App {
   start() {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
       if (!this.isValidUserInput(input)) {
-        throw new Error('잘못된 입력입니다.');
+        this.isError();
       }
       Console.print(`숫자를 입력해주세요 : ${this.userInput}`);
       this.strike = 0;
@@ -33,18 +33,11 @@ class App {
     });
   }
 
-  getUserInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.userInput = input.replace(/ /g, '');
-
-      Console.print(`숫자를 입력해주세요 : ${this.userInput}`);
-    });
-    return this.userInput;
-  }
-
   isValidUserInput(input) {
     input.replace(/ /g, '');
-    if (input.length !== 3 || Number.isNaN(+input)) return false;
+    if (input.length !== 3 || Number.isNaN(+input)) {
+      return false;
+    }
     this.userInput = input;
     return true;
   }
@@ -101,6 +94,10 @@ class App {
     Console.close();
   }
 
+  isError() {
+    throw new Error('잘못된 입력입니다.');
+  }
+
   askUserToRestart() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ');
@@ -115,7 +112,7 @@ class App {
         if (input === '2') {
           this.isExit();
         } else {
-          throw new Error('잘못된 입력입니다');
+          this.isError();
         }
       },
     );
