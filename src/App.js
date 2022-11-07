@@ -14,7 +14,7 @@ const startGame = () => {
   return;
 };
 
-const generateAnswer = (props) => {
+const generateAnswer = () => {
   const answer = [];
   while (answer.length < 3) {
     const num = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -44,11 +44,9 @@ const checkExcept = (number) => {
 
   if (numArr.length !== numSet.size) {
     throw "duplicated character";
-    return false;
   }
   if (number.length !== 3) {
     throw "invalid input length";
-    return false;
   }
 
   return true;
