@@ -1,6 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class Computer {
+  setUp() {
+    this.correctNumberList = this.getRandomThreeDigitNumber().split("");
+  }
+
   getRandomThreeDigitNumber() {
     const numberList = [];
     while (numberList.length < 3) {
