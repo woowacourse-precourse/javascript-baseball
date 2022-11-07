@@ -25,6 +25,7 @@ const getNumber = (randomNumberArr) => {
       exceptionHandlers.errorGetNumber();
     }
     if (is3Strike(num, randomNumberArr.join(''))) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       guessedCorrectly();
     } else {
       getNumber(randomNumberArr);
@@ -45,7 +46,6 @@ const wrongNumber = (num) => {
 };
 
 const guessedCorrectly = () => {
-  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   MissionUtils.Console.readLine(
     '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
     (num) => {
@@ -63,6 +63,7 @@ const exitOrRestart = (num) => {
   }
   if (num !== '1' && num !== '2') {
     exceptionHandlers.errorExitOrRestart();
+    guessedCorrectly();
   }
 };
 
