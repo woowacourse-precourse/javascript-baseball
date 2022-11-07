@@ -12,6 +12,24 @@ class App {
     Console.print(message);
   }
 
+  lengthCheck(inputData) {
+    return inputData.length === 3;
+  }
+
+  isNumber(inputData) {
+    return Number.isInteger(inputData);
+  }
+
+  isNegative(inputData) {
+    return Math.sign(inputData) === -1;
+  }
+
+  checkValidData(data) {
+    return (
+      !this.lengthCheck(data) || this.isNegative(data) || this.isNumber(data)
+    );
+  }
+
   gameStart() {
   }
 
