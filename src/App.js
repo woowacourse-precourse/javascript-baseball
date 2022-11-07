@@ -25,7 +25,7 @@ class App {
     }
   }
 
-  printStrikeAndBall(strike,ball){
+  printStrikeAndBall(strike, ball) {
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
@@ -51,7 +51,7 @@ class App {
         }
       });
 
-      this.printStrikeAndBall(strike,ball);
+      this.printStrikeAndBall(strike, ball);
       this.correctAnswer(strike, randomNumber);
     }
   }
