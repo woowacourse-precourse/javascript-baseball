@@ -3,7 +3,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   // 게임 종료 여부 확인(1: 시작, 2: 종료)
   gameOver() {
-
+    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.readLine("", (answer) => {
+      if (answer == '1') this.gameStart();
+      else if (answer == '2') {
+        MissionUtils.Console.print("게임 종료.");
+        MissionUtils.Console.close();
+      }
+    });
   }
 
   // 결과 출력
