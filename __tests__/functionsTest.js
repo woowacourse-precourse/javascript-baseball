@@ -34,7 +34,7 @@ describe("야구 게임 테스트", () => {
     mockRandoms(number);
 
     const app = new App();
-    const result = app.selectComputer();
+    const result = selectComputer();
 
     expect(result).toEqual("123");
   });
