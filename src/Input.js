@@ -5,6 +5,11 @@ class Input {
     if (this.isLengthThree(input))
       throw new Error("3자리 숫자를 입력해주세요.");
     const numArr = input.split("").map(Number);
+    if (!this.isAllNum(numArr)) return;
+  }
+
+  isAllNum(numArr) {
+    return numArr.every((num) => this.checkNum(num));
   }
 
   isLengthThree(input) {
