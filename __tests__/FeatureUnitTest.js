@@ -129,4 +129,26 @@ describe('기능 단위 목록별 테스트', () => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('기능7 재시작 또는 종료 처리', () => {
+    const printSpy = getPrintSpy();
+
+    const randoms = [1, 3, 3, 3, 5];
+    const answers = ['135', '1', '135', '2'];
+    const messages = [
+      '3스트라이크',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.setUserInput([1, 3, 5]);
+
+    messages.forEach(output => {
+      expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
