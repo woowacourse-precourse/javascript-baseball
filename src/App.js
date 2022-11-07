@@ -8,11 +8,12 @@ const ALL_STRIKE = "3스트라이크"
 
 class App {
   constructor() {
-    this.computerNumbers = null;
+    this.computerNumbers = [];
   }
 
   setComputerNumbers() {
-    this.computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(MIN_RANGE, MAX_RANGE, PICK_LENGTH);
+    for (let i = 0; i < PICK_LENGTH; i++) 
+      this.computerNumbers.push(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
   }
 
   checkStrike(userNumbers) {
@@ -61,7 +62,8 @@ class App {
       strikeCount = this.checkStrike(userNumbers);
       ballCount = this.checkBall(userNumbers);
 
-      MissionUtils.Console.print(resultComment = this.printResult(strikeCount, ballCount));
+      resultComment = this.printResult(strikeCount, ballCount)
+      MissionUtils.Console.print(resultComment);
       if (resultComment == ALL_STRIKE)
         this.checkGameEnd();
       else
@@ -85,6 +87,8 @@ class App {
     this.setComputerNumbers();
 
     this.startGame();
+
+    MissionUtils.Console.close();
   }
 }
 
