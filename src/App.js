@@ -64,6 +64,32 @@ class App {
     });
   }
 
+  assertRule() {
+    const { result } = this;
+    const { assertStrike, assertBall } = this.resultAssert;
+
+    const userInputArray = [...this.#userInput];
+    userInputArray.forEach((number, index) => {
+      if (assertStrike(number, index)) result.strike = result.strike + 1 || 1;
+      if (assertBall(number, index)) result.ball = result.ball + 1 || 1;
+    });
+  }
+
+  printResult() {
+    const { strike, ball } = this.result;
+
+    const BALL_MESSAGE = ball ? `${ball}${GameMessage.BALL} ` : '';
+    const STRIKE_MESSAGE = strike ? `${strike}${GameMessage.STRIKE} ` : '';
+    const NOTHING_MESSAGE = !strike && !ball ? GameMessage.NOTHING : '';
+
+    MissionUtils.Console.print(BALL_MESSAGE + STRIKE_MESSAGE + NOTHING_MESSAGE);
+    if (strike === 3) {
+      MissionUtils.Console.print(GameMessage.GAMEOVER_STRIKE_MESSAGE);
+    } else {
+      this.getUserInput();
+    }
+  }
+
   end() {
     MissionUtils.Console.readLine(GameMessage.END_GAME_MESSAGE, (input) => {
       switch (input) {
