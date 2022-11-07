@@ -1,4 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
+const Console = require("./Console");
 
 class App {
   constructor() {
@@ -6,7 +7,12 @@ class App {
     this.input = "";
   }
 
-  play() {}
+  play() {
+    if (!this.answer.length) {
+      Console.print(Console.START);
+      this.makeAnswer();
+    }
+  }
 
   makeAnswer() {
     if (this.answer.length) this.answer = "";
