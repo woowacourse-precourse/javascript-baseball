@@ -16,5 +16,11 @@ class ValidUserNumbers {
       throw new Error(ERROR_MESSAGE);
     }
   }
+  static isvalidRestart(restartNumber) {
+    restartNumber = Number(restartNumber);
+
+    if (restartNumber !== 1 && restartNumber !== 2)
+      throw new Error("1 또는 2만 입력해주세요.");
+  }
 }
 module.exports = ValidUserNumbers;

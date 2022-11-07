@@ -4,10 +4,10 @@ const ValidUserNumbers = require("./ValidUserInput");
 
 class BaseballGame {
   constructor() {
-    this.GameInit(true);
+    this.GameStart(true);
   }
 
-  GameInit(FirstGame) {
+  GameStart(FirstGame) {
     this.FirstGame = FirstGame;
     this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
   }
@@ -67,4 +67,19 @@ class BaseballGame {
     if (strike === 3)
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   };
+
+  isvalidRestart = (OneOrTwo) => {
+    OneOrTwo = Number(OneOrTwo);
+    ValidUserInput.isvalidRestart(OneOrTwo);
+
+    if (OneOrTwo == 1) {
+      this.GameStart(false);
+      this.playGame();
+    } else if (OneOrTwo == 2) {
+      Console.print("게임 종료");
+      Console.close();
+    }
+  };
 }
+
+module.exports = BaseballGame;
