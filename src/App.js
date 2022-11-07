@@ -2,6 +2,14 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  setRandomDigit() {
+    const randomDigit = new Set();
+    while (randomDigit.size < INPUT_LENGTH) {
+      randomDigit.add(Random.pickNumberInRange(START_DIGIT, END_DIGIT));
+    }
+    return Array.from(randomDigit);
+  }
+
   showStartMessage() {
     Console.print('숫자 야구 게임을 시작합니다.');
   }
