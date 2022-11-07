@@ -15,24 +15,24 @@ describe('컴퓨터 숫자 생성', () => {
   });
 
   test('숫자의 갯수는 세 개이다.', () => {
-    const randoms = ['1', '1', '4', '5', '6'];
+    const randoms = [1, 1, 4, 5, 6];
 
     mockRandoms(randoms);
 
     const computer = new BaseballComputer();
-    computer.setNumbers();
+    computer.setDigits();
 
-    expect(computer.numbers).toHaveLength(3);
+    expect(computer.digits).toHaveLength(3);
   });
 
   test('서로 다른 임의의 수로 구성되어 있다', () => {
-    const randoms = ['1', '1', '4', '5'];
+    const randoms = [1, 1, 4, 4, 5];
 
     mockRandoms(randoms);
 
     const computer = new BaseballComputer();
-    computer.setNumbers();
+    computer.setDigits();
 
-    expect(computer.numbers).toStrictEqual(['1', '4', '5']);
+    expect(computer.digits).toStrictEqual(['1', '4', '5']);
   });
 });

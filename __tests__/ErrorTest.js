@@ -84,13 +84,15 @@ describe('재시작 여부 입력 예외 테스트', () => {
   });
 
   test('1, 2 이외의 값 입력 시 예외가 발생해야 한다.', () => {
-    const invalidInput = ['a'];
+    const randoms = [1, 3, 5];
+    const answers = ['246', '135', 'a'];
 
-    mockQuestions(invalidInput);
+    mockRandoms(randoms);
+    mockQuestions(answers);
 
     expect(() => {
       const app = new App();
-      app.readRestartInput();
+      app.play();
     }).toThrow();
   });
 });
