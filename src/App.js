@@ -3,13 +3,13 @@ class User {
   game;
   constructor() {
     this.game = new BaseBallGame();
-    this.input();
+    this.play();
   }
-  input() {
+  play() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
       const isPlay = this.game.output(inputAnswer);
       if(isPlay){
-        this.input();
+        this.play();
       }
       this.selectRePlay();
     });
@@ -17,7 +17,7 @@ class User {
   selectRePlay(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (selectReplay) => {
       if(selectReplay === 1){
-        this.input();
+        this.play();
       }
       if(selectReplay === 2){
         this.finish();
