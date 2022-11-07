@@ -27,11 +27,11 @@
 
 ### Model 구현
 
-- [] computerNumber 모델 구현
-  - [] 컴퓨터가 임의로 선택한 3개의 수 구현
-  - [] 상태 관리 로직 구현
-- [] userGivenNumber 모델 구현
-  - [] 유저가 입력한 수 상태 관리 로직 구현
+- [x] computerNumber 모델 구현
+  - [x] 컴퓨터가 임의로 선택한 3개의 수 구현
+  - [x] 상태 관리 로직 구현
+- [x] userGivenNumber 모델 구현
+  - [x] 유저가 입력한 수 상태 관리 로직 구현
 
 ### View 구현
 
