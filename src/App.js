@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const message = require('./MESSAGE');
+const StrikeBall = require('./StrikeBall');
 
 class App {
   constructor() {
@@ -9,18 +10,11 @@ class App {
     this.UserInputNumber = 'InitINPUT';
   }
 
-  Init() {
-    this.ball = 0;
-    this.strike = 0;
-  }
-
   input() {
-    MissionUtils.Console.readLine('숫자를입력하세요', (InputNumber) => {
+    MissionUtils.Console.readLine('숫자를 입력하세요', (InputNumber) => {
       MissionUtils.Console.print(InputNumber);
       this.UserInputNumber = InputNumber;
     });
-    this.ball = 0;
-    this.strike = 0;
   }
 
   CreateRandom() {
@@ -32,16 +26,6 @@ class App {
       }
     }
     return RandomArr;
-  }
-
-  IfStrike() {
-    this.input();
-    if (this.UserInputNumber === '1') {
-      this.play();
-    } else {
-      MissionUtils.Console.print(message.END);
-      MissionUtils.Console.close();
-    }
   }
 
   CheckInputIsValid() {
@@ -56,50 +40,31 @@ class App {
     return true;
   }
 
-  StrikeBall() {
-    for (let i = 0; i < this.RANGE; i += 1) {
-      if (this.Number[i] === this.UserInputNumber[i]) {
-        this.strike += 1;
-      } else if (
-        this.Number[i] !== this.UserInputNumber[i] &&
-        this.Number.includes(this.UserInputNumber[i])
-      ) {
-        this.ball += 1;
-      }
-    }
-  }
-
-  PrintStrikeBall() {
-    if (this.strike === 0 && this.ball > 0) {
-      MissionUtils.Console.print(`${this.ball}볼`);
-    } else if (this.strike > 0 && this.ball === 0) {
-      MissionUtils.Console.print(`${this.strike}스트라이크`);
-    } else if (this.strike === 0 && this.ball === 0) {
-      MissionUtils.Console.print('낫싱');
-    } else {
-      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
-    }
-  }
-
   play() {
     this.Number = this.CreateRandom().join('');
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다!');
+    let strikeball = new StrikeBall();
     while (true) {
-      this.Init();
       this.input();
-
       if (this.CheckInputIsValid(this.UserInputNumber) === false) {
         break;
       }
-      this.StrikeBall();
-      this.PrintStrikeBall();
-      if (this.strike === 3) {
+      strikeball = new StrikeBall();
+      strikeball.InitStrikeBall();
+      strikeball.GetStrikeBall(this.UserInputNumber, this.Number);
+      strikeball.PrintStrikeBall();
+      if (strikeball.Strike === 3) {
         MissionUtils.Console.print(message.SUCCESS);
         break;
       }
     }
-    if (this.strike === 3) {
-      this.IfStrike();
+    if (strikeball.Strike === 3) {
+      if (strikeball.IfStrike()) {
+        this.play();
+      } else {
+        MissionUtils.Console.print(message.END);
+        MissionUtils.Console.close();
+      }
     } else if (this.UserInputNumber !== 'InitINPUT') {
       throw message.INPUTERROR;
     }
