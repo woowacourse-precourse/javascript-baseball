@@ -1,4 +1,5 @@
 const { isBall, isStrike } = require("../src/Referee");
+const validateUserInput = require("../src/utils");
 
 describe("Referee Test", () => {
   test("다른 자리에 있는 숫자의 수를 세야한다.", () => {
@@ -26,5 +27,39 @@ describe("Referee Test", () => {
     expect(
       isStrike(answer, input)
     ).toEqual(1);
+  });
+});
+
+describe("utils Test", () => {
+  test("입력값의 길이는 3이어야 한다.", () => {
+    const input = [3, 5];
+    
+    expect(()=>{
+      validateUserInput(input);
+    }).toThrow();
+  });
+
+  test("입력값에는 중복값이 없어야한다.", () => {
+    const input = [4, 1, 1];
+    
+    expect(()=>{
+      validateUserInput(input);
+    }).toThrow();
+  });
+
+  test("입력값의 각 자릿수는 1 ~ 9 사이의 자연수이다.", () => {
+    const input = [0, 5, 6];
+    
+    expect(()=>{
+      validateUserInput(input);
+    }).toThrow();
+  });
+
+  test("입력값의 각 자릿수는 1 ~ 9 사이의 자연수이다.", () => {
+    const input = ["a", 5, 6];
+    
+    expect(()=>{
+      validateUserInput(input);
+    }).toThrow();
   });
 });
