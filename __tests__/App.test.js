@@ -101,4 +101,15 @@ describe('userInteraction()', () => {
 
     expect(app.userInteraction(userInputArray)).toHaveLength(2);
   });
+
+  test('입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+    const userInputArray = [1, 2, 3];
+    const computerInputArray = [3, 2, 1];
+
+    app.userInteraction(userInputArray, computerInputArray);
+
+    expect(logSpy).toHaveBeenCalledWith('2볼 1스트라이크');
+  });
 });
