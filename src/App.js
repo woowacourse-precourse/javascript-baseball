@@ -8,17 +8,9 @@ class App {
     const result = [];
     for (let i = 0; i < 3; i++) {
       let num = MissionUtils.Random.pickNumberInRange(1, 9);
-      result.includes(num)?i--:result.push(num)
+      result.includes(num) ? i-- : result.push(num);
     }
-    this.randomNumbers = result;
-  }
-
-  getInputNumbers() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      this.inputExceptionHandling(userInput);
-      const inputNumbers = userInput.split("").map(Number);
-      this.checkInputNumbers(inputNumbers, this.randomNumbers);
-    });
+    return result;
   }
 
   inputExceptionHandling(inputNumber) {
@@ -37,6 +29,7 @@ class App {
   checkInputNumbers(inputNumbers, randomNumbers) {
     this.strikeCount = 0;
     let ballCount = 0;
+    console.log(randomNumbers);
 
     inputNumbers.map((value, index) => {
       value === randomNumbers[index]
@@ -46,35 +39,27 @@ class App {
         : null;
     });
 
-    return this.makeCheckedResult([ballCount, this.strikeCount]);
+    return [ballCount, this.strikeCount];
   }
 
   makeCheckedResult([ballCount, strikeCount]) {
     if (ballCount == 0 && strikeCount == 0) {
-      return this.showCheckedResult("낫싱");
+      return "낫싱";
     }
 
     const strikeResult = `${strikeCount}스트라이크`;
     const ballResult = `${ballCount}볼`;
 
     if (ballCount > 0 && strikeCount == 0) {
-      return this.showCheckedResult(ballResult);
+      return ballResult;
     }
     if (ballCount == 0 && strikeCount > 0) {
-      return this.showCheckedResult(strikeResult);
+      return strikeResult;
     }
-    return this.showCheckedResult(ballResult + " " + strikeResult);
+    return ballResult + " " + strikeResult;
   }
 
-  showCheckedResult(result) {
-    MissionUtils.Console.print(result);
-    if (this.strikeCount == 3) {
-      this.checkGameEndMessage();
-    }
-    this.getInputNumbers();
-  }
-
-  checkGameEndMessage() {
+  showGameEndMessage() {
     MissionUtils.Console.print(
       "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
@@ -82,18 +67,35 @@ class App {
       if (answer == "1") {
         this.play();
       }
-      if (answer == "2") {
-        MissionUtils.Console.print("게임 종료");
-        MissionUtils.Console.close();
+      MissionUtils.Console.print("게임 종료");
+      MissionUtils.Console.close();
+    });
+  }
+
+  startBaseball() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      this.inputExceptionHandling(userInput);
+      const inputNumbers = userInput.split("").map(Number);
+      const ballStrikeCount = this.checkInputNumbers(
+        inputNumbers,
+        this.randomNumbers
+      );
+      const result = this.makeCheckedResult(ballStrikeCount);
+      MissionUtils.Console.print(result);
+      if (this.strikeCount === 3) {
+        this.showGameEndMessage();
       }
+      this.startBaseball();
     });
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.setRandomNumbers();
-    this.getInputNumbers();
+    this.randomNumbers = this.setRandomNumbers();
+    this.startBaseball();
   }
 }
 
 module.exports = App;
+// const app = new App();
+// app.play();
