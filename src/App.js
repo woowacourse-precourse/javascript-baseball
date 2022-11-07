@@ -5,23 +5,27 @@ const isValidNum = require("./IsValideNum");
 const { makeComment, makeCount } = require("./MakeCount");
 
 class App {
-  constructor() {
-    this.answer = makeNumber();
+  throwErr() {
+    throw new Error(MESSAGE.INPUT_EXCEPTION);
   }
-
   makeOutput() {
     const { strike, ball } = makeCount(this.answer, this.userInput);
     const comment = makeComment(strike, ball);
-    return comment;
+
+    Console.print(comment);
+
+    if (strike !== 3) {
+      this.inputAnswer();
+    } else {
+      this.gameEnd();
+    }
   }
 
   checkInput() {
-    if (isValidNum(this.userInput)) {
-      Console.print(this.makeOutput());
-      this.inputAnswer();
-    } else {
-      throw new Error();
+    if (!isValidNum(this.userInput)) {
+      this.throwErr();
     }
+    this.makeOutput();
   }
 
   inputAnswer() {
@@ -31,9 +35,22 @@ class App {
     });
   }
 
+  gameEnd() {
+    Console.print(GAME_MESSAGE.END_MESSAGE);
+    Console.readLine(GAME_MESSAGE.INTENTION_MESSAGE, (input) => {
+      if (input === "1") return this.gameStart();
+      if (input === "2") return Console.close();
+      return throwErr();
+    });
+  }
+  gameStart() {
+    this.answer = makeNumber();
+    this.inputAnswer();
+  }
+
   play() {
     Console.print(GAME_MESSAGE.START_MESSAGE);
-    this.inputAnswer();
+    this.gameStart();
   }
 }
 const baseball = new App();
