@@ -60,6 +60,31 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("getCompareResult 메서드 비교 결과", () => {
+    const app = new App();
+    app.play();
+    const results = [
+      app.getCompareResult("135", "678"),
+      app.getCompareResult("135", "329"),
+      app.getCompareResult("135", "129"),
+      app.getCompareResult("135", "159"),
+      app.getCompareResult("135", "135"),
+    ];
+
+    const messages = [
+      "낫싱",
+      "1볼",
+      "1스트라이크",
+      "1볼 1스트라이크",
+      "3스트라이크",
+    ];
+
+    results.forEach((result, index) => {
+      expect(result).toEqual(messages[index]);
+    });
+  });
+
   test("진행상황 확인용 테스트", () => {
     const answers = ["123"];
 
