@@ -1,5 +1,5 @@
-const App = require('../src/App');
 const MissionUtils = require('@woowacourse/mission-utils');
+const App = require('../src/App');
 
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
@@ -24,8 +24,10 @@ const getLogSpy = () => {
 };
 
 describe('handleCommand', () => {
-  test('1이 들어오면 initGame()을 실행한다.', () => {});
-  test('2가 들어오면 quit()을 실행한다.', () => {});
+  test.todo('1이 들어오면 initGame()을 실행한다.');
+
+  test.todo('2가 들어오면 quit()을 실행한다.');
+
   test('1 또는 2가 아닌 값이 들어오면 에러가 발생한다.', () => {
     expect(() => {
       const app = new App();

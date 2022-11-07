@@ -18,9 +18,9 @@ class Computer {
   }
 
   processInput(input) {
-    const playerNumbers = this.parseInput(input);
+    const playerNumbers = Computer.parseInput(input);
 
-    if (!this.isValid(playerNumbers)) {
+    if (!Computer.isValid(playerNumbers)) {
       throw new Error(MESSAGES.ERROR);
     }
 
@@ -29,19 +29,19 @@ class Computer {
 
     return {
       numberOfStrike,
-      hintString: this.makeHintString({ numberOfBall, numberOfStrike }),
+      hintString: Computer.makeHintString({ numberOfBall, numberOfStrike }),
     };
   }
 
-  parseInput(input) {
+  static parseInput(input) {
     const trimmedInput = input.trim();
-    const numbers = [...trimmedInput].map(input => Number(input));
+    const numbers = [...trimmedInput].map(Number);
 
     return numbers;
   }
 
-  isValid(numbers) {
-    if (numbers.some(number => isNaN(number))) {
+  static isValid(numbers) {
+    if (numbers.some(number => Number.isNaN(number))) {
       return false;
     }
 
@@ -72,7 +72,7 @@ class Computer {
     }).length;
   }
 
-  makeHintString({ numberOfBall, numberOfStrike }) {
+  static makeHintString({ numberOfBall, numberOfStrike }) {
     const hint = [];
 
     if (numberOfBall) {
