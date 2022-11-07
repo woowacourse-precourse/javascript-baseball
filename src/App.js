@@ -11,7 +11,6 @@ class App {
   }
   game() {
     const answer = makeAnswer();
-    console.log(answer); //정답 미리보는 콘솔 로그
     this.userInput(answer);
   }
   userInput(answer) {
