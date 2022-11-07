@@ -30,9 +30,8 @@ class App {
 
   setRandomDigit() {
     const randomDigit = new Set();
-    while (randomDigit.size < INPUT_LENGTH) {
+    while (randomDigit.size < INPUT_LENGTH)
       randomDigit.add(Random.pickNumberInRange(START_DIGIT, END_DIGIT));
-    }
     return Array.from(randomDigit);
   }
 
@@ -61,9 +60,7 @@ class App {
       Console.print(
         (ball ? `${ball}볼 ` : ``) + (strike ? `${strike}스트라이크` : ``),
       );
-    } else {
-      Console.print('낫싱');
-    }
+    } else Console.print('낫싱');
     return strike === INPUT_LENGTH;
   }
 
