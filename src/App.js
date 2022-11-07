@@ -11,6 +11,7 @@ class App {
 
     while(true){
       player.setState('INGAME');
+      computer.reset();
       
       do{
         baseball.reset();
@@ -24,7 +25,6 @@ class App {
       player.scan();
 
       if(Number(player.getInput())===2) break;
-      computer.reset();
     }
   }
 }

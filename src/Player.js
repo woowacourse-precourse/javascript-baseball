@@ -1,11 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class Player{
-    constructor(){
-        this.state='INGAME';
-        this.input='';
-    }
-
     setState(state){
         this.state=state;
     }
@@ -23,7 +18,7 @@ class Player{
     }
 
     scan(){
-        const MESSAGE = (this.state==='INGAME') ? '숫자를 입력해주세요 : ' : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ';//좀 더 고려해보기.
+        const MESSAGE = (this.state==='INGAME') ? '숫자를 입력해주세요 : ' : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
         MissionUtils.Console.readLine(MESSAGE, (answer)=>{
             if(this.state==='INGAME') this.findErrorInGame(answer);
             if(this.state==='OUTGAME') this.findErrorOutGame(answer);
@@ -31,7 +26,8 @@ class Player{
     }
 
     findErrorInGame(input){
-        const INPUT_LENGTH = input.replace(/[^0-9]/g,'').length;
+        const INPUT_ARRAY = [...new Set(input.replace(/[^0-9]/g,'').split(''))];
+        const INPUT_LENGTH = INPUT_ARRAY.length;
         if(INPUT_LENGTH===3){
             this.setInput(input);
         }else{
