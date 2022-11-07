@@ -1,6 +1,31 @@
 const App = require("../src/App")
 const MissionUtils = require("@woowacourse/mission-utils")
 
+
+describe.only("Read Methods Test", () => {
+
+
+  test.each([
+    [123,[123,'2'],["3스트라이크"]],
+    [123,[124, 123,'2'],["2스트라이크","3스트라이크"]],
+    [213,[124, 123, 213,'2'],["2볼","2볼 1스트라이크","3스트라이크"]],
+  ])("case 1) Read User Input Value", (randomNum,answers,messages) => {
+    const logSpy = getLogSpy();
+    
+    const app = new App();
+    mockQuestions(answers);
+    
+    app.readUserInputValue(randomNum)
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  })
+  
+
+})
+
+
 describe("Print Message Test", () => {
 
   test("case 1) Game Start Message Test", () => {
