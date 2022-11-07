@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.close();
     this.game();
   }
   
@@ -12,14 +13,16 @@ class App {
   }
 
   predict(computer) { 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (input) => {
-      const inputArray = input.split('').map(digit => parseInt(digit));
-      this.checkInputError(inputArray);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      const inputArray = input.split('').map(digit => parseInt(digit));   // 문자열값 배열로 파싱
+      this.checkInputError(inputArray);   // 입력값 형식 테스트
 
-      const countResult = this.countStrikeAndBall(inputArray, computer);
-      MissionUtils.Console.print(this.resultString(countResult));
-      this.terminate(computer, countResult);
-    })
+      const countResult = this.countStrikeAndBall(inputArray, computer); // 스트라이크와 볼 계산
+      MissionUtils.Console.print(this.resultString(countResult));  // 결과 문자열 출력
+      MissionUtils.Console.close();
+      this.terminate(computer, countResult);  // 예측 반복 여부 결정
+    });
+    MissionUtils.Console.close();
   }
 
   terminate(computer, countResult) {
@@ -27,6 +30,7 @@ class App {
       this.predict(computer);
     } else {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.close();
       this.checkContinue();
     }
   }
@@ -34,9 +38,10 @@ class App {
   checkContinue() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
       if(parseInt(input) === 1) this.game();
-      else if(parseInt(input) === 2)  return 0;
+      else if(parseInt(input) === 2) return;
       else throw new Error('input error - should be 1 or 2');
     });
+    MissionUtils.Console.close();
   }
 
   checkInputError(inputArray) {
@@ -55,6 +60,7 @@ class App {
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      MissionUtils.Console.close();
       if (!computer.includes(number)) {
         computer.push(number);
       }
@@ -97,8 +103,6 @@ class App {
     }
     return res;
   }
-
-
 }
 
 module.exports = App;
