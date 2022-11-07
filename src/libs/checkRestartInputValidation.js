@@ -1,7 +1,7 @@
+const { GAME } = require("../constansts");
+
 const checkRestartInputValidation = (input) => {
-  const RESTART = "1";
-  const GAMEOVER = "2";
-  if (!input === RESTART || !input === GAMEOVER)
+  if (!input === GAME.RESTART || !input === GAME.OVER)
     throw new Error("1 또는 2를 입력해야합니다.");
 };
 
