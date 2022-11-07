@@ -1,9 +1,12 @@
 const { Random } = require("@woowacourse/mission-utils");
 const Console = require("./Console");
+const Input = require("./Input");
 
 class App {
-  answer = [];
-  userInput = "";
+  constructor() {
+    this.answer = [];
+    this.userInput = "";
+  }
 
   play() {
     if (this.answer.length === 0) {
@@ -11,8 +14,8 @@ class App {
       this.generateAnswer();
     }
 
-    Console.readline(Console.REQUEST_NUMBER, (userInput) => {
-      if (this.isValidInput(userInput)) {
+    Console.readLine(Console.REQUEST_NUMBER, (userInput) => {
+      if (Input.isValidGuess(userInput)) {
         this.userInput = userInput;
         Console.print(this.calculateCount(userInput));
       }
@@ -63,33 +66,10 @@ class App {
     }
   }
 
-  isValidInput(userInput) {
-    if (userInput.length !== 3) throw new Error("3자리 숫자를 입력해주세요.");
-
-    const userInputArr = Array.from(userInput);
-    userInputArr.every((char) => this.checkNumber(Number(char)));
-    userInputArr.every((char) => this.checkRange(Number(char)));
-
-    const numbers = new Set();
-    userInputArr.forEach((number) => {
-      numbers.add(number);
-    });
-
-    if (numbers.size < 3) throw new Error("중복되지 않는 숫자를 입력해주세요.");
-
-    return true;
-  }
-
-  checkNumber(number) {
-    if (isNaN(number)) throw new Error("숫자를 입력해주세요.");
-  }
-  checkRange(number) {
-    if (number < 1 || number > 9)
-      throw new Error("1~9 사이의 숫자를 입력해주세요.");
-  }
-
   askPlayOrExit() {
-    Console.readline(Console.AGAIN_OR_END, (userInput) => {
+    Console.readLine(Console.AGAIN_OR_END, (userInput) => {
+      Input.checkIsOneOrTwo(userInput);
+
       if (userInput === "1") {
         this.generateAnswer();
         this.play();
