@@ -40,14 +40,28 @@ function handleData(inputArr, targetArr) {
     }
   })
 
-  return makeResult([strike,ball]);
+  return printResult([strike,ball]);
 }
 
-function makeResult(countArr){
+function printResult(countArr){
   const [strike, ball] = countArr;
 
   if(strike === 0 && ball===0){
-
+    Console.print("낫싱");
+    return false;
+  }
+  else if(ball !==0 && strike===0){
+    Console.print(`${ball}볼`);
+    return false;
+  }
+  else if(ball ===0 && strike !==0){
+    Console.print(`${strike}스트라이크`);
+    if(strike === 3) return true;
+    else return false;
+  }
+  else if(ball !==0 && strike !==0){
+    Console.print(`${ball}볼 ${strike}스트라이크`);
+    return false;
   }
 
 }
@@ -68,7 +82,8 @@ class App {
         Console.close();
       }
     } catch (err) {
-
+      Console.print(err);
+      process.exit();
     }
 
 
