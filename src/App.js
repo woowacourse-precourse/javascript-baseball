@@ -20,6 +20,11 @@ class App {
     this.play();
   }
 
+  notThreeStrike() {
+    this.firstTry = false;
+    this.play();
+  }
+
   play() {
     const render = new Render();
 
@@ -53,8 +58,7 @@ class App {
       console.log(this.computerInput);
 
       if (this.strikeCount !== 3) {
-        this.firstTry = false;
-        this.play();
+        this.notThreeStrike();
       }
       if (this.strikeCount === 3) {
         render.replayQnA().then((userSelection) => {
