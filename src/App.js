@@ -5,6 +5,7 @@ const { updateStrikeOrBall } = require("./compare.js");
 class App {
   async play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+
   }
 
   // 정답이 될 무작위 난수를 배열로서 생성하는 함수
@@ -44,6 +45,20 @@ class App {
     }
 
     return result;
+  }
+
+  /**
+   * 비교 결과를 콘솔에 양식에 맞춰 출력하는 함수
+   * @param {*} result - 비교 결과를 담은 딕셔너리
+   */
+  printCompareResult(result) {
+    let message = "";
+    if (result.ball > 0) message += `${result.ball}볼 `; // 볼
+    if (result.strike > 0) message += `${result.strike}스트라이크`; // 스트라이크
+
+    if (message.length === 0) message = "낫싱";
+
+    MissionUtils.Console.print(message);
   }
 }
 
