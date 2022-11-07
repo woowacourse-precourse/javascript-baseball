@@ -9,9 +9,12 @@ const pickRandomNumber = () => {
 };
 
 const getUserInput = () => {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) =>
-    validateUserInput(input)
-  );
+  let answer = pickRandomNumber();
+
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    validateUserInput(input);
+    evaluateUserInput(answer, input);
+  });
 };
 
 const validateUserInput = (input) => {
@@ -25,12 +28,39 @@ const validateUserInput = (input) => {
   return true;
 };
 
+const countStrike = (answer, input) => {
+  let strike = 0;
+
+  answer.split("").forEach((el, i) => {
+    if (el === input[i]) strike++;
+  });
+
+  return strike;
+};
+
+const countBall = (answer, input) => {
+  let ball = 0;
+
+  answer.split("").forEach((el, i) => {
+    if (input.includes(el) && input[i] !== el) ball++;
+  });
+
+  return ball;
+};
+
+const evaluateUserInput = (answer, input) => {
+  const strike = countStrike(answer, input);
+  const ball = countBall(answer, input);
+
+  if (strike === 0 && ball === 0) MissionUtils.Console.print(`낫싱`);
+  else if (strike !== 0 && ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
+  else if (strike === 0 && ball !== 0) MissionUtils.Console.print(`${ball}볼`);
+  else MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+};
+
 class App {
   play() {
     gameStart();
-
-    let answer = pickRandomNumber();
-
     getUserInput();
   }
 }
