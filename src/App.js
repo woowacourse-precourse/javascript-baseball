@@ -66,17 +66,29 @@ class App {
     return result.strike === 3;
   }
 
+  askRestart() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+      if (input === "1") { // 재시작
+        this.play();
+      }
+      if (input === "2") { // 종료
+        MissionUtils.Console.close();
+      }
+    })
+  }
+
   guessAnswer(answer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.isCorrectInput(input);
       input = this.stringToAnswerType(input);
       let result = this.compare(answer, input);
       this.printResult(result);
-      this.isAnswer(result) ? console.log("정답") : console.log("틀림");
+      this.isAnswer(result) ? this.askRestart() : this.guessAnswer(answer);
 
     });
-
   }
+
 
   play() {
     this.printStart();
