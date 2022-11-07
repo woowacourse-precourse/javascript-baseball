@@ -1,8 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Function = require('../src/Function');
 const {
   validByRegex,
   validDuplicate,
-  validInput,
   validOneOrTwo,
   endApp,
 } = require('../src/Function');
@@ -31,9 +31,11 @@ describe('Function 테스트', () => {
   });
 
   test('validInput 테스트', () => {
-    expect(() => {
-      validInput('124');
-    }).toThrow();
+    const input = ['123', '890', '678', '1234', '112', '123', '222'];
+    const answer = [true, false, true, false, false, true, false];
+
+    const message = input.map(el => Function.validInput(el));
+    expect(message).toStrictEqual(answer);
   });
 
   test('validOneOrTwo 테스트', () => {
