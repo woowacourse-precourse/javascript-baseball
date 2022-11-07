@@ -13,6 +13,7 @@ const RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART_CODE}, 종�
 class App {
   play() {
     let answer = this.getRandomNumber();
+    MissionUtils.Console.print(START_MESSAGE);
     this.PlayerInput();
   }
 
@@ -33,7 +34,28 @@ class App {
     });
   }
 
-  checkInput(input) {}
+  checkOverlap(input, checkIndex) {
+    for (let index = 0; index < NUMBER_LENGTH; index++) {
+      if (index === checkIndex) {
+        continue;
+      }
+      if (input[index] === input[checkIndex]) {
+        throw new Error("각 숫자는 중복되지 않아야합니다");
+      }
+    }
+  }
+
+  checkInput(input) {
+    if (input.length !== NUMBER_LENGTH) {
+      throw new Error(`${NUMBER_LENGTH}자리 숫자를 입력해 주세요`);
+    }
+    for (let index = 0; index < NUMBER_LENGTH; index++) {
+      if (isNaN(input[index])) {
+        throw new Error("숫자만 입력해 주세요");
+      }
+      this.checkOverlap(input, index);
+    }
+  }
 }
 
 module.exports = App;
