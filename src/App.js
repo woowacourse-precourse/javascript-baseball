@@ -72,12 +72,12 @@ class App {
     const restartOrEnd = () => {
       MissionUtils.Console.readLine(
         '게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.',
-        (number) => {
-          if (number === '1') app.play();
+        (userInput) => {
+          if (userInput === '1') app.play();
 
-          if (number === '2') MissionUtils.Console.close();
+          if (userInput === '2') MissionUtils.Console.close();
 
-          if (number !== '1' && number !== '2') restartOrEnd();
+          if (userInput !== '1' && userInput !== '2') restartOrEnd();
         }
       );
     };
