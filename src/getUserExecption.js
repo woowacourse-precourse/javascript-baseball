@@ -1,7 +1,7 @@
 const getUserExecption = (input) => {
   const arr = changeNumberToArray(input);
   if (!checkLength(arr) || !checkIsNumber(arr) || !checkOverlap(arr)) {
-    throw "error";
+    throw new Error("Input Error");
   } else {
     return arr;
   }

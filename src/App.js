@@ -43,7 +43,7 @@ class App {
       } else if (parseInt(input) === 2) {
         MissionUtils.Console.close();
       } else {
-        throw new Error();
+        throw new Error("Input Error");
       }
     });
   }
