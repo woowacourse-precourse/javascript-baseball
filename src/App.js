@@ -1,13 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  constructor() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
   play() {
-    // 게임 시작
-    gameStart();
     // 컴퓨터 랜덤 값 생성
     this.computerNumber = RandomChoice();
     // 사용자 값 입력
     this.userInput();
+    console.log(this.computerNumber);
   }
   userInput() {
     let userNumber;
@@ -16,16 +18,22 @@ class App {
       checkValidNumber(answer);
       const resultCount = getCount(userNumber, this.computerNumber);
       getResult(resultCount);
-      if (resultCount.strike !== 3) return this.userInput();
+      console.log(userNumber);
+      if (resultCount.strike !== 3) {
+        return this.userInput();
+      }
       this.gameClear();
     });
   }
   gameClear() {
     MissionUtils.Console.readLine(
-      `3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`,
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
         checkValidation(answer);
-        if (+answer === 1) app.play();
+        console.log(answer);
+        if (+answer === 1) {
+          this.play();
+        }
         if (+answer === 2) {
           MissionUtils.Console.print("게임 종료");
           MissionUtils.Console.close();
@@ -34,6 +42,7 @@ class App {
     );
   }
 }
+
 function checkValidation(answer) {
   if (![1, 2].includes(+answer)) throw new Error("1과 2만 입력할 수 있습니다.");
 }
@@ -66,26 +75,6 @@ function getResult(result) {
     resultMessage = "낫싱";
   }
   MissionUtils.Console.print(resultMessage);
-
-  // if (strikeCount === 3) {
-  //   MissionUtils.Console.print("3스트라이크");
-  // }
-  // if ((strikeCount === 0) & (ballCount === 0)) {
-  //   MissionUtils.Console.print("낫싱");
-  // }
-  // if ((strikeCount !== 0) & (ballCount === 0)) {
-  //   MissionUtils.Console.print(`${strikeCount}스트라이크`);
-  // }
-  // if ((strikeCount === 0) & (ballCount !== 0)) {
-  //   MissionUtils.Console.print(`${ballCount}볼`);
-  // }
-  // if ((strikeCount !== 0) & (ballCount !== 0)) {
-  //   MissionUtils.Console.print(`${strikeCount}스트라이크 ${ballCount}볼`);
-  // }
-}
-
-function gameStart() {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 }
 
 function RandomChoice() {
@@ -112,76 +101,6 @@ function checkValidNumber(answer) {
     throw new Error("중복되지 않는 값을 입력해주세요.");
   }
 }
-
-// function getBall(userNumber, computerNumber) {
-//   let ballCount = 0;
-//   userNumber.forEach((userElement, index) => {
-//     const computerElement = computerNumber[index];
-//     if (computerNumber.includes(userElement)) {
-//       ballCount += 1;
-//     }
-//     return ballCount;
-//   });
-// }
-// function getStrike(userNumber, computerNumber) {
-//   let strikeCount = 0;
-//   userNumber.forEach((userElement, index) => {
-//     let computerElement = computerNumber[index];
-//     if (userElement === computerElement) {
-//       strikeCount += 1;
-//     }
-//     return strikeCount;
-//   });
-// }
-
-// function gameResult(computerNumber, userNumber) {
-//   const strike = countStrike(computerNumber, userNumber);
-//   const ball = countBall(computerNumber, userNumber);
-//   if (strike === 3) {
-//     MissionUtils.Console.print("3스트라이크");
-//     // 게임 종료 후 재시작 여부 알기
-//     reStart();
-//   }
-//   if ((strike === 0) & (ball === 0)) {
-//     MissionUtils.Console.print("낫싱");
-//   }
-//   if ((strike !== 0) & (ball === 0)) {
-//     MissionUtils.Console.print(`${strike}스트라이크`);
-//   }
-//   if ((strike === 0) & (ball !== 0)) {
-//     MissionUtils.Console.print(`${ball}볼`);
-//   }
-//   if ((strike !== 0) & (ball !== 0)) {
-//     MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
-//   }
-// }
-
-// function countStrike(computerNumber, userNumber) {
-//   return [...computerNumber].filter(
-//     (element, index) => userNumber[index] === element
-//   ).length;
-// }
-
-// function countBall(computerNumber, userNumber) {
-//   return [...computerNumber].filter((element) => userNumber.includes(element))
-//     .length;
-// }
-
-// function reStart() {
-//   MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-//   MissionUtils.Console.readLine(
-//     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
-//     (answer) => {
-//       if (answer === "1") {
-//         app.play();
-//       }
-//       if (answer === "2") {
-//         MissionUtils.Console.close();
-//       }
-//     }
-//   );
-// }
-
 const app = new App();
 app.play();
 
