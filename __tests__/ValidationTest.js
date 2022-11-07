@@ -51,4 +51,4 @@ describe("(게임 종료 시) 유저 입력 값 유효성 검사", () => {
 
     expect(result).toEqual(true);
   });
-})
+});
