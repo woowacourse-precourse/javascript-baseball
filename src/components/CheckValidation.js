@@ -10,32 +10,17 @@ const CheckValidation = (answer) => {
   length === 3 ? "" : notRightLength(length);
 };
 
-const inputMore = (length) => {
-  return length - 3 + ERROR_MESSAGE.INPUT_MORE_MSG + ERROR_MESSAGE.GUIDE_MSG;
-};
-const inputLess = (length) => {
-  return 3 - length + ERROR_MESSAGE.INPUT_LESS_MSG + ERROR_MESSAGE.GUIDE_MSG;
-};
-const throwErrorMsg = (typeOfError, length) => {
-  if (length === 3) {
-    throw new Error(typeOfError + ERROR_MESSAGE.GUIDE_MSG);
-  }
-  length > 3
-    ? (function () {
-        throw new Error(typeOfError + inputMore(length));
-      })()
-    : (function () {
-        throw new Error(typeOfError + inputLess(length));
-      })();
+const throwErrorMsg = (typeOfError) => {
+  throw new Error(typeOfError + ERROR_MESSAGE.GUIDE_MSG);
 };
 
-const hasZero = (answer, length) => {
+const hasZero = (answer) => {
   let isZero = false;
   const zeroRegex = /[0]/;
   zeroRegex.test(answer) ? (isZero = true) : (isZero = false);
 
   if (!isZero) return;
-  throwErrorMsg(ERROR_MESSAGE.HAS_ZERO_MSG, length);
+  throwErrorMsg(ERROR_MESSAGE.HAS_ZERO_MSG);
 };
 
 const checkDuplicated = (splitAnswer) => {
@@ -44,30 +29,27 @@ const checkDuplicated = (splitAnswer) => {
     splitAnswer[1] == splitAnswer[2] ||
     splitAnswer[0] == splitAnswer[2]
   ) {
-    throw new Error(ERROR_MESSAGE.DUPLICATED_MSG);
+    throwErrorMsg(ERROR_MESSAGE.DUPLICATED_MSG);
   }
 };
 
-const makeNotANumberList = (splitAnswer) => {
+const checkNotANumber = (splitAnswer) => {
   const regex = /[1-9]/;
-  let tempNotANumberList = [];
-  splitAnswer.forEach((el, idx) => {
-    !regex.test(el) ? tempNotANumberList.push(idx + 1) : "";
-  });
-  return tempNotANumberList;
+  for (let splitChar of splitAnswer) {
+    if (!regex.test(splitChar)) return true;
+  }
+  return false;
 };
 
-const containNotANumber = (splitAnswer, length) => {
-  let notANumberList = makeNotANumberList(splitAnswer);
-  let isNotANumber = `${notANumberList.join(",")}번째 문자`;
-  let hasNotANumber = notANumberList.length !== 0;
+const containNotANumber = (splitAnswer) => {
+  let hasNotANumber = checkNotANumber(splitAnswer);
 
   if (!hasNotANumber) return;
-  throwErrorMsg(isNotANumber + ERROR_MESSAGE.IS_NOT_A_NUMBER_MSG, length);
+  throwErrorMsg(ERROR_MESSAGE.IS_NOT_A_NUMBER_MSG);
 };
 
 const notRightLength = (length) => {
-  throwErrorMsg("", length);
+  throwErrorMsg("");
 };
 
 module.exports = CheckValidation;
