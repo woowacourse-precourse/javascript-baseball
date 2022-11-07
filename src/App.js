@@ -78,27 +78,22 @@ function readControl() {
 }
 
 function isValidNumber(inputList) {
-  const inputNumbers = [];
-
   if (inputList.length !== config.GAME_NUM_SIZE) {
-    return 0;
+    throw "숫자가 유효하지 않습니다.";
   }
 
-  for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
-    if (
-      !(
-        inputList[i] >= config.START_GAME_NUM &&
-        inputList[i] <= config.END_GAME_NUM
-      )
-    ) {
-      return 0;
-    }
-    if (inputNumbers.includes(inputList[i])) {
-      return 0;
-    }
-    inputNumbers.push(inputList[i]);
+  const result = inputList.filter(
+    (input) => input >= config.START_GAME_NUM && input <= config.END_GAME_NUM
+  );
+  if (result.length !== inputList.length) {
+    throw "숫자 범위가 유효하지 않습니다.";
   }
-  return 1;
+
+  if (new Set(inputList).size !== inputList.length) {
+    throw "숫자가 유효하지 않습니다.";
+  }
+
+  return true;
 }
 
 function isValidControl(input) {
@@ -120,9 +115,7 @@ class App {
     while (control === 1) {
       userNumber = readNumber();
       console.log("userNumber", userNumber);
-      if (isValidNumber(userNumber) !== 1) {
-        throw "숫자가 유효하지 않습니다.";
-      }
+      isValidNumber(userNumber);
 
       scoreObject = compareNumber(computerNumber, userNumber);
       printScore(scoreObject);
