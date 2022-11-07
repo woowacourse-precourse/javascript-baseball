@@ -12,7 +12,10 @@ const MESSAGE = {
   ERROR: "유효하지 않은 값을 입력해 게임이 종료됩니다",
 };
 
+const NUMBER_COUNT = 3;
+
 module.exports = {
   RESULT,
   MESSAGE,
+  NUMBER_COUNT,
 };
