@@ -123,4 +123,15 @@ describe('userInteraction()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('낫싱');
   });
+
+  test('3개의 숫자를 모두 맞힐 경우 3스트라이크 문구를 출력한다.', () => {
+    const app = new App();
+    const logSpy = getLogSpy();
+    const userInputArray = [4, 5, 6];
+    const computerInputArray = [4, 5, 6];
+
+    app.userInteraction(userInputArray, computerInputArray);
+
+    expect(logSpy).toHaveBeenCalledWith('3스트라이크');
+  });
 });
