@@ -89,16 +89,46 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const flag = 1;
     let user = null;
+    let result = [];
 
-    while (flag === 1) {
+    while (flag === '1') {
+      // depth 1
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+        // depth 2
         user = input;
       });
 
+      // depth 1
       if (!this.validationCheck(user)) {
+        // depth 2
         throw new Error();
       }
+      result = this.match(computer, user);
+      // depth 1
+      if (result[0] > 0 && result[1] > 0) {
+        // depth 2
+        MissionUtils.Console.print(`${result[0]}볼 ${result[1]}스트라이크`);
+      } else if (result[0] > 0 && result[1] === 0) { // depth 1
+        // depth2
+        MissionUtils.Console.print(`${result[0]}볼`);
+      } else if (result[0] === 0 && result[1] > 0 && result[1] !== 3) {
+        // depth 2
+        MissionUtils.Console.print(`${result[1]}스트라이크`);
+      } else if (result[0] === 0 && result[1] > 0 && result[1] === 3) {
+        // depth 2
+        MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        result[0] = 0;
+        result[1] = 0;
+        flag = this.replay();
+
+        // 컴퓨터 제시 숫자 재설정
+        computer = this.generateComputerNumber();
+        computer = computer.join('');
+      } else {
+        MissionUtils.Console.print('낫싱');
+      }
     }
+    MissionUtils.Console.print('게임 종료');
   }
 }
 
