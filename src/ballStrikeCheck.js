@@ -1,4 +1,4 @@
-function strikeBallNumber(userNumber, computerNumber) {
+function ballStrikeCheck(userNumber, computerNumber) {
     const strikeNumber = countStrike(userNumber, computerNumber);
     const ballNumber = countBall(userNumber, computerNumber);
     return { ballNumber, strikeNumber };
@@ -13,4 +13,4 @@ function countBall(userNumber, computerNumber) {
     return (countIncludedNumber - countStrike(userNumber, computerNumber));
 }
 
-module.exports = strikeBallNumber;
+module.exports = ballStrikeCheck;
