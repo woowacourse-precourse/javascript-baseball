@@ -28,7 +28,8 @@ class App {
       this.exceptionHandling(input);
 
       const inputArr = [...input];
-
+      const { ball, strike } = this.countBS(inputArr);
+      console.log(this.computer, ball, strike);
     });
   }
 
@@ -45,6 +46,21 @@ class App {
     if (new Set(input).size !== REQUIREMENT.LENGTH) {
       throw(ERROR.DUPLICATE);
     }  
+  }
+
+  countBS(inputArr) {
+    let strike = 0;
+    let ball = 0;
+
+    inputArr.forEach((cur, idx) => {
+      if (idx === this.computer.indexOf(cur)) {
+        strike += 1;
+      } else if (this.computer.includes(cur)) {
+        ball += 1;
+      }
+    });
+
+    return { ball, strike };
   }
 
 }
