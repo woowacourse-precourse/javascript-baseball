@@ -75,6 +75,58 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
+  test("빈 문자열 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = [""];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("공백 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["   "];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("특수문자 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["!?#"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("특수문자 테스트 2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["\t\n\\"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test("3글자 미만 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["12"];
