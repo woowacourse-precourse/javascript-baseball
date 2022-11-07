@@ -30,8 +30,9 @@ class App {
       inputNum[0] === inputNum[2] ||
       inputNum[1] === inputNum[2];
 
-    if (Number.isNaN(inputNum) || inputNum.length !== 3 || duplicate)
-      throw new Error('잘못된 입력 값입니다.');
+    if (Number.isNaN(inputNum)) throw new Error('잘못된 입력 값입니다.');
+    else if (inputNum.length !== 3) throw new Error('3자리 수가 아닙니다.');
+    else if (duplicate) throw new Error('중복된 숫자가 존재합니다.');
   }
 
   checkStrikeAndBall(inputNum) {
@@ -50,16 +51,16 @@ class App {
       MissionUtils.Console.print('낫싱');
       this.input();
     } else if (strike === 3) {
-      MissionUtils.Console.print('${strike}스트라이크');
+      MissionUtils.Console.print(strike + '스트라이크');
       this.input();
     } else if (strike > 0 && ball === 0) {
-      MissionUtils.Console.print('${strike}스트라이크');
+      MissionUtils.Console.print(strike + '스트라이크');
       this.input();
     } else if (strike === 0 && ball > 0) {
-      MissionUtils.Console.print('${strike}스트라이크');
+      MissionUtils.Console.print(strike + '스트라이크');
       this.input();
     } else {
-      MissionUtils.Console.print('${ball}볼 ${strike}스트라이크');
+      MissionUtils.Console.print(ball + '볼 ' + strike + '스트라이크');
       this.input();
     }
   }
