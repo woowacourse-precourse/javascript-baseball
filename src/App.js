@@ -21,6 +21,11 @@ class App {
     }
   }
 
+  getUserNum(){
+    
+
+  }
+
   getRandomNum(){
     const com_num = [];
     while(com_num.length < 3){
@@ -29,8 +34,10 @@ class App {
         com_num.push(randomNum);
       }
     }
-    return com_num;
+    return com_num.join("");
   }
+
+
 
 }
 
