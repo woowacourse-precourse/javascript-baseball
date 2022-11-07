@@ -8,6 +8,12 @@ const {
 } = require("./Constant");
 
 class App {
+  
+  validation(input) {}
+  typeCheck(input) {}
+  lengthCheck(input) {}
+  repeatCheck(input) {}
+
   play() {}
 }
 
