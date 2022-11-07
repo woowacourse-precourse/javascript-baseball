@@ -36,6 +36,7 @@ function makeResultStr(strike, ball) {
   let result = [];
   if (checkNothing(strike, ball)) return Message.nothing;
   if (ball) result.push(`${ball}${Message.ball}`);
+  if (strike) result.push(`${strike}${Message.strike}`);
   return result.join(" ");
 }
 
