@@ -1,4 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const STRIKE_PHRASE = '스트라이크';
+const BALL_PHRASE = '볼';
+const NOTHING_PHRASE = '낫싱';
 
 function checkLength(answer) {
   if (answer.length !== 3) throw new Error('숫자 세 개를 입력해주세요.');
@@ -38,6 +41,14 @@ class App {
     for (let number of answerArray) {
       this.userAnswer.push(parseInt(number));
     }
+  }
+
+  printResult() {
+    let printStatement = '';
+    if (this.ball > 0) printStatement = this.ball + BALL_PHRASE;
+    if (this.strike > 0) printStatement += this.strike + STRIKE_PHRASE;
+    if (printStatement.length === 0) printStatement = NOTHING_PHRASE;
+    MissionUtils.Console.print(printStatement);
   }
 
   play() {
