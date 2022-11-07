@@ -8,6 +8,7 @@ const {
 } = require('./util');
 
 const { Console } = MissionUtils;
+const RESTART = '1';
 const END = '2';
 
 class App {
@@ -37,8 +38,10 @@ class App {
       (input) => {
         if (input === END) {
           this.quitGame();
-        } else {
+        } else if (input === RESTART) {
           this.play();
+        } else {
+          throw new Error('사용자 인풋 에러');
         }
       },
     );
