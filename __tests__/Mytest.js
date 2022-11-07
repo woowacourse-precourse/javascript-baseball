@@ -71,10 +71,12 @@ describe("Utils.checkNumberisOk", () => {
 });
 
 describe("Utils.setComputerNumber", () => {
-  //given
-  //when
-  const randomNumber = Utils.setComputerNumber();
-  //then
-  expect(randomNumber).toHaveLength(3);
-  expect(randomNumber).toBeDistinct();
+  test("중복된 숫자가 없고 길이가 3인 숫자배열을 만들어야 한다.", () => {
+    //given
+    //when
+    const randomNumber = Utils.setComputerNumber();
+    //then
+    expect(randomNumber).toHaveLength(3);
+    expect(randomNumber).toBeDistinct();
+  });
 });
