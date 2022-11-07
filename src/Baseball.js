@@ -2,18 +2,22 @@ const { Console } = require('@woowacourse/mission-utils');
 const { Computer } = require('./Computer');
 const { ErrorCheck } = require('./functions/ErrorCheck');
 const { Game } = require('./functions/Game');
-const { SYSTEM_MESSAGE, GAME_MESSAGE } = require('./constants/system message');
+const { SYSTEM_MESSAGE, COUNT_MESSAGE } = require('./constants/system message');
 const { REPLAY_NUMBER } = require('./constants/game numbers');
 
 class Baseball {
   constructor() {
     this.randomNumber = [];
+    this.isPlayFirst = true;
   }
 
   playGame() {
-    Console.print(SYSTEM_MESSAGE.START);
-    this.randomNumber = Computer.getRandomNumber();
+    if (this.isPlayFirst) {
+      this.isPlayFirst = false;
+      Console.print(SYSTEM_MESSAGE.START);
+    }
 
+    this.randomNumber = Computer.getRandomNumber();
     this.getUserNumber();
   }
 
@@ -33,9 +37,10 @@ class Baseball {
 
   printGameCount(STRIKE, BALL) {
     const gameMessage = Game.getStrikeBallMessage(STRIKE, BALL);
+
     Console.print(gameMessage);
 
-    if (gameMessage !== GAME_MESSAGE.CORRECT) {
+    if (!Game.isEqual(gameMessage, COUNT_MESSAGE.CORRECT)) {
       this.getUserNumber();
     } else {
       Console.print(SYSTEM_MESSAGE.END);
@@ -52,7 +57,7 @@ class Baseball {
   isReplay(replayNumber) {
     ErrorCheck.replayError(replayNumber);
 
-    if (replayNumber === REPLAY_NUMBER.KEEP_PLAY) {
+    if (Game.isEqual(replayNumber, REPLAY_NUMBER.KEEP_PLAY)) {
       this.playGame();
     } else {
       Console.close();
@@ -60,4 +65,4 @@ class Baseball {
   }
 }
 
-exports.Baseball = Baseball;
+module.exports = { Baseball };

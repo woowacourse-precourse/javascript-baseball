@@ -35,15 +35,13 @@ class ErrorCheck {
     if (this.hasDuplication(userInput)) {
       throw new Error(ERROR_MESSAGE.DUP_ERROR);
     }
-    return true;
   }
 
   static replayError(userInput) {
     if (this.isReplayError(userInput)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUM_ERROR);
     }
-    return true;
   }
 }
 
-exports.ErrorCheck = ErrorCheck;
+module.exports = { ErrorCheck };

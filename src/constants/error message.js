@@ -8,3 +8,5 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 exports.ERROR_MESSAGE = ERROR_MESSAGE;
+
+module.exports = { ERROR_MESSAGE };

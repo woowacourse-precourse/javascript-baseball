@@ -5,7 +5,7 @@ const SYSTEM_MESSAGE = Object.freeze({
   GET_NUMBER: '숫자를 입력해주세요 : ',
 });
 
-const GAME_MESSAGE = Object.freeze({
+const COUNT_MESSAGE = Object.freeze({
   NOTHING: '낫싱',
   STRIKE: '스트라이크',
   BALL: '볼',
@@ -13,4 +13,4 @@ const GAME_MESSAGE = Object.freeze({
 });
 
 exports.SYSTEM_MESSAGE = SYSTEM_MESSAGE;
-exports.GAME_MESSAGE = GAME_MESSAGE;
+exports.COUNT_MESSAGE = COUNT_MESSAGE;

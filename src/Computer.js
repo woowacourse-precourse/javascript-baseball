@@ -8,10 +8,12 @@ class Computer {
     while (computer.length < PICK_NUMBER.PICK) {
       const number = Random.pickNumberInRange(PICK_NUMBER.MIN, PICK_NUMBER.MAX);
 
-      if (!computer.includes(number)) computer.push(number);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
     }
     return computer;
   }
 }
 
-exports.Computer = Computer;
+module.exports = { Computer };
