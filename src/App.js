@@ -2,6 +2,28 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
 
+  throwError(input) {
+    let inputArr = Array.from(String(input));
+
+    if (inputArr.length !== 3) {
+      throw new Error("3자리 숫자만 입력 가능합니다.")
+    }
+
+    if (input.includes(0)) {
+      throw new Error("0은 포함될 수 없습니다.")
+    }
+
+    let inputSet = new Set(inputArr);
+
+    if (inputSet.size < 3) {
+      throw new Error("중복되지 않은 숫자 3개만 입력 가능합니다.")
+    }
+
+    if (input.replace(/[0-9]/g, '').length !== 0) {
+      throw new Error("숫자만 입력 가능합니다.")
+    }
+  }
+
   computerMakeNum() {
     const computer = [];
     while (computer.length < 3) {
@@ -10,7 +32,18 @@ class App {
         computer.push(number);
       }
     }
-    return computer;
+    return computer.join('');
+  }
+
+  finished() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하시려면 1, 종료하려면 2를 입력하세요.', (order) => {
+
+      if (Number(order) == 1) new App().play();
+      else if (Number(order) == 2)  MissionUtils.Console.close();
+
+      else throw new Error('1 또는 2만 입력하세요.')
+    })
   }
 
   findStrike(computerAns, ans) {
@@ -22,6 +55,7 @@ class App {
     }
     return cnt;
   }
+
   findBall(computerAns, ans) {
     let cnt = 0;
     for (let i = 0; i < 3; i++) {
@@ -33,102 +67,35 @@ class App {
     }
     return cnt;
   }
+  printResult(cntStrike, cntBall) {
+    let printMessage = "";
 
-  finished(cnt) {
-    if (cnt == 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      let answer;
-      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (order) => {
-        answer = order;
-      })
-      return answer;
-    }
-    else {
-      return -1;
-    }
+    if (cntBall) printMessage += `${cntBall}볼`;
 
+    if (cntStrike && cntBall != 0) printMessage += ` ${cntStrike}스트라이크`;
+    else if (cntStrike && cntBall == 0) printMessage += `${cntStrike}스트라이크`;
+
+    if (printMessage == "") MissionUtils.Console.print("낫싱");
+    else MissionUtils.Console.print(printMessage);
   }
 
-  close() {
-    MissionUtils.close();
+  guess(computerAns) {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', input => {
+
+      this.throwError(input);
+
+      let cntStrike = this.findStrike(computerAns, input);
+      let cntBall = this.findBall(computerAns, input);
+      this.printResult(cntStrike, cntBall);
+
+      if (cntStrike == 3) this.finished();
+      else this.guess(computerAns);
+    })
   }
 
   play() {
-    let intro = 0;
-    let flag=0;
-    let order=-1;
-    if (intro == 0) {
-      MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-      intro = 1;
-    }
-    let finished = 0;
-    // 숫자 랜덤화
-    let computerAnswer = this.computerMakeNum();
-
-
-    while (finished == 0) {
-
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-        // 예외사항들 
-        if (Number.isNaN(parseInt(answer))) {
-          throw "숫자만 입력해주세요";
-        }
-
-        if (answer.length != 3) {
-          throw " 숫자 3개를 입력해주세요";
-        }
-        if (answer < 0) {
-          throw new RangeError(answer);
-        }
-        if (new Set(answer).size != 3) {
-          throw "중복된 숫자가 존재합니다";
-        }
-        // MissionUtils.Console.print(`입력 : ${answer}`);
-
-        // 스트라이크 찾기
-        let cntStrike = this.findStrike(computerAnswer, answer);
-        // 볼 찾기
-        let cntBall = this.findBall(computerAnswer, answer);
-
-        //메세지 출력
-        let printMessage = "";
-        if (cntBall) printMessage += `${cntBall}볼 `;
-        if (cntStrike) printMessage += `${cntStrike}스트라이크`;
-
-        if (printMessage == "") {
-          MissionUtils.Console.print("낫싱");
-        }
-
-        else {
-          MissionUtils.Console.print(printMessage);
-        }
-        if(cntStrike ==3){
-          order = this.finished(cntStrike);
-          flag=1;
-        }
-        else{
-          flag=0;
-        }
-
-       // MissionUtils.Console.print(`order 값은 : ${order}`);
-
-        if (order == 1 && flag==1) {
-          computerAnswer = this.computerMakeNum();
-          finished=0;
-          flag=0;
-        }
-
-        else if(flag ==1 && order==2) {
-          finished = 1;
-          flag=0;
-        }
-
-        else if (flag ==1){
-          throw(order);
-        }
-
-      });
-    }
+    let computerAns = this.computerMakeNum();
+    this.guess(computerAns);
   }
 
 }
