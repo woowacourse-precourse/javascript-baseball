@@ -19,7 +19,7 @@
 
 #### 게임 결과 판단
 
-- strike 카운트
+- strike 카운트 ✔
 - ball 카운트
 - nothing 카운트
 
