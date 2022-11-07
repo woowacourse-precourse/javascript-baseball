@@ -6,6 +6,10 @@ const compareTwoArrayResult = require('./compare');
 class App {
   play() {
     this.startMessage();
+    this.makeComputerNumArr();
+  }
+
+  makeComputerNumArr() {
     this.computerNumArr = generateNumber();
     this.getInputAndCompare();
   }
@@ -43,7 +47,7 @@ class App {
       try {
         const endOrRetryInput = this.isValidEndOrRetryInput(input);
         if (endOrRetryInput === 1) {
-          this.play();
+          this.makeComputerNumArr();
         }
         if (endOrRetryInput === 2) {
           this.close();
