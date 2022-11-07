@@ -1,5 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const FIXED_LEN = 3; // 숫자야구 고정 이이
+
 class App {
   /**
    * @param computer : computer가제시한숫자
@@ -46,7 +48,7 @@ class App {
 
     const numberString = number.toString();
     // 3자리가 아니면 return false
-    if (numberString.length !== 3) {
+    if (numberString.length !== FIXED_LEN) {
       return false;
     }
 
@@ -66,7 +68,7 @@ class App {
   generateComputerNumber() {
     // 서로다른 자릿수이어야 한다.
     const result = new Set();
-    while (result.size < 3) {
+    while (result.size < FIXED_LEN) {
       result.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
     return Array.from(result);
@@ -110,12 +112,12 @@ class App {
       } else if (result[0] > 0 && result[1] === 0) { // depth 1
         // depth2
         MissionUtils.Console.print(`${result[0]}볼`);
-      } else if (result[0] === 0 && result[1] > 0 && result[1] !== 3) {
+      } else if (result[0] === 0 && result[1] > 0 && result[1] !== FIXED_LEN) {
         // depth 2
         MissionUtils.Console.print(`${result[1]}스트라이크`);
-      } else if (result[0] === 0 && result[1] > 0 && result[1] === 3) {
+      } else if (result[0] === 0 && result[1] > 0 && result[1] === FIXED_LEN) {
         // depth 2
-        MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        MissionUtils.Console.print(`${FIXED_LEN}스트라이크\n${FIXED_LEN}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
         result[0] = 0;
         result[1] = 0;
         if (this.replay() === '2') break;
