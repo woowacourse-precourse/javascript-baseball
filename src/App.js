@@ -12,17 +12,39 @@ class App {
     this.result = result;
   }
   play() { 
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.random();
   }
   random(){
     this.computerNum = setRandomNumberComputer();
+    this.compare();
   }
   compare(){
     this.userNum = inputMyNumber();
     compareBothNumber(this.computerNum, this.userNum);
+    this.compareResult();
   }
-  finish(res) {
-    this.result = res;
+  compareResult(){
+    this.pass = outputResultCompare(this.strike,this.ball,this.none,this.check);
+    if(this.pass == true){
+      this.finishInput();
+    }
+    else{
+      this.compare();
+    }
+  }
+  finishInput() {
+    this.result = finishCheck();
+    if(this.result == 1){
+      this.reset();
+      this.random();
+    }
+    else{
+      this.finish();
+    }
+  }
+  finish(){
+    MissionUtils.Console.close();
   }
   reset(){
     this.computerNum = 0;
@@ -58,7 +80,6 @@ function finishCheck(){
   });
 
   return resultNum;
-
 }
 
 function setRandomNumberComputer(){
@@ -131,62 +152,34 @@ function validateNumber(number){
 function inputMyNumber(){
   let myNumber;
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-    if(validateNumber(number)){
-      myNumber = number;
-    }
+    if(validateNumber(number)) myNumber = number;
   });
 
   return myNumber;
 }
 
-function outputResultCompare(){
-  const setApp2 = new App();
-  let strike = setApp2.strike;
-  let ball = setApp2.ball;
-  let notting = setApp2.none;
-  let check = setApp2.check;
-
-  if(notting == true){
-    MissionUtils.Console.print("낫싱");
-    setApp2.pass = false;
+function outputResultCompare(strike, ball, notting, check){
+  let pass = false;
+  if(notting === true){
+    MissionUtils.Console.print('낫싱');
   }
-  if(strike == 3){
-    MissionUtils.Console.print("3스트라이크");
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  if(strike === 3){
+    MissionUtils.Console.print('3스트라이크');
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     let getResult = finishCheck();
     setApp2.finish(getResult);
-    setApp2.pass = true;
+    pass = true;
   }
-  if(check == true){
-    MissionUtils.Console.print("%d볼 %d스트라이크", ball, strike);
-    setApp2.pass = false;
+  if(strike > 0 && ball > 0){
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
   }
-  else{
-    if(strike > 0) MissionUtils.Console.print("%d스트라이크",strike);
-    else MissionUtils.Console.print("%d볼",ball);
-    setApp2.pass = false;
-  }
-
+  else if(strike > 0 && ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
+  else if(strike === 0 && ball > 0) MissionUtils.Console.print(`${ball}볼`);
+  return pass
 }
 
 
-let isFinish = 1;
-let pass = false;
 const app = new App();
-
-MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-while(isFinish == 1){
-  app.play();
-  while(!pass){
-    app.compare();
-    outputResultCompare();
-    pass = app.pass;
-  }
-  isFinish = app.finish;
-  app.reset();
-}
-
-//종료
-MissionUtils.Console.close();
+app.play();
 
 module.exports = App;
