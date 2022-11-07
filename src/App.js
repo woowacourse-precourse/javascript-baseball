@@ -81,10 +81,25 @@ class App {
     const pointString = pointsArray.join("");
     const [ball, strike] = pointsArray;
     let message;
-    if (pointString === "03")
-      message = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    if (pointString === "03") message = "승리";
     else if (pointString === "00") message = "낫싱";
     else message = `${ball}볼 ${strike}스트라이크`;
+    this.printResponse(message);
+  }
+
+  /**
+   * 유저 입력의 결과 메시지를 출력합니다.
+   * @param {string} message - 유저 입력의 점수에 대한 메시지
+   */
+  printResponse(message) {
+    const winningMessage = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    if (message === "승리") {
+      Console.print(winningMessage);
+      // 재시작 여부 물어보기
+    } else {
+      Console.print(message);
+      askForNumbers();
+    }
   }
 }
 
