@@ -7,4 +7,10 @@ describe("유저 입력 숫자 테스트", () => {
     const input = '112';
     expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
   });
+
+  test("user가 숫자 이외의 입력했을시 에러뜨는지 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = 'asb';
+    expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
+  });
 });
