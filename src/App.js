@@ -30,7 +30,7 @@ class App {
     do {
       MissionUtils.Console.readLine("", (answer) => {
         number = answer;
-        console.log("숫자를 입력해주세요 : " + number);
+        MissionUtils.Console.print("숫자를 입력해주세요 : " + number);
       });
       this.checkException(number);
     } while (!this.checkResult(computer, number));
