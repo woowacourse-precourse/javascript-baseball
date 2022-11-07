@@ -64,9 +64,9 @@ class Game {
 
     inputNumbers.forEach((inputNum, inputIdx) => {
       if (inputNum === randomNumbers[inputIdx]) {
-        strike++;
+        strike += 1;
       } else if (randomNumbers.includes(inputNum)) {
-        ball++;
+        ball += 1;
       }
     });
 
