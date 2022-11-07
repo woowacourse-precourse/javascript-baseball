@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const isValidUser = require("./isValidUser.js");
+const getComputerNumber = require("./getComputerNumber.js");
 
 const mConsole = MissionUtils.Console;
-const mRandom = MissionUtils.Random;
 const GAME_NUMBER_LENGTH = 3;
 
 class App {
@@ -15,7 +15,7 @@ class App {
 
   startGame() {
     mConsole.print("숫자 야구 게임을 시작합니다.");
-    this.computerInputNumber = this.getComputerNumber();
+    this.computerInputNumber = getComputerNumber();
   }
 
   getInput() {
@@ -29,17 +29,6 @@ class App {
         this.printResult(countResultArr);
       }
     });
-  }
-
-  getComputerNumber() {
-    const computerNumber = new Set();
-    while (computerNumber.size < GAME_NUMBER_LENGTH) {
-      const newNumber = mRandom.pickNumberInRange(1, 9);
-      if (!computerNumber.has(newNumber)) {
-        computerNumber.add(newNumber);
-      }
-    }
-    return [...computerNumber];
   }
 
   countInput(computerInput, userInput) {
@@ -59,7 +48,7 @@ class App {
       mConsole.print(
         `${GAME_NUMBER_LENGTH}스트라이크\n${GAME_NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
-      this.checkRetry();
+      this.checkRestart();
     } else {
       if (count[0] === 0 && count[1] === 0) mConsole.print("낫싱");
       else
@@ -72,10 +61,12 @@ class App {
     }
   }
 
-  checkRetry() {
+  checkRestart() {
     mConsole.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     mConsole.readLine("", (restartInput) => {
-      this.checkRestartNumber(restartInput);
+      if (this.checkRestartNumber(restartInput)) {
+        this.restartGame(Number(restartInput));
+      }
     });
   }
 
@@ -83,12 +74,12 @@ class App {
     if (Number(restartInput) < 1 || Number(restartInput) > 2)
       throw "1 또는 2를 입력해주세요.";
     if (isNaN(restartInput)) throw "숫자를 입력해주세요.";
-    else this.restartGame(Number(restartInput));
+    return true;
   }
 
   restartGame(restartInput) {
     if (restartInput === 1) {
-      this.computerInputNumber = this.getComputerNumber();
+      this.computerInputNumber = getComputerNumber();
       this.getInput();
     }
     if (restartInput === 2) {
