@@ -19,6 +19,8 @@ const countBall = (inputNumber, answers, index) => {
   return 0;
 };
 
+const isNotNumber = (charCode) => charCode < 49 || charCode > 57;
+
 const getRandomNumber = () => {
   return Random.pickUniqueNumbersInRange(
     COMPUTER.START_NUMBER,
@@ -55,7 +57,24 @@ const generateHint = (inputNumbers, answers) => {
   return `${score.ball}볼 ${score.strike}스트라이크`;
 };
 
+const validateInput = (input) => {
+  const map = {};
+  const values = input.split('');
+
+  if (values.length !== COMPUTER.ANSWER_LENGTH) throw new Error(COMPUTER.LENGTH_ERROR);
+
+  values.forEach((value) => {
+    const charCode = value.charCodeAt();
+
+    if (isNotNumber(charCode)) throw new Error(COMPUTER.CHARACTER_ERROR);
+    if (map[value]) throw new Error(COMPUTER.SAME_ERROR);
+
+    map[value] = true;
+  });
+};
+
 module.exports = {
   getRandomNumber,
   generateHint,
+  validateInput,
 };
