@@ -2,14 +2,22 @@ const { Console } = require("@woowacourse/mission-utils");
 const GAME_MESSAGE = require("./util/Constant");
 const makeNumber = require("./MakeNumber");
 const isValidNum = require("./IsValideNum");
+const { makeComment, makeCount } = require("./MakeCount");
 
 class App {
   constructor() {
     this.answer = makeNumber();
   }
 
+  makeOutput() {
+    const { strike, ball } = makeCount(this.answer, this.userInput);
+    const comment = makeComment(strike, ball);
+    return comment;
+  }
+
   checkInput() {
     if (isValidNum(this.userInput)) {
+      Console.print(this.makeOutput());
       this.inputAnswer();
     } else {
       throw new Error();
