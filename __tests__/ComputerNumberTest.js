@@ -1,8 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const {
-  randomSelectComputerNumbers
-} = require('../src/game-utils/ComputerNumbers');
+const { randomSelectComputerNumbers } = require('../src/game-utils/ComputerNumbers');
 
 afterAll(() => {
   Console.close();
@@ -46,18 +44,18 @@ describe('길이가 3으로 반환되는지 확인', () => {
 
 describe('반환된 문자가 1부터 9까지의 숫자인지 확인', () => {
   test('case1', () => {
-    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBe(true);
+    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBeTruthy();
   });
 
   test('case2', () => {
-    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBe(true);
+    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBeTruthy();
   });
 
   test('case3', () => {
-    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBe(true);
+    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBeTruthy();
   });
 
   test('case4', () => {
-    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBe(true);
+    expect([...randomSelectComputerNumbers()].every((element) => (element >= '1' && element <= '9'))).toBeTruthy();
   });
 });
