@@ -1,4 +1,7 @@
-const { Random, Console } = require('@woowacourse/mission-utils');
+const MissionUtils = require('@woowacourse/mission-utils');
+
+const { Random } = MissionUtils;
+const { Console } = MissionUtils;
 
 class App {
   constructor() {
@@ -29,7 +32,7 @@ class App {
   }
 
   inputCheck(inputNumber) {
-    const ONLYNUMBER = /[1-9]/;
+    const ONLYNUMBER = /^[1-9]+$/;
     if (inputNumber.length !== 3) throw new Error('숫자 3자리를 입력해주세요.');
 
     const INPUT_ARRAY = inputNumber.split('').map((number) => {
@@ -74,7 +77,6 @@ class App {
   judgeResult(threeStrike) {
     if (threeStrike) return this.endingOption();
     if (!threeStrike) return this.enterNumber();
-    throw new Error('정해진 값을 입력해주세요.');
   }
 
   endingOption() {
