@@ -69,6 +69,15 @@ class App {
     return intersectionArray.length;
   }
 
+  replay(option){
+    MissionUtils.Console.print(option);
+    if(option == 1) {
+      this.play();
+    } else if(option == 2) {
+      MissionUtils.Console.close();
+    }
+  }
+
   // 입력받은 숫자를 판단하는 함수
   referee(answerList, computerRandomNumber) {
     // 사용자가 잘못된 값을 입력했는지 확인
