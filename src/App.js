@@ -9,18 +9,23 @@ class App {
   play() {
     const answer = this.getAnswerNumber();
     this.printGameStartMessage();
-    let inputNumber = this.getInputNumber();
+    let inputNumber;
 
-    const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
-    const numberOfBall = this.getNumberOfBall(
-      answer,
-      inputNumber,
-      numberOfStrike
-    );
-    this.printGameResultMessage(numberOfStrike, numberOfBall);
+    while (true) {
+      inputNumber = this.getInputNumber();
 
-    if (this.isInputNumberCorrect(numberOfStrike)) {
-      printGameEndMessage();
+      const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
+      const numberOfBall = this.getNumberOfBall(
+        answer,
+        inputNumber,
+        numberOfStrike
+      );
+      this.printGameResultMessage(numberOfStrike, numberOfBall);
+
+      if (this.isInputNumberCorrect(numberOfStrike)) {
+        printGameEndMessage();
+        break;
+      }
     }
   }
   getAnswerNumber() {
