@@ -1,4 +1,9 @@
 class UserModel {
+  convertStringToArray(input) {
+    const convertArgsStringToInt = (arg) => Number(arg);
+    return Array.from([...input], convertArgsStringToInt);
+  }
+
   isLengthEqualsThree(input) {
     return input.length !== 3;
   }
