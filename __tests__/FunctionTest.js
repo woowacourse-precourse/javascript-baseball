@@ -1,11 +1,14 @@
 const App = require("../src/App");
+const MissionUtils = require("@woowacourse/mission-utils");
 const app = new App();
 
-const mockErrorInputs = (errorInputList) => {
-  app.totalUserInputErrorChecker = jest.fn();
-  errorInputList.reduce((acc, errorInput) => {
-    return acc.mockReturnValueOnce(errorInput);
-  }, app.totalUserInputErrorChecker);
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
 };
 
 const getLogSpy = () => {
@@ -148,6 +151,16 @@ describe("예외 테스트", () => {
       expect(() => app.totalUserInputErrorChecker(errorInput)).toThrow(
         errorOutputList[index]
       );
+    });
+  });
+
+  test("게임 재시작 입력 예외 테스트", () => {
+    const errorInputList = ["3", "4", "5", "6", "ㅁㄴㅇ", "1;2", "1ㅏ2", "1l2"];
+    const errorOutput = "1또는 2만 입력할 수 있습니다.";
+
+    errorInputList.map((errorInput) => {
+      mockQuestions(errorInputList);
+      expect(() => app.reStartSelector()).toThrow(errorOutput);
     });
   });
 });
