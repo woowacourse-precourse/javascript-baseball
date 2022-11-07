@@ -72,7 +72,7 @@ class App {
           return;
         }
         if (answer === "2") {
-          this.Console.print("게임 종료");
+          Console.print("게임 종료");
           Console.close();
           return;
         }
