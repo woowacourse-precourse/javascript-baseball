@@ -59,4 +59,56 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test('재시작 여부 예외 테스트1', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['123', '11'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('재시작 여부 예외 테스트2', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['123', ''];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('재시작 여부 예외 테스트3', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['123', ' '];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('재시작 여부 예외 테스트2', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['123', 'aa'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
