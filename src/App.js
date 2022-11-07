@@ -1,6 +1,7 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const GAME_SETTING = require('./utils/constants');
+const { GAME_SETTING, RESULT } = require('./utils/constants');
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT } = GAME_SETTING;
+const { NOTHING, BALL, STRIKE } = RESULT;
 
 class App {
   play() {
@@ -36,7 +37,7 @@ class App {
       const result = this.getResult(computer, player);
       Console.print(result);
 
-      if (result !== `${NUMBER_COUNT}스트라이크`) {
+      if (result !== `${NUMBER_COUNT}${STRIKE}`) {
         this.guess(computer);
       } else {
         Console.print(`${NUMBER_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
@@ -75,14 +76,14 @@ class App {
     const ball = exist - strike;
 
     if (exist === 0) {
-      return '낫싱';
+      return `${NOTHING}`;
     } else if (strike === 0) {
-      return `${ball}볼`;
+      return `${ball}${BALL}`;
     } else if (ball === 0) {
-      return strike + '스트라이크';
+      return `${strike}${STRIKE}`;
     }
 
-    return `${ball}볼 ${strike}스트라이크`;
+    return `${ball}${BALL} ${strike}${STRIKE}`;
   }
 
   askPlayAgain() {

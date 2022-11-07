@@ -4,4 +4,13 @@ const GAME_SETTING = {
   NUMBER_COUNT: 3,
 };
 
-module.exports = GAME_SETTING;
+const RESULT = {
+  NOTHING: '낫싱',
+  BALL: '볼',
+  STRIKE: '스트라이크',
+};
+
+module.exports = {
+  GAME_SETTING,
+  RESULT,
+};
