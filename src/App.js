@@ -27,7 +27,7 @@ class App {
     this.printGameResult();
   }
   printGameResult() {
-    Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
+    Console.print(this.getResultString());
     if (this.strikeCount === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       Console.readLine(
@@ -46,7 +46,17 @@ class App {
     }
   }
   getResultString() {
-    
+    let ballString = this.ballCount > 0 ? `${this.ballCount}볼 ` : ``;
+    let strikeString =
+      this.strikeCount > 0 ? `${this.strikeCount}스트라이크` : ``;
+    if (ballString.length === 0 && strikeString.length === 0) return "낫싱";
+    return ballString + strikeString;
+  }
+  /**
+   * 
+   */
+  handleException() {
+
   }
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
