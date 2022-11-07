@@ -19,6 +19,21 @@ describe("기능별 테스트", () => {
     expect(ballScore).toEqual(2);
     expect(strikeScore).toEqual(1);
   });
+  test('게임룰에 따른 올바른 점수값이 나오는지', () => {
+    const computer = [1,4,5];
+    const user = ['236', '167', '157', '451', '145'];
+    const messages = [
+      '낫싱',
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '3볼',
+      '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+    ];
+
+    messages.forEach((output, index) => {
+      expect(playTool.gameRule(computer, user[index])).toEqual(output);
+    });
+  });
 });
 
 MissionUtils.Console.close();
