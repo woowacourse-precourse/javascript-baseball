@@ -28,6 +28,8 @@ class App {
           checkedUser
         );
         this.printResult(countResultArr);
+        if (countResultArr[1] === GAME_NUMBER_LENGTH) this.checkRestart();
+        this.getInput();
       }
     });
   }
@@ -37,7 +39,6 @@ class App {
       mConsole.print(
         `${GAME_NUMBER_LENGTH}스트라이크\n${GAME_NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
       );
-      this.checkRestart();
     } else {
       if (count[0] === 0 && count[1] === 0) mConsole.print("낫싱");
       else
@@ -46,7 +47,6 @@ class App {
             count[1] > 0 ? count[1] + "스트라이크" : ""
           }`.trim()
         );
-      this.getInput();
     }
   }
 
