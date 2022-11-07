@@ -41,8 +41,7 @@ class App {
       if (!userNumberArray.includes(element)) {
         userNumberArray.push(Number(element));
       } else {
-        console.log("중복된 수가 있습니다. 다시 입력하세요!");
-        this.userInput();
+        throw "중복된 수가 있습니다. 다시 입력하세요!"
       }
     });
     this.getBothArrays(userNumberArray);
