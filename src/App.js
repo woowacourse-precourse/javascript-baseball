@@ -36,10 +36,25 @@ class App {
   }
 }
 
+function validateResult(number){
+  let backSign;
+  let check = /^[1-2]+$/;
+
+  if(!check.test(number)){
+    backSign = false;
+    throw new Error("올바른 숫자가 아닙니다(1과 2만 입력하시오).");
+  }else{
+    backSign = true;
+  }
+
+  return backSign;
+}
 function finishCheck(){
   let resultNum;
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (result) => {
-    //유효한 종료 방법인지 체크
+    if(validateResult(result)){
+      resultNum = result;
+    }
   });
 
   return resultNum;
