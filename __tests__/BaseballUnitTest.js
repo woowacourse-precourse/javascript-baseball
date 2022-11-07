@@ -1,5 +1,6 @@
 const isNumber = require('../src/IsNumber');
 const checkStrike = require('../src/CountStrike')
+const checkBall = require('../src/CountBall')
 
 describe('사용자의 입력 값 확인', () => {
   test('입력 값 정상범위 확인', () => {
@@ -37,3 +38,8 @@ describe("스트라이크 여부 확인", () => {
   });
 });
 
+describe("볼 여부 확인", () => {
+  test("볼 개수", () => {
+    expect(checkBall([1, 2, 3], [3, 2, 1])).toEqual(2);
+  });
+});

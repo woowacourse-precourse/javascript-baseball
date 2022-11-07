@@ -1,5 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
-
 const checkBall = (computer, userInput) => {
   let countBall = 0;
 
