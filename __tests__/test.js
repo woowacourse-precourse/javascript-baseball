@@ -72,4 +72,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("재시작시 1이나 종료시 2 외 선택시 예외발생", () => {
+    const randoms = [4, 7, 8];
+    const answers = ["478", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
