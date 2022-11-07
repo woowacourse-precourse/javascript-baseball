@@ -21,7 +21,7 @@ class App {
   playerInput(computer) {
     MissionUtils.Console.readLine("숫자를 입력해 주세요 :", (input) => {
       if (this.playerNumberCheck(input)) {
-        
+        this.countBallStrike(computer, input);
       }
     });
   }
@@ -33,6 +33,21 @@ class App {
       throw new Error("잘못된 입력입니다.");
     }
     return true;
+  }
+  countBallStrike(computer, input) {
+    let strike = 0;
+    let ball = 0;
+
+    for (let i = 0; i < input.length; i++) {
+      if (computer.includes(input[i])) {
+        if(computer[i]===input[i]){
+          strike += 1;
+        }
+        else {
+          ball += 1;
+        }
+      }
+    }
   }
 }
 
