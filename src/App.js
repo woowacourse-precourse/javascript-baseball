@@ -32,13 +32,13 @@ class App {
     });
   }
 
-  checkError(userInput) {
-    const NUMBERS = /^[1-9]+$/
-    if(!NUMBERS.test(userInput)) throw new Error('숫자가 입력되지 않았습니다');
-    
-    if(userInput.length !== 3) throw new Error('3개의 글자가 아닙니다.');
-
-    if(new Set(userInput).size !== 3) throw new Error('중복된 숫자가 있습니다.');
+  checkError(userNumArr) {
+    const NUMBERS = /^[1-9]+$/;
+    for (let i = 0; i < userNumArr.length; i++) {
+      if (!NUMBERS.test(userNumArr[i])) throw new Error("숫자가 입력되지 않았습니다");
+    }
+    if (userNumArr.length !== 3) throw new Error("3개의 숫자가 아닙니다.");
+    if (new Set(userNumArr).size !== 3) throw new Error("중복된 숫자가 있습니다.");
   }
 
   checkAnswer(userInput){
