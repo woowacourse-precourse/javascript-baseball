@@ -48,7 +48,7 @@ class User extends Mission {
   compareNumbers(userNumbers) {
     const compare = new Compare(this.computerNumbers, userNumbers);
     if (compare.getResult() === true) {
-      this.selectRestartOrExit();
+      this.inputRestartOrExit();
       return;
     }
 
