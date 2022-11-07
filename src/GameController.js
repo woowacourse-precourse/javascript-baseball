@@ -20,7 +20,6 @@ class GameController {
   }
 
   start(numberFromUser, numberFromComputer) {
-    const getResult = (userInput, computerInput) => {};
     const { strikeCount, ballCount, nothingCount } = this.getResult(
       numberFromUser,
       numberFromComputer
