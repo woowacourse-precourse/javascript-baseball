@@ -14,8 +14,9 @@ class App {
 
   play() {
     this.randomNumber();
-    this.userInput();
-    this.game();
+    this.userInput().then(() => {
+      this.game();
+    });
   }
 
   userInput() {
@@ -57,15 +58,18 @@ class App {
   }
 
   // 숫자 야구 게임 logic
-  game() {
-    const score = "";
-    if (this.nothing()) {
-      return "낫싱";
-    } else if (this.ball() != 0) {
-      score += `${this.ball()}볼`;
-    } else if (this.strike() != 0) {
-      score += `${this.strike()}스트라이크`;
-    }
+  async game() {
+    return new Promise((resolve) => {
+      const score = "";
+      if (this.nothing()) {
+        return "낫싱";
+      } else if (this.ball() != 0) {
+        score += `${this.ball()}볼`;
+      } else if (this.strike() != 0) {
+        score += `${this.strike()}스트라이크`;
+      }
+      resolve(score);
+    });
   }
 
   nothing() {
