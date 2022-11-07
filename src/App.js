@@ -77,33 +77,40 @@ function App () {
         }
       });
       let result = [ball, strike];
-      
+
       return result;
     }
     
     function getScore (matchResult){
-      const [ball, strike] = matchResult
-      const ANSWER_STRIKE_COUNT = 3
+      const [ball, strike] = matchResult;
+      const ANSWER_STRIKE_COUNT = 3;
+
       if (strike === ANSWER_STRIKE_COUNT){
-        MissionUtils.Console.print ("3스트라이크 \n\ 3개의 숫자를 모두 맞히셨습니다! 게임 종료")
-        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
-          if(answer === GAME_START_KEY){
+        MissionUtils.Console.print (
+          "3스트라이크 \n 3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+        );
+        MissionUtils.Console.readLine(`게임을 새로 시작하려면 ${GAME_START_KEY}, 종료하려면 ${GAME_EXIT_KEY}를 입력하세요.\n`, 
+        (input) => {
+          if(input === GAME_START_KEY){
             startGame();
             getUserAnswer();
             return;
           }
-          if(answer === GAME_EXIT_KEY){
+          if(input === GAME_EXIT_KEY){
             MissionUtils.Console.close();
             return;
-          } throw '올바른 값을 입력하세요.';
-        })
+          } 
+          throw '올바른 값을 입력하세요.';
+        }
+        );
         return;
       }
       if (strike === 0 && ball === 0){
-        MissionUtils.Console.print ("낫싱")
+        MissionUtils.Console.print ("낫싱");
         getUserAnswer();
         return;
       }
+      
       MissionUtils.Console.print (`${ball}볼 ${strike}스트라이크`);
       getUserAnswer();
     }
