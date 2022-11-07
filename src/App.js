@@ -49,15 +49,31 @@ class App{
       if(userInput.includes(this.uniqueNumberList[index])) COUNT_DUPLICATION++
     }
     COUNT_BALL = COUNT_DUPLICATION - COUNT_STRIKE ;
-    // MissionUtils.Console.print(COUNT_DUPLICATION);
-    // MissionUtils.Console.print(COUNT_STRIKE);
-    // MissionUtils.Console.print(COUNT_BALL);
+    this.printResult(COUNT_STRIKE,COUNT_BALL);
   }
+
+  printResult(countStrike,countBall){
+  if(countStrike===3)
+    MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  if(countStrike ===0 && countBall ===0){
+    MissionUtils.Console.print('낫싱');
+  }
+  if(countStrike > 0 && countBall >0){
+    MissionUtils.Console.print(`${countBall}볼 ${countStrike}스트라이크`);
+  }
+  if((countStrike > 0 && countBall ===0) && countStrike !==3){
+    MissionUtils.Console.print(`${countStrike}스트라이크`);
+  }
+  if(countStrike === 0 && countBall >0){
+    MissionUtils.Console.print(`${countBall}볼`);
+  }
+  
+}
 
   play(){
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.getRandumNumber();
-    MissionUtils.Console.print(this.uniqueNumberList);
+    // MissionUtils.Console.print(this.uniqueNumberList);
     this.userInput();
   
   }
