@@ -26,6 +26,7 @@ class User {
       const isPlay = this.game.output(inputAnswer);
       if(isPlay){
         this.play();
+        return;
       }
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.selectRePlay();
@@ -33,11 +34,11 @@ class User {
   }
   selectRePlay(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (selectReplay) => {
-      if(Number(selectReplay) === 1){
+      if(selectReplay === '1'){
         this.game.getRandomNumber();
         this.play();
       }
-      if(Number(selectReplay) === 2){
+      if(selectReplay === '2'){
         this.finish();
         return;
       }
