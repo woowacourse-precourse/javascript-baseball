@@ -1,23 +1,23 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { getUniqueNumbersInRange } = require("./utils/RandomNumber");
-const { countBall, countStrike, printBallCount } = require("./utils/BallCount");
+const { Console } = require('@woowacourse/mission-utils');
+const { getUniqueNumbersInRange } = require('./utils/RandomNumber');
+const { countBall, countStrike, printBallCount } = require('./utils/BallCount');
 const {
   checkInputLength,
   checkInputIsNumber,
   checkInputExcludeCertainNumber,
   checkInputDuplicateNumber,
   checkInputIsOneOrTwo,
-} = require("./utils/InputChecker");
+} = require('./utils/InputChecker');
 
 class App {
   constructor() {
-    this.RESTART = "1";
+    this.RESTART = '1';
     this.NUMBER_LENGTH = 3;
     this.MESSAGE = {
-      start: "숫자 야구 게임을 시작합니다.",
-      turn: "숫자를 입력해주세요 : ",
-      end: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-      replay: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      start: '숫자 야구 게임을 시작합니다.',
+      turn: '숫자를 입력해주세요 : ',
+      end: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+      replay: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
     };
   }
 
@@ -37,7 +37,7 @@ class App {
 
   runTurn(computerNumbers, input) {
     this.checkInputIsValid(input);
-    const userNumbers = input.split("");
+    const userNumbers = input.split('');
     const ball = countBall(userNumbers, computerNumbers);
     const strike = countStrike(userNumbers, computerNumbers);
     printBallCount(ball, strike);

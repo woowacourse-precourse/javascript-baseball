@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console } = require('@woowacourse/mission-utils');
 
 function isBall(computerNumbers, userNumber, index) {
   return computerNumbers[index] !== userNumber && computerNumbers.includes(userNumber);
@@ -38,7 +38,7 @@ function printBallCount(ball, strike) {
     return;
   }
   if (ball === 0 && strike === 0) {
-    Console.print("낫싱");
+    Console.print('낫싱');
   }
 }
 

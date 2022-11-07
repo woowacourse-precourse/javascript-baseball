@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random } = require('@woowacourse/mission-utils');
 
 function getRandomNumberExceptList(startInclusive, endInclusive, list) {
   const randomNumber = String(Random.pickNumberInRange(startInclusive, endInclusive));
