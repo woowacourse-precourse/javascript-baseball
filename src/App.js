@@ -3,7 +3,6 @@ const { render } = require("node-sass");
 
 class App {
   randomNumbers;
-  inputNumbers;
   strikeCount;
   gameResult;
 
@@ -18,8 +17,8 @@ class App {
   getInputNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       inputExceptionHandling(userInput);
-      this.inputNumbers = userInput.split("").map(Number);
-      return this.inputNumbers
+      const inputNumbers = userInput.split("").map(Number);
+      this.checkInputNumbers(inputNumbers,this.randomNumbers)
     });
   }
 
@@ -37,7 +36,6 @@ class App {
   }
 
   checkInputNumbers(inputNumbers, randomNumbers) {
-    const inputNumbers = inputNumbers.split("").map(Number);
     this.strikeCount = 0;
     let ballCount = 0;
 
@@ -52,7 +50,7 @@ class App {
     return [ballCount, this.strikeCount];
   }
 
-  showNumberResult([ballCount, strikeCount]) {
+  makeCheckedResult([ballCount, strikeCount]) {
     if (ballCount == 0 && strikeCount == 0) {
       return "낫싱";
     }
@@ -67,6 +65,15 @@ class App {
     }
     return ballResult + " " + strikeResult;
   }
+
+  showCheckedResult(result){
+    MissionUtils.Console.print(result)
+    if(this.strikeCount==3){
+      this.checkEndMessage()
+    }
+    this.getInputNumbers()
+  }
+
 
   checkGameEndMessage() {
     MissionUtils.Console.print(
