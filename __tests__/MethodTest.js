@@ -19,6 +19,7 @@ describe("기능별 테스트", () => {
     expect(ballScore).toEqual(2);
     expect(strikeScore).toEqual(1);
   });
+
   test('게임룰에 따른 올바른 점수값이 나오는지', () => {
     const computer = [1,4,5];
     const user = ['236', '167', '157', '451', '145'];
@@ -33,6 +34,30 @@ describe("기능별 테스트", () => {
     messages.forEach((output, index) => {
       expect(playTool.gameRule(computer, user[index])).toEqual(output);
     });
+  });
+
+  test('유저번호 3자리가 안들어갈 경우 올바른 에러를 나타내주는지' , () => {
+    expect(() => {
+      playTool.userInputError('12');
+    }).toThrow('3자리의 수를 입력해야합니다.');
+  });
+
+  test('유저번호 중복일경우 올바른 에러를 나타내주는지' , () => {
+    expect(() => {
+      playTool.userInputError('122');
+    }).toThrow('중복된 수가 없는지 확인해야합니다.');
+  });
+
+  test('유저번호 0이 들어갈 경우 올바른 에러를 나타내주는지' , () => {
+    expect(() => {
+      playTool.userInputError('012');
+    }).toThrow('1~9까지의 숫자만 입력해야합니다');
+  });
+
+  test('유저번호 숫자가 아닌값이 들어갈 경우 올바른 에러를 나타내주는지' , () => {
+    expect(() => {
+      playTool.userInputError(' 12');
+    }).toThrow('숫자만 입력해야합니다.');
   });
 });
 
