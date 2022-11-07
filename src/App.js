@@ -25,7 +25,6 @@ class App {
   }
 
   start() {
-    console.log(this._computer.answer);
     this.getUserAnswer();
   }
 
