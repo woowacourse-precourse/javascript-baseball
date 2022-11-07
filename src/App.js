@@ -22,10 +22,9 @@ class App {
   play() {
     this.Number = this.CreateRandom().join('');
     let strikeball = new StrikeBall();
-    let userinput;
+    let userinput = new UserInput();
+    userinput.GetInput();
     while (true) {
-      userinput = new UserInput();
-      userinput.GetInput();
       if (userinput.CheckInputIsValid(userinput.UserInputNumber) === false) {
         break;
       }
@@ -37,6 +36,7 @@ class App {
         MissionUtils.Console.print(message.SUCCESS);
         break;
       }
+      userinput.GetInput();
     }
     if (strikeball.Strike === message.THREESTRIKE) {
       if (strikeball.IfStrike()) {
