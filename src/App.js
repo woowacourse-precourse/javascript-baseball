@@ -8,7 +8,12 @@ class App {
 
   play() {
     this.computerInput = this.selectRandomNumber();
-    this.userInputNumber();
+    this.userInput = [1, 2, 3]; // 디버깅용
+    // this.userInputNumber();
+
+    console.log(`정답: ${this.computerInput} / 입력: ${this.userInput}`);
+    this.compareNumber(this.userInput);
+
     return;
   }
 
@@ -24,10 +29,28 @@ class App {
     return randomNumber;
   }
 
-  userInputNumber() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      this.userInput = answer.split("");
-    });
+  // userInputNumber() {
+  //   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+  //     this.userInput = answer.split("");
+  //   });
+  //   this.compareNumber(this.userInput);
+  // }
+
+  compareNumber() {
+    console.log("비교할게!");
+    let score = [0, 0]; //[ 볼, 스트라이크]
+    this.isStrike(this.userInput);
+  }
+
+  isStrike() {
+    for (let i = 0; i < 3; i++) {
+      if (this.userInput[i] === this.computerInput[i]) {
+        score[1] += 1;
+      } else {
+        // isBall(i);
+        console.log("스트라이크는 아님");
+      }
+    }
   }
 }
 
