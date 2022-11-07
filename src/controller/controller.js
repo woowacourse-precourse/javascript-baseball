@@ -14,10 +14,10 @@ class Controller {
 
   /**
    * 유저가 제시한 수를 저장한다(update).
-   * @param {string[]} userGivenNumber [유저가 제시한 수]
+   * @param {string} userGivenNumber [유저가 제시한 수(문자열)]
    */
   updateUserGivenNumber(userGivenNumber) {
-    this.userGivenNumber.setState(userGivenNumber);
+    this.userGivenNumber.setState(userGivenNumber.toString().split(""));
   }
 
   /**

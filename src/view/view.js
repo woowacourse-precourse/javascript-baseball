@@ -28,9 +28,7 @@ class View {
   // 유저로부터 숫자를 제시받는다.
   getUserGuessInput() {
     Console.readLine(this.GET_INPUT_COMMET, (userGivenString) => {
-      this.controller.updateUserGivenNumber(
-        userGivenString.toString().split("")
-      );
+      this.controller.updateUserGivenNumber(userGivenString);
       this.controller.checkIsUserInputValid();
     });
   }
