@@ -156,4 +156,49 @@ describe('숫자 야구 게임', () => {
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
     );
   });
+
+  test('게임 새로 시작', () => {
+    const answers = '1';
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.endGameSystem(answers);
+    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+
+  test('게임 종료', () => {
+    const answers = '2';
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.endGameSystem(answers);
+    expect(logSpy).not.toBeCalled();
+  });
+
+  test('게임 종료 예외 테스트 1', () => {
+    const answers = '0';
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.postEndMessage(answers);
+    }).toThrow();
+  });
+
+  test('게임 종료 예외 테스트 2', () => {
+    const answers = 'a';
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.postEndMessage(answers);
+    }).toThrow();
+  });
+
+  test('게임 종료 예외 테스트 3', () => {
+    const answers = ' ';
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.postEndMessage(answers);
+    }).toThrow();
+  });
 });
