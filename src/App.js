@@ -1,4 +1,5 @@
 const MissonUtils = require("@woowacourse/mission-utils");
+const { Random, Console } = MissonUtils;
 
 class App {
   #RANDOM_NUM_LENGTH = 3;
@@ -18,19 +19,19 @@ class App {
       () =>
         (this.#randomNum = [
           ...this.#randomNum,
-          MissonUtils.Random.pickNumberInRange(1, 9) + "",
+          Random.pickNumberInRange(1, 9) + "",
         ])
     );
   }
 
   startGame() {
-    MissonUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
 
     this.getInput();
   }
 
   getInput() {
-    MissonUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) =>
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) =>
       this.compareResults(userInput)
     );
   }
@@ -58,28 +59,27 @@ class App {
 
     console.log(this.#randomNum, compareResults);
 
-    if (!ball && !strike) MissonUtils.Console.print("낫싱");
+    if (!ball && !strike) Console.print("낫싱");
 
-    if (ball && !strike) MissonUtils.Console.print(`${ball}볼`);
+    if (ball && !strike) Console.print(`${ball}볼`);
 
-    if (!ball && strike) MissonUtils.Console.print(`${strike}스트라이크`);
+    if (!ball && strike) Console.print(`${strike}스트라이크`);
 
-    if (ball && strike)
-      MissonUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    if (ball && strike) Console.print(`${ball}볼 ${strike}스트라이크`);
 
     strike === 3 ? this.resetGame() : this.getInput();
   }
 
   resetGame() {
-    MissonUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissonUtils.Console.readLine(
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
         if (userInput !== "1" && userInput !== "2") {
           this.throwError("Fail to reset");
         }
 
-        userInput === "1" ? this.play() : MissonUtils.Console.close();
+        userInput === "1" ? this.play() : Console.close();
       }
     );
   }
@@ -96,14 +96,14 @@ class App {
 
   throwError(errorCase) {
     if (errorCase === "Fail to reset") {
-      MissonUtils.Console.close();
+      Console.close();
       throw new TypeError(
         "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다."
       );
     }
 
     if (errorCase === "Fail to compare") {
-      MissonUtils.Console.close();
+      Console.close();
       throw new TypeError(
         "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다."
       );
@@ -111,8 +111,8 @@ class App {
   }
 }
 
-// const app = new App();
+const app = new App();
 
-// app.play();
+app.play();
 
 module.exports = App;
