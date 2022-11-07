@@ -27,6 +27,19 @@ class App {
       throw new Error("1 또는 2를 입력하세요.");
     }
   }
+
+  // 상대방(컴퓨터) 숫자 생성
+  getRandomNum(){
+    const computer = [];
+    while(computer.length < 3){
+      const number = MissionUtils.Random.picNumberInRange(1, 9);
+      if(!computer.includes(number)){
+        computer.push(number);
+      }
+    }
+    return computer.join("");
+  }
+
 }
 
 module.exports = App;
