@@ -1,6 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
+const MESSAGE = {
+  START: "숫자 야구 게임을 시작합니다.",
+  END: "3개의 숫자를 모두 맞히셨습니다. 게임 종료",
+  RESTART: "게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.",
+  INPUT: "숫자를 입력해주세요 : ",
+  ERROR: "잘못된 값을 입력하셨습니다.",
+};
 
 class App {
   constructor() {
@@ -80,14 +87,14 @@ class App {
 
     if (ball === 0 && strike === 0) {
       this.printMsg("낫싱");
-      return this.inputNumber("숫자를 입력하세요.");
+      return this.inputNumber(MESSAGE.INPUT);
     }
-    if (strike === 3) return this.gameEnd();
+    if (strike === this.gameSet.NUM_LENGTH) return this.gameEnd(strike);
     if (ball !== 0) msg += `${ball}볼`;
     if (strike !== 0) msg += ` ${strike}스트라이크`;
 
     this.printMsg(msg);
-    this.inputNumber("숫자를 입력하세요.");
+    this.inputNumber(MESSAGE.INPUT);
   }
 
   isGameEnd(endNumber) {
@@ -101,14 +108,14 @@ class App {
 
   gameStart() {
     this.gameSet = this.gameSetting();
-    this.printMsg("숫자 야구 게임을 시작합니다.");
+    this.printMsg(MESSAGE.START);
   }
 
-  gameEnd() {
+  gameEnd(strike) {
     this.playing = 0;
-    this.printMsg("3스트라이크");
-    this.printMsg("3개의 숫자를 모두 맞히셨습니다. 게임 종료");
-    this.inputNumber("게임을 새로 시작하려면 1, 종료하려면 2 를 입력하세요.");
+    this.printMsg(`${strike}스트라이크`);
+    this.printMsg(MESSAGE.END);
+    this.inputNumber(MESSAGE.RESTART);
   }
 
   reStart() {
@@ -122,14 +129,17 @@ class App {
     if (this.round == 0) this.gameStart();
 
     this.choiceNumber();
-    this.inputNumber("숫자를 입력하세요.");
+    this.inputNumber(MESSAGE.INPUT);
   }
 
   error() {
     this.round = 0;
     Console.close();
-    throw new Error("잘못된 입력입니다.");
+    throw new Error(MESSAGE.ERROR);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
