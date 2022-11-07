@@ -34,6 +34,12 @@ class BaseballGame {
     });
   }
 
+  getMessage(computerNumber) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.checkValidation(input);
+    });
+  }
+
   play() {
     this.init();
   }
