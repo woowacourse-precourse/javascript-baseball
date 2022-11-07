@@ -52,7 +52,7 @@ class App {
 
   isBall(compareIter){
     for(let i = 0; i < this.computerNum.length; i++) {
-      if((compareIter !== i) && (this.computerNum[compareIter] == this.userNum[i])) {
+      if((compareIter !== i) && (this.computerNum[compareIter] === this.userNum[i])) {
           return 1;
       }
     }
@@ -61,7 +61,7 @@ class App {
 
   getNumOfStrike(strike) {
     for(let i = 0; i < this.computerNum.length; i++) {
-      if(this.computerNum[i] == this.userNum[i]) {
+      if(this.computerNum[i] === this.userNum[i]) {
           strike++;
       }
     }
