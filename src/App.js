@@ -27,14 +27,14 @@ class App {
   }
   getUserInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_num) => {
-      this.user_number=input_num;
-      this.changeUserNumberToArray();
+      this.changeUserNumberToArray(input_num);
     });
   }
-  changeUserNumberToArray(){
-    let user_num;
-    user_num = (this.user_number + '').split('');
+  changeUserNumberToArray(input_num){
+    this.user_number = (input_num + '').split('');
   }
+
+  
 }
 const app = new App;
 app.play();
