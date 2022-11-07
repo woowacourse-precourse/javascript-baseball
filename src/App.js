@@ -26,6 +26,14 @@ class App {
       })
   }
 
+  askRestartOrQuit(){
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.readLine('', (answer) => {
+      if(answer == 1) return this.play();
+      if(answer == 2) return Console.print("게임 종료");
+    })
+  }
+
   compareInput(userInput){
     this.userInputNums = userInput;
     const subtractArr = this.computerInput.map((x,y) => x-userInput[y]);
@@ -33,7 +41,7 @@ class App {
     if(zeroCount == 3){
       Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      //return this.restartGame();
+      return this.askRestartOrQuit();
     }
 
     //this.getResult();
