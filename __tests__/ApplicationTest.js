@@ -143,29 +143,21 @@ describe('숫자 야구 게임', () => {
     });
   });
 
-  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
+  test('isValidInput 메서드로 부적절한 입력값 예외처리', () => {
     expect(App.isValidInput([1, 2, 3])).toEqual(true);
-  });
 
-  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
     expect(() => {
       App.isValidInput([1, NaN, 2]);
     }).toThrow('문자를 제외한 숫자만 입력하세요.');
-  });
 
-  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
     expect(() => {
       App.isValidInput([1, 0, 9]);
     }).toThrow('1~9 사이의 숫자만 입력하세요.');
-  });
 
-  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
     expect(() => {
       App.isValidInput([1, 9]);
     }).toThrow('3개의 숫자들을 입력하세요.');
-  });
 
-  test('isValidInput 메소드 제대로 동작하는지 확인', () => {
     expect(() => {
       App.isValidInput([4, 7, 7]);
     }).toThrow('서로 다른 숫자를 입력하세요.');
