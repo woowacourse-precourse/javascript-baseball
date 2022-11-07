@@ -1,15 +1,20 @@
 const { print, close, readLine, pickNumberInRange } = require("./Utils");
 const ExceptionCheck = require("./ExceptionCheck");
+const { GAME_MSG, BASEBALL_MSG } = require("./Message");
 
 class App {
+  constructor() {
+    this.gamaStartAlram();
+  }
+
   #computerNums;
+  #userInputNums;
 
   gamaStartAlram() {
-    print("게임을 시작합니다");
+    print(GAME_MSG.START);
   }
 
   play() {
-    this.gamaStartAlram();
     this.createRandomNum();
     this.setComputerNums();
     this.getAnswer();
@@ -28,20 +33,24 @@ class App {
   }
 
   getAnswer() {
-    readLine('숫자를 입력해주세요 :', (input) => {
-      const exceptionCheck = new ExceptionCheck();
-      exceptionCheck.UserInputCheck(input);
-      print(`입력한 숫자는 ${input} 입니다`);
-      this.userInput = input;
-      this.strikeCount();
-      this.ballCount();
-      this.strikeBallCountAlram();
-      return this.userInput;
+    readLine('숫자를 입력해주세요 :', (userInput) => {
+      this.userInputAnalysis(userInput);
     });
   }
 
+  userInputAnalysis(userInput) {
+    const exceptionCheck = new ExceptionCheck();
+    exceptionCheck.UserInputCheck(userInput);
+    this.userInput = userInput;
+    this.strikeCount();
+    this.ballCount();
+    this.strikeBallCountAlram();
+    return this.#userInputNums = userInput;
+
+  }
+
   strikeCount() {
-    const correctAnswerArr = this.correctAnswer.split('');
+    const correctAnswerArr = this.#computerNums.split('');
     correctAnswerArr.map((number, index) => {
       if (number === this.userInput[index]) {
         this.strike += 1;
@@ -51,7 +60,7 @@ class App {
   }
 
   ballCount() {
-    const correctAnswerArr = this.correctAnswer.split('');
+    const correctAnswerArr = this.#computerNums.split('');
     correctAnswerArr.map((number, index) => {
       if (number !== this.userInput[index] && this.userInput.includes(number)) {
         this.ball += 1;
@@ -89,7 +98,7 @@ class App {
   }
 
   win() {
-    print(`3스트라이크! 정답은 : ${this.correctAnswer} 입니다`);
+    print(`3스트라이크! 정답은 : ${this.#computerNums} 입니다`);
   }
 
   restartOrEnd() {
