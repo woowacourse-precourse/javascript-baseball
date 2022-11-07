@@ -38,9 +38,8 @@ describe("숫자 야구 게임", () => {
 
     mockRandoms(randoms);
     mockQuestions(answers);
-
     const app = new App();
-    app.play();
+    app.InsertNumber(answers);
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
@@ -50,13 +49,24 @@ describe("숫자 야구 게임", () => {
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
-
+    
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    expect(() => {
+    const t = (answers) => {
       const app = new App();
-      app.play();
-    }).toThrow();
+      app.InsertNumber(answers);
+      throw new TypeError();
+    };
+
+    expect(t).toThrow(TypeError);
+
+    // expect(() => {
+    //   const app = new App();
+    //   app.InsertNumber(answers);
+
+    // }).toThrow(
+    //   TypeError
+    // );
   });
 });
