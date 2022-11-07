@@ -33,8 +33,10 @@ class App {
 
       this.#userAnswer = [...answer];
       this.score = {};
+
       this.getScore();
       this.printScore();
+      this.restart();
     });
   }
   getScore() {
@@ -56,6 +58,25 @@ class App {
     if (strike === 3)
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     else this.inputUserAnswer();
+  }
+  restart() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (answer === "1") {
+          this.#answer = "";
+          this.start();
+          return;
+        }
+        if (answer === "2") {
+          this.Console.print("게임 종료");
+          Console.close();
+          return;
+        }
+        Console.close();
+        throw new Error("잘못된 값을 입력하셨습니다.");
+      }
+    );
   }
 }
 
