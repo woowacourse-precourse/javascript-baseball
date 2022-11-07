@@ -47,7 +47,7 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("세 자리 수 이상 입력 시", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
 
@@ -57,6 +57,6 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("세 자리 수만 입력할 수 있습니다.");
   });
 });
