@@ -17,6 +17,7 @@ class App {
     Console.readLine(`${Message.input}`, (userInput) => {
       checkException(userInput);
       const result = getResult(this.answer, userInput);
+      console.log(result);
       Console.close();
     });
   }
