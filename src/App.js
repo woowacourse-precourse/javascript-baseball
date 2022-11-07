@@ -7,6 +7,11 @@ class App {
     MissionUtils.Console.print(MESSAGE.START);
   }
 
+  newGame() {
+    let answer = this.makeAnswer();
+    this.guessAnswer(answer)
+  }
+
   makeAnswer() {
     const answer = [];
     while (answer.length < 3) {
@@ -16,6 +21,18 @@ class App {
       }
     }
     return answer;
+  }
+
+  guessAnswer(answer) {
+    MissionUtils.Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
+      this.isCorrectInput(input);
+
+      input = this.stringToAnswerType(input);
+      let result = this.compare(answer, input);
+      this.printResult(result);
+
+      this.isAnswer(result) ? this.askRestart() : this.guessAnswer(answer);
+    });
   }
 
   isCorrectInput(value) {
@@ -94,24 +111,6 @@ class App {
       if (input === RESTART.NO)
         MissionUtils.Console.close();
     })
-  }
-
-  guessAnswer(answer) {
-    MissionUtils.Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
-      this.isCorrectInput(input);
-
-      input = this.stringToAnswerType(input);
-      let result = this.compare(answer, input);
-      this.printResult(result);
-
-      this.isAnswer(result) ? this.askRestart() : this.guessAnswer(answer);
-    });
-  }
-
-  newGame() {
-    let answer = this.makeAnswer();
-    console.log(answer);
-    this.guessAnswer(answer)
   }
 
   play() {
