@@ -6,8 +6,10 @@ class App {
     const Game = new GameLoop();
     while (Game.continues) {
       Game.start();
-      Game.restart();
+      Game.end();
     }
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.close();
   }
 }
 
@@ -19,7 +21,7 @@ class Computer {
 
   _initialize() {
     this._digits.length = 0;
-    while (this._digits.length <= 3) {
+    while (this._digits.length < 3) {
       const digit = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this._digits.includes(digit)) {
         this._digits.push(digit);
@@ -27,22 +29,22 @@ class Computer {
     }
   }
 
-  judge(message) {
-    let ball = 0,
-      strike = 0;
+  judge(userInput) {
+    const userInputList = userInput.split("").map((num) => Number(num));
+    const notStrikeList = [];
+    let balls = 0;
+    let strikes = 0;
 
-    for (let i = 0; i < 3; i++) {
-      if (!this._digits.includes(message.at(i))) continue;
-      ball += 1;
-    }
+    userInputList.forEach((num, index) => {
+      if (num === this._digits[index]) strikes++;
+      else notStrikeList.push(num);
+    });
 
-    for (let i = 0; i < 3; i++) {
-      if (message[i] != this._digits[i]) continue;
-      strike += 1;
-      ball -= 1;
-    }
+    notStrikeList.forEach((num) => {
+      if (this._digits.includes(num)) balls++;
+    });
 
-    return [ball, strike];
+    return [balls, strikes];
   }
 }
 
@@ -68,41 +70,52 @@ class GameLoop {
     return;
   }
 
-  restart() {
+  end() {
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
-    const gameEnd = MissionUtils.Console.readLine();
 
-    if (gameEnd === "1") {
-      return;
-    }
+    const gameEnd = MissionUtils.Console.readLine("", (message) => {
+      if (message === "2") {
+        this.continues = false;
+        return;
+      }
 
-    if (gameEnd === "2") {
-      this.continues = false;
-      MissionUtils.Console.print("게임 종료");
-      return;
-    }
+      if (message === "1") {
+        this.continues = true;
+        return;
+      }
 
-    throw new Error("1이나 2를 입력해야합니다");
+      MissionUtils.Console.close();
+      throw new Error("1이나 2를 입력해야합니다");
+    });
   }
 
   _validate(message) {
     if (typeof message != "string") {
+      MissionUtils.Console.close();
       throw new Error("문자열을 입력해야 합니다");
     }
 
     if (!/^\d+$/.test(message)) {
+      MissionUtils.Console.close();
       throw new Error("숫자를 입력해야 합니다");
     }
 
+    if (message.includes("0")) {
+      MissionUtils.Console.close();
+      throw new Error("1에서 9 사이 숫자를 입력해야합니다.");
+    }
+
     if (message.length != 3) {
+      MissionUtils.Console.close();
       throw new Error("세자리 숫자를 입력해야 합니다");
     }
 
-    // if (new Set(message).length != 3) {
-    //   throw new Error("서로 다른 숫자를 입력해야 합니다");
-    // }
+    if (new Set(message).size != 3) {
+      MissionUtils.Console.close();
+      throw new Error("서로 다른 숫자를 입력해야 합니다");
+    }
 
     return message;
   }
@@ -132,8 +145,5 @@ class GameLoop {
     return false;
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
