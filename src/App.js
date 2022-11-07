@@ -1,28 +1,17 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { OUTPUT_MESSAGE, ERROR_MESSAGE, GENERATE_RANGE } = require('./constant');
+const { OUTPUT_MESSAGE } = require('./constant');
+const { restartEndGameAnswerValidator, guessAnswerValidate } = require('./utils/validation');
+const getRandomNumbers = require('./utils/generate-random-number');
+const scoreConversion = require('./utils/score-conversion');
+
 class App {
   constructor() {
     this.firstEnter = true;
   }
 
-  getRandomNumbers() {
-    const Numbers = [];
-    while (Numbers.length < GENERATE_RANGE.MAX_SIZE) {
-      const number = MissionUtils.Random.pickNumberInRange(
-        GENERATE_RANGE.MINIMUM_VALUE,
-        GENERATE_RANGE.MAXIMUM_VALUE
-      );
-      if (!Numbers.includes(number)) {
-        Numbers.push(number);
-      }
-    }
-
-    return Numbers;
-  }
-
   guessAnswer() {
     MissionUtils.Console.readLine(OUTPUT_MESSAGE.ENTER_NUMBER, (answer) => {
-      this.guessAnswerValidate(answer);
+      guessAnswerValidate(answer);
       if (this.outputResult(answer) === OUTPUT_MESSAGE.CORRECT_ANSWER) {
         MissionUtils.Console.print(this.outputResult(answer));
         this.restartEndGameAnswer();
@@ -33,24 +22,9 @@ class App {
     });
   }
 
-  guessAnswerValidate(answer) {
-    const duplicate = new Set(answer);
-    if (answer.length !== 3) {
-      throw ERROR_MESSAGE.DIFFERENT_NUMBERS;
-    }
-    if (answer.length !== duplicate.size) {
-      throw ERROR_MESSAGE.DIFFERENT_NUMBERS;
-    }
-    if (
-      !answer.split('').every((number) => number.charCodeAt() >= 49 && number.charCodeAt() <= 57)
-    ) {
-      throw ERROR_MESSAGE.OUT_OF_RANGE;
-    }
-  }
-
   restartEndGameAnswer() {
     MissionUtils.Console.readLine(OUTPUT_MESSAGE.RESTART_ENDGAME_ENTER_NUMBER, (answer) => {
-      this.restartEndGameAnswerValidator(answer);
+      restartEndGameAnswerValidator(answer);
       if (answer === '1') {
         this.play();
         return;
@@ -58,15 +32,6 @@ class App {
       MissionUtils.Console.close();
       return;
     });
-  }
-
-  restartEndGameAnswerValidator(answer) {
-    if (answer.length !== 1) {
-      throw ERROR_MESSAGE.ONLY_NUMBER;
-    }
-    if (!(answer.charCodeAt() >= 49 && answer.charCodeAt() <= 50)) {
-      throw ERROR_MESSAGE.OUT_OF_RANGE;
-    }
   }
 
   outputResult(answer) {
@@ -83,25 +48,7 @@ class App {
       }
     });
 
-    return this.scoreConversion(strike, ball);
-  }
-
-  scoreConversion(strike, ball) {
-    if (strike === 0 && ball === 0) {
-      return OUTPUT_MESSAGE.NOTHING;
-    }
-    if (strike === 3) {
-      return OUTPUT_MESSAGE.CORRECT_ANSWER;
-    }
-    if (ball > 0 && strike > 0) {
-      return `${ball}${OUTPUT_MESSAGE.BALL} ${strike}${OUTPUT_MESSAGE.STRIKE}`;
-    }
-    if (ball > 0 && strike === 0) {
-      return `${ball}${OUTPUT_MESSAGE.BALL}`;
-    }
-    if (strike > 0 && ball === 0) {
-      return `${strike}${OUTPUT_MESSAGE.STRIKE}`;
-    }
+    return scoreConversion(strike, ball);
   }
 
   play() {
@@ -109,7 +56,7 @@ class App {
       MissionUtils.Console.print(OUTPUT_MESSAGE.START_GAME);
       this.firstEnter = false;
     }
-    this.computer = this.getRandomNumbers();
+    this.computer = getRandomNumbers();
     this.guessAnswer();
   }
 }
