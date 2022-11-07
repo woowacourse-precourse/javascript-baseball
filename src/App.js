@@ -14,6 +14,7 @@ class App {
 
     while(true){
       //사용자에게 숫자 3개를 받음
+      const answer = 0;
       MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
         console.log(`${answer}`);
         MissionUtils.Console.close();
@@ -31,6 +32,7 @@ class App {
       }
       //스트라이크
       let cnt = 0; //스트라이크 수를 세기 위한 count
+      const control = 0; //게임 새로 시작/종료를 위한 컨트롤러
       Strike(random, input, cnt);
       if(cnt == 3){
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
