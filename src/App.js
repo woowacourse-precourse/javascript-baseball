@@ -24,7 +24,6 @@ class Computer extends App {
     let strike = this.countStrike(computerNum, userNum);
     let ball = this.countBall(computerNum, userNum, strike[1]);
 
-    
   }
 
   countStrike(computerNum, userNum) {
@@ -35,9 +34,31 @@ class Computer extends App {
         strike += 1;
         strikeIndex.push(i);
       }
-
     }
     return [strike, strikeIndex]
+  }
+
+  exceptStrikedNumbers(computerNum, userNum, strikeIndex) {
+
+    let comLs = [...computerNum];
+    let userLs = [...userNum];
+
+    for (let i of strikeIndex) {
+      delete comLs[i];
+      delete userLs[i] ;
+    }
+    comLs = comLs.filter(comLsItem => comLsItem !== undefined );
+    userLs = userLs.filter(userLsItem => userLsItem !== undefined );
+
+    return [comLs, userLs]
+  }
+
+  countBall(computerNum, userNum, strikeIndex) {
+    const listOfComAndUser = this.exceptStrikedNumbers(computerNum, userNum, strikeIndex);
+    const comLs = listOfComAndUser[0];
+    const userLs = listOfComAndUser[1];
+
+    return comLs.filter(item => userLs.includes(item)).length
   }
     
 }
@@ -67,6 +88,3 @@ class User extends App {
 module.exports = App;
 module.exports = Computer;
 module.exports = User;
-
-
-// console.log(computerLs.makeComNumLs());
