@@ -1,14 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class User {
   game;
-  isPlay = true;
   constructor() {
     this.game = new BaseBallGame();
     this.input();
   }
   input() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputAnswer) => {
-      this.game.output(inputAnswer);
+      const isPlay = this.game.output(inputAnswer);
+      if(isPlay){
+        this.input();
+      }
     })
   }
 }
