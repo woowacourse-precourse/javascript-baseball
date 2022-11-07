@@ -163,8 +163,8 @@ class App {
   }
 
   exitGame() {
-    console.log("종료 테스트");
-    return true;
+    Console.print("exitGame");
+    Console.close();
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
@@ -229,3 +229,7 @@ const app = new App();
 app.play();
 
 module.exports = App;
+
+// TODO: 입력이 요구사항과 일치하는지 확인하기
+// TODO: 올바른 프로그램 종료
+// TODO: 종료 후 1, 2 입력시 올바른 입력 검증
