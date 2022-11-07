@@ -142,4 +142,108 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("입력이 ''인 경우 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = [''];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  
+  test("입력이 ' '인 경우 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = [' '];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력이 '\n'인 경우 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['\n'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력에 숫자가 아닌 것이 있는 경우 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['a%5'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  
+  test("음수를 입력했을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['-13'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("소수를 입력했을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['7.5'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력에 0이 있을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['350'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력에 중복되는 숫자가 있을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['311'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
