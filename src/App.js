@@ -74,7 +74,7 @@ function compareAnswer(playerAnswer) {
   if (!creatComputerAnswer.some((number) => playerAnswer.includes(number))) {
     MissionUtils.Console.print("낫싱");
   }
-  if (creatComputerAnswer.every((num) => playerAnswer.includes(num))) {
+  if (creatComputerAnswer.every((number) => playerAnswer.includes(number))) {
     const gameEndString = `3 스트라이크
     3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
     MissionUtils.Console.print(gameEndString);
@@ -84,10 +84,18 @@ function compareAnswer(playerAnswer) {
 function startGame() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-  const playerAnswer = [];
+  do {
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      const playerAnswer = answer.split("").map(Number);
 
-  MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-    playerAnswer.push(answer);
-    verifyPlayerAnswer(playerAnswer);
-  });
+      verifyPlayerAnswer(playerAnswer);
+    });
+
+    playerAnswer.splice(0);
+  } while (creatComputerAnswer.every((num) => playerAnswer.includes(num)));
+
+  MissionUtils.Console.Console.readLine(
+    "게임을 다시 시작하려면 1, 종료하려면 2를 입력하세요.",
+    reStartOrEnd
+  );
 }
