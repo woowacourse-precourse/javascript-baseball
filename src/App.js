@@ -1,5 +1,9 @@
 class App {
-  play() {}
+  play() { }
+}
+
+function printMessage(sentence) {
+  return Console.print(sentence)
 }
 
 module.exports = App;
