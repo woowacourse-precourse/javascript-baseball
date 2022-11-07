@@ -28,6 +28,16 @@ class App {
     };
   }
 
+  isThreeStrike(baseBallBoard) {
+    const { strike, ball } = baseBallBoard;
+    if (strike || ball) {
+      Console.print(
+        (ball ? `${ball}볼 ` : ``) + (strike ? `${strike}스트라이크` : ``),
+      );
+    } else Console.print('낫싱');
+    return strike === INPUT_LENGTH;
+  }
+
   calcBaseBallDigit(inputDigit, randomDigit) {
     const { isStrike, isBall } = this.#collectCalculatorFn;
     const baseBallBoard = {
@@ -56,8 +66,8 @@ class App {
   setUserInput(randomDigit) {
     Console.readLine('숫자를 입력해주세요 : ', inputDigit => {
       const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
-      Console.print(userDigit);
       const baseBallBoard = this.calcBaseBallDigit(userDigit, randomDigit);
+      this.isThreeStrike(baseBallBoard, randomDigit);
     });
   }
 
