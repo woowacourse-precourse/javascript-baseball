@@ -29,6 +29,8 @@ class App {
   }
 
   compareResults(userInput) {
+    if (userInput.length !== 3) this.throwError("비교 실패");
+
     userInput = userInput.split("");
 
     const results = { ball: 0, strike: 0 };
@@ -45,7 +47,7 @@ class App {
   }
 
   printResults(compareResults) {
-    const { strike, ball } = compareResults;
+    const { ball, strike } = compareResults;
 
     console.log(this.#randomNum, compareResults);
 
@@ -72,6 +74,18 @@ class App {
         userInput === "1" ? this.play() : MissonUtils.Console.close();
       }
     );
+  }
+
+  throwError(errorCase) {
+    if (errorCase === "초기화 실패") {
+      MissonUtils.Console.close();
+      throw "1 또는 2를 입력해야 합니다.";
+    }
+
+    if (errorCase === "비교 실패") {
+      MissonUtils.Console.close();
+      throw "3자리의 숫자를 입력해야 합니다.";
+    }
   }
 
   play() {
