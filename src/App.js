@@ -31,6 +31,9 @@ class App {
     if (userNumberInput.length != 3) {
       throw new Error("숫자는 3자리로 입력해야합니다.");
     }
+    if (new Set(userNumberInput).size != 3) {
+      throw new Error("서로 다른 숫자여야 합니다");
+    }
   }
 }
 
