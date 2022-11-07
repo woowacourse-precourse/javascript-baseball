@@ -4,6 +4,20 @@ const MIN_RANDOM_NUIMBER = 1
 const MAX_RANDOM_NUMBER = 9
 const VALID_NUMBER_LENGTH = 3
 
+const isValidInput = (input) => {
+  if (!isValidLength(input)) {
+    return false;
+  }
+  if (input.includes(0)) {
+    return false;
+  }
+  if (isDuplicated(input)) {
+    return false;
+  }
+
+  return true;
+};
+
 function App () {
   this.randomNumber;
   this.play = () => {
