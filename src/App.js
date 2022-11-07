@@ -92,8 +92,9 @@ class App {
         throw new Error('정해진 값을 입력해주세요.');
       }
     );
+    Console.print('');
   }
 }
 const app = new App();
-app.play();
+app.endingOption();
 module.exports = App;
