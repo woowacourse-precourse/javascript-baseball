@@ -17,6 +17,7 @@ class App {
   };
   #CORRECT_ANSWER = "3스트라이크";
   #EXIT_APP = "게임 종료";
+  #LIMIT_CNT = 3;
   #computerNumbers;
   constructor() {
     this.#computerNumbers = null;
@@ -27,64 +28,46 @@ class App {
   #setComputerNumbers(arr) {
     this.#computerNumbers = arr;
   }
-  #initComputerNumbers(arr = [], randNo = 0) {
-    arr.length === 3
-      ? this.#setComputerNumbers(arr)
-      : ((randNo = Random.pickNumberInRange(1, 9)),
-        arr.includes(randNo) || arr.push(randNo),
-        this.#initComputerNumbers(arr));
+  #initComputerNumbers(arr = []) {
+    if (arr.length === this.#LIMIT_CNT) {
+      this.#setComputerNumbers(arr);
+      return;
+    }
+    const randNo = Random.pickNumberInRange(1, 9);
+    arr.includes(randNo) || arr.push(randNo);
+    this.#initComputerNumbers(arr);
   }
   #takeUserNumbersInput() {
-    const checkUnique = (arr) => new Set(arr).size === 3;
-    const checkUserNumbersInputValidity = (arr) => {
-      if (!arr.every((el) => Number.isInteger(el) && el <= 9 && el >= 1))
-        throw this.#ERROR_MSG.ONLY_NUMBERS;
-      if (arr.length !== 3) throw this.#ERROR_MSG.INVALID_LENGTH;
-      if (!checkUnique(arr)) throw this.#ERROR_MSG.DUPLICATE_NUMBERS;
-    };
     Console.readLine(this.#GAME_MSG.PLEASE_INPUT, (input) => {
-      const userNumbers = input.trim().split("").map(Number);
-      checkUserNumbersInputValidity(userNumbers);
-      const rstArr = this.#compareEachNumbers(
-        this.#getComputerNumbers(),
-        userNumbers
-      );
-      this.#getResult(rstArr) === this.#CORRECT_ANSWER
-        ? this.#askRestart()
-        : this.#takeUserNumbersInput();
+      this.#handleUserNumbers(input);
     });
   }
-  #compareEachNumbers(computerNumbers, userNumbers) {
-    return userNumbers.reduce(
-      ([ballCnt, strikeCnt], userNo, i) => {
-        userNo === computerNumbers[i]
-          ? strikeCnt++
-          : computerNumbers.includes(userNo) && ballCnt++;
-        return [ballCnt, strikeCnt];
-      },
-      [0, 0]
-    );
+  #handleUserNumbers(input) {
+    const checkIsCorrect = (str) => str === this.#CORRECT_ANSWER;
+
+    const userNumbers = input.trim().split("").map(Number);
+    this.checkUserNumbersInputValidity(userNumbers);
+    const computerNumbers = this.#getComputerNumbers();
+    const ballStrikeArr = this.compareEachNumbers(computerNumbers, userNumbers);
+    checkIsCorrect(this.#getResult(ballStrikeArr))
+      ? this.#askRestart()
+      : this.#takeUserNumbersInput();
   }
   #getResult([ballCnt, strikeCnt]) {
-    const rstStr =
-      ballCnt === 0 && strikeCnt === 0
-        ? this.#GAME_RESULT.NOTHING
-        : [
-            [ballCnt, this.#GAME_RESULT.BALL],
-            [strikeCnt, this.#GAME_RESULT.STRIKE],
-          ]
-            .filter(([cnt]) => cnt > 0)
-            .map((line) => line.join(""))
-            .join(" ");
+    const helpArr = [
+      [ballCnt, this.#GAME_RESULT.BALL],
+      [strikeCnt, this.#GAME_RESULT.STRIKE],
+    ];
+    const filteredArr = helpArr.filter(([cnt]) => cnt > 0);
+    const rstArr = filteredArr.map((line) => line.join(""));
+    const rstStr = rstArr.join(" ") || this.#GAME_RESULT.NOTHING;
     Console.print(rstStr);
-    return rstStr.trim();
+    return rstStr;
   }
   #askRestart() {
     Console.readLine(this.#GAME_MSG.ASK_RESTART, (input) => {
       const restartNo = +input.trim();
-
-      if (restartNo !== 1 && restartNo !== 2)
-        throw this.#ERROR_MSG.ONLY_ONE_OR_TWO;
+      this.checkRestartNumberValidity(restartNo);
       restartNo === 1 ? this.#startGame() : this.#exitApp();
     });
   }
@@ -95,6 +78,25 @@ class App {
   #startGame() {
     this.#initComputerNumbers();
     this.#takeUserNumbersInput();
+  }
+  checkUnique(arr) {
+    return new Set(arr).size === this.#LIMIT_CNT;
+  }
+  checkUserNumbersInputValidity(arr) {
+    if (!arr.every((el) => Number.isInteger(el) && el <= 9 && el >= 1))
+      throw this.#ERROR_MSG.ONLY_NUMBERS;
+    if (arr.length !== this.#LIMIT_CNT) throw this.#ERROR_MSG.INVALID_LENGTH;
+    if (!this.checkUnique(arr)) throw this.#ERROR_MSG.DUPLICATE_NUMBERS;
+  }
+  checkRestartNumberValidity(restart) {
+    if (restart !== 1 && restart !== 2) throw this.#ERROR_MSG.ONLY_ONE_OR_TWO;
+  }
+  compareEachNumbers(cmpts, usrs) {
+    const getBallStrikeCnt = ([ballCnt, strikeCnt], usr, i) => {
+      usr === cmpts[i] ? strikeCnt++ : cmpts.includes(usr) && ballCnt++;
+      return [ballCnt, strikeCnt];
+    };
+    return usrs.reduce(getBallStrikeCnt, [0, 0]);
   }
   play() {
     Console.print(this.#GAME_MSG.START);
