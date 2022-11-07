@@ -1,4 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const InputError = require('./InputError');
+const ValidationError = require('./ValidationError');
 const { GAME_SETTING, RESULT } = require('./utils/constants');
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT } = GAME_SETTING;
 const { NOTHING, BALL, STRIKE } = RESULT;
@@ -27,10 +29,15 @@ class App {
 
   guess(computer) {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      if (!this.validateUserGuess(input)) {
-        throw new Error(
-          `${MIN_NUMBER}부터 ${MAX_NUMBER}까지 서로 다른 ${NUMBER_COUNT}자리 숫자를 입력해주세요.`
-        );
+      try {
+        this.validateUserGuess(input);
+      } catch (err) {
+        if (err instanceof ValidationError) {
+          const message = `${MIN_NUMBER}부터 ${MAX_NUMBER}까지 서로 다른 ${NUMBER_COUNT}자리 숫자를 입력해주세요.`;
+          throw new InputError(message, err);
+        } else {
+          throw err;
+        }
       }
 
       const player = Array.from(input, Number);
@@ -47,16 +54,21 @@ class App {
   }
 
   validateUserGuess(input) {
-    if (input.length !== NUMBER_COUNT) return false;
-
     const inputNumbers = Array.from(input, Number);
-    if (inputNumbers.some((number) => !Number.isInteger(number))) return false;
-    if (inputNumbers.some((number) => number < MIN_NUMBER || number > MAX_NUMBER)) return false;
-
     const inputNumberSet = new Set(inputNumbers);
-    if (inputNumberSet.size !== NUMBER_COUNT) return false;
 
-    return true;
+    if (input.length !== NUMBER_COUNT) {
+      throw new ValidationError('3자리만 입력하세요.');
+    }
+    if (inputNumbers.some((number) => !Number.isInteger(number))) {
+      throw new ValidationError('숫자만 입력하세요.');
+    }
+    if (inputNumbers.some((number) => number < MIN_NUMBER || number > MAX_NUMBER)) {
+      throw new ValidationError(`${MIN_NUMBER}부터 ${MAX_NUMBER}까지의 숫자만 입력하세요.`);
+    }
+    if (inputNumberSet.size !== NUMBER_COUNT) {
+      throw new ValidationError('서로 다른 숫자만 입력하세요.');
+    }
   }
 
   countExist(computer, player) {
@@ -95,7 +107,7 @@ class App {
         case '2':
           return Console.close();
         default:
-          throw new Error('게임을 종료합니다.');
+          throw new InputError('게임을 종료합니다.');
       }
     });
   }
