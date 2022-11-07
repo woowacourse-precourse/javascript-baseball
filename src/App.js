@@ -5,8 +5,12 @@ class App {
   #randomNumber = [];
 
   play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.startNewGame();
+  }
+
+  startNewGame() {
     this.#randomNumber = App.generateRandomNumber();
-    console.log(this.#randomNumber);
     this.askUserInput();
   }
 
@@ -79,7 +83,7 @@ class App {
   handleMenuInput(answer) {
     Validator.validate(answer, Validator.menuInputValidator);
     if (answer === '1') {
-      this.play();
+      this.startNewGame();
       return;
     }
     MissionUtils.Console.close();
