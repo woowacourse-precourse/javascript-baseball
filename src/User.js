@@ -28,10 +28,10 @@ class User {
     return true;
   }
 
-  convertNumToArr(num) {
-    let ARR = [...num];
-    ARR = ARR.map((num) => Number(num));
-    return ARR;
+  convertStrToArr(str) {
+    let arr = [...str];
+    arr = arr.map((str) => Number(str));
+    return arr;
   }
 }
 

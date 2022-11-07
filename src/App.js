@@ -19,7 +19,7 @@ class App {
       this.restart();
     }
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      const USER_INPUT_ARR = this.user.convertNumToArr(userInput);
+      const USER_INPUT_ARR = this.user.convertStrToArr(userInput);
       const IS_USER_INPUT_VALID = this.user.checkUserInputValid(USER_INPUT_ARR);
       if (IS_USER_INPUT_VALID === false) {
         throw new Error();
