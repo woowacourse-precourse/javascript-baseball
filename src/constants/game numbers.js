@@ -1,8 +1,13 @@
-const BASIC_NUMBER = Object.freeze({
+const GAME_NUMBER = Object.freeze({
   INIT: 0,
   STRIKE: 1,
   BALL: 2,
-  CORRECT_NUMBER: 3,
+  CORRECT: 3,
+});
+
+const BOOLEAN = Object.freeze({
+  TRUE: true,
+  FALSE: false,
 });
 
 const PICK_NUMBER = Object.freeze({
@@ -16,6 +21,7 @@ const REPLAY_NUMBER = Object.freeze({
   EXIT: '2',
 });
 
-exports.BASIC_NUMBER = BASIC_NUMBER;
+exports.GAME_NUMBER = GAME_NUMBER;
 exports.PICK_NUMBER = PICK_NUMBER;
 exports.REPLAY_NUMBER = REPLAY_NUMBER;
+exports.BOOLEAN = BOOLEAN;

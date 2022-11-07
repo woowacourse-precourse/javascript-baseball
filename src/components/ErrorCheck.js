@@ -1,13 +1,13 @@
-const { BASIC_NUMBER, REPLAY_NUMBER } = require('../constants/game numbers');
+const { GAME_NUMBER, REPLAY_NUMBER } = require('../constants/game numbers');
 const { ERROR_MESSAGE } = require('../constants/error message');
 
 class ErrorCheck {
   static isInvalidInputLength(userInput) {
-    return userInput.length !== BASIC_NUMBER.CORRECT_NUMBER;
+    return userInput.length !== GAME_NUMBER.CORRECT;
   }
 
   static hasDuplication(userInput) {
-    return new Set(userInput).size !== BASIC_NUMBER.CORRECT_NUMBER;
+    return new Set(userInput).size !== GAME_NUMBER.CORRECT;
   }
 
   static notOnlyConsistOfNums(userInput) {
@@ -22,7 +22,7 @@ class ErrorCheck {
   }
 
   static isNothing(STRIKE, BALL) {
-    return STRIKE === BASIC_NUMBER.INIT && BALL === BASIC_NUMBER.INIT;
+    return STRIKE === GAME_NUMBER.INIT && BALL === GAME_NUMBER.INIT;
   }
 
   static guessError(userInput) {

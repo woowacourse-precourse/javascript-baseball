@@ -10,6 +10,7 @@ const COUNT_MESSAGE = Object.freeze({
   STRIKE: '스트라이크',
   BALL: '볼',
   CORRECT: '3스트라이크',
+  EMPTY: '',
 });
 
 exports.SYSTEM_MESSAGE = SYSTEM_MESSAGE;

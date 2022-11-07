@@ -1,19 +1,22 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { Computer } = require('./Computer');
-const { ErrorCheck } = require('./functions/ErrorCheck');
-const { Game } = require('./functions/Game');
-const { SYSTEM_MESSAGE, COUNT_MESSAGE } = require('./constants/system message');
-const { REPLAY_NUMBER } = require('./constants/game numbers');
+const { ErrorCheck } = require('./ErrorCheck');
+const { Game } = require('./Game');
+const {
+  SYSTEM_MESSAGE,
+  COUNT_MESSAGE,
+} = require('../constants/system message');
+const { REPLAY_NUMBER, BOOLEAN } = require('../constants/game numbers');
 
 class Baseball {
   constructor() {
     this.randomNumber = [];
-    this.isPlayFirst = true;
+    this.isPlayFirst = BOOLEAN.TRUE;
   }
 
   playGame() {
     if (this.isPlayFirst) {
-      this.isPlayFirst = false;
+      this.isPlayFirst = BOOLEAN.FALSE;
       Console.print(SYSTEM_MESSAGE.START);
     }
 

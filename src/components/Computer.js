@@ -1,5 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { PICK_NUMBER } = require('./constants/game numbers');
+const { PICK_NUMBER } = require('../constants/game numbers');
 
 class Computer {
   static getRandomNumber() {

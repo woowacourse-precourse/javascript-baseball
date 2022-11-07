@@ -1,4 +1,4 @@
-const { Baseball } = require('./Baseball');
+const { Baseball } = require('./components/Baseball');
 
 class App {
   constructor() {

@@ -1,10 +1,10 @@
 const { COUNT_MESSAGE } = require('../constants/system message');
-const { BASIC_NUMBER } = require('../constants/game numbers');
+const { GAME_NUMBER } = require('../constants/game numbers');
 const { ErrorCheck } = require('./ErrorCheck');
 
 class Game {
-  static isEqual(num1, num2) {
-    return num1 === num2;
+  static isEqual(elemA, elemB) {
+    return elemA === elemB;
   }
 
   static digitizeUserInput(userInput) {
@@ -13,7 +13,7 @@ class Game {
 
   static getStrikeBallCount(baseballNumber, userInput) {
     const userInputNums = this.digitizeUserInput(userInput);
-    let [STRIKE, BALL] = [BASIC_NUMBER.INIT, BASIC_NUMBER.INIT];
+    let [STRIKE, BALL] = [GAME_NUMBER.INIT, GAME_NUMBER.INIT];
 
     baseballNumber.forEach((num, index) => {
       if (this.isEqual(num, userInputNums[index])) {
@@ -26,12 +26,16 @@ class Game {
   }
 
   static getStrikeBallMessage(STRIKE, BALL) {
-    const ballMessage = BALL ? `${BALL}${COUNT_MESSAGE.BALL}` : '';
-    const strikeMessage = STRIKE ? `${STRIKE}${COUNT_MESSAGE.STRIKE}` : '';
+    const ballMessage = BALL
+      ? `${BALL}${COUNT_MESSAGE.BALL}`
+      : COUNT_MESSAGE.EMPTY;
+    const strikeMessage = STRIKE
+      ? `${STRIKE}${COUNT_MESSAGE.STRIKE}`
+      : COUNT_MESSAGE.EMPTY;
 
     return ErrorCheck.isNothing(STRIKE, BALL)
       ? COUNT_MESSAGE.NOTHING
-      : `${ballMessage + strikeMessage}`;
+      : `${ballMessage} ${strikeMessage}`.trim();
   }
 }
 
