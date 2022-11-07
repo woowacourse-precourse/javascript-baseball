@@ -11,7 +11,7 @@ const CheckValidation = (answer) => {
 };
 
 const throwErrorMsg = (typeOfError) => {
-  throw typeOfError + ERROR_MESSAGE.GUIDE_MSG;
+  throw new Error(typeOfError + ERROR_MESSAGE.GUIDE_MSG);
 };
 
 const hasZero = (answer) => {

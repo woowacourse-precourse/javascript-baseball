@@ -52,7 +52,7 @@ class App {
           this.exit();
           break;
         default:
-          throw GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG;
+          throw new Error(GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG);
       }
     });
   }
@@ -64,8 +64,5 @@ class App {
     Console.close();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
