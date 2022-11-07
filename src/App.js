@@ -11,12 +11,12 @@ class App {
   }
 }
 
-const gameStart = () => {
+function gameStart() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-};
+}
 
-const RandomChoice = () => {
-  const randomNumber = [];
+function RandomChoice() {
+  let randomNumber = [];
   while (randomNumber.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!randomNumber.includes(number)) {
@@ -24,7 +24,7 @@ const RandomChoice = () => {
     }
   }
   return randomNumber;
-};
+}
 
 // 유저 입력을 배열화
 function userInput() {
