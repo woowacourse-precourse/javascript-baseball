@@ -21,6 +21,20 @@ class App {
       if (number.length !== 3 || !numberRegExp.test(number)) {
         throw new Error(Messages.ERROR.NUMBER_RANGE);
       } else {
+        const checkCount = [0, 0, 0];
+        const splittedNumbers = number.split('').map(Number);
+        splittedNumbers.forEach((splittedNumber, index) => {
+          if (computer[index] === splittedNumber) checkCount[0]++;
+          else if (computer.includes(splittedNumber)) checkCount[1]++;
+          else checkCount[2]++;
+        });
+
+        let result = '';
+        const [strike, ball, out] = checkCount;
+        if (ball > 0) result += `${ball}볼 `;
+        if (strike > 0) result += `${strike}스트라이크`;
+        if (out === 3) result += `낫싱`;
+        MissionUtils.Console.print(result);
       }
     });
   }
