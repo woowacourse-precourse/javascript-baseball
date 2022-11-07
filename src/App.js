@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  resultNumbers;
+  randomNumbers;
   gameResult;
 
   constructor() {
@@ -9,10 +9,10 @@ class App {
   }
 
   setRandomNumbers() {
-    this.resultNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
-  inputExceptionHandling(inputNumber){
+  inputExceptionHandling(inputNumber) {
     if (isNaN(inputNumber)) {
       throw "숫자가 아닙니다.";
     }
@@ -25,30 +25,46 @@ class App {
     }
   }
 
-  checkInputNumbers(inputNumbers, resultNumbers){
-    const inputNumbersArray = inputNumbers.split("").map(Number);
+  checkInputNumbers(inputNumbers, randomNumbers) {
+    const inputNumbers = inputNumbers.split("").map(Number);
     let strikeCount = 0;
     let ballCount = 0;
 
-    inputNumbersArray.map((value,index)=>{
-      value === resultNumbers[index]
+    inputNumbers.map((value, index) => {
+      value === randomNumbers[index]
         ? (strikeCount += 1)
-        : resultNumbers.includes(value)
+        : randomNumbers.includes(value)
         ? (ballCount += 1)
         : null;
-    })
+    });
 
-    return [ballCount, strikeCount]
+    return [ballCount, strikeCount];
   }
 
+  showNumberResult([ballCount, strikeCount]) {
+    if (ballCount == 0 && strikeCount == 0) {
+      return "낫싱";
+    }
+    const strikeResult = `${strikeCount}스트라이크`;
+    const ballResult = `${ballCount}볼`;
+
+    if (ballCount > 0 && strikeCount == 0) {
+      return ballResult;
+    }
+    if (ballCount == 0 && strikeCount > 0) {
+      return strikeResult;
+    }
+    return ballResult + " " + strikeResult;
+  }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-      this.inputExceptionHandling(answer);
-    });
-  
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    let inputNum = this.getInputNumbers();
+    this.checkInputNumbers(inputNum);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
