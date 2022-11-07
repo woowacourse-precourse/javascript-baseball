@@ -34,6 +34,7 @@ function baseBall(answers){
     exceptionHandling(inputNums);
     nothing = isNothing(answers, inputNums);
     if(!nothing) countStrike = isStrike(answers, inputNums);
+    if(!nothing) countBall = isBall(answers, inputNums, countStrike);
   });
 }
 
@@ -66,6 +67,18 @@ function isStrike(answers, input){
     singleNum = Number(singleNum);
     if(answers.indexOf(singleNum) == 2-i) cnt++;
   }
+  return cnt;
+}
+
+function isBall(answers, input, countStrike){
+  input = Array.from(input);
+  let cnt = 0;
+  for(let i=0; i<3; ++i) {
+    let singleNum = input.pop();
+    singleNum = Number(singleNum);
+    if(answers.indexOf(singleNum) >= 0) cnt++;
+  }
+  if(countStrike) cnt -= countStrike;
   return cnt;
 }
 
