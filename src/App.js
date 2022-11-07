@@ -10,12 +10,8 @@ class App {
     const [computer, interaction] = this.start();
     Console.print(MESSAGE.STARTGAME);
     Console.print(computer.number);
-    Console.readLine(MESSAGE.PLAYONE, (inputNumber) => {
-      interaction.checkValidNumberInput(inputNumber);
-      Console.print('passed');
-      const resultMap = computer.getResultMap(inputNumber);
-      const result = computer.computeResult(resultMap);
-    });
+    this.playOneSet(computer, interaction);
+    this.AskNewGame();
   }
 
   start() {
@@ -24,7 +20,30 @@ class App {
     return [computer, interaction];
   }
 
-  async oneGame(computer, interaction) {}
+  playOneSet(computer, interaction) {
+    Console.readLine(MESSAGE.PLAYONE, (inputNumber) => {
+      interaction.checkValidNumberInput(inputNumber);
+      Console.print('passed');
+      const resultMap = computer.getResultMap(inputNumber);
+      Console.print(resultMap);
+      const result = computer.getResultMessage(resultMap);
+      Console.print(result);
+      if (result === MESSAGE.ENDGAME) {
+        this.AskNewGame();
+      }
+      return this.playOneSet(computer, interaction);
+    });
+  }
+
+  AskNewGame() {
+    Console.readLine(MESSAGE.NEWGAME, (inputAnswer) => {
+      if (inputAnswer === '1') {
+        this.play();
+      } else {
+        Console.close();
+      }
+    });
+  }
 }
 
 module.exports = App;

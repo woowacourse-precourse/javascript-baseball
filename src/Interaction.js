@@ -12,7 +12,7 @@ class Interaction {
     return new Promise(this.handleReadLine('숫자를 입력해주세요. :'));
   }
 
-  printEndGameMEssage() {
+  printEndGameMessage() {
     return new Promise(this.handleReadLine('그만하시겠습니까? :'));
   }
 

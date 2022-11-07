@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
+const MESSAGE = require('./Message');
 
 class Computer {
   constructor() {
@@ -26,14 +27,15 @@ class Computer {
     return resultMap;
   }
 
-  computeResult(resultMap) {
+  getResultMessage(resultMap) {
     if (resultMap.strike === 3) {
-      return '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+      return MESSAGE.ENDGAME;
     }
 
     if (resultMap.strike === 0 && resultMap.ball === 0) {
       return '낫싱';
     }
+
     const message = '입니다.';
     const ballMessage = resultMap.ball !== '0' ? `${resultMap.ball}볼 ` : '';
     const strikeMessage = resultMap.strike !== '0' ? `${resultMap.strike}스트라이크` : '';
