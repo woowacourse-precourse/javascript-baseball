@@ -18,17 +18,22 @@ class App {
     CONSOLE_UTIL.readLine("숫자를 입력해 주세요 : ", (userInput) => {
       userInput = String(userInput);
       const USER_VALUE_ARRAY = Array.from(userInput, Number);
-      if (userInput < 1 || isNaN(userInput) || userInput.length !== 3) {
-        throw new Error("3자리 양의 정수를 입력해 주세요.");
-      }
-      if (userInput.length !== [...new Set(USER_VALUE_ARRAY)].length) {
-        throw new Error("서로 다른 3개의 숫자를 입력해 주세요.");
-      }
-      if (USER_VALUE_ARRAY.includes(0)) {
-        throw new Error("1 ~ 9 사이의 숫자 3개를 골라주세요.");
-      }
-      return this.compare(USER_VALUE_ARRAY, this.computerValue);
+      this.isException(userInput, USER_VALUE_ARRAY);
     });
+  }
+
+  isException(userInput, USER_VALUE_ARRAY) {
+    if (userInput < 1 || isNaN(userInput) || userInput.length !== 3) {
+      throw new Error("3자리 양의 정수를 입력해 주세요.");
+    }
+    if (userInput.length !== [...new Set(USER_VALUE_ARRAY)].length) {
+      throw new Error("서로 다른 3개의 숫자를 입력해 주세요.");
+    }
+    if (USER_VALUE_ARRAY.includes(0)) {
+      throw new Error("1 ~ 9 사이의 숫자 3개를 골라주세요.");
+    }
+
+    return this.compare(USER_VALUE_ARRAY, this.computerValue);
   }
 
   compare(userValue, computerValue) {
@@ -50,9 +55,7 @@ class App {
 
   result(strikeCount, ballCount) {
     if (strikeCount === 3) {
-      CONSOLE_UTIL.print(`${strikeCount}스트라이크`);
-      CONSOLE_UTIL.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.endGame();
+      this.threeStirke(strikeCount);
     }
     if (strikeCount && strikeCount !== 3) {
       this.strikeOrBallStrike(strikeCount, ballCount);
@@ -64,6 +67,11 @@ class App {
     }
   }
 
+  threeStirke(strikeCount) {
+    CONSOLE_UTIL.print(`${strikeCount}스트라이크`);
+    CONSOLE_UTIL.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.endGame();
+  }
   strikeOrBallStrike(ballCount, strikeCount) {
     !ballCount
       ? CONSOLE_UTIL.print(`${strikeCount}스트라이크`)
