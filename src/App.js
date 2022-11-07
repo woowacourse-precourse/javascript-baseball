@@ -38,6 +38,17 @@ class App {
       throw new Error("1~9 숫자만 입력해주세요");
     }
   }
+
+  checkNumbers(COMPUTER_NUMBER, userNumberInput) {
+    for (
+      let userNumberCipher = 0;
+      userNumberCipher < userNumberInput.length;
+      userNumberCipher++
+    ) {
+      this.countStrikeBall(COMPUTER_NUMBER, userNumberInput, userNumberCipher);
+    }
+    this.strikeBallResult(strikeBallCount);
+  }
 }
 
 module.exports = App;
