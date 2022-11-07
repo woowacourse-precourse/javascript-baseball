@@ -1,6 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  showCommand() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        this.isRestart(input);
+      }
+    );
+  }
+
   printResult(strike, ball, randomNumber) {
     if (strike === 0 && ball === 0) {
       console.log("낫싱");
