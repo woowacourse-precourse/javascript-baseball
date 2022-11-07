@@ -170,4 +170,11 @@ describe('userConfirm()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('게임 종료');
   });
+
+  test('1과 2를 제외한 나머지를 전달하면 예외가 발생한다.', () => {
+    expect(() => {
+      const app = new App();
+      app.userConfirm(3);
+    }).toThrow('잘못된 입력을 하였습니다.');
+  });
 });
