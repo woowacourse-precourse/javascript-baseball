@@ -46,4 +46,17 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("서로 같은 숫자가 있으면 예외발생", () => {
+    const randoms = [2, 3, 6];
+    const answers = ["115"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
