@@ -12,6 +12,16 @@ class App {
     return computer;
   }
 
+  getUserAnswer(computerRandomNumber) {
+    let input;
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      let answerList = Array.from(String(answer), Number);
+      MissionUtils.Console.print(`answerList :${answerList}`);
+
+      return this.referee(answerList, computerRandomNumber);
+    });
+  }
+
   play() {
     // 1. 게임 시작 문구 출력
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
