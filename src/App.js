@@ -62,17 +62,7 @@ class App {
       }
     }
     ballCount -= strikeCount;
-
-    const gameResult = this.getGameResult(strikeCount, ballCount);
-
-    MissionUtils.Console.print(gameResult);
-
-    if (strikeCount !== 3) {
-      this.getUserInput();
-    }
-
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    this.resumeOrQuitGame();
+    this.printResult(strikeCount, ballCount);
   }
 
   getGameResult(strikeCount, ballCount) {
@@ -102,6 +92,18 @@ class App {
         throw new Error('1 혹은 2를 입력하세요!');
       }
     );
+  }
+  printResult(strikeCount, ballCount) {
+    const gameResult = this.getGameResult(strikeCount, ballCount);
+
+    MissionUtils.Console.print(gameResult);
+
+    if (strikeCount !== 3) {
+      this.getUserInput();
+    }
+
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.resumeOrQuitGame();
   }
 }
 
