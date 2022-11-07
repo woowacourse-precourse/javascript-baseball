@@ -1,4 +1,3 @@
-const Action = require('./Action');
 const Dispatcher = require('./Dispatcher');
 const GameDataStore = require('./GameDataStore');
 const GameDataUI = require('./GameDataUI');
@@ -8,38 +7,36 @@ const { makeTarget } = require('./utils');
 
 class App {
   play() {
-    const action = new Action();
     const dispatcher = new Dispatcher();
     const gameDataStore = new GameDataStore();
     const gameDataUI = new GameDataUI();
     const gameStatusStore = new GameStatusStore();
     const gameStatusUI = new GameStatusUI();
 
-    action.injection(dispatcher);
     gameDataStore.injection(gameDataUI);
     gameStatusStore.injection(gameStatusUI);
-    gameDataUI.injection(action);
-    gameStatusUI.injection(action);
+    gameDataUI.injection(dispatcher);
+    gameStatusUI.injection(dispatcher);
 
-    dispatcher.register((payload) => {
-      if (payload.type === 'game-start') {
+    dispatcher.register((action) => {
+      if (action.type === 'game-start') {
         gameStatusStore.setGameStatus('START');
       }
     });
 
-    dispatcher.register((payload) => {
-      if (payload.type === 'game-start' || payload.type === 'game-restart') {
+    dispatcher.register((action) => {
+      if (action.type === 'game-start' || action.type === 'game-restart') {
         gameDataStore.setTarget(makeTarget());
       }
     });
 
-    dispatcher.register((payload) => {
-      if (payload.type === 'new-guess') {
-        gameDataStore.setInput(payload.input);
+    dispatcher.register((action) => {
+      if (action.type === 'new-guess') {
+        gameDataStore.setInput(action.input);
       }
     });
 
-    action.sendToDispatcher({
+    dispatcher.dispatch({
       type: 'game-start',
     });
   }

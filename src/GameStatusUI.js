@@ -1,14 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 class GameStatusUI {
-  #action;
+  #dispatcher;
 
   constructor() {
-    this.#action = {};
+    this.#dispatcher = {};
   }
 
-  injection(newAction) {
-    this.#action = newAction;
+  injection(newDispatcher) {
+    this.#dispatcher = newDispatcher;
   }
 
   update(newGameStatus) {

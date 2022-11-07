@@ -2,10 +2,10 @@ const { Console } = require('@woowacourse/mission-utils');
 const { getUniqueNumberCount, getGuessResult } = require('./utils');
 
 class GameDataUI {
-  #action;
+  #dispatcher;
 
   constructor() {
-    this.#action = {};
+    this.#dispatcher = {};
   }
 
   #inputError() {
@@ -13,8 +13,8 @@ class GameDataUI {
     throw new Error('잘못된 입력입니다! 게임을 종료합니다.');
   }
 
-  injection(newAction) {
-    this.#action = newAction;
+  injection(newDispatcher) {
+    this.#dispatcher = newDispatcher;
   }
 
   newGuess() {
@@ -27,7 +27,7 @@ class GameDataUI {
         this.#inputError();
       }
 
-      this.#action.sendToDispatcher({
+      this.#dispatcher.dispatch({
         type: 'new-guess',
         input,
       });
@@ -40,7 +40,7 @@ class GameDataUI {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
         if (answer === '1') {
-          this.#action.sendToDispatcher({
+          this.#dispatcher.dispatch({
             type: 'game-restart',
           });
           return;

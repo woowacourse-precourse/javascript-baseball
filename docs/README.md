@@ -1,17 +1,8 @@
 # 🔖 기능 목록
 
-## Action 클래스
-
-### 게임의 시작점 Dispatcher에게 메세지를 보내는 클래스
-
-- [o] UserInterface 에서 사용자의 상호작용을 받아 Action 생성
-- [o] Dispatcher 에게 Action을 전송
-
----
-
 ## Dispatcher 클래스
 
-### 들어오는 Action 정보를 받아서 순서에 맞게 콜백함수를 실행하는 클래스
+### 들어오는 action 정보를 받아서 순서에 맞게 콜백함수를 실행하는 클래스
 
 - [o] 콜백함수를 등록할 register 함수 만들기
 - [o] 콜백함수를 실행하는 dispatch 함수 만들기
@@ -43,4 +34,4 @@
 
 ### 인스턴스 간 의존성을 주입해주는 클래스
 
-- [o] play() 의존성 주입 후 Action
+- [o] play() 의존성 주입 후 game-start action을 dispatch 해주기

@@ -9,9 +9,9 @@ class Dispatcher {
     this.#callbacks.push(callback);
   }
 
-  dispatch(payload) {
+  dispatch(action) {
     this.#callbacks.forEach((callback) => {
-      callback(payload);
+      callback(action);
     });
   }
 }
