@@ -1,26 +1,27 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE, GAME } = require("./constants");
 
 const showStartMessage = () => {
-  Console.print("숫자 야구 게임을 시작합니다.");
+  Console.print(MESSAGE.START);
 }
 
 const showCountMessage = (ballCount, strikeCount) => {
   if (ballCount === 0) {
-    Console.print(`${strikeCount}스트라이크`);
+    Console.print(`${strikeCount}${MESSAGE.STRIKE}`);
   } else if (strikeCount === 0) {
-    Console.print(`${ballCount}볼`);
+    Console.print(`${ballCount}${MESSAGE.BALL}`);
   } else {
-    Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    Console.print(`${ballCount}${MESSAGE.BALL} ${strikeCount}${MESSAGE.STRIKE}`);
   }
 }
 
 const showNothingMessage = () => {
-  Console.print('낫싱');
+  Console.print(MESSAGE.NOTHING);
 }
 
 const showCorrectMessage = () => {
-  Console.print('3스트라이크');
-  Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  Console.print(`${GAME.LENGTH}${MESSAGE.STRIKE}`);
+  Console.print(MESSAGE.SUCCESS);
 }
 
 module.exports = { showStartMessage, showCountMessage, showNothingMessage, showCorrectMessage };
