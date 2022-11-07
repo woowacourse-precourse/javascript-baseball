@@ -13,7 +13,7 @@ class App {
   #submitInput() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.input, (input) => {
       input = GameUtils.System.toFilterdArray(input);
-      const errorMessage = GameUtils.Validator.isInvaildAnswer(input);
+      const errorMessage = GameUtils.Validator.isInvalidAnswer(input);
       if(errorMessage) Print.GameMessage.error(errorMessage);
       const result = GameUtils.System.getResult(input, this.answer);
       Print.GameMessage.result(result);
@@ -24,14 +24,14 @@ class App {
     if(score !== constants.CLEAR_CONDITION) this.#submitInput();
     this.#clearGame();
   }
-  #clearGame() {   
+  #clearGame() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.clear, (submit) => {
-      const errorMessage = GameUtils.Validator.isInvaildRestartSubmit(Number(submit));
+      const errorMessage = GameUtils.Validator.isInvalidRestartSubmit(Number(submit));
       if(errorMessage) Print.GameMessage.error(errorMessage);
       this.#isRestart(Number(submit));
     });
   }
-  #isRestart(submit) {  
+  #isRestart(submit) {
     submit = Number(submit);  
     if(submit === 1) this.play();
     if(submit === 2) {
