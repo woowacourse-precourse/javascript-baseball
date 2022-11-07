@@ -124,4 +124,20 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("3스트라이크시 gameRestart로 넘어가는지 테스트", () => {
+    const answers = ["145", "145"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ];
+
+    const app = new App();
+    app.getStrikeAndBall(answers[0], answers[1]);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
