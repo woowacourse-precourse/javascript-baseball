@@ -54,6 +54,8 @@ class App {
     const COMPARE = userNumberInput.indexOf(COMPUTER_NUMBER[userNumberCipher]);
     if (COMPARE > -1 && COMPARE === userNumberCipher) {
       strikeBallCount[0] += 1;
+    } else if (COMPARE > -1 && COMPARE != userNumberCipher) {
+      strikeBallCount[1] += 1;
     }
   }
 }
