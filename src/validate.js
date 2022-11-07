@@ -27,7 +27,7 @@ const validateRestartInput = (input) => {
     const { INVALID_RESTART_INPUT } = config.RESTART_INPUT_ERRORS;
 
     const isNumberInput = !isNaN(input);
-    const isInRange = +input === RESTART || +input === END;
+    const isInRange = input === RESTART || input === END;
 
     if (!isNumberInput) throw new Error(INVALID_RESTART_INPUT);
     if (!isInRange) throw new Error(INVALID_RESTART_INPUT);

@@ -34,7 +34,7 @@ class App {
   getRestartFromUser() {
     Console.readLine(this.restartPhrase, (input) => {
       validateRestartInput(input);
-      if (+input === config.RESTART_INPUT.RESTART) {
+      if (input === config.RESTART_INPUT.RESTART) {
         this.restartGame();
         this.play();
       } else {
@@ -46,7 +46,6 @@ class App {
   judgeGuess(guess) {
     const { strike, ball } = findStrikeBall(this.target, guess);
     this.isGameEnd = strike === this.target.length;
-    console.log(this.isGameEnd, strike, this.target.length);
     printPhrase(makePhrase(strike, ball));
   }
 
