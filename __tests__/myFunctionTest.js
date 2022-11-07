@@ -106,6 +106,20 @@ describe('숫자 야구 게임 시작 테스트', () => {
     });
   });
 
+  test('사용자의 입력값 숫자 테스트', () => {
+    const user = new User();
+    const userTestArray = ['a12', 'abc', '17D'];
+    const userTestNumberArray = userTestArray.map((item) =>
+      user.makeNumberArray(item)
+    );
+
+    userTestNumberArray.forEach((item) => {
+      expect(() => user.checkUserNumber(item)).toThrow(
+        '숫자만 입력 가능합니다. 종료합니다.'
+      );
+    });
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
