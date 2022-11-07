@@ -82,6 +82,17 @@ class App {
     return this.gameResult(STRIKE_CNT);
   }
 
+  askReplay() {
+    let replay = true;
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (answer !== "1") replay = false;
+      }
+    );
+    return replay;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
     let playing = true;
@@ -96,12 +107,7 @@ class App {
           clear = this.printResult(COM_NUMBER, USER_NUMBER);
         });
       }
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        (answer) => {
-          if (answer === "2") playing = false;
-        }
-      );
+      playing = this.askReplay();
     }
   }
 }
