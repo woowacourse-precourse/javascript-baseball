@@ -56,7 +56,7 @@ class User extends Mission {
     return;
   }
 
-  selectRestartOrExit() {
+  inputRestartOrExit() {
     this.mission.Console.readLine(
       `게임을 새로 시작하려면 ${constants.GAME_RESTART}, 종료하려면 ${constants.GAME_END}를 입력하세요.\n`,
       (answer) => {
