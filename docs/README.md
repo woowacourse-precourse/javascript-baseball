@@ -79,3 +79,10 @@
 
 - 알파벳 순으로 하는 게 좋은지? 아니면 주요 기능 순으로 하는 게 좋은지! 혹은 다른 방법이 있는지.
 - 난 로직 순으로 배치하고 주요 기능 메서드의 자식 메서드(?)는 바로 밑에 위치 시켰다.
+
+#### 👉 method ordering conventions? [stackoverflow](https://stackoverflow.com/questions/4668218/are-there-any-java-method-ordering-conventions)
+
+- 자바 기준으로 작성된 글이지만, 자바스크립트에 적용해 보면..
+  - constructors 가장 먼저
+  - main method 그리고 관련 있는 method끼리 그룹핑.
+  - standard methods like toString, equals and hashcode 서브 메서드 마지막.
