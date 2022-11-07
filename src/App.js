@@ -7,39 +7,6 @@ const MIN_RANDOM_NUIMBER = 1;
 const MAX_RANDOM_NUMBER = 9;
 const VALID_NUMBER_LENGTH = 3;
 
-const isValidInput = (input) => {
-  if (!isValidLength(input)) {
-    return false;
-  }
-  if (input.includes(0)) {
-    return false;
-  }
-  if (isDuplicated(input)) {
-    return false;
-  }
-
-  return true;
-};
-
-const isValidLength = (input) => {
-  if (input.length !== VALID_NUMBER_LENGTH) {
-    return false;
-  }
-  if (isNaN(input)) {
-    return false;
-  }
-  if (parseFloat(input) !== parseInt(input)) {
-    return false;
-  }
-  if (parseInt(input) < 0) {
-    return false;
-  }
-
-  return true;
-};
-
-const isDuplicated = (input) => input.length !== new Set(input).size;
-
 function App () {
   this.randomNumber;
   this.play = () => {
@@ -110,7 +77,7 @@ function App () {
         getUserAnswer();
         return;
       }
-      
+
       MissionUtils.Console.print (`${ball}볼 ${strike}스트라이크`);
       getUserAnswer();
     }
@@ -140,3 +107,35 @@ function App () {
 
 module.exports = App;
 
+const isValidInput = (input) => {
+  if (!isValidLength(input)) {
+    return false;
+  }
+  if (input.includes(0)) {
+    return false;
+  }
+  if (isDuplicated(input)) {
+    return false;
+  }
+
+  return true;
+};
+
+const isValidLength = (input) => {
+  if (input.length !== VALID_NUMBER_LENGTH) {
+    return false;
+  }
+  if (isNaN(input)) {
+    return false;
+  }
+  if (parseFloat(input) !== parseInt(input)) {
+    return false;
+  }
+  if (parseInt(input) < 0) {
+    return false;
+  }
+
+  return true;
+};
+
+const isDuplicated = (input) => input.length !== new Set(input).size;
