@@ -84,4 +84,13 @@ describe('count()', () => {
 
     expect(logSpy).toHaveBeenCalledWith('3볼');
   });
+
+  test('2스트라이크 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.count(0, 2));
+
+    expect(logSpy).toHaveBeenCalledWith('2스트라이크');
+  });
 });
