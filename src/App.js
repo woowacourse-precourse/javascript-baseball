@@ -1,13 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  constructor(computerNum, userNum, strike, ball, none, check){
+  constructor(computerNum, userNum, strike, ball, none, check, pass){
     this.computerNum = computerNum;
     this.userNum = userNum;
     this.strike = strike;
     this.ball = ball;
     this.none = none;
     this.check = check;
+    this.pass = pass;
   }
   play() { 
     this.random();
@@ -79,13 +80,50 @@ function inputMyNumber(){
   return myNumber;
 }
 
+function outputResultCompare(){
+  const setApp2 = new App();
+  let strike = setApp2.strike;
+  let ball = setApp2.ball;
+  let notting = setApp2.none;
+  let check = setApp2.check;
+
+  if(notting == true){
+    MissionUtils.Console.print("낫싱");
+    setApp2.pass = false;
+  }
+  if(strike == 3){
+    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    let getResult = finishCheck();
+    setApp2.finish(getResult);
+    setApp2.pass = true;
+  }
+  if(check == true){
+    MissionUtils.Console.print("%d볼 %d스트라이크", ball, strike);
+    setApp2.pass = false;
+  }
+  else{
+    if(strike > 0) MissionUtils.Console.print("%d스트라이크",strike);
+    else MissionUtils.Console.print("%d볼",ball);
+    setApp2.pass = false;
+  }
+
+}
+
+
 let isFinish = 1;
+let pass = false;
 const app = new App();
 
 MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 while(isFinish == 1){
   app.play();
-  app.compare();
+  while(!pass){
+    app.compare();
+    outputResultCompare();
+    pass = app.pass;
+  }
+
 }
 
 //종료
