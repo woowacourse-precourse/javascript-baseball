@@ -35,9 +35,10 @@ class App {
       this.retryCheck(number);
       if(number === "1")
         this.play();
-      else
+      else {
         MissionUtils.Console.close();
         return 0;
+      }
     })
   }
 
