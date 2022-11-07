@@ -13,7 +13,7 @@ class App {
 
   getInputNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      String(input).split('');
+      this.validCheckInputNumber(String(input).split(''));
     });
   }
 
@@ -28,6 +28,14 @@ class App {
       }
     }
     return randomArray.join('');
+  }
+
+  validCheckInputNumber(input) {
+    const setInput = new Set(input.split(''));
+
+    if (!/^[1-9]+$/g.test(input) || setInput.size !== 3 || input.length !== 3) {
+      throw Error('입력값이 잘못되었습니다.');
+    } else { this.getInterimOutcome(input); }
   }
 
   play() {
