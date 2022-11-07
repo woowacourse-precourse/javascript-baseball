@@ -19,7 +19,7 @@ class App {
     }
     process() {
         MissionUtils.Console.readLine(constant.INPUT_QUESTIONS, (number) => {
-            this.verification(number, 1);
+            this.verification(number, 'process');
             const judgement = this.judge(number);
             MissionUtils.Console.print(judgement);
             if (judgement === constant.THREE_STRIKE) {
@@ -38,7 +38,7 @@ class App {
             } else if (number === '2') {
                 MissionUtils.Console.close();
             } else {
-                this.verification(number, 2);
+                this.verification(number, 'replay');
             }
         });
     }
@@ -68,7 +68,7 @@ class App {
     }
     verification(input, type) {
         const exception = new Exception(input, type);
-        if (type == 1) {
+        if (type === 'process') {
             exception.checkInputException();
         } else {
             exception.checkReplayInputException();
