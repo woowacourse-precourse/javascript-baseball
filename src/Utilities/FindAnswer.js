@@ -13,13 +13,16 @@ class FindAnswer {
     this.ball = 0;
     this.isStrike(computerNum, userInput);
     this.isBall(computerNum, userInput);
+
     const strikeText = this.strike ? `${this.strike}스트라이크` : '';
     const ballText = this.ball ? `${this.ball}볼` : '';
+
     if (this.strike || this.ball) {
       Console.print(`${ballText} ${strikeText}`.trim());
     } else {
       Console.print('낫싱');
     }
+
     return { strike: this.strike, ball: this.ball };
   }
 

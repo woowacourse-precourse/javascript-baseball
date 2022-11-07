@@ -1,6 +1,7 @@
 class User {
   isValidUserInput(userInput) {
     userInput.replace(/ /g, '');
+
     return (
       this.isValidLength(userInput) &&
       this.isValidType(userInput) &&
@@ -13,7 +14,7 @@ class User {
   }
 
   isValidType(userInput) {
-    const typeRegex = /^[0-9]+$/;
+    const typeRegex = /^[1-9]+$/;
     return typeRegex.test(userInput);
   }
 
