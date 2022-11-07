@@ -74,6 +74,8 @@ class App {
         return new App();
       } else if (answer === 2) {
         return this.gameExit();
+      } else{
+        this.restartOrExit();
       }
     });
   }
