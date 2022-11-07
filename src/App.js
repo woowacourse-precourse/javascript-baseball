@@ -14,6 +14,12 @@ class App {
     return [...String(num)];
   }
 
+  setAndReplay() {
+    this.firstTry = true;
+    this.computerInput = ComputerInput();
+    this.play();
+  }
+
   play() {
     const render = new Render();
 
@@ -64,9 +70,7 @@ class App {
             throw new Error(error);
           }
           if (this.replayQnAResult === "1") {
-            this.firstTry = true;
-            this.computerInput = ComputerInput();
-            this.play();
+            this.setAndReplay();
           }
 
           if (this.replayQnAResult === "2") {
