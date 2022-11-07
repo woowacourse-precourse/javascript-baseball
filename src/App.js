@@ -12,6 +12,27 @@ class App {
 
   }
 
+  startGame() {
+
+  }
+
+  exitGame() {
+    
+  }
+
+  askRestart() {
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.readLine("", (isRestart) => {
+      if(isRestart === "1"){
+        return this.startGame();
+      }
+      if(isRestart === "2") {
+        return this.exitGame();
+      }
+      throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
+    })
+  }
+
   getGuessRst(userGuess, computerNum) {
     const cNumArray = [...computerNum];
     const uNumArray = [...userGuess];
@@ -34,7 +55,7 @@ class App {
     if(strCnt === 0) return ballCnt+'볼';
 
     return ballCnt+'볼 '+strCnt+'스트라이크';
-}
+  }
   
 }
 
