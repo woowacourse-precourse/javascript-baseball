@@ -1,15 +1,25 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { RANGE, NEW_GAME_CONSTANT, GAME_MESSAGE, ERROR_MESSAGE, RESULT } = require('./Constants');
 
 class App {
+  constructor() {
+    this.RANGE = RANGE;
+    this.NEW_GAME_CONSTANT = NEW_GAME_CONSTANT;
+    this.GAME_MESSAGE = GAME_MESSAGE;
+    this.ERROR_MESSAGE = ERROR_MESSAGE;
+    this.RESULT = RESULT;
+  }
+
   play() {
     const computerRandomNumber = this.getComputerNumber();
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    console.log(computerRandomNumber)
+    MissionUtils.Console.print(this.GAME_MESSAGE.INIT_MESSAGE);
     this.baseballGame(computerRandomNumber);
   }
 
   getComputerNumber() {
     const computerNumber = [];
-    while (computerNumber.length < 3) {
+    while (computerNumber.length < this.RANGE.LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNumber.includes(number)) {
         computerNumber.push(number);
@@ -20,9 +30,9 @@ class App {
   }
 
   baseballGame(computerRandomNumber) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    MissionUtils.Console.readLine(this.GAME_MESSAGE.USER_INPUT, (input) => {
       if (!this.validUserInput(input)) {
-        throw new Error('사용자의 입력이 올바르지 않습니다.');
+        throw new Error(this.ERROR_MESSAGE.USER_INPUT_ERROR);
       }
 
       const userInputNumber = this.strToIntArr(input);
@@ -30,7 +40,7 @@ class App {
       const isWin = this.winOrLose(gameResult);
 
       if (isWin) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        MissionUtils.Console.print(this.GAME_MESSAGE.GAME_FINISHED);
         this.newGame();
       }
       this.baseballGame(computerRandomNumber);
@@ -42,7 +52,7 @@ class App {
 
     const userInputSet = new Set(str);
 
-    return str.length == 3 && reg.test(str) && str.length == userInputSet.size;
+    return str.length == this.RANGE.LENGTH && reg.test(str) && str.length == userInputSet.size;
   }
 
   strToIntArr(str) {
@@ -71,41 +81,44 @@ class App {
 
   winOrLose(resultArr) {
     if (resultArr[0] == 0 && resultArr[1] == 0) {
-      MissionUtils.Console.print('낫싱');
+      MissionUtils.Console.print(this.RESULT.NOTHING);
       return false;
     }
     else if (resultArr[0] == 0 && resultArr[1] != 0) {
-      MissionUtils.Console.print(`${resultArr[1]}스트라이크`);
-      if (resultArr[1] == 3) {
+      MissionUtils.Console.print(`${resultArr[1]}${this.RESULT.STRIKE}`);
+      if (resultArr[1] == this.RANGE.LENGTH) {
         return true;
       }
       return false;
     }
     else if (resultArr[1] == 0 && resultArr[0] != 0) {
-      MissionUtils.Console.print(`${resultArr[0]}볼`);
+      MissionUtils.Console.print(`${resultArr[0]}${this.RESULT.BALL}`);
       return false;
     }
     else {
-      MissionUtils.Console.print(`${resultArr[0]}볼 ${resultArr[1]}스트라이크`);
+      MissionUtils.Console.print(`${resultArr[0]}${this.RESULT.BALL} ${resultArr[1]}${this.RESULT.STRIKE}`);
       return false;
     }
   }
 
   newGame() {
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissionUtils.Console.print(this.GAME_MESSAGE.NEW_GAME);
     MissionUtils.Console.readLine('', (input) => {
-      if (input == 2) {
+      if (input == this.NEW_GAME_CONSTANT.FINISH) {
         return MissionUtils.Console.close();
       }
-      else if (input == 1) {
+      else if (input == this.NEW_GAME_CONSTANT.RESTART) {
         const computerRandomNumber = this.getComputerNumber();
         this.baseballGame(computerRandomNumber);
       }
       else {
-        throw new Error('올바르지 않은 입력입니다.');
+        throw new Error(this.ERROR_MESSAGE.USER_INPUT_ERROR);
       }
     })
   }
 }
+
+const app = new App()
+app.play()
 
 module.exports = App;
