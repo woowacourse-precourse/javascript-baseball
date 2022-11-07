@@ -1,8 +1,8 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.count = "";
+    this.count = '';
     this.input;
     this.countResult;
   }
@@ -18,11 +18,11 @@ class App {
   }
 
   gameStart() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   generateCount(numberList) {
-    return numberList.reduce((acc, cur) => acc + cur, "");
+    return numberList.reduce((acc, cur) => acc + cur, '');
   }
 
   generateRandomList() {
@@ -37,7 +37,7 @@ class App {
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", this.handleGame);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.handleGame);
   }
 
   handleGame = (answer) => {
@@ -53,31 +53,31 @@ class App {
   };
 
   printWinMessage() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     MissionUtils.Console.print(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
     );
   }
 
   handleRestart = (answer) => {
-    if (answer === "1") {
+    if (answer === '1') {
       this.replay();
-    } else if (answer === "2") {
+    } else if (answer === '2') {
       MissionUtils.Console.close();
     } else {
-      throw new Error("잘못된 입력입니다.");
+      throw new Error('잘못된 입력입니다.');
     }
   };
   inputSignal() {
-    MissionUtils.Console.readLine("", this.handleRestart);
+    MissionUtils.Console.readLine('', this.handleRestart);
   }
 
   vaildInput(input) {
     if (!this.isVaildNumberFormat(input)) {
-      throw new Error("형식이 잘못되었습니다.");
+      throw new Error('형식이 잘못되었습니다.');
     }
     if (this.isDuplicate(input)) {
-      throw new Error("중복된 숫자가 존재합니다.");
+      throw new Error('중복된 숫자가 존재합니다.');
     }
     return input;
   }
@@ -86,7 +86,7 @@ class App {
   }
 
   isDuplicate(target) {
-    const charList = target.split("");
+    const charList = target.split('');
     const firstLetter = charList.shift();
     return (
       charList.includes(firstLetter) ||
@@ -126,7 +126,7 @@ class App {
 
   makeCountMessage(counts) {
     if (counts.strikeCount === 0 && counts.ballCount === 0) {
-      return "낫싱";
+      return '낫싱';
     }
     if (counts.strikeCount === 0) {
       return `${counts.ballCount}볼`;
