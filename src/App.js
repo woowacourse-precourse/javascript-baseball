@@ -9,7 +9,7 @@ class App {
   // 게임 시작
   playGame() {
     const computerNumber = this.createComputerNumber();
-    this.inputUserNumber(computerNumber);
+    const user = this.inputUserNumber(computerNumber);
   }
 
   // 컴퓨터의 숫자 랜덤으로 생성한다. (1부터 9까지 서로 다른 수로 이루어진 3자리의 수)
@@ -27,29 +27,28 @@ class App {
 
   // 사용자에게 숫자를 입력 받는다.
   inputUserNumber(computerNumber) {
-    let userNumber;
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       this.isNumberVaild(number);
-      userNumber = number;
       this.countScore(number, computerNumber);
     });
-    return userNumber;
   }
 
-  // 사용자가 입력한 숫자 유효성 검사
+  // 사용자가 입력한 값 유효성 검사
   isNumberVaild(number) {
     this.checkNumberLength(number);
+    this.checkInputValueisNumber(number);
     this.checkNumberDifferent(number);
     this.checkNumberInRange(number);
     return number;
   }
 
-  // 유효성 검사: 입력한 수가 숫자인가
-  checkInputisNumber(number) {
-    if (!isNaN(number)) {
+  // 유효성 검사: 입력한 값이 숫자인가
+  checkInputValueisNumber(number) {
+    if (isNaN(number)) {
       throw "숫자를 입력해주세요.";
     }
   }
+
   // 유효성 검사: 입력한 수가 3자리 수인가
   checkNumberLength(number) {
     if (number.length !== 3) {
@@ -77,7 +76,7 @@ class App {
   countScore(user, computer) {
     const score = this.countBallAndStrike(user, computer);
     const result = this.printScore(score);
-    console.log(result);
+    const answer = this.checkThreeStrikes(result, computer);
   }
 
   // 사용자가 입력한 숫자와 컴퓨터 숫자를 비교하여 ball, strike 개수 세기
@@ -116,6 +115,13 @@ class App {
 
     MissionUtils.Console.print(result);
     return result;
+  }
+
+  // 숫자를 모두 맞춘 경우
+  checkThreeStrikes(result, computer) {
+    if (result === "3스트라이크") {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료.");
+    }
   }
 }
 
