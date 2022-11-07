@@ -57,5 +57,29 @@ describe("게임 시작", () => {
             }).toThrow();
         })
     });
-
+    test("숫자 야구 게임 출력 확인", () => {
+        const randoms = [1, 2, 3, 4, 5, 6];
+        const answers = ["312", "132", "123", "1", "789", "452", "456", "2"];
+        const logSpy = getLogSpy();
+        const messages = [
+            "3볼",
+            "2볼 1스트라이크",
+            "3스트라이크",
+            "낫싱",
+            "2스트라이크",
+            "3스트라이크",
+            "게임 종료",
+        ];
+    
+        mockRandoms(randoms);
+        mockQuestions(answers);
+    
+        const app = new App();
+        app.play();
+    
+        messages.forEach((output) => {
+          expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    });
+    
 });
