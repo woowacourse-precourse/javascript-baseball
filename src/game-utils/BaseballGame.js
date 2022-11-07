@@ -1,7 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
 const ComputerNumbers = require("./ComputerNumbers");
+const ValidUserNumbers = require("./ValidUserNumbers");
 
 class BaseballGame {
+  constructor() {
+    this.validUserNumbers = new ValidUserNumbers();
+  }
+
   printResult(strikeCount, ballCount) {
     if (strikeCount === 0 && ballCount === 0) Console.print("낫싱");
     else if (strikeCount > 0 && ballCount === 0) Console.print(`${strikeCount}스트라이크`);
@@ -21,7 +26,7 @@ class BaseballGame {
 
   inputUserNumbers(computerNumbers) {
     Console.readLine("숫자를 입력해주세요 : ", userInput => {
-      const validUserInput = this.isValidUserInput(userInput);
+      const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
         this.throwError('세 자리 수를 1부터 9까지 중복되지 않도록 입력해주세요!');
       }
@@ -59,21 +64,6 @@ class BaseballGame {
       }
       (number === '1') ? this.playGame() : this.exitConsole();
     });
-  }
-
-  isValidUserInput(userInput) {
-    const isNumberElement = (element) => (element >= '1' && element <= '9');
-    const userNumbers = [];
-    userInput
-      .split('')
-      .forEach(element => {
-        !userNumbers.includes(element) ? userNumbers.push(element) : ""
-      });
-
-    return (
-      userNumbers.length === 3 &&
-      (userNumbers).every(isNumberElement)
-    )
   }
 
   exitConsole() {
