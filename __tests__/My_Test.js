@@ -27,4 +27,21 @@ describe("기능 테스트", () => {
 
     expect(result).toEqual(JSON.stringify(answer));
   });
+
+  test("숫자 비교 기능", () => {
+    // App.js 32번째줄 테스트를 위한 return 값 주석처리
+
+    const user = [123, 214, 213];
+    const computer = [2, 1, 3];
+    const answers = [
+      { strikeCount: 1, ballCount: 2 },
+      { strikeCount: 2, ballCount: 0 },
+      { strikeCount: 3, ballCount: 0 },
+    ];
+
+    user.map((item, i) => {
+      const result = JSON.stringify(App.compareNumber(item, computer));
+      expect(result).toEqual(JSON.stringify(answers[i]));
+    });
+  });
 });
