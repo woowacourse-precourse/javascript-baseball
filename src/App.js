@@ -63,6 +63,12 @@ class App {
     return count;
   }
 
+  // 교집합 찾기
+  findIntersection(input, computerRandomNumber) {
+    let intersectionArray = input.filter(x => computerRandomNumber.includes(x));
+    return intersectionArray.length;
+  }
+
   // 입력받은 숫자를 판단하는 함수
   referee(answerList, computerRandomNumber) {
     // 사용자가 잘못된 값을 입력했는지 확인
