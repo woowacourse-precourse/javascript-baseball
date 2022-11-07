@@ -6,7 +6,7 @@ class App {
     this.gameStart();
   }
 
-  gameStart(){
+  gameStart() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.computerNumber = this.pickRandomNumber();
   }
@@ -14,7 +14,7 @@ class App {
   pickRandomNumber() {
     let randomNumber = [];
     while (randomNumber.length !== 3) {
-      const pickNumber = Random.pickNumberInRange(1,9);
+      const pickNumber = Random.pickNumberInRange(1, 9);
       if (!randomNumber.includes(pickNumber)) {
         randomNumber.push(pickNumber);
       }
