@@ -68,7 +68,7 @@ function endGame() {
 }
 
 function faultNumberInput() {
-    throw "잘못된 값을 입력하였습니다.";
+    throw '잘못된 값을 입력하였습니다.';
 }
 
 function getHint(ballCount, strikeCount) {
@@ -77,7 +77,7 @@ function getHint(ballCount, strikeCount) {
         hint += `${ballCount}볼`;
     }
     if (ballCount && strikeCount) {
-        hint += " ";
+        hint += ' ';
     }
     if (strikeCount) {
         hint += `${strikeCount}스트라이크`;
