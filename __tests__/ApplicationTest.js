@@ -43,6 +43,45 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('게임 재시작 입력값 1 또는 2가 아닌 경우', () => {
+    const randoms = [2, 4, 5];
+    const answers = ['245', '3'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('user input이 3자리가 아닌 경우 (1) length 1', () => {
+    const randoms = [5, 6, 7];
+    const answers = ['1'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('user input이 3자리가 아닌 경우 (2) length 2', () => {
+    const randoms = [5, 6, 7];
+    const answers = ['31'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
