@@ -52,11 +52,11 @@ test('입력값 제한 사항 예외사항 체크2', () => {
 });
 
 test('입력값 제한 사항 예외사항 체크3', () => {
-  const answers = ['111'];
-
+  const answers = ['!@#'];
+  mockQuestions(answers);
   expect(() => {
     const app = new App();
-    app.inputCheck(answers);
+    app.play();
   }).toThrow();
 });
 

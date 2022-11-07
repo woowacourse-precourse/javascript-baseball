@@ -9,7 +9,11 @@ class App {
   }
 
   play() {
-    this.createAnswer();
+    try {
+      this.createAnswer();
+    } catch {
+      throw new Error();
+    }
   }
 
   createAnswer() {
