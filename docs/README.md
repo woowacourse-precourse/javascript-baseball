@@ -53,3 +53,16 @@
    getStrikeAndBall ==> gameRestart, checkStrikeAndBall
    gameRestart : 정답 맞췄을 때 재시작 또는 종료
    checkStrikeAndBall : 오답일 때 스트라이크, 볼, 낫싱 판별
+
+---
+
+테스팅 코드
+
+1. 숫자 입력 유효성 검사
+   a. 자릿수 초과
+   b. 자릿수 미만
+   c. 문자열 입력
+   d. 중복 수
+   e. 범위 외
+   f. 힌트 정확도
+   g. 게임 재시작하는지
