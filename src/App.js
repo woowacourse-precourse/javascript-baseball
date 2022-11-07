@@ -70,7 +70,6 @@ function cpuMakeAnswer() {
       computer.push(number);
     }
   }
-  console.log(computer);
 
   return computer;
 }
