@@ -2,12 +2,18 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const gameControlValidation = require('./validation/gameControlValidation.js');
 const gameInputValidation = require('./validation/gameInputValidation.js');
 
-const GAME_WIN = '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+const MESSAGE = {
+  WIN: '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  START: '숫자 야구 게임을 시작합니다.',
+  INPUT: '숫자를 입력해 주세요 : ',
+  RESTART_INPUT: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
+};
 const RESTART = 1;
+
 module.exports = class Game {
   constructor() {
     this.computerNumbers;
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(MESSAGE.START);
     this.gameInit();
   }
 
@@ -26,7 +32,7 @@ module.exports = class Game {
   }
 
   getUserNumberInput() {
-    MissionUtils.Console.readLine('숫자를 입력해 주세요 : ', (input) =>
+    MissionUtils.Console.readLine(MESSAGE.INPUT, (input) =>
       this.progressGame(input)
     );
   }
@@ -35,7 +41,7 @@ module.exports = class Game {
     gameInputValidation(userNumberInput);
     const gameResultString = this.getGameResultString(userNumberInput);
     MissionUtils.Console.print(gameResultString);
-    if (gameResultString == GAME_WIN) this.getUserControlInput();
+    if (gameResultString == MESSAGE.WIN) this.getUserControlInput();
     this.getUserNumberInput();
   }
 
@@ -48,7 +54,7 @@ module.exports = class Game {
     const IS_ONLY_STRIKE = strikeCount > 0 && ballCount == 0;
     const IS_ONLY_BALL = strikeCount === 0 && ballCount > 0;
 
-    if (IS_ANSWER) return GAME_WIN;
+    if (IS_ANSWER) return MESSAGE.WIN;
     if (IS_NOTHING) return `낫싱`;
     if (IS_ONLY_STRIKE) return `${strikeCount}스트라이크`;
     if (IS_ONLY_BALL) return `${ballCount}볼`;
@@ -77,9 +83,8 @@ module.exports = class Game {
   }
 
   getUserControlInput() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ',
-      (input) => this.handleGame(input)
+    MissionUtils.Console.readLine(MESSAGE.RESTART_INPUT, (input) =>
+      this.handleGame(input)
     );
   }
 
