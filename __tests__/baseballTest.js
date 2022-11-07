@@ -39,3 +39,17 @@ test("ball 개수 count", () => {
 
   MissionUtils.Console.print(ballCount);  //3이 출력되면 성공
 });
+
+test("결과출력 테스트", () => {
+  ballCount = 2
+  strikeCount = 1
+
+  if (ballCount != 0 && strikeCount != 0)
+    MissionUtils.Console.print(ballCount + "볼" + strikeCount + "스트라이크 ");
+  else if (ballCount != 0)
+    MissionUtils.Console.print(ballCount + "볼");
+  else if (strikeCount != 0)
+    MissionUtils.Console.print(strikeCount + "스트라이크");
+  else if (strikeCount == 0 && ballCount == 0)
+    MissionUtils.Console.print("낫싱");
+})

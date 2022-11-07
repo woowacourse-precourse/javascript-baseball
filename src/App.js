@@ -29,6 +29,17 @@ class App {
     return ballCount;
   }
 
+  printResult(strikeCount, ballCount) {
+    if (ballCount != 0 && strikeCount != 0)
+      MissionUtils.Console.print(ballCount + "볼" + strikeCount + "스트라이크 ");
+    else if (ballCount != 0)
+      MissionUtils.Console.print(ballCount + "볼");
+    else if (strikeCount != 0)
+      MissionUtils.Console.print(strikeCount + "스트라이크");
+    else if (strikeCount == 0 && ballCount == 0)
+      MissionUtils.Console.print("낫싱");
+  }
+
   setNumbers() {
     let strikeCount;
     let ballCount;
@@ -43,7 +54,6 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
     this.setNumbers();
   }
 }
