@@ -47,7 +47,7 @@ describe("기능 테스트", () => {
     baseballGame.computer.makeRandomNumberArray();
     const testArray = baseballGame.computer.computerRandomNumberArray;
 
-    expect(checkComputerRandomArray(testArray)).toBe(true);
+    expect(checkComputerRandomArray(testArray)).toBeTruthy();
   });
 
   test("게임 종료 후 재시작", () => {
