@@ -26,7 +26,6 @@ class Game {
 
   getResult(userInputNumber) {
     const calculator = new CalculateGame(this.computerNumber, userInputNumber);
-
     this.print(calculator.getResult());
 
     if (calculator.checkSuccess()) {
