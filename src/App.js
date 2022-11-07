@@ -20,7 +20,7 @@ class App {
 
   getStrikeAndBall(computerValue, userValue) {
     if (userValue == computerValue) {
-      // 만약에 같은 수가 나오게 된다면 console.log 띄우고 재시작 여부 물어봄
+      Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
@@ -45,7 +45,7 @@ class App {
       });
 
       if (strike != "0" && ball != "0") {
-        Console.print(`${strike}스트라이크 ${ball}볼`);
+        Console.print(`${ball}볼 ${strike}스트라이크`);
       } else if (strike == "0" && ball != "0") {
         Console.print(`${ball}볼`);
       } else if (strike != "0" && ball == "0") {
@@ -67,7 +67,7 @@ class App {
       }
     }
 
-    console.log(computerRandomNum.join(""), "randomNum"); // ❌
+    // console.log(computerRandomNum.join(""), "randomNum"); // ❌
 
     return computerRandomNum.join("");
   }
