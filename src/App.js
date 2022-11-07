@@ -30,7 +30,21 @@ class App {
           validNumberFromUser,
           numberFromComputer
         );
-        this.try(numberFromComputer);
+        if (isClear) this.askRestart();
+        else this.try(numberFromComputer);
+      }
+    );
+  }
+
+  askRestart() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        if (answer === "1") this.play();
+        if (answer === "2") MissionUtils.Console.close();
+        if (answer !== "1" && answer !== "2") {
+          throw Error("1또는 2만 입력해주세요.");
+        }
       }
     );
   }
