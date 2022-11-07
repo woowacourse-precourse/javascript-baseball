@@ -27,7 +27,7 @@ class App {
     this.ball = 0;
     this.strike = 0;
 
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       answer = parseInt(answer);
       if (answer.toString().length !== 3 && (answer !== 1) & (answer !== 2))
         throw new Error();
