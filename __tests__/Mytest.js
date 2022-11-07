@@ -1,11 +1,4 @@
 const Utils = require("../src/utils/utils.js");
-const MissionUtils = require("@woowacourse/mission-utils");
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
 
 expect.extend({
   toBeDistinct(received) {
@@ -115,6 +108,33 @@ describe("Utils.compareNumbers", () => {
       );
       //then
       expect(strikeBall).toStrictEqual(results[index]);
+    }
+  });
+});
+
+describe("Utils.returnStringResult", () => {
+  test("object로 되어있는 strike, ball 개수를 string으로 변환", () => {
+    //given
+    const strikeBallCount = [
+      {},
+      { strike: 1, ball: 1 },
+      { strike: 3 },
+      { ball: 3 },
+      { strike: 1, ball: 2 },
+    ];
+    const results = [
+      "낫싱",
+      "1볼 1스트라이크",
+      "3스트라이크",
+      "3볼",
+      "2볼 1스트라이크",
+    ];
+
+    for (const index in strikeBallCount) {
+      //when
+      let strikeBall = Utils.returnStringResult(strikeBallCount[index]);
+      //then
+      expect(strikeBall).toEqual(results[index]);
     }
   });
 });
