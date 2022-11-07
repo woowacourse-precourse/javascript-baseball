@@ -1,32 +1,32 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MISSIONUTILS = require("@woowacourse/mission-utils");
 
 class App {
   
   play() {
-
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const RANDOM = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    MISSIONUTILS.Console.print('숫자 야구 게임을 시작합니다.');
+    const RANDOM = MISSIONUTILS.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(RANDOM);//콘솔
     this.startGame(RANDOM);
   }
   
   reGame() {
-
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (wantGame) => {
+    MISSIONUTILS.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (wantGame) => {
       if(wantGame === '1'){
-        const RANDOM = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        const RANDOM = MISSIONUTILS.Random.pickUniqueNumbersInRange(1, 9, 3);
         this.startGame(RANDOM);
       }else if(wantGame === '2'){
-      return MissionUtils.Console.close();
-      }
+        return MISSIONUTILS.Console.close();
+      }else throw '다시하기_ 잘못된 입력입니다.';
       
     })
   }
-  startGame(RANDOM) { 
-        
-    MissionUtils.Console.readLine('숫자를 입력해주세요', (user_num) => {
+
+  startGame(RANDOM) {       
+    MISSIONUTILS.Console.readLine('숫자를 입력해주세요', (user_num) => {
+      if(user_num.length != 3) throw '숫자입력_ 잘못된 입력입니다.';
       let flag = this.checkNum(RANDOM,user_num);
       if(flag){
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        MISSIONUTILS.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.reGame();
       }
     })
@@ -34,17 +34,21 @@ class App {
 
   checkNum(RANDOM,num) {
     let bucketNum = [];
-    for(let i = 2; i >= 0; i--){
+    for(let i = 2; i >= 0; i--) {
+      if(num % 10 === 0) throw '입력범위 아님_ 0 입력';
       bucketNum[i] = num % 10;
       num = parseInt(num /10); 
     }
+    if(this.duplicateCheck(bucketNum)) throw '중복 값 입력';
+
     let strike = [];
     let j = -1;
-    for(let i = 0; i < bucketNum.length; i++){
+    for(let i = 0; i < bucketNum.length; i++) {
       if(bucketNum[i] === RANDOM[i]){
         strike[++j] = bucketNum[i];
       }
     }
+
     let ball = RANDOM.filter(x => bucketNum.includes(x)).filter(x => !strike.includes(x));
     this.print(strike.length, ball.length);
 
@@ -54,18 +58,23 @@ class App {
       this.startGame(RANDOM);
   }
 
+  duplicateCheck(bucketNum){
+    const NUM_SET = new Set(bucketNum);
+    if(NUM_SET.size != 3) return 1;
+    return 0;
+  }
+
   print(strike, ball) {
     if(ball != 0 && strike === 0){
-      MissionUtils.Console.print(`${ball}볼`);
+      MISSIONUTILS.Console.print(`${ball}볼`);
     }else if(strike != 0 && ball === 0){
-      MissionUtils.Console.print(`${strike}스트라이크`);
+      MISSIONUTILS.Console.print(`${strike}스트라이크`);
     }else if(ball != 0 && strike != 0){
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      MISSIONUTILS.Console.print(`${ball}볼 ${strike}스트라이크`);
     }else{
-      MissionUtils.Console.print('낫싱');
+      MISSIONUTILS.Console.print('낫싱');
     }
   }
-  
 }
 const app = new App();
 app.play();
