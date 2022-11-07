@@ -39,16 +39,17 @@ class App {
   compareNumber() {
     console.log("비교할게!");
     let score = [0, 0]; //[ 볼, 스트라이크]
-    this.isStrike(this.userInput);
+    this.isStrike(this.computerInput, this.userInput);
+    console.log(`${score[0]} 볼 ${score[1]} 스트라이크`);
   }
 
-  isStrike() {
+  isStrike(ans, input) {
+    console.log(ans, input);
     for (let i = 0; i < 3; i++) {
-      if (this.userInput[i] === this.computerInput[i]) {
+      if (input[i] === ans[i]) {
         score[1] += 1;
       } else {
-        // isBall(i);
-        console.log("스트라이크는 아님");
+        console.log("볼 체크");
       }
     }
   }
@@ -56,4 +57,4 @@ class App {
 
 const app = new App();
 app.play();
-module.exports = App;
+// module.exports = App;
