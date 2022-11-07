@@ -110,4 +110,16 @@ describe("기능 테스트", () => {
     expect(isThreeStrikes1).toBe(true);
     expect(isThreeStrikes2).toBe(false);
   });
+
+  test("볼 카운트 문자열로 바꾸기", () => {
+    const count1 = new BallCount([1, 2, 3], [1, 3, 4]);
+    const count2 = new BallCount([1, 2, 3], [4, 5, 6]);
+    const count3 = new BallCount([1, 2, 3], [4, 2, 3]);
+    const count4 = new BallCount([1, 2, 3], [3, 7, 2]);
+
+    expect(count1.toString()).toBe("1볼 1스트라이크");
+    expect(count2.toString()).toBe("낫싱");
+    expect(count3.toString()).toBe("2스트라이크");
+    expect(count4.toString()).toBe("2볼");
+  });
 });
