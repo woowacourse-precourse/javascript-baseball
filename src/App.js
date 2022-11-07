@@ -8,7 +8,7 @@ class App {
 
   startgame(){
     const RandomNumber = MakeNumber();
-    inputNum(num) = RandomNumber;
+    InputNum(answer) = RandomNumber;
   }
 
   //Make random number
@@ -23,6 +23,18 @@ class App {
       }
     }
     return RandomNumber.join("");
+  }
+
+  InputNum(answer){
+    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (number) => {
+      const isValidInput = checkExcept(number);
+      if (isValidInput == true) {
+        CheckAnswer(answer, number);
+      } else {
+        MissionUtils.Console.close();
+      }
+    });
+    return;
   }
 }
 // module.exports = App;
