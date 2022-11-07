@@ -23,15 +23,22 @@ class App {
         nonDuplicateNumbers.push(randomNumber);
       }
     }
-    
-    this.answer = Number(nonDuplicateNumbers.join(""));
-    return this.answer;
+    return nonDuplicateNumbers
   }
 
   getUserNumberInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numberInput) => {
       this.userNumberInput = numberInput;
     });
+  }
+
+  checkError(numberInput) {
+    const NUMBERS = /^[1-9]+$/
+    if(!NUMBERS.test(numberInput)) throw new Error('숫자가 입력되지 않았습니다');
+    
+    if(numberInput.length !== 3) throw new Error('3개의 글자가 아닙니다.');
+
+    if(new Set(numberInput).size !== 3) throw new Error('중복된 숫자가 있습니다.');
   }
 }
 
