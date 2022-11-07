@@ -35,12 +35,15 @@ class App {
 
   printResult(strikeCount, ballCount) {
     if (ballCount != 0 && strikeCount != 0) 
-      return ballCount + "볼" + strikeCount + "스트라이크 ";
-    else if (ballCount != 0)
+      return ballCount + "볼 " + strikeCount + "스트라이크 ";
+    
+    else if (ballCount != 0) 
       return ballCount + "볼";
-    else if (strikeCount != 0)
+    
+    else if (strikeCount != 0) 
       return strikeCount + "스트라이크 ";
-    else if (strikeCount == 0 && ballCount == 0)
+    
+    else if (strikeCount == 0 && ballCount == 0) 
       return "낫싱";
   }
 
@@ -54,7 +57,11 @@ class App {
       ballCount = this.checkBall(userNumbers);
 
       MissionUtils.Console.print(resultComment = this.printResult(strikeCount, ballCount));
-      return resultComment;
+      if (resultComment == "3스트라이크")
+        this.checkGameEnd();
+      else
+        this.startGame();
+      // return resultComment;
     });
   }
 
@@ -70,14 +77,13 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.setComputerNumbers();
 
-    let gameResult = this.startGame();
-    MissionUtils.Console.print(gameResult);
+    this.startGame();
 
-    if (gameResult == "3스트라이크")
-      this.checkGameEnd();
-    else {
-      this.startGame();
-    }
+    // if (gameResult == "3스트라이크")
+    //   this.checkGameEnd();
+    // else {
+    //   this.startGame();
+    // }
   }
 }
 
