@@ -42,12 +42,12 @@ describe("Controller 클래스 기능 테스트", () => {
   test("strike 수와 ball 수로 적절한 hint를 만드는가 1", () => {
     const controller = new Controller();
     const result = controller.makeHint(1,2);
-    expect(result).toEqual('1스트라이크 2볼');
+    expect(result).toEqual('2볼 1스트라이크');
   });
   test("strike 수와 ball 수로 적절한 hint를 만드는가 2", () => {
     const controller = new Controller();
     const result = controller.makeHint(1,1);
-    expect(result).toEqual("1스트라이크 1볼");
+    expect(result).toEqual("1볼 1스트라이크");
   });
   test("strike 수와 ball 수로 적절한 hint를 만드는가 3", () => {
     const controller = new Controller();
@@ -68,7 +68,7 @@ describe("Controller 클래스 기능 테스트", () => {
   test("입력과 정답 비교 2", () => {
     const controller = new Controller();
     const result = controller.compareAnswer([3,2,1],[1,2,3]);
-    expect(result).toEqual(['1스트라이크 2볼', false]);
+    expect(result).toEqual(['2볼 1스트라이크', false]);
   });
   test("입력과 정답 비교 3", () => {
     const controller = new Controller();
