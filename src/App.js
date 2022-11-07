@@ -34,6 +34,7 @@ class App {
       this.#userAnswer = [...answer];
       this.score = {};
       this.getScore();
+      this.printScore();
     });
   }
   getScore() {
@@ -44,6 +45,17 @@ class App {
       if (this.#answer[idx] !== num && this.#answer.includes(num))
         score.ball = score.ball + 1 || 1;
     });
+  }
+  printScore() {
+    const { strike, ball } = this.score;
+    const ballScore = `${ball ? `${ball}볼 ` : ""}`;
+    const strikeScore = `${strike ? `${strike}스트라이크 ` : ""}`;
+    const nothingScore = `${!strike && !ball ? "낫싱" : ""}`;
+
+    Console.print(ballScore + strikeScore + nothingScore);
+    if (strike === 3)
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    else this.inputUserAnswer();
   }
 }
 
