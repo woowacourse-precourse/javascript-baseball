@@ -9,7 +9,7 @@ class App {
 
   static startGame() {
     App.init();
-    App.getUserInputNumber();
+    App.progressGame();
   }
 
   static init() {
@@ -30,13 +30,6 @@ class App {
       }
     });
     App.printResult(strikeCount, ballCount);
-  }
-
-  static getUserGameOptionValue() {
-    return MissionUtils.Console.readLine(GAME_MESSAGES.END_OPTION, (input) => {
-      MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
-      App.validateUserGameOptionValueInput(input);
-    });
   }
 
   static runByGameOptionValue(userInput) {
@@ -62,23 +55,25 @@ class App {
     if (strikeCount === 3) {
       MissionUtils.Console.print(`${strikeCount}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
       this.gameEndStatus = true;
-      App.getUserGameOptionValue();
+      App.progressGame();
     }
     if (strikeCount > 0 && ballCount > 0) MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크 `);
     if (strikeCount > 0 && ballCount === 0) MissionUtils.Console.print(`${strikeCount}스트라이크`);
     if (ballCount > 0 && strikeCount === 0) MissionUtils.Console.print(`${ballCount}볼`);
     if (ballCount === 0 && strikeCount === 0) MissionUtils.Console.print("낫싱");
-    if (this.gameEndStatus === false) this.getUserInputNumber();
+    if (this.gameEndStatus === false) this.progressGame();
   }
 
   static convertUserNumberToArray(userNumber) {
     return userNumber.toString().split("");
   }
 
-  static getUserInputNumber() {
-    return MissionUtils.Console.readLine("숫자를입력해주세요: ", (input) => {
+  static progressGame() {
+    const message = this.gameEndStatus ? GAME_MESSAGES.END_OPTION : GAME_MESSAGES.PROGRESS;
+
+    MissionUtils.Console.readLine(message, (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
-      App.validateUserInput(input);
+      this.gameEndStatus ? App.validateUserGameOptionValueInput(input) : App.validateUserInput(input);
     });
   }
 
@@ -93,3 +88,6 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
