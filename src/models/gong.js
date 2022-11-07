@@ -13,7 +13,7 @@ class Gong {
    * @param {[number, number, number]} numbers
    */
   constructor(numbers) {
-    this.numbers = numbers;
+    this.#numbers = numbers;
     Object.freeze(this);
   }
 
