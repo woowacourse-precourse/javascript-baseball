@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable max-lines-per-function */
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 

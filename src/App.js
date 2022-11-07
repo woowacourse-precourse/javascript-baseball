@@ -1,18 +1,9 @@
-// const rata = "aer";
-// console.log(rata);
 const MissionUtils = require("@woowacourse/mission-utils");
 const GameStartMsg = require("./GameStartMsg");
-
-// const RandomNum = require("./RandomNum");
-// const ComputerOutput = require("./ComputerOutput");
-// const UserInput = require("./UserInput");
-
-// const ReGameMsg = require("./ReGameMsg")
 
 class App {
   constructor() {
     this.answerBox = [];
-    // this.compareComputer = ComputerNum.randomNumArr[0];
     this.compareComputer = [];
   }
   play() {
@@ -27,7 +18,6 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.answerBox.length = 0;
       this.answerBox.push(answer.split("").map(Number));
-      // this.computerSelect()
       this.isError(this.answerBox);
       this.isNothing(this.answerBox);
       this.isBall(this.answerBox);
@@ -39,15 +29,6 @@ class App {
   computerSelect() {
     let pickedNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     this.compareComputer.push(pickedNum);
-    // console.log(this.compareComputer);
-
-    // this.compareComputer.length = 1;
-
-    // this.isNothing(this.compareComputer);
-    // this.isBall(this.compareComputer);
-    // this.isStrike(this.compareComputer);
-    // this.isCorrect(this.compareComputer);
-    // this.reGame(this.compareComputer);
   }
   isError() {
     if (this.answerBox[0].length !== 3) {
@@ -65,13 +46,8 @@ class App {
     }
   }
   isNothing() {
-    const userNum = this.answerBox[0];
-    if (
-      userNum.length === 3 &&
-      userNum.filter((duplicated) =>
-        this.compareComputer[0].includes(duplicated)
-      ).length === 0
-    ) {
+    const userNum = this.answerBox[0];                    // 여기 인클루드였음
+    if (userNum.filter((duplicated) =>this.compareComputer[0].indexOf(duplicated) != -1).length === 0) {
       MissionUtils.Console.print("낫싱");
       this.userInputfunc(this.answerBox);
     }
@@ -137,18 +113,7 @@ class App {
       if (reGameAnswer === "1") {
         this.userInputfunc(this.answerBox);
         this.reGameNum();
-        this.compareComputer.shift()
-        // console.log(this.compareComputer)
-        // this.userInputfunc(this.compareComputer.splice(0, 3))
-        // console.log(this.compareComputer)
-
-        // ComputerNum.computerNum(); ###랜덤넘버 생성
-
-        // const str = String(this.compareComputer)
-        // const mapfn = (arg) => Number(arg);
-        // const newNumArr = str.split(',').map(mapfn);
-        // console.log(newNumArr.splice(0,3))
-        // this.userInputfunc(newNumArr)
+        this.compareComputer.shift();
       }
       if (reGameAnswer !== "1" && reGameAnswer !== "2") {
         throw new Error("1과 2중에 입력해주세요");
