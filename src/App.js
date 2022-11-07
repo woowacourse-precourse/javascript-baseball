@@ -51,9 +51,9 @@ class Umpire {
     this.ball = ballNums.length;
     let decision;
     if (miss === 6) decision = '낫싱';
-    if (this.strike === 3) decision = '3스트라이크';
-    if (this.ball === 3) decision = '3볼';
-    if (miss !== 6 && this.strike !== 3 && this.ball !== 3) decision = `${this.ball}볼 ${this.strike}스트라이크`;
+    if (miss !== 6 && this.strike === 0) decision = `${this.ball}볼`;
+    if (miss !== 6 && this.ball === 0) decision = `${this.strike}스트라이크`;
+    if (miss !== 6 && this.strike !== 0 && this.ball !== 0) decision = `${this.ball}볼 ${this.strike}스트라이크`;
     this.decision = decision;
   }
 }
