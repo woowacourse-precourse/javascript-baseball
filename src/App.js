@@ -18,6 +18,23 @@ const isValidInput = (input) => {
   return true;
 };
 
+const isValidLength = (input) => {
+  if (input.length !== VALID_NUMBER_LENGTH) {
+    return false;
+  }
+  if (isNaN(input)) {
+    return false;
+  }
+  if (parseFloat(input) !== parseInt(input)) {
+    return false;
+  }
+  if (parseInt(input) < 0) {
+    return false;
+  }
+
+  return true;
+};
+
 function App () {
   this.randomNumber;
   this.play = () => {
