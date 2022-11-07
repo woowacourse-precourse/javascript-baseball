@@ -3,16 +3,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   // 프로그램 시작
   play() {
-    console.log(`숫자 야구 게임을 시작합니다.`);
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.pickComputerNumber;
     this.gameStart(computer)
   }
 
   gameStart(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요.', (user) => {
-      console.log(computer);
+      MissionUtils.Console.print(`숫자를 입력해주세요 : ${user}`);
       let userSplited = user.split("");
-      console.log(userSplited);
       this.checkUser(userSplited);
       const result = this.scoreCounter(userSplited, computer);
       const answer = this.printScore(result);
@@ -128,6 +127,7 @@ class App {
   // 프로그램 종료 및 재시작
   restartOrQuit() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      MissionUtils.Console.print(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n${answer}`);
       if(answer == '1'){
         this.play();
       }
