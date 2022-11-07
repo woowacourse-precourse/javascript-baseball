@@ -44,8 +44,12 @@ class PlayGame extends Mission {
         this.missionConsole.close();
         return;
       }
-      throw "잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+      throw this.messageForRestartInput();
     });
+  }
+
+  messageForRestartInput() {
+    return "잘못된 입력입니다. 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
   }
 
   messageForVictory() {
