@@ -66,7 +66,7 @@ class App {
         if (menuNumber === "2") {
           return this.gameStop();
         }
-        throw new Error("잘못된 값을 입력하셨습니다.");
+        return this.error.throwError();
       }
     );
   }
