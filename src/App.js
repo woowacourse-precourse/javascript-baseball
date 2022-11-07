@@ -46,7 +46,7 @@ class App {
           this.play();
         }
         if (endOrRetryInput === 2) {
-          MissionUtils.Console.close();
+          this.close();
         }
       } catch (error) {
         this.wrongInput(error);
