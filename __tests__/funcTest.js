@@ -44,13 +44,6 @@ describe("기능테스트", () => {
 
   test("continueAnswer1", () => {
     const app = new App();
-    const spyFn = jest.spyOn(app, "setBaseLine");
-    app.continueAnswer("1");
-    expect(spyFn).toBeCalled();
-  });
-
-  test("continueAnswer1", () => {
-    const app = new App();
     const spySetBaseLine = jest.spyOn(app, "setBaseLine");
     const spyProgressFn = jest.spyOn(app, "progress");
     app.continueAnswer("1");
@@ -73,6 +66,7 @@ describe("기능테스트", () => {
       app.continueAnswer("3");
     }).toThrow();
   });
+
   test("continueQuestion", () => {
     const app = new App();
     const spyReadLine = jest.spyOn(MissionUtils.Console, "readLine");
