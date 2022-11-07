@@ -19,8 +19,14 @@ class User {
       if(selectReplay === 1){
         this.input();
       }
-      //끝내기
+      if(selectReplay === 2){
+        this.finish();
+      }
+      this.selectRePlay();
     })
+  }
+  finish(){
+    MissionUtils.Console.close();
   }
 }
 
