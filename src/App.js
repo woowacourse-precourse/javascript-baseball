@@ -1,16 +1,29 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const STATUS = {
-  Started: 1,
-  Finished: 0,
+  started: 0,
+  finished: 1,
+}
+
+const MESSAGE = {
+  start: '숫자 야구 게임을 시작합니다.',
+  input: '숫자를 입력해주세요: ',
+  nothing: '낫싱',
+  strike: '3스트라이크',
+  finish: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  continueOrEnd: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 }
 
 class App {
   randomNumber;
-  gameStatus = STATUS.Start;
+  gameStatus = STATUS.started;
+
+  consolePrint(message) {
+    MissionUtils.Console.print(message);
+  }
   
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.consolePrint(MESSAGE.start);
     this.start();
   }
 
@@ -22,10 +35,10 @@ class App {
   }
 
   userInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요: ', (input) => {
+    MissionUtils.Console.readLine(MESSAGE.input, (input) => {
       this.checkUserInput(input);
-      if (this.gameStatus === STATUS.Finished) {
-        this.gameStatus = STATUS.Started;
+      if (this.gameStatus === STATUS.finished) {
+        this.gameStatus = STATUS.started;
         this.continueOrEnd();
       } else {
         this.userInput();
@@ -84,18 +97,18 @@ class App {
     let balls = this.countBalls(userNumbers);
 
     if (strikes == 0 && balls == 0) {
-      MissionUtils.Console.print('낫싱');
+      this.consolePrint(MESSAGE.nothing);
     } else if (strikes == 3) {
-      MissionUtils.Console.print('3스트라이크');
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-      this.gameStatus = STATUS.Finished;
+      this.consolePrint(MESSAGE.strike);
+      this.consolePrint(MESSAGE.finish);
+      this.consolePrint(MESSAGE.continueOrEnd);
+      this.gameStatus = STATUS.finished;
     } else if (strikes == 0) {
-      MissionUtils.Console.print(`${balls}볼`);
+      this.consolePrint(`${balls}볼`);
     } else if (balls == 0) {
-      MissionUtils.Console.print(`${strikes}스트라이크`);
+      this.consolePrint(`${strikes}스트라이크`);
     } else {
-      MissionUtils.Console.print(`${balls}볼 ${strikes}스트라이크`);
+      this.consolePrint(`${balls}볼 ${strikes}스트라이크`);
     }
   }
 
