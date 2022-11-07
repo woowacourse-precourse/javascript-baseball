@@ -34,6 +34,9 @@ class App {
     if (new Set(userNumberInput).size != 3) {
       throw new Error("서로 다른 숫자여야 합니다");
     }
+    if (/[^1-9]/g.test(userNumberInput)) {
+      throw new Error("1~9 숫자만 입력해주세요");
+    }
   }
 }
 
