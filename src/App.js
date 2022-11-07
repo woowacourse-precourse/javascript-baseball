@@ -17,21 +17,24 @@ class App {
 
   // 2. 사용자에게 숫자 3개 받는 함수
   readNums() {
-    let user = "";
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      user = answer.split("").map((string) => Number(string));
-      user.map((num) => {
-        if (isNaN(num)) {
-          throw "Not a number";
-        }
-      });
-      if (user.includes(0)) {
-        throw "0 exists";
-      } else if (user.length !== 3) {
-        throw "Not three digits";
-      }
+    let user = ""
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", answer => {
+      this.checkError(answer);
+      user = [...answer].map(num => Number(num))
     });
+    
     return user;
+  }
+
+  // 8. 사용자에게 입력받은 숫자 에러 체크하는 함수
+  checkError(answer) {
+    if (
+      isNaN(Number(answer)) ||
+      answer.includes(0) ||
+      answer.length !== 3
+    ) {
+      throw new Error();
+    }
   }
 
   // 3. 컴퓨터 숫자와 사용자 숫자 비교하는 함수
@@ -53,13 +56,13 @@ class App {
   printResult(score) {
     let ball = score[0];
     let strike = score[1];
-    
+
     if (strike === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return true;
-    } 
-    
+    }
+
     if (ball === 0 && strike === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike === 0) {
@@ -72,31 +75,45 @@ class App {
     return false;
   }
 
-  play() {
-    let check = 1;
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    while (check === 1) {
-      let computer = this.randomNums();
+  // 5. 새 게임을 시작하는 함수
+  newGame() {
+    let computer = this.randomNums();
+    this.startGame(computer);
+  }
 
-      while (1) {
-        let user = this.readNums();
-        let score = this.compareNums(computer, user);
-        let result = this.printResult(score);
-        if (result) break;
+  // 6. 게임을 진행하는 함수
+  startGame(computer) {
+    let user = this.readNums();
+    let score = this.compareNums(computer, user);
+    let result = this.printResult(score);
+    if (!result) this.startGame(computer);
+    
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+      answer => {
+        this.checkContinue(answer);
       }
+    );
+  }
 
-      MissionUtils.Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
-        (answer) => {
-          if (answer === 2) check = 2;
-        }
-      );
-      if (check === 2) break;
+  // 7. 새로 시작할지 종료할지 판단하는 함수
+  checkContinue(answer) {
+    if (answer === "1") {
+      this.newGame();
+    } else if (answer === "2") {
+      MissionUtils.Console.print("숫자 야구 프로그램을 종료합니다");
+      MissionUtils.Console.close();
+    } else {
+      throw new Error();
     }
+
+  }
+
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.newGame();
+    MissionUtils.Console.close();
   }
 }
 
-const baseballGame = new App();
-baseballGame.play();
-
-export default App;
+module.exports = App;
