@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = MissionUtils;
+const TOTAL_COUNT = 3;
 
 class Judge {
   checkIsValidInput(player_input) {
@@ -10,13 +11,15 @@ class Judge {
       Console.print(opponentInput);
       let [ball, strike] = this.countBallStrike(opponentInput, input);
       this.printBS(ball, strike);
-      if (strike === 3) {
+      if (strike === TOTAL_COUNT) {
         //종료할지 다시할지 물어보기
+        
       } else {
         this.performOneGame(opponentInput);
       }
     });
   }
+  
   printBS(ball, strike) {
     if (ball + strike === 0) {
       Console.print("낫싱");
