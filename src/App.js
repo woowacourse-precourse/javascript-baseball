@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  // 프로그램 시작
   play () {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.pickComputerNumber;
@@ -26,7 +25,6 @@ class App {
     });
   }
 
-  // 정답 숫자 선정
   get pickComputerNumber () {
     let computer = [];
     while (computer.length < 3) {
@@ -38,7 +36,6 @@ class App {
     return computer;
   }
 
-  // 사용자로부터 입력값 얻기
   get pickUserNumber () {
     let user = '';
     MissionUtils.Console.readLine('숫자를 입력해주세요.', (answer) => {
@@ -47,7 +44,6 @@ class App {
     return user
   }
 
-  // 입력값 예외 처리
   checkUser (user) {
     this.checkIfNumber(user);
     this.checkIfThreeDigit(user);
@@ -55,7 +51,6 @@ class App {
     this.checkIfnotZero(user);
   }
 
-  // 숫자인지 체크
   checkIfNumber (user) {
     for (let i = 0; i < 3; i++) {
       if (isNaN(user[i])) { 
@@ -64,7 +59,6 @@ class App {
     }
   }
   
-  // 3자리인지 체크
   checkIfThreeDigit (user) {
     if (user.length != 3) {
       
@@ -72,7 +66,6 @@ class App {
     }
   }
   
-  // 서로 다른 숫자인지 체크
   checkIfDiff (user) {
     let numberCheck = new Set(user);
     if (numberCheck.size != user.length) {
@@ -81,7 +74,6 @@ class App {
     }
   }
   
-  // 1 ~ 9사이의 숫자인지 체크
   checkIfnotZero (user) {
     for (let i = 0; i < 3; i++){
       if(1 > Number(user[i]) || Number(user[i])>9){
@@ -91,7 +83,6 @@ class App {
     }
   }
 
-  // 정답 숫자와 사용자의 입력값 체크
   scoreCounter (user, computer) {
     let result = [0, 0]
     for(let i = 0; i < 3; i++){
@@ -105,7 +96,6 @@ class App {
     return result;
   }
   
-  // 결과 출력
   printScore (result) {
     let answer = '';
     if (result[0] === 0 && result[1] == 0) {
@@ -123,7 +113,6 @@ class App {
     return answer;
   }
 
-  // 프로그램 종료 및 재시작
   restartOrQuit () {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       MissionUtils.Console.print(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n${answer}`);
