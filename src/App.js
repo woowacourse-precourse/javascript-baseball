@@ -1,6 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  // 게임 종료 여부 확인(1: 시작, 2: 종료)
+  gameOver() {
+
+  }
+
+  // 결과 출력
+  printResult() {
+
+  }
+
+  // 입력 값과 컴퓨터 숫자 비교
+  playBaseball() {
+
+  }
+
   // 입력값 확인
   checkAnswer(user) {
     if (user.length !== 3) throw new Error("입력 개수는 3개입니다!");
@@ -13,6 +28,7 @@ class App {
       const user = answer.split('');
       this.checkAnswer(user);
       user.map(e => this.user.push(parseInt(e)));
+      this.playBaseball(this.user);
     });
   }
 
