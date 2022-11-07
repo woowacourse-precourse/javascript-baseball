@@ -25,14 +25,15 @@ class Game {
 
   pitchNumber() {
     Console.readLine('숫자를 입력해주세요 : ', (inputStr) => {
-      const guess = this.isValidInput(inputStr);
+      const guess = this.isValidGuess(inputStr);
       const { ball, strike } = this.judgeBallStrike(guess, this.answer);
       this.printHint(ball, strike);
       if (strike !== 3) this.pitchNumber();
+      else this.askReplay();
     });
   }
 
-  isValidInput(inputStr) {
+  isValidGuess(inputStr) {
     const inputArr = [...inputStr].map(Number);
     const inputSet = new Set(inputArr);
     if (!/^[1-9]{3}$/.test(inputStr) || inputSet.size !== 3) {
@@ -71,6 +72,25 @@ class Game {
     if (ball > 0 && strike === 0) Console.print(`${ball}볼`);
     if (ball === 0 && strike > 0) Console.print(`${strike}스트라이크`);
     if (ball > 0 && strike > 0) Console.print(`${ball}볼 ${strike}스트라이크`);
+  }
+
+  askReplay() {
+    Console.readLine(
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (inputStr) => {
+        const answer = this.isValidAnswer(inputStr);
+        if (answer === 1) this.play();
+        if (answer === 2) return Console.close();
+      }
+    );
+  }
+
+  isValidAnswer(inputStr) {
+    if (!/^[1-2]{1}$/.test(inputStr)) {
+      throw new Error('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    }
+
+    return parseInt(inputStr);
   }
 }
 
