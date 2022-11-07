@@ -55,7 +55,7 @@ describe("목표값 테스트", () => {
 describe("입력값 배열화 테스트", () => {
   test("입력값 배열화", () => {
     const userInput = "123";
-    expect(app.stringToArrConverter(userInput)).toEqual([1, 2, 3]);
+    expect(app.stringToNumberArrayConverter(userInput)).toEqual([1, 2, 3]);
   });
 });
 

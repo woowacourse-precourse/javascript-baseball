@@ -42,7 +42,7 @@ class App {
     return refNumbers;
   }
 
-  stringToArrConverter(numbersString) {
+  stringToNumberArrayConverter(numbersString) {
     const numbersStringArray = numbersString.split("");
     const numbersNumberArray = numbersStringArray.map((number) =>
       Number(number)
@@ -97,6 +97,8 @@ class App {
           this.gameStarter(refNumbersArray);
         } else if (answer === "2") {
           MissionUtils.Console.close();
+        } else {
+          throw "1또는 2만 입력할 수 있습니다.";
         }
       }
     );
@@ -108,7 +110,7 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
-      const userNumbersArray = this.stringToArrConverter(usersInput);
+      const userNumbersArray = this.stringToNumberArrayConverter(usersInput);
       const discrimination = this.discriminator(
         userNumbersArray,
         refNumbersArray
