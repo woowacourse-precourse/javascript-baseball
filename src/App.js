@@ -46,7 +46,7 @@ class App {
     });
   }
 
-  // * 사용자 수가 옳은 입력인지 확인
+  // 사용자 수가 옳은 입력인지 확인
   userNumberIsValid(input) {
     const duplicateRemoveArr = [...new Set(input)];
     if (
