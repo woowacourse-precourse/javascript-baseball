@@ -4,6 +4,8 @@ const MIN_RANGE = 1
 const MAX_RANGE = 9
 const PICK_LENGTH = 3
 
+const ALL_STRIKE = "3스트라이크"
+
 class App {
   constructor() {
     this.computerNumbers = null;
@@ -41,7 +43,7 @@ class App {
       return ballCount + "볼";
     
     else if (strikeCount != 0) 
-      return strikeCount + "스트라이크 ";
+      return ALL_STRIKE;
     
     else if (strikeCount == 0 && ballCount == 0) 
       return "낫싱";
@@ -57,7 +59,7 @@ class App {
       ballCount = this.checkBall(userNumbers);
 
       MissionUtils.Console.print(resultComment = this.printResult(strikeCount, ballCount));
-      if (resultComment == "3스트라이크")
+      if (resultComment == ALL_STRIKE)
         this.checkGameEnd();
       else
         this.startGame();
