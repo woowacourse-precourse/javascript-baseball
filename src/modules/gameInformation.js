@@ -3,6 +3,7 @@ const { isValid } = require('./isValid')
 const { generateNumbers } = require('./generateNumbers')
 const { isStrikeBallResult } = require('./isStrikeBallResult')
 
+
 function baseBall(computerInput) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
         if(!isValid(userInput)) throw '잘못된 입력입니다!';
@@ -17,5 +18,6 @@ function baseBall(computerInput) {
     })
     return;
 }
+
 
 exports.baseBall = baseBall
