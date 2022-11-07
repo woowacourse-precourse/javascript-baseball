@@ -7,6 +7,18 @@ class BaseballGame{
     Console.print(MESSAGE.START);
   }
 
+  getBall(answer, inputNumber){
+    let ball = 0;
+    
+    [...inputNumber].forEach((number, index) => {
+      if(number !== answer[index] && answer.includes(number)){
+        ball++;
+      }
+    });
+
+    return ball;
+  }
+
   createAnswer() {
     const answer = [];
 
@@ -29,3 +41,5 @@ class BaseballGame{
   }
 
 }
+
+module.exports = BaseballGame;
