@@ -43,3 +43,23 @@ function checkNothing(strike,ball){
   else{ nothing=0;}
   return nothing;
 }
+
+function gameResult(randomNum,userNumber){
+  const strike = checkStrike(randomNum,userNumber);
+  const ball = checkball(randomNum,userNumber);
+  const nothing = checkNothing(strike,ball);
+  let answer =""
+  if(nothing==1){
+      answer="낫싱";
+  }
+  else if(strike==0 && ball>0){
+      answer=`${ball}볼`;
+  }
+  else if(strike>0 && ball==0){
+      answer=`${strike}스트라이크`;
+  }
+  else{
+      answer=`${ball}볼 ${strike}스트라이크`;
+  }
+  return answer;
+}
