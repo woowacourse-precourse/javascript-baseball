@@ -62,6 +62,16 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("calculateCount", () => {
+    const app = new App();
+    app.answer = [1, 2, 3];
+
+    expect(app.calculateCount("123")).toBe("3스트라이크");
+    expect(app.calculateCount("456")).toBe("낫싱");
+    expect(app.calculateCount("312")).toBe("3볼");
+    expect(app.calculateCount("132")).toBe("2볼 1스트라이크");
+  });
 });
 
 describe("Input", () => {
