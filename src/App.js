@@ -19,7 +19,6 @@ function checkDuplicate(answer) {
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
-    this.userAnswer = [];
     this.strike = 0;
     this.ball = 0;
   }
@@ -62,12 +61,6 @@ class App {
     this.printResult();
   }
 
-  setUserAnswer(answerArray) {
-    for (let number of answerArray) {
-      this.userAnswer.push(parseInt(number));
-    }
-  }
-
   printResult() {
     let printStatement = '';
     if (this.ball > 0) printStatement = this.ball + BALL_PHRASE;
@@ -78,12 +71,6 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-
-    for (let idx = 0; idx < this.userAnswer.length; idx++) {
-      let userNum = this.userAnswer[idx];
-      if (userNum === this.computerRandomNumber[idx]) this.strike++;
-      else if (this.computerRandomNumber.includes(userNum)) this.ball++;
-    }
 
   }
 }
