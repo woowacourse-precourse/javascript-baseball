@@ -66,9 +66,12 @@
 
   - [x] resetCountBoard: countboard를 0,0 으로 초기화 시킨다
   - [x] compareUserAndComputer: user의 값과 computer의 값을 비교하여, countBoard 최신화
+  - [x] setCountBoard: count Board를 userNumberArray 값을 바탕으로 셋팅한다.
   - [x] makeResult: countboard를 바탕으로 결과를 나타낸다
   - [x] decideReprocess: 3스트라이크 여부를 판단하여, process를 다시 돌려야하는지 판단한다.
   - [x] process: 전체적인 일련의 과정을 나타낸다.
+  - [x] askRestartOrEnd: readline을 통해 재시작할 것인지, 종료할 것인지 묻는다.
+  - [x] restartOrEnd: 실제 재시작 혹은 종료의 동작을 한다.
 
 - [x] computer
 
