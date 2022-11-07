@@ -41,10 +41,9 @@ class App {
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       if (this.isValidInputNumbers(userInput)) {
-        this.ballStrikeCount(this.computerRandomNumbers, userInput);
-      } else {
-        throw new Error('조건에 맞는 수를 입력하세요!');
+        return this.ballStrikeCount(this.computerRandomNumbers, userInput);
       }
+      throw new Error('조건에 맞는 수를 입력하세요!');
     });
   }
 
@@ -70,10 +69,10 @@ class App {
 
     if (strikeCount !== 3) {
       this.getUserInput();
-    } else {
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.resumeOrQuitGame();
     }
+
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    this.resumeOrQuitGame();
   }
 
   getGameResult(strikeCount, ballCount) {
@@ -95,12 +94,12 @@ class App {
       (answer) => {
         if (answer === '1') {
           this.computerRandomNumbers = this.generateComputerRandomNumbers();
-          this.getUserInput();
-        } else if (answer === '2') {
-          MissionUtils.Console.close();
-        } else {
-          throw new Error('1 혹은 2를 입력하세요!');
+          return this.getUserInput();
         }
+        if (answer === '2') {
+          return MissionUtils.Console.close();
+        }
+        throw new Error('1 혹은 2를 입력하세요!');
       }
     );
   }
