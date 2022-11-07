@@ -11,10 +11,14 @@ const CORRECT_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종
 const RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART_CODE}, 종료하려면 ${EXIT_CODE}를 입력하세요.`;
 
 class App {
+  constructor() {
+    this.score = { ball: 0, strike: 0 };
+  }
+
   play() {
     let answer = this.getRandomNumber();
     this.printMessage(START_MESSAGE);
-    this.playerInput();
+    this.playerInput(answer);
   }
 
   printMessage(message) {
@@ -30,10 +34,21 @@ class App {
     return computer;
   }
 
-  playerInput() {
+  playerInput(answer) {
     MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
       this.checkInput(input);
+      this.checkAnswer(input, answer);
     });
+  }
+
+  checkAnswer(input, answer) {
+    for (let index = 0; index < NUMBER_LENGTH; index++) {
+      if (Number(input[index]) === answer[index]) {
+        this.score.strike++;
+      } else if (answer.includes(Number(input[index]))) {
+        this.score.ball++;
+      }
+    }
   }
 
   checkOverlap(input, checkIndex) {
