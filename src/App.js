@@ -13,12 +13,15 @@ function makeTarget() {
   return [...tempArr];
 }
 
-function readData(target) {
+function readData(targetArr) {
   let isAnswer = false;
 
   while (!isAnswer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      isAnswer = handleData(input, target);
+
+      const inputArr = [...input].map(Number);
+
+      isAnswer = handleData(inputArr, targetArr);
     });
   }
 }
@@ -40,7 +43,11 @@ function handleData(inputArr, targetArr) {
 }
 
 function makeResult(countArr){
-  
+  const [strike, ball] = countArr;
+
+  if(strike === 0 && ball===0){
+
+  }
 
 }
 
@@ -54,8 +61,8 @@ class App {
       let isRepeat = true;
 
       while (isRepeat) {
-        const target = makeTarget();
-        readData(target);
+        const targetArr = makeTarget();
+        readData(targetArr);
         isRepeat =false;
         MissionUtils.Console.close();
       }
