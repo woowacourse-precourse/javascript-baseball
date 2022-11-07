@@ -12,6 +12,8 @@ function playerInputNumbers(computerNumber) {
   MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
     const playerNumber = isValid(answer);
     const gameState = compare(playerNumber, computerNumber);
+    MissionUtils.Console.print(gameState);
+    gameProgress(gameState, computerNumber);
   });
 }
 
@@ -79,7 +81,9 @@ function ballCheck(playerNumber, computerNumber) {
 function gameRestart() {
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (answer) => {}
+    (answer) => {
+      selectGameRestart(answer);
+    }
   );
 }
 
@@ -93,6 +97,14 @@ function selectGameRestart(answer) {
   } else {
     throw new Error("1이나 2가 아닌 다른 숫자가 입력되었습니다.");
   }
+}
+
+// 게임 진행
+function gameProgress(gameState, computerNumber) {
+  if (gameState === "3스트라이크") {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    gameRestart();
+  } else playerInputNumbers(computerNumber);
 }
 
 const app = new App();
