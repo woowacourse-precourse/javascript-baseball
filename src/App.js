@@ -44,6 +44,7 @@ class User {
       if(selectReplay === '1'){
         this.game.getRandomNumber();
         this.play();
+        return;
       }
       if(selectReplay === '2'){
         this.finish();
