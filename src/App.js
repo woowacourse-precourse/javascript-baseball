@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const NUMBER_LENGTH = 3;
 
 class App {
   play() {
@@ -18,7 +19,7 @@ class App {
 
   selectComputer() {
     const computer = [];
-    while (computer.length < 3) {
+    while (computer.length < NUMBER_LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
 
       if (!computer.includes(number)) {
@@ -52,20 +53,20 @@ class App {
   }
 
   checkLength(number) {
-    if (number.length !== 3) {
-      throw "3자리 숫자를 입력해주세요.";
+    if (number.length !== NUMBER_LENGTH) {
+      throw `${NUMBER_LENGTH}자리 숫자를 입력해주세요.`;
     }
   }
 
   checkNumber(number) {
     if (isNaN(number)) {
-      throw "3자리 숫자를 입력해주세요.";
+      throw `${NUMBER_LENGTH}자리 숫자를 입력해주세요.`;
     }
   }
 
   checkRange(number) {
     if (number.includes("0")) {
-      throw "1과 9 사이의 숫자 3개를 입력해주세요.";
+      throw `1과 9 사이의 숫자 ${NUMBER_LENGTH}개를 입력해주세요.`;
     }
   }
 
@@ -115,8 +116,10 @@ class App {
   }
 
   isAnswer(answer, computer) {
-    if (answer.includes("3스트라이크")) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (answer.includes(`${NUMBER_LENGTH}스트라이크`)) {
+      MissionUtils.Console.print(
+        `${NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+      );
       return this.selectOption();
     }
 
