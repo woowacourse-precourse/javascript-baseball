@@ -38,6 +38,8 @@ class App {
           this.game();
         } else if (parseInt(input) === 2) {
           MissionUtils.Console.close();
+        } else {
+          throw new Error();
         }
       }
     );
