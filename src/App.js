@@ -63,6 +63,18 @@ class App {
     return ballCnt
   }
 
+  countStrikes(computerInputNumbers, userInputNumbers) {
+    let strikeCnt = 0
+    for (let i = 0; i < 3; i++) {
+      let user = userInputNumbers[i]
+      let com = computerInputNumbers[i]
+      if (parseInt(user) === parseInt(com)) {
+        strikeCnt += 1
+      }
+    }
+    return strikeCnt
+  }
+
   gameStart() {
     this.computerInput()
 
@@ -70,6 +82,7 @@ class App {
       this.userInput()
 
       const balls = this.countBalls(this.computerInputNumbers, this.userInputNumbers)
+      const strikes = this.countStrikes(this.computerInputNumbers, this.userInputNumbers)
     }
   }
 
