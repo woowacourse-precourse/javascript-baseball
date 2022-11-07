@@ -4,9 +4,9 @@ class App {
   play() {
     this.generate_computerNums();
 
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    console.log('숫자 야구 게임을 시작합니다.');
 
-    this.match(this.computerNums);
+    this.match();
   }
 
   generate_computerNums() {
@@ -17,16 +17,10 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const playerNums = answer.split('').map(Number);
 
-      try {
-        this.vaildation_playerNums(playerNums);
-      } catch (e) {
-        console.error(e);
-        MissionUtils.Console.close();
-        return; 
-      }
-
+      this.vaildation_playerNums(playerNums);
+      
       if(this.compare(playerNums)) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        console.log('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         this.ask_restart();
       } else {
         this.match();
@@ -82,6 +76,7 @@ class App {
         this.generate_computerNums();
         this.match();
       } else if (answer === '2') {
+        MissionUtils.Console.readLine('게임 종료');
         MissionUtils.Console.close();
       }
     });
@@ -89,3 +84,5 @@ class App {
 }
 
 module.exports = App;
+
+//new App().play();
