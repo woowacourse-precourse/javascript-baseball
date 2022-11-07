@@ -69,19 +69,24 @@ const printResultMessage = ([strike, ball]) => {
   return MissionUtils.Console.print(message);
 };
 
+const isCorrect = ([strike, ball]) => {
+  return strike === 3 && ball === 0;
+};
+
 const game = (computerNumber) => {
   MissionUtils.Console.readLine(PLAYER_MESSAGE, (num) => {
     let playerNumber = [...String(num)];
     let result = getGameResult(playerNumber, computerNumber);
 
     validatePlayerNumber(num) && printResultMessage(result);
+    (isCorrect(result) && restartGame()) || game(computerNumber);
   });
 };
 
 class App {
   play() {
     printGameStart();
-    game();
+    game(createComputerNumber());
   }
 }
 
