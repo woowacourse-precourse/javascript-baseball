@@ -5,13 +5,7 @@ class App {
   }
   play() {
     this.printStartMessage();
-    this.startGame();
-  }
-  startGame() {
-    const computerInput = this.generateComputerRandomNumbers();
-    const userInput = this.getUserInput();
-    const strikeBall = this.ballStrikeCount(computerInput, userInput);
-    this.getGameResult([...strikeBall]);
+    this.getUserInput();
   }
   printStartMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -40,9 +34,9 @@ class App {
       return true;
   }
   getUserInput(){
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      if(this.isValidInputNumbers(input)){
-        this.userInput = input;
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      if(this.isValidInputNumbers(userInput)){
+        this.ballStrikeCount(this.computerRandomNumbers, userInput);
       }
       else{
         throw new Error('조건에 맞는 수를 입력하세요!')
@@ -63,7 +57,15 @@ class App {
         ballCount++;
       }
     }
-    return [strikeCount, ballCount];
+    ballCount -= strikeCount;
+
+    let gameResult = this.getGameResult(strikeCount, ballCount);
+    
+    MissionUtils.Console.print(gameResult);
+
+    if(strikeCount !== 3){
+      this.getUserInput();
+    }
   }
   getGameResult(strikeCount, ballCount) {
     if(strikeCount && ballCount) {
@@ -76,7 +78,7 @@ class App {
       return `${ballCount}볼` 
     }
     else {
-      return `낫싱`
+      return '낫싱'
     }
   }
 }
