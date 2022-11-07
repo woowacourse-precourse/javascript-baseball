@@ -15,7 +15,12 @@ class App {
   /* 게임 플레이 */
   play() {
     const numbers = this.pickRandomNumbers();
-    // console.log(numbers);
+
+    // 게임 시작 문구 출력
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      // console.log(answer);
+    })
   }
 }
 
