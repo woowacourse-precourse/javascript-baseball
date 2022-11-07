@@ -115,6 +115,8 @@ class App {
     this.selectedNumberException(selectedNumber);
 
     if (selectedNumber === 1) this.startNewGame();
+
+    if (selectedNumber === 2) MissionUtils.Console.close();
   }
 
   checkAnswer(strike) {
