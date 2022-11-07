@@ -40,5 +40,29 @@ function isCorrectInput(input) {
   if (input[2] === "0") return false;
   return true;
 }
+function checkHint(computerNumber, userNumber) {
+  let strikeCount = 0;
+  let ballCount = 0;
+  if (computerNumber[0] === userNumber[0]) strikeCount++;
+  if (computerNumber[1] === userNumber[1]) strikeCount++;
+  if (computerNumber[2] === userNumber[2]) strikeCount++;
+  if (computerNumber[0] === userNumber[1]) ballCount++;
+  if (computerNumber[0] === userNumber[2]) ballCount++;
+  if (computerNumber[1] === userNumber[0]) ballCount++;
+  if (computerNumber[1] === userNumber[2]) ballCount++;
+  if (computerNumber[2] === userNumber[0]) ballCount++;
+  if (computerNumber[2] === userNumber[1]) ballCount++;
+  let result = "";
+  if (ballCount === 0) {
+    if (strikeCount === 0) result = "낫싱";
+    else result = strikeCount + "스트라이크";
+  } else {
+    result = ballCount + "볼";
+    if (strikeCount !== 0) result += " " + strikeCount + "스트라이크";
+  }
+  MissionUtils.Console.print(result);
+  if (strikeCount === 3) return true;
+  return false;
+}
 
 module.exports = App;
