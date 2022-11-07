@@ -6,10 +6,10 @@ var resultString = "";
 var input;
 var randomNumber;
 class App {
-  
+  randomNumber = createRandomNumber();
   play() {
+    const app = new App();
     input = setInput();
-    randomNumber = createRandomNumber();
     numberCheck(input);
     judgement(input);
     createResultString();
@@ -31,6 +31,7 @@ function setInput() {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
     console.log(`입력한 숫자 : ${inputNumber}`);
   });
+  return inputNumber;
 }
 
 function numberCheck(input) {
@@ -73,4 +74,20 @@ function createResultString() {
   if(strike === 0 && ball === 0)
     result += "낫싱";
 }
+
+function announceResult() {
+  var commandNumber;
+  MissionUtils.Console.print(result);
+  if(strike === 3)
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (commandNumber) => {gameCommand(commandNumber)});
+}
+
+function gameCommand(commandNumber) {
+  if(commandNumber === 1)
+    app.play();
+  if(commandNumber === 2)
+    return 0;
+}
 module.exports = App;
+
