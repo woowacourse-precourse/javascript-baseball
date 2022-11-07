@@ -14,16 +14,16 @@ const printGameStart = () => {
 }
 
 const createRandomNumbers = () => {
-    let RandomNums = [];
+    let randomNumArr = [];
 
-    while (RandomNums.length < 3) {
-        const randonNum = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (randomNumArr.length < 3) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
 
-        if (!RandomNums.includes(randonNum)) {
-            RandomNums.push(randonNum);
-        }
+      if (!randomNumArr.includes(randomNum)) {
+        randomNumArr.push(randomNum);
+      }
     }
-    return RandomNums;
+    return randomNumArr;
 }
 
 const inputNumbers = () => {
