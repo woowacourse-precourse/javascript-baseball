@@ -10,7 +10,13 @@ class App {
   }
 
   generate_computerNums() {
-    this.computerNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.computerNums = [];
+    while (this.computerNums.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computerNums.includes(number)) {
+        this.computerNums.push(number);
+      }
+    }
   }
 
   match() {
@@ -76,7 +82,7 @@ class App {
         this.generate_computerNums();
         this.match();
       } else if (answer === '2') {
-        MissionUtils.Console.readLine('게임 종료');
+        MissionUtils.Console.print('게임 종료');
         MissionUtils.Console.close();
       }
     });
