@@ -72,7 +72,6 @@ class BaseBallGame{
     }
 
     compareUserWithAnswer = () => {
-        console.log(this.answer,this.userAnswer);
         for (let idx=0; idx<3; idx++){
             if (this.answer[idx] === this.userAnswer[idx]){
                 this.countResult("strike");
