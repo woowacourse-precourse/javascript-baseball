@@ -64,7 +64,7 @@ describe("숫자 야구 게임", () => {
     expect(result).toEqual([5, 3, 4]);
   });
 
-  test("getStats메서드로 정확한 stats반환  ", () => {
+  test("getStats메서드로 정확한 stats반환", () => {
     const input = "135";
     const randoms = [5, 3, 2];
 
@@ -72,5 +72,17 @@ describe("숫자 야구 게임", () => {
     const result = app.getStats(input, randoms);
 
     expect(result).toEqual({ ball: 1, strike: 1 });
+  });
+
+  test("getHint메서드로 stat의 값을 문자열로 반환", () => {
+    const input = {
+      ball: 1,
+      strike: 1,
+    };
+
+    const app = new App();
+    const result = app.getHint(input);
+
+    expect(result).toEqual("1볼 1스트라이크");
   });
 });
