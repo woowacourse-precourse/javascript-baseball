@@ -12,6 +12,7 @@ class App {
     const handleInput = (input) => {
       computerUtils.validateInput(input);
       this.userInputs = input.split('').map((input) => Number(input));
+      Console.print(computerUtils.generateHint(this.userInputs, this.answers));
     };
 
     this.readLine(handleInput);
