@@ -151,4 +151,15 @@ describe('기능 단위 목록별 테스트', () => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('기능8 종료여부 입력값 유효성 검사', () => {
+    const inputException = ['3', ' ', '12'];
+
+    mockQuestions(inputException);
+
+    const app = new App();
+    inputException.forEach(_ =>
+      expect(() => app.getRestartInput()).toThrow('잘못된 값 입력됨'),
+    );
+  });
 });
