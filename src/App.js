@@ -1,4 +1,4 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
@@ -6,7 +6,7 @@ class App {
   }
 
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print('숫자 야구 게임을 시작합니다.');
     this.startGame();
   }
 
@@ -29,7 +29,7 @@ class App {
   }
 
   guessNumbers() {
-    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const userNumbers = this.separateNumbers(answer);
       const memo = this.mark(this.computer, userNumbers);
       this.printResultMessage(memo);
@@ -40,29 +40,25 @@ class App {
 
   replay() {
     Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        if (answer !== "1" && answer !== "2") {
-          throw new Error("replay/invalid-user-input");
+        if (answer !== '1' && answer !== '2') {
+          throw new Error('replay/invalid-user-input');
         }
 
-        answer === "1" ? this.startGame() : Console.close();
+        answer === '1' ? this.startGame() : Console.close();
       }
     );
   }
 
   separateNumbers(str) {
-    const characters = [...str];
-
-    if (characters.length !== 3) {
-      throw new Error("separateNumbers/invalid-length");
+    if (str.length !== 3) {
+      throw new Error('separateNumbers/invalid-length');
     }
 
-    characters.forEach((character) => {
-      if (isNaN(character)) {
-        throw new Error("separateNumbers/invalid-user-input");
-      }
-    });
+    if (!Number.isInteger(Number(str))) {
+      throw new Error('separateNumbers/invalid-user-input');
+    }
 
     return [...str].map((digit) => Number(digit));
   }
@@ -81,25 +77,25 @@ class App {
     return memo;
   }
 
-  printResultMessage(memo) {
-    let resultMessage = "";
+  printResultMessage({ ball, strike }) {
+    let resultMessage = '';
 
-    if (memo.ball !== 0) {
-      resultMessage += `${memo.ball}볼`;
+    if (ball !== 0) {
+      resultMessage += `${ball}볼`;
     }
 
-    if (memo.strike !== 0) {
-      resultMessage += ` ${memo.strike}스트라이크`;
+    if (strike !== 0) {
+      resultMessage += ` ${strike}스트라이크`;
     }
 
-    if (memo.ball === 0 && memo.strike === 0) {
-      resultMessage = "낫싱";
+    if (ball === 0 && strike === 0) {
+      resultMessage = '낫싱';
     }
 
     Console.print(resultMessage.trim());
 
-    if (memo.strike === 3) {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (strike === 3) {
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     }
   }
 }
