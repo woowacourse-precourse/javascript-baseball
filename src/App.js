@@ -9,7 +9,7 @@ class App {
     NumberBaseBallSystem.createAnswerNumber();
     // console.log(NumberBaseBallSystem.getNumber);
     const guessNumber = await PlayingUser.enterGuessNumber();
-    // console.log(guessNumber);
+    NumberBaseBallSystem.isStrike(guessNumber);
   }
 }
 
