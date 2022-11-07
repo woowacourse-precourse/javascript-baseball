@@ -5,7 +5,7 @@ const generateRandomComputerNumber = require('./generateRandomComputerNumber');
 class Game {
   constructor() {
     this.gameCount = 0;
-    this.computerNumber;
+    this.computerNumber = null;
   }
 
   start() {
