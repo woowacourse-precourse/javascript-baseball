@@ -37,7 +37,7 @@ class App {
     printMessage.printBallAndStrike(ball, strike);
     if(strike === 3) {
       printMessage.printGameWin();
-      this.gameWin();
+      this.gameRestartOrEnd();
     }
     else{
       this.getUserInputNum();
@@ -63,6 +63,15 @@ class App {
   gameRestartOrEnd() {
     const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
     MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
+      if(userInput == 1) {
+        this.play();
+      }
+      else if(userInput == 2) {
+        MissionUtils.Console.close();
+      }
+      else{
+        throw new Error("1 또는 2가 입력되지 않았습니다.")
+      }
     });
   }
 }

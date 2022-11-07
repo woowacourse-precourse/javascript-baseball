@@ -53,6 +53,5 @@ function printGameWin() {
 module.exports = {
     printGameStart,
     printBallAndStrike,
-    printUserContinueInput,
     printGameWin
 }
