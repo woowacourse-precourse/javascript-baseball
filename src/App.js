@@ -16,6 +16,10 @@ function startGame() {
     });
 }
 
+function endGame() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+}
+
 function getResultMessage(input) {
     let result = countBallandStrike(input);
     let answer = '';
@@ -31,6 +35,7 @@ function getResultMessage(input) {
 function printResultMessage(input) {
     if (input === RANDOM_NUMBER) {
         MissionUtils.Console.print('3스트라이크');
+        endGame();
     } else {
         MissionUtils.Console.print(getResultMessage(input));
     }
