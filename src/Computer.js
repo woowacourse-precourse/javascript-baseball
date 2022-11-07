@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class Computer {
-  createComputerNumber() {
+  createNumber() {
     const computer = [];
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
