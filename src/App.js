@@ -17,6 +17,17 @@ class App {
     return user;
   }
 
+  checkUserNum(num) {
+    if (num.length !== 3) {
+      return false;
+    } else if (num[0] === num[1] || num[0] === num[2] || num[1] === num[2]) {
+      return false;
+    } else if (isNaN(num)) {
+      return false;
+    }
+    return true;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임 시작!");
   }
