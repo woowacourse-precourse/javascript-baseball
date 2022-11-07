@@ -87,7 +87,10 @@ class App {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
-        if (answer !== "1") replay = false;
+        if (answer !== "1") {
+          replay = false;
+          MissionUtils.Console.close();
+        }
       }
     );
     return replay;
