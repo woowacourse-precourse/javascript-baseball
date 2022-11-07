@@ -22,7 +22,21 @@ const NOT_A_NUMBER_ERROR_MESSAGE = "숫자로만 입력해주세요.";
 const GAME_REPLAY_NUMBER_ERROR_MESSAGE = "1 또는 2를 입력하세요.";
 
 class App {
-  play() {}
+  play() {
+    this.printGameMsg(GAME_START_MESSAGE);
+
+    let computerNum;
+    let playOptionNum = GAME_PLAY_NUM;
+
+    while (playOptionNum === GAME_PLAY_NUM) {
+      computerNum = this.getComputerNum();
+
+      this.start(computerNum);
+      this.printGameMsg(GAME_END_MESSAGE);
+
+      playOptionNum = this.inputReplayNum();
+    }
+  }
 
   start(computerNum) {
     while (true) {
