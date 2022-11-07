@@ -7,9 +7,9 @@ const REPLY = {
 
 const MESSAGE = {
   GAMESTART: "숫자 야구 게임을 시작합니다.",
-  ASKREPLAY: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  ASKREPLAY: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
   GAMEEND: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  ASKNUMBER: "숫자를 입력해주세요 :",
+  ASKNUMBER: "숫자를 입력해주세요 : \n",
 };
 
 const ERROR_MESSAGE = {
@@ -26,7 +26,9 @@ const BASEBALL_TERM = {
 };
 
 class App {
-  computerNumber = null;
+  constructor() {
+    this.computerNumber = null;
+  }
 
   generateComputerNumber() {
     const numberArr = [];
@@ -37,7 +39,6 @@ class App {
         numberArr.push(randomNumber);
       }
     }
-
     this.computerNumber = numberArr;
   }
 
@@ -45,20 +46,17 @@ class App {
     return nums.length === new Set(nums).size;
   }
 
-  async getUserNumber() {
-    let userNumber;
-
-    await MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
-      userNumber = Array.from(inputNumber, Number);
+  getUserNumber() {
+    MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
+      const userNumber = Array.from(inputNumber, Number);
       try {
         this.checkValidity(userNumber);
+        this.compareNumbers(this.computerNumber, userNumber);
       } catch (e) {
         MissionUtils.Console.print(e);
         MissionUtils.Console.close();
       }
     });
-    
-    return userNumber;
   }
 
   checkValidity(userNumber) {
@@ -95,8 +93,8 @@ class App {
     if (ballNum === 0 && strikeNum === 0) {
       message = BASEBALL_TERM.NOTHING;
     }
-    return message.trim();
-    //  MissionUtils.Console.print(message.trim());
+
+    MissionUtils.Console.print(message.trim());
   }
 
   askToPlayAgain() {
@@ -111,22 +109,21 @@ class App {
     });
   }
 
-  async compareNumbers() {
-    const userNumber = await this.getUserNumber();
-    const ballAndStrikeNumber = this.getResult(this.computerNumber, userNumber);
-    this.showMessage(ballAndStrikeNumber);
+  compareNumbers(computer, user) {
+    const result = this.getResult(computer, user);
+    this.showMessage(result);
 
-    if (ballAndStrikeNumber.strikeNum === 3) {
+    if (result.strikeNum === 3) {
       MissionUtils.Console.print(MESSAGE.GAMEEND);
       this.askToPlayAgain();
     } else {
-      this.compareNumbers();
+      this.getUserNumber();
     }
   }
 
   playNewGame() {
     this.generateComputerNumber();
-    this.compareNumbers();
+    this.getUserNumber();
   }
 
   play() {
