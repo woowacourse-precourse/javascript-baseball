@@ -85,4 +85,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("중복된 수는 입력할 수 없습니다.");
   });
+
+  test("숫자 0 입력 시", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["109"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("0은 입력할 수 없습니다.");
+  });
 });
