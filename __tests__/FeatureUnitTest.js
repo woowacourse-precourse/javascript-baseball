@@ -69,4 +69,32 @@ describe('기능 단위 목록별 테스트', () => {
       expect(() => app.isDigitValidation(inputs)).toThrow('잘못된 값 입력됨'),
     );
   });
+
+  test('기능5 유저 숫자야구 입력 테스트 (calcBaseBallDigit 메소드)', () => {
+    const inputDigits = [
+      [2, 4, 6],
+      [1, 6, 2],
+      [1, 3, 5],
+      [6, 7, 8],
+    ];
+    const randomDigits = [
+      [2, 4, 6],
+      [1, 5, 6],
+      [3, 5, 1],
+      [5, 2, 3],
+    ];
+    const baseBallBoards = [
+      { strike: 3, ball: 0 },
+      { strike: 1, ball: 1 },
+      { strike: 0, ball: 3 },
+      { strike: 0, ball: 0 },
+    ];
+
+    const app = new App();
+    baseBallBoards.forEach((Board, idx) => {
+      expect(
+        app.calcBaseBallDigit(inputDigits[idx], randomDigits[idx]),
+      ).toEqual(Board);
+    });
+  });
 });
