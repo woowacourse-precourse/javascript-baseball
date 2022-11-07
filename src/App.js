@@ -6,7 +6,6 @@ class App {
   constructor() {
     this.answer = [];
     this.userInput = "";
-    this.restartInput = "";
   }
 
   getBallCnt(includeOfNum) {
@@ -55,10 +54,7 @@ class App {
   }
 
   checkPlayingNum(inputNum, allowed) {
-    if (inputNum.length !== 3) {
-      return false;
-    }
-    if (inputNum.includes(0)) {
+    if (inputNum.length !== 3 || inputNum.includes(0)) {
       return false;
     }
     [...inputNum].forEach((str) => {
@@ -68,11 +64,9 @@ class App {
   }
 
   checkException(inputNum, checkStyle) {
-    const playingInput = 0;
-    const restartInput = 1;
-    if (checkStyle === playingInput) {
+    if (checkStyle === "playingInput") {
       return this.checkPlayingNum(inputNum, true);
-    } else if (checkStyle === restartInput) {
+    } else if (checkStyle === "restartInput") {
       return inputNum === "1" || inputNum === "2";
     }
   }
@@ -81,24 +75,21 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
-        if (!this.checkException(input, 1)) {
+        if (!this.checkException(input, "restartInput")) {
           throw new Error(
             "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다."
           );
         }
-        this.restartInput = input;
-        if (this.restartInput === "1") this.startGame();
-        else if (this.restartInput === "2") {
-          Console.print("게임 종료");
-          Console.close();
-        }
+        if (input === "1") this.startGame();
+        Console.print("게임 종료");
+        Console.close();
       }
     );
   }
 
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!this.checkException(input, 0)) {
+      if (!this.checkException(input, "playingInput")) {
         throw new Error("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
       }
       this.userInput = input;
