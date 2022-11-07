@@ -59,7 +59,8 @@ class App {
 
     // 정답일 경우
     if (correct === received) {
-      // 메시지 출력 함수로 [0, 3] 인자 전달;
+      // 메시지 설정 함수로 [0, 3] 인자 전달;
+      return this.setMessage([0, 3]);
     }
 
     // 같은 수가 존재하는 경우
@@ -68,7 +69,22 @@ class App {
       else if (received.indexOf(correct[i]) >= 0) points[0]++;
     }
 
-    // 메시지 출력 함수로 points를 인자로 전달
+    // 메시지 설정 함수로 points를 인자로 전달
+    return this.setMessage(points);
+  }
+
+  /**
+   * 유저 입력의 점수에 대한 메시지를 설정합니다.
+   * @param {Array<number>} pointsArray - 유저가 입력한 답변에 대한 점수가 담긴 배열
+   */
+  setMessage(pointsArray) {
+    const pointString = pointsArray.join("");
+    const [ball, strike] = pointsArray;
+    let message;
+    if (pointString === "03")
+      message = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    else if (pointString === "00") message = "낫싱";
+    else message = `${ball}볼 ${strike}스트라이크`;
   }
 }
 
