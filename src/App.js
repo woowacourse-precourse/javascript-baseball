@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { GAME_MESSAGE, CONFIRM, COMPUTER_NUMBER_RANGE } = require("./constant");
 const Counter = require("./Counter");
 const Printer = require("./Printer");
 const Validation = require("./Validation");
@@ -9,21 +10,24 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(GAME_MESSAGE.start);
     this.inputNumberFromUser();
   }
 
   getRandomNumber() {
     const randomNumberArr = [];
-    while (randomNumberArr.length !== 3) {
-      const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (randomNumberArr.length !== COMPUTER_NUMBER_RANGE.length) {
+      const randomNum = MissionUtils.Random.pickNumberInRange(
+        COMPUTER_NUMBER_RANGE.minimum,
+        COMPUTER_NUMBER_RANGE.maximum
+      );
       !randomNumberArr.includes(randomNum) && randomNumberArr.push(randomNum);
     }
     return randomNumberArr;
   }
 
   inputNumberFromUser() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+    MissionUtils.Console.readLine(GAME_MESSAGE.input, (inputNumber) => {
       const validation = new Validation();
       validation.isSingleDigitNaturalNumber(inputNumber);
       validation.isNumberWithoutDuplicate(inputNumber);
@@ -52,17 +56,14 @@ class App {
   }
 
   inputExitOrReStart() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (inputNumber) => {
-        this.checkExitOrRestart(inputNumber);
-      }
-    );
+    MissionUtils.Console.readLine(GAME_MESSAGE.confirm, (inputNumber) => {
+      this.checkExitOrRestart(inputNumber);
+    });
   }
 
   checkExitOrRestart(inputNumber) {
-    if (inputNumber === "1") return this.reStartGame(inputNumber);
-    if (inputNumber === "2") return this.exitGame(inputNumber);
+    if (inputNumber === CONFIRM.reStart) return this.reStartGame(inputNumber);
+    if (inputNumber === CONFIRM.exit) return this.exitGame(inputNumber);
     const validation = new Validation();
     return validation.isConfirmInput();
   }
