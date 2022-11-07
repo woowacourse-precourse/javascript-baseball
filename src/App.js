@@ -3,24 +3,29 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { ERROR_MSG, GAME_STATE_MSG } = require("./errorMsg");
 
 class App {
-	get getComNum() {
+	constructor() {
+		this.comNumber = [];
+	}
+
+	play() {
+		this.comNumber = this.makeComNum();
+
+		this.gameStart(this.comNumber);
+	}
+	makeComNum() {
 		let arr = [];
-		while (arr.length < 3) {
+		for (let count = 0; count < 3; count++) {
 			let num = MissionUtils.Random.pickNumberInRange(1, 9);
 			if (!arr.includes(num)) arr.push(num);
 		}
 		return arr;
 	}
 
-	play() {
-		const comNumber = this.getComNum;
-
-		this.gameStart(comNumber);
-	}
 	gameStart(comNumber) {
 		MissionUtils.Console.readLine(GAME_STATE_MSG.READY, (userInput) => {
 			const arr = userInput.split("").map((ele) => Number(ele));
 			const userNumber = this.inputValidFn(arr);
+			console.log(comNumber, arr);
 			const [ball, strike] = this.gameResult(comNumber, userNumber);
 		});
 	}
