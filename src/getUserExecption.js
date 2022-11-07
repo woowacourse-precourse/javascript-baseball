@@ -16,7 +16,7 @@ const changeNumberToArray = (input) => {
 };
 
 const checkLength = (arr) => {
-  return arr.length > 3 ? false : true;
+  return arr.length !== 3 ? false : true;
 };
 
 const checkIsNumber = (arr) => {
