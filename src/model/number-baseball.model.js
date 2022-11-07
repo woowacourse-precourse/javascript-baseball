@@ -34,10 +34,9 @@ class NumberBaseballModel {
     return strArray.every((num) => CONSTANTS.NUMBERS.includes(num));
   }
 
-  async generateNum() {
-    // 리팩토링 필요!!
+  generateNum() {
     while (this.computer.length < CONSTANTS.INPUT_LENGTH) {
-      const number = await MissionUtils.Random.pickNumberInRange(
+      const number = MissionUtils.Random.pickNumberInRange(
         CONSTANTS.MIN_NUMBER,
         CONSTANTS.MAX_NUMBER,
       );
@@ -48,11 +47,38 @@ class NumberBaseballModel {
     return this;
   }
 
-  getScore(strArray) {}
+  getScore(strArray) {
+    return strArray.reduce((acc, cur, idx) => this.findNumState(acc, cur, idx), {
+      nothing: 0,
+      ball: 0,
+      strike: 0,
+    });
+  }
 
-  getBalls() {}
+  findNumState(acc, strNum, index) {
+    if (this.isStrike(strNum, index)) {
+      return { ...acc, strike: acc.strike + 1 };
+    } else if (this.isBall(strNum)) {
+      return { ...acc, ball: acc.ball + 1 };
+    }
+    return { ...acc, nothing: acc.nothing + 1 };
+  }
 
-  getStrikes() {}
+  isBall(strNum) {
+    return this.computer.includes(strNum);
+  }
+
+  isStrike(strNum, index) {
+    return this.computer.indexOf(strNum) === index;
+  }
+
+  isAnswer(result) {
+    return result.strike === CONSTANTS.INPUT_LENGTH;
+  }
+
+  clear() {
+    this.computer = [];
+  }
 }
 
 module.exports = NumberBaseballModel;
