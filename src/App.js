@@ -95,10 +95,10 @@ class App {
     const winningMessage = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
     if (message === "승리") {
       Console.print(winningMessage);
-      // 재시작 여부 물어보기
+      this.askRestart();
     } else {
       Console.print(message);
-      askForNumbers();
+      this.askForNumbers();
     }
   }
 }
