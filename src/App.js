@@ -13,8 +13,7 @@ class App {
 
   enterUserInput(computerValue) {
     Console.readLine("숫자를 입력해주세요 : ", (userInputValue) => {
-      // 여기서 입력된 값을 비교하는 함수를 따로 만든다.
-      const checkNum = /^[1-9]{3}/;
+      const checkNum = /^[1-9]{3,3}$/;
       if (!checkNum.test(userInputValue)) {
         throw new Error("잘못된 값 입니다.");
       } else {
@@ -74,7 +73,7 @@ class App {
       }
     }
 
-    // console.log(computerRandomNum.join(""), "randomNum"); // ❌
+    console.log(computerRandomNum.join(""), "randomNum"); // ❌
 
     return computerRandomNum.join("");
   }
