@@ -1,4 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const { validateThreeFigures, validateNextAction } = require("./modules/validation");
 
 class App {
   play() {
@@ -26,17 +27,16 @@ class App {
   getUsersPrediction(randomNumber) {
     Console.readLine('숫자를 입력해주세요 : ', (prediction) => {
       console.log(prediction);
-      if (!this.validateThreeFigures(prediction)) {
+      if (!validateThreeFigures(prediction)) {
         throw '잘못된 값을 입력했습니다!';
       }
       const convertedNumber = prediction.split('').map(Number);
       console.log(convertedNumber);
       if (this.isRightAnswer(randomNumber, convertedNumber)) {
-        Console.print('3스트라이크');
-        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        this.showCorrectMessage();
         this.getUsersNextAction();
       } else if (this.isNothing(randomNumber, convertedNumber)) {
-        Console.print('낫싱');
+        this.showNothingMessage();
         this.getUsersPrediction(randomNumber);
       } else {
         const [ballCount, strikeCount] = this.calculateCount(randomNumber, convertedNumber);
@@ -80,7 +80,7 @@ class App {
 
   getUsersNextAction() {
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userInput) => {
-      if (!this.validateNextAction(userInput)) {
+      if (!validateNextAction(userInput)) {
         throw '잘못된 값을 입력했습니다!'
       } else if (userInput === '1') {
         const randomNumber = this.makeRandomNumber();
@@ -90,32 +90,6 @@ class App {
         Console.close();
       }
     })
-  }
-
-  validateThreeFigures(userInput) {
-    // 'asd' '1234' '122'
-    const regex = /[^1-9]/g;
-    if (userInput.length !== 3) {
-      // 3자리가 아닌경우 asdf 1234
-      return false;
-    } else if (new Set(userInput).size !== 3) {
-      // 중복숫자가있는경우 113
-      return false;
-    } else if (regex.test(userInput)) {
-      // 숫자가아닌 문자열이 있는 경우
-      return false;
-    } else {
-      return true;
-    }
-    
-  }
-
-  validateNextAction(userInput) {
-    if (!userInput === '1' || !userInput === '2') {
-      return false;
-    } else {
-      return true;
-    }
   }
 }
 
