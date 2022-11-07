@@ -30,6 +30,11 @@ class User {
     if (userNumList.includes("-")) return false;
     return true;
   }
+
+  checkNoDuplicate(userNum) {
+    const userNumSet = new Set([...userNum]);
+    return userNumSet.size === 3;
+  }
 }
 
 class App {
