@@ -29,7 +29,7 @@ test('1 = 1', () => {
 
 test('상대방 배열 생성', () => {
   const app = new App();
-  const ComputerArr = app.makeAnswer();
+  const ComputerArr = app.createAnswer();
   expect(ComputerArr).toHaveLength(3);
 });
 
@@ -87,4 +87,18 @@ test('사용자 숫자 상대방 숫자 비교4', () => {
   messages.forEach((output) => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
   });
+});
+
+test('judgeResult 메서드 return 테스트(true)', () => {
+  const app = new App();
+  const SPYFunction = jest.spyOn(app, 'endingOption');
+  app.judgeResult(true);
+  expect(SPYFunction).toBeCalled();
+});
+
+test('judgeResult 메서드 return 테스트(false)', () => {
+  const app = new App();
+  const SPYFunction = jest.spyOn(app, 'enterNumber');
+  app.judgeResult(false);
+  expect(SPYFunction).toBeCalled();
 });
