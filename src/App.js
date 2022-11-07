@@ -52,19 +52,22 @@ class App {
   isSameNumber(answer, input) {
     return answer === input;
   }
-  compareToAnswer(answers, inputs) {
+  calculateStrike(answer, answerIdx, input, inputIdx, score) {
+    if (!this.isSameNumber(answer, input)) return;
+    // 만약 수가 같을 떄, 인덱스의 값 또한 같다면
+    if (this.isSameNumber(answerIdx, inputIdx)) {
+      score.strike += 1;
+    } else {
+      score.ball += 1;
+    }
+  }
+  compare(answers, inputs) {
     const score = { strike: 0, ball: 0 };
 
     answers.forEach((answer, answerIdx) => {
-      inputs.forEach((input, inputIdx) => {
-        if (!this.isSameNumber(answer, input)) return;
-        // 만약 수가 같을 떄, 인덱스의 값 또한 같다면
-        if (this.isSameNumber(answerIdx, inputIdx)) {
-          score.strike += 1;
-        } else {
-          score.ball += 1;
-        }
-      });
+      inputs.forEach((input, inputIdx) =>
+        this.calculateStrike(answer, answerIdx, input, inputIdx, score)
+      );
     });
 
     return score;
@@ -90,7 +93,7 @@ class App {
       this.inputs = inputs.split("").map((v) => parseInt(v));
       this.validateInput(this.inputs);
 
-      const score = this.compareToAnswer(this.answer, this.inputs);
+      const score = this.compare(this.answer, this.inputs);
       this.process(score);
     });
   }
