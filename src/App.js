@@ -3,6 +3,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const Message = require('./Message');
 const Random = require('./Random');
 const Game = require('./Game');
+const ReadLine = require('./ReadLine');
 
 const { close } = MissionUtils.Console;
 
@@ -18,6 +19,8 @@ class App {
   #mesage = new Message();
 
   #game = new Game();
+
+  #readLine = new ReadLine();
 
   isStart() {
     return this.#isStart;
@@ -88,6 +91,22 @@ class App {
         throw new Error('잘못된 입력을 하였습니다.');
       }
     }
+  }
+
+  play() {
+    if (!this.isStart()) {
+      this.init();
+    }
+
+    this.#readLine.input(Message.input(), (userInput) => {
+      this.userInteraction(userInput, this.#computerInput);
+
+      if (this.isFinish()) {
+        this.#readLine.input(Message.confirm(), ([confirmNumber]) => {
+          this.userConfirm(confirmNumber);
+        });
+      }
+    });
   }
 }
 
