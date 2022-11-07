@@ -1,6 +1,13 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
 const INVALID_INPUT_ERR = 'invalid input error';
+const SPACE_BAR = ' ';
+const END_GAME = 'end game';
+const HINT_UNITS = ['ball', 'strike'];
+const HINT_UNITS_OBJ = {
+  ball: '볼',
+  strike: '스트라이크',
+};
 
 class App {
   play() {
@@ -43,12 +50,14 @@ class App {
     return this.answer[idx] !== number && this.answer.includes(number);
   }
 
+  getMessage(cnt, msgUnitStr) {
+    if (cnt === 0) return '';
+
+    return `${cnt}${msgUnitStr}`;
+  }
+
   evaluate(input) {
-    if (this.answer === input) {
-      // 게임 종료.
-      this.terminate();
-      return;
-    }
+    if (this.answer === input) return END_GAME;
 
     const cnt = {
       strike: 0,
@@ -62,15 +71,27 @@ class App {
         cnt.ball += 1;
       }
     }
+
+    const hintMessage = HINT_UNITS.map((hintUnit) => this.getMessage(cnt[hintUnit], HINT_UNITS_OBJ[hintUnit])).join(
+      SPACE_BAR
+    );
+
+    return hintMessage !== SPACE_BAR ? hintMessage : '낫싱';
   }
 
   validate(input) {
     const regExp = new RegExp(/^[1-9]{1,3}$/);
 
     try {
-      if (regExp.test(input) && !this.isDuplicated(input)) {
+      if (regExp.test(input) && !isDuplicated(input)) {
         // 입력값이 3자리 숫자이고, 중복숫자가 없다면 다음 힌트제공 기능을 이용한다.
-        this.evaluate(input);
+        const hintMessage = this.evaluate(input);
+        if (hintMessage === END_GAME) {
+          return this.terminate();
+        } else {
+          Console.print(hintMessage);
+          return this.getUserInput(this.validate);
+        }
       } else {
         // 입력이 잘못되었다면 예외를 발생시키고 게임을 종료시킨다.
         throw new Error(INVALID_INPUT_ERR);
