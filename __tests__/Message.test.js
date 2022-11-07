@@ -74,3 +74,14 @@ describe('input()', () => {
     expect(logSpy).toHaveBeenCalledWith('숫자를 입력해 주세요 : ');
   });
 });
+
+describe('count()', () => {
+  test('3볼 문구를 출력한다.', () => {
+    const message = new Message();
+    const logSpy = getLogSpy();
+
+    message.print(Message.count(3));
+
+    expect(logSpy).toHaveBeenCalledWith('3볼');
+  });
+});
