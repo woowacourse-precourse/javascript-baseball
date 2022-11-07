@@ -48,4 +48,15 @@ describe("기능 테스트", () => {
     expect(app.countBallAndStrike(computerNumber, userNumber)).toEqual([2, 1]);
   });
 
+  test("기능 6, 결과 출력하기 - 낫싱", () => {
+    const logSpy = getLogSpy();
+    const checkResult = "nothing";
+
+    const app = new App();
+    app.printResult(checkResult);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('낫싱')
+    );
+  });
 });
