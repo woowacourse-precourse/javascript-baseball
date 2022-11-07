@@ -67,8 +67,7 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', 
       (answer) => {
         if (answer === '1') {
-          this.init();
-          this.guessingNumber();
+          this.play();
         } else if (answer !== '2') {
           throw new Error('Invalid input');
         }
