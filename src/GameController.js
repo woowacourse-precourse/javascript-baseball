@@ -4,6 +4,7 @@ const { Console } = MissionUtils;
 
 const Validation = require("./Validatoin");
 const Computer = require("./Computer");
+const { GameMessage } = require("./Contants");
 
 class GameController {
   computer = new Computer();
@@ -25,7 +26,7 @@ class GameController {
 
   // 게임 시작
   gameStart() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(GameMessage.GAME_START);
     this.computer.setRandomNumbers();
     this.saveUserInputs();
   }
@@ -45,28 +46,46 @@ class GameController {
     });
 
     this.printScoreMessage();
-
-    if(this.score.STRIKE === 3) {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.isAginOrQuit();
-    } else {
-      this.saveUserInputs();
-    }
+    this.isWinOrUserInputAgain();
   }
 
+  // 스트라이크가 3개일 경우 게임 
+  isWinOrUserInputAgain() {
+    if(this.score.STRIKE === 3) {
+      return this.gameWin();
+    } 
+    
+    // 다시 유저 입력값 받기
+    this.saveUserInputs();
+  }
+
+  // 3스트라이크일 경우에
+  gameWin() {
+    // 게임 종료 메시지 출력
+    Console.print(GameMessage.GAME_WIN);
+    // 게임종료 | 다시하기 기능
+    this.isAginOrExit();
+  }
+
+  // 유저 입력값 저장
   saveUserInputs() {
-    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    Console.readLine(GameMessage.PLEASE_INPUT_NUMBER, (answer) => {
+      // 유저 입력값 유효성 검사
       this.validation.isValidUserInputNumber(answer);
+      // 유저 입력값 저장
       this.userInputs = answer;
+      // 점수 계산
       this.calculationScore();
     });
   }
 
+  // 점수에 따른 메시지 출력
   printScoreMessage() {
     const message = this.scoreMessage();
     Console.print(message);
   }
 
+  // 점수에 따른 메시지 반환
   scoreMessage() {
     const BALL = this.score.BALL;
     const STRIKE = this.score.STRIKE;
@@ -81,8 +100,8 @@ class GameController {
   }
 
   // 다시하기 / 게임종료 중 선택
-  isAginOrQuit() {
-    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
+  isAginOrExit() {
+    Console.readLine(GameMessage.GAME_AGAIN_OR_EXIT, (answer) => {
       this.validation.isValidUserSettingNumber(answer);
       if(answer === '1') {
         return this.gameStart();
