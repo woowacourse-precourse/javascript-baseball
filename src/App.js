@@ -1,9 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const RESTART_CODE = "1";
+const EXIT_CODE = "2";
+
 const PLAYER_MESSAGE = "숫자를 입력해주세요 : ";
 const PLAYER_ERROR_MESSAGE = "올바른 숫자를 입력해주세요.";
 const START_MESSAGE = "숫자 야구 게임을 시작합니다.";
 const END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+const RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART_CODE}, 종료하려면 ${EXIT_CODE}를 입력하세요.\n`;
 
 const printGameStart = () => {
   MissionUtils.Console.print(START_MESSAGE);
@@ -75,8 +79,13 @@ const isCorrect = ([strike, ball]) => {
   return strike === 3 && ball === 0;
 };
 
+const printRestartMessage = () => {
+  MissionUtils.Console.readLine(RESTART_MESSAGE, (code) => {});
+};
+
 const restartGame = () => {
   MissionUtils.Console.print(END_MESSAGE);
+  printRestartMessage();
 };
 
 const game = (computerNumber) => {
