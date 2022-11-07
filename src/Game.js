@@ -37,17 +37,14 @@ class Game {
     playGame() {    
         Console.readLine("숫자를 입력해주세요 : ", usersNumber => {
             exception(usersNumber);
-
-            // console.log(this.computersNumber);
-            usersNumber = [...usersNumber].map(idx => parseInt(idx));
-            // console.log(usersNumber);
+            usersNumber = this.usersArray(usersNumber);
   
             // 볼 스트라이크 갯수 구하기, resultMessage함수 결과 출력
             const [howManyStrike, howManyBall] = this.getStrikeAndBall(this.computersNumber, usersNumber);
             this.resultMessage(howManyStrike, howManyBall);
             
             if (howManyStrike !== STRIKE_VALUE) this.playGame();
-            if (howManyStrike === STRIKE_VALUE) this.getRightAnswer();
+            if (howManyStrike === STRIKE_VALUE) this.gameOver();
         });
     }
     
@@ -58,6 +55,10 @@ class Game {
             if (choice === GAME_EXIT) return this.pickedClose();
             return pickedWrongChoice();
         });
+    }
+
+    usersArray(usersNumber) {
+        return [...usersNumber].map(idx => parseInt(idx));
     }
 
     pickedRestart() {
