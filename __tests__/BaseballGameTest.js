@@ -89,7 +89,28 @@ describe('내가 구현한 기능 테스트',()=>{
       const app = new App();
       app.restartOrExit(3);
     }).toThrow();
+
+  });
+
+  test('checkCorrectAnswer 테스트 코드',()=>{
+    const app = new App();
+    const spyCheck = jest.spyOn(app, 'checkRestart');
+    const spyPlay = jest.spyOn(app, 'playTheGame');
     
+    app.hintString = '3스트라이크';
+    app.checkCorrectAnswer();
+    expect(spyCheck).toBeCalledTimes(1);
+    expect(spyPlay).toBeCalledTimes(0);
+    
+    spyCheck.mockClear();
+    spyPlay.mockClear();
+
+    app.hintString = '1볼 1스트라이크';
+    app.checkCorrectAnswer();
+    expect(spyCheck).toBeCalledTimes(0);
+    expect(spyPlay).toBeCalledTimes(1);
+    
+    MissionUtils.Console.close();
   });
 })
 
