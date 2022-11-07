@@ -4,11 +4,6 @@ const { render } = require("node-sass");
 class App {
   randomNumbers;
   strikeCount;
-  gameResult;
-
-  constructor() {
-    this.setRandomNumbers();
-  }
 
   setRandomNumbers() {
     this.randomNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
@@ -18,7 +13,7 @@ class App {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       inputExceptionHandling(userInput);
       const inputNumbers = userInput.split("").map(Number);
-      this.checkInputNumbers(inputNumbers,this.randomNumbers)
+      this.checkInputNumbers(inputNumbers, this.randomNumbers);
     });
   }
 
@@ -47,33 +42,33 @@ class App {
         : null;
     });
 
-    return [ballCount, this.strikeCount];
+    return makeCheckedResult([ballCount, this.strikeCount]);
   }
 
   makeCheckedResult([ballCount, strikeCount]) {
     if (ballCount == 0 && strikeCount == 0) {
-      return "낫싱";
+      return this.showCheckedResult("낫싱");
     }
+
     const strikeResult = `${strikeCount}스트라이크`;
     const ballResult = `${ballCount}볼`;
 
     if (ballCount > 0 && strikeCount == 0) {
-      return ballResult;
+      return this.showCheckedResult(ballResult);
     }
     if (ballCount == 0 && strikeCount > 0) {
-      return strikeResult;
+      return this.showCheckedResult(strikeResult);
     }
-    return ballResult + " " + strikeResult;
+    return this.showCheckedResult(ballResult + " " + strikeResult);
   }
 
-  showCheckedResult(result){
-    MissionUtils.Console.print(result)
-    if(this.strikeCount==3){
-      this.checkEndMessage()
+  showCheckedResult(result) {
+    MissionUtils.Console.print(result);
+    if (this.strikeCount == 3) {
+      this.checkEndMessage();
     }
-    this.getInputNumbers()
+    this.getInputNumbers();
   }
-
 
   checkGameEndMessage() {
     MissionUtils.Console.print(
@@ -81,20 +76,20 @@ class App {
     );
     MissionUtils.Console.readLine("", (answer) => {
       if (answer == "1") {
-        render();
+        this.play();
       }
       if (answer == "2") {
+        MissionUtils.Console.print("게임 종료");
+        MissionUtils.Console.close();
       }
     });
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
+    this.setRandomNumbers();
+    this.getInputNumbers();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
