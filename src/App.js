@@ -1,4 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const GAME_SETTING = require('./utils/constants');
+const { MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT } = GAME_SETTING;
 
 class App {
   play() {
@@ -7,7 +9,7 @@ class App {
   }
 
   playGame() {
-    const computer = this.createUniqueNumbers(1, 9, 3);
+    const computer = this.createUniqueNumbers(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT);
     this.guess(computer);
   }
 
@@ -25,31 +27,33 @@ class App {
   guess(computer) {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
       if (!this.validateUserGuess(input)) {
-        throw new Error('1부터 9까지 서로 다른 3자리 숫자를 입력해주세요.');
+        throw new Error(
+          `${MIN_NUMBER}부터 ${MAX_NUMBER}까지 서로 다른 ${NUMBER_COUNT}자리 숫자를 입력해주세요.`
+        );
       }
 
       const player = Array.from(input, Number);
       const result = this.getResult(computer, player);
       Console.print(result);
 
-      if (result !== '3스트라이크') {
+      if (result !== `${NUMBER_COUNT}스트라이크`) {
         this.guess(computer);
       } else {
-        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        Console.print(`${NUMBER_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
         this.askPlayAgain();
       }
     });
   }
 
   validateUserGuess(input) {
-    if (input.length !== 3) return false;
+    if (input.length !== NUMBER_COUNT) return false;
 
     const inputNumbers = Array.from(input, Number);
     if (inputNumbers.some((number) => !Number.isInteger(number))) return false;
-    if (inputNumbers.some((number) => number === 0)) return false;
+    if (inputNumbers.some((number) => number < MIN_NUMBER || number > MAX_NUMBER)) return false;
 
     const inputNumberSet = new Set(inputNumbers);
-    if (inputNumberSet.size !== 3) return false;
+    if (inputNumberSet.size !== NUMBER_COUNT) return false;
 
     return true;
   }
