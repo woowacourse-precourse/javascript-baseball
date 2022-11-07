@@ -7,11 +7,18 @@ const MESSAGES = {
   restart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 class App {
+  constructor() {
+    this.computerNum = "";
+  }
   play() {
     this.print(MESSAGES.start);
+    this.computerNum = getComputerNum();
   }
   print(message) {
     MissionUtils.Console.print(message);
+  }
+  getComputerNum() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join("");
   }
 }
 const app = new App();
