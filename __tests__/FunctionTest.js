@@ -1,6 +1,6 @@
 const App = require("../src/App");
 describe("기능 구현 함수 테스트", () => {
-    test("checkInputError 테스트", () => {
+    test("checkInputError test", () => {
         const inputs = [
             [1,1,2],
             [1,2],
@@ -25,7 +25,7 @@ describe("기능 구현 함수 테스트", () => {
         
     });
 
-    test("setComputerNum 테스트", () => {
+    test("setComputerNum test", () => {
         const app = new App();
         const computer = app.setComputerNum();
         expect(() => {
@@ -33,7 +33,7 @@ describe("기능 구현 함수 테스트", () => {
         }).not.toThrow()
     });
 
-    test("countStrikeAndBall 테스트", () => {
+    test("countStrikeAndBall test", () => {
         const computer = [1,2,3]
         const inputs = [
             [1,2,3],
@@ -60,7 +60,7 @@ describe("기능 구현 함수 테스트", () => {
         })
     });
 
-    test("resultString 테스트", () => {
+    test("resultString test", () => {
         const results = [
             {strike: 3, ball:0},
             {strike: 2, ball:0},
@@ -85,4 +85,4 @@ describe("기능 구현 함수 테스트", () => {
             expect(app.resultString(results[idx])).toEqual(message);
         })
     });
-}) 
+});
