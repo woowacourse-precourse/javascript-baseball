@@ -26,6 +26,7 @@ class App {
   input() {
     Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.checkErrorInputNumber(inputNumber);
+      this.checkStrikeInputNumber(inputNumber);
     });
   }
 
@@ -43,6 +44,16 @@ class App {
     ) {
       throw new Error("잘못된 입력 값입니다.");
     }
+  }
+
+  checkStrikeInputNumber(inputNumber) {
+    let strike = 0;
+    let splitInputNumber = [...inputNumber];
+    splitInputNumber.forEach((ball) => {
+      if (this.computerNumber.includes(Number(ball))) {
+        strike += 1;
+      }
+    });
   }
 }
 
