@@ -4,7 +4,7 @@ class GetComputerInput {
   }
   makeRandomNumbers() {
     const storeNumberArray = [];
-    while (newArr.length < 3) {
+    while (storeNumberArray.length < 3) {
       const storeNumber = this.missionRandom.pickNumberInRange(1, 9);
       if (!storeNumberArray.includes(storeNumber)) {
         storeNumberArray.push(storeNumber);
