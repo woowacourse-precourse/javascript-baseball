@@ -19,7 +19,7 @@ const ERROR_MESSAGE = {
   WRONG_REPLY: "잘못된 값을 입력하셨습니다.",
 };
 
-const BASEBALLTERM = {
+const BASEBALL_TERM = {
   STRIKE: "스트라이크",
   BALL: "볼",
   NOTHING: "낫싱",
@@ -50,15 +50,14 @@ class App {
 
     await MissionUtils.Console.readLine(MESSAGE.ASKNUMBER, (inputNumber) => {
       userNumber = Array.from(inputNumber, Number);
+      try {
+        this.checkValidity(userNumber);
+      } catch (e) {
+        MissionUtils.Console.print(e);
+        MissionUtils.Console.close();
+      }
     });
-
-    try {
-      this.checkValidity(numberArr);
-    } catch (e) {
-      MissionUtils.Console.print(e);
-      MissionUtils.Console.close();
-    }
-
+    
     return userNumber;
   }
 
@@ -89,15 +88,15 @@ class App {
   showMessage(matchNum) {
     const { ballNum, strikeNum } = matchNum;
 
-    let message = `${ballNum === 0 ? "" : ballNum + BASEBALLTERM.BALL} ${
-      strikeNum === 0 ? "" : strikeNum + BASEBALLTERM.STRIKE
+    let message = `${ballNum === 0 ? "" : ballNum + BASEBALL_TERM.BALL} ${
+      strikeNum === 0 ? "" : strikeNum + BASEBALL_TERM.STRIKE
     }`;
 
     if (ballNum === 0 && strikeNum === 0) {
-      message = BASEBALLTERM.NOTHING;
+      message = BASEBALL_TERM.NOTHING;
     }
-
-    MissionUtils.Console.print(message.trim());
+    return message.trim();
+    //  MissionUtils.Console.print(message.trim());
   }
 
   askToPlayAgain() {
