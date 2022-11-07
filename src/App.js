@@ -1,11 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { GAME_MESSAGES, RANGE_NUMBER, ERROR_MESSAGES } = require("./Constant");
+
+console.log(ERROR_MESSAGES);
 
 class App {
   constructor() {
     this.GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
   }
   play() {
-    MissionUtils.Console.print(this.GAME_START_MESSAGE);
+    MissionUtils.Console.print(GAME_MESSAGES.START);
     App.startGame();
   }
 
@@ -37,7 +40,7 @@ class App {
   }
 
   static getUserGameOptionValue() {
-    return MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (input) => {
+    return MissionUtils.Console.readLine(GAME_MESSAGES.END_OPTION, (input) => {
       MissionUtils.Console.print(`입력하신 숫자는 ${input} 입니다.`);
       this.gameOptionValue = input;
       App.validateUserGameOptionValueInput();
@@ -50,15 +53,15 @@ class App {
   }
 
   static validateUserGameOptionValueInput() {
-    if (+this.gameOptionValue !== 1 && +this.gameOptionValue !== 2) throw new Error("1,2 만 입력해주세요");
+    if (+this.gameOptionValue !== 1 && +this.gameOptionValue !== 2) throw new Error(ERROR_MESSAGES.ONLY_NUMBER_1_AND_2);
     else App.runByGameOptionValue();
   }
 
   static validateUserInput(userNumber) {
-    if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error("숫자를 입력해주세요 어플리케이션을 종료합니다");
-    if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error("3자리수를 입력해주세요. 어플리케이션을 종료합니다");
-    if (new Set([...App.convertUserNumberToArray()]).size !== 3) throw new Error("중복되지 않은 숫자 3자리를 입력해주세요");
-    if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error("소수점과 마이너스는 허용되지않습니다.");
+    if (typeof +userNumber !== "number" || Number.isNaN(Number(userNumber))) throw new Error(ERROR_MESSAGES.ONLY_NUMBER);
+    if (userNumber.toString().length > 3 || userNumber.toString().length < 3) throw new Error(ERROR_MESSAGES.ONLY_THREE_LENGTH_NUMBER);
+    if (new Set([...App.convertUserNumberToArray()]).size !== 3) throw new Error(ERROR_MESSAGES.NOT_DUPLICATE);
+    if (!(+userNumber % 1 === 0) || Math.sign(+userNumber) === -1) throw new Error(ERROR_MESSAGES.NOT_DECIMAL_AND_MINUS);
     else this.isValidUserNumber = true;
     if (this.isValidUserNumber === true) App.compareNumber();
   }
@@ -91,7 +94,7 @@ class App {
   static generateComputerNumberArray() {
     const computerNumberArray = [];
     while (computerNumberArray.length < 3) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      const randomNumber = MissionUtils.Random.pickNumberInRange(RANGE_NUMBER.MIN_RANGE, RANGE_NUMBER.MAX_RANGE);
       if (!computerNumberArray.includes(randomNumber)) computerNumberArray.push(randomNumber);
     }
     return computerNumberArray;
