@@ -12,6 +12,16 @@ class App {
       }
     }
   }
+
+  userInputNumber(COMPUTER_NUMBER) {
+    MissionUtils.Console.readLine(
+      "숫자를 입력해주세요 : ",
+      (userNumberInput) => {
+        this.occurredError(userNumberInput);
+        this.checkNumbers(COMPUTER_NUMBER, userNumberInput);
+      }
+    );
+  }
 }
 
 module.exports = App;
