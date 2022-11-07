@@ -244,6 +244,25 @@ describe("숫자 야구 게임", () => {
     }).toThrow(ERROR.NOT_THREE_NUMBER);
   });
 
+  test("정답 후 게임 종료", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["135", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 
 
 
