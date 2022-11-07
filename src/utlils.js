@@ -15,4 +15,13 @@ function getBallCount(userInputNumber, targetNumber) {
       number !== [...userInputNumber][index]
   ).length;
 }
+
+function getStrikeCount(userInputNumber, targetNumber) {
+  return [...targetNumber].filter(
+    (number, index) => number === [...userInputNumber][index]
+  ).length;
+}
+
 module.exports.getTargetNumber = getTargetNumber;
+module.exports.getBallCount = getBallCount;
+module.exports.getStrikeCount = getStrikeCount;
