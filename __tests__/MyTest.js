@@ -81,5 +81,17 @@ describe("게임 시작", () => {
           expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
         });
     });
+    test("게임 종료 후 입력 확인", () => {
+        const randoms = [4, 5, 6];
+        const answers = ["456", "3"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
     
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
+
 });
