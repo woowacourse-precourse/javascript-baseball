@@ -70,30 +70,30 @@ class App {
   }
 
   play() {
-    const PLAYING = true;
-    while (PLAYING) {
+    let playing = true;
+    while (playing) {
       MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
-      const COMNUM = this.makeComputerNumber();
-      const CLEAR = true;
-      while (CLEAR) {
+      const COM_NUMBER = this.makeComputerNumber();
+      let clear = true;
+      while (clear) {
         MissionUtils.Console.readLine("숫자를 입력해주세요:", (num) => {
           this.checkError(num);
-          const USERNUM = String(num).split("");
-          const BALLCNT = this.checkBall(COMNUM, USERNUM);
-          const STRIKECNT = this.checkStrike(COMNUM, USERNUM);
-          this.printResult(BALLCNT, STRIKECNT);
-          if (STRIKECNT == 3) {
+          const USER_NUMBER = String(num).split("");
+          const BALL_CNT = this.checkBall(COM_NUMBER, USER_NUMBER);
+          const STRIKE_CNT = this.checkStrike(COM_NUMBER, USER_NUMBER);
+          this.printResult(BALL_CNT, STRIKE_CNT);
+          if (STRIKE_CNT == 3) {
             MissionUtils.Console.print(
               "3개의 숫자를 모두 맞히셨습니다! 게임종료\n"
             );
-            CLEAR = false;
+            clear = false;
           }
         });
       }
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (answer) => {
-          if (answer == 2) PLAYING = false;
+          if (answer == 2) playing = false;
         }
       );
     }
