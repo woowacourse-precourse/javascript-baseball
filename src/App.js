@@ -39,10 +39,13 @@ class App {
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', this.handleGame);
+    MissionUtils.Console.readLine(
+      '숫자를 입력해주세요 : ',
+      this.handleGame.bind(this)
+    );
   }
 
-  handleGame = (answer) => {
+  handleGame(answer) {
     this.input = this.vaildInput(answer);
     this.countResult = this.decideCount(this.count, this.input);
     this.printMessage(this.makeCountMessage(this.countResult));
@@ -53,9 +56,9 @@ class App {
       this.printMessage(MESSAGE.RESTART);
       this.inputSignal();
     }
-  };
+  }
 
-  handleRestart = (answer) => {
+  handleRestart(answer) {
     if (answer === '1') {
       this.replay();
     } else if (answer === '2') {
@@ -63,9 +66,9 @@ class App {
     } else {
       throw new Error(ERROR.INVAILD_INPUT);
     }
-  };
+  }
   inputSignal() {
-    MissionUtils.Console.readLine('', this.handleRestart);
+    MissionUtils.Console.readLine('', this.handleRestart.bind(this));
   }
 
   vaildInput(input) {
