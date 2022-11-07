@@ -1,4 +1,3 @@
-// import * as MissionUtils from "@woowacourse/mission-utils";
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
@@ -20,7 +19,6 @@ class App {
   isThreeDifferNum(numArr) {
     const set = new Set(numArr);
     const isNumber = Number(numArr.join(''));
-    console.log(set);
     if (isNumber && (numArr.length === 3) && (numArr.length === set.size)) {
       return true;
     } else {
@@ -35,21 +33,16 @@ class App {
       nothing: 0,
     };
 
-    //match함수를 사용하기 위해 computerNum을 문자열로 변경
-    const stringComputerNum = computerNumArr.join('');
-    console.log(stringComputerNum);
+
     for (let index = 0; index < 3; index++) {
       if (userNumArr[index] === computerNumArr[index]) {
         ballCount.strike++;
-        console.log("스트라이크" + ballCount.strike);
         continue;
-      } else if (stringComputerNum.match(userNumArr[index]) === userNumArr[index]) {
+      } else if (computerNumArr.indexOf(userNumArr[index]) > -1) {
         ballCount.ball++;
-        console.log("볼" + ballCount.ball);
         continue;
       }
       ballCount.nothing++;
-      console.log("낫싱" + ballCount.nothing);
     }
 
     return ballCount;
@@ -65,7 +58,6 @@ class App {
     if (ballCount.nothing === 3) {
       MissionUtils.Console.print('낫싱');
     }
-    MissionUtils.Console.print('\n');
   }
 
   restartOrExit() {
@@ -74,7 +66,7 @@ class App {
         return new App();
       } else if (answer === 2) {
         return this.gameExit();
-      } else{
+      } else {
         this.restartOrExit();
       }
     });
@@ -101,18 +93,17 @@ class App {
       if (ballCount.strike === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
         return this.restartOrExit();
-      }else{
+      } else {
         this.userPickNum(stringComputerNumArr);
       }
     });
   }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.\n');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const stringComputerNumArr = this.computerNum().map(function (element) {
       return element.toString();
     });
-    console.log(stringComputerNumArr);
 
     this.userPickNum(stringComputerNumArr);
   }
