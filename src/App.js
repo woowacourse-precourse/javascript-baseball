@@ -17,7 +17,22 @@ class App {
       Function.throwInvalidInputError(input);
       this.resetCountBoard();
       this.compareUserAndComputer(input);
+      this.makeResult();
     });
+  }
+
+  makeResult() {
+    if (this.countBoard.strike === 0 && this.countBoard.ball === 0) {
+      Console.print(COUNTBOARDRESULT.NOTHING);
+    } else if (this.countBoard.strike === 0) {
+      Console.print(COUNTBOARDRESULT.NOSTRIKE(this.countBoard.ball));
+    } else if (this.countBoard.ball === 0) {
+      Console.print(COUNTBOARDRESULT.NOBALL(this.countBoard.strike));
+    } else {
+      Console.print(
+        COUNTBOARDRESULT.RESULT(this.countBoard.strike, this.countBoard.ball),
+      );
+    }
   }
 
   compareUserAndComputer(user) {
