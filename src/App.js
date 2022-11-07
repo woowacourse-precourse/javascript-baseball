@@ -20,7 +20,6 @@ class App {
 
       MissionUtils.Console.readLine("", (answer) => {
         playGame = answer;
-        MissionUtils.Console.print(answer);
       });
     }
   }
@@ -28,9 +27,8 @@ class App {
   guessNumber(computer) {
     let number;
     do {
-      MissionUtils.Console.readLine("", (answer) => {
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
         number = answer;
-        MissionUtils.Console.print("숫자를 입력해주세요 : " + number);
       });
       this.checkException(number);
     } while (!this.checkResult(computer, number));
