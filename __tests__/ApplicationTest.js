@@ -59,4 +59,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("세 자리 수만 입력할 수 있습니다.");
   });
+
+  test("숫자 외 문자 입력 시", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["a!ㄱ"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("숫자만 입력할 수 있습니다.");
+  });
 });
