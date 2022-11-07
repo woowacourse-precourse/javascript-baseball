@@ -32,30 +32,3 @@ describe("사용자 답 입력 테스트", () => {
     expect(() => error.isLengthValidate(input)).toThrow();
   });
 });
-
-describe("사용자 재시작 여부 입력 테스트", () => {
-  test("case1", () => {
-    const input = "";
-    const error = new Error();
-
-    expect(() => error.isLengthValidate(input)).toThrow();
-  });
-  test("case1", () => {
-    const input = "3";
-    const error = new Error();
-
-    expect(() => error.isLengthValidate(input)).toThrow();
-  });
-  test("case1", () => {
-    const input = "12";
-    const error = new Error();
-
-    expect(() => error.isLengthValidate(input)).toThrow();
-  });
-  test("case1", () => {
-    const input = "11";
-    const error = new Error();
-
-    expect(() => error.isLengthValidate(input)).toThrow();
-  });
-});
