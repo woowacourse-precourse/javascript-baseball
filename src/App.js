@@ -11,13 +11,13 @@ class App {
     this.computerNumbers = [];
   }
 
-  clearComputerNumbers() {
-    this.computerNumbers = [];
-  }
-
   setComputerNumbers() {
     for (let i = 0; i < PICK_LENGTH; i++) 
       this.computerNumbers.push(MissionUtils.Random.pickNumberInRange(MIN_RANGE, MAX_RANGE));
+  }
+
+  clearComputerNumbers() {
+    this.computerNumbers = [];
   }
 
   userNumbersValid(userNumbers) {
@@ -66,6 +66,19 @@ class App {
       return "낫싱";
   }
 
+  checkGameEnd() {
+    console.log("3개의 숫자를 모두 맞히셨습니다!");
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (isContinue) => {
+      if (isContinue == 1) {
+        this.clearComputerNumbers();
+        this.setComputerNumbers();
+        this.startGame();
+      }
+      else if (isContinue == 2) return;
+    });
+  }
+
   startGame() {
     let strikeCount = 0;
     let ballCount = 0;
@@ -83,19 +96,6 @@ class App {
         this.checkGameEnd();
       else 
         this.startGame();
-    });
-  }
-
-  checkGameEnd() {
-    console.log("3개의 숫자를 모두 맞히셨습니다!");
-    MissionUtils.Console.print("게임 종료");
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (isContinue) => {
-      if (isContinue == 1) {
-        this.clearComputerNumbers();
-        this.setComputerNumbers();
-        this.startGame();
-      }
-      else if (isContinue == 2) return;
     });
   }
 
