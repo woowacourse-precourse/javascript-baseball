@@ -149,7 +149,7 @@ describe('기능 구현 목록 테스트', () => {
     }).toThrow();
   });
 
-  test('', () => {
+  test('정답 후 재시작 시 isReplay 값 변경 & 재시작 종료 테스트', () => {
     const game = new Game();
     const logSpy = getLogSpy();
     const randoms = [1, 3, 5, 5, 8, 9];
