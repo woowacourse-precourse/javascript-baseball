@@ -1,17 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
-// game setting
-const START_GAME_NUM = 1;
-const END_GAME_NUM = 9;
-
-const GAME_NUM_SIZE = 3;
+const config = require("./config/config");
 
 function generateNumberList(size) {
   const result = [];
   while (result.length < size) {
     const number = MissionUtils.Random.pickNumberInRange(
-      START_GAME_NUM,
-      END_GAME_NUM
+      config.START_GAME_NUM,
+      config.END_GAME_NUM
     );
     if (!result.includes(number)) {
       result.push(number);
@@ -22,7 +17,7 @@ function generateNumberList(size) {
 
 function getStrikeCount(computerNumber, userNumber) {
   let count = 0;
-  for (let i = 0; i < GAME_NUM_SIZE; i++) {
+  for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
     if (computerNumber[i] === userNumber[i]) {
       count++;
     }
@@ -32,7 +27,7 @@ function getStrikeCount(computerNumber, userNumber) {
 
 function getSameNumberCount(computerNumber, userNumber) {
   let count = 0;
-  for (let i = 0; i < GAME_NUM_SIZE; i++) {
+  for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
     if (userNumber.includes(computerNumber[i])) {
       count++;
     }
@@ -85,12 +80,17 @@ function readControlNumber() {
 function isValidNumberCheck(inputList) {
   const inputNumbers = [];
 
-  if (inputList.length !== GAME_NUM_SIZE) {
+  if (inputList.length !== config.GAME_NUM_SIZE) {
     return 0;
   }
 
-  for (let i = 0; i < GAME_NUM_SIZE; i++) {
-    if (!(inputList[i] >= 1 && inputList[i] <= 9)) {
+  for (let i = 0; i < config.GAME_NUM_SIZE; i++) {
+    if (
+      !(
+        inputList[i] >= config.START_GAME_NUM &&
+        inputList[i] <= config.END_GAME_NUM
+      )
+    ) {
       return 0;
     }
     if (inputNumbers.includes(inputList[i])) {
@@ -112,7 +112,7 @@ class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
-    let computerNumber = generateNumberList(GAME_NUM_SIZE);
+    let computerNumber = generateNumberList(config.GAME_NUM_SIZE);
     let control = 1;
     let userNumber = 0;
     let scoreObject = {};
@@ -127,17 +127,17 @@ class App {
       scoreObject = compareNumber(computerNumber, userNumber);
       printScore(scoreObject);
 
-      if (scoreObject.strike === GAME_NUM_SIZE) {
+      if (scoreObject.strike === config.GAME_NUM_SIZE) {
         MissionUtils.Console.print(
-          `${GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
+          `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
         );
         control = readControlNumber();
       }
       if (isValidControlCheck(control) !== 1) {
         throw "입력값이 유효하지 않습니다.";
       }
-      if (scoreObject.strike === GAME_NUM_SIZE && control === 1) {
-        computerNumber = generateNumberList(GAME_NUM_SIZE);
+      if (scoreObject.strike === config.GAME_NUM_SIZE && control === 1) {
+        computerNumber = generateNumberList(config.GAME_NUM_SIZE);
       }
     }
   }
