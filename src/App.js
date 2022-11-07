@@ -29,24 +29,33 @@ class App {
     this.play();
   }
 
-  getUser() {
-    const checkVaild = new CheckInputValid();
-    MissionUtils.Console.readLine(GAME.START_GETNUMBER, (num) => {
-      this.userNum = this.numToArr(num);
-      const checkUserInputValid = checkVaild.checkUserInput(this.userNum);
-      if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
-        throw checkUserInputValid;
-      }
-      this.gameRender();
-    });
-  }
-
   getMention() {
     const render = new Render();
 
     if (this.firstTry === true) {
       render.startment();
     }
+  }
+
+  getUser() {
+    this.getMention();
+
+    const checkVaild = new CheckInputValid();
+    MissionUtils.Console.readLine(GAME.START_GETNUMBER, (num) => {
+      this.userNum = this.numToArr(num);
+      this.checkVaild();
+    });
+  }
+
+  checkVaild() {
+    const render = new Render();
+
+    const checkVaild = new CheckInputValid();
+    const checkUserInputValid = checkVaild.checkUserInput(this.userNum);
+    if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
+      render.errorThrow(checkUserInputValid);
+    }
+    this.gameRender();
   }
 
   gamePlay() {
@@ -77,7 +86,7 @@ class App {
           this.numToArr(userInput)
         );
         if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
-          throw checkUserRetryInputValid;
+          render.errorThrow(checkUserRetryInputValid);
         }
         this.retryOrEnd();
       });
@@ -98,7 +107,6 @@ class App {
   }
 
   play() {
-    this.getMention();
     this.getUser();
   }
 }
