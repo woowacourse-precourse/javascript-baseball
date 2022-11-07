@@ -21,7 +21,14 @@ class App {
 
     return answer.join("");
   }
-  getInput(answer) {}
+  getInput(answer) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      const isInputError = this.detectInputError(userInput);
+      if (!isInputError) {
+        this.compareAnswerAndInput(answer, userInput);
+      }
+    });
+  }
   compareAnswerAndInput(answer, userInput) {}
   getStrikeBall(answer, userInput) {}
 
