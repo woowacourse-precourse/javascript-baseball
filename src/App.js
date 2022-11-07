@@ -18,6 +18,7 @@ class App {
         this.answer.push(ANSWER);
       }
     }
+    console.log(this.answer);
     return this.enterNumber();
   }
 
@@ -28,10 +29,11 @@ class App {
   }
 
   inputCheck(inputNumber) {
+    const ONLYNUMBER = /[1-9]/;
     if (inputNumber.length !== 3) throw new Error('숫자 3자리를 입력해주세요.');
 
     const INPUT_ARRAY = inputNumber.split('').map((number) => {
-      if (Number.isNaN(number)) throw new Error('숫자를 입력해주세요.');
+      if (!ONLYNUMBER.test(number)) throw new Error('숫자를 입력해주세요.');
       return parseInt(number, 10);
     });
     const SET = new Set(INPUT_ARRAY);
@@ -87,5 +89,6 @@ class App {
     );
   }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
