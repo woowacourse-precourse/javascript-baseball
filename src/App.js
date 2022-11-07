@@ -17,7 +17,8 @@ class App {
   }
 
   exitGame() {
-    
+    Console.print("게임을 종료합니다.");
+    Console.close();
   }
 
   askRestart() {
