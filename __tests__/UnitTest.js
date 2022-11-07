@@ -13,6 +13,22 @@ describe("Print Message Test", () => {
     
   });
 
+  test.each([
+    [1,2,"1볼 2스트라이크"],
+    [1,0,"1볼"],
+    [0,3,"3스트라이크"],
+    [0,0,"낫싱"]
+  ])("case 2) Ball And Strike Count Test", (strike,ball,expected) => {
+    
+    const logSpy = getLogSpy();
+    const app = new App();
+    
+    app.printBallAndStrikeCount(strike,ball);
+      
+    expect(logSpy).toHaveBeenCalledWith(expected);
+  });
+
+
 });
 
 const mockQuestions = (answers) => {
