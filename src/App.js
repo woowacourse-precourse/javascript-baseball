@@ -81,13 +81,26 @@ function compareAnswer(playerAnswer) {
   }
 }
 
+function reStartOrEnd(num) {
+  switch (num) {
+    case 1:
+      this.startGame();
+
+    case 2:
+      MissionUtils.Console.print("게임 종료");
+      MissionUtils.Console.close();
+
+    default:
+      throw new Error("잘못된 값을 입력했습니다.");
+  }
+}
+
 function startGame() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
   do {
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
       const playerAnswer = answer.split("").map(Number);
-
       verifyPlayerAnswer(playerAnswer);
     });
 
