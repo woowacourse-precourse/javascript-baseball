@@ -18,13 +18,13 @@ class App {
 
   printResult(strike, ball, randomNumber) {
     if (strike === 0 && ball === 0) {
-      console.log("낫싱");
+      MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
-      console.log(`${strike}스트라이크 ${ball}볼`);
+      MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
     } else if (strike > 0) {
-      console.log(`${strike}스트라이크`);
+      MissionUtils.Console.print(`${strike}스트라이크`);
     } else if (ball > 0) {
-      console.log(`${ball}볼`);
+      MissionUtils.Console.print(`${ball}볼`);
     }
 
     if (strike === 3) {
@@ -52,19 +52,17 @@ class App {
     }
   }
 
-
   validateUserNumbers(inputNumber) {
-    if (inputNumber.length < 3 || inputNumber.includes("0")) {
+    if (inputNumber.length !== 3 || inputNumber.includes("0")) {
       // throw 오류
-      throw new Error("잘못입력.");
+      throw new Error("수를 잘못 입력하였습니다.");
     }
   }
-
 
   makeUserNumbers(randomNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.validateUserNumbers(inputNumber);
-      let userNumber = inputNumber.split("")
+      let userNumber = inputNumber.split("");
       this.countStrikeAndBall(userNumber, randomNumber);
     });
   }
