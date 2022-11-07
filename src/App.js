@@ -29,6 +29,19 @@ class App {
 
     return threeRandomArray;
   }
+
+  isStrike(strike) {
+    const STRIKE = 3;
+
+    if (strike === STRIKE) {
+      this.#mesage.print(Message.end());
+      this.#isFinish = true;
+
+      return true;
+    }
+
+    return false;
+  }
 }
 
 module.exports = App;
