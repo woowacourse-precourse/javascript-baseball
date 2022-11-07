@@ -126,7 +126,7 @@ class GameLoop {
       MissionUtils.Console.print("낫싱");
     }
 
-    if (balls === 0 && strikes != 0) {
+    if (balls === 0 && strikes != 0 && strikes != 3) {
       MissionUtils.Console.print(`${strikes}스트라이크`);
     }
 
