@@ -74,9 +74,8 @@ describe("숫자 야구 게임", () => {
     app.comparePlayerInputWithRandomNumber("123");
     expect(app.strike).toEqual(3);
     expect(app.ball).toEqual(0);
-    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
     expect(logSpy).toHaveBeenCalledWith(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
 
     app.COMPUTER = [3, 2, 5];
@@ -109,9 +108,8 @@ describe("숫자 야구 게임", () => {
 
     expect(app.strike).toEqual(3);
     expect(app.ball).toEqual(0);
-    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
     expect(logSpy).toHaveBeenCalledWith(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
     expect(replaySpy).toHaveBeenCalled();
     expect(replaySpy).toHaveBeenCalledTimes(1);
