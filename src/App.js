@@ -49,6 +49,8 @@ function replay() {
       if (userNum === "2") {
         return exit();
       }
+      Console.close();
+      throw new Error("잘못된 값을 입력하였습니다.");
     }
   );
 }
