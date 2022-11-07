@@ -50,4 +50,11 @@ describe('배열 테스트', () => {
 
     expect(result).toEqual(true);
   });
+
+  test('push 메서드로 배열에 요소 추가', () => {
+    const input = [1];
+    input.push(2);
+
+    expect(input).toEqual([1, 2]);
+  });
 });
