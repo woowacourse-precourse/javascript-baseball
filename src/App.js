@@ -53,14 +53,15 @@ class App {
 
   // 기능 4
   checkValidityUserNumber(userNumber) {
-    const userNumberList = [...userNumber];
+    const tmpUserNumberList = [...userNumber];
+    const userNumberList = tmpUserNumberList.map(userNumber => Number(userNumber));
     const [firstNumber, secondNumber, thirdNumber] = userNumberList;
 
     if (!(userNumberList.length === NUMBER.THREE_DIGIT)) {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
     }
 
-    if ((isNaN(firstNumber) == true) || (isNaN(secondNumber) == true) || (isNaN(thirdNumber) == true)) {
+    if ((isNaN(firstNumber) === true) || (isNaN(secondNumber) === true) || (isNaN(thirdNumber) === true)) {
       throw new Error(ERROR_MESSAGE.TYPE_ERROR);
     }
 
@@ -68,7 +69,7 @@ class App {
       throw new Error(ERROR_MESSAGE.OVERLAP_ERROR);
     }
 
-    if (firstNumber == NUMBER.ZERO || secondNumber == NUMBER.ZERO || thirdNumber == NUMBER.ZERO) {
+    if (firstNumber === NUMBER.ZERO || secondNumber === NUMBER.ZERO || thirdNumber === NUMBER.ZERO) {
       throw new Error(ERROR_MESSAGE.ZERO_ERROR);
     }
   }
@@ -139,12 +140,12 @@ class App {
 
   // 기능 8
   checkUserChoiceNumber(userChoiceNumber) {
-    if (userChoiceNumber == NUMBER.RESTART) {
+    if (Number(userChoiceNumber) === NUMBER.RESTART) {
       this.StartGame();
       return;
     }
     
-    if (userChoiceNumber == NUMBER.END) {
+    if (Number(userChoiceNumber) === NUMBER.END) {
       MissionUtils.Console.print(MESSAGE.END);
       MissionUtils.Console.close();
       return;
