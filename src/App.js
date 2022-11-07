@@ -18,6 +18,8 @@ class App {
       if (Input.isValidInput(input)) Console.print(this.makeAnswer(input));
       if (this.isGameOver()) {
         Console.print(Console.END);
+        this.makeNotice();
+        return;
       }
     });
   }
