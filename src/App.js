@@ -15,14 +15,20 @@ class App {
     printStartMassage() {
         isFirst && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
     }
+
+    createAnswer() {
+        const ANSWER_ARRAY = [];
+        while (ANSWER_ARRAY.length < 3) {
+            const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+            if (!ANSWER_ARRAY.includes(NUMBER)) ANSWER_ARRAY.push(NUMBER);
+        }
+        return ANSWER_ARRAY;
+    }
+
     play() {
         this.printStartMassage();
-        let answer = this.createAnswer();
-        // console.log(answer);
-        this.getUserInput(answer);
-    }
-    createAnswer() {
-        return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        const answer = this.createAnswer();
+        this.getUserInput(answer); 
     }
 
     isCorrect(userInput, answer) {
@@ -117,7 +123,6 @@ class App {
 }
 
 const app = new App();
-
 app.play();
 
 module.exports = App;
