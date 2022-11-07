@@ -6,19 +6,20 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: ["airbnb-base", "plugin:prettier/recommended"],
+  extends: ['airbnb-base', 'plugin:prettier/recommended'],
   overrides: [],
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest',
   },
   rules: {
-    "prettier/prettier": [
-      "error",
+    'prettier/prettier': [
+      'error',
       {
-        endOfLine: "auto",
+        endOfLine: 'auto',
+        singleQuote: true,
       },
     ],
-    semi: ["error", "always"],
+    semi: ['error', 'always'],
   },
-  plugins: ["prettier"],
+  plugins: ['prettier'],
 };
