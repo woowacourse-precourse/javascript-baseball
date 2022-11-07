@@ -60,6 +60,24 @@ describe("입력값 배열화 테스트", () => {
 });
 
 describe("판정 테스트", () => {
+  test("스트라이크 카운터 테스트", () => {
+    const strikeTestExamples = [
+      [[1, 2, 3], [1, 2, 3], 3],
+      [[1, 2, 3], [1, 2, 4], 2],
+      [[1, 2, 3], [1, 4, 5], 1],
+      [[1, 2, 3], [3, 1, 2], 0],
+      [[1, 2, 3], [4, 1, 2], 0],
+      [[1, 2, 3], [4, 5, 2], 0],
+      [[1, 2, 3], [4, 5, 6], 0],
+      [[1, 2, 3], [3, 2, 1], 1],
+      [[1, 2, 3], [5, 1, 3], 1],
+    ];
+
+    strikeTestExamples.map((example) => {
+      expect(app.strikeCounter(example[0], example[1])).toEqual(example[2]);
+    });
+  });
+
   test("판정", () => {
     const discriminateExamples = [
       [[1, 2, 3], [1, 2, 3], "3스트라이크"],
