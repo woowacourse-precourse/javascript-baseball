@@ -50,21 +50,19 @@ class App {
     }
   }
 
+gamePlay(){
+const UserInput =this.getUser()
+const ComputerInput=this.computerInput
+ const gameJudgment = new GameJudgment();
+ const [userBallCount,userStrikeCount]= gameJudgment.judgement(UserInput,ComputerInput)
+return [userBallCount,userStrikeCount]
+}
+
   play() {
     this.getMention();
     this.getUser();
 
-    render.getUser().then((num) => {
-      this.userNum = this.numToArr(num);
-      const checkInputValid = new CheckInputValid({
-        userNum: this.userNum,
-      });
-
-      this.errorResult = checkInputValid.checkValidation();
-
-      if (this.errorResult !== ERROR.USER_INPUT_PASS) {
-        this.errorRetry();
-      }
+    
 
       const gameJudgment = new GameJudgment({
         user: this.userNum,
