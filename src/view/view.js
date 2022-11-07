@@ -1,3 +1,5 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 class View {
   constructor(controller) {
     this.controller = controller;
@@ -11,6 +13,16 @@ class View {
     this.RESTART_INVALID_INPUT_COMMENT =
       "1(게임 재시작) 혹은 2(게임 종료) 만 입력 가능합니다.";
     this.CLOSING_COMMENT = "게임 종료";
+  }
+
+  // 유저로부터 숫자를 제시받는다.
+  getUserGuessInput() {
+    Console.readLine(this.GET_INPUT_COMMET, (userGivenString) => {
+      this.controller.updateUserGivenNumber(
+        userGivenString.toString().split("")
+      );
+      this.controller.checkIsUserInputValid();
+    });
   }
 }
 
