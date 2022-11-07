@@ -91,6 +91,9 @@ class App {
   #printResult(str) {
     Console.print(str);
   }
+  #handleGameOver(str) {
+    this.#setIsUserWon(str === "3스트라이크");
+  }
   play() {}
 }
 

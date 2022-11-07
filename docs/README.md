@@ -82,9 +82,9 @@
 
 ## 7. 게임 종료 기능(#handleGameOver) 구현
 
-- [ ] 1. 문자열을 인자로 받음
-- [ ] 2. `3스트라이크`일 경우 `#setIsUserWon` true
-- [ ] 3. 그 외 경우 `#setIsUserWon` false
+- [x] 1. 문자열을 인자로 받음
+- [x] 2. `3스트라이크`일 경우 `#setIsUserWon` true
+- [x] 3. 그 외 경우 `#setIsUserWon` false
 
 ## 8. 재시작 묻는 기능(#askRestart) 구현
 
