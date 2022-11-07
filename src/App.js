@@ -70,7 +70,7 @@ class App {
       MissionUtils.Console.print('낫싱');
       return this.getUserNumbers(computerNumbers);
     }
-    
+
     MissionUtils.Console.print(result);
 
     return this.getUserNumbers(computerNumbers);
