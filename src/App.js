@@ -39,14 +39,15 @@ class App {
   }
 
   hasError(query) {
+    let err = false;
     const queryArr = this.getQueryArrFromQuery(query);
-    if (queryArr.length > 3) return true;
-    queryArr.forEach((num) => {
-      if (Number(num) < 1 || Number(num) > 9) return true;
-    });
     const querySet = new Set(queryArr);
+    if (queryArr.length > 3) return true;
     if (querySet.size !== 3) return true;
-    return false;
+    queryArr.forEach((num) => {
+      if (Number.isNaN(+num) || +num < 1 || +num > 9) err = true;
+    });
+    return err;
   }
 
   getScore(answer, query) {
