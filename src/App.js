@@ -1,7 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Validate = require('./Validate.js')
 
 class App {
-
+  constructor() {
+    this.user = new Validate;
+  }
+  
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.makeComputerNum();
@@ -14,6 +18,15 @@ class App {
         if(random_num.includes(number)) continue;
         random_num.push(number);        
     }
+  }
+
+  getUserNum() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
+      const isValid = this.user.isValid(userNum);
+      if (!isValid) {
+        throw new Error("입력값이 잘못되었습니다. 프로그램을 종료합니다.");
+      }
+    });
   }
 
 }
