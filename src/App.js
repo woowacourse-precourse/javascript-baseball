@@ -98,6 +98,9 @@ class App {
       COMPUTER_NUMBER.length = 0;
       this.randomComputerNumber();
       this.userInputNumber(COMPUTER_NUMBER);
+    } else if (restartEndNumber == 2) {
+      result = "게임 종료";
+      MissionUtils.Console.print(result);
     }
   }
 }
