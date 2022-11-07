@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer.js');
 const Function = require('./Function');
-const { MESSAGE } = require('./Const');
+const { MESSAGE, COUNTBOARDRESULT } = require('./Const');
 
 class App {
   constructor() {
@@ -22,21 +22,25 @@ class App {
     });
   }
 
-  restartOrEnd() {
+  askRestartOrEnd() {
     Console.readLine(MESSAGE.RESTARTOREND, input => {
-      Function.validOneOrTwo(input);
-      if (input === '1') {
-        this.play();
-      } else {
-        Function.endApp();
-      }
+      this.restartOrEnd(input);
     });
+  }
+
+  restartOrEnd(input) {
+    Function.validOneOrTwo(input);
+    if (input === '1') {
+      this.play();
+    } else {
+      Function.endApp();
+    }
   }
 
   decideReprocess() {
     if (this.countBoard.strike === 3) {
       Console.print(MESSAGE.THREESTRIKE);
-      this.restartOrEnd();
+      this.askRestartOrEnd();
     } else {
       this.process();
     }
@@ -58,20 +62,25 @@ class App {
 
   compareUserAndComputer(user) {
     const userNumberArray = user.toString().split('');
-    const computerNumberArry = this.computer.selectedNumber
+    const computerNumberArray = this.computer.selectedNumber
       .toString()
       .split('');
+
     userNumberArray.forEach((number, numberIndex) => {
-      const index = computerNumberArry.indexOf(number);
-      if (index < 0) {
-        return;
-      }
-      if (index === numberIndex) {
-        this.countBoard.strike += 1;
-      } else {
-        this.countBoard.ball += 1;
-      }
+      this.setCountBoard(number, numberIndex, computerNumberArray);
     });
+  }
+
+  setCountBoard(number, numberIndex, computerNumberArray) {
+    const index = computerNumberArray.indexOf(number);
+    if (index < 0) {
+      return;
+    }
+    if (index === numberIndex) {
+      this.countBoard.strike += 1;
+    } else {
+      this.countBoard.ball += 1;
+    }
   }
 
   resetCountBoard() {
