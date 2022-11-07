@@ -57,7 +57,7 @@ class App {
 
     MissionUtils.Console.print(output.trim());
     if (strikeCount === 3) {
-      this.endGame();
+      this.checkRestartOrExit();
     } else {
       this.startGame();
     }
@@ -84,6 +84,16 @@ class App {
       }
     }
     return ballCount;
+  }
+
+  checkRestartOrExit() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (userInput) => {
+        if (userInput === '1') this.play();
+        else if (userInput === '2') this.endGame();
+      },
+    );
   }
 
   endGame() {}
