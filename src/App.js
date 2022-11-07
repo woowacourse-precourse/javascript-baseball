@@ -9,6 +9,7 @@ class App {
     const answer = this.getThreeNum();
     this.getUserNum();
     var strike = this.countStrike(answer, this.userNumber);
+    var ball = this.countBall(answer, this.userNumber);
   }
 
   getThreeNum() {
@@ -45,6 +46,18 @@ class App {
       if (computerNum[i] === parseInt(userNum[i])) strikeCount += 1;
     }
     return strikeCount;
+  }
+
+  countBall(computerNum, userNum) {
+    var ballCount = 0;
+    for (var i = 0; i < 3; i++) {
+      if (
+        userNum.includes(computerNum[i]) &&
+        computerNum[i] !== parseInt(userNum[i])
+      )
+        ballCount += 1;
+    }
+    return ballCount;
   }
 }
 
