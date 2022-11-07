@@ -29,9 +29,9 @@ class Game {
 
   attempt (input) {
     this.user.setNumber(input);
-    const result = this.compare(this.computer.getNumber(), this.user.getNumber());
+    const result = Game.compare(this.computer.getNumber(), this.user.getNumber());
     this.outputResult(result);
-    if (this.isEnd(result)) {
+    if (Game.isEnd(result)) {
       this.outputGameEnd();
       this.askReplay();
     } else {
@@ -53,20 +53,17 @@ class Game {
    * @param {[number, number, number]} input
    * @return {{strike:number, ball:number}}
    */
-  compare (computerNumber, input) {
+  static compare (computerNumber, input) {
     let strike = 0;
     let ball = 0;
-    for (let i = 0; i < computerNumber.length; i++) {
-      if (computerNumber[i] === input[i]) {
-        strike++;
-      } else if (computerNumber.includes(input[i])) {
-        ball++;
-      }
-    }
+    computerNumber.forEach((number, index) => {
+      if (number === input[index]) strike += 1;
+      else if (input.includes(number)) ball += 1;
+    });
     return { strike, ball };
   }
 
-  isEnd ({ strike }) {
+  static isEnd ({ strike }) {
     return strike === 3;
   }
 

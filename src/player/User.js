@@ -19,13 +19,13 @@ class User extends Player {
    */
   setNumber (string) {
     if (this.isValidate(string)) {
-      this.number = this.parseInput(string);
+      this.number = User.parseInput(string);
     } else {
       throw new Error('유효하지 않은 입력입니다.');
     }
   }
 
-  parseInput (input) {
+  static parseInput (input) {
     const number = input.split('').map((value) => Number(value));
     return number;
   }
