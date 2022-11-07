@@ -8,19 +8,19 @@ class App {
   }
 
   showCommand() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      (input) => {
-        this.isRestart(input);
-      }
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
+    MissionUtils.Console.readLine("", (input) => {
+      this.isRestart(input);
+    });
   }
 
   printResult(strike, ball, randomNumber) {
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
-      MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     } else if (strike > 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
     } else if (ball > 0) {
@@ -35,7 +35,8 @@ class App {
     }
   }
 
-  countStrikeAndBall(userNumber, randomNumber) {
+  countStrikeAndBall(inputNumber, randomNumber) {
+    let userNumber = inputNumber.split("");
     let strike = 0;
     let ball = 0;
 
@@ -62,8 +63,7 @@ class App {
   makeUserNumbers(randomNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.validateUserNumbers(inputNumber);
-      let userNumber = inputNumber.split("");
-      this.countStrikeAndBall(userNumber, randomNumber);
+      this.countStrikeAndBall(inputNumber, randomNumber);
     });
   }
 
@@ -84,7 +84,6 @@ class App {
 
   startGame() {
     const randomNumber = this.makeRandom();
-    console.log(randomNumber);
     this.makeUserNumbers(randomNumber);
   }
 
@@ -94,6 +93,7 @@ class App {
   }
 }
 
-const app = new App();
-app.play();
-// module.exports = App;
+module.exports = App;
+
+// const app = new App();
+// app.play();
