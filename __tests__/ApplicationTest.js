@@ -100,5 +100,18 @@ describe("숫자 야구 게임", () => {
     }).toThrow(ERROR.NOT_THREE_NUMBER);
   });
 
+  test("예외 테스트: 입력값 공백인 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = [""];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOT_THREE_NUMBER);
+  });
+
 
 });
