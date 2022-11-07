@@ -2,6 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   userInputErrorCheckList = {
+    inputValueEmptyCheck: (usersInput) => {
+      if (usersInput.indexOf(" ") !== -1) {
+        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
+      }
+    },
     inputNumberLengthCheck: (usersInput) => {
       if (usersInput.length !== 3) {
         throw "3자리의 숫자를 입력해주세요.";
@@ -10,11 +15,6 @@ class App {
     inputValueStringCheck: (usersInput) => {
       if (isNaN(usersInput)) {
         throw "숫자만 입력해주세요.";
-      }
-    },
-    inputValueEmptyCheck: (usersInput) => {
-      if (usersInput.indexOf(" ") !== -1) {
-        throw "입력값 사이에 빈칸이 없도록 입력해주세요.";
       }
     },
   };
