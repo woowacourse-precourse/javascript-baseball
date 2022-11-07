@@ -1,6 +1,6 @@
 ## ✔️ 기능 목록
 
-- [ ] feat1. createRadomNumDigitArray function (Return random num digit array)
+- [x] feat1. createRandomNumDigitArray function (Return random num digit array)
 - [ ] feat2. getNumDigitArray function (Input num / Return digit array)
 - [ ] feat3. getResultArray function (Input randomNum / checkNum and Return strike&ball array)
 - [ ] feat4. checkResult function (Input strike&ball array and print strike&ball count / Return is all strike)
