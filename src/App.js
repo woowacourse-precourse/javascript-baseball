@@ -55,20 +55,28 @@ class App {
     return this.randomNum;
   }
 
+  // 숫자 야구 게임 logic
   nothing() {
     for (let index = 0; index < 3; index++) {
-      this.inputNum[index] != this.randomNum[index];
+      this.inputNum[index] == this.randomNum[index];
       return false;
     }
     return true;
   }
 
   ball() {
-
+    userInputArr = [...this.inputNum];
+    if()
   }
 
   strike() {
-    
+    let count;
+    for(let index=0; index<3;index++){
+      if(this.inputNum[index] == this.randomNum){
+        count ++;
+      }
+    }
+    return count;
   }
 }
 
