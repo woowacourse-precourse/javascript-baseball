@@ -1,4 +1,4 @@
-const { Console } = require("./Utilitys");
+const { Console, Random } = require("./Utilitys");
 
 class System {
   constructor() {
@@ -15,6 +15,10 @@ class System {
 
   getStarted() {
     Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
+  createAnswerNumber() {
+    this.setNumber = Random.pickUniqueNumbersInRange(1, 10, 3);
   }
 }
 

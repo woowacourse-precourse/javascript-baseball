@@ -6,6 +6,8 @@ class App {
     const PlayingUser = new User();
 
     NumberBaseBallSystem.getStarted();
+    NumberBaseBallSystem.createAnswerNumber();
+    console.log(NumberBaseBallSystem.getNumber);
   }
 }
 
