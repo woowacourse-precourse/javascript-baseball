@@ -27,7 +27,6 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult3 = app.getHint([1, 2, 3], '312');
     expect(testResult3).toEqual('3볼');
   });
-
   test('같은 자리 같은 수 일 때, hint strike가 나오는지 테스트', () => {
     const app = new App();
     const testResult1 = app.getHint([1, 2, 3], '145');
@@ -37,7 +36,6 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult3 = app.getHint([1, 2, 3], '123');
     expect(testResult3).toEqual('3스트라이크');
   });
-
   test('strike,ball 같이 있을 때 hint가 맞는지 테스트', () => {
     const app = new App();
     const testResult1 = app.getHint([1, 2, 3], '134');
@@ -45,7 +43,6 @@ describe('내가 구현한 기능 테스트',()=>{
     const testResult2 = app.getHint([1, 2, 3], '321');
     expect(testResult2).toEqual('2볼 1스트라이크');
   });
-
   test('사용자 입력시, isValidInput, getHint 실행 여부 확인', () => {
     const app = new App();
     const spyValidInput = jest.spyOn(app, "isValidInput");
@@ -54,6 +51,15 @@ describe('내가 구현한 기능 테스트',()=>{
     app.getHintOrThrowError('123');
     expect(spyValidInput).toBeCalledTimes(1);
     expect(spyGetHint).toBeCalledTimes(1);
+  });
+  test('judgeStrikeOrBall 테스트 코드',()=>{
+    const app = new App();
+    const testResult = app.judgeStrikeOrBall([1,2,3],"142",0);
+    expect(testResult).toEqual('strike');
+    const testResult2 = app.judgeStrikeOrBall([1, 2, 3], '142', 1);
+    expect(testResult2).toEqual('');
+    const testResult3 = app.judgeStrikeOrBall([1, 2, 3], '142', 2);
+    expect(testResult3).toEqual('ball');
   });
 })
 
