@@ -37,13 +37,26 @@ function numberCheck(input) {
 }
 
 function judgement(input) {
+  var comfirmStrike = false;
   for(var i = 0; i < 3; i++) {
+    comfirmStrike = false;
     strikeCompare(input[i],randomNumber[i]);
+    if(!comfirmStrike) ballCompare(input[i]);
   }
 }
 
 function strikeCompare(input, randomNumber) {
-  if(input === randomNumber)
+  if(input === randomNumber){
     strike++;
+    comfirmStrike = true;
+  }
+    
+}
+
+function ballCompare(input) {
+  var randomString = randomNumber.toString();
+  for(var i = 0; i < 3; i++) {
+    if(randomString.includes(input)) ball++;
+  }
 }
 module.exports = App;
