@@ -8,7 +8,9 @@ class App {
 
     while (isPlaying) {
       this.callGameSequence(); 
-      if (!this.askRestart()) isPlaying = false;
+      if (!this.askRestart()) {
+        isPlaying = false;
+      }
     }
     MissionUtils.Console.print("게임 종료");
   }
@@ -51,7 +53,7 @@ class App {
     const userNumber = []; 
     
     MissionUtils.Console.readLine("숫자를 입력해주세요: ", (answer) => {
-      answer = answer.split("").map(e => userNumber.push(e));
+      answer.split("").forEach(e => userNumber.push(e));
     });
     MissionUtils.Console.close();
     // 예외 처리
@@ -64,16 +66,18 @@ class App {
     const valueSet = new Set(value);
 
     if (value.length !== 3) { // 길이 검사
-      throw `잘못된 형식 입력`;
+      throw `잘못된 형식 입력, 입력값의 길이는 3이어야 합니다. 입력된 길이: ${value.length}`;
     }
 
     if (valueSet.size !== 3) { // 중복 숫자 검사
-      throw `잘못된 형식 입력`;
+      throw `잘못된 형식 입력, 중복 숫자 존재, 입력된 value: ${value}`;
     }
 
     value.map(element => { // 숫자 검사
       element = Number(element);
-      if (Number.isNaN(element)) throw `잘못된 형식 입력`;
+      if (Number.isNaN(element)) {
+        throw `잘못된 형식 입력, 숫자로 변환 불가능한 문자 존재, 입력된 value: ${value}`;
+      }
     })
   }
 
@@ -93,11 +97,11 @@ class App {
   }
 
   printResult(strike, ball) {
-    if (!strike && !ball) {
+    if (strike === 0 && ball === 0) {  // 주석 추가
       MissionUtils.Console.print("낫싱");
-    } else if (!ball) {
+    } else if (ball === 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
-    } else if (!strike) {
+    } else if (strike === 0) {
       MissionUtils.Console.print(`${ball}볼`);
     } else {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
@@ -108,22 +112,20 @@ class App {
     let isRestart;
     
     MissionUtils.Console.readLine(
-      `3개의 숫자를 모두 맞히셨습니다! 게임 종료₩n
-      게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`,
+      `3개의 숫자를 모두 맞히셨습니다! 게임 종료\n
+      게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n
+       > `,
       (answer) => {
-        answer = Number(answer);
-        isRestart = answer;
+        if (answer === '1' || answer === '2') {
+          isRestart = answer;
+        } else {
+          throw `잘못된 입력 값 (재시작:1 , 게임종료:2) : ${answer}`
+        }
       }
     )
     MissionUtils.Console.close();
 
-    if (isRestart === 1) {
-      return true;
-    } else if (isRestart === 2) {
-      return false;
-    } else {
-      throw `잘못된 값을 입력하여 게임을 종료합니다.`
-    }
+    return isRestart === '1' ? true : false;
   }
 }
 
