@@ -6,12 +6,15 @@ class Validate {
   static userGuessNumbers(userInput) {
     validUserGuessNumber(userInput);
   }
+  static userChoice(userInput) {
+    validateUserChoice(userInput);
+  }
 }
 
 const validUserGuessNumber = (userInput) => {
   const userInputArr = GameUtils.userInputToNumberArr(userInput);
 
-  if (userInputArr.length !== 3) {
+  if (!isRightSize(userInputArr, 3)) {
     throw new Error("입력값은 반드시 3자리 여야 합니니다.");
   }
   if (userInputArr.includes(0)) {
@@ -25,8 +28,17 @@ const validUserGuessNumber = (userInput) => {
   }
 };
 
+const validateUserChoice = (userInput) => {
+  if (userInput !== "1" && userInput !== "2") {
+    throw new Error("1 과 2 중에 숫자만 입력하세요");
+  }
+};
+
 function isDup(arr) {
   return arr.length !== [...new Set(arr)].length;
+}
+function isRightSize(userInput, num) {
+  return userInput.length === num;
 }
 
 module.exports = Validate;

@@ -18,6 +18,7 @@ class BaseballGame {
   }
   static gameStartStepTwo() {
     this.randomNumber = generateRandom();
+    console.log("정답 : ", this.randomNumber);
     userGuessNumber();
   }
 
@@ -30,7 +31,7 @@ class BaseballGame {
 
 const willPlayMoreGame = () => {
   MissionUtils.Console.readLine(USER_CHOICE, (answer) => {
-    //todo 유저 대답 벨리데이션
+    Validate.userChoice(answer);
 
     if (answer === YES) {
       BaseballGame.gameStartStepTwo();
