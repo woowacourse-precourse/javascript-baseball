@@ -40,7 +40,7 @@ class App {
     }
     return computer.join("");
   }
-  
+
   //결과 출력
   printResult(strike, ball){
     if(strike === 0 && ball === 0){
@@ -53,6 +53,30 @@ class App {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     }
   }
+
+  // 숫자 비교
+compareNum(com_num, user_num){
+  let strike = 0;
+  let ball = 0;
+
+  for(let i = 0; i < 3; i ++){
+    let index = com_num.indexOf(user_num.charAt(i));
+    if(index === -1){
+      continue;
+    } else if(index === i){
+      strike += 1;
+    } else{
+      ball += 1;
+    }
+  }
+  this.printResult(strike, ball);
+  if(strike === 3){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 
 
 }
