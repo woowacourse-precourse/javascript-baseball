@@ -45,22 +45,54 @@ class App {
   }
   selectNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      const check = /[^0-9]/g;
-      if (!(answer.length === 3) || check.test(answer)) {
+      const checkNumber = /[^0-9]/g;
+      const checkNumberOver = false;
+      for (let i = 0; i < answer.length; i++) {
+        const answerCopy = [...answer];
+        const splice = answerCopy.splice(i, 1);
+        console.log(answerCopy.includes(splice));
+        if (answerCopy.includes(splice)) {
+          checkNumberOver = true;
+          console.log('하이', checkNumberOver);
+        }
+      }
+      if (
+        !(answer.length === 3) ||
+        checkNumber.test(answer) ||
+        checkNumberOver
+      ) {
         // 숫자가 아니거나, 글자수가 3보다 적고 크면 thow문 사용하여 예외 처리
         //!애플리케이션 종료
         this.gameOver();
       } else {
-        //게임 진행
         const result = this.solve(answer);
         console.log(result);
-        return result[1] === 3 ? '재시작? 종료?' : this.selectNumber();
-
-        //return `${result[0]}볼 ${result[1]}스트라이크`;
+        if (result[1] === 3) {
+          this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+          return this.reStart();
+        } else {
+          result[1] === 0 && result[0] === 0
+            ? this.print('낫싱')
+            : this.print(`${result[0]}볼 ${result[1]}스트라이크`);
+          this.selectNumber();
+        }
       }
     });
   }
 
+  reStart() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (answer) => {
+        if (answer === '2') {
+          this.gameOver();
+        } else if (answer === '1') {
+          this.correctAnswer = this.setNumber();
+          this.selectNumber();
+        }
+      }
+    );
+  }
   solve(numbers) {
     const copyCorrectAnswer = this.correctAnswer;
     const userAnswer = [...numbers];
