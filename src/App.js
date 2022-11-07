@@ -8,8 +8,8 @@ class App {
     this.answer = makeNumber();
   }
 
-  checkInput(data) {
-    if (isValidNum(data)) {
+  checkInput() {
+    if (isValidNum(this.userInput)) {
       this.inputAnswer();
     } else {
       throw new Error();
@@ -19,7 +19,7 @@ class App {
   inputAnswer() {
     Console.readLine(GAME_MESSAGE.INPUT_MESSAGE, (input) => {
       this.userInput = Array.from(String(input), Number);
-      this.checkInput(this.userInput);
+      this.checkInput();
     });
   }
 
