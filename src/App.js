@@ -6,7 +6,7 @@ const {
   RANDOM_NUMBER_COUNT,
 } = require('./lib/constants/game');
 const {
-  DUPLICATE_CHARACTER_REGEX,
+  DUPLICATE_NUMBER_REGEX,
   GAME_MENU_CODE_REGEX,
   THREE_DIGIT_NUMBER_REGEX,
 } = require('./lib/constants/validation');
@@ -66,7 +66,7 @@ class App {
   }
 
   hasDuplicateNumber(inputValue) {
-    return DUPLICATE_CHARACTER_REGEX.test(inputValue);
+    return DUPLICATE_NUMBER_REGEX.test(inputValue);
   }
 
   printHint(answer) {

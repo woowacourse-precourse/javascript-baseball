@@ -1,5 +1,5 @@
 const {
-  DUPLICATE_CHARACTER_REGEX,
+  DUPLICATE_NUMBER_REGEX,
   GAME_MENU_CODE_REGEX,
   THREE_DIGIT_NUMBER_REGEX,
 } = require('../src/lib/constants/validation');
@@ -58,7 +58,7 @@ describe('정규식 테스트', () => {
     test('중복된 숫자가 존재하는 경우 true를 반환해야 한다.', () => {
       const inputValues = ['122', '455', '699', '333', '123'];
       const result = inputValues.map(inputValue =>
-        DUPLICATE_CHARACTER_REGEX.test(inputValue),
+        DUPLICATE_NUMBER_REGEX.test(inputValue),
       );
 
       expect(result).toEqual([true, true, true, true, false]);
