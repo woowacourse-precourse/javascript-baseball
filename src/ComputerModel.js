@@ -1,16 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class ComputerModel {
-  constructor() {
-    this.computerNumberSpace = [];
-  }
-
   getNumberFromComputer() {
+    this.computerNumberSpace = [];
     this.setNumberIntoSpace();
     return this.computerNumberSpace;
   }
 
-  setNumberIntoSpace = () => {
+  setNumberIntoSpace() {
     const numberFromComputer = () => this.getRandomNumberInRange(1, 9);
     const InsertNumberToSpace = (number, space) => {
       if (this.isNumberNotInSpace(number, space)) {
@@ -21,7 +18,7 @@ class ComputerModel {
     while (this.isSpaceFull(this.computerNumberSpace)) {
       InsertNumberToSpace(numberFromComputer(), this.computerNumberSpace);
     }
-  };
+  }
 
   getRandomNumberInRange(start, end) {
     return MissionUtils.Random.pickNumberInRange(start, end);
