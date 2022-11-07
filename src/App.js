@@ -5,12 +5,12 @@ const compareTwoArrayResult = require('./compare');
 
 class App {
   play() {
-    this.start();
+    this.startMessage();
     this.computerNumArr = generateNumber();
     this.getInputAndCompare();
   }
 
-  start() {
+  startMessage() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
