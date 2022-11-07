@@ -26,7 +26,8 @@ class App {
   input() {
     Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.checkErrorInputNumber(inputNumber);
-      this.checkStrikeAndBallInputNumber(inputNumber);
+      let [strike, ball] = this.checkStrikeAndBallInputNumber(inputNumber);
+      this.printPoint(strike, ball);
     });
   }
 
@@ -50,13 +51,28 @@ class App {
     let [strike, ball] = [0, 0];
     let splitInputNumber = [...inputNumber];
     splitInputNumber.forEach((number, index) => {
-      const computerNumberIndex = this.computerNumber.indexOf(number);
+      const computerNumberIndex = this.computerNumber.indexOf(Number(number));
       if (computerNumberIndex === index) {
         strike += 1;
       } else if (computerNumberIndex !== -1) {
         ball += 1;
       }
     });
+    return [strike, ball];
+  }
+
+  printPoint(strike, ball) {
+    if (strike === 0 && ball === 0) {
+      Console.print("낫싱");
+    } else if (strike === 3) {
+      Console.print(`${strike}스트라이크`);
+    } else if (strike > 0 && ball === 0) {
+      Console.print(`${strike}스트라이크`);
+    } else if (strike === 0 && ball > 0) {
+      Console.print(`${ball}볼`);
+    } else {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
   }
 }
 
