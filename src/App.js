@@ -38,7 +38,25 @@ class App {
     return is_three;
   }
 
+  checkDuplication(input){
+    let isNot_dupli = 1;
+    const num_list = [];
+    for(let i=0; i<input.length; i++){
+      if(num_list.includes(input.charAt(i))){
+        isNot_dupli = 0;
+      }
+      else{
+        num_list.push(input.charAt(i));
+      }
+    }
 
+    if(!isNot_dupli){
+      throw "중복되지 않은 숫자 조합을 입력해주세요."
+    }
+    return isNot_dupli;
+  }
+
+  
   checkInputValue(input){
     
     // 양수가 아닌 값을 입력 받았을 때
@@ -46,6 +64,9 @@ class App {
 
     // 숫자가 세자리가 아닐 때
     this.checkInputSize(input);
+
+    // 중복된 숫자 포함하여 입력 받았을 때
+    this.checkDuplication(input);
         
   }
 
