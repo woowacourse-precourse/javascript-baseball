@@ -65,6 +65,22 @@ class BaseballGame {
     return MissionUtils.Console.print(message);
   }
 
+  restart() {
+    const restartvariable = MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
+      (answers) => {
+        const answer = Number(answers);
+        if (answer === 1) {
+          return this.play();
+        }
+        if (answer === 2) {
+          return MissionUtils.Console.close();
+        }
+        throw new Error("입력한 숫자는 1 또는 2의 값이어야 합니다.");
+      }
+    );
+  }
+
   getMessage(computerNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       const { ball, strike } = this.countStrikeBall(
@@ -73,6 +89,14 @@ class BaseballGame {
       );
       this.checkValidation(input);
       this.printStrikeBall(ball, strike);
+
+      if (strike === 3) {
+        this.replay = true;
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.restart();
+      } else {
+        return this.getMessage(computerNumber);
+      }
     });
   }
 
