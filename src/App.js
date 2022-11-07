@@ -87,7 +87,15 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return this.checkIfRestartGame();
     }
-    MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크 `);
+    if (result.ball > 0 && result.strike === 0) {
+      MissionUtils.Console.print(`${result.ball}볼`);
+      return this.isPlaying;
+    }
+    if (result.ball === 0 && result.strike > 0) {
+      MissionUtils.Console.print(`${result.strike}스트라이크`);
+      return this.isPlaying;
+    }
+    MissionUtils.Console.print(`${result.ball}볼 ${result.strike}스트라이크`);
     return this.isPlaying;
   }
 
