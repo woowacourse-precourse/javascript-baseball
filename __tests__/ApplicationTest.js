@@ -57,6 +57,6 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow('입력은 3자리만 가능합니다.');
   });
 });
