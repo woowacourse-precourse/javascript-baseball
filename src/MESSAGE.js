@@ -9,5 +9,6 @@ const MESSAGE = {
   GAMERESTART: '1',
   INITINPUT: 'INITSTR',
   INPUTQA: '숫자를 입력하세요:',
+  THREESTRIKE: 3,
 };
 module.exports = MESSAGE;
