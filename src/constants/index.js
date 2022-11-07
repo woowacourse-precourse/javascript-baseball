@@ -9,7 +9,7 @@ const COUNT_MESSAGE = {
   STRIKE: '스트라이크',
   BALL: '볼',
   NOTHING: '낫싱',
-  CORRECT_ANSWER: '3스트라이크',
+  THREE_STRIKE: '3스트라이크',
 };
 
 const ERROR_MESSAGE = {
@@ -20,8 +20,8 @@ const ERROR_MESSAGE = {
 };
 
 const GAME_PROGRESS = {
-  RESTART: '1',
-  TERMINATE: '2',
+  RETRY: '1',
+  END: '2',
 };
 
 const NUMBER = {

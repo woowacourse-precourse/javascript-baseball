@@ -32,7 +32,7 @@ class App {
   }
 
   isGameOver(result) {
-    if (result !== COUNT_MESSAGE.CORRECT_ANSWER) {
+    if (result !== COUNT_MESSAGE.THREE_STRIKE) {
       return this.getInputAndCompare();
     }
     return this.endOrRetry();
@@ -51,10 +51,10 @@ class App {
   }
 
   checkOneOrTwo(answer) {
-    if (answer === GAME_PROGRESS.RESTART) {
+    if (answer === GAME_PROGRESS.RETRY) {
       return this.makeComputerNumArr();
     }
-    if (answer === GAME_PROGRESS.TERMINATE) {
+    if (answer === GAME_PROGRESS.END) {
       return this.close();
     }
     return this.throwInputError(ERROR_MESSAGE.NOT_ONE_OR_TWO_ERROR);
