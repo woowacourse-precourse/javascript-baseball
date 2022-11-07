@@ -8,9 +8,9 @@ class App {
   }
   play() {
     this.gameStart();
-    // MissionUtils.Console.print(`상대방의 숫자는 ${this.opponent.number} 입니다`);
     this.user.getInput();
     this.user.checkValidation();
+    this.user.changeToNumbers();
   }
   gameStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -50,6 +50,9 @@ class User {
     });
     if (this.input.includes("0")) throw new Error("1부터 9 사이의 숫자만 입력 가능합니다.");
     if (this.input.length !== 3) throw new Error("3자리 수만 입력이 가능합니다.");
+  }
+  changeToNumbers() {
+    this.input = this.input.map((letter) => Number(letter));
   }
 }
 
