@@ -13,6 +13,14 @@ class User {
       return input;
     });
   }
+
+  checkValidation(userNum) {
+    if (!this.checkLength3(userNum)) return false;
+  }
+
+  checkLength3(userNum) {
+    return userNum.length === 3;
+  }
 }
 
 class App {
