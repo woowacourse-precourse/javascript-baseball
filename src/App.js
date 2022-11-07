@@ -4,6 +4,7 @@ class App {
     this.computerNumber = [];
     this.userNumber = [];
   }
+
   createRandomNumber() {
     while (this.computerNumber.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -12,16 +13,7 @@ class App {
       }
     }
   }
-  checkValidate(value) {
-    if (value.length !== 3) throw "잘못된 입력값 입니다.";
-    if (value.includes("0")) throw "잘못된 입력값 입니다.";
-    if (isNaN(value)) throw "잘못된 입력값 입니다.";
 
-    const isDuplicated = value.some((elem) => {
-      return value.indexOf(elem) !== value.lastIndexOf(elem);
-    });
-    if (isDuplicated) throw "잘못된 입력값 입니다.";
-  }
   userInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (value) => {
       this.userNumber = [...value];
@@ -34,6 +26,18 @@ class App {
       }
     });
   }
+
+  checkValidate(value) {
+    if (value.length !== 3) throw "잘못된 입력값 입니다.";
+    if (value.includes("0")) throw "잘못된 입력값 입니다.";
+    if (isNaN(value)) throw "잘못된 입력값 입니다.";
+
+    const isDuplicated = value.some((elem) => {
+      return value.indexOf(elem) !== value.lastIndexOf(elem);
+    });
+    if (isDuplicated) throw "잘못된 입력값 입니다.";
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.createRandomNumber();
