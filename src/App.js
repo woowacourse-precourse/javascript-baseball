@@ -87,7 +87,7 @@ class GameLoop {
       }
 
       MissionUtils.Console.close();
-      throw new Error("1이나 2를 입력해야합니다");
+      throw new Error("1이나 2를 입력해야 합니다");
     });
   }
 
