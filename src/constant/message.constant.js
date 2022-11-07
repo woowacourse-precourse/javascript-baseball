@@ -3,3 +3,7 @@ const RESULT = {
   BALL: "볼",
   NOTHING: "낫싱",
 };
+
+module.exports = {
+  RESULT,
+};
