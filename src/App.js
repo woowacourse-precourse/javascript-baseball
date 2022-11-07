@@ -8,7 +8,8 @@ class App {
     this.userInput = "";
     this.restartInput = "";
   }
-  getBall(includeOfNum) {
+
+  getBallCnt(includeOfNum) {
     let ballCnt = 0;
     [...this.userInput].forEach((num, idx) => {
       if (+num !== this.answer[idx] && includeOfNum[num]) {
@@ -19,7 +20,7 @@ class App {
     return ballCnt;
   }
 
-  getStrike() {
+  getStrikeCnt() {
     let strikeCnt = 0;
     [...this.userInput].forEach((num, idx) => {
       if (+num === this.answer[idx]) {
@@ -31,7 +32,6 @@ class App {
   }
 
   createResult() {
-    if (this.userInput === "") return "낫싱";
     const includeOfNum = Array.from({ length: 10 }).fill(false);
     let result = "";
 
@@ -39,8 +39,8 @@ class App {
       includeOfNum[num] = true;
     });
 
-    const ball = this.getBall(includeOfNum);
-    const strike = this.getStrike();
+    const ball = this.getBallCnt(includeOfNum);
+    const strike = this.getStrikeCnt();
 
     if (ball === 0 && strike === 0) result = "낫싱";
     if (ball > 0) result += `${ball}볼`;
@@ -61,24 +61,10 @@ class App {
     if (inputNum.includes(0)) {
       return false;
     }
-    String(inputNum)
-      .split("")
-      .forEach((str) => {
-        allowed = !isNaN(str) && allowed;
-      });
+    [...inputNum].forEach((str) => {
+      allowed = !isNaN(str) && allowed;
+    });
     return allowed;
-  }
-
-  checkRestartNum(inputNum) {
-    const RESTART = "1";
-    const EXIT = "2";
-    if (inputNum.length !== 1) {
-      return false;
-    }
-    if (inputNum !== RESTART && inputNum !== EXIT) {
-      return false;
-    }
-    return true;
   }
 
   checkException(inputNum, checkStyle) {
@@ -87,7 +73,7 @@ class App {
     if (checkStyle === playingInput) {
       return this.checkPlayingNum(inputNum, true);
     } else if (checkStyle === restartInput) {
-      return this.checkRestartNum(inputNum);
+      return inputNum === "1" || inputNum === "2";
     }
   }
 
