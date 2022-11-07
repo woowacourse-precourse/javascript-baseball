@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
+const exception = require("./Exception");
 
 class Game {
     constructor() {
@@ -28,21 +29,10 @@ class Game {
         return MissionUtils.Console.print("낫싱");
     }
 
-    exception(usersNumber) {
-        // 길이가 3자리인지 확인, 3자리 전부 일의 자리 숫자인지 확인 가능.
-        if (usersNumber.length !== "3") return true;
-        // 서로 다른 수인지 확인
-        if (Array.from(usersNumber).length !== new Set(usersNumber.split("")).length) return true;
-        if (isNaN(usersNumber)) return true;
-        return false;
-    }
-
     playGame() {    
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ", usersNumber => {
-            if (this.exception(usersNumber)) {
-                MissionUtils.Console.close();
-            }
-            
+            exception(usersNumber);
+
             console.log(this.computersNumber);
             usersNumber = [...usersNumber].map(idx => parseInt(idx));
             console.log(usersNumber);
@@ -59,21 +49,28 @@ class Game {
     getRightAnswer() {
         new Computer().successMessage();
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (choice) => {
-            if (!(choice === 1 || choice === 2)) {
-                MissionUtils.Console.close();
-            }
-            if (choice === "1") {
-                this.computersNumber = new Computer().pickedNum();
-                this.playGame();
-                return ;
-            }
-            if (choice === "2") {
-                console.log("들어왔다");
-                MissionUtils.Console.close();
-            }
+            if (choice === "1") this.pickedRestart();
+            if (choice === "2") this.pickedClose();
+            // this.pickedWrongChoice();
         });
     }
-    
+
+    pickedWrongChoice() {
+        MissionUtils.Console.close();
+        throw new Error("잘못된 수를 입력하셨습니다.")
+    }
+
+    pickedRestart() {
+        this.computersNumber = new Computer().pickedNum();
+        this.playGame();
+        return ;
+    }
+
+    pickedClose() {
+        MissionUtils.Console.close();
+        return ;
+    }
+
 }
 
 const game = new Game;
