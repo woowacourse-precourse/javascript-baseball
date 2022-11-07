@@ -45,8 +45,7 @@ class App {
    */
   stirUp(receivedNumbers) {
     if (this.isValidInput(receivedNumbers)) {
-      const correctNumbers = this.correctNumber;
-      this.gradeInput(correctNumbers, receivedNumbers);
+      this.gradeInput(receivedNumbers);
     } else {
       throw "잘못된 입력입니다.";
     }
@@ -54,10 +53,10 @@ class App {
 
   /**
    * 사용자가 입력한 값을 평가합니다.
-   * @param {string} correct
    * @param {string} received
    */
-  gradeInput(correct, received) {
+  gradeInput(received) {
+    const correct = this.correctNumber;
     // 볼, 스트라이크 점수를 담을 배열
     let points = [0, 0];
 
