@@ -1,6 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { message, checkStyle } = require("./message/message");
 
 const { Random, Console } = MissionUtils;
+const { START, ENTER, CLEAR, FINISH, END, CONTINUE, ERROR } = message;
+const { PLAY, RESTART } = checkStyle;
 
 class App {
   constructor() {
@@ -12,12 +15,8 @@ class App {
     let ballCnt = 0;
     let strikeCnt = 0;
     [...this.userInput].forEach((num, idx) => {
-      if (+num !== this.answer[idx] && includeOfNum[num]) {
-        ballCnt += 1;
-      }
-      if (+num === this.answer[idx]) {
-        strikeCnt += 1;
-      }
+      if (+num !== this.answer[idx] && includeOfNum[num]) ballCnt += 1;
+      else if (+num === this.answer[idx]) strikeCnt += 1;
     });
 
     return [ballCnt, strikeCnt];
@@ -39,8 +38,8 @@ class App {
     if (strike > 0) result += `${strike}스트라이크`;
 
     Console.print(result);
-    if (result === "3스트라이크") {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (result === CLEAR) {
+      Console.print(FINISH);
       this.restartQuestion();
     } else this.getUserInput();
   }
@@ -56,33 +55,28 @@ class App {
   }
 
   checkException(inputNum, checkStyle) {
-    if (checkStyle === "playingInput") {
+    if (checkStyle === PLAY) {
       return this.checkPlayingNum(inputNum, true);
-    } else if (checkStyle === "restartInput") {
+    } else if (checkStyle === RESTART) {
       return inputNum === "1" || inputNum === "2";
     }
   }
 
   restartQuestion() {
-    Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => {
-        if (!this.checkException(input, "restartInput")) {
-          throw new Error(
-            "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다."
-          );
-        }
-        if (input === "1") this.startGame();
-        Console.print("게임 종료");
-        Console.close();
+    Console.readLine(`${CONTINUE}\n`, (input) => {
+      if (!this.checkException(input, RESTART)) {
+        throw new Error(ERROR);
       }
-    );
+      if (input === "1") this.startGame();
+      Console.print(END);
+      Console.close();
+    });
   }
 
   getUserInput() {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!this.checkException(input, "playingInput")) {
-        throw new Error("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    Console.readLine(ENTER, (input) => {
+      if (!this.checkException(input, PLAY)) {
+        throw new Error(ERROR);
       }
       this.userInput = input;
       this.createResult();
@@ -106,7 +100,7 @@ class App {
   }
 
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(START);
     this.startGame();
   }
 }
