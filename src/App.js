@@ -25,9 +25,26 @@ class App {
 
   proceedGame(){
     MissionUtils.Console.readLine(MESSAGES.INPUT, (input) => {
-      console.log(input);
+      this.exceptionHandling(input);
+
     });
   }
+
+  exceptionHandling(input) {
+    if (input.length !== REQUIREMENT.LENGTH) {
+      throw(ERROR.LENGTH);
+    }
+    if (Number.isNaN(Number(input))) {
+      throw(ERROR.NaN);
+    }
+    if (input.includes('0')) {
+      throw(ERROR.ZERO);
+    }
+    if (new Set(input).size !== REQUIREMENT.LENGTH) {
+      throw(ERROR.DUPLICATE);
+    }  
+  }
+  
 }
 
 const app = new App();
