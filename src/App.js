@@ -68,8 +68,8 @@ class App {
   showResult(result) {
     const { ballNum, strikeNum } = result;
 
-    let message = `${ballNum === 0 ? "" : ballNum + BASEBALL_TERM.BALL} ${
-      strikeNum === 0 ? "" : strikeNum + BASEBALL_TERM.STRIKE
+    let message = `${ballNum + BASEBALL_TERM.BALL || ""} ${
+      strikeNum + BASEBALL_TERM.STRIKE || ""
     }`;
 
     if (ballNum === 0 && strikeNum === 0) {
@@ -113,5 +113,5 @@ class App {
     this.playNewGame();
   }
 }
-new App().play();
+
 module.exports = App;
