@@ -12,6 +12,10 @@ class App {
 
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.gameStart();
+  }
+
+  gameStart() {
     this.saveRandomNumbers();
     this.saveUserInputs();
   }
@@ -31,6 +35,7 @@ class App {
         this.randomNumbers.push(number);
       }
     }
+    console.log(this.randomNumbers);
   }
 
   saveUserInputs() {
@@ -89,8 +94,10 @@ class App {
     });
 
     this.printScoreMessage();
+
     if(this.score.STRIKE === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.isAginOrQuit();
     } else {
       this.saveUserInputs();
     }
@@ -112,6 +119,18 @@ class App {
     if (BALL && !STRIKE) return `${BALL} 볼`;
 
     if (BALL && STRIKE) return `${BALL}볼 ${STRIKE}스트라이크`;
+  }
+
+  // 다시하기 / 게임종료 중 선택
+  isAginOrQuit() {
+    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
+      if(answer === '1') {
+        return this.gameStart();
+      }
+      if(answer === '2') {
+        return Console.close();
+      }
+    });
   }
 }
 
