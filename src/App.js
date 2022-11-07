@@ -4,8 +4,7 @@ function createRandNum() {
   let randNum = [];
 
   for (let i = 0; i < 3; i++) {
-    let randNumList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let tempNum = MissionUtils.Random.pickNumberInList(randNumList);
+    let tempNum = MissionUtils.Random.pickNumberInList([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     if (!randNum.includes(tempNum)) {
       randNum.push(tempNum);
     } else {
@@ -13,7 +12,7 @@ function createRandNum() {
     }
   }
 
-  // console.log(randNum, 'random number 생성');
+  console.log(randNum, 'random number 생성');
   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
   return randNum
@@ -64,7 +63,7 @@ function inputUserAnswer(randNum) {
     for (a of answer) {
       inputNum.push(parseInt(a))
     }
-    // MissionUtils.Console.print(inputNum, '입력된 숫자');
+    console.log(inputNum, '입력된 숫자');
 
     // 낫싱인지 확인
     if (checkNothing(randNum, inputNum)) {
@@ -76,12 +75,18 @@ function inputUserAnswer(randNum) {
       ballList = checkBall(randNum, inputNum);
     }
     if (strike === 3) {
-      MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n')
+      MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n')
+      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (opinion) => {
+        if (opinion === 1) {
+          inputUserAnswer();
+        } else {
+          MissionUtils.Console.close()
+        }
+      })
     } else {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      inputUserAnswer();
     }
-
-    MissionUtils.Console.close()
   })
 }
 
