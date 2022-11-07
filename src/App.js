@@ -1,24 +1,30 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  createNumberList() {
-    const numberList = [];
-    while (numberList.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!numberList.includes(number)) numberList.push(number);
-    }
-    return numberList;
+  constructor() {
+    this.answerNumberList = [];
   }
 
   printStartPhrase() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
+  createNumberList() {
+    this.answerNumberList.splice(0);
+    while (this.answerNumberList.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.answerNumberList.includes(number))
+        this.answerNumberList.push(number);
+    }
+  }
+
   receiveNumber() {
-    MissionUtils.Console.readLine(
-      '숫자를 입력해주세요 : ',
-      this.compareNumbers.bind(this)
-    );
+    return new Promise((resolve, reject) => {
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+        this.throwException(input);
+        resolve(input);
+      });
+    });
   }
 
   throwException(input) {
@@ -29,18 +35,15 @@ class App {
     }, '');
   }
 
-  compareNumbers(input) {
-    this.throwException(input);
-    const answerNumberList = this.createNumberList();
-    const inputNumberList = input.split('').map((number) => Number(number));
+  async compareNumbers(input) {
     const result = { 볼: 0, 스트라이크: 0 };
+    const inputNumberList = input.split('').map((number) => Number(number));
 
     inputNumberList.forEach((number, idx) => {
-      if (number === answerNumberList[idx]) result.스트라이크 += 1;
-      else if (answerNumberList.includes(number)) result.볼 += 1;
+      if (number === this.answerNumberList[idx]) result.스트라이크 += 1;
+      else if (this.answerNumberList.includes(number)) result.볼 += 1;
     });
-
-    this.printResult(result);
+    return result;
   }
 
   printResult({ 볼: BALL_COUNT, 스트라이크: STRIKE_COUNT }) {
@@ -58,7 +61,10 @@ class App {
 
   play() {
     this.printStartPhrase();
-    this.receiveNumber();
+    this.createNumberList();
+    this.receiveNumber()
+      .then(this.compareNumbers.bind(this))
+      .then(this.printResult);
   }
 }
 
