@@ -17,7 +17,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe("숫자 입력 예외 처리 테스트", () => {
+describe("예외 처리 테스트", () => {
   test("1. 알파벳 입력", () => {
     const randoms = [1,2,3];
     const answers = ["13a"];
@@ -56,4 +56,18 @@ describe("숫자 입력 예외 처리 테스트", () => {
       app.play();
     }).toThrow();
   });
+
+  test("4. 종료 옵션 입력 에러", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["246", "135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
+
