@@ -1,25 +1,33 @@
+const MESSAGE = require("../constant/message");
+
 class UserInput {
   constructor(userInput) {
     this._userInput = userInput;
   }
 
   checkLength() {
-    return this._userInput.length === 3;
+    if (this._userInput.length !== 3) throw new Error(MESSAGE.INVALID_LENGTH);
   }
 
   checkRange() {
-    return (
-      1 <= Math.min(...this._userInput) && Math.max(...this._userInput) <= 9
-    );
+    if (
+      !(1 <= Math.min(...this._userInput) && Math.max(...this._userInput) <= 9)
+    ) {
+      throw new Error(MESSAGE.INVALID_RANGE);
+    }
   }
 
   checkDuplicate() {
     const setLength = new Set(this._userInput).size;
-    return setLength === 3;
+    if (setLength !== 3) {
+      throw new Error(MESSAGE.INVALID_DUPLICATE);
+    }
   }
 
   checkAllUserInput() {
-    return this.checkLength() && this.checkRange() && this.checkDuplicate();
+    this.checkLength();
+    this.checkRange();
+    this.checkDuplicate();
   }
 }
 
