@@ -57,8 +57,6 @@ class App {
   printResults(compareResults) {
     const { ball, strike } = compareResults;
 
-    console.log(this.#randomNum, compareResults);
-
     if (!ball && !strike) Console.print("낫싱");
 
     if (ball && !strike) Console.print(`${ball}볼`);
