@@ -3,20 +3,21 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class ComputerModel {
   getNumberFromComputer() {
     this.computerNumberSpace = [];
-    this.setNumberIntoSpace();
+    this.setNumberIntoSpace(this.computerNumberSpace);
     return this.computerNumberSpace;
   }
 
-  setNumberIntoSpace() {
+  setNumberIntoSpace(computerSpace) {
     const numberFromComputer = () => this.getRandomNumberInRange(1, 9);
     const InsertNumberToSpace = (number, space) => {
       if (this.isNumberNotInSpace(number, space)) {
         space.push(number);
       }
+      return space;
     };
 
-    while (this.isSpaceFull(this.computerNumberSpace)) {
-      InsertNumberToSpace(numberFromComputer(), this.computerNumberSpace);
+    while (this.isSpaceNotFull(computerSpace)) {
+      InsertNumberToSpace(numberFromComputer(), computerSpace);
     }
   }
 
@@ -28,7 +29,7 @@ class ComputerModel {
     return !space.includes(number);
   }
 
-  isSpaceFull(space) {
+  isSpaceNotFull(space) {
     return space.length < 3;
   }
 }
