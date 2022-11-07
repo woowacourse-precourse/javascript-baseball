@@ -38,6 +38,15 @@ class Utils {
   static #hasNumber0(number) {
     return number.toString().includes("0");
   }
+
+  static setComputerNumber() {
+    let randomNumberSet = new Set();
+    while (randomNumberSet.size !== 3) {
+      let number = Random.pickNumberInRange(1, 9);
+      randomNumberSet.add(number);
+    }
+    return Array.from(randomNumberSet);
+  }
 }
 
 module.exports = Utils;
