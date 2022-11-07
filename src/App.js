@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const RandomNumber = require("./RandomNumber");
 const Constraints = require("./Constraints");
+const Console = MissionUtils.Console;
 
 class App {
   constructor() {
@@ -14,11 +15,11 @@ class App {
   }
 
   showStartMessage() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   getPlayerInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       this.constraints.checkConstraints(userInput);
 
       this.comparePlayerInputWithRandomNumber(userInput);
@@ -51,9 +52,7 @@ class App {
 
   showPlayerResult() {
     if (this.strike === 3) {
-      MissionUtils.Console.print(
-        "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-      );
+      Console.print("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 
       this.getPlayerRePlayInput();
 
@@ -61,7 +60,7 @@ class App {
     }
 
     if (this.ball === 0 && this.strike === 0) {
-      MissionUtils.Console.print("낫싱");
+      Console.print("낫싱");
 
       this.getPlayerInput();
 
@@ -69,7 +68,7 @@ class App {
     }
 
     if (this.ball !== 0 && this.strike !== 0) {
-      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+      Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
 
       this.getPlayerInput();
 
@@ -77,7 +76,7 @@ class App {
     }
 
     if (this.ball !== 0 && this.strike === 0) {
-      MissionUtils.Console.print(`${this.ball}볼`);
+      Console.print(`${this.ball}볼`);
 
       this.getPlayerInput();
 
@@ -85,14 +84,14 @@ class App {
     }
 
     if (this.ball === 0 && this.strike !== 0 && this.strike !== 3) {
-      MissionUtils.Console.print(`${this.strike}스트라이크`);
+      Console.print(`${this.strike}스트라이크`);
 
       this.getPlayerInput();
     }
   }
 
   getPlayerRePlayInput() {
-    MissionUtils.Console.readLine(
+    Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (userInput) => {
         this.constraints.checkRePlayInputConstraints(userInput);
@@ -110,7 +109,7 @@ class App {
     }
 
     if (userInput === "2") {
-      MissionUtils.Console.close();
+      Console.close();
     }
   }
 }
