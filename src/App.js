@@ -10,9 +10,10 @@ class App {
   }
 
   play() {
-   // MissionUtils.Console.print(this.computerNumber);
+    //console.log(this.computerNumber);
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInputNumber) => {
       this.userInputNumber = userInputNumber;
+      this.isError();
       this.countMethod();
       this.printMessageMethod();
       if (this.countStrike < 3) {
@@ -56,7 +57,7 @@ class App {
     }
  }
 
- gameRestart(){
+ gameRestart() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n', (userResponse)=>{
     if (userResponse === '1') {
       this.countStrike = 0;
@@ -67,12 +68,30 @@ class App {
     else if (userResponse === '2') {
       MissionUtils.Console.close();
     }
+    else {
+    throw '입력값의 양식이 올바르지 않습니다.';
+    }
   });
  }
 
+ isError() {
+  const countUserInputNumber = new Set(this.userInputNumber.split(''));
+  if (this.userInputNumber.length >= 4) {
+    throw '입력값의 양식이 올바르지 않습니다.';
+  }
+  else if (countUserInputNumber.size < 3) {
+    throw '입력값의 양식이 올바르지 않습니다.';
+  }
+  else if (countUserInputNumber.has('0')) {
+    throw '입력값의 양식이 올바르지 않습니다.';
+  }
+  else if ((/\D/g).test(this.userInputNumber)) {
+    throw '입력값의 양식이 올바르지 않습니다.';
+  }
+ }
 }
 
 module.exports = App;
 
-const test = new App;
+const test = new App();
 test.play();
