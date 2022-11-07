@@ -66,7 +66,7 @@ function readNumber() {
   return answerList;
 }
 
-function readControlNumber() {
+function readControl() {
   let answer = -1;
   MissionUtils.Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
@@ -77,7 +77,7 @@ function readControlNumber() {
   return answer;
 }
 
-function isValidNumberCheck(inputList) {
+function isValidNumber(inputList) {
   const inputNumbers = [];
 
   if (inputList.length !== config.GAME_NUM_SIZE) {
@@ -101,7 +101,7 @@ function isValidNumberCheck(inputList) {
   return 1;
 }
 
-function isValidControlCheck(input) {
+function isValidControl(input) {
   if (input !== 1 && input !== 2) {
     return 0;
   }
@@ -120,7 +120,7 @@ class App {
     while (control === 1) {
       userNumber = readNumber();
       console.log("userNumber", userNumber);
-      if (isValidNumberCheck(userNumber) !== 1) {
+      if (isValidNumber(userNumber) !== 1) {
         throw "숫자가 유효하지 않습니다.";
       }
 
@@ -131,9 +131,9 @@ class App {
         MissionUtils.Console.print(
           `${config.GAME_NUM_SIZE}개의 숫자를 모두 맞히셨습니다! 게임 종료`
         );
-        control = readControlNumber();
+        control = readControl();
       }
-      if (isValidControlCheck(control) !== 1) {
+      if (isValidControl(control) !== 1) {
         throw "입력값이 유효하지 않습니다.";
       }
       if (scoreObject.strike === config.GAME_NUM_SIZE && control === 1) {
