@@ -1,10 +1,6 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 class getComputerNum {
-  constructor() {
-    this.userSelectNum = '';
-  }
-
   getComputerRandomNum() {
     const COMPUTER_NUM = [];
 
