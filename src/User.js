@@ -1,3 +1,4 @@
+const { NUMBER } = require("./Game");
 const Game = require("./Game");
 
 class User {
@@ -29,6 +30,13 @@ class User {
     userInput.forEach((number) => {
       if (!number > 0) return false;
     });
+  }
+
+  makeUserNumber(userInput) {
+    const changeStrToNum = (str) => Number(str);
+    const userNumber = Array.from(userInput, changeStrToNum);
+
+    return userNumber;
   }
 }
 
