@@ -7,7 +7,6 @@ class App {
   }
 
   getUserInput() {
-    console.log(this.computerRandomNumber);
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       const validation = new Validation(userInput);
       if (validation.isValidInput()) {
@@ -19,8 +18,8 @@ class App {
   doGame(userInput) {
     let strikeCount = 0;
     let ballCount = 0;
-    for (let idx = 0; idx < 3; idx++) {
-      if (this.computerRandomNumber[idx] === userInput[idx]) strikeCount++;
+    for (let idx = 0; idx < 3; idx += 1) {
+      if (this.computerRandomNumber[idx] === userInput[idx]) strikeCount += 1;
       else if (userInput.includes(this.computerRandomNumber[idx])) {
         ballCount += 1;
       }
@@ -29,7 +28,7 @@ class App {
     this.checkGameResult(result);
   }
 
-  printGameResult(strikeCnt, ballCnt) {
+  static printGameResult(strikeCnt, ballCnt) {
     if (strikeCnt === 0 && ballCnt === 0) return Console.print("낫싱");
     const strike = strikeCnt === 0 ? "" : `${strikeCnt}스트라이크`;
     const ball = ballCnt === 0 ? "" : `${ballCnt}볼 `;
@@ -49,14 +48,24 @@ class App {
 
   checkGameResult(result) {
     const { strikeCount, ballCount } = result;
-    this.printGameResult(strikeCount, ballCount);
-    if (strikeCount !== 3) return this.getUserInput();
-    return this.askRestart();
+    App.printGameResult(strikeCount, ballCount);
+    if (strikeCount !== 3) this.getUserInput();
+    else this.askRestart();
+  }
+
+  makeComputerNumber() {
+    const numberArray = [];
+    while (numberArray.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!numberArray.includes(number)) {
+        numberArray.push(number);
+      }
+    }
+    this.computerRandomNumber = numberArray.join("");
   }
 
   gameStart() {
-    const RandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3).join("");
-    this.computerRandomNumber = RandomNumber;
+    this.makeComputerNumber();
     this.getUserInput();
   }
 
@@ -65,8 +74,5 @@ class App {
     this.gameStart();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
