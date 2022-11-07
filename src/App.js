@@ -17,26 +17,26 @@ class App {
 
   play() {
     this.answer = this.generateAnswer()
-    this.getInput()
+    this.takeGuess()
   }
 
   generateAnswer() {
     return Random.pickUniqueNumbersInRange(this.from, this.to, this.ballCount)
   }
 
-  getInput() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      if (this.isInvalidInput(input)) {
+  takeGuess() {
+    Console.readLine('숫자를 입력해주세요 : ', (guess) => {
+      if (this.isInvalidGuess(guess)) {
         throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.')
       }
 
-      const numbers = Array.from(input).map((digit) => parseInt(digit))
+      const numbers = Array.from(guess).map((digit) => parseInt(digit))
       const { strike, ball, finished } = this.determineGameResult(numbers)
 
       this.printGameResult({ strike, ball })
 
       if (!finished) {
-        this.getInput()
+        this.takeGuess()
       } else {
         Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
 
@@ -105,13 +105,13 @@ class App {
   }
 
   /**
-   * @param {string} input
+   * @param {string} guess
    * @returns {boolean}
    */
-  isInvalidInput(input) {
+  isInvalidGuess(guess) {
     const inputValidationExpression = new RegExp(`^\\d{${this.ballCount}}$`)
 
-    return !inputValidationExpression.test(input)
+    return !inputValidationExpression.test(guess)
   }
 
   close() {
