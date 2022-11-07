@@ -92,6 +92,7 @@ const play_again_test = (is_end, callback)=> {
     } else if (answer == 2) {
       //case when game is end and just print game end to console
       MissionUtils.Console.print("game end")
+      MissionUtils.Console.close()
     }
   })
 }
