@@ -1,11 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { COMMAND, MESSAGES } = require('./constant/constant');
 
 const Computer = require('./Computer');
-
-const COMMAND = {
-  RESTART: 1,
-  QUIT: 2,
-};
 
 class App {
   play() {
@@ -14,7 +10,7 @@ class App {
   }
 
   printGameStart() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MESSAGES.START_GAME);
   }
 
   initGame() {
@@ -23,7 +19,7 @@ class App {
   }
 
   run() {
-    Console.readLine('숫자를 입력해주세요 : ', input => {
+    Console.readLine(MESSAGES.ENTER_INPUT, input => {
       const { numberOfStrike, hintString } = this.computer.processInput(input);
       Console.print(hintString);
 
@@ -37,17 +33,14 @@ class App {
   }
 
   printPlayerWinGame() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print(MESSAGES.WIN_GAME);
   }
 
   askRestartOrQuit() {
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      input => {
-        const command = Number(input.trim());
-        this.handleCommand(command);
-      },
-    );
+    Console.readLine(MESSAGES.ENTER_COMMAND, input => {
+      const command = Number(input.trim());
+      this.handleCommand(command);
+    });
   }
 
   handleCommand(command) {
@@ -56,7 +49,7 @@ class App {
     } else if (command === COMMAND.QUIT) {
       this.quit();
     } else {
-      throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.');
+      throw new Error(MESSAGES.ERROR);
     }
   }
 

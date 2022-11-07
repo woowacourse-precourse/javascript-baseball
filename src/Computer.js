@@ -1,6 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
-
-const NUMBER_LENGTH = 3;
+const { NUMBER_LENGTH, HINTS, MESSAGES } = require('./constant/constant');
 
 class Computer {
   #numbers;
@@ -23,7 +22,7 @@ class Computer {
     const playerNumbers = this.parseInput(input);
 
     if (!this.isValid(playerNumbers)) {
-      throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.');
+      throw new Error(MESSAGES.ERROR);
     }
 
     const numberOfBall = this.countBall(playerNumbers);
@@ -78,13 +77,13 @@ class Computer {
     const hint = [];
 
     if (numberOfBall) {
-      hint.push(`${numberOfBall}볼`);
+      hint.push(HINTS.BALL(numberOfBall));
     }
     if (numberOfStrike) {
-      hint.push(`${numberOfStrike}스트라이크`);
+      hint.push(HINTS.STRIKE(numberOfStrike));
     }
 
-    return hint.length ? hint.join(' ') : '낫싱';
+    return hint.length ? hint.join(' ') : HINTS.NOTHING;
   }
 }
 
