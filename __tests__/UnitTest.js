@@ -40,6 +40,20 @@ describe("Print Message Test", () => {
 
 });
 
+describe("Throw Error Test", () => {
+  test.each([
+    ["세 자리의 숫자를 정확히 입력해주세요 : 입력한 내용"],
+    ["정확한 값을 입력해주세요 : 입력한 내용"]
+  ])("case 1) Throw Exception Message", (message) => {
+    expect(() => {
+      const app = new App();
+      app.throwExceptionMessage(message)
+    }).toThrow();
+    
+  });
+})
+
+
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
