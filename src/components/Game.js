@@ -13,27 +13,27 @@ class Game {
 
   static getStrikeBallCount(baseballNumber, userInput) {
     const userInputNums = this.digitizeUserInput(userInput);
-    let [STRIKE, BALL] = [GAME_NUMBER.INIT, GAME_NUMBER.INIT];
+    let [strikeCount, ballCount] = [GAME_NUMBER.INIT, GAME_NUMBER.INIT];
 
     baseballNumber.forEach((num, index) => {
       if (this.isEqual(num, userInputNums[index])) {
-        STRIKE++;
+        strikeCount++;
       } else if (userInputNums.includes(num)) {
-        BALL++;
+        ballCount++;
       }
     });
-    return [STRIKE, BALL];
+    return [strikeCount, ballCount];
   }
 
-  static getStrikeBallMessage(STRIKE, BALL) {
-    const ballMessage = BALL
-      ? `${BALL}${COUNT_MESSAGE.BALL}`
+  static getStrikeBallMessage(strikeCount, ballCount) {
+    const ballMessage = ballCount
+      ? `${ballCount}${COUNT_MESSAGE.BALL}`
       : COUNT_MESSAGE.EMPTY;
-    const strikeMessage = STRIKE
-      ? `${STRIKE}${COUNT_MESSAGE.STRIKE}`
+    const strikeMessage = strikeCount
+      ? `${strikeCount}${COUNT_MESSAGE.STRIKE}`
       : COUNT_MESSAGE.EMPTY;
 
-    return ErrorCheck.isNothing(STRIKE, BALL)
+    return ErrorCheck.isNothing(strikeCount, ballCount)
       ? COUNT_MESSAGE.NOTHING
       : `${ballMessage} ${strikeMessage}`.trim();
   }

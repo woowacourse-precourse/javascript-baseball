@@ -15,16 +15,6 @@ class ErrorCheck {
     return numberOnlyReg.test(userInput);
   }
 
-  static isReplayError(userInput) {
-    return (
-      userInput !== REPLAY_NUMBER.KEEP_PLAY && userInput !== REPLAY_NUMBER.EXIT
-    );
-  }
-
-  static isNothing(STRIKE, BALL) {
-    return STRIKE === GAME_NUMBER.INIT && BALL === GAME_NUMBER.INIT;
-  }
-
   static guessError(userInput) {
     if (this.isInvalidInputLength(userInput)) {
       throw new Error(ERROR_MESSAGE.LENGTH_ERROR);
@@ -37,10 +27,20 @@ class ErrorCheck {
     }
   }
 
+  static isReplayError(userInput) {
+    return (
+      userInput !== REPLAY_NUMBER.KEEP_PLAY && userInput !== REPLAY_NUMBER.EXIT
+    );
+  }
+
   static replayError(userInput) {
     if (this.isReplayError(userInput)) {
       throw new Error(ERROR_MESSAGE.INVALID_NUM_ERROR);
     }
+  }
+
+  static isNothing(strikeCount, ballCount) {
+    return strikeCount === GAME_NUMBER.INIT && ballCount === GAME_NUMBER.INIT;
   }
 }
 

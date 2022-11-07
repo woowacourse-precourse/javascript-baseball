@@ -33,17 +33,20 @@ class Baseball {
   }
 
   getGameCount(randomNumber, userInput) {
-    const [STRIKE, BALL] = Game.getStrikeBallCount(randomNumber, userInput);
+    const [strikeCount, ballCount] = Game.getStrikeBallCount(
+      randomNumber,
+      userInput
+    );
 
-    this.printGameCount(STRIKE, BALL);
+    this.printGameCount(strikeCount, ballCount);
   }
 
-  printGameCount(STRIKE, BALL) {
-    const gameMessage = Game.getStrikeBallMessage(STRIKE, BALL);
+  printGameCount(strikeCount, ballCount) {
+    const strikeBallMessage = Game.getStrikeBallMessage(strikeCount, ballCount);
 
-    Console.print(gameMessage);
+    Console.print(strikeBallMessage);
 
-    if (!Game.isEqual(gameMessage, COUNT_MESSAGE.CORRECT)) {
+    if (!Game.isEqual(strikeBallMessage, COUNT_MESSAGE.CORRECT)) {
       this.getUserNumber();
     } else {
       Console.print(SYSTEM_MESSAGE.END);

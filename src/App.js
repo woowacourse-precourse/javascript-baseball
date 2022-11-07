@@ -2,11 +2,11 @@ const { Baseball } = require('./components/Baseball');
 
 class App {
   constructor() {
-    this.baseballGame = new Baseball();
+    this.basball = new Baseball();
   }
 
   play() {
-    this.baseballGame.playGame();
+    this.basball.playGame();
   }
 }
 
