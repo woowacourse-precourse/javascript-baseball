@@ -6,15 +6,15 @@ class Console {
   static END = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
   static END_NOTICE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
 
-  readLine(message, callback) {
+  static readLine(message, callback) {
     MissionUtils.Console.readLine(message, callback);
   }
 
-  print(message) {
+  static print(message) {
     MissionUtils.Console.print(message);
   }
 
-  close() {
+  static close() {
     MissionUtils.Console.close();
   }
 }
