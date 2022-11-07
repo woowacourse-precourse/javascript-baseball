@@ -1,8 +1,8 @@
-const {Console, Random} = require("@woowacourse/mission-utils");
-const Computer = require("./Computer");
-const User = require("./User");
-const { Referee } = require("./Referee");
-const validateUserInput = require("./utils")
+const { Console, Random } = require('@woowacourse/mission-utils');
+const Computer = require('./Computer');
+const User = require('./User');
+const { Referee } = require('./Referee');
+const validateUserInput = require('./utils');
 
 class App {
   user = new User();
@@ -10,15 +10,15 @@ class App {
   referee = new Referee();
 
   constructor() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  play () {
+  play() {
     this.initialize();
     this.match();
   }
 
-  initialize () {
+  initialize() {
     const numbers = [];
     while (numbers.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
@@ -29,36 +29,38 @@ class App {
     this.computer.numbers = numbers.map(String);
   }
 
-  match () {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      this.user.numbers = input.split("")
-      validateUserInput(this.user.numbers)
+  match() {
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.user.numbers = input.split('');
+      validateUserInput(this.user.numbers);
 
-      console.log("정답: ", this.computer.numbers);
-      console.log("입력: ", this.user.numbers);
+      console.log('정답: ', this.computer.numbers);
+      console.log('입력: ', this.user.numbers);
 
-      this.referee.judge(this.computer.numbers, this.user.numbers)
-      this.referee.printScore();
+      this.referee.judge(this.computer.numbers, this.user.numbers).printScore();
 
       if (this.referee.strike === 3) {
-        this.isRegame()
-      } 
-    
+        this.isRegame();
+      }
+
       this.match();
     });
   }
 
-  isRegame () {
-    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
-      if (input === "1") {
-        this.play();
-      } else if (input === "2") {
-        Console.close();
-        return;
-      } else {
-        throw new Error("input should be 1 or 2");
-      }
-    })
+  isRegame() {
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (input) => {
+        if (input === '1') {
+          this.play();
+        } else if (input === '2') {
+          Console.close();
+          return;
+        } else {
+          throw new Error('input should be 1 or 2');
+        }
+      },
+    );
   }
 }
 
@@ -66,4 +68,3 @@ const app = new App();
 app.play();
 
 module.exports = App;
-

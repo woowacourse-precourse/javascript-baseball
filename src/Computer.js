@@ -5,7 +5,7 @@ class Computer {
     return this._numbers;
   }
   set numbers(value) {
-    this._numbers = value
+    this._numbers = value;
   }
 }
 
