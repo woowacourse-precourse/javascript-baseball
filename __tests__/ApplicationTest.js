@@ -59,4 +59,54 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("게임 종료 후 예외테스트", () => {
+    const randoms = [1, 2, 5, 3, 9, 7];
+    const answers = ["346", "651", "126", "125", "1", "321", "248", "397"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "2볼",
+      "2스트라이크",
+      "3스트라이크",
+      "1스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("미입력 Enter 예외테스트", () => {
+    const randoms = [1, 5, 9];
+    const answers = [""];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력했습니다. 프로그램을 종료합니다.");
+  });
+
+  test("0 입력 예외테스트", () => {
+    const randoms = [1, 5, 9];
+    const answers = ["019"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("잘못된 문자를 입력했습니다. 프로그램을 종료합니다.");
+  });
 });
