@@ -1,7 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const constants = require("./data/constants.js");
 
 function start() {
-  MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  MissionUtils.Console.print(constants.MESSAGE.START);
 }
 
 exports.start = start;
