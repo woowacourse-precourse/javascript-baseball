@@ -1,47 +1,35 @@
-const checkInput = (input) => {
-  if(input.length !== 3){
-    return false;
-  }
-  if (isNaN(input)){
-    return false;
-  }
+const startGame = (computer) => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      const userInputArray = setting.getInputIntArray(userInput);
+      let hint = '';
+      if (setting.checkInput(userInput)) {
+          hint = getHint(userInputArray, computer);
+      } else {
+          throw new Error('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
+      }
 
-  let newArray = [];
-  for (let i = 0;  i < input.length; i++){
-    if(!newArray.includes(input[i])){
-      newArray.push(input[i]);
-    } else{
-      return false;
-    }
-  }
-  return true;
-}
-
-
-const getInputIntArray = (input) => {
-  const userInputArray = [...input];
-  const newArray = userInputArray.map((num) => parseInt(num));
-  return newArray;
+      MissionUtils.Console.print(hint);
+      if (hint === '3스트라이크') {
+          MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+          endGame();
+      } else {
+          startGame(computer);
+      }
+  });
 };
 
 
-const startGame = (computer) => {
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-    const userInputArray = getInputIntArray(userInput);
-    let hint = '';
-    if (checkInput(userInput)){
-      hint = getHint(userInputArray, computer);
-    } else {
-      throw new Error('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
-    }
-
-    MissionUtils.Console.print(hint);
-    if (hint === '3스트라이크'){
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      endGame();
-    } else{
-      startGame(computer);
-    }
+const endGame = () => {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (answer) => {
+      if (answer === '1') {
+          const app = new App();
+          app.play();
+      } else if (answer === '2') {
+          MissionUtils.Console.close();
+          return;
+      } else {
+          throw new Error('다시 입력해주세요 !');
+      }
   });
 };
 
@@ -50,44 +38,29 @@ const getHint = (userInputArray, computer) => {
   let hint = '';
   let strike = 0;
   let ball = 0;
-  for (let i = 0; i < userInputArray.length; i++){
-    let idx = -1;
-    idx = computer.indexOf(userInputArray[i]);
-    if (idx === i){
-      strike++;
-    } else if (idx > -1){
-      ball++;
-    }
+  for (let i = 0; i < userInputArray.length; i++) {
+      let idx = -1;
+      idx = computer.indexOf(userInputArray[i]);
+      if (idx === i) {
+          strike++;
+      } else if (idx > -1) {
+          ball++;
+      }
   }
 
-  if (strike || ball){
-    if (ball > 0){
-      hint += `${ball}볼 `;
-  
-    } if (strike > 0) {
-      hint += `${strike}스트라이크`;
-    }
-  } else{
-    hint = '낫싱';
+  if (strike || ball) {
+      if (ball > 0) {
+          hint += `${ball}볼 `;
+
+      } if (strike > 0) {
+          hint += `${strike}스트라이크`;
+      }
+  } else {
+      hint = '낫싱';
   }
 
   return hint;
-}
-
-
-const endGame = () => {
-  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (answer) => {
-    if (answer === '1'){
-      app.play();
-    } else if (answer === '2'){
-      MissionUtils.Console.close();
-      return;
-    } else{
-      throw new Error('다시 입력해주세요 !');
-    }
-  });
-}
-
+};
 
 const pickComputerNumber = () => {
   const computer = [];
@@ -98,7 +71,7 @@ const pickComputerNumber = () => {
     }
   }
   return computer;
-}
+};
 
 
 class App {
@@ -111,7 +84,6 @@ class App {
 }
 
 const MissionUtils = require("@woowacourse/mission-utils");
-const app = new App();
-app.play();
+const setting = require("./Setting");
 
 module.exports = App;
