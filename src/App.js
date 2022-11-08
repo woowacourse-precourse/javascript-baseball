@@ -11,6 +11,13 @@ class App {
     this.gameover = false;
   }
 
+  createComputerNumber() {
+    this.computerNumber = [];
+    while (this.computerNumber.length < MAX_LENGTH) {
+      this.computerNumber.push(MissionUtils.Random.pickNumberInRange(1, 9));
+    }
+  }
+
   play() { }
 
 }
