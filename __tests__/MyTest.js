@@ -48,4 +48,31 @@ describe('기능 목록 테스트', () => {
       }).toThrow();
     });
   });
+
+  test('결과를 출력하는 기능', () => {
+    const logSpy = getLogSpy();
+    const resultList = [
+      { ball: 1, strike: 1 },
+      { ball: 1, strike: 0 },
+      { ball: 0, strike: 1 },
+      { ball: 0, strike: 3 },
+      { ball: 0, strike: 0 },
+    ];
+    const messages = [
+      '1볼 1스트라이크',
+      '1볼',
+      '1스트라이크',
+      '3스트라이크',
+      '낫싱',
+    ];
+
+    resultList.forEach((result, idx) => {
+      const app = new App();
+      app.printResult(result);
+
+      expect(logSpy).toHaveBeenCalledWith(
+        expect.stringContaining(messages[idx])
+      );
+    });
+  });
 });
