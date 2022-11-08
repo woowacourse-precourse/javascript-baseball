@@ -4,6 +4,7 @@ const ComputerInput = require("../src/ComputerInput");
 const CheckInputValid = require("../src/CheckInputValid");
 const { ERROR } = require("../src/data/Constants");
 const Render = require("../src/Render");
+const GameJudgment = require("../src/GameJudgment");
 
 describe("Computer에서 랜덤숫자 배열 추출", () => {
   const computerInput = ComputerInput();
@@ -46,4 +47,32 @@ describe("Error 발생 테스트", () => {
     expect(() => errorCatch(ERROR.USER_INPUT_LENGTH)).toThrow();
   });
 });
+
+describe("GameRule Test", () => {
+  const gameJudgment = new GameJudgment();
+  test("ballCount와 strikeCount 측정 테스트", () => {
+    function countStrikeAndBall(user, computer) {
+      let ballCount = 0;
+      let strikeCount = 0;
+
+      for (let i = 0; i < 3; i++) {
+        if (user[i] === computer[i]) {
+          strikeCount = strikeCount + 1;
+        }
+        if (user[i] !== computer[i] && computer.includes(user[i])) {
+          ballCount = ballCount + 1;
+        }
+      }
+      return [ballCount, strikeCount];
+    }
+
+    const result1 = gameJudgment.judgement(["1", "2", "3"], ["1", "3", "2"]);
+
+    expect(result1).toEqual([2, 1]);
+    expect(countStrikeAndBall(["1", "3", "4"], ["6", "7", "3"])).toEqual([
+      1, 0,
+    ]);
+  });
+});
+
 //    npm test Retry.js
