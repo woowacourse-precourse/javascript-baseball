@@ -41,11 +41,11 @@ const getUserNumber = (computer, question) => {
 };
 
 const validateUserNumber = (userInput) => {
-  const isOneToNine = validateOneToNine(userInput);
+  const isBetweenOneToNine = validateOneToNine(userInput);
   const isCorrectLength = validateLength(userInput, 3);
   const isNotOverlapped = validateOverlapped(userInput);
 
-  if (isOneToNine && isCorrectLength && isNotOverlapped) {
+  if (isBetweenOneToNine && isCorrectLength && isNotOverlapped) {
     return true;
   } else {
     throw new Error("에러 발생 후 종료");
@@ -53,19 +53,14 @@ const validateUserNumber = (userInput) => {
 };
 
 const validateLength = (target, setLength) => {
-  if (target.length === setLength) {
-    return true;
-  }
-
-  return false;
+  let validLength = target.length === setLength;
+  return validLength;
 };
 
 const validateOverlapped = (target) => {
   const setTarget = new Set(target);
-  if (target.length === setTarget.size) {
-    return true;
-  }
-  return false;
+  let validOverlapped = target.length === setTarget.size;
+  return validOverlapped;
 };
 
 const validateOneToNine = (target) => {
