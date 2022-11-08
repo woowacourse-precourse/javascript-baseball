@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const Message = require('./assets/Message');
 const { getComputerNumber } = require('./utils/getComputerNumber');
 const { getBaseballResultMessage } = require('./utils/getBaseballResultMessage');
+const { checkPlayerNumberError } = require('./utils/handleError');
 
 const playEachRound = (target, input) => {
   const isThreeStrikes = target === input;
@@ -13,6 +14,7 @@ const playEachRound = (target, input) => {
   }
 
   Console.readLine(Message.INPUT, (answer) => {
+    checkPlayerNumberError(answer);
     input = answer;
 
     Console.print(getBaseballResultMessage(target, input));
