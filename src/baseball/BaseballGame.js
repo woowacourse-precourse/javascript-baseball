@@ -23,13 +23,16 @@ class BaseballGame {
       if (validUserInput === false) {
         this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
       }
-      const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
-      this.printResult(strike, ball);
-      if (strike === 3) {
-        return Console.readLine(GAME_MESSAGE.GAME_RESTART, this.isValidRestart);
-      }
-      this.playing(computerNumbers);
+      this.turnCheck(userInput, computerNumbers);
     });
+  };
+
+  turnCheck = (userInput, computerNumbers) => {
+    const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
+    this.printResult(strike, ball);
+    strike === 3
+      ? Console.readLine(GAME_MESSAGE.GAME_RESTART, this.isValidRestart)
+      : this.playing(computerNumbers);
   };
 
   StrikeCount = (userInput, computerNumbers) => {
