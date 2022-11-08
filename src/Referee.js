@@ -25,7 +25,8 @@ class Referee {
     if (count.ball === 0 && count.strike === 0) Console.print('낫싱');
     if (count.ball !== 0 && count.strike === 0) Console.print(`${count.ball}볼`);
     if (count.ball === 0 && count.strike !== 0) Console.print(`${count.strike}스트라이크`);
-    if (count.ball !== 0 && count.strike !== 0) Console.print(`${count.ball}볼 ${count.strike}스트라이크`);
+    if (count.ball !== 0 && count.strike !== 0)
+      Console.print(`${count.ball}볼 ${count.strike}스트라이크`);
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
@@ -37,8 +38,10 @@ class Referee {
     Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
       const stringAnswer = answer + '';
       if (stringAnswer === RESTART) this.gameStart();
-      else if (stringAnswer === GAME_OVER) Console.print(MESSAGE.GAME.OVER);
-      else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+      else if (stringAnswer === GAME_OVER) {
+        Console.close();
+        Console.print(MESSAGE.GAME.OVER);
+      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 
@@ -48,8 +51,6 @@ class Referee {
       ball: 0,
       strike: 0,
     };
-
-    if (!computerValue || !playerValue) throw new Error(MESSAGE.ERROR.SYSTEM);
 
     for (let i = 0; i < 3; i++) {
       if (computerValue[i] === playerValue[i]) count.strike++;
