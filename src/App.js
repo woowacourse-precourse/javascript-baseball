@@ -1,5 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE, RESULT } = require("./constants/constants");
+const { MESSAGE, RESULT, RESTART_INPUT } = require("./constants/constants");
+const { checkRestartInput } = require("./utils/checkInput");
 
 class App {
   play() {
@@ -27,6 +28,18 @@ class App {
     if (strike === 0) return `${ball}${RESULT.BALL}`;
     if (ball === 0) return `${strike}${RESULT.STRIKE}`;
     return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
+  }
+
+  isRestartGame() {
+    Console.print(`3${RESULT.STRIKE}\n${MESSAGE.SUCCESS}`);
+    Console.readLine(`${MESSAGE.RESTART}\n`, (input) => {
+      checkRestartInput(input);
+      if (input === RESTART_INPUT.YES) {
+        this.gameStart();
+      } else if (input === RESTART_INPUT.NO) {
+        Console.close();
+      }
+    });
   }
 }
 
