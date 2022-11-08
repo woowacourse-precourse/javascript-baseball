@@ -13,17 +13,20 @@ class App {
 
   startGame() {
     this.makeCorrectNumber();
-    console.log(this.computerNumber);
     this.putNumber();
   }
 
   makeCorrectNumber() {
     this.computerNumber = [];
     while (this.computerNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computerNumber.includes(number)) {
-        this.computerNumber.push(number);
-      }
+      this.pushToCorrectNoumber();
+    }
+  }
+
+  pushToCorrectNoumber() {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!this.computerNumber.includes(number)) {
+      this.computerNumber.push(number);
     }
   }
 
@@ -64,16 +67,24 @@ class App {
   gameWin() {
     MissionUtils.Console.print("3스트라이크");
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.restartGame();
+  }
+
+  restartGame() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (answer) => {
-        if (answer === START_FLAG) {
-          this.startGame();
-        } else if (answer === END_FLAG) {
-          MissionUtils.Console.close();
-        }
+        this.restartOrClose(answer);
       }
     );
+  }
+
+  restartOrClose(answer) {
+    if (answer === START_FLAG) {
+      this.startGame();
+    } else if (answer === END_FLAG) {
+      MissionUtils.Console.close();
+    }
   }
 
   notWin() {
@@ -102,7 +113,7 @@ class App {
       this.strikeNumber.push(el);
     } else if (
       this.computerNumber
-        .filter((el) => el !== this.computerNumber[index])
+        .filter((num) => num !== this.computerNumber[index])
         .includes(el)
     ) {
       this.ballNumber.push(el);
@@ -111,7 +122,6 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-
     this.startGame();
   }
 }
@@ -120,5 +130,3 @@ const app = new App();
 app.play();
 
 module.exports = App;
-
-// node src/App.js
