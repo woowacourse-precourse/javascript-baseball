@@ -39,7 +39,7 @@ class App {
   isDuplicated(input) {
     const numberSet = new Set([...input]);
 
-    return numberSet.size === input.length;
+    return numberSet.size !== input.length;
   }
 
   isStrike(number, idx) {
