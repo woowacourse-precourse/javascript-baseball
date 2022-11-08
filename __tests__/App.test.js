@@ -1,5 +1,6 @@
 const App = require('../src/App');
 const { endApp } = require('../src/Function');
+const Function = require('../src/Function');
 
 describe('App class 테스트', () => {
   let app;
@@ -38,6 +39,19 @@ describe('App class 테스트', () => {
       app.resetCountBoard();
       app.setCountBoard(example[0], example[1], example[2]);
       expect(app.countBoard).toStrictEqual(answers[index]);
+    });
+  });
+
+  test('compareUserAndComputer 테스트', () => {
+    app.setCountBoard = jest.fn(() => {
+      this.countBoard = { strike: '1', ball: '1' };
+    });
+    app.computer.selectedNumber = '123';
+    const mockMakeStringToArray = jest.fn().mockReturnValue(['1', '2', '3']);
+    Function.makeStringToArray = mockMakeStringToArray;
+    expect(app.countBoard).toStrictEqual({
+      strike: 0,
+      ball: 0,
     });
   });
 });
