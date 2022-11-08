@@ -39,6 +39,21 @@ class App {
         const strikeToString = strike === 0 ? "" : `${strike}스트라이크`;
 
         Console.print(`${ballToString}${strikeToString}`);
+
+        if (strike === 3) {
+          Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+          Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+          Console.readLine("", (choice) => {
+            switch (choice) {
+              case "1":
+                this.play();
+              case "2":
+                Console.close();
+              default:
+                return;
+            }
+          });
+        }
         retry();
       });
     };
