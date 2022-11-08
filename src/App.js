@@ -38,10 +38,11 @@ class App {
   }
   continueOrNot() {
     Console.readLine(MESSAGE.CONTINUE, (input) => {
+      Console.print(CONTINUE_OR_NOT);
       if (input === CONTINUE_OR_NOT.CONTINUE) {
-        this.gameSetter();
+        return this.gameSetter();
       } else if (input === CONTINUE_OR_NOT.TERMINATE) {
-        Console.close();
+        return Console.close();
       }
     });
   }
