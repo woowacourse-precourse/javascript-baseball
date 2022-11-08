@@ -45,6 +45,27 @@ class App {
       this.checkAllValidation(guessNumbers);
       const { strike, ball } = this.getStrikeBallCount(randomNumbers, guessNumbers);
       Console.print(this.getResultMessage(strike, ball));
+
+      if (strike !== 3) {
+        return this.getUserInput(randomNumbers);
+      }
+
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+
+      this.showGameMenu();
+    });
+  }
+
+  showGameMenu() {
+    Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
+
+      if (guessNumbers === "1") {
+        return this.play();
+      }
+
+      Console.print("게임 종료");
+
+      return Console.close();
     });
   }
 
