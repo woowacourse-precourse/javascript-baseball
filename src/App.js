@@ -20,7 +20,8 @@ const promptInput = function promptUserGuessInput(answer) {
     validateInput(input);
     const result = calculateResult(input, answer);
     MissionUtils.Console.print(result);
-    if (result === "3개의 숫자를 모두 맞히셨습니다! 게임 종료") {
+    if (result === "3스트라이크") {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       askPlayNewGame();
       return;
     }
@@ -53,15 +54,13 @@ const calculateResult = function calculateResult(input, answer) {
     return "낫싱";
   }
   if (ball === 0) {
-    return `${strike} 스트라이크`;
+    return `${strike}스트라이크`;
   }
   if (strike === 0) {
-    return `${ball} 볼`;
+    return `${ball}볼`;
   }
-  if (strike === 3) {
-    return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-  }
-  return `${strike} 스트라이크 ${ball} 볼`;
+  
+  return `${ball}볼 ${strike}스트라이크 `;
 };
 
 const countBall = function countBall(userInput, answer) {
