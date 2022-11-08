@@ -101,15 +101,17 @@ class App {
   }
 
   isValidInput(input) {
+    const chkStyle = /\d/;
     const checkDuplicate = new Set(input.split(''));
     if (
-      [...input].includes('0') ||
-      input.length !== 3 ||
-      checkDuplicate.size !== 3
+      ![...input].includes('0') &&
+      input.length === 3 &&
+      checkDuplicate.size === 3 &&
+      chkStyle.test(input)
     ) {
-      throw new Error('잘못된 값을 입력했습니다');
+      return this;
     }
-    return this;
+    throw new Error('잘못된 값을 입력했습니다');
   }
 }
 module.exports = App;
