@@ -10,9 +10,15 @@ const getStrikeBallCount = (computerInput, userInput) => {
   for (let i = 0; i < GAME_RULE.LENGTH; i++) {
     if (computerInputToArray[i] === userInputToArray[i]) {
       strikeCount++;
-    } else {
-      ballCount++;
     }
+
+    for (let eachLetter of userInput) {
+      if (computerInput.includes(eachLetter)) {
+        ballCount++;
+      }
+    }
+
+    ballCount -= strikeCount;
   }
 
   return [strikeCount, ballCount];
