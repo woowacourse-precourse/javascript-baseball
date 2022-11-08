@@ -39,16 +39,23 @@ class App {
   }
 
   playerInput(answer) {
+    let status;
     MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
+      this.score = { ball: 0, strike: 0 };
       this.checkInput(input);
       this.checkAnswer(input, answer);
-      this.printScore();
+      status = this.printScore();
     });
   }
 
   printScore() {
     if (!this.score.ball && !this.score.strike) {
       this.printMessage(NOTHING_STRING);
+      return -1;
+    }
+    if (this.score.strike === NUMBER_LENGTH) {
+      this.printMessage(CORRECT_MESSAGE);
+      return 0;
     }
     if (this.score.ball) {
       this.printMessage(this.score.ball.toString() + BALL_STRING);
@@ -56,9 +63,7 @@ class App {
     if (this.score.strike) {
       this.printMessage(this.score.strike.toString() + STRIKE_STRING);
     }
-    if (this.score.strike === NUMBER_LENGTH) {
-      this.printMessage(CORRECT_MESSAGE);
-    }
+    return -1;
   }
 
   checkAnswer(input, answer) {
