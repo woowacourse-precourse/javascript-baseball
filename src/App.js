@@ -6,6 +6,7 @@ class App {
   }
 
   play() {
+    BaseballGame.printStartMessage();
     BaseballGame.startGame();
   }
 }

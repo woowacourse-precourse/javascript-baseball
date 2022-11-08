@@ -35,9 +35,10 @@ const orderInput = answer => {
 
 const startGame = () => {
   const answer = setAnswer();
-  printStartMessage();
+
   orderInput(answer);
 };
 
 exports.startGame = startGame;
 exports.orderInput = orderInput;
+exports.printStartMessage = printStartMessage;
