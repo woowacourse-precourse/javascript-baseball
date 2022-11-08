@@ -18,5 +18,16 @@ const computerRandom = () => {
   return computer;
 }
 
+class gameStart {
+  start() {
+    let computer = computerRandom();
+    this.computer = this.handleComputer(computer);
+  }
+
+  handleComputer(computer) {
+    return (computer.join(''))
+  }
+
+}
 
 module.exports = App;
