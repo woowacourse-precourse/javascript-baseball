@@ -15,7 +15,8 @@ async function getInputValue(question) {
     Console.readLine(question, (answer) => resolve(answer));
   });
   if (!inputValue) {
-    throw new Error("입력한 값이 없습니다.");
+    print("입력한 값이 없습니다. 다시 입력해주세요");
+    return await getInputValue(question);
   }
 
   return inputValue;

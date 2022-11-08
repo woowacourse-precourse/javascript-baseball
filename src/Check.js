@@ -26,7 +26,7 @@ function getThisTurnResult(param) {
 
   const ball = checkBall(input, random);
   const strike = checkStrike(input, random);
-  const nothing = ball || strike;
+  const nothing = !(ball || strike);
 
   return { ball, strike, nothing };
 }
@@ -57,4 +57,30 @@ function checkBall(input, random) {
   }
   return ballCount;
 }
-module.exports = { getThisTurnResult, checkStrike, checkBall };
+
+function checkInputIsRightInPlaying(string) {
+  if (string.length !== 3) {
+    return false;
+  }
+  for (let i = 0; i < 3; i++) {
+    const num = Number(string[i]);
+    for (let j = 0; j < 3; j++) {
+      if (i == j) continue;
+      if (string[j] === string[i]) return false;
+    }
+    if (!num || num === 0) return false;
+  }
+  return true;
+}
+function checkInputIsRightInEnd(string) {
+  const num = Number(string);
+  if (!(num === 1 || num === 2)) return false;
+  return true;
+}
+module.exports = {
+  getThisTurnResult,
+  checkStrike,
+  checkBall,
+  checkInputIsRightInPlaying,
+  checkInputIsRightInEnd,
+};
