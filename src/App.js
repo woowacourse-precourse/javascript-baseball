@@ -11,7 +11,7 @@ class App {
     }
     return computer;
   }
-  
+
   getUserInputAndPlay(computerNumber) {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', answer => {
       let answerSet = new Set(answer);
@@ -44,6 +44,19 @@ class App {
       }
     });  
   }
+
+  countStrikes (computerNum,userInputNum) {
+    let totalStrike = 0;
+    let com = computerNum;
+    let user = userInputNum;
+    for (let i = 0; i < com.length ; i++) {
+      if(com[i] == user[i]){ 
+          totalStrike += 1;
+      }
+    }
+    return totalStrike;
+  }
+  
 }
 const app = new App();
 app.play();
