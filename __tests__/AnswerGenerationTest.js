@@ -1,10 +1,8 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 
 function answerTest() {
   const answer = App.generateAnswer();
   const isValid = App.isValidAnswerValue(answer);
-  // MissionUtils.Console.print(answer.join(''));
   expect(isValid).toEqual(true);
 }
 
