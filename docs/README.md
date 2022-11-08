@@ -27,7 +27,7 @@
 
 * `isCorrect(computerNums, playerNums)` : player가 정답을 맞췄는지 bool로 반환하는 기능
 
-* `ask_rePlay()` : 입력값을 받아 다시 실행하거나 게임을 종료하는 기능
+* `ask_replay()` : 입력값을 받아 다시 실행하거나 게임을 종료하는 기능
     - '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' 출력
     - `answer` <=  MissionUtils.Console.readLine()
     - answer가 1이면
