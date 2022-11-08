@@ -18,10 +18,8 @@
 - endGame(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 1과 2 중 하나만 가능
 
 ### 테스트 목록
-- changeComputerNumberToArray(): 입력 타입은 숫자만 가능, 반환값은 배열
-- changeUserNumberToArray(): 입력 타입은 숫자만 가능, 반환값은 배열
+- selectComputerNumber(): 3개의 숫자 반환, 서로 다른 숫자 반환, 1에서 9 사이의 숫자 반환, 숫자 반환
+- changeComputerNumberToArray(): 반환값은 배열
+- changeUserNumberToArray(): 반환값은 배열
 - findEqualNumber(): 반환값 strike, ball 타입은 숫자
-- resultGame(): 입력 타입은 숫자
-- resultBall(): 입력 타입은 숫자
-- resultStrikeAndBall(): 입력 타입은 숫자
 
