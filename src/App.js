@@ -13,6 +13,11 @@ class App {
     this.result = {};
   }
 
+  update(kind) {
+    if (this.result[kind]) this.result[kind] += 1;
+    else this.result[kind] = 1;
+  }
+
   play() {}
 }
 
