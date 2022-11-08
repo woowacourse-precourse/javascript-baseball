@@ -5,7 +5,7 @@ class App {
 	computerNumArr = [];
 
 	play() {
-		// Console.print(MESSAGES.START);
+		Console.print(MESSAGES.START);
 		this.initGame();
 		this.playGame();
 	}
@@ -41,8 +41,6 @@ class App {
 	}
 
 	#isValid(userAnswerStr) {
-		//TODO: 1.길이오류(3자리숫자여야한다) 2. 숫자로 치환되어야한다. 3. 그밖의 오류?
-
 		const answer = userAnswerStr.replace(REGEX.SPACE, '');
 		const length = answer.length;
 
