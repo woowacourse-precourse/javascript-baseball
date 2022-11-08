@@ -80,6 +80,11 @@ class BaseBallGame {
       gameStartOrExit === '1' ? this.newplay() : MissionUtils.Console.close();
     });
   }
+
+  newplay() {
+    this.ANSWER = this.generateAnswer();
+    this.play()
+  }
 }
 
 const game = new BaseBallGame;
