@@ -4,6 +4,7 @@ class App {
     this.computerInput = new ComputerRandomNumber();
     this.baseballGame = new BaseballPlayTool();
   }
+
   play() {
     this.baseballGame.gameRepeat();
   }
