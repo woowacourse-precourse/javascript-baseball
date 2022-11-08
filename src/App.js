@@ -48,7 +48,28 @@ class App {
       if (this.isError(userInput)) {
         throw new Error(MESSAGE.ERROR);
       }
+
+      const { ballCount, strikeCount } = this.compare(userInput.split(''));
     });
+  }
+
+  compare(userInputStr) {
+    const userInputNum = userInputStr.map((input) => Number(input));
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    this.answer.forEach((number, index) => {
+      if (userInputNum[index] === number) {
+        strikeCount += 1;
+        return;
+      }
+
+      if (userInputNum.includes(number)) {
+        ballCount += 1;
+      }
+    });
+
+    return { ballCount, strikeCount };
   }
 
   isError(userInput) {
