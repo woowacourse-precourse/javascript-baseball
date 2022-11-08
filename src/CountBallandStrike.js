@@ -1,4 +1,4 @@
-const printGameResult = require("./PrintResultBaseballGame");
+const printGameResult = require('./PrintResultBaseballGame');
 
 function checkBallAndStrike(computerInputNumbers, userInputNumbers) {
   let ball = 0;
