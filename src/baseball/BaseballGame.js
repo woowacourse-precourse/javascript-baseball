@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const ComputerNumbers = require("./ComputerNumbers");
-const ValidUserNumbers = require("./ValidUserInput");
+const ValidUserNumbers = require("./ValidUserNumbers");
 const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
 
 class BaseballGame {
@@ -76,3 +76,4 @@ class BaseballGame {
 }
 
 module.exports = BaseballGame;
+
