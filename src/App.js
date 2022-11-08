@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
@@ -82,11 +82,14 @@ const goAndStop = (strikeNum) => {
 };
 
 const errorTestGameNum = (number) => {
-  if (number.length !== 3) throw "잘못된 양식입니다.";
+  number = number.trim();
+  if (number.length !== 3 || isNaN(number)) throw "잘못된 양식입니다.";
 };
 
 const errorTestGoandStop = (number) => {
   if (number !== "1" && number !== "2") throw "잘못된 양식입니다.";
 };
 
+const app = new App();
+app.play();
 module.exports = App;
