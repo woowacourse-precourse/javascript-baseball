@@ -9,9 +9,14 @@ function isExist(gameNumber, digit) {
   return false;
 }
 
+function addUniqueRandomDigit(gameNumber, digit) {
+  if (isExist(gameNumber, digit)) return;
+  gameNumber.push(digit);
+}
+
 class App {
   play() {}
 }
 
 module.exports = App;
-module.exports = { generateRandomDigit, isExist };
+module.exports = { generateRandomDigit, isExist, addUniqueRandomDigit };
