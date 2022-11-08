@@ -1,6 +1,8 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
+  goal = [];
+
   generateGoalNumber() {
     const threeNumbers = new Set();
     const MIN = 1;
@@ -9,13 +11,7 @@ class App {
       const number = Random.pickNumberInRange(MIN, MAX);
       threeNumbers.add(number);
     }
-    return [...threeNumbers];
-  }
-
-  async receiveAnswerFromCLI(question = "") {
-    return await new Promise((resolve) => {
-      Console.readLine(question, (answer) => resolve(answer));
-    });
+    this.goal = [...threeNumbers];
   }
 
   verifyUserAnswer(answer) {
@@ -92,20 +88,23 @@ class App {
     Console.print(NOTHING);
   }
 
-  async confirmRestart() {
+  confirmRestart() {
     const RESTART = "1";
     const EXIT = "2";
     const VALID_ANSWER = {
       1: RESTART,
       2: EXIT,
     };
-    let userAnswer;
-
-    while (!VALID_ANSWER[userAnswer]) {
-      Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-      userAnswer = await this.receiveAnswerFromCLI();
-    }
-    return userAnswer === RESTART;
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (VALID_ANSWER[answer] === RESTART) {
+          this.restartGame();
+          return;
+        }
+        this.exitGame();
+      }
+    );
   }
 
   restartGame() {
@@ -116,32 +115,31 @@ class App {
     Console.close();
   }
 
-  async play() {
-    const PLEASE_ENTER_NUMBER = "숫자를 입력해주세요 : ";
-    const goal = this.generateGoalNumber();
-    const userAnswer = this.verifyUserAnswer(
-      await this.receiveAnswerFromCLI(PLEASE_ENTER_NUMBER)
-    );
-    let score = this.getStrikeAndBallCount(goal, userAnswer);
+  play() {
+    this.generateGoalNumber();
+    this.receiveAnswer();
+  }
 
-    const THREE_STRIKE = 3;
-    const isThreeStrike = (strikeScore) => strikeScore === THREE_STRIKE;
-    while (!isThreeStrike(score[0])) {
+  receiveAnswer() {
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      const userAnswer = this.verifyUserAnswer(answer);
+      let score = this.getStrikeAndBallCount(this.goal, userAnswer);
       this.printResult(score);
-      const userAnswer = this.verifyUserAnswer(
-        await this.receiveAnswerFromCLI(PLEASE_ENTER_NUMBER)
-      );
-      score = this.getStrikeAndBallCount(goal, userAnswer);
-    }
 
-    this.printResult(score, "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    if (await this.confirmRestart()) return this.restartGame();
+      const THREE_STRIKE = 3;
 
-    this.exitGame();
+      const isThreeStrike = (strikeScore) => strikeScore === THREE_STRIKE;
+      if (isThreeStrike(score[0])) {
+        this.printResult(score, "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.confirmRestart();
+      }
+
+      this.receiveAnswer();
+    });
   }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
