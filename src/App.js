@@ -17,11 +17,31 @@ class App {
 
   get_from_user(computer){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (user_number) => {
-      const user = user_number.split('').map(Number);
+      let user = this.check_input(user_number);
       let check_iteration = this.count_ball_strike(computer, user);
       if (check_iteration === true) return this.get_from_user(computer);
       else this.ask_repeat();
     });
+  }
+
+  check_input(user_num){
+    if (Number.isInteger(user_num)){
+      throw '숫자가 아닌 값이 포함되어있습니다.';
+    }
+    let get_user = user_num.split('').map(Number);
+    let delete_overlab = [...new Set(get_user)];
+    if (get_user.length != 3){
+      throw '숫자를 3개 입력하세요';
+    }
+    
+    if (delete_overlab.length != 3){
+      throw '중복된 값이 입력되었습니다.';
+    }
+    
+    if(get_user.includes(0)){
+      throw '1에서 9사이의 값만 입력하세요';
+    }
+    return get_user;
   }
 
   count_ball_strike(computer, user) {
