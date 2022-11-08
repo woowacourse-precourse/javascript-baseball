@@ -67,31 +67,31 @@
 
     </br>
 
-    - 📃 **Message Body (메시지 내용)**
-      - 명령문, 현재 시제로 작성하길 권장한다.
-      - 변경한 이유 및 변경 전과 후의 차이점을 기재한다.
-      - 긴 설명이 필요한 경우에 작성한다.
-      - 어떻게 했는지보다는, 무엇을 왜 했는지를 작성한다.
+  - 📃 **Message Body (메시지 내용)**
+    - 명령문, 현재 시제로 작성하길 권장한다.
+    - 변경한 이유 및 변경 전과 후의 차이점을 기재한다.
+    - 긴 설명이 필요한 경우에 작성한다.
+    - 어떻게 했는지보다는, 무엇을 왜 했는지를 작성한다.
 
-    </br>
+  </br>
 
-    - 🦶 **Message Footer (메시지 하단)**
-      - 주요 변경 내역들 (Breaking Changes)
-        - 모든 주요 변경 내역들은 다음과 함께 하단에 언급되어야 한다.
+  - 🦶 **Message Footer (메시지 하단)**
+    - 주요 변경 내역들 (Breaking Changes)
       - 모든 주요 변경 내역들은 다음과 함께 하단에 언급되어야 한다.
-        - 변경점 (description of the change)
-        - 변경 사유 (justification)
-        - 마이그레이션 지시 (migration instructions)
-      - 해결된 이슈 (Referencing Issues)
-        - 해결된 이슈는 커밋 메시지 하단에 Closes #<이슈번호> 와 같이 기록되어야 한다.
-        - 해결된 이슈가 여러개인 경우는 ,(쉼표) 로 구분해서 기록한다.
-        ```js
-        // 예시
-        Closes #234
-        Closes #123, #245, #992
-        ```
+    - 모든 주요 변경 내역들은 다음과 함께 하단에 언급되어야 한다.
+      - 변경점 (description of the change)
+      - 변경 사유 (justification)
+      - 마이그레이션 지시 (migration instructions)
+    - 해결된 이슈 (Referencing Issues)
+      - 해결된 이슈는 커밋 메시지 하단에 Closes #<이슈번호> 와 같이 기록되어야 한다.
+      - 해결된 이슈가 여러개인 경우는 ,(쉼표) 로 구분해서 기록한다.
+      ```js
+      // 예시
+      Closes #234
+      Closes #123, #245, #992
+      ```
 
-    </br>
+  </br>
 
 - **🔖 type (타입) 의 종류 :**
 
