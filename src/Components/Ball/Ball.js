@@ -10,6 +10,11 @@ class Ball {
   }
 
   compareTo(otherBall) {
+    const BALL = this.getBallOf(otherBall);
+    const STRIKE = this.getStrikeOf(otherBall);
+
+    if (!BALL && !STRIKE) return "낫싱";
+
     return `${this.getBallOf(otherBall)} ${this.getStrikeOf(otherBall)}`.trim();
   }
 
