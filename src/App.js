@@ -61,6 +61,16 @@ class App {
     return ballNumber;
   }
 
+  countStrike(inputArray) {
+    let strikesNumber = 0;
+    for (let i = 0; i < inputArray.length; i++) {
+      if (inputArray[i] === this.answerArray[i]) {
+        strikesNumber++;
+      }
+    }
+    return strikesNumber;
+  }
+
   inputCallback() {}
 
   play() {}
