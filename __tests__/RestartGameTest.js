@@ -1,5 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { EXCEPTIONMESSAGE } = require("../src/ConstMessage");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -28,6 +29,6 @@ describe('게임 종료 시 사용자의 재시작 응답 테스트', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow('게임 시작은 1, 종료는 2를 입력하셔야 합니다.');
+    }).toThrow(EXCEPTIONMESSAGE.NOT_ONE_TWO);
   });
 });

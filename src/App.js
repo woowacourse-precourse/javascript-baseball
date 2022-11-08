@@ -1,4 +1,5 @@
 const MissonUtils = require("@woowacourse/mission-utils");
+const { EXCEPTIONMESSAGE, GAMEMESSAGE } = require("./ConstMessage");
 const checkBallAndStrike = require("./CountBallandStrike");
 const checkUserInput = require("./ExceptionUserInput");
 
@@ -8,7 +9,7 @@ class App {
     this.userRandomNumbers = [];
   }
   play() {
-    MissonUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissonUtils.Console.print(GAMEMESSAGE.START_MESSAGE);
     this.gameStart();
   }
 
@@ -28,7 +29,7 @@ class App {
   }
 
   userInputNumber() {
-    MissonUtils.Console.readLine('숫자를 입력해주세요 : ', userInput => {
+    MissonUtils.Console.readLine(GAMEMESSAGE.USER_INPUT_MESSAGE, userInput => {
       if (checkUserInput(userInput)) this.baseballGame(userInput.split('').map(Number));
     });
   }
@@ -44,11 +45,11 @@ class App {
   }
 
   chooseRestartGame() {
-    MissonUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    MissonUtils.Console.print(GAMEMESSAGE.GAME_RESTART_MESSAGE);
     MissonUtils.Console.readLine('', chooseNumber => {
       if (chooseNumber === '1') this.gameStart();
       if (chooseNumber === '2') MissonUtils.Console.close();
-      if (chooseNumber !== '1' && chooseNumber !== '2') throw '게임 시작은 1, 종료는 2를 입력하셔야 합니다.';
+      if (chooseNumber !== '1' && chooseNumber !== '2') throw EXCEPTIONMESSAGE.NOT_ONE_TWO;
     });
   }
 }
