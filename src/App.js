@@ -50,11 +50,13 @@ class App {
 
     MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
     MissionUtils.Console.readLine('', (answer) => {
-      if(number == 1) {
+      if(answer == 1) {
         this.play();
         answer = 0;
       } else if (answer == 2) {
         console.close();
+      } else {
+        throw new Error
       }
     });
   }
