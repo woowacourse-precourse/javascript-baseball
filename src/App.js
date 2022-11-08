@@ -32,10 +32,6 @@ class Game {
 
     this.validation = new Validation();
   }
-
-  inputUserNumber(text, callback) {
-    this.utilsIo.readLine(text, callback.bind(this));
-  }
   
   makeComputerNumer(){
     const computer = [];
@@ -47,7 +43,7 @@ class Game {
   }
 
   inputGame(text, callback){
-    this.inputUserNumber(text, callback);
+    this.utilsIo.readLine(text, callback.bind(this));
   }
 
   startGame(){
