@@ -70,7 +70,7 @@ class App {
     this.strikeAndBallCheck();
   }
 
-  threeStrikeCheck() {
+  threeStrikePrint() {
     const isThreeStrike = this.strikeCount === 3;
 
     if (isThreeStrike) {
@@ -81,7 +81,7 @@ class App {
     return false;
   }
 
-  nothingCheck() {
+  nothingPrint() {
     const isNoting = this.strikeCount === 0 && this.ballCount === 0;
 
     if (isNoting) {
@@ -91,7 +91,7 @@ class App {
     return false;
   }
 
-  ballCheck() {
+  ballPrint() {
     const isBall = this.strikeCount === 0 && this.ballCount !== 0;
 
     if (isBall) {
@@ -101,7 +101,7 @@ class App {
     return false;
   }
 
-  strikeCheck() {
+  strikePrint() {
     const isStrike =
       this.strikeCount !== 0 && this.ballCount === 0 && this.strikeCount !== 3;
 
@@ -112,7 +112,7 @@ class App {
     return false;
   }
 
-  strikeAndBallCheck() {
+  strikeAndBallPrint() {
     const isStrikeAndBall =
       this.ballCount !== 0 &&
       this.strikeCount !== 0 &&
