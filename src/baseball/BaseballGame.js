@@ -1,6 +1,6 @@
-const { Console } = require("@woowacourse/mission-utils");
-const PickedNumberByComputer = require("./PickedNumberByComputer");
-const ValidateUserInput = require("./ValidateUserInput");
+const { Console } = require('@woowacourse/mission-utils');
+const PickedNumberByComputer = require('./PickedNumberByComputer');
+const ValidateUserInput = require('./ValidateUserInput');
 
 class BaseballGame {
   constructor() {
@@ -13,8 +13,8 @@ class BaseballGame {
   };
 
   playGame = () => {
-    if (this.isFirstGame) Console.print("숫자 야구 게임을 시작합니다.");
-    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
+    if (this.isFirstGame) Console.print('숫자 야구 게임을 시작합니다.');
+    Console.readLine('숫자를 입력해주세요 : ', this.playTurn);
   };
 
   playTurn = (pickedNumberByUser) => {
@@ -28,7 +28,7 @@ class BaseballGame {
 
     if (strike === 3) {
       Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
         this.inputRestartOrEnd
       );
       return;
@@ -56,12 +56,12 @@ class BaseballGame {
   };
 
   printResultsForCount = (strike, ball, nothing) => {
-    if (nothing === 3) Console.print("낫싱");
+    if (nothing === 3) Console.print('낫싱');
     else if (strike > 0 && ball === 0) Console.print(`${strike}스트라이크`);
     else if (ball > 0 && strike === 0) Console.print(`${ball}볼`);
     else Console.print(`${ball}볼 ${strike}스트라이크`);
 
-    if (strike === 3) Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (strike === 3) Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   };
 
   inputRestartOrEnd = (selectedNumber) => {
@@ -72,7 +72,7 @@ class BaseballGame {
       this.init(false);
       this.playGame();
     } else if (selectedNumber === 2) {
-      Console.print("게임 종료");
+      Console.print('게임 종료');
       Console.close();
     }
   };
