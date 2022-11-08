@@ -15,29 +15,29 @@ class App {
   inputComputerAnswer() {
     const computerAnswerArr = [];
     while (computerAnswerArr.length < 3) {
-      const pickNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerAnswerArr.includes(pickNumber)) {
-        computerAnswerArr.push(pickNumber);
+      const randomPickNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerAnswerArr.includes(randomPickNumber)) {
+        computerAnswerArr.push(randomPickNumber);
       }
     }
     this.computerAnswerArr = computerAnswerArr;
   }
 
   inputUserAnswer() {
-    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_ANSWER, (value) => {
-      this.checkValidity(value);
+    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_ANSWER, (useAnswer) => {
+      this.checkUserAnswerValidity(useAnswer);
       this.userScore();
     });
   }
 
-  checkValidity(value) {
-    let userAnswerArr = value.split('');
+  checkUserAnswerValidity(useAnswer) {
+    let userAnswerArr = useAnswer.split('');
     if (userAnswerArr.length !== 3) throw new Error(ERROR_MESSAGE.INPUT_THREE_NUMBER);
-    userAnswerArr.forEach(value => {
-      if (isNaN(Number(value)) === true) {
+    userAnswerArr.forEach(useAnswerItem => {
+      if (isNaN(Number(useAnswerItem)) === true) {
         throw new Error(ERROR_MESSAGE.INPUT_TYPE_NUMBER);
       }
-      if (Number(value) > 9 || Number(value) < 1) {
+      if (Number(useAnswerItem) > 9 || Number(useAnswerItem) < 1) {
         throw new Error(ERROR_MESSAGE.INPUT_RANGE_NUMBER);
       }
     });
@@ -45,14 +45,14 @@ class App {
     if (inputValueSet.size !== 3) {
       throw new Error(ERROR_MESSAGE.INPUT_UNIQUE_NUMBER);
     }
-    this.userAnswerArr = userAnswerArr.map((pickNum) => +pickNum);
+    this.userAnswerArr = userAnswerArr.map((useAnswerItem) => +useAnswerItem);
   }
 
   userScore() {
     let strikeCount = 0;
     let ballCount = 0;
-    this.computerAnswerArr.forEach((computerAnswerItem, index) => {
-      if (computerAnswerItem === this.userAnswerArr[index]) {
+    this.computerAnswerArr.forEach((computerAnswerItem, useAnswerItem) => {
+      if (computerAnswerItem === this.userAnswerArr[useAnswerItem]) {
         strikeCount += 1;
       } else {
         if (this.userAnswerArr.includes(computerAnswerItem)) ballCount += 1;
@@ -77,16 +77,16 @@ class App {
   }
 
   restart() {
-    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_RESTART, (inputNum) => {
-      if (Number(inputNum) === 1) {
+    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_RESTART, (inputValue) => {
+      if (Number(inputValue) === 1) {
         MissionUtils.Console.close();
         this.startGame();
       }
-      if (Number(inputNum) === 2) {
+      if (Number(inputValue) === 2) {
         MissionUtils.Console.close();
         MissionUtils.Console.print(PROGRESS_MESSAGE.GAME_OVER);
       }
-      if (Number(inputNum) !== 1 && Number(inputNum) !== 2) {
+      if (Number(inputValue) !== 1 && Number(inputValue) !== 2) {
         throw new Error(ERROR_MESSAGE.INPUT_RESTART_NUMBER);
       }
     });
