@@ -8,11 +8,11 @@ class App {
 
   play() {
     this.getComputerAnswer();
-    this.startGameMessage();
+    this.printStartGameMessage();
     this.getUserNumber();
   }
 
-  startGameMessage() {
+  printStartGameMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다");
   }
 
@@ -57,10 +57,10 @@ class App {
     let strike = 0;
     let ball = 0;
 
-    for (let i = 0; i < 3; i++) {
-      if (this.computerNumber[i] === this.userNumber[i]) {
+    for (let index = 0; index < 3; index++) {
+      if (this.computerNumber[index] === this.userNumber[index]) {
         strike += 1;
-      } else if (this.computerNumber.includes(this.userNumber[i])) {
+      } else if (this.computerNumber.includes(this.userNumber[index])) {
         ball += 1;
       }
     }
