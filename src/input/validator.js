@@ -15,7 +15,7 @@ class Validator {
   }
 
   static hasValidType(input) {
-    if (isNaN(input)) {
+    if (isNaN(Number(input))) {
       throw ERROR_MESSAGE.type;
     }
   }
