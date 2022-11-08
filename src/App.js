@@ -1,10 +1,10 @@
 const {Console, Random} = require("@woowacourse/mission-utils");
 
 const messages = {
-  start : '숫자 야구 게임을 시작합니다.',
-  input : '숫자를 입력해 주세요 : ',
-  gameover : '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  option : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+  START : '숫자 야구 게임을 시작합니다.',
+  INPUT : '숫자를 입력해 주세요 : ',
+  OVER : '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  OPTION : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
 }
 
 class App {
@@ -12,29 +12,14 @@ class App {
     this.NUMBER_LENGTH = 3;
   }
 
-  isVaildPlayer(player){
-    const test = [...player];
-    return (
-      (player.length <= this.NUMBER_LENGTH) &&  
-      (/^[0-9]+$/.test(player)) &&     
-      (test.length === [...new Set(test)].length)
-    );
-  }
-
-  isVaildOption(option){
-    return (
-      (option==='1')||(option==='2')
-    )
-  }
-
   play(){
-    Console.print(messages.start);
+    Console.print(messages.START);
     this.initGame();
   }
 
   initGame(){
     let computer = this.makeComputer();
-    this.startASet(computer);
+    this.startOneRound(computer);
   }
 
   makeComputer(){
@@ -47,20 +32,19 @@ class App {
     return [...computer];
   }
 
-  startASet(computer){
-    Console.readLine( messages.input , (player)=>{
+  startOneRound(computer){
+    Console.readLine( messages.INPUT , (player)=>{
       if(!this.isVaildPlayer(player)) throw 'player error'
-      this.playASet(player, computer);
+      this.playOneRound(player, computer);
     })
   }
 
-  playASet(player, computer){
+  playOneRound(player, computer){
     const strike = this.countStrike(player, computer);
     const ball = this.countBall(player, computer, strike);
     this.showResult(ball, strike);
-
     if(!this.playerWin(strike)){
-      return this.startASet(computer);
+      return this.startOneRound(computer);
     }
     this.selectOptions();
   }
@@ -109,13 +93,31 @@ class App {
   }
 
   selectOptions(){
-    Console.print(messages.gameover);
-    Console.print(messages.option);
+    Console.print(messages.OVER);
+    Console.print(messages.OPTION);
 
     Console.readLine("",(option)=>{
       if(!this.isVaildOption(option)) throw 'option error'
       this.quitOrRestart(option);
     });
+  }
+  
+  
+  //예외 처리
+
+  isVaildPlayer(player){
+    const test = [...player];
+    return (
+      (player.length <= this.NUMBER_LENGTH) &&  
+      (/^[0-9]+$/.test(player)) &&     
+      (test.length === [...new Set(test)].length)
+    );
+  }
+
+  isVaildOption(option){
+    return (
+      (option==='1')||(option==='2')
+    )
   }
 }
 
