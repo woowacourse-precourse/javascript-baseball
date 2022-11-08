@@ -26,6 +26,10 @@ class Input {
 
     return array;
   }
+
+  print(message) {
+    Console.print(message);
+  }
 }
 
 module.exports = Input;
