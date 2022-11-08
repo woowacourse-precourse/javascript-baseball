@@ -27,7 +27,7 @@ class App {
   getUserInput(currentAnswer) {
     MissionUtils.Console.readLine(GAME_MESSAGE.INPUT_TEXT, (answer) => {
       this.Error.validateUserInput(answer);
-      this.createHint(answer, currentAnswer);
+      this.checkIsHintAnswer(answer, currentAnswer);
       this.isDone ? this.getRetryInput() : this.getUserInput(currentAnswer);
     });
   }
@@ -57,27 +57,25 @@ class App {
     MissionUtils.Console.print(hint);
   }
 
-  checkUserScore(scoreObj) {
+  createHint(scoreObj) {
     let hint;
-    switch (scoreObj[GAME_MESSAGE.STRIKE] === 0) {
-      case true:
-        scoreObj[GAME_MESSAGE.BALL] === 0
-          ? (hint = "낫싱")
-          : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼`);
-        break;
-      case false:
-        scoreObj[GAME_MESSAGE.BALL] === 0
-          ? (hint = `${scoreObj[GAME_MESSAGE.STRIKE]}스트라이크`)
-          : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼 ${
-              scoreObj[GAME_MESSAGE.STRIKE]
-            }스트라이크`);
+    if (scoreObj[GAME_MESSAGE.STRIKE] === 0) {
+      scoreObj[GAME_MESSAGE.BALL] === 0
+        ? (hint = "낫싱")
+        : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼`);
+    } else {
+      scoreObj[GAME_MESSAGE.BALL] === 0
+        ? (hint = `${scoreObj[GAME_MESSAGE.STRIKE]}스트라이크`)
+        : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼 ${
+            scoreObj[GAME_MESSAGE.STRIKE]
+          }스트라이크`);
     }
     return hint;
   }
 
-  createHint(input, currentAnswer) {
+  checkIsHintAnswer(input, currentAnswer) {
     const score = this.checkInputIsCorrect(input, currentAnswer);
-    const hint = this.checkUserScore(score);
+    const hint = this.createHint(score);
     this.printHint(hint);
     if (hint === GAME_MESSAGE.ANSWER) {
       this.printGameOver();
