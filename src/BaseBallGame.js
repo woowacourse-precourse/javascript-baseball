@@ -4,12 +4,22 @@ const Computer = require("./Computer");
 const RandomNumber = require("./RandomNumber");
 
 class BaseBallGame {
+  #strikeCount;
+  #ballCount;
+
   constructor() {
     this.computer = null;
+    this.#strikeCount = 0;
+    this.#ballCount = 0;
   }
 
   getNewComputerNumber() {
     const newComputerNumber = new Computer(new RandomNumber());
     this.computer = newComputerNumber.numbers;
+  }
+
+  #clearBallAndStrikeCount() {
+    this.#strikeCount = 0;
+    this.#ballCount = 0;
   }
 }
