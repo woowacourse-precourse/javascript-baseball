@@ -8,7 +8,11 @@ class Validator {
     return Boolean(userAnswer);
   }
 
-  static checkType(userAnswer) {
+  static checkStringType(userAnswerString) {
+    return typeof userAnswerString === 'string';
+  }
+
+  static checkNumberType(userAnswer) {
     return typeof userAnswer === 'number';
   }
 

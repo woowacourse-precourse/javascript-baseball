@@ -1,4 +1,6 @@
+import Convertor from '../utils/Convertor.js';
 import Random from '../utils/Random.js';
+import Validator from './Validator.js';
 
 class Computer {
   checker = {
@@ -20,7 +22,7 @@ class Computer {
 
     while (this.checkLessThanThreeLength(answer)) {
       const number = Random.pickNumberInRange(this.checker.min, this.checker.max);
-      answer = this.addUniqueNumberToAnswerArray(answer, number);
+      answer = this.getUniqueNumberToAnswerArray(answer, number);
     }
 
     return answer;
@@ -30,12 +32,20 @@ class Computer {
     return answer.length < this.checker.length;
   }
 
-  addUniqueNumberToAnswerArray(answer, number) {
-    return answer.includes(number) ? answer : this.addNumberToAnswerArray(answer, number);
+  getUniqueNumberToAnswerArray(answer, number) {
+    return answer.includes(number) ? [...answer] : [...answer, number];
   }
 
-  addNumberToAnswerArray(answer, number) {
-    return [...answer, number];
+  checkAnswer() {
+    const answer = Convertor.stringToNumber(Convertor.numberArrayToString(this.answer));
+
+    return (
+      Validator.checkTruthy(answer) &&
+      Validator.checkNumberType(answer) &&
+      Validator.checkRange(answer) &&
+      Validator.checkDuplication(this.answer) &&
+      this.answer.every(number => Validator.checkNumberType(number))
+    );
   }
 }
 

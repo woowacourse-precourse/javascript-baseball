@@ -1,10 +1,14 @@
 class Convertor {
-  static stringToNumber(answer) {
-    return parseInt(answer, 10);
+  static stringToNumber(string) {
+    return parseInt(string, 10);
   }
 
-  static stringToNumberArray(answer) {
-    return Array.from(answer, Number);
+  static stringToNumberArray(string) {
+    return Array.from(string, Number);
+  }
+
+  static numberArrayToString(numberArray) {
+    return numberArray.join('');
   }
 }
 

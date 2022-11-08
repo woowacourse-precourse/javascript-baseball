@@ -1,24 +1,17 @@
-import OutputView from '../views/OutputView.js';
 import Message from './Message.js';
 
 const RESTART = '1';
+const END = '2';
 
 class Counter {
   getStrikeAndBall() {
     return [this.strike, this.ball];
   }
 
-  checkGameMode(inputView) {
-    return inputView.question.currentMessage === inputView.question.answerMessage;
-  }
+  checkGameResult(computerAnswerArray, userAnswerArray) {
+    this.resetStrikeAndBall().countResult(computerAnswerArray, userAnswerArray);
 
-  checkGameResult({ computerAnswerArray, userAnswerArray, inputView }) {
-    this.resetStrikeAndBall()
-      .countResult(computerAnswerArray, userAnswerArray)
-      .printResultMessage()
-      .checkEndGame(inputView);
-
-    return this;
+    return this.isRunningGame();
   }
 
   resetStrikeAndBall() {
@@ -29,15 +22,33 @@ class Counter {
   }
 
   countResult(computerAnswerArray, userAnswerArray) {
-    computerAnswerArray.forEach((computerValue, i) => {
-      if (computerValue === userAnswerArray[i]) {
-        this.strike += 1;
-      } else if (userAnswerArray.includes(computerValue)) {
-        this.ball += 1;
-      }
-    });
+    this.strike = this.countStrike(computerAnswerArray, userAnswerArray);
+    this.ball = this.countBall(computerAnswerArray, userAnswerArray);
 
     return this;
+  }
+
+  countStrike(computerAnswerArray, userAnswerArray) {
+    return computerAnswerArray.filter(this.checkSameValueInSamePlace, {
+      userAnswerArray,
+    }).length;
+  }
+
+  checkSameValueInSamePlace(computerAnswerValue, i) {
+    return this.userAnswerArray.indexOf(computerAnswerValue) === i;
+  }
+
+  countBall(computerAnswerArray, userAnswerArray) {
+    return computerAnswerArray.filter(this.checkSameValueInDifferentPlace, {
+      userAnswerArray,
+    }).length;
+  }
+
+  checkSameValueInDifferentPlace(computerAnswerValue, i) {
+    return (
+      this.userAnswerArray.includes(computerAnswerValue) &&
+      this.userAnswerArray.indexOf(computerAnswerValue) !== i
+    );
   }
 
   printResultMessage() {
@@ -48,18 +59,15 @@ class Counter {
       .isOnlyStrike(this.strike, this.ball)
       .isBallAndStrike(this.strike, this.ball);
 
-    OutputView.printScoreMessage(this.message.getMessage());
-
-    return this;
+    return this.message.getMessage();
   }
 
-  checkEndGame(inputView) {
-    if (this.strike === 3) {
-      OutputView.printThreeStrikeMessage();
-      inputView.setCurrentQuestionMessage(inputView.question.choiceMessage);
-    }
+  isRunningGame() {
+    return this.strike !== 3;
+  }
 
-    return this;
+  checkChoice(answerString) {
+    return answerString === RESTART || answerString === END;
   }
 
   isRestart(answerString) {
