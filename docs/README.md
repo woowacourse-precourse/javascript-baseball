@@ -30,7 +30,7 @@
 
 - return message string based on judge result
 
-## static play(): void
+## play(): void
 
 - menu select loop
   - prompt query message and get input from user
