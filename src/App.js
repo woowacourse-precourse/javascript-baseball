@@ -1,16 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-function createAnswer() {
-  const computer = [];
-  while (computer.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!computer.includes(number)) {
-      computer.push(number);
-    }
-  }
-  return computer.join('');
-}
-
 class App {
   constructor() {
     this.answer = undefined;
@@ -24,22 +13,33 @@ class App {
     this.start();
   }
 
+  static createAnswer() {
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer.join('');
+  }
+
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', input => {
       this.input = input;
-      return this.checkInput();
+      return this.checkInput(this.input);
     });
   }
 
-  checkInput() {
-    if (Number.isNaN(parseFloat(this.input))) {
+  checkInput(number) {
+    if (Number.isNaN(parseFloat(number))) {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다.숫자를 입력해주세요. ' });
     }
-    if (this.input.length !== 3) {
+    if (number.length !== 3) {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다. 3자리 수를 입력해주세요. ' });
     }
-    const inputDigit = this.input.split('').map(Number);
-    if (new Set(inputDigit).size !== 3 || this.input.includes('0')) {
+    const inputDigit = number.split('').map(Number);
+    if (new Set(inputDigit).size !== 3 || number.includes('0')) {
       throw Object.assign(new Error(), { message: '잘못된 입력입니다. 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요. ' });
     }
     return this.getResult();
@@ -90,7 +90,7 @@ class App {
   }
 
   start() {
-    this.answer = createAnswer();
+    this.answer = App.createAnswer();
     return this.getUserInput();
   }
 
