@@ -21,7 +21,6 @@ class App {
       throw new Error("숫자가 초과했습니다.(3개만 입력)");
     }
     if ([...new Set(inputNumber.split(""))].length !== 3) {
-      console.log([...new Set(inputNumber.split[""])]);
       throw new Error("중복되는 숫자가 입력되었습니다.");
     }
   }
@@ -29,7 +28,6 @@ class App {
   checkInputNumbers(inputNumbers, randomNumbers) {
     this.strikeCount = 0;
     let ballCount = 0;
-    console.log(randomNumbers);
 
     inputNumbers.map((value, index) => {
       value === randomNumbers[index]
@@ -97,5 +95,3 @@ class App {
 }
 
 module.exports = App;
-// const app = new App();
-// app.play();
