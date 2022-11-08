@@ -11,6 +11,7 @@ const inputUserNum = () => {
     exceptionHandlingInputUserNum(answer);
     userAnswerNumList = stringToNumberInList(answer);
 
+    let [ballCount, strikeCount] = getGameResult(gameAnswerNumList, userAnswerNumList);
   });
 }
 
@@ -26,6 +27,23 @@ const exceptionHandlingInputUserNum = (answer) => {
   if (!areEachDifferent(answer)) {
     throw escape;
   }
+}
+
+const getGameResult = (answer, userAnswer) => {
+  let ballCount = 0;
+  let strikeCount = 0;
+
+  userAnswer.forEach((num, index) => {
+    if (answer[index] === num) {
+      strikeCount += 1;
+      return;
+    }
+    if (answer.includes(num)) {
+      ballCount += 1
+    }
+  })
+
+  return [ballCount, strikeCount]
 }
 
 }
