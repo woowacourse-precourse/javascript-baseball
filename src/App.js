@@ -5,7 +5,7 @@ class App {
 	computerNumArr = [];
 
 	play() {
-		Console.print(MESSAGES.START);
+		console.log(MESSAGES.START);
 		this.initGame();
 		this.playGame();
 	}
@@ -30,6 +30,7 @@ class App {
 					);
 					if (resultMessage === MESSAGES.THREE_STRIKE) {
 						Console.print(MESSAGES.THREE_STRIKE);
+						console.log(MESSAGES.END(3))
 						this.askToReplay();
 					} else {
 						Console.print(resultMessage);
@@ -62,11 +63,11 @@ class App {
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
 			computerNumArr.map((computerNum, computerNumIdx) => {
-				if (computerNum === Number(userAnswerStr) &&computerNumIdx === userAnswerIdx ) {strike++; return;}
+				if (computerNum === Number(userAnswerStr) && computerNumIdx === userAnswerIdx ) {strike++; return;}
 				if(computerNum === Number(userAnswerStr)) ball++;
 				}
 			);
-
+			
 			if (strike > 0 && ball > 0) {
 				result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
 			} else if (strike > 0) {
@@ -89,6 +90,7 @@ class App {
 				this.initGame();
 				this.playGame();
 			} else if (playerChoice === CHOICE.EXIT) {
+				Console.print("게임 종료")
 				Console.close();
 			} else {
 				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);

@@ -1,5 +1,5 @@
 const MESSAGES = Object.freeze({
-    START: "game started",
+    START: "숫자 야구 게임을 시작합니다.",
     THREE_STRIKE: "3스트라이크",
     INVALID_LENGTH: "3자리 숫자를 입력해주세요!",
     NOT_A_NUMBER: "숫자만 입력해주세요!",
