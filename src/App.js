@@ -13,6 +13,8 @@ const RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART_CODE}, 종�
 class App {
   constructor() {
     this.score = { ball: 0, strike: 0 };
+    this.answer = [];
+    this.playerInput = [];
   }
 
   play() {
@@ -21,8 +23,8 @@ class App {
   }
 
   startGame() {
-    let answer = this.getRandomNumber();
-    this.playerInput(answer);
+    this.getRandomNumber();
+    this.getPlayerInput();
   }
 
   printMessage(message) {
@@ -30,92 +32,88 @@ class App {
   }
 
   getRandomNumber() {
-    const computer = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      NUMBER_LENGTH
-    );
-    return computer;
+    while (this.answer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
+      }
+    }
   }
 
-  playerInput(answer) {
-    let status;
+  getPlayerInput() {
     MissionUtils.Console.readLine(INPUT_MESSAGE, (input) => {
-      this.score = { ball: 0, strike: 0 };
       this.checkInput(input);
-      this.checkAnswer(input, answer);
-      status = this.printScore();
-      if (status < 0) {
-        this.playerInput(answer);
+      this.checkAnswer();
+      this.printScore();
+    });
+  }
+
+  checkInput(input) {
+    let element;
+    this.playerInput = [];
+
+    if (input.length !== NUMBER_LENGTH) {
+      throw new Error(`${NUMBER_LENGTH}자리 숫자를 입력해 주세요`);
+    }
+
+    for (let index = 0; index < NUMBER_LENGTH; index++) {
+      element = Number(input[index]);
+      if (isNaN(element)) {
+        throw new Error("숫자만 입력해 주세요");
+      }
+      if (!this.playerInput.includes(element)) {
+        this.playerInput.push(element);
       } else {
-        this.playerRestartInput();
-      }
-      return;
-    });
-  }
-
-  playerRestartInput() {
-    MissionUtils.Console.readLine(RESTART_MESSAGE, (input) => {
-      if (input === EXIT_CODE) {
-        return;
-      }
-      if (input !== RESTART_CODE) {
-        throw new Error(RESTART_MESSAGE);
-      }
-      this.startGame();
-      return;
-    });
-  }
-
-  printScore() {
-    if (!this.score.ball && !this.score.strike) {
-      this.printMessage(NOTHING_STRING);
-      return -1;
-    }
-    if (this.score.strike === NUMBER_LENGTH) {
-      this.printMessage(CORRECT_MESSAGE);
-      return 0;
-    }
-    if (this.score.ball) {
-      this.printMessage(this.score.ball.toString() + BALL_STRING);
-    }
-    if (this.score.strike) {
-      this.printMessage(this.score.strike.toString() + STRIKE_STRING);
-    }
-    return -1;
-  }
-
-  checkAnswer(input, answer) {
-    for (let index = 0; index < NUMBER_LENGTH; index++) {
-      if (Number(input[index]) === answer[index]) {
-        this.score.strike++;
-      } else if (answer.includes(Number(input[index]))) {
-        this.score.ball++;
-      }
-    }
-  }
-
-  checkOverlap(input, checkIndex) {
-    for (let index = 0; index < NUMBER_LENGTH; index++) {
-      if (index === checkIndex) {
-        continue;
-      }
-      if (input[index] === input[checkIndex]) {
         throw new Error("각 숫자는 중복되지 않아야합니다");
       }
     }
   }
 
-  checkInput(input) {
-    if (input.length !== NUMBER_LENGTH) {
-      throw new Error(`${NUMBER_LENGTH}자리 숫자를 입력해 주세요`);
-    }
+  checkAnswer() {
+    this.score = { ball: 0, strike: 0 };
+
     for (let index = 0; index < NUMBER_LENGTH; index++) {
-      if (isNaN(input[index])) {
-        throw new Error("숫자만 입력해 주세요");
+      if (this.playerInput[index] === this.answer[index]) {
+        this.score.strike++;
+      } else if (this.answer.includes(this.playerInput[index])) {
+        this.score.ball++;
       }
-      this.checkOverlap(input, index);
     }
+  }
+
+  printScore() {
+    if (this.score.strike === 0 && this.score.ball === 0) {
+      this.printMessage(NOTHING_STRING);
+    } else if (this.score.strike !== 0 && this.score.ball !== 0) {
+      this.printMessage(
+        this.score.ball + BALL_STRING + " " + this.score.strike + STRIKE_STRING
+      );
+    } else {
+      if (this.score.strike) {
+        this.printMessage(this.score.strike + STRIKE_STRING);
+      } else {
+        this.printMessage(this.score.ball + BALL_STRING);
+      }
+    }
+
+    if (this.score.strike === NUMBER_LENGTH) {
+      this.printMessage(CORRECT_MESSAGE);
+      this.getRestartInput();
+    } else {
+      this.getPlayerInput();
+    }
+  }
+
+  getRestartInput() {
+    MissionUtils.Console.readLine(RESTART_MESSAGE, (input) => {
+      if (input === EXIT_CODE) {
+        return;
+      } else if (input !== RESTART_CODE) {
+        throw new Error(RESTART_MESSAGE);
+      }
+      this.answer = [];
+      this.startGame();
+    });
   }
 }
 
