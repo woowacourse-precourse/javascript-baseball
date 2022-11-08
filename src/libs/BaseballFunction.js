@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const gameSetting = () => {
+function gameSetting() {
   const computer = [];
 
   while (computer.length < 3) {
@@ -11,9 +11,9 @@ const gameSetting = () => {
   }
 
   return computer;
-};
+}
 
-const isValidation = (userNumber) => {
+function isValidation(userNumber) {
   const userNumberList = userNumber.split('');
 
   if (userNumberList.filter((element) => element > 0).length !== 3) {
@@ -28,16 +28,16 @@ const isValidation = (userNumber) => {
   }
 
   return true;
-};
+}
 
-const requestNumber = (computer) => {
+function requestNumber(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
     if (!isValidation(userNumber)) {
       throw new Error('올바르지 않은 입력입니다.');
     }
     checkResult(computer, userNumber);
   });
-};
+}
 
 const gameRestart = (answer) => {
   if (answer === '1') {
@@ -65,7 +65,7 @@ const getStrike = (computer, user) => {
   return strike;
 };
 
-const getBall = (computer, user) => {
+function getBall(computer, user) {
   let ball = 0;
 
   for (let i = 0; i < 3; i++) {
@@ -75,9 +75,9 @@ const getBall = (computer, user) => {
   }
 
   return ball;
-};
+}
 
-const checkResult = (computer, userNumber) => {
+function checkResult(computer, userNumber) {
   const user = userNumber.split('').map((element) => Number(element));
   const strike = getStrike(computer, user);
   const ball = getBall(computer, user);
@@ -107,7 +107,7 @@ const checkResult = (computer, userNumber) => {
   }
   MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
   requestNumber(computer);
-};
+}
 
 module.exports = {
   gameSetting, isValidation, requestNumber, gameRestart, getStrike, getBall, checkResult,
