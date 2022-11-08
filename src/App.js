@@ -106,8 +106,7 @@ class App {
       MissionUtils.Console.close(); 
       return;
     }
-    MissionUtils.Console.print(ERROR.INVALID_RETRY);
-    this.askRetry();
+    throw new Error(ERROR.INVALID_RETRY);
   }
 }
 
