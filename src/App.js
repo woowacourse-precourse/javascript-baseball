@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const checkValidRandomNumber = require('./utils/checkValidRandomNumber');
 
 class App {
   initGame() {
@@ -10,8 +11,10 @@ class App {
   }
 
   generateRandomNumber() {
-    const newRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    this.computerRandomNumber = [...newRandomNumber];
+    do {
+      const newRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+      this.computerRandomNumber = [...newRandomNumber];
+    } while (!checkValidRandomNumber());
   }
 
   startGame() {
