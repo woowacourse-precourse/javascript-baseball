@@ -58,12 +58,12 @@ class App {
     return numberSet.size !== input.length;
   }
 
-  isStrike(number, idx) {
-    return this.answer[idx] === number;
+  isStrike(answer, number, idx) {
+    return answer[idx] === number;
   }
 
-  isBall(number, idx) {
-    return this.answer[idx] !== number && this.answer.includes(number);
+  isBall(answer, number, idx) {
+    return answer[idx] !== number && answer.includes(number);
   }
 
   getMessage(cnt, msgUnitStr) {
@@ -79,9 +79,9 @@ class App {
     };
 
     for (let i = 0; i < 3; i++) {
-      if (this.isStrike(input[i], i)) {
+      if (this.isStrike(this.answer, input[i], i)) {
         cnt.strike += 1;
-      } else if (this.isBall(input[i], i)) {
+      } else if (this.isBall(this.answer, input[i], i)) {
         cnt.ball += 1;
       }
     }
