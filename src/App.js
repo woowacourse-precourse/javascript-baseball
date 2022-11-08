@@ -10,12 +10,12 @@ class App {
   }
 
   setComputerNum() {
-    const computer = new Set();
-    while (computer.size < 3) {
-      computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    const NumSet = new Set();
+    while (NumSet.size < 3) {
+      NumSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
 
-    return Number([...computer].join(""));
+    return Number([...NumSet].join(""));
   }
 
   gameStart(computer) {
@@ -48,8 +48,8 @@ class App {
     result.set("스트라이크", null);
     result.set("볼", null);
 
-    inputArray.forEach((e, idx) => {
-      switch (computerArray.indexOf(e)) {
+    inputArray.forEach((element, idx) => {
+      switch (computerArray.indexOf(element)) {
         case idx: // 같은 자리수의 숫자일때, 스트라이크
           result.set("스트라이크", result.get("스트라이크") + 1 ?? 1);
           break;
