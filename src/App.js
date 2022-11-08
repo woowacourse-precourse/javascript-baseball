@@ -1,17 +1,18 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const Messages = require('./Messages');
 
 class App {
   computerNumber;
 
   constructor() {
     this.setComputerNumber();
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(Messages.PLAY);
   }
 
   play() {
-    Console.readLine('숫자를 입력해주세요 : ', (userGuess) => {
+    Console.readLine(Messages.QUERY, (userGuess) => {
       if (!this.isValidGuess(userGuess)) {
-        throw new Error('--- *서로다른 세자리 자연수를 입력해주세요 ---');
+        throw new Error(Messages.ERROR_WHILE_INPUT);
       }
       this.progress(userGuess);
     });
@@ -19,7 +20,7 @@ class App {
 
   progress(userGuess) {
     const { strike, ball } = this.calcHit(this.computerNumber, userGuess);
-    Console.print(this.createResultMessage(strike, ball));
+    Console.print(Messages.RESULT_MESSAGE(strike, ball));
 
     if (strike === 3) {
       this.gameOver();
@@ -29,8 +30,8 @@ class App {
   }
 
   gameOver() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (keyPress) => {
+    Console.print(Messages.GAME_OVER);
+    Console.readLine(Messages.REPLAY, (keyPress) => {
       switch (keyPress) {
         case '1':
           this.replay();
@@ -39,7 +40,7 @@ class App {
           this.quit();
           return;
         default:
-          throw new Error('--- *1 또는 2를 입력해주세요  ---');
+          throw new Error(Messages.ERROR_WHILE_REPLAY);
       }
     });
   }
@@ -92,22 +93,6 @@ class App {
       }
       return acc;
     }, { strike: 0, ball: 0 });
-  }
-
-  createResultMessage(strike, ball) {
-    if (ball === 0 && strike === 0) {
-      return '낫싱';
-    }
-    if (ball === 0 && strike > 0) {
-      return `${strike}스트라이크`;
-    }
-    if (ball > 0 && strike === 0) {
-      return `${ball}볼`;
-    }
-    if (ball > 0 && strike > 0) {
-      return `${ball}볼 ${strike}스트라이크`;
-    }
-    throw new Error('비정상적인 결과 입니다.');
   }
 }
 
