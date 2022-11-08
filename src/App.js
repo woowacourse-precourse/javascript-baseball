@@ -121,6 +121,7 @@ class App {
     this.game = new Game();
   }
   play() {
+    this.game.startGame();
   }
 }
 

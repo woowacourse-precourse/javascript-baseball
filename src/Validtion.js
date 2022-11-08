@@ -3,6 +3,7 @@ const ERROR_MESSAGE = require("./ErrorMessage.js");
 class Validtion {
     constructor(){
         this.userNumberArray = [];
+        this.buttonNumber = 0;
     }
     isValidationUserBallInput(userNumberArray){
         this.userNumberArray = userNumberArray;
