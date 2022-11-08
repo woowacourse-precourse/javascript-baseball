@@ -2,9 +2,6 @@
   "name": "javascript-baseball",
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 숫자 야구 게임 미션",
-  "dependencies": {
-    "@woowacourse/mission-utils": "^1.0.6"
-  },
   "devDependencies": {
     "jest": "^29.0.3"
   },
@@ -26,5 +23,8 @@
   "engines": {
     "npm": ">=6.0.0",
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.6"
   }
 }
