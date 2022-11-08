@@ -66,4 +66,12 @@ describe("기능 테스트", () => {
       app.requireInputRandomNumber();
     }).toThrow();
   });
+
+  test("[기능 5] 입력 값이 랜덤수와 일치하는지 확인", () => {
+    const randoms = [1, 3, 2];
+    const answer = "132";
+
+    const app = new App();
+    expect(app.isCorrectNumber(randoms, answer)).toBeTruthy();
+  });
 });
