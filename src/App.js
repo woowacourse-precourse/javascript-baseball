@@ -30,8 +30,9 @@ class App {
   inGame(userInput) {
     const result = getResult(this.answer, userInput);
     printResult(result);
-    if (checkCorrect(result)) this.correct();
-    else this.getUserInput();
+
+    if (checkWrong(result)) this.getUserInput();
+    this.correct();
   }
 
   correct() {
@@ -41,11 +42,11 @@ class App {
 
   getUserRestartInput() {
     Console.readLine(`${Message.restart}`, (userRestartInput) => {
-      this.decideSystemRestart(userRestartInput);
+      this.decideRestart(userRestartInput);
     });
   }
 
-  decideSystemRestart(userRestartInput) {
+  decideRestart(userRestartInput) {
     if (
       userRestartInput !== Message.restartNum &&
       userRestartInput !== Message.gameoverNum
@@ -65,8 +66,8 @@ class App {
   }
 }
 
-function checkCorrect(result) {
-  return result === Message.strike_3;
+function checkWrong(result) {
+  return result !== Message.strike_3;
 }
 
 const app = new App();
