@@ -4,7 +4,7 @@ const MSG = {
   initMsg: '숫자 야구 게임을 시작합니다.',
   inputNumber: '숫자를 입력해주세요 : ',
   endMsg: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  requestMsg: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요',
+  requestMsg: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n',
   invalidInput: '잘못된 값을 입력하셨습니다',
   allCorrect: '3스트라이크',
   strike: '스트라이크',
@@ -107,7 +107,12 @@ class App {
   }
 
   endGame() {
-    Console.print(MSG.requestMsg);
+    Console.print(MSG.endMsg);
+
+    Console.readLine(MSG.requestMsg, (input) => {
+      if (input === '1') return this.startGame();
+      else if (input === '2') return Console.close();
+    });
   }
 }
 
