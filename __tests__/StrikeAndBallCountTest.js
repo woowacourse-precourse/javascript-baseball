@@ -24,11 +24,11 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-afterEach(() => {
-  MissionUtils.Console.close();
-});
-
 describe("스트라이크 볼 카운트 테스트", () => {
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
+
   test("스트라이크 볼 카운트 결과 가져오는 함수", () => {
     const answerNumber = "123";
     const inputsAndReturns = [

@@ -7,11 +7,10 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-afterEach(() => {
-  MissionUtils.Console.close();
-});
-
 describe("게임 시작 문구 테스트", () => {
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
   test("게임 시작 문구 출력 확인", () => {
     const logSpy = getLogSpy();
     const app = new App();
