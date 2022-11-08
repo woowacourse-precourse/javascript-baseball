@@ -14,9 +14,9 @@ class App {
 
   generateAnswer() {
     const MISSION_UTILS = require('@woowacourse/mission-utils');
-    while (this.answer.length < 4) {
-      const RANDOM_NUM = MISSION_UTILS.Random.pickNumberInRange(1, 9);
-      if (this.answer.indexOf(RANDOM_NUM) === -1) this.answer.push(RANDOM_NUM);
+    while (this.answer.length < 3) {
+      let randomNum = MISSION_UTILS.Random.pickNumberInRange(1, 9);
+      if (this.answer.indexOf(randomNum) === -1) this.answer.push(randomNum);
     }
   }
 
@@ -52,7 +52,7 @@ class App {
       if (countBall === 0 && countStrike !== 3 && countStrike !== 0) {
         MISSION_UTILS.Console.print(`${countStrike}스트라이크`);
       }
-      if (countStrike !== 0 && countStrike !== 3 && countBall !== 0) {
+      if (countStrike !== 0 && countBall !== 0) {
         MISSION_UTILS.Console.print(`${countBall}볼 ${countStrike}스트라이크`);
       }
 
@@ -64,7 +64,7 @@ class App {
       if (countStrike === 3) {
         MISSION_UTILS.Console.print('3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료');
         MISSION_UTILS.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', (response) => {
-          if (response === 1) {
+          if (Number(response) === 1) {
             const APP2 = new App();
             APP2.play();
           }
