@@ -18,7 +18,7 @@ class Utils {
     const numbers = Array.from({ length: count }).reduce(
       (prev) => [
         ...prev,
-        Utils.#createUniqueNumberInList({ array: prev, minNumber, maxNumber }),
+        Utils.createUniqueNumberInList({ array: prev, minNumber, maxNumber }),
       ],
       []
     );
