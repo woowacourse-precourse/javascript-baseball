@@ -25,7 +25,7 @@ class App {
 
       if (!this.isValidAnswer) {
         this.user = '';
-        throw new TypeError();
+        throw new TypeError('서로 다른 세자리 숫자를 입력해주세요.');
       }
 
       this.resetScore();
@@ -98,7 +98,9 @@ class App {
   }
 
   get isValidAnswer() {
-    return this.user.match(/[1-9]/g) && new Set([...this.user]).size === 3;
+    return (
+      /^[1-9]+$/.test(this.user) && new Set([...this.user]).size === LENGTH
+    );
   }
 }
 
