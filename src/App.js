@@ -8,9 +8,9 @@ class App {
     this.ballCount = 0;
     this.strikeCount = 0;
   }
-  // Expected 'this' to be used by class method 'play'.
 
-  getRandomNumber() {
+  getRandomComputerNumber() {
+    this.computerNumberList = [];
     while (this.computerNumberList.length < 3) {
       const pickedNumber = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this.computerNumberList.includes(pickedNumber)) {
@@ -19,7 +19,7 @@ class App {
     }
   }
 
-  guessUserNumber() {
+  getUserNumber() {
     let guessNumber;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (x) => {
       guessNumber = x;
@@ -43,7 +43,7 @@ class App {
     });
   }
 
-  getResult() {
+  getTotalBallStrike() {
     if (this.strikeCount > 0 && this.ballCount > 0) {
       return `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
     }
@@ -54,10 +54,20 @@ class App {
 
   inputException() {
     if (this.userNumberList.length !== 3) {
-      throw new Error('예외');
+      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
     }
     if (this.userNumberList.filter((num) => Number.isNaN(num)).length > 0) {
-      throw new Error('예외');
+      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    }
+  }
+
+  continueOrFinishInputException(input) {
+    try {
+      if (input !== '1' || input !== '2') {
+        throw new Error('1 또는 2를 입력해야 합니다. 게임을 종료합니다.');
+      }
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
     }
   }
 
@@ -73,29 +83,29 @@ class App {
     return input;
   }
 
-  chooseContinueFinish() {
-    const input = this.continueOrFinish();
-
+  chooseContinueFinish(input) {
     if (input.toString() === '2') {
       MissionUtils.Console.print('게임 종료');
       this.isPlaying = false;
     } else {
       this.computerNumberList = [];
-      this.getRandomNumber();
+      this.getRandomComputerNumber();
     }
   }
 
   playGame() {
-    this.guessUserNumber();
+    this.getUserNumber();
     try {
       this.inputException();
 
       this.countStrike();
       this.countBall();
-      MissionUtils.Console.print(this.getResult());
+      MissionUtils.Console.print(this.getTotalBallStrike());
 
       if (this.strikeCount === 3) {
-        this.chooseContinueFinish();
+        const input = this.continueOrFinish();
+        this.continueOrFinishInputException(input);
+        this.chooseContinueFinish(input);
       }
     } catch (error) {
       MissionUtils.Console.print(error.message);
@@ -104,7 +114,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.getRandomNumber();
+    this.getRandomComputerNumber();
     while (this.isPlaying) {
       this.playGame();
     }
