@@ -99,6 +99,19 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
+  test('중복된 숫자 입력시 예외 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['113'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test('게임이 끝난후 종료', () => {
     const randoms = [1, 3, 5];
     const answers = ['135', '2', '135'];
