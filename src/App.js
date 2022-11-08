@@ -1,37 +1,24 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-
-const GAME_PLAY_NUM = 1;
-const GAME_EXIT_NUM = 2;
-const COMPUTER_NUMBER_LENGTH = 3;
-
-const STRIKE = "스트라이크";
-const BALL = "볼";
-
-const GAME_START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-const GAME_END_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-
-const INPUT_NUMBER_MESSAGE = "숫자를 입력해주세요 :";
-const CHECK_REPLAY_OR_EXIT_MESSAGE =
-  "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
-
-const LENGTH_ERROR_MESSAGE = "3자리의 수를 입력해주세요.";
-const RANGE_ERROR_MESSAGE = "1부터 9까지의 수만 입력해주세요.";
-const DUPLICATED_ERROR_MESSAGE = "서로 다른 3자리를 입력해주세요.";
-const NOT_A_NUMBER_ERROR_MESSAGE = "숫자로만 입력해주세요.";
-const GAME_REPLAY_NUMBER_ERROR_MESSAGE = "1 또는 2를 입력하세요.";
+const validatePlayerInput = require("./Validator");
+const {
+  GAME_OPTION,
+  SCORE,
+  GAME_MESSAGE,
+  COMPUTER_NUMBER,
+} = require("./Constatns");
 
 class App {
   play() {
-    this.printGameMsg(GAME_START_MESSAGE);
+    this.printGameMsg(GAME_MESSAGE.START);
 
     let computerNum;
-    let playOptionNum = GAME_PLAY_NUM;
+    let playOptionNum = GAME_OPTION.PLAY;
 
-    while (playOptionNum === GAME_PLAY_NUM) {
+    while (playOptionNum === GAME_OPTION.PLAY) {
       computerNum = this.getComputerNum();
 
       this.start(computerNum);
-      this.printGameMsg(GAME_END_MESSAGE);
+      this.printGameMsg(GAME_MESSAGE.END);
 
       playOptionNum = this.inputReplayNum();
     }
@@ -51,14 +38,17 @@ class App {
   }
 
   isAllStrike(strike) {
-    return strike === COMPUTER_NUMBER_LENGTH;
+    return strike === COMPUTER_NUMBER.LENGTH;
   }
 
   getComputerNum() {
     const computerNum = [];
 
-    while (computerNum.length < 3) {
-      const num = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (computerNum.length < COMPUTER_NUMBER.LENGTH) {
+      const num = MissionUtils.Random.pickNumberInRange(
+        COMPUTER_NUMBER.MIN_RANGE,
+        COMPUTER_NUMBER.MAX_RANDE
+      );
       if (!computerNum.includes(num)) {
         computerNum.push(num);
       }
@@ -74,8 +64,8 @@ class App {
   inputPlayerNum() {
     let playerNum;
 
-    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
-      if (this.isValidPlayerInput(input)) playerNum = input;
+    MissionUtils.Console.readLine(GAME_MESSAGE.INPUT_PLAYER_NUMBER, (input) => {
+      if (validatePlayerInput.isValidPlayerInput(input)) playerNum = input;
     });
 
     return playerNum;
@@ -84,53 +74,12 @@ class App {
   inputReplayNum() {
     let replayNum;
 
-    MissionUtils.Console.readLine(CHECK_REPLAY_OR_EXIT_MESSAGE, (input) => {
-      if (this.isValidReplayNum(input)) replayNum = parseInt(input);
+    MissionUtils.Console.readLine(GAME_MESSAGE.REPLAY_OR_EXIT, (input) => {
+      if (validatePlayerInput.isValidReplayNum(input))
+        replayNum = parseInt(input);
     });
 
     return replayNum;
-  }
-
-  isValidPlayerInput(playerNum) {
-    if (isNaN(parseInt(playerNum))) {
-      throw new Error(NOT_A_NUMBER_ERROR_MESSAGE);
-    }
-
-    if (!this.isValidLength(playerNum)) {
-      throw new Error(LENGTH_ERROR_MESSAGE);
-    }
-
-    if (!this.isValidRange(playerNum)) {
-      throw new Error(RANGE_ERROR_MESSAGE);
-    }
-
-    if (!this.isValidDuplicated(playerNum)) {
-      throw new Error(DUPLICATED_ERROR_MESSAGE);
-    }
-
-    return true;
-  }
-
-  isValidLength(playerNum) {
-    return playerNum.length === COMPUTER_NUMBER_LENGTH;
-  }
-
-  isValidRange(playerNum) {
-    return !playerNum.includes("0");
-  }
-
-  isValidDuplicated(playerNum) {
-    const set = new Set(playerNum);
-
-    return set.size === COMPUTER_NUMBER_LENGTH;
-  }
-
-  isValidReplayNum(answer) {
-    if (Number(answer) !== GAME_PLAY_NUM && Number(answer) !== GAME_EXIT_NUM) {
-      throw new Error(GAME_REPLAY_NUMBER_ERROR_MESSAGE);
-    }
-
-    return true;
   }
 
   getHint(computerNum, playerNum) {
@@ -153,22 +102,24 @@ class App {
 
   printHint(ball, strike) {
     if (ball === 0 && strike === 0) {
-      MissionUtils.Console.print("낫싱");
+      MissionUtils.Console.print(SCORE.NOTHING);
       return;
     }
 
     if (ball > 0 && strike === 0) {
-      MissionUtils.Console.print(`${ball}${BALL}`);
+      MissionUtils.Console.print(`${ball}${SCORE.BALL}`);
       return;
     }
 
     if (ball === 0 && strike > 0) {
-      MissionUtils.Console.print(`${strike}${STRIKE}`);
+      MissionUtils.Console.print(`${strike}${SCORE.STRIKE}`);
       return;
     }
 
     if (ball > 0 && strike > 0)
-      MissionUtils.Console.print(`${ball}${BALL} ${strike}${STRIKE}`);
+      MissionUtils.Console.print(
+        `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`
+      );
   }
 }
 
