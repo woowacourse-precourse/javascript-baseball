@@ -6,8 +6,8 @@ class App {
   }
 
   play() {
-    Console.readLine("숫자를 입력해주세요 : ", () => {
-      // 숫자 유효성 검사
+    Console.readLine("숫자를 입력해주세요 : ", (getUserNum) => {
+      this.checkUserNum(getUserNum);
     });
   }
 
@@ -18,6 +18,16 @@ class App {
       if (!randomNum.includes(number)) randomNum.push(number);
     }
     return randomNum;
+  }
+
+  checkUserNum(getUserNum) {
+    if (getUserNum.match(/[^1-9]/)) {
+      throw new Error("숫자를 입력해주세요.");
+    } else if (new Set(getUserNum.split("")).size !== 3) {
+      throw new Error("중복되지 않은 숫자를 입력해주세요.");
+    } else if (getUserNum.length !== 3) {
+      throw new Error("세자리 숫자를 입력해주세요.");
+    }
   }
 }
 
