@@ -28,6 +28,10 @@ function getUserNumber() {
     });
   });
 }
+function restartOrExit(input) {
+  if (input == 1) return true;
+  else return false;
+}
 
 const app = new App();
 app.play();
