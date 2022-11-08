@@ -1,23 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { GAME_START, RESTART } = require('./constant/constant');
-const validation = require('./user/validation');
 const { ballCheck, strikeCheck, compareNumber } = require('./game/bowlingResult');
 const numberRandom = require('./computer/randomNumber');
 const userInputNumber = require('./user/userInputNumber');
+const wrongInput = require('./inputError/wrongInput');
 
 class App {
-  // 게임 재시작 입력 오류
-  wrongInput(inputNumber) {
-    if (inputNumber !== '1' && inputNumber !== '2') {
-      throw new Error('숫자 1 혹은 숫자 2를 입력해 주세요.');
-    }
-  }
-
   // 게임 재시작
   restartGame() {
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (input) => {
-      this.wrongInput(input);
+      wrongInput(input);
       if (input === '1') {
         MissionUtils.Console.print(RESTART);
         this.startGame();

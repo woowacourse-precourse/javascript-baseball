@@ -35,4 +35,4 @@ const oneToNineCheck = (inputNumber) => {
     }
 }
 
-module.exports = userInputCheck
+module.exports = userInputCheck;

@@ -12,4 +12,4 @@ const userInputNumber = () => {
     return userAnswer;
 }
 
-module.exports = userInputNumber
+module.exports = userInputNumber;

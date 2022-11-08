@@ -27,7 +27,7 @@ const compareNumber = (strike, ball) => {
 }
 
 module.exports = {
-    ballCheck,
-    strikeCheck,
-    compareNumber
-}
+  ballCheck,
+  strikeCheck,
+  compareNumber
+};

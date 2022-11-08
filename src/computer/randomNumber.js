@@ -12,4 +12,4 @@ const numberRandom = () => {
     return computer.join("");
 }
 
-module.exports = numberRandom
+module.exports = numberRandom;
