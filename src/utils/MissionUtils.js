@@ -104,6 +104,11 @@ const isBall = (number, index, computers) => {
   return 0;
 };
 
+const isUserWin = (countStrike) => {
+  let userWin = countStrike === 3;
+  return userWin;
+};
+
 const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
