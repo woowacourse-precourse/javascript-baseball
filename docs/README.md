@@ -22,3 +22,11 @@ Added constructor to $App:
 - declare the class's variable: this._computer , this._player
 
 Breaks $App.this_computer and $App.this_player, which was declared in $App.setting move to $App.constructor
+
+feat($App): play method
+
+Added new method 'play' to $App:
+- start the baseball game: setting
+- add other methods for the game
+
+Breaks $App.play, which was added

@@ -18,14 +18,6 @@ class App {
     while(true){
         this.setting();
         console.log("숫자 야구 게임을 시작합니다.");
-        this.input();
-        let success = 0;
-        do{
-            success = this.check();
-        }while(success == 0);
-        if(this.end() == 2){
-            break;
-        }
     }
   }
 
