@@ -22,16 +22,19 @@ class App {
 
     function numberInput() {
       MissionUtils.Console.readLine('숫자를 입력해주세요', (answer) => {
+        strike = 0;
+        ball = 0;
+        nothing = 0;
         //숫자가 3자리수 이상인 경우 예외 처리
         if (answer.length > 3) throw '입력 값이 잘못됨';
 
         //while문과 if문은 depth가 2 이상이므로 map을 활용
-        answer.map((number, i) => {
-          computer.includes(number)
-            ? computer.indexOf(number) === i
-              ? (strike += 1)
-              : (ball += 1)
-            : (nothing += 1);
+        computer.map((number, i) => {
+          if (answer.includes(number)) {
+            return answer.indexOf(number) === i ? strike++ : ball++;
+          } else {
+            nothing ++;
+          }
         });
       });
     }
