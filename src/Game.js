@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const User = require('./User');
-const { MESSAGE } = require('./lib/constants');
+const { MESSAGE, REPLAY } = require('./lib/constants');
 
 class Game {
   constructor() {
@@ -18,16 +18,21 @@ class Game {
     this.start();
   }
 
+  replay(){
+    this.set();
+    this.play();
+  }
+
+  exit() {
+    MissionUtils.Console.close();
+  }
+
   start() {
     this.printStartMessage();
     this.user.readAnswer(MESSAGE.READ_ANSWER, (answer) => {
       const correct = this.checkAnswer(answer);
 
-      if (!correct) this.start();
-      else
-      this.user.wantRestart(MESSAGE.RESTART, (answer) => {
-        console.log(answer);
-      });
+      correct ? this.checkReplay() : this.start();
     });
   }
 
@@ -43,6 +48,14 @@ class Game {
 
     return false;
   }
+
+  checkReplay() {
+    this.user.readFlag(MESSAGE.RESTART, (flag) => {
+      if (flag === REPLAY.RESTART) this.replay();
+      if (flag === REPLAY.EXIT) this.exit();
+    });
+  }
+
 
   printStartMessage() {
     this.printMessage(MESSAGE.START);
