@@ -1,5 +1,15 @@
 class App {
-  play() {}
+  play() {    
+    let computerRandomNum = this.createRandomNumber();
+    let userInputNum=this.InputUserNumber();
+
+    if(this.checkUserNumVaildation(userInputNum)){
+      MissionUtils.Console.print(this.calResult(computerRandomNum, userInputNum));
+    }
+    
+    while(!this.checkThreeStrike(computerRandomNum, userInputNum)&&this.checkUserNumVaildation(userInputNum)){     
+      userInputNum=this.InputUserNumber();  
+    }}
   createRandomNumber() {
     let computerNumber="";
     let count=0;
