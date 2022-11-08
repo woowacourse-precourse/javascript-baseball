@@ -1,10 +1,10 @@
 //    npm test Retry.js
 
 const ComputerInput = require("../src/ComputerInput");
-const CheckInputValid = require("../src/CheckInputValid");
-const { ERROR } = require("../src/data/Constants");
+const { ERROR, GAME } = require("../src/data/Constants");
 const Render = require("../src/Render");
 const GameJudgment = require("../src/GameJudgment");
+const CheckInputValid = require("../src/CheckInputValid");
 
 describe("Computer에서 랜덤숫자 배열 추출", () => {
   const computerInput = ComputerInput();
@@ -18,17 +18,6 @@ describe("Computer에서 랜덤숫자 배열 추출", () => {
 
 describe("UserInput과 관련된 테스트", () => {
   const checkInputValid = new CheckInputValid();
-
-  test("UserInput 입력받기", (done) => {
-    function callback() {
-      MissionUtils.Console.readLine("숫자를 입력해주세요", (number) => {
-        expect(number).toBe(number);
-        done();
-      });
-    }
-    callback();
-  });
-
   test("유효성 체크: 1~9 사이의 숫자인지", () => {
     expect(checkInputValid.checkUserInput(["1", "2", "3"])).toBe(
       ERROR.USER_INPUT_PASS
@@ -85,6 +74,33 @@ describe("GameRule Test", () => {
       1, 0,
     ]);
   });
+});
+
+describe("게임 결과에 따른 Rendering Test", () => {
+  function resultRender(ballCount, strikeCount) {
+    if (ballCount === 0 && strikeCount === 0) {
+      return GAME.GAME_NOTHING;
+    }
+    if (strikeCount === 3) {
+      return GAME.GAME_THREE_STRIKE;
+    }
+    if (ballCount === 0 && strikeCount !== 0 && strikeCount !== 3) {
+      return `${strikeCount}스트라이크`;
+    }
+    if (strikeCount === 0 && ballCount !== 0) {
+      return `${ballCount}볼`;
+    }
+    if (ballCount !== 0 && strikeCount !== 0) {
+      return `${ballCount}볼 ${strikeCount}스트라이크`;
+    }
+  }
+  expect(resultRender(1, 2)).toBe(`1볼 2스트라이크`);
+  expect(resultRender(0, 0)).toBe(`낫싱`);
+  expect(resultRender(0, 3)).toBe(
+    `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
+  );
+  expect(resultRender(1, 0)).toBe(`1볼`);
+  expect(resultRender(0, 2)).toBe(`2스트라이크`);
 });
 
 //    npm test Retry.js
