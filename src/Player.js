@@ -6,7 +6,6 @@ class Player {
     let userInput = "";
     MissionUtils.Console.readLine(SYS_MESSAGE.INPUT_MESSAGE, (input) => {
       userInput = input;
-      MissionUtils.Console.close();
     });
     return userInput;
   }
