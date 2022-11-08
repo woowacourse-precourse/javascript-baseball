@@ -13,17 +13,33 @@ class App {
 
   readLine() {
     Console.readLine(`숫자를 입력해주세요 : `, (input) => {
-      const USER_INPUT = input.split('').map((number) => number * 1);
+      const USER_INPUT = input.split('').map((data) => data * 1);
+      USER_INPUT.forEach((data) => {
+        if (Number.isNaN(data)) {
+          throw '숫자만 입력해주세요!';
+        }
+      });
+      if (USER_INPUT.length !== 3) {
+        throw '3자리 숫자를 입력해주세요!';
+      }
+      this.checkDuplicateInputs(USER_INPUT);
       this.check(USER_INPUT);
     });
+  }
+
+  checkDuplicateInputs(USER_INPUT) {
+    let result = 0;
+    result = USER_INPUT[0];
+    for (let i = 1; i < USER_INPUT.length; i += 1) {
+      if (result === USER_INPUT[i]) {
+        throw '중복되지 않는 3자리의 숫자를 입력해주세요!';
+      }
+    }
   }
 
   check(USER_INPUT) {
     let countBall = 0;
     let countStrike = 0;
-    if (typeof USER_INPUT !== `number` && USER_INPUT.length !== 3) {
-      throw new Error('3자리 숫자만 입력해주세요!');
-    }
 
     for (let i = 0; i < COMPUTER.length; i += 1) {
       for (let j = 0; j < USER_INPUT.length; j += 1) {
