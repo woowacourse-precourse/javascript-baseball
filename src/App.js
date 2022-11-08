@@ -10,6 +10,14 @@ class App {
       let randomNum = Random.pickUniqueNumbersInRange(1, 10, 3);
     }
 
+    function userNum() {
+      let userNum = 
+      Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
+        userNum = [...String(userNum)];
+        exception();
+      });
+    }
+
   }
 }
 
