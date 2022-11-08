@@ -13,13 +13,13 @@ class App {
     }
 
     makeQuizNumber() {
-        let quizNumber = "";
-        for (let i = 0; i < 3; i++) {
-            let randomIntToString = Random.pickNumberInRange(1, 3).toString();
-            quizNumber.includes(randomIntToString)
-                ? i - 1
-                : (quizNumber += randomIntToString);
+        let quizNumber = [];
+
+        while (quizNumber.length < 3) {
+            let randomInt = Random.pickNumberInRange(1, 9).toString();
+            !quizNumber.includes(randomInt) && quizNumber.push(randomInt);
         }
+
         return quizNumber;
     }
 
@@ -37,8 +37,8 @@ class App {
     }
 
     inputNumber() {
-        Console.readLine("숫자를 입력해주세요.", (answer) => {
-            this.checkStrikeBalls(this.quizNumber, answer);
+        Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+            this.checkScore(this.quizNumber, answer);
             if (!this.isValidInput(answer)) {
                 throw new Error("잘못된 수를 입력하였습니다.");
             }
@@ -67,7 +67,7 @@ class App {
         return ball;
     }
 
-    checkStrikeBalls(quizNumber, input) {
+    checkScore(quizNumber, input) {
         let ball = this.checkBall(quizNumber, input);
         let strike = this.checkStrike(quizNumber, input);
         let score = { strike: strike, ball: ball };
@@ -88,8 +88,25 @@ class App {
             Console.print(`${score.ball}볼`);
             this.inputNumber();
         } else if (score.strike === 3) {
-            this.printMessage("성공!");
+            this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료!");
         }
+    }
+
+    closeGame() {
+        Console.close();
+    }
+
+    askContinue() {
+        Console.readLine(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+            (answer) => {
+                if (answer == 1) {
+                    this.startGame();
+                } else if (answer == 2) {
+                    this.closeGame();
+                }
+            }
+        );
     }
 }
 
