@@ -32,6 +32,18 @@ function printHint(ballCount, strikeCount) {
   Console.print(gameMessage);
 }
 
+function isValidInput(userInputNumber) {
+  if (
+    userInputNumber.length !== 3 ||
+    userInputNumber % 1 !== 0 ||
+    new Set([...userInputNumber]).size !== 3 ||
+    userInputNumber.includes("0")
+  ) {
+    throw new Error("유효하지 않은 값을 입력해 게임이 종료됩니다");
+  }
+
+  return userInputNumber;
+}
 module.exports.getTargetNumber = getTargetNumber;
 module.exports.getBallCount = getBallCount;
 module.exports.getStrikeCount = getStrikeCount;
