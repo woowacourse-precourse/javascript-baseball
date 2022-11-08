@@ -1,7 +1,7 @@
 const MESSAGES = {
   START: "숫자 야구 게임을 시작합니다.",
   END_GAME: "게임 종료",
-  END_PROGRAM: "프로그램을 종료합니다.",
+  EXIT_APP: "프로그램을 종료합니다.",
   RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 
@@ -33,8 +33,8 @@ class Messages {
     return MESSAGES.END_GAME;
   }
 
-  get endProgram() {
-    return MESSAGES.END_PROGRAM;
+  get exitApp() {
+    return MESSAGES.EXIT_APP;
   }
 
   get restart() {

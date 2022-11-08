@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Utils = require("./Utils");
 const Messages = require("./Messages");
+
 const { Console } = MissionUtils;
 const {
   createUniqueNumbers,
@@ -46,17 +47,17 @@ class App {
     return this._question;
   }
 
-  endProgramWithError(message, err = Error) {
-    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
+  throwException(message, err = Error) {
+    throw new err(`${message}\n${this.MESSAGES.exitApp}`);
   }
 
   isValidInput(input) {
     if (isEmptyInput(input)) {
-      this.endProgramWithError(this.MESSAGES.emptyError);
+      this.throwException(this.MESSAGES.emptyError);
     }
 
     if (hasWhiteSpace(input)) {
-      this.endProgramWithError(this.MESSAGES.whiteSpaceError);
+      this.throwException(this.MESSAGES.whiteSpaceError);
     }
 
     return true;
@@ -74,19 +75,19 @@ class App {
     const numbers = input.split("").map(Number);
 
     if (!numbers.every(isNumber)) {
-      this.endProgramWithError(this.MESSAGES.typeError, TypeError);
+      this.throwException(this.MESSAGES.typeError, TypeError);
     }
 
     if (!this.isValidDigit(numbers)) {
-      this.endProgramWithError(this.MESSAGES.digitError);
+      this.throwException(this.MESSAGES.digitError);
     }
 
     if (!numbers.every(this.isValidRange.bind(this))) {
-      this.endProgramWithError(this.MESSAGES.rangeError, RangeError);
+      this.throwException(this.MESSAGES.rangeError, RangeError);
     }
 
     if (hasDuplicateElmentInList(numbers)) {
-      this.endProgramWithError(this.MESSAGES.duplicateError);
+      this.throwException(this.MESSAGES.duplicateError);
     }
 
     return true;
@@ -94,7 +95,7 @@ class App {
 
   isValidCommandInput(input, commands) {
     if (!commands[input]) {
-      this.endProgramWithError(this.MESSAGES.commandError);
+      this.throwException(this.MESSAGES.commandError);
     }
 
     return true;
@@ -167,7 +168,7 @@ class App {
   restart(input) {
     const COMMANDS = {
       1: this.startNewGame.bind(this),
-      2: this.endProgram.bind(this),
+      2: this.exitApp.bind(this),
     };
 
     if (!this.isValidInput(input)) {
@@ -221,8 +222,8 @@ class App {
     this.startNewGame();
   }
 
-  endProgram() {
-    Console.print(this.MESSAGES.endProgram);
+  exitApp() {
+    Console.print(this.MESSAGES.exitApp);
     Console.close();
   }
 
