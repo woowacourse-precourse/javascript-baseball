@@ -3,13 +3,13 @@ const { NOTICE, OPTION } = require("./message");
 
 class User {
     constructor() {
-        this.guess = [];
+        this.number = [];
     }
 
     setNumberArray(userInput) {
         const userNumberArray = userInput.split("");
         if (this.checkValidInput(userNumberArray)) {
-            this.guess = userInput.split("");
+            this.number = userInput.split("");
         }
     }
 
