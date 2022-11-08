@@ -1,24 +1,25 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  play() {}
   play() {
-    let BaseballNumber = createRandomNumber();
-    startBaseballNumber();
-    inputNumber(BaseballNumber);
+    let baseballNumber = createRandomNumber();
+    startNumberBaseball();
+    inputNumber(baseballNumber);
   }
-  
 }
 
-const startBaseballNumber = () => {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+const startNumberBaseball = () => {
+  MissionUtils.Console.print("숫자 야구를 게임을 시작합니다.");
 };
 
 const inputNumber = (answerNumber) => {
-  errorTestGameNum(number);
+
   let ball = 0;
   let strike = 0;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-
+    errorTestGameNum(number);
     [ball, strike] = checkNumbers(answerNumber, number);
     let sentence = printBallStrike(ball, strike);
     MissionUtils.Console.print(`${sentence}`);
@@ -30,23 +31,23 @@ const inputNumber = (answerNumber) => {
 };
 
 const createRandomNumber = () => {
-  const baseballArray = [];
-  while (baseballArray.length < 3) {
+  const baseballArr = [];
+  while (baseballArr.length < 3) {
     let randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!baseballArray.includes(randomNum)) {
-      baseballArray.push(randomNum);
+    if (!baseballArr.includes(randomNum)) {
+      baseballArr.push(randomNum);
     }
   }
-  return baseballArray
+  return baseballArr;
 };
 
 const checkNumbers = (answerNumber, inputNumber) => {
   let ball = 0;
   let strike = 0;
-  const inputNumberArray = inputNumber.split("").map((el) => +el);
+  const inputNumArr = inputNumber.split("").map((el) => +el);
   for (let idx = 0; idx < 3; idx++) {
-    if (answerNumber.includes(inputNumberArray[idx])) {
-      if (answerNumber.indexOf(inputNumberArray[idx]) === idx) {
+    if (answerNumber.includes(inputNumArr[idx])) {
+      if (answerNumber.indexOf(inputNumArr[idx]) === idx) {
         strike++;
         continue;
       }
@@ -56,6 +57,7 @@ const checkNumbers = (answerNumber, inputNumber) => {
   return [ball, strike];
 };
 
+
 const printBallStrike = (ballNum, strikeNum) => {
   let sentence = "";
   if (ballNum !== 0) sentence += ballNum + "볼 ";
@@ -63,6 +65,8 @@ const printBallStrike = (ballNum, strikeNum) => {
   if (ballNum === 0 && strikeNum === 0) sentence = "낫싱";
   return sentence.trim();
 };
+
+
 
 const goAndStop = (strikeNum) => {
   MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -80,6 +84,7 @@ const goAndStop = (strikeNum) => {
     }
   });
 };
+
 
 const errorTestGameNum = (number) => {
   number = number.trim();
