@@ -5,7 +5,7 @@ class ValidUserNumbers {
     userInput
       .split('')
       .forEach(element => {
-        !userNumbers.includes(element) ? userNumbers.push(element) : ""
+        !userNumbers.includes(element) ? userNumbers.push(element) : userNumbers.push('X');
       });
 
     return (
