@@ -1,6 +1,7 @@
-const ERROR = require('./Constants/Error');
-const { generateNumArr } = require('./Utils');
-const ANSWER = require('./Constants/Answer');
+const ERROR = require('../Constants/Error');
+const { generateNumArr } = require('../Utils');
+const ANSWER = require('../Constants/Answer');
+
 const validLength = (numArr) => numArr.length === ANSWER.LENGTH;
 
 const validRange = (numArr) => {

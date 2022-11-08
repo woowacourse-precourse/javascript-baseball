@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { isMatchAnswer, printHint } = require('./ControlAnswer/CheckAnswer');
 const { generateAnswer } = require('./ControlAnswer/GenerateAnswer');
 const { stringToNumArr } = require('./Utils');
-const { isValidInput } = require('./Validation');
+const { isValidInput } = require('./UserInput/UserInputValidation');
 const ANSWER = require('./Constants/Answer');
 const GAME = require('./Constants/Game');
 const ERROR = require('./Constants/Error');
@@ -22,14 +22,13 @@ class App {
   receiveInput() {
     Console.readLine(GAME_SENTENCE.INPUT, (input) => {
       const numArr = stringToNumArr(input);
-
       if (isValidInput(numArr)) this.checkAnswer(numArr);
     });
   }
 
   checkAnswer(numArr) {
     if (isMatchAnswer(numArr, this.answer)) this.askPlayMore();
-    else this.tryMore(numArr);
+    else this.tryAnswerInput(numArr);
   }
 
   askPlayMore() {
@@ -45,14 +44,10 @@ class App {
     });
   }
 
-  tryMore(numArr) {
+  tryAnswerInput(numArr) {
     printHint(numArr, this.answer);
     this.receiveInput();
   }
 }
-
-const app = new App();
-
-app.play();
 
 module.exports = App;
