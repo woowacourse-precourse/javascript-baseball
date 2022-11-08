@@ -16,11 +16,14 @@ class App {
   }
 
   setRandomNumber() {
-    const threeNumberArray = new Set();
-    while (threeNumberArray.size < 3) {
-      threeNumberArray.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
     }
-    this._randomNumber = Array.from(threeNumberArray);
+    this._randomNumber = computer;
   }
 
   inputUserNumber() {
