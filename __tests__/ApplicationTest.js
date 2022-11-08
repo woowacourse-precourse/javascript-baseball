@@ -26,10 +26,12 @@ const getLogSpy = () => {
 describe("숫자 야구 게임", () => {
   test("랜덤 숫자 생성", () => {
     const app = new App();
-    const goal = app.generateGoalNumber();
-    const isNumberTypeGoal = goal.every((number) => typeof number === "number");
+    app.generateGoalNumber();
+    const isNumberTypeGoal = app.goal.every(
+      (number) => typeof number === "number"
+    );
 
-    expect(goal.length).toEqual(3);
+    expect(app.goal.length).toEqual(3);
     expect(isNumberTypeGoal).toEqual(true);
   });
 
