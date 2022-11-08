@@ -1,85 +1,86 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE, RESULT, USER_CHOICE } = require("./constants");
+const { MESSAGE, HINT, PLAY_STATUS } = require("./constants");
 const { Input, Error } = require("./utils");
 
 class App {
   constructor() {
     this.user = new Input();
     this.computer = new Input();
-    this.result = {};
+    this.hint = {};
   }
 
-  clear() {
-    this.result = {};
+  play() {
+    this.computer.print(MESSAGE.START);
+    this.computer.saveRandom();
+    this.playing();
   }
 
-  update(kind) {
-    if (this.result[kind]) this.result[kind] += 1;
-    else this.result[kind] = 1;
+  playing() {
+    Console.readLine(MESSAGE.INPUT, (answer) => {
+      this.user.save(answer);
+      this.clearHint();
+      this.getHint();
+      this.printHint();
+      if (this.hint[HINT.STRIKE] === 3) {
+        this.computer.print(MESSAGE.SUCCESS);
+        this.reStartOREnd();
+      } else {
+        this.playing();
+      }
+    });
   }
 
-  process() {
+  clearHint() {
+    this.hint = {};
+  }
+
+  getHint() {
     const computer = this.computer.value;
     const user = this.user.value;
 
     for (let i = 0; i < computer.length; i++) {
-      if (computer[i] === user[i]) this.update(RESULT.STRIKE);
+      const isEqual = computer[i] === user[i];
+      if (isEqual) this.updateHint(HINT.STRIKE);
       else {
         const exist = computer.indexOf(user[i]) > -1;
-        if (exist) this.update(RESULT.BALL);
+        if (exist) this.updateHint(HINT.BALL);
       }
     }
   }
 
-  print() {
-    const message = Object.entries(this.result).reduce(
+  updateHint(name) {
+    if (this.hint[name]) this.hint[name] += 1;
+    else this.hint[name] = 1;
+  }
+
+  printHint() {
+    const message = Object.entries(this.hint).reduce(
       (reduced, [key, value]) => {
         const str = `${value}${key} `;
-        reduced = key === RESULT.BALL ? str + reduced : reduced + str;
+        reduced = key === HINT.BALL ? str + reduced : reduced + str;
         return reduced;
       },
       ""
     );
 
-    this.computer.print(message.length > 0 ? message : RESULT.NOTHING);
+    this.computer.print(message.length > 0 ? message : HINT.NOTHING);
   }
 
-  start() {
-    Console.readLine(MESSAGE.INPUT, (answer) => {
-      this.user.save(answer);
-      this.clear();
-      this.process();
-      this.print();
-      if (this.result[RESULT.STRIKE] === 3) {
-        this.computer.print(MESSAGE.SUCCESS);
-        this.reStart();
-      } else {
-        this.start();
-      }
+  reStartOREnd() {
+    Console.readLine(MESSAGE.RESTART_OR_END, (answer) => {
+      this.computer.print(answer);
+      if (answer === PLAY_STATUS.RESTART) {
+        this.computer.saveRandom();
+        this.playing();
+      } else if (answer === PLAY_STATUS.END) {
+        this.end();
+      } else Error.throw(MESSAGE.ERROR);
     });
   }
 
   end() {
     Console.close();
   }
-
-  reStart() {
-    Console.readLine(MESSAGE.RESTART_OR_END, (answer) => {
-      this.computer.print(answer);
-      if (answer === USER_CHOICE.RESTART) {
-        this.computer.saveRandom();
-        this.start();
-      } else if (answer === USER_CHOICE.END) {
-        this.end();
-      } else Error.throw(MESSAGE.ERROR);
-    });
-  }
-
-  play = () => {
-    this.computer.print(MESSAGE.START);
-    this.computer.saveRandom();
-    this.start();
-  };
 }
 
 module.exports = App;
