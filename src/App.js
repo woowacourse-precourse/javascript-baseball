@@ -5,7 +5,7 @@ class App {
     Console.print("숫자 야구 게임을 시작합니다.");
     com = [];
     randNum();
-    // guessNum();
+    guessNum();
   }
 }
 
@@ -17,6 +17,18 @@ function randNum() {
     }
   }
 }
+
+
+function inputNum(input) {
+  const allNum = /^[1-9]+$/; //1-9가 들어갔는지 확인
+  if (allNum.test(input) && input.split("").length === 3) { // 1~9가 들어가고 3개인지 확인
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
 
 
 module.exports = App;
