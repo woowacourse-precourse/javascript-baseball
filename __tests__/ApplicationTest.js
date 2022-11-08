@@ -47,9 +47,72 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 종료", () => {
+    const randoms = [2, 4, 6];
+    const answers = ["357", "235", "249", "259", "246", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "1스트라이크",
+      "2스트라이크",
+      "1스트라이크",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["안녕하세요"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["204"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["@#$@#%"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
