@@ -9,6 +9,10 @@ const {
 } = Utils;
 
 class App {
+  _userNumber = null;
+  _gameNumber = null;
+  _isPlaying = false;
+
   constructor(count = 3, minNumber = 1, maxNumber = 9) {
     this.count = count;
     this.minNumber = minNumber;
