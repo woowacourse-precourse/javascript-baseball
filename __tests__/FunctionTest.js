@@ -44,4 +44,15 @@ describe("기능 테스트", () => {
 
     expect(app.createRandomNumber()).toStrictEqual([1, 5, 8]);
   });
+
+  test("[기능 3] 입력 문구 출력", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.requireInputRandomNumber();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("숫자를 입력해주세요 : ")
+    );
+  });
 });
