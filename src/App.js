@@ -7,10 +7,9 @@ class App {
 }
 
 const gamestart = () =>{
-
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
-  judgeNumber(createComputerNumber(),inputUserNumber());
-  return ;
+  createComputerNumber();
+  inputUserNumber();
 
 }
 
@@ -25,11 +24,12 @@ const createComputerNumber = () =>{
   return computerInputNumber.join("")
 }
 
-const inputUserNumber =() =>{
+const inputUserNumber =(computerNumber) =>{
   MissionUtils.Console.readLine('숫자를 입력해주세요.:', (userNumber) => {
     
     while(verifyUserNumber(userNumber)==true){
-      return userNumber;
+      judgeNumber(computerNumber,userNumber);
+      return;
     };
   });
 }
@@ -72,11 +72,11 @@ const judgeNumber = (computerNumber,userNumber) =>{
   if (strikeScore==3){
     gameRestartOrEnd();
   }
-  else if(strikeScore==0&&ballScore==0){
+  if(strikeScore==0&&ballScore==0){
     MissionUtils.Console.print(`낫싱`)
     inputUserNumber(userNumber)
   }
-  else if(!strikeScore==3){
+  if(strikeScore==1&&strikeScore==2){
     MissionUtils.Console.print(`${strikeScore}스트라이크`);
     MissionUtils.Console.print(`${ballScore}볼`);
     inputUserNumber(userNumber);
