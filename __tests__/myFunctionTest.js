@@ -120,6 +120,33 @@ describe('숫자 야구 게임 시작 테스트', () => {
     });
   });
 
+  test('사용자의 값과 컴퓨터의 값 비교한 결과 테스트', () => {
+    const log = getLogSpy();
+
+    const randoms = [1, 2, 3, 2, 3, 1, 1, 7, 9];
+    const answers = ['789', '123', '1', '321', '231', '1', '264', '178', '179'];
+    const messages = [
+      '낫싱',
+      '3스트라이크',
+      '2볼 1스트라이크',
+      '3스트라이크',
+      '낫싱',
+      '2스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(log).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
