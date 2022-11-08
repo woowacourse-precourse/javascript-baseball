@@ -4,7 +4,7 @@ const { appendFile } = require("fs");
 class App {
 
   constructor () {
-
+    
   }
 
   printStartMessage () {
@@ -12,7 +12,7 @@ class App {
   }
 
   randomThreeNumbers() {
-    let threeNumbers = [];
+    const threeNumbers = [];
     let count = 0;
     let notFull = true;
 
@@ -70,6 +70,8 @@ class App {
     let ball = 0;
 
     let result = "";
+
+    console.log(this.threeNumbers);
 
     for(let i=0; i<user.length; i++) {
       if(user[i] === this.threeNumbers[i]) {
