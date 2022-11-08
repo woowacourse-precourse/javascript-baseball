@@ -10,6 +10,12 @@ const userInput = (answer) => {
     checkNumber(input);
     let inputResult = countNumber(input, answer);
     printResult(inputResult);
+
+    if (inputResult[0] !== 3) {
+      userInput(answer)
+    } else {
+      askRestart();
+    }
   })
 };
 
@@ -67,6 +73,26 @@ const printResult = (result) => {
   } else {
     MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
   }
+};
+
+const askRestart = () => {
+  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+  MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.')
+  MissionUtils.Console.readLine('', (input) => {
+
+    if (input !== '1' && input !== '2') {
+      throw new Error(`1과 2가 아닌 다른 수 ${input}을(를) 입력했습니다.`);
+    }
+
+    if (input === '1') {
+      let newAnswer = makeNumber();
+      userInput(newAnswer)
+    }
+
+    if (input === '2') {
+      MissionUtils.Console.close();
+    }
+  })
 };
 
 class App {
