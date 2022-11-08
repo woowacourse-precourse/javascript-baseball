@@ -75,7 +75,9 @@ class App {
 		return RESULT;
 	}
 
-	isNotThreeStrike() {}
+	isNotThreeStrike(resultMessage) {
+		return resultMessage !== '3스트라이크' ? true : false;
+	}
 
 	validateOption(option) {
 		if (/[^1-2]/g.test(option)) throw new Error('옵션에 없는 값을 입력하셨습니다.');
