@@ -27,6 +27,8 @@ class App {
   judge(input) {
     const isValidInput = this.game.validateInput(input);
     if (!isValidInput) return this.error();
+
+    const { ballCnt, strikeCnt } = this.game.judgeAnswer(input, this.answer);
   }
 
   error() {
