@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.compareNumber = this.getComputerNumber();
+    this.correctAnswer = false
   }
 
   getComputerNumber() {
@@ -74,10 +75,41 @@ class App {
     return true;
   }
 
+isCorrect(){
+  if(this.correctAnswer === true) {
+    return true
+  }
+  return false
+}
+
+gameRestart() {
+this.compareNumber.length = 0;
+this.correctAnswer = false;
+this.gameStart()  
+}
+gameOver(){
+  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
+    if(input === 1) {
+      this.gameRestart()
+    }
+    if(input === 2) {
+      MissionUtils.Console.close()
+    }
+    if(input !== '1' && input !== '2') {
+      throw new Error('1또는 2를 선택해주세요')
+    }
+  })
+}
+
   userInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.validUserInput(input);
       this.compareNumber(input);
+
+      if(this.isCorrect() = true) {
+        this.gameOver()
+      }
+      this.userInput
     });
   }
 
