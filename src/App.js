@@ -11,11 +11,8 @@ class App {
 
   play() {
     Console.print(MESSAGE.GAMESTART);
-    this.startGame();
-  }
-
-  startGame() {
     this.pickRandomNumber();
+    this.playInning();
   }
 
   pickRandomNumber() {
@@ -26,6 +23,27 @@ class App {
       }
     }
   }
-}
 
+  playInning() {
+    this.getUserInput();
+  }
+
+  getUserInput() {
+    Console.readLine('숫자를 입력해주세요 : ', input => {
+      this.isValidInput(input);
+    });
+  }
+
+  isValidInput(input) {
+    const checkDuplicate = new Set(input.split(''));
+    if (
+      [...input].includes('0') ||
+      input.length !== 3 ||
+      checkDuplicate.size !== 3
+    ) {
+      throw new Error('잘못된 값을 입력했습니다');
+    }
+    return this;
+  }
+}
 module.exports = App;
