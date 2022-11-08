@@ -95,7 +95,7 @@ class App {
    * @param {string} message - 유저 입력의 점수에 대한 메시지
    */
   printResponse(message) {
-    const winningMessage = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    const winningMessage = `3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`;
     if (message === "승리") {
       Console.print(winningMessage);
       this.askRestart();
