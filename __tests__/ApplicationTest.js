@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const BaseballGame = require('../src/game-utils/BaseballGame');
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -22,6 +23,17 @@ const getLogSpy = () => {
   logSpy.mockClear();
   return logSpy;
 };
+
+describe('start()', () => {
+  test('숫자 야구 게임을 시작합니다. 문구를 출력한다.', () => {
+    const baseballGame = new BaseballGame();
+    const logSpy = getLogSpy();
+
+    baseballGame.start();
+
+    expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+});
 
 describe("숫자 야구 게임", () => {
   test("게임 종료 후 재시작", () => {
@@ -47,9 +59,48 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 종료 후 1 혹은 2 대신 다른 값이 들어가는 경우", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("게임 도중 유효하지 않은 값 들어가는 경우 (입력값의 길이)", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "1", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("게임 도중 유효하지 않은 값 들어가는 경우", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "1", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const answers = ["1234", "122", "abc", "1 2 3", "120"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
