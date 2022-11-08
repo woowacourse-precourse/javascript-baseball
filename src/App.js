@@ -72,16 +72,21 @@ class App {
       return "낫싱";
   }
 
+  checkContinue(continueInput) {
+    if (continueInput == 1) {
+      this.clearComputerNumbers();
+      this.setComputerNumbers();
+      this.startGame();
+    }
+    else if (continueInput == 2) 
+      MissionUtils.Console.close();
+  }
+
   checkGameEnd() {
     console.log("3개의 숫자를 모두 맞히셨습니다!");
     MissionUtils.Console.print("게임 종료");
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (isContinue) => {
-      if (isContinue == 1) {
-        this.clearComputerNumbers();
-        this.setComputerNumbers();
-        this.startGame();
-      }
-      else if (isContinue == 2) return;
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (continueInput) => { 
+      this.checkContinue(continueInput);
     });
   }
 
