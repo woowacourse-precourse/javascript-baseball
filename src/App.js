@@ -1,75 +1,88 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-var strike;
-var ball;
-var resultString = "";
-var input;
-var randomNumber = createRandomNumber();
-class App { 
-  play() {
-    
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    setInput(); 
-  }
-}
 
-function createRandomNumber() {
-  var randomNumber = [, ,];
+
+class App { 
+  constructor(input) {
+    this.strike = 0;
+    this.ball = 0;
+    this.resultString = "";
+    this.input = input;
+    this.randomNumber = [,,];
+  }
+  
+  play() {
+    this.resultString = "";
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.createRandomNumber();
+    this.setInput();
+    return this.resultString;
+  }
+
+  
+createRandomNumber() {
   for(var i = 0; i < 3; i++) {
-    randomNumber[i] = MissionUtils.Random.pickNumberInRange(1, 9);
+    (this.randomNumber).push(MissionUtils.Random.pickNumberInRange(1, 9));
   }
 }
-function setInput() {
+setInput() {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-    numberCheck(input);
+    this.numberCheck(this.input);
   });
 }
 
-function numberCheck(input) {
+numberCheck(input) {
   if(typeof(input) !== "number")
-    throw '숫자를 입력해주세요';
+    throw new Error('숫자를 입력해주세요');
   if(input.length !== 3)
-    throw '숫자 3자리가 아닙니다.';
-  judgement(input);
+    throw new Error('숫자 3자리가 아닙니다.');
+  if(input[0] < 0)
+    throw new Error('첫번째 자리에 음수가 입력됨');
+  if(input[1] < 0)
+    throw new Error('두번째 자리에 음수가 입력됨');
+  if(input[2] < 0)
+    throw new Error('세번째 자리에 음수가 입력됨');
+  this.judgement(input);
+
 }
 
-function judgement(input) {
+judgement(input) {
   var comfirmStrike = false;
   for(var i = 0; i < 3; i++) {
     comfirmStrike = false;
     strikeCompare(input[i],randomNumber[i]);
     if(!comfirmStrike) ballCompare(input[i]);
   }
-  createResultString();
+  this.createResultString();
 }
 
-function strikeCompare(input, randomNumber) {
+strikeCompare(input, randomNumber) {
   if(input === randomNumber){
-    strike++;
+    this.strike++;
     comfirmStrike = true;
   }
     
 }
 
-function ballCompare(input) {
+ballCompare(input) {
   var randomString = randomNumber.toString();
   for(var i = 0; i < 3; i++) {
-    if(randomString.includes(input)) ball++;
+    if(randomString.includes(input)) this.ball++;
   }
 }
 
-function createResultString() {
+createResultString() {
   if(strike > 0)
-    result += (result) + "스트라이크 ";
+    resultString += `${this.strike}스트라이크 `;
   if(ball > 0)
-    result += (result) + "볼 ";
+    resultString += `${this.ball}볼 `;
   if(strike === 0 && ball === 0)
-    result += "낫싱";
-  result = result.replace(/\s*$/, "");
-  announceResult();
+    resultString += "낫싱";
+  this.resultString = this.resultString.replace(/\s*$/, "");
+  this.announceResult();
 }
 
-function announceResult() {
+announceResult() {
   var commandNumber;
   MissionUtils.Console.print(result);
   if(strike === 3){
@@ -77,17 +90,20 @@ function announceResult() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (commandNumber) => {gameCommand(commandNumber)});
   }
   else{
-    setInput();
+    this.setInput();
   }
 }
 
-function gameCommand(commandNumber) {
+gameCommand(commandNumber) {
   if(commandNumber === 1)
-    app.play();
+    this.play();
   if(commandNumber === 2) {
     MissionUtils.Console.print("게임 종료");
-    return 0;
   }
 }
+
+}
+
+
 module.exports = App;
 
