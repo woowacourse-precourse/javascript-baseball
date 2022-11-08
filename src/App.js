@@ -1,13 +1,13 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGE, NUMBER } = require("./Game");
 const Computer = require("./Computer");
-const User = require("./User");
+const Player = require("./Player");
 const Referee = require("./Referee");
 
 class App {
   constructor() {
     this.computer = new Computer();
-    this.user = new User();
+    this.player = new Player();
     this.referee = new Referee();
   }
 
@@ -23,8 +23,8 @@ class App {
 
   start(computerNumber) {
     MissionUtils.Console.readLine(MESSAGE.INPUT, (userInput) => {
-      const userNumber = this.user.makeUserNumber(userInput);
-      const userInputValidation = this.user.validateInput(userNumber);
+      const userNumber = this.player.makeUserNumber(userInput);
+      const userInputValidation = this.player.validateInput(userNumber);
 
       if (userInputValidation === false) throw new Error(MESSAGE.ERROR);
 

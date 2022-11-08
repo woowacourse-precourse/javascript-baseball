@@ -1,6 +1,6 @@
 const { NUMBER } = require("./Game");
 
-class User {
+class Player {
   validateInput(userInput) {
     return (
       this.checkType(userInput) &&
@@ -48,4 +48,4 @@ class User {
   }
 }
 
-module.exports = User;
+module.exports = Player;
