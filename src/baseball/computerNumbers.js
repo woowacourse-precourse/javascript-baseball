@@ -9,7 +9,7 @@ class ComputerNumbers {
         randomNumbers.push(number);
       }
     }
-    return randomNumbers.join("");
+    return randomNumbers.join('');
   }
 }
 
