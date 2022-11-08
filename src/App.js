@@ -18,7 +18,6 @@ class App {
         COMPUTER_NUMBER.push(computerNumber);
       }
     }
-    MissionUtils.Console.print(COMPUTER_NUMBER);
     return COMPUTER_NUMBER;
   }
 
