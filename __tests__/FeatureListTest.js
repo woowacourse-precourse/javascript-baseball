@@ -47,7 +47,7 @@ describe('기능 목록 테스트', () => {
   test('잘못된 값을 입력한 경우 에러처리', () => {
     const game = new Game();
 
-    guesses = [
+    const guesses = [
       // 3자리 수가 아닐 경우
       '1234',
       '12',
