@@ -8,7 +8,6 @@ class Game {
   constructor() {
     Console.print(GAME_MESSAGE.START_MESSAGE);
     this.generateNumberArrayByComputer();
-    console.log(this.pickedNumberArrayByComputer);
   }
 
   generateNumberArrayByComputer() {
