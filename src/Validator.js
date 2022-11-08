@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE, GAME_OPTION, COMPUTER_NUMBER } = require("./Constatns");
+const { ERROR_MESSAGE, GAME, COMPUTER_NUMBER } = require("./Constants");
 
 function isValidPlayerInput(playerNum) {
   if (isNaN(parseInt(playerNum))) {
@@ -33,10 +33,7 @@ function isValidDuplicated(playerNum) {
 }
 
 function isValidReplayNum(input) {
-  if (
-    Number(input) !== GAME_OPTION.PLAY &&
-    Number(input) !== GAME_OPTION.EXIT
-  ) {
+  if (Number(input) !== GAME.RUN && Number(input) !== GAME.STOP) {
     throw new Error(ERROR_MESSAGE.REAPLY_NUM);
   }
 
