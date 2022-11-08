@@ -29,6 +29,7 @@ class App {
 
       if (strikeCount === NUMBER_LENGTH) {
         this.end();
+        return;
       }
 
       this.play();
