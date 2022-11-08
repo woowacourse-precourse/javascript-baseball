@@ -41,6 +41,24 @@ class App {
     return MissionUtils.Console.print(message);
   }
 
+  askRestartGame() {
+    const RESTART_CODE = '1';
+    const END_CODE = '2';
+
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (answer) => {
+        if (answer === RESTART_CODE) {
+          this.play();
+        }
+
+        if (answer === END_CODE) {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
+
   playerInputsNumbers(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const player = this.convertToNumberArray(answer);
@@ -50,7 +68,7 @@ class App {
 
       if (strike === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-        return MissionUtils.Console.close();
+        return this.askRestartGame();
       }
 
       this.playerInputsNumbers(computer);
