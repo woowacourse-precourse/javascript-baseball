@@ -96,6 +96,8 @@ class User {
     });
     if (this.input.includes("0")) throw new Error("1부터 9 사이의 숫자만 입력 가능합니다.");
     if (this.input.length !== 3) throw new Error("3자리 수만 입력이 가능합니다.");
+    const checkSet = Array.from(new Set([...this.input]));
+    if (checkSet.length !== this.input.length) throw new Error("중복되지 않은 입력만 가능합니다.");
   }
   changeToNumbers() {
     this.input = this.input.map((letter) => Number(letter));
