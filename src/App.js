@@ -3,8 +3,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 let RANDOM_NUMBER;
 
 function generateRandomNumber() {
-    RANDOM_NUMBER = parseInt(
-        MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('')
+    RANDOM_NUMBER = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
+        ''
     );
     return RANDOM_NUMBER;
 }
@@ -107,5 +107,8 @@ class App {
         startGame();
     }
 }
+
+const app = new App();
+app.play();
 
 module.exports = checkUserInput;
