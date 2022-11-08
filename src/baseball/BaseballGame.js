@@ -4,6 +4,9 @@ const ValidUserNumbers = require("./ValidUserInput");
 const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
 
 class BaseballGame {
+  constructor() {
+    this.validUserNumbers = new ValidUserNumbers();
+  }
   initGame = () => {
     Console.print(GAME_MESSAGE.START_MESSAGE);
     this.playGame();
@@ -16,7 +19,7 @@ class BaseballGame {
 
   playing = (computerNumbers) => {
     Console.readLine(GAME_MESSAGE.ENTER_NUMBER, (userInput) => {
-      const validUserInput = ValidUserNumbers.isValidUserInput(userInput);
+      const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
         return this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
       }
@@ -56,7 +59,7 @@ class BaseballGame {
 
   isValidRestart = (OneOrTwo) => {
     OneOrTwo = Number(OneOrTwo);
-    ValidUserNumbers.isValidRestart(OneOrTwo);
+    this.validUserNumbers.isValidRestart(OneOrTwo);
     if (OneOrTwo == 1) {
       return this.playGame();
     }
