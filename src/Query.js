@@ -1,5 +1,7 @@
 const { END } = require("./Constant");
-
+const { Console } = require("@woowacourse/mission-utils");
+const { checkOneOrTwo } = require("./Error");
+const { makeRandomNumber } = require("./Make");
 function selectNextQuery(
   strike,
   randomNumbers,
@@ -14,4 +16,15 @@ function selectNextQuery(
   }
 }
 
-module.exports = { selectNextQuery };
+function restartQuery(selectNumQueryfn) {
+  Console.readLine(RESTART_OR_END_QUERY, (answer) => {
+    checkOneOrTwo(answer);
+    if (answer === "1") {
+      selectNumQueryfn(makeRandomNumber(), selectNextQuery);
+    } else {
+      Console.close();
+    }
+  });
+}
+
+module.exports = { selectNextQuery, restartQuery };
