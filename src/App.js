@@ -17,6 +17,7 @@ class App {
         this.computerNumber += `${RANDOM_NUMBER}`;
       }
     }
+    MissionUtils.Console.print(this.computerNumber);
     this.computerNumberArr = this.computerNumber
       .toString()
       .split("")
@@ -89,7 +90,6 @@ class App {
           this.userInputMessage();
         } else {
           MissionUtils.Console.print("게임 종료");
-          return;
         }
       }
     );
