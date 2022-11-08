@@ -6,12 +6,21 @@ class App {
     this.randomNumber = [];
     this.userInput = "";
   }
+  /**
+   * 서로 다른 3 수
+   */
   createRandomNumber() {
     this.randomNumber = [...Array(3)].map(() => Random.pickNumberInRange(1, 9));
+    while (!this.handleDuplicateNumber(this.randomNumber)) {
+      this.randomNumber = [...Array(3)].map(() =>
+        Random.pickNumberInRange(1, 9)
+      );
+    }
     this.userInput = this.getUserInput();
   }
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
+      if (!this.handleDuplicateNumber(ans)) throw "exception";
       if (this.handleUserNumException(ans)) {
         this.userInput = ans.split("").map((v) => +v);
         this.chekUserInput();
@@ -35,11 +44,11 @@ class App {
       Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
         (ans) => {
-          Console.print(typeof ans);
           ans = this.handleGameEndException(ans);
           if (ans === 1) {
             this.play();
           } else if (ans === 2) {
+            Console.print("게임 종료");
             Console.close();
           } //1 or 2 제외 다른 거 입력했을 때 생각.
         }
@@ -58,25 +67,31 @@ class App {
   /**
    * 사용자 입력이 3자리이고, 모두 숫자일때(아스키코드)
    * 정답 맞췄을 때, 입력 숫자가 1자리이고, 숫자일 때
+   * throw 후 애플리케이션 종료
    */
   handleGameEndException(ans) {
+    if (ans.length !== 1) throw "exception1";
     let ansAscii = ans.charCodeAt(0);
-    if (ansAscii === 49 || ansAscii === 48) {
+    if (ansAscii === 49 || ansAscii === 50) {
       return Number(ans);
+    } else {
+      throw "exception1";
     }
-    throw "exception";
   }
   //depth 확인
   handleUserNumException(ans) {
-    if (ans.length !== 3) throw "exception";
+    if (ans.length !== 3) throw "exception2";
     else {
-      let isException = false;
       for (let i = 0; i < ans.length; i++) {
         let ansAscii = ans.charCodeAt(i);
-        if (ansAscii >= 49 && ansAscii <= 57) isException = true;
+        if (ansAscii < 49 || ansAscii > 57) throw "exception3";
       }
-      if (isException) throw "exception";
     }
+    return true;
+  }
+  handleDuplicateNumber(ans) {
+    let ansSet = Array.from(new Set(ans));
+    if (ansSet.length !== ans.length) return false;
     return true;
   }
   play() {
@@ -89,5 +104,5 @@ const app = new App();
 app.play();
 
 // MissionUtils.Console.close();
-
+//console close 시점 고려
 module.exports = App;
