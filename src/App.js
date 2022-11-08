@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES } = require('./constants');
+const { MESSAGES, ERRORS } = require('./constants');
 const { getRandomUniqueNumbers } = require('./utils');
 
 class App {
@@ -20,7 +20,23 @@ class App {
   }
 
   #progressGame() {
-    Console.readLine(MESSAGES.INPUT, (input) => {});
+    Console.readLine(MESSAGES.INPUT, (input) => {
+      this.#validateInput(input);
+    });
+  }
+
+  #validateInput(input) {
+    if (input.length !== 3) {
+      throw new Error(ERRORS.UNVALID_INPUT_LENGTH);
+    }
+
+    if (new Set(input).size !== 3) {
+      throw new Error(ERRORS.UNVALID_INPUT_VALUE);
+    }
+
+    if (input.includes(0)) {
+      throw new Error(ERRORS.UNVALID_INPUT_RANGE);
+    }
   }
 }
 
