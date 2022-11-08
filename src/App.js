@@ -14,7 +14,6 @@ class App {
       }
     }
     const computerPick = computerPickArr.join('');
-    console.log(computerPick);
     return computerPick;
   }
 
