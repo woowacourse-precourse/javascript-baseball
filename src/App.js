@@ -102,6 +102,10 @@ class App {
       }
     });
   }
+  startGame() {
+    const COMPUTER = this.getComputerNumber();
+    return this.getPersonNumber(COMPUTER);
+  }
   play() {}
 }
 
