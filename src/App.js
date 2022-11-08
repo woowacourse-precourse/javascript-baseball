@@ -3,6 +3,13 @@ const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
 class App {
+  askingRestart() {
+    let answer_of_restart;
+
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => { });
+  }
+
   printResult(result_text) {
     if (result_text === ``) return '낫싱'
     return result_text;
@@ -58,7 +65,9 @@ class App {
     let result_score = this.checkScore(answer, CORRECT_LIST);
     let result_text = this.checkCount(result_score);
 
-    console.log(this.printResult(result_text));
+    Console.print(this.printResult(result_text));
+
+    this.askingRestart();
   }
 
   startGame(CORRECT_LIST) {
@@ -81,5 +90,7 @@ class App {
     this.startGame(CORRECT_LIST);
   }
 }
+const app = new App;
+app.inputNumber('123', ['1', '2', '3']);
 
 module.exports = App;
