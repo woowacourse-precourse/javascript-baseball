@@ -1,4 +1,4 @@
-function checkInput(input){
+const checkInput = (input) => {
   if(input.length !== 3){
     return false;
   }
@@ -18,17 +18,17 @@ function checkInput(input){
 }
 
 
-function getInputIntArray(input){
+const getInputIntArray = (input) => {
   const userInputArray = [...input];
   const newArray = [];
   for (let i = 0; i < userInputArray.length; i++){
     newArray.push(parseInt(userInputArray[i]));
   }
   return newArray;
-}
+};
 
 
-function startGame(computer){
+const startGame = (computer) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
     const userInputArray = getInputIntArray(userInput);
     let hint = '';
@@ -46,10 +46,10 @@ function startGame(computer){
       startGame(computer);
     }
   });
-}
+};
 
 
-function getHint(userInputArray, computer){
+const getHint = (userInputArray, computer) => {
   let hint = '';
   let strike = 0;
   let ball = 0;
@@ -78,7 +78,7 @@ function getHint(userInputArray, computer){
 }
 
 
-function endGame(){
+const endGame = () => {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', (answer) => {
     if (answer === '1'){
       app.play();
@@ -92,7 +92,7 @@ function endGame(){
 }
 
 
-function pickComputerNumber() {
+const pickComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
