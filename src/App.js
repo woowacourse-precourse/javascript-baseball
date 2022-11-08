@@ -3,20 +3,35 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor(){
     this.computerInputNum = []
-    this.userInputNum = []
   }
+
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.computerInputRandomNum();
+    this.userInputRandomNum();
+  }
+
+  computerInputRandomNum(){
+    this.computerInputNum = []
+    let comNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
+    if(this.computerInputNum.length = 3){
+     this.computerInputNum.push(comNum);
+     return computerInputNum
+    }
+  }
+
+  userInputRandomNum(){
+    MissionUtils.console.readLine('숫자를 입력 해주세요.', (answer) => {
+    this.checkError(answer)
+    this.checkAnswer()
+   })
+  }
+  
 }
 
 module.exports = App;
 
-function computerInputRandomNum(){
-  this.computerInputNum = []
-  let comNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
-  if(this.computerInputNum.length = 3){
-   this.computerInputNum.push(comNum);
-   return computerInputNum
-  }
-}
+
 
 
 
