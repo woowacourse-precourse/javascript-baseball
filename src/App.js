@@ -2,13 +2,15 @@ const { MissionUtils } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
     gamestart();
   }
 }
 
 const gamestart = () =>{
-  judgeNumber(createComputerNumber().split(""),inputUserNumber().split(""))
+
+  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
+  judgeNumber(createComputerNumber().split(""),inputUserNumber().split(""));
+  return ;
 
 }
 
@@ -45,6 +47,8 @@ const verifyUserNumber = (userNumber) =>{
   if(userNumberArr[0]==0||userNumberArr[1]==0||userNumberArr[2]==0){
     throw "1~9사이의 수가 아닙니다"
   }
+
+  return true;
 }
 
 
@@ -59,14 +63,18 @@ const judgeNumber = (computerNumber,userNumber) =>{
     if(userNumber.includes(computerNumber)){
       ballScore++;
     }
-    
   }
   if (strikeScore==3){
     gameRestartOrEnd();
   }
-  if(!strikeScore==3){
-    MissionUtils.Console.print(`${strikeScore}스트라이크`)
-    MissionUtils.Console.print(`${ballScore}볼`)
+  else if(strikeScore==0&&ballScore==0){
+    MissionUtils.Console.print(`낫싱`)
+    inputUserNumber(userNumber)
+  }
+  else if(!strikeScore==3){
+    MissionUtils.Console.print(`${strikeScore}스트라이크`);
+    MissionUtils.Console.print(`${ballScore}볼`);
+    inputUserNumber(userNumber);
   }
 
 }
@@ -74,14 +82,14 @@ const judgeNumber = (computerNumber,userNumber) =>{
 const gameRestartOrEnd = () =>{
   MissionUtils.Console.readLine(`세개의 숫자를 모두 맞히셨습니다. 게임종료\n
    계속하려면 1, 중지하려면 2를 입력하세요`,(answer)=>{
-    if (answer!=1&&answer!=2){
-      throw "잘못된 입력값입니다"
-    }
     if(answer==1){
       gamestart();
     }
-    if(answer==2){
+    else if(answer==2){
       MissionUtils.Console.close();
+    }
+    else if (answer!=1&&answer!=2){
+      throw "잘못된 입력값입니다"
     }
    })
 }
