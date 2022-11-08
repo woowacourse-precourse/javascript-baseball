@@ -4,32 +4,24 @@ class App {
 		this.runGame();
 	}
 
-	async runGame() {
+	runGame() {
 		MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 
-		try {
-			do {
-				await this.process();
-			} while (await this.restartOrFinish());
-			MissionUtils.Console.print('게임 종료');
-			MissionUtils.Console.close();
-		} catch (error) {
-			throw new Error(error.message);
-		}
+		do {
+			this.process();
+		} while (this.restartOrFinish());
+		MissionUtils.Console.print('게임 종료');
+		MissionUtils.Console.close();
 	}
 
-	async process() {
+	process() {
 		const RANDOMNUMBER = this.getRandomNumber();
 		let message = '';
 
-		try {
-			do {
-				const ANSWER = await this.inputAnswer();
-				message = this.printResult(RANDOMNUMBER, ANSWER);
-			} while (this.isNotThreeStrike(message));
-		} catch (error) {
-			throw new Error(error.message);
-		}
+		do {
+			const ANSWER = this.inputAnswer();
+			message = this.printResult(RANDOMNUMBER, ANSWER);
+		} while (this.isNotThreeStrike(message));
 	}
 
 	getRandomNumber() {
@@ -44,17 +36,15 @@ class App {
 	}
 
 	inputAnswer() {
-		return new Promise((resolve, reject) => {
-			try {
-				MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
-					const input = number.toString().split('');
-					this.validateAnswer(input);
-					resolve(input);
-				});
-			} catch (error) {
-				reject(new Error(error.message));
-			}
+		let answer = '';
+		MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
+			const input = number.toString().split('');
+			this.validateAnswer(input);
+			answer = input;
 		});
+		MissionUtils.Console.close();
+
+		return answer;
 	}
 
 	validateAnswer(answer) {
@@ -96,17 +86,14 @@ class App {
 
 	restartOrFinish() {
 		MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-
-		return new Promise((resolve, reject) => {
-			try {
-				MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (option) => {
-					this.validateOption(option);
-					resolve(option === '1' ? true : false);
-				});
-			} catch (error) {
-				reject(new Error(error.message));
-			}
+		let finish = '';
+		MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (option) => {
+			this.validateOption(option);
+			finish = option;
 		});
+		MissionUtils.Console.close();
+
+		return finish === '1' ? true : false;
 	}
 
 	validateOption(option) {
