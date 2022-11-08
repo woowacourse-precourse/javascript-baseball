@@ -74,7 +74,7 @@ describe('기능 목록 테스트', () => {
 
   test('볼, 스트라이크 개수 구하기', () => {
     const game = new Game();
-    const pitch = [
+    const pitches = [
       [
         // guess
         [1, 2, 3],
@@ -100,7 +100,7 @@ describe('기능 목록 테스트', () => {
       ],
     ];
 
-    pitch.map(([guess, answer, [ballShouldBe, strikeShouldbe]]) => {
+    pitches.map(([guess, answer, [ballShouldBe, strikeShouldbe]]) => {
       const { ball, strike } = game.judgeBallStrike(guess, answer);
       expect([ball, strike]).toEqual([ballShouldBe, strikeShouldbe]);
     });
