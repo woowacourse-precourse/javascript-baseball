@@ -1,20 +1,13 @@
 const getComputerRandNum = require("./getComputerRandNum.js");
 const Validator = require("./validator.js");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { getSumOfBallAndStrike, getStrikeCnt } = require("./getCntOfBallOrStrike.js");
 
 class App {
-  getSumOfBallAndStrike(computerNum, userNum) {
-    const overlappingNum = userNum.reduce((acc, cur) => {
-      return acc + (computerNum.includes(cur) | 0);
-    }, 0);
-    return overlappingNum;
-  }
-
-  getStrikeCnt(computerNum, userNum) {
-    const strikeCnt = userNum.reduce((acc, cur, idx) => {
-      return acc + ((computerNum[idx] === cur) | 0);
-    }, 0);
-    return strikeCnt;
+  play() {
+    const computerNum = getComputerRandNum();
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.startGame(computerNum);
   }
 
   startGame(computerNum) {
@@ -26,8 +19,8 @@ class App {
         if (!validator.isValidInput()) {
           throw new Error("입력값을 확인하세요.");
         }
-        const ballAndStrikeCnt = this.getSumOfBallAndStrike(computerNum, userNum);
-        const strikeCnt = this.getStrikeCnt(computerNum, userNum);
+        const ballAndStrikeCnt = getSumOfBallAndStrike(computerNum, userNum);
+        const strikeCnt = getStrikeCnt(computerNum, userNum);
         this.judgeGameResult(ballAndStrikeCnt, strikeCnt, computerNum);
       }
     );
@@ -48,6 +41,14 @@ class App {
     this.startNewGameOrQuit();
   }
 
+  notClearGame(ballAndStrikeCnt, strikeCnt, computerNum) {
+    const ballCnt = ballAndStrikeCnt - strikeCnt;
+    if (ballAndStrikeCnt === 0) MissionUtils.Console.print("낫싱");
+    else if (ballCnt === 0) MissionUtils.Console.print(`${strikeCnt}스트라이크`);
+    else MissionUtils.Console.print(`${ballCnt}볼 ${strikeCnt}스트라이크`);
+    this.startGame(computerNum);
+  }
+
   startNewGameOrQuit() {
     MissionUtils.Console.readLine("", (restartOrQuit) => {
       if (parseInt(restartOrQuit) === 1) {
@@ -58,20 +59,6 @@ class App {
         MissionUtils.Console.close();
       } else throw new Error("입력값이 잘못되었습니다.");
     });
-  }
-
-  notClearGame(ballAndStrikeCnt, strikeCnt, computerNum) {
-    const ballCnt = ballAndStrikeCnt - strikeCnt;
-    if (ballAndStrikeCnt === 0) MissionUtils.Console.print("낫싱");
-    else if (ballCnt === 0) MissionUtils.Console.print(`${strikeCnt}스트라이크`);
-    else MissionUtils.Console.print(`${ballCnt}볼 ${strikeCnt}스트라이크`);
-    this.startGame(computerNum);
-  }
-
-  play() {
-    const computerNum = getComputerRandNum();
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.startGame(computerNum);
   }
 }
 
