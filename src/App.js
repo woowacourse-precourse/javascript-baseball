@@ -79,7 +79,7 @@ class App {
 		if (input === 1) {
 			this.PICKED_NUMBERS = this.getRandomNumber();
 			this.getInput();
-		}
+		} else MissionUtils.Console.close();
 	}
 }
 
