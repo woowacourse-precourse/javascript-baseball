@@ -12,7 +12,18 @@ const RANDOM_NUMBER = Object.freeze({
   MAX_SIZE: 3,
 });
 
+const EXECPTION_CONDITION = Object.freeze({
+  RESTART: "1",
+  END: "2",
+});
+
+const ERROR_MESSAGE = Object.freeze({
+  TYPE_ERROR: "잘못된 입력입니다. 게임 규칙에 알맞게 입력해주십시오.",
+});
+
 module.exports = {
   GAME_STATE_MESSAGE,
   RANDOM_NUMBER,
+  EXECPTION_CONDITION,
+  ERROR_MESSAGE,
 };
