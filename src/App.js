@@ -1,14 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const MESSAGE = require("./constants/string.js");
-
-const SETTING = {
-  MAX_NUMBER_LENGTH: 3,
-  FROM_NUMBER: 1,
-  TO_NUMBER: 9,
-  STRIKE_OUT_COUNT: 3,
-  RESTART: "1",
-  GAME_CLOSE: "2",
-};
+const SETTING = require("./constants/setting.js");
 
 class App {
   constructor() {
