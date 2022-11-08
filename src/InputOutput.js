@@ -29,9 +29,11 @@ async function getInputValue(question) {
  * @param {string | numberCheckResult} content 문자열 혹은 숫자확인 결과 객체
  */
 function print(content) {
-  if (!(content || JSON.stringify(content) == {} || content.length == 0)) {
+  if (!content || JSON.stringify(content) == {} || content.length == 0) {
     throw Error("출력할 값이 없습니다");
   }
+  if (JSON.stringify(content)[0] == "[")
+    throw Error("배열은 print할 수 없습니다");
   if (!(typeof content === "string" || typeof content === "object"))
     throw Error("string 혹은 object 값만 출력가능합니다");
   if (typeof content === "string") {
