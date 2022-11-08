@@ -63,23 +63,26 @@ class App {
   processResult(strike) {
     if (strike === GAME.CORRECT_COUNT) {
       Console.readLine(PHRASE.RESTART, (input) => {
-        this.printException(input);
-        this.restartOrExit(input);
+        if (input === GAME.RESTART) {
+          this.restart();
+        } else if (input === GAME.EXIT) {
+          this.exit();
+        } else this.printException();
       });
     } else this.receiveNumber();
   }
 
-  printException(input) {
-    if (input !== GAME.RESTART && input !== GAME.EXIT)
-      Console.print(PHRASE.ERROR2);
+  printException() {
+    Console.print(PHRASE.ERROR2);
   }
 
-  restartOrExit(input) {
-    if (input === GAME.RESTART) {
-      this.createNumberList();
-      this.receiveNumber();
-    }
-    if (input === GAME.EXIT) Console.close();
+  restart() {
+    this.createNumberList();
+    this.receiveNumber();
+  }
+
+  exit() {
+    Console.close();
   }
 
   play() {
