@@ -37,6 +37,18 @@ class App {
 
     return ballStrikeCount;
   }
+
+  printBallStrike(ballStrikeCount) {
+    if ((ballStrikeCount[0] === 0) & (ballStrikeCount[1] === 0)) {
+      return "낫싱";
+    } else if (ballStrikeCount[0] === 0) {
+      return `${ballStrikeCount[1]}스트라이크`;
+    } else if (ballStrikeCount[1] === 0) {
+      return `${ballStrikeCount[0]}볼`;
+    } else {
+      return `${ballStrikeCount[0]}볼 ${ballStrikeCount[1]}스트라이크`;
+    }
+  }
 }
 
 module.exports = App;
