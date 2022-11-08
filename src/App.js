@@ -8,17 +8,17 @@ class App {
   }
   play() {
     this.gameStart();
-    while (!this.endGame) {
+  }
+  gameStart() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    let endGame = false;
+    while (!endGame) {
       this.user.getInput();
       this.user.checkValidation();
       this.user.changeToNumbers();
       const ballAndStrike = this.compareNumbers(this.opponent.number, this.user.input);
       this.printResult(ballAndStrike);
     }
-  }
-  gameStart() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.endGame = false;
   }
   compareNumbers(opponentArr, userArr) {
     let ball = 0,
@@ -38,7 +38,6 @@ class App {
     else if (ball > 0 && strike === 0) MissionUtils.Console.print(`${ball}볼`);
     else if (ball === 0 && strike > 0) {
       MissionUtils.Console.print(`${strike}스트라이크`);
-      if (strike === 3) this.endGame = true;
     } else if (ball === 0 && strike === 0) MissionUtils.Console.print("낫싱");
   }
 }
