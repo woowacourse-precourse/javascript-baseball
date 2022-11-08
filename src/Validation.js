@@ -9,6 +9,10 @@ class Validation{
         if(!(number.length==3)){
             throw new Error("숫자 3개를 입력하세요.");
         }
+        if(!duplicate_number(number)){
+            throw new Error("서로 다른 숫자를 입력하세요.")
+        }
+        
     };
     static endgame_choice_valid=function checkChoiceInputValid(number){
         let check_number = /^[0-9]+$/;
@@ -20,6 +24,12 @@ class Validation{
         }
     };
     
+}
+const duplicate_number = function duplicate_number(n){
+    if(n[0]==n[1]) return 0;
+    if(n[0]==n[2]) return 0;
+    if(n[1]==n[2]) return 0;
+    return 1;
 }
 
 module.exports = Validation;
