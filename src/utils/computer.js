@@ -19,10 +19,8 @@ const getHintOfAnswer = (result) => {
     return this.isUserWrong;
   }
   if (result.ball === 0 && result.strike === 3) {
-    Console.print("3스트라이크");
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    this.isUserWrong = false;
-    return this.isUserWrong;
+    Console.print("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    return !this.isUserWrong;
   }
   if (result.ball > 0 && result.strike === 0) {
     Console.print(`${result.ball}볼`);
