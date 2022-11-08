@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
-const getStrikeAndBall = require("./StrikeAndBall");
+// const getStrikeAndBall = require("./StrikeAndBall");
 const getStrikeAndBallText = require("./StrikeAndBallText");
 const throwError = require("./ThrowError");
 const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT, MIN_NUMBER, MAX_NUMBER } = require("./constants/ConstantValues");
@@ -23,7 +23,7 @@ class App {
         throwError();
       }
 
-      const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
+      const [strikeCount, ballCount] = this.getStrikeAndBall(this.threeRandomNumbers, input);
       MissionUtils.Console.print(getStrikeAndBallText(strikeCount, ballCount));
 
       if (strikeCount === NUMBER_LENGTH) {
@@ -61,6 +61,32 @@ class App {
     }
 
     return [...threeRandomNumber].join("");
+  }
+
+  getBallCount(answer, input) {
+    let ballCount = 0;
+    input.split("").forEach((eachNumber, index) => {
+      if (answer.includes(eachNumber) && answer.indexOf(eachNumber) !== index) {
+        ballCount++;
+      }
+    });
+
+    return ballCount;
+  }
+
+  getStrikeCount(answer, input) {
+    let strikeCount = 0;
+    input.split("").forEach((eachNumber, index) => {
+      if (answer.includes(eachNumber) && answer.indexOf(eachNumber) === index) {
+        strikeCount++;
+      }
+    });
+
+    return strikeCount;
+  }
+
+  getStrikeAndBall(answer, input) {
+    return [this.getStrikeCount(answer, input), this.getBallCount(answer, input)];
   }
 }
 
