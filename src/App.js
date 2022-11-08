@@ -3,7 +3,7 @@ const {
   WhiteSpaceInputException,
   DuplicateElementException,
   InvalidDigitException,
-  BadCommandException,
+  InvalidCommandException,
   InputRangeException,
   InputTypeException,
 } = require('./Error');
@@ -100,7 +100,7 @@ class App {
 
   isValidCommandInput(input, commands) {
     if (!commands[input]) {
-      throw new BadCommandException();
+      throw new InvalidCommandException();
     }
 
     return true;

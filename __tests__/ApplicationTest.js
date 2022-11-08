@@ -5,7 +5,7 @@ const {
   WhiteSpaceInputException,
   DuplicateElementException,
   InvalidDigitException,
-  BadCommandException,
+  InvalidCommandException,
   InputRangeException,
   InputTypeException,
 } = require('../src/Error');
@@ -232,7 +232,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(BadCommandException);
+    }).toThrow(InvalidCommandException);
   });
 
   test('게임 종료 후 재시작 여부 확인시 아무런 글자 없이 입력하면 예외가 발생되며 종료된다.', () => {
