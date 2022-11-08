@@ -7,6 +7,7 @@ class GameMessage {
   }  
   static gameover() {
     MissionUtils.Console.print(constants.GAME_MESSAGE.gameover);
+    MissionUtils.Console.print(constants.GAME_MESSAGE.restart);
   }
   static result(score) {
     let resultMessage = '';
@@ -15,6 +16,9 @@ class GameMessage {
     if(resultMessage === '') resultMessage = constants.RESULT_COUNT.nothing;
     resultMessage = resultMessage.trim();
     MissionUtils.Console.print(resultMessage);
+  }
+  static clear() {
+    MissionUtils.Console.print(constants.GAME_MESSAGE.clear);
   }
   static error(messege) {
     throw new Error(messege);

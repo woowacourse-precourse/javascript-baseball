@@ -48,20 +48,18 @@ class Validator {
     return false;
   }
   static #isNotThreeLength(value) {
-    if(value.length !== 3) return true;
+    if(value.length !== constants.CLEAR_CONDITION) return true;
     return false;
   }
   static #isOutOfRange(value) {
-    let result = false;
-    value.forEach(number => {
-      number = Number(number);
-      if(Number.isNaN(number) || number < 1) result = true;
-    });
-    return result;
+    value = value.join('');
+    const regex = /^[1-9]*$/g;
+    const result = regex.test(value);
+    return !result;
   }
   static #isDuplicated(value) {
     const removeDuplicatedValue = [...new Set(value)];
-    return (removeDuplicatedValue.length !== 3);
+    return (removeDuplicatedValue.length !== constants.CLEAR_CONDITION);
   }
 
   static isInvalidRestartSubmit(value) {
