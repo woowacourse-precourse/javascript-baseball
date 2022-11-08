@@ -12,36 +12,39 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      if (!validateInput(input)) {
-        throwError();
-      }
-
-      const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
-      MissionUtils.Console.print(getStrikeAndBallText(strikeCount, ballCount));
-
-      if (strikeCount === 3) {
-        this.end();
-      }
-
-      this.play();
-    });
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", this.playGame.bind(this));
   }
 
   end() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
-      if (input !== "1" && input !== "2") {
-        this.throwError();
-      }
-      if (input === "1") {
-        this.threeRandomNumbers = getThreeRandomNumbers();
-        this.play();
-      }
-      if (input === "2") {
-        MissionUtils.Console.close();
-      }
-    });
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", this.endGame.bind(this));
+  }
+
+  playGame(input) {
+    if (!validateInput(input)) {
+      throwError();
+    }
+    const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
+    MissionUtils.Console.print(getStrikeAndBallText(strikeCount, ballCount));
+
+    if (strikeCount === 3) {
+      this.end();
+    }
+
+    this.play();
+  }
+
+  endGame(input) {
+    if (input !== "1" && input !== "2") {
+      this.throwError();
+    }
+    if (input === "1") {
+      this.threeRandomNumbers = getThreeRandomNumbers();
+      this.play();
+    }
+    if (input === "2") {
+      MissionUtils.Console.close();
+    }
   }
 }
 
