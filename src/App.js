@@ -24,6 +24,7 @@ class App {
   startMention() {
     if (this.firstTry === true) {
       render.startment();
+      console.log(this.computerInput);
     }
   }
 
@@ -38,6 +39,7 @@ class App {
 
   checkVaild(userNum) {
     const checkUserInputValid = checkNumVaild.checkUserInput(userNum);
+
     render.errorThrow(checkUserInputValid);
 
     this.gameRender();
@@ -95,7 +97,6 @@ class App {
     if (userRetryNumber === "2") {
       const render = new Render();
       render.end();
-      Console.close();
     }
   }
   numToArr(num) {

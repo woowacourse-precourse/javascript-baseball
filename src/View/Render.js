@@ -10,13 +10,11 @@ class Render {
 
   errorThrow(errorMessege) {
     if (errorMessege !== ERROR.USER_INPUT_PASS) {
-      Console.close();
       throw new Error(errorMessege);
     }
   }
   errorRetryThrow(errorMessege) {
     if (errorMessege !== ERROR.USER_INPUT_PASS) {
-      Console.close();
       throw new Error(errorMessege);
     }
   }
@@ -39,8 +37,8 @@ class Render {
   }
 
   end() {
-    Console.print(GAME.END_MENTION);
     Console.close();
+    Console.print(GAME.END_MENTION);
   }
 }
 module.exports = Render;
