@@ -6,7 +6,7 @@ const Judge = require("./Judge.js");
 
 class App {
   constructor() {
-    this.computer = null;
+    this.computer = new Computer();
     this.player = new Player();
     this.judge = new Judge();
     this.playCnt = 0;
@@ -16,22 +16,20 @@ class App {
     if (this.playCnt === 0) this.alertStart();
     this.playCnt++;
 
-    this.computer = new Computer();
-
     let computerNum = this.computer.makeRandomNum();
-    let playerInput = null;
+    let playerInput = "";
 
     while (computerNum !== playerInput) {
       playerInput = this.player.getNumber();
       if (!this.judge.isPlayerInputValid(playerInput)) {
-        MissionUtils.Console.close();
+        throw new Error(SYS_MESSAGE.ERROR_MESSAGE);
       }
-      if (this.judge.isPlayerInputValid(playerInput)) {
-        this.showBallState(
-          this.judge.findStrikeAndBallCnt(computerNum, playerInput)
-        );
-      }
+      this.showBallState(
+        this.judge.findStrikeAndBallCnt(computerNum, playerInput)
+      );
     }
+
+    MissionUtils.Console.print(SYS_MESSAGE.FINISH_MESSAGE);
     this.askMoreGame();
   }
 
