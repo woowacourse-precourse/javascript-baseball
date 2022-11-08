@@ -21,9 +21,7 @@ class App {
   }
   checkGameClear(strikeCount) {
     const gameResult = new GameResult();
-    if (strikeCount !== 3) {
-      return this.userInput();
-    }
+    if (strikeCount !== 3) return this.userInput();
     gameResult.gameClearMessage();
   }
 }
@@ -33,12 +31,10 @@ class Validation {
   checkUserInput(value) {
     const checkDeplicated = [...new Set(value)];
     if (value.length !== 3) throw new Error("3글자여야 합니다.");
-    if (!value.match(/[1-9]/)) {
+    if (!value.match(/[1-9]/))
       throw new Error("1에서 9짜리의 숫자만 입력해주세요.");
-    }
-    if (checkDeplicated.length !== 3) {
+    if (checkDeplicated.length !== 3)
       throw new Error("중복되지 않는 값을 입력해주세요.");
-    }
   }
   checkUserEndInput(value) {
     if (![1, 2].includes(+value))
@@ -59,9 +55,7 @@ class GameResult {
     );
   }
   askRestart(value) {
-    if (+value === 1) {
-      app.play();
-    }
+    if (+value === 1) app.play();
     if (+value === 2) {
       MissionUtils.Console.print("게임 종료");
       MissionUtils.Console.close();
@@ -88,28 +82,18 @@ function getCount(userInputValue, computerRandomValue) {
   };
   userInputValue.forEach((userElement, index) => {
     const computerElement = computerRandomValue[index];
-    if (computerElement === userElement) {
-      return result.strike++;
-    }
-    if (computerRandomValue.includes(userElement)) {
-      return result.ball++;
-    }
+    if (computerElement === userElement) return result.strike++;
+    if (computerRandomValue.includes(userElement)) return result.ball++;
   });
   return result;
 }
 
 function getResult(strike, ball) {
   let resultMessage = "";
+  if (ball) resultMessage += `${ball}볼`;
+  if (strike) resultMessage += ` ${strike}스트라이크`;
+  if (resultMessage === "") resultMessage = "낫싱";
 
-  if (ball) {
-    resultMessage += `${ball}볼`;
-  }
-  if (strike) {
-    resultMessage += ` ${strike}스트라이크`;
-  }
-  if (resultMessage === "") {
-    resultMessage = "낫싱";
-  }
   MissionUtils.Console.print(resultMessage);
 }
 
