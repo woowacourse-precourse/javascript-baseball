@@ -4,12 +4,19 @@ const { MESSAGES } = require("./lib/Constants");
 class NumberBaseball {
   gameStart() {
     Console.print(MESSAGES.START_GAME);
+    this.gameSet();
+  }
+
+  gameSet() {
+    const answer = this.makeAnswer();
+    console.log(answer);
     this.gamePlay();
   }
 
   gamePlay() {
-    const answer = this.makeAnswer();
-    console.log(answer);
+    this.getUserInput((input) => {
+      console.log(input);
+    });
   }
 
   makeAnswer() {
@@ -21,6 +28,13 @@ class NumberBaseball {
       }
     }
     return answer;
+  }
+
+  getUserInput(callback) {
+    Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
+      const inputArray = [...input].map((x) => Number(x));
+      callback(inputArray);
+    });
   }
 }
 module.exports = NumberBaseball;
