@@ -9,6 +9,10 @@ class App {
     this.result = {};
   }
 
+  clear() {
+    this.result = {};
+  }
+
   play() {}
 }
 
