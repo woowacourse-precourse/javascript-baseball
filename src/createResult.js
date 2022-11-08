@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-function getBall(computerAnswer, userAnswer) {
+const getBall = (computerAnswer, userAnswer) => {
   let ball = 0;
   computerAnswer.forEach((num) => {
     if (userAnswer.includes(num)) {
@@ -9,9 +9,9 @@ function getBall(computerAnswer, userAnswer) {
   });
 
   return ball;
-}
+};
 
-function getStrike(computerAnswer, userAnswer) {
+const getStrike = (computerAnswer, userAnswer) => {
   let strike = 0;
   computerAnswer.forEach((item, idx) => {
     if (computerAnswer[idx] === userAnswer[idx]) {
@@ -20,9 +20,9 @@ function getStrike(computerAnswer, userAnswer) {
   });
 
   return strike;
-}
+};
 
-function createResult(computerAnswer, userAnswer) {
+const createResult = (computerAnswer, userAnswer) => {
   const strike = getStrike(computerAnswer, userAnswer);
   const ball = getBall(computerAnswer, userAnswer) - strike;
   let result = "";
@@ -42,6 +42,6 @@ function createResult(computerAnswer, userAnswer) {
   MissionUtils.Console.print(result);
 
   return strike === 3;
-}
+};
 
 module.exports = createResult;
