@@ -1,3 +1,9 @@
+const {
+  ERROR_NOT_THREE_LENGTH,
+  ERROR_NOT_NUMBER,
+  ERROR_NOT_IN_RANGE,
+  ERROR_NOT_DUPLICATED,
+} = require("./constants/message");
 const GAME_VALUE = require("./constants/values");
 
 class UserModel {
@@ -24,16 +30,16 @@ class UserModel {
 
   isInputNumbersValid(numberFromUser) {
     if (this.isLengthEqualsThree(numberFromUser)) {
-      throw Error("세글자의 수만 입력 해주세요.");
+      throw Error(ERROR_NOT_THREE_LENGTH);
     }
     if (this.isConsistOfOnlyNumber(numberFromUser)) {
-      throw Error("숫자만 입력 해주세요.");
+      throw Error(ERROR_NOT_NUMBER);
     }
     if (this.isNumberRangeOneToNine(numberFromUser)) {
-      throw Error("1~9사이 숫자만 입력해주세요.");
+      throw Error(ERROR_NOT_IN_RANGE);
     }
     if (this.isDuplicatedInNumber(numberFromUser)) {
-      throw Error("같은 수를 입력하지 말아주세요.");
+      throw Error(ERROR_NOT_DUPLICATED);
     }
     return numberFromUser;
   }
