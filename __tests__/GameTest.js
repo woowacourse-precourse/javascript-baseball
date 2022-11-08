@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const GameLogic = require("../src/GameLogic");
+const Input = require("../src/Input");
 const { ERROR_MESSAGE, INGAME_MESSAGE } = require("../src/Constant");
 const Validation = require("../src/Validation");
 
@@ -9,135 +11,109 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("게임 문구 테스트", () => {
-  test("시작 문구", () => {
-    const app = new App();
-    const logSpy = getLogSpy();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(INGAME_MESSAGE.START)
-    );
-  });
-
-  test("입력 문구", () => {
-    const app = new App();
-    const logSpy = getLogSpy();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(INGAME_MESSAGE.INPUT_NUMBER)
-    );
-  });
-
-  test("종료 문구", () => {
-    const app = new App();
-    const logSpy = getLogSpy();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(INGAME_MESSAGE.END)
-    );
-  });
-
-  test("재시작 문구", () => {
-    const app = new App();
-    const logSpy = getLogSpy();
-    app.play();
-
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(INGAME_MESSAGE.ASK)
-    );
-  });
-});
+// describe("게임 문구 테스트", () => {
+//   test("시작 문구", () => {
+//     const app = new App();
+//     const logSpy = getLogSpy();
+//     app.play();
+//     expect(logSpy).toHaveBeenCalledWith(
+//       expect.stringContaining(INGAME_MESSAGE.START)
+//     );
+//   });
+//   test("입력 문구", () => {
+//     const gameLogic = new GameLogic();
+//     const input = new Input();
+//     const computerNumber = input.computer();
+//     const logSpy = getLogSpy();
+//     gameLogic.implement(computerNumber);
+//     expect(logSpy).toHaveBeenCalledWith(
+//       expect.stringContaining(INGAME_MESSAGE.INPUT_NUMBER)
+//     );
+//   });
+//   test("종료 문구", () => {
+//     const app = new App();
+//     const logSpy = getLogSpy();
+//     app.play();
+//     expect(logSpy).toHaveBeenCalledWith(
+//       expect.stringContaining(INGAME_MESSAGE.END)
+//     );
+//   });
+//   test("재시작 문구", () => {
+//     const app = new App();
+//     const logSpy = getLogSpy();
+//     app.play();
+//     expect(logSpy).toHaveBeenCalledWith(
+//       expect.stringContaining(INGAME_MESSAGE.ASK)
+//     );
+//   });
+// });
 
 describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크1 : 자릿수", () => {
     const validation = new Validation();
     expect(() => validation.checkLength([1, 2, 3, 4])).toThrow(
-      ERROR_MESSAGE.INPUT,
-      "입력값은 3자리여야 합니다."
+      ERROR_MESSAGE.INPUT_LENGTH
     );
   });
 
   test("플레이어 숫자 입력 체크2 : 숫자", () => {
     const validation = new Validation();
     expect(() => validation.checkNumber([1, 2, "a"])).toThrow(
-      ERROR_MESSAGE.INPUT,
-      "입력값은 1~9사이의 '숫자'여야 합니다."
+      ERROR_MESSAGE.INPUT_NUMBER
     );
   });
 
   test("플레이어 숫자 입력 체크3 : 숫자 (0제외)", () => {
     const validation = new Validation();
     expect(() => validation.checkNumber([0, 2, 1])).toThrow(
-      ERROR_MESSAGE.INPUT_ZERO,
-      "입력값에 0이 포함될 수 없습니다."
+      ERROR_MESSAGE.INPUT_NUMBER
     );
   });
 
-  test("플레이어 숫자 입력 체크4", () => {
+  test("플레이어 숫자 입력 체크4 : 중복", () => {
     const validation = new Validation();
     expect(() => validation.checkRepeat([1, 2, 2])).toThrow(
-      ERROR_MESSAGE.INPUT,
-      "입력값은 중복되지 않은 숫자로 이루어져야 합니다."
+      ERROR_MESSAGE.INPUT_REPEAT
     );
   });
 });
 
 describe("게임 로직 테스트", () => {
   test("게임 : 판별로직1", () => {
-    const app = new App();
-    expect(() => "...").toEqual("3 스트라이크");
+    const gameLogic = new GameLogic();
+    const logSpy = getLogSpy();
+    gameLogic.result([0, 3]);
+    expect(logSpy).toHaveBeenCalledWith("3스트라이크");
   });
 
   test("게임 : 판별로직2", () => {
-    const app = new App();
-    expect(() => "...").toEqual("3 볼");
+    const gameLogic = new GameLogic();
+    const logSpy = getLogSpy();
+    gameLogic.result([3, 0]);
+    expect(logSpy).toHaveBeenCalledWith("3볼");
   });
 
   test("게임 : 판별로직3", () => {
-    const app = new App();
-    expect(() => "...").toEqual("3 낫싱");
+    const gameLogic = new GameLogic();
+    const logSpy = getLogSpy();
+    gameLogic.result([0, 0]);
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
   });
 
-  //   test("게임 : 판별로직4", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("2스트라이크 1볼");
-  //   });
-  //   test("게임 : 판별로직5", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("2스트라이크 1낫싱");
-  //   });
-  //   test("게임 : 판별로직6", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("1스트라이크 2볼");
-  //   });
-  //   test("게임 : 판별로직7", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("2볼 1낫싱");
-  //   });
-  //   test("게임 : 판별로직8", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("1스트라이크 2낫싱");
-  //   });
-  //   test("게임 : 판별로직9", () => {
-  //     const app = new App();
-  //     expect(() => "...").toEqual("1볼 2낫싱");
-  //   });
-
-  test("게임 : 판별로직10", () => {
-    const app = new App();
-    expect(() => "...").toEqual("1스트라이크 1볼 1낫싱");
+  test("게임 : 판별로직4", () => {
+    const gameLogic = new GameLogic();
+    const logSpy = getLogSpy();
+    gameLogic.result([1, 2]);
+    expect(logSpy).toHaveBeenCalledWith("1볼 2스트라이크");
   });
 });
 
-describe("종료/재시작 테스트", () => {
-  test("종료 후 선택 : 재시작", () => {
-    "재시작";
-  });
+// describe("종료/재시작 테스트", () => {
+//   test("종료 후 선택 : 재시작", () => {
+//     "재시작";
+//   });
 
-  test("종료 후 선택 : 종료", () => {
-    "종료";
-  });
-});
+//   test("종료 후 선택 : 종료", () => {
+//     "종료";
+//   });
+// });
