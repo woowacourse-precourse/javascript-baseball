@@ -19,7 +19,9 @@ class App {
   }
 
   gameStart(computer) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
+    if (this.gameResult == undefined)
+      MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       if (!this.isValidInput(input)) {
         throw "유효하지 않은 숫자입니다.";
       }
