@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console } = MissionUtils;
-const { GAME_MESSAGE } = require("./constants");
+const { GAME_MESSAGE, GAME_RULE } = require("./constants");
 const checkValidation = require("./utils/checkValidation");
 const getPrintScore = require("./utils/getPrintScore");
 const getStrikeBallCount = require("./utils/getStrikeBallCount");
@@ -25,11 +25,11 @@ class App {
   play() {
     Console.print(GAME_MESSAGE.START);
     this.generateComputerInput();
-    this.generateUserInput();
   }
 
   generateComputerInput() {
     this.computerInput = setRandomNumber();
+    this.generateUserInput();
 
     return this.computerInput;
   }
@@ -56,6 +56,10 @@ class App {
     const scoreResultMessage = getPrintScore(this.score);
 
     Console.print(scoreResultMessage);
+
+    if (this.score.STRIKE < GAME_RULE.LENGTH) {
+      return this.generateUserInput();
+    }
   }
 }
 
