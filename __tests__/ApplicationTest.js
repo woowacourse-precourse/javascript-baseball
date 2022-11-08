@@ -1,5 +1,7 @@
 const App = require('../src/App');
 const MissionUtils = require('@woowacourse/mission-utils');
+const isAvailableValue = require('../src/utils/isAvailableValue');
+const getGameResultMessage = require('../src/utils/getGameResultMessage');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -139,5 +141,44 @@ describe('숫자 야구 게임', () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+});
+
+describe('util 테스트', () => {
+  test('isAvailableValue 테스트', () => {
+    const values = ['123', '133', '190', '3456', 394];
+    const result = [true, false, false, false, true];
+    values.forEach((value, i) => expect(isAvailableValue(value)).toEqual(result[i]));
+  });
+
+  test('getGameResultMessage 테스트', () => {
+    const count = [
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 3],
+      [1, 0],
+      [2, 0],
+      [3, 0],
+      [1, 1],
+      [1, 2],
+      [2, 1],
+    ];
+    const result = [
+      '낫싱',
+      '1스트라이크',
+      '2스트라이크',
+      '3스트라이크',
+      '1볼',
+      '2볼',
+      '3볼',
+      '1볼 1스트라이크',
+      '1볼 2스트라이크',
+      '2볼 1스트라이크',
+    ];
+
+    count.forEach((element, i) =>
+      expect(getGameResultMessage(element[0], element[1])).toEqual(result[i])
+    );
   });
 });
