@@ -20,6 +20,7 @@ class App {
 
     while (computer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      
       if (!computer.includes(number)) {
         computer.push(number);
       }
@@ -44,18 +45,23 @@ class App {
     if (strike === 3) {
       return this.gameOver();
     }
+
     if (strike > 0 && ball > 0) {
       this.printMent(computer, `${ball}볼 ${strike}스트라이크`);
     }
+
     if (strike > 0 && ball === 0) {
       this.printMent(computer, `${strike}스트라이크`);
     }
+
     if (strike === 0 && ball > 0) {
       this.printMent(computer, `${ball}볼`);
     }
+
     if (strike === 0 && ball === 0) {
       this.printMent(computer, '낫싱');
     }
+
     return false;
   }
 
