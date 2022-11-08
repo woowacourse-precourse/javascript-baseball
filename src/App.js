@@ -3,23 +3,33 @@ const isError = require('./errorHandler');
 
 class App {
   play() {
-    // 3개의 랜덤숫자 생성
+    let FLAG = "";
+    let SCORE_BOARD = [0, 0];
     let RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    let USER_VALUE = this.sliceNumber(this.inputFromUser());
+    let USER_VALUE;
 
+    while (FLAG == false) {
+      USER_VALUE = this.sliceNumber(this.inputFromUser());
+      SCORE_BOARD = this.judgeScore(RANDOM_VALUE, USER_VALUE);
+    }
   }
 
   // 사용자로부터 값 입력받기
   inputFromUser() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요.', (USER_INPUT) => {
-      let errorHandler = new isError(USER_INPUT);
+    MissionUtils.Console.readLine('숫자를 입력해주세요.', (INPUT) => {
+      let RESULT;
+      let errorHandler = new isError(INPUT);
 
-      if(errorHandler.isInputCorrect(USER_INPUT)) {
+      if(errorHandler.isInputCorrect(INPUT)) {
         throw new Error("입력값이 올바르지 않습니다.");
+      } else {
+        RESULT = INPUT;
       }
 
-      return USER_INPUT;
+      return RESULT;
     });
+
+    return ;
   }
 
   // 입력받은 숫자 쪼개기
@@ -45,6 +55,20 @@ class App {
     }
 
     return SCORE_BOARD;
+  }
+
+  playGame(PC) {
+    let FLAG = false;
+    let USER_VALUE = "";
+    let SCORE_BOARD = [0, 0];
+
+    while (FLAG==false) {
+      MissionUtils.Console.readLine("숫자 입력 : ", (INPUT) => {
+        USER_VALUE = INPUT;
+      });
+
+      SCORE_BOARD = this.judgeScore(PC, USER_VALUE);
+    }
   }
 
 }
