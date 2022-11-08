@@ -18,20 +18,20 @@ class App {
     return computerNumber.join("");
   }
 
-  checkBallStrike(nums, answer) {
+  checkBallStrike(computerNumber, userInput) {
     let ballStrikeCount = [0, 0];
 
-    if (!(answer.length === 3 && answer.length === new Set(answer).size))
+    if (!(userInput.length === 3 && userInput.length === new Set(userInput).size))
       throw new Error("잘못된 입력입니다.");
 
     for (let i = 0; i < 3; i++) {
-      let checkNums = Number(nums[i]);
+      let checkComputerNumber = Number(computerNumber[i]);
 
-      if (!(1 <= checkNums && checkNums <= 9)) {
+      if (!(1 <= checkComputerNumber && checkComputerNumber <= 9)) {
         throw new Error("잘못된 입력입니다.");
-      } else if (nums[i] === checkNums) {
+      } else if (computerNumber[i] === checkComputerNumber) {
         ballStrikeCount[1]++;
-      } else if (nums.indexOf(checkNums) !== -1) {
+      } else if (computerNumber.indexOf(checkComputerNumber) !== -1) {
         ballStrikeCount[0]++;
       }
     }
