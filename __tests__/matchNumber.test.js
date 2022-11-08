@@ -1,6 +1,6 @@
 //기능1. matchNumber함수 검증 : 숫자, 숫자의 위치 일치여부 가려내는 기능 검증
 
-const fn = require("../src/App");
+const fn = require("../src/gameFunctions");
 
 describe("함수 동작 테스트", () => {
   test("기본 테스트1", () => {

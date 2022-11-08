@@ -1,4 +1,4 @@
-const fn = require("../src/App");
+const fn = require("../src/gameFunctions");
 
 describe("100번 반복 테스트", () => {
   test("서로다른 랜덤한 결괏값이 나오는지 테스트", () => {

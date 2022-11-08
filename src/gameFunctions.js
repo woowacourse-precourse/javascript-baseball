@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 /**
  * 입력한 값이 정확한 값인지 판별하는 기능 필요 (예외처리)
  * 숫자인가? 길이가3인가? 중복된값은 없는가? 등등 잘못된경우 throw로 예외처리
@@ -22,6 +24,7 @@
    * @param {Function} matchNumber 콜백함수 matchNumber (숫자비교)
    * @returns {string} 비교이후 결과 리턴
    */
+  
   function playBaseball(randomNumbers, userNum, matchNumber) {
     const result = matchNumber(userNum, randomNumbers); // user입력값과 임의의수 매칭 결과값
     MissionUtils.Console.print(result);
@@ -115,4 +118,13 @@
       }
       repeatGame(randomNumber);
     });
+  }
+
+  module.exports = {
+    findWrongNumber,
+    playBaseball,
+    makeRandomNumbers,
+    matchNumber,
+    repeatGame
+
   }
