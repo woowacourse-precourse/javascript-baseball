@@ -25,6 +25,26 @@ describe("Error throw 테스트", () => {
       controller.updateUserGivenNumber(";,?");
     }).toThrow();
   });
+
+  test("재시작 여부 Input invalid 할 때", () => {
+    const controller = new Controller(true);
+
+    expect(() => {
+      controller.checkIsRestartUserInputValid("");
+    }).toThrow();
+
+    expect(() => {
+      controller.checkIsRestartUserInputValid("3");
+    }).toThrow();
+
+    expect(() => {
+      controller.checkIsRestartUserInputValid("zz");
+    }).toThrow();
+
+    expect(() => {
+      controller.checkIsRestartUserInputValid("?");
+    }).toThrow();
+  });
 });
 
 afterAll(() => {
