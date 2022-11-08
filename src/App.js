@@ -93,6 +93,16 @@ class App {
     );
   }
 
+  guessGameNumber(gameNumber) {
+    const CORRECT = "3스트라이크";
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      const guessNumber = convertToNumberArray(userInput);
+      const compareResult = this.compareGuessAndGameNumber(guessNumber, gameNumber);
+      if (compareResult == CORRECT) this.replayOrQuit();
+      else this.guessGameNumber(gameNumber);
+    });
+  }
+
   play() {}
 }
 

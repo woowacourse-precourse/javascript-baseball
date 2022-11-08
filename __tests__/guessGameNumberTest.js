@@ -103,3 +103,12 @@ describe("게임 숫자를 맞추면 해당 게임 종료하고 게임을 재시
     expect(logSpy).toHaveBeenCalledWith("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   });
 });
+
+describe("상대방 숫자 추측", () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "readLine");
+  const app = new App();
+  app.guessGameNumber([1, 2, 3]);
+  test("case1", () => {
+    expect(logSpy).toHaveBeenCalledTimes(1);
+  });
+});
