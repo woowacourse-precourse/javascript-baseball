@@ -22,8 +22,8 @@ class Error {
     throw new Error(message);
   }
 
-  static isDuplicated(string, element) {
-    return string.indexOf(element) !== string.lastIndexOf(element);
+  static isDuplicated(string, char) {
+    return string.indexOf(char) !== string.lastIndexOf(char);
   }
 }
 
