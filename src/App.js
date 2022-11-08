@@ -1,4 +1,4 @@
-const Game = require("./Game.js");
+const Game = require('./Game.js');
 class App {
   constructor() {
     this.game = new Game();
@@ -12,8 +12,5 @@ class App {
     return this.game.numberEnteredByUser;
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
