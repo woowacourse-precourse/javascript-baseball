@@ -1,16 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Computer = require('./Computer');
+const { RESTART, GAME_OVER, NOTHING, STRIKE, BALL } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
+const Computer = require('./Computer');
 const Player = require('./Player');
-
-const RESTART = '1';
-const GAME_OVER = '2';
 
 class Referee {
   constructor() {
     this.computer = new Computer();
     this.player = new Player(this);
-
     Console.print(MESSAGE.GAME.START);
   }
 
@@ -21,12 +18,7 @@ class Referee {
 
   gameResult() {
     const count = this.getBallAndStrikeCount();
-
-    if (count.ball === 0 && count.strike === 0) Console.print('낫싱');
-    if (count.ball !== 0 && count.strike === 0) Console.print(`${count.ball}볼`);
-    if (count.ball === 0 && count.strike !== 0) Console.print(`${count.strike}스트라이크`);
-    if (count.ball !== 0 && count.strike !== 0)
-      Console.print(`${count.ball}볼 ${count.strike}스트라이크`);
+    Console.print(this.getResultMessage(count.ball, count.strike));
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
@@ -37,26 +29,39 @@ class Referee {
   gameFinish() {
     Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
       const stringAnswer = answer + '';
+
       if (stringAnswer === RESTART) this.gameStart();
       else if (stringAnswer === GAME_OVER) {
-        Console.close();
         Console.print(MESSAGE.GAME.OVER);
+        Console.close();
       } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 
   getBallAndStrikeCount() {
-    const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
+    const value = {
+      computer: this.computer.getValue(),
+      player: this.player.getValue(),
+    };
     const count = {
       ball: 0,
       strike: 0,
     };
 
     for (let i = 0; i < 3; i++) {
-      if (computerValue[i] === playerValue[i]) count.strike++;
-      else if (computerValue.includes(playerValue[i])) count.ball++;
+      if (value.computer[i] === value.player[i]) count.strike++;
+      else if (value.computer.includes(value.player[i])) count.ball++;
     }
+
     return count;
+  }
+
+  getGameResultMessage(ball, strike) {
+    const nothingString = ball === 0 && strike === 0 ? `${NOTHING}` : '';
+    const ballString = ball ? `${ball}${BALL} ` : '';
+    const strikeString = strike ? `${strike}${STRIKE}` : '';
+
+    return (nothingString + ballString + strikeString).trim();
   }
 }
 
