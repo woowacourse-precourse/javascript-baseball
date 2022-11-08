@@ -48,7 +48,18 @@ class App {
 		if (/[^1-9]/g.test(answer.join(''))) throw new Error('1~9 이외의 숫자 혹은 문자를 입력하셨습니다.');
 	}
 
-	printResult() {}
+	printResult(RANDOMNUMBER, ANSWER) {
+		let resultMessage = [];
+		const RESULT = this.getResult(RANDOMNUMBER, ANSWER);
+
+		if (RESULT.ball > 0) resultMessage.push(`${RESULT.ball}볼`);
+		if (RESULT.strike > 0) resultMessage.push(`${RESULT.strike}스트라이크`);
+		if (RESULT.ball + RESULT.strike === 0) resultMessage.push('낫싱');
+
+		resultMessage = resultMessage.join(' ');
+		MissionUtils.Console.print(resultMessage);
+		return resultMessage;
+	}
 
 	getResult() {}
 
