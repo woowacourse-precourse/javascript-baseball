@@ -34,24 +34,27 @@ describe('사용자의 입력 값 확인', () => {
   });
 });
 
-describe("스트라이크 여부 확인", () => {
-  test("스트라이크 개수", () => {
+describe('스트라이크 여부 확인', () => {
+  test('스트라이크 개수', () => {
     expect(checkStrike([4, 1, 6], [4, 5, 6])).toEqual(2);
   });
 });
 
-describe("볼 여부 확인", () => {
-  test("볼 개수", () => {
+describe('볼 여부 확인', () => {
+  test('볼 개수', () => {
     expect(checkBall([1, 2, 3], [3, 2, 1])).toEqual(2);
   });
 });
 
-describe("게임 시작 구문 호출", () => {
-  const app = new App()
-  const spyFn = jest.spyOn(MissionUtils.Console, 'print')
-
-  app.announceGameStart()
-
-  expect(spyFn).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
-  MissionUtils.Console.close()
+describe('게임 시작 구문 호출', () => {
+  test('게임 시작 구문 호출', () => {
+    const app = new App()
+    const spyFn = jest.spyOn(MissionUtils.Console, 'print')
+  
+    app.announceGameStart()
+  
+    expect(spyFn).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.close()
+  })
 });
+
