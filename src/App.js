@@ -21,7 +21,7 @@ class App {
   }
 
   startGame() {
-    MissionUtils.Console.readline('숫자를 입력해주세요 : ', (inputNumber) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNumber) => {
       this.throwError(inputNumber);
       MissionUtils.Console.print(this.hint);
       this.checkAnswer();
@@ -49,13 +49,14 @@ class App {
     let result = '';
     let hint = '';
     for (let i = 0; i < answer.length; i++) {
-      result = this.CheckStrikeBall(answer, inputNumber, i);
+      result = this.checkStrikeBall(answer, inputNumber, i);
       if (result === 'strike') strike += 1;
       else if (result === 'ball') ball += 1;
     }
     hint = this.printHint(strike, ball);
     return hint;
   }
+
 
   printHint(strike, ball) {
     let hint = '';
@@ -72,6 +73,14 @@ class App {
       hint = '${ball}볼 ${strike}스트라이크';
     }
     return hint;
+  }
+
+  checkStrikeBall(answer, inputNumber, i) {
+    const playerNumber = [...inputNumber];
+    if (answer.includes(parseInt(playerNumber[i]))) {
+      if (playerNumber[i] === answer[i]) return 'strike';
+      return 'ball';
+    }
   }
 
   checkAnswer() {
