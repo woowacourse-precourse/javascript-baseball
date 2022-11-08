@@ -16,8 +16,6 @@ function isValidPlayerInput(playerNum) {
   if (!isValidDuplicated(playerNum)) {
     throw new Error(ERROR_MESSAGE.DUPLICATED);
   }
-
-  return true;
 }
 
 function isValidLength(playerNum) {
@@ -36,8 +34,6 @@ function isValidReplayNum(input) {
   if (Number(input) !== GAME.RUN && Number(input) !== GAME.STOP) {
     throw new Error(ERROR_MESSAGE.REAPLY_NUM);
   }
-
-  return true;
 }
 
 module.exports = { isValidPlayerInput, isValidReplayNum };

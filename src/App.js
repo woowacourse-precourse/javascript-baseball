@@ -9,33 +9,32 @@ class App {
 
   play() {
     this.printGameMsg(GAME_MESSAGE.START);
-
     this.answer = this.getComputerNum();
-    this.start(this.answer);
-    this.printGameMsg(GAME_MESSAGE.END);
-
-    let playNum = this.inputReplayNum();
-
-    if (playNum === GAME.RUN) this.play();
-
-    Console.close();
+    this.start();
   }
 
-  start(computerNum) {
+  start() {
     let playerNum = this.inputPlayerNum();
-    const result = this.getResult(computerNum, playerNum);
+  }
 
-    if (this.isSucesse(result)) return;
-    
-    this.start(computerNum);
+  inputPlayerNum() {
+    Console.readLine(GAME_MESSAGE.INPUT_PLAYER_NUMBER, (input) => {
+      validatePlayerInput.isValidPlayerInput(input);
+
+      const result = this.getResult(input);
+      if (this.isSucesse(result)) {
+        this.printGameMsg(GAME_MESSAGE.END);
+        this.inputReplayNum();
+      } else this.start();
+    });
   }
 
   isSucesse(strike) {
     return strike === COMPUTER_NUMBER.LENGTH;
   }
 
-  getResult(computerNum, playerNum) {
-    const { ball, strike } = this.getHint(computerNum, playerNum);
+  getResult(playerNum) {
+    const { ball, strike } = this.getHint(this.answer, playerNum);
     this.printHint(ball, strike);
 
     return strike;
@@ -61,25 +60,13 @@ class App {
     Console.print(message);
   }
 
-  inputPlayerNum() {
-    let playerNum;
-
-    Console.readLine(GAME_MESSAGE.INPUT_PLAYER_NUMBER, (input) => {
-      if (validatePlayerInput.isValidPlayerInput(input)) playerNum = input;
-    });
-
-    return playerNum;
-  }
-
   inputReplayNum() {
-    let replayNum;
-
     Console.readLine(GAME_MESSAGE.REPLAY_OR_STOP, (input) => {
-      if (validatePlayerInput.isValidReplayNum(input))
-        replayNum = parseInt(input);
-    });
+      validatePlayerInput.isValidReplayNum(input);
 
-    return replayNum;
+      if (parseInt(input) === GAME.RUN) this.play();
+      else Console.close();
+    });
   }
 
   getHint(computerNum, playerNum) {
@@ -124,5 +111,8 @@ class App {
       Console.print(`${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`);
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
