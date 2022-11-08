@@ -8,5 +8,16 @@ class App {
   pickUniqueNumber() {
     return MissionUtils.Random.pickUniqueNumbersInRange(0, 9, 3).join("");
   }
+  getInputNumber(pickedNumber) {
+    let strike = 0;
+    while (strike === 0)
+      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+        let gameResultComment = this.numberCheck(pickedNumber, number);
+        MissionUtils.Console.print(gameResultComment);
+        if (gameResultComment === "3스트라이크") {
+          strike = 3;
+        }
+      });
+  }
 }
 module.exports = App;
