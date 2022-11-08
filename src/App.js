@@ -28,6 +28,25 @@ class App {
       this.isRandomInputErrorCase(answer);
     });
   }
+
+  isRandomInputErrorCase(answer) {
+    const exceptionInput = answer;
+
+    const inputList = exceptionInput?.split("");
+    const setCollection = new Set(inputList);
+    const isSame = setCollection.size !== inputList?.length;
+
+    if (
+      exceptionInput?.split("").map(Number).includes(0) ||
+      exceptionInput?.split("").includes("-") ||
+      isNaN(exceptionInput) ||
+      exceptionInput?.toString().length !== 3 ||
+      isSame
+    ) {
+      throw new Error("잘못입력함. 종료");
+    }
+  }
+
 }
 
 const app = new App();
