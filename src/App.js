@@ -111,7 +111,7 @@ const isValidInput = (input) => {
   if (input.includes(0)) {
     return false;
   }
-  if (isDuplicated(input)) {
+  if (hasDuplicateNumber(input)) {
     return false;
   }
 
@@ -135,8 +135,4 @@ const isValidLengthInteger = (input) => {
   return true;
 };
 
-const isDuplicated = (input) => input.length !== new Set(input).size;
-
-if ((a = 1)) {
-  console.log("hello world");
-}
+const hasDuplicateNumber = (input) => input.length !== new Set(input).size;
