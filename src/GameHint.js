@@ -9,13 +9,10 @@ class GameHint {
       Validator.isValidRangeOfNumber,
       Validator.isUniqueNumber,
     ];
-    let isValid = false;
     checkList.forEach((validatorFunction) => {
-      isValid = validatorFunction(playerInput);
+      validatorFunction(playerInput);
     });
-    if (isValid) {
-      return this.isThreeStrike(randomNumbers, playerInput);
-    }
+    return this.isThreeStrike(randomNumbers, playerInput);
   }
 
   countStrike(randomNumbers, playerPickedNumbers) {
