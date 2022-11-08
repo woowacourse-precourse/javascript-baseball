@@ -60,6 +60,22 @@ class App {
         ball += 1;
       }
     }
+
+    this.printResult(strike, ball);
+  }
+
+  printResult(strike, ball) {
+    if (strike === 0 && ball === 0) MissionUtils.Console.print("낫싱");
+
+    if (strike > 0 && ball === 0)
+      MissionUtils.Console.print(`${strike}스트라이크`);
+
+    if (strike === 0 && ball > 0) MissionUtils.Console.print(`${ball}볼`);
+
+    if (strike > 0 && ball > 0)
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+
+    strike === 3 ? this.endGameAndNoticeNextStep() : this.getUserNumber();
   }
 }
 
