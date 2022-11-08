@@ -60,7 +60,24 @@ class App {
     this.showResult(STRIKE, BALL);
   }
 
-  showResult() {}
+  showResult(STRIKE, BALL) {
+    if (STRIKE === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.gameRestart();
+    } else {
+      this.userData();
+    }
+
+    if (STRIKE === 0 && BALL === 0) {
+      MissionUtils.Console.print("낫싱");
+    } else if (!BALL) {
+      MissionUtils.Console.print(`${STRIKE}스트라이크`);
+    } else {
+      MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+    }
+  }
+
+  gameRestart() {}
 }
 
 module.exports = App;
