@@ -31,6 +31,26 @@ class App {
   getUserInput(comment, callback) {
     MissionUtils.Console.readLine(comment, callback);
   }
+
+  compareRandomWithUserInput() {
+    this.getUserInput("숫자를 입력해주세요 : ", (answers) => {
+      this.userInput = [...answers];
+
+      this.giveScore();
+    });
+  }
+
+  giveScore() {
+    const result = {};
+
+    this.random.forEach((randomNum, i) => {
+      if (randomNum === +this.userInput[i]) {
+        result.strike = (result.strike ?? 0) + 1;
+      } else if (this.random.includes(+this.userInput[i])) {
+        result.ball = (result.ball ?? 0) + 1;
+      }
+    });
+  }
 }
 
 const app = new App();
