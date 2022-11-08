@@ -10,15 +10,7 @@ class App {
       let user = ""
       user = user_inputnumber();
 
-      if (user == 1){
-        throw "is not three numbers";
-      }
-      if (user == 2){
-        throw "is not number";
-      }
-      if (user == 3){
-        throw "is not a number from 1 to 9";
-      }
+      exception(user);
 
       let ball_strike_result = [0, 0];
       for (let i = 0; i < 3; i++){
@@ -111,6 +103,18 @@ function restart(){
   if (restartNumber == 2){
     MissionUtils.Console.print("게임 종료");
     return;
+  }
+}
+
+function exception(user){
+  if (user == 1){
+    throw "is not three numbers";
+  }
+  if (user == 2){
+    throw "is not number";
+  }
+  if (user == 3){
+    throw "is not a number from 1 to 9";
   }
 }
 
