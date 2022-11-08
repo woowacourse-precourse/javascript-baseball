@@ -18,6 +18,21 @@ function randNum() {
   }
 }
 
+function guessNum() {
+  Console.readLine("숫자를 입력해주세요", (answer) => {
+    if (!inputNum(answer)) {
+      throw "잘못된 값을 입력했습니다.";
+    }
+    const num = inputCount(Array.from(answer));
+    if (showNum(num) === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      endLine();
+    }
+    else {
+      guessNum();
+    }
+  });
+}
 
 function inputNum(input) {
   const allNum = /^[1-9]+$/; //1-9가 들어갔는지 확인
@@ -47,7 +62,6 @@ function inputCount(answer) {
   return count;
 }
 
-
 function showNum(obj) { // strike 리턴 함수
   const strikeNum = Number(obj.strike);
   const ballNum = Number(obj.ball);
@@ -70,7 +84,6 @@ function showNum(obj) { // strike 리턴 함수
   }
   return strikeNum;
 }
-
 
 function endLine() {
   Console.readLine(
