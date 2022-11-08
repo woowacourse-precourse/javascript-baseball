@@ -11,10 +11,10 @@ const mockQuestions = (answers) => {
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickUniqueNumbersInRange = jest.fn();
+  MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickUniqueNumbersInRange);
+  }, MissionUtils.Random.pickNumberInRange);
 };
 
 const getLogSpy = () => {
@@ -25,7 +25,7 @@ const getLogSpy = () => {
 
 describe("숫자 야구 게임 테스트", () => {
   test("게임 종료 후 재시작", () => {
-    const randoms = [[1, 3, 5], [5, 8, 9]];
+    const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
     const messages = [
@@ -48,7 +48,7 @@ describe("숫자 야구 게임 테스트", () => {
   });
 
   test("게임 결과 출력", () => {
-    const randoms = [[1, 3, 5], [5, 8, 9]];
+    const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "214", "213", "513", "154", "153", "124", "134", "135"];
     const logSpy = getLogSpy();
     const messages = [
@@ -76,7 +76,7 @@ describe("숫자 야구 게임 테스트", () => {
 
 describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", () => {
   test("2-1 숫자만 받기", () => {
-    const randoms = [[1, 3, 5]];
+    const randoms = [1, 3, 5];
     const answers = ["1a2"];
 
     mockRandoms(randoms);
@@ -89,7 +89,7 @@ describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", 
   });
 
   test("2-2 3자리 수만 받기", () => {
-    const randoms = [[1, 3, 5]];
+    const randoms = [1, 3, 5];
     const answers = ["1234"];
 
     mockRandoms(randoms);
@@ -102,7 +102,7 @@ describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", 
   });
 
   test("2-3 겹치는 숫자 없음", () => {
-    const randoms = [[1, 3, 5]];
+    const randoms = [1, 3, 5];
     const answers = ["112"];
 
     mockRandoms(randoms);
@@ -117,7 +117,7 @@ describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", 
 
 describe("6 게임 성공시 사용자 커맨드 받기 예외 처리 테스트", () => {
   test("잘못된 입력값", () => {
-    const randoms = [[1, 3, 5], [5, 8, 9]];
+    const randoms = [1, 3, 5];
     const answers = ["246", "135", "3"];
 
     mockRandoms(randoms);
