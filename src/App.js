@@ -1,4 +1,22 @@
 class App {
+    getScore(computer, user) {
+        let strike = 0;
+        for (let i = 0; i < 3; i++) {
+            if (computer[i].toString() === user[i]) {
+                strike++
+            }
+        }
+        let ball = 0;
+        for (let x of user) {
+            if (computer.includes(parseInt(x))) {
+                ball++
+            }
+        }
+        ball = ball - strike
+        let score = [];
+        score.push(strike, ball);
+        return score;
+    }
 
     play() {
         let computerNumber = new Set();
