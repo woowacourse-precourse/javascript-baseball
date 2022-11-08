@@ -1,10 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 function checkUserNumber(user_number) {
-  console.log(Number(user_number))
-  if(isNaN(user_number)) throw new Error("숫자만 입력해 주세요");
-  let user_numbers = user_number.split("")
-    .map((number) => Number(number));
+  if (isNaN(user_number)) throw new Error("숫자만 입력해 주세요");
+  let user_numbers = user_number.split("").map((number) => Number(number));
   if (user_numbers.length != 3) throw new Error("입력값이 세자리가 아닙니다");
   if (new Set(user_numbers).size != 3) throw new Error("중복된 값이 있습니다");
   return user_numbers;
@@ -89,7 +87,6 @@ function gameResultAfter() {
     }
   );
 }
-console.log(setGame())
 class App {
   play() {
     setGame();
