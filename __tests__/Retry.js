@@ -8,6 +8,7 @@ const GameJudgment = require("../src/GameJudgment");
 
 describe("Computer에서 랜덤숫자 배열 추출", () => {
   const computerInput = ComputerInput();
+
   test("컴퓨터에서 받아온 숫자가 중복이 없고 길이가 3인지 확인", () => {
     const checkDuplicates = new Set(computerInput).size;
 
@@ -17,6 +18,17 @@ describe("Computer에서 랜덤숫자 배열 추출", () => {
 
 describe("UserInput과 관련된 테스트", () => {
   const checkInputValid = new CheckInputValid();
+
+  test("UserInput 입력받기", (done) => {
+    function callback() {
+      MissionUtils.Console.readLine("숫자를 입력해주세요", (number) => {
+        expect(number).toBe(number);
+        done();
+      });
+    }
+    callback();
+  });
+
   test("유효성 체크: 1~9 사이의 숫자인지", () => {
     expect(checkInputValid.checkUserInput(["1", "2", "3"])).toBe(
       ERROR.USER_INPUT_PASS
