@@ -41,6 +41,8 @@ class App {
 
       let ballCount = this.findBall(playerNum, comNum)
 
+      const result=this.makeAnswer(strikeCount,ballCount)
+
       MissionUtils.Console.close()
     })
   }
@@ -109,6 +111,32 @@ class App {
 
     return ballCount
   }
+
+  makeAnswer(strikeCount,ballCount){
+    let result
+
+    if(strikeCount!==0 && ballCount!==0){
+      result=`${ballCount}볼 ${strikeCount}스트라이크`
+      return result
+    }
+
+    if(strikeCount!==0 && ballCount===0){
+      result=`${strikeCount}스트라이크`
+      return result
+    }
+
+    if(strikeCount===0 && ballCount!==0){
+      result=`${ballCount}볼`
+      return result
+    }
+
+    if(strikeCount===0 && ballCount===0){
+      result=`낫싱`
+      return result
+    }
+    
+  }
+
 }
 
 module.exports = App
