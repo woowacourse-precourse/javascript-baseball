@@ -14,9 +14,13 @@ class App {
     };
   }
 
-  async play() {
+  play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.makeRandomNums();
+    this.startGame();
+  }
+
+  async startGame() {
     await this.getInputNum();
     this.getResult();
   }
@@ -28,6 +32,7 @@ class App {
       if (!randomNums.includes(num)) randomNums.push(num);
     }
     this.randomNums = randomNums;
+    // this.randomNums = [1, 2, 3];
   }
 
   getInputNum() {
@@ -66,9 +71,8 @@ class App {
   }
 
   getResult() {
-    MissionUtils.Console.print(`getresult.random : ${this.randomNums}`);
-    // MissionUtils.Console.print(`getresult.input : ${this.inputNums}`);
     this.countBallAndStrike();
+    this.printResult();
   }
 
   countBallAndStrike() {
@@ -90,8 +94,37 @@ class App {
       result = BALL;
       if (value.inputIndex === value.randomIndex) result = STRIKE;
     }
+    this.addResultScore(result);
+  }
+
+  addResultScore(result) {
     if (result == BALL) this.gameResult.ball++;
     if (result == STRIKE) this.gameResult.strike++;
+  }
+
+  printResult() {
+    const count = this.gameResult;
+    let result = '';
+    if (this.gameResult.strike === 3) {
+      MissionUtils.Console.print('3스트라이크');
+      result = '3개의 숫자를 모두 맞히셨습니다! 게임종료';
+    } else if (count.ball === 0 && count.strike === 0) {
+      result = '낫싱';
+    } else {
+      result = App.caseOfBall(count.ball);
+      result += App.caseofStrike(count.strike);
+    }
+    MissionUtils.Console.print(result);
+  }
+
+  static caseOfBall(ball) {
+    if (ball !== NOTHING) return String(`${ball}볼 `);
+    return '';
+  }
+
+  static caseofStrike(strike) {
+    if (strike !== NOTHING) return String(`${strike}스트라이크 `);
+    return '';
   }
 }
 
