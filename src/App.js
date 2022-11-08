@@ -61,6 +61,24 @@ class App {
         const answerResult = result;
         return answerResult;
     }
+
+    // 6. 비교값에 대한 결과 출력
+    compareResultPrint(answerResult, computerDefineNum) {
+        if (answerResult["strike"] == 0 && answerResult["ball"] == 0) {
+            MissionUtils.Console.print("낫싱");
+        } else if (answerResult["strike"] == 3 && answerResult["ball"] == 0) {
+            MissionUtils.Console.print(`${answerResult["strike"]}스트라이크`);
+            MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+            this.newGameStart();
+        } else if (answerResult["strike"] == 0 && answerResult["ball"] > 0) {
+            MissionUtils.Console.print(`${answerResult["ball"]}볼`);
+        } else if (answerResult["strike"] > 0 && answerResult["ball"] == 0) {
+            MissionUtils.Console.print(`${answerResult["strike"]}스트라이크`);
+        } else {
+            MissionUtils.Console.print(`${answerResult["ball"]}볼 ${answerResult["strike"]}스트라이크`);
+        }
+        this.userInputValue(computerDefineNum, this.resetResult());
+    }
 }
 const app = new App();
 app.play();
