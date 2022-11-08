@@ -7,7 +7,7 @@ function handleException(inputs) {
 
 function exceptionCase(inputs) {
   const uniqueInputs = Array.from(new Set(inputs));
-  if (isNaN(inputs.join(""))) return 1;
+  if (Number.isNaN(Number(inputs.join("")))) return 1;
   if (inputs.length !== uniqueInputs.length) return 2;
   if (inputs.length !== 3) return 3;
   if (inputs.includes(0)) return 4;
