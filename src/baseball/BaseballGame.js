@@ -38,9 +38,9 @@ class BaseballGame {
     let strike = 0;
     let ball = 0;
     computerNumbersArr.forEach((number, index) => {
-      number === Number(userInputArr[index])
+      number === userInputArr[index]
         ? strike++
-        : userInputArr.includes(number.toString())
+        : userInputArr.includes(number)
         ? ball++
         : 0;
     });
