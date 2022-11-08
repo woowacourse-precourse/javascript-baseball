@@ -53,15 +53,14 @@ class BaseballGame {
     if (strike === 0 && ball === 0) {
       return Console.print("낫싱");
     }
-    const strikePrint = strike > 0 ? `${strike}스트라이크` : "";
-    ball === 0
+    const strikePrint = strike > 0 ? `${strike}스트라이크` : '';
+    (ball === 0)
       ? Console.print(`${strikePrint}`)
       : Console.print(`${ball}볼 ${strikePrint}`);
   }
 
   restartOrEndGame() {
     Console.readLine(GAME_MESSAGE.GAME_RESTART, (OneOrTwo) => {
-      console.log(OneOrTwo);
       if (OneOrTwo === "1") {
         return this.playGame();
       } else if (OneOrTwo === "2") {
