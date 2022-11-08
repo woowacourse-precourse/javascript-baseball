@@ -24,9 +24,25 @@ const getLogSpy = () => {
 };
 
 describe('handleCommand', () => {
-  test.todo('1이 들어오면 initGame()을 실행한다.');
+  test('1이 들어오면 initGame()을 실행한다.', () => {
+    const app = new App();
+    const initGameSpy = jest.spyOn(app, 'initGame');
+    initGameSpy.mockClear();
 
-  test.todo('2가 들어오면 quit()을 실행한다.');
+    app.handleCommand(1);
+
+    expect(initGameSpy).toBeCalledTimes(1);
+  });
+
+  test('2가 들어오면 Console.close()를 실행한다.', () => {
+    const closeSpy = jest.spyOn(MissionUtils.Console, 'close');
+    closeSpy.mockClear();
+    const app = new App();
+
+    app.handleCommand(2);
+
+    expect(closeSpy).toBeCalledTimes(1);
+  });
 
   test('1 또는 2가 아닌 값이 들어오면 에러가 발생한다.', () => {
     expect(() => {
