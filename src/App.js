@@ -51,6 +51,16 @@ class App {
     return stat;
   }
 
+  getHint(stat) {
+    let hintMessage = "";
+    if (stat.ball === 0 && stat.strike === 0) hintMessage += "낫싱";
+    else if (stat.ball > 0 && stat.strike > 0) hintMessage += `${stat.ball}볼 ${stat.strike}스트라이크`;
+    else if (stat.strike === 0) hintMessage += `${stat.ball}볼`;
+    else hintMessage += `${stat.strike}스트라이크`;
+
+    return hintMessage;
+  }
+
   play() {}
 }
 
