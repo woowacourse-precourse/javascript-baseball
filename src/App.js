@@ -3,14 +3,19 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   constructor() {
     this.isPlaying = true;
-    this.computerNumber = [];
+    this.computerNumberList = [];
+    this.userNumberList = [];
+    this.ballCount = 0;
+    this.strikeCount = 0;
   }
   // Expected 'this' to be used by class method 'play'.
 
   getRandomNumber() {
-    while (this.computerNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computerNumber.includes(number)) this.computerNumber.push(number);
+    while (this.computerNumberList.length < 3) {
+      const pickedNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computerNumberList.includes(pickedNumber)) {
+        this.computerNumberList.push(pickedNumber);
+      }
     }
   }
 
@@ -20,14 +25,40 @@ class App {
       guessNumber = x;
     });
     MissionUtils.Console.close();
-    return guessNumber.split('');
+    this.userNumberList = guessNumber.split('').reduce((prev, cur) => [...prev, Number(cur)], []);
   }
 
-  countStrike(guessNumber) {
-    const strike = this.computerNumber.filter(
-      (num, index) => num.toString() === guessNumber[index],
+  countStrike() {
+    this.strikeCount = this.computerNumberList.filter(
+      (num, index) => num === this.userNumberList[index],
     ).length;
-    return strike;
+  }
+
+  countBall() {
+    this.ballCount = 0;
+    this.computerNumberList.forEach((computerNum, index) => {
+      if (this.userNumberList.includes(computerNum) && this.userNumberList[index] !== computerNum) {
+        this.ballCount += 1;
+      }
+    });
+  }
+
+  getResult() {
+    if (this.strikeCount > 0 && this.ballCount > 0) {
+      return `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
+    }
+    if (this.strikeCount > 0) return `${this.strikeCount}스트라이크`;
+    if (this.ballCount > 0) return `${this.ballCount}볼`;
+    return '낫싱';
+  }
+
+  inputException() {
+    if (this.userNumberList.length !== 3) {
+      throw new Error('예외');
+    }
+    if (this.userNumberList.filter((num) => Number.isNaN(num)).length > 0) {
+      throw new Error('예외');
+    }
   }
 
   continueOrFinish() {
@@ -42,33 +73,6 @@ class App {
     return input;
   }
 
-  countBall(guessNumber) {
-    let ball = 0;
-    this.computerNumber.forEach((computerNum, index) => {
-      const num = computerNum.toString();
-      if (guessNumber.includes(num) && guessNumber[index] !== num) {
-        ball += 1;
-      }
-    });
-    return ball;
-  }
-
-  getResult(strike, ball) {
-    if (strike > 0 && ball > 0) return `${ball}볼 ${strike}스트라이크`;
-    if (strike > 0) return `${strike}스트라이크`;
-    if (ball > 0) return `${ball}볼`;
-    return '낫싱';
-  }
-
-  inputException(guessNumber) {
-    if (guessNumber.length !== 3) {
-      throw new Error('예외');
-    }
-    if (guessNumber.filter((num) => Number.isNaN(num)).length > 0) {
-      throw new Error('예외');
-    }
-  }
-
   chooseContinueFinish() {
     const input = this.continueOrFinish();
 
@@ -76,29 +80,25 @@ class App {
       MissionUtils.Console.print('게임 종료');
       this.isPlaying = false;
     } else {
-      this.computerNumber = [];
+      this.computerNumberList = [];
       this.getRandomNumber();
     }
   }
 
   playGame() {
-    // const IS_PLAYING = true;
-
-    const guessNumber = this.guessUserNumber();
+    this.guessUserNumber();
     try {
-      this.inputException(guessNumber);
+      this.inputException();
 
-      const strike = this.countStrike(guessNumber);
-      const ball = this.countBall(guessNumber);
-      MissionUtils.Console.print(this.getResult(strike, ball));
+      this.countStrike();
+      this.countBall();
+      MissionUtils.Console.print(this.getResult());
 
-      if (strike === 3) {
+      if (this.strikeCount === 3) {
         this.chooseContinueFinish();
       }
-      // inputException(this.guessNumber);
-    } catch (e) {
-      // IS_PLAYING = false;
-      // break;
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
     }
   }
 
