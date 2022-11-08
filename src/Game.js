@@ -14,11 +14,10 @@ class Game {
   }
 
   validateInput(userInput) {
-    return (
-      userInput.length === ANSWER.LENGTH &&
-      Boolean(userInput.match(/^[1-9]+$/)) &&
-      new Set([...userInput]).size === ANSWER.LENGTH
-    );
+    const checkLength = userInput.length === ANSWER.LENGTH;
+    const checkNumber = Boolean(userInput.match(/^[1-9]+$/));
+    const checkDuplicate = new Set([...userInput]).size === ANSWER.LENGTH;
+    return checkLength && checkNumber && checkDuplicate;
   }
 
   getResult(answer, userNumber) {
