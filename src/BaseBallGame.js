@@ -93,7 +93,7 @@ class BaseBallGame{
             if (parseInt(input) === 1){
                 this.start();
             }else if (parseInt(input) === 2){
-                return;
+                MissionUtils.Console.close();
             }else {
                 throw new Error("올바르지 않은 값이 입력됐습니다.");
             }
