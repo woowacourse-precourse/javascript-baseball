@@ -1,4 +1,5 @@
 const { NOTHING, BALL, STRIKE } = require("./Constant");
+const { Random } = require("@woowacourse/mission-utils");
 
 function makeHint(strike, ball) {
   const res = [];
@@ -26,4 +27,16 @@ function makeBallStrikeCount(input, randomNumbers) {
   return { strike, ball };
 }
 
-module.exports = { makeHint, makeBallStrikeCount };
+function makeRandomNumber() {
+  const res = [];
+  while (res.length < 3) {
+    const number = Random.pickNumberInRange(1, 9);
+    if (!res.includes(number)) {
+      res.push(number);
+    }
+  }
+
+  return res;
+}
+
+module.exports = { makeHint, makeBallStrikeCount, makeRandomNumber };
