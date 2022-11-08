@@ -42,25 +42,26 @@ class App {
 
   announceCurrectNumber(computer, strike, ball) {
     if (strike === 3) {
-      return this.gameOver()
+      return this.gameOver();
     }
-
     if (strike > 0 && ball > 0) {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-      this.getUserInput(computer);
+      this.printMent(computer, `${ball}볼 ${strike}스트라이크`);
     }
     if (strike > 0 && ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
-      this.getUserInput(computer);
+      this.printMent(computer, `${strike}스트라이크`);
     }
     if (strike === 0 && ball > 0) {
-      MissionUtils.Console.print(`${ball}볼`);
-      this.getUserInput(computer);
+      this.printMent(computer, `${ball}볼`);
     }
     if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print('낫싱');
-      this.getUserInput(computer);
+      this.printMent(computer, '낫싱');
     }
+    return false;
+  }
+
+  printMent(computer, ment) {
+    MissionUtils.Console.print(ment);
+    this.getUserInput(computer);
   }
 
   gameOver() {
