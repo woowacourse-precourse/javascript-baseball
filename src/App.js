@@ -75,6 +75,7 @@ class App {
         }
         if (input === "2") {
           Console.print("게임 종료");
+          Console.close();
           return;
         }
         throw new Error("잘못된 값을 입력하셨습니다.");
