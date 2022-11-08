@@ -52,8 +52,8 @@ class Validator {
   static #isOutOfRange(value) {
     value = value.join('');
     const regex = /^[1-9]*$/g;
-    regex.test(value);
-    return result;
+    const result = regex.test(value);
+    return !result;
   }
   static #isDuplicated(value) {
     const removeDuplicatedValue = [...new Set(value)];
