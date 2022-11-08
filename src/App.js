@@ -80,6 +80,15 @@ class App {
     });
     return { strike, ball };
   }
+
+  checkAnswer(strike, computerNumbers) {
+    if (strike === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.chooseRestartGame();
+    } else {
+      this.makeUserNumbers(computerNumbers);
+    }
+  }
 }
 
 module.exports = App;
