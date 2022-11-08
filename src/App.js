@@ -25,9 +25,10 @@ class App {
 
   requestAnswer(message) {
     Console.readLine(message, (answer) => {
+      answer = answer.split("").map(Number);
       validateAnswer(answer);
 
-      this.userAnswer = answer.split("").map(Number);
+      this.userAnswer = answer;
 
       const [strike, ball] = this.compareAnswer(this.answer, this.userAnswer);
       this.compareAnswerResult(strike, ball);

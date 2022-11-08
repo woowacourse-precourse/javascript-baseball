@@ -4,6 +4,7 @@ const MESSAGE = {
   ERROR: {
     ANSWER_LENGTH_MUST_BE_THREE: "입력 에러! 숫자 3자리를 입력해주세요!",
     ANSWER_IS_MUST_BE_DIFFERENT_EACH_NUMBER: "입력 에러! 숫자 3개는 각각 다른 숫자여야 합니다!",
+    ANSWER_IS_NOT_A_VALID_NUMBER: "입력 에러! 1~9까지의 값으로 이루어진 3가지 숫자를 입력하여야 합니다!",
   },
 
   COMPARE_ANSWER: {
