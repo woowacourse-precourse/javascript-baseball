@@ -17,9 +17,23 @@ function App() {
     computerNumbers: [],
   };
 
+  this.setState = (nextState) => {
+    this.state = {
+      ...this.state,
+      ...nextState,
+    };
+  };
+
   const initlalizeGame = () => {
     this.state.computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
     setUserInput(REQUIRE_NUMBER, getUserGameNumber);
+  };
+
+  const getUserGameNumber = (userInput) => {
+    validateUserNumber(userInput);
+    this.setState({
+      userNumbers: userInput,
+    });
   };
 
   this.play = () => {
