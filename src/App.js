@@ -79,7 +79,8 @@ function App() {
   };
 
   this.play = () => {
-    MissionUtils.Console.print(START_GAME);
+    printMessage(START_GAME);
+
     initlalizeGame();
   };
 }
