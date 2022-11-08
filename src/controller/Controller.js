@@ -1,7 +1,7 @@
-const View = require("../view/view");
-const ComputerNumber = require("../model/computerNumber");
-const UserGivenNumber = require("../model/userGivenNumber");
-const Validation = require("../utils/validation");
+const View = require("../view/View");
+const ComputerNumber = require("../model/ComputerNumber");
+const UserGivenNumber = require("../model/UserGivenNumber");
+const Validation = require("../utils/Validation");
 
 class Controller {
   constructor(isFirstGame) {

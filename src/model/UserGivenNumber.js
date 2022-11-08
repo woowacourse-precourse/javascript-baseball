@@ -1,5 +1,5 @@
-const Validation = require("../utils/validation");
-const View = require("../view/view");
+const Validation = require("../utils/Validation");
+const View = require("../view/View");
 
 // 유저가 제시한 수
 class UserGivenNumber {
