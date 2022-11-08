@@ -8,7 +8,13 @@ class App {
     }
 
     play() {
-        
+       this.gameProgram(); 
+    }
+
+    gameProgram() {
+        this.gameStartTextPrint();
+        const hintMessage = this.printHintMessage();
+        this.conditionsOfWin();
     }
 
     createRandomNumber() {
