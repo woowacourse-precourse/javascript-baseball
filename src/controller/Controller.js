@@ -91,7 +91,7 @@ class Controller {
 
     // 유효하지 않다면 throw error
     if (!isRestartUserInputValid) {
-      throw new Error(this.view.RESTART_INVALID_INPUT_COMMENT);
+      this.view.trowUserRestartInputError();
     }
 
     // 1번이라면 게임 재시작

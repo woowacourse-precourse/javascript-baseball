@@ -76,6 +76,11 @@ class View {
   throwUserGuessInputError() {
     throw new Error(this.WRONG_COMMENT);
   }
+
+  // 게임 제시작 의사 Input 에 대한 에러를 throw 한다.ㄴ
+  trowUserRestartInputError() {
+    throw new Error(this.RESTART_INVALID_INPUT_COMMENT);
+  }
 }
 
 module.exports = View;
