@@ -23,19 +23,26 @@ describe("기능 목록 테스트", () => {
     const log = jest.spyOn(MissionUtils.Console, "print");
     log.mockClear();
     const game = new Game();
+
     game.go();
+
     expect(log).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
+
   test("서로 다른 세자리 수 생성 및 1 ~ 9 숫자 확인", () => {
     const game = new Game();
+
     const randomNumber = game.createRandomNumber();
+
     expect(randomNumber.length).toEqual(3);
     randomNumber.forEach((number) => {
       expect(RANDOM_NUMBER.RANGE.test(number)).toBe(true);
     });
   });
+
   test("점수 출력 확인", () => {
     const game = new Game();
+
     const log = jest.spyOn(MissionUtils.Console, "print");
     log.mockClear();
 
@@ -48,6 +55,7 @@ describe("기능 목록 테스트", () => {
     game.printScore(2, 1);
     expect(log).toHaveBeenCalledWith("2볼 1스트라이크");
   });
+
   test("입력값과 정답 비교", () => {
     const game = new Game();
 
@@ -57,6 +65,7 @@ describe("기능 목록 테스트", () => {
     expect(ball).toEqual(1);
     expect(strike).toEqual(1);
   });
+
   test("input 유효성 검사", () => {
     const game = new Game();
 
@@ -80,9 +89,11 @@ describe("기능 목록 테스트", () => {
   });
 
   test("종료 후 메세지 출력 확인", () => {
+    const game = new Game();
+
     const log = jest.spyOn(MissionUtils.Console, "print");
     log.mockClear();
-    const game = new Game();
+
     const answer = [6, 7, 8];
     const input = ["678"];
 
@@ -108,13 +119,4 @@ describe("기능 목록 테스트", () => {
       game.play();
     }).toThrow();
   });
-
-  /*
-  종료 후 메세지 출력 확인
-  게임 종료 후 숫자 입력 => 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. 출력 확인
-    -1, 2가 아닌 숫자 입력시 예외처리
-        -1인 경우 재시작 확인
-        -2인 경우 종료 확인 
-        -1, 2가 아닌 경우 확인
-  */
 });
