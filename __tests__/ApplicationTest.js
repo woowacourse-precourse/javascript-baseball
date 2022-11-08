@@ -84,6 +84,18 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
+  test("입력 숫자에 0이 있는 경우", () =>{
+    const randoms = [1, 3, 5];
+    const answers = ["012"];
+    
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  })
+
   test("게임 재시작 시 잘못된 값 입력", () => {
     const randoms = [1, 3, 5];
     const answers = ["135", "3"];
