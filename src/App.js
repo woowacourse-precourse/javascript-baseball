@@ -11,8 +11,8 @@ class App {
   }
 
   getInputNumber() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.validCheckInputNumber(input);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputUserNumber) => {
+      this.validCheckInputNumber(inputUserNumber);
     });
   }
 
@@ -28,15 +28,15 @@ class App {
     return this.randomArray.join('');
   }
 
-  validCheckInputNumber(input) {
-    if (!String(input).match(/[1-9]/g) || new Set(input).size !== 3 || input.length !== 3) {
+  validCheckInputNumber(inputUserNumber) {
+    if (!String(inputUserNumber).match(/[1-9]/g) || new Set(inputUserNumber).size !== 3 || inputUserNumber.length !== 3) {
       throw Error('정확한 값을 입력하세요.');
-    } else { this.getInterimOutcome(input); }
+    } else { this.getInterimOutcome(inputUserNumber); }
   }
 
-  getInterimOutcome(input) {
-    const BALL = this.getBall(input);
-    const STRIKE = this.getStrike(input);
+  getInterimOutcome(inputUserNumber) {
+    const BALL = this.getBall(inputUserNumber);
+    const STRIKE = this.getStrike(inputUserNumber);
     if (STRIKE === 3) {
       this.getAnswer();
     } else if (BALL && !STRIKE) {
@@ -54,9 +54,9 @@ class App {
     }
   }
 
-  getBall(input) {
+  getBall(inputUserNumber) {
     let ball = 0;
-    [].forEach.call(input, (num, idx) => {
+    [].forEach.call(inputUserNumber, (num, idx) => {
       if (num !== this.computerNumber[idx] && this.computerNumber.includes(num)) {
         ball += 1;
         MissionUtils.Console.print(ball);
@@ -65,9 +65,9 @@ class App {
     return ball;
   }
 
-  getStrike(input) {
+  getStrike(inputUserNumber) {
     let strike = 0;
-    [].forEach.call(input, (num, idx) => {
+    [].forEach.call(inputUserNumber, (num, idx) => {
       if (num === this.computerNumber[idx]) {
         strike += 1;
         MissionUtils.Console.print(strike);
@@ -91,12 +91,12 @@ class App {
     );
   }
 
-  restart(input) {
-    if (input === '1') {
+  restart(inputRestartNumber) {
+    if (inputRestartNumber === '1') {
       this.start();
       this.getInputNumber();
     }
-    if (input === '2') {
+    if (inputRestartNumber === '2') {
       MissionUtils.Console.close();
     }
   }
