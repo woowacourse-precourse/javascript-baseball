@@ -163,4 +163,17 @@ describe('게임 종료 이후 단계 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('재시작 여부 입력값 예외 테스트', () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['135', 3];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('잘못된 입력입니다. 1 또는 2만 입력 가능합니다.');
+  });
 });
