@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {    
     let computerRandomNum = this.createRandomNumber();
@@ -126,7 +127,7 @@ class App {
     }
     return true;
   }
-}
+
   /*게임 종료 여부 선택하는 기능*/
   selectGameEnd(userInputNum){
     userInputNum=this.InputUserNumber();
@@ -142,7 +143,6 @@ class App {
     else{
       throw "입력이 잘못되었습니다."
     }
+  }
 }
-
-
 module.exports = App;
