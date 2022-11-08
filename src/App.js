@@ -24,8 +24,13 @@ class App {
     while (computerRandomNums.size < COMPUTER_NUM_LENGTH) {
       computerRandomNums.add(pickNumberInRange(MIN_UUM_RANGE, MAX_NUM_RANGE));
     }
+    print([...computerRandomNums]);
     return this.#computerNums = [...computerRandomNums].join('');
   }
+
+  // arrToString(arr) {
+  //   return arr.join('')
+  // }
 
   getAnswer() {
     readLine(GAME_MSG.NUM_REQUEST, (userInput) => {
@@ -90,19 +95,25 @@ class App {
   }
 
   restartOrEnd() {
-    readLine(GAME_MSG.RESTART_ASK, (answer) => {
+    readLine(GAME_MSG.RESTART_ASK, (userInput) => {
       const exceptionCheck = new ExceptionCheck();
-      // exceptionCheck.restartInputCheck(answer);
-      if (answer == RESTART_INPUT_NUM) {
+      exceptionCheck.restartInputCheck(userInput);
+      if (this.inputIsNumOne(userInput)) {
         app.play();
       }
-      if (answer == END_INPUT_NUM) {
+      if (this.inputIsNumTwo(userInput)) {
         print(GAME_MSG.END);
         close();
-      } else {
-        this.restartOrEnd();
       }
     });
+  }
+
+  inputIsNumOne(userInput) {
+    return Number(userInput) === RESTART_INPUT_NUM;
+  }
+
+  inputIsNumTwo(userInput) {
+    return Number(userInput) === END_INPUT_NUM;
   }
 }
 const app = new App();
