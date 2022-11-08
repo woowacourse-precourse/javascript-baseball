@@ -8,8 +8,12 @@ const intersection = (setA, setB) =>
 
 class App {
   constructor() {
-    this.computerNumberArray = [];
-    this.computerNumberSet = new Set();
+    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      9,
+      3,
+    );
+    this.computerNumberSet = new Set(this.computerNumberArray);
     this.userNumberInput = '';
     this.userNumberArray = [];
     this.userNumberSet = new Set();
@@ -82,12 +86,6 @@ class App {
   }
 
   gameProcess() {
-    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      3,
-    );
-    this.computerNumberSet = new Set(this.computerNumberArray);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.userNumberInput = input;
       // this.resultObject.ball += 1;
@@ -116,6 +114,12 @@ class App {
   }
 
   restart() {
+    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      9,
+      3,
+    );
+    this.computerNumberSet = new Set(this.computerNumberArray);
     this.gameProcess();
   }
 
