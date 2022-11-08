@@ -34,3 +34,24 @@ describe("isOnlyNumber 함수 테스트", () => {
     });
 });
 
+describe("areEachDifferent 함수 테스트", () => {
+    test("테스트 1", () => {
+        const result = areEachDifferent('123');
+
+        expect(result).toEqual(true);
+    });
+
+    test("테스트 2", () => {
+        const result = areEachDifferent('122');
+
+        expect(result).toEqual(false);
+    });
+
+
+    test("테스트 3", () => {
+        const result = areEachDifferent('121');
+
+        expect(result).toEqual(false);
+    });
+});
+
