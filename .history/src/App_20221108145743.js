@@ -4,11 +4,12 @@ class App {
     let doRestart;
     do {
       doRestart = 2;
+
       this.start();
-      MissionUtils.Console.readLine("ê²Œì„ì„ ìƒˆë¡œ ì‹œì‘í•˜ë ¤ë©´ 1, ì¢…ë£Œí•˜ë ¤ë©´ 2ë¥¼ ì…ë ¥í•˜ì„¸ìš”.",(Restart)=>{
+      MissionUtils.Console.readline("°ÔÀÓÀ» »õ·Î ½ÃÀÛÇÏ·Á¸é 1, Á¾·áÇÏ·Á¸é 2¸¦ ÀÔ·ÂÇÏ¼¼¿ä.",(Restart)=>{
         doRestart = Restart;
       })
-    } while (doRestart == 1);
+    } while (doRestart === '1');
     MissionUtils.Console.close();
   }
 
@@ -16,32 +17,17 @@ class App {
     let computerNumber;
     let status = 0;
 
-    MissionUtils.Console.print('ìˆ«ì ì•¼êµ¬ ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.');
+    MissionUtils.Console.print('¼ıÀÚ ¾ß±¸ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.');
     computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
     do {
-      MissionUtils.Console.readLine('ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ',(input)=>{
-      if(this.checkArgument(input))
-        throw 'ì˜ëª»ëœ ì…ë ¥ì…ë‹ˆë‹¤.'
+      MissionUtils.Console.readLine('¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ',(input)=>{
       let inputToInt=[];
       for(let c of input)
         inputToInt.push(parseInt(c));
       status = this.checkAnswer(inputToInt, computerNumber);
       })
-    } while (status != 0);
-    MissionUtils.console.print('3ê°œì˜ ìˆ«ìë¥¼ ëª¨ë‘ ë§íˆì…¨ìŠµë‹ˆë‹¤! ê²Œì„ ì¢…ë£Œ')
-  }
-
-  checkArgument(input){
-    const numStr = "0123456789";
-    let   checkNum = new Array(10);
-    if(input.length != 3)
-      return true;
-    for(let i = 0;i<3;i++){
-      if(!numStr.includes(input[i]) || checkNum.indexOf(input[i]) != -1)
-        return true;
-      checkNum.push(input[i]);
-    }
-    return false;
+    } while (status !== 0);
+    MissionUtils.console.print('3°³ÀÇ ¼ıÀÚ¸¦ ¸ğµÎ ¸ÂÈ÷¼Ì½À´Ï´Ù! °ÔÀÓ Á¾·á')
   }
 
   checkAnswer(input, computerNumber){
@@ -56,13 +42,13 @@ class App {
       ball+= this.checkBall(input[i],computerNumber);
     }
   if ( strike === 0 && ball === 0){
-    MissionUtils.Console.print('ë‚«ì‹±');
+    MissionUtils.Console.print('³´½Ì');
     return ;
   }
   if (ball > 0)
-  MissionUtils.Console.print(ball+'ë³¼ ')
+  MissionUtils.Console.print(ball+'º¼ ')
   if (strike > 0 )
-  MissionUtils.Console.print(strike+'ìŠ¤íŠ¸ë¼ì´í¬')
+  MissionUtils.Console.print(strike+'½ºÆ®¶óÀÌÅ©')
   if (strike === 3)
     flag = 1;
   }
@@ -76,5 +62,8 @@ class App {
     return 0;
   }
 }
+
+// const app = new App();
+// app.play();
 
 module.exports = App;
