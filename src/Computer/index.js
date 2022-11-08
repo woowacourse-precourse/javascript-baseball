@@ -16,7 +16,15 @@ class Computer {
   }
 
   resetComputer() {
-    this.#Numbers = Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.#Numbers = this.getRandomsNumStr(1, 9, 3);
+  }
+  getRandomsNumStr(start, end, size) {
+    const randomNums = [];
+    while (randomNums.length < size) {
+      const nums = Random.pickNumberInRange(start, end);
+      if (!randomNums.includes(nums)) randomNums.push(nums);
+    }
+    return randomNums;
   }
 }
 
