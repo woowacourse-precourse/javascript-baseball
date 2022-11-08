@@ -1,7 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const makeNumber = () => {
-  const result = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  const result = [];
+  while (result.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!result.includes(number)) {
+      result.push(number);
+    };
+  };
   return result;
 };
 
