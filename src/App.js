@@ -128,6 +128,8 @@ class App {
           this.restart();
         } else if (input === '2') {
           MissionUtils.Console.close();
+        } else {
+          throw new Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
         }
       },
     );
