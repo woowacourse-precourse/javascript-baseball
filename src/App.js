@@ -1,22 +1,32 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  chooseStartEnd(chooseNum) {
+    
+  }
+
+  getCorrectAnswer() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (chooseNum) => {
+      this.chooseStartEnd(chooseNum);
+    });
+  }
+
   getHint(compareResult) {
-    if(compareResult[0] === 3) {
-      Console.print("3스트라이크");
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (compareResult[0] === 3) {
+      MissionUtils.Console.print("3스트라이크");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.getCorrectAnswer();
-    } 
-    if(compareResult[0] != 0 && compareResult[1] !=0) {
-      Console.print(`${compareResult[1]}볼 ${compareResult[0]}스트라이크`);
-      this.inputUserNum(randomNum);
-    } 
-    if(compareResult[1] != 0) {
-      Console.print(`${compareResult[1]}볼`);
+    }
+    if (compareResult[0] != 0 && compareResult[1] != 0) {
+      MissionUtils.Console.print(`${compareResult[1]}볼 ${compareResult[0]}스트라이크`);
       this.inputUserNum(randomNum);
     }
-    if(compareResult[2] != 0) {
-      Console.print("낫싱");
+    if (compareResult[1] != 0) {
+      MissionUtils.Console.print(`${compareResult[1]}볼`);
+      this.inputUserNum(randomNum);
+    }
+    if (compareResult[2] != 0) {
+      MissionUtils.Console.print("낫싱");
       this.inputUserNum(randomNum);
     }
   }
@@ -50,7 +60,7 @@ class App {
   }
 
   inputUserNum(randomNum) {
-    Console.readLine("숫자를 입력해주세요 : ", (getUserNum) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (getUserNum) => {
       this.checkUserNum(randomNum, getUserNum);
     });
   }
@@ -65,7 +75,7 @@ class App {
   }
 
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getComputerNum();
   }
 }
