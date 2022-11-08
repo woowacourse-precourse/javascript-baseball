@@ -43,6 +43,13 @@ class App {
     }
   }
 
+  setStrike(numbers) {
+    this.strike = numbers.reduce(
+      (count, number, index) => (number === this.baseballNumber[index] ? count + 1 : count),
+      0
+    );
+  }
+
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.pickNumber();
