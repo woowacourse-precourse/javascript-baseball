@@ -79,6 +79,7 @@ describe("숫자 야구 게임", () => {
 
   test("(NEW) 게임 재시작 여부 1 또는 2가 아닌 기타 입력", () => {
     // 새로운 테스트 케이스
+    // 게임 재시작 명령으로 1 또는 2가 아닌 기타 명령이 들어온 경우 재차 물어본다.
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "137", "135", "a", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
@@ -110,7 +111,7 @@ describe("숫자 야구 게임", () => {
   });
 
   test("(NEW) 예외 테스트 - 숫자 이외의 입력", () => {
-    // 사용자 입력에 숫자가 아닌 것이 포함된 경우
+    // 사용자 입력에 숫자가 아닌 것(특수문자)이 포함된 경우
     const randoms = [1, 3, 5];
     const answers = ["1?4"];
 
@@ -127,6 +128,20 @@ describe("숫자 야구 게임", () => {
     // 사용자 입력에 숫자가 아닌 것이 포함된 경우
     const randoms = [1, 3, 5];
     const answers = ["1a4"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("(NEW) 예외 테스트 - 숫자 이외의 입력", () => {
+    // 사용자 입력에 숫자가 아닌 것(특수문자)이 포함된 경우
+    const randoms = [1, 3, 5];
+    const answers = ['1"4'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
