@@ -62,13 +62,12 @@ function printHint(computerNumber, userNumber) {
     if (posSameNumber === index) strikeCount++;
     else if (posSameNumber != -1) ballCount++;
   }
-  let hintMessage = "";
+  let hintMessage = "낫싱";
   if (ballCount === 0) {
-    if (strikeCount === 0) hintMessage = "낫싱";
-    else hintMessage += strikeCount + "스트라이크";
+    if (strikeCount !== 0) hintMessage = `${strikeCount}스트라이크`;
   } else {
-    hintMessage += ballCount + "볼";
-    if (strikeCount !== 0) hintMessage += " " + strikeCount + "스트라이크";
+    hintMessage = `${ballCount}볼`;
+    if (strikeCount !== 0) hintMessage += ` ${strikeCount}스트라이크`;
   }
   MissionUtils.Console.print(hintMessage);
   if (strikeCount === 3) return true;
