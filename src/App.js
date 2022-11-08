@@ -1,18 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-
-const MESSAGE = {
-  PLAY: '숫자 야구 게임을 시작합니다.',
-  QUIT: '게임 종료',
-  WIN: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  REPLAY_OR_QUIT: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-  HIT_BALLS: '숫자를 입력해주세요 : ',
-};
-
-const SCORE = {
-  ball: '볼',
-  strike: '스트라이크',
-  nothing: '낫싱',
-};
+const { MESSAGE, SCORE, RANDOM, GAME } = require('./constants');
 
 class App {
   #answer = [];
@@ -30,7 +17,7 @@ class App {
   play(type) {
     if (type !== 'WRONG_ANSWER') {
       Console.print(MESSAGE.PLAY);
-      this.#answer = App.#pickRandomNumbers(3);
+      this.#answer = App.#pickRandomNumbers(RANDOM.PICK_NUM);
     }
     this.#hitBalls();
     this.#judgeBallStrike();
@@ -41,7 +28,7 @@ class App {
   static #pickRandomNumbers(count) {
     const result = new Set();
     while (result.size !== count) {
-      const random = Random.pickNumberInRange(1, 9);
+      const random = Random.pickNumberInRange(RANDOM.MIN, RANDOM.MAX);
       result.add(random);
     }
     return Array.from(result);
@@ -59,15 +46,15 @@ class App {
       throw new Error('inputValue must be numbers.');
     }
 
-    if (numbersArray.length !== 3) {
+    if (numbersArray.length !== RANDOM.PICK_NUM) {
       throw new Error('numbers length must be 3.');
     }
 
-    if (new Set(numbersArray).size !== 3) {
+    if (new Set(numbersArray).size !== RANDOM.PICK_NUM) {
       throw new Error('inputValue cannot be duplicated');
     }
 
-    if (numbersArray.filter((n) => !(n >= 1 && n <= 9)).length > 0) {
+    if (numbersArray.filter((n) => !(n >= RANDOM.MIN && n <= RANDOM.MAX)).length > 0) {
       throw new Error('inputValue cannot be grater than 9 or less than 1');
     }
   }
@@ -76,8 +63,9 @@ class App {
     this.#initScore();
     this.balls.forEach((ball, idx) => {
       const answerIdx = this.#answer.indexOf(ball);
+      const isNothing = answerIdx === -1;
 
-      if (answerIdx === -1) {
+      if (isNothing) {
         return;
       }
 
@@ -103,7 +91,7 @@ class App {
   }
 
   #resultGame() {
-    if (this.score.strike === 3) {
+    if (this.score.strike === RANDOM.PICK_NUM) {
       this.#win();
       return;
     }
@@ -117,12 +105,12 @@ class App {
   }
 
   #replayOrQuit(input) {
-    if (input === '1') {
+    if (input === GAME.REPLAY) {
       this.play();
       return;
     }
 
-    if (input === '2') {
+    if (input === GAME.QUIT) {
       App.quit();
       return;
     }
