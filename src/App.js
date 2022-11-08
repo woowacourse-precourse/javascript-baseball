@@ -29,6 +29,10 @@ class App {
     });
   }
 
+  makeStrToArr(input) {
+    return input.split("");
+  }
+
   makeAnswer() {
     if (this.answer.length) this.answer = "";
     while (this.answer.length < 3) {
@@ -39,8 +43,9 @@ class App {
 
   makeResult(input) {
     const initialBoard = { strike: 0, ball: 0 };
+    const inputArr = this.makeStrToArr(input);
 
-    const scoreBoard = input.split("").reduce((acc, cur, idx) => {
+    const scoreBoard = inputArr.reduce((acc, cur, idx) => {
       if (this.answer[idx] === cur) return { ...acc, strike: acc.strike + 1 };
       if (this.answer.includes(cur)) return { ...acc, ball: acc.ball + 1 };
       return acc;
@@ -67,7 +72,9 @@ class App {
   }
 
   isGameOver() {
-    return this.input.split("").every((num, idx) => num === this.answer[idx]);
+    return this.makeStrToArr(this.input).every(
+      (num, idx) => num === this.answer[idx]
+    );
   }
 }
 
