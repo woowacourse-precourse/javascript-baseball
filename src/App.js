@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
+// const MESSAGE = require("./constants");
+// const { START, INPUT, THREE_STRIKE, BALL, STRIKE, ASK_CONTINUE } = MESSAGE;
 
 class App {
     constructor() {
@@ -7,24 +9,28 @@ class App {
     }
 
     play() {
-        this.quizNumber = this.makeQuizNumber();
-        this.makeQuizNumber();
         this.startGame();
     }
 
     makeQuizNumber() {
         let quizNumber = [];
-
         while (quizNumber.length < 3) {
-            let randomInt = Random.pickNumberInRange(1, 9).toString();
+            let randomInt = Random.pickNumberInRange(1, 9);
             !quizNumber.includes(randomInt) && quizNumber.push(randomInt);
         }
-
-        return quizNumber;
+        return quizNumber.join("");
     }
 
-    isValidInput(input) {
-        return input.length === 3 && !isNaN(Number(input)) && input[0] !== "0";
+    isNumber(input) {
+        return !isNaN(Number(input));
+    }
+
+    isValidNum(input) {
+        return input.length === 3 && input[0] !== "0";
+    }
+
+    isNotDuplicated(input) {
+        return new Set(input).size !== 3;
     }
 
     printMessage(message) {
@@ -33,15 +39,22 @@ class App {
 
     startGame() {
         this.printMessage("숫자 야구 게임을 시작합니다");
+        this.quizNumber = this.makeQuizNumber();
         this.inputNumber();
     }
 
     inputNumber() {
         Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-            this.checkScore(this.quizNumber, answer);
-            if (!this.isValidInput(answer)) {
-                throw new Error("잘못된 수를 입력하였습니다.");
+            if (!this.isNumber(answer)) {
+                throw new Error("숫자를 입력해주세요.");
+            } else if (!this.isNotDuplicated(answer)) {
+                throw new Error("중복되지 않은 수를 입력해주세요.");
+            } else if (!this.isValidNum(answer)) {
+                throw new Error(
+                    "3자리수 이며, 시작하는 수는 0이 될 수 없습니다."
+                );
             }
+            this.checkScore(this.quizNumber, answer);
         });
     }
 
@@ -75,7 +88,10 @@ class App {
     }
 
     printStrikeBall(score) {
-        if (score.strike > 0 && score.ball > 0) {
+        if (score.strike === 3) {
+            this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료!");
+            this.askContinue();
+        } else if (score.strike > 0 && score.ball > 0) {
             Console.print(`${score.ball}볼 ${score.strike}스트라이크`);
             this.inputNumber();
         } else if (score.strike === 0 && score.ball === 0) {
@@ -87,8 +103,6 @@ class App {
         } else if (score.ball > 0) {
             Console.print(`${score.ball}볼`);
             this.inputNumber();
-        } else if (score.strike === 3) {
-            this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료!");
         }
     }
 
@@ -98,7 +112,7 @@ class App {
 
     askContinue() {
         Console.readLine(
-            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
             (answer) => {
                 if (answer == 1) {
                     this.startGame();
