@@ -36,7 +36,6 @@ class App {
     // 게임 결과 출력 message
     if(strike == 3) {
       MissionUtils.Console.print("3개의 스트라이크\n 3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
     } else if (ball > 0 && strike > 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     } else if (ball > 0 && strike == 0) {
@@ -46,6 +45,15 @@ class App {
     } else if ( ball == 0 && strike == 0) {
       MissionUtils.Console.print("낫싱");
     }
+
+    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+    MissionUtils.Console.readLine('', (answer) => {
+      if(answer == 1) {
+        this.play();
+      } else if (answer == 2) {
+        console.close();
+      }
+    });
   }
 }
 
