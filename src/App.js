@@ -84,6 +84,19 @@ const makeResponseMessage = (strikeCount, ballCount) => {
   }
 };
 
+const checkContinue = (inputNumber) => {
+  if (inputNumber === "1") {
+    startGame(getComputerNumber());
+  }
+  if (inputNumber === "2") {
+    MissionUtils.Console.close();
+  }
+  if (inputNumber !== "1" && inputNumber !== "2") {
+    MissionUtils.Console.print("입력 오류 게임을 종료합니다.");
+    MissionUtils.Console.close();
+  }
+};
+
 const getComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
