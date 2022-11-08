@@ -11,7 +11,6 @@ class App {
     while (gameState === 1) {
       let pickedNumber = this.pickUniqueNumber();
       this.getInputNumber(pickedNumber);
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
         (answer) => {
@@ -32,6 +31,9 @@ class App {
         MissionUtils.Console.print(gameResultComment);
         if (gameResultComment === "3스트라이크") {
           strike = 3;
+          return MissionUtils.Console.print(
+            "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+          );
         }
       });
   }
