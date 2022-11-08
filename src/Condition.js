@@ -1,0 +1,13 @@
+const MAX_NUM_RANGE = 9;
+const MIN_UUM_RANGE = 1;
+const COMPUTER_NUM_LENGTH = 3;
+const RESTART_INPUT_NUM = 1;
+const END_INPUT_NUM = 2;
+
+module.exports = {
+  MAX_NUM_RANGE,
+  MIN_UUM_RANGE,
+  COMPUTER_NUM_LENGTH,
+  RESTART_INPUT_NUM,
+  END_INPUT_NUM
+};
