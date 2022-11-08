@@ -82,6 +82,10 @@ class App {
   }
 
   isValidQuestionInput(input) {
+    if (!this.isValidInput(input)) {
+      return;
+    }
+
     const numbers = input.split('').map(Number);
 
     if (!numbers.every(isNumber)) {
@@ -104,6 +108,10 @@ class App {
   }
 
   isValidCommandInput(input) {
+    if (!this.isValidInput(input)) {
+      return;
+    }
+
     const COMMANDS = Object.values(RESTART_COMMAND);
 
     if (!COMMANDS.includes(input)) {
@@ -118,10 +126,6 @@ class App {
   }
 
   setCurrentQuestion(input) {
-    if (!this.isValidInput(input)) {
-      return;
-    }
-
     if (!this.isValidQuestionInput(input)) {
       return;
     }
@@ -186,10 +190,6 @@ class App {
       [RESTART_COMMAND.NEW_GAME]: this.startNewGame.bind(this),
       [RESTART_COMMAND.EXIT]: this.exitApp.bind(this),
     };
-
-    if (!this.isValidInput(input)) {
-      return;
-    }
 
     if (!this.isValidCommandInput(input)) {
       return;
