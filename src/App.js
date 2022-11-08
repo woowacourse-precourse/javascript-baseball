@@ -11,15 +11,25 @@ const {
     ISNOTVALIDNUMBER,
     NOTHING,
 } = require("./Message");
+const { isNotDuplicated, isValidNum, isNumber } = require("./InputValidation");
 
 class App {
     constructor() {
         this.quizNumber = "";
     }
 
+    printMessage(message) {
+        Console.print(message);
+    }
+
     play() {
         this.printMessage(START);
         this.startGame();
+    }
+
+    startGame() {
+        this.quizNumber = this.makeQuizNumber();
+        this.inputNumber();
     }
 
     makeQuizNumber() {
@@ -31,34 +41,13 @@ class App {
         return quizNumber.join("");
     }
 
-    isNumber(input) {
-        return !isNaN(Number(input));
-    }
-
-    isValidNum(input) {
-        return input.length === 3 && input[0] !== "0";
-    }
-
-    isNotDuplicated(input) {
-        return new Set(input).size === 3;
-    }
-
-    printMessage(message) {
-        Console.print(message);
-    }
-
-    startGame() {
-        this.quizNumber = this.makeQuizNumber();
-        this.inputNumber();
-    }
-
     inputNumber() {
         Console.readLine(INPUT, (answer) => {
-            if (!this.isNumber(answer)) {
+            if (!isNumber(answer)) {
                 throw new Error(ISNOTNUMBER);
-            } else if (!this.isValidNum(answer)) {
+            } else if (!isValidNum(answer)) {
                 throw new Error(ISNOTVALIDNUMBER);
-            } else if (!this.isNotDuplicated(answer)) {
+            } else if (!isNotDuplicated(answer)) {
                 throw new Error(ISDUPLICATED);
             }
             this.checkScore(this.quizNumber, answer);
@@ -88,9 +77,9 @@ class App {
     }
 
     checkScore(quizNumber, input) {
-        let ball = this.checkBall(quizNumber, input);
-        let strike = this.checkStrike(quizNumber, input);
-        let score = { strike: strike, ball: ball };
+        const ball = this.checkBall(quizNumber, input);
+        const strike = this.checkStrike(quizNumber, input);
+        const score = { strike: strike, ball: ball };
         return this.printStrikeBall(score);
     }
 
