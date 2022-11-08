@@ -36,6 +36,12 @@ class Input {
     this.clear(this.value);
     this.makeNumberArray(input).forEach((element) => this.value.push(element));
   }
+
+  saveRandom() {
+    this.save(
+      this.randomDiffNumberArray(NUMBER.START, NUMBER.END, NUMBER.TOTAL)
+    );
+  }
 }
 
 module.exports = Input;
