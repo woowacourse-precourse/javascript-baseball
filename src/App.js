@@ -38,12 +38,13 @@ class App {
   }
 
   makeResult(input) {
-    const scoreBoard = { strike: 0, ball: 0 };
+    const initialBoard = { strike: 0, ball: 0 };
 
-    input.split("").forEach((num, idx) => {
-      if (this.answer[idx] === num) scoreBoard.strike += 1;
-      else if (this.answer.includes(num)) scoreBoard.ball += 1;
-    });
+    const scoreBoard = input.split("").reduce((acc, cur, idx) => {
+      if (this.answer[idx] === cur) return { ...acc, strike: acc.strike + 1 };
+      if (this.answer.includes(cur)) return { ...acc, ball: acc.ball + 1 };
+      return acc;
+    }, initialBoard);
 
     const { strike, ball } = scoreBoard;
 
