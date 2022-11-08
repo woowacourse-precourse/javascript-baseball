@@ -53,10 +53,14 @@ class App {
     const ball = count.ball(this.#userInputNums, this.#computerNums);
     const strike = count.strike(this.#userInputNums, this.#computerNums);
     countPrint.ofBaseball(ball, strike);
-    if (strike === COMPUTER_NUM_LENGTH) {
+    if (this.threeStrikes(strike, COMPUTER_NUM_LENGTH)) {
       this.win();
     }
     this.getAnswer();
+  }
+
+  threeStrikes(strike, lenghIsThree) {
+    return strike === lenghIsThree;
   }
 
   win() {
