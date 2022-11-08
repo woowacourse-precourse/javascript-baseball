@@ -147,6 +147,18 @@ describe('숫자 야구 게임 시작 테스트', () => {
     });
   });
 
+  test('게임 종료 시 1과 2가 아닌 값 입력한 경우의 테스트', () => {
+    const user = new User();
+
+    const restartExitInputArray = ['3', '4', '0', 'a', 'z', 'abc', ''];
+
+    restartExitInputArray.forEach((item) => {
+      expect(() => user.checkRestartOrExit(Number(item))).toThrow(
+        `${constants.GAME_RESTART}과 ${constants.GAME_END}만 입력 가능합니다. 잘못된 값이 입력 되었습니다.`
+      );
+    });
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
