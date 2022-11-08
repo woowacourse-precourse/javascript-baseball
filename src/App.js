@@ -5,7 +5,7 @@ class App {
   constructor(){}
 
   play() {
-    console.log('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     return this.startGame();
   }
 
@@ -17,6 +17,7 @@ class App {
 
   makeComputerNumber () {
     let makedComputerNum = this.makeRandomNum();
+    console.log(makedComputerNum)
     return this.computerNumber.push(makedComputerNum.join(''))
   }
 
@@ -101,11 +102,12 @@ class App {
     const ballResult = results[1];
 
     if (strikeResult == 3) {
-      console.log('3개의 숫자를 모두 맞히셨습니다! 게임종료');
+      MissionUtils.Console.print('3스트라이크')
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
       return this.chooseReStart();
     }
     if (strikeResult == 0 && ballResult == 0){
-      console.log('낫싱');
+      MissionUtils.Console.print('낫싱');
       return this.getUserNumber(computerNum)
     }
     else {
@@ -115,9 +117,9 @@ class App {
 
   scoreSpeaker(ballResult, strike, computerNum) {
     const announcement = []
-    if (ballResult > 0) announcement.push(ballResult + ' 볼');
-    if (strike > 0) announcement.push(strike + ' 스트라이크');
-    console.log(announcement.join(' '));
+    if (ballResult > 0) announcement.push(ballResult + '볼');
+    if (strike > 0) announcement.push(strike + '스트라이크');
+    MissionUtils.Console.print(announcement.join(' '));
     setTimeout(() => {return this.getUserNumber(computerNum);})
   }
 
