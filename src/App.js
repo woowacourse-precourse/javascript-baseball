@@ -23,6 +23,9 @@ class App {
     if (isNaN(userNumber) === true) {
       throw "숫자를 입력해주세요.";
     }
+    if (userNumbers.includes(0) === true) {
+      throw "1~9 사이에 숫자를 입력해주세요.";
+    }
     if (userNumber.length !== 3) {
       throw "3자리로 입력해주세요.";
     }
@@ -62,18 +65,20 @@ class App {
   }
 
   gameFinishOption() {
-    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-    Console.readLine("", (number) => {
-      if (number === "1") {
-        return this.getUserInput();
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (number) => {
+        if (number === "1") {
+          return this.getUserInput();
+        }
+        if (number === "2") {
+          Console.print("게임 종료");
+          Console.close();
+          return;
+        }
+        throw new Error("옳바른 값을 입력해주세요.");
       }
-      if (number === "2") {
-        Console.print("게임 종료");
-        Console.close();
-        return;
-      }
-      throw new Error("옳바른 값을 입력해주세요.");
-    });
+    );
   }
 
   createComputerNumber() {
