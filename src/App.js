@@ -5,7 +5,6 @@ class App {
   play() {
     showStartMessage();
     const randomNumber = makeRandomNumber();
-    console.log(randomNumber);
     getUsersPrediction(randomNumber);
   }
 }
