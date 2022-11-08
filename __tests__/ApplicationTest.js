@@ -84,14 +84,14 @@ describe("숫자 야구 게임", () => {
 
   test("사용자의 숫자 입력을 받아 저장한다.", () => {
     const userInput = ["123"];
-    const userNumber = [1, 2, 3];
+    const question = [1, 2, 3];
 
     mockQuestions(userInput);
 
     const app = new App();
     app.play();
 
-    expect(app.userNumber).toEqual(userNumber);
+    expect(app.question).toEqual(question);
   });
 
   test("아무 문자없이 입력이 일어난 경우 예외를 발생시키고 애플리케이션을 종료한다.", () => {

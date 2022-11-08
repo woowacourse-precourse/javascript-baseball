@@ -11,9 +11,9 @@ const {
 } = Utils;
 
 class App {
-  _userNumber = null;
+  _question = null;
   _answer = null;
-  _isPlaying = false;
+  _isGameEnd = false;
 
   constructor(digit = 3, minNumber = 1, maxNumber = 9) {
     this.digit = digit;
@@ -22,12 +22,12 @@ class App {
     this.MESSAGES = new Messages(digit, minNumber, maxNumber);
   }
 
-  set isPlaying(boolean) {
-    this._isPlaying = boolean;
+  set isGameEnd(boolean) {
+    this._isGameEnd = boolean;
   }
 
-  get isPlaying() {
-    return this._isPlaying;
+  get isGameEnd() {
+    return this._isGameEnd;
   }
 
   set answer(number) {
@@ -38,12 +38,12 @@ class App {
     return this._answer;
   }
 
-  set userNumber(number) {
-    this._userNumber = number;
+  set question(number) {
+    this._question = number;
   }
 
-  get userNumber() {
-    return this._userNumber;
+  get question() {
+    return this._question;
   }
 
   isValidDigit(numbers) {
@@ -58,7 +58,7 @@ class App {
     throw new err(`${message}\n${this.MESSAGES.endProgram}`);
   }
 
-  isValidUserNumberInput(input) {
+  isValidQuestionInput(input) {
     const numbers = input.split("").map(Number);
 
     if (isEmptyInput(input)) {
@@ -88,14 +88,14 @@ class App {
     return true;
   }
 
-  inputUserNumbers(input) {
-    if (!this.isValidUserNumberInput(input)) {
+  inputQuestion(input) {
+    if (!this.isValidQuestionInput(input)) {
       return;
     }
 
-    this.userNumber = input.split("").map(Number);
-    this.isPlaying = true;
+    this.question = input.split("").map(Number);
   }
+
   restart(input) {
     const COMMANDS = {
       1: this.newGame.bind(this),
@@ -124,11 +124,10 @@ class App {
   }
 
   continueGame(input) {
-    this.inputUserNumbers(input);
-    const result = this.getGameResult();
-    this.printGameResult(result);
+    this.inputQuestion(input);
+    this.printGameResult(this.getGameResult());
 
-    if (!this.isPlaying) {
+    if (this.isGameEnd) {
       this.confirmRestart();
       return;
     }
@@ -140,7 +139,7 @@ class App {
     let sameDigitCount = 0;
     let sameNumberCount = 0;
 
-    this.userNumber.forEach((number, idx) => {
+    this.question.forEach((number, idx) => {
       if (number === this.answer[idx]) {
         sameDigitCount++;
         return;
@@ -154,30 +153,32 @@ class App {
     return { sameDigitCount, sameNumberCount };
   }
 
+  isCorrectNumber(sameDigitCount) {
+    if (sameDigitCount !== this.digit) {
+      return false;
+    }
+
+    return true;
+  }
+
   getGameResult() {
     const { sameDigitCount, sameNumberCount } = this.compareNumbers();
-    // TODO: 불필요한 console.log 제거
-    console.log(this.answer);
+
     if (!sameDigitCount && !sameNumberCount) {
       return this.MESSAGES.resultNothing;
     }
 
-    if (sameDigitCount === this.digit) {
-      this.isPlaying = false;
+    if (!this.isCorrectNumber(sameDigitCount)) {
+      const balls = this.MESSAGES.resultBall(sameNumberCount);
+      const whiteSpace = (sameDigitCount && sameNumberCount && " ") || "";
+      const strikes = this.MESSAGES.resultStrike(sameDigitCount);
 
-      let result = this.MESSAGES.resultCorrect;
-      result += this.MESSAGES.endGame;
-
-      return result;
+      return balls + whiteSpace + strikes;
     }
 
-    let result = `${this.MESSAGES.resultBall(sameNumberCount)}`;
-    if (sameNumberCount && sameDigitCount) {
-      result += " ";
-    }
-    result += `${this.MESSAGES.resultStrike(sameDigitCount)}`;
+    this.isGameEnd = true;
 
-    return result;
+    return this.MESSAGES.resultCorrect;
   }
 
   printGameResult({ sameDigitCount, sameNumberCount }) {
@@ -186,23 +187,22 @@ class App {
     Console.print(gameResult);
   }
 
-  setAnswer() {
+  setNewAnswer() {
     this.answer = createUniqueNumbers({
       count: this.digit,
       minNumber: this.minNumber,
       maxNumber: this.maxNumber,
     });
+
+    this.isGameEnd = false;
   }
 
   runGame() {
-    Console.readLine(
-      this.MESSAGES.insertUserNumber,
-      this.continueGame.bind(this)
-    );
+    Console.readLine(this.MESSAGES.inputQuestion, this.continueGame.bind(this));
   }
 
   newGame() {
-    this.setAnswer();
+    this.setNewAnswer();
     this.runGame();
   }
 
