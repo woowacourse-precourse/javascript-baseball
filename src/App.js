@@ -2,6 +2,18 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Opponent = require("./Opponent");
 const User = require("./User");
 
+const ERROR_MSG = {
+  // 에러 메시지 관련 문자열 상수
+  UNAVAILABLE_RESTART: "불가능한 재시작 명령입니다.",
+};
+
+const GAME_MSG = {
+  // 게임 메시지 관련 문자열 상수
+  START: "숫자 야구 게임을 시작합니다.",
+  END: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+};
+
 class App {
   constructor() {
     this.opponent = new Opponent(); //상대방 등장
@@ -9,7 +21,7 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(GAME_MSG.START);
     // this.gameStart();
     let restartGame = "1"; // 게임 진행 중에는 재시작 여부를 1로 지정
     while (restartGame === "1") {
@@ -24,7 +36,7 @@ class App {
     // 게임 재시작 명령 유효성 검사
     // 1 또는 2 이외의 명령 시 재시작 또는 종료를 수행하지 않고 다시 입력받는다.
     while (restartGame !== "1" && restartGame !== "2") {
-      MissionUtils.Console.print("불가능한 재시작 명령입니다.");
+      MissionUtils.Console.print(ERROR_MSG.UNAVAILABLE_RESTART);
       restartGame = this.gameRestart();
     }
     return restartGame;
@@ -46,7 +58,7 @@ class App {
   gameEnd(ballAndStrike) {
     // 3스트라이크 여부 검사
     if (ballAndStrike[1] === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.print(GAME_MSG.END);
       return true;
     }
     return false;
@@ -55,7 +67,7 @@ class App {
   gameRestart() {
     // 사용자로부터 게임 재시작 명령 입력 받음
     let restartGame;
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (restartInput) => {
+    MissionUtils.Console.readLine(GAME_MSG.RESTART, (restartInput) => {
       restartGame = restartInput.toString().split("");
     });
     return restartGame[0]; // 사용자 입력에서 첫번째 원소 반환
