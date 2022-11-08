@@ -46,3 +46,11 @@ describe('게임 시작 전 테스트', () => {
     test(`정답 생성`, answerTest);
   }
 });
+describe('게임 참여 단계 테스트', () => {
+  test('게임 시작 문구 출력 테스트', () => {
+    const logpy = getLogSpy();
+    const app = new App();
+    app.play();
+    expect(logpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  });
+});
