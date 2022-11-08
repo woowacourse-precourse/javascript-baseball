@@ -29,7 +29,7 @@ class App {
       console.log(userNumber);
       this.checkUserNumber(userNumber);
       this.processNumber(computer, userNumber);
-      MissionUtils.Console.close();
+      //MissionUtils.Console.close();
     });
   }
   checkUserNumber(array) {
@@ -40,9 +40,11 @@ class App {
   processNumber(computer, user) {
     let ballCount = 0;
     let strikeCount = 0;
+    let count = 0;
     computer.forEach((number, int) => {
       if (number === user[int]) {
         strikeCount += 1;
+        count += 1;
       } else if (user.includes(number)) {
         ballCount += 1;
       }
@@ -59,6 +61,26 @@ class App {
         ballCount + " 볼, " + strikeCount + " 스트라이크"
       );
     }
+
+    if (strikeCount === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.askReplayGame();
+    } else if (strikeCount !== 3) {
+    }
+  }
+
+  askReplayGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (askAnswer) => {
+        if (askAnswer === "1") {
+          this.play();
+        } else if (askAnswer === "2") {
+          MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
+        }
+      }
+    );
   }
 }
 const app = new App();
