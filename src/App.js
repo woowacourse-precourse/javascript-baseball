@@ -35,6 +35,22 @@ class App {
     }
   }
 
+  getStats(userInput, answerNumbers) {
+    const userNumbers = userInput.split("").map((el) => Number(el));
+    const stat = {
+      ball: 0,
+      strike: 0,
+    };
+
+    userNumbers.forEach((userNumber, userNumberIndex) => {
+      if (answerNumbers.includes(userNumber)) {
+        userNumber === answerNumbers[userNumberIndex] ? (stat.strike += 1) : (stat.ball += 1);
+      }
+    });
+
+    return stat;
+  }
+
   play() {}
 }
 
