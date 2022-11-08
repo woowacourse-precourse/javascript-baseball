@@ -33,7 +33,10 @@ class GetScore {
 
   getBallCount(computerNumArr, userNumArr) {
     return userNumArr.reduce((acc, currentValue, index) => {
-      if (computerNumArr[index] !== currentValue && computerNumArr.includes(currentValue)) {
+      if (
+        computerNumArr[index] !== currentValue &&
+        computerNumArr.includes(currentValue)
+      ) {
         return acc + 1;
       }
       return acc;
