@@ -1,4 +1,5 @@
 const BaseballGame = require("./BaseballGame.js");
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
@@ -6,6 +7,7 @@ class App {
   }
 
   play() {
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.baseballGame.startGame();
   }
 }
