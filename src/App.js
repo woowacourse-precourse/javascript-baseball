@@ -4,8 +4,12 @@ let user;
 let computer;
 let isEndGame = true;
 let result = true;
-const game_start = "숫자 야구 게임을 시작합니다.";
-
+const GAME_START = "숫자 야구 게임을 시작합니다.";
+const WRONG_INPUT = "잘못 입력하셨습니다.";
+const NOTHING = "낫싱";
+const INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+const RESTART_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+const END_MESSAGE = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 function ballCount(userInputNumbersArray, computerPickNumbersArray) {
   let ball = 0;
   for (let i = 0; i < userInputNumbersArray.length; i += 1) {
@@ -30,14 +34,12 @@ function showResult() {
   const ball = ballCount(user, computer);
   const strike = strikeCount(user, computer);
   if (strike === 3) {
-    MissionUtils.Console.print(
-      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-    );
+    MissionUtils.Console.print(END_MESSAGE);
     result = false;
     return;
   }
   if (ball === 0) {
-    MissionUtils.Console.print("낫싱");
+    MissionUtils.Console.print(NOTHING);
     result = true;
     return;
   }
@@ -62,11 +64,11 @@ function computerPickNumbers() {
 function checkInputError() {
   const userInputArray = user.split("");
   if (userInputArray.length !== 3) {
-    throw new Error("잘못 입력하셨습니다.");
+    throw new Error(WRONG_INPUT);
   }
   for (let i = 0; i < userInputArray.length; i += 1) {
     if (Number.isNaN(userInputArray[i])) {
-      throw new Error("잘못 입력하셨습니다.");
+      throw new Error(WRONG_INPUT);
     }
   }
   if (
@@ -74,36 +76,33 @@ function checkInputError() {
     userInputArray[1] === userInputArray[2] ||
     userInputArray[0] === userInputArray[2]
   ) {
-    throw new Error("잘못 입력하셨습니다.");
+    throw new Error(WRONG_INPUT);
   }
   if (userInputArray.includes("0")) {
-    throw new Error("잘못 입력하셨습니다.");
+    throw new Error(WRONG_INPUT);
   }
   user = userInputArray.map((value) => Number(value));
 }
 
 function userInput() {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+  MissionUtils.Console.readLine(INPUT_MESSAGE, (answer) => {
     console.log(`${answer}`);
     user = answer;
   });
 }
 
 function restartShutdown() {
-  MissionUtils.Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (answer) => {
-      console.log(`${answer}`);
-      if (answer === 1) {
-        isEndGame = true;
-      }
-      if (answer === 2) {
-        MissionUtils.Console.close();
-        isEndGame = false;
-      }
-      throw new Error("잘못 입력하셨습니다.");
+  MissionUtils.Console.readLine(RESTART_MESSAGE, (answer) => {
+    console.log(`${answer}`);
+    if (answer === 1) {
+      isEndGame = true;
     }
-  );
+    if (answer === 2) {
+      MissionUtils.Console.close();
+      isEndGame = false;
+    }
+    throw new Error(WRONG_INPUT);
+  });
 }
 function init() {
   user = undefined;
@@ -123,7 +122,7 @@ function startGame() {
 
 class App {
   play() {
-    MissionUtils.Console.print(game_start);
+    MissionUtils.Console.print(GAME_START);
     startGame();
     while (isEndGame) {
       restartShutdown();
