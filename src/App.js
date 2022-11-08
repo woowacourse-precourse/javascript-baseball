@@ -18,6 +18,22 @@ class App {
         return score;
     }
 
+    currentScore(score) {
+        console.log(score[0], score[1])
+        if (score[0] === 0 && score[1] === 0) {
+            MissionUtils.Console.print("낫싱")
+        } else if (score[0] !== 0 && score[1] === 0) {
+            MissionUtils.Console.print(`${score[0]}스트라이크`)
+        } else if (score[0] === 0 && score[1] !== 0) {
+            MissionUtils.Console.print(`${score[1]}볼`)
+        } else if (score[0] !== 0 && score[1] !== 0) {
+            MissionUtils.Console.print(`${score[1]}볼 ${score[0]}스트라이크`)
+        }
+        if (score[0] === 3) {
+            MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n")
+        }
+    }
+
     play() {
         let computerNumber = new Set();
         while (computerNumber.size < 3) {
