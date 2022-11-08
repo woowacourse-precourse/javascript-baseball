@@ -1,7 +1,9 @@
 const BaseballGame = require("./BaseballGame");
 
 class App {
-  game = new BaseballGame();
+  constructor() {
+    this.game = new BaseballGame();
+  }
 
   play() {
     this.game.startGame();

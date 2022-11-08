@@ -4,8 +4,10 @@ const getHint = require("./Hint");
 const Computer = require("./Computer");
 
 class BaseballGame {
-  hint = "";
-  computer = new Computer();
+  constructor() {
+    this.hint = "";
+    this.computer = new Computer();
+  }
 
   setHint(correctNumber, inputNumber) {
     this.hint = getHint(correctNumber, inputNumber);

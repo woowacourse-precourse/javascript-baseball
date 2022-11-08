@@ -1,7 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class Computer {
-  correctNumber = getRandomNumber();
+  constructor() {
+    this.correctNumber = getRandomNumber();
+  }
 
   setNewCorrectNumber() {
     this.correctNumber = getRandomNumber();
