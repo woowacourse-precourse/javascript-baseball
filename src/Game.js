@@ -8,27 +8,24 @@ class Game {
   start(randomNumber) {
     let playerNumber;
     let insertingNumber = true;
-    let isContinue = true;
 
-    while (insertingNumber) {
-      MissionUtils.Console.readLine("", (inputNumber) => {
-        console.log(`숫자를 입력해주세요 : ${inputNumber}`);
-        playerNumber = inputNumber;
-      });
-      MissionUtils.Console.close();
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      console.log(`${inputNumber}`);
+      playerNumber = inputNumber;
 
       if (this.isValidNumber(playerNumber)) {
-        var splittedNumber = Array.from(playerNumber + "");
+        const toNumber = (arg) => Number(arg);
+        var splittedNumber = Array.from(playerNumber + "", toNumber);
 
         insertingNumber = this.checkingResult(randomNumber, splittedNumber);
-      } else {
-        throw new Error("잘못된 입력으로 게임 종료");
+
+        if (insertingNumber === false) {
+          return this.over();
+        }
+
+        return this.start(randomNumber);
       }
-    }
-
-    isContinue = this.over();
-
-    return isContinue;
+    });
   }
 
   over() {
@@ -37,20 +34,26 @@ class Game {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
       (inputNumber) => {
         restart = inputNumber;
         console.log(`${inputNumber}`);
+        MissionUtils.Console.close();
       }
     );
-    MissionUtils.Console.close();
 
-    if (restart === 1) {
-      return true;
-    } else if (restart === 2) {
-      throw new Error("게임 종료");
+    try {
+      if (restart === 1) {
+        return true;
+      } else if (restart === 2) {
+        throw "게임 종료";
+      }
+    } catch (e) {
+      MissionUtils.Console.print(e);
     }
   }
+
+  setUserNumber() {}
 
   setRandomNumber() {
     while (this.computer.length < 3) {
