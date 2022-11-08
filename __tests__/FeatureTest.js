@@ -1,5 +1,5 @@
-const App = require("../src/App");
 const { Random } = require("@woowacourse/mission-utils");
+const App = require("../src/App");
 
 const app = new App();
 
@@ -20,7 +20,7 @@ describe("generate valid game number", () => {
 
       return true;
     };
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       const gameNumbers = app.selectGameNumbers();
       expect(isThreeDifferntDigitWithoutZero(gameNumbers)).toBe(true);
     }
@@ -53,7 +53,7 @@ describe("game input validation test", () => {
   });
 
   test("valid input test", () => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       const input = generateValidInput();
       expect(app.isValidGameInput(input)).toBe(true);
     }
@@ -78,20 +78,20 @@ describe("parse user input", () => {
 
 describe("game result", () => {
   test("count same index same number", () => {
-    const case1_1 = [1, 2, 3];
-    const case1_2 = [2, 3, 1];
+    const case11 = [1, 2, 3];
+    const case12 = [2, 3, 1];
     const result1 = 0;
 
-    const case2_1 = [7, 4, 3];
-    const case2_2 = [4, 6, 3];
+    const case21 = [7, 4, 3];
+    const case22 = [4, 6, 3];
     const result2 = 1;
 
-    const case3_1 = [8, 5, 2];
-    const case3_2 = [8, 5, 2];
+    const case31 = [8, 5, 2];
+    const case32 = [8, 5, 2];
     const result3 = 3;
 
-    expect(app.getNumOfSameIndexSameNumber(case1_1, case1_2)).toEqual(result1);
-    expect(app.getNumOfSameIndexSameNumber(case2_1, case2_2)).toEqual(result2);
-    expect(app.getNumOfSameIndexSameNumber(case3_1, case3_2)).toEqual(result3);
+    expect(app.getNumOfSameIndexSameNumber(case11, case12)).toEqual(result1);
+    expect(app.getNumOfSameIndexSameNumber(case21, case22)).toEqual(result2);
+    expect(app.getNumOfSameIndexSameNumber(case31, case32)).toEqual(result3);
   });
 });
