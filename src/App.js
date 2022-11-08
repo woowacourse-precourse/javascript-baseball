@@ -16,7 +16,6 @@ const startGame = () => {
 }
 
 const quitGame = () => {
-  MissionUtils.Console.print('게임 종료');
   MissionUtils.Console.close();
 }
 
