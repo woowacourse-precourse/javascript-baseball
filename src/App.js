@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 const {
   START_NUMBER,
   END_NUMBER,
@@ -24,14 +24,14 @@ class App {
   }
 
   printMessage(message) {
-    MissionUtils.Console.print(message);
+    Console.print(message);
   }
 
   generateComputerNumber() {
     const computerNumber = [];
 
     while (computerNumber.length < 3) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      const randomNumber = Random.pickNumberInRange(1, 9);
 
       if (!computerNumber.includes(randomNumber)) {
         computerNumber.push(randomNumber);
@@ -43,7 +43,7 @@ class App {
 
   input(message) {
     return new Promise((resolve) => {
-      MissionUtils.Console.readLine(message, resolve);
+      Console.readLine(message, resolve);
     });
   }
 
@@ -116,7 +116,7 @@ class App {
 
     if (result === ``) result += `${NOTHING}`;
 
-    MissionUtils.Console.print(result.trim());
+    Console.print(result.trim());
   }
 
   selectedNumberException(selectedNumber) {
@@ -131,7 +131,7 @@ class App {
 
     if (selectedNumber === NEW_GAME) this.startNewGame();
 
-    if (selectedNumber === EXIT_GAME) MissionUtils.Console.close();
+    if (selectedNumber === EXIT_GAME) Console.close();
   }
 
   checkAnswer(strike) {
