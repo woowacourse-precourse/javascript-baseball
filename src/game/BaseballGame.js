@@ -25,11 +25,7 @@ class BaseballGame {
 
   getResult(randomNumber) {
     Console.readLine(GAME_MESSAGE.input, (input) => {
-      const valid = Validator.inputValidator(input);
-
-      if (!valid.isValid) {
-        throw valid.message;
-      }
+      Validator.inputValidator(input);
 
       const { ball, strike } = this.calculator.calcScore(input, randomNumber);
 

@@ -1,30 +1,35 @@
 const { NUMBER_LENGTH, ERROR_MESSAGE } = require('../constant/constant');
 
-const errorMessage = {
-  print(message) {
-    return { isValid: false, message };
-  },
-};
-
 class Validator {
   static inputValidator(input) {
+    this.hasValidLength(input);
+    this.hasValidType(input);
+    this.hasValidRange(input);
+    this.hasNoneDuplicateNumbers(input);
+  }
+
+  static hasValidLength(input) {
     if (input.length !== NUMBER_LENGTH) {
-      return errorMessage.print(ERROR_MESSAGE.length);
+      throw new Error(ERROR_MESSAGE.length);
     }
+  }
 
+  static hasValidType(input) {
     if (isNaN(input)) {
-      return errorMessage.print(ERROR_MESSAGE.type);
+      throw new Error(ERROR_MESSAGE.type);
     }
+  }
 
+  static hasValidRange(input) {
     if (input.includes('0')) {
-      return errorMessage.print(ERROR_MESSAGE.range);
+      throw new Error(ERROR_MESSAGE.range);
     }
+  }
 
+  static hasNoneDuplicateNumbers(input) {
     if ([...new Set(input)].length !== NUMBER_LENGTH) {
-      return errorMessage.print(ERROR_MESSAGE.duplication);
+      throw new Error(ERROR_MESSAGE.duplication);
     }
-
-    return { isValid: true };
   }
 }
 
