@@ -7,4 +7,13 @@ describe("기능 테스트", () => {
         app.openingOutput();
         expect(consoleSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
     });
+    test("2. 컴퓨터의 수 랜덤으로 생성 기능", () => {
+        const TEST_LIST = app.createRandomValue();
+        expect(TEST_LIST.length).toBe(3);
+
+        TEST_LIST.forEach(number => {
+            expect(number).toBeGreaterThan(0);
+            expect(number).toBeLessThan(10);
+        })
+    })
 });
