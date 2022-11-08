@@ -64,7 +64,16 @@ class App {
     } else {
       MissionUtils.Console.print(result);
     }
+    this.replay(strike, computerArr);
   }
+
+  /** 5. 게임종료까지 반복하는 기능 구현 */
+  replay(strike, computerArr) {
+    if(strike !== 3) {
+      this.userInput(computerArr);
+    }
+  }
+
 }
 
 const app = new App();
