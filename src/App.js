@@ -103,7 +103,11 @@ class Game {
 
   reselectButton(input){
     this.validation.isValidationUserReselectButtonInput(input);
-  
+    
+    if(input === BUTTON.재시작){
+      this.startGame();
+    }
+
   }
 }
 
