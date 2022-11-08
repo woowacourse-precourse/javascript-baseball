@@ -97,8 +97,8 @@ class gameStart {
     else {
       Console.print("낫싱");
     }
+    this.user();
   }
-
 }
 
 class InputCheck {
