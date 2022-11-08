@@ -5,9 +5,7 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
   play() {
-    // 컴퓨터 랜덤 값 생성
     this.computerRandomValue = RandomChoice();
-    // 사용자 값 입력
     this.userInput();
   }
   userInput() {
@@ -26,31 +24,6 @@ class App {
       return this.userInput();
     }
     gameClear();
-  }
-}
-
-// function checkGameClear(strikeCount) {
-//   gameClear;
-// }
-
-function gameClear() {
-  const validation = new Validation();
-  MissionUtils.Console.readLine(
-    "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (value) => {
-      validation.checkUserEndInput(value);
-      askRestart(value);
-    }
-  );
-}
-
-function askRestart(value) {
-  if (+value === 1) {
-    app.play();
-  }
-  if (+value === 2) {
-    MissionUtils.Console.print("게임 종료");
-    MissionUtils.Console.close();
   }
 }
 
@@ -114,6 +87,27 @@ function getResult(strike, ball) {
     resultMessage = "낫싱";
   }
   MissionUtils.Console.print(resultMessage);
+}
+
+function gameClear() {
+  const validation = new Validation();
+  MissionUtils.Console.readLine(
+    "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (value) => {
+      validation.checkUserEndInput(value);
+      askRestart(value);
+    }
+  );
+}
+
+function askRestart(value) {
+  if (+value === 1) {
+    app.play();
+  }
+  if (+value === 2) {
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.close();
+  }
 }
 
 const app = new App();
