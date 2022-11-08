@@ -34,6 +34,12 @@ describe('숫자 야구 게임', () => {
     expect(app.makeRandomNumbers()).toEqual([1, 2, 3]);
   });
 
+  test('사용자 숫자 배열 변경 테스트', () => {
+    const number = '123';
+
+    expect(app.changeUserNumbersToArray(number)).toEqual([1, 2, 3]);
+  });
+
   test('게임 종료 후 재시작', () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ['246', '135', '1', '597', '589', '2'];
