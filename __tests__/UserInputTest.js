@@ -3,33 +3,33 @@ const { mockQuestions } = require('../src/TestUtils');
 
 describe('사용자 입력 검사', () => {
   test('올바른 입력 검사 1', () => {
-    const answers = ['123'];
+    const userInput = ['123'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
-    expect(App.getUserInput().join('')).toEqual(answers[0]);
+    expect(App.getUserInput().join('')).toEqual(userInput[0]);
   });
 
   test('올바른 입력 검사 2', () => {
-    const answers = ['456'];
+    const userInput = ['456'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
-    expect(App.getUserInput().join('')).toEqual(answers[0]);
+    expect(App.getUserInput().join('')).toEqual(userInput[0]);
   });
 
   test('올바른 입력 검사 3', () => {
-    const answers = ['789'];
+    const userInput = ['789'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
-    expect(App.getUserInput().join('')).toEqual(answers[0]);
+    expect(App.getUserInput().join('')).toEqual(userInput[0]);
   });
 
   test('잘못된 숫자 범위 검사 1', () => {
-    const answers = ['012'];
+    const userInput = ['012'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -37,9 +37,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 숫자 범위 검사 2', () => {
-    const answers = ['290'];
+    const userInput = ['290'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -47,9 +47,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 숫자 범위 검사 3', () => {
-    const answers = ['012'];
+    const userInput = ['012'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -57,9 +57,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 길이 검사 1', () => {
-    const answers = ['2'];
+    const userInput = ['2'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -67,9 +67,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 길이 검사 2', () => {
-    const answers = ['73'];
+    const userInput = ['73'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -77,9 +77,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 길이 검사 3', () => {
-    const answers = ['1987'];
+    const userInput = ['1987'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -87,9 +87,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 문자 검사 1', () => {
-    const answers = ['32삼'];
+    const userInput = ['32삼'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -97,9 +97,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 문자 검사 2', () => {
-    const answers = ['사오육'];
+    const userInput = ['사오육'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -107,9 +107,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('잘못된 입력 문자 검사 3', () => {
-    const answers = ['def'];
+    const userInput = ['def'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -117,9 +117,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('중복 숫자 입력 검사 1', () => {
-    const answers = ['111'];
+    const userInput = ['111'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -127,9 +127,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('중복 숫자 입력 검사 2', () => {
-    const answers = ['989'];
+    const userInput = ['989'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
@@ -137,9 +137,9 @@ describe('사용자 입력 검사', () => {
   });
 
   test('중복 숫자 입력 검사 3', () => {
-    const answers = ['477'];
+    const userInput = ['477'];
 
-    mockQuestions(answers);
+    mockQuestions(userInput);
 
     expect(() => {
       App.getUserInput();
