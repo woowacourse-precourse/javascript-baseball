@@ -117,8 +117,7 @@ class App {
 
   // 기능 6
   printResult(checkResult) {
-    const ball = checkResult[0];
-    const strike = checkResult[1];
+    const [ball, strike] = checkResult;
 
     if (checkResult === TEXT.NOTHING) {
       MissionUtils.Console.print(RESULT_MESSAGE.NOTHING);
