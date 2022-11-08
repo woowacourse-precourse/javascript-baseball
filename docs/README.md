@@ -1,0 +1,25 @@
+- [X] 게임을 시작한다는 문구 출력
+- [X] computer는 randomNumber 생성
+- [X] player는 입력을 받아옴
+- [X] judge가 입력값이 유효한지 판단
+  - [X] 입력값이 숫자로만 이루어져있는지 확인
+  - [X] 입력 길이 확인
+  - [X] 숫자 중복 여부 확인
+- [X] 입력이 유효할 경우 컴퓨터와 사용자의 수 비교
+- [X] 결과 출력
+- [X] 재시작 여부 선택
+---
+- computer : 랜덤 숫자 생성
+- player : 숫자 입력, 재시작 여부 선택
+- judge : 유효성 판단, 숫자 비교, 비교 결과 전달
+- app : 게임 시작
+---
+- START_MESSAGE = "숫자 야구 게임을 시작합니다."
+- FINISH_MESSAGE = "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+- RESTART_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요"
+- INPUT_MESSAGE = "숫자를 입력하세요."
+- BALL = "볼"
+- STRIKE = "스트라이크"
+- NOTHING = "낫싱"
+- LENGTH = 3
+- RANGE, MIN = 1, MAX = 9
