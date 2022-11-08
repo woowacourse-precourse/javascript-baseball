@@ -44,6 +44,28 @@ class App {
       }
     }
   }
+
+  /**
+   * input randomNumDigit, checkNumDigit and check ball&strike count
+   * @param {array} randomDigit
+   * @param {array} checkDigit
+   * @returns [strikeCount, ballCount]
+   */
+  getBallAndStrike(randomDigit, checkDigit) {
+    let strikeCount = 0;
+    let ballCount = 0;
+
+    checkDigit.forEach((digit, idx) => {
+      if (randomDigit[idx] === digit) {
+        strikeCount += 1;
+      } else {
+        if (randomDigit.includes(digit)) {
+          ballCount += 1;
+        }
+      }
+    });
+    return [strikeCount, ballCount];
+  }
 }
 
 module.exports = App;

@@ -50,4 +50,50 @@ describe('Application Unit Test', () => {
       }).toThrow();
     });
   });
+
+  describe('getBallAndStrike method test', () => {
+    test('it must be 3 strike ([1,2,3], [1,2,3])', () => {
+      const app = new App();
+
+      const [strikeCount, ballCount] = app.getBallAndStrike(
+        [1, 2, 3],
+        [1, 2, 3]
+      );
+      expect(strikeCount).toEqual(3);
+      expect(ballCount).toEqual(0);
+    });
+
+    test('it must be 3 ball ([1,2,3], [3,1,2])', () => {
+      const app = new App();
+
+      const [strikeCount, ballCount] = app.getBallAndStrike(
+        [1, 2, 3],
+        [3, 1, 2]
+      );
+      expect(strikeCount).toEqual(0);
+      expect(ballCount).toEqual(3);
+    });
+
+    test('it must be 1 ball, 1 strike ([3,1,4], [3,4,2])', () => {
+      const app = new App();
+
+      const [strikeCount, ballCount] = app.getBallAndStrike(
+        [3, 1, 4],
+        [3, 4, 2]
+      );
+      expect(strikeCount).toEqual(1);
+      expect(ballCount).toEqual(1);
+    });
+
+    test('it must be 0 ball, 0 strike ([1,2,3], [4,5,6])', () => {
+      const app = new App();
+
+      const [strikeCount, ballCount] = app.getBallAndStrike(
+        [1, 2, 3],
+        [4, 5, 6]
+      );
+      expect(strikeCount).toEqual(0);
+      expect(ballCount).toEqual(0);
+    });
+  });
 });
