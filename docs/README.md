@@ -31,15 +31,11 @@
 - return message string based on judge result
 
 ## play(): void
-
-- menu select loop
-  - prompt query message and get input from user
-    - throw error if input is invalid
-  - start game play loop or exit
-- game play loop
-  - prompt message
-  - get input from user
-    - throw error if input is invalid
-  - judge user input
-  - print result
-- catch exception
+- turn function
+  - callback function passed to MissionUtils.Console.readline
+  - calls itself recursively if user input is not correct answer
+  - calls menuSelect function if user input is  correct answer
+- menuSelect function
+  - callback function passed to MissionUtils.Console.readline
+  - calls turn function if user want restart game
+  - return if user want to exit game
