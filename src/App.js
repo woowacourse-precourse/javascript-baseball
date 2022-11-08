@@ -16,13 +16,11 @@ class App {
   }
 
   setRandomNumber() {
-    const threeNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      3,
-    );
-    const randomNumber = MissionUtils.Random.shuffle(threeNumberArray);
-    this._randomNumber = randomNumber;
+    const threeNumberArray = new Set();
+    while (threeNumberArray.size < 3) {
+      threeNumberArray.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    }
+    this._randomNumber = Array.from(threeNumberArray);
   }
 
   inputUserNumber() {
@@ -34,7 +32,7 @@ class App {
   checkInputCorret(numberInput) {
     try {
       if (!/^[1-9]{3}$/.test(numberInput)) {
-        throw new Error('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
+        throw new TypeError('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
       }
       const numberInputSet = new Set(numberInput.split(''));
       if (numberInputSet.size < 3) {
