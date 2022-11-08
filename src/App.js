@@ -30,6 +30,21 @@ class App {
       if (!this.isThreeStrike) {
         return this.getUserInput();
       }
+      if (this.isThreeStrike) {
+        return this.askRestart();
+      }
+    });
+  }
+
+  askRestart() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (userInput) => {
+      if (userInput === '1') {
+        return this.startGame();
+      }
+      if (userInput === '2') {
+        MissionUtils.Console.close();
+      }
     });
   }
 
