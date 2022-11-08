@@ -78,7 +78,7 @@ function endsGame(){
       return true;
     }
     else{
-      throw new Error("Invalid input(Should be 1 or 2) : " + answer);
+      return true;
     }
   });
   
