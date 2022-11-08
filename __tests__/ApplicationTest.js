@@ -94,7 +94,7 @@ describe("숫자 야구 게임", () => {
     expect(app.userNumber).toEqual(userNumber);
   });
 
-  test.only("공백문자만을 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+  test("공백문자만을 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
     const userInputs = [" "];
 
     mockQuestions(userInputs);
@@ -205,6 +205,19 @@ describe("숫자 야구 게임", () => {
   test("게임 종료 후 재시작 여부 확인시 잘못된 입력이 있으면 예외가 발생되며 종료된다.", () => {
     const randoms = [1, 2, 3];
     const answers = ["123", "a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test.only("게임 종료 후 재시작 여부 확인시 입력에 공백이 있으면 예외가 발생되며 종료된다.", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123", " 1"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
