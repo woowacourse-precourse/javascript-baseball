@@ -56,6 +56,7 @@ class App {
 
     const resultMessage = this.getResultMessage(result);
     Console.print(resultMessage);
+    this.checkResultMessage(resultMessage);
   }
 
   isStrike(answer, number, idx) {
@@ -74,6 +75,24 @@ class App {
     if (ball > 0 && strike > 0) resultMessage = `${ball}볼 ${strike}스트라이크`;
 
     return resultMessage;
+  }
+
+  checkResultMessage(message) {
+    if (message === "3스트라이크") {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+        (input) => {
+          if (input === "1") {
+            return this.startGame();
+          } else if (input === "2") {
+            return Console.close();
+          } else throw Error("1 또는 2를 입력해주세요.");
+        }
+      );
+    } else {
+      this.getResultOfUserInput();
+    }
   }
 }
 
