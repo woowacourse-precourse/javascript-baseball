@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const {
   throwGuessException,
   convertToNumberArray,
@@ -91,5 +92,14 @@ describe("추측한 숫자와 게임 숫자 대조하고 결과 반환", () => {
 describe("재시작 선택 입력 형식이 잘못됐을 때 예외처리하고 종료", () => {
   test("case1", () => {
     expect(() => throwReplayOrQuitException("3")).toThrow("1 또는 2를 입력하세요");
+  });
+});
+
+describe("게임 숫자를 맞추면 해당 게임 종료하고 게임을 재시작할지 완전히 종료할 지 결정", () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, "print");
+  const app = new App();
+  app.replayOrQuit();
+  test("case1", () => {
+    expect(logSpy).toHaveBeenCalledWith("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   });
 });
