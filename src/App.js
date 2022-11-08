@@ -1,5 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
+  constructor() {
+    this.NUMBER_ARRAY_MAX_LENGTH = 3;
+  }
+
   play() {
     this.getStarted();
     this.playGame();
@@ -17,7 +21,7 @@ class App {
 
   createAnswerNumber() {
     let numberArr = [];
-    while (numberArr.length < 3) {
+    while (numberArr.length < this.NUMBER_ARRAY_MAX_LENGTH) {
       let number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!numberArr.includes(number)) numberArr.push(number);
     }
@@ -26,7 +30,7 @@ class App {
 
   enterGuessNumber(correctNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (guessNumber) => {
-      if (guessNumber.length !== 3) {
+      if (guessNumber.length !== this.NUMBER_ARRAY_MAX_LENGTH) {
         throw "input value length isn't correct!";
       }
       const guessNumberArray = guessNumber
@@ -38,13 +42,7 @@ class App {
       const scoreboard = { strike: 0, ball: 0 };
 
       guessNumberArray.forEach((number, index) => {
-        if (correctNumberArray.includes(number)) {
-          if (correctNumberArray[index] === number) {
-            scoreboard.strike++;
-          } else {
-            scoreboard.ball++;
-          }
-        }
+        this.isStrikeOrBall(number, index, correctNumberArray, scoreboard);
       });
 
       this.notifyGuessResult(scoreboard);
@@ -56,6 +54,16 @@ class App {
 
       this.enterGuessNumber(correctNumber);
     });
+  }
+
+  isStrikeOrBall(number, index, array, scoreboard) {
+    if (array.includes(number)) {
+      if (array[index] === number) {
+        scoreboard.strike++;
+      } else {
+        scoreboard.ball++;
+      }
+    }
   }
 
   notifyGuessResult(scoreboard) {
@@ -82,12 +90,14 @@ class App {
   }
 
   isReplay() {
+    const RESTART = 1;
+    const GAME_OVER = 2;
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
     MissionUtils.Console.readLine("", (answer) => {
-      if (answer === "1") this.playGame();
-      if (answer === "2") MissionUtils.Console.close();
+      if (answer === RESTART) this.playGame();
+      if (answer === GAME_OVER) MissionUtils.Console.close();
     });
   }
 }
