@@ -4,9 +4,9 @@ class GameResources {
     generateAnswer() {
         const ANSWER_TEMPORARY_STORAGE = [];
         while(ANSWER_TEMPORARY_STORAGE.length < 3) {
-          const ANSWER_TEMPORARY_NUMBER = Random.pickNumberInRange(1, 9)
+          const ANSWER_TEMPORARY_NUMBER = Random.pickNumberInRange(1, 9);
           if (!ANSWER_TEMPORARY_STORAGE.includes(ANSWER_TEMPORARY_NUMBER)) ANSWER_TEMPORARY_STORAGE.push(ANSWER_TEMPORARY_NUMBER);
-        }
+        };
         return ANSWER_TEMPORARY_STORAGE.join('');
       }
     
