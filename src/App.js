@@ -5,7 +5,7 @@ const MESSAGE = {
   INPUT: "숫자를 입력해주세요 : ",
   SUCCESS: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
   END: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-  ERROR: "3자리 숫자를 입력하세요"
+  ERROR: "3자리 숫자(1~9)를 입력하세요"
 };
 class App {
   initRandom(){
@@ -25,26 +25,19 @@ class App {
     for(let val=0; val<input.length; val++){
       if(isNaN(input[val])){
         throw new Error(MESSAGE.ERROR);
+      }else if(Number(input[val])==0){
+        throw new Error(MESSAGE.ERROR);
       }
     }
   }
   countHint(computer,guess){
-    //console.log("computer",computer);
-    //console.log("guess",guess);
     let strikeCnt = 0;
     let ballCnt = 0;
     for(let idx=0; idx<3; idx++){
       if(computer[idx]==guess[idx]){
         strikeCnt+=1;
-      }
-    }
-    for(let comIdx=0; comIdx<computer.length; comIdx++){
-      let computerNum = computer[comIdx];
-      for(let guessIdx=0; guessIdx<guess.length; guessIdx++){
-        let guessNum = guess[guessIdx];
-        if(computerNum == guessNum && comIdx != guessIdx){
-          ballCnt+=1;
-        }
+      }else if(computer.includes(guess[idx])){
+        ballCnt+=1;
       }
     }
     return [strikeCnt, ballCnt];
@@ -71,6 +64,7 @@ class App {
         this.startGame();
       }else if(Number(input)==2){
         MissionUtils.Console.close();
+        return;
       }
     });
   }
@@ -105,6 +99,4 @@ class App {
     this.startGame();
   }
 }
-//const app = new App();
-//app.play();
 module.exports = App;
