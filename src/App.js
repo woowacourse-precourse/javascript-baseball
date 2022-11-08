@@ -36,10 +36,10 @@ function questionToContinueGame() {
 }
 
 function checkPass(COMPETITOR) {
-  MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : \n', async function(answer) {
+  MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : \n', function(answer) {
     const answerArray = Array.from(String(answer), (num) => Number(num));
     if (answerArray.length !== 3 || answerArray.includes(0)) {
-      throw new Error('Wrong');
+      throw new Error("길이가 맞지 않습니다.");
     }
     if (!checkResult(COMPETITOR, answerArray)) {
       checkPass(COMPETITOR)
