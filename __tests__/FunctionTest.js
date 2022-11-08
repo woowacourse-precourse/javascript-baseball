@@ -74,4 +74,21 @@ describe("기능 테스트", () => {
     const app = new App();
     expect(app.isCorrectNumber(randoms, answer)).toBeTruthy();
   });
+
+  test("[기능 6] 입력값에 따른 결과 값 출력", () => {
+    const randoms = [1, 3, 2];
+    const answers = ["134", "123"];
+    const logSpy = getLogSpy();
+    const messages = ["2스트라이크", "2볼 1스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
