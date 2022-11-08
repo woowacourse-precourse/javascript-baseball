@@ -6,12 +6,6 @@ const GAME_MESSAGE = {
   GAME_END: "게임 종료\n",
 };
 
-const WHAT = {
-  BALL: "볼",
-  STRIKE: "스트라이크",
-  NOTHING: "낫싱",
-};
-
 const ERROR_MESSAGE = {
   ERROR_RESTART_MESSAGE: "잘못된 값을 입력하셨습니다. 1 또는 2를 입력해주세요.",
   ERROR_USER_INPUT:
@@ -20,6 +14,5 @@ const ERROR_MESSAGE = {
 
 module.exports = {
   GAME_MESSAGE,
-  WHAT,
   ERROR_MESSAGE,
 };
