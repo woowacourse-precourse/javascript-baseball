@@ -1,3 +1,3 @@
-const NUMBER_ONE_TO_NINE = /^[1-9]+$/;
+const REGEXP_NUMBER_ONE_TO_NINE = /^[1-9]+$/;
 
-module.exports = { NUMBER_ONE_TO_NINE };
+module.exports = { REGEXP_NUMBER_ONE_TO_NINE };
