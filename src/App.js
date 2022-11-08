@@ -32,6 +32,17 @@ class App {
     if (!this.checkInput(inputNumber)) throw new Error('잘못된 입력입니다.');
     this.hint = this.getHint(this.answer, inputNumber);
   }
+
+  checkInput(inputNumber) {
+    let listOfNumber = [...inputNumber];
+    if (!Number(inputNumber)) return false;
+    if (
+      listOfNumber[0] === listOfNumber[1] ||
+      listOfNumber[0] === listOfNumber[2] ||
+      listOfNumber[1] === listOfNumber[2]) return false;
+    if (listOfNumber.includes('0')) return false;
+  }
+
 }
 
 module.exports = App;
