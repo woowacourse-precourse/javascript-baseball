@@ -13,7 +13,21 @@ class App {
     return result;
   }
 
-  isValidGameInput() {}
+  isValidGameInput(input) {
+    if (typeof input !== "string") return false;
+    if (input.length !== 3) return false;
+    for (let i = 0; i < 3; i++) {
+      if (!(input.charCodeAt(i) > 48 && input.charCodeAt(i) < 58)) return false;
+    }
+    if (
+      input[0] === input[1] ||
+      input[1] === input[2] ||
+      input[0] === input[2]
+    ) {
+      return false;
+    }
+    return true;
+  }
 
   parseGameInput() {}
 

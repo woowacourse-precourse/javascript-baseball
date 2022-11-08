@@ -1,4 +1,5 @@
 const App = require("../src/App");
+const { Random } = require("@woowacourse/mission-utils");
 
 const app = new App();
 
@@ -22,6 +23,39 @@ describe("generate valid game number", () => {
     for (let i = 0; i < 5; i++) {
       const gameNumbers = app.selectGameNumbers();
       expect(isThreeDifferntDigitWithoutZero(gameNumbers)).toBe(true);
+    }
+  });
+});
+
+describe("game input validation test", () => {
+  const generateValidInput = () => {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const result = [];
+    while (result.length !== 3) {
+      const num = Random.pickNumberInList(numbers);
+      if (!result.includes(num)) result.push(num);
+    }
+    return result.join("");
+  };
+
+  test("invalid input test", () => {
+    const longInput = "1234567";
+    const containNoneNumberInput = "ab2";
+    const containZero = "097";
+    const containSpace = "0 12";
+    const sameNumberInput = "211";
+
+    expect(app.isValidGameInput(longInput)).toBe(false);
+    expect(app.isValidGameInput(containNoneNumberInput)).toBe(false);
+    expect(app.isValidGameInput(containZero)).toBe(false);
+    expect(app.isValidGameInput(containSpace)).toBe(false);
+    expect(app.isValidGameInput(sameNumberInput)).toBe(false);
+  });
+
+  test("valid input test", () => {
+    for (let i = 0; i < 5; i++) {
+      const input = generateValidInput();
+      expect(app.isValidGameInput(input)).toBe(true);
     }
   });
 });
