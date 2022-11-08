@@ -20,8 +20,8 @@ function createAnswer() {
 }
 
 function inputNumber(answer) {
-  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (inputNum) => {
-    const inputNum = inputNum.split('').map(Number);
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    const inputNum = input.split('').map(Number);
     const validInput = validNumber(inputNum);
     const answercheck = answerCheck(validInput, answer);
     MissionUtils.Console.print(answercheck);
@@ -37,6 +37,7 @@ function validNumber(inputNum) {
 
   return inputNum;
 }
+
 function checkBall(inputNum, answer) {
   let cnt = 0;
   answer.forEach((num) => {
@@ -44,8 +45,10 @@ function checkBall(inputNum, answer) {
       cnt++;
     }
   });
+
   return cnt;
 }
+
 function checkStrike(inputNum, answer) {
   let cnt = 0;
   answer.forEach((num, i) => {
@@ -53,8 +56,10 @@ function checkStrike(inputNum, answer) {
       cnt++;
     }
   });
+
   return cnt;
 }
+
 function answerCheck(inputNum, answer) {
   const strike = checkStrike(inputNum, answer);
   const ball = checkBall(inputNum, answer) - strike;
@@ -89,4 +94,8 @@ function gameStartState(input) {
     throw new Error('1 또는 2를 입력해주세요.');
   }
 }
+
 module.exports = App;
+
+const test = new App();
+test.play();
