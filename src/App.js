@@ -110,9 +110,25 @@ function init() {
   computer = undefined;
   result = true;
 }
+
+function startGame() {
+  init();
+  computerPickNumbers();
+  while (result) {
+    userInput();
+    checkInputError();
+    showResult();
+  }
+}
+
 class App {
   play() {
     MissionUtils.Console.print(game_start);
+    startGame();
+    while (isEndGame) {
+      restartShutdown();
+    }
+    return this;
   }
 }
 
