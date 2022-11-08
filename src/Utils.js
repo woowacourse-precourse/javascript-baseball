@@ -34,6 +34,10 @@ class Utils {
     return [...new Set(list)].length !== list.length;
   }
 
+  static isEmptyInput(value) {
+    return value.length === 0;
+  }
+
   static hasWhiteSpace(string) {
     return string !== string.trim();
   }

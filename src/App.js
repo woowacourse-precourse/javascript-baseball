@@ -5,6 +5,7 @@ const {
   createUniqueNumbers,
   isNumber,
   hasDuplicateElmentInList,
+  isEmptyInput,
   hasWhiteSpace,
 } = Utils;
 
@@ -78,6 +79,12 @@ class App {
   isValidUserNumberInput(input) {
     const numbers = input.split("").map(Number);
 
+    if (isEmptyInput(input)) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}\n입력된 글자가 없습니다.${this.MESSAGES.ERROR.END}`
+      );
+    }
+
     if (hasWhiteSpace(input)) {
       throw new Error(
         `${this.MESSAGES.ERROR.INSERT}\n입력에 공백이 있습니다.${this.MESSAGES.ERROR.END}`
@@ -127,6 +134,12 @@ class App {
 
     // TODO: 검증 부분 분리
     // TODO: 에러 메시지 정리
+
+    if (isEmptyInput(input)) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}\n입력된 글자가 없습니다.${this.MESSAGES.ERROR.END}`
+      );
+    }
 
     if (hasWhiteSpace(input)) {
       throw new Error(
