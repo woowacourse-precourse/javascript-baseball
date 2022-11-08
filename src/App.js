@@ -1,35 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
-
-const isNumber = (input) => {
-  return Number.isInteger(Number(input)) ? true : false;
-};
-const isOneToNine = (input) => {
-  for (let i = 0; i < input.length; i++) {
-    if (Number(input[i]) > 0 && Number(input[i]) < 10) return true;
-  }
-  return false;
-};
-const isThree = (input) => {
-  return input.length === 3 ? true : false;
-};
-const isAllDifferent = (input) => {
-  const unique = new Set(input);
-  return unique.size === input.length ? true : false;
-};
-
-const isCompare = (computerNumber, playerNumber) => {
-  let score = [0, 0]; // [스트라이크, 볼]
-  for (let i = 0; i < 3; i++) {
-    if (computerNumber[i] === playerNumber[i]) {
-      score[0] += 1;
-    } else if (computerNumber.includes(playerNumber[i])) {
-      score[1] += 1;
-    }
-  }
-  return score;
-};
-
+const isNumber = require("../src/utils/isNumber.js");
+const isCompare = require("../src/utils/isCompare.js");
+const isOneToNine = require("../src/utils/isOneToNine.js");
+const isThree = require("../src/utils/isThree.js");
+const isAllDifferent = require("../src/utils/isAllDifferent.js");
 class App {
   #userNumber;
   #computerNumber;
@@ -54,7 +29,7 @@ class App {
         !isThree(input) ||
         !isAllDifferent(input)
       )
-        throw new Error("잘못된 숫자를 입력하였습니다.");
+        throw new Error("잘못된 값을 입력하셨습니다.");
       this.#userNumber = [...input];
       this.getScore = [];
       this.getScore = isCompare(this.#computerNumber, this.#userNumber); // 숫자 비교
@@ -81,7 +56,7 @@ class App {
     const nothingMessage = `${!strike && !ball ? "낫싱" : ""}`;
 
     Console.print(ballMessage + strikeMessage + nothingMessage);
-    // Console.print(this.#computerNumber);
+
     if (strike === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.restart();
