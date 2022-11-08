@@ -82,17 +82,16 @@ class App {
   }
 
   #quitGame() {
-    Console.print(MESSAGES.QUIT);
+    this.#printQuitMessage();
+
     Console.readLine(MESSAGES.RESTART, (option) => {
       this.#validateRestartOption(option);
-
-      const options = {
-        restart: () => this.#restartGame(),
-        quit: () => Console.close(),
-      };
-
-      options[RESTART_OPTIONS[option]]();
+      this.#selectQuitOption(option);
     });
+  }
+
+  #printQuitMessage() {
+    Console.print(MESSAGES.QUIT);
   }
 
   #validateRestartOption(option) {
@@ -101,13 +100,19 @@ class App {
     }
   }
 
+  #selectQuitOption(option) {
+    const options = {
+      restart: () => this.#restartGame(),
+      quit: () => Console.close(),
+    };
+
+    options[RESTART_OPTIONS[option]]();
+  }
+
   #restartGame() {
     this.#setAnswer();
     this.#progressGame();
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
