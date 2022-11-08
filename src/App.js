@@ -86,7 +86,3 @@ function App() {
 }
 
 module.exports = App;
-
-// 삭제 예정
-const app = new App();
-app.play();
