@@ -77,6 +77,7 @@ class App {
           }
         }
       );
+      Console.close();
       return;
     }
     Console.readLine('숫자를 입력해주세요 : ', guess => {
