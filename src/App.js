@@ -10,7 +10,7 @@ const {
 
 class App {
   _userNumber = null;
-  _gameNumber = null;
+  _answer = null;
   _isPlaying = false;
 
   constructor(digit = 3, minNumber = 1, maxNumber = 9) {
@@ -51,12 +51,12 @@ class App {
     return this._isPlaying;
   }
 
-  set gameNumber(number) {
-    this._gameNumber = number;
+  set answer(number) {
+    this._answer = number;
   }
 
-  get gameNumber() {
-    return this._gameNumber;
+  get answer() {
+    return this._answer;
   }
 
   set userNumber(number) {
@@ -159,7 +159,7 @@ class App {
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
-    console.log(this.gameNumber);
+    console.log(this.answer);
     if (!sameDigitCount && !sameNumberCount) {
       return this.MESSAGES.RESULT.NOTHING;
     }
@@ -189,12 +189,12 @@ class App {
     let sameNumberCount = 0;
 
     this.userNumber.forEach((number, idx) => {
-      if (number === this.gameNumber[idx]) {
+      if (number === this.answer[idx]) {
         sameDigitCount++;
         return;
       }
 
-      if (this.gameNumber.includes(number)) {
+      if (this.answer.includes(number)) {
         sameNumberCount++;
       }
     });
@@ -202,8 +202,8 @@ class App {
     Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
   }
 
-  setGameNumber() {
-    this.gameNumber = createUniqueNumbers({
+  setAnswer() {
+    this.answer = createUniqueNumbers({
       count: this.digit,
       minNumber: this.minNumber,
       maxNumber: this.maxNumber,
@@ -220,7 +220,7 @@ class App {
   }
 
   newGame() {
-    this.setGameNumber();
+    this.setAnswer();
     this.runGame();
   }
 

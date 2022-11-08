@@ -65,8 +65,8 @@ describe("숫자 야구 게임", () => {
     const app = new App();
     app.play();
 
-    expect(app.gameNumber).toHaveLength(NUMBERS_LIST_LENGTH);
-    expect(isRightRangeNumber(app.gameNumber)).toBe(true);
+    expect(app.answer).toHaveLength(NUMBERS_LIST_LENGTH);
+    expect(isRightRangeNumber(app.answer)).toBe(true);
     expect(randomSpy).toHaveBeenCalled();
     expect(randomSpy.mock.calls.length).toBeGreaterThanOrEqual(
       NUMBERS_LIST_LENGTH
@@ -215,7 +215,7 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test.only("게임 종료 후 재시작 여부 확인시 입력에 공백이 있으면 예외가 발생되며 종료된다.", () => {
+  test("게임 종료 후 재시작 여부 확인시 입력에 공백이 있으면 예외가 발생되며 종료된다.", () => {
     const randoms = [1, 2, 3];
     const answers = ["123", " 1"];
 
