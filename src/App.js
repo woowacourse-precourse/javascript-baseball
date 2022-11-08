@@ -22,6 +22,8 @@ class App {
   #progressGame() {
     Console.readLine(MESSAGES.INPUT, (input) => {
       this.#validateInput(input);
+
+      const { strike, ball } = this.#compareInputWithAnswer(input);
     });
   }
 
@@ -37,6 +39,25 @@ class App {
     if (input.includes(0)) {
       throw new Error(ERRORS.UNVALID_INPUT_RANGE);
     }
+  }
+
+  #compareInputWithAnswer(input) {
+    let strike = 0;
+    let ball = 0;
+
+    [...input].forEach((number, index) => {
+      if (!this.#answer.includes(number)) {
+        return;
+      }
+
+      if (number === this.#answer[index]) {
+        strike += 1;
+      }
+
+      ball += 1;
+    });
+
+    return { strike, ball: ball - strike };
   }
 }
 
