@@ -41,8 +41,10 @@ describe("숫자 야구 게임 기능 테스트", () => {
       expect(() => app.checkUserNumbersInputValidity(wrongInput)).toThrow();
     });
     test("[2, 3, 6]을 입력 받으면 not throw", () => {
-      const wrongInput = [2, 3, 6];
-      expect(() => app.checkUserNumbersInputValidity(wrongInput)).not.toThrow();
+      const correctInput = [2, 3, 6];
+      expect(() =>
+        app.checkUserNumbersInputValidity(correctInput)
+      ).not.toThrow();
     });
   });
   describe("길이가 3인 두 배열을 비교하는 compareEachNumbers, [ballCnt, strikeCnt] 반환", () => {
