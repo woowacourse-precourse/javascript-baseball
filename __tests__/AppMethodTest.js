@@ -51,4 +51,23 @@ describe('App 클래스 메소드 테스트', () => {
             expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
         });
     });
+
+    test("decideReplay 테스트", () => {
+        const randoms = [1, 2, 3];
+        const answers = ["123", "2"];
+        const logSpy = getLogSpy();
+        const messages = [
+            "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+        ];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        const app = new App();
+        app.play();
+
+        messages.forEach((output) => {
+            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    });
 })
