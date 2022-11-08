@@ -47,7 +47,46 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("문자 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["ㄱㄴㄷ"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("문자 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["abc"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("특수기호 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["!@#"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("세 자릿수 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
 
@@ -59,4 +98,31 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("중복 숫자 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["113"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작/종료 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
 });
