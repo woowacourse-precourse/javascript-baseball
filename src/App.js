@@ -51,6 +51,25 @@ class App {
       }
     });
   }
+
+  print(input) {
+    let notice = "";
+
+    if (typeof input !== "object") notice = input;
+    else {
+      let { strike, ball } = input;
+      notice =
+        strike && ball
+          ? `${ball}볼 ${strike}스트라이크`
+          : strike && !ball
+          ? `${strike}스트라이크`
+          : !strike && ball
+          ? `${ball}볼`
+          : `낫싱`;
+    }
+
+    MissionUtils.Console.print(notice);
+  }
 }
 
 const app = new App();
