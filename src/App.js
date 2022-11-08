@@ -99,7 +99,7 @@ class App {
   restart(input) {
     const COMMANDS = {
       1: this.newGame.bind(this),
-      2: this.exitGame.bind(this),
+      2: this.endProgram.bind(this),
     };
 
     // TODO: 검증 부분 분리
@@ -193,7 +193,7 @@ class App {
     );
   }
 
-  exitGame() {
+  endProgram() {
     Console.print(this.MESSAGES.endProgram);
     Console.close();
   }
