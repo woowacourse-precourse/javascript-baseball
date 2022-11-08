@@ -1,7 +1,8 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
+const NUM_SIZE = 3;
+
 const KEY = {
-  NUM_SIZE: 3,
   RESTART: '1',
   QUIT: '2',
 };
@@ -26,7 +27,7 @@ class App {
 
   computerInput(){
     const computer = [];
-    while (computer.length < KEY.NUM_SIZE) {
+    while (computer.length < NUM_SIZE) {
       const number = Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
         computer.push(number);
@@ -44,8 +45,8 @@ class App {
   }
 
   checkUserInput(userInput){
-    if(userInput.length!==KEY.NUM_SIZE) throw new Error("3자리의 수를 입력해주세요.");
-    if(new Set(userInput).size!==KEY.NUM_SIZE) throw new Error("중복된 숫자가 없도록 입력해주세요.");
+    if(userInput.length!==NUM_SIZE) throw new Error("3자리의 수를 입력해주세요.");
+    if(new Set(userInput).size!==NUM_SIZE) throw new Error("중복된 숫자가 없도록 입력해주세요.");
     if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
   }
 
@@ -88,7 +89,7 @@ class App {
     if(ballCount !== 0 && strikeCount === 0) Console.print(`${ballCount}볼`);
     if(ballCount === 0 && strikeCount !== 0) Console.print(`${strikeCount}스트라이크`);
 
-    if(strikeCount == KEY.NUM_SIZE){
+    if(strikeCount == NUM_SIZE){
       Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 
