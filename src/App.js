@@ -24,6 +24,17 @@ class App {
     })
   }
 
+  count() {
+    for (let i = 0; i < 3; i++) {
+      this.checkMatch(this.userNumber[i], this.computerNumber[i])
+    }
+  }
+
+  checkMatch(userNumber, computerNumber) {
+    if (userNumber === computerNumber) this.countStrike++;
+    else if (this.computerNumber.indexOf(userNumber) !== -1) this.countBall++;
+  }
+
   play() { }
 
 }
