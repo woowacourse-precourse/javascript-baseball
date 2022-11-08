@@ -47,9 +47,61 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트1", () => {
+    const randoms = [1, 3, 4];
+    const answers = ["rrr"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트2", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트3", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["034"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트4", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["565"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트5", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["137", "637", "135", "3"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
