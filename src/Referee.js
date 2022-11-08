@@ -43,7 +43,7 @@ class Referee {
   gameFinish() {
     MissionUtils.Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
       if (answer === RESTART) this.gameStart();
-      else if (answer === GAME_OVER) MissionUtils.Console.print(MESSAGE.GAME.WIN);
+      else if (answer === GAME_OVER) MissionUtils.Console.print(MESSAGE.GAME.OVER);
       else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
@@ -60,8 +60,6 @@ class Referee {
   getBallAndStrikeCount() {
     const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
     let [ball, strike] = [0, 0];
-
-    if (!computerValue || !playerValue) throw new Error(MESSAGE.ERROR.SYSTEM);
 
     for (let i = 0; i < 3; i++) {
       if (computerValue[i] === playerValue[i]) strike++;
