@@ -86,7 +86,19 @@ class App {
 		return resultMessage !== '3스트라이크' ? true : false;
 	}
 
-	restartOrFinish() {}
+	async restartOrFinish() {
+		MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+		return await new Promise((resolve, reject) => {
+			try {
+				MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (option) => {
+					this.validateOption(option);
+					resolve(option === '1' ? true : false);
+				});
+			} catch (error) {
+				reject(error);
+			}
+		});
+	}
 
 	validateOption(option) {
 		if (/[^1-2]/g.test(option)) throw new Error('옵션에 없는 값을 입력하셨습니다.');
