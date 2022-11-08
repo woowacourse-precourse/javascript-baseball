@@ -2,6 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   #playerInput;
+  #strike;
+  #ball;
 
   constructor() {
     this.#missionUtils = new MissionUtils();
@@ -43,35 +45,81 @@ class App {
       "숫자를 입력해주세요: ",
       this.#validatePlayerInput
     );
-    this.#playerInput = playerInput.split("");
+    this.#playerInput = playerInput.split("").map((number) => Number(number));
     this.#missionUtils.Console.close();
   }
 
   #countStrikeAndBall(number, index) {
-    let strike = 0;
-    let ball = 0;
-    if (this.#answer.has(number) && this.#answer[index] === number) {
-      strike++;
-    } else if (this.#answer.has(number)) {
-      ball++;
+    if (number === this.#playerInput[index]) {
+      this.strike++;
+    } else if (this.#playerInput.includes(number)) {
+      this.ball++;
     }
-    return { strike, ball };
   }
 
   #compareAnswer() {
-    let strike = 0;
-    let ball = 0;
-    this.#answer.forEach(
-      (number, index) =>
-        ({ strike, ball } = this.#countStrikeAndBall(number, index))
+    this.#answer.forEach(this.#countStrikeAndBall);
+  }
+
+  #makeResult() {
+    if (this.#strike === 3) {
+      return "3스트라이크";
+    } else if (this.#strike === 0 && this.#ball === 0) {
+      return "낫싱";
+    } else if (this.#strike === 0 && this.#ball !== 0) {
+      return `${this.#ball}볼`;
+    } else if (this.#strike !== 0 && this.#ball === 0) {
+      return `${this.#strike}스트라이크`;
+    } else {
+      return `${this.#strike}스트라이크 ${this.#ball}볼`;
+    }
+  }
+
+  #clearStrikeAndBall() {
+    this.#strike = 0;
+    this.#ball = 0;
+  }
+
+  #validateContinueInput(input) {
+    if (input !== "1" && input !== "2") {
+      throw new Error("입력값은 1 또는 2여야 합니다.");
+    }
+    return input;
+  }
+  #getContinueInput() {
+    const continueInput = this.#missionUtils.Console.getInput(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      this.#validateContinueInput
     );
-    return { strike, ball };
+    this.#missionUtils.Console.close();
+    return continueInput;
+  }
+
+  #printEndMessage() {
+    this.#missionUtils.Console.print(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+    this.#missionUtils.Console.getInput(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
+    this.#missionUtils.Console.close();
+  }
+
+  #printResult() {
+    const result = this.#makeResult();
+    this.#missionUtils.Console.print(result);
+    if (this.#strike === 3) {
+      this.#printEndMessage();
+    }
+    this.#clearStrikeAndBall();
   }
 
   play() {
     this.#printStartMessage();
     this.#makeAnswer();
     this.#getPlayerInput();
+    this.#compareAnswer();
+    this.#printResult();
   }
 }
 
