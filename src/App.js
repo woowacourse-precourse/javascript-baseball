@@ -106,7 +106,10 @@ class App {
     const COMPUTER = this.getComputerNumber();
     return this.getPersonNumber(COMPUTER);
   }
-  play() {}
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    return this.startGame();
+  }
 }
 
 module.exports = App;
