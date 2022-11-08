@@ -18,13 +18,13 @@ class Console {
     return new Promise((sendUsedNumber, reject) => {
       this.inputByConsole("숫자를 입력해주세요 : ", (answer) => {
         if (answer.length > 3) {
-          throw "입력한 값이 3자리 이상입니다.";
+          throw new Error("입력한 값이 3자리 이상입니다.");
         }
         if (this.isOverLapping(answer)) {
-          throw "입력한 값이 중복됩니다.";
+          throw new Error("입력한 값이 중복됩니다.");
         }
         if (this.isNotNumber(answer)) {
-          throw "입력한 값이 숫자가 아닙니다.";
+          throw new Error("입력한 값이 숫자가 아닙니다.");
         }
 
         sendUsedNumber(answer);
@@ -38,7 +38,7 @@ class Console {
         if (answer === "1" || answer === "2") {
           sendResult(answer);
         } else {
-          throw "1과 2가 아닌 값을 입력하였습니다.";
+          throw new Error("1과 2가 아닌 값을 입력하였습니다.");
         }
       });
     });
