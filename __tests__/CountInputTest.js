@@ -33,4 +33,15 @@ describe("스트라이크와 볼 갯수 카운트 기능 테스트", () => {
 
     expect(methodResult).toEqual(result);
   });
+
+  test(`countInput 낫싱 확인`, () => {
+    const referee = new Referee();
+    const computerInput = [1, 2, 3];
+    const userInput = [4, 5, 6];
+    const result = [0, 0];
+
+    const methodResult = referee.countInput(computerInput, userInput);
+
+    expect(methodResult).toEqual(result);
+  });
 });
