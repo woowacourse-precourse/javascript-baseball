@@ -13,6 +13,9 @@ class Validtion {
     isValidationUserBallInput(userNumberArray){
         this.userNumberArray = userNumberArray;
         
+        if(this.isIncludeZero()){
+            throw ERROR_MESSAGE.INCLUDE_ZERO_ERROR;
+        }
         if(this.isNotANumber()){
             throw ERROR_MESSAGE.NOT_A_POSITIVE_NUMBER_ERROR;
         }
@@ -28,6 +31,9 @@ class Validtion {
         if(this.isNotButton()){
             throw ERROR_MESSAGE.NOT_BUTTON_ERROR;
         }
+    }
+    isIncludeZero(){
+        return this.userNumberArray.includes(0);
     }
     isNotANumber(){
         return this.userNumberArray.includes(NaN)
