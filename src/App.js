@@ -30,8 +30,6 @@ class App {
   generateComputerInput() {
     this.computerInput = setRandomNumber();
     this.generateUserInput();
-
-    return this.computerInput;
   }
 
   generateUserInput() {
@@ -49,6 +47,8 @@ class App {
     this.score.STRIKE = score[0];
     this.score.BALL = score[1];
 
+    Console.print(score);
+
     this.printScoreMessage();
   }
 
@@ -57,9 +57,25 @@ class App {
 
     Console.print(scoreResultMessage);
 
-    if (this.score.STRIKE < GAME_RULE.LENGTH) {
-      return this.generateUserInput();
+    if (this.score.STRIKE === GAME_RULE.LENGTH) {
+      Console.print(GAME_MESSAGE.CORRECT);
+
+      return this.gameRePlayCheckInput();
     }
+
+    return this.generateUserInput();
+  }
+
+  gameRePlayCheckInput() {
+    Console.readLine(GAME_MESSAGE.REPLAY_CHECK, (answer) => {
+      if (answer === GAME_RULE.RESTART) {
+        return this.generateComputerInput();
+      }
+
+      if (answer === GAME_RULE.END) {
+        return Console.close();
+      }
+    });
   }
 }
 

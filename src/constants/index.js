@@ -13,7 +13,7 @@ const GAME_MESSAGE = {
   BALL: "볼",
   NOTHING: "낫싱",
   CORRECT: `${GAME_RULE.LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`,
-  RESTART_OR_END: `게임을 새로 시작하려면 ${GAME_RULE.RESTART}, 종료하려면 ${GAME_RULE.END}를 입력하세요.\n`,
+  REPLAY_CHECK: `게임을 새로 시작하려면 ${GAME_RULE.RESTART}, 종료하려면 ${GAME_RULE.END}를 입력하세요.\n`,
 };
 
 const ERROR_MESSAGE = {
