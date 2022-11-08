@@ -33,6 +33,10 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const player = this.convertToNumberArray(answer);
       const { strike, ball } = this.compareNumbers(computer, player);
+
+      if ((strike === 0, ball === 0)) {
+        MissionUtils.Console.print('낫싱');
+      }
     });
   }
 }
