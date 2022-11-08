@@ -6,8 +6,8 @@ const GAME_MESSAGE = {
   MAX_LENGTH: 3,
   NO_MESSAGE: "",
   ANSWER: "3스트라이크",
-  STRIKE: "스트라이크",
-  BALL: "볼",
+  STRIKE: "strike",
+  BALL: "ball",
 };
 
 const ERROR_MESSAGE = {
