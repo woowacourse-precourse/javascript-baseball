@@ -143,6 +143,11 @@ class App {
     while(flag== false){
       this.playoneround();
       MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (x) =>{
+        if (isNaN(parseInt(x))) throw 'not a number';
+        if (parseInt(x) <=0) throw 'minus number';
+        if (this.checkallArefitNumber(x)) throw 'suspicious number'       
+        if (this.is_Natural(x) == false) throw 'not a natural number';
+
         if (parseInt(x) == 1){
           //another round;
         }        
