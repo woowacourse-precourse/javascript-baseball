@@ -41,12 +41,12 @@ class App {
       strike: 0,
       ball: 0,
     };
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < GAME_MESSAGE.MAX_LENGTH; i++) {
       if (Number(userInput[i]) === currentAnswer[i]) {
-        const changePosition = "strike";
+        const changePosition = GAME_MESSAGE.STRIKE;
         this.addScore(score, changePosition);
       } else if (currentAnswer.includes(Number(userInput[i]))) {
-        const changePosition = "ball";
+        const changePosition = GAME_MESSAGE.BALL;
         this.addScore(score, changePosition);
       }
     }
@@ -59,14 +59,18 @@ class App {
 
   checkUserScore(scoreObj) {
     let hint;
-    switch (scoreObj.strike === 0) {
+    switch (scoreObj[GAME_MESSAGE.STRIKE] === 0) {
       case true:
-        scoreObj.ball === 0 ? (hint = "낫싱") : (hint = `${scoreObj.ball}볼`);
+        scoreObj[GAME_MESSAGE.BALL] === 0
+          ? (hint = "낫싱")
+          : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼`);
         break;
       case false:
-        scoreObj.ball === 0
-          ? (hint = `${scoreObj.strike}스트라이크`)
-          : (hint = `${scoreObj.ball}볼 ${scoreObj.strike}스트라이크`);
+        scoreObj[GAME_MESSAGE.BALL] === 0
+          ? (hint = `${scoreObj[GAME_MESSAGE.STRIKE]}스트라이크`)
+          : (hint = `${scoreObj[GAME_MESSAGE.BALL]}볼 ${
+              scoreObj[GAME_MESSAGE.STRIKE]
+            }스트라이크`);
     }
     return hint;
   }
