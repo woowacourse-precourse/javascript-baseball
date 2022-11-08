@@ -32,17 +32,22 @@ class App {
       (value) => {
         validation.checkUserEndInput(value);
         console.log(value);
-        if (+value === 1) {
-          this.play();
-        }
-        if (+value === 2) {
-          MissionUtils.Console.print("게임 종료");
-          MissionUtils.Console.close();
-        }
+        askRestart(value);
       }
     );
   }
 }
+
+function askRestart(value) {
+  if (+value === 1) {
+    app.play();
+  }
+  if (+value === 2) {
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.close();
+  }
+}
+
 // 예외처리 클래스
 class Validation {
   checkUserInput(value) {
@@ -105,4 +110,5 @@ function getResult(result) {
   MissionUtils.Console.print(resultMessage);
 }
 
+const app = new App();
 module.exports = App;
