@@ -25,10 +25,10 @@ class App {
     }
   }
 
-  printStrikeAndBall(inputNumber,randomNumber) {
+  printStrikeAndBall(inputNumber, randomNumber) {
     let userNumber = inputNumber.split("").map(Number);
-    const {strike, ball} = this.countStrikeAndBall(userNumber,randomNumber);
-    
+    const { strike, ball } = this.countStrikeAndBall(userNumber, randomNumber);
+
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
@@ -39,7 +39,7 @@ class App {
       MissionUtils.Console.print(`${ball}볼`);
     }
 
-    this.correctAnswer(strike,randomNumber);
+    this.correctAnswer(strike, randomNumber);
   }
 
   countStrikeAndBall(userNumber, randomNumber) {
@@ -56,7 +56,7 @@ class App {
       });
     }
 
-    return {strike, ball}
+    return { strike, ball };
   }
 
   validateUserNumbers(inputNumber) {
