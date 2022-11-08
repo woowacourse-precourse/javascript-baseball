@@ -1,7 +1,9 @@
-const App = require("../src/App");
 const CountPrinter = require("../src/CountPrinter");
-const { print } = require("../src/Utils");
+const { print, close } = require("../src/Utils");
 
+afterEach(() => {
+  close();
+});
 
 describe("counterPrint 테스트", () => {
   test('2스트라이크 0볼일때 "2스트라이크" 출력 확인', () => {
