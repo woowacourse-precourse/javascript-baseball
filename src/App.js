@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { ERROR, RESTART } = require("./constants/constants.js");
+const validate = require("./validation/validation");
 
 const gameStart = () => {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -18,21 +18,10 @@ const pickRandomNumber = () => {
 
 const getUserInput = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    validateUserInput(input);
+    validate.userInput(input);
     evaluateUserInput(answer, input);
     gameEnd(answer, input);
   });
-};
-
-const validateUserInput = (input) => {
-  if (
-    input.length !== 3 ||
-    input.match(/[^1-9]/g) ||
-    new Set(input.split("")).size !== 3
-  )
-    throw new Error(ERROR.INVALID_USER_INPUT);
-
-  return true;
 };
 
 const countStrike = (answer, input) => {
@@ -74,20 +63,13 @@ const gameEnd = (answer, input) => {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (input) => {
-        validateRestartInput(input);
+        validate.restartInput(input);
         evaluateRestartInput(answer, input);
       }
     );
   }
 
   return getUserInput(answer);
-};
-
-const validateRestartInput = (input) => {
-  if (!(input === RESTART.YES || input === RESTART.NO))
-    throw new Error(ERROR.INVALID_RESTART_INPUT);
-
-  return true;
 };
 
 const evaluateRestartInput = (answer, input) => {
