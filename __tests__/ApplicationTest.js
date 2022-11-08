@@ -75,13 +75,11 @@ describe("숫자 야구 게임", () => {
   });
 
   test("getHint메서드로 stat의 값을 문자열로 반환", () => {
-    const input = {
-      ball: 1,
-      strike: 1,
-    };
+    const ball = 1;
+    const strike = 1;
 
     const app = new App();
-    const result = app.getHint(input);
+    const result = app.getHint(ball, strike);
 
     expect(result).toEqual("1볼 1스트라이크");
   });
