@@ -15,14 +15,6 @@ module.exports = App;
 
 function game(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-    // try{
-    //   judgeInputNumber(answer);
-    // } catch(error) {
-    //   MissionUtils.Console.print(error);
-    //   MissionUtils.Console.print('게임 종료');
-    //   MissionUtils.Console.close();
-    //   return;
-    // }
     judgeInputNumber(answer);
     
     const compareNumberArr = comparingNumbers(answer, computer);
@@ -40,19 +32,15 @@ function game(computer) {
 
 function askGamePlay() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
-    try {
-      if(answer == 1) {
-        const computer = pickRandomNumbers();
-        game(computer);
-      } else if(answer == 2) {
-        MissionUtils.Console.print('게임 종료');
-        MissionUtils.Console.close();
-      } else {
-        MissionUtils.Console.close();
-        throw '잘못된 값 입력. 게임 종료';
-      }
-    } catch(error) {
-      MissionUtils.Console.print(error);
+    if(answer == 1) {
+      const computer = pickRandomNumbers();
+      game(computer);
+    } else if(answer == 2) {
+      MissionUtils.Console.print('게임 종료');
+      MissionUtils.Console.close();
+    } else {
+      MissionUtils.Console.close();
+      throw new Error('잘못된 값 입력. 게임 종료');
     }
   });
 }
