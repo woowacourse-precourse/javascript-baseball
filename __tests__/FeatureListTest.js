@@ -71,4 +71,38 @@ describe('기능 목록 테스트', () => {
       );
     });
   });
+
+  test('볼, 스트라이크 개수 구하기', () => {
+    const game = new Game();
+    const pitch = [
+      [
+        // guess
+        [1, 2, 3],
+        // answer
+        [4, 2, 5],
+        // [ballShouldBe, strikeShouldbe]
+        [0, 1],
+      ],
+      [
+        [4, 5, 6],
+        [4, 2, 5],
+        [1, 1],
+      ],
+      [
+        [7, 8, 9],
+        [4, 2, 5],
+        [0, 0],
+      ],
+      [
+        [4, 2, 5],
+        [4, 2, 5],
+        [0, 3],
+      ],
+    ];
+
+    pitch.map(([guess, answer, [ballShouldBe, strikeShouldbe]]) => {
+      const { ball, strike } = game.judgeBallStrike(guess, answer);
+      expect([ball, strike]).toEqual([ballShouldBe, strikeShouldbe]);
+    });
+  });
 });
