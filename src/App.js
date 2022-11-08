@@ -8,6 +8,22 @@ class App {
 
   gamePrepare() {
     const answer = createRandomNumber();
+    this.gameStart(answer);
+  }
+
+  gameStart(answer) {
+    Console.readLine(MESSAGE.INPUT, (userInput) => {
+      if (!validateInputValue(userInput)) {
+        this.gameInputError();
+      }
+      const { ball, strike } = countBallAndStrike(userInput, answer);
+        printResultMessage(ball, strike);
+        return this.gameRestartCheck();
+      } else {
+        printResultMessage(ball, strike);
+      }
+      return this.gameStart(answer);
+    });
   }
 
 
