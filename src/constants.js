@@ -27,7 +27,9 @@ const RESTART_OPTIONS = {
   2: 'quit',
 };
 
-exports.MESSAGES = MESSAGES;
-exports.OUTPUTS = OUTPUTS;
-exports.ERRORS = ERRORS;
-exports.RESTART_OPTIONS = RESTART_OPTIONS;
+module.exports = {
+  MESSAGES,
+  OUTPUTS,
+  ERRORS,
+  RESTART_OPTIONS,
+};

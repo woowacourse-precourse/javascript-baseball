@@ -30,6 +30,8 @@ function isNumber(value) {
   return typeof value === 'number';
 }
 
-exports.getRandomUniqueNumbers = getRandomUniqueNumbers;
-exports.isInRange = isInRange;
-exports.isNumber = isNumber;
+module.exports = {
+  getRandomUniqueNumbers,
+  isInRange,
+  isNumber,
+};
