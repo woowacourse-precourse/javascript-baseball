@@ -7,7 +7,7 @@ class App {
     while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
       const errorFlag = oneGame(computerNumbers);
-      if (errorFlag == 1) throw new Error("입력 숫자 개수 에러");
+      if (errorFlag == 1) throw new Error("입력 숫자 에러");
       gameAgain = askGameAgain();
       if (gameAgain != 1 && gameAgain != 2) {
         console.log("[Error]재시작? - 입력 값이 1이나 2가 아닙니다.");
@@ -49,7 +49,10 @@ const playerNumbersInput = () => {
     console.log("[Error]입력 숫자 개수가 맞지 않습니다");
     throw "입력 숫자 개수 에러";
   }
-  
+  if(input[0]==input[1] || input[1] == input[2] || input[0]==input[2]){
+    console.log("[Error]입력 숫자는 각각 서로 다른 숫자여야 합니다.");
+    throw "입력 숫자 겹침";
+  }
   return input;
 };
 
