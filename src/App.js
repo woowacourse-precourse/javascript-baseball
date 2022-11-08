@@ -23,9 +23,17 @@ const progress = (input) => {
   score = getScore(cpu, user);
 }
 
-const endGame = () => {};
 const makeTargetNumber = () => {
-  return Random.pickUniqueNumbersInRange(1, 9, 3);
+  const targetNumber = [];
+
+  while (targetNumber.length < 3) {
+    const randomNumber = Random.pickNumberInRange(1, 9);
+
+    if (!targetNumber.includes(randomNumber)) {
+      targetNumber.push(randomNumber);
+    }
+  }
+  return targetNumber;
 };
 
 const validateInput = (regEx, input) => {
