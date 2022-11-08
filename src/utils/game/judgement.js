@@ -7,3 +7,13 @@ const strikeJudgment = (pickedNumberArrayByComputer, numberArrayEnteredByUser) =
     { strikeCount: 0, notStrikeIndexArray: [] },
   );
 };
+
+const ballJudment = (notStrikeIndexArray, pickedNumberArrayByComputer, numberArrayEnteredByUser) => {
+  let ballCount = 0;
+  notStrikeIndexArray.forEach((notStrikeIndex) => {
+    if (pickedNumberArrayByComputer.includes(numberArrayEnteredByUser[notStrikeIndex])) {
+      ballCount += 1;
+    }
+  });
+  return ballCount;
+};
