@@ -46,7 +46,6 @@ describe('기능 목록 테스트', () => {
 
   test('잘못된 값을 입력한 경우 에러처리', () => {
     const game = new Game();
-
     const guesses = [
       // 3자리 수가 아닐 경우
       '1234',
@@ -109,7 +108,6 @@ describe('기능 목록 테스트', () => {
   test('입력한 숫자에 대한 결과 출력', () => {
     const game = new Game();
     const logSpy = getLogSpy();
-
     const scores = [
       // [[ball 개수, strike 개수], 출력문]
       [[0, 1], '1스트라이크'],
@@ -126,7 +124,6 @@ describe('기능 목록 테스트', () => {
 
   test('게임 종료 후 1, 2 외의 숫자 입력시 에러처리', () => {
     const game = new Game();
-
     answers = [
       // 1 또는 2가 아닐 경우
       '0',
