@@ -52,4 +52,22 @@ describe("유저 플로우", () => {
     });
   });
 
+  test("정답 없을시 낫싱 출력", () => {
+    const randoms = [7, 3, 1];
+    const answers = ["256"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
