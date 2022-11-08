@@ -199,7 +199,7 @@ class App {
   }
 
   confirmRestart() {
-    const MESSAGE = `게임을 새로 시작하려면 ${RESTART_COMMAND.NEW_GAME}, 종료하려면 ${RESTART_COMMAND.EXIT}를 입력하세요.`;
+    const MESSAGE = `게임을 새로 시작하려면 ${RESTART_COMMAND.NEW_GAME}, 종료하려면 ${RESTART_COMMAND.EXIT}를 입력하세요.\n`;
 
     Console.readLine(MESSAGE, this.restart.bind(this));
   }
