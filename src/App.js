@@ -1,106 +1,127 @@
-const { Console } = require('@woowacourse/mission-utils');
-const COMPUTER = require('./Answer');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
-class App {
-  play() {
-    this.print('숫자 야구 게임을 시작합니다.');
-    this.readLine();
-  }
-
-  print(msg) {
-    Console.print(msg);
-  }
-
-  readLine() {
-    Console.readLine(`숫자를 입력해주세요 : `, (input) => {
-      const USER_INPUT = input.split('').map((data) => data * 1);
-      USER_INPUT.forEach((data) => {
-        if (Number.isNaN(data)) {
-          throw '숫자만 입력해주세요!';
-        }
-      });
-      if (USER_INPUT.length !== 3) {
-        throw '3자리 숫자를 입력해주세요!';
-      }
-      this.checkDuplicateInputs(USER_INPUT);
-      this.check(USER_INPUT);
-    });
-  }
-
-  checkDuplicateInputs(USER_INPUT) {
-    let result = 0;
-    result = USER_INPUT[0];
-    for (let i = 1; i < USER_INPUT.length; i += 1) {
-      if (result === USER_INPUT[i]) {
-        throw '중복되지 않는 3자리의 숫자를 입력해주세요!';
-      }
+function randomNumber() {
+  const COMPUTER = [];
+  while (COMPUTER.length < 3) {
+    const NUMBER = Random.pickNumberInRange(1, 9);
+    if (!COMPUTER.includes(NUMBER)) {
+      COMPUTER.push(NUMBER);
     }
   }
+  return COMPUTER;
+}
 
-  check(USER_INPUT) {
-    let countBall = 0;
-    let countStrike = 0;
+function inputVerification(USER_INPUT) {
+  const ORGANIZED_DATA = USER_INPUT.filter(
+    (data, index) => USER_INPUT.indexOf(data) === index
+  );
+  if (USER_INPUT.includes(0)) {
+    throw new Error('1-9');
+  }
+  if (USER_INPUT.length !== 3) {
+    throw new Error('3자리 입력');
+  }
+  if (USER_INPUT.includes(NaN)) {
+    throw new Error('숫자만 입력');
+  }
+  if (ORGANIZED_DATA.length !== 3) {
+    throw new Error('중복 ㄴㄴ');
+  }
+  return USER_INPUT;
+}
 
-    for (let i = 0; i < COMPUTER.length; i += 1) {
-      for (let j = 0; j < USER_INPUT.length; j += 1) {
-        if (COMPUTER[i] === USER_INPUT[j]) {
-          countBall += 1;
-        }
-      }
+function countStrike(USER_INPUT, computerAnswer) {
+  let count = 0;
+  computerAnswer.forEach((data, index) => {
+    if (data === USER_INPUT[index]) {
+      count += 1;
     }
-    COMPUTER.forEach((number, index) => {
-      if (number === USER_INPUT[index]) {
-        countStrike += 1;
-      }
-    });
+  });
+  return count;
+}
 
-    if (countBall !== 0 && countStrike === 3) {
-      this.result(countBall, countStrike);
-      this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      this.replay();
-    } else {
-      this.result(countBall, countStrike);
-      this.readLine();
+function countBall(USER_INPUT, computerAnswer) {
+  let count = 0;
+  computerAnswer.forEach((data) => {
+    if (USER_INPUT.includes(data)) {
+      count += 1;
     }
+  });
+  return count;
+}
+
+function answerToInput(USER_INPUT, computerAnswer) {
+  const STRIKE = countStrike(USER_INPUT, computerAnswer);
+  const BALL = countBall(USER_INPUT, computerAnswer) - STRIKE;
+  if (BALL === 0 && STRIKE === 0) {
+    return '낫싱';
   }
 
-  result(countBall, countStrike) {
-    if (countBall === 0 && countStrike === 0) {
-      this.print(`${COMPUTER} 낫싱`);
-    }
-    if (countBall === 0 && countStrike !== 0) {
-      this.print(`${COMPUTER} ${countStrike}스트라이크`);
-    }
-    if (countBall !== 0 && countStrike === 0) {
-      this.print(`${COMPUTER} ${countBall}볼`);
-    }
-    if (countBall !== 0 && countStrike !== 0) {
-      this.print(`${COMPUTER} ${countBall}볼 ${countStrike}스트라이크`);
-    }
-    if (countBall !== 0 && countStrike === 3) {
-      this.print(`${countStrike}스트라이크`);
-    }
+  if (STRIKE === 0) {
+    return `${BALL}볼`;
   }
 
-  replay() {
-    this.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요');
-    Console.readLine('', (input) => {
-      if (input === '1') {
-        this.readLine();
-      }
-      if (input === '2') {
-        this.print('게임을 종료합니다.');
-        this.close();
-      }
-    });
+  if (BALL === 0) {
+    return `${STRIKE}스트라이크`;
   }
 
-  close() {
-    Console.close();
+  if (STRIKE === 3) {
+    return '3스트라이크';
+  }
+
+  return `${BALL}볼 ${STRIKE}스트라이크`;
+}
+
+function endGameJudgment(ANSWER_CHECK, computerAnswer) {
+  if (ANSWER_CHECK === '3스트라이크') {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    restartGame();
+  } else {
+    inputReadLine(computerAnswer);
   }
 }
 
-const app = new App();
-app.play();
+function inputReadLine(computerAnswer) {
+  Console.readLine(`숫자를 입력해주세요 : `, (input) => {
+    const USER_INPUT = input.split('').map((data) => data * 1);
+    const INPUT_CHECK = inputVerification(USER_INPUT);
+    const ANSWER_CHECK = answerToInput(INPUT_CHECK, computerAnswer);
+    Console.print(ANSWER_CHECK);
+    endGameJudgment(ANSWER_CHECK, computerAnswer);
+  });
+}
+
+function restartGame() {
+  Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요');
+  Console.readLine('', (input) => restartCondition(input));
+  /* 
+    
+  } */
+}
+
+function restartCondition(input) {
+  if (input === '1') {
+    const computerAnswer = randomNumber();
+    inputReadLine(computerAnswer);
+  }
+  if (input === '2') {
+    Console.print('게임 종료');
+    Console.close();
+  }
+  if (input !== '1' && input !== '2') {
+    throw new Error('1-2');
+  }
+}
+
+class App {
+  play() {
+    Console.print('숫자 야구 게임을 시작합니다.');
+    const computerAnswer = randomNumber();
+    inputReadLine(computerAnswer);
+  }
+}
+
+const test = new App();
+test.play();
 
 module.exports = App;
