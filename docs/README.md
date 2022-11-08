@@ -13,8 +13,9 @@
 3. 사용자 입력 예외 처리 `inputExceptionHandling`
     - 잘못된 값을 입력햇을 때 → `throw`을 사용하여 예외 발생 후 애플리케이션 종료
     (e) 0 입력 불가
-    (e) 숫자 중복 불가
     (e) 문자 입력 불가
+    (e) 숫자 중복 불가
+    (e) 3개 이상 입력 불가
     
 4. 사용자 입력 확인 `checkInputNumbers`
     : 입력 받은 숫자(`inputNumbers`)와 랜덤 숫자(`randomNumbers`)를 가져와 하나씩 비교한다. 

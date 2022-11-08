@@ -14,14 +14,17 @@ class App {
   }
 
   inputExceptionHandling(inputNumber) {
+    if(inputNumber.includes("0")){
+      throw new Error("0은 입력할 수 없습니다.")
+    }
     if (isNaN(inputNumber)) {
       throw new Error("숫자가 아닙니다.");
     }
-    if (inputNumber.length > 3) {
-      throw new Error("숫자가 초과했습니다.(3개만 입력)");
-    }
     if ([...new Set(inputNumber.split(""))].length !== 3) {
       throw new Error("중복되는 숫자가 입력되었습니다.");
+    }
+    if (inputNumber.length > 3) {
+      throw new Error("숫자가 초과했습니다.(3개만 입력)");
     }
   }
 
