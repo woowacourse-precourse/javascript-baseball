@@ -14,6 +14,16 @@ class Input {
       if (!computerPick.includes(computerPick)) {
         computerPick.push(randomNumber);
       }
+
+      //   if (computerPick[0] && !computerPick.includes(computerPick[0])) {
+      //     computerPick.push(randomNumber);
+      //   } else if (
+      //     computerPick[1] &&
+      //     !computerPick.includes(computerPick[0]) &&
+      //     !computerPick.includes(computerPick[1])
+      //   ) {
+      //     computerPick.push(randomNumber);
+      //   }
     }
     return computerPick;
   }

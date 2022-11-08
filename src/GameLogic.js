@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const App = require("../src/App");
+const Input = require("../src/Input");
 const Validation = require("../src/Validation");
 
 const { INGAME_MESSAGE, RESPONSE } = require("./Constant");
@@ -47,33 +47,35 @@ class GameLogic {
   select() {
     MissionUtils.Console.readLine(INGAME_MESSAGE.ASK, (input) => {
       if (input === RESPONSE.RESTART) {
-        const app = new App();
-        app.play();
+        const input = new Input();
+        const computerNumber = input.computer();
+
+        this.implement(computerNumber);
       } else if (input === RESPONSE.FINISH) {
         MissionUtils.Console.close();
-      }
+      } else MissionUtils.Console.close();
     });
   }
 
   implement(computerNumber) {
-    MissionUtils.Console.readLine(INGAME_MESSAGE.INPUT_NUMBER, (string) => {
-      const validation = new Validation();
+    MissionUtils.Console.readLine(
+      //   INGAME_MESSAGE.INPUT_NUMBER,
+      `${computerNumber}`,
+      (string) => {
+        const validation = new Validation();
+        const userNumber = string.split("").map((el) => Number(el));
+        const ballStrikeResult = this.judge(userNumber, computerNumber);
+        const result = this.result(ballStrikeResult);
 
-      const userNumber = string.split("").map((el) => Number(el));
+        validation.checkAll(userNumber);
 
-      ////////////////////////////////////////////////////////////////
-      //   if (validation.checkAll(userNumber)) { //체크 후 안넘어가는 문제
-      const ballStrikeResult = this.judge(userNumber, computerNumber);
-
-      const result = this.result(ballStrikeResult);
-
-      if (result) {
-        this.select();
-      } else {
-        this.implement(computerNumber);
+        if (result) {
+          this.select();
+        } else {
+          this.implement(computerNumber);
+        }
       }
-      //   }
-    });
+    );
   }
 }
 
