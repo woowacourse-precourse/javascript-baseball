@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { ANSWER, OPTION } = require('./constants/constants');
+const { ANSWER, OPTION, MESSAGE } = require('./constants/constants');
 
 class Game {
   makeAnswer() {
@@ -56,17 +56,15 @@ class Game {
   }
 
   progress(answer) {
-    Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
+    Console.readLine(MESSAGE.INPUT, (userNumber) => {
       if (!this.validateInput(userNumber)) {
-        throw new Error('유효하지 않은 값이 입력되어 게임이 종료됩니다.');
+        throw new Error(MESSAGE.ERROR);
       }
       const result = this.getResult(answer, userNumber);
       this.printResult(result);
 
       if (result.strikeCnt === ANSWER.LENGTH) {
-        Console.print(
-          `${ANSWER.LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`
-        );
+        Console.print(`${ANSWER.LENGTH}${MESSAGE.END}`);
         this.askRestart();
       } else {
         this.progress(answer);
@@ -80,18 +78,15 @@ class Game {
   }
 
   askRestart() {
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (userInput) => {
-        if (userInput === OPTION.RESTART) {
-          return this.start();
-        } else if (userInput === OPTION.END) {
-          return this.end();
-        } else {
-          throw new Error('유효하지 않은 값이 입력되어 게임이 종료됩니다.');
-        }
+    Console.readLine(`${MESSAGE.RESTART}\n`, (userInput) => {
+      if (userInput === OPTION.RESTART) {
+        return this.start();
+      } else if (userInput === OPTION.END) {
+        return this.end();
+      } else {
+        throw new Error(MESSAGE.ERROR);
       }
-    );
+    });
   }
 
   end() {
