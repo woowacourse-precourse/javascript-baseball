@@ -20,8 +20,15 @@ class App {
 
   #startGame() {
     const computerPick = this.#computerPicksNumber();
+    Console.readLine('숫자를 입력해주세요 : ', guess => {
+      this.#gameLoop(computerPick, guess.trim());
+    })
   };
 
+  #gameLoop(computerPick, guess) {
+
+  }
+  
   play() {
     this.#sayStart();
     this.#startGame();
