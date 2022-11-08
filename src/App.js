@@ -11,6 +11,12 @@ class App {
     this.gameover = false;
   }
 
+  isNumberValidated(input) {
+    if (isNaN(input)) return false;
+    else if (input.length !== MAX_LENGTH) return false;
+    else return true;
+  }
+
   createComputerNumber() {
     this.computerNumber = [];
     while (this.computerNumber.length < MAX_LENGTH) {
