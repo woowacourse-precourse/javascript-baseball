@@ -101,12 +101,14 @@ class App {
       "n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
 
     MissionUtils.Console.readLine(userQuestion, (input) => {
-      if (input == 1) {
-        return this.play();
-      } else if (input == 2) {
-        MissionUtils.Console.print("게임 종료");
-      } else {
-        throw "유효하지 않은 입력값 입니다.";
+      switch (input) {
+        case "1":
+          return this.play();
+        case "2":
+          MissionUtils.Console.print("게임 종료");
+          break;
+        default:
+          throw "유효하지 않은 입력값입니다.";
       }
     });
   }
