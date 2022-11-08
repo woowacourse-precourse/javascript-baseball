@@ -2,10 +2,21 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 class App {
 
   constructor() {
-    this.computerInputNums = [];
-    this.userInputNums = [];
+    this.computerInputNums = '';
+    this.userInputNums = '';
+  }
+
+  play(){
+    Console.print("숫자 야구 게임을 시작합니다.");
+    this.startGame();
+  }
+
+  startGame(){
+    this.computerInput();
+    this.userInput();
   }
   
+
   computerInput(){
     const computer = [];
     while (computer.length < 3) {
@@ -17,14 +28,6 @@ class App {
     this.computerInputNums = computer;
   }
 
-  checkUserInput(userInput){
-    //const isValidArr = userInput.map(e => e=Number.isNaN(e));
-    if(userInput.length!==3) throw new Error("3자리의 수를 입력해주세요.");
-    //if(isValidArr.includes(true)) return false;
-    if(new Set(userInput).size!==3) throw new Error("중복된 숫자가 없도록 입력해주세요.");
-    if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
-  }
-
   userInput(){
     return Console.readLine('숫자를 입력해주세요 : ',(input) => {
       this.checkUserInput(input);
@@ -33,11 +36,18 @@ class App {
       })
   }
 
+  checkUserInput(userInput){
+    if(userInput.length!==3) throw new Error("3자리의 수를 입력해주세요.");
+    if(new Set(userInput).size!==3) throw new Error("중복된 숫자가 없도록 입력해주세요.");
+    if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
+  }
+
+
   askRestartOrQuit(){
     Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     Console.readLine('', (answer) => {
-      if(answer == 1) return this.startGame();
-      if(answer == 2) return Console.print("게임 종료");
+      if(answer === '1') return this.startGame();
+      if(answer === '2') return Console.print("게임 종료");
     })
   }
 
@@ -79,16 +89,6 @@ class App {
 
   }
 
-
-  play(){
-    Console.print("숫자 야구 게임을 시작합니다.");
-    this.startGame();
-  }
-
-  startGame(){
-    this.computerInput();
-    this.userInput();
-  }
 }
 
 module.exports = App;
