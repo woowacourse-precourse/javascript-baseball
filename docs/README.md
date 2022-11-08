@@ -26,7 +26,8 @@
 - `generateRandomNumber` : 1에서 9까지 서로 다른 임의의 수 3개를 선택하여 생성하는 함수
 - `inputNumber` : 3개의 숫자를 입력받는 함수
 - `isValidateNumber` : 입력받은 값 유효성 검사하는 함수
-- `checkBaseballCount` : 입력받은 값을 저장했던 임의의 수 3개와 비교하여 스트라이크, 볼, 낫싱을 판별하는 함수
+- `checkBaseballCount` : 입력받은 값을 저장했던 임의의 수 3개와 비교하여 스트라이크, 볼을 판별하는 함수
+- `printBaseballCount` : 스트라이크, 볼, 낫싱을 출력하는 함수
 
 ### Constants.js
 - 출력 메시지
