@@ -106,5 +106,19 @@ describe("contextualHint 확인", () => {
         contextualHints.gameEnd();
       }).toBeTruthy();
     });
+
+    it("플레이어가 올바르지 않은 값을 입력했을 때", () => {
+      let answers = ["3"];
+      mockQuestions(answers);
+      expect(() => {
+        contextualHints.gameEnd();
+      }).toThrow();
+
+      answers = ["안녕"];
+      mockQuestions(answers);
+      expect(() => {
+        contextualHints.gameEnd();
+      }).toThrow();
+    });
   });
 });

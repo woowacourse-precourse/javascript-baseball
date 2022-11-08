@@ -45,7 +45,7 @@ class ContextualHints {
           MissionUtils.Console.print(
             "올바르지 않은 값을 입력하여 게임이 종료됩니다."
           );
-          MissionUtils.Console.close();
+          throw MissionUtils.Console.close();
         }
       }
     );
