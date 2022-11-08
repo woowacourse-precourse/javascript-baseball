@@ -48,4 +48,28 @@ function inputCount(answer) {
 }
 
 
+function showNum(obj) { // strike 리턴 함수
+  const strikeNum = Number(obj.strike);
+  const ballNum = Number(obj.ball);
+  const nothingNum = Number(obj.nothing);
+
+  if (strikeNum === 3) {
+    Console.print("3스트라이크");
+  }
+  else if (ballNum !== 0 && strikeNum !== 0) {
+    Console.print(`${ballNum}볼 ${strikeNum}스트라이크`);
+  }
+  else if (ballNum !== 0 && strikeNum === 0) {
+    Console.print(`${ballNum}볼`);
+  }
+  else if (ballNum === 0 && strikeNum !== 0) {
+    Console.print(`${strikeNum}스트라이크`);
+  }
+  else if (nothingNum === 3) {
+    Console.print("낫싱");
+  }
+  return strikeNum;
+}
+
+
 module.exports = App;
