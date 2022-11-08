@@ -59,5 +59,12 @@ class App {
       return `${gameResult.ball}볼 ${gameResult.strike}스트라이크`;
     }
   }
+  restartOrNot(answer) {
+    if (answer === 1 || answer === 2) {
+      return answer;
+    } else {
+      throw "1 또는 2를 입력해주세요.";
+    }
+  }
 }
 module.exports = App;
