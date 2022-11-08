@@ -21,12 +21,18 @@ function endGame() {
     whetherContinueGame();
 }
 
+function restartGame() {
+    generateRandomNumber();
+    startGame();
+}
+
 function whetherContinueGame() {
     MissionUtils.Console.print(
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
     );
     MissionUtils.Console.readLine('', (response) => {
         if (response === '1') {
+            restartGame();
         } else if (response === '2') {
             MissionUtils.Console.close();
         } else {
