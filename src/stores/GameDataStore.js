@@ -5,12 +5,12 @@ class GameDataStore {
   #gameData;
   #gameDataView;
 
-  constructor() {
+  constructor(GameDataView) {
     this.#gameData = {
       target: [],
       ballsAndStrikes: {},
     };
-    this.#gameDataView = {};
+    this.#gameDataView = GameDataView;
   }
 
   initializeGameData() {
@@ -71,10 +71,6 @@ class GameDataStore {
 
       return acc;
     }, initialValue);
-  }
-
-  injection(GameDataView) {
-    this.#gameDataView = GameDataView;
   }
 }
 

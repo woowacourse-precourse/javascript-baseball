@@ -4,8 +4,8 @@ const { ACTION_TYPE, GAME_STATUS, PRINT } = require('../utils/constants');
 class GameStatusView {
   #dispatcher;
 
-  constructor() {
-    this.#dispatcher = {};
+  constructor(Dispatcher) {
+    this.#dispatcher = Dispatcher;
   }
 
   update(newGameStatus) {
@@ -23,10 +23,6 @@ class GameStatusView {
         Console.close();
         break;
     }
-  }
-
-  injection(newDispatcher) {
-    this.#dispatcher = newDispatcher;
   }
 }
 

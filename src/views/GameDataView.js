@@ -4,8 +4,8 @@ const { PRINT, ACTION_TYPE, NUMBER } = require('../utils/constants');
 class GameDataView {
   #dispatcher;
 
-  constructor() {
-    this.#dispatcher = {};
+  constructor(Dispatcher) {
+    this.#dispatcher = Dispatcher;
   }
 
   update = ({ ballsAndStrikes }) => {
@@ -72,10 +72,6 @@ class GameDataView {
       return `${strike}${PRINT.STRIKE}`;
     }
     return '';
-  }
-
-  injection(newDispatcher) {
-    this.#dispatcher = newDispatcher;
   }
 }
 

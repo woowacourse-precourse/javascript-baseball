@@ -4,9 +4,9 @@ class GameStatusStore {
   #gameStatus;
   #gameStatusView;
 
-  constructor() {
+  constructor(GameStatusView) {
     this.#gameStatus = GAME_STATUS.INITIALIZED;
-    this.#gameStatusView = {};
+    this.#gameStatusView = GameStatusView;
   }
 
   setGameStatus(newGameStatus) {
@@ -22,10 +22,6 @@ class GameStatusStore {
     if (gameStatus === GAME_STATUS.RESTARTED) return;
     if (gameStatus === GAME_STATUS.FINISHED) return;
     throw new Error();
-  }
-
-  injection(GameStatusView) {
-    this.#gameStatusView = GameStatusView;
   }
 }
 

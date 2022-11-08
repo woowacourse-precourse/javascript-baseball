@@ -8,25 +8,17 @@ const { ACTION_TYPE, GAME_STATUS } = require('./utils/constants');
 class GameService {
   constructor() {
     this.dispatcher = new Dispatcher();
-    this.gameDataStore = new GameDataStore();
-    this.gameDataView = new GameDataView();
-    this.gameStatusStore = new GameStatusStore();
-    this.gameStatusView = new GameStatusView();
+
+    this.gameDataView = new GameDataView(this.dispatcher);
+    this.gameStatusView = new GameStatusView(this.dispatcher);
+
+    this.gameDataStore = new GameDataStore(this.gameDataView);
+    this.gameStatusStore = new GameStatusStore(this.gameStatusView);
   }
 
   startGame() {
-    this.injectDependencies();
     this.registerCallbacks();
-
     this.dispatcher.dispatch({ type: ACTION_TYPE.GAME_START });
-  }
-
-  injectDependencies() {
-    this.gameDataStore.injection(this.gameDataView);
-    this.gameStatusStore.injection(this.gameStatusView);
-
-    this.gameDataView.injection(this.dispatcher);
-    this.gameStatusView.injection(this.dispatcher);
   }
 
   registerCallbacks() {
