@@ -1,8 +1,15 @@
 //module used
 const { Console, Random } = require("@woowacourse/mission-utils");
 
-//constants
+//constants & error codes
 const TOTAL_COUNT = 3;
+const ERR_INPUT_UNDEFINED = "입력값이 없습니다";
+const ERR_3_NUM_NEEDED = "입력은 3글자여야합니다";
+const ERR_NUM_DUPLICATED = "입력에 중복된 숫자가 포함되어 있습니다";
+const ERR_ONLY_NUMBER =
+  "입력값은 1~9의 중복되지 않는 세개의 수로 구성되어야합니다";
+const ERR_OPT_1_CHAR_NEEDED = "한글자만 입력해주세요";
+const ERR_OPT_ANSWER_NEEDED = "1 또는 2로 응답해주세요";
 
 class App {
   //properties
@@ -25,13 +32,25 @@ class App {
     this.#answer = answerList.join("");
     return this.#answer;
   }
-  //input validation
+  //게임 진행시의 입력 검증
   checkAnswerValidInput(player_input) {
-    if (!player_input) throw new Error("Player Input Is Undefined!");
-    if (player_input.length !== 3)
-      throw new Error("Input string's length must be 3 characters!");
-    if (new Set(player_input).size !== 3) throw new Error("no same");
-    //숫자가 아닌 경우도 처리해야함
+    if (!player_input) throw new Error(ERR_INPUT_UNDEFINED);
+    if (player_input.length !== 3) throw new Error(ERR_3_NUM_NEEDED);
+    if (new Set(player_input).size !== 3) throw new Error(ERR_NUM_DUPLICATED);
+    let isAllNum = true;
+    player_input
+      .split("")
+      .forEach((char) => (isAllNum = "123456789".includes(char) && isAllNum));
+    if (isAllNum === false) throw new Error(ERR_ONLY_NUMBER);
+  }
+  //추가 진행 여부 입력시의 입력 검증
+  checkOptionValid(input) {
+    if (input.length !== 1) {
+      throw new Error(ERR_OPT_1_CHAR_NEEDED);
+    }
+    if ("12".indexOf(input) < 0) {
+      throw new Error(ERR_OPT_ANSWER_NEEDED);
+    }
   }
   performOneGame(opponentInput) {
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
@@ -41,8 +60,7 @@ class App {
       //afterCheckScore
       if (strike === TOTAL_COUNT) {
         //종료할지 다시할지 물어보기
-        // Console.print(`${TOTAL_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
-        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        Console.print(`${TOTAL_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
         this.askReplay();
       } else {
         this.performOneGame(opponentInput);
@@ -63,14 +81,7 @@ class App {
       }
     );
   }
-  checkOptionValid(input) {
-    if (input.length !== 1) {
-      throw new Error("length bad");
-    }
-    if ("12".indexOf(input) < 0) {
-      throw new Error("bad options");
-    }
-  }
+
   printBS(ball, strike) {
     if (ball + strike === 0) {
       Console.print("낫싱");
