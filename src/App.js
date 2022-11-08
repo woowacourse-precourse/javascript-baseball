@@ -72,7 +72,7 @@ class App {
 
     for (let i = 0; i < 3; i++) {
       ballCount =
-        refNumbers[i] !== userNumbers[i] && refNumbers.includes(userNumber)
+        refNumbers[i] !== userNumbers[i] && refNumbers.includes(userNumbers[i])
           ? ballCount + 1
           : ballCount;
     }
