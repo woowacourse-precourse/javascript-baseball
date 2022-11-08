@@ -36,6 +36,16 @@ class App {
             this.compareResultPrint(compare, computerDefinedArr);
         });
     }
+
+    // 4. 받은 입력값 검증하기
+    userInputValidate(userInput) {
+        const chkStyle = /\d/;
+        const checkDuplicate = new Set(userInput.split(""));
+        if (![...userInput].includes("0") && userInput.length === 3 && checkDuplicate.size === 3 && chkStyle.test(userInput)) {
+            return this;
+        }
+        throw new Error("잘못된 값을 입력했습니다");
+    }
 }
 const app = new App();
 app.play();
