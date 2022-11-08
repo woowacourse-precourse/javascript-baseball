@@ -41,43 +41,38 @@ class App {
     this.computerNumber = computerNumber;
   }
 
-  input(message) {
-    return new Promise((resolve) => {
-      Console.readLine(message, resolve);
+  inputNumber(message) {
+    let number = null;
+
+    Console.readLine(message, (input) => {
+      number = [...input].map((num) => Number(num));
     });
+
+    return number;
   }
 
-  async inputNumber(message) {
-    const number = await this.input(message);
-
-    return [...number].map((num) => Number(num));
-  }
-
-  isNumber() {
-    for (let number of this.userNumber) {
+  isNumber(num) {
+    for (let number of num) {
       if (!(START_NUMBER <= number && number <= END_NUMBER)) {
         throw new Error(INVALID_NUMBER_ERROR);
       }
     }
-
-    return true;
   }
 
-  isLength3() {
-    if (this.userNumber.length !== 3) throw new Error(LENGTH_ERROR);
+  isLength3(num) {
+    if (num.length !== 3) throw new Error(LENGTH_ERROR);
   }
 
-  isDuplicated() {
-    const userNumberSet = new Set(this.userNumber);
+  isDuplicated(num) {
+    const userNumberSet = new Set(num);
 
-    if (userNumberSet.size !== this.userNumber.length)
-      throw new Error(DUPLICATE_ERROR);
+    if (userNumberSet.size !== num.length) throw new Error(DUPLICATE_ERROR);
   }
 
-  userNumberException() {
-    this.isNumber();
-    this.isLength3();
-    this.isDuplicated();
+  userNumberException(num) {
+    this.isNumber(num);
+    this.isLength3(num);
+    this.isDuplicated(num);
   }
 
   countStrike() {
@@ -125,13 +120,15 @@ class App {
     }
   }
 
-  async askReGame() {
-    const selectedNumber = Number(await this.inputNumber(REGAME_MESSAGE));
-    this.selectedNumberException(selectedNumber);
+  askReGame() {
+    Console.readLine(REGAME_MESSAGE, (input) => {
+      const num = Number(input);
+      this.selectedNumberException(num);
 
-    if (selectedNumber === NEW_GAME) this.startNewGame();
+      if (num === NEW_GAME) this.startNewGame(true);
 
-    if (selectedNumber === EXIT_GAME) Console.close();
+      if (num === EXIT_GAME) Console.close();
+    });
   }
 
   checkAnswer(strike) {
@@ -139,14 +136,11 @@ class App {
       this.printMessage(WIN_MESSAGE);
       this.askReGame();
     } else {
-      this.tryGetAnswer();
+      this.startNewGame(false);
     }
   }
 
-  async tryGetAnswer() {
-    this.userNumber = await this.inputNumber(INPUT_NUMBER_MESSAGE);
-    this.userNumberException();
-
+  tryGetAnswer() {
     const strike = this.countStrike();
     const ball = this.countBall();
     this.printResult(ball, strike);
@@ -154,14 +148,22 @@ class App {
     this.checkAnswer(strike);
   }
 
-  startNewGame() {
-    this.generateComputerNumber();
-    this.tryGetAnswer();
+  startNewGame(newGame) {
+    if (newGame) {
+      this.generateComputerNumber();
+    }
+
+    Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
+      const num = [...input].map((num) => Number(num));
+      this.userNumberException(num);
+      this.userNumber = num;
+      this.tryGetAnswer();
+    });
   }
 
   play() {
     this.printMessage(START_MESSAGE);
-    this.startNewGame();
+    this.startNewGame(true);
   }
 }
 
