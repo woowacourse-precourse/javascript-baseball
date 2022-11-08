@@ -43,6 +43,25 @@ const validateInput = function validateInput(input) {
   }
 };
 
+const calculateResult = function calculateResult(input, answer) {
+  const inputNumbers = input.split("").map((number) => Number(number));
+  const answerNumbers = answer.split("").map((number) => Number(number));
+  const ball = countBall(inputNumbers, answerNumbers);
+  const strike = countStrike(inputNumbers, answerNumbers);
+
+  if (ball === 0 && strike === 0) {
+    return "낫싱";
+  }
+  if (ball === 0) {
+    return `${strike} 스트라이크`;
+  }
+  if (strike === 0) {
+    return `${ball} 볼`;
+  }
+  return `${strike} 스트라이크 ${ball} 볼`;
+};
+
+
 class App {
   play() {}
 }
