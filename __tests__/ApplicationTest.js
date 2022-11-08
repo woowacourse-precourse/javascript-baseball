@@ -1,6 +1,7 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 const { isValidBallNumber } = require("../src/game/validation");
+const { makeBallStrikeText } = require("../src/game/ball");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -170,24 +171,57 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
-  test("입력 함수 검증 : 1", () => {
+  test("입력 함수 검증 (isValidBallNumber) : 1", () => {
     const input = "1";
     const result = isValidBallNumber(input);
     expect(result).toBeFalsy();
   });
 
-  test("입력 함수 검증 : 123", () => {
+  test("입력 함수 검증 (isValidBallNumber) : 123", () => {
     const input = "123";
     const result = isValidBallNumber(input);
     expect(result).toBeTruthy();
   });
 
-  test("입력 함수 검증 : 122", () => {
+  test("입력 함수 검증 (isValidBallNumber) : 122", () => {
     const input = "122";
     const result = isValidBallNumber(input);
     expect(result).toBeFalsy();
   });
 
-  
+  test("입력 함수 검증 (isValidBallNumber) : 122", () => {
+    const ball = "1";
+    const strike = "2";
+    const result = makeBallStrikeText(ball, strike);
+    expect(result).toBe("1볼 2스트라이크");
+  });
+
+  test("입력 함수 검증 (makeBallStrikeText) : 1,2", () => {
+    const ball = 1;
+    const strike = 2;
+    const result = makeBallStrikeText(ball, strike);
+    expect(result).toBe("1볼 2스트라이크");
+  });
+
+  test("입력 함수 검증 (makeBallStrikeText) : 0,2", () => {
+    const ball = 0;
+    const strike = 2;
+    const result = makeBallStrikeText(ball, strike);
+    expect(result).toBe("2스트라이크");
+  });
+
+  test("입력 함수 검증 (makeBallStrikeText) : 1,0", () => {
+    const ball = 1;
+    const strike = 0;
+    const result = makeBallStrikeText(ball, strike);
+    expect(result).toBe("1볼");
+  });
+
+  test("입력 함수 검증 (makeBallStrikeText) : 0,0", () => {
+    const ball = 0;
+    const strike = 0;
+    const result = makeBallStrikeText(ball, strike);
+    expect(result).toBe("낫싱");
+  });
 
 });
