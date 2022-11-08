@@ -55,4 +55,15 @@ describe("기능 테스트", () => {
       expect.stringContaining("숫자를 입력해주세요 : ")
     );
   });
+
+  test("[기능 4] 게임 예상 숫자 입력 받은 후 예외사항 판단", () => {
+    const answers = ["509"];
+
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.requireInputRandomNumber();
+    }).toThrow();
+  });
 });
