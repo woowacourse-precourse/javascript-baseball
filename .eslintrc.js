@@ -10,7 +10,6 @@ module.exports = {
   rules: {
     indent: ["error", 2],
     "max-depth": ["error", 2],
-    // "no-await-in-loop": "allow",
   },
   overrides: [
     {
