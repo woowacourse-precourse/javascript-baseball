@@ -4,6 +4,7 @@ const { Random } = MissionUtils;
 class Computer {
   #randomNumbers;
 
+  // 랜덤값 설정
   setRandomNumbers() {
     this.#randomNumbers = [];
     while (this.#randomNumbers.length < 3) {
@@ -14,6 +15,7 @@ class Computer {
     }
   }
 
+  // 랜덤값 반환
   get randomNumbers() {
     return this.#randomNumbers;
   }
