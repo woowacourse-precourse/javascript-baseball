@@ -89,6 +89,17 @@ class App {
 
     return [ball, strike];
   }
+
+  restartGame() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ",
+      (playerInput) => {
+        if (playerInput === "1") return this.start();
+        else if (playerInput === "2") return Console.close();
+        throw new Error("1,2 이외의 숫자가 입력되었습니다.");
+      }
+    );
+  }
 }
 
 module.exports = App;
