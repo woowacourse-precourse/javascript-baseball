@@ -84,22 +84,26 @@ class App {
     return resultString;
   }
 
+  gameProcessCallback(input) {
+    this.userNumberInput = input;
+    if (this.checkInvalidInput()) {
+      MissionUtils.Console.close();
+      throw Error('3자리 숫자를 입력하세요');
+    }
+    this.resultObject.strike = this.countStrike();
+    this.resultObject.ball = this.countBall();
+    MissionUtils.Console.print(this.getResultString());
+    if (this.resultObject.strike === 3) {
+      this.endingProcess();
+    } else {
+      this.gameProcess();
+    }
+  }
+
   gameProcess() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.userNumberInput = input;
-      if (this.checkInvalidInput()) {
-        MissionUtils.Console.close();
-        throw Error('3자리 숫자를 입력하세요');
-      }
-      this.resultObject.strike = this.countStrike();
-      this.resultObject.ball = this.countBall();
-      MissionUtils.Console.print(this.getResultString());
-      if (this.resultObject.strike === 3) {
-        this.endingProcess();
-      } else {
-        this.gameProcess();
-      }
-    });
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) =>
+      this.gameProcessCallback(input),
+    );
   }
 
   play() {
@@ -114,20 +118,22 @@ class App {
     this.gameProcess();
   }
 
+  endingProcessCallback(input) {
+    if (input === '2') {
+      MissionUtils.Console.print('게임 종료');
+      MissionUtils.Console.close();
+    } else if (input === '1') {
+      MissionUtils.Console.close();
+      this.restart();
+    } else {
+      throw Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
+    }
+  }
+
   endingProcess() {
     MissionUtils.Console.readLine(
       '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (input) => {
-        if (input === '2') {
-          MissionUtils.Console.print('게임 종료');
-          MissionUtils.Console.close();
-        } else if (input === '1') {
-          MissionUtils.Console.close();
-          this.restart();
-        } else {
-          throw Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
-        }
-      },
+      (input) => this.endingProcessCallback(input),
     );
   }
 }
