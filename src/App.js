@@ -13,7 +13,7 @@ class App {
 
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (userInput) => {
-      this.checkAvailable(userInput);
+      this.checkValid(userInput);
       this.checkResult(this.getStats(userInput, this.answerNumbers));
     });
   }
