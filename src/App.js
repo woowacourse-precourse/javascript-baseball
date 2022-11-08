@@ -118,19 +118,19 @@ class App {
 
   end() {
     MissionUtils.Console.readLine(GameMessage.END_GAME_MESSAGE, (input) => {
-      switch (input) {
-        case GameMessage.RESTART_INPUT:
-          this.#answer = '';
-          this.start();
-          break;
-        case GameMessage.GAMEOVER_INPUT:
-          MissionUtils.Console.close();
-          MissionUtils.Console.print(GameMessage.GAMEOVER_MESSAGE);
-          break;
-        default:
-          MissionUtils.Console.close();
-          throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
+      if (input === GameMessage.RESTART_INPUT) {
+        this.#answer = '';
+        this.start();
+        return;
       }
+      if (input === GameMessage.GAMEOVER_INPUT) {
+        MissionUtils.Console.close();
+        MissionUtils.Console.print(GameMessage.GAMEOVER_MESSAGE);
+        return;
+      }
+
+      MissionUtils.Console.close();
+      throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
     });
   }
 
