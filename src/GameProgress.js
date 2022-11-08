@@ -19,7 +19,7 @@ class GameProgress{
             this.userNumber.exception(userPickNumber);
             this.userComputerCompare(userPickNumber, this.createNumber.pickNumber)
             })
-}
+        }
 
     gameSelection(){
         Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' , (answer) => {
@@ -32,35 +32,37 @@ class GameProgress{
                 return Console.close();
             }
                 throw "Error (1과 2중에 선택해주세요)";
-        })
-    }
+            })
+        }
 
     userComputerCompare(userNumber, createNumber){
         let strike = 0;
         let ball = 0;
         createNumber.forEach((number , index) => {
-        if(userNumber.includes(number)){
-            if(number == Number(userNumber[index])){
-                strike += 1;
+            if(userNumber.includes(number)){
+                if(number == Number(userNumber[index])){
+                    strike += 1;
+                }
+                else{
+                    ball +=1;
+                }
             }
-            else{
-                ball +=1;
-            }
-        }
-    })
-    this.nothing(strike, ball);
-    this.allStrike(strike, ball);
-    this.allBall(strike, ball);
-    this.strikeAndBall(strike, ball);
-    this.threeStrike(strike);
+        })
+        this.nothing(strike, ball);
+        this.allStrike(strike, ball);
+        this.allBall(strike, ball);
+        this.strikeAndBall(strike, ball);
+        this.threeStrike(strike);
     }
 
+    
+
     allStrike(strike, ball){
-    if(strike > 0 && strike < 3 && ball == 0){
-        Console.print(`${strike}` + '스트라이크');
-        this.gameInput();
+        if(strike > 0 && strike < 3 && ball == 0){
+            Console.print(`${strike}` + '스트라이크');
+            this.gameInput();
+        }
     }
-}
 
     threeStrike(strike){
         if(strike == 3){
@@ -71,25 +73,25 @@ class GameProgress{
 
 
     allBall(strike, ball){
-    if(strike == 0 && ball > 0){
-        Console.print(`${ball}` + '볼');
-        this.gameInput();
+        if(strike == 0 && ball > 0){
+            Console.print(`${ball}` + '볼');
+            this.gameInput();
+        }
     }
-}
 
     strikeAndBall(strike,ball){
-    if(strike > 0 && ball > 0){
-        Console.print( `${ball}` + '볼 ' + `${strike}`+ '스트라이크');
-        this.gameInput();
+        if(strike > 0 && ball > 0){
+            Console.print( `${ball}` + '볼 ' + `${strike}`+ '스트라이크');
+            this.gameInput();
+        }
     }
-}
 
     nothing(strike, ball){
-    if(strike == 0 && ball == 0 ){
-        Console.print('낫싱');
-        this.gameInput();
+        if(strike == 0 && ball == 0 ){
+            Console.print('낫싱');
+            this.gameInput();
+        }
     }
-}
 }
 
 module.exports = GameProgress ;
