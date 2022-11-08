@@ -1,9 +1,17 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const getUserInputs = require("./lib/getUserInput");
 class App {
   constructor() {}
 
-  selectGameNumbers() {}
+  selectGameNumbers() {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const result = [];
+    while (result.length !== 3) {
+      const num = Random.pickNumberInList(numbers);
+      if (!result.includes(num)) result.push(num);
+    }
+    return result;
+  }
 
   isValidGameInput() {}
 
