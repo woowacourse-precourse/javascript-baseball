@@ -5,7 +5,7 @@ const MSG = {
   inputNumber: '숫자를 입력해주세요 : ',
   endMsg: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   requestMsg: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요',
-  invalidNumber: '잘못된 값을 입력하셨습니다',
+  invalidInput: '잘못된 값을 입력하셨습니다',
   strike: '스트라이크',
   ball: '볼',
   nothing: '낫싱',
@@ -37,14 +37,21 @@ class App {
 
   setInputNumber() {
     Console.readLine(MSG.inputNumber, (input) => {
-
-    })
+      // this.checkNumber(input);
+    });
   }
 
   isValid(inputNumber) {
     const re = /^[1-9]{3}/;
-    const inputNumber = [...new Set(inputNumber)];
-    if (!re.test(inputNumber) || )
+    const number = [...new Set(inputNumber)];
+    if (!re.test(inputNumber) || number.length !== 3) {
+      throw Error(MSG.invalidInput);
+    }
+    return inputNumber;
+  }
+
+  checkNumber(number) {
+    for (let i = 0; i < 3; i++) {}
   }
 }
 
