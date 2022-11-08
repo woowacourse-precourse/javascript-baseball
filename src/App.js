@@ -1,12 +1,15 @@
+const { Random, Console } = require("@woowacourse/mission-utils");
 const REG_EXP = { userInputRegEx: /^[1-9]{3,3}$/ };
-class App {
-  play() {}
-}
 
-module.exports = App;
-const startGame = () => {
-  cpu = makeTargetNumber();
-};
+class App {
+  play() {
+    let cpu = [];
+    let user = "";
+    let score = { ball: 0, strike: 0 };
+    startGame();
+    processGame(user, cpu);
+  }
+}
 const processGame = () => {
   Console.readLine("숫자를 입력해주세요 : ", (input) => {
     progress(input);
@@ -21,7 +24,7 @@ const progress = (input) => {
   user = input;
   validateInput(REG_EXP.userInputRegEx, user);
   score = getScore(cpu, user);
-}
+};
 
 const makeTargetNumber = () => {
   const targetNumber = [];
@@ -89,7 +92,7 @@ const noticeScore = () => {
     processGame();
   }
 };
-let cpu = "";
+
 const considerRestart = () => {
   Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
@@ -106,3 +109,6 @@ const defineRestartGame = (flag) => {
     Console.close();
   }
 };
+const app = new App();
+app.play();
+module.exports = App;
