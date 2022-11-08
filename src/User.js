@@ -1,14 +1,14 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Exception = require('./Exception');
 class User {
-  readAnswer(query, callback) {
-    MissionUtils.Console.readLine(query, (answer) => {
-      callback(Exception.answer(answer));
+  readAnswer(message, action) {
+    MissionUtils.Console.readLine(message, (answer) => {
+      action(Exception.answer(answer));
     });
   }
-  wantRestart(query, callback) {
-    MissionUtils.Console.readLine(query, (answer) => {
-      callback(Exception.restart(answer));
+  wantRestart(message, action) {
+    MissionUtils.Console.readLine(message, (answer) => {
+      action(Exception.restart(answer));
     });
   }
 }
