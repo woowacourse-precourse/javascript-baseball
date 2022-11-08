@@ -46,6 +46,21 @@ class App {
         }
         throw new Error("잘못된 값을 입력했습니다");
     }
+
+    // 5. 컴퓨터 생성값과 사용자 입력값 비교하기
+    compare(userInput, computerDefinedArr, result) {
+        for (var i = 0; i < 3; i++) {
+            if (userInput[i] == computerDefinedArr[i]) {
+                result["strike"] += 1;
+            } else {
+                if (computerDefinedArr.includes(parseInt(userInput[i]))) {
+                    result["ball"] += 1;
+                }
+            }
+        }
+        const answerResult = result;
+        return answerResult;
+    }
 }
 const app = new App();
 app.play();
