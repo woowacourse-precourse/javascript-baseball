@@ -3,7 +3,8 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-
+    let newGame = new gameStart();
+    newGame.start(true);
   }
 }
 
@@ -19,10 +20,12 @@ const computerRandom = () => {
 }
 
 class gameStart {
-  start() {
+  start(firstTime) {
     let computer = computerRandom();
     this.computer = this.handleComputer(computer);
-    Console.print("숫자 야구 게임을 시작합니다.");
+    if(firstTime) {
+      Console.print("숫자 야구 게임을 시작합니다.");
+    }
     this.user();
   }
 
@@ -55,6 +58,16 @@ class gameStart {
       return true;
     }
     return false;
+  }
+
+  endOrRestart(answer) {
+    let RESTART = '1';
+    let END = '2';
+      if(answer === RESTART) {
+        this.start(false);
+      } else if(answer === END) {
+        Console.close()
+      };
   }
 
 }
