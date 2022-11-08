@@ -4,6 +4,12 @@ const MESSAGE = {
   HIT_BALLS: '숫자를 입력해주세요 : ',
 };
 
+const SCORE = {
+  ball: '볼',
+  strike: '스트라이크',
+  nothing: '낫싱',
+};
+
 class App {
   #answer = [];
 
@@ -21,6 +27,7 @@ class App {
     this.#answer = App.#pickRandomNumbers(3);
     this.#hitBalls();
     this.#judgeBallStrike();
+    this.#showScore();
   }
 
   static #pickRandomNumbers(count) {
@@ -75,6 +82,17 @@ class App {
     });
   }
 
+  #showScore() {
+    const result = Object.keys(this.score)
+      .reduce((acc, cur) => {
+        const value = this.score[cur];
+        const unit = SCORE[cur];
+        return acc + (value ? `${value}${unit} ` : '');
+      }, '')
+      .trimEnd();
+    const score = result || SCORE.nothing;
+    Console.print(score);
+  }
 }
 
 module.exports = App;
