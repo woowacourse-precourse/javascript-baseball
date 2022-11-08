@@ -20,9 +20,27 @@ class App {
     Console.readLine("숫자를 입력해주세요 : ", (user_input) => {
       // 사용자의 입력 체크후 return 받은 값을 이용
       const user_number = this.check_user_input(user_input);
-      Console.print(user_number);
-      Console.print(this.computer_random_number);
+      this.baseball_game(user_number);
     });
+  }
+  check_user_input(user_input) {
+    // user_input의 set 변환
+    const user_input_set = new Set(user_input.split(""));
+    let user_num = Array.from(user_input_set);
+    // user_input의 길이 체크 & 중복 체크
+    if (
+      user_input.length != 3 ||
+      isNaN(Number(user_input)) ||
+      user_input_set.size != 3 ||
+      user_num.includes("0")
+    ) {
+      throw Error("잘못된 입력입니다.");
+    }
+    // user_input_set을 숫자로 바꾸어 배열로 return
+    user_num.forEach((element, index) => {
+      user_num[index] = Number(element);
+    });
+    return user_num;
   }
 }
 
