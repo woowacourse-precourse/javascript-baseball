@@ -109,7 +109,11 @@ const getComputerNumber = () => {
 };
 
 class App {
-  play() {}
+  play() {
+    MissionUtils.Console.print(START_GAME);
+    startGame(getComputerNumber());
+  }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
