@@ -1,5 +1,4 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const getUserInputs = require("./lib/getUserInput");
 
 class App {
   selectGameNumbers() {
@@ -73,7 +72,6 @@ class App {
     if (gameResult.ball !== 0 && gameResult.strike !== 0) {
       Console.print(`${gameResult.ball}볼 ${gameResult.strike}스트라이크`);
     }
-    Console.close();
   }
 
   static isValidGameOverInput(userInput) {
@@ -84,38 +82,52 @@ class App {
     return true;
   }
 
+  askNewGame() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (!App.isValidGameOverInput(input)) {
+          Console.close();
+          throw new Error("잘못된 입력값입니다.");
+        }
+
+        if (input === "1") {
+          this.selectGameNumbers();
+          this.getUserInput();
+        }
+
+        if (input === "2") {
+          Console.close();
+        }
+      }
+    );
+  }
+
+  judge(parsedInput) {
+    const gameResult = this.getGameResult(parsedInput);
+    App.printGameResult(gameResult);
+
+    if (gameResult.strike === 3) {
+      this.askNewGame();
+    }
+    this.getUserInput();
+  }
+
+  getUserInput() {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!App.isValidGameInput(input)) {
+        throw new Error("잘못된 입력값입니다.");
+      }
+      const parsedInput = App.parseGameInput(input);
+      this.judge(parsedInput);
+    });
+  }
+
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.selectGameNumbers();
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      const userInput = getUserInputs("숫자를 입력해주세요 : ");
-      if (!App.isValidGameInput(userInput)) {
-        throw new Error("잘못된 입력값입니다.");
-      }
-      const parsedInput = App.parseGameInput(userInput);
-      const gameResult = this.getGameResult(parsedInput);
-      App.printGameResult(gameResult);
-      // eslint-disable-next-line no-continue
-      if (gameResult.strike !== 3) continue;
-
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      Console.close();
-
-      const userGameOverSelection = getUserInputs(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-      );
-
-      if (!App.isValidGameOverInput(userGameOverSelection)) {
-        throw new Error("잘못된 입력값입니다.");
-      }
-      if (userGameOverSelection === "1") {
-        this.selectGameNumbers();
-      }
-      if (userGameOverSelection === "2") {
-        break;
-      }
-    }
+    this.getUserInput();
   }
 }
 
