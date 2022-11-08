@@ -16,8 +16,13 @@ class App {
   #inputNumber;
 
   play() {
-    Console.print(Msg.initMsg);
+    Console.print(MSG.initMsg);
+    this.startGame();
+  }
+
+  startGame() {
     this.#randomNumber = this.makeRandomNumber();
+    this.#inputNumber = this.setInputNumber();
   }
 
   makeRandomNumber() {
@@ -29,6 +34,22 @@ class App {
     }
     return computer.join('');
   }
+
+  setInputNumber() {
+    Console.readLine(MSG.inputNumber, (input) => {
+
+    })
+  }
+
+  isValid(inputNumber) {
+    const re = /^[1-9]{3}/;
+    const inputNumber = [...new Set(inputNumber)];
+    if (!re.test(inputNumber) || )
+  }
 }
 
+const etst = new App();
+
+etst.play();
+console.log('안녕하세요!');
 module.exports = App;
