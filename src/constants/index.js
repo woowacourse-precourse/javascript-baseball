@@ -12,14 +12,14 @@ const GAME_MESSAGE = {
   STRIKE: "스트라이크",
   BALL: "볼",
   NOTHING: "낫싱",
-  CORRECT: `${LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`,
-  RESTART_OR_END: `게임을 새로 시작하려면 ${RESTART}, 종료하려면 ${END}를 입력하세요.\n`,
+  CORRECT: `${GAME_RULE.LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`,
+  RESTART_OR_END: `게임을 새로 시작하려면 ${GAME_RULE.RESTART}, 종료하려면 ${GAME_RULE.END}를 입력하세요.\n`,
 };
 
 const ERROR_MESSAGE = {
-  INVALID_CHARACTER: `${RULE.NUMBER_RANGE_START}~${RULE.NUMBER_RANGE_END} 사이의 숫자를 입력해주세요.`,
+  INVALID_CHARACTER: `${GAME_RULE.NUMBER_RANGE_START}~${GAME_RULE.NUMBER_RANGE_END} 사이의 숫자를 입력해주세요.`,
   DUPLICATE: "중복된 값이 포함되어 있습니다.",
-  INVALID_LENGTH: `${RULE.LENGTH}자리의 숫자를 입력해주세요.`,
+  INVALID_LENGTH: `${GAME_RULE.LENGTH}자리의 숫자를 입력해주세요.`,
   INVALID_INPUT: "유효하지 않은 값을 입력하셨습니다. 게임 종료",
 };
 
