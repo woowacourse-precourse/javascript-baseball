@@ -45,6 +45,25 @@ class App {
       this.checkInput(input);
       this.checkAnswer(input, answer);
       status = this.printScore();
+      if (status < 0) {
+        this.playerInput(answer);
+      } else {
+        this.playerRestartInput();
+      }
+      return;
+    });
+  }
+
+  playerRestartInput() {
+    MissionUtils.Console.readLine(RESTART_MESSAGE, (input) => {
+      if (input === EXIT_CODE) {
+        return;
+      }
+      if (input !== RESTART_CODE) {
+        throw new Error(RESTART_MESSAGE);
+      }
+      this.startGame();
+      return;
     });
   }
 
