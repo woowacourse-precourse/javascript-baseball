@@ -1,20 +1,24 @@
 const { Console } = require("@woowacourse/mission-utils");
 
+const Ball = require("../Ball/Ball");
+
 class ManualBallGenerator {
   maxNumberCount = 3;
 
   async execute() {
-    return await new Promise((resolve, reject) => {
+    const NUMBER = await new Promise((resolve, reject) => {
       const callback = (input) => {
         Console.close();
 
-        if (this.isSatisfied(input)) return resolve(this.toNumberArray(input));
+        if (this.isSatisfied(input)) return resolve(Number(input));
 
         return reject(new Error());
       };
 
       Console.readLine("숫자를 입력해주세요 : ", callback);
     });
+
+    return new Ball(NUMBER);
   }
 
   isSatisfied(input) {
@@ -35,10 +39,6 @@ class ManualBallGenerator {
 
   isZeroExcluded(input) {
     return !input.includes("0");
-  }
-
-  toNumberArray(input) {
-    return input.trim().split("").map(Number);
   }
 }
 
