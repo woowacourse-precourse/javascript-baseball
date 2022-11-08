@@ -40,7 +40,7 @@
 # refactor
 
 - [x] 사용되는 상수를 담은 Object 생성.
-- [ ] indent depth 재확인
+- [x] indent depth 재확인
 - [x] 의미 없는 주석 및 console 삭제.
 
 ---
