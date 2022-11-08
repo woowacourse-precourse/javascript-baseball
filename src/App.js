@@ -65,5 +65,7 @@ function matchNumber(userNums, computerNums) {
 // Test를 위한 exports 코드
 module.exports = {
   matchNumber,
+  makeRandomNumbers,
   App,
+  
 };
