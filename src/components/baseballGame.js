@@ -91,14 +91,14 @@ class BaseballGame{
     }
 
     validateInputNumber(number) {
-        if (!(typeof Number(number) === "number")) {
-            throw new Error("숫자를 입력하세요.");
-        }
-        if ([...new Set(number)].length !== NUMBER.DIGIT){
-            throw new Error("중복되지 않은 수를 입력하세요.");
+        if (!Number(number)) {
+            throw new Error(ERROR.NUMBER);
         }
         if (number.length !== NUMBER.DIGIT) {
-            throw new Error("3자리 수를 입력하세요.");
+            throw new Error(ERROR.LENGTH);
+        }
+        if ([...new Set(number)].length !== NUMBER.DIGIT){
+            throw new Error(ERROR.OVERLAP);
         }
     }
 
