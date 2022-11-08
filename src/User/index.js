@@ -10,9 +10,8 @@ class User {
   getInputNums() {
     return this.#InputNums;
   }
-
-  async setInputNums(query, callBack) {
-    let inputs = await callBack(query);
+  setInputNums(value) {
+    let inputs = value;
     Validate.isVaildate(inputs);
     this.#InputNums = inputs.split('').map((num) => Number(num));
   }
