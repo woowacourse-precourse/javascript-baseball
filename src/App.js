@@ -4,11 +4,16 @@ class App {
   async play() {
     MISSION_UTILS.Console.print('숫자 야구 게임을 시작합니다.');
     newGamePlay();
-    //MISSION_UTILS.Console.close();
   }
 }
 
 async function newGamePlay() {
+  const COMPETITOR = [];
+  
+  while(COMPETITOR.length < 3) {
+    COMPETITOR.push(MISSION_UTILS.Random.pickNumberInRange(1, 9));
+  }
+
   questionToContinueGame();
 }
 
