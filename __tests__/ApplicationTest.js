@@ -94,6 +94,28 @@ describe("숫자 야구 게임", () => {
     expect(app.userNumber).toEqual(userNumber);
   });
 
+  test("공백문자만을 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = [" "];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("공백문자를 포함한 문자를 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
+    const userInputs = ["abc "];
+
+    mockQuestions(userInputs);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test("숫자 이외의 문자 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
     const userInputs = ["abc"];
 
