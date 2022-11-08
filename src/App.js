@@ -52,7 +52,7 @@ class App {
   }
 
   play() {
-    if (this.firstEnter === true) {
+    if (this.firstEnter) {
       MissionUtils.Console.print(OUTPUT_MESSAGE.START_GAME);
       this.firstEnter = false;
     }
