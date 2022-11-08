@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE, RESULT, USER_CHOICE } = require("./constants");
-const { Input } = require("./utils");
+const { Input, Error } = require("./utils");
 
 class App {
   constructor() {
@@ -69,10 +69,9 @@ class App {
       if (answer === USER_CHOICE.RESTART) {
         this.computer.saveRandom();
         this.start();
-      }
-      if (answer === USER_CHOICE.END) {
+      } else if (answer === USER_CHOICE.END) {
         this.end();
-      }
+      } else Error.throw(MESSAGE.ERROR);
     });
   }
 
