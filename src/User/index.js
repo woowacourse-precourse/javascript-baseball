@@ -16,7 +16,7 @@ class User {
   // User가 입력한 값을  저장
   setInputNums(value) {
     let inputs = value;
-    Validate.isVaildate(inputs);
+    Validate.isInputVaildate(inputs);
     this.#InputNums = inputs.split('').map((num) => Number(num));
   }
 
