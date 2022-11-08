@@ -22,7 +22,8 @@ class App {
 
   EndGame(result) {
     let isTrue = false;
-    if (result === "3스트라이크") {
+    const END_STANDARD = "3스트라이크";
+    if (result === END_STANDARD) {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       isTrue = true;
     }
@@ -30,10 +31,11 @@ class App {
   }
 
   pickNewOrEnd() {
+    const END_GAME_NUMBER = "1";
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (number) => {
-        if (number === "1") {
+        if (number === END_GAME_NUMBER) {
           this.play();
         } else {
           MissionUtils.Console.close();

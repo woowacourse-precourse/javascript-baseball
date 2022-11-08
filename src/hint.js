@@ -23,10 +23,11 @@ const addStrikeUnit = (number, strikeAndBall) => {
 };
 
 const result = (wordArr) => {
+  const NOTHING = "낫싱";
   if (wordArr.join(" ") !== "") {
     return wordArr.join(" ");
   } else {
-    return "낫싱";
+    return NOTHING;
   }
 };
 

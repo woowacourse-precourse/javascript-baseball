@@ -2,8 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 const pickComputerNum = () => {
   const computerNums = [];
-  while (computerNums.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+  const MAX_DIGIT = 3;
+  const MIN_NUMBER = 1;
+  const MAX_NUMBER = 9;
+  while (computerNums.length < MAX_DIGIT) {
+    const number = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
     if (!computerNums.includes(number)) {
       computerNums.push(number);
     }
