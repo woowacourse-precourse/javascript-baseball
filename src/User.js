@@ -1,7 +1,6 @@
 class User {
   checkUserInputValid(userInputArr) {
     if (!userInputArr) {
-      this.errorMessage = "입력 값이 없음";
       throw new Error("입력 값이 없음");
     }
     if (userInputArr.includes(0)) {
