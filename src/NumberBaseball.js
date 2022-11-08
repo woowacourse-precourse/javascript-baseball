@@ -17,13 +17,7 @@ class NumberBaseball {
       const scores = this.checkUserInput(input, answer);
       this.printInputResult(scores.ball, scores.strike);
       if (scores.strike === 3) {
-        this.getRestartOrEnd((isRestart) => {
-          if (isRestart) {
-            this.gameSet();
-          } else {
-            Console.close();
-          }
-        });
+        this.getRestartOrEnd();
       } else {
         this.gamePlay(answer);
       }
@@ -90,10 +84,22 @@ class NumberBaseball {
     Console.print(message);
   }
 
-  getRestartOrEnd(callback) {
+  getRestartOrEnd() {
     Console.readLine(MESSAGES.RESTART, (input) => {
-      callback(input === "1");
+      this.setExceptionForRestartInput(input);
+      if (input === "1") {
+        this.gameSet();
+      } else if (input === "2") {
+        Console.close();
+      }
     });
   }
+
+  setExceptionForRestartInput(input) {
+    if (input !== "1" && input !== "2") {
+      throw new Error("1 또는 2를 입력하세요.");
+    }
+  }
 }
+
 module.exports = NumberBaseball;
