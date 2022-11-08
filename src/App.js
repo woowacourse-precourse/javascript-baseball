@@ -31,9 +31,7 @@ class App {
     let inputArr = [];
       MissionUtils.Console.readLine("숫자를 입력해주세요:", (input) => {
         this.Expectcheck(input);
-        for(var i = 0; i < input.length; i++) {
-          inputArr.push(Number(input[i]));
-        }
+        inputArr = Array.from(input).map(Number);
         const strike = this.countstrike(inputArr, computernum);
         const ball = this.countball(inputArr, computernum);
         if(strike<3)
@@ -50,8 +48,8 @@ class App {
 
   countstrike(inputArr, computernum) {
     let strike =0;
-    for (let i = 0; i < 3; i++) {
-      if (inputArr[i] === computernum[i]) {
+    for (let order = 0; order < 3; order++) {
+      if (inputArr[order] === computernum[order]) {
         strike++;
       }
     }
@@ -60,8 +58,8 @@ class App {
 
   countball(inputArr, computernum) {
     let ball =0;
-    for (let i = 0; i < 3; i++) {
-      if (computernum.includes(inputArr[i]) && inputArr[i] !== computernum[i]) {
+    for (let order = 0; order < 3; order++) {
+      if (computernum.includes(inputArr[order]) && inputArr[order] !== computernum[order]) {
         ball++;
       }
     }
