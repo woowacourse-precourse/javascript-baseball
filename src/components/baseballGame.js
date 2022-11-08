@@ -57,10 +57,10 @@ class BaseballGame{
         return ball;
     }
 
-    getStrike(answer, inputNumber){
+    getStrike(answer, number){
         let strike = 0;
         
-        [...inputNumber].forEach((number, index) => {
+        [...number].forEach((number, index) => {
             if(number === answer[index]) {
                 strike++;
             }
