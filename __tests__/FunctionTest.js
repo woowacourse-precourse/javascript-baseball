@@ -31,8 +31,8 @@ describe("숫자 야구 게임 시작 문구", () => {
 
 describe("목표값 테스트", () => {
   test("목표값 개수", () => {
-    const refNumbersArray = app.refNumbersArrayGetter();
-    expect(refNumbersArray.length).toEqual(3);
+    const refNumbers = app.refNumbersArrayGetter();
+    expect(refNumbers.length).toEqual(3);
   });
 
   test("목표값 내 중복 확인", () => {

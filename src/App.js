@@ -36,7 +36,7 @@ class App {
     Console.print(message);
   }
 
-  refNumbersArrayGetter() {
+  refNumbersGetter() {
     let refNumbers = "";
 
     while (refNumbers.length < 3) {
@@ -105,8 +105,8 @@ class App {
   reStartSelector() {
     Console.readLine(RESTART_MESSAGE.QUESTION, (answer) => {
       if (answer.trim() === "1") {
-        const newRefNumbersArray = this.refNumbersArrayGetter();
-        this.gameStarter(newRefNumbersArray);
+        const newRefNumbers = this.refNumbersGetter();
+        this.gameStarter(newRefNumbers);
       } else if (answer.trim() === "2") {
         Console.close();
       } else {
@@ -115,18 +115,18 @@ class App {
     });
   }
 
-  gameStarter(refNumbersArray) {
+  gameStarter(refNumbers) {
     Console.readLine(BASE_MESSAGE.INPUT_REQUEST, (answer) => {
       const usersInput = answer.trim();
       this.totalUserInputErrorChecker(usersInput);
-      const userNumbersArray = this.stringToNumberArrayConverter(usersInput);
-      const strikeCount = this.strikeCounter(userNumbersArray, refNumbersArray);
-      const ballCount = this.ballCounter(userNumbersArray, refNumbersArray);
+      const userNumbers = this.stringToNumberArrayConverter(usersInput);
+      const strikeCount = this.strikeCounter(userNumbers, refNumbers);
+      const ballCount = this.ballCounter(userNumbers, refNumbers);
       const discrimination = this.discriminator(strikeCount, ballCount);
       this.consolePrinter(discrimination);
 
       if (discrimination !== JUDGE_MESSAGE.THREE_STRIKE) {
-        this.gameStarter(refNumbersArray);
+        this.gameStarter(refNumbers);
       } else if (discrimination === JUDGE_MESSAGE.THREE_STRIKE) {
         this.consolePrinter(BASE_MESSAGE.END);
         this.reStartSelector();
@@ -136,8 +136,8 @@ class App {
 
   play() {
     this.consolePrinter(BASE_MESSAGE.START);
-    const refNumbersArray = this.refNumbersArrayGetter();
-    this.gameStarter(refNumbersArray);
+    const refNumbers = this.refNumbersGetter();
+    this.gameStarter(refNumbers);
   }
 }
 
