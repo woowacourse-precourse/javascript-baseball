@@ -1,5 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { ERROR } = require('../src/data/constants');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -59,4 +60,44 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test('입력 길이 예외 테스트', () => {
+    expect(() => {
+      const randoms = [1, 3, 5];
+      const answers = ['1234'];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.LENGTH);
+  });
+
+  test('입력 중복 예외 테스트', () => {
+    expect(() => {
+      const randoms = [1, 3, 5];
+      const answers = ['122'];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NOTUNIQUE);
+  });
+
+  test('0 입력 예외 테스트', () => {
+    expect(() => {
+      const randoms = [1, 3, 5];
+      const answers = ['012'];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      const app = new App();
+      app.play();
+    }).toThrow(ERROR.NUMBER_RANGE);
+  });
+
 });
