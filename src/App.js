@@ -38,16 +38,13 @@ class App {
   }
 
   checkBallOrStrike(userInputArray) {
-    for (let index = 0; index < this.COMPUTER.length; index++) {
-      if (this.COMPUTER[index] === userInputArray[index]) {
+    this.COMPUTER.forEach((item, index) => {
+      if (item === userInputArray[index]) {
         this.strike++;
-        continue;
-      }
-
-      if (userInputArray.includes(this.COMPUTER[index])) {
+      } else if (userInputArray.includes(item)) {
         this.ball++;
       }
-    }
+    });
   }
 
   showPlayerResult() {
