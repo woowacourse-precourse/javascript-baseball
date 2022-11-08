@@ -18,7 +18,6 @@ const countStrikeAndBall = (computers, user) => {
     countStrike += isStrike(number, index, computers);
     countBall += isBall(number, index, computers);
   });
-  console.log(countStrike, countBall);
   return { countStrike: countStrike, countBall: countBall };
 };
 

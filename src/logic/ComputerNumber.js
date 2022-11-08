@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const { pickNumberBetweenRange } = require("../utils/MissionUtils");
 
 const createComputerNumber = (start, end) => {

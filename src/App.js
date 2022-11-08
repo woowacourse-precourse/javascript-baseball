@@ -51,7 +51,6 @@ function App() {
   };
 
   const turnGame = () => {
-    console.log(this.state.computerNumbers, this.state.userNumbers);
     const { computerNumbers, userNumbers } = this.state;
     const { countStrike, countBall } = countStrikeAndBall(
       computerNumbers,
