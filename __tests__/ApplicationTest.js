@@ -41,7 +41,7 @@ describe("숫자 야구 게임", () => {
 
     const app = new App();
     app.play();
-
+    
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
@@ -55,6 +55,45 @@ describe("숫자 야구 게임", () => {
     mockQuestions(answers);
 
     expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자 입력이 숫자가 아닌 경우", () =>{
+    const randoms = [1, 3, 5];
+    const answers = ["1ab"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(()=>{
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("중복된 값을 입력한 경우", () =>{
+    const randoms = [1, 3, 5];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(()=>{
       const app = new App();
       app.play();
     }).toThrow();
