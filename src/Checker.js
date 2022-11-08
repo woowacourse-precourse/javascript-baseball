@@ -1,7 +1,7 @@
 class Checker {
   checkStrikeAndBall(targetNum, userNum) {
-    let strike = 0;
     let ball = 0;
+    let strike = 0;
     [...targetNum].forEach((n, i) => {
       if (n === userNum[i]) {
         strike++;
@@ -9,7 +9,7 @@ class Checker {
       }
       if (userNum.includes(n)) ball++;
     });
-    return [strike, ball];
+    return [ball, strike];
   }
 }
 
