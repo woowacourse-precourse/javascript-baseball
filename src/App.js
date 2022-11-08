@@ -27,6 +27,12 @@ const promptInput = function promptUserGuessInput(answer) {
   });
 }
 
+const validateInput = function validateInput(input) {
+  if (input.length !== 3) {
+    throw new Error("입력값은 3자리여야합니다.");
+  }
+}
+
 class App {
   play() {}
 }
