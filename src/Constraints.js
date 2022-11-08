@@ -1,10 +1,10 @@
 class Constraints {
   checkNumberRange(inputData) {
-    const regex = /^[1-9]+$/;
-
     if (typeof inputData === "object") {
       inputData = inputData.join("");
     }
+
+    const regex = /^[1-9]+$/;
 
     if (!regex.test(inputData)) {
       return false;
