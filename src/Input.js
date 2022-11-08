@@ -11,19 +11,10 @@ class Input {
         GAME_CONFIG.START_NUMBER,
         GAME_CONFIG.END_NUMBER
       );
-      if (!computerPick.includes(computerPick)) {
+
+      if (!computerPick.includes(randomNumber)) {
         computerPick.push(randomNumber);
       }
-
-      //   if (computerPick[0] && !computerPick.includes(computerPick[0])) {
-      //     computerPick.push(randomNumber);
-      //   } else if (
-      //     computerPick[1] &&
-      //     !computerPick.includes(computerPick[0]) &&
-      //     !computerPick.includes(computerPick[1])
-      //   ) {
-      //     computerPick.push(randomNumber);
-      //   }
     }
     return computerPick;
   }
