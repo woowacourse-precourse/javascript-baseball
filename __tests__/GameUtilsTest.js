@@ -2,8 +2,21 @@ const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
 
 const gameManager = new NumberBaseballGameManager();
 
+const mockGetRandomNumberArray = randomNumberCount => {
+  const randomNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const result = [];
+  let idx = 0;
+
+  while (result.length !== randomNumberCount && idx < randomNumbers.length) {
+    result.push(randomNumbers[idx++]);
+  }
+
+  return result;
+};
+
 describe('게임 기능 테스트', () => {
   test('getRandomNumberArray 메서드는 인자로 전달받은 개수만큼 컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
+    gameManager.getRandomNumberArray = jest.fn(mockGetRandomNumberArray);
     const randomNumberCount = 3;
     const result = gameManager.getRandomNumberArray(randomNumberCount).length;
 
