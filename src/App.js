@@ -64,6 +64,25 @@ class App {
   #gameLoop(computerPick, guess) {
     this.#validateGuess(guess);
     Console.print(this.#getHint(computerPick, guess))
+    if (computerPick === guess) {
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+        response => {
+          if (response.trim() === '1') {
+            this.#startGame();
+          } else if (response.trim() === '2') {
+            return;
+          } else {
+            throw new Error('1 혹은 2가 아닌 값을 입력하였습니다');
+          }
+        }
+      );
+      return;
+    }
+    Console.readLine('숫자를 입력해주세요 : ', guess => {
+      this.#gameLoop(computerPick, guess.trim());
+    });
   }
 
   play() {
