@@ -24,10 +24,11 @@ class BaseballGameFunc {
   static generateRandomNumber = () => {
     const computer = [];
     while (computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
+      let pickUp;
+      do {
+        pickUp = MissionUtils.Random.pickNumberInRange(1, 9);
+      } while (computer.indexOf(pickUp) !== -1);
+      computer.push(pickUp);
     }
     return computer;
   };
@@ -37,30 +38,27 @@ class BaseballGameFunc {
     return newMap;
   };
 
-  static isBallOrStrike = (idx, value, whereToFind) => {
-    const isIncludedAndSameIdx = whereToFind.get(idx) === value;
-    const isIncludedValue = [...whereToFind.values()].includes(value);
-
-    if (isIncludedValue && isIncludedAndSameIdx) return 'strike';
-    else if (isIncludedValue && !isIncludedAndSameIdx) return 'ball';
-    else return 'nothing';
-  };
-
   static countScore = (userInput, whereToFind) => {
     const ballAndStrike = {
       strike: 0,
       ball: 0,
       nothing: 0,
     };
+    console.log(userInput, whereToFind);
 
     userInput.forEach((value, idx) => {
-      let response = this.isBallOrStrike(idx, value, whereToFind);
-      ballAndStrike[response]++;
+      const isIncludedAndSameIdx = whereToFind.get(idx) === value;
+      const isIncludedValue = [...whereToFind.values()].includes(value);
+
+      if (isIncludedValue && isIncludedAndSameIdx) ballAndStrike.strike++;
+      else if (isIncludedValue && !isIncludedAndSameIdx) ballAndStrike.ball++;
+      else ballAndStrike.nothing++;
     });
+
     return ballAndStrike;
   };
 
-  static scoreMessagePinter = score => {
+  static scoreMessagePrinter = score => {
     const [ball, strike] = [score.ball, score.strike];
     let scoreMessage;
     if (strike > 0 && ball > 0) {
@@ -72,7 +70,7 @@ class BaseballGameFunc {
     } else {
       scoreMessage = '낫싱';
     }
-    Console.print(scoreMessage);
+    return scoreMessage;
   };
 }
 
