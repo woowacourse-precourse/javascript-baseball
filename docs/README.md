@@ -15,6 +15,10 @@
 
 게임을 진행한다.
 
+### BaseballGameRule (야구 규칙)
+
+진행 규칙을 관리한다.
+
 ### PlayerList(선수 명단)
 
 선수를 관리한다.
@@ -122,7 +126,7 @@ ManualNumberGenerator와 NumberSelectionRule의 추상 클래스
 ### Defender(수비수)
 
 - 프로퍼티:
-- numberComparisonRule: 숫자 비교 규칙
+  - numberComparisonRule: 숫자 비교 규칙
 - 메서드
   - defend: 공격 결과를 보고한다.
 

@@ -1,5 +1,5 @@
 const config = {
-  testPathIgnorePatterns: ["<rootDir>/__tests__/"],
+  testPathIgnorePatterns: ['<rootDir>/__tests__/'],
 };
 
 module.exports = config;
