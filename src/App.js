@@ -47,6 +47,27 @@ class App {
     return true;
   }
 
+  printResult(playerInput) {
+    const [ball, strike] = this.calcResult(playerInput);
+
+    if (ball && strike) {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    } else if (ball) {
+      Console.print(`${ball}볼`);
+    } else if (strike) {
+      Console.print(`${strike}스트라이크`);
+    } else {
+      Console.print("낫싱");
+    }
+
+    if (strike === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return this.restartGame();
+    }
+
+    return this.inputNumber(this.answer);
+  }
+
   calcResult(playerInput) {
     let [ball, strike] = [0, 0];
 
