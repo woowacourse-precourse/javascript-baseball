@@ -4,7 +4,7 @@ const CompareNumber = require('./utils/CompareNumber');
 
 let computerNumber;
 class App {
-  constructor() {
+  play() {
     this.InputValidation = new InputValidation();
     this.printGreeting();
   }
@@ -84,7 +84,5 @@ class App {
     MissionUtils.Console.close();
   }
 }
-
-new App();
 
 module.exports = App;
