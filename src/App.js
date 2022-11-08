@@ -19,42 +19,38 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, this.playGame.bind(this));
+    MissionUtils.Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
+      if (!validateInput(input)) {
+        throwError();
+      }
+
+      const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
+      MissionUtils.Console.print(getStrikeAndBallText(strikeCount, ballCount));
+
+      if (strikeCount === NUMBER_LENGTH) {
+        this.end();
+      }
+
+      this.play();
+    });
   }
 
   end() {
     MissionUtils.Console.print(END_MESSAGE);
-    MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, this.endGame.bind(this));
-  }
-
-  playGame(input) {
-    if (!validateInput(input)) {
-      throwError();
-    }
-
-    const [strikeCount, ballCount] = getStrikeAndBall(this.threeRandomNumbers, input);
-    MissionUtils.Console.print(getStrikeAndBallText(strikeCount, ballCount));
-
-    if (strikeCount === NUMBER_LENGTH) {
-      this.end();
-    }
-
-    this.play();
-  }
-
-  endGame(input) {
-    if (input !== RESTART_INPUT && input !== END_INPUT) {
-      throwError();
-    }
-    if (input === RESTART_INPUT) {
-      this.threeRandomNumbers = getThreeRandomNumbers();
-      this.play();
-      return;
-    }
-    if (input === END_INPUT) {
-      MissionUtils.Console.close();
-      return;
-    }
+    MissionUtils.Console.readLine(INPUT_RESTART_OR_END_MESSAGE, (input) => {
+      if (input !== RESTART_INPUT && input !== END_INPUT) {
+        throwError();
+      }
+      if (input === RESTART_INPUT) {
+        this.threeRandomNumbers = getThreeRandomNumbers();
+        this.play();
+        return;
+      }
+      if (input === END_INPUT) {
+        MissionUtils.Console.close();
+        return;
+      }
+    });
   }
 }
 
