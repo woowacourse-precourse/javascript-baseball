@@ -8,6 +8,10 @@ const {
 const { getComputerNumber, getUserNumber } = require("./utils/MissionUtils");
 
 function App() {
+  this.state = {
+    userNumbers: "",
+    computerNumbers: [],
+  };
   this.play = () => {
     MissionUtils.Console.print(START_GAME);
     const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
