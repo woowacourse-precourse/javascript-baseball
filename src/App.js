@@ -88,7 +88,18 @@ class App {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
     return false;
   }
-  
+
+  replayGame (){
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ', answer => {
+      if (answer == '1') {
+        this.play();
+      } else if (answer == '2'){
+        MissionUtils.Console.print("게임 종료")
+        MissionUtils.Console.close();
+      } else {throw new Error("잘못된 값 입력으로 게임을 종료합니다.")}
+      })
+  }
+
 }
 const app = new App();
 app.play();
