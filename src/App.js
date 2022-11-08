@@ -1,21 +1,15 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-
-const NUM_SIZE = 3;
-
-const KEY = {
-  RESTART: '1',
-  QUIT: '2',
-};
+const { NUM_SIZE, KEY, MESSAGE, ERROR } = require('./Constants');
 
 class App {
 
   constructor() {
-    this.computerInputNums = '';
+    this.computerInputNums='';
     this.userInputNums = '';
   }
 
   play(){
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(MESSAGE.START);
     this.startGame();
   }
 
@@ -37,7 +31,7 @@ class App {
   }
 
   userInput(){
-    return Console.readLine('숫자를 입력해주세요 : ',(input) => {
+    return Console.readLine(MESSAGE.INPUT,(input) => {
       this.checkUserInput(input);
       this.getResult(input);
       Console.close();
@@ -45,17 +39,17 @@ class App {
   }
 
   checkUserInput(userInput){
-    if(userInput.length!==NUM_SIZE) throw new Error("3자리의 수를 입력해주세요.");
-    if(new Set(userInput).size!==NUM_SIZE) throw new Error("중복된 숫자가 없도록 입력해주세요.");
-    if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
+    if(userInput.length!==NUM_SIZE) throw new Error(ERROR.LENGTH);
+    if(new Set(userInput).size!==NUM_SIZE) throw new Error(ERROR.UNIQUE);
+    if(userInput.includes(0)) throw new Error(ERROR.RANGE);
   }
 
 
   askRestartOrQuit(){
-    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.print(MESSAGE.RESTART);
     Console.readLine('', (answer) => {
       if(answer === KEY.RESTART) return this.startGame();
-      if(answer === KEY.QUIT) return Console.print("게임 종료");
+      if(answer === KEY.QUIT) return Console.print(MESSAGE.QUIT);
     })
   }
 
@@ -90,8 +84,8 @@ class App {
     if(ballCount === 0 && strikeCount !== 0) Console.print(`${strikeCount}스트라이크`);
 
     if(strikeCount == NUM_SIZE){
-      Console.print("3스트라이크");
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      Console.print(MESSAGE.THREE_STRIKE);
+      Console.print(MESSAGE.SUCCESS);
 
       return this.askRestartOrQuit();
     }
