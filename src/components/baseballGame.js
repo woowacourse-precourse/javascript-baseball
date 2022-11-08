@@ -103,11 +103,12 @@ class BaseballGame{
     }
 
     inputRestartOrEnd() {
-        Console.readLine(MESSAGE.OPTION, (inputNumber) => {
-            if(inputNumber === '1'){
+        Console.readLine(MESSAGE.OPTION, (number) => {
+            this.validateInputRestartOrEnd(number)
+            if(number === '1'){
                 this.start();
             }
-            if(inputNumber === '2'){
+            if(number === '2'){
                 Console.close();
             }
         });
