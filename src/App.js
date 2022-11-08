@@ -3,10 +3,9 @@ const getUserInputs = require("./lib/getUserInput");
 
 class App {
   selectGameNumbers() {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const result = [];
     while (result.length !== 3) {
-      const num = Random.pickNumberInList(numbers);
+      const num = Random.pickNumberInRange(1, 9);
       if (!result.includes(num)) result.push(num);
     }
     this.gameNumbers = result;
