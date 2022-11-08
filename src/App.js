@@ -3,7 +3,10 @@ class App {
   constructor() {
     this.game = new Game();
   }
-  play() {}
+
+  play() {
+    this.game.start();
+  }
 }
 
 const app = new App();

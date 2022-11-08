@@ -10,6 +10,14 @@ class Game {
   generateNumberArrayByComputer() {
     this.pickedNumberArrayByComputer = generateRandomNumberArray();
   }
+
+  start() {
+    Console.readLine("숫자를 입력해주세요 : ", this.playTurn);
+  }
+
+  playTurn = (numberEnteredByUser) => {
+    console.log(numberEnteredByUser);
+  };
 }
 
 module.exports = Game;
