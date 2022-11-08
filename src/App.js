@@ -25,7 +25,7 @@ class App {
       const userNum = input.trim();
       const isValid = this.user.checkValidation(userNum);
       if (!isValid) {
-        sayError();
+        this.sayError();
       }
       const [ball, strike] = this.checker.checkStrikeAndBall(
         targetNum,
