@@ -29,9 +29,7 @@ function isValidRange(playerNum) {
 }
 
 function isValidDuplicated(playerNum) {
-  const set = new Set(playerNum);
-
-  return set.size === COMPUTER_NUMBER.LENGTH;
+  return new Set(playerNum).size === COMPUTER_NUMBER.LENGTH;
 }
 
 function isValidReplayNum(input) {

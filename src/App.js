@@ -36,7 +36,7 @@ class App {
       const { ball, strike } = this.getHint(computerNum, playerNum);
       this.printHint(ball, strike);
 
-      if (this.isAllStrike(strike)) return;
+      if (this.isAllStrike(strike)) break;
     }
   }
 
