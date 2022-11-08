@@ -9,7 +9,13 @@ class App {
 
     MissionUtils.Console.readLine('숫자를 입력해 주세요', (num) => {
       const playerNum = num.split('').map(Number) //내가 입력
-      const comNum = MissionUtils.Random.pickNumberInRange(1, 9, 3) //컴퓨터가 입력
+      let comNum=[]
+      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+
+      console.log(playerNum)
+      console.log(comNum)
 
       try {
         this.vaildCheckforLength(playerNum)
@@ -41,7 +47,10 @@ class App {
 
       let ballCount = this.findBall(playerNum, comNum)
 
-      const result=this.makeAnswer(strikeCount,ballCount)
+      const result = this.makeAnswer(strikeCount, ballCount)
+      MissionUtils.Console.print(result)
+
+
 
       MissionUtils.Console.close()
     })
@@ -102,8 +111,6 @@ class App {
     for (let i = 0; i < playerNum.length; i++) {
       let index = comNum.indexOf(playerNum[i])
 
-      //console.log(index,answer[index],first[i])
-
       if (index !== -1 && index !== i) {
         ballCount++
       }
@@ -112,31 +119,29 @@ class App {
     return ballCount
   }
 
-  makeAnswer(strikeCount,ballCount){
+  makeAnswer(strikeCount, ballCount) {
     let result
 
-    if(strikeCount!==0 && ballCount!==0){
-      result=`${ballCount}볼 ${strikeCount}스트라이크`
+    if (strikeCount !== 0 && ballCount !== 0) {
+      result = `${ballCount}볼 ${strikeCount}스트라이크`
       return result
     }
 
-    if(strikeCount!==0 && ballCount===0){
-      result=`${strikeCount}스트라이크`
+    if (strikeCount !== 0 && ballCount === 0) {
+      result = `${strikeCount}스트라이크`
       return result
     }
 
-    if(strikeCount===0 && ballCount!==0){
-      result=`${ballCount}볼`
+    if (strikeCount === 0 && ballCount !== 0) {
+      result = `${ballCount}볼`
       return result
     }
 
-    if(strikeCount===0 && ballCount===0){
-      result=`낫싱`
+    if (strikeCount === 0 && ballCount === 0) {
+      result = `낫싱`
       return result
     }
-    
   }
-
 }
 
 module.exports = App
