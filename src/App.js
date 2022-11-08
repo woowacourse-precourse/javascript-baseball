@@ -1,8 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const getComputerNumber = require("./modules/getComputerNumber");
-const countInput = require("./modules/countInput");
-const printResult = require("./modules/printResult");
 const User = require("./User");
+const Referee = require("./Referee");
 
 const mConsole = MissionUtils.Console;
 const GAME_NUMBER_LENGTH = 3;
@@ -10,6 +8,7 @@ const GAME_NUMBER_LENGTH = 3;
 class App {
   constructor() {
     this.user = new User();
+    this.referee = new Referee();
   }
 
   computerInputNumber = [];
@@ -21,7 +20,7 @@ class App {
 
   startGame() {
     mConsole.print("숫자 야구 게임을 시작합니다.");
-    this.computerInputNumber = getComputerNumber();
+    this.computerInputNumber = this.referee.getComputerNumber();
   }
 
   getInput() {
@@ -34,8 +33,11 @@ class App {
   }
 
   checkInput(userArr) {
-    const countResultArr = countInput(this.computerInputNumber, userArr);
-    printResult(countResultArr);
+    const countResultArr = this.referee.countInput(
+      this.computerInputNumber,
+      userArr
+    );
+    this.referee.printResult(countResultArr);
     if (countResultArr[1] === GAME_NUMBER_LENGTH) this.checkRestart();
     this.getInput();
   }
@@ -51,7 +53,7 @@ class App {
 
   restartGame(restartInput) {
     if (restartInput === 1) {
-      this.computerInputNumber = getComputerNumber();
+      this.computerInputNumber = this.referee.getComputerNumber();
       this.getInput();
     }
     if (restartInput === 2) {
