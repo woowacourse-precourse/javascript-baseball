@@ -36,29 +36,37 @@ class App {
     });
   }
 
-  throwExceptionForInvalidInput(user){
-    if(user === '' || user === ' ' || user.includes(' ')){
+  throwExceptionForInvalidInput(input){
+    if(input === '' || input === ' ' || input.includes(' ')){
       throw "입력에 공백은 포함될 수 없습니다.";
     }
-    if(user.length !== 3){
+
+    if(input.length !== 3){
       throw "3자리의 수를 입력해주세요.";
     }
-    if(isNaN(Number(user))){
+
+    if(isNaN(Number(input))){
       throw "숫자만 입력해주세요.";
     }
 
-    [...user].forEach((num, numIndex)=>{
+    [...input].forEach((num, numIndex)=>{
       if(isNaN(num)){
         throw "음수 또는 소수점은 입력할 수 없습니다.";
       }
+
       if(!Number(num)){
         throw "각 자리의 숫자는 1~9만 허용합니다.";
       }
-      [...user].forEach((compareNum, compareIndex)=>{
-        if(numIndex !== compareIndex && num === compareNum){
-          throw "서로 다른 3개의 숫자를 입력하세요.";
-        }
-      });
+
+      this.throwExceptionForDuplicateNumber([...input], num, numIndex);
+    });
+  }
+
+  throwExceptionForDuplicateNumber(inputList, num, index) {
+    inputList.forEach((compareNum, compareIndex)=>{
+      if(num === compareNum && index !== compareIndex){
+        throw "서로 다른 3개의 숫자를 입력하세요.";
+      }
     });
   }
 
