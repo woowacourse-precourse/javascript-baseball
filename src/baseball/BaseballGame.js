@@ -7,17 +7,17 @@ class BaseballGame {
   constructor() {
     this.validUserNumbers = new ValidUserNumbers();
   }
-  initGame = () => {
+  initGame() {
     Console.print(GAME_MESSAGE.START_MESSAGE);
     return this.playGame();
-  };
+  }
 
-  playGame = () => {
+  playGame() {
     this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
     return this.playing(this.computerNumbers);
-  };
+  }
 
-  playing = (computerNumbers) => {
+  playing(computerNumbers) {
     Console.readLine(GAME_MESSAGE.ENTER_NUMBER, (userInput) => {
       const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
@@ -25,17 +25,17 @@ class BaseballGame {
       }
       this.turnCheck(userInput, computerNumbers);
     });
-  };
+  }
 
-  turnCheck = (userInput, computerNumbers) => {
+  turnCheck(userInput, computerNumbers) {
     const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
     this.printResult(strike, ball);
     strike === 3
       ? Console.readLine(GAME_MESSAGE.GAME_RESTART, this.isValidRestart)
       : this.playing(computerNumbers);
-  };
+  }
 
-  StrikeCount = (userInput, computerNumbers) => {
+  StrikeCount(userInput, computerNumbers) {
     const computerNumbersArr = [...computerNumbers];
     const userInputArr = [...userInput];
     let strike = 0;
@@ -48,9 +48,9 @@ class BaseballGame {
         : 0;
     });
     return { strike, ball };
-  };
+  }
 
-  printResult = (strike, ball) => {
+  printResult(strike, ball) {
     if (strike === 0 && ball === 0) {
       return Console.print("낫싱");
     }
@@ -58,16 +58,16 @@ class BaseballGame {
     ball === 0
       ? Console.print(`${strikePrint}`)
       : Console.print(`${ball}볼 ${strikePrint}`);
-  };
+  }
 
-  isValidRestart = (OneOrTwo) => {
+  isValidRestart(OneOrTwo) {
     OneOrTwo = Number(OneOrTwo);
     this.validUserNumbers.isValidRestart(OneOrTwo);
     if (OneOrTwo === 1) {
       return this.playGame();
     }
     Console.close();
-  };
+  }
 
   throwError(messages) {
     throw new Error(messages);
