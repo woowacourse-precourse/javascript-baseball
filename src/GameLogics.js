@@ -5,7 +5,7 @@ class GameLogics {
         for (let currentCheckingNumber of userNumber) {
           const INDEX = userNumber.indexOf(currentCheckingNumber);
           if (currentCheckingNumber === ANSWER[INDEX]) strikeCount += 1;
-        }
+        };
         return strikeCount;
       }
     
@@ -15,7 +15,7 @@ class GameLogics {
         for (let currentCheckingNumber of userNumber) {
           const INDEX = userNumber.indexOf(currentCheckingNumber);
           if (currentCheckingNumber !== ANSWER[INDEX] && ANSWER.includes(currentCheckingNumber)) ballCount += 1;
-        }
+        };
         return ballCount;
       }  
     
