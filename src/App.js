@@ -3,14 +3,20 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.opponent = new Opponent(); //상대방 등장
-    this.opponent.setRandomNumber(); //상대방 숫자 지정
     this.user = new User(); //사용자(본인) 등장
   }
   play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.gameStart();
+    let restartGame = this.gameRestart()[0];
+    while (restartGame === "1") {
+      this.gameStart();
+      restartGame = this.gameRestart()[0];
+    }
   }
   gameStart() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.opponent.setRandomNumber(); //상대방 숫자 지정
+    console.log(this.opponent.number);
     let endGame = false;
     while (!endGame) {
       this.user.getInput();
@@ -27,6 +33,14 @@ class App {
       return true;
     }
     return false;
+  }
+  gameRestart() {
+    let restartGame;
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (restartInput) => {
+      restartGame = restartInput.toString().split("");
+      // MissionUtils.Console.close();
+    });
+    return restartGame;
   }
   compareNumbers(opponentArr, userArr) {
     let ball = 0,
@@ -74,7 +88,7 @@ class User {
   getInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.input = inputNumber.toString().split("");
-      MissionUtils.Console.close();
+      // MissionUtils.Console.close();
     });
   }
   checkValidation() {
