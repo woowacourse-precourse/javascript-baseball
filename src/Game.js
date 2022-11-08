@@ -34,14 +34,18 @@ class Game {
   askRestart() {
     Console.readLine(GAME_MESSAGE.RESTART_MESSAGE, (willingnessToRestart) => {
       isOneOrTwo(willingnessToRestart);
-      if (willingnessToRestart === GAME_MESSAGE.RETRY) {
-        this.generateNumberArrayByComputer();
-        this.start();
-        return;
-      }
-      Console.print(GAME_MESSAGE.END_MESSAGE);
-      Console.close();
+      this.processRestartOrShutdown(willingnessToRestart);
     });
+  }
+
+  processRestartOrShutdown(willingnessToRestart) {
+    if (willingnessToRestart === GAME_MESSAGE.RETRY) {
+      this.generateNumberArrayByComputer();
+      this.start();
+      return;
+    }
+    Console.print(GAME_MESSAGE.END_MESSAGE);
+    Console.close();
   }
 }
 

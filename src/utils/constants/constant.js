@@ -13,4 +13,5 @@ const GAME_MESSAGE = {
   RETRY: '1',
 };
 Object.freeze(GAME_MESSAGE);
+
 module.exports = GAME_MESSAGE;
