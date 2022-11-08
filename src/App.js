@@ -3,12 +3,13 @@ const {Console,Random} = require("@woowacourse/mission-utils");
 class App {
 
   checkRangeOver(input) {
+    let checkBool = false;
     input.map((num)=> {
       if(num > 9 || num<1) {
-        return true;  
+        checkBool = true;  
       }
     })
-    return false;
+    return checkBool;
   }
   checkDupulicate(input) {
     const set = new Set(input);
@@ -24,6 +25,7 @@ class App {
     if(testInput.some((num)=> isNaN(num))) {
       throw new("숫자만 입력 가능합니다.");
     }
+    console.log("트루안나옴?",this.checkRangeOver(testInput));
     if(this.checkRangeOver(testInput)) {
       throw new("1~9사이의 숫자를 입력해주세요.")
     }
