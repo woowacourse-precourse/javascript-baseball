@@ -42,6 +42,33 @@ class App {
     });
     return user_num;
   }
+  baseball_game(user_number) {
+    this.strike = 0;
+    this.ball = 0;
+    // 완전 일치하면 3스트라이트 출력후 -> 다시 게임할지 질문
+    if (user_number.join("") == this.computer_random_number.join("")) {
+      this.strike = 3;
+      Console.print(`${this.strike}스트라이크`);
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    }
+    user_number.forEach((element, index) => {
+      if (this.computer_random_number[index] == element) {
+        this.strike++;
+      } else if (this.computer_random_number.includes(element)) {
+        this.ball++;
+      }
+    });
+    if (!(this.strike + this.ball)) {
+      Console.print(this.nothing);
+    } else if (this.strike > 0 && this.ball == 0) {
+      Console.print(`${this.strike}스트라이크`);
+    } else if (this.ball > 0 && this.strike == 0) {
+      Console.print(`${this.ball}볼`);
+    } else {
+      Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+    }
+    this.user_input();
+  }
 }
 
 module.exports = App;
