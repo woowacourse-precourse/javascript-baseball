@@ -16,4 +16,24 @@ class App {
     this.Userinput(computernum);
   }
 }
+
+countstrike(inputArr, computernum) {
+  let strike =0;
+  for (let i = 0; i < 3; i++) {
+    if (inputArr[i] === computernum[i]) {
+      strike++;
+    }
+  }
+  return strike;
+}
+
+countball(inputArr, computernum) {
+  let ball =0;
+  for (let i = 0; i < 3; i++) {
+    if (computernum.includes(inputArr[i]) && inputArr[i] !== computernum[i]) {
+      ball++;
+    }
+  }
+  return ball;
+}
 module.exports = App;
