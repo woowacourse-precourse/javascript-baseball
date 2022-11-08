@@ -6,6 +6,9 @@
     "@woowacourse/mission-utils": "^1.0.6"
   },
   "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "jest": "^29.0.3"
   },
   "scripts": {
