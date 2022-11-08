@@ -73,15 +73,13 @@ class App {
         assertRange,
       } = this.inputAssert;
 
-      if (assertRange(input))
-        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
-      if (assertOverlap(input))
-        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
-      if (!assertLength(input))
-        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
-      if (!assertInteger(input))
-        throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
-      if (!assertPositive(input))
+      if (
+        assertRange(input) ||
+        assertOverlap(input) ||
+        !assertLength(input) ||
+        !assertInteger(input) ||
+        !assertPositive(input)
+      )
         throw new Error(GameMessage.WRONG_INPUT_ERROR_MESSAGE);
 
       this.#userInput = input;
