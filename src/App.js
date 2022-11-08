@@ -49,17 +49,21 @@ class App {
     result.set("볼", null);
 
     inputArray.forEach((e, idx) => {
-      // 같은 자리수의 숫자일때, 스트라이크
-      if (computerArray.indexOf(e) == idx) {
-        result.set("스트라이크", result.get("스트라이크") + 1 ?? 1);
-      }
-      // 같은 숫자가 다른 자리수일때, 볼
-      else if (computerArray.indexOf(e) != -1) {
-        result.set("볼", result.get("볼") + 1 ?? 1);
+      switch (computerArray.indexOf(e)) {
+        case idx: // 같은 자리수의 숫자일때, 스트라이크
+          result.set("스트라이크", result.get("스트라이크") + 1 ?? 1);
+          break;
+
+        case -1: // 동일한 숫자가 없을때
+          break;
+
+        default: // 같은 숫자가 다른 자리수일때, 볼
+          result.set("볼", result.get("볼") + 1 ?? 1);
       }
     });
 
     this.gameResult = result;
+
     this.printResult();
   }
 
