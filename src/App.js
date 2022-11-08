@@ -8,7 +8,7 @@ class App {
   }
 
   play() {
-    openingOutput();
+    this.openingOutput();
   }
 }
 
