@@ -1,4 +1,10 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const { validate } = require('../src/utils');
+
+afterAll(() => {
+  Console.close();
+});
 
 describe('정상적인 값일 때, true를 반환하는지 확인', () => {
   test('case1', () => {
