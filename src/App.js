@@ -36,6 +36,10 @@ class Game {
     this.compareNumberArray = computer;
   }
 
+  inputGame(text, callback){
+    this.inputUserNumber(text, callback);
+  }
+  
   startGame(){
     this.makeComputerNumer();
     this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
