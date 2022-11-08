@@ -181,4 +181,12 @@ describe("숫자 야구 게임", () => {
       getUserGuess(userNumArr, userInput);
     }).toThrow();
   });
+
+  test("추가테스트4-4: getUserGuess", () => {
+    const userNumArr = [];
+    const userInput = "123";
+    getUserGuess(userNumArr, userInput);
+    expect(userNumArr).toHaveLength(3);
+    expect(userNumArr).toContain(1, 2, 3);
+  });
 });
