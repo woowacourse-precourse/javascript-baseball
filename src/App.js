@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole } = require("./utils.js");
+const { isThreeDigitNumberWithoutZero, hasNoRedundancy, handleException } = require("./utils.js");
 const { updateStrikeOrBall } = require("./compare.js");
 
 class App {
@@ -73,8 +73,7 @@ class App {
   proceedOneTurn(answer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       if (!this.isValidInput(input)) { // 올바르지 않은 입력 예외처리
-        MissionUtils.Console.close();
-        throw new Error("improper input!");
+        handleException();
       }
 
       const COMPARE_RESULT = this.getResult(input, answer); // 비교 결과
@@ -103,8 +102,7 @@ class App {
         MissionUtils.Console.close();
       }
       else {
-        MissionUtils.Console.close();
-        throw new Error("improper input!");
+        handleException();
       }
     })
   }

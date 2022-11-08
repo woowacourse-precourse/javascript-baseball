@@ -12,15 +12,12 @@ function hasNoRedundancy(input) {
         && input.charAt(2) !== input.charAt(0));
 }
 
-// 콘솔에 입력을 받아 그 값을 반환해주는 promise 함수
-async function getInputFromConsole(message) {
-    return new Promise((resolve, reject) => {
-        MissionUtils.Console.readLine(message, (input) => {
-            resolve(input);
-        })
-    })
+// 예외 상황 발생 시 처리하는 함수
+function handleException() {
+    MissionUtils.Console.close();
+    throw new Error("improper input!");
 }
 
 module.exports = {
-    isThreeDigitNumberWithoutZero, hasNoRedundancy, getInputFromConsole
+    isThreeDigitNumberWithoutZero, hasNoRedundancy, handleException
 }
