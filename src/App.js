@@ -55,9 +55,13 @@ class Game {
     const strike = this.countStrike();
     this.utilsIo.print(this.showResult(ball, strike));
 
-    if(this.isThreeStrike(strike)) { }
+    if(this.isThreeStrike(strike)) { this.endGame(); }
   }
 
+  endGame(){
+    this.utilsIo.print(TEXTS.END_TEXT);
+    this.inputGame(TEXTS.RESELECT_TEXT, this.reselectButton);
+  }
 
   countBall(){
     let ball = 0;
