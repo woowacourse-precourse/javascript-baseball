@@ -3,16 +3,16 @@ const GameManager = require('./GameManager');
 const Printer = require('./Printer');
 const Validator = require('./Validator');
 
-const MODE_NUMBER = {
-  RESTART: 1,
-  END: 2,
-};
-
 class App {
   constructor() {
     this.gameManager = new GameManager();
     this.printer = new Printer();
     this.validator = new Validator();
+    this.console = Console;
+    this.MODE_NUMBER = {
+      RESTART: 1,
+      END: 2,
+    };
   }
 
   play() {
@@ -21,7 +21,7 @@ class App {
   }
 
   guess() {
-    Console.readLine(this.printer.getInputMessage(), (userInput) => {
+    this.console.readLine(this.printer.getInputMessage(), (userInput) => {
       if (this.validator.isError(userInput)) {
         this.printer.throwError();
       }
@@ -42,13 +42,13 @@ class App {
   }
 
   end() {
-    Console.readLine(this.printer.getEndMessage(), (mode) => {
-      if (Number(mode) === MODE_NUMBER.RESTART) {
+    this.console.readLine(this.printer.getEndMessage(), (mode) => {
+      if (Number(mode) === this.MODE_NUMBER.RESTART) {
         this.restart();
         return;
       }
 
-      if (Number(mode) === MODE_NUMBER.END) {
+      if (Number(mode) === this.MODE_NUMBER.END) {
         this.exit();
         return;
       }
@@ -63,7 +63,7 @@ class App {
   }
 
   exit() {
-    Console.close();
+    this.console.close();
   }
 }
 
