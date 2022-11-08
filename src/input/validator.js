@@ -10,25 +10,25 @@ class Validator {
 
   static hasValidLength(input) {
     if (input.length !== NUMBER_LENGTH) {
-      throw ERROR_MESSAGE.length;
+      throw new Error(ERROR_MESSAGE.length);
     }
   }
 
   static hasValidType(input) {
     if (isNaN(Number(input))) {
-      throw ERROR_MESSAGE.type;
+      throw new Error(ERROR_MESSAGE.type);
     }
   }
 
   static hasValidRange(input) {
     if (input.includes('0')) {
-      throw ERROR_MESSAGE.range;
+      throw new Error(ERROR_MESSAGE.range);
     }
   }
 
   static hasNoneDuplicateNumbers(input) {
     if ([...new Set(input)].length !== NUMBER_LENGTH) {
-      throw ERROR_MESSAGE.duplication;
+      throw new Error(ERROR_MESSAGE.duplication);
     }
   }
 }

@@ -65,7 +65,7 @@ class BaseballGame {
         return Console.close();
       }
 
-      throw ERROR_MESSAGE.restartInput;
+      throw new Error(ERROR_MESSAGE.restartInput);
     });
   }
 
