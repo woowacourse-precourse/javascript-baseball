@@ -52,7 +52,7 @@ class App {
       this.print();
       if (this.result[RESULT.STRIKE] === 3) {
         this.computer.print(MESSAGE.SUCCESS);
-        // this.reStart();
+        this.reStart();
       } else {
         this.start();
       }
@@ -61,6 +61,19 @@ class App {
 
   end() {
     Console.close();
+  }
+
+  reStart() {
+    Console.readLine(MESSAGE.RESTART_OR_END, (answer) => {
+      this.computer.print(answer);
+      if (answer === USER_CHOICE.RESTART) {
+        this.computer.saveRandom();
+        this.start();
+      }
+      if (answer === USER_CHOICE.END) {
+        this.end();
+      }
+    });
   }
 
   play() {}
