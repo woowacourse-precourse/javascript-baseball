@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils  = require("@woowacourse/mission-utils");
 
 class App {
   play() {
@@ -9,14 +9,14 @@ class App {
 const gamestart = () =>{
 
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
-  judgeNumber(createComputerNumber().split(""),inputUserNumber().split(""));
+  judgeNumber(createComputerNumber(),inputUserNumber());
   return ;
 
 }
 
 const createComputerNumber = () =>{
   const computerInputNumber = [];
-  while (computerNumber.length<3){
+  while (computerInputNumber.length<3){
     const randomInputNumber = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!computerInputNumber.includes(randomInputNumber)){
       computerInputNumber.push(randomInputNumber);
@@ -27,15 +27,16 @@ const createComputerNumber = () =>{
 
 const inputUserNumber =() =>{
   MissionUtils.Console.readLine('숫자를 입력해주세요.:', (userNumber) => {
-    const userNumberArr = userNumber.split("")
-    while(verifyUserNumber(userNumberArr)==true){
+    
+    while(verifyUserNumber(userNumber)==true){
       return userNumber;
     };
   });
 }
 
 const verifyUserNumber = (userNumber) =>{
-  const userNumberArr = userNumber.split("");
+    const stringUserNumber = String(userNumber);
+  const userNumberArr = stringUserNumber.split("");
 
   if(userNumberArr.length !== 3){
     throw "세개의 숫자가 아닙니다";
@@ -55,12 +56,16 @@ const verifyUserNumber = (userNumber) =>{
 const judgeNumber = (computerNumber,userNumber) =>{
   let ballScore =0;
   let strikeScore = 0;
+  const stringComputerNumber = String(computerNumber);
+  const stringUserNumber = String(userNumber);
+  const judgeForArrComputerNumber = stringComputerNumber.split("");
+  const judgeForArrUserNumber = stringUserNumber.split("");
 
-  for (let i = 0; i < computerNumber.length; i++) {
-    if(userNumber[i] == computerNumber[i]){
+  for (let i = 0; i < judgeForArrComputerNumber.length; i++) {
+    if(judgeForArrUserNumber[i] == judgeForArrComputerNumber[i]){
       strikeScore++;
     };
-    if(userNumber.includes(computerNumber)){
+    if(judgeForArrUserNumber.includes(judgeForArrComputerNumber)){
       ballScore++;
     }
   }
@@ -94,3 +99,4 @@ const gameRestartOrEnd = () =>{
    })
 }
 
+gamestart();
