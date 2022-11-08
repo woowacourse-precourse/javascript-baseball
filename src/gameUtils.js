@@ -13,10 +13,9 @@ class System {
     numbers.add(randomNumber);
     if(numbers.size < constants.CLEAR_CONDITION) System.#addNumber(numbers);
   }
-  static toFilterdArray(input) {
-    input = input.replace(/[\s,]/g, '');
-    const arrayInput = input.split('').map(number => Number(number));
-    return arrayInput;
+  static InputtodArray(input) {
+    input = input.split('').map(number => Number(number));
+    return input;
   }
   static getResult(input, answer) {
     const result = {

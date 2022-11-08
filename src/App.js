@@ -11,7 +11,7 @@ class App {
   }
   #submitInput() {
     MissionUtils.Console.readLine(constants.GAME_MESSAGE.input, (input) => {
-      input = GameUtils.System.toFilterdArray(input);
+      input = GameUtils.System.InputtodArray(input);
       const errorMessage = GameUtils.Validator.isInvalidAnswer(input);
       if(errorMessage) Print.GameMessage.error(errorMessage);
       const result = GameUtils.System.getResult(input, this.answer);
@@ -20,7 +20,7 @@ class App {
     });
   }
   #isClear(score) {
-    if(score !== constants.CLEAR_CONDITION) this.#submitInput();
+    if(score !== constants.CLEAR_CONDITION) return this.#submitInput();
     Print.GameMessage.clear();
     this.#clearGame();
   }
