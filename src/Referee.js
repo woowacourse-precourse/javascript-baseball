@@ -1,6 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const isStrike = (answers, inputs) => {
+const countStrike = (answers, inputs) => {
   let count = 0;
   for (let i = 0; i < 3; i++) {
     if (answers[i] === inputs[i]) {
@@ -11,7 +11,7 @@ const isStrike = (answers, inputs) => {
   return count;
 };
 
-const isBall = (answers, inputs) => {
+const countBall = (answers, inputs) => {
   let count = 0;
   inputs.map((input) => {
     if (answers.includes(input)) {
@@ -39,8 +39,8 @@ class Referee {
     this._strike = value;
   }
   judge(answers, inputs) {
-    this.strike = isStrike(answers, inputs);
-    this.ball = isBall(answers, inputs) - this.strike;
+    this.strike = countStrike(answers, inputs);
+    this.ball = countBall(answers, inputs) - this.strike;
 
     return this;
   }
@@ -63,6 +63,6 @@ class Referee {
 
 module.exports = {
   Referee,
-  isBall,
-  isStrike,
+  countBall,
+  countStrike,
 };
