@@ -58,6 +58,34 @@ class App {
       ) - this.strike;
   }
 
+  print() {
+    if (this.strike === 3) {
+      Console.print('3스트라이크');
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return this;
+    }
+
+    if (this.strike === 0 && this.ball === 0) {
+      Console.print('낫싱');
+      return this;
+    }
+
+    if (this.strike > 0 && this.ball > 0) {
+      Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+      return this;
+    }
+
+    if (this.ball === 0) {
+      Console.print(`${this.strike}스트라이크`);
+      return this;
+    }
+
+    if (this.strike === 0) {
+      Console.print(`${this.ball}볼`);
+      return this;
+    }
+  }
+
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.pickNumber();
