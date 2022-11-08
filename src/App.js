@@ -43,8 +43,11 @@ class gameStart {
   countScore(answer) {
     let errorCheck = new InputCheck(answer);
     if(!errorCheck.isValid(answer)) {
-      throw new Error("올바르지 않은 입력값입니다.")
+      throw new Error("올바르지 않은 입력값입니다.");
     }
+    if(!this.isThreeStrike(this.computer, answer)) {
+      this.countStrikeAndBall(this.computer, answer);
+    };
   }
 
   isThreeStrike(computer, user) {
@@ -68,6 +71,32 @@ class gameStart {
       } else if(answer === END) {
         Console.close()
       };
+  }
+
+  countStrikeAndBall(computer, user) {
+    let strike = 0;
+    let ball = 0;
+    for(let i = 0; i < 3; i++) {
+      const index = computer.indexOf(user[i]);
+      if(index === i) {
+        strike += 1;
+      }
+      else if(index > -1) {
+        ball += 1;
+      }
+    }
+    if(strike > 0 && ball === 0) {
+      Console.print(`${strike}스트라이크`);
+    }
+    else if( strike === 0 && ball > 0) {
+      Console.print(`${ball}볼`);
+    }
+    else if (strike > 0 && ball > 0) {
+      Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
+    else {
+      Console.print("낫싱");
+    }
   }
 
 }
