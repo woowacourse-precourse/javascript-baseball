@@ -35,8 +35,8 @@ class App {
 
   getCompareResult() {
     let ball = 0, strike = 0;
-    ball = this.getNumOfBall(ball);
-    strike = this.getNumOfStrike(strike);
+    strike = this.getNumOfStrike();
+    ball = this.getNumOfBall(strike);
     printMessage.printBallAndStrike(ball, strike);
     if(strike === 3) {
       printMessage.printGameWin();
@@ -47,29 +47,24 @@ class App {
     }
   }
 
-  getNumOfBall(ball) {
-    for(let i = 0; i < this.computerNum.length; i++) {
-      ball += this.isBall(i);
-    }
-    return ball;
-  }
-
-  isBall(compareIter){
-    for(let i = 0; i < this.computerNum.length; i++) {
-      if((compareIter !== i) && (this.computerNum[compareIter] === this.userNum[i])) {
-          return 1;
-      }
-    }
-    return 0;
-  }
-
-  getNumOfStrike(strike) {
+  getNumOfStrike() {
+    let numOfStrike = 0;
     for(let i = 0; i < this.computerNum.length; i++) {
       if(this.computerNum[i] === this.userNum[i]) {
-          strike++;
+          numOfStrike++;
       }
     }
-    return strike;
+    return numOfStrike;
+  }
+
+  getNumOfBall(numOfStrike) {
+    let numOfBall = 0;
+    for(let i = 0; i < this.computerNum.length; i++) {
+      if(this.userNum.includes(this.computerNum[i])){
+        numOfBall++;
+      }
+    }
+    return numOfBall - numOfStrike;
   }
 
   gameRestartOrEnd() {
