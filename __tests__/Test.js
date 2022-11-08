@@ -13,6 +13,15 @@ const getLogSpyRandom = () => {
   return logSpyRandom;
 };
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
 describe("숫자 야구 게임", () => {
   test("1. 게임 시작 출력문 테스트", () => {
     const logSpy = getLogSpy();
@@ -31,5 +40,16 @@ describe("숫자 야구 게임", () => {
     app.play();
 
     expect(logSpyRandom).toHaveBeenCalled();
+  });
+  test("3. 사용자 입력 테스트", () => {
+    const answers = ["246"];
+    const logSpy = getLogSpy();
+
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("246"));
   });
 });

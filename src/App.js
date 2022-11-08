@@ -24,9 +24,16 @@ class App {
       .map((x) => parseInt(x));
   }
 
+  userInputMessage() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      MissionUtils.Console.print(`${userInput}`);
+    });
+  }
+
   play() {
     this.gameStartMessage();
     this.computerChoiceNumber();
+    this.userInputMessage();
   }
 }
 
