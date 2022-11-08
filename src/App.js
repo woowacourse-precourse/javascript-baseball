@@ -37,6 +37,20 @@ class App {
     ballScore = countIntersect - strikeScore;
   }
 
+  restartOrFinish() {
+    MissionUtils.Console.readLine(
+      "재시작 => 1, 종료 => 2", (answer) => {
+        if (parseInt(answer) == 1) {
+          this.play();
+        } 
+        else if(parseInt(answer) == 2) {
+          MissionUtils.Console.print("게임 종료");
+          return;
+        }
+      }
+    )
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getComputerNumber;
@@ -53,8 +67,11 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return;
     }
-    return this.play();
+    this.restartOrFinish();
   }
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
