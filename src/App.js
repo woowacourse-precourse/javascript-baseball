@@ -20,12 +20,26 @@ const MESSAGE = {
 };
 
 class App {
+  constructor() {
+    this.answer = [];
+  }
+
   play() {
     this.start();
   }
 
   start() {
     Console.print(MESSAGE.START);
+  }
+
+  initComputer() {
+    while (this.answer.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+
+      if (!this.answer.includes(number)) {
+        this.answer.push(number);
+      }
+    }
   }
 }
 
