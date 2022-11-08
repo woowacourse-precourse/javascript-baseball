@@ -53,9 +53,9 @@ class App {
     let ballCount = 0;
     this.computerAnswerArr.forEach((computerAnswerItem, index) => {
       if (computerAnswerItem === this.userAnswerArr[index]) {
-        strikeCount++;
+        strikeCount += 1;
       } else {
-        if (this.userAnswerArr.includes(computerAnswerItem)) ballCount++;
+        if (this.userAnswerArr.includes(computerAnswerItem)) ballCount += 1;
       }
     })
     if (strikeCount === 3) this.gameResult('3스트라이크');
