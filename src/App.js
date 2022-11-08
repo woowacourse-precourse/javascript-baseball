@@ -66,10 +66,13 @@ class App {
     );
     MissionUtils.Console.readLine("", (answer) => {
       if (answer == "1") {
-        this.play();
+        return this.play();
       }
-      MissionUtils.Console.print("게임 종료");
-      MissionUtils.Console.close();
+      if (answer == "2") {
+        MissionUtils.Console.print("게임 종료");
+        return MissionUtils.Console.close();
+      }
+      throw ("다른 숫자를 입력해서 종료됩니다.");
     });
   }
 
