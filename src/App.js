@@ -69,11 +69,27 @@ class App {
 
   /** 5. 게임종료까지 반복하는 기능 구현 */
   replay(strike, computerArr) {
-    if(strike !== 3) {
+    if(strike === 3) {
+      this.gameComplete();
+    } else {
       this.userInput(computerArr);
     }
   }
 
+  /** 6. 게임종료 및 재시작 기능 구현 */
+  gameComplete() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      MissionUtils.Console.print(`${answer}`);
+      if (answer == 1) {
+        this.play();
+      } else if (answer == 2) {
+        MissionUtils.Console.close();
+      } else {
+        throw new Error('입력값이 잘못되어, 게임을 종료합니다.');
+      }
+    });
+  } 
 }
 
 const app = new App();
