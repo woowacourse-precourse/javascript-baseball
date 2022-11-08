@@ -101,7 +101,7 @@ class App {
     // 새로운 게임 할 것인지 질문.
     query() {
         MissionUtils.Console.readLine(
-            '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ',
+            '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
             (choice) => {
                 if (Number(choice) === 1) {
                     this.play();
@@ -113,6 +113,7 @@ class App {
     }
 
     play() {
+        MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
         this.RANDOM_NUMBER = this.generateRandomNumber();
         try {
             this.getThreeDigitNumber();
@@ -122,7 +123,7 @@ class App {
     }
 }
 
-const app = new App();
-app.play();
+// const app = new App();
+// app.play();
 
 module.exports = App;
