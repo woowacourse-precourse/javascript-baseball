@@ -3,6 +3,9 @@ const printMessage = require("./PrintMessage.js");
 const generateRandNum = require("./GenerateRandomNumber");
 const exception = require("./HandleException.js");
 
+const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
+const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
+
 printMessage.printGameStart();
 
 class App {
@@ -21,7 +24,6 @@ class App {
   }
 
   getUserInputNum() {
-    const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
     MissionUtils.Console.readLine(REQUEST_USER_INPUT_MESSAGE, (userInput) => {
       this.userNum = userInput;
       exception.handleException(this.userNum);
@@ -69,7 +71,6 @@ class App {
   }
 
   gameRestartOrEnd() {
-    const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
     MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
       if(userInput === '1') {
         this.play();
