@@ -11,13 +11,6 @@ describe("ComputerModel 단위테스트", () => {
     computerModel.setNumberIntoSpace(space);
     expect(space.size).toEqual(3);
   });
-
-  test("컴퓨터의 생성 숫자는 1~9사이 인가?", () => {
-    const numberFromComputer = computerModel.getRandomNumberInRange(1, 9);
-
-    expect(numberFromComputer > 0 && numberFromComputer < 10).toEqual(true);
-    expect(numberFromComputer <= 0 && numberFromComputer >= 10).toEqual(false);
-  });
   test("공간이 가득 차 있지 않다?", () => {
     const space = new Set([1, 2, 3]);
     expect(computerModel.isSpaceNotFull(space)).toEqual(false);
