@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { THREE_TIMES, ASK_CONTINUE } = require("./constants/constant");
+const { THREE_TIMES, ASK_CONTINUE, ANSWER_NUMBERS } = require("./constants/constant");
 const MESSAGE = require("./constants/message");
 
 class App {
@@ -11,7 +11,7 @@ class App {
   initAnswer() {
     this.answer = [];
     while (this.answer.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
+      const number = Random.pickNumberInRange(ANSWER_NUMBERS.MIN_NUM, ANSWER_NUMBERS.MAX_NUM);
       if (!this.answer.includes(number)) {
         this.answer.push(number);
       }
