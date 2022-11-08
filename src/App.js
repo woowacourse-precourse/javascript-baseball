@@ -15,7 +15,6 @@ class App {
 
   playGame() {
     const correctNumber = this.createAnswerNumber();
-    console.log(correctNumber);
     this.enterGuessNumber(correctNumber);
   }
 
@@ -71,6 +70,12 @@ class App {
       MissionUtils.Console.print("낫싱");
     }
 
+    if (scoreboard.strike && scoreboard.ball) {
+      MissionUtils.Console.print(
+        `${scoreboard.ball}볼 ${scoreboard.strike}스트라이크`
+      );
+    }
+
     if (!scoreboard.strike && scoreboard.ball) {
       MissionUtils.Console.print(`${scoreboard.ball}볼 `);
     }
@@ -81,17 +86,11 @@ class App {
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       }
     }
-
-    if (scoreboard.strike && scoreboard.ball) {
-      MissionUtils.Console.print(
-        `${scoreboard.ball}볼 ${scoreboard.strike}스트라이크`
-      );
-    }
   }
 
   isReplay() {
-    const RESTART = 1;
-    const GAME_OVER = 2;
+    const RESTART = "1";
+    const GAME_OVER = "2";
     MissionUtils.Console.print(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
     );
