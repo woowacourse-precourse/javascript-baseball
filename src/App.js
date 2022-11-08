@@ -16,8 +16,12 @@ class App {
   }
 
   play() {
-    let answer = this.getRandomNumber();
     this.printMessage(START_MESSAGE);
+    this.startGame();
+  }
+
+  playGame() {
+    let answer = this.getRandomNumber();
     this.playerInput(answer);
   }
 
