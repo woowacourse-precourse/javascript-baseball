@@ -1,74 +1,75 @@
 const { Console } = require("@woowacourse/mission-utils");
 const ComputerNumbers = require("./ComputerNumbers");
-const ValidUserNumbers = require("./ValidUserNumbers");
-const { GAME_VALUE, GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
+const ValidUserNumbers = require("./ValidUserInput");
+const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
 
 class BaseballGame {
   constructor() {
     this.validUserNumbers = new ValidUserNumbers();
   }
 
-  printResult(strikeCount, ballCount) {
-    if (strikeCount === 0 && ballCount === 0) {
-      return Console.print("낫싱");
-    }
-    const strikeCountComment = (strikeCount > 0) ? `${strikeCount}스트라이크` : '';
-    (ballCount === 0) ? Console.print(`${strikeCountComment}`) :
-      Console.print(`${ballCount}볼 ${strikeCountComment}`);
-  };
-
-  start() {
-    Console.print(GAME_MESSAGE.GAME_START);
-
+  initGame() {
+    Console.print(GAME_MESSAGE.START_MESSAGE);
     return this.playGame();
   }
 
   playGame() {
     this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
-
-    return this.inputUserNumbers(this.computerNumbers);
+    return this.playing(this.computerNumbers);
   }
 
-  inputUserNumbers(computerNumbers) {
-    Console.readLine(GAME_MESSAGE.GAME_INPUT_NUMBERS, userInput => {
+  playing(computerNumbers) {
+    Console.readLine(GAME_MESSAGE.ENTER_NUMBER, (userInput) => {
       const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
-        this.throwError(ERROR_MESSAGE.ERROR_USERINPUT_NOT_VALID);
+        this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
       }
-      this.progressTurn(userInput, computerNumbers);
+      this.turnCheck(userInput, computerNumbers);
     });
   }
 
-  progressTurn(userInput, computerNumbers) {
-    const { strikeCount, ballCount } =
-      this.getStrikeAndBallCount(userInput, computerNumbers);
-    this.printResult(strikeCount, ballCount);
-    (strikeCount === 3) ? this.restartOrEndGame() : this.inputUserNumbers(computerNumbers);
+  turnCheck(userInput, computerNumbers) {
+    const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
+    this.printResult(strike, ball);
+    strike === 3 ? this.restartOrEndGame() : this.playing(computerNumbers);
   }
 
-  getStrikeAndBallCount(userInput, computerNumbers) {
-    const computerNumbersArray = [...computerNumbers];
-    const userInputArray = [...userInput];
-    let strikeCount = 0;
-    let ballCount = 0;
-    userInputArray.map((number, index) => {
-      (number === computerNumbersArray[index]) ? strikeCount++ :
-        (computerNumbersArray.includes(number)) ? ballCount++ : 0;
+  StrikeCount(userInput, computerNumbers) {
+    const computerNumbersArr = [...computerNumbers];
+    const userInputArr = [...userInput];
+    let strike = 0;
+    let ball = 0;
+    computerNumbersArr.forEach((number, index) => {
+      number === userInputArr[index]
+        ? strike++
+        : userInputArr.includes(number)
+        ? ball++
+        : 0;
     });
-    return { strikeCount, ballCount };
+    return { strike, ball };
+  }
+
+  printResult(strike, ball) {
+    if (strike === 0 && ball === 0) {
+      return Console.print("낫싱");
+    }
+    const strikePrint = strike > 0 ? `${strike}스트라이크` : "";
+    ball === 0
+      ? Console.print(`${strikePrint}`)
+      : Console.print(`${ball}볼 ${strikePrint}`);
   }
 
   restartOrEndGame() {
-    Console.print(GAME_MESSAGE.GAME_CLEAR);
-    Console.readLine(GAME_MESSAGE.GAME_RESTART, (number) => {
-      (number !== GAME_VALUE.RESTART && number !== GAME_VALUE.END) ?
-        this.throwError(ERROR_MESSAGE.ERROR_USERINPUT_RESTART) :
-        (number === GAME_VALUE.RESTART) ? this.playGame() : this.exitConsole();
+    Console.readLine(GAME_MESSAGE.GAME_RESTART, (OneOrTwo) => {
+      console.log(OneOrTwo);
+      if (OneOrTwo === "1") {
+        return this.playGame();
+      } else if (OneOrTwo === "2") {
+        return Console.close();
+      } else {
+        return this.throwError(ERROR_MESSAGE.ERROR_RESTART_MESSAGE);
+      }
     });
-  }
-
-  exitConsole() {
-    Console.close();
   }
 
   throwError(messages) {
