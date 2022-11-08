@@ -13,10 +13,12 @@ class Game {
     this.ScoreManager = new ScoreManager();
   }
 
+  // 게임 스타트
   play() {
     this.gameStart();
   }
 
+  // readLine을 통해 Input을 받고 게임을 진행하는 함수
   gameStart() {
     Console.readLine(MSG.INPUT, (input) => {
       this.User.setInputNums(input);
@@ -29,6 +31,7 @@ class Game {
     });
   }
 
+  // 게임 라운드가 종료되면 계속할것인지 물어보는 함수
   gameResult() {
     Console.print(MSG.END);
     Console.readLine(MSG.SELECT, (input) => {
@@ -36,17 +39,20 @@ class Game {
     });
   }
 
+  // 게임을 재실행하는 함수
   gameRestart() {
     this.gameDataReset();
     this.gameStart();
   }
 
+  // 게임을 재실행할때 클래스의 데이터를 리셋하는 함수
   gameDataReset() {
     this.User.resetUser();
     this.Computer.resetComputer();
     this.ScoreManager.resetScoreManager();
   }
 
+  // 게임을 재실행할때 클래스의 데이터를 리셋하는 함수
   gameExit() {
     Console.close();
   }
