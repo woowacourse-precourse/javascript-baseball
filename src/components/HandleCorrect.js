@@ -1,6 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const gameConst = require('./GameConstant');
 
+const endGame = () => {
+  MissionUtils.Console.close();
+};
+
 const doNextStep = answer => {
   if (answer === '1') {
     reStartGame();
