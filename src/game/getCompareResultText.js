@@ -1,16 +1,16 @@
-const getCompareResultText = () => {
-  if (this.strikeScore === 0 && this.ballScore === 0) {
-    this.compareResultText = '낫싱';
-  } else if (this.ballScore === 0) {
-    this.compareResultText = `${this.strikeScore}스트라이크`;
-    if (this.strikeScore === 3) {
-      this.isThreeStrike = true;
-    }
-  } else if (this.strikeScore === 0) {
-    this.compareResultText = `${this.ballScore}볼`;
-  } else if (this.strikeScore > 0 && this.ballScore > 0) {
-    this.compareResultText = `${this.ballScore}볼 ${this.strikeScore}스트라이크`;
+const getCompareResultText = (strikeScore, ballScore) => {
+  let compareResultText = '';
+  if (strikeScore === 0 && ballScore === 0) {
+    compareResultText = '낫싱';
+  } else if (ballScore === 0) {
+    compareResultText = `${strikeScore}스트라이크`;
+  } else if (strikeScore === 0) {
+    compareResultText = `${ballScore}볼`;
+  } else if (strikeScore > 0 && ballScore > 0) {
+    compareResultText = `${ballScore}볼 ${strikeScore}스트라이크`;
   }
+
+  return compareResultText;
 };
 
 module.exports = getCompareResultText;
