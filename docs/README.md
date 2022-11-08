@@ -1,36 +1,36 @@
 # App
 
-## isValidMenuInput(): boolean
+## static isValidMenuInput(input: string): boolean
 
 - check if user input is 1 or 2
 
-## pickThreeDigits(): number[]
+## static pickThreeDigits(input: string): number[]
 
 - pick 3 random digits
 - 3 digits should be unique
 
-## isValidPlayInput(input: string): boolean
+## static isValidPlayInput(input: string): boolean
 
 - check if user input is valid
 - length of input should be 3
 - each character of input should be digit (1~9)
 - 3 digits should be unique
 
-## getGuessArray(input: string): number[]
+## static getGuessArray(input: string): number[]
 
 - turn input string into number array
 
-## judge(guess: number[], answer: number[]): number[]
+## static judge(guess: number[], answer: number[]): number[]
 
 - return array of length 2 which contains judge result
   - [0]: ball count
   - [1]: strike count
 
-## getMessage(judged: number[]): string
+## static getMessage(judged: number[]): string
 
 - return message string based on judge result
 
-## play(): void
+## static play(): void
 
 - menu select loop
   - prompt query message and get input from user
