@@ -1,6 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const gameConst = require('./GameConstant');
 
+const checkAnswer = answer => {
+  MissionUtils.Console.print(answer);
+  if (answer === '1' || answer === '2') {
+    doNextStep(answer);
+    return;
+  }
+  askNextStep();
+};
+
 const askNextStep = () => {
   MissionUtils.Console.readLine(gameConst.ASK_NEXT_MESSAGE, checkAnswer);
 };
