@@ -15,6 +15,10 @@ const getLogSpy = () => {
 };
 
 describe("게임 종료 테스트", () => {
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
+
   test("게임 종료 문구 출력 확인", () => {
     const logSpy = getLogSpy();
     const app = new App();

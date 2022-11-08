@@ -3,6 +3,10 @@ const getThreeRandomNumbers = require("../src/ThreeRandomNumbers");
 const { MIN_NUMBER, MAX_NUMBER, NUMBER_LENGTH } = require("../src/constants/ConstantValues");
 
 describe("숫자 뽑기 테스트", () => {
+  afterEach(() => {
+    MissionUtils.Console.close();
+  });
+
   test("숫자 개수가 3개인지 확인", () => {
     const threeRandomNumber = getThreeRandomNumbers();
 
