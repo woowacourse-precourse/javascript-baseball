@@ -34,7 +34,7 @@ class InvalidTest {
     return true;
   }
   static isOneOrTwo(input) {
-    if (input !== "1" || input !== "2") {
+    if ((input !== "1") & (input !== "2")) {
       throw "잘못된 입력입니다! 프로그램을 종료합니다.";
     }
     return true;
