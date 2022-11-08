@@ -60,9 +60,35 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
-  test('예외 테스트 - 문자 입력, 0 입력, 겹치는 숫자', () => {
+  test('예외 테스트 - 문자 입력', () => {
     const randoms = [1, 2, 3];
-    const answers = ['12a', '012', '112'];
+    const answers = ['12a'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('예외 테스트 - 0 입력', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['012'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('예외 테스트 - 겹치는 숫자 입력', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['112'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
