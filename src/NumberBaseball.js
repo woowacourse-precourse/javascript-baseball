@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { MESSAGES } = require("./lib/Constants");
+const { VALUES, MESSAGES } = require("./lib/Constants");
 
 class NumberBaseball {
   gameStart() {
@@ -43,9 +43,26 @@ class NumberBaseball {
 
   getUserInput(callback) {
     Console.readLine(MESSAGES.INPUT_NUMBER, (input) => {
+      this.setExceptionForUserTry(input);
       const inputArray = [...input].map((x) => Number(x));
       callback(inputArray);
     });
+  }
+
+  setExceptionForUserTry(input) {
+    if (typeof input !== "string") {
+      throw new Error("문자열을 입력하세요");
+    }
+    if (Number.isNaN(Number(input))) {
+      throw new Error("숫자인 문자열을 입력하세요");
+    }
+    if (input.length !== VALUES.NUMBER_LENGTH) {
+      throw new Error("3자리 숫자를 입력하세요");
+    }
+    const set = new Set([...input]);
+    if (set.size !== input.length) {
+      throw new Error("서로 다른 세 자리 수를 입력하세요");
+    }
   }
 
   checkUserInput(input, answer) {
