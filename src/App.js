@@ -71,6 +71,17 @@ const countBall = function countBall(inputNumbers, answerNumbers) {
   return ball;
 };
 
+const countStrike = function countStrike(inputNumbers, answerNumbers) {
+  let strike = 0;
+  inputNumbers.forEach((inputNumber, index) => {
+    if (inputNumber === answerNumbers[index]) {
+      strike++;
+    }
+  });
+  return strike;
+};
+
+
 
 
 class App {
