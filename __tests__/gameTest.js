@@ -1,9 +1,11 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const { RANDOM_NUMBER } = require("../src/constants");
 const Game = require("../src/game");
 
 describe("기능 목록 테스트", () => {
   test("시작 후 메세지 출력", () => {
-    const log = jest.spyOn(console, "log");
+    const log = jest.spyOn(MissionUtils.Console, "print");
+    log.mockClear();
     const game = new Game();
     game.init();
     expect(log).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
@@ -18,14 +20,15 @@ describe("기능 목록 테스트", () => {
   });
   test("점수 출력 확인", () => {
     const game = new Game();
-    const log = getLogSpy();
+    const log = jest.spyOn(MissionUtils.Console, "print");
+    log.mockClear();
 
     game.printScore(0, 0);
     expect(log).toHaveBeenCalledWith("낫싱");
     game.printScore(0, 2);
-    expect(log).toHaveBeenCalledWith("2볼");
+    expect(log).toHaveBeenCalledWith("2스트라이크");
     game.printScore(1, 0);
-    expect(log).toHaveBeenCalledWith("1스트라이크");
+    expect(log).toHaveBeenCalledWith("1볼");
     game.printScore(2, 1);
     expect(log).toHaveBeenCalledWith("2볼 1스트라이크");
   });
