@@ -13,7 +13,7 @@ class AutomaticBallGenerator {
       Random.pickUniqueNumbersInRange(startNumber, endNumber, maxNumberCount)
     );
 
-    return new Ball(NUMBER);
+    return Promise.resolve(new Ball(NUMBER));
   }
 
   arrayToNumber(numberArray) {
