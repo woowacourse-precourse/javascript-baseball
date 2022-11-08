@@ -1,6 +1,10 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Random, Console } = require('@woowacourse/mission-utils');
 
 class App {
+  constructor() {
+    this.inputCallback = this.inputCallback.bind(this);
+  }
+
   generateRandomNumbers() {
     this.answerArray = [];
     while (this.answerArray.length < 3) {
@@ -11,6 +15,12 @@ class App {
       }
     }
   }
+
+  readUserInput() {
+    Console.readLine('숫자를 입력해주세요 : ', this.inputCallback);
+  }
+
+  inputCallback() {}
 
   play() {}
 }
