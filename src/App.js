@@ -8,11 +8,17 @@ class App {
     Console.close();
   }
 
+  answerException(answer) {
+    if (answer !== '1' && answer !== '2') throw '입력 값이 1혹은 2가 아닙니다. 게임을 종료합니다.';
+    if (answer === '2') this.endGame();
+    return true;
+  }
+
   askingRestart() {
     let answer_of_restart;
 
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => { });
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => { try { this.answerException(answer) } catch (e) { this.endGame(e) }; });
   }
 
   printResult(result_text) {

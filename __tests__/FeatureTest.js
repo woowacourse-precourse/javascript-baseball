@@ -61,4 +61,12 @@ describe("기능 테스트", () => {
         expect(app.printResult('')).toBe('낫싱');
         expect(app.printResult('2볼 1스트라이크')).toBe('2볼 1스트라이크');
     })
+    test("10. 게임 재시작에 대한 대답을 예외처리하는 기능 - 1을 입력할 경우", () => {
+        expect(app.answerException('1')).toBe(true);
+    })
+    test("10. 게임 재시작에 대한 대답을 예외처리하는 기능 - 1 또는 2가 아닐 경우", () => {
+        const consoleSpy = jest.spyOn(console, 'log');
+        try { app.answerException('string') } catch (e) { console.log(e) };
+        expect(consoleSpy).toHaveBeenCalledWith('입력 값이 1혹은 2가 아닙니다. 게임을 종료합니다.');
+    })
 });
