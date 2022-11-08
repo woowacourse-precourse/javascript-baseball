@@ -51,4 +51,15 @@ describe('메세지 출력 테스트', () => {
       printer.throwError();
     }).toThrow();
   });
+
+  test('게임 성공 메세지 출력 테스트', () => {
+    const successMessage = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    const logSpy = getLogSpy();
+    const printer = new Printer();
+    printer.showSuccessMessage();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(successMessage)
+    );
+  });
 });
