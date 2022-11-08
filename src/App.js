@@ -3,6 +3,11 @@ const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
 class App {
+  endGame(e) {
+    if (e) console.error(e);
+    Console.close();
+  }
+
   askingRestart() {
     let answer_of_restart;
 
@@ -43,11 +48,6 @@ class App {
     CORRECT_LIST.forEach((number, index) => { scoreCount = this.checkAnswer(answer, number, index, scoreCount) });
 
     return scoreCount;
-  }
-
-  endGame(e) {
-    console.error(e);
-    Console.close();
   }
 
   valueExceptionHandling(answer) {
