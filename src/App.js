@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const Message = require('./assets/Message');
 const { getComputerNumber } = require('./utils/getComputerNumber');
 const { getBaseballResultMessage } = require('./utils/getBaseballResultMessage');
-const { checkPlayerNumberError } = require('./utils/handleError');
+const { checkPlayerNumberError, checkEndSelectionError } = require('./utils/handleError');
 
 const playEachRound = (target, input) => {
   const isThreeStrikes = target === input;
@@ -30,6 +30,8 @@ const playNewGame = () => {
 };
 
 const decideToRestartOrExit = (answer) => {
+  checkEndSelectionError(answer);
+
   const isGameOver = answer !== Message.RESTART;
 
   if (isGameOver) {
