@@ -6,6 +6,8 @@ const {
   REQUIRE_NUMBER,
   GAME_END,
   RETRY_OR_END,
+  RETRY_VALUE,
+  END_VALUE,
 } = require("./utils/Constants");
 const {
   createComputerNumber,
@@ -57,8 +59,19 @@ function App() {
     if (userWin) {
       printMessage(GAME_END);
       printMessage(RETRY_OR_END);
+      setUserInput("", getUserRetryOrEndNumber);
     } else {
       setUserInput(REQUIRE_NUMBER, getUserGameNumber);
+    }
+  };
+
+  const getUserRetryOrEndNumber = (userInput) => {
+    if (userInput === RETRY_VALUE) {
+      initlalizeGame();
+    } else if (userInput === END_VALUE) {
+      MissionUtils.Console.close();
+    } else {
+      throw new Error("게임 종료");
     }
   };
 
