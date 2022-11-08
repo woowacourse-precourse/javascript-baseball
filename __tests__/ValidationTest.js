@@ -13,7 +13,8 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
-describe('숫자 야구 게임 사용자 입력값 테스트', () => {
+// 테스트 구문
+describe('컴퓨터와 비교할 사용자 공 입력값 테스트', () => {
   test('알파벳 3자리 입력할 경우', () => {
     mockQuestions(['abc']);
     const baseballGame = new BaseballGame();
@@ -55,6 +56,30 @@ describe('숫자 야구 게임 사용자 입력값 테스트', () => {
       baseballGame.getUserInput();
     } catch (error) {
       expect(error.message).toBe(Messages.ERROR.INVALID_BALL_NUMBER);
+    }
+  });
+});
+
+describe('종료 후 게임 진행 사용자 입력값 테스트', () => {
+  test('1, 2 선택지 외의 숫자를 입력할 경우', () => {
+    mockQuestions(['11']);
+    const baseballGame = new BaseballGame();
+
+    try {
+      baseballGame.chooseResetOrExit();
+    } catch (error) {
+      expect(error.message).toBe(Messages.ERROR.INVALID_SELECT_NUMBER);
+    }
+  });
+
+  test('1, 2 선택지 외의 문자를 입력할 경우', () => {
+    mockQuestions(['alphabet test']);
+    const baseballGame = new BaseballGame();
+
+    try {
+      baseballGame.chooseResetOrExit();
+    } catch (error) {
+      expect(error.message).toBe(Messages.ERROR.INVALID_SELECT_NUMBER);
     }
   });
 });
