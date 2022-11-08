@@ -24,6 +24,12 @@ class App {
     return inputString.split('').map((item) => Number(item));
   }
 
+  arrayLengthCheck(inputArray) {
+    if (inputArray.length !== 3) {
+      throw new Error('❗️ 숫자 3개를 입력하세요. ❗️');
+    }
+  }
+
   inputCallback() {}
 
   play() {}
