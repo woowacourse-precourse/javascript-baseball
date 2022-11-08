@@ -65,8 +65,8 @@ class Validator {
   }
 
   static isInvalidRestartSubmit(value) {
-    const possibleValue = [1, 2];
-    if(!possibleValue.includes(value)) return constants.ERROR_MESSAGE.isInvalidRestartSubmit;
+    const validValues = Object.values(constants.RESTART_CODES);
+    if(!validValues.includes(value)) return constants.ERROR_MESSAGE.isInvalidRestartSubmit;
     return false;
   }
 }
