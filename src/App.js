@@ -86,7 +86,6 @@ class App {
   play() {
     gameStartLine();
     const comp = getComputerNumber();
-    console.log(comp);
     MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
       let user = [];
       for (let i of answer) user.push(Number.parseInt(i));
