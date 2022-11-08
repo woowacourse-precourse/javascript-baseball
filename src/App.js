@@ -5,8 +5,22 @@ class App {
 }
 
 /**
- * 기능2. 임의의 수 3개 구현
+ * 기능2. 임의의 수 3개 만드는 기능 구현
+ * @returns {string} 임의의 1~9까지의 3개 숫자 문자열
  */
+function makeRandomNumbers() {
+  let tempList = []; //임의의 수를 담을 빈 리스트
+  let i = 0;
+  while (i < 3) {
+    const tempNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    const overlapFind = tempList.find((element) => element == tempNumber);
+
+    overlapFind ? i-- : tempList.push(tempNumber);
+    i++;
+    tempList.push();
+  }
+  return tempList.join("")
+}
 
 /**
  * 기능1. 숫자, 숫자의 위치 일치여부 가려내는 기능
