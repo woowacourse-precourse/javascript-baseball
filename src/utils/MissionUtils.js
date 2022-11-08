@@ -6,6 +6,11 @@ const setUserInput = (inputMessage, treatUserValueFunction) => {
   });
 };
 
+const pickNumberBetweenRange = (start, end) => {
+  const number = MissionUtils.Random.pickNumberInRange(start, end);
+  return number;
+};
+
 const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
@@ -18,4 +23,5 @@ module.exports = {
   setUserInput,
   printMessage,
   deInitializationGame,
+  pickNumberBetweenRange,
 };

@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { pickNumberBetweenRange } = require("../utils/MissionUtils");
 
 const createComputerNumber = (start, end) => {
   const computer = [];
@@ -7,11 +8,6 @@ const createComputerNumber = (start, end) => {
     const isSelected = isSelectedNumber(number, computer);
   }
   return computer;
-};
-
-const pickNumberBetweenRange = (start, end) => {
-  const number = MissionUtils.Random.pickNumberInRange(start, end);
-  return number;
 };
 
 const isSelectedNumber = (number, computer) => {
