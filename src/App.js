@@ -41,10 +41,7 @@ class App {
     });
   }
 
-  playBaseball(){
-    // 시작 메시지 출력
-    this.init();
-
+  makeComputerInputNum(){
     const randomArr = []; // computer의 입력을 위한 임시 배열 
     while (randomArr.length < 3) {
       const temp = MissionUtils.Random.pickNumberInRange(1, 9);
@@ -52,7 +49,14 @@ class App {
     }
 
     this.computerArr = [...randomArr]; // 배열로 바꿔야 출력 가능 // 배열 내용은 number
-    console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
+    // console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
+  }
+
+  playBaseball(){
+    // 시작 메시지 출력
+    this.init();
+
+    this.makeComputerInputNum();
 
     this.userInputNum();
 
