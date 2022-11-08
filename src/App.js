@@ -56,13 +56,13 @@ class App {
     return numbersNumberArray;
   }
 
-  strikeCounter(userNumbersArray, refNumbersArray) {
+  strikeCounter(userNumbers, refNumbers) {
     let strikeCount = 0;
 
-    userNumbersArray.map((userNumber, index) => {
+    for (let i = 0; i < 3; i++) {
       strikeCount =
-        userNumber === refNumbersArray[index] ? strikeCount + 1 : strikeCount;
-    });
+        refNumbers[i] === userNumbers[i] ? strikeCount + 1 : strikeCount;
+    }
 
     return strikeCount;
   }
