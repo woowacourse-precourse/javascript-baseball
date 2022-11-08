@@ -8,9 +8,11 @@ class BaseballGame {
 
   startRound(targetNumber) {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      const userInputNumber = utils.isValidInput(userInput);
-      const ballCount = utils.getBallCount(userInputNumber, targetNumber);
-      const strikeCount = utils.getStrikeCount(userInputNumber, targetNumber);
+      if (utils.isValidInput(userInput) === false) {
+        throw new Error("유효하지 않은 값을 입력해 게임이 종료됩니다.");
+      }
+      const ballCount = utils.getBallCount(userInput, targetNumber);
+      const strikeCount = utils.getStrikeCount(userInput, targetNumber);
 
       utils.printHint(ballCount, strikeCount);
 
@@ -28,7 +30,7 @@ class BaseballGame {
         if (userInput === "1") {
           this.startGame();
         } else if (userInput === "2") Console.close();
-        else throw new Error("유효하지 않은 값을 입력해 게임이 종료됩니다");
+        else throw new Error("유효하지 않은 값을 입력해 게임이 종료됩니다.");
       }
     );
   }
