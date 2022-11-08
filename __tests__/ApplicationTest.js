@@ -24,6 +24,7 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
@@ -59,4 +60,26 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  // 테스트 및 검증.
+  // test("makeComputerNumber", () => {
+  //   expect(app.makeComputerNumber().length).toEqual(3);
+  // });
+
+  // test("checkResult", () => {`
+  //   expect(app.checkResult("123", [1, 2, 3])).toEqual([0, 3]);
+  //   expect(app.checkResult("123", [1, 4, 2])).toEqual([2, 1]);
+  //   expect(app.checkResult("123", [4, 5, 1])).toEqual([1, 0]);
+  //   expect(app.checkResult("123", [4, 5, 6])).toEqual([0, 0]);
+  // });
+
+  // test("resultMessage", () => {
+  //   expect(app.resultMessage([0, 3])).toEqual("3스트라이크");
+  //   expect(app.resultMessage([2, 1])).toEqual("2볼 1스트라이크");
+  //   expect(app.resultMessage([1, 0])).toEqual("1볼");
+  //   expect(app.resultMessage([0, 0])).toEqual("낫싱");
+  // });
+
+  MissionUtils.Console.close();
+
 });
