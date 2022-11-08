@@ -74,6 +74,7 @@ class App {
     if (gameResult.ball !== 0 && gameResult.strike !== 0) {
       Console.print(`${gameResult.ball}볼 ${gameResult.strike}스트라이크`);
     }
+    Console.close();
   }
 
   static isValidGameOverInput(userInput) {
@@ -84,13 +85,12 @@ class App {
     return true;
   }
 
-  async play() {
+  play() {
     Console.print("숫자 야구 게임을 시작합니다.");
     this.selectGameNumbers();
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      // eslint-disable-next-line no-await-in-loop
-      const userInput = await getUserInputs("숫자를 입력해주세요 : ");
+      const userInput = getUserInputs("숫자를 입력해주세요 : ");
       if (!App.isValidGameInput(userInput)) {
         throw new Error("잘못된 입력값입니다.");
       }
@@ -101,10 +101,12 @@ class App {
       if (gameResult.strike !== 3) continue;
 
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      // eslint-disable-next-line no-await-in-loop
-      const userGameOverSelection = await getUserInputs(
+      Console.close();
+
+      const userGameOverSelection = getUserInputs(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
       );
+
       if (!App.isValidGameInput(userGameOverSelection)) {
         throw new Error("잘못된 입력값입니다.");
       }
