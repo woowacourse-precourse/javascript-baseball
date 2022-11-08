@@ -49,15 +49,20 @@ const getBalls = (answer, inputArray) => {
   return ball;
 };
 
+const getResult = (answer, playerInput) => {
+  const inputArray = playerInput.split('');
+  const strikes = getStrikes(answer, inputArray);
+  const balls = getBalls(answer, inputArray);
+  const result = { strike: +strikes, ball: +balls };
+  return result;
+};
+
 const compareNumber = (answer, playerInput) => {
   if (isCorrect(answer, playerInput)) {
     handleCorrectAnswer(answer, playerInput);
     return;
   }
-  const inputArray = playerInput.split('');
-  const strikes = getStrikes(answer, inputArray);
-  const balls = getBalls(answer, inputArray);
-  const result = { strike: +strikes, ball: +balls };
+  const result = getResult(answer, playerInput);
   printAnswer(answer, result);
 };
 
