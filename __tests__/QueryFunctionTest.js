@@ -1,5 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { selectNextQuery, restartQuery } = require("../src/Query");
+const {
+  selectNumQuery,
+  selectNextQuery,
+  restartQuery,
+} = require("../src/Query");
+const { checkThreeDifferentNumbers } = require("../src/Error");
+const { makeHint, makeBallStrikeCount } = require("../src/Make");
 
 jest.mock("../src/make", () => ({
   makeBallStrikeCount: jest.fn(() => ({ strike: 1, ball: 1 })),
@@ -8,6 +14,8 @@ jest.mock("../src/make", () => ({
 }));
 
 jest.mock("../src/Error");
+
+const selectNextQueryMock = jest.fn();
 
 MissionUtils.Console.readLine = jest.fn((_, callback) => callback("123"));
 
@@ -43,5 +51,15 @@ describe("restartQuery 함수 테스트", () => {
     MissionUtils.Console.close = jest.fn();
     restartQuery(selectNumQueryfn);
     expect(MissionUtils.Console.close).toBeCalledTimes(1);
+  });
+});
+
+describe("selectNumQuery 함수 테스트", () => {
+  test("실행 과정", () => {
+    selectNumQuery([1, 2, 3], selectNextQueryMock);
+    expect(makeHint).toBeCalledTimes(1);
+    expect(makeBallStrikeCount).toBeCalledTimes(1);
+    expect(checkThreeDifferentNumbers).toBeCalledTimes(1);
+    expect(selectNextQueryMock).toBeCalledTimes(1);
   });
 });
