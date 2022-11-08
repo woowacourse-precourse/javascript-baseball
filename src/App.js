@@ -97,16 +97,16 @@ class App {
   
   return1IfSame(comparitiveValueLeft, comparitiveValueRight) {
     if (comparitiveValueLeft === comparitiveValueRight) {
-      return 1
+      return 1;
     }
-    return 0
+    return 0;
   }
 
   return1IfIncludes(targetArray, targetValue) {
     if (targetArray.includes(targetValue)) {
-      return 1
+      return 1;
     }
-    return 0
+    return 0;
   }
 
   printResultOfGuess(numberOfBalls, numberOfStrikes) {
@@ -136,7 +136,7 @@ class App {
 
   confirmRestart() {
     const RESTART = '1';
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.')
+    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (restartOrEnd) => {
       this.isValidConfirm(restartOrEnd);
       this.restart(restartOrEnd);
@@ -145,11 +145,12 @@ class App {
 
   isValidConfirm(restartOrEnd) {
     if (!restartOrEnd.match(/^[12]$/)) {
-      throw '잘못된 값을 입력하여 게임이 종료되었습니다.'
+      throw '잘못된 값을 입력하여 게임이 종료되었습니다.';
     }
   }
 
   restart(restartOrEnd) {
+    const RESTART = '1';
     if (restartOrEnd === RESTART) {
       this.play();
     }
