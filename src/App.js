@@ -79,6 +79,16 @@ class App {
       (strikeCount ? `${strikeCount}스트라이크` : "");
     return resultBaseball ? resultBaseball : "낫싱";
   }
+
+  checkInputRestartExit(input) {
+    if (input === "1") {
+      return true;
+    } else if (input === "2") {
+      return false;
+    } else {
+      throw new Error("잘못된 값 입력");
+    }
+  }
 }
 
 const app = new App();
