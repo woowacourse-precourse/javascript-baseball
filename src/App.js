@@ -1,7 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 function throwError() {
-  // MissionUtils.Console.close();
   throw new Error();
 }
 
@@ -17,7 +16,6 @@ function makeComputerRandNums() {
     if (randNumsArr.includes(newNum)) continue;
     randNumsArr.push(newNum);
   }
-  // console.log(randNumsArr);
   return randNumsArr;
 }
 
@@ -114,7 +112,6 @@ function restartGame() {
         playGame(computerRandNumsArray);
       }
       if (answer === '2') MissionUtils.Console.close();
-      // else throwError();
     })
 }
 
