@@ -33,20 +33,29 @@ class App {
     let input = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (line) => {
       input = line.split("").map(el => parseInt(el));
-      this.checkInput(input);
+      this.checkInputLength(input);
+      this.checkInputDuplicate(input);
     })
 
     // return input;
   }
 
-  checkInput(input) {
+  checkInputLength(input) {
+
     if(input.length !== 3) {
       throw new Error("세 자리 수를 입력하세요.");
     }
   }
+  checkInputDuplicate(input) {
+    const setInput = new Set(input);
+
+    if(setInput < input) {
+      throw new Error("서로 다른 세 수를 입력하세요.");
+    }
+  }
 
   printResult(computer, user) {
-
+    
   }
 
   endGame() {
