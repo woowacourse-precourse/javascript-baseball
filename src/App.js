@@ -18,6 +18,19 @@ class App {
     else this.result[kind] = 1;
   }
 
+  process() {
+    const computer = this.computer.value;
+    const user = this.user.value;
+
+    for (let i = 0; i < computer.length; i++) {
+      if (computer[i] === user[i]) this.update(RESULT.STRIKE);
+      else {
+        const exist = computer.indexOf(user[i]) > -1;
+        if (exist) this.update(RESULT.BALL);
+      }
+    }
+  }
+
   play() {}
 }
 
