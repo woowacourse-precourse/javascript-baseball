@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "rules": {
+    "quotes": ["error", "single"],
+    "arrow-spacing": "error",
+    "arrow-parens": ["error", "always"],
+    "padded-blocks": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "max-len": ["error", 100],
+    "max-depth": ["error", 2],
+    "comma-spacing": "error"
+  }
+}
