@@ -42,3 +42,52 @@ describe('시작 문구 테스트', () => {
     expect(logSpy).not.toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 });
+
+describe('숫자 야구 게임 실행 테스트', () => {
+  test('실행 예시 1', () => {
+    const randoms = [4, 2, 5];
+    const answers = ['123', '456', '789', '425', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '낫싱',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('실행 예시 2', () => {
+    const randoms = [7, 1, 3];
+    const answers = ['123', '145', '671', '216', '713', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '1볼 1스트라이크',
+      '1볼',
+      '2볼',
+      '1스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+});
