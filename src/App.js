@@ -7,7 +7,6 @@ class App {
     getNumber(randombaseball);
   }
 }
-module.exports = App;
 
 const createRandomNumber = () => {
   const numbers = [];
@@ -29,13 +28,12 @@ const getNumber = (randombaseball) => {
     checkNumberError(number);
     let result = computeBallStrike(randombaseball, number);
     MissionUtils.Console.print(computeResult(result));
+    if (result[1] === 3) {
+      gameover();
+    } else {
+      getNumber(randombaseball);
+    }
   });
-  if (result[1] === 3) {
-    gameover();
-  }
-  if (result[1] !== 3) {
-    getNumber(randombaseball);
-  }
 };
 
 const checkNumberError = (number) => {
@@ -54,12 +52,17 @@ const computeBallStrike = (randombaseball, number) => {
   let userNumber = number.split("").map(Number);
 
   for (let i = 0; i < 3; i++) {
-    if (randombaseball.includes(userNumber[i])) {
-      if (randombaseball.indexOf(userNumber[i]) == i) {
-        strike++;
-        continue;
-      }
+    if (
+      randombaseball.includes(userNumber[i]) &&
+      randombaseball.indexOf(userNumber[i]) !== i
+    ) {
       ball++;
+    }
+    if (
+      randombaseball.includes(userNumber[i]) &&
+      randombaseball.indexOf(userNumber[i]) == i
+    ) {
+      strike++;
     }
   }
 
@@ -110,3 +113,5 @@ const checkGameoverNumber = (number) => {
     MissionUtils.Console.close();
   }
 };
+
+module.exports = App;
