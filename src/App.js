@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const User = require('./User.js')
-const Computer = require('./Computer.js')
+const User = require('./User.js');
+const Computer = require('./Computer.js');
+const { NUMBER, RESULT, ALERT, STRING } = require('./Const.js');
 
 class App {
   constructor() {
@@ -9,7 +10,7 @@ class App {
   }
 
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(ALERT.START);
     this.startGame();
   }
 
@@ -19,42 +20,42 @@ class App {
   }
 
   getUserGuess(computerNum) {
-    Console.readLine("숫자를 입력해주세요 : ", (userGuess) => {
+    Console.readLine(ALERT.INPUT_NUMBER, (userGuess) => {
       const isValid = this.user.isInputValid(userGuess);
       if(!isValid) {
-        throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
+        throw new Error(ALERT.INVALID_INPUT);
       }
       const [ballCnt, strCnt] = this.getGuessRst(userGuess, computerNum);
       const rstMsg = this.getRstMsg(ballCnt, strCnt);
       Console.print(rstMsg);
 
-      if(strCnt === 3){
+      if(strCnt === NUMBER.MAX_LENGTH){
         this.correctAns();
         this.askRestart();
       }
-      if(strCnt !== 3) this.getUserGuess(computerNum);
+      if(strCnt !== NUMBER.MAX_LENGTH) this.getUserGuess(computerNum);
     })
   }
 
   correctAns() {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print(ALERT.CORRECT_ANSWER);
   }
   
   exitGame() {
-    Console.print("게임을 종료합니다.");
+    Console.print(ALERT.EXIT_GAME);
     Console.close();
   }
 
   askRestart() {
-    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.print(ALERT.RESTART_GAME);
     Console.readLine("", (isRestart) => {
-      if(isRestart === "1"){
+      if(isRestart === STRING.RESTART_TRUE){
         return this.startGame();
       }
-      if(isRestart === "2") {
+      if(isRestart === STRING.RESTART_FALSE) {
         return this.exitGame();
       }
-      throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
+      throw new Error(ALERT.INVALID_INPUT);
     })
   }
 
@@ -75,11 +76,11 @@ class App {
   }
 
   getRstMsg(ballCnt, strCnt) {
-    if(ballCnt === 0 && strCnt === 0) return '낫싱';
-    if(ballCnt === 0) return strCnt+'스트라이크';
-    if(strCnt === 0) return ballCnt+'볼';
+    if(ballCnt === 0 && strCnt === 0) return RESULT.NOTHING;
+    if(ballCnt === 0) return strCnt+RESULT.STRIKE;
+    if(strCnt === 0) return ballCnt+RESULT.BALL;
 
-    return ballCnt+'볼 '+strCnt+'스트라이크';
+    return ballCnt+RESULT.BALL+' '+strCnt+RESULT.STRIKE;
   }
   
 }
