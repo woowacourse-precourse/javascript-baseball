@@ -19,6 +19,22 @@ describe("Game.js 기능 테스트", () => {
         expect(test_result).toStrictEqual([1, 2]);
     });
 
+    test("getStrikeAndBall함수 결과값 테스트", () => {
+        const comNum = [9, 8, 2];
+        const userNum = [1, 2, 3]
+        const test_result = game.getStrikeAndBall(comNum, userNum);
+
+        expect(test_result).toStrictEqual([0, 1]);
+    });
+
+    test("getStrikeAndBall함수 결과값 테스트", () => {
+        const comNum = [7, 8, 9];
+        const userNum = [1, 3, 6]
+        const test_result = game.getStrikeAndBall(comNum, userNum);
+
+        expect(test_result).toStrictEqual([0, 0]);
+    });
+
     test("resultMessage 결과값 테스트", () => {
         const strike = 1;
         const ball = 2;
