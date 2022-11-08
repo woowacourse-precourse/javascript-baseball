@@ -145,3 +145,30 @@ describe("게임 한 턴 진행 테스트", () => {
         });
     })
 })
+
+describe("게임 두 턴 진행 테스트", () => {
+    test("게임 두 턴 진행", () => {
+        const RANDOMS = [1, 2, 4, 5, 6, 7];
+        const ANSWERS = ["123", "124", "1", "123", "576", "567", "2"];
+        const LOG_SPY = getLogSpy();
+        const MESSAGES = [
+            "2스트라이크",
+            "3스트라이크",
+            "낫싱",
+            "게임을 새로 시작하려면",
+            "2볼 1스트라이크",
+            "3스트라이크",
+            "게임 종료"
+        ];
+
+        mockRandoms(RANDOMS);
+        mockQuestions(ANSWERS);
+
+        const APP = new App();
+        APP.play();
+
+        MESSAGES.forEach((output) => {
+            expect(LOG_SPY).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    })
+})
