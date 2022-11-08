@@ -23,6 +23,9 @@ class Game {
     const numberArrayEnteredByUser = this.numberEnteredByUser.split('').map(Number);
     const resultThisTurn = generateResultThisTurn(this.pickedNumberArrayByComputer, numberArrayEnteredByUser);
 
+    if (resultThisTurn === '3스트라이크') {
+      return;
+    }
     this.start();
   };
 }
