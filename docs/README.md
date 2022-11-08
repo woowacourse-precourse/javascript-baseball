@@ -64,11 +64,12 @@
 [x] 랜덤함수 생성 후 randomNumArr 배열로 저장(MissionUtils - pickNumberInRange)
 ㄴ [x] 중복값이 없는지 확인
 [x] 입력값 받기 (MissionUtils - Console.readLine)
-[] 받은 입력값 split("")해서 inputNumArr 배열로 저장
-[] 입력값 예외처리
-ㄴ [] 숫자인지 확인
-ㄴ [] 중복값이 없는지 확인
-ㄴ [] 오류값이 있는 경우 throw 후 종료
+[x] 받은 입력값 split("")해서 inputNumArr 배열로 저장
+[x] 입력값 예외처리
+ㄴ [x] 1~9 범위의 숫자인지 확인
+ㄴ [x] 숫자 3개가 들어왔는지 확인
+ㄴ [x] 중복값이 없는지 확인
+ㄴ [x] 오류값이 있는 경우 throw 후 종료
 [] 입력값과 비교해서 결과 구하기
 ㄴ [] ANSWER = { ball:0, strike:0 }, score = 0 생성
 ㄴ [] 입력값과 랜덤값을 비교해서 값이 같으면 score++, index가 같으면 score++
