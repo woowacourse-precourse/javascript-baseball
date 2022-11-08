@@ -96,15 +96,7 @@ class App {
     this.question = input.split("").map(Number);
   }
 
-  restart(input) {
-    const COMMANDS = {
-      1: this.newGame.bind(this),
-      2: this.endProgram.bind(this),
-    };
-
-    // TODO: 검증 부분 분리
-    // TODO: 에러 메시지 정리
-
+  isValidCommandInput(input, commands) {
     if (isEmptyInput(input)) {
       this.endProgramWithError(this.MESSAGES.emptyError);
     }
@@ -113,9 +105,23 @@ class App {
       this.endProgramWithError(this.MESSAGES.whiteSpaceError);
     }
 
-    if (!COMMANDS[input]) {
+    if (!commands[input]) {
       this.endProgramWithError(this.MESSAGES.commandError);
     }
+
+    return true;
+  }
+
+  restart(input) {
+    const COMMANDS = {
+      1: this.newGame.bind(this),
+      2: this.endProgram.bind(this),
+    };
+
+    if (!this.isValidCommandInput(input, COMMANDS)) {
+      return;
+    }
+
     COMMANDS[input]();
   }
 
