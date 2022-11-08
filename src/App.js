@@ -37,7 +37,7 @@ class App {
       if (isNaN(Number(value)) === true) {
         throw new Error(ERROR_MESSAGE.INPUT_TYPE_NUMBER);
       }
-      if (Number(value) > 9) {
+      if (Number(value) > 9 || Number(value) < 1) {
         throw new Error(ERROR_MESSAGE.INPUT_RANGE_NUMBER);
       }
     });
