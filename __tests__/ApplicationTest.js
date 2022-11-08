@@ -1,5 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { GAME_MESSAGE } = require("../src/constants/messages");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -35,6 +36,23 @@ describe("숫자 야구 게임", () => {
       "3스트라이크",
       "게임 종료",
     ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임종료 메세지 출력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "2"];
+    const logSpy = getLogSpy();
+    const messages = [GAME_MESSAGE.GAME_OVER];
 
     mockRandoms(randoms);
     mockQuestions(answers);
