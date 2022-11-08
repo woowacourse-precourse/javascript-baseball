@@ -26,7 +26,7 @@ class App {
 
   changeUserNumbersToArray(userNumber) {
     const changeNumber = (string) => Number(string);
-    this.userNumberArray = Array.from(userNumber, changeNumber);
+    return (this.userNumberArray = Array.from(userNumber, changeNumber));
   }
 
   checkValidation(userNumber) {
@@ -68,7 +68,7 @@ class App {
       else if (computerNumber.includes(userNumber[i])) score[1]++;
     }
 
-    this.score = score;
+    return (this.score = score);
   }
 
   getScoreResult(score) {
@@ -80,7 +80,7 @@ class App {
     if (score[0] > 0 && score[1] > 0)
       scoreResult = `${score[1]}볼 ${score[0]}스트라이크`;
 
-    this.scoreResult = scoreResult;
+    return (this.scoreResult = scoreResult);
   }
 
   printScoreResult(scoreResult) {
