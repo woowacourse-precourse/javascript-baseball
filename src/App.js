@@ -23,6 +23,7 @@ class App {
     Console.readLine('숫자를 입력하세요 : ', (input) => {
       this.input = input.split('').map((i) => Number(i));
       this.checkValidation(this.input);
+      this.playScore(this.computer, this.input);
     })
   }
 
@@ -45,6 +46,16 @@ class App {
       else if (computer.includes(input[i])) score[0] += 1;
     }
     return score;
+  }
+
+  playScore(computer,input) {
+    const score = this.checkInput(computer, input);
+    let ans="";
+    if (score[0] === 0 && score[1] === 0) ans += "낫싱";
+    if (score[0] > 0) ans += `${score[0]}볼 `;
+    if (score[1] > 0) ans += `${score[1]}스트라이크`;
+  
+    Console.print(ans);
   }
 
 }
