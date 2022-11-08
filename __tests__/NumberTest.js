@@ -1,6 +1,10 @@
 const App = require("../src/App.js");
-const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH, RESTART_INPUT_NUM, END_INPUT_NUM } = require("../src/Condition");
+const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH } = require("../src/Condition");
+const { print, close, readLine, pickNumberInRange } = require("../src/Utils");
 
+afterEach(() => {
+  close();
+});
 
 describe("랜덤 숫자 테스트", () => {
   test("랜덤으로 만든 숫자의 길이가 3인지", () => {
