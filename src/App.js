@@ -5,7 +5,7 @@ class App {
   randomNumber(){
     const computer = [];
     while (computer.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    const number = Random.pickNumberInRange(1, 9);
     if (!computer.includes(number)) {
      computer.push(number);
        }
@@ -24,11 +24,11 @@ class App {
   inputNumber() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
       if (ans.length === 3 && !isNaN(Number(ans))) {
-        MissionUtils.Console.print("숫자만 3개를 입력해주세요.");
+        Console.print("숫자만 3개를 입력해주세요.");
       }else if(ans.length>3){
-        MissionUtils.Console.print("숫자를 3개만 입력해주세요.");
+        Console.print("숫자를 3개만 입력해주세요.");
       }else if(isdupli(ans)){
-        MissionUtils.Console.print("중복되지 않은 숫자 3개를 입력해주세요.");
+        Console.print("중복되지 않은 숫자 3개를 입력해주세요.");
       }
       const playerNumber = [];
       let res = {};
@@ -55,9 +55,9 @@ class App {
       resultValue = "낫싱";
     }
 
-    MissionUtils.Console.print(resultValue);
+    Console.print(resultValue);
     if (res.strike === 3) {
-      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }else {
       inputNumber();
     } 
@@ -71,9 +71,9 @@ class App {
           this.randomeNumber();
           this.inputNumber(); 
         }else if (ans === "2") {
-          MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+          Console.print("숫자 야구 게임을 종료합니다.");
         }else if(ans !=="1"||ans !=="2"){
-          MissionUtils.Console.print("1과 2 문자만 입력 가능합니다.");
+          Console.print("1과 2 문자만 입력 가능합니다.");
         }
         return;
       }
@@ -81,10 +81,10 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.randomNumber();
     this.inputNumber();
-    MissionUtils.Console.close();
+    Console.close();
   }
 }
 const app = new App();
