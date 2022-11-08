@@ -57,13 +57,14 @@ class App {
 
   askMoreGame() {
     MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+      SYS_MESSAGE.RESTART_MESSAGE,
       (userInputAboutRestart) => {
-        if (userInputAboutRestart === "1") MissionUtils.Console.close();
-        return this.play();
-        if (userInputAboutRestart === "2") MissionUtils.Console.close();
-        MissionUtils.Console.print("종료");
-        MissionUtils.Console.close();
+        if (userInputAboutRestart === "1") {
+          this.play();
+        }
+        if (userInputAboutRestart === "2") {
+          MissionUtils.Console.print(SYS_MESSAGE.END_MESSAGE);
+        }
       }
     );
   }
