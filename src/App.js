@@ -1,4 +1,4 @@
-import * as MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   #playerInput;
@@ -43,7 +43,29 @@ class App {
       "숫자를 입력해주세요: ",
       this.#validatePlayerInput
     );
-    this.#playerInput = playerInput;
+    this.#playerInput = playerInput.split("");
+    this.#missionUtils.Console.close();
+  }
+
+  #countStrikeAndBall(number, index) {
+    let strike = 0;
+    let ball = 0;
+    if (this.#answer.has(number) && this.#answer[index] === number) {
+      strike++;
+    } else if (this.#answer.has(number)) {
+      ball++;
+    }
+    return { strike, ball };
+  }
+
+  #compareAnswer() {
+    let strike = 0;
+    let ball = 0;
+    this.#answer.forEach(
+      (number, index) =>
+        ({ strike, ball } = this.#countStrikeAndBall(number, index))
+    );
+    return { strike, ball };
   }
 
   play() {
