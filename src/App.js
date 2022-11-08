@@ -28,7 +28,26 @@ class App {
   #hitBalls() {
     Console.readLine(MESSAGE.HIT_BALLS, (input) => {
       this.balls = input.split('').map((e) => +e);
+      App.#validateNumbers(this.balls);
     });
+  }
+
+  static #validateNumbers(numbersArray) {
+    if (numbersArray.filter((n) => Number.isNaN(n)).length > 0) {
+      throw new Error('inputValue must be numbers.');
+    }
+
+    if (numbersArray.length !== 3) {
+      throw new Error('numbers length must be 3.');
+    }
+
+    if (new Set(numbersArray).size !== 3) {
+      throw new Error('inputValue cannot be duplicated');
+    }
+
+    if (numbersArray.filter((n) => !(n >= 1 && n <= 9)).length > 0) {
+      throw new Error('inputValue cannot be grater than 9 or less than 1');
+    }
   }
 
 }
