@@ -59,4 +59,52 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("입력이 숫자가 아닌 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["입력값이글자"];
+    
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력 숫자가 서로 겹치는 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["111"];
+    
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력 숫자에 0이 있는 경우", () =>{
+    const randoms = [1, 3, 5];
+    const answers = ["012"];
+    
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  })
+
+  test("게임 재시작 시 잘못된 값 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
