@@ -104,7 +104,7 @@ class Game {
         this.play();
         return;
       }
-      if (answer === END_INPUT.END) {
+      if (inputNumber === END_INPUT.END) {
         return Console.close();
       }
       throw new Error(ERROR.INPUT_ONE_OR_TWO);
@@ -112,6 +112,5 @@ class Game {
     return;
   }
 }
-const game = new Game();
-game.play();
+
 module.exports = Game;
