@@ -65,9 +65,9 @@ const gameOver = () => {
     '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
   );
   MissionUtils.Console.readLine('', (answer) => {
-    if (answer === 2) {
+    if (answer === '2') {
       return;
-    } else if (answer === 1) {
+    } else if (answer === '1') {
       startNewGame();
     }
   });
