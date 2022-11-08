@@ -37,10 +37,10 @@ class GameDataView {
 
   gameOverAction() {
     Console.print(PRINT.GAME_OVER);
-    Console.readLine('', (input) => {
+    Console.readLine('', (nextGameStatus) => {
       this.#dispatcher.dispatch({
         type: ACTION_TYPE.GAME_OVER,
-        input,
+        nextGameStatus,
       });
     });
   }

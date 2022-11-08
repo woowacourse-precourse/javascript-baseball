@@ -9,10 +9,10 @@ class GameStatusStore {
     this.#gameStatusView = GameStatusView;
   }
 
-  setGameStatus(newGameStatus) {
-    this.gameStatusValidator(newGameStatus);
+  setGameStatus(gameStatus) {
+    this.gameStatusValidator(gameStatus);
 
-    this.#gameStatus = newGameStatus;
+    this.#gameStatus = gameStatus;
     this.#gameStatusView.update(this.#gameStatus);
   }
 

@@ -37,7 +37,7 @@ class GameService {
 
     this.dispatcher.register((action) => {
       if (action.type === ACTION_TYPE.GAME_OVER) {
-        this.gameStatusStore.setGameStatus(action.input);
+        this.gameStatusStore.setGameStatus(action.nextGameStatus);
       }
     });
 

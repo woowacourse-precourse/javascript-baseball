@@ -8,8 +8,8 @@ class GameStatusView {
     this.#dispatcher = Dispatcher;
   }
 
-  update(newGameStatus) {
-    switch (newGameStatus) {
+  update(gameStatus) {
+    switch (gameStatus) {
       case GAME_STATUS.STARTED:
         Console.print(PRINT.GAME_START);
         break;
