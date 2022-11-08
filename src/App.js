@@ -3,6 +3,12 @@ const checkValidRandomNumber = require('./utils/checkValidRandomNumber');
 const checkValidUserInput = require('./utils/checkValidUserInput');
 
 class App {
+  startGame() {
+    this.initGame();
+    this.generateRandomNumber();
+    this.getUserInput();
+  }
+
   initGame() {
     this.userInputNumber = [];
     this.computerRandomNumber = [];
@@ -36,18 +42,6 @@ class App {
     });
   }
 
-  askRestart() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (userInput) => {
-      if (userInput === '1') {
-        return this.startGame();
-      }
-      if (userInput === '2') {
-        MissionUtils.Console.close();
-      }
-    });
-  }
-
   calculateResult() {
     this.strikeScore = 0;
     this.ballScore = 0;
@@ -75,10 +69,16 @@ class App {
     }
   }
 
-  startGame() {
-    this.initGame();
-    this.generateRandomNumber();
-    this.getUserInput();
+  askRestart() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (userInput) => {
+      if (userInput === '1') {
+        return this.startGame();
+      }
+      if (userInput === '2') {
+        MissionUtils.Console.close();
+      }
+    });
   }
 
   play() {
