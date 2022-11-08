@@ -67,15 +67,18 @@ class App {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (input) => {
-        switch (input.trim()) {
-          case '1':
-            this.play()
-            break
-          case '2':
-            this.#close()
-            break
-          default:
-            this.#checkRestart()
+        const gameOption = input.trim()
+        const gameOptionMapper = {
+          RESTART: '1',
+          CLOSE: '2',
+        }
+
+        if (gameOption === gameOptionMapper.RESTART) {
+          this.play()
+        } else if (gameOption === gameOptionMapper.CLOSE) {
+          this.#close()
+        } else {
+          this.#checkRestart()
         }
       }
     )
