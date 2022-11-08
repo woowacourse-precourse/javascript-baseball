@@ -1,65 +1,32 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const isError = require('./errorHandler');
+const isError = require("./errorHandler");
 
 class App {
   play() {
-    let FLAG = false;
-    let USER_VALUE;
-    let SCORE_BOARD = [0, 0];
-    let RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-
-    while (FLAG == false) {
-      USER_VALUE = this.sliceNumber(this.inputFromUser());
-      SCORE_BOARD = this.judgeScore(RANDOM_VALUE, USER_VALUE);
-
-      if (SCORE_BOARD[0] == 3){
-        if (this.finishGame()){
-          MissionUtils.Console.print("게임을 재시작합니다.\n\n");
-          
-          // 랜덤값, 사용자 지정값 재설정
-          RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-          USER_VALUE = this.sliceNumber(this.inputFromUser());
-        // FLAG를 true로 설정해 반복문 탈출
-        } else  FLAG = true;
-      } else {
-        this.printScore(SCORE_BOARD);
-      }
-    }
+    let RANDOM_VALUE = this.getRandomNumber();
+    this.inputFromUser(RANDOM_VALUE);
   }
 
   // 사용자로부터 값 입력받기
-  inputFromUser() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요.', (INPUT) => {
-      let RESULT;
+  inputFromUser(PC) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (INPUT) => {
       let errorHandler = new isError(INPUT);
 
-      if(errorHandler.isInputCorrect(INPUT)) {
-        throw new Error("입력값이 올바르지 않습니다.");
+      if (errorHandler.isInputCorrect(INPUT)) {
+        this.printScore(PC, INPUT);
       } else {
-        RESULT = INPUT;
+        throw new Error("입력값이 잘못되었습니다.");
       }
-
-      return RESULT;
     });
-
-    return ;
-  }
-
-  // 입력받은 숫자 쪼개기
-  sliceNumber(NUM) {
-    let RESULT = (NUM + '').split('').map(function(item) {
-        return parseInt(item);
-      });
-
-    return RESULT;
   }
 
   // 점수 판정(볼, 스트라이크)
-  judgeScore(PC, USER) {
+  judgeScore(USER_INPUT, PC) {
     let SCORE_BOARD = [0, 0];
+    let USER = USER_INPUT;
 
     for (let i=0; i<3; i++) {
-      if (PC[i] == USER[i]) {
+      if (PC[i] === USER[i]) {
         SCORE_BOARD[0] += 1;
       }
       else if (PC.includes(USER[i])) {
@@ -72,29 +39,60 @@ class App {
 
   // 게임종료 및 재도전 의사를 묻는 함수
   finishGame() {
-    let RESTART;
-    MissionUtils.Console.readLine("정답입니다. 재도전을 원하시면 1, 게임을 종료하시려면 2를 입력하세요\n", 
-      (INPUT) => {RESTART = INPUT});
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.readLine("재시작하려면 1, 게임을 종료하려면 2를 입력하세요\n", 
+    (INPUT) => {
+      if (INPUT === "1") {
+        MissionUtils.Console.print("게임을 재시작합니다.\n\n");
+        this.play();
+      } else if (INPUT === "2") {
+        MissionUtils.Console.close();
+      } else {
+        throw new Error("입력값이 잘못되었습니다.");
+      }
+    });
+  }  
 
-    if (RESTART == 1) return true;
-    else if (RESTART == 2)  return false;
-    else  throw new Error("입력값이 올바르지 않습니다.");
-  }
+  // 점수를 계산하고 출력하는 함수
+  printScore(PC, USER) {
+    let SCORE_BOARD = this.judgeScore(PC, USER);
 
-  printScore(SCORE_BOARD) {
     let STRIKE = SCORE_BOARD[0];
     let BALL = SCORE_BOARD[1];
 
-    if (STRIKE == 0 && BALL == 0) {
-      MissionUtils.Console.print("낫싱");
+    if (STRIKE > 0 && BALL == 0) {
+      MissionUtils.Console.print(`${STRIKE}스트라이크`);
+    }
+    else if (STRIKE > 0 && BALL > 0) {
+      MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+    }
+    else if (STRIKE == 0 && BALL > 0) {
+      MissionUtils.Console.print(`${BALL}볼`);
     } else {
-      MissionUtils.Console.print(`${STRIKE}스트라이크 ${BALL}볼`);
+      MissionUtils.Console.print("낫싱");
+    }
+
+    if (STRIKE == 3) {
+      this.finishGame();
+    } else {
+      this.inputFromUser(PC)
     }
   }
+
+  // PC의 랜덤값 정해주는 함수
+  getRandomNumber() {
+    const RESULT = [];
+
+    while (RESULT.length < 3) {
+      const RANDOM_VALUE = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!RESULT.includes(RANDOM_VALUE)) {
+        RESULT.push(RANDOM_VALUE);
+      }
+    }
+
+    return RESULT.join("");
+  }
+
+
 }
-
-const app = new App();
-
-app.play();
-
 module.exports = App;
