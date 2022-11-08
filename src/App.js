@@ -1,10 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
 const MESSAGE = require("./assets/Message");
 const Computer = require("./components/Computer");
+const Game = require("./components/Game");
 
 class App {
   constructor() {
     this.computer = new Computer();
+    this.game = new Game();
     this.answer = null;
   }
 
@@ -19,7 +21,16 @@ class App {
   }
 
   enter() {
-    Console.readLine(MESSAGE.ENTER, (input) => Console.print(input));
+    Console.readLine(MESSAGE.ENTER, (input) => this.judge(input));
+  }
+
+  judge(input) {
+    const isValidInput = this.game.validateInput(input);
+    if (!isValidInput) return this.error();
+  }
+
+  error() {
+    throw new Error(MESSAGE.ERROR);
   }
 }
 
