@@ -1,7 +1,6 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-
+const MissionUtils = require("@woowacourse/mission-utils");
 Console.print('숫자 야구 게임을 시작합니다.');
-
 const setComputerNumber = () => {
    computerNumber = [];
   while (computerNumber.length < 3) {
@@ -56,9 +55,9 @@ const printCount = (strike, ball) => {
   if (strike > 0 && ball > 0) {
     Console.print(`${ball}볼 ${strike}스트라이크`);
   } else if (strike === 0 && ball > 0) {
-    Console.print(`${ball} 볼`);
+    Console.print(`${ball}볼`);
   } else if (strike > 0 && ball === 0) {
-    Console.print(`${strike} 스트라이크`);
+    Console.print(`${strike}스트라이크`);
   } else {
     Console.print('낫싱');
   }
@@ -71,6 +70,8 @@ const gameClear = () => {
     if (input === "1"){
       app.play();
     } else Console.close();
+       
+   
   })
 }
 
