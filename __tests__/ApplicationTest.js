@@ -1,6 +1,10 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+// 유저 입력값 생성
+// 아 readLine을 두 번 사용하는구만
+// 1. 유저 입력 값 받기
+// 2. 게임 재시작 관련
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
   answers.reduce((acc, input) => {
@@ -10,6 +14,7 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+//정답 생성
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
@@ -48,8 +53,8 @@ describe("숫자 야구 게임", () => {
   });
 
   test("예외 테스트", () => {
-    const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const randoms = [1, 3, 5]; // 정답은 135
+    const answers = ["1234"]; // 유저 입력값 "1234"
 
     mockRandoms(randoms);
     mockQuestions(answers);
