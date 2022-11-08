@@ -77,9 +77,9 @@ class App {
     }
 
     checkScore(quizNumber, input) {
-        const ball = this.checkBall(quizNumber, input);
-        const strike = this.checkStrike(quizNumber, input);
-        const score = { strike: strike, ball: ball };
+        let ball = this.checkBall(quizNumber, input);
+        let strike = this.checkStrike(quizNumber, input);
+        let score = { strike: strike, ball: ball };
         return this.printStrikeBall(score);
     }
 
@@ -103,10 +103,6 @@ class App {
         }
     }
 
-    closeGame() {
-        Console.close();
-    }
-
     askContinue() {
         Console.readLine(ASK_CONTINUE, (answer) => {
             if (answer == 1) {
@@ -115,6 +111,10 @@ class App {
                 this.closeGame();
             }
         });
+    }
+
+    closeGame() {
+        Console.close();
     }
 }
 
