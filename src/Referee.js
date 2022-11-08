@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RESTART, GAME_OVER, NOTHING, STRIKE, BALL } = require('./constants/gameSetting');
+const { RESTART, GAME_OVER } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
+const getGameResultMessage = require('./utils/getGameResultMessage');
 const Computer = require('./Computer');
 const Player = require('./Player');
 
@@ -18,7 +19,7 @@ class Referee {
 
   gameResult() {
     const count = this.getBallAndStrikeCount();
-    Console.print(this.getGameResultMessage(count.ball, count.strike));
+    Console.print(getGameResultMessage(count.ball, count.strike));
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
@@ -54,14 +55,6 @@ class Referee {
     }
 
     return count;
-  }
-
-  getGameResultMessage(ball, strike) {
-    const nothingString = ball === 0 && strike === 0 ? `${NOTHING}` : '';
-    const ballString = ball ? `${ball}${BALL} ` : '';
-    const strikeString = strike ? `${strike}${STRIKE}` : '';
-
-    return (nothingString + ballString + strikeString).trim();
   }
 }
 
