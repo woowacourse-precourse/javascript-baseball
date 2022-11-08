@@ -51,19 +51,20 @@ class App {
     }
     return ballCounter;
   }
-  restartOrEnd(userCommand) {
-    if(userCommand === '1') return this.play();
-    return Console.close();
-  }
-  gameOver() {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+  restartOrEnd() {
     let userCommand;
     Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",(input)=> {
       userCommand = input;
-      while(userCommand === '1' || userCommand === '2') {
-        restartOrEnd(userCommand);
-      }
-    });
+    });  
+    switch(userCommand) {
+      case '1' : this.play(); break;
+      case '2' : Console.close();
+      default : throw new Error("잘못된 입력입니다.");
+    }
+  }
+  gameOver() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+    this.restartOrEnd();
     
   }
   guessGame(strikeCounter,ballCounter,comNums) {
@@ -73,7 +74,7 @@ class App {
     Console.print(this.resultMessage(strikeCounter,ballCounter));
     return this.userInput(comNums);
   }
-  
+
   resultMessage(strikeCounter,ballCounter) {
     let message = '';
     
@@ -101,7 +102,6 @@ class App {
   
   play() {
     this.startBaseBallGame();
-    
   }
 }
 
