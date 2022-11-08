@@ -52,13 +52,13 @@ class App {
 
   printMessage() {
     if ( this.countStrike > 0 && this.countBall === 0 ) {
-      MissionUtils.Console.print(`${this.countStrike}스트라이크`)
+      MissionUtils.Console.print(`${this.countStrike}스트라이크`);
     }
     else if ( this.countStrike === 0 && this.countBall > 0 ) {
-      MissionUtils.Console.print(`${this.countBall}볼`)
+      MissionUtils.Console.print(`${this.countBall}볼`);
     }
     else if (this.countStrike > 0 && this.countBall > 0) {
-      MissionUtils.Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`)
+      MissionUtils.Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`);
     }
     else if ( this.countStrike + this.countBall === 0) {
       MissionUtils.Console.print('낫싱');
@@ -77,7 +77,7 @@ class App {
       MissionUtils.Console.close();
     }
     else {
-    throw '입력값의 양식이 올바르지 않습니다.';
+    throw '1 혹은 2를 입력해주세요.';
     }
   });
  }
@@ -85,21 +85,21 @@ class App {
  isError() {
   const countUserInputNumber = new Set(this.userInputNumber.split(''));
   if (this.userInputNumber.length >= 4) {
-    throw '입력값의 양식이 올바르지 않습니다.';
+    throw '서로 다른 3개의 숫자를 입력해주세요';
   }
   else if (countUserInputNumber.size < 3) {
-    throw '입력값의 양식이 올바르지 않습니다.';
+    throw '서로 다른 3개의 숫자를 입력해주세요.';
   }
   else if (countUserInputNumber.has('0')) {
-    throw '입력값의 양식이 올바르지 않습니다.';
+    throw '1에서 9사이의 숫자만 입력가능합니다.';
   }
   else if ((/\D/g).test(this.userInputNumber)) {
-    throw '입력값의 양식이 올바르지 않습니다.';
+    throw '1에서 9사이의 숫자만 입력가능합니다.';
   }
  }
 }
 
 module.exports = App;
 
-const test = new App();
-test.play();
+const game = new App();
+game.play();
