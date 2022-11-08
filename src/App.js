@@ -17,6 +17,22 @@ class App {
         }
       }
     }
+
+    // 유저가 숫자를 입력하게 만들고, 입력한 값이 제대로 된 값인지 확인하는 함수
+    function getUserInput() {
+      MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+        if (answer.length > 3) {
+          throw "다시 입력해주세요.";
+        }else if (answer.includes(0)){
+          throw "다시 입력해주세요.";
+        }else if (Number.isNaN(Number(answer))){
+          throw "다시 입력해주세요.";
+        }else if (new Set(answer).size!==3){
+          throw "다시 입력해주세요.";
+        }
+        userNum = answer;
+      });
+    }
   }
 }
 
