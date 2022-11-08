@@ -16,4 +16,14 @@ describe("숫자 야구 게임 기능 테스트", () => {
       expect(app.getBallStrikeResult(input)).toEqual("3스트라이크");
     });
   });
+  describe("길이 3인 array 요소가 서로 다른지 확인하는 checkUnique", () => {
+    test("[1, 2, 3]을 입력 받으면 true 출력", () => {
+      const correctInput = [1, 2, 3];
+      expect(app.checkUnique(correctInput)).toBeTruthy();
+    });
+    test("[2, 2, 3]을 입력 받으면 false 출력", () => {
+      const wrongInput = [2, 2, 3];
+      expect(app.checkUnique(wrongInput)).toBeFalsy();
+    });
+  });
 });
