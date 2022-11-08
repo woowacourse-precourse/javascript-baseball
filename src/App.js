@@ -12,6 +12,7 @@ const HINT_UNITS_OBJ = {
 class App {
   play() {
     this.answer = this._getRandomsStr([1, 2, 3, 4, 5, 6, 7, 8, 9], 3);
+    Console.print('숫자 야구 게임을 시작합니다.');
     this.getUserInput(this.validate);
   }
 
@@ -28,7 +29,6 @@ class App {
   }
 
   getUserInput(cbFn) {
-    Console.print('숫자 야구 게임을 시작합니다.');
     Console.readLine('숫자를 입력해주세요 : ', cbFn);
   }
 
