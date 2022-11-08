@@ -22,7 +22,7 @@ describe('기능 테스트', () => {
     expect(result).toEqual(true);
   });
 
-  test('입력이 1부터 9까지로 이루어진 유효한 입력이면 false 반환', () => {
+  test('입력이 1부터 9까지로 이루어진 유효하지 않은 입력이면 false 반환', () => {
     const app = new App();
     const case1 = app.isVaildNumberFormat('a123');
     const case2 = app.isVaildNumberFormat('123a');
