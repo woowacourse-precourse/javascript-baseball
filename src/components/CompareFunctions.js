@@ -1,6 +1,6 @@
 const gameConstant = require('./GameConstant');
 const handleCorrectAnswer = require('./HandleCorrect');
-const getResult = require('./GameResult');
+const printAnswer = require('./GameResult');
 
 const limitSize = gameConstant.LIMIT_NUMBER_SIZE;
 
@@ -58,7 +58,7 @@ const compareNumber = (answer, playerInput) => {
   const strikes = getStrikes(answer, inputArray);
   const balls = getBalls(answer, inputArray);
   const result = { strike: +strikes, ball: +balls };
-  getResult(answer, result);
+  printAnswer(answer, result);
 };
 
 module.exports = compareNumber;

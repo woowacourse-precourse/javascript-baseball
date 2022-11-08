@@ -33,9 +33,9 @@ const compareResult = result => {
   printResult(resultMessage, result);
 };
 
-const getResult = (answer, result) => {
+const printAnswer = (answer, result) => {
   compareResult(result);
   baseballGame.orderInput(answer);
 };
 
-module.exports = getResult;
+module.exports = printAnswer;
