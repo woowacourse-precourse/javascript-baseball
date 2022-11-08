@@ -208,4 +208,11 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toHaveBeenCalledWith("2볼 1스트라이크");
   });
 
+  test("추가테스트5-3: compareUserGuessToCompNum", () => {
+    const logSpy = getLogSpy();
+    const userNumArr = [1, 2, 3];
+    const compNumArr = [4, 5, 6];
+    compareUserGuessToCompNum(userNumArr, compNumArr);
+    expect(logSpy).toHaveBeenCalledWith("낫싱");
+  });
 });
