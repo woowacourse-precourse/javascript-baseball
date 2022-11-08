@@ -40,6 +40,7 @@ class Game {
     this.userNumberArray = input.split("").map(Number);
 
     const ball = this.countBall();
+    const strike = this.countStrike();
   }
 
   countBall(){
@@ -51,6 +52,16 @@ class Game {
       }
     })
     return ball;
+  }
+
+  countStrike(){
+    let strike = 0;
+    this.userNumberArray.map((userNumber, index)=>{
+      if(userNumber === this.compareNumberArray[index]){
+        strike++;
+      }
+    })
+    return strike;
   }
 }
 
