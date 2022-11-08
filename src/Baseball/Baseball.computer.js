@@ -17,9 +17,7 @@ class BaseballComputer {
   getUserNumbers() {
     const userNumbers = this.baseballOutput.getNumber();
 
-    this.baseballValidator.checkNumbersLength(userNumbers);
-    this.baseballValidator.checkNumericNumbers(userNumbers);
-    this.baseballValidator.checkDuplicateNumbers(userNumbers);
+    this.baseballValidator.checkInputNumbers(userNumbers);
 
     return userNumbers;
   }

@@ -1,7 +1,12 @@
 const BaseballDto = require('./Baseball.dto');
 
 class BaseballValidator {
-  static checkNumericNumbers(numbers) {
+  static checkInputNumbers(userNumbers) {
+    this.#checkNumbersLength(userNumbers);
+    this.#checkNumericNumbers(userNumbers);
+    this.#checkDuplicateNumbers(userNumbers);
+  }
+  static #checkNumericNumbers(numbers) {
     if (numbers === undefined) {
       throw new Error('알 수 없는 입력값입니다.');
     }
@@ -18,21 +23,17 @@ class BaseballValidator {
     }
   }
 
-  static checkNumbersLength(numbers) {
+  static #checkNumbersLength(numbers) {
     if (numbers.length !== 3) {
       throw new Error('글자가 3개가 아닙니다.');
     }
   }
 
-  static checkDuplicateNumbers(numbers) {
-    const removedDuplicateNumbers = Array.from(new Set(...numbers));
-    if (
-      removedDuplicateNumbers.length === numbers.length &&
-      numbers.length === 3
-    ) {
-      return;
+  static #checkDuplicateNumbers(numbers) {
+    const removedDuplicateNumbers = Array.from(new Set(numbers));
+    if (removedDuplicateNumbers.length !== numbers.length) {
+      throw new Error('중복된 입력값입니다.');
     }
-    throw new Error('잘못된 입력값입니다.');
   }
 
   static checkBallState(computerNumbers, userNumbers) {
