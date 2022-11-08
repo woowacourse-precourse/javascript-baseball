@@ -66,15 +66,14 @@ class App {
             ballCount = ballCount + 1;
           } else if (!numberArr.includes(answerArr[i])) {
             this.result = "낫싱";
-            console.log(this.result);
           }
         }
 
         this.result = `${ballCount}볼 ${strikeCount}스트라이크`;
-        if (this.result === "0불 0스트라이크") {
+        if (this.result === "0볼 0스트라이크") {
           this.result = "낫싱";
         }
-        console.log(`게임 결과: ${this.result}`);
+        MissionUtils.Console.print(`${this.result}`);
 
         if (this.result !== "3스트라이크") {
           this.gameStart(gameNumber);
