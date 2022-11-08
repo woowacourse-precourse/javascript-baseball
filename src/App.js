@@ -1,4 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const { createPrinter } = require("typescript");
 const {
   INPUT_ERROR_MESSAGE,
   RESTART_MESSAGE,
@@ -36,12 +37,12 @@ class App {
   }
 
   refNumbersArrayGetter() {
-    const refNumbers = [];
+    let refNumbers = "";
 
     while (refNumbers.length < 3) {
       const targetNumber = Random.pickNumberInRange(1, 9);
       if (!refNumbers.includes(targetNumber)) {
-        refNumbers.push(targetNumber);
+        refNumbers = refNumbers + targetNumber;
       }
     }
 
