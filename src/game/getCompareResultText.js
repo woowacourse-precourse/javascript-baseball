@@ -1,13 +1,15 @@
+const { GAME_RESULT_TEXT } = require('../constant/gameRule');
+
 const getCompareResultText = (strikeScore, ballScore) => {
   let compareResultText = '';
   if (strikeScore === 0 && ballScore === 0) {
-    compareResultText = '낫싱';
+    compareResultText = GAME_RESULT_TEXT.NOTHING;
   } else if (ballScore === 0) {
-    compareResultText = `${strikeScore}스트라이크`;
+    compareResultText = `${strikeScore}${GAME_RESULT_TEXT.STRIKE}`;
   } else if (strikeScore === 0) {
-    compareResultText = `${ballScore}볼`;
+    compareResultText = `${ballScore}${GAME_RESULT_TEXT.BALL}`;
   } else if (strikeScore > 0 && ballScore > 0) {
-    compareResultText = `${ballScore}볼 ${strikeScore}스트라이크`;
+    compareResultText = `${ballScore}${GAME_RESULT_TEXT.BALL} ${strikeScore}${GAME_RESULT_TEXT.STRIKE}`;
   }
 
   return compareResultText;

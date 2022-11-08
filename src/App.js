@@ -3,6 +3,10 @@ const checkValidUserInput = require('./utils/checkValidUserInput');
 const generateRandomNumber = require('./game/generateRandomNumber');
 const calculateScore = require('./game/calculateScore');
 const getCompareResultText = require('./game/getCompareResultText');
+const {
+  GAME_PROGRESS_TEXT, GAME_RESULT_TEXT,
+  THREE_STRIKE_COUNT, RESTART_USER_INPUT,
+} = require('./constant/gameRule');
 
 class App {
   startGame() {
@@ -20,7 +24,7 @@ class App {
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+    MissionUtils.Console.readLine(GAME_PROGRESS_TEXT.REQUEST_INPUT, (userInput) => {
       this.userInputNumber = [...String(userInput).split('').map((x) => +x)];
       checkValidUserInput(this.userInputNumber);
       this.calculateResult();
@@ -35,28 +39,29 @@ class App {
   }
 
   checkThreeStrike() {
-    if (this.strike !== 3) {
+    if (this.strike !== THREE_STRIKE_COUNT) {
       this.getUserInput();
     }
-    if (this.strike === 3) {
+    if (this.strike === THREE_STRIKE_COUNT) {
       this.askRestart();
     }
   }
 
   askRestart() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (userInput) => {
-      if (userInput === '1') {
-        return this.startGame();
+    MissionUtils.Console.print(GAME_RESULT_TEXT.THREE_STRIKE);
+    MissionUtils.Console.readLine(GAME_PROGRESS_TEXT.RESTART_QUESTION, (userInput) => {
+      if (userInput === RESTART_USER_INPUT.RESTART_INPUT) {
+        this.startGame();
+        return;
       }
-      if (userInput === '2') {
+      if (userInput === RESTART_USER_INPUT.STOP_INPUT) {
         MissionUtils.Console.close();
       }
     });
   }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(GAME_PROGRESS_TEXT.START_TEXT);
     this.startGame();
   }
 }

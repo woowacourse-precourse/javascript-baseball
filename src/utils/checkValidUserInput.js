@@ -3,6 +3,7 @@
 // 2. 각 자리의 수가 중복되는 것이 2개 이상인 경우
 // 3. 3자리를 입력하지 않은 경우
 // 4. 숫자가 아닌 경우
+const { ERROR_TEXT } = require('../constant/error');
 
 const isDuplicatedNumber = (userInputNumber) => {
   const newSet = new Set(userInputNumber);
@@ -23,16 +24,16 @@ const isIncludeZero = (userInputNumber) => userInputNumber.includes(0);
 
 const checkValidUserInput = (userInput) => {
   if (isDuplicatedNumber(userInput)) {
-    throw new Error('error1');
+    throw new Error(ERROR_TEXT.DUPLICATED);
   }
   if (isNotThreeDigit(userInput)) {
-    throw new Error('error2');
+    throw new Error(ERROR_TEXT.NOTTHREEDIGIT);
   }
   if (isNotNumber(userInput)) {
-    throw new Error('error3');
+    throw new Error(ERROR_TEXT.NOTNUMBER);
   }
   if (isIncludeZero(userInput)) {
-    throw new Error('error4');
+    throw new Error(ERROR_TEXT.INCLUDEZERO);
   }
 };
 
