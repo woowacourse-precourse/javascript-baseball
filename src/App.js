@@ -93,6 +93,5 @@ class App {
     this.getInput();
   }
 }
-const app = new App();
-app.play();
+
 module.exports = App;
