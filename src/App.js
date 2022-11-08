@@ -2,7 +2,7 @@ const LENGTH = 3;
 const MissionUtils = require('@woowacourse/mission-utils');
 class App {
   constructor() {
-    this.computer = '';
+    this.enemy = '';
     this.user = '';
     this.strike = 0;
     this.ball = 0;
@@ -16,7 +16,7 @@ class App {
   startGame() {
     this.resetGame();
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.setComputer();
+    this.setEnemy();
   }
 
   playGame() {
@@ -43,32 +43,31 @@ class App {
     });
   }
 
-  setComputer() {
-    this.computer = '';
-    while (this.computer.length < LENGTH) {
+  setEnemy() {
+    this.enemy = '';
+    while (this.enemy.length < LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9) + '';
-      if (!this.computer.includes(number)) {
-        this.computer += number;
+      if (!this.enemy.includes(number)) {
+        this.enemy += number;
       }
     }
   }
 
   setScore() {
     [...this.user].forEach((num, i) => {
-      if (num === this.computer[i]) this.strike += 1;
-      else if (this.computer.includes(num)) this.ball += 1;
+      if (num === this.enemy[i]) this.strike += 1;
+      else if (this.enemy.includes(num)) this.ball += 1;
     });
   }
 
   printResult() {
-    if (!this.ball && !this.strike) MissionUtils.Console.print('낫싱');
-    else {
-      MissionUtils.Console.print(
-        `${this.ball ? this.ball + '볼 ' : ''}${
-          this.strike ? this.strike + '스트라이크' : ''
-        }`
-      );
-    }
+    if (!this.ball && !this.strike) return MissionUtils.Console.print('낫싱');
+
+    MissionUtils.Console.print(
+      `${this.ball ? this.ball + '볼 ' : ''}${
+        this.strike ? this.strike + '스트라이크' : ''
+      }`
+    );
   }
 
   resetScore() {
@@ -77,7 +76,7 @@ class App {
   }
 
   resetGame() {
-    this.computer = '';
+    this.enemy = '';
     this.user = '';
     this.resetScore();
   }
@@ -86,13 +85,14 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (answer) => {
-        if (+answer === 1) this.play();
-        else if (+answer === 2) {
+        if (+answer === 1) return this.play();
+
+        if (+answer === 2) {
           MissionUtils.Console.close();
           return MissionUtils.Console.print('게임 종료');
-        } else {
-          throw new TypeError('1 또는 2만 입력해주세요');
         }
+
+        throw new TypeError('1 또는 2만 입력해주세요');
       }
     );
   }
