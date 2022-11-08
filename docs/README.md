@@ -8,8 +8,8 @@
 
 - `startGame()`: 숫자 야구 게임 시작
 - `numberPrediction()` : 사용자에게 숫자를 입력받고 힌트를 출력, 정답을 맞췄다면 게임을 종료하고 그렇지 않다면 입력을 다시 받음
-- `endGame()` : 게임 종료, 재시작/종료 입력을 받고 동작
-- `endGameInputMessage()` :
+- `endGame()` : 게임 재시작/종료 입력에 따른 동작
+- `endGameInputMessage()` : 게임 종료, 재시작/종료 입력을 받음
 - `getResult(answers, rightAnswers)` : 사용자와 컴퓨터의 입력을 받아, `strike`와 `ball` 개수를 계산
 - `getHintMessage(strike, ball)` : strike와 ball개수를 받아, 힌트 메시지를 리턴
 - `setRandomNumbers()` : 3개의 서로 다른 랜덤 숫자를 받아, 컴퓨터의 수로 지정
