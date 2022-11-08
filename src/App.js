@@ -1,17 +1,14 @@
-import * as readline from "readline";
+const MissionUtils = require("@woowacourse/mission-utils");
+const Console = MissionUtils.Console;
 
 class App {
   constructor() {
-    this.rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
     this.answer = {};
     this.guess = null;
   }
 
   play() {
-    console.log("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.selectAnswerNumber();
     this.getUserGuess();
   }
@@ -31,16 +28,15 @@ class App {
   }
 
   getUserGuess() {
-    this.rl.question("숫자를 입력해주세요 : ", (guess) => {
+    Console.readLine("숫자를 입력해주세요 : ", (guess) => {
       try {
         this.checkGuessVaildation(guess);
         this.compareAndDisplay(guess);
       } catch (err) {
         console.log(err.message);
-        this.rl.close();
+        Console.close();
       }
     });
-    return;
   }
 
   checkGuessVaildation(guess) {
@@ -107,7 +103,7 @@ class App {
   }
 
   replayOrEnd() {
-    this.rl.question(
+    Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (reply) => {
         if (reply === "1") {
@@ -115,14 +111,13 @@ class App {
         } else {
           if (reply !== "2") console.log("옳지 않은 값을 입력하셨습니다.");
           console.log("프로그램이 종료됩니다.");
-          this.rl.close();
+          Console.close();
         }
       }
     );
   }
 }
 
-const baseballGame = new App();
-baseballGame.play();
-
-// module.exports = App;
+const app = new App();
+app.play();
+module.exports = App;

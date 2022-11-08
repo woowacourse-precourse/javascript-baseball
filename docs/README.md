@@ -47,3 +47,4 @@ https://stackoverflow.com/questions/9011524/regex-to-check-whether-a-string-cont
 - 영어로 커밋 메세지 남기는 건 어렵다.
 - 유효성 검사 for 문을 두 번 돌려버리는데 비효율적인 듯 => 리팩토링 요망!
 - 함수 쪼개다 보니까 비효율적인 코드가 된 것 같은데 효율 vs 함수?
+- aysnc await ^^
