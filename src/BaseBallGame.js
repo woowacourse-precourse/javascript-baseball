@@ -98,4 +98,13 @@ class BaseBallGame {
 
     return "낫싱";
   }
+
+  #checkPlayerWin() {
+    if (this.#strikeCount === 3) {
+      Console.print(GAME_STATE_MESSAGE.WIN);
+      this.#checkRestartOrEndGame();
+    } else {
+      this.#inputNumber();
+    }
+  }
 }
