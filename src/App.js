@@ -1,8 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const getRandomNumbers = require("./getRandomNumbers");
 const { userErrorCheck, restartErrorCheck } = require("./errorCheck");
+const compareNumbers = require("./compareNumbers");
 
-const { OUTPUT_MESSAGE } = require('./constant');
+const { OUTPUT_MESSAGE } = require('./constantValue');
 
 class App {
 

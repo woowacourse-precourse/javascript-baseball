@@ -1,4 +1,4 @@
-const { ERROR_MESSAGE } = require('../constant');
+const { ERROR_MESSAGE } = require('./constantValue');
 
 function userErrorCheck(answer) {
     const duplicate = new Set(answer);
