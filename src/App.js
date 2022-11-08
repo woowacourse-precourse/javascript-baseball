@@ -10,7 +10,16 @@ class App {
     }
     return verification;
   }
-
+  checksizeofNumber(answer){
+    //1부터 9까지만 적었는지 확인하기
+    var value = false; 
+    for (var i;i<answer.length;i++){
+      if (answer[i]<1 || answer[i]<9){
+        value = true;
+      }
+    }
+    return value;
+  }
   print(values){
      //입력한 결과 표시해주기
      const MissionUtils = require("@woowacourse/mission-utils");
@@ -89,13 +98,15 @@ class App {
       MissionUtils.Console.readLine("숫자를 입력해주세요: ", (x) =>{
         if (isNaN(parseInt(x))) throw 'not a number';
         if (parseInt(x) <=0) throw 'not a natural number';
-        
         answer = x.split(",");
       });
       answer = answer.toString().split(",");
+      //1부터 9까지만 적었는지 확인하기
+      if (this.checksizeofNumber(answer)) throw 'too big number'
       answer = answer.join("");
       if (answer.length != 3) throw 'length error';
-      if (this.checkoverlap(answer) == true) throw 'overlap';
+      //중복되는 수 없는지 확인
+      if (this.checkoverlap(answer)) throw 'overlap';
 
       //계산하기
       var values = this.calculate(Numbers, answer);
