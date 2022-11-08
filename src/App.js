@@ -79,7 +79,6 @@ class App {
   play() {
     this.sendMessage(MESSAGE.GAME_PROGRESS.START);
     this.initAnswer();
-    this.sendMessage(this.answer);
     this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
   }
 }

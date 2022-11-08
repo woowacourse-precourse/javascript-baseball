@@ -11,7 +11,7 @@ const MESSAGE = {
 
   REQUEST: {
     USER_ANSWER: "숫자를 입력해주세요. : ",
-    IS_CONTINUE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    IS_CONTINUE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
   },
 
   GAME_PROGRESS: {
