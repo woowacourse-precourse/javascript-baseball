@@ -1,17 +1,29 @@
 const Message = require('./Message');
 
+class Count {
+  constructor(answer, userInputArr) {
+    this.count = 0;
+    this.answer = answer;
+    this.userInputArr = userInputArr;
+  }
+
+  countScore(checkFunction) {
+    this.userInputArr.reduce((acc, cur, idx) => {
+      if (checkFunction(this.answer, cur, idx)) {
+        this.count += 1;
+      }
+    }, 0);
+    return this.count;
+  }
+}
+
 function checkStrike(answer, cur, idx) {
   return cur === answer[idx];
 }
 
 function countStrike(answer, userInputArr) {
-  let strike = 0;
-  userInputArr.reduce((acc, cur, idx) => {
-    if (checkStrike(answer, cur, idx)) {
-      strike += 1;
-    }
-  }, 0);
-  return strike;
+  const strike = new Count(answer, userInputArr);
+  return strike.countScore(checkStrike);
 }
 
 function checkBall(answer, cur, idx) {
@@ -19,13 +31,8 @@ function checkBall(answer, cur, idx) {
 }
 
 function countBall(answer, userInputArr) {
-  let ball = 0;
-  userInputArr.reduce((acc, cur, idx) => {
-    if (checkBall(answer, cur, idx)) {
-      ball += 1;
-    }
-  }, 0);
-  return ball;
+  const ball = new Count(answer, userInputArr);
+  return ball.countScore(checkBall);
 }
 
 function checkNothing(strike, ball) {
