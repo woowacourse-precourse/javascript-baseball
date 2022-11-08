@@ -165,3 +165,15 @@ while (computer.length < 3) {
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+
+## 기능 목록
+
+### App
+
+- 실행하면 '숫자 야구 게임을 시작합니다.' 문구를 출력한다.
+- 임의의 숫자를 정답(computer_number)에 할당한다.
+- 사용자가 입력하는 숫자를 받아 유효성 검사를 한다.
+- 유효성 검사 통과시 사용자숫자(user_number)에 할당한다.
+- 정답과 사용자숫자를 비교해서 strike와 ball을 count한다.
+- strike와 ball의 갯수에 따라 문자열을 출력하고 정답이면 마지막 단계로, 틀렸으면 사용자 숫자를 다시 받는다.
+- 사용자에게 숫자를 입력받아 게임을 다시 진행할지, 끝낼지 정한다.
