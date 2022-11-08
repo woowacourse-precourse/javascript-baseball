@@ -39,9 +39,28 @@ class App{
     });
   }
 
+  getGameResult(){ //스트라이크, 볼 계산
+    let strike = 0;
+    let ball = 0;
+    let nothing = 0;
+
+    for(let i = 0; i < usrNum.length; i++){
+      if(comNum.includes(u[i])){
+        if(usrNum[i] == comNum[i]){
+          strike ++;
+        } else {
+          ball ++;
+        }
+      } else {
+        nothing++;
+      }
+    }
+  }
+
   play() { 
     this.comRandomNumber();
     this.gameStartNotice();
+    this.gameStart();
   }
 }
 
