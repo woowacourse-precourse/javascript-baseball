@@ -2,12 +2,21 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { RANDOM_NUMBER } = require("../src/constants");
 const Game = require("../src/game");
 
+const mockQuestions = (input) => {
+  MissionUtils.Console.readLine = jest.fn();
+  input.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
 describe("기능 목록 테스트", () => {
   test("시작 후 메세지 출력", () => {
     const log = jest.spyOn(MissionUtils.Console, "print");
     log.mockClear();
     const game = new Game();
-    game.init();
+    game.go();
     expect(log).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
   test("서로 다른 세자리 수 생성 및 1 ~ 9 숫자 확인", () => {
@@ -34,6 +43,7 @@ describe("기능 목록 테스트", () => {
   });
   test("입력값과 정답 비교", () => {
     const game = new Game();
+
     const answer = [1, 2, 3];
     const input = [1, 5, 2];
     const { ball, strike } = game.countPitch(input, answer);
@@ -61,4 +71,13 @@ describe("기능 목록 테스트", () => {
       game.isValidInput(lengthCheck, RANDOM_NUMBER.RANGE);
     }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
   });
+
+  /*
+  종료 후 메세지 출력 확인
+  게임 종료 후 숫자 입력 => 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. 출력 확인
+    -1, 2가 아닌 숫자 입력시 예외처리
+        -1인 경우 재시작 확인
+        -2인 경우 종료 확인 
+        -1, 2가 아닌 경우 확인
+  */
 });
