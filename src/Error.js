@@ -39,3 +39,11 @@ class BadCommandException extends InvalidInputException {
     this.message = message;
   }
 }
+
+module.exports = {
+  EmptyInputException,
+  WhiteSpaceInputException,
+  DuplicateElementException,
+  InvalidDigitException,
+  BadCommandException,
+};

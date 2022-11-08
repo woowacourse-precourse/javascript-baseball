@@ -1,8 +1,14 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const {
+  EmptyInputException,
+  WhiteSpaceInputException,
+  DuplicateElementException,
+  InvalidDigitException,
+  BadCommandException,
+} = require("./Error");
 const Utils = require("./Utils");
 const Messages = require("./Messages");
+const MissionUtils = require("@woowacourse/mission-utils");
 
-const { Console } = MissionUtils;
 const {
   createUniqueNumbers,
   isNumber,
@@ -10,6 +16,7 @@ const {
   isEmptyInput,
   hasWhiteSpace,
 } = Utils;
+const { Console } = MissionUtils;
 
 class App {
   _question = null;
@@ -53,11 +60,14 @@ class App {
 
   isValidInput(input) {
     if (isEmptyInput(input)) {
-      this.throwException(this.MESSAGES.emptyError);
+      this.throwException(this.MESSAGES.emptyError, EmptyInputException);
     }
 
     if (hasWhiteSpace(input)) {
-      this.throwException(this.MESSAGES.whiteSpaceError);
+      this.throwException(
+        this.MESSAGES.whiteSpaceError,
+        WhiteSpaceInputException
+      );
     }
 
     return true;
@@ -79,7 +89,7 @@ class App {
     }
 
     if (!this.isValidDigit(numbers)) {
-      this.throwException(this.MESSAGES.digitError);
+      this.throwException(this.MESSAGES.digitError, InvalidDigitException);
     }
 
     if (!numbers.every(this.isValidRange.bind(this))) {
@@ -87,7 +97,10 @@ class App {
     }
 
     if (hasDuplicateElmentInList(numbers)) {
-      this.throwException(this.MESSAGES.duplicateError);
+      this.throwException(
+        this.MESSAGES.duplicateError,
+        DuplicateElementException
+      );
     }
 
     return true;
@@ -95,7 +108,7 @@ class App {
 
   isValidCommandInput(input, commands) {
     if (!commands[input]) {
-      this.throwException(this.MESSAGES.commandError);
+      this.throwException(this.MESSAGES.commandError, BadCommandException);
     }
 
     return true;
