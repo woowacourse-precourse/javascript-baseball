@@ -1,19 +1,21 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
+const Utils = require("./Utils");
+const { Console } = MissionUtils;
+const { createUniqueNumbers, isNumber, hasDuplicateElmentInList } = Utils;
 
 class App {
-  constructor(count = 3, minNum = 1, maxNum = 9) {
+  constructor(count = 3, minNumber = 1, maxNumber = 9) {
     this.count = count;
-    this.minNum = minNum;
-    this.maxNum = maxNum;
+    this.minNumber = minNumber;
+    this.maxNumber = maxNumber;
     this.MESSAGES = {
       START: "숫자 야구 게임을 시작합니다.",
       END: "게임 종료",
       RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      INSERT_NUMBER: `${this.count}자리 숫자(각 자리 수: ${this.minNum}~${this.maxNum})를 입력해주세요 : `,
+      INSERT_NUMBER: `${this.count}자리 숫자(각 자리 수: ${this.minNumber}~${this.maxNumber})를 입력해주세요 : `,
       ERROR: {
         INSERT: "올바르지 않은 입력입니다.",
-        RANGE: `\n각 자리의 수는 ${this.minNum}부터 ${this.maxNum}까지 입력할 수 있습니다.`,
+        RANGE: `\n각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`,
         TYPE: "\n숫자만 입력할 수 있습니다.",
         DIGIT: `\n${this.count}자리 수가 입력되어야 합니다.`,
         DUPLICATE: "\n각 자리의 수는 중복되지 않아야 합니다.",
@@ -56,36 +58,18 @@ class App {
     return this._userNumber;
   }
 
-  createUniqueNumberInList(array) {
-    let pickedNumber = Random.pickNumberInRange(this.minNum, this.maxNum);
-
-    while (array.includes(pickedNumber)) {
-      pickedNumber = Random.pickNumberInRange(this.minNum, this.maxNum);
-    }
-
-    return pickedNumber;
-  }
-
   isValidDigit(numbers) {
     return numbers.length === this.count;
   }
 
-  isNumber(number) {
-    return typeof number === "number";
-  }
-
   isValidNumber(number) {
-    return number >= this.minNum && number <= this.maxNum;
-  }
-
-  hasDuplicateElement(list) {
-    return [...new Set(list)].length !== list.length;
+    return number >= this.minNumber && number <= this.maxNumber;
   }
 
   isValidUserNumberInput(input) {
     const numbers = input.split("").map(Number);
 
-    if (!numbers.every(this.isNumber)) {
+    if (!numbers.every(isNumber)) {
       throw new TypeError(
         `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.TYPE}${this.MESSAGES.ERROR.END}`
       );
@@ -103,7 +87,7 @@ class App {
       );
     }
 
-    if (this.hasDuplicateElement(numbers)) {
+    if (hasDuplicateElmentInList(numbers)) {
       throw new Error(
         `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.DUPLICATE}${this.MESSAGES.ERROR.END}`
       );
@@ -195,15 +179,6 @@ class App {
     Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
   }
 
-  createGameNumbers() {
-    const gameNumbers = Array.from({ length: this.count }).reduce(
-      (prev) => [...prev, this.createUniqueNumberInList(prev)],
-      []
-    );
-
-    this.gameNumber = gameNumbers;
-  }
-
   runGame() {
     Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
   }
@@ -214,12 +189,16 @@ class App {
   }
 
   newGame() {
-    this.createGameNumbers();
+    this.gameNumber = createUniqueNumbers({
+      count: this.count,
+      minNumber: this.minNumber,
+      maxNumber: this.maxNumber,
+    });
+
     this.runGame();
   }
 
   startGame() {
-    // TODO: 첫 게임에만 MESSAGES.START표시하기
     Console.print(this.MESSAGES.START);
     this.newGame();
   }
@@ -233,7 +212,3 @@ const app = new App();
 app.play();
 
 module.exports = App;
-
-// TODO: 입력이 요구사항과 일치하는지 확인하기
-// TODO: 올바른 프로그램 종료
-// TODO: 종료 후 1, 2 입력시 올바른 입력 검증
