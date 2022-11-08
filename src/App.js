@@ -38,6 +38,23 @@ class App {
       // 아니면 숫자 재입력
     });
   }
+
+  restartOrExit() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (input === "1") {
+          this.play();
+        } else if (input === "2") {
+          MissionUtils.Console.close();
+        } else {
+          throw new Error(
+            "잘못된 입력입니다. 1(재시작)이나 2(종료) 중 하나를 입력 바랍니다."
+          );
+        }
+      }
+    );
+  }
 }
 
 module.exports = App;
