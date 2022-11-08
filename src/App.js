@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { appendFile } = require("fs");
 
 class App {
 
@@ -67,7 +68,7 @@ class App {
     }
   }
 
-  printResult(computer, user) {
+  getResult(computer, user) {
     let strike = 0;
     let ball = 0;
 
@@ -95,6 +96,23 @@ class App {
     else if(strike > 0 || ball > 0) {
       result = "${ball}볼 ${strike}스트라이크";
     }
+
+    this.printResult(result);
+  }
+
+  printResult(result) {
+    if(result === "3스트라이크") {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n", input => {
+        if(input === 1) {
+          app.play();
+        } else if(input === 2){
+          MissionUtils.Console.close();
+        } else {
+          throw new Error('1과 2중에 값을 입력하세요.');
+        }
+      })
+    }
   }
 
   play() {
@@ -102,7 +120,7 @@ class App {
     MissionUtils.Console.print(this.printStartMessage());
     let computer = this.randomThreeNumbers();
     let user = this.inputThreeNumbers();
-    this.printResult(computer, user);
+    this.getResult(computer, user);
   }
 }
 
