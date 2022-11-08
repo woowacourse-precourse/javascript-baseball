@@ -1,4 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const {
+  START_NUMBER,
+  END_NUMBER,
+  NEW_GAME,
+  EXIT_GAME,
+  ANSWER,
+  REGAME_MESSAGE,
+  WIN_MESSAGE,
+  INPUT_NUMBER_MESSAGE,
+  START_MESSAGE,
+} = require('./constant');
 const Constants = require('./constant');
 
 class App {
@@ -39,7 +50,7 @@ class App {
 
   isNumber() {
     for (let number of this.userNumber) {
-      if (!(1 <= number && number <= 9)) {
+      if (!(START_NUMBER <= number && number <= END_NUMBER)) {
         throw new Error('유효한 숫자가 아닙니다');
       }
     }
@@ -104,25 +115,23 @@ class App {
   }
 
   selectedNumberException(selectedNumber) {
-    if (!(selectedNumber === 1 || selectedNumber === 2)) {
+    if (!(selectedNumber === NEW_GAME || selectedNumber === EXIT_GAME)) {
       throw new Error('유효한 숫자가 아닙니다');
     }
   }
 
   async askReGame() {
-    const selectedNumber = Number(
-      await this.inputNumber(Constants.REGAME_MESSAGE)
-    );
+    const selectedNumber = Number(await this.inputNumber(REGAME_MESSAGE));
     this.selectedNumberException(selectedNumber);
 
-    if (selectedNumber === 1) this.startNewGame();
+    if (selectedNumber === NEW_GAME) this.startNewGame();
 
-    if (selectedNumber === 2) MissionUtils.Console.close();
+    if (selectedNumber === EXIT_GAME) MissionUtils.Console.close();
   }
 
   checkAnswer(strike) {
-    if (strike === 3) {
-      this.printMessage(Constants.WIN_MESSAGE);
+    if (strike === ANSWER) {
+      this.printMessage(WIN_MESSAGE);
       this.askReGame();
     } else {
       this.tryGetAnswer();
@@ -130,7 +139,7 @@ class App {
   }
 
   async tryGetAnswer() {
-    this.userNumber = await this.inputNumber(Constants.INPUT_NUMBER_MESSAGE);
+    this.userNumber = await this.inputNumber(INPUT_NUMBER_MESSAGE);
     this.userNumberException();
 
     const strike = this.countStrike();
@@ -146,7 +155,7 @@ class App {
   }
 
   play() {
-    this.printMessage(Constants.START_MESSAGE);
+    this.printMessage(START_MESSAGE);
     this.startNewGame();
   }
 }
