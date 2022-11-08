@@ -1,5 +1,19 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
+const SYSTEM_MESSAGES = {
+  START: "숫자 야구 게임을 시작합니다.",
+  REQUEST: "숫자를 입력해주세요 : ",
+  FINISH: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+  NOTHING: "낫싱",
+}
+
+const ERROR_MESSAGES = {
+  NULL: "숫자를 입력해 주세요!",
+  SHORT: "3자리 숫자를 입력해 주세요!",
+  DUPL: "서로 다른 수를 입력해 주세요!"
+}
+
+
 class App {
   constructor() {
     this.RAND_NUM = [];
@@ -10,20 +24,21 @@ class App {
   }
 
   init() {
+    this.RAND_NUM = [];
+    this.INPUT_NUM = [];
     this.IS_NOTHING = true;
     this.COUNT_BALL = 0;
     this.COUNT_STRIKE = 0;
   }
 
   play() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(SYSTEM_MESSAGES.START);
     this.playNewGame();
   }
 
   // 게임 시작
   playNewGame() {
-    this.RAND_NUM = [];
-    this.INPUT_NUM = [];
+    this.init();
 
     // 1. random number(컴퓨터 숫자) 생성
     this.createRandomNumber();
@@ -43,16 +58,15 @@ class App {
   }
 
   inputUserAnswer() {
-    this.init();
     //2. 사용자가 숫자를 입력한다. 
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    Console.readLine(SYSTEM_MESSAGES.REQUEST, (answer) => {
       const ANSWER = Array.from(answer);
       ANSWER.map((a, idx) => {
         this.INPUT_NUM[idx] = parseInt(a);
       })
 
       // 4. 사용자가 입력한 입력에 대한 validation을 수행한다.
-      this.validateInput(this.INPUT_NUM);
+      this.validateInput();
 
       //2. randNum과 비교하여 결과를 확인한다.
       this.checkResult();
@@ -77,12 +91,12 @@ class App {
   printMessages() {
     if (this.IS_NOTHING) {
       // 정답을 맞춘 경우가 아니면 사용자에게 입력만 다시 받기
-      Console.print('낫싱');
+      Console.print(SYSTEM_MESSAGES.NOTHING);
       this.inputUserAnswer();
     } else {
       // 3. 정답을 맞춘 경우 게임 시작
       if (this.COUNT_STRIKE === 3) {
-        Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+        Console.print(SYSTEM_MESSAGES.FINISH);
         if (this.INPUT_NUM.includes(1)) {
           this.playNewGame();
         } else {
@@ -96,16 +110,16 @@ class App {
     }
   }
 
-  validateInput(INPUT_NUM) {
-    if (INPUT_NUM.length === 0) {
-      throw '정답을 입력해 주세요!';
+  validateInput() {
+    if (this.INPUT_NUM.length === 0) {
+      throw ERROR_MESSAGES.NULL;
     }
-    if (INPUT_NUM.length > 3) {
-      throw '3자리의 수를 입력해 주세요!';
+    if (this.INPUT_NUM.length > 3) {
+      throw ERROR_MESSAGES.SHORT;
     }
-    for (let i = 0; i < INPUT_NUM.length; i++) {
-      if (INPUT_NUM[i] == INPUT_NUM[i + 1]) {
-        throw '서로 다른 수를 입력해 주세요!';
+    for (let i = 0; i < this.INPUT_NUM.length; i++) {
+      if (this.INPUT_NUM[i] == this.INPUT_NUM[i + 1]) {
+        throw ERROR_MESSAGES.DUPL;
       }
     }
   }
