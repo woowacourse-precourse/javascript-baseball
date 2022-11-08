@@ -26,8 +26,6 @@ class App {
         notFull = false;
       }
     }
-
-    return threeNumbers;
   }
 
   inputThreeNumbers() {
@@ -41,7 +39,7 @@ class App {
       this.checkInputDuplicate(input);
     })
 
-    return input;
+    this.getResult(input);
   }
 
   checkIsNumber(input) {
@@ -67,17 +65,17 @@ class App {
     }
   }
 
-  getResult(computer, user) {
+  getResult(user) {
     let strike = 0;
     let ball = 0;
 
     let result = "";
 
     for(let i=0; i<user.length; i++) {
-      if(user[i] === computer[i]) {
+      if(user[i] === this.threeNumbers[i]) {
         strike++;
       }
-      else if(computer.includes(user[i])){
+      else if(this.threeNumbers.includes(user[i])){
         ball++;
       }
     }
@@ -115,9 +113,8 @@ class App {
 
   play() {
     this.printStartMessage();
-    let computer = this.randomThreeNumbers();
-    let user = this.inputThreeNumbers();
-    this.getResult(computer, user);
+    this.randomThreeNumbers();
+    this.inputThreeNumbers();
   }
 }
 
