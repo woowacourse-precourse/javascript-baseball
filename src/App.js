@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('./data/constants');
+const { MESSAGE, RESULT } = require('./data/constants');
 const { CheckException } = require('./exception/exception');
 
 class App {
@@ -7,14 +7,28 @@ class App {
     return Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  threeStrike(strike) {
+    if (strike === 3) {
+      Console.print(MESSAGE.SUCCESS);
+
+      this.restart();
+
+      return;
+    }
+  }
+
   recursiveInput() {
     Console.readLine(MESSAGE.INPUT, inputNum => {
       CheckException(inputNum, 3);
+
       const { ball, strike } = this.check(inputNum);
-      if (strike === 3) {
-        Console.print('정답');
-        this.restart();
-      }
+
+      Console.print(this.result(ball, strike));
+
+      this.threeStrike(strike);
+      this.recursiveInput();
+
+      return;
     });
   }
 
@@ -43,6 +57,18 @@ class App {
     Console.print(MESSAGE.START);
     this.computerNumber = this.randomArray();
     this.recursiveInput();
+  }
+
+  result(ball, strike) {
+    if (ball == 0 && strike == 0)
+      return RESULT.NOTHING;
+
+    if (ball > 0 && strike > 0)
+      return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
+    if (ball > 0 && strike == 0)
+      return `${ball}${RESULT.BALL}`;
+    if (ball == 0 && strike > 0)
+      return `${strike}${RESULT.STRIKE}`;
   }
 }
 
