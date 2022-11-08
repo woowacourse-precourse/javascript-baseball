@@ -23,34 +23,33 @@ class App {
 
   gameStart(gameNumber) {
     MissionUtils.Console.readLine("3자리 숫자를 입력해주세요: ", (answer) => {
-      try {
-        if (answer.length !== 3) {
-          throw new Error("입력값은 반드시 3자리 숫자여야 합니다.");
-        }
+      if (answer.length !== 3) {
+        throw new Error("입력값은 반드시 3자리 숫자여야 합니다.");
+      }
 
-        if (Number(gameNumber) === Number(answer)) {
-          this.result = "3스트라이크";
-          if (this.result === "3스트라이크") {
-            MissionUtils.Console.print(this.result);
-            MissionUtils.Console.print(
-              "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-            );
-            MissionUtils.Console.print(
-              "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-            );
-            return MissionUtils.Console.readLine(
-              "게임 재개 여부: ",
-              (gameResumeChoice) => {
-                if (Number(gameResumeChoice) === 1) {
-                  this.play();
-                } else if (Number(gameResumeChoice) === 2) {
-                  MissionUtils.Console.print("게임 종료");
-                }
+      if (Number(gameNumber) === Number(answer)) {
+        this.result = "3스트라이크";
+        if (this.result === "3스트라이크") {
+          MissionUtils.Console.print(this.result);
+          MissionUtils.Console.print(
+            "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+          );
+          MissionUtils.Console.print(
+            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+          );
+          return MissionUtils.Console.readLine(
+            "게임 재개 여부: ",
+            (gameResumeChoice) => {
+              if (Number(gameResumeChoice) === 1) {
+                this.play();
+              } else if (Number(gameResumeChoice) === 2) {
+                MissionUtils.Console.print("게임 종료");
               }
-            );
-          }
+            }
+          );
         }
-
+      }
+      try {
         let result = this.reulst;
         let strikeCount = 0;
         let ballCount = 0;
@@ -97,5 +96,3 @@ class App {
 }
 
 module.exports = App;
-const app = new App();
-app.play();
