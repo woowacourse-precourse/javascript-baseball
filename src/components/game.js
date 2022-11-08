@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./computer');
 const Validation = require('./Validation');
+const { PROMPT, SUCCESS, RESTART, END } = require('../constant/constant.js');
 
 class Game {
   constructor() {
@@ -36,7 +37,7 @@ class Game {
   print() {
     if (this.strike === 3) {
       Console.print('3스트라이크');
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      Console.print(SUCCESS);
       return this;
     }
 
@@ -62,7 +63,7 @@ class Game {
   }
 
   replay() {
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.print(RESTART);
 
     Console.readLine('', input => {
       if (input === '1') {
@@ -72,13 +73,14 @@ class Game {
 
       if (input === '2') {
         Console.close();
+        Console.print(END);
         return;
       }
     });
   }
 
   readAnswer() {
-    Console.readLine('숫자를 입력해주세요 : ', input => {
+    Console.readLine(PROMPT, input => {
       const numbers = input //
         .split('')
         .map(Number);
