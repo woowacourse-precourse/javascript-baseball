@@ -1,7 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  
   getInputNumber() {
     let userNum;
     MissionUtils.Cosole.readLine("숫자를 입력해주세요 :", (number) => {
@@ -14,14 +13,9 @@ class App {
     while (computerNum.length < 3) { 
       let num = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computerNum.includes(num)) {
-        computerNum.push(num);ㅇ
+        computerNum.push(num);
       }
     }
-  }
-
-  play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    
   }
 
   checkStrike(computerNum, userNum) {
@@ -43,8 +37,23 @@ class App {
     ballScore = countIntersect - strikeScore;
   }
 
-  while (computerNum == userNum) {
-    
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.getComputerNumber;
+    this.getInputNumber();
+
+    if (ballScore > 0 || strikeScore > 0) {
+      MissionUtils.Console.print("${ballScore}볼 ${strikeScore}스트라이크");ㄱ
+    }
+    else if (countIntersect == 0) {
+      MissionUtils.Console.print("낫싱");
+    }
+    else if (strikeScore == 3) {
+      MissionUtils.Console.print("3스트라이크");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return;
+    }
+    return this.play();
   }
 }
 
