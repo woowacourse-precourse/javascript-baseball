@@ -1,4 +1,5 @@
-const { Random, Console } = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
+const GameManager = require('./GameManager');
 
 const HINT_WORD = {
   BALL: '볼',
@@ -21,26 +22,16 @@ const MESSAGE = {
 
 class App {
   constructor() {
-    this.answer = [];
+    this.gameManager = new GameManager();
   }
 
   play() {
     this.start();
-    this.guess(this.initComputer());
+    this.guess();
   }
 
   start() {
     Console.print(MESSAGE.START);
-  }
-
-  initComputer() {
-    while (this.answer.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-
-      if (!this.answer.includes(number)) {
-        this.answer.push(number);
-      }
-    }
   }
 
   guess() {
@@ -49,7 +40,9 @@ class App {
         throw new Error(MESSAGE.ERROR);
       }
 
-      const { ballCount, strikeCount } = this.compare(userInput.split(''));
+      const { ballCount, strikeCount } = this.gameManager.compare(
+        userInput.split('')
+      );
       this.showResult(ballCount, strikeCount);
 
       if (strikeCount === 3) {
@@ -60,25 +53,6 @@ class App {
 
       this.guess();
     });
-  }
-
-  compare(userInputStr) {
-    const userInputNum = userInputStr.map((input) => Number(input));
-    let ballCount = 0;
-    let strikeCount = 0;
-
-    this.answer.forEach((number, index) => {
-      if (userInputNum[index] === number) {
-        strikeCount += 1;
-        return;
-      }
-
-      if (userInputNum.includes(number)) {
-        ballCount += 1;
-      }
-    });
-
-    return { ballCount, strikeCount };
   }
 
   showResult(ballCount, strikeCount) {
@@ -123,8 +97,7 @@ class App {
   }
 
   restart() {
-    this.answer = [];
-    this.initComputer();
+    this.gameManager = new GameManager();
     this.guess();
   }
 
