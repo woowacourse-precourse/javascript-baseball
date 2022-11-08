@@ -7,7 +7,7 @@ class Printer {
     this.MESSAGE = {
       START: '숫자 야구 게임을 시작합니다.',
       INPUT_NUMBER: '숫자를 입력해주세요 : ',
-      CORRECT: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+      SUCCESS: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
       ERROR: '잘못된 값이 입력되었습니다. 게임을 종료합니다.',
       END: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
     };
@@ -56,8 +56,8 @@ class Printer {
     throw new Error(this.MESSAGE.ERROR);
   }
 
-  showSuccess() {
-    this.console.print(this.MESSAGE.CORRECT);
+  showSuccessMessage() {
+    this.console.print(this.MESSAGE.SUCCESS);
   }
 }
 

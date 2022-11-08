@@ -32,7 +32,7 @@ class App {
       this.printer.showResult(ballCount, strikeCount);
 
       if (strikeCount === 3) {
-        this.printer.showSuccess();
+        this.printer.showSuccessMessage();
         this.end();
         return;
       }
