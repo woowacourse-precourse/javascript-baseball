@@ -25,7 +25,7 @@ class App {
     const GUESS = num.toString().split('').map((element) => Number(element));
 
     if (GUESS.length !== 3 || GUESS.includes(NaN)) {
-      throw Error();
+      throw new Error();
     }
 
     if (GUESS.length === 3 && !GUESS.includes(NaN)) {
@@ -76,8 +76,5 @@ class App {
     }
   }
 }
-
-const APP = new App();
-APP.play();
 
 module.exports = App;
