@@ -45,6 +45,22 @@ class App {
     }
   }
 
+  countBall(inputArray) {
+    let ballNumber = 0;
+
+    for (let i = 0; i < inputArray.length; i++) {
+      const matchResult = this.answerArray.some(
+        (answer, index) => answer === inputArray[i] && index !== i
+      );
+
+      if (matchResult) {
+        ballNumber++;
+      }
+    }
+
+    return ballNumber;
+  }
+
   inputCallback() {}
 
   play() {}
