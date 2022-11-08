@@ -48,6 +48,44 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('볼, 스트라이크 개수 구하기(check method)', () => {
+    const app = new App();
+    const random = [1, 2, 3];
+    const answer = ['245', '125', '865', '182', '123'];
+    const resuslt = [
+      { ball: 1, strike: 0 },
+      { ball: 0, strike: 2 },
+      { ball: 0, strike: 0 },
+      { ball: 1, strike: 1 },
+      { ball: 0, strike: 3 },
+    ];
+
+    answer.forEach((number, index) => {
+      expect(app.check(number, random)).toEqual(resuslt[index]);
+    });
+  });
+
+  test('결과 출력 확인(result method)', () => {
+    const app = new App();
+    const input = [
+      { ball: 0, strike: 0 },
+      { ball: 1, strike: 0 },
+      { ball: 0, strike: 2 },
+      { ball: 1, strike: 1 },
+      { ball: 0, strike: 3 },
+    ];
+    const result = [
+      '낫싱',
+      '1볼',
+      '2스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+    ];
+    input.forEach((inputNum, index) => {
+      expect(app.result(inputNum)).toEqual(result[index]);
+    });
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
