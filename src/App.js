@@ -9,8 +9,13 @@ const {
   WIN_MESSAGE,
   INPUT_NUMBER_MESSAGE,
   START_MESSAGE,
+  BALL,
+  STRIKE,
+  NOTHING,
+  INVALID_NUMBER_ERROR,
+  LENGTH_ERROR,
+  DUPLICATE_ERROR,
 } = require('./constant');
-const Constants = require('./constant');
 
 class App {
   constructor() {
@@ -51,7 +56,7 @@ class App {
   isNumber() {
     for (let number of this.userNumber) {
       if (!(START_NUMBER <= number && number <= END_NUMBER)) {
-        throw new Error('유효한 숫자가 아닙니다');
+        throw new Error(INVALID_NUMBER_ERROR);
       }
     }
 
@@ -59,14 +64,14 @@ class App {
   }
 
   isLength3() {
-    if (this.userNumber.length !== 3) throw new Error('길이가 3이 아닙니다');
+    if (this.userNumber.length !== 3) throw new Error(LENGTH_ERROR);
   }
 
   isDuplicated() {
     const userNumberSet = new Set(this.userNumber);
 
     if (userNumberSet.size !== this.userNumber.length)
-      throw new Error('중복된 숫자가 있습니다');
+      throw new Error(DUPLICATE_ERROR);
   }
 
   userNumberException() {
@@ -105,18 +110,18 @@ class App {
   printResult(ball, strike) {
     let result = ``;
 
-    if (ball) result += `${ball}볼`;
+    if (ball) result += `${ball}${BALL}`;
 
-    if (strike) result += ` ${strike}스트라이크`;
+    if (strike) result += ` ${strike}${STRIKE}`;
 
-    if (result === ``) result += `낫싱`;
+    if (result === ``) result += `${NOTHING}`;
 
     MissionUtils.Console.print(result.trim());
   }
 
   selectedNumberException(selectedNumber) {
     if (!(selectedNumber === NEW_GAME || selectedNumber === EXIT_GAME)) {
-      throw new Error('유효한 숫자가 아닙니다');
+      throw new Error(INVALID_NUMBER_ERROR);
     }
   }
 
