@@ -1,4 +1,4 @@
---필요한 변수: ComputerNumbers, PlayerNumbers, strike, ball, gameAgain
+--필요한 변수: ComputerNumbers, PlayerNumbers, strike, ball, strikeBall, gameAgain, inspect
 
 --설계
 0. "야구 게임을 시작합니다" 출력.
@@ -43,7 +43,7 @@
 2. Computer가 생성한 난수 가져오는 함수(computerNumbersMaking)
 3. Player의 수 입력 받는 함수(playerNumbersInput)
 4. 하나의 게임을 진행하는 함수(oneGame)
-5. computer와 player의 숫자 비교 검사하여 strike와 ball 산출하는 함수(compareComputerAndPlayer)
+5. computer와 player의 숫자 비교 검사하여 strike와 ball의 개수를 산출하는 함수(compareComputerAndPlayer)
 6. strike와 ball 개수에 맞게 출력하는 함수(printStrikeAndBall)
 7. 게임 종료 조건 검사하는 조건문
 8. 게임 종료 문구 출력 함수(gameEndingText)

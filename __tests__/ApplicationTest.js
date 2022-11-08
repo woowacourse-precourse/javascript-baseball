@@ -74,7 +74,7 @@ describe("숫자 야구 게임", () => {
 
   test("게임 재시작 시 잘못된 값 입력", () => {
     const randoms = [1, 3, 5];
-    const answers = ["246", "135", "3"];
+    const answers = ["135", "3"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
