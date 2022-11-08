@@ -29,6 +29,9 @@ class App {
   }
 
 
+  gameInputError() {
+    throw new Error(MESSAGE.INPUT_ERROR);
+  }
 }
 const app = new App();
 app.play();
