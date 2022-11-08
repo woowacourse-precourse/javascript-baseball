@@ -4,8 +4,23 @@ const { MESSAGE, COUNTBOARDRESULT } = require('../src/Const');
 const { endApp } = require('../src/Function');
 const Function = require('../src/Function');
 
-const getLogSpy = () => {
+const mockQuestions = answers => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const getLogPrintSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
+const getLogReadLineSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'readLine');
   logSpy.mockClear();
   return logSpy;
 };
@@ -64,7 +79,7 @@ describe('App class 테스트', () => {
   });
 
   test('makeResult 테스트', () => {
-    const logSpy = getLogSpy();
+    const logSpy = getLogPrintSpy();
     app.countBoard = { strike: 0, ball: 0 };
     app.makeResult();
 
@@ -72,7 +87,7 @@ describe('App class 테스트', () => {
   });
 
   test('decideResponse 테스트', () => {
-    const logSpy = getLogSpy();
+    const logSpy = getLogPrintSpy();
     app.countBoard = { strike: 3, ball: 0 };
     app.decideReprocess();
     endApp();
@@ -81,9 +96,18 @@ describe('App class 테스트', () => {
   });
 
   test('restartOrEnd 테스트', () => {
-    const logSpy = getLogSpy();
+    const logSpy = getLogPrintSpy();
     app.restartOrEnd('2');
 
     expect(logSpy).toHaveBeenCalledWith('게임 종료');
+  });
+
+  test('askRestartOrEnd 테스트', () => {
+    const logSpy = getLogReadLineSpy();
+    app.restartOrEnd = jest.fn(() => endApp());
+    app.askRestartOrEnd();
+    endApp();
+
+    expect(logSpy).toBeCalledTimes(1);
   });
 });
