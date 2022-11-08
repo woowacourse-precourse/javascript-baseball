@@ -70,4 +70,24 @@ describe("유저 플로우", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("정답시 게임 종료", () => {
+    const randoms = [7, 3, 1];
+    const answers = ["731"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "게임 종료"
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
