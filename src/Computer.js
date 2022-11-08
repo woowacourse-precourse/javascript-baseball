@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { NUMBER } = require("./Game");
-//3개 랜덤 숫자 만들기
 
 class Computer {
   makeRandomNumber() {
