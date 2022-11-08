@@ -29,7 +29,7 @@ describe('기능 단위 목록별 테스트', () => {
     const printSpy = getPrintSpy();
     const app = new App();
 
-    app.showStartMessage();
+    app.play();
     expect(printSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 
