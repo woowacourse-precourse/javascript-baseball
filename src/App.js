@@ -26,7 +26,7 @@ function App () {
   function recieveUserInput () {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       if(isValidInput(input)){
-        getScore(getMatchedBallStrikeNumber(input, this.randomNumber));
+        printMatchResult(getMatchedBallStrikeNumber(input, this.randomNumber));
         return;
       }
       throw '올바른 값을 입력하세요.';
@@ -57,7 +57,7 @@ function App () {
     return result;
   }
     
-  function getScore (matchResult){
+  function printMatchResult (matchResult){
     const [ball, strike] = matchResult;
     const ANSWER_STRIKE_COUNT = 3;
 
