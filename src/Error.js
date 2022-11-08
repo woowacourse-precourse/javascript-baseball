@@ -18,7 +18,7 @@ const ERROR_MESSAGE = Object.freeze({
 
 const createParams = (code, value) =>
   // eslint-disable
-  [ERROR_MESSAGE[code], { cause: { code: ERROR_CODE[code], value } }];
+  [ERROR_MESSAGE[code], { cause: { code, value } }];
 
 class AnswerError extends Error {
   constructor(code, value = null) {
