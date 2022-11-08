@@ -31,7 +31,9 @@ class App {
     const checkOverlap = () => new Set(userValue.split("")).size === 3;
 
     if (validLength() && validRange() && checkOverlap()) return true;
-    throw "올바른 입력값이 아닙니다.";
+    if (!validLength()) throw new Error("3자리 숫자값을 입력해야합니다");
+    if (!validRange()) throw new Error("1-9사이 숫자값을 입력해야합니다");
+    if (!checkOverlap()) throw new Error("서로 다른 3자리 수를 입력해주세요");
   }
 
   countStrike(computer, userValue) {
@@ -83,7 +85,7 @@ class App {
           Console.close();
           return;
         }
-        throw "올바르지 않은 입력값 입니다.";
+        throw new Error("1 혹은 2 이외의 입력값을 입력하셨습니다.");
       }
     );
   }
