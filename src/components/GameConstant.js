@@ -7,7 +7,7 @@ const INPUT_ORDER_MESSAGE = '숫자를 입력해주세요 : ';
 const BALL = '볼';
 const STRIKE = '스트라이크';
 const NOTHING = '낫싱';
-const CORRECT_ANSWER_MESSAGE = '3쓰트라이크';
+const CORRECT_ANSWER_MESSAGE = '3스트라이크';
 const GAME_END_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
 const ASK_NEXT_MESSAGE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
 
