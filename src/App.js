@@ -13,8 +13,32 @@ class App {
 
   getUserInput(randomNumbers) {
     Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
-
+      this.checkAllValidation(guessNumbers);
     });
+  }
+
+  checkAllValidation(guessNumbers) {
+    this.checkLength(guessNumbers);
+    this.checkRange(guessNumbers);
+    this.checkDuplicate(guessNumbers);
+  }
+
+  checkLength(guessNumbers) {
+    if (guessNumbers.length !== 3) 
+        throw new Error("Invalid Length Error.");
+  }
+
+  checkRange(guessNumbers) {
+    if (!(1 <= Math.min(...guessNumbers) && Math.max(...guessNumbers) <= 9)) {
+        throw new Error("Invalid Range Error.");
+    }
+  }
+
+  checkDuplicate(guessNumbers) {
+    const setLength = new Set(guessNumbers).size;
+    if (setLength !== 3) {
+      throw new Error("Duplicate Error.");
+    }
   }
 
   generateRandomNumbers() {
