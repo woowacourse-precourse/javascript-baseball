@@ -9,14 +9,15 @@
 - [x] 게임 상태 결정하기
 - [x] 게임 진행 여부 결정하기
 - [x] 에러처리
+- [x] 리팩터링
 
 ## 프로그래밍 요구사항
 
-- [ ] node 14 버전 실행 가능하여야 한다.
-- [ ] 예시에 맞는 실행 방법 따르기
-- [ ] Javascript 코드 컨벤션 따르기
-- [ ] 프로그램 종료 시 process.exit() 호출하지 않기
-- [ ] indent depth 2로 허용하기
-- [ ] 함수는 한가지 일만 하도록 작성하기
-- [ ] Jest로 테스트 하기
-- [ ] MissionUtils 라이브러리에서 제공하는 Random, Console API 사용하기
+- [x] node 14 버전 실행 가능하여야 한다.
+- [x] 예시에 맞는 실행 방법 따르기
+- [x] Javascript 코드 컨벤션 따르기
+- [x] 프로그램 종료 시 process.exit() 호출하지 않기
+- [x] indent depth 2로 허용하기
+- [x] 함수는 한가지 일만 하도록 작성하기
+- [x] Jest로 테스트 하기
+- [x] MissionUtils 라이브러리에서 제공하는 Random, Console API 사용하기
