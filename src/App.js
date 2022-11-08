@@ -37,18 +37,20 @@ class App {
   getInterimOutcome(inputUserNumber) {
     const BALL = this.getBall(inputUserNumber);
     const STRIKE = this.getStrike(inputUserNumber);
-    if (STRIKE === 3) {
-      this.getAnswer();
-    } else if (BALL && !STRIKE) {
+    if (STRIKE === 3) this.getAnswer();
+    if (BALL && !STRIKE) {
       MissionUtils.Console.print(`${BALL}볼`);
       this.getInputNumber();
-    } else if (!BALL && STRIKE) {
+    }
+    if (!BALL && STRIKE) {
       MissionUtils.Console.print(`${STRIKE}스트라이크`);
       this.getInputNumber();
-    } else if (BALL && STRIKE) {
+    }
+    if (BALL && STRIKE) {
       MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
       this.getInputNumber();
-    } else if (!BALL && !STRIKE) {
+    }
+    if (!BALL && !STRIKE) {
       MissionUtils.Console.print('낫싱');
       this.getInputNumber();
     }
