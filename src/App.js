@@ -25,6 +25,30 @@ class App {
     }
   }
 
+  readAnswer() {
+    Console.readLine('숫자를 입력해주세요 : ', input => {
+      const numbers = input //
+        .split('')
+        .map(Number);
+
+      this.validateInput(numbers);
+      this.getResult(numbers);
+
+      if (this.strike !== 3) {
+        this.readAnswer();
+        return;
+      }
+
+      this.replay();
+    });
+  }
+
+  getResult(numbers) {
+    this.setStrike(numbers);
+    this.setBall(numbers);
+    this.print();
+  }
+
   validateInput(numbers) {
     if (numbers.length !== 3) {
       throw new Error('numbers length must be 3.');
@@ -105,6 +129,7 @@ class App {
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.pickNumber();
+    this.readAnswer();
   }
 }
 
