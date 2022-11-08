@@ -29,4 +29,12 @@ describe("기능 목록 테스트", () => {
     game.printScore(2, 1);
     expect(log).toHaveBeenCalledWith("2볼 1스트라이크");
   });
+  test("입력값과 정답 비교", () => {
+    const game = new Game();
+    const answer = [1, 2, 3];
+    const input = [1, 5, 2];
+    const { ball, strike } = game.countPitch(input, answer);
+    expect(ball).toEqual(1);
+    expect(strike).toEqual(1);
+  });
 });
