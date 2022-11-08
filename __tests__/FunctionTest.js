@@ -48,6 +48,12 @@ describe("유효하지 않은 입력값 예외 처리 테스트", () => {
       app.checkUserDigitsValidity("112");
     }).toThrow();
   });
+
+  test("유효한 입력값의 경우 예외를 발생시키지 않는다.", () => {
+    expect(() => {
+      app.checkUserDigitsValidity("123");
+    }).not.toThrow();
+  });
 });
 
 describe("채점 테스트", () => {
