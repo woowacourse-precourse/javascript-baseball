@@ -20,6 +20,10 @@ class App {
     Console.readLine('숫자를 입력해주세요 : ', this.inputCallback);
   }
 
+  convertToNumberArray(inputString) {
+    return inputString.split('').map((item) => Number(item));
+  }
+
   inputCallback() {}
 
   play() {}
