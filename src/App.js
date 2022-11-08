@@ -30,6 +30,24 @@ class App {
       this.compareResult();
     });
   }
+
+  validNumber(number) {
+    if (isNaN(number)) {
+      throw "서로 다른 3자리 숫자로 입력해주세요 🥲";
+    }
+
+    if (number.includes("0") || number < 0) {
+      throw "입력값이 잘못되었어요 🥲";
+    }
+
+    const setNumber = [...new Set(number)];
+
+    if (setNumber.length === 3) {
+      return setNumber;
+    } else {
+      throw "서로 다른 3자리 숫자로 입력해주세요 🥲";
+    }
+  }
 }
 
 const app = new App();
