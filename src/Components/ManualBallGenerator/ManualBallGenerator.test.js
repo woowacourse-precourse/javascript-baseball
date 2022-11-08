@@ -3,36 +3,51 @@ const mockFunction = require("../../mockFunction");
 
 describe("Ball", () => {
   test("execute로 숫자 생성", async () => {
-    const NUMBER_ARRAY = ["246"];
-    mockFunction.mockQuestions(NUMBER_ARRAY);
+    const INPUT_NUMBER = 246;
+    const STRING_ARRAY = [String(INPUT_NUMBER)];
+    mockFunction.mockQuestions(STRING_ARRAY);
 
-    const BALL_GENERATOR = new ManualBallGenerator();
-    const NUMBER = await BALL_GENERATOR.execute();
+    const NUMBER = await new ManualBallGenerator().execute();
 
-    expect(typeof NUMBER).toBe("number");
+    expect(NUMBER).toBe(INPUT_NUMBER);
   });
 
   test("숫자가 아니면 throw로 예외 발생", async () => {
     const STRING_ARRAY = ["hello"];
     mockFunction.mockQuestions(STRING_ARRAY);
 
-    const BALL_GENERATOR = new ManualBallGenerator();
-    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
+    await expect(new ManualBallGenerator().execute()).rejects.toThrow();
   });
 
   test("3자리 숫자가 아니면 throw로 예외 발생", async () => {
     const STRING_ARRAY = ["2464"];
     mockFunction.mockQuestions(STRING_ARRAY);
 
-    const BALL_GENERATOR = new ManualBallGenerator();
-    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
+    await expect(new ManualBallGenerator().execute()).rejects.toThrow();
   });
 
   test("0을 포함하면 throw로 예외 발생", async () => {
     const NUMBER_ARRAY = ["024"];
     mockFunction.mockQuestions(NUMBER_ARRAY);
 
-    const BALL_GENERATOR = new ManualBallGenerator();
-    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
+    await expect(new ManualBallGenerator().execute()).rejects.toThrow();
+  });
+
+  test("숫자 앞 뒤의 공백 제거", async () => {
+    const INPUT_NUMBER = 246;
+    const STRING_ARRAY = ["   " + String(INPUT_NUMBER) + "    "];
+    mockFunction.mockQuestions(STRING_ARRAY);
+
+    const NUMBER = await new ManualBallGenerator().execute();
+
+    expect(NUMBER).toBe(INPUT_NUMBER);
+  });
+
+  test("숫자 사이에 공백이 있으면 throw로 예외 발생", async () => {
+    const INPUT_NUMBER = 246;
+    const STRING_ARRAY = ["123 " + String(INPUT_NUMBER) + " 123"];
+    mockFunction.mockQuestions(STRING_ARRAY);
+
+    await expect(new ManualBallGenerator().execute()).rejects.toThrow();
   });
 });
