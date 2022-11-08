@@ -13,6 +13,7 @@ class GameMessage {
     if(score.ball) resultMessage += `${score.ball}${constants.RESULT_COUNT.ball} `;
     if(score.strike) resultMessage += `${score.strike}${constants.RESULT_COUNT.strike}`;
     if(resultMessage === '') resultMessage = constants.RESULT_COUNT.nothing;
+    resultMessage = resultMessage.trim();
     MissionUtils.Console.print(resultMessage);
   }
   static error(messege) {
