@@ -135,7 +135,6 @@ class App {
   }
 
   confirmRestart() {
-    const RESTART = '1';
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (restartOrEnd) => {
       this.isValidConfirm(restartOrEnd);
@@ -151,9 +150,11 @@ class App {
 
   restart(restartOrEnd) {
     const RESTART = '1';
+    const END = '2';
     if (restartOrEnd === RESTART) {
       this.play();
     }
+    if (restartOrEnd === END) return;
   }
 }
 
