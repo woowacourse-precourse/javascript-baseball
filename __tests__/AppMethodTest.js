@@ -27,28 +27,27 @@ describe('App 클래스 메소드 테스트', () => {
     test("createComputerNumber 컴퓨터 3개 숫자 생성 테스트", () => {
         const app = new App();
         expect(app.createComputerNumber()).toHaveLength(3);
-    })
+    });
 
-    test("printResult 테스트", () => {
+    test("createComputerNumber 컴퓨터 3개 숫자 생성 테스트", () => {
+        const app = new App();
+        expect(app.createComputerNumber()).toHaveLength(3);
+    });
+
+    test("calcBallAndStrike 테스트", () => {
         const randoms = [1, 2, 3];
-        const answers = ["456", "231", "192", "123", "2"];
-        const logSpy = getLogSpy();
-        const messages = [
-            "낫싱",
-            "3볼",
-            "1볼 1스트라이크",
-            "3스트라이크",
-            "게임 종료",
+        const answers = [["4", "5", "6"], ["2", "3", "1"], ["1", "9", "2"], ["1", "2", "3"]];
+        const result = [
+            [0, 0],
+            [3, 0],
+            [1, 1],
+            [0, 3]
         ];
 
-        mockRandoms(randoms);
-        mockQuestions(answers);
-
         const app = new App();
-        app.play();
 
-        messages.forEach((output) => {
-            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        result.forEach((output, index) => {
+            expect(app.calcBallAndStrike(answers[index], randoms)).toEqual(output);
         });
     });
 
