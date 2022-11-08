@@ -25,7 +25,6 @@ class App {
     if(testInput.some((num)=> isNaN(num))) {
       throw new Error("숫자만 입력 가능합니다.");
     }
-    console.log("트루안나옴?",this.checkRangeOver(testInput));
     if(this.checkRangeOver(testInput)) {
       throw new Error("1~9사이의 숫자를 입력해주세요.")
     }
