@@ -12,28 +12,32 @@ class App {
     return [...threeNumbers];
   }
 
-  async readLine(question = "") {
+  async receiveAnswerFromCLI(question = "") {
     return await new Promise((resolve) => {
       Console.readLine(question, (answer) => resolve(answer));
     });
   }
 
-  async receiveNumberFromUser() {
-    let userAnswer;
-    const answer = await this.readLine("숫자를 입력해주세요 : ");
+  verifyUserAnswer(answer) {
+    let verifiedAnswer;
     const arrayOfAnswer = Array.from(answer).map(
       (stringNumber) => +stringNumber
     );
     const isAllNumber = (numberArr) =>
       numberArr.every((number) => !Number.isNaN(number));
-    if (!isAllNumber(arrayOfAnswer)) throw Error("숫자만 입력해주세요.");
+    if (!isAllNumber(arrayOfAnswer)) {
+      this.exitGame();
+      throw "숫자만 입력해주세요.";
+    }
 
-    userAnswer = [...new Set(arrayOfAnswer)];
+    verifiedAnswer = [...new Set(arrayOfAnswer)];
     const isCorrectedLength = (arr) => arr.length === 3;
-    if (!isCorrectedLength(userAnswer))
-      throw Error("세 자리 숫자를 입력해주세요.");
+    if (!isCorrectedLength(verifiedAnswer)) {
+      this.exitGame();
+      throw "세 자리 숫자를 입력해주세요.";
+    }
 
-    return userAnswer;
+    return verifiedAnswer;
   }
 
   getStrikeAndBallCount(goal, userAnswer) {
@@ -99,7 +103,7 @@ class App {
 
     while (!VALID_ANSWER[userAnswer]) {
       Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-      userAnswer = await this.readLine();
+      userAnswer = await this.receiveAnswerFromCLI();
     }
     return userAnswer === RESTART;
   }
@@ -113,15 +117,20 @@ class App {
   }
 
   async play() {
+    const PLEASE_ENTER_NUMBER = "숫자를 입력해주세요 : ";
     const goal = this.generateGoalNumber();
-    let userAnswer = await this.receiveNumberFromUser();
+    const userAnswer = this.verifyUserAnswer(
+      await this.receiveAnswerFromCLI(PLEASE_ENTER_NUMBER)
+    );
     let score = this.getStrikeAndBallCount(goal, userAnswer);
 
-    const STRIKE_COUNT = 3;
-    const isThreeStrike = (strikeScore) => strikeScore === STRIKE_COUNT;
+    const THREE_STRIKE = 3;
+    const isThreeStrike = (strikeScore) => strikeScore === THREE_STRIKE;
     while (!isThreeStrike(score[0])) {
       this.printResult(score);
-      userAnswer = await this.receiveNumberFromUser();
+      const userAnswer = this.verifyUserAnswer(
+        await this.receiveAnswerFromCLI(PLEASE_ENTER_NUMBER)
+      );
       score = this.getStrikeAndBallCount(goal, userAnswer);
     }
 
