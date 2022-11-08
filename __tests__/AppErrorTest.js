@@ -83,4 +83,30 @@ describe("Throw 테스트", () => {
             app.play();
         }).toThrow();
     });
+
+    test("예외 테스트: 1 or 2 외의 숫자 입력", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["135", '3'];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow('1 또는 2만 입력해주세요.');
+    });
+
+    test("예외 테스트: 1 or 2 외의 문자 입력", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["135", 'a'];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow('숫자만 입력해주세요.');
+    });
 });
