@@ -22,7 +22,7 @@ function inputAnswer(COM_NUMBER) {
   answerCheck(userInput, COM_NUMBER)})
 }
 
-function answerCheck (userInput, COM_NUMBER) {
+function answerCheck(userInput, COM_NUMBER) {
   var strike = 0
   var ball = 0
   for (let i = 0; i<3 ; i++) {
@@ -37,7 +37,7 @@ function resultprint(COM_NUMBER, strike, ball) {
     MissionUtils.Console.print('낫싱')
   }
   if(strike == 0 && ball>0){
-    MissionUtils.Console.print(`${ball}볼 `)
+    MissionUtils.Console.print(`${ball}볼`)
   }
   if(strike>0 && ball == 0){
     MissionUtils.Console.print(`${strike}스트라이크`)
@@ -64,7 +64,6 @@ function newGame() {
       throw '올바른 숫자를 입력해주세요'
     }
   })
-
 }
 
 function exception(userInput) {
@@ -82,6 +81,5 @@ function exception(userInput) {
   if (userInput.includes(0)){
     throw '1~9사이의 숫자를 입력해주세요'
   }
-  
 }
 module.exports = App;
