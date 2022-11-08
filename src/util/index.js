@@ -4,7 +4,7 @@ function numberToArray(inputAnswer) {
 
 function exceptionHandle(inputAnswer) {
   const inputAnswerArray = numberToArray(inputAnswer);
-  if(inputAnswerArray.includes('0')) return true;
+  if(inputAnswerArray.includes(0)) return true;
   if(inputAnswerArray.length !== 3) return true;
   if(new Set(inputAnswerArray).size !== 3) return true;
   if(isNaN(+inputAnswer)) return true;
