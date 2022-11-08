@@ -107,7 +107,6 @@ class App {
     } else {
       let result = App.caseOfBall(count.ball);
       result += App.caseofStrike(count.strike);
-      // if (result === '') throw new Error('Invalid input');
       MissionUtils.Console.print(result);
     }
   }
@@ -159,6 +158,4 @@ class App {
   }
 }
 
-// const app = new App();
-// app.play();
 module.exports = App;
