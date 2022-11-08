@@ -12,7 +12,6 @@ class Computer {
         answers.push(number);
       }
     }
-    console.log(answers);
     return answers;
   }
 }
