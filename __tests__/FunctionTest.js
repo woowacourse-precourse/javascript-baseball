@@ -91,4 +91,14 @@ describe("기능 테스트", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test("[기능 7] 종료, 재시작 선택 입력받은 후 예외사항 판단", () => {
+    const input = "0";
+
+    const app = new App();
+
+    expect(() => {
+      app.checkInputRestartExit(input);
+    }).toThrow("잘못된 값 입력");
+  });
 });
