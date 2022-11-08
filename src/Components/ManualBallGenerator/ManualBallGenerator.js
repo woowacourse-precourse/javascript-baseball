@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 
-class AutomaticBallGenerator {
+class ManualBallGenerator {
   maxNumberCount = 3;
 
   async execute() {
@@ -8,7 +8,9 @@ class AutomaticBallGenerator {
       Console.readLine("숫자를 입력해주세요 : ", (input) => {
         Console.close();
 
-        this.isSatisfied(input) ? resolve(Number(input)) : reject(new Error());
+        this.isSatisfied(input)
+          ? resolve(this.toNumberArray(input))
+          : reject(new Error());
       });
     });
   }
@@ -32,6 +34,10 @@ class AutomaticBallGenerator {
   isZeroExcluded(input) {
     return !input.includes("0");
   }
+
+  toNumberArray(input) {
+    return input.trim().split("").map(Number);
+  }
 }
 
-module.exports = AutomaticBallGenerator;
+module.exports = ManualBallGenerator;
