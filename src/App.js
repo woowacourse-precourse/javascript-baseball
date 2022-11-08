@@ -2,40 +2,83 @@ const MissionUtils = require('@woowacourse/mission-utils')
 
 class App {
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다')
+    //MissionUtils.Console.print('숫자 야구 게임을 시작합니다')
+    //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
+
+    console.log('숫자 야구 게임을 시작합니다')
 
     MissionUtils.Console.readLine('숫자를 입력해 주세요', (num) => {
       const playerNum = num.split('').map(Number) //내가 입력
       const comNum = MissionUtils.Random.pickNumberInRange(1, 9, 3) //컴퓨터가 입력
 
-      this.vaildCheck(playerNum)
+      try {
+        this.vaildCheckforLength(playerNum)
+      } catch (e) {
+        //MissionUtils.Console.print(e) 
+        //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
+        console.log(e)
+        MissionUtils.Console.close()
+        return
+      }
+
+      try {
+        this.vaildCheckforNaN(playerNum)
+      } catch (e) {
+        console.log(e)
+        MissionUtils.Console.close()
+        return
+      }
+
+      try {
+        this.vaildCheckforDuplicate(playerNum)
+      } catch (e) {
+        console.log(e)
+        MissionUtils.Console.close()
+        return
+      }
+
+      MissionUtils.Console.close()
     })
   }
 
+  //길이가 3이 아닐 때(길이가 3 이상 , 입력값이 없을 때)
+  vaildCheckforLength(playerNum) {
+    if (playerNum.length !== 3) {
+      //에러 throw
+      throw new Error('입력값의 길이가 3 이상이거나 3보다 작습니다')
+      //MissionUtils.Console.close()
+    }
+  }
 
-  // vaildCheck(playerNum){
+  //숫자 형태로 입력되지 않았을 때
+  vaildCheckforNaN(playerNum) {
+    playerNum.map((i) => {
+      if (typeof i !== 'number') {
+        //에러 throw
+        throw new Error('숫자 형태가 아닙니다')
+        //MissionUtils.Console.close()
+      }
+    })
+  }
 
-  //   //길이가 3 이상 이거나 값이 입력되지 않았을 때
-  //   if(playerNum.length>3 && playerNum.length===0){
-  //     //에러 throw
-  //     MissionUtils.Console.close();
-      
-  //   }
+  //중복값 처리
+  vaildCheckforDuplicate(playerNum) {
+    let copiedArr = [...playerNum]
 
-  //   //숫자 형태로 입력되지 않았을 때
-  //   playerNum.map(i=>{
-  //     if(typeof(i)!=='number'){
-  //       //에러
-  //       MissionUtils.Console.close();
-  //     }
-  //   })
-    
-  // }
+    let i = 0
+    while (i !== playerNum.length) {
+      let firstValue = copiedArr.shift()
+
+      let existIndex = copiedArr.indexOf(firstValue)
+      if (existIndex !== -1) {
+        //존재한다면
+        throw new Error('중복된 값이 존재합니다')
+        break
+      }
+
+      i++
+    }
+  }
 }
-
-//유효성 안 맞으면 close?
-//try catch로 나누고 
-//try에는 유효성 검사를 해주고 검사 로직에서 유효성 안 맞으면 throw하고
-//catch로 받아서 close?
 
 module.exports = App
