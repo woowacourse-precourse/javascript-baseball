@@ -20,11 +20,12 @@ class App {
   checkBallStrike(computerNumber, userInput) {
     let ballStrikeCount = [0, 0];
 
-    if (!(userInput.length === 3 && userInput.length === new Set(userInput).size))
+    if (userInput.length !== 3) {
       throw new Error("잘못된 입력입니다.");
+    }
 
     for (let i = 0; i < 3; i++) {
-      let checkComputerNumber = Number(computerNumber[i]);
+      let checkComputerNumber = Number(userInput[i]);
 
       if (!(1 <= checkComputerNumber && checkComputerNumber <= 9)) {
         throw new Error("잘못된 입력입니다.");
