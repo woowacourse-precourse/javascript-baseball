@@ -21,8 +21,8 @@ describe("generate valid game number", () => {
       return true;
     };
     for (let i = 0; i < 5; i += 1) {
-      const gameNumbers = app.selectGameNumbers();
-      expect(isThreeDifferntDigitWithoutZero(gameNumbers)).toBe(true);
+      app.selectGameNumbers();
+      expect(isThreeDifferntDigitWithoutZero(app.gameNumbers)).toBe(true);
     }
   });
 });
@@ -45,17 +45,17 @@ describe("game input validation test", () => {
     const containSpace = "0 12";
     const sameNumberInput = "211";
 
-    expect(app.isValidGameInput(longInput)).toBe(false);
-    expect(app.isValidGameInput(containNoneNumberInput)).toBe(false);
-    expect(app.isValidGameInput(containZero)).toBe(false);
-    expect(app.isValidGameInput(containSpace)).toBe(false);
-    expect(app.isValidGameInput(sameNumberInput)).toBe(false);
+    expect(App.isValidGameInput(longInput)).toBe(false);
+    expect(App.isValidGameInput(containNoneNumberInput)).toBe(false);
+    expect(App.isValidGameInput(containZero)).toBe(false);
+    expect(App.isValidGameInput(containSpace)).toBe(false);
+    expect(App.isValidGameInput(sameNumberInput)).toBe(false);
   });
 
   test("valid input test", () => {
     for (let i = 0; i < 5; i += 1) {
       const input = generateValidInput();
-      expect(app.isValidGameInput(input)).toBe(true);
+      expect(App.isValidGameInput(input)).toBe(true);
     }
   });
 });
@@ -70,9 +70,9 @@ describe("parse user input", () => {
     const result2 = [6, 7, 4];
     const result3 = [9, 2, 3];
 
-    expect(app.parseGameInput(case1)).toEqual(result1);
-    expect(app.parseGameInput(case2)).toEqual(result2);
-    expect(app.parseGameInput(case3)).toEqual(result3);
+    expect(App.parseGameInput(case1)).toEqual(result1);
+    expect(App.parseGameInput(case2)).toEqual(result2);
+    expect(App.parseGameInput(case3)).toEqual(result3);
   });
 });
 
@@ -81,53 +81,59 @@ describe("game result", () => {
     const case11 = [1, 2, 3];
     const case12 = [2, 3, 1];
     const result1 = 0;
+    app.gameNumbers = case11;
+    expect(app.getNumOfSameIndexSameNumber(case12)).toEqual(result1);
 
     const case21 = [7, 4, 3];
     const case22 = [4, 6, 3];
     const result2 = 1;
+    app.gameNumbers = case21;
+    expect(app.getNumOfSameIndexSameNumber(case22)).toEqual(result2);
 
     const case31 = [8, 5, 2];
     const case32 = [8, 5, 2];
     const result3 = 3;
-
-    expect(app.getNumOfSameIndexSameNumber(case11, case12)).toEqual(result1);
-    expect(app.getNumOfSameIndexSameNumber(case21, case22)).toEqual(result2);
-    expect(app.getNumOfSameIndexSameNumber(case31, case32)).toEqual(result3);
+    app.gameNumbers = case31;
+    expect(app.getNumOfSameIndexSameNumber(case32)).toEqual(result3);
   });
   test("count same number", () => {
     const case11 = [1, 2, 3];
     const case12 = [2, 3, 1];
     const result1 = 3;
+    app.gameNumbers = case11;
+    expect(app.getNumOfSameNumber(case12)).toEqual(result1);
 
     const case21 = [7, 4, 3];
     const case22 = [4, 6, 3];
     const result2 = 2;
+    app.gameNumbers = case21;
+    expect(app.getNumOfSameNumber(case22)).toEqual(result2);
 
     const case31 = [1, 4, 7];
     const case32 = [8, 5, 2];
     const result3 = 0;
-
-    expect(app.getNumOfSameNumber(case11, case12)).toEqual(result1);
-    expect(app.getNumOfSameNumber(case21, case22)).toEqual(result2);
-    expect(app.getNumOfSameNumber(case31, case32)).toEqual(result3);
+    app.gameNumbers = case31;
+    expect(app.getNumOfSameNumber(case32)).toEqual(result3);
   });
 
   test("count strike, ball", () => {
     const case11 = [1, 2, 3];
     const case12 = [2, 3, 1];
     const result1 = { ball: 3, strike: 0 };
+    app.gameNumbers = case11;
+    expect(app.getGameResult(case12)).toEqual(result1);
 
     const case21 = [7, 4, 3];
     const case22 = [4, 6, 3];
     const result2 = { strike: 1, ball: 1 };
+    app.gameNumbers = case21;
+    expect(app.getGameResult(case22)).toEqual(result2);
 
     const case31 = [1, 4, 7];
     const case32 = [8, 5, 2];
     const result3 = { strike: 0, ball: 0 };
-
-    expect(app.getGameResult(case11, case12)).toEqual(result1);
-    expect(app.getGameResult(case21, case22)).toEqual(result2);
-    expect(app.getGameResult(case31, case32)).toEqual(result3);
+    app.gameNumbers = case31;
+    expect(app.getGameResult(case32)).toEqual(result3);
   });
 });
 
@@ -140,10 +146,10 @@ describe("print game result", () => {
     const case4 = { ball: 1, strike: 2 };
     const printResults = ["낫싱", "2볼", "1스트라이크", "1볼 2스트라이크"];
 
-    app.printGameResult(case1);
-    app.printGameResult(case2);
-    app.printGameResult(case3);
-    app.printGameResult(case4);
+    App.printGameResult(case1);
+    App.printGameResult(case2);
+    App.printGameResult(case3);
+    App.printGameResult(case4);
 
     printResults.forEach((print) => {
       expect(logSpy).toHaveBeenCalledWith(print);
@@ -158,17 +164,17 @@ describe("validation of game over input", () => {
     const twoDigit = "12";
     const longNonDigit = "asd";
 
-    expect(app.isValidGameOverInput(notDigit)).toBe(false);
-    expect(app.isValidGameOverInput(notOneOrTwo)).toBe(false);
-    expect(app.isValidGameOverInput(twoDigit)).toBe(false);
-    expect(app.isValidGameOverInput(longNonDigit)).toBe(false);
+    expect(App.isValidGameOverInput(notDigit)).toBe(false);
+    expect(App.isValidGameOverInput(notOneOrTwo)).toBe(false);
+    expect(App.isValidGameOverInput(twoDigit)).toBe(false);
+    expect(App.isValidGameOverInput(longNonDigit)).toBe(false);
   });
 
   test("invalid game over input", () => {
     const one = "1";
     const two = "2";
 
-    expect(app.isValidGameOverInput(one)).toBe(true);
-    expect(app.isValidGameOverInput(two)).toBe(true);
+    expect(App.isValidGameOverInput(one)).toBe(true);
+    expect(App.isValidGameOverInput(two)).toBe(true);
   });
 });

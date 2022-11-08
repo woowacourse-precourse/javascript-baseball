@@ -9,10 +9,10 @@ class App {
       const num = Random.pickNumberInList(numbers);
       if (!result.includes(num)) result.push(num);
     }
-    return result;
+    this.gameNumbers = result;
   }
 
-  isValidGameInput(input) {
+  static isValidGameInput(input) {
     if (typeof input !== "string") return false;
     if (input.length !== 3) return false;
     for (let i = 0; i < 3; i += 1) {
@@ -28,17 +28,14 @@ class App {
     return true;
   }
 
-  parseGameInput(validUserInput) {
+  static parseGameInput(validUserInput) {
     const parsed = validUserInput.split("").map((elem) => Number(elem));
     return parsed;
   }
 
-  getGameResult(gameNumbers, userNumbers) {
-    const numOfSameIdxSameNum = this.getNumOfSameIndexSameNumber(
-      gameNumbers,
-      userNumbers
-    );
-    const numOfSameNum = this.getNumOfSameNumber(gameNumbers, userNumbers);
+  getGameResult(userNumbers) {
+    const numOfSameIdxSameNum = this.getNumOfSameIndexSameNumber(userNumbers);
+    const numOfSameNum = this.getNumOfSameNumber(userNumbers);
 
     return {
       strike: numOfSameIdxSameNum,
@@ -46,25 +43,25 @@ class App {
     };
   }
 
-  getNumOfSameIndexSameNumber(gameNumbers, userNumbers) {
+  getNumOfSameIndexSameNumber(userNumbers) {
     let count = 0;
     for (let i = 0; i < 3; i += 1) {
-      if (gameNumbers[i] === userNumbers[i]) {
+      if (this.gameNumbers[i] === userNumbers[i]) {
         count += 1;
       }
     }
     return count;
   }
 
-  getNumOfSameNumber(gameNumbers, userNumbers) {
+  getNumOfSameNumber(userNumbers) {
     let count = 0;
-    for (let i = 0; i < 3; i++) {
-      if (userNumbers.includes(gameNumbers[i])) count += 1;
+    for (let i = 0; i < 3; i += 1) {
+      if (userNumbers.includes(this.gameNumbers[i])) count += 1;
     }
     return count;
   }
 
-  printGameResult(gameResult) {
+  static printGameResult(gameResult) {
     if (gameResult.ball === 0 && gameResult.strike === 0) {
       Console.print("낫싱");
     }
@@ -79,7 +76,7 @@ class App {
     }
   }
 
-  isValidGameOverInput(userInput) {
+  static isValidGameOverInput(userInput) {
     if (typeof userInput !== "string") return false;
     if (userInput.length !== 1) return false;
     if (userInput !== "1" && userInput !== "2") return false;
@@ -89,16 +86,18 @@ class App {
 
   async play() {
     Console.print("숫자 야구 게임을 시작합니다.");
-    let gameNumbers = selectGameNumbers();
+    this.selectGameNumbers();
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       // eslint-disable-next-line no-await-in-loop
       const userInput = await getUserInputs("숫자를 입력해주세요 : ");
-      if (!isValidGameInput(userInput)) {
+      if (!App.isValidGameInput(userInput)) {
         throw new Error("잘못된 입력값입니다.");
       }
-      const parsedInput = parseGameInput(userInput);
-      const gameResult = getGameResult(gameNumbers, parsedInput);
-      printGameResult(gameResult);
+      const parsedInput = App.parseGameInput(userInput);
+      const gameResult = this.getGameResult(parsedInput);
+      App.printGameResult(gameResult);
+      // eslint-disable-next-line no-continue
       if (gameResult.strike !== 3) continue;
 
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -106,11 +105,11 @@ class App {
       const userGameOverSelection = await getUserInputs(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
       );
-      if (!isValidGameInput(userGameOverSelection)) {
+      if (!App.isValidGameInput(userGameOverSelection)) {
         throw new Error("잘못된 입력값입니다.");
       }
       if (userGameOverSelection === "1") {
-        gameNumbers = selectGameNumbers();
+        this.selectGameNumbers();
       }
       if (userGameOverSelection === "2") {
         break;
