@@ -1,8 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const {
-  Console: { readLine, print, close },
-  Random,
-} = MissionUtils;
 const inputValidation = require("./validation/inputValidation");
 const outputValidation = require("./validation/outputValidation");
 
@@ -21,7 +17,7 @@ class App {
 
   // userInput logic
   userInit() {
-    print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   userInput() {
@@ -31,7 +27,7 @@ class App {
         throw new Error("잘못된 값을 입력하셨습니다.");
       }
       this.game();
-      close();
+      MissionUtils.Console.close();
     });
   }
 
@@ -49,7 +45,7 @@ class App {
   randomNumber() {
     this.randomNum = [];
     for (let rotate = 0; rotate < 3; rotate++) {
-      const random = Random.pickNumberInRange(1, 9);
+      const random = MissionUtils.Random.pickNumberInRange(1, 9);
       if (this.randomNum.indexOf(random) === -1) {
         this.randomNum.push(random);
       } else {
@@ -70,9 +66,9 @@ class App {
   // 숫자 야구 게임 logic
   game() {
     let score = "";
-    print(this.randomNum);
+    MissionUtils.Console.print(this.randomNum);
     if (this.nothing()) {
-      print("낫싱");
+      MissionUtils.Console.print("낫싱");
     }
     if (!this.nothing() && this.ball() > 0) {
       score += `${this.ball()}볼`;
@@ -80,7 +76,7 @@ class App {
     if (!this.nothing() && this.strike() > 0) {
       score += `${this.strike()}스트라이크`;
     }
-    print(score);
+    MissionUtils.Console.print(score);
   }
 
   nothing() {
