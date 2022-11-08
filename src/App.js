@@ -33,6 +33,8 @@ class App {
     let input = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (line) => {
       input = line.split("").map(el => parseInt(el));
+
+      this.checkIsNumber(input);
       this.checkInputLength(input);
       this.checkInputDuplicate(input);
     })
@@ -40,6 +42,15 @@ class App {
     // return input;
   }
 
+  checkIsNumber(input) {
+    const NUMBERS = /^[1-9]+$/;
+
+    for(let i=0; i<input.length; i++) {
+      if(NUMBERS.test(input[i])) {
+        throw new Error("숫자를 입력하세요.");
+      }
+    }
+  }
   checkInputLength(input) {
 
     if(input.length !== 3) {
@@ -55,7 +66,7 @@ class App {
   }
 
   printResult(computer, user) {
-    
+
   }
 
   endGame() {
