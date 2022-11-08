@@ -1,7 +1,7 @@
 const { NUMBER_LENGTH, ERROR_MESSAGE } = require('../constant/constant');
 
 class Validator {
-  static inputValidator(input) {
+  static checkValidation(input) {
     this.hasValidLength(input);
     this.hasValidType(input);
     this.hasValidRange(input);

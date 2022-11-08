@@ -1,12 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
-const Computer = require('../computer/Computer');
 const {
   NUMBER_LENGTH,
   GAME_MESSAGE,
   RESTART_OPTION,
 } = require('../constant/constant');
-const Validator = require('../input/Validator');
+const Computer = require('../computer/Computer');
 const Calculator = require('./Calculator');
+const Validator = require('../input/Validator');
 
 class BaseballGame {
   constructor() {
@@ -25,7 +25,7 @@ class BaseballGame {
 
   getResult(randomNumber) {
     Console.readLine(GAME_MESSAGE.input, (input) => {
-      Validator.inputValidator(input);
+      Validator.checkValidation(input);
 
       const { ball, strike } = this.calculator.calcScore(input, randomNumber);
 
