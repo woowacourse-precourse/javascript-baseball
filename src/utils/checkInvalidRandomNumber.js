@@ -13,14 +13,15 @@ const isNotThreeDigit = (randomNumber) => randomNumber.length !== 3;
 
 const isNotNumber = (randomNumber) => {
   let hasNan = false;
-  randomNumber.split('').forEach((x) => {
+  randomNumber.forEach((x) => {
     if (Number.isNaN(+x)) hasNan = true;
   });
   return hasNan;
 };
 
-const checkInvalidRandomNumber = (input) => {
-  const randomNumber = input.join('');
+const isIncludeZero = (randomNumber) => randomNumber.includes(0);
+
+const checkInvalidRandomNumber = (randomNumber) => {
   let isInValid = false;
   if (isDuplicatedNumber(randomNumber)) {
     isInValid = true;
@@ -29,6 +30,9 @@ const checkInvalidRandomNumber = (input) => {
     isInValid = true;
   }
   if (isNotNumber(randomNumber)) {
+    isInValid = true;
+  }
+  if (isIncludeZero(randomNumber)) {
     isInValid = true;
   }
   return isInValid;
