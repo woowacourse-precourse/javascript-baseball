@@ -33,6 +33,7 @@ class App {
         inputNumber,
         numberOfStrike
       );
+
       this.printGameResultMessage(numberOfStrike, numberOfBall);
 
       gameContinue = !this.isInputNumberCorrect(numberOfStrike);
@@ -51,6 +52,7 @@ class App {
         this.RANGE_START_NUMBER,
         this.RANGE_END_NUMBER
       );
+
       if (!answer.includes(number)) {
         answer.push(number);
       }
@@ -96,23 +98,16 @@ class App {
 
     Object.freeze(GAME_EXCEPTION);
 
-    let errorMessage = null;
-
-    if (isNaN(inputNumber)) {
-      errorMessage = GAME_EXCEPTION.NOT_A_NUMBER;
-    } else if (this.isNotInteger(inputNumber)) {
-      errorMessage = GAME_EXCEPTION.NOT_INTEGER;
-    } else if (this.isIncorrectNumberOfDigits(inputNumber)) {
-      errorMessage = GAME_EXCEPTION.NUMBER_OF_DIGITS;
-    } else if (this.hasSameNumber(inputNumber)) {
-      errorMessage = GAME_EXCEPTION.SAME_NUMBER;
+    switch (true) {
+      case isNaN(inputNumber):
+        throw new Error(GAME_EXCEPTION.NOT_A_NUMBER);
+      case this.isNotInteger(inputNumber):
+        throw new Error(GAME_EXCEPTION.NOT_INTEGER);
+      case this.isIncorrectNumberOfDigits(inputNumber):
+        throw new Error(GAME_EXCEPTION.NUMBER_OF_DIGITS);
+      case this.hasSameNumber(inputNumber):
+        throw new Error(GAME_EXCEPTION.SAME_NUMBER);
     }
-
-    if (errorMessage === null) {
-      return;
-    }
-
-    throw new Error(errorMessage);
   }
 
   isNotInteger(inputNumber) {
@@ -132,9 +127,18 @@ class App {
   }
 
   hasSameNumber(inputNumber) {
-    const [first, second, third] = inputNumber;
+    let numberCount = {};
 
-    if (first === second || second === third || first === third) {
+    for (const digit of inputNumber) {
+      if (!numberCount[digit]) {
+        numberCount[digit] = 0;
+      }
+
+      numberCount[digit] += 1;
+    }
+
+    const kindOfDigits = Object.keys(numberCount).length;
+    if (kindOfDigits !== this.NUMBER_OF_DIGITS) {
       return true;
     }
 
@@ -190,14 +194,18 @@ class App {
 
     const MESSAGE_BOTH = `${MESSAGE.BALL} ${MESSAGE.STRIKE}`;
 
-    if (numberOfBall && numberOfStrike) {
-      Console.print(MESSAGE_BOTH);
-    } else if (numberOfBall) {
-      Console.print(MESSAGE.BALL);
-    } else if (numberOfStrike) {
-      Console.print(MESSAGE.STRIKE);
-    } else {
-      Console.print(MESSAGE.NOTHING);
+    switch (true) {
+      case numberOfBall > 0 && numberOfStrike > 0:
+        Console.print(MESSAGE_BOTH);
+        break;
+      case numberOfBall > 0:
+        Console.print(MESSAGE.BALL);
+        break;
+      case numberOfStrike > 0:
+        Console.print(MESSAGE.STRIKE);
+        break;
+      case !numberOfBall && !numberOfStrike:
+        Console.print(MESSAGE.NOTHING);
     }
   }
 
@@ -209,6 +217,7 @@ class App {
   getInputRestart() {
     const RESTART = '1';
     const EXIT = '2';
+
     const POSTPOSITION = '를'; // EXIT의 받침 여부에 따라 을 또는 를
     const INPUT_RESTART_MESSAGE = `게임을 새로 시작하려면 ${RESTART}, 종료하려면 ${EXIT}${POSTPOSITION} 입력하세요.\n`;
 
@@ -234,19 +243,12 @@ class App {
 
     Object.freeze(RESTART_EXCEPTION);
 
-    let errorMessage = null;
-
-    if (isNaN(inputRestart)) {
-      errorMessage = RESTART_EXCEPTION.NOT_A_NUMBER;
-    } else if (inputRestart !== RESTART && inputRestart !== EXIT) {
-      errorMessage = RESTART_EXCEPTION.NOT_CORRECT_NUMBER;
+    switch (true) {
+      case isNaN(inputRestart):
+        throw new Error(RESTART_EXCEPTION.NOT_A_NUMBER);
+      case inputRestart !== RESTART && inputRestart !== EXIT:
+        throw new Error(RESTART_EXCEPTION.NOT_CORRECT_NUMBER);
     }
-
-    if (errorMessage === null) {
-      return;
-    }
-
-    throw new Error(errorMessage);
   }
 }
 
