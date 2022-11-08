@@ -12,15 +12,15 @@ class UserModel {
     return Array.from([...input], convertArgsStringToInt);
   }
 
-  isLengthEqualsThree(input) {
+  isNotLengthEqualsThree(input) {
     return input.length !== GAME_VALUE.MAX_NUMBER_LENGTH;
   }
 
-  isConsistOfOnlyNumber(input) {
+  isNotConsistOfOnlyNumber(input) {
     return /[^0-9]/g.test(input);
   }
 
-  isNumberRangeOneToNine(input) {
+  isNotNumberRangeOneToNine(input) {
     return /[^1-9]/g.test(input);
   }
 
@@ -29,13 +29,13 @@ class UserModel {
   }
 
   isInputNumbersValid(numberFromUser) {
-    if (this.isLengthEqualsThree(numberFromUser)) {
+    if (this.isNotLengthEqualsThree(numberFromUser)) {
       throw Error(ERROR_NOT_THREE_LENGTH);
     }
-    if (this.isConsistOfOnlyNumber(numberFromUser)) {
+    if (this.isNotConsistOfOnlyNumber(numberFromUser)) {
       throw Error(ERROR_NOT_NUMBER);
     }
-    if (this.isNumberRangeOneToNine(numberFromUser)) {
+    if (this.isNotNumberRangeOneToNine(numberFromUser)) {
       throw Error(ERROR_NOT_IN_RANGE);
     }
     if (this.isDuplicatedInNumber(numberFromUser)) {
