@@ -2,7 +2,15 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   chooseStartEnd(chooseNum) {
-    
+    if (parseInt(chooseNum) === 1) {
+      this.getComputerNum();
+    } else if (parseInt(chooseNum) === 2) {
+      MissionUtils.Console.print("게임 종료");
+      return;
+    } else {
+      MissionUtils.Console.print("1 또는 2를 입력해주세요");
+      this.getCorrectAnswer();
+    }
   }
 
   getCorrectAnswer() {
@@ -11,7 +19,7 @@ class App {
     });
   }
 
-  getHint(compareResult) {
+  getHint(compareResult, randomNum) {
     if (compareResult[0] === 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -38,7 +46,7 @@ class App {
       if (randomNum[i] === getUserNum[i]) {
         compareResult[0]++;
       }
-      if (getUserNum.indexOf(userNumber[i]) >= 0) {
+      if (getUserNum.indexOf(randomNum[i]) >= 0) {
         compareResult[1]++;
       }
     }
@@ -66,11 +74,12 @@ class App {
   }
 
   getComputerNum() {
-    const randomNum = [];
-    while (randomNum.length < 3) {
+    const numberArray = [];
+    while (numberArray.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!randomNum.includes(number)) randomNum.push(number);
+      if (!numberArray.includes(number)) numberArray.push(number);
     }
+    let randomNum = numberArray.join("");
     this.inputUserNum(randomNum);
   }
 
