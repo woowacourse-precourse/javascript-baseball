@@ -14,7 +14,7 @@ class App {
       try {
         this.vaildCheckforLength(playerNum)
       } catch (e) {
-        //MissionUtils.Console.print(e) 
+        //MissionUtils.Console.print(e)
         //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
         console.log(e)
         MissionUtils.Console.close()
@@ -37,9 +37,9 @@ class App {
         return
       }
 
+      let strikeCount = this.findStrike(playerNum, comNum)
 
-      let strikeCount=this.findStrike(playerNum,comNum)
-
+      let ballCount = this.findBall(playerNum, comNum)
 
       MissionUtils.Console.close()
     })
@@ -84,7 +84,7 @@ class App {
     }
   }
 
-  findStrike(playerNum,comNum){
+  findStrike(playerNum, comNum) {
     let strikeCount = 0
     for (let i = 0; i < comNum.length; i++) {
       if (playerNum[i] === comNum[i]) {
@@ -95,9 +95,20 @@ class App {
     return strikeCount
   }
 
+  findBall(playerNum, comNum) {
+    let ballCount = 0
+    for (let i = 0; i < playerNum.length; i++) {
+      let index = comNum.indexOf(playerNum[i])
 
+      //console.log(index,answer[index],first[i])
 
+      if (index !== -1 && index !== i) {
+        ballCount++
+      }
+    }
 
+    return ballCount
+  }
 }
 
 module.exports = App
