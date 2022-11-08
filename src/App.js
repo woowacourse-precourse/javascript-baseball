@@ -41,7 +41,7 @@ class App {
     this.USER_NUMBER = [];
     Console.readLine(GAME_MESSAGE.INPUT_NUMBER, userinput => {
       this.USER_NUMBER = userinput.split('').map(Number);
-      errorCheck(this.USER_NUMBER);
+      errorCheck(userinput);
       this.compareNumbers(this.USER_NUMBER);
     });
   }
@@ -139,16 +139,11 @@ class App {
 }
 
 function errorCheck(userInput) {
-  if (
-    userInput.length === 0 ||
-    [...new Set(userInput)].length !== 3 ||
-    userInput.length !== 3 ||
-    userInput.includes(0) ||
-    isNaN(userInput.join(''))
-  ) {
-    throw new Error(GAME_MESSAGE.ERROR);
+  const validNumber = /^[1-9]{3}$/;
+  if (validNumber.test(userInput) && [...new Set(userInput)].length === 3) {
+    return;
   }
-  return userInput;
+  throw new Error(GAME_MESSAGE.ERROR);
 }
 
 module.exports = App;
