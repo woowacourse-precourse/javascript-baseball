@@ -1,12 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const getRandomNumbers = require("./getRandomNumbers");
-const userErrorCheck = require("./errorCheck");
+const { userErrorCheck, restartErrorCheck } = require("./errorCheck");
+
+const { OUTPUT_MESSAGE } = require('./constant');
 
 class App {
 
   constructor() {
-    this.firstEnter = true;
-    this.computer = getRandomNumbers();
   }
 
   userAnswer() {
@@ -14,12 +14,22 @@ class App {
       userErrorCheck(answer);
       if (this.printOutput(answer) === OUTPUT_MESSAGE.CORRECT_ANSWER) {
         MissionUtils.Console.print(this.printOutput(answer));
-        // this.restart();
-        // 다시 시작할지 물어보는 기능
+        this.printRestart();
         return;
       }
       MissionUtils.Console.print(this.printOutput(answer));
       this.userAnswer();
+    });
+  }
+
+  printRestart() {
+    MissionUtils.Console.readLine(OUTPUT_MESSAGE.RESTART_ENTER_NUMBER, (answer) => {
+      restartErrorCheck(answer);
+      if (answer === '1') {
+        this.play();
+        return;
+      }
+      MissionUtils.Console.close();
     });
   }
 

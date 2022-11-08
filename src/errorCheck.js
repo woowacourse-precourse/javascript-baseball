@@ -13,4 +13,13 @@ function userErrorCheck(answer) {
     }
 }
 
-module.exports = { userErrorCheck };
+function restartErrorCheck(answer) {
+    if (answer.length !== 1) {
+        throw ERROR_MESSAGE.ONLY_NUMBER;
+    }
+    if (!(answer.charCodeAt() >= 49 && answer.charCodeAt() <= 50)) {
+        throw ERROR_MESSAGE.OUT_OF_RANGE;
+    }
+}
+
+module.exports = { userErrorCheck, restartErrorCheck };
