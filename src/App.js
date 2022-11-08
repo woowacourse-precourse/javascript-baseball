@@ -27,9 +27,6 @@ class App {
   }
 
   comparePlayerInputWithRandomNumber(userInput) {
-    this.ball = 0;
-    this.strike = 0;
-
     const USER_INPUT = userInput.split("").map((item) => Number(item));
 
     this.checkBallOrStrike(USER_INPUT);
@@ -38,6 +35,9 @@ class App {
   }
 
   checkBallOrStrike(userInputArray) {
+    this.ball = 0;
+    this.strike = 0;
+
     this.COMPUTER.forEach((item, index) => {
       if (item === userInputArray[index]) {
         this.strike++;
