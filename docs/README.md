@@ -46,7 +46,7 @@ https://7942yongdae.tistory.com/96
 
 https://stackoverflow.com/questions/9011524/regex-to-check-whether-a-string-contains-only-numbers
 
-## 감상
+## 생각~
 
 - package 파일에 "type": "module" 로 할 것이냐 module.exports로 할 것이냐~~
 - src 로 터미널을 열어서 뒷북으로 기능 목록 업데이트 함~~~ㅜㅜ git add 할 때 위치 항상 확인할 것!
@@ -55,3 +55,7 @@ https://stackoverflow.com/questions/9011524/regex-to-check-whether-a-string-cont
 - 함수 쪼개다 보니까 비효율적인 코드가 된 것 같은데 효율 vs 함수?
 
 # 소감
+
+> 난 무얼 했는가
+
+처음에 요구사항을 제대로 읽지 않아

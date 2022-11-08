@@ -5,75 +5,93 @@ const { Console, Random } = MissionUtils;
 class App {
   constructor() {
     this.answer = null;
+    this.answerLength = null;
   }
 
   play() {
-    this.startGame();
-    this.getGuess(this.answer);
+    Console.print(MESSAGES.APP_START);
+    this.answerLength = 3;
+    this.startGame(3);
   }
 
   startGame() {
-    Console.print(MESSAGES.APP_START);
     this.answer = this.setAnswer();
+    this.getGuess();
   }
 
   setAnswer() {
     let answer = {};
     let indexCount = 1;
-    while (indexCount <= 3) {
+
+    while (indexCount <= this.answerLength) {
       const digit = Random.pickNumberInRange(1, 9);
       if (!answer[digit]) answer[digit] = indexCount++;
     }
+
     return answer;
   }
 
-  isValidInput(input) {
-    if (!/^\d+$/.test(input)) throw new Error(ERRORS.IS_NOT_NUMBER);
-    if (new Set(input).size !== 3) throw new Error(ERRORS.HAS_SAME_NUMBER);
-    if (input.includes("0")) throw new Error(ERRORS.HAS_ZERO);
-    if (input.length !== 3) throw new Error(ERRORS.LENGTH_IS_NOT_THREE);
+  isValidInput(guess) {
+    if (!this.isDigits(guess)) throw new Error(ERRORS.IS_NOT_NUMBER);
+    if (new Set(guess).size !== 3) throw new Error(ERRORS.HAS_SAME_NUMBER);
+    if (guess.includes("0")) throw new Error(ERRORS.HAS_ZERO);
+    if (guess.length !== 3) throw new Error(ERRORS.LENGTH_IS_NOT_THREE);
+
     return true;
   }
 
-  getGuess(answer) {
+  isDigits(number) {
+    return /^\d+$/.test(number);
+  }
+
+  // equalsLength(number) {
+  //   return new Set(number).size !== 3;
+  // }
+
+  getGuess() {
     Console.readLine(MESSAGES.GUESS_QUESTION, (guess) => {
       if (!this.isValidInput(guess)) return;
-      const { ball, strike } = this.compare(guess, this.answer);
-      this.display(ball, strike);
-      if (strike !== 3) return this.getGuess(answer);
-      else this.replayOrEnd();
+
+      const { ball, strike } = this.compareGuessAndAnswer(guess);
+      this.displayResult(ball, strike);
+
+      strike !== 3 ? this.getGuess() : this.replayOrEnd();
     });
   }
 
-  compare(guess, answer) {
+  compareGuessAndAnswer(guess) {
     let ball = 0;
     let strike = 0;
 
     guess.split("").forEach((digit, index) => {
-      if (answer[digit] === index + 1) strike++;
-      else if (answer[digit]) ball++;
+      if (this.answer[digit] === index + 1) strike++;
+      else if (this.answer[digit]) ball++;
     });
 
     return { ball, strike };
   }
 
-  display(ball, strike) {
-    const displayed = [];
+  displayResult(ball, strike) {
+    const result = [];
 
-    if (ball) displayed.push(`${ball}볼`);
-    if (strike) displayed.push(`${strike}스트라이크`);
-    if (!ball & !strike) displayed.push("낫싱");
+    if (ball) result.push(`${ball}볼`);
+    if (strike) result.push(`${strike}스트라이크`);
+    if (!ball & !strike) result.push("낫싱");
 
-    Console.print(displayed.join(" "));
+    Console.print(result.join(" "));
   }
 
   replayOrEnd() {
     Console.print(MESSAGES.GAME_END);
-    Console.readLine(MESSAGES.REPLAY_QUESTION, (input) => {
-      if (input === "1") this.play();
-      else if (input === "2") Console.close();
+    Console.readLine(MESSAGES.REPLAY_QUESTION, (reply) => {
+      if (reply === "1") this.startGame();
+      else if (reply === "2") this.endApp();
       else throw new Error(ERRORS.ONLY_ONE_OR_TWO);
     });
+  }
+
+  endApp() {
+    return Console.close();
   }
 }
 
