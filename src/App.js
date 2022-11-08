@@ -35,7 +35,14 @@ class App {
   }
   // 랜덤 번호 생성
   #getRandomNum() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
   }
   // 사용자가 번호를 입력
   #guessNum() {
