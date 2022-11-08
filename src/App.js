@@ -52,6 +52,20 @@ class App {
       throw new Error("잘못된 입력입니다.");
     }
   }
+  // 사용자 숫자와 컴퓨터 숫자 비교 후 strike와 ball 저장
+  compareNum(user, computer) {
+    const { user_num, computer_num } = convertNum(user, computer);
+    console.log(user_num, computer_num);
+
+    user_num.forEach((item, idx) => {
+      const is_include = computer_num.includes(item);
+      const is_index_match = computer_num.indexOf(item) === idx;
+
+      if (is_include && is_index_match) this.#strike += 1;
+      else if (is_include) this.#ball += 1;
+    });
+    this.getCompareResult(this.#strike, this.#ball);
+  }
 
   print(string) {
     MissionUtils.Console.print(string);
