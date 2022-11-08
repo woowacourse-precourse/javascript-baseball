@@ -3,7 +3,8 @@ const { Random } = require("@woowacourse/mission-utils");
 const ERROR_MESSAGES = {
     NULL: "숫자를 입력해 주세요!",
     SHORT: "3자리 숫자를 입력해 주세요!",
-    DUPL: "서로 다른 수를 입력해 주세요!"
+    DUPL: "서로 다른 수를 입력해 주세요!",
+    RANGE: "1이상 9이하의 수를 입력해 주세요!"
 }
 
 
@@ -28,6 +29,9 @@ function validateInput(input) {
     for (let i = 0; i < input.length; i++) {
         if (input[i] == input[i + 1]) {
             throw ERROR_MESSAGES.DUPL;
+        }
+        if(input[i] < 1 || input[i] > 9) {
+            throw ERROR_MESSAGES.RANGE;
         }
     }
 }
