@@ -135,7 +135,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(TypeError);
   });
 
   test("3자리를 초과하는 숫자 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -168,7 +168,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow(RangeError);
   });
 
   test("숫자비교 : 어떤 자릿수, 숫자도 불일치시 낫싱 표시", () => {
