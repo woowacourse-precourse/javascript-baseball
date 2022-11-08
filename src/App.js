@@ -4,7 +4,7 @@ const { makeRandomNumber, chkDuplicatedNumber } = require('./util');
 class App {
   #gameAnswer = null;
 
-  printResult(result) {
+  static printResult(result) {
     let output = '';
     if (result.ball !== 0) {
       output += `${result.ball}볼`;
@@ -21,7 +21,7 @@ class App {
     Console.print(output);
   }
 
-  getResult(number, answer) {
+  static getResult(number, answer) {
     const numberArr = [...number];
     const result = numberArr.reduce(
       ({ strike, ball }, num, nowInd) => {
@@ -61,8 +61,8 @@ class App {
         throw new Error(
           '입력형식이 잘못되었습니다. 서로 다른 숫자 3개를 입력해주세요.🙏'
         );
-      const result = this.getResult(input, this.#gameAnswer);
-      this.printResult(result);
+      const result = App.getResult(input, this.#gameAnswer);
+      App.printResult(result);
       if (result.strike === 3) {
         this.decideRestart();
       } else {

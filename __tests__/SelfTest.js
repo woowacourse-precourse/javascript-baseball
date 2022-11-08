@@ -91,9 +91,8 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
       { strike: 2, ball: 0 },
       { strike: 3, ball: 0 }
     ];
-    const app = new App();
     inputs.forEach((input, ind) => {
-      expect(app.getResult(input, gameAnswer)).toEqual(outputs[ind]);
+      expect(App.getResult(input, gameAnswer)).toEqual(outputs[ind]);
     });
   });
 
@@ -123,7 +122,7 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
     const app = new App();
     const logSpy = getLogSpy();
     results.forEach((result, ind) => {
-      app.printResult(result);
+      App.printResult(result);
       expect(logSpy).toHaveBeenCalledWith(printResults[ind]);
     });
   });
