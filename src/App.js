@@ -68,7 +68,7 @@ class App {
             const APP2 = new App();
             APP2.play();
           }
-          if (response === 2) {
+          if (Number(response) === 2) {
             throw new Error();
           }
         });
