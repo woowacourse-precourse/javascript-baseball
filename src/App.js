@@ -11,7 +11,11 @@ function newGamePlay() {
   const COMPETITOR = [];
   
   while(COMPETITOR.length < 3) {
-    COMPETITOR.push(MISSION_UTILS.Random.pickNumberInRange(1, 9));
+    const randomNumber = MISSION_UTILS.Random.pickNumberInRange(1, 9);
+    
+    if (!COMPETITOR.includes(randomNumber)) {
+      COMPETITOR.push(randomNumber);
+    }
   }
 
   checkPass(COMPETITOR);
@@ -33,6 +37,10 @@ function questionToContinueGame() {
 
 function checkPass(COMPETITOR) {
   MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : \n', async function(answer) {
+    const validateValue = /^[1-9]{3}$/;
+    if (!validateValue.test(answer)) {
+      throw new Error('잘못된 값을 입력하셨습니다. 애플리케이션을 종료합니다.');
+    }
     const answerArray = Array.from(String(answer), (num) => Number(num));
     if (!checkResult(COMPETITOR, answerArray)) {
       checkPass(COMPETITOR)
