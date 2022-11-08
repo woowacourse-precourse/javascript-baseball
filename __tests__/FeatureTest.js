@@ -90,4 +90,24 @@ describe("숫자 야구 게임 기능 테스트", () => {
       expect(result.length).toEqual(expected.length);
     });
   });
+  describe("재시작 여부 입력 유효성 검사하는 checkRestartNumberValidity", () => {
+    test("1 입력 받으면 not throw", () => {
+      expect(() => app.checkRestartNumberValidity(1)).not.toThrow();
+    });
+    test("2 입력 받으면 not throw", () => {
+      expect(() => app.checkRestartNumberValidity(2)).not.toThrow();
+    });
+    test("3 입력 받으면 throw", () => {
+      expect(() => app.checkRestartNumberValidity(3)).toThrow();
+    });
+    test("0 입력 받으면 throw", () => {
+      expect(() => app.checkRestartNumberValidity(0)).toThrow();
+    });
+    test("a 입력 받으면 throw", () => {
+      expect(() => app.checkRestartNumberValidity("a")).toThrow();
+    });
+    test("ㄱ 입력 받으면 throw", () => {
+      expect(() => app.checkRestartNumberValidity("ㄱ")).toThrow();
+    });
+  });
 });
