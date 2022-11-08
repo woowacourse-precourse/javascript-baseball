@@ -1,13 +1,15 @@
 const { Random } = require('@woowacourse/mission-utils');
-const checkInvalidRandomNumber = require('../utils/checkInvalidRandomNumber');
 
 const generateRandomNumber = () => {
-  let newRandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
-  while (checkInvalidRandomNumber(newRandomNumber)) {
-    newRandomNumber = Random.pickUniqueNumbersInRange(1, 9, 3);
+  const RandomNumber = [];
+  while (RandomNumber.length < 3) {
+    const number = Random.pickNumberInRange(1, 9);
+    if (!RandomNumber.includes(number)) {
+      RandomNumber.push(number);
+      this.RandomNumber = RandomNumber;
+    }
   }
-
-  return newRandomNumber;
+  return RandomNumber;
 };
 
 module.exports = generateRandomNumber;
