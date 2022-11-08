@@ -20,6 +20,7 @@ class App {
       const resultCalculator = new game.ResultCalculator;
       const result = resultCalculator.getResult(userInput, this.answer);
       print.result(result);
+      if(result.strike !== 3) this.submitInput();
     });
   }
 }
