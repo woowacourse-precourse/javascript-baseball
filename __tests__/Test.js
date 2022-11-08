@@ -95,4 +95,20 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+  test("6. 재시작 테스트", () => {
+    const randoms = [4, 8, 6, 8, 2, 5];
+    const answers = ["486", "1", "825", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["3스트라이크", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });

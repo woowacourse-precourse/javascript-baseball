@@ -14,6 +14,7 @@ class App {
     this.computerNumber = "";
     for (var i = 0; i < 3; i++) {
       const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+      MissionUtils.Console.print(RANDOM_NUMBER);
       if (!this.computerNumber.includes(RANDOM_NUMBER)) {
         this.computerNumber += `${RANDOM_NUMBER}`;
       }
@@ -71,6 +72,7 @@ class App {
       MissionUtils.Console.print(
         "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
       );
+      this.gameRestart();
     } else if (strikeCnt == 0 && ballCnt == 0) {
       MissionUtils.Console.print("낫싱");
       this.userInputMessage();
@@ -80,6 +82,21 @@ class App {
       MissionUtils.Console.print(printHint);
       this.userInputMessage();
     }
+  }
+
+  gameRestart() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n",
+      (userRestartInput) => {
+        if (userRestartInput == 1) {
+          this.computerChoiceNumber();
+          this.userInputMessage();
+        } else {
+          MissionUtils.Console.print("게임 종료");
+          return;
+        }
+      }
+    );
   }
 
   play() {
