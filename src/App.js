@@ -125,7 +125,8 @@ class App {
 
   continueGame(input) {
     this.inputUserNumbers(input);
-    this.compareNumbers();
+    const result = this.getGameResult();
+    this.printGameResult(result);
 
     if (!this.isPlaying) {
       this.confirmRestart();
@@ -135,7 +136,26 @@ class App {
     this.runGame();
   }
 
-  getGameResult({ sameDigitCount, sameNumberCount }) {
+  compareNumbers() {
+    let sameDigitCount = 0;
+    let sameNumberCount = 0;
+
+    this.userNumber.forEach((number, idx) => {
+      if (number === this.answer[idx]) {
+        sameDigitCount++;
+        return;
+      }
+
+      if (this.answer.includes(number)) {
+        sameNumberCount++;
+      }
+    });
+
+    return { sameDigitCount, sameNumberCount };
+  }
+
+  getGameResult() {
+    const { sameDigitCount, sameNumberCount } = this.compareNumbers();
     // TODO: 불필요한 console.log 제거
     console.log(this.answer);
     if (!sameDigitCount && !sameNumberCount) {
@@ -160,22 +180,10 @@ class App {
     return result;
   }
 
-  compareNumbers() {
-    let sameDigitCount = 0;
-    let sameNumberCount = 0;
+  printGameResult({ sameDigitCount, sameNumberCount }) {
+    const gameResult = this.getGameResult({ sameDigitCount, sameNumberCount });
 
-    this.userNumber.forEach((number, idx) => {
-      if (number === this.answer[idx]) {
-        sameDigitCount++;
-        return;
-      }
-
-      if (this.answer.includes(number)) {
-        sameNumberCount++;
-      }
-    });
-
-    Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
+    Console.print(gameResult);
   }
 
   setAnswer() {
@@ -193,11 +201,6 @@ class App {
     );
   }
 
-  endProgram() {
-    Console.print(this.MESSAGES.endProgram);
-    Console.close();
-  }
-
   newGame() {
     this.setAnswer();
     this.runGame();
@@ -210,6 +213,11 @@ class App {
 
   play() {
     this.startGame();
+  }
+
+  endProgram() {
+    Console.print(this.MESSAGES.endProgram);
+    Console.close();
   }
 }
 
