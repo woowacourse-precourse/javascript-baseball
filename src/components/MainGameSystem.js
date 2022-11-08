@@ -26,13 +26,12 @@ class MainGameSystem {
     return randomNum;
   }
 
-  returnHint(computerNum = 0) {
-    let insideComputerNum = computerNum;
-    if (!insideComputerNum) {
-      const pickThreeRandomNum = new ThreeRandomNumForComputer();
-      insideComputerNum = pickThreeRandomNum.returnNumsWithoutDuplication();
-    }
+  getComputerRandomNum() {
+    const pickThreeRandomNum = new ThreeRandomNumForComputer();
+    return pickThreeRandomNum.returnNumsWithoutDuplication();
+  }
 
+  giveplayerHint(insideComputerNum) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (playerNum) => {
       try {
         this.verifiedPlayerNum = this.checkPlayerRandomNum(playerNum);
@@ -46,8 +45,13 @@ class MainGameSystem {
         MainGameSystem
       );
       contextualHints.getContextualHints();
-      return this.returnHint(insideComputerNum);
+      return this.giveplayerHint(insideComputerNum);
     });
+  }
+
+  runGame() {
+    const computerNum = this.getComputerRandomNum();
+    this.giveplayerHint(computerNum);
   }
 }
 

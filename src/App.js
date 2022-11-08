@@ -5,7 +5,7 @@ class App {
   play() {
     firstAnnouncement();
     const mainGameSystem = new MainGameSystem();
-    mainGameSystem.returnHint();
+    mainGameSystem.runGame();
   }
 }
 
