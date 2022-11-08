@@ -94,4 +94,39 @@ describe("game result", () => {
     expect(app.getNumOfSameIndexSameNumber(case21, case22)).toEqual(result2);
     expect(app.getNumOfSameIndexSameNumber(case31, case32)).toEqual(result3);
   });
+  test("count same number", () => {
+    const case11 = [1, 2, 3];
+    const case12 = [2, 3, 1];
+    const result1 = 3;
+
+    const case21 = [7, 4, 3];
+    const case22 = [4, 6, 3];
+    const result2 = 2;
+
+    const case31 = [1, 4, 7];
+    const case32 = [8, 5, 2];
+    const result3 = 0;
+
+    expect(app.getNumOfSameNumber(case11, case12)).toEqual(result1);
+    expect(app.getNumOfSameNumber(case21, case22)).toEqual(result2);
+    expect(app.getNumOfSameNumber(case31, case32)).toEqual(result3);
+  });
+
+  test("count strike, ball", () => {
+    const case11 = [1, 2, 3];
+    const case12 = [2, 3, 1];
+    const result1 = { ball: 3, strike: 0 };
+
+    const case21 = [7, 4, 3];
+    const case22 = [4, 6, 3];
+    const result2 = { strike: 1, ball: 1 };
+
+    const case31 = [1, 4, 7];
+    const case32 = [8, 5, 2];
+    const result3 = { strike: 0, ball: 0 };
+
+    expect(app.getGameResult(case11, case12)).toEqual(result1);
+    expect(app.getGameResult(case21, case22)).toEqual(result2);
+    expect(app.getGameResult(case31, case32)).toEqual(result3);
+  });
 });

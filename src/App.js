@@ -2,8 +2,6 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 const getUserInputs = require("./lib/getUserInput");
 
 class App {
-  constructor() {}
-
   selectGameNumbers() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const result = [];
@@ -36,11 +34,11 @@ class App {
   }
 
   getGameResult(gameNumbers, userNumbers) {
-    const numOfSameIdxSameNum = getNumOfSameIndexSameNumber(
+    const numOfSameIdxSameNum = this.getNumOfSameIndexSameNumber(
       gameNumbers,
       userNumbers
     );
-    const numOfSameNum = getNumOfSameNumber(gameNumbers, userNumbers);
+    const numOfSameNum = this.getNumOfSameNumber(gameNumbers, userNumbers);
 
     return {
       strike: numOfSameIdxSameNum,
@@ -58,7 +56,13 @@ class App {
     return count;
   }
 
-  getNumOfSameNumber() {}
+  getNumOfSameNumber(gameNumbers, userNumbers) {
+    let count = 0;
+    for (let i = 0; i < 3; i++) {
+      if (userNumbers.includes(gameNumbers[i])) count += 1;
+    }
+    return count;
+  }
 
   printGameResult() {}
 
