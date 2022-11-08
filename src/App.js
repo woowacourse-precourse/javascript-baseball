@@ -1,8 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const GAME_MESSAGE = require("./util/Constant");
-const makeNumber = require("./MakeNumber");
-const isValidNum = require("./IsValideNum");
-const { makeComment, makeCount } = require("./MakeCount");
+const makeNumber = require("./util/MakeNumber");
+const isValidNum = require("./util/IsValideNum");
+const { makeComment, makeCount } = require("./util/MakeCount");
 
 class App {
   throwErr() {
