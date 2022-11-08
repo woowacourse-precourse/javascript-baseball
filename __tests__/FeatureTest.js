@@ -59,3 +59,19 @@ describe("game input validation test", () => {
     }
   });
 });
+
+describe("parse user input", () => {
+  test("is correctly parse valid user input", () => {
+    const case1 = "123";
+    const case2 = "674";
+    const case3 = "923";
+
+    const result1 = [1, 2, 3];
+    const result2 = [6, 7, 4];
+    const result3 = [9, 2, 3];
+
+    expect(app.parseGameInput(case1)).toEqual(result1);
+    expect(app.parseGameInput(case2)).toEqual(result2);
+    expect(app.parseGameInput(case3)).toEqual(result3);
+  });
+});

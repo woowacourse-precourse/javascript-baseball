@@ -29,7 +29,10 @@ class App {
     return true;
   }
 
-  parseGameInput() {}
+  parseGameInput(validUserInput) {
+    const parsed = validUserInput.split("").map((elem) => Number(elem));
+    return parsed;
+  }
 
   getGameResult() {}
 
