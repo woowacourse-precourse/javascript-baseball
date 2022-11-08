@@ -27,6 +27,16 @@ class App {
     return Array.from(input, Number);
   }
 
+  static judge(guess, answer) {
+    const answerSet = new Set(answer);
+
+    const containCount = guess.filter((x) => answerSet.has(x)).length;
+    const strikeCount = guess.filter((x, i) => answer[i] === x).length;
+
+    const ballCount = containCount - strikeCount;
+    return [ballCount, strikeCount];
+  }
+
   play() { }
 }
 

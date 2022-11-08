@@ -23,4 +23,10 @@ describe('App Test', () => {
   test('test getGuessArray', () => {
     expect(App.getGuessArray('123')).toEqual([1, 2, 3]);
   });
+
+  test('test getGuessArray', () => {
+    expect(App.judge([1, 2, 3], [1, 2, 3])).toEqual([0, 3]);
+    expect(App.judge([1, 2, 3], [2, 1, 3])).toEqual([2, 1]);
+    expect(App.judge([1, 2, 3], [4, 5, 6])).toEqual([0, 0]);
+  });
 });
