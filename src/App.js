@@ -55,17 +55,33 @@ class App {
     this.getAnswer();
   }
 
-
   countPrinter(ball, strike) {
-    if (ball === 0 && strike !== 0) {
-      print(`${strike}${BASEBALL_MSG.STRIKE}`);
-    } else if (ball !== 0 && strike === 0) {
-      print(`${ball}${BASEBALL_MSG.BALL}`);
-    } else if (ball === 0 && strike === 0) {
-      print(BASEBALL_MSG.NOTHING);
-    } else {
-      print(`${ball}${BASEBALL_MSG.BALL} ${strike}${BASEBALL_MSG.STRIKE}`);
+    if (this.onlyStrike(ball, strike)) {
+      return print(`${strike}${BASEBALL_MSG.STRIKE}`);
     }
+    if (this.onlyBall(ball, strike)) {
+      return print(`${ball}${BASEBALL_MSG.BALL}`);
+    }
+    if (this.onlyNothing(ball, strike)) {
+      return print(BASEBALL_MSG.NOTHING);
+    }
+    return print(`${ball}${BASEBALL_MSG.BALL} ${strike}${BASEBALL_MSG.STRIKE}`);
+  }
+
+  onlyStrike(ball, strike) {
+    return ball === 0 && strike !== 0;
+  }
+
+  onlyBall(ball, strike) {
+    return ball !== 0 && strike === 0;
+  }
+
+  onlyNothing(ball, strike) {
+    return ball === 0 && strike === 0;
+  }
+
+  ballAndStrike(ball, strike) {
+    return ball !== 0 && strike !== 0;
   }
 
   win() {
