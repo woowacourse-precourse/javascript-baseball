@@ -26,6 +26,7 @@ class App {
 
   play() {
     this.start();
+    this.guess(this.initComputer());
   }
 
   start() {
@@ -40,6 +41,31 @@ class App {
         this.answer.push(number);
       }
     }
+  }
+
+  guess() {
+    Console.readLine(MESSAGE.INPUT_NUMBER, (userInput) => {
+      if (this.isError(userInput)) {
+        throw new Error(MESSAGE.ERROR);
+      }
+    });
+  }
+
+  isError(userInput) {
+    if (userInput.length !== 3) {
+      return true;
+    }
+
+    if (new Set(userInput.split('')).size !== 3) {
+      return true;
+    }
+
+    const VALIDATION_REGEX = /[^1-9]/g;
+    if (VALIDATION_REGEX.test(userInput)) {
+      return true;
+    }
+
+    return false;
   }
 }
 
