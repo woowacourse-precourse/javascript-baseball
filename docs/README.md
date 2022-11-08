@@ -4,7 +4,7 @@
 
 - check if user input is 1 or 2
 
-## static pickThreeDigits(input: string): number[]
+## static pickThreeDigits(): number[]
 
 - pick 3 random digits
 - 3 digits should be unique
