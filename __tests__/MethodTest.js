@@ -12,7 +12,7 @@ describe("기능별 테스트", () => {
   });
   
   test('볼카운터와 스트라이크카운터가 잘 동작되는지', () => {
-    const numberArr = [[1,2,3],[2,1,3]];
+    const numberArr = [[1,2,3], [2,1,3]];
     const ballScore = playTool.ballCount(numberArr[0], numberArr[1]);
     const strikeScore = playTool.strikeCount(numberArr[0], numberArr[1]);
 
@@ -63,4 +63,4 @@ describe("기능별 테스트", () => {
 
 afterAll(() => {
   MissionUtils.Console.close();
-})
+});

@@ -13,7 +13,7 @@ class ComputerRandomNumber {
   randomNumber() {
     const number = [];
     while (number.length < NUMBER_CONSTANTS.MAX_SCORE) {
-      const numberInput = MissionUtils.Random.pickNumberInRange(1,9);
+      const numberInput = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!number.includes(numberInput)) {
         number.push(numberInput);
       }
