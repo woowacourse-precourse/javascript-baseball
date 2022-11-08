@@ -11,12 +11,11 @@ const GAME = Object.freeze({
 });
 
 const ERROR = Object.freeze({
-  USER_INPUT_LENGTH: `숫자를 3개 입력해주세요.`,
+  USER_INPUT_LENGTH: `공백이아닌 숫자를 3개 입력해주세요.`,
   USER_INPUT_DUPLICATES: `숫자에 중복이 있습니다.`,
   USER_INPUT_RANGE: `숫자 1~9까지만 입력이 가능합니다.`,
   USER_RETRY_INPUT_RANGE: `입력은 1또는 2만 가능합니다.`,
-  USER_RETRY_INPUT_BLANK: `공백은 입력할 수 업습니다.`,
-  USER_RETRY_INPUT_LENGTH: `입력 값이 2개 이상입니다.`,
+  USER_RETRY_INPUT_LENGTH: `공백이아닌 입력 값이 2개 이상입니다.`,
   USER_INPUT_PASS: `입력값에 문제가 없습니다.`,
 });
 
