@@ -26,9 +26,11 @@ class App {
         notFull = false;
       }
     }
+
+    return threeNumbers;
   }
 
-  inputThreeNumbers() {
+  inputThreeNumbers(computer) {
 
     let input = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (line) => {
@@ -37,9 +39,9 @@ class App {
       this.checkIsNumber(input);
       this.checkInputLength(input);
       this.checkInputDuplicate(input);
+  
+      this.getResult(input, computer);
     })
-
-    this.getResult(input);
   }
 
   checkIsNumber(input) {
@@ -65,41 +67,45 @@ class App {
     }
   }
 
-  getResult(user) {
+  getResult(user, computer) {
     let strike = 0;
     let ball = 0;
 
     let result = "";
 
-    console.log(this.threeNumbers);
-
     for(let i=0; i<user.length; i++) {
-      if(user[i] === this.threeNumbers[i]) {
+      if(user[i] === computer[i]) {
         strike++;
       }
-      else if(this.threeNumbers.includes(user[i])){
+      else if(computer.includes(user[i])){
         ball++;
       }
     }
 
     if(strike === 0 && ball === 0){
-      result = "낫싱";
+      result = '낫싱';
     }
-    else if(strike > 0 || ball === 0) {
-      result = "${strike}스트라이크";
+    else if(strike > 0 && ball === 0) {
+      result = '${strike}스트라이크';
     }
-    else if(strike === 0 || ball > 0) {
-      result = "${ball}볼";
+    else if(strike === 0 && ball > 0) {
+      result = '${ball}볼';
     }
-    else if(strike > 0 || ball > 0) {
-      result = "${ball}볼 ${strike}스트라이크";
+    else if(strike > 0 && ball > 0) {
+      result = '${ball}볼 ${strike}스트라이크';
     }
 
-    this.printResult(result);
+    this.printResult(result, computer);
   }
 
-  printResult(result) {
-    if(result === "3스트라이크") {
+  printResult(result, computer) {
+
+    MissionUtils.Console.print(result);
+
+    if(result !== "3스트라이크") {
+      this.inputThreeNumbers(computer);
+    }
+    else if(result === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n", input => {
         if(input === 1) {
@@ -115,10 +121,9 @@ class App {
 
   play() {
     this.printStartMessage();
-    this.randomThreeNumbers();
-    this.inputThreeNumbers();
+    let computer = this.randomThreeNumbers();
+    this.inputThreeNumbers(computer);
   }
 }
 
 module.exports = App;
-
