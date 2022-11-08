@@ -84,7 +84,7 @@ class Messages {
   get resultCorrect() {
     return `${this.resultStrike(this.digit)}\n${
       this.digit
-    }개의 숫자를 모두 맞히셨습니다!\n${this.endGame}}`;
+    }개의 숫자를 모두 맞히셨습니다!\n${this.endGame}`;
   }
 
   resultBall(count) {
