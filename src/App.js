@@ -16,6 +16,9 @@ class App {
       if (isNaN(parseInt(answer[i]))){
         value = true;
       }
+      if(isNaN(answer)){
+        value = ture;
+      }
       if ((parseInt(answer[i])) ==0 ){
         value = true;
       }
