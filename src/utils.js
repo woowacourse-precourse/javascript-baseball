@@ -11,8 +11,8 @@ const checkDuplicate = (num) => {
   return numberSet.size === num.length;
 };
 
-module.exports({
+module.exports = {
   checkLength,
   checkZeroExist,
   checkDuplicate,
-});
+};
