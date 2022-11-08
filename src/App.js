@@ -5,7 +5,7 @@ const messages = {
   INPUT : '숫자를 입력해 주세요 : ',
   OVER : '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   OPTION : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
-}
+};
 
 class App {
   constructor(){
@@ -34,9 +34,9 @@ class App {
 
   startOneRound(computer){
     Console.readLine( messages.INPUT , (player)=>{
-      if(!this.isVaildPlayer(player)) throw 'player error'
+      if(!this.isVaildPlayer(player)) throw 'player error';
       this.playOneRound(player, computer);
-    })
+    });
   }
 
   playOneRound(player, computer){
@@ -52,7 +52,7 @@ class App {
   countStrike(player, computer){
     const strike = computer.reduce((strike, computer_number, index)=>(
       strike + (computer_number === player[index])
-    ), 0)
+    ), 0);
     return strike;
   }
 
@@ -70,10 +70,10 @@ class App {
     }
     let resultPrint = '';
     if (ball){
-      resultPrint += `${ball}볼 `
+      resultPrint += `${ball}볼 `;
     }
     if (strike){
-      resultPrint += `${strike}스트라이크`
+      resultPrint += `${strike}스트라이크`;
     }
     Console.print(resultPrint);
   }
@@ -97,7 +97,7 @@ class App {
     Console.print(messages.OPTION);
 
     Console.readLine("",(option)=>{
-      if(!this.isVaildOption(option)) throw 'option error'
+      if(!this.isVaildOption(option)) throw 'option error';
       this.quitOrRestart(option);
     });
   }
@@ -117,7 +117,7 @@ class App {
   isVaildOption(option){
     return (
       (option==='1')||(option==='2')
-    )
+    );
   }
 }
 

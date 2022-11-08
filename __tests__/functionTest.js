@@ -23,30 +23,30 @@ describe("기능 확인 테스트", () => {
     const numbers = ['1','2','3','4','5','6','7','8','9'];
     let result;
     computer.forEach((num)=>{
-      result = numbers.includes(num)
+      result = numbers.includes(num);
     })
 
     expect(computer_length).toEqual(3);
     expect(result).toEqual(true);
-  })
+  });
 
   test("스트라이크/볼 횟수 반환", () => {
-    const computers = [['1','4','5'],['3','6','7'],['7','3','1']]
-    const players = ['154','37','1']
+    const computers = [['1','4','5'],['3','6','7'],['7','3','1']];
+    const players = ['154','37','1'];
 
     let strikes = [];
     players.forEach((player, idx)=>{
       strikes.push(app.countStrike(player, computers[idx]))
-    })
+    });
 
     let balls = [];
     players.forEach((player, idx)=>{
       balls.push(app.countBall(player, computers[idx], strikes[idx]))
-    })
+    });
 
     expect(strikes).toEqual([1,1,0]);
     expect(balls).toEqual([2,1,1]);
-  })
+  });
 
   test("player가 숫자를 다 맞췄는지 반환", ()=>{
     const result1 = app.playerWin(1);
@@ -54,5 +54,5 @@ describe("기능 확인 테스트", () => {
     
     expect(result1).toEqual(false);
     expect(result2).toEqual(true);
-  })
+  });
 });
