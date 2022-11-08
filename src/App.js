@@ -91,23 +91,23 @@ const utils = {
     }
 };
 
-function startGame() {
+const startGame = () => {
     utils.generateRandomNumber();
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (response) => {
         utils.checkUserInput(response);
     });
-}
+};
 
-function endGame() {
+const endGame = () => {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     utils.whetherContinueGame();
-}
+};
 
-function restartGame() {
+const restartGame = () => {
     utils.generateRandomNumber();
     startGame();
-}
+};
 
 class App {
     play() {
