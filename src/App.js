@@ -41,14 +41,16 @@ class App {
     this.computerNumber = computerNumber;
   }
 
-  inputNumber(message) {
-    let number = null;
-
-    Console.readLine(message, (input) => {
-      number = [...input].map((num) => Number(num));
+  input(message) {
+    return new Promise((resolve) => {
+      Console.readLine(message, resolve);
     });
+  }
 
-    return number;
+  async inputNumber(message) {
+    const number = await this.input(message);
+
+    return [...number].map((num) => Number(num));
   }
 
   isNumber(num) {
@@ -120,10 +122,9 @@ class App {
     }
   }
 
-  askReGame() {
-    Console.readLine(REGAME_MESSAGE, (input) => {
-      const num = Number(input);
-      this.selectedNumberException(num);
+  async askReGame() {
+    const selectedNumber = Number(await this.inputNumber(REGAME_MESSAGE));
+    this.selectedNumberException(selectedNumber);
 
       if (num === NEW_GAME) this.startNewGame(true);
 
@@ -140,7 +141,10 @@ class App {
     }
   }
 
-  tryGetAnswer() {
+  async tryGetAnswer() {
+    this.userNumber = await this.inputNumber(INPUT_NUMBER_MESSAGE);
+    this.userNumberException();
+
     const strike = this.countStrike();
     const ball = this.countBall();
     this.printResult(ball, strike);
