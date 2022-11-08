@@ -2,10 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const { isValidNumbers, isOneOrTwo } = require('./utils/validate/validate.js');
 const generateRandomNumberArray = require('./utils/game/generateRandomNumber.js');
 const generateResultThisTurn = require('./utils/game/result.js');
+const GAME_MESSAGE = require('./utils/constants/constant.js');
 
 class Game {
   constructor() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(GAME_MESSAGE.START_MESSAGE);
     this.generateNumberArrayByComputer();
     console.log(this.pickedNumberArrayByComputer);
   }
@@ -15,7 +16,7 @@ class Game {
   }
 
   start() {
-    Console.readLine('숫자를 입력해주세요 : ', this.playTurn);
+    Console.readLine(GAME_MESSAGE.ENTER_NUMBER, this.playTurn);
   }
 
   playTurn = (numberEnteredByUser) => {
@@ -24,7 +25,7 @@ class Game {
     const numberArrayEnteredByUser = this.numberEnteredByUser.split('').map(Number);
     const resultThisTurn = generateResultThisTurn(this.pickedNumberArrayByComputer, numberArrayEnteredByUser);
 
-    if (resultThisTurn === '3스트라이크') {
+    if (resultThisTurn === GAME_MESSAGE.ANSWER) {
       this.askRestart();
       return;
     }
@@ -32,14 +33,14 @@ class Game {
   };
 
   askRestart() {
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (willingnessToRestart) => {
+    Console.readLine(GAME_MESSAGE.RESTART_MESSAGE, (willingnessToRestart) => {
       isOneOrTwo(willingnessToRestart);
-      if (willingnessToRestart === '1') {
+      if (willingnessToRestart === GAME_MESSAGE.RETRY) {
         this.generateNumberArrayByComputer();
         this.start();
         return;
       }
-      Console.print('게임 종료');
+      Console.print(GAME_MESSAGE.END_MESSAGE);
       Console.close();
     });
   }

@@ -1,17 +1,18 @@
 const { Console } = require('@woowacourse/mission-utils');
 const strikeBallJudgment = require('./judgement.js');
+const GAME_MESSAGE = require('../constants/constant.js');
 
 const generateResultMessage = (strikeCount, ballCount) => {
   if (strikeCount === 0 && ballCount === 0) {
-    return `낫싱`;
+    return GAME_MESSAGE.NOTHING;
   }
   if (strikeCount === 0) {
-    return `${ballCount}볼`;
+    return `${ballCount}${GAME_MESSAGE.BALL}`;
   }
   if (ballCount === 0) {
-    return `${strikeCount}스트라이크`;
+    return `${strikeCount}${GAME_MESSAGE.STRIKE}`;
   }
-  return `${ballCount}볼 ${strikeCount}스트라이크`;
+  return `${ballCount}${GAME_MESSAGE.BALL} ${strikeCount}${GAME_MESSAGE.STRIKE}`;
 };
 
 const generateResultThisTurn = (computerInputNumbers, userInputNumbers) => {
