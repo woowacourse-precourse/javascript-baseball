@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random, Console } = require("@woowacourse/mission-utils");
 const App = require("../src/App");
 
 const app = new App();
@@ -128,5 +128,25 @@ describe("game result", () => {
     expect(app.getGameResult(case11, case12)).toEqual(result1);
     expect(app.getGameResult(case21, case22)).toEqual(result2);
     expect(app.getGameResult(case31, case32)).toEqual(result3);
+  });
+});
+
+describe("print game result", () => {
+  test("is corretly print game result?", () => {
+    const logSpy = jest.spyOn(Console, "print");
+    const case1 = { ball: 0, strike: 0 };
+    const case2 = { ball: 2, strike: 0 };
+    const case3 = { ball: 0, strike: 1 };
+    const case4 = { ball: 1, strike: 2 };
+    const printResults = ["낫싱", "2볼", "1스트라이크", "1볼 2스트라이크"];
+
+    app.printGameResult(case1);
+    app.printGameResult(case2);
+    app.printGameResult(case3);
+    app.printGameResult(case4);
+
+    printResults.forEach((print) => {
+      expect(logSpy).toHaveBeenCalledWith(print);
+    });
   });
 });

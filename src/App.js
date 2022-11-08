@@ -64,7 +64,20 @@ class App {
     return count;
   }
 
-  printGameResult() {}
+  printGameResult(gameResult) {
+    if (gameResult.ball === 0 && gameResult.strike === 0) {
+      Console.print("낫싱");
+    }
+    if (gameResult.ball === 0 && gameResult.strike !== 0) {
+      Console.print(`${gameResult.strike}스트라이크`);
+    }
+    if (gameResult.ball !== 0 && gameResult.strike === 0) {
+      Console.print(`${gameResult.ball}볼`);
+    }
+    if (gameResult.ball !== 0 && gameResult.strike !== 0) {
+      Console.print(`${gameResult.ball}볼 ${gameResult.strike}스트라이크`);
+    }
+  }
 
   isValidGameOverInput() {}
 
