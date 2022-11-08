@@ -26,4 +26,26 @@ describe("숫자 야구 게임 기능 테스트", () => {
       expect(app.checkUnique(wrongInput)).toBeFalsy();
     });
   });
+  describe("사용자 입력 배열 유효성 검사하는 checkUserNumbersInputValidity", () => {
+    test("[a, 2, 3]을 입력 받으면 throw", () => {
+      const wrongInput = ["a", 2, 3];
+      expect(() => app.checkUserNumbersInputValidity(wrongInput)).toThrow();
+    });
+    test("[0, 2, 3]을 입력 받으면 throw", () => {
+      const wrongInput = [0, 2, 3];
+      expect(() => app.checkUserNumbersInputValidity(wrongInput)).toThrow();
+    });
+    test("[2, 3]을 입력 받으면 throw", () => {
+      const wrongInput = [2, 3];
+      expect(() => app.checkUserNumbersInputValidity(wrongInput)).toThrow();
+    });
+    test("[2, 3, 3]을 입력 받으면 throw", () => {
+      const wrongInput = [2, 3, 3];
+      expect(() => app.checkUserNumbersInputValidity(wrongInput)).toThrow();
+    });
+    test("[2, 3, 6]을 입력 받으면 not throw", () => {
+      const wrongInput = [2, 3, 6];
+      expect(() => app.checkUserNumbersInputValidity(wrongInput)).not.toThrow();
+    });
+  });
 });
