@@ -77,6 +77,25 @@ class App {
 
     strike === 3 ? this.endGameAndNoticeNextStep() : this.getUserNumber();
   }
+
+  endGameAndNoticeNextStep() {
+    MissionUtils.Console.print(
+      "짝짝짝 3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (number) => {
+        if (number === "1") {
+          return this.play();
+        } else if (number === "2") {
+          return MissionUtils.Console.close();
+        } else {
+          throw "입력값이 잘못되었어요 🥲";
+        }
+      }
+    );
+  }
 }
 
 const app = new App();
