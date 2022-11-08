@@ -24,6 +24,7 @@ class App {
 
   createMyNumber(randomNumbers) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (myNumbers) => {
+      this.checkValid(myNumbers);
       this.countBallStrike(randomNumbers, myNumbers);
     })
   }
@@ -31,8 +32,11 @@ class App {
   countBallStrike(randomNumbers, myNumbers) {
     let ball = 0;
     let strike = 0;
+
+    this.createMyNumber();
+
     for (let i = 0; i < 3; i++) {
-      if (myNumbers[i] == randomNumbers[i])
+      if (myNumbers[i] === randomNumbers[i])
         strike++;
       else if (myNumbers.includes(randomNumbers[i]))
         ball++;
@@ -41,6 +45,8 @@ class App {
     if (strike === 3) {
       MissionUtils.Console.print("3스트라이크\n");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+      this.newGame();
+      return;
     }
     if (ball === 0 && strike === 0)
       MissionUtils.Console.print("낫싱\n");
@@ -61,6 +67,16 @@ class App {
         MissionUtils.Console.close();
       } else throw new Error("입력하신 글자가 1 혹은 2가 아닙니다.");
     })
+  }
+
+  checkValid(numbers) {
+    if (numbers.length != 3)
+      throw new Error("3자리가 아닙니다.");
+    if (numbers[0] === numbers[1] || numbers[0] === numbers[2] || numbers[1] === numbers[2])
+      throw new Error("이미 같은 수가 존재합니다.");
+    if (isNaN(numbers) || numbers.includes(0)) {
+      throw new Error("1 ~ 9 사이의 숫자를 입력해주세요.");
+    }
   }
 }
 
