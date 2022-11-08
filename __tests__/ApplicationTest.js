@@ -1,5 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const { isValidBallNumber } = require("../src/game/validation");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -169,5 +170,24 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
+  test("입력 함수 검증 : 1", () => {
+    const input = "1";
+    const result = isValidBallNumber(input);
+    expect(result).toBeFalsy();
+  });
+
+  test("입력 함수 검증 : 123", () => {
+    const input = "123";
+    const result = isValidBallNumber(input);
+    expect(result).toBeTruthy();
+  });
+
+  test("입력 함수 검증 : 122", () => {
+    const input = "122";
+    const result = isValidBallNumber(input);
+    expect(result).toBeFalsy();
+  });
+
+  
 
 });
