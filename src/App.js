@@ -15,10 +15,12 @@ class App {
 
   start() {
     this.answer = this.computer.makeAnswer();
+    this.enter();
+  }
+
+  enter() {
+    Console.readLine(MESSAGE.ENTER, (input) => Console.print(input));
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
