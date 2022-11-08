@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const checkValidRandomNumber = require('./utils/checkValidRandomNumber');
+const checkValidUserInput = require('./utils/checkValidUserInput');
 
 class App {
   initGame() {
@@ -20,6 +21,21 @@ class App {
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       this.userInputNumber = [...String(userInput).split('').map((x) => +x)];
+      if (checkValidUserInput(this.userInputNumber)) {
+        this.calculateResult();
+      }
+    });
+  }
+
+  calculateResult() {
+    this.strikeScore = 0;
+    this.ballScore = 0;
+    this.userInputNumber.forEach((digit, digitIndex) => {
+      if (digit === this.computerRandomNumber[digitIndex]) {
+        this.strikeScore += 1;
+      } else if (this.computerRandomNumber.includes(digit)) {
+        this.ballScore += 1;
+      }
     });
   }
 
