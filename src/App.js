@@ -2,9 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   getInputNumber() {
-    let userNum;
+    let USER_NUM;
     MissionUtils.Cosole.readLine("숫자를 입력해주세요 :", (number) => {
-      userNum = String(number).split("");
+      USER_NUM = String(number).split("");
     });
 
     if (answer.length > 3) {
@@ -13,32 +13,32 @@ class App {
   }
 
   getComputerNumber() {
-    const computerNum = [];
-    while (computerNum.length < 3) { 
-      let num = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerNum.includes(num)) {
-        computerNum.push(num);
+    const COMPUTER_NUM = [];
+    while (COMPUTER_NUM.length < 3) { 
+      let NUM = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!COMPUTER_NUM.includes(NUM)) {
+        COMPUTER_NUM.push(NUM);
       }
     }
   }
 
-  checkStrike(computerNum, userNum) {
-    let strikeScore = 0;
+  checkStrike(COMPUTER_NUM, USER_NUM) {
+    let STRIKE_SCORE = 0;
 
     for (let i = 0; i < 3; i++) {
-      if (computerNum[i] == userNum[i]) {
-        strikeScore += 1;
+      if (COMPUTER_NUM[i] == USER_NUM[i]) {
+        STRIKE_SCORE += 1;
       }
-      return strikeScore;
+      return STRIKE_SCORE;
     }
   }
 
-  checkBall(computerNum, userNum) {
-    let ballScore = 0;
+  checkBall(COMPUTER_NUM, USER_NUM) {
+    let BALL_SCORE = 0;
 
-    const intersect = computerNum.filter(x => userNum(x));
-    let countIntersect = intersect.length;
-    ballScore = countIntersect - strikeScore;
+    const intersect = COMPUTER_NUM.filter(x => USER_NUM(x));
+    let COUNT_INTERSECT = intersect.length;
+    BALL_SCORE = COUNT_INTERSECT - STRIKE_SCORE;
   }
 
   restartOrFinish() {
@@ -60,13 +60,13 @@ class App {
     this.getComputerNumber;
     this.getInputNumber();
 
-    if (ballScore > 0 || strikeScore > 0) {
-      MissionUtils.Console.print("${ballScore}볼 ${strikeScore}스트라이크");ㄱ
+    if (BALL_SCORE > 0 || STRIKE_SCORE > 0) {
+      MissionUtils.Console.print("${BALL_SCORE}볼 ${STRIKE_SCORE}스트라이크");ㄱ
     }
-    else if (countIntersect == 0) {
+    else if (COUNT_INTERSECT == 0) {
       MissionUtils.Console.print("낫싱");
     }
-    else if (strikeScore == 3) {
+    else if (STRIKE_SCORE == 3) {
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return;
@@ -76,6 +76,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
