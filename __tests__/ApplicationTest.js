@@ -1,6 +1,14 @@
 const App = require('../src/App');
-const { InvalidInputException } = require('../src/Error');
 const MissionUtils = require('@woowacourse/mission-utils');
+const {
+  EmptyInputException,
+  WhiteSpaceInputException,
+  DuplicateElementException,
+  InvalidDigitException,
+  BadCommandException,
+  InputRangeException,
+  InputTypeException,
+} = require('../src/Error');
 
 const NUMBERS = {
   MIN: 1,
@@ -103,7 +111,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(EmptyInputException);
   });
 
   test('공백문자만을 입력시 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -114,7 +122,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(WhiteSpaceInputException);
   });
 
   test('공백문자를 포함한 문자를 입력시 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -125,7 +133,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(WhiteSpaceInputException);
   });
 
   test('숫자 이외의 문자 입력시 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -136,7 +144,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(TypeError);
+    }).toThrow(InputTypeException);
   });
 
   test('3자리를 초과하는 숫자 입력시 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -147,7 +155,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(InvalidDigitException);
   });
 
   test('각 자리수 중 같은 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -158,7 +166,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(DuplicateElementException);
   });
 
   test('각 자리수 중 1~9를 벗어난 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.', () => {
@@ -169,7 +177,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(RangeError);
+    }).toThrow(InputRangeException);
   });
 
   test('숫자비교 : 어떤 자릿수, 숫자도 불일치시 낫싱 표시', () => {
@@ -224,7 +232,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(BadCommandException);
   });
 
   test('게임 종료 후 재시작 여부 확인시 아무런 글자 없이 입력하면 예외가 발생되며 종료된다.', () => {
@@ -237,7 +245,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(EmptyInputException);
   });
 
   test('게임 종료 후 재시작 여부 확인시 입력에 공백이 있으면 예외가 발생되며 종료된다.', () => {
@@ -250,7 +258,7 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(WhiteSpaceInputException);
   });
 
   test('게임 종료 후 재시작', () => {
@@ -286,6 +294,6 @@ describe('숫자 야구 게임', () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidInputException);
+    }).toThrow(InvalidDigitException);
   });
 });
