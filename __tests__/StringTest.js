@@ -10,7 +10,6 @@ describe("문자열 테스트", () => {
   test("split 메서드로 구분자가 포함되지 않은 경우 값을 그대로 반환", () => {
     const input = "1";
     const result = input.split(",");
-
     expect(result).toContain("1");
   });
 

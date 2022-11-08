@@ -49,7 +49,7 @@ describe("숫자 야구 게임", () => {
 
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const answers = ["112"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -58,5 +58,43 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+
+
+  test("예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["000"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('게임룰에 따른 올바른 점수값이 나오는지', () => {
+    const randoms = [1,4,5];
+    const answers = ['236', '167', '157', '451', '145' , '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '낫싱',
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '3볼',
+      '3스트라이크',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
