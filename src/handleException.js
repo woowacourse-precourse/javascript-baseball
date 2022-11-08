@@ -1,4 +1,4 @@
-const Message = require("./Message");
+const Message = require('./Message');
 const INPUT_LENGTH = 3;
 
 function checkInputLength(input) {
@@ -6,7 +6,7 @@ function checkInputLength(input) {
 }
 
 function checkIsDigitInRange(input) {
-  const regexp = new RegExp("^[1-9]+$");
+  const regexp = new RegExp('^[1-9]+$');
   return !regexp.test(input);
 }
 

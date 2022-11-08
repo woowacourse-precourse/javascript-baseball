@@ -1,5 +1,5 @@
-const Message = require("./Message");
-const { Console } = require("@woowacourse/mission-utils");
+const Message = require('./Message');
+const { Console } = require('@woowacourse/mission-utils');
 
 class printMessage {
   constructor() {

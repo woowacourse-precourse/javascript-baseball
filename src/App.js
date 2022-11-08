@@ -1,17 +1,17 @@
-const getNewAnswer = require("./getNewAnswer");
-const { Console } = require("@woowacourse/mission-utils");
-const Message = require("./Message");
+const getNewAnswer = require('./getNewAnswer');
+const { Console } = require('@woowacourse/mission-utils');
+const Message = require('./Message');
 const {
   handleGameException,
   handleRestartException,
-} = require("./handleException");
-const getResult = require("./getResult");
+} = require('./handleException');
+const getResult = require('./getResult');
 const {
   printStart,
   printCorrect,
   printGameover,
   printResult,
-} = require("./printMessage");
+} = require('./printMessage');
 
 class App {
   constructor() {

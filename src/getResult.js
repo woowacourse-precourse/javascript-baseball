@@ -1,4 +1,4 @@
-const Message = require("./Message");
+const Message = require('./Message');
 
 function checkStrike(answer, cur, idx) {
   return cur === answer[idx];
@@ -37,11 +37,11 @@ function makeResultStr(strike, ball) {
   if (checkNothing(strike, ball)) return Message.nothing;
   if (ball) result.push(`${ball}${Message.ball}`);
   if (strike) result.push(`${strike}${Message.strike}`);
-  return result.join(" ");
+  return result.join(' ');
 }
 
 function getResult(answer, userInput) {
-  const userInputArr = userInput.split("");
+  const userInputArr = userInput.split('');
   const strike = countStrike(answer, userInputArr);
   const ball = countBall(answer, userInputArr);
   const result = makeResultStr(strike, ball);

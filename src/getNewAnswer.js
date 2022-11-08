@@ -1,4 +1,4 @@
-const { Random } = require("@woowacourse/mission-utils");
+const { Random } = require('@woowacourse/mission-utils');
 const ANSWER_LENGTH = 3;
 
 function checkDifferentValue(num) {
@@ -17,7 +17,7 @@ function getNewAnswer() {
       answer.push(newRandomValue);
     }
   }
-  return answer.join("");
+  return answer.join('');
 }
 
 module.exports = getNewAnswer;
