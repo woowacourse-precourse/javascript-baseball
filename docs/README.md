@@ -36,6 +36,50 @@
 
 
 
+## 😥 시행 착오
+
+### 모듈 import 하기
+
+과제에서 제공해주는 MissionUtils 라이브러리를 이용하기 위해 import를 해야 했음
+
+다음과 같이 ES Modules 방식으로 사용하였더니, 
+
+* 추가로 `import * ` 는 wildcard import로 single default export임을 확실히 해야한다는 주의가 있어 사용하지 말라는 내용이 Airbnb javascript 스타일 가이드에 작성되어 있음
+
+```javascript
+import * as MissionUtils from "@woowacourse/mission-utils";
+```
+
+다음과 같은 에러 메시지를 얻을 수 있었음
+
+```javascript
+SyntaxError: Cannot use import statement outside a module
+
+> 1 | const App = require("../src/App");
+    |                                 ^
+  2 | const MissionUtils = require("@woowacourse/mission-utils");
+  3 |
+  4 | const mockQuestions = (answers) => {
+
+  at Runtime.createScriptFromCode (node_modules/jest-runtime/build/index.js:1678:14)
+  at Object.<anonymous> (__tests__/ApplicationTest.js:1:33)
+```
+
+모듈의 밖에서는 import를 할 수 없다는 내용인 것 같아서 CommonJS 방식으로 사용하였음
+
+* 그런데 모듈은 항상 비표준이 아닌 (`import`/`export`)를 이용해달라는 내용이 Airbnb javascript 스타일 가이드에 작성되어 있어 수정이 필요함
+
+```javascript
+const MissionUtils = require("@woowacourse/mission-utils");
+class App {
+  ...
+}
+```
+
+단 App 클래스 내부에서 정의해서 (const 없이 프로퍼티로) 사용하면 this.MissionUtils로 접근해야 함
+
+
+
 ## 📌요구사항
 
 > ## 🚀 기능 요구 사항
