@@ -11,6 +11,13 @@ const mockQuestions = (input) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 describe("기능 목록 테스트", () => {
   test("시작 후 메세지 출력", () => {
     const log = jest.spyOn(MissionUtils.Console, "print");
@@ -70,6 +77,36 @@ describe("기능 목록 테스트", () => {
     expect(() => {
       game.isValidInput(lengthCheck, RANDOM_NUMBER.RANGE);
     }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
+  });
+
+  test("종료 후 메세지 출력 확인", () => {
+    const log = jest.spyOn(MissionUtils.Console, "print");
+    log.mockClear();
+    const game = new Game();
+    const answer = [6, 7, 8];
+    const input = ["678"];
+
+    mockRandoms(answer);
+    mockQuestions(input);
+
+    game.play();
+
+    expect(log).toHaveBeenCalledWith(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+  });
+  test("재시작 입력 시 1, 2가 아닌 숫자 입력 확인", () => {
+    const game = new Game();
+
+    const answer = [7, 1, 2, 3, 6, 4];
+    const input = ["621", "427", "5"];
+
+    mockRandoms(answer);
+    mockQuestions(input);
+
+    expect(() => {
+      game.play();
+    }).toThrow();
   });
 
   /*
