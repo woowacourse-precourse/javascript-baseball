@@ -19,8 +19,6 @@ class App {
   }
 
   init() {
-    this.RAND_NUM = [];
-    this.INPUT_NUM = [];
     this.IS_NOTHING = true;
     this.COUNT_BALL = 0;
     this.COUNT_STRIKE = 0;
@@ -33,7 +31,8 @@ class App {
 
   // 게임 시작
   playNewGame() {
-    this.init();
+    this.RAND_NUM = [];
+    this.INPUT_NUM = [];
 
     // 1. random number(컴퓨터 숫자) 생성
     this.RAND_NUM = createRandomNumber(this.RAND_NUM);
@@ -44,6 +43,8 @@ class App {
 
   // 사용자가 정답 입력
   inputUserAnswer() {
+    this.init();
+
     //2. 사용자가 숫자를 입력한다. 
     Console.readLine(SYSTEM_MESSAGES.REQUEST, (answer) => {
       const ANSWER = Array.from(answer);
@@ -51,6 +52,7 @@ class App {
         this.INPUT_NUM[idx] = parseInt(a);
       })
 
+      console.log(this.INPUT_NUM, this.RAND_NUM, '입력 숫자, 랜덤 숫자')
       // 4. 사용자가 입력한 입력에 대한 validation을 수행한다.
       validateInput(this.INPUT_NUM);
 
