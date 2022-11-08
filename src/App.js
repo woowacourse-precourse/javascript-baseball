@@ -2,7 +2,14 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   getRandomNumbers() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
   }
 
   convertToNumberArray(numbers) {
@@ -33,10 +40,10 @@ class App {
       message = '낫싱';
     }
 
-    if (ball > 0) message += `${ball} 볼`;
+    if (ball > 0) message += `${ball}볼`;
 
     if (strike > 0)
-      message += ball === 0 ? `${strike} 스트라이크` : ` ${strike} 스트라이크`;
+      message += ball === 0 ? `${strike}스트라이크` : ` ${strike}스트라이크`;
 
     return MissionUtils.Console.print(message);
   }
