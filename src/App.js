@@ -37,5 +37,33 @@ function validNumber(inputNum) {
 
   return inputNum;
 }
+function checkBall(inputNum, answer) {
+  let cnt = 0;
+  answer.forEach((num) => {
+    if (inputNum.includes(num)) {
+      cnt++;
+    }
+  });
+  return cnt;
+}
+function checkStrike(inputNum, answer) {
+  let cnt = 0;
+  answer.forEach((num, i) => {
+    if (inputNum[i] === num) {
+      cnt++;
+    }
+  });
+  return cnt;
+}
+function answerCheck(inputNum, answer) {
+  const strike = checkStrike(inputNum, answer);
+  const ball = checkBall(inputNum, answer) - strike;
+
+  if (strike + ball === 0) return '낫싱';
+  if (strike === 3) return '3스트라이크';
+  if (strike === 0) return `${ball}볼`;
+  if (ball === 0) return `${strike}스트라이크`;
+  if (true) return `${ball}볼 ${strike}스트라이크`;
+}
 
 module.exports = App;
