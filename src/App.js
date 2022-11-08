@@ -15,6 +15,10 @@ const startGame = () => {
   inputUserNum();
 }
 
+const quitGame = () => {
+  MissionUtils.Console.print('게임 종료');
+  MissionUtils.Console.close();
+}
 
 const createAnswerNumList = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
