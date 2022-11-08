@@ -36,7 +36,7 @@ const isBall = (number, index, computers) => {
 };
 
 const isUserWin = (countStrike) => {
-  let userWin = countStrike === 3;
+  let userWin = countStrike === MAX_CORRECT;
   return userWin;
 };
 
@@ -47,7 +47,7 @@ const printGameResultMessage = (countStrike, countBall) => {
 };
 
 const makeMessage = (countStrike, countBall) => {
-  if (countStrike === 3) {
+  if (countStrike === MAX_CORRECT) {
     return countStrike + STRIKE;
   }
 
