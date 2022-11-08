@@ -113,10 +113,14 @@ class App {
     let stringBalls = '';
     let stringStrikes = '';
     if (numberOfBalls) {
-      stringBalls = `${numberOfBalls}볼 `;
+      stringBalls = `${numberOfBalls}볼`;
     }
     if (numberOfStrikes) {
       stringStrikes = `${numberOfStrikes}스트라이크`;
+    }
+    if (numberOfBalls && numberOfStrikes) {
+      MissionUtils.Console.print(`${stringBalls} ${stringStrikes}`);
+      return;
     }
     if (numberOfBalls || numberOfStrikes) {
       MissionUtils.Console.print(`${stringBalls}${stringStrikes}`);
