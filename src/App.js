@@ -15,14 +15,15 @@ module.exports = App;
 
 function game(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-    try{
-      judgeInputNumber(answer);
-    } catch(error) {
-      MissionUtils.Console.print(error);
-      MissionUtils.Console.print('게임 종료');
-      MissionUtils.Console.close();
-      return;
-    }
+    // try{
+    //   judgeInputNumber(answer);
+    // } catch(error) {
+    //   MissionUtils.Console.print(error);
+    //   MissionUtils.Console.print('게임 종료');
+    //   MissionUtils.Console.close();
+    //   return;
+    // }
+    judgeInputNumber(answer);
     
     const compareNumberArr = comparingNumbers(answer, computer);
     const result = returnResult(compareNumberArr);
@@ -45,7 +46,7 @@ function askGamePlay() {
         game(computer);
       } else if(answer == 2) {
         MissionUtils.Console.print('게임 종료');
-        return MissionUtils.Console.close();
+        MissionUtils.Console.close();
       } else {
         MissionUtils.Console.close();
         throw '잘못된 값 입력. 게임 종료';
@@ -106,22 +107,22 @@ function returnResult(result) {
 function judgeInputNumber(inputNumber) {
   const numbers = inputNumber.split('').map(item => +item);
   if(3 < numbers.length) {
-    throw '잘못된 값입니다.';
+    throw new Error('잘못된 값입니다.');
   } 
 
   const set = new Set(numbers);
   const numberArr = [...set];
   if(numberArr.length < 3) {
-    throw '잘못된 값입니다.';
+    throw new Error('잘못된 값입니다.');
   }
 
   for(let i = 0; i < numbers.length; i++) {
     if(numbers[i] < 1 || numbers[i] > 9) {
-      throw '잘못된 값입니다.';
+      throw new Error('잘못된 값입니다.');
     }
   
     if(/\D/g.test(numbers[i])) {
-      throw '잘못된 값입니다.';
+      throw new Error('잘못된 값입니다.');
     }
   }
 
