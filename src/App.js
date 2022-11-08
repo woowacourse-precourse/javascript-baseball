@@ -37,6 +37,16 @@ class App {
     return [ballCount, strikeCount];
   }
 
+  static getMessage(judged) {
+    const UNITS = ['볼', '스트라이크'];
+    const out = judged
+      .map((x, i) => (x > 0 ? `${x}${UNITS[i]}` : ''))
+      .join(' ')
+      .trim();
+
+    return out.length ? out : '낫싱';
+  }
+
   play() { }
 }
 

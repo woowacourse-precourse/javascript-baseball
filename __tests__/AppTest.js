@@ -29,4 +29,11 @@ describe('App Test', () => {
     expect(App.judge([1, 2, 3], [2, 1, 3])).toEqual([2, 1]);
     expect(App.judge([1, 2, 3], [4, 5, 6])).toEqual([0, 0]);
   });
+
+  test('test getMessage', () => {
+    expect(App.getMessage([0, 3])).toBe('3스트라이크');
+    expect(App.getMessage([2, 1])).toBe('2볼 1스트라이크');
+    expect(App.getMessage([3, 0])).toBe('3볼');
+    expect(App.getMessage([0, 0])).toBe('낫싱');
+  });
 });
