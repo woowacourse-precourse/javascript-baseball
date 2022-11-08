@@ -16,7 +16,7 @@ const ERROR_MESSAGE = {
   INPUT_TYPE_ERROR: "숫자를 입력해주세요.",
   INPUT_ISPOSITIVE_NUM_ERROR: "0보다 큰 숫자를 입력해주세요.",
   INPUT_REPEAT_ERROR: "서로 다른 숫자를 입력해주세요.",
-  RETRY_INPUT_ERROR: "1혹은 2를 입력해주세요.",
+  RETRY_INPUT_ERROR: "1또는 2를 입력해주세요.",
   ZERO_ERROR: "1부터 9까지의 숫자를 입력해주세요.",
 };
 
