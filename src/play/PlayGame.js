@@ -5,7 +5,7 @@ const GetComputerInput = require("../input/GetComputerInput");
 class PlayGame extends Mission {
   constructor() {
     super();
-    this.missionConsole.print("숫자 야구 게임을 시작합니다");
+    this.missionConsole.print("숫자 야구 게임을 시작합니다.");
   }
 
   gameReady() {
