@@ -9,8 +9,14 @@ class App {
     this.compareResultText = '';
   }
 
+  generateRandomNumber() {
+    const newRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.computerRandomNumber = [...newRandomNumber];
+  }
+
   startGame() {
     this.initGame();
+    this.generateRandomNumber();
   }
 
   play() {
