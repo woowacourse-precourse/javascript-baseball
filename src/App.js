@@ -29,8 +29,8 @@ class App {
       if (COMPUTER_NUM[i] == USER_NUM[i]) {
         STRIKE_SCORE += 1;
       }
-      return STRIKE_SCORE;
     }
+    return STRIKE_SCORE;
   }
 
   checkBall(COMPUTER_NUM, USER_NUM) {
@@ -45,7 +45,7 @@ class App {
     MissionUtils.Console.readLine(
       "재시작 => 1, 종료 => 2", (answer) => {
         if (parseInt(answer) == 1) {
-          this.play();
+          play();
         } 
         else if(parseInt(answer) == 2) {
           MissionUtils.Console.print("게임 종료");
@@ -57,7 +57,7 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.getComputerNumber;
+    this.getComputerNumber();
     this.getInputNumber();
 
     if (BALL_SCORE > 0 || STRIKE_SCORE > 0) {
@@ -71,7 +71,7 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return;
     }
-    this.restartOrFinish();
+    restartOrFinish();
   }
 }
 
