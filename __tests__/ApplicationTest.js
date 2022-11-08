@@ -29,8 +29,10 @@ describe("숫자 야구 게임", () => {
     const answers = ["246", "135", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
     const messages = [
+      "숫자 야구 게임을 시작합니다.",
       "낫싱",
       "3스트라이크",
+      "게임 종료",
       "1볼 1스트라이크",
       "3스트라이크",
       "게임 종료",
@@ -43,11 +45,11 @@ describe("숫자 야구 게임", () => {
     app.play();
 
     messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      expect(logSpy).toContain(output);
     });
   });
 
-  test("예외 테스트: 3자리가 아닌 수 입력", () => {
+  test("예외 테스트: 3자리 숫자 입력이 아닌 경우", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
 
@@ -57,10 +59,10 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("3자리 숫자를 입력하세요");
   });
 
-  test("예외 테스트: 숫자가 아닌 문자 입력", () => {
+  test("예외 테스트: 숫자 입력이 아닌 경우", () => {
     const randoms = [1, 3, 5];
     const answers = ["Number"];
 
@@ -70,6 +72,19 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("숫자를 입력하세요");
+  });
+
+  test("예외 테스트: 중복되는 숫자를 입력한 경우", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["111"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("중복되지 않은 숫자를 입력하세요");
   });
 });

@@ -37,7 +37,6 @@ class App {
         i++;
       }
     }
-    console.log(answer);
     return answer;
   };
 
@@ -65,11 +64,13 @@ class App {
   }
 
   async checkRestartGame() {
-    if ((await this.inputRestartGameValue()) == 2) {
-      return true;
-    } else {
-      return false;
-    }
+    try {
+      if ((await this.inputRestartGameValue()) == 2) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {}
   }
 
   inputRestartGameValue = () => {
@@ -80,15 +81,21 @@ class App {
           resolove(answer);
         }
       );
+    }).catch((err) => {
+      return err;
     });
   };
 
   async doBaseBall() {
-    this.userAnswer = await this.input();
-    this.checkBallValidity();
-    this.judgeResult();
-    this.printResult();
-    this.checkWin();
+    try {
+      this.userAnswer = await this.input();
+      this.checkBallValidity();
+      this.judgeResult();
+      this.printResult();
+      this.checkWin();
+    } catch (e) {
+      return e;
+    }
   }
 
   async checkWin() {
@@ -99,7 +106,6 @@ class App {
   }
 
   printResult = () => {
-    console.log(this.strike, this.ball);
     if ((this.strike === 0) & (this.ball === 0)) {
       MissionUtils.Console.print("낫싱");
     } else if ((this.strike === 0) & (this.ball !== 0)) {
@@ -141,13 +147,13 @@ class App {
 
   isNumber = () => {
     if (isNaN(parseInt(this.userAnswer))) {
-      throw new Error("숫자를 입력하세요!");
+      throw new Error("숫자를 입력하세요");
     }
   };
 
   isThreeDigit = () => {
     if ([...this.userAnswer].length !== 3) {
-      throw new Error("3자리 숫자를 입력하세요!");
+      throw new Error("3자리 숫자를 입력하세요");
     }
   };
 
@@ -156,7 +162,7 @@ class App {
       const checkValue = [...this.userAnswer];
       checkValue.splice(idx, 1);
       if (checkValue.includes(userValue)) {
-        throw new Error("중복되지 않은 값을 입력하시오");
+        throw new Error("중복되지 않은 숫자를 입력하세요");
       }
     });
   };
@@ -166,11 +172,12 @@ class App {
       MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
         resolove(answer);
       });
+    }).catch((err) => {
+      return err;
     });
   };
 }
 
-const app = new App();
-app.play();
-
+// const app = new App();
+// app.play();
 module.exports = App;
