@@ -12,6 +12,7 @@ class App {
       if (!this.isValidGuess(userGuess)) {
         throw new Error('--- *서로다른 세자리 자연수를 입력해주세요 ---');
       }
+      this.progress(userGuess);
     });
   }
 
@@ -65,6 +66,19 @@ class App {
     return [...computerNumber];
   }
 
+  isValidGuess(guessNumber) {
+    if (guessNumber.length !== 3) {
+      return false;
+    }
+    if (new Set(guessNumber).size !== 3) {
+      return false;
+    }
+    if (!/^[1-9]{3}$/.test(guessNumber)) {
+      return false;
+    }
+    return true;
+  }
+
   calcHit(computerNumber, userGuess) {
     return userGuess.split('').map(Number).reduce((acc, curr, idx) => {
       if (curr === computerNumber[idx]) {
@@ -77,19 +91,6 @@ class App {
       }
       return acc;
     }, { strike: 0, ball: 0 });
-  }
-
-  isValidGuess(guessNumber) {
-    if (guessNumber.length !== 3) {
-      return false;
-    }
-    if (new Set(guessNumber).size !== 3) {
-      return false;
-    }
-    if (!/^[1-9]{3}$/.test(guessNumber)) {
-      return false;
-    }
-    return true;
   }
 
   createResultMessage(strike, ball) {
