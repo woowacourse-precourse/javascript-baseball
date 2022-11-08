@@ -5,6 +5,7 @@ class App {
     const computer = this.getComputerRandomNumberString();
     
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    console.log(computer);
     this.numberBaseballGame(computer);
   }
 
@@ -96,14 +97,32 @@ class App {
   selectRestartOrExitGame(){
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     MissionUtils.Console.readLine('', (choice) => {
+      this.throwExceptionForChoice(choice);
+
       if(choice==='1'){
         const computer = this.getComputerRandomNumberString();
+        console.log(computer);
         this.numberBaseballGame(computer);
       }
       else{
         MissionUtils.Console.close();
       }
     });
+  }
+
+  throwExceptionForChoice(choice){
+    if(choice === '' || choice === ' ' || choice.includes(' ')){
+      throw "입력에 공백은 포함될 수 없습니다.";
+    }
+    if(choice.length !== 1){
+      throw "1자리의 수를 입력해주세요.";
+    }
+    if(isNaN(Number(choice))){
+      throw "숫자만 입력해주세요.";
+    }
+    if(Number(choice) !== 1 && Number(choice) !== 2){
+      throw "1 또는 2를 입력해주세요.";
+    }
   }
 }
 
