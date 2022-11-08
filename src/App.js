@@ -39,6 +39,14 @@ class App {
     }
   }
 
+  checkInput (computer, input) {
+    let score = [0,0];
+    for (let i = 0 ; i < computer.length ; i++) {
+      if (computer[i] === input[i]) score[1] += 1;
+      else if (computer.includes(input[i])) score[0] += 1;
+    }
+    return score;
+  }
 
 }
 
