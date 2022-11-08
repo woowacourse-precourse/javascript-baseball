@@ -1,5 +1,5 @@
-const Computer = require('./Computer');
 const { Console } = require('@woowacourse/mission-utils');
+const Computer = require('./Computer');
 const MESSAGE = require('./Message');
 
 class App {
