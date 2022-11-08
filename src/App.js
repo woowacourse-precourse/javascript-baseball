@@ -87,7 +87,7 @@ class App {
         if (userRestartInput == 1) {
           this.computerChoiceNumber();
           this.userInputMessage();
-        } else {
+        } else if (userRestartInput == 2) {
           MissionUtils.Console.print("게임 종료");
         }
       }
