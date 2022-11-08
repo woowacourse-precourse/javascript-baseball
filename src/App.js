@@ -47,9 +47,8 @@ class App {
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (ans) => {
           ans = this.handleGameEndException(ans);
-          if (ans === 1) {
-            this.createRandomNumber();
-          } else if (ans === 2) {
+          if (ans === 1) this.createRandomNumber();
+          else if (ans === 2) {
             Console.print("게임 종료");
             Console.close();
           }
