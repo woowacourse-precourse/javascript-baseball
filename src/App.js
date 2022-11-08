@@ -5,7 +5,11 @@ class App {
     this.answer = this.getComputerNum();
   }
 
-  play() {}
+  play() {
+    Console.readLine("숫자를 입력해주세요 : ", () => {
+      // 숫자 유효성 검사
+    });
+  }
 
   getComputerNum() {
     const randomNum = [];
