@@ -42,23 +42,18 @@ class App {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.user.numbers = input.split('');
       validateInputMap['INGAME_VALIDATE'](this.user.numbers);
-
-      console.log('정답: ', this.computer.numbers);
-      console.log('입력: ', this.user.numbers);
-
       this.referee
         .judge(this.computer.numbers, this.user.numbers)
         .printScore();
 
       if (this.referee.strike === 3) {
-        this.isRegame();
+        this.isRematch();
       }
-
       this.match();
     });
   }
 
-  isRegame() {
+  isRematch() {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (input) => {
@@ -68,8 +63,5 @@ class App {
     );
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
