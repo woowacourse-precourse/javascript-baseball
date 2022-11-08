@@ -11,11 +11,10 @@ class Referee {
   constructor() {
     this.computer = null;
     this.player = null;
-
-    MissionUtils.Console.print(MESSAGE.GAME.START);
   }
 
   gameInit() {
+    MissionUtils.Console.print(MESSAGE.GAME.START);
     this.computer = new Computer();
     this.player = new Player();
     this.gameStart();
