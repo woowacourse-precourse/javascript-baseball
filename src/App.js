@@ -159,7 +159,7 @@ class App {
     return { sameDigitCount, sameNumberCount };
   }
 
-  isCorrectNumber(sameDigitCount) {
+  isNumberAnswer(sameDigitCount) {
     if (sameDigitCount !== this.digit) {
       return false;
     }
@@ -174,7 +174,7 @@ class App {
       return this.MESSAGES.resultNothing;
     }
 
-    if (!this.isCorrectNumber(sameDigitCount)) {
+    if (!this.isNumberAnswer(sameDigitCount)) {
       const balls = this.MESSAGES.resultBall(sameNumberCount);
       const whiteSpace = (sameDigitCount && sameNumberCount && " ") || "";
       const strikes = this.MESSAGES.resultStrike(sameDigitCount);
