@@ -3,6 +3,7 @@ const {
   NUMBER_LENGTH,
   GAME_MESSAGE,
   RESTART_OPTION,
+  ERROR_MESSAGE,
 } = require('../constant/constant');
 const Computer = require('../computer/Computer');
 const Calculator = require('./Calculator');
@@ -63,6 +64,8 @@ class BaseballGame {
       if (answer === RESTART_OPTION.end) {
         return Console.close();
       }
+
+      throw new Error(ERROR_MESSAGE.restartInput);
     });
   }
 
