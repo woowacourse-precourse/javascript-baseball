@@ -14,6 +14,12 @@ function addUniqueRandomDigit(gameNumber, digit) {
   gameNumber.push(digit);
 }
 
+function throwGuessException(userInput) {
+  if (userInput.length !== 3) throw "3자리를 입력해주세요";
+  if (isNaN(Number(userInput))) throw "숫자형식을 입력해주세요";
+  if (userInput.includes("0")) throw "0은 포함되지 않습니다";
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -27,4 +33,10 @@ class App {
   play() {}
 }
 
-module.exports = { generateRandomDigit, isExist, addUniqueRandomDigit, App };
+module.exports = {
+  generateRandomDigit,
+  isExist,
+  addUniqueRandomDigit,
+  App,
+  throwGuessException,
+};
