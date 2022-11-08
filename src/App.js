@@ -17,3 +17,12 @@ const isOnlyNumber = (numStr) => {
   return check.test(numStr);
 }
 
+const areEachDifferent = (numStr) => {
+  for (let i = 0; i < numStr.length; i++) {
+    if (numStr.indexOf(numStr[i], i + 1) !== -1) {
+      return false
+    }
+  }
+  return true
+}
+
