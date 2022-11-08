@@ -8,8 +8,7 @@ class App {
   }
 
   printStartMessage () {
-    const str = "숫자 야구 게임을 시작합니다.";
-    return str;
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   randomThreeNumbers() {
@@ -49,7 +48,7 @@ class App {
     const NUMBERS = /^[1-9]+$/;
 
     for(let i=0; i<input.length; i++) {
-      if(NUMBERS.test(input[i])) {
+      if(!NUMBERS.test(input[i])) {
         throw new Error("숫자를 입력하세요.");
       }
     }
@@ -83,7 +82,6 @@ class App {
       }
     }
 
-
     if(strike === 0 && ball === 0){
       result = "낫싱";
     }
@@ -116,8 +114,7 @@ class App {
   }
 
   play() {
-
-    MissionUtils.Console.print(this.printStartMessage());
+    this.printStartMessage();
     let computer = this.randomThreeNumbers();
     let user = this.inputThreeNumbers();
     this.getResult(computer, user);
