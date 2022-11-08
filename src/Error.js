@@ -7,7 +7,7 @@ const MESSAGES = {
   DIGIT: '올바른 자리수의 숫자를 입력하셔야 합니다.',
   COMMAND: '올바른 명령어가 입력되지 않았습니다.',
   RANGE: '각 자리 수의 범위가 올바르지 않습니다.',
-  TYPE: '숫자만 입력할 수 있습니다.',
+  TYPE: '숫자(양수)만 입력할 수 있습니다.',
 };
 
 function getMessageExitByInputError(message) {
