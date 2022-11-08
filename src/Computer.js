@@ -12,7 +12,6 @@ class Computer {
         this.#randomNumbers.push(number);
       }
     }
-    console.log(this.#randomNumbers);
   }
 
   get randomNumbers() {
