@@ -52,6 +52,15 @@ class App {
                 throw '0을 제외한 숫자만 입력 가능합니다';
             }
         }
+        // 중복이 있을 경우.
+        const count = new Array(10);
+        for (let char of userInput) {
+            if (count[Number(char)]) {
+                throw '서로 다른 3자리 숫자를 입력하세요';
+            } else {
+                count[Number(char)] = 1;
+            }
+        }
         return true;
     }
 
