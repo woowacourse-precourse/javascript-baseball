@@ -18,7 +18,7 @@ class App {
         return;
       }
       MissionUtils.Console.print(this.outputResult(answer));
-      return this.guessAnswer();
+      this.guessAnswer();
     });
   }
 
@@ -30,7 +30,6 @@ class App {
         return;
       }
       MissionUtils.Console.close();
-      return;
     });
   }
 
