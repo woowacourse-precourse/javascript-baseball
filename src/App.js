@@ -17,19 +17,46 @@ class App {
     });
   }
 
+  inputCheck(userArray){
+    console.log("check: " + userArray);
+    if(userArray.length > 3){ //1) 입력 값은 3자리
+      throw "input length > 3";
+    }
+
+    userArray.map((number)=> {
+      if(isNaN(number)){ //2) 1부터 9까지 숫자로 구성
+        throw "Input not a number";
+      }
+      else if(number <= 0){//3) 0 이하의 정수 불가능
+        throw "num <= 0";
+      }
+      else{ //4) 각 숫자는 중복 불가능
+        const setCollection = new Set(userArray);
+        const isDuplicate = setCollection.size < userArray.length;
+        
+        if (isDuplicate){
+          throw "is duplicate";
+        }
+        
+      }
+
+    });
+
+  }
+
 
   input() {
     return new Promise(function(resolve, reject) {
       var items = [];
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-            items = answer.split('').map((el) => parseInt(el));
-            //console.log(user);
-            resolve(items);  
-            MissionUtils.Console.close();
-          });
+        items = answer.split('').map((el) => parseInt(el));
+        resolve(items);
+        MissionUtils.Console.close();
+      });
+
+    
     });
     
-
   }
 
   compare(user, computer){
@@ -63,17 +90,21 @@ class App {
   }
 
 
-
-
-
   async play() {
     let computer = await this.random(); 
     let user = await this.input();
-    let bNum, sNum;
-    [bNum, sNum] = this.compare(user, computer);
-    //console.log(bNum, sNum);
+    try {
+      this.inputCheck(user);
+    } catch (e) {
+      console.error(e);
+      //break;
+    }
+    //  let bNum, sNum;
+    //  [bNum, sNum] = this.compare(user, computer);
 
-    this.print(bNum, sNum);
+    //  this.print(bNum, sNum);
+
+    
 
     
   }
@@ -85,6 +116,8 @@ class App {
 
 const app = new App();
 app.play();
+
+
 
 
 module.exports = App;
