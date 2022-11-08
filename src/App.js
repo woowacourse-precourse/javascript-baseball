@@ -1,6 +1,10 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable operator-linebreak */
 const MissionUtils = require('@woowacourse/mission-utils');
+
+const intersection = (setA, setB) =>
+  new Set([...setA].filter((element) => setB.has(element)));
 
 class App {
   constructor() {
@@ -9,9 +13,11 @@ class App {
       9,
       3,
     );
+    this.computerNumberSet = new Set(this.computerNumberArray);
     this.userNumberInput = '';
     this.userNumberArray = [];
     this.userNumberSet = new Set();
+    this.resultObject = { ball: 0, strike: 0 };
   }
 
   // get userNumberArray() {
@@ -52,11 +58,17 @@ class App {
     }
   }
 
+  countBall() {
+    return intersection(this.userNumberSet, this.computerNumberSet).size;
+  }
+
   play() {
     MissionUtils.Console.print(this.computerNumberArray);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       // console.log(`입력받은 숫자 : ${input}`);
       this.userNumberInput = input;
+      // this.resultObject.ball += 1;
+      // console.log(`ball ${this.resultObject.ball}`);
       this.checkInvalidInput();
     });
   }
