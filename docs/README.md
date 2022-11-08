@@ -9,6 +9,8 @@
     | :--------------------: | :--------------------: |
     | 관련 내용 앞에 🔶 기입 | 관련 내용 앞에 🔷 기입 |
 
+## 📌 App.js
+
 ### 🔶 `#NUMERIC_CONSTANTS` : object
 
 - Description
@@ -21,33 +23,6 @@
     min: 1,
     max: 9,
     initResult: 0,
-  };
-  ```
-
-### 🔶 `#ERROR_CASES` : object
-
-- Description
-  - `findInputError`, `findResetError` 메서드에 인수로 전달할 에러의 종류를 프로퍼티로 가진 객체
-  - 외부에서 접근할 수 없도록 private 필드로 선언
-- Example
-
-  ```Javascript
-    #ERROR_CASES = {
-      reset: "failReset",
-      compare: "failCompare",
-    };
-  ```
-
-### 🔶 `#ERROR_MESSAGES` : object
-
-- Description
-  - `throwError` 메서드가 출력할 에러의 메시지를 프로퍼티로 가진 객체
-  - 외부에서 접근할 수 없도록 private 필드로 선언
-- Example
-  ```Javascript
-  #ERROR_MESSAGES = {
-    failReset: "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다.",
-    failCompare: "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다.",
   };
   ```
 
@@ -148,8 +123,9 @@
 - Params
   - 1 - `userInput`
 - Return Value
-  - "스트라이크", "볼" 개수를 프로퍼티로 가지는 객체 `results` 반환 <br>
-    ex) `{ ball: '1', strike: '2' }`
+
+  - 없음
+
 - Usage
 
   - 먼저 `findInputError`를 호출하여 플레이어의 입력 값이 규칙에 어긋난다면 에러 출력
@@ -162,7 +138,7 @@
 - Description
 
   1. `split` 메서드로 전달 받은 `userInput` 값을 배열로 변환
-  2. `userInput` 배열을 `forEach`로 `순회하며 각각의 숫자마다 `randomNum.includes` 메서드를 호출
+  2. `userInput` 배열을 `forEach`로 순회하며 각각의 숫자마다 `includes` 메서드를 호출
   3. 반환 값이 `true`인 경우 배열의 index까지 서로 비교<br>
      3-1. 일치하면 `results`의 `strike` 값에 1을 더하여 저장<br>
      3-2. 일치하지 않으면 `results`의 `ball` 값에 1을 더하여 저장<br>
@@ -194,7 +170,7 @@
 - Params
   - `compareResults`
 - Return Value
-  - 전달 받은 비교 결과를 토대로 결과 값에 해당하는 문자열 반환
+  - 없음
 - Usage
   - "스트라이크"나 "볼"이 1개 이상 존재하는 경우 각각의 개수만큼 "스트라이크", "볼" 출력<br>
     ex) `1볼`, `1볼 1스트라이크`
@@ -289,6 +265,46 @@
 
       this.throwError(reset);
     }
+  ```
+
+## 📌 Validation.js
+
+### 🔶 `#MAX_LENGTH` : number
+
+- Description
+  - 입력 값의 길이 관련 에러를 판별하기 위한 상수
+  - 외부에서 접근할 수 없도록 private 필드로 선언
+- Example
+
+  ```Javascript
+    #MAX_LENGTH = 3;
+  ```
+
+### 🔶 `#ERROR_CASES` : object
+
+- Description
+  - `findInputError`, `findResetError` 메서드에 인수로 전달할 에러의 종류를 프로퍼티로 가진 객체
+  - 외부에서 접근할 수 없도록 private 필드로 선언
+- Example
+
+  ```Javascript
+    #ERROR_CASES = {
+      reset: "failReset",
+      compare: "failCompare",
+    };
+  ```
+
+### 🔶 `#ERROR_MESSAGES` : object
+
+- Description
+  - `throwError` 메서드가 출력할 에러의 메시지를 프로퍼티로 가진 객체
+  - 외부에서 접근할 수 없도록 private 필드로 선언
+- Example
+  ```Javascript
+  #ERROR_MESSAGES = {
+    failReset: "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다.",
+    failCompare: "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다.",
+  };
   ```
 
 ### 🔶 `findResetError` : function
