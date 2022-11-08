@@ -3,6 +3,16 @@ const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
 class App {
+  checkCount(result_score) {
+    let temp_output_string = ``;
+
+    if (result_score.ball !== 0) temp_output_string += `${result_score.ball}볼`;
+    if (result_score.strike !== 0 && temp_output_string === ``) temp_output_string += `${result_score.strike}스트라이크`;
+    else if (result_score.strike !== 0) temp_output_string += ` ${result_score.strike}스트라이크`;
+
+    return temp_output_string;
+  }
+
   checkAnswer(answer, number, index, scoreCount) {
     let ball_count = 0;
     let strike_count = 0;
@@ -40,7 +50,8 @@ class App {
 
   inputNumber(answer, CORRECT_LIST) {
     try { this.valueExceptionHandling(answer) } catch (e) { this.endGame(e) };
-    let resultScore = this.checkScore(answer, CORRECT_LIST);
+    let result_score = this.checkScore(answer, CORRECT_LIST);
+    let result_text = this.checkCount(result_score);
   }
 
   startGame(CORRECT_LIST) {

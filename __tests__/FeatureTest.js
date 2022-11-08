@@ -43,4 +43,18 @@ describe("기능 테스트", () => {
             strike: 3
         });
     })
+    test("7. 정답을 판단하는 기능", () => {
+        expect(app.checkCount({
+            ball: 3,
+            strike: 0
+        })).toBe('3볼');
+        expect(app.checkCount({
+            ball: 1,
+            strike: 2
+        })).toBe('1볼 2스트라이크');
+        expect(app.checkCount({
+            ball: 0,
+            strike: 3
+        })).toBe('3스트라이크');
+    })
 });
