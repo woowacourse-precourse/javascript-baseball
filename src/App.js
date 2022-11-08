@@ -69,11 +69,28 @@ class App {
 
     if (strike == NUMBER_LENGTH) {
       Console.print(`${NUMBER_LENGTH}스트라이크\n${NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+      this.askRestart();
     } else if (strike > 0 || ball > 0) {
       Console.print((ball == 0 ? '' : ball + '볼 ') + (strike == 0 ? '' : strike + '스트라이크'));
     } else {
       Console.print("낫싱");
     }
+  }
+
+  askRestart() {
+    this.isPlayingNow = false;
+    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
+      switch (answer) {
+        case "1":
+          return this.play();
+        case "2":
+          Console.print("게임 종료");
+          Console.close();
+          break;
+        default:
+          throw new Error("입력한 숫자가 유효하지 않습니다.");
+      }
+    });
   }
 
   roundStart() {
