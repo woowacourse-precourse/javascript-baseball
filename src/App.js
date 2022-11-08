@@ -90,6 +90,21 @@ class App {
     return resultString;
   }
 
+  confirmRetry() {
+    Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (inputString) => {
+        if (inputString === '1') {
+          this.play();
+        } else if (inputString === '2') {
+          Console.close();
+        } else {
+          throw new Error('❗️ 잘못된 숫자를 입력하여 게임이 종료됩니다. ❗️');
+        }
+      }
+    );
+  }
+
   inputCallback() {}
 
   play() {}
