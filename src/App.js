@@ -15,7 +15,7 @@ class App {
   }
 
   startGame() {
-    const computerNum = this.computer.makeRandNum();
+    const computerNum = this.computer.makeRandomNum();
     this.getUserGuess(computerNum);
   }
 
@@ -25,19 +25,19 @@ class App {
       if(!isValid) {
         throw new Error(ALERT.INVALID_INPUT);
       }
-      const [ballCnt, strCnt] = this.getGuessRst(userGuess, computerNum);
-      const rstMsg = this.getRstMsg(ballCnt, strCnt);
-      Console.print(rstMsg);
+      const [ballCount, strikeCount] = this.getGuessRst(userGuess, computerNum);
+      const resultMessage = this.getRstMsg(ballCount, strikeCount);
+      Console.print(resultMessage);
 
-      if(strCnt === NUMBER.MAX_LENGTH){
-        this.correctAns();
+      if(strikeCount === NUMBER.MAX_LENGTH){
+        this.correctAnswer();
         this.askRestart();
       }
-      if(strCnt !== NUMBER.MAX_LENGTH) this.getUserGuess(computerNum);
+      if(strikeCount !== NUMBER.MAX_LENGTH) this.getUserGuess(computerNum);
     })
   }
 
-  correctAns() {
+  correctAnswer() {
     Console.print(ALERT.CORRECT_ANSWER);
   }
   
@@ -59,28 +59,28 @@ class App {
     })
   }
 
-  getGuessRst(userGuess, computerNum) {
-    const cNumArray = [...computerNum];
-    const uNumArray = [...userGuess];
-    let ballCnt = 0, strCnt = 0;
-    for(let cnum of cNumArray) {
-        const loc = cNumArray.indexOf(cnum);
-        if(uNumArray.indexOf(cnum) === loc){
-            strCnt++; continue;
+  getGuessRst(userGuess, computerNumber) {
+    const computerNumToArray = [...computerNumber];
+    const userNumToArray = [...userGuess];
+    let ballCount = 0, strikeCount = 0;
+    for(let computerNumElement of computerNumToArray) {
+        const loc = computerNumToArray.indexOf(computerNumElement);
+        if(userNumToArray.indexOf(computerNumElement) === loc){
+            strikeCount++; continue;
         }
-        if(uNumArray.includes(cnum)){
-            ballCnt++;
+        if(userNumToArray.includes(computerNumElement)){
+            ballCount++;
         }
     }
-    return [ballCnt, strCnt];
+    return [ballCount, strikeCount];
   }
 
-  getRstMsg(ballCnt, strCnt) {
-    if(ballCnt === 0 && strCnt === 0) return RESULT.NOTHING;
-    if(ballCnt === 0) return strCnt+RESULT.STRIKE;
-    if(strCnt === 0) return ballCnt+RESULT.BALL;
+  getRstMsg(ballCount, strikeCount) {
+    if(ballCount === 0 && strikeCount === 0) return RESULT.NOTHING;
+    if(ballCount === 0) return strikeCount+RESULT.STRIKE;
+    if(strikeCount === 0) return ballCount+RESULT.BALL;
 
-    return ballCnt+RESULT.BALL+' '+strCnt+RESULT.STRIKE;
+    return ballCount+RESULT.BALL+' '+strikeCount+RESULT.STRIKE;
   }
   
 }
