@@ -121,4 +121,10 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("추가테스트1-1: getCompNumArray <check length === 3>", () => {
+    const compNumArr = [];
+    getCompNumArray(compNumArr);
+    expect(compNumArr).toHaveLength(3);
+  });
 });
