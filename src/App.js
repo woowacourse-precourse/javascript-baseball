@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
+
 class App {
   constructor() {
     this.START_NUMBER = 1;
@@ -40,40 +41,44 @@ class App {
         answer.push(number);
       }
     }
+
     return answer;
   }
 
   numberInput() {
     const INPUT_MESSAGE = '숫자를 입력해주세요. : ';
+
     let inputNumber;
     Console.readLine(INPUT_MESSAGE, number => {
       this.handleInputException(number);
       inputNumber = number;
       Console.close();
     });
+
     return inputNumber;
   }
 
   isInteger(inputNumber) {
     if (Number.isInteger(Number(inputNumber))) {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   isDigit(inputNumber) {
     if (inputNumber.length === this.DIGITS) {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   hasSameNumber(inputNumber) {
     if (inputNumber[0] === inputNumber[1] || inputNumber[1] === inputNumber[2] || inputNumber[2] === inputNumber[0]) {
       return true;
     }
+
     return false;
   }
 
@@ -82,6 +87,7 @@ class App {
     const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
     const NOT_DIGIT_EXCEPTION_MESSAGE = `압력값이 ${this.DIGITS}자리 숫자가 아닙니다.`;
     const SAME_NUMBER_EXCEPTION_MESSAGE = '입력값에 중복된 숫자가 존재합니다.';
+
     let errorMessage = null;
     if (isNaN(inputNumber)) {
       errorMessage = NOT_A_NUMBER_EXCEPTION_MESSAGE;
@@ -92,9 +98,11 @@ class App {
     } else if (this.hasSameNumber(inputNumber)) {
       errorMessage = SAME_NUMBER_EXCEPTION_MESSAGE;
     }
+
     if (errorMessage === null) {
       return;
     }
+
     throw new Error(errorMessage);
   }
 
@@ -105,6 +113,7 @@ class App {
         strikeCount += 1;
       }
     }
+
     return strikeCount;
   }
 
@@ -116,11 +125,13 @@ class App {
       }
     }
     ballCount -= strikeCount;
+
     return ballCount;
   }
 
   printCheckResult(strikeCount, ballCount) {
     const HIT_MESSAGE = `${this.DIGITS}개의 숫자를 모두 맞히셨습니다! 게임 종료`;
+
     if (ballCount && strikeCount) {
       Console.print(ballCount + '볼 ' + strikeCount + '스트라이크');
       return true;
@@ -133,35 +144,39 @@ class App {
         Console.print(HIT_MESSAGE);
         return false;
       }
-    } else {
-      Console.print('낫싱');
-      return true;
     }
+    Console.print('낫싱');
+    return true;
   }
 
   restartGame() {
     const CONTINUE = '1';
     const EXIT = '2';
+
     const RESTART_MESSAGE = `게임을 새로 시작하려면 ${CONTINUE}, 종료하려면 ${EXIT}를 입력하세요.`;
+
     let userChoice = null;
     Console.readLine(RESTART_MESSAGE, choice => {
       this.handleRestartInputException(choice);
       userChoice = choice;
       Console.close();
     });
+
     if (userChoice === CONTINUE) {
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   handleRestartInputException(choice) {
     const CONTINUE = '1';
     const EXIT = '2';
+
     const NOT_NUMBER_EXCEPTION_MESSAGE = '숫자가 아닙니다.';
     const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
     const NOT_NUMBER_IN_RANGE_EXCEPTION_MESSAGE = '입력값이 1 또는 2가 아닙니다.';
+
     let errorMessage = null;
     if (isNaN(choice)) {
       errorMessage = NOT_NUMBER_EXCEPTION_MESSAGE;
@@ -174,6 +189,7 @@ class App {
     if (errorMessage === null) {
       return;
     }
+
     throw new Error(errorMessage);
   }
 }
