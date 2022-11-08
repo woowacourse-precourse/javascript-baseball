@@ -28,7 +28,7 @@ const select_computer_num = function selectComputerNumber() {
 }
 const user_input_number= function getUserInputNumber() {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_num) => {
-    Validation.check_input_valid(input_num);
+    Validation.number_input_valid(input_num);
     user_to_array(input_num);
   });
 }
@@ -71,6 +71,7 @@ const game_end= function endGame(){
   MissionUtils.Console.print('3스트라이크\n');
   MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (number) => {
+    Validation.endgame_choice_valid(number);
     if(number==1){
       game_start();
     }
