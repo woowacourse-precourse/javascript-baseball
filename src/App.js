@@ -71,7 +71,6 @@ class App {
     if (strike === 0 && ball === 0) {
       hint = "낫싱";
     }
-
     return MissionUtils.Console.print(hint);
   }
 
