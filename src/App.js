@@ -46,6 +46,7 @@ class App {
 			this.playMainGame();
 			return;
 		}
+		this.printMessage(GAME_MESSAGES.EXIT_GAME_MESSAGE);
 		this.closeConsole();
 	}
 
