@@ -64,12 +64,9 @@ class App {
   }
 
   NumberToArray(number) {
-    // let numArray = [];
-    // while (number >= 1) {
-    //   numArray.unshift(number % 10);
-    //   number = parseInt(number / 10);
-    // }
-    // return numArray;
+    return String(number)
+      .split("")
+      .map((num) => Number(num));
   }
 
   printResult() {
