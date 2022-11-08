@@ -18,7 +18,7 @@ class Referee {
 
   gameResult() {
     const count = this.getBallAndStrikeCount();
-    Console.print(this.getResultMessage(count.ball, count.strike));
+    Console.print(this.getGameResultMessage(count.ball, count.strike));
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
