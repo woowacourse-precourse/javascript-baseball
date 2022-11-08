@@ -15,7 +15,7 @@ module.exports = App;
 
 function playGame(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-    judgeInputNumber(answer);
+    judgeAnswer(answer);
     
     const compareNumberArr = comparingNumbers(answer, computer);
     const result = returnResult(compareNumberArr);
@@ -29,10 +29,10 @@ function playGame(computer) {
   });
 };
 
-function judgeInputNumber(inputNumber) {
-  const numbers = inputNumber.split('').map(item => +item);
+function judgeAnswer(answer) {
+  const numbers = answer.split('').map(item => +item);
 
-  if(/\D/g.test(+inputNumber)) {
+  if(/\D/g.test(+answer)) {
     throw new Error('잘못된 값입니다.');
   }
 
