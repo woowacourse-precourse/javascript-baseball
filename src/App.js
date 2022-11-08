@@ -36,7 +36,7 @@ class App {
     obj[position] += 1;
   }
 
-  checkInputIsCorrect(userInput, currentAnswer) {
+  createUserScore(userInput, currentAnswer) {
     const score = {
       strike: 0,
       ball: 0,
@@ -74,7 +74,7 @@ class App {
   }
 
   checkIsHintAnswer(input, currentAnswer) {
-    const score = this.checkInputIsCorrect(input, currentAnswer);
+    const score = this.createUserScore(input, currentAnswer);
     const hint = this.createHint(score);
     this.printHint(hint);
     if (hint === GAME_MESSAGE.ANSWER) {
@@ -103,17 +103,15 @@ class App {
     MissionUtils.Console.close();
   }
 
+  checkWhetherRetry(answer) {
+    if (answer === RETRY_MESSAGE.RETRY) return this.retryGame();
+    if (answer === RETRY_MESSAGE.FINISH) return this.finishGame();
+  }
+
   getRetryInput() {
     MissionUtils.Console.readLine(GAME_MESSAGE.NO_MESSAGE, (answer) => {
       this.Error.validateRetryInput(answer);
-      switch (answer) {
-        case RETRY_MESSAGE.RETRY:
-          this.retryGame();
-          break;
-        case RETRY_MESSAGE.FINISH:
-          this.finishGame();
-          break;
-      }
+      this.checkWhetherRetry(answer);
     });
   }
 
