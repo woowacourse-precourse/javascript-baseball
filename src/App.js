@@ -1,8 +1,4 @@
-
-
-function random_three_numbers () {
-
-}
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
 
@@ -15,8 +11,13 @@ class App {
     return str;
   }
 
+  random_three_numbers() {
+    
+  }
+
   play() {
-    console.log(start_message());
+
+    MissionUtils.Console.print(this.start_message());
 
 
 
