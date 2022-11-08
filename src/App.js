@@ -79,7 +79,13 @@ class App {
     }
   }
 
-  isValidGameOverInput() {}
+  isValidGameOverInput(userInput) {
+    if (typeof userInput !== "string") return false;
+    if (userInput.length !== 1) return false;
+    if (userInput !== "1" && userInput !== "2") return false;
+
+    return true;
+  }
 
   async play() {
     Console.print("숫자 야구 게임을 시작합니다.");

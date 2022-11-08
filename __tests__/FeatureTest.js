@@ -150,3 +150,25 @@ describe("print game result", () => {
     });
   });
 });
+
+describe("validation of game over input", () => {
+  test("valid game over input", () => {
+    const notDigit = "a";
+    const notOneOrTwo = "3";
+    const twoDigit = "12";
+    const longNonDigit = "asd";
+
+    expect(app.isValidGameOverInput(notDigit)).toBe(false);
+    expect(app.isValidGameOverInput(notOneOrTwo)).toBe(false);
+    expect(app.isValidGameOverInput(twoDigit)).toBe(false);
+    expect(app.isValidGameOverInput(longNonDigit)).toBe(false);
+  });
+
+  test("invalid game over input", () => {
+    const one = "1";
+    const two = "2";
+
+    expect(app.isValidGameOverInput(one)).toBe(true);
+    expect(app.isValidGameOverInput(two)).toBe(true);
+  });
+});
