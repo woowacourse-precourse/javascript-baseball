@@ -17,7 +17,7 @@ const mockRandoms = (numbers) => {
     }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe("숫자 야구 게임", () => {
+describe("Throw 테스트", () => {
 
     test("예외 테스트: 1-9 사이의 수가 아닌 수", () => {
         const randoms = [1, 3, 5];
@@ -48,6 +48,32 @@ describe("숫자 야구 게임", () => {
     test("예외 테스트: 중복 숫자 인풋", () => {
         const randoms = [1, 3, 5];
         const answers = ["113"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
+
+    test("예외 테스트: 길이가 3이 아닌 숫자 인풋(4)", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["1234"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
+
+    test("예외 테스트: 길이가 3이 아닌 숫자 인풋(1)", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["1"];
 
         mockRandoms(randoms);
         mockQuestions(answers);
