@@ -42,10 +42,10 @@ function countResult(input) {
 function getHint(ball,strike) {
     let hintMessage = '';
 
-    (ball&&strike) ? hintMessage = `${ball}볼 ${strike}스트라이크`
-    : ball ? hintMessage = `${ball}볼`
-    : strike ? hintMessage = `${strike}스트라이크`
-    : hintMessage = `낫싱`
+    (ball&&strike) ? hintMessage = HINT_MESSAGES.BALL_AND_STRIKE({ball, strike})
+    : ball ? hintMessage = HINT_MESSAGES.BALL(ball)
+    : strike ? hintMessage = HINT_MESSAGES.STRIKE(strike)
+    : hintMessage = HINT_MESSAGES.NOTHING
     
     MissionUtils.Console.print(hintMessage);
     
