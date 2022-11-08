@@ -39,6 +39,7 @@ const checkAgain = (input) => {
     getRandomNumber();
     runGame();
   } else if (input == 2) {
+    MissionUtils.Console.close();
     return;
   }
 };
