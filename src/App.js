@@ -80,7 +80,7 @@ class App {
   }
 
   getStats(userInput, answerNumbers) {
-    const userNumbers = userInput.split("").map((el) => Number(el));
+    const userNumbers = [...userInput].map((el) => Number(el));
     const stat = {
       ball: 0,
       strike: 0,
