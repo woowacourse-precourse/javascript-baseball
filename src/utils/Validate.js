@@ -2,9 +2,14 @@ const { ERROR, REG_EXP } = require('./Constant');
 
 // 유저가 받은 Input값이 타당한지 체크하는 클래스
 class Validate {
-  static isVaildate(input) {
+  static isInputVaildate(input) {
     if (!this.isRegExp(input) || this.isDuplicate(input)) {
       throw new Error(ERROR.INPUT_VALID);
+    }
+  }
+  static isSelectValidate(input) {
+    if (input !== '1' && input !== '2') {
+      throw new Error(ERROR.SELECT_VALID);
     }
   }
 

@@ -1,5 +1,6 @@
 const { RESTART, MSG } = require('./utils/Constant');
 const { Console } = require('@woowacourse/mission-utils');
+const Validate = require('./utils/Validate');
 const User = require('./User');
 const Computer = require('./Computer');
 const ScoreManager = require('./ScoreManager');
@@ -22,6 +23,7 @@ class Game {
   gameStart() {
     Console.readLine(MSG.INPUT, (input) => {
       this.User.setInputNums(input);
+      console.log(this.Computer.getComNums());
       this.ScoreManager.calScore(
         this.Computer.getComNums(),
         this.User.getInputNums()
@@ -35,7 +37,8 @@ class Game {
   gameResult() {
     Console.print(MSG.END);
     Console.readLine(MSG.SELECT, (input) => {
-      input === RESTART ? this.gameRestart() : this.gameExit();
+      Validate.isSelectValidate(input);
+      input === RESTART ? this.gameRestart() : this.gameExit(input);
     });
   }
 
