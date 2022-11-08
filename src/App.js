@@ -3,17 +3,21 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.baseballNumber;
-    this.initializeNumber();
-    this.isGameOn = true;
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.initializeGame();
     while (this.isGameOn) {
       this.guessBaseBallNumber();
     }
     this.confirmRestart();
+  }
+
+  initializeGame() {
+    this.baseballNumber;
+    this.initializeNumber();
+    this.isGameOn = true;
   }
 
   initializeNumber() {
@@ -131,10 +135,10 @@ class App {
   }
 
   confirmRestart() {
-    const RESTART = 1;
-    const END = 2;
+    const RESTART = '1';
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.')
     MissionUtils.Console.readLine('', (restartOrEnd) => {
+      console.log(restartOrEnd)
       if (restartOrEnd === RESTART) {
         this.play()
       }
