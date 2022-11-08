@@ -65,6 +65,30 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("출력값 확인", () => {
+    const app = new App();
+    const inputArray = [
+      { strike: 0, ball: 0 },
+      { strike: 0, ball: 1 },
+      { strike: 1, ball: 0 },
+      { strike: 1, ball: 1 },
+      { strike: 3, ball: 0 },
+    ];
+    const result = [
+      "낫싱",
+      "1볼",
+      "1스트라이크",
+      "1볼 1스트라이크",
+      "3스트라이크",
+    ];
+
+    inputArray.forEach((input, index) => {
+      expect(app.getResultMessage(input.strike, input.ball)).toBe(
+        result[index]
+      );
+    });
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
