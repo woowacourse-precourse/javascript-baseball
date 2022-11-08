@@ -17,7 +17,22 @@ describe("Ball", () => {
     mockFunction.mockQuestions(STRING_ARRAY);
 
     const BALL_GENERATOR = new ManualBallGenerator();
+    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
+  });
 
-    expect(async () => await BALL_GENERATOR.execute()).toThrow();
+  test("3자리 숫자가 아니면 throw로 예외 발생", async () => {
+    const STRING_ARRAY = ["2464"];
+    mockFunction.mockQuestions(STRING_ARRAY);
+
+    const BALL_GENERATOR = new ManualBallGenerator();
+    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
+  });
+
+  test("0을 포함하면 throw로 예외 발생", async () => {
+    const NUMBER_ARRAY = ["024"];
+    mockFunction.mockQuestions(NUMBER_ARRAY);
+
+    const BALL_GENERATOR = new ManualBallGenerator();
+    await expect(BALL_GENERATOR.execute()).rejects.toThrow();
   });
 });
