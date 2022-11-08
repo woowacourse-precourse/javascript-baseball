@@ -24,8 +24,7 @@ function App() {
 
   this.play = () => {
     MissionUtils.Console.print(START_GAME);
-    const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
-    getUserNumber(computerNumbers, REQUIRE_NUMBER);
+    initlalizeGame();
   };
 }
 
