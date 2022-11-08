@@ -49,30 +49,6 @@ class App {
 		this.closeConsole();
 	}
 
-	getRestartAnswer() {
-		let restartAnswer;
-		MissionUtils.Console.readLine(GAME_MESSAGES.GAME_RESTART_MESSAGE, answer => {
-			if (!this.validateRestartAnswer(answer)) {
-				this.closeConsole();
-				throw new Error(GAME_MESSAGES.RESTART_ERROR_MESSAGE);
-			}
-			restartAnswer = answer;
-		});
-		return restartAnswer;
-	}
-
-	validateRestartAnswer(answer) {
-		return answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO;
-	}
-
-	closeConsole() {
-		MissionUtils.Console.close();
-	}
-
-	printMessage(message) {
-		MissionUtils.Console.print(message);
-	}
-
 	getComputerNumber() {
 		const numSet = new Set();
 		while (numSet.size !== NUMBER_LENGTH) {
@@ -93,13 +69,16 @@ class App {
 		return userAnswer;
 	}
 
-	validateUserNumber(answer) {
-		const userNumberSet = new Set();
-		[...answer].forEach(string => userNumberSet.add(string));
-		if (userNumberSet.size !== NUMBER_LENGTH) {
-			return false;
-		}
-		return !userNumberSet.has(SHOULD_NOT_INCLUDE_NUMBER);
+	getRestartAnswer() {
+		let restartAnswer;
+		MissionUtils.Console.readLine(GAME_MESSAGES.GAME_RESTART_MESSAGE, answer => {
+			if (!this.validateRestartAnswer(answer)) {
+				this.closeConsole();
+				throw new Error(GAME_MESSAGES.RESTART_ERROR_MESSAGE);
+			}
+			restartAnswer = answer;
+		});
+		return restartAnswer;
 	}
 
 	getCompareResult(computerNumber, userNumber) {
@@ -140,6 +119,27 @@ class App {
 			return RESULT_MESSAGES.ONLY_STRIKE(strikeScore);
 		}
 		return RESULT_MESSAGES.BALL_AND_STRIKE({ ballScore, strikeScore });
+	}
+
+	validateUserNumber(answer) {
+		const userNumberSet = new Set();
+		[...answer].forEach(string => userNumberSet.add(string));
+		if (userNumberSet.size !== NUMBER_LENGTH) {
+			return false;
+		}
+		return !userNumberSet.has(SHOULD_NOT_INCLUDE_NUMBER);
+	}
+
+	validateRestartAnswer(answer) {
+		return answer === RESTART_ANSWER.YES || answer === RESTART_ANSWER.NO;
+	}
+
+	closeConsole() {
+		MissionUtils.Console.close();
+	}
+
+	printMessage(message) {
+		MissionUtils.Console.print(message);
 	}
 }
 
