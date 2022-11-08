@@ -53,9 +53,16 @@ describe('기능 테스트', () => {
   });
 
   test('입력 값이 1~9 사이의 숫자인지 확인', () => {
-    const [input1, input2, input3] = ['12a', '190', '179'];  // input3만 true
+    const [input1, input2, input3] = ['12a', '190', '179']; // input3만 true
     const CHECKED_IS_NUMBER = INPUT_CHECK.checkIsNumber(input3);
 
     expect(CHECKED_IS_NUMBER).toBeTruthy();
+  });
+
+  test('중복되는 값을 입력했는지 확인', () => {
+    const [input1, input2] = ['122', '123'];
+
+    expect(INPUT_CHECK.checkNumOverlap(input1)).toBeFalsy();
+    expect(INPUT_CHECK.checkNumOverlap(input2)).toBeTruthy();
   });
 });
