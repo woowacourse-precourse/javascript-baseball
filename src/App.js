@@ -1,6 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const inputValidation = require("./validation/inputValidation");
-const outputValidation = require("./validation/outputValidation");
 
 class App {
   constructor(inputNum, randomNum, overInputNum) {
@@ -14,20 +13,9 @@ class App {
     this.gameRoutine();
   }
 
-  async gameRoutine() {
+  gameRoutine() {
     this.randomNumber();
-    for (let i = 1; i < 5; i++) {
-      // MissionUtils.Console.print(this.randomNum, this.inputNum);
-      if (this.randomNum != this.inputNum) {
-        // MissionUtils.Console.print("실행되냐?");
-        this.userInput();
-      }
-      if (this.randomNum == this.inputNum) {
-        this.overMessage();
-        MissionUtils.Console.print("1");
-        return true;
-      }
-    }
+    this.userInput();
   }
 
   // userInput logic
@@ -41,9 +29,12 @@ class App {
       if (!this.checkInputValidation()) {
         throw new Error("잘못된 값을 입력하셨습니다.");
       }
-      MissionUtils.Console.close();
       this.game();
-      return 0;
+      if (this.randomNum.join("") == this.inputNum) {
+        this.overMessage();
+        this.overChoice();
+        return;
+      } else this.userInput();
     });
   }
 
@@ -74,30 +65,29 @@ class App {
   // 종료 후 logic
   overMessage() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissionUtils.Console.print(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-    );
   }
 
   overChoice() {
-    MissionUtils.Console.readLine((input) => {
-      this.overInputNum = input;
-      if (this.overInputNum == 1) {
-        this.gameRoutine();
-      } else if (this.overInputNum == 2) {
-        throw new Error("게임이 종료되었습니다.");
-      } else {
-        throw new Error("잘못된 값을 입력하셨습니다.");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => {
+        this.overInputNum = input;
+        if (this.overInputNum == 1) {
+          this.gameRoutine();
+        } else if (this.overInputNum == 2) {
+          MissionUtils.Console.close();
+        } else {
+          throw new Error("잘못된 값을 입력하셨습니다.");
+        }
       }
-    });
+    );
   }
 
   // 숫자 야구 게임 logic
   game() {
     let score = "";
-    MissionUtils.Console.print(this.randomNum); //추후 삭제
     if (this.nothing()) {
-      MissionUtils.Console.print("낫싱");
+      score += "낫싱";
     }
     if (!this.nothing() && this.ball() > 0) {
       score += `${this.ball()}볼`;
