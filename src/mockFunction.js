@@ -5,6 +5,7 @@ const mockFunction = {
     Console.readLine = jest.fn();
     answers.reduce((acc, input) => {
       return acc.mockImplementationOnce((question, callback) => {
+        console.log(question);
         callback(input);
       });
     }, Console.readLine);

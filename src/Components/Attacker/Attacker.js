@@ -12,6 +12,7 @@ class Attacker {
 
     do {
       const BALL = await this.ready();
+      defender.reportAbout(BALL);
       isEnd = defender.isGameEnd(BALL);
     } while (!isEnd);
   }
