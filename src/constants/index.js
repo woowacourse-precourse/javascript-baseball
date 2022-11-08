@@ -20,7 +20,6 @@ const ERROR_MESSAGE = {
   INVALID_CHARACTER: `${GAME_RULE.NUMBER_RANGE_START}~${GAME_RULE.NUMBER_RANGE_END} 사이의 숫자를 입력해주세요.`,
   DUPLICATE: "중복된 값이 포함되어 있습니다.",
   INVALID_LENGTH: `${GAME_RULE.LENGTH}자리의 숫자를 입력해주세요.`,
-  INVALID_INPUT: "유효하지 않은 값을 입력하셨습니다. 게임 종료",
 };
 
 module.exports = {
