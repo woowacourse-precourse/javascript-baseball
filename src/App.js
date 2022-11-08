@@ -54,13 +54,11 @@ class App{
 
   getGameResult(){ //스트라이크, 볼 계산 
     for(let i = 0; i < 3; i++){
-      if(this.comNum.includes(this.usrNum[i])){
-        if(this.usrNum[i] == this.comNum[i]){
-          this.strike++;
-        } else {
-          this.ball++;
-        }
-      } else {
+      if(this.comNum.includes(this.usrNum[i]) == true && this.usrNum[i] == this.comNum[i]){
+        this.strike++;
+      } else if(this.comNum.includes(this.usrNum[i]) == true && this.usrNum[i] != this.comNum[i]){
+        this.ball++;
+      } else if(this.comNum.includes(this.usrNum[i]) != true){
         this.nothing++;
       }
     }  
