@@ -111,4 +111,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("숫자 범위 테스트", () => {
+    const randoms = [3, 4, 5];
+    const answers = ["012"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
