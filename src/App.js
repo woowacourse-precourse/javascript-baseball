@@ -1,5 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const REPLAY = "1";
+const QUIT = "2";
+
 function generateRandomDigit() {
   return MissionUtils.Random.pickNumberInRange(1, 9);
 }
@@ -46,6 +49,11 @@ function findBall(gameNumber, guessNumber) {
   return balls;
 }
 
+function throwReplayOrQuitException(userInput) {
+  if (userInput !== REPLAY && userInput !== QUIT)
+    throw `${REPLAY} 또는 ${QUIT}를 입력하세요`;
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -86,4 +94,5 @@ module.exports = {
   isNothing,
   findStrike,
   findBall,
+  throwReplayOrQuitException,
 };

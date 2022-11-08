@@ -5,6 +5,7 @@ const {
   findStrike,
   findBall,
   App,
+  throwReplayOrQuitException,
 } = require("../src/App");
 
 describe("추측 숫자를 문자열로 입력받으면 숫자배열로 변환해주는 기능", () => {
@@ -84,5 +85,11 @@ describe("추측한 숫자와 게임 숫자 대조하고 결과 반환", () => {
   });
   test("case4", () => {
     expect(app.compareGuessAndGameNumber(gameNumber, [1, 2, 3])).toBe("3스트라이크");
+  });
+});
+
+describe("재시작 선택 입력 형식이 잘못됐을 때 예외처리하고 종료", () => {
+  test("case1", () => {
+    expect(() => throwReplayOrQuitException("3")).toThrow("1 또는 2를 입력하세요");
   });
 });
