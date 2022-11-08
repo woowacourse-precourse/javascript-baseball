@@ -148,4 +148,27 @@ describe('기능 목록 테스트', () => {
       }).toThrow('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
     });
   });
+
+  test('게임 종료 후 재시작', () => {
+    const game = new Game();
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['246', '135', '1', '597', '589', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '낫싱',
+      '3스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    game.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
