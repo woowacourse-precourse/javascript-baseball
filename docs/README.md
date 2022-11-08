@@ -30,3 +30,11 @@ Added new method 'play' to $App:
 - add other methods for the game
 
 Breaks $App.play, which was added
+
+feat($App): input method
+
+Added new method 'input' to $App:
+- input from the user
+- change user's input to this._player(array type)
+
+Breaks $App.input, which is added

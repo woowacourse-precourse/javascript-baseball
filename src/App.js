@@ -18,9 +18,28 @@ class App {
     while(true){
         this.setting();
         console.log("숫자 야구 게임을 시작합니다.");
+        
+        this.input();
     }
   }
 
-}
+  input(){
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (PLAYER_NUMBER) => {
+      this._player = Array.from(PLAYER_NUMBER)
+    });
 
+    console.log("[*] COMPUTER ANSWER:" + this._computer);
+    console.log("[*] PLAYER ANSWER: " + this._player);
+
+    if(this._player.length > 3)
+      throw new Error("너무 많은 값을 입력했습니다. 게임을 종료합니다.");
+
+    this._player.forEach((num)=>{
+      if(!(num >= 1 && num <= 9)){
+          throw new Error("잘못된 값을 입력했습니다. 게임을 종료합니다.");
+      }
+    });
+  }
+
+}
 module.exports = App;
