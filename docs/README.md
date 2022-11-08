@@ -29,3 +29,20 @@
   - [x] 게임 성공 문구 출력
   - [x] 재시작 / 종료 여부 문구 출력
   - [x] 입력값에 따라 재시작, 종료 동작. (1, 2 이외의 문자 or 숫자 입력시 Error throw)
+
+## 사용한 메서드 & 함수
+
+### Methods
+
+    - gamePrepare()
+    - gameStart()
+    - gameRestartCheck()
+    - gameExit()
+    - gameInputError()
+
+### Functions
+
+    - countBallAndStrike()
+    - createRandomNumber()
+    - printResultMessage()
+    - validateInputValue()
