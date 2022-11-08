@@ -33,52 +33,10 @@ describe("유저 플로우", () => {
     expect(logSpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 
-  test("일부 숫자 정답시 볼, 스트라이크 갯수 출력", () => {
-    const randoms = [7, 3, 1];
-    const answers = ["623"];
-    const logSpy = getLogSpy();
-    const messages = [
-      "1볼",
-    ];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    const app = new App();
-    app.play();
-
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
-  test("정답 없을시 낫싱 출력", () => {
-    const randoms = [7, 3, 1];
-    const answers = ["256"];
-    const logSpy = getLogSpy();
-    const messages = [
-      "낫싱",
-    ];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    const app = new App();
-    app.play();
-
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
   test("정답시 게임 종료", () => {
     const randoms = [7, 3, 1];
     const answers = ["731"];
     const logSpy = getLogSpy();
-    const messages = [
-      "3스트라이크",
-      "게임 종료"
-    ];
 
     mockRandoms(randoms);
     mockQuestions(answers);
@@ -87,7 +45,7 @@ describe("유저 플로우", () => {
     app.play();
 
     messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
     });
   });
   
