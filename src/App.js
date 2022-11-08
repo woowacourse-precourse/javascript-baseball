@@ -7,10 +7,9 @@
  *    b. 맞추면 다시게임할지 물어본 후 종료 또는 재시작
  */
 const MissionUtils = require("@woowacourse/mission-utils");
-
 class App {
 
-  async play() {
+  play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.")
     this.computer()
   }
@@ -35,8 +34,7 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       if (userInput.length !== 3 || !check.test(userInput) ||
         ((userInput[0] == userInput[1]) || (userInput[1] == userInput[2]) || (userInput[0] == userInput[2]))) {
-        MissionUtils.Console.close();
-        MissionUtils.Console.print("Error Message")
+        throw "Error Message 2";
       } else {
         this.playing(computer, userInput)
       }
@@ -54,6 +52,7 @@ class App {
         ballCount += 1;
       }
     }
+
     this.count(strikeCount, ballCount)
 
     if (strikeCount === 3) {
@@ -80,16 +79,14 @@ class App {
   }
 
   restart() {
-    MissionUtils.Console.readLine('숫자를 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (start) => {
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (start) => {
       if (start === '1') {
         this.play()
       } else if (start === '2') {
         MissionUtils.Console.close()
         MissionUtils.Console.print("게임 종료")
       } else {
-        MissionUtils.Console.close()
-        MissionUtils.Console.print("Error Message")
-
+        throw "Error Message";
       }
     })
   }
