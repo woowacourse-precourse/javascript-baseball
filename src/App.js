@@ -35,6 +35,9 @@ class App {
     if (isNaN(num)) {
       throw "숫자가 아닙니다.";
     }
+    if (inputNumArr.includes(0)) {
+      throw "1~9까지의 수가 아닙니다.";
+    }
     if (inputNumArr.length !== NUMBERLENGTH) {
       throw "3자리의 수가 아닙니다.";
     }
