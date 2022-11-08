@@ -1,3 +1,4 @@
+/* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable operator-linebreak */
@@ -8,16 +9,22 @@ const intersection = (setA, setB) =>
 
 class App {
   constructor() {
-    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      3,
-    );
-    this.computerNumberSet = new Set(this.computerNumberArray);
+    this.computerNumberArray = [];
+    this.computerNumberSet = new Set();
     this.userNumberInput = '';
     this.userNumberArray = [];
     this.userNumberSet = new Set();
     this.resultObject = { ball: 0, strike: 0 };
+  }
+
+  setComputerNumberArray() {
+    this.computerNumberArray = [];
+    while (this.computerNumberArray.length < 3) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!this.computerNumberArray.includes(randomNumber)) {
+        this.computerNumberArray.push(randomNumber);
+      }
+    }
   }
 
   isSameNumber() {
@@ -66,8 +73,10 @@ class App {
     if (this.resultObject.ball !== 0) {
       resultString += `${this.resultObject.ball}볼`;
     }
-    if (this.resultObject.strike !== 0) {
-      resultString += `${this.resultObject.strike}스트라이크`;
+    if (this.resultObject.ball !== 0 && this.resultObject.strike !== 0) {
+      resultString += ` ${this.resultObject.strike}스트라이크`;
+    } else if (this.resultObject.strike !== 0) {
+      resultString += ` ${this.resultObject.strike}스트라이크`;
     }
     if (this.resultObject.ball === 0 && this.resultObject.strike === 0) {
       resultString = '낫싱';
@@ -94,29 +103,27 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.setComputerNumberArray();
+    this.computerNumberSet = new Set(this.computerNumberArray);
     this.gameProcess();
   }
 
   restart() {
-    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      3,
-    );
+    this.setComputerNumberArray();
     this.computerNumberSet = new Set(this.computerNumberArray);
     this.gameProcess();
   }
 
   endingProcess() {
-    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (input) => {
-        if (input === '1') {
-          this.restart();
-        } else if (input === '2') {
+        if (input === '2') {
+          MissionUtils.Console.print('게임 종료');
           MissionUtils.Console.close();
+        } else if (input === '1') {
+          MissionUtils.Console.close();
+          this.restart();
         } else {
           throw Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
         }
@@ -126,6 +133,7 @@ class App {
 }
 
 const app = new App();
+MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 app.play();
 
 module.exports = App;
