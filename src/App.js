@@ -88,6 +88,7 @@ class App {
         return false;
       default:
         this.exceptionEnd();
+        throw "에러발생";
     }
   }
 
