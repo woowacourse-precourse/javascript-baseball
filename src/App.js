@@ -12,6 +12,7 @@ class App {
   }
 
   setting(){
+    this._computer = [];
     while(this._computer.length < 3){
         const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
         if(!this._computer.includes(NUMBER))
@@ -23,16 +24,12 @@ class App {
   }
 
   play() {
-    while(true){
+    while(this._keep_play){
       this.setting();
       MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
       
       while(!this._game_over){
         this.input();
-      }
-
-      if(!this._keep_play){
-        break;
       }
     }
   }
