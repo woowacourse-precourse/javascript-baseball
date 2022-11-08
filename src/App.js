@@ -29,7 +29,7 @@ class App {
   }
 
   getUserInput(cbFn) {
-    Console.readLine('숫자를 입력해주세요 : ', cbFn);
+    Console.readLine('숫자를 입력해주세요 : ', cbFn.bind(this));
   }
 
   terminate() {
@@ -83,9 +83,11 @@ class App {
     const regExp = new RegExp(/^[1-9]{1,3}$/);
 
     try {
-      if (regExp.test(input) && !isDuplicated(input)) {
+      if (regExp.test(input) && !this.isDuplicated(input)) {
         // 입력값이 3자리 숫자이고, 중복숫자가 없다면 다음 힌트제공 기능을 이용한다.
+
         const hintMessage = this.evaluate(input);
+
         if (hintMessage === END_GAME) {
           return this.terminate();
         } else {
