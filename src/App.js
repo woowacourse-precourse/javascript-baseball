@@ -11,6 +11,19 @@ class App {
     return [...computerNumberSet];
   }
 
+  userNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
+      let result = this.resultMessage(this.checkResult(userNumber, this.computerNumber));
+      MissionUtils.Console.print(result);
+
+      if(result !== "3스트라이크") this.userNumber();
+      else {
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        return this.askReplay();
+      }
+    });
+  }
+
   resultMessage(checkCount) {
     if (checkCount[0] == 0 && checkCount[1] == 0) return "낫싱";
     else if (checkCount[0] == 0) return `${checkCount[1]}스트라이크`;
