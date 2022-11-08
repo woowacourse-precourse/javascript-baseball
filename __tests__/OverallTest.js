@@ -76,7 +76,18 @@ describe("숫자 야구 전체 테스트", () => {
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
   });
 
-  test("정답 이후 액션", () => {});
+  test("정답 이후 출력", () => {
+    const controller = new Controller(true);
+    const logSpy = getLogSpy();
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("123");
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("3스트라이크"));
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
+    );
+  });
 });
 
 afterAll(() => {
