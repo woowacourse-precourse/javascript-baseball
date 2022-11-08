@@ -1,16 +1,15 @@
 //module used
 const { Console, Random } = require('@woowacourse/mission-utils');
-
-//constants & error codes
-const TOTAL_COUNT = 3;
-const OPTION_STRING = '12';
-const INPUT_STRING = '123456789';
-const ERR_INPUT_UNDEFINED = '입력값이 없습니다';
-const ERR_3_NUM_NEEDED = '입력은 3글자여야합니다';
-const ERR_NUM_DUPLICATED = '입력에 중복된 숫자가 포함되어 있습니다';
-const ERR_ONLY_NUMBER = '입력값은 1~9의 중복되지 않는 세개의 수로 구성되어야합니다';
-const ERR_OPT_1_CHAR_NEEDED = '한글자만 입력해주세요';
-const ERR_OPT_ANSWER_NEEDED = '1 또는 2로 응답해주세요';
+const { Constants, Errors } = require('./Constants');
+const { TOTAL_COUNT, OPTION_STRING, INPUT_STRING } = Constants;
+const {
+  ERR_INPUT_UNDEFINED,
+  ERR_3_NUM_NEEDED,
+  ERR_NUM_DUPLICATED,
+  ERR_ONLY_NUMBER,
+  ERR_OPT_1_CHAR_NEEDED,
+  ERR_OPT_ANSWER_NEEDED,
+} = Errors;
 
 class App {
   // 정답 문자열 저장하는 변수
@@ -80,12 +79,16 @@ class App {
 
   checkOptionValid(input) {
     //추가 진행 여부 입력시의 사용자의 입력을 검증한다
+    if (!input){
+      throw new Error(ERR_INPUT_UNDEFINED)
+    }
     if (input.length !== 1) {
       throw new Error(ERR_OPT_1_CHAR_NEEDED);
     }
     if (!OPTION_STRING.includes(input)) {
       throw new Error(ERR_OPT_ANSWER_NEEDED);
     }
+    return true;
   }
 
   countIfStrike(player_char, opponent_char) {
@@ -131,3 +134,4 @@ class App {
 }
 
 module.exports = App;
+
