@@ -4,6 +4,7 @@ class App {
   computerNumber;
 
   constructor() {
+    this.setComputerNumber();
     Console.print('숫자 야구 게임을 시작합니다.');
   }
 
@@ -18,7 +19,7 @@ class App {
 
   progress(userGuess) {
     const { strike, ball } = this.calcHit(this.computerNumber, userGuess);
-    Console.print(createResultMessage(strike, ball));
+    Console.print(this.createResultMessage(strike, ball));
 
     if (strike === 3) {
       this.gameOver();
