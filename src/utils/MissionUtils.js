@@ -25,26 +25,6 @@ const setUserInput = (inputMessage, treatUserValueFunction) => {
   });
 };
 
-const createComputerNumber = (start, end) => {
-  const computer = [];
-  while (computer.length < 3) {
-    const number = pickNumberBetweenRange(start, end);
-    const isSelected = isSelectedNumber(number, computer);
-  }
-  return computer;
-};
-
-const pickNumberBetweenRange = (start, end) => {
-  const number = MissionUtils.Random.pickNumberInRange(start, end);
-  return number;
-};
-
-const isSelectedNumber = (number, computer) => {
-  if (!computer.includes(number)) {
-    computer.push(number);
-  }
-};
-
 const getUserNumber = (computer, question) => {
   MissionUtils.Console.readLine(question, (userInput) => {
     validateUserNumber(userInput);
@@ -157,7 +137,6 @@ const retryOrEnd = () => {
 };
 
 module.exports = {
-  createComputerNumber,
   getUserNumber,
   setUserInput,
   validateUserNumber,

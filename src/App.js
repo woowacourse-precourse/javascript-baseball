@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { createComputerNumber } = require("./logic/ComputerNumber");
 const {
   START_NUMBER,
   END_NUMBER,
@@ -10,7 +11,6 @@ const {
   END_VALUE,
 } = require("./utils/Constants");
 const {
-  createComputerNumber,
   getUserNumber,
   setUserInput,
   validateUserNumber,
