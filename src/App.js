@@ -56,6 +56,9 @@ class App {
     if (this.score.strike) {
       this.printMessage(this.score.strike.toString() + STRIKE_STRING);
     }
+    if (this.score.strike === NUMBER_LENGTH) {
+      this.printMessage(CORRECT_MESSAGE);
+    }
   }
 
   checkAnswer(input, answer) {
