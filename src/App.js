@@ -3,10 +3,20 @@ function App() {
   // const checkIsValid = require("./CheckIsValid");
   // const askReplay = require("./AskReplay");
   this.play = () => {
-    const TARGET = +MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join(
-      ""
-    );
-    // console.log(TARGET);
+    // const computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+
+    const computer = [];
+
+    function computerNumbers() {
+      while (computer.length < 3) {
+        let number = MissionUtils.Random.pickNumberInRange(1, 9);
+        if (!computer.includes(number)) {
+          computer.push(number);
+        }
+      }
+    }
+    computerNumbers();
+    console.log(computer);
 
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
@@ -15,7 +25,7 @@ function App() {
     function guess() {
       const MissionUtils = require("@woowacourse/mission-utils");
       MissionUtils.Console.readLine("숫자를 입력해주세요.", (n) => {
-        const isValid = checkIsValid(TARGET, n);
+        const isValid = checkIsValid(computer, n);
         checkInput(n);
         if (!isValid) {
           guess();
@@ -68,15 +78,17 @@ function App() {
       }
     }
 
-    function checkIsValid(input, TARGET) {
-      TARGET = TARGET.toString();
-      input = input.toString();
+    function checkIsValid(input, computer) {
+      input = input.join("");
+      // computer = computer.toString();
+      // input = input.toString();
+      console.log(input, computer);
       let [strike, ball, nothing] = [0, 0, 0];
-
-      for (let i = 0; i < TARGET.length; i++) {
-        if (TARGET[i] === input[i]) {
+      // console.log(typeof input[i], typeof)
+      for (let i = 0; i < computer.length; i++) {
+        if (computer[i] === input[i]) {
           strike++;
-        } else if (TARGET.includes(input[i])) {
+        } else if (computer.includes(input[i])) {
           ball++;
         } else {
           nothing++;
@@ -93,5 +105,9 @@ function App() {
     }
   };
 }
+
+const app = new App();
+
+app.play();
 
 module.exports = App;
