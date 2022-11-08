@@ -19,6 +19,9 @@ const inputNumber = (answerNumber) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
 
     [ball, strike] = checkNumbers(answerNumber, number);
+    let sentence = printBallStrike(ball, strike);
+    MissionUtils.Console.print(`${sentence}`);
+    if (strike !== 3) inputNumber(answerNumber);
   });
 };
 
@@ -38,8 +41,8 @@ const checkNumbers = (answerNumber, inputNumber) => {
   let strike = 0;
   const inputNumberArray = inputNumber.split("").map((el) => +el);
   for (let idx = 0; idx < 3; idx++) {
-    if (answerNumber.includes(inputNumberArray[idx]) {
-      if (answerNumber.indexOf(inputNumArr[idx]) === idx) {
+    if (answerNumber.includes(inputNumberArray[idx])) {
+      if (answerNumber.indexOf(inputNumberArray[idx]) === idx) {
         strike++;
         continue;
       }
@@ -47,6 +50,14 @@ const checkNumbers = (answerNumber, inputNumber) => {
     }
   }
   return [ball, strike];
+};
+
+const printBallStrike = (ballNum, strikeNum) => {
+  let sentence = "";
+  if (ballNum !== 0) sentence += ballNum + "볼 ";
+  if (strikeNum !== 0) sentence += strikeNum + "스트라이크";
+  if (ballNum === 0 && strikeNum === 0) sentence = "낫싱";
+  return sentence.trim();
 };
 
 module.exports = App;
