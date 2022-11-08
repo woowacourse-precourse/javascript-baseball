@@ -9,10 +9,16 @@ const GAME_OVER = '2';
 
 class Referee {
   constructor() {
-    this.computer = new Computer();
-    this.player = new Player();
+    this.computer = null;
+    this.player = null;
 
     MissionUtils.Console.print(MESSAGE.GAME.START);
+  }
+
+  gameInit() {
+    this.computer = new Computer();
+    this.player = new Player();
+    this.gameStart();
   }
 
   gameStart() {

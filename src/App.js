@@ -7,7 +7,7 @@ class App {
 
   play() {
     this.referee = new Referee();
-    this.referee.gameStart();
+    this.referee.gameInit();
   }
 }
 
