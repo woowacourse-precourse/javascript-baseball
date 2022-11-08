@@ -40,4 +40,25 @@ describe("기능 목록 테스트", () => {
     expect(ball).toEqual(1);
     expect(strike).toEqual(1);
   });
+  test("input 유효성 검사", () => {
+    const game = new Game();
+
+    const string = "bbq";
+    const dupNumber = "999";
+    const overRange = "099";
+    const lengthCheck = "4444";
+
+    expect(() => {
+      game.isValidInput(string, RANDOM_NUMBER.RANGE);
+    }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
+    expect(() => {
+      game.isValidInput(dupNumber, RANDOM_NUMBER.RANGE);
+    }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
+    expect(() => {
+      game.isValidInput(overRange, RANDOM_NUMBER.RANGE);
+    }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
+    expect(() => {
+      game.isValidInput(lengthCheck, RANDOM_NUMBER.RANGE);
+    }).toThrow("1부터 9까지 서로 다른 숫자 3개를 입력해주세요");
+  });
 });
