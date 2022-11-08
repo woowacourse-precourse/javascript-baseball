@@ -1,6 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const constants = require('./constants');
 
+const randomNumberComputer = require('./computerNumbers');
+
 class App {
   play() {
     let computer = [];
@@ -8,17 +10,12 @@ class App {
     let ball;
     let nothing;
 
-    // 컴퓨터의 랜덤한 숫자 3개
-    function computerNumbers() {
-      computer = [];
-      while (computer.length < 3) {
-        let number = MissionUtils.Random.pickNumberInRange(1, 9);
-        if (!computer.includes(number)) {
-          //중복되지 않는 숫자만 뽑기
-          computer.push(number);
-        }
-      }
-    }
+    const validationCheck = /[^1-9]/g; //숫자가 1~9인지에 대한 정규식
+
+    MissionUtils.Console.print(constants.START_MESSAGE);
+
+    //컴퓨터 랜덤 숫자 3개 뽑기
+    computer = randomNumberComputer.randomNumber();
 
     function numberInput() {
       strike = 0;
@@ -27,7 +24,8 @@ class App {
 
       MissionUtils.Console.readLine(constants.START, (answer) => {
         //숫자가 3자리수 이상인 경우 예외 처리
-        if (answer.length > 3) throw '입력 값이 잘못됨';
+        if (answer.length !== 3) throw '입력 값은 세 자리 숫자입니다';
+        if (validationCheck.test(answer)) throw '1-9까지 숫자만 입력하세요';
 
         //while문과 if문은 depth가 2 이상이므로 map을 활용
         computer.map((number, i) => {
@@ -59,7 +57,7 @@ class App {
     function gameRestart() {
       MissionUtils.Console.readLine(constants.MESSAGE, (answer) => {
         if (parseInt(answer) === 1) {
-          computerNumbers();
+          computer = randomNumberComputer.randomNumber();
           gamePlay();
           gameRestart();
         } else if (parseInt(answer) === 2) {
@@ -74,7 +72,7 @@ class App {
       });
     }
 
-    computerNumbers();
+    //computer = randomNumberComputer.randomNumber;
     gamePlay();
     gameRestart();
   }
