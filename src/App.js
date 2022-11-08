@@ -25,7 +25,26 @@ class App {
     return this.PlayerInput;
   }
 
-
+  checkPlayerInput(PlayerInput){
+   if((PlayerInput.length)!==3){
+    throw  new Error();
+   }
+   else if(PlayerInput.includes(0)){
+    throw  new Error();
+   }
+   else{
+    for(let i=0;i<3;i++){
+      if(!parseInt(PlayerInput[i])){
+        throw  new Error();
+      }
+    }
+    const arr= new Set(PlayerInput)
+    if(arr.size<PlayerInput.length){
+      throw  new Error();
+    }
+   }
+  return true;
+  }
 
   getStrike(Player, comInput){
     this.strike=0;
@@ -72,6 +91,13 @@ class App {
 
   playGame(){
     MissionUtils.Console.readLine('숫자를 입력하세요 : ',(userInput)=>{
+    try{
+      this.checkPlayerInput(userInput);
+    }
+    catch(e){
+      MissionUtils.Console.close();
+      throw new Error();
+    }
     this.setPlayerInput(userInput);
     this.getStrike(this.PlayerInput, this.comInput);
     this.getBall(this.PlayerInput, this.comInput);
@@ -104,6 +130,7 @@ printResult(){
       MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     }
     this.setComInput();
+    console.log(this.comInput);
     try{
       this.playGame();
     }
@@ -114,5 +141,4 @@ printResult(){
   }
 }
 
-const app = new App
-app.play()
+module.exports=App
