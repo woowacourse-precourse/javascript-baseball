@@ -3,6 +3,11 @@ const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
 
 class App {
+  printResult(result_text) {
+    if (result_text === ``) return '낫싱'
+    return result_text;
+  }
+
   checkCount(result_score) {
     let temp_output_string = ``;
 
@@ -52,6 +57,8 @@ class App {
     try { this.valueExceptionHandling(answer) } catch (e) { this.endGame(e) };
     let result_score = this.checkScore(answer, CORRECT_LIST);
     let result_text = this.checkCount(result_score);
+
+    console.log(this.printResult(result_text));
   }
 
   startGame(CORRECT_LIST) {

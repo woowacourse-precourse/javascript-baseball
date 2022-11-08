@@ -57,4 +57,8 @@ describe("기능 테스트", () => {
             strike: 3
         })).toBe('3스트라이크');
     })
+    test("8. 결과를 출력하는 기능", () => {
+        expect(app.printResult('')).toBe('낫싱');
+        expect(app.printResult('2볼 1스트라이크')).toBe('2볼 1스트라이크');
+    })
 });
