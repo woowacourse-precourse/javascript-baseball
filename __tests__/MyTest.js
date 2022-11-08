@@ -67,10 +67,9 @@ describe("기능 테스트", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("입력 중복 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["122"];
-
     mockRandoms(randoms);
     mockQuestions(answers);
 
@@ -78,5 +77,29 @@ describe("기능 테스트", () => {
       const app = new App();
       app.play();
     }).toThrow("중복이 없는 숫자를 입력해주세요.");
+  });
+
+  test("입력 자릿수 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["12"];
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("세자리 숫자를 입력해주세요.");
+  });
+
+  test("입력 범위 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["103"];
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1부터 9까지의 숫자를 입력해주세요");
   });
 });
