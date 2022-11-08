@@ -10,6 +10,12 @@ describe("UserModel 단위테스트", () => {
     letter = "235";
     expect(userModel.convertStringToArray(letter)).toEqual([2, 3, 5]);
   });
+  test("convertArgsStringToInt 함수 테스트", () => {
+    let letter = "145";
+    expect(userModel.convertArgsStringToInt(letter)).toEqual(145);
+    letter = "235";
+    expect(userModel.convertArgsStringToInt(letter)).toEqual(235);
+  });
 
   test("isNotLengthEqualsThree 함수 테스트", () => {
     let letter = "145";
