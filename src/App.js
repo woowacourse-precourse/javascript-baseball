@@ -1,5 +1,5 @@
 const MissonUtils = require("@woowacourse/mission-utils");
-const checkBallAndStrike = require("./BaseballGame");
+const checkBallAndStrike = require("./CountBallandStrike");
 const checkUserInput = require("./ExceptionUserInput");
 
 class App {
