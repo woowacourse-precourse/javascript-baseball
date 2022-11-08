@@ -7,6 +7,12 @@ const TEXTS = Object.freeze({
   RESELECT_TEXT: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
 });
 
+const RESULT = Object.freeze({
+  STRIKE: "스트라이크",
+  BALL: "볼", 
+  NOTHING: "낫싱"
+});
+
 class Game {
   constructor(){
     this.utilsIo = MISSIONUTILS_IO.Console;
@@ -20,11 +26,6 @@ class Game {
   inputUserNumber(text, callback) {
     this.utilsIo.readLine(text, callback.bind(this));
   }
-
-  startGame(){
-    this.makeComputerNumer();
-    this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
-  }
   
   makeComputerNumer(){
     const computer = [];
@@ -35,6 +36,10 @@ class Game {
     this.compareNumberArray = computer;
   }
 
+  startGame(){
+    this.makeComputerNumer();
+    this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
+  }
 
   onGame(input){
     this.userNumberArray = input.split("").map(Number);
