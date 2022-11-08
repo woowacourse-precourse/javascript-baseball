@@ -43,7 +43,7 @@ class App {
                 const letter_converted_number = number_converted_letter.split('').map((letter) => Number(letter))
                 this.gamePlayerNumber.push(letter_converted_number);
             } else {
-                throw "3개의 중복되지않는 숫자를 입력해주세요. 게임 종료";
+                throw new Error("3개의 중복되지않는 숫자를 입력해주세요. 게임 종료");
             }
         })
     }   
@@ -116,7 +116,7 @@ class App {
                 this.initialize();
                 return;
             } else {
-                throw "1또는 2를 입력해주세요. 게임 종료"
+                throw new Error("1또는 2를 입력해주세요. 게임 종료");
             }
         });
     }
