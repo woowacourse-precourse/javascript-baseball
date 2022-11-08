@@ -46,35 +46,41 @@ class Messages {
   }
 
   get inputError() {
-    return `${ERROR_MESSAGES.DEFAULT}\n`;
+    return ERROR_MESSAGES.DEFAULT;
+  }
+
+  exitByInputError(message) {
+    return `${this.inputError}\n${message}\n${this.exitApp}`;
   }
 
   get emptyError() {
-    return `${this.inputError}${ERROR_MESSAGES.EMPTY}`;
+    return this.exitByInputError(ERROR_MESSAGES.EMPTY);
   }
 
   get whiteSpaceError() {
-    return `${this.inputError}${ERROR_MESSAGES.WHITE_SPACE}`;
+    return this.exitByInputError(ERROR_MESSAGES.WHITE_SPACE);
   }
 
   get rangeError() {
-    return `${this.inputError}각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`;
+    return this.exitByInputError(
+      `각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`
+    );
   }
 
   get typeError() {
-    return `${this.inputError}${ERROR_MESSAGES.TYPE}`;
+    return this.exitByInputError(ERROR_MESSAGES.TYPE);
   }
 
   get digitError() {
-    return `${this.inputError}${this.digit}자리 수가 입력되어야 합니다.`;
+    return this.exitByInputError(`${this.digit}자리 수가 입력되어야 합니다.`);
   }
 
   get duplicateError() {
-    return `${this.inputError}${ERROR_MESSAGES.DUPLICATE}`;
+    return this.exitByInputError(ERROR_MESSAGES.DUPLICATE);
   }
 
   get commandError() {
-    return `${this.inputError}${ERROR_MESSAGES.COMMAND}`;
+    return this.exitByInputError(ERROR_MESSAGES.COMMAND);
   }
 
   get resultNothing() {
