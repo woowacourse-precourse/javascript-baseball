@@ -59,7 +59,10 @@ class App {
   }
 
   countBall() {
-    return intersection(this.userNumberSet, this.computerNumberSet).size;
+    return (
+      intersection(this.userNumberSet, this.computerNumberSet).size -
+      this.resultObject.strike
+    );
   }
 
   countStrike() {
