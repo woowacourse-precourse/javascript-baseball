@@ -31,4 +31,16 @@ describe("유저 입력 숫자 테스트", () => {
     const input = '012';
     expect(() => { exceptionCheck.UserInputCheck(input); }).toThrow();
   });
+
+  test("user가 1과 2이외의 숫자를 입력했을시에 에러 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = 3;
+    expect(() => { exceptionCheck.restartInputCheck(); }).toThrow();
+  });
+
+  test("user가 1과 2이외의 숫자를 입력했을시에 에러 확인", () => {
+    const exceptionCheck = new ExceptionCheck();
+    const input = 'a';
+    expect(() => { exceptionCheck.restartInputCheck(); }).toThrow();
+  });
 });
