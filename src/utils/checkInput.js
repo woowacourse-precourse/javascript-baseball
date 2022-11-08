@@ -14,6 +14,11 @@ function checkDuplicate(input) {
   return new Set(inputArray).size === inputArray.length;
 }
 
+function checkRestartInput(input) {
+  if (input !== RESTART_INPUT.YES && input !== RESTART_INPUT.NO)
+    throw new Error(ERROR.INVALID_RESTART);
+}
+
 function checkGuessInput(input) {
   if (!checkLength(input, 3)) throw new Error(ERROR.INVALID_LENGTH);
   if (!checkRange(input, 1, 9)) throw new Error(ERROR.INVALID_RANGE);
@@ -22,4 +27,5 @@ function checkGuessInput(input) {
 
 module.exports = {
   checkGuessInput,
+  checkRestartInput,
 };
