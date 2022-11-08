@@ -43,8 +43,8 @@ exports.checkStop = function checkStop() {
 
   MissionUtils.Console.print(STOP_CHECKING);
   MissionUtils.Console.readLine("", (answer) => {
+    if (answer != 1 && answer != 2) throw "1, 2 둘 중 선택해야 합니다.";
     state = answer;
-    console.log(state);
   });
 
   return state;
