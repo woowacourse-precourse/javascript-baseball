@@ -6,7 +6,7 @@ class User {
         this.guess = [];
     }
 
-    getUserNumberArray(userInput) {
+    setNumberArray(userInput) {
         const userNumberArray = userInput.split("");
         if (this.checkValidInput(userNumberArray)) {
             this.guess = userInput.split("");

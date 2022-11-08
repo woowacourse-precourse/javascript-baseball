@@ -21,7 +21,7 @@ class App {
 
     judge() {
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
-            this.user.getUserNumberArray(userInput);
+            this.user.setNumberArray(userInput);
             this.judgePitch();
         });
     }
