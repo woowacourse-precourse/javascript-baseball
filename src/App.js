@@ -20,16 +20,14 @@ class App {
     this.computerNumbers = [];
   }
 
-  userNumbersValid(userNumbers) {
-    let removeDuplicateNumbers = new Set(userNumbers);
-
+  validCheckUserNumbers(userNumbers) {
     if (userNumbers.length != PICK_LENGTH) throw "error";   //숫자를 3개 입력하지 않은 경우
-    if (userNumbers.length != removeDuplicateNumbers.size) throw "error";   //중복 숫자 입력이 있는지 검사
 
-    return 1;
+    let filterDuplicateNumberSet = new Set(userNumbers);
+    if (userNumbers.length != filterDuplicateNumberSet.size) throw "error";   //중복 숫자 입력이 있는지 검사
   }
 
-  checkStrike(userNumbers) {
+  countStrikeNum(userNumbers) {
     let strikeCount = 0;
 
     for (let i = 0; i < PICK_LENGTH; i++) 
@@ -38,7 +36,7 @@ class App {
     return strikeCount;
   }
 
-  checkBall(userNumbers) {
+  countBallNum(userNumbers) {
     let ballCount = 0;
 
     for (let i = 0; i < PICK_LENGTH; i++) 
@@ -49,7 +47,7 @@ class App {
     return ballCount;
   }
 
-  printResult(strikeCount, ballCount) {
+  returnGameResult(strikeCount, ballCount) {
     if (strikeCount == PICK_LENGTH)
       return ALL_STRIKE;
 
@@ -82,17 +80,18 @@ class App {
   startGame() {
     let strikeCount = 0;
     let ballCount = 0;
-    let resultComment; 
+    let gameResult; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
-      this.userNumbersValid(userNumbers);
+      this.validCheckUserNumbers(userNumbers);
 
-      strikeCount = this.checkStrike(userNumbers);
-      ballCount = this.checkBall(userNumbers);
+      strikeCount = this.countStrikeNum(userNumbers);
+      ballCount = this.countBallNum(userNumbers);
 
-      resultComment = this.printResult(strikeCount, ballCount)
-      MissionUtils.Console.print(resultComment);
-      if (resultComment == ALL_STRIKE)
+      gameResult = this.returnGameResult(strikeCount, ballCount)
+      MissionUtils.Console.print(gameResult);
+
+      if (gameResult == ALL_STRIKE)
         this.checkGameEnd();
       else 
         this.startGame();
