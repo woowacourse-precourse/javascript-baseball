@@ -93,6 +93,14 @@ class App {
     }
   }
 
+  checkGameOver() {
+    if (this.isFinish()) {
+      this.#readLine.input(Message.confirm(), ([confirmNumber]) => {
+        this.userConfirm(confirmNumber);
+      });
+    }
+  }
+
   play() {
     if (!this.isStart()) {
       this.init();
@@ -100,12 +108,7 @@ class App {
 
     this.#readLine.input(Message.input(), (userInput) => {
       this.userInteraction(userInput, this.#computerInput);
-
-      if (this.isFinish()) {
-        this.#readLine.input(Message.confirm(), ([confirmNumber]) => {
-          this.userConfirm(confirmNumber);
-        });
-      }
+      this.checkGameOver();
     });
   }
 }
