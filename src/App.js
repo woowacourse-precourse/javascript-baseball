@@ -36,6 +36,17 @@ class App {
       }
     }
 
+    function showStatus() {
+      this.compareCount.countStrike = countStrike;
+      this.compareCount.countBall = countBall;
+      if (countStrike === true && countBall === true) {
+        Console.print(`${countBall}볼 ${countStrike}스트라이크` );
+      }
+      if (countStrike === false && countBall === true) {
+        Console.print(`${countBall}볼`);
+      }
+    }
+
   }
 }
 
