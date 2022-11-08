@@ -50,6 +50,21 @@ class App {
       return `${ballStrikeCount[0]}볼 ${ballStrikeCount[1]}스트라이크`;
     }
   }
+
+  retryOrEnd() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (input === "1") {
+          this.play();
+        } else if (!(input === "2")) {
+          throw new Error("잘못된 입력입니다.");
+        } else {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
 }
 
 module.exports = App;
