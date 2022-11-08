@@ -17,7 +17,7 @@ class Game {
     return (
       userInput.length === ANSWER.LENGTH &&
       Boolean(userInput.match(/^[1-9]+$/)) &&
-      new Set(userInput.split('')).size === ANSWER.LENGTH
+      new Set([...userInput]).size === ANSWER.LENGTH
     );
   }
 
