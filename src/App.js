@@ -5,12 +5,8 @@ const Computer = require('./Computer');
 
 class App {
   play() {
-    App.printGameStart();
-    this.initGame();
-  }
-
-  static printGameStart() {
     Console.print(MESSAGES.START_GAME);
+    this.initGame();
   }
 
   initGame() {
@@ -26,14 +22,10 @@ class App {
       if (numberOfStrike !== 3) {
         this.run();
       } else {
-        App.printPlayerWinGame();
+        Console.print(MESSAGES.WIN_GAME);
         this.askRestartOrQuit();
       }
     });
-  }
-
-  static printPlayerWinGame() {
-    Console.print(MESSAGES.WIN_GAME);
   }
 
   askRestartOrQuit() {
@@ -47,14 +39,10 @@ class App {
     if (command === COMMAND.RESTART) {
       this.initGame();
     } else if (command === COMMAND.QUIT) {
-      App.quit();
+      Console.close();
     } else {
       throw new Error(MESSAGES.ERROR);
     }
-  }
-
-  static quit() {
-    Console.close();
   }
 }
 

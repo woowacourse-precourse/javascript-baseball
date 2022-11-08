@@ -1,6 +1,11 @@
 const { Random } = require('@woowacourse/mission-utils');
 
-const { NUMBER_LENGTH, HINTS, MESSAGES } = require('./lib/constants');
+const { NUMBER_LENGTH, MESSAGES } = require('./lib/constants');
+const {
+  makeHintString,
+  parseInputToNumberArray,
+  isValidNumber,
+} = require('./lib/utils');
 
 class Computer {
   #numbers;
@@ -18,9 +23,9 @@ class Computer {
   }
 
   processInput(input) {
-    const playerNumbers = Computer.parseInput(input);
+    const playerNumbers = parseInputToNumberArray(input);
 
-    if (!Computer.isValid(playerNumbers)) {
+    if (!isValidNumber(playerNumbers)) {
       throw new Error(MESSAGES.ERROR);
     }
 
@@ -29,35 +34,8 @@ class Computer {
 
     return {
       numberOfStrike,
-      hintString: Computer.makeHintString({ numberOfBall, numberOfStrike }),
+      hintString: makeHintString({ numberOfBall, numberOfStrike }),
     };
-  }
-
-  static parseInput(input) {
-    const trimmedInput = input.trim();
-    const numbers = [...trimmedInput].map(Number);
-
-    return numbers;
-  }
-
-  static isValid(numbers) {
-    if (numbers.some(number => Number.isNaN(number))) {
-      return false;
-    }
-
-    if (numbers.length !== NUMBER_LENGTH) {
-      return false;
-    }
-
-    if (numbers.includes(0)) {
-      return false;
-    }
-
-    if (new Set(numbers).size !== NUMBER_LENGTH) {
-      return false;
-    }
-
-    return true;
   }
 
   countBall(playerNumbers) {
@@ -70,19 +48,6 @@ class Computer {
     return playerNumbers.filter((number, index) => {
       return this.#numbers[index] === number;
     }).length;
-  }
-
-  static makeHintString({ numberOfBall, numberOfStrike }) {
-    const hint = [];
-
-    if (numberOfBall) {
-      hint.push(HINTS.BALL(numberOfBall));
-    }
-    if (numberOfStrike) {
-      hint.push(HINTS.STRIKE(numberOfStrike));
-    }
-
-    return hint.length ? hint.join(' ') : HINTS.NOTHING;
   }
 }
 
