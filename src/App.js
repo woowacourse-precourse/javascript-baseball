@@ -57,3 +57,13 @@ const getJudge = (targetNumbers, inputNumber, inputNumberIndex, score) => {
   }
   return score;
 };
+const noticeScore = () => {
+  if (score.strike === 3) {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    gameFlag = !gameFlag;
+  } else {
+    Console.print(`${score.ball}볼 ${score.strike}스트라이크`);
+    processGame();
+  }
+};
+let cpu = "";
