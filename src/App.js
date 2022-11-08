@@ -8,7 +8,16 @@ class App {
 
 	process() {}
 
-	getRandomNumber() {}
+	getRandomNumber() {
+		let randomNumber = '';
+
+		for (let digit = 1; digit <= 3; digit++) {
+			const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
+			randomNumber.includes(NUMBER) ? digit-- : (randomNumber += NUMBER);
+		}
+
+		return randomNumber.split('');
+	}
 
 	async inputAnswer() {
 		const answer = await new Promise((resolve, reject) => {
