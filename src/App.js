@@ -28,7 +28,7 @@ class App {
   }
 
   userInputNumber() {
-    return MissonUtils.Console.readLine('숫자를 입력해주세요 : ', userInput => {
+    MissonUtils.Console.readLine('숫자를 입력해주세요 : ', userInput => {
       if (checkUserInput(userInput)) this.baseballGame(userInput.split('').map(Number));
     });
   }
