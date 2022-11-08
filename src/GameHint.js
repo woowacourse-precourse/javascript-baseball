@@ -22,23 +22,21 @@ class GameHint {
 
   countStrike(randomNumbers, playerPickedNumbers) {
     let strike = 0;
-    playerPickedNumbers.forEach((number, index) => {
-      if (number === randomNumbers[index]) {
+    playerPickedNumbers.forEach((playerNumber, index) => {
+      if (playerNumber === randomNumbers[index]) {
         strike += 1;
       }
     });
-
     return strike;
   }
 
   countBall(randomNumbers, playerPickedNumbers) {
     let ball = 0;
-    playerPickedNumbers.forEach((number, index) => {
-      if (number !== randomNumbers[index] && randomNumbers.includes(number)) {
+    playerPickedNumbers.forEach((playerNumber, index) => {
+      if (playerNumber !== randomNumbers[index] && randomNumbers.includes(playerNumber)) {
         ball += 1;
       }
     });
-
     return ball;
   }
 
@@ -50,22 +48,26 @@ class GameHint {
     if (strike === 3) {
       Console.print(`${strike}스트라이크`);
       return true;
-    } else {
-      this.printStrikeBall(strike, ball);
-      return false;
     }
+
+    this.printStrikeBall(strike, ball);
+    return false;
   }
 
   printStrikeBall(strike, ball) {
-    if (strike === 0 && ball === 0) {
-      Console.print('낫싱');
-    } else if (!strike && ball) {
-      Console.print(`${ball}볼`);
-    } else if (strike && !ball) {
-      Console.print(`${strike}스트라이크`);
-    } else {
-      Console.print(`${ball}볼 ${strike}스트라이크`);
+    if (!strike && !ball) {
+      return Console.print('낫싱');
     }
+
+    if (!strike && ball) {
+      return Console.print(`${ball}볼`);
+    }
+
+    if (strike && !ball) {
+      return Console.print(`${strike}스트라이크`);
+    }
+
+    return Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 }
 
