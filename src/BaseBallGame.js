@@ -13,6 +13,13 @@ class BaseBallGame {
     this.#ballCount = 0;
   }
 
+  start() {
+    this.#clearBallAndStrikeCount();
+    this.getNewComputerNumber();
+    Console.print(GAME_STATE_MESSAGE.START);
+    this.#inputNumber();
+  }
+
   getNewComputerNumber() {
     const newComputerNumber = new Computer(new RandomNumber());
     this.computer = newComputerNumber.numbers;
