@@ -35,7 +35,9 @@ class App {
   }
 
   printResult() {
-    if (!this.result.ball) {
+    if (!this.result.ball && !this.result.strike) {
+      Console.print(`낫싱`);
+    } else if (!this.result.ball) {
       Console.print(`${this.result.strike}스트라이크`);
     } else if (!this.result.strike) {
       Console.print(`${this.result.ball}볼`);
