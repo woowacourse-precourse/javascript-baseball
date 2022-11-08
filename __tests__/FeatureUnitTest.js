@@ -47,6 +47,8 @@ describe('기능 단위 목록별 테스트', () => {
 
   test('기능3 유저 숫자야구 입력 테스트 (setUserInput 메소드)', () => {
     const printSpy = getPrintSpy();
+
+    const randoms = [1, 3, 3, 3, 5];
     const answers = ['246', '513', '152', '125', '135'];
     const messages = [
       '낫싱',
@@ -56,10 +58,11 @@ describe('기능 단위 목록별 테스트', () => {
       '3스트라이크',
     ];
 
+    mockRandoms(randoms);
     mockQuestions(answers);
 
     const app = new App();
-    app.setUserInput([1, 3, 5]);
+    app.play();
 
     messages.forEach(output => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));

@@ -21,13 +21,13 @@ class App {
     });
   }
 
-  setUserInput() {
+  #setUserInput() {
     Console.readLine('숫자를 입력해주세요 : ', inputDigit => {
       const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
       const baseBallBoard = this.#computer.calcBaseBallDigit(userDigit);
       this.isThreeStrike(baseBallBoard)
         ? this.getRestartInput()
-        : this.setUserInput();
+        : this.#setUserInput();
     });
   }
 
@@ -68,7 +68,7 @@ class App {
 
   gameStart() {
     this.#computer = new Computer();
-    this.setUserInput();
+    this.#setUserInput();
   }
 
   gameEnd() {
