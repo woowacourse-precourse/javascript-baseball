@@ -53,8 +53,13 @@ const retryOrEnd = () => {
   });
 };
 
+const deInitializationGame = () => {
+  MissionUtils.Console.close();
+};
+
 module.exports = {
   getUserNumber,
   setUserInput,
   printMessage,
+  deInitializationGame,
 };

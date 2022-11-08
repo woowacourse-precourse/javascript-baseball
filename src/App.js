@@ -20,6 +20,7 @@ const {
   getUserNumber,
   setUserInput,
   printMessage,
+  deInitializationGame,
 } = require("./utils/MissionUtils");
 
 function App() {
@@ -71,7 +72,7 @@ function App() {
     if (userInput === RETRY_VALUE) {
       initlalizeGame();
     } else if (userInput === END_VALUE) {
-      MissionUtils.Console.close();
+      deInitializationGame();
     } else {
       throw new Error("게임 종료");
     }
