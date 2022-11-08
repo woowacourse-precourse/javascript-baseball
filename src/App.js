@@ -90,7 +90,7 @@ class App {
       score += "낫싱";
     }
     if (!this.nothing() && this.ball() > 0) {
-      score += `${this.ball()}볼`;
+      score += `${this.ball()}볼 `;
     }
     if (!this.nothing() && this.strike() > 0) {
       score += `${this.strike()}스트라이크`;
