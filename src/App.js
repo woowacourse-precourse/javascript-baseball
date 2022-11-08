@@ -28,6 +28,9 @@ class App {
     });
   }
 
+  gameExit() {
+    Console.close();
+  }
 
   gameInputError() {
     throw new Error(MESSAGE.INPUT_ERROR);
