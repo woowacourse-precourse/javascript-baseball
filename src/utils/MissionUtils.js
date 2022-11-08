@@ -17,6 +17,12 @@ const {
 } = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
+const setUserInput = (inputMessage, treatUserValueFunction) => {
+  MissionUtils.Console.readLine(inputMessage, (userInput) => {
+    treatUserValueFunction(userInput);
+  });
+};
+
 const createComputerNumber = (start, end) => {
   const computer = [];
   while (computer.length < 3) {
