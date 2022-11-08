@@ -1,4 +1,5 @@
 const { ANSWER_IS_MUST_BE_THREE_LENGTH } = require("../constants/constant");
+const MESSAGE = require("../constants/message");
 
 const validateAnswer = (answer) => {
   if (isThreeLength(answer)) throw new Error(MESSAGE.ERROR.ANSWER_LENGTH_MUST_BE_THREE);
