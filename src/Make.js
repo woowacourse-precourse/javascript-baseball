@@ -11,4 +11,19 @@ function makeHint(strike, ball) {
   return res.join(" ");
 }
 
-module.exports = { makeHint };
+function makeBallStrikeCount(input, randomNumbers) {
+  let strike = 0;
+  let ball = 0;
+  const userNums = input.split("").map(Number);
+  userNums.forEach((userNum, index) => {
+    if (userNum === randomNumbers[index]) {
+      strike += 1;
+    } else if (randomNumbers.indexOf(userNum) !== -1) {
+      ball += 1;
+    }
+  });
+
+  return { strike, ball };
+}
+
+module.exports = { makeHint, makeBallStrikeCount };
