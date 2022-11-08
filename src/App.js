@@ -69,6 +69,27 @@ class App {
       }
       return checkGameResult();
     }
+
+    // 정답을 맞췄을 경우 다시 게임을 시작하거나 종료할수 있도록 숫자를 입력받고 확인하는 함수
+    function replayGame() {
+      MissionUtils.Console.readLine(
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+        (replayOrStopNumber) => {
+          if (Number(replayOrStopNumber) === 1) {
+            computer.splice(0, computer.length);
+            createComputerNumber();
+            checkGameResult();
+            replayGame();
+          } else if (Number(replayOrStopNumber) === 2) {
+            MissionUtils.Console.print("게임 종료");
+            return MissionUtils.Console.close();
+            // 유저가 1 또는 2와 다른 것을 입력한다면 다시 입력할 수 있도록 하는 if문
+          }else if (Number(replayOrStopNumber) !== 1 || Number(replayOrStopNumber) !== 2){
+            return replayGame();
+          }
+        }
+      );
+    }
   }
 }
 
