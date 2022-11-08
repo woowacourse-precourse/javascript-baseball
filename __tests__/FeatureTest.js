@@ -1,6 +1,16 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const GET_COMPUTER_NUM = require('../src/Baseball/computerNum');
+const INPUT_CHECK = require('../src/Baseball/inputCheck');
+
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
@@ -33,5 +43,13 @@ describe('기능 테스트', () => {
     const COMPUTER_NUM = GET_COMPUTER_NUM.getComputerRandomNum();
 
     expect(COMPUTER_NUM).toEqual(answers);
+  });
+
+  test('입력 값이 3글자인지 확인', () => {
+    const input = '123';
+
+    const CHECKED_NUM_LENGTH = INPUT_CHECK.checkNumLength(input);
+
+    expect(CHECKED_NUM_LENGTH).toBeTruthy();
   });
 });
