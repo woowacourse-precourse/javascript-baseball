@@ -45,7 +45,7 @@ class Validation {
 
   /**
    * 유저 재시작 여부 input 이 valid 한지 여부를 return 한다.
-   * @param {string[]} restartUserInput [유저 재시작 여부 input]
+   * @param {string} restartUserInput [유저 재시작 여부 input]
    * @return {boolean} [valid 여부]
    */
   getIsUserRestartInputValid(restartUserInput) {
