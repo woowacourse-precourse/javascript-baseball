@@ -5,3 +5,5 @@
 4. getUserGuess:              get user's guess: 3 numbers, without duplicates
 5. compareUserGuessToCompNum: compare user's guess to computer's number
 6. getUserReplayOrFinish:     get user's response: replay or finish
+
+# ApplicationTest.js에서 위 구현 기능 목록 리스트 순서대로 테스트 구현
