@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
- 
+
 class App {
   play() {}
 }
@@ -42,11 +42,12 @@ function matchNumber(userNums, computerNums) {
   if (matchResult.strike === 0 && matchResult.ball === 0) {
     return "낫싱";
   } else {
-    return `${matchResult.ball ? matchResult.ball + "볼 " : ""}${
+    const result = `${matchResult.ball ? matchResult.ball + "볼 " : ""}${
       matchResult.strike ? matchResult.strike + "스트라이크" : ""
     }`;
+    return result.trim();
   }
-} 
+}
 // Test를 위한 exports 코드
 module.exports = {
   matchNumber,
