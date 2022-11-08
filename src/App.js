@@ -58,8 +58,19 @@ class App {
     else this.createComputerNumber();
   }
 
-  play() { }
-
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.createComputerNumber();
+    while (!this.gameover) {
+      this.createUserNumber();
+      this.count();
+      this.printCount();
+      if (this.countStrike === 3) this.isGameover();
+      this.countBall = 0;
+      this.countStrike = 0;
+    }
+    MissionUtils.Console.close();
+  }
 }
 
 module.exports = App;
