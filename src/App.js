@@ -1,19 +1,12 @@
-const GET_ANSWER = require("./")
+const GET_NUMBER = require("./CreateNumber");
 
 class App {
-  play() { }
-}
-
-module.exports = App;
-
-const getAnswer = require("./createAnswer");
-
-class App {
-  play() { }
   play() {
-    const answer = getAnswer();
+    const NUMBERS = GET_NUMBER();
   }
 }
 
 const app = new App();
 app.play();
+
+module.exports = App;
