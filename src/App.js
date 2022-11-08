@@ -26,6 +26,21 @@ class App {
     return { strike, ball };
   }
 
+  printHintMessage(strike, ball) {
+    let message = '';
+
+    if (strike === 0 && ball === 0) {
+      message = '낫싱';
+    }
+
+    if (ball > 0) message += `${ball} 볼`;
+
+    if (strike > 0)
+      message += ball === 0 ? `${strike} 스트라이크` : ` ${strike} 스트라이크`;
+
+    return MissionUtils.Console.print(message);
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.getRandomNumbers();
@@ -34,9 +49,7 @@ class App {
       const player = this.convertToNumberArray(answer);
       const { strike, ball } = this.compareNumbers(computer, player);
 
-      if ((strike === 0, ball === 0)) {
-        MissionUtils.Console.print('낫싱');
-      }
+      this.printHintMessage(strike, ball);
     });
   }
 }
