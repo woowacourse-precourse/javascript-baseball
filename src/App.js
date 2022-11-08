@@ -6,11 +6,13 @@ const setRandomNumber = require("./utils/setRandomNumber");
 class App {
   play() {
     Console.print(GAME_MESSAGE.START);
-    this.gamePrepare();
+    this.generateComputerInput();
   }
 
-  gamePrepare() {
+  generateComputerInput() {
     const randomNumber = setRandomNumber();
+
+    return randomNumber;
   }
 }
 
