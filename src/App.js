@@ -67,7 +67,6 @@ class App {
   }
   
   guessGame(comNums,userNums) {
-    console.log(comNums,userNums,"답지 컴터,유저 정보")
     const [strikeCounter,ballCounter] = this.getStrikeAndBall(comNums,userNums);
     Console.print(this.resultMessage(strikeCounter,ballCounter));
     if(strikeCounter !== 3) {
