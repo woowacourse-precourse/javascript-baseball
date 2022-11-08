@@ -1,4 +1,12 @@
 class Error {
+  check(userInput) {
+    this.checkLength(userInput);
+    this.checkIsNumber(userInput);
+    this.checkDuplicate(userInput);
+    this.checkIncludesZero(userInput);
+    this.checkNull(userInput);
+  }
+
   checkLength(userInput) {
     if (String(userInput).length !== 3) {
       throw '세 자리 숫자가 아닙니다.'
@@ -29,12 +37,8 @@ class Error {
     }
   }
 
-  check(userInput) {
-    this.checkLength(userInput);
-    this.checkIsNumber(userInput);
-    this.checkDuplicate(userInput);
-    this.checkIncludesZero(userInput);
-    this.checkNull(userInput);
+  print() {
+    throw '잘못된 값을 입력하셨습니다.';
   }
 }
 

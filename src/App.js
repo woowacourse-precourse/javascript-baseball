@@ -17,6 +17,7 @@ class App {
 
   getComputerNumbers() {
     const computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(computerNumbers);
     this.getUserNumbers(computerNumbers);
   }
 
@@ -48,19 +49,17 @@ class App {
 
   askRestart() {
     MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    MissionUtils.Console.readLine('',(answer) => {
-      if (answer === '1') {
+    MissionUtils.Console.readLine('',(userInput) => {
+      if (userInput === '1') {
         return this.play();
       }
-      if (answer === '2') {
+      if (userInput === '2') {
         return MissionUtils.Console.close();
       }
 
-      throw new Error('잘못된 수를 입력하셨습니다.');
+      this.error.print();
     });
   }
 }
 
-const app = new App();
-app.play();
 
