@@ -5,6 +5,15 @@ const createAnswerNumList = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
 
+const inputUserNum = () => {
+  let userAnswerNumList;
+  MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    exceptionHandlingInputUserNum(answer);
+    userAnswerNumList = stringToNumberInList(answer);
+
+  });
+}
+
 const exceptionHandlingInputUserNum = (answer) => {
   if (!is3Letters(answer)) {
     throw escape;
