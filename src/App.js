@@ -90,7 +90,7 @@ class App {
 				this.initGame();
 				this.playGame();
 			} else if (playerChoice === CHOICE.EXIT) {
-				Console.print("게임 종료")
+				Console.print(MESSAGES.END_GAME)
 				Console.close();
 			} else {
 				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);

@@ -7,6 +7,7 @@ const MESSAGES = Object.freeze({
     ASK_RESTART: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
     FORMAT_ERROR_CHOICE: '입력값은 반드시 1 또는 2여야 합니다.',
     END: (num) => `${num}개의 숫자를 모두 맞히셨습니다! 게임 종료`,
+    END_GAME: "게임 종료"
   });
   
   const UNITS = Object.freeze({
