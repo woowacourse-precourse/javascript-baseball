@@ -10,6 +10,7 @@ class App {
           const app = new App();
           return app.play();
         } else if (answer == 2) {
+          MissionUtils.Console.close();
           return;
         } else {
           throw "1 또는 2를 입력해주세요";
