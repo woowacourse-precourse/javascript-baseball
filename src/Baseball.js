@@ -21,12 +21,22 @@ class Baseball {
     return [strike, ball];
   }
 
+  printResult(strike, ball) {
+    if (strike && !ball) return Console.print(`${strike}스트라이크`);
+    if (!strike && ball) return Console.print(`${ball}볼`);
+    if (strike && ball) return Console.print(`${ball}볼 ${strike}스트라이크`);
+    return Console.print("낫싱");
+  }
+
   playGame() {
     Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
       exception(userNumber);
       userNumber = new User().getUserArray(userNumber);
 
       const [strike, ball] = this.getScore(this.computerNumberSet, userNumber);
+      this.printResult(strike, ball);
+
+      if (strike !== 3) this.playGame();
     });
   }
 }
