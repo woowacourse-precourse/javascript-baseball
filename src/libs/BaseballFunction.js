@@ -17,22 +17,22 @@ function isValidation(userNumber) {
   const userNumberList = userNumber.split('');
 
   if (userNumberList.filter((element) => element > 0).length !== 3) {
-    return false;
+    return true;
   }
 
   if (userNumberList
     .filter(
       (element, idx) => userNumberList.indexOf(element) === idx,
     ).length !== 3) {
-    return false;
+    return true;
   }
 
-  return true;
+  return false;
 }
 
 function requestNumber(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
-    if (!isValidation(userNumber)) {
+    if (isValidation(userNumber)) {
       throw new Error('올바르지 않은 입력입니다.');
     }
     checkResult(computer, userNumber);
