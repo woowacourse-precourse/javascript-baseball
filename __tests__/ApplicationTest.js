@@ -90,6 +90,46 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시해야 합니다.", () => {
+    // given
+    const randoms = [1, 3, 5];
+    const answers = [
+      "246",
+      "461",
+      "413",
+      "351",
+      "146",
+      "143",
+      "153",
+      "136",
+      "135",
+    ];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "1볼",
+      "2볼",
+      "3볼",
+      "1스트라이크",
+      "1볼 1스트라이크",
+      "2볼 1스트라이크",
+      "2스트라이크",
+      "3스트라이크",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    // when
+    const app = new App();
+    app.play();
+
+    // then
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
