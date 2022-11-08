@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const ComputerNumbers = require("./ComputerNumbers");
 const ValidUserNumbers = require("./ValidUserInput");
-const { GAME_MESSAGE, WHAT, ERROR_MESSAGE } = require("../constants/constants");
+const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
 
 class BaseballGame {
   constructor() {
