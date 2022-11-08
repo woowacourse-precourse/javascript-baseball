@@ -56,7 +56,19 @@ class App {
     }
     return totalStrike;
   }
-  
+
+  countBalls (computerNum,userInputNum) {
+    let totalBall = 0;
+    let com = computerNum;
+    let user = userInputNum;
+    for (let i = 0; i < com.length ; i++) {
+      if(com[i] != user[i] && com.includes(user[i])){ 
+        totalBall += 1;
+      }
+    }
+    return totalBall;
+  }
+
 }
 const app = new App();
 app.play();
