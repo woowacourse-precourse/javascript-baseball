@@ -1,4 +1,9 @@
 const ERROR_MESSAGE = require("./ErrorMessage.js");
+const BALL_COUNT = 3;
+const BUTTON = Object.freeze({
+    재시작: "1",
+    종료: "2", 
+});
 
 class Validtion {
     constructor(){
@@ -28,14 +33,14 @@ class Validtion {
         return this.userNumberArray.includes(NaN)
     }
     isNotValidSize(){
-        return this.userNumberArray.length !== 3
+        return this.userNumberArray.length !== BALL_COUNT
     }
     isOverLap(){
         const userNumberSet = new Set(this.userNumberArray);
-        return userNumberSet.size < 3;
+        return userNumberSet.size < BALL_COUNT;
     }
     isNotButton(){
-        return !(this.buttonNumber === "1" || this.buttonNumber == "2")
+        return !(this.buttonNumber === BUTTON.재시작 || this.buttonNumber == BUTTON.종료)
     }
 }
 
