@@ -34,6 +34,10 @@ class Game {
     }
     this.compareNumberArray = computer;
   }
+
+  onGame(input){
+    this.utilsIo.print(this.showResult(ball, strike));
+  }
 }
 
 class App {
