@@ -12,4 +12,32 @@ describe('App class 테스트', () => {
     expect(app.computer.selectedNumber.length).toBe(3);
     endApp();
   });
+
+  test('resetCountBoard 테스트', () => {
+    app.countBoard.strike = 1;
+    app.countBoard.ball = 2;
+
+    app.resetCountBoard();
+    expect(app.countBoard).toStrictEqual({ strike: 0, ball: 0 });
+  });
+
+  test('setCountBoard', () => {
+    const examples = [
+      [1, 0, [1, 2, 3]],
+      [2, 1, [2, 1, 3]],
+      [3, 1, [1, 2, 4]],
+    ];
+
+    const answers = [
+      { strike: 1, ball: 0 },
+      { strike: 0, ball: 1 },
+      { strike: 0, ball: 0 },
+    ];
+
+    examples.forEach((example, index) => {
+      app.resetCountBoard();
+      app.setCountBoard(example[0], example[1], example[2]);
+      expect(app.countBoard).toStrictEqual(answers[index]);
+    });
+  });
 });
