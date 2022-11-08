@@ -1,42 +1,4 @@
-const App = require("../src/App.js");
-const MissionUtils = require("@woowacourse/mission-utils");
-
 describe("기능 구현 테스트", () => {
-
-  test("숫자 야구 게임 예외사항이 없을때.", () => {
-
-    const detectError = (user) => {
-      user = removeRepeated(user);
-  
-      if (detectStringError(user)) {
-        if (user.length !== 3) {
-          return -1;
-        }
-      }
-  
-      return 1;
-    }
-  
-    const detectStringError = (user) => {
-      user = [...user];
-      user.forEach((element) => {
-        if (!(element >= "1" && element <= "9")) {
-          return -1;
-        }
-      });
-  
-      return 1;
-    }
-  
-    const removeRepeated = (user) =>{
-      const set = new Set([...user]);
-      user = [...set];
-      return user;
-    }
-
-    const result = detectError('123');
-    expect(result).toEqual(1);
-  });
 
   test("숫자 야구 게임 예외사항이 존재할때.", () => {
 
@@ -103,11 +65,11 @@ describe("기능 구현 테스트", () => {
     // result = getStrikeAndBall('123', '312');
     // expect(result).toEqual([0,3]);
     
-    // result = getStrikeAndBall('123', '124');
-    // expect(result).toEqual([2,0]);
+    result = getStrikeAndBall('123', '124');
+    expect(result).toEqual([2,0]);
 
-    result = getStrikeAndBall('123', '819');
-    expect(result).toEqual([0,1]);
+    // result = getStrikeAndBall('123', '819');
+    // expect(result).toEqual([0,1]);
 
   });
 
