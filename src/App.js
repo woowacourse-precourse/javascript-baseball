@@ -7,6 +7,11 @@ class App {
     this.RANGE_START_NUMBER = 1;
     this.RANGE_END_NUMBER = 9;
     this.NUMBER_OF_DIGITS = 3;
+
+    this.answer = null;
+    this.inputNumber = null;
+    this.numberOfStrike = null;
+    this.numberOfBall = null;
   }
 
   play() {
@@ -18,25 +23,15 @@ class App {
   }
 
   startGame() {
-    const answer = this.getAnswerNumber();
+    this.getAnswerNumber();
     this.printGameStartMessage();
 
     let gameContinue = true;
-    let inputNumber;
 
     while (gameContinue) {
-      inputNumber = this.getInputNumber();
+      this.startTurn();
 
-      const numberOfStrike = this.getNumberOfStrike(answer, inputNumber);
-      const numberOfBall = this.getNumberOfBall(
-        answer,
-        inputNumber,
-        numberOfStrike
-      );
-
-      this.printGameResultMessage(numberOfStrike, numberOfBall);
-
-      gameContinue = !this.isInputNumberCorrect(numberOfStrike);
+      gameContinue = !this.isInputNumberCorrect(this.numberOfStrike);
 
       if (!gameContinue) {
         this.printGameEndMessage();
@@ -60,7 +55,16 @@ class App {
 
     answer = this.joinNumberToString(answer);
 
-    return answer;
+    this.answer = answer;
+  }
+
+  startTurn() {
+    this.setInputNumber();
+
+    this.setNumberOfStrike();
+    this.setNumberOfBall();
+
+    this.printGameResultMessage();
   }
 
   joinNumberToString(numberArr) {
@@ -75,20 +79,17 @@ class App {
     Console.print(GAME_START_MESSAGE);
   }
 
-  getInputNumber() {
+  setInputNumber() {
     const INPUT_NUMBER_MESSAGE = '숫자를 입력해주세요 : ';
 
-    let inputNumber;
     Console.readLine(INPUT_NUMBER_MESSAGE, (input) => {
       this.handleGameException(input);
-      inputNumber = input;
+      this.inputNumber = input;
       Console.close();
     });
-
-    return inputNumber;
   }
 
-  handleGameException(inputNumber) {
+  handleGameException(input) {
     const GAME_EXCEPTION = {
       NOT_A_NUMBER: '입력값이 숫자가 아닙니다.',
       NOT_INTEGER: '입력값이 정수가 아닙니다.',
@@ -99,37 +100,37 @@ class App {
     Object.freeze(GAME_EXCEPTION);
 
     switch (true) {
-      case isNaN(inputNumber):
+      case isNaN(input):
         throw new Error(GAME_EXCEPTION.NOT_A_NUMBER);
-      case this.isNotInteger(inputNumber):
+      case this.isNotInteger(input):
         throw new Error(GAME_EXCEPTION.NOT_INTEGER);
-      case this.isIncorrectNumberOfDigits(inputNumber):
+      case this.isIncorrectNumberOfDigits(input):
         throw new Error(GAME_EXCEPTION.NUMBER_OF_DIGITS);
-      case this.hasSameNumber(inputNumber):
+      case this.hasSameNumber(input):
         throw new Error(GAME_EXCEPTION.SAME_NUMBER);
     }
   }
 
-  isNotInteger(inputNumber) {
-    if (Number.isInteger(Number(inputNumber))) {
+  isNotInteger(input) {
+    if (Number.isInteger(Number(input))) {
       return false;
     }
 
     return true;
   }
 
-  isIncorrectNumberOfDigits(inputNumber) {
-    if (inputNumber.length === this.NUMBER_OF_DIGITS) {
+  isIncorrectNumberOfDigits(input) {
+    if (input.length === this.NUMBER_OF_DIGITS) {
       return false;
     }
 
     return true;
   }
 
-  hasSameNumber(inputNumber) {
+  hasSameNumber(input) {
     let numberCount = {};
 
-    for (const digit of inputNumber) {
+    for (const digit of input) {
       if (!numberCount[digit]) {
         numberCount[digit] = 0;
       }
@@ -145,47 +146,47 @@ class App {
     return false;
   }
 
-  isInputNumberCorrect(numberOfStrike) {
-    if (numberOfStrike === this.NUMBER_OF_DIGITS) {
+  isInputNumberCorrect() {
+    if (this.numberOfStrike === this.NUMBER_OF_DIGITS) {
       return true;
     }
 
     return false;
   }
 
-  getNumberOfStrike(answer, inputNumber) {
+  setNumberOfStrike() {
     let numberOfStrike = 0;
     for (let i = 0; i < this.NUMBER_OF_DIGITS; i++) {
-      if (answer[i] === inputNumber[i]) {
+      if (this.answer[i] === this.inputNumber[i]) {
         numberOfStrike += 1;
       }
     }
 
-    return numberOfStrike;
+    this.numberOfStrike = numberOfStrike;
   }
 
-  getNumberOfBall(answer, inputNumber, numberOfStrike) {
+  setNumberOfBall() {
     let answerDictinary = {};
-    for (const value of answer) {
+    for (const value of this.answer) {
       answerDictinary[value] = true;
     }
 
     let numberOfBall = 0;
-    for (const value of inputNumber) {
+    for (const value of this.inputNumber) {
       if (answerDictinary[value]) {
         numberOfBall += 1;
       }
     }
 
-    numberOfBall -= numberOfStrike;
+    numberOfBall -= this.numberOfStrike;
 
-    return numberOfBall;
+    this.numberOfBall = numberOfBall;
   }
 
-  printGameResultMessage(numberOfStrike, numberOfBall) {
+  printGameResultMessage() {
     const MESSAGE = {
-      BALL: `${numberOfBall}볼`,
-      STRIKE: `${numberOfStrike}스트라이크`,
+      BALL: `${this.numberOfBall}볼`,
+      STRIKE: `${this.numberOfStrike}스트라이크`,
       NOTHING: '낫싱',
     };
 
@@ -194,16 +195,16 @@ class App {
     const MESSAGE_BOTH = `${MESSAGE.BALL} ${MESSAGE.STRIKE}`;
 
     switch (true) {
-      case numberOfBall > 0 && numberOfStrike > 0:
+      case this.numberOfBall > 0 && this.numberOfStrike > 0:
         Console.print(MESSAGE_BOTH);
         break;
-      case numberOfBall > 0:
+      case this.numberOfBall > 0:
         Console.print(MESSAGE.BALL);
         break;
-      case numberOfStrike > 0:
+      case this.numberOfStrike > 0:
         Console.print(MESSAGE.STRIKE);
         break;
-      case !numberOfBall && !numberOfStrike:
+      case !this.numberOfBall && !this.numberOfStrike:
         Console.print(MESSAGE.NOTHING);
     }
   }
@@ -234,7 +235,7 @@ class App {
     return false;
   }
 
-  handleRestartException(inputRestart, RESTART, EXIT) {
+  handleRestartException(input, RESTART, EXIT) {
     const RESTART_EXCEPTION = {
       NOT_A_NUMBER: '입력값이 숫자가 아닙니다.',
       NOT_CORRECT_NUMBER: `입력값이 ${RESTART} 또는 ${EXIT}이(가) 아닙니다.`,
@@ -243,9 +244,9 @@ class App {
     Object.freeze(RESTART_EXCEPTION);
 
     switch (true) {
-      case isNaN(inputRestart):
+      case isNaN(input):
         throw new Error(RESTART_EXCEPTION.NOT_A_NUMBER);
-      case inputRestart !== RESTART && inputRestart !== EXIT:
+      case input !== RESTART && input !== EXIT:
         throw new Error(RESTART_EXCEPTION.NOT_CORRECT_NUMBER);
     }
   }
