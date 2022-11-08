@@ -20,17 +20,17 @@ class App {
   inputValidation(input) {
     let testInput = input.split('').map((num)=> Number(num));
     if(testInput.length !== 3)  {
-      throw new("입력은 세자리 숫자로 해주세요.");
+      throw new Error("입력은 세자리 숫자로 해주세요.");
     }
     if(testInput.some((num)=> isNaN(num))) {
-      throw new("숫자만 입력 가능합니다.");
+      throw new Error("숫자만 입력 가능합니다.");
     }
     console.log("트루안나옴?",this.checkRangeOver(testInput));
     if(this.checkRangeOver(testInput)) {
-      throw new("1~9사이의 숫자를 입력해주세요.")
+      throw new Error("1~9사이의 숫자를 입력해주세요.")
     }
     if(this.checkDupulicate(testInput)) {
-      throw new("서로 다른숫자로 입력해주세요.")
+      throw new Error("서로 다른숫자로 입력해주세요.")
     }
     return true;
   }
