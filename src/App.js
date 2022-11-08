@@ -74,19 +74,13 @@ function winAndRestart() {
 
 function game(ansNum) {
   Console.readLine('숫자를 입력해주세요 : ', input => {
-    try {
-      throwError(input);
-      let umpire = new Umpire(input, ansNum);
-      let decision = umpire.decision;
-      let strike = umpire.strike;
-      printMessage(decision);
-      if (strike === 3) winAndRestart();
-      else game(ansNum);
-    }
-    catch (err) {
-      printMessage(err);
-      quit();
-    }
+    throwError(input);
+    let umpire = new Umpire(input, ansNum);
+    let decision = umpire.decision;
+    let strike = umpire.strike;
+    printMessage(decision);
+    if (strike === 3) winAndRestart();
+    else game(ansNum);
   })
 }
 
