@@ -1,4 +1,4 @@
-class Input {
+class Condition {
   static isValidInput(input) {
     if (!this.isLengthThree(input))
       throw new Error("3자리 숫자를 입력해주세요.");
@@ -42,4 +42,4 @@ class Input {
   }
 }
 
-module.exports = Input;
+module.exports = Condition;

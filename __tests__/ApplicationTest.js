@@ -1,5 +1,5 @@
 const App = require("../src/App");
-const Input = require("../src/Input");
+const Condition = require("../src/Condition");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -109,32 +109,32 @@ describe("사용자 입력에 대한 예외 처리 테스트", () => {
   test("적절한 입력에 대해서는 true를 리턴한다.", () => {
     const input = ["123", "234", "345"];
     input.forEach((num) => {
-      expect(Input.isValidInput(num)).toBe(true);
+      expect(Condition.isValidInput(num)).toBe(true);
     });
   });
 
   test("3자리 숫자를 입력하지 않았을 때는 예외를 발생시킨다.", () => {
     const input = ["12", "23", "34567"];
     input.forEach((num) => {
-      expect(() => Input.isValidInput(num)).toThrow(Error);
+      expect(() => Condition.isValidInput(num)).toThrow(Error);
     });
   });
   test("숫자가 아닌 값을 입력했을 때는 예외를 발생시킨다.", () => {
     const input = ["12ba", "23a", "345ㅁ"];
     input.forEach((num) => {
-      expect(() => Input.isValidInput(num)).toThrow(Error);
+      expect(() => Condition.isValidInput(num)).toThrow(Error);
     });
   });
   test("1 ~ 9 사이의 숫자가 아닌 값을 입력했을 때는 예외를 발생시킨다.", () => {
     const input = ["103", "203", "305"];
     input.forEach((num) => {
-      expect(() => Input.isValidInput(num)).toThrow(Error);
+      expect(() => Condition.isValidInput(num)).toThrow(Error);
     });
   });
   test("중복되는 숫자를 입력했을 때는 예외를 발생시킨다.", () => {
     const input = ["122", "223", "355"];
     input.forEach((num) => {
-      expect(() => Input.isValidInput(num)).toThrow(Error);
+      expect(() => Condition.isValidInput(num)).toThrow(Error);
     });
   });
 });

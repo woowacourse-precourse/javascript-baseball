@@ -1,6 +1,6 @@
 const { Random } = require("@woowacourse/mission-utils");
 const Console = require("./Console");
-const Input = require("./Input");
+const Condition = require("./Condition");
 
 class App {
   constructor() {
@@ -15,7 +15,7 @@ class App {
     }
 
     Console.readLine(Console.INPUT, (input) => {
-      if (Input.isValidInput(input)) {
+      if (Condition.isValidInput(input)) {
         this.input = input;
         Console.print(this.makeResult(input));
       }
@@ -55,7 +55,7 @@ class App {
 
   makeNotice() {
     Console.readLine(Console.END_NOTICE, (input) => {
-      Input.checkOneOrTwo(input);
+      Condition.checkOneOrTwo(input);
       if (input === "1") {
         this.makeAnswer();
         this.play();
