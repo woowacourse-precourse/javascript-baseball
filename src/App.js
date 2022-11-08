@@ -12,6 +12,7 @@ const generateAnswer = function generateRandomThreeNumbers() {
       answer.push(number);
     }
   }
+  return answer;
 };
 
 const promptInput = function promptUserGuessInput(answer) {
@@ -38,16 +39,15 @@ const validateInput = function validateInput(input) {
   const inputArray = input.split("");
   const inputSet = new Set(inputArray);
   if (inputArray.length !== inputSet.size) {
-    console.log("입력이 잘못되었습니다.");
     throw new Error("입력이 잘못되었습니다.");
   }
 };
 
 const calculateResult = function calculateResult(input, answer) {
-  const inputNumbers = input.split("").map((number) => Number(number));
-  const answerNumbers = answer.split("").map((number) => Number(number));
-  const ball = countBall(inputNumbers, answerNumbers);
-  const strike = countStrike(inputNumbers, answerNumbers);
+  const inputArray = input.split("").map(Number);
+  const answerArray = answer;
+  const ball = countBall(inputArray, answerArray);
+  const strike = countStrike(inputArray, answerArray);
 
   if (ball === 0 && strike === 0) {
     return "낫싱";
@@ -61,40 +61,54 @@ const calculateResult = function calculateResult(input, answer) {
   return `${strike} 스트라이크 ${ball} 볼`;
 };
 
-const countBall = function countBall(inputNumbers, answerNumbers) {
+const countBall = function countBall(userInput, answer) {
   let ball = 0;
-  inputNumbers.forEach((inputNumber, index) => {
-    if (answerNumbers.includes(inputNumber) && inputNumber !== answerNumbers[index]) {
+  userInput.forEach((userInput, index) => {
+    if (answer.includes(userInput) && userInput !== answer[index]) {
       ball++;
     }
   });
   return ball;
 };
 
-const countStrike = function countStrike(inputNumbers, answerNumbers) {
+const countStrike = function countStrike(userInput, answer) {
   let strike = 0;
-  inputNumbers.forEach((inputNumber, index) => {
-    if (inputNumber === answerNumbers[index]) {
+  userInput.forEach((userInput, index) => {
+    if (userInput === answer[index]) {
       strike++;
     }
   });
   return strike;
 };
 
-const askPlayNewGame = function askPlayNewGame() {
-  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
-    if (input === "1") {
-      playGame();
+const askPlayNewGame = function askUserPlayNewGame() {
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (input) => {
+      if (input === "1") {
+        playGame();
+      }
+      if (input === "2") {
+        MissionUtils.Console.print("게임을 종료합니다.");
+        MissionUtils.Console.close();
+      }
     }
-    if (input === "2") {
-      MissionUtils.Console.print("게임을 종료합니다.");
-      MissionUtils.Console.close();
-    }
-  });
+  );
+};
 
+const playGame = function playGame() {
+  const answer = generateAnswer();
+  promptInput(answer);
+};
 
 class App {
-  play() {}
+  play() {
+    startMessage();
+    playGame();
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
