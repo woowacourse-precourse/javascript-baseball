@@ -37,6 +37,7 @@ class App {
   comparePlayerNumberWithComputerNumber() {
     this.roundResult['ball'] = this.countBall();
     this.roundResult['strike'] = this.countStrike();
+    this.printRoundResult();
   }
 
   countBall() {
@@ -60,6 +61,19 @@ class App {
       }
     }
     return strike;
+  }
+
+  printRoundResult() {
+    let ball = this.roundResult['ball'];
+    let strike = this.roundResult['strike'];
+
+    if (strike == NUMBER_LENGTH) {
+      Console.print(`${NUMBER_LENGTH}스트라이크\n${NUMBER_LENGTH}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+    } else if (strike > 0 || ball > 0) {
+      Console.print((ball == 0 ? '' : ball + '볼 ') + (strike == 0 ? '' : strike + '스트라이크'));
+    } else {
+      Console.print("낫싱");
+    }
   }
 
   roundStart() {
