@@ -84,24 +84,24 @@ const countStrikeAndBall = (computers, user) => {
   let countBall = 0;
 
   users.forEach((number, index) => {
-    countStrike = isStrike(number, index, computers, countStrike);
-    countBall = isBall(number, index, computers, countBall);
+    countStrike += isStrike(number, index, computers);
+    countBall += isBall(number, index, computers);
   });
   console.log(countStrike, countBall);
   return { countStrike: countStrike, countBall: countBall };
 };
 
-const isStrike = (number, index, computers, countStrike) => {
+const isStrike = (number, index, computers) => {
   if (number === computers[index]) {
-    countStrike += 1;
+    return 1;
   }
-  return countStrike;
+  return 0;
 };
-const isBall = (number, index, computers, countBall) => {
+const isBall = (number, index, computers) => {
   if (number !== computers[index] && computers.includes(number)) {
-    countBall += 1;
+    return 1;
   }
-  return countBall;
+  return 0;
 };
 
 const printMessage = (message) => {
