@@ -103,7 +103,7 @@ class BaseballGame {
         MissionUtils.Console.close();
       } else if (answer == REPLAY) {
         this.replay();
-      } else throw new Error();
+      }
     });
   }
 }
