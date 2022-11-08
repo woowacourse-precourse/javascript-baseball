@@ -1,4 +1,5 @@
 const App = require('../src/App');
+const Computer = require('../src/Computer');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = answers => {
@@ -34,10 +35,14 @@ describe('기능 단위 목록별 테스트', () => {
 
   test('기능2 랜덤 숫자 생성 테스트 (setRandomDigit 메소드)', () => {
     const randoms = [1, 5, 5, 5, 8, 9];
+
     mockRandoms(randoms);
 
-    const app = new App();
-    expect(app.setRandomDigit()).toEqual([1, 5, 8]);
+    const computer = new Computer();
+    expect(computer.calcBaseBallDigit([1, 5, 8])).toEqual({
+      strike: 3,
+      ball: 0,
+    });
   });
 
   test('기능3 유저 숫자야구 입력 테스트 (setUserInput 메소드)', () => {
