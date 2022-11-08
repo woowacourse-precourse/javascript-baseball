@@ -39,6 +39,18 @@ class App {
     });
   }
 
+  printBaseballResult(result) {
+    if (result[0] === 0 && result[1] === 0) {
+      return "낫싱";
+    } else if (result[0] === 0) {
+      return result[1] + "스트라이크";
+    } else if (result[1] === 0) {
+      return result[0] + "볼";
+    } else {
+      return result[0] + "볼 " + result[1] + "스트라이크";
+    }
+  }
+
   restartOrExit() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
