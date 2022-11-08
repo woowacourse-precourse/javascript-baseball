@@ -22,7 +22,16 @@ describe("함수 기능 테스트", () => {
         }
         expect(result).toEqual(0);
     });
-    
+
+    test("selectComputerNumber() 함수로 컴퓨터 숫자 1에서 9까지의 숫자 반환", () => {
+        const app =new App();
+        const result = app.selectComputerNumber();
+        if(result=="0"){
+            result=0;
+        }
+        expect(result).toEqual(0);
+    });
+
     test("changeUserNumberToArray() 배열 타입 반환", () => {
         const app =new App();
         let result = app.changeUserNumberToArray("123");
