@@ -55,78 +55,82 @@ const MissionUtils = require("@woowacourse/mission-utils");
 // }
 
 class App {
+  constructor() {
+    this.randNum = [];
+    this.inputNum = [];
+    this.isNothing = true;
+    this.ball = 0;
+    this.strike = 0;
+  }
+
   play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+
     // 1. 컴퓨터가 정답(1-9 사이의 서로 다른 수로 이루어진 3자리 숫자)을 생성한다.
-    const RAND_NUM = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    this.randNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    // console.log(this.randNum, '랜덤 숫자');
+
+    this.playGame();
+  }
+
+  playGame() {
+    this.init();
     //2. 사용자가 숫자를 입력한다. 
-    const INPUT_NUM = this.inputUserAnswer();
-  }
-
-  inputUserAnswer() {
-    let input = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      for (let a of answer) {
-        input.push(parseInt(a));
-      }
-    })
-    return input
+      const ANSWER = Array.from(answer);
+      ANSWER.map((a, idx) => {
+        this.inputNum[idx] = parseInt(a);
+      })
+
+      //2. randNum과 비교하여 결과를 확인한다.
+      this.checkResult();
+    });
   }
 
-  checkNothing() {
-    let isNothing = true;
-
-    INPUT_NUM.map((num, idx) => {
-      if (RAND_NUM.includes(num)) {
-        isNothing = false;
-      }
-    })
-
-    return isNothing
+  init() {
+    // this.randNum = [];
+    // this.inputNum = [0, 0, 0];
+    this.isNothing = true;
+    this.ball = 0;
+    this.strike = 0;
   }
 
-  checkBall() {
-    let ball = 0;
-
-    INPUT_NUM.map((num, idx) => {
-      if (RAND_NUM.includes(num) && num !== RAND_NUM[idx]) {
-        ball++;
-      }
-    })
-
-    return ball
-  }
-
-  checkStrike() {
-    let strike = 0;
-
-    INPUT_NUM.map((num, idx) => {
-      if (num === RAND_NUM[idx]) {
-        strike++;
-      }
-    })
-
-    return strike
+  checkResult() {
+    // console.log(this.inputNum, this.randNum, '입력한 숫자, 랜덤 숫자');
+    if (this.inputNum !== []) {
+      this.inputNum.map((num, idx) => {
+        if (this.randNum.includes(num)) {
+          this.isNothing = false
+          if (num !== this.randNum[idx]) {
+            this.ball++;
+          } else {
+            this.strike++;
+          }
+        }
+      })
+      this.printMessages();
+    }
   }
 
   printMessages() {
-    let strike = this.checkStrike;
-    let ball = this.checkBall;
-    if (this.checkNothing) {
+    if (this.isNothing) {
       MissionUtils.Console.print('낫싱');
-    } else if (strike === 3) {
-      MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n')
-      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (opinion) => {
-        if (opinion === 1) {
-          inputUserAnswer();
-        } else {
-          MissionUtils.Console.close()
-        }
-      })
+      this.playGame();
     } else {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-      inputUserAnswer();
+      if (this.strike === 3) {
+        MissionUtils.Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n')
+        MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (opinion) => {
+          if (opinion === 1) {
+            this.play();
+          } else {
+            MissionUtils.Console.close()
+          }
+        })
+      } else {
+        MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+        this.playGame();
+      }
     }
-
   }
 }
 
