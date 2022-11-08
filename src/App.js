@@ -54,6 +54,7 @@ class App {
 
       if (strikeCount === 3) {
         this.success();
+        this.end();
         return;
       }
 
@@ -103,6 +104,32 @@ class App {
 
   success() {
     Console.print(MESSAGE.CORRECT);
+  }
+
+  end() {
+    Console.readLine(`${MESSAGE.END}\n`, (mode) => {
+      if (Number(mode) === MODE_NUMBER.RESTART) {
+        this.restart();
+        return;
+      }
+
+      if (Number(mode) === MODE_NUMBER.END) {
+        this.exit();
+        return;
+      }
+
+      throw new Error(MESSAGE.ERROR);
+    });
+  }
+
+  restart() {
+    this.answer = [];
+    this.initComputer();
+    this.guess();
+  }
+
+  exit() {
+    Console.close();
   }
 
   isError(userInput) {
