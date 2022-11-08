@@ -3,7 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const {
     generateRandomBallNumber,
     countBallStrike,
-    printBallStrike
+    makeBallStrikeText
 } = require("./ball");
 const { isValidBallNumber } = require("./validation");
 
@@ -32,7 +32,7 @@ const ballManager = (computerNumber, userNumber) => {
     const computerNumbersArray = computerNumber.split('');
     const userNumbersArray = userNumber.split('');
     const { ball, strike } = countBallStrike(computerNumbersArray, userNumbersArray);
-    printBallStrike(ball, strike);
+    MissionUtils.Console.print(makeBallStrikeText(ball, strike));
     playGame(computerNumber);
 }
 

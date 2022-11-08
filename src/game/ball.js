@@ -35,7 +35,7 @@ const countAfterCompareNumbers = (count, computerNumbersArray, computerIndex, us
     }
 }
 
-const printBallStrike = (ball, strike) => {
+const makeBallStrikeText = (ball, strike) => {
     let textArray = [];
     if (ball !== 0) {
         textArray.push(`${ball}볼`);
@@ -48,12 +48,12 @@ const printBallStrike = (ball, strike) => {
     if (textArray.length > 0) {
         text = textArray.join(' ');
     }
-    MissionUtils.Console.print(text);
+    return text;
 }
 
 
 module.exports = {
     generateRandomBallNumber,
     countBallStrike,
-    printBallStrike
+    makeBallStrikeText
 };
