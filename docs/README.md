@@ -70,10 +70,11 @@
 ㄴ [x] 숫자 3개가 들어왔는지 확인
 ㄴ [x] 중복값이 없는지 확인
 ㄴ [x] 오류값이 있는 경우 throw 후 종료
-[] 입력값과 비교해서 결과 구하기
-ㄴ [] ANSWER = { ball:0, strike:0 }, score = 0 생성
-ㄴ [] 입력값과 랜덤값을 비교해서 값이 같으면 score++, index가 같으면 score++
-ㄴ [] score가 2일때는 strike++, score가 1일때는 ball++
+[x] 입력값과 랜덤값 비교해서 결과 구하기
+ㄴ [x] NOTHING = 0, BALL = 1, STRIKE = 2로 상수 설정
+ㄴ [x] gameResult = { ball:0, strike:0 }, result = 0 생성
+ㄴ [x] 입력값과 랜덤값을 비교해서 값만 같으면 result = BALL, index까지 같으면 result = STRIKE
+ㄴ [x] result 값에 따라 gameResult에서 ball 또는 strike 점수 적립
 [] 출력
 [] 게임을 지속할지 종료할지 문구 출력
 [] 지속을 입력받았을 경우 1번부터 실행, 종료시 프로그램 종료

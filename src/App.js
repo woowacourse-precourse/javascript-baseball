@@ -1,5 +1,9 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
+const NOTHING = 0;
+const BALL = 1;
+const STRIKE = 2;
+
 class App {
   constructor() {
     this.randomNums = [];
@@ -14,6 +18,7 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.makeRandomNums();
     await this.getInputNum();
+    this.getResult();
   }
 
   makeRandomNums() {
@@ -38,7 +43,6 @@ class App {
     const inputArr = input.split('').map(Number);
     App.checkInputException(inputArr);
     return inputArr;
-    // console.log(inputArr);
   }
 
   static checkInputException(input) {
@@ -59,6 +63,35 @@ class App {
     const numsSet = new Set(numsArr);
     if (numsArr.length !== numsSet.size) return false;
     return true;
+  }
+
+  getResult() {
+    MissionUtils.Console.print(`getresult.random : ${this.randomNums}`);
+    // MissionUtils.Console.print(`getresult.input : ${this.inputNums}`);
+    this.countBallAndStrike();
+  }
+
+  countBallAndStrike() {
+    this.inputNums.forEach((inputNum, inputIndex) => {
+      this.randomNums.forEach((randomNum, randomIndex) => {
+        const compareValue = {};
+        compareValue.inputNum = inputNum;
+        compareValue.inputIndex = inputIndex;
+        compareValue.randomNum = randomNum;
+        compareValue.randomIndex = randomIndex;
+        this.isBallOrStrike(compareValue);
+      });
+    });
+  }
+
+  isBallOrStrike(value) {
+    let result = NOTHING;
+    if (value.inputNum === value.randomNum) {
+      result = BALL;
+      if (value.inputIndex === value.randomIndex) result = STRIKE;
+    }
+    if (result == BALL) this.gameResult.ball++;
+    if (result == STRIKE) this.gameResult.strike++;
   }
 }
 
