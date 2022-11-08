@@ -1,9 +1,8 @@
-// FIXME: 비표준 모듈 시스템을 사용하고 있음
-const MissionUtils = require("@woowacourse/mission-utils");
+import { Console, Random } from "@woowacourse/mission-utils";
 
 class App {
   constructor() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   play() {
@@ -23,7 +22,7 @@ class App {
   initializeNumber() {
     this.baseballNumber = [];
     while (this.baseballNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      const number = Random.pickNumberInRange(1, 9);
       this.pushNumberIntoBaseballNumber(number);
     }
   }
@@ -42,7 +41,7 @@ class App {
     this.printResultOfGuess(numberOfBalls, numberOfStrikes);
     const isfinished = this.isCorrect(numberOfStrikes);
     if (isfinished) {
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.isGameOn = false;
     }
   }
@@ -51,7 +50,7 @@ class App {
     let numberOfBalls;
     let numberOfStrikes;
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 :', (guessedBaseballNumber) => {
+    Console.readLine('숫자를 입력해주세요 :', (guessedBaseballNumber) => {
       this.isValidGuess(guessedBaseballNumber);
       [numberOfBalls, numberOfStrikes] = this.checkingBallsAndStrikes(guessedBaseballNumber);
     })
@@ -119,14 +118,14 @@ class App {
       stringStrikes = `${numberOfStrikes}스트라이크`;
     }
     if (numberOfBalls && numberOfStrikes) {
-      MissionUtils.Console.print(`${stringBalls} ${stringStrikes}`);
+      Console.print(`${stringBalls} ${stringStrikes}`);
       return;
     }
     if (numberOfBalls || numberOfStrikes) {
-      MissionUtils.Console.print(`${stringBalls}${stringStrikes}`);
+      Console.print(`${stringBalls}${stringStrikes}`);
       return;
     }
-    MissionUtils.Console.print(`낫싱`);
+    Console.print(`낫싱`);
     return;
   }
 
@@ -139,8 +138,8 @@ class App {
   }
 
   confirmRestart() {
-    MissionUtils.Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    MissionUtils.Console.readLine('', (restartOrEnd) => {
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.readLine('', (restartOrEnd) => {
       this.isValidConfirm(restartOrEnd);
       this.restart(restartOrEnd);
     })
@@ -162,4 +161,4 @@ class App {
   }
 }
 
-module.exports = App;
+export default App;
