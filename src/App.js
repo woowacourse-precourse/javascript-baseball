@@ -1,8 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { PROGRESS_MESSAGE, ERROR_MESSAGE } = require('./constants');
 
 class App {
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(PROGRESS_MESSAGE.GAME_START);
     this.startGame();
   }
 
@@ -23,7 +24,7 @@ class App {
   }
 
   inputUserAnswer() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요.', (value) => {
+    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_ANSWER, (value) => {
       this.checkValidity(value);
       this.userScore();
     });
@@ -31,18 +32,18 @@ class App {
 
   checkValidity(value) {
     let userAnswerArr = value.split('');
-    if (userAnswerArr.length !== 3) throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+    if (userAnswerArr.length !== 3) throw new Error(ERROR_MESSAGE.INPUT_THREE_NUMBER);
     userAnswerArr.forEach(value => {
       if (isNaN(Number(value)) === true) {
-        throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+        throw new Error(ERROR_MESSAGE.INPUT_TYPE_NUMBER);
       }
       if (Number(value) > 9) {
-        throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+        throw new Error(ERROR_MESSAGE.INPUT_RANGE_NUMBER);
       }
     });
     const inputValueSet = new Set([...userAnswerArr]);
     if (inputValueSet.size !== 3) {
-      throw new Error('1~9 범위의 숫자 세 개를 입력해주세요.');
+      throw new Error(ERROR_MESSAGE.INPUT_UNIQUE_NUMBER);
     }
     this.userAnswerArr = userAnswerArr.map((pickNum) => +pickNum);
   }
@@ -57,18 +58,17 @@ class App {
         if (this.userAnswerArr.includes(computerAnswerItem)) ballCount++;
       }
     })
-    if (strikeCount === 3) this.gameResult("3스트라이크");
-    if (strikeCount === 0 && ballCount === 0) this.gameResult("낫싱");
+    if (strikeCount === 3) this.gameResult('3스트라이크');
+    if (strikeCount === 0 && ballCount === 0) this.gameResult('낫싱');
     if (strikeCount > 0 && ballCount > 0) this.gameResult(`${ballCount}볼 ${strikeCount}스트라이크`);
     if (strikeCount > 0 && ballCount === 0) this.gameResult(`${strikeCount}스트라이크`);
     if (ballCount > 0 && strikeCount === 0) this.gameResult(`${ballCount}볼`);
   }
 
-
   gameResult(score) {
     if (score === '3스트라이크') {
       MissionUtils.Console.print(score);
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.print(PROGRESS_MESSAGE.CORRECT_ANSWER);
       this.restart();
     } else {
       MissionUtils.Console.print(score);
@@ -77,22 +77,20 @@ class App {
   }
 
   restart() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (inputNum) => {
+    MissionUtils.Console.readLine(PROGRESS_MESSAGE.INPUT_RESTART, (inputNum) => {
       if (Number(inputNum) === 1) {
         MissionUtils.Console.close();
         this.startGame();
       }
       if (Number(inputNum) === 2) {
         MissionUtils.Console.close();
-        MissionUtils.Console.print('게임 종료');
+        MissionUtils.Console.print(PROGRESS_MESSAGE.GAME_OVER);
       }
       if (Number(inputNum) !== 1 && Number(inputNum) !== 2) {
-        throw new Error('재시작은 1, 종료는 2를 눌러주세요.');
+        throw new Error(ERROR_MESSAGE.INPUT_RESTART_NUMBER);
       }
     });
   }
-
-
 }
 
 module.exports = App;
