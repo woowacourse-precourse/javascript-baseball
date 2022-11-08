@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "max-depth": ["error", 2],
+    "indent": ["error", 2],
+    "quotes": ["error", "double"]
+  },
+  "env": {
+    "es6": true,
+    "es2021": true
+  }
+}
