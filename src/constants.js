@@ -10,13 +10,14 @@ const GAME_ERROR_MESSAGE = Object.freeze({
   THREE_DIGIT: "숫자 3개가 입력되지 않았습니다.",
   DUPLICATE: "중복된 숫자가 있습니다.",
   NOT_NUMBER: "1 ~ 9 사이의 숫자를 입력하지 않았습니다.",
+  WRONG_INPUT: "잘못된 값을 입력하여 게임을 종료합니다."
 });
 
 const RESULT = Object.freeze({
-  낫싱: "낫싱",
-  볼: "볼 ",
-  스트라이크: "스트라이크",
-  공백: "",
+  NOTHING: "낫싱",
+  BALL: "볼 ",
+  STRIKE: "스트라이크",
+  BLANK: "",
 })
 
 module.exports = {GAME_ERROR_MESSAGE, GAME_MESSAGE, RESULT}
