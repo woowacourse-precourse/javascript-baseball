@@ -21,7 +21,8 @@ class App {
   checkBallStrike(nums, answer) {
     let ballStrikeCount = [0, 0];
 
-    if (answer.length !== 3) throw new Error("잘못된 입력입니다.");
+    if (!(answer.length === 3 && answer.length === new Set(answer).size))
+      throw new Error("잘못된 입력입니다.");
 
     for (let i = 0; i < 3; i++) {
       let checkNums = Number(nums[i]);
