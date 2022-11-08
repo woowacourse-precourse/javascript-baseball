@@ -41,7 +41,7 @@ describe("목표값 테스트", () => {
     let duplicateChecker;
 
     for (let i = 0; i < 3; i++) {
-      duplicateCheck =
+      duplicateChecker =
         refNumbers.indexOf(refNumbers[i]) === i ? "clear" : "duplicate";
     }
 
