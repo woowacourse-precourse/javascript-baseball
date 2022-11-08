@@ -90,27 +90,17 @@ class App {
   validate(input) {
     const regExp = new RegExp(/^[1-9]{1,3}$/);
 
-    try {
-      if (regExp.test(input) && !this.isDuplicated(input)) {
-        // 입력값이 3자리 숫자이고, 중복숫자가 없다면 다음 힌트제공 기능을 이용한다.
+    if (regExp.test(input) && !this.isDuplicated(input)) {
+      const hintMessage = this.evaluate(input);
 
-        const hintMessage = this.evaluate(input);
-
-        if (hintMessage === END_GAME) {
-          return this.terminate();
-        } else {
-          Console.print(hintMessage);
-          return this.getUserInput(this.validate);
-        }
+      if (hintMessage === END_GAME) {
+        return this.terminate();
       } else {
-        // 입력이 잘못되었다면 예외를 발생시키고 게임을 종료시킨다.
-        throw new Error(INVALID_INPUT_ERR);
+        Console.print(hintMessage);
+        return this.getUserInput(this.validate);
       }
-    } catch (e) {
-      if (e.message === INVALID_INPUT_ERR) {
-        Console.print('유효하지 않은 입력입니다. 3자리 중복되지 않은 숫자를 입력하세요.\n게임을 종료합니다.');
-        Console.close();
-      }
+    } else {
+      throw new Error(INVALID_INPUT_ERR);
     }
   }
 }
