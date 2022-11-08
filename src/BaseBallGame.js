@@ -102,11 +102,10 @@ class BaseBallGame{
 
     if (!(this.score["strike"] + this.score["ball"])) message = "낫싱";
 
-    if (this.score["strike"] === 3) message = `${this.score["strike"]}스트라이크`;
-    
     if (this.score["ball"]) message = `${this.score["ball"]}볼 `;
-  
-    if (this.score["strike"]) message += `${this.score["strike"]}스트라이크`;
+
+    if (this.score["strike"] === 3) message = `${this.score["strike"]}스트라이크`;
+    else if (this.score["strike"]) message += `${this.score["strike"]}스트라이크`;
     
     return message;
   }
