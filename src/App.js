@@ -158,7 +158,9 @@ class App {
     if (restartOrEnd === RESTART) {
       this.play();
     }
-    if (restartOrEnd === END) return;
+    if (restartOrEnd === END) {
+      MissionUtils.Console.close();
+    }
   }
 }
 
