@@ -19,7 +19,7 @@ class App {
   }
 
   setAnswer() {
-    const answer = [];
+    let answer = [];
     while (answer.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!answer.includes(number)) {
