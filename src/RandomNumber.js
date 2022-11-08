@@ -1,5 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
-const { RANDOM_NUMBER } = require("./../constant/constant");
+const { RANDOM_NUMBER } = require("./../utils/constant");
 
 class RandomNumber {
   constructor() {
