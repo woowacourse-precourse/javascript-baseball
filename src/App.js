@@ -49,7 +49,8 @@ class App {
   }
 
   throwErr() {
-    throw new Error(MESSAGE.INPUT_EXCEPTION);
+    Console.print(GAME_MESSAGE.ERROR_MESSAGE);
+    throw new Error();
   }
 }
 const baseball = new App();
