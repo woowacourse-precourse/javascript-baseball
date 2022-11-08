@@ -1,5 +1,10 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { checkLength, checkZeroExist, checkDuplicate } = require("./utils");
+const {
+  checkLength,
+  checkZeroExist,
+  checkDuplicate,
+  convertNum,
+} = require("./utils");
 
 // 같은 수가 같은 자리에 있으면 스트라이크, 다른 자리에 있으면 볼, 같은 수가 전혀 없으면 낫싱이란 힌트를 얻고, 그 힌트를 이용해서 먼저 상대방(컴퓨터)의 수를 맞추면 승리한다.
 // 예) 상대방(컴퓨터)의 수가 425일 때
@@ -14,6 +19,9 @@ const { checkLength, checkZeroExist, checkDuplicate } = require("./utils");
 class App {
   #computer_number;
   #user_number;
+  #strike = 0;
+  #ball = 0;
+
   play() {
     this.#computer_number = this.getRandomNum();
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -31,14 +39,16 @@ class App {
   }
   // 사용자 입력 숫자 유효성 검사
   valid(number) {
-    if (checkLength(number) || checkZeroExist(number) || checkDuplicate(number))
-      return false;
-    else return true;
+    if (checkLength(number) && checkZeroExist(number) && checkDuplicate(number))
+      return true;
+    else return false;
   }
   // 사용자 입력 숫자 유효성 검사 후 저장
   setUserNum(number) {
-    if (this.valid(number)) this.#user_number = number;
-    else {
+    if (this.valid(number)) {
+      this.#user_number = number;
+      this.compareNum(this.#user_number, this.#computer_number);
+    } else {
       throw new Error("잘못된 입력입니다.");
     }
   }

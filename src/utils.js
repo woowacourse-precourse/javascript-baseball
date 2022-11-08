@@ -8,7 +8,7 @@ const checkZeroExist = (num) => {
 };
 // 중복 유효성 검사
 const checkDuplicate = (num) => {
-  const numberSet = new Set([...number]);
+  const numberSet = new Set([...num]);
   return numberSet.size === num.length;
 };
 // 숫자 데이터를 같은 형식으로 변환
