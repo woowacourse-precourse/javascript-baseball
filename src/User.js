@@ -22,7 +22,6 @@ class User {
     this.checkType(input);
     this.checkLength(input);
     this.checkDuplicatedInput(input);
-
     return true;
   };
 
