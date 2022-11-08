@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { Console } = MissionUtils;
+const { Console, Random } = MissionUtils;
 class App {
-  play() {}
   constructor() {
     this.START_NUMBER = 1;
     this.END_NUMBER = 9;
@@ -36,7 +35,7 @@ class App {
   getAnswerNumber() {
     const answer = [];
     while (answer.length < this.DIGITS) {
-      const number = MissionUtils.Random.pickNumberInRange(this.START_NUMBER, this.END_NUMBER);
+      const number = Random.pickNumberInRange(this.START_NUMBER, this.END_NUMBER);
       if (!answer.includes(number)) {
         answer.push(number);
       }
