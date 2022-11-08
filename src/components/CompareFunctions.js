@@ -4,6 +4,10 @@ const handleCorrectAnswer = require('./HandleCorrect');
 const limitSize = gameConstant.LIMIT_NUMBER_SIZE;
 
 const compareNumber = (answer, playerInput) => {
+  if (isCorrect(answer, playerInput)) {
+    handleCorrectAnswer(answer, playerInput);
+    return;
+  }
   const inputArray = playerInput.split('');
   const strikes = getStrikes(answer, inputArray);
   const balls = getBalls(answer, inputArray);
