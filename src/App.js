@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
-const { getStrikeAndBall, getStrikeAndBallText } = require("./StrikeAndBall");
+const getStrikeAndBall = require("./StrikeAndBall");
+const getStrikeAndBallText = require("./StrikeAndBallText");
 const getThreeRandomNumbers = require("./ThreeRandomNumbers");
 const throwError = require("./ThrowError");
 const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT } = require("./constants/ConstantValues");

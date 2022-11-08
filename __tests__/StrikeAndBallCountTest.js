@@ -1,5 +1,6 @@
 const App = require("../src/App");
-const { getStrikeAndBall, getStrikeAndBallText } = require("../src/StrikeAndBall");
+const getStrikeAndBall = require("../src/StrikeAndBall");
+const getStrikeAndBallText = require("../src/StrikeAndBallText");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {

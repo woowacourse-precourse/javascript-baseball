@@ -31,7 +31,4 @@ const getStrikeAndBallText = (strike, ball) => {
   return output.trim();
 };
 
-module.exports = {
-  getStrikeAndBall,
-  getStrikeAndBallText,
-};
+module.exports = getStrikeAndBall;
