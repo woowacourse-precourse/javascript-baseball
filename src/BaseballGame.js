@@ -1,21 +1,37 @@
 const utils = require("./utlils");
 const { Console } = require("@woowacourse/mission-utils");
 class BaseballGame {
-  constructor() {
-    this.targetNumber = utils.getTargetNumber();
-  }
-
   startGame() {
-    this.startRound();
-    // targetNumber을 찾을때 까지 round를 진행합니다.
-    // targetNumber를 찾았다면 restart 로직을 추가합니다.
+    const targetNumber = utils.getTargetNumber();
+    this.startRound(targetNumber);
   }
 
-  startRound() {
-    Console.readLine("숫자를 입력해주세요 : ", (userInputNumber) => {
-      console.log(userInputNumber);
+  startRound(targetNumber) {
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      const userInputNumber = utils.isValidInput(userInput);
+      Console.print(userInputNumber + " " + targetNumber);
+      const ballCount = utils.getBallCount(userInputNumber, targetNumber);
+      const strikeCount = utils.getStrikeCount(userInputNumber, targetNumber);
+
+      utils.printHint(ballCount, strikeCount);
+
+      if (strikeCount === 3) this.askRestartGame();
+
+      this.startRound(targetNumber);
     });
-    // 입력을 통해서 힌트를 출력하는 로직으로 구성이 되어 있습니다. (이 과정에서 오류를 관리합니다.)
+  }
+
+  askRestartGame() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (userInput) => {
+        if (userInput === "1") {
+          this.startGame();
+        } else if (userInput === "2") Console.close();
+        else throw new Error("유효하지 않은 값을 입력해 게임이 종료됩니다");
+      }
+    );
   }
 }
 
