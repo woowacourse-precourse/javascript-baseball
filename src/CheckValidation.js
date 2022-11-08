@@ -5,9 +5,9 @@ const CheckValidation = (answer) => {
   let length = answer.length;
 
   hasZero(answer, length);
-  if (length > 1) checkDuplicated(splitAnswer);
+  checkDuplicated(splitAnswer, length);
   containNotANumber(splitAnswer, length);
-  if (length !== 3) notRightLength(length);
+  notRightLength(length);
 };
 
 const throwErrorMsg = (typeOfError) => {
@@ -23,11 +23,12 @@ const hasZero = (answer) => {
   throwErrorMsg(ERROR_MESSAGE.HAS_ZERO_MSG);
 };
 
-const checkDuplicated = (splitAnswer) => {
+const checkDuplicated = (splitAnswer, length) => {
   if (
-    splitAnswer[0] == splitAnswer[1] ||
-    splitAnswer[1] == splitAnswer[2] ||
-    splitAnswer[0] == splitAnswer[2]
+    length > 1 &&
+    (splitAnswer[0] == splitAnswer[1] ||
+      splitAnswer[1] == splitAnswer[2] ||
+      splitAnswer[0] == splitAnswer[2])
   ) {
     throwErrorMsg(ERROR_MESSAGE.DUPLICATED_MSG);
   }
@@ -49,7 +50,7 @@ const containNotANumber = (splitAnswer) => {
 };
 
 const notRightLength = (length) => {
-  throwErrorMsg("");
+  length === 3 ? null : throwErrorMsg("");
 };
 
 module.exports = CheckValidation;
