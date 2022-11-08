@@ -11,6 +11,7 @@ class App {
 
   play() {
     this.generateRandomNums();
+    this.compareRandomWithUserInput();
   }
 
   generateRandomNums() {
@@ -34,10 +35,19 @@ class App {
 
   compareRandomWithUserInput() {
     this.getUserInput("숫자를 입력해주세요 : ", (answers) => {
+      this.checkUserInput(answers);
+
       this.userInput = [...answers];
 
       this.giveScore();
     });
+  }
+
+  checkUserInput(answers) {
+    if ((answers + "").length !== 3)
+      throw new RangeError("3자리 숫자를 입력해주세요");
+    else if ((answers + "").length !== new Set([...(answers + "")]).size)
+      throw new Error("중복된 숫자를 입력할 수 없습니다.");
   }
 
   giveScore() {
@@ -85,14 +95,6 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요",
       (answers) => this.continueGameOrStop(answers)
     );
-  }
-
-  continueGameOrStop(answers) {
-    if (answers !== "1" && answers !== "2")
-      throw new RangeError(
-        "게임을 시작하려면 1, 게임을 그만두려면 2를 입력해주세요."
-      );
-    return answers === "1" ? this.play() : MissionUtils.Console.close();
   }
 }
 
