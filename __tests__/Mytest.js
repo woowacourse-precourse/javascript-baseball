@@ -182,6 +182,19 @@ describe("Utils.askGameAgain", () => {
     mockInput(notOneOrTwo);
     //when
     //then
-    expect(() => Utils.askGameAgain()).toThrow();
+    expect(() => Utils.askGameAgain()).toThrow(
+      new Error("1 또는 2이외의 다른 숫자나 문자를 입력하지 마세요!")
+    );
+  });
+
+  test("1 또는 2가 아닌 다른 문자를 입력했을 때는 예외가 발생해야 한다.", () => {
+    //given
+    const notOneOrTwo = "ab";
+    mockInput(notOneOrTwo);
+    //when
+    //then
+    expect(() => Utils.askGameAgain()).toThrow(
+      new Error("1 또는 2이외의 다른 숫자나 문자를 입력하지 마세요!")
+    );
   });
 });

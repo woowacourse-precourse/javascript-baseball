@@ -13,7 +13,7 @@ class Utils {
     if (Utils.#isNotNumber(userInputNumber)) {
       throw new Error("숫자를 입력하세요!");
     }
-    if (userInputNumberLength !== 3) {
+    if (userInputNumberLength < 3 || userInputNumberLength > 3) {
       throw new Error("숫자를 3자리 입력하세요!");
     }
 
@@ -106,9 +106,11 @@ class Utils {
         if (userInpuOneorTwo === "1") {
           let computerRandomNumber = Utils.setComputerNumber();
           Utils.startGame(computerRandomNumber);
-        } else {
+        } else if (userInpuOneorTwo === "2") {
           Console.print("게임 종료");
           Console.close();
+        } else {
+          throw new Error("1 또는 2이외의 다른 숫자나 문자를 입력하지 마세요!");
         }
       }
     );
