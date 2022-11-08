@@ -1,6 +1,6 @@
 const GAME_OPTION = {
-  PLAY: 1,
-  EXIT: 2,
+  RUN: 1,
+  STOP: 2,
 };
 
 const COMPUTER_NUMBER = {
