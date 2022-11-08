@@ -38,11 +38,11 @@ class App {
     let ball = 0;
 
     answer.split('').forEach((number, index) => {
-      const computer = String(this.computer[index]);
-      if (computer === number) {
+      const randomNumbers = String(this.randomNumbers[index]);
+      if (randomNumbers === number) {
         strike += 1;
       }
-      if (computer !== number && String(this.computer).includes(number)) {
+      if (randomNumbers !== number && String(this.randomNumbers).includes(number)) {
         ball += 1;
       }
     });
@@ -51,7 +51,14 @@ class App {
     return compareNumbers(strike, ball);
   }
 
-  play() { }
+  play() {
+    if (this.firstGame) {
+      MissionUtils.Console.print(OUTPUT_MESSAGE.START_GAME);
+      this.firstGame = false;
+    }
+    this.randomNumbers = getRandomNumbers();
+    this.userAnswer();
+  }
 }
 
 
