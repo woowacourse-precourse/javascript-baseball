@@ -87,15 +87,11 @@ class App {
   };
 
   async doBaseBall() {
-    try {
-      this.userAnswer = await this.input();
-      this.checkBallValidity();
-      this.judgeResult();
-      this.printResult();
-      this.checkWin();
-    } catch (e) {
-      return e;
-    }
+    this.userAnswer = await this.input();
+    this.checkBallValidity();
+    this.judgeResult();
+    this.printResult();
+    this.checkWin();
   }
 
   async checkWin() {
@@ -152,7 +148,7 @@ class App {
   };
 
   isThreeDigit = () => {
-    if ([...this.userAnswer].length !== 3) {
+    if ([...this.userAnswer].length != 3) {
       throw new Error("3자리 숫자를 입력하세요");
     }
   };
@@ -178,6 +174,6 @@ class App {
   };
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 module.exports = App;
