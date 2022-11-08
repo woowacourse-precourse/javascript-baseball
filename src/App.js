@@ -13,35 +13,35 @@ class App {
     })
   }
 
-  checkOver (strike) {
-    if (strike === 3) {
+  checkOver (STRIKE) {
+    if (STRIKE === 3) {
       return true
      } false
   }
 
-  feedbackMessage (strike, ball) {
-    if (strike === 3) {
-      Console.print(`${strike}스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
+  feedbackMessage (STRIKE, BALL) {
+    if (STRIKE === 3) {
+      Console.print(`${STRIKE}스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료`)
       return 
     }
   
-    if (!strike+ball) {
+    if (!STRIKE+BALL) {
       Console.print('낫싱')
       return 
     }
   
-    if (strike > 0 && !ball) {
-      Console.print(`${strike}스트라이크`)
+    if (STRIKE > 0 && !BALL) {
+      Console.print(`${STRIKE}스트라이크`)
       return 
     }
   
-    if (!strike && ball > 0) {
-      Console.print(`${ball}볼`)
+    if (!STRIKE && BALL > 0) {
+      Console.print(`${BALL}볼`)
       return 
     }
   
-    if (strike > 0 && ball > 0) {
-      Console.print(`${ball}볼 ${strike}스트라이크`)
+    if (STRIKE > 0 && BALL > 0) {
+      Console.print(`${BALL}볼 ${STRIKE}스트라이크`)
       return 
     }
   }
@@ -52,21 +52,21 @@ class App {
 
   checkCount (userAnswer, rightNumber) {
     console.log(userAnswer, rightNumber)
-    let [strike, ball] = this.initCount()
+    let [STRIKE, BALL] = this.initCount()
   
     for (let i = 0; i < 3; i++) {
       if (rightNumber.includes(userAnswer[i])) {
-        ball += 1
+        BALL += 1
       }
       if (userAnswer[i] === rightNumber[i]) {
-        strike += 1
-        ball -= 1
+        STRIKE += 1
+        BALL -= 1
       }
     }
 
-    this.feedbackMessage(strike, ball)
+    this.feedbackMessage(STRIKE, BALL)
 
-    let gameOverStatus = this.checkOver(strike)
+    let gameOverStatus = this.checkOver(STRIKE)
     if (!gameOverStatus) {
       this.getUserInput(rightNumber)
     }
@@ -74,28 +74,41 @@ class App {
     if (gameOverStatus) {
       this.gameOver()
     }
-
   }
 
-  exception (userNumber) {
-    switch (userNumber) {
-      case !userNumber: return true
-      case isNaN(Number(userNumber)): return true
-      case userNumber.length !== 3: return true
-      case userNumber < 0 : return true
-      default : return false
+  checkError (userNumber, rightNumber) {
+    const USER_ANSWER = userNumber
+    const USER_ANSWER_LENGTH = userNumber.length
+    const REMOVED_DUPLICATION_NUMBER = new Set(USER_ANSWER)
+    let IS_ERROR = false
+
+    if (!USER_ANSWER) {
+      IS_ERROR = true
+    }
+    if (USER_ANSWER_LENGTH !== 3) {
+      IS_ERROR = true
+    }
+    if (USER_ANSWER < 0) {
+      IS_ERROR = true
+    }
+    if (isNaN(USER_ANSWER)) {
+      IS_ERROR = true
+    }
+    if (USER_ANSWER_LENGTH !== REMOVED_DUPLICATION_NUMBER.size) {
+      IS_ERROR = true
+    }
+
+    if (IS_ERROR) {
+      throw new Error('올바른 값이 입력되지 않아 종료되었습니다.')
+    } else {
+      this.checkCount(userNumber,rightNumber)
     }
   }
 
   getUserInput (rightNumber) {
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const userAnswer = answer.trim()
-      const error = this.exception(userAnswer)
-      if (error) {
-        throw new Error('잘못된 입력으로 종료되었습니다.')
-      } else {
-      this.checkCount(userAnswer,rightNumber)
-      }
+      this.checkError(userAnswer,rightNumber)
     })
   }
 
