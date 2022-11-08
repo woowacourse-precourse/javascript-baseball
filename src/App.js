@@ -1,5 +1,10 @@
+const NumberBaseball = require("./NumberBaseball");
+
 class App {
-  play() {}
+  play() {
+    this.numberBaseball = new NumberBaseball();
+    this.numberBaseball.gameStart();
+  }
 }
 
 module.exports = App;
