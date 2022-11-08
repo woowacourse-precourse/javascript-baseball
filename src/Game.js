@@ -78,7 +78,7 @@ class Game {
       this.printMessage(MESSAGE.BALL[ball]);
     }
     if (ball === 0 && strike === 0) {
-      this.printMessage('낫싱');
+      this.printMessage(MESSAGE.NOTHING);
     }
     if (ball !== 0 && strike !== 0) {
       this.printMessage(

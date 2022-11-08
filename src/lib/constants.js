@@ -4,6 +4,7 @@ const MESSAGE = {
     USER_ANSWER: '숫자를 입력해주세요 : ',
     RESTART:'게임을 다시 시작하시려면 1, 끝내시려면 2를 입력하세요',
     CLOSE :'게임 종료',
+    NOTHING: '낫싱',
   
     BALL: {
       1: '1볼',
