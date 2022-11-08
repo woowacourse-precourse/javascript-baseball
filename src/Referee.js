@@ -7,25 +7,19 @@ const GAME_OVER = '2';
 
 class Referee {
   constructor() {
-    this.computer = new Computer(this);
+    this.computer = new Computer();
     this.player = new Player(this);
 
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
   gameStart() {
-    this.computer.setRandomValue();
+    this.computer.setValue();
     this.player.setValue();
   }
 
   gameResult() {
-    const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
-    let [ball, strike] = [0, 0];
-
-    for (let i = 0; i < 3; i++) {
-      if (computerValue[i] === playerValue[i]) strike++;
-      else if (computerValue.includes(playerValue[i])) ball++;
-    }
+    const [ball, strike] = this.getBallAndStrikeCount();
 
     const nothingString = ball === 0 && strike === 0 ? '낫싱' : '';
     const ballString = ball ? `${ball}볼 ` : '';
@@ -48,6 +42,19 @@ class Referee {
         return this.gameFinish();
       }
     );
+  }
+
+  getBallAndStrikeCount() {
+    const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
+    let [ball, strike] = [0, 0];
+
+    if (!computerValue || !playerValue) throw new Error('시스템 오류로 인해 게임을 종료합니다.');
+
+    for (let i = 0; i < 3; i++) {
+      if (computerValue[i] === playerValue[i]) strike++;
+      else if (computerValue.includes(playerValue[i])) ball++;
+    }
+    return [ball, strike];
   }
 }
 
