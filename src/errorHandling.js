@@ -38,4 +38,12 @@ function validateNumbers(userInput) {
   }
 }
 
-exports.validateNumbers = validateNumbers;
+function validResetValid() {
+  Console.print('유효하지 않은 입력값입니다. 게임을 종료합니다.');
+  throw Error('Only 1 or 2');
+}
+
+module.exports = {
+  validateNumbers,
+  validResetValid,
+};

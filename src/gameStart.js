@@ -1,5 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const { validateNumbers } = require('./errorHandling');
+const { validateNumbers, validResetValid } = require('./errorHandling');
 const { compareNumbers } = require('./compareNumbers');
 let { computerStore } = require('./store');
 
@@ -15,13 +15,19 @@ function extractComputerNumber() {
 }
 
 function resetAllInputNumbers(isRestart) {
-  if (isRestart === '1') {
-    resetStore();
-    extractComputerNumber();
-    baseballGameStart();
-  } else {
-    computerStore = null;
-    Console.close();
+  switch (isRestart) {
+    case '1':
+      resetStore();
+      extractComputerNumber();
+      baseballGameStart();
+      break;
+    case '2':
+      computerStore = null;
+      Console.close();
+      break;
+    default:
+      validResetValid();
+      break;
   }
 }
 
