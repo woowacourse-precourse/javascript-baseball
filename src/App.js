@@ -35,6 +35,13 @@ class App {
     else if (this.computerNumber.indexOf(userNumber) !== -1) this.countBall++;
   }
 
+  printCount() {
+    if (!this.countStrike && !this.countBall) MissionUtils.Console.print("낫싱");
+    else if (!this.countStrike && this.countBall) MissionUtils.Console.print(`${this.countBall}볼`);
+    else if (this.countStrike && !this.countBall) MissionUtils.Console.print(`${this.countStrike}스트라이크`);
+    else MissionUtils.Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`);
+  }
+
   play() { }
 
 }
