@@ -17,14 +17,14 @@
 ### 프로그래밍 요구 사항
 
 - [x] node.js 14버전에서 실행 가능
-- [ ] 프로그램 실행의 시작점 : App.js 의 play 메서드
-- [ ] 순수 Vanilla JS 로만 구현
-- [ ] Airbnb JavaScript 코드 컨벤션 사용 (Eslint, prettier)
-- [ ] 프로그램 구현 완료 후 `ApplicationTest`의 모든 테스트 통과
-- [ ] indent depth가 3이 넘지 않도록 구현 (2까지만 허용)
-- [ ] 함수(메서드)가 한가지 일만 하도록 최대한 작게 작성
-- [ ] Jest를 이용한 TDD방식 활용 (StringTest.js 참고하여 작성)
-- [ ] 사용 라이브러리
+- [x] 프로그램 실행의 시작점 : App.js 의 play 메서드
+- [x] 순수 Vanilla JS 로만 구현
+- [x] Airbnb JavaScript 코드 컨벤션 사용 (Eslint, prettier)
+- [x] 프로그램 구현 완료 후 `ApplicationTest`의 모든 테스트 통과
+- [x] indent depth가 3이 넘지 않도록 구현 (2까지만 허용)
+- [x] 함수(메서드)가 한가지 일만 하도록 최대한 작게 작성
+- [x] Jest를 이용한 TDD방식 활용 (StringTest.js 참고하여 작성)
+- [x] 사용 라이브러리
   - MissionUtils 라이브러리에서 제공하는 `Random` 및 `Console` API를 사용하여 구현
   - 사용자의 값을 입력 받고 출력하기 위해서는 `Console.readLine`, `Console.print`를 활용
 
@@ -51,8 +51,8 @@
   - [x] 힌트 출력
     - [x] 볼과 스트라이크 둘 다 있을 경우 볼부터 출력
   - [x] 입력 값 받기
-- [ ] 정답인 경우
-  - [ ] 축하 메시지 출력
-  - [ ] 게임 재시작 여부 입력
-    - [ ] 1인 경우 재시작
-    - [ ] 2인 경우 종료
+- [x] 정답인 경우
+  - [x] 축하 메시지 출력
+  - [x] 게임 재시작 여부 입력
+    - [x] 1인 경우 재시작
+    - [x] 2인 경우 종료
