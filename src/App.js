@@ -22,7 +22,7 @@ class App {
         Console.print('게임 종료');
         this.isFinish();
       } else {
-        this.init();
+        this.int();
       }
     });
   }
@@ -39,11 +39,9 @@ class App {
     });
   }
 
-  play(arg) {
-    if (arg !== false) {
-      this.computer();
-      this.init();
-    }
+  play() {
+    this.computer();
+    this.init();
   }
 }
 
