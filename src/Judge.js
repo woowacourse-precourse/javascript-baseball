@@ -12,11 +12,8 @@ class Judge {
   }
 
   isDuplicateNum(playerInput) {
-    const duplicateCountTable = [];
+    const duplicateCountTable = Array.from({ length: 9 });
 
-    for (let i = 0; i < 9; i++) {
-      duplicateCountTable.push(0);
-    }
     for (let i = 0; i < playerInput.length; i++) {
       duplicateCountTable[playerInput[i]]++;
     }
