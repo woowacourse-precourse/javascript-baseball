@@ -19,8 +19,17 @@ class App {
 
   getPlayerNumberList() {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
-      this.playerNumberList = answer;
+      if (this.isValidRandomNumberList(answer)) {
+        this.playerNumberList = answer;
+      } else {
+        throw new Error("입력한 숫자가 유효하지 않습니다.");
+      }
     });
+  }
+
+  isValidRandomNumberList(numberList) {
+    var regex = new RegExp(`^\\d{${NUMBER_LENGTH}}$`);
+    return regex.test(String(numberList)) && !(/([0-9])\1/).test(String(numberList));
   }
 
   roundStart() {
