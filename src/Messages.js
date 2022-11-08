@@ -82,10 +82,10 @@ class Messages {
   }
 
   get resultCorrect() {
-    const strike = this.resultStrike(this.digit);
-    const correct = `${this.digit}개의 숫자를 모두 맞히셨습니다!`;
+    const strikes = this.resultStrike(this.digit);
+    const correctMessage = `${this.digit}개의 숫자를 모두 맞히셨습니다!`;
 
-    return `${strike}\n${correct} ${this.endGame}`;
+    return `${strikes}\n${correctMessage} ${this.endGame}`;
   }
 
   resultBall(count) {

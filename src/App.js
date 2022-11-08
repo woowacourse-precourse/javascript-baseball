@@ -46,12 +46,8 @@ class App {
     return this._question;
   }
 
-  isValidDigit(numbers) {
-    return numbers.length === this.digit;
-  }
-
-  isValidNumber(number) {
-    return number >= this.minNumber && number <= this.maxNumber;
+  endProgramWithError(message, err = Error) {
+    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
   }
 
   isValidInput(input) {
@@ -66,6 +62,14 @@ class App {
     return true;
   }
 
+  isValidDigit(numbers) {
+    return numbers.length === this.digit;
+  }
+
+  isValidRange(number) {
+    return number >= this.minNumber && number <= this.maxNumber;
+  }
+
   isValidQuestionInput(input) {
     const numbers = input.split("").map(Number);
 
@@ -77,7 +81,7 @@ class App {
       this.endProgramWithError(this.MESSAGES.digitError);
     }
 
-    if (!numbers.every(this.isValidNumber.bind(this))) {
+    if (!numbers.every(this.isValidRange.bind(this))) {
       this.endProgramWithError(this.MESSAGES.rangeError, RangeError);
     }
 
@@ -106,10 +110,6 @@ class App {
     }
 
     this.question = input.split("").map(Number);
-  }
-
-  endProgramWithError(message, err = Error) {
-    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
   }
 
   compareNumbers() {
@@ -221,13 +221,13 @@ class App {
     this.startNewGame();
   }
 
-  play() {
-    this.startGame();
-  }
-
   endProgram() {
     Console.print(this.MESSAGES.endProgram);
     Console.close();
+  }
+
+  play() {
+    this.startGame();
   }
 }
 
