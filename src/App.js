@@ -1,11 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const checkInvalidRandomNumber = require('./utils/checkInvalidRandomNumber');
 const checkValidUserInput = require('./utils/checkValidUserInput');
+const generateRandomNumber = require('./game/generateRandomNumber');
 
 class App {
   startGame() {
     this.initGame();
-    this.generateRandomNumber();
+    this.computerRandomNumber = generateRandomNumber();
     this.getUserInput();
   }
 
@@ -16,13 +16,6 @@ class App {
     this.ballScore = 0;
     this.compareResultText = '';
     this.isThreeStrike = false;
-  }
-
-  generateRandomNumber() {
-    do {
-      const newRandomNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-      this.computerRandomNumber = [...newRandomNumber];
-    } while (checkInvalidRandomNumber());
   }
 
   getUserInput() {
