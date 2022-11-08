@@ -68,9 +68,17 @@ class BaseBallGame {
       if (this.isRightForm(inputNum) === false) throw new Error('입력하신 값이 올바른 형식이 아닙니다! 3자리의 1~9로 이루어진 수를 중복없이 입력해주세요!');
       const [HINT_MENT, IS_END] = this.checkNumber(inputNum);
       MissionUtils.Console.print(HINT_MENT);
-      if (IS_END);
+      if (IS_END) this.end();
       this.play();
     }));
+  }
+
+  end() {
+    const ENDING_MENT = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    MissionUtils.Console.print(ENDING_MENT)
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n', (gameStartOrExit) => {
+      gameStartOrExit === '1' ? this.newplay() : MissionUtils.Console.close();
+    });
   }
 }
 
