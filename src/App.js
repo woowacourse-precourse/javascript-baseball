@@ -11,9 +11,9 @@ function makeNewRandNum() {
 
 function makeComputerRandNums() {
   const randNumsArr = []
-  while (randNumsArr.length < 3) {
+  while(randNumsArr.length < 3) {
     const newNum = makeNewRandNum();
-    if (randNumsArr.includes(newNum)) continue;
+    if(randNumsArr.includes(newNum)) continue;
     randNumsArr.push(newNum);
   }
   return randNumsArr;
@@ -138,6 +138,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
