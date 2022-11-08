@@ -37,4 +37,15 @@ describe('기능 목록 테스트', () => {
       expect(newList).toEqual(expect.not.arrayContaining([number]));
     });
   });
+
+  test('사용자 입력값 예외 처리 기능', () => {
+    const exceptionInputList = [111, 12, '일이삼'];
+
+    exceptionInputList.forEach((exceptionInput) => {
+      expect(() => {
+        const app = new App();
+        app.throwException(exceptionInput);
+      }).toThrow();
+    });
+  });
 });
