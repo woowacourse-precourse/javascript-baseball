@@ -67,6 +67,19 @@ class App {
 
     this.checkAnswer(strike, computerNumbers);
   }
+
+  countStrikeAndBall(computerNumbers, userNumbers) {
+    let strike = 0;
+    let ball = 0;
+    userNumbers.forEach((item, index) => {
+      if (item === computerNumbers[index]) {
+        strike++;
+      } else if (computerNumbers.includes(item)) {
+        ball++;
+      }
+    });
+    return { strike, ball };
+  }
 }
 
 module.exports = App;
