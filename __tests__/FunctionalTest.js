@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 const App = require('../src/App');
 const MissionUtils = require('@woowacourse/mission-utils');
 
@@ -46,6 +47,7 @@ describe('게임 시작 전 테스트', () => {
     test(`정답 생성`, answerTest);
   }
 });
+
 describe('게임 참여 단계 테스트', () => {
   test('게임 시작 문구 출력 테스트', () => {
     const logpy = getLogSpy();
@@ -106,5 +108,34 @@ describe('사용자 입력값 평가 테스트', () => {
       const app = new App();
       app.play();
     }).toThrow('잘못된 입력입니다. 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요. ');
+  });
+});
+
+describe('사용자 입력값 평가 테스트2', () => {
+  test('사용자 입력값과 정답 비교 테스트', () => {
+    const randoms = [1, 2, 3, 4, 5, 6];
+    const answers = ['789', '451', '178', '139', '123', '1', '456', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '낫싱',
+      '1볼',
+      '1스트라이크',
+      '1볼 1스트라이크',
+      '3스트라이크',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+      '3스트라이크',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+      '게임 종료',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
