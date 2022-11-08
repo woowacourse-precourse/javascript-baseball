@@ -46,7 +46,7 @@ class App {
       MissionUtils.Console.print(`${strike}스트라이크`);
       return `${strike}스트라이크`;
     } else if (strike > 0 && ball > 0) {
-      MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
       return `${ball}볼 ${strike}스트라이크`;
     }
   }
