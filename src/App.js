@@ -71,6 +71,25 @@ class App {
     return strikesNumber;
   }
 
+  printResult(numberBall, numberStrike) {
+    let resultString;
+
+    const ballString = numberBall ? `${numberBall}볼` : '';
+    const strikeString = numberStrike ? `${numberStrike}스트라이크` : '';
+
+    if (ballString || strikeString) {
+      const separator = ballString && strikeString ? ' ' : '';
+      resultString = ballString + separator + strikeString;
+    } else {
+      resultString = '낫싱';
+    }
+    Console.print(resultString);
+    if (numberStrike === 3) {
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    }
+    return resultString;
+  }
+
   inputCallback() {}
 
   play() {}
