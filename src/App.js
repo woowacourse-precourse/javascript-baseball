@@ -12,7 +12,4 @@ class App {
     this.game.start();
   }
 }
-
-const test = new App();
-test.play();
 module.exports = App;
