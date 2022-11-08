@@ -22,25 +22,38 @@ class GameService {
   }
 
   registerCallbacks() {
+    this.changeGameStatusWhenGameStart();
+    this.changeGameStatusWhenGameOver();
+    this.initializeGameWhenGameStartOrRestart();
+    this.changeGameDataWhenNewGuess();
+  }
+
+  changeGameStatusWhenGameStart() {
     this.dispatcher.register((action) => {
       if (action.type === ACTION_TYPE.GAME_START) {
         this.gameStatusStore.setGameStatus(GAME_STATUS.STARTED);
       }
     });
+  }
 
+  changeGameStatusWhenGameOver() {
+    this.dispatcher.register((action) => {
+      if (action.type === ACTION_TYPE.GAME_OVER) {
+        this.gameStatusStore.setGameStatus(action.nextGameStatus);
+      }
+    });
+  }
+
+  initializeGameWhenGameStartOrRestart() {
     this.dispatcher.register((action) => {
       if (action.type === ACTION_TYPE.GAME_START
           || action.type === ACTION_TYPE.GAME_RESTART) {
         this.gameDataStore.initializeGameData();
       }
     });
+  }
 
-    this.dispatcher.register((action) => {
-      if (action.type === ACTION_TYPE.GAME_OVER) {
-        this.gameStatusStore.setGameStatus(action.nextGameStatus);
-      }
-    });
-
+  changeGameDataWhenNewGuess() {
     this.dispatcher.register((action) => {
       if (action.type === ACTION_TYPE.NEW_GUESS) {
         this.gameDataStore.setBallsAndStrikesWithInput(action.input);
