@@ -37,6 +37,10 @@ class App {
         return
       }
 
+
+      let strikeCount=this.findStrike(playerNum)
+
+
       MissionUtils.Console.close()
     })
   }
@@ -79,6 +83,21 @@ class App {
       i++
     }
   }
+
+  findStrike(playerNum,comNum){
+    let strikeCount = 0
+    for (let i = 0; i < comNum.length; i++) {
+      if (playerNum[i] === comNum[i]) {
+        strikeCount++
+      }
+    }
+
+    return strikeCount
+  }
+
+
+
+
 }
 
 module.exports = App
