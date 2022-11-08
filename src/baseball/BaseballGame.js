@@ -7,6 +7,7 @@ class BaseballGame {
   constructor() {
     this.validUserNumbers = new ValidUserNumbers();
   }
+
   initGame() {
     Console.print(GAME_MESSAGE.START_MESSAGE);
     return this.playGame();
@@ -30,7 +31,7 @@ class BaseballGame {
   turnCheck(userInput, computerNumbers) {
     const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
     this.printResult(strike, ball);
-    strike === 3 ? this.restartOrEndGame() : this.playing(computerNumbers);
+    (strike === 3) ? this.restartOrEndGame() : this.playing(computerNumbers);
   }
 
   StrikeCount(userInput, computerNumbers) {
@@ -39,11 +40,9 @@ class BaseballGame {
     let strike = 0;
     let ball = 0;
     computerNumbersArr.forEach((number, index) => {
-      number === userInputArr[index]
-        ? strike++
-        : userInputArr.includes(number)
-        ? ball++
-        : 0;
+      (number === userInputArr[index])
+        ? strike++ : (userInputArr.includes(number)
+        ? ball++ : 0);
     });
     return { strike, ball };
   }
@@ -53,7 +52,7 @@ class BaseballGame {
       return Console.print("낫싱");
     }
     const strikePrint = strike > 0 ? `${strike}스트라이크` : "";
-    ball === 0
+    (ball === 0)
       ? Console.print(`${strikePrint}`)
       : Console.print(`${ball}볼 ${strikePrint}`);
   }
