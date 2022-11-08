@@ -1,14 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const isValidUser = require("./modules/isValidUser");
 const getComputerNumber = require("./modules/getComputerNumber");
 const countInput = require("./modules/countInput");
 const printResult = require("./modules/printResult");
-const isRestartNumber = require("./modules/isRestartNumber");
+const User = require("./User");
 
 const mConsole = MissionUtils.Console;
 const GAME_NUMBER_LENGTH = 3;
 
 class App {
+  constructor() {
+    this.user = new User();
+  }
+
   computerInputNumber = [];
 
   play() {
@@ -23,7 +26,7 @@ class App {
 
   getInput() {
     mConsole.readLine("숫자를 입력해주세요 : ", (pickedNumber) => {
-      if (isValidUser(pickedNumber)) {
+      if (this.user.isValidUser(pickedNumber)) {
         const checkedUser = pickedNumber.split("").map(Number);
         this.checkInput(checkedUser);
       }
@@ -40,7 +43,7 @@ class App {
   checkRestart() {
     mConsole.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     mConsole.readLine("", (restartInput) => {
-      if (isRestartNumber(restartInput)) {
+      if (this.user.isRestartNumber(restartInput)) {
         this.restartGame(Number(restartInput));
       }
     });
