@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 const mockFunction = {
   mockQuestions(answers) {
@@ -14,10 +14,10 @@ const mockFunction = {
     logSpy.mockClear();
     return logSpy;
   },
-  mockRandoms(numbers) {
+  mockRandoms(numbersArray) {
     Random.pickUniqueNumbersInRange = jest.fn();
-    numbers.reduce((acc, number) => {
-      return acc.mockReturnValueOnce(number);
+    numbersArray.reduce((acc, numberArray) => {
+      return acc.mockReturnValueOnce(numberArray);
     }, Random.pickUniqueNumbersInRange);
   },
 };
