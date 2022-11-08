@@ -14,11 +14,12 @@ const startNumberBaseball = () => {
 };
 
 const inputNumber = (answerNumber) => {
+  let ball = 0;
+  let strike = 0;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-    
+    [ball, strike] = checkNumbers(answerNumber, number);
   });
 };
-
 
 const createRandomNumber = () => {
   const baseballArr = [];
@@ -29,6 +30,22 @@ const createRandomNumber = () => {
     }
   }
   return baseballArr;
+};
+
+const checkNumbers = (answerNumber, inputNumber) => {
+  let ball = 0;
+  let strike = 0;
+  const inputNumArr = inputNumber.split("").map((el) => +el);
+  for (let idx = 0; idx < 3; idx++) {
+    if (answerNumber.includes(inputNumArr[idx])) {
+      if (answerNumber.indexOf(inputNumArr[idx]) === idx) {
+        strike++;
+        continue;
+      }
+      ball++;
+    }
+  }
+  return [ball, strike];
 };
 
 module.exports = App;
