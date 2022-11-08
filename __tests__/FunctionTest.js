@@ -3,7 +3,24 @@ const Input = require("../src/Input");
 const Parse = require("../src/Parse");
 const Question = require("../src/Question");
 const BallCount = require("../src/BallCount");
+const Game = require("../src/Game");
 const { Output } = require("../src/Output");
+
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
 
 const getPrintLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
@@ -121,5 +138,35 @@ describe("기능 테스트", () => {
     expect(count2.toString()).toBe("낫싱");
     expect(count3.toString()).toBe("2스트라이크");
     expect(count4.toString()).toBe("2볼");
+  });
+
+  test("게임 진행", () => {
+    const randoms1 = [1, 3, 5];
+    const randoms2 = [5, 8, 9];
+    const answers1 = ["246", "135"];
+    const answers2 = ["597", "589"];
+    const logSpy = getPrintLogSpy();
+    const messages1 = ["낫싱", "3스트라이크", "게임 종료"];
+    const messages2 = ["1볼 1스트라이크", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms1);
+    mockQuestions(answers1);
+
+    const game1 = new Game();
+    game1.run();
+
+    messages1.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+
+    mockRandoms(randoms2);
+    mockQuestions(answers2);
+
+    const game2 = new Game();
+    game2.run();
+
+    messages2.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
