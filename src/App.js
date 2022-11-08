@@ -29,14 +29,22 @@ class App {
   inputNumber(targetNumber) {
     Console.readLine(GUIDE_MESSAGE.PROCESS_MSG, (answer) => {
       CheckValidation(answer);
-      this.guessNumber(answer, targetNumber);
+      this.setGuessNumber(answer, targetNumber);
     });
   }
 
-  guessNumber(answer, targetNumber) {
+  setGuessNumber(answer, targetNumber) {
     let userGuessedNumber = answer.split("").map((v) => +v);
+    this.printBallCount(targetNumber, userGuessedNumber);
+  }
+
+  printBallCount(targetNumber, userGuessedNumber) {
     let [ball, strike] = CheckBallCount(targetNumber, userGuessedNumber);
     PrintBallCount(ball, strike);
+    this.gameOver(strike, targetNumber);
+  }
+
+  gameOver(strike, targetNumber) {
     strike > 2
       ? (Console.print(GUIDE_MESSAGE.CORRECT_MSG), this.manageGame())
       : this.inputNumber(targetNumber);
