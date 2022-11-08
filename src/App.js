@@ -59,12 +59,12 @@ class App {
     this.checkResultMessage(resultMessage);
   }
 
-  isStrike(answer, number, idx) {
-    return answer[idx] === number;
+  isStrike(randomNums, userNum, idx) {
+    return randomNums[idx] === userNum;
   }
 
-  isBall(answer, number, idx) {
-    return answer[idx] !== number && answer.includes(number);
+  isBall(randomNums, userNum, idx) {
+    return randomNums[idx] !== userNum && randomNums.includes(userNum);
   }
 
   getResultMessage({ ball, strike }) {
