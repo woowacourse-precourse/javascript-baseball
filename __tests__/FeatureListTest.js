@@ -105,4 +105,22 @@ describe('기능 목록 테스트', () => {
       expect([ball, strike]).toEqual([ballShouldBe, strikeShouldbe]);
     });
   });
+
+  test('입력한 숫자에 대한 결과 출력', () => {
+    const game = new Game();
+    const logSpy = getLogSpy();
+
+    const scores = [
+      // [[ball 개수, strike 개수], 출력문]
+      [[0, 1], '1스트라이크'],
+      [[1, 1], '1볼 1스트라이크'],
+      [[0, 0], '낫싱'],
+      [[0, 3], '3스트라이크'],
+    ];
+
+    scores.map(([[ball, strike], outputStr]) => {
+      game.printHint(ball, strike);
+      expect(logSpy).toHaveBeenCalledWith(outputStr);
+    });
+  });
 });
