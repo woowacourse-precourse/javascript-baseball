@@ -59,4 +59,43 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("입력에 0이 포함된 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["109"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("중복 숫자가 포함된 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["199"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("숫자가 아닌 값이 입력된 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1bc"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
