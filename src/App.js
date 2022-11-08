@@ -1,12 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
-  constructor() {
-    this.computerRandomNumbers = this.generateComputerRandomNumbers();
-  }
-
   play() {
-
+    const randomNumbers = this.createRandomNumber();
+    this.printStartMessage();
+    this.createMyNumber(randomNumbers);
   }
 
   printStartMessage() {
@@ -24,9 +22,9 @@ class App {
     return randomNumbers;
   }
 
-  createMyNumber() {
-    MissionUtils.Console.readline("숫자를 입력해주세요 : ", (myNumbers) => {
-      
+  createMyNumber(randomNumbers) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (myNumbers) => {
+      this.countBallStrike(randomNumbers, myNumbers);
     })
   }
 
@@ -52,6 +50,17 @@ class App {
       MissionUtils.Console.print(strike + "스트라이크\n");
     else
       MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크\n");
+  }
+
+  newGame() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (answer) => {
+      if (answer === 1) {
+        const randomNumbers = this.createRandomNumber();
+        this.createMyNumber(randomNumbers);
+      } else if (answer === 2) {
+        MissionUtils.Console.close();
+      } else throw new Error("입력하신 글자가 1 혹은 2가 아닙니다.");
+    })
   }
 }
 
