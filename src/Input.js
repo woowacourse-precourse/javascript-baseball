@@ -58,7 +58,8 @@ class Input {
   }
 
   static checkWrongRequest(userRequest) {
-    if (userRequest !== 1 && userRequest !== 2) throw new Error("올바르지 않은 입력입니다.");
+    const requestNumber = parseInt(userRequest);
+    if (requestNumber !== 1 && requestNumber !== 2) throw new Error("올바르지 않은 입력입니다.");
   }
 }
 
