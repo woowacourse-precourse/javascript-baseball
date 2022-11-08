@@ -2,11 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Validation = require("./Validation");
 
 class App {
-  play() {}
   constructor() {
     this.computer_number = 0;
     this.user_number = 0;
   }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.startGame();
@@ -22,12 +22,12 @@ class App {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (number) => {
-        Validation.endgame_choice_valid(number);
-        if (number == 1) {
+      (choice_number) => {
+        Validation.endgame_choice_valid(choice_number);
+        if (choice_number == 1) {
           this.startGame();
         }
-        if (number == 2) {
+        if (choice_number == 2) {
           MissionUtils.Console.close();
         }
       }
@@ -37,9 +37,9 @@ class App {
   selectComputerNumber() {
     let random_number = [];
     while (random_number.length < 3) {
-      const selected_number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!random_number.includes(selected_number)) {
-        random_number.push(selected_number);
+      const selected_random_number = MissionUtils.Random.pickNumberInRange(1,9);
+      if (!random_number.includes(selected_random_number)) {
+        random_number.push(selected_random_number);
       }
     }
     this.changeComputerNumberToArray(random_number);
@@ -100,14 +100,15 @@ class App {
     MissionUtils.Console.print(`${ball}볼`);
     this.getUserInputNumber();
   }
+
   resultNothing() {
     MissionUtils.Console.print("낫싱");
     this.getUserInputNumber();
   }
+
   resultStrikeAndBall(strike, ball) {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
     this.getUserInputNumber();
   }
 }
-
 module.exports = App;
