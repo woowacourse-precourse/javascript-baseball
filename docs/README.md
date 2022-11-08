@@ -23,14 +23,19 @@
 
 ## `setValue()`: 컴퓨터의 값을 랜덤하게 설정하는 메서드
 
+- `generatorComputerValue()` 메서드의 리턴값을 받아, `isAvailableValue`로 재확인합니다.
+- true면 `value`에 그 값을 저장합니다.
+- false면 `throw`문을 통해 예외처리합니다.
+
+## `generatorComputerValue()`: 컴퓨터의 값을 랜덤하게 설정하는 메서드
+
 - `MissionUtils` 라이브러리의 `Random.pickNumberInRange()`를 사용하여 1~9 까지 겹치지 않는 3자리 수를 만든 후 `value` 필드에 저장합니다.
-- `isAvailableValue` util 함수를 사용해서 사용 가능한 값인지 최종적으로 확인합니다.
 
 # Player 클래스
 
 - 두 개의 필드
-  - `value`: private string
   - `referee`: `Referee` 인스턴스
+  - `value`: private string
 
 ## `getValue()`: 플레이어의 값을 return하는 메서드
 
@@ -60,7 +65,7 @@
 
 - 1을 입력하면 게임을 재시작합니다.
   - `gameStart()` 메서드를 호출합니다.
-- 2를 입력하면 게임을 종료합니다.
+- 2를 입력하면 `Console.close()`를 호출하여 종료합니다.
 - 1, 2를 제외한 다른 문자를 입력 시, 다시 `gameFinish()` 메서드를 호출합니다.
 
 ## `getBallAndStrikeCount()`: 볼과 스트라이크 개수를 가져오는 메서드
@@ -68,12 +73,19 @@
 - 같은 수가 같은 자리에 있으면 **스트라이크**
 - 다른 자리에 있으면 **볼**
 
-# util 함수
+# utils/
 
-## `isAvailableValue()`: 값이 게임에 사용될 수 있는지 판단하는 함수
+## `isAvailableValue.js`
 
+- 값이 게임에 사용될 수 있는지 판단하는 함수
 - 1~9 까지 겹치지 않는 3자리 수인지 확인하고, `boolean` 값을 return합니다.
 
-# constants/message.js
+# constants/
+
+## `message.js`
 
 - 메시지들을 상수로 저장합니다.
+
+## `gameSetting.js`
+
+- 게임 설정 값들을 상수로 저장합니다.
