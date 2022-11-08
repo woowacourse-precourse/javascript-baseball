@@ -1,7 +1,8 @@
 const Message = require("./Message");
+const INPUT_LENGTH = 3;
 
 function checkInputLength(input) {
-  return input.length !== 3;
+  return input.length !== INPUT_LENGTH;
 }
 
 function checkIsDigitInRange(input) {
@@ -11,10 +12,10 @@ function checkIsDigitInRange(input) {
 
 function checkIsDiffEachOther(input) {
   const duplicateNum = new Set(input).size;
-  return duplicateNum !== 3;
+  return duplicateNum !== INPUT_LENGTH;
 }
 
-function handleException(input) {
+function handleGameException(input) {
   if (
     checkInputLength(input) |
     checkIsDigitInRange(input) |
@@ -24,4 +25,14 @@ function handleException(input) {
   }
 }
 
-module.exports = handleException;
+function checkRestartValid(input) {
+  return input !== Message.restartNum && input !== Message.gameoverNum;
+}
+
+function handleRestartException(input) {
+  if (checkRestartValid(input)) {
+    throw new Error(Message.error);
+  }
+}
+
+module.exports = { handleGameException, handleRestartException };

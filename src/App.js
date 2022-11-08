@@ -1,7 +1,10 @@
 const getNewAnswer = require("./getNewAnswer");
 const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
-const handleException = require("./handleException");
+const {
+  handleGameException,
+  handleRestartException,
+} = require("./handleException");
 const getResult = require("./getResult");
 const {
   printStart,
@@ -22,7 +25,7 @@ class App {
 
   getUserInput() {
     Console.readLine(`${Message.input}`, (userInput) => {
-      handleException(userInput);
+      handleGameException(userInput);
       this.inGame(userInput);
     });
   }
@@ -47,12 +50,7 @@ class App {
   }
 
   decideRestart(userRestartInput) {
-    if (
-      userRestartInput !== Message.restartNum &&
-      userRestartInput !== Message.gameoverNum
-    ) {
-      throw new Error(Message.error);
-    }
+    handleRestartException(userRestartInput);
 
     if (userRestartInput === Message.restartNum) {
       this.answer = getNewAnswer();
