@@ -46,3 +46,11 @@ Added new method 'check' to $App:
 - if the result is 'strike', return true
 
 Breaks $App.check, which is added and $App.input, $App.play Print Method, which is changed
+
+feat($App): end method
+
+Added new method 'end' to $App:
+- check if the player decides to re-play the game
+- if input 2, stop the game
+
+Breaks $App.end, which is added
