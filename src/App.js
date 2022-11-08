@@ -6,7 +6,14 @@ class App {
 
 	runGame() {}
 
-	process() {}
+	async process() {
+		const RANDOMNUMBER = this.getRandomNumber();
+		let message = '';
+		do {
+			const ANSWER = await this.inputAnswer();
+			message = this.printResult(RANDOMNUMBER, ANSWER);
+		} while (this.isNotThreeStrike(message));
+	}
 
 	getRandomNumber() {
 		let randomNumber = '';
