@@ -29,6 +29,7 @@ class App {
     return is_integer;
   }
 
+
   checkInputSize(input){
     let is_three = 1;
     if(input.length != 3){
@@ -37,6 +38,7 @@ class App {
     }
     return is_three;
   }
+
 
   checkDuplication(input){
     let isNot_dupli = 1;
@@ -78,49 +80,85 @@ class App {
   }
 
 
+  printResult(result){
+    let strike_cnt = result[0];
+    let ball_cnt = result[1];
+    
+    if(strike_cnt === 0 && ball_cnt === 0){
+      MissionUtils.Console.print("낫싱");
+    }
+    else if(strike_cnt === 0){
+      MissionUtils.Console.print(`${ball_cnt}볼`);
+    }
+    else if(ball_cnt === 0){
+      MissionUtils.Console.print(`${strike_cnt}스트라이크`);
+    }
+    else{
+      MissionUtils.Console.print(`${ball_cnt}볼 ${strike_cnt}스트라이크`);
+    }
+  }
+
+
   getGameResult(computer_num, game_num){
 
     // [0]strike_cnt  [1]ball_cnt
     const result = [0, 0];
     if(game_num === undefined) return result;
 
-    let idx;
-    for(let i=0; i<game_num.length; i++){
-      idx = computer_num.findIndex( x => x === game_num[i]); // 포함하지 않을 경우 -1 return
-
-      if(idx === -1) continue;
-      else if(idx === i) result[0]++;
-      else if(idx !== i) result[1]++;
+    else{
+      let idx;
+      for(let i=0; i<game_num.length; i++){
+        idx = computer_num.findIndex( x => x === game_num[i]); // 포함하지 않을 경우 -1 return
+  
+        if(idx === -1) continue;
+        else if(idx === i) result[0]++;
+        else if(idx !== i) result[1]++;
+      }
+      this.printResult(result);
     }
-    
     return result;
   }
 
 
-  play() {
+  startGame(computer_num){
 
+    let is_game_over = 0;
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", async (input) => {
+      await MissionUtils.Console.close();
+      const game_num = await(this.checkInputValue(input));
+      
+      if(game_num.length === 0){
+        return is_game_over = 1;
+      }
+
+      const result = this.getGameResult(computer_num, game_num);
+      if(result[0] === 3) { // 3 strike
+        is_game_over = 1;
+      }
+    });
+
+    return is_game_over;
+  }
+
+
+  restartGame(){
+    console.log("restart")
+  }
+
+
+  play() {
     const computer_num = this.selectComputerNum();
+
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   
     let is_game_over = 0;
-    while(!is_game_over){
-      
-      let input;
-      MissionUtils.Console.readLine("숫자를 입력해주세요 : ", async (input) => {
-        await MissionUtils.Console.close();
-        const game_num = await(this.checkInputValue(input));
-
-        const result = this.getGameResult(computer_num, game_num);
-        if(result[0] === 3) { // 3 strike
-          is_game_over = 1;
-        }
-      });
-      
-      // printResult(result);
-      // is_game_over = 1;
+    while(true){
+      is_game_over = this.startGame(computer_num);
+      if(is_game_over){
+        this.restartGame();
+        // break;
+      }
     }
-
-
   }
 }
 
