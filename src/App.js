@@ -58,6 +58,20 @@ class App {
     else if (ball == 0) MissionUtils.Console.print(strike + "스트라이크\n");
     else MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크\n");
   }
+
+  newGame() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (answer == 1) {
+          const randomNums = this.createRandomComNum();
+          this.tryToAnswer(randomNums);
+        } else if (answer == 2) {
+          MissionUtils.Console.close();
+        } else throw new Error("입력하신 글자가 1 혹은 2가 아닙니다.");
+      }
+    );
+  }
   
 }
 
