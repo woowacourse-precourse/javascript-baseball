@@ -48,6 +48,10 @@ class App {
     return out.length ? out : '낫싱';
   }
 
+  static cleanup() {
+    MissionUtils.Console.close();
+  }
+
   play() {
     const GREETING_MESSAGE = '숫자 야구 게임을 시작합니다';
     const PLAY_QUESTION = '숫자를 입력해주세요 : ';
@@ -85,14 +89,14 @@ class App {
         return;
       }
 
-      MissionUtils.Console.close();
+      App.cleanup();
     };
 
     MissionUtils.Console.print(GREETING_MESSAGE);
     try {
       MissionUtils.Console.readLine(PLAY_QUESTION, turn);
     } catch (e) {
-      MissionUtils.Console.close();
+      App.cleanup();
       throw e;
     }
   }

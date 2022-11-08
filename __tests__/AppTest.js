@@ -1,6 +1,8 @@
 const App = require('../src/App');
 
 describe('App Test', () => {
+  afterAll(() => App.cleanup());
+
   test('test isValidMenuInput', () => {
     expect(App.isValidMenuInput('1')).toBe(true);
     expect(App.isValidMenuInput('2')).toBe(true);
