@@ -66,4 +66,21 @@ describe('숫자 야구 게임 시나리오', () => {
       }).toThrow();
     });
   });
+
+  test('게임이 종료되고 재시작 혹은 종료를 선택할 수 있게 하는 기능', () => {
+    const pickedNumberArrayByComputer = [1, 2, 3, 4, 5, 6];
+    const numberEnteredByUser = ['123', '1', '456', '2'];
+    const logSpy = getLogSpy();
+    const messages = ['3스트라이크', '게임 종료'];
+
+    mockRandoms(pickedNumberArrayByComputer);
+    mockQuestions(numberEnteredByUser);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
