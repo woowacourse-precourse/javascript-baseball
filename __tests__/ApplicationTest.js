@@ -133,4 +133,12 @@ describe("숫자 야구 게임", () => {
     getCompNumArray(compNumArr);
     expect(checkDuplicates(compNumArr)).toBeFalsy();
   });
+
+  test("추가테스트1-3: getCompNumArray", () => {
+    const compNumArr = [];
+    getCompNumArray(compNumArr);
+    expect([1, 2, 3, 4, 5, 6, 7, 8, 9]).toEqual(
+      expect.arrayContaining(compNumArr)
+    );
+  });
 });
