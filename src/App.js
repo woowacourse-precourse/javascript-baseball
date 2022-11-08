@@ -1,4 +1,4 @@
-const NumberBaseball = require('./NumberBaseball');
+const NumberBaseball = require("./NumberBaseball");
 
 class App {
   play() {
@@ -9,5 +9,5 @@ class App {
 
 module.exports = App;
 
-const app = new App();
+let app = new App();
 app.play();
