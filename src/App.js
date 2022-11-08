@@ -4,23 +4,26 @@ const isError = require('./errorHandler');
 class App {
   play() {
     let FLAG = false;
+    let USER_VALUE;
     let SCORE_BOARD = [0, 0];
     let RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    let USER_VALUE = this.sliceNumber(this.inputFromUser());
 
     while (FLAG == false) {
+      USER_VALUE = this.sliceNumber(this.inputFromUser());
       SCORE_BOARD = this.judgeScore(RANDOM_VALUE, USER_VALUE);
-    }
 
-    if (SCORE_BOARD[0] == 3){
-      if (this.finishGame()){
-        MissionUtils.Console.print("게임을 재시작합니다.\n\n");
-        
-        // 랜덤값, 사용자 지정값 재설정
-        RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-        USER_VALUE = this.sliceNumber(this.inputFromUser());
-      // FLAG를 true로 설정해 반복문 탈출
-      } else  FLAG = true;
+      if (SCORE_BOARD[0] == 3){
+        if (this.finishGame()){
+          MissionUtils.Console.print("게임을 재시작합니다.\n\n");
+          
+          // 랜덤값, 사용자 지정값 재설정
+          RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+          USER_VALUE = this.sliceNumber(this.inputFromUser());
+        // FLAG를 true로 설정해 반복문 탈출
+        } else  FLAG = true;
+      } else {
+        this.printScore(SCORE_BOARD);
+      }
     }
   }
 
@@ -78,6 +81,16 @@ class App {
     else  throw new Error("입력값이 올바르지 않습니다.");
   }
 
+  printScore(SCORE_BOARD) {
+    let STRIKE = SCORE_BOARD[0];
+    let BALL = SCORE_BOARD[1];
+
+    if (STRIKE == 0 && BALL == 0) {
+      MissionUtils.Console.print("낫싱");
+    } else {
+      MissionUtils.Console.print(`${STRIKE}스트라이크 ${BALL}볼`);
+    }
+  }
 }
 
 const app = new App();
