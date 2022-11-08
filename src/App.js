@@ -1,25 +1,37 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    // 2) 숫자 입력 기능
+    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
+      // @todo 잘못된 값을 찾는 기능 , 결과에 따라 예외 발생
+
+      playBaseball(makeRandomNumbers(), answer, matchNumber); 
+
+      MissionUtils.Console.close();
+    });
+  }
 }
-inputAndPlay(makeRandomNumbers(), matchNumber);
+
+// let app = new App();
+// app.play();
 
 /**
- * 기능2. 2) 숫자 입력 기능 함수 , 입력기능 + 입력한 수와 임의의수 비교후 출력, 결과리턴
- * @param {string} randomNumbers makeRandomNumbers 함수를 통해서 랜덤한 수 생성
- * @param {Function} matchNumber 콜백함수 matchNumber (비동기 방지)
- * @returns {string} 비교이후 결과 리턴
- * @todo 잘못된 값(예외처리) 기능추가를 여기에 추가 해야 할지도 모름
+ * 입력한 값이 정확한 값인지 판별하는 기능 필요 (예외처리)
  */
-function inputAndPlay(randomNumbers, matchNumber) {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
-    // @todo 잘못된 값을 찾는 기능 , 결과에 따라 예외 발생
-    const result = matchNumber(answer, randomNumbers); // user입력값과 임의의수 매칭 결과값
-    MissionUtils.Console.print(result);
-    MissionUtils.Console.close();
-    return result;
-  });
+
+
+/**
+ * 기능2. 2) 입력한 수와 임의의수 비교후 출력, 결과리턴
+ * @param {string} randomNumbers makeRandomNumbers 함수를 통해서 랜덤한 수 생성
+ * @param {string} userNum 사용자가 입력한 수
+ * @param {Function} matchNumber 콜백함수 matchNumber (숫자비교)
+ * @returns {string} 비교이후 결과 리턴
+ */
+function playBaseball(randomNumbers, userNum, matchNumber) {
+  const result = matchNumber(userNum, randomNumbers); // user입력값과 임의의수 매칭 결과값
+  MissionUtils.Console.print(result);
+  return result;
 }
 
 /**
@@ -84,6 +96,6 @@ function matchNumber(userNums, computerNums) {
 module.exports = {
   matchNumber,
   makeRandomNumbers,
-  inputAndPlay,
+  playBaseball,
   App,
 };
