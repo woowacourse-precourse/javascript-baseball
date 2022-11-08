@@ -1,4 +1,4 @@
-const { GAME_MESSAGE, WHAT, ERROR_MESSAGE } = require("../constants/constants");
+const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
 
 class ValidUserNumbers {
   isValidUserInput(userInput) {
