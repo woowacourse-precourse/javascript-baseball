@@ -3,10 +3,12 @@ const { LENGTH, RANGE } = require("./Constant.js");
 class Judge {
   isPlayerInputValid(playerInput) {
     const numReg = /[1-9]+/;
-    if (playerInput.length !== LENGTH) return false;
-    if (playerInput.match(numReg)[0].length !== LENGTH) return false;
-    if (this.isDuplicateNum(playerInput)) return false;
-    return true;
+    if (
+      playerInput.length === LENGTH &&
+      playerInput.match(numReg)[0].length === LENGTH &&
+      !this.isDuplicateNum(playerInput)
+    )
+      return true;
   }
 
   isDuplicateNum(playerInput) {
@@ -20,9 +22,9 @@ class Judge {
     }
 
     for (let i = 0; i < 9; i++) {
-      if (duplicateCountTable[i] > 1) return false;
+      if (duplicateCountTable[i] > 1) return true;
     }
-    return true;
+    return false;
   }
 
   findStrikeAndBallCnt(computerRandomNum, playerInput) {
