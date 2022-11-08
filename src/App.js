@@ -45,6 +45,8 @@ class App {
         }
       }
     });
+
+    this.isRepeat();
   }
 
   // 유효성 검사
@@ -89,6 +91,22 @@ class App {
     console.log(`배열 두개 겹치는지 확인` + this.computerArr.filter(x=>this.userArr.includes(x)));
 
     return [strr, ball, nothing];
+  }
+
+  isRepeat(){
+    const INPUT_ERROR = "잘못된 입력입니다.(1, 2 이외의 입력)"
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+      if(input === '1'){
+        // play(); // 로직 새로 구성해서 다시 시작할 수 있도록.
+      }
+      else if(input === '2'){
+        MissionUtils.Console.print('게임 종료');
+        MissionUtils.Console.close();
+      }
+      else {
+        throw INPUT_ERROR;
+      }
+    });
   }
 }
 
