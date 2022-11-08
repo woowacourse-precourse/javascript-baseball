@@ -127,4 +127,10 @@ describe("숫자 야구 게임", () => {
     getCompNumArray(compNumArr);
     expect(compNumArr).toHaveLength(3);
   });
+
+  test("추가테스트1-2: getCompNumArray", () => {
+    const compNumArr = [];
+    getCompNumArray(compNumArr);
+    expect(checkDuplicates(compNumArr)).toBeFalsy();
+  });
 });
