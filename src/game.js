@@ -12,7 +12,7 @@ class Game {
   }
   play() {
     this.init();
-    this.getNumber(this.answerNumber);
+    this.getCount(this.answerNumber);
   }
   init() {
     this.print(MESSAGE.START);
@@ -31,8 +31,17 @@ class Game {
     }
     return randomNumberArr;
   }
-  getNumber(answer) {
-    //console.readLine();
+  getCount(answer) {
+    Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
+      const inputNumber = [...input].map(Number);
+      const { ball, strike } = this.count(inputNumber, answer); // count 함수 작업
+
+      this.isValidInput(input); // 유효성 검사
+      this.printScore(ball, strike);
+    });
+  }
+  if(strike !== 3){
+      return this.getCount
   }
 }
 const game = new Game();
