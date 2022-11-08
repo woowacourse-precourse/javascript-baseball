@@ -14,11 +14,28 @@ class App {
   play() {
     const computer_number = this.getRandomNum();
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.print(computer_number);
-    MissionUtils.Console.close();
+    this.guessNum();
   }
+  // 랜덤 번호 생성
   getRandomNum() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
+  // 사용자가 번호를 맞추기
+  guessNum() {
+    MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (answer) => {
+      MissionUtils.Console.print(answer);
+      MissionUtils.Console.close();
+      if (answer === "123") {
+        this.print("정답입니다!");
+      } else {
+        this.print("틀렸습니다!");
+        this.guessNum();
+      }
+    });
+  }
+  print(string) {
+    MissionUtils.Console.print(string);
+    MissionUtils.Console.close();
   }
 }
 
