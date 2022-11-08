@@ -2,26 +2,23 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const MESSAGE = require('./constants/message');
 const Player = require('./Player');
-const isAvailableValue = require('./utils/isAvailableValue');
 
 const RESTART = '1';
 const GAME_OVER = '2';
 
 class Referee {
   constructor() {
-    this.computer = null;
-    this.player = null;
+    this.computerValue = null;
+    this.playerValue = null;
   }
 
   gameInit() {
     MissionUtils.Console.print(MESSAGE.GAME.START);
-    this.computer = new Computer();
-    this.player = new Player();
     this.gameStart();
   }
 
   gameStart() {
-    this.computer.setValue();
+    this.computerValue = Computer.generatorComputerValue();
     this.inputPlayerValue();
   }
 
@@ -50,15 +47,15 @@ class Referee {
 
   inputPlayerValue() {
     MissionUtils.Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
-      if (isAvailableValue(answer)) {
-        this.player.setValue(answer);
-        this.gameResult();
-      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+      this.playerValue = Player.checkValidValue(answer);
+      this.gameResult();
     });
   }
 
   getBallAndStrikeCount() {
-    const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
+    const computerValue = this.computerValue;
+    const playerValue = this.playerValue;
+
     let [ball, strike] = [0, 0];
 
     for (let i = 0; i < 3; i++) {
