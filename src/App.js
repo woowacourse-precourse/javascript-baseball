@@ -1,9 +1,10 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { NOTICE, HINT, OPTION } = require("./message");
+const Computer = require("./Computer");
 
 class App {
     constructor() {
-        this.computer = [];
+        this.computer = new Computer();
         this.user = [];
     }
     play() {
@@ -12,22 +13,12 @@ class App {
     }
 
     gameStart() {
-        this.makeRandomNumber();
-    }
-
-    makeRandomNumber() {
-        this.computer = [];
-        while (this.computer.length < OPTION.PITCH_COUNT) {
-            const number = Random.pickNumberInRange(1, 9);
-            if (!this.computer.includes(number)) {
-                this.computer.push(number);
-            }
-        }
+        this.computer.setRandomNumber();
         this.getUserInput();
     }
 
     getUserInput() {
-        const computerNumber = this.computer;
+        const computerNumber = this.computer.number;
         Console.print(computerNumber);
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
             const userNumberArray = userInput.split("");
