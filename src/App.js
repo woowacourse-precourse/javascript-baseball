@@ -8,6 +8,7 @@ class App {
   play() {
     this.#startGame();
     this.#setAnswer();
+    this.#progressGame();
   }
 
   #startGame() {
@@ -17,6 +18,13 @@ class App {
   #setAnswer() {
     this.#answer = getRandomUniqueNumbers(1, 9, 3).join('');
   }
+
+  #progressGame() {
+    Console.readLine(MESSAGES.INPUT, (input) => {});
+  }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
