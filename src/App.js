@@ -86,18 +86,14 @@ class App {
 
   decideRestart() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
-      try {
-        checkNumber(answer);
-        if (answer === '2') MissionUtils.Console.close();
-        else if (answer === '1') {
-          this.computerRandomNumber = this.createRandomNumber();
-          this.getUserNumber();
-        }
-        else {
-          throw new Error('1 또는 2만 입력해주세요.');
-        }
-      } catch (error) {
-        console.log(error);
+      checkNumber(answer);
+      if (answer === '2') MissionUtils.Console.close();
+      else if (answer === '1') {
+        this.computerRandomNumber = this.createRandomNumber();
+        this.getUserNumber();
+      }
+      else {
+        throw new Error('1 또는 2만 입력해주세요.');
       }
     });
   }
