@@ -58,6 +58,9 @@ class App {
 
   showGameMenu() {
     Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
+      if (guessNumbers !== "1" && guessNumbers !== "2") {
+        throw new Error("Only 1 or 2 is possible.");
+      }
 
       if (guessNumbers === "1") {
         return this.play();
