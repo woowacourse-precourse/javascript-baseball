@@ -45,7 +45,7 @@ class DuplicateElementException extends InvalidInputException {
   }
 }
 
-class InvalidDigitException extends InvalidInputException {
+class InvalidDigitException extends RangeError {
   constructor(message = MESSAGES.DIGIT) {
     super(message);
     this.message = getMessageExitByInputError(message);
@@ -53,7 +53,7 @@ class InvalidDigitException extends InvalidInputException {
   }
 }
 
-class InvalidCommandException extends InvalidInputException {
+class InvalidCommandException extends RangeError {
   constructor(message = MESSAGES.COMMAND) {
     super(message);
     this.message = getMessageExitByInputError(message);
@@ -61,7 +61,7 @@ class InvalidCommandException extends InvalidInputException {
   }
 }
 
-class InputRangeException extends InvalidInputException {
+class InputRangeException extends RangeError {
   constructor(message = MESSAGES.RANGE) {
     super(message);
     this.message = getMessageExitByInputError(message);
@@ -69,7 +69,7 @@ class InputRangeException extends InvalidInputException {
   }
 }
 
-class InputTypeException extends InvalidInputException {
+class InputTypeException extends TypeError {
   constructor(message = MESSAGES.TYPE) {
     super(message);
     this.message = getMessageExitByInputError(message);
