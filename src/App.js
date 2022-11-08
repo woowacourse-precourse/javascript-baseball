@@ -38,6 +38,17 @@ Userinput(computernum) {
     })
   }
 
+  Expectcheck(input) {
+    if (input.length !== 3) {
+      throw new Error("3자리 숫자만 입력 가능합니다.");
+    }
+    else if (isNaN(input)) {
+      throw new Error("숫자만 입력 가능합니다.");
+    }
+    else if (input.includes(0))
+      throw new Error("숫자에 0이 포함될수 없습니다.")
+  }
+
 countstrike(inputArr, computernum) {
   let strike =0;
   for (let i = 0; i < 3; i++) {
