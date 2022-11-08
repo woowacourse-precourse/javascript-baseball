@@ -21,7 +21,8 @@ class App {
   }
 
   guessNum(targetNum) {
-    Console.readLine("숫자를 입력해주세요 : ", (userNum) => {
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      const userNum = input.trim();
       const isValid = this.user.checkValidation(userNum);
       if (!isValid) {
         throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
@@ -50,7 +51,8 @@ class App {
 
   askRestart() {
     Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-    Console.readLine("", (isRestart) => {
+    Console.readLine("", (input) => {
+      const isRestart = input.trim();
       if (isRestart === "1") return this.startGame();
       if (isRestart === "2") return this.endGame();
       this.sayError();
