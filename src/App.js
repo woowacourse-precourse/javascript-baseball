@@ -91,8 +91,8 @@ class App {
   }
 
   // 예외처리 함수
-  errorHandler(numbers) {
-    return numbers.length === 3 && numbers.length === new Set(numbers).size;
+  errorHandler(INPUT) {
+    return INPUT.length === 3 && INPUT.length === new Set(INPUT).size;
   }
 
 }
