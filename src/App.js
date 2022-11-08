@@ -49,7 +49,7 @@ class App {
       if (chooseNumber === '1') this.gameStart();
       if (chooseNumber === '2') MissonUtils.Console.close();
       if (chooseNumber !== '1' && chooseNumber !== '2') throw '게임 시작은 1, 종료는 2를 입력하셔야 합니다.';
-    })
+    });
   }
 }
 
