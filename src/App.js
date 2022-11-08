@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const userInputCheck = require("./userInputCheck.js");
 const gameCommentPrint = require("./gameCommentPrint.js");
 const { GAME_MESSAGE } = require("./constants.js");
+const compareArguments = require("./baseballGame.js");
 
 class App {
   constructor() {
@@ -19,7 +20,7 @@ class App {
     MissionUtils.Console.readLine(GAME_MESSAGE.INPUT, (userInput) => {
       this.userInput = userInput;
       userInputCheck(this.userInput);
-      console.log(this.computerNumber)
+      compareArguments(this.computerNumber, this.userInput)
       this.readUserInput();
     });
   }

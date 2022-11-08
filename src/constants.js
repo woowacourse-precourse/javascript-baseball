@@ -10,4 +10,12 @@ const GAME_ERROR_MESSAGE = Object.freeze({
   NOT_NUMBER: "1 ~ 9 사이의 숫자를 입력하지 않았습니다.",
 });
 
-module.exports = {GAME_ERROR_MESSAGE, GAME_MESSAGE}
+const RESULT = Object.freeze({
+  정답: "3스트라이크",
+  낫싱: "낫싱",
+  볼: "볼 ",
+  스트라이크: "스트라이크",
+  공백: "",
+})
+
+module.exports = {GAME_ERROR_MESSAGE, GAME_MESSAGE, RESULT}
