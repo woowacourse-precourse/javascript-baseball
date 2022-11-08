@@ -1,14 +1,14 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 function pickUniqueNumbersInRange(start, end, count) {
-  const targat = [];
-  while (targat.length < count) {
+  const numbers = [];
+  while (numbers.length < count) {
     const number = Random.pickNumberInRange(start, end);
-    if (!targat.includes(number)) {
-      targat.push(number);
+    if (!numbers.includes(number)) {
+      numbers.push(number);
     }
   }
-  return targat;
+  return numbers;
 }
 
 function getUniqueNumberCount(string) {
