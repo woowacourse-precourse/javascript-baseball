@@ -9,8 +9,8 @@ class User {
   }
 
   readFlag(query, callback) {
-    MissionUtils.Console.readLine(query, (answer) => {
-      callback(Validator.flag(answer));
+    MissionUtils.Console.readLine(query, (flag) => {
+      callback(Validator.flag(flag));
     });
   }
 }
