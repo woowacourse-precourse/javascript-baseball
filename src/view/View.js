@@ -51,7 +51,7 @@ class View {
       singleTryResultComment += `${strike}스트라이크`;
     }
 
-    Console.print(singleTryResultComment);
+    Console.print(singleTryResultComment.trim());
   }
 
   // 게임이 끝났을 때 상응하는 메세지를 출력한다.
