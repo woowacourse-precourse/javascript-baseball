@@ -44,7 +44,6 @@ class BaseballGameFunc {
       ball: 0,
       nothing: 0,
     };
-    console.log(userInput, whereToFind);
 
     userInput.forEach((value, idx) => {
       const isIncludedAndSameIdx = whereToFind.get(idx) === value;
