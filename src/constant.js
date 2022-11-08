@@ -5,7 +5,12 @@ const constants = {
   STRIKE: '스트라이크',
   NOTHING: '낫싱',
   WIN_MESSAGE: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
-  END_MESSAGE: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  REGAME_MESSAGE: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  START_NUMBER: 1,
+  END_NUMBER: 9,
+  ANSWER: 3,
+  NEW_GAME: 1,
+  EXIT_GAME: 2,
 };
 
 module.exports = constants;
