@@ -6,7 +6,7 @@ class App {
   }
 
   gameStartMessage() {
-    return MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 
   computerChoiceNumber() {
@@ -17,7 +17,6 @@ class App {
         this.computerNumber += `${RANDOM_NUMBER}`;
       }
     }
-    MissionUtils.Console.print(this.computerNumber);
     this.computerNumberArr = this.computerNumber
       .toString()
       .split("")
