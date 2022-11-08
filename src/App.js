@@ -20,22 +20,11 @@ class App {
     this.resultObject = { ball: 0, strike: 0 };
   }
 
-  // get userNumberArray() {
-  //   return this.serNumberArray;
-  // }
-
-  // set userNumberArray(array) {
-  //   this.userNumberArray = array;
-  // }
-
   isSameNumber() {
     this.userNumberArray = this.userNumberInput
       .split('')
       .map((number) => parseInt(number, 10));
     this.userNumberSet = new Set(this.userNumberArray);
-    // console.log(
-    //   `arr ${this.userNumberArray.length} set ${this.userNumberSet.size}`,
-    // );
     return this.userNumberArray.length !== this.userNumberSet.size;
   }
 
@@ -88,15 +77,9 @@ class App {
   gameProcess() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.userNumberInput = input;
-      // this.resultObject.ball += 1;
-      // console.log(`ball ${this.resultObject.ball}`);
       this.checkInvalidInput();
-      // console.log(`입력받은 숫자 : ${this.userNumberInput}`);
-      console.log(`컴퓨터 숫자 : ${this.computerNumberArray.join('')}`);
       this.resultObject.strike = this.countStrike();
       this.resultObject.ball = this.countBall();
-      // console.log(`ball ${this.resultObject.ball}`);
-      // console.log(`strike ${this.resultObject.strike}`);
       MissionUtils.Console.print(this.getResultString());
       if (this.resultObject.strike === 3) {
         this.endingProcess();
@@ -108,9 +91,7 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    // while (this.continueFlag) {
     this.gameProcess();
-    // }
   }
 
   restart() {
