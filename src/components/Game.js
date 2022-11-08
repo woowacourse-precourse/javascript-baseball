@@ -1,3 +1,5 @@
+const { Console } = require("@woowacourse/mission-utils");
+
 class Game {
   validateInput(input) {
     const isValidLength = input.length === 3;
