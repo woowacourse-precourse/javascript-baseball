@@ -23,6 +23,27 @@ class App {
     }
     return computer.join('');
   }
+
+  // 인게임 진행
+  inGame() {
+    
+  }
+
+  // 입력 예외 처리
+  checkInput(input) {
+    if (input.length !== 3) {
+      throw ("INPUT ERROR: 3자리 숫자를 입력해주세요.");
+    }
+    
+    if (Number.isNaN(Number(input))) {
+      throw ("INPUT ERROR: 숫자만 입력해주세요.");
+    }
+  
+    if (input.split("").some((num, index, arr) => arr.indexOf(num) !== index)) {
+      throw ("INPUT ERROR: 중복되지 않은 숫자를 입력해주세요.");
+    }
+  }
+
 }
 
 module.exports = App;
