@@ -56,6 +56,7 @@ class App {
         MissionUtils.Console.readLine("숫자를 입력해주세요.", (number) => {
             this.isValidLength(number)
             this.isDuplicate(number)
+            this.isABC(number)
             userNumber = Array.from(number)
             if (this.currentScore(this.getScore(computerNumber, userNumber)) === false) {
                 this.read(computerNumber)
@@ -86,6 +87,12 @@ class App {
         let arr = new Set(userNumber);
         arr = [...arr];
         if (arr.length !== 3) {
+            throw "잘못된 값을 입력하셨습니다. 게임을 종료합니다.\n";
+        }
+    }
+
+    isABC(userNumber) {
+        if (isNaN(parseInt(userNumber))) {
             throw "잘못된 값을 입력하셨습니다. 게임을 종료합니다.\n";
         }
     }
