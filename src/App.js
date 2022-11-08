@@ -1,113 +1,79 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Console = MissionUtils.Console;
-const Random = MissionUtils.Random;
+const { MESSAGES, ERRORS } = require("./constants.js");
+const { Console, Random } = MissionUtils;
 
 class App {
   constructor() {
-    this.answer = {};
-    this.guess = null;
+    this.answer = null;
   }
 
   play() {
-    Console.print("숫자 야구 게임을 시작합니다.");
-    this.answer = this.selectAnswerNumber();
-    this.getUserGuess();
+    this.startGame();
+    this.getGuess(this.answer);
   }
 
-  selectAnswerNumber() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3).reduce((acc, cur, idx) => {
-      acc[cur] = idx + 1;
-      return acc;
-    }, {});
+  startGame() {
+    Console.print(MESSAGES.APP_START);
+    this.answer = this.setAnswer();
   }
 
-  getUserGuess() {
-    Console.readLine("숫자를 입력해주세요 : ", (guess) => {
-      this.checkGuessVaildation(guess);
-      this.compareAndDisplay(guess);
+  setAnswer() {
+    let answer = {};
+    let indexCount = 1;
+    while (indexCount <= 3) {
+      const digit = Random.pickNumberInRange(1, 9);
+      if (!answer[digit]) answer[digit] = indexCount++;
+    }
+    return answer;
+  }
+
+  isValidInput(input) {
+    if (!/^\d+$/.test(input)) throw new Error(ERRORS.IS_NOT_NUMBER);
+    if (new Set(input).size !== 3) throw new Error(ERRORS.HAS_SAME_NUMBER);
+    if (input.includes("0")) throw new Error(ERRORS.HAS_ZERO);
+    if (input.length !== 3) throw new Error(ERRORS.LENGTH_IS_NOT_THREE);
+    return true;
+  }
+
+  getGuess(answer) {
+    Console.readLine(MESSAGES.GUESS_QUESTION, (guess) => {
+      if (!this.isValidInput(guess)) return;
+      const { ball, strike } = this.compare(guess, this.answer);
+      this.display(ball, strike);
+      if (strike !== 3) return this.getGuess(answer);
+      else this.replayOrEnd();
     });
   }
 
-  checkGuessVaildation(guess) {
-    if (!this.isDigits(guess)) {
-      throw new Error("숫자가 아닌 문자는 입력이 불가능합니다.");
-    }
-    if (guess.length !== 3) {
-      throw new Error(
-        "1부터 9까지 서로 다른 수로 이루어진 3자리 숫자만 입력이 가능합니다."
-      );
-    }
-    if (this.hasZero(guess)) {
-      throw new Error("0이 포함된 숫자는 입력이 불가능합니다.");
-    }
-    if (this.hasSameNumber(guess)) {
-      throw new Error("중복되는 숫자는 입력이 불가능합니다.");
-    }
-  }
-
-  isDigits(number) {
-    return /^\d+$/.test(number);
-  }
-
-  hasZero(number) {
-    return number.includes("0");
-  }
-
-  hasSameNumber(number) {
-    for (let index = 0; index < 3; index++) {
-      if (number.indexOf(number[index]) !== number.lastIndexOf(number[index])) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  compareAndDisplay(guess) {
-    let result = this.compareGuessAndAnswer(guess);
-    this.displayResult(result);
-    if (this.isAnswer(result.strike)) {
-      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      this.replayOrEnd();
-    } else {
-      this.getUserGuess();
-    }
-  }
-
-  compareGuessAndAnswer(guess) {
+  compare(guess, answer) {
     let ball = 0;
     let strike = 0;
 
     guess.split("").forEach((digit, index) => {
-      if (this.answer[digit])
-        this.answer[digit] === index + 1 ? strike++ : ball++;
+      if (answer[digit] === index + 1) strike++;
+      else if (answer[digit]) ball++;
     });
-    return { ball: ball, strike: strike };
+
+    return { ball, strike };
   }
 
-  displayResult({ ball, strike }) {
+  display(ball, strike) {
     const displayed = [];
+
     if (ball) displayed.push(`${ball}볼`);
     if (strike) displayed.push(`${strike}스트라이크`);
     if (!ball & !strike) displayed.push("낫싱");
+
     Console.print(displayed.join(" "));
   }
 
-  isAnswer(strike) {
-    return strike == 3;
-  }
-
   replayOrEnd() {
-    Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (reply) => {
-        if (reply === "1") {
-          this.answer = this.selectAnswerNumber();
-          this.getUserGuess();
-        } else if (reply === "2") {
-          Console.close();
-        }
-      }
-    );
+    Console.print(MESSAGES.GAME_END);
+    Console.readLine(MESSAGES.REPLAY_QUESTION, (input) => {
+      if (input === "1") this.play();
+      else if (input === "2") Console.close();
+      else throw new Error(ERRORS.ONLY_ONE_OR_TWO);
+    });
   }
 }
 
