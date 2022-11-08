@@ -109,7 +109,10 @@ class App {
           return;
         }
 
-        if (parsedAnswer === 2) return;
+        if (parsedAnswer === 2) {
+          MissionUtils.Console.close();
+          return;
+        }
 
         MissionUtils.Console.print("1 혹은 2만 입력하세요.");
         this.afterGameEnded();
