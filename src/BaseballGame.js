@@ -30,8 +30,13 @@ class BaseballGame {
    * 3자리이며 숫자만 입력되었는지 확인한다.
    */
   isInvalidThreeDigits = () => {
+    const numberSet = new Set(this.#userInput);
     const numberRegExp = new RegExp(/[0-9]/g);
-    return this.#userInput.length !== 3 || !numberRegExp.test(this.#userInput);
+    return (
+      this.#userInput.length !== 3 ||
+      numberSet.size !== 3 ||
+      !numberRegExp.test(this.#userInput)
+    );
   };
 
   /**
@@ -41,7 +46,7 @@ class BaseballGame {
     Console.readLine(Messages.INPUT_NUMBER, (number) => {
       this.#userInput = number;
       if (this.isInvalidThreeDigits()) {
-        throw new Error(Messages.ERROR.NUMBER_RANGE);
+        throw new Error(Messages.ERROR.INVALID_BALL_NUMBER);
       }
 
       const checkCount = this.getCheckCount();
@@ -91,7 +96,7 @@ class BaseballGame {
         Console.print(Messages.GAME_OVER);
         Console.close();
       } else {
-        throw new Error(Messages.ERROR.CHOOSE_RANGE);
+        throw new Error(Messages.ERROR.INVALID_SELECT_NUMBER);
       }
     });
   };
