@@ -43,5 +43,12 @@ class App {
       return false;
     }
   }
+
+  hasSameNumber(inputNumber) {
+    if (inputNumber[0] === inputNumber[1] || inputNumber[1] === inputNumber[2] || inputNumber[2] === inputNumber[0]) {
+      return true;
+    }
+    return false;
+  }
 }
 module.exports = App;
