@@ -55,3 +55,10 @@ describe("areEachDifferent 함수 테스트", () => {
     });
 });
 
+describe("stringToNumberInList 함수 테스트", () => {
+    test("테스트 1", () => {
+        const result = stringToNumberInList('123');
+
+        expect(result).toEqual([1, 2, 3]);
+    });
+});
