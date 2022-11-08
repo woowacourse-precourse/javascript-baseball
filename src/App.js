@@ -6,12 +6,12 @@ class App {
 
   }
 
-  print_start_message () {
+  printStartMessage () {
     const str = "숫자 야구 게임을 시작합니다.";
     return str;
   }
 
-  random_three_numbers() {
+  randomThreeNumbers() {
 
     let three_numbers = [];
     let array_size = 3;
@@ -27,10 +27,14 @@ class App {
     // return three_numbers;
   }
 
+  inputThreeNumbers() {
+    
+  }
+
   play() {
 
-    MissionUtils.Console.print(this.print_start_message());
-    this.random_three_numbers();
+    MissionUtils.Console.print(this.printStartMessage());
+    this.randomThreeNumbers();
 
 
 
