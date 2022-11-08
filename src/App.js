@@ -4,6 +4,11 @@ class App {
   play() {
     console.log('숫자 야구 게임을 시작합니다')
 
+    this.wholeLogic()
+  }
+
+  wholeLogic() {
+    this.getComNum()
     this.gameStart()
   }
 
@@ -11,18 +16,12 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해 주세요', (num) => {
       const playerNum = num.split('').map(Number)
 
-      //이걸 분리해야 함
-      const comNum = []
-      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
-      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
-      comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
-
+      console.log(this.comNum)
       console.log(playerNum)
-      console.log(comNum)
 
       this.checkAllvalidation(playerNum)
-      let strikeCount = this.findStrike(playerNum, comNum)
-      let ballCount = this.findBall(playerNum, comNum)
+      let strikeCount = this.findStrike(playerNum, this.comNum)
+      let ballCount = this.findBall(playerNum, this.comNum)
       const result = this.makeAnswer(strikeCount, ballCount)
       MissionUtils.Console.print(result)
 
@@ -35,36 +34,70 @@ class App {
     })
   }
 
+  getComNum() {
+    this.comNum = []
+    this.comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+    this.comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+    this.comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
+  }
+
   checkAllvalidation(playerNum) {
-    try {
-      this.vaildCheckforLength(playerNum)
-    } catch (e) {
-      //MissionUtils.Console.print(e)
-      //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
-      console.log(e)
-      return
+    if (playerNum.length !== 3) {
+      //에러 throw
+      throw '입력값의 길이가 3 이상이거나 3보다 작습니다'
     }
 
-    try {
-      this.vaildCheckforNaN(playerNum)
-    } catch (e) {
-      console.log(e)
-      return
+    playerNum.map((i) => {
+      if (typeof i !== 'number') {
+        //에러 throw
+        throw '숫자 형태가 아닙니다'
+      }
+    })
+
+    let copiedArr = [...playerNum]
+
+    let i = 0
+    while (i !== playerNum.length) {
+      let firstValue = copiedArr.shift()
+
+      let existIndex = copiedArr.indexOf(firstValue)
+      if (existIndex !== -1) {
+        //존재한다면
+        throw '중복된 값이 존재합니다'
+      }
+
+      i++
     }
 
-    try {
-      this.vaildCheckforDuplicate(playerNum)
-    } catch (e) {
-      console.log(e)
-      return
-    }
+    // try {
+    //   this.vaildCheckforLength(playerNum)
+    // } catch (e) {
+    //   //MissionUtils.Console.print(e)
+    //   //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
+    //   console.log(e)
+    //   return
+    // }
+
+    // try {
+    //   this.vaildCheckforNaN(playerNum)
+    // } catch (e) {
+    //   console.log(e)
+    //   return
+    // }
+
+    // try {
+    //   this.vaildCheckforDuplicate(playerNum)
+    // } catch (e) {
+    //   console.log(e)
+    //   return
+    // }
   }
 
   //길이가 3이 아닐 때(길이가 3 이상 , 입력값이 없을 때)
   vaildCheckforLength(playerNum) {
     if (playerNum.length !== 3) {
       //에러 throw
-      throw new Error('입력값의 길이가 3 이상이거나 3보다 작습니다')
+      throw '입력값의 길이가 3 이상이거나 3보다 작습니다'
     }
   }
 
@@ -73,8 +106,7 @@ class App {
     playerNum.map((i) => {
       if (typeof i !== 'number') {
         //에러 throw
-        throw new Error('숫자 형태가 아닙니다')
-        //MissionUtils.Console.close()
+        throw '숫자 형태가 아닙니다'
       }
     })
   }
@@ -90,8 +122,7 @@ class App {
       let existIndex = copiedArr.indexOf(firstValue)
       if (existIndex !== -1) {
         //존재한다면
-        throw new Error('중복된 값이 존재합니다')
-        break
+        throw '중복된 값이 존재합니다'
       }
 
       i++
@@ -152,8 +183,8 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       (num) => {
-        if (num === 1) {
-          this.gameStart()
+        if (Number(num) === 1) {
+          this.wholeLogic()
         } else {
           MissionUtils.Console.print('게임 종료')
           MissionUtils.Console.close()
