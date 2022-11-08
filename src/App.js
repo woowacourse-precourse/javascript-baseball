@@ -37,7 +37,7 @@ class Game {
 
 
   onGame(input){
-    // this.userNumberArray = input.split("").map(Number);
+    this.userNumberArray = input.split("").map(Number);
   }
 
 
