@@ -1,11 +1,5 @@
 const App = require("../src/App");
-const {
-  EmptyInputException,
-  WhiteSpaceInputException,
-  DuplicateElementException,
-  InvalidDigitException,
-  BadCommandException,
-} = require("../src/Error");
+const { InvalidInputException } = require("../src/Error");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const NUMBERS = {
@@ -109,7 +103,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(EmptyInputException);
+    }).toThrow(InvalidInputException);
   });
 
   test("공백문자만을 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -120,7 +114,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(WhiteSpaceInputException);
+    }).toThrow(InvalidInputException);
   });
 
   test("공백문자를 포함한 문자를 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -131,7 +125,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(WhiteSpaceInputException);
+    }).toThrow(InvalidInputException);
   });
 
   test("숫자 이외의 문자 입력시 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -153,7 +147,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidDigitException);
+    }).toThrow(InvalidInputException);
   });
 
   test("각 자리수 중 같은 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -164,7 +158,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(DuplicateElementException);
+    }).toThrow(InvalidInputException);
   });
 
   test("각 자리수 중 1~9를 벗어난 숫자가 있는 경우 예외를 발생시키고 애플리케이션을 종료한다.", () => {
@@ -230,7 +224,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(BadCommandException);
+    }).toThrow(InvalidInputException);
   });
 
   test("게임 종료 후 재시작 여부 확인시 아무런 글자 없이 입력하면 예외가 발생되며 종료된다.", () => {
@@ -243,7 +237,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(EmptyInputException);
+    }).toThrow(InvalidInputException);
   });
 
   test("게임 종료 후 재시작 여부 확인시 입력에 공백이 있으면 예외가 발생되며 종료된다.", () => {
@@ -256,7 +250,7 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(WhiteSpaceInputException);
+    }).toThrow(InvalidInputException);
   });
 
   test("게임 종료 후 재시작", () => {
@@ -292,6 +286,6 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow(InvalidDigitException);
+    }).toThrow(InvalidInputException);
   });
 });

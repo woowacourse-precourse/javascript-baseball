@@ -1,49 +1,8 @@
 class InvalidInputException extends Error {
   constructor(message = "잘못된 입력입니다.") {
     super(message);
-    this.message = message;
+    this.name = "InvalidInputException";
   }
 }
 
-class EmptyInputException extends InvalidInputException {
-  constructor(message) {
-    super(message);
-    this.message = message;
-  }
-}
-
-class WhiteSpaceInputException extends InvalidInputException {
-  constructor(message) {
-    super(message);
-    this.message = message;
-  }
-}
-
-class DuplicateElementException extends InvalidInputException {
-  constructor(message) {
-    super(message);
-    this.message = message;
-  }
-}
-
-class InvalidDigitException extends InvalidInputException {
-  constructor(message) {
-    super(message);
-    this.message = message;
-  }
-}
-
-class BadCommandException extends InvalidInputException {
-  constructor(message) {
-    super(message);
-    this.message = message;
-  }
-}
-
-module.exports = {
-  EmptyInputException,
-  WhiteSpaceInputException,
-  DuplicateElementException,
-  InvalidDigitException,
-  BadCommandException,
-};
+module.exports = { InvalidInputException };
