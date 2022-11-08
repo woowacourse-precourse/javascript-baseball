@@ -123,4 +123,29 @@ describe('기능 목록 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(outputStr);
     });
   });
+
+  test('게임 종료 후 1, 2 외의 숫자 입력시 에러처리', () => {
+    const game = new Game();
+
+    answers = [
+      // 1 또는 2가 아닐 경우
+      '0',
+      '3',
+      // 1자리 수가 아닐 경우
+      '',
+      '12',
+      '0.1',
+      '-2',
+      // 숫자가 아닐 경우
+      'a',
+      '일',
+      '$',
+    ];
+
+    answers.forEach((answer) => {
+      expect(() => {
+        game.isValidAnswer(answer);
+      }).toThrow('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    });
+  });
 });
