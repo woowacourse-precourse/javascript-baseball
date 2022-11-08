@@ -24,7 +24,7 @@ const getLogSpy = () => {
 };
 
 describe("입력한 수에 대한 결과를 볼, 스트라이크 개수 순서로 표시하는지 테스트", () => {
-  test("게임 종료 후 재시작", () => {
+  test("게임 결과 출력 테스트", () => {
     const randoms = [9, 5, 8];
     const answers = ["456", "789", "985", "958", "2"];
     const logSpy = getLogSpy();
