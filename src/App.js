@@ -85,5 +85,4 @@ class App {
 
 const MissionUtils = require("@woowacourse/mission-utils");
 const setting = require("./Setting");
-
 module.exports = App;

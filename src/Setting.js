@@ -18,7 +18,7 @@ const checkInput = (input) => {
 }
   
   
-  const getInputIntArray = (input) => {
+const getInputIntArray = (input) => {
     const userInputArray = [...input];
     const newArray = userInputArray.map((num) => parseInt(num));
     return newArray;
