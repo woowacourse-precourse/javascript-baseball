@@ -43,6 +43,12 @@ class Ball {
 
     return COUNT ? `${COUNT}볼` : "";
   }
+
+  is3Strike(otherBall) {
+    if (!this.number - otherBall.getNumber()) return true;
+
+    return false;
+  }
 }
 
 module.exports = Ball;
