@@ -61,10 +61,12 @@ class App {
 
     while (deduplicateRandomNumbers.length < SETTING.MAX_NUMBER_LENGTH) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(SETTING.FROM_NUMBER, SETTING.TO_NUMBER);
+
       if (!deduplicateRandomNumbers.includes(randomNumber)) {
         deduplicateRandomNumbers.push(randomNumber);
       }
     }
+
     return deduplicateRandomNumbers;
   }
 
