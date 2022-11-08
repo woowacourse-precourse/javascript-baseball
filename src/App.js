@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const GAME_START_KEY = "1";
+const GAME_RESTART_KEY = "1";
 const GAME_EXIT_KEY = "2";
 
 const MIN_RANDOM_NUIMBER = 1;
@@ -60,9 +60,9 @@ function App() {
         "3스트라이크 \n 3개의 숫자를 모두 맞히셨습니다! 게임 종료"
       );
       MissionUtils.Console.readLine(
-        `게임을 새로 시작하려면 ${GAME_START_KEY}, 종료하려면 ${GAME_EXIT_KEY}를 입력하세요.\n`,
+        `게임을 새로 시작하려면 ${GAME_RESTART_KEY}, 종료하려면 ${GAME_EXIT_KEY}를 입력하세요.\n`,
         (input) => {
-          if (input === GAME_START_KEY) {
+          if (input === GAME_RESTART_KEY) {
             setNewAnswer();
             recieveUserInput();
             return;
