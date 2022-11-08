@@ -1,8 +1,10 @@
 const { GAME_RULE, ERROR_MESSAGE } = require("../constants");
 
 const checkValidation = (userInput) => {
-  RangeNumber(userInput);
-  isNumberLengthThree(userInput);
+  this.userInput = userInput;
+  isNumberLengthThree();
+  RangeNumber();
+  isOverLayRange(userInput);
 };
 
 const RangeNumber = () => {
@@ -16,8 +18,18 @@ const RangeNumber = () => {
 };
 
 const isNumberLengthThree = () => {
-  if (userInput.length !== GAME_RULE.LENGTH) {
+  if (this.userInput.length !== GAME_RULE.LENGTH) {
     throw new Error(ERROR_MESSAGE.INVALID_LENGTH);
+  } else {
+    return true;
+  }
+};
+
+const isOverLayRange = () => {
+  const userInputSet = new Set(this.userInput);
+
+  if (this.userInput.length !== userInputSet.size) {
+    throw new Error(ERROR_MESSAGE.DUPLICATE);
   }
 
   return true;
