@@ -8,12 +8,8 @@ const intersection = (setA, setB) =>
 
 class App {
   constructor() {
-    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
-      1,
-      9,
-      3,
-    );
-    this.computerNumberSet = new Set(this.computerNumberArray);
+    this.computerNumberArray = [];
+    this.computerNumberSet = new Set();
     this.userNumberInput = '';
     this.userNumberArray = [];
     this.userNumberSet = new Set();
@@ -85,21 +81,56 @@ class App {
     return resultString;
   }
 
-  play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  gameProcess() {
+    this.computerNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
+      1,
+      9,
+      3,
+    );
+    this.computerNumberSet = new Set(this.computerNumberArray);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      console.log(`입력받은 숫자 : ${input}`);
       this.userNumberInput = input;
       // this.resultObject.ball += 1;
       // console.log(`ball ${this.resultObject.ball}`);
       this.checkInvalidInput();
+      // console.log(`입력받은 숫자 : ${this.userNumberInput}`);
+      console.log(`컴퓨터 숫자 : ${this.computerNumberArray.join('')}`);
+      this.resultObject.strike = this.countStrike();
+      this.resultObject.ball = this.countBall();
+      // console.log(`ball ${this.resultObject.ball}`);
+      // console.log(`strike ${this.resultObject.strike}`);
+      MissionUtils.Console.print(this.getResultString());
+      if (this.resultObject.strike === 3) {
+        this.endingProcess();
+      } else {
+        this.gameProcess();
+      }
     });
-    console.log(`컴퓨터 숫자 : ${this.computerNumberArray.join('')}`);
-    this.resultObject.strike = this.countStrike();
-    this.resultObject.ball = this.countBall();
-    console.log(`ball ${this.resultObject.ball}`);
-    console.log(`strike ${this.resultObject.strike}`);
-    MissionUtils.Console.print(this.getResultString());
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    // while (this.continueFlag) {
+    this.gameProcess();
+    // }
+  }
+
+  restart() {
+    this.gameProcess();
+  }
+
+  endingProcess() {
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (input) => {
+        if (input === '1') {
+          this.restart();
+        } else if (input === '2') {
+          MissionUtils.Console.close();
+        }
+      },
+    );
   }
 }
 
