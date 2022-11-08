@@ -64,34 +64,28 @@ class App {
   }
 
   NumberToArray(number) {
-    let numArray = [];
-    while (number >= 1) {
-      numArray.unshift(number % 10);
-      number = parseInt(number / 10);
-    }
-
-    return numArray;
+    // let numArray = [];
+    // while (number >= 1) {
+    //   numArray.unshift(number % 10);
+    //   number = parseInt(number / 10);
+    // }
+    // return numArray;
   }
 
   printResult() {
     let result = this.gameResult;
 
-    // 볼, 스트라이크가 둘 다 null인 경우
-    if (!result.get("볼") && !result.get("스트라이크")) {
-      MissionUtils.Console.print("낫싱");
-      // 숫자를 모두 맞춘 경우
-    } else if (result.get("스트라이크") == 3) {
-      MissionUtils.Console.print("3스트라이크");
-      // 볼, 스트라이크 값이 있는 경우
-    } else {
-      let ball = result.get("볼") != null ? result.get("볼") + "볼" : "";
-      let strike =
-        result.get("스트라이크") != null
-          ? result.get("스트라이크") + "스트라이크"
-          : "";
-      MissionUtils.Console.print(
-        ball ? ball.concat(strike ? " " + strike : "") : strike
-      );
+    let strike = result.get("스트라이크")
+      ? result.get("스트라이크") + "스트라이크"
+      : null;
+    let ball = result.get("볼") ? result.get("볼") + "볼" : null;
+
+    switch (ball) {
+      case null:
+        MissionUtils.Console.print(strike ?? "낫싱");
+        break;
+      default:
+        MissionUtils.Console.print(ball + (strike ? " " + strike : ""));
     }
   }
 
