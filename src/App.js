@@ -70,14 +70,16 @@ class App {
     try { this.valueExceptionHandling(answer) } catch (e) { this.endGame(e) };
     let result_score = this.checkScore(answer, CORRECT_LIST);
     let result_text = this.checkCount(result_score);
-
+  
     Console.print(this.printResult(result_text));
+
+    if(result_score.strike !== 3) return true;
 
     this.askingRestart();
   }
 
   startGame(CORRECT_LIST) {
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => { this.inputNumber(answer, CORRECT_LIST) });
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => { if(this.inputNumber(answer, CORRECT_LIST)) this.startGame() });
   }
 
   createRandomValue() {
@@ -97,6 +99,6 @@ class App {
   }
 }
 const app = new App;
-app.inputNumber('123', ['1', '2', '3']);
+app.play();
 
 module.exports = App;
