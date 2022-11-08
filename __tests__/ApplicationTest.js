@@ -152,4 +152,9 @@ describe("숫자 야구 게임", () => {
     const testArr = [1, 2, 2];
     expect(checkDuplicates(testArr)).toBeTruthy();
   });
+
+  test("추가테스트3-2: checkDuplicates", () => {
+    const testArr = [1, 2, 3];
+    expect(checkDuplicates(testArr)).toBeFalsy();
+  });
 });
