@@ -43,6 +43,20 @@ class App {
     if (listOfNumber.includes('0')) return false;
   }
 
+  getHint(answer, inputNumber) {
+    let strike = 0;
+    let ball = 0;
+    let result = '';
+    let hint = '';
+    for (let i = 0; i < answer.length; i++) {
+      result = this.CheckStrikeBall(answer, inputNumber, i);
+      if (result === 'strike') strike += 1;
+      else if (result === 'ball') ball += 1;
+    }
+    hint = this.makeHint(strike, ball);
+    return hint;
+
+  }
 }
 
 module.exports = App;
