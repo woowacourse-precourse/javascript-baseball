@@ -4,7 +4,7 @@ class Error {
     this.checkIsNumber(userInput);
     this.checkDuplicate(userInput);
     this.checkIncludesZero(userInput);
-    this.checkNull(userInput);
+    this.checkEmpty(userInput);
   }
 
   checkLength(userInput) {
@@ -31,7 +31,7 @@ class Error {
     }
   }
 
-  checkNull(userInput) {
+  checkEmpty(userInput) {
     if (!userInput) {
       throw '아무것도 입력되지 않았습니다.';
     }

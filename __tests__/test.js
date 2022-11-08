@@ -22,7 +22,7 @@ describe("숫자 야구 게임 테스트", () => {
   })
 
   test("입력 여부 테스트", () => {
-    expect(() => error.checkNull('')).toThrow();
+    expect(() => error.checkEmpty('')).toThrow();
   })
 
   test("볼과 스트라이크 개수 테스트", () => {
