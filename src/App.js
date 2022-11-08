@@ -51,6 +51,13 @@ class App {
 
       const { ballCount, strikeCount } = this.compare(userInput.split(''));
       this.showResult(ballCount, strikeCount);
+
+      if (strikeCount === 3) {
+        this.success();
+        return;
+      }
+
+      this.guess();
     });
   }
 
@@ -92,6 +99,10 @@ class App {
     Console.print(
       `${ballCount}${HINT_WORD.BALL} ${strikeCount}${HINT_WORD.STRIKE}`
     );
+  }
+
+  success() {
+    Console.print(MESSAGE.CORRECT);
   }
 
   isError(userInput) {
