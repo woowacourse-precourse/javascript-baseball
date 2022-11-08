@@ -35,5 +35,13 @@ class App {
       return false;
     }
   }
+
+  is3Digit(inputNumber) {
+    if (inputNumber.length === 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 module.exports = App;
