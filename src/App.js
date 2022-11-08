@@ -6,7 +6,6 @@ const compareNumbers = require("./compareNumbers");
 const { OUTPUT_MESSAGE } = require('./constantValue');
 
 class App {
-
   constructor() {
   }
 
@@ -47,7 +46,6 @@ class App {
         ball += 1;
       }
     });
-
 
     return compareNumbers(strike, ball);
   }

@@ -20,7 +20,6 @@ const OUTPUT_MESSAGE = Object.freeze({
     STRIKE: '스트라이크',
 });
 
-
 module.exports = {
     BASEBALL_RANGE,
     ERROR_MESSAGE,
