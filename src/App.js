@@ -12,14 +12,11 @@ class App {
   }
 
   userPick() {
-    const user = MissionUtils.Console.readLine(
-      "숫자를 입력해주세요.",
-      (input) => {
-        console.log(`숫자: ${input}`);
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
+      if (!this.checkUserNum(input)) {
+        throw new Error();
       }
-    );
-    MissionUtils.Console.close();
-    return user;
+    });
   }
 
   checkUserNum(num) {
@@ -36,6 +33,48 @@ class App {
     return true;
   }
 
+  baseballGame(computer, user) {
+    let strike = 0;
+    let ball = 0;
+    const user = [];
+    for (let i = 0; i < 3; i++) {
+      user.push(parseInt(user[i]));
+    }
+    for (let i = 0; i < 3; i++) {
+      if (this.compare(computer, computer[i], user[i]) === 1) {
+        strike += 1;
+      } else if (this.compare(computer, computer[i], user[i]) === 2) {
+        ball += 1;
+      }
+    }
+    let result = "";
+    if (ball !== 0) {
+      result += `${ball}볼`;
+    }
+    if (strike !== 0) {
+      if (result !== "") {
+        result += " ";
+      }
+      result += `${strike}스트라이크`;
+    }
+    if (ball === 0 && strike === 0) {
+      result = "낫싱";
+    }
+    MissionUtils.Console.print(result);
+    if (strike === 3) {
+      return true;
+    }
+    return false;
+  }
+  compare(array, num1, num2) {
+    if (array.includes(num2)) {
+      if (num1 === num2) {
+        return 1;
+      }
+      return 2;
+    }
+    return;
+  }
   play() {
     MissionUtils.Console.print("숫자 야구 게임 시작!");
   }
