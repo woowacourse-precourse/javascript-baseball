@@ -1,3 +1,5 @@
+const { GAME_MESSAGE, WHAT, ERROR_MESSAGE } = require("../constants/constants");
+
 class ValidUserNumbers {
   static isValidUserInput(userInput) {
     const isNumberElement = (element) => element >= "1" && element <= "9";
@@ -13,7 +15,7 @@ class ValidUserNumbers {
     restartNumber = Number(restartNumber);
 
     if (restartNumber !== 1 && restartNumber !== 2)
-      throw new Error("1 또는 2만 입력해주세요.");
+      throw new Error(ERROR_MESSAGE.ERROR_RESTART_MESSAGE);
   }
 }
 
