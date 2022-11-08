@@ -86,7 +86,7 @@ class App {
     let ball = 0;
     let strike = 0;
 
-    let playerNumArr = Array.from(playerNum);
+    let playerNumArr = this.convertStringToArray(playerNum);
 
     playerNumArr.forEach((num, idx) => {
       if (Number(num) === Number(computerNum[idx])) {
@@ -98,6 +98,10 @@ class App {
     });
 
     return { ball, strike };
+  }
+
+  convertStringToArray(string) {
+    return Array.from(string);
   }
 
   printHint(ball, strike) {
