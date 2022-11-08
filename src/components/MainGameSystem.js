@@ -21,8 +21,9 @@ class MainGameSystem {
   checkPlayerRandomNum(randomNum) {
     if (randomNum.split("").length !== this.THREE_DIGITS) throw "3자리 아님";
     if (!Number(randomNum)) throw "숫자가아닌 값이 포함되어있습니다";
-    if (Number(randomNum) < this.NEEDLESS)
+    if (Number(randomNum) < this.NEEDLESS) {
       throw "-, +등 불필요한 값이 존재합니다.";
+    }
     if (this.isDuplicate(randomNum)) throw "중복되는 숫자가 존재합니다.";
     return randomNum;
   }
