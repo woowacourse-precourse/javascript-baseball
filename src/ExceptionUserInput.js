@@ -11,8 +11,7 @@ function checkUserInput(userInput) {
 
   const isNotNumber = isNaN(userInputArr.join(''));
   const isIncludesZero = userInputArr.indexOf('0');
-  if (isNotNumber || isIncludesZero !== -1)
-    throw EXCEPTIONMESSAGE.NOT_NUMBER_EXCEPTION;
+  if (isNotNumber || isIncludesZero !== -1) throw EXCEPTIONMESSAGE.NOT_NUMBER_EXCEPTION;
 
   return true;
 }
