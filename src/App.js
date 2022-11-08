@@ -10,7 +10,6 @@ class App {
 
   setGame() {
     this.setComputerNumber();
-    // console.log("computerNumber", this.computerNumber);
     this.compareWithUserNumber();
   }
 
@@ -119,5 +118,4 @@ class App {
   }
 }
 
-new App().play();
 module.exports = App;
