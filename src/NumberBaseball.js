@@ -9,7 +9,6 @@ class NumberBaseball {
 
   gameSet() {
     const answer = this.makeAnswer();
-    console.log(answer);
     this.gamePlay(answer);
   }
 
@@ -17,6 +16,17 @@ class NumberBaseball {
     this.getUserInput((input) => {
       const scores = this.checkUserInput(input, answer);
       this.printInputResult(scores.ball, scores.strike);
+      if (scores.strike === 3) {
+        this.getRestartOrEnd((isRestart) => {
+          if (isRestart) {
+            this.gameSet();
+          } else {
+            Console.close();
+          }
+        });
+      } else {
+        this.gamePlay(answer);
+      }
     });
   }
 
@@ -61,6 +71,12 @@ class NumberBaseball {
       message = `${ballMessage}${strikeMessage}`;
     }
     Console.print(message);
+  }
+
+  getRestartOrEnd(callback) {
+    Console.readLine(MESSAGES.RESTART, (input) => {
+      callback(input === "1");
+    });
   }
 }
 module.exports = NumberBaseball;
