@@ -32,19 +32,14 @@ class App {
   }
 
   checkInputCorret(numberInput) {
-    try {
-      if (!/[1-9]{3}/.test(numberInput)) {
-        throw new Error('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
-      }
-      const numberInputSet = new Set(numberInput.split(''));
-      if (numberInputSet.size < 3) {
-        throw new Error('입력이 서로 다른 3자리 숫자가 아닙니다.');
-      }
-      this.judgeInput(numberInput);
-    } catch (e) {
-      MissionUtils.Console.print(`잘못된 입력입니다. ${e.message}`);
-      this.endGame();
+    if (!/^[1-9]{3}$/.test(numberInput)) {
+      throw new Error('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
     }
+    const numberInputSet = new Set(numberInput.split(''));
+    if (numberInputSet.size < 3) {
+      throw new Error('입력이 서로 다른 3자리 숫자가 아닙니다.');
+    }
+    this.judgeInput(numberInput);
   }
 
   judgeInput(numberInput) {
@@ -57,6 +52,7 @@ class App {
 
     MissionUtils.Console.print(output.trim());
     if (strikeCount === 3) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       this.checkRestartOrExit();
     } else {
       this.startGame();
@@ -96,7 +92,7 @@ class App {
     );
   }
 
-  static endGame() {
+  endGame() {
     MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
     MissionUtils.Console.close();
   }
