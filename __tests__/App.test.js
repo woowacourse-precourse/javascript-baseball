@@ -110,4 +110,16 @@ describe('App class 테스트', () => {
 
     expect(logSpy).toBeCalledTimes(1);
   });
+
+  test('process 테스트', () => {
+    const logSpy = getLogReadLineSpy();
+    app.resetCountBoard = jest.fn(() => endApp());
+    app.compareUserAndComputer = jest.fn();
+    app.makeResult = jest.fn();
+    app.decideReprocess = jest.fn();
+
+    app.process();
+
+    expect(logSpy).toBeCalledTimes(1);
+  });
 });
