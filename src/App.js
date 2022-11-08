@@ -50,5 +50,26 @@ class App {
     }
     return false;
   }
+
+  handleInputException(inputNumber) {
+    const NOT_A_NUMBER_EXCEPTION_MESSAGE = '입력값이 숫자가 아닙니다.';
+    const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
+    const NOT_3_DIGIT_EXCEPTION_MESSAGE = '압력값이 3자리 숫자가 아닙니다.';
+    const SAME_NUMBER_EXCEPTION_MESSAGE = '입력값에 중복된 숫자가 존재합니다.';
+    let errorMessage = null;
+    if (isNaN(inputNumber)) {
+      errorMessage = NOT_A_NUMBER_EXCEPTION_MESSAGE;
+    } else if (!this.isInteger(inputNumber)) {
+      errorMessage = NOT_INTEGER_EXCEPTION_MESSAGE;
+    } else if (!this.is3Digit(inputNumber)) {
+      errorMessage = NOT_3_DIGIT_EXCEPTION_MESSAGE;
+    } else if (this.hasSameNumber(inputNumber)) {
+      errorMessage = SAME_NUMBER_EXCEPTION_MESSAGE;
+    }
+    if (errorMessage === null) {
+      return;
+    }
+    throw new Error(errorMessage);
+  }
 }
 module.exports = App;
