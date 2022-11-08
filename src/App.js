@@ -5,7 +5,8 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
   play() {
-    this.computerRandomValue = RandomChoice();
+    const computer = new Computer();
+    this.computerRandomValue = computer.RandomChoice();
     this.userInput();
   }
   userInput() {
@@ -31,6 +32,20 @@ class App {
   }
 }
 
+// 컴퓨터 랜덤 값 생성 클래스
+class Computer {
+  RandomChoice() {
+    let randomSet = new Set();
+    this.addNumber(randomSet);
+    return [...randomSet];
+  }
+  addNumber(randomSet) {
+    const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    randomSet.add(randomNumber);
+    if (randomSet.size < 3) this.addNumber(randomSet);
+  }
+}
+
 // 예외처리 클래스
 class Validation {
   checkUserInput(value) {
@@ -47,7 +62,7 @@ class Validation {
   }
 }
 
-// 스트라이크, 볼 카운팅 관련 클래스
+// 스트라이크, 볼 카운팅 클래스
 class ResultCounting {
   getCount(userInputValue, computerRandomValue) {
     const result = {
@@ -70,7 +85,7 @@ class ResultCounting {
   }
 }
 
-// 게임 결과 처리 관련 클래스
+// 게임 결과 처리 클래스
 class GameResult {
   gameClearMessage() {
     const validation = new Validation();
@@ -89,18 +104,6 @@ class GameResult {
       MissionUtils.Console.close();
     }
   }
-}
-
-function RandomChoice() {
-  let randomSet = new Set();
-  addNumber(randomSet);
-  return [...randomSet];
-}
-
-function addNumber(randomSet) {
-  const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-  randomSet.add(randomNumber);
-  if (randomSet.size < 3) addNumber(randomSet);
 }
 
 const app = new App();
