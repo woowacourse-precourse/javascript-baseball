@@ -12,3 +12,8 @@ const is3Letters = (numStr) => {
   return numStr.length === 3
 }
 
+const isOnlyNumber = (numStr) => {
+  let check = /^[0-9]+$/;
+  return check.test(numStr);
+}
+
