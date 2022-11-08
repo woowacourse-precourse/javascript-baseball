@@ -18,7 +18,7 @@
 
 ### 프로그래밍 요구사항 checklist
 
-- [ ] indent depth는 최대 2
-- [ ] 함수/메서드는 한가지 일만 하도록 설계한다.
-- [ ] Jest로 기능목록이 정상 동작함을 테스트코드로 확인한다.
-- [ ] MissionUtils 라이브러리의 Random, Console API 활용하기.
+- [x] indent depth는 최대 2
+- [x] 함수/메서드는 한가지 일만 하도록 설계한다.
+- [x] Jest로 기능목록이 정상 동작함을 테스트코드로 확인한다.
+- [x] MissionUtils 라이브러리의 Random, Console API 활용하기.
