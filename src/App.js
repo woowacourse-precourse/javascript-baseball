@@ -29,6 +29,23 @@ function inputNum(input) {
   }
 }
 
+function inputCount(answer) {
+  let count = { strike: 0, ball: 0, nothing: 0 }; // count에 strike, ball, noting 갯수 넣기
+  answer.forEach((ele) => {
+    const idx = answer.indexOf(ele);
+    ele = parseInt(ele, 10);
+    if (ele === com[idx]) { // 같은 인덱스에 같은 숫자가 있으면 strike
+      count.strike += 1;
+    }
+    else if (com.includes(ele)) { // 인덱스는 다르지만 숫자는 포함하면 ball
+      count.ball += 1;
+    }
+    else { // 둘 다 아니면 nothing
+      count.nothing += 1;
+    }
+  });
+  return count;
+}
 
 
 module.exports = App;
