@@ -23,29 +23,29 @@ function inputAnswer(COM_NUMBER) {
 }
 
 function answerCheck (input, COM_NUMBER) {
-  var STRIKE = 0
-  var BALL = 0
+  var strike = 0
+  var ball = 0
   for (let i = 0; i<3 ; i++) {
     if(input[i] == COM_NUMBER[i]) {
-      STRIKE++;} else if(COM_NUMBER.includes(Number(input[i])))
-      {BALL++}
+      strike++;} else if(COM_NUMBER.includes(Number(input[i])))
+      {ball++}
   }
-  resultprint(COM_NUMBER, STRIKE, BALL)
+  resultprint(COM_NUMBER, strike, ball)
 }
-function resultprint(COM_NUMBER, STRIKE, BALL) {
-  if(STRIKE==0 && BALL==0){
+function resultprint(COM_NUMBER, strike, ball) {
+  if(strike==0 && ball==0){
     MissionUtils.Console.print('낫싱')
   }
-  if(BALL>0 && STRIKE == 0){
-    MissionUtils.Console.print(`${BALL}볼 `)
+  if(strike == 0 && ball>0){
+    MissionUtils.Console.print(`${ball}볼 `)
   }
-  if(STRIKE>0 && BALL == 0){
-    MissionUtils.Console.print(`${STRIKE}스트라이크`)
+  if(strike>0 && ball == 0){
+    MissionUtils.Console.print(`${strike}스트라이크`)
   }
-  if(STRIKE>0 && BALL>0) {
-    MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`)
+  if(strike>0 && ball>0) {
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
   }
-  if(STRIKE<3){
+  if(strike<3){
     return inputAnswer(COM_NUMBER)
   } else {
     MissionUtils.Console.print('3스트라이크')
