@@ -1,13 +1,12 @@
-// 모듈 선언
+// 클래스 모듈 선언
 const { Console, Random } = require('@woowacourse/mission-utils');
+const Computer = require('./Computer');
 // 상수 선언
 const INPUT_LENGTH = 3;
-const START_DIGIT = 1;
-const END_DIGIT = 9;
 
 class App {
   #collectValidationFn;
-  #collectCalculatorFn;
+  #computer;
 
   constructor() {
     this.#collectValidationFn = Object.freeze({
@@ -20,28 +19,15 @@ class App {
         return arrForCheck.length !== setForCheck.size;
       },
     });
-    this.#collectCalculatorFn = Object.freeze({
-      isBall: (randomDigit, digit, idx) =>
-        randomDigit.includes(digit) && randomDigit[idx] !== digit,
-      isStrike: (randomDigit, digit, idx) =>
-        randomDigit.includes(digit) && randomDigit[idx] === digit,
-    });
   }
 
-  setRandomDigit() {
-    const randomDigit = new Set();
-    while (randomDigit.size < INPUT_LENGTH)
-      randomDigit.add(Random.pickNumberInRange(START_DIGIT, END_DIGIT));
-    return Array.from(randomDigit);
-  }
-
-  setUserInput(randomDigit) {
+  setUserInput() {
     Console.readLine('숫자를 입력해주세요 : ', inputDigit => {
       const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
-      const baseBallBoard = this.calcBaseBallDigit(userDigit, randomDigit);
+      const baseBallBoard = this.#computer.calcBaseBallDigit(userDigit);
       this.isThreeStrike(baseBallBoard)
         ? this.getRestartInput()
-        : this.setUserInput(randomDigit);
+        : this.setUserInput();
     });
   }
 
@@ -64,19 +50,6 @@ class App {
     return strike === INPUT_LENGTH;
   }
 
-  calcBaseBallDigit(userDigit, randomDigit) {
-    const { isStrike, isBall } = this.#collectCalculatorFn;
-    const baseBallBoard = {
-      strike: 0,
-      ball: 0,
-    };
-    userDigit.forEach((digit, idx) => {
-      if (isBall(randomDigit, digit, idx)) baseBallBoard.ball++;
-      else if (isStrike(randomDigit, digit, idx)) baseBallBoard.strike++;
-    });
-    return baseBallBoard;
-  }
-
   isDigitValidation(inputDigit) {
     const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } =
       this.#collectValidationFn;
@@ -94,7 +67,8 @@ class App {
   }
 
   gameStart() {
-    this.setUserInput(this.setRandomDigit());
+    this.#computer = new Computer();
+    this.setUserInput();
   }
 
   gameEnd() {
