@@ -25,7 +25,9 @@ class App {
     }
   }
 
-  printStrikeAndBall(strike, ball) {
+  printStrikeAndBall(inputNumber,randomNumber) {
+
+    const {strike, ball} = this.countStrikeAndBall(inputNumber,randomNumber);
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
@@ -35,6 +37,8 @@ class App {
     } else if (ball > 0) {
       MissionUtils.Console.print(`${ball}볼`);
     }
+
+    this.correctAnswer(strike,randomNumber);
   }
 
   countStrikeAndBall(inputNumber, randomNumber) {
@@ -50,10 +54,9 @@ class App {
           ball++;
         }
       });
-
-      this.printStrikeAndBall(strike, ball);
-      this.correctAnswer(strike, randomNumber);
     }
+
+    return {strike, ball}
   }
 
   validateUserNumbers(inputNumber) {
@@ -66,7 +69,7 @@ class App {
   makeUserNumbers(randomNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       this.validateUserNumbers(inputNumber);
-      this.countStrikeAndBall(inputNumber, randomNumber);
+      this.printStrikeAndBall(inputNumber, randomNumber);
     });
   }
 
