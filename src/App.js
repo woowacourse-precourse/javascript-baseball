@@ -40,7 +40,19 @@ class App {
 		);
 	}
 
-	#isValid() {}
+	#isValid(userAnswerStr) {
+		//TODO: 1.길이오류(3자리숫자여야한다) 2. 숫자로 치환되어야한다. 3. 그밖의 오류?
+
+		const answer = userAnswerStr.replace(/ /gi, '');
+		const length = answer.length;
+
+		if (length < 3 || length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
+
+		if (isNaN(answer)) throw new Error(MESSAGES.NOT_A_NUMBER);
+
+		return true;
+	}
+
 	#getResultMessage(computerNumArr, userAnswerStr) {
 		let result = '';
 		let [ball, strike] = [0, 0];
