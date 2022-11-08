@@ -25,8 +25,10 @@ class App {
     this.score.strike = 0;
   }
 
-  play() {
-    this.#answer = App.#pickRandomNumbers(3);
+  play(type) {
+    if (type !== 'WRONG_ANSWER') {
+      this.#answer = App.#pickRandomNumbers(3);
+    }
     this.#hitBalls();
     this.#judgeBallStrike();
     this.#showScore();
@@ -102,6 +104,8 @@ class App {
       this.#win();
       return;
     }
+
+    this.play('WRONG_ANSWER');
   }
 
   #win() {
