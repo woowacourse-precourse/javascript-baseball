@@ -94,7 +94,7 @@ class App {
     }
 
     conditionsOfWin() {
-        if(hintMessage === "3스트라이크") {
+        if(hintMessage.includes("3스트라이크")) {
             this.gameOver();
         } else {
             this.gameProgram();
