@@ -17,10 +17,13 @@ class App {
   gameEnd() {
     Console.print(GAME_MESSAGE.END_MESSAGE);
     Console.readLine(GAME_MESSAGE.INTENTION_MESSAGE, (input) => {
-      if (input === RESTART) return this.gameStart();
-      if (input === END) return Console.close();
-      return throwErr();
+      this.askRestart(input);
     });
+  }
+  askRestart(input) {
+    if (input === RESTART) return this.gameStart();
+    if (input === END) return Console.close();
+    return throwErr();
   }
 
   inputAnswer() {
