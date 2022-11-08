@@ -90,7 +90,7 @@ class App {
   }
 
   play() {
-    // if (!this.isRestart) Console.print(`${MESSAGE.START}`);
+    if (!this.isRestart) Console.print(`${MESSAGE.START}`);
     this.computer.setRandomNumber();
     this.process();
   }

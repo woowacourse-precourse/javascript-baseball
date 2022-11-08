@@ -79,4 +79,11 @@ describe('App class 테스트', () => {
 
     expect(logSpy).toHaveBeenCalledWith(MESSAGE.THREESTRIKE);
   });
+
+  test('restartOrEnd 테스트', () => {
+    const logSpy = getLogSpy();
+    app.restartOrEnd('2');
+
+    expect(logSpy).toHaveBeenCalledWith('게임 종료');
+  });
 });
