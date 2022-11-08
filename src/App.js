@@ -2,9 +2,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    let randombaseball = createRandomNumber();
+    const RANDOM_NUMBER = createRandomNumber();
     start();
-    getNumber(randombaseball);
+    getNumber(RANDOM_NUMBER);
   }
 }
 
@@ -23,15 +23,15 @@ const start = () => {
   MissionUtils.Console.print("숫자 야구를 게임을 시작합니다.");
 };
 
-const getNumber = (randombaseball) => {
-  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
-    checkNumberError(number);
-    let result = computeBallStrike(randombaseball, number);
-    MissionUtils.Console.print(computeResult(result));
-    if (result[1] === 3) {
+const getNumber = (RANDOM_NUMBER) => {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (USER_NUMBER) => {
+    checkNumberError(USER_NUMBER);
+    const RESULT_COUNT = computeBallStrike(RANDOM_NUMBER, USER_NUMBER);
+    MissionUtils.Console.print(computeResult(RESULT_COUNT));
+    if (RESULT_COUNT[1] === 3) {
       gameover();
     } else {
-      getNumber(randombaseball);
+      getNumber(RANDOM_NUMBER);
     }
   });
 };
@@ -45,47 +45,47 @@ const checkNumberError = (number) => {
     throw new Error("중복되지 않는 수들을 입력해주세요.");
 };
 
-const computeBallStrike = (randombaseball, number) => {
+const computeBallStrike = (RANDOM_NUMBER, USER_NUMBER) => {
   let ball = 0;
   let strike = 0;
 
-  let userNumber = number.split("").map(Number);
+  const USER_NUMBERS = USER_NUMBER.split("").map(Number);
 
   for (let i = 0; i < 3; i++) {
     if (
-      randombaseball.includes(userNumber[i]) &&
-      randombaseball.indexOf(userNumber[i]) !== i
+      RANDOM_NUMBER.includes(USER_NUMBERS[i]) &&
+      RANDOM_NUMBER.indexOf(USER_NUMBERS[i]) !== i
     ) {
       ball++;
     }
     if (
-      randombaseball.includes(userNumber[i]) &&
-      randombaseball.indexOf(userNumber[i]) == i
+      RANDOM_NUMBER.includes(USER_NUMBERS[i]) &&
+      RANDOM_NUMBER.indexOf(USER_NUMBERS[i]) == i
     ) {
       strike++;
     }
   }
 
-  const result = [ball, strike];
-  return result;
+  const RESULT_COUNT = [ball, strike];
+  return RESULT_COUNT;
 };
 
-const computeResult = (result) => {
+const computeResult = (RESULT_COUNT) => {
   let str = "";
-  if (result[1] === 3) {
+  if (RESULT_COUNT[1] === 3) {
     str = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
     return str;
   }
-  if (result[0] !== 0 && result[1] === 0) {
-    str += `${result[0]}볼`;
+  if (RESULT_COUNT[0] !== 0 && RESULT_COUNT[1] === 0) {
+    str += `${RESULT_COUNT[0]}볼`;
   }
-  if (result[1] !== 0 && result[0] === 0) {
-    str += `${result[1]}스트라이크`;
+  if (RESULT_COUNT[1] !== 0 && RESULT_COUNT[0] === 0) {
+    str += `${RESULT_COUNT[1]}스트라이크`;
   }
-  if (result[0] !== 0 && result[1] !== 0) {
-    str += `${result[0]}볼 ${result[1]}스트라이크`;
+  if (RESULT_COUNT[0] !== 0 && RESULT_COUNT[1] !== 0) {
+    str += `${RESULT_COUNT[0]}볼 ${RESULT_COUNT[1]}스트라이크`;
   }
-  if (result[0] === 0 && result[1] === 0) {
+  if (RESULT_COUNT[0] === 0 && RESULT_COUNT[1] === 0) {
     str = "낫싱";
   }
   return str;
