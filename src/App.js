@@ -15,9 +15,17 @@ const HINT_UNITS_OBJ = {
 
 class App {
   play() {
-    this.answer = this._getRandomsStr([1, 2, 3, 4, 5, 6, 7, 8, 9], 3);
     Console.print('숫자 야구 게임을 시작합니다.');
+    this.startGame();
+  }
+
+  startGame() {
+    this.initAnswer();
     this.getUserInput(this.validate);
+  }
+
+  initAnswer() {
+    this.answer = this._getRandomsStr([1, 2, 3, 4, 5, 6, 7, 8, 9], 3);
   }
 
   _getRandomsStr(numbers, size) {
@@ -41,7 +49,7 @@ class App {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
       if (answer === '1') {
-        return this.play();
+        return this.startGame();
       } else if (answer === '2') {
         return Console.close();
       }
