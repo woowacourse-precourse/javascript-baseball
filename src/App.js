@@ -47,6 +47,9 @@ class App {
     }
   }
 
+  isCorrectNumber(randomNumber, answer) {
+    return randomNumber?.join("") === answer;
+  }
 }
 
 const app = new App();
