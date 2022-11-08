@@ -20,6 +20,11 @@ const inputUserNum = () => {
     let [ballCount, strikeCount] = getGameResult(gameAnswerNumList, userAnswerNumList);
     printGameResult(ballCount, strikeCount);
 
+    if (isCorrectAnswer(ballCount, strikeCount)) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      return;
+    }
+
   });
 }
 
