@@ -1,4 +1,5 @@
 const MISSIONUTILS_IO = require("@woowacourse/mission-utils");
+const Validation = require("./Validtion.js");
 
 const TEXTS = Object.freeze({
   START_TEXT: "숫자 야구 게임을 시작합니다.",
@@ -28,6 +29,8 @@ class Game {
     
     this.userNumberArray = [];
     this.compareNumberArray = [];
+
+    this.validation = new Validation();
   }
 
   inputUserNumber(text, callback) {
