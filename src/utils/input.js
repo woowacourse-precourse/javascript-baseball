@@ -11,6 +11,10 @@ class Input {
     this.value.length = 0;
   }
 
+  makeNumberArray(input) {
+    if (Array.isArray(input)) return input;
+    return input.split("").map((value) => +value);
+  }
 }
 
 module.exports = Input;
