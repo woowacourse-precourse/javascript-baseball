@@ -47,7 +47,7 @@ const calculateCount = (randomNumber, userInput) => {
   randomNumber.forEach((number, index) => {
     if (userInput.includes(number) && index !== userInput.indexOf(number)) {
       ballCount++;
-    } else if(userInput[index] === number) {
+    } else if (userInput[index] === number) {
       strikeCount++;
     }
   });
@@ -57,7 +57,7 @@ const calculateCount = (randomNumber, userInput) => {
 const getUsersNextAction = () => {
   Console.readLine(MESSAGE.END_QUESTION, (userInput) => {
     if (!validateNextAction(userInput)) {
-      throw MESSAGE.INPUT_INVALID
+      throw MESSAGE.INPUT_INVALID;
     } else if (userInput === GAME.RESTART) {
       const randomNumber = makeRandomNumber();
       getUsersPrediction(randomNumber);
