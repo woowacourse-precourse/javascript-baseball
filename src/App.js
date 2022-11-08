@@ -29,6 +29,15 @@ class App {
       throw new Error("숫자의 중복은 허용되지 않습니다. 바른 입력 바랍니다.");
     }
   }
+
+  inputNum() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      this.checkNum(inputNumber);
+      // 숫자 야구 실행 후 결과 출력
+      // 만약 스트라이크인 경우 재시작/종료 여부 입력받기
+      // 아니면 숫자 재입력
+    });
+  }
 }
 
 module.exports = App;
