@@ -10,7 +10,7 @@ class Ball {
   }
 
   compareTo(otherBall) {
-    return `${this.getStrikeOf(otherBall)} ${this.getBallOf(otherBall)}`.trim();
+    return `${this.getBallOf(otherBall)} ${this.getStrikeOf(otherBall)}`.trim();
   }
 
   getStrikeOf(otherBall) {
