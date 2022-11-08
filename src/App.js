@@ -42,6 +42,11 @@ class App {
     });
   }
 
+  replay() {
+    this.setComputerNumber();
+    this.play();
+  }
+
   setComputerNumber() {
     this.computerNumber = this.createComputerNumber();
   }
