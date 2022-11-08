@@ -13,7 +13,6 @@ const GAME_MESSAGE = {
   input: '숫자를 입력해주세요 : ',
   clear: `3개의 숫자를 모두 맞히셨습니다! 게임 종료`,
   askRestart: `게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요`,
-  gameover: `게임 종료`,
 }
 
 const RESULT_COUNT = {
@@ -41,9 +40,10 @@ class GameUtils {
     numbers.add(randomNumber);
     if(numbers.size < CLEAR_CONDITION) GameUtils.#addNumber(numbers);
   }
-  static InputtodArray(input) {
-    input = input.split('').map(number => Number(number));
-    return input;
+  static toFilterdArray(input) {
+    input = input.replace(/[\s,]/g, '');
+    const arrayInput = input.split('').map(number => Number(number));
+    return arrayInput;
   }
   static getResult(input, answer) {
     const result = {
@@ -121,7 +121,8 @@ class App {
   }
   #submitInput() {
     MissionUtils.Console.readLine(GAME_MESSAGE.input, (input) => {
-      input = GameUtils.InputtodArray(input);
+      console.log(input);
+      input = GameUtils.toFilterdArray(input);
       const errorMessage = Validator.isInvalidAnswer(input);
       if(errorMessage) Print.error(errorMessage);
       const result = GameUtils.getResult(input, this.answer);
