@@ -71,16 +71,12 @@ class App{
     MissionUtils.Console.close();
   }
 
-  gameStart(){ //게임 시작
-    this.getGameResult();
-    this.printGameResult();
-    
-  }
 
   play() { 
     this.comRandomNumber();
     this.gameStartNotice();
-    this.gameStart();
+    this.getGameResult();
+    this.printGameResult();
   }
 }
 
