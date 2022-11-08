@@ -68,7 +68,7 @@ class App {
         MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
             this.userInput = answer.split('')
             const validation = this.exceptionHandler(this.userInput)
-            if (validation) throw new Error()
+            if (validation) throw new Error("입력 값이 잘못 되었습니다. 게임을 종료합니다.")
             this.compareNumber(this.userInput)
         })
     }
