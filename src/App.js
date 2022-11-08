@@ -34,6 +34,19 @@ class App {
     });
   }
 
+  checkRestart(userInput) {
+    if (userInput === "1") {
+      this.answerNumbers = this.getRandomNumbers();
+      this.getUserInput();
+    } else if (userInput === "2") {
+      MissionUtils.Console.print("게임을 종료합니다.");
+      MissionUtils.Console.close();
+      return;
+    } else {
+      throw new Error("1또는 2를 입력하셔야 합니다.\n게임을 종료합니다.");
+    }
+  }
+
   getRandomNumbers() {
     const deduplicateRandomNumbers = [];
 
