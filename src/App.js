@@ -83,6 +83,7 @@ class App {
     this.ball = this.hitCount - this.strike;
   }
 
+  // 기능 5. 결과를 출력하는 함수
   printResult() {
     if (this.strike === 3) return '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
     else if (this.hitCount === 0) return '낫싱';
@@ -92,21 +93,21 @@ class App {
     return `${this.ball}볼 ${this.strike}스트라이크`;
   }
 
+  // 기능 6. 종료 결정 함수
   finishOrRestart() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (number) => {
-        if (number === '1') return true;
-        else if (number === '2') return false;
-        else throw new Error('입력값이 올바르지 않습니다.');
-      }
-    );
+    return new Promise((resolove, reject) => {
+      MissionUtils.Console.readLine(
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+        (number) => {
+          resolove(number);
+        }
+      );
+    });
   }
 
-  async play() {
+  async startBaseballGame() {
     let resultText = '';
-
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    let checkRestartOrFinish = '';
 
     this.answer = this.getRandomNumber();
 
@@ -117,6 +118,23 @@ class App {
 
       MissionUtils.Console.print(resultText);
     }
+
+    checkRestartOrFinish = await this.finishOrRestart();
+
+    if (checkRestartOrFinish === '1') {
+      this.startBaseballGame();
+    } else if (checkRestartOrFinish === '2') {
+      MissionUtils.Console.close();
+      return;
+    } else {
+      throw new Error('입력값이 올바르지 않습니다.');
+    }
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+
+    this.startBaseballGame();
   }
 }
 
