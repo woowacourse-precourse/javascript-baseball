@@ -43,6 +43,7 @@ class App {
     Console.readLine(INPUT_MESSAGE, number => {
       this.handleInputException(number);
       inputNumber = number;
+      Console.close();
     });
     return inputNumber;
   }
