@@ -1,7 +1,4 @@
 class App {
-  randomNumber(){
-    
-  }
   play() {}
 }
 
