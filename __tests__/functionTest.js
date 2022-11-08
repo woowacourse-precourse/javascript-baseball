@@ -1,5 +1,6 @@
 const App = require("../src/App");
 
+//validateUserNumbers
 describe("user number 유효성 검사", () => {
   test("user가 입력한 수의 길이가 3이 아니면 오류", () => {
     const app = new App();
@@ -15,3 +16,31 @@ describe("user number 유효성 검사", () => {
     expect(() => app.validateUserNumbers(USER_STRING)).toThrow();
   });
 });
+
+//makeRandom
+describe("random 값 배열 생성", () => {
+  test("random값의 길이가 3이어야 함.", () => {
+    const app = new App();
+    const randomArray = app.makeRandom();
+
+    expect(randomArray.length).toEqual(3);
+  });
+
+  test("random 배열의 값은 1부터 9사이", () => {
+    const app = new App();
+    const randomArray = app.makeRandom();
+
+    const result = randomArray.every((number)=> number > 0 && number < 10);
+    expect(result).toBe(true);
+  });
+
+  test("random 배열의 값은 다 다른 수", () => {
+    const app = new App();
+    const randomArray = app.makeRandom();
+
+    const result = randomArray.every((number,index)=> randomArray.indexOf(number) === index);
+    expect(result).toBe(true);
+  });
+});
+
+//countStrikeAndBall
