@@ -24,16 +24,6 @@ const getLogSpy = () => {
 };
 
 describe("입력값 테스트", () => {
-  const testCode = new App();
-
-  test("checkPlayingNum 메서드 true 반환값 확인", () => {
-    expect(testCode.checkPlayingNum("123", true)).toBeTruthy();
-  });
-
-  test("checkPlayingNum 메서드 false 반환값 확인", () => {
-    expect(testCode.checkPlayingNum("f2a", true)).toBeFalsy();
-  });
-
   test("세번째 입력값 예외처리 테스트", () => {
     const randoms = [3, 4, 7];
     const answers = ["123", "357", "5"];
@@ -44,20 +34,7 @@ describe("입력값 테스트", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
-  });
-
-  test("세번째 입력값 예외처리 테스트", () => {
-    const randoms = [3, 4, 7];
-    const answers = ["123", "357", "5"];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    }).toThrow("세자리 수를 입력해야합니다. 프로그램을 종료합니다.");
   });
 
   test("게임 종료 테스트", () => {
@@ -113,7 +90,9 @@ describe("입력값 테스트", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    }).toThrow(
+      "1,2 둘 중 한자리 숫자만 입력해야합니다. 프로그램을 종료합니다."
+    );
   });
 
   test("미입력 Enter 예외처리 테스트", () => {
@@ -126,7 +105,7 @@ describe("입력값 테스트", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    }).toThrow("세자리 수를 입력해야합니다. 프로그램을 종료합니다.");
   });
 
   test("숫자 이외 입력 예외처리 테스트", () => {
@@ -139,7 +118,7 @@ describe("입력값 테스트", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    }).toThrow("1 ~ 9 숫자만 입력해야합니다. 프로그램을 종료합니다.");
   });
 
   test("0 입력 예외처리 테스트", () => {
@@ -152,6 +131,6 @@ describe("입력값 테스트", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow("잘못된 문자를 입력하였습니다. 프로그램을 종료합니다.");
+    }).toThrow("1 ~ 9 숫자만 입력해야합니다. 프로그램을 종료합니다.");
   });
 });

@@ -1,9 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { message, checkStyle } = require("./constant/constant");
+const { MESSAGE, FORMAT, ERROR } = require("./constant/constant");
 
 const { Random, Console } = MissionUtils;
-const { START, ENTER, CLEAR, FINISH, END, CONTINUE, ERROR } = message;
-const { PLAY, RESTART } = checkStyle;
+const allowNum = /[1-9]/;
 
 class App {
   constructor() {
@@ -38,47 +37,47 @@ class App {
     if (strike > 0) result += `${strike}스트라이크`;
 
     Console.print(result);
-    if (result === CLEAR) {
-      Console.print(FINISH);
+    if (result === MESSAGE.CLEAR) {
+      Console.print(MESSAGE.FINISH);
       this.restartQuestion();
     } else this.getUserInput();
   }
 
   checkPlayingNum(inputNum, allowed) {
-    if (inputNum.length !== 3 || inputNum.includes(0)) {
-      return false;
-    }
-    [...inputNum].forEach((str) => {
-      allowed = !isNaN(str) && allowed;
+    const duplicationCheck = [...new Set(inputNum)].length;
+    if (inputNum.length !== 3) throw new Error(ERROR.LENGTH);
+    if (duplicationCheck !== 3) throw new Error(ERROR.DUPLICATION);
+    inputNum.forEach((str) => {
+      allowed = allowNum.test(str) && allowed;
     });
     return allowed;
   }
 
   checkException(inputNum, checkStyle) {
-    if (checkStyle === PLAY) {
-      return this.checkPlayingNum(inputNum, true);
-    } else if (checkStyle === RESTART) {
+    if (checkStyle === FORMAT.PLAY) {
+      return this.checkPlayingNum([...inputNum], true);
+    } else if (checkStyle === FORMAT.RESTART) {
       return inputNum === "1" || inputNum === "2";
     }
   }
 
   restartQuestion() {
-    Console.readLine(`${CONTINUE}\n`, (input) => {
-      if (!this.checkException(input, RESTART)) {
-        throw new Error(ERROR);
+    Console.readLine(`${MESSAGE.CONTINUE}\n`, (input) => {
+      if (!this.checkException(input, FORMAT.RESTART)) {
+        throw new Error(ERROR.SELECT);
       }
       if (input === "1") this.startGame();
       else if (input === "2") {
-        Console.print(END);
+        Console.print(MESSAGE.END);
         Console.close();
       }
     });
   }
 
   getUserInput() {
-    Console.readLine(ENTER, (input) => {
-      if (!this.checkException(input, PLAY)) {
-        throw new Error(ERROR);
+    Console.readLine(MESSAGE.ENTER, (input) => {
+      if (!this.checkException(input, FORMAT.PLAY)) {
+        throw new Error(ERROR.STRING);
       }
       this.userInput = input;
       this.createResult();
@@ -102,7 +101,7 @@ class App {
   }
 
   play() {
-    Console.print(START);
+    Console.print(MESSAGE.START);
     this.startGame();
   }
 }
