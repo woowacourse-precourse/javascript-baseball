@@ -13,16 +13,17 @@ class App {
       this.gameStart();
       restartGame = this.gameRestart()[0];
     }
+    return MissionUtils.Console.close();
   }
   gameStart() {
-    this.opponent.setRandomNumber(); //상대방 숫자 지정
-    console.log(this.opponent.number);
+    const opponentNumber = this.opponent.setRandomNumber(); //상대방 숫자 지정
+    console.log(opponentNumber);
     let endGame = false;
     while (!endGame) {
       this.user.getInput();
       this.user.checkValidation();
       this.user.changeToNumbers();
-      const ballAndStrike = this.compareNumbers(this.opponent.number, this.user.input);
+      const ballAndStrike = this.compareNumbers(opponentNumber, this.user.input);
       this.printResult(ballAndStrike);
       endGame = this.gameEnd(ballAndStrike);
     }
@@ -66,18 +67,17 @@ class App {
 
 class Opponent {
   //상대방 관련 클래스
-  constructor() {
-    this.number = []; //빈 숫자 배열 생성
-  }
   setRandomNumber() {
     //랜덤으로 숫자 3개를 추출하여 배열에 저장(중복 없음)
-    while (this.number.length < 3) {
+    const opponentNumber = [];
+    while (opponentNumber.length < 3) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.number.includes(randomNumber)) {
+      if (!opponentNumber.includes(randomNumber)) {
         // 중복 숫자 없어야 함
-        this.number.push(randomNumber);
+        opponentNumber.push(randomNumber);
       }
     }
+    return opponentNumber;
   }
 }
 
