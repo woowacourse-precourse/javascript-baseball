@@ -32,13 +32,13 @@ describe("기능 테스트", () => {
         expect(consoleSpy).toHaveBeenCalledWith('입력 값에 중복된 수가 있습니다. 게임을 종료합니다.');
     })
     test("5. 볼을 판단하는 기능", () => {
-        expect(app.checkScore('123', ['3', '1', '2'])).toEqual({
+        expect(app.checkScore('123', [3, 1, 2])).toEqual({
             ball: 3,
             strike: 0
         });
     })
     test("6. 스트라이크를 판단하는 기능", () => {
-        expect(app.checkScore('123', ['1', '2', '3'])).toEqual({
+        expect(app.checkScore('123', [1, 2, 3])).toEqual({
             ball: 0,
             strike: 3
         });
@@ -60,9 +60,6 @@ describe("기능 테스트", () => {
     test("8. 결과를 출력하는 기능", () => {
         expect(app.printResult('')).toBe('낫싱');
         expect(app.printResult('2볼 1스트라이크')).toBe('2볼 1스트라이크');
-    })
-    test("10. 게임 재시작에 대한 대답을 예외처리하는 기능 - 1을 입력할 경우", () => {
-        expect(app.answerException('1')).toBe(true);
     })
     test("10. 게임 재시작에 대한 대답을 예외처리하는 기능 - 1 또는 2가 아닐 경우", () => {
         const consoleSpy = jest.spyOn(console, 'log');
