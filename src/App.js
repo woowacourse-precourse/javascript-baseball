@@ -65,6 +65,11 @@ class App {
       } return play();
     }
 
+    function exception() {
+      if (userNum.length < 3 || typeof(userNum[0] || userNum[1] || userNum[2]) !== "number" || (userNum[0] !== userNum[1] && userNum[1] !== userNum[2] && userNum[2] !== userNum[0])) {
+        throw new Error("잘못된 값 입력") && Console.close();
+      } 
+    }
   }
 }
 
