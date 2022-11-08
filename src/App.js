@@ -19,9 +19,12 @@ class App {
 
   startGame() {
     this.answerList = this.setAnswerList;
-    this.getPlayerInputList();
-    this.getResult();
-    this.printCountMessage();
+
+    while (this.strike !== ANSWER_LENGTH) {
+      this.getPlayerInputList();
+      this.getResult();
+      this.printCountMessage();
+    }
   }
 
   setAnswerList() {
