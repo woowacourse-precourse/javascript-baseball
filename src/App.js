@@ -6,6 +6,7 @@ class App {
     this.answer = '';
     this.ball = 0;
     this.strike = 0;
+    this.hitCount = 0;
   }
 
   // 기능 1.사용자에게 값을 입력받는 함수
@@ -58,7 +59,25 @@ class App {
     return computer.join('');
   }
 
-  countHint() {}
+  // 기능 4. 힌트를 계산하는 함수
+  countHint() {
+    const answerArr = [...this.answer];
+    const userNumberArr = [...this.userNumber];
+
+    userNumberArr.forEach((number) => {
+      if (answerArr.includes(number)) {
+        this.hitCount += 1;
+      }
+    });
+
+    for (let i = 0; i < 3; i++) {
+      if (userNumberArr[i] === answerArr[i]) {
+        this.strike += 1;
+      }
+    }
+
+    this.ball = this.hitCount - this.strike;
+  }
 
   printResult() {}
 
@@ -68,6 +87,7 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.userNumber = await this.getUserNumber();
     this.answer = this.getRandomNumber();
+    this.countHint();
   }
 }
 
