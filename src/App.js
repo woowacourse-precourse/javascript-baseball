@@ -41,7 +41,7 @@ class App {
     if (gameResult) {
       this.chooseRestartGame();
     } else if (!gameResult) {
-      return this.userInputNumber();
+      this.userInputNumber();
     }
   }
 
