@@ -124,4 +124,15 @@ describe("입력값 검증", () => {
       }).toThrow();
     });
   });
+
+  test("checkRestartInput 함수 테스트", () => {
+    const answers = ["0", "-1", "abc"];
+    mockQuestions(answers);
+
+    answers.forEach((answer) => {
+      expect(() => {
+        checkInput(answer);
+      }).toThrow();
+    });
+  });
 });
