@@ -7,6 +7,10 @@ class Error {
     throw new Error(message);
   }
 
+  static isDuplicated(string, element) {
+    return string.indexOf(element) !== string.lastIndexOf(element);
+  }
+
 }
 
 module.exports = Error;
