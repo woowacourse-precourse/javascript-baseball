@@ -173,4 +173,12 @@ describe("숫자 야구 게임", () => {
       getUserGuess(userNumArr, userInput);
     }).toThrow();
   });
+
+  test("추가테스트4-3: getUserGuess", () => {
+    const userNumArr = [];
+    const userInput = "1234";
+    expect(() => {
+      getUserGuess(userNumArr, userInput);
+    }).toThrow();
+  });
 });
