@@ -1,6 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
+    this.computerInput = new ComputerRandomNumber();
     this.baseballGame = new BaseballPlayTool();
   }
   play() {
