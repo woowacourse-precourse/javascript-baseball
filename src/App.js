@@ -13,7 +13,4 @@ class App {
   }
 }
 
-const baseballGame = new App();
-baseballGame.play();
-
 module.exports = App;
