@@ -3,6 +3,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const ANSWER_LENGTH = 3;
 const START_NUMBER = 1;
 const END_NUMBER = 9;
+const YES = 1;
+const NO = 2;
 
 class App {
   constructor() {
@@ -14,11 +16,16 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.startGame();
+
+    let isGameStart = true;
+    while (isGameStart) {
+      this.startGame();
+      isGameStart = this.getPlayerChoice();
+    }
   }
 
   startGame() {
-    this.answerList = this.setAnswerList;
+    this.answerList = this.setAnswerList();
 
     while (this.strike !== ANSWER_LENGTH) {
       this.getPlayerInputList();
@@ -99,9 +106,17 @@ class App {
     this.strike = 0;
     this.ball = 0;
   }
-}
 
-const app = new App();
-app.play();
+  getPlayerChoice() {
+    let choice;
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+      choice = Number(input.trim());
+    });
+
+    if (choice === YES) return true;
+    if (choice === NO) return false;
+    throw new Error('1과 2만 입력 가능합니다.');
+  }
+}
 
 module.exports = App;
