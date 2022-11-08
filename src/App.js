@@ -14,11 +14,11 @@ const startNumberBaseball = () => {
 };
 
 const inputNumber = (answerNumber) => {
-  errorTestGameNum(number);
   
   let ball = 0;
   let strike = 0;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
+    errorTestGameNum(number);
     [ball, strike] = checkNumbers(answerNumber, number);
     let sentence = printBallStrike(ball, strike);
     MissionUtils.Console.print(`${sentence}`);
