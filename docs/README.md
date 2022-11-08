@@ -54,3 +54,12 @@ Added new method 'end' to $App:
 - if input 2, stop the game
 
 Breaks $App.end, which is added
+
+feat($ApplicationTest): add the exception cases
+
+Added the exception test cases:
+- enter non-intger value
+- enter same value
+- enter longer or shorter value
+
+Breaks $ApplicationTest, which the test cases are added
