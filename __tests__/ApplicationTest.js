@@ -47,9 +47,136 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("게임 진행 문구 출력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "숫자 야구 게임을 시작합니다",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 종료", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["246", "135", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 진행 시 볼 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["567", "354", "513"];
+    const logSpy = getLogSpy();
+    const messages = ["1볼", "2볼", "3볼"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 진행 시 스트라이크 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["127", "139", "135"];
+    const logSpy = getLogSpy();
+    const messages = ["1스트라이크", "2스트라이크", "3스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("게임 진행 시 낫싱 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["278"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력값이 0이 포함될 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["105"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력값이 중복된 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["113"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력값이 숫자가 아닌 경우 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["game"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
