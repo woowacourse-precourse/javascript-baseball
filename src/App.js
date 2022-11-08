@@ -1,30 +1,30 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
-const {makeTarget, handleData, isValidInput,printResult} = require("./util");
+const { makeTarget, handleData, isValidInput, printResult } = require("./util");
 
 class App {
 
   #targetArr;
 
-  constructor(){
-   this.#targetArr = [];
-   this.countArr = []; // [strike,ball] 형태
+  constructor() {
+    this.#targetArr = [];
+    this.countArr = []; // [strike,ball] 형태
   }
 
-  initData(){
+  initData() {
     this.#targetArr = [];
     this.countArr = [];
   }
 
-  setCountArr(array){
+  setCountArr(array) {
     this.countArr = array;
   }
-  
-  getCountArr(){
+
+  getCountArr() {
     return [...this.countArr];
   }
 
-  readData(targetArr){
+  readData(targetArr) {
     let isAnswer = false;
 
     Console.readLine("숫자를 입력해주세요 : ", (input) => {
@@ -42,7 +42,7 @@ class App {
     });
   }
 
-  isRepeatGame(){
+  isRepeatGame() {
     Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 : ", (input) => {
       if (input === "1") this.playGame();
       else if (input === "2") {
@@ -55,7 +55,7 @@ class App {
     });
   }
 
-  playGame(){
+  playGame() {
     this.initData();
     this.#targetArr = makeTarget();
     console.log(this.#targetArr);
@@ -67,12 +67,7 @@ class App {
     this.playGame();
   }
 }
-
-
-
-const app = new App();
-app.play();
-
-
+// const app = new App();
+// app.play();
 
 module.exports = App;
