@@ -1,11 +1,9 @@
-const { NUMBER_LENGTH } = require("./constants/constantValues");
-
 const validateInputLength = (input) => {
-  return input.length !== NUMBER_LENGTH;
+  return input.length !== 3;
 };
 
 const validateInputDuplication = (input) => {
-  return new Set(input.split("")).size !== NUMBER_LENGTH;
+  return new Set(input.split("")).size !== 3;
 };
 
 const validateInputIsNaN = (input) => {

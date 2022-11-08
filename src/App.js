@@ -29,25 +29,24 @@ class App {
 
       if (strikeCount === 3) {
         this.end();
-      } else {
-        this.play();
       }
+
+      this.play();
     });
   }
 
   end() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
-      // if (input !== "1" && input !== "2") {
-      //   this.throwError();
-      // }
+      if (input !== "1" && input !== "2") {
+        this.throwError();
+      }
       if (input === "1") {
         this.threeRandomNumbers = getThreeRandomNumbers();
         this.play();
-      } else if (input === "2") {
+      }
+      if (input === "2") {
         MissionUtils.Console.close();
-      } else {
-        throwError();
       }
     });
   }

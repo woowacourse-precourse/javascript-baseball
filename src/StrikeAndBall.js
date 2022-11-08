@@ -1,4 +1,4 @@
-function getBallCount(answer, input) {
+const getBallCount = (answer, input) => {
   let ballCount = 0;
   input.split("").forEach((eachNumber, index) => {
     if (answer.includes(eachNumber) && answer.indexOf(eachNumber) !== index) {
@@ -7,9 +7,9 @@ function getBallCount(answer, input) {
   });
 
   return ballCount;
-}
+};
 
-function getStrikeCount(answer, input) {
+const getStrikeCount = (answer, input) => {
   let strikeCount = 0;
   input.split("").forEach((eachNumber, index) => {
     if (answer.includes(eachNumber) && answer.indexOf(eachNumber) === index) {
@@ -18,10 +18,10 @@ function getStrikeCount(answer, input) {
   });
 
   return strikeCount;
-}
+};
 
-function getStrikeAndBall(answer, input) {
+const getStrikeAndBall = (answer, input) => {
   return [getStrikeCount(answer, input), getBallCount(answer, input)];
-}
+};
 
 module.exports = getStrikeAndBall;
