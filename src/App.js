@@ -24,7 +24,7 @@ function makeComputerAnswer() {
 }
 
 function stringToArray(string) {
-  let array = [];
+  const array = [];
   for (let i = 0; i < string.length; i++) {
     array.push(string[i]);
   }
@@ -32,7 +32,7 @@ function stringToArray(string) {
 }
 
 function startBaseballGame(userMessage, computerAnswer) {
-  if (userMessage.length !== 3 || userMessage.includes(NaN)) {
+  if (userMessage.length !== NUMBER_LENGTH || userMessage.includes(NaN)) {
     throw new Error('올바른 입력이 아닙니다. 3자리의 숫자를 입력해주세요.');
   }
   const ballCount = checkBall(userMessage, computerAnswer);
@@ -114,6 +114,3 @@ function gameNotCleared(ballCount, strikeCount, computerAnswer) {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
