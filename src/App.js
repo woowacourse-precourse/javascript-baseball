@@ -9,6 +9,7 @@ class App {
     return (
       input.length === 3
       && [...input].every((x) => Number(x) >= 1 && Number(x) <= 9)
+      && (new Set(input)).size === 3
     );
   }
 

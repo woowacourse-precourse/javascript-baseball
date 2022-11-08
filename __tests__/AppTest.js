@@ -14,6 +14,7 @@ describe('App Test', () => {
     expect(App.isValidPlayInput('012')).toBe(false);
     expect(App.isValidPlayInput('1234')).toBe(false);
     expect(App.isValidPlayInput('abc')).toBe(false);
+    expect(App.isValidPlayInput('111')).toBe(false);
   });
 
   test('test pickThreeDigits', () => {
