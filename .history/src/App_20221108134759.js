@@ -22,18 +22,22 @@ class App {
     do {
       MissionUtils.Console.readline("숫자를 입력해주세요 : ",(input)=>{
       //답이면 0, 답 아니면 1
-      let inputToInt=[];
-      for(let c of input)
-        inputToInt.push(parseInt(c));
-      status = checkAnswer(inputToInt, computerNumber);
+      status = checkAnswer(input, computerNumber);
       })
     } while (status !== 0);
   }
 
   checkAnswer(input, computerNumber){
+    //input과 computer 같으면
+    let inputToInt=[];
+    let flag = 0;
+
+    for(let c of input)
+      inputToInt.push(parseInt(c));
+
     for(let i = 0; i < 3;i++)
     {
-      if(input[i]!==computerNumber[i]){
+      if(inputToInt[i]!==computerNumber[i]){
         printStatus(input, computerNumber);
         return 1;
       }

@@ -31,6 +31,7 @@ class App {
   }
 
   checkAnswer(input, computerNumber){
+
     for(let i = 0; i < 3;i++)
     {
       if(input[i]!==computerNumber[i]){
