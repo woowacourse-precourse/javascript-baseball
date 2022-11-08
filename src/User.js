@@ -2,12 +2,6 @@ const { NUMBER } = require("./Game");
 
 class User {
   validateInput(userInput) {
-    console.log(
-      this.checkType(userInput),
-      this.checkUnique(userInput),
-      this.checkLength(userInput),
-      this.checkRange(userInput)
-    );
     return (
       this.checkType(userInput) &&
       this.checkUnique(userInput) &&
