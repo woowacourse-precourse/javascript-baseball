@@ -46,9 +46,9 @@ class App {
     return ;
   }
   if (ball > 0)
-  MissionUtils.Console.print(ball+'볼 ')
+    console.print(ball+'볼 ')
   if (strike > 0 )
-  MissionUtils.Console.print(strike+'스트라이크')
+    console.print(strike+'스트라이크')
   if (strike === 3)
     flag = 1;
   }
