@@ -17,17 +17,28 @@ function playGame(computer) {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
     judgeAnswer(answer);
     
-    const compareNumberArr = comparingNumbers(answer, computer);
-    const result = returnResult(compareNumberArr);
+    const compareNumberArr = compareNumbers(answer, computer);
+    const result = getResult(compareNumberArr);
     MissionUtils.Console.print(result);
 
     if(compareNumberArr[1] === 3) {
-      askGamePlay();
+      selectPlayGame();
     } else {
       playGame(computer);
     }
   });
 };
+
+function pickRandomNumbers() {
+  const computer = [];
+  while(computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if(!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
+  return computer;
+}
 
 function judgeAnswer(answer) {
   const numbers = answer.split('').map(item => +item);
@@ -55,34 +66,7 @@ function judgeAnswer(answer) {
   return;
 }
 
-
-function askGamePlay() {
-  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
-    if(answer == 1) {
-      const computer = pickRandomNumbers();
-      playGame(computer);
-    } else if(answer == 2) {
-      MissionUtils.Console.print('게임 종료');
-      MissionUtils.Console.close();
-    } else {
-      throw new Error('잘못된 값 입력. 게임 종료');
-    }
-  });
-}
-
-
-function pickRandomNumbers() {
-  const computer = [];
-  while(computer.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if(!computer.includes(number)) {
-      computer.push(number);
-    }
-  }
-  return computer;
-}
-
-function comparingNumbers(inputNum, randomNum) {
+function compareNumbers(inputNum, randomNum) {
   const result = [0, 0];
   const inputNumbers = inputNum.split('').map(item => +item);
   randomNum.forEach((number, index) => {
@@ -98,7 +82,7 @@ function comparingNumbers(inputNum, randomNum) {
   return result;
 }
 
-function returnResult(result) {
+function getResult(result) {
   const ball = result[0];
   const strike = result[1];
   if(ball === 0 && strike === 0) {
@@ -117,3 +101,17 @@ function returnResult(result) {
   } 
 }
 
+
+function selectPlayGame() {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
+    if(answer == 1) {
+      const computer = pickRandomNumbers();
+      playGame(computer);
+    } else if(answer == 2) {
+      MissionUtils.Console.print('게임 종료');
+      MissionUtils.Console.close();
+    } else {
+      throw new Error('잘못된 값 입력. 게임 종료');
+    }
+  });
+}
