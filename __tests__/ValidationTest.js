@@ -58,6 +58,28 @@ describe('컴퓨터와 비교할 사용자 공 입력값 테스트', () => {
       expect(error.message).toBe(Messages.ERROR.INVALID_BALL_NUMBER);
     }
   });
+
+  test('소수가 입력될 경우', () => {
+    mockQuestions(['3.45']);
+    const baseballGame = new BaseballGame();
+
+    try {
+      baseballGame.getUserInput();
+    } catch (error) {
+      expect(error.message).toBe(Messages.ERROR.INVALID_BALL_NUMBER);
+    }
+  });
+
+  test('0이 포함된 숫자가 입력될 경우', () => {
+    mockQuestions(['802']);
+    const baseballGame = new BaseballGame();
+
+    try {
+      baseballGame.getUserInput();
+    } catch (error) {
+      expect(error.message).toBe(Messages.ERROR.INVALID_BALL_NUMBER);
+    }
+  });
 });
 
 describe('종료 후 게임 진행 사용자 입력값 테스트', () => {
@@ -74,6 +96,17 @@ describe('종료 후 게임 진행 사용자 입력값 테스트', () => {
 
   test('1, 2 선택지 외의 문자를 입력할 경우', () => {
     mockQuestions(['alphabet test']);
+    const baseballGame = new BaseballGame();
+
+    try {
+      baseballGame.chooseResetOrExit();
+    } catch (error) {
+      expect(error.message).toBe(Messages.ERROR.INVALID_SELECT_NUMBER);
+    }
+  });
+
+  test('1, 2 선택지 외의 소수를 입력할 경우', () => {
+    mockQuestions(['5.2']);
     const baseballGame = new BaseballGame();
 
     try {

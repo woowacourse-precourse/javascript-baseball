@@ -31,7 +31,7 @@ class BaseballGame {
    */
   isInvalidThreeDigits = () => {
     const numberSet = new Set(this.#userInput);
-    const numberRegExp = new RegExp(/[0-9]/g);
+    const numberRegExp = new RegExp(/[1-9]{3}/g);
     return (
       this.#userInput.length !== 3 ||
       numberSet.size !== 3 ||
