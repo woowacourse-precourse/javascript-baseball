@@ -20,15 +20,15 @@ class Referee {
   }
 
   gameResult() {
-    const [ball, strike] = this.getBallAndStrikeCount();
+    const count = this.getBallAndStrikeCount();
 
-    const nothingString = ball === 0 && strike === 0 ? '낫싱' : '';
-    const ballString = ball ? `${ball}볼 ` : '';
-    const strikeString = strike ? `${strike}스트라이크` : '';
+    const nothingString = count.ball === 0 && count.strike === 0 ? '낫싱' : '';
+    const ballString = count.ball ? `${count.ball}볼 ` : '';
+    const strikeString = count.strike ? `${count.strike}스트라이크` : '';
 
     MissionUtils.Console.print(nothingString + ballString + strikeString);
 
-    if (strike === 3) {
+    if (count.strike === 3) {
       MissionUtils.Console.print(MESSAGE.GAME.WIN);
       this.gameFinish();
     } else this.player.setValue();
@@ -36,23 +36,26 @@ class Referee {
 
   gameFinish() {
     MissionUtils.Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
-      if (answer === RESTART) return this.gameStart();
-      if (answer === GAME_OVER) return MissionUtils.Console.print(MESSAGE.GAME.OVER);
-      return this.gameFinish();
+      if (answer === RESTART) this.gameStart();
+      else if (answer === GAME_OVER) MissionUtils.Console.print(MESSAGE.GAME.OVER);
+      else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 
   getBallAndStrikeCount() {
     const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
-    let [ball, strike] = [0, 0];
+    const count = {
+      ball: 0,
+      strike: 0,
+    };
 
     if (!computerValue || !playerValue) throw new Error(MESSAGE.ERROR.SYSTEM);
 
     for (let i = 0; i < 3; i++) {
-      if (computerValue[i] === playerValue[i]) strike++;
-      else if (computerValue.includes(playerValue[i])) ball++;
+      if (computerValue[i] === playerValue[i]) count.strike++;
+      else if (computerValue.includes(playerValue[i])) count.ball++;
     }
-    return [ball, strike];
+    return count;
   }
 }
 
