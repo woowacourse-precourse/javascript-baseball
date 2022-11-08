@@ -49,20 +49,9 @@ class App {
     this.checkUserNumbersInputValidity(userNumbers);
     const computerNumbers = this.#getComputerNumbers();
     const ballStrikeArr = this.compareEachNumbers(computerNumbers, userNumbers);
-    checkIsCorrect(this.#getResult(ballStrikeArr))
+    checkIsCorrect(this.getBallStrikeResult(ballStrikeArr))
       ? (Console.print(GAME_MSG.correct), this.#askRestart())
       : this.#takeUserNumbersInput();
-  }
-  #getResult([ballCnt, strikeCnt]) {
-    const helpArr = [
-      [ballCnt, GAME_RESULT.ball],
-      [strikeCnt, GAME_RESULT.strike],
-    ];
-    const filteredArr = helpArr.filter(([cnt]) => cnt > 0);
-    const rstArr = filteredArr.map((line) => line.join(""));
-    const rstStr = rstArr.join(" ") || GAME_RESULT.nothing;
-    Console.print(rstStr);
-    return rstStr;
   }
   #askRestart() {
     Console.readLine(GAME_MSG.askRestart, (input) => {
@@ -77,6 +66,17 @@ class App {
   #startGame() {
     this.#initComputerNumbers();
     this.#takeUserNumbersInput();
+  }
+  getBallStrikeResult([ballCnt, strikeCnt]) {
+    const helpArr = [
+      [ballCnt, GAME_RESULT.ball],
+      [strikeCnt, GAME_RESULT.strike],
+    ];
+    const filteredArr = helpArr.filter(([cnt]) => cnt > 0);
+    const rstArr = filteredArr.map((line) => line.join(""));
+    const rstStr = rstArr.join(" ") || GAME_RESULT.nothing;
+    Console.print(rstStr);
+    return rstStr;
   }
   checkUnique(arr) {
     return new Set(arr).size === LIMIT_CNT;

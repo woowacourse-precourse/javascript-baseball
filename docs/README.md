@@ -40,7 +40,7 @@
 - [x] 1. 숫자 배열로 변환(`String.prototype.split`, `Array.prototype.map`, `Number`을 이용) : userNumbers
 - [x] 2. 입력 유효성 검사([`checkUserNumbersInputValidity`](#4-1-세자리-숫자-유효성-검사-기능checkusernumbersinputvalidity-구현))
 - [x] 3. [`compareEachNumbers`](#5-사용자-입력-값과-상대방컴퓨터의-숫자-비교하는-기능compareeachnumbers-구현)에 `#computerNumbers`, `userNumbers` 전달, 배열 반환
-- [x] 4. [`#getBallStrikeResult`](#6-ball-strike-개수-결과값을-반환하는-기능getballstrikeresult-구현)에 배열 전달, 문자열 반환
+- [x] 4. [`getBallStrikeResult`](#6-ball-strike-개수-결과값을-반환하는-기능getballstrikeresult-구현)에 배열 전달, 문자열 반환
 - [x] 5. CORRECT_ANSWER와 일치 여부 확인
   - [x] 5.1 true일 경우 GAME_MSG.correct 출력, [`#askRestart`](#7-재시작-묻는-기능askrestart-구현) 호출
   - [x] 5.2 false일 경우 [`#takeUserNumbersInput`](#3-사용자로부터-입력받는-기능takeusernumbersinput-구현) 다시 호출
@@ -66,7 +66,7 @@
   - [x] 3.2 요소가 computerNumbers에 포함되어 있으면 `ballCnt++`
 - [x] 4. [ballCnt, strikeCnt]를 return
 
-## 6. ball, strike 개수 결과값을 반환하는 기능(#getBallStrikeResult) 구현
+## 6. ball, strike 개수 결과값을 반환하는 기능(getBallStrikeResult) 구현
 
 - [x] 1. [ballCnt, strikeCnt] 배열을 인자로 받음
 - [x] 2. 배열 값이 모두 0일 경우 GAME_RESULT.nothing return
