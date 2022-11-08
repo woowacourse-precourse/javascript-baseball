@@ -5,17 +5,14 @@ const { GAME_MESSAGE, WHAT, ERROR_MESSAGE } = require("../constants/constants");
 
 class BaseballGame {
   constructor() {
-    this.GameStart(true);
-  }
-
-  GameStart(FirstGame) {
-    this.FirstGame = FirstGame;
-    this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
+    this.FirstGame = true;
   }
 
   playGame = () => {
     if (this.FirstGame) {
       Console.print(GAME_MESSAGE.START_MESSAGE);
+      this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
+      this.FirstGame = false;
     }
     Console.readLine(GAME_MESSAGE.ENTER_NUMBER, this.playing);
   };
@@ -39,12 +36,10 @@ class BaseballGame {
     const userInputArr = [...userInput];
     let strike = 0;
     let ball = 0;
-    console.log(computerNumbersArr);
-    console.log(userInputArr);
     computerNumbersArr.forEach((number, index) => {
       number === Number(userInputArr[index])
         ? strike++
-        : Number(userInputArr.includes(number))
+        : userInputArr.includes(number.toString())
         ? ball++
         : 0;
     });
@@ -53,7 +48,7 @@ class BaseballGame {
 
   printResult = (strike, ball) => {
     if (strike === 0 && ball === 0) {
-      return Console.print(WHAT.NOTHING);
+      return Console.print("낫싱");
     } else if (ball > 0 && strike === 0) {
       return Console.print(`${ball}볼`);
     } else if (ball === 0 && strike > 0) {
@@ -71,10 +66,10 @@ class BaseballGame {
     ValidUserNumbers.isvalidRestart(OneOrTwo);
 
     if (OneOrTwo == 1) {
-      this.GameStart(false);
+      this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
       this.playGame();
     } else if (OneOrTwo == 2) {
-      Console.print("GAME_MESSAGE.GAME_END");
+      Console.print(GAME_MESSAGE.GAME_END);
       Console.close();
     }
   };
