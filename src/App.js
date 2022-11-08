@@ -36,6 +36,19 @@ class App {
     });
     return;
   }
+
+  CheckAnswer(answer,number){
+    const strike = 0;
+    const ball = 0;
+    for(let i = 0 ; i < 3 ; i++){
+      if(answer[i] === number[i])
+        strike++;
+      if(answer[i] == answer.includes(number[i]))
+        ball++;
+    }
+    Result(answer,strike,ball);
+    return;
+  }
 }
 // module.exports = App;
 
