@@ -19,6 +19,14 @@ class App {
     }
     return computerNumber;
   }
+
+  startGame() {
+    MissionUtils.Console.readline('숫자를 입력해주세요 : ', (inputNumber) => {
+      this.getHint(inputNumber);
+      MissionUtils.Console.print(this.hint);
+      this.checkAnswer();
+    })
+  }
 }
 
 module.exports = App;
