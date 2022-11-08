@@ -7,10 +7,10 @@ class BaseballGame {
     this.init(true);
   }
 
-  init(isFirstGame) {
+  init = (isFirstGame) => {
     this.isFirstGame = isFirstGame;
     this.pickedNumberByComputer = PickedNumberByComputer.randomNumInRange();
-  }
+  };
 
   playGame = () => {
     if (this.isFirstGame) Console.print("숫자 야구 게임을 시작합니다.");
