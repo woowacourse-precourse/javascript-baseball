@@ -76,3 +76,14 @@
 ### 📝 ActionTest.js
 
 - [o] UserInterface 와 Dispatcher 의존성 주입 테스트
+
+<br/>
+
+---
+# 🔨 구조와 데이터 흐름
+
+### **Action** ➡️ **Dispatcher** ➡️ **Store** ➡️ **View** ➡️ **Action**
+
+- 디스패쳐는 발생한 Action을 콜백함수들에게 전달해 모든 콜백함수를 실행한다.
+- 콜백함수는 Store의 상태를 변경하고 Store는 View에 상태가 바뀌었음을 알린다.
+- View는 바뀐 Store의 상태에 맞게 View를 update하고 사용자의 입력에 따라 새로운 Action을 발생시킨다.
