@@ -47,9 +47,48 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("Exception.js 입력된 숫자가 세자리인지 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("Exception.js 0이 포함되어 있는지 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["102"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("Exception.js 숫자가 아닌 값이 들어왔을 경우 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["num"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("Exception.js 중복된 값이 포함되었는지 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["112"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
