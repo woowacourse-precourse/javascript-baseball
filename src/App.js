@@ -4,11 +4,12 @@ const { Console, Random } = MissionUtils;
 class App {
   makeRandomNumbers() {
     const randomNumberArray = [];
-    for (let i = 0; i < 3; i++) {
+    while (randomNumberArray.length < 3) {
       let randomNumber = Random.pickNumberInRange(1, 9);
-      randomNumberArray.push(randomNumber);
+      if (!randomNumberArray.includes(randomNumber))
+        randomNumberArray.push(randomNumber);
     }
-    this.computerNumberArray = randomNumberArray;
+    return (this.computerNumberArray = randomNumberArray);
   }
 
   getUserNumbers() {
