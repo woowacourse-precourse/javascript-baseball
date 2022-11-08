@@ -4,13 +4,6 @@ const getStrikeAndBall = require("./StrikeAndBall");
 const getStrikeAndBallText = require("./StrikeAndBallText");
 const getThreeRandomNumbers = require("./ThreeRandomNumbers");
 const throwError = require("./ThrowError");
-// const { 3, "2", "1", 1, 9 } = require("./constants/constantValues");
-// const {
-//   숫자 야구 게임을 시작합니다.,
-//   "숫자를 입력해주세요 : ",
-//   END_MESSAGE,
-//   "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-// } = require("./constants/messages");
 
 class App {
   constructor() {
