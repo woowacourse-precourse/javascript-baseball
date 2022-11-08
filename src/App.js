@@ -79,7 +79,7 @@ class GameStart {
   countStrikeAndBall(computer, user) {
     let strike = 0;
     let ball = 0;
-    for(let i = 0; i < 3; i++) {
+    for(let i = 0; i < LENGTH_LIMIT; i++) {
       const index = computer.indexOf(user[i]);
       if(index === i) {
         strike += 1;
