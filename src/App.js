@@ -20,7 +20,7 @@ const runGame = () => {
   let result;
   Console.readLine("숫자를 입력해주세요: ", (inputStr) => {
     const inputArr = validateInput(inputStr);
-    result = checkCount(inputArr);
+    result = count(inputArr);
     checkResult(result);
   });
 };
@@ -30,11 +30,11 @@ const checkResult = (result) => {
     runGame();
   } else {
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    inputAgain();
+    inputReGame();
   }
 };
 
-const checkAgain = (input) => {
+const checkReGame = (input) => {
   if (input == 1) {
     getRandomNumber();
     runGame();
@@ -57,14 +57,14 @@ const validateInput = (inputStr) => {
   return inputArr;
 };
 
-const inputAgain = () => {
+const inputReGame = () => {
   Console.readLine(
     "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    checkAgain
+    checkReGame
   );
 };
 
-const checkCount = (inputArr) => {
+const count = (inputArr) => {
   let count = [0, 0];
   for (let i = 0; i < 3; i++) {
     checkOne(inputArr, i, count);
