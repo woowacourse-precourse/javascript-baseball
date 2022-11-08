@@ -40,13 +40,14 @@
 
 --필요한 기능
 1. 게임 시작 문구 출력 함수(gameStartingText)
-2. Computer가 생성한 난수 가져오는 함수(computerNumbersMaking)
-3. Player의 수 입력 받는 함수(playerNumbersInput)
-4. 하나의 게임을 진행하는 함수(oneGame)
-5. computer와 player의 숫자 비교 검사하여 strike와 ball의 개수를 산출하는 함수(compareComputerAndPlayer)
-6. strike와 ball 개수에 맞게 출력하는 함수(printStrikeAndBall)
-7. 게임 종료 조건 검사하는 조건문
-8. 게임 종료 문구 출력 함수(gameEndingText)
-9. 게임 재시작할지 입력받는 함수(askGameAgain)
-10. 게임 재시작 조건 검사 또는 변수 할당기
-11. 게임이 완전 끝났을 때 문구 출력 함수(gameCompleteEndText)
+2. 하나의 게임을 진행하는 함수(oneGame)
+3. Computer가 생성한 난수 가져오는 함수(computerNumbersMaking)
+4. Player의 수 입력 받는 함수(playerNumbersInput)
+5. Player의 input에 이상이 없는지 체크하는 함수(inputNumberErrorCheck)
+6. computer와 player의 숫자 비교 검사하여 strike와 ball의 개수를 산출하는 함수(compareComputerAndPlayer)
+7. strike와 ball 개수에 맞게 출력하는 함수(printStrikeAndBall)
+8. 게임 종료 조건 검사하는 조건문
+9. 게임 종료 문구 출력 함수(gameEndingText)
+10. 게임 재시작할지 입력받는 함수(askGameAgain)
+11. 게임 재시작 조건 검사 또는 변수 할당기
+12. 게임이 완전 끝났을 때 문구 출력 함수(gameCompleteEndText)
