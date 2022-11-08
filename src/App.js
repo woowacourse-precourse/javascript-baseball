@@ -1,5 +1,14 @@
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGES } = require('./constants');
+
 class App {
-  play() {}
+  play() {
+    this.#startGame();
+  }
+
+  #startGame() {
+    Console.print(MESSAGES.START);
+  }
 }
 
 module.exports = App;
