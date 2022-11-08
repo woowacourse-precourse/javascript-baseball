@@ -37,3 +37,23 @@ const validateNumber = (input) => {
   }
   return true;
 };
+const getScore = (cpu, user) => {
+  const userNumber = user.split("");
+  const score = defineScore(cpu, userNumber);
+  return score;
+};
+const defineScore = (targetNumbers, inputNumbers) => {
+  let score = { ball: 0, strike: 0 };
+  for (let index = 0; index < inputNumbers.length; index++) {
+    score = getJudge(targetNumbers, Number(inputNumbers[index]), index, score);
+  }
+  return score;
+};
+const getJudge = (targetNumbers, inputNumber, inputNumberIndex, score) => {
+  if (targetNumbers.indexOf(inputNumber) === inputNumberIndex) {
+    return { ...score, strike: score.strike + 1 };
+  } else if (targetNumbers.indexOf(inputNumber) !== -1) {
+    return { ...score, ball: score.ball + 1 };
+  }
+  return score;
+};
