@@ -143,6 +143,27 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('setHint 메서드에서 낫싱 또는 스트라이크가 아니면 무조건 볼이라는 것을 확인', () => {
+    const randoms = [2, 9, 6, 3, 7, 4];
+    const answers = ['137', '296', '1', '374'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    app.input.forEach((digitNumber, index) => {
+      expect(
+        !(
+          !app.answer.includes(digitNumber) || app.answer[index] === digitNumber
+        )
+      ).toBe(
+        app.answer.includes(digitNumber) && app.answer[index] !== digitNumber
+      );
+    });
+  });
+
   test('isValidInput 메서드로 부적절한 입력값 예외처리', () => {
     expect(App.isValidInput([1, 2, 3])).toEqual(true);
 
