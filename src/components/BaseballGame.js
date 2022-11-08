@@ -5,8 +5,21 @@ const handleException = require('./HandlingException');
 
 const orderMessage = gameConstant.INPUT_ORDER_MESSAGE;
 
+const removeDuplicate = (number, computer) => {
+  if (!computer.includes(number)) {
+    computer.push(number);
+  }
+};
+
 const setAnswer = () => {
-  return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
+  let answer = '';
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    removeDuplicate(number, computer);
+  }
+  answer = computer.join('');
+  return answer;
 };
 
 const printStartMessage = () => {
