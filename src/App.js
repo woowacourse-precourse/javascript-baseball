@@ -1,7 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+  play() {
+    const randomNums = this.createRandomComNum();
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.\n");
+    this.tryToAnswer(randomNums);
+  }
 
   createRandomComNum() {
     const randomNums = [];
