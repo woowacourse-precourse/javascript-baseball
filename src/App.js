@@ -36,9 +36,18 @@ class BaseBallGame {
     }
     return STRIKE_COUNT;
   }
+
+  isBall(INPUT_NUM, ANSWER) {
+    let BALL_COUNT = 0;
+    for (let curr_Number of INPUT_NUM) {
+      const i = INPUT_NUM.indexOf(curr_Number);
+      if (curr_Number !== ANSWER[i] && ANSWER.includes(curr_Number)) BALL_COUNT += 1;
+    }
+    return BALL_COUNT;
+  }  
 }
 
 const game = new BaseBallGame;
-game.isStrike('123', '132');
+game.isBall('123', '321');
 
 module.exports = BaseBallGame;
