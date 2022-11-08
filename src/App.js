@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const { REPLY, MESSAGE, ERROR_MESSAGE, BASEBALL_TERM } = require("./Constants");
 
 class App {
@@ -7,14 +7,14 @@ class App {
   }
 
   showMessage(message) {
-    MissionUtils.Console.print(message);
+    Console.print(message);
   }
 
   generateComputerNumber() {
     const numberArr = [];
 
     while (numberArr.length < 3) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      const randomNumber = Random.pickNumberInRange(1, 9);
       if (!numberArr.includes(randomNumber)) {
         numberArr.push(randomNumber);
       }
@@ -27,7 +27,7 @@ class App {
   }
 
   getUserNumber() {
-    MissionUtils.Console.readLine(MESSAGE.ASK_NUMBER, (inputNumber) => {
+    Console.readLine(MESSAGE.ASK_NUMBER, (inputNumber) => {
       const userNumber = Array.from(inputNumber, Number);
       if (this.checkValidity(userNumber)) {
         this.compareNumbers(this.computerNumber, userNumber);
@@ -68,8 +68,8 @@ class App {
   showResult(result) {
     const { ballNum, strikeNum } = result;
 
-    let message = `${ballNum + BASEBALL_TERM.BALL || ""} ${
-      strikeNum + BASEBALL_TERM.STRIKE || ""
+    let message = `${ballNum ? ballNum + BASEBALL_TERM.BALL : ""} ${
+      strikeNum ? strikeNum + BASEBALL_TERM.STRIKE : ""
     }`;
 
     if (ballNum === 0 && strikeNum === 0) {
@@ -80,11 +80,11 @@ class App {
   }
 
   askToPlayAgain() {
-    MissionUtils.Console.readLine(MESSAGE.ASK_REPLAY, (reply) => {
+    Console.readLine(MESSAGE.ASK_REPLAY, (reply) => {
       if (reply === REPLY.REPLAY) {
         this.playNewGame();
       } else if (reply === REPLY.GAME_END) {
-        MissionUtils.Console.close();
+        Console.close();
       } else {
         throw new Error(ERROR_MESSAGE.WRONG_REPLY);
       }
@@ -113,5 +113,5 @@ class App {
     this.playNewGame();
   }
 }
-
+new App().play();
 module.exports = App;
