@@ -39,6 +39,51 @@ function answerToIntArr(inputs){
   return [Number(inputs[0]),Number(inputs[1]),Number(inputs[2])];
 }
 
+function countStrike(guess, computer){
+  var strike = 0;
+  for(var i  = 0; i < 3; i++){
+    if(guess[i] == computer[i]){
+      strike++;
+    }
+  }
+  return strike;
+}
+
+function countBall(guess, computer){
+  var ball = 0;
+  for(var i = 0; i < 3; i++){
+    var j = (i+2)%3; // i-1
+    var k = (i+1)%3; // i+1
+    if(guess[i] == computer[j] || guess[i] == computer[k]){
+      ball++;
+    }
+  }
+  return ball;
+}
+
+function resultCheck(strike, ball){
+  if(strike == 3){
+    MissionUtils.Console.print("3스트라이크");
+    return true;
+  }
+  else if(strike == 0 && ball == 0){
+    MissionUtils.Console.print("낫싱");
+    return false;
+  }
+  else if (strike == 0){
+    MissionUtils.Console.print("" + ball + "볼");
+    return false;
+  }
+  else if (ball == 0){
+    MissionUtils.Console.print("" + strike + "스트라이크");
+    return false;
+  }
+  else{
+    MissionUtils.Console.print("" + ball + "볼 " + strike + "스트라이크");
+    return false;
+  }
+}
+
 class App {
   constructor() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -48,7 +93,13 @@ class App {
   }
   startGame() {
     var computer = generateRandomNumbers();
-    var guess = getGuess();
+    var isCorrect = false;
+    while(!isCorrect){
+      var guess = getGuess();
+      var strike = countStrike(guess, computer);
+      var ball = countBall(guess, computer);
+      if(resultCheck(strike, ball)) isCorrect = true;
+    }
   }
 }
 
