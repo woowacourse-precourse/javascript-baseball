@@ -1,5 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const {
+  makeNumberToArray,
+  useNumberToArray,
+} = require("../hooks/useNumberToArray.js");
+const {
   NOTTHING,
   STRIKE,
   BALL,
@@ -67,13 +71,8 @@ const validateOneToNine = (target) => {
   return NUMBER_ONE_TO_NINE.test(target);
 };
 
-const makeNumberToArray = (target) => {
-  const arrayTarget = target.split("").map((item) => Number(item));
-  return arrayTarget;
-};
-
 const gamePlay = (computers, user) => {
-  const users = makeNumberToArray(user);
+  const users = useNumberToArray(user);
 
   let countStrike = 0;
   let countBall = 0;
