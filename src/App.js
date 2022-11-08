@@ -112,7 +112,4 @@ class App {
   }
 }
 
-const app = new App();
-MissionUtils.Console.print(app.play());
-
 module.exports = App;
