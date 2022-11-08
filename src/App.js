@@ -3,8 +3,9 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const GAME_START_MSG = '숫자 야구 게임을 시작합니다.';
 const NUM_INPUT_MSG = '숫자를 입력해주세요 : ';
 const INPUT_EXCEPTION_MSG = '입력 값 에러 !!!';
-const GAME_END_MSG =
-  '3개의 숫자를 모두 맞히셨습니다! 게임 종료 \n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
+const GAME_END_MSG = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+const GAME_RESTART_MSG =
+  '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
 
 class App {
   play() {
@@ -66,9 +67,6 @@ class App {
   calScore() {
     this.countBall();
     this.countStrike();
-    // // Debug
-    // MissionUtils.Console.print(this.answer);
-    // MissionUtils.Console.print(this.score);
     this.printScore();
   }
 
@@ -82,6 +80,7 @@ class App {
     if (this.score.ball === 0 && this.score.strike === 0) scoreMsg = '낫싱';
     MissionUtils.Console.print(scoreMsg);
     if (this.score.strike === 3) {
+      MissionUtils.Console.print(GAME_END_MSG);
       this.gameEndInput();
     } else {
       this.score.ball = 0;
@@ -99,7 +98,7 @@ class App {
   }
 
   gameEndInput() {
-    MissionUtils.Console.readLine(GAME_END_MSG, (line) => {
+    MissionUtils.Console.readLine(GAME_RESTART_MSG, (line) => {
       this.EndInputExceptionCheck(line);
       if (line === '1') {
         this.answer = this.generateAnswer();
@@ -114,9 +113,14 @@ class App {
   }
 
   generateAnswer() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
-      .join('')
-      .split('');
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer.join('').split('');
   }
 
   constructor() {
@@ -126,6 +130,3 @@ class App {
 }
 
 module.exports = App;
-
-const app = new App();
-app.play();
