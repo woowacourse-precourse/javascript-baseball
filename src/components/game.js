@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./computer');
-const Validation = require('./Validation');
-const { PROMPT, SUCCESS, RESTART, END } = require('../constant/constant.js');
+const Validation = require('./validation');
+const { PROMPT, SUCCESS, RESTART, END } = require('../constant/constant');
 
 class Game {
   constructor() {
