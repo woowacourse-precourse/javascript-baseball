@@ -32,6 +32,19 @@ class Validator {
 
     return true;
   }
+
+  #isValidGameEndInput() {
+    return (
+      this.input === EXECPTION_CONDITION.RESTART ||
+      this.input === EXECPTION_CONDITION.END
+    );
+  }
+
+  isResetOrAndInput(input) {
+    this.input = input;
+
+    if (this.#isValidGameEndInput() === false) return this.#throwTypeError();
+  }
 }
 
 module.exports = Validator;
