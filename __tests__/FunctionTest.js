@@ -101,4 +101,26 @@ describe("기능 테스트", () => {
       app.checkInputRestartExit(input);
     }).toThrow("잘못된 값 입력");
   });
+
+  test("[기능 8] 1 or 2 입력 시 결과에 따라 돌아가거나, 종료", () => {
+    const randoms = [1, 3, 2, 5, 6, 7];
+    const answers = ["132", "1", "567", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
