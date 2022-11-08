@@ -31,16 +31,24 @@ class App {
   }
 
   playInning() {
+    this.resetResult();
     const userAnswer = this.getUserInput();
     this.getResult(userAnswer);
     this.printResult();
     this.checkFinished();
   }
 
+  resetResult() {
+    this.result.ball = 0;
+    this.result.strike = 0;
+  }
+
   checkFinished() {
     if (this.result.strike === 3) {
       Console.print(MESSAGE.GAMEFINISHED);
       Console.print(MESSAGE.GAMERESTART);
+    } else {
+      this.playInning();
     }
   }
 
