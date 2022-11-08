@@ -1,9 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 class Defender {
+  ball = null;
+
   constructor(ballGenerator) {
     this.ballGenerator = ballGenerator;
-    this.ball = ballGenerator.execute();
+  }
+
+  async ready() {
+    this.ball = await this.ballGenerator.execute();
   }
 
   reportAbout(otherBall) {
