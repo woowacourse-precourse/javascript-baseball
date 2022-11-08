@@ -21,11 +21,12 @@ while (DEF_NUM.length < 3) {
  function MakeAtk(){
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(answer)=>{
     for(let i=0;i<3;i++){
-      ATK_NUM.push(parseInt(answer[i],10));
+      ATK_NUM.push(answer.split('').map(Number));
     }
   });
-
-    setTimeout(findError,0);
+  setTimeout(()=>{if(ATK_NUM.length !==3){
+    findError();
+  }},0);
   return ATK_NUM;
 }
 
@@ -48,17 +49,18 @@ function getStrike() {
 }//strike
 
 function findError(){
-  if(ATK_NUM.length !== 3){
-    throw "3자리 수를 입력하세요";
-  }
-    for(let i=0;i<3;i++){
-     if(typeof ATK_NUM[i] !== Number){
-      throw "문자가 아닌 숫자를 입력하세요";
-     }else if(ATK_NUM.indexOf(ATK_NUM[i])!==i || ATK_NUM[i]===0){
-      throw "0을 포함하지않은 중복되지않는 숫자를 입력하세요";
-     }
-    }
+  // if(ATK_NUM.length !== 3){
+  //   throw "3자리 수를 입력하세요";
+  // }
+  //   for(let i=0;i<3;i++){
+  //    if(typeof ATK_NUM[i] !== Number){
+  //     throw "문자가 아닌 숫자를 입력하세요";
+  //    }else if(ATK_NUM.indexOf(ATK_NUM[i])!==i || ATK_NUM[i]===0){
+  //     throw "0을 포함하지않은 중복되지않는 숫자를 입력하세요";
+  //    }
+  //   }
       
+  throw "3자리 수를 입력하세요"
 
 }
 function Gaming(){
@@ -92,9 +94,15 @@ class App {
   play() {
     MakeDef();
     MakeAtk();
-    while(strikeCount<3){ 
-    setTimeout(Gaming,0);
-    }
+    setTimeout(()=>{
+      // findError();
+      while(strikeCount<3){ 
+      Gaming();
+      }
+      if(strikeCount>=3){
+        app.finish();
+      }
+    });
   }    
   finish(){
       restartOrEnd();
