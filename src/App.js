@@ -49,6 +49,22 @@ class App {
     }
     return true;
   }
+
+  createResultMessage(strike, ball) {
+    if (ball === 0 && strike === 0) {
+      return '낫싱';
+    }
+    if (ball === 0 && strike > 0) {
+      return `${strike}스트라이크`;
+    }
+    if (ball > 0 && strike === 0) {
+      return `${ball}볼`;
+    }
+    if (ball > 0 && strike > 0) {
+      return `${ball}볼 ${strike}스트라이크`;
+    }
+    throw new Error('비정상적인 결과 입니다.');
+  }
 }
 
 module.exports = App;
