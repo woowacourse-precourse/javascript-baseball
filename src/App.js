@@ -15,6 +15,15 @@ class App {
     return this.getUserNumber()
   }
 
+  makeComputerNumber () {
+    let makedComputerNum = this.makeRandomNum();
+    return this.computerNumber.push(makedComputerNum.join(''))
+  }
+
+  makeRandomNum() {
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+  }
+
   getUserNumber () {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumber) => {
       return this.inputChecker(userNumber)
@@ -28,26 +37,16 @@ class App {
     else if (this.duplicationCheck(userNumber) == false){
       throw '서로 중복되지 않는 수를 입력하세요'
     }
+    else if ([...userNumber].includes('0')) {
+      throw '1~9의 숫자만 입력하세요'
+    }
     return this.readyResultCheck(userNumber)
   }
 
-  makeComputerNumber () {
-    const computerLs = new Computer();
-    let makeComputerNumber = computerLs.makeComNumLs();
-    makeComputerNumber = makeComputerNumber.join('');
-
-    return this.computerNumber.push(makeComputerNumber)
-  }
-
-
-
   readyResultCheck (userNumber) {
     const computerNumber = this.computerNumber[0]
-    console.log('컴퓨터 넘버 : ', computerNumber)
     return this.checkStrikeResult(computerNumber, userNumber)
   }
-
-
 
   checkStrikeResult(computerNum, userNum) {
     let strikeResultAndIndex = this.countStrike(computerNum, userNum);
@@ -97,26 +96,21 @@ class App {
     return [comLs, userLs]
   }
 
-
   scoreChecker(results, computerNum) {
     const strikeResult = results[0];
     const ballResult = results[1];
-
 
     if (strikeResult == 3) {
       console.log('3개의 숫자를 모두 맞히셨습니다! 게임종료');
       return this.chooseReStart();
     }
-    
     if (strikeResult == 0 && ballResult == 0){
       console.log('낫싱');
       return this.getUserNumber(computerNum)
     }
-
     else {
       return this.scoreSpeaker(ballResult, strikeResult, computerNum)
       }
-      
   }
 
   scoreSpeaker(ballResult, strike, computerNum) {
@@ -128,12 +122,10 @@ class App {
   }
 
   chooseReStart() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (userNumber) => {
-      MissionUtils.Console.close();
-      if (userNumber == 1) return this.startGame()
-      else if (userNumber == 2) return 
-      else if (userNumber !== 1 || userNumber !== 2) throw '1이나 2를 입력하세요.'
-      else '1이나 2를 입력하세요.'
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
+      if (answer == 1) return this.startGame()
+      if (answer == 2) return 
+      throw '1이나 2를 입력하세요.'
     })
   }
 
@@ -144,11 +136,4 @@ class App {
   }
 }
 
-class Computer extends App {
-  makeComNumLs() {
-    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  }
-}
-
 module.exports = App;
-
