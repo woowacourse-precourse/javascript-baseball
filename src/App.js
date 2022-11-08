@@ -86,7 +86,7 @@ const goAndStop = (strikeNum) => {
 
 
 const errorTestGameNum = (number) => {
-  if (number.length !== 3) throw "잘못된 양식입니다.";
+  if (number.length !== 3 || isNaN(number)) throw "잘못된 양식입니다.";
 };
 
 const errorTestGoandStop = (number) => {
