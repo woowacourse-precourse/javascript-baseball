@@ -23,7 +23,12 @@ class Game {
     this.user.readAnswer(MESSAGE.USER_ANSWER, (answer) => {
       const correct = this.checkAnswer(answer);
 
-      correct ? this.checkReplay() : this.start();
+      if (correct) {
+        this.checkReplay();
+      }
+      if (!correct) {
+        this.start();
+      }
     });
   }
 
@@ -68,7 +73,14 @@ class Game {
   printResult(ball, strike) {
     if (ball === 0 && strike > 0) {
       this.printMessage(MESSAGE.STRIKE[strike]);
-    } else {
+    }
+    if (ball > 0 && strike === 0) {
+      this.printMessage(MESSAGE.BALL[ball]);
+    }
+    if (ball === 0 && strike === 0) {
+      this.printMessage('낫싱');
+    }
+    if (ball !== 0 && strike !== 0) {
       this.printMessage(
         `${MESSAGE.BALL[ball]} ${MESSAGE.STRIKE[strike]}`.trim()
       );
