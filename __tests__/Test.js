@@ -1,9 +1,9 @@
 const App = require("../src/App");
 
-const find_duplicate_number = (n)=>{
-    if(n[0]==n[1]) return 0;
-    if(n[0]==n[2]) return 0;
-    if(n[1]==n[2]) return 0;
+const find_duplicate_number = function(number){
+    if(number[0]==number[1]) return 0;
+    if(number[0]==number[2]) return 0;
+    if(number[1]==number[2]) return 0;
     return 1;
 }
 
