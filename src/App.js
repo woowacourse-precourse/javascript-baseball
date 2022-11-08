@@ -28,11 +28,11 @@ class App {
     this.checkGameResult(result);
   }
 
-  static printGameResult(strikeCnt, ballCnt) {
-    if (strikeCnt === 0 && ballCnt === 0) return Console.print("낫싱");
-    const strike = strikeCnt === 0 ? "" : `${strikeCnt}스트라이크`;
-    const ball = ballCnt === 0 ? "" : `${ballCnt}볼 `;
-    return Console.print(`${ball}${strike}`);
+  static printGameResult(strikeCount, ballCount) {
+    if (strikeCount === 0 && ballCount === 0) return Console.print("낫싱");
+    const strikeMessage = strikeCount === 0 ? "" : `${strikeCount}스트라이크`;
+    const ballMessage = ballCount === 0 ? "" : `${ballCount}볼 `;
+    return Console.print(`${ballMessage}${strikeMessage}`);
   }
 
   askRestart() {
@@ -40,8 +40,9 @@ class App {
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
       (restart) => {
-        if (restart === "1") this.gameStart();
-        else Console.close();
+        if (restart === "1") return this.gameStart();
+        else if (restart === "2") return Console.close();
+        throw new Error("유효하지 않은 값을 입력하였습니다.");
       }
     );
   }
@@ -49,8 +50,8 @@ class App {
   checkGameResult(result) {
     const { strikeCount, ballCount } = result;
     App.printGameResult(strikeCount, ballCount);
-    if (strikeCount !== 3) this.getUserInput();
-    else this.askRestart();
+    if (strikeCount !== 3) return this.getUserInput();
+    return this.askRestart();
   }
 
   makeComputerNumber() {
