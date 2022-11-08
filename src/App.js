@@ -43,6 +43,10 @@ const exceptionHandlingInputUserNum = (answer) => {
   }
 }
 
+const isCorrectAnswer = (ballCount, strikeCount) => {
+  return strikeCount === 3 && ballCount === 0;
+}
+
 const getGameResult = (answer, userAnswer) => {
   let ballCount = 0;
   let strikeCount = 0;
