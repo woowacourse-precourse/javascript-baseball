@@ -16,4 +16,17 @@ describe("기능 목록 테스트", () => {
       expect(RANDOM_NUMBER.RANGE.test(number)).toBe(true);
     });
   });
+  test("점수 출력 확인", () => {
+    const game = new Game();
+    const log = getLogSpy();
+
+    game.printScore(0, 0);
+    expect(log).toHaveBeenCalledWith("낫싱");
+    game.printScore(0, 2);
+    expect(log).toHaveBeenCalledWith("2볼");
+    game.printScore(1, 0);
+    expect(log).toHaveBeenCalledWith("1스트라이크");
+    game.printScore(2, 1);
+    expect(log).toHaveBeenCalledWith("2볼 1스트라이크");
+  });
 });
