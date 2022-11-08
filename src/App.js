@@ -49,6 +49,22 @@ class App {
     this.game();
   }
 
+  restartOrEnd() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (number) => {
+        MissionUtils.Console.close();
+
+        if (number === "1") {
+          this.game();
+        } else if (number === "2") {
+        } else {
+          throw new Error("잘못된 입력입니다.");
+        }
+      }
+    );
+  }
+
   countBallandStrike = () => {
     let ballCount = 0;
     let strikeCount = 0;
