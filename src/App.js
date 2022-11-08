@@ -6,7 +6,6 @@ class App {
     const COMPUTER = this.computerExtrackNumber();
     this.userNumber(COMPUTER);
   }
-
   startMessage() {
     return MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
@@ -19,17 +18,15 @@ class App {
         COMPUTER_NUMBER.push(computerNumber);
       }
     }
-    console.log(COMPUTER_NUMBER);
+    MissionUtils.Console.print(COMPUTER_NUMBER);
     return COMPUTER_NUMBER;
   }
 
   userNumber(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
       let userNumber = answer.split("").map((element) => parseInt(element));
-      console.log(userNumber);
       this.checkUserNumber(userNumber);
       this.processNumber(computer, userNumber);
-      //MissionUtils.Console.close();
     });
   }
   checkUserNumber(array) {
@@ -53,16 +50,17 @@ class App {
     if (ballCount === 0 && strikeCount === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (ballCount !== 0 && strikeCount === 0) {
-      MissionUtils.Console.print(ballCount + " 볼");
+      MissionUtils.Console.print(ballCount + "볼");
     } else if (ballCount === 0 && strikeCount !== 0) {
-      MissionUtils.Console.print(strikeCount + " 스트라이크");
+      MissionUtils.Console.print(strikeCount + "스트라이크");
     } else {
       MissionUtils.Console.print(
-        ballCount + " 볼, " + strikeCount + " 스트라이크"
+        ballCount + "볼, " + strikeCount + "스트라이크"
       );
     }
 
     if (strikeCount === 3) {
+      MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.askReplayGame();
     } else if (strikeCount !== 3) {
