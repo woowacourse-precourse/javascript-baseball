@@ -16,6 +16,16 @@ function ballCount(userInputNumbersArray, computerPickNumbersArray) {
   return ball;
 }
 
+function strikeCount(userInputNumbersArray, computerPickNumbersArray) {
+  let strike = 0;
+  for (let i = 0; i < userInputNumbersArray.length; i += 1) {
+    if (userInputNumbersArray[i] === computerPickNumbersArray[i]) {
+      strike += 1;
+    }
+  }
+  return strike;
+}
+
 function computerPickNumbers() {
   computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
