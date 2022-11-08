@@ -7,7 +7,6 @@ class App {
   play() {
     this.game.playGame();
   }
-  
 }
 
 module.exports = App;
