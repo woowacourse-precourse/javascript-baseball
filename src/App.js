@@ -4,6 +4,7 @@ class App {
     constructor() {
         this.RANDOM_NUMBER = 0;
     }
+
     // 랜덤한 3자리 숫자를 생성하고 리턴.
     generateRandomNumber() {
         const randomNumberArray = MissionUtils.Random.pickUniqueNumbersInRange(
@@ -14,7 +15,7 @@ class App {
         return randomNumberArray.join('');
     }
 
-    // 스트라이크(S), 볼(B), 낫씽(N) 판단하고 결과를 리턴.
+    // S, B, N의 개수를 담은 객체를 리턴.
     checkSBN(userInput) {
         let strike = 0;
         let ball = 0;
@@ -25,12 +26,12 @@ class App {
             if (this.RANDOM_NUMBER.includes(char)) ball++;
         }
 
-        // ball == 0 이면 낫씽
-        if (!ball) nothing = 1;
+        // ball이 0 이면 낫씽
+        if (ball === 0) nothing = 1;
 
         // strike 개수 세기. strike 발견하면 ball--
         for (let i = 0; i < 3; i++) {
-            if (userInput[i] == this.RANDOM_NUMBER[i]) {
+            if (userInput[i] === this.RANDOM_NUMBER[i]) {
                 strike++;
                 ball--;
             }
@@ -38,18 +39,77 @@ class App {
         return { strike, ball, nothing };
     }
 
-    // 3자리 숫자 입력 받아서 로직 처리.
+    // 올바른 입력인지 판단하고, invalid면 throw를 던진다.
+    validCheck(userInput) {
+        // 길이가 3이 아닌 경우.
+        if (userInput.length !== 3) {
+            throw '3자리 숫자를 입력하세요';
+        }
+        // 숫자가 아닌 문자 또는 0이 들어 있는 경우.
+        const numbers = '123456789';
+        for (let num of userInput) {
+            if (!numbers.includes(num)) {
+                throw '0을 제외한 숫자만 입력 가능합니다';
+            }
+        }
+        return true;
+    }
+
+    // S, B, N을 출력한다.
+    printResult(result) {
+        // 정보 출력하기.
+        if (result.nothing === 1) {
+            MissionUtils.Console.print('낫싱');
+        } else if (result.strike && result.ball) {
+            MissionUtils.Console.print(
+                `${result.ball}볼 ${result.strike}스트라이크`
+            );
+        } else if (result.strike !== 0) {
+            MissionUtils.Console.print(`${result.strike}스트라이크`);
+        } else if (result.ball !== 0) {
+            MissionUtils.Console.print(`${result.ball}볼`);
+        }
+    }
+
+    // 3자리 숫자 입력 받고, 로직을 처리한다.
     getThreeDigitNumber() {
         MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+            this.validCheck(userInput); // invalid의 경우 throw.
+
             const result = this.checkSBN(userInput);
+            this.printResult(result);
+            if (result.strike !== 3) {
+                this.getThreeDigitNumber();
+            } else if (result.strike === 3) {
+                MissionUtils.Console.print(
+                    '3개의 숫자를 모두 맞히셨습니다! 게임 종료'
+                );
+                this.query();
+            }
         });
     }
 
-    play() {
-        MissionUtils.Console.print('숫자야구 게임을 시작합니다.');
+    // 새로운 게임 할 것인지 질문.
+    query() {
+        MissionUtils.Console.readLine(
+            '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ',
+            (choice) => {
+                if (Number(choice) === 1) {
+                    this.play();
+                } else {
+                    MissionUtils.Console.close();
+                }
+            }
+        );
+    }
 
+    play() {
         this.RANDOM_NUMBER = this.generateRandomNumber();
-        this.getThreeDigitNumber();
+        try {
+            this.getThreeDigitNumber();
+        } catch (exceptionMessage) {
+            MissionUtils.Console.print(exceptionMessage);
+        }
     }
 }
 
