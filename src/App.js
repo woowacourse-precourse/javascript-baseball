@@ -69,6 +69,26 @@ class App {
     return totalBall;
   }
 
+  compareNumbers (computerNum, userInputNum) {
+    let strike = this.countStrikes(computerNum, userInputNum);
+    let ball = this.countBalls(computerNum, userInputNum);
+    if (strike == 0 && ball == 0) {
+      MissionUtils.Console.print("낫싱")
+      return false
+    } else if (strike == 3) {
+      MissionUtils.Console.print("3스트라이크");
+      return true
+    } else if (strike == 0) {            
+      MissionUtils.Console.print(`${ball}볼`)
+      return false
+    } else if (ball == 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`)
+      return false;
+    } 
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
+    return false;
+  }
+  
 }
 const app = new App();
 app.play();
