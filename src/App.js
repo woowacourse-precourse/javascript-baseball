@@ -10,13 +10,24 @@ class App {
     Console.print(MESSAGES.START);
     this.start();
   }
-  async start() {
+  start() {
     this.answer = gameTool.generateRandomNumber();
+    this.continue();
+  }
+  async continue() {
     const input = await gameTool.inputNumber();
     if(gameTool.isValidateNumber(input) === false) throw new Error('입력이 잘못되었습니다.');
     console.log(this.answer, input);
     const { strike, ball } = gameTool.checkBaseballCount(this.answer, input);
     console.log(strike, ball);
+    if(strike === 3){
+      this.end();
+    } else {
+      this.continue();
+    }
+  }
+  end() {
+    console.log('끝');
   }
 }
 
