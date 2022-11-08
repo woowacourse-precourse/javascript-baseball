@@ -10,7 +10,7 @@ class Validation {
       repeatInput.length !== THREE
     ) {
       throw new Error(ERROR_TEXT);
-    } else return;
+    } else return input;
   }
 }
 
