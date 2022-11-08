@@ -52,18 +52,6 @@ class App {
     Console.readLine(MSG.inputNumber, cbFn.bind(this));
   }
 
-  terminate() {
-    // 게임을 종료 메시지를 발생시킨다.
-    Console.print(MSG.endGame);
-    Console.readLine(MSG.reQuestion, (answer) => {
-      if (answer === REQUESTION_CHOICE.start) {
-        return this.startGame();
-      } else if (answer === REQUESTION_CHOICE.end) {
-        return Console.close();
-      }
-    });
-  }
-
   isDuplicated(input) {
     const numberSet = new Set([...input]);
 
@@ -108,18 +96,30 @@ class App {
   validate(input) {
     const regExp = new RegExp(/^[1-9]{3}$/);
 
-    if (regExp.test(input) && !this.isDuplicated(input)) {
-      const hintMessage = this.evaluate(input);
-      Console.print(hintMessage);
-
-      if (hintMessage === MSG.winGame) {
-        return this.terminate();
-      } else {
-        return this.getUserInput(this.validate);
-      }
-    } else {
+    if (!regExp.test(input) || this.isDuplicated(input)) {
       throw new Error(MSG.invalidInput);
     }
+
+    const hintMessage = this.evaluate(input);
+    Console.print(hintMessage);
+
+    if (hintMessage === MSG.winGame) {
+      return this.terminate();
+    }
+
+    return this.getUserInput(this.validate);
+  }
+
+  terminate() {
+    Console.print(MSG.endGame);
+
+    Console.readLine(MSG.reQuestion, (answer) => {
+      if (answer === REQUESTION_CHOICE.start) {
+        return this.startGame();
+      } else if (answer === REQUESTION_CHOICE.end) {
+        return Console.close();
+      }
+    });
   }
 }
 
