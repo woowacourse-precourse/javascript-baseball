@@ -73,11 +73,19 @@ function exception(input) {
     input_array.push(x)
   } 
   var input_set = new Set(input_array);
+  var regExp = new RegExp('/\D/gm')
+  if (regExp.test(input)) {
+    throw '숫자만 입력해주세요'
+  }
   if (input.length !== 3) {
     throw '3자리 숫자를 입력해주세요'
   }
   if (input_set.size !== 3){
     throw '각자 다른 숫자를 입력해주세요'
   }
+  if (input.includes(0)){
+    throw '1~9사이의 숫자를 입력해주세요'
+  }
+  
 }
 module.exports = App;
