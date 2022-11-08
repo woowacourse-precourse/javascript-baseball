@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const GET_COMPUTER_NUM = require('../src/Baseball/computerNum');
 const INPUT_CHECK = require('../src/Baseball/inputCheck');
+const GAME_RESULT = require('../src/Baseball/gameResult');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -64,5 +65,15 @@ describe('기능 테스트', () => {
 
     expect(INPUT_CHECK.checkNumOverlap(input1)).toBeFalsy();
     expect(INPUT_CHECK.checkNumOverlap(input2)).toBeTruthy();
+  });
+
+  test('볼, 스트라이크 갯수 카운트 확인', () => {
+    const computerNum = [1, 7, 9];
+    const userNum = [1, 9, 8];
+
+    const count = GAME_RESULT.gameCounter(userNum, computerNum);
+    const expectedValue = [1, 1];
+
+    expect(count).toEqual(expectedValue);
   });
 });
