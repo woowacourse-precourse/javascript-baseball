@@ -25,6 +25,7 @@ const guessNumber = randomNumberArray => {
     userInputNumberArray = convertNumberToNumberArray(userInputNumber);
 
     if (isValidNumber(userInputNumber, userInputNumberArray)) {
+      showAnswer(randomNumberArray, userInputNumberArray);
     } else {
       throw new Error(
         '1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 입력해주세요.'
@@ -54,6 +55,43 @@ const isValidNumber = (userInputNumber, userInputNumberArray) => {
   if (userInputNumberArray[1] === userInputNumberArray[2]) return false;
 
   return true;
+};
+
+const showAnswer = (randomNumberArray, userInputNumberArray) => {
+  if (
+    randomNumberArray.every(
+      (randomNumber, index) => randomNumber === userInputNumberArray[index]
+    )
+  ) {
+    Console.print('3스트라이크');
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  } else {
+    showHint(randomNumberArray, userInputNumberArray);
+    guessNumber(randomNumberArray);
+  }
+};
+
+const showHint = (randomNumberArray, userInputNumberArray) => {
+  let strikeCount = 0;
+  let ballCount = 0;
+
+  for (i = 0; i < randomNumberArray.length; i++) {
+    if (randomNumberArray[i] === userInputNumberArray[i]) strikeCount++;
+    else if (randomNumberArray.includes(userInputNumberArray[i])) ballCount++;
+  }
+
+  let ballHint = '';
+  let strikeHint = '';
+
+  if (ballCount > 0) ballHint = `${ballCount}볼`;
+  if (strikeCount > 0) strikeHint = `${strikeCount}스트라이크`;
+  if (strikeCount === 0 && ballCount === 0) {
+    return Console.print('낫싱');
+  } else if (ballCount > 0 && strikeCount > 0) {
+    return Console.print(`${ballHint} ${strikeHint}`);
+  } else {
+    return Console.print(`${ballHint}${strikeHint}`);
+  }
 };
 
 module.exports = App;
