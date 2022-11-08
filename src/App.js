@@ -102,4 +102,6 @@ function validateNumber(number){
 
 module.exports = App;
 
+const app = new App();
+app.play();
 
