@@ -48,9 +48,7 @@ function App() {
         ball += 1;
       }
     });
-    let result = [ball, strike];
-
-    return result;
+    return [ball, strike];
   }
 
   function printMatchResult(matchResult) {
