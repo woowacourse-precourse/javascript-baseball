@@ -71,6 +71,8 @@ class Game {
   }
 
   printResult(ball, strike) {
+    let viewStrikeAndBall = `${MESSAGE.BALL[ball]} ${MESSAGE.STRIKE[strike]}`.trim();
+
     if (ball === 0 && strike > 0) {
       this.printMessage(MESSAGE.STRIKE[strike]);
     }
@@ -81,9 +83,7 @@ class Game {
       this.printMessage(MESSAGE.NOTHING);
     }
     if (ball !== 0 && strike !== 0) {
-      this.printMessage(
-        `${MESSAGE.BALL[ball]} ${MESSAGE.STRIKE[strike]}`.trim()
-      );
+      this.printMessage(viewStrikeAndBall);
     }
   }
 
