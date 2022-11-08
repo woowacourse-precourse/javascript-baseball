@@ -25,7 +25,7 @@ const SCORE = Object.freeze({
 
 const ERROR = Object.freeze({
   INPUT_THREE_NUMBER: "1부터 9까지 서로 다른 숫자 3개를 입력해주세요",
-  INPUT_ONE_OR_THO: "1 또는 2를 입력해주세요",
+  INPUT_ONE_OR_TWO: "1 또는 2를 입력해주세요",
 });
 
 module.exports = {
