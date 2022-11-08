@@ -1,4 +1,4 @@
-const App = require("../src/App");
+const App = require("../src/App.js");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const mockQuestions = (answers) => {
@@ -28,13 +28,7 @@ describe("숫자 야구 게임", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
     const logSpy = getLogSpy();
-    const messages = [
-      "낫싱",
-      "3스트라이크",
-      "1볼 1스트라이크",
-      "3스트라이크",
-      "게임 종료",
-    ];
+    const messages = ["낫싱", "3스트라이크", "1볼 1스트라이크", "3스트라이크", "게임 종료"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
