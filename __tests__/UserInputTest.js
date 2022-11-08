@@ -1,14 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-
-const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
+const { mockQuestions } = require('../src/TestUtils');
 
 describe('사용자 입력 검사', () => {
   test('올바른 입력 검사 1', () => {

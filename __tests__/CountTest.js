@@ -1,11 +1,5 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
-  logSpy.mockClear();
-  return logSpy;
-};
+const { getLogSpy } = require('../src/TestUtils');
 
 describe('볼-스트라이크 결과 표시', () => {
   test('경우 1', () => {
