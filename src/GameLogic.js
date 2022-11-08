@@ -59,9 +59,10 @@ class GameLogic {
   }
 
   implement(computerNumber) {
+    // MissionUtils.Console.print(INGAME_MESSAGE.START);
     MissionUtils.Console.readLine(
       INGAME_MESSAGE.INPUT_NUMBER,
-      //   `${computerNumber}`,
+      // `${computerNumber}`,
       (string) => {
         const validation = new Validation();
         const userNumber = string.split("").map((el) => Number(el));
