@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Random, Console } = require("@woowacourse/mission-utils");
 
+const LENGTH_LIMIT = 3;
+
 class App {
   play() {
     let newGame = new gameStart();
@@ -10,7 +12,7 @@ class App {
 
 const computerRandom = () => {
   const computer = [];
-  while (computer.length < 3) {
+  while (computer.length < LENGTH_LIMIT) {
     const number = Random.pickNumberInRange(1, 9);
     if (!computer.includes(number)) {
       computer.push(number);
@@ -113,7 +115,6 @@ class InputCheck {
   }
 
   isValidLength() {
-    const LENGTH_LIMIT = 3;
     return (this.answer.length === LENGTH_LIMIT);
   }
   
