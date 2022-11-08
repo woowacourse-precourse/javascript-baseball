@@ -77,9 +77,9 @@ function compareUserGuessToCompNum(userNumArr, compNumArr) {
 
 function getUserReplayOrFinish(userInput) {
   if (userInput === "1") {
-    MissionUtils.Console.print("replay the game!");
+    MissionUtils.Console.print("replay the game");
   } else if (userInput === "2") {
-    MissionUtils.Console.print("finish the game!");
+    MissionUtils.Console.print("finish the game");
   } else {
     throw new Error("재시작은 1, 종료는 2를 입력해주세요."); // error
   }
@@ -214,5 +214,12 @@ describe("숫자 야구 게임", () => {
     const compNumArr = [4, 5, 6];
     compareUserGuessToCompNum(userNumArr, compNumArr);
     expect(logSpy).toHaveBeenCalledWith("낫싱");
+  });
+
+  test("추가테스트6-1: getUserReplayOrFinish", () => {
+    const logSpy = getLogSpy();
+    const userInput = "1";
+    getUserReplayOrFinish(userInput);
+    expect(logSpy).toHaveBeenCalledWith("replay the game");
   });
 });
