@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const MESSAGE = require('./constants/message');
 const Player = require('./Player');
+const isAvailableValue = require('./utils/isAvailableValue');
 
 const RESTART = '1';
 const GAME_OVER = '2';
@@ -9,14 +10,14 @@ const GAME_OVER = '2';
 class Referee {
   constructor() {
     this.computer = new Computer();
-    this.player = new Player(this);
+    this.player = new Player();
 
     MissionUtils.Console.print(MESSAGE.GAME.START);
   }
 
   gameStart() {
     this.computer.setValue();
-    this.player.setValue();
+    this.inputPlayerValue();
   }
 
   gameResult() {
@@ -31,7 +32,7 @@ class Referee {
     if (strike === 3) {
       MissionUtils.Console.print(MESSAGE.GAME.WIN);
       this.gameFinish();
-    } else this.player.setValue();
+    } else this.inputPlayerValue();
   }
 
   gameFinish() {
@@ -39,6 +40,15 @@ class Referee {
       if (answer === RESTART) return this.gameStart();
       if (answer === GAME_OVER) return MissionUtils.Console.print(MESSAGE.GAME.WIN);
       return this.gameFinish();
+    });
+  }
+
+  inputPlayerValue() {
+    MissionUtils.Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
+      if (isAvailableValue(answer)) {
+        this.player.setValue(answer);
+        this.gameResult();
+      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 
