@@ -56,7 +56,30 @@ class App {
     if (score[1] > 0) ans += `${score[1]}스트라이크`;
   
     Console.print(ans);
+    this.isEnd(score[1]);
   }
+
+  isEnd(strike){
+    if (strike !== 3) this.inputNumber();
+    else this.restartGame();
+  }
+  
+  restartGame() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임종료');
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+      if (input === '1') {
+        return this.play();
+      }
+      else if (input === '2') {
+        Console.print('게임 종료');
+        return;
+      }
+      else {
+        throw '값을 잘못 입력하셨습니다.';
+      }
+    });
+  }
+
 
 }
 
