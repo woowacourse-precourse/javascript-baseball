@@ -35,10 +35,11 @@ class Game {
     this.compareNumberArray = computer;
   }
 
+
   onGame(input){
-    this.utilsIo.print(this.showResult(ball, strike));
+    // this.userNumberArray = input.split("").map(Number);
   }
-}
+
 
 class App {
   constructor() {
