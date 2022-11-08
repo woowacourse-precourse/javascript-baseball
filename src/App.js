@@ -54,9 +54,13 @@ class App {
         this.computer.print(MESSAGE.SUCCESS);
         // this.reStart();
       } else {
-        // this.start();
+        this.start();
       }
     });
+  }
+
+  end() {
+    Console.close();
   }
 
   play() {}
