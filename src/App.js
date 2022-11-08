@@ -8,6 +8,7 @@ const playEachRound = (target, input) => {
 
   if (isThreeStrikes) {
     Console.print(Message.getCorrect());
+    Console.readLine(Message.selectEnd(), decideToRestartOrExit);
     return;
   }
 
@@ -24,6 +25,17 @@ const playNewGame = () => {
   let playerNumber = null;
 
   playEachRound(computerNumber, playerNumber);
+};
+
+const decideToRestartOrExit = (answer) => {
+  const isGameOver = answer !== Message.RESTART;
+
+  if (isGameOver) {
+    Console.close();
+    return;
+  }
+
+  playNewGame();
 };
 
 class App {
