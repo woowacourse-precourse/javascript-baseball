@@ -47,6 +47,23 @@ describe('숫자 야구 게임', () => {
     });
   });
 
+  test('게임 종료', () => {
+    const randoms = [8, 9, 1];
+    const answers = ['123', '415', '671', '891', '2'];
+    const logSpy = getLogSpy();
+    const messages = ['1볼', '1볼', '1스트라이크', '게임 종료'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach(output => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test('예외 테스트', () => {
     const randoms = [1, 3, 5];
     const answers = ['1234'];
