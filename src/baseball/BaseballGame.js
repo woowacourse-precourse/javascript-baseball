@@ -19,7 +19,7 @@ class BaseballGame {
   }
 
   playing(computerNumbers) {
-    Console.readLine(GAME_MESSAGE.ENTER_NUMBER, (userInput) => {
+    Console.readLine(GAME_MESSAGE.ENTER_NUMBER, userInput => {
       const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
         this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
@@ -29,20 +29,19 @@ class BaseballGame {
   }
 
   turnCheck(userInput, computerNumbers) {
-    const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
+    const { strike, ball } = this.strikeCount(userInput, computerNumbers);
     this.printResult(strike, ball);
     (strike === 3) ? this.restartOrEndGame() : this.playing(computerNumbers);
   }
 
-  StrikeCount(userInput, computerNumbers) {
+  strikeCount(userInput, computerNumbers) {
     const computerNumbersArr = [...computerNumbers];
     const userInputArr = [...userInput];
     let strike = 0;
     let ball = 0;
-    computerNumbersArr.forEach((number, index) => {
-      (number === userInputArr[index])
-        ? strike++ : (userInputArr.includes(number)
-        ? ball++ : 0);
+    userInputArr.map((number, index) => {
+      (number === computerNumbersArr[index]) ? strike++ :
+        (computerNumbersArr.includes(number)) ? ball++ : 0;
     });
     return { strike, ball };
   }
