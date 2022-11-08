@@ -8,7 +8,7 @@ const GAME_VALUE = require("./constants/values");
 
 class UserModel {
   convertStringToArray(input) {
-    const convertArgsStringToInt = (arg) => Number(arg);
+    const convertArgsStringToInt = (arg) => +arg;
     return Array.from([...input], convertArgsStringToInt);
   }
 
