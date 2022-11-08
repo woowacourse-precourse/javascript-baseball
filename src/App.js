@@ -48,9 +48,11 @@ class App {
     if (input === RESTART_INPUT) {
       this.threeRandomNumbers = getThreeRandomNumbers();
       this.play();
+      return;
     }
     if (input === END_INPUT) {
       MissionUtils.Console.close();
+      return;
     }
   }
 }
