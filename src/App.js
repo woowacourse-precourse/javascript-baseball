@@ -9,17 +9,11 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.creatComputerAnswer;
 
-    const playerAnswer = [];
-    do {
-      MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
-        playerAnswer.push(answer.split("").map(Number));
-        this.verifyPlayerAnswer(playerAnswer);
-        this.compareAnswer(playerAnswer);
-      });
-    } while (
-      JSON.stringify(this.creatComputerAnswer()) ===
-      JSON.stringify(playerAnswer)
-    );
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (answer) => {
+      const playerAnswer = answer.split("").map(Number);
+      this.verifyPlayerAnswer(playerAnswer);
+      this.compareAnswer(playerAnswer);
+    });
   }
 
   creatComputerAnswer() {
@@ -37,11 +31,11 @@ class App {
     if (Number.isNaN(playerAnswer)) {
       throw new Error("숫자가 아닙니다.");
     }
-    if (playerAnswer.length === 3) {
+    if (playerAnswer.length !== 3) {
       throw new Error("3자리 숫자가 아닙니다.");
     }
     if (
-      playerAnswer.some(
+      !playerAnswer.some(
         (playerAnswerElement) =>
           1 <= playerAnswerElement && playerAnswerElement <= 9
       )
