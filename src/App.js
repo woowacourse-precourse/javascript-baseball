@@ -12,6 +12,7 @@ class App {
           computer.push(number);
         }
       }
+      console.log("computer: " + computer); 
       resolve(computer);
     });
   }
@@ -28,13 +29,27 @@ class App {
           });
     });
     
-    
+
   }
+
+  compare(user, computer){
+    let ball = user.filter(item => computer.includes(item));
+    let strike = user.filter(item => item === computer[user.indexOf(item)]);
+
+    let ballNum = ball.length - strike.length;
+    let strikeNum = strike.length;
+    return [ballNum, strikeNum];
+  }
+
+
 
 
   async play() {
     let computer = await this.random(); 
-    let user = await this.input(); 
+    let user = await this.input();
+    let bNum, sNum;
+    [bNum, sNum] = this.compare(user, computer);
+    //console.log(bNum, sNum);
     
   }
 
