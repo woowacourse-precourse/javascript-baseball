@@ -27,10 +27,6 @@ class Computer {
     return randomDigit.includes(digit) && randomDigit[idx] === digit;
   }
 
-  getRandomDigit() {
-    return this.#baseBallDigit;
-  }
-
   calcBaseBallDigit(userDigit) {
     const randomDigit = this.#baseBallDigit;
     const baseBallBoard = {
