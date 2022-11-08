@@ -1,3 +1,5 @@
+const { ASK_CONTINUE } = require("./constant");
+
 const MESSAGE = {
   ERROR: {
     ANSWER_LENGTH_MUST_BE_THREE: "입력 에러! 숫자 3자리를 입력해주세요!",
@@ -11,7 +13,7 @@ const MESSAGE = {
 
   REQUEST: {
     USER_ANSWER: "숫자를 입력해주세요. : ",
-    IS_CONTINUE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    IS_CONTINUE: `게임을 새로 시작하려면 ${ASK_CONTINUE.YES}, 종료하려면 ${ASK_CONTINUE.NO}를 입력하세요.\n`,
   },
 
   GAME_PROGRESS: {

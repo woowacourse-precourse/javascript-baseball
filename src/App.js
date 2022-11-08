@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { THREE_TIMES } = require("./constants/constant");
+const { THREE_TIMES, ASK_CONTINUE } = require("./constants/constant");
 const MESSAGE = require("./constants/message");
 
 class App {
@@ -66,12 +66,12 @@ class App {
   }
 
   isContinue(answer) {
-    if (answer === "1") {
+    if (answer === ASK_CONTINUE.YES) {
       this.play();
       return;
     }
 
-    if (answer === "2") {
+    if (answer === ASK_CONTINUE.NO) {
       Console.print(MESSAGE.GAME_PROGRESS.SHUTDOWN);
       Console.close();
     }
