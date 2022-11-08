@@ -2,6 +2,8 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 
 const MESSAGE = {
   GAMESTART: '숫자 야구 게임을 시작합니다.',
+  GAMEFINISHED: `3개의 숫자를 모두 맞히셨습니다! 게임 종료`,
+  GAMERESTART: `게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.`,
 };
 
 class App {
@@ -32,6 +34,14 @@ class App {
     const userAnswer = this.getUserInput();
     this.getResult(userAnswer);
     this.printResult();
+    this.checkFinished();
+  }
+
+  checkFinished() {
+    if (this.result.strike === 3) {
+      Console.print(MESSAGE.GAMEFINISHED);
+      Console.print(MESSAGE.GAMERESTART);
+    }
   }
 
   printResult() {
