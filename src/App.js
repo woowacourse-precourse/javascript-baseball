@@ -6,13 +6,11 @@ class App {
     this.playGame();
   }
 
-  // 게임 시작
   playGame() {
     const computerNumber = this.createComputerNumber();
     const user = this.inputUserNumber(computerNumber);
   }
 
-  // 컴퓨터의 숫자 랜덤으로 생성한다. (1부터 9까지 서로 다른 수로 이루어진 3자리의 수)
   createComputerNumber() {
     const computer = [];
 
@@ -25,7 +23,6 @@ class App {
     return computer.join("");
   }
 
-  // 사용자에게 숫자를 입력 받는다.
   inputUserNumber(computerNumber) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       this.isNumberVaild(number);
@@ -42,21 +39,18 @@ class App {
     return number;
   }
 
-  // 유효성 검사: 입력한 값이 숫자인가
   checkInputValueisNumber(number) {
     if (isNaN(number)) {
       throw "숫자를 입력해주세요.";
     }
   }
 
-  // 유효성 검사: 입력한 수가 3자리 수인가
   checkNumberLength(number) {
     if (number.length !== 3) {
       throw "3자리 수를 입력해주세요.";
     }
   }
 
-  // 유효성 검사: 입력한 수가 서로 다른 숫자인가
   checkNumberDifferent(number) {
     const removeDuplicates = new Set(number);
     if (number.length !== removeDuplicates.size) {
@@ -64,12 +58,9 @@ class App {
     }
   }
 
-  // 유효성 검사: 1 ~ 9 범위에 해당하는 수를 입력했는가
   checkNumberInRange(number) {
     if (number.includes(0)) {
-      throw new Error(
-        "0은 입력할 수 없는 숫자입니다. 1 ~ 9 범위에 해당하는 수를 입력해주세요."
-      );
+      throw "0은 입력할 수 없는 숫자입니다. 1 ~ 9 범위에 해당하는 수를 입력해주세요.";
     }
   }
 
@@ -79,7 +70,6 @@ class App {
     const answer = this.checkThreeStrikes(result, computer);
   }
 
-  // 사용자가 입력한 숫자와 컴퓨터 숫자를 비교하여 ball, strike 개수 세기
   countBallAndStrike(user, computer) {
     let score = {
       ball: 0,
@@ -95,7 +85,6 @@ class App {
     return score;
   }
 
-  // 비교 결과 출력
   printScore(score) {
     let result = "";
     const ball = score.ball;
@@ -117,7 +106,6 @@ class App {
     return result;
   }
 
-  // 숫자를 모두 맞춘 경우, 숫자를 다 맞추지 못한 경우
   checkThreeStrikes(result, computer) {
     if (result === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료.");
@@ -136,7 +124,6 @@ class App {
     );
   }
 
-  // 게임 종료 및 재시작 선택
   selectEndOrRestartGame(option) {
     if (option === "1") {
       this.playGame();
