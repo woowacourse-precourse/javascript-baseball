@@ -14,21 +14,22 @@ class GameDataStore {
   }
 
   initializeGameData() {
-    this.#gameData = this.makeInitGameData();
+    this.#gameData = this.makeInitialGameData();
     this.#gameDataView.update(this.#gameData);
   }
 
-  setInput(input) {
+  setBallsAndStrikesWithInput(input) {
     this.gameInputValidator(input);
 
     this.#gameData.ballsAndStrikes = this.calcBallsAndStrikes(
       this.#gameData.target,
       input,
     );
+
     this.#gameDataView.update(this.#gameData);
   }
 
-  makeInitGameData() {
+  makeInitialGameData() {
     const target = pickUniqueNumbersInRange(
       NUMBER.RANGE_START,
       NUMBER.RANGE_END,

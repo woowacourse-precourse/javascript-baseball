@@ -43,7 +43,7 @@ class GameService {
 
     this.dispatcher.register((action) => {
       if (action.type === ACTION_TYPE.NEW_GUESS) {
-        this.gameDataStore.setInput(action.input);
+        this.gameDataStore.setBallsAndStrikesWithInput(action.input);
       }
     });
   }

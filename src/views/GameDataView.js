@@ -12,21 +12,21 @@ class GameDataView {
     const { balls, strikes } = ballsAndStrikes;
 
     if (balls === undefined) {
-      this.newGuessAction();
+      this.generateNewGuessAction();
       return;
     }
 
-    Console.print(this.getGuessResult(balls, strikes));
+    Console.print(this.getGuessString(balls, strikes));
 
     if (strikes === NUMBER.DIGITS) {
-      this.gameOverAction();
+      this.generateGameOverAction();
       return;
     }
 
-    this.newGuessAction();
+    this.generateNewGuessAction();
   };
 
-  newGuessAction() {
+  generateNewGuessAction() {
     Console.readLine(PRINT.NEW_GUESS, (input) => {
       this.#dispatcher.dispatch({
         type: ACTION_TYPE.NEW_GUESS,
@@ -35,7 +35,7 @@ class GameDataView {
     });
   }
 
-  gameOverAction() {
+  generateGameOverAction() {
     Console.print(PRINT.GAME_OVER);
     Console.readLine('', (nextGameStatus) => {
       this.#dispatcher.dispatch({
@@ -45,7 +45,7 @@ class GameDataView {
     });
   }
 
-  getGuessResult(ball, strike) {
+  getGuessString(ball, strike) {
     if (ball + strike === 0) {
       return PRINT.NOTHING;
     }
