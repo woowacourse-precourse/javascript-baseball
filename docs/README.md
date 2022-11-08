@@ -1,4 +1,4 @@
-### 기능 목록
+#### [ 기능 목록 ]
 
 ✅ 게임 종료
 
@@ -58,14 +58,32 @@
 - 사용자 숫자를 입력 받는 함수 호출
 - 함수명:resultStrikeAndBall
 
-### 사용자 입력값 예외 목록
+#### [ 예외 목록 ]
 
-- getUserInputNumber(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 숫자 3개만 가능, 서로 다른 3개의 숫자만 가능, 1에서 9 사이의 숫자 가능
-- endGame(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 1과 2 중 하나만 가능
+📛 사용자 숫자 입력 함수 : getUserInputNumber()
 
-### 테스트 목록
+- 사용자 입력 타입은 숫자만 가능
+- 사용자 입력값은 숫자 3개만 가능
+- 서로 다른 3개의 숫자만 가능
+- 1에서 9 사이의 숫자 가능
 
-- selectComputerNumber(): 3개의 숫자 반환, 서로 다른 숫자 반환, 1에서 9 사이의 숫자 반환
-- changeComputerNumberToArray(): 반환값은 배열
-- changeUserNumberToArray(): 반환값은 배열
-- findEqualNumber(): 반환값 strike, ball, 타입은 숫자
+📛 게임 종료 함수 : endGame()
+
+- 사용자 입력 타입은 숫자만 가능
+- 사용자 입력값은 1과 2 중 하나만 가능
+
+#### [ 테스트 목록 ]
+
+🔄 컴퓨터 랜덤 숫자 선택 함수 : selectComputerNumber()
+
+- 3개의 숫자 반환
+- 서로 다른 숫자 반환
+- 1에서 9 사이의 숫자 반환
+
+🔄 컴퓨터 숫자 배열 변환 함수 : changeComputerNumberToArray()
+
+- 배열로 반환
+
+🔄 사용자 숫자 배열 변환 함수 : changeUserNumberToArray()
+
+- 배열로 반환
