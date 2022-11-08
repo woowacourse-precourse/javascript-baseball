@@ -12,7 +12,7 @@ function App () {
   this.play = () => {
     printNewGameInterface();
     startGame();
-    getUserAnswer();
+    recieveUserAnswer();
   };
   
   function printNewGameInterface () {
@@ -23,7 +23,7 @@ function App () {
     this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
   }
 
-  function getUserAnswer () {
+  function recieveUserAnswer () {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       if(isValidInput(answer)){
         getScore(matchNumber(answer, this.randomNumber));
@@ -70,7 +70,7 @@ function App () {
         (input) => {
           if(input === GAME_START_KEY){
             startGame();
-            getUserAnswer();
+            recieveUserAnswer();
             return;
           }
           if(input === GAME_EXIT_KEY){
@@ -85,12 +85,12 @@ function App () {
 
     if (strike === 0 && ball === 0){
       MissionUtils.Console.print ('낫싱');
-      getUserAnswer();
+      recieveUserAnswer();
       return;
     }
 
     MissionUtils.Console.print (`${ball}볼 ${strike}스트라이크`);
-    getUserAnswer();
+    recieveUserAnswer();
   }
 }
 
