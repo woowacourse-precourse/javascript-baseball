@@ -3,14 +3,24 @@ const isError = require('./errorHandler');
 
 class App {
   play() {
-    let FLAG = "";
+    let FLAG = false;
     let SCORE_BOARD = [0, 0];
     let RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    let USER_VALUE;
+    let USER_VALUE = this.sliceNumber(this.inputFromUser());
 
     while (FLAG == false) {
-      USER_VALUE = this.sliceNumber(this.inputFromUser());
       SCORE_BOARD = this.judgeScore(RANDOM_VALUE, USER_VALUE);
+    }
+
+    if (SCORE_BOARD[0] == 3){
+      if (this.finishGame()){
+        MissionUtils.Console.print("게임을 재시작합니다.\n\n");
+        
+        // 랜덤값, 사용자 지정값 재설정
+        RANDOM_VALUE = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+        USER_VALUE = this.sliceNumber(this.inputFromUser());
+      // FLAG를 true로 설정해 반복문 탈출
+      } else  FLAG = true;
     }
   }
 
@@ -57,18 +67,15 @@ class App {
     return SCORE_BOARD;
   }
 
-  playGame(PC) {
-    let FLAG = false;
-    let USER_VALUE = "";
-    let SCORE_BOARD = [0, 0];
+  // 게임종료 및 재도전 의사를 묻는 함수
+  finishGame() {
+    let RESTART;
+    MissionUtils.Console.readLine("정답입니다. 재도전을 원하시면 1, 게임을 종료하시려면 2를 입력하세요\n", 
+      (INPUT) => {RESTART = INPUT});
 
-    while (FLAG==false) {
-      MissionUtils.Console.readLine("숫자 입력 : ", (INPUT) => {
-        USER_VALUE = INPUT;
-      });
-
-      SCORE_BOARD = this.judgeScore(PC, USER_VALUE);
-    }
+    if (RESTART == 1) return true;
+    else if (RESTART == 2)  return false;
+    else  throw new Error("입력값이 올바르지 않습니다.");
   }
 
 }
