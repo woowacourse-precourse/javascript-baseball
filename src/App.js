@@ -22,13 +22,16 @@ class App {
   getUserInput() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       this.userInputNumber = [...String(userInput).split('').map((x) => +x)];
-      if (checkValidUserInput(this.userInputNumber)) {
-        [this.strike, this.ball] = calculateScore(this.userInputNumber, this.computerRandomNumber);
-        this.compareResultText = getCompareResultText(this.strike, this.ball);
-        MissionUtils.Console.print(this.compareResultText);
-      }
-      this.checkThreeStrike();
+      checkValidUserInput(this.userInputNumber);
+      this.calculateResult();
     });
+  }
+
+  calculateResult() {
+    [this.strike, this.ball] = calculateScore(this.userInputNumber, this.computerRandomNumber);
+    this.compareResultText = getCompareResultText(this.strike, this.ball);
+    MissionUtils.Console.print(this.compareResultText);
+    this.checkThreeStrike();
   }
 
   checkThreeStrike() {
