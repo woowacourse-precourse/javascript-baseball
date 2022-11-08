@@ -105,7 +105,11 @@ function restartShutdown() {
     }
   );
 }
-
+function init() {
+  user = undefined;
+  computer = undefined;
+  result = true;
+}
 class App {
   play() {
     MissionUtils.Console.print(game_start);
