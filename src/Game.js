@@ -1,3 +1,4 @@
+const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
 const User = require("./User");
 
@@ -26,10 +27,19 @@ class Game {
     return { ball, strike };
   }
 
+  printResultMessage({ ball, strike }) {
+    if (ball === 0 && strike === 0) {
+      return Console.print("낫싱");
+    }
+    const ballText = ball ? `${ball}볼` : "";
+    const strikText = strike ? `${strike}스트라이크` : "";
+    Console.print(`${ballText} ${strikText}`);
+  }
 
   play() {
     this.user.setNumber();
     const result = this.countBallAndStrike();
+    this.printResultMessage(result);
   }
 }
 
