@@ -35,6 +35,6 @@ describe("Ball", () => {
     const BALL_OF_ATTACKER = new Ball(425);
     const BALL_OF_DEFENDER = new Ball(425);
 
-    expect(BALL_OF_DEFENDER.compareTo(BALL_OF_ATTACKER)).toBe("낫싱");
+    expect(BALL_OF_DEFENDER.compareTo(BALL_OF_ATTACKER)).toBe("3스트라이크");
   });
 });
