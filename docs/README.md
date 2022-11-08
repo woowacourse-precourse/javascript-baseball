@@ -14,4 +14,4 @@
     setPlayersNumber()
   }
   ㄴ- setPlayersNumber 함수에 '숫자 야구 게임을 시작합니다.' 출력되게 하면??
-- 클래스로 마무리 해야하니까 함수들 return 정리하기
+- 클래스로 마무리 해야하니까 함수들 return 정리하기.
