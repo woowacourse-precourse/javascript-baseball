@@ -66,10 +66,9 @@ class GameLogic {
       (string) => {
         const validation = new Validation();
         const userNumber = string.split("").map((el) => Number(el));
+        validation.checkAll(userNumber);
         const ballStrikeResult = this.judge(userNumber, computerNumber);
         const result = this.result(ballStrikeResult);
-
-        validation.checkAll(userNumber);
 
         if (result) {
           this.select();
