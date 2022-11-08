@@ -40,7 +40,6 @@ const isUserWin = (countStrike) => {
 };
 
 const printGameResultMessage = (countStrike, countBall) => {
-  let isUserWin = countStrike === MAX_CORRECT;
   let message = makeMessage(countStrike, countBall);
   printMessage(message);
 };
