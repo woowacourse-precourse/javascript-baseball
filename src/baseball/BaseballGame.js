@@ -63,7 +63,7 @@ class BaseballGame {
   isValidRestart = (OneOrTwo) => {
     OneOrTwo = Number(OneOrTwo);
     this.validUserNumbers.isValidRestart(OneOrTwo);
-    if (OneOrTwo == 1) {
+    if (OneOrTwo === 1) {
       return this.playGame();
     }
     Console.close();
