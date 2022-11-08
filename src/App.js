@@ -2,19 +2,24 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  play() {
+  constructor() {
+    this.baseballNumber;
     this.initializeNumber();
+    this.isGameOn = true;
+  }
+
+  play() {
+    // this.initializeNumber();
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    let isGameOn = true;
+    // let isGameOn = true;
     let tempCountForTest = 1;
     while (tempCountForTest < 3) {
       this.readLineNumberOfPlayer();
-      isGameOn = false;
+      this.isGameOn = false;
       tempCountForTest += 1;
     }
   }
 
-  baseballNumber = [];
   initializeNumber() {
     this.baseballNumber = [];
     while (this.baseballNumber.length < 3) {
