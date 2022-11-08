@@ -1,8 +1,5 @@
 const Attacker = require("./Attacker");
 
-const { Console, Random } = require("@woowacourse/mission-utils");
-
-const { getLogSpy, mockRandoms } = require("../../mockFunction");
 const ManualBallGenerator = require("../ManualBallGenerator/ManualBallGenerator");
 const AutomaticBallGenerator = require("../AutomaticBallGenerator/AutomaticBallGenerator");
 const Ball = require("../Ball/Ball");
