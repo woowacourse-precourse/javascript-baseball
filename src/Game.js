@@ -12,8 +12,24 @@ class Game {
     this.play();
   }
 
+  countBallAndStrike() {
+    let ball = 0,
+      strike = 0;
+    const computerNumber = this.computer.getNumber();
+    this.user.getNumber().forEach((userNumber, index) => {
+      if (computerNumber[index] === userNumber) {
+        strike += 1;
+      } else if (computerNumber.includes(userNumber)) {
+        ball += 1;
+      }
+    });
+    return { ball, strike };
+  }
+
+
   play() {
     this.user.setNumber();
+    const result = this.countBallAndStrike();
   }
 }
 
