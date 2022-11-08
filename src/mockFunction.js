@@ -15,11 +15,11 @@ const mockFunction = {
     logSpy.mockClear();
     return logSpy;
   },
-  mockRandoms(numbersArray) {
-    Random.pickUniqueNumbersInRange = jest.fn();
-    numbersArray.reduce((acc, numberArray) => {
-      return acc.mockReturnValueOnce(numberArray);
-    }, Random.pickUniqueNumbersInRange);
+  mockRandoms(numbers) {
+    Random.pickNumberInRange = jest.fn();
+    numbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, Random.pickNumberInRange);
   },
 };
 
