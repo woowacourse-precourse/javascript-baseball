@@ -53,9 +53,25 @@ class App {
     let numberOfStrikes;
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (guessedBaseballNumber) => {
+      this.isValidGuess(guessedBaseballNumber);
       [numberOfBalls, numberOfStrikes] = this.checkingBallsAndStrikes(guessedBaseballNumber);
     })
     return [numberOfBalls, numberOfStrikes];
+  }
+
+  isValidGuess(guess) {
+    if (guess.match(/[^1-9]/g)) {
+      throw '숫자가 아닌 값을 입력하였습니다.';
+    }
+    if (guess.length > 3) {
+      throw '3자리를 초과하는 숫자를 입력하였습니다.';
+    }
+    if (guess.length < 3) {
+      throw '3자리 미만의 숫자를 입력하였습니다.';
+    }
+    if (guess.match(/([1-9])\1+/g)) {
+      throw '중복되는 숫자를 입력하였습니다.';
+    }
   }
 
   checkingBallsAndStrikes(guessedBaseballNumber) {
