@@ -22,12 +22,7 @@ class App {
 
   getUserNumbers(computerNumbers) {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (userInput) => {
-      const isUserInputError = this.error.check(userInput);
-
-      if (isUserInputError === true) {
-        throw new Error('잘못된 값을 입력하셨습니다. 게임 종료');
-      }
-
+      this.error.check(userInput);
       const [strikeCount, ballCount] = this.count.get(userInput, computerNumbers);
       const result = this.result.get(strikeCount, ballCount);
 

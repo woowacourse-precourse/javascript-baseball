@@ -1,19 +1,40 @@
 class Error {
-  check(userInput) {
+  checkLength(userInput) {
     if (String(userInput).length !== 3) {
-      return true;
+      throw '세 자리 숫자가 아닙니다.'
     }
-    if (isNaN(userInput) === false && typeof userInput === 'number') {
-      return true;
-    }
-    if (new Set([...userInput]).size < 3) {
-      return true;
-    }
-    if (String(userInput).includes('0')) {
-      return true;
-    }
+  }
 
-    return false;
+  checkIsNumber(userInput) {
+    if (isNaN(Number(userInput))) {
+      throw '입력된 문자열이 숫자가 아닙니다.';
+    }
+  }
+
+  checkDuplicate(userInput) {
+    if (new Set([...userInput]).size < 3) {
+      throw '중복된 숫자를 입력하셨습니다.'
+    }
+  }
+
+  checkIncludesZero(userInput) {
+    if (String(userInput).includes('0')) {
+      throw '입력된 수에 0이 포함되어 있습니다.';
+    }
+  }
+
+  checkNull(userInput) {
+    if (!userInput) {
+      throw '아무것도 입력되지 않았습니다.';
+    }
+  }
+
+  check(userInput) {
+    this.checkLength(userInput);
+    this.checkIsNumber(userInput);
+    this.checkDuplicate(userInput);
+    this.checkIncludesZero(userInput);
+    this.checkNull(userInput);
   }
 }
 
