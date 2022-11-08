@@ -11,7 +11,7 @@ const Messages = Object.freeze({
         ERROR_RANGE : "ERROR : 1~9 사이의 숫자를 입력해주세요.",
         ERROR_NUMBER_COUNT : "ERROR : 숫자를 3개만 입력해주세요.",
         ERROR_OVERLAP : "ERROR : 서로 다른 숫자를 입력해주세요.",
-        ERROR_VALUE : "ERROR : 재시작을 원하면 1을, 종료를 원하면 2를 입력해주세요."
+        ERROR_VALUE : "ERROR : 재시작을 원하면 1을, 종료를 원하면 2를 입력해주세요.\n"
     }
 });
   
