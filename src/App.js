@@ -2,7 +2,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    // this.computerNumber = "";
     this.computerNumberArr = [];
   }
 
