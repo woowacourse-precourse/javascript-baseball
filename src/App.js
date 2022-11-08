@@ -106,7 +106,7 @@ class App {
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
       );
 
-      if (!App.isValidGameInput(userGameOverSelection)) {
+      if (!App.isValidGameOverInput(userGameOverSelection)) {
         throw new Error("잘못된 입력값입니다.");
       }
       if (userGameOverSelection === "1") {
