@@ -9,7 +9,7 @@ class Computer {
 
     while (numberSet.size !== count) {
       const number = Random.pickNumberInRange(start, end);
-      if (!numberSet.has(number)) numberSet.add(number);
+      numberSet.add(number);
     }
 
     return [...numberSet];
