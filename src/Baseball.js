@@ -9,6 +9,7 @@ class Baseball {
 
   playGame() {
     Console.readLine("숫자를 입력해주세요 : ", (userNumber) => {
+      exception(userNumber);
       userNumber = new User().getUserArray(userNumber);
     });
   }
