@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./constants/message');
 const isAvailableValue = require('./utils/isAvailableValue');
 
@@ -23,7 +23,7 @@ class Computer {
     let randomNumber;
 
     while (computerValue.length < 3) {
-      randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+      randomNumber = Random.pickNumberInRange(1, 9);
       if (!computerValue.includes(randomNumber)) computerValue += randomNumber;
     }
 

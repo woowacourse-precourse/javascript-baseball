@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const MESSAGE = require('./constants/message');
 const isAvailableValue = require('./utils/isAvailableValue');
 
@@ -14,7 +14,7 @@ class Player {
   }
 
   setValue() {
-    MissionUtils.Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
+    Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
       if (isAvailableValue(answer)) {
         this.#value = answer + '';
         this.referee.gameResult();

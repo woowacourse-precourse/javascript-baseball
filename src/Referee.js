@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const MESSAGE = require('./constants/message');
 const Player = require('./Player');
@@ -11,7 +11,7 @@ class Referee {
     this.computer = new Computer();
     this.player = new Player(this);
 
-    MissionUtils.Console.print(MESSAGE.GAME.START);
+    Console.print(MESSAGE.GAME.START);
   }
 
   gameStart() {
@@ -26,18 +26,19 @@ class Referee {
     const ballString = count.ball ? `${count.ball}볼 ` : '';
     const strikeString = count.strike ? `${count.strike}스트라이크` : '';
 
-    MissionUtils.Console.print(nothingString + ballString + strikeString);
+    Console.print(nothingString + ballString + strikeString);
 
     if (count.strike === 3) {
-      MissionUtils.Console.print(MESSAGE.GAME.WIN);
+      Console.print(MESSAGE.GAME.WIN);
       this.gameFinish();
     } else this.player.setValue();
   }
 
   gameFinish() {
-    MissionUtils.Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
-      if (answer === RESTART) this.gameStart();
-      else if (answer === GAME_OVER) MissionUtils.Console.print(MESSAGE.GAME.OVER);
+    Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
+      stringAnswer = answer + '';
+      if (stringAnswer === RESTART) this.gameStart();
+      else if (stringAnswer === GAME_OVER) Console.print(MESSAGE.GAME.OVER);
       else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
