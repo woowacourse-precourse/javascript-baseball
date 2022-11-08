@@ -49,6 +49,20 @@ describe("숫자야구 기능 테스트", () => {
     });
   });
 
+  test("게임종료 시 입력 예외처리", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "153", "135", "3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+    
+  });
+
   test("0입력 불가 확인", () => {
     const randoms = [1, 3, 5];
     const answers = ["014"];
