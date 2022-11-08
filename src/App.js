@@ -6,6 +6,10 @@ class App {
     MissionUtils.Cosole.readLine("숫자를 입력해주세요 :", (number) => {
       userNum = String(number).split("");
     });
+
+    if (answer.length > 3) {
+      throw "잘못된 값 입력 : 서로 다른 3자리 수를 입력해주세요.";
+    }
   }
 
   getComputerNumber() {
