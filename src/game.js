@@ -42,7 +42,7 @@ class Game {
         this.answerNumber
       );
 
-      //this.isValidInput(input); // 유효성 검사
+      this.isValidInput(input); // 유효성 검사
       this.printScore(ball, strike);
       if (strike !== 3) {
         //return this.getCount;
@@ -52,6 +52,19 @@ class Game {
       }
       return;
     });
+  }
+  isValidInput(input) {
+    const checkDupInput = [...new Set(input)].length; // 중복되지 않은 숫자의 갯수
+    if (checkDupInput !== 3) {
+      throw new Error(ERROR.INPUT_THREE_NUMBER);
+    }
+    if (!RANDOM_NUMBER.RANGE.test(input)) {
+      throw new Error(ERROR.INPUT_THREE_NUMBER);
+    }
+    if (input.length !== 3) {
+      // 숫자가 3개가 아닌 경우
+      throw new Error(ERROR.INPUT_THREE_NUMBER);
+    }
   }
   countPitch(inputNumber, answerNumber) {
     let ball = 0;
