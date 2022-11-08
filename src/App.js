@@ -41,16 +41,27 @@ class App {
     return MissionUtils.Console.print(message);
   }
 
-  play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    const computer = this.getRandomNumbers();
-
+  playerInputsNumbers(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const player = this.convertToNumberArray(answer);
       const { strike, ball } = this.compareNumbers(computer, player);
 
       this.printHintMessage(strike, ball);
+
+      if (strike === 3) {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        return MissionUtils.Console.close();
+      }
+
+      this.playerInputsNumbers(computer);
     });
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    const computer = this.getRandomNumbers();
+    console.log(computer);
+    this.playerInputsNumbers(computer);
   }
 }
 
