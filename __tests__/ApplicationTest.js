@@ -246,4 +246,134 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("재시작에 ''을 입력했을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', ''];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 ' '을 입력했을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', ' '];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 '\n'을 입력했을 때 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '\n'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 길이가 1을 초과한 입력 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '12'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 길이가 1을 초과한 입력 예외처리(음수)", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '-1'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 길이가 1을 초과한 입력 예외처리(소수)", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '1.2'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 숫자가 아닌 입력 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', 'g'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 숫자가 아닌 입력 예외처리2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '-'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 길이가 1을 초과한 입력 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '12'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("재시작에 1과 2 제외 다른 숫자 입력 예외처리", () => {
+    const randoms = [1, 3, 5];
+    const answers = ['135', '0'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
