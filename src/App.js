@@ -14,6 +14,7 @@ const startBaseballNumber = () => {
 };
 
 const inputNumber = (answerNumber) => {
+  errorTestGameNum(number);
   let ball = 0;
   let strike = 0;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
@@ -80,5 +81,12 @@ const goAndStop = (strikeNum) => {
   });
 };
 
+const errorTestGameNum = (number) => {
+  if (number.length !== 3) throw "잘못된 양식입니다.";
+};
+
+const errorTestGoandStop = (number) => {
+  if (number !== "1" && number !== "2") throw "잘못된 양식입니다.";
+};
 
 module.exports = App;
