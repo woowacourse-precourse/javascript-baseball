@@ -22,4 +22,28 @@ function createRandomNumber() {
   return randomNumber;
 }
 
+function checkUserInput(userInput) {
+  let userInput;
+
+  userInput = input('숫자를 입력해주세요 : ');
+  if (userInput.length !== 3) {
+    throw new Error();
+  }
+  
+  let userInputStr = userInput.split("");
+  userInput = userInputStr.map((val) => Number(val));
+
+  return userInput;
+}
+
+function input(text) {
+  let result = 0;
+  MissionUtils.Console.readLine('입력', (answer) => {
+    MissionUtils.Console.print(`${text}${answer}`);
+    result = answer;
+  });
+
+  return result;
+}
+
 module.exports = App;
