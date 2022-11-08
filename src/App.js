@@ -61,7 +61,19 @@ class App {
 		return resultMessage;
 	}
 
-	getResult() {}
+	getResult(RANDOMNUMBER, ANSWER) {
+		const RESULT = {
+			ball: 0,
+			strike: 0,
+		};
+
+		ANSWER.forEach((number, digit) => {
+			if (RANDOMNUMBER.includes(number)) {
+				RANDOMNUMBER[digit] === number ? RESULT.strike++ : RESULT.ball++;
+			}
+		});
+		return RESULT;
+	}
 
 	isNotThreeStrike() {}
 
