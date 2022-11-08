@@ -55,11 +55,12 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+
   test('printResult 기능 테스트', () => {
     const ball = 2;
     const strike = 1;
     const result = app.printResult(ball, strike);
 
     expect(result).toEqual(MissionUtils.Console.print('2볼 1스트라이크'));
-  })
+  });
 });
