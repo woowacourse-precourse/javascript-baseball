@@ -18,7 +18,7 @@ const utils = {
         );
         MissionUtils.Console.readLine('', (response) => {
             if (response === '1') {
-                restartGame();
+                startGame();
             } else if (response === '2') {
                 MissionUtils.Console.close();
             } else {
@@ -102,11 +102,6 @@ const startGame = () => {
 const endGame = () => {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     utils.whetherContinueGame();
-};
-
-const restartGame = () => {
-    utils.generateRandomNumber();
-    startGame();
 };
 
 class App {
