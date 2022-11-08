@@ -25,12 +25,12 @@ class Exception {
     return answer;
   }
 
-  static restart(flag) {
-    if (flag !== REPLAY.RESTART && flag !== REPLAY.EXIT) {
+  static restart(answer) {
+    if (answer !== REPLAY.RESTART && answer !== REPLAY.EXIT) {
       throw WRONG_INPUT_ALERT.NOT_ONE_OR_TWO;
     }
 
-    return flag;
+    return answer;
   }
 }
 

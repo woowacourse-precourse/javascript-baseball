@@ -7,7 +7,7 @@ class Game {
   constructor() {
     this.user = new User();
     this.computer = new Computer();
-    this.setUpNumber();
+    this.set();
   }
 
   set() {
@@ -15,25 +15,26 @@ class Game {
   }
 
   play() {
+    this.printStartMessage();
     this.start();
   }
 
-  replay(){
+  start() {
+    this.user.readAnswer(MESSAGE.USER_ANSWER, (answer) => {
+      const correct = this.checkAnswer(answer);
+
+      correct ? this.checkReplay() : this.start();
+    });
+  }
+
+  replay() {
     this.set();
     this.play();
   }
 
   exit() {
+    this.printMessage(MESSAGE.CLOSE);
     MissionUtils.Console.close();
-  }
-
-  start() {
-    this.printStartMessage();
-    this.user.readAnswer(MESSAGE.READ_ANSWER, (answer) => {
-      const correct = this.checkAnswer(answer);
-
-      correct ? this.checkReplay() : this.start();
-    });
   }
 
   checkAnswer(answer) {
@@ -50,12 +51,11 @@ class Game {
   }
 
   checkReplay() {
-    this.user.readFlag(MESSAGE.RESTART, (flag) => {
-      if (flag === REPLAY.RESTART) this.replay();
-      if (flag === REPLAY.EXIT) this.exit();
+    this.user.wantRestart(MESSAGE.RESTART, (answer) => {
+      if (answer === REPLAY.RESTART) this.replay();
+      if (answer === REPLAY.EXIT) this.exit();
     });
   }
-
 
   printStartMessage() {
     this.printMessage(MESSAGE.START);

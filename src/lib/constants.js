@@ -3,6 +3,7 @@ const MESSAGE = {
     END: '3자리수를 맞췄습니다. 게임 끝!!',
     USER_ANSWER: '숫자를 입력해주세요 : ',
     RESTART:'게임을 다시 시작하시려면 1, 끝내시려면 2를 입력하세요',
+    CLOSE :'게임 종료',
   
     BALL: {
       0: '낫싱',
@@ -21,7 +22,7 @@ const MESSAGE = {
 
   const REPLAY = {
     RESTART : '1',
-    EXIT : '2'
+    EXIT : '2',
   }
   
   const WRONG_INPUT_ALERT = {

@@ -21,11 +21,12 @@ class Computer {
     [this.ball, this.strike] = [0, 0];
   }
 
-  calculateCount(answer) {
-    this.initCount();
-    answer.split("").forEach(this.checkNumber.bind(this));
+  isBall(number) {
+    return this.correctNumberList.includes(number);
+  }
 
-    return [this.ball, this.strike];
+  isStrike(number, index) {
+    return this.correctNumberList[index] === number;
   }
 
   checkNumber(number, index) {
@@ -40,12 +41,11 @@ class Computer {
     }
   }
 
-  isBall(number) {
-    return this.correctNumberList.includes(number);
-  }
+  calculateCount(answer) {
+    this.initCount();
+    answer.split("").forEach(this.checkNumber.bind(this));
 
-  isStrike(number, index) {
-    return this.correctNumberList[index] === number;
+    return [this.ball, this.strike];
   }
 }
 
