@@ -20,7 +20,7 @@ class BaseballGame {
   playing = (userInput) => {
     const validUserInput = ValidUserNumbers.isValidUserInput(userInput);
     if (validUserInput === false) {
-      this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
+      return this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
     }
     const { strike, ball } = this.StrikeCount(userInput, this.computerNumbers);
     this.printResult(strike, ball);
@@ -58,13 +58,11 @@ class BaseballGame {
   isValidRestart = (OneOrTwo) => {
     OneOrTwo = Number(OneOrTwo);
     ValidUserNumbers.isValidRestart(OneOrTwo);
-
     if (OneOrTwo == 1) {
       this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
-      this.playGame();
-    } else if (OneOrTwo == 2) {
-      Console.close();
+      return this.playGame();
     }
+    Console.close();
   };
 
   throwError(messages) {
