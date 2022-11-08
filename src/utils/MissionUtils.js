@@ -113,27 +113,30 @@ const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
 
-const printGameResult = (countStrike, countBall, computers) => {
-  if (countStrike === 0 && countBall === 0) {
-    printMessage(NOTTHING);
-    getUserNumber(computers, REQUIRE_NUMBER);
-  } else if (3 > countStrike > 0 && countBall === 0) {
-    printMessage(countStrike + STRIKE);
-    getUserNumber(computers, REQUIRE_NUMBER);
-  } else if (countStrike === 0 && countBall > 0) {
-    printMessage(countBall + BALL);
-    getUserNumber(computers, REQUIRE_NUMBER);
-  } else if (3 > countStrike > 0 && countBall > 0) {
-    printMessage(`${countBall + BALL} ${countStrike + STRIKE}`);
-    getUserNumber(computers, REQUIRE_NUMBER);
-  } else if (countStrike === 3) {
-    printMessage(countStrike + STRIKE);
-    printMessage(GAME_END);
-    printMessage(RETRY_OR_END);
-    retryOrEnd();
-  }
+const printGameResultMessage = (countStrike, countBall) => {
+  let isUserWin = countStrike === MAX_CORRECT;
+  let message = makeMessage(countStrike, countBall);
+  printMessage(message);
 };
 
+const makeMessage = (countStrike, countBall) => {
+  if (countStrike === 3) {
+    return countStrike + STRIKE;
+  }
+
+  let message = "";
+  if (countBall > MIN_CORRECT) {
+    message += countBall + BALL + " ";
+  }
+  if (countStrike > MIN_CORRECT) {
+    message += countStrike + STRIKE;
+  }
+  if (countStrike === MIN_CORRECT && countBall === MIN_CORRECT) {
+    message = NOTTHING;
+  }
+
+  return message.trim();
+};
 const playAgain = () => {
   const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
   getUserNumber(computerNumbers, REQUIRE_NUMBER);
