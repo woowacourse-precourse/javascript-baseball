@@ -4,21 +4,23 @@ const Messages = require("./Messages")
 const START_GAME = 1;
 const END_GAME = 2;
 
-const replayGame = (selection) => {
+function replayGame(selection) {
     if (selection === START_GAME) return true;
     else if (selection === END_GAME) return false;
     else return Messages.ERROR.ERROR_VALUE;
-};
+}
 
-const endGame = (strike) => {
+function endGame(strike) {
     if (strike == 3) return true;
     else return false;
-};
+}
 
-const selectComputer = () => {
+function selectComputer() {
     return Random.pickUniqueNumbersInRange(1, 9, 3);
 }
 
+function inputUserNum() {
 
+}
 
 module.exports = Functions;
