@@ -79,7 +79,7 @@ class App {
         if (this.result === "0볼 0스트라이크") {
           this.result = "낫싱";
         } else if ((strikeCount > 0) & (ballCount === 0)) {
-          // this.result = `${strikeCount}스트라이크`;
+          this.result = `${strikeCount}스트라이크`;
         } else if ((strikeCount == 0) & (ballCount > 0)) {
           this.result = `${ballCount}볼`;
         } else if ((strikeCount > 0) & (ballCount > 0)) {
