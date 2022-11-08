@@ -23,9 +23,9 @@ class BaseballGame{
         Console.print(MESSAGE.START);
     }
 
-    resultMessage(answer, inputNumber) {
-        const ball = this.getBall(answer, inputNumber);
-        const strike = this.getStrike(answer, inputNumber);
+    resultMessage(answer, number) {
+        const ball = this.getBall(answer, number);
+        const strike = this.getStrike(answer, number);
 
         let message = ``;
 
