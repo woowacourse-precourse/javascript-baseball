@@ -24,44 +24,42 @@ class App {
   compare(number){
     this.inputUserNumber(number);
   }
-  compareBothNumber(computer, userNumber){
-    const user = userNumber.toString().split('');
-    const result = [0, 0];
-    let ball = 0;
-    let strike = 0;
+  calculateBall(comNumber, userNumber){
+    let check = 0;
 
-    if(parseInt(user[0]) === computer[0]) strike++;
-    else if(parseInt(user[0]) === computer[1]) ball++;
-    else if(parseInt(user[0]) === computer[2]) ball++;
-    if(parseInt(user[1]) === computer[1]) strike++;
-    else if(parseInt(user[1]) === computer[2]) ball++;
-    if(parseInt(user[2]) === computer[2]) strike++;
+    //ball
+    comNumber.forEach((num) => {
+      if (userNumber.includes(num)) {
+        check++;
+      }
+    });
 
-    result[0] += strike;
-    result[1] += ball;
-    
-    return result;
-
+    return check;
   }
-  compareSettingNumber(randomNum, userNum){
-    const [s, b] = this.compareBothNumber(randomNum, userNum);
-    this.compareResult(s, b);
+  calculateStrike(comNumber, userNumber){
+    let check2 = 0;
+    //strike
+    comNumber.forEach((num, i) => {
+      if (userNumber[i] === num) {
+        check2++;
+      }
+    });
+    return check2;
+  }
+  compareBothNumber(randomNum, userNum){
+    const strike = this.calculateStrike(randomNum, userNum);
+    const ball = this.calculateBall(randomNum, userNum) - strike;
+
+    let ok = this.outputResultCompare(strike, ball);
+    if(ok == true) this.finishInput();
+    else this.compare(randomNum);
   }
   inputUserNumber(answer){
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       if(validateNumber(userInput)){
-        this.compareSettingNumber(answer, userInput);
+        this.compareBothNumber(answer, userInput);
       }
     });
-  }
-  compareResult(strike, ball){
-    let pass = this.outputResultCompare(strike, ball);
-    if(pass == true){
-      this.finishInput();
-    }
-    else{
-      this.compare();
-    }
   }
   outputResultCompare(strike, ball){
     let pass = false;
