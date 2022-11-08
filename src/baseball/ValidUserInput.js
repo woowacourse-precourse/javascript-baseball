@@ -11,7 +11,7 @@ class ValidUserNumbers {
     return userNumbers.length === 3 && userNumbers.every(isNumberElement);
   }
 
-  static isvalidRestart(restartNumber) {
+  static isValidRestart(restartNumber) {
     restartNumber = Number(restartNumber);
 
     if (restartNumber !== 1 && restartNumber !== 2)
