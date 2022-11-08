@@ -10,11 +10,17 @@ class App {
         computerNumber.push(number);
       }
     }
-    MissionUtils.Console.print(computerNumber);
     return computerNumber;
+  }
+
+  userInput() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      MissionUtils.Console.print("");
+    });
   }
   gameStart() {
     this.getComputerNumber();
+    this.userInput();
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
