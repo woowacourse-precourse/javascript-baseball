@@ -38,31 +38,39 @@ class App {
 
         this.print(hint);
 
-        if (strike === BASEBALL_NUMBER_CNT) {
-          this.endGame();
-        } else {
-          this.numberPrediction();
-        }
+        this.checkEndGame(strike);
       } else {
         throw new Error(INPUT_FAIL_ERROR_MESSAGE);
       }
     });
   }
 
-  endGame() {
+  checkEndGame(strike) {
+    if (strike === BASEBALL_NUMBER_CNT) {
+      this.endGameInputMessage();
+    } else {
+      this.numberPrediction();
+    }
+  }
+
+  endGame(answer) {
+    const trimAnswer = answer.trim();
+
+    if (trimAnswer === '1') {
+      this.startGame();
+    } else if (trimAnswer === '2') {
+      Console.close();
+    } else {
+      throw new Error(INPUT_FAIL_ERROR_MESSAGE);
+    }
+  }
+
+  endGameInputMessage() {
     this.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     this.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        const trimAnswer = answer.trim();
-
-        if (trimAnswer === '1') {
-          this.startGame();
-        } else if (trimAnswer === '2') {
-          Console.close();
-        } else {
-          throw new Error(INPUT_FAIL_ERROR_MESSAGE);
-        }
+        this.endGame(answer);
       }
     );
   }
