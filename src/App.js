@@ -79,10 +79,7 @@ class App {
       const COMPARE_RESULT = this.getResult(input, answer); // 비교 결과
       this.printCompareResult(COMPARE_RESULT);
 
-      if (COMPARE_RESULT["strike"] === 3) {
-        this.chooseProceedOrExit(); // 게임 재시작 혹은 프로그램 종료
-      }
-      else this.proceedOneTurn(answer);
+      this.proceedNextTurn(answer, COMPARE_RESULT);
     })
   }
 
@@ -106,9 +103,21 @@ class App {
       }
     })
   }
+
+  /**
+   * 다음 턴으로 넘어가거나, 정답을 맞춘 경우에 대해 handling하는 함수
+   * @param {*} answer 현재 컴퓨터의 정답
+   * @param {*} compareResult 이번 턴의 입력 비교 결과
+   */
+  proceedNextTurn(answer, compareResult) {
+    if (compareResult["strike"] === 3) {
+      this.chooseProceedOrExit(); // 게임 재시작 혹은 프로그램 종료
+    }
+    else this.proceedOneTurn(answer);
+  }
 }
 
-const app = new App();
-app.play();
+const APP = new App();
+APP.play();
 
 module.exports = App;
