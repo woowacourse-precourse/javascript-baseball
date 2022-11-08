@@ -6,7 +6,7 @@ class App {
   }
 
   play() {
-    this.game.startGame();
+    this.game.start();
     this.game.getInput();
   }
 }

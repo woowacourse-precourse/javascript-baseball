@@ -13,7 +13,7 @@ class Game {
 
   computerInputNumber = [];
 
-  startGame() {
+  start() {
     mConsole.print(GAME_MESSAGES.START);
     this.computerInputNumber = this.referee.getComputerNumber();
   }
