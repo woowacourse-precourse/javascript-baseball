@@ -1,5 +1,3 @@
-const { GAME_MESSAGE, ERROR_MESSAGE } = require("../constants/constants");
-
 class ValidUserNumbers {
   isValidUserInput(userInput) {
     const isNumberElement = (element) => (element >= "1" && element <= "9");
