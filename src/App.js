@@ -22,6 +22,7 @@ const inputUserNum = () => {
 
     if (isCorrectAnswer(ballCount, strikeCount)) {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      inputUserCommandRestartOrQuit();
       return;
     }
 
@@ -80,6 +81,24 @@ const printGameResult = (ballCount, strikeCount) => {
   MissionUtils.Console.print(ballCount + '볼 ' + strikeCount + '스트라이크');
 }
 
+const COMMAND = {
+  StartGame: 1,
+  QuitGame: 2,
+}
+const inputUserCommandRestartOrQuit = () => {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', executeUserCommandRestartOrQuit);
+}
+
+const executeUserCommandRestartOrQuit = (command) => {
+  if (parseInt(command) === COMMAND.StartGame) {
+    startGame();
+    return;
+  }
+  if (parseInt(command) ===  COMMAND.QuitGame) {
+    quitGame();
+    return;
+  }
+  throw '[ERROR] input error';
 }
 
 module.exports = App;
