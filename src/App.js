@@ -25,15 +25,16 @@ class App {
     mConsole.readLine("숫자를 입력해주세요 : ", (pickedNumber) => {
       if (isValidUser(pickedNumber)) {
         const checkedUser = pickedNumber.split("").map(Number);
-        const countResultArr = countInput(
-          this.computerInputNumber,
-          checkedUser
-        );
-        printResult(countResultArr);
-        if (countResultArr[1] === GAME_NUMBER_LENGTH) this.checkRestart();
-        else this.getInput();
+        this.checkInput(checkedUser);
       }
     });
+  }
+
+  checkInput(userArr) {
+    const countResultArr = countInput(this.computerInputNumber, userArr);
+    printResult(countResultArr);
+    if (countResultArr[1] === GAME_NUMBER_LENGTH) this.checkRestart();
+    this.getInput();
   }
 
   checkRestart() {
