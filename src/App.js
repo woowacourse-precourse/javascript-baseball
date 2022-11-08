@@ -41,7 +41,7 @@ class App {
     const inputNumberList = [...input].map((number) => Number(number));
 
     inputNumberList.forEach((number, idx) => {
-      if (number === this.answerNumberList[idx]) sult.strike += 1;
+      if (number === this.answerNumberList[idx]) result.strike += 1;
       else if (this.answerNumberList.includes(number)) result.ball += 1;
     });
     this.printResult(result);
@@ -49,12 +49,12 @@ class App {
   }
 
   printResult({ ball, strike }) {
-    const RESULT_BALL = ball === 0 ? '' : ball + BASEBALL.BALL;
+    const RESULT_BALL = ball === 0 ? '' : ball + BASEBALL.BALL + ' ';
     const RESULT_STRIKE = strike === 0 ? '' : strike + BASEBALL.STRIKE;
     const RESULT_MESSAGE =
       ball === 0 && strike === 0
         ? BASEBALL.NOTHING
-        : RESULT_BALL + ' ' + RESULT_STRIKE;
+        : RESULT_BALL + RESULT_STRIKE;
 
     Console.print(RESULT_MESSAGE);
     if (strike === GAME.CORRECT_COUNT) Console.print(PHRASE.CORRECT);
@@ -63,18 +63,23 @@ class App {
   processResult(strike) {
     if (strike === GAME.CORRECT_COUNT) {
       Console.readLine(PHRASE.RESTART, (input) => {
-        if (input === GAME.RESTART) {
-          this.createNumberList();
-          this.receiveNumber();
-        } else if (input === GAME.EXIT) {
-          Console.close();
-        } else {
-          Console.print(PHRASE.ERROR2);
-        }
+        this.printException(input);
+        this.restartOrExit(input);
       });
-    } else {
+    } else this.receiveNumber();
+  }
+
+  printException(input) {
+    if (input !== GAME.RESTART && input !== GAME.EXIT)
+      Console.print(PHRASE.ERROR2);
+  }
+
+  restartOrExit(input) {
+    if (input === GAME.RESTART) {
+      this.createNumberList();
       this.receiveNumber();
     }
+    if (input === GAME.EXIT) Console.close();
   }
 
   play() {
