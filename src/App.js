@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { MESSAGE, RESULT } = require('./data/constants');
+const { MESSAGE, RESULT, ERROR, END_OPTION } = require('./data/constants');
 const { CheckException } = require('./exception/exception');
 
 class App {
@@ -7,11 +7,24 @@ class App {
     return Random.pickUniqueNumbersInRange(1, 9, 3);
   }
 
+  askRestart() {
+    Console.readLine(MESSAGE.RESTART + '\n', answer => {
+      if (!['1', '2'].includes(answer))
+        throw ERROR.RESTART_RANGE;
+      if (answer == END_OPTION.RESTART)
+        this.restart();
+      if (answer == END_OPTION.EXIT)
+        Console.close();
+
+      return;
+    });
+  }
+
   threeStrike(strike) {
     if (strike === 3) {
       Console.print(MESSAGE.SUCCESS);
 
-      this.restart();
+      this.askRestart();
 
       return;
     }
@@ -51,12 +64,17 @@ class App {
   restart() {
     this.computerNumber = this.randomArray();
     this.recursiveInput();
+
+    return;
   }
 
   play() {
     Console.print(MESSAGE.START);
+
     this.computerNumber = this.randomArray();
     this.recursiveInput();
+
+    return;
   }
 
   result(ball, strike) {
