@@ -80,6 +80,19 @@ class App {
 
   engGame() {
     this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
+    this.getUserInput(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요",
+      (answers) => this.continueGameOrStop(answers)
+    );
+  }
+
+  continueGameOrStop(answers) {
+    if (answers !== "1" && answers !== "2")
+      throw new RangeError(
+        "게임을 시작하려면 1, 게임을 그만두려면 2를 입력해주세요."
+      );
+    return answers === "1" ? this.play() : MissionUtils.Console.close();
   }
 }
 
