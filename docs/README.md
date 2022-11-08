@@ -73,3 +73,7 @@
 ## `isAvailableValue()`: 값이 게임에 사용될 수 있는지 판단하는 함수
 
 - 1~9 까지 겹치지 않는 3자리 수인지 확인하고, `boolean` 값을 return합니다.
+
+# constants/message.js
+
+- 메시지들을 상수로 저장합니다.
