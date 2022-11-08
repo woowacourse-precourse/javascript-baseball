@@ -1,14 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class Game {
-  constructor() {
-    this.computer = [];
-  }
-
   start() {
-    const randomNumber = this.setRandomNumber();
-
-    this.setUserNumber(randomNumber);
+    this.setUserNumber(this.setRandomNumber());
   }
 
   over() {
@@ -22,12 +16,12 @@ class Game {
         restart = inputNumber;
         console.log(`${inputNumber}`);
 
-        if (restart === 1) {
+        if (restart === "1") {
           return this.start();
-        } else if (restart === 2) {
+        } else if (restart === "2") {
           MissionUtils.Console.close();
         } else {
-          throw new Error("게임 종료");
+          throw new Error("잘못된 입력으로 게임 종료");
         }
       }
     );
@@ -36,8 +30,6 @@ class Game {
   setUserNumber(randomNumber) {
     let playerNumber;
     let insertingNumber = true;
-
-    MissionUtils.Console.print(randomNumber);
 
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
       console.log(`${inputNumber}`);
@@ -54,20 +46,24 @@ class Game {
         }
 
         return this.setUserNumber(randomNumber);
+      } else {
+        throw new Error("잘못된 입력으로 게임 종료");
       }
     });
   }
 
   setRandomNumber() {
-    while (this.computer.length < 3) {
+    const randomNumber = [];
+
+    while (randomNumber.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
 
-      if (!this.computer.includes(number)) {
-        this.computer.push(number);
+      if (!randomNumber.includes(number)) {
+        randomNumber.push(number);
       }
     }
 
-    return this.computer;
+    return randomNumber;
   }
 
   checkingResult(computer, player) {
