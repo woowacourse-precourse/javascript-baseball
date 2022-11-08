@@ -21,8 +21,6 @@ class App {
     computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
     do {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(input)=>{
-      if(checkArgu(input))
-        throw new Error('잘못된 입력입니다.');
       let inputToInt=[];
       for(let c of input)
         inputToInt.push(parseInt(c));
