@@ -19,7 +19,6 @@ class App {
 
       if (answer == END_OPTION.RESTART) this.gameStart();
       if (answer == END_OPTION.EXIT) Console.close();
-      return;
     });
   }
 
@@ -28,7 +27,6 @@ class App {
       Console.print(MESSAGE.SUCCESS);
 
       this.askRestart();
-      return;
     }
   }
 
@@ -36,8 +34,8 @@ class App {
     Console.readLine(MESSAGE.INPUT, inputNum => {
       checkBaseBallException(inputNum, 3);
 
-      const countResult = this.check(inputNum, computerNumber);
-      const resultPrint = this.result(countResult);
+      const countResult = this.countBallAndStrike(inputNum, computerNumber);
+      const resultPrint = this.countResultPrint(countResult);
       Console.print(resultPrint);
 
       this.isThreeStrike(countResult.strike);
@@ -46,7 +44,7 @@ class App {
     });
   }
 
-  check(inputNum, computerNumber) {
+  countBallAndStrike(inputNum, computerNumber) {
     const count = {
       ball: 0,
       strike: 0,
@@ -60,7 +58,7 @@ class App {
     return count;
   }
 
-  result({ ball, strike }) {
+  countResultPrint({ ball, strike }) {
     if (ball == 0 && strike == 0) return RESULT.NOTHING;
 
     if (ball > 0 && strike > 0)
