@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
   play() {
     baseBall()
@@ -30,9 +31,10 @@ function answerCheck(userInput, COM_NUMBER) {
       strike++;} else if(COM_NUMBER.includes(Number(userInput[i])))
       {ball++}
   }
-  resultprint(COM_NUMBER, strike, ball)
+  resultPrint(COM_NUMBER, strike, ball)
 }
-function resultprint(COM_NUMBER, strike, ball) {
+
+function resultPrint(COM_NUMBER, strike, ball) {
   if(strike==0 && ball==0){
     MissionUtils.Console.print('낫싱')
   }
@@ -53,6 +55,7 @@ function resultprint(COM_NUMBER, strike, ball) {
     return newGame()
   }
 }
+
 function newGame() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (input)=>{
     if(input == 1) {
@@ -82,4 +85,5 @@ function exception(userInput) {
     throw '1~9사이의 숫자를 입력해주세요'
   }
 }
+
 module.exports = App;
