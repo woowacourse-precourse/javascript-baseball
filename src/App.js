@@ -11,7 +11,7 @@ class App {
     this.countArr = []; // [strike,ball] 형태
   }
 
-  initData() {
+  initFields() {
     this.#targetArr = [];
     this.countArr = [];
   }
@@ -56,7 +56,7 @@ class App {
   }
 
   playGame() {
-    this.initData();
+    this.initFields();
     this.#targetArr = makeTarget();
     console.log(this.#targetArr);
     this.readData(this.#targetArr);
