@@ -6,14 +6,33 @@ class AutomaticBallGenerator {
   maxNumberCount = 3;
 
   async execute() {
-    const INPUT = await new Promise((resolve) => {
-      Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    return await new Promise((resolve, reject) => {
+      Console.readLine("숫자를 입력해주세요 : ", (input) => {
         Console.close();
-        resolve(answer);
+
+        this.isSatisfied(input) ? resolve(Number(input)) : reject(new Error());
       });
     });
+  }
 
-    return Number(INPUT);
+  isSatisfied(input) {
+    return (
+      this.isNumber(input) &&
+      this.hasMaxCount(input) &&
+      this.isZeroExcluded(input)
+    );
+  }
+
+  isNumber(input) {
+    return !isNaN(input);
+  }
+
+  hasMaxCount(input) {
+    return input.trim().length === this.maxNumberCount;
+  }
+
+  isZeroExcluded(input) {
+    return !input.includes("0");
   }
 }
 
