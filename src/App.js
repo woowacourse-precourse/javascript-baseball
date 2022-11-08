@@ -1,7 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Utils = require("./Utils");
 const { Console } = MissionUtils;
-const { createUniqueNumbers, isNumber, hasDuplicateElmentInList } = Utils;
+const {
+  createUniqueNumbers,
+  isNumber,
+  hasDuplicateElmentInList,
+  hasWhiteSpace,
+} = Utils;
 
 class App {
   constructor(count = 3, minNumber = 1, maxNumber = 9) {
@@ -68,6 +73,12 @@ class App {
 
   isValidUserNumberInput(input) {
     const numbers = input.split("").map(Number);
+
+    if (hasWhiteSpace(input)) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}\n입력에 공백이 있습니다.${this.MESSAGES.ERROR.END}`
+      );
+    }
 
     if (!numbers.every(isNumber)) {
       throw new TypeError(

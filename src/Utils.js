@@ -33,6 +33,10 @@ class Utils {
   static hasDuplicateElmentInList(list) {
     return [...new Set(list)].length !== list.length;
   }
+
+  static hasWhiteSpace(string) {
+    return string !== string.trim();
+  }
 }
 
 module.exports = Utils;
