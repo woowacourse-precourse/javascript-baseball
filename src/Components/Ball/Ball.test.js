@@ -37,4 +37,11 @@ describe("Ball", () => {
 
     expect(BALL_OF_DEFENDER.compareTo(BALL_OF_ATTACKER)).toBe("3스트라이크");
   });
+
+  test("3스트라이크이면 true를 반환", () => {
+    const BALL_OF_ATTACKER = new Ball(425);
+    const BALL_OF_DEFENDER = new Ball(425);
+
+    expect(BALL_OF_DEFENDER.is3Strike(BALL_OF_ATTACKER)).toBe(true);
+  });
 });
