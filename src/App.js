@@ -57,8 +57,8 @@ class App {
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.getComputerNumber();
-    this.getInputNumber();
+    getComputerNumber();
+    getInputNumber();
 
     if (BALL_SCORE > 0 || STRIKE_SCORE > 0) {
       MissionUtils.Console.print("${BALL_SCORE}볼 ${STRIKE_SCORE}스트라이크");ㄱ
