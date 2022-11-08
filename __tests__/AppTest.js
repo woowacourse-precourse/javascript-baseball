@@ -39,4 +39,14 @@ describe('App Test', () => {
     expect(App.getMessage([3, 0])).toBe('3볼');
     expect(App.getMessage([0, 0])).toBe('낫싱');
   });
+
+  test('test isStrikeOut', () => {
+    expect(App.isStrikeOut([0, 3])).toBe(true);
+    expect(App.isStrikeOut([1, 2])).toBe(false);
+  });
+
+  test('test isRestart', () => {
+    expect(App.isRestart('1')).toBe(true);
+    expect(App.isRestart('2')).toBe(false);
+  });
 });

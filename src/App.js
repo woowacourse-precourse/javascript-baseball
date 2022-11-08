@@ -48,6 +48,14 @@ class App {
     return out.length ? out : '낫싱';
   }
 
+  static isStrikeOut(judged) {
+    return judged[1] === 3;
+  }
+
+  static isRestart(input) {
+    return input === '1';
+  }
+
   static cleanup() {
     MissionUtils.Console.close();
   }
@@ -69,7 +77,7 @@ class App {
       const judgeMessage = App.getMessage(judged);
       MissionUtils.Console.print(judgeMessage);
 
-      if (judged[1] === 3) {
+      if (App.isStrikeOut(judged)) {
         MissionUtils.Console.print(COMPLETE_MESSAGE);
         MissionUtils.Console.readLine(MENU_QUESTION, menuSelect);
         return;
@@ -83,7 +91,7 @@ class App {
         throw new Error('잘못된 입력입니다');
       }
 
-      if (input === '1') {
+      if (App.isRestart(input)) {
         answer = App.pickThreeDigits();
         MissionUtils.Console.readLine(PLAY_QUESTION, turn);
         return;
