@@ -17,17 +17,17 @@ function baseBall() {
 }
 
 function inputAnswer(COM_NUMBER) {
-  MissionUtils.Console.readLine('숫자를 입력해 주세요', (input) => {
-  exception(input)
-  answerCheck(input, COM_NUMBER)})
+  MissionUtils.Console.readLine('숫자를 입력해 주세요', (userInput) => {
+  exception(userInput)
+  answerCheck(userInput, COM_NUMBER)})
 }
 
-function answerCheck (input, COM_NUMBER) {
+function answerCheck (userInput, COM_NUMBER) {
   var strike = 0
   var ball = 0
   for (let i = 0; i<3 ; i++) {
-    if(input[i] == COM_NUMBER[i]) {
-      strike++;} else if(COM_NUMBER.includes(Number(input[i])))
+    if(userInput[i] == COM_NUMBER[i]) {
+      strike++;} else if(COM_NUMBER.includes(Number(userInput[i])))
       {ball++}
   }
   resultprint(COM_NUMBER, strike, ball)
@@ -67,23 +67,23 @@ function newGame() {
 
 }
 
-function exception(input) {
+function exception(userInput) {
   var input_array = []
-  for (let x of input) {
+  for (let x of userInput) {
     input_array.push(x)
   } 
   var input_set = new Set(input_array);
   var regExp = new RegExp('/\D/gm')
-  if (regExp.test(input)) {
+  if (regExp.test(userInput)) {
     throw '숫자만 입력해주세요'
   }
-  if (input.length !== 3) {
+  if (userInput.length !== 3) {
     throw '3자리 숫자를 입력해주세요'
   }
   if (input_set.size !== 3){
     throw '각자 다른 숫자를 입력해주세요'
   }
-  if (input.includes(0)){
+  if (userInput.includes(0)){
     throw '1~9사이의 숫자를 입력해주세요'
   }
   
