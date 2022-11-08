@@ -36,6 +36,9 @@ class App {
 
   finish() {
     Console.print(MESSAGE.FINISH);
+    Console.readLine(`${MESSAGE.RESTART}\n`, (input) => {
+      Console.print(input);
+    });
   }
 
   error() {
