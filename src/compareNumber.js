@@ -28,7 +28,6 @@ const compareNumber = (initNumber) => {
     ) {
       MissionUtils.Console.print(`3스트라이크`);
       MissionUtils.Console.print(`3개의 숫자를 모두 맞히셨습니다!`);
-      isContinue();
     } else if (strikeScore !== null && ballScore !== null) {
       MissionUtils.Console.print(saveString);
       compareNumber(initNumber);
