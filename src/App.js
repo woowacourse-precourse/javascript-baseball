@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const ExceptionHandler = require("./ExceptionHandler");
 
 const startMessage = function printGameStartMessage() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -30,18 +31,9 @@ const promptInput = function promptUserGuessInput(answer) {
 };
 
 const validateInput = function validateInput(input) {
-  if (input.length !== 3) {
-    throw new Error("입력값은 3자리여야합니다.");
-  }
-  const regExp = /^[1-9]+$/;
-  if (!regExp.test(input)) {
-    throw new Error("입력값은 1~9 사이숫자여야합니다.");
-  }
-  const inputArray = input.split("");
-  const inputSet = new Set(inputArray);
-  if (inputArray.length !== inputSet.size) {
-    throw new Error("입력이 잘못되었습니다.");
-  }
+  ExceptionHandler.validateInputLength(input);
+  ExceptionHandler.validateInputisNumber(input);
+  ExceptionHandler.validateInputisNotDuplicated(input);
 };
 
 const calculateResult = function calculateResult(input, answer) {
