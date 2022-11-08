@@ -1,0 +1,25 @@
+const DIGIT = 3;
+const LIMIT_NUMBER_SIZE = 9;
+const MIN_NUMBER = 1;
+const MAX_NUMBER = 9;
+const START_MESSAGE = '숫자 야구 게임을 시작합니다.';
+const INPUT_ORDER_MESSAGE = '숫자를 입력해주세요 : ';
+const BALL = '볼';
+const STRIKE = '스트라이크';
+const NOTHING = '낫싱';
+const CORRECT_ANSWER_MESSAGE = '3스트라이크';
+const GAME_END_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+const ASK_NEXT_MESSAGE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
+
+exports.DIGIT = DIGIT;
+exports.LIMIT_NUMBER_SIZE = LIMIT_NUMBER_SIZE;
+exports.MIN_NUMBER = MIN_NUMBER;
+exports.MAX_NUMBER = MAX_NUMBER;
+exports.START_MESSAGE = START_MESSAGE;
+exports.INPUT_ORDER_MESSAGE = INPUT_ORDER_MESSAGE;
+exports.BALL = BALL;
+exports.STRIKE = STRIKE;
+exports.NOTHING = NOTHING;
+exports.CORRECT_ANSWER_MESSAGE = CORRECT_ANSWER_MESSAGE;
+exports.GAME_END_MESSAGE = GAME_END_MESSAGE;
+exports.ASK_NEXT_MESSAGE = ASK_NEXT_MESSAGE;
