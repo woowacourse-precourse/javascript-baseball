@@ -23,12 +23,12 @@ class App {
       if (!this.isValidInput(input)) {
         throw "유효하지 않은 숫자입니다.";
       }
+
       this.CompareInputWithComputer(input, computer);
-      if (this.gameResult.get("스트라이크") == 3) {
-        this.isRetry();
-      } else {
-        this.gameStart(computer);
-      }
+
+      this.gameResult.get("스트라이크") == 3
+        ? this.isRetry()
+        : this.gameStart(computer);
     });
   }
 
@@ -88,8 +88,8 @@ class App {
 
   isRetry() {
     let userQuestion =
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료" +
-      "n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n" +
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
 
     MissionUtils.Console.readLine(userQuestion, (input) => {
       switch (input) {
