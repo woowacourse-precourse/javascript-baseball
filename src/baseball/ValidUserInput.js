@@ -14,8 +14,14 @@ class ValidUserNumbers {
   }
 
   isValidRestart(restartNumber) {
-    if (restartNumber !== 1 && restartNumber !== 2)
-      throw new Error(ERROR_MESSAGE.ERROR_RESTART_MESSAGE);
+    restartNumber !== 1 && restartNumber !== 2
+      ? this.throwError(ERROR_MESSAGE.ERROR_RESTART_MESSAGE)
+      : restartNumber;
+    return restartNumber;
+  }
+
+  throwError(messages) {
+    throw new Error(messages);
   }
 }
 
