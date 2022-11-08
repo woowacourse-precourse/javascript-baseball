@@ -83,4 +83,23 @@ describe('숫자 야구 게임 시나리오', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('재시작 또는 종료의 예외처리', () => {
+    const pickedNumberArrayByComputer = [1, 2, 3];
+    const numberEnteredByUser = [
+      ['123', '0'],
+      ['123', '\n'],
+      ['123', '*'],
+    ];
+
+    numberEnteredByUser.forEach((enteredNumber) => {
+      mockRandoms(pickedNumberArrayByComputer);
+      mockQuestions(enteredNumber);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+  });
 });
