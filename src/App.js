@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Message = require('./assets/Message');
+const { getComputerNumber } = require('./utils/getComputerNumber');
 const { getBaseballResultMessage } = require('./utils/getBaseballResultMessage');
 
 const playEachRound = (target, input) => {
@@ -18,8 +19,18 @@ const playEachRound = (target, input) => {
   });
 };
 
+const playNewGame = () => {
+  const computerNumber = getComputerNumber();
+  let playerNumber = null;
+
+  playEachRound(computerNumber, playerNumber);
+};
+
 class App {
-  play() {}
+  play() {
+    Console.print(Message.START);
+    playNewGame();
+  }
 }
 
 module.exports = App;
