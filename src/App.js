@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   static answer;
-  static hintString;
+  static hint;
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
@@ -26,6 +26,16 @@ class App {
       MissionUtils.Console.print(this.hint);
       this.checkAnswer();
     })
+  }
+
+  throwError(inputNumber) {
+    if (!this.isValidInput(inputNumber)) {
+      throw new Error('숫자가 아닙니다.');
+    }
+    else if (inputNumber > 999 || inputNumber < 0) {
+      throw new Error('3개의 숫자가 아닙니다.')
+    }
+    this.hint = this.getHint(this.answer, inputNumber);
   }
 }
 
