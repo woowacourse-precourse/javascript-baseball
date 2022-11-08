@@ -1,7 +1,8 @@
-const { END } = require("./Constant");
 const { Console } = require("@woowacourse/mission-utils");
-const { checkOneOrTwo } = require("./Error");
-const { makeRandomNumber } = require("./Make");
+const { END, RESTART_OR_END_QUERY, NUMBER_INPUT_QUERY } = require("./Constant");
+const { checkThreeDifferentNumbers, checkOneOrTwo } = require("./Error");
+const { makeBallStrikeCount, makeHint, makeRandomNumber } = require("./Make");
+
 function selectNextQuery(
   strike,
   randomNumbers,
@@ -27,4 +28,13 @@ function restartQuery(selectNumQueryfn) {
   });
 }
 
-module.exports = { selectNextQuery, restartQuery };
+function selectNumQuery(randomNumbers, selectNextQueryFn) {
+  Console.readLine(NUMBER_INPUT_QUERY, (answer) => {
+    checkThreeDifferentNumbers(answer);
+    const { strike, ball } = makeBallStrikeCount(answer, randomNumbers);
+    Console.print(makeHint(strike, ball));
+    selectNextQueryFn(strike, randomNumbers, selectNumQuery, restartQuery);
+  });
+}
+
+module.exports = { selectNumQuery, restartQuery, selectNextQuery };
