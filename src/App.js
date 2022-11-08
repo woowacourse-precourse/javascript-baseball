@@ -37,6 +37,26 @@ class App {
       }
       return ballScore;
     }
+        /*볼과 스트라이크 점수 계산하는 기능*/
+  calResult(computerRandomNum, userInputNum){
+    let score=[];
+    score.push(this.strike(computerRandomNum,userInputNum));
+    score.push(this.ball(computerRandomNum,userInputNum));
+    let answer="";
+    if(score[0]==0&&score[1]==0){
+      answer="낫싱";
+    }
+    if(score[0]==0&&score[1] >0){
+      answer=`${score[1]}볼`;
+    }
+    if(score[0]>0&&score[1]==0&&!score[0]==3){
+      answer=`${score[0]}스트라이크`;
+    }
+    if(score[0]>0&&score[1]>0){
+      answer=`${score[1]}볼 ${score[0]}스트라이크`;
+    }
+    return answer;
+  }
 }
 
 module.exports = App;
