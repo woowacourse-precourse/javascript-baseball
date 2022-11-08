@@ -25,11 +25,11 @@ class App {
 
   inputUserNumber() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (numberInput) => {
-      this.checkInputCorret(numberInput);
+      this.checkInputCorrect(numberInput);
     });
   }
 
-  checkInputCorret(numberInput) {
+  checkInputCorrect(numberInput) {
     try {
       if (!/^[1-9]{3}$/.test(numberInput)) {
         throw new TypeError('입력이 1 ~ 9로 이루어진 3자리 숫자가 아닙니다.');
