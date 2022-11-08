@@ -10,25 +10,24 @@ class App {
   play() {
     this.printGameMsg(GAME_MESSAGE.START);
 
-    let playNum = GAME.RUN;
+    this.answer = this.getComputerNum();
+    this.start(this.answer);
+    this.printGameMsg(GAME_MESSAGE.END);
 
-    while (playNum !== GAME.STOP) {
-      this.answer = this.getComputerNum();
-      this.start(this.answer);
-      this.printGameMsg(GAME_MESSAGE.END);
+    let playNum = this.inputReplayNum();
 
-      playNum = this.inputReplayNum();
-    }
+    if (playNum === GAME.RUN) this.play();
 
     Console.close();
   }
 
   start(computerNum) {
-    while (true) {
-      let playerNum = this.inputPlayerNum();
-      const result = this.getResult(computerNum, playerNum);
-      if (this.isSucesse(result)) break;
-    }
+    let playerNum = this.inputPlayerNum();
+    const result = this.getResult(computerNum, playerNum);
+
+    if (this.isSucesse(result)) return;
+    
+    this.start(computerNum);
   }
 
   isSucesse(strike) {
