@@ -15,6 +15,7 @@ const {
   RETRY_OR_END,
   RETRY_VALUE,
   END_VALUE,
+  THROW_ERROR,
 } = require("./utils/Constants");
 const {
   getUserNumber,
@@ -74,7 +75,7 @@ function App() {
     } else if (userInput === END_VALUE) {
       deInitializationGame();
     } else {
-      throw new Error("게임 종료");
+      throw new Error(THROW_ERROR);
     }
   };
 

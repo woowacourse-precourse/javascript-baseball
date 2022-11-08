@@ -1,3 +1,4 @@
+const { THROW_ERROR } = require("../utils/Constants");
 const { REGEXP_NUMBER_ONE_TO_NINE } = require("../utils/RegExpress");
 
 const validateUserNumber = (userInput) => {
@@ -8,7 +9,7 @@ const validateUserNumber = (userInput) => {
   if (isBetweenOneToNine && isCorrectLength && isNotOverlapped) {
     return true;
   } else {
-    throw new Error("에러 발생 후 종료");
+    throw new Error(THROW_ERROR);
   }
 };
 
