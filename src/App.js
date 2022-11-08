@@ -25,10 +25,19 @@ class App {
     })
   };
 
-  #gameLoop(computerPick, guess) {
-
-  }
+  #validateGuess(guess) {
+    if (!/^[1-9]{3}$/.test(guess)) {
+      throw new Error('1-9 범위의 세 자리 수가 아닙니다: ' + guess);
+    }
+    if (guess[0] === guess[1] || guess[1] === guess[2] || guess[2] === guess[0]) {
+      throw new Error('세 자리 수가 다르지 않습니다: ' + guess);
+    }
+  };
   
+  #gameLoop(computerPick, guess) {
+    this.#validateGuess(guess);
+  }
+
   play() {
     this.#sayStart();
     this.#startGame();
