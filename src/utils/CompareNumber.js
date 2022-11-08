@@ -2,15 +2,11 @@ function CompareNumber(computerNumber, userNumber) {
   let [strike, ball] = [0, 0];
   let nothing = false;
 
+  console.log(computerNumber, userNumber);
   for (let i = 0; i < 3; i++) {
     if (userNumber[i] === computerNumber[i]) {
       strike++;
-    }
-
-    if (
-      userNumber[i] !== computerNumber[i] &&
-      computerNumber.includes(userNumber[i])
-    ) {
+    } else if (computerNumber.includes(userNumber[i])) {
       ball++;
     }
   }

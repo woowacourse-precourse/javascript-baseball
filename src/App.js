@@ -28,7 +28,7 @@ class App {
     let userNumber = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
       if (this.InputValidation.isValidInput(answer)) {
-        userNumber = answer.split('');
+        userNumber = answer.split('').map(Number);
         this.printResult(this.makeRandomNumber(), userNumber);
       }
     });
@@ -36,7 +36,7 @@ class App {
 
   printResult(computerNumber, userNumber) {
     const [strike, ball, nothing] = CompareNumber(computerNumber, userNumber);
-    console.log(strike, ball, nothing);
+    console.log(computerNumber, strike, ball, nothing);
   }
 }
 
