@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { pickNumberInRange } = require("./utils");
 
 class ComputerModel {
   getNumberFromComputer() {
@@ -20,7 +20,7 @@ class ComputerModel {
   }
 
   getRandomNumberInRange(start, end) {
-    return MissionUtils.Random.pickNumberInRange(start, end);
+    return pickNumberInRange(start, end);
   }
 
   isNumberNotInSpace(number, space) {

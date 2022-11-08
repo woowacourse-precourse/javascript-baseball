@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { print } = require("./utils");
 const GAME_MESSAGE = require("./constants/message");
 
 class GameManager {
@@ -18,22 +18,22 @@ class GameManager {
 
   getResult(strikeCount, ballCount) {
     if (this.getJudgeStrikeOrBall().isAllStrike(strikeCount, ballCount)) {
-      MissionUtils.Console.print(`${strikeCount}스트라이크`);
-      MissionUtils.Console.print(GAME_MESSAGE.NOTIFY_GAME_CLEAR);
+      print(`${strikeCount}스트라이크`);
+      print(GAME_MESSAGE.NOTIFY_GAME_CLEAR);
       return true;
     }
 
     if (this.getJudgeStrikeOrBall().isStrikeAndBall(strikeCount, ballCount)) {
-      MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+      print(`${ballCount}볼 ${strikeCount}스트라이크`);
     }
     if (this.getJudgeStrikeOrBall().isOnlyStrike(strikeCount, ballCount)) {
-      MissionUtils.Console.print(`${strikeCount}스트라이크`);
+      print(`${strikeCount}스트라이크`);
     }
     if (this.getJudgeStrikeOrBall().isOnlyBall(strikeCount, ballCount)) {
-      MissionUtils.Console.print(`${ballCount}볼`);
+      print(`${ballCount}볼`);
     }
     if (this.getJudgeStrikeOrBall().isNotStrikeAndNotBall(strikeCount, ballCount)) {
-      MissionUtils.Console.print(`낫싱`);
+      print(`낫싱`);
     }
     return false;
   }
