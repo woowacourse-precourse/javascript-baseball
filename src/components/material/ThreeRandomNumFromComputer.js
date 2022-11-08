@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-class ThreeRandomNumForComputer {
+class ThreeRandomNumFromComputer {
   constructor() {
     this.randomNumsWithoutDuplication = [];
     this.NUM_RANDOM_NUMS_REQUIRED = 3;
@@ -36,4 +36,4 @@ class ThreeRandomNumForComputer {
   }
 }
 
-module.exports = ThreeRandomNumForComputer;
+module.exports = ThreeRandomNumFromComputer;
