@@ -44,12 +44,36 @@ class Game {
     return false;
   }
 
+  askReplay() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (input) => {
+        if (+input === 1) {
+          return this.replay();
+        } else if (+input === 2) {
+          return this.exit();
+        } else {
+          throw new Error("잘못된 입력입니다. 게임이 종료됩니다.");
+        }
+      }
+    );
+  }
+
+  replay() {
+    this.start();
+  }
+
+  exit() {
+    Console.close();
+  }
 
   play() {
     this.user.setNumber();
     const result = this.countBallAndStrike();
     this.printResultMessage(result);
-    const isEnd = this.checkEnd(result);
+    if (this.checkEnd(result)) {
+      return this.askReplay();
+    }
   }
 }
 
