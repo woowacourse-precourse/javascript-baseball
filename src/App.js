@@ -2,14 +2,17 @@ const MissionUtils = require('@woowacourse/mission-utils')
 
 class App {
   play() {
-    //MissionUtils.Console.print('숫자 야구 게임을 시작합니다')
-    //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
-
     console.log('숫자 야구 게임을 시작합니다')
 
+    this.gameStart()
+  }
+
+  gameStart() {
     MissionUtils.Console.readLine('숫자를 입력해 주세요', (num) => {
-      const playerNum = num.split('').map(Number) //내가 입력
-      let comNum=[]
+      const playerNum = num.split('').map(Number)
+
+      //이걸 분리해야 함
+      const comNum = []
       comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
       comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
       comNum.push(MissionUtils.Random.pickNumberInRange(1, 9))
@@ -17,43 +20,44 @@ class App {
       console.log(playerNum)
       console.log(comNum)
 
-      try {
-        this.vaildCheckforLength(playerNum)
-      } catch (e) {
-        //MissionUtils.Console.print(e)
-        //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
-        console.log(e)
-        MissionUtils.Console.close()
-        return
-      }
-
-      try {
-        this.vaildCheckforNaN(playerNum)
-      } catch (e) {
-        console.log(e)
-        MissionUtils.Console.close()
-        return
-      }
-
-      try {
-        this.vaildCheckforDuplicate(playerNum)
-      } catch (e) {
-        console.log(e)
-        MissionUtils.Console.close()
-        return
-      }
-
+      this.checkAllvalidation(playerNum)
       let strikeCount = this.findStrike(playerNum, comNum)
-
       let ballCount = this.findBall(playerNum, comNum)
-
       const result = this.makeAnswer(strikeCount, ballCount)
       MissionUtils.Console.print(result)
 
-
-
-      MissionUtils.Console.close()
+      if (strikeCount === 3) {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+        this.askTryAgain()
+      } else {
+        this.gameStart()
+      }
     })
+  }
+
+  checkAllvalidation(playerNum) {
+    try {
+      this.vaildCheckforLength(playerNum)
+    } catch (e) {
+      //MissionUtils.Console.print(e)
+      //spyOn의 추적때문에 MissionUtils.Console은 정답에만 사용해야 함
+      console.log(e)
+      return
+    }
+
+    try {
+      this.vaildCheckforNaN(playerNum)
+    } catch (e) {
+      console.log(e)
+      return
+    }
+
+    try {
+      this.vaildCheckforDuplicate(playerNum)
+    } catch (e) {
+      console.log(e)
+      return
+    }
   }
 
   //길이가 3이 아닐 때(길이가 3 이상 , 입력값이 없을 때)
@@ -61,7 +65,6 @@ class App {
     if (playerNum.length !== 3) {
       //에러 throw
       throw new Error('입력값의 길이가 3 이상이거나 3보다 작습니다')
-      //MissionUtils.Console.close()
     }
   }
 
@@ -120,6 +123,8 @@ class App {
   }
 
   makeAnswer(strikeCount, ballCount) {
+    console.log(strikeCount, ballCount)
+
     let result
 
     if (strikeCount !== 0 && ballCount !== 0) {
@@ -142,6 +147,23 @@ class App {
       return result
     }
   }
+
+  askTryAgain() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (num) => {
+        if (num === 1) {
+          this.gameStart()
+        } else {
+          MissionUtils.Console.print('게임 종료')
+          MissionUtils.Console.close()
+        }
+        //1이면 readline으로 게임하는 로직 호출
+        //2면 close 호출해서 끝
+      },
+    )
+  }
 }
 
 module.exports = App
+//전역변수...?
