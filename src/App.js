@@ -26,6 +26,8 @@ class App {
         notFull = false;
       }
     }
+
+    return threeNumbers;
   }
 
   inputThreeNumbers() {
@@ -39,7 +41,7 @@ class App {
       this.checkInputDuplicate(input);
     })
 
-    // return input;
+    return input;
   }
 
   checkIsNumber(input) {
@@ -66,19 +68,41 @@ class App {
   }
 
   printResult(computer, user) {
+    let strike = 0;
+    let ball = 0;
 
-  }
+    let result = "";
 
-  endGame() {
+    for(let i=0; i<user.length; i++) {
+      if(user[i] === computer[i]) {
+        strike++;
+      }
+      else if(computer.includes(user[i])){
+        ball++;
+      }
+    }
 
+
+    if(strike === 0 && ball === 0){
+      result = "낫싱";
+    }
+    else if(strike > 0 || ball === 0) {
+      result = "${strike}스트라이크";
+    }
+    else if(strike === 0 || ball > 0) {
+      result = "${ball}볼";
+    }
+    else if(strike > 0 || ball > 0) {
+      result = "${ball}볼 ${strike}스트라이크";
+    }
   }
 
   play() {
 
     MissionUtils.Console.print(this.printStartMessage());
-    this.randomThreeNumbers();
-    this.inputThreeNumbers();
-    
+    let computer = this.randomThreeNumbers();
+    let user = this.inputThreeNumbers();
+    this.printResult(computer, user);
   }
 }
 
