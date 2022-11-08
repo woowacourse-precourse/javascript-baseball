@@ -14,7 +14,7 @@ class App {
     gameProgram() {
         this.gameStartTextPrint();
         const hintMessage = this.printHintMessage();
-        this.conditionsOfWin();
+        this.conditionsOfWin(hintMessage);
     }
 
     createRandomNumber() {
@@ -91,6 +91,14 @@ class App {
         
         MissionUtils.Console.print(hintArr.join(" "));
         return hintArr;
+    }
+
+    conditionsOfWin() {
+        if(hintMessage === "3스트라이크") {
+            this.gameOver();
+        } else {
+            this.gameProgram();
+        }
     }
 }
 
