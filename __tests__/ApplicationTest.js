@@ -96,6 +96,13 @@ describe("게임 결과 만들기 유닛 테스트", () => {
     expect(app.makeResult("127")).toBe("2스트라이크");
     expect(app.makeResult("321")).toBe("2볼 1스트라이크");
   });
+  test("사용자가 입력했을 때, 정답과 전혀 다른 숫자가 들어오면 낫싱을 출력한다.", () => {
+    const app = new App();
+    app.answer = "123";
+
+    expect(app.makeResult("567")).toBe("낫싱");
+    expect(app.makeResult("489")).toBe("낫싱");
+  });
 });
 
 describe("사용자 입력에 대한 예외 처리 테스트", () => {
