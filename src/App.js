@@ -5,7 +5,7 @@ const LENGTH_LIMIT = 3;
 
 class App {
   play() {
-    let newGame = new gameStart();
+    let newGame = new GameStart();
     newGame.start(true);
   }
 }
@@ -21,7 +21,7 @@ const computerRandom = () => {
   return computer;
 }
 
-class gameStart {
+class GameStart {
   start(firstTime) {
     let computer = computerRandom();
     this.computer = this.handleComputer(computer);
@@ -70,7 +70,8 @@ class gameStart {
     let END = '2';
       if(answer === RESTART) {
         this.start(false);
-      } else if(answer === END) {
+      } 
+      else if(answer === END) {
         Console.close()
       };
   }
