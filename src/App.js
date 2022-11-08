@@ -1,8 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
-const Render = require("./View/Render");
+const Render = require("./Render");
 const CheckInputValid = require("./Model/CheckInputValid");
-const GameJudgment = require("./Model/GameJudgment");
-const ComputerInput = require(".//Model/ComputerInput");
+const GameJudgment = require("./GameJudgment");
+const ComputerInput = require("./ComputerInput");
 const { ERROR, GAME } = require("./data/Constants");
 
 const render = new Render();
