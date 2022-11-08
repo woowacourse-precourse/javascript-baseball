@@ -86,6 +86,22 @@ class App {
     }
   }
 
+  replay() {
+    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+
+    Console.readLine('', input => {
+      if (input === '1') {
+        this.play();
+        return;
+      }
+
+      if (input === '2') {
+        Console.close();
+        return;
+      }
+    });
+  }
+
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
     this.pickNumber();
