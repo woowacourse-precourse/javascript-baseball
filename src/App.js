@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const User = require("./User");
 const Computer = require("./Computer");
 
@@ -18,7 +18,7 @@ class App {
     if (this.isReplay) {
       this.restart();
     }
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+    Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       const USER_INPUT_ARR = this.convertStrToArr(userInput);
       const IS_USER_INPUT_VALID = this.user.checkUserInputValid(USER_INPUT_ARR);
       if (IS_USER_INPUT_VALID === true) {
@@ -36,7 +36,7 @@ class App {
   }
 
   start() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.computerAnswer = this.computer.generateDifferRandomNumArr(3);
     this.isFirstPlay = false;
   }
@@ -47,7 +47,7 @@ class App {
   }
 
   checkIfRestartGame() {
-    MissionUtils.Console.readLine(
+    Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
       (userInput) => {
         if (userInput === "1") {
@@ -56,7 +56,7 @@ class App {
         }
         if (userInput === "2") {
           this.isReplay = false;
-          return MissionUtils.Console.close();
+          return Console.close();
         }
       }
     );
