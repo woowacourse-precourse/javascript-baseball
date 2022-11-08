@@ -7,6 +7,18 @@ class Input {
     this.value = [];
   }
 
+  save(input) {
+    Error.validate(input);
+    this.clear(this.value);
+    this.makeNumberArray(input).forEach((element) => this.value.push(element));
+  }
+
+  saveRandom() {
+    this.save(
+      this.makeRandomDiffNumberArray(NUMBER.START, NUMBER.END, NUMBER.TOTAL)
+    );
+  }
+
   clear() {
     this.value.length = 0;
   }
@@ -16,7 +28,7 @@ class Input {
     return input.split("").map((value) => +value);
   }
 
-  randomDiffNumberArray(start, end, total) {
+  makeRandomDiffNumberArray(start, end, total) {
     const array = [];
     while (array.length < total) {
       const random = Random.pickNumberInRange(start, end);
@@ -29,18 +41,6 @@ class Input {
 
   print(message) {
     Console.print(message);
-  }
-
-  save(input) {
-    Error.validate(input);
-    this.clear(this.value);
-    this.makeNumberArray(input).forEach((element) => this.value.push(element));
-  }
-
-  saveRandom() {
-    this.save(
-      this.randomDiffNumberArray(NUMBER.START, NUMBER.END, NUMBER.TOTAL)
-    );
   }
 }
 
