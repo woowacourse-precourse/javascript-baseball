@@ -70,9 +70,10 @@ class App {
         if (ans === "1") {
           this.randomeNumber();
           this.inputNumber(); 
-        }
-        if (ans === "2") {
-          MissionUtils.Console.print("게임 종료");
+        }else if (ans === "2") {
+          MissionUtils.Console.print("숫자 야구 게임을 종료합니다.");
+        }else if(ans !=="1"||ans !=="2"){
+          MissionUtils.Console.print("1과 2 문자만 입력 가능합니다.");
         }
         return;
       }
