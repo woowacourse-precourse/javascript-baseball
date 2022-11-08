@@ -10,10 +10,6 @@ const mockQuestion = (answer) => {
 };
 
 describe("플레이어 입력 검증 테스트", () => {
-  afterEach(() => {
-    MissionUtils.Console.close();
-  });
-
   test("입력 검증 함수 정상 입력", () => {
     const inputs = ["123", "231", "451", "643"];
 

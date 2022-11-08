@@ -2,9 +2,9 @@ const App = require("../src/App");
 const { getStrikeAndBall, getStrikeAndBallText } = require("../src/StrikeAndBall");
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const mockQuestions = (inputs) => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  inputs.reduce((acc, input) => {
+  answers.reduce((acc, input) => {
     return acc.mockImplementationOnce((question, callback) => {
       callback(input);
     });
@@ -25,10 +25,6 @@ const getLogSpy = () => {
 };
 
 describe("스트라이크 볼 카운트 테스트", () => {
-  afterEach(() => {
-    MissionUtils.Console.close();
-  });
-
   test("스트라이크 볼 카운트 결과 가져오는 함수", () => {
     const answerNumber = "123";
     const inputsAndReturns = [
@@ -62,12 +58,12 @@ describe("스트라이크 볼 카운트 테스트", () => {
 
   test("플레이 과정 테스트", () => {
     const randoms = [1, 2, 3];
-    const inputs = ["231", "135", "789", "123"];
+    const answers = ["231", "135", "789", "123"];
     const logSpy = getLogSpy();
     const messages = ["3스트라이크", "1볼 1스트라이크", "낫싱", "3스트라이크"];
 
     mockRandoms(randoms);
-    mockQuestions(inputs);
+    mockQuestions(answers);
 
     const app = new App();
     app.play();
