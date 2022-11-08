@@ -49,11 +49,13 @@ function getHint(ball,strike) {
     
     MissionUtils.Console.print(hintMessage);
     
-    return (strike !== 3) ? getUserNumbers() : askRetry();
+    return (strike !== 3) ? getUserNumbers() : askRestart();
 }
 
-function askRetry() {
-    MissionUtils.Console.print(GAME_MESSAGES.GAME_END_MESSAGE, GAME_MESSAGES.GAME_RESTART_MESSAGE);
+function askRestart() {
+    MissionUtils.Console.print(GAME_MESSAGES.GAME_END_MESSAGE);
+    MissionUtils.Console.print(GAME_MESSAGES.GAME_RESTART_MESSAGE);
+
     MissionUtils.Console.readLine('', (input) => {
         if (input === "1") {
             computerNumber = getComputerNumbers(); 
