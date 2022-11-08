@@ -64,7 +64,7 @@ class BaseballGame {
       if (OneOrTwo === "1") {
         return this.playGame();
       } else if (OneOrTwo === "2") {
-        return Console.close();
+        Console.close();
       } else {
         return this.throwError(ERROR_MESSAGE.ERROR_RESTART_MESSAGE);
       }
