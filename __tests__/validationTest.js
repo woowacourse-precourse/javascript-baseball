@@ -36,7 +36,7 @@ describe("입력값 유효성 테스트", () => {
     expect(() => {
       const app = new App();
       app.checkValid(input);
-    }).toThrow;
+    }).toThrow();
   });
 
   test("checkValid메서드에 유효한 값을 넣으면 예외 발생시키지 않음  ", () => {
@@ -46,5 +46,25 @@ describe("입력값 유효성 테스트", () => {
       const app = new App();
       app.checkValid(input);
     }).not.toThrow();
+  });
+
+  test("checkRestart메서드에 1,2를 제외한 값을 넣었을 때 예외 발생 ", () => {
+    const input = "3";
+
+    expect(() => {
+      const app = new App();
+      app.checkRestart(input);
+    }).toThrow();
+  });
+
+  test("checkRestart메서드에 유효한 값을 넣었을 때 예외 발생하지 않음 ", () => {
+    const inputs = ["1", "2"];
+
+    inputs.forEach((input) => {
+      expect(() => {
+        const app = new App();
+        app.checkRestart(input);
+      }).not.toThrow();
+    });
   });
 });
