@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const {Console,Random} = require("@woowacourse/mission-utils");
 
 class App {
 
@@ -51,6 +51,21 @@ class App {
     }
     return ballCounter;
   }
+  restartOrEnd(userCommand) {
+    if(userCommand === '1') return this.play();
+    return Console.close();
+  }
+  gameOver() {
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료\n");
+    let userCommand;
+    Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",(input)=> {
+      userCommand = input;
+      while(userCommand === '1' || userCommand === '2') {
+        restartOrEnd(userCommand);
+      }
+    });
+    
+  }
   resultMessage(strikeCounter,ballCounter) {
     let message = '';
     if(strikeCounter === 3) {
@@ -66,14 +81,14 @@ class App {
   }
 
   startBaseBallGame() {
-    const comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    const comNums = Random.pickUniqueNumbersInRange(1, 9, 3);
     let userNums;
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(answer)=> {
-      userAnswer = answer.split('').map((num)=>{return Number(num)});
+    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.readLine("숫자를 입력해주세요 : ",(answer)=> {
+      userNums = answer.split('').map((num)=>{return Number(num)});
     });
     const [strikeCounter,ballCounter] = this.getStrikeAndBall(comNums,userNums);
-
+    Console.print(this.resultMessage(strikeCounter,ballCounter));
   }
   
   play() {
