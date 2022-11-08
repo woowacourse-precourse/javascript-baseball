@@ -21,7 +21,31 @@ class App {
     }
   }
 
-  
+  determineResult(num) {
+    const MissionUtils = require("@woowacourse/mission-utils");
+    const guess = num.toString().split("").map(element => Number(element));
+
+    if (guess.length !== 3 || guess.includes(NaN)) {
+      throw Error();
+    }
+    
+    if (guess.length === 3 && !guess.includes(NaN)) {
+      let countStrike = 0;
+      let countBall = 0;
+      let i = 0;
+
+      while (i < 3 && guess.length === 3) {
+        if (this.answer[i] === guess[i]) {
+          countStrike++;
+        }
+        if (this.answer[i] !== guess[i] && guess.includes(this.answer[i])) {
+          countBall++;
+        }
+        i++;
+    }
+
+    
+  }
 }
 
 const app = new App;
