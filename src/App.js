@@ -1,11 +1,11 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const Exception = require("./components/Exception");
+const Error = require("./components/Error");
 const Count = require("./components/Count");
 const Result = require("./components/Result");
 
 class App {
   constructor() {
-    this.exception = new Exception();
+    this.error = new Error();
     this.count = new Count();
     this.result = new Result();
   }
@@ -22,7 +22,7 @@ class App {
 
   getUserNumbers(computerNumbers) {
     MissionUtils.Console.readLine('숫자를 입력해주세요: ', (userInput) => {
-      const isUserInputError = this.exception.checkError(userInput);
+      const isUserInputError = this.error.check(userInput);
 
       if (isUserInputError === true) {
         throw new Error('잘못된 값을 입력하셨습니다. 게임 종료');

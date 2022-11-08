@@ -1,5 +1,5 @@
-class Exception {
-  checkError(userInput) {
+class Error {
+  check(userInput) {
     if (String(userInput).length !== 3) {
       return true;
     }
@@ -17,4 +17,4 @@ class Exception {
   }
 }
 
-module.exports = Exception;
+module.exports = Error;
