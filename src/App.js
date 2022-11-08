@@ -9,6 +9,19 @@ const {
 class App {
   game() {
     this.randomNumber = this.generateRandomNumber();
+
+    while (this.randomNumber !== this.userInputNumbers) {
+      this.userInputNumbers = this.getUserInput();
+      isInvalidLength(this.userInputNumbers);
+      isDuplicated(this.userInputNumbers);
+      isNaN(this.userInputNumbers);
+      includeSpace(this.userInputNumbers);
+
+      const { strikeCount, ballCount } = this.countBallandStrike();
+      MissionUtils.Console.print(this.joinHint(ballCount, strikeCount));
+    }
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.restartOrEnd();
   }
 
   generateRandomNumber() {
@@ -35,6 +48,7 @@ class App {
 
     this.game();
   }
+
   countBallandStrike = () => {
     let ballCount = 0;
     let strikeCount = 0;
