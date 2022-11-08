@@ -10,10 +10,12 @@ const printMassage = (message) => {
     return MissionUtils.Console.print(message);
 };
 
-let isFirst = true;
 class App {
+    constructor() {
+        this.isFirst = true;
+    }
     printStartMassage() {
-        isFirst && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
+        this.isFirst && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
     }
 
     createAnswer() {
@@ -28,7 +30,7 @@ class App {
     play() {
         this.printStartMassage();
         const answer = this.createAnswer();
-        this.getUserInput(answer); 
+        this.getUserInput(answer);
     }
 
     isCorrect(userInput, answer) {
@@ -83,33 +85,34 @@ class App {
         printMassage("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         MissionUtils.Console.readLine("", (number) => {
             if (number === "1") {
-                isFirst = false;
+                this.isFirst = false;
                 return this.play();
             }
             if (number === "2") {
                 return MissionUtils.Console.close();
             }
 
-            throw new Error("1이나 2를 입력해주세요");
+            throw new Error("1이나 2를 입력해주세요.");
         });
     }
 
     checkUserInput(input) {
         if (input.includes(NaN)) {
-            throw new Error("숫자를 입력해주세요");
+            throw new Error("숫자만 입력해주세요.");
         }
         if (input.length !== 3) {
-            throw new Error("숫자 3개를 입력해주세요");
+            throw new Error("숫자 3개를 입력해주세요.");
         }
         if (new Set(input).size !== 3) {
-            throw new Error("중복된 숫자가 있습니다.");
+            throw new Error("중복되지 않는 숫자3개를 입력해주세요.");
         }
         if (input.includes(0)) {
-            throw new Error("1~9 사이의 숫자만 입력해주세요");
+            throw new Error("1~9 사이의 숫자만 입력해주세요.");
         }
     }
 
     getUserInput(answer) {
+        console.log(answer);
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
             const INPUT_ARRAY = changeToArray(input);
             this.checkUserInput(INPUT_ARRAY);
