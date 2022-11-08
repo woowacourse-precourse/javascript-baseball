@@ -51,14 +51,29 @@ class App {
     }
     return ballCounter;
   }
+  resultMessage(strikeCounter,ballCounter) {
+    let message = '';
+    if(strikeCounter === 3) {
+      // gameOver();
+    }
+    if(ballCounter) {
+      message.concat(`${ballCounter}볼 `);
+    }
+    if(strikeCounter) {
+      message.concat(`${strikeCounter}스트라이크 `);
+    }
+    return (!ballCounter && !strikeCounter) ? "낫싱" : message;
+  }
 
   startBaseBallGame() {
-    const computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    let userAnswer;
+    const comNums = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    let userNums;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(answer)=> {
       userAnswer = answer.split('').map((num)=>{return Number(num)});
     });
+    const [strikeCounter,ballCounter] = this.getStrikeAndBall(comNums,userNums);
+
   }
   
   play() {
