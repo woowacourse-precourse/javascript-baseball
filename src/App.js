@@ -1,6 +1,22 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  checkStrikeOrBall(
+    COMPUTER,
+    computerNumberIndex,
+    answer,
+    answerNumberIndex,
+    strike,
+    ball
+  ) {
+    if (COMPUTER[computerNumberIndex] == answer[answerNumberIndex]) {
+      if (computerNumberIndex == answerNumberIndex) {
+        strike += 1;
+      } else ball += 1;
+    }
+    return [strike, ball];
+  }
+
   playBaseball(COMPUTER, answer) {
     let strike = 0;
     let ball = 0;
