@@ -7,13 +7,21 @@ class App {
   }
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.gameStart();
-    let restartGame = this.gameRestart()[0];
+    // this.gameStart();
+    let restartGame = "1";
     while (restartGame === "1") {
       this.gameStart();
-      restartGame = this.gameRestart()[0];
+      restartGame = this.gameRestart();
+      restartGame = this.checkRestartValidation(restartGame);
     }
     return MissionUtils.Console.close();
+  }
+  checkRestartValidation(restartGame) {
+    while (restartGame !== "1" && restartGame !== "2") {
+      MissionUtils.Console.print("불가능한 재시작 명령입니다.");
+      restartGame = this.gameRestart();
+    }
+    return restartGame;
   }
   gameStart() {
     const opponentNumber = this.opponent.setRandomNumber(); //상대방 숫자 지정
@@ -36,11 +44,10 @@ class App {
   }
   gameRestart() {
     let restartGame;
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (restartInput) => {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (restartInput) => {
       restartGame = restartInput.toString().split("");
-      // MissionUtils.Console.close();
     });
-    return restartGame;
+    return restartGame[0];
   }
   compareNumbers(opponentArr, userArr) {
     let ball = 0,
