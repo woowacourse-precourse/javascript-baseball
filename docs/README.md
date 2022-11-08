@@ -1,4 +1,4 @@
-
+### 기능 목록
 - constructor(): computer_num,user_num 객체 속성 생성
 - 게임시작()-play : 사용자 숫자 입력 받는 함수 호출, 컴퓨터 숫자를 맞추지 못했을때 호출되는 함수
 - 게임종료()-endGame : 결과 안내문 출력, 게임 새로 시작 or 종료 입력 받기
@@ -12,3 +12,16 @@
 - 볼 결과 출력 - resultBall: 게임계속(사용자입력받기)
 - 낫싱 출력 - resultNothing: 게임계속(사용자입력받기)
 - 볼 스트라이크 결과 출력- resultStrikeAndBall:  게임계속(사용자입력받기)
+
+### 사용자 입력값 예외 목록
+- getUserInputNumber(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 숫자 3개만 가능
+- endGame(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 1과 2 중 가능, 사용자 입력값은 1개만 가능
+
+### 함수 결과값 예외 목록
+- selectComputerNumber(): 랜덤 숫자 길이는 3, 랜덤 숫자는 서로 다른 3개, 랜덤 숫자는 1에서 9까지의 숫자
+- changeComputerNumberToArray(): 입력 타입은 숫자만 가능, 반환값은 배열
+- changeUserNumberToArray(): 입력 타입은 숫자만 가능, 반환값은 배열
+- findEqualNumber(): 반환값 strike, ball 타입은 숫자
+- resultGame(): 입력 타입은 숫자
+- resultBall(): 입력 타입은 숫자
+- resultStrikeAndBall(): 입력 타입은 숫자
