@@ -1,7 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { GAME_MESSAGE, RESTART, END } = require("./util/Constant");
 const makeNumber = require("./util/MakeNumber");
-const isValidNum = require("./util/IsValideNum");
+const isValidNum = require("./util/IsValidNum");
 const { makeComment, makeCount } = require("./util/MakeCount");
 
 class App {
