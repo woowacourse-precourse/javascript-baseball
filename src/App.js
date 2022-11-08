@@ -38,11 +38,9 @@ class App {
   baseballGame(userNumber) {
     this.userRandomNumbers = userNumber;
     const gameResult = checkBallAndStrike(this.computerRandomNumbers, this.userRandomNumbers);
-    if (gameResult) {
-      this.chooseRestartGame();
-    } else if (!gameResult) {
-      this.userInputNumber();
-    }
+    if (gameResult) this.chooseRestartGame();
+    
+    this.userInputNumber(); 
   }
 
   chooseRestartGame() {
