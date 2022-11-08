@@ -10,8 +10,6 @@ class App {
   }
 
   init() {
-    this.RAND_NUM = [];
-    this.INPUT_NUM = [];
     this.IS_NOTHING = true;
     this.COUNT_BALL = 0;
     this.COUNT_STRIKE = 0;
@@ -19,13 +17,22 @@ class App {
 
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
+    this.playNewGame();
+  }
+
+  // 게임 시작
+  playNewGame() {
+    this.RAND_NUM = [];
+    this.INPUT_NUM = [];
 
     // 1. random number(컴퓨터 숫자) 생성
     this.createRandomNumber();
 
-    this.playGame();
+    // 사용자가 정답 입력
+    this.inputUserAnswer();
   }
 
+  // 1. random number(컴퓨터 숫자) 생성
   createRandomNumber() {
     while (this.RAND_NUM.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
@@ -35,7 +42,8 @@ class App {
     }
   }
 
-  playGame() {
+  inputUserAnswer() {
+    this.init();
     //2. 사용자가 숫자를 입력한다. 
     Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const ANSWER = Array.from(answer);
@@ -47,16 +55,16 @@ class App {
       this.validateInput(this.INPUT_NUM);
 
       //2. randNum과 비교하여 결과를 확인한다.
-      this.checkResult(this.INPUT_NUM, this.RAND_NUM);
+      this.checkResult();
     });
   }
 
-  checkResult(INPUT_NUM, RAND_NUM) {
-    console.log(INPUT_NUM, RAND_NUM, '입력한 숫자, 랜덤 숫자');
-    INPUT_NUM.map((num, idx) => {
-      if (RAND_NUM.includes(num)) {
+  checkResult() {
+    // console.log(this.INPUT_NUM, this.RAND_NUM, '입력한 숫자, 랜덤 숫자');
+    this.INPUT_NUM.map((num, idx) => {
+      if (this.RAND_NUM.includes(num)) {
         this.IS_NOTHING = false
-        if (num !== RAND_NUM[idx]) {
+        if (num !== this.RAND_NUM[idx]) {
           this.COUNT_BALL++;
         } else {
           this.COUNT_STRIKE++;
@@ -70,25 +78,20 @@ class App {
     if (this.IS_NOTHING) {
       // 정답을 맞춘 경우가 아니면 사용자에게 입력만 다시 받기
       Console.print('낫싱');
-      this.init();
-      this.play();
+      this.inputUserAnswer();
     } else {
       // 3. 정답을 맞춘 경우 게임 시작
       if (this.COUNT_STRIKE === 3) {
-        Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n')
-        Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (opinion) => {
-          if (opinion === 1) {
-            this.init();
-            this.play();
-          } else {
-            Console.close()
-          }
-        })
+        Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
+        if (this.INPUT_NUM.includes(1)) {
+          this.playNewGame();
+        } else {
+          Console.close()
+        }
       } else {
         // 정답을 맞춘 경우가 아니면 사용자에게 입력만 다시 받기
         Console.print(`${this.COUNT_BALL}볼 ${this.COUNT_STRIKE}스트라이크`);
-        this.init();
-        this.play();
+        this.inputUserAnswer();
       }
     }
   }
