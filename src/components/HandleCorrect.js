@@ -1,5 +1,10 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const gameConst = require('./GameConstant');
+const BaseballGame = require('./BaseballGame');
+
+const reStartGame = () => {
+  BaseballGame.startGame();
+};
 
 const endGame = () => {
   MissionUtils.Console.close();
