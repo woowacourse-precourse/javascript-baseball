@@ -3,18 +3,18 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App{
   constructor(){ //변수 선언
     this.comNum = [];
-    this.usrNum = [];
+    //this.usrNum = [];
     this.strike = 0;
     this.ball = 0;
     this.nothing = 0;
   }
   
-  usrInputCheck(){ //사용자 수 입력 예외 처리
-    if((this.usrNum).length != 3){
+  usrNumberInputCheck(answers){ //사용자 수 입력 예외 처리
+    if((answers).length != 3){
       throw '3자리 수가 아닙니다.';
-    } else if(this.usrNum[0] == this.usrNum[1] || this.usrNum[0] == this.usrNum[2] || this.usrNum[2] == this.usrNum[3]){
+    } else if(answers[0] == answers[1] || answers[0] == answers[2] || answers[2] == answers[3]){
       throw '서로 다른 수가 아닙니다.';
-    } else if(Math.sign(this.usrNum[0]) != 1 || Math.sign(this.usrNum[1]) != 1 || Math.sign(this.usrNum[2]) != 1){
+    } else if(Math.sign(answers[0]) != 1 || Math.sign(answers[1]) != 1 || Math.sign(answers[2]) != 1){
       throw '양수가 아닙니다.';
     }
   }
@@ -26,6 +26,7 @@ class App{
         this.comNum.push(number);
       }
     }
+    return this.comNum;
   }
 
   gameStartNotice(){ //게임 시작 알림
@@ -34,12 +35,12 @@ class App{
 
   getGameResult(){ //스트라이크, 볼 계산
     MissionUtils.Console.readLine('숫자를 입력해주세요', (answers) => {
-      this.usrNum = [...answers];
-      this.usrInputCheck(); 
+      const usrNum = [...answers];
+      this.usrNumberInputCheck(usrNum); 
 
-      for(let i = 0; i < (this.usrNum).length; i++){
-        if(this.comNum.includes(this.usrNum[i])){
-          if(this.usrNum[i] == this.comNum[i]){
+      for(let i = 0; i < usrNum.length; i++){
+        if(this.comNum.includes(usrNum[i])){
+          if(usrNum[i] == this.comNum[i]){
             this.strike ++;
           } else {
             this.ball ++;
@@ -75,7 +76,7 @@ class App{
       } else if(number == 2){
         MissionUtils.Console.close();
       } else {
-        //예외처리
+        throw '잘못된 입력값입니다.';
       }
     });
     MissionUtils.Console.close();
