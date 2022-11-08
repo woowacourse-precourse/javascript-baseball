@@ -8,6 +8,7 @@ class BaseBallGame {
   #ballCount;
 
   constructor() {
+    this.playerInputNumber = null;
     this.computer = null;
     this.#strikeCount = 0;
     this.#ballCount = 0;
@@ -28,6 +29,13 @@ class BaseBallGame {
   #clearBallAndStrikeCount() {
     this.#strikeCount = 0;
     this.#ballCount = 0;
+  }
+
+  getResult(plyaerInput, randomNumbers) {
+    this.playerInputNumber = plyaerInput;
+    this.isValidGameInput(plyaerInput);
+
+    return this.checkBallAndStrike(plyaerInput, randomNumbers);
   }
 
   #inputNumber() {
