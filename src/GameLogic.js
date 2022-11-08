@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
+const Validation = require("../src/Validation");
 
 const { INGAME_MESSAGE, RESPONSE } = require("./Constant");
 
@@ -51,6 +52,27 @@ class GameLogic {
       } else if (input === RESPONSE.FINISH) {
         MissionUtils.Console.close();
       }
+    });
+  }
+
+  implement(computerNumber) {
+    MissionUtils.Console.readLine(INGAME_MESSAGE.INPUT_NUMBER, (string) => {
+      const validation = new Validation();
+
+      const userNumber = string.split("").map((el) => Number(el));
+
+      ////////////////////////////////////////////////////////////////
+      //   if (validation.checkAll(userNumber)) { //체크 후 안넘어가는 문제
+      const ballStrikeResult = this.judge(userNumber, computerNumber);
+
+      const result = this.result(ballStrikeResult);
+
+      if (result) {
+        this.select();
+      } else {
+        this.implement(computerNumber);
+      }
+      //   }
     });
   }
 }

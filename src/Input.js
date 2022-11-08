@@ -1,12 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Validation = require("../src/Validation");
 
-const {
-  GAME_CONFIG,
-  ERROR_MESSAGE,
-  INGAME_MESSAGE,
-  RESPONSE,
-} = require("./Constant");
+const { GAME_CONFIG, INGAME_MESSAGE } = require("./Constant");
 
 class Input {
   computer() {
@@ -20,6 +15,7 @@ class Input {
         computerPick.push(randomNumber);
       }
     }
+    return computerPick;
   }
 
   user() {
