@@ -27,22 +27,30 @@ class App {
     if (userNumbers.length != filterDuplicateNumberSet.size) throw "error";   //중복 숫자 입력이 있는지 검사
   }
 
+  isStrike(userNumbers, i) {
+    if (this.computerNumbers[i] == userNumbers[i]) return 1;    //같은 경우 1을 반환
+    return 0;
+  }
+
   countStrikeNum(userNumbers) {
     let strikeCount = 0;
-
     for (let i = 0; i < PICK_LENGTH; i++) 
-      if (this.computerNumbers[i] == userNumbers[i]) strikeCount++;
+      strikeCount += this.isStrike(userNumbers, i);
 
     return strikeCount;
   }
 
+  isBall(userNumbers, i) {
+    if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1 &&
+    this.computerNumbers.indexOf(parseInt(userNumbers[i])) != i) 
+      return 1;
+    return 0;
+  }
+
   countBallNum(userNumbers) {
     let ballCount = 0;
-
     for (let i = 0; i < PICK_LENGTH; i++) 
-      if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1 &&
-      this.computerNumbers.indexOf(parseInt(userNumbers[i])) != i) 
-        ballCount++;
+      ballCount += this.isBall(userNumbers, i)
 
     return ballCount;
   }
