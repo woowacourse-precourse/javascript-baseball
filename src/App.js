@@ -22,7 +22,21 @@ class App {
     }
   }
 
-  #validatePlayerInput() {}
+  #validatePlayerInput(input) {
+    if (input.length !== 3) {
+      throw new Error("입력값은 3자리 숫자여야 합니다.");
+    }
+    if (new Set(input.split("")).size !== 3) {
+      throw new Error("입력값은 중복되지 않은 숫자여야 합니다.");
+    }
+    if (input.includes(" ")) {
+      throw new Error("입력값은 공백을 포함할 수 없습니다.");
+    }
+    if (input.split("").some((number) => number < 1 || number > 9)) {
+      throw new Error("입력값은 1부터 9까지의 숫자여야 합니다.");
+    }
+    return input;
+  }
 
   #getPlayerInput() {
     const playerInput = this.#missionUtils.Console.getInput(
