@@ -33,5 +33,21 @@ describe("게임 플로우", () => {
 
     expect(result).toHaveLength(3);
   });
+  
+  test("스트라이크 카운트 반환", () => {
+    const game = new BaseBallGame();
+    game.answer = [2,5,7]
+    const result = game.getStrikeCount('256');
+
+    expect(result).toBe(2);
+  });
+  
+  test("볼 카운트 반환", () => {
+    const game = new BaseBallGame();
+    game.answer = [2,5,7]
+    const result = game.getBallCount('562');
+
+    expect(result).toBe(2);
+  });
 
 });
