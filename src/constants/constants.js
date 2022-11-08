@@ -1,3 +1,8 @@
+const GAME_VALUE = {
+  RESTART: '1',
+  END: '2',
+};
+
 const GAME_MESSAGE = {
   GAME_START: "숫자 야구 게임을 시작합니다.",
   GAME_INPUT_NUMBERS: "숫자를 입력해주세요 : ",
@@ -11,6 +16,7 @@ const ERROR_MESSAGE = {
 };
 
 module.exports = {
+  GAME_VALUE,
   GAME_MESSAGE,
   ERROR_MESSAGE,
 }
