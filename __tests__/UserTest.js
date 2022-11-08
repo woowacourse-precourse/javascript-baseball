@@ -44,9 +44,7 @@ describe("유저 플로우", () => {
     const app = new App();
     app.play();
 
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
-    });
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
   
   test("게임 재시작", () => {

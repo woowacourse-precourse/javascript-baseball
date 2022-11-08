@@ -9,23 +9,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
-
-const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
-};
-
-describe("게임 플로우", () => {
+describe("게임 플로우 테스트", () => {
   test("랜덤 세개 숫자 출력", () => {
     const game = new BaseBallGame();
     game.getRandomNumber();
@@ -50,4 +34,48 @@ describe("게임 플로우", () => {
     expect(result).toBe(2);
   });
 
+  test("볼, 스트라이크 갯수 출력", () => {
+    const game = new BaseBallGame();
+    const logSpy = getLogSpy();
+    game.answer = [2,5,7]
+    game.output('265');
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1볼 1스트라이크'));
+  });
+
+  test("스트라이크 갯수 출력", () => {
+    const game = new BaseBallGame();
+    const logSpy = getLogSpy();
+    game.answer = [2,5,7]
+    game.output('256');
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('2스트라이크'));
+  });
+
+  test("볼 갯수 출력", () => {
+    const game = new BaseBallGame();
+    const logSpy = getLogSpy();
+    game.answer = [2,5,7]
+    game.output('365');
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1볼'));
+  });
+  
+  test("낫싱 출력", () => {
+    const game = new BaseBallGame();
+    const logSpy = getLogSpy();
+    game.answer = [2,5,7]
+    game.output('368');
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('낫싱'));
+  });
+
+  test("3스트라이크 출력", () => {
+    const game = new BaseBallGame();
+    const logSpy = getLogSpy();
+    game.answer = [2,5,7]
+    game.output('257');
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('3스트라이크'));
+  });
 });
