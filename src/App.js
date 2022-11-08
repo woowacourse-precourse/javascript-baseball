@@ -1,4 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const { THREE_TIMES } = require("./constants/constant");
 const MESSAGE = require("./constants/message");
 
 class App {
@@ -47,7 +48,7 @@ class App {
       }
     });
 
-    if (strike === 3) {
+    if (strike === THREE_TIMES) {
       this.sendMessage(MESSAGE.COMPARE_ANSWER.THREE_STRIKE);
       this.sendMessage(MESSAGE.GAME_PROGRESS.END);
       Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => this.isContinue(answer));
