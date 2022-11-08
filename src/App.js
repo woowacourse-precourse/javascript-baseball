@@ -15,11 +15,11 @@ class App {
     }
   }
   
-  ballCounting(input) {
+  static ballCount(computerNum, input) {
     let count = 0;
-    
+
     for (let i = 0; i < 3; i++) {
-      let found = this.computerNum.indexOf(parseInt(input[i]));
+      let found = computerNum.indexOf(parseInt(input[i]));
       if (found != -1 && found != i) {
         count++;
       }
@@ -27,11 +27,11 @@ class App {
     return count;
   }
   
-  strikeCounting(input) {
+  static strikeCount(computerNum, input) {
     let count = 0;
-    
+
     for (let i = 0; i < 3; i++) {
-      let found = this.computerNum.indexOf(parseInt(input[i]));
+      let found = computerNum.indexOf(parseInt(input[i]));
       if (found != -1 && found == i) {
         count++;
       }
@@ -39,7 +39,7 @@ class App {
     return count;  
   }
   
-  static printCount(ball, strike) {
+  static printResult(ball, strike) {
     if (ball > 0 && strike > 0) {
       MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
       return ;
@@ -58,14 +58,14 @@ class App {
     }
   }
 
-  checkAndPrintCount(input) {
-    let ball = this.ballCounting(input);
-    let strike = this.strikeCounting(input);
+  checkResult(input) {
+    let ball = App.ballCount(this.computerNum, input);
+    let strike = App.strikeCount(this.computerNum, input);
 
     if (strike == 3) {
       this.threeStrike = true;
     }
-    this.printCount(ball, strike);
+    App.printResult(ball, strike);
   }
 
   static checkInputValid(input) {
@@ -84,38 +84,53 @@ class App {
     return true;
   }
 
-  inGame() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      this.checkInputValid(input);
+  isCorrect() {
+    if (this.threeStrike == true) {
+      return true;
+    }
+    return false;
+  }
 
-      this.checkAndPrintCount(input);
-      if (this.threeStrike) {
-        this.endOrReplay();
+  playerTurn() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      App.checkInputValid(input);
+
+      this.checkResult(input);
+      if (this.iscorrect) {
+        this.endGame();
       }
-      this.inGame();
+      this.playerTurn();
     });
   }
 
-  endOrReplay() {
+  static appExit() {
+    MissionUtils.Console.close();
+  }
+
+  replay() {
+    this.computerNum.length = 0;
+    this.threeStrike = false;
+    this.newGame();
+  }
+
+  endGame() {
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
       if (input != 1 && input != 2) {
         throw "ERROR: Invalid input\n [ Valid Input : 1 or 2 ]";
       }
 
       if (input == 1) {
-        this.computerNum.length = 0;
-        this.threeStrike = false;
-        this.newGame();
+        this.replay();
       }
       if (input == 2) {
-        MissionUtils.Console.close();
+        appExit();
       }
     });
   }
 
   newGame() {
     this.setComputerNum();
-    this.inGame();
+    this.playerTurn();
   }
 
   play() {
