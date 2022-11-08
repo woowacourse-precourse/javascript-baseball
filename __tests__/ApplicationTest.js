@@ -94,4 +94,15 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+  
+  test('feat#4: 결과 출력하기', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['124'];
+    const logSpy = getLogSpy();
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1스트라이크"));
+  });
 });
