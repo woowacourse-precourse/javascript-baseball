@@ -74,9 +74,48 @@ describe("숫자 야구 게임 테스트", () => {
     });
   });
 
-  test("사용자의 입력 형식이 잘못되었을 때 예외가 발생합니다.", () => {
+  test("사용자의 입력 형식(숫자가 3개가 아님)이 잘못되었을 때 예외가 발생합니다.", () => {
     const randoms = [1, 3, 5];
     const answers = ["12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자의 입력 형식(1부터 9사이가 아닌 숫자)이 잘못되었을 때 예외가 발생합니다.", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["120"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자의 입력 형식(중복된 수가 있음)이 잘못되었을 때 예외가 발생합니다.", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("사용자의 입력 형식(숫자가 아닌 문자가 있음)이 잘못되었을 때 예외가 발생합니다.", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1ㄱ2"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
