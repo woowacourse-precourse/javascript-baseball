@@ -166,12 +166,11 @@ class App {
 
   getNumberOfBall(answer, inputNumber, numberOfStrike) {
     let answerDictinary = {};
-    let numberOfBall = 0;
-
     for (const value of answer) {
       answerDictinary[value] = true;
     }
 
+    let numberOfBall = 0;
     for (const value of inputNumber) {
       if (answerDictinary[value]) {
         numberOfBall += 1;
