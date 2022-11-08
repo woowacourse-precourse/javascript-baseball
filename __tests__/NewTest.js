@@ -60,4 +60,40 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+  test("0이 포함되었을때", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["102"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("숫자가 중복되었을때", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["116"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("게임재시작시 입력값이 1,2이 아닐때", () => {
+    const randoms = [1, 2];
+    const answers = ["3"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.selectGamePlay();
+    }).toThrow();
+  });
 });
