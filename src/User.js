@@ -1,22 +1,20 @@
-const GAME_NUMBER_LENGTH = 3;
+const { GAME_LENGTH, ERROR } = require("./constants/constants");
 
 class User {
   checkScope = (input) => {
-    if (input.includes(0)) throw "0이 아닌 1~9 사이 숫자를 입력해주세요.";
+    if (input.includes(0)) throw ERROR.NOT_ZERO;
   };
 
   checkType = (input) => {
-    if (isNaN(input)) throw "숫자를 입력해주세요.";
+    if (isNaN(input)) throw ERROR.NOT_NUMBER;
   };
 
   checkLength = (input) => {
-    if (input.length !== GAME_NUMBER_LENGTH)
-      throw `${GAME_NUMBER_LENGTH}개의 숫자를 입력해주세요.`;
+    if (input.length !== GAME_LENGTH) throw ERROR.LENGTH;
   };
 
   checkDuplicatedInput = (input) => {
-    if (input.length !== new Set(input).size)
-      throw "서로 다른 숫자를 입력해주세요.";
+    if (input.length !== new Set(input).size) throw ERROR.DUPLICATED;
   };
 
   isValidUser = (input) => {
@@ -30,8 +28,8 @@ class User {
 
   isRestartNumber = (restartInput) => {
     if (Number(restartInput) < 1 || Number(restartInput) > 2)
-      throw "1 또는 2를 입력해주세요.";
-    if (isNaN(restartInput)) throw "숫자를 입력해주세요.";
+      throw ERROR.RESTART;
+    if (isNaN(restartInput)) throw ERROR.NOT_NUMBER;
     return true;
   };
 }
