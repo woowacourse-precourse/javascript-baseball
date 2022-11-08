@@ -21,26 +21,20 @@ class App {
       }
     });
 
-    let strike;
-    let ball;
+    var strike;
+    var ball;
     var inputArray = answer.split('');
 
-    while(number[i] !== answer) {
+    for( var i = 0; i < 3; i++ ) {
       strike = 0;
       ball = 0;
-      for( var j = 0; j <number.length; j++) {
-        for(var k = 0; k < number.length; k++) {
-          if(number[j] == inputArray[k]){
-            if(j === k) {
-              strike++;
-            }else {
-              ball++;
-            }
-            break;
-          }
-        }
+      if(inputArray[i] === answer[i]) {
+        strike++;
+      } else if (answer.includes(inputArray[i])){
+        ball++;
       }
     }
+
     // 게임 결과 출력 message
     if(strike == 3) {
       MissionUtils.Console.print("3개의 스트라이크\n 3개의 숫자를 모두 맞히셨습니다! 게임 종료");
