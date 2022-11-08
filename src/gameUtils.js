@@ -41,7 +41,7 @@ class System {
 }
 
 class Validator {
-  static isInvaildAnswer(value) {
+  static isInvalidAnswer(value) {
     if(Validator.#isNotThreeLength(value)) return constants.ERROR_MESSAGE.notThreeLength;
     if(Validator.#isOutOfRange(value)) return constants.ERROR_MESSAGE.notNumberRange;
     if(Validator.#isDuplicated(value)) return constants.ERROR_MESSAGE.isDuplicated;
@@ -64,7 +64,7 @@ class Validator {
     return (removeDuplicatedValue.length !== 3);
   }
 
-  static isInvaildRestartSubmit(value) {
+  static isInvalidRestartSubmit(value) {
     const possibleValue = [1, 2];
     if(!possibleValue.includes(value)) return constants.ERROR_MESSAGE.isInvalidRestartSubmit;
     return false;
