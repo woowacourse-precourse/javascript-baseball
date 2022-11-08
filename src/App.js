@@ -65,7 +65,7 @@ class App {
 }
 
 function checkWrong(result) {
-  return result !== Message.strike_3;
+  return result !== Message.threeStrike;
 }
 
 const app = new App();

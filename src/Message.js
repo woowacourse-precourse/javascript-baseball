@@ -10,7 +10,7 @@ const Message = {
   ball: "볼",
   nothing: "낫싱",
 
-  strike_3: "3스트라이크",
+  threeStrike: "3스트라이크",
 
   restartNum: "1",
   gameoverNum: "2",
