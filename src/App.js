@@ -28,7 +28,7 @@ const getNumber = (randombaseball) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
     checkNumberError(number);
     let result = computeBallStrike(randombaseball, number);
-    computeResult(result);
+    MissionUtils.Console.print(computeResult(result));
   });
 };
 
