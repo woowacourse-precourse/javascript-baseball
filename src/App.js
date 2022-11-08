@@ -24,6 +24,12 @@ function convertToNumberArray(userInput) {
   return userInput.split("").map((singleInput) => Number(singleInput));
 }
 
+function isNothing(gameNumber, guessNumber) {
+  if (guessNumber.filter((digit) => gameNumber.includes(digit)).length == 0)
+    return true;
+  return false;
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -44,4 +50,5 @@ module.exports = {
   App,
   throwGuessException,
   convertToNumberArray,
+  isNothing,
 };
