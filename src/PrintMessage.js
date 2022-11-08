@@ -24,6 +24,9 @@ function printBallAndStrike(ball, strike){
     else if(ball === 0 && strike === 0){
         printNothing(NOTHINGCORRECT);
     }
+    else{
+        throw new Error("잘못된 볼과 스트라이크 값입니다.")
+    }
 }
 
 function printBoth(NUM_OF_BALL, NUM_OF_STRIKE) {
