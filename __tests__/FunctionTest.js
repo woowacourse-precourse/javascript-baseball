@@ -31,31 +31,32 @@ describe("숫자 야구 게임 시작 문구", () => {
 
 describe("목표값 테스트", () => {
   test("목표값 개수", () => {
-    const refNumbers = app.refNumbersArrayGetter();
+    const refNumbers = app.refNumbersGetter();
     expect(refNumbers.length).toEqual(3);
   });
 
   test("목표값 내 중복 확인", () => {
-    const refNumbersArray = app.refNumbersArrayGetter();
+    const refNumbers = app.refNumbersGetter();
 
     let duplicateChecker;
-    refNumbersArray.map((number, index) => {
+
+    for (let i = 0; i < 3; i++) {
       duplicateChecker =
-        refNumbersArray.indexOf(number) === index ? "clear" : "duplicate";
-    });
+        refNumbers.indexOf(refNumbers[i]) === i ? "clear" : "duplicate";
+    }
+
     expect(duplicateChecker).toEqual("clear");
   });
 
   test("목표값 숫자 범위 1~9 확인", () => {
-    const refNumbersArray = app.refNumbersArrayGetter();
+    const refNumbers = app.refNumbersGetter();
 
-    let rangeChecker;
-    refNumbersArray.map((number, index) => {
+    let duplicateChecker;
+
+    for (let i = 0; i < 3; i++) {
       rangeChecker =
-        Number.isInteger(number) && number < 10 && number > 0
-          ? "clear"
-          : "rangeOver";
-    });
+        refNumbers[i] < 10 && refNumbers[i] > 0 ? "clear" : "rangeOver";
+    }
     expect(rangeChecker).toEqual("clear");
   });
 });
