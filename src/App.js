@@ -82,11 +82,19 @@ class App {
       if (input === '1') {
         answer = App.pickThreeDigits();
         MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+        return;
       }
+
+      MissionUtils.Console.close();
     };
 
     MissionUtils.Console.print(GREETING_MESSAGE);
-    MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+    try {
+      MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+    } catch (e) {
+      MissionUtils.Console.close();
+      throw e;
+    }
   }
 }
 
