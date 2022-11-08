@@ -7,7 +7,7 @@ describe("(추가)숫자 야구 게임", () => {
     const result = app.selectNum();
 
     expect(result).toBeGreaterThanOrEqual(123);
-    expect(result).toBeLessThan(987);
+    expect(result).toBeLessThanOrEqual(987);
   });
 
   test("입력값 검증하기", () => {
