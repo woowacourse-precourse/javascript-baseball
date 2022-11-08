@@ -72,5 +72,15 @@ class App {
     }
     throw new Error(errorMessage);
   }
+
+  checkStrike(answer, inputNumber) {
+    let strikeCount = 0;
+    for (var i = 0; i < 3; i++) {
+      if (Number(inputNumber.charAt(i)) === answer[i]) {
+        strikeCount += 1;
+      }
+    }
+    return strikeCount;
+  }
 }
 module.exports = App;
