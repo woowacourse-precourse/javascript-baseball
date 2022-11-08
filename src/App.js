@@ -29,6 +29,32 @@ function playGame(computer) {
   });
 };
 
+function judgeInputNumber(inputNumber) {
+  const numbers = inputNumber.split('').map(item => +item);
+
+  if(/\D/g.test(+inputNumber)) {
+    throw new Error('잘못된 값입니다.');
+  }
+
+  if(3 > numbers.length || 3 < numbers.length) {
+    throw new Error('잘못된 값입니다.');
+  } 
+
+  const set = new Set(numbers);
+  const numberArr = [...set];
+  if(numberArr.length < 3) {
+    throw new Error('잘못된 값입니다.');
+  }
+
+  for(let i = 0; i < numbers.length; i++) {
+    if(numbers[i] < 1) {
+      throw new Error('잘못된 값입니다.');
+    }
+  }
+
+  return;
+}
+
 
 function askGamePlay() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.' + '\n', (answer) => {
@@ -92,27 +118,3 @@ function returnResult(result) {
   } 
 }
 
-function judgeInputNumber(inputNumber) {
-  const numbers = inputNumber.split('').map(item => +item);
-  if(3 < numbers.length) {
-    throw new Error('잘못된 값입니다.');
-  } 
-
-  const set = new Set(numbers);
-  const numberArr = [...set];
-  if(numberArr.length < 3) {
-    throw new Error('잘못된 값입니다.');
-  }
-
-  for(let i = 0; i < numbers.length; i++) {
-    if(numbers[i] < 1 || numbers[i] > 9) {
-      throw new Error('잘못된 값입니다.');
-    }
-  
-    if(/\D/g.test(numbers[i])) {
-      throw new Error('잘못된 값입니다.');
-    }
-  }
-
-  return inputNumber;
-}
