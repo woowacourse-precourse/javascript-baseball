@@ -10,15 +10,20 @@ class App {
     }
     return verification;
   }
+  is_Natural(n){  
+    n = n.toString();
+    var n1 = Math.abs(n);
+    var n2 = parseInt(n, 10);
+    return !isNaN(n1) && n2 === n1 && n1.toString() === n;
+  }
+
   checkallArefitNumber(answer){
     var value = false; 
     for (var i;i<answer.length;i++){
       if (isNaN(parseInt(answer[i]))){
         value = true;
       }
-      if(isNaN(answer)){
-        value = ture;
-      }
+  
       if ((parseInt(answer[i])) ==0 ){
         value = true;
       }
@@ -111,6 +116,7 @@ class App {
       if (answer.length != 3) throw 'length error';
       //중복되는 수 없는지 확인
       if (this.checkoverlap(answer)) throw 'overlap';
+      if (this.is_Natural(answer) == false) throw 'not a natural number';
 
       //계산하기
       var values = this.calculate(Numbers, answer);
