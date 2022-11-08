@@ -40,18 +40,18 @@ class Game {
 
   printResult(result) {
     const { strikeCnt, ballCnt } = result;
-    let message = '';
+    let resultMessage = '';
     if (strikeCnt === 0 && ballCnt === 0) {
       Console.print('낫싱');
       return;
     }
     if (ballCnt) {
-      message += `${ballCnt}볼 `;
+      resultMessage += `${ballCnt}볼 `;
     }
     if (strikeCnt) {
-      message += `${strikeCnt}스트라이크`;
+      resultMessage += `${strikeCnt}스트라이크`;
     }
-    Console.print(message);
+    Console.print(resultMessage);
   }
 
   progress(answer) {
