@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { createComputerNumber } = require("./logic/ComputerNumber");
+const { validateUserNumber } = require("./logic/UserNumber");
 const {
   START_NUMBER,
   END_NUMBER,
@@ -13,7 +14,6 @@ const {
 const {
   getUserNumber,
   setUserInput,
-  validateUserNumber,
   countStrikeAndBall,
   isUserWin,
   printGameResultMessage,
