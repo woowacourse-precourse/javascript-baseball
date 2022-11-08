@@ -34,19 +34,47 @@ MissionUtils.Console.readLine("사용수가 값을 입력할 때 도움이 되�
 ```
 
 ### &nbsp;&nbsp;2.기능리스트
-
+---
 <!-- prettier-ignore -->
-> 숫자를 입력해주세요;
-&downarrow;<span style="font-size : .7rem">3자리의 수를 입력 받는다.</span>
-> 값을 입력 받는다.<span style="color : red"> &rightarrow;입력 값의 길이가 3자리 이상이면 throw로 예외로 처리한다.</span>
-> &downarrow;
-> 값에 대한 결과를 파악한다.<span style="color : blue"> &rightarrow; 게임 시작시 정한 컴퓨터의 값을 기준으로 한다.</span>
-> &downarrow;<span style="font-size : .7rem">스트라이크와 볼의 개수를 파악한다.</span>
-> 3스트라이크 인지
-> 아닌 지를 판단한다.<span style="color : blue"> &rightarrow; 3스트라이크가 아닌 경우 다시 값을 입력 받는다.</span>
-> &downarrow; <span style="font-size : .7rem">3스트라이크 일 경우</span>
-> 게임을 다시 시작할
-> 것인지 아닌지를 판단한다. <span style="color : red"> &rightarrow;입력 값의 1과 2 이외의 값이면 throw로 예외로 처리한다.</span>
-> &downarrow;
-> 2의 값이 주어지면 콘솔을
-> 종료하며 게임을 끝낸다.
+숫자를 입력해주세요    
+
+
+　　　　　&downarrow;3자리의 수를 입력 받는다.  
+     
+     
+값을 입력 받는다.   &rightarrow;입력 값의 길이가 3자리 이상이면 throw로 예외로 처리한다.  
+
+
+　　　　　&downarrow;  
+     
+     
+값에 대한 결과를 파악한다. &rightarrow; 게임 시작시 정한 컴퓨터의 값을 기준으로 한다.  
+
+
+　　　　　&downarrow;  
+     
+     
+스트라이크와 볼의 개수를 파악한다.  
+
+
+　　　　　&downarrow;  
+     
+     
+3스트라이크 인지
+아닌 지를 판단한다. &rightarrow; 3스트라이크가 아닌 경우 다시 값을 입력 받는다.  
+
+
+　　　　　&downarrow;  <span style="font-size : .7rem">3스트라이크 일 경우</span>  
+     
+     
+게임을 다시 시작할
+것인지 아닌지를 판단한다. <span style="color : red"> &rightarrow;입력 값의 1과 2 이외의 값이면 throw로 예외로 처리한다.</span>  
+
+
+　　　　　&downarrow;  
+     
+     
+2의 값이 주어지면 콘솔을
+종료하며 게임을 끝낸다.
+
+---
