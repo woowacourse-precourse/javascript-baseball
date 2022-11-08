@@ -2,11 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const constants = require("./data/constants.js");
 
 function start() {
-  MissionUtils.Console.print(constants.MESSAGE.START);
+  MissionUtils.Console.print(constants.GAME_MESSAGE.START);
 }
 
 function gameover() {
-  MissionUtils.Console.print(constants.MESSAGE.GAMEOVER);
+  MissionUtils.Console.print(constants.GAME_MESSAGE.GAMEOVER);
 }
 
 function result(resultValue) {
