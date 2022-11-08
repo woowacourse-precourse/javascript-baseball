@@ -11,6 +11,9 @@ class App {
   }
   play() {
     Console.print("숫자 야구 게임을 시작합니다.");
+    this.replay();
+  }
+  replay() {
     // 기능 1번 구현
     this.computer_random_number = Random.pickUniqueNumbersInRange(1, 9, 3);
     // 기능 2번 구현
@@ -50,6 +53,7 @@ class App {
       this.strike = 3;
       Console.print(`${this.strike}스트라이크`);
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return this.endUserResponse();
     }
     user_number.forEach((element, index) => {
       if (this.computer_random_number[index] == element) {
@@ -68,6 +72,15 @@ class App {
       Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
     }
     this.user_input();
+  }
+  endUserResponse() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (user_response) => {
+        if (user_response == "1") return this.replay();
+        else if (user_response == "2") return Console.close();
+      }
+    );
   }
 }
 
