@@ -59,12 +59,14 @@ class App {
   }
 
   countResultPrint({ ball, strike }) {
-    if (ball == 0 && strike == 0) return RESULT.NOTHING;
-
+    if (ball == 0 && strike == 0)
+      return RESULT.NOTHING;
     if (ball > 0 && strike > 0)
       return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
-    if (ball > 0 && strike == 0) return `${ball}${RESULT.BALL}`;
-    if (ball == 0 && strike > 0) return `${strike}${RESULT.STRIKE}`;
+    if (ball > 0 && strike == 0)
+      return `${ball}${RESULT.BALL}`;
+    if (ball == 0 && strike > 0)
+      return `${strike}${RESULT.STRIKE}`;
   }
 
   gameStart() {
