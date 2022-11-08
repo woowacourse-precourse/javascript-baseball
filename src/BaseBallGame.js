@@ -27,6 +27,11 @@ class BaseBallGame {
     this.#inputNumber();
   }
 
+  isValidGameInput(plyaerInput) {
+    const validator = new Validator();
+    return validator.isGameNumberInput(plyaerInput);
+  }
+
   getNewComputerNumber() {
     const newComputerNumber = new Computer(new RandomNumber());
     this.computer = newComputerNumber.numbers;
