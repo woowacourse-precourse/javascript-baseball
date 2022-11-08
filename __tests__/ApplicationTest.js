@@ -47,8 +47,33 @@ describe("숫자 야구 게임 테스트", () => {
     });
   });
 
-  test("예외 테스트", () => {
-    const randoms = [1, 3, 5];
+  test("게임 결과 출력", () => {
+    const randoms = [[1, 3, 5], [5, 8, 9]];
+    const answers = ["246", "214", "213", "513", "154", "153", "124", "134", "135"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "낫싱",
+      "1볼",
+      "2볼",
+      "3볼",
+      "1볼 1스트라이크",
+      "2볼 1스트라이크",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+});
+
 describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", () => {
   test("2-1 숫자만 받기", () => {
     const randoms = [[1, 3, 5]];
@@ -89,6 +114,7 @@ describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", 
     }).toThrow();
   });
 })
+
 describe("6 게임 성공시 사용자 커맨드 받기 예외 처리 테스트", () => {
   test("잘못된 입력값", () => {
     const randoms = [[1, 3, 5], [5, 8, 9]];
