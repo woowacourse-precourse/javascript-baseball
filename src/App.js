@@ -22,19 +22,14 @@ class App {
 
   startGame() {
     MissionUtils.Console.readline('숫자를 입력해주세요 : ', (inputNumber) => {
-      this.getHint(inputNumber);
+      this.throwError(inputNumber);
       MissionUtils.Console.print(this.hint);
       this.checkAnswer();
     })
   }
 
   throwError(inputNumber) {
-    if (!this.isValidInput(inputNumber)) {
-      throw new Error('숫자가 아닙니다.');
-    }
-    else if (inputNumber > 999 || inputNumber < 0) {
-      throw new Error('3개의 숫자가 아닙니다.')
-    }
+    if (!this.checkInput(inputNumber)) throw new Error('잘못된 입력입니다.');
     this.hint = this.getHint(this.answer, inputNumber);
   }
 }
