@@ -3,8 +3,8 @@ const checkStrike = (computer, user) => {
 
   Array.from(user, Number).map((currentValue, index) => {
     if (
-      computer.includes(currentValue) &&
-      computer.indexOf(currentValue) === index
+      computer.includes(currentValue)
+      && computer.indexOf(currentValue) === index
     ) {
       countStrike += 1;
     }

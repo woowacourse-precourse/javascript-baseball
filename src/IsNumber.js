@@ -1,7 +1,9 @@
 const isNumber = number => {
   const regex = /^[0-9]+$/;
   let set = new Set(String(number));
+
   set = [...set];
+
   if (set.length < 3) {
     throw new Error('중복되지 않는 3자리의 숫자를 입력해주세요.');
   }

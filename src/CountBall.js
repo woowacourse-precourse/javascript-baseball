@@ -3,8 +3,8 @@ const checkBall = (computer, userInput) => {
 
   Array.from(userInput, Number).map((currentValue, index) => {
     if (
-      computer.includes(currentValue) &&
-      computer.indexOf(currentValue) !== index
+      computer.includes(currentValue)
+      && computer.indexOf(currentValue) !== index
     ) {
       countBall += 1;
     }

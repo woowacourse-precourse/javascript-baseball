@@ -74,9 +74,11 @@ class App {
           case '1':
             this.play();
             break;
+
           case '2':
             MissionUtils.Console.close();
             break;
+            
           default:
             throw new Error('1 또는 2만 입력 해주세요.');
         }
