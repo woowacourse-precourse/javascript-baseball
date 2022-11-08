@@ -1,14 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { LENGTH, RANGE } = require("./Constant.js");
 
 class Computer {
   makeRandomNum() {
-    this.number = MissionUtils.Random.pickUniqueNumbersInRange(
-      RANGE.MIN,
-      RANGE.MAX,
-      LENGTH
-    );
-    return this.number.join("");
+    const computerRandomNum = [];
+    while (computerRandomNum.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerRandomNum.includes(number)) {
+        computerRandomNum.push(number);
+      }
+    }
+    return computerRandomNum.join("");
   }
 }
 
