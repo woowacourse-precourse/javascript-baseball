@@ -13,6 +13,8 @@ const RESULT = Object.freeze({
   NOTHING: "낫싱"
 });
 
+const THREE_STRIKE = 3;
+
 class Game {
   constructor(){
     this.utilsIo = MISSIONUTILS_IO.Console;
@@ -39,7 +41,7 @@ class Game {
   inputGame(text, callback){
     this.inputUserNumber(text, callback);
   }
-  
+
   startGame(){
     this.makeComputerNumer();
     this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
@@ -47,11 +49,15 @@ class Game {
 
   onGame(input){
     this.userNumberArray = input.split("").map(Number);
+    this.validation.isValidationUserBallInput(this.userNumberArray);
 
     const ball = this.countBall();
     const strike = this.countStrike();
     this.utilsIo.print(this.showResult(ball, strike));
+
+    if(this.isThreeStrike(strike)) { }
   }
+
 
   countBall(){
     let ball = 0;
@@ -73,11 +79,16 @@ class Game {
     })
     return strike;
   }
+
   showResult(ball, strike){
     if(ball == 0 && strike == 0) return RESULT.NOTHING;
     if(ball > 0 && strike == 0) return `${ball}${RESULT.BALL}`;
     if(ball == 0 && strike > 0) return `${strike}${RESULT.STRIKE}`;
     if(ball > 0 && strike > 0) return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
+  }
+
+  isThreeStrike(strike){
+    return strike === THREE_STRIKE;
   }
 }
 
