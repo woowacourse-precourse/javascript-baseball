@@ -17,6 +17,18 @@ class App {
     return computer;
   }
 
+  inputNumber() {
+    Console.readLine("숫자를 입력해주세요: ", (playerInput) => {
+      const isValid = this.validateInput(playerInput);
+      if (isValid) {
+        playerInput = [...playerInput].map((input) => Number(input));
+        return this.printResult(playerInput);
+      }
+      Console.close();
+      throw new Error("사용자가 잘못된 값을 입력하였습니다.");
+    });
+  }
+
   validateInput(playerInput) {
     const INPUT_REGEX = /^[1-9]{3}$/;
     if (!INPUT_REGEX.test(playerInput)) {
