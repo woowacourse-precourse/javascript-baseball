@@ -68,15 +68,35 @@ class App {
     ).length;
   }
 
+  getResultString() {
+    let resultString = '';
+    if (this.resultObject.ball !== 0) {
+      resultString += `${this.resultObject.ball}볼`;
+    }
+    if (this.resultObject.strike !== 0) {
+      resultString += `${this.resultObject.strike}스트라이크`;
+    }
+    if (this.resultObject.ball === 0 && this.resultObject.strike === 0) {
+      resultString = '낫싱';
+    }
+    return resultString;
+  }
+
   play() {
-    MissionUtils.Console.print(this.computerNumberArray);
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      // console.log(`입력받은 숫자 : ${input}`);
+      console.log(`입력받은 숫자 : ${input}`);
       this.userNumberInput = input;
       // this.resultObject.ball += 1;
       // console.log(`ball ${this.resultObject.ball}`);
       this.checkInvalidInput();
     });
+    console.log(`컴퓨터 숫자 : ${this.computerNumberArray.join('')}`);
+    this.resultObject.strike = this.countStrike();
+    this.resultObject.ball = this.countBall();
+    console.log(`ball ${this.resultObject.ball}`);
+    console.log(`strike ${this.resultObject.strike}`);
+    MissionUtils.Console.print(this.getResultString());
   }
 }
 
