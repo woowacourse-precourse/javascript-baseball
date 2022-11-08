@@ -189,4 +189,14 @@ describe("숫자 야구 게임", () => {
     expect(userNumArr).toHaveLength(3);
     expect(userNumArr).toContain(1, 2, 3);
   });
+
+  test("추가테스트5-1: compareUserGuessToCompNum", () => {
+    const logSpy = getLogSpy();
+    const userNumArr = [1, 2, 3];
+    const compNumArr = [1, 2, 3];
+    compareUserGuessToCompNum(userNumArr, compNumArr);
+    expect(logSpy).toHaveBeenCalledWith(
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+  });
 });
