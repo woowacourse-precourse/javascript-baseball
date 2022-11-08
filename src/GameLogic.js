@@ -21,6 +21,7 @@ class GameLogic {
 
   result(ballStrike) {
     if (ballStrike[1] === 3) {
+      MissionUtils.Console.print(3 + INGAME_MESSAGE.STRIKE);
       MissionUtils.Console.print(INGAME_MESSAGE.END);
       return true;
     } else if (ballStrike[0] === 0 && ballStrike[1] === 0) {

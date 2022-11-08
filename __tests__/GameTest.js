@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const App = require("../src/App");
-const { ERROR_CHECK, INGAME_MESSAGE } = require("../src/Constant");
+const { ERROR_MESSAGE, INGAME_MESSAGE } = require("../src/Constant");
 const Validation = require("../src/Validation");
 
 const getLogSpy = () => {
@@ -55,7 +55,7 @@ describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크1 : 자릿수", () => {
     const validation = new Validation();
     expect(() => validation.checkLength([1, 2, 3, 4])).toThrow(
-      INGAME_MESSAGE.ERROR,
+      ERROR_MESSAGE.INPUT,
       "입력값은 3자리여야 합니다."
     );
   });
@@ -63,15 +63,15 @@ describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크2 : 숫자", () => {
     const validation = new Validation();
     expect(() => validation.checkNumber([1, 2, "a"])).toThrow(
-      INGAME_MESSAGE.ERROR,
+      ERROR_MESSAGE.INPUT,
       "입력값은 1~9사이의 '숫자'여야 합니다."
     );
   });
 
   test("플레이어 숫자 입력 체크3 : 숫자 (0제외)", () => {
     const validation = new Validation();
-    expect(() => validation.checkNumber([1, 2, 0])).toThrow(
-      INGAME_MESSAGE.ERROR,
+    expect(() => validation.checkNumber([0, 2, 1])).toThrow(
+      ERROR_MESSAGE.INPUT_ZERO,
       "입력값에 0이 포함될 수 없습니다."
     );
   });
@@ -79,7 +79,7 @@ describe("플레이어 입력 테스트", () => {
   test("플레이어 숫자 입력 체크4", () => {
     const validation = new Validation();
     expect(() => validation.checkRepeat([1, 2, 2])).toThrow(
-      INGAME_MESSAGE.ERROR,
+      ERROR_MESSAGE.INPUT,
       "입력값은 중복되지 않은 숫자로 이루어져야 합니다."
     );
   });
