@@ -2,13 +2,13 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
 
-  checkRange(input) {
+  checkRangeOver(input) {
     input.map((num)=> {
       if(num > 9 || num<1) {
-        return false;  
+        return true;  
       }
     })
-    return true;
+    return false;
   }
   checkDupulicate(input) {
     const set = new Set(input);
@@ -23,7 +23,7 @@ class App {
     if(input.some((num)=> isNaN(num))) {
       throw new("숫자만 입력 가능합니다.");
     }
-    if(checkRange(input)) {
+    if(checkRangeOver(input)) {
       throw new("1~9사이의 숫자를 입력해주세요.")
     }
     if(checkDupulicate(input)) {
@@ -31,6 +31,8 @@ class App {
     }
     return true;
   }
+
+
   
   play() {
     const computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
