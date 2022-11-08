@@ -1,6 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console } = MissionUtils;
 class App {
+  play() {}
+  constructor() {
+    this.START_NUMBER = 1;
+    this.END_NUMBER = 9;
+    this.DIGITS = 3;
+  }
+
   play() {
     this.printStartMessage();
     let playStatus = true;
@@ -28,8 +35,8 @@ class App {
 
   getAnswerNumber() {
     const answer = [];
-    while (answer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (answer.length < this.DIGITS) {
+      const number = MissionUtils.Random.pickNumberInRange(this.START_NUMBER, this.END_NUMBER);
       if (!answer.includes(number)) {
         answer.push(number);
       }
@@ -56,8 +63,8 @@ class App {
     }
   }
 
-  is3Digit(inputNumber) {
-    if (inputNumber.length === 3) {
+  isDigit(inputNumber) {
+    if (inputNumber.length === this.DIGITS) {
       return true;
     } else {
       return false;
@@ -74,15 +81,15 @@ class App {
   handleInputException(inputNumber) {
     const NOT_A_NUMBER_EXCEPTION_MESSAGE = '입력값이 숫자가 아닙니다.';
     const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
-    const NOT_3_DIGIT_EXCEPTION_MESSAGE = '압력값이 3자리 숫자가 아닙니다.';
+    const NOT_DIGIT_EXCEPTION_MESSAGE = `압력값이 ${this.DIGITS}자리 숫자가 아닙니다.`;
     const SAME_NUMBER_EXCEPTION_MESSAGE = '입력값에 중복된 숫자가 존재합니다.';
     let errorMessage = null;
     if (isNaN(inputNumber)) {
       errorMessage = NOT_A_NUMBER_EXCEPTION_MESSAGE;
     } else if (!this.isInteger(inputNumber)) {
       errorMessage = NOT_INTEGER_EXCEPTION_MESSAGE;
-    } else if (!this.is3Digit(inputNumber)) {
-      errorMessage = NOT_3_DIGIT_EXCEPTION_MESSAGE;
+    } else if (!this.isDigit(inputNumber)) {
+      errorMessage = NOT_DIGIT_EXCEPTION_MESSAGE;
     } else if (this.hasSameNumber(inputNumber)) {
       errorMessage = SAME_NUMBER_EXCEPTION_MESSAGE;
     }
@@ -94,7 +101,7 @@ class App {
 
   checkStrike(answer, inputNumber) {
     let strikeCount = 0;
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < this.DIGITS; i++) {
       if (Number(inputNumber.charAt(i)) === answer[i]) {
         strikeCount += 1;
       }
@@ -104,7 +111,7 @@ class App {
 
   checkBall(answer, inputNumber, strikeCount) {
     let ballCount = 0;
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < this.DIGITS; i++) {
       if (answer.includes(Number(inputNumber.charAt(i)))) {
         ballCount += 1;
       }
@@ -114,7 +121,7 @@ class App {
   }
 
   printCheckResult(strikeCount, ballCount) {
-    const HIT_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    const HIT_MESSAGE = `${this.DIGITS}개의 숫자를 모두 맞히셨습니다! 게임 종료`;
     if (ballCount && strikeCount) {
       Console.print(ballCount + '볼 ' + strikeCount + '스트라이크');
       return true;
@@ -123,7 +130,7 @@ class App {
       return true;
     } else if (strikeCount) {
       Console.print(strikeCount + '스트라이크');
-      if (strikeCount === 3) {
+      if (strikeCount === this.DIGITS) {
         Console.print(HIT_MESSAGE);
         return false;
       }
@@ -134,14 +141,16 @@ class App {
   }
 
   restartGame() {
-    const RESTART_MESSAGE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
+    const CONTINUE = '1';
+    const EXIT = '2';
+    const RESTART_MESSAGE = `게임을 새로 시작하려면 ${CONTINUE}, 종료하려면 ${EXIT}를 입력하세요.`;
     let userChoice = null;
     Console.readLine(RESTART_MESSAGE, choice => {
       this.handleRestartInputException(choice);
       userChoice = choice;
       Console.close();
     });
-    if (userChoice === '1') {
+    if (userChoice === CONTINUE) {
       return true;
     } else {
       return false;
@@ -149,6 +158,8 @@ class App {
   }
 
   handleRestartInputException(choice) {
+    const CONTINUE = '1';
+    const EXIT = '2';
     const NOT_NUMBER_EXCEPTION_MESSAGE = '숫자가 아닙니다.';
     const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
     const NOT_NUMBER_IN_RANGE_EXCEPTION_MESSAGE = '입력값이 1 또는 2가 아닙니다.';
@@ -157,7 +168,7 @@ class App {
       errorMessage = NOT_NUMBER_EXCEPTION_MESSAGE;
     } else if (!this.isInteger(choice)) {
       errorMessage = NOT_INTEGER_EXCEPTION_MESSAGE;
-    } else if (choice != '1' && choice != '2') {
+    } else if (choice != CONTINUE && choice != EXIT) {
       errorMessage = NOT_NUMBER_IN_RANGE_EXCEPTION_MESSAGE;
     }
 
