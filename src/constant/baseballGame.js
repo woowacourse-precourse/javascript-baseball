@@ -20,7 +20,7 @@ const GAME = {
 const ERROR = {
     OPTION: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
     NUMBER: '숫자를 입력하세요.',
-    LENGTH: '3자리 수를 입력하세요.',
+    LENGTH: '세 자릿수를 입력하세요.',
     OVERLAP: '중복되지 않은 수를 입력하세요.'
 }
 
