@@ -1,8 +1,13 @@
 const { NUMBER } = require("./Game");
-const Game = require("./Game");
 
 class User {
   validateInput(userInput) {
+    console.log(
+      this.checkType(userInput),
+      this.checkUnique(userInput),
+      this.checkLength(userInput),
+      this.checkRange(userInput)
+    );
     return (
       this.checkType(userInput) &&
       this.checkUnique(userInput) &&
@@ -12,24 +17,33 @@ class User {
   }
 
   checkType(userInput) {
+    let flag = true;
     userInput.forEach((number) => {
-      if (isNaN(number)) return false;
+      if (isNaN(number)) flag = false;
     });
+    if (flag === false) return false;
+    return true;
   }
 
   checkUnique(userInput) {
-    const unique = new Set(userInput);
-    if (userInput.length !== unique.length) return false;
+    const uniqueSet = new Set(userInput);
+    if (userInput.length !== uniqueSet.size) return false;
+    return true;
   }
 
   checkLength(userInput) {
-    if (userInput.length !== Game.NUMBER.LENGTH) return false;
+    if (userInput.length !== NUMBER.LENGTH) return false;
+    return true;
   }
 
   checkRange(userInput) {
+    let flag = true;
     userInput.forEach((number) => {
-      if (!number > 0) return false;
+      if (number <= 0) flag = false;
     });
+
+    if (flag === false) return false;
+    return true;
   }
 
   makeUserNumber(userInput) {
