@@ -101,14 +101,14 @@ class App {
   }
 
   getHint(ball, strike) {
-    let hintMessage = "";
-    if (ball === 0 && strike === 0) hintMessage += "낫싱";
-    else if (ball > 0 && strike > 0) hintMessage += `${ball}볼 ${strike}스트라이크`;
-    else if (strike === 0) hintMessage += `${ball}볼`;
-    else hintMessage += `${strike}스트라이크`;
-
-    return hintMessage;
+    if (!ball && !strike) return "낫싱";
+    else if (ball && strike) return `${ball}볼 ${strike}스트라이크`;
+    else if (!strike) return `${ball}볼`;
+    else return `${strike}스트라이크`;
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
