@@ -23,12 +23,20 @@ class App {
   userInputRandomNum(){
     MissionUtils.console.readLine('숫자를 입력 해주세요.', (answer) => {
     this.checkError(answer)
-    this.checkAnswer()
+    this.returnAnswer(userAnswer)
    })
   }
-  
-}
 
+  checkError(answer){
+    const answerCheck = answer.toString().split('').map(Number)
+    if(answerCheck.length !== 3) throw '숫자의 길이는 3자리 이하이여야 합니다.'
+    if(answerCheck !== /^[1-9]+$/) throw '1~9 사이의 값 중에서 고르세요.'
+    if(isNaN(answerCheck)) throw '숫자가 아닙니다.'
+    duplicatedNum = answerCheck.map((el,i) => {
+      if(el[i] === el[i+1]) throw '숫자가 중복 됐습니다.'
+    })
+  }
+}
 module.exports = App;
 
 
