@@ -1,12 +1,14 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const { NOTICE, HINT, OPTION } = require("./message");
 const Computer = require("./Computer");
+const User = require("./User");
 
 class App {
     constructor() {
         this.computer = new Computer();
-        this.user = [];
+        this.user = new User();
     }
+
     play() {
         Console.print(NOTICE.START);
         this.gameStart();
@@ -14,42 +16,19 @@ class App {
 
     gameStart() {
         this.computer.setRandomNumber();
-        this.getUserInput();
+        this.judge();
     }
 
-    getUserInput() {
-        const computerNumber = this.computer.number;
-        Console.print(computerNumber);
+    judge() {
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
-            const userNumberArray = userInput.split("");
-            if (this.checkValidInput(userNumberArray)) {
-                this.judgePitch(computerNumber, userNumberArray);
-            }
+            this.user.getUserNumberArray(userInput);
+            this.judgePitch();
         });
     }
 
-    checkValidInput(userInput) {
-        if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput) || this.hasWrongWord(userInput)) {
-            throw new Error(NOTICE.ERROR);
-        }
-        return true;
-    }
-    hasZero(userInput) {
-        return userInput.includes("0");
-    }
-    hasSameNumber(userInput) {
-        const setInput = new Set(userInput);
-        return setInput.size !== userInput.length;
-    }
-    hasRightLength(userInput) {
-        return userInput.length !== OPTION.PITCH_COUNT;
-    }
-    hasWrongWord(userInput) {
-        return !(userInput.join("") > OPTION.MINIMUM_INPUT_RANGE);
-    }
-
-    judgePitch(computerNumber, userNumberArray) {
-        const userGuess = userNumberArray;
+    judgePitch() {
+        const computerNumber = this.computer.number;
+        const userGuess = this.user.guess;
         const strikeCount = this.countStrike(computerNumber, userGuess);
         const ballCount = this.countBall(computerNumber, userGuess);
         this.printResult(strikeCount, ballCount);
@@ -66,7 +45,7 @@ class App {
     printResult(strikeCount, ballCount) {
         if (this.out(strikeCount, ballCount)) {
             Console.print(HINT.OUT);
-            return this.getUserInput();
+            return this.judge();
         }
         if (this.strikeOut(strikeCount)) {
             Console.print(strikeCount + HINT.STRIKE);
@@ -75,15 +54,15 @@ class App {
         }
         if (strikeCount === 0) {
             Console.print(ballCount + HINT.BALL);
-            return this.getUserInput();
+            return this.judge();
         }
         if (strikeCount - ballCount === 0) {
             Console.print(strikeCount + HINT.STRIKE);
-            return this.getUserInput();
+            return this.judge();
         }
         if (ballCount !== 0 && strikeCount !== 0) {
             Console.print(`${ballCount - strikeCount + HINT.BALL} ${strikeCount + HINT.STRIKE}`);
-            return this.getUserInput();
+            return this.judge();
         }
     }
     out(strikeCount, ballCount) {
