@@ -20,6 +20,11 @@ class Game {
   inputUserNumber(text, callback) {
     this.utilsIo.readLine(text, callback.bind(this));
   }
+
+  startGame(){
+    this.makeComputerNumer();
+    this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
+  }
   
   makeComputerNumer(){
     const computer = [];
