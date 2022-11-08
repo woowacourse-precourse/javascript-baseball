@@ -11,8 +11,18 @@ class App {
         return randomNumberArray.join('');
     }
 
+    // 3자리 숫자 입력 받기.
+    getThreeDigitNumber() {
+        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+            console.log(input);
+        });
+    }
+
     play() {
+        MissionUtils.Console.print('숫자야구 게임을 시작합니다.');
+
         const RANDOM_NUMBER = this.generateRandomNumber();
+        this.getThreeDigitNumber();
     }
 }
 
