@@ -34,7 +34,18 @@ class App {
     return parsed;
   }
 
-  getGameResult() {}
+  getGameResult(gameNumbers, userNumbers) {
+    const numOfSameIdxSameNum = getNumOfSameIndexSameNumber(
+      gameNumbers,
+      userNumbers
+    );
+    const numOfSameNum = getNumOfSameNumber(gameNumbers, userNumbers);
+
+    return {
+      strike: numOfSameIdxSameNum,
+      ball: numOfSameNum - numOfSameIdxSameNum,
+    };
+  }
 
   getNumOfSameIndexSameNumber() {}
 
