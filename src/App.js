@@ -13,9 +13,22 @@ class App {
     return computerNumber;
   }
 
+  validUserInput(input) {
+    if (input.length !== 3) {
+      throw new Error("중복되지 않는 1~9까지의 3자리 숫자만 입력해주세요");
+    }
+    if (new Set(input).size !== 3) {
+      throw new Error("중복되지 않는 1~9까지의 3자리 숫자만 입력해주세요");
+    }
+    if (input.includes("0")) {
+      throw new Error("중복되지 않는 1~9까지의 3자리 숫자만 입력해주세요");
+    }
+    return true;
+  }
+
   userInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      MissionUtils.Console.print("");
+      this.validUserInput(input);
     });
   }
   gameStart() {
