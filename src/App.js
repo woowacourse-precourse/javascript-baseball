@@ -33,6 +33,22 @@ class App {
         userNum = answer;
       });
     }
+
+    // 컴퓨터 숫자와 유저 숫자를 비교하는 함수
+    function compareNumber(){
+      strike = 0;
+      ball = 0;
+      nothing = 0;
+      for (let ind = 0; ind < 3; ind++){
+        if (userNum[ind] == computer[ind]){
+          strike += 1;
+        }else if (userNum.includes(computer[ind])){
+          ball += 1;
+        }else {
+          nothing += 1;
+        }
+      }
+    }
   }
 }
 
