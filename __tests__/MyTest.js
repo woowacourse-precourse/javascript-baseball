@@ -1,5 +1,5 @@
 const { isBall, isStrike } = require('../src/Referee');
-const validateUserInput = require('../src/utils');
+const validateInputMap = require('../src/utils');
 const User = require('../src/User');
 const Computer = require('../src/Computer');
 
@@ -31,7 +31,7 @@ describe('utils Test', () => {
     const input = [3, 5];
 
     expect(() => {
-      validateUserInput(input);
+      validateInputMap['INGAME_VALIDATE'](input);
     }).toThrow();
   });
 
@@ -39,7 +39,7 @@ describe('utils Test', () => {
     const input = [4, 1, 1];
 
     expect(() => {
-      validateUserInput(input);
+      validateInputMap['INGAME_VALIDATE'](input);
     }).toThrow();
   });
 
@@ -47,7 +47,7 @@ describe('utils Test', () => {
     const input = [0, 5, 6];
 
     expect(() => {
-      validateUserInput(input);
+      validateInputMap['INGAME_VALIDATE'](input);
     }).toThrow();
   });
 
@@ -55,7 +55,7 @@ describe('utils Test', () => {
     const input = ['a', 5, 6];
 
     expect(() => {
-      validateUserInput(input);
+      validateInputMap['INGAME_VALIDATE'](input);
     }).toThrow();
   });
 });
@@ -63,7 +63,6 @@ describe('utils Test', () => {
 describe('Getter and Setter Test', () => {
   test('User', () => {
     const input = [1, 5, 6];
-
     const user = new User();
     user.numbers = input;
 
@@ -72,7 +71,6 @@ describe('Getter and Setter Test', () => {
 
   test('Computer', () => {
     const input = [1, 5, 6];
-
     const computer = new Computer();
     computer.numbers = input;
 

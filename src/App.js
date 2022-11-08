@@ -2,12 +2,21 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const User = require('./User');
 const { Referee } = require('./Referee');
-const validateUserInput = require('./utils');
+const validateInputMap = require('./utils');
 
 class App {
   user = new User();
   computer = new Computer();
   referee = new Referee();
+  userChoiceMap = {
+    "1": () => {
+      this.play();
+    },
+    "2": () => {
+      Console.close();
+      return;
+    },
+  };
 
   constructor() {
     Console.print('숫자 야구 게임을 시작합니다.');
@@ -32,12 +41,14 @@ class App {
   match() {
     Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.user.numbers = input.split('');
-      validateUserInput(this.user.numbers);
+      validateInputMap['INGAME_VALIDATE'](this.user.numbers);
 
       console.log('정답: ', this.computer.numbers);
       console.log('입력: ', this.user.numbers);
 
-      this.referee.judge(this.computer.numbers, this.user.numbers).printScore();
+      this.referee
+        .judge(this.computer.numbers, this.user.numbers)
+        .printScore();
 
       if (this.referee.strike === 3) {
         this.isRegame();
@@ -51,15 +62,9 @@ class App {
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (input) => {
-        if (input === '1') {
-          this.play();
-        } else if (input === '2') {
-          Console.close();
-          return;
-        } else {
-          throw new Error('input should be 1 or 2');
-        }
-      },
+        validateInputMap['OUTGAME_VALIDATE'](input);
+        this.userChoiceMap[input]();
+      }
     );
   }
 }
