@@ -3,6 +3,8 @@ const gameConstant = require('./GameConstant');
 const compareNumber = require('./CompareFunctions');
 const handleException = require('./HandlingException');
 
+const orderMessage = gameConstant.INPUT_ORDER_MESSAGE;
+
 const setAnswer = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
 };
@@ -11,15 +13,18 @@ const printStartMessage = () => {
   MissionUtils.Console.print(gameConstant.START_MESSAGE);
 };
 
-const inputNumber = playerInput => {
-  const answer = setAnswer();
-  handleException(playerInput, gameConstant.DIGIT);
-  compareNumber(answer, playerInput);
+const orderInput = answer => {
+  MissionUtils.Console.readLine(orderMessage, playerInput => {
+    handleException(playerInput, gameConstant.DIGIT);
+    compareNumber(answer, playerInput);
+  });
 };
 
 const startGame = () => {
+  const answer = setAnswer();
   printStartMessage();
-  MissionUtils.Console.readLine(gameConstant.INPUT_ORDER_MESSAGE, inputNumber);
+  orderInput(answer);
 };
 
-module.exports = startGame;
+exports.startGame = startGame;
+exports.orderInput = orderInput;
