@@ -5,22 +5,22 @@ class App {
   computerNumber;
 
   constructor() {
-    this.setComputerNumber();
+    this.initComputerNumber();
     Console.print(Messages.PLAY);
   }
 
   play() {
     Console.readLine(Messages.QUERY, (userGuess) => {
-      if (!this.isValidGuess(userGuess)) {
-        throw new Error(Messages.ERROR_WHILE_INPUT);
+      if (!this.isValidNumber(userGuess)) {
+        throw new Error(Messages.ERROR_WHILE_GUESS);
       }
       this.progress(userGuess);
     });
   }
 
   progress(userGuess) {
-    const { strike, ball } = this.calcHit(this.computerNumber, userGuess);
-    Console.print(Messages.RESULT_MESSAGE(strike, ball));
+    const { strike, ball } = this.calcGuessResult(this.computerNumber, userGuess);
+    this.printGuessResult(strike, ball);
 
     if (strike === 3) {
       this.gameOver();
@@ -46,7 +46,7 @@ class App {
   }
 
   replay() {
-    this.setComputerNumber();
+    this.initComputerNumber();
     this.play();
   }
 
@@ -54,8 +54,12 @@ class App {
     Console.close();
   }
 
-  setComputerNumber() {
+  initComputerNumber() {
     this.computerNumber = this.createComputerNumber();
+  }
+
+  printGuessResult(strike, ball) {
+    Console.print(Messages.RESULT_MESSAGE(strike, ball));
   }
 
   createComputerNumber() {
@@ -68,7 +72,7 @@ class App {
     return [...computerNumber];
   }
 
-  isValidGuess(guessNumber) {
+  isValidNumber(guessNumber) {
     if (guessNumber.length !== 3) {
       return false;
     }
@@ -81,7 +85,7 @@ class App {
     return true;
   }
 
-  calcHit(computerNumber, userGuess) {
+  calcGuessResult(computerNumber, userGuess) {
     return userGuess.split('').map(Number).reduce((acc, curr, idx) => {
       if (curr === computerNumber[idx]) {
         acc.strike += 1;

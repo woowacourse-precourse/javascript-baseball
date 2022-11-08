@@ -7,7 +7,7 @@ class Messages {
 
   static REPLAY = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n';
 
-  static ERROR_WHILE_INPUT = '--- *서로다른 세자리 자연수를 입력해주세요 ---';
+  static ERROR_WHILE_GUESS = '--- *서로다른 세자리 자연수를 입력해주세요 ---';
 
   static ERROR_WHILE_REPLAY = '--- *1 또는 2를 입력해주세요  ---';
 
