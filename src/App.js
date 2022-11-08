@@ -1,10 +1,11 @@
-const giveHint = require("./components/giveHint");
+const MainGameSystem = require("./components/MainGameSystem");
 const firstAnnouncement = require("./components/firstAnnouncement");
 
 class App {
   play() {
     firstAnnouncement();
-    giveHint();
+    const mainGameSystem = new MainGameSystem();
+    mainGameSystem.returnHint();
   }
 }
 

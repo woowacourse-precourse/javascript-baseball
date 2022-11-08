@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const ContextualHints = require("./ContextualHints");
-const PickThreeRandomNumFrom1To9 = require("./PickThreeRandomNumFrom1To9");
+const ThreeRandomNumForComputer = require("./ThreeRandomNumForComputer");
 
 class MainGameSystem {
   constructor() {
@@ -29,7 +29,7 @@ class MainGameSystem {
   returnHint(computerNum = 0) {
     let insideComputerNum = computerNum;
     if (!insideComputerNum) {
-      const pickThreeRandomNum = new PickThreeRandomNumFrom1To9();
+      const pickThreeRandomNum = new ThreeRandomNumForComputer();
       insideComputerNum = pickThreeRandomNum.returnNumsWithoutDuplication();
     }
 

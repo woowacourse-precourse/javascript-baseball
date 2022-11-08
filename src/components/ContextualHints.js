@@ -37,7 +37,12 @@ class ContextualHints {
           MissionUtils.Console.print("게임 종료");
           MissionUtils.Console.close();
         }
-        throw "잘못된 값을 입력하여 게임이 종료됩니다.";
+        if (answer !== this.RESTART && answer !== this.GAVE_OVER) {
+          MissionUtils.Console.print(
+            "올바르지 않은 값을 입력하여 게임이 종료됩니다."
+          );
+          MissionUtils.Console.close();
+        }
       }
     );
   }

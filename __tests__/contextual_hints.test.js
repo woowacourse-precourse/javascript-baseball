@@ -92,14 +92,6 @@ describe("contextualHint 확인", () => {
       }, MissionUtils.Console.readLine);
     };
 
-    it("플레이어가 잘못된 값을 입력했을 때 ", () => {
-      const answers = ["3"];
-      mockQuestions(answers);
-      expect(() => {
-        contextualHints.gameEnd();
-      }).toThrow();
-    });
-
     it("플레이어가 올바른 값을 입력했을 때", () => {
       const answers = ["1"];
       mockQuestions(answers);
