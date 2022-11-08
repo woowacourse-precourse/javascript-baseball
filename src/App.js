@@ -1,4 +1,12 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
+
+const KEY = {
+  NUM_SIZE: 3,
+  RESTART: '1',
+  QUIT: '2',
+};
+
+
 class App {
 
   constructor() {
@@ -19,7 +27,7 @@ class App {
 
   computerInput(){
     const computer = [];
-    while (computer.length < 3) {
+    while (computer.length < KEY.NUM_SIZE) {
       const number = Random.pickNumberInRange(1, 9);
       if (!computer.includes(number)) {
         computer.push(number);
@@ -37,8 +45,8 @@ class App {
   }
 
   checkUserInput(userInput){
-    if(userInput.length!==3) throw new Error("3자리의 수를 입력해주세요.");
-    if(new Set(userInput).size!==3) throw new Error("중복된 숫자가 없도록 입력해주세요.");
+    if(userInput.length!==KEY.NUM_SIZE) throw new Error("3자리의 수를 입력해주세요.");
+    if(new Set(userInput).size!==KEY.NUM_SIZE) throw new Error("중복된 숫자가 없도록 입력해주세요.");
     if(userInput.includes(0)) throw new Error("1~9 범위의 숫자로 구성된 수를 입력해주세요.");
   }
 
@@ -46,8 +54,8 @@ class App {
   askRestartOrQuit(){
     Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     Console.readLine('', (answer) => {
-      if(answer === '1') return this.startGame();
-      if(answer === '2') return Console.print("게임 종료");
+      if(answer === KEY.RESTART) return this.startGame();
+      if(answer === KEY.QUIT) return Console.print("게임 종료");
     })
   }
 
@@ -57,7 +65,7 @@ class App {
     this.userInputNums = userInput;
     const subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
     const zeroCount = subtractArr.reduce((count, data) => data == 0 ? count + 1 : count, 0);
-    if(zeroCount == 3){
+    if(zeroCount == KEY.NUM_SIZE){
       Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return this.askRestartOrQuit();
@@ -79,7 +87,7 @@ class App {
     let difference = this.computerInputNums.filter(x => !this.userInputNums.includes(x));
 
     strikeCount = zeroCount;
-    ballCount = 3-strikeCount-difference.length;
+    ballCount = KEY.NUM_SIZE-strikeCount-difference.length;
 
     if(ballCount != 0 && strikeCount !=0) return Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
     if(ballCount != 0 && strikeCount == 0) return Console.print(`${ballCount}볼`);
