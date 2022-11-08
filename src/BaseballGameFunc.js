@@ -4,7 +4,8 @@ const Console = MissionUtils.Console;
 class BaseballGameFunc {
   static inputControl = num => {
     const regValidNumExp = /^[1-9]{3}$/;
-    if (!regValidNumExp.test(num)) {
+    const testValidationSet = new Set(num.split(''));
+    if (!regValidNumExp.test(num) || testValidationSet.size !== 3) {
       throw '유효한 값이 아닙니다!';
     }
   };
