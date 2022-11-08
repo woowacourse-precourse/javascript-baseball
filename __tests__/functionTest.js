@@ -10,6 +10,7 @@ describe("함수 기능단위 테스트", () => {
       ball: 0,
     });
   });
+
   test("사용자 score객체의 점수를 확인하여 힌트 생성하는 함수", () => {
     const app = new App();
     const scoreObj = { strike: 1, ball: 0 };
