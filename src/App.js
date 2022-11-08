@@ -5,9 +5,10 @@ const makeNumber = () => {
   return result;
 };
 
-const userInput = () => {
+const userInput = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
     checkNumber(input);
+    let inputResult = countNumber(input, answer);
   })
 };
 
@@ -32,10 +33,30 @@ const checkNumber = (target) => {
   };
 };
 
+const countNumber = (target, goal) => {
+  const targetArray = target.split('');
+  let ballCount = 0;
+  let strikeCount = 0;
+
+  targetArray.forEach((element, i) => {
+
+    if (goal.includes(Number(element))) {
+      ballCount += 1
+    };
+
+    if (Number(element) === goal[i]) {
+      ballCount -= 1
+      strikeCount += 1
+    };
+  });
+  
+  return [strikeCount, ballCount];
+}
+
 class App {
   play() {
     let answer = makeNumber();
-    userInput();
+    userInput(answer);
   };
 };
 
