@@ -6,20 +6,30 @@ class App {
 
 	async runGame() {
 		MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-		do {
-			await this.process();
-		} while (await this.restartOrFinish());
-		MissionUtils.Console.print('게임 종료');
-		MissionUtils.Console.close();
+
+		try {
+			do {
+				await this.process();
+			} while (await this.restartOrFinish());
+			MissionUtils.Console.print('게임 종료');
+			MissionUtils.Console.close();
+		} catch (error) {
+			throw new Error(error.message);
+		}
 	}
 
 	async process() {
 		const RANDOMNUMBER = this.getRandomNumber();
 		let message = '';
-		do {
-			const ANSWER = await this.inputAnswer();
-			message = this.printResult(RANDOMNUMBER, ANSWER);
-		} while (this.isNotThreeStrike(message));
+
+		try {
+			do {
+				const ANSWER = await this.inputAnswer();
+				message = this.printResult(RANDOMNUMBER, ANSWER);
+			} while (this.isNotThreeStrike(message));
+		} catch (error) {
+			throw new Error(error.message);
+		}
 	}
 
 	getRandomNumber() {
@@ -33,8 +43,8 @@ class App {
 		return randomNumber.split('');
 	}
 
-	async inputAnswer() {
-		const answer = await new Promise((resolve, reject) => {
+	inputAnswer() {
+		return new Promise((resolve, reject) => {
 			try {
 				MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
 					const input = number.toString().split('');
@@ -42,17 +52,15 @@ class App {
 					resolve(input);
 				});
 			} catch (error) {
-				reject(error);
+				reject(new Error(error.message));
 			}
 		});
-
-		return answer;
 	}
 
 	validateAnswer(answer) {
+		if (/[^1-9]/g.test(answer.join(''))) throw new Error('1~9 이외의 숫자 혹은 문자를 입력하셨습니다.');
 		if (answer.length !== 3) throw new Error('세자리 수가 아닙니다.');
 		if ([...new Set(answer)].length !== 3) throw new Error('같은 숫자를 입력하셨습니다.');
-		if (/[^1-9]/g.test(answer.join(''))) throw new Error('1~9 이외의 숫자 혹은 문자를 입력하셨습니다.');
 	}
 
 	printResult(RANDOMNUMBER, ANSWER) {
@@ -86,16 +94,17 @@ class App {
 		return resultMessage !== '3스트라이크' ? true : false;
 	}
 
-	async restartOrFinish() {
+	restartOrFinish() {
 		MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-		return await new Promise((resolve, reject) => {
+
+		return new Promise((resolve, reject) => {
 			try {
 				MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (option) => {
 					this.validateOption(option);
 					resolve(option === '1' ? true : false);
 				});
 			} catch (error) {
-				reject(error);
+				reject(new Error(error.message));
 			}
 		});
 	}
@@ -104,5 +113,8 @@ class App {
 		if (/[^1-2]/g.test(option)) throw new Error('옵션에 없는 값을 입력하셨습니다.');
 	}
 }
+
+// const app = new App();
+// app.play();
 
 module.exports = App;
