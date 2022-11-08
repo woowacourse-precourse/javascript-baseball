@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { NUMBER, MESSAGE, GAME } = require('../constant/baseballGame');
+const { NUMBER, MESSAGE, GAME , ERROR} = require('../constant/baseballGame');
 
 class BaseballGame{
 
@@ -110,11 +110,15 @@ class BaseballGame{
             if(inputNumber === '2'){
                 Console.close();
             }
-            if(inputNumber !== '1' && inputNumber !== '2')
-                throw new Error(MESSAGE.ERROR);
         });
     }
     
+    validateInputRestartOrEnd() {
+        if(inputNumber !== '1' && inputNumber !== '2'){
+            throw new Error(ERROR.OPTION);
+        }
+    }
+
 }
 
 module.exports = BaseballGame;
