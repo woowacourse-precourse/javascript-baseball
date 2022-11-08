@@ -57,3 +57,23 @@ describe("숫자 야구 게임", () => {
     });
   });
 });
+
+describe("사용자가", () => {
+  const app = new App();
+
+  const getSpyInputValue = () => {
+    const logSpy = jest.spyOn(app.Console, "getUserValue");
+    logSpy.mockClear();
+    return logSpy;
+  };
+
+  test("입력한 수의 반환 값이 3자리의 수 인지 판단", async () => {
+    try {
+      const spy = getSpyInputValue();
+      await app.play();
+      expect(spy).resolves.toHaveLength(3);
+      expect(spy).resolves.toBeGreaterThan(100);
+      expect(spy).resolves.toBeLessThan(999);
+    } catch {}
+  });
+});
