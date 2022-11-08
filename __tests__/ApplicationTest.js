@@ -33,7 +33,7 @@ describe("숫자 야구 게임", () => {
       "3스트라이크",
       "1볼 1스트라이크",
       "3스트라이크",
-      "게임 종료",
+      // "게임 종료",
     ];
 
     mockRandoms(randoms);
@@ -47,9 +47,48 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트(4개 이상 입력)", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트(0 포함 입력)", () => {
+    const randoms = [1, 2, 7];
+    const answers = ["104"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트(공백 입력)", () => {
+    const randoms = [1, 8, 7];
+    const answers = [" "];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트(한글 || 영어 || 특수기호 입력)", () => {
+    const randoms = [4, 3, 9];
+    const answers = ["ㄱr$"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
