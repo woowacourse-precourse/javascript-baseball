@@ -20,10 +20,7 @@ const checkInput = (input) => {
 
 const getInputIntArray = (input) => {
   const userInputArray = [...input];
-  const newArray = [];
-  for (let i = 0; i < userInputArray.length; i++){
-    newArray.push(parseInt(userInputArray[i]));
-  }
+  const newArray = userInputArray.map((num) => parseInt(num));
   return newArray;
 };
 
