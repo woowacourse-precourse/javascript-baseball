@@ -6,6 +6,16 @@ let isEndGame = true;
 let result = true;
 const game_start = "숫자 야구 게임을 시작합니다.";
 
+function ballCount(userInputNumbersArray, computerPickNumbersArray) {
+  let ball = 0;
+  for (let i = 0; i < userInputNumbersArray.length; i += 1) {
+    if (userInputNumbersArray.includes(computerPickNumbersArray[i])) {
+      ball += 1;
+    }
+  }
+  return ball;
+}
+
 function computerPickNumbers() {
   computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
