@@ -11,11 +11,7 @@ function CompareNumber(computerNumber, userNumber) {
     }
   }
 
-  if (strike === 0 && ball === 0) {
-    nothing = true;
-  }
-
-  return [strike, ball, nothing];
+  return [strike, ball];
 }
 
 module.exports = CompareNumber;
