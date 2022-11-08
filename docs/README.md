@@ -53,12 +53,25 @@
 <br/>
 
 2. 사용자에게 숫자를 입력받는 기능
-   - BaseballGame 클래스에 inputNumber 프로퍼티 추가
-   - `MissionUtils.Console.readLine`을 통해 숫자를 입력해 inputNumber 값 변경
+   - `MissionUtils.Console.readLine`을 통해 숫자를 입력해 게임 로직 실행
+     - `handleInputDuringGame`메서드
+       - 게임 진행 로직을 실행하기 위해 사용자 입력을 다루는 메서드
+       - 입력: 사용자 입력값
+       - 출력: X
+       - `getHint`를 통해 반환된 hint가 `3스트라이크`와 일치하는지 판별
+       - 일치한다면 `recommendRestart`메서드 호출
+       - 불일치한다면 `getUserInput`호출
+     - `handleInputAfterEndGame`메서드
+       - 게임 진행 후 재시작 여부를 결정하기 위해 사용자 입력을 다루는 메서드
+       - 입력: 사용자 입력값
+       - 출력: X
+       - 입력값이 1, 2에 속하지 않는다면 에러 발생
+       - 입력값이 1이면 `restartGame`메서드 호출
+       - 입력값이 2면 `MissionUtils.Console.close`호출하여 게임 종료
 
 <br/>
 
-3. 사용자의 입력 숫자가 유효한 숫자인지 판별하는 기능 (게임 진행 중)
+1. 사용자의 입력 숫자가 유효한 숫자인지 판별하는 기능 (게임 진행 중)
 
    - `getIsInputValueValid` 모듈 추가
    - 입력값이 세 글자인지 확인하는 함수 추가
@@ -112,28 +125,26 @@
 
 6. 게임을 지속적으로 이어나갈 수 있게 하는 기능 (반복)
 
-   - BaseballGame 클래스에 `hint` 빈 문자열 프로퍼티 추가
-   - `getUserInput()`에서 `hint`가 빈 문자열이면 "숫자 야구 게임을 시작합니다." 문구 출력부분 추가
    - `MissionUtils.Console.readLine` 를 통해 사용자의 입력값을 받아온다.
+   - 입력값을 `handleInputDuringGame`에 전달한다.
    - 입력된 입력값과 `Computer`의 `correctNumber`를 `getHint`의 인자로 전달해 반환 값을 `hint`에 대입한다.
    - `hint`를 출력한다.
    - `hint`와 `3스트라이크`가 불일치하면 `getUserInput()`함수 다시 호출
 
 <br/>
 
-7. 게임 종료 이후 재시작 여부를 결정하는 기능
+1. 게임 종료 이후 재시작 여부를 결정하는 기능
    - BaseBallGame 클래스에 `recommendRestart` 메서드 추가
    - `getUserInput()`에서 재귀 호출 조건에 걸리지 않았을 때 `recommendRestart`호출
      - `3개의 숫자를 모두 맞히셨습니다! 게임 종료` 문구를 출력한다.
      - `MissionUtils.Console.readLine`을 통해 사용자에게 값을 입력 받는다
-     - 1이 입력된 경우 `play()`호출
+     - 1이 입력된 경우 `restartGame()`호출
+     - 2가 입력된 경우 `MissionUtils.Console.close()`를 호출해 게임 종료
 
 <br/>
 
-8. 이전 게임에서 사용된 변수들의 값을 리셋 하는 기능
-   - BaseballGame 클래스에 `resetGameValue` 메서드 추가
-     - `hint` 프로퍼티를 빈 문자열로 초기화
-     - `computer` 클래스의 `setNewCorrectNumber` 메서드 호출하여 랜덤 숫자 교체
+1. 이전 게임에서 사용된 변수들의 값을 리셋 하는 기능
+   - `computer` 클래스의 `setNewCorrectNumber` 메서드 호출하여 랜덤 숫자 교체
 
 <br/>
 
