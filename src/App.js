@@ -41,6 +41,18 @@ function whetherContinueGame() {
     });
 }
 
+function countBallandStrike(input) {
+    let record = { ball: 0, strike: 0 };
+
+    input.split('').forEach((element, i) => {
+        if (element === RANDOM_NUMBER[i]) record.strike += 1;
+        if (element !== RANDOM_NUMBER[i] && RANDOM_NUMBER.indexOf(element) > -1)
+            record.ball += 1;
+    });
+
+    return record;
+}
+
 function getResultMessage(input) {
     let result = countBallandStrike(input);
     let answer = '';
