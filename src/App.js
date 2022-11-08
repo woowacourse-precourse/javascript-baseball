@@ -48,6 +48,10 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
+        if (answer !== RESTART_CODE || answer !== END_CODE) {
+          throw new Error('유효하지 않은 입력 값입니다.');
+        }
+
         if (answer === RESTART_CODE) {
           this.play();
         }
@@ -59,9 +63,32 @@ class App {
     );
   }
 
+  checkValidNumbers(inputs) {
+    const VALID_LENGTH = 3;
+
+    if (inputs.includes(NaN)) {
+      throw new Error('숫자만 입력해주세요.');
+    }
+
+    if (inputs.includes(0)) {
+      throw new Error('1~9 사이의 숫자를 입력해주세요');
+    }
+
+    if (inputs.length !== VALID_LENGTH) {
+      throw new Error('3자리의 숫자를 입력해주세요.');
+    }
+
+    if (new Set(inputs).size !== VALID_LENGTH) {
+      throw '서로 다른 3자리의 숫자를 입력해주세요.';
+    }
+  }
+
   playerInputsNumbers(computer) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       const player = this.convertToNumberArray(answer);
+
+      this.checkValidNumbers(player);
+
       const { strike, ball } = this.compareNumbers(computer, player);
 
       this.printHintMessage(strike, ball);
@@ -78,7 +105,7 @@ class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.getRandomNumbers();
-    console.log(computer);
+
     this.playerInputsNumbers(computer);
   }
 }
