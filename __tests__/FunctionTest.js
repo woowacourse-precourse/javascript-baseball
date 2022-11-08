@@ -41,7 +41,7 @@ describe("목표값 테스트", () => {
     let duplicateChecker;
 
     for (let i = 0; i < 3; i++) {
-      duplicateChecker =
+      duplicateCheck =
         refNumbers.indexOf(refNumbers[i]) === i ? "clear" : "duplicate";
     }
 
@@ -51,7 +51,7 @@ describe("목표값 테스트", () => {
   test("목표값 숫자 범위 1~9 확인", () => {
     const refNumbers = app.refNumbersGetter();
 
-    let duplicateChecker;
+    let rangeChecker;
 
     for (let i = 0; i < 3; i++) {
       rangeChecker =
