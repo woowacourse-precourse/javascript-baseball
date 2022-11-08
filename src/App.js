@@ -22,21 +22,21 @@ function checkZero(answer) {
 
 class App {
   constructor() {
-    this.computerRandomNumber = this.createRandomNumber();
+    this.computerNumber = this.createComputerNumber();
     this.strike = 0;
     this.ball = 0;
   }
 
-  createRandomNumber() {
-    const computerRandomNumber = [];
-    while (computerRandomNumber.length < 3) {
+  createComputerNumber() {
+    const computerNumber = [];
+    while (computerNumber.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerRandomNumber.includes(number)) {
-        computerRandomNumber.push(number);
+      if (!computerNumber.includes(number)) {
+        computerNumber.push(number);
       }
     }
-    MissionUtils.Console.print(computerRandomNumber);
-    return computerRandomNumber;
+    MissionUtils.Console.print(computerNumber);
+    return computerNumber;
   }
 
   getUserNumber() {
@@ -57,8 +57,8 @@ class App {
 
     for (let idx = 0; idx < userAnswer.length; idx++) {
       let userNum = parseInt(userAnswer[idx]);
-      if (userNum === this.computerRandomNumber[idx]) this.strike++;
-      else if (this.computerRandomNumber.includes(userNum)) this.ball++;
+      if (userNum === this.computerNumber[idx]) this.strike++;
+      else if (this.computerNumber.includes(userNum)) this.ball++;
     }
     this.printResult();
   }
@@ -88,7 +88,7 @@ class App {
       checkNumber(answer);
       if (answer === '2') MissionUtils.Console.close();
       else if (answer === '1') {
-        this.computerRandomNumber = this.createRandomNumber();
+        this.computerNumber = this.createComputerNumber();
         this.getUserNumber();
       }
       else {
