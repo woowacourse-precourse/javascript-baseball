@@ -164,4 +164,18 @@ while (computer.length < 3) {
 - **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가한다.
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
-- 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.
+- 과제 진행 및 제출 방법은 [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서를 참고한다.   
+
+<br>
+
+---
+
+## 구현할 기능 목록   
+
+- [] 게임 시작 멘트    
+- [] 숫자 입력 받는 기능   
+- [] 랜덤한 정답 숫자 생성하는 기능   
+- [] 정답 숫자와 입력한 숫자 비교하는 기능   
+- [] 비교한 후 볼, 스트라이크 판단하는 기능    
+- [] 다시 시작할지, 종료할지 판단하는 기능   
+- [] 예외 처리 기능   
