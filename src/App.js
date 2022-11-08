@@ -1,8 +1,8 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { NOTICE, HINT, OPTION } = require("./message");
-const Computer = require("./Computer");
-const User = require("./User");
-const Hint = require("./Hint");
+const Computer = require("./component/Computer");
+const User = require("./component/User");
+const Hint = require("./component/Hint");
 
 class App {
     constructor() {

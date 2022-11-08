@@ -1,5 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
-const { OPTION } = require("./message");
+const { OPTION } = require("../message");
 
 class Computer {
     constructor() {

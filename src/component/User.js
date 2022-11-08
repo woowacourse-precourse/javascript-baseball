@@ -1,5 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { NOTICE, OPTION } = require("./message");
+const { NOTICE, OPTION } = require("../message");
 
 class User {
     constructor() {
