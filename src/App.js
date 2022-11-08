@@ -7,23 +7,8 @@ class App {
     this.userArr=[];
   }
 
-  playBaseball(){
-    // 시작 메시지 출력
-    //const computer = new Set(); // set은 중복값 허용x => 그냥 입력은 배열로 받고 나중에 중복을 set으로 확인
-    this.init();
-
-    const randomArr = []; // computer의 입력을 위한 임시 배열 
-    while (randomArr.length < 3) {
-      const temp = MissionUtils.Random.pickNumberInRange(1, 9);
-      if(!randomArr.includes(temp)) randomArr.push(temp);
-    }
-
-    this.computerArr = [...randomArr]; // 배열로 바꿔야 출력 가능 // 배열 내용은 number
-    console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
-
-
-    ////////////
-
+  userInputNum(){
+    // 게임이 끝날 때 까지 사용자 입력을 계속 받아야 한다. => 재귀
     let strike, ball, nothing;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       // userinput은 computerinput과 다르게 123 이렇게 주어짐
@@ -40,6 +25,7 @@ class App {
         else if(strike === 3){
           MissionUtils.Console.print('3스트라이크');
           MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+          this.isRepeat(); // 게임 다시 시작할건지
         }
         else if(ball !== 0 && strike !== 0){
           MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
@@ -50,10 +36,25 @@ class App {
         else if(strike === 0){
           MissionUtils.Console.print(`${strike}스트라이크`);
         }
+        this.userInputNum();
       }
     });
+  }
 
-    //////////////
+  playBaseball(){
+    // 시작 메시지 출력
+    this.init();
+
+    const randomArr = []; // computer의 입력을 위한 임시 배열 
+    while (randomArr.length < 3) {
+      const temp = MissionUtils.Random.pickNumberInRange(1, 9);
+      if(!randomArr.includes(temp)) randomArr.push(temp);
+    }
+
+    this.computerArr = [...randomArr]; // 배열로 바꿔야 출력 가능 // 배열 내용은 number
+    console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
+
+    this.userInputNum();
 
     this.isRepeat();
   }
@@ -70,6 +71,7 @@ class App {
     const DUPLICATE_ERROR = "중복된 입력입니다."
 
     // 입력값 3자리인지 확인 => set은 중복 허용 하지 않기에 같은 숫자 들어온다면 3자리 입력이라도 중복되어 자릿수 줄어든다. => 따로 확인
+    console.log(`입력 3개인가?? : ${userInput.length}`);
     if(userInput.length !== 3) throw NOT_NUMBER_ERROR;
 
     // 숫자인지 확인
