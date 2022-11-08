@@ -109,8 +109,16 @@ describe("게임 종료 조건 유닛 테스트", () => {
   test("사용자가 입력한 숫자와 정답이 일치하면 게임을 종료한다.", () => {
     const app = new App();
     app.answer = "123";
+    app.input = "123";
 
-    expect(app.isGameOver("123")).toBe(true);
+    expect(app.isGameOver()).toBe(true);
+  });
+  test("사용자가 입력한 숫자와 정답이 일치하지 않으면 게임을 지속한다.", () => {
+    const app = new App();
+    app.answer = "123";
+    app.input = "456";
+
+    expect(app.isGameOver()).toBe(false);
   });
 });
 
