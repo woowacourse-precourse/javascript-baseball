@@ -39,6 +39,20 @@ class App {
     return;
   }
 
+  checkExcept(number){
+    const numArr = number.split("");
+    const numSet = new Set(numArr);
+
+    if(number.length !== 3){
+      throw "입력길이를 세자리로 맞춰주세요."
+    }
+    else if(numArr.length !== numSet.size){
+      throw "중복 문자가 존재합니다."
+    }
+    return true;
+
+  }
+
   CheckAnswer(answer,number){
     const strike = 0;
     const ball = 0;
