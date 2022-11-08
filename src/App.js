@@ -26,6 +26,10 @@ class App {
       const { strike, ball } = this.#compareInputWithAnswer(input);
       this.#printGameResult(strike, ball);
 
+      if (strike === 3) {
+        this.#quitGame();
+      }
+
       this.#progressGame();
     });
   }
@@ -74,6 +78,10 @@ class App {
     const resultMessage = `${ballMessage}${strikeMessage}`;
 
     Console.print(resultMessage.trim());
+  }
+
+  #quitGame() {
+    Console.print(MESSAGES.QUIT);
   }
 }
 
