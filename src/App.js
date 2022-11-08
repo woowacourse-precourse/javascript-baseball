@@ -30,6 +30,14 @@ class App {
     }
   }
 
+  arrayValueRangeCheck(inputArray) {
+    for (let i = 0; i < inputArray.length; i++) {
+      if (!inputArray[i] > 0 && inputArray[i] < 10) {
+        throw new Error('❗️ 1부터 9사이의 숫자를 입력하세요. ❗️');
+      }
+    }
+  }
+
   inputCallback() {}
 
   play() {}
