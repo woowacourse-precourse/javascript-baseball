@@ -17,33 +17,37 @@ class App {
   }
 
   baseballGameWin() {
-    Console.readLine(ANNOUNCEMENT_MESSAGE.RESTART.MESSAGE, (answer) => {
-      if (answer === ANNOUNCEMENT_MESSAGE.RESTART.START) {
-        this.play();
-      } else if (answer === ANNOUNCEMENT_MESSAGE.RESTART.FINISH) {
-        Console.print(ANNOUNCEMENT_MESSAGE.END);
-        Console.close();
-      } else {
-        throw ERROR_MESSAGE.IS_RESTART;
+    Console.readLine(ANNOUNCEMENT_MESSAGE.RESTART.MESSAGE, (userAnswer) => {
+      switch (userAnswer) {
+        case ANNOUNCEMENT_MESSAGE.RESTART.START:
+          this.play();
+          break;
+        case ANNOUNCEMENT_MESSAGE.RESTART.FINISH:
+          Console.print(ANNOUNCEMENT_MESSAGE.END);
+          Console.close();
+          break;
+        default:
+          throw ERROR_MESSAGE.IS_RESTART;
       }
     });
   }
 
   baseballGameStart() {
-    const compareResult = utilFun.compareComputerAndUser(
+    const gameResult = utilFun.compareComputerAndUser(
       this.computerRandomThreeNumber,
       this.userRandomThreeNumber
     );
-    Console.print(compareResult);
-    if (compareResult === GAME_MESSAGE.NOTHING) {
-      this.getUserNumbers();
-      return;
-    }
-    if (compareResult === GAME_MESSAGE.WIN) {
-      Console.print(ANNOUNCEMENT_MESSAGE.WIN);
-      this.baseballGameWin();
-    } else {
-      this.getUserNumbers();
+    Console.print(gameResult);
+    switch (gameResult) {
+      case GAME_MESSAGE.NOTHING:
+        this.getUserNumbers();
+        break;
+      case GAME_MESSAGE.WIN:
+        Console.print(ANNOUNCEMENT_MESSAGE.WIN);
+        this.baseballGameWin();
+        break;
+      default:
+        this.getUserNumbers();
     }
   }
 
@@ -51,7 +55,7 @@ class App {
     Console.readLine(ANNOUNCEMENT_MESSAGE.INPUT, (userAnswer) => {
       utilFun.checkUserValid(userAnswer);
       this.userRandomThreeNumber = userAnswer;
-      if (userAnswer.length > 0) this.baseballGameStart();
+      if (userAnswer) this.baseballGameStart();
     });
   }
 
