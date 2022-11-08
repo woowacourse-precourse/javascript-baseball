@@ -28,6 +28,25 @@ class App {
       this.printStrikeAndBall(computerNumbers, userNumber);
     });
   }
+
+  checkUserNumbers(userNumber) {
+    if (userNumber.length !== 3) {
+      throw new Error("세글자가 아닙니다");
+    }
+    for (let i = 0; i < userNumber.length; i++) {
+      if (isNaN(userNumber[i])) {
+        throw new Error("숫자가 아닙니다");
+      }
+      for (let j = 0; j < userNumber.length; j++) {
+        if (i == j) {
+          continue;
+        }
+        if (userNumber[i] == userNumber[j]) {
+          throw new Error("숫자가 중복됩니다");
+        }
+      }
+    }
+  }
 }
 
 module.exports = App;
