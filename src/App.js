@@ -2,20 +2,20 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    let randombaseball = computeRandomNumber();
-    console.log(randombaseball);
-    start();
+    let randombaseball = createRandomNumber();
   }
 }
 module.exports = App;
 
-const computeRandomNumber = () => {
-  let number = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-  return number;
-};
-
-const start = () => {
-  MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+const createRandomNumber = () => {
+  const numbers = [];
+  while (numbers.length < 3) {
+    const newNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!numbers.includes(newNumber)) {
+      numbers.push(newNumber);
+    }
+  }
+  return numbers;
 };
 
 const app = new App();
