@@ -12,9 +12,13 @@ const gameStart = () => {
   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 };
 
-const getUserNumber = () => [
-  MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => answer),
-];
+const getUserNumber = () => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
+    if (answer.length !== 3)
+      throw new Error('숫자는 세자리 수로 입력해주세요.');
+    return answer;
+  });
+};
 
 class App {
   play() {
