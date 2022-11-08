@@ -19,7 +19,6 @@ class Counter {
       }
     });
     return strike;
-
   }
 }
 
