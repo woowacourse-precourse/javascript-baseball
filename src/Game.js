@@ -1,9 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
+const User = require("./User");
 const { MESSAGE } = require('./lib/constants');
 
 class Game {
   constructor() {
+    this.user = new User();
     this.computer = new Computer();
     this.setUpNumber();
   }
@@ -16,7 +18,10 @@ class Game {
     this.start();
   }
   start() {
-    this.printIntro();
+    this.printStartMessage();
+    this.user.readAnswer(MESSAGE.USER_ANSWER, (answer) => {
+      console.log(answer);
+    });
   }
   printStartMessage() {
     this.printMessage(MESSAGE.INTRO);
