@@ -27,7 +27,6 @@ class App {
 
   printStrikeAndBall(inputNumber,randomNumber) {
     let userNumber = inputNumber.split("").map(Number);
-    console.log(userNumber)
     const {strike, ball} = this.countStrikeAndBall(userNumber,randomNumber);
     
     if (strike === 0 && ball === 0) {
@@ -90,7 +89,6 @@ class App {
 
   startGame() {
     const randomNumber = this.makeRandom();
-    console.log(randomNumber);
     this.makeUserNumbers(randomNumber);
   }
 
@@ -101,6 +99,3 @@ class App {
 }
 
 module.exports = App;
-
-// const app = new App();
-// app.play();
