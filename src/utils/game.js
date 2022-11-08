@@ -24,9 +24,9 @@ const playGame = async () => {
   const computerNumber = getComputerNumber();
   let isGameRun = true;
 
-  while (isGameRun) {
-    isGameRun = await inputNumber(computerNumber);
-  }
+  // while (isGameRun) {
+  isGameRun = await inputNumber(computerNumber);
+  // }
 };
 
 const restartGame = () => {
