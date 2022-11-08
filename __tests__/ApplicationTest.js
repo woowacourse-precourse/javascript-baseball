@@ -11,10 +11,11 @@ const mockQuestions = (answers) => {
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
+  MissionUtils.Random.pickNumberInList = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
+  }, MissionUtils.Random.pickNumberInList);
+  console.log("mockRandoms");
 };
 
 const getLogSpy = () => {
@@ -50,6 +51,19 @@ describe("숫자 야구 게임", () => {
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
