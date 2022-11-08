@@ -1,4 +1,4 @@
-const { ERROR } = require("../data/constants");
+const { ERROR } = require("./Constants");
 
 function checkLengthOfUserInput(userNum) {
   if (userNum.length !== 3) {

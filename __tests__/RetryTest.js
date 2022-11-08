@@ -1,8 +1,8 @@
-const ComputerInput = require("../src/Model/ComputerInput");
-const { ERROR, GAME } = require("../src/data/Constants");
-const Render = require("../src/View/Render");
-const GameJudgment = require("../src/Model/GameJudgment");
-const CheckInputValid = require("../src/Model/CheckInputValid");
+const ComputerInput = require("../src/ComputerInput");
+const { ERROR, GAME } = require("../src/Constants");
+const Render = require("../src/Render");
+const GameJudgment = require("../src/GameJudgment");
+const CheckInputValid = require("../src/CheckInputValid");
 
 describe("Computer에서 랜덤숫자 배열 추출", () => {
   const computerInput = ComputerInput();

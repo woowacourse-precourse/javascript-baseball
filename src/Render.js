@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME, ERROR } = require("./data/Constants");
+const { GAME, ERROR } = require("./Constants");
 
 class Render {
   constructor() {}
