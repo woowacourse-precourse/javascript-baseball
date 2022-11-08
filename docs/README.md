@@ -62,7 +62,7 @@
 
 ## [ 게임 로직 ]
 
-<img src="user-images.githubusercontent.com/108187253/200585604-81733a27-6c6d-44d8-8dc8-8550ee679cdf.png">
+<img src="https://user-images.githubusercontent.com/108187253/200586233-e15224fc-232c-4b83-830b-8a9de5a05a1f.png">
 
 ---
 
