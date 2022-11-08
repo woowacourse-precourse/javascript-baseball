@@ -2,7 +2,7 @@ const {
   RANDOM_NUMBER,
   EXECPTION_CONDITION,
   ERROR_MESSAGE,
-} = require("../constant/constant");
+} = require("../utils/constant");
 
 class Validator {
   constructor() {
