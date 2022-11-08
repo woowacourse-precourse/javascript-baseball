@@ -90,10 +90,10 @@ class App {
         if (isResatrtNum === "1") {
           this.computerNum = [];
           this.setComputerNum();
-        } else if ((isResatrtNum !== "1") | (isResatrtNum != "2")) {
-          throw "1 혹은 2가 아닙니다.";
-        } else {
+        } else if (isResatrtNum === "2") {
           Console.close();
+        } else {
+          throw "1 혹은 2가 아닙니다.";
         }
       }
     );
