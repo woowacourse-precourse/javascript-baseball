@@ -63,3 +63,12 @@ Added the exception test cases:
 - enter longer or shorter value
 
 Breaks $ApplicationTest, which the test cases are added
+
+fix($App): change the functions
+
+Changed the calling point of the functions and Added Class's vaiable:
+- change the calling point of the function 'check' and 'end' (b/c asynchronized calling)
+- change the functions 'check' and 'end' 
+    - change the variables to the class's variables
+
+Breaks $App._is_strike, $App._strike, $App._ball, $App._keep_play, which was local variables of the functions

@@ -4,6 +4,10 @@ class App {
   constructor(){
     this._computer = [];
     this._player = [];
+    this._is_strike = false;
+    this._strike = 0;
+    this._ball = 0;
+    this._keep_play = true;
   }
 
   setting(){
@@ -12,6 +16,9 @@ class App {
         if(!this._computer.includes(NUMBER))
             this._computer.push(NUMBER);
     }
+    this._strike = 0;
+    this._ball = 0;
+    this._is_strike = false;
   }
 
   play() {
@@ -19,16 +26,13 @@ class App {
       this.setting();
       MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
       
-      let success = false;
-      while(!success){
+      //let success = false;
+      while(!this._is_strike){
+        //this.input();
         this.input();
-        MissionUtils.Console.print("[*] COMPUTER: "+ this._computer);
-        MissionUtils.Console.print("[*] PLAYER: "+this._player);
-    
-        success = this.check();
       }
 
-      if(this.end() == 2){
+      if(!this._keep_play){
         break;
       }
     }
@@ -42,7 +46,7 @@ class App {
       if(len > 3){
         throw new Error("너무 많은 값을 입력했습니다. 게임을 종료합니다.");
       }
-      else if(this._player.length < 3){
+      else if(len < 3){
         throw new Error("너무 적은 값을 입력했습니다. 게임을 종료합니다.");
       }
         
@@ -54,90 +58,92 @@ class App {
               this._player[i] = Number(tmp[i]);
           }
       }
+
+      this._player.forEach((num)=>{
+        if(!(num >= 1 && num <= 9)){
+            throw new Error("잘못된 값을 입력했습니다. 게임을 종료합니다.");
+        }
+      });
+
+      this.check();
   });
-    
-    this._player.forEach((num)=>{
-      if(!(num >= 1 && num <= 9)){
-          throw new Error("잘못된 값을 입력했습니다. 게임을 종료합니다.");
-      }
-    });
   }
 
   check(){
-    let strike = 0;
-    let ball = 0;
     for(let i = 0; i<3 ; i++){
       const INDEX = this._player.indexOf(this._computer[i]);
-      MissionUtils.Console.print("[*] INDEX: "+ INDEX);
+      //MissionUtils.Console.print("[*] INDEX: "+ INDEX);
       if(INDEX > -1){
         if(i === INDEX){
-          strike += 1;
+          this._strike += 1;
         }
         else{
-          ball += 1;
+          this._ball += 1;
         }
       }
-      MissionUtils.Console.print("[*] STRIKE: " + strike + " BALL: "+ball);
+      //MissionUtils.Console.print("[*] STRIKE: " + this._strike + " BALL: "+ this._ball);
+      
     }
 
-    if(strike == 0){
-      if(ball == 0){
-        MissionUtils.Console.print("낫싱");
-      }
-      else if(ball == 1){
-        MissionUtils.Console.print("1볼");
-      }
-      else if(ball == 2){
-        MissionUtils.Console.print("2볼");
-      }
-      else if(ball == 3){
+    if(this._strike == 0){
+      if(this._ball == 3){
         MissionUtils.Console.print("3볼");
       }
+      
+      else if(this._ball == 2){
+        MissionUtils.Console.print("2볼");
+      }
+  
+      else if(this._ball == 1){
+        MissionUtils.Console.print("1볼");
+      }
+  
       else{
-        MissionUtils.Console.print("[🚨] 채점에 문제가 생겼습니다.");
+        MissionUtils.Console.print("낫싱");
       }
     }
-
-    else if(strike == 1){
-      if(ball == 1){
-        MissionUtils.Console.print("1스트라이크1볼");
+  
+    else if(this._strike == 1){
+      if(this._ball == 2){
+        MissionUtils.Console.print("1스트라이크 2볼");
       }
-      else if(ball == 2){
-        MissionUtils.Console.print("1스트라이크2볼");
+      else if(this._ball == 1){
+        MissionUtils.Console.print("1스트라이크 1볼");
       }
-      else if(ball == 0){
+      else{
         MissionUtils.Console.print("1스트라이크");
       }
-      else{
-        MissionUtils.Console.print("[🚨] 채점에 문제가 생겼습니다.");
-      }
     }
-
-    else if(strike == 2){
-      if(ball == 0){
+  
+    else if(this._strike == 2){
+      if(this._ball == 1){
+        MissionUtils.Console.print("2스트라이크 1볼");
+      }
+      else{
         MissionUtils.Console.print("2스트라이크");
       }
-      else if(ball == 1){
-        MissionUtils.Console.print("2스트라이크1볼");
-      }
-      else{
-        MissionUtils.Console.print("[🚨] 채점에 문제가 생겼습니다.");
-      }
     }
-
-    else if(strike == 3){
+  
+    else if(this._strike == 3){
       MissionUtils.Console.print("3스트라이크");
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      return true;
-    }
-
-    return false;
+      this._is_strike = true;
+    }    
   }
 
   end(){
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
-        return answer;
+        if(answer == 2){
+          this._keep_play = false;
+        }
+        else if(answer == 1){
+          this._keep_play = true;
+        }
+        else{
+          throw new Error("잘못된 값을 입력했습니다. 종료하겠습니다."); 
+        }
     });
+    
   }
 
 }
