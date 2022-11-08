@@ -37,8 +37,14 @@ class App {
   finish() {
     Console.print(MESSAGE.FINISH);
     Console.readLine(`${MESSAGE.RESTART}\n`, (input) => {
-      Console.print(input);
+      if (input === "1") this.start();
+      else if (input == "2") this.exit();
+      else this.error();
     });
+  }
+
+  exit() {
+    Console.close();
   }
 
   error() {
