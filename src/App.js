@@ -88,7 +88,7 @@ class App {
     return true;
   }
 
-  inputQuestion(input) {
+  setCurrentQuestion(input) {
     if (!this.isValidQuestionInput(input)) {
       return;
     }
@@ -114,7 +114,7 @@ class App {
 
   restart(input) {
     const COMMANDS = {
-      1: this.newGame.bind(this),
+      1: this.startNewGame.bind(this),
       2: this.endProgram.bind(this),
     };
 
@@ -130,7 +130,7 @@ class App {
   }
 
   continueGame(input) {
-    this.inputQuestion(input);
+    this.setCurrentQuestion(input);
     this.printGameResult(this.getGameResult());
 
     if (this.isGameEnd) {
@@ -207,14 +207,14 @@ class App {
     Console.readLine(this.MESSAGES.inputQuestion, this.continueGame.bind(this));
   }
 
-  newGame() {
+  startNewGame() {
     this.setNewAnswer();
     this.runGame();
   }
 
   startGame() {
     Console.print(this.MESSAGES.start);
-    this.newGame();
+    this.startNewGame();
   }
 
   play() {
