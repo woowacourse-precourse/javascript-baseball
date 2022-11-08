@@ -22,9 +22,9 @@ function printStart() {
   start.print();
 }
 
-function printGameover() {
-  const gameover = new printMessage().setMessage(Message.correct);
-  gameover.print();
+function printCorrect() {
+  const correct = new printMessage().setMessage(Message.correct);
+  correct.print();
 }
 
 function printIsRestart() {
@@ -32,4 +32,16 @@ function printIsRestart() {
   restart.print();
 }
 
-module.exports = { printStart, printGameover, printIsRestart };
+class printConsoleMessage extends printMessage {
+  print() {
+    Console.print(this.message);
+    return this;
+  }
+}
+
+function printGameover() {
+  const gameover = new printConsoleMessage().setMessage(Message.gameover);
+  gameover.print();
+}
+
+module.exports = { printStart, printCorrect, printIsRestart, printGameover };

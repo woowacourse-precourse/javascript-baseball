@@ -3,7 +3,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
 const handleException = require("./handleException");
 const getResult = require("./getResult");
-const { printStart, printGameover } = require("./printMessage");
+const { printStart, printCorrect, printGameover } = require("./printMessage");
 
 class App {
   constructor() {
@@ -29,12 +29,12 @@ class App {
   printResult(userInput) {
     const result = getResult(this.answer, userInput);
     Console.print(result);
-    if (this.checkCorrect(result)) this.gameOver();
+    if (this.checkCorrect(result)) this.correct();
     else this.getUserInput();
   }
 
-  gameOver() {
-    printGameover();
+  correct() {
+    printCorrect();
     this.getUserRestartInput();
   }
 
@@ -58,7 +58,7 @@ class App {
     }
 
     if (userRestartInput === Message.gameoverNum) {
-      Console.print(Message.gameover);
+      printGameover();
       Console.close();
     }
   }
