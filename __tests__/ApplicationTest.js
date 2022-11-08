@@ -59,4 +59,26 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("재시작 부분 예외 테스트", () => {
+    const randoms = [1, 3, 5, 2, 4, 6];
+    const answers = ["135", "3", "1", "246", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "잘못 입력하였습니다. 다시 입력해주세요.",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
