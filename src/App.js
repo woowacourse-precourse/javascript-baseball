@@ -15,6 +15,11 @@ const RESULT = Object.freeze({
 
 const THREE_STRIKE = 3;
 
+const BUTTON = Object.freeze({
+  재시작: "1",
+  종료: "2", 
+});
+
 class Game {
   constructor(){
     this.utilsIo = MISSIONUTILS_IO.Console;
@@ -56,6 +61,7 @@ class Game {
     this.utilsIo.print(this.showResult(ball, strike));
 
     if(this.isThreeStrike(strike)) { this.endGame(); }
+    this.inputGame(TEXTS.INPUT_TEXT, this.onGame);
   }
 
   endGame(){
