@@ -32,15 +32,38 @@ class App {
     return true;
   }
 
+  getStrikeAndBall(comNums,userNums) {
+    let strikeCounter = 0;
+    let ballCounter = this.getBallCounter(comNums,userNums);
+    for(let i =0; i<userNums; i++) {
+      if(userNums[i] === comNums[i]) {
+        strikeCounter++;
+      }
+    }
+    return [strikeCounter,ballCounter-strikeCounter];
+  }
+  getBallCounter(comNums,userNums) {
+    let ballCounter = 0;
+    for(let i =0; i<userNums; i++) {
+      if(comNums.includes(userNums[i])) {
+        ballCounter++;
+      }
+    }
+    return ballCounter;
+  }
 
-  
-  play() {
+  startBaseBallGame() {
     const computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     let userAnswer;
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(answer)=> {
       userAnswer = answer.split('').map((num)=>{return Number(num)});
     });
+  }
+  
+  play() {
+    this.startBaseBallGame();
+    
   }
 }
 
