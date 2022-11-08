@@ -1,4 +1,27 @@
 const App = require("../src/App.js");
+const MissionUtils = require("@woowacourse/mission-utils");
+
+const mockQuestions = (answers) => {
+    MissionUtils.Console.readLine = jest.fn();
+    answers.reduce((acc, input) => {
+        return acc.mockImplementationOnce((question, callback) => {
+            callback(input);
+        });
+    }, MissionUtils.Console.readLine);
+};
+
+const mockRandoms = (numbers) => {
+    MissionUtils.Random.pickNumberInRange = jest.fn();
+    numbers.reduce((acc, number) => {
+        return acc.mockReturnValueOnce(number);
+    }, MissionUtils.Random.pickNumberInRange);
+};
+
+const getLogSpy = () => {
+    const logSpy = jest.spyOn(MissionUtils.Console, "print");
+    logSpy.mockClear();
+    return logSpy;
+};
 
 describe("입력이 올바른지 판단 테스트", () => {
     const APP = new App();
@@ -72,3 +95,28 @@ describe("스트라이크와 볼 판단 테스트", () => {
         expect(RESULT).toEqual({ strike: 0, ball: 0 });
     })
 })
+
+describe("비교 결과 출력 테스트", () => {
+    const APP = new App();
+
+    test("출력 테스트", () => {
+        const RESULTS = [{ ball: 0, strike: 0 }, { ball: 1, strike: 0 }, { ball: 0, strike: 1 }, { ball: 1, strike: 1 }, { ball: 2, strike: 1 }];
+        const LOG_SPY = getLogSpy();
+        const MESSAGES = [
+            "낫싱",
+            "1볼",
+            "1스트라이크",
+            "1볼 1스트라이크",
+            "2볼 1스트라이크"
+        ];
+
+        RESULTS.forEach((result) => {
+            APP.printCompareResult(result);
+        })
+
+        MESSAGES.forEach((output) => {
+            expect(LOG_SPY).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    })
+})
+
