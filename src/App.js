@@ -70,11 +70,15 @@ class App {
     return MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입려하세요.\n',
       answer => {
-        if (answer === '1') {
-          this.play();
-        }
-        if (answer === '2') {
-          MissionUtils.Console.close();
+        switch (answer) {
+          case '1':
+            this.play();
+            break;
+          case '2':
+            MissionUtils.Console.close();
+            break;
+          default:
+            throw new Error('1 또는 2만 입력 해주세요.');
         }
       },
     );
