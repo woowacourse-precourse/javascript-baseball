@@ -105,6 +105,14 @@ class App {
     );
   }
 
+  processNextStep(numberStrike) {
+    if (numberStrike === 3) {
+      this.confirmRetry();
+    } else {
+      this.readUserInput();
+    }
+  }
+
   inputCallback() {}
 
   play() {}
