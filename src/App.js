@@ -35,7 +35,7 @@ class App {
     printResult(result);
 
     if (checkWrong(result)) this.getUserInput();
-    this.correct();
+    else this.correct();
   }
 
   correct() {
