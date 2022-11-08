@@ -47,9 +47,22 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트: 3자리가 아닌 수 입력", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트: 숫자가 아닌 문자 입력", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["Number"];
 
     mockRandoms(randoms);
     mockQuestions(answers);

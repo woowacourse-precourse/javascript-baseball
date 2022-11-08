@@ -14,6 +14,19 @@ class App {
     this.ball = 0;
   }
 
+  reGame = () => {
+    this.answer = this.createAnswer();
+    this.isRight = false;
+    this.strike = 0;
+    this.ball = 0;
+  };
+
+  initializer = () => {
+    this.isRight = false;
+    this.strike = 0;
+    this.ball = 0;
+  };
+
   createAnswer = () => {
     let i = 0;
     const answer = [];
@@ -28,11 +41,27 @@ class App {
     return answer;
   };
 
+  duplicateCheck = (answer, val) => {
+    return answer.every((e) => val !== e);
+  };
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.Game().then(() => {
       MissionUtils.Console.close();
     });
+  }
+
+  async Game() {
+    while (true) {
+      this.initializer();
+      await this.doBaseBall();
+      if (this.isRight && (await this.checkRestartGame())) {
+        break;
+      } else if (this.isRight) {
+        this.reGame();
+      }
+    }
   }
 
   async checkRestartGame() {
@@ -52,35 +81,6 @@ class App {
         }
       );
     });
-  };
-
-  async Game() {
-    while (true) {
-      this.initializer();
-      await this.doBaseBall();
-      if (this.isRight && (await this.checkRestartGame())) {
-        break;
-      } else if (this.isRight) {
-        this.reGame();
-      }
-    }
-  }
-
-  duplicateCheck = (answer, val) => {
-    return answer.every((e) => val !== e);
-  };
-
-  reGame = () => {
-    this.answer = this.createAnswer();
-    this.isRight = false;
-    this.strike = 0;
-    this.ball = 0;
-  };
-
-  initializer = () => {
-    this.isRight = false;
-    this.strike = 0;
-    this.ball = 0;
   };
 
   async doBaseBall() {
