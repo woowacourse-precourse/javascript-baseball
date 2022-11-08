@@ -8,6 +8,7 @@ const {
 const Computer = require('../computer/Computer');
 const Calculator = require('./Calculator');
 const Validator = require('../input/Validator');
+const App = require('../App');
 
 class BaseballGame {
   constructor() {
@@ -32,11 +33,11 @@ class BaseballGame {
 
       this.printResult(ball, strike);
 
-      if (strike !== NUMBER_LENGTH) {
-        this.getResult(randomNumber);
+      if (strike === NUMBER_LENGTH) {
+        return this.askRestart();
       }
 
-      this.askRestart();
+      return this.getResult(randomNumber);
     });
   }
 
@@ -49,19 +50,21 @@ class BaseballGame {
     }
 
     if (strike === NUMBER_LENGTH) {
-      return Console.print(`${strikeMessage}\n` + GAME_MESSAGE.correct);
+      Console.print(`${strikeMessage}`);
+
+      return Console.print(GAME_MESSAGE.correct);
     }
 
     return Console.print(`${ballMessage}${strikeMessage}`);
   }
 
   askRestart() {
-    Console.readLine(GAME_MESSAGE.restart, (answer) => {
-      if (answer === RESTART_OPTION.restart) {
+    Console.readLine(GAME_MESSAGE.restart, (input) => {
+      if (input === RESTART_OPTION.restart) {
         return this.start();
       }
 
-      if (answer === RESTART_OPTION.end) {
+      if (input === RESTART_OPTION.end) {
         return Console.close();
       }
 
