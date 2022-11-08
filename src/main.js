@@ -21,7 +21,7 @@ const makeRandomNumber = () => {
 
 const getNumber = (randomNumberArr) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (num) => {
-    if (wrongNumber(num)) {
+    if (isWrongNumber(num)) {
       exceptionHandlers.errorGetNumber();
     }
     if (is3Strike(num, randomNumberArr.join(''))) {
@@ -33,7 +33,7 @@ const getNumber = (randomNumberArr) => {
   });
 };
 
-const wrongNumber = (num) => {
+const isWrongNumber = (num) => {
   if (
     isNaN(Number(num)) ||
     num <= 0 ||
