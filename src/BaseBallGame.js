@@ -119,6 +119,11 @@ class BaseBallGame {
     }
   }
 
+  #isValidResetOrEndInput(input) {
+    const validator = new Validator();
+    return validator.isResetOrAndInput(input);
+  }
+
   #checkRestartOrEndGame() {
     Console.print(GAME_STATE_MESSAGE.END);
     Console.readLine(GAME_STATE_MESSAGE.RESET_0R_END, (input) => {
