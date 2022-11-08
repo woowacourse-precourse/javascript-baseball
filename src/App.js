@@ -49,6 +49,7 @@ function user_inputnumber() {
   if (userNumber <= 0) {
     return 3;
   }
+  MissionUtils.Console.close();
   return userNumber;
 }
 
