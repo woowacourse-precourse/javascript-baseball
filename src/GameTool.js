@@ -12,9 +12,19 @@ const inputNumber = () => {
   }))
 }
 
+const isValidateNumber = (input) => {
+  let result = true;
+  const regexp = /^[1-9]*$/;
+  [...input].forEach(item => {
+    result = regexp.test(item) && result;
+  })
+  return result && (input.length === 3) && ([...new Set(input.split(""))].length === 3);
+}
+
 const gameTool = {
   generateRandomNumber,
   inputNumber,
+  isValidateNumber,
 }
 
 module.exports = gameTool;

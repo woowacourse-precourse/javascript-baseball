@@ -13,6 +13,7 @@ class App {
   async start() {
     this.answer = gameTool.generateRandomNumber();
     const input = await gameTool.inputNumber();
+    if(gameTool.isValidateNumber(input) === false) throw new Error('입력이 잘못되었습니다.')
   }
 }
 
