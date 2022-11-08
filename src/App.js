@@ -33,7 +33,10 @@ class App {
       }
       MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
 
-      if (!this.isGameFinished) this.playGame();
+      if (!this.isGameFinished) {
+        this.playGame();
+        return;
+      }
 
       MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
         let restartNumber = +input;
@@ -112,8 +115,6 @@ class App {
       return `${numberOfBalls}볼 ${numberOfStrikes}스트라이크`;
     }
   }
-
-  print;
 }
 const app = new App();
 app.play();
