@@ -1,3 +1,4 @@
+const { ERROR } = require('./Constants');
 class InputValidation {
   //숫자인가?
   isNumber(input) {
@@ -27,20 +28,20 @@ class InputValidation {
 
   isValidInput(input) {
     if (this.isNumber(input) === false) {
-      throw Error('숫자만 입력할 수 있습니다.');
+      throw Error(ERROR.ONLY_NUMBER + ERROR.ERROR_ENDING);
     }
     if (this.isThreeDigits(input) === false) {
-      throw Error('세자리 수를 입력해주세요.');
+      throw Error(ERROR.LENGTH_IS_THREE + ERROR.ERROR_ENDING);
     }
     if (this.isUniqueDigits(input) === false) {
-      throw Error('각 자리수가 중복되지 않게 입력해주세요.');
+      throw Error(ERROR.NOT_UNIQUE + ERROR.ERROR_ENDING);
     }
     return true;
   }
 
   isValidRestartInput(input) {
     if (input !== '1' && input !== '2') {
-      throw Error('잘못된 입력입니다.');
+      throw Error(ERROR.ONLY_ONE_OR_TWO + ERROR.ERROR_ENDING);
     }
     return true;
   }

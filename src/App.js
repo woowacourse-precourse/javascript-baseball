@@ -1,6 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const InputValidation = require('./utils/InputValidation');
 const CompareNumber = require('./utils/CompareNumber');
+const Console = MissionUtils.Console;
+const {
+  NUM_THREE,
+  RESULT,
+  RESTART_INPUT,
+  MESSAGE,
+} = require('./utils/Constants');
 
 let computerNumber;
 class App {
@@ -10,7 +17,7 @@ class App {
   }
 
   printGreeting() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MESSAGE.START);
     this.setGame();
   }
 
@@ -22,7 +29,7 @@ class App {
     let randomNumSet = new Set();
     while (true) {
       randomNumSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
-      if (randomNumSet.size === 3) {
+      if (randomNumSet.size === NUM_THREE) {
         break;
       }
     }
@@ -32,7 +39,7 @@ class App {
 
   getUserNumber() {
     let userNumber = [];
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
+    Console.readLine(MESSAGE.INPUT, answer => {
       if (this.InputValidation.isValidInput(answer)) {
         userNumber = answer.split('').map(Number);
         this.printResult(userNumber);
@@ -44,24 +51,24 @@ class App {
     const [strike, ball] = CompareNumber(computerNumber, userNumber);
 
     if (strike === 0 && ball === 0) {
-      MissionUtils.Console.print('낫싱');
+      Console.print(RESULT.NOTHING);
     }
     if (strike > 0 && ball === 0) {
-      MissionUtils.Console.print(`${strike}스트라이크`);
+      Console.print(`${strike}${RESULT.STRIKE}`);
     }
     if (ball > 0 && strike === 0) {
-      MissionUtils.Console.print(`${ball}볼`);
+      Console.print(`${ball}${RESULT.BALL}`);
     }
     if (ball > 0 && strike > 0) {
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+      Console.print(`${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`);
     }
 
     this.isCorrect(strike);
   }
 
   isCorrect(strike) {
-    if (strike === 3) {
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    if (strike === NUM_THREE) {
+      Console.print(MESSAGE.CORRECT);
       this.wantRestart();
     } else {
       this.getUserNumber();
@@ -69,20 +76,19 @@ class App {
   }
 
   wantRestart() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      answer => {
-        if (this.InputValidation.isValidRestartInput(answer)) {
-          answer === '1' ? this.setGame() : this.printClosing();
-        }
-      },
-    );
+    Console.readLine(MESSAGE.RESTART, answer => {
+      if (this.InputValidation.isValidRestartInput(answer)) {
+        answer === RESTART_INPUT.RESTART ? this.setGame() : this.printClosing();
+      }
+    });
   }
 
   printClosing() {
-    MissionUtils.Console.print('게임을 완전히 종료합니다');
-    MissionUtils.Console.close();
+    Console.print(MESSAGE.ENDING);
+    Console.close();
   }
 }
+
+new App().play();
 
 module.exports = App;
