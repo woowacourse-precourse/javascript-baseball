@@ -1,4 +1,11 @@
 const App = require('../src/App');
+const MissionUtils = require('@woowacourse/mission-utils');
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe('Application Unit Test', () => {
   describe('createRandomNumDigitArray method test', () => {
@@ -94,6 +101,34 @@ describe('Application Unit Test', () => {
       );
       expect(strikeCount).toEqual(0);
       expect(ballCount).toEqual(0);
+    });
+  });
+
+  describe('gameResult method test', () => {
+    test('return correct random number and print ball, strike count', () => {
+      const strikeCountArray = [1, 3, 0, 0];
+      const ballCountArray = [1, 0, 3, 0];
+      const result = [false, true, false, false];
+      const logSpy = getLogSpy();
+
+      const messages = [
+        '1볼 1스트라이크',
+        '3스트라이크',
+        '3볼 ',
+        '3스트라이크',
+        '낫싱',
+      ];
+
+      const app = new App();
+      for (let i = 0; i < strikeCountArray.length; i++) {
+        expect(app.gameResult(strikeCountArray[i], ballCountArray[i])).toBe(
+          result[i]
+        );
+      }
+
+      messages.forEach((output, idx) => {
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+      });
     });
   });
 });

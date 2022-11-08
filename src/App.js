@@ -66,6 +66,37 @@ class App {
     });
     return [strikeCount, ballCount];
   }
+
+  /**
+   * input strike, ball count and print result message
+   * @param {number} strikeCount
+   * @param {number} ballCount
+   * @returns is finish boolean
+   */
+  gameResult(strikeCount, ballCount) {
+    const strikeMessage = `${strikeCount}스트라이크`;
+    const ballMessage = `${ballCount}볼`;
+    const nothingMessage = '낫싱';
+    const result = strikeCount === 3;
+
+    let resultMessage = '';
+
+    if (ballCount === 0 && strikeCount === 0) {
+      resultMessage += nothingMessage;
+    }
+    if (ballCount > 0) {
+      resultMessage += ballMessage + ' ';
+    }
+
+    if (strikeCount > 0) {
+      resultMessage += strikeMessage;
+    }
+
+    MissionUtils.Console.print(resultMessage);
+    MissionUtils.Console.close();
+
+    return result;
+  }
 }
 
 module.exports = App;
