@@ -102,7 +102,7 @@ class App {
   }
 
   convertStringToArray(string) {
-    return Array.from(string);
+    return Array.from(String(string));
   }
 
   printHint(ball, strike) {
