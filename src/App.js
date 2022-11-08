@@ -2,64 +2,90 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const { Console, Random } = MissionUtils;
 
 class App {
-  randomNumber(){
-    const computer = [];
-    while (computer.length < 3) {
-    const number = Random.pickNumberInRange(1, 9);
-    if (!computer.includes(number)) {
-     computer.push(number);
-       }
-     }    
+  computer;
+  playerNumber;
+
+ 
+  check(answer) {
+    if (answer.length === 3 && !isNaN(Number(answer))) {
+      return false;
+    }
+  
+    return true;
   }
-  isdupli(answer) {
+
+  isdupli(answer) {//중복숫자확인
     let cnt=0;
     for(let i=1;i<3;i++){
       if(answer[i]===answer[i-1]){
         cnt++;
       }
-    }
-    if(cnt>0) return true;
+   }
+   if(cnt>0) return true;
     return false;
+  }
+
+
+  strike(num, i) {
+    return this.computer[i] === num;
+  }
+
+  ball(num, i) {
+    return this.computer[i] !== num && this.computer.includes(num);
+  }
+
+  randomNumber(){
+    this.computer = [];
+    while (this.computer.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+    if (!this.computer.includes(number)) {
+      this.computer.push(number+"");
+       }
+     }    
+ 
   }
   inputNumber() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
-      if (ans.length === 3 && !isNaN(Number(ans))) {
-        Console.print("숫자만 3개를 입력해주세요.");
-      }else if(ans.length>3){
-        Console.print("숫자를 3개만 입력해주세요.");
-      }else if(isdupli(ans)){
-        Console.print("중복되지 않은 숫자 3개를 입력해주세요.");
+      if(this.check(ans)) {
+        throw new Error("숫자만 3개를 입력해주세요.");
       }
-      const playerNumber = [];
-      let res = {};
+       if(this.isdupli(ans)){
+         throw new Error("중복되지 않은 숫자 3개를 입력해주세요.");
+       }
+      this.playerNumber = [...ans];
+       this.res = {};
 
-        playerNumber.forEach((num, i) => {
-        if (computer[i] === num) {
-          res.strike = res.strike + 1 || 1;
+       this.playerNumber.forEach((num, i) => {
+        if (this.strike(num, i)) {
+          this.res.strike = this.res.strike + 1 || 1;
         }
-        if (computer[i] !== num && computer.includes(num)) {
-          res.ball = res.ball + 1 || 1;
+        if (this.ball(num,i)) {
+          this.res.ball = this.res.ball + 1 || 1;
         }
       });
-      resultGame();
+
+      this.resultGame();
+      this.reGame();
     });
   }
 
   resultGame() {
     let resultValue = "";
-    if (res.ball > 0) {
-      resultValue += `${res.ball}볼 `;
-    }else if(res.strike > 0) {
-      resultValue += `${res.strike}스트라이크 `;
-    }else if(!res.ball && !res.strike) {
+    if (this.res.ball > 0) {
+      resultValue += `${this.res.ball}볼 `;
+    }
+    if(this.res.strike > 0) {
+      resultValue += `${this.res.strike}스트라이크 `;
+    }
+    if(!this.res.ball && !this.res.strike) {
       resultValue = "낫싱";
     }
 
     Console.print(resultValue);
-    if (res.strike === 3) {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (this.res.strike === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }else {
-      inputNumber();
+      this.inputNumber();
     } 
   }
 
@@ -68,12 +94,14 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (ans) => {
         if (ans === "1") {
-          this.randomeNumber();
+          this.randomNumber();
           this.inputNumber(); 
-        }else if (ans === "2") {
+        }
+        if (ans === "2") {
           Console.print("숫자 야구 게임을 종료합니다.");
-        }else if(ans !=="1"||ans !=="2"){
-          Console.print("1과 2 문자만 입력 가능합니다.");
+        }
+        if(ans !=="1"||ans !=="2"){
+           Console.print("1과 2 문자만 입력 가능합니다.");
         }
         return;
       }
@@ -87,6 +115,8 @@ class App {
     Console.close();
   }
 }
+
 const app = new App();
 app.play();
+
 module.exports = App;
