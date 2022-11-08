@@ -47,31 +47,10 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("재시작(1)/종료(2) 외 다른 숫자 입력", () => {
-    const randoms = [1, 3, 5, 5, 8, 9];
-    const answers = ["135", "3", "2"];
-    const logSpy = getLogSpy();
-    const messages = ["3스트라이크", "1 또는 2를 입력해주세요.", "게임 종료"];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    const app = new App();
-    app.play();
-
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
   test("컴퓨터가 1에서 9까지 서로 다른 임의의 수 3개 선택", () => {
-    const randoms = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-    const app = new App();
-    app.play();
-
     expect(() => {
-      setAnswer(randoms).toHaveLength(3);
+      const app = new App();
+      app.setAnswer().toHaveLength(3);
     });
   });
 
