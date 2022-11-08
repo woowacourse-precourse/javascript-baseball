@@ -3,6 +3,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   constructor() {
     this.randomNumber = [];
+    this.userInput = [];
   };
 
   play() {
@@ -31,21 +32,24 @@ class App {
     if (answer.length !== 3) {
       throw new Error("입력이 잘못되었습니다.");
     }
-    this.baseballGame(this.randomNumber, answer);
+    else {
+      this.userInput = answer;
+    }
+    this.baseballGame(this.randomNumber, this.userInput);
   }
 
   baseballGame(random, answer) {
     let strike = 0;
     let ball = 0;
-    
-    for (let i=0; i<3; i++) {
-      if (random[i] === answer[i]) {
+
+    for (let val of answer) {
+      if (random.indexOf(val) === -1 )
+        continue;
+      else if (random.indexOf(val) === answer.indexOf(val) && random.indexOf(val) !== -1 ) {
         strike += 1;
       }
-      else {
-        if (random.includes(answer[i])) {
-          ball += 1;
-        }
+      else if (random.indexOf(val) !== answer.indexOf(val) && random.indexOf(val) !== -1 ) {
+        ball += 1;
       }
     }
     this.checkBallStrike(strike, ball);
@@ -88,8 +92,9 @@ class App {
     })
   }
 
-
-
+  returnNumber() {
+    return this.randomNumber;
+  }
 }
 
 const app = new App();
