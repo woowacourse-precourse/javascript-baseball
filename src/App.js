@@ -96,7 +96,7 @@ class App {
       App.checkInputValid(input);
 
       this.checkResult(input);
-      if (this.iscorrect) {
+      if (this.isCorrect() == true) {
         this.endGame();
       }
       this.playerTurn();
@@ -123,7 +123,7 @@ class App {
         this.replay();
       }
       if (input == 2) {
-        appExit();
+        App.appExit();
       }
     });
   }
@@ -140,3 +140,5 @@ class App {
 }
 
 module.exports = App;
+// const app = new App( );
+// app.play();
