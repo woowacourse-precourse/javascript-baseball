@@ -23,6 +23,12 @@ class App {
     }
     return randomNumbers;
   }
+
+  createMyNumber() {
+    MissionUtils.Console.readline("숫자를 입력해주세요 : ", (answer) => {
+      
+    })
+  }
 }
 
 const app = new App();
