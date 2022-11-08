@@ -1,11 +1,12 @@
 const { Console } = require("@woowacourse/mission-utils");
 
-const getUserInputs = async (notification) => {
-  return new Promise((resolve) => {
-    Console.readLine(notification, (input) => {
-      resolve(input);
-    });
+const getUserInputs = (notification) => {
+  let userInput;
+  Console.readLine(notification, (input) => {
+    userInput = input;
+    Console.close();
   });
+  return userInput;
 };
 
 module.exports = getUserInputs;
