@@ -47,6 +47,10 @@ class App {
     this.play();
   }
 
+  quit() {
+    Console.close();
+  }
+
   setComputerNumber() {
     this.computerNumber = this.createComputerNumber();
   }
