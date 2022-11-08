@@ -43,7 +43,7 @@ class Game {
       );
 
       //this.isValidInput(input); // 유효성 검사
-      //this.printScore(ball, strike);
+      this.printScore(ball, strike);
       if (strike !== 3) {
         //return this.getCount;
       } else {
@@ -63,8 +63,20 @@ class Game {
         ball++;
       }
     });
-    console.log(answerNumber, inputNumber, ball, strike);
     return { ball, strike };
+  }
+  printScore(ball, strike) {
+    let output;
+    if (ball === 0 && strike === 0) {
+      output = SCORE.NOTHING;
+    } else if (ball > 0 && strike > 0) {
+      output = `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`;
+    } else if (ball > 0) {
+      output = `${ball}${SCORE.BALL}`;
+    } else if (strike > 0) {
+      output = `${strike}${SCORE.STRIKE}`;
+    }
+    return Console.print(output);
   }
 }
 const game = new Game();
