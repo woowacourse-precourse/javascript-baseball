@@ -17,6 +17,7 @@ class App {
 
   getComputerNumbers() {
     const computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
+    console.log(computerNumbers);
     this.getUserNumbers(computerNumbers);
   }
 
@@ -36,13 +37,13 @@ class App {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       return this.askRestart();
     }
+
     if (result === 'nothing') {
       MissionUtils.Console.print('낫싱');
       return this.getUserNumbers(computerNumbers);
     }
 
     MissionUtils.Console.print(result);
-
     return this.getUserNumbers(computerNumbers);
   }
 
@@ -52,11 +53,12 @@ class App {
       if (userInput === '1') {
         return this.play();
       }
+
       if (userInput === '2') {
         return MissionUtils.Console.close();
       }
 
-      this.error.print();
+      return this.error.print();
     });
   }
 }
