@@ -28,6 +28,7 @@ const select_computer_num = function selectComputerNumber() {
 }
 const user_input_number= function getUserInputNumber() {
   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_num) => {
+    Validation.check_input_valid(input_num);
     user_to_array(input_num);
   });
 }
