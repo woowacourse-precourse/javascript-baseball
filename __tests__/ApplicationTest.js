@@ -142,4 +142,26 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 
+  test("3번 연속 게임 재시작 후 종료하는 경우", () => {
+    const randoms = [7, 2, 4, 5, 6, 8, 1, 2, 4, 8, 9, 7];
+    const answers = ["724", "1", "568", "1", "124", "1", "897", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "3스트라이크",
+      "3스트라이크",
+      "게임 종료"
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
 });
