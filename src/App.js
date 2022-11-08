@@ -82,14 +82,22 @@ class App {
   }
 
   discriminator(strikeCount, ballCount) {
-    const discrimination =
-      ballCount && strikeCount
-        ? `${ballCount + JUDGE_MESSAGE.BALL} ${
-            strikeCount + JUDGE_MESSAGE.STRIKE
-          }`
-        : (ballCount ? `${ballCount + JUDGE_MESSAGE.BALL}` : "") +
-            (strikeCount ? `${strikeCount + JUDGE_MESSAGE.STRIKE}` : "") ||
-          JUDGE_MESSAGE.NOTHING;
+    let discrimination;
+
+    if (ballCount === 0 && strikeCount === 0) {
+      discrimination = JUDGE_MESSAGE.NOTHING;
+    }
+    if (ballCount !== 0 && strikeCount === 0) {
+      discrimination = ballCount + JUDGE_MESSAGE.BALL;
+    }
+    if (ballCount === 0 && strikeCount !== 0) {
+      discrimination = strikeCount + JUDGE_MESSAGE.STRIKE;
+    }
+    if (ballCount !== 0 && strikeCount !== 0) {
+      discrimination = `${ballCount + JUDGE_MESSAGE.BALL} ${
+        strikeCount + JUDGE_MESSAGE.STRIKE
+      }`;
+    }
 
     return discrimination;
   }
