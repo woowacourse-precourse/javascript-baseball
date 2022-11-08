@@ -120,3 +120,28 @@ describe("비교 결과 출력 테스트", () => {
     })
 })
 
+describe("게임 한 턴 진행 테스트", () => {
+    test("게임 한 턴 진행", () => {
+        const RANDOMS = [1, 2, 3];
+        const ANSWERS = ["456", "145", "256", "137", "125", "132"];
+        const LOG_SPY = getLogSpy();
+        const MESSAGES = [
+            "낫싱",
+            "1스트라이크",
+            "1볼",
+            "1볼 1스트라이크",
+            "2스트라이크",
+            "2볼 1스트라이크"
+        ];
+
+        mockRandoms(RANDOMS);
+        mockQuestions(ANSWERS);
+
+        const APP = new App();
+        APP.play();
+
+        MESSAGES.forEach((output) => {
+            expect(LOG_SPY).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    })
+})
