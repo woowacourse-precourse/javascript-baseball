@@ -7,14 +7,17 @@ const { GAME_MESSAGE } = require("../constants/index");
 const startGame = () => MissionUtils.Console.print(GAME_MESSAGE.START);
 
 const inputNumber = async (computerNumber) => {
+  let restart = true;
   MissionUtils.Console.readLine(GAME_MESSAGE.INPUT_NUMBER, (userNumber) => {
     if (isValid(userNumber)) {
       if (isAnswer(userNumber, computerNumber)) {
-        return false;
+        restart = restartGame();
+        return restart;
       }
     }
-    inputNumber(computerNumber);
   });
+
+  return restart;
 };
 
 const playGame = async () => {
@@ -24,6 +27,17 @@ const playGame = async () => {
   while (isGameRun) {
     isGameRun = await inputNumber(computerNumber);
   }
+};
+
+const restartGame = () => {
+  MissionUtils.Console.readLine(GAME_MESSAGE.RESTART, (option) => {
+    if (option === "1") {
+      return true;
+    } else {
+      closeGame();
+      return false;
+    }
+  });
 };
 
 const closeGame = () => MissionUtils.Console.close();
@@ -38,4 +52,4 @@ const isAnswer = (userNumber, computerNumber) => {
   return false;
 };
 
-module.exports = { startGame, playGame, closeGame };
+module.exports = { startGame, playGame };

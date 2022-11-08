@@ -1,4 +1,4 @@
-const { startGame, playGame, closeGame } = require("./game");
+const { startGame, playGame } = require("./game");
 const { getComputerNumber } = require("./numberMaker");
 const { isValid } = require("./validate");
 const { getHint } = require("./hintMaker");
@@ -6,7 +6,6 @@ const { getHint } = require("./hintMaker");
 module.exports = {
   startGame,
   playGame,
-  closeGame,
   getComputerNumber,
   isValid,
   getHint,
