@@ -25,7 +25,7 @@ class App {
       const userNum = input.trim();
       const isValid = this.user.checkValidation(userNum);
       if (!isValid) {
-        throw new Error("올바른 입력이 아닙니다. 프로그램을 종료합니다.");
+        sayError();
       }
       const [ball, strike] = this.checker.checkStrikeAndBall(
         targetNum,
