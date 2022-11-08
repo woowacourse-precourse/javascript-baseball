@@ -18,4 +18,17 @@ describe("함수 테스트", () => {
       expect(score).toEqual(results[i])
     })
   })
+
+  test('checkInputIsValid로 입력값이 중복되지 않은 3자리 숫자인지 검사',()=>{
+    const rightInputs = ['123', '503', '937']
+    const wrongInputs = ['12', 'abc', '111']
+    
+    rightInputs.forEach(input => {
+      expect(checkInputIsValid(input)).toEqual(true)
+    })
+
+    wrongInputs.forEach(input => {
+      expect(()=>checkInputIsValid(input)).toThrow()
+    })
+  })
 });
