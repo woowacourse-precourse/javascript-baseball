@@ -65,5 +65,28 @@ describe("구현 기능 목록 테스트", () => {
             "예외 입력 발생, 프로그램을 종료합니다"
         );
       });
-   
+    test("낫싱인 경우", () => {
+        const app = new App();
+        const logSpy = getLogSpy();
+        app.gameResult(0, 0);
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
+      });
+    test("스트라이크가 0이고 볼이 있는 경우", () => {
+        const app = new App();
+        const logSpy = getLogSpy();
+        app.gameResult(0, 2);
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("2볼"));
+      });
+    test("볼이 0이고 스트라이크가 있는 경우", () => {
+        const app = new App();
+        const logSpy = getLogSpy();
+        app.gameResult(2, 0);
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("2스트라이크"));
+      });
+    test("스트라이크, 볼이 다있는 경우", () => {
+        const app = new App();
+        const logSpy = getLogSpy();
+        app.gameResult(2, 1);
+        expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1볼 2스트라이크"));
+      });      
   });
