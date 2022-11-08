@@ -49,9 +49,9 @@ class BaseballGame {
     if (strike === 0 && ball === 0) {
       return Console.print("낫싱");
     } else if (ball > 0 && strike === 0) {
-      return Console.print(`${ball}볼`);
+      Console.print(`${ball}볼`);
     } else if (ball === 0 && strike > 0) {
-      return Console.print(`${strike}스트라이크`);
+      Console.print(`${strike}스트라이크`);
     } else Console.print(`${ball}볼 ${strike}스트라이크`);
   };
 
@@ -61,7 +61,7 @@ class BaseballGame {
 
     if (OneOrTwo == 1) {
       this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
-      return this.playGame();
+      this.playGame();
     } else if (OneOrTwo == 2) {
       Console.close();
     }
