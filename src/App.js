@@ -1,3 +1,5 @@
+const { Random, Console } = require('@woowacourse/mission-utils');
+
 const HINT_WORD = {
   BALL: '볼',
   STRIKE: '스트라이크',
@@ -18,7 +20,13 @@ const MESSAGE = {
 };
 
 class App {
-  play() {}
+  play() {
+    this.start();
+  }
+
+  start() {
+    Console.print(MESSAGE.START);
+  }
 }
 
 module.exports = App;
