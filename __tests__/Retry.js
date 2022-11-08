@@ -37,6 +37,16 @@ describe("UserInput과 관련된 테스트", () => {
       ERROR.USER_INPUT_LENGTH
     );
   });
+  test("재시작 유효성체크: ", () => {
+    expect(checkInputValid.checkUserRetryInput(12)).toBe(
+      ERROR.USER_RETRY_INPUT_LENGTH
+    );
+  });
+  test("재시작 유효성체크: ", () => {
+    expect(checkInputValid.checkUserRetryInput(0)).toBe(
+      ERROR.USER_RETRY_INPUT_RANGE
+    );
+  });
 });
 
 describe("Error 발생 테스트", () => {

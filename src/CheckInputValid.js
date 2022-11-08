@@ -21,12 +21,12 @@ function checkRange(userNum) {
 }
 
 function checkRangeOfRetryUserInput(retryNum) {
-  if (/^[1-2]*$/g.test(retryNum) === false) {
+  if (/^[1-2]*$/g.test([...String(retryNum)].join("")) === false) {
     return false;
   }
 }
 function checkLengthOfRetryUserInput(retryNum) {
-  if (retryNum.length !== 1) {
+  if ([...String(retryNum)].length !== 1) {
     return false;
   }
 }
