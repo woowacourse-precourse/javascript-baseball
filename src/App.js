@@ -1,4 +1,6 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
+const { createRandomNumber, validateInput } = require('./Utils');
+
 
 const SYSTEM_MESSAGES = {
   START: "숫자 야구 게임을 시작합니다.",
@@ -6,13 +8,6 @@ const SYSTEM_MESSAGES = {
   FINISH: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
   NOTHING: "낫싱",
 }
-
-const ERROR_MESSAGES = {
-  NULL: "숫자를 입력해 주세요!",
-  SHORT: "3자리 숫자를 입력해 주세요!",
-  DUPL: "서로 다른 수를 입력해 주세요!"
-}
-
 
 class App {
   constructor() {
@@ -41,22 +36,13 @@ class App {
     this.init();
 
     // 1. random number(컴퓨터 숫자) 생성
-    this.createRandomNumber();
+    this.RAND_NUM = createRandomNumber(this.RAND_NUM);
 
     // 사용자가 정답 입력
     this.inputUserAnswer();
   }
 
-  // 1. random number(컴퓨터 숫자) 생성
-  createRandomNumber() {
-    while (this.RAND_NUM.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!this.RAND_NUM.includes(number)) {
-        this.RAND_NUM.push(number);
-      }
-    }
-  }
-
+  // 사용자가 정답 입력
   inputUserAnswer() {
     //2. 사용자가 숫자를 입력한다. 
     Console.readLine(SYSTEM_MESSAGES.REQUEST, (answer) => {
@@ -66,7 +52,7 @@ class App {
       })
 
       // 4. 사용자가 입력한 입력에 대한 validation을 수행한다.
-      this.validateInput();
+      validateInput(this.INPUT_NUM);
 
       //2. randNum과 비교하여 결과를 확인한다.
       this.checkResult();
@@ -85,6 +71,8 @@ class App {
         }
       }
     })
+    
+    // 결과에 따른 메세지 출력
     this.printMessages();
   }
 
@@ -94,7 +82,7 @@ class App {
       Console.print(SYSTEM_MESSAGES.NOTHING);
       this.inputUserAnswer();
     } else {
-      // 3. 정답을 맞춘 경우 게임 시작
+      // 3. 정답을 맞춘 경우 게임 다시 시작
       if (this.COUNT_STRIKE === 3) {
         Console.print(SYSTEM_MESSAGES.FINISH);
         if (this.INPUT_NUM.includes(1)) {
@@ -106,20 +94,6 @@ class App {
         // 정답을 맞춘 경우가 아니면 사용자에게 입력만 다시 받기
         Console.print(`${this.COUNT_BALL}볼 ${this.COUNT_STRIKE}스트라이크`);
         this.inputUserAnswer();
-      }
-    }
-  }
-
-  validateInput() {
-    if (this.INPUT_NUM.length === 0) {
-      throw ERROR_MESSAGES.NULL;
-    }
-    if (this.INPUT_NUM.length > 3) {
-      throw ERROR_MESSAGES.SHORT;
-    }
-    for (let i = 0; i < this.INPUT_NUM.length; i++) {
-      if (this.INPUT_NUM[i] == this.INPUT_NUM[i + 1]) {
-        throw ERROR_MESSAGES.DUPL;
       }
     }
   }
