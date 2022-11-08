@@ -33,6 +33,15 @@ describe("숫자 야구 전체 테스트", () => {
     );
   });
 
+  test("두번째 게임일시 환영 메시지 미출력", () => {
+    const controller = new Controller(false);
+    const logSpy = getLogSpy();
+
+    controller.init();
+
+    expect(logSpy).toHaveBeenCalledTimes(0);
+  });
+
   test("입력한 수에 대한 스트라이크,볼,낫싱 결과 출력", () => {
     const controller = new Controller(false);
     const logSpy = getLogSpy();
@@ -66,6 +75,8 @@ describe("숫자 야구 전체 테스트", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
   });
+
+  test("정답 이후 액션", () => {});
 });
 
 afterAll(() => {
