@@ -8,6 +8,13 @@ class App {
 
   play() {
     const randomNumbers = this.generateRandomNumbers();
+    this.getUserInput(randomNumbers);
+  }
+
+  getUserInput(randomNumbers) {
+    Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
+
+    });
   }
 
   generateRandomNumbers() {
