@@ -12,6 +12,8 @@ const inputUserNum = () => {
     userAnswerNumList = stringToNumberInList(answer);
 
     let [ballCount, strikeCount] = getGameResult(gameAnswerNumList, userAnswerNumList);
+    printGameResult(ballCount, strikeCount);
+
   });
 }
 
@@ -44,6 +46,22 @@ const getGameResult = (answer, userAnswer) => {
   })
 
   return [ballCount, strikeCount]
+}
+
+const printGameResult = (ballCount, strikeCount) => {
+  if (ballCount === 0 && strikeCount === 0) {
+    MissionUtils.Console.print('낫싱');
+    return;
+  }
+  if (ballCount === 0) {
+    MissionUtils.Console.print(strikeCount + '스트라이크');
+    return;
+  }
+  if (strikeCount === 0) {
+    MissionUtils.Console.print(ballCount + '볼 ');
+    return;
+  }
+  MissionUtils.Console.print(ballCount + '볼 ' + strikeCount + '스트라이크');
 }
 
 }
