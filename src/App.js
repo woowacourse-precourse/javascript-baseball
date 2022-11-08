@@ -20,7 +20,7 @@ class App {
     this.startGame();
   }
 
-  playGame() {
+  startGame() {
     let answer = this.getRandomNumber();
     this.playerInput(answer);
   }
