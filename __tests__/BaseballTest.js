@@ -1,5 +1,4 @@
 const App = require("../src/App");
-const { isValidateNumber } = require("../src/GameTool");
 const gameTool = require("../src/GameTool");
 
 describe("gameTool 테스트", () => {
@@ -7,7 +6,7 @@ describe("gameTool 테스트", () => {
     const set = new Set();
     const randomNumbers = gameTool.generateRandomNumber();
 
-    randomNumbers.forEach((number) => {
+    [...randomNumbers].forEach((number) => {
       expect(number.toString()).toMatch(/[1-9]/);
       set.add(number);
     });
