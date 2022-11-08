@@ -112,27 +112,6 @@ class App {
     throw new err(`${message}\n${this.MESSAGES.endProgram}`);
   }
 
-  restart(input) {
-    const COMMANDS = {
-      1: this.startNewGame.bind(this),
-      2: this.endProgram.bind(this),
-    };
-
-    if (!this.isValidInput(input)) {
-      return;
-    }
-
-    if (!this.isValidCommandInput(input, COMMANDS)) {
-      return;
-    }
-
-    COMMANDS[input]();
-  }
-
-  confirmRestart() {
-    Console.readLine(this.MESSAGES.restart, this.restart.bind(this));
-  }
-
   compareNumbers() {
     let sameDigitCount = 0;
     let sameNumberCount = 0;
@@ -183,6 +162,27 @@ class App {
     const gameResult = this.getGameResult({ sameDigitCount, sameNumberCount });
 
     Console.print(gameResult);
+  }
+
+  restart(input) {
+    const COMMANDS = {
+      1: this.startNewGame.bind(this),
+      2: this.endProgram.bind(this),
+    };
+
+    if (!this.isValidInput(input)) {
+      return;
+    }
+
+    if (!this.isValidCommandInput(input, COMMANDS)) {
+      return;
+    }
+
+    COMMANDS[input]();
+  }
+
+  confirmRestart() {
+    Console.readLine(this.MESSAGES.restart, this.restart.bind(this));
   }
 
   setNewAnswer() {
