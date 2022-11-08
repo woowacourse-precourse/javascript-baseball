@@ -70,7 +70,6 @@ class App {
           }
           if (Number(response) === 2) {
             MISSION_UTILS.Console.close();
-            throw new Error();
           }
         });
       }
