@@ -1,8 +1,8 @@
 class App {
   checkoverlap(answer){
-    verification = false;
-    for (var i =0;i<3;i++){
-      for (var j = i;j<3;j++){
+    var verification = false;
+    for (var i =0;i<2;i++){
+      for (var j = i+1;j<3;j++){
         if (answer[i] == answer[j]){
           verification = true;
         }
@@ -88,14 +88,14 @@ class App {
       //MissionUtils.Console.print("숫자를 입력해주세요: ")
       MissionUtils.Console.readLine("숫자를 입력해주세요: ", (x) =>{
         if (isNaN(parseInt(x))) throw 'not a number';
-        if (parseInt(x) <0) throw 'minus number';
+        if (parseInt(x) <=0) throw 'not a natural number';
         
         answer = x.split(",");
       });
       answer = answer.toString().split(",");
       answer = answer.join("");
       if (answer.length != 3) throw 'length error';
-      if (checkoverlap(answer) == true) throw 'overlap';
+      if (this.checkoverlap(answer) == true) throw 'overlap';
 
       //계산하기
       var values = this.calculate(Numbers, answer);
