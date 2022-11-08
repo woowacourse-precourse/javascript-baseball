@@ -74,6 +74,7 @@ class App {
 
   printException() {
     Console.print(PHRASE.ERROR2);
+    this.processResult(3);
   }
 
   restart() {
@@ -82,6 +83,7 @@ class App {
   }
 
   exit() {
+    Console.print(PHRASE.EXIT);
     Console.close();
   }
 

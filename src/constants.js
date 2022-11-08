@@ -5,6 +5,7 @@ const PHRASE = {
   RESTART: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
   ERROR: '서로 다른 세 자리 수를 입력해야 합니다.',
   ERROR2: '잘못된 값을 입력하였습니다.',
+  EXIT: '게임을 종료합니다.',
 };
 
 const BASEBALL = {
