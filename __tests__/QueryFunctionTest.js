@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { selectNextQuery } = require("../src/Query");
+const { selectNextQuery, restartQuery } = require("../src/Query");
 
 jest.mock("../src/make", () => ({
   makeBallStrikeCount: jest.fn(() => ({ strike: 1, ball: 1 })),
@@ -27,5 +27,21 @@ describe("selectNextQuery 함수 테스트", () => {
   test("이외의 경우", () => {
     selectNextQuery(2, [1, 2, 3], selectNumQueryMock, restartQueryMock);
     expect(selectNumQueryMock).toBeCalledTimes(1);
+  });
+});
+
+describe("restartQuery 함수 테스트", () => {
+  const selectNumQueryfn = jest.fn();
+  test("1을 입력한 경우", () => {
+    MissionUtils.Console.readLine = jest.fn((_, callback) => callback("1"));
+    restartQuery(selectNumQueryfn);
+    expect(selectNumQueryfn).toBeCalledTimes(1);
+  });
+
+  test("2를 입력한 경우", () => {
+    MissionUtils.Console.readLine = jest.fn((_, callback) => callback("2"));
+    MissionUtils.Console.close = jest.fn();
+    restartQuery(selectNumQueryfn);
+    expect(MissionUtils.Console.close).toBeCalledTimes(1);
   });
 });
