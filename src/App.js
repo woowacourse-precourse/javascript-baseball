@@ -25,6 +25,8 @@ class App {
       this.getResult();
       this.printCountMessage();
     }
+
+    this.resetGame();
   }
 
   setAnswerList() {
@@ -88,6 +90,13 @@ class App {
     if (!messageList.length) messageList.push('낫싱');
 
     MissionUtils.Console.print(messageList.join(' '));
+  }
+
+  resetGame() {
+    this.answerList = [];
+    this.inputList = [];
+    this.strike = 0;
+    this.ball = 0;
   }
 }
 
