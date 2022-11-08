@@ -67,16 +67,15 @@ class App {
     return strikeCount;
   }
 
-  ballCounter(userNumbersArray, refNumbersArray) {
+  ballCounter(userNumbers, refNumbers) {
     let ballCount = 0;
 
-    userNumbersArray.map((userNumber, index) => {
+    for (let i = 0; i < 3; i++) {
       ballCount =
-        refNumbersArray.indexOf(userNumber) !== index &&
-        refNumbersArray.includes(userNumber)
+        refNumbers[i] !== userNumbers[i] && refNumbers.includes(userNumber)
           ? ballCount + 1
           : ballCount;
-    });
+    }
 
     return ballCount;
   }
