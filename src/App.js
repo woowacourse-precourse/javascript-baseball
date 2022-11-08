@@ -26,14 +26,14 @@ function App () {
   function recieveUserInput () {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       if(isValidInput(input)){
-        getScore(matchNumber(input, this.randomNumber));
+        getScore(getMatchedBallStrikeNumber(input, this.randomNumber));
         return;
       }
       throw '올바른 값을 입력하세요.';
     });
   }
 
-  function matchNumber (num1, num2) {
+  function getMatchedBallStrikeNumber (num1, num2) {
     let strike = 0;
     let ball = 0;
     const userInput = num1
