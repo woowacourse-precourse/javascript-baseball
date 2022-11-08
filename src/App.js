@@ -4,6 +4,10 @@ class App {
   randomNumbers;
   strikeCount;
 
+  constructor(){
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  }
+
   setRandomNumbers() {
     const result = [];
     for (let i = 0; i < 3; i++) {
@@ -94,10 +98,13 @@ class App {
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.randomNumbers = this.setRandomNumbers();
     this.startBaseball();
   }
 }
 
-module.exports = App;
+const app = new App();
+app.play();
+
+
+// module.exports = App;
