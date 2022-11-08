@@ -24,23 +24,22 @@ class App {
   compare(number){
     this.inputUserNumber(number);
   }
-  compareBothNumber(randomNumber, userNumber){
-    let random = numberToArr(randomNumber);
-    let user = numberToArr(userNumber);
- 
+  compareBothNumber(computer, userNumber){
+    const user = userNumber.toString().split('');
     const result = [0, 0];
-  
-    if(random[0] == user[0]) result[0]++;
-    else{
-      if(random[0] == user[1]) result[1]++;
-      else if(random[0] == user[2]) result[1]++;
-    }
-    if(random[1] == user[1]) result[0]++;
-    else{
-      if(random[1] == user[2]) result[1]++;
-    }
-    if(random[2] == user[2]) result[0]++;
+    let ball = 0;
+    let strike = 0;
 
+    if(parseInt(user[0]) === computer[0]) strike++;
+    else if(parseInt(user[0]) === computer[1]) ball++;
+    else if(parseInt(user[0]) === computer[2]) ball++;
+    if(parseInt(user[1]) === computer[1]) strike++;
+    else if(parseInt(user[1]) === computer[2]) ball++;
+    if(parseInt(user[2]) === computer[2]) strike++;
+
+    result[0] += strike;
+    result[1] += ball;
+    
     return result;
 
   }
@@ -90,21 +89,11 @@ class App {
       }
     });
     if(this.result == 1){
-      this.reset();
-      this.random();
+      this.play();
     }
     else{
       MissionUtils.Console.close();
     }
-  }
-  reset(){
-    this.computerNum = 0;
-    this.strike = 0;
-    this.ball = 0;
-    this.none = false;
-    this.check = false;
-    this.result = 1;
-    this.pass = false;
   }
 }
 
@@ -115,24 +104,18 @@ function validateResult(number){
   return true;
 }
 function validateNumber(number){
-  if(number.length != 3){
-    throw new Error("올바른 숫자를 입력해주세요(3자리 수).");
+  const numberStr = number.toString();
+  let checkStr = /^[1-9]+$/;
+  if(number.length !== 3){
+    throw new Error("올바른 숫자를 입력해주세요.");
   }
-  if(!(checkStr.test(number))){
-    throw new Error("올바른 숫자를 입력해주세요(1-9 사이, 문자 제외).");
-  }
+  numberStr.split('').forEach((n) => {
+    if (!(n.charCodeAt(0) >= 49 && n.charCodeAt(0) <= 57)) {
+      throw new Error("올바른 숫자를 입력해주세요.");
+    }
+  });
 
   return true;
-}
-
-function numberToArr(number){
-  var numArray = [];
-  do{
-    numArray.push(number%10);
-    number = Math.floor(number/10);
-  }while(number > 0);
-  
-  return numArray;
 }
 
 
