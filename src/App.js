@@ -25,13 +25,16 @@ class App {
   }
 
   playInning() {
-    this.getUserInput();
+    const userAnswer = this.getUserInput();
   }
 
   getUserInput() {
+    let userInput;
     Console.readLine('숫자를 입력해주세요 : ', input => {
       this.isValidInput(input);
+      userInput = input;
     });
+    return userInput;
   }
 
   isValidInput(input) {
