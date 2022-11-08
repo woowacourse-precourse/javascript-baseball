@@ -31,6 +31,19 @@ class App {
     }
   }
 
+  print() {
+    const message = Object.entries(this.result).reduce(
+      (reduced, [key, value]) => {
+        const str = `${value}${key} `;
+        reduced = key === RESULT.BALL ? str + reduced : reduced + str;
+        return reduced;
+      },
+      ""
+    );
+
+    this.computer.print(message.length > 0 ? message : RESULT.NOTHING);
+  }
+
   play() {}
 }
 
