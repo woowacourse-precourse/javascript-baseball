@@ -66,6 +66,7 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       this.askReplayGame();
     } else if (strikeCount !== 3) {
+      this.userNumber(computer);
     }
   }
 
