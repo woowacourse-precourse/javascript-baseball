@@ -2,9 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const validateInput = require("./ValidateInput");
 const getStrikeAndBall = require("./StrikeAndBall");
 const getStrikeAndBallText = require("./StrikeAndBallText");
-const getThreeRandomNumbers = require("./ThreeRandomNumbers");
 const throwError = require("./ThrowError");
-const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT } = require("./constants/ConstantValues");
+const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT, MIN_NUMBER, MAX_NUMBER } = require("./constants/ConstantValues");
 const {
   START_MESSAGE,
   INPUT_NUMBER_MESSAGE,
@@ -14,7 +13,7 @@ const {
 
 class App {
   constructor() {
-    this.threeRandomNumbers = getThreeRandomNumbers();
+    this.threeRandomNumbers = this.getThreeRandomNumbers();
     MissionUtils.Console.print(START_MESSAGE);
   }
 
@@ -43,7 +42,7 @@ class App {
         throwError();
       }
       if (input === RESTART_INPUT) {
-        this.threeRandomNumbers = getThreeRandomNumbers();
+        this.threeRandomNumbers = this.getThreeRandomNumbers();
         this.play();
         return;
       }
@@ -52,6 +51,16 @@ class App {
         return;
       }
     });
+  }
+
+  getThreeRandomNumbers() {
+    const threeRandomNumber = new Set();
+    while (threeRandomNumber.size < NUMBER_LENGTH) {
+      const newNumber = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
+      threeRandomNumber.add(newNumber);
+    }
+
+    return [...threeRandomNumber].join("");
   }
 }
 
