@@ -7,7 +7,6 @@ class App {
     this.createRandomNum();
   }
 
-  // 컴퓨터 랜덤값 생성 기능
   createRandomNum() {
     const computerInput = [];
     while (computerInput.length < 3) {
@@ -20,7 +19,6 @@ class App {
     this.startGame(computerInput);
   }
 
-  // - 사용자 숫자 입력 기능
   startGame(computerInput) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       if (this.isValidNum(userInput)) {
@@ -30,7 +28,25 @@ class App {
     });
   }
 
-  //컴퓨터 숫자와 비교 기능
+  isValidNum(userInput) {
+    if (userInput.length !== 3) {
+      throw "3개의 숫자를 입력해주세요.";
+    }
+
+    if (isNaN(userInput)) {
+      throw "숫자만 입력해주세요.";
+    }
+
+    if (new Set(userInput).size !== 3) {
+      throw "서로 다른 3자리의 숫자를 입력해주세요.";
+    }
+
+    if (userInput.includes("0")) {
+      throw "0을 제외한 숫자를 입력해주세요.";
+    }
+    return true;
+  }
+
   compareNum(computerInput, userInput) {
     let STRIKE = 0;
     let BALL = 0;
@@ -45,7 +61,6 @@ class App {
     this.printScore(computerInput, STRIKE, BALL);
   }
 
-  // 결과에 따른 값 출력 기능(낫싱,볼/스트라이크,승리)
   printScore(computerInput, STRIKE, BALL) {
     if (STRIKE > 0 && BALL > 0) {
       MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
@@ -68,7 +83,6 @@ class App {
     }
   }
 
-  // 게임 재시작 및 종료 기능
   reStart() {
     MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
@@ -82,26 +96,6 @@ class App {
         }
       }
     );
-  }
-
-  //[예외처리] 잘못된 값 입력시 오류 처리 기능
-  isValidNum(userInput) {
-    if (userInput.length !== 3) {
-      throw "3개의 숫자를 입력해주세요.";
-    }
-
-    if (isNaN(userInput)) {
-      throw "숫자만 입력해주세요.";
-    }
-
-    if (new Set(userInput).size !== 3) {
-      throw "서로 다른 3자리의 숫자를 입력해주세요.";
-    }
-
-    if (userInput.includes("0")) {
-      throw "0을 제외한 숫자를 입력해주세요.";
-    }
-    return true;
   }
 }
 
