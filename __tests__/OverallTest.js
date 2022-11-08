@@ -32,6 +32,40 @@ describe("숫자 야구 전체 테스트", () => {
       expect.stringContaining("숫자 야구 게임을 시작합니다.")
     );
   });
+
+  test("입력한 수에 대한 스트라이크,볼,낫싱 결과 출력", () => {
+    const controller = new Controller(false);
+    const logSpy = getLogSpy();
+
+    controller.init();
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("456");
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("145");
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1스트라이크"));
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("432");
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("2볼"));
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("142");
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("1볼 1스트라이크")
+    );
+
+    controller.computerNumber.setState(["1", "2", "3"]);
+    controller.updateUserGivenNumber("456");
+
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
+  });
 });
 
 afterAll(() => {
