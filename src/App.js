@@ -58,6 +58,9 @@ const calculateResult = function calculateResult(input, answer) {
   if (strike === 0) {
     return `${ball} 볼`;
   }
+  if (strike === 3) {
+    return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+  }
   return `${strike} 스트라이크 ${ball} 볼`;
 };
 
