@@ -23,12 +23,12 @@ class App {
       ball: 0,
       strike: 0
     };
-    const inputNumArr = inputNum.split('');
+    const inputNumArray = inputNum.split('');
 
-    inputNumArr.forEach((num, index) => {
-      if (parseInt(num) === this.computerNum[index])
+    inputNumArray.forEach((num, index) => {
+      if (parseInt(num) === this.computerNumber[index])
         count.strike += 1;
-      else if (this.computerNum.includes(parseInt(num)))
+      else if (this.computerNumber.includes(parseInt(num)))
         count.ball += 1;
     });
     return count;
