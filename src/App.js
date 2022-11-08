@@ -8,6 +8,8 @@ class App {
   constructor() {
     this.answerList = [];
     this.inputList = [];
+    this.strike = 0;
+    this.ball = 0;
   }
 
   play() {
@@ -18,6 +20,7 @@ class App {
   startGame() {
     this.answerList = this.setAnswerList;
     this.getPlayerInputList();
+    this.getResult();
   }
 
   setAnswerList() {
@@ -51,6 +54,24 @@ class App {
     }
 
     this.inputList = this.inputList.map(Number);
+  }
+
+  getResult() {
+    this.strike = 0;
+    this.ball = 0;
+    for (let index = 0; index < ANSWER_LENGTH; index++) {
+      this.compareInputWithAnswer(index);
+    }
+  }
+
+  compareInputWithAnswer(index) {
+    const inputNumber = this.inputList[index];
+    const answerNumber = this.answerList[index];
+    if (inputNumber === answerNumber) {
+      this.strike++;
+    } else if (this.answerList.includes(inputNumber)) {
+      this.ball++;
+    }
   }
 }
 
