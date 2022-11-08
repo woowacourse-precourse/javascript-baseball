@@ -81,8 +81,48 @@ class App {
     }
     return;
   }
+
+  checkReplay() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (replayInput) => {
+        const REPLAY = this.replay(replayInput);
+        if (REPLAY) {
+          MissionUtils.Console.close();
+        }
+      }
+    );
+  }
+  replay(input) {
+    if (!this.checkReplayInput(input)) {
+      throw new Error();
+    } else if (input === "1") {
+      const COMPUTER_NUM = this.computerRandom();
+      try {
+        this.userPick(COMPUTER_NUM);
+      } catch (error) {
+        throw new Error();
+      }
+    } else if (input === "2") {
+      return true;
+    }
+  }
+  checkReplayInput(num) {
+    if (num === "1" || num === "2") {
+      return true;
+    }
+    return false;
+  }
+
   play() {
     MissionUtils.Console.print("숫자 야구 게임 시작!");
+    const COMPUTER_NUM = this.computerRandom();
+    try {
+      this.userPick(COMPUTER_NUM);
+    } catch (error) {
+      throw new Error();
+    }
   }
 }
 
