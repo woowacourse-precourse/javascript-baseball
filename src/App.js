@@ -18,6 +18,7 @@ class App {
         this.computerNumber += `${RANDOM_NUMBER}`;
       }
     }
+    MissionUtils.Console.print(this.computerNumber);
     this.computerNumberArr = this.computerNumber
       .toString()
       .split("")
@@ -45,6 +46,39 @@ class App {
     const INPUT_SET = new Set(inputArr);
     if (INPUT_SET.size != inputArr.length) {
       throw new Error("입력 오류입니다.");
+    }
+    this.BallOrStrike(inputArr, this.computerNumberArr);
+  }
+
+  BallOrStrike(userArr, comArr) {
+    var strikeCnt = 0;
+    var ballCnt = 0;
+    for (var index = 0; index < 3; index++) {
+      if (userArr[index] == comArr[index]) {
+        strikeCnt += 1;
+      } else {
+        if (comArr.includes(userArr[index])) {
+          ballCnt += 1;
+        }
+      }
+    }
+    this.printBallOrStrike(ballCnt, strikeCnt);
+  }
+
+  printBallOrStrike(ballCnt, strikeCnt) {
+    var printHint = "";
+    if (strikeCnt == 3) {
+      MissionUtils.Console.print(
+        "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+      );
+    } else if (strikeCnt == 0 && ballCnt == 0) {
+      MissionUtils.Console.print("낫싱");
+      this.userInputMessage();
+    } else {
+      printHint += ballCnt == 0 ? "" : `${ballCnt}볼 `;
+      printHint += strikeCnt == 0 ? "" : `${strikeCnt}스트라이크`;
+      MissionUtils.Console.print(printHint);
+      this.userInputMessage();
     }
   }
 

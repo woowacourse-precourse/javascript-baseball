@@ -22,6 +22,13 @@ const mockQuestions = (answers) => {
   }, MissionUtils.Console.readLine);
 };
 
+const mockRandoms = (numbers) => {
+  MissionUtils.Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => {
+    return acc.mockReturnValueOnce(number);
+  }, MissionUtils.Random.pickNumberInRange);
+};
+
 describe("숫자 야구 게임", () => {
   test("1. 게임 시작 출력문 테스트", () => {
     const logSpy = getLogSpy();
@@ -71,5 +78,21 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+  test("5. 사용자 입력에 대한 출력 테스트", () => {
+    const randoms = [4, 8, 6];
+    const answers = ["123", "467", "487", "486"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱", "1볼 1스트라이크", "2스트라이크", "3스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
