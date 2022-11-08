@@ -34,7 +34,7 @@ class App {
 
     inputNumber() {
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(NUMBER_ENTERED) => {
-            if(this.inputNumberIsValid(NUMBER_ENTERED)) {
+            if (this.inputNumberIsValid(NUMBER_ENTERED)) {
                 const number_converted_letter = toString(NUMBER_ENTERED);
                 const letter_converted_number = number_converted_letter.split('').map((letter) => Number(letter))
                 this.gamePlayerNumber.push(letter_converted_number);
@@ -45,7 +45,7 @@ class App {
     }   
 
     inputNumberIsValid(inputNumber) {
-        if(toString(inputNumber).length !==3 || isNaN(inputNumber) || new Set(inputNumber).size !== 3) {
+        if (toString(inputNumber).length !==3 || isNaN(inputNumber) || new Set(inputNumber).size !== 3) {
             return false;
         }
         return true;
@@ -54,14 +54,14 @@ class App {
     countStrike() {
         let strikeCount = 0;
         this.gamePlayerNumber.forEach((number,index) => {
-            if(this.computerNumber.includes(number)) {
-                if(this.computerNumber[index] === number) {
+            if (this.computerNumber.includes(number)) {
+                if (this.computerNumber[index] === number) {
                     strikeCount++;
                 } 
             }
         })
 
-        if(strikeCount !== 0) {
+        if (strikeCount !== 0) {
             return (`${strikeCount}스트라이크`);
         }
     }
@@ -69,14 +69,14 @@ class App {
     countBall() {
         let ballCount = 0;
         this.gamePlayerNumber.forEach((number,index) => {
-            if(this.computerNumber.includes(number)) {
-                if(this.computerNumber[index] !== number) {
+            if (this.computerNumber.includes(number)) {
+                if (this.computerNumber[index] !== number) {
                     ballCount++;
                 } 
             }
         })
 
-        if(ballCount !== 0) {
+        if (ballCount !== 0) {
             return (`${ballCount}볼`);
         }
     }
@@ -86,7 +86,7 @@ class App {
         hintArr.push(this.countBall());
         hintArr.push(this.countStrike());
 
-        if(hintArr.length === 0) {
+        if (hintArr.length === 0) {
             hintArr.push("낫싱");
         }
         
@@ -95,7 +95,7 @@ class App {
     }
 
     conditionsOfWin() {
-        if(hintMessage.includes("3스트라이크")) {
+        if (hintMessage.includes("3스트라이크")) {
             this.gameOver();
         } else {
             this.gameProgram();
@@ -105,10 +105,10 @@ class App {
     gameOver() {
         MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (NUMBER_ENTERED) => {
-            if(NUMBER_ENTERED === "1") {
+            if (NUMBER_ENTERED === "1") {
                 this.initialize();
                 this.play();
-            } else if(NUMBER_ENTERED === "2") {
+            } else if (NUMBER_ENTERED === "2") {
                 this.initialize();
                 return;
             } else {
@@ -120,7 +120,6 @@ class App {
     initialize() {
         this.computerNumber = [];
         this.gamePlayerNumber = [];
-
     }
 }
 
