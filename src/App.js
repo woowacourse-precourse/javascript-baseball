@@ -103,6 +103,7 @@ class App {
           return this.play();
         case "2":
           MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
           break;
         default:
           throw "유효하지 않은 입력값입니다.";
