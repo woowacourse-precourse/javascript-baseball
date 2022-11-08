@@ -47,7 +47,18 @@ class App {
         ballCount += 1;
       }
     });
-    console.log("볼 => " + ballCount, "스트라이크 => " + strikeCount);
+
+    if (ballCount === 0 && strikeCount === 0) {
+      MissionUtils.Console.print("낫싱");
+    } else if (ballCount !== 0 && strikeCount === 0) {
+      MissionUtils.Console.print(ballCount + " 볼");
+    } else if (ballCount === 0 && strikeCount !== 0) {
+      MissionUtils.Console.print(strikeCount + " 스트라이크");
+    } else {
+      MissionUtils.Console.print(
+        ballCount + " 볼, " + strikeCount + " 스트라이크"
+      );
+    }
   }
 }
 const app = new App();
