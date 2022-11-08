@@ -1,4 +1,4 @@
-const { ERROR } = require('./data/constants');
+const { ERROR } = require('../data/constants');
 
 function checkLength(value, length) {
   return value.length === length;

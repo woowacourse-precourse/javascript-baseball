@@ -1,6 +1,9 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { MESSAGE, RESULT, END_OPTION } = require('./data/constants');
-const { checkBaseBallException, checkRestartException } = require('./utils');
+const {
+  checkBaseBallException,
+  checkRestartException,
+} = require('./utils/checkInput');
 
 class App {
   extractRandomNumber() {
