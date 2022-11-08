@@ -59,4 +59,54 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("user가 입력한 수의 길이가 3이 아니면 오류", () => {
+    const app = new App();
+    const USER_STRING = "1234";
+
+    expect(() => app.validateUserNumbers(USER_STRING)).toThrow();
+  });
+
+  test("user가 입력한 수에 0이 들어있으면 오류", () => {
+    const app = new App();
+    const USER_STRING = "104";
+
+    expect(() => app.validateUserNumbers(USER_STRING)).toThrow();
+  });
+
+  test("3자리 수가 아닐 때 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("1부터 9까지가 아닐 때 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["890"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("Strike, Ball 개수 세기", () => {
+    const app = new App();
+
+    const inputNumber = [1, 5, 8];
+    const randomNumber = [8, 5, 3];
+    const result = app.countStrikeAndBall(inputNumber, randomNumber);
+
+    expect(result).toEqual({ strike: 1, ball: 1 });
+  });
 });
