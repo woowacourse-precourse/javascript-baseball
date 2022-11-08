@@ -5,10 +5,6 @@ class GameMessage {
   static start() {
     MissionUtils.Console.print(constants.GAME_MESSAGE.start);
   }  
-  static gameover() {
-    MissionUtils.Console.print(constants.GAME_MESSAGE.gameover);
-    MissionUtils.Console.print(constants.GAME_MESSAGE.restart);
-  }
   static result(score) {
     let resultMessage = '';
     if(score.ball) resultMessage += `${score.ball}${constants.RESULT_COUNT.ball} `;
