@@ -52,4 +52,24 @@ describe("숫자 야구 게임", () => {
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("246"));
   });
+  test("4. 사용자 입력에 대한 예외 처리 테스트", () => {
+    const answer = ["1234"];
+
+    mockQuestions(answer);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("4. 사용자 입력에 대한 예외 처리 테스트2", () => {
+    const answer = ["097"];
+
+    mockQuestions(answer);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });

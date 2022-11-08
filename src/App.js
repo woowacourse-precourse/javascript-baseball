@@ -26,8 +26,26 @@ class App {
 
   userInputMessage() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      MissionUtils.Console.print(`${userInput}`);
+      MissionUtils.Console.print(userInput);
+      this.checkInputError(userInput);
     });
+  }
+
+  checkInputError(input) {
+    var inputArr = input.split("").map((x) => parseInt(x));
+
+    if (inputArr.length != 3) {
+      throw new Error("입력 오류입니다.");
+    }
+    for (var inputNumber of inputArr) {
+      if (inputNumber < 1) {
+        throw new Error("입력 오류입니다.");
+      }
+    }
+    const INPUT_SET = new Set(inputArr);
+    if (INPUT_SET.size != inputArr.length) {
+      throw new Error("입력 오류입니다.");
+    }
   }
 
   play() {
