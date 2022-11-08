@@ -9,11 +9,18 @@ class App {
 
   constructor() {
     this.balls = [];
+    this.score = { ball: 0, strike: 0 };
+  }
+
+  #initScore() {
+    this.score.ball = 0;
+    this.score.strike = 0;
   }
 
   play() {
     this.#answer = App.#pickRandomNumbers(3);
     this.#hitBalls();
+    this.#judgeBallStrike();
   }
 
   static #pickRandomNumbers(count) {
@@ -48,6 +55,24 @@ class App {
     if (numbersArray.filter((n) => !(n >= 1 && n <= 9)).length > 0) {
       throw new Error('inputValue cannot be grater than 9 or less than 1');
     }
+  }
+
+  #judgeBallStrike() {
+    this.#initScore();
+    this.balls.forEach((ball, idx) => {
+      const answerIdx = this.#answer.indexOf(ball);
+
+      if (answerIdx === -1) {
+        return;
+      }
+
+      if (answerIdx === idx) {
+        this.score.strike += 1;
+        return;
+      }
+
+      this.score.ball += 1;
+    });
   }
 
 }
