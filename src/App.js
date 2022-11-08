@@ -47,11 +47,11 @@ class App {
       const answerArray = removeSpace.split('');
       checkDuplicate(answerArray);
       checkZero(answerArray);
-      this.compareTwoArray(answerArray);
+      this.calcBallAndStrike(answerArray);
     });
   }
 
-  compareTwoArray(userAnswer) {
+  calcBallAndStrike(userAnswer) {
     this.strike = 0;
     this.ball = 0;
 
