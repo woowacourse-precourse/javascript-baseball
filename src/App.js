@@ -1,13 +1,26 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGE, FORMAT, ERROR, SELECT } = require("./constant/constant");
 const { Random, Console } = MissionUtils;
-const allowNum = /[1-9]/;
-const allowLength = 3;
+const ALLOW_NUM = /[1-9]/;
+const ALLOW_LENGTH = 3;
 
 class App {
   constructor() {
     this.answer = [];
     this.userInput = "";
+  }
+
+  restartQuestion() {
+    Console.readLine(`${MESSAGE.CONTINUE}\n`, (input) => {
+      if (!this.checkException(input, FORMAT.RESTART)) {
+        throw new Error(ERROR.CHOOSE);
+      }
+      if (input === SELECT.CONTINUE) this.startGame();
+      else if (input === SELECT.EXIT) {
+        Console.print(MESSAGE.END);
+        Console.close();
+      }
+    });
   }
 
   getCnt() {
@@ -38,10 +51,10 @@ class App {
 
   checkInputNum(inputNum, allowed) {
     const duplicationCheck = [...new Set(inputNum)].length;
-    if (inputNum.length !== allowLength) throw new Error(ERROR.LENGTH);
-    if (duplicationCheck !== allowLength) throw new Error(ERROR.DUPLICATION);
+    if (inputNum.length !== ALLOW_LENGTH) throw new Error(ERROR.LENGTH);
+    if (duplicationCheck !== ALLOW_LENGTH) throw new Error(ERROR.DUPLICATION);
     inputNum.forEach((str) => {
-      allowed = allowNum.test(str) && allowed;
+      allowed = ALLOW_NUM.test(str) && allowed;
     });
 
     return allowed;
@@ -53,19 +66,6 @@ class App {
     } else if (checkStyle === FORMAT.RESTART) {
       return inputNum === SELECT.CONTINUE || inputNum === SELECT.EXIT;
     }
-  }
-
-  restartQuestion() {
-    Console.readLine(`${MESSAGE.CONTINUE}\n`, (input) => {
-      if (!this.checkException(input, FORMAT.RESTART)) {
-        throw new Error(ERROR.CHOOSE);
-      }
-      if (input === SELECT.CONTINUE) this.startGame();
-      else if (input === SELECT.EXIT) {
-        Console.print(MESSAGE.END);
-        Console.close();
-      }
-    });
   }
 
   getUserInput() {
@@ -80,7 +80,7 @@ class App {
 
   createAnswer() {
     this.answer = [];
-    while (this.answer.length < allowLength) {
+    while (this.answer.length < ALLOW_LENGTH) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
         this.answer.push(number);
