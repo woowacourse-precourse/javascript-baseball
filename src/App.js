@@ -52,7 +52,7 @@ class App {
       this.input();
     } else if (strike === 3) {
       MissionUtils.Console.print(strike + '스트라이크');
-      this.input();
+      this.result();
     } else if (strike > 0 && ball === 0) {
       MissionUtils.Console.print(strike + '스트라이크');
       this.input();
