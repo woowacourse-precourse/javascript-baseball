@@ -9,7 +9,7 @@ class Validation {
 
   checkLength(inputArray) {
     if (inputArray.length !== 3) {
-      throw ERROR_MESSAGE.INPUT;
+      throw ERROR_MESSAGE.INPUT_LENGTH;
     }
   }
 
@@ -19,7 +19,7 @@ class Validation {
       ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[1]) ||
       ![1, 2, 3, 4, 5, 6, 7, 8, 9].includes(inputArray[2])
     ) {
-      throw ERROR_MESSAGE.INPUT;
+      throw ERROR_MESSAGE.INPUT_NUMBER;
     }
   }
 
@@ -29,7 +29,7 @@ class Validation {
       inputArray[1] === inputArray[2] ||
       inputArray[2] === inputArray[0]
     ) {
-      throw ERROR_MESSAGE.INPUT;
+      throw ERROR_MESSAGE.INPUT_REPEAT;
     }
   }
 }

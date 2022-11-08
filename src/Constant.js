@@ -5,8 +5,11 @@ const GAME_CONFIG = {
 };
 
 const ERROR_MESSAGE = {
-  INPUT: "입력값은 중복되지 않은 숫자 3자리여야 합니다. (1~9)",
-  INPUT_ZERO: "입력값은 숫자 1~9만 사용 가능합니다.",
+  INPUT: "입력값은 중복되지 않은 숫자 3자리여야 합니다. (숫자 1~9만 사용)",
+  INPUT_NUMBER:
+    "입력값은 숫자 1~9에서만 사용 가능합니다. (문자, 숫자 0은 불가능)",
+  INPUT_LENGTH: "입력값은 3자리여야 합니다.",
+  INPUT_REPEAT: "입력값은 중복되지 않은 숫자로 이루어져야 합니다.",
 };
 
 const INGAME_MESSAGE = {
