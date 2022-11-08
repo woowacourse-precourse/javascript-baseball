@@ -26,21 +26,21 @@ class App {
     // input must be number
     const strNum = String(num);
     if (strNum.match(/[^0-9]/)) {
-      throw new Error('input must be number');
+      throw 'input must be number';
     }
 
     const digitList = strNum.split('');
 
     // input must be 3 digits
     if (digitList.length !== 3) {
-      throw new Error('input must be 3 digits number');
+      throw 'input must be 3 digits number';
     }
 
     // check duplicate digit
     for (let i = 0; i < 3; i++) {
       let count = digitList.filter((item) => item === digitList[i]).length;
       if (count > 1) {
-        throw new Error('input must consist of non-duplicate digit');
+        throw 'input must consist of non-duplicate digit';
       }
     }
   }
@@ -112,7 +112,7 @@ class App {
     }
 
     // input is not 1 or 2, throw error
-    throw new Error('game restart input must be 1(restart) or 2(finish)');
+    throw 'game restart input must be 1(restart) or 2(finish)';
   }
 }
 
