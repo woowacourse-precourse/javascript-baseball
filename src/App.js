@@ -1,90 +1,111 @@
 //module used
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 //constants & error codes
 const TOTAL_COUNT = 3;
-const ERR_INPUT_UNDEFINED = "입력값이 없습니다";
-const ERR_3_NUM_NEEDED = "입력은 3글자여야합니다";
-const ERR_NUM_DUPLICATED = "입력에 중복된 숫자가 포함되어 있습니다";
-const ERR_ONLY_NUMBER =
-  "입력값은 1~9의 중복되지 않는 세개의 수로 구성되어야합니다";
-const ERR_OPT_1_CHAR_NEEDED = "한글자만 입력해주세요";
-const ERR_OPT_ANSWER_NEEDED = "1 또는 2로 응답해주세요";
+const OPTION_STRING = '12';
+const INPUT_STRING = '123456789';
+const ERR_INPUT_UNDEFINED = '입력값이 없습니다';
+const ERR_3_NUM_NEEDED = '입력은 3글자여야합니다';
+const ERR_NUM_DUPLICATED = '입력에 중복된 숫자가 포함되어 있습니다';
+const ERR_ONLY_NUMBER = '입력값은 1~9의 중복되지 않는 세개의 수로 구성되어야합니다';
+const ERR_OPT_1_CHAR_NEEDED = '한글자만 입력해주세요';
+const ERR_OPT_ANSWER_NEEDED = '1 또는 2로 응답해주세요';
 
 class App {
-  //properties
-  #answer = ""; // 정답 문자열 저장하는 변수
+  // 정답 문자열 저장하는 변수
+  #answer = '';
 
-  //functions
   getAnswer() {
     return this.#answer;
   }
+
   initAnswer() {
-    // this.#answer = Random.pickUniqueNumbersInRange(1, 9, TOTAL_COUNT).join("");
-    // return this.#answer;
+    //랜덤으로 1~9까지 3개의 중복되지 않은 수를 골라 answer에 저장한다
     const answerList = [];
     while (answerList.length < TOTAL_COUNT) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (answerList.indexOf(number) < 0) {
-        answerList.push(number);
+      const randomNumber = Random.pickNumberInRange(1, 9);
+      if (!answerList.includes(randomNumber)) {
+        answerList.push(randomNumber);
       }
     }
-    this.#answer = answerList.join("");
-    return this.#answer;
+    this.#answer = answerList.join('');
   }
-  //게임 진행시의 입력 검증
-  checkAnswerValidInput(player_input) {
-    if (!player_input) throw new Error(ERR_INPUT_UNDEFINED);
-    if (player_input.length !== 3) throw new Error(ERR_3_NUM_NEEDED);
-    if (new Set(player_input).size !== 3) throw new Error(ERR_NUM_DUPLICATED);
-    let isAllNum = true;
-    player_input
-      .split("")
-      .forEach((char) => (isAllNum = "123456789".includes(char) && isAllNum));
-    if (isAllNum === false) throw new Error(ERR_ONLY_NUMBER);
+
+  play() {
+    //숫자 야구 게임을 진행한다
+    this.initAnswer();
+    const opponentString = this.getAnswer();
+    Console.print('숫자 야구 게임을 시작합니다.');
+    this.performGame(opponentString);
   }
-  //추가 진행 여부 입력시의 입력 검증
-  checkOptionValid(input) {
-    if (input.length !== 1) {
-      throw new Error(ERR_OPT_1_CHAR_NEEDED);
-    }
-    if ("12".indexOf(input) < 0) {
-      throw new Error(ERR_OPT_ANSWER_NEEDED);
-    }
-  }
-  performOneGame(opponentInput) {
-    Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      // Console.print(opponentInput); //for test
-      let [ball, strike] = this.countBallStrike(opponentInput, input);
+
+  performGame(answer) {
+    //정답문자열이 있는 상태에서 게임을 진행한다
+    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      let [ball, strike] = this.countBallStrike(answer, input);
       this.printBS(ball, strike);
-      //afterCheckScore
       if (strike === TOTAL_COUNT) {
-        //종료할지 다시할지 물어보기
         Console.print(`${TOTAL_COUNT}개의 숫자를 모두 맞히셨습니다! 게임 종료`);
         this.askReplay();
       } else {
-        this.performOneGame(opponentInput);
+        this.performGame(answer);
       }
     });
   }
+
   askReplay() {
-    Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => {
-        this.checkOptionValid(input);
-        if (input === "1") {
-          const newAnswer = this.initAnswer();
-          this.performOneGame(newAnswer);
-        } else if (input === "2") {
-          Console.close();
-        }
+    //게임이 한판 끝난 상태에서 다음의 진행 여부를 묻는다
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+      this.checkOptionValid(input);
+      if (input === '1') {
+        this.initAnswer();
+        const newAnswer = this.getAnswer();
+        this.performGame(newAnswer);
+      } else if (input === '2') {
+        Console.close();
       }
-    );
+    });
+  }
+
+  checkAnswerValid(input) {
+    //게임 진행시의 사용자의 입력을 검증한다
+    if (!input) throw new Error(ERR_INPUT_UNDEFINED);
+    if (input.length !== 3) throw new Error(ERR_3_NUM_NEEDED);
+    if (new Set(input).size !== 3) throw new Error(ERR_NUM_DUPLICATED);
+    let isAllNum = true;
+    input.split('').forEach((char) => (isAllNum = INPUT_STRING.includes(char) && isAllNum));
+    if (isAllNum === false) throw new Error(ERR_ONLY_NUMBER);
+  }
+
+  checkOptionValid(input) {
+    //추가 진행 여부 입력시의 사용자의 입력을 검증한다
+    if (input.length !== 1) {
+      throw new Error(ERR_OPT_1_CHAR_NEEDED);
+    }
+    if (!OPTION_STRING.includes(input)) {
+      throw new Error(ERR_OPT_ANSWER_NEEDED);
+    }
+  }
+
+  countIfStrike(player_char, opponent_char) {
+    //player_char가 '스트라이크'의 조건을 만족하는 경우 1을 리턴한다
+    if (player_char === opponent_char) return 1;
+    return 0;
+  }
+
+  countIfBall(player_char, opponent_input) {
+    //player_char가 '볼'의 조건을 만족하는 경우 1을 리턴한다
+    if (opponent_input.includes(player_char)) {
+      return 1;
+    }
+    return 0;
   }
 
   printBS(ball, strike) {
+    // 볼과 스트라이크로 현재 상황을 출력한다
     if (ball + strike === 0) {
-      Console.print("낫싱");
+      Console.print('낫싱');
     } else if (ball === 0) {
       Console.print(`${strike}스트라이크`);
     } else if (strike === 0) {
@@ -93,10 +114,12 @@ class App {
       Console.print(`${ball}볼 ${strike}스트라이크`);
     }
   }
+
   countBallStrike(opponent_input, player_input) {
+    //두 문자열로 볼과 스트라이크를 리턴한다
     let ball = 0;
     let strike = 0;
-    this.checkAnswerValidInput(player_input);
+    this.checkAnswerValid(player_input);
     for (let idx in player_input) {
       strike += this.countIfStrike(player_input[idx], opponent_input[idx]);
       ball +=
@@ -105,28 +128,6 @@ class App {
     }
     return [ball, strike];
   }
-
-  countIfStrike(player_char, opponent_char) {
-    if (player_char === opponent_char) return 1;
-    return 0;
-  }
-
-  countIfBall(player_char, opponent_input) {
-    if (opponent_input.indexOf(player_char) >= 0) {
-      return 1;
-    }
-    return 0;
-  }
-
-  play() {
-    const opponentString = this.initAnswer();
-    Console.print("숫자 야구 게임을 시작합니다.");
-    this.performOneGame(opponentString);
-  }
 }
 
 module.exports = App;
-
-// const app = new App();
-
-// app.play();
