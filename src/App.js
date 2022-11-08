@@ -17,7 +17,9 @@ class App {
         this.gameInputError();
       }
       const { ball, strike } = countBallAndStrike(userInput, answer);
+      if (strike === MESSAGE.THREE_STRIKE) {
         printResultMessage(ball, strike);
+        Console.print(MESSAGE.SUCCESS);
         return this.gameRestartCheck();
       } else {
         printResultMessage(ball, strike);
