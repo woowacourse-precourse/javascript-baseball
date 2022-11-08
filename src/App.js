@@ -19,10 +19,13 @@ class App {
 
   checkUserNum(num) {
     if (num.length !== 3) {
+      MissionUtils.Console.print("3개의 숫자만 입력해주세요.");
       return false;
     } else if (num[0] === num[1] || num[0] === num[2] || num[1] === num[2]) {
+      MissionUtils.Console.print("같은 숫자를 입력하면 안 됩니다.");
       return false;
     } else if (isNaN(num)) {
+      MissionUtils.Console.print("3개의 숫자만 입력해주세요.");
       return false;
     }
     return true;
