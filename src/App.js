@@ -8,17 +8,14 @@ class App {
     this.random();
   }
   setRandomNumberComputer(){
-    const computer = [];
-    while(computer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if(!computer.includes(number)){
-        computer.push(number);
-      }
+    let computer = new Set();
+    while (computer.size < 3) {
+      computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    return computer;
+    return Array.from(computer).join("");
   }
   random(){
-    const computerNumber = this.setRandomNumberComputer();
+    let computerNumber = this.setRandomNumberComputer();
     this.compare(computerNumber);
   }
   compare(number){
@@ -28,7 +25,7 @@ class App {
     let check = 0;
 
     //ball
-    comNumber.forEach((num) => {
+    comNumber.split("").forEach((num) => {
       if (userNumber.includes(num)) {
         check++;
       }
@@ -39,45 +36,38 @@ class App {
   calculateStrike(comNumber, userNumber){
     let check2 = 0;
     //strike
-    comNumber.forEach((num, i) => {
-      if (userNumber[i] === num) {
+    for(let num = 0; num < 3; num++){
+      if (userNumber[num] === comNumber[num]) {
         check2++;
       }
-    });
+    }
     return check2;
   }
   compareBothNumber(randomNum, userNum){
     const strike = this.calculateStrike(randomNum, userNum);
     const ball = this.calculateBall(randomNum, userNum) - strike;
 
-    let ok = this.outputResultCompare(strike, ball);
-    if(ok == true) this.finishInput();
+    let pass = false;
+
+    if(strike === 0 && ball === 0){
+      MissionUtils.Console.print('낫싱');
+    }else if(strike === 3){
+      MissionUtils.Console.print('3스트라이크');
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      pass = true;
+    }else if(strike > 0 && ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
+    else if(strike === 0) MissionUtils.Console.print(`${ball}볼`);
+    else MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+
+
+    if(pass == true) this.finishInput();
     else this.compare(randomNum);
   }
   inputUserNumber(answer){
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      if(validateNumber(userInput)){
-        this.compareBothNumber(answer, userInput);
-      }
+      const userInNumber = validateNumber(userInput);
+      this.compareBothNumber(answer, userInNumber);
     });
-  }
-  outputResultCompare(strike, ball){
-    let pass = false;
-    if(strike === 0 && ball === 0){
-      MissionUtils.Console.print('낫싱');
-    }
-    if(strike === 3){
-      MissionUtils.Console.print('3스트라이크');
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-      pass = true;
-    }
-    if(strike > 0 && ball > 0){
-      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    }
-    else if(strike > 0 && ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
-    else if(strike === 0 && ball > 0) MissionUtils.Console.print(`${ball}볼`);
-
-    return pass
   }
   finishInput() {
     let result;
@@ -86,8 +76,8 @@ class App {
         result = number;
       }
     });
-    if(this.result == 1){
-      this.play();
+    if(result == 1){
+      this.random();
     }
     else{
       MissionUtils.Console.close();
@@ -96,28 +86,20 @@ class App {
 }
 
 function validateResult(number){
-  if(number != 1 && number != 2){
-    throw new Error("올바른 숫자가 아닙니다(1과 2만 입력하시오).");
+  if(number !== "1" && number !== "2") {
+    throw new Error("1이나 2가 아닌 다른 숫자가 입력되었습니다.");
   }
-  return true;
+  return number;
 }
 function validateNumber(number){
-  const numberStr = number.toString();
-  let checkStr = /^[1-9]+$/;
-  if(number.length !== 3){
-    throw new Error("올바른 숫자를 입력해주세요.");
-  }
-  numberStr.split('').forEach((n) => {
-    if (!(n.charCodeAt(0) >= 49 && n.charCodeAt(0) <= 57)) {
-      throw new Error("올바른 숫자를 입력해주세요.");
-    }
+  if (number.length !== 3) throw new Error("입력한 숫자가 3개가 아닙니다.");
+  if (new Set(number).size !== 3) throw new Error("중복된 숫자가 있습니다.");
+  number.split("").map((number) => {
+    if(!(parseInt(number, 10) >= 1 && parseInt(number, 10) <= 9)) throw new Error("숫자가 아닌 문자가 있습니다.");
   });
-
-  return true;
+  return number;
 }
 
-
-const app = new App();
-app.play();
-
 module.exports = App;
+
+
