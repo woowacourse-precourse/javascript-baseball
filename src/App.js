@@ -23,6 +23,11 @@ class App {
     this.goal = [...threeNumbers];
   }
 
+  play() {
+    this.generateGoalNumber();
+    this.receiveAnswer();
+  }
+
   verifyUserAnswer(answer) {
     let verifiedAnswer;
     const arrayOfAnswer = Array.from(answer).map(
@@ -72,16 +77,23 @@ class App {
     return result;
   }
 
-  printResult(score, otherTextMessage = "") {
+  scoreToMessage(score) {
     const [strikeScore, ballScore] = score;
-
     const message =
-      `${TO_STRING_BALL[ballScore]} ${TO_STRING_STRIKE[strikeScore]}\n${otherTextMessage}`.trim();
-    if (message) {
-      Console.print(message);
-      return;
-    }
-    Console.print(NOTHING);
+      `${TO_STRING_BALL[ballScore]} ${TO_STRING_STRIKE[strikeScore]}`.trimLeft();
+    return message ? message : NOTHING;
+  }
+
+  printResult(message) {
+    Console.print(message);
+  }
+
+  exitGame() {
+    Console.close();
+  }
+
+  restartGame() {
+    this.play();
   }
 
   confirmRestart() {
@@ -97,31 +109,23 @@ class App {
     );
   }
 
-  restartGame() {
-    this.play();
-  }
-
-  exitGame() {
-    Console.close();
-  }
-
-  play() {
-    this.generateGoalNumber();
-    this.receiveAnswer();
-  }
-
   receiveAnswer() {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       const userAnswer = this.verifyUserAnswer(answer);
       let score = this.getStrikeAndBallCount(this.goal, userAnswer);
-      this.printResult(score);
+      this.printResult(this.scoreToMessage(score));
 
       const THREE_STRIKE = 3;
       const isThreeStrike = (strikeScore) => strikeScore === THREE_STRIKE;
       if (isThreeStrike(score[0])) {
-        this.printResult(score, "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        this.printResult(
+          `${this.scoreToMessage(
+            score
+          )}\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`
+        );
         this.confirmRestart();
       }
+
       this.receiveAnswer();
     });
   }
