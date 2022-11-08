@@ -11,8 +11,15 @@ class App {
 
   generateComputerInput() {
     const randomNumber = setRandomNumber();
+    this.generateUserInput();
 
     return randomNumber;
+  }
+
+  generateUserInput() {
+    Console.readLine(GAME_MESSAGE.INPUT, (userInput) => {
+      Console.print(`입력 숫자 : ${userInput}`);
+    });
   }
 }
 
