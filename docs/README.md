@@ -37,4 +37,4 @@
     - [] 랜덤생성한 수와 입력한 수를 비교하여 결과 구하기 : getResult
   - [] 결과가 3스트라이크인지 확인 : isNotThreeStrike
 - [] 게임을 재시작할지 종료할지 입력 받고 값 리턴 : restartOrFinish
-  - [] 입력값이 유효한지 확인 : validateOption
+  - [x] 입력값이 유효한지 확인 : validateOption
