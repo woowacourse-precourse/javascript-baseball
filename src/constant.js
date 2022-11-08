@@ -11,6 +11,9 @@ const constants = {
   ANSWER: 3,
   NEW_GAME: 1,
   EXIT_GAME: 2,
+  INVALID_NUMBER_ERROR: '유효한 숫자가 아닙니다',
+  LENGTH_ERROR: '길이가 3이 아닙니다',
+  DUPLICATE_ERROR: '중복된 숫자가 있습니다',
 };
 
 module.exports = constants;
