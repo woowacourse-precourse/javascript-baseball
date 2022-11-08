@@ -38,3 +38,11 @@ Added new method 'input' to $App:
 - change user's input to this._player(array type)
 
 Breaks $App.input, which is added
+
+feat($App): check method
+
+Added new method 'check' to $App:
+- compare the player's input with the computer's answer
+- if the result is 'strike', return true
+
+Breaks $App.check, which is added and $App.input, $App.play Print Method, which is changed
