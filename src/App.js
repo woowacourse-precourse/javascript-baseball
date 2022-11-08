@@ -3,19 +3,19 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App{
   constructor(){ //변수 선언
     this.comNum = [];
-    //this.usrNum = [];
     this.strike = 0;
     this.ball = 0;
     this.nothing = 0;
   }
   
   usrNumberInputCheck(answers){ //사용자 수 입력 예외 처리
+    let setAnswers = new Set(answers);
     if((answers).length != 3){
-      throw '3자리 수가 아닙니다.';
-    } else if(answers[0] == answers[1] || answers[0] == answers[2] || answers[2] == answers[3]){
-      throw '서로 다른 수가 아닙니다.';
+      throw new Error('3자리 수가 아닙니다.');
+    } else if(setAnswers.size != 3){
+      throw new Error('서로 다른 수가 아닙니다.');
     } else if(Math.sign(answers[0]) != 1 || Math.sign(answers[1]) != 1 || Math.sign(answers[2]) != 1){
-      throw '양수가 아닙니다.';
+      throw new Error('양수가 아닙니다.');
     }
   }
 
@@ -76,7 +76,7 @@ class App{
       } else if(number == 2){
         MissionUtils.Console.close();
       } else {
-        throw '잘못된 입력값입니다.';
+        throw new Error('잘못된 입력값입니다.');
       }
     });
     MissionUtils.Console.close();
