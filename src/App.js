@@ -61,7 +61,7 @@ class App {
 
   getResult(userInput){
     this.userInputNums = userInput;
-    
+
     const {ballCount, strikeCount} = this.getBallAndStrike();
     this.printHint(ballCount, strikeCount);
 
@@ -69,7 +69,8 @@ class App {
   }
 
   getBallAndStrike(){
-    let strikeCount = 0, ballCount = 0;
+    let strikeCount = 0
+    let ballCount = 0;
 
     let subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
     let zeroCount = subtractArr.filter(element => 0 === element).length;
@@ -90,11 +91,14 @@ class App {
     if(strikeCount == KEY.NUM_SIZE){
       Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
       return this.askRestartOrQuit();
     }
     if(ballCount === 0 && strikeCount === 0) Console.print("낫싱");
-
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
