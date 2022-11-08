@@ -24,8 +24,9 @@ class App {
     pitching() {
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
             this.user.setNumberArray(userInput);
-            this.hint.judgePitching(this.computer.number, this.user.number);
-            this.printResult(this.hint.count.strike, this.hint.count.ball);
+            const { strikeCount, ballCount } = this.hint.judgePitching(this.computer.number, this.user.number);
+
+            this.printResult(strikeCount, ballCount);
         });
     }
 

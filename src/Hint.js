@@ -1,14 +1,13 @@
 class Hint {
     constructor() {
-        this.count = {
-            strike: 0,
-            ball: 0,
-        };
+        this.strike = 0;
+        this.ball = 0;
     }
 
     judgePitching(computerNumber, userNumber) {
-        this.count.strike = this.countStrike(computerNumber, userNumber);
-        this.count.ball = this.countBall(computerNumber, userNumber);
+        const strikeCount = this.countStrike(computerNumber, userNumber);
+        const ballCount = this.countBall(computerNumber, userNumber);
+        return { strikeCount, ballCount };
     }
     countStrike(computerNumber, userNumber) {
         return computerNumber.filter((el, idx) => el.toString() === userNumber[idx]).length;
