@@ -45,9 +45,26 @@ class BaseBallGame {
     }
     return BALL_COUNT;
   }  
+
+  checkNumber(number) {
+    const STRIKE_COUNT = this.isStrike(number, this.ANSWER);
+    const BALL_COUNT = this.isBall(number, this.ANSWER);
+    const IS_NOTHING = STRIKE_COUNT === 0 && BALL_COUNT === 0;
+
+    let HINT_MENT, IS_END;
+
+    if (STRIKE_COUNT === 3) IS_END = true;
+
+    if (IS_NOTHING) HINT_MENT = "낫싱";
+    if (BALL_COUNT === 0 && STRIKE_COUNT !== 0) HINT_MENT = `${STRIKE_COUNT}스트라이크`;
+    else if (BALL_COUNT !== 0 && STRIKE_COUNT === 0) HINT_MENT = `${BALL_COUNT}볼`;
+    else if (BALL_COUNT !== 0 && STRIKE_COUNT !== 0) HINT_MENT = `${BALL_COUNT}볼 ${STRIKE_COUNT}스트라이크`;
+
+    return [HINT_MENT, IS_END];
+  }
 }
 
 const game = new BaseBallGame;
-game.isBall('123', '321');
+game.checkNumber('123');
 
 module.exports = BaseBallGame;
