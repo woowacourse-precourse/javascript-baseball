@@ -3,7 +3,7 @@ const GAME_MESSAGE = {
   ENTER_NUMBER: "숫자를 입력해주세요 : ",
   FINISH_MESSAGE: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
   GAME_RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-  GAME_END: "게임 종료\n",
+  GAME_END: "게임 종료",
 };
 
 const ERROR_MESSAGE = {
