@@ -1,7 +1,7 @@
-const { InvalidInputException } = require("./Error");
-const Utils = require("./Utils");
-const Messages = require("./Messages");
-const MissionUtils = require("@woowacourse/mission-utils");
+const { InvalidInputException } = require('./Error');
+const Utils = require('./Utils');
+const Messages = require('./Messages');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const {
   createUniqueNumbers,
@@ -69,7 +69,7 @@ class App {
   }
 
   isValidQuestionInput(input) {
-    const numbers = input.split("").map(Number);
+    const numbers = input.split('').map(Number);
 
     if (!numbers.every(isNumber)) {
       throw new TypeError(this.MESSAGES.typeError);
@@ -107,7 +107,7 @@ class App {
       return;
     }
 
-    this.question = input.split("").map(Number);
+    this.question = input.split('').map(Number);
   }
 
   compareNumbers() {
@@ -145,7 +145,7 @@ class App {
 
     if (!this.isNumberAnswer(sameDigitCount)) {
       const balls = this.MESSAGES.resultBall(sameNumberCount);
-      const whiteSpace = (sameDigitCount && sameNumberCount && " ") || "";
+      const whiteSpace = (sameDigitCount && sameNumberCount && ' ') || '';
       const strikes = this.MESSAGES.resultStrike(sameDigitCount);
 
       return balls + whiteSpace + strikes;
