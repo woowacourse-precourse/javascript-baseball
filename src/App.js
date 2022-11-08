@@ -53,8 +53,11 @@ class App {
   }
 
   answerGenerator() {
-    while (this.#answer.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (this.#answer.length < length) {
+      const number = MissionUtils.Random.pickNumberInRange(
+        firstRange,
+        lastRange
+      );
       if (!this.#answer.includes(number)) this.#answer += `${number}`;
     }
     this.#answer = [...this.#answer];
