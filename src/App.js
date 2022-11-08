@@ -4,7 +4,14 @@ class App {
 		this.runGame();
 	}
 
-	runGame() {}
+	async runGame() {
+		MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+		do {
+			await this.process();
+		} while (await this.restartOrFinish());
+		MissionUtils.Console.print('게임 종료');
+		MissionUtils.Console.close();
+	}
 
 	async process() {
 		const RANDOMNUMBER = this.getRandomNumber();
@@ -78,6 +85,8 @@ class App {
 	isNotThreeStrike(resultMessage) {
 		return resultMessage !== '3스트라이크' ? true : false;
 	}
+
+	restartOrFinish() {}
 
 	validateOption(option) {
 		if (/[^1-2]/g.test(option)) throw new Error('옵션에 없는 값을 입력하셨습니다.');
