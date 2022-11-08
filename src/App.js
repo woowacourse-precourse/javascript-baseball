@@ -20,6 +20,9 @@ class App {
       );
 
       MissionUtils.Console.readLine("", (answer) => {
+        if (answer !== "1" && answer !== "2") {
+          throw new Error("1 또는 2 입력.");
+        }
         playGame = answer;
       });
     }
