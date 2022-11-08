@@ -1,12 +1,16 @@
 const gameConstant = require('./GameConstant');
+const handleCorrectAnswer = require('./HandleCorrect');
 
 const limitSize = gameConstant.LIMIT_NUMBER_SIZE;
-const digit = gameConstant.DIGIT;
 
 const compareNumber = (answer, playerInput) => {
   const inputArray = playerInput.split('');
   const strikes = getStrikes(answer, inputArray);
   const balls = getBalls(answer, inputArray);
+};
+
+const isCorrect = (answer, playerInput) => {
+  return answer === playerInput;
 };
 
 const countStrikes = (number, index, answer) => {
