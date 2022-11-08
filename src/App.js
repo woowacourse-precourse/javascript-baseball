@@ -98,15 +98,15 @@ class App {
   #determineGameResult(numbers) {
     const strikes = this.#answer.filter(
       (digit, index) => numbers[index] === digit
-    ).length
+    )
     const balls = this.#answer.filter(
       (digit, index) => numbers[index] !== digit && numbers.includes(digit)
-    ).length
+    )
 
     return {
-      strike: strikes,
-      ball: balls,
-      finished: strikes === this.#ballCount,
+      strike: strikes.length,
+      ball: balls.length,
+      finished: strikes.length === this.#ballCount,
     }
   }
 
