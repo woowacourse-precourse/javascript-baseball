@@ -50,6 +50,7 @@ class App {
         result.ball = (result.ball ?? 0) + 1;
       }
     });
+    return this.determineGameStatus(result);
   }
 
   print(input) {
@@ -69,6 +70,16 @@ class App {
     }
 
     MissionUtils.Console.print(notice);
+  }
+
+  determineGameStatus({ strike, ball }) {
+    this.print({ strike, ball });
+
+    return strike === 3 ? this.engGame() : this.compareRandomWithUserInput();
+  }
+
+  engGame() {
+    this.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 }
 
