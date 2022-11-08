@@ -35,9 +35,11 @@ function printNumber(answer){
 
 //숫자의 유효성을 확인한다. 유효성이 없으면 throw를 한다.
 function Check_Number(getNumber){
+  getNumber = parseInt(getNumber);
   if(getNumber < 100 || getNumber > 999){
     throw new Error("It is not Approriate number");
   }
+  return 0;
 }
 
 //재시작하는 함수이다 1이면 다시 새롭게 랜덤 값을 만든 후에 시작하고

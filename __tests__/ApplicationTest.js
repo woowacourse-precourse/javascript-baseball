@@ -57,6 +57,6 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("It is not Approriate number");
   });
 });
