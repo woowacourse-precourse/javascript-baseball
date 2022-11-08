@@ -1,6 +1,7 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
 const MESSAGE = {
+  QUIT: '게임 종료',
   WIN: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   REPLAY_OR_QUIT: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
   HIT_BALLS: '숫자를 입력해주세요 : ',
@@ -111,6 +112,25 @@ class App {
   #win() {
     Console.print(MESSAGE.WIN);
     Console.readLine(MESSAGE.REPLAY_OR_QUIT, this.#replayOrQuit.bind(this));
+  }
+
+  #replayOrQuit(input) {
+    if (input === '1') {
+      this.play();
+      return;
+    }
+
+    if (input === '2') {
+      App.quit();
+      return;
+    }
+
+    this.#win();
+  }
+
+  static quit() {
+    Console.print(MESSAGE.QUIT);
+    Console.close();
   }
 }
 
