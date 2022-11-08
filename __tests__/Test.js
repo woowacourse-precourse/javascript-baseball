@@ -7,6 +7,5 @@ describe("[추가] 숫자 야구 게임 기능 테스트", () => {
         app.createRandomNumber();
         const result = app.returnRandomNumber();
         expect(result.length).toEqual(3);
-      });
-  });
-  
+    });
+});

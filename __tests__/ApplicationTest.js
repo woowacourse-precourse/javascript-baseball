@@ -59,4 +59,61 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+
+  test("[추가] 게임 종료 후 재시작 (2)", () => {
+    const randoms = [2, 1, 6, 7, 6, 5];
+    const answers = ["216", "1", "428", "763", "765", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "낫싱",
+      "2스트라이크",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("[추가] 게임 종료 후 재시작 (2)", () => {
+    const randoms = [6, 2, 5];
+    const answers = ["752", "625", "2"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "2볼",
+      "3스트라이크",
+      "게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("[추가] 예외 테스트 (2)", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["1"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
