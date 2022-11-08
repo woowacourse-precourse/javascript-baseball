@@ -49,6 +49,22 @@ describe("숫자 야구 게임", () => {
 
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
+describe("2 사용자에게 3자리 수 입력 받기 예외 처리 테스트", () => {
+  test("2-1 숫자만 받기", () => {
+    const randoms = [[1, 3, 5]];
+    const answers = ["1a2"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("2-2 3자리 수만 받기", () => {
+    const randoms = [[1, 3, 5]];
     const answers = ["1234"];
 
     mockRandoms(randoms);
@@ -59,4 +75,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
-});
+
+  test("2-3 겹치는 숫자 없음", () => {
+    const randoms = [[1, 3, 5]];
+    const answers = ["112"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+})
