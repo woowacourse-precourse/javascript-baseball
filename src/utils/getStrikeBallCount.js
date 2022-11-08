@@ -11,15 +11,15 @@ const getStrikeBallCount = (computerInput, userInput) => {
     if (computerInputToArray[i] === userInputToArray[i]) {
       strikeCount++;
     }
-
-    for (let eachLetter of userInput) {
-      if (computerInput.includes(eachLetter)) {
-        ballCount++;
-      }
-    }
-
-    ballCount -= strikeCount;
   }
+
+  for (let eachLetter of userInput) {
+    if (computerInput.includes(eachLetter)) {
+      ballCount++;
+    }
+  }
+
+  ballCount -= strikeCount;
 
   return [strikeCount, ballCount];
 };
