@@ -1,29 +1,29 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const STATUS = {
-  started: 0,
-  finished: 1,
-}
+const status = {
+  STARTED: 0,
+  FINISHED: 1,
+};
 
-const MESSAGE = {
+const consoleMessage = {
   start: '숫자 야구 게임을 시작합니다.',
   input: '숫자를 입력해주세요: ',
   nothing: '낫싱',
   strike: '3스트라이크',
   finish: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   continueOrEnd: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-}
+};
 
 class App {
   randomNumber;
-  gameStatus = STATUS.started;
+  gameStatus = status.STARTED;
 
   consolePrint(message) {
     MissionUtils.Console.print(message);
   }
   
   play() {
-    this.consolePrint(MESSAGE.start);
+    this.consolePrint(consoleMessage.start);
     this.start();
   }
 
@@ -33,10 +33,10 @@ class App {
   }
 
   userInput() {
-    MissionUtils.Console.readLine(MESSAGE.input, (input) => {
+    MissionUtils.Console.readLine(consoleMessage.input, (input) => {
       this.checkUserInput(input);
-      if (this.gameStatus === STATUS.finished) {
-        this.gameStatus = STATUS.started;
+      if (this.gameStatus === status.FINISHED) {
+        this.gameStatus = status.STARTED;
         this.continueOrEnd();
       } else {
         this.userInput();
@@ -71,7 +71,7 @@ class App {
     let strikeCount = 0;
     userNumbers.forEach((userNumber, index) => {
       let randomNumber = this.randomNumber[index];
-      if (userNumber == randomNumber) {
+      if (userNumber === randomNumber) {
         strikeCount += 1;
       }
     });
@@ -82,7 +82,7 @@ class App {
     let ballCount = 0;
     userNumbers.forEach((userNumber, index) => {
       let randomNumber = this.randomNumber[index];
-      if (userNumber != randomNumber && this.randomNumber.includes(userNumber)) {
+      if (userNumber !== randomNumber && this.randomNumber.includes(userNumber)) {
         ballCount += 1;
       }
     });
@@ -92,17 +92,16 @@ class App {
   gameResult(userNumbers) {
     let strikes = this.countStrickes(userNumbers);
     let balls = this.countBalls(userNumbers);
-
-    if (strikes == 0 && balls == 0) {
-      this.consolePrint(MESSAGE.nothing);
-    } else if (strikes == 3) {
-      this.consolePrint(MESSAGE.strike);
-      this.consolePrint(MESSAGE.finish);
-      this.consolePrint(MESSAGE.continueOrEnd);
-      this.gameStatus = STATUS.finished;
-    } else if (strikes == 0) {
+    if (!strikes && !balls) {
+      this.consolePrint(consoleMessage.nothing);
+    } else if (strikes === 3) {
+      this.consolePrint(consoleMessage.strike);
+      this.consolePrint(consoleMessage.finish);
+      this.consolePrint(consoleMessage.continueOrEnd);
+      this.gameStatus = status.FINISHED;
+    } else if (!strikes) {
       this.consolePrint(`${balls}볼`);
-    } else if (balls == 0) {
+    } else if (!balls) {
       this.consolePrint(`${strikes}스트라이크`);
     } else {
       this.consolePrint(`${balls}볼 ${strikes}스트라이크`);
@@ -111,9 +110,9 @@ class App {
 
   continueOrEnd() {
     MissionUtils.Console.readLine('', (input) => {
-      if (input == 1) {
+      if (input === '1') {
         this.start();
-      } else if (input == 2) {
+      } else if (input === '2') {
         MissionUtils.Console.close();
       } else {
         throw new Error('1또는 2를 입력하지 않아 게임을 종료합니다.');
@@ -122,5 +121,6 @@ class App {
   }
 }
 
-
+const app = new App();
+app.play();
 module.exports = App;
