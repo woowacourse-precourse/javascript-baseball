@@ -60,13 +60,13 @@ class App {
     if (this.score.STRIKE === GAME_RULE.LENGTH) {
       Console.print(GAME_MESSAGE.CORRECT);
 
-      return this.gameRePlayCheckInput();
+      return this.gameRePlayCheck();
     }
 
     return this.generateUserInput();
   }
 
-  gameRePlayCheckInput() {
+  gameRePlayCheck() {
     Console.readLine(GAME_MESSAGE.REPLAY_CHECK, (answer) => {
       if (answer === GAME_RULE.RESTART) {
         return this.generateComputerInput();
@@ -75,7 +75,13 @@ class App {
       if (answer === GAME_RULE.END) {
         return Console.close();
       }
+
+      return this.inputErrorException();
     });
+  }
+
+  inputErrorException() {
+    throw new Error(GAME_MESSAGE.INVALID_INPUT_EXCEPTION);
   }
 }
 
