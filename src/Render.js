@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAME } = require("./data/Constants");
+const { GAME, ERROR } = require("./data/Constants");
 
 class Render {
   constructor() {}
@@ -9,14 +9,17 @@ class Render {
   }
 
   errorThrow(errorMessege) {
-    Console.close();
-    throw new Error(errorMessege);
+    if (errorMessege !== ERROR.USER_INPUT_PASS) {
+      Console.close();
+      throw new Error(errorMessege);
+    }
   }
   errorRetryThrow(errorMessege) {
-    Console.close();
-    throw new Error(errorMessege);
+    if (errorMessege !== ERROR.USER_INPUT_PASS) {
+      Console.close();
+      throw new Error(errorMessege);
+    }
   }
-
   result(ballCount, strikeCount) {
     if (ballCount === 0 && strikeCount === 0) {
       Console.print(GAME.GAME_NOTHING);

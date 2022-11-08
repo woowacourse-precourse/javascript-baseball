@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Render = require("./Render");
-const CheckInputValid = require("./CheckValid");
+const CheckInputValid = require("./CheckInputValid");
 const GameJudgment = require("./GameJudgment");
 const ComputerInput = require("./ComputerInput");
 const { ERROR } = require("./data/Constants");
@@ -51,19 +51,19 @@ class App {
 
     const checkNumVaild = new CheckInputValid();
     const checkUserInputValid = checkNumVaild.checkUserInput(this.userNum);
-    if (checkUserInputValid !== ERROR.USER_INPUT_PASS) {
-      render.errorThrow(checkUserInputValid);
-    }
+
+    render.errorThrow(checkUserInputValid);
+
     this.gameRender();
   }
 
   gameResult() {
-    const UserInput = this.userNum;
-    const ComputerInput = this.computerInput;
+    const userInput = this.userNum;
+    const computerInput = this.computerInput;
     const gameJudgment = new GameJudgment();
     const [userBallCount, userStrikeCount] = gameJudgment.judgement(
-      UserInput,
-      ComputerInput
+      userInput,
+      computerInput
     );
     return [userBallCount, userStrikeCount];
   }
@@ -91,9 +91,9 @@ class App {
     const checkUserRetryInputValid = checkRetryNumVaild.checkUserRetryInput(
       this.userRetryNum
     );
-    if (checkUserRetryInputValid !== ERROR.USER_INPUT_PASS) {
-      render.errorThrow(checkUserRetryInputValid);
-    }
+
+    render.errorThrow(checkUserRetryInputValid);
+
     this.retryOrEnd();
   }
 
