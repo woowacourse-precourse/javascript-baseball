@@ -1,8 +1,9 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.get_computer_number();
-    count_ball_strike(computer);
+    this.get_from_user(computer);
   }
 
   get_computer_number() {
@@ -10,7 +11,6 @@ class App {
     while (computer_number.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!computer_number.includes(number)) computer_number.push(number);
-         
     }
     return computer_number;
   }
@@ -18,16 +18,18 @@ class App {
   get_from_user(computer){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (user_number) => {
       const user = user_number.split('').map(Number);
-      this.count_ball_strike(computer, user);
-      MissionUtils.Console.close();
+      let check_iteration = this.count_ball_strike(computer, user);
+      if (check_iteration === true) return this.get_from_user(computer);
+      else return MissionUtils.Console.close();
     });
   }
 
   count_ball_strike(computer, user) {
     let ball = 0;
     let strike = 0;
+    let next_iteration = true;
 
-    for(let i=0;i<3;i++){
+    for(let i=0; i<3; i++){
       if(user[i] === computer[i]){
         strike++;
         continue;
@@ -41,6 +43,9 @@ class App {
 
     let message = this.print_message(strike, ball);
     MissionUtils.Console.print(message);
+
+    if(strike === 3) next_iteration = false;
+    return next_iteration;
   }
 
   print_message(strike, ball) {
