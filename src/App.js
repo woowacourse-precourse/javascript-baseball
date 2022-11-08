@@ -1,11 +1,11 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { MESSAGES, NUMBERS, UNITS } = require('./constants');
+const { MESSAGES, NUMBERS, UNITS, REGEX, CHOICE } = require('./constants');
 
 class App {
 	computerNumArr = [];
 
 	play() {
-		Console.print(MESSAGES.START);
+		// Console.print(MESSAGES.START);
 		this.initGame();
 		this.playGame();
 	}
@@ -16,7 +16,7 @@ class App {
 			if (!this.computerNumArr.includes(number))
 				this.computerNumArr.push(number);
 		}
-		Console.print(this.computerNumArr);
+		// Console.print(this.computerNumArr);
 	}
 
 	playGame() {
@@ -30,7 +30,7 @@ class App {
 					);
 					if (resultMessage === MESSAGES.THREE_STRIKE) {
 						Console.print(MESSAGES.THREE_STRIKE);
-						Console.close();
+						this.askToReplay();
 					} else {
 						Console.print(resultMessage);
 						this.playGame();
@@ -43,16 +43,21 @@ class App {
 	#isValid(userAnswerStr) {
 		//TODO: 1.길이오류(3자리숫자여야한다) 2. 숫자로 치환되어야한다. 3. 그밖의 오류?
 
-		const answer = userAnswerStr.replace(/ /gi, '');
+		const answer = userAnswerStr.replace(REGEX.SPACE, '');
 		const length = answer.length;
 
-		if (length < 3 || length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
+		if (length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
 
 		if (isNaN(answer)) throw new Error(MESSAGES.NOT_A_NUMBER);
 
 		return true;
 	}
 
+	#isValidChoice(playerChoice) {
+		if (!REGEX.CHOICE.test(playerChoice)) {
+			throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
+		}
+	}
 	#getResultMessage(computerNumArr, userAnswerStr) {
 		let result = '';
 		let [ball, strike] = [0, 0];
@@ -79,6 +84,21 @@ class App {
 		});
 
 		return result;
+	}
+
+	askToReplay() {
+		Console.readLine(MESSAGES.ASK_RESTART, playerChoice => {
+			this.#isValidChoice(playerChoice);
+
+			if (playerChoice === CHOICE.PLAY_AGAIN) {
+				this.initGame();
+				this.playGame();
+			} else if (playerChoice === CHOICE.EXIT) {
+				Console.close();
+			} else {
+				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
+			}
+		});
 	}
 }
 
