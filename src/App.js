@@ -3,7 +3,12 @@ const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
 const handleException = require("./handleException");
 const getResult = require("./getResult");
-const { printStart, printCorrect, printGameover } = require("./printMessage");
+const {
+  printStart,
+  printCorrect,
+  printGameover,
+  printResult,
+} = require("./printMessage");
 
 class App {
   constructor() {
@@ -18,18 +23,14 @@ class App {
   getUserInput() {
     Console.readLine(`${Message.input}`, (userInput) => {
       handleException(userInput);
-      this.printResult(userInput);
+      this.inGame(userInput);
     });
   }
 
-  checkCorrect(result) {
-    return result === Message.strike_3;
-  }
-
-  printResult(userInput) {
+  inGame(userInput) {
     const result = getResult(this.answer, userInput);
-    Console.print(result);
-    if (this.checkCorrect(result)) this.correct();
+    printResult(result);
+    if (checkCorrect(result)) this.correct();
     else this.getUserInput();
   }
 
@@ -62,6 +63,10 @@ class App {
       Console.close();
     }
   }
+}
+
+function checkCorrect(result) {
+  return result === Message.strike_3;
 }
 
 const app = new App();

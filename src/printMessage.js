@@ -44,4 +44,15 @@ function printGameover() {
   gameover.print();
 }
 
-module.exports = { printStart, printCorrect, printIsRestart, printGameover };
+function printResult(resultStr) {
+  const result = new printConsoleMessage().setMessage(resultStr);
+  result.print();
+}
+
+module.exports = {
+  printStart,
+  printCorrect,
+  printIsRestart,
+  printGameover,
+  printResult,
+};
