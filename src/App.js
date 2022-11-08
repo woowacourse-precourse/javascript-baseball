@@ -96,9 +96,6 @@ class App {
   returnRandomNumber() {
     return this.randomNumber;
   }
-  returnUserNumber() {
-    return this.userInput;
-  }
 }
 
 const app = new App();
