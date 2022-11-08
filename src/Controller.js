@@ -24,7 +24,11 @@ class Controller {
 	 * @returns {boolean}
 	 */
 	_isValid(num) {
-		return true;
+		if (!!Number(num) && +num > 0 && +num < 1000 //숫자 & 범위 체크
+			&& !num.split("").some((item) => 
+				num.indexOf(item) !== num.lastIndexOf(item))) //중복 체크
+			return true;
+		return false;
 	}
 
 	_next(state, result) {
