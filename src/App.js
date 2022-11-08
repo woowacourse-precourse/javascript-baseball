@@ -48,7 +48,7 @@ class App {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       (answer) => {
-        if (answer !== RESTART_CODE || answer !== END_CODE) {
+        if (answer !== RESTART_CODE && answer !== END_CODE) {
           throw new Error('유효하지 않은 입력 값입니다.');
         }
 
@@ -79,7 +79,7 @@ class App {
     }
 
     if (new Set(inputs).size !== VALID_LENGTH) {
-      throw '서로 다른 3자리의 숫자를 입력해주세요.';
+      throw new Error('서로 다른 3자리의 숫자를 입력해주세요.');
     }
   }
 
@@ -109,8 +109,5 @@ class App {
     this.playerInputsNumbers(computer);
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
