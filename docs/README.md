@@ -4,13 +4,15 @@
 
 #### 입력
 
-- [x] API - Console을 이용한 사용자 숫자 입력받는 `userInput` 함수 만들기
+- [x] MissionUtils - Console을 이용한 사용자 숫자 입력받는 `userInput` 함수 만들기
 
 - [x] 서로 다른 3자리 숫자를 입력하는지 확인하는 `checkUserInput` 함수 만들기
 
 - [x] 게임이 끝난 경우 종료/재시작을 구분하는 `continueOrEnd` 함수 만들기
 
 #### 출력
+
+- [x] MissionUtils - Console.print()를 이용한 문자열을 출력하는 `consolePrint` 함수 만들기
 
 - [x] 입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시하는 `gameResult` 함수 만들기
 
