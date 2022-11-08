@@ -78,4 +78,15 @@ function scoreCheck(answercheck, answer) {
 function restartGame() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => gameStartState(input));
 }
+
+function gameStartState(input) {
+  if (input === '1') {
+    let answer = createAnswer();
+    inputNumber(answer);
+  } else if (input === '2') {
+    MissionUtils.Console.close();
+  } else {
+    throw new Error('1 또는 2를 입력해주세요.');
+  }
+}
 module.exports = App;
