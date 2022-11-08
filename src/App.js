@@ -10,11 +10,10 @@ class App {
     }
     return verification;
   }
-  checksizeofNumber(answer){
-    //1부터 9까지만 적었는지 확인하기
+  checkallAreNumber(answer){
     var value = false; 
     for (var i;i<answer.length;i++){
-      if (answer[i]<1 || answer[i]>9){
+      if (isNaN(parseInt(answer[i]))){
         value = true;
       }
     }
@@ -93,17 +92,15 @@ class App {
    
     var pass = false;
     while (pass == false){
-      var answer  = 0;
-      //MissionUtils.Console.print("숫자를 입력해주세요: ")
+      var answer;
       MissionUtils.Console.readLine("숫자를 입력해주세요: ", (x) =>{
         if (isNaN(parseInt(x))) throw 'not a number';
         if (parseInt(x) <=0) throw 'not a natural number';
-        answer = x.split(",");
+        answer = x;
       });
-      answer = answer.toString().split(",");
-      //1부터 9까지만 적었는지 확인하기
-      if (this.checksizeofNumber(answer)) throw 'too big number'
-      answer = answer.join("");
+    
+      //숫자만 적었는지 확인하기
+      if (this.checkallAreNumber(answer)) throw 'too big number'
       if (answer.length != 3) throw 'length error';
       //중복되는 수 없는지 확인
       if (this.checkoverlap(answer)) throw 'overlap';
@@ -127,8 +124,7 @@ class App {
       this.playoneround();
       MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (x) =>{
         if (parseInt(x) == 1){
-       //   App.play();
-       //   MissionUtils.Console.print("again");
+          //another round;
         }        
         else if (parseInt(x) == 2){
           flag = true;
@@ -136,7 +132,6 @@ class App {
         else throw 'enter 1 or 2'
       });
    }
-   //MissionUtils.Console.print("게임 종료");
   }
 }
 module.exports = App;
