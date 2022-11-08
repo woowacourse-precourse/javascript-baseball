@@ -37,7 +37,7 @@ class App {
     } else this.getUserInput();
   }
 
-  checkPlayingNum(inputNum, allowed) {
+  checkInputNum(inputNum, allowed) {
     const duplicationCheck = [...new Set(inputNum)].length;
     if (inputNum.length !== allowLength) throw new Error(ERROR.LENGTH);
     if (duplicationCheck !== allowLength) throw new Error(ERROR.DUPLICATION);
@@ -50,7 +50,7 @@ class App {
 
   checkException(inputNum, checkStyle) {
     if (checkStyle === FORMAT.PLAY) {
-      return this.checkPlayingNum([...inputNum], true);
+      return this.checkInputNum([...inputNum], true);
     } else if (checkStyle === FORMAT.RESTART) {
       return inputNum === SELECT.CONTINUE || inputNum === SELECT.EXIT;
     }
