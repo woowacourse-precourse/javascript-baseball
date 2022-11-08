@@ -47,7 +47,7 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트 - 숫자 갯수", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
 
@@ -57,6 +57,58 @@ describe("숫자 야구 게임", () => {
     expect(() => {
       const app = new App();
       app.play();
-    }).toThrow();
+    }).toThrow("숫자 3개를 입력해주세요.");
+  });
+  
+  test("예외 테스트 - 숫자", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("숫자만 입력해주세요.");
+  });
+
+  test("예외 테스트 - 0 존재", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["120"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("0을 제외한 1~9 까지의 숫자만 입력해주세요.");
+  });
+
+  test("예외 테스트 - 중복 숫자", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("중복되는 숫자를 제외해주세요.");
+  });
+
+  test("예외 테스트 - 게임 재시작 입력 숫자", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123", "1a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1 또는 2가 입력되지 않았습니다.");
   });
 });
