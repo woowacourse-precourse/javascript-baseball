@@ -1,6 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
-const checkException = require("../src/checkException");
+const handleException = require("../src/handleException");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -64,18 +64,18 @@ describe("숫자 야구 게임", () => {
   test("입력 1-9 사이의 정수 예외 테스트", () => {
     const input = "a34";
 
-    expect(() => checkException(input)).toThrow();
+    expect(() => handleException(input)).toThrow();
   });
 
   test("입력 1-9 사이의 정수 예외 테스트2", () => {
     const input = "904";
 
-    expect(() => checkException(input)).toThrow();
+    expect(() => handleException(input)).toThrow();
   });
 
   test("입력 서로 다른 수 예외 테스트", () => {
     const input = "994";
 
-    expect(() => checkException(input)).toThrow();
+    expect(() => handleException(input)).toThrow();
   });
 });

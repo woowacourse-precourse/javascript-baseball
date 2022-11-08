@@ -14,7 +14,7 @@ function checkIsDiffEachOther(input) {
   return duplicateNum !== 3;
 }
 
-function checkException(input) {
+function handleException(input) {
   if (
     checkInputLength(input) |
     checkIsDigitInRange(input) |
@@ -24,4 +24,4 @@ function checkException(input) {
   }
 }
 
-module.exports = checkException;
+module.exports = handleException;

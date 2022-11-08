@@ -1,7 +1,7 @@
 const getNewAnswer = require("./getNewAnswer");
 const { Console } = require("@woowacourse/mission-utils");
 const Message = require("./Message");
-const checkException = require("./checkException");
+const handleException = require("./handleException");
 const getResult = require("./getResult");
 const { printStart, printGameover } = require("./printMessage");
 
@@ -17,7 +17,7 @@ class App {
 
   getUserInput() {
     Console.readLine(`${Message.input}`, (userInput) => {
-      checkException(userInput);
+      handleException(userInput);
       this.printResult(userInput);
     });
   }
@@ -45,17 +45,20 @@ class App {
   }
 
   decideSystemRestart(userRestartInput) {
-    if (userRestartInput !== "1" && userRestartInput !== "2") {
+    if (
+      userRestartInput !== Message.restartNum &&
+      userRestartInput !== Message.gameoverNum
+    ) {
       throw new Error(Message.error);
     }
 
-    if (userRestartInput === "1") {
+    if (userRestartInput === Message.restartNum) {
       this.answer = getNewAnswer();
       this.getUserInput();
     }
 
-    if (userRestartInput === "2") {
-      Console.print("게임 종료");
+    if (userRestartInput === Message.gameoverNum) {
+      Console.print(Message.gameover);
       Console.close();
     }
   }
