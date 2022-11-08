@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const InputValidation = require('./utils/InputValidation');
 
 class App {
   constructor() {
@@ -20,9 +21,13 @@ class App {
   getUserNumber() {
     let userNumber = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
-      userNumber = answer.split('');
+      if (InputValidation.isValidInput(answer)) {
+        userNumber = answer.split('');
+        //게임 시작하는 메서드 호출
+      } else {
+        MissionUtils.Console.print('오류로 인하여 게임을 종료합니다.');
+      }
     });
-    return userNumber;
   }
 
   play() {}
