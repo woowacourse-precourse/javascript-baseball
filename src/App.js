@@ -10,7 +10,7 @@ class App {
           const app = new App();
           return app.play();
         } else if (answer == 2) {
-          throw "게임종료";
+          return;
         } else {
           throw "1 또는 2를 입력해주세요";
         }
@@ -46,7 +46,7 @@ class App {
       return `${strike}스트라이크`;
     } else if (strike > 0 && ball > 0) {
       MissionUtils.Console.print(`${strike}스트라이크 ${ball}볼`);
-      return `${strike}스트라이크 ${ball}볼`;
+      return `${ball}볼 ${strike}스트라이크`;
     }
   }
 
