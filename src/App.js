@@ -43,7 +43,20 @@ class App {
     return newStr;
   }
 
-  getRandomNumber() {}
+  // 기능 3. 무작위 숫자 생성 함수
+  getRandomNumber() {
+    const computer = [];
+
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+
+    return computer.join('');
+  }
 
   countHint() {}
 
@@ -54,6 +67,7 @@ class App {
   async play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     this.userNumber = await this.getUserNumber();
+    this.answer = this.getRandomNumber();
   }
 }
 
