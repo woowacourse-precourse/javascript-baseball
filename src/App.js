@@ -26,7 +26,7 @@ class App {
     MissionUtils.Console.readLine("3자리 숫자를 입력해주세요: ", (answer) => {
       console.log(`입력값: ${answer}`);
       if (answer.length !== 3) {
-        throw "입력값은 반드시 3자리 숫자여야 합니다.";
+        throw new Error("입력값은 반드시 3자리 숫자여야 합니다.");
       }
 
       if (Number(gameNumber) === Number(answer)) {
