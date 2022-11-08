@@ -50,35 +50,35 @@ class App {
     return [ball, strike];
   };
 
-  matchResultPrint = (matchNum) => {
+  getMatchResultMessage = (matchNum) => {
     const [ball, strike] = matchNum;
     let message = "";
     if (ball > 0) message += ball + "볼 ";
     if (strike > 0) message += strike + "스트라이크";
     if (strike === 0 && ball === 0) message = "낫싱";
     message = message.trim();
+    return message;
+  };
+  getMatchResultPrint = (message) => {
     MissionUtils.Console.print(message);
     if (message === "3스트라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       MissionUtils.Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
         (answer) => {
-          if (answer === "1") {
-            this.gameStart();
-          } else if (answer === "2") {
-            MissionUtils.Console.close();
-          }
+          if (answer === "1") this.gameStart();
+          if (answer === "2") MissionUtils.Console.close();
         }
       );
     } else {
       this.gameMatch();
     }
   };
-
   gameMatch = () => {
     const userNumber = this.getUserNumber();
     const matchResult = this.getMatchResult(this.computerNumber, userNumber);
-    this.matchResultPrint(matchResult);
+    const matchResultMessage = this.getMatchResultMessage(matchResult);
+    this.getMatchResultPrint(matchResultMessage);
   };
 
   gameStart = () => {
