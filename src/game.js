@@ -9,6 +9,7 @@ const { Console, Random } = require("@woowacourse/mission-utils");
 class Game {
   constructor() {
     this.answerNumber;
+    this.playBoolean;
   }
   print(message) {
     return Console.print(message);
@@ -46,11 +47,14 @@ class Game {
       this.printScore(ball, strike);
       if (strike !== 3) {
         //return this.getCount;
+        return this.getCount(answer);
       } else {
         this.print(MESSAGE.SUCCESS);
+        this.playAgain();
+
+        return;
         // 재시작 구문
       }
-      return;
     });
   }
   isValidInput(input) {
@@ -90,6 +94,21 @@ class Game {
       output = `${strike}${SCORE.STRIKE}`;
     }
     return Console.print(output);
+  }
+  playAgain() {
+    Console.readLine(MESSAGE.RESTART, (input) => {
+      const inputNumber = Number(input);
+      if (inputNumber === END_INPUT.START) {
+        this.playBoolean = true;
+        this.play();
+
+        return;
+      }
+      if (answer === END_INPUT.END) {
+        return Console.close();
+      }
+      throw new Error(ERROR.INPUT_ONE_OR_TWO);
+    });
   }
 }
 const game = new Game();
