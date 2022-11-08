@@ -4,7 +4,7 @@ const checkValidation = (userInput) => {
   this.userInput = userInput;
   isNumberLengthThree();
   RangeNumber();
-  isOverLayRange(userInput);
+  isOverLayRange();
 };
 
 const RangeNumber = () => {
