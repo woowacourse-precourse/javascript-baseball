@@ -84,15 +84,15 @@ class Game {
     return { ball, strike };
   }
   printScore(ball, strike) {
-    let output;
+    let output = "";
     if (ball === 0 && strike === 0) {
-      output = SCORE.NOTHING;
+      output += SCORE.NOTHING;
     } else if (ball > 0 && strike > 0) {
-      output = `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`;
+      output += `${ball}${SCORE.BALL} ${strike}${SCORE.STRIKE}`;
     } else if (ball > 0) {
-      output = `${ball}${SCORE.BALL}`;
+      output += `${ball}${SCORE.BALL}`;
     } else if (strike > 0) {
-      output = `${strike}${SCORE.STRIKE}`;
+      output += `${strike}${SCORE.STRIKE}`;
     }
     return Console.print(output);
   }
