@@ -54,6 +54,7 @@ class App {
 
 	#isValidChoice(playerChoice) {
 		if (!REGEX.CHOICE.test(playerChoice)) {
+			Console.print(MESSAGES.FORMAT_ERROR_CHOICE)
 			throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 		}
 	}
@@ -93,6 +94,7 @@ class App {
 				Console.print(MESSAGES.END_GAME)
 				Console.close();
 			} else {
+				Console.print(MESSAGES.FORMAT_ERROR_CHOICE)
 				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 			}
 		});
