@@ -18,23 +18,31 @@ class App {
     console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      // 만약 유효성 검사 만족하면 -> 
-      if(true){
+      // userinput은 computerinput과 다르게 123 이렇게 주어짐
+      this.userArr = input.split('').map(Number);
+      MissionUtils.Console.print(`input: ${this.userArr}`); // this.userArr[0] 이렇게 뽑아보면 number 확인
+
+      if(this.isValid(input)){ // 만약 유효성 검사 만족하면 
         // 값 있는지 확인
-        this.userArr = [...input]; // userinput은 computerinput과 다르게 123 이렇게 주어짐
-        this.userArr = input.split('').map(Number);
-        MissionUtils.Console.print(`input: ${this.userArr}`); // this.userArr[0] 이렇게 뽑아보면 number 확인
       }
     });
   }
 
   // 유효성 검사
   isValid(userInput){
+    const NOT_NUMBER_ERROR = "입력은 3개까지 허용입니다."
+    const NOT_DIGIT_ERROR = "숫자만 입력해야 합니다."
+    // 입력값 3자리인지 확인 => set은 중복 허용 하지 않기에 같은 숫자 들어온다면 3자리 입력이라도 중복되어 자릿수 줄어든다.
+    if(userInput.size !== 3) throw NOT_NUMBER_ERROR;
+
+    // 숫자인지 확인
+    if(!isNaN(userInput)) throw NOT_DIGIT_ERROR; // true면 문자, false면 숫자
+
+    // 중복 없는지 확인
+    
+    return true;
+
   }
-
-
-
-
 }
 
 module.exports = App;
