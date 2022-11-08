@@ -4,31 +4,31 @@
 // 2-3. 3자리이다.
 // 2-4. 숫자이다.
 
-const isDuplicatedNumber = (userInputNumber) => {
-  const newSet = new Set(userInputNumber);
-  return newSet.size !== userInputNumber.length;
+const isDuplicatedNumber = (randomNumber) => {
+  const newSet = new Set(randomNumber);
+  return newSet.size !== randomNumber.length;
 };
 
-const isNotThreeDigit = (userInputNumber) => userInputNumber.length !== 3;
+const isNotThreeDigit = (randomNumber) => randomNumber.length !== 3;
 
-const isNotNumber = (userInputNumber) => {
+const isNotNumber = (randomNumber) => {
   let hasNan = false;
-  userInputNumber.split('').forEach((x) => {
+  randomNumber.split('').forEach((x) => {
     if (Number.isNaN(+x)) hasNan = true;
   });
   return hasNan;
 };
 
 const checkInvalidRandomNumber = (input) => {
-  const userInputNumber = input.join('');
+  const randomNumber = input.join('');
   let isInValid = false;
-  if (isDuplicatedNumber(userInputNumber)) {
+  if (isDuplicatedNumber(randomNumber)) {
     isInValid = true;
   }
-  if (isNotThreeDigit(userInputNumber)) {
+  if (isNotThreeDigit(randomNumber)) {
     isInValid = true;
   }
-  if (isNotNumber(userInputNumber)) {
+  if (isNotNumber(randomNumber)) {
     isInValid = true;
   }
   return isInValid;
