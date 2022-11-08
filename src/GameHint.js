@@ -9,12 +9,10 @@ class GameHint {
       Validator.isValidRangeOfNumber,
       Validator.isUniqueNumber,
     ];
-
     let isValid = false;
     checkList.forEach((validatorFunction) => {
       isValid = validatorFunction(playerInput);
     });
-
     if (isValid) {
       return this.isThreeStrike(randomNumbers, playerInput);
     }
@@ -44,12 +42,10 @@ class GameHint {
     const playerPickedNumbers = playerInput.split('').map(Number);
     const strike = this.countStrike(randomNumbers, playerPickedNumbers);
     const ball = this.countBall(randomNumbers, playerPickedNumbers);
-
     if (strike === 3) {
       Console.print(`${strike}스트라이크`);
       return true;
     }
-
     this.printStrikeBall(strike, ball);
     return false;
   }
@@ -58,15 +54,12 @@ class GameHint {
     if (!strike && !ball) {
       return Console.print('낫싱');
     }
-
     if (!strike && ball) {
       return Console.print(`${ball}볼`);
     }
-
     if (strike && !ball) {
       return Console.print(`${strike}스트라이크`);
     }
-
     return Console.print(`${ball}볼 ${strike}스트라이크`);
   }
 }

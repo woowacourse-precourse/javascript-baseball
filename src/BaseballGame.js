@@ -51,7 +51,6 @@ class BaseballGame {
       }
       return this.getPlayerInput();
     };
-
     Console.readLine(`${INPUT_MESSAGE}`, playerInput);
   }
 
