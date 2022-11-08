@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE } = require("./constants/constants");
+const { MESSAGE, RESULT } = require("./constants/constants");
 
 class App {
   play() {
@@ -11,6 +11,7 @@ class App {
       strike: 0,
       ball: 0,
     };
+
     computerNumber.forEach((computer, index) => {
       if (`${computer}` === userInput[index]) {
         count.strike += 1;
@@ -19,6 +20,13 @@ class App {
       }
     });
     return count;
+  }
+
+  getResultMessage(strike, ball) {
+    if (strike === 0 && ball === 0) return RESULT.NOTHING;
+    if (strike === 0) return `${ball}${RESULT.BALL}`;
+    if (ball === 0) return `${strike}${RESULT.STRIKE}`;
+    return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
   }
 }
 
