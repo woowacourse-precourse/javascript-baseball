@@ -15,14 +15,19 @@ class App {
   }
 
   async gameRoutine() {
-    const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     this.randomNumber();
-    while (this.randomNum != this.inputNum) {
-      await timer(3000).this(userInput());
-      MissionUtils.Console.print("1");
-      if (this.randomNum == this.inputNum) break;
+    for (let i = 1; i < 5; i++) {
+      // MissionUtils.Console.print(this.randomNum, this.inputNum);
+      if (this.randomNum != this.inputNum) {
+        // MissionUtils.Console.print("실행되냐?");
+        this.userInput();
+      }
+      if (this.randomNum == this.inputNum) {
+        this.overMessage();
+        MissionUtils.Console.print("1");
+        return true;
+      }
     }
-    this.overMessage();
   }
 
   // userInput logic
@@ -68,11 +73,24 @@ class App {
 
   // 종료 후 logic
   overMessage() {
-    print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
   }
 
-  overChoice() {}
+  overChoice() {
+    MissionUtils.Console.readLine((input) => {
+      this.overInputNum = input;
+      if (this.overInputNum == 1) {
+        this.gameRoutine();
+      } else if (this.overInputNum == 2) {
+        throw new Error("게임이 종료되었습니다.");
+      } else {
+        throw new Error("잘못된 값을 입력하셨습니다.");
+      }
+    });
+  }
 
   // 숫자 야구 게임 logic
   game() {
