@@ -55,13 +55,17 @@ class App {
     let strikeCount = 0;
     let ballCount = 0;
 
+    // strke count
     checkDigit.forEach((digit, idx) => {
       if (randomDigit[idx] === digit) {
         strikeCount += 1;
-      } else {
-        if (randomDigit.includes(digit)) {
-          ballCount += 1;
-        }
+      }
+    });
+
+    // ball count
+    checkDigit.forEach((digit, idx) => {
+      if (randomDigit[idx] !== digit && randomDigit.includes(digit)) {
+        ballCount += 1;
       }
     });
     return [strikeCount, ballCount];
