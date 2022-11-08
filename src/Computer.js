@@ -19,15 +19,14 @@ class Computer {
   }
 
   generatorComputerValue() {
-    let computerValue = '';
-    let randomNumber;
+    let computerValue = [];
 
     while (computerValue.length < 3) {
-      randomNumber = Random.pickNumberInRange(1, 9);
-      if (!computerValue.includes(randomNumber)) computerValue += randomNumber;
+      const randomNumber = Random.pickNumberInRange(1, 9);
+      if (!computerValue.includes(randomNumber)) computerValue.push(randomNumber);
     }
 
-    return computerValue;
+    return computerValue.join('');
   }
 }
 

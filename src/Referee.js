@@ -22,11 +22,10 @@ class Referee {
   gameResult() {
     const count = this.getBallAndStrikeCount();
 
-    const nothingString = count.ball === 0 && count.strike === 0 ? '낫싱' : '';
-    const ballString = count.ball ? `${count.ball}볼 ` : '';
-    const strikeString = count.strike ? `${count.strike}스트라이크` : '';
-
-    Console.print(nothingString + ballString + strikeString);
+    if (count.ball === 0 && count.strike === 0) Console.print('낫싱');
+    if (count.ball !== 0 && count.strike === 0) Console.print(`${count.ball}볼`);
+    if (count.ball === 0 && count.strike !== 0) Console.print(`${count.strike}스트라이크`);
+    if (count.ball !== 0 && count.strike !== 0) Console.print(`${count.ball}볼 ${count.strike}스트라이크`);
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
@@ -36,7 +35,7 @@ class Referee {
 
   gameFinish() {
     Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
-      stringAnswer = answer + '';
+      const stringAnswer = answer + '';
       if (stringAnswer === RESTART) this.gameStart();
       else if (stringAnswer === GAME_OVER) Console.print(MESSAGE.GAME.OVER);
       else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
