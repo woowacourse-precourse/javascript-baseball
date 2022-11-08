@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    let gameAgain = 1;
+    let gameAgain;
     gameStartingText();
     while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
@@ -12,7 +12,7 @@ class App {
       if (gameAgain != 1 && gameAgain != 2) {
         console.log("[Error]재시작? - 입력 값이 1이나 2가 아닙니다.");
         throw new Error("입력 값이 1이나 2가 아님");
-      };
+      }
     }
     gameCompleteEndText();
   }
@@ -41,11 +41,11 @@ const playerNumbersInput = () => {
     input = answer;
   });
   inspect = Number(input);
-  if (isNaN(inspect)){
+  if (isNaN(inspect)) {
     console.log("[Error]입력이 숫자가 아닙니다.");
     throw "입력이 숫자가 아님";
   }
-  if(input.length != 3){
+  if (input.length != 3) {
     console.log("[Error]입력 숫자 개수가 맞지 않습니다");
     throw "입력 숫자 개수 에러";
   }
@@ -57,9 +57,9 @@ const oneGame = (computerNumbers) => {
   let playerNumbers;
   let errorFlag = 0;
   while (1) {
-    try{
+    try {
       playerNumbers = playerNumbersInput();
-    }catch(error){
+    } catch (error) {
       errorFlag = 1;
       break;
     }
@@ -117,6 +117,6 @@ const askGameAgain = () => {
 
 const gameCompleteEndText = () => {
   MissionUtils.Console.print("게임 종료.");
-}
+};
 
 module.exports = App;
