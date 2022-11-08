@@ -57,6 +57,16 @@ class App {
     }
     return answer;
   }
+    /*3스트라이크 인지 확인하는 기능*/
+  checkThreeStrike(computerRandomNum, userInputNum){
+    if(this.strike(computerRandomNum, userInputNum)==3){
+      MissionUtils.Console.print("3스트라이크");
+      console.log("3개를 모두 맞히셨습니다! 게임 종료");
+      this.selectGameEnd(userInputNum);
+      return true;
+      }
+      return false;
+    }
   /*유저가 입력한 수의 길이가 유효한지 확인하는 기능*/
   checkUserNumLength(userInputNum){
     if(userInputNum==='1'||userInputNum==='2'){
@@ -92,7 +102,7 @@ class App {
       return false;
     }
     return true;
-    
+  }
   /*입력 수가 유효한지 확인하는 기능*/
   checkUserNumVaildation(userInputNum){
     if(!this.checkUserNumLength(userInputNum)){
@@ -122,7 +132,7 @@ class App {
     else{
       throw "입력이 잘못되었습니다."
     }
-    }
 }
+
 
 module.exports = App;
