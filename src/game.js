@@ -7,6 +7,9 @@ const {
 } = require("./constants");
 const { Console, Random } = require("@woowacourse/mission-utils");
 class Game {
+  constructor() {
+    this.answerNumber;
+  }
   print(message) {
     return Console.print(message);
   }
@@ -34,14 +37,34 @@ class Game {
   getCount(answer) {
     Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
       const inputNumber = [...input].map(Number);
-      const { ball, strike } = this.count(inputNumber, answer); // count 함수 작업
+      const { ball, strike } = this.countPitch(
+        inputNumber,
+        this.answerNumber
+      );
 
-      this.isValidInput(input); // 유효성 검사
-      this.printScore(ball, strike);
+      //this.isValidInput(input); // 유효성 검사
+      //this.printScore(ball, strike);
+      if (strike !== 3) {
+        //return this.getCount;
+      } else {
+        this.print(MESSAGE.SUCCESS);
+        // 재시작 구문
+      }
+      return;
     });
   }
-  if(strike !== 3){
-      return this.getCount
+  countPitch(inputNumber, answerNumber) {
+    let ball = 0;
+    let strike = 0;
+    inputNumber.forEach((number, index) => {
+      if (number === answerNumber[index]) {
+        strike++;
+      } else if (answerNumber.includes(number)) {
+        ball++;
+      }
+    });
+    console.log(answerNumber, inputNumber, ball, strike);
+    return { ball, strike };
   }
 }
 const game = new Game();
