@@ -1,6 +1,10 @@
 const { print, close, readLine, pickNumberInRange } = require("../src/Utils");
 const MissionUtils = require("@woowacourse/mission-utils");
 
+afterEach(() => {
+  close();
+});
+
 describe("utils 정상 작동 테스트", () => {
   test("print 출력 테스트", () => {
     const printMocking = jest.spyOn(MissionUtils.Console, "print");
