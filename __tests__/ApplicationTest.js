@@ -105,11 +105,9 @@ describe('숫자 야구 게임', () => {
     const app = new App();
     app.play();
 
-    expect(app.input).toHaveLength(3);
     expect(app.input).toEqual([1, 2, 3]);
     expect(App.isValidInput(app.input)).toEqual(true);
 
-    expect(app.answer).toHaveLength(3);
     expect(app.answer).toEqual([1, 3, 5]);
 
     expect(app.hint).toEqual({
@@ -119,7 +117,7 @@ describe('숫자 야구 게임', () => {
     });
   });
 
-  test('입력값, 정답값, 힌트값을 나타내는 인스턴스 프로퍼티가 제대로 저장되는지 확인2', () => {
+  test('입력값, 정답값, 힌트값을 나타내는 인스턴스 프로퍼티가 제대로 저장되는지 확인 - 2', () => {
     const randoms = [2, 9, 6];
     const answers = ['137'];
 
@@ -129,11 +127,9 @@ describe('숫자 야구 게임', () => {
     const app = new App();
     app.play();
 
-    expect(app.input).toHaveLength(3);
     expect(app.input).toEqual([1, 3, 7]);
     expect(App.isValidInput(app.input)).toEqual(true);
 
-    expect(app.answer).toHaveLength(3);
     expect(app.answer).toEqual([2, 9, 6]);
 
     expect(app.hint).toEqual({
@@ -141,6 +137,46 @@ describe('숫자 야구 게임', () => {
       strike: 0,
       nothing: 3,
     });
+  });
+
+  test('입력값을 나타내는 인스턴스 프로퍼티가 유효한 값으로 저장되는지 확인', () => {
+    const randoms = [2, 9, 6];
+    const answers = ['137'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(app.input).toHaveLength(3); // 입력값의 길이가 3인가?
+    expect(app.input.every((number) => number >= 1 && number <= 9)).toBe(true); // 입력값의 각 자릿수가 1이상 9이하의 숫자인가?
+    expect(!app.input.includes(NaN)).toBe(true); // 입력값에 숫자만 포함되어 있는가?
+    expect(!app.input.includes(0)).toBe(true); // 입력값에 0이 포함되어 있지 않은가?
+
+    // 입력값의 각 자릿수끼리 중복된 숫자가 없는가?
+    expect(app.input[0] !== app.input[1]).toBe(true);
+    expect(app.input[0] !== app.input[2]).toBe(true);
+    expect(app.input[1] !== app.input[2]).toBe(true);
+  });
+
+  test('정답값을 나타내는 인스턴스 프로퍼티가 유효한 값으로 저장되는지 확인', () => {
+    const randoms = [2, 9, 6];
+    const answers = ['137'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    expect(app.answer).toHaveLength(3); // 정답값의 길이가 3인가?
+    expect(app.answer.every((number) => number >= 1 && number <= 9)).toBe(true); // 정답값의 각 자릿수가 1이상 9이하의 숫자인가?
+
+    // 정답값의 각 자릿수끼리 중복된 숫자가 없는가?
+    expect(app.answer[0] !== app.answer[1]).toBe(true);
+    expect(app.answer[0] !== app.answer[2]).toBe(true);
+    expect(app.answer[1] !== app.answer[2]).toBe(true);
   });
 
   test('setHint 메서드에서 낫싱 또는 스트라이크가 아니면 무조건 볼이라는 것을 확인', () => {
