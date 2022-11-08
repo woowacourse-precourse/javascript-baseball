@@ -90,6 +90,10 @@ class App {
         }
       );
     }
+
+    createComputerNumber();
+    checkGameResult();
+    replayGame();
   }
 }
 
