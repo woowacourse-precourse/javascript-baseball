@@ -131,6 +131,37 @@ class App {
     );
   }
 
+  CheckRestartNum(inputNum) {
+    const RESTART = "1";
+    const EXIT = "0";
+    if (inputNum.length !== 1) {
+      return false;
+    }
+    if (inputNum !== RESTART && inputNum !== EXIT) {
+      return false;
+    }
+    return true;
+  }
+
+  RestartQuestion() {
+    Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (input) => {
+        if (!this.checkException(input, 1)) {
+          throw new Error(
+            "잘못된 문자를 입력하였습니다. 프로그램을 종료합니다."
+          );
+        }
+        this.restartInput = input;
+        if (this.restartInput === "1") this.startGame();
+        else if (this.restartInput === "2") {
+          Console.print("게임 종료");
+          Console.close();
+        }
+      }
+    );
+  }
+
   StartGame() {
     this.createAnswer();
     this.UserInput();
