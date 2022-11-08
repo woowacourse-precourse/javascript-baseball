@@ -27,9 +27,18 @@ class BaseBallGame {
     
     return IS_NUMBER && RIGHT_LENGTH && NOT_DUPLICATE;
   }
+
+  isStrike(INPUT_NUM, ANSWER) {
+    let STRIKE_COUNT = 0;
+    for (let curr_Number of INPUT_NUM) {
+      const i = INPUT_NUM.indexOf(curr_Number);
+      if (curr_Number === ANSWER[i]) STRIKE_COUNT += 1;
+    }
+    return STRIKE_COUNT;
+  }
 }
 
 const game = new BaseBallGame;
-game.isRightForm('122');
+game.isStrike('123', '132');
 
 module.exports = BaseBallGame;
