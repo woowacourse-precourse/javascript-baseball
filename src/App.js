@@ -18,6 +18,12 @@ class App {
     }
   }
 
+  createUserNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      this.userNumber = input.split('').map(item => parseInt(item));
+    })
+  }
+
   play() { }
 
 }
