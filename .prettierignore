@@ -1,1 +1,3 @@
 node_moduels/
+./__test__/ApplicationTest.js
+./__test__/StringTest.js

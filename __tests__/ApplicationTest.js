@@ -1,5 +1,6 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+/* eslint-disable */
 const App = require('../src/App');
+const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
