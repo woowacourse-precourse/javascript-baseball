@@ -28,6 +28,9 @@
       1. [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)에서 제공하는 `Console.print` API 사용
    2. 재시작/종료를 구분하는 1과 2 중 하나의 수
       1. [MissionUtils 라이브러리](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)에서 제공하는 `Console.readLine` API 사용
-      2. 잘못된 값을 입력한 경우 예외 발생시킨후 종료, 이때 `throw` 문 이용
+      2. (e) 1 또는 2가 아닐 경우
+      3. (e) 1자리 수가 아닐 경우 (2자리 수 이상, 음수, 소수 등 불가)
+      4. (e) 숫자가 아닐 경우 (알파벳, 한글, 특수문자 등 불가)
+      5. 잘못된 값을 입력한 경우 예외 발생시킨후 종료, 이때 `throw` 문 이용
    3. 사용자가 1 입력시 1번 기능으로 되돌아감
    4. 2 입력시 프로그램 완전히 종료
