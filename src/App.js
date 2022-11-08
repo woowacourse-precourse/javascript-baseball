@@ -27,5 +27,13 @@ class App {
     });
     return inputNumber;
   }
+
+  isInteger(inputNumber) {
+    if (Number.isInteger(Number(inputNumber))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 module.exports = App;
