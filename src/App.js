@@ -129,7 +129,7 @@ class App {
   chooseReStart() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       if (answer == 1) return this.startGame()
-      if (answer == 2) return 
+      if (answer == 2) return Console.close();
       throw new Error('1이나 2를 입력하세요.')
     })
   }
@@ -140,6 +140,7 @@ class App {
     else if (numForCheck[0] == numForCheck[2]) return false
   }
 }
+
 
 module.exports = App;
 
