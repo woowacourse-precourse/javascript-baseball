@@ -14,7 +14,6 @@ class App {
   //램덤 숫자(답) 미리 구하기!
   gameSetter() {
     const answer = makeRandomNumber.createRandomNumber();
-    Console.print(answer);
     this.startGame(answer);
   }
   startGame(answer) {
@@ -50,6 +49,5 @@ class App {
     throw new Error(MESSAGE.WRONG_INPUT);
   }
 }
-const app = new App();
-app.play();
+
 module.exports = App;
