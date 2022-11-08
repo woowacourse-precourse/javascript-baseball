@@ -59,4 +59,22 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow();
   });
+ 
+
+  test("user가 입력한 수에 0이 들어있으면 오류", () => {
+    const app = new App();
+    const USER_STRING = "104";
+
+    expect(()=> app.validateUserNumbers(USER_STRING)).toThrow();
+  });
+
+  test("Strike, Ball 개수 세기", () => {
+    const app = new App();
+
+    const inputNumber = [1, 5, 8];
+    const randomNumber = [8, 5, 3];
+    const result = app.countStrikeAndBall(inputNumber, randomNumber);
+
+    expect(result).toEqual({ strike: 1, ball: 1 });
+  });
 });
