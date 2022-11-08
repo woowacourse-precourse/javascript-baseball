@@ -3,6 +3,17 @@ const { Console } = MissionUtils;
 class App {
   play() {}
 
+  gameStart() {
+    const answer = this.getAnswerNumber();
+    let gameStatus = true;
+    while (gameStatus) {
+      let inputNumber = this.numberInput();
+      let strikeCount = this.checkStrike(answer, inputNumber);
+      let ballCount = this.checkBall(answer, inputNumber, strikeCount);
+      gameStatus = this.printCheckResult(strikeCount, ballCount);
+    }
+  }
+
   printStartMessage() {
     const START_MESSAGE = '숫자 야구 게임을 시작합니다.';
     Console.print(START_MESSAGE);
