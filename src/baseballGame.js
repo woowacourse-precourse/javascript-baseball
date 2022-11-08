@@ -13,26 +13,20 @@ class BaseballGame {
   play() {
     printGameStartMessage();
     this.computerNumber = generateRandomNumber();
-    this.readUserInput();
+    this.readUserInput(GAME_MESSAGE.INPUT);
   }
 
-  readUserInput() {
-    Console.readLine(GAME_MESSAGE.INPUT, (userInput) => {
-      this.userInput = userInput;
-      this.userInputHandling();
-      this.readUserInput();
+  readUserInput(message) {
+    Console.readLine(message, (userInput) => {
+      this.userInputHandling(userInput);
+      this.readUserInput(GAME_MESSAGE.INPUT);
     });
   }
 
-  userInputHandling() {
+  userInputHandling(userInput) {
+    this.userInput = userInput;
     checkUserInput(this.userInput);
-    this.compareComputerAndUser();
-  }
-
-  compareComputerAndUser() {
-    const strike = this.countStrikeNumbers();
-    const ball = this.countBallNumbers();
-    this.printGameResult(strike, ball);
+    this.printGameResult();
   }
 
   countStrikeNumbers() {
@@ -48,8 +42,11 @@ class BaseballGame {
     ).length;
   }
 
-  printGameResult(strike, ball) {
-    if (strike === 3) return print(RESULT.정답);
+  printGameResult() {
+    const strike = this.countStrikeNumbers();
+    const ball = this.countBallNumbers();
+
+    if (strike === 3) return this.readUserInputOneOrTwo();
     if (!strike && !ball) return print(RESULT.낫싱);
 
     return print(
@@ -57,6 +54,11 @@ class BaseballGame {
         strike ? strike + RESULT.스트라이크 : RESULT.공백
       }`
     );
+  }
+
+  readUserInputOneOrTwo() {
+    print(GAME_MESSAGE.ANSWER);
+    this.readUserInput(GAME_MESSAGE.RESTART);
   }
 }
 module.exports = BaseballGame;
