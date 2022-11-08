@@ -31,10 +31,15 @@ class App {
 
   //유저 입력 받기
   userNumber(computer) {
-    var isnum = new RegExp(`/^\d+$/`)
+    let check = /^[0-9]+$/;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-      if(userInput.length !== 3 || isnum.test(userInput) === false)
-      this.playing(computer, userInput)
+      if (userInput.length !== 3 || !check.test(userInput) ||
+        ((userInput[0] == userInput[1]) || (userInput[1] == userInput[2]) || (userInput[0] == userInput[2]))) {
+        MissionUtils.Console.close();
+        MissionUtils.Console.print("Error Message")
+      } else {
+        this.playing(computer, userInput)
+      }
     })
   }
 
@@ -55,20 +60,22 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료")
       this.restart()
     } else if (strikeCount !== 3) {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
-        this.playing(computer, userInput)
-      })
+      this.userNumber(computer)
+    } else {
+      this.playing(computer, userInput)
     }
+
   }
+
   count(strike, ball) {
     if (strike > 0 && ball > 0) {
-      console.log(`${ball}볼 ${strike}스트라이크`)
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
     } else if (ball > 0) {
-      console.log(`${ball}볼`)
+      MissionUtils.Console.print(`${ball}볼`)
     } else if (strike > 0) {
-      console.log(`${strike}스트라이크`)
-    }else if(strike === 0 && ball === 0) {
-      console.log("낫싱")
+      MissionUtils.Console.print(`${strike}스트라이크`)
+    } else if (strike === 0 && ball === 0) {
+      MissionUtils.Console.print("낫싱")
     }
   }
 
@@ -77,8 +84,12 @@ class App {
       if (start === '1') {
         this.play()
       } else if (start === '2') {
-        console.log("게임을 종료합니다.")
         MissionUtils.Console.close()
+        MissionUtils.Console.print("게임 종료")
+      } else {
+        MissionUtils.Console.close()
+        MissionUtils.Console.print("Error Message")
+
       }
     })
   }
