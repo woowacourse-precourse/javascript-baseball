@@ -35,33 +35,33 @@ class App {
 
   checkInput(inputNumber) {
     let listOfNumber = [...inputNumber];
-    if (!Number(inputNumber)) return false;
+    if (!Number(inputNumber)) return 0;
     if (
       listOfNumber[0] == listOfNumber[1] ||
       listOfNumber[0] == listOfNumber[2] ||
-      listOfNumber[1] == listOfNumber[2]) return false;
-    if (listOfNumber.includes('0')) return false;
-    if (listOfNumber.length == 0 || listOfNumber.length != 3) return false;
-    return true;
+      listOfNumber[1] == listOfNumber[2]) return 0;
+    if (listOfNumber.includes('0')) return 0;
+    if (listOfNumber.length == 0 || listOfNumber.length != 3) return 0;
+    return 1;
   }
 
   getHint(answer, inputNumber) {
     let strike = 0;
     let ball = 0;
     let result = '';
+    let hint = '';
     for (let i = 0; i < answer.length; i++) {
       result = this.checkStrikeBall(answer, inputNumber, i);
       if (result == 'strike') strike += 1;
       else if (result == 'ball') ball += 1;
     }
-    let hint = '';
     hint = this.printHint(strike, ball);
     return hint;
   }
 
 
   printHint(strike, ball) {
-    let hint;
+    let hint = '';
     if (strike == 0 && ball == 0) {
       hint = '낫싱';
     } else if (strike == 0) {
