@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES, ERRORS } = require('./constants');
+const { MESSAGES, OUTPUTS, ERRORS } = require('./constants');
 const { getRandomUniqueNumbers } = require('./utils');
 
 class App {
@@ -24,6 +24,9 @@ class App {
       this.#validateInput(input);
 
       const { strike, ball } = this.#compareInputWithAnswer(input);
+      this.#printGameResult(strike, ball);
+
+      this.#progressGame();
     });
   }
 
@@ -58,6 +61,19 @@ class App {
     });
 
     return { strike, ball: ball - strike };
+  }
+
+  #printGameResult(strike, ball) {
+    if (strike <= 0 && ball <= 0) {
+      Console.print(OUTPUTS.NOTHING);
+      return;
+    }
+
+    const strikeMessage = strike > 0 ? `${strike}${OUTPUTS.STRIKE}` : '';
+    const ballMessage = ball > 0 ? `${ball}${OUTPUTS.BALL} ` : '';
+    const resultMessage = `${ballMessage}${strikeMessage}`;
+
+    Console.print(resultMessage.trim());
   }
 }
 
