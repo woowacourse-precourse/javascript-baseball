@@ -19,6 +19,12 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
+
 describe('기능테스트', () => {
   test('중복없는 3자리 숫자 생성', () => {
     const exceptNumbers = new Set(getRandomNumbers());
@@ -38,50 +44,38 @@ describe('기능테스트', () => {
       '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료'
     );
   });
+  test('정답입력 후 게임종료 시 게임종료 출력', () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ['135', '2'];
+    const logSpy = getLogSpy();
+    const messages = ['3스트라이크', '게임 종료'];
+    mockRandoms(randoms);
+    mockAnswer(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((message) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
+    });
+  });
+  test('게임시작 문구 출력', () => {
+    const logSpy = getLogSpy();
+    const app = new App();
+    app.play();
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('숫자 야구 게임을 시작합니다'));
+  });
 });
 
 describe('예외 테스트', () => {
-  test('0이 들어간 입력시 에러', () => {
-    const randoms = [4, 6, 7];
-    const answers = ['102', '103'];
-    mockRandoms(randoms);
-    mockAnswer(answers);
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
-  });
-
-  test('1~9숫자가 아닐 때 에러', () => {
-    const randoms = [4, 6, 7];
-    const answers = ['10q'];
-    mockRandoms(randoms);
-    mockAnswer(answers);
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
-  });
-
-  test('재시작 게임 입력 값 1,2가 아니라면 에러', () => {
-    const randoms = [4, 6, 7, 6, 7, 8];
-    const answers = ['467', '0'];
-    mockRandoms(randoms);
-    mockAnswer(answers);
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
-  });
-
-  test('restartEndGameAnswerValidator 예외 처리 테스트', () => {
-    const numbers = ['12', '3', 'q', 1];
+  test('재시작/종료 입력 예외 처리 테스트', () => {
+    const numbers = ['12', '3', 'q', '-', ' ', '57'];
     numbers.forEach((number) => {
       expect(() => restartEndGameAnswerValidator(number)).toThrow();
     });
   });
-  test('guessAnswerValidate 예외 처리 테스트', () => {
-    const numbers = ['12', 'q23', '000', 1];
+  test('정답 입력 예외 처리 테스트', () => {
+    const numbers = ['12', 'q23', '000', 1, '1 2', '103', '1-2'];
     numbers.forEach((number) => {
       expect(() => guessAnswerValidate(number)).toThrow();
     });
