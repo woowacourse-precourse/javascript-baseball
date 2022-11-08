@@ -27,7 +27,7 @@ class Utils {
   }
 
   static isNumber(value) {
-    return typeof value === "number";
+    return !Number.isNaN(value);
   }
 
   static hasDuplicateElmentInList(list) {
