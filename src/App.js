@@ -42,8 +42,11 @@ class App {
 
   createUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!this.isNumberValidated(input)) throw new Error("Invalid user input (Do not use string)");
       this.userNumber = input.split('').map(item => parseInt(item));
     })
+    if (this.isDuplicated(this.userNumber)) throw new Error("Invalid user input (Use unique number)")
+    else if (!this.isInRange(this.userNumber)) throw new Error("Invalid user input (You must use number range 1 ~ 9)")
   }
 
   count() {
