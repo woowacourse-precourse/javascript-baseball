@@ -25,8 +25,7 @@ function convertToNumberArray(userInput) {
 }
 
 function isNothing(gameNumber, guessNumber) {
-  if (guessNumber.filter((digit) => gameNumber.includes(digit)).length == 0)
-    return true;
+  if (guessNumber.filter((digit) => gameNumber.includes(digit)).length == 0) return true;
   return false;
 }
 
@@ -41,10 +40,7 @@ function findStrike(gameNumber, guessNumber) {
 function findBall(gameNumber, guessNumber) {
   let balls = 0;
   guessNumber.forEach((digit) => {
-    if (
-      digit !== gameNumber[guessNumber.indexOf(digit)] &&
-      gameNumber.includes(digit)
-    )
+    if (digit !== gameNumber[guessNumber.indexOf(digit)] && gameNumber.includes(digit))
       balls++;
   });
   return balls;
@@ -58,6 +54,23 @@ class App {
       addUniqueRandomDigit(gameNumber, digit);
     }
     return gameNumber;
+  }
+
+  compareGuessAndGameNumber(gameNumber, guessNumber) {
+    let compareResult;
+
+    if (isNothing(guessNumber, gameNumber)) compareResult = "낫싱";
+    else {
+      let strikes = findStrike(guessNumber, gameNumber);
+      let balls = findBall(guessNumber, gameNumber);
+
+      if (balls > 0 && strikes > 0) compareResult = `${balls}볼 ${strikes}스트라이크`;
+      else if (balls > 0) compareResult = `${balls}볼`;
+      else compareResult = `${strikes}스트라이크`;
+    }
+
+    MissionUtils.Console.print(compareResult);
+    return compareResult;
   }
 
   play() {}

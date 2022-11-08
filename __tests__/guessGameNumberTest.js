@@ -4,6 +4,7 @@ const {
   isNothing,
   findStrike,
   findBall,
+  App,
 } = require("../src/App");
 
 describe("추측 숫자를 문자열로 입력받으면 숫자배열로 변환해주는 기능", () => {
@@ -66,5 +67,22 @@ describe("숫자는 포함하고 인덱스가 다른지 찾아 볼 수 반환", 
   });
   test("case4", () => {
     expect(findBall(gameNumber, [1, 2, 3])).toBe(0);
+  });
+});
+
+describe("추측한 숫자와 게임 숫자 대조하고 결과 반환", () => {
+  const app = new App();
+  const gameNumber = [1, 2, 3];
+  test("case1", () => {
+    expect(app.compareGuessAndGameNumber(gameNumber, [1, 3, 2])).toBe("2볼 1스트라이크");
+  });
+  test("case2", () => {
+    expect(app.compareGuessAndGameNumber(gameNumber, [5, 4, 9])).toBe("낫싱");
+  });
+  test("case3", () => {
+    expect(app.compareGuessAndGameNumber(gameNumber, [7, 1, 3])).toBe("1볼 1스트라이크");
+  });
+  test("case4", () => {
+    expect(app.compareGuessAndGameNumber(gameNumber, [1, 2, 3])).toBe("3스트라이크");
   });
 });
