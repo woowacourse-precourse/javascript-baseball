@@ -43,12 +43,12 @@
   - [ ] loop를 돌며 각 자리수가 같은지 비교하여 같으면 스트라이크 카운트가 증가한다.
   - [ ] 스트라이크 카운트를 반환한다.
 
-- [ ] 볼(같은 수가 다른 자리에 있을 경우 1볼) 구하기
+- [x] 볼(같은 수가 다른 자리에 있을 경우 1볼) 구하기
 
-  - [ ] 입력받은 3자리 array를 set으로 형변환하기
-  - [ ] 컴퓨터 임의의 수 array를 set으로 형변환하기
-  - [ ] [set 교집합 구현](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Set) -[ ] test: 교집합이 제대로 작동하는가
-  - [ ] 입력받은 3자리 set과 컴퓨터 임의의 수 set을 교집합한 결과 길이 반환
+  - [x] 입력받은 3자리 array를 set으로 형변환하기
+  - [x] 컴퓨터 임의의 수 array를 set으로 형변환하기
+  - [x] [set 교집합 구현](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Set) -[ ] test: 교집합이 제대로 작동하는가
+  - [x] 입력받은 3자리 set과 컴퓨터 임의의 수 set을 교집합한 결과 길이 반환
 
 - [ ] 각 결과 object를 생성한다.
 
