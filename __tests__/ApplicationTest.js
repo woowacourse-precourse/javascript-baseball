@@ -105,6 +105,15 @@ describe("게임 결과 만들기 유닛 테스트", () => {
   });
 });
 
+describe("게임 종료 조건 유닛 테스트", () => {
+  test("사용자가 입력한 숫자와 정답이 일치하면 게임을 종료한다.", () => {
+    const app = new App();
+    app.answer = "123";
+
+    expect(app.isGameOver("123")).toBe(true);
+  });
+});
+
 describe("사용자 입력에 대한 예외 처리 테스트", () => {
   test("적절한 입력에 대해서는 true를 리턴한다.", () => {
     const input = ["123", "234", "345"];
