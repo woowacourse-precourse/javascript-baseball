@@ -5,6 +5,20 @@ const createAnswerNumList = () => {
   return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
 
+const exceptionHandlingInputUserNum = (answer) => {
+  if (!is3Letters(answer)) {
+    throw escape;
+  }
+
+  if (!isOnlyNumber(answer)) {
+    throw escape;
+  }
+
+  if (!areEachDifferent(answer)) {
+    throw escape;
+  }
+}
+
 }
 
 module.exports = App;
