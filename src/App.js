@@ -98,5 +98,3 @@ const gameRestartOrEnd = () =>{
     }
    })
 }
-
-gamestart();
