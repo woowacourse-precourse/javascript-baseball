@@ -11,7 +11,7 @@ const ERROR = {
   LENGTH: "세자리 수를 입력해야합니다. 프로그램을 종료합니다.",
   STRING: "1 ~ 9 숫자만 입력해야합니다. 프로그램을 종료합니다.",
   DUPLICATION: "서로 다른 숫자 세가지를 입력해야합니다. 프로그램을 종료합니다.",
-  SELECT: "1,2 둘 중 한자리 숫자만 입력해야합니다. 프로그램을 종료합니다.",
+  CHOOSE: "1,2 둘 중 한자리 숫자만 입력해야합니다. 프로그램을 종료합니다.",
 };
 
 const FORMAT = {
@@ -19,4 +19,9 @@ const FORMAT = {
   RESTART: "restartInput",
 };
 
-module.exports = { MESSAGE, ERROR, FORMAT };
+const SELECT = {
+  CONTINUE: "1",
+  EXIT: "2",
+};
+
+module.exports = { MESSAGE, ERROR, FORMAT, SELECT };

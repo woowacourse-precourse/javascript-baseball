@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGE, FORMAT, ERROR } = require("./constant/constant");
-
+const { MESSAGE, FORMAT, ERROR, SELECT } = require("./constant/constant");
 const { Random, Console } = MissionUtils;
 const allowNum = /[1-9]/;
+const allowLength = 3;
 
 class App {
   constructor() {
@@ -10,11 +10,11 @@ class App {
     this.userInput = "";
   }
 
-  getCnt(includeOfNum) {
+  getCnt() {
     let ballCnt = 0;
     let strikeCnt = 0;
     [...this.userInput].forEach((num, idx) => {
-      if (+num !== this.answer[idx] && includeOfNum[num]) ballCnt += 1;
+      if (+num !== this.answer[idx] && this.answer.includes(+num)) ballCnt += 1;
       else if (+num === this.answer[idx]) strikeCnt += 1;
     });
 
@@ -22,14 +22,8 @@ class App {
   }
 
   createResult() {
-    const includeOfNum = Array.from({ length: 10 }).fill(false);
+    const [ball, strike] = this.getCnt();
     let result = "";
-
-    this.answer.forEach((num) => {
-      includeOfNum[num] = true;
-    });
-
-    const [ball, strike] = this.getCnt(includeOfNum);
 
     if (ball === 0 && strike === 0) result = "낫싱";
     if (ball > 0) result += `${ball}볼`;
@@ -45,8 +39,8 @@ class App {
 
   checkPlayingNum(inputNum, allowed) {
     const duplicationCheck = [...new Set(inputNum)].length;
-    if (inputNum.length !== 3) throw new Error(ERROR.LENGTH);
-    if (duplicationCheck !== 3) throw new Error(ERROR.DUPLICATION);
+    if (inputNum.length !== allowLength) throw new Error(ERROR.LENGTH);
+    if (duplicationCheck !== allowLength) throw new Error(ERROR.DUPLICATION);
     inputNum.forEach((str) => {
       allowed = allowNum.test(str) && allowed;
     });
@@ -57,17 +51,17 @@ class App {
     if (checkStyle === FORMAT.PLAY) {
       return this.checkPlayingNum([...inputNum], true);
     } else if (checkStyle === FORMAT.RESTART) {
-      return inputNum === "1" || inputNum === "2";
+      return inputNum === SELECT.CONTINUE || inputNum === SELECT.EXIT;
     }
   }
 
   restartQuestion() {
     Console.readLine(`${MESSAGE.CONTINUE}\n`, (input) => {
       if (!this.checkException(input, FORMAT.RESTART)) {
-        throw new Error(ERROR.SELECT);
+        throw new Error(ERROR.CHOOSE);
       }
-      if (input === "1") this.startGame();
-      else if (input === "2") {
+      if (input === SELECT.CONTINUE) this.startGame();
+      else if (input === SELECT.EXIT) {
         Console.print(MESSAGE.END);
         Console.close();
       }
@@ -86,7 +80,7 @@ class App {
 
   createAnswer() {
     this.answer = [];
-    while (this.answer.length < 3) {
+    while (this.answer.length < allowLength) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
         this.answer.push(number);
