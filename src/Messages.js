@@ -46,35 +46,35 @@ class Messages {
   }
 
   get inputError() {
-    return ERROR_MESSAGES.DEFAULT;
+    return `${ERROR_MESSAGES.DEFAULT}\n`;
   }
 
   get emptyError() {
-    return `${this.inputError}\n${ERROR_MESSAGES.EMPTY}`;
+    return `${this.inputError}${ERROR_MESSAGES.EMPTY}`;
   }
 
   get whiteSpaceError() {
-    return `${this.inputError}\n${ERROR_MESSAGES.WHITE_SPACE}`;
+    return `${this.inputError}${ERROR_MESSAGES.WHITE_SPACE}`;
   }
 
   get rangeError() {
-    return `${this.inputError}\n각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`;
+    return `${this.inputError}각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`;
   }
 
   get typeError() {
-    return `${this.inputError}\n${ERROR_MESSAGES.TYPE}`;
+    return `${this.inputError}${ERROR_MESSAGES.TYPE}`;
   }
 
   get digitError() {
-    return `${this.inputError}\n${this.digit}자리 수가 입력되어야 합니다.`;
+    return `${this.inputError}${this.digit}자리 수가 입력되어야 합니다.`;
   }
 
   get duplicateError() {
-    return `${this.inputError}\n${ERROR_MESSAGES.DUPLICATE}`;
+    return `${this.inputError}${ERROR_MESSAGES.DUPLICATE}`;
   }
 
   get commandError() {
-    return `${this.inputError}\n${ERROR_MESSAGES.COMMAND}`;
+    return `${this.inputError}${ERROR_MESSAGES.COMMAND}`;
   }
 
   get resultNothing() {
@@ -82,9 +82,10 @@ class Messages {
   }
 
   get resultCorrect() {
-    return `${this.resultStrike(this.digit)}\n${
-      this.digit
-    }개의 숫자를 모두 맞히셨습니다!\n${this.endGame}`;
+    const strike = this.resultStrike(this.digit);
+    const correct = `${this.digit}개의 숫자를 모두 맞히셨습니다!`;
+
+    return `${strike}\n${correct}\n${this.endGame}`;
   }
 
   resultBall(count) {
