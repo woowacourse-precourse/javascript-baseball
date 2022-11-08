@@ -1,16 +1,16 @@
 ## 🔥 구현할 기능 목록
 
-1. 사용자 입력값 예외 처리
+1. 게임 초기 세팅
+  - MissionUtils라이브러리의 Random.pickNumberInRange를 활용하여 1-9로 이루어진 세자리 랜덤 수 생성
+  - MissionUtils라이브러리의 Console.readLine를 활용하여 사용자 입력값 저장
+  - 게임 결과 담을 score 객체 생성
+2. 사용자 입력값 예외 처리
   - 타입 확인
   - 양수 여부 확인
   - 3자리 수 여부 확인
   - 0 포함 여 확인
   - 각 자리 수 중복 여부 확인
   - 잘못된 입력값일 경우 애플리케이션 종료
-2. 게임 초기 세팅
-  - MissionUtils라이브러리의 Random.pickNumberInRange를 활용하여 1-9로 이루어진 세자리 랜덤 수 생성
-  - MissionUtils라이브러리의 Console.readLine를 활용하여 사용자 입력값 저장
-  - 게임 결과 담을 score 객체 생성
 3. 상대방의 수와 입력값의 각 자리수 비교
   - 숫자도 같고 같은 자리수일 경우 score.strike += 1
   - 숫자만 같고 다른 자리수일 경우 score.ball += 1
