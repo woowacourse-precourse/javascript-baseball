@@ -42,6 +42,9 @@ class BaseballGame {
         if (input === "1") {
           this.restartGame();
         }
+        if (input === "2") {
+          MissionUtils.Console.close();
+        }
       }
     );
   }
