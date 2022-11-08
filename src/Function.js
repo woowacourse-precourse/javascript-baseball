@@ -39,7 +39,7 @@ class Function {
 
   static endApp() {
     Console.close();
-    Console.print('게임 종료');
+    Console.print(MESSAGE.END);
   }
 }
 

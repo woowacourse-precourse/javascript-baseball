@@ -4,6 +4,7 @@ const MESSAGE = {
   THREESTRIKE: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
   INPUTERROR: '잘못 입력 하였습니다.',
   RESTARTOREND: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+  END: '게임 종료',
 };
 
 const COUNTBOARDRESULT = {

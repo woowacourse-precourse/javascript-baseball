@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('../src/Const');
 const Function = require('../src/Function');
 const {
   validByRegex,
@@ -54,6 +55,6 @@ describe('Function 테스트', () => {
   test('endApp 테스트', () => {
     const logSpy = getLogSpy();
     endApp();
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(MESSAGE.END));
   });
 });
