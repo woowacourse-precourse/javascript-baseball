@@ -6,7 +6,6 @@ class App {
     let isGamePlaying = true;
     while (isGamePlaying) {
       startGame();
-      isGamePlaying = false;
     }
   }
 }
@@ -17,11 +16,14 @@ async function startGame() {
     const result = getResult(userNumber, answer);
     if (result === "3스크라이크") {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      const restart = getRestartOrExit();
+      restartOrExit(restart);
     }
   } catch (error) {
     MissionUtils.Console.print(`잘못된 입력입니다. 게임을 종료합니다.`);
     restartOrExit(2);
   }
+  return false;
 }
 function getInput() {
   return new Promise((resolve, reject) => {
