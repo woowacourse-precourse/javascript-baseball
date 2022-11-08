@@ -54,13 +54,7 @@ class App {
     return number >= this.minNumber && number <= this.maxNumber;
   }
 
-  endProgramWithError(message, err = Error) {
-    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
-  }
-
-  isValidQuestionInput(input) {
-    const numbers = input.split("").map(Number);
-
+  isValidInput(input) {
     if (isEmptyInput(input)) {
       this.endProgramWithError(this.MESSAGES.emptyError);
     }
@@ -68,6 +62,12 @@ class App {
     if (hasWhiteSpace(input)) {
       this.endProgramWithError(this.MESSAGES.whiteSpaceError);
     }
+
+    return true;
+  }
+
+  isValidQuestionInput(input) {
+    const numbers = input.split("").map(Number);
 
     if (!numbers.every(isNumber)) {
       this.endProgramWithError(this.MESSAGES.typeError, TypeError);
@@ -88,23 +88,7 @@ class App {
     return true;
   }
 
-  setCurrentQuestion(input) {
-    if (!this.isValidQuestionInput(input)) {
-      return;
-    }
-
-    this.question = input.split("").map(Number);
-  }
-
   isValidCommandInput(input, commands) {
-    if (isEmptyInput(input)) {
-      this.endProgramWithError(this.MESSAGES.emptyError);
-    }
-
-    if (hasWhiteSpace(input)) {
-      this.endProgramWithError(this.MESSAGES.whiteSpaceError);
-    }
-
     if (!commands[input]) {
       this.endProgramWithError(this.MESSAGES.commandError);
     }
@@ -112,11 +96,31 @@ class App {
     return true;
   }
 
+  setCurrentQuestion(input) {
+    if (!this.isValidInput(input)) {
+      return;
+    }
+
+    if (!this.isValidQuestionInput(input)) {
+      return;
+    }
+
+    this.question = input.split("").map(Number);
+  }
+
+  endProgramWithError(message, err = Error) {
+    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
+  }
+
   restart(input) {
     const COMMANDS = {
       1: this.startNewGame.bind(this),
       2: this.endProgram.bind(this),
     };
+
+    if (!this.isValidInput(input)) {
+      return;
+    }
 
     if (!this.isValidCommandInput(input, COMMANDS)) {
       return;
@@ -127,18 +131,6 @@ class App {
 
   confirmRestart() {
     Console.readLine(this.MESSAGES.restart, this.restart.bind(this));
-  }
-
-  continueGame(input) {
-    this.setCurrentQuestion(input);
-    this.printGameResult(this.getGameResult());
-
-    if (this.isGameEnd) {
-      this.confirmRestart();
-      return;
-    }
-
-    this.runGame();
   }
 
   compareNumbers() {
@@ -201,6 +193,18 @@ class App {
     });
 
     this.isGameEnd = false;
+  }
+
+  continueGame(input) {
+    this.setCurrentQuestion(input);
+    this.printGameResult(this.getGameResult());
+
+    if (this.isGameEnd) {
+      this.confirmRestart();
+      return;
+    }
+
+    this.runGame();
   }
 
   runGame() {
