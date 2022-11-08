@@ -1,20 +1,13 @@
+const Vaildation = require("./Vaildation");
 const MissionUtils = require("@woowacourse/mission-utils");
 const { Random, Console } = MissionUtils;
 
-class App {
+class App extends Vaildation {
   #NUMERIC_CONSTANTS = {
     maxLength: 3,
     min: 1,
     max: 9,
     initResult: 0,
-  };
-  #ERROR_CASES = {
-    reset: "failReset",
-    compare: "failCompare",
-  };
-  #ERROR_MESSAGES = {
-    failReset: "게임을 재시작하려면 1, 종료하려면 2를 입력해야 합니다.",
-    failCompare: "서로 다른 1 ~ 9 사이의 숫자를 연속으로 3개 입력해야 합니다.",
   };
 
   #randomNum = [];
@@ -93,34 +86,6 @@ class App {
         userInput === "1" ? this.play() : Console.close();
       }
     );
-  }
-
-  findInputError(userInput) {
-    const { maxLength } = this.#NUMERIC_CONSTANTS;
-
-    if (
-      typeof +userInput !== "number" ||
-      userInput.length !== maxLength ||
-      userInput.length !== new Set(userInput).size ||
-      userInput.includes("0")
-    ) {
-      const { reset } = this.#ERROR_CASES;
-
-      this.throwError(reset);
-    }
-  }
-
-  findResetError(userInput) {
-    if (userInput !== "1" && userInput !== "2") {
-      const { compare } = this.#ERROR_CASES;
-
-      this.throwError(compare);
-    }
-  }
-
-  throwError(errorCase) {
-    Console.close();
-    throw new TypeError(this.#ERROR_MESSAGES[errorCase]);
   }
 }
 
