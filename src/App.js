@@ -24,12 +24,12 @@ class App {
     });
   }
 
-  checkResult(stat) {
-    if (stat.strike === SETTING.STRIKE_OUT_COUNT) {
-      MissionUtils.Console.print(`${stat.strike}스트라이크\n${MESSAGE.GAME_OVER}`);
+  checkResult({ ball, strike }) {
+    if (strike === SETTING.STRIKE_OUT_COUNT) {
+      MissionUtils.Console.print(`${strike}스트라이크\n${MESSAGE.GAME_OVER}`);
       this.askRestart();
     } else {
-      MissionUtils.Console.print(this.getHint(stat));
+      MissionUtils.Console.print(this.getHint(ball, strike));
       this.getUserInput();
     }
   }
@@ -102,12 +102,12 @@ class App {
     return stat;
   }
 
-  getHint(stat) {
+  getHint(ball, strike) {
     let hintMessage = "";
-    if (stat.ball === 0 && stat.strike === 0) hintMessage += "낫싱";
-    else if (stat.ball > 0 && stat.strike > 0) hintMessage += `${stat.ball}볼 ${stat.strike}스트라이크`;
-    else if (stat.strike === 0) hintMessage += `${stat.ball}볼`;
-    else hintMessage += `${stat.strike}스트라이크`;
+    if (ball === 0 && strike === 0) hintMessage += "낫싱";
+    else if (ball > 0 && strike > 0) hintMessage += `${ball}볼 ${strike}스트라이크`;
+    else if (strike === 0) hintMessage += `${ball}볼`;
+    else hintMessage += `${strike}스트라이크`;
 
     return hintMessage;
   }
