@@ -113,5 +113,20 @@ class App {
       return true;
     }
   }
+
+  restartGame() {
+    const RESTART_MESSAGE = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.';
+    let userChoice = null;
+    Console.readLine(RESTART_MESSAGE, choice => {
+      this.handleRestartInputException(choice);
+      userChoice = choice;
+      Console.close();
+    });
+    if (userChoice === '1') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 module.exports = App;
