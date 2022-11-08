@@ -13,6 +13,6 @@ const PrintScore = (strike, ball, none) => {
   else {
     MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
   }
-}
+};
 
 module.exports = PrintScore;

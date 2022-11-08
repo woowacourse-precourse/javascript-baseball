@@ -9,7 +9,7 @@ const UserInput = (RandomNumber) => {
     CheckInput(input);
     GameSystem(input, RandomNumber);
   });
-}
+};
 
 const GameSystem = (input, ComputerNumber) => {
   let [strike, ball, none] = ScoreCount(input, ComputerNumber);
@@ -22,6 +22,6 @@ const GameSystem = (input, ComputerNumber) => {
   else{
     UserInput(ComputerNumber);
   }
-}
+};
 
 module.exports = UserInput;

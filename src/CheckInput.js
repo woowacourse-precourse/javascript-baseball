@@ -10,7 +10,7 @@ const CheckInput = (input) => {
   else if(CheckDuplicate(inputarray)){
     throw "중복된 숫자가있습니다!!"
   }
-}
+};
 
 const CheckSize = (input) => {
   return (input.length !== 3) ? true : false

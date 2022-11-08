@@ -12,6 +12,6 @@ const ScoreCount = (input, Randomnumber) => {
     else none += 1;
   };
   return [strike, ball, none];
-}
+};
   
 module.exports = ScoreCount;
