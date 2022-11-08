@@ -1,74 +1,78 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Console = MissionUtils.Console;
 
-const getUserInput = Console.readLine('숫자를 입력하세요 >>> \n', x => {
-  const userInput = InputControl(isValidNumber, x);
-  Console.print(userInput);
-});
-
-const InputControl = (f, num) => {
-  return f(num);
-};
-
-const parser = num => {
-  const value = [];
-  do {
-    (digit = num % 10), value.push(digit);
-    num = parseInt(num / 10);
-  } while (num > 0);
-  value.sort();
-  return value;
-};
-
-const isValidNumber = value => {
-  const regValidNumExp = /^[1-9]{3}$/;
-  if (regValidNumExp.test(value) === false) {
-    throw '유효한 숫자가 아닙니다!';
-  }
-  return parser(value);
-};
-
-const generateRandomNumber = () => {
-  const COMPUTER = [];
-  while (COMPUTER.length < 3) {
-    const number = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!COMPUTER.includes(number)) {
-      COMPUTER.push(number);
+class BaseballGameFunc {
+  static inputControl = num => {
+    const regValidNumExp = /^[1-9]{3}$/;
+    if (!regValidNumExp.test(num)) {
+      throw '유효한 값이 아닙니다!';
     }
-  }
-  return COMPUTER;
-};
-
-const makeMap = list => {
-  const newMap = new Map(list.map((item, idx) => [idx, item]));
-  return newMap;
-};
-
-const isBallOrStrike = (idx, value, whereToFind) => {
-  const IS_INCLUDED_AND_SAME_IDX = whereToFind.get(idx) === value;
-  const IS_INCLUDED_VALUE = [...whereToFind.values()].includes(value);
-
-  if (IS_INCLUDED_VALUE && IS_INCLUDED_AND_SAME_IDX) return '스트라이크';
-  else if (IS_INCLUDED_VALUE && !IS_INCLUDED_AND_SAME_IDX) return '볼';
-  else return '낫싱';
-};
-
-const countScore = (userInput, whereToFind) => {
-  const ballAndStrike = {
-    스트라이크: 0,
-    볼: 0,
-    낫싱: 0,
   };
 
-  console.log(userInput);
+  static parser = num => {
+    const value = [];
+    do {
+      let digit = num % 10;
+      value.push(digit);
+      num = parseInt(num / 10);
+    } while (num > 0);
+    value.reverse();
+    return value;
+  };
 
-  userInput.forEach((value, idx) => {
-    let response = isBallOrStrike(idx, value, whereToFind);
-    ballAndStrike[response]++;
-  });
-  return ballAndStrike;
-};
+  static generateRandomNumber = () => {
+    const computer = [];
+    while (computer.length < 3) {
+      const number = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    return computer;
+  };
 
-let user = getUserInput;
-let computer = makeMap(generateRandomNumber());
-let gameResult = countScore(user, computer);
+  static makeMap = list => {
+    const newMap = new Map(list.map((item, idx) => [idx, item]));
+    return newMap;
+  };
+
+  static isBallOrStrike = (idx, value, whereToFind) => {
+    const isIncludedAndSameIdx = whereToFind.get(idx) === value;
+    const isIncludedValue = [...whereToFind.values()].includes(value);
+
+    if (isIncludedValue && isIncludedAndSameIdx) return 'strike';
+    else if (isIncludedValue && !isIncludedAndSameIdx) return 'ball';
+    else return 'nothing';
+  };
+
+  static countScore = (userInput, whereToFind) => {
+    const ballAndStrike = {
+      strike: 0,
+      ball: 0,
+      nothing: 0,
+    };
+
+    userInput.forEach((value, idx) => {
+      let response = this.isBallOrStrike(idx, value, whereToFind);
+      ballAndStrike[response]++;
+    });
+    return ballAndStrike;
+  };
+
+  static scoreMessagePinter = score => {
+    const [ball, strike] = [score.ball, score.strike];
+    let scoreMessage;
+    if (strike > 0 && ball > 0) {
+      scoreMessage = `${ball}볼 ${strike}스트라이크`;
+    } else if (strike > 0) {
+      scoreMessage = `${strike}스트라이크`;
+    } else if (ball > 0) {
+      scoreMessage = `${ball}볼`;
+    } else {
+      scoreMessage = '낫싱';
+    }
+    Console.print(scoreMessage);
+  };
+}
+
+module.exports = BaseballGameFunc;
