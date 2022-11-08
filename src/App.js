@@ -8,16 +8,18 @@ class App {
   }
 
   answerException(answer) {
-    if (answer !== '1' && answer !== '2') throw '입력 값이 1혹은 2가 아닙니다. 게임을 종료합니다.';
+    if (answer !== '1' && answer !== '2') {
+      throw '입력 값이 1혹은 2가 아닙니다. 게임을 종료합니다.';
+      this.endGame();
+    }
     if (answer === '2') this.endGame();
     if (answer === '1') this.play('restart');
   }
 
   askingRestart() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => { 
-      try { this.answerException(answer) } 
-      catch (e) { this.endGame(e) }; 
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
+      this.answerException(answer);
     });
   }
 
@@ -61,31 +63,40 @@ class App {
     const temp_set = new Set(answer_list);
     answer_list = [...temp_set];
 
-    if (String(Number(answer)) === 'NaN') throw '입력 값이 숫자가 아닙니다. 게임을 종료합니다.';
-    else if (answer.length !== 3) throw '입력 값이 세 자리가 아닙니다. 게임을 종료합니다.';
-    else if (answer_list.length !== 3) throw '입력 값에 중복된 수가 있습니다. 게임을 종료합니다.';
+    if (String(Number(answer)) === 'NaN') {
+      throw '입력 값이 숫자가 아닙니다. 게임을 종료합니다.';
+      this.endGame();
+    }
+    else if (answer.length !== 3) {
+      throw '입력 값이 세 자리가 아닙니다. 게임을 종료합니다.';
+      this.endGame();
+    }
+    else if (answer_list.length !== 3) {
+      throw '입력 값에 중복된 수가 있습니다. 게임을 종료합니다.';
+      this.endGame();
+    }
   }
 
   inputNumber(answer, CORRECT_LIST) {
     let end_state = false;
+    
+    this.valueExceptionHandling(answer)
 
-    try { this.valueExceptionHandling(answer) } 
-    catch (e) { this.endGame(e); end_state = true };
-    if(end_state) return false;
+    if (end_state) return false;
 
     let result_score = this.checkScore(answer, CORRECT_LIST);
     let result_text = this.checkCount(result_score);
-  
+
     Console.print(this.printResult(result_text));
 
-    if(result_score.strike !== 3) return true;
+    if (result_score.strike !== 3) return true;
 
     this.askingRestart();
   }
 
   startGame(CORRECT_LIST) {
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => { 
-      if(this.inputNumber(answer, CORRECT_LIST)) this.startGame(CORRECT_LIST) 
+    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+      if (this.inputNumber(answer, CORRECT_LIST)) this.startGame(CORRECT_LIST)
     });
   }
 
@@ -105,7 +116,7 @@ class App {
   }
 
   play(state) {
-    if(!state) this.openingOutput();
+    if (!state) this.openingOutput();
     const CORRECT_LIST = this.createRandomValue();
     this.startGame(CORRECT_LIST);
   }
