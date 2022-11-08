@@ -6,6 +6,20 @@ const StrikeBall = require('./StrikeBall');
 class App {
   constructor() {
     this.MAXRANGE = 3;
+    this.close = () => {
+      MissionUtils.Console.print(message.END);
+      MissionUtils.Console.close();
+    };
+
+    this.StrikeBallCycle = (
+      StrikeBallObj,
+      UserInputValue,
+      RandomNumberValue
+    ) => {
+      StrikeBallObj.InitStrikeBall();
+      StrikeBallObj.GetStrikeBall(UserInputValue, RandomNumberValue);
+      StrikeBallObj.PrintStrikeBall();
+    };
   }
 
   CreateRandom() {
@@ -22,16 +36,14 @@ class App {
   play() {
     this.Number = this.CreateRandom().join('');
     let strikeball = new StrikeBall();
-    let userinput = new UserInput();
+    const userinput = new UserInput();
     userinput.GetInput();
     while (true) {
       if (userinput.CheckInputIsValid(userinput.UserInputNumber) === false) {
         break;
       }
       strikeball = new StrikeBall();
-      strikeball.InitStrikeBall();
-      strikeball.GetStrikeBall(userinput.UserInputNumber, this.Number);
-      strikeball.PrintStrikeBall();
+      this.StrikeBallCycle(strikeball, userinput.UserInputNumber, this.Number);
       if (strikeball.Strike === message.THREESTRIKE) {
         MissionUtils.Console.print(message.SUCCESS);
         break;
@@ -42,8 +54,7 @@ class App {
       if (strikeball.IfStrike()) {
         this.play();
       } else {
-        MissionUtils.Console.print(message.END);
-        MissionUtils.Console.close();
+        this.close();
       }
     } else if (userinput.UserInputNumber !== message.INITINPUT) {
       throw message.INPUTERROR;
