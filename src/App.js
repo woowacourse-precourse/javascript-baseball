@@ -1,5 +1,5 @@
-const { Console, Random } = require('@woowacourse/mission-utils');
-const { makeRandomNumber } = require('./util');
+const { Console } = require('@woowacourse/mission-utils');
+const { makeRandomNumber, chkDuplicatedNumber } = require('./util');
 
 class App {
   #gameAnswer = null;
@@ -39,18 +39,6 @@ class App {
     return result;
   }
 
-  chkValidNumber(answer) {
-    const answerArr = [...answer];
-
-    if (answerArr.length !== 3) return false;
-    if (answerArr.length !== [...new Set(answerArr)].length) return false;
-    for (let i = 0; i < answerArr.length; i += 1) {
-      if (!answerArr[i].match(/^[1-9]+$/)) return false;
-    }
-
-    return true;
-  }
-
   decideRestart() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine(
@@ -69,7 +57,7 @@ class App {
 
   inputByConsole() {
     Console.readLine('숫자를 입력해주세요 : ', input => {
-      if (!this.chkValidNumber(input))
+      if (chkDuplicatedNumber(input, 3))
         throw new Error(
           '입력형식이 잘못되었습니다. 서로 다른 숫자 3개를 입력해주세요.🙏'
         );
