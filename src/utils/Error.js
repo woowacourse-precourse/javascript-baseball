@@ -24,6 +24,12 @@ class InputError {
     }
   }
 
+  isZeroExist(input) {
+    if (input && input.includes("0")) {
+      throw ERROR_MESSAGE.ZERO_ERROR;
+    }
+  }
+
   validateNumRepeat(input) {
     const existNum = new Set();
     for (let i = 0; i < input.length; i++) {
