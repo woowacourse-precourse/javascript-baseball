@@ -8,13 +8,8 @@ class ComputerModel {
   }
 
   setNumberIntoSpace(computerSpace) {
-    const numberFromComputer = () => this.getRandomNumberInRange(1, 9);
-    const InsertNumberToSpace = (number, space) => {
-      space.add(number);
-    };
-
     while (this.isSpaceNotFull(computerSpace)) {
-      InsertNumberToSpace(numberFromComputer(), computerSpace);
+      computerSpace.add(this.getRandomNumberInRange(1, 9));
     }
     return computerSpace; // 테스트코드용 리턴
   }
