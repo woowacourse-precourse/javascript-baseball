@@ -11,7 +11,7 @@ function App () {
   this.randomNumber;
   this.play = () => {
     printNewGameInterface();
-    startGame();
+    setNewAnswer();
     recieveUserAnswer();
   };
   
@@ -19,7 +19,7 @@ function App () {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  function startGame () {
+  function setNewAnswer () {
     this.randomNumber = getRandomNumber(MIN_RANDOM_NUIMBER,MAX_RANDOM_NUMBER);
   }
 
@@ -69,7 +69,7 @@ function App () {
         `게임을 새로 시작하려면 ${GAME_START_KEY}, 종료하려면 ${GAME_EXIT_KEY}를 입력하세요.\n`, 
         (input) => {
           if(input === GAME_START_KEY){
-            startGame();
+            setNewAnswer();
             recieveUserAnswer();
             return;
           }
