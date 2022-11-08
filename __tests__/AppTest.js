@@ -19,4 +19,8 @@ describe('App Test', () => {
   test('test pickThreeDigits', () => {
     expect((new Set(App.pickThreeDigits())).size).toBe(3);
   });
+
+  test('test getGuessArray', () => {
+    expect(App.getGuessArray('123')).toEqual([1, 2, 3]);
+  });
 });

@@ -23,6 +23,10 @@ class App {
     return digits;
   }
 
+  static getGuessArray(input) {
+    return Array.from(input, Number);
+  }
+
   play() { }
 }
 
