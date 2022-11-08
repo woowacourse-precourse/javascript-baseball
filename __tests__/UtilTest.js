@@ -19,3 +19,18 @@ describe("is3Letters 함수 테스트", () => {
         expect(result).toEqual(false);
     });
 });
+
+describe("isOnlyNumber 함수 테스트", () => {
+    test("테스트 1", () => {
+        const result = isOnlyNumber('123');
+
+        expect(result).toEqual(true);
+    });
+
+    test("테스트 2", () => {
+        const result = isOnlyNumber('a12');
+
+        expect(result).toEqual(false);
+    });
+});
+
