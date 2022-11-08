@@ -1,4 +1,4 @@
-const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
+const NumberBaseballGameManager = require('../src/NumberBaseballGameManager.js');
 
 const gameManager = new NumberBaseballGameManager();
 

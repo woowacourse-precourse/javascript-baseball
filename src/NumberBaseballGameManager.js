@@ -4,7 +4,7 @@ const {
   RANDOM_NUMBER_COUNT,
   MIN_RANDOM_NUMBER_LIMIT,
   MAX_RANDOM_NUMBER_LIMIT,
-} = require('./lib/constants/game');
+} = require('./lib/constants/game.js');
 
 class NumberBaseballGameManager {
   computerNumbers;

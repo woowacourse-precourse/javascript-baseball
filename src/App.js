@@ -4,14 +4,14 @@ const {
   GAME_MENU_RESTART,
   GAME_MENU_EXIT,
   RANDOM_NUMBER_COUNT,
-} = require('./lib/constants/game');
+} = require('./lib/constants/game.js');
 const {
   DUPLICATE_NUMBER_REGEX,
   GAME_MENU_CODE_REGEX,
   THREE_DIGIT_NUMBER_REGEX,
-} = require('./lib/constants/validation');
+} = require('./lib/constants/validation.js');
 
-const NumberBaseballGameManager = require('../src/NumberBaseballGameManager');
+const NumberBaseballGameManager = require('../src/NumberBaseballGameManager.js');
 
 class App {
   gameManager;

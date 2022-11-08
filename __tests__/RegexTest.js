@@ -2,7 +2,7 @@ const {
   DUPLICATE_NUMBER_REGEX,
   GAME_MENU_CODE_REGEX,
   THREE_DIGIT_NUMBER_REGEX,
-} = require('../src/lib/constants/validation');
+} = require('../src/lib/constants/validation.js');
 
 describe('정규식 테스트', () => {
   describe('1에서 9까지의 수로 이루어진 세 자리 수에 대한 정규식 테스트', () => {
