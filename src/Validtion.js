@@ -17,6 +17,12 @@ class Validtion {
             throw ERROR_MESSAGE.OVERLAP_ERROR;
         }
     }
+    isValidationUserReselectButtonInput(buttonNumber){
+        this.buttonNumber = buttonNumber;
+        if(this.isNotButton()){
+            throw ERROR_MESSAGE.NOT_BUTTON_ERROR;
+        }
+    }
     isNotANumber(){
         return this.userNumberArray.includes(NaN)
     }
@@ -26,6 +32,9 @@ class Validtion {
     isOverLap(){
         const userNumberSet = new Set(this.userNumberArray);
         return userNumberSet.size < 3;
+    }
+    isNotButton(){
+        return !(this.buttonNumber === "1" || this.buttonNumber == "2")
     }
 }
 
