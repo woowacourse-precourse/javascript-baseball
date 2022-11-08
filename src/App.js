@@ -1,6 +1,32 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  playBaseball(COMPUTER, answer) {
+    let strike = 0;
+    let ball = 0;
+    for (
+      let computerNumberIndex = 0;
+      computerNumberIndex < 3;
+      computerNumberIndex++
+    ) {
+      for (
+        let answerNumberIndex = 0;
+        answerNumberIndex < 3;
+        answerNumberIndex++
+      ) {
+        [strike, ball] = this.checkStrikeOrBall(
+          COMPUTER,
+          computerNumberIndex,
+          answer,
+          answerNumberIndex,
+          strike,
+          ball
+        );
+      }
+    }
+    return this.printBallPointResult(strike, ball);
+  }
+
   getComputerNumber() {
     const COMPUTER = [];
     while (COMPUTER.length < 3) {
