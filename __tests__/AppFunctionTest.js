@@ -4,7 +4,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 describe("(추가)숫자 야구 게임", () => {
   test("잘못된 컴퓨터의 랜덤 숫자", () => {
     const app = new App();
-    const result = app.selectNum();
+    const result = app.setComputerNum();
 
     expect(result).toBeGreaterThanOrEqual(123);
     expect(result).toBeLessThanOrEqual(987);
@@ -34,14 +34,6 @@ describe("(추가)숫자 야구 게임", () => {
     const app = new App();
     const input = [145, 789, 632, 789, 715, 234];
     const computer = [456, 123, 973, 789, 619, 243];
-    const result = [
-      "2볼",
-      "낫싱",
-      "1볼",
-      "3스트라이크",
-      "1스트라이크",
-      "2볼 1스트라이크",
-    ];
 
     input.forEach((output, idx) => {
       expect(
