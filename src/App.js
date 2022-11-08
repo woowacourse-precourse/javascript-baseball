@@ -57,16 +57,13 @@ class App {
 
   compareResult(message) {
     this.print(message);
-    if (this.correctAnswer) {
-      this.finish();
-    } else {
-      this.gameProgress();
-    }
+    this.correctAnswer ? this.finish() : this.gameProgress();
   }
 
   compare(input, computer) {
     const strike = this.compareStrike(input, computer);
     const ball = this.compareBall(input, computer);
+
     if (strike === NUMBER.THREE_STRIKE) {
       this.correctAnswer = true;
       return `${strike}${TEXT.STRIKE}`;
