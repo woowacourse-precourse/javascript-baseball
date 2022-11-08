@@ -96,12 +96,19 @@ class App {
     
     //세 가지 숫자 만들기
     var Numbers = [];
-    for (var i =0;i<3;i++){
+    while(Numbers.length !=3){
       var number = MissionUtils.Random.pickNumberInRange(1,9);
-      Numbers.push(number);
-    }
-
-   
+      var check = false;
+      for(var i =0;i<Numbers.length;i++){
+        if (number == Numbers[i]){
+          check = true;
+        }
+      }
+      if (check != true){
+        Numbers.push(number);
+      }
+  }
+    
     var pass = false;
     while (pass == false){
       var answer;
@@ -111,7 +118,7 @@ class App {
     
       //숫자만 적었는지 확인하기
       if (isNaN(parseInt(answer))) throw 'not a number';
-      if (parseInt(answer) <=0) throw 'not a natural number';
+      if (parseInt(answer) <=0) throw 'minus number';
       if (this.checkallArefitNumber(answer)) throw 'suspicious number'
       if (answer.length != 3) throw 'length error';
       //중복되는 수 없는지 확인
