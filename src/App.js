@@ -1,4 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const userNumbersTester = require("./components/UserNumbersTester");
+const ballAndStrikeCountTask = require("./components/BallAndStrikeCountTask");
+const ballAndStrikeMessage = require("./components/BallAndStrikeMessage");
+const printMessage = require("./components/PrintMessage");
+const { MESSAGE, ERROR_MESSAGE, RESTART_OR_STOP } = require("./components/Constants");
 class App {
     play() {
         MissionUtils.Console.print(MESSAGE.START_GAME);
@@ -15,6 +20,9 @@ class App {
         }
 
         return this.playTheGame(GET_NUMBERS.join(""));
+    }
+    playTheGame(computerNumbers) {
+        MissionUtils.Console.readLine(MESSAGE.REQUIRE_NUMBER, (userNumbers) => {});
     }
 }
 module.exports = App;
