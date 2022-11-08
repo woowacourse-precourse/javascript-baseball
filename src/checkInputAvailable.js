@@ -1,7 +1,7 @@
 function checkInputAvailable(input) {
   let isAvailable = true;
   let checkedLetter = [];
-  const REG_EXP = /[0-9]/g;
+  const REG_EXP = /[1-9]/g;
 
   input.forEach((letter) => {
     if (

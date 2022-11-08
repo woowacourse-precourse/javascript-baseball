@@ -31,7 +31,7 @@ const getLogSpy = () => {
 describe("1. 서로 다른 세자리의 숫자의 배열을 생성하는 기능", () => {
   test("case1. 서로 다른 세자리 숫자인 경우", () => {
     const result = createRandomNumbers();
-    const REG_EXP = /[0-9]/g;
+    const REG_EXP = /[1-9]/g;
 
     const uniqueResult = new Set(result);
 
