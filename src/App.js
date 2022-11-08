@@ -1,36 +1,27 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-
-const changeToArray = (number) => {
-    return number
-        .toString()
-        .split("")
-        .map((num) => parseInt(num), 10);
-};
-const printMassage = (message) => {
-    return MissionUtils.Console.print(message);
-};
-
+const { Console, Random } = require("@woowacourse/mission-utils");
+const CHANGE_TO_ARRAY = require("../utils/changeToArray");
 class App {
     constructor() {
         this.isFirst = true;
-    }
-    printStartMassage() {
-        this.isFirst && MissionUtils.Console.print(`숫자 야구 게임을 시작합니다.`);
-    }
-
-    createAnswer() {
-        const ANSWER_ARRAY = [];
-        while (ANSWER_ARRAY.length < 3) {
-            const NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
-            if (!ANSWER_ARRAY.includes(NUMBER)) ANSWER_ARRAY.push(NUMBER);
-        }
-        return ANSWER_ARRAY;
     }
 
     play() {
         this.printStartMassage();
         const answer = this.createAnswer();
         this.userPlayGame(answer);
+    }
+
+    printStartMassage() {
+        this.isFirst && Console.print(`숫자 야구 게임을 시작합니다.`);
+    }
+
+    createAnswer() {
+        const ANSWER_ARRAY = [];
+        while (ANSWER_ARRAY.length < 3) {
+            const NUMBER = Random.pickNumberInRange(1, 9);
+            if (!ANSWER_ARRAY.includes(NUMBER)) ANSWER_ARRAY.push(NUMBER);
+        }
+        return ANSWER_ARRAY;
     }
 
     isCorrect(userInput, answer) {
@@ -47,7 +38,6 @@ class App {
         });
         return ball;
     }
-
     getStrikeCount(userInput, answer) {
         let strike = 0;
         userInput.forEach((num, index) => {
@@ -63,33 +53,32 @@ class App {
         const BALL = this.getBallCount(userInput, answer);
         const STRIKE = this.getStrikeCount(userInput, answer);
         if (BALL === 0 && STRIKE === 0) {
-            return printMassage("낫싱");
+            return Console.print("낫싱");
         }
         if (BALL === 0) {
-            return printMassage(`${STRIKE}스트라이크`);
+            return Console.print(`${STRIKE}스트라이크`);
         }
         if (STRIKE === 0) {
-            return printMassage(`${BALL}볼`);
+            return Console.print(`${BALL}볼`);
         }
 
-        return printMassage(`${BALL}볼 ${STRIKE}스트라이크`);
+        return Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
     }
 
     printEndMessage() {
-        printMassage(`3스트라이크`);
-        printMassage("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        Console.print(`3스트라이크`);
+        Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         return this.choosesNextStep();
     }
 
     choosesNextStep() {
-        printMassage("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-        MissionUtils.Console.readLine("", (number) => {
+        Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (number) => {
             if (number === "1") {
                 this.isFirst = false;
                 return this.play();
             }
             if (number === "2") {
-                return MissionUtils.Console.close();
+                return Console.close();
             }
 
             throw new Error("1이나 2를 입력해주세요.");
@@ -112,8 +101,8 @@ class App {
     }
 
     userPlayGame(answer) {
-        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-            const INPUT_ARRAY = changeToArray(input);
+        Console.readLine("숫자를 입력해주세요 : ", (input) => {
+            const INPUT_ARRAY = CHANGE_TO_ARRAY(input);
             this.checkUserInput(INPUT_ARRAY);
             if (this.isCorrect(INPUT_ARRAY, answer)) {
                 return this.printEndMessage();
