@@ -12,23 +12,31 @@ class App {
   }
 
   randomThreeNumbers() {
-
     let three_numbers = [];
     let array_size = 3;
     for(let i=0; i<array_size; i++) {
       const number = MissionUtils.Random.pickNumberInRange(1,9);
       three_numbers.push(number);
     }
-
-    //확인용 (지우기)
-    MissionUtils.Console.print(three_numbers);
-
-
-    // return three_numbers;
   }
 
   inputThreeNumbers() {
-    
+
+    let input = [];
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (line) => {
+      input = line.split("").map(el => parseInt(el));
+      checkInput(input);
+    })
+  }
+
+  checkInput(input) {
+    if(input.length !== 3) {
+      throw new Error("세 자리 수를 입력하세요.");
+    }
+  }
+
+  printResult() {
+
   }
 
   play() {
@@ -36,8 +44,8 @@ class App {
     MissionUtils.Console.print(this.printStartMessage());
     this.randomThreeNumbers();
 
-
-
+    this.inputThreeNumbers();
+    // this.calcResult(numbers);
 
 
   }
