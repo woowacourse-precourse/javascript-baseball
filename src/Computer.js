@@ -4,7 +4,7 @@ const { setGameInputError, newGameInputError } = require('./Error');
 
 class Computer {
   constructor() {
-    this.number = this.initNumber();
+    this.answerNumber = this.initNumber();
     this.resultMap;
   }
 
@@ -15,13 +15,13 @@ class Computer {
     };
 
     [...inputNumber].forEach((digit) => {
-      if ([...this.number].includes(digit)) {
+      if ([...this.answerNumber].includes(digit)) {
         resultMap.ball += 1;
       }
     });
 
     for (let i = 0; i < 3; i++) {
-      if (this.number[i] === inputNumber[i]) {
+      if (this.answerNumber[i] === inputNumber[i]) {
         resultMap.ball -= 1;
         resultMap.strike += 1;
       }
