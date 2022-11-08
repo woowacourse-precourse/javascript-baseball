@@ -8,17 +8,34 @@ class AutomaticBallGenerator {
   maxNumberCount = 3;
 
   execute() {
-    const { startNumber, endNumber, maxNumberCount } = this;
-    const NUMBER = this.arrayToNumber(
-      Random.pickUniqueNumbersInRange(startNumber, endNumber, maxNumberCount)
-    );
+    const { hasDuplicate, arrayToNumber } = this;
+    const init = this.init.bind(this);
+    let numberArray = init();
 
-    return Promise.resolve(new Ball(NUMBER));
+    while (hasDuplicate(numberArray)) {
+      numberArray = init();
+    }
+
+    return Promise.resolve(new Ball(arrayToNumber(numberArray)));
   }
 
   arrayToNumber(numberArray) {
     return Number(
       numberArray.map(String).reduce((string, digit) => string + digit)
+    );
+  }
+
+  init() {
+    const { startNumber, endNumber, maxNumberCount } = this;
+
+    return Array.from({ length: maxNumberCount }, () =>
+      Random.pickNumberInRange(startNumber, endNumber)
+    );
+  }
+
+  hasDuplicate(numberArray) {
+    return numberArray.some(
+      (number, index, array) => index !== array.indexOf(number)
     );
   }
 }
