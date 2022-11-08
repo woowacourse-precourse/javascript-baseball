@@ -60,12 +60,24 @@ const getJudge = (targetNumbers, inputNumber, inputNumberIndex, score) => {
   }
   return score;
 };
+
 const noticeScore = () => {
+  const ball = score.ball;
+  const strike = score.strike;
   if (score.strike === 3) {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    gameFlag = !gameFlag;
+    Console.print("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    considerRestart();
+  } else if (score.ball === 0 && score.strike === 0) {
+    Console.print(`낫싱`);
+    processGame();
+  } else if (score.ball !== 0 && score.strike === 0) {
+    Console.print(`${ball}볼`);
+    processGame();
+  } else if (score.ball === 0 && score.strike !== 0) {
+    Console.print(`${strike}스트라이크`);
+    processGame();
   } else {
-    Console.print(`${score.ball}볼 ${score.strike}스트라이크`);
+    Console.print(`${ball}볼 ${strike}스트라이크`);
     processGame();
   }
 };
