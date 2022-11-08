@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.answer = this.getComputerNum();
+    this.randomNum = this.getComputerNum();
   }
 
   play() {
@@ -28,6 +28,23 @@ class App {
     } else if (getUserNum.length !== 3) {
       throw new Error("세자리 숫자를 입력해주세요.");
     }
+  }
+
+  compareNumbers(randomNum, getUserNum) {
+    const compareResult = [0,0,0];
+ 
+    for (let i = 0; i < 3; i++) {
+      if (randomNum[i] === getUserNum[i]) {
+        compareResult[0]++;
+      }
+      if (getUserNum.indexOf(userNumber[i]) >= 0) {
+        compareResult[1]++;
+      }
+    }
+    if (compareResult[0] === 0 && compareResult[1] === 0) {
+      compareResult[2]++;
+    }
+    return compareResult;
   }
 }
 
