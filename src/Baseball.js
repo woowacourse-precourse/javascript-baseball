@@ -1,5 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Computer = require("./Computer");
+const User = require("./User");
+const { exception, pickedWrongChoice } = require("./Exception");
 
 class Baseball {
   constructor() {
