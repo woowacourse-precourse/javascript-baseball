@@ -1,4 +1,4 @@
-const { MissionUtils } = require("@woowacourse/mission-utils");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
 
@@ -94,7 +94,7 @@ class App {
         return hintArr;
     }
 
-    conditionsOfWin() {
+    conditionsOfWin(hintMessage) {
         if (hintMessage.includes("3스트라이크")) {
             this.gameOver();
         } else {
