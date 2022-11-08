@@ -15,6 +15,17 @@ class Input {
     if (Array.isArray(input)) return input;
     return input.split("").map((value) => +value);
   }
+
+  randomDiffNumberArray(start, end, total) {
+    const array = [];
+    while (array.length < total) {
+      const random = Random.pickNumberInRange(start, end);
+      const exist = array.indexOf(random) > -1;
+      if (!exist) array.push(random);
+    }
+
+    return array;
+  }
 }
 
 module.exports = Input;
