@@ -6,7 +6,11 @@ class App {
     this.userNumber = [];
   }
 
-  play() {}
+  play() {
+    this.getComputerAnswer();
+    this.startGameMessage();
+    this.getUserNumber();
+  }
 
   startGameMessage() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다");
