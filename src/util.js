@@ -1,4 +1,7 @@
 const { Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
+
+const print = (string) => Console.print(string);
 
 const generateRandomNumber = () => {
   const computerNumber = [];
@@ -11,4 +14,4 @@ const generateRandomNumber = () => {
   return computerNumber;
 };
 
-module.exports = generateRandomNumber;
+module.exports = {generateRandomNumber, print};

@@ -1,7 +1,6 @@
-const { Console } = require("@woowacourse/mission-utils");
-const generateRandomNumber = require("./computerNumber.js");
 const { RESULT, GAME_MESSAGE, GAME_ERROR_MESSAGE } = require("./constants.js");
-const { printGameStartMessage, print } = require("./gameCommentPrint.js");
+const {generateRandomNumber, print} = require("./util.js");
+const { Console } = require("@woowacourse/mission-utils");
 const checkUserInput = require("./userInputCheck.js");
 
 class BaseballGame {
@@ -11,7 +10,7 @@ class BaseballGame {
   }
 
   play() {
-    printGameStartMessage();
+    print(GAME_MESSAGE.START);
     this.computerNumber = generateRandomNumber();
     this.readUserInput(GAME_MESSAGE.INPUT);
   }
