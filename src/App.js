@@ -1,6 +1,8 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 class App {
+  computerNumber;
+
   constructor() {
     Console.print('숫자 야구 게임을 시작합니다.');
   }
@@ -22,6 +24,26 @@ class App {
     } else {
       this.play();
     }
+  }
+
+  gameOver() {
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (keyPress) => {
+      switch (keyPress) {
+        case '1':
+          this.replay();
+          return;
+        case '2':
+          this.quit();
+          return;
+        default:
+          throw new Error('--- *1 또는 2를 입력해주세요  ---');
+      }
+    });
+  }
+
+  setComputerNumber() {
+    this.computerNumber = this.createComputerNumber();
   }
 
   createComputerNumber() {
