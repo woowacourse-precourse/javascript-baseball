@@ -34,7 +34,7 @@ class InputError {
     const existNum = new Set();
     for (let i = 0; i < input.length; i++) {
       if (existNum.has(input[i])) {
-        throw ERROR_MESSAGE.RETRY_INPUT_ERROR;
+        throw ERROR_MESSAGE.INPUT_REPEAT_ERROR;
       }
       existNum.add(input[i]);
     }
@@ -43,7 +43,7 @@ class InputError {
   validateRetryInput(input) {
     const possibleValue = ["1", "2"];
     if (!possibleValue.includes(input)) {
-      throw "1혹은 2를 입력해주세요.";
+      throw RETRY_INPUT_ERROR;
     }
   }
 
