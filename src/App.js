@@ -1,9 +1,9 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { MESSAGE, RESULT, ERROR, END_OPTION } = require('./data/constants');
-const CheckException = require('./utils');
+const { MESSAGE, RESULT, END_OPTION } = require('./data/constants');
+const { checkBaseBallException, checkRestartException } = require('./utils');
 
 class App {
-  randomArr() {
+  extractRandomNumber() {
     const randomNumbers = new Set();
 
     while (randomNumbers.size < 3) {
@@ -15,8 +15,9 @@ class App {
 
   askRestart() {
     Console.readLine(MESSAGE.RESTART + '\n', answer => {
-      if (!['1', '2'].includes(answer)) throw ERROR.RESTART_RANGE;
-      if (answer == END_OPTION.RESTART) this.restart();
+      checkRestartException(answer);
+
+      if (answer == END_OPTION.RESTART) this.gameStart();
       if (answer == END_OPTION.EXIT) Console.close();
       return;
     });
@@ -31,21 +32,21 @@ class App {
     }
   }
 
-  recursiveInput() {
+  recursiveInput(computerNumber) {
     Console.readLine(MESSAGE.INPUT, inputNum => {
-      CheckException(inputNum, 3);
+      checkBaseBallException(inputNum, 3);
 
-      const { ball, strike } = this.check(inputNum);
-      Console.print(this.result(ball, strike));
+      const countResult = this.check(inputNum, computerNumber);
+      const resultPrint = this.result(countResult);
+      Console.print(resultPrint);
 
-      this.isThreeStrike(strike);
+      this.isThreeStrike(countResult.strike);
 
-      this.recursiveInput();
-      return;
+      this.recursiveInput(computerNumber);
     });
   }
 
-  check(inputNum) {
+  check(inputNum, computerNumber) {
     const count = {
       ball: 0,
       strike: 0,
@@ -53,13 +54,13 @@ class App {
     const inputNumArr = inputNum.split('');
 
     inputNumArr.forEach((num, index) => {
-      if (parseInt(num) === this.computerNum[index]) count.strike += 1;
-      else if (this.computerNum.includes(parseInt(num))) count.ball += 1;
+      if (parseInt(num) === computerNumber[index]) count.strike += 1;
+      else if (computerNumber.includes(parseInt(num))) count.ball += 1;
     });
     return count;
   }
 
-  result(ball, strike) {
+  result({ ball, strike }) {
     if (ball == 0 && strike == 0) return RESULT.NOTHING;
 
     if (ball > 0 && strike > 0)
@@ -68,18 +69,14 @@ class App {
     if (ball == 0 && strike > 0) return `${strike}${RESULT.STRIKE}`;
   }
 
-  restart() {
-    this.computerNum = this.randomArr();
-    this.recursiveInput();
-    return;
+  gameStart() {
+    const computerNumber = this.extractRandomNumber();
+    this.recursiveInput(computerNumber);
   }
 
   play() {
     Console.print(MESSAGE.START);
-    this.computerNum = this.randomArr();
-
-    this.recursiveInput();
-    return;
+    this.gameStart();
   }
 }
 
