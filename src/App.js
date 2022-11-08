@@ -114,6 +114,7 @@ class App {
       var ball = countBall(guess, computer);
       if(resultCheck(strike, ball)) isCorrect = true;
     }
+    endsGame();
   }
 }
 
