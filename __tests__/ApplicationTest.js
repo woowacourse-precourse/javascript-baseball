@@ -1,4 +1,5 @@
 const App = require('../src/App');
+const Baseball = require('../src/components/Baseball');
 const MissionUtils = require('@woowacourse/mission-utils');
 const { ERROR } = require('../src/data/constants');
 
@@ -49,7 +50,7 @@ describe('숫자 야구 게임', () => {
   });
 
   test('볼, 스트라이크 개수 구하기(check method)', () => {
-    const app = new App();
+    const baseball = new Baseball();
     const random = [1, 2, 3];
     const answer = ['245', '125', '865', '182', '123'];
     const resuslt = [
@@ -61,12 +62,14 @@ describe('숫자 야구 게임', () => {
     ];
 
     answer.forEach((number, index) => {
-      expect(app.countBallAndStrike(number, random)).toEqual(resuslt[index]);
+      expect(baseball.countBallAndStrike(number, random)).toEqual(
+        resuslt[index],
+      );
     });
   });
 
   test('결과 출력 확인(result method)', () => {
-    const app = new App();
+    const baseball = new Baseball();
     const input = [
       { ball: 0, strike: 0 },
       { ball: 1, strike: 0 },
@@ -82,7 +85,7 @@ describe('숫자 야구 게임', () => {
       '3스트라이크',
     ];
     input.forEach((inputNum, index) => {
-      expect(app.countResultPrint(inputNum)).toEqual(result[index]);
+      expect(baseball.countResultPrint(inputNum)).toEqual(result[index]);
     });
   });
 
