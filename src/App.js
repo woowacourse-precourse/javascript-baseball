@@ -9,6 +9,7 @@ const {
   createComputerNumber,
   getUserNumber,
   setUserInput,
+  validateUserNumber,
 } = require("./utils/MissionUtils");
 
 function App() {

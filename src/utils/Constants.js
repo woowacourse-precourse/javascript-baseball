@@ -14,6 +14,9 @@ const END_NUMBER = 9;
 const RETRY_VALUE = "1";
 const END_VALUE = "2";
 
+const MIN_CORRECT = 0;
+const MAX_CORRECT = 3;
+
 module.exports = {
   START_GAME,
   GAME_END,
@@ -26,4 +29,6 @@ module.exports = {
   END_NUMBER,
   RETRY_VALUE,
   END_VALUE,
+  MIN_CORRECT,
+  MAX_CORRECT,
 };
