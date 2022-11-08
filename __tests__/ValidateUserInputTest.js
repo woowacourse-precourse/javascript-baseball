@@ -46,7 +46,7 @@ describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
     const input = "3";
 
     expect(() => {
-      ValidateUserInput.isOneOrTwo(input);
+      ValidateUserInput.isRestartOrEnd(input);
     }).toThrow();
   });
 
@@ -54,7 +54,7 @@ describe("사용자가 잘못된 값을 넣었을 때 예외 발생", () => {
     const input = "1";
 
     expect(() => {
-      ValidateUserInput.isOneOrTwo(input);
+      ValidateUserInput.isRestartOrEnd(input);
     }).not.toThrow();
   });
 });

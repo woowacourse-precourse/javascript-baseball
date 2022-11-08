@@ -15,7 +15,7 @@ class ValidateUserInput {
     }
   }
 
-  static isOneOrTwo(selectedNumber) {
+  static isRestartOrEnd(selectedNumber) {
     selectedNumber = Number(selectedNumber);
 
     if (selectedNumber !== 1 && selectedNumber !== 2) throw new Error("1 또는 2만 입력해주세요.");

@@ -66,7 +66,7 @@ class BaseballGame {
 
   inputRestartOrEnd = (selectedNumber) => {
     selectedNumber = Number(selectedNumber);
-    ValidateUserInput.isOneOrTwo(selectedNumber);
+    ValidateUserInput.isRestartOrEnd(selectedNumber);
 
     if (selectedNumber === 1) {
       this.init(false);
