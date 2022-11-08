@@ -167,10 +167,14 @@ class App {
     this.UserInput();
     this.RestartQuestion();
   }
+
+  play() {
+    Console.print("숫자 야구 게임이 시작됩니다. 서로 다른 숫자 3자리를 입력하세요 : ");
+    this.startGame();
+  }
 }
 
 const app = new App();
-console.log("서로 다른 숫자 3자리를 입력해주세요 : ")
 app.play();
 
 module.exports = App;
