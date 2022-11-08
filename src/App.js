@@ -20,6 +20,8 @@ class App {
         throw new Error("1부터 9까지 서로 다른 숫자 3자리를 입력해주세요.");
       }
       const gameUser = Array.from(input, Number);
+      const result = this.getResult(computer, gameUser);
+      Console.print(result);
     });
   }
   discUser(input) {
@@ -34,6 +36,29 @@ class App {
     if (inputNumberSet.size !== 3) return false;
 
     return true;
+  }
+  countExist(computer, gameUser) {
+    const computerSet = new Set(computer);
+    const exists = gameUser.filter((disc) => computerSet.has(disc));
+    return exists.length;
+  }
+  countStrike(computer, gameUser) {
+    const strikes = gameUser.filter((disc, i) => disc === computer[i]);
+    return strikes.length;
+  }
+  getResult(computer, gameUser) {
+    const exist = this.countExist(computer, gameUser);
+    const strike = this.countStrike(computer, gameUser);
+    const ball = exist - strike;
+
+    if (exist === 0) {
+      return "낫싱";
+    } else if (strike === 0) {
+      return `${ball}볼`;
+    } else if (ball === 0) {
+      return strike + "스트라이크";
+    }
+    return `${ball}볼 ${strike} 스트라이크`;
   }
 }
 
