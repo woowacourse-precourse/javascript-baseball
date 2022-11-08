@@ -7,4 +7,9 @@ const NUMBER = {
     END: 2
 };
 
-module.exports = { NUMBER };
+const TEXT = {
+    NOTHING: "nothing",
+    FINISH: "end"
+}
+
+module.exports = { NUMBER, TEXT };

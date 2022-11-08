@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const { MESSAGE, ERROR_MESSAGE, RESULT_MESSAGE } = require("./constants/MessageConstants");
-const { NUMBER } = require("./constants/Constants");
+const { NUMBER, TEXT } = require("./constants/Constants");
 
 class App {
   play() {
@@ -42,7 +42,7 @@ class App {
       const checkResult = this.countBallAndStrike(computerNumber, userNumber);
       const result = this.printResult(checkResult);
 
-      if (result === "end") {
+      if (result === TEXT.FINISH) {
         this.reStartOrEnd();
       }
 
@@ -101,7 +101,7 @@ class App {
     });
 
     if (ballOrStrike === NUMBER.ZERO) {
-      return "nothing";
+      return TEXT.NOTHING;
     }
 
     for (let index = NUMBER.ZERO; index < NUMBER.THREE_DIGIT; index++) {
@@ -120,14 +120,14 @@ class App {
     const ball = checkResult[0];
     const strike = checkResult[1];
 
-    if (checkResult === "nothing") {
+    if (checkResult === TEXT.NOTHING) {
       MissionUtils.Console.print(RESULT_MESSAGE.NOTHING);
       return;
     }
 
     if (strike === NUMBER.THREE_DIGIT) {
       MissionUtils.Console.print(RESULT_MESSAGE.SUCCESS);
-      return "end";
+      return TEXT.FINISH;
     }
 
     if (ball === NUMBER.ZERO) {
