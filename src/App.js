@@ -24,6 +24,12 @@ class App {
     this.computerNumber = computerNumber;
   }
 
+  getComputerNumber() {
+    if (this.computerNumber) {
+      return this.computerNumber;
+    }
+  }
+
   compareWithUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
       if (number.length > 3 || number.length < 3)
@@ -120,6 +126,5 @@ class App {
     );
   }
 }
-new App().play();
 
 module.exports = App;
