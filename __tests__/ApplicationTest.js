@@ -47,7 +47,7 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("자릿 수 초과 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
 
@@ -58,5 +58,86 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+
+  test("자릿 수 미만 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["12"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("문자열 입력 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["ab2"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("숫자 범위 외 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["035"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("숫자 중복 예외 테스트", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["225"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("스트라이크, 볼, 낫싱 계산 확인 테스트", () => {
+    const answers = ["145", "152"];
+    const logSpy = getLogSpy();
+    const messages = ["1볼 1스트라이크"];
+
+    const app = new App();
+    app.checkStrikeAndBall(answers[0], answers[1]);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("3스트라이크시 gameRestart로 넘어가는지 테스트", () => {
+    const answers = ["145", "145"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ];
+
+    const app = new App();
+    app.getStrikeAndBall(answers[0], answers[1]);
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
