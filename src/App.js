@@ -18,9 +18,18 @@ class BaseBallGame {
     }
     return TEMPORARY_STORAGE.join('');
   }
+
+  isRightForm(inputNum) {
+    const REGULAR_EXPRESSION_NUMBER = /^[1-9]+$/;
+    const IS_NUMBER = REGULAR_EXPRESSION_NUMBER.test(inputNum);
+    const RIGHT_LENGTH = inputNum.length === 3;
+    const NOT_DUPLICATE = inputNum[0] !== inputNum[1] && inputNum[1] !== inputNum[2];
+    
+    return IS_NUMBER && RIGHT_LENGTH && NOT_DUPLICATE;
+  }
 }
 
 const game = new BaseBallGame;
-game.start();
+game.isRightForm('122');
 
 module.exports = BaseBallGame;
