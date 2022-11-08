@@ -43,9 +43,11 @@ class App {
     };
     for (let i = 0; i < 3; i++) {
       if (Number(userInput[i]) === currentAnswer[i]) {
-        this.addScore(score, "strike");
+        const changePosition = "strike";
+        this.addScore(score, changePosition);
       } else if (currentAnswer.includes(Number(userInput[i]))) {
-        this.addScore(score, "ball");
+        const changePosition = "ball";
+        this.addScore(score, changePosition);
       }
     }
     return score;
@@ -55,19 +57,23 @@ class App {
     MissionUtils.Console.print(hint);
   }
 
-  createHint(input, currentAnswer) {
-    const score = this.checkInputIsCorrect(input, currentAnswer);
+  checkUserScore(scoreObj) {
     let hint;
-
-    switch (score.strike === 0) {
+    switch (scoreObj.strike === 0) {
       case true:
-        score.ball === 0 ? (hint = "낫싱") : (hint = `${score.ball}볼`);
+        scoreObj.ball === 0 ? (hint = "낫싱") : (hint = `${scoreObj.ball}볼`);
         break;
       case false:
-        score.ball === 0
-          ? (hint = `${score.strike}스트라이크`)
-          : (hint = `${score.ball}볼 ${score.strike}스트라이크`);
+        scoreObj.ball === 0
+          ? (hint = `${scoreObj.strike}스트라이크`)
+          : (hint = `${scoreObj.ball}볼 ${scoreObj.strike}스트라이크`);
     }
+    return hint;
+  }
+
+  createHint(input, currentAnswer) {
+    const score = this.checkInputIsCorrect(input, currentAnswer);
+    const hint = this.checkUserScore(score);
     this.printHint(hint);
     if (hint === GAME_MESSAGE.ANSWER) {
       this.printGameOver();
