@@ -1,6 +1,15 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const MESSAGE = require("./constants/string.js");
 
+const SETTING = {
+  MAX_NUMBER_LENGTH: 3,
+  FROM_NUMBER: 1,
+  TO_NUMBER: 9,
+  STRIKE_OUT_COUNT: 3,
+  RESTART: "1",
+  GAME_CLOSE: "2",
+};
+
 class App {
   constructor() {
     this.answerNumbers;
@@ -20,7 +29,7 @@ class App {
   }
 
   checkResult(stat) {
-    if (stat.strike === 3) {
+    if (stat.strike === SETTING.STRIKE_OUT_COUNT) {
       MissionUtils.Console.print(`${stat.strike}스트라이크\n${MESSAGE.GAME_OVER}`);
       this.askRestart();
     } else {
@@ -36,10 +45,10 @@ class App {
   }
 
   checkRestart(userInput) {
-    if (userInput === "1") {
+    if (userInput === SETTING.RESTART) {
       this.answerNumbers = this.getRandomNumbers();
       this.getUserInput();
-    } else if (userInput === "2") {
+    } else if (userInput === SETTING.GAME_CLOSE) {
       MissionUtils.Console.print(MESSAGE.GAME_CLOSE);
       MissionUtils.Console.close();
       return;
@@ -51,8 +60,8 @@ class App {
   getRandomNumbers() {
     const deduplicateRandomNumbers = [];
 
-    while (deduplicateRandomNumbers.length < 3) {
-      const randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
+    while (deduplicateRandomNumbers.length < SETTING.MAX_NUMBER_LENGTH) {
+      const randomNumber = MissionUtils.Random.pickNumberInRange(SETTING.FROM_NUMBER, SETTING.TO_NUMBER);
       if (!deduplicateRandomNumbers.includes(randomNumber)) {
         deduplicateRandomNumbers.push(randomNumber);
       }
@@ -65,7 +74,7 @@ class App {
       throw new Error(MESSAGE.ERROR.TYPE);
     }
 
-    if (!(userInput.length === 3)) {
+    if (!(userInput.length === SETTING.MAX_NUMBER_LENGTH)) {
       throw new Error(MESSAGE.ERROR.LENGTH);
     }
 
@@ -73,7 +82,7 @@ class App {
       throw new Error(MESSAGE.ERROR.RANGE);
     }
 
-    if (new Set(userInput).size !== 3) {
+    if (new Set(userInput).size !== SETTING.MAX_NUMBER_LENGTH) {
       throw new Error(MESSAGE.ERROR.DUPLICATE);
     }
   }
