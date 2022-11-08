@@ -62,6 +62,12 @@ class App {
     return intersection(this.userNumberSet, this.computerNumberSet).size;
   }
 
+  countStrike() {
+    return this.userNumberArray.filter(
+      (userNumber, index) => userNumber === this.computerNumberArray[index],
+    ).length;
+  }
+
   play() {
     MissionUtils.Console.print(this.computerNumberArray);
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
