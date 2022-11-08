@@ -52,10 +52,10 @@ class StrikeBall {
   }
 
   IfStrike() {
-    MissionUtils.Console.readLine('숫자를 입력하세요', (InputNumber) => {
+    MissionUtils.Console.readLine(message.INPUTQA, (InputNumber) => {
       this.UserInputNumber = InputNumber;
     });
-    if (this.UserInputNumber === '1') {
+    if (this.UserInputNumber === message.GAMERESTART) {
       return true;
     }
     return false;
