@@ -131,8 +131,7 @@ class App {
       }
       let inputresult = this.checkUserInput();
       if (inputresult[0] === false) {
-        throw new Error();
-        break;
+        throw new Error("입력이 잘못되었습니다.");
       }
       else if (inputresult[0] === true)
         userInput = inputresult[1];
@@ -151,5 +150,8 @@ class App {
     }
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
