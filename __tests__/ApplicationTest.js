@@ -61,7 +61,7 @@ describe('숫자 야구 게임', () => {
     ];
 
     answer.forEach((number, index) => {
-      expect(app.check(number, random)).toEqual(resuslt[index]);
+      expect(app.countBallAndStrike(number, random)).toEqual(resuslt[index]);
     });
   });
 
@@ -82,7 +82,7 @@ describe('숫자 야구 게임', () => {
       '3스트라이크',
     ];
     input.forEach((inputNum, index) => {
-      expect(app.result(inputNum)).toEqual(result[index]);
+      expect(app.countResultPrint(inputNum)).toEqual(result[index]);
     });
   });
 
