@@ -13,6 +13,13 @@ class App {
     }
     return randomNums;
   }
+
+  tryToAnswer(randomNums) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      this.checkValidation(answer);
+      this.getBallStrikeCount(randomNums, answer);
+    });
+  }
   
 }
 
