@@ -5,6 +5,7 @@ const computerUtils = require('../src/utils/computerUtils');
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
 
   return logSpy;
 };
@@ -13,15 +14,13 @@ const mockReadline = (inputs) => {
   MissionUtils.Console.readLine = jest.fn();
 
   inputs.reduce((fn, value) => {
-    return fn.mockImplementationOnce((_, callback) => {
-      callback(value);
-    });
+    return fn.mockImplementationOnce((_, callback) => callback(value));
   }, MissionUtils.Console.readLine);
 };
 
-const mockGetRandomNumber = (answer) => {
-  computerUtils.getRandomNumber = jest.fn();
-  computerUtils.getRandomNumber.mockReturnValueOnce(answer);
+const mockgetRandomNumbers = (answer) => {
+  computerUtils.getRandomNumbers = jest.fn();
+  computerUtils.getRandomNumbers.mockReturnValueOnce(answer);
 };
 
 describe('Game test', () => {
@@ -54,7 +53,7 @@ describe('Game test', () => {
     const logSpy = getLogSpy();
 
     mockReadline(inputs);
-    mockGetRandomNumber(answer);
+    mockgetRandomNumbers(answer);
 
     const app = new App();
     app.play();

@@ -2,7 +2,7 @@ const computerUtils = require('../src/utils/computerUtils');
 const COMPUTER = require('../src/constants/COMPUTER');
 
 describe('서로 다른 임의의 수 3개 생성 테스트', () => {
-  const randomNumbers = computerUtils.getRandomNumber();
+  const randomNumbers = computerUtils.getRandomNumbers();
 
   test('중복 숫자 포함 확인', () => {
     expect([...new Set(randomNumbers)]).toHaveLength(COMPUTER.ANSWER_LENGTH);
@@ -57,7 +57,7 @@ describe('입력값 검증 테스트', () => {
 
   test('같은 숫자를 입력한 경우', () => {
     const userInput = '112';
-    const sameNumberError = new Error(COMPUTER.SAME_ERROR);
+    const sameNumberError = new Error(COMPUTER.SAME_NUMBER_ERROR);
 
     expect(() => computerUtils.validateInput(userInput)).toThrowError(sameNumberError);
   });
