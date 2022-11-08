@@ -15,4 +15,16 @@ describe("숫자 야구 게임 시나리오", () => {
     app.play();
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
+
+  test("컴퓨터가 랜덤 숫자를 생성", () => {
+    for (let i = 0; i < 100; i += 1) {
+      const randomNumberArray = generateRandomNumberArray();
+      expect(randomNumberArray.length).toBe(3);
+      randomNumberArray.map((randomNumber) => {
+        const number = Number(randomNumber);
+        expect(number).toBeGreaterThanOrEqual(1);
+        expect(number).toBeLessThanOrEqual(9);
+      });
+    }
+  });
 });
