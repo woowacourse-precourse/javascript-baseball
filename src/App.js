@@ -65,7 +65,6 @@ function askGamePlay() {
       MissionUtils.Console.print('게임 종료');
       MissionUtils.Console.close();
     } else {
-      MissionUtils.Console.close();
       throw new Error('잘못된 값 입력. 게임 종료');
     }
   });
