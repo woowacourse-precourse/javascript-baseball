@@ -11,7 +11,7 @@ class App {
     return computer;
   }
 
-  userPick() {
+  userPick(computer) {
     MissionUtils.Console.readLine("숫자를 입력해주세요.", (userInput) => {
       if (!this.checkUserNum(userInput)) {
         throw new Error();
@@ -42,14 +42,14 @@ class App {
   baseballGame(computer, user) {
     let strike = 0;
     let ball = 0;
-    const user = [];
+    const USER = [];
     for (let i = 0; i < 3; i++) {
-      user.push(parseInt(user[i]));
+      USER.push(parseInt(user[i]));
     }
     for (let i = 0; i < 3; i++) {
-      if (this.compare(computer, computer[i], user[i]) === 1) {
+      if (this.compare(computer, computer[i], USER[i]) === 1) {
         strike += 1;
-      } else if (this.compare(computer, computer[i], user[i]) === 2) {
+      } else if (this.compare(computer, computer[i], USER[i]) === 2) {
         ball += 1;
       }
     }
