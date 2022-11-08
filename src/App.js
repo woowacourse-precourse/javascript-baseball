@@ -5,11 +5,11 @@ class App {
   }
 
   play() {
-    let computerNum = this.selectNum();
+    let computerNum = this.setComputerNum();
     this.gameStart(computerNum);
   }
 
-  selectNum() {
+  setComputerNum() {
     const computer = new Set();
     while (computer.size < 3) {
       computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
