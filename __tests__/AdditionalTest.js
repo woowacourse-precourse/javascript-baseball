@@ -36,9 +36,21 @@ describe("숫자 야구 게임", () => {
             app.play();
         }).toThrow();
     });
-        test("예외처리 1 중복", () => {
+        test("예외처리 2 중복", () => {
         const randoms = [1, 3, 5];
         const answers = ["112"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
+        test("예외처리 3 문자", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["abc"];
 
         mockRandoms(randoms);
         mockQuestions(answers);
