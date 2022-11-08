@@ -5,7 +5,7 @@ describe("함수 기능단위 테스트", () => {
     const app = new App();
     const userInput = "123";
     const currentAnswer = [1, 7, 8];
-    expect(app.checkInputIsCorrect(userInput, currentAnswer)).toEqual({
+    expect(app.createUserScore(userInput, currentAnswer)).toEqual({
       strike: 1,
       ball: 0,
     });
