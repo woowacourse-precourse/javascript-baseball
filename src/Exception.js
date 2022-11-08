@@ -9,7 +9,7 @@ function exception(userNum) {
     }
     // 서로 다른 수인지 확인
     if (userNum[EXCEP.FIRST] === userNum[EXCEP.SECONED] || userNum[EXCEP.SECONED] === userNum[EXCEP.THIRD] || userNum[EXCEP.FIRST] === userNum[EXCEP.THIRD]) {
-        Console.close();
+        Console.close() ;
         throw ERROR.DUPLICATION;
     }
     // 숫자가 아닐경우

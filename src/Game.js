@@ -9,7 +9,6 @@ class Game {
         this.computersNumber = new Computer().pickedNum();
     }
 
-    // 유저와 컴퓨터 대조해서 스트라이크 볼 갯수 리턴
     getStrikeAndBall(computersNumber, usersNumber) {
         let howManyStrike = SET.START_VAL;
         let howManyBall = SET.START_VAL;
@@ -22,7 +21,6 @@ class Game {
         return [howManyStrike, howManyBall];
     }
     
-    // 입력된 숫자 대조 결과 출력
     resultMessage(howManyStrike, howManyBall) {
         if (howManyStrike && !howManyBall) return Console.print(`${howManyStrike}스트라이크`);
         if (!howManyStrike && howManyBall) return Console.print(`${howManyBall}볼`);
@@ -30,7 +28,7 @@ class Game {
         return Console.print("낫싱");
     }
 
-    playGame() {    
+    playGame() {
         Console.readLine(GAME.INPUT_NUMBER, usersNumber => {
             exception(usersNumber);
             usersNumber = this.getUsersArray(usersNumber);

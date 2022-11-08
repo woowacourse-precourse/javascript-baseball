@@ -34,5 +34,12 @@ describe("Game.js 기능 테스트", () => {
 
         expect(test_result).toStrictEqual(Console.print("낫싱"));
     });
+
+    test("getUsersArray 결과값 테스트", () => {
+        const userNum = "123";
+        const test_result = game.getUsersArray(userNum);
+
+        expect(test_result).toStrictEqual([1, 2, 3]);
+    });
     
 })
