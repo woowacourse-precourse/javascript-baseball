@@ -12,7 +12,7 @@ class App {
 
   computerChoiceNumber() {
     this.computerNumber = "";
-    for (var i = 0; i < 3; i++) {
+    while (this.computerNumber.length != 3) {
       const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
       MissionUtils.Console.print(RANDOM_NUMBER);
       if (!this.computerNumber.includes(RANDOM_NUMBER)) {
