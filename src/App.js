@@ -124,7 +124,7 @@ class App {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
       console.log(`재시작??? : ${input}`);
       if(input === '1'){
-        // play(); // 로직 새로 구성해서 다시 시작할 수 있도록.
+        this.playBaseball();
       }
       else if(input === '2'){
         MissionUtils.Console.print('게임 종료');
