@@ -68,11 +68,7 @@ function newGame() {
 }
 
 function exception(userInput) {
-  var input_array = []
-  for (let x of userInput) {
-    input_array.push(x)
-  } 
-  var input_set = new Set(input_array);
+  var input_set = new Set(userInput.split(''));
   var regExp = new RegExp('/\D/gm')
   if (regExp.test(userInput)) {
     throw '숫자만 입력해주세요'
