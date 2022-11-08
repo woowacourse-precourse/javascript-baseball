@@ -1,7 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const InvalidTest = require("./InvalidTest");
 class BaseballGame {
   computerAnswer;
-
   constructor() {
     this.gameStart();
   }
@@ -21,12 +21,12 @@ class BaseballGame {
   }
   getUserAnswer() {
     Console.readLine("숫자를 입력해주세요 : ", (userAnswer) => {
-      if (userAnswer.length !== 3) {
-        throw "숫자를 잘못 입력하셨어요!";
-      }
+      InvalidTest.isNumber(userAnswer);
+      InvalidTest.isThreeNumber(userAnswer);
+      InvalidTest.isHaveZero(userAnswer);
+      InvalidTest.isSameNumber(userAnswer);
       this.compareNumber(this.computerAnswer, userAnswer);
       this.getUserAnswer();
-      //숫자 비교하기 함수
     });
   }
   compareNumber(computerAnswer, userAnswer) {
@@ -35,7 +35,6 @@ class BaseballGame {
     const computerAnswerObject = { ...computerAnswerList };
     const userAnswerObject = { ...userAnswerList };
     const score = this.baseballReferee(computerAnswerObject, userAnswerObject);
-    console.log(score);
     const strike = score[0];
     const ballCount = score[1];
     if (strike === 3) {
@@ -94,11 +93,4 @@ class BaseballGame {
     );
   }
 }
-
-/*
-예외처리 
-  1. 입력 숫자 3개 이외 갯수 오류 처리
-  2. 같은 숫자 없어야 하고
-  3. 숫자만 받아야하고 0제외
-*/
 module.exports = BaseballGame;
