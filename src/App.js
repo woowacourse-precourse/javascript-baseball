@@ -1,18 +1,34 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const MESSAGE = {
+  GAME_START: "숫자 야구 게임을 시작합니다.",
+  IM_GAME: "숫자를 입력해주세요 :",
+  GAME_OVER: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  REGAME: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 :",
+  GAME_CLOSE: "게임을 종료합니다.",
+
+  ERROR: {
+    TYPE: "정수 숫자를 입력하셔야 합니다.",
+    LENGTH: "숫자 3개만 입력하셔야 합니다.",
+    RANGE: "1~9사이의 숫자 3개를 입력하셔야 합니다.",
+    DUPLICATE: "각각 다른 숫자를 입력하셔야 합니다.",
+    VALUE: "1또는 2를 입력하셔야 합니다.",
+  },
+};
+
 class App {
   constructor() {
     this.answerNumbers;
   }
 
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.GAME_START);
     this.answerNumbers = this.getRandomNumbers();
     this.getUserInput();
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (userInput) => {
+    MissionUtils.Console.readLine(`${MESSAGE.IM_GAME}`, (userInput) => {
       this.checkValid(userInput);
       this.checkResult(this.getStats(userInput, this.answerNumbers));
     });
@@ -20,7 +36,7 @@ class App {
 
   checkResult(stat) {
     if (stat.strike === 3) {
-      MissionUtils.Console.print(`${stat.strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+      MissionUtils.Console.print(`${stat.strike}스트라이크\n${MESSAGE.GAME_OVER}`);
       this.askRestart();
     } else {
       MissionUtils.Console.print(this.getHint(stat));
@@ -29,7 +45,7 @@ class App {
   }
 
   askRestart() {
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요 :", (userInput) => {
+    MissionUtils.Console.readLine(`${MESSAGE.REGAME}`, (userInput) => {
       this.checkRestart(userInput);
     });
   }
@@ -39,11 +55,11 @@ class App {
       this.answerNumbers = this.getRandomNumbers();
       this.getUserInput();
     } else if (userInput === "2") {
-      MissionUtils.Console.print("게임을 종료합니다.");
+      MissionUtils.Console.print(MESSAGE.GAME_CLOSE);
       MissionUtils.Console.close();
       return;
     } else {
-      throw new Error("1또는 2를 입력하셔야 합니다.\n게임을 종료합니다.");
+      throw new Error(`${MESSAGE.ERROR.VALUE}\n${MESSAGE.GAME_CLOSE}`);
     }
   }
 
@@ -61,19 +77,19 @@ class App {
 
   checkValid(userInput) {
     if (Number.isNaN(userInput) || !Number.isInteger(Number(userInput))) {
-      throw new Error("정수 숫자를 입력하셔야 합니다.");
+      throw new Error(MESSAGE.ERROR.TYPE);
     }
 
     if (!(userInput.length === 3)) {
-      throw new Error("숫자 3개만 입력하셔야 합니다.");
+      throw new Error(MESSAGE.ERROR.LENGTH);
     }
 
     if (userInput.includes("0") || Number(userInput) < 0) {
-      throw new Error("1~9사이의 숫자 3개를 입력하셔야 합니다.");
+      throw new Error(MESSAGE.ERROR.RANGE);
     }
 
     if (new Set(userInput).size !== 3) {
-      throw new Error("각각 다른 숫자를 입력하셔야 합니다.");
+      throw new Error(MESSAGE.ERROR.DUPLICATE);
     }
   }
 
