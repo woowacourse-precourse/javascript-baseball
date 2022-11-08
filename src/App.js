@@ -38,15 +38,23 @@ class App {
 
   checkRestart(userInput) {
     if (userInput === SETTING.RESTART) {
-      this.answerNumbers = this.getRandomNumbers();
-      this.getUserInput();
+      this.restart();
     } else if (userInput === SETTING.GAME_CLOSE) {
-      MissionUtils.Console.print(MESSAGE.GAME_CLOSE);
-      MissionUtils.Console.close();
-      return;
+      this.closeGame();
     } else {
       throw new Error(`${MESSAGE.ERROR.VALUE}\n${MESSAGE.GAME_CLOSE}`);
     }
+  }
+
+  restart() {
+    this.answerNumbers = this.getRandomNumbers();
+    this.getUserInput();
+  }
+
+  closeGame() {
+    MissionUtils.Console.print(MESSAGE.GAME_CLOSE);
+    MissionUtils.Console.close();
+    return;
   }
 
   getRandomNumbers() {
