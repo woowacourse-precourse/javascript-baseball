@@ -36,7 +36,7 @@ class App {
   checkBall(COMPUTER_NUM, USER_NUM) {
     let BALL_SCORE = 0;
 
-    const intersect = COMPUTER_NUM.filter(x => USER_NUM(x));
+    const intersect = COMPUTER_NUM.filter(x => USER_NUM.includes(x));
     let COUNT_INTERSECT = intersect.length;
     BALL_SCORE = COUNT_INTERSECT - STRIKE_SCORE;
   }
@@ -71,6 +71,7 @@ class App {
       MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return;
     }
+
     restartOrFinish();
   }
 }
