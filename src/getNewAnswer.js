@@ -1,4 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
+const ANSWER_LENGTH = 3;
 
 function checkDifferentValue(num) {
   return !answer.includes(num);
@@ -10,7 +11,7 @@ function getRandomValue() {
 
 function getNewAnswer() {
   answer = [];
-  while (answer.length < 3) {
+  while (answer.length < ANSWER_LENGTH) {
     const newRandomValue = getRandomValue();
     if (checkDifferentValue(newRandomValue)) {
       answer.push(newRandomValue);
