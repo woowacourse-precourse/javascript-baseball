@@ -89,7 +89,7 @@ class App {
     //세 가지 숫자 만들기
     var Numbers = [];
     for (var i =0;i<3;i++){
-      var number = MissionUtils.Random.pickNumberInRange();
+      var number = MissionUtils.Random.pickNumberInRange(1,9);
       Numbers.push(number);
     }
 
