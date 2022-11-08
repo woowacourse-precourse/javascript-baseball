@@ -30,9 +30,7 @@ class BaseballGame {
   turnCheck(userInput, computerNumbers) {
     const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
     this.printResult(strike, ball);
-    strike === 3
-      ? Console.readLine(GAME_MESSAGE.GAME_RESTART, this.isValidRestart)
-      : this.playing(computerNumbers);
+    strike === 3 ? this.restartOrEndGame() : this.playing(computerNumbers);
   }
 
   StrikeCount(userInput, computerNumbers) {
@@ -60,13 +58,17 @@ class BaseballGame {
       : Console.print(`${ball}볼 ${strikePrint}`);
   }
 
-  isValidRestart(OneOrTwo) {
-    OneOrTwo = Number(OneOrTwo);
-    this.validUserNumbers.isValidRestart(OneOrTwo);
-    if (OneOrTwo === 1) {
-      return this.playGame();
-    }
-    Console.close();
+  restartOrEndGame() {
+    Console.readLine(GAME_MESSAGE.GAME_RESTART, (OneOrTwo) => {
+      console.log(OneOrTwo);
+      if (OneOrTwo === "1") {
+        return this.playGame();
+      } else if (OneOrTwo === "2") {
+        return Console.close();
+      } else {
+        return this.throwError(ERROR_MESSAGE.ERROR_RESTART_MESSAGE);
+      }
+    });
   }
 
   throwError(messages) {

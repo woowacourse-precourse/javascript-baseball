@@ -12,17 +12,6 @@ class ValidUserNumbers {
 
     return userNumbers.length === 3 && userNumbers.every(isNumberElement);
   }
-
-  isValidRestart(restartNumber) {
-    restartNumber !== 1 && restartNumber !== 2
-      ? this.throwError(ERROR_MESSAGE.ERROR_RESTART_MESSAGE)
-      : restartNumber;
-    return restartNumber;
-  }
-
-  throwError(messages) {
-    throw new Error(messages);
-  }
 }
 
 module.exports = ValidUserNumbers;
