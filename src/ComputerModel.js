@@ -9,17 +9,9 @@ class ComputerModel {
 
   setNumberIntoSpace(computerSpace) {
     while (this.isSpaceNotFull(computerSpace)) {
-      computerSpace.add(this.getRandomNumberInRange(1, 9));
+      computerSpace.add(pickNumberInRange(1, 9));
     }
     return computerSpace; // 테스트코드용 리턴
-  }
-
-  getRandomNumberInRange(start, end) {
-    return pickNumberInRange(start, end);
-  }
-
-  isNumberNotInSpace(number, space) {
-    return !space.includes(number);
   }
 
   isSpaceNotFull(space) {
