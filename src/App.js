@@ -7,10 +7,8 @@ const {
 } = require("../src/inputValidation");
 
 class App {
-  play() {}
-
-  gameStart() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  game() {
+    this.randomNumber = this.generateRandomNumber();
   }
 
   generateRandomNumber() {
@@ -18,18 +16,48 @@ class App {
 
     while (randomNumbers.size < 3) {
       const pickedNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      randomNumbers.add(pickedNumber.toString());
+      randomNumbers.add(pickedNumber);
     }
-
     return Array.from(randomNumbers).join("");
   }
 
   getUserInput() {
-    MissionUtils.Console.readLine(
-      "1부터 9까지 서로 다른 수로 이루어진 3자리의 수를 입력해주세요. : ",
-      (input) => {}
-    );
+    let userInput = "";
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      userInput = input;
+      MissionUtils.Console.close();
+    });
+    return userInput;
   }
+
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+
+    this.game();
+  }
+  countBallandStrike = () => {
+    let ballCount = 0;
+    let strikeCount = 0;
+
+    for (let i = 0; i < this.randomNumber.length; i += 1) {
+      if (this.randomNumber[i] === this.userInputNumbers[i]) {
+        strikeCount += 1;
+      } else if (this.userInputNumbers.indexOf(this.randomNumber[i]) !== -1) {
+        ballCount += 1;
+      }
+    }
+
+    return { ballCount, strikeCount };
+  };
+
+  joinHint = (ballCount, strikeCount) => {
+    const ballHint = ballCount ? `${ballCount}볼` : "";
+    const strikeHint = strikeCount ? `${strikeCount}스트라이크` : "";
+    if (ballHint == "" && strikeHint == "") return "낫싱";
+    if (strikeHint == "") return ballHint;
+    if (ballHint == "") return strikeHint;
+    return `${ballHint} ${strikeHint}`;
+  };
 }
 
 module.exports = App;
