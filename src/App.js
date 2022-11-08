@@ -44,6 +44,21 @@ class App {
     this.computer.print(message.length > 0 ? message : RESULT.NOTHING);
   }
 
+  start() {
+    Console.readLine(MESSAGE.INPUT, (answer) => {
+      this.user.save(answer);
+      this.clear();
+      this.process();
+      this.print();
+      if (this.result[RESULT.STRIKE] === 3) {
+        this.computer.print(MESSAGE.SUCCESS);
+        // this.reStart();
+      } else {
+        // this.start();
+      }
+    });
+  }
+
   play() {}
 }
 
