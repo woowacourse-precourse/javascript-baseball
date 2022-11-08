@@ -16,6 +16,7 @@ class ComputerModel {
     while (this.isSpaceNotFull(computerSpace)) {
       InsertNumberToSpace(numberFromComputer(), computerSpace);
     }
+    return computerSpace; // 테스트코드용 리턴
   }
 
   getRandomNumberInRange(start, end) {
