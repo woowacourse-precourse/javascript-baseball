@@ -90,7 +90,7 @@
 <br/>
 
 # 🔖 숫자 야구 플로우차트
-<img src="./flowchart/js-baseball flowchart.png"/>
+<img src="./flowchart/js-baseball flowchart.drawio.png"/>
 
 # 📝 입출력 요구 사항
 ### 입력
