@@ -7,7 +7,6 @@ class App {
   play() {
     this.answer = GameUtils.System.getRandomAnswer();
     Print.GameMessage.start();
-    console.log(this.answer);
     this.#submitInput();
   }
   #submitInput() {
@@ -26,7 +25,7 @@ class App {
     this.#clearGame();
   }
   #clearGame() {
-    MissionUtils.Console.readLine(constants.GAME_MESSAGE.restart, (submit) => {
+    MissionUtils.Console.readLine(constants.GAME_MESSAGE.askRestart, (submit) => {
       const errorMessage = GameUtils.Validator.isInvalidRestartSubmit(Number(submit));
       if(errorMessage) Print.GameMessage.error(errorMessage);
       this.#isRestart(Number(submit));
