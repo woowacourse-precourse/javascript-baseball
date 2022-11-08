@@ -109,6 +109,26 @@ class App {
     if (answer === true) return "낫싱";
     return answer;
   }
+
+  isValidate(input) {
+    const repeatCheck = new Set(input);
+    if (repeatCheck.size !== 3) {
+      throw new Error("서로 다른 3자리 숫자를 입력하세요");
+    }
+    let checkString = 0;
+    input.map((user) => {
+      if (isNaN(user)) checkString = 1;
+    });
+    if (checkString === 1) {
+      throw new Error("숫자를 입력하세요");
+    }
+    if (input.length !== 3) {
+      throw new Error("3자리 숫자를 입력하세요");
+    }
+    if (input.includes("0")) {
+      throw new Error("1~9 사이의 숫자로 이루어진 숫자를 입력하세요");
+    }
+  }
 }
 
 const app = new App();
