@@ -17,3 +17,11 @@ const ballJudment = (notStrikeIndexArray, pickedNumberArrayByComputer, numberArr
   });
   return ballCount;
 };
+
+const strikeBallJudgment = (pickedNumberArrayByComputer, numberArrayEnteredByUser) => {
+  const { strikeCount, notStrikeIndexArray } = strikeJudgment(pickedNumberArrayByComputer, numberArrayEnteredByUser);
+  const ballCount = ballJudment(notStrikeIndexArray, pickedNumberArrayByComputer, numberArrayEnteredByUser);
+  return [strikeCount, ballCount];
+};
+
+module.exports = strikeBallJudgment;
