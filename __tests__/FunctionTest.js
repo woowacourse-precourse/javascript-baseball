@@ -57,17 +57,18 @@ describe("기능 목록 테스트", () => {
   test("사용자에게 힌트를 주는 기능", () => {
     let ball = 1;
     let strike = 1;
-    let result = ""
-    if (ball > 0 && strike > 0) {
-      result = `${ball}볼 ${strike}스트라이크`;
-    } else if(ball > 0) {
-      result = `${ball}볼`;
-    } else if(strike > 0) {
-      result = `${strike}스트라이크`;
-    } else {
-      result = "낫싱";
+    let hint = "";
+
+    if (ball > 0) {
+      hint = `${ball}볼 `;
     }
-    expect(result).toBe("1볼 1스트라이크");
+    if (strike > 0) {
+      hint += `${strike}스트라이크`;
+    }
+    if (ball < 0 && strike < 0) {
+      hint = "낫싱";
+    }
+    expect(hint).toBe("1볼 1스트라이크");
   })
 })
 
