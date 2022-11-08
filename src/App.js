@@ -51,16 +51,19 @@ class App {
   }
 
   printMessage() {
-    if ( this.countStrike > 0 && this.countBall === 0 ) {
-      MissionUtils.Console.print(`${this.countStrike}스트라이크`);
+    const strikeNumber = this.countStrike;
+    const ballNumber = this.countBall;
+
+    if ( strikeNumber > 0 && ballNumber === 0 ) {
+      MissionUtils.Console.print(`${strikeNumber}스트라이크`);
     }
-    else if ( this.countStrike === 0 && this.countBall > 0 ) {
-      MissionUtils.Console.print(`${this.countBall}볼`);
+    else if ( strikeNumber === 0 && ballNumber > 0 ) {
+      MissionUtils.Console.print(`${ballNumber}볼`);
     }
-    else if (this.countStrike > 0 && this.countBall > 0) {
-      MissionUtils.Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`);
+    else if (strikeNumber > 0 && ballNumber > 0) {
+      MissionUtils.Console.print(`${ballNumber}볼 ${strikeNumber}스트라이크`);
     }
-    else if ( this.countStrike + this.countBall === 0) {
+    else if ( strikeNumber + ballNumber === 0) {
       MissionUtils.Console.print('낫싱');
     }
  }
