@@ -102,3 +102,13 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 });
+
+describe("랜덤수 구하기", () => {
+  test("getRandomNumber 함수 테스트", () => {
+    const randoms = [1, 3, 5];
+    mockRandoms(randoms);
+
+    const randomNumber = getRandomNumber(3);
+    expect(randomNumber).toEqual([1, 3, 5]);
+  });
+});
