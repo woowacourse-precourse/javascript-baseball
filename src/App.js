@@ -67,3 +67,19 @@ const noticeScore = () => {
   }
 };
 let cpu = "";
+const considerRestart = () => {
+  Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+    (input) => {
+      defineRestartGame(Number(input));
+    }
+  );
+};
+const defineRestartGame = (flag) => {
+  if (flag === 1) {
+    cpu = makeTargetNumber();
+    processGame();
+  } else {
+    Console.close();
+  }
+};
