@@ -18,6 +18,11 @@ class App {
         if (answerToList.length !== 3) {
           throw new Error("세 개만 입력하라고");
         }
+
+        if (answerToList.every((num) => !computer.includes(num))) {
+          Console.print("낫싱");
+          retry();
+        }
       });
     };
     retry();
