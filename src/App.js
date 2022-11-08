@@ -16,14 +16,13 @@ class App {
     let comNum = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3)
     if(this.computerInputNum.length = 3){
      this.computerInputNum.push(comNum);
-     return computerInputNum
     }
   }
 
   userInputRandomNum(){
-    MissionUtils.console.readLine('숫자를 입력 해주세요.', (answer) => {
+    MissionUtils.console.readLine('숫자를 입력 해주세요 : ', (answer) => {
     this.checkError(answer)
-    this.returnAnswer(userAnswer)
+    this.collectAnswer(answer)
    })
   }
 
@@ -36,7 +35,18 @@ class App {
       if(el[i] === el[i+1]) throw '숫자가 중복 됐습니다.'
     })
   }
+
+  collectAnswer(answer){
+    userAnswer = answer.toString().split('').map(Number)
+    checkStrike = 0;
+    checkBall = 0;
+    for(let i=0; i < userAnswer.length; i++){
+      if(this.computerInputNum[i] === userAnswer[i]) checkStrike++
+      else if(this.computerInputNum[i].includes(userAnswer)) checkBall++
+    }
+  }
 }
+
 module.exports = App;
 
 
