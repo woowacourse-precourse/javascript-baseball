@@ -13,7 +13,7 @@ const {
 } = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
-const getComputerNumber = (start, end) => {
+const createComputerNumber = (start, end) => {
   const computer = [];
   while (computer.length < 3) {
     const number = pickNumberRange(start, end);
@@ -129,7 +129,7 @@ const printGameResult = (countStrike, countBall, computers) => {
 };
 
 const playAgain = () => {
-  const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
+  const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
   getUserNumber(computerNumbers, REQUIRE_NUMBER);
 };
 
@@ -145,4 +145,4 @@ const retryOrEnd = () => {
   });
 };
 
-module.exports = { getComputerNumber, getUserNumber };
+module.exports = { createComputerNumber, getUserNumber };

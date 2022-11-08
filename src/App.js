@@ -5,7 +5,7 @@ const {
   START_GAME,
   REQUIRE_NUMBER,
 } = require("./utils/Constants");
-const { getComputerNumber, getUserNumber } = require("./utils/MissionUtils");
+const { createComputerNumber, getUserNumber } = require("./utils/MissionUtils");
 
 function App() {
   this.state = {
@@ -14,7 +14,7 @@ function App() {
   };
   this.play = () => {
     MissionUtils.Console.print(START_GAME);
-    const computerNumbers = getComputerNumber(START_NUMBER, END_NUMBER);
+    const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
     getUserNumber(computerNumbers, REQUIRE_NUMBER);
   };
 }
