@@ -90,7 +90,7 @@ class App {
     var strike = 0;
 
     for (var i = 0; i < computerNum.length; i++) {
-      if (computerNum[i] === userNum[i]) {
+      if (computerNum[i] == userNum[i]) {
         strike += 1;
       } else if (userNum.includes(computerNum[i])) {
         ball += 1;
