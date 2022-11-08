@@ -57,6 +57,20 @@ class App{
     }
   }
 
+  printGameResult(){ //게임 결과 출력
+    if(strike == 3){
+      MissionUtils.Console.print('3스트라이크');
+    } else if(strike > 0 && strike < 3 && ball ==0){
+      MissionUtils.Console.print('%d스트라이크', strike);
+    } else if(ball > 0 && ball <= 3 && strike == 0){
+      MissionUtils.Console.print('%d볼', ball);
+    } else if(strike == 2 && ball == 1){
+      MissionUtils.Console.print('%d스트라이크 %d볼', strike, ball);
+    } else if(nothing == 3){
+      MissionUtils.Console.print('낫싱');
+    }
+  }
+
   play() { 
     this.comRandomNumber();
     this.gameStartNotice();
