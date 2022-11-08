@@ -5,7 +5,6 @@ const Tools = require('./BaseballGameFunc');
 class App {
   constructor() {
     this.randomNumberMap = new Map();
-    this.flag = true;
   }
   computer() {
     this.randomNumberMap = Tools.makeMap(Tools.generateRandomNumber());
@@ -22,7 +21,7 @@ class App {
         Console.print('게임 종료');
         this.isFinish();
       } else {
-        this.int();
+        this.init();
       }
     });
   }
