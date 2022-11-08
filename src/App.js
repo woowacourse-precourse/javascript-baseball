@@ -31,7 +31,12 @@ class App {
     }
   }
   end() {
-    console.log('끝');
+    Console.print(MESSAGES.END);
+    Console.readLine(MESSAGES.CONTINUE, (isContinue) => {
+      if(isContinue === '1') {
+        this.ready();
+      }
+    });
   }
 }
 
