@@ -5,23 +5,24 @@ const setting = require("../src/Setting");
 
 const startGame = (computer) => {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
+      let hint = '';
+      if (setting.checkInput(userInput) && setting.checkInput(computer.join(''))) {
         const userInputArray = setting.getInputIntArray(userInput);
-        let hint = '';
-        if (setting.checkInput(userInput)) {
-            hint = getHint(userInputArray, computer);
-        } else {
-            throw new Error('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
-        }
-
-        MissionUtils.Console.print(hint);
-        if (hint === '3스트라이크') {
-            MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-            endGame();
-        } else {
-            startGame(computer);
-        }
+        hint = getHint(userInputArray, computer);
+      } else {
+        throw new Error('숫자가 올바르지 않습니다. 다시 입력해주세요 !');
+      }
+  
+      MissionUtils.Console.print(hint);
+      if (hint === '3스트라이크') {
+        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        endGame();
+      } else {
+        startGame(computer);
+      }
     });
 };
+  
 
 
 const endGame = () => {
@@ -33,7 +34,7 @@ const endGame = () => {
             MissionUtils.Console.close();
             return;
         } else {
-            throw new Error('다시 입력해주세요 !');
+            endGame('다시 입력해주세요 !');
         }
     });
 };
@@ -103,6 +104,13 @@ describe("숫자야구 함수 테스트", () => {
         const input = pickComputerNumber();
         const result = setting.checkInput(input);
         expect(result).toEqual(false);
+    });
+
+    test("입력값과 컴퓨터값을 비교해 힌트 주기", () => {
+        const input = [1, 2, 3];
+        const computer = [1, 3, 5];
+        const result = getHint(input, computer);
+        expect(result).toEqual("1볼 1스트라이크");
     });
 });
 
