@@ -25,13 +25,6 @@ const setUserInput = (inputMessage, treatUserValueFunction) => {
   });
 };
 
-const getUserNumber = (computer, question) => {
-  MissionUtils.Console.readLine(question, (userInput) => {
-    validateUserNumber(userInput);
-    countStrikeAndBall(computer, userInput);
-  });
-};
-
 const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
