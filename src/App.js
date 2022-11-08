@@ -142,8 +142,4 @@ class App {
     return 0;
   }
 }
-
-const game = new App();
-game.play();
-
 module.exports = App;
