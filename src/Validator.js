@@ -34,8 +34,11 @@ function isValidDuplicated(playerNum) {
   return set.size === COMPUTER_NUMBER.LENGTH;
 }
 
-function isValidReplayNum(answer) {
-  if (Number(answer) !== GAME_OPTION.PLAY && Number(answer) !== GAME_OPTION.EXIT) {
+function isValidReplayNum(input) {
+  if (
+    Number(input) !== GAME_OPTION.PLAY &&
+    Number(input) !== GAME_OPTION.EXIT
+  ) {
     throw new Error(ERROR_MESSAGE.REAPLY_NUM);
   }
 
