@@ -10,9 +10,10 @@ class MainGameSystem {
   }
 
   isDuplicate(randomNum) {
+    const LAST_INDEX = 2;
     return randomNum.split("").reduce((acc, num, index, arr) => {
       if (!acc.includes(num)) acc.push(num);
-      if (index === 2) return acc.length !== arr.length;
+      if (index === LAST_INDEX) return acc.length !== arr.length;
       return acc;
     }, []);
   }

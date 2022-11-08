@@ -28,6 +28,13 @@ describe("contextualHint 확인", () => {
       expect(contextualHints.THREE_STRIKE).toBe(3);
     });
 
+    it("this.NO_BALL = 0, ONE_BALL = 1, this.TWO_BAll = 2, THREE_BALL = 3", () => {
+      expect(contextualHints.NO_BALL).toBe(0);
+      expect(contextualHints.ONE_BALL).toBe(1);
+      expect(contextualHints.TWO_BAll).toBe(2);
+      expect(contextualHints.THREE_BALL).toBe(3);
+    });
+
     it("RESTART = '1' / this.GAVE_OVER = '2'", () => {
       expect(contextualHints.RESTART).toBe("1");
       expect(contextualHints.GAVE_OVER).toBe("2");

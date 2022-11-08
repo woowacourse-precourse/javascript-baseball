@@ -11,6 +11,10 @@ class ContextualHints {
     this.ONE_STRIKE = 1;
     this.TWO_STRIKE = 2;
     this.THREE_STRIKE = 3;
+    this.NO_BALL = 0;
+    this.ONE_BALL = 1;
+    this.TWO_BAll = 2;
+    this.THREE_BALL = 3;
     this.RESTART = "1";
     this.GAVE_OVER = "2";
     this.GivePlayerHint = GivePlayerHint;
@@ -50,29 +54,29 @@ class ContextualHints {
   getContextualHints() {
     if (this.NumOfSamePosition === this.NO_STRIKE) {
       switch (this.HowManyEqualNum()) {
-        case 0:
+        case this.NO_BALL:
           MissionUtils.Console.print("낫싱");
           break;
-        case 1:
+        case this.ONE_BALL:
           MissionUtils.Console.print("1볼");
           break;
-        case 2:
+        case this.TWO_BAll:
           MissionUtils.Console.print("2볼");
           break;
-        case 3:
+        case this.THREE_BALL:
           MissionUtils.Console.print("3볼");
           break;
       }
     }
     if (this.NumOfSamePosition === this.ONE_STRIKE) {
       switch (this.HowManyEqualNum() - this.ONE_STRIKE) {
-        case 0:
+        case this.NO_BALL:
           MissionUtils.Console.print("1스트라이크");
           break;
-        case 1:
+        case this.ONE_BALL:
           MissionUtils.Console.print("1볼 1스트라이크");
           break;
-        case 2:
+        case this.TWO_BAll:
           MissionUtils.Console.print("2볼 1스트라이크");
           break;
       }
