@@ -1,5 +1,12 @@
 const {Console, Random} = require("@woowacourse/mission-utils");
 
+const messages = {
+  start : '숫자 야구 게임을 시작합니다.',
+  input : '숫자를 입력해 주세요 : ',
+  gameover : '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  option : '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+}
+
 class App {
   constructor(){
     this.NUMBER_LENGTH = 3;
@@ -21,7 +28,7 @@ class App {
   }
 
   play(){
-    Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print(messages.start);
     this.initGame();
   }
 
@@ -41,7 +48,7 @@ class App {
   }
 
   startASet(computer){
-    Console.readLine("숫자를 입력해 주세요 : ", (player)=>{
+    Console.readLine( messages.input , (player)=>{
       if(!this.isVaildPlayer(player)) throw 'player error'
       this.playASet(player, computer);
     })
@@ -102,8 +109,8 @@ class App {
   }
 
   selectOptions(){
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.print(messages.gameover);
+    Console.print(messages.option);
 
     Console.readLine("",(option)=>{
       if(!this.isVaildOption(option)) throw 'option error'
