@@ -14,6 +14,8 @@ const {
   END_VALUE,
   START_NUMBER,
   END_NUMBER,
+  MAX_CORRECT,
+  MIN_CORRECT,
 } = require("./Constants.js");
 const { NUMBER_ONE_TO_NINE } = require("./RegExpress.js");
 
@@ -159,4 +161,8 @@ module.exports = {
   getUserNumber,
   setUserInput,
   validateUserNumber,
+  countStrikeAndBall,
+  isUserWin,
+  printGameResultMessage,
+  printMessage,
 };
