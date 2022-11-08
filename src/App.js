@@ -14,12 +14,10 @@ class App {
     this.computerNumber = "";
     while (this.computerNumber.length != 3) {
       const RANDOM_NUMBER = MissionUtils.Random.pickNumberInRange(1, 9);
-      MissionUtils.Console.print(RANDOM_NUMBER);
       if (!this.computerNumber.includes(RANDOM_NUMBER)) {
         this.computerNumber += `${RANDOM_NUMBER}`;
       }
     }
-    MissionUtils.Console.print(this.computerNumber);
     this.computerNumberArr = this.computerNumber
       .toString()
       .split("")
@@ -28,7 +26,6 @@ class App {
 
   userInputMessage() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
-      MissionUtils.Console.print(userInput);
       this.checkInputError(userInput);
     });
   }

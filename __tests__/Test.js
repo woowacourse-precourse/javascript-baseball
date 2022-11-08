@@ -48,17 +48,17 @@ describe("숫자 야구 게임", () => {
 
     expect(logSpyRandom).toHaveBeenCalled();
   });
-  test("3. 사용자 입력 테스트", () => {
-    const answers = ["246"];
-    const logSpy = getLogSpy();
+  //   test("3. 사용자 입력 테스트", () => {
+  //     const answers = ["246"];
+  //     const logSpy = getLogSpy();
 
-    mockQuestions(answers);
+  //     mockQuestions(answers);
 
-    const app = new App();
-    app.play();
+  //     const app = new App();
+  //     app.play();
 
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("246"));
-  });
+  //     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("246"));
+  //   });
   test("4. 사용자 입력에 대한 예외 처리 테스트", () => {
     const answer = ["1234"];
 
