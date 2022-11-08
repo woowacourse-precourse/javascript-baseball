@@ -46,10 +46,51 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+});
 
+describe("사용자 입력 예외 테스트", () => {
   test("예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력에 중복된 숫자가 있는 예외 테스트", () => {
+    const randoms = [1, 4, 3];
+    const answers = ["122"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력에 0이 포함된 예외 테스트", () => {
+    const randoms = [1, 4, 3];
+    const answers = ["903"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("입력이 숫자가 아닌 예외 테스트", () => {
+    const randoms = [1, 4, 3];
+    const answers = ["abc"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
