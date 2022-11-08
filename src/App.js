@@ -60,7 +60,6 @@ class App {
   }
 
   getScore(computerNumber, userNumber) {
-    console.log(computerNumber, userNumber);
     const score = [0, 0];
 
     for (let i = 0; i < 3; i++) {
