@@ -30,6 +30,14 @@ function isNothing(gameNumber, guessNumber) {
   return false;
 }
 
+function findStrike(gameNumber, guessNumber) {
+  let strikes = 0;
+  guessNumber.forEach((digit) => {
+    if (digit == gameNumber[guessNumber.indexOf(digit)]) strikes++;
+  });
+  return strikes;
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -51,4 +59,5 @@ module.exports = {
   throwGuessException,
   convertToNumberArray,
   isNothing,
+  findStrike,
 };

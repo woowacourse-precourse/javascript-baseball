@@ -2,6 +2,7 @@ const {
   throwGuessException,
   convertToNumberArray,
   isNothing,
+  findStrike,
 } = require("../src/App");
 
 describe("추측 숫자를 문자열로 입력받으면 숫자배열로 변환해주는 기능", () => {
@@ -32,5 +33,21 @@ describe("포함된 숫자 유무 판별", () => {
   });
   test("case3", () => {
     expect(isNothing(gameNumber, [6, 8, 4])).toBe(true);
+  });
+});
+
+describe("포함된 숫자가 있다면 인덱스가 일치하는지 찾아 스트라이크 수 반환", () => {
+  const gameNumber = [1, 2, 3];
+  test("case1", () => {
+    expect(findStrike(gameNumber, [1, 3, 2])).toBe(1);
+  });
+  test("case2", () => {
+    expect(findStrike(gameNumber, [5, 4, 9])).toBe(0);
+  });
+  test("case3", () => {
+    expect(findStrike(gameNumber, [7, 1, 3])).toBe(1);
+  });
+  test("case4", () => {
+    expect(findStrike(gameNumber, [1, 2, 3])).toBe(3);
   });
 });
