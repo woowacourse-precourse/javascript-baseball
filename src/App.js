@@ -1,7 +1,16 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const { Console, Random } = MissionUtils;
-// const MESSAGE = require("./constants");
-// const { START, INPUT, THREE_STRIKE, BALL, STRIKE, ASK_CONTINUE } = MESSAGE;
+const { Console, Random } = require("@woowacourse/mission-utils");
+const {
+    START,
+    INPUT,
+    THREE_STRIKE,
+    BALL,
+    STRIKE,
+    ASK_CONTINUE,
+    ISNOTNUMBER,
+    ISDUPLICATED,
+    ISNOTVALIDNUMBER,
+    NOTHING,
+} = require("./Message");
 
 class App {
     constructor() {
@@ -9,6 +18,7 @@ class App {
     }
 
     play() {
+        this.printMessage(START);
         this.startGame();
     }
 
@@ -30,7 +40,7 @@ class App {
     }
 
     isNotDuplicated(input) {
-        return new Set(input).size !== 3;
+        return new Set(input).size === 3;
     }
 
     printMessage(message) {
@@ -38,21 +48,18 @@ class App {
     }
 
     startGame() {
-        this.printMessage("숫자 야구 게임을 시작합니다");
         this.quizNumber = this.makeQuizNumber();
         this.inputNumber();
     }
 
     inputNumber() {
-        Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+        Console.readLine(INPUT, (answer) => {
             if (!this.isNumber(answer)) {
-                throw new Error("숫자를 입력해주세요.");
-            } else if (!this.isNotDuplicated(answer)) {
-                throw new Error("중복되지 않은 수를 입력해주세요.");
+                throw new Error(ISNOTNUMBER);
             } else if (!this.isValidNum(answer)) {
-                throw new Error(
-                    "3자리수 이며, 시작하는 수는 0이 될 수 없습니다."
-                );
+                throw new Error(ISNOTVALIDNUMBER);
+            } else if (!this.isNotDuplicated(answer)) {
+                throw new Error(ISDUPLICATED);
             }
             this.checkScore(this.quizNumber, answer);
         });
@@ -89,19 +96,20 @@ class App {
 
     printStrikeBall(score) {
         if (score.strike === 3) {
-            this.printMessage("3개의 숫자를 모두 맞히셨습니다! 게임 종료!");
+            this.printMessage(score.strike + STRIKE);
+            this.printMessage(THREE_STRIKE);
             this.askContinue();
         } else if (score.strike > 0 && score.ball > 0) {
-            Console.print(`${score.ball}볼 ${score.strike}스트라이크`);
+            Console.print(score.ball + BALL + " " + score.strike + STRIKE);
             this.inputNumber();
         } else if (score.strike === 0 && score.ball === 0) {
-            Console.print(`낫싱`);
+            Console.print(NOTHING);
             this.inputNumber();
         } else if (score.strike > 0) {
-            Console.print(`${score.strike}스트라이크`);
+            Console.print(score.strike + STRIKE);
             this.inputNumber();
         } else if (score.ball > 0) {
-            Console.print(`${score.ball}볼`);
+            Console.print(score.ball + BALL);
             this.inputNumber();
         }
     }
@@ -111,16 +119,13 @@ class App {
     }
 
     askContinue() {
-        Console.readLine(
-            "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n",
-            (answer) => {
-                if (answer == 1) {
-                    this.startGame();
-                } else if (answer == 2) {
-                    this.closeGame();
-                }
+        Console.readLine(ASK_CONTINUE, (answer) => {
+            if (answer == 1) {
+                this.startGame();
+            } else if (answer == 2) {
+                this.closeGame();
             }
-        );
+        });
     }
 }
 
