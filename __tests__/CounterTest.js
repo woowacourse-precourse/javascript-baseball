@@ -1,4 +1,9 @@
 const Counter = require("../src/Counter");
+const { print, close, readLine, pickNumberInRange } = require("../src/Utils");
+
+afterEach(() => {
+  close();
+});
 
 describe("볼과 스트라이크 개수를 구하는 class Counter 테스트", () => {
   test("0스트라이크 1볼", () => {
