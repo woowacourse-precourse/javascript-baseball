@@ -1,8 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+
 class App {
   constructor() {
     this.printGreeting();
-    this.makeRandomNumber();
   }
 
   printGreeting() {
@@ -15,6 +15,14 @@ class App {
       randomNumSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
     return Array.from(randomNumSet);
+  }
+
+  getUserNumber() {
+    let userNumber = [];
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
+      userNumber = answer.split('');
+    });
+    return userNumber;
   }
 
   play() {}
