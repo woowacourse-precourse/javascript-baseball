@@ -29,9 +29,8 @@ const ballManager = (computerNumber, userNumber) => {
         MissionUtils.Console.print('3스트라이크');
         return askReplay();
     }
-    const computerNumbersArray = computerNumber.split('');
-    const userNumbersArray = userNumber.split('');
-    const { ball, strike } = countBallStrike(computerNumbersArray, userNumbersArray);
+
+    const { ball, strike } = countBallStrike(computerNumber, userNumber);
     MissionUtils.Console.print(makeBallStrikeText(ball, strike));
     playGame(computerNumber);
 }

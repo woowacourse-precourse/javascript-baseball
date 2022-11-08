@@ -12,11 +12,13 @@ const generateRandomBallNumber = () => {
     return computer.join('');
 }
 
-const countBallStrike = (computerNumbersArray, userNumbersArray) => {
+const countBallStrike = (computerNumber, userNumber) => {
     const count = {
         ball: 0,
         strike: 0,
     };
+    const computerNumbersArray = computerNumber.split('');
+    const userNumbersArray = userNumber.split('');
     for (let computerIndex = 0; computerIndex < 3; computerIndex++) {
         for (let userIndex = 0; userIndex < 3; userIndex++) {
             countAfterCompareNumbers(count, computerNumbersArray, computerIndex, userNumbersArray, userIndex);
