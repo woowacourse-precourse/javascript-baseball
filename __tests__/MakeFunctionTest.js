@@ -1,5 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { makeRandomNumber, makeBallStrikeCount } = require("../src/Make");
+const {
+  makeRandomNumber,
+  makeBallStrikeCount,
+  makeHint,
+} = require("../src/Make");
 
 describe("makeRandomNumber 함수 테스트", () => {
   test("서로다른 3개의 숫자가 만들어 지는지 여부", () => {
@@ -15,7 +19,7 @@ describe("makeRandomNumber 함수 테스트", () => {
   });
 });
 
-describe("makeBallStrikeCount 함수 테스트", () => {
+describe("checkBallStrikeCount 함수 테스트", () => {
   test("임의수 테스트 1", () => {
     expect(makeBallStrikeCount("123", [1, 4, 2])).toEqual({
       strike: 1,
@@ -27,5 +31,20 @@ describe("makeBallStrikeCount 함수 테스트", () => {
       strike: 1,
       ball: 2,
     });
+  });
+});
+
+describe("makeHint 함수 테스트", () => {
+  test("아무것도 일치하지 않는 경우", () => {
+    expect(makeHint(0, 0)).toEqual("낫싱");
+  });
+  test("스트라이크만 있는경우", () => {
+    expect(makeHint(2, 0)).toEqual("2스트라이크");
+  });
+  test("볼만 있는경우", () => {
+    expect(makeHint(0, 2)).toEqual("2볼");
+  });
+  test("스트라이크 볼 모두 있는경우", () => {
+    expect(makeHint(1, 1)).toEqual("1볼 1스트라이크");
   });
 });
