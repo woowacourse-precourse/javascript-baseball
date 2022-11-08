@@ -1,4 +1,3 @@
-const MissionUtils = require("@woowacourse/mission-utils");
 const { createComputerNumber } = require("./logic/ComputerNumber");
 const {
   countStrikeAndBall,
@@ -18,7 +17,6 @@ const {
   THROW_ERROR,
 } = require("./utils/Constants");
 const {
-  getUserNumber,
   setUserInput,
   printMessage,
   deInitializationGame,
