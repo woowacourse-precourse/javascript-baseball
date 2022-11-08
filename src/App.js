@@ -2,30 +2,37 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   comArr = [];
-  pushUniqueNumber(arr, num) {
+  pushUniqueNumber(num) {
     num = String(num);
-    if (!arr.includes(num)) {
-      return arr.push(num);
+    if (!this.comArr.includes(num)) {
+      return this.comArr.push(num);
     }
   }
 
   getRandomComputerArr() {
     while (this.comArr.length < 3) {
       let randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      this.pushUniqueNumber(this.comArr, randomNumber);
+      this.pushUniqueNumber(randomNumber);
     }
     return this.comArr;
   }
 
   pushUserInput(arr, num) {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < num.length; i++) {
       arr.push(num[i]);
+    }
+  }
+
+  checkUserInputError(answer) {
+    if (answer.length !== 3 || answer.includes("0") || isNaN(answer)) {
+      throw new Error("1부터 9까지 숫자 3개를 입력하세요");
     }
   }
 
   responseUserInput() {
     let userInputArr = [];
     MissionUtils.Console.readLine("숫자를 입력하세요: ", (answer) => {
+      this.checkUserInputError(answer);
       this.pushUserInput(userInputArr, answer);
       const countedStrikeArr = this.countStrike(userInputArr);
       const countedBallArr = this.countBall(userInputArr, countedStrikeArr);
