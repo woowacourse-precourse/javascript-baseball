@@ -1,3 +1,8 @@
+const isNumber = require("../src/utils/isNumber.js");
+const isCompare = require("../src/utils/isCompare.js");
+const isOneToNine = require("../src/utils/isOneToNine.js");
+const isThree = require("../src/utils/isThree.js");
+const isAllDifferent = require("../src/utils/isAllDifferent.js");
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
@@ -58,5 +63,42 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+});
+
+describe("숫자 야구 게임", () => {
+  test("입력값 검증 테스트 - 정수 판별", () => {
+    expect(isNumber("123")).toBe(true);
+    expect(isNumber("312")).toBe(true);
+    expect(isNumber("1a23")).toBe(false);
+    expect(isNumber("a13")).toBe(false);
+    expect(isNumber("952")).toBe(true);
+  });
+
+  test("입력값 검증 테스트 - 1~9 판별", () => {
+    expect(isOneToNine("123")).toBe(true);
+    expect(isOneToNine("892")).toBe(true);
+    expect(isOneToNine("012")).toBe(false);
+  });
+
+  test("입력값 검증 테스트 - 3개 인지 판별", () => {
+    expect(isThree("123")).toBe(true);
+    expect(isThree("892")).toBe(true);
+    expect(isThree("2456")).toBe(false);
+    expect(isThree("56")).toBe(false);
+  });
+
+  test("입력값 검증 테스트 - 서로 다른 숫자인지 판별", () => {
+    expect(isAllDifferent("123")).toBe(true);
+    expect(isAllDifferent("892")).toBe(true);
+    expect(isAllDifferent("244")).toBe(false);
+    expect(isAllDifferent("566")).toBe(false);
+  });
+
+  test("볼 스트라이크 출력 함수 테스트", () => {
+    expect(isCompare([1, 2, 3], [2, 3, 1])).toEqual([0, 3]);
+    expect(isCompare([4, 5, 6], [7, 8, 9])).toEqual([0, 0]);
+    expect(isCompare([3, 4, 5], [3, 4, 5])).toEqual([3, 0]);
+    expect(isCompare([6, 7, 3], [3, 5, 9])).toEqual([0, 1]);
   });
 });
