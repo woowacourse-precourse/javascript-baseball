@@ -8,3 +8,7 @@ const createAnswerNumList = () => {
 }
 
 module.exports = App;
+const is3Letters = (numStr) => {
+  return numStr.length === 3
+}
+
