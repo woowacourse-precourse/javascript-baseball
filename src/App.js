@@ -1,7 +1,14 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console } = MissionUtils;
 class App {
-  play() {}
+  play() {
+    this.printStartMessage();
+    let playStatus = true;
+    while (playStatus) {
+      this.gameStart();
+      playStatus = this.restartGame();
+    }
+  }
 
   gameStart() {
     const answer = this.getAnswerNumber();
