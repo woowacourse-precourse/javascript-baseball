@@ -50,6 +50,7 @@ class App {
       }
 
       const { ballCount, strikeCount } = this.compare(userInput.split(''));
+      this.showResult(ballCount, strikeCount);
     });
   }
 
@@ -70,6 +71,27 @@ class App {
     });
 
     return { ballCount, strikeCount };
+  }
+
+  showResult(ballCount, strikeCount) {
+    if (!ballCount && !strikeCount) {
+      Console.print(HINT_WORD.NOTHING);
+      return;
+    }
+
+    if (!ballCount) {
+      Console.print(`${strikeCount}${HINT_WORD.STRIKE}`);
+      return;
+    }
+
+    if (!strikeCount) {
+      Console.print(`${ballCount}${HINT_WORD.BALL}`);
+      return;
+    }
+
+    Console.print(
+      `${ballCount}${HINT_WORD.BALL} ${strikeCount}${HINT_WORD.STRIKE}`
+    );
   }
 
   isError(userInput) {
