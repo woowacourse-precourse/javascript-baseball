@@ -72,4 +72,20 @@ function showNum(obj) { // strike 리턴 함수
 }
 
 
+function endLine() {
+  Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (answer) => {
+      const game = Number(answer);
+      if (game === 1) { // 재시작
+        const game = new App();
+        game.play();
+      }
+      else if (game === 2) { // 종료
+        Console.close();
+      }
+    }
+  );
+}
+
 module.exports = App;
