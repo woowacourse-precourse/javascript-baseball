@@ -2,6 +2,7 @@ const { print, close, readLine, pickNumberInRange } = require("./Utils");
 const ExceptionCheck = require("./ExceptionCheck");
 const { GAME_MSG, BASEBALL_MSG } = require("./Message");
 const Counter = require("./Counter");
+const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH, RESTART_INPUT_NUM, END_INPUT_NUM } = require("./Condition");
 
 class App {
 
@@ -20,8 +21,8 @@ class App {
 
   createRandomNum() {
     let computerRandomNums = new Set();
-    while (computerRandomNums.size < 3) {
-      computerRandomNums.add(pickNumberInRange(1, 9));
+    while (computerRandomNums.size < COMPUTER_NUM_LENGTH) {
+      computerRandomNums.add(pickNumberInRange(MIN_UUM_RANGE, MAX_NUM_RANGE));
     }
     return this.#computerNums = [...computerRandomNums].join('');
   }
@@ -34,10 +35,13 @@ class App {
 
   userInputAnalysis(userInput) {
     const exceptionCheck = new ExceptionCheck();
-    if (exceptionCheck.userInputCheck(userInput)) {
-      this.#userInputNums = userInput;
-      this.baseBall();
-    }
+    exceptionCheck.userInputCheck(userInput);
+    this.setUserInput(userInput);
+  }
+
+  setUserInput(userInput) {
+    this.#userInputNums = userInput;
+    this.baseBall();
   }
 
   baseBall() {
@@ -45,38 +49,41 @@ class App {
     const ball = count.ball(this.#userInputNums, this.#computerNums);
     const strike = count.strike(this.#userInputNums, this.#computerNums);
     this.countPrinter(ball, strike);
-    if (strike === 3) {
+    if (strike === COMPUTER_NUM_LENGTH) {
       this.win();
     }
     this.getAnswer();
   }
 
+
   countPrinter(ball, strike) {
     if (ball === 0 && strike !== 0) {
-      print(`${strike}스트라이크`);
+      print(`${strike}${BASEBALL_MSG.STRIKE}`);
     } else if (ball !== 0 && strike === 0) {
-      print(`${ball}볼`);
-    } else if (ball === 0 && ball === 0) {
-      print('낫싱');
+      print(`${ball}${BASEBALL_MSG.BALL}`);
+    } else if (ball === 0 && strike === 0) {
+      print(BASEBALL_MSG.NOTHING);
     } else {
-      print(`${ball}볼 ${strike}스트라이크`);
+      print(`${ball}${BASEBALL_MSG.BALL} ${strike}${BASEBALL_MSG.STRIKE}`);
     }
   }
 
   win() {
-    print(`3스트라이크! 정답은 : ${this.#computerNums} 입니다`);
+    print(GAME_MSG.WIN);
     this.restartOrEnd();
   }
 
   restartOrEnd() {
     readLine(GAME_MSG.RESTART_ASK, (answer) => {
-      if (answer == 1) {
+      const exceptionCheck = new ExceptionCheck();
+      // exceptionCheck.restartInputCheck(answer);
+      if (answer == RESTART_INPUT_NUM) {
         app.play();
-      } else if (answer == 2) {
+      }
+      if (answer == END_INPUT_NUM) {
         print(GAME_MSG.END);
         close();
       } else {
-        print('1 과 2 둘중 하나만 선택하세요');
         this.restartOrEnd();
       }
     });
