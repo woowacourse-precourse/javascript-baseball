@@ -1,4 +1,4 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const {Console, Random} = require("@woowacourse/mission-utils");
 
 class App {
   constructor(){
@@ -8,9 +8,9 @@ class App {
   isVaildPlayer(player){
     const test = [...player];
     return (
-      (player.length <= this.NUMBER_LENGTH) &&     // 입력 길이 초과 확인
-      (/^[0-9]+$/.test(player)) &&                 // 숫자로 이루어져 있는지 확인
-      (test.length === [...new Set(test)].length)  // 중복 숫자 있는지 확인
+      (player.length <= this.NUMBER_LENGTH) &&  
+      (/^[0-9]+$/.test(player)) &&     
+      (test.length === [...new Set(test)].length)
     );
   }
 
@@ -21,7 +21,7 @@ class App {
   }
 
   play(){
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    Console.print("숫자 야구 게임을 시작합니다.");
     this.initGame();
   }
 
@@ -34,14 +34,14 @@ class App {
     const computer = new Set([]);
     let number;
     while([...computer].length < this.NUMBER_LENGTH){
-      number = MissionUtils.Random.pickNumberInRange(1,9);
+      number = Random.pickNumberInRange(1,9);
       computer.add(String(number));
     }
     return [...computer];
   }
 
   startASet(computer){
-    MissionUtils.Console.readLine("숫자를 입력해 주세요 : ", (player)=>{
+    Console.readLine("숫자를 입력해 주세요 : ", (player)=>{
       if(!this.isVaildPlayer(player)) throw 'player error'
       this.playASet(player, computer);
     })
@@ -59,8 +59,8 @@ class App {
   }
 
   countStrike(player, computer){
-    const strike = computer.reduce((count, computer_number, index)=>(
-      count + (computer_number === player[index])
+    const strike = computer.reduce((strike, computer_number, index)=>(
+      strike + (computer_number === player[index])
     ), 0)
     return strike;
   }
@@ -74,7 +74,7 @@ class App {
 
   showResult(ball, strike){
     if (ball + strike === 0){
-      MissionUtils.Console.print('낫싱');
+      Console.print('낫싱');
       return;
     }
     let resultPrint = '';
@@ -84,7 +84,7 @@ class App {
     if (strike){
       resultPrint += `${strike}스트라이크`
     }
-    MissionUtils.Console.print(resultPrint);
+    Console.print(resultPrint);
   }
 
   playerWin(strike){
@@ -96,16 +96,16 @@ class App {
       this.initGame();
     }
     else{
-      MissionUtils.Console.close();
+      Console.close();
       return;
     }
   }
 
   selectOptions(){
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
 
-    MissionUtils.Console.readLine("",(option)=>{
+    Console.readLine("",(option)=>{
       if(!this.isVaildOption(option)) throw 'option error'
       this.quitOrRestart(option);
     });
