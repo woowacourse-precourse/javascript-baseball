@@ -6,6 +6,12 @@ function validateInputValue(userInput) {
     return numberSet.size !== number.length ? true : false;
   }
 
+  function hasZero(number) {
+    if (number.includes("0")) {
+      return true;
+    }
+    return false;
+  }
 
   if (isNaN(Number(userInput))) {
     return false;
@@ -16,6 +22,10 @@ function validateInputValue(userInput) {
   if (hasDuplicateNumber(userInput)) {
     return false;
   }
+  if (hasZero(userInput)) {
+    return false;
+  }
+
   return true;
 }
 
