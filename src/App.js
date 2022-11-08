@@ -24,45 +24,70 @@ function inputAnswer(COM_NUMBER) {
     } 
     var input_set = new Set(input_array);
     if(exception(input, input_set)) {
-    answercheck(input_array, COM_NUMBER)}
+    answerCheck(input, COM_NUMBER)}
   })
 }
 
-function answerCheck (input_array, COM_NUMBER) {
+function answerCheck (input, COM_NUMBER) {
   var strike = 0
   var ball = 0
   for (let i = 0; i<3 ; i++) {
-    if(input_array[i] == COM_NUMBER[i]) {
-      strike++;
-      continue}
-    if(COM_NUMBER.includes(input_array[i])) {
-      ball++
-      continue
-    }
+    if(input[i] == COM_NUMBER[i]) {
+      strike++;} else if(COM_NUMBER.includes(Number(input[i])))
+      {ball++}
   }
   resultprint(COM_NUMBER, strike, ball)
 }
 function resultprint(COM_NUMBER, strike, ball) {
-  var result = ''
   if(strike==3){
-    result += '정답입니다!';
-    return newGame
-    }
-  if(strike==0 && ball==0){result += '낫싱'}
-  if(ball>0){result += `${ball}볼`}
-  if(strike>0){result = result + " " + `${strike}스트라이크`}
-  MissionUtils.Console.print(result)
+    MissionUtils.Console.print('3스트라이크')
+    MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+    return newGame()
+  }
+  if(strike==0 && ball==0){
+    MissionUtils.Console.print('낫싱')
+    return inputAnswer(COM_NUMBER)
+  }
+  if(ball>0 && strike == 0){
+    MissionUtils.Console.print(`${ball}볼 `)
+    return inputAnswer(COM_NUMBER)
+  }
+  if(strike>0 && ball == 0){
+    MissionUtils.Console.print(`${strike}스트라이크`)
+    return inputAnswer(COM_NUMBER)
+  }
+  if(strike>0 && ball>0) {
+    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
+  return inputAnswer(COM_NUMBER)
+
+  }
   return inputAnswer(COM_NUMBER)
 }
-function newGame (){
+function newGame() {
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (input)=>{
+    if(input == 1) {
+      return baseBall()
+    }
+    if(input == 2) {
+      MissionUtils.Console.close()
+    } else {
+      throw '올바른 숫자를 입력해주세요'
+    }
+  })
+
+
+
 
 }
-function exception(input) {
-  if (input !== /[1-9]{3}/) {
+function exception(input, input_set) {
+  // if (input !== /[1-9]{3}/) {
+  //   throw '3자리 숫자를 입력해주세요'
+  // }
+  if (input.length !== 3) {
     throw '3자리 숫자를 입력해주세요'
   }
   if (input_set.size !== 3){
-    throw '각자 다른 숫자를 입력해 주세요'
+    throw '각자 다른 숫자를 입력해주세요'
   }
   return true
 }
