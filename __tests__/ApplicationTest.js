@@ -98,4 +98,17 @@ describe("숫자 야구 게임", () => {
       app.play();
     }).toThrow("중복되는 숫자를 제외해주세요.");
   });
+
+  test("예외 테스트 - 게임 재시작 입력 숫자", () => {
+    const randoms = [1, 2, 3];
+    const answers = ["123", "1a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("1 또는 2가 입력되지 않았습니다.");
+  });
 });
