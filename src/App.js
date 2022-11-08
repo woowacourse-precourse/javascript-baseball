@@ -1,14 +1,16 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 const Random = MissionUtils.Random;
+
+const {
+  DUPLICATE_NUMBER,
+  IS_NOT_NUM,
+  IS_NOT_3_LENGTH,
+  IS_NOT_1_LENGTH,
+  IS_NOT_1_2,
+} = require("./Error");
+
 class App {
-  constructor() {
-    this.randomNumber = [];
-    this.userInput = "";
-  }
-  /**
-   * 서로 다른 3 수
-   */
   createRandomNumber() {
     this.randomNumber = [...Array(3)].map(() => Random.pickNumberInRange(1, 9));
     while (!this.handleDuplicateNumber(this.randomNumber)) {
@@ -20,7 +22,7 @@ class App {
   }
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
-      if (!this.handleDuplicateNumber(ans)) throw "exception";
+      if (!this.handleDuplicateNumber(ans)) throw new Error(DUPLICATE_NUMBER);
       if (this.handleUserNumException(ans)) {
         this.userInput = ans.split("").map((v) => +v);
         this.chekUserInput();
@@ -42,15 +44,15 @@ class App {
     if (this.strikeCount === 3) {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       Console.readLine(
-        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ",
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
         (ans) => {
           ans = this.handleGameEndException(ans);
           if (ans === 1) {
-            this.play();
+            this.createRandomNumber();
           } else if (ans === 2) {
             Console.print("게임 종료");
             Console.close();
-          } //1 or 2 제외 다른 거 입력했을 때 생각.
+          }
         }
       );
     } else {
@@ -64,28 +66,19 @@ class App {
     if (ballString.length === 0 && strikeString.length === 0) return "낫싱";
     return ballString + strikeString;
   }
-  /**
-   * 사용자 입력이 3자리이고, 모두 숫자일때(아스키코드)
-   * 정답 맞췄을 때, 입력 숫자가 1자리이고, 숫자일 때
-   * throw 후 애플리케이션 종료
-   */
+
   handleGameEndException(ans) {
-    if (ans.length !== 1) throw "exception1";
     let ansAscii = ans.charCodeAt(0);
-    if (ansAscii === 49 || ansAscii === 50) {
-      return Number(ans);
-    } else {
-      throw "exception1";
-    }
+    if (ans.length !== 1) throw new Error(IS_NOT_1_LENGTH);
+    if (ansAscii === 49 || ansAscii === 50) return Number(ans);
+    else throw new Error(IS_NOT_1_2);
   }
-  //depth 확인
+
   handleUserNumException(ans) {
-    if (ans.length !== 3) throw "exception2";
-    else {
-      for (let i = 0; i < ans.length; i++) {
-        let ansAscii = ans.charCodeAt(i);
-        if (ansAscii < 49 || ansAscii > 57) throw "exception3";
-      }
+    if (ans.length !== 3) throw new Error(IS_NOT_3_LENGTH);
+    for (let i = 0; i < ans.length; i++) {
+      let ansAscii = ans.charCodeAt(i);
+      if (ansAscii < 49 || ansAscii > 57) throw new Error(IS_NOT_NUM);
     }
     return true;
   }
@@ -103,6 +96,4 @@ class App {
 const app = new App();
 app.play();
 
-// MissionUtils.Console.close();
-//console close 시점 고려
 module.exports = App;
