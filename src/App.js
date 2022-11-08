@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 class App {
     getScore(computer, user) {
         let strike = 0;
