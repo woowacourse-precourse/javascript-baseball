@@ -21,7 +21,4 @@ const REPLAY_NUMBER = Object.freeze({
   EXIT: '2',
 });
 
-exports.GAME_NUMBER = GAME_NUMBER;
-exports.PICK_NUMBER = PICK_NUMBER;
-exports.REPLAY_NUMBER = REPLAY_NUMBER;
-exports.BOOLEAN = BOOLEAN;
+module.exports = { GAME_NUMBER, PICK_NUMBER, REPLAY_NUMBER, BOOLEAN };

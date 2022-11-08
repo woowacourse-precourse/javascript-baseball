@@ -1,22 +1,20 @@
 const { COUNT_MESSAGE } = require('../constants/system message');
 const { GAME_NUMBER } = require('../constants/game numbers');
 const { ErrorCheck } = require('./ErrorCheck');
+const isEqual = require('./Equal');
 
 class Game {
-  static isEqual(elemA, elemB) {
-    return elemA === elemB;
-  }
-
   static digitizeUserInput(userInput) {
     return [...userInput].map((num) => +num);
   }
 
   static getStrikeBallCount(baseballNumber, userInput) {
     const userInputNums = this.digitizeUserInput(userInput);
-    let [strikeCount, ballCount] = [GAME_NUMBER.INIT, GAME_NUMBER.INIT];
+    let strikeCount = GAME_NUMBER.INIT;
+    let ballCount = GAME_NUMBER.INIT;
 
     baseballNumber.forEach((num, index) => {
-      if (this.isEqual(num, userInputNums[index])) {
+      if (isEqual(num, userInputNums[index])) {
         strikeCount++;
       } else if (userInputNums.includes(num)) {
         ballCount++;

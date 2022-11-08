@@ -1,12 +1,13 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { Computer } = require('./Computer');
 const { ErrorCheck } = require('./ErrorCheck');
 const { Game } = require('./Game');
+const { Computer } = require('./Computer');
 const {
   SYSTEM_MESSAGE,
   COUNT_MESSAGE,
 } = require('../constants/system message');
 const { REPLAY_NUMBER, BOOLEAN } = require('../constants/game numbers');
+const isEqual = require('./Equal');
 
 class Baseball {
   constructor() {
@@ -46,11 +47,11 @@ class Baseball {
 
     Console.print(strikeBallMessage);
 
-    if (!Game.isEqual(strikeBallMessage, COUNT_MESSAGE.CORRECT)) {
-      this.getUserNumber();
-    } else {
+    if (isEqual(strikeBallMessage, COUNT_MESSAGE.CORRECT)) {
       Console.print(SYSTEM_MESSAGE.END);
       this.getReplayNumber();
+    } else {
+      this.getUserNumber();
     }
   }
 
@@ -63,7 +64,7 @@ class Baseball {
   isReplay(replayNumber) {
     ErrorCheck.replayError(replayNumber);
 
-    if (Game.isEqual(replayNumber, REPLAY_NUMBER.KEEP_PLAY)) {
+    if (isEqual(replayNumber, REPLAY_NUMBER.KEEP_PLAY)) {
       this.playGame();
     } else {
       Console.close();

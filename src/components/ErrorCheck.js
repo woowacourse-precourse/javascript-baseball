@@ -1,13 +1,14 @@
 const { GAME_NUMBER, REPLAY_NUMBER } = require('../constants/game numbers');
 const { ERROR_MESSAGE } = require('../constants/error message');
+const isEqual = require('./Equal');
 
 class ErrorCheck {
   static isInvalidInputLength(userInput) {
-    return userInput.length !== GAME_NUMBER.CORRECT;
+    return !isEqual(userInput.length, GAME_NUMBER.CORRECT);
   }
 
   static hasDuplication(userInput) {
-    return new Set(userInput).size !== GAME_NUMBER.CORRECT;
+    return !isEqual(new Set(userInput).size, GAME_NUMBER.CORRECT);
   }
 
   static notOnlyConsistOfNums(userInput) {
@@ -29,7 +30,8 @@ class ErrorCheck {
 
   static isReplayError(userInput) {
     return (
-      userInput !== REPLAY_NUMBER.KEEP_PLAY && userInput !== REPLAY_NUMBER.EXIT
+      !isEqual(userInput, REPLAY_NUMBER.KEEP_PLAY) &&
+      !isEqual(userInput, REPLAY_NUMBER.EXIT)
     );
   }
 
@@ -40,7 +42,10 @@ class ErrorCheck {
   }
 
   static isNothing(strikeCount, ballCount) {
-    return strikeCount === GAME_NUMBER.INIT && ballCount === GAME_NUMBER.INIT;
+    return (
+      isEqual(strikeCount, GAME_NUMBER.INIT) &&
+      isEqual(ballCount, GAME_NUMBER.INIT)
+    );
   }
 }
 

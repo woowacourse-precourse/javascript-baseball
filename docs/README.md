@@ -52,10 +52,10 @@
 
 ## 테스트 코드 작성
 
-- [ ] getStrikeBallCount
-- [ ] getStrikeBallMessage
-- [ ] guessError
-- [ ] replayError
+- [x] getStrikeBallCount
+- [x] getStrikeBallMessage
+- [x] guessError
+- [x] replayError
 
 # 💻 순서도
 
