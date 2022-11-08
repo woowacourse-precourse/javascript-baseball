@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   computerRandom() {
-    const computer = MissionUtils.Random.pickNumberInRange(1, 9, 3);
+    const computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
     MissionUtils.Console.close();
     return computer;
   }
