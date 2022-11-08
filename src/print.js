@@ -3,16 +3,16 @@ const constants = require("./data/constants.js");
 
 class GameMessage {
   static start() {
-    MissionUtils.Console.print(constants.GAME_MESSAGE.START);
+    MissionUtils.Console.print(constants.GAME_MESSAGE.start);
   }  
   static gameover() {
-    MissionUtils.Console.print(constants.GAME_MESSAGE.GAMEOVER);
+    MissionUtils.Console.print(constants.GAME_MESSAGE.gameover);
   }
   static result(score) {
     let resultMessage = '';
-    if(score.ball) resultMessage += `${score.ball}${constants.RESULT_COUNT.BALL} `;
-    if(score.strike) resultMessage += `${score.strike}${constants.RESULT_COUNT.STRIKE}`;
-    if(resultMessage === '') resultMessage = constants.RESULT_COUNT.NOTHING;
+    if(score.ball) resultMessage += `${score.ball}${constants.RESULT_COUNT.ball} `;
+    if(score.strike) resultMessage += `${score.strike}${constants.RESULT_COUNT.strike}`;
+    if(resultMessage === '') resultMessage = constants.RESULT_COUNT.nothing;
     MissionUtils.Console.print(resultMessage);
   }
 }
