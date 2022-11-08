@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
+const { MESSAGE, COUNTBOARDRESULT } = require('../src/Const');
 const { endApp } = require('../src/Function');
 const Function = require('../src/Function');
 
@@ -67,6 +68,15 @@ describe('App class 테스트', () => {
     app.countBoard = { strike: 0, ball: 0 };
     app.makeResult();
 
-    expect(logSpy).toHaveBeenCalledWith('낫싱');
+    expect(logSpy).toHaveBeenCalledWith(COUNTBOARDRESULT.NOTHING);
+  });
+
+  test('decideResponse 테스트', () => {
+    const logSpy = getLogSpy();
+    app.countBoard = { strike: 3, ball: 0 };
+    app.decideReprocess();
+    endApp();
+
+    expect(logSpy).toHaveBeenCalledWith(MESSAGE.THREESTRIKE);
   });
 });
