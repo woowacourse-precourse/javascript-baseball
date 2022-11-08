@@ -1,8 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 
 class AutomaticBallGenerator {
-  startNumber = 1;
-  endNumber = 9;
   maxNumberCount = 3;
 
   async execute() {
