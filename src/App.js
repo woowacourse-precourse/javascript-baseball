@@ -1,12 +1,21 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
 
-const INVALID_INPUT_ERR = 'invalid input error';
 const SPACE_BAR = ' ';
 const EMPTY = '';
-const HINT_MSG = {
+const MSG = {
+  startGame: '숫자 야구 게임을 시작합니다.',
+  inputNumber: '숫자를 입력해주세요 : ',
+  endGame: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  reQuestion: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  winGame: '3스트라이크',
   nothing: '낫싱',
-  end: '3스트라이크',
+  invalidInput: '유효하지 않은 입력',
 };
+const REQUESTION_CHOICE = {
+  start: '1',
+  end: '2',
+};
+
 const HINT_UNITS = ['ball', 'strike'];
 const HINT_UNITS_OBJ = {
   ball: '볼',
@@ -15,7 +24,7 @@ const HINT_UNITS_OBJ = {
 
 class App {
   play() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MSG.startGame);
     this.startGame();
   }
 
@@ -40,16 +49,16 @@ class App {
   }
 
   getUserInput(cbFn) {
-    Console.readLine('숫자를 입력해주세요 : ', cbFn.bind(this));
+    Console.readLine(MSG.inputNumber, cbFn.bind(this));
   }
 
   terminate() {
     // 게임을 종료 메시지를 발생시킨다.
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
-      if (answer === '1') {
+    Console.print(MSG.endGame);
+    Console.readLine(MSG.reQuestion, (answer) => {
+      if (answer === REQUESTION_CHOICE.start) {
         return this.startGame();
-      } else if (answer === '2') {
+      } else if (answer === REQUESTION_CHOICE.end) {
         return Console.close();
       }
     });
@@ -93,23 +102,23 @@ class App {
       .join(SPACE_BAR)
       .trim();
 
-    return hintMessage !== EMPTY ? hintMessage : HINT_MSG.nothing;
+    return hintMessage !== EMPTY ? hintMessage : MSG.nothing;
   }
 
   validate(input) {
-    const regExp = new RegExp(/^[1-9]{1,3}$/);
+    const regExp = new RegExp(/^[1-9]{3}$/);
 
     if (regExp.test(input) && !this.isDuplicated(input)) {
       const hintMessage = this.evaluate(input);
       Console.print(hintMessage);
 
-      if (hintMessage === HINT_MSG.end) {
+      if (hintMessage === MSG.winGame) {
         return this.terminate();
       } else {
         return this.getUserInput(this.validate);
       }
     } else {
-      throw new Error(INVALID_INPUT_ERR);
+      throw new Error(MSG.invalidInput);
     }
   }
 }
