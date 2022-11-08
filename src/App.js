@@ -1,5 +1,13 @@
+const BaseballGame = require('./components/BaseballGame');
+
 class App {
-  play() {}
+  constructor() {
+    this.App = App;
+  }
+
+  play() {
+    BaseballGame.startGame();
+  }
 }
 
 module.exports = App;
