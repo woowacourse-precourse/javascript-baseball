@@ -16,7 +16,7 @@ class BaseballGame {
 
   init() {
     this.printStartMessage();
-    this.startGame();
+    this.start();
   }
 
   printStartMessage() {
@@ -57,7 +57,7 @@ class BaseballGame {
   askRestart() {
     Console.readLine(GAME_MESSAGE.restart, (answer) => {
       if (answer === RESTART_OPTION.restart) {
-        return this.startGame();
+        return this.start();
       }
 
       if (answer === RESTART_OPTION.end) {
@@ -66,7 +66,7 @@ class BaseballGame {
     });
   }
 
-  startGame() {
+  start() {
     const randomNumber = this.computer.createRandomNumber();
 
     this.getResult(randomNumber);
