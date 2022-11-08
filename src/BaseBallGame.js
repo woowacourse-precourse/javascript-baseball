@@ -31,6 +31,19 @@ class BaseBallGame {
     this.#ballCount = 0;
   }
 
+  checkBallAndStrike(plyaerInput, randomNumbers) {
+    const numbers = plyaerInput.split("").map((v) => Number(v));
+
+    for (let i = 0; i < randomNumbers.length; i++) {
+      this.#countStrike(numbers[i], randomNumbers, i);
+      this.#countBall(numbers[i], randomNumbers, i);
+    }
+
+    this.#viewMessage();
+
+    this.#checkPlayerWin();
+  }
+
   getResult(plyaerInput, randomNumbers) {
     this.playerInputNumber = plyaerInput;
     this.isValidGameInput(plyaerInput);
