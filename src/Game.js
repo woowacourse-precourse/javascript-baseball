@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { isValidNumbers } = require('./utils/validate/validate.js');
 const generateRandomNumberArray = require('./utils/game/generateRandomNumber.js');
+const generateResultThisTurn = require('./utils/game/result.js');
 
 class Game {
   constructor() {
@@ -19,6 +20,10 @@ class Game {
   playTurn = (numberEnteredByUser) => {
     this.numberEnteredByUser = numberEnteredByUser;
     isValidNumbers(this.numberEnteredByUser);
+    const numberArrayEnteredByUser = this.numberEnteredByUser.split('').map(Number);
+    const resultThisTurn = generateResultThisTurn(this.pickedNumberArrayByComputer, numberArrayEnteredByUser);
+
+    this.start();
   };
 }
 
