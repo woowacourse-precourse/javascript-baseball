@@ -17,14 +17,21 @@ class App {
       userInputValue = value.split("").map((number) => +number);
       validation.checkUserInput(value);
       const resultCount = getCount(userInputValue, this.computerRandomValue);
-      getResult(resultCount);
-      if (resultCount.strike !== 3) {
-        return this.userInput();
-      }
-      gameClear();
+      getResult(resultCount.strike, resultCount.ball);
+      this.checkGameClear(resultCount.strike);
     });
   }
+  checkGameClear(strikeCount) {
+    if (strikeCount !== 3) {
+      return this.userInput();
+    }
+    gameClear();
+  }
 }
+
+// function checkGameClear(strikeCount) {
+//   gameClear;
+// }
 
 function gameClear() {
   const validation = new Validation();
@@ -94,17 +101,17 @@ function getCount(userInputValue, computerRandomValue) {
   return result;
 }
 
-function getResult(result) {
+function getResult(strike, ball) {
   let resultMessage = "";
 
+  if (ball) {
+    resultMessage += `${ball}볼`;
+  }
+  if (strike) {
+    resultMessage += ` ${strike}스트라이크`;
+  }
   if (resultMessage === "") {
     resultMessage = "낫싱";
-  }
-  if (result.ball) {
-    resultMessage += `${result.ball}볼`;
-  }
-  if (result.strike) {
-    resultMessage += ` ${result.strike}스트라이크`;
   }
   MissionUtils.Console.print(resultMessage);
 }
