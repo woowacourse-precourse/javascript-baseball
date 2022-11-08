@@ -17,7 +17,6 @@ class App {
 			if (!this.computerNumArr.includes(number))
 				this.computerNumArr.push(number);
 		}
-		// Console.print(this.computerNumArr);
 	}
 
 	playGame() {
@@ -100,7 +99,5 @@ class App {
 	}
 }
 
-const app = new App()
-app.play()
 
 module.exports = App;
