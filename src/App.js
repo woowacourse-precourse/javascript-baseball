@@ -40,3 +40,9 @@ const areEachDifferent = (numStr) => {
   return true
 }
 
+const stringToNumberInList = (list) => {
+  return list.split('').map((num) => {
+    return parseInt(num);
+  });
+}
+
