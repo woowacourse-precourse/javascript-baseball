@@ -3,6 +3,8 @@
 const ComputerInput = require("../src/ComputerInput");
 const CheckInputValid = require("../src/CheckInputValid");
 const { ERROR } = require("../src/data/Constants");
+const Render = require("../src/Render");
+
 describe("Computer에서 랜덤숫자 배열 추출", () => {
   const computerInput = ComputerInput();
   test("컴퓨터에서 받아온 숫자가 중복이 없고 길이가 3인지 확인", () => {
@@ -34,3 +36,14 @@ describe("UserInput과 관련된 테스트", () => {
     );
   });
 });
+
+describe("Error 발생 테스트", () => {
+  const render = new Render();
+  test("에러를 발생 테스트", () => {
+    function errorCatch(errorMessege) {
+      render.errorThrow(errorMessege);
+    }
+    expect(() => errorCatch(ERROR.USER_INPUT_LENGTH)).toThrow();
+  });
+});
+//    npm test Retry.js
