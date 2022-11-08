@@ -21,10 +21,11 @@ class App {
     }
 
     function numberInput() {
-      MissionUtils.Console.readLine('숫자를 입력해주세요', (answer) => {
-        strike = 0;
-        ball = 0;
-        nothing = 0;
+      strike = 0;
+      ball = 0;
+      nothing = 0;
+
+      MissionUtils.Console.readLine(constants.START, (answer) => {
         //숫자가 3자리수 이상인 경우 예외 처리
         if (answer.length > 3) throw '입력 값이 잘못됨';
 
@@ -33,7 +34,7 @@ class App {
           if (answer.includes(number)) {
             return answer.indexOf(number) === i ? strike++ : ball++;
           } else {
-            nothing ++;
+            nothing++;
           }
         });
       });
@@ -49,7 +50,7 @@ class App {
         MissionUtils.Console.print(constants.NOTING);
       } else {
         MissionUtils.Console.print(
-          `${ball} ${constants.BALL} ${strike} ${constants.STRIKE}`
+          `${ball}${constants.BALL} ${strike}${constants.STRIKE}`
         );
       }
       return gamePlay();
@@ -57,13 +58,18 @@ class App {
 
     function gameRestart() {
       MissionUtils.Console.readLine(constants.MESSAGE, (answer) => {
-        if (answer === 1) {
+        if (parseInt(answer) === 1) {
           computerNumbers();
           gamePlay();
           gameRestart();
-        } else if (answer === 2) {
+        } else if (parseInt(answer) === 2) {
           MissionUtils.Console.print(constants.END_MESSAGE);
           return;
+        }
+
+        //종료메시지가 1이나 2가 아닌 경우
+        else {
+          throw '종료 값이 잘못됨';
         }
       });
     }
