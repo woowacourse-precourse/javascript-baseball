@@ -13,7 +13,6 @@ class Referee {
   countStrike(userNum, computerNum, length) {
     let count = 0;
     for (let i = 0; i < length; i++) {
-      console.log("userNum,index, computerNum", userNum[i], i, computerNum[i]);
       if (userNum[i] === computerNum[i]) count++;
     }
 
@@ -22,10 +21,9 @@ class Referee {
 
   ballCount(userNum, computerNum) {
     let hint = BALLCOUNT_HINT.NOTHING;
-
     const countBall = this.countBall(userNum, computerNum);
     const countStrike = this.countStrike(userNum, computerNum, NUMBER.LENGTH);
-    console.log("ball strkie", countBall, countStrike);
+
     if (countBall && countStrike) {
       hint = `${countBall}${BALLCOUNT_HINT.BALL} ${countStrike}${BALLCOUNT_HINT.STRIKE}`;
       return hint;
@@ -36,7 +34,7 @@ class Referee {
       return hint;
     }
     if (countStrike) {
-      hint = `${countStrike}${BALLCOUNT_HINT.BALL}`;
+      hint = `${countStrike}${BALLCOUNT_HINT.STRIKE}`;
       return hint;
     }
 
