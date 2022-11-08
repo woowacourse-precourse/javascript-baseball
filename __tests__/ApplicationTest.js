@@ -153,4 +153,92 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+
+  test('feat#7: 종료후 게임 다시 시작', () => {
+    const randoms = [1, 3, 5, 2, 4, 5];
+    const answers = ['136', '245', '247','135', '1', '246', '245'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '숫자 야구 게임을 시작합니다.',
+      '2스트라이크',
+      '1스트라이크',
+      '낫싱',
+      '3스트라이크',
+      '게임 종료',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      '숫자 야구 게임을 시작합니다.',
+      '2스트라이크',
+      '3스트라이크',
+      '게임 종료',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('feat#7: 종료후 게임 다시 시작후 종료', () => {
+    const randoms = [1, 3, 5, 2, 4, 5];
+    const answers = ['136', '245', '247','135', '1', '246', '245', '2'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '숫자 야구 게임을 시작합니다.',
+      '2스트라이크',
+      '1스트라이크',
+      '낫싱',
+      '3스트라이크',
+      '게임 종료',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      '숫자 야구 게임을 시작합니다.',
+      '2스트라이크',
+      '3스트라이크',
+      '게임 종료',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('feat#7 예외: 종료후 게임 다시 시작후 입력오류', () => {
+    const randoms = [1, 3, 5, 2, 4, 5];
+    const answers = ['136', '245', '247','135', '1', '246', '245', '5'];
+    const logSpy = getLogSpy();
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('게임 전체 예외: answers 입력오류', () => {
+    const randoms = [1, 3, 5, 2, 4, 5];
+    const answers = ['136', '245', '244','135', '1', '246', '245', '5'];
+    const logSpy = getLogSpy();
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
