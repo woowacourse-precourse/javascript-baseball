@@ -44,4 +44,11 @@ describe('메세지 출력 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(message));
     });
   });
+
+  test('예외 테스트', () => {
+    expect(() => {
+      const printer = new Printer();
+      printer.throwError();
+    }).toThrow();
+  });
 });
