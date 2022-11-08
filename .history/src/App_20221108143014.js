@@ -31,7 +31,17 @@ class App {
   }
 
   checkAnswer(input, computerNumber){
-    let flag = 1;
+    for(let i = 0; i < 3;i++)
+    {
+      if(input[i]!==computerNumber[i]){
+        printStatus(input, computerNumber);
+        return 1;
+      }
+    }
+    return 0;
+  }
+
+  printStatus(input,computerNumber){
     let strike = 0;
     let ball = 0;
     for(let i = 0;i < 3;i++){
@@ -45,12 +55,9 @@ class App {
     console.print('≥¥ΩÃ');
     return ;
   }
-  if (ball > 0)
+  if (ball != 0)
     console.print(ball+'∫º ')
-  if (strike > 0 )
-    console.print(strike+'Ω∫∆Æ∂Û¿Ã≈©')
-  if (strike === 3)
-    flag = 1;
+  if (ball)
 }
 
 module.exports = App;

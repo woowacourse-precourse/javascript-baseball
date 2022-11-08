@@ -31,26 +31,20 @@ class App {
   }
 
   checkAnswer(input, computerNumber){
-    let flag = 1;
-    let strike = 0;
-    let ball = 0;
-    for(let i = 0;i < 3;i++){
-      if(input[i]==computerNumber[i]){
-        strike++;
-        continue;
+    for(let i = 0; i < 3;i++)
+    {
+      if(input[i]!==computerNumber[i]){
+        printStatus(input, computerNumber);
+        return 1;
       }
-      ball+= checkBall(input[i],computerNumber);
     }
-  if ( strike === 0 && ball === 0){
-    console.print('≥¥ΩÃ');
-    return ;
+    return 0;
   }
-  if (ball > 0)
-    console.print(ball+'∫º ')
-  if (strike > 0 )
-    console.print(strike+'Ω∫∆Æ∂Û¿Ã≈©')
-  if (strike === 3)
-    flag = 1;
+
+  printStatus(input,computerNumber){
+    //count ball strike
+    for(let i = 0;i < 3;i++)
+  }
 }
 
 module.exports = App;
