@@ -26,6 +26,10 @@ class App {
       })
     } while (status !== 0);
   }
+
+  check_answer(){
+
+  }
 }
 
 module.exports = App;

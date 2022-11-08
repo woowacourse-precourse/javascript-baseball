@@ -21,9 +21,9 @@ class App {
     computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
     do {
       MissionUtils.Console.readline("숫자를 입력해주세요 : ",(input)=>{
-      //답이면 0, 답 아니면 1
-      status = check_answer(input, computerNumber);
-      })
+      //정답 맞으면 0 낫싱이면 1 모두 아니면 2
+      status = check_answer(input);
+    })
     } while (status !== 0);
   }
 }
