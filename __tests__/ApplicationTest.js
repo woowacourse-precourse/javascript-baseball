@@ -222,4 +222,11 @@ describe("숫자 야구 게임", () => {
     getUserReplayOrFinish(userInput);
     expect(logSpy).toHaveBeenCalledWith("replay the game");
   });
+
+  test("추가테스트6-2: getUserReplayOrFinish", () => {
+    const logSpy = getLogSpy();
+    const userInput = "2";
+    getUserReplayOrFinish(userInput);
+    expect(logSpy).toHaveBeenCalledWith("finish the game!");
+  });
 });
