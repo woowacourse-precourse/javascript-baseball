@@ -26,6 +26,35 @@ function strikeCount(userInputNumbersArray, computerPickNumbersArray) {
   return strike;
 }
 
+function showResult() {
+  const ball = ballCount(user, computer);
+  const strike = strikeCount(user, computer);
+  if (strike === 3) {
+    MissionUtils.Console.print(
+      "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+    );
+    result = false;
+    return;
+  }
+  if (ball === 0) {
+    MissionUtils.Console.print("낫싱");
+    result = true;
+    return;
+  }
+  if (strike === 0) {
+    MissionUtils.Console.print(`${ball}볼`);
+    result = true;
+    return;
+  }
+  if (ball === strike) {
+    MissionUtils.Console.print(`${strike}스트라이크`);
+    result = true;
+    return;
+  }
+  MissionUtils.Console.print(`${ball - strike}볼 ${strike}스트라이크`);
+  result = true;
+}
+
 function computerPickNumbers() {
   computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
