@@ -55,8 +55,8 @@ describe("기능 목록 테스트", () => {
   })
 
   test("사용자에게 힌트를 주는 기능", () => {
-    let ball = 1;
-    let strike = 1;
+    let ball = 0;
+    let strike = 0;
     let hint = "";
 
     if (ball > 0) {
@@ -65,10 +65,10 @@ describe("기능 목록 테스트", () => {
     if (strike > 0) {
       hint += `${strike}스트라이크`;
     }
-    if (ball < 0 && strike < 0) {
+    if (ball === 0 && strike === 0) {
       hint = "낫싱";
     }
-    expect(hint).toBe("1볼 1스트라이크");
+    expect(hint).toBe("낫싱");
   })
 })
 
