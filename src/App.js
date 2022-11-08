@@ -66,6 +66,32 @@ class App {
     });
     this.getCompareResult(this.#strike, this.#ball);
   }
+  // 스트라이크 및 볼 갯수 출력 및 다음 단계 판별
+  getCompareResult(strike, ball) {
+    let is_answer_right = false;
+    if (strike && ball) {
+      this.print(`${ball}볼 ${strike}스트라이크`);
+    } else if (ball) {
+      this.print(`${ball}볼`);
+    } else if (strike) {
+      this.print(`${strike}스트라이크`);
+    } else {
+      this.print("낫싱");
+    }
+
+    if (strike === 3) {
+      is_answer_right = true;
+    }
+
+    if (is_answer_right) {
+      // 정답이므로 마지막 단계로 진입
+    } else {
+      // 틀렸으므로 사용자 숫자 다시 입력
+      this.#strike = 0;
+      this.#ball = 0;
+      this.guessNum();
+    }
+  }
 
   print(string) {
     MissionUtils.Console.print(string);
