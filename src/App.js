@@ -1,3 +1,4 @@
+const isValidUserNumberInput = require("./ValidationCheck.js");
 const { Random, Console } = require("@woowacourse/mission-utils");
 const { GAME_MESSAGE, ERROR_MESSAGE } = require("./constants/message.js");
 const {
@@ -16,7 +17,7 @@ class App {
 
   play() {
     Console.readLine(GAME_MESSAGE.USER_NUMBER_INPUT_REQUEST, (userInput) => {
-      const { isValid, errorType } = this.isValidUserNumberInput(userInput);
+      const { isValid, errorType } = isValidUserNumberInput(userInput);
       if (!isValid) {
         this.handleInputError(errorType);
       }
@@ -87,46 +88,6 @@ class App {
   handleInputError(errorType) {
     this.quitGame();
     throw new Error(ERROR_MESSAGE[errorType]);
-  }
-  hasOnlyNumber(userInput) {
-    return userInput
-      .split("")
-      .map((eachLetter) => parseInt(eachLetter), 10)
-      .every((number) => !isNaN(number));
-  }
-  hasValidLength(userInput) {
-    return userInput.length === MAX_NUMBER_LENGTH;
-  }
-  hasOnlyUniqueNumber(userInput) {
-    const duplicateCheckSet = new Set(userInput.split(""));
-
-    return duplicateCheckSet.size === MAX_NUMBER_LENGTH;
-  }
-  hasOnlyValidRangeNumber(userInput) {
-    const isValidRangeNumber = (number) => {
-      return MIN_NUMBER_RANGE <= number && number <= MAX_NUMBER_RANGE;
-    };
-
-    return userInput
-      .split("")
-      .map((eachLetter) => parseInt(eachLetter), 10)
-      .every(isValidRangeNumber);
-  }
-  isValidUserNumberInput(userInput) {
-    if (!this.hasOnlyNumber(userInput)) {
-      return { isValid: false, errorType: "INVALID_INPUT_TYPE" };
-    }
-    if (!this.hasValidLength(userInput)) {
-      return { isValid: false, errorType: "INVALID_INPUT_LENGTH" };
-    }
-    if (!this.hasOnlyUniqueNumber(userInput)) {
-      return { isValid: false, errorType: "DUPLICATED_NUMBER" };
-    }
-    if (!this.hasOnlyValidRangeNumber(userInput)) {
-      return { isValid: false, errorType: "INVALID_INPUT_RANGE" };
-    }
-
-    return { isValid: true };
   }
 
   quitGame() {
