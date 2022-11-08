@@ -21,10 +21,14 @@ describe("함수 기능 테스트", () => {
         }
         expect(result).toEqual(0);
     });
-    test("changeComputerNumberToArray() 배열 타입 반환", () => {
+    test("changeUserNumberToArray() 배열 타입 반환", () => {
         const app =new App();
         let result = app.changeUserNumberToArray("123");
-        
+        expect(result).toEqual(['1','2','3']);
+    });
+    test("changeComputerNumberToArray() 배열 타입 반환", () => {
+        const app =new App();
+        let result = app.changeComputerNumberToArray("1,2,3");
         expect(result).toEqual(['1','2','3']);
     });
 });
