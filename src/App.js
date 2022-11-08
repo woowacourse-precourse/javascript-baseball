@@ -10,6 +10,7 @@ class App {
 
     // 컴퓨터의 랜덤한 숫자 3개
     function computerNumbers() {
+      computer = [];
       while (computer.length < 3) {
         let number = MissionUtils.Random.pickNumberInRange(1, 9);
         if (!computer.includes(number)) {
@@ -20,9 +21,9 @@ class App {
     }
 
     function numberInput() {
-      Console.readLine('숫자를 입력해주세요', (answer) => {
+      MissionUtils.Console.readLine('숫자를 입력해주세요', (answer) => {
         //숫자가 3자리수 이상인 경우 예외 처리
-        if (answer.length() > 3) throw '입력 값이 잘못됨';
+        if (answer.length > 3) throw '입력 값이 잘못됨';
 
         //while문과 if문은 depth가 2 이상이므로 map을 활용
         answer.map((number, i) => {
@@ -51,11 +52,22 @@ class App {
       return gamePlay();
     }
 
+    function gameRestart() {
+      MissionUtils.Console.readLine(constants.MESSAGE, (answer) => {
+        if (answer === 1) {
+          computerNumbers();
+          gamePlay();
+          gameRestart();
+        } else if (answer === 2) {
+          MissionUtils.Console.print(constants.END_MESSAGE);
+          return;
+        }
+      });
+    }
 
-    
     computerNumbers();
     gamePlay();
-    
+    gameRestart();
   }
 }
 
