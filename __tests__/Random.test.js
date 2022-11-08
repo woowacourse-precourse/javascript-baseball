@@ -33,18 +33,21 @@ describe('getThreeRandomArray()', () => {
   test('첫번째 요소는 1부터 3까지 범위의 값을 반환한다.', () => {
     const random = new Random();
     const target = random.getThreeRandomArray()[0];
+
     expect(target >= 1 && target <= 3).toBeTruthy();
   });
 
   test('두번째 요소는 4부터 6까지 범위의 값을 반환한다.', () => {
     const random = new Random();
     const target = random.getThreeRandomArray()[1];
+
     expect(target >= 4 && target <= 6).toBeTruthy();
   });
 
   test('세번째 요소는 7부터 9까지 범위의 값을 반환한다.', () => {
     const random = new Random();
     const target = random.getThreeRandomArray()[2];
+
     expect(target >= 7 && target <= 9).toBeTruthy();
   });
 });

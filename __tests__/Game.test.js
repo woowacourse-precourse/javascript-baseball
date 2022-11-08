@@ -29,6 +29,7 @@ describe('calculate()', () => {
   test('아무것도 입력을 하지 않은면 에러가 발생한다.', () => {
     expect(() => {
       const game = new Game();
+
       game.calculate([]);
     }).toThrow('입력값이 없으면 안됩니다.');
   });

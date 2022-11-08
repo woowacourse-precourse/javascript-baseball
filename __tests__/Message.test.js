@@ -9,7 +9,9 @@ afterEach(() => {
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(console, 'log');
+
   logSpy.mockClear();
+
   return logSpy;
 };
 
@@ -26,6 +28,7 @@ describe('print()', () => {
   test('빈 문자열을 전달하면 에러가 발생한다.', () => {
     expect(() => {
       const message = new Message();
+
       message.print('');
     }).toThrow();
   });

@@ -9,13 +9,16 @@ afterEach(() => {
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(console, 'log');
+
   logSpy.mockClear();
+
   return logSpy;
 };
 
 describe('isStart()', () => {
   test('boolean 타입을 반환한다.', () => {
     const app = new App();
+
     expect(typeof app.isStart()).toBe('boolean');
   });
 });
@@ -23,6 +26,7 @@ describe('isStart()', () => {
 describe('isFinish()', () => {
   test('boolean 타입을 반환한다.', () => {
     const app = new App();
+
     expect(typeof app.isFinish()).toBe('boolean');
   });
 });

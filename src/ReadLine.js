@@ -10,6 +10,7 @@ class ReadLine {
       }
 
       const userNumberArray = Array.from(userInput, (value) => parseInt(value, 10));
+
       callbackFunc(userNumberArray);
     });
   }
