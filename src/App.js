@@ -20,10 +20,11 @@ class App {
     });
   }
   checkGameClear(strikeCount) {
+    const gameResult = new GameResult();
     if (strikeCount !== 3) {
       return this.userInput();
     }
-    gameClear();
+    gameResult.gameClearMessage();
   }
 }
 
@@ -42,6 +43,29 @@ class Validation {
   checkUserEndInput(value) {
     if (![1, 2].includes(+value))
       throw new Error("1과 2만 입력할 수 있습니다.");
+  }
+}
+
+// 게임 결과 처리 관련 클래스
+class GameResult {
+  gameClearMessage() {
+    const validation = new Validation();
+    MissionUtils.Console.readLine(
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (value) => {
+        validation.checkUserEndInput(value);
+        this.askRestart(value);
+      }
+    );
+  }
+  askRestart(value) {
+    if (+value === 1) {
+      app.play();
+    }
+    if (+value === 2) {
+      MissionUtils.Console.print("게임 종료");
+      MissionUtils.Console.close();
+    }
   }
 }
 
@@ -87,27 +111,6 @@ function getResult(strike, ball) {
     resultMessage = "낫싱";
   }
   MissionUtils.Console.print(resultMessage);
-}
-
-function gameClear() {
-  const validation = new Validation();
-  MissionUtils.Console.readLine(
-    "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-    (value) => {
-      validation.checkUserEndInput(value);
-      askRestart(value);
-    }
-  );
-}
-
-function askRestart(value) {
-  if (+value === 1) {
-    app.play();
-  }
-  if (+value === 2) {
-    MissionUtils.Console.print("게임 종료");
-    MissionUtils.Console.close();
-  }
 }
 
 const app = new App();
