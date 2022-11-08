@@ -130,6 +130,29 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("3개의 숫자를 모두 맞힌 경우 스트라이크 개수와 게임 종료 메시지를 출력해야 한다.", () => {
+    // given
+    const randoms = [1, 3, 5];
+    const answers = ["135"];
+    const logSpy = getLogSpy();
+    const messages = [
+      "3스트라이크",
+      "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    // when
+    const app = new App();
+    app.play();
+
+    // then
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ["246", "135", "1", "597", "589", "2"];
