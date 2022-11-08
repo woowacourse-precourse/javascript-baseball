@@ -45,7 +45,7 @@ class Ball {
   }
 
   is3Strike(otherBall) {
-    if (!this.number - otherBall.getNumber()) return true;
+    if (!(this.number - otherBall.getNumber())) return true;
 
     return false;
   }
