@@ -29,7 +29,8 @@ class App {
 
       this.userAnswer = answer.split("").map(Number);
 
-      this.compareAnswer(this.answer, this.userAnswer);
+      const [strike, ball] = this.compareAnswer(this.answer, this.userAnswer);
+      this.compareAnswerResult(strike, ball);
     });
   }
 
@@ -49,6 +50,10 @@ class App {
       }
     });
 
+    return [strike, ball];
+  }
+
+  compareAnswerResult(strike, ball) {
     if (strike === THREE_TIMES) {
       this.sendMessage(MESSAGE.COMPARE_ANSWER.THREE_STRIKE);
       this.sendMessage(MESSAGE.GAME_PROGRESS.END);
