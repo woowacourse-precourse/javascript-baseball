@@ -15,15 +15,20 @@ const gameStartLine = () => {
   MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
 };
 
-const playBall = async () => {
-  let user;
-  const comp = getComputerNumber();
-  await MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
-    if (answer.length !== 3)
-      throw new Error('숫자는 세자리 수로 입력해주세요.');
-    user = answer.split('');
-    baseballGameRule(comp, user);
-  });
+const playBall = (comp, user) => {
+  if (user.length > 3 || user.length <= 0)
+    throw new Error('숫자는 세자리 수로 입력해주세요.');
+  let [strike, ball, nothing] = baseballGameRule(comp, user);
+  const result =
+    (ball > 0 ? ball + '볼 ' : '') +
+    (strike > 0 ? strike + '스트라이크' : '') +
+    (nothing === 3 ? '낫싱' : '');
+
+  MissionUtils.Console.print(result);
+
+  if (strike === 3) {
+    gameOver();
+  } else oneMoreGame(comp);
 };
 
 const baseballGameRule = (comp, user) => {
@@ -32,29 +37,61 @@ const baseballGameRule = (comp, user) => {
     nothing = 3;
 
   for (let i = 0; i < 3; i++) {
-    let usrNm = Number.parseInt(user[i]);
-    if (comp.includes(usrNm)) {
+    if (user[i] === comp[i]) {
+      strike++;
+      nothing--;
+      continue;
+    }
+    if (comp.includes(user[i])) {
       ball++;
       nothing--;
     }
-    if (usrNm === comp[i]) strike++;
   }
 
-  if (nothing === 0) return MissionUtils.Console.print('낫싱');
-  if (strike === 3) return;
+  return [strike, ball, nothing];
+};
 
-  const result =
-    (strike > 0 ? strike + '스트라이크 ' : '') +
-    (ball > 0 ? ball + '볼' : '') +
-    (nothing === 0 ? '낫싱' : '');
+const oneMoreGame = (comp) => {
+  MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
+    let user = [];
+    for (let i of answer) user.push(Number.parseInt(i));
+    playBall(comp, user);
+  });
+};
 
-  return MissionUtils.Console.print(result);
+const gameOver = () => {
+  MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  MissionUtils.Console.print(
+    '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+  );
+  MissionUtils.Console.readLine('', (answer) => {
+    if (answer === 2) {
+      return;
+    } else if (answer === 1) {
+      startNewGame();
+    }
+  });
+};
+
+const startNewGame = () => {
+  let comp = getComputerNumber();
+  MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
+    let user = [];
+    for (let i of answer) user.push(Number.parseInt(i));
+    playBall(comp, user);
+  });
 };
 
 class App {
   play() {
     gameStartLine();
-    playBall();
+    const comp = getComputerNumber();
+    console.log(comp);
+    MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
+      let user = [];
+      for (let i of answer) user.push(Number.parseInt(i));
+      playBall(comp, user);
+    });
   }
 }
 
