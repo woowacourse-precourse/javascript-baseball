@@ -12,11 +12,15 @@ class App {
     return [...threeNumbers];
   }
 
+  async readLine(question = "") {
+    return await new Promise((resolve) => {
+      Console.readLine(question, (answer) => resolve(answer));
+    });
+  }
+
   async receiveNumberFromUser() {
     let userAnswer;
-    const answer = await new Promise((resolve) => {
-      Console.readLine("숫자를 입력해주세요 : ", (answer) => resolve(answer));
-    });
+    const answer = await this.readLine("숫자를 입력해주세요 : ");
     const arrayOfAnswer = Array.from(answer).map(
       (stringNumber) => +stringNumber
     );
@@ -83,13 +87,29 @@ class App {
     Console.print(NOTHING);
   }
 
-  confirmRestart() {}
+  async confirmRestart() {
+    const RESTART = "1";
+    const EXIT = "2";
+    const VALID_ANSWER = {
+      1: RESTART,
+      2: EXIT,
+    };
+    let userAnswer;
+
+    while (!VALID_ANSWER[userAnswer]) {
+      Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+      userAnswer = await this.readLine();
+    }
+    return userAnswer === RESTART;
+  }
 
   restartGame() {
     this.play();
   }
 
-  exitGame() {}
+  exitGame() {
+    Console.close();
+  }
 
   async play() {
     const goal = this.generateGoalNumber();
@@ -104,13 +124,15 @@ class App {
       score = this.getStrikeAndBallCount(goal, userAnswer);
     }
 
-    // this.printResult(score);
-    // if (confirmRestart()) return restartGame();
-    // exitGame();
+    this.printResult(score);
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    if (await this.confirmRestart()) return this.restartGame();
+
+    this.exitGame();
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;
