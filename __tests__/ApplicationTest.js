@@ -62,6 +62,19 @@ describe("숫자 야구 게임", () => {
   });
 });
 
+describe("컴퓨터가 정답 만들기 유닛 테스트", () => {
+  test("기존 정답이 존재하지 않을 때, 컴퓨터가 정답을 새로 생성한다.", () => {
+    const randoms = [1, 5, 5, 8, 8, 9];
+
+    mockRandoms(randoms);
+
+    const app = new App();
+    app.makeAnswer();
+
+    expect(app.answer).toBe("158");
+  });
+});
+
 describe("사용자 입력에 대한 예외 처리 테스트", () => {
   test("적절한 입력에 대해서는 true를 리턴한다.", () => {
     const input = ["123", "234", "345"];
