@@ -5,9 +5,14 @@ const makeNumber = () => {
   return result;
 };
 
+const userInput = () => {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {})
+};
+
 class App {
   play() {
     let answer = makeNumber();
+
   };
 };
 
