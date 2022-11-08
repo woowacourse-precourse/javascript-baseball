@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { ERROR, RESTART } = require("./constants/constants.js");
 
 const gameStart = () => {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -6,12 +7,13 @@ const gameStart = () => {
 
 const pickRandomNumber = () => {
   const numberArr = [];
+
   while (numberArr.length < 3) {
     const number = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!numberArr.includes(number)) numberArr.push(number);
   }
 
-  return Number(numberArr.join(""));
+  return numberArr.join("");
 };
 
 const getUserInput = (answer) => {
@@ -28,7 +30,7 @@ const validateUserInput = (input) => {
     input.match(/[^1-9]/g) ||
     new Set(input.split("")).size !== 3
   )
-    throw new Error("Invalid UserInput");
+    throw new Error(ERROR.INVALID_USER_INPUT);
 
   return true;
 };
@@ -36,11 +38,9 @@ const validateUserInput = (input) => {
 const countStrike = (answer, input) => {
   let strike = 0;
 
-  String(answer)
-    .split("")
-    .forEach((el, i) => {
-      if (el === input[i]) strike++;
-    });
+  answer.split("").forEach((el, i) => {
+    if (el === input[i]) strike++;
+  });
 
   return strike;
 };
@@ -48,11 +48,9 @@ const countStrike = (answer, input) => {
 const countBall = (answer, input) => {
   let ball = 0;
 
-  String(answer)
-    .split("")
-    .forEach((el, i) => {
-      if (input.includes(el) && input[i] !== el) ball++;
-    });
+  answer.split("").forEach((el, i) => {
+    if (input.includes(el) && input[i] !== el) ball++;
+  });
 
   return ball;
 };
@@ -81,13 +79,13 @@ const gameEnd = (answer, input) => {
       }
     );
   }
-  
+
   return getUserInput(answer);
 };
 
 const validateRestartInput = (input) => {
-  if (!(input === "1" || input === "2"))
-    throw new Error("Invalid RestartInput");
+  if (!(input === RESTART.YES || input === RESTART.NO))
+    throw new Error(ERROR.INVALID_RESTART_INPUT);
 
   return true;
 };
