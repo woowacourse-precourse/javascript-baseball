@@ -7,6 +7,10 @@ class App {
   play() {
     this.game.start();
   }
+
+  numberEnteredByUser() {
+    return this.game.numberEnteredByUser;
+  }
 }
 
 const app = new App();

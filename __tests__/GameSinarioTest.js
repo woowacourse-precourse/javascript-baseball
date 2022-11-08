@@ -8,6 +8,15 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+const mockQuestions = (answers) => {
+  MissionUtils.Console.readLine = jest.fn();
+  answers.reduce((acc, input) => {
+    return acc.mockImplementationOnce((question, callback) => {
+      callback(input);
+    });
+  }, MissionUtils.Console.readLine);
+};
+
 describe("숫자 야구 게임 시나리오", () => {
   test("게임 시작 시 게임시작 문구 출력", () => {
     const logSpy = getLogSpy();
@@ -26,5 +35,14 @@ describe("숫자 야구 게임 시나리오", () => {
         expect(number).toBeLessThanOrEqual(9);
       });
     }
+  });
+
+  test("사용자로 부터 1 부터 9 까지 서로 다른 세자리 수를 입력을 받는다.", () => {
+    const userInput = ["123"];
+    mockQuestions(userInput);
+
+    const app = new App();
+    app.play();
+    expect(app.numberEnteredByUser()).toBe("123");
   });
 });

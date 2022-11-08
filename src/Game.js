@@ -16,7 +16,7 @@ class Game {
   }
 
   playTurn = (numberEnteredByUser) => {
-    console.log(numberEnteredByUser);
+    this.numberEnteredByUser = numberEnteredByUser;
   };
 }
 
