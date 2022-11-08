@@ -76,7 +76,7 @@ class Game {
             let sameNumberComputerIndex = this.compareNumberArray.indexOf(userNumber);
             if(sameNumberComputerIndex !== -1 && sameNumberComputerIndex !== index){ ball++; }
         })
-    return ball;
+        return ball;
     }
 
     countStrike(){
