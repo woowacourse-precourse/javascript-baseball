@@ -43,7 +43,7 @@ class App {
       this.userAnswer = parseInt(answer);
       try {
         this.answerChecker(this.userAnswer);
-        this.resultPrint(this.compareUserAnswer(this.userAnswer));
+        this.resultPrint(this.compareUserAnswer(this.userAnswer, this.answer));
         this.play();
       } catch (e) {
         this.exceptionEnd();
@@ -87,20 +87,18 @@ class App {
       case 2:
         return false;
       default:
-        this.exceptionEnd();
         throw "에러발생";
+        this.exceptionEnd();
     }
   }
 
-  compareUserAnswer(answer) {
-    const computerAnswer = this.answer;
+  compareUserAnswer(answer, computer) {
     const user = String(answer).split("");
     const obj = { ball: 0, strike: 0 };
     user.map((n, i) => {
       const num = parseInt(n);
-      if (computerAnswer[i] !== num && computerAnswer.includes(num))
-        obj.ball += 1;
-      if (computerAnswer[i] === num) obj.strike += 1;
+      if (computer[i] !== num && computer.includes(num)) obj.ball += 1;
+      if (computer[i] === num) obj.strike += 1;
     });
     return obj;
   }
