@@ -14,14 +14,14 @@ const gamestart = () =>{
 }
 
 const createComputerNumber = () =>{
-  const computerInputNumber = [];
-  while (computerInputNumber.length<3){
+  const computerNumber = [];
+  while (computerNumber.length<3){
     const randomInputNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!computerInputNumber.includes(randomInputNumber)){
-      computerInputNumber.push(randomInputNumber);
+    if (!computerNumber.includes(randomInputNumber)){
+      computerNumber.push(randomInputNumber);
     }
   }
-  return computerInputNumber.join("")
+  return computerNumber.join("")
 }
 
 const inputUserNumber =(computerNumber) =>{
@@ -69,17 +69,18 @@ const judgeNumber = (computerNumber,userNumber) =>{
       ballScore++;
     }
   }
+
   if (strikeScore==3){
     gameRestartOrEnd();
   }
   if(strikeScore==0&&ballScore==0){
     MissionUtils.Console.print(`낫싱`)
-    inputUserNumber(userNumber)
+    inputUserNumber(computerNumber)
   }
   if(strikeScore==1&&strikeScore==2){
     MissionUtils.Console.print(`${strikeScore}스트라이크`);
     MissionUtils.Console.print(`${ballScore}볼`);
-    inputUserNumber(userNumber);
+    inputUserNumber(computerNumber);
   }
 
 }
@@ -98,3 +99,5 @@ const gameRestartOrEnd = () =>{
     }
    })
 }
+
+gamestart();
