@@ -16,7 +16,38 @@ function makeRandomNum() {
   return ranNum;
 }
 
-starGame();
-const computerNum = makeRandomNum();
+function isItValid(inputNum) {
+  let inputNumArr = [];
+  inputNumArr = inputNum.toString().trim().split('').map(Number);
+  if (inputNumArr.length != 3) {
+    console.log("유효한 숫자가 아닙니다. 게임을 종료합니다.");
+    process.exit();
+  }
+  for (let i = 0; i < 3; i++) {
+    if (inputNumArr[i] > 9 || inputNumArr[i] < 1) {
+      console.log("유효한 숫자가 아닙니다. 게임을 종료합니다.");
+      process.exit();
+    }
+    if (inputNumArr[i] == inputNumArr[i-1] || inputNumArr[i] == inputNumArr[i-2]) {
+      console.log("유효한 숫자가 아닙니다. 게임을 종료합니다.");
+      process.exit();
+    }
+  }
+}
 
-module.exports = App;
+starGame();
+let computerNum = makeRandomNum();
+let inputNum = 0;
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+rl.question("숫자를 입력해주세요 : ", (input) => {
+  inputNum = input;
+  isItValid(inputNum);
+  rl.close();
+});
+
+//module.exports = App;
