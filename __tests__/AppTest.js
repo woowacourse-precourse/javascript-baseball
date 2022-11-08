@@ -15,4 +15,8 @@ describe('App Test', () => {
     expect(App.isValidPlayInput('1234')).toBe(false);
     expect(App.isValidPlayInput('abc')).toBe(false);
   });
+
+  test('test pickThreeDigits', () => {
+    expect((new Set(App.pickThreeDigits())).size).toBe(3);
+  });
 });
