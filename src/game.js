@@ -11,17 +11,21 @@ class Game {
     this.answerNumber;
     this.playBoolean;
   }
+
   print(message) {
     return Console.print(message);
   }
+
   play() {
     this.go();
     this.getCount(this.answerNumber);
   }
+
   go() {
     this.print(MESSAGE.START);
     this.answerNumber = this.createRandomNumber();
   }
+
   createRandomNumber() {
     let randomNumberArr = [];
     while (randomNumberArr.length < RANDOM_NUMBER.LENGTH) {
@@ -35,8 +39,9 @@ class Game {
     }
     return randomNumberArr;
   }
+
   isValidInput(input) {
-    const checkDupInput = [...new Set(input)].length; // 중복되지 않은 숫자의 갯수
+    const checkDupInput = [...new Set(input)].length;
     if (checkDupInput !== 3) {
       throw new Error(ERROR.INPUT_THREE_NUMBER);
     }
@@ -44,7 +49,6 @@ class Game {
       throw new Error(ERROR.INPUT_THREE_NUMBER);
     }
     if (input.length !== 3) {
-      // 숫자가 3개가 아닌 경우
       throw new Error(ERROR.INPUT_THREE_NUMBER);
     }
     return;
@@ -52,25 +56,23 @@ class Game {
 
   getCount(answer) {
     Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
-      this.isValidInput(input); // 유효성 검사
+      this.isValidInput(input);
       const inputNumber = [...input].map(Number);
       const { ball, strike } = this.countPitch(
-        // 볼, 스트라이크 체크
         inputNumber,
         this.answerNumber
       );
-
-      this.printScore(ball, strike); // 현재 스코어 출력
+      this.printScore(ball, strike);
       if (strike !== 3) {
         return this.getCount(answer);
       } else {
         this.print(MESSAGE.SUCCESS);
         this.playAgain();
-        // 재시작 구문
       }
     });
     return;
   }
+
   countPitch(inputNumber, answerNumber) {
     let ball = 0;
     let strike = 0;
@@ -83,6 +85,7 @@ class Game {
     });
     return { ball, strike };
   }
+
   printScore(ball, strike) {
     let output = "";
     if (ball === 0 && strike === 0) {
@@ -96,6 +99,7 @@ class Game {
     }
     return Console.print(output);
   }
+
   playAgain() {
     Console.readLine(MESSAGE.RESTART, (input) => {
       const inputNumber = Number(input);
