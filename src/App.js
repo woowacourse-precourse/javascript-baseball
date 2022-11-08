@@ -8,7 +8,6 @@ const MESSAGE = {
 
 class App {
   constructor() {
-    this.answer = [];
     this.result = {
       ball: 0,
       strike: 0,
@@ -22,6 +21,7 @@ class App {
   }
 
   pickRandomNumber() {
+    this.answer = [];
     while (this.answer.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
       if (!this.answer.includes(number)) {
@@ -47,9 +47,20 @@ class App {
     if (this.result.strike === 3) {
       Console.print(MESSAGE.GAMEFINISHED);
       Console.print(MESSAGE.GAMERESTART);
+      this.getUserRestart();
     } else {
       this.playInning();
     }
+  }
+
+  getUserRestart() {
+    Console.readLine('', input => {
+      if (input === '1') this.play();
+      else if (input === '2') Console.close();
+      else {
+        throw new Error('잘못된 값을 입력했습니다');
+      }
+    });
   }
 
   printResult() {
