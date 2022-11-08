@@ -22,9 +22,8 @@ class App {
   getUserGuess(computerNum) {
     Console.readLine(ALERT.INPUT_NUMBER, (userGuess) => {
       const isValid = this.user.isInputValid(userGuess);
-      if(!isValid) {
-        throw new Error(ALERT.INVALID_INPUT);
-      }
+      if(!isValid) throw new Error(ALERT.INVALID_INPUT);
+    
       const [ballCount, strikeCount] = this.getGuessRst(userGuess, computerNum);
       const resultMessage = this.getRstMsg(ballCount, strikeCount);
       Console.print(resultMessage);
@@ -49,12 +48,8 @@ class App {
   askRestart() {
     Console.print(ALERT.RESTART_GAME);
     Console.readLine("", (isRestart) => {
-      if(isRestart === STRING.RESTART_TRUE){
-        return this.startGame();
-      }
-      if(isRestart === STRING.RESTART_FALSE) {
-        return this.exitGame();
-      }
+      if(isRestart === STRING.RESTART_TRUE) return this.startGame();
+      if(isRestart === STRING.RESTART_FALSE) return this.exitGame();
       throw new Error(ALERT.INVALID_INPUT);
     })
   }
@@ -64,13 +59,13 @@ class App {
     const userNumToArray = [...userGuess];
     let ballCount = 0, strikeCount = 0;
     for(let computerNumElement of computerNumToArray) {
-        const loc = computerNumToArray.indexOf(computerNumElement);
-        if(userNumToArray.indexOf(computerNumElement) === loc){
-            strikeCount++; continue;
-        }
-        if(userNumToArray.includes(computerNumElement)){
-            ballCount++;
-        }
+      const loc = computerNumToArray.indexOf(computerNumElement);
+      if(userNumToArray.indexOf(computerNumElement) === loc){
+        strikeCount++; continue;
+      }
+      if(userNumToArray.includes(computerNumElement)){
+        ballCount++;
+      }
     }
     return [ballCount, strikeCount];
   }
