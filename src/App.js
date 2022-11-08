@@ -4,6 +4,10 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const [Console, Random] = [MissionUtils.Console, MissionUtils.Random];
 
 class App {
+  constructor() {
+    this.answer = [];
+  }
+
   play() {}
 
   generateRandomAnswer() {
@@ -41,6 +45,20 @@ class App {
     }
 
     return true;
+  }
+
+  calcResult(playerInput) {
+    let [ball, strike] = [0, 0];
+
+    [...playerInput].map((number, index) => {
+      if (number === this.answer[index]) {
+        strike++;
+      } else if (this.answer.includes(number)) {
+        ball++;
+      }
+    });
+
+    return [ball, strike];
   }
 }
 
