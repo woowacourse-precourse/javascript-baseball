@@ -8,7 +8,7 @@ class BaseballGame {
     this.validUserNumbers = new ValidUserNumbers();
   }
 
-  start() {
+  play() {
     Console.print(GAME_MESSAGE.START_MESSAGE);
     return this.playGame();
   }
