@@ -33,5 +33,13 @@ class App {
             return this.playTheGame(computerNumbers);
         });
     }
+    restartGame() {
+        MissionUtils.Console.print(MESSAGE.CORRECT_ANSWER);
+        MissionUtils.Console.readLine(MESSAGE.ASK_RESTART, (userAnswer) => {
+            if (userAnswer === RESTART_OR_STOP.RESTART) return this.getComputerNumbers();
+            else if (userAnswer === RESTART_OR_STOP.STOP) return MissionUtils.Console.close();
+            throw new Error(ERROR_MESSAGE.ONE_OR_TWO);
+        });
+    }
 }
 module.exports = App;
