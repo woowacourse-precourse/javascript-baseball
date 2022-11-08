@@ -37,7 +37,8 @@ class App {
     MissionUtils.Console.print(SYS_MESSAGE.START_MESSAGE);
   }
 
-  showBallState(strikeCnt, ballCnt) {
+  showBallState(ballState) {
+    const { strikeCnt, ballCnt } = ballState;
     if (strikeCnt === 3)
       MissionUtils.Console.print(
         strikeCnt + BALL_STATE.STRIKE + "\n" + SYS_MESSAGE.FINISH_MESSAGE
