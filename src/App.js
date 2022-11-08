@@ -1,4 +1,16 @@
 class App {
+  checkoverlap(answer){
+    verification = false;
+    for (var i =0;i<3;i++){
+      for (var j = i;j<3;j++){
+        if (answer[i] == answer[j]){
+          verification = true;
+        }
+      }
+    }
+    return verification;
+  }
+
   print(values){
      //입력한 결과 표시해주기
      const MissionUtils = require("@woowacourse/mission-utils");
@@ -73,15 +85,18 @@ class App {
     var pass = false;
     while (pass == false){
       var answer  = 0;
+      //MissionUtils.Console.print("숫자를 입력해주세요: ")
       MissionUtils.Console.readLine("숫자를 입력해주세요: ", (x) =>{
         if (isNaN(parseInt(x))) throw 'not a number';
         if (parseInt(x) <0) throw 'minus number';
-        //if (x.toString().split(",").join("").length!=3) throw 'length error';
+        
         answer = x.split(",");
       });
       answer = answer.toString().split(",");
       answer = answer.join("");
-      if (answer.length != 3) throw 'length error'
+      if (answer.length != 3) throw 'length error';
+      if (checkoverlap(answer) == true) throw 'overlap';
+
       //계산하기
       var values = this.calculate(Numbers, answer);
       
@@ -95,7 +110,7 @@ class App {
   play() {
     const MissionUtils = require("@woowacourse/mission-utils");
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    
+
     var flag = false;
     while(flag== false){
       this.playoneround();
