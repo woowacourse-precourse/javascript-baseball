@@ -1,5 +1,10 @@
 const ExceptionCheck = require("../src/ExceptionCheck");
 
+const { print, close, readLine, pickNumberInRange } = require("../src/Utils");
+
+afterEach(() => {
+  close();
+});
 
 describe("유저 입력 숫자 테스트", () => {
   test("user가 중복된 숫자를 입력했을시 에러뜨는지 확인", () => {
