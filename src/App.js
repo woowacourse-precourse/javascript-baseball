@@ -18,7 +18,7 @@ class App {
         Random.pickNumberInRange(1, 9)
       );
     }
-    this.userInput = this.getUserInput();
+    this.getUserInput();
   }
   getUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (ans) => {
