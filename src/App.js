@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.answerNumbers = this.getRandomNumbers();
+    this.answerNumbers;
   }
 
   getRandomNumbers() {
@@ -17,12 +17,7 @@ class App {
     return deduplicateRandomNumbers;
   }
 
-  play() {
-    MissionUtils.Console.print(Message.gameStart);
-  }
+  play() {}
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
