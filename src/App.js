@@ -11,7 +11,7 @@ class App {
 
   play() {
     Console.readLine(Messages.QUERY, (userGuess) => {
-      if (!this.isValidNumber(userGuess)) {
+      if (!this.isValidGuess(userGuess)) {
         throw new Error(Messages.ERROR_WHILE_GUESS);
       }
       this.progress(userGuess);
@@ -72,7 +72,7 @@ class App {
     return [...computerNumber];
   }
 
-  isValidNumber(guessNumber) {
+  isValidGuess(guessNumber) {
     if (guessNumber.length !== 3) {
       return false;
     }
