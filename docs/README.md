@@ -72,3 +72,10 @@ Changed the calling point of the functions and Added Class's vaiable:
     - change the variables to the class's variables
 
 Breaks $App._is_strike, $App._strike, $App._ball, $App._keep_play, which was local variables of the functions
+
+fix($App): add the variables
+
+Added Class's variables:
+- check if the game is over, $App._game_over
+
+Breaks $App._game_over
