@@ -1,5 +1,8 @@
 class App {
-  play() {}
+  randomNumber(firstNumber, secondNumber, thirdNumber){
+    
+  }
 }
 
 module.exports = App;
+
