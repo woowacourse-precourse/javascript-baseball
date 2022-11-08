@@ -5,6 +5,7 @@ const generateRandom = require("./utils/generateRandom");
 const printFormat = require("./utils/printingFormat");
 const Validate = require("./Validate");
 
+//상수 선언
 const ALL_STRIKE = "3스트라이크";
 const END_OF_GAME = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
 const USER_CHOICE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
@@ -24,7 +25,10 @@ class BaseballGame {
   }
 
   static compareComputerAndUser(userGuessNumberm, random) {
+    //볼, 스트라이크, 낫싱 계산
     const score = scoreUtil.calculateScore(userGuessNumberm, random);
+
+    //계산 결과를 출력을 위한 string으로 변환.
     const result = printFormat.printFormat(score);
     showResult(result);
   }

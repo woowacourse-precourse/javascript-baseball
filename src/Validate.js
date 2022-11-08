@@ -35,6 +35,7 @@ const validateUserChoice = (userInput) => {
 };
 
 function isDup(arr) {
+  //중복값이 있다면 Set의 길이가 짧다.
   return arr.length !== [...new Set(arr)].length;
 }
 function isRightSize(userInput, num) {
