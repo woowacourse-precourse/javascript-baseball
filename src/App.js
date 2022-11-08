@@ -9,9 +9,11 @@ class App{
   
   
   getRandumNumber(){
+    const Max_RANGE = 9;
+    const MIN_RANGE = 1
     const randomNumber = new Set();
     while(randomNumber.size !==3){
-    randomNumber.add(MissionUtils.Random.pickNumberInRange(1,9));
+    randomNumber.add(MissionUtils.Random.pickNumberInRange(MIN_RANGE,Max_RANGE));
     }
     const uniqueNumberList = [...randomNumber]
     this.uniqueNumberList = uniqueNumberList;
@@ -93,6 +95,7 @@ class App{
   }
   
 }
-
+const app = new App();
+app.play()
 
 module.exports = App;
