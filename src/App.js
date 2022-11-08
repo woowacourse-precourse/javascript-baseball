@@ -13,26 +13,26 @@ class App {
   _gameNumber = null;
   _isPlaying = false;
 
-  constructor(count = 3, minNumber = 1, maxNumber = 9) {
-    this.count = count;
+  constructor(digit = 3, minNumber = 1, maxNumber = 9) {
+    this.digit = digit;
     this.minNumber = minNumber;
     this.maxNumber = maxNumber;
     this.MESSAGES = {
       START: "숫자 야구 게임을 시작합니다.",
       END: "게임 종료",
       RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      INSERT_NUMBER: `${this.count}자리 숫자(각 자리 수: ${this.minNumber}~${this.maxNumber})를 입력해주세요 : `,
+      INSERT_NUMBER: `${this.digit}자리 숫자(각 자리 수: ${this.minNumber}~${this.maxNumber})를 입력해주세요 : `,
       ERROR: {
         INSERT: "올바르지 않은 입력입니다.",
         RANGE: `\n각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`,
         TYPE: "\n숫자만 입력할 수 있습니다.",
-        DIGIT: `\n${this.count}자리 수가 입력되어야 합니다.`,
+        DIGIT: `\n${this.digit}자리 수가 입력되어야 합니다.`,
         DUPLICATE: "\n각 자리의 수는 중복되지 않아야 합니다.",
         END: "\n프로그램을 종료합니다.",
       },
       RESULT: {
         NOTHING: "낫싱",
-        CORRECT: `${this.count}개의 숫자를 모두 맞히셨습니다!`,
+        CORRECT: `${this.digit}개의 숫자를 모두 맞히셨습니다!`,
         BALL(num) {
           return (num && `${num}볼`) || "";
         },
@@ -68,7 +68,7 @@ class App {
   }
 
   isValidDigit(numbers) {
-    return numbers.length === this.count;
+    return numbers.length === this.digit;
   }
 
   isValidNumber(number) {
@@ -164,7 +164,7 @@ class App {
       return this.MESSAGES.RESULT.NOTHING;
     }
 
-    if (sameDigitCount === this.count) {
+    if (sameDigitCount === this.digit) {
       this.isPlaying = false;
 
       let result = this.MESSAGES.RESULT.STRIKE(sameDigitCount);
@@ -204,7 +204,7 @@ class App {
 
   setGameNumber() {
     this.gameNumber = createUniqueNumbers({
-      count: this.count,
+      count: this.digit,
       minNumber: this.minNumber,
       maxNumber: this.maxNumber,
     });
