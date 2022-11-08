@@ -44,8 +44,8 @@ describe("숫자 야구 게임", () => {
     const app = new App();
     app.play();
 
-    messages.forEach((output) => {
-      expect(logSpy).toContain(output);
+    messages.forEach(function (output) {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 

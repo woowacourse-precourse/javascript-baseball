@@ -14,19 +14,6 @@ class App {
     this.ball = 0;
   }
 
-  reGame = () => {
-    this.answer = this.createAnswer();
-    this.isRight = false;
-    this.strike = 0;
-    this.ball = 0;
-  };
-
-  initializer = () => {
-    this.isRight = false;
-    this.strike = 0;
-    this.ball = 0;
-  };
-
   createAnswer = () => {
     let i = 0;
     const answer = [];
@@ -40,37 +27,24 @@ class App {
     return answer;
   };
 
-  duplicateCheck = (answer, val) => {
-    return answer.every((e) => val !== e);
-  };
-
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.Game().then(() => {
-      MissionUtils.Console.close();
-    });
-  }
-
-  async Game() {
-    while (true) {
-      this.initializer();
-      await this.doBaseBall();
-      if (this.isRight && (await this.checkRestartGame())) {
-        break;
-      } else if (this.isRight) {
-        this.reGame();
-      }
-    }
+    this.Game()
+      .then(() => {
+        MissionUtils.Console.close();
+      })
+      .catch((e) => {
+        MissionUtils.Console.close();
+        return;
+      });
   }
 
   async checkRestartGame() {
-    try {
-      if ((await this.inputRestartGameValue()) == 2) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {}
+    if ((await this.inputRestartGameValue()) == 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   inputRestartGameValue = () => {
@@ -81,9 +55,40 @@ class App {
           resolove(answer);
         }
       );
-    }).catch((err) => {
-      return err;
     });
+  };
+
+  async Game() {
+    while (true) {
+      this.initializer();
+      try {
+        await this.doBaseBall();
+      } catch (e) {
+        throw new Error(e);
+      }
+      if (this.isRight && (await this.checkRestartGame())) {
+        break;
+      } else if (this.isRight) {
+        this.reGame();
+      }
+    }
+  }
+
+  duplicateCheck = (answer, val) => {
+    return answer.every((e) => val !== e);
+  };
+
+  reGame = () => {
+    this.answer = this.createAnswer();
+    this.isRight = false;
+    this.strike = 0;
+    this.ball = 0;
+  };
+
+  initializer = () => {
+    this.isRight = false;
+    this.strike = 0;
+    this.ball = 0;
   };
 
   async doBaseBall() {
@@ -143,13 +148,13 @@ class App {
 
   isNumber = () => {
     if (isNaN(parseInt(this.userAnswer))) {
-      throw new Error("숫자를 입력하세요");
+      throw new Error("숫자를 입력하세요!");
     }
   };
 
   isThreeDigit = () => {
-    if ([...this.userAnswer].length != 3) {
-      throw new Error("3자리 숫자를 입력하세요");
+    if ([...this.userAnswer].length !== 3) {
+      throw new Error("3자리 숫자를 입력하세요!");
     }
   };
 
@@ -158,7 +163,7 @@ class App {
       const checkValue = [...this.userAnswer];
       checkValue.splice(idx, 1);
       if (checkValue.includes(userValue)) {
-        throw new Error("중복되지 않은 숫자를 입력하세요");
+        throw new Error("중복되지 않은 값을 입력하시오");
       }
     });
   };
@@ -168,12 +173,7 @@ class App {
       MissionUtils.Console.readLine("숫자를 입력해주세요 :", (answer) => {
         resolove(answer);
       });
-    }).catch((err) => {
-      return err;
     });
   };
 }
-
-const app = new App();
-app.play();
 module.exports = App;
