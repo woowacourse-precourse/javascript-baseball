@@ -110,7 +110,7 @@ const getRandomNumber = (min, max) => {
 
 
 const isValidInput = (input) => {
-  if (!isValidLength(input)) {
+  if (!isValidLengthInteger(input)) {
     return false;
   }
   if (input.includes(0)) {
@@ -123,7 +123,7 @@ const isValidInput = (input) => {
   return true;
 };
 
-const isValidLength = (input) => {
+const isValidLengthInteger = (input) => {
   if (input.length !== VALID_NUMBER_LENGTH) {
     return false;
   }
