@@ -1,9 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-// 기본 변수명에서 살을 붙인다(numbers,answers로 지정)
-//함수 순서는 게임 시작문구 프린트 ->랜덤 고르는 것 -> (3일 때 주시해야하니까 따로 빼놓고)
-// ball,strkie세기 -> ball,strike센거 출력 -> 게임 상태 체크 -> 게임 숫자 입력창(여러 함수들을 넣어야해서 뒤로 뺀다)
-// 게임 플레이 함수에 이때 까지 짠 함수들을 넣는다
-// 입력창을 위 or play()바로 위? -> play 바로 위로 간다
+
 class App {
   printGameStart() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -20,8 +16,7 @@ class App {
 
     return random.join("");
   }
-  //3일때 주시하기 위해서 햇갈려서 좀 빼놓음
-  //(ball strike 너무 햇갈린다 반대로 이해해서 코드가 이상하게 나오더라...)
+
   getThreeResult(numbers) {
     return numbers.length === 3 && numbers.length === new Set(numbers).size;
   }
@@ -40,7 +35,7 @@ class App {
 
     return [ball, strike];
   }
-  // 몇볼, 몇 스트라이크인지 출력해주기(한글로 전부 표현)
+
   BallStrikeResult(numbers, answers) {
     const [ball, strike] = this.BallStrikeStatus(numbers, answers);
     let result;
@@ -62,7 +57,7 @@ class App {
       this.putNumbers(answers);
     }
   }
-  // 게임종료나 시작 같은 게임 상태 체크해주기(입력형식에 안맞는경우 throw문 사용)
+ 
   selectStatus() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
@@ -78,7 +73,7 @@ class App {
       }
     );
   }
-  // 숫자 입력창
+
   putNumbers(answers) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (numbers) => {
       if (this.getThreeResult(numbers)) {
@@ -88,7 +83,7 @@ class App {
       }
     });
   }
-  // 게임 플레이 함수(위에서 짠 함수들을 전부 집어넣는다)
+
   play() {
     const answers = this.pickInputRandom();
 
