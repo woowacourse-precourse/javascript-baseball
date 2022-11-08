@@ -34,16 +34,4 @@ describe("컴퓨터 숫자와 사용자 숫자 비교 결과", () => {
       expect(baseballGame.countBallNumbers()).toBe(ball);
     });
   });
-
-  test("콘솔에 알맞은 문자열을 출력하는지 검사", () => {
-    const logSpy = getLogSpy();
-    const ball = [3, 2, 0, 0];
-    const strike = [0, 1, 3, 0];
-    const messages = ["3볼", "2볼 1스트라이크", "3스트라이크", "낫싱"];
-
-    messages.forEach((output, index) => {
-      baseballGame.printGameResult(strike[index], ball[index]);
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
 });

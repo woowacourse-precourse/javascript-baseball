@@ -1,4 +1,4 @@
-const generateRandomNumber = require("../computerNumber");
+const {generateRandomNumber} = require("../util.js");
 
 describe("컴퓨터 난수 생성 테스트", () => {
   let computerNumber;
