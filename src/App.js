@@ -61,6 +61,17 @@ const calculateResult = function calculateResult(input, answer) {
   return `${strike} 스트라이크 ${ball} 볼`;
 };
 
+const countBall = function countBall(inputNumbers, answerNumbers) {
+  let ball = 0;
+  inputNumbers.forEach((inputNumber, index) => {
+    if (answerNumbers.includes(inputNumber) && inputNumber !== answerNumbers[index]) {
+      ball++;
+    }
+  });
+  return ball;
+};
+
+
 
 class App {
   play() {}
