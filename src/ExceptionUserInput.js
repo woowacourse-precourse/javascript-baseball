@@ -1,7 +1,5 @@
 const { EXCEPTIONMESSAGE } = require("./ConstMessage");
 
-
-
 function checkUserInput(userInput) {
   const userInputArr = userInput.split('');
 

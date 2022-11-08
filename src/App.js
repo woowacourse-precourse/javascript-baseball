@@ -8,6 +8,7 @@ class App {
     this.computerRandomNumbers = [];
     this.userRandomNumbers = [];
   }
+  
   play() {
     MissonUtils.Console.print(GAMEMESSAGE.START_MESSAGE);
     this.gameStart();
