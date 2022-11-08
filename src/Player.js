@@ -7,7 +7,7 @@ class Player {
     const uniqueValue = [...new Set(value)].join('');
 
     if (uniqueValue.length === 3 && /^[1-9]/.test(uniqueValue)) return value;
-    else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+    else throw MESSAGE.ERROR.WRONG_VALUE;
   }
 }
 
