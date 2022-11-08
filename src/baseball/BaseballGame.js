@@ -9,19 +9,19 @@ class BaseballGame {
   }
   initGame = () => {
     Console.print(GAME_MESSAGE.START_MESSAGE);
-    this.playGame();
+    return this.playGame();
   };
 
   playGame = () => {
     this.computerNumbers = ComputerNumbers.randomSelectComputerNumbers();
-    this.playing(this.computerNumbers);
+    return this.playing(this.computerNumbers);
   };
 
   playing = (computerNumbers) => {
     Console.readLine(GAME_MESSAGE.ENTER_NUMBER, (userInput) => {
       const validUserInput = this.validUserNumbers.isValidUserInput(userInput);
       if (validUserInput === false) {
-        return this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
+        this.throwError(ERROR_MESSAGE.ERROR_USER_INPUT);
       }
       const { strike, ball } = this.StrikeCount(userInput, computerNumbers);
       this.printResult(strike, ball);
