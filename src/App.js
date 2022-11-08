@@ -36,9 +36,9 @@ class App {
             if (this.gameOver() === -1) {
                 return true
             }
-            if (score[0] !== 3) {
-                return false
-            }
+        }
+        if (score[0] !== 3) {
+            return false
         }
     }
 
