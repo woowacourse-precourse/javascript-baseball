@@ -37,15 +37,15 @@ class App {
 
   #validateInput(input) {
     if (input.length !== 3) {
-      throw new Error(ERRORS.UNVALID_INPUT_LENGTH);
+      throw new Error(ERRORS.INVALID_INPUT_LENGTH);
     }
 
     if (new Set(input).size !== 3) {
-      throw new Error(ERRORS.UNVALID_INPUT_VALUE);
+      throw new Error(ERRORS.INVALID_INPUT_VALUE);
     }
 
     if (input.includes(0)) {
-      throw new Error(ERRORS.UNVALID_INPUT_RANGE);
+      throw new Error(ERRORS.INVALID_INPUT_RANGE);
     }
   }
 
@@ -97,7 +97,7 @@ class App {
 
   #validateRestartOption(option) {
     if (RESTART_OPTIONS[option] === undefined) {
-      throw new Error(ERRORS.UNVALID_RESTART_OPTION);
+      throw new Error(ERRORS.INVALID_RESTART_OPTION);
     }
   }
 

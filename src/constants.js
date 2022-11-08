@@ -12,13 +12,13 @@ const OUTPUTS = {
 };
 
 const ERRORS = {
-  UNVALID_INPUT_LENGTH:
+  INVALID_INPUT_LENGTH:
     '3자리의 수를 입력해주세요. 입력이 올바르지 않아 게임을 종료합니다.',
-  UNVALID_INPUT_VALUE:
+  INVALID_INPUT_VALUE:
     '중복되지 않는 세 자리의 수를 입력해주세요. 입력이 올바르지 않아 게임을 종료합니다.',
-  UNVALID_INPUT_RANGE:
+  INVALID_INPUT_RANGE:
     '1~9 사이의 서로 다른 세 자리의 수를 입력해주세요. 입력이 올바르지 않아 게임을 종료합니다.',
-  UNVALID_RESTART_OPTION:
+  INVALID_RESTART_OPTION:
     '1과 2중에서 하나를 입력해주세요. 입력이 올바르지 않아 게임을 종료합니다.',
 };
 

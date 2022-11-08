@@ -52,7 +52,7 @@ describe("숫자 야구 게임", () => {
       expect(() => {
         const app = new App();
         app.play();
-      }).toThrow(ERRORS.UNVALID_INPUT_LENGTH);
+      }).toThrow(ERRORS.INVALID_INPUT_LENGTH);
     });
   });
 
@@ -69,7 +69,7 @@ describe("숫자 야구 게임", () => {
       expect(() => {
         const app = new App();
         app.play();
-      }).toThrow(ERRORS.UNVALID_INPUT_VALUE);
+      }).toThrow(ERRORS.INVALID_INPUT_VALUE);
     });
   });
 
@@ -86,7 +86,7 @@ describe("숫자 야구 게임", () => {
       expect(() => {
         const app = new App();
         app.play();
-      }).toThrow(ERRORS.UNVALID_INPUT_RANGE);
+      }).toThrow(ERRORS.INVALID_INPUT_RANGE);
     });
   });
 
@@ -216,7 +216,7 @@ describe("숫자 야구 게임", () => {
       expect(() => {
         const app = new App();
         app.play();
-      }).toThrow(ERRORS.UNVALID_RESTART_OPTION);
+      }).toThrow(ERRORS.INVALID_RESTART_OPTION);
     });
   });
 
