@@ -24,7 +24,7 @@ const getLogSpy = () => {
 };
 
 describe("숫자 야구 게임", () => {
-        test("예외처리 1 길이", () => {
+    test("예외처리 1 길이", () => {
         const randoms = [1, 3, 5];
         const answers = ["1"];
 
@@ -36,7 +36,7 @@ describe("숫자 야구 게임", () => {
             app.play();
         }).toThrow();
     });
-        test("예외처리 2 중복", () => {
+    test("예외처리 2 중복", () => {
         const randoms = [1, 3, 5];
         const answers = ["112"];
 
@@ -48,7 +48,7 @@ describe("숫자 야구 게임", () => {
             app.play();
         }).toThrow();
     });
-        test("예외처리 3 문자", () => {
+    test("예외처리 3 문자", () => {
         const randoms = [1, 3, 5];
         const answers = ["abc"];
 
@@ -60,7 +60,7 @@ describe("숫자 야구 게임", () => {
             app.play();
         }).toThrow();
     });
-        test("예외처리 4 공백 및 기호", () => {
+    test("예외처리 4 공백 및 기호", () => {
         const randoms = [1, 3, 5];
         const answers = ["^ ★"];
 
@@ -71,6 +71,23 @@ describe("숫자 야구 게임", () => {
             const app = new App();
             app.play();
         }).toThrow();
+    });
+
+    test("3스트라이크", () => {
+        const randoms = [1, 3, 6];
+        const answers = ["136"];
+        const logSpy = getLogSpy();
+        const messages = ["3스트라이크"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        const app = new App();
+        app.play();
+
+        messages.forEach((output) => {
+            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
     });
 
 });
