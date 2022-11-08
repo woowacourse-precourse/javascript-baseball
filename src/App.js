@@ -25,9 +25,20 @@ class App {
   }
 
   createMyNumber() {
-    MissionUtils.Console.readline("숫자를 입력해주세요 : ", (answer) => {
+    MissionUtils.Console.readline("숫자를 입력해주세요 : ", (myNumbers) => {
       
     })
+  }
+
+  countBallStrike(randomNumbers, myNumbers) {
+    let ball = 0;
+    let strike = 0;
+    for (let i = 0; i < 3; i++) {
+      if (myNumbers[i] == randomNumbers[i])
+        strike++;
+      else if (myNumbers.includes(randomNumbers[i]))
+        ball++;
+    }
   }
 }
 
