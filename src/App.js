@@ -30,18 +30,18 @@ class App {
   throwException(input) {
     if (input.length !== GAME.NUMBER_COUNT || isNaN(input))
       throw new Error(PHRASE.ERROR);
-    input.split('').reduce((acc, cur) => {
+    [...input].reduce((acc, cur) => {
       if (acc.includes(cur)) throw new Error(PHRASE.ERROR);
       return acc + cur;
-    }, '');
+    });
   }
 
   compareNumbers(input) {
     const result = { ball: 0, strike: 0 };
-    const inputNumberList = input.split('').map((number) => Number(number));
+    const inputNumberList = [...input].map((number) => Number(number));
 
     inputNumberList.forEach((number, idx) => {
-      if (number === this.answerNumberList[idx]) result.strike += 1;
+      if (number === this.answerNumberList[idx]) sult.strike += 1;
       else if (this.answerNumberList.includes(number)) result.ball += 1;
     });
     this.printResult(result);
