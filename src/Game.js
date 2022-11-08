@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { isValidNumbers } = require('./utils/validate/validate.js');
+const { isValidNumbers, isOneOrTwo } = require('./utils/validate/validate.js');
 const generateRandomNumberArray = require('./utils/game/generateRandomNumber.js');
 const generateResultThisTurn = require('./utils/game/result.js');
 
