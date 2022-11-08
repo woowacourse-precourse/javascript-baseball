@@ -16,6 +16,9 @@ class App {
   // 게임
   play() {
     const numbers = this.randomPickNumbers();
+
+    // 게임 시작 문구 출력
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   }
 }
 
