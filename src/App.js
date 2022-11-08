@@ -82,17 +82,19 @@ class App {
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       Console.readLine(
         "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-        (input) => {
-          if (input === "1") {
-            return this.startGame();
-          } else if (input === "2") {
-            return Console.close();
-          } else throw Error("1 또는 2를 입력해주세요.");
-        }
+        (input) => this.selectOneAfterGameEnd(input)
       );
     } else {
       this.getResultOfUserInput();
     }
+  }
+
+  selectOneAfterGameEnd(input) {
+    if (input === "1") {
+      return this.startGame();
+    } else if (input === "2") {
+      return Console.close();
+    } else throw Error("1 또는 2를 입력해주세요.");
   }
 }
 
