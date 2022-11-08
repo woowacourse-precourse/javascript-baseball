@@ -10,24 +10,28 @@ class App {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.random_numbers = CreateRandomNum();
     MissionUtils.Console.print(this.random_numbers);
-    this.input_numbers = InputNumber();
-    MissionUtils.Console.print(this.input_numbers);
+    this.start();
+
+  }
+
+  start() {
+    const computer = this.computer;
+    let user = [];
+    let result = "";
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      // this.input_numbers = answer;
+      // MissionUtils.Console.print(this.input_numbers);
+
+    this.start();
+    });
   }
 }
 
-//숫자 입력 함수
-//
-// function InputNumber(){
-//   let input_numbers;
-  
-//   MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input_numbers) => {
-//     console.log(`숫자: ${input_numbers}`);
-//   });
 
-// //throw new Error("숫자를 입력하세요");
 
-//   return input_numbers;
-// }
+function isExcept(){
+
+}
 
 
 function CalStrike(str1, str2){
@@ -61,9 +65,6 @@ function CreateRandomNum(){
   }
   return randstr;
 }
-
-
-
 
 
 
