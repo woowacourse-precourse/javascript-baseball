@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const getIsInputValueValid = require("./ValidCheck");
-const getHint = require("./Hint");
+const { getIsInputValueValid } = require("./ValidCheck");
+const { getHint } = require("./Hint");
 const Computer = require("./Computer");
 
 class BaseballGame {

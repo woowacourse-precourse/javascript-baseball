@@ -42,4 +42,4 @@ const getHint = (correctNumber, inputNumber) => {
   return hint;
 };
 
-module.exports = getHint;
+module.exports = { getHint };

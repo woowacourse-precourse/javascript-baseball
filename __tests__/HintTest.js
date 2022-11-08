@@ -1,4 +1,4 @@
-const getHint = require("../src/Hint");
+const { getHint } = require("../src/Hint");
 
 describe("힌트 산출 테스트", () => {
   test('볼과 스트라이크가 함께 있을 때는 "~볼 ~스트라이크"가 출력된다.', () => {

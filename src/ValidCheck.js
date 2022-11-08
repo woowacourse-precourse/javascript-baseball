@@ -25,4 +25,4 @@ const getIsInputValueValid = (inputValue) => {
   return isInputValueValid;
 };
 
-module.exports = getIsInputValueValid;
+module.exports = { getIsInputValueValid };
