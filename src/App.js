@@ -1,5 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
+  constructor(){
+    this.computer=[];
+    this.user=[];
+    this.strike=0;
+    this.ball=0;
+  }
+
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     const computer = this.get_computer_number();
@@ -25,9 +32,14 @@ class App {
   }
 
   check_input(user_num){
-    if (Number.isInteger(user_num)){
+    if (isNaN(+user_num)){
       throw '숫자가 아닌 값이 포함되어있습니다.';
     }
+
+    if (Math.abs(parseInt(+user_num)) !== (+user_num)){
+      throw '양의 정수만 입력하세요';
+    }
+    
     let get_user = user_num.split('').map(Number);
     let delete_overlab = [...new Set(get_user)];
     if (get_user.length != 3){
