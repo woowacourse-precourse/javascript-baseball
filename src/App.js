@@ -53,6 +53,10 @@ const playerNumbersInput = () => {
     console.log("[Error]입력 숫자는 각각 서로 다른 숫자여야 합니다.");
     throw "입력 숫자 겹침";
   }
+  if(input.includes(0)){
+    console.log("[Error]입력 숫자에 0은 허용되지 않습니다.");
+    throw "입력 숫자 0";
+  }
   return input;
 };
 
