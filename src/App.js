@@ -23,7 +23,6 @@ function checkZero(answer) {
 class App {
   constructor() {
     this.computerRandomNumber = this.createRandomNumber();
-    this.userAnswer = [];
     this.strike = 0;
     this.ball = 0;
   }
