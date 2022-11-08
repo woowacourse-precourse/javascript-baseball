@@ -89,5 +89,21 @@ describe("숫자 야구 게임", () => {
             expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
         });
     });
+    test("2스트라이크", () => {
+        const randoms = [1, 3, 6];
+        const answers = ["135"];
+        const logSpy = getLogSpy();
+        const messages = ["2스트라이크"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        const app = new App();
+        app.play();
+
+        messages.forEach((output) => {
+            expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+        });
+    });
 
 });
