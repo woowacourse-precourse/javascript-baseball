@@ -44,15 +44,15 @@ const inputUserNum = () => {
 
 const exceptionHandlingInputUserNum = (answer) => {
   if (!is3Letters(answer)) {
-    throw escape;
+    throw '[ERROR] input error, is not 3 Letters';
   }
 
   if (!isOnlyNumber(answer)) {
-    throw escape;
+    throw '[ERROR] input error, is not only number';
   }
 
   if (!areEachDifferent(answer)) {
-    throw escape;
+    throw '[ERROR] input error, not each different number';
   }
 }
 
