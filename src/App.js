@@ -20,17 +20,28 @@ class App {
   }
 
   getUserNumber() {
-    let guessNumber;
+    let userNumberInput;
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (x) => {
-      guessNumber = x;
+      userNumberInput = x;
     });
     MissionUtils.Console.close();
-    this.userNumberList = guessNumber.split('').reduce((prev, cur) => [...prev, Number(cur)], []);
+    this.userNumberList = userNumberInput
+      .split('')
+      .reduce((numberList, pickedNumber) => [...numberList, Number(pickedNumber)], []);
+  }
+
+  userNumberInputException() {
+    if (this.userNumberList.length !== 3) {
+      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    }
+    if (this.userNumberList.filter((pickedNumber) => Number.isNaN(pickedNumber)).length > 0) {
+      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    }
   }
 
   countStrike() {
     this.strikeCount = this.computerNumberList.filter(
-      (num, index) => num === this.userNumberList[index],
+      (pickedNumber, index) => pickedNumber === this.userNumberList[index],
     ).length;
   }
 
@@ -43,7 +54,7 @@ class App {
     });
   }
 
-  getTotalBallStrike() {
+  getTotalBallStrikeCount() {
     if (this.strikeCount > 0 && this.ballCount > 0) {
       return `${this.ballCount}볼 ${this.strikeCount}스트라이크`;
     }
@@ -52,18 +63,21 @@ class App {
     return '낫싱';
   }
 
-  inputException() {
-    if (this.userNumberList.length !== 3) {
-      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
-    }
-    if (this.userNumberList.filter((num) => Number.isNaN(num)).length > 0) {
-      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
-    }
+  getContinueOrFinishInput() {
+    let continueOrFinishInput;
+    MissionUtils.Console.readLine(
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (x) => {
+        continueOrFinishInput = x;
+      },
+    );
+    MissionUtils.Console.close();
+    return continueOrFinishInput;
   }
 
-  continueOrFinishInputException(input) {
+  continueOrFinishInputException(continueOrFinishInput) {
     try {
-      if (input !== '1' || input !== '2') {
+      if (continueOrFinishInput !== '1' || continueOrFinishInput !== '2') {
         throw new Error('1 또는 2를 입력해야 합니다. 게임을 종료합니다.');
       }
     } catch (error) {
@@ -71,20 +85,8 @@ class App {
     }
   }
 
-  continueOrFinish() {
-    let input;
-    MissionUtils.Console.readLine(
-      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (x) => {
-        input = x;
-      },
-    );
-    MissionUtils.Console.close();
-    return input;
-  }
-
-  chooseContinueFinish(input) {
-    if (input.toString() === '2') {
+  chooseContinueOrFinish(continueOrFinishInput) {
+    if (continueOrFinishInput.toString() === '2') {
       MissionUtils.Console.print('게임 종료');
       this.isPlaying = false;
     } else {
@@ -96,16 +98,16 @@ class App {
   playGame() {
     this.getUserNumber();
     try {
-      this.inputException();
+      this.userNumberInputException();
 
       this.countStrike();
       this.countBall();
-      MissionUtils.Console.print(this.getTotalBallStrike());
+      MissionUtils.Console.print(this.getTotalBallStrikeCount());
 
       if (this.strikeCount === 3) {
-        const input = this.continueOrFinish();
-        this.continueOrFinishInputException(input);
-        this.chooseContinueFinish(input);
+        const continueOrFinishInput = this.getContinueOrFinishInput();
+        this.continueOrFinishInputException(continueOrFinishInput);
+        this.chooseContinueOrFinish(continueOrFinishInput);
       }
     } catch (error) {
       MissionUtils.Console.print(error.message);
