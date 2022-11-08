@@ -1,4 +1,4 @@
-import * as MissionUtils from "@woowacourse/mission-utils";
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
@@ -29,7 +29,7 @@ class App {
       throw new Error("숫자만 입력 바랍니다.");
     } else if (userNum.length !== 3) {
       throw new Error("3자리의 숫자를 입력 바랍니다.");
-    } else if ([...new Set(str)].length !== 3) {
+    } else if ([...new Set(userNum)].length !== 3) {
       throw new Error("숫자의 중복은 허용되지 않습니다. 바른 입력 바랍니다.");
     }
   }
