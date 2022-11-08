@@ -2,7 +2,6 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   play() {
     baseBall()
-
   }
 }
 
@@ -19,25 +18,16 @@ function baseBall() {
 
 function inputAnswer(COM_NUMBER) {
   MissionUtils.Console.readLine('숫자를 입력해 주세요', (input) => {
-    inputcheck(input, COM_NUMBER);
+    var input_array = []
+    for (let x of input) {
+      input_array.push(x)
+    } 
+    var input_set = new Set(input_array);
+    if(exception(input, input_set)) {
+    answercheck(input_array, COM_NUMBER)}
   })
-
 }
 
-function inputcheck(input, COM_NUMBER) {
-  var input_array = []
-  for (let x of input) {
-    input_array.push(x)
-  }
-  var input_set = new Set(input_array);
-  // if (input !== /[1-9]{3}/ || input_set.length !== 3) {
-  //   throw exception()
-  // }
-  answerCheck(input_array, COM_NUMBER)
-}
-function exception() {
-  MissionUtils.Console.print('잘못된 숫자를 입력하여 게임을 종료합니다.')
-}
 function answerCheck (input_array, COM_NUMBER) {
   var strike = 0
   var ball = 0
@@ -50,9 +40,9 @@ function answerCheck (input_array, COM_NUMBER) {
       continue
     }
   }
-  resultprint(strike, ball)
+  resultprint(COM_NUMBER, strike, ball)
 }
-function resultprint(strike, ball) {
+function resultprint(COM_NUMBER, strike, ball) {
   var result = ''
   if(strike==3){
     result += '정답입니다!';
@@ -62,10 +52,18 @@ function resultprint(strike, ball) {
   if(ball>0){result += `${ball}볼`}
   if(strike>0){result = result + " " + `${strike}스트라이크`}
   MissionUtils.Console.print(result)
-  return inputAnswer
+  return inputAnswer(COM_NUMBER)
 }
 function newGame (){
 
 }
-
+function exception(input) {
+  if (input !== /[1-9]{3}/) {
+    throw '3자리 숫자를 입력해주세요'
+  }
+  if (input_set.size !== 3){
+    throw '각자 다른 숫자를 입력해 주세요'
+  }
+  return true
+}
 module.exports = App;
