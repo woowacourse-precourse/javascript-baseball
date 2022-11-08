@@ -109,7 +109,7 @@ class App {
     const test = [...player];
     return (
       (player.length <= this.NUMBER_LENGTH) &&  
-      (/^[0-9]+$/.test(player)) &&     
+      (/^[1-9]+$/.test(player)) &&     
       (test.length === [...new Set(test)].length)
     );
   }
@@ -122,3 +122,6 @@ class App {
 }
 
 module.exports = App;
+
+const app = new App();
+app.play();
