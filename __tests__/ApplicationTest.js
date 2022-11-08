@@ -199,4 +199,13 @@ describe("숫자 야구 게임", () => {
       "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료"
     );
   });
+
+  test("추가테스트5-2: compareUserGuessToCompNum", () => {
+    const logSpy = getLogSpy();
+    const userNumArr = [1, 2, 3];
+    const compNumArr = [1, 3, 2];
+    compareUserGuessToCompNum(userNumArr, compNumArr);
+    expect(logSpy).toHaveBeenCalledWith("2볼 1스트라이크");
+  });
+
 });
