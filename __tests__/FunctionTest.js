@@ -34,4 +34,14 @@ describe("기능 테스트", () => {
       expect.stringContaining("숫자 야구 게임을 시작합니다.")
     );
   });
+
+  test("[기능 2] 랜덤 수 생성 및 저장", () => {
+    const randoms = [1, 5, 5, 5, 8, 9];
+
+    const app = new App();
+
+    mockRandoms(randoms);
+
+    expect(app.createRandomNumber()).toStrictEqual([1, 5, 8]);
+  });
 });
