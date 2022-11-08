@@ -12,7 +12,7 @@ class App {
     let reGuess = true;
     do {
       NumberBaseBallSystem.createAnswerNumber();
-      console.log(NumberBaseBallSystem.getNumber);
+      // console.log(NumberBaseBallSystem.getNumber);
       do {
         const guessNumber = await PlayingUser.enterGuessNumber();
         const scoreboard = NumberBaseBallSystem.isStrike(guessNumber);
@@ -26,7 +26,7 @@ class App {
   }
 }
 
-App.prototype.play();
+// App.prototype.play();
 
 // const readLine = (question) => {
 //   return new Promise((resolve) => {
