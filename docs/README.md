@@ -105,3 +105,52 @@
 5. 정답 (3스트라이크) 일 때 게임 재시작 또는 종료에 관한 테스트 ✅
 
 - 1과 2가 아닌 값을 입력시에 에러처리
+
+</br>
+
+### **디렉터리 구조**
+
+---
+
+📦src
+
+┣ 📂constants</br>
+┃ ┗ 📜constants.js</br>
+┣ 📂game</br>
+┃ ┗ 📜Game.js</br>
+┃ ┃ ┗ 🔖 initPrint ➡️ 게임 시작 멘트 출력 메서드</br>
+┃ ┃ ┗ 🔖 start ➡️ 게임 시작 담당 메서드</br>
+┣ 📂input</br>
+┃ ┣ 📜Computer.js</br>
+┃ ┃ ┗ 🔖 getRandomNumber ➡️ 난수 생성 메서드</br>
+┃ ┃ ┗ 🔖 getComputerNumbers ➡️ 컴퓨터의 중복없는 난수 3개를 반환하는 메서드</br>
+┃ ┗ 📜User.js</br>
+┃ ┃ ┗ 🔖 userInputStart ➡️ 유저의 입력값을 받는 메서드</br>
+┃ ┃ ┗ 🔖 makeNumberArray ➡️ 유저의 입력값을 숫자 배열로 반환하는 메서드</br>
+┃ ┃ ┗ 🔖 checkUserNumber ➡️ 유저의 입력값을 검사하는 메서드</br>
+┃ ┃ ┗ 🔖 compareNumbers ➡️ 유저의 입력값과 컴퓨터의 값을 비교한 결과를 통해 정답이라면 게임 진행을 결정하는 메서드</br>
+┃ ┃ ┗ 🔖 inputRestartOrExit ➡️ 정답일 경우 게임진행을 위해 입력을 받는 메서드</br>
+┃ ┃ ┗ 🔖 checkRestartOrExit ➡️ 게임 진행 여부를 위해 입력한 값을 검사하는 메서드</br>
+┃ ┃ ┗ 🔖 gameRestart ➡️ 컴퓨터의 값을 초기화하고 새롭게 사용자에게 입력값을 받기 위한 메서드</br>
+┣ 📂utils</br>
+┃ ┣ 📜Compare.js</br>
+┃ ┃ ┗ 🔖 getStrikeCount ➡️ 사용자 입력값과 컴퓨터의 값을 비교하여 스트라이크의 개수를 반환하는 메서드</br>
+┃ ┃ ┗ 🔖 getBallCount ➡️ 사용자 입력값과 컴퓨터의 값을 비교하여 볼의 개수를 반환하는 메서드</br>
+┃ ┃ ┗ 🔖 consoleCompareResult ➡️ 비교한 결과값에 따라 사용자에게 힌트를 보여주는 메서드</br>
+┃ ┃ ┗ 🔖 returnResult ➡️ 결과값이 스트라이크가 3개라면 true를 반환하는 메서드</br>
+┃ ┃ ┗ 🔖 getResult ➡️ 위 함수들을 이용해 결과적으로 사용자에게 비교한 결과를 보여주고 returnResult 메서드의 결과를 반환하는 메서드 </br>
+┃ ┗ 📜Mission.js ➡️ @woowacourse/mission-utils를 각 클래스에서 따로 require 받지 않고 상속을 이용해 사용하기 위한 클래스</br>
+┗ 📜App.js</br>
+┃ ┗ 🔖 play ➡️ 게임 시작을 하는 메서드</br>
+</br>
+
+📦docs</br>
+
+┗ 📜constants.js ➡️ 상수를 관리하는 객체</br>
+</br>
+
+📦\_\_tests\_\_</br>
+
+┣ 📜ApplicationTest.js</br>
+┣ 📜StringTest.js</br>
+┗ 📜FunctionTest.js ➡️ 추가적으로 구현한 테스트코드</br>
