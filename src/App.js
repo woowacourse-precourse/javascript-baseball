@@ -45,7 +45,7 @@ const computeBallStrike = (randombaseball, number) => {
   let ball = 0;
   let strike = 0;
 
-  let userNumber = number.split('').map(Number);
+  let userNumber = number.split("").map(Number);
 
   for (let i = 0; i < 3; i++) {
     if (randombaseball.includes(userNumber[i])) {
@@ -57,6 +57,27 @@ const computeBallStrike = (randombaseball, number) => {
     }
   }
 
-  const result = [ball, strike]
+  const result = [ball, strike];
   return result;
+};
+
+const computeResult = (result) => {
+  let str = "";
+  if (result[1] === 3) {
+    str = "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    return str;
+  }
+  if (result[0] !== 0 && result[1] === 0) {
+    str += `${result[0]}볼`;
+  }
+  if (result[1] !== 0 && result[0] === 0) {
+    str += `${result[1]}스트라이크`;
+  }
+  if (result[0] !== 0 && result[1] !== 0) {
+    str += `${result[0]}볼 ${result[1]}스트라이크`;
+  }
+  if (result[0] === 0 && result[1] === 0) {
+    str = "낫싱";
+  }
+  return str;
 };
