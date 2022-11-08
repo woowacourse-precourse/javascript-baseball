@@ -27,6 +27,10 @@ class App {
     }
     this.random = randomNums;
   }
+
+  getUserInput(comment, callback) {
+    MissionUtils.Console.readLine(comment, callback);
+  }
 }
 
 const app = new App();
