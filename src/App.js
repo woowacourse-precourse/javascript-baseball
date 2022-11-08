@@ -16,18 +16,17 @@ class App {
   }
 
   computerData() {
-    const COMPUTER_NUM = [];
-    while (COMPUTER_NUM.length < 3) {
+    this.COMPUTER_NUM = [];
+    while (this.COMPUTER_NUM.length < 3) {
       const NUM = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!COMPUTER_NUM.includes(NUM)) {
-        COMPUTER_NUM.push(NUM);
+      if (!this.COMPUTER_NUM.includes(NUM)) {
+        this.COMPUTER_NUM.push(NUM);
       }
     }
-    return COMPUTER_NUM;
   }
 
   userData() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (USER_NUM) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 :", (USER_NUM) => {
       this.checkIsValid(USER_NUM);
       this.checkIsRight();
     });
@@ -35,25 +34,31 @@ class App {
 
   checkIsValid(USER_NUM) {
     if (USER_NUM === "") {
-      throw new Error("입력값이 없습니다. 숫자를 입력해주세요");
+      throw "입력값이 없습니다. 숫자를 입력해주세요";
     }
     if (USER_NUM.length !== 3) {
-      throw new Error("숫자 3개를 입력해주세요.");
+      throw "숫자 3개를 입력해주세요.";
     }
-    if ([...new Set(USER_NUM.split(""))].length !== 3) {
-      throw new Error("중복된 숫자가 존재합니다.");
+    if (USER_NUM.includes("0")) {
+      throw "0을 포함하지 않습니다";
     }
+
+    this.USER_NUM = [...USER_NUM].map((NUM) => parseInt(NUM));
+    if (this.USER_NUM.includes(NaN)) throw "잘못된 입력값 입니다.";
+
+    const isRepeat = [...new Set(USER_NUM.split(""))].length !== 3;
+    if (isRepeat) throw "중복된 숫자가 존재합니다.";
   }
 
   checkIsRight() {
     let STRIKE = 0;
     let BALL = 0;
 
-    this.USER_NUM.map((num, idx) => {
-      if (this.COMPUTER_NUM[idx] === num) {
+    this.USER_NUM.map((elem, idx) => {
+      if (this.COMPUTER_NUM[idx] === elem) {
         STRIKE++;
       } else {
-        this.COMPUTER_NUM.includes(num) ? BALL++ : BALL;
+        this.COMPUTER_NUM.includes(elem) ? BALL++ : BALL;
       }
     });
 
@@ -77,7 +82,26 @@ class App {
     }
   }
 
-  gameRestart() {}
+  gameRestart() {
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (OPTION_NUM) => {
+        this.gameOption(OPTION_NUM);
+      }
+    );
+  }
+
+  gameOption(OPTION_NUM) {
+    if (OPTION_NUM === "1") {
+      app.play();
+    } else if (OPTION_NUM === "2") {
+      MissionUtils.Console.close();
+    } else {
+      throw "1과 2의 숫자만 입력하실 수 있습니다";
+    }
+  }
 }
 
+const app = new App();
+app.play();
 module.exports = App;
