@@ -17,6 +17,14 @@ class App {
     else return true;
   }
 
+  isDuplicated(input) {
+    let check = false;
+    input.map((item, index) => {
+      if (input.indexOf(item) !== index) check = true;
+    })
+    return check;
+  }
+
   createComputerNumber() {
     this.computerNumber = [];
     while (this.computerNumber.length < MAX_LENGTH) {
