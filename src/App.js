@@ -53,9 +53,25 @@ class App {
       if (result === 'strike') strike += 1;
       else if (result === 'ball') ball += 1;
     }
-    hint = this.makeHint(strike, ball);
+    hint = this.printHint(strike, ball);
     return hint;
+  }
 
+  printHint(strike, ball) {
+    let hint = '';
+    if (strike === 0 && ball === 0) {
+      hint = '낫싱';
+    }
+    else if (strike === 0) {
+      hint = '${ball}볼';
+    }
+    else if (ball === 0) {
+      hint = '${strike}스트라이크';
+    }
+    else {
+      hint = '${ball}볼 ${strike}스트라이크';
+    }
+    return hint;
   }
 }
 
