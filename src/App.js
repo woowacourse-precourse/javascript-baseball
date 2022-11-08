@@ -92,7 +92,16 @@ class App {
     return `${this.ball}볼 ${this.strike}스트라이크`;
   }
 
-  finishOrRestart() {}
+  finishOrRestart() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (number) => {
+        if (number === '1') return true;
+        else if (number === '2') return false;
+        else throw new Error('입력값이 올바르지 않습니다.');
+      }
+    );
+  }
 
   async play() {
     let resultText = '';
