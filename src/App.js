@@ -31,7 +31,7 @@ class App {
   }
 
   init() {
-    this.answers = computerUtils.getRandomNumber();
+    this.answers = computerUtils.getRandomNumbers();
     Console.print('숫자 야구 게임을 시작합니다.');
   }
 
@@ -49,5 +49,7 @@ class App {
     Console.close();
   }
 }
+
+new App().play();
 
 module.exports = App;
