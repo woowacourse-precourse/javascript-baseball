@@ -64,7 +64,7 @@ class App {
     return result;
   }
 
-  printResult(score) {
+  printResult(score, otherTextMessage = "") {
     const [strikeScore, ballScore] = score;
     const BALL = {
       0: "",
@@ -79,7 +79,8 @@ class App {
       3: "3스트라이크",
     };
     const NOTHING = "낫싱";
-    const message = `${BALL[ballScore]} ${STRIKE[strikeScore]}`.trimLeft();
+    const message =
+      `${BALL[ballScore]} ${STRIKE[strikeScore]}\n${otherTextMessage}`.trim();
     if (message) {
       Console.print(message);
       return;
@@ -124,8 +125,7 @@ class App {
       score = this.getStrikeAndBallCount(goal, userAnswer);
     }
 
-    this.printResult(score);
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.printResult(score, "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     if (await this.confirmRestart()) return this.restartGame();
 
     this.exitGame();
