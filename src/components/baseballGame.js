@@ -45,10 +45,10 @@ class BaseballGame{
         this.progress(answer, strike);
     }
 
-    getBall(answer, inputNumber){
+    getBall(answer, number){
         let ball = 0;
         
-        [...inputNumber].forEach((number, index) => {
+        [...number].forEach((number, index) => {
             if(number !== answer[index] && answer.includes(number)){
                 ball++;
             }
