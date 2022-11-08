@@ -8,4 +8,11 @@ const MESSAGE = {
   IS_DUPLICATED: '중복되지 않은 값을 입력하세요!',
 };
 
+const RESULT_COUNT = {
+  STRIKE: '스트라이크',
+  BALL: '볼',
+  NOTHING: '낫싱',
+};
+
 exports.MESSAGE = MESSAGE;
+exports.RESULT_COUNT = RESULT_COUNT;
