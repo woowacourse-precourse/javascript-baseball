@@ -22,4 +22,12 @@ class BaseBallGame {
     this.#strikeCount = 0;
     this.#ballCount = 0;
   }
+
+  #inputNumber() {
+    this.#clearBallAndStrikeCount();
+
+    Console.readLine(GAME_STATE_MESSAGE.INPUT, (input) => {
+      this.getResult(input, this.computer);
+    });
+  }
 }
