@@ -1,6 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { THREE_TIMES, ASK_CONTINUE, ANSWER_NUMBERS, ANSWER_IS_MUST_BE_THREE_LENGTH } = require("./constants/constant");
+const { THREE_TIMES, ASK_CONTINUE, ANSWER_NUMBERS } = require("./constants/constant");
 const MESSAGE = require("./constants/message");
+const validateAnswer = require("./exceptions/exception");
 
 class App {
   constructor() {
@@ -24,8 +25,8 @@ class App {
 
   requestAnswer(message) {
     Console.readLine(message, (answer) => {
-      if (answer.length !== ANSWER_IS_MUST_BE_THREE_LENGTH) throw new Error(MESSAGE.ERROR.ANSWER_LENGTH_MUST_BE_THREE);
-      if (answer.length !== [...new Set(answer)].length) throw new Error(MESSAGE.ERROR.ANSWER_IS_MUST_BE_DIFFERENT_EACH_NUMBER);
+      validateAnswer(answer);
+
       this.userAnswer = answer.split("").map(Number);
 
       this.compareAnswer(this.answer, this.userAnswer);
