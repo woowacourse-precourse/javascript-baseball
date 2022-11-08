@@ -9,14 +9,10 @@ class App {
   }
 
   play() {
-    // this.initializeNumber();
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    // let isGameOn = true;
-    let tempCountForTest = 1;
-    while (tempCountForTest < 3) {
-      this.readLineNumberOfPlayer();
+    while (this.isGameOn) {
+      this.guessBaseBallNumber();
       this.isGameOn = false;
-      tempCountForTest += 1;
     }
   }
 
@@ -34,14 +30,22 @@ class App {
     }
   }
 
+  guessBaseBallNumber() {
+    let numberOfBalls;
+    let numberOfStrikes;
+    [numberOfBalls, numberOfStrikes] = this.readLineNumberOfPlayer();
+
+    this.printResultOfGuess(numberOfBalls, numberOfStrikes);
+  }
+
   readLineNumberOfPlayer() {
-    let numberOfBalls = 0;
-    let numberOfStrikes = 0;
+    let numberOfBalls;
+    let numberOfStrikes;
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (guessedBaseballNumber) => {
       [numberOfBalls, numberOfStrikes] = this.checkingBallsAndStrikes(guessedBaseballNumber);
     })
-    MissionUtils.Console.print(`${numberOfBalls}, ${numberOfStrikes}`);
+    return [numberOfBalls, numberOfStrikes];
   }
 
   checkingBallsAndStrikes(guessedBaseballNumber) {
@@ -78,6 +82,23 @@ class App {
       return 1
     }
     return 0
+  }
+
+  printResultOfGuess(numberOfBalls, numberOfStrikes) {
+    let stringBalls = '';
+    let stringStrikes = '';
+    if (numberOfBalls) {
+      stringBalls = `${numberOfBalls}볼 `;
+    }
+    if (numberOfStrikes) {
+      stringStrikes = `${numberOfStrikes}스트라이크`;
+    }
+    if (numberOfBalls || numberOfStrikes) {
+      MissionUtils.Console.print(`${stringBalls}${stringStrikes}`);
+      return;
+    }
+    MissionUtils.Console.print(`낫싱`);
+    return;
   }
 }
 
