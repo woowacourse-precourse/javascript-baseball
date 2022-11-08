@@ -6,6 +6,7 @@ const { GAME_CONFIG, INGAME_MESSAGE } = require("./Constant");
 class Input {
   computer() {
     const computerPick = [];
+
     while (computerPick.length < GAME_CONFIG.COUNT) {
       const randomNumber = MissionUtils.Random.pickNumberInRange(
         GAME_CONFIG.START_NUMBER,
@@ -16,6 +17,7 @@ class Input {
         computerPick.push(randomNumber);
       }
     }
+
     return computerPick;
   }
 
