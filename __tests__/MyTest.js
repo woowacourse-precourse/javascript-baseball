@@ -39,6 +39,7 @@ describe('기능 목록 테스트', () => {
   });
 
   test('사용자 입력값 예외 처리 기능', () => {
+    // throw exception
     const exceptionInputList = [111, 12, '일이삼'];
 
     exceptionInputList.forEach((exceptionInput) => {
@@ -47,6 +48,14 @@ describe('기능 목록 테스트', () => {
         app.throwException(exceptionInput);
       }).toThrow();
     });
+
+    // print exception
+    const logSpy = getLogSpy();
+    const app = new App();
+    const exceptionInput = 3;
+
+    app.printException(exceptionInput);
+    expect(logSpy).toHaveBeenCalledWith(expect.stringMatching(PHRASE.ERROR2));
   });
 
   test('결과를 출력하는 기능', () => {
