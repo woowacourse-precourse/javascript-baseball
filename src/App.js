@@ -3,20 +3,29 @@ const MissionUtils = require("@woowacourse/mission-utils");
 class App{
   constructor(){ //변수 선언
     this.comNum = [];
+    this.usrNum = [];
     this.strike = 0;
     this.ball = 0;
     this.nothing = 0;
   }
   
-  comRandomNumber(){ //컴퓨터 랜덤 숫자 정하기 함수
-    
+  usrInputCheck(){ //사용자 수 입력 예외 처리
+    if((this.usrNum).length != 3){
+      throw '3자리 수가 아닙니다.';
+    } else if(this.usrNum[0] == this.usrNum[1] || this.usrNum[0] == this.usrNum[2] || this.usrNum[2] == this.usrNum[3]){
+      throw '서로 다른 수가 아닙니다.';
+    } else if(Math.sign(this.usrNum[0]) != 1 || Math.sign(this.usrNum[1]) != 1 || Math.sign(this.usrNum[2]) != 1){
+      throw '양수가 아닙니다.';
+    }
+  }
+
+  comRandomNumber(){ //컴퓨터 랜덤 숫자 정하기
     while (this.comNum.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!this.comNum.includes(number)) {
         this.comNum.push(number);
       }
     }
-    MissionUtils.Console.print(this.comNum);
   }
 
   gameStartNotice(){ //게임 시작 알림
@@ -24,12 +33,13 @@ class App{
   }
 
   getGameResult(){ //스트라이크, 볼 계산
-    MissionUtils.Console.readLine('숫자를 입력해주세요', (number) => {
-      let usrNum = [...number];
+    MissionUtils.Console.readLine('숫자를 입력해주세요', (answers) => {
+      this.usrNum = [...answers];
+      this.usrInputCheck(); 
 
-      for(let i = 0; i < usrNum.length; i++){
-        if(this.comNum.includes(usrNum[i])){
-          if(usrNum[i] == this.comNum[i]){
+      for(let i = 0; i < (this.usrNum).length; i++){
+        if(this.comNum.includes(this.usrNum[i])){
+          if(this.usrNum[i] == this.comNum[i]){
             this.strike ++;
           } else {
             this.ball ++;
@@ -72,7 +82,7 @@ class App{
   }
 
 
-  play() { 
+  play() { //게임 시작
     this.comRandomNumber();
     this.gameStartNotice();
     this.getGameResult();
