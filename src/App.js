@@ -42,6 +42,16 @@ class App {
     else MissionUtils.Console.print(`${this.countBall}볼 ${this.countStrike}스트라이크`);
   }
 
+  replay() {
+    let option = true;
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
+      MissionUtils.Console.print(input);
+      if (input !== "1" && input !== "2") throw new Error("Invalid option");
+      else if (input == "1") option = false;
+    })
+    return option;
+  }
+
   play() { }
 
 }
