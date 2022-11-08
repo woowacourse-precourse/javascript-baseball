@@ -1,4 +1,4 @@
-const { WRONG_INPUT_ALERT } = require("./lib/constants");
+const { WRONG_INPUT_ALERT, REPLAY } = require("./lib/constants");
 
 class Exception {
   static answer(answer) {
@@ -23,6 +23,14 @@ class Exception {
     }
 
     return answer;
+  }
+
+  static restart(flag) {
+    if (flag !== REPLAY.RESTART && flag !== REPLAY.EXIT) {
+      throw WRONG_INPUT_ALERT.NOT_ONE_OR_TWO;
+    }
+
+    return flag;
   }
 }
 
