@@ -5,7 +5,7 @@ const {
   GAME_MESSAGE,
   RESTART_OPTION,
 } = require('../constant/constant');
-const inputValidator = require('../input/validator');
+const Validator = require('../input/Validator');
 const Calculator = require('./Calculator');
 
 class BaseballGame {
@@ -25,7 +25,7 @@ class BaseballGame {
 
   getResult(randomNumber) {
     Console.readLine(GAME_MESSAGE.input, (input) => {
-      const valid = inputValidator(input);
+      const valid = Validator.inputValidator(input);
 
       if (!valid.isValid) {
         throw valid.message;
