@@ -12,8 +12,9 @@ const ERROR_MESSAGES = {
 };
 
 const HINT_MESSAGES = {
-    BALL: '볼',
-    STRIKE: '스트라이크',
+    BALL: ball => `${ball}볼`,
+    STRIKE: strike => `${strike}스트라이크`,
+	BALL_AND_STRIKE: ({ ball, strike }) => `${ball}볼 ${strike}스트라이크`,
     NOTHING: '낫싱',
 };
 
