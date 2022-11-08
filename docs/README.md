@@ -1,22 +1,13 @@
-- [x] generateGoalNumber() {}
+# 숫자 야구
 
-- [x] receiveNumberFromUser() {
-      // 서로 다른 3자리의 수 입력 받고 반환
-      // 잘못된 값일 경우 throw 하고 앱 종료하기
-      }
+## 구현할 기능 목록
 
-- [x] compareGoalAndUserAnswer() {
-      // 스트라이크 아웃 비교하고 결과 반환
-      }
-
-- [x] printResult() {
-      // 볼 스트라이크 낫싱 등 결과 출력;
-      }
-
-- [x] confirmRestart() {}
-
-- [x] restartGame() {
-      this.play();
-      }
-
-- [x] exitGame() {}
+- [x] generateGoalNumber : 유저가 맞춰야 할 3자리 숫자를 생성
+- [x] verifyUserAnswer : 유저 대답이 조건에 맞는지 확인하고 필요시 예외 발생
+- [x] getStrikeAndBallCount : 골과 유저 대답을 비교해 ball과 strike 점수를 계산
+- [x] scoreToMessage : [스트라이크, 볼]을 매개변수로 받고 1볼 1스트라이크 형식으로 반환
+- [x] printResult : 매개변수를 콘솔에 출력함
+- [x] exitGame : 게임 종료
+- [x] restartGame : 게임 재시작
+- [x] confirmRestart : 재시작할 것인지 확인하고 재시작이나 종료함
+- [x] receiveAnswer : 유저에게 대답을 입력받고 모든 로직을 실행한다.
