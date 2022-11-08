@@ -17,7 +17,6 @@ class App {
   }
   gameStart() {
     const opponentNumber = this.opponent.setRandomNumber(); //상대방 숫자 지정
-    console.log(opponentNumber);
     let endGame = false;
     while (!endGame) {
       this.user.getInput();
