@@ -1,6 +1,6 @@
 const App = require('../src/App');
 
-describe('유효성 테스트', () => {
+describe('메세지 테스트', () => {
   const app = new App();
 
   test('시작 메세지 출력', () => {

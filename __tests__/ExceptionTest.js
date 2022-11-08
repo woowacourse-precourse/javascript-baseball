@@ -17,7 +17,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe('숫자 야구 게임', () => {
+describe('예외 테스트', () => {
   test('형식에 맞지 않는 숫자 예외', () => {
     const randoms = [1, 3, 5];
     const answers = ['120'];
