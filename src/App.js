@@ -48,17 +48,13 @@ class App {
     return this._question;
   }
 
-  throwException(message, err = InvalidInputException) {
-    throw new err(`${message}\n${this.MESSAGES.exitApp}`);
-  }
-
   isValidInput(input) {
     if (isEmptyInput(input)) {
-      this.throwException(this.MESSAGES.emptyError);
+      throw new InvalidInputException(this.MESSAGES.emptyError);
     }
 
     if (hasWhiteSpace(input)) {
-      this.throwException(this.MESSAGES.whiteSpaceError);
+      throw new InvalidInputException(this.MESSAGES.whiteSpaceError);
     }
 
     return true;
@@ -76,19 +72,19 @@ class App {
     const numbers = input.split("").map(Number);
 
     if (!numbers.every(isNumber)) {
-      this.throwException(this.MESSAGES.typeError, TypeError);
+      throw new TypeError(this.MESSAGES.typeError);
     }
 
     if (!this.isValidDigit(numbers)) {
-      this.throwException(this.MESSAGES.digitError);
+      throw new InvalidInputException(this.MESSAGES.digitError);
     }
 
     if (!numbers.every(this.isValidRange.bind(this))) {
-      this.throwException(this.MESSAGES.rangeError, RangeError);
+      throw new RangeError(this.MESSAGES.rangeError);
     }
 
     if (hasDuplicateElmentInList(numbers)) {
-      this.throwException(this.MESSAGES.duplicateError);
+      throw new InvalidInputException(this.MESSAGES.duplicateError);
     }
 
     return true;
@@ -96,7 +92,7 @@ class App {
 
   isValidCommandInput(input, commands) {
     if (!commands[input]) {
-      this.throwException(this.MESSAGES.commandError);
+      throw new InvalidInputException(this.MESSAGES.commandError);
     }
 
     return true;
