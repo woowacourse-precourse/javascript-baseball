@@ -1,5 +1,4 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const isError = require("./errorHandler");
 
 class App {
   play() {
@@ -10,9 +9,7 @@ class App {
   // 사용자로부터 값 입력받기
   inputFromUser(PC) {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (INPUT) => {
-      let errorHandler = new isError(INPUT);
-
-      if (errorHandler.isInputCorrect(INPUT)) {
+      if (this.errorHandler(INPUT)) {
         this.printScore(PC, INPUT);
       } else {
         throw new Error("입력값이 잘못되었습니다.");
@@ -93,6 +90,10 @@ class App {
     return RESULT.join("");
   }
 
+  // 예외처리 함수
+  errorHandler(numbers) {
+    return numbers.length === 3 && numbers.length === new Set(numbers).size;
+  }
 
 }
 module.exports = App;
