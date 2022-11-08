@@ -100,6 +100,11 @@ class App {
       })
   }
 
+  play () {    
+    console.log("숫자 야구 게임을 시작합니다.");
+    let computerNumber = this.getComputerNumber();
+    this.getUserInputAndPlay(computerNumber);
+  }
 }
 const app = new App();
 app.play();
