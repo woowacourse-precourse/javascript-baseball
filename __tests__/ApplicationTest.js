@@ -1,6 +1,6 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MESSAGES } = require("../src/constants");
+const { MESSAGES, ERRORS } = require("../src/constants");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -37,6 +37,57 @@ describe("숫자 야구 게임", () => {
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(MESSAGES.START),
     );
+  });
+
+  test("입력이 세 자리의 수가 아니라면 예외를 발생시킨 후 게임을 종료합니다.", () => {
+    // given
+    const randoms = [1, 3, 5];
+    const answers = ["1234", "4567", "6789"];
+
+    // when, then
+    answers.forEach((answer) => {
+      mockRandoms(randoms);
+      mockQuestions([answer]);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow(ERRORS.UNVALID_INPUT_LENGTH);
+    });
+  });
+
+  test("입력이 서로 다른 세 자리의 수가 아니라면 예외를 발생시킨 후 게임을 종료합니다.", () => {
+    // given
+    const randoms = [1, 3, 5];
+    const answers = ["333", "121", "288"];
+
+    // when, then
+    answers.forEach((answer) => {
+      mockRandoms(randoms);
+      mockQuestions([answer]);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow(ERRORS.UNVALID_INPUT_VALUE);
+    });
+  });
+
+  test("입력값에 0이 포함되어 있다면 예외를 발생시킨 후 게임을 종료합니다.", () => {
+    // given
+    const randoms = [1, 3, 5];
+    const answers = ["130", "013", "103"];
+
+    // when, then
+    answers.forEach((answer) => {
+      mockRandoms(randoms);
+      mockQuestions([answer]);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow(ERRORS.UNVALID_INPUT_RANGE);
+    });
   });
 
   test("게임 종료 후 재시작", () => {
