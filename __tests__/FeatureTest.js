@@ -15,5 +15,20 @@ describe("기능 테스트", () => {
             expect(number).toBeGreaterThan(0);
             expect(number).toBeLessThan(10);
         })
+    });
+    test("4. 잘못된 값이 입력되었을 때 종료하는 기능 - 문자열", () => {
+        const consoleSpy = jest.spyOn(console, 'log');
+        try { app.valueExceptionHandling('string') } catch (e) { console.log(e) };
+        expect(consoleSpy).toHaveBeenCalledWith('입력 값이 숫자가 아닙니다. 게임을 종료합니다.');
+    })
+    test("4. 잘못된 값이 입력되었을 때 종료하는 기능 - 숫자 길이", () => {
+        const consoleSpy = jest.spyOn(console, 'log');
+        try { app.valueExceptionHandling('12345') } catch (e) { console.log(e) };
+        expect(consoleSpy).toHaveBeenCalledWith('입력 값이 세 자리가 아닙니다. 게임을 종료합니다.');
+    })
+    test("4. 잘못된 값이 입력되었을 때 종료하는 기능 - 중복 숫자", () => {
+        const consoleSpy = jest.spyOn(console, 'log');
+        try { app.valueExceptionHandling('122') } catch (e) { console.log(e) };
+        expect(consoleSpy).toHaveBeenCalledWith('입력 값에 중복된 수가 있습니다. 게임을 종료합니다.');
     })
 });
