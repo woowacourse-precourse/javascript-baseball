@@ -11,14 +11,14 @@ class App {
   }
 
   computerData() {
-    const computerNum = [];
-    while (computerNum.length < 3) {
-      const num = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerNum.includes(num)) {
-        computerNum.push(num);
+    const COMPUTER_NUM = [];
+    while (COMPUTER_NUM.length < 3) {
+      const NUM = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!COMPUTER_NUM.includes(NUM)) {
+        COMPUTER_NUM.push(NUM);
       }
     }
-    return computerNum;
+    return COMPUTER_NUM;
   }
 }
 
