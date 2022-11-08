@@ -14,7 +14,7 @@ function getResultMessage(answer, userAnswer) {
   let ballMessage = ballCnt === 0 ? "" : `${ballCnt}볼`;
   let strikeMessage = strikeCnt === 0 ? "" : `${strikeCnt}스트라이크`;
 
-  return `${ballMessage} ${strikeMessage}`;
+  return `${ballMessage} ${strikeMessage}`.trim();
 }
 
 module.exports = getResultMessage;
