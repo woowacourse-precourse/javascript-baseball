@@ -47,7 +47,46 @@ class App {
     return out.length ? out : '낫싱';
   }
 
-  play() { }
+  play() {
+    const GREETING_MESSAGE = '숫자 야구 게임을 시작합니다';
+    const PLAY_QUESTION = '숫자를 입력해주세요 :';
+    const COMPLETE_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    const MENU_QUESTION = '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요';
+    let answer = App.pickThreeDigits();
+
+    const turn = function playOneTurn(input) {
+      if (!App.isValidPlayInput(input)) {
+        throw new Error('잘못된 입력입니다');
+      }
+
+      const guess = App.getGuessArray(input);
+      const judged = App.judge(guess, answer);
+      const judgeMessage = App.getMessage(judged);
+      MissionUtils.Console.print(judgeMessage);
+
+      if (judged[1] === 3) {
+        MissionUtils.Console.print(COMPLETE_MESSAGE);
+        MissionUtils.Console.readLine(MENU_QUESTION, menuSelect);
+        return;
+      }
+
+      MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+    };
+
+    const menuSelect = function menuSelect(input) {
+      if (!App.isValidMenuInput(input)) {
+        throw new Error('잘못된 입력입니다');
+      }
+
+      if (input === '1') {
+        answer = App.pickThreeDigits();
+        MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+      }
+    };
+
+    MissionUtils.Console.print(GREETING_MESSAGE);
+    MissionUtils.Console.readLine(PLAY_QUESTION, turn);
+  }
 }
 
 module.exports = App;
