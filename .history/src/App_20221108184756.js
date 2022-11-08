@@ -27,7 +27,7 @@ class App {
         inputToInt.push(parseInt(c));
       status = this.checkAnswer(inputToInt, computerNumber);
       })
-    } while (status != 0);
+    } while (status !== 0);
     MissionUtils.console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
   }
 

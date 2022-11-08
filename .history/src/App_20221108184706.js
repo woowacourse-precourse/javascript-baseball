@@ -21,13 +21,13 @@ class App {
     do {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(input)=>{
       if(this.checkArgument(input))
-        throw '잘못된 입력입니다.'
+        throw '게임 종료 후 재시작'
       let inputToInt=[];
       for(let c of input)
         inputToInt.push(parseInt(c));
       status = this.checkAnswer(inputToInt, computerNumber);
       })
-    } while (status != 0);
+    } while (status !== 0);
     MissionUtils.console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
   }
 
