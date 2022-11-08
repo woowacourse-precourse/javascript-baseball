@@ -26,8 +26,8 @@ describe('게임 기능 테스트', () => {
   test('isStrike 메서드는 컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크인지 판단한다.', () => {
     const computerNumbers = [1, 2, 3];
     const userNumbers = [1, 2, 4];
-    const result = computerNumbers.map((_, idx) =>
-      gameManager.isStrike({ computerNumbers, userNumbers, idx }),
+    const result = userNumbers.map((userNumber, idx) =>
+      gameManager.isStrike(computerNumbers[idx], userNumber),
     );
 
     expect(result).toEqual([true, true, false]);
