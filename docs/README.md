@@ -31,10 +31,12 @@
      2. 입력값이 3개가 아닐때
      3. 같은 수를 썼을때
 
-4. <strong>입력 받은 수에 결과를 계산하기</strong>
+4. <strong>입력 받은 수에 결과를 계산하고 출력하기</strong>
 
    - result = {ball,strike}
    - 입력 받은 수를 forEach문을 돌려 Set의 has와 [...set].indexOf로 ball인지 strike인지 판단
+   - result에 어떤 값도 들어가 있지 않다면 낫싱 출력
+   - 있다면 볼, 스트라이크 출력
 
 5. <strong>종료 조건</strong>
 
@@ -48,10 +50,8 @@
 
    - 종료 되었다면 7번 기능
 
-6. <strong>입력한 수에 대한 결과를 출력하기</strong>
+6. <strong>종료되지 않았다면 다시 이닝 시작</strong>
 
-   - result에 어떤 값도 들어가 있지 않다면 낫싱 출력
-   - 있다면 볼, 스트라이크 출력
    - 3번 함수 불러오기
 
 7. <strong>사용자의 재시작/종료 입력을 기다림</strong>
