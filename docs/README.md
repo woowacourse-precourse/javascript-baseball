@@ -1,5 +1,5 @@
 ## 숫자야구 알고리즘 순서도
-
+![숫자야구 순서도](https://user-images.githubusercontent.com/39366835/200489049-2cd1f48f-83bb-4ed3-9449-617178c9c6d2.jpg)
 
 ## ☑️ 기능 구현 체크리스트
 
