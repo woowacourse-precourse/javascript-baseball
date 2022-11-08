@@ -21,6 +21,7 @@ class App {
     computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
     do {
       MissionUtils.Console.readline("숫자를 입력해주세요 : ",(input)=>{
+      //답이면 0, 답 아니면 1
       let inputToInt=[];
       for(let c of input)
         inputToInt.push(parseInt(c));
@@ -35,7 +36,7 @@ class App {
     let strike = 0;
     let ball = 0;
     for(let i = 0;i < 3;i++){
-      if(input[i]===computerNumber[i]){
+      if(input[i]==computerNumber[i]){
         strike++;
         continue;
       }

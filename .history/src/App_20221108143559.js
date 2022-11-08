@@ -35,7 +35,7 @@ class App {
     let strike = 0;
     let ball = 0;
     for(let i = 0;i < 3;i++){
-      if(input[i]===computerNumber[i]){
+      if(input[i]==computerNumber[i]){
         strike++;
         continue;
       }
