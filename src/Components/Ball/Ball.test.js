@@ -23,4 +23,13 @@ describe("Ball", () => {
       "1볼 1스트라이크"
     );
   });
+
+  test("나(공격수)의 Ball이 789이고 컴퓨터(수비수)의 Ball이 425이면 낫싱을 반환", () => {
+    const BALL_OF_ATTACKER = new Ball(789);
+    const BALL_OF_DEFENDER = new Ball(425);
+
+    expect(BALL_OF_DEFENDER.compareTo(BALL_OF_ATTACKER)).toBe("낫싱");
+  });
+
+  test("");
 });
