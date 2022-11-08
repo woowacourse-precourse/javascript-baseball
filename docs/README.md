@@ -85,3 +85,4 @@
   - [x] validInput: 정규식에 의해 확이낳고, 곂치는 수에 의해 확인하여 false, true를 return 한다.
   - [x] throwInvalidInputError: 올바르지 않은 input 값이라면 throw error를 한다.
   - [x] validOneOrTwo: 1과 2중에 값이 있는지 확인한다.
+  - [x] makeStringToArray: string으로 받은 input 값을 Array로 바꿔 return 한다.
