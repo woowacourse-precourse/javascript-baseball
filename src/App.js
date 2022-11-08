@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+// docs/README.md를 참조
+
 class App {
   getComputerRandomNumber() {
     const cpuNum = [];
@@ -109,9 +111,5 @@ class App {
     }
   }
 }
-
-// const app = new App();
-
-// app.play();
 
 module.exports = App;
