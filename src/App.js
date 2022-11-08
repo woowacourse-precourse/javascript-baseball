@@ -24,7 +24,9 @@ class App {
 
 	isNotThreeStrike() {}
 
-	validateOption() {}
+	validateOption(option) {
+		if (/[^1-2]/g.test(option)) throw new Error('옵션에 없는 값을 입력하셨습니다.');
+	}
 }
 
 module.exports = App;
