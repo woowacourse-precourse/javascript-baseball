@@ -56,9 +56,35 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test('feat#2, feat#3: 예외 테스트-길이', () => {
     const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    const answers = ['1234'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('feat#2, feat#3: 예외 테스트-중복', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['111'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('feat#2, feat#3: 예외 테스트-0값', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['105'];
 
     mockRandoms(randoms);
     mockQuestions(answers);
