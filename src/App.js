@@ -24,6 +24,7 @@ class App {
   input() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       answer = answer.split("").map((val) => Number(val));
+      this.userInput = answer;
       this.userInputCheck(answer);
     })
   }
@@ -92,8 +93,11 @@ class App {
     })
   }
 
-  returnNumber() {
+  returnRandomNumber() {
     return this.randomNumber;
+  }
+  returnUserNumber() {
+    return this.userInput;
   }
 }
 
