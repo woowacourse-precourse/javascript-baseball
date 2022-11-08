@@ -1,6 +1,13 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
 const { endApp } = require('../src/Function');
 const Function = require('../src/Function');
+
+const getLogSpy = () => {
+  const logSpy = jest.spyOn(MissionUtils.Console, 'print');
+  logSpy.mockClear();
+  return logSpy;
+};
 
 describe('App class 테스트', () => {
   let app;
@@ -53,5 +60,13 @@ describe('App class 테스트', () => {
       strike: 0,
       ball: 0,
     });
+  });
+
+  test('makeResult 테스트', () => {
+    const logSpy = getLogSpy();
+    app.countBoard = { strike: 0, ball: 0 };
+    app.makeResult();
+
+    expect(logSpy).toHaveBeenCalledWith('낫싱');
   });
 });
