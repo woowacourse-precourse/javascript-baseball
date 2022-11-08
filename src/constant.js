@@ -24,7 +24,7 @@ const TEXT = {
 
 const ERROR = {
     INVALID_USER_NUMBER: '잘못된 값을 입력하였습니다.',
-    INVALID_RETRY: '잘못 입력하였습니다. 다시 입력해주세요.',
+    INVALID_RETRY: '1이나 2가 아닌 값을 잘못 입력하였습니다.',
 };
 
 module.exports = { ANSWER, RESULT, TEXT, GAME_END, ERROR };
