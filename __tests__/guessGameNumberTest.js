@@ -1,4 +1,10 @@
-const { throwGuessException } = require("../src/App");
+const { throwGuessException, convertToNumberArray } = require("../src/App");
+
+describe("추측 숫자를 문자열로 입력받으면 숫자배열로 변환해주는 기능", () => {
+  test("case1", () => {
+    expect(convertToNumberArray("123")).toStrictEqual([1, 2, 3]);
+  });
+});
 
 describe("추측 숫자 입력받고 형식이 잘못됐을 때 예외처리하고 종료", () => {
   test("case1", () => {

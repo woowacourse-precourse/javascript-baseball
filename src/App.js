@@ -20,6 +20,10 @@ function throwGuessException(userInput) {
   if (userInput.includes("0")) throw "0은 포함되지 않습니다";
 }
 
+function convertToNumberArray(userInput) {
+  return userInput.split("").map((singleInput) => Number(singleInput));
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -39,4 +43,5 @@ module.exports = {
   addUniqueRandomDigit,
   App,
   throwGuessException,
+  convertToNumberArray,
 };
