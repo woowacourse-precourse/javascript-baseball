@@ -20,13 +20,12 @@ class App {
   }
 
   playGame() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      this.user = answer;
-
-      if (!this.isValidAnswer) {
-        this.user = '';
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      if (!this.isValidInput(input)) {
         throw new TypeError('서로 다른 세자리 숫자를 입력해주세요.');
       }
+
+      this.user = input;
 
       this.resetScore();
       this.setScore();
@@ -84,10 +83,10 @@ class App {
   endGame() {
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (answer) => {
-        if (+answer === 1) return this.play();
+      (input) => {
+        if (+input === 1) return this.play();
 
-        if (+answer === 2) {
+        if (+input === 2) {
           MissionUtils.Console.close();
           return MissionUtils.Console.print('게임 종료');
         }
@@ -97,10 +96,8 @@ class App {
     );
   }
 
-  get isValidAnswer() {
-    return (
-      /^[1-9]+$/.test(this.user) && new Set([...this.user]).size === LENGTH
-    );
+  isValidInput(input) {
+    return /^[1-9]+$/.test(input) && new Set([...input]).size === LENGTH;
   }
 }
 
