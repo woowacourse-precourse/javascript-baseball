@@ -28,7 +28,7 @@ const playBall = (comp, user) => {
 
   if (strike === 3) {
     gameOver();
-  } else oneMoreGame(comp);
+  } else oneMoreGuess(comp);
 };
 
 const baseballGameRule = (comp, user) => {
@@ -51,7 +51,7 @@ const baseballGameRule = (comp, user) => {
   return [strike, ball, nothing];
 };
 
-const oneMoreGame = (comp) => {
+const oneMoreGuess = (comp) => {
   MissionUtils.Console.readLine('숫자를 입력해주세요. : ', (answer) => {
     let user = [];
     for (let i of answer) user.push(Number.parseInt(i));
@@ -66,6 +66,7 @@ const gameOver = () => {
   );
   MissionUtils.Console.readLine('', (answer) => {
     if (answer === '2') {
+      MissionUtils.Console.close();
       return;
     } else if (answer === '1') {
       startNewGame();
@@ -93,5 +94,8 @@ class App {
     });
   }
 }
+
+const test = new App();
+test.play();
 
 module.exports = App;
