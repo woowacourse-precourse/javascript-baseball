@@ -46,7 +46,7 @@ const isSelectedNumber = (number, computer) => {
 const getUserNumber = (computer, question) => {
   MissionUtils.Console.readLine(question, (userInput) => {
     validateUserNumber(userInput);
-    gamePlay(computer, userInput);
+    countStrikeAndBall(computer, userInput);
   });
 };
 
@@ -77,7 +77,7 @@ const validateOneToNine = (target) => {
   return NUMBER_ONE_TO_NINE.test(target);
 };
 
-const gamePlay = (computers, user) => {
+const countStrikeAndBall = (computers, user) => {
   const users = useNumberToArray(user);
 
   let countStrike = 0;
@@ -87,7 +87,8 @@ const gamePlay = (computers, user) => {
     countStrike = isStrike(number, index, computers, countStrike);
     countBall = isBall(number, index, computers, countBall);
   });
-  printGameResult(countStrike, countBall, computers);
+  console.log(countStrike, countBall);
+  return { countStrike: countStrike, countBall: countBall };
 };
 
 const isStrike = (number, index, computers, countStrike) => {
@@ -145,4 +146,9 @@ const retryOrEnd = () => {
   });
 };
 
-module.exports = { createComputerNumber, getUserNumber, setUserInput };
+module.exports = {
+  createComputerNumber,
+  getUserNumber,
+  setUserInput,
+  validateUserNumber,
+};
