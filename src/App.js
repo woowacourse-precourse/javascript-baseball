@@ -114,7 +114,6 @@ const executeUserCommandRestartOrQuit = (command) => {
   throw '[ERROR] input error';
 }
 
-module.exports = App;
 const is3Letters = (numStr) => {
   return numStr.length === 3
 }
@@ -139,3 +138,4 @@ const stringToNumberInList = (list) => {
   });
 }
 
+module.exports = App;
