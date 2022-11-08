@@ -1,12 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer.js');
+const Function = require('./Function.js');
 const { MESSAGE, COUNTBOARDRESULT } = require('./Const');
-const {
-  throwInvalidInputError,
-  validOneOrTwo,
-  endApp,
-  makeStringToArray,
-} = require('./Function');
+const { validOneOrTwo, endApp, makeStringToArray } = require('./Function');
 
 class App {
   constructor() {
@@ -21,7 +17,7 @@ class App {
   process() {
     this.isRestart = true;
     Console.readLine(`${MESSAGE.GETINPUT}`, input => {
-      throwInvalidInputError(input);
+      Function.throwInvalidInputError(input);
       this.resetCountBoard();
       this.compareUserAndComputer(input);
       this.makeResult();
@@ -94,7 +90,7 @@ class App {
   }
 
   play() {
-    if (!this.isRestart) Console.print(`${MESSAGE.START}`);
+    // if (!this.isRestart) Console.print(`${MESSAGE.START}`);
     this.computer.setRandomNumber();
     this.process();
   }

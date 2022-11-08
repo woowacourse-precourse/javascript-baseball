@@ -1,4 +1,5 @@
 const App = require('../src/App');
+const { endApp } = require('../src/Function');
 
 describe('App class 테스트', () => {
   let app;
@@ -8,7 +9,7 @@ describe('App class 테스트', () => {
   });
   test('play 동작시 computer selectedNumber 랜덤 설정여부 확인', () => {
     app.play();
-
     expect(app.computer.selectedNumber.length).toBe(3);
+    endApp();
   });
 });

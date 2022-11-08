@@ -5,6 +5,7 @@ const {
   validDuplicate,
   validOneOrTwo,
   endApp,
+  makeStringToArray,
 } = require('../src/Function');
 
 const getLogSpy = () => {
@@ -42,6 +43,12 @@ describe('Function 테스트', () => {
     expect(() => {
       validOneOrTwo('3');
     }).toThrow();
+  });
+
+  test('makeStringToARray 테스트', () => {
+    const answer = makeStringToArray('input');
+    expect(answer).not.toBeInstanceOf(String);
+    expect(answer).toBeInstanceOf(Array);
   });
 
   test('endApp 테스트', () => {
