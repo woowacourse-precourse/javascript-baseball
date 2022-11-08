@@ -18,50 +18,40 @@ function baseBall() {
 
 function inputAnswer(COM_NUMBER) {
   MissionUtils.Console.readLine('숫자를 입력해 주세요', (input) => {
-    var input_array = []
-    for (let x of input) {
-      input_array.push(x)
-    } 
-    var input_set = new Set(input_array);
-    if(exception(input, input_set)) {
-    answerCheck(input, COM_NUMBER)}
-  })
+  exception(input)
+  answerCheck(input, COM_NUMBER)})
 }
 
 function answerCheck (input, COM_NUMBER) {
-  var strike = 0
-  var ball = 0
+  var STRIKE = 0
+  var BALL = 0
   for (let i = 0; i<3 ; i++) {
     if(input[i] == COM_NUMBER[i]) {
-      strike++;} else if(COM_NUMBER.includes(Number(input[i])))
-      {ball++}
+      STRIKE++;} else if(COM_NUMBER.includes(Number(input[i])))
+      {BALL++}
   }
-  resultprint(COM_NUMBER, strike, ball)
+  resultprint(COM_NUMBER, STRIKE, BALL)
 }
-function resultprint(COM_NUMBER, strike, ball) {
-  if(strike==3){
+function resultprint(COM_NUMBER, STRIKE, BALL) {
+  if(STRIKE==0 && BALL==0){
+    MissionUtils.Console.print('낫싱')
+  }
+  if(BALL>0 && STRIKE == 0){
+    MissionUtils.Console.print(`${BALL}볼 `)
+  }
+  if(STRIKE>0 && BALL == 0){
+    MissionUtils.Console.print(`${STRIKE}스트라이크`)
+  }
+  if(STRIKE>0 && BALL>0) {
+    MissionUtils.Console.print(`${BALL}볼 ${STRIKE}스트라이크`)
+  }
+  if(STRIKE<3){
+    return inputAnswer(COM_NUMBER)
+  } else {
     MissionUtils.Console.print('3스트라이크')
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
     return newGame()
   }
-  if(strike==0 && ball==0){
-    MissionUtils.Console.print('낫싱')
-    return inputAnswer(COM_NUMBER)
-  }
-  if(ball>0 && strike == 0){
-    MissionUtils.Console.print(`${ball}볼 `)
-    return inputAnswer(COM_NUMBER)
-  }
-  if(strike>0 && ball == 0){
-    MissionUtils.Console.print(`${strike}스트라이크`)
-    return inputAnswer(COM_NUMBER)
-  }
-  if(strike>0 && ball>0) {
-    MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`)
-  return inputAnswer(COM_NUMBER)
-
-  }
-  return inputAnswer(COM_NUMBER)
 }
 function newGame() {
   MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요', (input)=>{
@@ -75,20 +65,19 @@ function newGame() {
     }
   })
 
-
-
-
 }
-function exception(input, input_set) {
-  // if (input !== /[1-9]{3}/) {
-  //   throw '3자리 숫자를 입력해주세요'
-  // }
+
+function exception(input) {
+  var input_array = []
+  for (let x of input) {
+    input_array.push(x)
+  } 
+  var input_set = new Set(input_array);
   if (input.length !== 3) {
     throw '3자리 숫자를 입력해주세요'
   }
   if (input_set.size !== 3){
     throw '각자 다른 숫자를 입력해주세요'
   }
-  return true
 }
 module.exports = App;
