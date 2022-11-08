@@ -71,7 +71,6 @@ function printResult(strike, ball){
 
 function endsGame(){
   MissionUtils.Console.readLine('', (answer) => {
-    console.log("End : " + answer);
     if(answer[0] == '1' || answer[0] == 1){
       return false;
     }
