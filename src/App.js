@@ -13,8 +13,8 @@ const {
 
 class App {
   constructor() {
-    this.threeRandomNumbers = this.getThreeRandomNumbers();
     MissionUtils.Console.print(START_MESSAGE);
+    this.threeRandomNumbers = this.getThreeRandomNumbers();
   }
 
   play() {
