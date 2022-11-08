@@ -41,7 +41,33 @@ class App {
 	}
 
 	#isValid() {}
-	#getREsultMessage() {}
+	#getResultMessage(computerNumArr, userAnswerStr) {
+		let result = '';
+		let [ball, strike] = [0, 0];
+
+		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
+			computerNumArr.map((computerNum, computerNumIdx) => {
+				if (computerNum === Number(userAnswerStr)) {
+					ball++;
+					if (computerNumIdx === userAnswerIdx) {
+						strike++;
+					}
+				}
+			});
+
+			if (strike > 0 && ball > 0) {
+				result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
+			} else if (strike > 0) {
+				result = `${strike}${UNITS.STRIKE}`;
+			} else if (ball > 0) {
+				result = `${ball}${UNITS.BALL}`;
+			} else {
+				result = UNITS.NOTHING;
+			}
+		});
+
+		return result;
+	}
 }
 
 module.exports = App;
