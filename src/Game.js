@@ -36,10 +36,20 @@ class Game {
     Console.print(`${ballText} ${strikText}`);
   }
 
+  checkEnd({ strike }) {
+    if (strike === 3) {
+      Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return true;
+    }
+    return false;
+  }
+
+
   play() {
     this.user.setNumber();
     const result = this.countBallAndStrike();
     this.printResultMessage(result);
+    const isEnd = this.checkEnd(result);
   }
 }
 
