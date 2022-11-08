@@ -12,7 +12,6 @@ class App {
 
   play() {
     this.#computerAnswer = this.#gameStart();
-
     this.#inputFromUser();
   }
 
@@ -63,6 +62,9 @@ class App {
 
     //예외 처리
     this.#inputExcept(input);
+    
+    //원래는 예외발생 시 다시 유저의 입력값을 요구하려고 했는데
+    //그럴 경우 jest의 toThrow()로 에러가 가질 않아 주석처리하였습니다.
     /*try {
       this.#inputExcept(input);
     } catch (e) {
@@ -99,11 +101,11 @@ class App {
   }
 
   #compareTwoArray() {
-    for (let comIdx = 0; comIdx < this.#computerAnswer.length; comIdx++) {
-      for (let userIdx = 0; userIdx < this.#userInput.length; userIdx++) {
+    this.#computerAnswer.map((comArrData, comIdx) => {
+      this.#userInput.map((userArrData, userIdx) => {
         this.#compareTwoNumber(comIdx, userIdx);
-      }
-    }
+      });
+    });
     return;
   }
 
