@@ -1,12 +1,11 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { NOTICE, HINT } = require("./notice");
+const { NOTICE, HINT, OPTION } = require("./message");
 
 class App {
     constructor() {
-        this.computerNumber = [];
-        this.guess = [];
+        this.computer = [];
+        this.user = [];
     }
-
     play() {
         Console.print(NOTICE.START);
         this.gameStart();
@@ -14,84 +13,93 @@ class App {
 
     gameStart() {
         this.makeRandomNumber();
-        this.guessNumber();
-        this.gameFinish();
     }
 
     makeRandomNumber() {
-        this.computerNumber = [];
-        while (this.computerNumber.length < 3) {
+        this.computer = [];
+        while (this.computer.length < OPTION.PITCH_COUNT) {
             const number = Random.pickNumberInRange(1, 9);
-            if (!this.computerNumber.includes(number)) {
-                this.computerNumber.push(number);
+            if (!this.computer.includes(number)) {
+                this.computer.push(number);
             }
         }
+        this.getUserInput();
     }
 
-    guessNumber() {
+    getUserInput() {
+        const computerNumber = this.computer;
+        Console.print(computerNumber);
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
-            this.guess = userInput.split("");
-            this.isValidNumber(userInput);
-            const strikeCount = this.countStrike();
-            const ballCount = this.countBall();
-            this.printResult(strikeCount, ballCount);
+            const userNumberArray = userInput.split("");
+            if (this.checkValidInput(userNumberArray)) {
+                this.judgePitch(computerNumber, userNumberArray);
+            }
         });
     }
 
-    isValidNumber(userInput) {
+    checkValidInput(userInput) {
         if (this.hasZero(userInput) || this.hasSameNumber(userInput) || this.hasRightLength(userInput) || this.hasWrongWord(userInput)) {
             throw new Error(NOTICE.ERROR);
         }
+        return true;
     }
     hasZero(userInput) {
         return userInput.includes("0");
     }
     hasSameNumber(userInput) {
         const setInput = new Set(userInput);
-        return setInput.size !== this.guess.length;
+        return setInput.size !== userInput.length;
     }
     hasRightLength(userInput) {
-        return userInput.length !== 3;
+        return userInput.length !== OPTION.PITCH_COUNT;
     }
     hasWrongWord(userInput) {
-        return !(userInput > 122);
+        return !(userInput.join("") > OPTION.MINIMUM_INPUT_RANGE);
     }
 
-    countStrike() {
-        const strike = this.computerNumber.filter((el, idx) => el.toString() === this.guess[idx]).length;
+    judgePitch(computerNumber, userNumberArray) {
+        const userGuess = userNumberArray;
+        const strikeCount = this.countStrike(computerNumber, userGuess);
+        const ballCount = this.countBall(computerNumber, userGuess);
+        this.printResult(strikeCount, ballCount);
+    }
+    countStrike(computerNumber, userGuess) {
+        const strike = computerNumber.filter((el, idx) => el.toString() === userGuess[idx]).length;
         return strike;
     }
-    countBall() {
-        const ball = this.computerNumber.filter((el) => this.guess.includes(el.toString()));
+    countBall(computerNumber, userGuess) {
+        const ball = computerNumber.filter((el) => userGuess.includes(el.toString()));
         return ball.length;
     }
 
     printResult(strikeCount, ballCount) {
-        if (ballCount === 0 && strikeCount === 0) {
+        if (this.out(strikeCount, ballCount)) {
             Console.print(HINT.OUT);
-            return this.guessNumber();
+            return this.getUserInput();
         }
-        if (strikeCount === 3) {
+        if (this.strikeOut(strikeCount)) {
             Console.print(strikeCount + HINT.STRIKE);
             Console.print(NOTICE.CLEAR);
             return this.questionFinish();
         }
         if (strikeCount === 0) {
             Console.print(ballCount + HINT.BALL);
-            return this.guessNumber();
+            return this.getUserInput();
         }
         if (strikeCount - ballCount === 0) {
             Console.print(strikeCount + HINT.STRIKE);
-            return this.guessNumber();
+            return this.getUserInput();
         }
         if (ballCount !== 0 && strikeCount !== 0) {
             Console.print(`${ballCount - strikeCount + HINT.BALL} ${strikeCount + HINT.STRIKE}`);
-            return this.guessNumber();
+            return this.getUserInput();
         }
     }
-
-    gameFinish() {
-        this.questionFinish();
+    out(strikeCount, ballCount) {
+        return ballCount === 0 && strikeCount === 0;
+    }
+    strikeOut(strikeCount) {
+        return strikeCount === OPTION.PITCH_COUNT;
     }
 
     questionFinish() {
@@ -99,7 +107,7 @@ class App {
             if (this.restartGame(finishInput)) {
                 return this.gameStart();
             }
-            if (this.finishGame(finishInput)) {
+            if (this.endGame(finishInput)) {
                 return Console.close();
             }
             throw new Error(NOTICE.ERROR);
@@ -108,7 +116,7 @@ class App {
     restartGame(finishInput) {
         return finishInput === "1";
     }
-    finishGame(finishInput) {
+    endGame(finishInput) {
         return finishInput === "2";
     }
 }

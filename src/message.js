@@ -12,4 +12,9 @@ const HINT = {
     STRIKE: "스트라이크",
 };
 
-module.exports = { NOTICE, HINT };
+const OPTION = {
+    PITCH_COUNT: 3,
+    MINIMUM_INPUT_RANGE: 122,
+};
+
+module.exports = { NOTICE, HINT, OPTION };
