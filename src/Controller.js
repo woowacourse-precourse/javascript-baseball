@@ -4,7 +4,6 @@ const Referee = require("./model/Referee");
 const { GAME_STATE } = require("./enum");
 const Game = require("./model/Game");
 
-//오류 검증
 class Controller {
 	constructor() {
 		this._referee = new Referee();
@@ -19,7 +18,23 @@ class Controller {
 		});
 	}
 
+	/**
+	 * 
+	 * @param {string} num
+	 * @returns {boolean}
+	 */
+	_isValid(num) {
+		return true;
+	}
+
+	_next(state, result) {
+		this._view.output(state, result);
+		this._view.input(state);
+	}
+
 	start(state = GAME_STATE.START) {
+		this._referee.chargeGame(new Game());
+		this._next(state, undefined);
 	}
 }
 
