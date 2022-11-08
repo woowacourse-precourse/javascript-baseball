@@ -70,6 +70,11 @@ class App {
         throw new Error("잘못된 값 입력") && Console.close();
       } 
     }
+    randomNum();
+    userNum();
+    compareCount();
+    showStatus();
+    newgameOrQuit();
   }
 }
 
