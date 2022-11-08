@@ -68,7 +68,8 @@ class App {
 
     if (ballCount === 0 && strikeCount === 0) {
       this.isNothing();
-    } else if (strikeCount === 3) {
+    }
+    if (strikeCount === 3) {
       this.isThreeStrike();
     } else {
       ballCount
