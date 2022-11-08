@@ -75,3 +75,23 @@ describe("parse user input", () => {
     expect(app.parseGameInput(case3)).toEqual(result3);
   });
 });
+
+describe("game result", () => {
+  test("count same index same number", () => {
+    const case1_1 = [1, 2, 3];
+    const case1_2 = [2, 3, 1];
+    const result1 = 0;
+
+    const case2_1 = [7, 4, 3];
+    const case2_2 = [4, 6, 3];
+    const result2 = 1;
+
+    const case3_1 = [8, 5, 2];
+    const case3_2 = [8, 5, 2];
+    const result3 = 3;
+
+    expect(app.getNumOfSameIndexSameNumber(case1_1, case1_2)).toEqual(result1);
+    expect(app.getNumOfSameIndexSameNumber(case2_1, case2_2)).toEqual(result2);
+    expect(app.getNumOfSameIndexSameNumber(case3_1, case3_2)).toEqual(result3);
+  });
+});

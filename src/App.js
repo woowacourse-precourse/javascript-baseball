@@ -47,7 +47,15 @@ class App {
     };
   }
 
-  getNumOfSameIndexSameNumber() {}
+  getNumOfSameIndexSameNumber(gameNumbers, userNumbers) {
+    let count = 0;
+    for (let i = 0; i < 3; i++) {
+      if (gameNumbers[i] === userNumbers[i]) {
+        count++;
+      }
+    }
+    return count;
+  }
 
   getNumOfSameNumber() {}
 
