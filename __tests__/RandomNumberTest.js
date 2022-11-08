@@ -13,4 +13,9 @@ describe("랜덤 숫자 뽑기 단위 테스트", () => {
       expect(num).toBeLessThan(10);
     });
   });
+
+  test("길이가 3인 테스트", () => {
+    // then
+    expect(random.length).toBe(3);
+  });
 });
