@@ -1,4 +1,4 @@
-const GENERATE_RANGE = Object.freeze({
+const BASEBALL_RANGE = Object.freeze({
     MAX_SIZE: 3,
     MINIMUM_VALUE: 1,
     MAXIMUM_VALUE: 9,
@@ -22,7 +22,7 @@ const OUTPUT_MESSAGE = Object.freeze({
 
 
 module.exports = {
-    GENERATE_RANGE,
+    BASEBALL_RANGE,
     ERROR_MESSAGE,
     OUTPUT_MESSAGE,
 };
