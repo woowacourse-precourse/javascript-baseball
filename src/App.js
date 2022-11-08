@@ -1,126 +1,118 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Console = MissionUtils.Console;
+const Random = MissionUtils.Random;
 
 class App {
-  #playerInput;
-  #strike;
-  #ball;
-
-  constructor() {
-    this.#missionUtils = new MissionUtils();
-    this.#answer = new Set();
+  init() {
+    this.answer = [];
+    this.userInput = [];
   }
 
-  #printStartMessage() {
-    this.#missionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+  printStartMessage() {
+    Console.print("숫자 야구 게임을 시작합니다.");
   }
 
-  #makeAnswer() {
-    const randomNumber = this.#missionUtils.Random.getRandomNumber(1, 9);
-    this.#answer.add(randomNumber);
-    if (this.#answer.size < 3) {
-      this.#makeAnswer();
-    } else {
-      return;
+  makeNoutDuplicateRandomNumber() {
+    const randomNumber = Random.pickNumberInRange(1, 9);
+    if (!this.answer.includes(randomNumber)) {
+      this.answer.push(randomNumber);
     }
   }
 
-  #validatePlayerInput(input) {
-    if (input.length !== 3) {
-      throw new Error("입력값은 3자리 숫자여야 합니다.");
-    }
-    if (new Set(input.split("")).size !== 3) {
-      throw new Error("입력값은 중복되지 않은 숫자여야 합니다.");
-    }
-    if (input.includes(" ")) {
-      throw new Error("입력값은 공백을 포함할 수 없습니다.");
-    }
-    if (input.split("").some((number) => number < 1 || number > 9)) {
-      throw new Error("입력값은 1부터 9까지의 숫자여야 합니다.");
-    }
-    return input;
-  }
-
-  #getPlayerInput() {
-    const playerInput = this.#missionUtils.Console.getInput(
-      "숫자를 입력해주세요: ",
-      this.#validatePlayerInput
-    );
-    this.#playerInput = playerInput.split("").map((number) => Number(number));
-    this.#missionUtils.Console.close();
-  }
-
-  #countStrikeAndBall(number, index) {
-    if (number === this.#playerInput[index]) {
-      this.strike++;
-    } else if (this.#playerInput.includes(number)) {
-      this.ball++;
+  makeAnswer() {
+    while (this.answer.length < 3) {
+      this.makeNoutDuplicateRandomNumber();
     }
   }
 
-  #compareAnswer() {
-    this.#answer.forEach(this.#countStrikeAndBall);
+  isValid(userInput) {
+    const NOT_THREE_NUM_ERROR = "입력은 3개까지 허용입니다.";
+    const NOT_DIGIT_ERROR = "숫자만 입력해야 합니다.";
+    const DUPLICATE_ERROR = "중복된 입력입니다.";
+    const NOT_ALLOW_ZERO_ERROR = "1~9사이의 숫자만 입력하세요";
+
+    if (userInput.length !== 3) throw NOT_THREE_NUM_ERROR;
+
+    if (!isNaN(userInput)) throw NOT_DIGIT_ERROR;
+
+    const array = [...userInput];
+    const arraySet = new Set(array);
+    if (arraySet.size !== array.length) throw DUPLICATE_ERROR;
+
+    if (userInput.includes(0)) throw NOT_ALLOW_ZERO_ERROR;
+
+    return true;
   }
 
-  #makeResult() {
-    if (this.#strike === 3) {
-      return "3스트라이크";
-    } else if (this.#strike === 0 && this.#ball === 0) {
-      return "낫싱";
-    } else if (this.#strike === 0 && this.#ball !== 0) {
-      return `${this.#ball}볼`;
-    } else if (this.#strike !== 0 && this.#ball === 0) {
-      return `${this.#strike}스트라이크`;
-    } else {
-      return `${this.#strike}스트라이크 ${this.#ball}볼`;
+  getStrikeBall() {
+    const same = this.answer.filter((x) => this.userInput.includes(x));
+    let nothing = -1;
+    let size = same.length;
+    let strike = 0;
+    let ball = 0;
+
+    if (same.length === 0) nothing++;
+    while (size--) {
+      if (
+        this.answer.indexOf(same[size]) === this.userInput.indexOf(same[size])
+      )
+        strike++;
     }
+    ball = same.length - strike;
+
+    return [strike, ball, nothing];
   }
 
-  #clearStrikeAndBall() {
-    this.#strike = 0;
-    this.#ball = 0;
-  }
-
-  #validateContinueInput(input) {
-    if (input !== "1" && input !== "2") {
-      throw new Error("입력값은 1 또는 2여야 합니다.");
-    }
-    return input;
-  }
-  #getContinueInput() {
-    const continueInput = this.#missionUtils.Console.getInput(
+  isRepeat() {
+    const INPUT_ERROR = "잘못된 입력입니다.(1, 2 이외의 입력)";
+    MissionUtils.Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      this.#validateContinueInput
+      (input) => {
+        if (input === "1") this.playBaseball();
+        else if (input === "2") {
+          MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
+        } else throw INPUT_ERROR;
+      }
     );
-    this.#missionUtils.Console.close();
-    return continueInput;
   }
 
-  #printEndMessage() {
-    this.#missionUtils.Console.print(
-      "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
-    );
-    this.#missionUtils.Console.getInput(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-    );
-    this.#missionUtils.Console.close();
+  printResult() {
+    let strike, ball, nothing;
+    this.isValid(this.userInput);
+    [strike, ball, nothing] = this.getStrikeBall();
+
+    if (nothing === 0) MissionUtils.Console.print("낫싱");
+    else if (strike === 3) {
+      MissionUtils.Console.print("3스트라이크");
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.isRepeat();
+    } else if (ball !== 0 && strike !== 0)
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    else if (ball === 0) MissionUtils.Console.print(`${strike}스트라이크`);
+    else if (strike === 0) MissionUtils.Console.print(`${strike}스트라이크`);
+    this.getPlayerInput();
   }
 
-  #printResult() {
-    const result = this.#makeResult();
-    this.#missionUtils.Console.print(result);
-    if (this.#strike === 3) {
-      this.#printEndMessage();
-    }
-    this.#clearStrikeAndBall();
+  getPlayerInput() {
+    Console.readLine("숫자를 입력해주세요: ", (input) => {
+      this.userInput = input.split("").map((number) => Number(number));
+      this.printResult();
+    });
+  }
+
+  playBaseball() {
+    this.init();
+    this.makeAnswer();
+    this.getPlayerInput();
   }
 
   play() {
-    this.#printStartMessage();
-    this.#makeAnswer();
-    this.#getPlayerInput();
-    this.#compareAnswer();
-    this.#printResult();
+    this.printStartMessage();
+    this.playBaseball();
   }
 }
+const app = new App();
+app.play();
 
 module.exports = App;
