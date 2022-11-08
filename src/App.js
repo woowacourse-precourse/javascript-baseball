@@ -44,7 +44,28 @@ class App {
         i++;
     }
 
+    if (countStrike === 0 && countBall === 0) {
+      MissionUtils.Console.print("낫싱");
+    }
+    if (countStrike === 0 && countBall !== 0) {
+      MissionUtils.Console.print(countBall + "볼");
+    }
+    if (countBall === 0 && countStrike !== 3 && countStrike !== 0) {
+      MissionUtils.Console.print(countStrike + "스트라이크");
+    }
+    if (countStrike !== 0 && countBall !== 0) {
+      MissionUtils.Console.print(countBall + "볼 " 
+      + countStrike + "스트라이크");
+    }
+      
+
+    if (countStrike !== 3) {
+      MissionUtils.Console.readLine("숫자를 입력해 주세요: ", (num) => {
+        this.determineResult(num);
+    });
+    }
     
+    }    
   }
 }
 
