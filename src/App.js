@@ -2,8 +2,8 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   constructor() {
-    this.userNumber = [];
-    this.answer = [];
+    this.userNumber = '';
+    this.answer = '';
     this.ball = 0;
     this.strike = 0;
   }
@@ -21,7 +21,27 @@ class App {
     });
   }
 
-  checkValidityUserNumber() {}
+  // 기능 2. 입력값의 유효성을 판단하는 함수
+  checkValidityUserNumber(number) {
+    const userNumber = parseInt(number, 10);
+    number = this.checkDuplicateNumber(number);
+
+    if (number.length !== 3) {
+      return false;
+    } else if (userNumber < 123 || userNumber > 987) {
+      return false;
+    }
+
+    return true;
+  }
+
+  checkDuplicateNumber(str) {
+    let newStr = new Set(str);
+    newStr = [...new Set(str)];
+    newStr = [...new Set(str)].join('');
+
+    return newStr;
+  }
 
   getRandomNumber() {}
 
