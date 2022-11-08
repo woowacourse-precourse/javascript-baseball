@@ -2,7 +2,6 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const constants = require('./constants');
 
 const randomNumberComputer = require('./computerNumbers');
-
 class App {
   play() {
     let computer = [];
@@ -72,7 +71,6 @@ class App {
       });
     }
 
-    //computer = randomNumberComputer.randomNumber;
     gamePlay();
     gameRestart();
   }

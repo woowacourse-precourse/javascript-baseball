@@ -26,3 +26,16 @@ Jest를 이용하여 본인이 정리한 기능 목록이 정상 동작함을 �
 MissionUtils 라이브러리에서 제공하는 Random 및 Console API를 사용하여 구현해야 한다.
 Random 값 추출은 MissionUtils 라이브러리의 Random.pickNumberInRange()를 활용한다.
 사용자의 값을 입력 받고 출력하기 위해서는 MissionUtils 라이브러리에서 제공하는 Console.readLine, Console.print를 활용한다.
+
+- 구현 사항
+
+예외 처리 
+
+- 종료 값이 1이나 2가 아닌 경우
+- 입력 값이 세 자리수 이상인 경우
+- 1-9까지의 숫자를 입력하지 않은 경우
+
+일부 기능들을 모듈화 시키기
+
+- 모듈화를 통해 재사용성이 커짐
+
