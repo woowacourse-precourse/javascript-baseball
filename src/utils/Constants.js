@@ -17,6 +17,8 @@ const END_VALUE = "2";
 const MIN_CORRECT = 0;
 const MAX_CORRECT = 3;
 
+const THROW_ERROR = "예외가 발생했습니다. 애플리케이션을 종료합니다";
+
 module.exports = {
   START_GAME,
   GAME_END,
@@ -31,4 +33,5 @@ module.exports = {
   END_VALUE,
   MIN_CORRECT,
   MAX_CORRECT,
+  THROW_ERROR,
 };
