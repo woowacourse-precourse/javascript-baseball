@@ -34,6 +34,17 @@ class App {
       throw new Error("입력하신 글자에 1~9가 아닌 글자가 포함되어 있습니다.");
     }
   }
+
+  getBallStrikeCount(randomNums, answer) {
+    let ball = 0;
+    let strike = 0;
+    for (let i = 0; i < 3; i++) {
+      if (answer[i] == randomNums[i]) strike++;
+      else if (answer.includes(randomNums[i])) ball++;
+    }
+    this.printBallStrikeCount(ball, strike);
+    this.tryToAnswer(randomNums);
+  }
   
 }
 
