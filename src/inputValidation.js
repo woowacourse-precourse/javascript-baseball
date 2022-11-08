@@ -8,22 +8,21 @@ function inputValidation(number) {
 }
 
 function threeDigitValidation(number) {
-    const numberLength = number.length;
-    if (numberLength !== 3) {
+    if (number.length !== 3) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
 
 function numberRangeValidation(number) {
-    const isNumberBetween = number.every(eachDigit => (eachDigit >= MIN_NUMBER && eachDigit <= MAX_NUMBER));
-    if (!isNumberBetween) {
+    const insideRange = number.every(eachDigit => ((eachDigit >= MIN_NUMBER) && (eachDigit <= MAX_NUMBER)));
+    if (!insideRange) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
 
 function reduplicationValidation(number) {
-    const isReduplication = (new Set(number).size === 3);
-    if (!isReduplication) {
+    const isReduplication = (new Set(number).size !== 3);
+    if (isReduplication) {
         throw "잘못된 값을 입력하였습니다.";
     }
 }
