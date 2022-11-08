@@ -34,9 +34,37 @@ class App {
       for (var i = 0; i < input.length; i++) {
         inputArr.push(Number(input[i]));
       }
+      this.hint(inputArr, computerArr);
     });
   }
 
+  /** 4. 컴퓨터 숫자와 사용자 숫자 비교 결과값 출력  */ 
+  hint(inputArr, computerArr) {
+    var strike = 0;
+    var ball = 0;
+  
+    for(var i = 0; i < 3; i++) {
+      if(computerArr[i] === inputArr[i]) {
+        strike++;
+      } else if (inputArr.includes(computerArr[i])) {
+        ball++;
+      }      
+    }
+  
+    //힌트 출력
+    var result = ""; 
+    if(ball > 0) {
+      result +=(`${ball}볼 `);
+    }
+    if(strike > 0) {
+      result +=(`${strike}스트라이크`);
+    } 
+    if(ball === 0 && strike === 0) {
+      MissionUtils.Console.print('낫싱');
+    } else {
+      MissionUtils.Console.print(result);
+    }
+  }
 }
 
 const app = new App();
