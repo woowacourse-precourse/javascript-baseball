@@ -1,4 +1,4 @@
-const { getStrike, getBall } = require('../src/libs/BaseballFunction');
+const { getStrike, getBall, isValidation } = require('../src/libs/BaseballFunction');
 
 describe('숫자야구 기능 테스트', () => {
   test('스트라이크 개수 확인', () => {
@@ -25,5 +25,16 @@ describe('숫자야구 기능 테스트', () => {
 
     expect(strke).toEqual(1);
     expect(ball).toEqual(2);
+  });
+
+  test('입력값 유효성 검증', () => {
+    expect(isValidation('123')).toEqual(false);
+    expect(isValidation('1 3')).toEqual(true);
+    expect(isValidation('a12')).toEqual(true);
+    expect(isValidation('한12')).toEqual(true);
+    expect(isValidation('   ')).toEqual(true);
+    expect(isValidation('121')).toEqual(true);
+    expect(isValidation('1234')).toEqual(true);
+    expect(isValidation('12')).toEqual(true);
   });
 });
