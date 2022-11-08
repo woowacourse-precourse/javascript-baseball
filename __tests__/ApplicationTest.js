@@ -62,7 +62,24 @@ describe("숫자 야구 게임", () => {
 
   // Custom Test
 
-  test("예외 테스트2", () => {
+  test("기능#1 테스트: 사용자에게 게임을 시작한다는 문장을 출력해보인다.", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.play();
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining("숫자 야구 게임을 시작합니다.")
+    );
+  });
+
+  test("기능#3 예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["ㄱㄴa"];
 
