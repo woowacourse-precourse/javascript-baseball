@@ -20,7 +20,48 @@ class App {
 
     return random.join("");
   }
+  //3일때 주시하기 위해서 햇갈려서 좀 빼놓음
+  //(ball strike 너무 햇갈린다 반대로 이해해서 코드가 이상하게 나오더라...)
+  getThreeResult(numbers) {
+    return numbers.length === 3 && numbers.length === new Set(numbers).size;
+  }
+  // ball,strike세기
+  BallStrikeStatus(numbers, answers) {
+    let ball = 0;
+    let strike = 0;
 
+    Array.from(numbers).forEach((number, idx) => {
+      if (number === answers[idx]) {
+        strike++;
+      } else if (answers.includes(number)) {
+        ball++;
+      }
+    });
+
+    return [ball, strike];
+  }
+  // 몇볼, 몇 스트라이크인지 출력해주기(한글로 전부 표현)
+  BallStrikeResult(numbers, answers) {
+    const [ball, strike] = this.BallStrikeStatus(numbers, answers);
+    let result;
+
+    if (ball && strike) {
+      result = `${ball}볼 ${strike}스트라이크`;
+    } else if (ball) {
+      result = `${ball}볼`;
+    } else if (strike) {
+      result = `${strike}스트라이크`;
+    } else {
+      result = `낫싱`;
+    }
+
+    MissionUtils.Console.print(result);
+    if (strike === 3) {
+      this.selectStatus();
+    } else {
+      this.putNumbers(answers);
+    }
+  }
   play() {}
 }
 module.exports = App;
