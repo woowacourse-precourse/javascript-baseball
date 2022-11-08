@@ -1,20 +1,16 @@
-const App = require("../App.js");
+const generateRandomNumber = require("../computerNumber");
 
 describe("컴퓨터 난수 생성 테스트", () => {
-  let app;
+  let computerNumber;
   beforeEach(() => {
-    app = new App();
-  });
-
+    computerNumber = generateRandomNumber();
+  })
   test("배열의 길이가 3인지 검사", () => {
-    app.generateRandomNumber();
-
-    expect(app.computerNumber).toHaveLength(3);
+    expect(computerNumber).toHaveLength(3);
   });
 
   test("서로 다른 수 3개인지 검사", () => {
-    app.generateRandomNumber();
-    const set = new Set(app.computerNumber);
+    const set = new Set(computerNumber);
 
     expect([...set]).toHaveLength(3);
   });
