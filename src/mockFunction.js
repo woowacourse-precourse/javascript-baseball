@@ -9,6 +9,17 @@ const mockFunction = {
       });
     }, Console.readLine);
   },
+  getLogSpy() {
+    const logSpy = jest.spyOn(Console, "print");
+    logSpy.mockClear();
+    return logSpy;
+  },
+  mockRandoms(numbers) {
+    Random.pickUniqueNumbersInRange = jest.fn();
+    numbers.reduce((acc, number) => {
+      return acc.mockReturnValueOnce(number);
+    }, Random.pickUniqueNumbersInRange);
+  },
 };
 
 module.exports = mockFunction;
