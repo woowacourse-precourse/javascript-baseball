@@ -8,10 +8,11 @@ class App {
   } 
   play() {
     Console.print(MESSAGES.START);
-    this.start
+    this.start();
   }
-  start() {
+  async start() {
     this.answer = gameTool.generateRandomNumber();
+    const input = await gameTool.inputNumber();
   }
 }
 
