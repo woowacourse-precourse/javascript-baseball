@@ -4,15 +4,6 @@ const { MESSAGE, COUNTBOARDRESULT } = require('../src/Const');
 const { endApp } = require('../src/Function');
 const Function = require('../src/Function');
 
-const mockQuestions = answers => {
-  MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
-};
-
 const getLogPrintSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
