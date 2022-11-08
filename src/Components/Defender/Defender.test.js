@@ -1,21 +1,9 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
+const { getLogSpy, mockRandoms } = require("../../mockFunction");
 const AutomaticBallGenerator = require("../AutomaticBallGenerator/AutomaticBallGenerator");
 const Ball = require("../Ball/Ball");
 const Defender = require("./Defender");
-
-const getLogSpy = () => {
-  const logSpy = jest.spyOn(Console, "print");
-  logSpy.mockClear();
-  return logSpy;
-};
-
-const mockRandoms = (numbers) => {
-  Random.pickUniqueNumbersInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, Random.pickUniqueNumbersInRange);
-};
 
 describe("Defender", () => {
   test("나(공격수)의 Ball이 425이고 컴퓨터(수비수)의 Ball이 425이면 3스트라이크를 출력", () => {
