@@ -30,6 +30,12 @@ class Input {
   print(message) {
     Console.print(message);
   }
+
+  save(input) {
+    Error.validate(input);
+    this.clear(this.value);
+    this.makeNumberArray(input).forEach((element) => this.value.push(element));
+  }
 }
 
 module.exports = Input;
