@@ -59,7 +59,6 @@ class BaseballGame {
   }
 
   restartOrEndGame() {
-    this.restart = true;
     Console.print(GAME_MESSAGE.GAME_CLEAR);
     Console.readLine(GAME_MESSAGE.GAME_RESTART, (number) => {
       (number !== GAME_VALUE.RESTART && number !== GAME_VALUE.END) ?
