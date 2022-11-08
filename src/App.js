@@ -59,8 +59,8 @@ class App {
     this.getAnswer();
   }
 
-  threeStrikes(strike, lenghIsThree) {
-    return strike === lenghIsThree;
+  threeStrikes(strike, lengthIsThree) {
+    return strike === lengthIsThree;
   }
 
   win() {
