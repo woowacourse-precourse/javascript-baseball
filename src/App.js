@@ -8,12 +8,8 @@ class App {
   }
 
   play() {
-    this.gameStart();
-    this.setComputerNum();
-  }
-
-  gameStart() {
     Console.print("숫자 야구 게임을 시작합니다");
+    this.setComputerNum();
   }
 
   setComputerNum() {
@@ -23,7 +19,6 @@ class App {
         ? ""
         : this.computerNum.push(randomNum);
     }
-    Console.print(this.computerNum);
     this.userInput();
   }
 
@@ -37,14 +32,14 @@ class App {
     const inputNumArr = Array.from(String(num), (arg) => Number(arg));
     const inputNunSet = new Set(inputNumArr);
 
+    if (isNaN(num)) {
+      throw "숫자가 아닙니다.";
+    }
     if (inputNumArr.length !== NUMBERLENGTH) {
-      throw "3자리가 아님";
+      throw "3자리의 수가 아닙니다.";
     }
     if (inputNumArr.length !== inputNunSet.size) {
-      throw "중복 숫자 있음";
-    }
-    if (isNaN(num)) {
-      throw "숫자가 아님";
+      throw "중복된 숫자가 있습니다.";
     }
 
     this.compareNum(inputNumArr, this.computerNum);
@@ -55,11 +50,8 @@ class App {
     let ballCount = 0;
     for (var index = 0; index < NUMBERLENGTH; index++) {
       let sameFind = inputNumArr.indexOf(computerNum[index]);
-      if (sameFind >= 0 && sameFind === index) {
-        strikeCount++;
-      } else if (sameFind >= 0 && sameFind !== index) {
-        ballCount++;
-      }
+      sameFind >= 0 && sameFind === index ? strikeCount++ : "";
+      sameFind >= 0 && sameFind !== index ? ballCount++ : "";
     }
     this.compareResultPrint(strikeCount, ballCount);
   }
@@ -71,25 +63,20 @@ class App {
     } else if (strikeCount === 3) {
       Console.print("3스트라이크");
       this.winGame();
-    } else if (strikeCount > 0 && strikeCount < 3) {
-      {
-        ballCount > 0
-          ? Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
-          : Console.print(`${strikeCount}스트라이크`);
-      }
+    } else if (strikeCount > 0 && strikeCount < 3 && ballCount > 0) {
+      Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
       this.userInput();
-    } else if (ballCount > 0) {
-      {
-        strikeCount > 0
-          ? Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
-          : Console.print(`${ballCount}볼`);
-      }
+    } else if (strikeCount > 0 && strikeCount < 3 && ballCount === 0) {
+      Console.print(`${strikeCount}스트라이크`);
+      this.userInput();
+    } else if (ballCount > 0 && strikeCount === 0) {
+      Console.print(`${ballCount}볼`);
       this.userInput();
     }
   }
 
   winGame() {
-    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+    Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     this.isRestartGame();
   }
 
@@ -107,6 +94,7 @@ class App {
     );
   }
 }
+
 const app = new App();
 app.play();
 
