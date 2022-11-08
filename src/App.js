@@ -11,6 +11,7 @@ class App {
 	}
 
 	initGame() {
+		this.computerNumArr = [];
 		while (this.computerNumArr.length < 3) {
 			let number = Random.pickNumberInRange(1, 9);
 			if (!this.computerNumArr.includes(number))
