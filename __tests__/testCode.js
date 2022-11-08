@@ -26,14 +26,14 @@ const getLogSpy = () => {
 describe("입력값 테스트", () => {
   const testCode = new App();
 
-  test("checkPlayingNum 메서드 에러 값 검사", () => {
-    expect(() => testCode.checkPlayingNum("12", true)).toThrow(
+  test("checkInputNum 메서드 에러 값 검사", () => {
+    expect(() => testCode.checkInputNum("12", true)).toThrow(
       "세자리 수를 입력해야합니다. 프로그램을 종료합니다."
     );
   });
 
-  test("checkPlayingNum 메서드 에러 값 검사", () => {
-    expect(() => testCode.checkPlayingNum("334", true)).toThrow(
+  test("checkInputNum 메서드 에러 값 검사", () => {
+    expect(() => testCode.checkInputNum("334", true)).toThrow(
       "서로 다른 숫자 세가지를 입력해야합니다. 프로그램을 종료합니다."
     );
   });
