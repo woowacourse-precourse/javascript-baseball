@@ -8,8 +8,8 @@ const GAME_OVER = '2';
 
 class Referee {
   constructor() {
-    this.computerValue = null;
-    this.playerValue = null;
+    this.computerValue = '';
+    this.playerValue = '';
   }
 
   gameInit() {
