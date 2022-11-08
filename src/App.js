@@ -81,7 +81,16 @@ const countStrike = function countStrike(inputNumbers, answerNumbers) {
   return strike;
 };
 
-
+const askPlayNewGame = function askPlayNewGame() {
+  MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (input) => {
+    if (input === "1") {
+      playGame();
+    }
+    if (input === "2") {
+      MissionUtils.Console.print("게임을 종료합니다.");
+      MissionUtils.Console.close();
+    }
+  });
 
 
 class App {
