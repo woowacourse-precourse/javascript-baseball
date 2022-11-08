@@ -72,8 +72,10 @@ class App {
       this.askRestart();
     } else if (strike > 0 || ball > 0) {
       Console.print((ball == 0 ? '' : ball + '볼 ') + (strike == 0 ? '' : strike + '스트라이크'));
+      this.roundStart();
     } else {
       Console.print("낫싱");
+      this.roundStart();
     }
   }
 
