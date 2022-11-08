@@ -1,4 +1,5 @@
 const { Random } = require('@woowacourse/mission-utils');
+const { MIN_NUMBER, MAX_NUMBER, VALUE_SIZE } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
 const isAvailableValue = require('./utils/isAvailableValue');
 
@@ -21,8 +22,8 @@ class Computer {
   generatorComputerValue() {
     let computerValue = [];
 
-    while (computerValue.length < 3) {
-      const randomNumber = Random.pickNumberInRange(1, 9);
+    while (computerValue.length < VALUE_SIZE) {
+      const randomNumber = Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
       if (!computerValue.includes(randomNumber)) computerValue.push(randomNumber);
     }
 
