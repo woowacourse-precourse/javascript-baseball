@@ -12,11 +12,19 @@ class App {
   }
 
   randomThreeNumbers() {
-    let three_numbers = [];
-    let array_size = 3;
-    for(let i=0; i<array_size; i++) {
+    let threeNumbers = [];
+    let count = 0;
+    let notFull = true;
+
+    while(notFull) {
       const number = MissionUtils.Random.pickNumberInRange(1,9);
-      three_numbers.push(number);
+      if(!threeNumbers.includes(number)) {
+        threeNumbers.push(number);
+        count++;
+      }
+      if(count == 3) {
+        notFull = false;
+      }
     }
   }
 
@@ -25,8 +33,10 @@ class App {
     let input = [];
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (line) => {
       input = line.split("").map(el => parseInt(el));
-      checkInput(input);
+      this.checkInput(input);
     })
+
+    // return input;
   }
 
   checkInput(input) {
@@ -35,7 +45,11 @@ class App {
     }
   }
 
-  printResult() {
+  printResult(computer, user) {
+
+  }
+
+  endGame() {
 
   }
 
@@ -43,11 +57,8 @@ class App {
 
     MissionUtils.Console.print(this.printStartMessage());
     this.randomThreeNumbers();
-
     this.inputThreeNumbers();
-    // this.calcResult(numbers);
-
-
+    
   }
 }
 
