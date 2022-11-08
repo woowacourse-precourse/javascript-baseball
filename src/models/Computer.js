@@ -1,6 +1,6 @@
-import Convertor from '../utils/Convertor.js';
-import Random from '../utils/Random.js';
-import Validator from './Validator.js';
+const Convertor = require('../utils/Convertor.js');
+const Random = require('../utils/Random.js');
+const Validator = require('./Validator.js');
 
 class Computer {
   checker = {
@@ -49,4 +49,4 @@ class Computer {
   }
 }
 
-export default Computer;
+module.exports = Computer;

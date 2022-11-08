@@ -1,5 +1,5 @@
-import Convertor from '../utils/Convertor.js';
-import Validator from './Validator.js';
+const Convertor = require('../utils/Convertor.js');
+const Validator = require('./Validator.js');
 
 class User {
   getAnswerArray() {
@@ -33,4 +33,4 @@ class User {
   }
 }
 
-export default User;
+module.exports = User;

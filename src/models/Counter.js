@@ -1,4 +1,4 @@
-import Message from './Message.js';
+const Message = require('./Message.js');
 
 const RESTART = '1';
 const END = '2';
@@ -75,4 +75,4 @@ class Counter {
   }
 }
 
-export default Counter;
+module.exports = Counter;

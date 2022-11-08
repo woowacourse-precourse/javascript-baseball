@@ -1,4 +1,4 @@
-import Game from './controller/Game.js';
+const Game = require('./controller/Game.js');
 
 class App {
   play() {
@@ -7,4 +7,4 @@ class App {
   }
 }
 
-export default App;
+module.exports = App;

@@ -44,4 +44,4 @@ class Message {
   }
 }
 
-export default Message;
+module.exports = Message;

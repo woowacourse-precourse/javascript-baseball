@@ -1,8 +1,8 @@
-import User from '../models/User.js';
-import Computer from '../models/Computer.js';
-import InputView from '../views/InputView.js';
-import OutputView from '../views/OutputView.js';
-import Counter from '../models/Counter.js';
+const User = require('../models/User.js');
+const Computer = require('../models/Computer.js');
+const InputView = require('../views/InputView.js');
+const OutputView = require('../views/OutputView.js');
+const Counter = require('../models/Counter.js');
 
 const MESSAGE = '잘못된 입력입니다.';
 
@@ -90,4 +90,4 @@ class Game {
   }
 }
 
-export default Game;
+module.exports = Game;

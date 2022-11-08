@@ -1,4 +1,4 @@
-import MissionUtils from '@woowacourse/mission-utils';
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class Console {
   static print(msg) {
@@ -14,4 +14,4 @@ class Console {
   }
 }
 
-export default Console;
+module.exports = Console;

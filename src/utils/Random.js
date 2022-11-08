@@ -1,4 +1,4 @@
-import MissionUtils from '@woowacourse/mission-utils';
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class Random {
   static pickNumberInRange(min, max) {
@@ -6,4 +6,4 @@ class Random {
   }
 }
 
-export default Random;
+module.exports = Random;

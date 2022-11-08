@@ -1,4 +1,4 @@
-import Console from '../utils/Console.js';
+const Console = require('../utils/Console.js');
 
 class OutputView {
   static message = {
@@ -19,4 +19,4 @@ class OutputView {
   }
 }
 
-export default OutputView;
+module.exports = OutputView;

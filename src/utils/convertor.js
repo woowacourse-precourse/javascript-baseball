@@ -12,4 +12,4 @@ class Convertor {
   }
 }
 
-export default Convertor;
+module.exports = Convertor;

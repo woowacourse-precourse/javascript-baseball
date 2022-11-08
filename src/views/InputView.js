@@ -1,4 +1,4 @@
-import Console from '../utils/Console.js';
+const Console = require('../utils/Console.js');
 
 class InputView {
   static question = {
@@ -15,4 +15,4 @@ class InputView {
   }
 }
 
-export default InputView;
+module.exports = InputView;
