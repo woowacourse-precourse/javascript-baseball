@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
+const { makeRandomNumber } = require('../src/util');
 
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
@@ -62,7 +63,7 @@ describe('숫자 야구 게임 (셀프테스트)', () => {
 
   test('컴퓨터 랜덤 정답 생성', () => {
     const app = new App();
-    const randomNum = app.makeRandomAnswer();
+    const randomNum = makeRandomNumber(3, 1, 9);
     expect(app.chkValidNumber(randomNum)).toEqual(true);
   });
 

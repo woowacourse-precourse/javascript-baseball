@@ -1,4 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
+const { makeRandomNumber } = require('./util');
 
 class App {
   #gameAnswer = null;
@@ -50,24 +51,13 @@ class App {
     return true;
   }
 
-  makeRandomAnswer() {
-    const randomNumArr = [];
-    while (randomNumArr.length < 3) {
-      const randomNum = Random.pickNumberInRange(1, 9);
-      if (!randomNumArr.includes(randomNum)) {
-        randomNumArr.push(randomNum);
-      }
-    }
-    return randomNumArr.join('');
-  }
-
   decideRestart() {
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
       finishInput => {
         if (finishInput === '1') {
-          this.#gameAnswer = this.makeRandomAnswer();
+          this.#gameAnswer = makeRandomNumber(3, 1, 9);
           this.inputByConsole();
         }
         if (finishInput === '2') {
@@ -95,7 +85,7 @@ class App {
 
   play() {
     Console.print('숫자 야구 게임을 시작합니다.');
-    this.#gameAnswer = this.makeRandomAnswer();
+    this.#gameAnswer = makeRandomNumber(3, 1, 9);
     this.inputByConsole();
   }
 }
