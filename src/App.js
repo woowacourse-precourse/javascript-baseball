@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const ExceptionHandler = require("./ExceptionHandler");
+const BaseballCounter = require("./BaseBallCounter");
 
 const startMessage = function printGameStartMessage() {
   MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
@@ -19,7 +20,7 @@ const generateAnswer = function generateRandomThreeNumbers() {
 const promptInput = function promptUserGuessInput(answer) {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
     validateInput(input);
-    const result = calculateResult(input, answer);
+    const result = BaseballCounter.calculateResult(input, answer);
     MissionUtils.Console.print(result);
     if (result === "3스트라이크") {
       MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
@@ -34,45 +35,6 @@ const validateInput = function validateInput(input) {
   ExceptionHandler.validateInputLength(input);
   ExceptionHandler.validateInputisNumber(input);
   ExceptionHandler.validateInputisNotDuplicated(input);
-};
-
-const calculateResult = function calculateResult(input, answer) {
-  const inputArray = input.split("").map(Number);
-  const answerArray = answer;
-  const ball = countBall(inputArray, answerArray);
-  const strike = countStrike(inputArray, answerArray);
-
-  if (ball === 0 && strike === 0) {
-    return "낫싱";
-  }
-  if (ball === 0) {
-    return `${strike}스트라이크`;
-  }
-  if (strike === 0) {
-    return `${ball}볼`;
-  }
-  
-  return `${ball}볼 ${strike}스트라이크 `;
-};
-
-const countBall = function countBall(userInput, answer) {
-  let ball = 0;
-  userInput.forEach((userInput, index) => {
-    if (answer.includes(userInput) && userInput !== answer[index]) {
-      ball++;
-    }
-  });
-  return ball;
-};
-
-const countStrike = function countStrike(userInput, answer) {
-  let strike = 0;
-  userInput.forEach((userInput, index) => {
-    if (userInput === answer[index]) {
-      strike++;
-    }
-  });
-  return strike;
 };
 
 const askPlayNewGame = function askUserPlayNewGame() {
