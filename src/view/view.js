@@ -29,7 +29,6 @@ class View {
   getUserGuessInput() {
     Console.readLine(this.GET_INPUT_COMMET, (userGivenString) => {
       this.controller.updateUserGivenNumber(userGivenString);
-      this.controller.checkIsUserInputValid();
     });
   }
 
@@ -71,6 +70,11 @@ class View {
   finishGame() {
     Console.print(this.CLOSING_COMMENT);
     Console.close();
+  }
+
+  // 유저 제시 Input 에 대한 에러를 throw 한다.
+  throwUserGuessInputError() {
+    throw new Error(this.WRONG_COMMENT);
   }
 }
 

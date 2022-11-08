@@ -13,37 +13,6 @@ class Controller {
   }
 
   /**
-   * 유저가 제시한 수를 저장한다(update).
-   * @param {string} userGivenNumber [유저가 제시한 수(문자열)]
-   */
-  updateUserGivenNumber(userGivenNumber) {
-    this.userGivenNumber.setState(userGivenNumber.toString().split(""));
-  }
-
-  /**
-   * 유저가 제시한 수의 각 숫자에 따른 스트라이크, 볼, 낫싱 여부를 return 한다.
-   * @param {string[]} userGivenNumber [유저가 제시한 수]
-   * @param {string[]} computerGivenNumber [컴퓨터가 생성한 수]
-   * @param {number} index [순회문의 index]
-   * @return {string} [결과 값]
-   */
-  isStrikeBallNothing(userGivenNumber, computerGivenNumber, index) {
-    // 숫자와 자리까지 같다면 (스트라이크)
-    if (userGivenNumber[index] === computerGivenNumber[index]) {
-      return "strike";
-    }
-    // 숫자만 있다면 (볼)
-    if (
-      userGivenNumber[index] !== computerGivenNumber[index] &&
-      computerGivenNumber.includes(userGivenNumber[index])
-    ) {
-      return "ball";
-    }
-
-    return "noting";
-  }
-
-  /**
    * 결과값을 받아 게임이 끝났는지 확인한다.
    * @param {number[]} strikeBallCountArray [결과 배열]
    */
@@ -78,19 +47,38 @@ class Controller {
     this.checkIsGameFinished(strikeBallCount);
   }
 
-  // 유저가 제시한 수에 문제가 없는지 확인한다.
-  checkIsUserInputValid() {
-    const isUserInputValid = this.validation.getIsUserGuessInputValid(
-      this.userGivenNumber.getState()
-    );
-
-    // 문제가 있다면 throw Error
-    if (!isUserInputValid) {
-      throw new Error(this.view.WRONG_COMMENT);
-    }
+  /**
+   * 유저가 제시한 수를 저장한다(update).
+   * @param {string} userGivenNumber [유저가 제시한 수(문자열)]
+   */
+  updateUserGivenNumber(userGivenNumber) {
+    this.userGivenNumber.setState(userGivenNumber.toString().split(""));
 
     // 문제가 없다면 다음 단계로
     this.getSingleTryResult();
+  }
+
+  /**
+   * 유저가 제시한 수의 각 숫자에 따른 스트라이크, 볼, 낫싱 여부를 return 한다.
+   * @param {string[]} userGivenNumber [유저가 제시한 수]
+   * @param {string[]} computerGivenNumber [컴퓨터가 생성한 수]
+   * @param {number} index [순회문의 index]
+   * @return {string} [결과 값]
+   */
+  isStrikeBallNothing(userGivenNumber, computerGivenNumber, index) {
+    // 숫자와 자리까지 같다면 (스트라이크)
+    if (userGivenNumber[index] === computerGivenNumber[index]) {
+      return "strike";
+    }
+    // 숫자만 있다면 (볼)
+    if (
+      userGivenNumber[index] !== computerGivenNumber[index] &&
+      computerGivenNumber.includes(userGivenNumber[index])
+    ) {
+      return "ball";
+    }
+
+    return "noting";
   }
 
   /**
