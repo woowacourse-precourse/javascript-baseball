@@ -22,6 +22,14 @@ class App {
       }
     }
   }
+
+  getUserNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요: ", (inputNumber) => {
+      this.userNumber = this.validNumber(inputNumber);
+
+      this.compareResult();
+    });
+  }
 }
 
 const app = new App();
