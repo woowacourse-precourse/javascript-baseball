@@ -112,3 +112,16 @@ describe("랜덤수 구하기", () => {
     expect(randomNumber).toEqual([1, 3, 5]);
   });
 });
+
+describe("입력값 검증", () => {
+  test("checkGuessInput 함수 테스트", () => {
+    const answers = ["12", "1234", "123a", "112"];
+    mockQuestions(answers);
+
+    answers.forEach((answer) => {
+      expect(() => {
+        checkInput(answer);
+      }).toThrow();
+    });
+  });
+});
