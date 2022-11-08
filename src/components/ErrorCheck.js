@@ -12,7 +12,7 @@ class ErrorCheck {
   }
 
   static notOnlyConsistOfNums(userInput) {
-    const numberOnlyReg = /[^0-9]/;
+    const numberOnlyReg = /[^1-9]/;
     return numberOnlyReg.test(userInput);
   }
 
