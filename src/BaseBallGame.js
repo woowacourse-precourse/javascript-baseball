@@ -21,6 +21,12 @@ class BaseBallGame {
     this.#inputNumber();
   }
 
+  #restart() {
+    this.#clearBallAndStrikeCount();
+    this.getNewComputerNumber();
+    this.#inputNumber();
+  }
+
   getNewComputerNumber() {
     const newComputerNumber = new Computer(new RandomNumber());
     this.computer = newComputerNumber.numbers;
@@ -117,3 +123,5 @@ class BaseBallGame {
     });
   }
 }
+
+module.exports = BaseBallGame;
