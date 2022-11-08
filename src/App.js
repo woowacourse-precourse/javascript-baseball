@@ -82,6 +82,8 @@ class App {
   restartGameByInput(input) {
     if (input === '1') {
       this.startGame();
+    } else {
+      MissionUtils.Console.close();
     }
   }
 
