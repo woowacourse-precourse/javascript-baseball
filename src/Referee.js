@@ -37,7 +37,7 @@ class Referee {
   gameFinish() {
     MissionUtils.Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
       if (answer === RESTART) return this.gameStart();
-      if (answer === GAME_OVER) return MissionUtils.Console.print(MESSAGE.GAME.WIN);
+      if (answer === GAME_OVER) return MissionUtils.Console.print(MESSAGE.GAME.OVER);
       return this.gameFinish();
     });
   }

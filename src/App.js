@@ -1,12 +1,9 @@
 const Referee = require('./Referee');
 
 class App {
-  constructor() {
-    this.referee = new Referee();
-  }
-
   play() {
-    this.referee.gameStart();
+    const referee = new Referee();
+    referee.gameStart();
   }
 }
 
