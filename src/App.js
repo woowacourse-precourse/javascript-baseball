@@ -30,6 +30,12 @@ const getNumber = (randombaseball) => {
     let result = computeBallStrike(randombaseball, number);
     MissionUtils.Console.print(computeResult(result));
   });
+  if (result[1] === 3) {
+    gameover();
+  }
+  if (result[1] !== 3) {
+    getNumber(randombaseball);
+  }
 };
 
 const checkNumberError = (number) => {
@@ -80,4 +86,27 @@ const computeResult = (result) => {
     str = "낫싱";
   }
   return str;
+};
+
+const gameover = () => {
+  MissionUtils.Console.readLine(
+    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+    (number) => {
+      checkGameoverNumber(number);
+    }
+  );
+};
+
+const checkGameoverNumber = (number) => {
+  let num = parseInt(number);
+  if (num !== 1 && num !== 2) {
+    throw new Error("1과 2중에서 입력해주세요.");
+  }
+  if (num == 1) {
+    let newNumber = createRandomNumber();
+    getNumber(newNumber);
+  }
+  if (num == 2) {
+    MissionUtils.Console.close();
+  }
 };
