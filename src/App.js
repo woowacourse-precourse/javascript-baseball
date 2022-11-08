@@ -18,7 +18,7 @@ class App {
     if (isNumber && (numArr.length === 3) && (numArr.length === set.size)) {
       return true;
     } else {
-      throw ('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
+      throw('서로 다른 세 자리 숫자를 입력하지 않았습니다.\n');
     }
   }
 
@@ -45,14 +45,14 @@ class App {
   }
 
   printBallCount(ballCount) {
-    if (ballCount.strike > 0) {
-      MissionUtils.Console.print(ballCount.strike + ' 스트라이크');
-    }
     if (ballCount.ball > 0) {
-      MissionUtils.Console.print(ballCount.ball + ' 볼');
+      MissionUtils.Console.print(ballCount.ball + '볼 ');
+    }
+    if (ballCount.strike > 0) {
+      MissionUtils.Console.print(ballCount.strike + '스트라이크 ');
     }
     if (ballCount.nothing === 3) {
-      MissionUtils.Console.print('낫싱');
+      MissionUtils.Console.print('낫싱 ');
     }
   }
 
@@ -60,18 +60,19 @@ class App {
     this.readInput('1: 재시작, 2: 종료 (숫자만 입력) :', (answer) => {
       if (answer === 1) {
         const app = new App();
-        return app.play();
+        app.play();
       } else if (answer === 2) {
         return this.gameExit();
-      } else {
-        this.restartOrExit();
-      }
+      } 
+      // else {
+      //   this.restartOrExit();
+      // }
     });
   }
 
-
   gameExit() {
-    throw ('게임을 종료합니다.\n');
+    MissionUtils.Console.print('게임을 종료합니다.\n');
+    MissionUtils.Console.close();
   }
 
   userPickNum(stringComputerNumArr) {
@@ -88,9 +89,10 @@ class App {
       if (ballCount.strike === 3) {
         MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료\n');
         return this.restartOrExit();
-      } else {
-        this.userPickNum(stringComputerNumArr);
-      }
+      } 
+      // else {
+      //   this.userPickNum(stringComputerNumArr);
+      // }
     });
   }
 
@@ -99,7 +101,7 @@ class App {
     const stringComputerNumArr = this.computerNum().map(function (element) {
       return element.toString();
     });
-
+    console.log(stringComputerNumArr);
     this.userPickNum(stringComputerNumArr);
   }
 }
