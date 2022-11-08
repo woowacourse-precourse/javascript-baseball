@@ -49,19 +49,19 @@ class App {
       throw "숫자만 입력해주세요.";
     }
 
-    [...input].forEach((num, numIndex)=>{
+    [...input].forEach((num, index)=>{
       if(isNaN(num)){
         throw "음수 또는 소수점은 입력할 수 없습니다.";
       }
       if(!Number(num)){
         throw "각 자리의 숫자는 1~9만 허용합니다.";
       }
-      this.throwExceptionForDuplicateNumber([...input], num, numIndex);
+      this.throwExceptionForDuplicateNumber(input, num, index);
     });
   }
 
-  throwExceptionForDuplicateNumber(inputList, num, index) {
-    inputList.forEach((compareNum, compareIndex)=>{
+  throwExceptionForDuplicateNumber(input, num, index) {
+    [...input].forEach((compareNum, compareIndex)=>{
       if(num === compareNum && index !== compareIndex){
         throw "서로 다른 3개의 숫자를 입력하세요.";
       }
