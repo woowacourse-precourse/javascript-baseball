@@ -37,8 +37,40 @@ class gameStart {
     return (computer.join(''))
   }
 
-  
+  countScore(answer) {
+    let errorCheck = new InputCheck(answer);
+    if(!errorCheck.isValid(answer)) {
+      throw new Error("올바르지 않은 입력값입니다.")
+    }
+  }
 
+}
+
+class InputCheck {
+
+  isValid(answer) {
+    this.answer = answer;
+    let isValid =
+      this.isValidLength()
+      && this.isNotduplicated()
+      && this.isValidRange()
+    return isValid;
+  }
+
+  isValidLength() {
+    const LENGTH_LIMIT = 3;
+    return (this.answer.length === LENGTH_LIMIT);
+  }
+  
+  isNotduplicated() {
+    const arr = [...new Set(this.answer)].join('');
+    return this.answer === arr;
+  }
+
+  isValidRange() {
+    const range = Array(9).fill().map((v, i) => (i+1).toString());
+    return ([...new Set(this.answer)].every((num) => range.includes(num)));
+  } 
 
 }
 
