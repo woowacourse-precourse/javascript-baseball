@@ -31,4 +31,16 @@ describe("기능 테스트", () => {
         try { app.valueExceptionHandling('122') } catch (e) { console.log(e) };
         expect(consoleSpy).toHaveBeenCalledWith('입력 값에 중복된 수가 있습니다. 게임을 종료합니다.');
     })
+    test("5. 볼을 판단하는 기능", () => {
+        expect(app.checkScore('123', ['3', '1', '2'])).toEqual({
+            ball: 3,
+            strike: 0
+        });
+    })
+    test("6. 스트라이크를 판단하는 기능", () => {
+        expect(app.checkScore('123', ['1', '2', '3'])).toEqual({
+            ball: 0,
+            strike: 3
+        });
+    })
 });
