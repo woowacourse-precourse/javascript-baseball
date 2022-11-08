@@ -59,12 +59,19 @@ class App {
 
   isValidUserNumber(number) {
     return (
-      this.isThreeDigits(number) && this.isCorrectRangeDigits(number) && this.isNotDuplicate(number)
+      this.isThreeDigits(number) &&
+      this.isNotNegative(number) &&
+      this.isCorrectRangeDigits(number) &&
+      this.isNotDuplicate(number)
     );
   }
 
   isThreeDigits(number) {
     return number.split('').filter((digit) => !isNaN(Number(digit))).length === 3;
+  }
+
+  isNotNegative(number) {
+    return Number(number) > 0;
   }
 
   isCorrectRangeDigits(number) {
