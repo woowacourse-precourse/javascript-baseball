@@ -82,5 +82,16 @@ class App {
     }
     return strikeCount;
   }
+
+  checkBall(answer, inputNumber, strikeCount) {
+    let ballCount = 0;
+    for (var i = 0; i < 3; i++) {
+      if (answer.includes(Number(inputNumber.charAt(i)))) {
+        ballCount += 1;
+      }
+    }
+    ballCount -= strikeCount;
+    return ballCount;
+  }
 }
 module.exports = App;
