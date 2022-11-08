@@ -33,9 +33,37 @@ class App {
       throw new Error('세 자리 수가 다르지 않습니다: ' + guess);
     }
   };
-  
+
+  #getHint(computerPick, guess) {
+    let strikes = 0;
+    let balls = 0;
+
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+      if (computerPick[i] !== guess[j]) {
+        continue;
+      }
+
+      if (i === j) {
+        strikes++;
+      } else {
+        balls++;
+      }
+    }
+
+    if (balls && strikes) {
+      return `${balls}볼 ${strikes}스트라이크`;
+    } else if (balls) {
+      return `${balls}볼`;
+    } else if (strikes) {
+      return `${strikes}스트라이크`;
+    } else {
+      return '낫싱';
+    }
+  }
+
   #gameLoop(computerPick, guess) {
     this.#validateGuess(guess);
+    Console.print(this.#getHint(computerPick, guess))
   }
 
   play() {
