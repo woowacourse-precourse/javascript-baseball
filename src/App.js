@@ -87,7 +87,7 @@ function playNewGameOrQuit() {
         }
       );
     } else if (newOrQuit == 2) {
-      return;
+      MissionUtils.Console.close();
     }
   });
 }
