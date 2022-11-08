@@ -7,13 +7,13 @@ const MESSAGE = {
   ERROR: "잘못된 입력값입니다. 숫자 야구 게임을 종료합니다.",
 };
 
-const RESULT = {
+const HINT = {
   BALL: "볼",
   STRIKE: "스트라이크",
   NOTHING: "낫싱",
 };
 
-const USER_CHOICE = {
+const PLAY_STATUS = {
   RESTART: "1",
   END: "2",
 };
@@ -26,7 +26,7 @@ const NUMBER = {
 
 module.exports = {
   MESSAGE,
-  RESULT,
-  USER_CHOICE,
+  HINT,
+  PLAY_STATUS,
   NUMBER,
 };
