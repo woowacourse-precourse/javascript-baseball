@@ -26,8 +26,10 @@ class App {
   }
 
   printStrikeAndBall(inputNumber,randomNumber) {
-
-    const {strike, ball} = this.countStrikeAndBall(inputNumber,randomNumber);
+    let userNumber = inputNumber.split("").map(Number);
+    console.log(userNumber)
+    const {strike, ball} = this.countStrikeAndBall(userNumber,randomNumber);
+    
     if (strike === 0 && ball === 0) {
       MissionUtils.Console.print("낫싱");
     } else if (strike > 0 && ball > 0) {
@@ -41,8 +43,7 @@ class App {
     this.correctAnswer(strike,randomNumber);
   }
 
-  countStrikeAndBall(inputNumber, randomNumber) {
-    let userNumber = inputNumber.split("");
+  countStrikeAndBall(userNumber, randomNumber) {
     let strike = 0;
     let ball = 0;
 
@@ -84,12 +85,12 @@ class App {
       }
     }
 
-    const toStringRandomArray = randomArray.map((value) => String(value));
-    return toStringRandomArray;
+    return randomArray;
   }
 
   startGame() {
     const randomNumber = this.makeRandom();
+    console.log(randomNumber);
     this.makeUserNumbers(randomNumber);
   }
 

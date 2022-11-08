@@ -43,4 +43,15 @@ describe("random 값 배열 생성", () => {
   });
 });
 
-//countStrikeAndBall
+// countStrikeAndBall
+describe("Strike, Ball 개수 세기", () => {
+  test("Strike, Ball 개수 세기", () => {
+    const app = new App();
+
+    const inputNumber = [1,5,8];
+    const randomNumber = [8,5,3];
+    const result = app.countStrikeAndBall(inputNumber, randomNumber);
+
+    expect(result).toEqual({strike : 1, ball:1});
+  });
+});
