@@ -5,6 +5,11 @@ const GameJudgment = require("../src/Model/GameJudgment");
 const ComputerInput = require("../src/Model/ComputerInput");
 const { ERROR, GAME } = require("../src/data/Constants");
 
+const render = new Render();
+const checkNumVaild = new CheckInputValid();
+const gameJudgment = new GameJudgment();
+const checkRetryNumVaild = new CheckInputValid();
+
 class App {
   constructor() {
     this.computerInput = ComputerInput();
@@ -17,8 +22,6 @@ class App {
   }
 
   startMention() {
-    const render = new Render();
-
     if (this.firstTry === true) {
       render.startment();
     }
@@ -34,10 +37,7 @@ class App {
   }
 
   checkVaild(userNum) {
-    const checkNumVaild = new CheckInputValid();
     const checkUserInputValid = checkNumVaild.checkUserInput(userNum);
-
-    const render = new Render();
     render.errorThrow(checkUserInputValid);
 
     this.gameRender();
@@ -46,7 +46,6 @@ class App {
   gameRender() {
     const [userBallCount, userStrikeCount] = this.gameBallAndStrike();
 
-    const render = new Render();
     render.result(userBallCount, userStrikeCount);
 
     this.gameJudge(userStrikeCount);
@@ -68,7 +67,6 @@ class App {
     const userInput = this.userNum;
     const computerInput = this.computerInput;
 
-    const gameJudgment = new GameJudgment();
     const [userBallCount, userStrikeCount] = gameJudgment.judgement(
       userInput,
       computerInput
@@ -78,12 +76,10 @@ class App {
   }
 
   checkRetryNumVaild() {
-    const checkRetryNumVaild = new CheckInputValid();
     const checkUserRetryInputValid = checkRetryNumVaild.checkUserRetryInput(
       this.userRetryNum
     );
 
-    const render = new Render();
     render.errorThrow(checkUserRetryInputValid);
 
     this.retryOrEnd();
