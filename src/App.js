@@ -62,6 +62,38 @@ class App {
       this.putNumbers(answers);
     }
   }
-  play() {}
+  // 게임종료나 시작 같은 게임 상태 체크해주기(입력형식에 안맞는경우 throw문 사용)
+  selectStatus() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요!\n",
+      (number) => {
+        if (number === "1") {
+          this.play();
+        } else if (number === "2") {
+          MissionUtils.Console.close();
+        } else {
+          throw new Error("입력 형식에 맞지 않습니다.");
+        }
+      }
+    );
+  }
+  // 숫자 입력창
+  putNumbers(answers) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (numbers) => {
+      if (this.getThreeResult(numbers)) {
+        this.BallStrikeResult(numbers, answers);
+      } else {
+        throw new Error("입력 형식에 맞지 않습니다.");
+      }
+    });
+  }
+  // 게임 플레이 함수(위에서 짠 함수들을 전부 집어넣는다)
+  play() {
+    const answers = this.pickInputRandom();
+
+    this.printGameStart();
+    this.putNumbers(answers);
+  }
 }
 module.exports = App;
