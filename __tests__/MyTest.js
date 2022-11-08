@@ -1,5 +1,4 @@
 const App = require("../src/App");
-const MissionUtils = require("@woowacourse/mission-utils");
 
 describe("숫자 야구 게임 테스트", () => {
   const app = new App();
