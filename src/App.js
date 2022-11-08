@@ -4,6 +4,7 @@ const makeRandomNumber = require("./utils/randomNumber");
 const { validNumber } = require("./utils/checkInputNumber");
 const { countStrikeAndBall } = require("./utils/countStrikeAndBall");
 const { printResult } = require("./utils/printResult");
+const { CONTINUE_OR_NOT } = require("./constant/constants");
 class App {
   play() {
     //시작 메세지 출력하기!
@@ -13,6 +14,7 @@ class App {
   //램덤 숫자(답) 미리 구하기!
   gameSetter() {
     const answer = makeRandomNumber.createRandomNumber();
+    Console.print(answer);
     this.startGame(answer);
   }
   startGame(answer) {
@@ -22,13 +24,24 @@ class App {
       else {
         //유효한 값을 입력했을 경우 결과값을 출력한다!
         const countResult = countStrikeAndBall(answer, input);
-        //countResult[0]은 항상 strike의 갯수를 담고 있다
-        if (countResult[0] === 3) {
+        Console.print(countResult);
+        if (countResult.strike === 3) {
           Console.print(MESSAGE.CORRECT);
+          //게임을 계속할 것인지, 아니면 종료할 것인지 결정!
+          this.continueOrNot();
         } else {
-          printResult(countResult[0], countResult[1]);
+          printResult(countResult.strike, countResult.ball);
           this.startGame(answer);
         }
+      }
+    });
+  }
+  continueOrNot() {
+    Console.readLine(MESSAGE.CONTINUE, (input) => {
+      if (input === CONTINUE_OR_NOT.CONTINUE) {
+        this.gameSetter();
+      } else if (input === CONTINUE_OR_NOT.TERMINATE) {
+        Console.close();
       }
     });
   }
