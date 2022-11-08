@@ -88,18 +88,16 @@ class App {
 
   getStats(userInput, answerNumbers) {
     const userNumbers = Array.from(userInput, (input) => Number(input));
-    const stat = {
-      ball: 0,
-      strike: 0,
-    };
+    let ball = 0;
+    let strike = 0;
 
     userNumbers.forEach((userNumber, userNumberIndex) => {
       if (answerNumbers.includes(userNumber)) {
-        userNumber === answerNumbers[userNumberIndex] ? (stat.strike += 1) : (stat.ball += 1);
+        userNumber === answerNumbers[userNumberIndex] ? (strike += 1) : (ball += 1);
       }
     });
 
-    return stat;
+    return { ball, strike };
   }
 
   getHint(ball, strike) {
