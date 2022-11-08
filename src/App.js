@@ -9,6 +9,7 @@ const userInput = (answer) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
     checkNumber(input);
     let inputResult = countNumber(input, answer);
+    printResult(inputResult);
   })
 };
 
@@ -52,6 +53,21 @@ const countNumber = (target, goal) => {
   
   return [strikeCount, ballCount];
 }
+
+const printResult = (result) => {
+  const strikeCount = result[0];
+  const ballCount = result[1];
+
+  if (strikeCount === 0 && ballCount === 0) {
+    MissionUtils.Console.print('낫싱')
+  } else if (strikeCount === 0 && ballCount !== 0) {
+    MissionUtils.Console.print(`${ballCount}볼`)
+  } else if (strikeCount !== 0 && ballCount === 0) {
+    MissionUtils.Console.print(`${strikeCount}스트라이크`)
+  } else {
+    MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`)
+  }
+};
 
 class App {
   play() {
