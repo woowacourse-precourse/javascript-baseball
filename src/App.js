@@ -1,6 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 const GameManager = require('./GameManager');
 const Printer = require('./Printer');
+const Validator = require('./Validator');
 
 const MODE_NUMBER = {
   RESTART: 1,
@@ -11,6 +12,7 @@ class App {
   constructor() {
     this.gameManager = new GameManager();
     this.printer = new Printer();
+    this.validator = new Validator();
   }
 
   play() {
@@ -20,7 +22,7 @@ class App {
 
   guess() {
     Console.readLine(this.printer.getInputMessage(), (userInput) => {
-      if (this.isError(userInput)) {
+      if (this.validator.isError(userInput)) {
         this.printer.throwError();
       }
 
@@ -62,23 +64,6 @@ class App {
 
   exit() {
     Console.close();
-  }
-
-  isError(userInput) {
-    if (userInput.length !== 3) {
-      return true;
-    }
-
-    if (new Set(userInput.split('')).size !== 3) {
-      return true;
-    }
-
-    const VALIDATION_REGEX = /[^1-9]/g;
-    if (VALIDATION_REGEX.test(userInput)) {
-      return true;
-    }
-
-    return false;
   }
 }
 
