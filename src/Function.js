@@ -33,6 +33,10 @@ class Function {
     }
   }
 
+  static makeStringToArray(input) {
+    return input.toString().split('');
+  }
+
   static endApp() {
     Console.close();
     Console.print('게임 종료');

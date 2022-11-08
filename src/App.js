@@ -2,9 +2,11 @@ const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer.js');
 const Function = require('./Function');
 const { MESSAGE, COUNTBOARDRESULT } = require('./Const');
+const { makeStringToArray } = require('./Function');
 
 class App {
   constructor() {
+    this.isRestart = false;
     this.computer = new Computer();
     this.countBoard = {
       strike: 0,
@@ -13,6 +15,7 @@ class App {
   }
 
   process() {
+    this.isRestart = true;
     Console.readLine(`${MESSAGE.GETINPUT}`, input => {
       Function.throwInvalidInputError(input);
       this.resetCountBoard();
@@ -61,10 +64,8 @@ class App {
   }
 
   compareUserAndComputer(user) {
-    const userNumberArray = user.toString().split('');
-    const computerNumberArray = this.computer.selectedNumber
-      .toString()
-      .split('');
+    const userNumberArray = makeStringToArray(user);
+    const computerNumberArray = makeStringToArray(this.computer.selectedNumber);
 
     userNumberArray.forEach((number, numberIndex) => {
       this.setCountBoard(number, numberIndex, computerNumberArray);
@@ -89,12 +90,12 @@ class App {
   }
 
   play() {
+    if (!this.isRestart) Console.print(`${MESSAGE.START}`);
     this.computer.setRandomNumber();
     this.process();
   }
 }
 
-Console.print(`${MESSAGE.START}`);
 const app = new App();
 app.play();
 
