@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGES, OUTPUTS, ERRORS } = require('./constants');
+const { MESSAGES, OUTPUTS, ERRORS, RESTART_OPTIONS } = require('./constants');
 const { getRandomUniqueNumbers } = require('./utils');
 
 class App {
@@ -28,6 +28,7 @@ class App {
 
       if (strike === 3) {
         this.#quitGame();
+        return;
       }
 
       this.#progressGame();
@@ -82,6 +83,27 @@ class App {
 
   #quitGame() {
     Console.print(MESSAGES.QUIT);
+    Console.readLine(MESSAGES.RESTART, (option) => {
+      this.#validateRestartOption(option);
+
+      const options = {
+        restart: () => this.#restartGame(),
+        quit: () => Console.close(),
+      };
+
+      options[RESTART_OPTIONS[option]]();
+    });
+  }
+
+  #validateRestartOption(option) {
+    if (RESTART_OPTIONS[option] === undefined) {
+      throw new Error(ERRORS.UNVALID_RESTART_OPTION);
+    }
+  }
+
+  #restartGame() {
+    this.#setAnswer();
+    this.#progressGame();
   }
 }
 
