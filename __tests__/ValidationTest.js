@@ -22,6 +22,13 @@ describe("(임의의 세자리 숫자) 유저 입력값 유효성 검사", () =>
     expect(result).toEqual(false);
   });
 
+  test("입력 안하는 경우", () => {
+    const input = "";
+    const result = validateNextAction(input);
+
+    expect(result).toEqual(false);
+  });
+
   test("제대로 된 경우 검사", () => {
     const input = "123";
     const result = validateThreeFigures(input);
@@ -39,10 +46,13 @@ describe("(게임 종료 시) 유저 입력 값 유효성 검사", () => {
   });
 
   test("1, 2 이외의 값을 입력하는 경우", () => {
-    const input = "3";
-    const result = validateNextAction(input);
+    const input1 = "3";
+    const input2 = "a";
+    const result1 = validateNextAction(input1);
+    const result2 = validateNextAction(input2);
 
-    expect(result).toEqual(false);
+    expect(result1).toEqual(false);
+    expect(result2).toEqual(false);
   });
 
   test("제대로 된 값을 입력하는 경우", () => {
