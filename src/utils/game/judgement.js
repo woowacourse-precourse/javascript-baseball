@@ -1,0 +1,9 @@
+const strikeJudgment = (pickedNumberArrayByComputer, numberArrayEnteredByUser) => {
+  return pickedNumberArrayByComputer.reduce(
+    (prev, randomNumber, index) => {
+      if (randomNumber === numberArrayEnteredByUser[index]) return { ...prev, strikeCount: prev.strikeCount + 1 };
+      return { ...prev, notStrikeIndexArray: [...prev.notStrikeIndexArray, index] };
+    },
+    { strikeCount: 0, notStrikeIndexArray: [] },
+  );
+};
