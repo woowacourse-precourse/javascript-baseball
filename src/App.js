@@ -12,7 +12,6 @@ let gameAnswerNumList;
 
 const startGame = () => {
   gameAnswerNumList = createAnswerNumList();
-  console.log(gameAnswerNumList)
   inputUserNum();
 }
 
