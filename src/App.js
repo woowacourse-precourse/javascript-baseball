@@ -10,7 +10,21 @@ class App {
 
 	getRandomNumber() {}
 
-	inputAnswer() {}
+	async inputAnswer() {
+		const answer = await new Promise((resolve, reject) => {
+			try {
+				MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (number) => {
+					const input = number.toString().split('');
+					this.validateAnswer(input);
+					resolve(input);
+				});
+			} catch (error) {
+				reject(error);
+			}
+		});
+
+		return answer;
+	}
 
 	validateAnswer(answer) {
 		if (answer.length !== 3) throw new Error('세자리 수가 아닙니다.');
