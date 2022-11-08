@@ -1,136 +1,137 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  
-  userNumber = [];
-  ballCount = 0;
-  strikeCount = 0;
-  selectNumber = 0;
+ 
+  constructor() {
+    this.computerNumber = [];
+    this.userNumber = [];
+    this.selectNumber = 0;
+  }
 
-  play() {}
+  play() {
+    this.setComputerNumber();
+    this.userInputNumber();
+  }
 
-  setComputerNumbers() {
-    let computerNumbers = [];
-    while (computerNumbers.length < 3) {
+  setComputerNumber() {
+    this.computerNumber = [];
+    while (this.computerNumber.length < 3) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!computerNumbers.includes(number)) {
-        computerNumbers.push(number);
+      if (!this.computerNumber.includes(number)) {
+        this.computerNumber.push(number);
       }
     }
-    return computerNumbers;
+    return this.computerNumber;
   }
 
-  userInputAnswer() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputAnswer) => {
-      this.userNumber = inputAnswer.split("").map(num => Number(num));
-      MissionUtils.Console.close();
+  userInputNumber() {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
+      MissionUtils.Console.print(`숫자를 입력해주세요 : ${inputNumber}`);
+      let inputNumberArr = inputNumber.split("").map(num => Number(num));
+      this.userNumber = this.inputNumberException(inputNumberArr);
+      this.numberCompare();
     })
-    this.inputAnswerException()
+    return this.userNumber;
   }
 
-  inputAnswerException() {
-    try {
-      if (this.userNumber.length !== 3) {
-        throw new Error;
-      }
-      if (this.userNumber[0] === this.userNumber[1] ||
-          this.userNumber[0] === this.userNumber[2] ||
-          this.userNumber[1] === this.userNumber[2]) {
-        throw new Error;
-      }
-      if (isNaN(this.userNumber[0]) || this.userNumber[0] === 0 ||
-          isNaN(this.userNumber[1]) || this.userNumber[1] === 0 ||
-          isNaN(this.userNumber[2]) || this.userNumber[2] === 0) {
-        throw new Error;
-      }
-      this.answerCompare();
-    } catch {
-      this.gameEnd();
+  inputNumberException(inputNumber) {
+    if (inputNumber.length !== 3) {
+      throw new Error;
     }
+    if ([...new Set(inputNumber)].length !== 3) {
+      throw new Error;
+    }
+    if (inputNumber.includes(NaN) || inputNumber.includes(0)) {
+      throw new Error;
+    }
+    return inputNumber;
   }
 
-  answerCompare() {
+  numberCompare() {
     this.getHint();
-    if (this.userNumber.toString() === this.answer.toString()) {
-      this.gameWin();
-    }
-  }
-
-  getHint() {
-    this.getBall();
-    this.getStrike();
-
-    if (this.ballCount > 0 && this.strikeCount > 0) {
-      return MissionUtils.Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
-    } else if (this.ballCount > 0) {
-      return MissionUtils.Console.print(`${this.ballCount}볼`);
-    } else if (this.strikeCount > 0) {
-      return MissionUtils.Console.print(`${this.strikeCount}스트라이크`);
+    if (this.computerNumber.toString() === this.userNumber.toString()) {
+      return this.gameWin();
     } else {
-      return MissionUtils.Console.print(`낫싱`);
+      this.userInputNumber();
     }
   }
-
-  getBall() {
-    this.ballCount = 0;
+ 
+  getHint() {
+    let ball = this.getBall();
+    let strike = this.getStrike();
     
-    for (let idx = 0; idx < this.answer.length; idx++) {
-      if (this.userNumber[idx] !== this.answer[idx] &&
-          this.answer.includes(this.userNumber[idx])) {
-        this.ballCount++;
-      }
+    if (ball > 0 && strike > 0) {
+      return MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    } else if (ball > 0) {
+      return MissionUtils.Console.print(`${ball}볼`);
+    } else if (strike > 0) {
+      return MissionUtils.Console.print(`${strike}스트라이크`);
+    } else {
+      return MissionUtils.Console.print("낫싱");
     }
   }
-
+  
+  getBall() {
+    let ballCount = 0;
+    
+    for (let idx = 0; idx < this.computerNumber.length; idx++) {
+      if (this.userNumber[idx] !== this.computerNumber[idx] &&
+        this.computerNumber.includes(this.userNumber[idx])) {
+          ballCount++;
+        }
+      }
+    return ballCount;
+  }
+  
   getStrike() {
-    this.strikeCount = 0;
-
-    for (let idx = 0; idx < this.answer.length; idx++) {
-      if (this.userNumber[idx] === this.answer[idx]) {
-        this.strikeCount++;
+    let strikeCount = 0;
+    
+    for (let idx = 0; idx < this.computerNumber.length; idx++) {
+      if (this.userNumber[idx] === this.computerNumber[idx]) {
+        strikeCount++;
       }
     }
+    return strikeCount;
   }
-
+  
   gameWin() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-    this.gameSelect();
+    this.userSelectNumber();
   }
+  
+  userSelectNumber() {
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (inputNumber) => {
+      MissionUtils.Console.print(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n${inputNumber}`)
+      this.selectNumber = this.userSeletException(Number(inputNumber));
 
-  gameSelect() {
-    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (inputNumber) => {
-      this.selectNumber = Number(inputNumber);
-      MissionUtils.Console.close();
-    })
-    this.gameSelectException();
-  }
-
-  gameSeletException() {
-    try {
-      if (this.selectNumber !== 1 || this.selectNumber !== 2) {
-        throw new Error;
-      }
       if (this.selectNumber === 1) {
-        this.startNewGame();
+        return this.startNewGame();
       }
       if (this.selectNumber === 2) {
-        this.gameEnd();
+        return this.gameEnd();
       }
-    } catch {
-      this.gameEnd();
+    })
+  }
+
+  userSeletException(inputNumber) {
+    if (inputNumber !== 1 && inputNumber !== 2) {
+      throw new Error;
     }
+    return inputNumber;  
   }
-
+  
   startNewGame() {
-    this.play();
+    this.setComputerNumber();
+    this.userInputNumber();
   }
-
+  
   gameEnd() {
-    
+    MissionUtils.Console.print("게임 종료");
+    MissionUtils.Console.close();
   }
 }
 
-const baseBallGame = new App;
-baseBallGame.play();
+const app = new App;
+app.play();
 
 module.exports = App;
