@@ -11,7 +11,7 @@ class App{
   getRandumNumber(){
     const randomNumber = new Set();
     while(randomNumber.size !==3){
-      randomNumber.add(MissionUtils.Random.pickNumberInRange(1,9));
+    randomNumber.add(MissionUtils.Random.pickNumberInRange(1,9));
     }
     const uniqueNumberList = [...randomNumber]
     this.uniqueNumberList = uniqueNumberList;
@@ -21,9 +21,9 @@ class App{
   
   userInput(){
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(userInputValue)=>{
-      IsVaildNumber.isVaildUserInput(userInputValue);
-      const InputNumber = userInputValue.split('').map((v)=>parseInt(v));
-      this.getHintCount(InputNumber);
+    IsVaildNumber.isVaildUserInput(userInputValue);
+    const InputNumber = userInputValue.split('').map((v)=>parseInt(v));
+    this.getHintCount(InputNumber);
     });
   }
 
@@ -34,10 +34,9 @@ class App{
     
     if(this.uniqueNumberList === userInput) COUNT_STRIKE = 3;
     
-    
     for(let index = 0; index<this.uniqueNumberList.length;index++){
-      if(this.uniqueNumberList[index] === userInput[index]) COUNT_STRIKE++
-      if(userInput.includes(this.uniqueNumberList[index])) COUNT_DUPLICATION++
+    if(this.uniqueNumberList[index] === userInput[index]) COUNT_STRIKE++
+    if(userInput.includes(this.uniqueNumberList[index])) COUNT_DUPLICATION++
     }
     const COUNT_BALL = COUNT_DUPLICATION - COUNT_STRIKE ;
     this.printResult(COUNT_STRIKE,COUNT_BALL);
@@ -45,25 +44,29 @@ class App{
 
   printResult(countStrike,countBall){
   const printMessage = MissionUtils.Console.print;
-  if(countStrike===3) printMessage('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-  if(countStrike ===0 && countBall ===0) printMessage('낫싱');
-  if(countStrike > 0 && countBall >0) printMessage(`${countBall}볼 ${countStrike}스트라이크`);
-  if((countStrike > 0 && countBall ===0) && countStrike !==3) printMessage(`${countStrike}스트라이크`);
-  if(countStrike === 0 && countBall >0) printMessage(`${countBall}볼`);
+
+  if(countStrike===3)
+  printMessage('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+  if(countStrike ===0 && countBall ===0)
+  printMessage('낫싱');
+  if(countStrike > 0 && countBall >0)
+  printMessage(`${countBall}볼 ${countStrike}스트라이크`);
+  if((countStrike > 0 && countBall ===0) && countStrike !==3)
+  printMessage(`${countStrike}스트라이크`);
+  if(countStrike === 0 && countBall >0)
+  printMessage(`${countBall}볼`);
 
   this.isSuccessGame(countStrike)
-}
+  }
 
   isSuccessGame(strike){
     if(strike ===3){
-      MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',(optionNumber)=>{
-        IsVaildNumber.IsVaildOptionNumber(optionNumber);
-        this.reStart(optionNumber);
-        this.gameExit(optionNumber);
-      });
-    } else this.userInput();
-    
-      
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',(optionNumber)=>{
+    IsVaildNumber.IsVaildOptionNumber(optionNumber);
+    this.reStart(optionNumber);
+    this.gameExit(optionNumber);
+    });
+    } else this.userInput();    
   }
 
   reStart(reStartNumber){
@@ -74,8 +77,8 @@ class App{
   gameExit(exitNumber){
     const EXIT_NUMBER = '2';
     if(exitNumber === EXIT_NUMBER){
-      MissionUtils.Console.print('게임 종료');
-      MissionUtils.Console.close();
+    MissionUtils.Console.print('게임 종료');
+    MissionUtils.Console.close();
     }
   }
   
