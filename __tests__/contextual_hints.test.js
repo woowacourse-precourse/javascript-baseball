@@ -1,4 +1,4 @@
-const ContextualHints = require("../src/components/ContextualHints");
+const ContextualHints = require("../src/components/material/ContextualHints");
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const getLogSpy = () => {

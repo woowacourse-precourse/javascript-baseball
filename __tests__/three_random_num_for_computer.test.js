@@ -1,4 +1,4 @@
-const ThreeRandomNumForComputer = require("../src/components/ThreeRandomNumForComputer");
+const ThreeRandomNumForComputer = require("../src/components/material/ThreeRandomNumForComputer");
 
 describe("컴퓨터가 1~9 범위내에서 서로 다른 3가지 수 뽑기", () => {
   let threeRandomNumForComputer;

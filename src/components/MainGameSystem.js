@@ -1,6 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const ContextualHints = require("./ContextualHints");
-const ThreeRandomNumForComputer = require("./ThreeRandomNumForComputer");
+const ContextualHints = require("./material/ContextualHints");
+const ThreeRandomNumForComputer = require("./material/ThreeRandomNumForComputer");
 
 class MainGameSystem {
   constructor() {
