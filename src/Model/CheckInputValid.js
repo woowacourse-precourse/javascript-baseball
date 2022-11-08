@@ -1,20 +1,21 @@
 const { ERROR } = require("../data/constants");
 
-function checkLength(userNum) {
+function checkLengthOfUserInput(userNum) {
   if (userNum.length !== 3) {
     return false;
   }
 }
-function checkDuplicates(userNum) {
+function checkDuplicatesOfUserInput(userNum) {
   let checkArr = [];
-  for (let i = 0; i < userNum.length; i++) {
+  let i = 0;
+  for (; i < userNum.length; i++) {
     if (checkArr.includes(userNum[i]) === true) {
       return false;
     }
     checkArr.push(userNum[i]);
   }
 }
-function checkRange(userNum) {
+function checkRangeOfUserInput(userNum) {
   if (/^[1-9]*$/g.test(userNum.join("")) === false) {
     return false;
   }
@@ -33,15 +34,15 @@ function checkLengthOfRetryUserInput(retryNum) {
 
 class CheckInputValid {
   checkUserInput(userNum) {
-    if (checkLength(userNum) === false) {
+    if (checkLengthOfUserInput(userNum) === false) {
       return ERROR.USER_INPUT_LENGTH;
     }
 
-    if (checkDuplicates(userNum) === false) {
+    if (checkDuplicatesOfUserInput(userNum) === false) {
       return ERROR.USER_INPUT_DUPLICATES;
     }
 
-    if (checkRange(userNum) === false) {
+    if (checkRangeOfUserInput(userNum) === false) {
       return ERROR.USER_INPUT_RANGE;
     }
     return ERROR.USER_INPUT_PASS;
