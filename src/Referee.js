@@ -25,11 +25,18 @@ class Referee {
   gameResult() {
     const [ball, strike] = this.getBallAndStrikeCount();
 
-    const nothingString = ball === 0 && strike === 0 ? '낫싱' : '';
-    const ballString = ball ? `${ball}볼 ` : '';
-    const strikeString = strike ? `${strike}스트라이크` : '';
-
-    MissionUtils.Console.print(nothingString + ballString + strikeString);
+    if (ball === 0 && strike === 0) {
+      MissionUtils.Console.print('낫싱');
+    }
+    if (ball !== 0 && strike === 0) {
+      MissionUtils.Console.print(`${ball}볼`);
+    }
+    if (ball === 0 && strike !== 0) {
+      MissionUtils.Console.print(`${strike}스트라이크`);
+    }
+    if (ball !== 0 && strike !== 0) {
+      MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
+    }
 
     if (strike === 3) {
       MissionUtils.Console.print(MESSAGE.GAME.WIN);
@@ -56,12 +63,14 @@ class Referee {
     const computerValue = this.computerValue;
     const playerValue = this.playerValue;
 
-    let [ball, strike] = [0, 0];
+    let ball = 0;
+    let strike = 0;
 
     for (let i = 0; i < 3; i++) {
       if (computerValue[i] === playerValue[i]) strike++;
       else if (computerValue.includes(playerValue[i])) ball++;
     }
+
     return [ball, strike];
   }
 }

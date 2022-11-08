@@ -2,9 +2,11 @@ const MESSAGE = require('./constants/message');
 
 class Player {
   static checkValidValue(value) {
+    if (value.length !== 3) throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+
     const uniqueValue = [...new Set(value)].join('');
 
-    if (value.length === 3 && /^[1-9]{3}$/.test(uniqueValue)) return value;
+    if (uniqueValue.length === 3 && /^[1-9]/.test(uniqueValue)) return value;
     else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
   }
 }
