@@ -1,5 +1,11 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { RANGE, NEW_GAME_CONSTANT, GAME_MESSAGE, ERROR_MESSAGE, RESULT } = require('./Constants');
+const {
+  RANGE,
+  NEW_GAME_CONSTANT,
+  GAME_MESSAGE,
+  ERROR_MESSAGE,
+  RESULT,
+} = require('./Constants');
 
 class App {
   constructor() {
@@ -24,7 +30,7 @@ class App {
         computerNumber.push(number);
       }
     }
-  
+
     return computerNumber;
   }
 
@@ -43,7 +49,7 @@ class App {
         this.newGame();
       }
       this.baseballGame(computerRandomNumber);
-    })
+    });
   }
 
   validUserInput(str) {
@@ -51,51 +57,54 @@ class App {
 
     const userInputSet = new Set(str);
 
-    return str.length == this.RANGE.LENGTH && reg.test(str) && str.length == userInputSet.size;
+    return (
+      str.length === this.RANGE.LENGTH
+      && reg.test(str)
+      && str.length === userInputSet.size
+    );
   }
 
   strToIntArr(str) {
     const strArr = [...str];
     const intArr = [];
-  
-    strArr.forEach((item) => intArr.push(parseInt(item)));
-  
+
+    strArr.forEach((item) => intArr.push(Number(item)));
+
     return intArr;
   }
 
   getResult(comArr, userArr) {
     let resultArr = [0, 0]; // resultArr[0] = Ball, resultArr[1] = Strike
     for (let i = 0; i < comArr.length; i++) {
-      if (comArr[i] == userArr[i]) {
+      if (comArr[i] === userArr[i]) {
         resultArr[1] += 1;
       }
-  
-      if (comArr.includes(userArr[i]) && comArr[i] != userArr[i]) {
+
+      if (comArr.includes(userArr[i]) && comArr[i] !== userArr[i]) {
         resultArr[0] += 1;
       }
     }
-  
+
     return resultArr;
   }
 
   winOrLose(resultArr) {
-    if (resultArr[0] == 0 && resultArr[1] == 0) {
+    if (resultArr[0] === 0 && resultArr[1] === 0) {
       MissionUtils.Console.print(this.RESULT.NOTHING);
       return false;
-    }
-    else if (resultArr[0] == 0 && resultArr[1] != 0) {
+    } else if (resultArr[0] === 0 && resultArr[1] !== 0) {
       MissionUtils.Console.print(`${resultArr[1]}${this.RESULT.STRIKE}`);
-      if (resultArr[1] == this.RANGE.LENGTH) {
+      if (resultArr[1] === this.RANGE.LENGTH) {
         return true;
       }
       return false;
-    }
-    else if (resultArr[1] == 0 && resultArr[0] != 0) {
+    } else if (resultArr[1] === 0 && resultArr[0] !== 0) {
       MissionUtils.Console.print(`${resultArr[0]}${this.RESULT.BALL}`);
       return false;
-    }
-    else {
-      MissionUtils.Console.print(`${resultArr[0]}${this.RESULT.BALL} ${resultArr[1]}${this.RESULT.STRIKE}`);
+    } else {
+      MissionUtils.Console.print(
+        `${resultArr[0]}${this.RESULT.BALL} ${resultArr[1]}${this.RESULT.STRIKE}`
+      );
       return false;
     }
   }
@@ -103,21 +112,16 @@ class App {
   newGame() {
     MissionUtils.Console.print(this.GAME_MESSAGE.NEW_GAME);
     MissionUtils.Console.readLine('', (input) => {
-      if (input == this.NEW_GAME_CONSTANT.FINISH) {
+      if (Number(input) === this.NEW_GAME_CONSTANT.FINISH) {
         return MissionUtils.Console.close();
-      }
-      else if (input == this.NEW_GAME_CONSTANT.RESTART) {
+      } else if (Number(input) === this.NEW_GAME_CONSTANT.RESTART) {
         const computerRandomNumber = this.getComputerNumber();
         this.baseballGame(computerRandomNumber);
-      }
-      else {
+      } else {
         throw new Error(this.ERROR_MESSAGE.USER_INPUT_ERROR);
       }
-    })
+    });
   }
 }
-
-const app = new App()
-app.play()
 
 module.exports = App;
