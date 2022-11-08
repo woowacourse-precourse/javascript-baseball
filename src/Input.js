@@ -31,6 +31,8 @@ class Input {
     MissionUtils.Console.readLine(ASK_ANSWER, (userAnswer) => {
       const answer = Parse.numberToArray(userAnswer);
 
+      this.checkWrongAnswer(answer);
+
       const ballCount = new BallCount(question, answer);
       const ballCountMessage = ballCount.toString();
       const isThreeStrikes = ballCount.isThreeStrikes();
@@ -43,9 +45,20 @@ class Input {
   static getReplayRequest() {
     MissionUtils.Console.print(ASK_REPLAY);
     MissionUtils.Console.readLine("", (userRequest) => {
+      this.checkWrongRequest(userRequest);
+
       const userWantsReplay = requestMap[userRequest];
-      userWantsReplay ? Input.getUserAnswer(Question.create()) : MissionUtils.Console.close();
+      userWantsReplay ? this.getUserAnswer(Question.create()) : MissionUtils.Console.close();
     });
+  }
+
+  static checkWrongAnswer(answer) {
+    if (answer.length !== 3) throw new Error("세 자리 수를 입력해야 합니다.");
+    if (answer.filter((value) => isNaN(value)).length > 0) throw new Error("숫자가 아닙니다.");
+  }
+
+  static checkWrongRequest(userRequest) {
+    if (userRequest !== 1 && userRequest !== 2) throw new Error("올바르지 않은 입력입니다.");
   }
 }
 
