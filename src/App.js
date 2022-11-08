@@ -5,15 +5,19 @@ class App {
     constructor() {
         this.computerNumber = [];
         this.gamePlayerNumber = [];
+        this.isFirstGame = true;
     }
 
     play() {
+        if (this.isFirstGame === true) {
+            this.gameStartTextPrint();
+        }
+        this.isFirstGame = false;
        this.gameProgram(); 
     }
 
     gameProgram() {
         this.createRandomNumber();
-        this.gameStartTextPrint();
         const hintMessage = this.printHintMessage();
         this.conditionsOfWin(hintMessage);
     }
