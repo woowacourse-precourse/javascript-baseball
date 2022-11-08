@@ -3,6 +3,8 @@ const printMessage = require("./PrintMessage.js");
 const generateRandNum = require("./GenerateRandomNumber");
 const exception = require("./HandleException.js");
 
+const GAME_RESTART = '1';
+const GAME_END = '2';
 const REQUEST_USER_INPUT_MESSAGE = "숫자를 입력해주세요 : ";
 const GAME_CONTINUE_MESSAGE = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n";
 
@@ -72,10 +74,10 @@ class App {
 
   gameRestartOrEnd() {
     MissionUtils.Console.readLine(GAME_CONTINUE_MESSAGE, userInput => {
-      if(userInput === '1') {
+      if(userInput === GAME_RESTART) {
         this.play();
       }
-      else if(userInput === '2') {
+      else if(userInput === GAME_END) {
         MissionUtils.Console.close();
       }
       else{
