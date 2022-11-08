@@ -1,4 +1,4 @@
-const App = require('../src/App');
+const App = require('../src/UserInput/App');
 const { mockQuestions, mockRandoms, getLogSpy } = require('./ApplicationTest');
 
 const mockAnswer = jest.requireMock('../src/constants/answer');

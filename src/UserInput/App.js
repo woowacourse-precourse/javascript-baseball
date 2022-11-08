@@ -1,12 +1,12 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { isMatchAnswer, printHint } = require('./ControlAnswer/CheckAnswer');
-const { generateAnswer } = require('./ControlAnswer/GenerateAnswer');
-const { stringToNumArr } = require('./Utils');
-const { isValidInput } = require('./UserInput/UserInputValidation');
-const ANSWER = require('./Constants/Answer');
-const GAME = require('./Constants/Game');
-const ERROR = require('./Constants/Error');
-const GAME_SENTENCE = require('./Constants/GameSentence');
+const { isMatchAnswer, printHint } = require('../ControlAnswer/PrintAnswer');
+const { generateAnswer } = require('../ControlAnswer/GenerateAnswer');
+const { stringToNumArr } = require('../Utils');
+const { isValidInput } = require('./UserInputValidation');
+const ANSWER = require('../Constants/Answer');
+const GAME = require('../Constants/Game');
+const ERROR = require('../Constants/Error');
+const GAME_SENTENCE = require('../Constants/GameSentence');
 
 class App {
   constructor() {

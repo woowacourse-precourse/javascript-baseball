@@ -3,7 +3,7 @@ const {
   validLength,
   validRange,
   duplication,
-} = require('../src/Validation');
+} = require('../src/UserInput/UserInputValidation');
 
 const ERROR = require('../src/Constants/Error');
 

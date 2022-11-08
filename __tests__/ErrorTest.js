@@ -1,5 +1,5 @@
 const { mockQuestions, mockRandoms, getLogSpy } = require('./ApplicationTest');
-const App = require('../src/App');
+const App = require('../src/UserInput/App');
 
 describe('에러 테스트', () => {
   test('게임 종료후 재시작 여부의 잘못된 입력', () => {
