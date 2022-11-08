@@ -32,10 +32,16 @@ class App {
 
   userNumberInputException() {
     if (this.userNumberList.length !== 3) {
-      throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+      throw new Error('입력 개수가 잘못되었습니다. 게임을 종료합니다.');
     }
     if (this.userNumberList.filter((pickedNumber) => Number.isNaN(pickedNumber)).length > 0) {
       throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+    }
+    if (this.userNumberList.some((number, index, array) => array.indexOf(number) !== index)) {
+      throw new Error('겹치는 숫자가 있습니다. 게임을 종료합니다.');
+    }
+    if (this.userNumberList.includes(0)) {
+      throw new Error('잘못된 숫자를 입력했습니다. 게임을 종료합니다.');
     }
   }
 
