@@ -90,6 +90,7 @@ class App {
           this.play();
         } else if (answer === "2") {
           this.initialize();
+          MissionUtils.Console.close();
           return;
         } else {
           throw new Error("1 또는 2를 입력해주세요.");
