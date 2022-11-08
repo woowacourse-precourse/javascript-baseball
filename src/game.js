@@ -15,10 +15,10 @@ class Game {
     return Console.print(message);
   }
   play() {
-    this.init();
+    this.go();
     this.getCount(this.answerNumber);
   }
-  init() {
+  go() {
     this.print(MESSAGE.START);
     this.answerNumber = this.createRandomNumber();
   }
@@ -35,28 +35,6 @@ class Game {
     }
     return randomNumberArr;
   }
-  getCount(answer) {
-    Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
-      const inputNumber = [...input].map(Number);
-      const { ball, strike } = this.countPitch(
-        inputNumber,
-        this.answerNumber
-      );
-
-      this.isValidInput(input); // 유효성 검사
-      this.printScore(ball, strike);
-      if (strike !== 3) {
-        //return this.getCount;
-        return this.getCount(answer);
-      } else {
-        this.print(MESSAGE.SUCCESS);
-        this.playAgain();
-
-        return;
-        // 재시작 구문
-      }
-    });
-  }
   isValidInput(input) {
     const checkDupInput = [...new Set(input)].length; // 중복되지 않은 숫자의 갯수
     if (checkDupInput !== 3) {
@@ -69,6 +47,29 @@ class Game {
       // 숫자가 3개가 아닌 경우
       throw new Error(ERROR.INPUT_THREE_NUMBER);
     }
+    return;
+  }
+
+  getCount(answer) {
+    Console.readLine(MESSAGE.INPUT_NUMBER, (input) => {
+      this.isValidInput(input); // 유효성 검사
+      const inputNumber = [...input].map(Number);
+      const { ball, strike } = this.countPitch(
+        // 볼, 스트라이크 체크
+        inputNumber,
+        this.answerNumber
+      );
+
+      this.printScore(ball, strike); // 현재 스코어 출력
+      if (strike !== 3) {
+        return this.getCount(answer);
+      } else {
+        this.print(MESSAGE.SUCCESS);
+        this.playAgain();
+        // 재시작 구문
+      }
+    });
+    return;
   }
   countPitch(inputNumber, answerNumber) {
     let ball = 0;
@@ -101,7 +102,6 @@ class Game {
       if (inputNumber === END_INPUT.START) {
         this.playBoolean = true;
         this.play();
-
         return;
       }
       if (answer === END_INPUT.END) {
@@ -109,6 +109,7 @@ class Game {
       }
       throw new Error(ERROR.INPUT_ONE_OR_TWO);
     });
+    return;
   }
 }
 const game = new Game();
