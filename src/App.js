@@ -9,6 +9,7 @@ class App {
     this.strikeScore = 0;
     this.ballScore = 0;
     this.compareResultText = '';
+    this.isThreeStrike = false;
   }
 
   generateRandomNumber() {
@@ -25,6 +26,10 @@ class App {
         this.calculateResult();
       }
       this.getCompareResultText();
+      MissionUtils.Console.print(this.compareResultText);
+      if (!this.isThreeStrike) {
+        return this.getUserInput();
+      }
     });
   }
 
