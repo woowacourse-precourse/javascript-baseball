@@ -1,5 +1,5 @@
 const ERROR_MESSAGE = {
-  InputError: '올바르지 못한 입력 값 입니다.',
+  InputError: '올바르지 않은 입력 값 입니다.',
 };
 
 const CONSOLE_MESSAGE = {
