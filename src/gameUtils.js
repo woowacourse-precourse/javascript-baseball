@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const constants = require("./data/constants.js");
 
 class System {
-  static get randomAnswer() {
+  static getRandomAnswer() {
     let answer = new Set();
     System.#addNumber(answer);
     answer = [...answer];
