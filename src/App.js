@@ -7,7 +7,14 @@ class App {
   }
   
   computerInput(){
-    this.computerInputNums = Random.pickUniqueNumbersInRange(1, 9, 3);
+    const computer = [];
+    while (computer.length < 3) {
+      const number = Random.pickNumberInRange(1, 9);
+      if (!computer.includes(number)) {
+        computer.push(number);
+      }
+    }
+    this.computerInputNums = computer;
   }
 
   checkUserInput(userInput){
