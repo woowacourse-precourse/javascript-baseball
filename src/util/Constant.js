@@ -5,4 +5,7 @@ const GAME_MESSAGE = {
   INTENTION_MESSAGE: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
 };
 
-module.exports = GAME_MESSAGE;
+const RESTART = "1";
+const END = "2";
+
+module.exports = { GAME_MESSAGE, RESTART, END };

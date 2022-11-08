@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const GAME_MESSAGE = require("./util/Constant");
+const { GAME_MESSAGE, RESTART, END } = require("./util/Constant");
 const makeNumber = require("./util/MakeNumber");
 const isValidNum = require("./util/IsValideNum");
 const { makeComment, makeCount } = require("./util/MakeCount");
@@ -17,8 +17,8 @@ class App {
   gameEnd() {
     Console.print(GAME_MESSAGE.END_MESSAGE);
     Console.readLine(GAME_MESSAGE.INTENTION_MESSAGE, (input) => {
-      if (input === "1") return this.gameStart();
-      if (input === "2") return Console.close();
+      if (input === RESTART) return this.gameStart();
+      if (input === END) return Console.close();
       return throwErr();
     });
   }
