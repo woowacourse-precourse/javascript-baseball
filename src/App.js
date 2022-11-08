@@ -43,8 +43,9 @@ class App {
       this.isSameNumber() ||
       this.isOutRangeNumber()
     ) {
-      throw new Error('3자리 숫자를 입력하세요');
+      return true;
     }
+    return false;
   }
 
   countBall() {
@@ -77,7 +78,10 @@ class App {
   gameProcess() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.userNumberInput = input;
-      this.checkInvalidInput();
+      if (this.checkInvalidInput()) {
+        MissionUtils.Console.close();
+        throw Error('3자리 숫자를 입력하세요');
+      }
       this.resultObject.strike = this.countStrike();
       this.resultObject.ball = this.countBall();
       MissionUtils.Console.print(this.getResultString());
@@ -114,7 +118,7 @@ class App {
         } else if (input === '2') {
           MissionUtils.Console.close();
         } else {
-          throw new Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
+          throw Error('1과 2중 하나를 띄어쓰기 없이 작성하시오.');
         }
       },
     );
