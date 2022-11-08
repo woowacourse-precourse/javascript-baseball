@@ -36,23 +36,6 @@ const printMessage = (message) => {
   MissionUtils.Console.print(message);
 };
 
-const playAgain = () => {
-  const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
-  getUserNumber(computerNumbers, REQUIRE_NUMBER);
-};
-
-const retryOrEnd = () => {
-  MissionUtils.Console.readLine("", (userInput) => {
-    if (userInput === RETRY_VALUE) {
-      playAgain();
-    } else if (userInput === END_VALUE) {
-      MissionUtils.Console.close();
-    } else {
-      throw new Error("게임 종료");
-    }
-  });
-};
-
 const deInitializationGame = () => {
   MissionUtils.Console.close();
 };
