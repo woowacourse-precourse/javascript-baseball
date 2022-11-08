@@ -1,9 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 class App {
   comInput=[];
-  PlayerInput=[];
+  playerInput=[];
   strike=0;
-  Ball=0;
+  ball=0;
   repeat=0;
 
   setComInput(){
@@ -18,52 +18,68 @@ class App {
   }
 
   setPlayerInput(ans){
-    this.PlayerInput=[];
+    this.playerInput=[];
     for(let i=0;i<3;i++){
-      this.PlayerInput.push(parseInt(ans[i]));
+      this.playerInput.push(parseInt(ans[i]));
     }
-    return this.PlayerInput;
+    return this.playerInput;
   }
 
-  checkPlayerInput(PlayerInput){
-   if((PlayerInput.length)!==3){
+  checkPlayerInput(playerInput){
+   if((playerInput.length)!==3){
     throw  new Error();
    }
-   else if(PlayerInput.includes(0)){
+   else if(playerInput.includes(0)){
     throw  new Error();
    }
    else{
+    //길이가 3이지만, 숫자가 아닌 값이 있는 경우 
     for(let i=0;i<3;i++){
-      if(!parseInt(PlayerInput[i])){
+      if(!parseInt(playerInput[i])){
         throw  new Error();
       }
     }
-    const arr= new Set(PlayerInput)
-    if(arr.size<PlayerInput.length){
+    const ARR= new Set(playerInput)
+    if(ARR.size<playerInput.length){
       throw  new Error();
     }
    }
   return true;
   }
 
-  getStrike(Player, comInput){
+  getStrike(player, comInput){
     this.strike=0;
     for(let i=0;i<3;i++){
-      if(Player[i]==comInput[i]){
+      if(player[i]==comInput[i]){
       this.strike++;
       }
     }
     return this.strike;
   }
 
-  getBall(Player, comInput){
-    this.Ball=0;
+  getBall(player, comInput){
+    this.ball=0;
     for(let i=0;i<3;i++){
-      if((Player[i]!==comInput[i]) && comInput.includes(Player[i])){
-        this.Ball++;
+      if((player[i]!==comInput[i]) && comInput.includes(player[i])){
+        this.ball++;
       }
     }
-    return this.Ball;
+    return this.ball;
+  }
+
+  printScore(){
+    if(this.ball==0 && this.strike==0){
+      MissionUtils.Console.print("낫싱");
+    }
+    else if(this.ball && this.strike){
+      MissionUtils.Console.print(`${this.ball}볼 ${this.strike}스트라이크`);
+    }
+    else if(!this.strike && this.ball){
+      MissionUtils.Console.print(`${this.ball}볼`);
+    }
+    else{
+      MissionUtils.Console.print(`${this.strike}스트라이크`);
+    }
   }
 
   restartGame(){
@@ -73,7 +89,7 @@ class App {
         if(userInput==1){
         this.repeat=1;
         this.strike=0;
-        this.Ball=0;
+        this.ball=0;
         this.play();
         }
         else if(userInput==2){
@@ -99,45 +115,29 @@ class App {
       throw new Error();
     }
     this.setPlayerInput(userInput);
-    this.getStrike(this.PlayerInput, this.comInput);
-    this.getBall(this.PlayerInput, this.comInput);
-    this.printResult();
+    this.getStrike(this.playerInput, this.comInput);
+    this.getBall(this.playerInput, this.comInput);
+    this.printScore();
     if(this.strike==3){
       this.restartGame();
     }
     this.playGame();
   }) 
-
 }
 
-printResult(){
-    if(this.Ball==0 && this.strike==0){
-      MissionUtils.Console.print("낫싱");
-    }
-    else if(this.Ball && this.strike){
-      MissionUtils.Console.print(`${this.Ball}볼 ${this.strike}스트라이크`);
-    }
-    else if(!this.strike && this.Ball){
-      MissionUtils.Console.print(`${this.Ball}볼`);
-    }
-    else{
-      MissionUtils.Console.print(`${this.strike}스트라이크`);
-    }
-}
 
-  play(){
-    if(this.repeat==0){
-      MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    }
-    this.setComInput();
-    try{
-      this.playGame();
-    }
-    catch(e){
-      MissionUtils.Console.close();
-      throw new Error();
-    }
+play(){
+  if(this.repeat==0){
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  }
+  this.setComInput();
+  try{
+    this.playGame();
+  }
+  catch(e){
+    MissionUtils.Console.close();
+    throw new Error();
   }
 }
-
+}
 module.exports=App
