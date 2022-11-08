@@ -34,10 +34,8 @@ class App {
   }
   #isRestart(submit) {
     submit = Number(submit);  
-    if(submit === constants.RESTART_CODES.restart) this.play();
-    if(submit === constants.RESTART_CODES.end) {
-      MissionUtils.Console.close();
-    }
+    if(submit === constants.RESTART_CODES.restart) return this.play();
+    MissionUtils.Console.close();
   }
 }
 
