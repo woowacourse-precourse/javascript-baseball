@@ -46,11 +46,12 @@ https://7942yongdae.tistory.com/96
 
 https://stackoverflow.com/questions/9011524/regex-to-check-whether-a-string-contains-only-numbers
 
-# 소감
+## 감상
 
 - package 파일에 "type": "module" 로 할 것이냐 module.exports로 할 것이냐~~
 - src 로 터미널을 열어서 뒷북으로 기능 목록 업데이트 함~~~ㅜㅜ git add 할 때 위치 항상 확인할 것!
 - 영어로 커밋 메세지 남기는 건 어렵다.
 - 유효성 검사 for 문을 두 번 돌려버리는데 비효율적인 듯 => 리팩토링 요망!
 - 함수 쪼개다 보니까 비효율적인 코드가 된 것 같은데 효율 vs 함수?
-- aysnc await ^^
+
+# 소감
