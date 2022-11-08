@@ -22,3 +22,7 @@
 - computer의 배열에서 strike판정이 된 index를 뺀 comArrWithoutStrike 배열 생성
 - userArray와 comArrWithoutStrike의 교집합 배열을 생성해 볼의 갯수 판정
 - countedBallArray 를 return
+
+5. 판별한 strike와 ball을 출력하기
+
+- 조건에따라 스트라이크와 볼, 낫싱을 출력

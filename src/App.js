@@ -35,6 +35,7 @@ class App {
         userInputArr,
         countedStrikeArr
       );
+      this.printJudgemnet(countedStrikeArr, countedBallArr);
     });
   }
 
@@ -54,6 +55,20 @@ class App {
     });
 
     return countedBallArr;
+  }
+
+  printJudgemnet(countedStrikeArr, countedBallArr) {
+    const countedStrike = countedStrikeArr.length;
+    const countedBall = countedBallArr.length;
+    if ((countedStrike && countedBall) > 0) {
+      MissionUtils.Console.print(`${countedStrike}스트라이크 ${countedBall}볼`);
+    } else if (countedStrike > 0 && countedBall === 0) {
+      MissionUtils.Console.print(`${countedStrike}스트라이크`);
+    } else if (countedStrike == 0 && countedBall > 0) {
+      MissionUtils.Console.print(`${countedBall}볼`);
+    } else if ((countedStrike && countedBall) === 0) {
+      MissionUtils.Console.print("낫싱");
+    }
   }
 
   play() {
