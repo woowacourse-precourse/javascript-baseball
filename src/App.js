@@ -81,6 +81,6 @@ class App {
     this.computer.saveRandom();
     this.start();
   };
-
+}
 
 module.exports = App;
