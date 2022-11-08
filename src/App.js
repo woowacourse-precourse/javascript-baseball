@@ -6,7 +6,7 @@ class App {
     computer = computer_randomnumber();
 
     let strike = 0;
-    while (strike != 3){
+    while (strike != 3) {
       let user = ""
       user = user_inputnumber();
 
@@ -21,7 +21,7 @@ class App {
   }
 }
 
-function computer_randomnumber(){
+function computer_randomnumber() {
   const COMPUTER_NUMBER = [];
   while (COMPUTER_NUMBER.length < 3) {
     //컴퓨터 숫자 범위 지정 (1 ~ 9)
@@ -34,7 +34,7 @@ function computer_randomnumber(){
   return COMPUTER_NUMBER;
 }
 
-function user_inputnumber(){
+function user_inputnumber() {
   let userNumber;
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(inputNumber) => {
     userNumber = inputNumber;
@@ -43,23 +43,23 @@ function user_inputnumber(){
   if (userNumber.length != 3) {
     return 1;
   }
-  if (userNumber == String){
+  if (userNumber == String) {
     return 2;
   }
-  if (userNumber <= 0){
+  if (userNumber <= 0) {
     return 3;
   }
   return userNumber;
 }
 
-function to_array(user_array){
+function to_array(user_array) {
   return user_array.split("");
 }
 
-function ball_and_strike(computer, to_array, number_of_digits){
+function ball_and_strike(computer, to_array, number_of_digits) {
   let ball_strike_count = [0, 0];
 
-  for (let i = 0; i < to_array.length; i++){
+  for (let i = 0; i < to_array.length; i++) {
     if (computer[number_of_digits] == to_array[i]){
       ball_strike_count = ball_strike_check(i, number_of_digits);
     }
@@ -67,7 +67,7 @@ function ball_and_strike(computer, to_array, number_of_digits){
   return ball_strike_count;
 }
 
-function ball_strike_check(i, number_of_digits){
+function ball_strike_check(i, number_of_digits) {
   let ball = 0;
   let strike = 0;
 
@@ -79,7 +79,7 @@ function ball_strike_check(i, number_of_digits){
   return [ball, strike];
 }
 
-function notthing(ball_strike_result){
+function notthing(ball_strike_result) {
   if (ball_strike_result[0] == 0 && ball_strike_result[1] == 0) {
     MissionUtils.Console.print("낫싱");
     return ball_strike_result[1];
@@ -88,35 +88,35 @@ function notthing(ball_strike_result){
   return ball_strike_result[1];;
 }
 
-function restart(){
+function restart() {
   const APP = new App();
 
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ",(inputNumber) => {
     restartNumber = inputNumber;
   })
-  if (restartNumber == 1){
+  if (restartNumber == 1) {
     return APP.play();
   }
-  if (restartNumber == 2){
+  if (restartNumber == 2) {
     MissionUtils.Console.print("게임 종료");
     return;
   }
 }
 
-function exception(user){
-  if (user == 1){
+function exception(user) {
+  if (user == 1) {
     throw "is not three numbers";
   }
-  if (user == 2){
+  if (user == 2) {
     throw "is not number";
   }
-  if (user == 3){
+  if (user == 3) {
     throw "is not a number from 1 to 9";
   }
 }
 
 function ball_strike_result_loop(ball_strike_result, computer, user) {
-  for (let i = 0; i < 3; i++){
+  for (let i = 0; i < 3; i++) {
     ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
     ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
   }
