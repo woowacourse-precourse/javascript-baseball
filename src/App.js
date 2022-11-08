@@ -25,6 +25,14 @@ class App {
     return check;
   }
 
+  isInRange(input) {
+    let check = true;
+    input.map((item) => {
+      if (item < 1 || item > 9) check = false;
+    })
+    return check;
+  }
+
   createComputerNumber() {
     this.computerNumber = [];
     while (this.computerNumber.length < MAX_LENGTH) {
