@@ -9,10 +9,10 @@ class App {
 
   play() {
     const computer = new Computer();
-    this.playMatch(computer);
+    this.playMatches(computer);
   }
 
-  playMatch(computer) {
+  playMatches(computer) {
     Console.readLine(MESSAGE.PLAYONE, (inputNumber) => {
       computer.checkValidationSetGameInput(inputNumber);
       const resultMessage = computer.computeMatchInput(inputNumber).getResultMessage();
@@ -22,7 +22,7 @@ class App {
         this.askNewGame(computer);
       }
 
-      return this.playMatch(computer);
+      return this.playMatches(computer);
     });
   }
 

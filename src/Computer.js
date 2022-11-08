@@ -14,18 +14,11 @@ class Computer {
       strike: 0,
     };
 
-    [...inputNumber].forEach((digit) => {
-      if ([...this.answerNumber].includes(digit)) {
-        resultMap.ball += 1;
-      }
+    [...inputNumber].forEach((digit, index) => {
+      if (this.answerNumber[index] === digit) resultMap.strike += 1;
+      else if ([...this.answerNumber].includes(digit)) resultMap.ball += 1;
     });
 
-    for (let i = 0; i < 3; i++) {
-      if (this.answerNumber[i] === inputNumber[i]) {
-        resultMap.ball -= 1;
-        resultMap.strike += 1;
-      }
-    }
     this.resultMap = resultMap;
     return this;
   }
@@ -65,6 +58,7 @@ class Computer {
       throw new Error(MESSAGE.ERROR);
     }
   }
+
   checkValidationNewGameInput(inputAnswer) {
     if (!newGameInputError.isValid(inputAnswer)) {
       Console.close();
