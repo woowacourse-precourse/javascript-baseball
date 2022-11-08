@@ -8,7 +8,15 @@ class App {
     this.answer = [];
   }
 
-  play() {}
+  play() {
+    Console.print("숫자 야구 게임을 시작합니다.");
+    this.start();
+  }
+
+  start() {
+    this.answer = this.generateRandomAnswer();
+    this.inputNumber();
+  }
 
   generateRandomAnswer() {
     const computer = [];
