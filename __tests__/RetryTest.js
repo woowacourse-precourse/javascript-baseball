@@ -1,5 +1,3 @@
-//    npm test Retry.js
-
 const ComputerInput = require("../src/Model/ComputerInput");
 const { ERROR, GAME } = require("../src/data/Constants");
 const Render = require("../src/View/Render");
@@ -112,5 +110,3 @@ describe("게임 결과에 따른 Rendering Test", () => {
   expect(resultRender(1, 0)).toBe(`1볼`);
   expect(resultRender(0, 2)).toBe(`2스트라이크`);
 });
-
-//    npm test Retry.js
