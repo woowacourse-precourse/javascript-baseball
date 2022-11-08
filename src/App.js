@@ -7,6 +7,7 @@ const {
   GAME_PROGRESS_TEXT, GAME_RESULT_TEXT,
   THREE_STRIKE_COUNT, RESTART_USER_INPUT,
 } = require('./constant/gameRule');
+const { ERROR_TEXT } = require('./constant/error');
 
 class App {
   startGame() {
@@ -49,14 +50,17 @@ class App {
 
   askRestart() {
     MissionUtils.Console.print(GAME_RESULT_TEXT.THREE_STRIKE);
-    MissionUtils.Console.readLine(GAME_PROGRESS_TEXT.RESTART_QUESTION, (userInput) => {
+    MissionUtils.Console.print(GAME_PROGRESS_TEXT.RESTART_QUESTION);
+    MissionUtils.Console.readLine('', (userInput) => {
       if (userInput === RESTART_USER_INPUT.RESTART_INPUT) {
         this.startGame();
         return;
       }
       if (userInput === RESTART_USER_INPUT.STOP_INPUT) {
         MissionUtils.Console.close();
+        return;
       }
+      throw new Error(ERROR_TEXT.INCORRECT_INPUT);
     });
   }
 
