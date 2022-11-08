@@ -4,7 +4,6 @@ const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH, RESTART_INPUT_NUM, EN
 
 class ExceptionCheck {
 
-
   userInputCheck(userInput) {
     if (this.isNotThreeLengthInput(userInput)) {
       throw new Error("3개의 숫자를 입력해주세요");
