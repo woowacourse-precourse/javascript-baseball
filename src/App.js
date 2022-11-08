@@ -38,8 +38,21 @@ class Game {
 
   onGame(input){
     this.userNumberArray = input.split("").map(Number);
+
+    const ball = this.countBall();
   }
 
+  countBall(){
+    let ball = 0;
+    this.userNumberArray.map((userNumber, index)=>{
+      let sameNumberComputerIndex = this.compareNumberArray.indexOf(userNumber);
+      if(sameNumberComputerIndex !== -1 && sameNumberComputerIndex !== index){
+        ball++;
+      }
+    })
+    return ball;
+  }
+}
 
 class App {
   constructor() {
