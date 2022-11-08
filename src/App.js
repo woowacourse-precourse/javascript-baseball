@@ -49,6 +49,7 @@ const playerNumbersInput = () => {
     console.log("[Error]입력 숫자 개수가 맞지 않습니다");
     throw "입력 숫자 개수 에러";
   }
+  
   return input;
 };
 
