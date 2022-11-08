@@ -12,13 +12,12 @@ class App {
   }
 
   start() {
-    this.generateNum(config.GAME_NUM_SIZE);
+    this.generateNum();
     this.round();
   }
 
   round() {
     const userNum = this.readNum();
-    // console.log("userNum", userNum);
     const scoreObject = this.compareNum(this.computerNum, userNum);
     this.printScore(scoreObject);
 
