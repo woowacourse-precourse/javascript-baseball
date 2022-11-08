@@ -34,6 +34,14 @@ class App {
 
   terminate() {
     // 게임을 종료 메시지를 발생시킨다.
+    Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
+      if (answer === '1') {
+        return this.play();
+      } else if (answer === '2') {
+        return Console.close();
+      }
+    });
   }
 
   isDuplicated(input) {
