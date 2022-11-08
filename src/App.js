@@ -97,12 +97,14 @@ const getUserInput = () => {
   let inputArray = [];
 
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (inputNumber) => {
-    if (isNaN(inputNumber) || inputNumber.length !== 3) {
+    if (Number.isNaN(inputNumber) || inputNumber.length !== 3) {
+      return [];
+    }
+    if (inputNumber.includes("0") || inputNumber.includes(".")) {
       return [];
     }
 
     inputArray = inputNumber.split("");
-
     const input_set = new Set(inputArray);
 
     if (inputArray.length !== input_set.size) {
