@@ -1,24 +1,26 @@
+const { ERROR_MESSAGE } = require("../constants/messages");
+
 class InputError {
   validateInputExist(input) {
     if (!input) {
-      throw "값을 입력해주세요.";
+      throw ERROR_MESSAGE.INPUT_EXIST_ERROR;
     }
   }
   validateInputLength(input) {
     if (input && input.length !== 3) {
-      throw "3자리 숫자를 입력해주세요.";
+      throw ERROR_MESSAGE.INPUT_LENGTH_ERROR;
     }
   }
 
   validateInputType(input) {
     if (input && isNaN(Number(input))) {
-      throw "숫자를 입력해주세요.";
+      throw ERROR_MESSAGE.INPUT_TYPE_ERROR;
     }
   }
 
   validateIsPositiveInteger(input) {
     if (input && Number(input) < 0) {
-      throw "0보다 큰 숫자를 입력해주세요.";
+      throw ERROR_MESSAGE.INPUT_ISPOSITIVE_NUM_ERROR;
     }
   }
 
@@ -26,7 +28,7 @@ class InputError {
     const existNum = new Set();
     for (let i = 0; i < input.length; i++) {
       if (existNum.has(input[i])) {
-        throw "서로 다른 숫자를 입력해주세요.";
+        throw ERROR_MESSAGE.RETRY_INPUT_ERROR;
       }
       existNum.add(input[i]);
     }

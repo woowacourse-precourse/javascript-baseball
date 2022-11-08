@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const InputError = require("./utils/Error");
+const { GAME_MESSAGE, RETRY_MESSAGE } = require("./constants/messages");
 
 class App {
   constructor() {
@@ -9,12 +10,12 @@ class App {
   }
 
   startGame() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(GAME_MESSAGE.GMAE_START);
   }
 
   createRandom() {
     const numbers = [];
-    while (numbers.length < 3) {
+    while (numbers.length < GAME_MESSAGE.MAX_LENGTH) {
       const number = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!numbers.includes(number)) {
         numbers.push(number);
@@ -24,7 +25,7 @@ class App {
   }
 
   getUserInput(currentAnswer) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    MissionUtils.Console.readLine(GAME_MESSAGE.INPUT_TEXT, (answer) => {
       this.Error.validateUserInput(answer);
       this.createHint(answer, currentAnswer);
       this.isDone ? this.getRetryInput() : this.getUserInput(currentAnswer);
@@ -68,7 +69,7 @@ class App {
           : (hint = `${score.ball}볼 ${score.strike}스트라이크`);
     }
     this.printHint(hint);
-    if (hint === "3스트라이크") {
+    if (hint === GAME_MESSAGE.ANSWER) {
       this.printGameOver();
       return;
     }
@@ -76,15 +77,13 @@ class App {
   }
 
   printGameOver() {
-    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.print(GAME_MESSAGE.GAME_OVER);
     this.printAskRetry();
     this.isDone = true;
   }
 
   printAskRetry() {
-    MissionUtils.Console.print(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
-    );
+    MissionUtils.Console.print(GAME_MESSAGE.RETRY_TEXT);
   }
 
   retryGame() {
@@ -97,13 +96,13 @@ class App {
   }
 
   getRetryInput() {
-    MissionUtils.Console.readLine("", (answer) => {
+    MissionUtils.Console.readLine(GAME_MESSAGE.NO_MESSAGE, (answer) => {
       this.Error.validateRetryInput(answer);
       switch (answer) {
-        case "1":
+        case RETRY_MESSAGE.RETRY:
           this.retryGame();
           break;
-        case "2":
+        case RETRY_MESSAGE.FINISH:
           this.finishGame();
           break;
       }
