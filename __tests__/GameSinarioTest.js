@@ -102,4 +102,21 @@ describe('숫자 야구 게임 시나리오', () => {
       }).toThrow();
     });
   });
+
+  test('입력한 수에 대한 결과를 볼, 스트라이크 개수로 표시', () => {
+    const pickedNumberArrayByComputer = [1, 2, 3, 7, 8, 9];
+    const numberEnteredByUser = ['456', '123', '1', '123', '869', '789', '2'];
+    const logSpy = getLogSpy();
+    const messages = ['낫싱', '3스트라이크', '낫싱', '1볼 1스트라이크', '3스트라이크', '게임 종료'];
+
+    mockRandoms(pickedNumberArrayByComputer);
+    mockQuestions(numberEnteredByUser);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
 });
