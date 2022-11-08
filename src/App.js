@@ -4,6 +4,10 @@ class App {
   isRestart(input) {
     if (input == 1) {
       this.startGame();
+    }else if(input == 2){
+      MissionUtils.Console.close();
+    }else{
+      throw new Error("1 또는 2가 입력되지 않았습니다.")
     }
   }
 
