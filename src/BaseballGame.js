@@ -9,13 +9,12 @@ class BaseballGame {
     this.computer = new Computer();
   }
 
-  setHint(correctNumber, inputNumber) {
+  setAndPrintHint(correctNumber, inputNumber) {
     this.hint = getHint(correctNumber, inputNumber);
+    MissionUtils.Console.print(this.hint);
   }
 
   startGame() {
-    if (this.hint === "")
-      MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.getUserInput();
   }
 
@@ -25,8 +24,7 @@ class BaseballGame {
         throw Error("입력값이 유효하지 않습니다.");
       }
 
-      this.setHint(this.computer.correctNumber, input);
-      MissionUtils.Console.print(this.hint);
+      this.setAndPrintHint(this.computer.correctNumber, input);
 
       if (this.hint !== "3스트라이크") this.getUserInput();
       else this.recommendRestart();
