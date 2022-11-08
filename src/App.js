@@ -12,6 +12,7 @@ class App {
     }
 
     gameProgram() {
+        this.createRandomNumber();
         this.gameStartTextPrint();
         const hintMessage = this.printHintMessage();
         this.conditionsOfWin(hintMessage);
