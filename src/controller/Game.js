@@ -1,8 +1,8 @@
-const User = require('../models/User.js');
-const Computer = require('../models/Computer.js');
-const InputView = require('../views/InputView.js');
-const OutputView = require('../views/OutputView.js');
-const Counter = require('../models/Counter.js');
+const User = require('../models/User');
+const Computer = require('../models/Computer');
+const InputView = require('../views/InputView');
+const OutputView = require('../views/OutputView');
+const Counter = require('../models/Counter');
 
 const MESSAGE = '잘못된 입력입니다.';
 

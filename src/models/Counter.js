@@ -1,4 +1,4 @@
-const Message = require('./Message.js');
+const Message = require('./Message');
 
 const RESTART = '1';
 const END = '2';

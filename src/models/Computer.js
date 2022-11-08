@@ -1,6 +1,6 @@
-const Convertor = require('../utils/Convertor.js');
-const Random = require('../utils/Random.js');
-const Validator = require('./Validator.js');
+const Convertor = require('../utils/Convertor');
+const Random = require('../utils/Random');
+const Validator = require('./Validator');
 
 class Computer {
   checker = {

@@ -1,4 +1,4 @@
-const Console = require('../utils/Console.js');
+const Console = require('../utils/Console');
 
 class InputView {
   static question = {
