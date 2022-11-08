@@ -23,7 +23,17 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-describe("숫자 야구 게임", () => {
+describe("입력값 테스트", () => {
+  const testCode = new App();
+
+  test("checkPlayingNum 메서드 true 반환값 확인", () => {
+    expect(testCode.checkPlayingNum("123", true)).toBeTruthy();
+  });
+
+  test("checkPlayingNum 메서드 false 반환값 확인", () => {
+    expect(testCode.checkPlayingNum("f2a", true)).toBeFalsy();
+  });
+
   test("세번째 입력값 예외처리 테스트", () => {
     const randoms = [3, 4, 7];
     const answers = ["123", "357", "5"];

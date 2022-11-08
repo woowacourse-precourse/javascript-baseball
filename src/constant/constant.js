@@ -14,3 +14,4 @@ const checkStyle = {
 };
 
 module.exports = { message, checkStyle };
+

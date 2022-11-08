@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { message, checkStyle } = require("./message/message");
+const { message, checkStyle } = require("./constant/constant");
 
 const { Random, Console } = MissionUtils;
 const { START, ENTER, CLEAR, FINISH, END, CONTINUE, ERROR } = message;
@@ -68,8 +68,10 @@ class App {
         throw new Error(ERROR);
       }
       if (input === "1") this.startGame();
-      Console.print(END);
-      Console.close();
+      else if (input === "2") {
+        Console.print(END);
+        Console.close();
+      }
     });
   }
 
