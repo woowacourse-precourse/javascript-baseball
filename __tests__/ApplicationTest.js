@@ -147,4 +147,9 @@ describe("숫자 야구 게임", () => {
     printBeginGame();
     expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
   });
+
+  test("추가테스트3-1: checkDuplicates", () => {
+    const testArr = [1, 2, 2];
+    expect(checkDuplicates(testArr)).toBeTruthy();
+  });
 });
