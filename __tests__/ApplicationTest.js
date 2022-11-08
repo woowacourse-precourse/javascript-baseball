@@ -73,6 +73,17 @@ describe("컴퓨터가 정답 만들기 유닛 테스트", () => {
 
     expect(app.answer).toBe("158");
   });
+
+  test("기존 정답이 존재할 때, 컴퓨터가 정답을 새로 생성한다.", () => {
+    const app = new App();
+    app.answer = "123";
+    const randoms = [1, 5, 5, 8, 8, 9];
+
+    mockRandoms(randoms);
+    app.makeAnswer();
+
+    expect(app.answer).toBe("158");
+  });
 });
 
 describe("사용자 입력에 대한 예외 처리 테스트", () => {
