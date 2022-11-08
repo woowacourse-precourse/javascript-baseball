@@ -65,4 +65,16 @@ describe('숫자 야구 게임', () => {
       app.play();
     }).toThrow();
   });
+  test('예외 테스트 - 1~9이외의 문자입력', () => {
+    const randoms = [1, 6, 5];
+    const answers = ['number'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
 });
