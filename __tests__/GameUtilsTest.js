@@ -79,7 +79,6 @@ describe('게임 기능 테스트', () => {
   });
 
   test('getHint 메서드는 스트라이크, 볼의 개수를 기반으로 힌트를 생성한다.', () => {
-    const gameManager = new NumberBaseballGameManager();
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
     const hints = inputValues.map(inputValue =>
