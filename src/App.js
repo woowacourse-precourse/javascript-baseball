@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const { OUTPUT_MESSAGE } = require('./constant');
 const { restartEndGameAnswerValidator, guessAnswerValidate } = require('./utils/validation');
 const getRandomNumbers = require('./utils/generate-random-number');
@@ -10,26 +10,27 @@ class App {
   }
 
   guessAnswer() {
-    MissionUtils.Console.readLine(OUTPUT_MESSAGE.ENTER_NUMBER, (answer) => {
+    Console.readLine(OUTPUT_MESSAGE.ENTER_NUMBER, (answer) => {
       guessAnswerValidate(answer);
       if (this.outputResult(answer) === OUTPUT_MESSAGE.CORRECT_ANSWER) {
-        MissionUtils.Console.print(this.outputResult(answer));
+        Console.print(this.outputResult(answer));
         this.restartEndGameAnswer();
         return;
       }
-      MissionUtils.Console.print(this.outputResult(answer));
+      Console.print(this.outputResult(answer));
       this.guessAnswer();
     });
   }
 
   restartEndGameAnswer() {
-    MissionUtils.Console.readLine(OUTPUT_MESSAGE.RESTART_ENDGAME_ENTER_NUMBER, (answer) => {
+    Console.readLine(OUTPUT_MESSAGE.RESTART_ENDGAME_ENTER_NUMBER, (answer) => {
       restartEndGameAnswerValidator(answer);
       if (answer === '1') {
         this.play();
         return;
       }
-      MissionUtils.Console.close();
+      Console.print(OUTPUT_MESSAGE.END_GAME);
+      Console.close();
     });
   }
 
@@ -52,7 +53,7 @@ class App {
 
   play() {
     if (this.firstEnter) {
-      MissionUtils.Console.print(OUTPUT_MESSAGE.START_GAME);
+      Console.print(OUTPUT_MESSAGE.START_GAME);
       this.firstEnter = false;
     }
     this.computer = getRandomNumbers();
