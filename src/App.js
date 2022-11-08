@@ -20,9 +20,7 @@ function initialGameSettings() {
   const answer = [];
   while (answer.length < 3) {
     const ranNum = MissionUtils.Random.pickNumberInRange(1, 9);
-    if (!answer.includes(ranNum)) {
-      answer.push(ranNum);
-    }
+    if (!answer.includes(ranNum)) answer.push(ranNum);
   }
 
   return answer;
@@ -37,7 +35,6 @@ function getUserInput(answer) {
 
 function checkInput(input) {
   let inputArr = input.toString().split("");
-  console.log({ inputArr });
   if (isNaN(input) || !Number(input)) throw WRONG_INPUT_ALERT.NOT_NUMBER;
   else if (input < 0) throw WRONG_INPUT_ALERT.NOT_POSITIVE;
   else if (inputArr.length !== 3) {
