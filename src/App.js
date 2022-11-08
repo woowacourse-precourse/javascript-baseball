@@ -2,14 +2,14 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   constructor() {
-    this.computerNumberArray = this.computerRandomNumber();
+    this.computerNumberArray = this.getComputerRandomNumber();
     this.userInputNumber;
     this.countStrike = 0;
     this.countBall = 0;
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  computerRandomNumber() {
+  getComputerRandomNumber() {
     const computerNumberSet = new Set();
     while (computerNumberSet.size < 3) {
       computerNumberSet.add(MissionUtils.Random.pickNumberInRange(1,9));
@@ -22,8 +22,8 @@ class App {
     MissionUtils.Console.readLine('숫자를 입력해주세요 :', (userInputNumber) => {
       this.userInputNumber = userInputNumber;
       this.isError();
-      this.countMethod();
-      this.printMessageMethod();
+      this.count();
+      this.printMessage();
       if (this.countStrike < 3) {
         this.countStrike = 0;
         this.countBall = 0;
@@ -36,7 +36,7 @@ class App {
     });
   }
 
-  countMethod() {
+  count() {
     const userNumberArray = this.userInputNumber.split('');  
     const computerStringArray = this.computerNumberArray.map(num=>num.toString());
     
@@ -50,7 +50,7 @@ class App {
     }
   }
 
-  printMessageMethod() {
+  printMessage() {
     if ( this.countStrike > 0 && this.countBall === 0 ) {
       MissionUtils.Console.print(`${this.countStrike}스트라이크`)
     }
@@ -70,7 +70,7 @@ class App {
     if (userResponse === '1') {
       this.countStrike = 0;
       this.countBall = 0;
-      this.computerNumberArray = this.computerRandomNumber();
+      this.computerNumberArray = this.getComputerRandomNumber();
       this.play();
     }
     else if (userResponse === '2') {
