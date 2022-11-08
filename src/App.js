@@ -35,13 +35,27 @@ class App {
       });
     }
 
-  
-    function gamePlay(){
-
+    function gamePlay() {
+      numberInput();
+      if (strike === 3) {
+        MissionUtils.Console.print(constants.ALL_STRIKE);
+        MissionUtils.Console.print(constants.CORRECT);
+        return;
+      } else if (nothing === 3) {
+        MissionUtils.Console.print(constants.NOTING);
+      } else {
+        MissionUtils.Console.print(
+          `${ball} ${constants.BALL} ${strike} ${constants.STRIKE}`
+        );
+      }
+      return gamePlay();
     }
+
+
     
     computerNumbers();
-    numberInput();
+    gamePlay();
+    
   }
 }
 
