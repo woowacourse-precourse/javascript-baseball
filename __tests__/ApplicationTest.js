@@ -23,6 +23,19 @@ const getLogSpy = () => {
   return logSpy;
 };
 
+describe("게임 시작 알려주기", () => {
+  test("console로 게임시작이 출력됨", () => {
+    const logSpy = getLogSpy();
+
+    const app = new App();
+    app.printGameStart();
+
+    expect(logSpy).toHaveBeenCalled();
+  });
+});
+
+
+
 describe("숫자 야구 게임", () => {
   test("게임 종료 후 재시작", () => {
     const randoms = [1, 3, 5, 5, 8, 9];
@@ -46,10 +59,46 @@ describe("숫자 야구 게임", () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
+  // 예외처리 테스트
+  test("같은 숫자를 2개이상 가지고 있을경우", () => {
+    const randoms = [1, 4, 5];
+    const answers = ["554"];
 
-  test("예외 테스트", () => {
-    const randoms = [1, 3, 5];
-    const answers = ["1234"];
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("3자리가 아닌 경우", () => {
+    const randoms = [3, 5, 7];
+    const answers = ["1234567"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("알파벳과 숫자가 섞여있는 경우", () => {
+    const randoms = [1, 4, 8];
+    const answers = ["2butterfly7"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+  test("0이 들어있을 경우", () => {
+    const randoms = [0, 4, 9];
+    const answers = ["490", "900"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
