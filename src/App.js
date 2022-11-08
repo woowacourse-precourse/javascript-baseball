@@ -11,6 +11,8 @@ const MSG = {
   nothing: '낫싱',
 };
 
+const HINT = ['볼', '스트라이크'];
+
 class App {
   #randomNumber;
   #inputNumber;
@@ -37,7 +39,7 @@ class App {
 
   setInputNumber() {
     Console.readLine(MSG.inputNumber, (input) => {
-      // this.checkNumber(input);
+      this.evaluate(input);
     });
   }
 
@@ -45,13 +47,48 @@ class App {
     const re = /^[1-9]{3}/;
     const number = [...new Set(inputNumber)];
     if (!re.test(inputNumber) || number.length !== 3) {
-      throw Error(MSG.invalidInput);
+      return false;
     }
-    return inputNumber;
+    return true;
   }
 
-  checkNumber(number) {
-    for (let i = 0; i < 3; i++) {}
+  evaluate(number) {
+    if (!this.isValid(number)) {
+      throw Error(MSG.invalidInput);
+    }
+
+
+  }
+
+  compare(number) {
+    const count = {
+      strike: 0,
+      ball: 0,
+    };
+
+    console.log(number, this.#randomNumber);
+    for (let i = 0; i < 3; i++) {
+      if (this.isStrike(number[i], this.#randomNumber[i]))
+        count.strike = count.strike + 1;
+      else if (this.isBall(number[i], this.#randomNumber[i]))
+        count.ball = count.ball + 1;
+    }
+
+    const hindMsg = HINT.forEach((hint, index) => this.getHint(index, hint))
+  }
+
+  isStrike(inputNumber, randomNumber) {
+    return inputNumber === randomNumber;
+  }
+
+  isBall(inputNumber, randomNumber) {
+    return inputNumber !== randomNumber && randomNumber.includes(inputNumber);
+  }
+
+  getHint(nubmer, msg) {
+    if (number === 0) return '';
+
+    return `${number}${msg}`
   }
 }
 
