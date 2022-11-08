@@ -27,8 +27,7 @@ class App {
   }
 
   requireInputRandomNumber(randomNumber) {
-    Console.print("숫자를 입력해주세요 : ");
-    Console.readLine("", (answer) => {
+    Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.isRandomInputErrorCase(answer);
 
       if (this.isCorrectNumber(randomNumber, answer)) {

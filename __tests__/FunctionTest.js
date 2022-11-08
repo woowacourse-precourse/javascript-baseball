@@ -34,7 +34,7 @@ describe("기능 테스트", () => {
       expect.stringContaining("숫자 야구 게임을 시작합니다.")
     );
   });
-
+  
   test("[기능 2] 랜덤 수 생성 및 저장", () => {
     const randoms = [1, 5, 5, 5, 8, 9];
 
@@ -43,17 +43,6 @@ describe("기능 테스트", () => {
     mockRandoms(randoms);
 
     expect(app.createRandomNumber()).toStrictEqual([1, 5, 8]);
-  });
-
-  test("[기능 3] 입력 문구 출력", () => {
-    const logSpy = getLogSpy();
-
-    const app = new App();
-    app.requireInputRandomNumber();
-
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining("숫자를 입력해주세요 : ")
-    );
   });
 
   test("[기능 4] 게임 예상 숫자 입력 받은 후 예외사항 판단", () => {
