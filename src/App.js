@@ -30,7 +30,7 @@ class App {
     play() {
         this.printStartMassage();
         const answer = this.createAnswer();
-        this.getUserInput(answer);
+        this.userPlayGame(answer);
     }
 
     isCorrect(userInput, answer) {
@@ -111,8 +111,7 @@ class App {
         }
     }
 
-    getUserInput(answer) {
-        console.log(answer);
+    userPlayGame(answer) {
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
             const INPUT_ARRAY = changeToArray(input);
             this.checkUserInput(INPUT_ARRAY);
@@ -120,7 +119,7 @@ class App {
                 return this.printEndMessage();
             }
             this.inputResult(INPUT_ARRAY, answer);
-            return this.getUserInput(answer);
+            return this.userPlayGame(answer);
         });
     }
 }
