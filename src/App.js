@@ -6,7 +6,6 @@ const KEY = {
   QUIT: '2',
 };
 
-
 class App {
 
   constructor() {
@@ -23,7 +22,7 @@ class App {
     this.computerInput();
     this.userInput();
   }
-  
+
 
   computerInput(){
     const computer = [];
@@ -39,7 +38,7 @@ class App {
   userInput(){
     return Console.readLine('숫자를 입력해주세요 : ',(input) => {
       this.checkUserInput(input);
-      this.compareInput(input);
+      this.getResult(input);
       Console.close();
       })
   }
@@ -60,43 +59,42 @@ class App {
   }
 
 
-
-  compareInput(userInput){
+  getResult(userInput){
     this.userInputNums = userInput;
-    const subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
-    const zeroCount = subtractArr.reduce((count, data) => data == 0 ? count + 1 : count, 0);
-    if(zeroCount == KEY.NUM_SIZE){
+    
+    const {ballCount, strikeCount} = this.getBallAndStrike();
+    this.printHint(ballCount, strikeCount);
+
+    return this.userInput();
+  }
+
+  getBallAndStrike(){
+    let strikeCount = 0, ballCount = 0;
+
+    let subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
+    let zeroCount = subtractArr.filter(element => 0 === element).length;
+
+    let intersect = this.computerInputNums.filter(x => this.userInputNums.includes(x));
+
+    strikeCount = zeroCount;
+    ballCount = intersect.length - strikeCount;
+
+    return {ballCount, strikeCount};
+  }
+
+  printHint(ballCount, strikeCount){
+    if(ballCount !== 0 && strikeCount !==0) Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    if(ballCount !== 0 && strikeCount === 0) Console.print(`${ballCount}볼`);
+    if(ballCount === 0 && strikeCount !== 0) Console.print(`${strikeCount}스트라이크`);
+
+    if(strikeCount == KEY.NUM_SIZE){
       Console.print("3스트라이크");
       Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
       return this.askRestartOrQuit();
     }
-
-    this.getHint();
-
-    return this.userInput();
+    if(ballCount === 0 && strikeCount === 0) Console.print("낫싱");
 
   }
-
-  getHint(){
-    let strikeCount = 0;
-    let ballCount = 0;
-
-    let subtractArr = this.computerInputNums.map((x,y) => x-this.userInputNums[y]);
-    let zeroCount = subtractArr.reduce((count, data) => data == 0 ? count + 1 : count, 0);
-
-    let difference = this.computerInputNums.filter(x => !this.userInputNums.includes(x));
-
-    strikeCount = zeroCount;
-    ballCount = KEY.NUM_SIZE-strikeCount-difference.length;
-
-    if(ballCount != 0 && strikeCount !=0) return Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
-    if(ballCount != 0 && strikeCount == 0) return Console.print(`${ballCount}볼`);
-    if(ballCount == 0 && strikeCount != 0) return Console.print(`${strikeCount}스트라이크`);
-    
-    return Console.print("낫싱");
-
-  }
-
 }
 
 module.exports = App;
