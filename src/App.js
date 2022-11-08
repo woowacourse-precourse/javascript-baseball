@@ -58,23 +58,35 @@ class Umpire {
   }
 }
 
+function quit() {
+  printMessage('게임을 종료합니다.');
+  Console.close();
+}
+
 function winAndRestart() {
   printMessage('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
   Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (oneOrtwo) => {
     if (Number(oneOrtwo) === 1) new App().play();
-    else if (Number(oneOrtwo) === 2) Console.close();
+    else if (Number(oneOrtwo) === 2) quit();
     else throw new Error('1 또는 2만 입력하세요.');
   })
 }
 
 function game(ansNum) {
   Console.readLine('숫자를 입력해주세요 : ', input => {
-    throwError(input);
-    let umpire = new Umpire(input, ansNum);
-    let decision = umpire.decision;
-    printMessage(decision);
-    if (umpire.strike === 3) winAndRestart();
-    else game(ansNum);
+    try {
+      throwError(input);
+      let umpire = new Umpire(input, ansNum);
+      let decision = umpire.decision;
+      let strike = umpire.strike;
+      printMessage(decision);
+      if (strike === 3) winAndRestart();
+      else game(ansNum);
+    }
+    catch (err) {
+      printMessage(err);
+      quit();
+    }
   })
 }
 
