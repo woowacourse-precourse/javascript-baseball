@@ -1,3 +1,4 @@
+const REG_EXP = { userInputRegEx: /^[1-9]{3,3}$/ };
 class App {
   play() {}
 }
@@ -12,11 +13,13 @@ const processGame = () => {
     noticeScore();
   });
 };
-
-function progress(input) {
+const startGame = () => {
+  Console.print("숫자 야구 게임을 시작합니다.");
+  cpu = makeTargetNumber();
+};
+const progress = (input) => {
   user = input;
-  Console.close();
-  validateInput(user);
+  validateInput(REG_EXP.userInputRegEx, user);
   score = getScore(cpu, user);
 }
 
@@ -25,11 +28,11 @@ const makeTargetNumber = () => {
   return Random.pickUniqueNumbersInRange(1, 9, 3);
 };
 
-const validateInput = (input) => {
-  return validateNumber(input);
+const validateInput = (regEx, input) => {
+  return validateNumber(regEx, input);
 };
-const validateNumber = (input) => {
-  if (!userInputRegEx.test(input)) {
+const validateNumber = (regEx, input) => {
+  if (!regEx.test(input)) {
     throw new Error("3자리의 중복되지 않는 숫자로 입력해주세요");
   }
   if (new Set(input.split("")).size > 3) {
