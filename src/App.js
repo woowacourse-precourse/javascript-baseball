@@ -31,11 +31,11 @@ class App {
     }
 
     printResult(strikeCount, ballCount) {
-        if (this.out(strikeCount, ballCount)) {
+        if (ballCount === 0 && strikeCount === 0) {
             Console.print(HINT.OUT);
             return this.pitching();
         }
-        if (this.strikeOut(strikeCount)) {
+        if (strikeCount === OPTION.PITCH_COUNT) {
             Console.print(strikeCount + HINT.STRIKE);
             Console.print(NOTICE.CLEAR);
             return this.questionFinish();
@@ -52,12 +52,6 @@ class App {
             Console.print(`${ballCount - strikeCount + HINT.BALL} ${strikeCount + HINT.STRIKE}`);
             return this.pitching();
         }
-    }
-    out(strikeCount, ballCount) {
-        return ballCount === 0 && strikeCount === 0;
-    }
-    strikeOut(strikeCount) {
-        return strikeCount === OPTION.PITCH_COUNT;
     }
 
     questionFinish() {
