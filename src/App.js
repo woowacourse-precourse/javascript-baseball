@@ -45,32 +45,32 @@ class App {
     }
 
     countStrike() {
-        let strike = 0;
+        let strikeCount = 0;
         this.gamePlayerNumber.forEach((number,index) => {
             if(this.computerNumber.includes(number)) {
-                if(this.computerNumber[index] !== number) {
-                    strike++;
+                if(this.computerNumber[index] === number) {
+                    strikeCount++;
                 } 
             }
         })
 
-        if(strike !== 0) {
-            MissionUtils.Console.print(`${strike}스트라이크`);
+        if(strikeCount !== 0) {
+            hintArr.push(`${strikeCount}스트라이크`);
         }
     }
 
     countBall() {
-        let ball = 0;
+        let ballCount = 0;
         this.gamePlayerNumber.forEach((number,index) => {
             if(this.computerNumber.includes(number)) {
                 if(this.computerNumber[index] !== number) {
-                    ball++;
+                    ballCount++;
                 } 
             }
         })
 
-        if(ball !== 0) {
-            MissionUtils.Console.print(`${ball}볼`);
+        if(ballCount !== 0) {
+            hintArr.push(`${ballCount}볼`);
         }
     }
 }
