@@ -9,6 +9,17 @@ const NUMBER_INPUT_CHECK = /[0-9]{3}/;
 const ERROR_MESSAGE =
   "1~9까지 서로 다른 수로 이루어진 3자리의 수를 입력해주세요.";
 
+const getComputerNumber = () => {
+  const computer = [];
+  while (computer.length < 3) {
+    const number = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!computer.includes(number)) {
+      computer.push(number);
+    }
+  }
+  return computer;
+};
+
 class App {
   play() {}
 }
