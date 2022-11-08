@@ -65,6 +65,8 @@ const showAnswer = (randomNumberArray, userInputNumberArray) => {
   ) {
     Console.print('3스트라이크');
     Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+
+    restartGame();
   } else {
     showHint(randomNumberArray, userInputNumberArray);
     guessNumber(randomNumberArray);
@@ -92,6 +94,24 @@ const showHint = (randomNumberArray, userInputNumberArray) => {
   } else {
     return Console.print(`${ballHint}${strikeHint}`);
   }
+};
+
+const restartGame = () => {
+  Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+
+  Console.readLine('', userChoice => {
+    if (Number(userChoice) === 1) {
+      return startGame();
+    } else if (Number(userChoice) === 2) {
+      return endGame();
+    } else {
+      throw new Error('유효하지 않은 입력값입니다.');
+    }
+  });
+};
+
+const endGame = () => {
+  Console.close();
 };
 
 module.exports = App;
