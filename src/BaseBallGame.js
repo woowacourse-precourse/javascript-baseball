@@ -107,4 +107,13 @@ class BaseBallGame {
       this.#inputNumber();
     }
   }
+
+  #checkRestartOrEndGame() {
+    Console.print(GAME_STATE_MESSAGE.END);
+    Console.readLine(GAME_STATE_MESSAGE.RESET_0R_END, (input) => {
+      this.#isValidResetOrEndInput(input);
+      if (input === "1") this.#restart();
+      if (input === "2") Console.close();
+    });
+  }
 }
