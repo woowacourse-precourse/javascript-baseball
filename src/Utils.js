@@ -4,7 +4,7 @@ const { Random } = MissionUtils;
 class Utils {
   constructor() {}
 
-  static #createUniqueNumberInList({ array, minNumber, maxNumber }) {
+  static createUniqueNumberInList({ array, minNumber, maxNumber }) {
     let pickedNumber = Random.pickNumberInRange(minNumber, maxNumber);
 
     while (array.includes(pickedNumber)) {
