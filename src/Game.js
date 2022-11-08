@@ -7,8 +7,12 @@ class Game {
     this.computer = new Computer();
   }
 
-  async start() {
+  start() {
     const answer = this.computer.makeAnswer();
+    progress(answer);
+  }
+
+  async progress(answer) {
     while (true) {
       const userNumber = await this.computer.getUserNumber();
       const result = this.computer.getResult(answer, userNumber);
