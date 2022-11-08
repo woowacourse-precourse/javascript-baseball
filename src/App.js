@@ -66,11 +66,17 @@ class App {
     });
     
   }
+  guessGame(strikeCounter,ballCounter,comNums) {
+    if(strikeCounter === 3) {
+      return gameOver();
+    }
+    Console.print(this.resultMessage(strikeCounter,ballCounter));
+    return this.userInput(comNums);
+  }
+  
   resultMessage(strikeCounter,ballCounter) {
     let message = '';
-    if(strikeCounter === 3) {
-      // gameOver();
-    }
+    
     if(ballCounter) {
       message.concat(`${ballCounter}볼 `);
     }
@@ -79,16 +85,18 @@ class App {
     }
     return (!ballCounter && !strikeCounter) ? "낫싱" : message;
   }
-
-  startBaseBallGame() {
-    const comNums = Random.pickUniqueNumbersInRange(1, 9, 3);
+  userInput(comNums) {
     let userNums;
-    Console.print("숫자 야구 게임을 시작합니다.");
     Console.readLine("숫자를 입력해주세요 : ",(answer)=> {
       userNums = answer.split('').map((num)=>{return Number(num)});
     });
     const [strikeCounter,ballCounter] = this.getStrikeAndBall(comNums,userNums);
     Console.print(this.resultMessage(strikeCounter,ballCounter));
+  }
+  startBaseBallGame() {
+    const comNums = Random.pickUniqueNumbersInRange(1, 9, 3);
+    Console.print("숫자 야구 게임을 시작합니다.");
+    userInput(comNums);
   }
   
   play() {
