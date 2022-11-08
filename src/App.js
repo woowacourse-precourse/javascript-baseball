@@ -11,6 +11,17 @@ class App {
     this.getUserInput(randomNumbers);
   }
 
+  getResultMessage(strike, ball) {
+    if (!strike && ball) 
+        return ball+'볼';
+    if (strike && !ball) 
+        return strike+'스트라이크';
+    if (strike && ball) 
+        return ball + '볼 ' + strike + '스트라이크';
+
+    return "낫싱";
+  }
+
   getStrikeBallCount(randomNumbers, guessNumbers) {
     let strike = 0;
     let ball = 0;
@@ -33,6 +44,7 @@ class App {
     Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
       this.checkAllValidation(guessNumbers);
       const { strike, ball } = this.getStrikeBallCount(randomNumbers, guessNumbers);
+      Console.print(this.getResultMessage(strike, ball));
     });
   }
 
