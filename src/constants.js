@@ -1,6 +1,6 @@
 const MESSAGES = Object.freeze({
     START: "game started",
-    THREE_STRIKE: "3볼 3스트라이크",
+    THREE_STRIKE: "3스트라이크",
     INVALID_LENGTH: "3자리 숫자를 입력해주세요!",
     NOT_A_NUMBER: "숫자만 입력해주세요!",
     REQUIRE_USER_INPUT: (num) => `${num}자리 숫자를 입력해주세요: `,

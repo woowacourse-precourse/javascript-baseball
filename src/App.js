@@ -62,13 +62,10 @@ class App {
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
 			computerNumArr.map((computerNum, computerNumIdx) => {
-				if (computerNum === Number(userAnswerStr)) {
-					ball++;
-					if (computerNumIdx === userAnswerIdx) {
-						strike++;
-					}
+				if (computerNum === Number(userAnswerStr) &&computerNumIdx === userAnswerIdx ) {strike++; return;}
+				if(computerNum === Number(userAnswerStr)) ball++;
 				}
-			});
+			);
 
 			if (strike > 0 && ball > 0) {
 				result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
@@ -99,5 +96,8 @@ class App {
 		});
 	}
 }
+
+const app = new App()
+app.play()
 
 module.exports = App;
