@@ -8,22 +8,26 @@ class App {
   } 
   play() {
     Console.print(MESSAGES.START);
+    this.ready();
+  }
+  ready() {
+    this.answer = gameTool.generateRandomNumber();
     this.start();
   }
   start() {
-    this.answer = gameTool.generateRandomNumber();
-    this.continue();
+    Console.readLine(MESSAGES.INPUT, this.continue);
   }
-  async continue() {
-    const input = await gameTool.inputNumber();
-    if(gameTool.isValidateNumber(input) === false) throw new Error('입력이 잘못되었습니다.');
+  continue = (input) => {
+    if(gameTool.isValidateNumber(input) === false){
+      throw new Error('입력이 잘못되었습니다.');
+    }
     const { strike, ball } = gameTool.checkBaseballCount(this.answer, input);
     gameTool.printBaseballCount(strike, ball);
     
     if(strike === 3){
       this.end();
     } else {
-      this.continue();
+      this.start();
     }
   }
   end() {

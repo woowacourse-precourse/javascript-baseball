@@ -1,15 +1,14 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const MESSAGES = require('./Constants');
 
 const generateRandomNumber = () => {
-  return Random.pickUniqueNumbersInRange(1, 9, 3).join('');
-}
-
-const inputNumber = () => {
-  return new Promise(resolve => 
-    Console.readLine(MESSAGES.INPUT, (number) => {
-      resolve(number);
-  }))
+  const randomNumbers = [];
+  while(randomNumbers.length < 3){
+    randomNumber = Random.pickNumberInRange(1, 9);
+    if(!randomNumbers.includes(randomNumber)){
+      randomNumbers.push(randomNumber);
+    }
+  }
+  return randomNumbers.join('');
 }
 
 const isValidateNumber = (input) => {
@@ -46,7 +45,6 @@ const printBaseballCount = (strike, ball) => {
 
 const gameTool = {
   generateRandomNumber,
-  inputNumber,
   isValidateNumber,
   checkBaseballCount,
   printBaseballCount,
