@@ -89,21 +89,31 @@ const continueOrFinish = () => {
   return input;
 };
 
+/**
+ * 사용자의 입력이 잘못되었는지 판단한다
+ * @param {string[]} guessNumber - 사용자가 예상한 숫자
+ * @returns {Error} 잘못될 경우 에러
+ */
 const inputException = (guessNumber) => {
-  if (guessNumber.length !== 3) throw new Error('예외');
-  if (guessNumber.filter((num) => Number.isNaN(num)).length > 0) throw new Error('예외');
+  if (guessNumber.length !== 3) {
+    throw new Error('예외');
+  }
+  if (guessNumber.filter((num) => Number.isNaN(num)).length > 0) {
+    throw new Error('예외');
+  }
 };
 
 class App {
-  play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  // Expected 'this' to be used by class method 'play'.
+
+  playGame() {
     let computerNumber = getRandomNumber();
     const IS_PLAYING = true;
+
     while (IS_PLAYING) {
       const guessNumber = guessUserNumber();
-
       try {
-        inputException(this.guessNumber);
+        inputException(guessNumber);
 
         const strike = countStrike(computerNumber, guessNumber);
         const ball = countBall(computerNumber, guessNumber);
@@ -119,12 +129,19 @@ class App {
             computerNumber = getRandomNumber();
           }
         }
+        // inputException(this.guessNumber);
       } catch (e) {
-        // console.log();
+        // IS_PLAYING = false;
+        // console.log('여기');
         // MissionUtils.Console.print(e);
         // break;
       }
     }
+  }
+
+  play() {
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.playGame();
   }
 }
 
