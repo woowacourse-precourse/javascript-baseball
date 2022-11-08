@@ -77,6 +77,24 @@ describe("숫자 야구 게임", () => {
     });
   });
 
+  test("(NEW) 게임 재시작 여부 1 또는 2가 아닌 기타 입력", () => {
+    // 새로운 테스트 케이스
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["246", "137", "135", "a", "1", "597", "589", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["낫싱", "2스트라이크", "3스트라이크", "불가능한 재시작 명령", "1볼 1스트라이크", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
   test("예외 테스트", () => {
     // 사용자 입력이 3자리 수가 아닌 경우
     const randoms = [1, 3, 5];
