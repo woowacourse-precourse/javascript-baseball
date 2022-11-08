@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
+const generateNumber = require('../src/utils/generateNumber');
 
 const mockQuestions = answers => {
   MissionUtils.Console.readLine = jest.fn();
@@ -22,6 +23,15 @@ const getLogSpy = () => {
   logSpy.mockClear();
   return logSpy;
 };
+
+describe('랜덤 숫자 생성 함수', () => {
+  const randomNumArr = generateNumber();
+  randomNumArr.forEach(number => {
+    expect(number).toBeGreaterThanOrEqual(1);
+    expect(number).toBeLessThanOrEqual(9);
+  });
+  expect(randomNumArr.length).toBe(3);
+});
 
 describe('숫자 야구 게임', () => {
   test('게임 종료 후 재시작', () => {
