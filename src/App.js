@@ -113,7 +113,19 @@ class App {
     }
   }
 
-  inputCallback() {}
+  inputCallback(inputString) {
+    const inputArray = this.convertToNumberArray(inputString);
+
+    this.arrayLengthCheck(inputArray);
+    this.arrayValueRangeCheck(inputArray);
+    this.arrayValueDuplicateCheck(inputArray);
+
+    const numberBall = this.countBall(inputArray);
+    const numberStrike = this.countStrike(inputArray);
+
+    this.printResult(numberBall, numberStrike);
+    this.processNextStep(numberStrike);
+  }
 
   play() {}
 }
