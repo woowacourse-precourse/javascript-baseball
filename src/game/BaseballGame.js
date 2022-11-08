@@ -41,20 +41,18 @@ class BaseballGame {
   }
 
   printResult(ball, strike) {
-    const ballMessage = ball > 0 ? `${ball}볼 ` : '';
+    const ballMessage = ball > 0 ? `${ball}볼` : '';
     const strikeMessage = strike > 0 ? `${strike}스트라이크` : '';
 
     if (!ball && !strike) {
       return Console.print(GAME_MESSAGE.nothing);
     }
 
-    if (strike === NUMBER_LENGTH) {
-      Console.print(`${strikeMessage}`);
+    Console.print(`${ballMessage} ${strikeMessage}`.trim());
 
+    if (strike === NUMBER_LENGTH) {
       return Console.print(GAME_MESSAGE.correct);
     }
-
-    return Console.print(`${ballMessage}${strikeMessage}`);
   }
 
   askRestart() {
