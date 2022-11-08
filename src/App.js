@@ -5,20 +5,20 @@ class App {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
   }
   play() {
-    startGame();
+    this.startGame();
   }
-}
 
-function startGame(){
-  var computer = generateRandomNumbers();
-  var isCorrect = false;
-  while(!isCorrect){
-    var guess = getGuess();
-    var strike = countStrike(guess, computer);
-    var ball = countBall(guess, computer);
-    if(resultCheck(strike, ball)) isCorrect = true;
+  startGame() {
+    var computer = generateRandomNumbers();
+    var isCorrect = false;
+    while(!isCorrect){
+      var guess = getGuess();
+      var strike = countStrike(guess, computer);
+      var ball = countBall(guess, computer);
+      if(resultCheck(strike, ball)) isCorrect = true;
+    }
+    endsGame();
   }
-  endsGame();
 }
 
 function generateRandomNumbers(){
@@ -107,19 +107,16 @@ function resultCheck(strike, ball){
 
 function endsGame(){
   MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-  MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-  MissionUtils.Console.readLine('', (answer) => {
-    if(answer[0] == '1' || answer[0] == 1){
-      startGame();
-      return false;
+  MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. : ', command => {
+    if (command === '1') {
+      const app = new App();
+      app.startGame();
+    } 
+    else if (command === '2') {
+      MissionUtils.Console.close();
     }
-    else if(answer[0] == '2' || answer[0] == 2){
-      return true;
-    }
-    else{
-      throw new Error();
-    }
-  });
+    else throw new Error();
+  },);
 }
 
 module.exports = App;
