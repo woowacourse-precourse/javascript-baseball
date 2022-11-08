@@ -54,3 +54,48 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 });
+
+describe('숫자 야구 게임 추가1', () => {
+  test('게임 종료 후 재시작1', () => {
+    const randoms = [2, 3, 5, 5, 8, 2];
+    const answers = ['321', '235', '1', '341', '582', '2'];
+    const logSpy = getLogSpy();
+    const messages = ['2볼', '3스트라이크', '낫싱', '3스트라이크', '게임 종료'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('예외 테스트1', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['113'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('예외 테스트2', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['240'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+});
