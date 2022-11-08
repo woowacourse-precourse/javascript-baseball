@@ -55,7 +55,7 @@ class App {
         })
 
         if(strikeCount !== 0) {
-            hintArr.push(`${strikeCount}스트라이크`);
+            return (`${strikeCount}스트라이크`);
         }
     }
 
@@ -70,8 +70,21 @@ class App {
         })
 
         if(ballCount !== 0) {
-            hintArr.push(`${ballCount}볼`);
+            return (`${ballCount}볼`);
         }
+    }
+
+    printHintMessage() {
+        let hintArr = [];
+        hintArr.push(this.countBall());
+        hintArr.push(this.countStrike());
+
+        if(hintArr.length === 0) {
+            hintArr.push("낫싱");
+        }
+        
+        MissionUtils.Console.print(hintArr.join(" "));
+        return hintArr;
     }
 }
 
