@@ -1,4 +1,3 @@
-
 const GAME_MSG = {
   START: "숫자 야구 게임을 시작합니다.",
   NUM_REQUEST: "숫자를 입력해주세요 : ",
