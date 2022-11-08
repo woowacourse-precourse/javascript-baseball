@@ -1,7 +1,9 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 
+Console.print('숫자 야구 게임을 시작합니다.');
+
 const setComputerNumber = () => {
-  let computerNumber = [];
+   computerNumber = [];
   while (computerNumber.length < 3) {
     const randomNumber = Random.pickNumberInRange(1, 9);
     if (!computerNumber.includes(randomNumber)) {
@@ -13,7 +15,7 @@ const setComputerNumber = () => {
 
 const setUserNumber = (computer) => {
   let input;
-  Console.readLine('숫자 3자리를 입력해주세요 : ', (num) => {
+  Console.readLine('숫자를 입력해주세요 : ', (num) => {
     input = num.toString().split("").map((str) => Number(str));
     errorCheck(input);
     checkNumber(input, computer);
@@ -24,7 +26,7 @@ const errorCheck = (input) => {
   const stringInput = input.join("");
   const numReg = /^[1-9]+$/;
   const setNumber = new Set(input);
-  if(!numReg.test(stringInput)) throw "숫자만 입력 가능합니다.";
+  if(!numReg.test(stringInput)) throw "1~9까지인 숫자만 입력 가능합니다.";
   if(input.length !== 3) throw "숫자는 3자리만 입력 가능합니다";
   if(setNumber.size != input.length) throw "중복된 숫자가 있습니다";
 }
@@ -52,7 +54,7 @@ const checkNumber = (input, computer) => {
 
 const printCount = (strike, ball) => {
   if (strike > 0 && ball > 0) {
-    Console.print(`${strike} 스트라이크 ${ball} 볼`);
+    Console.print(`${ball}볼 ${strike}스트라이크`);
   } else if (strike === 0 && ball > 0) {
     Console.print(`${ball} 볼`);
   } else if (strike > 0 && ball === 0) {
@@ -63,29 +65,18 @@ const printCount = (strike, ball) => {
 }
 
 const gameClear = () => {
-  Console.readLine('3개의 숫자를 모두 맞히셨습니다! 게임 종료 \n 게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. \n', (input) => {
-    if(input == 1){
-      reStart();
-    }
-    if(input == 2){
-      closeGame();
-    }
+  Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (input) => {
+    if (!(input === "1" || input === "2")) throw "잘못된 입력입니다.";
+    if (input === "1"){
+      app.play();
+    } else Console.close();
   })
-}
-
-const reStart = () => {
-  app.play();
-}
-
-const closeGame = () => {
-  Console.print('게임 종료');
-  Console.close();
 }
 
 class App {
   play() {
 
-    console.log('숫자 야구 게임을 시작합니다.');
     let answer = setComputerNumber();
 
     setUserNumber(answer);
