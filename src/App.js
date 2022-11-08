@@ -30,6 +30,12 @@ class App {
 
     const { ballCnt, strikeCnt } = this.game.judgeAnswer(input, this.answer);
     this.game.announceResult(ballCnt, strikeCnt);
+
+    strikeCnt === 3 ? this.finish() : this.enter();
+  }
+
+  finish() {
+    Console.print(MESSAGE.FINISH);
   }
 
   error() {
