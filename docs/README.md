@@ -1,25 +1,71 @@
 ### 기능 목록
-- constructor(): computer_num,user_num 객체 속성 생성
-- 게임시작()-play : 사용자 숫자 입력 받는 함수 호출, 컴퓨터 숫자를 맞추지 못했을때 호출되는 함수
-- 게임종료()-endGame : 결과 안내문 출력, 게임 새로 시작 or 종료 입력 받기
 
-- 유저숫자입력()-getUserInputNumber: 사용자의 숫자를 입력받는다.
-- 게임결과()-resultGame: 스트라이크, 볼 결과 조건문으로 함수 호출
+✅ 게임 종료
 
-- 유저 숫자 배열로 변환()-changeUserNumberToArray: 유저가 입력한 숫자를 배열로 바꾸는 기능, 컴퓨터숫자와 비교하기 위한 목적
-- 컴퓨터랜덤숫자선택()-selectComputerNumber(): 컴퓨터 랜덤 숫자 선택 기능
-- 같은 숫자 찾기()-findEqualNumber: 같으면 스트라이크, 다르면 볼
-- 볼 결과 출력 - resultBall: 게임계속(사용자입력받기)
-- 낫싱 출력 - resultNothing: 게임계속(사용자입력받기)
-- 볼 스트라이크 결과 출력- resultStrikeAndBall:  게임계속(사용자입력받기)
+- 3 스트라이크일 경우 결과 안내문 출력
+- 게임을 계속 진행할지 종료할지 입력받는 기능
+- 게임 종료 기능
+- 함수명:endGame
+
+✅ 컴퓨터 랜덤 숫자 선택
+
+- 1에서 9까지의 숫자 중 랜덤으로 3개를 선택하는 기능
+- 함수명:selectComputerNumber
+
+✅ 사용자 숫자 입력 받기
+
+- 입력 안내문 출력
+- 숫자 입력 받는 기능
+- 함수명:getUserInputNumber
+
+✅ 컴퓨터 숫자 배열로 변환
+
+- 컴퓨터 숫자를 콤마로 구분하여 배열로 변환하는 기능
+- 함수명:changeComputerNumberToArray
+
+✅ 사용자 숫자 배열로 변환
+
+- 입력 받은 사용자 숫자를 배열로 변환하는 기능
+- 함수명:changeUserNumberToArray
+
+✅ 같은 자리의 숫자 찾기
+
+- 컴퓨터 숫자와 사용자 숫자를 비교하여 같은 자리의 숫자를 찾는 기능
+- 같은 자리인 경우 strike 1 증가
+- 다른 자리인 경우 ball 1 증가
+- 함수명:findEqualIndexNumber
+
+✅ 게임 결과
+
+- strike, ball 수에 따라 게임 결과 조건문을 통해 함수 호출
+- 함수명:resultGame
+
+✅ 스코어 볼
+
+- 게임 결과인 ball 수를 안내문으로 출력
+- 사용자 숫자를 입력 받는 함수 호출
+- 함수명:resultBall
+
+✅ 스코어 낫싱
+
+- 게임 결과인 strike 0, ball 0 수를 낫싱 안내문으로 출력
+- 사용자 숫자를 입력 받는 함수 호출
+- 함수명:resultNothing
+
+✅ 스코어 스트라이크 앤드 볼
+
+- 게임 결과인 ball 수를 안내문으로 출력
+- 사용자 숫자를 입력 받는 함수 호출
+- 함수명:resultStrikeAndBall
 
 ### 사용자 입력값 예외 목록
+
 - getUserInputNumber(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 숫자 3개만 가능, 서로 다른 3개의 숫자만 가능, 1에서 9 사이의 숫자 가능
 - endGame(): 사용자 입력 타입은 숫자만 가능, 사용자 입력값은 1과 2 중 하나만 가능
 
 ### 테스트 목록
-- selectComputerNumber(): 3개의 숫자 반환, 서로 다른 숫자 반환, 1에서 9 사이의 숫자 반환, 숫자 반환
+
+- selectComputerNumber(): 3개의 숫자 반환, 서로 다른 숫자 반환, 1에서 9 사이의 숫자 반환
 - changeComputerNumberToArray(): 반환값은 배열
 - changeUserNumberToArray(): 반환값은 배열
-- findEqualNumber(): 반환값 strike, ball 타입은 숫자
-
+- findEqualNumber(): 반환값 strike, ball, 타입은 숫자
