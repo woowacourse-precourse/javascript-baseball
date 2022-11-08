@@ -10,6 +10,13 @@ function computerPickNumbers() {
   computer = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
 }
 
+function userInput() {
+  MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+    console.log(`${answer}`);
+    user = answer;
+  });
+}
+
 class App {
   play() {
     MissionUtils.Console.print(game_start);
