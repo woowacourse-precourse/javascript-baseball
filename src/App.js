@@ -16,7 +16,7 @@ function App() {
       }
     }
     computerNumbers();
-    console.log(computer);
+    // console.log(computer);
 
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
 
@@ -82,7 +82,7 @@ function App() {
       input = input.join("");
       // computer = computer.toString();
       // input = input.toString();
-      console.log(input, computer);
+      // console.log(input, computer);
       let [strike, ball, nothing] = [0, 0, 0];
       // console.log(typeof input[i], typeof)
       for (let i = 0; i < computer.length; i++) {
@@ -106,8 +106,8 @@ function App() {
   };
 }
 
-const app = new App();
+// const app = new App();
 
-app.play();
+// app.play();
 
 module.exports = App;
