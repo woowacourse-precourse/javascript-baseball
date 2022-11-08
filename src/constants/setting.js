@@ -24,13 +24,13 @@ const ERROR = {
     WRONG_CHOICE,
 };
 
-const START_VAL = 0;
+const START_VALUE = 0;
 const STRIKE = 3;
 const RESTART = "1";
 const EXIT = "2";
 
 const SET = {
-    START_VAL,
+    START_VALUE,
     STRIKE,
     RESTART,
     EXIT,
@@ -42,7 +42,7 @@ const SECONED = 1;
 const THIRD = 2;
 const ZERO = "0";
 
-const EXCEP = {
+const EXCEPTION = {
     THREE_DIGITS,
     FIRST,
     SECONED,
@@ -54,5 +54,5 @@ module.exports = {
     GAME,
     ERROR,
     SET,
-    EXCEP,
+    EXCEPTION,
 };

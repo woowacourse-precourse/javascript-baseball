@@ -10,8 +10,8 @@ class Game {
     }
 
     getStrikeAndBall(computersNumber, usersNumber) {
-        let howManyStrike = SET.START_VAL;
-        let howManyBall = SET.START_VAL;
+        let howManyStrike = SET.START_VALUE;
+        let howManyBall = SET.START_VALUE;
 
         usersNumber.forEach((number, idx) => {
             if (number === computersNumber[idx]) howManyStrike++;
