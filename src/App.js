@@ -10,6 +10,9 @@ class App {
     this.showPrint("숫자 야구 게임을 시작합니다.");
     this.compareNumber();
   }
+  showPrint(messages) {
+    MissionUtils.Console.print(messages);
+  }
 }
 
 const app = new App();
