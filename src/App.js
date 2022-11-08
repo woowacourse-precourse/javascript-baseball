@@ -8,7 +8,7 @@ class App{
 
   
   
-  getRandumNumber(){
+  getRandomNumber(){
     const Max_RANGE = 9;
     const MIN_RANGE = 1
     const randomNumber = new Set();
@@ -85,7 +85,7 @@ class App{
   }
   
   startGame(){
-    this.getRandumNumber();
+    this.getRandomNumber();
     this.userInput(); 
   }
 
