@@ -26,17 +26,12 @@ class App {
   start(computerNum) {
     while (true) {
       let playerNum = this.inputPlayerNum();
-      if (this.isSucesse(computerNum, playerNum)) break;
+      const result = this.getResult(computerNum, playerNum);
+      if (this.isSucesse(result)) break;
     }
   }
 
-  isSucesse(computerNum, playerNum) {
-    const strike = this.getResult(computerNum, playerNum);
-
-    return this.isAllStrike(strike);
-  }
-
-  isAllStrike(strike) {
+  isSucesse(strike) {
     return strike === COMPUTER_NUMBER.LENGTH;
   }
 
