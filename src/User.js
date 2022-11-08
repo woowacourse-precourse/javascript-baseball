@@ -13,9 +13,8 @@ class User {
   checkOnlyNaturalNum(userNum) {
     if (isNaN(userNum)) return false;
     if (!Number.isInteger(userNum)) return false;
-    const userNumList = [...userNum];
-    if (userNumList.includes("0")) return false;
-    if (userNumList.includes("-")) return false;
+    if (userNum.includes("0")) return false;
+    if (userNum.includes("-")) return false;
     return true;
   }
 
