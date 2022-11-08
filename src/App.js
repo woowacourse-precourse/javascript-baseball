@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
- 
+
   constructor() {
     this.computerNumber = [];
     this.userNumber = [];
@@ -9,6 +9,7 @@ class App {
   }
 
   play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     this.setComputerNumber();
     this.userInputNumber();
   }
@@ -55,25 +56,28 @@ class App {
       this.userInputNumber();
     }
   }
- 
+
   getHint() {
     let ball = this.getBall();
     let strike = this.getStrike();
-    
-    if (ball > 0 && strike > 0) {
-      return MissionUtils.Console.print(`${ball}볼 ${strike}스트라이크`);
-    } else if (ball > 0) {
-      return MissionUtils.Console.print(`${ball}볼`);
-    } else if (strike > 0) {
-      return MissionUtils.Console.print(`${strike}스트라이크`);
-    } else {
-      return MissionUtils.Console.print("낫싱");
+    let hint = "";
+
+    if (ball > 0) {
+      hint = `${ball}볼 `;
     }
+    if (strike > 0) {
+      hint += `${strike}스트라이크`;
+    }
+    if (strike === 0 && ball === 0) {
+      hint = "낫싱";
+    }
+
+    return MissionUtils.Console.print(hint);
   }
-  
+
   getBall() {
     let ballCount = 0;
-    
+
     for (let idx = 0; idx < this.computerNumber.length; idx++) {
       if (this.userNumber[idx] !== this.computerNumber[idx] &&
         this.computerNumber.includes(this.userNumber[idx])) {
@@ -82,10 +86,10 @@ class App {
       }
     return ballCount;
   }
-  
+
   getStrike() {
     let strikeCount = 0;
-    
+
     for (let idx = 0; idx < this.computerNumber.length; idx++) {
       if (this.userNumber[idx] === this.computerNumber[idx]) {
         strikeCount++;
@@ -93,12 +97,12 @@ class App {
     }
     return strikeCount;
   }
-  
+
   gameWin() {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     this.userSelectNumber();
   }
-  
+
   userSelectNumber() {
     MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (inputNumber) => {
       MissionUtils.Console.print(`게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n${inputNumber}`)
@@ -119,12 +123,12 @@ class App {
     }
     return inputNumber;  
   }
-  
+
   startNewGame() {
     this.setComputerNumber();
     this.userInputNumber();
   }
-  
+
   gameEnd() {
     MissionUtils.Console.print("게임 종료");
     MissionUtils.Console.close();
