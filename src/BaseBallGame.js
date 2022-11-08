@@ -74,4 +74,28 @@ class BaseBallGame {
       this.getResult(input, this.computer);
     });
   }
+
+  #viewMessage() {
+    Console.print(this.#selectMessage());
+  }
+
+  #selectMessage() {
+    if (this.#strikeCount === 3) {
+      return "3스트라이크";
+    }
+
+    if (this.#ballCount === 0 && this.#strikeCount > 0) {
+      return `${this.#strikeCount}스트라이크`;
+    }
+
+    if (this.#strikeCount === 0 && this.#ballCount > 0) {
+      return `${this.#ballCount}볼`;
+    }
+
+    if (this.#strikeCount > 0 && this.#ballCount > 0) {
+      return `${this.#ballCount}볼 ${this.#strikeCount}스트라이크`;
+    }
+
+    return "낫싱";
+  }
 }
