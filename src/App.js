@@ -52,7 +52,7 @@ class App {
     if (strike === THREE_TIMES) {
       this.sendMessage(MESSAGE.COMPARE_ANSWER.THREE_STRIKE);
       this.sendMessage(MESSAGE.GAME_PROGRESS.END);
-      Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => this.isContinue(answer));
+      Console.readLine(MESSAGE.REQUEST.IS_CONTINUE, (answer) => this.askContinueGame(answer));
       return;
     }
 
@@ -66,7 +66,7 @@ class App {
     this.requestAnswer(MESSAGE.REQUEST.USER_ANSWER);
   }
 
-  isContinue(answer) {
+  askContinueGame(answer) {
     if (answer === ASK_CONTINUE.YES) {
       this.play();
       return;
