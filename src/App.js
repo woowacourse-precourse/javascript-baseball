@@ -48,6 +48,19 @@ class App {
       throw "서로 다른 3자리 숫자로 입력해주세요 🥲";
     }
   }
+
+  compareResult() {
+    let strike = 0;
+    let ball = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (this.computerNumber[i] === this.userNumber[i]) {
+        strike += 1;
+      } else if (this.computerNumber.includes(this.userNumber[i])) {
+        ball += 1;
+      }
+    }
+  }
 }
 
 const app = new App();
