@@ -9,7 +9,6 @@ class BaseballGame {
   startRound(targetNumber) {
     Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
       const userInputNumber = utils.isValidInput(userInput);
-      Console.print(userInputNumber + " " + targetNumber);
       const ballCount = utils.getBallCount(userInputNumber, targetNumber);
       const strikeCount = utils.getStrikeCount(userInputNumber, targetNumber);
 
