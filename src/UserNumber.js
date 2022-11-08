@@ -28,12 +28,12 @@ class UserNumber{
 
     overlapNumberError(answer){
     let userInput = Array.from(answer);
-    for(let i = 0 ; i < userInput.length; i++){
-        if(userInput[i] == userInput[i+1]){
-            throw "Error (중복된 숫자가 있습니다.)" ;
+    const set = new Set(userInput);
+    if(set.size < userInput.length){
+        throw "Error (중복된 숫자가 있습니다.)"
+    }
+    
         }
     }
-}
-}
 
 module.exports = UserNumber ;
