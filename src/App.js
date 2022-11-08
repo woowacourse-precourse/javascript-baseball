@@ -14,9 +14,22 @@ class App {
     while (computer.size < 3) {
       computer.add(MissionUtils.Random.pickNumberInRange(1, 9));
     }
-    this.computerArr = [...computer]; // 배열로 바꿔야 출력 가능
-    console.log(`computer : ${this.computerArr}`);
+    this.computerArr = [...computer]; // 배열로 바꿔야 출력 가능 // 배열 내용은 number
+    console.log(`computer : ${this.computerArr}, type: ${typeof(this.computerArr[0])}`);
 
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      // 만약 유효성 검사 만족하면 -> 
+      if(true){
+        // 값 있는지 확인
+        this.userArr = [...input]; // userinput은 computerinput과 다르게 123 이렇게 주어짐
+        this.userArr = input.split('').map(Number);
+        MissionUtils.Console.print(`input: ${this.userArr}`); // this.userArr[0] 이렇게 뽑아보면 number 확인
+      }
+    });
+  }
+
+  // 유효성 검사
+  isValid(userInput){
   }
 
 
