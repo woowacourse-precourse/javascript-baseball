@@ -75,11 +75,19 @@ class App {
   }
 
   hasSameNumber(inputNumber) {
-    if (inputNumber[0] === inputNumber[1] || inputNumber[1] === inputNumber[2] || inputNumber[2] === inputNumber[0]) {
-      return true;
+    let object = {};
+    for (let value of inputNumber) {
+      if (!object[value]) {
+        object[value] = 0;
+      }
+      object[value] += 1;
     }
 
-    return false;
+    if (Object.entries(object).length === this.DIGITS) {
+      return false;
+    }
+
+    return true;
   }
 
   handleInputException(inputNumber) {
