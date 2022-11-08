@@ -53,7 +53,9 @@ class App {
 
   inputUserNumber() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
-      let result = this.printBallStrike(this.checkBallStrike(this.computerNumber, input));
+      let result = this.printBallStrike(
+        this.checkBallStrike(this.computerNumber, input)
+      );
 
       MissionUtils.Console.print(result);
 
@@ -64,7 +66,7 @@ class App {
 
         return this.retryOrEnd();
       }
-    })
+    });
   }
 
   retryOrEnd() {
@@ -84,7 +86,7 @@ class App {
 
   play() {
     this.computerNumber = this.createComputerNumber();
-    
+
     return this.inputUserNumber();
   }
 }
