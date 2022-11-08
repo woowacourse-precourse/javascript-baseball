@@ -15,10 +15,8 @@ class App {
   }
 
   start() {
-    const computer = this.computer;
-    let user = [];
-    let result = "";
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
+      Except(answer);
       // this.input_numbers = answer;
       // MissionUtils.Console.print(this.input_numbers);
 
@@ -29,8 +27,21 @@ class App {
 
 
 
-function isExcept(){
+function Except(input){
 
+  for(let i=0; i<input.length; i++){
+    code = input[i].charCodeAt(0);
+    code1 = '1'.charCodeAt(0);
+    code9 = '9'.charCodeAt(0);
+    if(code1 > code || code > code9)
+      throw "1~9범위의 숫자만 입력해주세요";
+  }
+
+  if(input.length != 3)
+    throw "3가지 숫자를 입력해주세요";
+  
+  if(input[0] == input[1] || input[1] == input[2] || input[0] == input[2])
+    throw "서로 다른 숫자를 입력해주세요";
 }
 
 
