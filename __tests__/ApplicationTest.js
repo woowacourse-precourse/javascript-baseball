@@ -47,9 +47,55 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("1. 최초 시작 문구 확인", () => {
+    const randoms = [1, 3, 5, 5, 8, 9];
+    const answers = ["216"];
+    const logSpy = getLogSpy();
+    const messages = ["숫자 야구 게임을 시작합니다."];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test("4. 입력받은 값에 대한 답 확인 - 볼/스트라이크/혼합", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["513", "175", "531"];
+    const logSpy = getLogSpy();
+    const messages = ["3볼", "2스트라이크", "2볼 1스트라이크"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+  test("7.예외 테스트", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("8. 예외 테스트2", () => {
+    const randoms = [1, 3, 5];
+    const answers = ["135", "7"];
 
     mockRandoms(randoms);
     mockQuestions(answers);

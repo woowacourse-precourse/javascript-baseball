@@ -15,8 +15,7 @@
     "prettier": "^2.7.1"
   },
   "scripts": {
-    "test": "jest",
-    "start": "node ./src/App.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
