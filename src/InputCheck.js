@@ -21,7 +21,7 @@ class InputCheck {
     }
 
     if (
-      !this.NumberCheck(input) ||
+      !this.ValidCheck(input) ||
       !this.LengthCheck(input) ||
       !this.SamenessCheck(input)
     ) {
