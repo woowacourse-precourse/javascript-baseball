@@ -15,7 +15,15 @@ class App {
   }
   replay() {
     // 기능 1번 구현
-    this.computer_random_number = Random.pickUniqueNumbersInRange(1, 9, 3);
+    function makeRandomNumber() {
+      let randomNumber = new Set();
+      while (1) {
+        randomNumber.add(MissionUtils.Random.pickNumberInRange(1, 9));
+        if (randomNumber.size == 3) break;
+      }
+      return Array.from(randomNumber);
+    }
+    this.computer_random_number = makeRandomNumber();
     // 기능 2번 구현
     this.user_input();
   }
