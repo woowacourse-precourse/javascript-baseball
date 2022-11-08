@@ -23,7 +23,6 @@ const isNotNumber = (userInputNumber) => {
 const isIncludeZero = (userInputNumber) => userInputNumber.includes(0);
 
 const checkValidUserInput = (userInput) => {
-  console.log(userInput);
   if (isDuplicatedNumber(userInput)) {
     throw new Error(ERROR_TEXT.DUPLICATED);
   }
