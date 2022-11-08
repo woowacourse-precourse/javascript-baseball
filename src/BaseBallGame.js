@@ -2,6 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const { GAME_STATE_MESSAGE, RANDOM_NUMBER } = require("../constant/constant");
 const Computer = require("./Computer");
 const RandomNumber = require("./RandomNumber");
+const Validator = require("./Validator");
 
 class BaseBallGame {
   #strikeCount;
