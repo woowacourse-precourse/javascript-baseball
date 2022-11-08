@@ -44,6 +44,13 @@ class App {
       if(this.computerInputNum[i] === userAnswer[i]) checkStrike++
       else if(this.computerInputNum[i].includes(userAnswer)) checkBall++
     }
+    this.getAnswer(checkStrike, checkBall)
+  }
+  
+  getAnswer(checkStrike, checkBall){
+    if(checkStrike !== 0) MissionUtils.Console.print(`${checkStrike} : Strike`);
+    if(checkBall !== 0) MissionUtils.Console.print(`${checkBall} : Ball`);
+    if(checkStrike === 0 && checkBall === 0) MissionUtils.Console.print('낫싱');
   }
 }
 
