@@ -44,6 +44,7 @@ class App {
     inputNum.forEach((str) => {
       allowed = allowNum.test(str) && allowed;
     });
+
     return allowed;
   }
 
