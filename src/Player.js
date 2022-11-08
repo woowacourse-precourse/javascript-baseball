@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const MESSAGE = require('./constants/message');
 const isAvailableValue = require('./utils/isAvailableValue');
 
 class Player {
@@ -13,11 +14,11 @@ class Player {
   }
 
   setValue() {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    MissionUtils.Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
       if (isAvailableValue(answer)) {
         this.#value = answer;
         this.referee.gameResult();
-      } else throw new Error('잘못된 값을 입력했습니다. 게임을 종료합니다.');
+      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 }

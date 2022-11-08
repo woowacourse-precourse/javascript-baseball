@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const MESSAGE = require('./constants/message');
 const isAvailableValue = require('./utils/isAvailableValue');
 
 class Computer {
@@ -14,7 +15,7 @@ class Computer {
   setValue() {
     const randomValue = this.generatorComputerValue();
     if (isAvailableValue(randomValue)) this.#value = randomValue;
-    else throw new Error('시스템 오류로 인해 게임을 종료합니다.');
+    else throw new Error(MESSAGE.ERROR.SYSTEM);
   }
 
   generatorComputerValue() {

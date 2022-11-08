@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
+const MESSAGE = require('./constants/message');
 const Player = require('./Player');
 
 const RESTART = '1';
@@ -10,7 +11,7 @@ class Referee {
     this.computer = new Computer();
     this.player = new Player(this);
 
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(MESSAGE.GAME.START);
   }
 
   gameStart() {
@@ -28,27 +29,24 @@ class Referee {
     MissionUtils.Console.print(nothingString + ballString + strikeString);
 
     if (strike === 3) {
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      MissionUtils.Console.print(MESSAGE.GAME.WIN);
       this.gameFinish();
     } else this.player.setValue();
   }
 
   gameFinish() {
-    MissionUtils.Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (answer) => {
-        if (answer === RESTART) return this.gameStart();
-        if (answer === GAME_OVER) return MissionUtils.Console.print('숫자 야구 게임을 종료합니다.');
-        return this.gameFinish();
-      }
-    );
+    MissionUtils.Console.readLine(MESSAGE.GAME_FINISH, (answer) => {
+      if (answer === RESTART) return this.gameStart();
+      if (answer === GAME_OVER) return MissionUtils.Console.print(MESSAGE.GAME.WIN);
+      return this.gameFinish();
+    });
   }
 
   getBallAndStrikeCount() {
     const [computerValue, playerValue] = [this.computer.getValue(), this.player.getValue()];
     let [ball, strike] = [0, 0];
 
-    if (!computerValue || !playerValue) throw new Error('시스템 오류로 인해 게임을 종료합니다.');
+    if (!computerValue || !playerValue) throw new Error(MESSAGE.ERROR.SYSTEM);
 
     for (let i = 0; i < 3; i++) {
       if (computerValue[i] === playerValue[i]) strike++;
