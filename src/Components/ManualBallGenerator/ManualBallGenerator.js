@@ -5,13 +5,15 @@ class ManualBallGenerator {
 
   async execute() {
     return await new Promise((resolve, reject) => {
-      Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      const callback = (input) => {
         Console.close();
 
-        this.isSatisfied(input)
-          ? resolve(this.toNumberArray(input))
-          : reject(new Error());
-      });
+        if (this.isSatisfied(input)) return resolve(this.toNumberArray(input));
+
+        return reject(new Error());
+      };
+
+      Console.readLine("숫자를 입력해주세요 : ", callback);
     });
   }
 
