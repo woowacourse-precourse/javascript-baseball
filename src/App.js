@@ -54,11 +54,11 @@ class App {
   static getUserInput() {
     let input;
 
-    function inputParser(inputString) {
+    const readLineCallback = function inputParser(inputString) {
       input = inputString.trim().split('');
-    }
+    };
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', inputParser);
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', readLineCallback);
     MissionUtils.Console.close();
 
     if (!App.isValidAnswerValue(input)) {
@@ -131,11 +131,11 @@ class App {
 
   static getGameEndStatus() {
     let input;
-    function inputParser(inputString) {
+    const readLineCallback = function inputParser(inputString) {
       input = Number(inputString.trim());
-    }
+    };
 
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', inputParser);
+    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', readLineCallback);
 
     if (input === 1) return false;
     if (input === 2) return true;
