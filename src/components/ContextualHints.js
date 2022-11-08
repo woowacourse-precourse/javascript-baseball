@@ -1,7 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class ContextualHints {
-  constructor(computerNum, playerNum) {
+  constructor(computerNum, playerNum, GivePlayerHint) {
     this.computerNum = computerNum;
     this.playerNum = playerNum;
     this.NumOfSamePosition = playerNum
@@ -11,6 +11,9 @@ class ContextualHints {
     this.ONE_STRIKE = 1;
     this.TWO_STRIKE = 2;
     this.THREE_STRIKE = 3;
+    this.RESTART = "1";
+    this.GAVE_OVER = "2";
+    this.GivePlayerHint = GivePlayerHint;
   }
 
   HowManyEqualNum() {
@@ -20,9 +23,28 @@ class ContextualHints {
     return isSame.filter((value) => Boolean(value)).length;
   }
 
+  gameEnd() {
+    MissionUtils.Console.readLine(
+      "3개의 숫자를 모두 맞히셨습니다. 게임 종료 \n" +
+        "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+      (answer) => {
+        console.log(answer);
+        if (answer === this.RESTART) {
+          const givePlayerHint = new this.GivePlayerHint();
+          givePlayerHint.returnHint();
+        }
+        if (answer === this.GAVE_OVER) {
+          MissionUtils.Console.print("게임 종료");
+          MissionUtils.Console.close();
+        }
+        throw "잘못된 값을 입력하여 게임이 종료됩니다.";
+      }
+    );
+  }
+
   getContextualHints() {
     if (this.NumOfSamePosition === this.NO_STRIKE) {
-      switch (this.HowManyEqualNum(this.NumOfSamePosition, this.computerNum)) {
+      switch (this.HowManyEqualNum()) {
         case 0:
           MissionUtils.Console.print("낫싱");
           break;
@@ -38,10 +60,7 @@ class ContextualHints {
       }
     }
     if (this.NumOfSamePosition === this.ONE_STRIKE) {
-      switch (
-        this.HowManyEqualNum(this.NumOfSamePosition, this.computerNum) -
-        this.ONE_STRIKE
-      ) {
+      switch (this.HowManyEqualNum() - this.ONE_STRIKE) {
         case 0:
           MissionUtils.Console.print("1스트라이크");
           break;
@@ -58,7 +77,7 @@ class ContextualHints {
     }
     if (this.NumOfSamePosition === this.THREE_STRIKE) {
       MissionUtils.Console.print("3스트라이크");
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      this.gameEnd();
     }
   }
 }

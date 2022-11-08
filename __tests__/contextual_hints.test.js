@@ -27,6 +27,11 @@ describe("contextualHint 확인", () => {
       expect(contextualHints.TWO_STRIKE).toBe(2);
       expect(contextualHints.THREE_STRIKE).toBe(3);
     });
+
+    it("RESTART = '1' / this.GAVE_OVER = '2'", () => {
+      expect(contextualHints.RESTART).toBe("1");
+      expect(contextualHints.GAVE_OVER).toBe("2");
+    });
   });
 
   describe("check HowMnayEqualNum Func ( 0스트라이크, 1스트라이크 때만 사용)", () => {
@@ -40,7 +45,13 @@ describe("contextualHint 확인", () => {
     });
   });
 
-  describe("checkk getContextualHints Func", () => {
+  describe("check getContextualHints Func", () => {
+    it("낫싱", () => {
+      contextualHints = new ContextualHints([7, 8, 1], "542");
+      contextualHints.getContextualHints();
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("낫싱"));
+    });
+
     it("낫싱", () => {
       contextualHints = new ContextualHints([7, 8, 1], "542");
       contextualHints.getContextualHints();
@@ -68,6 +79,33 @@ describe("contextualHint 확인", () => {
       expect(logSpy).toHaveBeenCalledWith(
         expect.stringContaining("3스트라이크")
       );
+    });
+  });
+
+  describe("check gameEnd", () => {
+    const mockQuestions = (answers) => {
+      MissionUtils.Console.readLine = jest.fn();
+      answers.reduce((acc, input) => {
+        return acc.mockImplementationOnce((question, callback) => {
+          callback(input);
+        });
+      }, MissionUtils.Console.readLine);
+    };
+
+    it("플레이어가 잘못된 값을 입력했을 때 ", () => {
+      const answers = ["3"];
+      mockQuestions(answers);
+      expect(() => {
+        contextualHints.gameEnd();
+      }).toThrow();
+    });
+
+    it("플레이어가 올바른 값을 입력했을 때", () => {
+      const answers = ["1"];
+      mockQuestions(answers);
+      expect(() => {
+        contextualHints.gameEnd();
+      }).toBeTruthy();
     });
   });
 });
