@@ -47,9 +47,15 @@ describe('기능 테스트', () => {
 
   test('입력 값이 3글자인지 확인', () => {
     const input = '123';
-
     const CHECKED_NUM_LENGTH = INPUT_CHECK.checkNumLength(input);
 
     expect(CHECKED_NUM_LENGTH).toBeTruthy();
+  });
+
+  test('입력 값이 1~9 사이의 숫자인지 확인', () => {
+    const [input1, input2, input3] = ['12a', '190', '179'];  // input3만 true
+    const CHECKED_IS_NUMBER = INPUT_CHECK.checkIsNumber(input3);
+
+    expect(CHECKED_IS_NUMBER).toBeTruthy();
   });
 });
