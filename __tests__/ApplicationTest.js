@@ -54,7 +54,7 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
-  test('예외 테스트 2', () => {
+  test('예외 테스트 특수문자', () => {
     const randoms = [1, 2, 3];
     const answers = ['!23'];
 
@@ -67,7 +67,7 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
-  test('예외 테스트 3', () => {
+  test('예외 테스트 공백', () => {
     const randoms = [2, 4, 8];
     const answers = [' 23'];
 
@@ -80,7 +80,7 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
-  test('예외 테스트', () => {
+  test('예외 테스트 중복', () => {
     const randoms = [1, 3, 5];
     const answers = ['122'];
 
