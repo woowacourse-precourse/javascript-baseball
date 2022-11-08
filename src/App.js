@@ -23,6 +23,20 @@ class App {
     return [...computerNumber];
   }
 
+  calcHit(computerNumber, userGuess) {
+    return userGuess.split('').map(Number).reduce((acc, curr, idx) => {
+      if (curr === computerNumber[idx]) {
+        acc.strike += 1;
+        return acc;
+      }
+      if (computerNumber.indexOf(curr) > -1) {
+        acc.ball += 1;
+        return acc;
+      }
+      return acc;
+    }, { strike: 0, ball: 0 });
+  }
+
   isValidGuess(guessNumber) {
     if (guessNumber.length !== 3) {
       return false;
