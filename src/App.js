@@ -34,7 +34,7 @@ class App {
       assertRange: (input) => {
         const inputArray = [...input];
         inputArray.map((number) => {
-          return +number > 0 && +number < 10;
+          return +number >= firstRange && +number <= lastRange;
         });
       },
     };
