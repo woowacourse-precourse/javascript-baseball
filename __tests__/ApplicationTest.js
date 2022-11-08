@@ -133,3 +133,21 @@ describe("isValidInput(): 사용자 입력이 유효하지 않으면 에러 발�
     });
   });
 });
+
+describe("Message 출력 테스트", () => {
+  test("handleSuccess()", () => {
+    const logSpy = getLogSpy();
+    const app = new App();
+    app.handleSuccess();
+
+    expect(logSpy).toHaveBeenCalledWith("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  });
+
+  test("exit()", () => {
+    const logSpy = getLogSpy();
+    const app = new App();
+    app.exit();
+
+    expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 종료합니다.");
+  });
+});
