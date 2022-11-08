@@ -22,4 +22,4 @@ function CompareNumber(computerNumber, userNumber) {
   return [strike, ball, nothing];
 }
 
-module.exports.CompareNumber;
+module.exports = CompareNumber;

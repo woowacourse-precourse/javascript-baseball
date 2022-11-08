@@ -1,19 +1,25 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const InputValidation = require('./utils/InputValidation');
+const CompareNumber = require('./utils/CompareNumber');
 
 class App {
   constructor() {
+    this.InputValidation = new InputValidation();
     this.printGreeting();
   }
 
   printGreeting() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.getUserNumber();
   }
 
   makeRandomNumber() {
     let randomNumSet = new Set();
-    while (3) {
+    while (true) {
       randomNumSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
+      if (randomNumSet.size === 3) {
+        break;
+      }
     }
     return Array.from(randomNumSet);
   }
@@ -21,16 +27,19 @@ class App {
   getUserNumber() {
     let userNumber = [];
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
-      if (InputValidation.isValidInput(answer)) {
+      if (this.InputValidation.isValidInput(answer)) {
         userNumber = answer.split('');
-        //게임 시작하는 메서드 호출
-      } else {
-        MissionUtils.Console.print('오류로 인하여 게임을 종료합니다.');
+        this.printResult(this.makeRandomNumber(), userNumber);
       }
     });
   }
 
-  play() {}
+  printResult(computerNumber, userNumber) {
+    const [strike, ball, nothing] = CompareNumber(computerNumber, userNumber);
+    console.log(strike, ball, nothing);
+  }
 }
+
+new App();
 
 module.exports = App;
