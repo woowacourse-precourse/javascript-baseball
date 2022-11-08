@@ -63,67 +63,45 @@ class App {
   }
 
   result() {
-    this.threeStrikeCheck();
-    this.nothingCheck();
-    this.ballCheck();
-    this.strikeCheck();
-    this.strikeAndBallCheck();
+    const isThreeStrike = this.strikeCount === 3;
+    const isNoting = this.strikeCount === 0 && this.ballCount === 0;
+    const isBall = this.strikeCount === 0 && this.ballCount !== 0;
+    const isStrike =
+      this.strikeCount !== 0 && this.ballCount === 0 && this.strikeCount !== 3;
+    const isStrikeAndBall =
+      this.ballCount !== 0 && this.strikeCount > 0 && this.strikeCount < 3;
+    if (isThreeStrike) return this.threeStrikePrint();
+    if (isNoting) return this.nothingPrint();
+    if (isBall) return this.ballPrint();
+    if (isStrike) return this.strikePrint();
+    if (isStrikeAndBall) return this.strikeAndBallPrint();
+    return false;
   }
 
   threeStrikePrint() {
-    const isThreeStrike = this.strikeCount === 3;
-
-    if (isThreeStrike) {
-      Console.print('3스트라이크');
-      Console.print(GAME_MESSAGE.GUESS_ALL_NUMBER);
-      return this.askRestartOrExit();
-    }
-    return false;
+    Console.print('3스트라이크');
+    Console.print(GAME_MESSAGE.GUESS_ALL_NUMBER);
+    return this.askRestartOrExit();
   }
 
   nothingPrint() {
-    const isNoting = this.strikeCount === 0 && this.ballCount === 0;
-
-    if (isNoting) {
-      Console.print('낫싱');
-      return this.getUserNumber();
-    }
-    return false;
+    Console.print('낫싱');
+    return this.getUserNumber();
   }
 
   ballPrint() {
-    const isBall = this.strikeCount === 0 && this.ballCount !== 0;
-
-    if (isBall) {
-      Console.print(`${this.ballCount}볼`);
-      return this.getUserNumber();
-    }
-    return false;
+    Console.print(`${this.ballCount}볼`);
+    return this.getUserNumber();
   }
 
   strikePrint() {
-    const isStrike =
-      this.strikeCount !== 0 && this.ballCount === 0 && this.strikeCount !== 3;
-
-    if (isStrike) {
-      Console.print(`${this.strikeCount}스트라이크`);
-      return this.getUserNumber();
-    }
-    return false;
+    Console.print(`${this.strikeCount}스트라이크`);
+    return this.getUserNumber();
   }
 
   strikeAndBallPrint() {
-    const isStrikeAndBall =
-      this.ballCount !== 0 &&
-      this.strikeCount !== 0 &&
-      this.strikeCount > 0 &&
-      this.strikeCount < 3;
-
-    if (isStrikeAndBall) {
-      Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
-      return this.getUserNumber();
-    }
-    return false;
+    Console.print(`${this.ballCount}볼 ${this.strikeCount}스트라이크`);
+    return this.getUserNumber();
   }
 
   askRestartOrExit() {
