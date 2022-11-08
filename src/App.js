@@ -20,11 +20,6 @@ class App {
     this.startGame();
   }
 
-  async startGame() {
-    await this.getInputNum();
-    this.getResult();
-  }
-
   makeRandomNums() {
     const randomNums = [];
     while (randomNums.length < 3) {
@@ -32,15 +27,12 @@ class App {
       if (!randomNums.includes(num)) randomNums.push(num);
     }
     this.randomNums = randomNums;
-    // this.randomNums = [1, 2, 3];
   }
 
-  getInputNum() {
-    return new Promise((resolve) => {
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-        this.inputNums = this.parseInput(input);
-        resolve();
-      });
+  startGame() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+      this.inputNums = this.parseInput(input);
+      this.getResult();
     });
   }
 
@@ -52,10 +44,12 @@ class App {
 
   static checkInputException(input) {
     input.forEach((num) => {
-      if (!App.isInRangeNum(num)) throw 'Error: Check range of input number';
+      if (!App.isInRangeNum(num))
+        throw new Error('Check range of input number');
     });
-    if (input.length !== 3) throw 'Error: Check input length';
-    if (!App.isNotDuplicatedNum(input)) throw 'Error: Check duplicated number';
+    if (input.length !== 3) throw new Error('Check input length');
+    if (!App.isNotDuplicatedNum(input))
+      throw new Error('Check duplicated number');
   }
 
   static isInRangeNum(num) {
@@ -105,17 +99,17 @@ class App {
 
   printResult() {
     const count = this.gameResult;
-    let result = '';
     if (this.gameResult.strike === 3) {
       MissionUtils.Console.print('3스트라이크');
-      result = '3개의 숫자를 모두 맞히셨습니다! 게임종료';
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     } else if (count.ball === 0 && count.strike === 0) {
-      result = '낫싱';
+      MissionUtils.Console.print('낫싱');
     } else {
-      result = App.caseOfBall(count.ball);
+      let result = App.caseOfBall(count.ball);
       result += App.caseofStrike(count.strike);
+      // if (result === '') throw new Error('Invalid input');
+      MissionUtils.Console.print(result);
     }
-    MissionUtils.Console.print(result);
   }
 
   static caseOfBall(ball) {
@@ -141,8 +135,7 @@ class App {
   initAll() {
     this.randomNums = [];
     this.inputNums = [];
-    this.gameResult.ball = 0;
-    this.gameResult.strike = 0;
+    this.initGameResult();
   }
 
   initGameResult() {
@@ -160,12 +153,12 @@ class App {
           this.startGame();
         } else if (input === '2') {
           MissionUtils.Console.close();
-        } else throw 'Error: Invalid Input';
+        } else throw new Error('Invalid Input');
       }
     );
   }
 }
 
-const app = new App();
-app.play();
-// module.exports = App;
+// const app = new App();
+// app.play();
+module.exports = App;
