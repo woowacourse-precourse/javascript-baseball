@@ -9,7 +9,7 @@ class App {
 
      if (strike_sum==3){
       MissionUtils.Console.print("3스트라이크");
-      //MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");  
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");  
       pass = true;     
       }
 
@@ -60,8 +60,9 @@ class App {
   }
 
   playoneround(){
-    //세 가지 숫자 만들기
     const MissionUtils = require("@woowacourse/mission-utils");
+    
+    //세 가지 숫자 만들기
     var Numbers = [];
     for (var i =0;i<3;i++){
       var number = MissionUtils.Random.pickNumberInRange();
@@ -78,6 +79,7 @@ class App {
         //if (x.toString().split(",").join("").length!=3) throw 'length error';
         answer = x.split(",");
       });
+      answer = answer.toString().split(",");
       answer = answer.join("");
       if (answer.length != 3) throw 'length error'
       //계산하기
@@ -92,23 +94,23 @@ class App {
   
   play() {
     const MissionUtils = require("@woowacourse/mission-utils");
-   // MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-   
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    
     var flag = false;
     while(flag== false){
       this.playoneround();
       MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (x) =>{
-        if (x == 1){
+        if (parseInt(x) == 1){
        //   App.play();
        //   MissionUtils.Console.print("again");
         }        
-        else if (x == 2){
+        else if (parseInt(x) == 2){
           flag = true;
         }
-        else throw 'enter 1 or two'
+        else throw 'enter 1 or 2'
       });
    }
-   MissionUtils.Console.print("게임 종료");
+   //MissionUtils.Console.print("게임 종료");
   }
 }
 module.exports = App;
