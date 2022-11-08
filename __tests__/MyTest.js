@@ -91,3 +91,83 @@ describe('숫자 야구 게임 실행 테스트', () => {
     });
   });
 });
+
+describe('입력값 예외 테스트', () => {
+  test('중복 숫자가 있는지 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['223'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('빈칸이 포함된 경우 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = [''];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('한글자만 입력한 경우 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['1'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('특수문자를 입력 했을 경우 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['*@/'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('한글을 입력했을 경우 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['가나다'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('숫자 0이 들어간 경우 테스트', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['012'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+});
