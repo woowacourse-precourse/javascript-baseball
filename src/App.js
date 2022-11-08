@@ -49,6 +49,25 @@ class App {
     Result(answer,strike,ball);
     return;
   }
+
+  Result(answer,strike,ball){
+    if(strike == 0 && ball == 0){
+      MissionUtils.Console.print("낫싱");
+      InputNum(answer);
+      return;
+    }
+    else if(strike == 3){
+      End();
+      return;
+    }
+    const checkStrike = strike == 0 ? "":`${strike}스트라이크`;
+    const checkBall = ball == 0 ? "" : `${ball}볼`;
+
+    MissionUtils.Console.print(checkBall + checkStrike);
+    InputNum(answer);
+
+    return;
+  }
 }
 // module.exports = App;
 
