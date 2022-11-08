@@ -53,6 +53,7 @@ const isValidNumber = (userInputNumber, userInputNumberArray) => {
   if (userInputNumberArray[0] === userInputNumberArray[1]) return false;
   if (userInputNumberArray[0] === userInputNumberArray[2]) return false;
   if (userInputNumberArray[1] === userInputNumberArray[2]) return false;
+  if (userInputNumberArray.includes(0)) return false;
 
   return true;
 };
