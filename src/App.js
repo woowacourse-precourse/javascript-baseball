@@ -13,10 +13,7 @@ class App {
       exception(user);
 
       let ball_strike_result = [0, 0];
-      for (let i = 0; i < 3; i++){
-        ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
-        ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
-      }
+      ball_strike_result = ball_strike_result_loop(ball_strike_result, computer, user);
 
       strike = notthing(ball_strike_result);
     }
@@ -116,6 +113,14 @@ function exception(user){
   if (user == 3){
     throw "is not a number from 1 to 9";
   }
+}
+
+function ball_strike_result_loop(ball_strike_result, computer, user) {
+  for (let i = 0; i < 3; i++){
+    ball_strike_result[0] += ball_and_strike(computer, to_array(user), i)[0];
+    ball_strike_result[1] += ball_and_strike(computer, to_array(user), i)[1];
+  }
+  return ball_strike_result;
 }
 
 module.exports = App;
