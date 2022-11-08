@@ -12,9 +12,15 @@ class App {
   }
 
   userPick() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요.", (input) => {
-      if (!this.checkUserNum(input)) {
+    MissionUtils.Console.readLine("숫자를 입력해주세요.", (userInput) => {
+      if (!this.checkUserNum(userInput)) {
         throw new Error();
+      }
+      const result = this.baseballGame(computer, userInput);
+      if (!result) {
+        this.userPick(computer);
+      } else if (result) {
+        this.checkReplay();
       }
     });
   }
