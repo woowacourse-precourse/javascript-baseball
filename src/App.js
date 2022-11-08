@@ -10,9 +10,14 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    let countForTest = 0;
     while (this.isGameOn) {
       this.guessBaseBallNumber();
-      this.isGameOn = false;
+
+      countForTest += 1;
+      if (countForTest > 10) {
+        break;
+      }
     }
   }
 
@@ -36,6 +41,11 @@ class App {
     [numberOfBalls, numberOfStrikes] = this.readLineNumberOfPlayer();
 
     this.printResultOfGuess(numberOfBalls, numberOfStrikes);
+    const isfinished = this.isCorrect(numberOfStrikes);
+    if (isfinished) {
+      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      this.isGameOn = false;
+    }
   }
 
   readLineNumberOfPlayer() {
@@ -99,6 +109,14 @@ class App {
     }
     MissionUtils.Console.print(`낫싱`);
     return;
+  }
+
+  isCorrect(numberOfStrikes) {
+    const numberOfStrikesToBeFinished = 3;
+    if (numberOfStrikes === numberOfStrikesToBeFinished) {
+      return true;
+    }
+    return false;
   }
 }
 
