@@ -63,6 +63,23 @@ class App {
     }
   }
 
+  // 입력값과 랜덤값 비교
+  compareNumbers(input) {
+    const inputArr = input.split("");
+    let strike = 0;
+    let ball = 0;
+  
+    inputArr.forEach((cur, idx) => {
+      if (idx === this.randomNumbers.indexOf(cur)) {
+        strike++;
+      } else if (this.randomNumbers.includes(cur)) {
+        ball++;
+      }
+    });
+  
+    return { strike, ball };
+  }
+
   // 게임 재시작 여부 확인
   restart() {
     const answer = MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n", (input) => {
