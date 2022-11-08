@@ -60,5 +60,17 @@ describe("숫자 야구 게임", () => {
             app.play();
         }).toThrow();
     });
+        test("예외처리 4 공백 및 기호", () => {
+        const randoms = [1, 3, 5];
+        const answers = ["^ ★"];
+
+        mockRandoms(randoms);
+        mockQuestions(answers);
+
+        expect(() => {
+            const app = new App();
+            app.play();
+        }).toThrow();
+    });
 
 });
