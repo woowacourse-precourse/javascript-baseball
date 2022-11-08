@@ -41,6 +41,7 @@ class Game {
 
     const ball = this.countBall();
     const strike = this.countStrike();
+    this.utilsIo.print(this.showResult(ball, strike));
   }
 
   countBall(){
@@ -62,6 +63,12 @@ class Game {
       }
     })
     return strike;
+  }
+  showResult(ball, strike){
+    if(ball == 0 && strike == 0) return RESULT.NOTHING;
+    if(ball > 0 && strike == 0) return `${ball}${RESULT.BALL}`;
+    if(ball == 0 && strike > 0) return `${strike}${RESULT.STRIKE}`;
+    if(ball > 0 && strike > 0) return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
   }
 }
 
