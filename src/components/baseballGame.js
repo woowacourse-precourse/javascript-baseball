@@ -114,8 +114,8 @@ class BaseballGame{
         });
     }
     
-    validateInputRestartOrEnd() {
-        if(inputNumber !== '1' && inputNumber !== '2'){
+    validateInputRestartOrEnd(number) {
+        if(number !== '1' && number !== '2'){
             throw new Error(ERROR.OPTION);
         }
     }
