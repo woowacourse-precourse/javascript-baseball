@@ -1,10 +1,17 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE, RESULT, RESTART_INPUT } = require("./constants/constants");
+const { getRandomNumber } = require("./utils/getRandomNumber");
 const { checkRestartInput } = require("./utils/checkInput");
 
 class App {
   play() {
     Console.print(MESSAGE.START);
+    this.gameStart();
+  }
+
+  gameStart() {
+    const computerNumber = getRandomNumber(3);
+    this.getUserNumber(computerNumber);
   }
 
   getStrikeAndBallNumber(computerNumber, userInput) {
