@@ -101,6 +101,9 @@ class App {
     if (inputRestartNumber === '2') {
       MissionUtils.Console.close();
     }
+    if (inputRestartNumber === !'1' && !'2') {
+      throw Error('1 또는 2를 입력하세요.');
+    }
   }
 
   play() {
