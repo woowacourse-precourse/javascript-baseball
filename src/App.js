@@ -64,7 +64,19 @@ class App {
         this.determineResult(num);
     });
     }
-    
+    if (countStrike === 3) {
+      MissionUtils.Console.print("3스트라이크 3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요. ", (response) => {
+        if (response == 1) {
+          const app2 = new App;
+          app2.play();
+        }
+        if (response === 2) {
+         server.close();
+         throw new Error;
+        }
+      });
+    } 
     }    
   }
 }
