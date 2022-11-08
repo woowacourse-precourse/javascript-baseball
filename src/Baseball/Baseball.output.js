@@ -12,7 +12,7 @@ class BaseballOutput {
   static getNumber() {
     let result = '';
 
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', answer => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       result = answer;
       MissionUtils.Console.close();
     });
@@ -41,7 +41,7 @@ class BaseballOutput {
 
     MissionUtils.Console.readLine(
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      answer => {
+      (answer) => {
         result = answer;
         MissionUtils.Console.close();
       },
