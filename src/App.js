@@ -1,38 +1,50 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
-  compare(computerNum, userNum) {
-    let i = 0;
-    let strike = 0;
-    let ball = 0;
   
-    //input 값 배열에 저장
-    const userNumArr = [];
-    userNumArr.push(userNum);
-  
-    //스트라이크
-    for (i = 0; i < 3; i++) {
-      if (computerNum[i] == userNumArr[i]) {
-        strike += 1;
+  getInputNumber() {
+    let userNum;
+    MissionUtils.Cosole.readLine("숫자를 입력해주세요 :", (number) => {
+      userNum = String(number).split("");
+    });
+  }
+
+  getComputerNumber() {
+    const computerNum = [];
+    while (computerNum.length < 3) { 
+      let num = MissionUtils.Random.pickNumberInRange(1, 9);
+      if (!computerNum.includes(num)) {
+        computerNum.push(num);ㅇ
       }
-      return strike;
     }
-    
-    const intersect = computerNum.filter(x => userNumArr(x));
-    let countIntersect = intersect.length;
-    ball = countIntersect - strike;
   }
 
   play() {
-    const computerNum = MissionUtils.Random.pickUniqueNumbersInRange([1, 9, 3]);
-
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    
+  }
 
-    let user_num;
-    MissionUtils.Cosole.readLine("숫자를 입력해주세요 :", (number) => {
-      userNum = number;
-      console.print(userNum);
-    });
+  checkStrike(computerNum, userNum) {
+    let strikeScore = 0;
+
+    for (let i = 0; i < 3; i++) {
+      if (computerNum[i] == userNum[i]) {
+        strikeScore += 1;
+      }
+      return strikeScore;
+    }
+  }
+
+  checkBall(computerNum, userNum) {
+    let ballScore = 0;
+
+    const intersect = computerNum.filter(x => userNum(x));
+    let countIntersect = intersect.length;
+    ballScore = countIntersect - strikeScore;
+  }
+
+  while (computerNum == userNum) {
+    
   }
 }
 
