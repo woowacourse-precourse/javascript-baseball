@@ -22,6 +22,15 @@ const startGame = (computerNumber) => {
   });
 };
 
+const userInputCheck = (userInput) => {
+  if (!NUMBER_INPUT_CHECK.test(Number(userInput))) {
+    throw new Error(ERROR_MESSAGE);
+  }
+  if (new Set(userInput).size !== 3) {
+    throw new Error(ERROR_MESSAGE);
+  }
+};
+
 const getComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
