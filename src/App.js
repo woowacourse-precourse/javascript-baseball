@@ -7,6 +7,7 @@ class App {
     this.isPlayingNow = false;
     this.computerNumberList = [];
     this.playerNumberList = [];
+    this.roundResult = { "ball" : 0, "strike" :  0 };
   }
 
   getComputerNumberList() {
@@ -21,6 +22,7 @@ class App {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       if (this.isValidRandomNumberList(answer)) {
         this.playerNumberList = answer;
+        this.comparePlayerNumberWithComputerNumber();
       } else {
         throw new Error("입력한 숫자가 유효하지 않습니다.");
       }
@@ -30,6 +32,34 @@ class App {
   isValidRandomNumberList(numberList) {
     var regex = new RegExp(`^\\d{${NUMBER_LENGTH}}$`);
     return regex.test(String(numberList)) && !(/([0-9])\1/).test(String(numberList));
+  }
+
+  comparePlayerNumberWithComputerNumber() {
+    this.roundResult['ball'] = this.countBall();
+    this.roundResult['strike'] = this.countStrike();
+  }
+
+  countBall() {
+    let ball = 0;
+    for(let idx = 0; idx < NUMBER_LENGTH; idx++) {
+      if (
+        this.playerNumberList[idx] != this.computerNumberList[idx] 
+        && this.computerNumberList.includes(Number(this.playerNumberList[idx]))
+      ) {
+        ball++;
+      }
+    }
+    return ball;
+  }
+
+  countStrike() {
+    let strike = 0;
+    for(let idx = 0; idx < NUMBER_LENGTH; idx++) {
+      if (this.playerNumberList[idx] == this.computerNumberList[idx]) {
+        strike++;
+      }
+    }
+    return strike;
   }
 
   roundStart() {
