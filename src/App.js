@@ -122,8 +122,7 @@ class App {
             MissionUtils.Console.close();
             break;
           default:
-            this.printMsg("1 또는 2를 입력해주세요.");
-            this.askRematchOrExit();
+            this.toThrow("1 또는 2를 입력해야합니다.");
         }
       }
     );
