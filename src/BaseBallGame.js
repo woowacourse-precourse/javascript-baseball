@@ -44,6 +44,22 @@ class BaseBallGame {
     this.#checkPlayerWin();
   }
 
+  #isStrike(input, computer, index) {
+    return input === computer[index];
+  }
+
+  #isBall(input, computer, index) {
+    return !this.#isStrike(input, computer, index) && computer.includes(input);
+  }
+
+  #countStrike(input, computer, index) {
+    if (this.#isStrike(input, computer, index)) this.#strikeCount += 1;
+  }
+
+  #countBall(input, computer, index) {
+    if (this.#isBall(input, computer, index)) this.#ballCount += 1;
+  }
+
   getResult(plyaerInput, randomNumbers) {
     this.playerInputNumber = plyaerInput;
     this.isValidGameInput(plyaerInput);
