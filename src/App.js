@@ -9,6 +9,10 @@ class App {
 
   play() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
+    this.startGame();
+  }
+
+  startGame() {
     this.answerNumbers = this.getRandomNumbers();
     this.getUserInput();
   }
@@ -38,17 +42,12 @@ class App {
 
   checkRestart(userInput) {
     if (userInput === SETTING.RESTART) {
-      this.restart();
+      this.startGame();
     } else if (userInput === SETTING.GAME_CLOSE) {
       this.closeGame();
     } else {
       throw new Error(`${MESSAGE.ERROR.VALUE}\n${MESSAGE.GAME_CLOSE}`);
     }
-  }
-
-  restart() {
-    this.answerNumbers = this.getRandomNumbers();
-    this.getUserInput();
   }
 
   closeGame() {
