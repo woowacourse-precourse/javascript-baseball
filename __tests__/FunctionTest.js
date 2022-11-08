@@ -52,7 +52,7 @@ describe("기능 테스트", () => {
 
     expect(() => {
       const app = new App();
-      app.requireInputRandomNumber();
+      app.handleInputAnswer();
     }).toThrow();
   });
 

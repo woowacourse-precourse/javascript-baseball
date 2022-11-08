@@ -4,7 +4,7 @@ const { Console, Random } = MissionUtils;
 class App {
   play() {
     this.printStartGame();
-    this.requireInputRandomNumber(this.createRandomNumber());
+    this.handleInputAnswer(this.createRandomNumber());
   }
 
   printStartGame() {
@@ -26,7 +26,7 @@ class App {
     return randomNumberList;
   }
 
-  requireInputRandomNumber(randomNumber) {
+  handleInputAnswer(randomNumber) {
     Console.readLine("숫자를 입력해주세요 : ", (answer) => {
       this.isRandomInputErrorCase(answer);
 
@@ -39,7 +39,7 @@ class App {
           "",
           (input) => {
             if (this.checkInputRestartExit(input)) {
-              this.requireInputRandomNumber(this.createRandomNumber());
+              this.handleInputAnswer(this.createRandomNumber());
             } else {
               Console.print("게임 종료");
               Console.close();
@@ -48,7 +48,7 @@ class App {
         );
       } else {
         Console.print(this.resultBaseballRule(randomNumber, answer));
-        this.requireInputRandomNumber(randomNumber);
+        this.handleInputAnswer(randomNumber);
       }
     });
   }
