@@ -57,6 +57,7 @@
     - checkIsNum()
     - checkDuplicate()
     - checkIncludesZero()
+    - checkEmpty()
   - print()
 
 3. Count.js
