@@ -35,6 +35,43 @@ function isItValid(inputNum) {
   }
 }
 
+let count = 0;
+
+function isItRight(computerNum, inputNum) {
+  if (computerNum == inputNum) {
+    console.log("3스트라이크");
+    console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
+    count++;
+  }
+
+  let ballCount = 0;
+  let strikeCount = 0;
+  let information = [];
+  let computerNumArr = computerNum.toString().trim().split('').map(Number);
+  let inputNumArr = inputNum.toString().trim().split('').map(Number);
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (computerNumArr[i].includes(inputNumArr[j])) {
+        ballCount++;
+      }
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    if (computerNumArr[i].includes(inputNumArr[i])) {
+      strikeCount++;
+    }
+  }
+  if (ballCount > 0) {
+    information.push(`${ballCount}볼`);
+  }
+  if (strikeCount > 0) {
+    information.push(`${strikeCount}스트라이크`);
+  }
+  information = information.join(' ');
+  console.log(information);
+}
+
 starGame();
 let computerNum = makeRandomNum();
 let inputNum = 0;
@@ -44,9 +81,10 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("숫자를 입력해주세요 : ", (input) => {
+  rl.question("숫자를 입력해주세요 : ", (input) => {
   inputNum = input;
   isItValid(inputNum);
+  isItRight(computerNum, inputNum);
   rl.close();
 });
 
