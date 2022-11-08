@@ -33,9 +33,16 @@ class App {
     this.resetHint();
 
     this.input.forEach((digitNumber, index) => {
-      if (!this.answer.includes(digitNumber)) this.hint.nothing += 1;
-      else if (this.answer[index] === digitNumber) this.hint.strike += 1;
-      else if (this.answer[index] !== digitNumber) this.hint.ball += 1;
+      if (!this.answer.includes(digitNumber)) {
+        this.hint.nothing += 1;
+        return;
+      }
+      if (this.answer[index] === digitNumber) {
+        this.hint.strike += 1;
+        return;
+      }
+
+      this.hint.ball += 1;
     });
 
     this.printHint();
