@@ -15,8 +15,16 @@ function addUniqueRandomDigit(gameNumber, digit) {
 }
 
 class App {
+  setGameNumber() {
+    let gameNumber = [];
+    while (gameNumber.length < 3) {
+      const digit = generateRandomDigit();
+      addUniqueRandomDigit(gameNumber, digit);
+    }
+    return gameNumber;
+  }
+
   play() {}
 }
 
-module.exports = App;
-module.exports = { generateRandomDigit, isExist, addUniqueRandomDigit };
+module.exports = { generateRandomDigit, isExist, addUniqueRandomDigit, App };
