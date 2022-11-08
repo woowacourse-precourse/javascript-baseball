@@ -115,12 +115,20 @@ class App {
     this.userNumber = input.split("").map(Number);
     this.isPlaying = true;
   }
-
   restart(input) {
     const COMMANDS = {
       1: this.newGame.bind(this),
       2: this.exitGame.bind(this),
     };
+
+    // TODO: 검증 부분 분리
+    // TODO: 에러 메시지 정리
+
+    if (hasWhiteSpace(input)) {
+      throw new Error(
+        `${this.MESSAGES.ERROR.INSERT}\n입력에 공백이 있습니다.${this.MESSAGES.ERROR.END}`
+      );
+    }
 
     if (!COMMANDS[input]) {
       throw new Error(
