@@ -16,17 +16,17 @@ class App {
 
     gameStart() {
         this.computer.setRandomNumber();
-        this.judge();
+        this.pitching();
     }
 
-    judge() {
+    pitching() {
         Console.readLine(NOTICE.NUMBER_QUESTION, (userInput) => {
             this.user.setNumberArray(userInput);
-            this.judgePitch();
+            this.judgePitching();
         });
     }
 
-    judgePitch() {
+    judgePitching() {
         const computerNumber = this.computer.number;
         const userGuess = this.user.guess;
         const strikeCount = this.countStrike(computerNumber, userGuess);
@@ -45,7 +45,7 @@ class App {
     printResult(strikeCount, ballCount) {
         if (this.out(strikeCount, ballCount)) {
             Console.print(HINT.OUT);
-            return this.judge();
+            return this.pitching();
         }
         if (this.strikeOut(strikeCount)) {
             Console.print(strikeCount + HINT.STRIKE);
@@ -54,15 +54,15 @@ class App {
         }
         if (strikeCount === 0) {
             Console.print(ballCount + HINT.BALL);
-            return this.judge();
+            return this.pitching();
         }
         if (strikeCount - ballCount === 0) {
             Console.print(strikeCount + HINT.STRIKE);
-            return this.judge();
+            return this.pitching();
         }
         if (ballCount !== 0 && strikeCount !== 0) {
             Console.print(`${ballCount - strikeCount + HINT.BALL} ${strikeCount + HINT.STRIKE}`);
-            return this.judge();
+            return this.pitching();
         }
     }
     out(strikeCount, ballCount) {
