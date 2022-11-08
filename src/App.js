@@ -89,6 +89,23 @@ class App {
       this.makeUserNumbers(computerNumbers);
     }
   }
+
+  chooseRestartGame() {
+    MissionUtils.Console.print(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
+    );
+    MissionUtils.Console.readLine("", (input) => {
+      console.log(input);
+      if (input == 1) {
+        this.startGame();
+      } else if (input == 2) {
+        MissionUtils.Console.print("게임종료");
+        MissionUtils.Console.close();
+      } else {
+        throw new Error("1 또는 2가 입력되지 않았습니다.");
+      }
+    });
+  }
 }
 
 module.exports = App;
