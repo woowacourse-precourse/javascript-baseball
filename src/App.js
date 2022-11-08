@@ -27,8 +27,16 @@ class App {
         };
         return result;
     }
-}
 
+    // 3. 사용자 입력 받기
+    userInputValue(computerDefinedArr, ansResult) {
+        MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+            this.userInputValidate(userInput);
+            const compare = this.compare(userInput, computerDefinedArr, ansResult);
+            this.compareResultPrint(compare, computerDefinedArr);
+        });
+    }
+}
 const app = new App();
 app.play();
 
