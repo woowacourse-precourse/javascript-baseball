@@ -10,7 +10,7 @@ class App {
         doRestart = Restart;
       })
     } while (doRestart === '1');
-    MissionUtils.Console.close();
+    Console.close();
   }
 
   start(){

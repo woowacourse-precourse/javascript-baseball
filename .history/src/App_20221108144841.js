@@ -10,14 +10,14 @@ class App {
         doRestart = Restart;
       })
     } while (doRestart === '1');
-    MissionUtils.Console.close();
+    Console.close();
   }
 
   start(){
     let computerNumber;
     let status = 0;
 
-    Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 10, 3);
     do {
       MissionUtils.Console.readline("숫자를 입력해주세요 : ",(input)=>{

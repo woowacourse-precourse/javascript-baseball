@@ -5,12 +5,12 @@ class App {
     do {
       doRestart = 2;
 
-      this.start();
+      start();
       MissionUtils.Console.readline("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",(Restart)=>{
         doRestart = Restart;
       })
     } while (doRestart === '1');
-    MissionUtils.Console.close();
+    Console.close();
   }
 
   start(){
@@ -63,7 +63,7 @@ class App {
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;
