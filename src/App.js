@@ -27,7 +27,7 @@ class App {
 
   startGame() {
     this.generateAnswer();
-    this.processGuess();
+    this.inputGuess();
   }
 
   exitGame() {
@@ -48,19 +48,23 @@ class App {
     }
   }
 
-  processGuess() {
+  inputGuess() {
     MissionUtils.Console.readLine(MESSAGE.INPUT_GUESS, (input) => {
       this.guess = input;
-      this.checkGuessInput();
-      this.calculateBallCount();
-      this.printBallCount();
-      if (this.ballCount.strike === ANSWER_LENGTH) {
-        this.printGameEndMessage();
-        this.processGameEnd();
-        return;
-      }
       this.processGuess();
     });
+  }
+
+  processGuess() {
+    this.checkGuessInput();
+    this.calculateBallCount();
+    this.printBallCount();
+    if (this.ballCount.strike === ANSWER_LENGTH) {
+      this.printGameEndMessage();
+      this.inputGameEnd();
+      return;
+    }
+    this.inputGuess();
   }
 
   checkGuessInput() {
@@ -105,12 +109,16 @@ class App {
     MissionUtils.Console.print(MESSAGE.GAME_END);
   }
 
-  processGameEnd() {
+  inputGameEnd() {
     MissionUtils.Console.readLine(MESSAGE.INPUT_GAME_END, (input) => {
       this.gameEnd = input;
-      this.checkGameEndInput();
-      this.handleGameEnd();
+      this.processGameEnd();
     });
+  }
+
+  processGameEnd() {
+    this.checkGameEndInput();
+    this.handleGameEnd();
   }
 
   checkGameEndInput() {
