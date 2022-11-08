@@ -1,5 +1,9 @@
+const Functions = require("./components/Functions")
+
 class App {
-  play() {}
+  play() {
+    Functions.playGame();
+  }
 }
 
 module.exports = App;
