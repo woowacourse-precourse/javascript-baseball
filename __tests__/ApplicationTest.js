@@ -70,6 +70,32 @@ describe('숫자 야구 게임', () => {
     }).toThrow();
   });
 
+  test('예외 테스트: 숫자 0 입력', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['012'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test('예외 테스트: 겹치는 숫자 입력', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['112'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
   test('예외 테스트: 게임종료 때 1 또는 2 말고 다른 것 입력', () => {
     const randoms = [1, 3, 5, 5, 8, 9];
     const answers = ['246', '135', '3'];
