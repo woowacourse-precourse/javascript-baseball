@@ -38,6 +38,18 @@ function findStrike(gameNumber, guessNumber) {
   return strikes;
 }
 
+function findBall(gameNumber, guessNumber) {
+  let balls = 0;
+  guessNumber.forEach((digit) => {
+    if (
+      digit !== gameNumber[guessNumber.indexOf(digit)] &&
+      gameNumber.includes(digit)
+    )
+      balls++;
+  });
+  return balls;
+}
+
 class App {
   setGameNumber() {
     let gameNumber = [];
@@ -60,4 +72,5 @@ module.exports = {
   convertToNumberArray,
   isNothing,
   findStrike,
+  findBall,
 };
