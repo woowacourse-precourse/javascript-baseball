@@ -64,6 +64,10 @@ class App {
     const answerArr = [...this.answer];
     const userNumberArr = [...this.userNumber];
 
+    this.ball = 0;
+    this.strike = 0;
+    this.hitCount = 0;
+
     userNumberArr.forEach((number) => {
       if (answerArr.includes(number)) {
         this.hitCount += 1;
@@ -79,15 +83,31 @@ class App {
     this.ball = this.hitCount - this.strike;
   }
 
-  printResult() {}
+  printResult() {
+    if (this.strike === 3) return '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    else if (this.hitCount === 0) return '낫싱';
+    else if (this.ball === 0) return `${this.strike}스트라이크`;
+    else if (this.strike === 0) return `${this.ball}볼`;
+
+    return `${this.ball}볼 ${this.strike}스트라이크`;
+  }
 
   finishOrRestart() {}
 
   async play() {
+    let resultText = '';
+
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
-    this.userNumber = await this.getUserNumber();
+
     this.answer = this.getRandomNumber();
-    this.countHint();
+
+    while (resultText !== '3개의 숫자를 모두 맞히셨습니다! 게임 종료') {
+      this.userNumber = await this.getUserNumber();
+      this.countHint();
+      resultText = this.printResult();
+
+      MissionUtils.Console.print(resultText);
+    }
   }
 }
 
