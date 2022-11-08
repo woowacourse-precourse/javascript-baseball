@@ -23,6 +23,12 @@ function exception(userSet) {
   }
 }
 
+function pickedWrongChoice() {
+  Console.close();
+  throw "입력된 값이 유효하지 않습니다.";
+}
+
 module.exports = {
   exception,
+  pickedWrongChoice,
 };

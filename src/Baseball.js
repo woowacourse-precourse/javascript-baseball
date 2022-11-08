@@ -45,6 +45,7 @@ class Baseball {
       (input) => {
         if (input === "1") return this.restartGame();
         if (input === "2") return this.endGame();
+        pickedWrongChoice();
       }
     );
   }
