@@ -73,10 +73,15 @@ class App {
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
       answer => {
         if (this.InputValidation.isValidRestartInput(answer)) {
-          answer === '1' ? this.setGame() : '종료';
+          answer === '1' ? this.setGame() : this.printClosing();
         }
       },
     );
+  }
+
+  printClosing() {
+    MissionUtils.Console.print('게임을 완전히 종료합니다');
+    MissionUtils.Console.close();
   }
 }
 
