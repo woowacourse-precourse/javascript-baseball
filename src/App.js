@@ -1,20 +1,19 @@
 const { print, close, readLine, pickNumberInRange } = require("./Utils");
+const CountPrinter = require("./CountPrinter");
 const ExceptionCheck = require("./ExceptionCheck");
 const { GAME_MSG, BASEBALL_MSG } = require("./Message");
 const Counter = require("./Counter");
 const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH, RESTART_INPUT_NUM, END_INPUT_NUM } = require("./Condition");
 
 class App {
+  constructor() {
+    print(GAME_MSG.START);
+  }
 
   #computerNums;
   #userInputNums;
 
-  gamaStartAlram() {
-    print(GAME_MSG.START);
-  }
-
   play() {
-    this.gamaStartAlram();
     this.createRandomNum();
     this.getAnswer();
   }
@@ -24,7 +23,6 @@ class App {
     while (computerRandomNums.size < COMPUTER_NUM_LENGTH) {
       computerRandomNums.add(pickNumberInRange(MIN_UUM_RANGE, MAX_NUM_RANGE));
     }
-    print([...computerRandomNums]);
     return this.#computerNums = [...computerRandomNums].join('');
   }
 
@@ -51,42 +49,14 @@ class App {
 
   baseBall() {
     const count = new Counter();
+    const countPrint = new CountPrinter();
     const ball = count.ball(this.#userInputNums, this.#computerNums);
     const strike = count.strike(this.#userInputNums, this.#computerNums);
-    this.countPrinter(ball, strike);
+    countPrint.ofBaseball(ball, strike);
     if (strike === COMPUTER_NUM_LENGTH) {
       this.win();
     }
     this.getAnswer();
-  }
-
-  countPrinter(ball, strike) {
-    if (this.onlyStrike(ball, strike)) {
-      return print(`${strike}${BASEBALL_MSG.STRIKE}`);
-    }
-    if (this.onlyBall(ball, strike)) {
-      return print(`${ball}${BASEBALL_MSG.BALL}`);
-    }
-    if (this.onlyNothing(ball, strike)) {
-      return print(BASEBALL_MSG.NOTHING);
-    }
-    return print(`${ball}${BASEBALL_MSG.BALL} ${strike}${BASEBALL_MSG.STRIKE}`);
-  }
-
-  onlyStrike(ball, strike) {
-    return ball === 0 && strike !== 0;
-  }
-
-  onlyBall(ball, strike) {
-    return ball !== 0 && strike === 0;
-  }
-
-  onlyNothing(ball, strike) {
-    return ball === 0 && strike === 0;
-  }
-
-  ballAndStrike(ball, strike) {
-    return ball !== 0 && strike !== 0;
   }
 
   win() {
