@@ -1,4 +1,4 @@
-const Exception = require('./index.js');
+const Exception = require('./index');
 
 const { EXCEPTION } = require('../utils/constants');
 
