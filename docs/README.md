@@ -34,3 +34,41 @@
    - 이외의 값을 입력하는 경우, throw 발생
 
 8. [x] 스트라이크 3개가 나올때 까지 2~6번 과정을 반복
+
+## 각 파일의 기능 및 메소드 구성
+
+1. App.js
+
+- 게임 실행 메인 파일
+- class App
+  - constructor()
+  - play()
+  - getComputerNumbers()
+  - getUserNumbers()
+  - printResult()
+  - askRestart()
+
+2. Error.js
+
+- 사용자의 입력에 대해 예외사항이 있는지 확인하고 검출하는 기능
+- class Error
+  - check()
+    - checkLength()
+    - checkIsNum()
+    - checkDuplicate()
+    - checkIncludesZero()
+  - print()
+
+3. Count.js
+
+- 사용자의 입력과 컴퓨터의 입력을 비교하여 볼 수와 스트라이크 수를 반환하는 기능
+- class Count
+  - get()
+    - getStrike()
+    - getBall()
+
+4. Result.js
+
+- 전달받은 볼 수와 스트라이크 수를 통해서 각각의 경우에 따라 다른 결과를 반환하는 기능
+- class Result
+  - get()
