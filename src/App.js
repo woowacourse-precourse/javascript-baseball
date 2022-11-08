@@ -1,4 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
+const { isNotDuplicated, isValidNum, isNumber } = require("./InputValidation");
 const {
     START,
     INPUT,
@@ -11,7 +12,6 @@ const {
     ISNOTVALIDNUMBER,
     NOTHING,
 } = require("./Message");
-const { isNotDuplicated, isValidNum, isNumber } = require("./InputValidation");
 
 class App {
     constructor() {
@@ -77,9 +77,9 @@ class App {
     }
 
     checkScore(quizNumber, input) {
-        let ball = this.checkBall(quizNumber, input);
-        let strike = this.checkStrike(quizNumber, input);
-        let score = { strike: strike, ball: ball };
+        const ball = this.checkBall(quizNumber, input);
+        const strike = this.checkStrike(quizNumber, input);
+        const score = { strike: strike, ball: ball };
         return this.printStrikeBall(score);
     }
 
