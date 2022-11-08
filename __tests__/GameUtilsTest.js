@@ -4,13 +4,10 @@ const gameManager = new NumberBaseballGameManager();
 
 describe('게임 기능 테스트', () => {
   test('getRandomNumberArray 메서드는 인자로 전달받은 개수만큼 컴퓨터가 생각중인 숫자를 무작위로 생성한다.', () => {
-    const randomNumberCounts = [3, 4];
-    const randomNumberArrays = randomNumberCounts.map(
-      gameManager.getRandomNumberArray,
-    );
-    const result = randomNumberArrays.map(arr => arr.length);
+    const randomNumberCount = 3;
+    const result = gameManager.getRandomNumberArray(randomNumberCount).length;
 
-    expect(result).toEqual([3, 4]);
+    expect(result).toEqual(randomNumberCount);
   });
 
   test('isStrike 메서드는 컴퓨터의 숫자와 유저가 입력한 숫자를 비교하여, 스트라이크인지 판단한다.', () => {
@@ -69,6 +66,7 @@ describe('게임 기능 테스트', () => {
   });
 
   test('getHint 메서드는 스트라이크, 볼의 개수를 기반으로 힌트를 생성한다.', () => {
+    const gameManager = new NumberBaseballGameManager();
     const inputValues = ['123', '456', '312', '132', '124'];
     const computerNumbers = [1, 2, 3];
     const hints = inputValues.map(inputValue =>
