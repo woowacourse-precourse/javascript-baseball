@@ -64,17 +64,43 @@ function printResult(strike, ball){
   }
 }
 
+function endsGame(){
+  MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+  MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+  MissionUtils.Console.readLine('', (answer) => {
+    if(answer == '1' || answer == 1){
+      return false;
+    }
+    else if(answer == '2' || answer == 2){
+      return true;
+    }
+    else{
+      throw new Error("Invalid input(Should be 1 or 2 : " + answer);
+    }
+  });
+}
+
 class App {
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     var computer = generateRandomNumbers();
-    var guess = "";
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      guess = validationCheck(answer);
-    });
-    var strike = countStrike(guess, computer);
-    var ball = countBall(guess, computer);
-    printResult(strike, ball);
+    var isGameEnd = false;
+    while(!isGameEnd){
+      var guess = "";
+      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+        guess = validationCheck(answer);
+      });
+      var strike = countStrike(guess, computer);
+      var ball = countBall(guess, computer);
+      if(strike == 3){
+        MissionUtils.Console.print("3스트라이크");
+        isGameEnd = endsGame();
+        computer = generateRandomNumbers();
+      }
+      else{
+        printResult(strike, ball);
+      }
+    }
     return 1;
   }
 }
