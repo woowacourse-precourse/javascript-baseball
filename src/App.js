@@ -2,7 +2,11 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 
 const INVALID_INPUT_ERR = 'invalid input error';
 const SPACE_BAR = ' ';
-const END_GAME = 'end game';
+const EMPTY = '';
+const HINT_MSG = {
+  nothing: '낫싱',
+  end: '3스트라이크',
+};
 const HINT_UNITS = ['ball', 'strike'];
 const HINT_UNITS_OBJ = {
   ball: '볼',
@@ -34,7 +38,7 @@ class App {
 
   terminate() {
     // 게임을 종료 메시지를 발생시킨다.
-    Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n', (answer) => {
       if (answer === '1') {
         return this.play();
@@ -65,8 +69,6 @@ class App {
   }
 
   evaluate(input) {
-    if (this.answer === input) return END_GAME;
-
     const cnt = {
       strike: 0,
       ball: 0,
@@ -80,11 +82,11 @@ class App {
       }
     }
 
-    const hintMessage = HINT_UNITS.map((hintUnit) => this.getMessage(cnt[hintUnit], HINT_UNITS_OBJ[hintUnit])).join(
-      SPACE_BAR
-    );
+    const hintMessage = HINT_UNITS.map((hintUnit) => this.getMessage(cnt[hintUnit], HINT_UNITS_OBJ[hintUnit]))
+      .join(SPACE_BAR)
+      .trim();
 
-    return hintMessage !== SPACE_BAR ? hintMessage : '낫싱';
+    return hintMessage !== EMPTY ? hintMessage : HINT_MSG.nothing;
   }
 
   validate(input) {
@@ -92,11 +94,11 @@ class App {
 
     if (regExp.test(input) && !this.isDuplicated(input)) {
       const hintMessage = this.evaluate(input);
+      Console.print(hintMessage);
 
-      if (hintMessage === END_GAME) {
+      if (hintMessage === HINT_MSG.end) {
         return this.terminate();
       } else {
-        Console.print(hintMessage);
         return this.getUserInput(this.validate);
       }
     } else {
