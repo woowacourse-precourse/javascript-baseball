@@ -60,3 +60,34 @@ describe("숫자 야구 게임", () => {
     }).toThrow();
   });
 });
+
+describe("숫자야구게임 test", ()=>{
+  test("잘못된 input값(숫자가 아닌경우)", ()=>{
+    const randoms = [1,3,5];
+    const answers = ["246", "가나다", "135"];
+    const logSpy = getLogSpy();
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+    
+  });
+
+  test("잘못된 input값(중복문자 포함)", ()=>{
+    const randoms = [1, 3, 5];
+    const answers = ["222", "333"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+});
+
