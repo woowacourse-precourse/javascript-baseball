@@ -13,9 +13,12 @@ class App {
 
   createRandomNumber() {
     const randomNumberList = [];
+    const RANDOM_NUMBER_LENGTH =3;
+    const FIRST_NUMBER =1;
+    const LAST_NUMBER =9;
 
-    while (randomNumberList.length < 3) {
-      const collectRandomNumber = Random.pickNumberInRange(1, 9);
+    while (randomNumberList.length < RANDOM_NUMBER_LENGTH) {
+      const collectRandomNumber = Random.pickNumberInRange(FIRST_NUMBER, LAST_NUMBER);
       !randomNumberList.includes(collectRandomNumber) &&
         randomNumberList.push(collectRandomNumber);
     }
@@ -25,16 +28,16 @@ class App {
 
   requireInputRandomNumber(randomNumber) {
     Console.print("숫자를 입력해주세요 : ");
-    Console.readLine(" ", (answer) => {
+    Console.readLine("", (answer) => {
       this.isRandomInputErrorCase(answer);
 
       if (this.isCorrectNumber(randomNumber, answer)) {
         Console.print("3스트라이크");
         Console.print(
-          "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
+          "3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
         );
         Console.readLine(
-          " ",
+          "",
           (input) => {
             if (this.checkInputRestartExit(input)) {
               this.requireInputRandomNumber(this.createRandomNumber());
