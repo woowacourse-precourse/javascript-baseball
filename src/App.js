@@ -17,7 +17,6 @@ class App {
     }
 
     const gameNumber = Number([...NumSet].join(""));
-    console.log(`시스템 게임 번호: ${gameNumber}`);
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     return gameNumber;
   }
