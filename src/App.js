@@ -23,7 +23,7 @@ class App {
   validCheckUserNumbers(userNumbers) {
     if (userNumbers.length != PICK_LENGTH) throw "error";   //숫자를 3개 입력하지 않은 경우
 
-    let filterDuplicateNumberSet = new Set(userNumbers);
+    const filterDuplicateNumberSet = new Set(userNumbers);
     if (userNumbers.length != filterDuplicateNumberSet.size) throw "error";   //중복 숫자 입력이 있는지 검사
   }
 
@@ -41,8 +41,8 @@ class App {
   }
 
   isBall(userNumbers, i) {
-    if (this.computerNumbers.indexOf(parseInt(userNumbers[i])) != -1 &&
-    this.computerNumbers.indexOf(parseInt(userNumbers[i])) != i) 
+    if (this.computerNumbers.indexOf(userNumbers[i]) != -1 &&
+    this.computerNumbers.indexOf(userNumbers[i]) != i) 
       return 1;
     return 0;
   }
@@ -91,6 +91,9 @@ class App {
     let gameResult; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
+      const mapfn = (arg) => Number(arg);
+      userNumbers = Array.from(userNumbers, mapfn);
+
       this.validCheckUserNumbers(userNumbers);
 
       strikeCount = this.countStrikeNum(userNumbers);
