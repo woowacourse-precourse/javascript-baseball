@@ -5,13 +5,23 @@ const {
   START_GAME,
   REQUIRE_NUMBER,
 } = require("./utils/Constants");
-const { createComputerNumber, getUserNumber } = require("./utils/MissionUtils");
+const {
+  createComputerNumber,
+  getUserNumber,
+  setUserInput,
+} = require("./utils/MissionUtils");
 
 function App() {
   this.state = {
     userNumbers: "",
     computerNumbers: [],
   };
+
+  const initlalizeGame = () => {
+    this.state.computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);
+    setUserInput(REQUIRE_NUMBER, getUserGameNumber);
+  };
+
   this.play = () => {
     MissionUtils.Console.print(START_GAME);
     const computerNumbers = createComputerNumber(START_NUMBER, END_NUMBER);

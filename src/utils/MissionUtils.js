@@ -145,4 +145,4 @@ const retryOrEnd = () => {
   });
 };
 
-module.exports = { createComputerNumber, getUserNumber };
+module.exports = { createComputerNumber, getUserNumber, setUserInput };
