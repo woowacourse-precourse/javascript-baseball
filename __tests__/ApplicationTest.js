@@ -106,7 +106,7 @@ describe("숫자 야구 게임", () => {
     const app = new App();
     app.play();
     
-    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("1스트라이크"));
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('1스트라이크'));
   });
 
   test('feat#5: 종료조건', () => {
@@ -114,6 +114,30 @@ describe("숫자 야구 게임", () => {
     const answers = ['135'];
     const logSpy = getLogSpy();
     const messages = [
+      '3스트라이크',
+      '게임 종료',
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+    ];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
+  });
+
+  test('feat#6: 종료되지 않았으면 다시 시작', () => {
+    const randoms = [1, 3, 5];
+    const answers = ['136', '245', '247','135'];
+    const logSpy = getLogSpy();
+    const messages = [
+      '2스트라이크',
+      '1스트라이크',
+      '낫싱',
       '3스트라이크',
       '게임 종료',
       '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
