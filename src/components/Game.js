@@ -25,6 +25,15 @@ class Game {
 
     return { ballCnt, strikeCnt };
   }
+
+  announceResult(ballCnt, strikeCnt) {
+    if (!ballCnt && !strikeCnt) return Console.print("낫싱");
+
+    const ballText = ballCnt ? `${ballCnt}볼` : "";
+    const strikeText = strikeCnt ? `${strikeCnt}스트라이크` : "";
+
+    Console.print(`${ballText} ${strikeText}`.trim());
+  }
 }
 
 module.exports = Game;
