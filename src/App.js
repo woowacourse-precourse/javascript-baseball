@@ -11,8 +11,14 @@ class App {
     var number = randomComputerNum(1,9,3);
 
     MissionUtils.Console.readLine('숫자 야구 게임을 시작합니다.\n숫자를 입력해주세요 : ', (answer) => {
-      console.log(answer);
-      Console.close();
+      if(answer.length !== 3){
+        throw Error("세 자리 숫자만 입력하세요");
+      }else if( isNaN(answer) || answer.includes('0')){
+        throw Error("1 ~ 9 사이의 서로 다른 숫자를 입력하세요");
+      } else {
+        var answer = answer;
+        Console.close();
+      }
     });
 
     let strike;
