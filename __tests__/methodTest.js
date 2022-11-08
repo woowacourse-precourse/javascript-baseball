@@ -26,19 +26,19 @@ const getLogSpy = () => {
 describe("입력값 테스트", () => {
   const testCode = new App();
 
-  test("checkInputNum 메서드 에러 값 검사", () => {
+  test("checkInputNum 메서드 두자리 에러 검사", () => {
     expect(() => testCode.checkInputNum("12", true)).toThrow(
       "세자리 수를 입력해야합니다. 프로그램을 종료합니다."
     );
   });
 
-  test("checkInputNum 메서드 에러 값 검사", () => {
+  test("checkInputNum 메서드 중복값 에러 검사", () => {
     expect(() => testCode.checkInputNum("334", true)).toThrow(
       "서로 다른 숫자 세가지를 입력해야합니다. 프로그램을 종료합니다."
     );
   });
 
-  test("세번째 입력값 예외처리 테스트", () => {
+  test("checkInputNum 예외처리 테스트", () => {
     const randoms = [3, 4, 7];
     const answers = ["123", "357", "5"];
 
@@ -51,24 +51,7 @@ describe("입력값 테스트", () => {
     }).toThrow("세자리 수를 입력해야합니다. 프로그램을 종료합니다.");
   });
 
-  test("게임 종료 테스트", () => {
-    const randoms = [7, 5, 4];
-    const answers = ["346", "654", "754", "2"];
-    const logSpy = getLogSpy();
-    const messages = ["1볼", "2스트라이크", "3스트라이크", "게임 종료"];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    const app = new App();
-    app.play();
-
-    messages.forEach((output) => {
-      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
-    });
-  });
-
-  test("게임 종료 후 재시작", () => {
+  test("restartQuestion 메서드 수행과정 확인 ", () => {
     const randoms = [1, 2, 5, 3, 9, 7];
     const answers = ["346", "651", "126", "125", "1", "312", "246", "397", "2"];
     const logSpy = getLogSpy();
@@ -94,35 +77,7 @@ describe("입력값 테스트", () => {
     });
   });
 
-  test("게임 재시작 선택창 예외처리 테스트", () => {
-    const randoms = [2, 4, 5];
-    const answers = ["123", "245", "5"];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow(
-      "1,2 둘 중 한자리 숫자만 입력해야합니다. 프로그램을 종료합니다."
-    );
-  });
-
-  test("미입력 Enter 예외처리 테스트", () => {
-    const randoms = [3, 6, 8];
-    const answers = [""];
-
-    mockRandoms(randoms);
-    mockQuestions(answers);
-
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow("세자리 수를 입력해야합니다. 프로그램을 종료합니다.");
-  });
-
-  test("숫자 이외 입력 예외처리 테스트", () => {
+  test("getCnt 예외처리 테스트", () => {
     const randoms = [3, 6, 8];
     const answers = ["a12"];
 
@@ -135,7 +90,20 @@ describe("입력값 테스트", () => {
     }).toThrow("1 ~ 9 숫자만 입력해야합니다. 프로그램을 종료합니다.");
   });
 
-  test("0 입력 예외처리 테스트", () => {
+  test("ERROR.LENGTH 예외처리 테스트", () => {
+    const randoms = [3, 6, 8];
+    const answers = [""];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow("세자리 수를 입력해야합니다. 프로그램을 종료합니다.");
+  });
+
+  test("ERROR.DUPLICATION 예외처리 테스트", () => {
     const randoms = [3, 6, 8];
     const answers = ["045"];
 
@@ -146,5 +114,22 @@ describe("입력값 테스트", () => {
       const app = new App();
       app.play();
     }).toThrow("1 ~ 9 숫자만 입력해야합니다. 프로그램을 종료합니다.");
+  });
+
+  test("게임 종료 테스트", () => {
+    const randoms = [7, 5, 4];
+    const answers = ["346", "654", "754", "2"];
+    const logSpy = getLogSpy();
+    const messages = ["1볼", "2스트라이크", "3스트라이크", "게임 종료"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    const app = new App();
+    app.play();
+
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    });
   });
 });
