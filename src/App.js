@@ -3,7 +3,7 @@ const { MESSAGE } = require("./constant/constants");
 const makeRandomNumber = require("./utils/randomNumber");
 const { validNumber } = require("./utils/checkInputNumber");
 const { countStrikeAndBall } = require("./utils/countStrikeAndBall");
-
+const { printResult } = require("./utils/printResult");
 class App {
   play() {
     //시작 메세지 출력하기!
@@ -25,11 +25,13 @@ class App {
         //countResult[0]은 항상 strike의 갯수를 담고 있다
         if (countResult[0] === 3) {
           Console.print(MESSAGE.CORRECT);
+        } else {
+          printResult(countResult[0], countResult[1]);
+          this.startGame(answer);
         }
       }
     });
   }
-
   inputException() {
     throw new Error(MESSAGE.WRONG_INPUT);
   }
