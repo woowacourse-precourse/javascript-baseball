@@ -62,9 +62,19 @@ class BaseBallGame {
 
     return [HINT_MENT, IS_END];
   }
+
+  play() {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', ((inputNum) => {
+      if (this.isRightForm(inputNum) === false) throw new Error('입력하신 값이 올바른 형식이 아닙니다! 3자리의 1~9로 이루어진 수를 중복없이 입력해주세요!');
+      const [HINT_MENT, IS_END] = this.checkNumber(inputNum);
+      MissionUtils.Console.print(HINT_MENT);
+      if (IS_END);
+      this.play();
+    }));
+  }
 }
 
 const game = new BaseBallGame;
-game.checkNumber('123');
+game.play();
 
 module.exports = BaseBallGame;
