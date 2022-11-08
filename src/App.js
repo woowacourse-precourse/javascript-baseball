@@ -9,6 +9,8 @@ class App {
   startgame(){
     const RandomNumber = MakeNumber();
     InputNum(answer) = RandomNumber;
+
+    return;
   }
 
   //Make random number
@@ -68,6 +70,21 @@ class App {
 
     return;
   }
+
+  End(){
+    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
+    MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (number) => {
+      if(number == 1){
+        startgame();
+      }
+      else if(number == 2){
+        MissionUtils.Console.close();
+      }
+    });
+    return;
+  }
 }
-// module.exports = App;
+module.exports = App;
 
