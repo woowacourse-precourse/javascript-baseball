@@ -2,7 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   play() {
-    let gameAgain;
+    let gameAgain = 1;
     gameStartingText();
     while (gameAgain == 1) {
       const computerNumbers = computerNumbersMaking();
