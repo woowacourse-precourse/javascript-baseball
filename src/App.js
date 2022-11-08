@@ -37,11 +37,10 @@ function questionToContinueGame() {
 
 function checkPass(COMPETITOR) {
   MISSION_UTILS.Console.readLine('숫자를 입력해주세요 : \n', async function(answer) {
-    const validateValue = /^[1-9]{3}$/;
-    if (!validateValue.test(answer)) {
-      throw new Error('잘못된 값을 입력하셨습니다. 애플리케이션을 종료합니다.');
-    }
     const answerArray = Array.from(String(answer), (num) => Number(num));
+    if (answerArray.length !== 3 || answerArray.includes(0)) {
+      throw new Error('Wrong');
+    }
     if (!checkResult(COMPETITOR, answerArray)) {
       checkPass(COMPETITOR)
     } else {
