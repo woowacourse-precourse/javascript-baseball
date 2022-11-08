@@ -40,23 +40,6 @@ const playerNumbersInput = () => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (answer) => {
     input = answer;
   });
-  inspect = Number(input);
-  if (isNaN(inspect)) {
-    console.log("[Error]입력이 숫자가 아닙니다.");
-    throw "입력이 숫자가 아님";
-  }
-  if (input.length != 3) {
-    console.log("[Error]입력 숫자 개수가 맞지 않습니다");
-    throw "입력 숫자 개수 에러";
-  }
-  if(input[0]==input[1] || input[1] == input[2] || input[0]==input[2]){
-    console.log("[Error]입력 숫자는 각각 서로 다른 숫자여야 합니다.");
-    throw "입력 숫자 겹침";
-  }
-  if(input.includes(0)){
-    console.log("[Error]입력 숫자에 0은 허용되지 않습니다.");
-    throw "입력 숫자 0";
-  }
   return input;
 };
 
@@ -65,8 +48,9 @@ const oneGame = (computerNumbers) => {
   let playerNumbers;
   let errorFlag = 0;
   while (1) {
+    playerNumbers = playerNumbersInput();
     try {
-      playerNumbers = playerNumbersInput();
+      inputNumberErrorCheck(playerNumbers);
     } catch (error) {
       errorFlag = 1;
       break;
@@ -79,6 +63,25 @@ const oneGame = (computerNumbers) => {
     }
   }
   return errorFlag;
+};
+
+const inputNumberErrorCheck = (input) => {
+  if (isNaN(Number(input))) {
+    console.log("[Error]입력이 숫자가 아닙니다.");
+    throw "입력이 숫자가 아님";
+  }
+  if (input.length != 3) {
+    console.log("[Error]입력 숫자 개수가 맞지 않습니다");
+    throw "입력 숫자 개수 에러";
+  }
+  if (input[0] == input[1] || input[1] == input[2] || input[0] == input[2]) {
+    console.log("[Error]입력 숫자는 각각 서로 다른 숫자여야 합니다.");
+    throw "입력 숫자 겹침";
+  }
+  if (input.includes(0)) {
+    console.log("[Error]입력 숫자에 0은 허용되지 않습니다.");
+    throw "입력 숫자 0";
+  }
 };
 
 const compareComputerAndPlayer = (computerNumbers, playerNumbers) => {
