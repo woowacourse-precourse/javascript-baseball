@@ -25,13 +25,18 @@ const promptInput = function promptUserGuessInput(answer) {
     }
     promptInput(answer);
   });
-}
+};
 
 const validateInput = function validateInput(input) {
   if (input.length !== 3) {
     throw new Error("입력값은 3자리여야합니다.");
   }
-}
+  const regExp = /^[1-9]+$/;
+  if (!regExp.test(input)) {
+    console.log("입력이 잘못되었습니다.");
+    throw new Error("입력이 잘못되었습니다.");
+  }
+};
 
 class App {
   play() {}
