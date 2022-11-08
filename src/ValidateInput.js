@@ -1,4 +1,4 @@
-const { NUMBER_LENGTH } = require("./constants/ConstantValues");
+const { NUMBER_LENGTH } = require("./constants/constantValues");
 
 const validateInputLength = (input) => {
   return input.length !== NUMBER_LENGTH;

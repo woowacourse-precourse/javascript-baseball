@@ -3,13 +3,13 @@ const validateInput = require("./ValidateInput");
 // const getStrikeAndBall = require("./StrikeAndBall");
 const getStrikeAndBallText = require("./StrikeAndBallText");
 const throwError = require("./ThrowError");
-const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT, MIN_NUMBER, MAX_NUMBER } = require("./constants/ConstantValues");
+const { NUMBER_LENGTH, END_INPUT, RESTART_INPUT, MIN_NUMBER, MAX_NUMBER } = require("./constants/constantValues");
 const {
   START_MESSAGE,
   INPUT_NUMBER_MESSAGE,
   END_MESSAGE,
   INPUT_RESTART_OR_END_MESSAGE,
-} = require("./constants/Messages");
+} = require("./constants/messages");
 
 class App {
   constructor() {
