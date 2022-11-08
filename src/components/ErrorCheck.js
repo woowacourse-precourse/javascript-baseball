@@ -4,11 +4,11 @@ const isEqual = require('./Equal');
 
 class ErrorCheck {
   static isInvalidInputLength(userInput) {
-    return !isEqual(userInput.length, GAME_NUMBER.CORRECT);
+    return !isEqual(userInput.length, GAME_NUMBER.GUESS);
   }
 
   static hasDuplication(userInput) {
-    return !isEqual(new Set(userInput).size, GAME_NUMBER.CORRECT);
+    return !isEqual(new Set(userInput).size, GAME_NUMBER.GUESS);
   }
 
   static notOnlyConsistOfNums(userInput) {

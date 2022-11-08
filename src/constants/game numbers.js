@@ -3,6 +3,7 @@ const GAME_NUMBER = Object.freeze({
   STRIKE: 1,
   BALL: 2,
   CORRECT: 3,
+  GUESS: 3,
 });
 
 const BOOLEAN = Object.freeze({

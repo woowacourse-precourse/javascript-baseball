@@ -30,7 +30,6 @@ class Game {
     const strikeMessage = strikeCount
       ? `${strikeCount}${COUNT_MESSAGE.STRIKE}`
       : COUNT_MESSAGE.EMPTY;
-
     return ErrorCheck.isNothing(strikeCount, ballCount)
       ? COUNT_MESSAGE.NOTHING
       : `${ballMessage} ${strikeMessage}`.trim();
