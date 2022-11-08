@@ -12,6 +12,12 @@ class App {
 
   play() {
     MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    this.startGame();
+  }
+
+  startGame() {
+    this.answerList = this.setAnswerList;
+    this.getPlayerInputList();
   }
 
   setAnswerList() {
@@ -25,6 +31,15 @@ class App {
     return randomList;
   }
 
+  isValid(inputList) {
+    const firstCondition = /^[1-9]+$/.test(inputList.join(''));
+    const secondCondition = ANSWER_LENGTH === new Set(inputList).size;
+    const thirdCondition = ANSWER_LENGTH === inputList.length;
+
+    if (firstCondition && secondCondition && thirdCondition) return true;
+    return false;
+  }
+
   getPlayerInputList() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
       this.inputList = input.trim().split('');
@@ -36,15 +51,6 @@ class App {
     }
 
     this.inputList = this.inputList.map(Number);
-  }
-
-  setIsValid(inputList) {
-    const firstCondition = /^[1-9]+$/.test(inputList.join(''));
-    const secondCondition = ANSWER_LENGTH === new Set(inputList).size;
-    const thirdCondition = ANSWER_LENGTH === inputList.length;
-
-    if (firstCondition && secondCondition && thirdCondition) return true;
-    return false;
   }
 }
 
