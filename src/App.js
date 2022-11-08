@@ -22,7 +22,16 @@ class App {
         return this.playTheGame(GET_NUMBERS.join(""));
     }
     playTheGame(computerNumbers) {
-        MissionUtils.Console.readLine(MESSAGE.REQUIRE_NUMBER, (userNumbers) => {});
+        MissionUtils.Console.readLine(MESSAGE.REQUIRE_NUMBER, (userNumbers) => {
+            userNumbersTester(userNumbers);
+            const BALL_COUNT_RESULT = ballAndStrikeCountTask(computerNumbers, userNumbers);
+            const MESSAGE = ballAndStrikeMessage(BALL_COUNT_RESULT.ball, BALL_COUNT_RESULT.strike);
+            printMessage(MESSAGE);
+            if (BALL_COUNT_RESULT.strike === 3) {
+                return this.restartGame();
+            }
+            return this.playTheGame(computerNumbers);
+        });
     }
 }
 module.exports = App;
