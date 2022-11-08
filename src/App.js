@@ -1,11 +1,11 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 class App {
 
-  #sayStart() {
+  sayStart() {
     Console.print('숫자 야구 시작합니다.');
   };
 
-  #computerPicksNumber() {
+  computerPicksNumber() {
     const computerPickArr = [];
     while (computerPickArr.length < 3) {
       const number = Random.pickNumberInRange(1, 9);
@@ -18,14 +18,14 @@ class App {
     return computerPick;
   }
 
-  #startGame() {
-    const computerPick = this.#computerPicksNumber();
+  startGame() {
+    const computerPick = this.computerPicksNumber();
     Console.readLine('숫자를 입력해주세요 : ', guess => {
-      this.#gameLoop(computerPick, guess.trim());
+      this.gameLoop(computerPick, guess.trim());
     })
   };
 
-  #validateGuess(guess) {
+  validateGuess(guess) {
     if (!/^[1-9]{3}$/.test(guess)) {
       throw new Error('1-9 범위의 세 자리 수가 아닙니다: ' + guess);
     }
@@ -34,7 +34,7 @@ class App {
     }
   };
 
-  #getHint(computerPick, guess) {
+  getHint(computerPick, guess) {
     let strikes = 0;
     let balls = 0;
 
@@ -61,16 +61,16 @@ class App {
     }
   }
 
-  #gameLoop(computerPick, guess) {
-    this.#validateGuess(guess);
-    Console.print(this.#getHint(computerPick, guess))
+  gameLoop(computerPick, guess) {
+    this.validateGuess(guess);
+    Console.print(this.getHint(computerPick, guess))
     if (computerPick === guess) {
       Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
       Console.readLine(
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
         response => {
           if (response.trim() === '1') {
-            this.#startGame();
+            this.startGame();
           } else if (response.trim() === '2') {
             return;
           } else {
@@ -81,13 +81,13 @@ class App {
       return;
     }
     Console.readLine('숫자를 입력해주세요 : ', guess => {
-      this.#gameLoop(computerPick, guess.trim());
+      this.gameLoop(computerPick, guess.trim());
     });
   }
 
   play() {
-    this.#sayStart();
-    this.#startGame();
+    this.sayStart();
+    this.startGame();
   }
 };
 
