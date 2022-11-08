@@ -14,7 +14,7 @@ class App {
     //1부터 9까지만 적었는지 확인하기
     var value = false; 
     for (var i;i<answer.length;i++){
-      if (answer[i]<1 || answer[i]<9){
+      if (answer[i]<1 || answer[i]>9){
         value = true;
       }
     }
