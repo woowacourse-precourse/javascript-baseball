@@ -157,4 +157,12 @@ describe("숫자 야구 게임", () => {
     const testArr = [1, 2, 3];
     expect(checkDuplicates(testArr)).toBeFalsy();
   });
+
+  test("추가테스트4-1: getUserGuess", () => {
+    const userNumArr = [];
+    const userInput = "122";
+    expect(() => {
+      getUserGuess(userNumArr, userInput);
+    }).toThrow();
+  });
 });
