@@ -73,6 +73,7 @@ class App {
   getResult() {
     this.countBallAndStrike();
     this.printResult();
+    this.reGame();
   }
 
   countBallAndStrike() {
@@ -125,6 +126,43 @@ class App {
   static caseofStrike(strike) {
     if (strike !== NOTHING) return String(`${strike}스트라이크 `);
     return '';
+  }
+
+  reGame() {
+    if (this.gameResult.strike === 3) {
+      this.initAll();
+      this.getReGameInput();
+    } else {
+      this.initGameResult();
+      this.startGame();
+    }
+  }
+
+  initAll() {
+    this.randomNums = [];
+    this.inputNums = [];
+    this.gameResult.ball = 0;
+    this.gameResult.strike = 0;
+  }
+
+  initGameResult() {
+    this.gameResult.ball = 0;
+    this.gameResult.strike = 0;
+  }
+
+  getReGameInput() {
+    MissionUtils.Console.readLine(
+      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+      (input) => {
+        if (input === '1') {
+          this.initAll();
+          this.makeRandomNums();
+          this.startGame();
+        } else if (input === '2') {
+          MissionUtils.Console.close();
+        } else throw 'Error: Invalid Input';
+      }
+    );
   }
 }
 
