@@ -54,3 +54,57 @@ describe('게임 참여 단계 테스트', () => {
     expect(logpy).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
   });
 });
+// eslint-disable-next-line max-lines-per-function
+describe('사용자 입력값 평가 테스트', () => {
+  test('입력값 예외 처리 테스트(문자)', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['cba'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('잘못된 입력입니다.숫자를 입력해주세요. ');
+  });
+
+  test('입력값 예외 처리 테스트(길이)', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['1234'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('잘못된 입력입니다. 3자리 수를 입력해주세요. ');
+  });
+
+  test('입력값 예외 처리 테스트(중복)', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['222'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('잘못된 입력입니다. 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요. ');
+  });
+
+  test('입력값 예외 처리 테스트(0포함)', () => {
+    const randoms = [1, 2, 3];
+    const answers = ['012'];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow('잘못된 입력입니다. 1부터 9까지 서로 다른 수로 이루어진 3자리 수를 입력해주세요. ');
+  });
+});
