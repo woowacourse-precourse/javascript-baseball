@@ -1,7 +1,5 @@
-const { print, close, readLine, pickNumberInRange } = require("./Utils");
-const { GAME_MSG, BASEBALL_MSG } = require("./Message");
-const Counter = require("./Counter");
-const { MAX_NUM_RANGE, MIN_UUM_RANGE, COMPUTER_NUM_LENGTH, RESTART_INPUT_NUM, END_INPUT_NUM } = require("./Condition");
+const { print } = require("./Utils");
+const { BASEBALL_MSG } = require("./Message");
 
 class CountPrinter {
 
