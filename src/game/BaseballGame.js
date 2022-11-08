@@ -8,7 +8,6 @@ const {
 const Computer = require('../computer/Computer');
 const Calculator = require('./Calculator');
 const Validator = require('../input/Validator');
-const App = require('../App');
 
 class BaseballGame {
   constructor() {
