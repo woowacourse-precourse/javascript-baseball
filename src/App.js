@@ -76,7 +76,11 @@ class App {
     });
   }
 
-  play() {}
-}
+  play = () => {
+    this.computer.print(MESSAGE.START);
+    this.computer.saveRandom();
+    this.start();
+  };
+
 
 module.exports = App;
