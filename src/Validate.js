@@ -1,3 +1,9 @@
+const {
+  INPUT_LENGTH_ERROR,
+  INPUT_NAN_ERROR,
+  INPUT_OVERLAP_ERROR,
+} = require("./Constants");
+
 const checkLength = (input) => {
   if (input.length === 3) return true;
   else return false;
@@ -8,7 +14,7 @@ const checkIsNumber = (input) => {
   else return true;
 };
 
-const checkDuplicate = (input) => {
+const checkOverlap = (input) => {
   for (let i = 0; i < input.length; i++) {
     if (input.indexOf(input[i]) !== i) return false;
   }
@@ -16,9 +22,9 @@ const checkDuplicate = (input) => {
 };
 
 const validateInput = (input) => {
-  if (!checkLength(input)) throw "3자리 숫자를 입력해주세요.";
-  if (!checkIsNumber(input)) throw "숫자만 입력해주세요.";
-  if (!checkDuplicate(input)) throw "서로 다른 숫자를 입력해주세요.";
+  if (!checkLength(input)) throw INPUT_LENGTH_ERROR;
+  if (!checkIsNumber(input)) throw INPUT_NAN_ERROR;
+  if (!checkOverlap(input)) throw INPUT_OVERLAP_ERROR;
 };
 
 module.exports = validateInput;
