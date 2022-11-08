@@ -128,5 +128,24 @@ class App {
       return false;
     }
   }
+
+  handleRestartInputException(choice) {
+    const NOT_NUMBER_EXCEPTION_MESSAGE = '숫자가 아닙니다.';
+    const NOT_INTEGER_EXCEPTION_MESSAGE = '입력값이 정수가 아닙니다.';
+    const NOT_NUMBER_IN_RANGE_EXCEPTION_MESSAGE = '입력값이 1 또는 2가 아닙니다.';
+    let errorMessage = null;
+    if (isNaN(choice)) {
+      errorMessage = NOT_NUMBER_EXCEPTION_MESSAGE;
+    } else if (!this.isInteger(choice)) {
+      errorMessage = NOT_INTEGER_EXCEPTION_MESSAGE;
+    } else if (choice != '1' && choice != '2') {
+      errorMessage = NOT_NUMBER_IN_RANGE_EXCEPTION_MESSAGE;
+    }
+
+    if (errorMessage === null) {
+      return;
+    }
+    throw new Error(errorMessage);
+  }
 }
 module.exports = App;
