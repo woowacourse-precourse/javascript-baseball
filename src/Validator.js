@@ -10,7 +10,7 @@ class Validator {
   }
 
   #throwTypeError() {
-    throw new TypeError(ERROR_MESSAGE.TYPE_EROOR);
+    throw new TypeError(ERROR_MESSAGE.TYPE_ERROR);
   }
 
   #isValidLength() {
