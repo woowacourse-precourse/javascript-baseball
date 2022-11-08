@@ -86,6 +86,18 @@ describe("컴퓨터가 정답 만들기 유닛 테스트", () => {
   });
 });
 
+describe("게임 결과 만들기 유닛 테스트", () => {
+  test("사용자가 입력했을 때, 정답과 같은 자리에 같은 숫자가 위치하면 스트라이크, 같은 숫자가 다른 자리에 위치하면 볼을 출력한다.", () => {
+    const app = new App();
+    app.answer = "123";
+
+    expect(app.makeResult("123")).toBe("3스트라이크");
+    expect(app.makeResult("234")).toBe("2볼");
+    expect(app.makeResult("127")).toBe("2스트라이크");
+    expect(app.makeResult("321")).toBe("2볼 1스트라이크");
+  });
+});
+
 describe("사용자 입력에 대한 예외 처리 테스트", () => {
   test("적절한 입력에 대해서는 true를 리턴한다.", () => {
     const input = ["123", "234", "345"];
