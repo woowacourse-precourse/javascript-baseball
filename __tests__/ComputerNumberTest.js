@@ -7,7 +7,7 @@ describe("컴퓨터 입력값 유효성 검사 테스트", () => {
     const computerNumber = referee.getComputerNumber();
     const computerLength = computerNumber.length;
 
-    expect(computerLength).toBe(GAME_LENGTH);
+    expect(computerLength).toEqual(GAME_LENGTH);
   });
 
   test(`중복 숫자가 있는지 확인`, () => {
@@ -15,6 +15,6 @@ describe("컴퓨터 입력값 유효성 검사 테스트", () => {
     const computerNumber = referee.getComputerNumber();
     const criteriaComputer = new Set(computerNumber);
 
-    expect(computerNumber.length).toBe(criteriaComputer.size);
+    expect(computerNumber.length).toEqual(criteriaComputer.size);
   });
 });
