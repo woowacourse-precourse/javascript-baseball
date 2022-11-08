@@ -5,13 +5,27 @@ class App {
     this.answerNumbers;
   }
 
-  play() {}
+  play() {
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.answerNumbers = this.getRandomNumbers();
+    this.getUserInput();
+  }
 
   getUserInput() {
     MissionUtils.Console.readLine("숫자를 입력해주세요 :", (userInput) => {
       this.checkAvailable(userInput);
       this.checkResult(this.getStats(userInput, this.answerNumbers));
     });
+  }
+
+  checkResult(stat) {
+    if (stat.strike === 3) {
+      MissionUtils.Console.print(`${stat.strike}스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료`);
+      this.askRestart();
+    } else {
+      MissionUtils.Console.print(this.getHint(stat));
+      this.getUserInput();
+    }
   }
 
   getRandomNumbers() {
