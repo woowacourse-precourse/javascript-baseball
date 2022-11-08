@@ -141,4 +141,10 @@ describe("숫자 야구 게임", () => {
       expect.arrayContaining(compNumArr)
     );
   });
+
+  test("추가테스트2: printBeginGame", () => {
+    const logSpy = getLogSpy();
+    printBeginGame();
+    expect(logSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
+  });
 });
