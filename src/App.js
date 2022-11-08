@@ -1,11 +1,6 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
 const validatePlayerInput = require("./Validator");
-const {
-  GAME_OPTION,
-  SCORE,
-  GAME_MESSAGE,
-  COMPUTER_NUMBER,
-} = require("./Constatns");
+const { GAME, SCORE, GAME_MESSAGE, COMPUTER_NUMBER } = require("./Constants");
 
 class App {
   constructor() {
@@ -15,15 +10,14 @@ class App {
   play() {
     this.printGameMsg(GAME_MESSAGE.START);
 
-    let playOptionNum = GAME_OPTION.PLAY;
+    let playNum = GAME.RUN;
 
-    while (playOptionNum === GAME_OPTION.PLAY) {
+    while (playNum !== GAME.STOP) {
       this.answer = this.getComputerNum();
-
       this.start(this.answer);
       this.printGameMsg(GAME_MESSAGE.END);
 
-      playOptionNum = this.inputReplayNum();
+      playNum = this.inputReplayNum();
     }
 
     Console.close();
@@ -32,16 +26,25 @@ class App {
   start(computerNum) {
     while (true) {
       let playerNum = this.inputPlayerNum();
-
-      const { ball, strike } = this.getHint(computerNum, playerNum);
-      this.printHint(ball, strike);
-
-      if (this.isAllStrike(strike)) break;
+      if (this.isSucesse(computerNum, playerNum)) break;
     }
+  }
+
+  isSucesse(computerNum, playerNum) {
+    const strike = this.getResult(computerNum, playerNum);
+
+    return this.isAllStrike(strike);
   }
 
   isAllStrike(strike) {
     return strike === COMPUTER_NUMBER.LENGTH;
+  }
+
+  getResult(computerNum, playerNum) {
+    const { ball, strike } = this.getHint(computerNum, playerNum);
+    this.printHint(ball, strike);
+
+    return strike;
   }
 
   getComputerNum() {
@@ -77,7 +80,7 @@ class App {
   inputReplayNum() {
     let replayNum;
 
-    Console.readLine(GAME_MESSAGE.REPLAY_OR_EXIT, (input) => {
+    Console.readLine(GAME_MESSAGE.REPLAY_OR_STOP, (input) => {
       if (validatePlayerInput.isValidReplayNum(input))
         replayNum = parseInt(input);
     });
