@@ -30,7 +30,9 @@ class App {
         this.selectRestartOrExitGame();
       }
       else{
-        this.showBallStrike(computer, user);
+        const ball = this.getNumberOfBall(computer, user);
+        const strike = this.getNumberOfStrike(computer, user);
+        this.showBallStrike(ball, strike);
         this.numberBaseballGame(computer);
       }
     });
@@ -40,11 +42,9 @@ class App {
     if(input === '' || input === ' ' || input.includes(' ')){
       throw "입력에 공백은 포함될 수 없습니다.";
     }
-
     if(input.length !== 3){
       throw "3자리의 수를 입력해주세요.";
     }
-
     if(isNaN(Number(input))){
       throw "숫자만 입력해주세요.";
     }
@@ -53,11 +53,9 @@ class App {
       if(isNaN(num)){
         throw "음수 또는 소수점은 입력할 수 없습니다.";
       }
-
       if(!Number(num)){
         throw "각 자리의 숫자는 1~9만 허용합니다.";
       }
-
       this.throwExceptionForDuplicateNumber([...input], num, numIndex);
     });
   }
@@ -70,23 +68,45 @@ class App {
     });
   }
 
-  showBallStrike(computer, user){
-    let ball = 0;
-    let strike = 0;
-
-    [...computer].forEach((computerNumber, computerIndex)=>{
-      [...user].forEach((userNumber, userIndex)=>{
-        if(computerNumber === userNumber){
-          if(computerIndex === userIndex){
-            strike++;
-          }
-          else{
-            ball++;
-          }
-        }
-      });
+  getNumberOfBall(computer, user){
+    let count = 0;
+    [...computer].forEach((num, index)=>{
+      if(this.checkBall(num, index, [...user])){
+        count++;
+      }
     });
+    return count;
+  }
 
+  checkBall(num, index, user){
+    for (let i=0; i<user.length; i++){
+      if(user[i] === num && i !== index){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  getNumberOfStrike(computer, user){
+    let count = 0;
+    [...computer].forEach((num, index)=>{
+      if(this.checkStrike(num, index, [...user])){
+        count++;
+      }
+    });
+    return count;
+  }
+
+  checkStrike(num, index, user){
+    for (let i=0; i<user.length; i++){
+      if(user[i] === num && i === index){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  showBallStrike(ball, strike){
     if(!ball && !strike){
       MissionUtils.Console.print("낫싱");
     }
