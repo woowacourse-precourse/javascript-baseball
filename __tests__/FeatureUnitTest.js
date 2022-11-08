@@ -141,7 +141,7 @@ describe('기능 단위 목록별 테스트', () => {
   test('기능7 재시작 또는 종료 처리', () => {
     const printSpy = getPrintSpy();
 
-    const randoms = [1, 3, 3, 3, 5];
+    const randoms = [1, 3, 3, 3, 5, 1, 1, 3, 3, 5];
     const answers = ['135', '1', '135', '2'];
     const messages = [
       '3스트라이크',
@@ -153,7 +153,7 @@ describe('기능 단위 목록별 테스트', () => {
     mockQuestions(answers);
 
     const app = new App();
-    app.setUserInput([1, 3, 5]);
+    app.play();
 
     messages.forEach(output => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
