@@ -107,7 +107,9 @@ class Game {
     if(input === BUTTON.재시작){
       this.startGame();
     }
-
+    if(input == BUTTON.종료){
+      this.utilsIo.close();
+    }
   }
 }
 
