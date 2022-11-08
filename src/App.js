@@ -23,6 +23,7 @@ class App {
     const INPUT_MESSAGE = '숫자를 입력해주세요. : ';
     let inputNumber;
     Console.readLine(INPUT_MESSAGE, number => {
+      this.handleInputException(number);
       inputNumber = number;
     });
     return inputNumber;
