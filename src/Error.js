@@ -1,4 +1,7 @@
-const { THREE_DIFFERENT_NUMBERS_ERROR } = require("./Constant");
+const {
+  THREE_DIFFERENT_NUMBERS_ERROR,
+  ONE_OR_TWO_ERROR,
+} = require("./Constant");
 
 function checkThreeDifferentNumbers(input) {
   const numbers = input
@@ -15,5 +18,11 @@ function checkThreeDifferentNumbers(input) {
   }
   throw new Error(THREE_DIFFERENT_NUMBERS_ERROR);
 }
+function checkOneOrTwo(input) {
+  if (input === "1" || input === "2") {
+    return true;
+  }
+  throw new Error(ONE_OR_TWO_ERROR);
+}
 
-module.exports = { checkThreeDifferentNumbers };
+module.exports = { checkThreeDifferentNumbers, checkOneOrTwo };
