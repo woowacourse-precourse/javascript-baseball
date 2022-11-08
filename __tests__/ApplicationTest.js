@@ -1,5 +1,7 @@
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
+const Error = require("../src/utils/error");
+const Input = require("../src/utils/input");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -58,5 +60,55 @@ describe("숫자 야구 게임", () => {
       const app = new App();
       app.play();
     }).toThrow();
+  });
+});
+
+describe("입력값 테스트", () => {
+  test("에러 처리", () => {
+    expect(() => {
+      const message = "잘못된 입력값입니다.";
+      Error.throw(message);
+    }).toThrow();
+  });
+
+  test("중복 검사", () => {
+    const inputs = ["122", "213"];
+    const expects = [
+      [false, true, true],
+      [false, false, false],
+    ];
+
+    for (let i = 0; i < inputs.length; i++) {
+      for (let j = 0; j < inputs[i].length; j++) {
+        expect(Error.isDuplicated(inputs[i], inputs[i][j])).toEqual(
+          expects[i][j]
+        );
+      }
+    }
+  });
+
+  test("유효성 검사", () => {
+    const wrongs = ["121", "122", "333", "0", "1", "1234"];
+    expect(() => {
+      wrongs.forEach((wrong) => Error.validate(wrong));
+    }).toThrow();
+  });
+});
+
+describe("입력값 테스트", () => {
+  const input = new Input();
+
+  test("값 저장 테스트", () => {
+    input.save("123");
+    expect(input.value).toEqual([1, 2, 3]);
+  });
+
+  test("값 초기화 테스트", () => {
+    input.clear();
+    expect(input.value).toEqual([]);
+  });
+
+  test("배열 테스트", () => {
+    expect(input.makeNumberArray("123")).toEqual([1, 2, 3]);
   });
 });
