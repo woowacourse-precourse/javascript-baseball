@@ -100,6 +100,11 @@ class Game {
   isThreeStrike(strike){
     return strike === THREE_STRIKE;
   }
+
+  reselectButton(input){
+    this.validation.isValidationUserReselectButtonInput(input);
+  
+  }
 }
 
 class App {
