@@ -6,9 +6,9 @@ describe("ManualBallGenerator", () => {
     const INPUT_NUMBER = 246;
     const STRING_ARRAY = [String(INPUT_NUMBER)];
     mockFunction.mockQuestions(STRING_ARRAY);
-    const NUMBER_ARRAY = await new ManualBallGenerator().execute();
+    const BALL = await new ManualBallGenerator().execute();
 
-    expect(NUMBER_ARRAY).toEqual([2, 4, 6]);
+    expect(BALL.getNumber()).toBe(INPUT_NUMBER);
   });
 
   test("숫자가 아니면 throw로 예외 발생", async () => {
@@ -36,9 +36,9 @@ describe("ManualBallGenerator", () => {
     const INPUT_NUMBER = 246;
     const STRING_ARRAY = ["   " + String(INPUT_NUMBER) + "    "];
     mockFunction.mockQuestions(STRING_ARRAY);
-    const NUMBER = await new ManualBallGenerator().execute();
+    const BALL = await new ManualBallGenerator().execute();
 
-    expect(NUMBER).toEqual([2, 4, 6]);
+    expect(BALL.getNumber()).toBe(INPUT_NUMBER);
   });
 
   test("숫자 사이에 공백이 있으면 throw로 예외 발생", async () => {
