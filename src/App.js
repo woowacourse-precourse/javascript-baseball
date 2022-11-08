@@ -1,10 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-// const config = require("./config/config");
-const config = {
-  START_GAME_NUM: 1,
-  END_GAME_NUM: 9,
-  GAME_NUM_SIZE: 3,
-};
+const config = require("./config/config");
 
 class App {
   constructor() {
@@ -96,6 +91,7 @@ class App {
         answerList.push(parseInt(number));
       });
     });
+    MissionUtils.Console.close();
     this.isValidNum(answerList);
     return answerList;
   }
@@ -106,15 +102,18 @@ class App {
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (input) => {
         answer = parseInt(input);
-        this.isValidControl(answer);
-        if (answer !== 1) {
-          MissionUtils.Console.close();
-        } else {
+        if (answer === 1) {
           this.start();
+          return true;
+        }
+        if (answer === 2) {
+          MissionUtils.Console.close();
+          return true;
         }
       }
     );
-    return answer;
+    MissionUtils.Console.close();
+    this.isValidControl(answer);
   }
 
   isValidNum(inputList) {
