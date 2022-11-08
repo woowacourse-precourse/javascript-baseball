@@ -46,20 +46,21 @@ class App {
       const answerArray = removeSpace.split('');
       checkDuplicate(answerArray);
       checkZero(answerArray);
-      this.calcBallAndStrike(answerArray);
+      this.calcBallAndStrike(answerArray, this.computerNumber);
     });
   }
 
-  calcBallAndStrike(userAnswer) {
+  calcBallAndStrike(userAnswer, computerNumber) {
     this.strike = 0;
     this.ball = 0;
 
     for (let idx = 0; idx < userAnswer.length; idx++) {
       let userNum = parseInt(userAnswer[idx]);
-      if (userNum === this.computerNumber[idx]) this.strike++;
-      else if (this.computerNumber.includes(userNum)) this.ball++;
+      if (userNum === computerNumber[idx]) this.strike++;
+      else if (computerNumber.includes(userNum)) this.ball++;
     }
     this.printResult();
+    return [this.ball, this.strike];
   }
 
   printResult() {
