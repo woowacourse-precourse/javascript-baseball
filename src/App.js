@@ -1,6 +1,16 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
-const REG_EXP = { userInputRegEx: /^[1-9]{3,3}$/ };
-
+const REG_EXP = {
+  userInputRegEx: /^[1-9]{3,3}$/,
+  restartRegEx: /^[1-2]{1,1}$/,
+};
+const GAME_MESSAGE = {
+  inputValue: "숫자를 입력해주세요 : ",
+  start: "숫자 야구 게임을 시작합니다.",
+  clear: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  restart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+  error_invalid_input: "3자리의 중복되지 않는 숫자로 입력해주세요",
+  error_invalid_restart_input: "1 또는 2를 입력해주세요",
+};
 class App {
   play() {
     let cpu = [];
@@ -10,22 +20,11 @@ class App {
     processGame(user, cpu);
   }
 }
-const processGame = () => {
-  Console.readLine("숫자를 입력해주세요 : ", (input) => {
-    progress(input);
-    noticeScore();
-  });
-};
+
 const startGame = () => {
-  Console.print("숫자 야구 게임을 시작합니다.");
+  Console.print(GAME_MESSAGE.start);
   cpu = makeTargetNumber();
 };
-const progress = (input) => {
-  user = input;
-  validateInput(REG_EXP.userInputRegEx, user);
-  score = getScore(cpu, user);
-};
-
 const makeTargetNumber = () => {
   const targetNumber = [];
 
@@ -39,15 +38,26 @@ const makeTargetNumber = () => {
   return targetNumber;
 };
 
-const validateInput = (regEx, input) => {
-  return validateNumber(regEx, input);
+const processGame = () => {
+  Console.readLine(GAME_MESSAGE.inputValue, (input) => {
+    progress(input);
+    noticeScore();
+  });
 };
-const validateNumber = (regEx, input) => {
-  if (!regEx.test(input)) {
-    throw new Error("3자리의 중복되지 않는 숫자로 입력해주세요");
-  }
+const progress = (input) => {
+  user = input;
+  validateInput(REG_EXP.userInputRegEx, user);
+  score = getScore(cpu, user);
+};
+const validateInput = (regEx, input) => {
   if (new Set(input.split("")).size > 3) {
     throw new Error("3자리의 중복되지 않는 숫자로 입력해주세요");
+  }
+  return validateNumber(regEx, input, GAME_MESSAGE.error_invalid_input);
+};
+const validateNumber = (regEx, input, message) => {
+  if (!regEx.test(input)) {
+    throw new Error(message);
   }
   return true;
 };
@@ -76,7 +86,7 @@ const noticeScore = () => {
   const ball = score.ball;
   const strike = score.strike;
   if (score.strike === 3) {
-    Console.print("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print(GAME_MESSAGE.clear);
     considerRestart();
   } else if (score.ball === 0 && score.strike === 0) {
     Console.print(`낫싱`);
@@ -94,14 +104,12 @@ const noticeScore = () => {
 };
 
 const considerRestart = () => {
-  Console.readLine(
-    "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-    (input) => {
-      defineRestartGame(Number(input));
-    }
-  );
+  Console.readLine(GAME_MESSAGE.restart, (input) => {
+    defineRestartGame(Number(input));
+  });
 };
 const defineRestartGame = (flag) => {
+  validateNumber(REG_EXP.restartRegEx, flag, GAME_MESSAGE.error_invalid_restart_input);
   if (flag === 1) {
     cpu = makeTargetNumber();
     processGame();
