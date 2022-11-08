@@ -11,8 +11,18 @@ class App {
 
   play() {
     this.userInit();
+    this.gameRoutine();
+  }
+
+  async gameRoutine() {
+    const timer = (ms) => new Promise((res) => setTimeout(res, ms));
     this.randomNumber();
-    this.userInput();
+    while (this.randomNum != this.inputNum) {
+      await timer(3000).this(userInput());
+      MissionUtils.Console.print("1");
+      if (this.randomNum == this.inputNum) break;
+    }
+    this.overMessage();
   }
 
   // userInput logic
@@ -21,13 +31,14 @@ class App {
   }
 
   userInput() {
-    readLine("숫자를 입력해주세요 : ", (input) => {
+    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
       this.inputNum = input;
       if (!this.checkInputValidation()) {
         throw new Error("잘못된 값을 입력하셨습니다.");
       }
-      this.game();
       MissionUtils.Console.close();
+      this.game();
+      return 0;
     });
   }
 
@@ -66,7 +77,7 @@ class App {
   // 숫자 야구 게임 logic
   game() {
     let score = "";
-    MissionUtils.Console.print(this.randomNum);
+    MissionUtils.Console.print(this.randomNum); //추후 삭제
     if (this.nothing()) {
       MissionUtils.Console.print("낫싱");
     }
