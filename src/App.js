@@ -20,6 +20,11 @@ const {
 } = Utils;
 const { Console } = MissionUtils;
 
+const RESTART_COMMAND = {
+  NEW_GAME: 1,
+  EXIT: 2,
+};
+
 class App {
   _question = null;
   _answer = null;
@@ -84,11 +89,11 @@ class App {
     }
 
     if (!this.isValidDigit(numbers)) {
-      throw new InvalidDigitException();
+      throw new InvalidDigitException(this.MESSAGES.digitError);
     }
 
     if (!numbers.every(this.isValidRange.bind(this))) {
-      throw new InputRangeException();
+      throw new InputRangeException(this.MESSAGES.rangeError);
     }
 
     if (hasDuplicateElmentInList(numbers)) {
@@ -98,9 +103,15 @@ class App {
     return true;
   }
 
-  isValidCommandInput(input, commands) {
-    if (!commands[input]) {
-      throw new InvalidCommandException();
+  isValidCommandInput(input) {
+    const COMMANDS = Object.values(RESTART_COMMAND);
+
+    if (!COMMANDS.includes(input)) {
+      const VALID_COMMAND = COMMANDS.join(', ');
+
+      throw new InvalidCommandException(
+        `입력 가능한 명령어는 ${VALID_COMMAND}입니다.`
+      );
     }
 
     return true;
@@ -172,15 +183,15 @@ class App {
 
   restart(input) {
     const COMMANDS = {
-      1: this.startNewGame.bind(this),
-      2: this.exitApp.bind(this),
+      [RESTART_COMMAND.NEW_GAME]: this.startNewGame.bind(this),
+      [RESTART_COMMAND.EXIT]: this.exitApp.bind(this),
     };
 
     if (!this.isValidInput(input)) {
       return;
     }
 
-    if (!this.isValidCommandInput(input, COMMANDS)) {
+    if (!this.isValidCommandInput(input)) {
       return;
     }
 
@@ -188,7 +199,9 @@ class App {
   }
 
   confirmRestart() {
-    Console.readLine(this.MESSAGES.restart, this.restart.bind(this));
+    const MESSAGE = `게임을 새로 시작하려면 ${RESTART_COMMAND.NEW_GAME}, 종료하려면 ${RESTART_COMMAND.EXIT}를 입력하세요.`;
+
+    Console.readLine(MESSAGE, this.restart.bind(this));
   }
 
   setNewAnswer() {
