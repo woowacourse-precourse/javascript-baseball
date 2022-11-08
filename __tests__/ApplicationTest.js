@@ -91,3 +91,45 @@ describe("getResultScore(): strike, ball, nothing 계산", () => {
     expect(app.getResultScore(answer, input)).toEqual([3, 0, false]);
   });
 });
+
+describe("isValidInput(): 사용자 입력이 유효하지 않으면 에러 발생", () => {
+  test("containsThreeNumbers(): 길이가 0, 1, 4 인 문자열", () => {
+    const inputs = ["", "12", "1234"];
+
+    const app = new App();
+
+    inputs.forEach((input) => {
+      expect(app.containsThreeNumbers(input)).toBeFalsy();
+    });
+  });
+
+  test("containsOnlyNumbers(): 숫자가 아닌 문자가 포함된 문자열", () => {
+    const inputs = ["a13", "1ㄱ3", "1dㅎ"];
+
+    const app = new App();
+
+    inputs.forEach((input) => {
+      expect(app.containsOnlyNumbers(input)).toBeFalsy();
+    });
+  });
+
+  test("containsZero(): 0이 포함된 문자열", () => {
+    const inputs = ["012", "507", "890"];
+
+    const app = new App();
+
+    inputs.forEach((input) => {
+      expect(app.containsOnlyNumbers(input)).toBeTruthy();
+    });
+  });
+
+  test("isDuplicated(): 중복 문자열", () => {
+    const inputs = ["122", "333"];
+
+    const app = new App();
+
+    inputs.forEach((input) => {
+      expect(app.isDuplicated(input)).toBeTruthy();
+    });
+  });
+});
