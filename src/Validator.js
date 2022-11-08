@@ -25,7 +25,7 @@ class Validator {
 
   static isValidRangeOfNumber(playerInput) {
     const convertStringPlayerInput = String(playerInput);
-    const inputNumbers = convertStringPlayerInput.split('');
+    const inputNumbers = convertStringPlayerInput.split('').map(Number);
     inputNumbers.forEach((inputNumber) => {
       if (inputNumber < BEGIN_NUM) {
         throw new Error(`${INVALID_NUMERIC_ERROR_MESSAGE}`);
@@ -36,8 +36,8 @@ class Validator {
 
   static isUniqueNumber(playerInput) {
     const convertStringPlayerInput = String(playerInput);
-    const differentNumbers = [...new Set(convertStringPlayerInput)];
-    if (differentNumbers.length !== MAX_LENGTH) {
+    const uniqueNumbers = [...new Set(convertStringPlayerInput)];
+    if (uniqueNumbers.length !== MAX_LENGTH) {
       throw new Error(`${DUPLICATE_NUMERIC_ERROR_MESSAGE}`);
     }
     return true;
