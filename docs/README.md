@@ -24,11 +24,11 @@
 - [x] 컴퓨터는 임의의 수를 선택한다. 아래 요건에 맞지 않는다면 다시 임의의 수를 선택한다.
 
   - [x] 임의의 수는 각 1~9 사이 수이다.
-    - [x] test: 1보다 작거나 9보다 큰 경우 - pickUniqueNumbersInRange 사용
+    - [x] test: 1보다 작거나 9보다 큰 경우 - pickNumberInRange 사용
   - [x] 임의의 수는 3자리 수이다.
-    - [x] test: 아무것도 없거나 1자리, 2자리 수일 경우 4자리 이상일 경우 - pickUniqueNumbersInRange 사용
+    - [x] test: 아무것도 없거나 1자리, 2자리 수일 경우 4자리 이상일 경우
   - [x] 임의의 수는 서로 다른 수이다.
-    - [x] test: 임의의 수가 1가지라도 같을 경우 - pickUniqueNumbersInRange 사용
+    - [x] test: 임의의 수가 1가지라도 같을 경우
   - [x] 컴퓨터 임의의 수를 array에 저장한다.
 
 - [x] 입력받은 3자리 문자를 전처리한다.
