@@ -10,11 +10,11 @@ const isDuplicatedNumber = (userInputNumber) => {
   return newSet.size !== userInputNumber.length;
 };
 
-const isNotThreeDigit = (randomNumber) => randomNumber.length !== 3;
+const isNotThreeDigit = (userInputNumber) => userInputNumber.length !== 3;
 
-const isNotNumber = (randomNumber) => {
+const isNotNumber = (userInputNumber) => {
   let hasNan = false;
-  randomNumber.forEach((x) => {
+  userInputNumber.forEach((x) => {
     if (Number.isNaN(+x)) hasNan = true;
   });
   return hasNan;
@@ -23,6 +23,7 @@ const isNotNumber = (randomNumber) => {
 const isIncludeZero = (userInputNumber) => userInputNumber.includes(0);
 
 const checkValidUserInput = (userInput) => {
+  console.log(userInput);
   if (isDuplicatedNumber(userInput)) {
     throw new Error(ERROR_TEXT.DUPLICATED);
   }
