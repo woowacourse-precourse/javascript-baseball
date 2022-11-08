@@ -1,5 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { MESSAGE } = require("./constants/constants");
+const countBallAndStrike = require("./utils/countBallAndStrike");
+const createRandomNumber = require("./utils/createRandomNumber");
+const validateInputValue = require("./utils/validateInputValue");
+const printResultMessage = require("./utils/printResultMessage");
+
 class App {
   play() {
     Console.print(MESSAGE.START);
