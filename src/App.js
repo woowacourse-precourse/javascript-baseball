@@ -2,10 +2,11 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 
 class App {
-  constructor(){}
+  constructor(){
+    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+  }
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
     return this.startGame();
   }
 
@@ -17,7 +18,6 @@ class App {
 
   makeComputerNumber () {
     let makedComputerNum = this.makeRandomNum();
-    console.log(makedComputerNum)
     return this.computerNumber.push(makedComputerNum.join(''))
   }
 
@@ -33,14 +33,17 @@ class App {
 
   inputChecker (userNumber) {
     if (userNumber.length !== 3){
-      throw '3자리 수를 입력하세요.'
+      throw new Error ('3자리 수를 입력하세요.')
     }
-    else if (this.duplicationCheck(userNumber) == false){
-      throw '서로 중복되지 않는 수를 입력하세요'
+    
+    if ([...userNumber].includes('0')) {
+      throw new Error ('1~9의 숫자만 입력하세요')
     }
-    else if ([...userNumber].includes('0')) {
-      throw '1~9의 숫자만 입력하세요'
+    if (this.duplicationCheck(userNumber) == false){
+      throw new Error ('서로 중복되지 않는 수를 입력하세요')
     }
+
+
     return this.readyResultCheck(userNumber)
   }
 
@@ -120,14 +123,14 @@ class App {
     if (ballResult > 0) announcement.push(ballResult + '볼');
     if (strike > 0) announcement.push(strike + '스트라이크');
     MissionUtils.Console.print(announcement.join(' '));
-    setTimeout(() => {return this.getUserNumber(computerNum);})
+    return this.getUserNumber(computerNum)
   }
 
   chooseReStart() {
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       if (answer == 1) return this.startGame()
       if (answer == 2) return 
-      throw '1이나 2를 입력하세요.'
+      throw new Error('1이나 2를 입력하세요.')
     })
   }
 
@@ -137,9 +140,6 @@ class App {
     else if (numForCheck[0] == numForCheck[2]) return false
   }
 }
-
-const app = new App();
-app.play();
 
 module.exports = App;
 
