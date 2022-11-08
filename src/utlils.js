@@ -2,10 +2,11 @@ const { Random, Console } = require("@woowacourse/mission-utils");
 
 function getTargetNumber() {
   let randomNumbers = "";
-  while (randomNumbers.length < 3)
-    if (randomNumbers.includes(Random.pickNumberInRange(1, 9)) === false)
-      randomNumbers += Random.pickNumberInRange(1, 9);
-
+  while (randomNumbers.length < 3) {
+    const rendomNumber = Random.pickNumberInRange(1, 9);
+    if (randomNumbers.includes(rendomNumber) === false)
+      randomNumbers += rendomNumber;
+  }
   return randomNumbers;
 }
 
