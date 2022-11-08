@@ -8,8 +8,11 @@ const GAME_VALUE = require("./constants/values");
 
 class UserModel {
   convertStringToArray(input) {
-    const convertArgsStringToInt = (arg) => +arg;
-    return Array.from([...input], convertArgsStringToInt);
+    return Array.from([...input], this.convertArgsStringToInt);
+  }
+
+  convertArgsStringToInt(input) {
+    return +input;
   }
 
   isNotLengthEqualsThree(input) {
