@@ -1,22 +1,24 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { MESSAGE, RESULT, ERROR, END_OPTION } = require('./data/constants');
-const { CheckException } = require('./exception/exception');
+const { MESSAGE, RESULT, ERROR, END_OPTION } = require('./data/constant');
+const { checkException, checkRestartException } = require('./exception/exception');
 
 class App {
-  randomArray() {
-    return Random.pickUniqueNumbersInRange(1, 9, 3);
+  randomNumber() {
+    const randomNumbers = new Set();
+
+    while (randomNumbers.size < 3) {
+      randomNumbers.add(Random.pickNumberInRange(1, 9));
+    }
+
+    return [...randomNumbers];
   }
 
   askRestart() {
     Console.readLine(MESSAGE.RESTART + '\n', answer => {
-      if (!['1', '2'].includes(answer))
-        throw ERROR.RESTART_RANGE;
-      if (answer == END_OPTION.RESTART)
-        this.restart();
-      if (answer == END_OPTION.EXIT)
-        Console.close();
+      checkRestartException(answer);
 
-      return;
+      if (answer == END_OPTION.RESTART) this.gameStart();
+      if (answer == END_OPTION.EXIT) Console.close();
     });
   }
 
@@ -25,68 +27,54 @@ class App {
       Console.print(MESSAGE.SUCCESS);
 
       this.askRestart();
-
-      return;
     }
   }
 
-  recursiveInput() {
+  recursiveInput(computerNumber) {
     Console.readLine(MESSAGE.INPUT, inputNum => {
-      CheckException(inputNum, 3);
+      checkException(inputNum, 3);
 
-      const { ball, strike } = this.check(inputNum);
+      const countResult = this.countBallAndStrike(inputNum, computerNumber);
+      const resultPrint = this.countResultPrint(countResult);
+      Console.print(resultPrint);
 
-      Console.print(this.result(ball, strike));
+      this.threeStrike(countResult.strike);
 
-      this.threeStrike(strike);
-      this.recursiveInput();
-
-      return;
+      this.recursiveInput(computerNumber);
     });
   }
 
-  check(inputNum) {
+  countBallAndStrike(inputNum, computerNumber) {
     const count = {
       ball: 0,
-      strike: 0
+      strike: 0,
     };
-    const inputNumArray = inputNum.split('');
+    const inputNumArr = inputNum.split('');
 
-    inputNumArray.forEach((num, index) => {
-      if (parseInt(num) === this.computerNumber[index])
-        count.strike += 1;
-      else if (this.computerNumber.includes(parseInt(num)))
-        count.ball += 1;
+    inputNumArr.forEach((num, index) => {
+      if (parseInt(num) === computerNumber[index]) count.strike += 1;
+      else if (computerNumber.includes(parseInt(num))) count.ball += 1;
     });
     return count;
   }
 
-  restart() {
-    this.computerNumber = this.randomArray();
-    this.recursiveInput();
+  countResultPrint({ ball, strike }) {
+    if (ball == 0 && strike == 0) return RESULT.NOTHING;
 
-    return;
+    if (ball > 0 && strike > 0)
+      return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
+    if (ball > 0 && strike == 0) return `${ball}${RESULT.BALL}`;
+    if (ball == 0 && strike > 0) return `${strike}${RESULT.STRIKE}`;
+  }
+
+  gameStart() {
+    const computerNumber = this.randomNumber();
+    this.recursiveInput(computerNumber);
   }
 
   play() {
     Console.print(MESSAGE.START);
-
-    this.computerNumber = this.randomArray();
-    this.recursiveInput();
-
-    return;
-  }
-
-  result(ball, strike) {
-    if (ball == 0 && strike == 0)
-      return RESULT.NOTHING;
-
-    if (ball > 0 && strike > 0)
-      return `${ball}${RESULT.BALL} ${strike}${RESULT.STRIKE}`;
-    if (ball > 0 && strike == 0)
-      return `${ball}${RESULT.BALL}`;
-    if (ball == 0 && strike > 0)
-      return `${strike}${RESULT.STRIKE}`;
+    this.gameStart();
   }
 }
 
