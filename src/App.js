@@ -1,4 +1,12 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+//const MESSAGE = require("../lib/message.js");
+const MESSAGE = {
+  START: "숫자 야구 게임을 시작합니다.",
+  INPUT: "숫자를 입력해주세요 : ",
+  SUCCESS: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
+  END: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  ERROR: "3자리 숫자를 입력하세요"
+};
 class App {
   initRandom(){
     const computer = [];
@@ -12,15 +20,17 @@ class App {
   }
   validateNumber(input){
     if(input.length!=3){
-      throw new Error("3자리 숫자를 입력하세요");
+      throw new Error(MESSAGE.ERROR);
     }
     for(let val=0; val<input.length; val++){
       if(isNaN(input[val])){
-        throw new Error("3자리 숫자를 입력하세요");
+        throw new Error(MESSAGE.ERROR);
       }
     }
   }
   countHint(computer,guess){
+    //console.log("computer",computer);
+    //console.log("guess",guess);
     let strikeCnt = 0;
     let ballCnt = 0;
     for(let idx=0; idx<3; idx++){
@@ -55,10 +65,12 @@ class App {
     MissionUtils.Console.print(hint);
   }
   restart(){
-    MissionUtils.Console.print("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    MissionUtils.Console.print(MESSAGE.END);
     MissionUtils.Console.readLine('', (input) => {
-      if(input==1){
+      if(Number(input)==1){
         this.startGame();
+      }else if(Number(input)==2){
+        MissionUtils.Console.close();
       }
     });
   }
@@ -70,15 +82,16 @@ class App {
     this.hintMessage(strikeCnt,ballCnt);
 
     if(strikeCnt == 3){
-      MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+      //MissionUtils.Console.print(MESSAGE.SUCCESS);
+      console.log(MESSAGE.SUCCESS);
       this.restart();
+      return;
     }else{
       this.guessNumber(computer);
     }
   }
-  
   guessNumber(computer){
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    MissionUtils.Console.readLine(MESSAGE.INPUT, (input) => {
       this.validateNumber(input);
       this.provideHint(computer,input.split('').map((num)=>Number(num)));
     });
@@ -88,8 +101,10 @@ class App {
     this.guessNumber(computer);
   }
   play() {
-    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    MissionUtils.Console.print(MESSAGE.START);
     this.startGame();
   }
 }
+//const app = new App();
+//app.play();
 module.exports = App;
