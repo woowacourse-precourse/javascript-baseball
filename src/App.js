@@ -97,6 +97,23 @@ class App {
 
     return result;
   }
+
+  /**
+   * return isRestart if input num is valid
+   * @param {number} num
+   * @returns restart true or false
+   */
+  getIsRestart(num) {
+    // gameRestart input must be 1 or 2
+    if (num === 1) {
+      return true;
+    } else if (num === 2) {
+      return false;
+    }
+
+    // input is not 1 or 2, throw error
+    throw new Error('game restart input must be 1(restart) or 2(finish)');
+  }
 }
 
 module.exports = App;

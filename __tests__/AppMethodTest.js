@@ -131,4 +131,25 @@ describe('Application Unit Test', () => {
       });
     });
   });
+
+  describe('getIsRestart method test', () => {
+    test('correct input (1: restart, 2: finish)', () => {
+      const app = new App();
+      const inputList = [1, 2];
+      const isRestartList = [true, false];
+
+      for (let i = 0; i < inputList.length; i++) {
+        expect(app.getIsRestart(inputList[i])).toBe(isRestartList[i]);
+      }
+    });
+
+    test('invalid input ', () => {
+      const app = new App();
+      const num = 3;
+      expect(() => {
+        const app = new App();
+        app.getIsRestart(num);
+      }).toThrow();
+    });
+  });
 });
