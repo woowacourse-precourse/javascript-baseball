@@ -84,9 +84,9 @@ class BaseballGame{
     }
 
     inputNumber(answer) {
-        Console.readLine(MESSAGE.INPUT, (inputNumber) => {
-            this.validateInputNumber(inputNumber);
-            this.resultMessage(answer, inputNumber);
+        Console.readLine(MESSAGE.INPUT, (number) => {
+            this.validateInputNumber(number);
+            this.resultMessage(answer, number);
         });
     }
 
