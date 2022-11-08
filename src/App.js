@@ -27,11 +27,11 @@ class App {
   /** 3. 숫자 입력 및 입력값 유효성 검사*/
   userInput(computerArr) {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (input) => {
-      if (input.length !== 3 || isNaN(input)) {
+      if(input.length !== 3 || isNaN(input)) {
         throw new Error('입력값이 잘못되어, 게임을 종료합니다.');
       }
       var inputArr = [];
-      for (var i = 0; i < input.length; i++) {
+      for(var i = 0; i < input.length; i++) {
         inputArr.push(Number(input[i]));
       }
       this.hint(inputArr, computerArr);
@@ -81,7 +81,7 @@ class App {
     MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (answer) => {
       MissionUtils.Console.print(`${answer}`);
-      if (answer == 1) {
+      if(answer == 1) {
         this.play();
       } else if (answer == 2) {
         MissionUtils.Console.close();
