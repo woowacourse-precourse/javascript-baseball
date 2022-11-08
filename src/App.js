@@ -20,11 +20,17 @@ class App {
     this.computerNumbers = [];
   }
 
+  stringToNumber(userNumbers) {
+    const mapfn = (arg) => Number(arg);
+    userNumbers = Array.from(userNumbers, mapfn);
+    return userNumbers;
+  }
+
   validCheckUserNumbers(userNumbers) {
-    if (userNumbers.length != PICK_LENGTH) throw "error";   //숫자를 3개 입력하지 않은 경우
+    if (userNumbers.length != PICK_LENGTH) throw "숫자를 3개 입력해주세요.";   //숫자를 3개 입력하지 않은 경우
 
     const filterDuplicateNumberSet = new Set(userNumbers);
-    if (userNumbers.length != filterDuplicateNumberSet.size) throw "error";   //중복 숫자 입력이 있는지 검사
+    if (userNumbers.length != filterDuplicateNumberSet.size) throw "중복 숫자를 입력하지 마세요.";   //중복 숫자 입력이 있는지 검사
   }
 
   isStrike(userNumbers, i) {
@@ -96,8 +102,7 @@ class App {
     let gameResult; 
 
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (userNumbers) => { 
-      const mapfn = (arg) => Number(arg);
-      userNumbers = Array.from(userNumbers, mapfn);
+      userNumbers = this.stringToNumber(userNumbers);
 
       this.validCheckUserNumbers(userNumbers);
 
