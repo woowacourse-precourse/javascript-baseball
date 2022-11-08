@@ -121,7 +121,6 @@ class App {
   }
   #submitInput() {
     MissionUtils.Console.readLine(GAME_MESSAGE.input, (input) => {
-      console.log(input);
       input = GameUtils.toFilterdArray(input);
       const errorMessage = Validator.isInvalidAnswer(input);
       if(errorMessage) Print.error(errorMessage);
