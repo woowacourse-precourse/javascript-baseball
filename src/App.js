@@ -31,6 +31,59 @@ const userInputCheck = (userInput) => {
   }
 };
 
+const countStrikeBall = (userInput, computerInput) => {
+  let ball = checkBall(userInput, computerInput);
+  let strike = checkStrike(userInput, computerInput);
+  return [strike, ball];
+};
+
+const checkStrike = (userInput, computerInput) => {
+  let count = 0;
+  [...userInput].map((elem, idx) => {
+    if (computerInput[idx] === Number(elem)) {
+      count++;
+    }
+  });
+  return count;
+};
+const checkBall = (userInput, computerInput) => {
+  let count = 0;
+  [...userInput].map((elem) => {
+    if (computerInput.includes(Number(elem))) {
+      count++;
+    }
+  });
+  count -= checkStrike(userInput, computerInput);
+  return count;
+};
+
+const makeResponseMessage = (strikeCount, ballCount) => {
+  if (strikeCount === 0 && ballCount === 0) {
+    MissionUtils.Console.print("낫싱");
+    return false;
+  }
+  if (strikeCount !== 0 && ballCount !== 0) {
+    MissionUtils.Console.print(`${ballCount}볼 ${strikeCount}스트라이크`);
+    return false;
+  }
+  if (strikeCount === 3) {
+    MissionUtils.Console.print("3스트라이크");
+    MissionUtils.Console.print(END_GAME_MESSAGE);
+    MissionUtils.Console.readLine(RESTART_END_APPLICATION, (answer) => {
+      checkContinue(answer);
+    });
+    return true;
+  }
+  if (strikeCount !== 0 && ballCount === 0) {
+    MissionUtils.Console.print(`${strikeCount}스트라이크`);
+    return false;
+  }
+  if (ballCount && strikeCount === 0) {
+    MissionUtils.Console.print(`${ballCount}볼`);
+    return false;
+  }
+};
+
 const getComputerNumber = () => {
   const computer = [];
   while (computer.length < 3) {
