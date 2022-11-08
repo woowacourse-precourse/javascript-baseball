@@ -93,5 +93,25 @@ class App {
     ballCount -= strikeCount;
     return ballCount;
   }
+
+  printCheckResult(strikeCount, ballCount) {
+    const HIT_MESSAGE = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    if (ballCount && strikeCount) {
+      Console.print(ballCount + '볼 ' + strikeCount + '스트라이크');
+      return true;
+    } else if (ballCount) {
+      Console.print(ballCount + '볼');
+      return true;
+    } else if (strikeCount) {
+      Console.print(strikeCount + '스트라이크');
+      if (strikeCount === 3) {
+        Console.print(HIT_MESSAGE);
+        return false;
+      }
+    } else {
+      Console.print('낫싱');
+      return true;
+    }
+  }
 }
 module.exports = App;
