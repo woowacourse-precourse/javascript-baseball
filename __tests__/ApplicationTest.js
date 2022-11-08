@@ -227,6 +227,6 @@ describe("숫자 야구 게임", () => {
     const logSpy = getLogSpy();
     const userInput = "2";
     getUserReplayOrFinish(userInput);
-    expect(logSpy).toHaveBeenCalledWith("finish the game!");
+    expect(logSpy).toHaveBeenCalledWith("finish the game");
   });
 });
