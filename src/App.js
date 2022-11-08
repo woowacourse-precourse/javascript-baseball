@@ -38,6 +38,13 @@ class App {
     }
   }
 
+  arrayValueDuplicateCheck(inputArray) {
+    const numberSet = new Set(inputArray);
+    if (numberSet.size !== 3) {
+      throw new Error('❗️ 중복되지 않은 숫자를 입력하세요. ❗️');
+    }
+  }
+
   inputCallback() {}
 
   play() {}
