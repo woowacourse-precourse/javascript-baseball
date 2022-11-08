@@ -85,7 +85,7 @@ class Messages {
     const strike = this.resultStrike(this.digit);
     const correct = `${this.digit}개의 숫자를 모두 맞히셨습니다!`;
 
-    return `${strike}\n${correct}\n${this.endGame}`;
+    return `${strike}\n${correct} ${this.endGame}`;
   }
 
   resultBall(count) {
