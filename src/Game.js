@@ -74,6 +74,7 @@ class Game {
     if (this.checkEnd(result)) {
       return this.askReplay();
     }
+    this.play();
   }
 }
 
