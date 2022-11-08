@@ -18,7 +18,15 @@ class App {
       this.user.changeToNumbers();
       const ballAndStrike = this.compareNumbers(this.opponent.number, this.user.input);
       this.printResult(ballAndStrike);
+      endGame = this.gameEnd(ballAndStrike);
     }
+  }
+  gameEnd(ballAndStrike) {
+    if (ballAndStrike[1] === 3) {
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      return true;
+    }
+    return false;
   }
   compareNumbers(opponentArr, userArr) {
     let ball = 0,
