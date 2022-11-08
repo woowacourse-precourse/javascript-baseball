@@ -11,8 +11,12 @@ class App {
   }
 
   newRandomNumber() {
-    const randomNumber = MissionUtils.Random.pickNumberInRange(100, 999);
-    const gameNumber = randomNumber;
+    const NumSet = new Set();
+    while (NumSet.size < 3) {
+      NumSet.add(MissionUtils.Random.pickNumberInRange(1, 9));
+    }
+
+    const gameNumber = Number([...NumSet].join(""));
     console.log(`시스템 게임 번호: ${gameNumber}`);
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
     return gameNumber;
@@ -20,15 +24,18 @@ class App {
 
   gameStart(gameNumber) {
     MissionUtils.Console.readLine("3자리 숫자를 입력해주세요: ", (answer) => {
+      console.log(`입력값: ${answer}`);
       if (answer.length !== 3) {
         throw "입력값은 반드시 3자리 숫자여야 합니다.";
       }
 
       if (Number(gameNumber) === Number(answer)) {
         this.result = "3스트라이크";
-        console.log(this.result);
         if (this.result === "3스트라이크") {
-          MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다!");
+          MissionUtils.Console.print(this.result);
+          MissionUtils.Console.print(
+            "3개의 숫자를 모두 맞히셨습니다! 게임 종료"
+          );
           MissionUtils.Console.print(
             "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."
           );
@@ -38,7 +45,7 @@ class App {
               if (Number(gameResumeChoice) === 1) {
                 this.play();
               } else if (Number(gameResumeChoice) === 2) {
-                MissionUtils.Console.print("게임을 종료합니다.");
+                MissionUtils.Console.print("게임 종료");
               }
             }
           );
@@ -69,9 +76,14 @@ class App {
           }
         }
 
-        this.result = `${ballCount}볼 ${strikeCount}스트라이크`;
         if (this.result === "0볼 0스트라이크") {
           this.result = "낫싱";
+        } else if ((strikeCount > 0) & (ballCount === 0)) {
+          // this.result = `${strikeCount}스트라이크`;
+        } else if ((strikeCount == 0) & (ballCount > 0)) {
+          this.result = `${ballCount}볼`;
+        } else if ((strikeCount > 0) & (ballCount > 0)) {
+          this.result = `${ballCount}볼 ${strikeCount}스트라이크`;
         }
         MissionUtils.Console.print(`${this.result}`);
 
@@ -79,7 +91,7 @@ class App {
           this.gameStart(gameNumber);
         }
       } catch (e) {
-        console.error(e);
+        MissionUtils.Console.print(e);
       }
     });
   }
@@ -89,4 +101,3 @@ module.exports = App;
 
 const app = new App();
 app.play();
-99;
