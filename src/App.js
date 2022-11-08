@@ -1,12 +1,21 @@
 const { Random, Console } = require("@woowacourse/mission-utils");
+const {
+  VALID_ANSWER,
+  RESTART,
+  TO_STRING_BALL,
+  TO_STRING_STRIKE,
+  NOTHING,
+  MIN,
+  MAX,
+} = require("./constant");
+const { throwError } = require("./handleError");
+const { isAllNumber, isCorrectedLength } = require("./utils");
 
 class App {
   goal = [];
 
   generateGoalNumber() {
     const threeNumbers = new Set();
-    const MIN = 1;
-    const MAX = 9;
     while (threeNumbers.size < 3) {
       const number = Random.pickNumberInRange(MIN, MAX);
       threeNumbers.add(number);
@@ -19,18 +28,17 @@ class App {
     const arrayOfAnswer = Array.from(answer).map(
       (stringNumber) => +stringNumber
     );
-    const isAllNumber = (numberArr) =>
-      numberArr.every((number) => !Number.isNaN(number));
+
     if (!isAllNumber(arrayOfAnswer)) {
       this.exitGame();
-      throw "숫자만 입력해주세요.";
+      throwError.onlyNumber();
     }
 
     verifiedAnswer = [...new Set(arrayOfAnswer)];
-    const isCorrectedLength = (arr) => arr.length === 3;
+
     if (!isCorrectedLength(verifiedAnswer)) {
       this.exitGame();
-      throw "세 자리 숫자를 입력해주세요.";
+      throwError.lengthIsThree();
     }
 
     return verifiedAnswer;
@@ -66,21 +74,9 @@ class App {
 
   printResult(score, otherTextMessage = "") {
     const [strikeScore, ballScore] = score;
-    const BALL = {
-      0: "",
-      1: "1볼",
-      2: "2볼",
-      3: "3볼",
-    };
-    const STRIKE = {
-      0: "",
-      1: "1스트라이크",
-      2: "2스트라이크",
-      3: "3스트라이크",
-    };
-    const NOTHING = "낫싱";
+
     const message =
-      `${BALL[ballScore]} ${STRIKE[strikeScore]}\n${otherTextMessage}`.trim();
+      `${TO_STRING_BALL[ballScore]} ${TO_STRING_STRIKE[strikeScore]}\n${otherTextMessage}`.trim();
     if (message) {
       Console.print(message);
       return;
@@ -89,12 +85,6 @@ class App {
   }
 
   confirmRestart() {
-    const RESTART = "1";
-    const EXIT = "2";
-    const VALID_ANSWER = {
-      1: RESTART,
-      2: EXIT,
-    };
     Console.readLine(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
       (answer) => {
@@ -127,19 +117,17 @@ class App {
       this.printResult(score);
 
       const THREE_STRIKE = 3;
-
       const isThreeStrike = (strikeScore) => strikeScore === THREE_STRIKE;
       if (isThreeStrike(score[0])) {
         this.printResult(score, "3개의 숫자를 모두 맞히셨습니다! 게임 종료");
         this.confirmRestart();
       }
-
       this.receiveAnswer();
     });
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;
