@@ -27,19 +27,18 @@ class App {
 
       // (숫자를 모두 맞힐 때까지 반복되는) 사용자 입력에 대한 재귀 호출 함수입니다.
   processInput(input) {
-    try {
-      this.validateInput(input);
-      const [strike, ball] = this.checkStrikeBall(input);
+    this.validateInput(input);
+    const [strike, ball] = this.checkStrikeBall(input);
 
-      if (strike === 3) { // 게임 종료
-        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (flag) => {
-          this.exitOrRestart(flag);
-        });
-      }
-      else { // 결과(힌트) 출력
-        if (strike === 0 && ball === 0) MissionUtils.Console.print("읎다");
-        else MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
+    if (strike === 3) { // 게임 종료
+      MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+      MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.", (flag) => {
+        this.exitOrRestart(flag);
+      });
+    }
+    else { // 결과(힌트) 출력
+      if (strike === 0 && ball === 0) MissionUtils.Console.print("읎다");
+      else MissionUtils.Console.print(ball + "볼 " + strike + "스트라이크");
 
         // 숫자를 모두 맞힐 때까지 반복
         MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
@@ -66,7 +65,7 @@ class App {
 
     return [strike, ball];
   }
-  
+
 // 종료 또는 재시작
 exitOrRestart(flag) {
   if (flag == 1) this.play();
