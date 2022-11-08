@@ -14,5 +14,5 @@
 	- [x] (Game) 생성된 랜덤 숫자와 입력값 위치 비교
 	- [x] (Judgement) toString()메서드
 	- [x] (Judgement) isAllStrike()메서드
-	- [ ] (Referee) Game할당
+	- [x] (Referee) Game할당
 	- [ ] (Referee) 입력받은 값에 대한 Judgement반환
