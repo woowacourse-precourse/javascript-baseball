@@ -24,6 +24,7 @@ class App {
       const validNumberFromUser = this.userModel.convertStringToArray(
         this.userModel.isInputNumbersValid(numberFromUser)
       );
+
       const isGameClear = this.GameManager.apply(validNumberFromUser, numberFromComputer);
 
       if (isGameClear === true) this.askUserRestartOrNot();
@@ -33,11 +34,11 @@ class App {
 
   askUserRestartOrNot() {
     readLine(GAME_MESSAGE.ASK_GAME_CONTINUE_OR_EXIT, (response) => {
-      this.updateNextPhaseDependingResponse(response);
+      this.updateStateRestartOrNotDependingResponse(response);
     });
   }
 
-  updateNextPhaseDependingResponse(response) {
+  updateStateRestartOrNotDependingResponse(response) {
     const isInputNotValid = (input) => input !== GAME_VALUE.RESTART && input !== GAME_VALUE.EXIT;
     if (response === GAME_VALUE.RESTART) this.play();
     if (response === GAME_VALUE.EXIT) close();
