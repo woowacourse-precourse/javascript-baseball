@@ -17,7 +17,6 @@ class App {
 
   getComputerNumbers() {
     const computerNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
-    console.log(computerNumbers);
     this.getUserNumbers(computerNumbers);
   }
 
@@ -61,5 +60,8 @@ class App {
     });
   }
 }
+
+const app = new App();
+app.play();
 
 
