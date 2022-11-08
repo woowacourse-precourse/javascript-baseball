@@ -13,6 +13,17 @@ class App {
     });
   }
 
+  progress(userGuess) {
+    const { strike, ball } = this.calcHit(this.computerNumber, userGuess);
+    Console.print(createResultMessage(strike, ball));
+
+    if (strike === 3) {
+      this.gameOver();
+    } else {
+      this.play();
+    }
+  }
+
   createComputerNumber() {
     const computerNumber = new Set();
 
