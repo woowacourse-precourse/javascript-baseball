@@ -2,6 +2,9 @@ const MissionUtils = require('@woowacourse/mission-utils');
 
 class App {
   play() {
+    let BaseballNumber = createRandomNumber();
+    startBaseballNumber();
+    inputNumber(BaseballNumber);
   }
   
 }
@@ -14,6 +17,17 @@ const inputNumber = (answerNumber) => {
   MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (number) => {
 
   });
+};
+
+const createRandomNumber = () => {
+  const baseballArray = [];
+  while (baseballArray.length < 3) {
+    let randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (!baseballArray.includes(randomNum)) {
+      baseballArray.push(randomNum);
+    }
+  }
+  return baseballArray
 };
 
 module.exports = App;
