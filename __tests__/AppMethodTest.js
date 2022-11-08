@@ -29,11 +29,6 @@ describe('App 클래스 메소드 테스트', () => {
         expect(app.createComputerNumber()).toHaveLength(3);
     });
 
-    test("createComputerNumber 컴퓨터 3개 숫자 생성 테스트", () => {
-        const app = new App();
-        expect(app.createComputerNumber()).toHaveLength(3);
-    });
-
     test("calcBallAndStrike 테스트", () => {
         const randoms = [1, 2, 3];
         const answers = [["4", "5", "6"], ["2", "3", "1"], ["1", "9", "2"], ["1", "2", "3"]];
