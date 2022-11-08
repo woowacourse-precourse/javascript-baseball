@@ -19,6 +19,7 @@ class App {
       validator.isVaild(userInput);      
       const resultCalculator = new game.ResultCalculator;
       const result = resultCalculator.getResult(userInput, this.answer);
+      print.result(result);
     });
   }
 }
