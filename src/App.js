@@ -1,6 +1,23 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
+  endGame() {
+    MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    MissionUtils.Console.readLine(
+      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+      (answer) => {
+        if (answer == 1) {
+          const app = new App();
+          return app.play();
+        } else if (answer == 2) {
+          throw "게임종료";
+        } else {
+          throw "1 또는 2를 입력해주세요";
+        }
+      }
+    );
+  }
+
   checkStrikeOrBall(
     COMPUTER,
     computerNumberIndex,
