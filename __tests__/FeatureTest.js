@@ -48,4 +48,46 @@ describe("숫자 야구 게임 기능 테스트", () => {
       expect(() => app.checkUserNumbersInputValidity(wrongInput)).not.toThrow();
     });
   });
+  describe("길이가 3인 두 배열을 비교하는 compareEachNumbers, [ballCnt, strikeCnt] 반환", () => {
+    test("[1, 2, 3], [1, 2, 3]을 입력 받으면 [0, 3]", () => {
+      const computerNumbers = [1, 2, 3];
+      const userNumbers = [1, 2, 3];
+      const expected = [0, 3];
+      const result = app.compareEachNumbers(computerNumbers, userNumbers);
+      expect(result).toEqual(expect.arrayContaining(expected));
+      expect(result.length).toEqual(expected.length);
+    });
+    test("[1, 2, 3], [4, 2, 3]을 입력 받으면 [0, 2]", () => {
+      const computerNumbers = [1, 2, 3];
+      const userNumbers = [4, 2, 3];
+      const expected = [0, 2];
+      const result = app.compareEachNumbers(computerNumbers, userNumbers);
+      expect(result).toEqual(expect.arrayContaining(expected));
+      expect(result.length).toEqual(expected.length);
+    });
+    test("[1, 2, 3], [3, 2, 1]을 입력 받으면 [2, 1]", () => {
+      const computerNumbers = [1, 2, 3];
+      const userNumbers = [3, 2, 1];
+      const expected = [2, 1];
+      const result = app.compareEachNumbers(computerNumbers, userNumbers);
+      expect(result).toEqual(expect.arrayContaining(expected));
+      expect(result.length).toEqual(expected.length);
+    });
+    test("[1, 2, 3], [4, 5, 6]을 입력 받으면 [0, 0]", () => {
+      const computerNumbers = [1, 2, 3];
+      const userNumbers = [4, 5, 6];
+      const expected = [0, 0];
+      const result = app.compareEachNumbers(computerNumbers, userNumbers);
+      expect(result).toEqual(expect.arrayContaining(expected));
+      expect(result.length).toEqual(expected.length);
+    });
+    test("[1, 2, 3], [3, 1, 7]을 입력 받으면 [2, 0]", () => {
+      const computerNumbers = [1, 2, 3];
+      const userNumbers = [3, 1, 7];
+      const expected = [2, 0];
+      const result = app.compareEachNumbers(computerNumbers, userNumbers);
+      expect(result).toEqual(expect.arrayContaining(expected));
+      expect(result.length).toEqual(expected.length);
+    });
+  });
 });
