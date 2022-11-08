@@ -1,7 +1,7 @@
 const { NUMBER_ONE_TO_NINE } = require("../utils/RegExpress");
 
 const validateUserNumber = (userInput) => {
-  const isBetweenOneToNine = validateOneToNine(userInput);
+  const isBetweenOneToNine = validateBetweenOneToNine(userInput);
   const isCorrectLength = validateLength(userInput, 3);
   const isNotOverlapped = validateOverlapped(userInput);
 
@@ -23,7 +23,7 @@ const validateOverlapped = (target) => {
   return validOverlapped;
 };
 
-const validateOneToNine = (target) => {
+const validateBetweenOneToNine = (target) => {
   return NUMBER_ONE_TO_NINE.test(target);
 };
 
