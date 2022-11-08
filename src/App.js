@@ -1,5 +1,6 @@
-const { Random, Console } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const { NUM_SIZE, KEY, MESSAGE, ERROR } = require('./Constants');
+const { computerInput } = require('./ComputerInput');
 
 class App {
 
@@ -14,21 +15,10 @@ class App {
   }
 
   startGame(){
-    this.computerInput();
+    this.computerInputNums = computerInput();
     this.userInput();
   }
 
-
-  computerInput(){
-    const computer = [];
-    while (computer.length < NUM_SIZE) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!computer.includes(number)) {
-        computer.push(number);
-      }
-    }
-    this.computerInputNums = computer;
-  }
 
   userInput(){
     return Console.readLine(MESSAGE.INPUT,(input) => {
