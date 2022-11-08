@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const isAvailableValue = require('./utils/isAvailableValue');
 
 class Computer {
   #value;
@@ -10,16 +11,22 @@ class Computer {
     return this.#value;
   }
 
-  setRandomValue() {
-    let randomValue = '';
+  setValue() {
+    const randomValue = this.generatorComputerValue();
+    if (isAvailableValue(randomValue)) this.#value = randomValue;
+    else throw new Error('시스템 오류로 인해 게임을 종료합니다.');
+  }
+
+  generatorComputerValue() {
+    let computerValue = '';
     let randomNumber;
 
-    while (randomValue.length < 3) {
+    while (computerValue.length < 3) {
       randomNumber = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!randomValue.includes(randomNumber)) randomValue += randomNumber;
+      if (!computerValue.includes(randomNumber)) computerValue += randomNumber;
     }
 
-    this.#value = randomValue;
+    return computerValue;
   }
 }
 
