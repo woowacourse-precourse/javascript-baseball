@@ -46,7 +46,7 @@ class App {
 
   countBalls(userInputNum) {
     return this.randomAnswer.reduce((acc, cur, idx) => {
-      return userInputNum.includes(cur) && userInputNum.indexOf(cur) !== idx ? acc + 1 : acc;
+      return ![-1, idx].includes(userInputNum.indexOf(cur)) ? acc + 1 : acc;
     }, 0);
   }
 
