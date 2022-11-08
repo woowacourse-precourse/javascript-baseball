@@ -4,12 +4,8 @@ class App {
     let doRestart;
     do {
       doRestart = 2;
-      try {
-        this.start();
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        MissionUtils.Console.close();
-      }
+
+      this.start();
       MissionUtils.Console.readline("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",(Restart)=>{
         doRestart = Restart;
       })
@@ -26,7 +22,7 @@ class App {
     do {
       MissionUtils.Console.readLine('숫자를 입력해주세요 : ',(input)=>{
       if(this.checkArgument(input))
-        throw '잘못된 입력입니다.'
+        throw new Error('잘못된 입력입니다.');
       let inputToInt=[];
       for(let c of input)
         inputToInt.push(parseInt(c));

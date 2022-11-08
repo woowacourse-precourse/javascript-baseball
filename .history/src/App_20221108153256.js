@@ -4,12 +4,8 @@ class App {
     let doRestart;
     do {
       doRestart = 2;
-      try {
-        this.start();
-      } catch (error) {
-        MissionUtils.Console.print(error);
-        MissionUtils.Console.close();
-      }
+
+      this.start();
       MissionUtils.Console.readline("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",(Restart)=>{
         doRestart = Restart;
       })
