@@ -1,6 +1,8 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const isNumber = require('../src/IsNumber');
 const checkStrike = require('../src/CountStrike')
 const checkBall = require('../src/CountBall')
+const App = require('../src/App')
 
 describe('사용자의 입력 값 확인', () => {
   test('입력 값 정상범위 확인', () => {
@@ -42,4 +44,14 @@ describe("볼 여부 확인", () => {
   test("볼 개수", () => {
     expect(checkBall([1, 2, 3], [3, 2, 1])).toEqual(2);
   });
+});
+
+describe("게임 시작 구문 호출", () => {
+  const app = new App()
+  const spyFn = jest.spyOn(MissionUtils.Console, 'print')
+
+  app.announceGameStart()
+
+  expect(spyFn).toHaveBeenCalledWith('숫자 야구 게임을 시작합니다.');
+  MissionUtils.Console.close()
 });
