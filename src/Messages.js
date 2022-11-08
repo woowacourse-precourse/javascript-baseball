@@ -11,32 +11,33 @@ const ERROR_MESSAGES = {
   DUPLICATE: "각 자리의 수는 중복되지 않아야 합니다.",
   EMPTY: "입력된 글자가 없습니다.",
   WHITE_SPACE: "입력에 공백이 있습니다.",
+  COMMAND: "올바른 명령어가 입력되지 않았습니다.",
 };
 
-const RESULT = {
+const RESULT_MESSAGES = {
   NOTHING: "낫싱",
 };
 
 class Messages {
-  constructor(digit = 3, minNumber = 1, maxNumber = 9) {
+  constructor(digit, minNumber, maxNumber) {
     this.digit = digit;
     this.minNumber = minNumber;
     this.maxNumber = maxNumber;
   }
 
-  static get start() {
+  get start() {
     return MESSAGES.START;
   }
 
-  static get endGame() {
+  get endGame() {
     return MESSAGES.END_GAME;
   }
 
   get endProgram() {
-    return END_PROGRAM;
+    return MESSAGES.END_PROGRAM;
   }
 
-  static get restart() {
+  get restart() {
     return MESSAGES.RESTART;
   }
 
@@ -49,35 +50,43 @@ class Messages {
   }
 
   get emptyError() {
-    return ERROR_MESSAGES.EMPTY;
+    return `${this.insertError()}\n${ERROR_MESSAGES.EMPTY}`;
   }
 
   get whiteSpaceError() {
-    return ERROR_MESSAGES.WHITE_SPACE;
+    return `${this.insertError()}\n${ERROR_MESSAGES.WHITE_SPACE}`;
   }
 
   get rangeError() {
-    return `각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`;
+    return `${this.insertError()}\n각 자리의 수는 ${this.minNumber}부터 ${
+      this.maxNumber
+    }까지 입력할 수 있습니다.`;
   }
 
   get typeError() {
-    return ERROR_MESSAGES.TYPE;
+    return `${this.insertError()}\n${ERROR_MESSAGES.TYPE}`;
   }
 
   get digitError() {
-    return `${this.digit}자리 수가 입력되어야 합니다.`;
+    return `${this.insertError()}\n${this.digit}자리 수가 입력되어야 합니다.`;
   }
 
   get duplicateError() {
-    return ERROR_MESSAGES.DUPLICATE;
+    return `${this.insertError()}\n${ERROR_MESSAGES.DUPLICATE}`;
+  }
+
+  get commandError() {
+    return `${this.insertError()}\n${ERROR_MESSAGES.COMMAND}`;
   }
 
   get resultNothing() {
-    return RESULT.NOTHING;
+    return RESULT_MESSAGES.NOTHING;
   }
 
   get resultCorrect() {
-    return `${this.digit}개의 숫자를 모두 맞히셨습니다!`;
+    return `${this.resultStrike(this.digit)}\n${
+      this.digit
+    }개의 숫자를 모두 맞히셨습니다!`;
   }
 
   resultBall(count) {
@@ -85,7 +94,7 @@ class Messages {
   }
 
   resultStrike(count) {
-    return (count && `${num}스트라이크`) || "";
+    return (count && `${count}스트라이크`) || "";
   }
 }
 

@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Utils = require("./Utils");
+const Messages = require("./Messages");
 const { Console } = MissionUtils;
 const {
   createUniqueNumbers,
@@ -18,30 +19,7 @@ class App {
     this.digit = digit;
     this.minNumber = minNumber;
     this.maxNumber = maxNumber;
-    this.MESSAGES = {
-      START: "숫자 야구 게임을 시작합니다.",
-      END: "게임 종료",
-      RESTART: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
-      INSERT_NUMBER: `${this.digit}자리 숫자(각 자리 수: ${this.minNumber}~${this.maxNumber})를 입력해주세요 : `,
-      ERROR: {
-        INSERT: "올바르지 않은 입력입니다.",
-        RANGE: `\n각 자리의 수는 ${this.minNumber}부터 ${this.maxNumber}까지 입력할 수 있습니다.`,
-        TYPE: "\n숫자만 입력할 수 있습니다.",
-        DIGIT: `\n${this.digit}자리 수가 입력되어야 합니다.`,
-        DUPLICATE: "\n각 자리의 수는 중복되지 않아야 합니다.",
-        END: "\n프로그램을 종료합니다.",
-      },
-      RESULT: {
-        NOTHING: "낫싱",
-        CORRECT: `${this.digit}개의 숫자를 모두 맞히셨습니다!`,
-        BALL(num) {
-          return (num && `${num}볼`) || "";
-        },
-        STRIKE(num) {
-          return (num && `${num}스트라이크`) || "";
-        },
-      },
-    };
+    this.MESSAGES = new Messages(digit, minNumber, maxNumber);
   }
 
   set isPlaying(boolean) {
@@ -76,43 +54,35 @@ class App {
     return number >= this.minNumber && number <= this.maxNumber;
   }
 
+  endProgramWithError(message, err = Error) {
+    throw new err(`${message}\n${this.MESSAGES.endProgram}`);
+  }
+
   isValidUserNumberInput(input) {
     const numbers = input.split("").map(Number);
 
     if (isEmptyInput(input)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}\n입력된 글자가 없습니다.${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.emptyError);
     }
 
     if (hasWhiteSpace(input)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}\n입력에 공백이 있습니다.${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.whiteSpaceError);
     }
 
     if (!numbers.every(isNumber)) {
-      throw new TypeError(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.TYPE}${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.typeError, TypeError);
     }
 
     if (!this.isValidDigit(numbers)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.DIGIT}${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.digitError);
     }
 
     if (!numbers.every(this.isValidNumber.bind(this))) {
-      throw new RangeError(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.RANGE}${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.rangeError, RangeError);
     }
 
     if (hasDuplicateElmentInList(numbers)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.DUPLICATE}${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.duplicateError);
     }
 
     return true;
@@ -136,27 +106,21 @@ class App {
     // TODO: 에러 메시지 정리
 
     if (isEmptyInput(input)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}\n입력된 글자가 없습니다.${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.emptyError);
     }
 
     if (hasWhiteSpace(input)) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}\n입력에 공백이 있습니다.${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.whiteSpaceError);
     }
 
     if (!COMMANDS[input]) {
-      throw new Error(
-        `${this.MESSAGES.ERROR.INSERT}${this.MESSAGES.ERROR.END}`
-      );
+      this.endProgramWithError(this.MESSAGES.commandError);
     }
     COMMANDS[input]();
   }
 
   confirmRestart() {
-    Console.readLine(this.MESSAGES.RESTART, this.restart.bind(this));
+    Console.readLine(this.MESSAGES.restart, this.restart.bind(this));
   }
 
   continueGame(input) {
@@ -172,27 +136,26 @@ class App {
   }
 
   getGameResult({ sameDigitCount, sameNumberCount }) {
+    // TODO: 불필요한 console.log 제거
     console.log(this.answer);
     if (!sameDigitCount && !sameNumberCount) {
-      return this.MESSAGES.RESULT.NOTHING;
+      return this.MESSAGES.resultNothing;
     }
 
     if (sameDigitCount === this.digit) {
       this.isPlaying = false;
 
-      let result = this.MESSAGES.RESULT.STRIKE(sameDigitCount);
-      result += "\n";
-      result += this.MESSAGES.RESULT.CORRECT;
-      result += this.MESSAGES.END;
+      let result = this.MESSAGES.resultCorrect;
+      result += this.MESSAGES.endGame;
 
       return result;
     }
 
-    let result = `${this.MESSAGES.RESULT.BALL(sameNumberCount)}`;
+    let result = `${this.MESSAGES.resultBall(sameNumberCount)}`;
     if (sameNumberCount && sameDigitCount) {
       result += " ";
     }
-    result += `${this.MESSAGES.RESULT.STRIKE(sameDigitCount)}`;
+    result += `${this.MESSAGES.resultStrike(sameDigitCount)}`;
 
     return result;
   }
@@ -224,11 +187,14 @@ class App {
   }
 
   runGame() {
-    Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
+    Console.readLine(
+      this.MESSAGES.insertUserNumber,
+      this.continueGame.bind(this)
+    );
   }
 
   exitGame() {
-    Console.print(this.MESSAGES.END);
+    Console.print(this.MESSAGES.endProgram);
     Console.close();
   }
 
@@ -238,7 +204,7 @@ class App {
   }
 
   startGame() {
-    Console.print(this.MESSAGES.START);
+    Console.print(this.MESSAGES.start);
     this.newGame();
   }
 
