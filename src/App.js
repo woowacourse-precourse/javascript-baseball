@@ -138,7 +138,7 @@ class App {
     return true;
   }
 
-  getGameResult() {
+  determineGameResult() {
     const { sameDigitCount, sameNumberCount } = this.compareNumbers();
 
     if (!sameDigitCount && !sameNumberCount) {
@@ -158,10 +158,10 @@ class App {
     return this.MESSAGES.resultCorrect;
   }
 
-  printGameResult({ sameDigitCount, sameNumberCount }) {
-    const gameResult = this.getGameResult({ sameDigitCount, sameNumberCount });
+  announceGameResult() {
+    const result = this.determineGameResult();
 
-    Console.print(gameResult);
+    Console.print(result);
   }
 
   restart(input) {
@@ -197,7 +197,7 @@ class App {
 
   continueGame(input) {
     this.setCurrentQuestion(input);
-    this.printGameResult(this.getGameResult());
+    this.announceGameResult();
 
     if (this.isGameEnd) {
       this.confirmRestart();
