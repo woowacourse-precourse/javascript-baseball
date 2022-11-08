@@ -24,7 +24,7 @@ const mockRandoms = (numbers) => {
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-describe("유저 플로우", () => {
+describe("유저 플로우 테스트", () => {
   test("게임 시작 문구 출력", () => {
     const app = new App();
     const logSpy = getLogSpy();
@@ -41,8 +41,8 @@ describe("유저 플로우", () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    const app = new App();
-    app.play();
+    const user = new User();
+    user.play();
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('게임 종료'));
   });
@@ -59,8 +59,8 @@ describe("유저 플로우", () => {
     mockRandoms(randoms);
     mockQuestions(answers);
 
-    const app = new App();
-    app.play();
+    const user = new User();
+    user.play();
 
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
