@@ -11,9 +11,28 @@ class App {
     this.getUserInput(randomNumbers);
   }
 
+  getStrikeBallCount(randomNumbers, guessNumbers) {
+    let strike = 0;
+    let ball = 0;
+
+    for (let index = 0; index < 3; index++) {
+      if(randomNumbers[index] === guessNumbers[index]) 
+        strike ++;
+    }
+
+    for (let value of guessNumbers) {
+      ball += randomNumbers.includes(value);
+    }
+
+    ball -= strike;
+
+    return { strike, ball };
+  }
+
   getUserInput(randomNumbers) {
     Console.readLine("숫자를 입력해 주세요 : ", (guessNumbers) => {
       this.checkAllValidation(guessNumbers);
+      const { strike, ball } = this.getStrikeBallCount(randomNumbers, guessNumbers);
     });
   }
 
