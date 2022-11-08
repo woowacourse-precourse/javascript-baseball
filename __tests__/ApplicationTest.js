@@ -35,7 +35,7 @@ describe("숫자 야구 게임", () => {
       "3스트라이크",
       "게임 종료",
     ];
-
+By
     mockRandoms(randoms);
     mockQuestions(answers);
 
