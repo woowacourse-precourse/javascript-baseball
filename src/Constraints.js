@@ -26,12 +26,10 @@ class Constraints {
       inputData = inputData.split("");
     }
 
-    for (let i = 0; i < inputData.length - 1; i++) {
-      if (
-        inputData.indexOf(inputData[i]) !== inputData.lastIndexOf(inputData[i])
-      ) {
-        return false;
-      }
+    const checkResult = new Set(inputData);
+
+    if (checkResult.size !== inputData.length) {
+      return false;
     }
 
     return true;
