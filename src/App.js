@@ -21,6 +21,7 @@ class App {
     this.answerList = this.setAnswerList;
     this.getPlayerInputList();
     this.getResult();
+    this.printCountMessage();
   }
 
   setAnswerList() {
@@ -72,6 +73,18 @@ class App {
     } else if (this.answerList.includes(inputNumber)) {
       this.ball++;
     }
+  }
+
+  printCountMessage() {
+    const messageList = [];
+    const ballCount = this.ball;
+    const strikeCount = this.strike;
+
+    if (ballCount) messageList.push(`${ballCount}볼`);
+    if (strikeCount) messageList.push(`${strikeCount}스트라이크`);
+    if (!messageList.length) messageList.push('낫싱');
+
+    MissionUtils.Console.print(messageList.join(' '));
   }
 }
 
