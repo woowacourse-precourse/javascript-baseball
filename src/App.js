@@ -21,8 +21,8 @@ const {
 const { Console } = MissionUtils;
 
 const RESTART_COMMAND = {
-  NEW_GAME: 1,
-  EXIT: 2,
+  NEW_GAME: '1',
+  EXIT: '2',
 };
 
 class App {
