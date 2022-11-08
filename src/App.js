@@ -33,6 +33,18 @@ class App {
     });
   }
 
+  gameRestartCheck() {
+    Console.readLine(MESSAGE.RESTART_OR_TERMINATE, (userInput) => {
+      if (userInput === MESSAGE.RESTART) {
+        return this.gamePrepare();
+      } else if (userInput === MESSAGE.TERMINATE) {
+        return this.gameExit();
+      } else {
+        return this.gameInputError();
+      }
+    });
+  }
+
   gameExit() {
     Console.close();
   }
