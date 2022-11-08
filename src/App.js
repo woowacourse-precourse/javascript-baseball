@@ -198,6 +198,14 @@ class App {
     Console.print(this.getGameResult({ sameDigitCount, sameNumberCount }));
   }
 
+  setGameNumber() {
+    this.gameNumber = createUniqueNumbers({
+      count: this.count,
+      minNumber: this.minNumber,
+      maxNumber: this.maxNumber,
+    });
+  }
+
   runGame() {
     Console.readLine(this.MESSAGES.INSERT_NUMBER, this.continueGame.bind(this));
   }
@@ -208,12 +216,7 @@ class App {
   }
 
   newGame() {
-    this.gameNumber = createUniqueNumbers({
-      count: this.count,
-      minNumber: this.minNumber,
-      maxNumber: this.maxNumber,
-    });
-
+    this.setGameNumber();
     this.runGame();
   }
 
