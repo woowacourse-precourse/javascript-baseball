@@ -61,13 +61,6 @@ describe("목표값 테스트", () => {
   });
 });
 
-describe("입력값 배열화 테스트", () => {
-  test("입력값 배열화", () => {
-    const userInput = "123";
-    expect(app.stringToNumberArrayConverter(userInput)).toEqual([1, 2, 3]);
-  });
-});
-
 describe("판정 테스트", () => {
   test("스트라이크 카운터 테스트", () => {
     const strikeTestExamples = [

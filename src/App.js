@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { createPrinter } = require("typescript");
+
 const {
   INPUT_ERROR_MESSAGE,
   RESTART_MESSAGE,
@@ -47,14 +47,6 @@ class App {
     }
 
     return refNumbers;
-  }
-
-  stringToNumberArrayConverter(numbersString) {
-    const numbersStringArray = numbersString.split("");
-    const numbersNumberArray = numbersStringArray.map((number) =>
-      Number(number)
-    );
-    return numbersNumberArray;
   }
 
   strikeCounter(userNumbers, refNumbers) {
@@ -117,9 +109,8 @@ class App {
 
   gameStarter(refNumbers) {
     Console.readLine(BASE_MESSAGE.INPUT_REQUEST, (answer) => {
-      const usersInput = answer.trim();
-      this.totalUserInputErrorChecker(usersInput);
-      const userNumbers = this.stringToNumberArrayConverter(usersInput);
+      const userNumbers = answer.trim();
+      this.totalUserInputErrorChecker(userNumbers);
       const strikeCount = this.strikeCounter(userNumbers, refNumbers);
       const ballCount = this.ballCounter(userNumbers, refNumbers);
       const discrimination = this.discriminator(strikeCount, ballCount);
