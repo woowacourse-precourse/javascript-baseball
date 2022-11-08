@@ -38,7 +38,7 @@ class App {
       }
 
 
-      let strikeCount=this.findStrike(playerNum)
+      let strikeCount=this.findStrike(playerNum,comNum)
 
 
       MissionUtils.Console.close()
