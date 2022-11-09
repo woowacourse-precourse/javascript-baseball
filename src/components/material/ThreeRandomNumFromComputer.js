@@ -19,7 +19,7 @@ class ThreeRandomNumFromComputer {
   pushRandomNumWithoutDuplication() {
     if (this.size() === this.NUM_RANDOM_NUMS_REQUIRED) return;
 
-    let randomNum = this.pickRandomNum();
+    const randomNum = this.pickRandomNum();
     if (this.randomNumsWithoutDuplication.includes(randomNum)) {
       return this.pushRandomNumWithoutDuplication();
     }
