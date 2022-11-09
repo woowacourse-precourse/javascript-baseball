@@ -1,5 +1,7 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const ANSWER_LENGTH = 3;
+
 const MESSEGE = {
   GREETING: "숫자 야구 게임을 시작합니다.",
   INPUT_NUM: "숫자를 입력해주세요 : ",
@@ -41,7 +43,7 @@ class App {
 
   setAnswer() {
     const answer = [];
-    while (answer.length < 3) {
+    while (answer.length < ANSWER_LENGTH) {
       const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
       if (!answer.includes(randomNum)) {
         answer.push(randomNum);
@@ -77,13 +79,13 @@ class App {
   }
 
   isVaildLength(input) {
-    if (input.length !== 3) return false;
+    if (input.length !== ANSWER_LENGTH) return false;
     return true;
   }
 
   isAllDiffNum(input) {
     const setInput = new Set(input.split(""));
-    if (setInput.size !== 3) return false;
+    if (setInput.size !== ANSWER_LENGTH) return false;
     return true;
   }
 
