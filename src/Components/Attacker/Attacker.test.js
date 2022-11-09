@@ -1,3 +1,5 @@
+const { mockQuestions, mockRandoms } = require("../../mockFunction");
+
 const Attacker = require("./Attacker");
 
 const ManualBallGenerator = require("../ManualBallGenerator/ManualBallGenerator");
@@ -6,45 +8,35 @@ const Ball = require("../Ball/Ball");
 const Defender = require("../Defender/Defender");
 
 describe("Attacker", () => {
-  test("1번 만에 3스트라이크", async () => {
+  test("1번 만에 3스트라이크", () => {
+    const RANDOM_ARRAY = [1, 3, 5];
+    const ANSWER_ARRAY = ["135"];
+    mockRandoms(RANDOM_ARRAY);
+    mockQuestions(ANSWER_ARRAY);
+
     const ATTACKER_BALL_GENERATOR = new ManualBallGenerator();
-    jest
-      .spyOn(ATTACKER_BALL_GENERATOR, "execute")
-      .mockReturnValue(new Ball(425));
-
     const DEFENDER_BALL_GENERATOR = new AutomaticBallGenerator();
-    jest
-      .spyOn(DEFENDER_BALL_GENERATOR, "execute")
-      .mockReturnValue(new Ball(425));
-
     const ATTACKER = new Attacker(ATTACKER_BALL_GENERATOR);
     const DEFENDER = new Defender(DEFENDER_BALL_GENERATOR);
-    await DEFENDER.ready();
-    const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
-    await ATTACKER.throwTo(DEFENDER);
 
+    const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
+    ATTACKER.throwTo(DEFENDER);
     expect(IS_GAME_END_SPY).toHaveBeenCalledTimes(1);
   });
 
-  test("3번 만에 3스트라이크", async () => {
+  test("2번 만에 3스트라이크", async () => {
+    const RANDOM_ARRAY = [1, 3, 5];
+    const ANSWER_ARRAY = ["246", "135"];
+    mockRandoms(RANDOM_ARRAY);
+    mockQuestions(ANSWER_ARRAY);
+
     const ATTACKER_BALL_GENERATOR = new ManualBallGenerator();
-    ATTACKER_BALL_GENERATOR.execute = jest.fn();
-    const BALL_ARRAY = [new Ball(671), new Ball(216), new Ball(425)];
-    BALL_ARRAY.reduce((acc, ball) => {
-      return acc.mockReturnValueOnce(ball);
-    }, ATTACKER_BALL_GENERATOR.execute);
-
     const DEFENDER_BALL_GENERATOR = new AutomaticBallGenerator();
-    jest
-      .spyOn(DEFENDER_BALL_GENERATOR, "execute")
-      .mockReturnValue(new Ball(425));
-
     const ATTACKER = new Attacker(ATTACKER_BALL_GENERATOR);
     const DEFENDER = new Defender(DEFENDER_BALL_GENERATOR);
-    await DEFENDER.ready();
-    const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
-    await ATTACKER.throwTo(DEFENDER);
 
-    expect(IS_GAME_END_SPY).toHaveBeenCalledTimes(3);
+    const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
+    ATTACKER.throwTo(DEFENDER);
+    expect(IS_GAME_END_SPY).toHaveBeenCalledTimes(2);
   });
 });
