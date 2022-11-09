@@ -77,12 +77,10 @@ class App {
     // 상대방(컴퓨터)의 수와 사용자의 예측값 비교
     let ball = 0,
       strike = 0;
-    for (let index = 0; index < 3; index++) {
-      if (userArr.includes(opponentArr[index])) {
-        if (opponentArr[index] !== userArr[index]) ball++; // 같은 숫자 다른 위치는 볼의 개수 증가
-        else strike++; // 같은 숫자 같은 위치는 스트라이크의 개수 증가
-      }
-    }
+    userArr.forEach((userDigit, index) => {
+      if (userDigit === opponentArr[index]) strike++; // 같은 숫자 같은 위치는 스트라이크의 개수 증가
+      else if (userArr.includes(opponentArr[index])) ball++; // 같은 숫자 다른 위치는 볼의 개수 증가
+    });
     return [ball, strike];
   }
 
