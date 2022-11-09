@@ -25,12 +25,12 @@ module.exports = {
       throw ERROR_MESSAGE.IS_MAX_NUMBER;
     }
     const setAnswer = new Set(userAnswer.split(""));
-    if ([...setAnswer].length !== MAX_NUMBER) {
+    if (setAnswer.size !== MAX_NUMBER) {
       throw ERROR_MESSAGE.IS_REPETITION;
     }
   },
   compareComputerAndUser(computerNum, userNum) {
-    const toStringComputerNum = String(computerNum).replaceAll(",", "");
+    const toStringComputerNum = computerNum.join("");
     const toStringUserNum = String(userNum);
     let strike = 0;
     let ball = 0;
