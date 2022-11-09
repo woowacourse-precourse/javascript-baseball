@@ -85,10 +85,10 @@ class App {
     MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     MissionUtils.Console.readLine(
       `게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n`,
-      (input) => {
-        throwReplayOrQuitException(input);
-        if (input == REPLAY) this.play();
-        else if (input == QUIT) MissionUtils.Console.close();
+      (userInput) => {
+        throwReplayOrQuitException(userInput);
+        if (userInput == REPLAY) this.play();
+        else if (userInput == QUIT) MissionUtils.Console.close();
       }
     );
   }
@@ -96,6 +96,7 @@ class App {
   guessGameNumber(gameNumber) {
     const CORRECT = "3스트라이크";
     MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (userInput) => {
+      throwGuessException(userInput);
       const guessNumber = convertToNumberArray(userInput);
       const compareResult = this.compareGuessAndGameNumber(guessNumber, gameNumber);
       if (compareResult == CORRECT) this.replayOrQuit();
