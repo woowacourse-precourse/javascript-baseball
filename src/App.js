@@ -8,13 +8,7 @@ class App {
 
   play() {
     this.printGameStartMessage();
-    this.init();
     this.playGame();
-  }
-
-  init() {
-    this.createComputerNumber();
-    this.isGameFinished = false;
   }
 
   printGameStartMessage() {
@@ -26,31 +20,8 @@ class App {
   }
 
   playGame() {
-    MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
-      this.getUserNumber(input);
-      if (!this.isValidUserNumber(this.userNumber)) {
-        throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
-      }
-      MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
-
-      if (!this.isGameFinished) {
-        this.playGame();
-        return;
-      }
-
-      MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
-        let restartNumber = +input;
-        if (restartNumber !== 1 && restartNumber !== 2)
-          throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
-        if (restartNumber === 1) {
-          this.isGameFinished = false;
-          this.init();
-          this.playGame();
-        } else {
-          MissionUtils.Console.close();
-        }
-      });
-    });
+    this.createComputerNumber();
+    this.guessComputerNumber();
   }
 
   getUserNumber(input) {
@@ -59,24 +30,17 @@ class App {
 
   isValidUserNumber(number) {
     return (
-      this.isThreeDigits(number) &&
-      this.isNotNegative(number) &&
-      this.isCorrectRangeDigits(number) &&
-      this.isNotDuplicate(number)
+      this.isThreeDigits(number) && this.isCorrectRangeDigits(number) && this.isNotDuplicate(number)
     );
   }
 
   isThreeDigits(number) {
-    return number.split('').filter((digit) => !isNaN(Number(digit))).length === 3;
-  }
-
-  isNotNegative(number) {
-    return Number(number) > 0;
+    return number.length === 3;
   }
 
   isCorrectRangeDigits(number) {
     const possibleDigits = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 9);
-    return number.split('').filter((digit) => possibleDigits.includes(+digit)).length === 3;
+    return number.split('').every((digit) => possibleDigits.includes(+digit));
   }
 
   isNotDuplicate(number) {
@@ -121,6 +85,31 @@ class App {
       if (numberOfStrikes === 0) return `${numberOfBalls}볼`;
       return `${numberOfBalls}볼 ${numberOfStrikes}스트라이크`;
     }
+  }
+
+  guessComputerNumber() {
+    MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
+      if (!this.isValidUserNumber(input)) {
+        throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
+      }
+      this.getUserNumber(input);
+      MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
+      if (this.userNumber === this.computerNumber) return this.selectRestartGame();
+      this.guessComputerNumber();
+    });
+  }
+
+  selectRestartGame() {
+    MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
+      let restartNumber = +input;
+      if (restartNumber !== 1 && restartNumber !== 2)
+        throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
+      if (restartNumber === 1) {
+        return this.playGame();
+      } else {
+        return MissionUtils.Console.close();
+      }
+    });
   }
 }
 const app = new App();
