@@ -9,19 +9,13 @@ const Player = require('./Player');
 class Referee {
   constructor() {
     this.computer = new Computer();
-    this.player = new Player(this);
+    this.player = new Player();
     Console.print(MESSAGE.GAME.START);
   }
 
   gameStart() {
     this.computer.setValue();
-    this.player.setValue((answer) => {
-      if (isAvailableValue(answer)) {
-        this.#value = answer + '';
-        return this.referee.gameResult();
-      }
-      throw new Error(MESSAGE.ERROR.WRONG_VALUE);
-    });
+    this.player.readInput(this.setPlayerValue.bind(this));
   }
 
   gameResult() {
@@ -30,8 +24,9 @@ class Referee {
 
     if (count.strike === 3) {
       Console.print(MESSAGE.GAME.WIN);
-      this.gameFinish();
-    } else this.player.setValue();
+      return this.gameFinish();
+    }
+    this.player.readInput(this.setPlayerValue.bind(this));
   }
 
   gameFinish() {
@@ -49,20 +44,28 @@ class Referee {
 
   getBallAndStrikeCount() {
     const value = {
-      computer: this.computer.getValue(),
-      player: this.player.getValue(),
+      computer: this.computer.getValue() + '',
+      player: this.player.getValue() + '',
     };
     const count = {
       ball: 0,
       strike: 0,
     };
 
-    for (let i = 0; i < VALUE_SIZE; i++) {
-      if (value.computer[i] === value.player[i]) count.strike++;
-      else if (value.computer.includes(value.player[i])) count.ball++;
-    }
+    [...value.computer].forEach((number, index) => {
+      if (number === value.player[index]) count.strike += 1;
+      else if (value.player.includes(number)) count.ball += 1;
+    });
 
     return count;
+  }
+
+  setPlayerValue(value) {
+    if (isAvailableValue(value)) {
+      this.player.setValue(value);
+      return this.gameResult();
+    }
+    throw new Error(MESSAGE.ERROR.WRONG_VALUE);
   }
 }
 

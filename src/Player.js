@@ -3,8 +3,7 @@ const MESSAGE = require('./constants/message');
 
 class Player {
   #value;
-  constructor(referee) {
-    this.referee = referee;
+  constructor() {
     this.#value = '';
   }
 
@@ -12,7 +11,11 @@ class Player {
     return this.#value;
   }
 
-  setValue(callback) {
+  setValue(value) {
+    this.#value = value;
+  }
+
+  readInput(callback) {
     Console.readLine(MESSAGE.GAME.INPUT, callback);
   }
 }
