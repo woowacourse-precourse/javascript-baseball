@@ -13,13 +13,8 @@ class Player {
     return this.#value;
   }
 
-  setValue() {
-    Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
-      if (isAvailableValue(answer)) {
-        this.#value = answer + '';
-        this.referee.gameResult();
-      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
-    });
+  setValue(callback) {
+    Console.readLine(MESSAGE.GAME.INPUT, callback);
   }
 }
 

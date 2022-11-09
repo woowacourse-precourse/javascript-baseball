@@ -14,7 +14,13 @@ class Referee {
 
   gameStart() {
     this.computer.setValue();
-    this.player.setValue();
+    this.player.setValue((answer) => {
+      if (isAvailableValue(answer)) {
+        this.#value = answer + '';
+        return this.referee.gameResult();
+      }
+      throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+    });
   }
 
   gameResult() {
@@ -31,11 +37,12 @@ class Referee {
     Console.readLine(MESSAGE.GAME.FINISH, (answer) => {
       const stringAnswer = answer + '';
 
-      if (stringAnswer === RESTART) this.gameStart();
-      else if (stringAnswer === GAME_OVER) {
+      if (stringAnswer === RESTART) return this.gameStart();
+      if (stringAnswer === GAME_OVER) {
         Console.print(MESSAGE.GAME.OVER);
-        Console.close();
-      } else throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+        return Console.close();
+      }
+      throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 
