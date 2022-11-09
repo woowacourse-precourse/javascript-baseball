@@ -1,7 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RESTART, GAME_OVER } = require('./constants/gameSetting');
+const { RESTART, GAME_OVER, VALUE_SIZE } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
 const getGameResultMessage = require('./utils/getGameResultMessage');
+const isAvailableValue = require('./utils/isAvailableValue');
 const Computer = require('./Computer');
 const Player = require('./Player');
 
@@ -56,7 +57,7 @@ class Referee {
       strike: 0,
     };
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < VALUE_SIZE; i++) {
       if (value.computer[i] === value.player[i]) count.strike++;
       else if (value.computer.includes(value.player[i])) count.ball++;
     }
