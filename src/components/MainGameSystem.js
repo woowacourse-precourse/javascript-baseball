@@ -7,6 +7,8 @@ class MainGameSystem {
     this.THREE_DIGITS = 3;
     this.NEEDLESS = 102;
     this.verifiedPlayerNum;
+    this.RESTART = '1';
+    this.GAVE_OVER = '2';
   }
 
   isDuplicate(randomNum) {
@@ -43,12 +45,32 @@ class MainGameSystem {
 
       const contextualHints = new ContextualHints(
         insideComputerNum,
-        this.verifiedPlayerNum,
-        MainGameSystem
+        this.verifiedPlayerNum
       );
-      contextualHints.getContextualHints();
+      let coco = contextualHints.getContextualHints();
+      if (coco === 3) return this.endGameOrRestart();
       return this.givePlayerHint(insideComputerNum);
     });
+  }
+
+  endGameOrRestart() {
+    Console.readLine(
+      '3개의 숫자를 모두 맞히셨습니다. 게임 종료 \n' +
+        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      (answer) => {
+        if (answer === this.RESTART) {
+          return this.runGame();
+        }
+        if (answer === this.GAVE_OVER) {
+          Console.print('게임 종료');
+          return Console.close();
+        }
+        if (answer !== this.RESTART && answer !== this.GAVE_OVER) {
+          Console.print('올바르지 않은 값을 입력하여 게임이 종료됩니다.');
+          throw Console.close();
+        }
+      }
+    );
   }
 
   runGame() {

@@ -34,11 +34,6 @@ describe('contextualHint 확인', () => {
       expect(contextualHints.TWO_BAll).toBe(2);
       expect(contextualHints.THREE_BALL).toBe(3);
     });
-
-    it("RESTART = '1' / this.GAVE_OVER = '2'", () => {
-      expect(contextualHints.RESTART).toBe('1');
-      expect(contextualHints.GAVE_OVER).toBe('2');
-    });
   });
 
   describe(' HowMnayEqualNum 함수 확인 ( 0스트라이크, 1스트라이크 때만 사용)', () => {

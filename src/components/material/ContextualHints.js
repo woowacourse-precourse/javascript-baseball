@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 class ContextualHints {
-  constructor(computerNum, playerNum, MainGameSystem) {
+  constructor(computerNum, playerNum) {
     this.computerNum = computerNum;
     this.playerNum = playerNum;
     this.NumOfSamePosition = playerNum
@@ -15,9 +15,6 @@ class ContextualHints {
     this.ONE_BALL = 1;
     this.TWO_BAll = 2;
     this.THREE_BALL = 3;
-    this.RESTART = '1';
-    this.GAVE_OVER = '2';
-    this.MainGameSystem = MainGameSystem;
   }
 
   HowManyEqualNum() {
@@ -25,28 +22,6 @@ class ContextualHints {
       .split('')
       .map((num) => this.computerNum.includes(+num));
     return isSame.filter((value) => Boolean(value)).length;
-  }
-
-  endGame() {
-    Console.readLine(
-      '3개의 숫자를 모두 맞히셨습니다. 게임 종료 \n' +
-        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-      (answer) => {
-        console.log(answer);
-        if (answer === this.RESTART) {
-          const mainGameSystem = new this.MainGameSystem();
-          return mainGameSystem.runGame();
-        }
-        if (answer === this.GAVE_OVER) {
-          Console.print('게임 종료');
-          Console.close();
-        }
-        if (answer !== this.RESTART && answer !== this.GAVE_OVER) {
-          Console.print('올바르지 않은 값을 입력하여 게임이 종료됩니다.');
-          throw Console.close();
-        }
-      }
-    );
   }
 
   getContextualHints() {
@@ -84,7 +59,7 @@ class ContextualHints {
     }
     if (this.NumOfSamePosition === this.THREE_STRIKE) {
       Console.print('3스트라이크');
-      this.endGame();
+      return this.THREE_STRIKE;
     }
   }
 }
