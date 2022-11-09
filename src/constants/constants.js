@@ -17,8 +17,15 @@ const MESSAGE = {
   ERROR: '유효하지 않은 값이 입력되어 게임이 종료됩니다.',
 };
 
+const RESULT = {
+  STRIKE: '스트라이크',
+  BALL: '볼',
+  NOTHING: '낫싱',
+};
+
 module.exports = {
   ANSWER,
   OPTION,
   MESSAGE,
+  RESULT,
 };

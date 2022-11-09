@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { ANSWER, OPTION, MESSAGE } = require('./constants/constants');
+const { ANSWER, OPTION, MESSAGE, RESULT } = require('./constants/constants');
 
 class Game {
   makeAnswer() {
@@ -42,14 +42,14 @@ class Game {
     const { strikeCnt, ballCnt } = result;
     let resultMessage = '';
     if (strikeCnt === 0 && ballCnt === 0) {
-      Console.print('낫싱');
+      Console.print(RESULT.NOTHING);
       return;
     }
     if (ballCnt) {
-      resultMessage += `${ballCnt}볼 `;
+      resultMessage += `${ballCnt}${RESULT.BALL} `;
     }
     if (strikeCnt) {
-      resultMessage += `${strikeCnt}스트라이크`;
+      resultMessage += `${strikeCnt}${RESULT.STRIKE}`;
     }
     Console.print(resultMessage);
   }
