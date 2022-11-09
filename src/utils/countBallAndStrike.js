@@ -1,4 +1,4 @@
-const { ANSWER_LENGTH } = require("../constants/constants");
+const { ANSWER_LENGTH } = require('../constants/constants');
 
 const countBallAndStrike = (userInput, answerInput) => {
   const result = {
@@ -6,8 +6,8 @@ const countBallAndStrike = (userInput, answerInput) => {
     ball: 0,
   };
 
-  userInput = userInput.split("");
-  answerInput = answerInput.split("");
+  userInput = userInput.split('');
+  answerInput = answerInput.split('');
 
   for (let userInputIndex = 0; userInputIndex < ANSWER_LENGTH; userInputIndex++) {
     for (let answerInputIndex = 0; answerInputIndex < ANSWER_LENGTH; answerInputIndex++) {

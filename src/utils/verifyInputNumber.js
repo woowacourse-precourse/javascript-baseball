@@ -1,4 +1,4 @@
-const { ANSWER_LENGTH } = require("../constants/constants");
+const { ANSWER_LENGTH } = require('../constants/constants');
 
 const verifyInputNumber = (input) => {
   if (isNaN(+input)) return false; // 숫자 아닌 수 입력 시

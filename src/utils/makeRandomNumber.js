@@ -1,5 +1,5 @@
-const { Random } = require("@woowacourse/mission-utils");
-const { ANSWER_LENGTH } = require("../constants/constants");
+const { Random } = require('@woowacourse/mission-utils');
+const { ANSWER_LENGTH } = require('../constants/constants');
 
 const makeRandomNumber = () => {
   const answer = [];
@@ -12,7 +12,7 @@ const makeRandomNumber = () => {
     }
   }
 
-  return answer.join(""); // 3자리 수를 만들어 number형태로 리턴
+  return answer.join(''); // 3자리 수를 만들어 number형태로 리턴
 };
 
 module.exports = makeRandomNumber;

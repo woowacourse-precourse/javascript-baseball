@@ -1,9 +1,9 @@
-const { Console } = require("@woowacourse/mission-utils");
-const { MESSAGE, GAME_PROGRESS, ANSWER_LENGTH } = require("./constants/constants");
-const countBallAndStrike = require("./utils/countBallAndStrike");
-const makeRandomNumber = require("./utils/makeRandomNumber");
-const printGameMessage = require("./utils/printGameMessage");
-const verifyInputNumber = require("./utils/verifyInputNumber");
+const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE, GAME_PROGRESS, ANSWER_LENGTH } = require('./constants/constants');
+const countBallAndStrike = require('./utils/countBallAndStrike');
+const makeRandomNumber = require('./utils/makeRandomNumber');
+const printGameMessage = require('./utils/printGameMessage');
+const verifyInputNumber = require('./utils/verifyInputNumber');
 
 class App {
   play() {
