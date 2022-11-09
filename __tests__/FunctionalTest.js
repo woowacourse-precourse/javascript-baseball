@@ -47,16 +47,57 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
-    const randoms = [1, 3, 5];
-    const answers = ["1234"];
+  describe("input에 올바르지 않은 값 입력", () => {
+    test("예외 테스트1 - 길이 3자리 이상", () => {
+      const randoms = [1, 3, 5];
+      const answers = ["1234"];
 
-    mockRandoms(randoms);
-    mockQuestions(answers);
+      mockRandoms(randoms);
+      mockQuestions(answers);
 
-    expect(() => {
-      const app = new App();
-      app.play();
-    }).toThrow();
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
+    test("예외 테스트2 - 중복된 숫자", () => {
+      const randoms = [1, 3, 5];
+      const answers = ["117"];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
+    test("예외 테스트3 - 한글", () => {
+      const randoms = [1, 3, 5];
+      const answers = ["ㄴㅇㄱ"];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
+
+    test("예외 테스트4 - 영어소문자", () => {
+      const randoms = [1, 3, 5];
+      const answers = ["o12"];
+
+      mockRandoms(randoms);
+      mockQuestions(answers);
+
+      expect(() => {
+        const app = new App();
+        app.play();
+      }).toThrow();
+    });
   });
 });
