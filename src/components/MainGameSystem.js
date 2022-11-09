@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console } = require('@woowacourse/mission-utils');
 const ContextualHints = require('./material/ContextualHints');
 const ThreeRandomNumForComputer = require('./material/ThreeRandomNumFromComputer');
 
@@ -34,7 +34,7 @@ class MainGameSystem {
   }
 
   givePlayerHint(insideComputerNum) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (playerNum) => {
+    Console.readLine('숫자를 입력해주세요 : ', (playerNum) => {
       try {
         this.verifiedPlayerNum = this.checkPlayerRandomNum(playerNum);
       } catch (error) {

@@ -1,4 +1,4 @@
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 
 class ThreeRandomNumFromComputer {
   constructor() {
@@ -13,10 +13,7 @@ class ThreeRandomNumFromComputer {
   }
 
   pickRandomNum() {
-    return MissionUtils.Random.pickNumberInRange(
-      this.RANGE_START_NUM,
-      this.RANGE_END_NUM
-    );
+    return Random.pickNumberInRange(this.RANGE_START_NUM, this.RANGE_END_NUM);
   }
 
   pushRandomNumWithoutDuplication() {
