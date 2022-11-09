@@ -1,7 +1,7 @@
 const { ANSWER_LENGTH } = require('../constants/constants');
 
 const verifyInputNumber = (input) => {
-  if (isNaN(+input)) return false; // 숫자 아닌 수 입력 시
+  if (isNaN(Number(input))) return false; // 숫자 아닌 수 입력 시
   if (input.length !== ANSWER_LENGTH) return false; // 입력값이 3자리수가 아닌 경우
   if (new Set(input).size !== input.length) return false; // 중복된 숫자가 있을 경우
 
