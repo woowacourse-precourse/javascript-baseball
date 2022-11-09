@@ -35,7 +35,7 @@ class ContextualHints {
         console.log(answer);
         if (answer === this.RESTART) {
           const givePlayerHint = new this.GivePlayerHint();
-          givePlayerHint.runGame();
+          return givePlayerHint.runGame();
         }
         if (answer === this.GAVE_OVER) {
           Console.print('게임 종료');
