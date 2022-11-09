@@ -1,5 +1,15 @@
+const {
+  randomNumberSetting,
+  gameStartPhrase,
+  gameProgressQuestion,
+} = require("./gameFunctions");
+
 class App {
-  play() {}
+  play() {
+    const answer = randomNumberSetting();
+    gameStartPhrase();
+    gameProgressQuestion(answer);
+  }
 }
 
 module.exports = App;
