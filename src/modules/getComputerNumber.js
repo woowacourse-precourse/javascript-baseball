@@ -1,7 +1,7 @@
 const { Random } = require('@woowacourse/mission-utils');
 const { NUMBER } = require('../constants');
 
-getComputerNumber = () => {
+const getComputerNumber = () => {
   const computer = [];
   while (computer.length < NUMBER.LENGTH) {
     const number = Random.pickNumberInRange(1, 9);
@@ -13,4 +13,4 @@ getComputerNumber = () => {
   return computer.join('');
 };
 
-module.exports.getComputerNumber = getComputerNumber;
+module.exports = { getComputerNumber };

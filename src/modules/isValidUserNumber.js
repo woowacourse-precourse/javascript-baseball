@@ -1,27 +1,25 @@
-/* eslint-disable no-undef */
-// eslint-disable-next-line import/extensions
 const { NUMBER, ERRORS } = require('../constants');
 
-isValidUserNumber = (user) => {
+const isValidUserNumber = (user) => {
   checkNumber(user);
   checkLength(user);
   checkDuplication(user);
   checkRange(user);
 };
 
-checkNumber = (number) => {
-  if (isNaN(number)) {
+const checkNumber = (number) => {
+  if (Number.isNaN(number)) {
     throw new Error(ERRORS.TYPE);
   }
 };
 
-checkLength = (number) => {
+const checkLength = (number) => {
   if (number.length !== NUMBER.LENGTH) {
     throw new Error(ERRORS.LENGTH);
   }
 };
 
-checkDuplication = (number) => {
+const checkDuplication = (number) => {
   const numberList = number.split('');
   const validNumber = [...new Set(numberList)];
   if (validNumber.length < NUMBER.LENGTH) {
@@ -29,10 +27,10 @@ checkDuplication = (number) => {
   }
 };
 
-checkRange = (number) => {
+const checkRange = (number) => {
   if (number.includes(NUMBER.NOT_INCLUDE)) {
     throw new Error(ERRORS.RANGE);
   }
 };
 
-module.exports.isValidUserNumber = isValidUserNumber;
+module.exports = { isValidUserNumber };

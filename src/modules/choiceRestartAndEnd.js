@@ -1,13 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGES, ERRORS, OPTION } = require('../constants');
+const { playBaseballGame } = require('./playBaseballGame');
 
-choiceRestartAndEnd = () => {
+const choiceRestartAndEnd = () => {
   Console.readLine(MESSAGES.INPUT_OPTION, (num) => {
     isValidUserAnswer(num);
   });
 };
 
-isValidUserAnswer = (answer) => {
+const isValidUserAnswer = (answer) => {
   if (answer === OPTION.RESTART) {
     return playBaseballGame();
   }
@@ -20,4 +21,4 @@ isValidUserAnswer = (answer) => {
   }
 };
 
-module.exports.choiceRestartAndEnd = choiceRestartAndEnd;
+module.exports = { choiceRestartAndEnd, isValidUserAnswer };

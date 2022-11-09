@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 const { startGame } = require('./modules/startGame');
 const { playBaseballGame } = require('./modules/playBaseballGame');
 
@@ -8,5 +7,6 @@ class App {
     playBaseballGame();
   }
 }
-
+const app = new App();
+app.play();
 module.exports = App;

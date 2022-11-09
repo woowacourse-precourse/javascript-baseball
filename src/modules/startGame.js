@@ -1,8 +1,8 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGES } = require('../constants');
 
-startGame = () => {
+const startGame = () => {
   Console.print(MESSAGES.START);
 };
 
-module.exports.startGame = startGame;
+module.exports = { startGame };

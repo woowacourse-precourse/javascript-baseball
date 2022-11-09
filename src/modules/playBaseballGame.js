@@ -4,25 +4,25 @@ const { getComputerNumber } = require('./getComputerNumber');
 const { isValidUserNumber } = require('./isValidUserNumber');
 const { choiceRestartAndEnd } = require('./choiceRestartAndEnd');
 
-playBaseballGame = () => {
+const playBaseballGame = () => {
   const computer = getComputerNumber();
   getUserNumbers(computer);
 };
 
-getUserNumbers = (computer) => {
+const getUserNumbers = (computer) => {
   Console.readLine(MESSAGES.INPUT_NUMBER, (num) => {
     isValidUserNumber(num);
     checkGameScore(computer, num);
   });
 };
 
-checkGameScore = (computer, user) => {
+const checkGameScore = (computer, user) => {
   const gameScore = calculateGameScore(computer, user);
   const gameResult = printGameScore(gameScore, computer);
   return checkThreeStrike(gameResult, computer);
 };
 
-calculateGameScore = (computer, user) => {
+const calculateGameScore = (computer, user) => {
   let ball = 0;
   let strike = 0;
   const overlappingNumbers = [...computer].filter((number) => [...user].includes(number));
@@ -38,7 +38,7 @@ calculateGameScore = (computer, user) => {
   return { ball, strike };
 };
 
-printGameScore = ({ ball, strike }) => {
+const printGameScore = ({ ball, strike }) => {
   let result = [];
   if (ball > 0) {
     result.push(`${ball}${SCORES.BALL}`);
@@ -55,7 +55,8 @@ printGameScore = ({ ball, strike }) => {
   return result;
 };
 
-checkThreeStrike = (answer, computer) => {
+// eslint-disable-next-line consistent-return
+const checkThreeStrike = (answer, computer) => {
   if (answer.includes(`${NUMBER.LENGTH}${SCORES.STRIKE}`)) {
     Console.print(MESSAGES.SUCCESS);
     return choiceRestartAndEnd();
@@ -64,4 +65,4 @@ checkThreeStrike = (answer, computer) => {
   getUserNumbers(computer);
 };
 
-module.exports.playBaseballGame = playBaseballGame;
+module.exports = { playBaseballGame };
