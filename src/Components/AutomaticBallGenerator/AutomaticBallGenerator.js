@@ -16,7 +16,7 @@ class AutomaticBallGenerator {
       numberArray = init();
     }
 
-    return Promise.resolve(new Ball(arrayToNumber(numberArray)));
+    return new Ball(arrayToNumber(numberArray));
   }
 
   arrayToNumber(numberArray) {
