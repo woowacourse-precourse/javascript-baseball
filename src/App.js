@@ -26,10 +26,7 @@ class App {
       if (IS_USER_INPUT_VALID === true) {
         const SCORE = scoreUserInput(this.computerAnswer, USER_INPUT_ARR);
         this.isUserWrong = getHintOfAnswer(SCORE);
-        if (this.isUserWrong) {
-          return this.play();
-        }
-        this.checkIfRestartGame();
+        return this.isUserWrong ? this.play() : this.checkIfRestartGame();
       }
     });
   }
