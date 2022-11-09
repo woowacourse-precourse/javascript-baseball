@@ -36,9 +36,7 @@ class App {
   }
 
   play() {
-    this.greetingMsg();
-    this.ANSWER = this.setAnswer();
-    this.askNumInput();
+    this.greetingMsg().setAnswer().askNumInput();
   }
 
   setAnswer() {
@@ -49,7 +47,8 @@ class App {
         answer.push(randomNum);
       }
     }
-    return answer;
+
+    this.ANSWER = answer;
   }
 
   askNumInput() {
