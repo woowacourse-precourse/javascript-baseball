@@ -44,17 +44,26 @@ class App {
 
 	isValid(userAnswerStr) {
 		const answer = userAnswerStr.replace(REGEX.SPACE, '');
-		const length = answer.length;
-		const set = new Set();
-		userAnswerStr.replace(REGEX.SPACE, '').forEach(num => set.add(num));
+		const { length } = answer;
 
 		if (length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
 
 		if (isNaN(answer)) throw new Error(MESSAGES.NOT_A_NUMBER);
 
-		if ([...set] !== [...answer]) throw new Error(MESSAGES.DUPLICATED_NUM);
+		if (this.removeDuplicated(userAnswerStr) !== userAnswerStr)
+			throw new Error(MESSAGES.DUPLICATED_NUM);
 
 		return true;
+	}
+
+	removeDuplicated(s) {
+		let answer = '';
+
+		for (let i = 0; i < s.length; i++) {
+			if (s.indexOf(s[i]) === i) answer += s[i];
+		}
+
+		return answer;
 	}
 
 	isValidChoice(playerChoice) {
@@ -89,13 +98,13 @@ class App {
 		let resultMessage = '';
 
 		if (strike > 0 && ball > 0) {
-			result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
+			resultMessage = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
 		} else if (strike > 0) {
-			result = `${strike}${UNITS.STRIKE}`;
+			resultMessage = `${strike}${UNITS.STRIKE}`;
 		} else if (ball > 0) {
-			result = `${ball}${UNITS.BALL}`;
+			resultMessage = `${ball}${UNITS.BALL}`;
 		} else {
-			result = UNITS.NOTHING;
+			resultMessage = UNITS.NOTHING;
 		}
 
 		return resultMessage;
@@ -104,7 +113,7 @@ class App {
 	showResultMessage(resultMessage) {
 		if (resultMessage === MESSAGES.THREE_STRIKE) {
 			Console.print(MESSAGES.THREE_STRIKE);
-			console.print(MESSAGES.END(3));
+			Console.print(MESSAGES.END(3));
 			this.askToReplay();
 		} else {
 			Console.print(resultMessage);
@@ -129,5 +138,8 @@ class App {
 		});
 	}
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
