@@ -14,7 +14,7 @@ describe('contextualHint 확인', () => {
     contextualHints = new ContextualHints([3, 2, 4], '345');
   });
 
-  describe('check constructor', () => {
+  describe('constructor 확인', () => {
     it('computerNum = [3,2,4], playerNum = 345, NumOfSamePosition === 1', () => {
       expect(contextualHints.computerNum).toStrictEqual([3, 2, 4]);
       expect(contextualHints.playerNum).toStrictEqual('345');
@@ -41,7 +41,7 @@ describe('contextualHint 확인', () => {
     });
   });
 
-  describe('check HowMnayEqualNum Func ( 0스트라이크, 1스트라이크 때만 사용)', () => {
+  describe(' HowMnayEqualNum 함수 확인 ( 0스트라이크, 1스트라이크 때만 사용)', () => {
     it('1스트라이크 1볼 스트라이크 포함 같은 숫자 2개(1스트라이크 일때만 추후 결과값 -1)', () => {
       expect(contextualHints.HowManyEqualNum()).toBe(2);
     });
@@ -52,7 +52,7 @@ describe('contextualHint 확인', () => {
     });
   });
 
-  describe('check getContextualHints Func', () => {
+  describe('getContextualHints 함수 확인 ', () => {
     it('낫싱', () => {
       contextualHints = new ContextualHints([7, 8, 1], '542');
       contextualHints.getContextualHints();
@@ -89,7 +89,7 @@ describe('contextualHint 확인', () => {
     });
   });
 
-  describe('check gameEnd', () => {
+  describe('gameEnd 함수 확인', () => {
     const mockQuestions = (answers) => {
       MissionUtils.Console.readLine = jest.fn();
       answers.reduce((acc, input) => {
