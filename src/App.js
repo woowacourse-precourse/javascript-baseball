@@ -5,7 +5,7 @@ class App {
 	computerNumArr = [];
 
 	play() {
-		console.log(MESSAGES.START);
+		Console.print(MESSAGES.START);
 		this.initGame();
 		this.playGame();
 	}
@@ -30,7 +30,7 @@ class App {
 					);
 					if (resultMessage === MESSAGES.THREE_STRIKE) {
 						Console.print(MESSAGES.THREE_STRIKE);
-						console.log(MESSAGES.END(3))
+						console.print(MESSAGES.END(3))
 						this.askToReplay();
 					} else {
 						Console.print(resultMessage);
@@ -44,10 +44,14 @@ class App {
 	#isValid(userAnswerStr) {
 		const answer = userAnswerStr.replace(REGEX.SPACE, '');
 		const length = answer.length;
+		const set = new Set()
+		userAnswerStr.replace(REGEX.SPACE, '').forEach(num => set.add(num))
 
 		if (length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
 
 		if (isNaN(answer)) throw new Error(MESSAGES.NOT_A_NUMBER);
+		
+		if ([...set]!==[...answer]) throw new Error(MESSAGES.DUPLICATED_NUM);
 
 		return true;
 	}
@@ -63,6 +67,8 @@ class App {
 		let [ball, strike] = [0, 0];
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
+			this.#isValid(userAnswerStr);
+
 			computerNumArr.map((computerNum, computerNumIdx) => {
 				if (computerNum === Number(userAnswerStr) && computerNumIdx === userAnswerIdx ) {strike++; return;}
 				if(computerNum === Number(userAnswerStr)) ball++;
@@ -101,5 +107,6 @@ class App {
 	}
 }
 
-
+const app = new App()
+app.play()
 module.exports = App;
