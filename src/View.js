@@ -15,14 +15,10 @@ class View {
 	/** @param {GAME_STATE} state */
 	input(state) {
 		if (state === GAME_STATE.END) {
-			this._console.readLine(View.#PROMPT_END, (command) => {
-				this._endHandler(command);
-			});
+			this._console.readLine(View.#PROMPT_END, this._endHandler.bind(this))
 			return;
 		}
-    this._console.readLine(View.#PROMPT_ING, (command) => {
-      this._ingHandler(command);
-    });
+    this._console.readLine(View.#PROMPT_ING, this._ingHandler.bind(this))
   }// todo - 객체지향 다형성으로 Commendable통해 핸들러 하나만
 	
 	/** 
