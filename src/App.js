@@ -26,7 +26,7 @@ class App {
 		Console.readLine(
 			MESSAGES.REQUIRE_USER_INPUT(NUMBERS.GAME_MAX),
 			userAnswerStr => {
-				this.isValid(userAnswerStr);
+				this.isValidNumber(userAnswerStr);
 
 				const [ball, strike] = this.compareComputerWithUser(
 					this.computerNumArr,
@@ -42,7 +42,7 @@ class App {
 		);
 	}
 
-	isValid(userAnswerStr) {
+	isValidNumber(userAnswerStr) {
 		const answer = userAnswerStr.replace(REGEX.SPACE, '');
 		const { length } = answer;
 
@@ -71,13 +71,14 @@ class App {
 			Console.print(MESSAGES.FORMAT_ERROR_CHOICE);
 			throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 		}
+		return true;
 	}
 
 	compareComputerWithUser(computerNumArr, userAnswerStr) {
 		let [ball, strike] = [0, 0];
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
-			this.isValid(userAnswerStr);
+			this.isValidNumber(userAnswerStr);
 
 			computerNumArr.map((computerNum, computerNumIdx) => {
 				if (
