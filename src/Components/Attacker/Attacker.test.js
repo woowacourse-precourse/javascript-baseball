@@ -18,9 +18,10 @@ describe("Attacker", () => {
     const DEFENDER_BALL_GENERATOR = new AutomaticBallGenerator();
     const ATTACKER = new Attacker(ATTACKER_BALL_GENERATOR);
     const DEFENDER = new Defender(DEFENDER_BALL_GENERATOR);
+    DEFENDER.ready();
 
     const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
-    ATTACKER.throwTo(DEFENDER);
+    ATTACKER.throwTo(DEFENDER, jest.fn());
     expect(IS_GAME_END_SPY).toHaveBeenCalledTimes(1);
   });
 
@@ -34,9 +35,10 @@ describe("Attacker", () => {
     const DEFENDER_BALL_GENERATOR = new AutomaticBallGenerator();
     const ATTACKER = new Attacker(ATTACKER_BALL_GENERATOR);
     const DEFENDER = new Defender(DEFENDER_BALL_GENERATOR);
+    DEFENDER.ready();
 
     const IS_GAME_END_SPY = jest.spyOn(DEFENDER, "isGameEnd");
-    ATTACKER.throwTo(DEFENDER);
+    ATTACKER.throwTo(DEFENDER, jest.fn());
     expect(IS_GAME_END_SPY).toHaveBeenCalledTimes(2);
   });
 });
