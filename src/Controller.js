@@ -11,23 +11,11 @@ class Controller {
 		this._view = new View(this._ingHandler.bind(this), this._endHandler.bind(this));
 	}
 
-	/**
-	 * 
-	 * @param {string} num
-	 * @returns {boolean}
-	 */
-	static isValid(num) {
-		const isCorrectNumber = /\d/.test(num) && +num > 0 && num.length === 3;
-		const isNotDuplicate = num.length === [...new Set(num)].length;
-		if (isCorrectNumber && isNotDuplicate)
-			return true;
-		return false;
-	}
-
 	_ingHandler(command) {
 		if (!Controller.isValid(command))
 			throw new Error("입력을 잘못 하셨네요 1에서 9 중복되지 않게 3자리");
-		const judgement = this._referee.judge(command.split("").map((item) => +item));
+		const balls = command.split("").map((item) => +item);
+		const judgement = this._referee.judge(balls);
 		this._next(judgement.isAllStrike() ? GAME_STATE.END : GAME_STATE.ING, judgement.toString());
 	}
 	
@@ -45,6 +33,18 @@ class Controller {
 		this._view.input(state);
 	}
 
+	/** 
+	 * @param {string} num
+	 * @returns {boolean}
+	 */
+	static isValid(num) {
+		const isCorrectNumber = /\d/.test(num) && +num > 0 && num.length === 3;
+		const isNotDuplicate = num.length === [...new Set(num)].length;
+		if (isCorrectNumber && isNotDuplicate)
+			return true;
+		return false;
+	}
+	
 	start(state = GAME_STATE.START) {
 		this._referee.chargeGame(new Game());
 		this._next(state, undefined);
