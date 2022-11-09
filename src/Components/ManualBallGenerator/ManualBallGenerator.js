@@ -5,20 +5,14 @@ const Ball = require("../Ball/Ball");
 class ManualBallGenerator {
   maxNumberCount = 3;
 
-  async execute() {
-    const NUMBER = await new Promise((resolve, reject) => {
-      const callback = (input) => {
-        Console.close();
+  execute(callback) {
+    const isSatisfied = this.isSatisfied.bind(this);
 
-        if (this.isSatisfied(input)) return resolve(Number(input));
+    Console.readLine("숫자를 입력해주세요 : ", (input) => {
+      if (!isSatisfied(input)) throw new Error();
 
-        return reject(new Error());
-      };
-
-      Console.readLine("숫자를 입력해주세요 : ", callback);
+      callback(new Ball(Number(input)));
     });
-
-    return new Ball(NUMBER);
   }
 
   isSatisfied(input) {
