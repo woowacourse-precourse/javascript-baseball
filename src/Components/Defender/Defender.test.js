@@ -9,6 +9,8 @@ describe("Defender", () => {
     jest.spyOn(BALL_GENERATOR, "execute").mockReturnValue(new Ball(425));
 
     const DEFENDER = new Defender(BALL_GENERATOR);
+    DEFENDER.ready();
+
     const BALL_OF_ATTACKER = new Ball(425);
     const LOG_SPY = getLogSpy();
     DEFENDER.reportAbout(BALL_OF_ATTACKER);
@@ -21,6 +23,8 @@ describe("Defender", () => {
     jest.spyOn(BALL_GENERATOR, "execute").mockReturnValue(new Ball(456));
 
     const DEFENDER = new Defender(BALL_GENERATOR);
+    DEFENDER.ready();
+
     const BALL_OF_ATTACKER = new Ball(425);
     const LOG_SPY = getLogSpy();
     DEFENDER.reportAbout(BALL_OF_ATTACKER);
@@ -33,6 +37,8 @@ describe("Defender", () => {
     jest.spyOn(BALL_GENERATOR, "execute").mockReturnValue(new Ball(425));
 
     const DEFENDER = new Defender(BALL_GENERATOR);
+    DEFENDER.ready();
+
     const BALL_OF_ATTACKER = new Ball(425);
 
     expect(DEFENDER.isGameEnd(BALL_OF_ATTACKER)).toBe(true);
