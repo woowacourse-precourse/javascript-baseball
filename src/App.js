@@ -12,11 +12,11 @@ class App {
     this.userRandomThreeNumber = 0;
   }
 
-  init() {
+  #init() {
     this.computerRandomThreeNumber = utilFun.computerUniqueThreeNumbers();
   }
 
-  baseballGameWin() {
+  #baseballGameWin() {
     Console.readLine(ANNOUNCEMENT_MESSAGE.RESTART.MESSAGE, (userAnswer) => {
       switch (userAnswer) {
         case ANNOUNCEMENT_MESSAGE.RESTART.START:
@@ -32,7 +32,7 @@ class App {
     });
   }
 
-  baseballGameStart() {
+  #baseballGameStart() {
     const gameResult = utilFun.compareComputerAndUser(
       this.computerRandomThreeNumber,
       this.userRandomThreeNumber
@@ -40,29 +40,30 @@ class App {
     Console.print(gameResult);
     switch (gameResult) {
       case GAME_MESSAGE.NOTHING:
-        this.getUserNumbers();
+        this.#getUserNumbers();
         break;
       case GAME_MESSAGE.WIN:
         Console.print(ANNOUNCEMENT_MESSAGE.WIN);
-        this.baseballGameWin();
+        this.#baseballGameWin();
         break;
       default:
-        this.getUserNumbers();
+        this.#getUserNumbers();
     }
   }
 
-  getUserNumbers() {
+  #getUserNumbers() {
     Console.readLine(ANNOUNCEMENT_MESSAGE.INPUT, (userAnswer) => {
       utilFun.checkUserValid(userAnswer);
       this.userRandomThreeNumber = userAnswer;
-      if (userAnswer) this.baseballGameStart();
+      if (userAnswer) this.#baseballGameStart();
     });
   }
 
   play() {
-    this.init();
+    this.#init();
     Console.print(ANNOUNCEMENT_MESSAGE.START);
-    this.getUserNumbers();
+    Console.print(this.computerRandomThreeNumber);
+    this.#getUserNumbers();
   }
 }
 const baseballGame = new App();
