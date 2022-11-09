@@ -68,9 +68,9 @@ class App {
     // 사용자로부터 게임 재시작 명령 입력 받음
     let restartGame;
     MissionUtils.Console.readLine(GAME_MSG.RESTART, (restartInput) => {
-      restartGame = restartInput.toString().split("");
+      restartGame = restartInput;
     });
-    return restartGame[0]; // 사용자 입력에서 첫번째 원소 반환
+    return restartGame; // 사용자 입력에서 첫번째 원소 반환
   }
 
   compareNumbers(opponentArr, userArr) {
