@@ -46,13 +46,20 @@ class App {
     const opponentNumber = this.opponent.setRandomNumber(); // 상대방 숫자 지정
     let endGame = false; // 게임 진행 동안에는 게임 종료 여부를 false로 지정
     while (!endGame) {
-      this.user.getInput(); // 사용자 예측값 입력
-      this.user.checkValidation(); // 사용자 입력 유효성 검사
-      this.user.changeToNumbers(); // 사용자 입력값이 문자 배열 형태이므로 숫자 배열로 변환
-      const ballAndStrike = this.compareNumbers(opponentNumber, this.user.input); // 볼, 스트라이크 개수 추출
-      this.printResult(ballAndStrike); // 볼, 스트라이크 결과값 화면 출력
-      endGame = this.gameEnd(ballAndStrike); // 3스트라이크가 나오면 게임 종료 여부를 true로 지정
+      endGame = this.oneRoundRepetition(opponentNumber, endGame); // 한 라운드 진행
     }
+  }
+
+  oneRoundRepetition(opponentNumber, endGame) {
+    // 한 라운드 진행에 필요한 연산 호출
+    this.user.getInput(); // 사용자 예측값 입력
+    this.user.checkValidation(); // 사용자 입력 유효성 검사
+    this.user.changeToNumbers(); // 사용자 입력값이 문자 배열 형태이므로 숫자 배열로 변환
+    const ballAndStrike = this.compareNumbers(opponentNumber, this.user.input); // 볼, 스트라이크 개수 추출
+    this.printResult(ballAndStrike); // 볼, 스트라이크 결과값 화면 출력
+    endGame = this.gameEnd(ballAndStrike); // 3스트라이크가 나오면 게임 종료 여부를 true로 지정
+
+    return endGame;
   }
 
   gameEnd(ballAndStrike) {
