@@ -6,12 +6,13 @@ class App {
 
 	play() {
 		Console.print(MESSAGES.START);
-		this.initGame();
-		this.playGame();
+		this.#initGame();
+		this.#playGame();
 	}
 
-	initGame() {
+	#initGame() {
 		this.computerNumArr = [];
+		
 		while (this.computerNumArr.length < 3) {
 			let number = Random.pickNumberInRange(1, 9);
 			if (!this.computerNumArr.includes(number))
@@ -19,24 +20,20 @@ class App {
 		}
 	}
 
-	playGame() {
+	#playGame() {
 		Console.readLine(
 			MESSAGES.REQUIRE_USER_INPUT(NUMBERS.GAME_MAX),
 			userAnswerStr => {
-				if (this.#isValid(userAnswerStr)) {
-					const resultMessage = this.#getResultMessage(
-						this.computerNumArr,
-						userAnswerStr
-					);
-					if (resultMessage === MESSAGES.THREE_STRIKE) {
-						Console.print(MESSAGES.THREE_STRIKE);
-						console.print(MESSAGES.END(3))
-						this.askToReplay();
-					} else {
-						Console.print(resultMessage);
-						this.playGame();
-					}
-				}
+				this.#isValid(userAnswerStr);
+				 
+				const [ball,strike] = this.#compareComputerWithUser(
+					this.computerNumArr,
+					userAnswerStr
+				);
+				const resultMessage = this.#convertScoreToMessage([ball,strike])
+
+				this.#showResultMessage(resultMessage)
+
 			}
 		);
 	}
@@ -62,8 +59,8 @@ class App {
 			throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 		}
 	}
-	#getResultMessage(computerNumArr, userAnswerStr) {
-		let result = '';
+
+	#compareComputerWithUser(computerNumArr, userAnswerStr) {
 		let [ball, strike] = [0, 0];
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
@@ -75,27 +72,45 @@ class App {
 				}
 			);
 			
-			if (strike > 0 && ball > 0) {
-				result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
-			} else if (strike > 0) {
-				result = `${strike}${UNITS.STRIKE}`;
-			} else if (ball > 0) {
-				result = `${ball}${UNITS.BALL}`;
-			} else {
-				result = UNITS.NOTHING;
-			}
 		});
 
-		return result;
+		return [ball,strike];
+	}
+	
+	#convertScoreToMessage ([ball, strike]){
+		let resultMessage = '';
+
+		if (strike > 0 && ball > 0) {
+			result = `${ball}${UNITS.BALL} ${strike}${UNITS.STRIKE}`;
+		} else if (strike > 0) {
+			result = `${strike}${UNITS.STRIKE}`;
+		} else if (ball > 0) {
+			result = `${ball}${UNITS.BALL}`;
+		} else {
+			result = UNITS.NOTHING;
+		}
+
+		return resultMessage;
 	}
 
-	askToReplay() {
+	#showResultMessage(resultMessage) {
+		if (resultMessage === MESSAGES.THREE_STRIKE) {
+			Console.print(MESSAGES.THREE_STRIKE);
+			console.print(MESSAGES.END(3))
+			this.#askToReplay();
+		} else {
+			Console.print(resultMessage);
+			this.#playGame();
+		}
+	}
+
+	#askToReplay() {
 		Console.readLine(MESSAGES.ASK_RESTART, playerChoice => {
 			this.#isValidChoice(playerChoice);
 
 			if (playerChoice === CHOICE.PLAY_AGAIN) {
 				this.initGame();
-				this.playGame();
+				this.#playGame();
 			} else if (playerChoice === CHOICE.EXIT) {
 				Console.print(MESSAGES.END_GAME)
 				Console.close();
