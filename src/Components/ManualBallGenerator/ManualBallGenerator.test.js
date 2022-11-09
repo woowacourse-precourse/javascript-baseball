@@ -2,7 +2,7 @@ const ManualBallGenerator = require("./ManualBallGenerator");
 const { mockQuestions } = require("../../mockFunction");
 
 describe("ManualBallGenerator", () => {
-  test("입력을 받으면 콜백 함수의 매개변수로 전달", () => {
+  test("246을 입력 받으면 콜백 함수의 매개변수로 전달", () => {
     const INPUT_NUMBER = 246;
     const STRING_ARRAY = [String(INPUT_NUMBER)];
     mockQuestions(STRING_ARRAY);
