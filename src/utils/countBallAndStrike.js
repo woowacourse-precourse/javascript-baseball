@@ -6,21 +6,21 @@ const countBallAndStrike = (userInput, answerInput) => {
     ball: 0,
   };
 
-  userInput = userInput.split("");
-  answerInput = answerInput.split("");
+  const userNumber = userInput.split("");
+  const answerNumber = answerInput.split("");
 
   for (let userInputIndex = 0; userInputIndex < ANSWER_LENGTH; userInputIndex++) {
     for (let answerInputIndex = 0; answerInputIndex < ANSWER_LENGTH; answerInputIndex++) {
       if (
-        userInput[userInputIndex] === answerInput[answerInputIndex] &&
+        userNumber[userInputIndex] === answerNumber[answerInputIndex] &&
         userInputIndex === answerInputIndex
       )
-        result.strike++; // 같은 자리수면 스트라이크 ++
+        result.strike += 1; // 같은 자리수면 스트라이크 ++
       else if (
-        userInput[userInputIndex] === answerInput[answerInputIndex] &&
+        userNumber[userInputIndex] === answerNumber[answerInputIndex] &&
         userInputIndex !== answerInputIndex
       )
-        result.ball++; // 다른 자리수면 볼 ++
+        result.ball += 1; // 다른 자리수면 볼 ++
     }
   }
 
