@@ -11,13 +11,11 @@ class App {
     this.gamePrepare();
   }
 
-  // 게임 준비 (정답 준비)
   gamePrepare() {
     const randomNum = makeRandomNumber();
     this.gameStart(randomNum);
   }
 
-  // 게임 시작
   gameStart(answer) {
     Console.readLine(MESSAGE.INPUT_NUMBER, (userNumber) => {
       // 사용자 입력값 유효 여부 확인
@@ -33,7 +31,6 @@ class App {
     });
   }
 
-  // 게임 재시작 여부 입력
   gameRestartCheck() {
     Console.print(MESSAGE.STRIKE_OUT);
     Console.readLine(MESSAGE.RESTART_OR_TERMINATE, (userInput) => {
@@ -43,7 +40,6 @@ class App {
     });
   }
 
-  // 예외 발생으로 인한 종료
   inputErrorException() {
     throw new Error(MESSAGE.INPUT_EXCEPTION);
   }
