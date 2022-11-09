@@ -21,7 +21,7 @@ class Controller {
 	
 	_endHandler(command) {
 		if (command === "1")
-			this.start(GAME_STATE.ING);
+			this.start(GAME_STATE.RE);
 		else if (command === "2")
 			Console.close();
 		else
