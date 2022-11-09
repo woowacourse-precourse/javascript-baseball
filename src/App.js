@@ -24,11 +24,12 @@ const messages = {
 class App {
   constructor() {
     let cleared = false; // 게임 클리어 여부
-    console.log(messages.START); // 게임 시작 문구 출력
   }
 
   // play() : 게임 시작
   play() {
+    console.log(messages.START); // 게임 시작 문구 출력
+
     const computer = this.setComputerNumber();
     let player = this.inputPlayerNumber();
 
