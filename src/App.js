@@ -1,5 +1,33 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
+const MESSEGE = {
+  GREETING: "숫자 야구 게임을 시작합니다.",
+  INPUT_NUM: "숫자를 입력해주세요 : ",
+  CONGRATS: "3개의 숫자를 모두 맞히셨습니다!",
+  END_GAME: "게임 종료",
+  ASK_REMATCH_OR_EXIT: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
+  REMATCH: "재경기를 진행합니다.",
+};
+
+const ERROR = {
+  ONLY_NUMBER: "숫자 입력만 가능합니다.",
+  THREE_LENGTHS: "숫자 3개를 입력해주세요.",
+  SAME_NUMBERS: "같은 숫자가 중복되었습니다. 다른 숫자 3개를 입력해주세요.",
+  NOT_ONE_OR_TWO: "1 또는 2를 입력해야합니다.",
+};
+
+const RESULT = {
+  NOTHING: "낫싱",
+  BALL: "볼",
+  STRIKE: "스트라이크",
+  THREE_STRIKES: "3스트라이크",
+};
+
+const OPTION = {
+  REMATCH: "1",
+  EXIT: "2",
+};
+
 class App {
   constructor() {
     this.ANSWER;
@@ -23,7 +51,7 @@ class App {
   }
 
   askNumInput() {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (input) => {
+    MissionUtils.Console.readLine(MESSEGE.INPUT_NUM, (input) => {
       this.isValidInput(input);
       this.getHint(input);
     });
@@ -31,13 +59,13 @@ class App {
 
   isValidInput(input) {
     if (!this.isNumber(input)) {
-      this.toThrow("숫자 입력만 가능합니다.");
+      this.toThrow(ERROR.ONLY_NUMBER);
     }
     if (!this.isVaildLength(input)) {
-      this.toThrow("숫자 3개를 입력해주세요.");
+      this.toThrow(ERROR.THREE_LENGTHS);
     }
     if (!this.isAllDiffNum(input)) {
-      this.toThrow("같은 숫자가 중복되었습니다. 다른 숫자 3개를 입력해주세요.");
+      this.toThrow(ERROR.SAME_NUMBERS);
     }
   }
 
@@ -68,15 +96,16 @@ class App {
 
     if (ballCount === 0 && strikeCount === 0) {
       this.isNothing();
-    }
-    if (strikeCount === 3) {
+    } else if (strikeCount === 3) {
       this.isThreeStrike();
     } else {
       ballCount
         ? strikeCount
-          ? this.printMsg(`${ballCount}볼 ${strikeCount}스트라이크`)
-          : this.printMsg(`${ballCount}볼`)
-        : this.printMsg(`${strikeCount}스트라이크`);
+          ? this.printMsg(
+              `${ballCount}${RESULT.BALL} ${strikeCount}${RESULT.STRIKE}`
+            )
+          : this.printMsg(`${ballCount}${RESULT.BALL}`)
+        : this.printMsg(`${strikeCount}${RESULT.STRIKE}`);
       this.askNumInput();
     }
   }
@@ -97,35 +126,32 @@ class App {
   }
 
   isNothing() {
-    this.printMsg("낫싱");
+    this.printMsg(RESULT.NOTHING);
     this.askNumInput();
   }
 
   isThreeStrike() {
-    this.printMsg("3스트라이크");
-    this.printMsg("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    this.printMsg(RESULT.THREE_STRIKES);
+    this.printMsg(`${MESSEGE.CONGRATS} ${MESSEGE.END_GAME}`);
     this.ANSWER = [];
     this.askRematchOrExit();
   }
 
   askRematchOrExit() {
-    MissionUtils.Console.readLine(
-      "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-      (input) => {
-        switch (input) {
-          case "1":
-            this.printMsg("재경기를 진행합니다.");
-            this.play();
-            break;
-          case "2":
-            this.printMsg("게임 종료");
-            MissionUtils.Console.close();
-            break;
-          default:
-            this.toThrow("1 또는 2를 입력해야합니다.");
-        }
+    MissionUtils.Console.readLine(MESSEGE.ASK_REMATCH_OR_EXIT, (input) => {
+      switch (input) {
+        case OPTION.REMATCH:
+          this.printMsg(MESSEGE.REMATCH);
+          this.play();
+          break;
+        case OPTION.EXIT:
+          this.printMsg(MESSEGE.END_GAME);
+          MissionUtils.Console.close();
+          break;
+        default:
+          this.toThrow(ERROR.NOT_ONE_OR_TWO);
       }
-    );
+    });
   }
 
   printMsg(message) {
@@ -133,7 +159,7 @@ class App {
   }
 
   greetingMsg() {
-    this.printMsg("숫자 야구 게임을 시작합니다.");
+    this.printMsg(MESSEGE.GREETING);
   }
 }
 
