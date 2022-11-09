@@ -33,7 +33,6 @@ class App {
   isNothing() {
     const userNum = this.answerBox[0];
     const comNum = this.compareComputer;
-    console.log(userNum, comNum);
     let duplicated = userNum.filter((x) => comNum.includes(x));
     if (duplicated.length === 0) {
       MissionUtils.Console.print("낫싱");
