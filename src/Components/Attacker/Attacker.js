@@ -3,18 +3,14 @@ class Attacker {
     this.ballGenerator = ballGenerator;
   }
 
-  async ready() {
-    return await this.ballGenerator.execute();
-  }
+  throwTo(defender) {
+    this.ballGenerator.execute((ball) => {
+      defender.reportAbout(ball);
 
-  async throwTo(defender) {
-    let isEnd = false;
+      if (defender.isGameEnd(ball)) return;
 
-    do {
-      const BALL = await this.ready();
-      defender.reportAbout(BALL);
-      isEnd = defender.isGameEnd(BALL);
-    } while (!isEnd);
+      this.throwTo(defender);
+    });
   }
 }
 
