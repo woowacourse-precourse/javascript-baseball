@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 class ContextualHints {
-  constructor(computerNum, playerNum, GivePlayerHint) {
+  constructor(computerNum, playerNum, MainGameSystem) {
     this.computerNum = computerNum;
     this.playerNum = playerNum;
     this.NumOfSamePosition = playerNum
@@ -17,7 +17,7 @@ class ContextualHints {
     this.THREE_BALL = 3;
     this.RESTART = '1';
     this.GAVE_OVER = '2';
-    this.GivePlayerHint = GivePlayerHint;
+    this.MainGameSystem = MainGameSystem;
   }
 
   HowManyEqualNum() {
@@ -34,8 +34,8 @@ class ContextualHints {
       (answer) => {
         console.log(answer);
         if (answer === this.RESTART) {
-          const givePlayerHint = new this.GivePlayerHint();
-          return givePlayerHint.runGame();
+          const mainGameSystem = new this.MainGameSystem();
+          return mainGameSystem.runGame();
         }
         if (answer === this.GAVE_OVER) {
           Console.print('게임 종료');
