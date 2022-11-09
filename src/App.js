@@ -6,78 +6,86 @@ class App {
 
 	play() {
 		Console.print(MESSAGES.START);
-		this.#initGame();
-		this.#playGame();
+		this.initGame();
+		this.playGame();
 	}
 
-	#initGame() {
+	initGame() {
 		this.computerNumArr = [];
-		
+
 		while (this.computerNumArr.length < 3) {
 			let number = Random.pickNumberInRange(1, 9);
 			if (!this.computerNumArr.includes(number))
 				this.computerNumArr.push(number);
 		}
+
+		return this.computerNumArr;
 	}
 
-	#playGame() {
+	playGame() {
 		Console.readLine(
 			MESSAGES.REQUIRE_USER_INPUT(NUMBERS.GAME_MAX),
 			userAnswerStr => {
-				this.#isValid(userAnswerStr);
-				 
-				const [ball,strike] = this.#compareComputerWithUser(
+				this.isValid(userAnswerStr);
+
+				const [ball, strike] = this.compareComputerWithUser(
 					this.computerNumArr,
 					userAnswerStr
 				);
-				const resultMessage = this.#convertScoreToMessage([ball,strike])
+				const resultMessage = this.convertScoreToMessage([
+					ball,
+					strike,
+				]);
 
-				this.#showResultMessage(resultMessage)
-
+				this.showResultMessage(resultMessage);
 			}
 		);
 	}
 
-	#isValid(userAnswerStr) {
+	isValid(userAnswerStr) {
 		const answer = userAnswerStr.replace(REGEX.SPACE, '');
 		const length = answer.length;
-		const set = new Set()
-		userAnswerStr.replace(REGEX.SPACE, '').forEach(num => set.add(num))
+		const set = new Set();
+		userAnswerStr.replace(REGEX.SPACE, '').forEach(num => set.add(num));
 
 		if (length >= 4) throw new Error(MESSAGES.INVALID_LENGTH);
 
 		if (isNaN(answer)) throw new Error(MESSAGES.NOT_A_NUMBER);
-		
-		if ([...set]!==[...answer]) throw new Error(MESSAGES.DUPLICATED_NUM);
+
+		if ([...set] !== [...answer]) throw new Error(MESSAGES.DUPLICATED_NUM);
 
 		return true;
 	}
 
-	#isValidChoice(playerChoice) {
+	isValidChoice(playerChoice) {
 		if (!REGEX.CHOICE.test(playerChoice)) {
-			Console.print(MESSAGES.FORMAT_ERROR_CHOICE)
+			Console.print(MESSAGES.FORMAT_ERROR_CHOICE);
 			throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 		}
 	}
 
-	#compareComputerWithUser(computerNumArr, userAnswerStr) {
+	compareComputerWithUser(computerNumArr, userAnswerStr) {
 		let [ball, strike] = [0, 0];
 
 		userAnswerStr.split('').forEach((userAnswerStr, userAnswerIdx) => {
-			this.#isValid(userAnswerStr);
+			this.isValid(userAnswerStr);
 
 			computerNumArr.map((computerNum, computerNumIdx) => {
-				if (computerNum === Number(userAnswerStr) && computerNumIdx === userAnswerIdx ) {strike++; return;}
-				if(computerNum === Number(userAnswerStr)) ball++;
+				if (
+					computerNum === Number(userAnswerStr) &&
+					computerNumIdx === userAnswerIdx
+				) {
+					strike++;
+					return;
 				}
-			);
-			
+				if (computerNum === Number(userAnswerStr)) ball++;
+			});
 		});
 
-		return [ball,strike];
+		return [ball, strike];
 	}
-	
-	#convertScoreToMessage ([ball, strike]){
+
+	convertScoreToMessage([ball, strike]) {
 		let resultMessage = '';
 
 		if (strike > 0 && ball > 0) {
@@ -93,35 +101,33 @@ class App {
 		return resultMessage;
 	}
 
-	#showResultMessage(resultMessage) {
+	showResultMessage(resultMessage) {
 		if (resultMessage === MESSAGES.THREE_STRIKE) {
 			Console.print(MESSAGES.THREE_STRIKE);
-			console.print(MESSAGES.END(3))
-			this.#askToReplay();
+			console.print(MESSAGES.END(3));
+			this.askToReplay();
 		} else {
 			Console.print(resultMessage);
-			this.#playGame();
+			this.playGame();
 		}
 	}
 
-	#askToReplay() {
+	askToReplay() {
 		Console.readLine(MESSAGES.ASK_RESTART, playerChoice => {
-			this.#isValidChoice(playerChoice);
+			this.isValidChoice(playerChoice);
 
 			if (playerChoice === CHOICE.PLAY_AGAIN) {
 				this.initGame();
-				this.#playGame();
+				this.playGame();
 			} else if (playerChoice === CHOICE.EXIT) {
-				Console.print(MESSAGES.END_GAME)
+				Console.print(MESSAGES.END_GAME);
 				Console.close();
 			} else {
-				Console.print(MESSAGES.FORMAT_ERROR_CHOICE)
+				Console.print(MESSAGES.FORMAT_ERROR_CHOICE);
 				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 			}
 		});
 	}
 }
 
-const app = new App()
-app.play()
 module.exports = App;
