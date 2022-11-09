@@ -1,5 +1,5 @@
-const MainGameSystem = require("./components/MainGameSystem");
-const firstAnnouncement = require("./components/firstAnnouncement");
+const MainGameSystem = require('./components/MainGameSystem');
+const firstAnnouncement = require('./components/firstAnnouncement');
 
 class App {
   play() {

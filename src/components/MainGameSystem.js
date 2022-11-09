@@ -1,6 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const ContextualHints = require("./material/ContextualHints");
-const ThreeRandomNumForComputer = require("./material/ThreeRandomNumFromComputer");
+const MissionUtils = require('@woowacourse/mission-utils');
+const ContextualHints = require('./material/ContextualHints');
+const ThreeRandomNumForComputer = require('./material/ThreeRandomNumFromComputer');
 
 class MainGameSystem {
   constructor() {
@@ -11,7 +11,7 @@ class MainGameSystem {
 
   isDuplicate(randomNum) {
     const LAST_INDEX = 2;
-    return randomNum.split("").reduce((acc, num, index, arr) => {
+    return randomNum.split('').reduce((acc, num, index, arr) => {
       if (!acc.includes(num)) acc.push(num);
       if (index === LAST_INDEX) return acc.length !== arr.length;
       return acc;
@@ -19,12 +19,12 @@ class MainGameSystem {
   }
 
   checkPlayerRandomNum(randomNum) {
-    if (randomNum.split("").length !== this.THREE_DIGITS) throw "3자리 아님";
-    if (!Number(randomNum)) throw "숫자가아닌 값이 포함되어있습니다";
+    if (randomNum.split('').length !== this.THREE_DIGITS) throw '3자리 아님';
+    if (!Number(randomNum)) throw '숫자가아닌 값이 포함되어있습니다';
     if (Number(randomNum) < this.NEEDLESS) {
-      throw "-, +등 불필요한 값이 존재합니다.";
+      throw '-, +등 불필요한 값이 존재합니다.';
     }
-    if (this.isDuplicate(randomNum)) throw "중복되는 숫자가 존재합니다.";
+    if (this.isDuplicate(randomNum)) throw '중복되는 숫자가 존재합니다.';
     return randomNum;
   }
 
@@ -34,7 +34,7 @@ class MainGameSystem {
   }
 
   givePlayerHint(insideComputerNum) {
-    MissionUtils.Console.readLine("숫자를 입력해주세요 : ", (playerNum) => {
+    MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (playerNum) => {
       try {
         this.verifiedPlayerNum = this.checkPlayerRandomNum(playerNum);
       } catch (error) {
