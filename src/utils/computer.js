@@ -1,4 +1,4 @@
-const { Random, Console } = require("@woowacourse/mission-utils");
+const { Random, Console } = require('@woowacourse/mission-utils');
 
 const generateDifferRandomNumArr = (numOfDigits) => {
   const DIFFER_RANDOM_NUM_ARR = [];
@@ -15,11 +15,11 @@ const generateDifferRandomNumArr = (numOfDigits) => {
 const getHintOfAnswer = (result) => {
   this.isUserWrong = true;
   if (result.ball === 0 && result.strike === 0) {
-    Console.print("낫싱");
+    Console.print('낫싱');
     return this.isUserWrong;
   }
   if (result.ball === 0 && result.strike === 3) {
-    Console.print("3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    Console.print('3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료');
     return !this.isUserWrong;
   }
   if (result.ball > 0 && result.strike === 0) {
