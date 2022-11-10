@@ -11,16 +11,22 @@
 # **🗂️ 디렉터리 구조 (Directory Structure)**
 
     📂 docs/ : 전체 문서 모음
-        ┗━ 📂 img/ : 문서 이미지 관리
-               ┗━🖼️ FlowChart(BaseBall).png : 순서도 이미지 파일
-        ┗━ 📑 README.md : 프로그램 기획 및 구성
+    ┗━ 📂 img/ : 문서 이미지 관리
+        ┗━🖼️ FlowChart(BaseBall).png : 순서도 이미지 파일
+    ┗━ 📑 README.md : 프로그램 기획 및 구성
     📂 __tests__/ : 테스트 관리 폴더
-        ┣━ 📑 ApplicationTest.js : 애플리케이션 전체 테스트 파일
-        ┣━ 📑 FeatureUnitTest.js : 기능 단위 테스트 파일
-        ┗━ 📑 StringTest.js : 문자열 테스트 파일 (Jest 기본 사용법 테스트)
+    ┣━ 📑 ApplicationTest.js : 애플리케이션 전체 테스트 파일
+    ┣━ 📑 FeatureUnitTest.js : 기능 단위 테스트 파일
+    ┗━ 📑 StringTest.js : 문자열 테스트 파일 (Jest 기본 사용법 테스트)
     📂 src/ : 소스파일 폴더
-        ┣━ 📑 App.js : 인터페이스 관리 및 유저 입/출력 관리 파일
-        ┗━ 📑 Computer.js : 랜덤숫자 생성 및 숫자야구 계산 처리 파일
+    ┣━ 📂 constants : 상수 관리 폴더
+        ┣━ 📑 gameMessage.js : 게임 메세지 관리 파일
+        ┗━ 📑 gameSetting.js : 게임 상수 관리 파일
+    ┣━ 📂 util : 유틸 관리 폴더
+        ┣━ 📑 gameProcess.js : 게임 프로세스에 필요한 유틸 관리 파일
+        ┗━ 📑 validation.js : 유효성 검사 유틸 관리 파일
+    ┣━ 📑 App.js : 인터페이스 관리 및 유저 입/출력 관리 파일
+    ┗━ 📑 Computer.js : 랜덤숫자 생성 및 숫자야구 계산 처리 파일
 
 ---
 
