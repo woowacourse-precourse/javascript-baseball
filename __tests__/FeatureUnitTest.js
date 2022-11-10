@@ -98,12 +98,7 @@ describe('기능 단위 목록별 테스트', () => {
   });
 
   test('기능6 3스트라이크시 반환되는 boolean 체크 (isThreeStrike 메소드)', () => {
-    const baseBallBoards = [
-      { strike: 3, ball: 0 },
-      { strike: 1, ball: 1 },
-      { strike: 0, ball: 3 },
-      { strike: 0, ball: 0 },
-    ];
+    const baseBallBoards = [3, 0, 1, 2];
     const result = [true, false, false, false];
 
     const app = new App();
