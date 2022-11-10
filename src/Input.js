@@ -3,8 +3,8 @@ class Input {
     if (userInput.length !== 3) throw new Error("3자리 숫자를 입력해주세요.");
 
     const userInputArr = Array.from(userInput);
-    userInputArr.every((char) => this.checkNumber(Number(char)));
-    userInputArr.every((char) => this.checkZero(Number(char)));
+    userInputArr.forEach((char) => this.checkNumber(Number(char)));
+    userInputArr.forEach((char) => this.checkZero(Number(char)));
 
     const numbers = new Set();
     userInputArr.forEach((number) => {
