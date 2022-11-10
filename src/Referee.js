@@ -1,8 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RESTART, GAME_OVER } = require('./constants/gameSetting');
+const { RESTART, GAME_OVER, VALUE_SIZE } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
 const getGameResultMessage = require('./utils/getGameResultMessage');
-const isAvailableValue = require('./utils/isAvailableValue');
 const Computer = require('./Computer');
 const Player = require('./Player');
 
@@ -15,18 +14,19 @@ class Referee {
 
   gameStart() {
     this.computer.setValue();
-    this.player.readInput(this.setPlayerValue.bind(this));
+    this.player.readInput(this.gameResult.bind(this));
   }
 
   gameResult() {
     const count = this.getBallAndStrikeCount();
     Console.print(getGameResultMessage(count.ball, count.strike));
 
-    if (count.strike === 3) {
+    if (count.strike === VALUE_SIZE) {
       Console.print(MESSAGE.GAME.WIN);
       return this.gameFinish();
     }
-    this.player.readInput(this.setPlayerValue.bind(this));
+
+    this.player.readInput(this.gameResult.bind(this));
   }
 
   gameFinish() {
@@ -38,6 +38,7 @@ class Referee {
         Console.print(MESSAGE.GAME.OVER);
         return Console.close();
       }
+
       throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
@@ -58,14 +59,6 @@ class Referee {
     });
 
     return count;
-  }
-
-  setPlayerValue(value) {
-    if (isAvailableValue(value)) {
-      this.player.setValue(value);
-      return this.gameResult();
-    }
-    throw new Error(MESSAGE.ERROR.WRONG_VALUE);
   }
 }
 
