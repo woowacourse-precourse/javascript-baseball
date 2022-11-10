@@ -2,20 +2,16 @@ const App = require('../src/App');
 const Computer = require('../src/Computer');
 const MissionUtils = require('@woowacourse/mission-utils');
 
-const mockQuestions = answers => {
+const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((question, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
+  answers.reduce((acc, input) => acc.mockImplementationOnce((question, callback) => {
+    callback(input);
+  }), MissionUtils.Console.readLine);
 };
 
-const mockRandoms = numbers => {
+const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
+  numbers.reduce((acc, number) => acc.mockReturnValueOnce(number), MissionUtils.Random.pickNumberInRange);
 };
 
 const getPrintSpy = () => {
@@ -64,18 +60,16 @@ describe('기능 단위 목록별 테스트', () => {
     const app = new App();
     app.play();
 
-    messages.forEach(output => {
+    messages.forEach((output) => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 
-  test('기능4 숫자야구 입력값 유효성 테스트 (isDigitValidation 메소드)', () => {
+  test('기능4 숫자야구 입력값 유효성 테스트 (validationDigit 메소드)', () => {
     const inputException = ['1234', '130', '12', '133'];
 
     const app = new App();
-    inputException.forEach(inputs =>
-      expect(() => app.isDigitValidation(inputs)).toThrow('잘못된 값 입력됨'),
-    );
+    inputException.forEach((inputs) => expect(() => app.validationDigit(inputs)).toThrow('[ERROR] 잘못된 값 입력됨'));
   });
 
   test('기능5 유저 숫자야구 입력 테스트 (calcBaseBallDigit 메소드)', () => {
@@ -133,7 +127,7 @@ describe('기능 단위 목록별 테스트', () => {
 
     app.play();
 
-    messages.forEach(output => {
+    messages.forEach((output) => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
@@ -156,7 +150,7 @@ describe('기능 단위 목록별 테스트', () => {
     const app = new App();
     app.play();
 
-    messages.forEach(output => {
+    messages.forEach((output) => {
       expect(printSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
@@ -167,8 +161,6 @@ describe('기능 단위 목록별 테스트', () => {
     mockQuestions(inputException);
 
     const app = new App();
-    inputException.forEach(_ =>
-      expect(() => app.getRestartInput()).toThrow('잘못된 값 입력됨'),
-    );
+    inputException.forEach((_) => expect(() => app.getRestartInput()).toThrow('[ERROR] 잘못된 값 입력됨'));
   });
 });

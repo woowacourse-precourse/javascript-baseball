@@ -1,8 +1,8 @@
 // 클래스 모듈 선언
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
-// 상수 선언
-const INPUT_LENGTH = 3;
+const MESSAGE = require('../constants/gameMessage');
+const { INPUT_LENGTH, GAME_RESTART, GAME_END } = require('../constants/gameSetting');
 
 class App {
   #collectValidationFn;
@@ -21,8 +21,8 @@ class App {
   }
 
   #setUserInput () {
-    Console.readLine('숫자를 입력해주세요 : ', (inputDigit) => {
-      const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
+    Console.readLine(MESSAGE.GAME.INPUT, (inputDigit) => {
+      const userDigit = [...this.validationDigit(inputDigit)].map(Number);
       const baseBallBoard = this.#computer.calcBaseBallDigit(userDigit);
       this.isThreeStrike(baseBallBoard)
         ? this.getRestartInput()
@@ -31,7 +31,7 @@ class App {
   }
 
   #showStartMessage () {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MESSAGE.GAME.START);
   }
 
   #gameStart () {
@@ -41,7 +41,7 @@ class App {
 
   #gameEnd () {
     this.#computer = null;
-    Console.print('게임 종료');
+    Console.print(MESSAGE.GAME.END);
     Console.close();
   }
 
@@ -55,22 +55,23 @@ class App {
     return strike === INPUT_LENGTH;
   }
 
-  isDigitValidation (inputDigit) {
-    const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } =      this.#collectValidationFn;
+  validationDigit (inputDigit) {
+    const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } = this.#collectValidationFn;
     if (
       isNotThreeDigit(inputDigit)
       || isNotOneToNineDigit(inputDigit)
       || isDuplicates(inputDigit)
-    ) throw new Error('잘못된 값 입력됨');
+    ) throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     return inputDigit;
   }
 
   getRestartInput () {
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
+    Console.print(MESSAGE.GAME.WIN);
+    Console.print(MESSAGE.GAME.FINISH);
     Console.readLine('', (isRestart) => {
-      if (isRestart === '1') return this.#gameStart();
-      if (isRestart === '2') return this.#gameEnd();
-      throw new Error('잘못된 값 입력됨');
+      if (isRestart === GAME_RESTART) return this.#gameStart();
+      if (isRestart === GAME_END) return this.#gameEnd();
+      throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     });
   }
 

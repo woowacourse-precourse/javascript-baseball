@@ -1,9 +1,6 @@
 // 모듈 선언
 const { Random } = require('@woowacourse/mission-utils');
-// 상수 선언
-const INPUT_LENGTH = 3;
-const START_DIGIT = 1;
-const END_DIGIT = 9;
+const { INPUT_LENGTH, START_DIGIT, END_DIGIT } = require('../constants/gameSetting');
 
 class Computer {
   #baseBallDigit;
