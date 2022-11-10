@@ -3,7 +3,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const MESSAGE = require('./constants/gameMessage');
 const { INPUT_LENGTH, GAME_RESTART, GAME_END } = require('./constants/gameSetting');
-const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } = require('./util/validation');
+const { isAllPassed } = require('./util/validation');
 const { isThreeStrike } = require('./util/gemeProcess');
 
 class App {
@@ -48,11 +48,7 @@ class App {
   }
 
   validationDigit (inputDigit) {
-    if (
-      isNotThreeDigit(inputDigit)
-      || isNotOneToNineDigit(inputDigit)
-      || isDuplicates(inputDigit)
-    ) throw new Error(MESSAGE.ERROR.WRONG_VALUE);
+    if (isAllPassed(inputDigit)) throw new Error(MESSAGE.ERROR.WRONG_VALUE);
     return inputDigit;
   }
 

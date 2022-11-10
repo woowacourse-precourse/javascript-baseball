@@ -8,8 +8,10 @@ const isDuplicates = (inputDigit) => {
   return arrForCheck.length !== setForCheck.size;
 };
 
+const isAllPassed = (inputDigit) => isNotThreeDigit(inputDigit)
+|| isNotOneToNineDigit(inputDigit)
+|| isDuplicates(inputDigit);
+
 module.exports = {
-  isNotThreeDigit,
-  isNotOneToNineDigit,
-  isDuplicates,
+  isAllPassed,
 };
