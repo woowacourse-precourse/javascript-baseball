@@ -1,5 +1,6 @@
 const App = require('../src/App');
 const Computer = require('../src/Computer');
+const { isThreeStrike } = require('../src/util/gemeProcess');
 const { Console, Random } = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -101,10 +102,8 @@ describe('기능 단위 목록별 테스트', () => {
     const baseBallBoards = [3, 0, 1, 2];
     const result = [true, false, false, false];
 
-    const app = new App();
-
     baseBallBoards.forEach((board, idx) => {
-      expect(app.isThreeStrike(board)).toEqual(result[idx]);
+      expect(isThreeStrike(board)).toEqual(result[idx]);
     });
   });
 
