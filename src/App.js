@@ -23,7 +23,7 @@ class App {
     Console.readLine('숫자를 입력해주세요 : ', (userInput) => {
       const USER_INPUT_ARR = this.convertStrToArr(userInput);
       const IS_USER_INPUT_VALID = checkUserInputValid(USER_INPUT_ARR);
-      if (IS_USER_INPUT_VALID === true) {
+      if (IS_USER_INPUT_VALID) {
         const SCORE = scoreUserInput(this.computerAnswer, USER_INPUT_ARR);
         this.isUserWrong = getHintOfAnswer(SCORE);
         return this.isUserWrong ? this.play() : this.checkIfRestartGame();
