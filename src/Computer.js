@@ -1,7 +1,7 @@
 // 모듈 선언
 const { Random } = require('@woowacourse/mission-utils');
 const { INPUT_LENGTH, START_DIGIT, END_DIGIT } = require('./constants/gameSetting');
-const { isBall, isStrike } = require('./util/gemeProcess');
+const { isBall, isStrike } = require('./util/gameProcess');
 
 class Computer {
   #baseBallDigit;

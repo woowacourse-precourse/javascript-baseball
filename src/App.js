@@ -4,7 +4,7 @@ const Computer = require('./Computer');
 const MESSAGE = require('./constants/gameMessage');
 const { INPUT_LENGTH, GAME_RESTART, GAME_END } = require('./constants/gameSetting');
 const { isAllPassed } = require('./util/validation');
-const { isThreeStrike } = require('./util/gemeProcess');
+const { isThreeStrike } = require('./util/gameProcess');
 
 class App {
   #computer;
