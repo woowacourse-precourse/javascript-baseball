@@ -6,11 +6,9 @@ class Input {
     userInputArr.forEach((char) => this.checkNumber(Number(char)));
     userInputArr.forEach((char) => this.checkZero(Number(char)));
 
-    const numbers = new Set();
-    userInputArr.forEach((number) => {
-      numbers.add(number);
-    });
-    if (numbers.size < 3) throw new Error("중복되지 않는 숫자를 입력해주세요.");
+    if (new Set(userInputArr) < 3) {
+      throw new Error("중복되지 않는 숫자를 입력해주세요.");
+    }
 
     return true;
   }
@@ -28,7 +26,7 @@ class Input {
   }
 
   static checkIsOneOrTwo(userInput) {
-    if (userInput !== "1" || userInput !== "2")
+    if (userInput !== "1" && userInput !== "2")
       throw new Error("1 또는 2를 입력해주세요.");
 
     return true;
