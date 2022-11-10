@@ -48,18 +48,19 @@ class App {
         throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.')
       }
 
-      const numbers = Array.from(guess).map((digit) => parseInt(digit))
+      const numbers = Array.from(guess).map(Number) // parseInt는 NaN 반환 - https://medium.com/dailyjs/parseint-mystery-7c4368ef7b21 참고
       const { strike, ball, finished } = this.#determineGameResult(numbers)
       const gameResult = this.#getGameResult({ strike, ball })
       Console.print(gameResult)
 
       if (!finished) {
         this.#takeGuess()
-      } else {
-        Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
 
-        this.#checkRestart()
+        return
       }
+
+      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+      this.#checkRestart()
     })
   }
 
