@@ -23,8 +23,9 @@ class App {
   #setUserInput () {
     Console.readLine(MESSAGE.GAME.INPUT, (inputDigit) => {
       const userDigit = [...this.validationDigit(inputDigit)].map(Number);
-      const baseBallBoard = this.#computer.calcBaseBallDigit(userDigit);
-      this.isThreeStrike(baseBallBoard)
+      const { strike, ball }  = this.#computer.calcBaseBallDigit(userDigit);
+      this.showBoard({ strike, ball });
+      this.isThreeStrike(strike)
         ? this.getRestartInput()
         : this.#setUserInput();
     });
@@ -45,14 +46,16 @@ class App {
     Console.close();
   }
 
-  isThreeStrike (baseBallBoard) {
-    const { strike, ball } = baseBallBoard;
+  isThreeStrike (strike) {
+    return strike === INPUT_LENGTH;
+  }
+
+  showBoard ({ strike, ball }) {
     if (strike || ball) {
       Console.print(
         (ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''),
       );
     } else Console.print('낫싱');
-    return strike === INPUT_LENGTH;
   }
 
   validationDigit (inputDigit) {
