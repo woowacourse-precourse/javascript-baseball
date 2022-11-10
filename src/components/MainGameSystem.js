@@ -9,6 +9,8 @@ class MainGameSystem {
     this.verifiedPlayerNum;
     this.RESTART = '1';
     this.GAVE_OVER = '2';
+    this.computerNum = 0;
+    this.APP_SHUT_DOWN = false;
   }
 
   isDuplicate(randomNum) {
@@ -35,25 +37,28 @@ class MainGameSystem {
     return pickThreeRandomNum.returnNumsWithoutDuplication();
   }
 
-  givePlayerHint(insideComputerNum) {
+  getPlayerNum() {
     Console.readLine('숫자를 입력해주세요 : ', (playerNum) => {
       try {
         this.verifiedPlayerNum = this.checkPlayerRandomNum(playerNum);
+        return;
       } catch (error) {
         throw `[error] : ${error}. 게임이 종료됩니다.`;
       }
-
-      const contextualHints = new ContextualHints(
-        insideComputerNum,
-        this.verifiedPlayerNum
-      );
-      let coco = contextualHints.getContextualHints();
-      if (coco === 3) return this.endGameOrRestart();
-      return this.givePlayerHint(insideComputerNum);
     });
   }
 
+  givePlayerHint() {
+    const contextualHints = new ContextualHints(
+      this.computerNum,
+      this.verifiedPlayerNum
+    );
+    let coco = contextualHints.getContextualHints();
+    if (coco === 3) return this.endGameOrRestart();
+  }
+
   endGameOrRestart() {
+    this.computerNum = 0;
     Console.readLine(
       '3개의 숫자를 모두 맞히셨습니다. 게임 종료 \n' +
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
@@ -63,6 +68,7 @@ class MainGameSystem {
         }
         if (answer === this.GAVE_OVER) {
           Console.print('게임 종료');
+          this.APP_SHUT_DOWN = true;
           return Console.close();
         }
         if (answer !== this.RESTART && answer !== this.GAVE_OVER) {
@@ -74,8 +80,11 @@ class MainGameSystem {
   }
 
   runGame() {
-    const computerNum = this.getComputerRandomNum();
-    this.givePlayerHint(computerNum);
+    if (this.APP_SHUT_DOWN) return;
+    if (!this.computerNum) this.computerNum = this.getComputerRandomNum();
+    this.getPlayerNum();
+    this.givePlayerHint();
+    return this.runGame();
   }
 }
 
