@@ -1,19 +1,19 @@
 const { Random, Console } = require('@woowacourse/mission-utils')
 
 class App {
-  #from // 숫자를 선택할 시작 범위
-  #to // 숫자를 선택할 끝 범위
+  #minRange // 숫자를 선택할 시작 범위
+  #maxRange // 숫자를 선택할 끝 범위
   #ballCount // 야구 게임에서 정답으로 사용할 숫자의 개수
   #answer
 
   /**
-   * @param {number=} from
-   * @param {number=} to
+   * @param {number=} minRange
+   * @param {number=} maxRange
    * @param {number=} ballCount
    */
-  constructor(from = 1, to = 9, ballCount = 3) {
-    this.#from = from
-    this.#to = to
+  constructor(minRange = 1, maxRange = 9, ballCount = 3) {
+    this.#minRange = minRange
+    this.#maxRange = maxRange
     this.#ballCount = ballCount
     this.#answer = []
 
@@ -32,7 +32,10 @@ class App {
     const answer = new Set()
 
     while (answer.size !== this.#ballCount) {
-      const randomNumber = Random.pickNumberInRange(this.#from, this.#to)
+      const randomNumber = Random.pickNumberInRange(
+        this.#minRange,
+        this.#maxRange
+      )
 
       answer.add(randomNumber)
     }
