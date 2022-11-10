@@ -1,21 +1,21 @@
 const App = require('../src/App');
 const Computer = require('../src/Computer');
-const MissionUtils = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
-  MissionUtils.Console.readLine = jest.fn();
+  Console.readLine = jest.fn();
   answers.reduce((acc, input) => acc.mockImplementationOnce((question, callback) => {
     callback(input);
-  }), MissionUtils.Console.readLine);
+  }), Console.readLine);
 };
 
 const mockRandoms = (numbers) => {
-  MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => acc.mockReturnValueOnce(number), MissionUtils.Random.pickNumberInRange);
+  Random.pickNumberInRange = jest.fn();
+  numbers.reduce((acc, number) => acc.mockReturnValueOnce(number), Random.pickNumberInRange);
 };
 
 const getPrintSpy = () => {
-  const printSpy = jest.spyOn(MissionUtils.Console, 'print');
+  const printSpy = jest.spyOn(Console, 'print');
   printSpy.mockClear();
   return printSpy;
 };
