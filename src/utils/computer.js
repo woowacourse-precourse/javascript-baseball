@@ -2,11 +2,10 @@ const { Random, Console } = require('@woowacourse/mission-utils');
 
 const generateDifferRandomNumArr = (numOfDigits) => {
   const DIFFER_RANDOM_NUM_ARR = [];
-  let randomNum;
   while (DIFFER_RANDOM_NUM_ARR.length < numOfDigits) {
-    randomNum = Random.pickNumberInRange(1, 9);
-    if (!DIFFER_RANDOM_NUM_ARR.includes(randomNum)) {
-      DIFFER_RANDOM_NUM_ARR.push(randomNum);
+    const RANDOM_NUM = Random.pickNumberInRange(1, 9);
+    if (!DIFFER_RANDOM_NUM_ARR.includes(RANDOM_NUM)) {
+      DIFFER_RANDOM_NUM_ARR.push(RANDOM_NUM);
     }
   }
   return DIFFER_RANDOM_NUM_ARR;
