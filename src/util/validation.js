@@ -1,4 +1,4 @@
-const { INPUT_LENGTH } = require('./constants/gameSetting');
+const { INPUT_LENGTH } = require('../constants/gameSetting');
 
 const isNotThreeDigit = (inputDigit) => inputDigit.length !== INPUT_LENGTH;
 const isNotOneToNineDigit = (inputDigit) => isNaN(inputDigit) || inputDigit.toString().includes('0');
