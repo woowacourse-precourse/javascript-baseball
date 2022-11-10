@@ -1,4 +1,5 @@
 const { Random, Console } = require('@woowacourse/mission-utils')
+const { gameInformation, gameResult, gameError } = require('./constants.js')
 
 class App {
   #minRange // 숫자를 선택할 시작 범위
@@ -17,7 +18,7 @@ class App {
     this.#ballCount = ballCount
     this.#answer = []
 
-    Console.print('숫자 야구 게임을 시작합니다.')
+    Console.print(gameInformation.START)
   }
 
   play() {
@@ -44,11 +45,11 @@ class App {
   }
 
   #takeGuess() {
-    Console.readLine('숫자를 입력해주세요 : ', (guess) => {
+    Console.readLine(gameInformation.GET_INPUT, (guess) => {
       if (this.#isInvalidGuess(guess)) {
         this.#close()
 
-        throw new Error('잘못된 입력입니다. 프로그램을 종료합니다.')
+        throw new Error(gameError.INVALID_INPUT)
       }
 
       const numbers = Array.from(guess).map(Number) // parseInt는 NaN 반환 - https://medium.com/dailyjs/parseint-mystery-7c4368ef7b21 참고
@@ -62,30 +63,27 @@ class App {
         return
       }
 
-      Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료')
+      Console.print(gameInformation.END)
       this.#checkRestart()
     })
   }
 
   #checkRestart() {
-    Console.readLine(
-      '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-      (input) => {
-        const gameOption = input.trim()
-        const gameOptionMapper = {
-          RESTART: '1',
-          CLOSE: '2',
-        }
-
-        if (gameOption === gameOptionMapper.RESTART) {
-          this.play()
-        } else if (gameOption === gameOptionMapper.CLOSE) {
-          this.#close()
-        } else {
-          this.#checkRestart()
-        }
+    Console.readLine(gameInformation.CHECK_RESTART, (input) => {
+      const gameOption = input.trim()
+      const gameOptionMapper = {
+        RESTART: '1',
+        CLOSE: '2',
       }
-    )
+
+      if (gameOption === gameOptionMapper.RESTART) {
+        this.play()
+      } else if (gameOption === gameOptionMapper.CLOSE) {
+        this.#close()
+      } else {
+        this.#checkRestart()
+      }
+    })
   }
 
   /**
@@ -119,11 +117,11 @@ class App {
    * @returns {string}
    */
   #getGameResult({ strike, ball }) {
-    const counts = `${ball ? `${ball}볼 ` : ' '}${
-      strike ? `${strike}스트라이크` : ''
+    const counts = `${ball ? `${ball}${gameResult.BALL} ` : ' '}${
+      strike ? `${strike}${gameResult.STRIKE}` : ''
     }`
 
-    return strike === 0 && ball === 0 ? '낫싱' : counts.trim()
+    return strike === 0 && ball === 0 ? gameResult.NONE : counts.trim()
   }
 
   /**
