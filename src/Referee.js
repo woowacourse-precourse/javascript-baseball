@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { RESTART, GAME_OVER, VALUE_SIZE } = require('./constants/gameSetting');
+const { RESTART, GAME_OVER } = require('./constants/gameSetting');
 const MESSAGE = require('./constants/message');
 const getGameResultMessage = require('./utils/getGameResultMessage');
 const isAvailableValue = require('./utils/isAvailableValue');
