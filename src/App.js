@@ -36,17 +36,21 @@ class App {
       if (this.isCorrectNumber(randomNumber, answer)) {
         Console.print(MESSAGE.GAME.SUCCESS);
         Console.print(MESSAGE.GAME.FINISH_OPTION);
-        Console.readLine('', (input) => {
-          if (this.checkInputRestartExit(input)) {
-            this.handleInputAnswer(this.createRandomNumber());
-          } else {
-            Console.print(MESSAGE.GAME.FINISH);
-            Console.close();
-          }
-        });
+        this.checkRestart();
       } else {
         Console.print(this.resultBaseballRule(randomNumber, answer));
         this.handleInputAnswer(randomNumber);
+      }
+    });
+  }
+
+  checkRestart () {
+    Console.readLine('', (input) => {
+      if (this.checkInputRestartExit(input)) {
+        this.handleInputAnswer(this.createRandomNumber());
+      } else {
+        Console.print(MESSAGE.GAME.FINISH);
+        Console.close();
       }
     });
   }
