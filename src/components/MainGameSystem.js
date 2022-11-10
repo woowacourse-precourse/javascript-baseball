@@ -11,6 +11,8 @@ class MainGameSystem {
     this.GAVE_OVER = '2';
     this.computerNum = 0;
     this.APP_SHUT_DOWN = false;
+    this.THREE_STRIKE = 3;
+    this.INITIALIZATION = 0;
   }
 
   isDuplicate(randomNum) {
@@ -53,12 +55,12 @@ class MainGameSystem {
       this.computerNum,
       this.verifiedPlayerNum
     );
-    let coco = contextualHints.getContextualHints();
-    if (coco === 3) return this.endGameOrRestart();
+    const strike = contextualHints.getContextualHints();
+    if (strike === this.THREE_STRIKE) return this.endGameOrRestart();
   }
 
   endGameOrRestart() {
-    this.computerNum = 0;
+    this.computerNum = this.INITIALIZATION;
     Console.readLine(
       '3개의 숫자를 모두 맞히셨습니다. 게임 종료 \n' +
         '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
