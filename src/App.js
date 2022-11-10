@@ -1,11 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const messages = require('./Constants.js');
 class App {
-  constructor() {
-    this.userNumber = '';
-    this.computerNumber = '';
-  }
-
   play() {
     this.printGameStartMessage();
     this.playGame();
@@ -16,16 +11,43 @@ class App {
   }
 
   createComputerNumber() {
-    this.computerNumber = MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
+    return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3).join('');
   }
 
   playGame() {
-    this.createComputerNumber();
-    this.guessComputerNumber();
+    const computerNumber = String(this.createComputerNumber());
+    this.guessComputerNumber(computerNumber);
   }
 
-  getUserNumber(input) {
-    this.userNumber = input;
+  guessComputerNumber(computerNumber) {
+    MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
+      if (!this.isValidUserNumber(input)) {
+        return this.throwNotValidNumberError();
+      }
+      MissionUtils.Console.print(this.getCountResult(computerNumber, input));
+      if (computerNumber !== input) return this.guessComputerNumber(computerNumber);
+      this.selectRestartGame();
+    });
+  }
+
+  selectRestartGame() {
+    MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
+      let restartNumber = +input;
+      if (restartNumber !== 1 && restartNumber !== 2) return this.throwNotValidRestartNumber();
+      if (restartNumber === 1) {
+        return this.playGame();
+      } else {
+        return MissionUtils.Console.close();
+      }
+    });
+  }
+
+  throwNotValidNumberError() {
+    throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
+  }
+
+  throwNotValidRestartNumber() {
+    throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
   }
 
   isValidUserNumber(number) {
@@ -77,7 +99,6 @@ class App {
     if (numberOfBalls === 0 && numberOfStrikes === 0) return messages.NONE_MATCHING_MESSAGE;
     if (numberOfBalls === 0) {
       if (numberOfStrikes === 3) {
-        this.isGameFinished = true;
         return `${numberOfStrikes}스트라이크\n` + messages.GAME_FINISH_MESSAGE;
       }
       return `${numberOfStrikes}스트라이크`;
@@ -85,31 +106,6 @@ class App {
       if (numberOfStrikes === 0) return `${numberOfBalls}볼`;
       return `${numberOfBalls}볼 ${numberOfStrikes}스트라이크`;
     }
-  }
-
-  guessComputerNumber() {
-    MissionUtils.Console.readLine(messages.ENTER_USER_NUMBER_MESSAGE, (input) => {
-      if (!this.isValidUserNumber(input)) {
-        throw new Error(messages.USER_NUMBER_ERROR_MESSAGE);
-      }
-      this.getUserNumber(input);
-      MissionUtils.Console.print(this.getCountResult(this.computerNumber, this.userNumber));
-      if (this.userNumber === this.computerNumber) return this.selectRestartGame();
-      this.guessComputerNumber();
-    });
-  }
-
-  selectRestartGame() {
-    MissionUtils.Console.readLine(messages.ENTER_GAME_RESART_NUMBER_MESSAGE, (input) => {
-      let restartNumber = +input;
-      if (restartNumber !== 1 && restartNumber !== 2)
-        throw new Error(messages.GAME_RESTART_NUMBER_ERROR_MESSAGE);
-      if (restartNumber === 1) {
-        return this.playGame();
-      } else {
-        return MissionUtils.Console.close();
-      }
-    });
   }
 }
 const app = new App();
