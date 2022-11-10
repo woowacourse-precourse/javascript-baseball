@@ -8,12 +8,11 @@ class App {
   #collectValidationFn;
   #computer;
 
-  constructor() {
+  constructor () {
     this.#collectValidationFn = Object.freeze({
-      isNotThreeDigit: inputDigit => inputDigit.length !== INPUT_LENGTH,
-      isNotOneToNineDigit: inputDigit =>
-        isNaN(inputDigit) || inputDigit.toString().includes('0'),
-      isDuplicates: inputDigit => {
+      isNotThreeDigit: (inputDigit) => inputDigit.length !== INPUT_LENGTH,
+      isNotOneToNineDigit: (inputDigit) => isNaN(inputDigit) || inputDigit.toString().includes('0'),
+      isDuplicates: (inputDigit) => {
         const arrForCheck = inputDigit.toString().split('');
         const setForCheck = new Set(arrForCheck);
         return arrForCheck.length !== setForCheck.size;
@@ -21,8 +20,8 @@ class App {
     });
   }
 
-  #setUserInput() {
-    Console.readLine('숫자를 입력해주세요 : ', inputDigit => {
+  #setUserInput () {
+    Console.readLine('숫자를 입력해주세요 : ', (inputDigit) => {
       const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
       const baseBallBoard = this.#computer.calcBaseBallDigit(userDigit);
       this.isThreeStrike(baseBallBoard)
@@ -31,53 +30,51 @@ class App {
     });
   }
 
-  #showStartMessage() {
+  #showStartMessage () {
     Console.print('숫자 야구 게임을 시작합니다.');
   }
 
-  #gameStart() {
+  #gameStart () {
     this.#computer = new Computer();
     this.#setUserInput();
   }
 
-  #gameEnd() {
+  #gameEnd () {
     this.#computer = null;
     Console.print('게임 종료');
     Console.close();
   }
 
-  isThreeStrike(baseBallBoard) {
+  isThreeStrike (baseBallBoard) {
     const { strike, ball } = baseBallBoard;
     if (strike || ball) {
       Console.print(
-        (ball ? `${ball}볼 ` : ``) + (strike ? `${strike}스트라이크` : ``),
+        (ball ? `${ball}볼 ` : '') + (strike ? `${strike}스트라이크` : ''),
       );
     } else Console.print('낫싱');
     return strike === INPUT_LENGTH;
   }
 
-  isDigitValidation(inputDigit) {
-    const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } =
-      this.#collectValidationFn;
+  isDigitValidation (inputDigit) {
+    const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } =      this.#collectValidationFn;
     if (
-      isNotThreeDigit(inputDigit) ||
-      isNotOneToNineDigit(inputDigit) ||
-      isDuplicates(inputDigit)
-    )
-      throw new Error('잘못된 값 입력됨');
+      isNotThreeDigit(inputDigit)
+      || isNotOneToNineDigit(inputDigit)
+      || isDuplicates(inputDigit)
+    ) throw new Error('잘못된 값 입력됨');
     return inputDigit;
   }
-  
-  getRestartInput() {
+
+  getRestartInput () {
     Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    Console.readLine('', isRestart => {
+    Console.readLine('', (isRestart) => {
       if (isRestart === '1') return this.#gameStart();
-      else if (isRestart === '2') return this.#gameEnd();
-      else throw new Error('잘못된 값 입력됨');
+      if (isRestart === '2') return this.#gameEnd();
+      throw new Error('잘못된 값 입력됨');
     });
   }
 
-  play() {
+  play () {
     this.#showStartMessage();
     this.#gameStart();
   }
