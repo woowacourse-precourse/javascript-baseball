@@ -7,8 +7,11 @@ const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } = require('./util/v
 const { isThreeStrike } = require('./util/gemeProcess');
 
 class App {
-  #collectValidationFn;
   #computer;
+
+  constructor () {
+    this.#computer = new Computer();
+  }
 
   #setUserInput () {
     Console.readLine(MESSAGE.GAME.INPUT, (inputDigit) => {
@@ -26,7 +29,7 @@ class App {
   }
 
   #gameStart () {
-    this.#computer = new Computer();
+    this.#computer.setRandomDigit();
     this.#setUserInput();
   }
 

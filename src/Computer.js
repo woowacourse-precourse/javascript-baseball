@@ -6,16 +6,12 @@ const { isBall, isStrike } = require('./util/gemeProcess');
 class Computer {
   #baseBallDigit;
 
-  constructor () {
-    this.#baseBallDigit = this.#setRandomDigit();
-  }
-
-  #setRandomDigit () {
+  setRandomDigit () {
     const randomDigit = new Set();
     while (randomDigit.size < INPUT_LENGTH) {
       randomDigit.add(Random.pickNumberInRange(START_DIGIT, END_DIGIT));
     }
-    return Array.from(randomDigit);
+    this.#baseBallDigit = Array.from(randomDigit);
   }
 
   calcBaseBallDigit (userDigit) {
