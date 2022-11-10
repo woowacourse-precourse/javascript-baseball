@@ -1,5 +1,5 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
-const CHANGE_TO_ARRAY = require("../utils/changeToArray");
+const changeToArray = require("../utils/changeToArray");
 class App {
     constructor() {
         this.isFirst = true;
@@ -16,12 +16,12 @@ class App {
     }
 
     createAnswer() {
-        const ANSWER_ARRAY = [];
-        while (ANSWER_ARRAY.length < 3) {
-            const NUMBER = Random.pickNumberInRange(1, 9);
-            if (!ANSWER_ARRAY.includes(NUMBER)) ANSWER_ARRAY.push(NUMBER);
+        const answerArray = [];
+        while (answerArray.length < 3) {
+            const number = Random.pickNumberInRange(1, 9);
+            if (!answerArray.includes(number)) answerArray.push(number);
         }
-        return ANSWER_ARRAY;
+        return answerArray;
     }
 
     isCorrect(userInput, answer) {
@@ -29,10 +29,10 @@ class App {
     }
 
     getBallCount(userInput, answer) {
-        const IS_TRUE = userInput.map((num, index) => num === answer[index]);
+        const isTrue = userInput.map((num, index) => num === answer[index]);
         let ball = 0;
         userInput.forEach((num, index) => {
-            if (!IS_TRUE[index] && answer.includes(num)) {
+            if (!isTrue[index] && answer.includes(num)) {
                 ball += 1;
             }
         });
@@ -50,19 +50,19 @@ class App {
     }
 
     inputResult(userInput, answer) {
-        const BALL = this.getBallCount(userInput, answer);
-        const STRIKE = this.getStrikeCount(userInput, answer);
-        if (BALL === 0 && STRIKE === 0) {
+        const ball = this.getBallCount(userInput, answer);
+        const strike = this.getStrikeCount(userInput, answer);
+        if (ball === 0 && strike === 0) {
             return Console.print("낫싱");
         }
-        if (BALL === 0) {
-            return Console.print(`${STRIKE}스트라이크`);
+        if (ball === 0) {
+            return Console.print(`${strike}스트라이크`);
         }
-        if (STRIKE === 0) {
-            return Console.print(`${BALL}볼`);
+        if (strike === 0) {
+            return Console.print(`${ball}볼`);
         }
 
-        return Console.print(`${BALL}볼 ${STRIKE}스트라이크`);
+        return Console.print(`${ball}볼 ${strike}스트라이크`);
     }
 
     printEndMessage() {
@@ -102,12 +102,12 @@ class App {
 
     userPlayGame(answer) {
         Console.readLine("숫자를 입력해주세요 : ", (input) => {
-            const INPUT_ARRAY = CHANGE_TO_ARRAY(input);
-            this.checkUserInput(INPUT_ARRAY);
-            if (this.isCorrect(INPUT_ARRAY, answer)) {
+            const inputArray = changeToArray(input);
+            this.checkUserInput(inputArray);
+            if (this.isCorrect(inputArray, answer)) {
                 return this.printEndMessage();
             }
-            this.inputResult(INPUT_ARRAY, answer);
+            this.inputResult(inputArray, answer);
             return this.userPlayGame(answer);
         });
     }
