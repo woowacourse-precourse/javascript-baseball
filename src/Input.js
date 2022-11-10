@@ -28,7 +28,7 @@ class Input {
   }
 
   static checkIsOneOrTwo(userInput) {
-    if (userInput !== "1" && userInput !== "2")
+    if (userInput !== "1" || userInput !== "2")
       throw new Error("1 또는 2를 입력해주세요.");
 
     return true;
