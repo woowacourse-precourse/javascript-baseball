@@ -1,5 +1,12 @@
+const MainGameSystem = require('./components/MainGameSystem');
+const firstAnnouncement = require('./components/firstAnnouncement');
+
 class App {
-  play() {}
+  play() {
+    firstAnnouncement();
+    const mainGameSystem = new MainGameSystem();
+    mainGameSystem.runGame();
+  }
 }
 
 module.exports = App;
