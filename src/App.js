@@ -1,11 +1,8 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
-const RANDOM_NUMBER_LENGTH = 3;
-const FIRST_NUMBER = 1;
-const LAST_NUMBER = 9;
-const EXCEPT_NUMBER =0;
-const INPUT_RESTART = '1';
-const INPUT_EXIT = '2';
+const NUMBER = require('../constants/gameSetting');
+const MESSAGE = require('../constants/gameMessages');
+
 
 class App {
   play() {
@@ -14,16 +11,16 @@ class App {
   }
 
   printStartGame() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(MESSAGE.GAME.START);
   }
 
   createRandomNumber() {
     const randomNumberList = [];
 
-    while (randomNumberList.length < RANDOM_NUMBER_LENGTH) {
+    while (randomNumberList.length < NUMBER.RANDOM_LENGTH) {
       const collectRandomNumber = Random.pickNumberInRange(
-        FIRST_NUMBER,
-        LAST_NUMBER
+        NUMBER.FIRST,
+        NUMBER.LAST
       );
       !randomNumberList.includes(collectRandomNumber) &&
         randomNumberList.push(collectRandomNumber);
@@ -33,19 +30,19 @@ class App {
   }
 
   handleInputAnswer(randomNumber) {
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+    Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
       this.isRandomInputErrorCase(answer);
 
       if (this.isCorrectNumber(randomNumber, answer)) {
-        Console.print('3스트라이크');
+        Console.print(MESSAGE.GAME.SUCCESS);
         Console.print(
-          '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.'
+          MESSAGE.GAME.FINISH_OPTION
         );
         Console.readLine('', (input) => {
           if (this.checkInputRestartExit(input)) {
             this.handleInputAnswer(this.createRandomNumber());
           } else {
-            Console.print('게임 종료');
+            Console.print(MESSAGE.GAME.FINISH);
             Console.close();
           }
         });
@@ -65,13 +62,13 @@ class App {
 
     if (
       exceptionInput?.split('').map(Number)
-        .includes(EXCEPT_NUMBER)
+        .includes(NUMBER.EXCEPT)
       || exceptionInput?.split('').includes('-')
       || isNaN(exceptionInput)
-      || exceptionInput?.toString().length !== RANDOM_NUMBER_LENGTH
+      || exceptionInput?.toString().length !== NUMBER.RANDOM_LENGTH
       || isSame
     ) {
-      throw new Error('잘못입력함. 종료');
+      throw new Error(MESSAGE.GAME.ERROR);
     }
   }
 
@@ -92,15 +89,15 @@ class App {
     }
 
     const resultBaseball =
-      (ballCount ? `${ballCount}볼 ` : '') +
-      (strikeCount ? `${strikeCount}스트라이크` : '');
-    return resultBaseball ? resultBaseball : '낫싱';
+      (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '') +
+      (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
+    return resultBaseball ? resultBaseball : MESSAGE.GAME.NOTHING;
   }
 
   checkInputRestartExit(input) {
-    if (input === INPUT_RESTART) return true;
-    if (input === INPUT_EXIT) return false;
-    throw new Error('잘못된 값 입력');
+    if (input === NUMBER.RESTART) return true;
+    if (input === NUMBER.EXIT) return false;
+    throw new Error(MESSAGE.GAME.ERROR);
   }
 }
 
