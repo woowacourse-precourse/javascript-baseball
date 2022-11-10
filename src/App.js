@@ -9,7 +9,7 @@ const {
 class App {
   constructor() {
     this.computerRandomThreeNumber = 0;
-    this.userRandomThreeNumber = 0;
+    this.userInputThreeNumber = 0;
   }
 
   #init() {
@@ -35,7 +35,7 @@ class App {
   #baseballGameStart() {
     const gameResult = utilFun.compareComputerAndUser(
       this.computerRandomThreeNumber,
-      this.userRandomThreeNumber
+      this.userInputThreeNumber
     );
     Console.print(gameResult);
     switch (gameResult) {
@@ -54,7 +54,7 @@ class App {
   #getUserNumbers() {
     Console.readLine(ANNOUNCEMENT_MESSAGE.INPUT, (userAnswer) => {
       utilFun.checkUserValid(userAnswer);
-      this.userRandomThreeNumber = userAnswer;
+      this.userInputThreeNumber = userAnswer;
       if (userAnswer) this.#baseballGameStart();
     });
   }
@@ -62,10 +62,10 @@ class App {
   play() {
     this.#init();
     Console.print(ANNOUNCEMENT_MESSAGE.START);
-    Console.print(this.computerRandomThreeNumber);
     this.#getUserNumbers();
   }
 }
+
 const baseballGame = new App();
 baseballGame.play();
 

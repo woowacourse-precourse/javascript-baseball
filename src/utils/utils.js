@@ -16,21 +16,26 @@ module.exports = {
     }
     return computer;
   },
+
   checkUserValid(userAnswer) {
     if (userAnswer.indexOf(0) !== -1) throw ERROR_MESSAGE.IS_INCLUDE_ZERO;
     if (isNaN(userAnswer)) {
       throw ERROR_MESSAGE.IS_NUMBER;
     }
+
     if (userAnswer.length !== MAX_NUMBER && !isNaN(userAnswer)) {
       throw ERROR_MESSAGE.IS_MAX_NUMBER;
     }
-    const setAnswer = new Set(userAnswer.split(""));
+
+    const setAnswer = new Set(userAnswer);
+
     if (setAnswer.size !== MAX_NUMBER) {
       throw ERROR_MESSAGE.IS_REPETITION;
     }
   },
+
   compareComputerAndUser(computerNum, userNum) {
-    const toStringComputerNum = computerNum.join("");
+    const toStringComputerNum = String(computerNum).replaceAll(",", "");
     const toStringUserNum = String(userNum);
     let strike = 0;
     let ball = 0;
@@ -44,6 +49,7 @@ module.exports = {
       ) {
         continue;
       }
+
       if (
         toStringUserNum[userNumberIndex] ===
         toStringComputerNum[userNumberIndex]
@@ -53,7 +59,7 @@ module.exports = {
         ball++;
       }
     }
-    if (strike === 0 && ball === 0) return GAME_MESSAGE.NOTHING;
+    if (strike === 0 && ball === 0) return GAME_MESSAGE.NOTHING; // makewords 함수로 이동하기
     const context = makeWords(strike, ball);
     return context;
   },
