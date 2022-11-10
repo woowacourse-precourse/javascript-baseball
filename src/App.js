@@ -41,18 +41,19 @@ class App {
 
     if (count.strike === 0 && count.ball === 0) {
       return "낫싱";
-    } else if (count.strike === 0) {
-      return `${count.ball}볼`;
-    } else if (count.ball === 0) {
-      return `${count.strike}스트라이크`;
-    } else {
-      return `${count.ball}볼 ${count.strike}스트라이크`;
     }
+    if (count.strike === 0) {
+      return `${count.ball}볼`;
+    }
+    if (count.ball === 0) {
+      return `${count.strike}스트라이크`;
+    }
+    return `${count.ball}볼 ${count.strike}스트라이크`;
   }
 
   isGameEnd() {
     return Array.from(this.userInput)
-      .map((char) => Number(char))
+      .map(Number)
       .every((number, index) => number === this.answer[index]);
   }
 
