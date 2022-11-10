@@ -50,8 +50,8 @@ class App {
 
       const numbers = Array.from(guess).map((digit) => parseInt(digit))
       const { strike, ball, finished } = this.#determineGameResult(numbers)
-
-      this.#printGameResult({ strike, ball })
+      const gameResult = this.#getGameResult({ strike, ball })
+      Console.print(gameResult)
 
       if (!finished) {
         this.#takeGuess()
@@ -112,17 +112,14 @@ class App {
 
   /**
    * @param {baseballResult} baseballResult
+   * @returns {string}
    */
-  #printGameResult({ strike, ball }) {
-    if (strike === 0 && ball === 0) {
-      Console.print('낫싱')
-    } else {
-      const result = `${ball ? `${ball}볼 ` : ' '}${
-        strike ? `${strike}스트라이크` : ''
-      }`
+  #getGameResult({ strike, ball }) {
+    const counts = `${ball ? `${ball}볼 ` : ' '}${
+      strike ? `${strike}스트라이크` : ''
+    }`
 
-      Console.print(result.trim())
-    }
+    return strike === 0 && ball === 0 ? '낫싱' : counts.trim()
   }
 
   /**
