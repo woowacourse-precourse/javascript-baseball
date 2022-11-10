@@ -1,6 +1,7 @@
 // 모듈 선언
 const { Random } = require('@woowacourse/mission-utils');
-const { INPUT_LENGTH, START_DIGIT, END_DIGIT } = require('../constants/gameSetting');
+const { INPUT_LENGTH, START_DIGIT, END_DIGIT } = require('./constants/gameSetting');
+const { isBall, isStrike } = require('./util/gemeProcess');
 
 class Computer {
   #baseBallDigit;
@@ -17,14 +18,6 @@ class Computer {
     return Array.from(randomDigit);
   }
 
-  #isBall ({ randomDigit, digit, idx }) {
-    return randomDigit.includes(digit) && randomDigit[idx] !== digit;
-  }
-
-  #isStrike ({ randomDigit, digit, idx }) {
-    return randomDigit.includes(digit) && randomDigit[idx] === digit;
-  }
-
   calcBaseBallDigit (userDigit) {
     const randomDigit = this.#baseBallDigit;
     const baseBallBoard = {
@@ -32,8 +25,8 @@ class Computer {
       ball: 0,
     };
     userDigit.forEach((digit, idx) => {
-      if (this.#isBall({ randomDigit, digit, idx })) baseBallBoard.ball += 1;
-      else if (this.#isStrike({ randomDigit, digit, idx })) baseBallBoard.strike += 1;
+      if (isBall({ randomDigit, digit, idx })) baseBallBoard.ball += 1;
+      else if (isStrike({ randomDigit, digit, idx })) baseBallBoard.strike += 1;
     });
     return baseBallBoard;
   }
