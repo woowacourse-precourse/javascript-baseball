@@ -36,6 +36,7 @@ describe('기능 단위 목록별 테스트', () => {
     mockRandoms(randoms);
 
     const computer = new Computer();
+    computer.setRandomDigit();
     expect(computer.calcBaseBallDigit([1, 5, 8])).toEqual({
       strike: 3,
       ball: 0,
@@ -94,6 +95,7 @@ describe('기능 단위 목록별 테스트', () => {
 
     baseBallBoards.forEach((Board, idx) => {
       const computer = new Computer();
+      computer.setRandomDigit();
       expect(computer.calcBaseBallDigit(inputDigits[idx])).toEqual(Board);
     });
   });
