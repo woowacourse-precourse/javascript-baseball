@@ -4,9 +4,8 @@ class Player {
     this.number = null;
   }
 
-  /** abstract method */
   getNumber () {
-    throw new Error('Not Implemented');
+    return this.number;
   }
   /** abstract method */
   setNumber () {
