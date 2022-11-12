@@ -1,5 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { ANSWER, OPTION, MESSAGE, RESULT } = require('./constants/constants');
+const { Validator } = require('./Validator');
 
 class Game {
   static makeAnswer() {
@@ -11,13 +12,6 @@ class Game {
       }
     }
     return randomNumList.join('');
-  }
-
-  static validateInput(userInput) {
-    const checkLength = userInput.length === ANSWER.LENGTH;
-    const checkNumber = Boolean(userInput.match(/^[1-9]+$/));
-    const checkDuplicate = new Set([...userInput]).size === ANSWER.LENGTH;
-    return checkLength && checkNumber && checkDuplicate;
   }
 
   static getResult(answer, userNumber) {
@@ -56,7 +50,7 @@ class Game {
 
   progress(answer) {
     Console.readLine(MESSAGE.INPUT, (userNumber) => {
-      if (!Game.validateInput(userNumber)) {
+      if (!Validator.validateInput(userNumber)) {
         throw new Error(MESSAGE.ERROR);
       }
       const result = Game.getResult(answer, userNumber);
