@@ -1,6 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { ANSWER, OPTION, MESSAGE, RESULT } = require('./constants/constants');
-const { Validator } = require('./Validator');
+const Validator = require('./Validator');
 
 class Game {
   static makeAnswer() {
@@ -50,9 +50,7 @@ class Game {
 
   progress(answer) {
     Console.readLine(MESSAGE.INPUT, (userNumber) => {
-      if (!Validator.validateInput(userNumber)) {
-        throw new Error(MESSAGE.ERROR);
-      }
+      Validator.validateInput(userNumber);
       const result = Game.getResult(answer, userNumber);
       Game.printResult(result);
 
@@ -77,7 +75,7 @@ class Game {
       } else if (userInput === OPTION.END) {
         return this.end();
       } else {
-        throw new Error(MESSAGE.ERROR);
+        throw new Error(MESSAGE.ERROR_RESTART);
       }
     });
   }
