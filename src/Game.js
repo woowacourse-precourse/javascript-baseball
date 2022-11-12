@@ -11,20 +11,13 @@ class Game {
     this.user = new User();
   }
 
-  /**
-   * 커맨드를 실행한다.
-   * @public
-   * @method
-   * @return {} void
-   * @description 게임을 시작한다. 클래스 외부에서 호출한다.
-   */
   playCommand () {
     this.computer.setNumber();
-    this.askNumber();
+    this.askNumber(this.attempt.bind(this));
   }
 
-  askNumber () {
-    this.io.input(Message.PLEASE_INPUT_NUMBER, this.attempt.bind(this));
+  askNumber (callback) {
+    this.io.input(Message.PLEASE_INPUT_NUMBER, callback);
   }
 
   attempt (input) {
@@ -68,7 +61,7 @@ class Game {
   }
 
   retry () {
-    this.askNumber();
+    this.askNumber(this.attempt.bind(this));
   }
 
   askReplay () {
