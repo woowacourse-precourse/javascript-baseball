@@ -1,4 +1,5 @@
 class Message {
+  // 상수처리
   static GAME_END = '3개의 숫자를 모두 맞히셨습니다! 게임 종료';
   static START = '숫자 야구 게임을 시작합니다.';
   static PLEASE_INPUT_NUMBER = '숫자를 입력해주세요 : ';
@@ -15,19 +16,12 @@ class Message {
     if (strike === 0 && ball === 0) {
       return this.NOTHING;
     }
-    return [this.getBallMessage(ball), this.getStrikeMessage(strike)].filter((string) => string !== null).join(' ');
+    return [this.getResultMessage(ball, this.BALL), this.getResultMessage(strike, this.STRIKE)].filter((string) => string !== null).join(' ');
   }
 
-  static getStrikeMessage (num) {
+  static getResultMessage (num, string) {
     if (num !== 0) {
-      return `${num}${this.STRIKE}`;
-    }
-    return '';
-  }
-
-  static getBallMessage (num) {
-    if (num !== 0) {
-      return `${num}${this.BALL}`;
+      return `${num}${string}`;
     }
     return null;
   }
