@@ -2,7 +2,7 @@ const { Console, Random } = require('@woowacourse/mission-utils');
 const { ANSWER, OPTION, MESSAGE, RESULT } = require('./constants/constants');
 
 class Game {
-  makeAnswer() {
+  static makeAnswer() {
     const randomNumList = [];
     while (randomNumList.length < ANSWER.LENGTH) {
       const number = Random.pickNumberInRange(ANSWER.MIN, ANSWER.MAX);
@@ -13,14 +13,14 @@ class Game {
     return randomNumList.join('');
   }
 
-  validateInput(userInput) {
+  static validateInput(userInput) {
     const checkLength = userInput.length === ANSWER.LENGTH;
     const checkNumber = Boolean(userInput.match(/^[1-9]+$/));
     const checkDuplicate = new Set([...userInput]).size === ANSWER.LENGTH;
     return checkLength && checkNumber && checkDuplicate;
   }
 
-  getResult(answer, userNumber) {
+  static getResult(answer, userNumber) {
     const userNumberArr = [...userNumber];
     const result = userNumberArr.reduce(
       ({ strikeCnt, ballCnt }, curNum, curIndex) => {
@@ -38,7 +38,7 @@ class Game {
     return result;
   }
 
-  printResult(result) {
+  static printResult(result) {
     const { strikeCnt, ballCnt } = result;
     let resultMessage = '';
     if (strikeCnt === 0 && ballCnt === 0) {
@@ -56,11 +56,11 @@ class Game {
 
   progress(answer) {
     Console.readLine(MESSAGE.INPUT, (userNumber) => {
-      if (!this.validateInput(userNumber)) {
+      if (!Game.validateInput(userNumber)) {
         throw new Error(MESSAGE.ERROR);
       }
-      const result = this.getResult(answer, userNumber);
-      this.printResult(result);
+      const result = Game.getResult(answer, userNumber);
+      Game.printResult(result);
 
       if (result.strikeCnt === ANSWER.LENGTH) {
         Console.print(`${ANSWER.LENGTH}${MESSAGE.END}`);
@@ -72,7 +72,7 @@ class Game {
   }
 
   start() {
-    const answer = this.makeAnswer();
+    const answer = Game.makeAnswer();
     this.progress(answer);
   }
 
