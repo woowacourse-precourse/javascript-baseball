@@ -1,0 +1,372 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": true
+      }
+    ],
+    "no-const-assign": [
+      "error"
+    ],
+    "no-var": "error",
+    "no-new-object": "error",
+    "object-shorthand": "error",
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    "no-prototype-builtins": "error",
+    "prefer-object-spread": "error",
+    "no-array-constructor": "error",
+    "array-callback-return": "error",
+    "prefer-destructuring": "error",
+    "prefer-template": "error",
+    "template-curly-spacing": "error", // default never
+    "no-eval": "error",
+    "no-useless-escape": "error",
+    "func-style": [
+      "error",
+      "expression"
+    ],
+    "wrap-iife": "error",
+    "no-loop-func": "error",
+    "prefer-rest-params": "error",
+    "default-param-last": "error",
+    "no-new-func": "error",
+    "space-before-function-paren": "error",
+    "space-before-blocks": "error",
+    "no-param-reassign": "error",
+    "prefer-spread": "error",
+    "function-paren-newline": [
+      "error",
+      "multiline-arguments"
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "prefer-arrow-callback": [
+      "error",
+      {
+        "allowNamedFunctions": false,
+        "allowUnboundThis": true
+      }
+    ],
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "arrow-body-style": [
+      "error",
+      "as-needed",
+      {
+        "requireReturnForObjectLiteral": false
+      }
+    ],
+    "no-confusing-arrow": [
+      "error",
+      {
+        "allowParens": true
+      }
+    ],
+    "implicit-arrow-linebreak": [
+      "error",
+      "beside"
+    ],
+    "no-useless-constructor": "error",
+    "no-dupe-class-members": "error",
+    "class-methods-use-this": "error",
+    "no-duplicate-imports": "error",
+    "object-curly-newline": "error",
+    "no-iterator": "error",
+    "generator-star-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "dot-notation": [
+      "error",
+      {
+        "allowKeywords": true
+      }
+    ],
+    "no-restricted-properties": [
+      "error",
+      {
+        "object": "global",
+        "property": "isFinite",
+        "message": "Please use Number.isFinite instead"
+      },
+      {
+        "object": "global",
+        "property": "isNaN",
+        "message": "Please use Number.isNaN instead"
+      },
+      {
+        "object": "Math",
+        "property": "pow",
+        "message": "Use the exponentiation operator (**) instead."
+      }
+    ],
+    "no-undef": "error",
+    "one-var": [
+      "error",
+      "never"
+    ],
+    "no-multi-assign": "error",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "operator-linebreak": [
+      "error",
+      "before",
+      {
+        "overrides": {
+          "=": "none"
+        }
+      }
+    ],
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+    "no-case-declarations": "error",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "no-mixed-operators": [
+      "error"
+    ],
+    "nonblock-statement-body-position": [
+      "error",
+      "beside"
+    ],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "no-else-return": [
+      "error",
+      {
+        "allowElseIf": false
+      }
+    ],
+    "spaced-comment": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": 1,
+        "outerIIFEBody": 1,
+        "FunctionDeclaration": {
+          "parameters": 1,
+          "body": 1
+        },
+        "FunctionExpression": {
+          "parameters": 1,
+          "body": 1
+        },
+        "CallExpression": {
+          "arguments": 1
+        },
+        "ArrayExpression": 1,
+        "ObjectExpression": 1,
+        "ImportDeclaration": 1,
+        "flatTernaryExpressions": false
+      }
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true,
+        "overrides": {
+          "return": {
+            "after": true
+          },
+          "throw": {
+            "after": true
+          },
+          "case": {
+            "after": true
+          }
+        }
+      }
+    ],
+    "space-infix-ops": "error",
+    "eol-last": [
+      "error",
+      "always"
+    ], // TODO
+    "newline-per-chained-call": [
+      "error",
+      {
+        "ignoreChainWithDepth": 2
+      }
+    ],
+    "no-whitespace-before-property": "error",
+    "padded-blocks": [
+      "error",
+      {
+        "blocks": "never",
+        "classes": "never",
+        "switches": "never"
+      },
+      {
+        "allowSingleLineBlocks": true
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxBOF": 0,
+        "maxEOF": 0
+      }
+    ],
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "max-len": [
+      "error",
+      100,
+      2,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "block-spacing": [
+      "error",
+      "always"
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
+    "func-call-spacing": [
+      "error",
+      "never"
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "beforeColon": false,
+        "afterColon": true
+      }
+    ],
+    "no-trailing-spaces": [
+      "error",
+      {
+        "skipBlankLines": false,
+        "ignoreComments": false
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
+    ],
+    "comma-style": [
+      "error",
+      "last",
+      {
+        "exceptions": {
+          "ArrayExpression": false,
+          "ArrayPattern": false,
+          "ArrowFunctionExpression": false,
+          "CallExpression": false,
+          "FunctionDeclaration": false,
+          "FunctionExpression": false,
+          "ImportDeclaration": false,
+          "ObjectExpression": false,
+          "ObjectPattern": false,
+          "VariableDeclaration": false,
+          "NewExpression": false
+        }
+      }
+    ],
+    "no-new-wrappers": "error",
+    "new-cap": [
+      "error",
+      {
+        "newIsCap": true
+      }
+    ],
+    "id-length": [
+      "error",
+      {
+        "min": 2,
+        "properties": "never"
+      }
+    ],
+    "radix": "error",
+    "camelcase": [
+      "error"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    // 우와한 테크코스 depth규칙 추가
+    "max-depth": [
+      "error",
+      2
+    ]
+  }
+}
