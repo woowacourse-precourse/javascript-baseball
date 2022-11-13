@@ -32,7 +32,7 @@ const OPTION = {
 
 class App {
   constructor() {
-    this.ANSWER;
+    this.answer;
   }
 
   play() {
@@ -48,7 +48,7 @@ class App {
       }
     }
 
-    this.ANSWER = answer;
+    this.answer = answer;
   }
 
   askNumInput() {
@@ -115,9 +115,9 @@ class App {
     var ballCount = 0;
     var strikeCount = 0;
 
-    var answerSet = new Set(this.ANSWER);
+    var answerSet = new Set(this.answer);
     for (var idx in input) {
-      if (this.ANSWER[idx] === +input[idx]) {
+      if (this.answer[idx] === +input[idx]) {
         strikeCount += 1;
         continue;
       }
@@ -134,7 +134,7 @@ class App {
   isThreeStrike() {
     this.printMsg(RESULT.THREE_STRIKES);
     this.printMsg(`${MESSEGE.CONGRATS} ${MESSEGE.END_GAME}`);
-    this.ANSWER = [];
+    this.answer = [];
     this.askRematchOrExit();
   }
 
