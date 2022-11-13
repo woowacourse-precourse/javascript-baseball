@@ -2,162 +2,105 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 
 class App {
-
-  random(){
-    return new Promise(function(resolve, reject) {
-      let computer = [];
-      while (computer.length < 3) {
-        const number = MissionUtils.Random.pickNumberInRange(1, 9);
-        if (!computer.includes(number)) {
-          computer.push(number);
-        }
-      }
-      //console.log("computer: " + computer); 
-      resolve(computer);
-    });
-  }
-
-  inputCheck(userArray){
-    //console.log("check: " + userArray);
-    if(userArray.length > 3){ //1) 입력 값은 3자리
-      throw "input length > 3";
+    constructor(){
+        var computerInput;
+        
     }
 
-    userArray.map((number)=> {
-      if(isNaN(number)){ //2) 1부터 9까지 숫자로 구성
-        throw "Input not a number";
-      }
-      else if(number <= 0){//3) 0 이하의 정수 불가능
-        throw "num <= 0";
-      }
-      else{ //4) 각 숫자는 중복 불가능
+    play(){
+        this.computerInput = this.getRandom();
+        this.getUserInput();
+
+    }
+
+    getRandom(){
+        let computerInput = [];
+        while (computerInput.length < 3) {
+            const number = MissionUtils.Random.pickNumberInRange(1, 9);
+            if (!computerInput.includes(number)) {
+                computerInput.push(number);
+            }
+        }
+        console.log("computer" + computerInput);
+        return computerInput;
+
+    }
+
+    getUserInput(){
+        let userInput = [];
+        MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
+            userInput = answer.split('').map((el) => parseInt(el));
+            this.checkInput(userInput);
+            this.compare(userInput);
+
+            
+        });
+
+    }
+
+    checkInput(userArray){
+        if (userArray.length > 3) throw "input length > 3";
+        if (userArray.includes(NaN)) throw "Input not a number";
         const setCollection = new Set(userArray);
         const isDuplicate = setCollection.size < userArray.length;
+        if (isDuplicate) throw "Input includes duplicated numbers";
+        let negative = userArray.filter((number) => number <= 0);
+        if (negative.length > 0) throw "Input number <= 0";
+
+    }
+
+    compare(userInput){
+        let ball = userInput.filter(item => this.computerInput.includes(item));
+        let strike = userInput.filter(item => item === this.computerInput[userInput.indexOf(item)]);
+
+        let ballNum = ball.length - strike.length;
+        let strikeNum = strike.length;
         
-        if (isDuplicate){
-          throw "is duplicate";
-        }
-
-      }
-
-    });
-
-  }
-
-
-  input() {
-    return new Promise(function(resolve, reject) {
-      var items = [];
-      MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-        items = answer.split('').map((el) => parseInt(el));
-        resolve(items);
-        MissionUtils.Console.close();
-      });
-
-
-    });
-    
-  }
-
-  compare(user, computer){
-    let ball = user.filter(item => computer.includes(item));
-    let strike = user.filter(item => item === computer[user.indexOf(item)]);
-
-    let ballNum = ball.length - strike.length;
-    let strikeNum = strike.length;
-    return [ballNum, strikeNum];
-  }
-
-  async print(ball, strike){
-    
-    let isSuccess= [0,0]; // 0번째 -> 정답 유무, 1번째 -> restart 유무
-
-    if (ball + strike === 0){
-      console.log("낫싱");
-    }
-    else if (strike === 3){
-      console.log(strike + "스트라이크");
-      console.log("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-      
-      isSuccess[0] = 1;
-      isSuccess[1] = await this.restart(); // input 값 체크하는 용도
-      
-    }
-    else if (ball !== 0 && strike !== 0){
-      console.log(ball + "볼 " + strike + "스트라이크");
-    }
-    else if(ball !== 0 && strike === 0){
-      console.log(ball + "볼");
-    }
-    else{
-      console.log(strike + "스트라이크");
-    }
-
-    return isSuccess;
-
-  }
-
-  restart(){
-    let restartValue;
-    console.log("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-
-
-    return new Promise(function(resolve, reject) {
-      MissionUtils.Console.readLine('', (answer) => {
-        console.log(`${answer}`);
-        if(answer === 1){ //restart 
-          restartValue = 1;
-        }
-        else if(answer === 2){
-          restartValue = 0;
-        }
-        resolve(restartValue);
         
-        MissionUtils.Console.close();
-      });
-
-    
-    });
-  }
-
-
-  async play() {
-
-    console.log("숫자 야구 게임을 시작합니다.");
-    
-    let computer = await this.random();
-    let isSuccess;
-    let flag;
-
-    while(true){
-      
-      let user = await this.input();
-      
-      try {
-        this.inputCheck(user);
-        let bNum, sNum;
-        [bNum, sNum] = this.compare(user, computer);
-
-        isSuccess = this.print(bNum, sNum);
-
-      }
-      catch(e){//input error
-        //console.error(e);
-        break;
-      }
-      //console.log(isSuccess);
-
-      if(isSuccess[0] === 1){ //success the game
-        break;
-      }
-      
-      if(isSuccess[1] === 1){ //restart 
-        break;
-      }
+        this.print([ballNum, strikeNum]);
 
     }
     
-  }
+
+    print(resultArray){
+        if(resultArray[0] + resultArray[1] === 0) MissionUtils.Console.print("낫싱")
+        
+        else if(resultArray[1] === 3){//3 strike => correct
+            MissionUtils.Console.print(`${resultArray[1]}스트라이크`);
+            this.restart();
+        }
+        else{
+            if(resultArray[1] === 0){ //only ball
+                MissionUtils.Console.print(`${resultArray[0]}볼`); 
+    
+            }
+            else if(resultArray[0] === 0){//only strike
+                MissionUtils.Console.print(`${resultArray[1]}스트라이크`); 
+                
+            }
+            else{
+                MissionUtils.Console.print(`${resultArray[0]}볼 ${resultArray[1]}스트라이크`); 
+            }
+            this.getUserInput();
+        }
+        
+    }
+
+    restart(){
+        MissionUtils.Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        MissionUtils.Console.readLine("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요\n", (answer) => {
+
+            if (answer === "1"){
+
+                console.log(answer);
+                app.play();
+            }
+            else{
+                MissionUtils.Console.close();
+                
+            }  
+        });
+    }
 
 }
 
