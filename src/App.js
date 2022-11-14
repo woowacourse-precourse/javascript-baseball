@@ -8,6 +8,14 @@ const NUMBER_MIN = 1;
 const NUMBER_MAX = 9;
 
 class App {
+  // 기능 3 - 사용자 숫자 input
+  setUserInput() {
+    Console.readLine("숫자를 입력해주세요 : ", (inputDigit) => {
+      const userDigit = [...inputDigit].map(Number);
+      Console.print(userDigit);
+    });
+  }
+
   // 기능 2 - Random 숫자 3자리 생성
   setRandomDigit() {
     const randomDigit = new Set();
@@ -22,8 +30,14 @@ class App {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
 
+  gameStart() {
+    this.setRandomDigit();
+    this.setUserInput();
+  }
+
   play() {
     this.showStartText();
+    this.gameStart();
   }
 }
 
