@@ -61,4 +61,13 @@ describe("기능 단위 목록별 테스트", () => {
       expect(printSpy).toHaveBeenCalledWith(expect.arrayContaining(output));
     });
   });
+
+  test("기능4 user 숫자 input 유효성 테스트 (isDigitValidation 메소드)", () => {
+    const inputException = ["1234", "130", "12", "133"];
+
+    const app = new App();
+    inputException.forEach((inputs) =>
+      expect(() => app.isDigitValidation(inputs)).toThrow("잘못된 값 입력됨")
+    );
+  });
 });
