@@ -13,7 +13,7 @@ class App {
 
   constructor() {
     this.#collectValidationFn = {
-      isNotThreeDigit: (inputDigit) => inputDigit.length !== INPUT_LENGTH,
+      isNotThreeDigit: (inputDigit) => inputDigit.length !== NUMBER_LENGTH,
       isNotOneToNineDigit: (inputDigit) =>
         isNaN(inputDigit) || inputDigit.toString().includes("0"),
       isDuplicates: (inputDigit) => {
