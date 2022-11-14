@@ -3,6 +3,14 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
+  setRandomDigit() {
+    const randomDigit = new Set();
+    while (randomDigit.size < NUMBER_LENGTH) {
+      randomDigit.add(Random.pickNumberInRange(NUMBER_MIN, NUMBER_MAX));
+    }
+    return Array.from(randomDigit);
+  }
+
   showStartText() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }
