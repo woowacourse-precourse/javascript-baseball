@@ -50,3 +50,10 @@
 - comment : 필요한 주석 추가 및 변경
 - rename : 파일 혹은 폴더명을 수정하는 경우
 - remove : 사용하지 않는 파일 혹은 폴더를 삭제하는 경우
+
+## 기능 구현 과정 작성
+
+1. 모듈 선언
+
+- $npm i @woowacourse/mission-utils
+- MissionUtils 라이브러리에서 제공하는 Console, Random API 추가

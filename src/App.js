@@ -1,4 +1,6 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+// 모듈 선언
+// MissionUtils 라이브러리에서 제공하는 Console, Random API 추가
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
   showStartText() {
