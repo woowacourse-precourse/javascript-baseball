@@ -41,4 +41,24 @@ describe("기능 단위 목록별 테스트", () => {
 
     expect(app.setRandomDigit()).toEqual([1, 5, 8]);
   });
+
+  test("기능3 user 숫자 input 테스트 (setUserInput 메소드)", () => {
+    const printSpy = getPrintSpy();
+    const answers = ["246", "513", "152", "125", "135"];
+    const messages = [
+      [2, 4, 6],
+      [5, 1, 3],
+      [1, 5, 2],
+      [1, 2, 5],
+      [1, 3, 5],
+    ];
+    mockQuestions(answers);
+    const app = new App();
+
+    messages.forEach((output) => {
+      app.setUserInput();
+
+      expect(printSpy).toHaveBeenCalledWith(expect.arrayContaining(output));
+    });
+  });
 });
