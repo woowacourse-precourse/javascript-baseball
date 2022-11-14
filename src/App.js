@@ -2,6 +2,11 @@
 // MissionUtils 라이브러리에서 제공하는 Console, Random API 추가
 const { Console, Random } = require("@woowacourse/mission-utils");
 
+// 상수 선언
+const NUMBER_LENGTH = 3;
+const NUMBER_MIN = 1;
+const NUMBER_MAX = 9;
+
 class App {
   // 기능 2 - Random 숫자 3자리 생성
   setRandomDigit() {
