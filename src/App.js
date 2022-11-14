@@ -10,6 +10,8 @@ const NUMBER_MAX = 9;
 class App {
   // 기능 4 - 사용자 숫자 유효성 검사
   #collectValidationFn;
+  // 기능 5 - 숫자야구 게임 계산
+  #collectCalculatorFn;
 
   constructor() {
     this.#collectValidationFn = {
@@ -22,6 +24,25 @@ class App {
         return arrForCheck.length !== setForCheck.size;
       },
     };
+    this.#collectCalculatorFn = {
+      isBall: (randomDigit, digit, idx) =>
+        randomDigit.includes(digit) && randomDigit[idx] !== digit,
+      isStrike: (randomDigit, digit, idx) =>
+        randomDigit.includes(digit) && randomDigit[idx] === digit,
+    };
+  }
+
+  calcBaseBallDigit(inputDigit, randomDigit) {
+    const { isStrike, isBall } = this.#collectCalculatorFn;
+    const baseBallBoard = {
+      strike: 0,
+      ball: 0,
+    };
+    inputDigit.forEach((digit, idx) => {
+      if (isBall(randomDigit, digit, idx)) baseBallBoard.ball++;
+      else if (isStrike(randomDigit, digit, idx)) baseBallBoard.strike++;
+    });
+    return baseBallBoard;
   }
 
   isDigitValidation(inputDigit) {
@@ -37,11 +58,12 @@ class App {
   }
 
   // 기능 3 - 사용자 숫자 input
-  setUserInput() {
+  setUserInput(randomDigit) {
     Console.readLine("숫자를 입력해주세요 : ", (inputDigit) => {
       // const userDigit = [...inputDigit].map(Number);
       const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
       Console.print(userDigit);
+      const baseBallBoard = this.calcBaseBallDigit(userDigit, randomDigit);
     });
   }
 
@@ -60,8 +82,9 @@ class App {
   }
 
   gameStart() {
-    this.setRandomDigit();
-    this.setUserInput();
+    //this.setRandomDigit();
+    //this.setUserInput();
+    this.setUserInput(this.setRandomDigit());
   }
 
   play() {
