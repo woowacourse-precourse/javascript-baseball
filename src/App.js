@@ -3,6 +3,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 
 class App {
+  // 기능 2 - Random 숫자 3자리 생성
   setRandomDigit() {
     const randomDigit = new Set();
     while (randomDigit.size < NUMBER_LENGTH) {
@@ -11,6 +12,7 @@ class App {
     return Array.from(randomDigit);
   }
 
+  // 기능 1 - 게임 시작 문구 출력
   showStartText() {
     Console.print("숫자 야구 게임을 시작합니다.");
   }

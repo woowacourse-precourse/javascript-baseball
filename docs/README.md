@@ -68,3 +68,8 @@
 <br />
 - FeatureUnitTest.js 파일 추가
 - 기능1 게임 시작 문구 출력 showStartText 메소드 test 추가
+
+3. Random 숫자 3자리 생성
+
+- App.js에 추가
+- Random.pickNumberInRange 메소드 사용
