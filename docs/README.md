@@ -64,3 +64,7 @@
 - $npm test로 테스트 코드 실행
 - Jest : All-In-One 테스팅 라이브러리
 - test.js로 끝나거나 _test_ 디렉토리 내 모든 파일들을 test 파일로 인식
+
+<br />
+- FeatureUnitTest.js 파일 추가
+- 기능1 게임 시작 문구 출력 showStartText 메소드 test 추가

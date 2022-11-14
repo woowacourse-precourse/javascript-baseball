@@ -25,4 +25,12 @@ const getPrintSpy = () => {
   return printSpy;
 };
 
-describe("기능 단위 목록별 테스트", () => {});
+describe("기능 단위 목록별 테스트", () => {
+  test("기능1 게임 시작 문구 테스트 (showStartText 메소드)", () => {
+    const printSpy = getPrintSpy();
+    const app = new App();
+
+    app.showStartText();
+    expect(printSpy).toHaveBeenCalledWith("숫자 야구 게임을 시작합니다.");
+  });
+});
