@@ -57,3 +57,10 @@
 
 - $npm i @woowacourse/mission-utils
 - MissionUtils 라이브러리에서 제공하는 Console, Random API 추가
+
+2. test code 작성하여 Jest 사용
+
+- $npm i -D jest
+- $npm test로 테스트 코드 실행
+- Jest : All-In-One 테스팅 라이브러리
+- test.js로 끝나거나 _test_ 디렉토리 내 모든 파일들을 test 파일로 인식
