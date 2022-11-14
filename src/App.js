@@ -8,10 +8,39 @@ const NUMBER_MIN = 1;
 const NUMBER_MAX = 9;
 
 class App {
+  // 기능 4 - 사용자 숫자 유효성 검사
+  #collectValidationFn;
+
+  constructor() {
+    this.#collectValidationFn = {
+      isNotThreeDigit: (inputDigit) => inputDigit.length !== INPUT_LENGTH,
+      isNotOneToNineDigit: (inputDigit) =>
+        isNaN(inputDigit) || inputDigit.toString().includes("0"),
+      isDuplicates: (inputDigit) => {
+        const arrForCheck = inputDigit.toString().split("");
+        const setForCheck = new Set(arrForCheck);
+        return arrForCheck.length !== setForCheck.size;
+      },
+    };
+  }
+
+  isDigitValidation(inputDigit) {
+    const { isNotThreeDigit, isNotOneToNineDigit, isDuplicates } =
+      this.#collectValidationFn;
+    if (
+      isNotThreeDigit(inputDigit) ||
+      isNotOneToNineDigit(inputDigit) ||
+      isDuplicates(inputDigit)
+    )
+      throw new Error("잘못된 값 입력됨");
+    return inputDigit;
+  }
+
   // 기능 3 - 사용자 숫자 input
   setUserInput() {
     Console.readLine("숫자를 입력해주세요 : ", (inputDigit) => {
-      const userDigit = [...inputDigit].map(Number);
+      // const userDigit = [...inputDigit].map(Number);
+      const userDigit = [...this.isDigitValidation(inputDigit)].map(Number);
       Console.print(userDigit);
     });
   }
