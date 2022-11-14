@@ -75,3 +75,5 @@
 - Random.pickNumberInRange 메소드 사용
 
 4. User 숫자 input 받아오도록
+
+5. User 숫자 input 유효성 검사
