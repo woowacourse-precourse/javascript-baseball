@@ -1,3 +1,5 @@
+// 기능 테스트 파일
+
 const App = require("../src/App");
 const MissionUtils = require("@woowacourse/mission-utils");
 
