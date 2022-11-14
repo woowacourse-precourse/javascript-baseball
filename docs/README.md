@@ -73,3 +73,5 @@
 
 - App.js에 추가
 - Random.pickNumberInRange 메소드 사용
+
+4. User 숫자 input 받아오도록
