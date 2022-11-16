@@ -1,5 +1,7 @@
 const BaseballHint = require('./BaseballHint');
 
+const { USER } = require('./constants/error');
+
 class User {
   #baseballHint;
 
@@ -12,7 +14,7 @@ class User {
 
   validate(baseballHint) {
     if (!baseballHint instanceof BaseballHint) {
-      throw new Error('baseballHint는 BaseballHint 객체여야 합니다.');
+      throw new Error(USER.INVALID_INSTANCE);
     }
   }
 

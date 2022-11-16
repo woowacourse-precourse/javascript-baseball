@@ -1,6 +1,8 @@
 const { Random } = require('@woowacourse/mission-utils');
 const Baseball = require('./Baseball');
 
+const { SETTING } = require('./constants/game');
+
 class Computer {
   #baseball;
 
@@ -12,8 +14,8 @@ class Computer {
   #pickRandomNumbers() {
     const numberSet = new Set();
 
-    while (numberSet.size < 3) {
-      const number = Random.pickNumberInRange(1, 9);
+    while (numberSet.size < SETTING.NUMBER_COUNT) {
+      const number = Random.pickNumberInRange(SETTING.MIN_NUMBER, SETTING.MAX_NUMBER);
       numberSet.add(number);
     }
 

@@ -1,7 +1,10 @@
-// modules
 const { Console } = require('@woowacourse/mission-utils');
 const Computer = require('./Computer');
 const User = require('./User');
+
+const { ALERT, ASK } = require('./constants/message');
+const { END_INPUT, RESULT } = require('./constants/game');
+const { APP } = require('./constants/error');
 
 class App {
   constructor() {
@@ -10,7 +13,7 @@ class App {
   }
 
   play() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    Console.print(ALERT.START_GAME);
     this.startGame();
   }
 
@@ -20,7 +23,7 @@ class App {
   }
 
   requestUserGuess() {
-    Console.readLine('숫자를 입력해주세요 : ', (input) => {
+    Console.readLine(ASK.NUMBER, (input) => {
       const numbers = Array.from(input, Number);
 
       this.user.guess(numbers, this.computer);
@@ -33,7 +36,7 @@ class App {
   printResult(result) {
     Console.print(result);
 
-    if (result !== '3스트라이크') {
+    if (result !== RESULT.END_POINT) {
       this.requestUserGuess();
     } else {
       this.requestPlayAgain();
@@ -41,16 +44,15 @@ class App {
   }
 
   requestPlayAgain() {
-    Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
-    Console.print('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.');
-    Console.readLine('', (input) => {
+    Console.print(ALERT.GAME_END);
+    Console.readLine(ASK.PLAY_AGAIN, (input) => {
       switch (input) {
-        case '1':
+        case END_INPUT.PLAY_AGAIN:
           return this.startGame();
-        case '2':
+        case END_INPUT.CLOSE_APP:
           return this.close();
         default:
-          throw new InputError('게임을 종료합니다.');
+          throw new Error(APP.INVALID_END_INPUT);
       }
     });
   }

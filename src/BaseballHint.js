@@ -1,3 +1,6 @@
+const { BASEBALL_HINT } = require('./constants/error');
+const { SETTING, HINT } = require('./constants/game');
+
 class BaseballHint {
   #strike;
   #ball;
@@ -10,11 +13,14 @@ class BaseballHint {
 
   validate(strike, ball) {
     if (!this.#isNumber(strike) || !this.#isNumber(ball)) {
-      throw new Error('스트라이크와 볼 갯수는 숫자여야 합니다.');
+      throw new Error(BASEBALL_HINT.ONLY_NUMBER);
     }
 
-    if (!this.#isInRange(strike, 0, 3) || !this.#isInRange(ball, 0, 3)) {
-      throw new Error('스트라이크와 볼은 최소 0개부터 최대 3개입니다.');
+    if (
+      !this.#isInRange(strike, HINT.MIN_COUNT, SETTING.NUMBER_COUNT) ||
+      !this.#isInRange(ball, HINT.MIN_COUNT, SETTING.NUMBER_COUNT)
+    ) {
+      throw new Error(BASEBALL_HINT.IN_RANGE);
     }
   }
 
@@ -27,10 +33,10 @@ class BaseballHint {
   }
 
   toString() {
-    if (this.#strike === 0 && this.#ball === 0) return '낫싱';
+    if (this.#strike === HINT.MIN_COUNT && this.#ball === HINT.MIN_COUNT) return HINT.NOTHING;
 
-    const ballString = this.#ball > 0 ? `${this.#ball}볼` : '';
-    const strikeString = this.#strike > 0 ? `${this.#strike}스트라이크` : '';
+    const ballString = this.#ball > HINT.MIN_COUNT ? `${this.#ball}${HINT.BALL}` : '';
+    const strikeString = this.#strike > HINT.MIN_COUNT ? `${this.#strike}${HINT.STRIKE}` : '';
 
     return `${ballString} ${strikeString}`.trim();
   }

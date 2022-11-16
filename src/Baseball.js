@@ -1,5 +1,8 @@
 const BaseballHint = require('./BaseballHint');
 
+const { BASEBALL } = require('./constants/error');
+const { SETTING } = require('./constants/game');
+
 class Baseball {
   #numbers;
 
@@ -10,15 +13,15 @@ class Baseball {
 
   validate(numbers) {
     if (numbers.some((number) => !Number.isInteger(number))) {
-      throw new Error('야구공은 숫자만 입력 가능합니다.');
+      throw new Error(BASEBALL.ONLY_NUMBER);
     }
 
-    if (numbers.length !== 3) {
-      throw new Error('야구공은 3자리입니다.');
+    if (numbers.length !== SETTING.NUMBER_COUNT) {
+      throw new Error(BASEBALL.LENGTH);
     }
 
     if (numbers.length !== new Set(numbers).size) {
-      throw new Error('중복된 숫자는 입력이 불가능합니다.');
+      throw new Error(BASEBALL.DUPLICATE);
     }
   }
 
