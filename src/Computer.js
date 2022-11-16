@@ -21,8 +21,6 @@ class Computer {
   }
 
   giveHint(numbers) {
-    this.#baseball.validate(numbers);
-
     return this.#baseball.createHint(numbers);
   }
 }
