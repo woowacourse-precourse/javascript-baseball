@@ -29,13 +29,12 @@ class BaseballGame {
   /**
    * 3자리이며 숫자만 입력되었는지 확인한다.
    */
-  isInvalidThreeDigits = () => {
-    const numberSet = new Set(this.#userInput);
+  isInvalidThreeDigits = (number) => {
+    const numberSet = new Set(number);
     const numberRegExp = new RegExp(/[1-9]{3}/g);
+
     return (
-      this.#userInput.length !== 3 ||
-      numberSet.size !== 3 ||
-      !numberRegExp.test(this.#userInput)
+      number.length !== 3 || numberSet.size !== 3 || !numberRegExp.test(number)
     );
   };
 
@@ -44,10 +43,10 @@ class BaseballGame {
    */
   getUserInput = () => {
     Console.readLine(Messages.INPUT_NUMBER, (number) => {
-      this.#userInput = number;
-      if (this.isInvalidThreeDigits()) {
+      if (this.isInvalidThreeDigits(number)) {
         throw new Error(Messages.ERROR.INVALID_BALL_NUMBER);
       }
+      this.#userInput = number.split('').map(Number);
 
       const checkCount = this.getCheckCount();
       this.getCompareInput(checkCount);
@@ -59,8 +58,7 @@ class BaseballGame {
    * @returns {[number, number, number]} 컴퓨터와 사용자를 비교한 배열
    */
   getCheckCount = () => {
-    const numbers = this.#userInput.split('').map(Number);
-    return numbers.reduce(
+    return this.#userInput.reduce(
       (checkCount, number, index) => {
         if (this.#computerInput[index] === number) checkCount[0]++;
         else if (this.#computerInput.includes(number)) checkCount[1]++;
