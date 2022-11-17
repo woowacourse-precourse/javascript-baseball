@@ -10,17 +10,10 @@ class BaseballGame {
   #userInput;
 
   /**
-   * 컴퓨터가 생성한 값
-   * @type {[number, number, number]}
-   */
-  #computerInput;
-
-  /**
    * 컴퓨터에게 랜덤한 숫자를 생성시킨 후, 사용자에게 숫자를 입력받기 시작한다.
    */
   start = () => {
-    const computerUser = new ComputerUser();
-    this.#computerInput = computerUser.createRandomAnswer();
+    this.computerUser = new ComputerUser();
 
     Console.print(Messages.START);
     this.getUserInput();
@@ -58,10 +51,11 @@ class BaseballGame {
    * @returns {[number, number, number]} 컴퓨터와 사용자를 비교한 배열
    */
   getCheckCount = () => {
+    const computerInput = this.computerUser.computerInput;
     return this.#userInput.reduce(
       (checkCount, number, index) => {
-        if (this.#computerInput[index] === number) checkCount[0]++;
-        else if (this.#computerInput.includes(number)) checkCount[1]++;
+        if (computerInput[index] === number) checkCount[0]++;
+        else if (computerInput.includes(number)) checkCount[1]++;
         else checkCount[2]++;
         return checkCount;
       },
