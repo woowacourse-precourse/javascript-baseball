@@ -69,7 +69,7 @@ javascript-baseball
 
 유저가 입력한 숫자의 유효성을 판별하는 모듈
 
-### components/Game.js
+### components/User.js
 
 유저의 입력값에 대한 결과를 출력하는 모듈
 
