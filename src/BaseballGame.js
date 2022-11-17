@@ -5,7 +5,7 @@ const ComputerUser = require('./ComputerUser');
 class BaseballGame {
   /**
    * 사용자가 입력한 값
-   * @type {string}
+   * @type {[number, number, number]}
    */
   #userInput;
 
