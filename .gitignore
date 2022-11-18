@@ -1,1 +1,14 @@
 node_modules
+
+__tests__
+
+.eslintrc.js
+
+.prettierrc
+.prettierrc.js
+
+.package-lock.json
+.package.json
+
+
+
