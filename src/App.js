@@ -1,7 +1,7 @@
 const {Console} = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 const Game = require('./Game');
-const {parseEndSelect, EndSelect} = require('./Constants');
+const {parseEndSelect, EndSelect} = require('./utils/EndSelect');
 
 class App {
   play() {
