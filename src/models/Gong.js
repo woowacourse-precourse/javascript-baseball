@@ -1,10 +1,13 @@
 const {Random} = require('@woowacourse/mission-utils');
-const Messages = require('../messages');
+const Messages = require('../Messages');
 
 /**
  * 숫자 야구게임에서 서로 다른 숫자 3개를 묶에 취급하는 클래스
  */
 class Gong {
+  /** @type {number} */
+  static SIZE = 3;
+
   /** @type {[number, number, number]} 서로 다른 숫자 3개 */
   #numbers;
 
@@ -23,13 +26,13 @@ class Gong {
    * @returns {Gong}
    */
   static parseGong(text) {
-    if (text.length !== 3) throw new Error(Messages.GONG_INVALID_FORMAT);
+    if (text.length !== Gong.SIZE) throw new Error(Messages.GONG_INVALID_FORMAT);
 
     if (!/^[1-9]{3}$/.test(text)) throw new Error(Messages.GONG_INVALID_FORMAT);
 
     const numbers = text.split('').map(Number);
 
-    if (new Set(numbers).size !== 3) throw new Error(Messages.GONG_INVALID_FORMAT);
+    if (new Set(numbers).size !== Gong.SIZE) throw new Error(Messages.GONG_INVALID_FORMAT);
 
     return new Gong(numbers);
   }

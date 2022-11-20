@@ -1,7 +1,7 @@
 const {Console} = require('@woowacourse/mission-utils');
-const Messages = require('./messages');
-const Gong = require('./models/gong');
-const Opponent = require('./models/opponent');
+const Messages = require('./Messages');
+const Gong = require('./models/Gong');
+const Opponent = require('./models/Opponent');
 
 /**
  * 한 판의 게임에 대한 클래스. 게임이 종료된 후에는 사용해선 안된다.
@@ -16,8 +16,8 @@ class Game {
   /**
    * @param {Opponent} opponent
    */
-  constructor(opponent = null) {
-    this.#opponent = opponent ?? new Opponent();
+  constructor(opponent = new Opponent()) {
+    this.#opponent = opponent;
   }
 
   /**
@@ -67,7 +67,7 @@ class Game {
 
     Console.print(guessResult);
 
-    if (strike === 3) {
+    if (strike === Gong.SIZE) {
       Console.print(Messages.GUESS_GONG_RESULT_SUCCESS);
       return true;
     }
