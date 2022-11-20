@@ -80,6 +80,15 @@ class App {
       else return acc;
     }, 0);
   }
+  userResult(input) {
+    if (input === "1") {
+      this.play();
+      return;
+    } else if (input === "2") {
+      MissionUtils.Console.print("게임을 종료합니다.");
+      MissionUtils.Console.close();
+    }
+  }
 }
 
 const app = new App();
