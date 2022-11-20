@@ -18,9 +18,9 @@ class App {
       ]);
       if (!arr.includes(num)) arr.push(num);
     }
-    console.log(arr);
+    return arr;
   }
 }
-
+const app = new App();
+app.play();
 module.exports = App;
-renderComputerValue();
