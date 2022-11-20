@@ -55,9 +55,6 @@ class Gong {
    * @returns {number} 스트라이크 갯수
    */
   countStrike(otherGong) {
-    console.log(this.#numbers);
-    this.#numbers = this.#numbers.reverse();
-    console.log(this.#numbers);
     return this.#numbers.reduce(
       (count, number, index) =>
         count +
