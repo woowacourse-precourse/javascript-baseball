@@ -49,7 +49,7 @@
   - <details>
     <summary>airbnb 규칙 사용</summary>
 
-    `npm install --save-dev eslint-config-airbnb eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y` 명령으로 설치한다.
+    `npx install-peerdeps --dev eslint-config-airbnb` 명령으로 설치한다.
 
     .eslintrc.js의 `extends: [...]` 에 `'airbnb'` 를 추가한다.
   </details>
