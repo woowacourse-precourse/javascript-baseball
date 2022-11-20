@@ -64,7 +64,7 @@ class App {
     }
   }
   getWholeCount(input) {
-    const userInput = input.split("").map((char) => +char);
+    const userInput = input.split("").map((char) => parseInt(char));
     console.log(userInput);
     const strikeCount = this.getStrikeCount(userInput, this.computerValue);
     const ballCount = this.getBallCount(userInput, this.computerValue);
