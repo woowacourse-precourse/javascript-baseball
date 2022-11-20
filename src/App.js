@@ -63,7 +63,25 @@ class App {
       );
     }
   }
+  getWholeCount(input) {
+    const userInput = input.split("").map((char) => +char);
+    console.log(userInput);
+    const strikeCount = this.getStrikeCount(userInput, this.computerValue);
+    const ballCount = this.getBallCount(userInput, this.computerValue);
+    return [strikeCount, ballCount];
+  }
+  getStrikeCount(user, computer) {
+    return computer.filter((n, i) => n === user[i]).length;
+  }
+  getBallCount(user, computer) {
+    return user.reduce((acc, cur, index) => {
+      if (cur === computer[index]) return acc;
+      if (computer.includes(cur)) return acc + 1;
+      else return acc;
+    }, 0);
+  }
 }
+
 const app = new App();
 app.play();
 module.exports = App;
