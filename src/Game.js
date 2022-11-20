@@ -67,7 +67,7 @@ class Game {
 
     Console.print(guessResult);
 
-    if (strike === 3) {
+    if (strike === Gong.SIZE) {
       Console.print(Messages.GUESS_GONG_RESULT_SUCCESS);
       return true;
     }
