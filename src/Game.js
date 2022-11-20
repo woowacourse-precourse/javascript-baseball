@@ -16,8 +16,8 @@ class Game {
   /**
    * @param {Opponent} opponent
    */
-  constructor(opponent = null) {
-    this.#opponent = opponent ?? new Opponent();
+  constructor(opponent = new Opponent()) {
+    this.#opponent = opponent;
   }
 
   /**
