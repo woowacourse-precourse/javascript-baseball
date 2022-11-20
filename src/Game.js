@@ -1,7 +1,7 @@
 const {Console} = require('@woowacourse/mission-utils');
-const Messages = require('./messages');
-const Gong = require('./models/gong');
-const Opponent = require('./models/opponent');
+const Messages = require('./Messages');
+const Gong = require('./models/Gong');
+const Opponent = require('./models/Opponent');
 
 /**
  * 한 판의 게임에 대한 클래스. 게임이 종료된 후에는 사용해선 안된다.

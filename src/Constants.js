@@ -1,4 +1,4 @@
-const Messages = require('./messages');
+const Messages = require('./Messages');
 
 /**
  * 게임 종료 후 계속할 것인지에 대한 선택

@@ -1,4 +1,4 @@
-const Gong = require('./gong');
+const Gong = require('./Gong');
 
 /**
  * 숫자 야구 게임에서 무작위의 숫자 3개를 정하는 상대방

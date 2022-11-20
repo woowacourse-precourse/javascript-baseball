@@ -1,5 +1,5 @@
 const {Random} = require('@woowacourse/mission-utils');
-const Messages = require('../messages');
+const Messages = require('../Messages');
 
 /**
  * 숫자 야구게임에서 서로 다른 숫자 3개를 묶에 취급하는 클래스
@@ -55,6 +55,9 @@ class Gong {
    * @returns {number} 스트라이크 갯수
    */
   countStrike(otherGong) {
+    console.log(this.#numbers);
+    this.#numbers = this.#numbers.reverse();
+    console.log(this.#numbers);
     return this.#numbers.reduce(
       (count, number, index) =>
         count +
