@@ -24,7 +24,7 @@ class App {
       if (!this.user.isValidUserInput(userInput)) {
         this.isError();
       }
-      Console.print(`${MESSAGE.USERINPUT}${userInput}`);
+      Console.print(`${userInput}`);
 
       const { strike } = this.findAnswer.getAnswer(computerNum, userInput);
       if (strike !== 3) {
@@ -48,7 +48,6 @@ class App {
   }
 
   askUserToRestart() {
-    Console.print(`${MESSAGE.GAMEEND}\n${MESSAGE.ASKTORESTART}`);
     Console.readLine(MESSAGE.ASKTORESTART, (userInput) => {
       if (userInput === RESTART) {
         Console.print(userInput);
@@ -64,5 +63,8 @@ class App {
     });
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
