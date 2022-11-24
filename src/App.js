@@ -1,33 +1,49 @@
+/* eslint-disable class-methods-use-this */
 const {Console} = require('@woowacourse/mission-utils');
 const Messages = require('./Messages');
 const Game = require('./Game');
 const {parseEndSelect, EndSelect} = require('./utils/EndSelect');
+const runGenerator = require('./utils/runGenerator');
+const Gong = require('./models/Gong');
 
 class App {
   play() {
     Console.print(Messages.GAME_START);
-    this.#startGame();
+    runGenerator(this.#run.bind(this));
   }
 
-  #startGame() {
+  *#run() {
     const game = new Game();
-    game.onEnd(() => this.#onGameEnd());
-    game.play();
+
+    while (true) {
+      const gong = yield this.#readGong;
+      const success = game.guess(gong);
+      if (success) break;
+    }
+
+    Console.print(Messages.END_SELECT);
+    const endSelect = yield this.#readEndSelect;
+
+    if (endSelect === EndSelect.SHUTDOWN) {
+      this.#shutdown();
+      return;
+    }
+
+    yield* this.#run(); // 게임 계속 실행
   }
 
-  #onGameEnd() {
-    Console.print(Messages.END_SELECT);
-    Console.readLine('', (text) => {
-      const endSelect = parseEndSelect(text);
-      if (endSelect === EndSelect.RETRY) {
-        this.#startGame();
-      } else if (endSelect === EndSelect.SHUTDOWN) {
-        this.#shutdown();
-      }
+  #readGong(callback) {
+    Console.readLine(Messages.INPUT_YOUR_GONG, (text) => {
+      callback(Gong.parseGong(text));
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  #readEndSelect(callback) {
+    Console.readLine('', (text) => {
+      callback(parseEndSelect(text));
+    });
+  }
+
   #shutdown() {
     Console.close();
   }
