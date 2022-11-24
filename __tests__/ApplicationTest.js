@@ -47,9 +47,35 @@ describe("숫자 야구 게임", () => {
     });
   });
 
-  test("예외 테스트", () => {
+  test("예외 테스트 3자리의 수가 아닐 때", () => {
     const randoms = [1, 3, 5];
     const answers = ["1234"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 숫자가 아닌 것이 들어왔을 때", () => {
+    const randoms = [3, 6, 9];
+    const answers = ["15a"];
+
+    mockRandoms(randoms);
+    mockQuestions(answers);
+
+    expect(() => {
+      const app = new App();
+      app.play();
+    }).toThrow();
+  });
+
+  test("예외 테스트 중복된 숫자가 있을 때", () => {
+    const randoms = [9, 8, 7];
+    const answers = ["989"];
 
     mockRandoms(randoms);
     mockQuestions(answers);
