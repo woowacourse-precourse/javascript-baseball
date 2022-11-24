@@ -9,40 +9,54 @@ class App {
     this.edgeCase = new EdgeCase();
     this.compare = new Compare();
   }
+
   play() {
     MissionUtils.Console.print(MESSAGE.GAME_START);
     this.start();
   }
+  
   start() {
-    const computer = this.computer;
-    const user = [];
-    let result = "";
     MissionUtils.Console.readLine(MESSAGE.INPUT_NUMBER, (answer) => {
       if (this.edgeCase.isValid(answer)) {
-        answer.split("").forEach((x) => user.push(+x));
-        result = this.compare.printHint(computer, user);
-        MissionUtils.Console.print(result);
-        if (result.split("\n")[1] == MESSAGE.THREE_STRIKE) {
-          this.restartOrShutdown();
-        } else this.start();
-      }
+        this.user(answer);
+      }  
     });
   }
+  
+  user(answer) {
+    const user = [];
+    answer.split("").forEach((x) => user.push(+x));
+    const result = this.compare.printHint(this.computer, user);
+    MissionUtils.Console.print(result);
+    this.isStrike(result);
+  }
+    
+  isStrike(result) {
+    if (result.split("\n")[1] == MESSAGE.THREE_STRIKE) {
+      this.restartOrShutdown();
+    } else this.start();
+  }
+
   restartOrShutdown() {
-    MissionUtils.Console.readLine(
-      MESSAGE.INPUT_RETRY,
-      (answer) => {
-        if (answer === INPUT.RETRY) {
-          this.computer = new Computer().createNumber();
-          this.start();
-        }
-        if (answer === INPUT.END) {
-          MissionUtils.Console.print(MESSAGE.GAME_END);
-          MissionUtils.Console.close();
-        }
-        if (answer !== INPUT.RETRY && answer !== INPUT.END) this.restartOrShutdown();
+    MissionUtils.Console.readLine(MESSAGE.INPUT_RETRY, (answer) => {
+      if (answer === INPUT.RETRY) {
+        return this.retry();
       }
-    );
+      if (answer === INPUT.END) {
+        return this.end();
+      }
+      this.restartOrShutdown()
+    });
+  }
+
+  retry() {
+    this.computer = new Computer().createNumber();
+    this.start();
+  }
+
+  end() {
+    MissionUtils.Console.print(MESSAGE.GAME_END);
+    MissionUtils.Console.close();
   }
 }
 const app = new App();

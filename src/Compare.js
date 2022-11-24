@@ -1,7 +1,6 @@
 const {HINT} = require("./constant");
 class Compare {
-  constructor() {
-  }
+  
   printHint(computer, user) {
     let strike = 0;
     let ball = 0;
