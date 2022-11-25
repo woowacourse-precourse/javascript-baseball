@@ -27,6 +27,7 @@ class App {
       }
       shouldRegame = await Input.shouldRegame();
     }
+    MissionUtils.Console.close();
   }
 }
 
