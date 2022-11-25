@@ -19,13 +19,13 @@ class Model {
     this.computerNumbers =
       computerNumbers === null ? this.computerNumbers : computerNumbers;
     this.userNumbers = userNumbers === null ? this.userNumbers : userNumbers;
-    console.log(this.computerNumbers, this.userNumbers);
   }
 
   calculate() {
-    const countBall = this.countBall();
-    const countStrike = this.countStrike() - countBall;
-    return [countBall, countStrike]
+    const countStrike = this.countStrike();
+    const countBall =
+      this.countBall() - countStrike < 0 ? 0 : this.countBall() - countStrike;
+    return {countBall, countStrike};
   }
 
   countBall() {

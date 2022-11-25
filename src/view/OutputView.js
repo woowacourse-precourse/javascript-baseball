@@ -5,8 +5,8 @@ const Output = {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
   },
 
-  printResult(result) {
-    MissionUtils.Console.print(`${result}`);
+  printResult(resultString) {
+    MissionUtils.Console.print(`${resultString}`);
   },
 };
 
