@@ -1,9 +1,7 @@
 const { Random, Console } = require('@woowacourse/mission-utils');
-const REG_EXP = {
-  userInputRegEx: /^[1-9]{3,3}$/,
-  restartRegEx: /^[1-2]{1,1}$/,
-};
 const { GAME_MESSAGE } = require('./static/GameMessage');
+const { REG_EXP } = require('./static/RegularExpression');
+
 class App {
   play() {
     let cpu = [];
