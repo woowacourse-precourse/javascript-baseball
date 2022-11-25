@@ -2,7 +2,8 @@
 
 ## view
 
-[ ] inputView.js 에서 3가지 숫자를 사용자에게 입력받아 Controller.js로 전송한다.
+[O] inputView.js 에서 3가지 숫자를 사용자에게 입력받는다.
+[O] 입력받은 값을 Controller.js로 전송한다.
 [ ] OutputView.js에서 결과를 출력
 
 ## model
@@ -12,8 +13,8 @@
 
 ## controller
 
-[ ] inputView.js에서 입력받은 값을 전송받아 숫자로 가공한다.
-[ ] 숫자로 가공된 값을 validate.
+[O] inputView.js에서 입력받은 값을 전송받아 숫자로 가공한다.
+[O] 숫자로 가공된 값을 validate.
 [ ] validate 통과한 값은 Model.js로 전송
 
 ## 테스트코드
