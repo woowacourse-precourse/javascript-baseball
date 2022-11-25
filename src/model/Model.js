@@ -22,9 +22,29 @@ class Model {
     console.log(this.computerNumbers, this.userNumbers);
   }
 
-  countBall() {}
+  calculate() {
+    const countBall = this.countBall();
+    const countStrike = this.countStrike() - countBall;
+    return [countBall, countStrike]
+  }
 
-  countStrike() {}
+  countBall() {
+    return this.userNumbers.reduce((acc, cur) => {
+      if (this.computerNumbers.includes(cur)) {
+        acc++;
+      }
+      return acc;
+    }, 0);
+  }
+
+  countStrike() {
+    return this.userNumbers.reduce((acc, cur, idx) => {
+      if (cur === this.computerNumbers[idx]) {
+        acc++;
+      }
+      return acc;
+    }, 0);
+  }
 }
 
 module.exports = Model;
