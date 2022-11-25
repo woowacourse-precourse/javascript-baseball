@@ -15,7 +15,6 @@ class App {
       const stringToNumber = await Controller.stringToNumber(input);
       const validatedNumbers = Controller.validate(stringToNumber);
       model.updatdeData(null, validatedNumbers);
-
       break;
     }
   }
