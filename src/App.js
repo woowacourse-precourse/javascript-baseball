@@ -1,20 +1,20 @@
-const { Random, Console } = require("@woowacourse/mission-utils");
+const { Random, Console } = require('@woowacourse/mission-utils');
 const REG_EXP = {
   userInputRegEx: /^[1-9]{3,3}$/,
   restartRegEx: /^[1-2]{1,1}$/,
 };
 const GAME_MESSAGE = {
-  inputValue: "숫자를 입력해주세요 : ",
-  start: "숫자 야구 게임을 시작합니다.",
-  clear: "3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  restart: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n",
-  error_invalid_input: "3자리의 중복되지 않는 숫자로 입력해주세요",
-  error_invalid_restart_input: "1 또는 2를 입력해주세요",
+  inputValue: '숫자를 입력해주세요 : ',
+  start: '숫자 야구 게임을 시작합니다.',
+  clear: '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  restart: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
+  error_invalid_input: '3자리의 중복되지 않는 숫자로 입력해주세요',
+  error_invalid_restart_input: '1 또는 2를 입력해주세요',
 };
 class App {
   play() {
     let cpu = [];
-    let user = "";
+    let user = '';
     let score = { ball: 0, strike: 0 };
     startGame();
     processGame(user, cpu);
@@ -39,19 +39,19 @@ const makeTargetNumber = () => {
 };
 
 const processGame = () => {
-  Console.readLine(GAME_MESSAGE.inputValue, (input) => {
+  Console.readLine(GAME_MESSAGE.inputValue, input => {
     progress(input);
     noticeScore();
   });
 };
-const progress = (input) => {
+const progress = input => {
   user = input;
   validateInput(REG_EXP.userInputRegEx, user);
   score = getScore(cpu, user);
 };
 const validateInput = (regEx, input) => {
-  if (new Set(input.split("")).size > 3) {
-    throw new Error("3자리의 중복되지 않는 숫자로 입력해주세요");
+  if (new Set(input.split('')).size > 3) {
+    throw new Error('3자리의 중복되지 않는 숫자로 입력해주세요');
   }
   return validateNumber(regEx, input, GAME_MESSAGE.error_invalid_input);
 };
@@ -62,7 +62,7 @@ const validateNumber = (regEx, input, message) => {
   return true;
 };
 const getScore = (cpu, user) => {
-  const userNumber = user.split("");
+  const userNumber = user.split('');
   const score = defineScore(cpu, userNumber);
   return score;
 };
@@ -104,12 +104,16 @@ const noticeScore = () => {
 };
 
 const considerRestart = () => {
-  Console.readLine(GAME_MESSAGE.restart, (input) => {
+  Console.readLine(GAME_MESSAGE.restart, input => {
     defineRestartGame(Number(input));
   });
 };
-const defineRestartGame = (flag) => {
-  validateNumber(REG_EXP.restartRegEx, flag, GAME_MESSAGE.error_invalid_restart_input);
+const defineRestartGame = flag => {
+  validateNumber(
+    REG_EXP.restartRegEx,
+    flag,
+    GAME_MESSAGE.error_invalid_restart_input,
+  );
   if (flag === 1) {
     cpu = makeTargetNumber();
     processGame();
