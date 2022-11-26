@@ -16,8 +16,8 @@ class BaseballGame {
   static randomNumber = [];
 
   static gameStart() {
-    console.log("숫자 야구 게임을 시작합니다.");
-    BaseballGame.gameStartStepTwo();
+    MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
+    this.gameStartStepTwo();
   }
   static gameStartStepTwo() {
     this.randomNumber = generateRandom();
