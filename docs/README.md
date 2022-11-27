@@ -17,12 +17,12 @@
 
 ## *기능목록* 🧑🏻‍💻
 
-- -[ ] 숫자야구 게임을 시작하는 문구 출력기능     #InputView  /
-- -[ ] 3자리의 서로 다른 수를 만드는 기능       #BaseballMaker / numberGenerator
-- -[ ] 플레이어의 숫자를 입력받는 기능          #InputView / 
+- -[x] 숫자야구 게임을 시작하는 문구 출력기능     #InputView  /
+- -[x] 3자리의 서로 다른 수를 만드는 기능       #BaseballMaker / numberGenerator
+- -[x] 플레이어의 숫자를 입력받는 기능          #InputView / 
   - 🚨예외사항    
-  - -[ ] 숫자타입이 아닐경우                  #Validtion
-  - -[ ] 1~9의 숫자가 아닐경우               #Validtion
+  - -[x] 숫자타입이 아닐경우                  #Validtion
+  - -[x] 1~9의 숫자가 아닐경우               #Validtion
 
 - -[ ] 조건에 맞추어 비교하는 기능             #BaseballReferee / compare
 - -[ ] 결과값을 출력하는 기능                 outPutView / 
