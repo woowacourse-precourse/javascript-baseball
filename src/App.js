@@ -1,9 +1,9 @@
 //@ts-check
-const Controller = require("./Controller");
+const BaseballGame = require("./controller/BaseballGame");
 
 class App {
   play() {
-    const controller = new Controller();
+    const controller = new BaseballGame();
     controller.start();
   }
 }

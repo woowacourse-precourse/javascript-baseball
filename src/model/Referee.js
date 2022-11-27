@@ -3,8 +3,8 @@ const Judgement = require("./Judgement");
 
 class Referee {
 	#game;
-  constructor() {
-		this.#game;
+  constructor(game) {
+		this.#game = game;
   }
 	#isBall(prevIdx, curIdx) {
 		if (curIdx >= 0 && curIdx !== prevIdx)

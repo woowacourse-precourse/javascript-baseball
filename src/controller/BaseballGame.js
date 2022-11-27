@@ -1,11 +1,11 @@
 //@ts-check
-const View = require("./View");
-const Referee = require("./model/Referee");
-const { GAME_STATE } = require("./enum");
-const Game = require("./model/Game");
+const View = require("../View");
+const Referee = require("../model/Referee");
+const { GAME_STATE } = require("../enum");
+const Game = require("../model/Game");
 const Console = require("@woowacourse/mission-utils").Console;
 
-class Controller {
+class BaseballGame {
 	#referee;
 	#view;
 	constructor() {
@@ -14,7 +14,7 @@ class Controller {
 	}
 
 	#ingHandler(command) {
-		if (!Controller.isValid(command))
+		if (!BaseballGame.isValid(command))
 			throw new Error("입력을 잘못 하셨네요 1에서 9 중복되지 않게 3자리");
 		const balls = command.split("").map((item) => +item);
 		const judgement = this.#referee.judge(balls);
@@ -53,4 +53,4 @@ class Controller {
 	}
 }
 
-module.exports = Controller;
+module.exports = BaseballGame;
