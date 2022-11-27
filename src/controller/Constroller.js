@@ -39,6 +39,14 @@ const Controller = {
       return `낫싱`;
     }
   },
+
+  validateRegame(isRegame) {
+    if (Number(isRegame) === 1 || Number(isRegame) === 2) {
+      return Number(isRegame);
+    } else {
+      throw new Error();
+    }
+  },
 };
 
 module.exports = Controller;

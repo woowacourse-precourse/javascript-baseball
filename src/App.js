@@ -6,9 +6,9 @@ const MissionUtils = require("@woowacourse/mission-utils");
 
 class App {
   async play() {
-    let shouldRegame = 1;
+    let isRegame = 1;
     Output.printStartMent();
-    while (shouldRegame !== 2) {
+    while (isRegame !== 2) {
       const model = new Model();
       model.generateComputerNumbers();
       while (true) {
@@ -25,7 +25,10 @@ class App {
           break;
         }
       }
-      shouldRegame = await Input.shouldRegame();
+      const shouldRegame = await Input.shouldRegame().then((result) => {
+        return result;
+      });
+      isRegame = await Controller.validateRegame(shouldRegame);
     }
     MissionUtils.Console.close();
   }
