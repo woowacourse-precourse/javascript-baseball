@@ -1,42 +1,42 @@
 class BaseballReferee {
-  #userInput;
-  #randomNumber;
+  #ball
+  #Strike;
 
   constructor(userInput, randomNumber) {
-    this.#userInput = userInput;
-    this.#randomNumber = randomNumber;
+    this.userInput = userInput;
+    this.randomNumber = randomNumber;
+    this.#ball = 0;
+    this.#strike = 0;
   }
 
   ballCount(userInput, randomNumber) {
-    let ballCount = 0;
     randomNumber.forEach((number, index) => {
       if(userInput.includes(number) && number !== userInput[index]) {
-        ballCount += 1;
+        this.#ball += 1;
       }
     })
 
-    return ballCount;
+    return this.#ball;
   }
 
   strikeCount(userInput, randomNumber) {
-    let strikeCount = 0;
     randomNumber.forEach((number, index) => {
       if(userInput.includes(number) && number === userInput[index]) {
-        strikeCount += 1;
+        this.#Strike += 1;
       }
     })
 
-    return strikeCount;
+    return this.#Strike;
   }
 
-  compare(ballCount, strikeCount) {
-    ballCount = this.ballCount(this.#userInput, this.#randomNumber);
-    strikeCount = this.strikeCount(this.#userInput, this.#randomNumber);
-    if(strikeCount === 3) return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
-    if(strikeCount === 0) return `${ballCount}볼`;
-    if(ballCount === 0) return `${strikeCount}스트라이크`;
-    if(strikeCount === 0 && ballCount === 0) return `낫싱`;
+  compare() {
+    const ball = this.ballCount(this.userInput, this.randomNumber);
+    const strike = this.strikeCount(this.userInput, this.randomNumber);
+    if(strike === 3) return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+    if(strike === 0) return `${ball}볼`;
+    if(ball === 0) return `${strike}스트라이크`;
+    if(strike === 0 && ball === 0) return `낫싱`;
 
-    return `${ballCount}볼 ${strikeCount}스트라이크`;
+    return `${ball}볼 ${strike}스트라이크`;
   }
 }
