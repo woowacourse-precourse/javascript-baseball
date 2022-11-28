@@ -6,7 +6,7 @@ const Controller = {
     return await newNumbers.map((newNumber) => Number(newNumber));
   },
 
-  validate(numbers) {
+  async validate(numbers) {
     const redundantNumbers = new Set(numbers);
     for (number of numbers) {
       if (isNaN(Number(number))) {
@@ -40,7 +40,7 @@ const Controller = {
     }
   },
 
-  validateRegame(isRegame) {
+  async validateRegame(isRegame) {
     if (Number(isRegame) === 1 || Number(isRegame) === 2) {
       return Number(isRegame);
     } else {
