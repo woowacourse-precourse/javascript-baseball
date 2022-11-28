@@ -1,7 +1,16 @@
-const { Console } = require('@woowacourse/mission-utils');
+const BaseballGame = require('./Controller/BaseballGame');
+const Computer = require('./Model/Computer');
+const User = require('./Model/User');
+const { generate } = require('./Utils/RandomNumberGenerator');
 
 class App {
-  play() {}
+  constructor() {
+    this.game = new BaseballGame(new Computer(generate), new User());
+  }
+
+  play() {
+    this.game.run();
+  }
 }
 
 const app = new App();
