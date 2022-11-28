@@ -1,7 +1,5 @@
 const App = require("../src/App");
-const OutputView = require("../src/view/OutputView");
 const MissionUtils = require("@woowacourse/mission-utils");
-const Controller = require("../src/controller/Constroller");
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
@@ -43,9 +41,8 @@ describe("숫자 야구 게임", () => {
 
     const app = new App();
     app.play();
-    messages.forEach(async (output) => {
-      console.log(output)
-      await expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
+    messages.forEach((output) => {
+      expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
   });
 
@@ -58,6 +55,7 @@ describe("숫자 야구 게임", () => {
 
     expect(() => {
       // const app = new App();
+      // app.play();
       Controller.validate(answer)
     }).toThrow();
   });

@@ -1,23 +1,21 @@
 const Output = require("../view/OutputView");
 
 const Controller = {
-  async stringToNumber(numbers) {
-    let newNumbers = numbers.split("");
-    return await newNumbers.map((newNumber) => Number(newNumber));
-  },
-
-  async validate(numbers) {
+  validate(numbers) {
     const redundantNumbers = new Set(numbers);
     for (number of numbers) {
       if (isNaN(Number(number))) {
         throw new Error();
       }
-      if (redundantNumbers.size !== 3) {
-        throw new Error();
-      }
       if (1 > Number(number) || Number(number) > 9) {
         throw new Error();
       }
+    }
+    if (numbers.length != 3) {
+      throw new Error();
+    }
+    if (redundantNumbers.size !== 3) {
+      throw new Error();
     }
     return numbers;
   },
@@ -40,7 +38,7 @@ const Controller = {
     }
   },
 
-  async validateRegame(isRegame) {
+  validateRegame(isRegame) {
     if (Number(isRegame) === 1 || Number(isRegame) === 2) {
       return Number(isRegame);
     } else {

@@ -13,10 +13,9 @@ class App {
       model.generateComputerNumbers();
       while (true) {
         const input = await Input.inputNumbers().then((result) => {
-          return result;
+          return result.split("").map((newNumber) => Number(newNumber));
         });
-        const stringToNumber = await Controller.stringToNumber(input);
-        const validatedNumbers = await Controller.validate(stringToNumber);
+        const validatedNumbers = Controller.validate(input);
         model.updatdeData(null, validatedNumbers);
         const calculateCounts = model.calculate();
         const makedResultString = Controller.makeResultString(calculateCounts);
@@ -28,7 +27,7 @@ class App {
       const shouldRegame = await Input.shouldRegame().then((result) => {
         return result;
       });
-      isRegame = await Controller.validateRegame(shouldRegame);
+      isRegame = Controller.validateRegame(shouldRegame);
     }
     MissionUtils.Console.close();
   }
