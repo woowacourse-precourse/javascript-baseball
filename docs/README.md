@@ -27,7 +27,6 @@
 - Computer
 
   - makeRandomNumber
-  - setRandomNumber
 
 - User
 
