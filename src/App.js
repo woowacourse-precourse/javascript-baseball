@@ -59,11 +59,11 @@ class App {
 
   runSelectResult(userSelect) {
     if (userSelect === '1') this.startGame();
-    if (userSelect === '2') {
-      Console.print('게임 종료');
-      Console.close();
-    }
+    if (userSelect === '2') OutputView.printGameEnd();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
