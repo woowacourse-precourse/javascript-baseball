@@ -9,6 +9,20 @@ const OutputView = {
     Console.print('게임 종료');
     Console.close();
   },
+
+  printGameHint(hint) {
+    let { ball: ball, strike: strike } = hint;
+    this.checkGameHint(ball, strike);
+  },
+
+  checkGameHint(ball, strike) {
+    let resultArr = [];
+    if (ball === 0 && strike === 0) Console.print('낫싱');
+    if (ball > 0) resultArr.push(`${ball}볼`);
+    if (strike > 0) resultArr.push(`${strike}스트라이크`);
+
+    Console.print(resultArr.join(' '));
+  },
 };
 
 module.exports = OutputView;

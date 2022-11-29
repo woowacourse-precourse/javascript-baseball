@@ -29,16 +29,17 @@ class App {
     this.userInputNum = gameNum;
     INPUT_CHECK.checkInputValidation(this.userInputNum);
 
-    this.getGameResult();
+    this.gameResult();
     this.inputGameNum();
   }
 
-  getGameResult() {
-    GAME_RESULT.getGameHint(
+  gameResult() {
+    const getGameHint = GAME_RESULT.gameCounter(
       this.userInputNum.split('').map(Number),
       this.COMPUTER_NUM
     );
-    if (GAME_RESULT.strikeNum === 3) this.inputGameOver();
+    OutputView.printGameHint(getGameHint);
+    if (getGameHint.strike === 3) this.inputGameOver();
   }
 
   inputGameOver() {
