@@ -1,4 +1,5 @@
 const { BASEBALL, ERROR } = require('../constants/Constants');
+const BaseballGameController = require('../BaseballGameController');
 
 const Validate = {
   checkUserNumber(userNumber) {
@@ -6,7 +7,7 @@ const Validate = {
     this.isNumber(userNumber);
     this.isRangeNumber(USER_NUMBER_ARRAY);
     this.isUnique(USER_NUMBER_ARRAY);
-    return USER_NUMBER_ARRAY;
+    BaseballGameController.checkResult(USER_NUMBER_ARRAY);
   },
 
   getUserNumberArray(userNumber) {

@@ -7,7 +7,7 @@ class App {
   }
 
   play() {
-    BaseballGameController.startGame(this.baseballGame);
+    BaseballGameController.start(this.baseballGame);
   }
 }
 
