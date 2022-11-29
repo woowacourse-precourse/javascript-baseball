@@ -1,8 +1,9 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const App = require('../src/App');
-const GET_COMPUTER_NUM = require('../src/Baseball/computerNum');
-const INPUT_CHECK = require('../src/Baseball/inputCheck');
-const GAME_RESULT = require('../src/Baseball/gameResult');
+
+const GET_COMPUTER_NUM = require('../src/model/computerNum');
+const INPUT_CHECK = require('../src/utils/inputCheck');
+const GAME_RESULT = require('../src/model/gameResult');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
