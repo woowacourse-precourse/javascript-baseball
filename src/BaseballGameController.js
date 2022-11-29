@@ -1,11 +1,13 @@
+const { Console } = require('@woowacourse/mission-utils');
+const { BASEBALL } = require('./constants/Constants');
+const BaseballGame = require('./BaseballGame');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
 const BaseballGameController = {
-  start(baseballGame) {
-    this.baseballGame = baseballGame;
+  start() {
+    this.baseballGame = new BaseballGame();
     OutputView.printStart();
-    this.baseballGame.setAnswerNumber();
   },
 
   userNumber() {
@@ -28,6 +30,19 @@ const BaseballGameController = {
   threeStrike() {
     OutputView.threeStrike();
     InputView.readCommand();
+  },
+
+  checkCommandResult(command) {
+    if (command === BASEBALL.RETRY) {
+      return this.start();
+    }
+    if (command === BASEBALL.END) {
+      return this.end();
+    }
+  },
+
+  end() {
+    Console.close();
   },
 };
 

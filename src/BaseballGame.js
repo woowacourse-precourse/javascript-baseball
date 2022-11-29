@@ -4,6 +4,10 @@ const { BASEBALL } = require('./constants/Constants');
 class BaseballGame {
   #answerNumber = [];
 
+  constructor() {
+    this.setAnswerNumber();
+  }
+
   setAnswerNumber() {
     while (this.#answerNumber.length < BASEBALL.NUMBER_LENGTH) {
       const NUMBER = this.getRandomNumber();
@@ -56,10 +60,6 @@ class BaseballGame {
       }
     });
     return ball;
-  }
-
-  setAnswer(answer) {
-    this.#answerNumber = answer;
   }
 }
 

@@ -10,7 +10,9 @@ const InputView = {
   },
 
   readCommand() {
-    Console.readLine(MESSAGE.COMMAND, (command) => {});
+    Console.readLine(MESSAGE.COMMAND, (command) => {
+      Validate.checkCommand(Number(command));
+    });
   },
 };
 

@@ -43,10 +43,10 @@ const Validate = {
   checkCommand(command) {
     this.isNumber(command);
     this.isCorrect(command);
+    BaseballGameController.checkCommandResult(command);
   },
 
   isCorrect(command) {
-    const COMMAND = Number(command);
     if (!COMMAND === BASEBALL.RETRY && !COMMAND === BASEBALL.END) {
       throw new Error(ERROR.COMMAND);
     }
