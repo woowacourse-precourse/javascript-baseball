@@ -1,9 +1,8 @@
 class BaseballReferee {
-  #ball
-  #Strike;
+  #ball;
+  #strike;
 
-  constructor(userInput, randomNumber) {
-    this.userInput = userInput;
+  constructor(randomNumber) {
     this.randomNumber = randomNumber;
     this.#ball = 0;
     this.#strike = 0;
@@ -11,7 +10,7 @@ class BaseballReferee {
 
   ballCount(userInput, randomNumber) {
     randomNumber.forEach((number, index) => {
-      if(userInput.includes(number) && number !== userInput[index]) {
+      if(userInput.includes(number.toString()) && number.toString() !== userInput[index]) {
         this.#ball += 1;
       }
     })
@@ -21,18 +20,18 @@ class BaseballReferee {
 
   strikeCount(userInput, randomNumber) {
     randomNumber.forEach((number, index) => {
-      if(userInput.includes(number) && number === userInput[index]) {
-        this.#Strike += 1;
+      if(number.toString() === userInput[index]) {
+        this.#strike += 1;
       }
     })
 
-    return this.#Strike;
+    return this.#strike;
   }
 
-  compare() {
-    const ball = this.ballCount(this.userInput, this.randomNumber);
-    const strike = this.strikeCount(this.userInput, this.randomNumber);
-    if(strike === 3) return '3스트라이크\n3개의 숫자를 모두 맞히셨습니다! 게임 종료';
+  compare(userInput) {
+    const ball = this.ballCount(userInput, this.randomNumber);
+    const strike = this.strikeCount(userInput, this.randomNumber);
+    if(strike === 3) return true;
     if(strike === 0) return `${ball}볼`;
     if(ball === 0) return `${strike}스트라이크`;
     if(strike === 0 && ball === 0) return `낫싱`;
@@ -40,3 +39,5 @@ class BaseballReferee {
     return `${ball}볼 ${strike}스트라이크`;
   }
 }
+
+module.exports = BaseballReferee;
