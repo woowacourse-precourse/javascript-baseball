@@ -2,11 +2,14 @@ const BASEBALL = {
   NUMBER_START: 1,
   NUMBER_END: 9,
   NUMBER_LENGTH: 3,
+  RETRY: 1,
+  END: 2,
 };
 
 const MESSAGE = {
   START: '숫자 야구 게임을 시작합니다.',
   READ_USER_NUMBER: '숫자를 입력해주세요 : ',
+  THREE_STRIKE: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
 };
 
 const ERROR = {

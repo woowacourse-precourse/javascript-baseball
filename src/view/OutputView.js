@@ -9,6 +9,10 @@ const OutputView = {
   printHintMessage(hintMessage) {
     Console.print(hintMessage);
   },
+
+  printThreeStrike() {
+    Console.print(MESSAGE.THREE_STRIKE);
+  },
 };
 
 module.exports = OutputView;

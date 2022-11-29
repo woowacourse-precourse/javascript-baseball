@@ -13,16 +13,20 @@ const BaseballGameController = {
   },
 
   checkResult(userNumberArray) {
+    this.hint(userNumberArray);
     if (this.baseballGame.isThreeStrike(userNumberArray)) {
-      return;
+      return this.threeStrike();
     }
-    return this.hint(userNumberArray);
+    return this.userNumber();
   },
 
   hint(userNumberArray) {
     const HINT_MESSAGE = this.baseballGame.getHint(userNumberArray);
     OutputView.printHint(HINT_MESSAGE);
-    this.userNumber();
+  },
+
+  threeStrike() {
+    OutputView.threeStrike();
   },
 };
 
