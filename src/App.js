@@ -3,6 +3,9 @@ const GAME_RESULT = require('./Baseball/gameResult');
 const GET_COMPUTER_NUM = require('./Baseball/computerNum');
 const INPUT_CHECK = require('./Baseball/inputCheck');
 
+const InputView = require('../src/view/InputView');
+const OutputView = require('../src/view/OutputView');
+
 class App {
   constructor() {
     this.userInputNum = '';
@@ -10,56 +13,55 @@ class App {
   }
 
   play() {
-    Console.print('숫자 야구 게임을 시작합니다.');
+    OutputView.printGameStart();
     this.startGame();
   }
 
   startGame() {
     this.COMPUTER_NUM = GET_COMPUTER_NUM.getComputerRandomNum();
-    this.playGame();
+    this.inputGameNum();
   }
 
-  playGame() {
-    Console.readLine('숫자를 입력해주세요 : ', (answer) => {
-      this.userInputNum = answer;
-      const IS_VALID_INPUT = INPUT_CHECK.checkInputValidation(
-        this.userInputNum
-      );
-
-      if (IS_VALID_INPUT === false) {
-        throw new Error('유효하지 않은 숫자를 입력했습니다.');
-      }
-
-      if (IS_VALID_INPUT) {
-        this.gameRule();
-        this.playGame();
-      }
-    });
+  inputGameNum() {
+    InputView.readInputNum(this.getInputNum.bind(this));
   }
 
-  gameRule() {
+  getInputNum(gameNum) {
+    this.userInputNum = gameNum;
+    const IS_VALID_INPUT = INPUT_CHECK.checkInputValidation(this.userInputNum);
+    if (IS_VALID_INPUT === false) {
+      throw new Error('유효하지 않은 숫자를 입력했습니다.');
+    }
+
+    this.getGameResult();
+    this.inputGameNum();
+  }
+
+  getGameResult() {
     GAME_RESULT.getGameHint(
       this.userInputNum.split('').map(Number),
       this.COMPUTER_NUM
     );
+    if (GAME_RESULT.strikeNum === 3) this.inputGameOver();
+  }
 
-    if (GAME_RESULT.strikeNum === 3) {
-      Console.readLine(
-        '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
-        (userSelect) => {
-          const IS_VALID_SELECT = INPUT_CHECK.checkUserSelect(userSelect);
+  inputGameOver() {
+    InputView.readRetry(this.getGameOverSelect.bind(this));
+  }
 
-          if (IS_VALID_SELECT === false) {
-            throw new Error('유효하지 않은 숫자를 입력했습니다.');
-          }
+  getGameOverSelect(userSelect) {
+    const IS_VALID_SELECT = INPUT_CHECK.checkUserSelect(userSelect);
+    if (IS_VALID_SELECT === false) {
+      throw new Error('유효하지 않은 숫자를 입력했습니다.');
+    }
+    this.runSelectResult(userSelect);
+  }
 
-          if (userSelect === '1') this.startGame();
-          if (userSelect === '2') {
-            Console.print('게임 종료');
-            Console.close();
-          }
-        }
-      );
+  runSelectResult(userSelect) {
+    if (userSelect === '1') this.startGame();
+    if (userSelect === '2') {
+      Console.print('게임 종료');
+      Console.close();
     }
   }
 }
