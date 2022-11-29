@@ -27,6 +27,7 @@ const BaseballGameController = {
 
   threeStrike() {
     OutputView.threeStrike();
+    InputView.readCommand();
   },
 };
 

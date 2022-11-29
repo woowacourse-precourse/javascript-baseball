@@ -8,6 +8,10 @@ const InputView = {
       Validate.checkUserNumber(userNumber);
     });
   },
+
+  readCommand() {
+    Console.readLine(MESSAGE.COMMAND, (command) => {});
+  },
 };
 
 module.exports = InputView;
