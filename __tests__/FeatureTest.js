@@ -72,7 +72,7 @@ describe('기능 테스트', () => {
     const userNum = [1, 9, 8];
 
     const count = GAME_RESULT.gameCounter(userNum, computerNum);
-    const expectedValue = [1, 1];
+    const expectedValue = { ball: 1, strike: 1 };
 
     expect(count).toEqual(expectedValue);
   });
