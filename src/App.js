@@ -1,5 +1,4 @@
-const InputView = require('./view/InputView');
-const OutputView = require('./view/OutputView');
+const BaseballGameController = require('./BaseballGameController');
 const BaseballGame = require('./BaseballGame');
 
 class App {
@@ -8,9 +7,7 @@ class App {
   }
 
   play() {
-    OutputView.printStart();
-    this.baseballGame.makeAnswerNumber();
-    InputView.readUserNumber();
+    BaseballGameController.startGame(this.baseballGame);
   }
 }
 
