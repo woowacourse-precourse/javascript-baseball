@@ -39,6 +39,18 @@ const Validate = {
       throw new Error(ERROR.DUPLICATE);
     }
   },
+
+  checkCommand(command) {
+    this.isNumber(command);
+    this.isCorrect(command);
+  },
+
+  isCorrect(command) {
+    const COMMAND = Number(command);
+    if (!COMMAND === BASEBALL.RETRY && !COMMAND === BASEBALL.END) {
+      throw new Error(ERROR.COMMAND);
+    }
+  },
 };
 
 module.exports = Validate;
