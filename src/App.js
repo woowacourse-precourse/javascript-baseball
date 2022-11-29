@@ -1,4 +1,3 @@
-const { Console } = require('@woowacourse/mission-utils');
 const GAME_RESULT = require('./Baseball/gameResult');
 const GET_COMPUTER_NUM = require('./Baseball/computerNum');
 const INPUT_CHECK = require('./Baseball/inputCheck');
@@ -28,10 +27,7 @@ class App {
 
   getInputNum(gameNum) {
     this.userInputNum = gameNum;
-    const IS_VALID_INPUT = INPUT_CHECK.checkInputValidation(this.userInputNum);
-    if (IS_VALID_INPUT === false) {
-      throw new Error('유효하지 않은 숫자를 입력했습니다.');
-    }
+    INPUT_CHECK.checkInputValidation(this.userInputNum);
 
     this.getGameResult();
     this.inputGameNum();
@@ -50,10 +46,7 @@ class App {
   }
 
   getGameOverSelect(userSelect) {
-    const IS_VALID_SELECT = INPUT_CHECK.checkUserSelect(userSelect);
-    if (IS_VALID_SELECT === false) {
-      throw new Error('유효하지 않은 숫자를 입력했습니다.');
-    }
+    INPUT_CHECK.checkUserSelect(userSelect);
     this.runSelectResult(userSelect);
   }
 
