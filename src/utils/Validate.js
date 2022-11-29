@@ -23,7 +23,7 @@ const Validate = {
   isRangeNumber(userNumberArray) {
     userNumberArray.forEach((userNumber) => {
       if (
-        !userNumber >= BASEBALL.NUMBER_START ||
+        !userNumber >= BASEBALL.NUMBER_START &&
         !userNumber <= BASEBALL.NUMBER_END
       ) {
         throw new Error(ERROR.RANGE);
