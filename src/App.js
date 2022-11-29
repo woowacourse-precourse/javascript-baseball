@@ -1,28 +1,17 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Computer = require("./Computer");
 
 class App {
 
   constructor() {
-    this.computerNumber = [];
     this.userNumber = [];
     this.selectNumber = 0;
   }
 
   play() {
     MissionUtils.Console.print("숫자 야구 게임을 시작합니다.");
-    this.setComputerNumber();
+    Computer.setAnswer();
     this.userInputNumber();
-  }
-
-  setComputerNumber() {
-    this.computerNumber = [];
-    while (this.computerNumber.length < 3) {
-      const number = MissionUtils.Random.pickNumberInRange(1, 9);
-      if (!this.computerNumber.includes(number)) {
-        this.computerNumber.push(number);
-      }
-    }
-    return this.computerNumber;
   }
 
   userInputNumber() {
@@ -50,7 +39,8 @@ class App {
 
   numberCompare() {
     this.getHint();
-    if (this.computerNumber.toString() === this.userNumber.toString()) {
+    console.log(Computer.answer)
+    if (Computer.answer.toString() === this.userNumber.toString()) {
       return this.gameWin();
     } else {
       this.userInputNumber();
@@ -77,9 +67,9 @@ class App {
   getBall() {
     let ballCount = 0;
 
-    for (let idx = 0; idx < this.computerNumber.length; idx++) {
-      if (this.userNumber[idx] !== this.computerNumber[idx] &&
-        this.computerNumber.includes(this.userNumber[idx])) {
+    for (let idx = 0; idx < Computer.answer.length; idx++) {
+      if (this.userNumber[idx] !== Computer.answer[idx] &&
+        Computer.answer.includes(this.userNumber[idx])) {
           ballCount++;
         }
       }
@@ -89,8 +79,8 @@ class App {
   getStrike() {
     let strikeCount = 0;
 
-    for (let idx = 0; idx < this.computerNumber.length; idx++) {
-      if (this.userNumber[idx] === this.computerNumber[idx]) {
+    for (let idx = 0; idx < Computer.answer.length; idx++) {
+      if (this.userNumber[idx] === Computer.answer[idx]) {
         strikeCount++;
       }
     }
@@ -124,7 +114,7 @@ class App {
   }
 
   startNewGame() {
-    this.setComputerNumber();
+    Computer.setAnswer();
     this.userInputNumber();
   }
 
