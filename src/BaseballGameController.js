@@ -8,6 +8,7 @@ const BaseballGameController = {
   start() {
     this.baseballGame = new BaseballGame();
     OutputView.printStart();
+    this.userNumber();
   },
 
   userNumber() {
