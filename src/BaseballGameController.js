@@ -1,44 +1,37 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { BASEBALL } = require('./constants/Constants');
 const BaseballGame = require('./BaseballGame');
-const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 
 const BaseballGameController = {
   start() {
     this.baseballGame = new BaseballGame();
     OutputView.printStart();
-    this.userNumber();
-  },
-
-  userNumber() {
-    InputView.readUserNumber();
   },
 
   checkResult(userNumberArray) {
     this.hint(userNumberArray);
     if (this.baseballGame.isThreeStrike(userNumberArray)) {
-      return this.threeStrike();
+      return true;
     }
-    return this.userNumber();
+    return false;
   },
 
   hint(userNumberArray) {
     const HINT_MESSAGE = this.baseballGame.getHint(userNumberArray);
-    OutputView.printHint(HINT_MESSAGE);
+    OutputView.printHintMessage(HINT_MESSAGE);
   },
 
   threeStrike() {
-    OutputView.threeStrike();
-    InputView.readCommand();
+    OutputView.printThreeStrike();
   },
 
   checkCommandResult(command) {
     if (command === BASEBALL.RETRY) {
-      return this.start();
+      return true;
     }
     if (command === BASEBALL.END) {
-      return this.end();
+      return false;
     }
   },
 
