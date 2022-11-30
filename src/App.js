@@ -4,6 +4,7 @@ const {
   ERROR_MESSAGES,
   OUTPUT_MESSAGES,
 } = require('./utils/Constants');
+const InputCheck = require('./utils/validates');
 
 class App {
 
@@ -24,40 +25,12 @@ class App {
     return computerNumber;
   };
 
-  checkUserInputType(userInput) {
-    for (let i = 0; i < 3; i++) {
-      if (isNaN(Number(userInput[i]))) {
-        throw new Error(ERROR_MESSAGES.TYPE_ERROR);
-      }
-    }
-  };
-
-  checkUserInputLength(userInput) {
-    if (userInput.length !== 3) {
-      throw new Error(ERROR_MESSAGES.LENGTH_ERROR);
-    }
-  };
-
-  checkUserInputIsDiff(userInput) {
-    let uniqueNumber = new Set(userInput);
-    if (uniqueNumber.size !== userInput.length) {
-      throw new Error(ERROR_MESSAGES.OVERLAP_ERROR);
-    }
-  };
-
-  checkUserInputNumberRange(userInput) {
-    for (let i = 0; i < 3; i++) {
-      if (Number[userInput[i]] > 1 || Number[userInput[i]] < 9) {
-        throw new Error(ERROR_MESSAGES.RANGE_ERROR);
-      }
-    }
-  };
-
   checkUserInput(userInput) {
-    this.checkUserInputType(userInput);
-    this.checkUserInputLength(userInput);
-    this.checkUserInputIsDiff(userInput);
-    this.checkUserInputNumberRange(userInput);
+    const inputCheck = new InputCheck;
+    inputCheck.checkUserInputType(userInput);
+    inputCheck.checkUserInputLength(userInput);
+    inputCheck.checkUserInputIsDiff(userInput);
+    inputCheck.checkUserInputNumberRange(userInput);
   };
 
   checkingScore(userInputNumber, computerNumber) {
