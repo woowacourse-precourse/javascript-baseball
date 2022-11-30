@@ -11,12 +11,12 @@ class App {
     this.referee = new Referee();
   }
 
-  playBall() {
+  play() {
     MissionUtils.Console.print(MESSAGE.START);
-    this.play();
+    this.playBall();
   }
 
-  play() {
+  playBall() {
     const computerNumber = this.computer.makeRandomNumber();
     this.start(computerNumber);
   }
@@ -26,21 +26,24 @@ class App {
       const userNumber = this.player.makeUserNumber(userInput);
       const userInputValidation = this.player.validateInput(userNumber);
 
-      if (userInputValidation === false) throw new Error(MESSAGE.ERROR);
+      if (userInputValidation === false) return this.throwError();
 
       MissionUtils.Console.print(
         this.referee.ballCount(userNumber, computerNumber)
       );
 
-      if (this.referee.ballCount(userNumber, computerNumber) === MESSAGE.OUT)
-        this.end();
-      if (this.referee.ballCount(userNumber, computerNumber) !== MESSAGE.OUT)
-        this.start(computerNumber);
+      if (this.referee.ballCount(userNumber, computerNumber) === MESSAGE.OUT) {
+        return this.end();
+      }
+
+      if (this.referee.ballCount(userNumber, computerNumber) !== MESSAGE.OUT) {
+        return this.start(computerNumber);
+      }
     });
   }
 
   restart() {
-    this.play();
+    this.playBall();
   }
 
   exit() {
@@ -56,9 +59,13 @@ class App {
       if (userNumber === NUMBER.EXIT) this.exit();
     });
   }
+
+  throwError() {
+    throw "Error";
+  }
 }
 
 const numberbaseball = new App();
-numberbaseball.playBall();
+numberbaseball.play();
 
 module.exports = App;
