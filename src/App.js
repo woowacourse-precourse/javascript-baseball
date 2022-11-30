@@ -3,7 +3,7 @@ const {
   INPUT_MESSAGE,
   ERROR_MESSAGE,
   PRINT_MESSAGE,
-} = require("./component/component");
+} = require("./model/component");
 
 const COMPUTER_NUMBER = [];
 let strikeBallCount = [0, 0];
