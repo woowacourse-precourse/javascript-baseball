@@ -27,10 +27,11 @@ const BaseballGameController = {
   },
 
   checkCommandResult(command) {
-    if (command === BASEBALL.RETRY) {
+    const COMMAND = Number(command);
+    if (COMMAND === BASEBALL.RETRY) {
       return true;
     }
-    if (command === BASEBALL.END) {
+    if (COMMAND === BASEBALL.END) {
       return false;
     }
   },

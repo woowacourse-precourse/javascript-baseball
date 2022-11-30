@@ -17,9 +17,8 @@ const InputView = {
 
   readCommand() {
     Console.readLine(MESSAGE.COMMAND, (command) => {
-      const COMMAND = Number(command);
-      Validate.checkCommand(COMMAND);
-      if (BaseballGameController.checkCommandResult(COMMAND)) {
+      Validate.checkCommand(command);
+      if (BaseballGameController.checkCommandResult(command)) {
         BaseballGameController.start();
         return this.readUserNumber();
       }

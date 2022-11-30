@@ -14,7 +14,7 @@ const Validate = {
   },
 
   isNumber(userNumber) {
-    if (isNaN(Number(userNumber))) {
+    if (isNaN(Number(userNumber)) || String(userNumber).includes(' ')) {
       throw new Error(ERROR.NAN);
     }
   },
@@ -46,7 +46,8 @@ const Validate = {
   },
 
   isCorrect(command) {
-    if (!command === BASEBALL.RETRY && !command === BASEBALL.END) {
+    const COMMAND = Number(command);
+    if (!(COMMAND === BASEBALL.RETRY) && !(COMMAND === BASEBALL.END)) {
       throw new Error(ERROR.COMMAND);
     }
   },
