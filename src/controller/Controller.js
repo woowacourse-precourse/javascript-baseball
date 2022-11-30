@@ -6,9 +6,12 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class Controller {
+  #userInputNum;
+  #COMPUTER_NUM;
+
   constructor() {
-    this.userInputNum = '';
-    this.COMPUTER_NUM;
+    this.#userInputNum = '';
+    this.#COMPUTER_NUM;
   }
 
   start() {
@@ -17,7 +20,7 @@ class Controller {
   }
 
   startGame() {
-    this.COMPUTER_NUM = GET_COMPUTER_NUM.getComputerRandomNum();
+    this.#COMPUTER_NUM = GET_COMPUTER_NUM.getComputerRandomNum();
     this.inputGameNum();
   }
 
@@ -26,8 +29,8 @@ class Controller {
   }
 
   getInputNum(gameNum) {
-    this.userInputNum = gameNum;
-    INPUT_CHECK.checkInputValidation(this.userInputNum);
+    this.#userInputNum = gameNum;
+    INPUT_CHECK.checkInputValidation(this.#userInputNum);
 
     this.gameResult();
     this.inputGameNum();
@@ -35,8 +38,8 @@ class Controller {
 
   gameResult() {
     const getGameHint = GAME_RESULT.gameCounter(
-      this.userInputNum.split('').map(Number),
-      this.COMPUTER_NUM
+      this.#userInputNum.split('').map(Number),
+      this.#COMPUTER_NUM
     );
     OutputView.printGameHint(getGameHint);
     if (getGameHint.strike === 3) this.inputGameOver();
