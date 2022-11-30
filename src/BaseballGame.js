@@ -5,16 +5,22 @@ class BaseballGame {
   #answerNumber = [];
 
   constructor() {
-    this.setAnswerNumber();
+    this.getAnswer();
   }
 
-  setAnswerNumber() {
-    while (this.#answerNumber.length < BASEBALL.NUMBER_LENGTH) {
+  setAnswerNumber(answerNumber) {
+    this.#answerNumber = answerNumber;
+  }
+
+  getAnswer() {
+    const ANSWER = [];
+    while (ANSWER.length < BASEBALL.NUMBER_LENGTH) {
       const NUMBER = this.getRandomNumber();
-      if (!this.#answerNumber.includes(NUMBER)) {
-        this.#answerNumber.push(NUMBER);
+      if (!ANSWER.includes(NUMBER)) {
+        ANSWER.push(NUMBER);
       }
     }
+    this.setAnswerNumber(ANSWER);
   }
 
   getRandomNumber() {
