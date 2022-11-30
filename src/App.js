@@ -1,7 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const {
   INPUT_MESSAGES,
-  ERROR_MESSAGES,
   OUTPUT_MESSAGES,
 } = require('./utils/Constants');
 const InputCheck = require('./utils/validates');
