@@ -1,9 +1,14 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const {
+  INPUT_MESSAGES,
+  ERROR_MESSAGES,
+  OUTPUT_MESSAGES,
+} = require('./utils/Constants');
 
 class App {
 
   play() {
-    MissionUtils.Console.print('숫자 야구 게임을 시작합니다.');
+    MissionUtils.Console.print(OUTPUT_MESSAGES.GAME_START);
     const COMPUTER_NUMBER = this.computerRandomNumber();
     this.gameStart(COMPUTER_NUMBER)
   };
@@ -22,28 +27,28 @@ class App {
   checkUserInputType(userInput) {
     for (let i = 0; i < 3; i++) {
       if (isNaN(Number(userInput[i]))) {
-        throw new Error('숫자로 입력해주세요.');
+        throw new Error(ERROR_MESSAGES.TYPE_ERROR);
       }
     }
   };
 
   checkUserInputLength(userInput) {
     if (userInput.length !== 3) {
-      throw new Error('3자리로 입력해주세요.');
+      throw new Error(ERROR_MESSAGES.LENGTH_ERROR);
     }
   };
 
   checkUserInputIsDiff(userInput) {
     let uniqueNumber = new Set(userInput);
     if (uniqueNumber.size !== userInput.length) {
-      throw new Error('중복없이 숫자를 입력해주세요.');
+      throw new Error(ERROR_MESSAGES.OVERLAP_ERROR);
     }
   };
 
   checkUserInputNumberRange(userInput) {
     for (let i = 0; i < 3; i++) {
       if (Number[userInput[i]] > 1 || Number[userInput[i]] < 9) {
-        throw new Error('1 ~ 9 사이의 숫자를 입력해주세요.');
+        throw new Error(ERROR_MESSAGES.RANGE_ERROR);
       }
     }
   };
@@ -92,7 +97,7 @@ class App {
   };
 
   gameStart(COMPUTER_NUMBER) {
-    MissionUtils.Console.readLine('숫자를 입력해주세요.', (input) => {
+    MissionUtils.Console.readLine(INPUT_MESSAGES.INPUT_NUMBER_MESSAGES, (input) => {
 
       let userInput = input.split('');
 
@@ -104,7 +109,7 @@ class App {
       MissionUtils.Console.print(ANSWER);
 
       if (this.checkStrike(SCORE)) {
-        MissionUtils.Console.print('3개의 숫자를 모두 맞히셨습니다! 게임 종료');
+        MissionUtils.Console.print(OUTPUT_MESSAGES.GAME_OVER);
         this.gameRestart();
       } else {
         this.gameStart(COMPUTER_NUMBER);
@@ -113,7 +118,7 @@ class App {
   };
 
   gameRestart() {
-    MissionUtils.Console.readLine('게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.', (input) => {
+    MissionUtils.Console.readLine(INPUT_MESSAGES.RESTART_GAME_MESSAGES, (input) => {
       if (input == 1) {
         this.play();
       } else if (input == 2) {
