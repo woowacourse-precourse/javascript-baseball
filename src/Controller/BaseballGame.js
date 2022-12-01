@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const Computer = require('../Model/Computer');
-const { GAME } = require('../Utils/Constant');
+const { GAME, ERROR_MESSAGE } = require('../Utils/Constant');
 const { generate } = require('../Utils/RandomNumberGenerator');
 const { askRestartOrEnd } = require('../View/InputView');
 const { startView, resultCompare, gameOverWithSuccess } = require('../View/OutputView');
@@ -59,7 +59,7 @@ class BaseballGame {
     } else if (number === GAME.END) {
       return this.end();
     }
-    throw '[ERROR] 1 또는 2를 입력하세요';
+    throw ERROR_MESSAGE.RESTART_OR_NOT;
   }
 }
 
