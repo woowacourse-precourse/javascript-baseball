@@ -4,5 +4,11 @@ const MESSAGE = {
   RESTART_OR_NOT: '\n다시 시작하려면 1, 게임을 종료하려면 2를 입력하세요\n',
 };
 
-module.exports = { MESSAGE };
+const GAME = {
+  LENGTH: 3,
+  RESTART: '1',
+  END: '2',
+};
+
+module.exports = { MESSAGE, GAME };
 
