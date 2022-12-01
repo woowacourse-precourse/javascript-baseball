@@ -127,14 +127,12 @@ class App {
 			this.isValidChoice(playerChoice);
 
 			if (playerChoice === CHOICE.PLAY_AGAIN) {
+				Console.print(MESSAGES.RESTART_GAME);
 				this.initGame();
 				this.playGame();
 			} else if (playerChoice === CHOICE.EXIT) {
 				Console.print(MESSAGES.END_GAME);
 				Console.close();
-			} else {
-				Console.print(MESSAGES.FORMAT_ERROR_CHOICE);
-				throw Error(MESSAGES.FORMAT_ERROR_CHOICE);
 			}
 		});
 	}
