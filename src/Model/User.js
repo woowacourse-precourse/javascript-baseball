@@ -1,4 +1,3 @@
-const MissionUtils = require('@woowacourse/mission-utils');
 const { ERROR_MESSAGE, GAME } = require('../Utils/Constant');
 const { readUserNumber } = require('../View/InputView');
 
