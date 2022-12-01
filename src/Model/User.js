@@ -12,13 +12,17 @@ class User {
     return this.#number;
   }
 
-  getNumber() {
-    readUserNumber(this);
+  getNumber(i) {
+    return this.#number[i];
+  }
+
+  inputNumber(game) {
+    readUserNumber(this, game);
   }
 
   setNumber(number) {
     this.validNumber(number);
-    this.#number = number;
+    this.#number = number.split('').map((el) => Number(el));
   }
 
   validNumber(number) {
