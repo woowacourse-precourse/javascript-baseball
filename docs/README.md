@@ -7,82 +7,30 @@
 
 <br><br>
 
-# 구현할 기능 목록
+# 구현할 클래스 목록
 
-<br>
+- Model
 
-## 구현할 클래스 목록
+  - Computer
+  - User
 
-- app
-- user
-- computer
+- View
 
-<br>
+  - InputView
+  - OutputView
 
-## 구현할 메소드 목록
+- Controller
+  - game
 
-- [x] app
+# 구현 메소드 목록
 
-  - [x] startOrRestartApp : app이 user input을 물어보는 동작부터 시작
-  - [x] endApp : app을 종료시킨다.
-  - [x] askRestartAPP: user가 computer의 값을 맞춘 뒤에 재시작할 것인지 끝낼지를 확인한다.
-  - [x] compareUserAndComputerNumber: input으로 받은 user number와 computer number를 비교한다.
-  - [x] compareAnswerMapByCompareUserAndComputer: index를 비교해서 answerMap의 값을 셋팅
-  - [x] initAnswerMap
-  - [x] setAnswerMapByCompareUserAndComputer : user와 computer의 값을 바탕으로 answerMap의 값을 셋팅한다
-  - [x] printResult: answerMap의 값을 바탕으로 비교 결과를 print 한다
-  - [x] compareInputToRestart: input이 1이면 재시작, 2이면 프로세스를 종료한다.
-  - [x] setAnswerMapStrikePlusOne: answerMap의 strike ++ 기능
-  - [x] setAnswerMapBallPlusOne: answerMap의 ball++ 기능
+- Computer
 
-- [x]user
+  - makeRandomNumber
 
-  - [x] getUserNumberFromInput
-  - [x] getInput
-  - [x] setNumberArray
-  - [x] validInput
-  - [x] makeInputToArray
+- User
 
-- [x] computer
+  - setUserNumber
 
-  - [x] setRandomNumberArray
-  - [x] setRandomNumber
-
-# 구현수정
-
-## 이유
-
-> "프로그래밍 요구 사항에서 달리 명시하지 않는 한 파일, 패키지 이름을 수정하거나 이동하지 않는다." 위 구절로 인해 Application Test에서 비동기 함수 테스트로 적용되지 않아, 비동기 함수로 구현 한 것을 동기 함수로 구현하도록 수정
-
-## 구현할 클래스 목록
-
-- app
-- computer
-- function
-
-## 구현할 기능 목록
-
-- [x] app
-
-  - [x] resetCountBoard: countboard를 0,0 으로 초기화 시킨다
-  - [x] compareUserAndComputer: user의 값과 computer의 값을 비교하여, countBoard 최신화
-  - [x] setCountBoard: count Board를 userNumberArray 값을 바탕으로 셋팅한다.
-  - [x] makeResult: countboard를 바탕으로 결과를 나타낸다
-  - [x] decideReprocess: 3스트라이크 여부를 판단하여, process를 다시 돌려야하는지 판단한다.
-  - [x] process: 전체적인 일련의 과정을 나타낸다.
-  - [x] askRestartOrEnd: readline을 통해 재시작할 것인지, 종료할 것인지 묻는다.
-  - [x] restartOrEnd: 실제 재시작 혹은 종료의 동작을 한다.
-
-- [x] computer
-
-  - [x] getRandomNumber: computer의 Number를 설정하기 위해, RandomNumber를 selectedNumber에 없는 것으로 return 한다.
-  - [x] setRandomNumber: computer의 selectedNumber를 setting 한다.
-
-- [x] Function
-
-  - [x] validByRegex: 정규식에 의해 1에서9까지의 수 3자리가 맞는지 확인한다.
-  - [x] validDuplicate: 곂치는 수가 없는지 확인한다.
-  - [x] validInput: 정규식에 의해 확이낳고, 곂치는 수에 의해 확인하여 false, true를 return 한다.
-  - [x] throwInvalidInputError: 올바르지 않은 input 값이라면 throw error를 한다.
-  - [x] validOneOrTwo: 1과 2중에 값이 있는지 확인한다.
-  - [x] makeStringToArray: string으로 받은 input 값을 Array로 바꿔 return 한다.
+- Game
+  - setResult
