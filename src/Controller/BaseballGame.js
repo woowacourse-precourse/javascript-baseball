@@ -1,4 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Computer = require('../Model/Computer');
+const { generate } = require('../Utils/RandomNumberGenerator');
+const { askRestartOrEnd } = require('../View/InputView');
 const { startView, resultCompare, gameOverWithSuccess } = require('../View/OutputView');
 
 class BaseballGame {
@@ -13,7 +16,16 @@ class BaseballGame {
 
   run() {
     startView();
-    this.#user.inputNumber(this);
+    return this.#user.inputNumber(this);
+  }
+
+  restart() {
+    this.#computer = new Computer(generate);
+    return this.#user.inputNumber(this);
+  }
+
+  end() {
+    return MissionUtils.Console.close();
   }
 
   getResult() {
@@ -21,7 +33,6 @@ class BaseballGame {
     let strike = 0;
     const computerArray = this.#computer.number;
     const userArray = this.#user.number;
-    console.log(computerArray, userArray);
     userArray.forEach((el, idx) => {
       if (computerArray.includes(el)) {
         if (computerArray[idx] === el) strike++;
@@ -36,12 +47,19 @@ class BaseballGame {
     resultCompare(ball, strike);
     if (strike === 3) {
       gameOverWithSuccess();
-      return MissionUtils.Console.close();
+      return askRestartOrEnd(this);
     }
     this.#user.inputNumber(this);
   }
 
-  restartOrEnd() {}
+  restartOrEnd(number) {
+    if (number === '1') {
+      return this.restart();
+    } else if (number === '2') {
+      return this.end();
+    }
+    throw '[ERROR] 1 또는 2를 입력하세요';
+  }
 }
 
 module.exports = BaseballGame;

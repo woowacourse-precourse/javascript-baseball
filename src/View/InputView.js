@@ -8,6 +8,12 @@ const InputView = {
       game.compareNumber();
     });
   },
+
+  askRestartOrEnd(game) {
+    Console.readLine(MESSAGE.RESTART_OR_NOT, (number) => {
+      game.restartOrEnd(number);
+    });
+  },
 };
 
 module.exports = InputView;
