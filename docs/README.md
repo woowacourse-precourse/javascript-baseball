@@ -12,7 +12,7 @@
 [ ] baseballGame.js - UI 함수 분리
 [ ] model 추가(controller 에서 분리
 [ ] outpuView 손보기
-[x] 예외추가: 맨앞에 0 이 올 경우
+[ ] 예외추가: 맨앞에 0 이 올 경우
 
 [x] package.json: eslint, prettier 삭제 후 커밋
 [x] eslint.json: 환경 변경 (browser to node)
