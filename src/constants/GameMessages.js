@@ -6,6 +6,7 @@ const GAME_MESSAGES = Object.freeze({
   INVALID_FORM: '띄어쓰기 없이 입력해주세요!',
   NOT_A_NUMBER: '숫자만 입력해주세요!',
   DUPLICATED_NUM: '서로 다른 숫자를 입력해주세요!',
+  CANNOT_START_WITH_ZERO: '첫 글자에 0 은 안되올시다',
   REQUIRE_USER_INPUT: (num) => `서로다른 ${num}자리 숫자를 입력해주세요: `,
   ASK_RESTART: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n',
   FORMAT_ERROR_CHOICE: '입력값은 반드시 1 또는 2여야 합니다.',
