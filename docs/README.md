@@ -17,5 +17,6 @@
 [x] package.json: eslint, prettier 삭제 후 커밋
 [x] eslint.json: 환경 변경 (browser to node)
 [ ] 불필요한 else 문 삭제
+[x] 불필요한 return 삭제
 
 --------------------------------- 2차 코드 리뷰 후
