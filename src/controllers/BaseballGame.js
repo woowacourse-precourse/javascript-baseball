@@ -1,5 +1,5 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { GAME_MESSAGES, UNITS, CHOICE } = require('../constants/index');
+const { GAME_MESSAGES, UNITS, CHOICE, NUMBER } = require('../constants/index');
 const { InputView, OutputView } = require('../views/index');
 
 class BaseballGame {
@@ -18,7 +18,7 @@ class BaseballGame {
   initGame() {
     this.#computerNumArr = [];
 
-    while (this.#computerNumArr.length < 3) {
+    while (this.#computerNumArr.length < NUMBER.MAX_NUMBER_LENGTH) {
       let number = Random.pickNumberInRange(1, 9);
       if (!this.#computerNumArr.includes(number))
         this.#computerNumArr.push(number);
