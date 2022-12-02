@@ -3,10 +3,10 @@ const {Console} = require("@woowacourse/mission-utils");
 const InputView = {
 
   readbaseballThreeNumber(callback) {
-    Console.readLine("숫자를 입력해주세요 : ",
-    (threeNumber) => {
-      callback(threeNumber.split("").map((value) => parseInt(value,10)))
-    });
+    Console.readLine("숫자를 입력해주세요 : ", (threeNumber) =>{
+      callback(threeNumber.split('').map((value) => parseInt(value,10)));
+      
+    })
   },
 
   readOptionNumber(callback) {
