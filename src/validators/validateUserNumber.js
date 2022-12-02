@@ -5,6 +5,8 @@ validateUserNumber = (userNumberStr) => {
   const answer = userNumberStr.replace(REGEX.SPACE, '');
   const { length } = answer;
 
+  if (answer[0] === '0') throw new Error(GAME_MESSAGES.CANNOT_START_WITH_ZERO);
+
   if (userNumberStr !== answer) throw new Error(GAME_MESSAGES.INVALID_FORM);
 
   if (isNaN(answer)) throw new Error(GAME_MESSAGES.NOT_A_NUMBER);
