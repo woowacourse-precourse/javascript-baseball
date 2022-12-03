@@ -4,7 +4,7 @@ const isvalidNumber = new IsvalidNumber()
 
 describe("사용자 입력값에 중복이 있으면 예외 발생", () => {
   test("중복이 있는 경우", () => {
-    const input = "122";
+    const input = [1,2,2];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("중복되지 않는 숫자를 입력하세요.");
@@ -13,21 +13,21 @@ describe("사용자 입력값에 중복이 있으면 예외 발생", () => {
 
 describe("사용자 입력값이 세자리 초과이거나 미만일 경우 예외 발생", () => {
   test("세자리 초과일 경우", () => {
-    const input = "12345";
+    const input = [1,2,3,4,5];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자 세자리 수를 입력하세요.");
   });
 
   test("세자리 미만일 경우", () => {
-    const input = "12";
+    const input = [1,2];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자 세자리 수를 입력하세요.");
   });
 
   test("공백일 경우", () => {
-    const input = "";
+    const input = [""];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자 세자리 수를 입력하세요.");
@@ -36,21 +36,21 @@ describe("사용자 입력값이 세자리 초과이거나 미만일 경우 예�
 
 describe("숫자 외의 문자를 입력할 경우 에러 발생", () => {
   test("문자를 섞어쓴 경우", () => {
-    const input = "12a";
+    const input = [1,2,"a"] ;
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자만 입력하세요.");
   });
 
   test("문자만 쓴 경우", () => {
-    const input = "abc";
+    const input = ["a","b","c"];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자만 입력하세요.");
   });
 
   test("특수문자를 섞어쓴 경우", () => {
-    const input = "1!2";
+    const input = ["1","!","2"];
     expect(()=>{
       isvalidNumber.isValidUserInput(input)
     }).toThrow("숫자만 입력하세요.");
