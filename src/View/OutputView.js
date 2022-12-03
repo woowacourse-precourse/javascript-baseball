@@ -9,7 +9,7 @@ const OutputView = {
     if(strike === 0 && ball === 0) Console.print(`낫싱`);
     if(strike === 0 && ball > 0) Console.print(`${ball}볼`);
     if(strike > 0 && ball > 0) Console.print(`${ball}볼 ${strike}스트라이크`)
-    if(strike > 0 && ball === 0) Console.print(`${strike}스트라이크`);
+    if(strike > 0 && strike !=3 && ball === 0) Console.print(`${strike}스트라이크`);
   },
 
   printSuccessGuide (){
