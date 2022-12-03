@@ -3,6 +3,7 @@ const OutputView = require('../View/OutputView');
 const BaseballMaker = require('../Model/BaseballMaker');
 const BaseballGame = require('../Model/BaseballGame');
 const IsvalidNumber = require('../util/IsValidNumber');
+const {Console} = require("@woowacourse/mission-utils");
 
 class Controller {
   #uniqueNumberList
