@@ -6,11 +6,16 @@ const IsvalidNumber = require('../util/IsValidNumber');
 
 class Controller {
   #uniqueNumberList
+  #SUCCESS
+  #RETRY
+  #EXIT
 
   constructor(){
     this.#uniqueNumberList;
-    this.SUCCESS = 3;
     this.isvalidNumber = new IsvalidNumber()
+    this.#SUCCESS = 3;
+    this.#RETRY = "1";
+    this.#EXIT = "2";
   }
   Hello() {
     OutputView.printStartGuide();
@@ -35,7 +40,7 @@ class Controller {
     const compareResult = BaseballGame.getHintCount(inputList,this.#uniqueNumberList);
     const [strike,ball] = [compareResult.strickCount,compareResult.ballCount];
 
-    if(strike === this.SUCCESS) this.showSuccess();
+    if(strike === this.#SUCCESS) this.showSuccess();
     this.ShowResult(strike,ball);
     this.getUserNumber();
   }
@@ -55,9 +60,9 @@ class Controller {
 
   isRetry(optionNum){
     this.isvalidNumber.isValidOptionNumber(optionNum);
-    
-    if(optionNum === '1') this.gameStart();
-    if(optionNum === '2') this.GameExit();
+
+    if(optionNum === this.#RETRY) this.gameStart();
+    if(optionNum === this.#EXIT) this.GameExit();
   }
   
   GameExit(){
