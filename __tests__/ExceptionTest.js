@@ -62,20 +62,20 @@ describe("3스트라이크일 경우 1과 2 외의 값을 입력할 경우 에�
     const input = "3";
     expect(()=>{
       isvalidNumber.isValidOptionNumber(input)
-    }).toThrow("1 또는 2 만 입력 가능합니다.");
+    }).toThrow("1 또는 2만 입력 가능합니다.");
   });
 
   test("문자를 입력할 경우", () => {
     const input = "a";
     expect(()=>{
       isvalidNumber.isValidOptionNumber(input)
-    }).toThrow("1 또는 2 만 입력 가능합니다.");
+    }).toThrow("1 또는 2만 입력 가능합니다.");
   });
 
   test("특수문자를 입력할 경우", () => {
     const input = "!";
     expect(()=>{
       isvalidNumber.isValidOptionNumber(input)
-    }).toThrow("1 또는 2 만 입력 가능합니다.");
+    }).toThrow("1 또는 2만 입력 가능합니다.");
   });  
 });
