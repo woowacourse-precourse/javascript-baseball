@@ -3,9 +3,6 @@
 ## App
 
 [O] strike의 값이 3개라면 while 문 종료
-
-## view
-
 [O] inputView.js 에서 3가지 숫자를 사용자에게 입력받는다.
 [O] 입력받은 값을 Controller.js로 전송한다.
 [O] OutputView.js에서 결과를 출력
