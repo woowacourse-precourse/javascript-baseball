@@ -54,9 +54,8 @@ describe("숫자 야구 게임", () => {
     mockQuestions(answers);
 
     expect(() => {
-      // const app = new App();
-      // app.play();
-      Controller.validate(answer)
+      const app = new App();
+      app.play();
     }).toThrow();
   });
 });
