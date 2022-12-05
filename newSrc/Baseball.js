@@ -1,3 +1,5 @@
+const MissionUtils = require('@woowacourse/mission-utils');
+
 class Baseball {
   #thrownBall;
 
@@ -5,8 +7,9 @@ class Baseball {
     this.#thrownBall = this.ballThrow();
   }
 
-  ballThrow() {
-    // todo return = 랜덤번호 생성
+  ballThrow(balls = []) {
+    const drawnBall = MissionUtils.Random.pickNumberInRange(1, 9);
+    return 
   }
 
   getThrownBall() {
