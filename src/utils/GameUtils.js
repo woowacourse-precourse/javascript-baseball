@@ -1,12 +1,10 @@
-const MissionUtils = require("@woowacourse/mission-utils");
+const MissionUtils = require('@woowacourse/mission-utils');
 
 class GameUtils {
-  constructor() {}
-
   static userInputToNumberArr(text) {
-    const splitString = text.split("");
-    let userInputArr = [];
-    splitString.forEach((char) => userInputArr.push(Number(char)));
+    const splitString = text.split('');
+    const userInputArr = [];
+    splitString.forEach(char => userInputArr.push(Number(char)));
 
     return userInputArr;
   }
