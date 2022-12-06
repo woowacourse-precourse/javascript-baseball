@@ -16,8 +16,8 @@ class GameController {
   }
 
   strikeOrBall(number) {
-    // const thrownBall = this.basball.getThrownBall();
-    console.log(number);
+    const thrownBall = this.basball.getThrownBall();
+    
   }
 }
 
