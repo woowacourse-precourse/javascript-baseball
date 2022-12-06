@@ -8,8 +8,8 @@ class GameController {
   }
 
   gameStart() {
-    GamePrinter.show('게임을 시작합니다.');
     const randomNumber = this.basball.getThrownBall();
+    GamePrinter.show('게임을 시작합니다.');
     GamePrinter.show(randomNumber);
   }
 }

@@ -12,7 +12,6 @@ class App {
     this.gameController.gameStart();
   }
 }
-module.exports = App;
 
 const app = new App(new GameController(new Baseball()));
 app.play();

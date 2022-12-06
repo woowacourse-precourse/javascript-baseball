@@ -8,8 +8,14 @@ class Baseball {
   }
 
   ballThrow(balls = []) {
-    const drawnBall = MissionUtils.Random.pickNumberInRange(1, 9);
-    return 
+    const randomNumber = [...balls];
+    if (randomNumber.length === 3) return randomNumber;
+
+    const ball = MissionUtils.Random.pickNumberInRange(1, 9);
+    if (randomNumber.includes(ball)) return this.ballThrow(randomNumber);
+
+    randomNumber.push(ball);
+    return this.ballThrow(randomNumber);
   }
 
   getThrownBall() {
