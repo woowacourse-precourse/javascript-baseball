@@ -1,4 +1,4 @@
-const { Error } = require('./Constant');
+const { Error, Constant } = require('./Constant');
 
 class Validator {
   // eslint-disable-next-line class-methods-use-this
@@ -18,6 +18,12 @@ class Validator {
     if (this.isDuplicated(number)) throw new Error(Error.DUPLICATED);
     if (number.length > 3) throw new Error(Error.NO_RIGTH_NUBER);
     if (number.length < 1) throw new Error(Error.NO_RIGTH_NUBER);
+  }
+
+  static continue(number) {
+    this.isNumber(number);
+    if (number !== Constant.OK && number !== Constant.NO)
+      throw new Error(Error.NO_RIGTH_NUBER);
   }
 }
 

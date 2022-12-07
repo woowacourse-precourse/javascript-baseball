@@ -1,4 +1,4 @@
-const BaseballGame = require("./BaseballGame.js");
+const BaseballGame = require('./BaseballGame.js');
 
 class App {
   play() {
