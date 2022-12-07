@@ -1,10 +1,12 @@
+const { Error } = require('./Constant');
+
 class Validator {
   // eslint-disable-next-line class-methods-use-this
   static isNumber(num) {
     const number = +num;
-    if (typeof number !== 'number') throw new Error('숫자가 아닙니다.');
-    if (!Number.isInteger(number)) throw new Error('숫자가 아닙니다');
-    if (Number.isNaN(number)) throw new Error('숫자가 아니라고요');
+    if (typeof number !== 'number') throw new Error(Error.NOT_NUMBER);
+    if (!Number.isInteger(number)) throw new Error(Error.NOT_NUMBER);
+    if (Number.isNaN(number)) throw new Error(Error.NOT_NUMBER);
   }
 
   static isDuplicated(numbers) {
@@ -13,9 +15,9 @@ class Validator {
 
   static userInput(number) {
     this.isNumber(number);
-    if (this.isDuplicated(number)) throw new Error('중복된 글자');
-    if (number.length > 3) throw new Error('올바른 자릿수 입력하세요');
-    if (number.length < 1) throw new Error('올바른 숫자를 입력하세요');
+    if (this.isDuplicated(number)) throw new Error(Error.DUPLICATED);
+    if (number.length > 3) throw new Error(Error.NO_RIGTH_NUBER);
+    if (number.length < 1) throw new Error(Error.NO_RIGTH_NUBER);
   }
 }
 

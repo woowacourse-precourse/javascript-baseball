@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { Score } = require('./Constant');
 
 class GamePrinter {
   static show(msg) {
@@ -6,10 +7,10 @@ class GamePrinter {
   }
 
   static showResult(strike, ball) {
-    let msg = '';
-    if (ball) msg += `${ball}볼 `;
-    if (strike) msg += `${strike}스트라이크`;
-    if (!strike && !ball) msg = '낫싱';
+    let msg = Score.EMPTY;
+    if (ball) msg += `${ball + Score.BALL} `;
+    if (strike) msg += `${strike + Score.STRIKE}`;
+    if (!strike && !ball) msg = Score.NOTHING;
 
     return this.show(msg);
   }

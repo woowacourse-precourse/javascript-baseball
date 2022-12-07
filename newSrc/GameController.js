@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { Message, Constant } = require('./Constant');
 const GameInput = require('./GameInput');
 const GamePrinter = require('./GamePrinter');
 
@@ -10,17 +11,17 @@ class GameController {
   }
 
   play() {
-    GamePrinter.show('게임을 시작합니다.');
+    GamePrinter.show(Message.START);
     this.gameStart();
   }
 
   gameStart() {
     const randomNumber = this.#baseball.getThrownBall();
     GamePrinter.show(randomNumber); // for quick testing
-    GameInput.userSwing(this.isStrikeOrBall.bind(this));
+    GameInput.userSwing(this.isStrike.bind(this));
   }
 
-  isStrikeOrBall(numbers) {
+  isStrike(numbers) {
     this.#baseball.clearScore();
     numbers.forEach((number, count) => this.setStrikeAndBall(number, count));
     this.announceScore();
@@ -37,21 +38,21 @@ class GameController {
     const { strike, ball } = this.#baseball.getScore();
     GamePrinter.showResult(strike, ball);
 
-    if (strike !== 3) GameInput.userSwing(this.isStrikeOrBall.bind(this));
-    if (strike === 3) this.reStart();
+    if (strike !== Constant.WIN) GameInput.userSwing(this.isStrike.bind(this));
+    if (strike === Constant.WIN) this.reStart();
   }
 
   reStart() {
-    GamePrinter.show('3스트라이크입니다 게임종료.');
+    GamePrinter.show(Message.WIN);
     GameInput.reStartQuestion(this.replayOrNot.bind(this));
   }
 
   replayOrNot(answer) {
-    if (answer === '1') {
+    if (answer === Constant.OK) {
       this.#baseball.setThrwonball();
       this.gameStart();
     }
-    if (answer === '2') MissionUtils.Console.close();
+    if (answer === Constant.No) MissionUtils.Console.close();
   }
 }
 

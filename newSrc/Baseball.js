@@ -1,4 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const { Constant } = require('./Constant');
+
+const { Random } = MissionUtils;
 
 class Baseball {
   #thrownBall;
@@ -9,8 +12,8 @@ class Baseball {
 
   constructor() {
     this.#thrownBall = this.ballThrow();
-    this.#strike = 0;
-    this.#ball = 0;
+    this.#strike = Constant.ZERO;
+    this.#ball = Constant.ZERO;
   }
 
   setThrwonball() {
@@ -19,9 +22,9 @@ class Baseball {
 
   ballThrow(balls = []) {
     const randomNumber = [...balls];
-    if (randomNumber.length === 3) return randomNumber;
+    if (randomNumber.length === Constant.LENGTH) return randomNumber;
 
-    const ball = MissionUtils.Random.pickNumberInRange(1, 9);
+    const ball = Random.pickNumberInRange(Constant.MIN, Constant.MAX);
     if (randomNumber.includes(ball)) return this.ballThrow(randomNumber);
 
     randomNumber.push(ball);
@@ -29,8 +32,8 @@ class Baseball {
   }
 
   clearScore() {
-    this.#strike = 0;
-    this.#ball = 0;
+    this.#strike = Constant.ZERO;
+    this.#ball = Constant.ZERO;
   }
 
   getThrownBall() {
@@ -38,11 +41,11 @@ class Baseball {
   }
 
   setStrike() {
-    this.#strike += 1;
+    this.#strike += Constant.INCREASE;
   }
 
   setBall() {
-    this.#ball += 1;
+    this.#ball += Constant.INCREASE;
   }
 
   getScore() {
