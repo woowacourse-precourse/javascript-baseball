@@ -3,7 +3,17 @@ const MissionUtils = require('@woowacourse/mission-utils');
 class Baseball {
   #thrownBall;
 
+  #strike;
+
+  #ball;
+
   constructor() {
+    this.#thrownBall = this.ballThrow();
+    this.#strike = 0;
+    this.#ball = 0;
+  }
+
+  setThrwonball() {
     this.#thrownBall = this.ballThrow();
   }
 
@@ -18,8 +28,25 @@ class Baseball {
     return this.ballThrow(randomNumber);
   }
 
+  clearScore() {
+    this.#strike = 0;
+    this.#ball = 0;
+  }
+
   getThrownBall() {
     return this.#thrownBall;
+  }
+
+  setStrike() {
+    this.#strike += 1;
+  }
+
+  setBall() {
+    this.#ball += 1;
+  }
+
+  getScore() {
+    return { strike: this.#strike, ball: this.#ball };
   }
 }
 

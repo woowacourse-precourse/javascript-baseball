@@ -9,6 +9,16 @@ class GameInput {
       callback([...answer]);
     });
   }
+
+  static reStartQuestion(callback) {
+    MissionUtils.Console.readLine(
+      '게임을 다시 시작하시겠습니까 다시시작은 1 종료는 2',
+      answer => {
+        // Validator.restart(answer)
+        callback(answer);
+      },
+    );
+  }
 }
 
 module.exports = GameInput;
