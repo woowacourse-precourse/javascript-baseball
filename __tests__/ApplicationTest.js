@@ -41,7 +41,10 @@ describe("숫자 야구 게임", () => {
 
     const app = new App();
     app.play();
+<<<<<<< HEAD
+=======
 
+>>>>>>> parent of 4ad3169 (test: 테스트 성공은 했으나 원본테스트 수정했음)
     messages.forEach((output) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(output));
     });
