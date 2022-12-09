@@ -1,12 +1,18 @@
-const MissionUtils = require("@woowacourse/mission-utils");
-const Validation = require("./Validation.js");
-const ErrorMsg = require("./ErrorMsg.js");
+const MissionUtils = require('@woowacourse/mission-utils');
+const Validation = require('./Validation.js');
+const ErrorMsg = require('./ErrorMsg.js');
+const {
+  START_TEXT,
+  INPUT_TEXT,
+  END_TEXT,
+  REDO_TEXT,
+} = require('./constants/Questions');
 
 const QuestionText = Object.freeze({
-  startText: "숫자 야구 게임을 시작합니다.",
-  inputText: "숫자를 입력해주세요 : ",
-  endText: "3개의 숫자를 모두 맞히셨습니다! 게임 종료",
-  redoText: "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.",
+  startText: '숫자 야구 게임을 시작합니다.',
+  inputText: '숫자를 입력해주세요 : ',
+  endText: '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
+  redoText: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
 });
 
 class GameBuilder {
@@ -27,7 +33,7 @@ class Game {
     this.target = undefined;
 
     this.io = MissionUtils.Console;
-    this.io.print(QuestionText.startText);
+    this.io.print(START_TEXT);
 
     this.userInputArray = [];
     this.validation = new Validation(this.targetLength);
@@ -47,13 +53,13 @@ class Game {
 
   play() {
     this.init();
-    this.start(QuestionText.inputText, this.onGame);
+    this.start(INPUT_TEXT, this.onGame);
   }
 
   finish() {
     try {
-      this.io.print(QuestionText.endText);
-      this.start(QuestionText.redoText, this.isRestart);
+      this.io.print(END_TEXT);
+      this.start(REDO_TEXT, this.isRestart);
     } catch {
       new Error(ErrorMsg.WarningEndMessage);
     }
@@ -73,7 +79,7 @@ class Game {
 
     if (this.isCorrect(strike)) this.finish();
 
-    this.start(QuestionText.inputText, this.onGame);
+    this.start(INPUT_TEXT, this.onGame);
   }
 
   isCorrect(strike) {
@@ -119,7 +125,7 @@ class Game {
   }
 
   showResult(ball, strike) {
-    if (ball == 0 && strike == 0) return "낫싱";
+    if (ball == 0 && strike == 0) return '낫싱';
     else if (ball > 0 && strike == 0) return `${ball}볼`;
     else if (ball == 0 && strike > 0) return `${strike}스트라이크`;
 
