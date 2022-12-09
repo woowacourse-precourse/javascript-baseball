@@ -1,14 +1,13 @@
-const GameBuilder = require("./Game.js");
-
-const LENGTH = 3;
+const GameController = require('./controller/GameController');
+const { GAME_NUMBER_LENGTH } = require('./constants/GameConfig');
 
 class App {
   constructor() {
-    this.game = new GameBuilder().setTargetLength(LENGTH).build();
+    this.game = new GameController();
   }
 
   play() {
-    this.game.play();
+    this.game.onInputNumbers();
   }
 }
 
