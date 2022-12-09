@@ -1,16 +1,13 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
+const outputView = require('./OutputView');
 const NUMBER = require('../constants/gameSetting');
 const MESSAGE = require('../constants/gameMessages');
 
 class App {
   play () {
-    this.printStartGame();
+    outputView.printStartGame();
     this.handleInputAnswer(this.createRandomNumber());
-  }
-
-  printStartGame () {
-    Console.print(MESSAGE.GAME.START);
   }
 
   createRandomNumber () {
@@ -34,11 +31,10 @@ class App {
       this.isRandomInputErrorCase(answer);
 
       if (this.isCorrectNumber(randomNumber, answer)) {
-        Console.print(MESSAGE.GAME.SUCCESS);
-        Console.print(MESSAGE.GAME.FINISH_OPTION);
+        outputView.printCorrect();
         this.checkRestart();
       } else {
-        Console.print(this.resultBaseballRule(randomNumber, answer));
+        outputView.printGameResultCount(this.resultBaseballRule(randomNumber, answer));
         this.handleInputAnswer(randomNumber);
       }
     });
@@ -49,7 +45,7 @@ class App {
       if (this.checkInputRestartExit(input)) {
         this.handleInputAnswer(this.createRandomNumber());
       } else {
-        Console.print(MESSAGE.GAME.FINISH);
+        outputView.printGameFinish();
         Console.close();
       }
     });
