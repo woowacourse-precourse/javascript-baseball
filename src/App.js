@@ -3,6 +3,7 @@ const { Console } = MissionUtils;
 const outputView = require('./OutputView');
 const inputView = require('./InputView');
 const { createRandomNumber } =require('./BaseballNumberMaker');
+const InputValidator = require('../validators/InputValidator');
 const NUMBER = require('../constants/gameSetting');
 const MESSAGE = require('../constants/gameMessages');
 
@@ -14,7 +15,6 @@ class App {
     outputView.printStartGame();
     this.setRandomNumber();
     this.InputAnswer();
-    
   }
 
   setRandomNumber() {
@@ -30,7 +30,7 @@ class App {
   }
 
   handleInputAnswer (answer) {
-      this.isRandomInputErrorCase(answer);
+      InputValidator.isRandomInputErrorCase(answer);
 
       if (this.isCorrectNumber(this.getRandomNumber(), answer)) {
         outputView.printCorrect();
@@ -48,31 +48,12 @@ class App {
 
   checkRestart (input) {
       if (this.checkInputRestartExit(input)) {
-        this.handleInputAnswer(createRandomNumber());
+        this.setRandomNumber();
+        this.InputAnswer();
       } else {
         outputView.printGameFinish();
         Console.close();
       }
-  }
-
-  isRandomInputErrorCase (answer) {
-    const exceptionInput = answer;
-
-    const inputList = exceptionInput?.split('');
-    const setCollection = new Set(inputList);
-    const isSame = setCollection.size !== inputList?.length;
-    const isThreeNumber = exceptionInput?.toString().length !== NUMBER.RANDOM_LENGTH;
-
-    if (
-      exceptionInput?.split('').map(Number)
-        .includes(NUMBER.EXCEPT)
-        || exceptionInput?.split('').includes('-')
-        || isNaN(exceptionInput)
-        || isThreeNumber
-        || isSame
-    ) {
-      throw new Error(MESSAGE.GAME.ERROR);
-    }
   }
 
   isCorrectNumber (randomNumber, answer) {
