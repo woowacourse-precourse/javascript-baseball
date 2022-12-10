@@ -24,7 +24,7 @@ class Controller {
     }
   
     handleInputAnswer (answer) {
-        InputValidator.isRandomInputErrorCase(answer);
+        InputValidator.checkBaseballNumber(answer);
         if (this.isCorrectNumber(this.#baseballGame.getRandomNumber(), answer)) {
           outputView.printCorrect();
           this.InputRestart();
@@ -40,7 +40,7 @@ class Controller {
     }
   
     checkRestart (input) {
-        if (this.checkInputRestartExit(input)) {
+        if (InputValidator.checkInputRestartExit(input)) {
           this.#baseballGame.setRandomNumber();
           this.InputAnswer();
         } else {
@@ -68,12 +68,7 @@ class Controller {
       + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
       return resultBaseball ? resultBaseball : MESSAGE.GAME.NOTHING;
     }
-  
-    checkInputRestartExit (input) {
-      if (input === NUMBER.RESTART) return true;
-      if (input === NUMBER.EXIT) return false;
-      throw new Error(MESSAGE.GAME.ERROR);
-    }
+
 }
 
 module.exports = Controller;
