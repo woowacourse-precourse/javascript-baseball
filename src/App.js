@@ -1,5 +1,4 @@
-const GameController = require('./controller/GameController');
-const { GAME_NUMBER_LENGTH } = require('./constants/GameConfig');
+const GameController = require("./controller/GameController");
 
 class App {
   constructor() {

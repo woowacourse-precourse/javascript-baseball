@@ -1,6 +1,6 @@
-const InputView = require('../InputView');
-const OutputView = require('../OutputView');
-const GameModel = require('../models/GameModel');
+const InputView = require("../InputView");
+const OutputView = require("../OutputView");
+const GameModel = require("../models/GameModel");
 
 class GameController {
   #gameModel;
@@ -10,10 +10,14 @@ class GameController {
     this.#gameModel = new GameModel();
   }
 
-  validation() {}
-
   onInputRecrusive(inputFunc, callback) {
-    inputFunc(callback);
+    inputFunc((input) => {
+      try {
+        callback(input);
+      } catch (e) {
+        OutputView.printError(e);
+      }
+    });
   }
 
   onInputNumbers() {

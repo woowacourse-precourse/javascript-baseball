@@ -1,5 +1,5 @@
-const { MakeNumbers } = require('../utils/MakeTargetNumbers');
-const PlayerModel = require('./PlayerModel');
+const { MakeNumbers } = require("../utils/MakeTargetNumbers");
+const PlayerModel = require("./PlayerModel");
 
 class GameModel {
   #player;
@@ -16,8 +16,6 @@ class GameModel {
     const ball = this.countBall();
     const strike = this.countStrike();
 
-    // console.log(`${strike}, ${ball}`);
-
     if (this.isCorrect(strike)) this.#gameStatus = true;
 
     const result = this.buildResultText(ball, strike);
@@ -26,7 +24,7 @@ class GameModel {
   }
 
   buildResultText(ball, strike) {
-    if (ball == 0 && strike == 0) return '낫싱';
+    if (ball == 0 && strike == 0) return "낫싱";
     else if (ball > 0 && strike == 0) return `${ball}볼`;
     else if (ball == 0 && strike > 0) return `${strike}스트라이크`;
 
