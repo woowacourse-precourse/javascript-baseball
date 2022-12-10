@@ -1,54 +1,58 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { Console, Random } = MissionUtils;
+const { Console } = MissionUtils;
 const outputView = require('./OutputView');
+const inputView = require('./InputView');
+const { createRandomNumber } =require('./BaseballNumberMaker');
 const NUMBER = require('../constants/gameSetting');
 const MESSAGE = require('../constants/gameMessages');
 
 class App {
+
+  #randomNumber;
+
   play () {
     outputView.printStartGame();
-    this.handleInputAnswer(this.createRandomNumber());
+    this.setRandomNumber();
+    this.InputAnswer();
+    
   }
 
-  createRandomNumber () {
-    const randomNumberList = [];
-
-    while (randomNumberList.length < NUMBER.RANDOM_LENGTH) {
-      const collectRandomNumber = Random.pickNumberInRange(
-        NUMBER.FIRST,
-        NUMBER.LAST,
-      );
-      if (!randomNumberList.includes(collectRandomNumber)) {
-        randomNumberList.push(collectRandomNumber);
-      }
-    }
-
-    return randomNumberList;
+  setRandomNumber() {
+    this.#randomNumber = createRandomNumber();
   }
 
-  handleInputAnswer (randomNumber) {
-    Console.readLine(MESSAGE.GAME.INPUT, (answer) => {
+  getRandomNumber() {
+    return this.#randomNumber;
+  }
+
+  InputAnswer() {
+    inputView.askAnswer(this.handleInputAnswer.bind(this));
+  }
+
+  handleInputAnswer (answer) {
       this.isRandomInputErrorCase(answer);
 
-      if (this.isCorrectNumber(randomNumber, answer)) {
+      if (this.isCorrectNumber(this.getRandomNumber(), answer)) {
         outputView.printCorrect();
-        this.checkRestart();
+        this.InputRestart();
       } else {
-        outputView.printGameResultCount(this.resultBaseballRule(randomNumber, answer));
-        this.handleInputAnswer(randomNumber);
+        outputView.printGameResultCount(this.resultBaseballRule(this.getRandomNumber(), answer));
+        this.InputAnswer();
       }
-    });
+    
   }
 
-  checkRestart () {
-    Console.readLine('', (input) => {
+  InputRestart () {
+    inputView.askRestart(this.checkRestart.bind(this));
+  }
+
+  checkRestart (input) {
       if (this.checkInputRestartExit(input)) {
-        this.handleInputAnswer(this.createRandomNumber());
+        this.handleInputAnswer(createRandomNumber());
       } else {
         outputView.printGameFinish();
         Console.close();
       }
-    });
   }
 
   isRandomInputErrorCase (answer) {

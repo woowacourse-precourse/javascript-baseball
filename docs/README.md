@@ -75,7 +75,7 @@
 <br/>
 
 # 리팩토링 목록
-[ ] `InputView`, `OutputView` 파일 분리를 통해 비즈니스 로직과 UI로직 분리  
+[x] `InputView`, `OutputView` 파일 분리를 통해 비즈니스 로직과 UI로직 분리  
 [x] 랜덤 숫자 생성 로직 `BaseballNumberMaker` 파일로 분리  
 [ ] `Validator` 파일로 예외처리 로직 분리    
 [ ] 함수 라인을 15라인으로 제한하면서 한가지 기능만을 하도록 함    
