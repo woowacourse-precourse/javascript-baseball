@@ -1,4 +1,7 @@
 const App = require('../src/App');
+const BaseballNumberMaker = require('../src/BaseballNumberMaker');
+const Controller = require('../src/Controller');
+const InputValidator = require('../validators/InputValidator');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -28,7 +31,7 @@ describe('기능 테스트', () => {
     const logSpy = getLogSpy();
 
     const app = new App();
-    app.printStartGame();
+    app.play();
 
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining('숫자 야구 게임을 시작합니다.'),
@@ -38,11 +41,9 @@ describe('기능 테스트', () => {
   test('[기능 2] 랜덤 수 생성 및 저장', () => {
     const randoms = [1, 5, 5, 5, 8, 9];
 
-    const app = new App();
-
     mockRandoms(randoms);
 
-    expect(app.createRandomNumber()).toStrictEqual([1, 5, 8]);
+    expect(BaseballNumberMaker.createRandomNumber()).toStrictEqual([1, 5, 8]);
   });
 
   test('[기능 4] 게임 예상 숫자 입력 받은 후 예외사항 판단', () => {
@@ -60,8 +61,9 @@ describe('기능 테스트', () => {
     const randoms = [1, 3, 2];
     const answer = '132';
 
-    const app = new App();
-    expect(app.isCorrectNumber(randoms, answer)).toBeTruthy();
+    const controller = new Controller();
+
+    expect(controller.CorrectNumber(randoms, answer)).toBeTruthy();
   });
 
   test('[기능 6] 입력값에 따른 결과 값 출력', () => {
@@ -87,7 +89,7 @@ describe('기능 테스트', () => {
     const app = new App();
 
     expect(() => {
-      app.checkInputRestartExit(input);
+      InputValidator.checkInputRestartExit(input);
     }).toThrow('잘못입력함. 종료');
   });
 
@@ -96,8 +98,9 @@ describe('기능 테스트', () => {
     const answers = ['132', '1', '567', '2'];
     const logSpy = getLogSpy();
     const messages = [
+      '숫자 야구 게임을 시작합니다.',
       '3스트라이크',
-      '3개의 숫자를 모두 맞히셨습니다! 게임 종료\n게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
+      '3개의 숫자를 모두 맞히셨습니다! 게임 종료',
       '3스트라이크',
       '게임 종료',
     ];
