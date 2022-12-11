@@ -5,34 +5,23 @@ class InputValidator {
 
     static checkExceptNumber (answer) {
         if(answer?.split('').map(Number)
-        .includes(NUMBER.EXCEPT)){
-            throw new Error(MESSAGE.GAME.ERROR);
-        }
-        return true;
+        .includes(NUMBER.EXCEPT)) throw new Error(MESSAGE.GAME.ERROR);
+        
     }
 
     static checkNumber (answer) {
-        if(isNaN(answer)){
-            throw new Error(MESSAGE.GAME.ERROR);
-        }
-        return true;
+        if(isNaN(answer)) throw new Error(MESSAGE.GAME.ERROR);
     }
 
     static checkThreeNumber (answer) {
-        if(answer?.toString().length !== NUMBER.RANDOM_LENGTH){
-            throw new Error(MESSAGE.GAME.ERROR);
-        }
-        return true;
+        if(answer?.toString().length !== NUMBER.RANDOM_LENGTH) throw new Error(MESSAGE.GAME.ERROR);
+        
     }
 
     static checkDuplication (answer) {
         const inputList = answer?.split('');
         const setCollection = new Set(inputList);
-
-        if(setCollection.size !== inputList?.length){
-            throw new Error(MESSAGE.GAME.ERROR);
-        }
-        return true;
+        if(setCollection.size !== inputList?.length) throw new Error(MESSAGE.GAME.ERROR);
     }
 
     static checkBaseballNumber (number) {
