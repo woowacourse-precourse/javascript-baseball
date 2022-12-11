@@ -3,7 +3,6 @@ const outputView = require('./OutputView');
 const inputView = require('./InputView');
 const BaseballGame = require('./BaseballGame');
 const InputValidator = require('../validators/InputValidator');
-const NUMBER = require('../constants/gameSetting');
 const MESSAGE = require('../constants/gameMessages');
 
 class Controller {
@@ -29,10 +28,14 @@ class Controller {
       this.InputRestart();
       return;
     }
+    this.IncorrectAnswer(answer);
+    this.InputAnswer();
+  }
+
+  IncorrectAnswer (answer) {
     outputView.printGameResultCount(
       this.ResultBaseballRule(this.#baseballGame.getRandomNumber(), answer),
     );
-    this.InputAnswer();
   }
 
   InputRestart () {
@@ -54,21 +57,22 @@ class Controller {
   }
 
   ResultBaseballRule (randomNumber, answer) {
-    const random = randomNumber;
     const input = answer.split('').map(Number);
-
     let strikeCount = 0;
     let ballCount = 0;
-    for (let idx = 0; idx < random?.length; idx++) {
-      if (random.includes(input[idx]) && random[idx] === input[idx])
-        strikeCount += 1;
-      if (random.includes(input[idx]) && random[idx] !== input[idx])
-        ballCount += 1;
+    for (let idx = 0; idx < randomNumber?.length; idx++) {
+      if (randomNumber.includes(input[idx])) {
+        randomNumber[idx] === input[idx] ? strikeCount += 1 : ballCount += 1;
+      }
     }
+    return this.GetResult(ballCount, strikeCount);
+  }
 
-    const resultBaseball = (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '')
-        + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
-    return resultBaseball ? resultBaseball : MESSAGE.GAME.NOTHING;
+  GetResult (ballCount, strikeCount) {
+    if (ballCount || strikeCount) {
+      return (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '') + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
+    }
+    return MESSAGE.GAME.NOTHING;
   }
 }
 

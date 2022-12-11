@@ -78,7 +78,7 @@
 [x] `InputView`, `OutputView` 파일 분리를 통해 비즈니스 로직과 UI로직 분리  
 [x] 랜덤 숫자 생성 로직 `BaseballNumberMaker` 파일로 분리  
 [x] `Validator` 파일로 예외처리 로직 분리    
-[ ] 함수 라인을 15라인으로 제한하면서 한가지 기능만을 하도록 함    
+[x] 함수 라인을 15라인으로 제한하면서 한가지 기능만을 하도록 함    
 [x] MVC패턴을 적용하여 객체 분리     
 [ ] Airbnb JS Style Guide에 따라 코드 작성
 [x] else 지양
