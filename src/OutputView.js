@@ -9,11 +9,7 @@ const OutputView = {
     print(END_TEXT);
   },
 
-  printRoundResult(message) {
-    print(message);
-  },
-
-  printError(message) {
+  printMessage(message) {
     print(message);
   },
 };

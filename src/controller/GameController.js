@@ -15,7 +15,7 @@ class GameController {
       try {
         callback(input);
       } catch (e) {
-        OutputView.printError(e);
+        OutputView.printMessage(e);
       }
     });
   }
@@ -28,7 +28,7 @@ class GameController {
   }
 
   inputNumbersCallback(input) {
-    OutputView.printRoundResult(this.#gameModel.onGame(input));
+    OutputView.printMessage(this.#gameModel.onGame(input));
 
     if (this.#gameModel.getGameStatus()) {
       OutputView.printEndText();
