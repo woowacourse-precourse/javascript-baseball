@@ -3,13 +3,11 @@ const Controller = require('./Controller');
 
 class App {
 
-  constructor () {
-    this.controller = new Controller();
-    }
+  #controller = new Controller();
 
   play () {
     outputView.printStartGame();
-    this.controller.StartGame();
+    this.#controller.StartGame();
   }
 
 }
