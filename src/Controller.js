@@ -7,70 +7,69 @@ const NUMBER = require('../constants/gameSetting');
 const MESSAGE = require('../constants/gameMessages');
 
 class Controller {
+  #baseballGame;
 
-    #baseballGame;
+  constructor () {
+    this.#baseballGame = new BaseballGame();
+  }
 
-    constructor() {
-        this.#baseballGame = new BaseballGame();
-    }
+  StartGame () {
+    this.#baseballGame.setRandomNumber();
+    this.InputAnswer();
+  }
 
-    startGame() {
-        this.#baseballGame.setRandomNumber();
-        this.InputAnswer();
+  InputAnswer () {
+    inputView.askAnswer(this.HandleInputAnswer.bind(this));
+  }
+
+  HandleInputAnswer (answer) {
+    InputValidator.checkBaseballNumber(answer);
+    if (this.CorrectNumber(this.#baseballGame.getRandomNumber(), answer)) {
+      outputView.printCorrect();
+      this.InputRestart();
+      return;
     }
-  
-    InputAnswer() {
-      inputView.askAnswer(this.handleInputAnswer.bind(this));
+    outputView.printGameResultCount(
+      this.ResultBaseballRule(this.#baseballGame.getRandomNumber(), answer),
+    );
+    this.InputAnswer();
+  }
+
+  InputRestart () {
+    inputView.askRestart(this.CheckRestart.bind(this));
+  }
+
+  CheckRestart (input) {
+    if (InputValidator.checkInputRestartExit(input)) {
+      this.#baseballGame.setRandomNumber();
+      this.InputAnswer();
+      return;
     }
-  
-    handleInputAnswer (answer) {
-        InputValidator.checkBaseballNumber(answer);
-        if (this.isCorrectNumber(this.#baseballGame.getRandomNumber(), answer)) {
-          outputView.printCorrect();
-          this.InputRestart();
-        } else {
-          outputView.printGameResultCount(this.resultBaseballRule(this.#baseballGame.getRandomNumber(), answer));
-          this.InputAnswer();
-        }
-      
-    }
-  
-    InputRestart () {
-      inputView.askRestart(this.checkRestart.bind(this));
-    }
-  
-    checkRestart (input) {
-        if (InputValidator.checkInputRestartExit(input)) {
-          this.#baseballGame.setRandomNumber();
-          this.InputAnswer();
-        } else {
-          outputView.printGameFinish();
-          Console.close();
-        }
-    }
-  
-    isCorrectNumber (randomNumber, answer) {
-      return randomNumber?.join('') === answer;
-    }
-  
-    resultBaseballRule (randomNumber, answer) {
-      const random = randomNumber;
-      const input = answer.split('').map(Number);
-  
-      let strikeCount = 0;
-      let ballCount = 0;
-      for (let idx = 0; idx < random?.length; idx++) {
-        if (random.includes(input[idx]) && random[idx] === input[idx]) strikeCount += 1;
-        if (random.includes(input[idx]) && random[idx] !== input[idx]) ballCount += 1;
-      }
-  
-      const resultBaseball = (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '')
-      + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
-      return resultBaseball ? resultBaseball : MESSAGE.GAME.NOTHING;
+    outputView.printGameFinish();
+    Console.close();
+  }
+
+  CorrectNumber(randomNumber, answer) {
+    return randomNumber?.join('') === answer;
+  }
+
+  ResultBaseballRule (randomNumber, answer) {
+    const random = randomNumber;
+    const input = answer.split('').map(Number);
+
+    let strikeCount = 0;
+    let ballCount = 0;
+    for (let idx = 0; idx < random?.length; idx++) {
+      if (random.includes(input[idx]) && random[idx] === input[idx])
+        strikeCount += 1;
+      if (random.includes(input[idx]) && random[idx] !== input[idx])
+        ballCount += 1;
     }
 
+    const resultBaseball = (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '')
+        + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
+    return resultBaseball ? resultBaseball : MESSAGE.GAME.NOTHING;
+  }
 }
 
 module.exports = Controller;
-
-
