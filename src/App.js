@@ -7,7 +7,7 @@ class App {
 
   play () {
     outputView.printStartGame();
-    this.#controller.StartGame();
+    this.#controller.startGame();
   }
 
 }

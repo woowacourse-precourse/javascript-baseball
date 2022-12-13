@@ -63,7 +63,7 @@ describe('기능 테스트', () => {
 
     const controller = new Controller();
 
-    expect(controller.CorrectNumber(randoms, answer)).toBeTruthy();
+    expect(controller.correctNumber(randoms, answer)).toBeTruthy();
   });
 
   test('[기능 6] 입력값에 따른 결과 값 출력', () => {

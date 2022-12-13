@@ -12,51 +12,51 @@ class Controller {
     this.#baseballGame = new BaseballGame();
   }
 
-  StartGame () {
+  startGame () {
     this.#baseballGame.setRandomNumber();
-    this.InputAnswer();
+    this.inputAnswer();
   }
 
-  InputAnswer () {
-    inputView.askAnswer(this.HandleInputAnswer.bind(this));
+  inputAnswer () {
+    inputView.askAnswer(this.handleInputAnswer.bind(this));
   }
 
-  HandleInputAnswer (answer) {
+  handleInputAnswer (answer) {
     InputValidator.checkBaseballNumber(answer);
-    if (this.CorrectNumber(this.#baseballGame.getRandomNumber(), answer)) {
+    if (this.correctNumber(this.#baseballGame.getRandomNumber(), answer)) {
       outputView.printCorrect();
-      this.InputRestart();
+      this.inputRestart();
       return;
     }
-    this.IncorrectAnswer(answer);
-    this.InputAnswer();
+    this.incorrectAnswer(answer);
+    this.inputAnswer();
   }
 
-  IncorrectAnswer (answer) {
+  incorrectAnswer (answer) {
     outputView.printGameResultCount(
-      this.ResultBaseballRule(this.#baseballGame.getRandomNumber(), answer),
+      this.resultBaseballRule(this.#baseballGame.getRandomNumber(), answer),
     );
   }
 
-  InputRestart () {
-    inputView.askRestart(this.CheckRestart.bind(this));
+  inputRestart () {
+    inputView.askRestart(this.checkRestart.bind(this));
   }
 
-  CheckRestart (input) {
+  checkRestart (input) {
     if (InputValidator.checkInputRestartExit(input)) {
       this.#baseballGame.setRandomNumber();
-      this.InputAnswer();
+      this.inputAnswer();
       return;
     }
     outputView.printGameFinish();
     Console.close();
   }
 
-  CorrectNumber(randomNumber, answer) {
+  correctNumber(randomNumber, answer) {
     return randomNumber?.join('') === answer;
   }
 
-  ResultBaseballRule (randomNumber, answer) {
+  resultBaseballRule (randomNumber, answer) {
     const input = answer.split('').map(Number);
     let strikeCount = 0;
     let ballCount = 0;
@@ -65,10 +65,10 @@ class Controller {
         randomNumber[idx] === input[idx] ? strikeCount += 1 : ballCount += 1;
       }
     }
-    return this.GetResult(ballCount, strikeCount);
+    return this.getResult(ballCount, strikeCount);
   }
 
-  GetResult (ballCount, strikeCount) {
+  getResult (ballCount, strikeCount) {
     if (ballCount || strikeCount) {
       return (ballCount ? `${ballCount}${MESSAGE.GAME.BALL} ` : '') + (strikeCount ? `${strikeCount}${MESSAGE.GAME.STRIKE}` : '');
     }
