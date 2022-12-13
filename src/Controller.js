@@ -60,7 +60,7 @@ class Controller {
     const input = answer.split('').map(Number);
     let strikeCount = 0;
     let ballCount = 0;
-    for (let idx = 0; idx < randomNumber?.length; idx++) {
+    for (let idx = 0; idx < randomNumber?.length; idx += 1) {
       if (randomNumber.includes(input[idx])) {
         randomNumber[idx] === input[idx] ? strikeCount += 1 : ballCount += 1;
       }
