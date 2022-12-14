@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "jest": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "overrides": [
+    {
+      "files": ["__tests__/*.js"],
+      "rules": {
+        "max-lines-per-function": "off"
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "indent": "error",
+    "max-depth": ["error", 2],
+    "max-lines-per-function": ["error", 10],
+    "max-params": ["error", 3]
+  }
+}
