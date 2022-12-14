@@ -1,76 +1,13 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
-const CheckValidation = require("./CheckValidation");
-const CheckBallCount = require("./CheckBallCount");
-const PrintBallCount = require("./PrintBallCount");
-const { GUIDE_MESSAGE } = require("./constants");
+const Controller = require("./controller/Controller");
 
 class App {
-  constructor() {
-    this.targetNumber = [];
-  }
-  makeRandomNumbers() {
-    this.targetNumber = [];
-    while (this.targetNumber.length < 3) {
-      const number = Random.pickNumberInRange(1, 9);
-      if (!this.targetNumber.includes(number)) {
-        this.targetNumber.push(number);
-      }
-    }
-  }
   play() {
-    Console.print(GUIDE_MESSAGE.START_MSG);
-    this.playGame();
-  }
-  playGame() {
-    this.makeRandomNumbers();
-    this.inputNumber(this.targetNumber);
-  }
-
-  inputNumber(targetNumber) {
-    Console.readLine(GUIDE_MESSAGE.PROCESS_MSG, (answer) => {
-      CheckValidation(answer);
-      this.setGuessNumber(answer, targetNumber);
-    });
-  }
-
-  setGuessNumber(answer, targetNumber) {
-    let userGuessedNumber = answer.split("").map((v) => +v);
-    this.printBallCount(targetNumber, userGuessedNumber);
-  }
-
-  printBallCount(targetNumber, userGuessedNumber) {
-    let [ball, strike] = CheckBallCount(targetNumber, userGuessedNumber);
-    PrintBallCount(ball, strike);
-    this.gameOver(strike, targetNumber);
-  }
-
-  gameOver(strike, targetNumber) {
-    strike > 2
-      ? (Console.print(GUIDE_MESSAGE.CORRECT_MSG), this.manageGame())
-      : this.inputNumber(targetNumber);
-  }
-
-  manageGame() {
-    Console.readLine(GUIDE_MESSAGE.MANAGE_GAME_MSG, (answer) => {
-      switch (answer) {
-        case "1":
-          this.reset();
-          break;
-        case "2":
-          this.exit();
-          break;
-        default:
-          throw new Error(GUIDE_MESSAGE.MANAGE_GAME_ERROR_MSG);
-      }
-    });
-  }
-  reset() {
-    this.playGame();
-  }
-  exit() {
-    Console.print(GUIDE_MESSAGE.FINISH_MSG);
-    Console.close();
+    const controller = new Controller();
+    controller.startGame();
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
