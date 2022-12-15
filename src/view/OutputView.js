@@ -6,11 +6,19 @@ const OutputView = {
     Console.print(message);
   },
 
-  renderGameStartCommand() {},
+  renderGameStartCommand() {
+    this.output(GAME_MESSAGE.game_start);
+  },
 
-  renderGameTrailResultCommand() {},
+  renderGameTrailResultCommand(trailResult) {
+    trailResult = GAME_MESSAGE.game_result.concat(trailResult);
+    this.output(trailResult);
+  },
 
-  renderGameWinner() {},
+  renderGameWinnerCommand(gameWinner) {
+    gameWinnerCommand = `${GAME_MESSAGE.game_winner} ${gameWinner}`;
+    this.output(gameWinnerCommand);
+  },
 };
 
 module.exports = OutputView;

@@ -146,9 +146,9 @@ north: ---
 
 ### 2. OutputView
 
-- [] 자동차 게임 시작 메세지 출력 renderGameStartCommand
-- [] 각 시도에 대한 자동차 게임 결과 출력 renderGameTrailResultCommand
-- [] 최종 우승자 출력 renderGameWinner
+- [x] 자동차 게임 시작 메세지 출력 renderGameStartCommand
+- [x] 각 시도에 대한 자동차 게임 결과 출력 renderGameTrailResultCommand
+- [x] 최종 우승자 출력 renderGameWinner
 
 ## Model
 
