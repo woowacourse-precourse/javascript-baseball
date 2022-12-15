@@ -1,6 +1,7 @@
 const GameView = require('./GameView');
 
 class CarView extends GameView {
+  // retryWhenError: 에러 발생 시 에러 문구 출력 후 재시작
   #retryWhenError(callerFunction, callback) {
     return input => {
       try {
@@ -12,6 +13,18 @@ class CarView extends GameView {
     };
   }
 
+  // closeWhenError: 에러 발생 시 에러 문구 출력 후 종료
+  #closeWhenError(callback) {
+    return input => {
+      try {
+        callback(input);
+      } catch (error) {
+        this.#errorHandler(error);
+        this.outputView.close();
+      }
+    };
+  }
+
   #errorHandler(error) {
     console.log(error.message);
   }
@@ -19,6 +32,7 @@ class CarView extends GameView {
   inputCarNameList(callback) {
     this.inputView.inputCarNameList(
       this.#retryWhenError(this.inputCarNameList.bind(this), callback),
+      // this.#closeWhenError(callback),
     );
   }
 

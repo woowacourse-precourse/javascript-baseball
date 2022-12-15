@@ -6,6 +6,10 @@ const OutputView = {
     Console.print(message);
   },
 
+  close() {
+    Console.close();
+  },
+
   renderGameStartCommand() {
     this.output(GAME_MESSAGE.game_start);
   },
