@@ -6,11 +6,11 @@ const InputView = {
     Console.readLine(message, callback);
   },
 
-  inputCarNameList() {
+  inputCarNameList(callback) {
     this.input(GAME_MESSAGE.input_car_name, callback);
   },
 
-  inputTrailCnt() {
+  inputTrailCnt(callback) {
     this.input(GAME_MESSAGE.input_game_trial, callback);
   },
 };

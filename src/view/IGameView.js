@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constants';
+const { ERROR_MESSAGE } = require('../constants');
 
 class IGameView {
   errorBoundary(callerFunction, callback) {

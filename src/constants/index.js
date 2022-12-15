@@ -23,5 +23,4 @@ module.exports = {
   GAME_MESSAGE,
   ERROR_MESSAGE,
   RESULT,
-  REGEX,
 };

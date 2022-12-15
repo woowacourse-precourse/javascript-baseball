@@ -7,7 +7,24 @@ class CarCtrl extends GameCtrl {
     this.model = model;
   }
 
-  start() {}
+  start() {
+    this.view.renderGameStartCommand();
+    this.#setTrailCarList();
+  }
+
+  #setTrailCarList() {
+    this.view.inputCarNameList(carNameList => {
+      this.model.setCarNameList(carNameList);
+      this.#setTrailCnt();
+    });
+  }
+
+  #setTrailCnt() {
+    this.view.inputTrailCnt(trailCnt => {
+      this.model.setTrailCnt(trailCnt);
+      this.gameProcess();
+    });
+  }
 
   gameProcess() {}
 

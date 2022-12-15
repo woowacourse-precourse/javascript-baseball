@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../constants';
+const { ERROR_MESSAGE } = require('../constants');
 
 class IGameCtrl {
   start() {
@@ -16,6 +16,6 @@ class IGameCtrl {
   askToReplayGame() {
     throw Error(ERROR_MESSAGE.interface_class);
   }
-};
+}
 
 module.exports = IGameCtrl;
