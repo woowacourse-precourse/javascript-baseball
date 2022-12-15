@@ -14,8 +14,9 @@ const OutputView = {
     this.output(GAME_MESSAGE.game_result);
   },
 
-  renderGameTrailResultCommand(trailResult) {
-    this.output(trailResult);
+  renderGameTrailResultCommand(gameResult) {
+    gameResult = GAME_MESSAGE.game_result.concat(trailResult);
+    this.output(gameResult);
   },
 
   renderGameWinnerCommand(gameWinner) {

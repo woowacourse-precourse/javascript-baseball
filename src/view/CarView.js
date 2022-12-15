@@ -19,6 +19,10 @@ class CarView extends GameView {
     this.outputView.renderGameStartCommand();
   }
 
+  renderGameExecutionResult() {
+    this.outputView.renderGameExecutionResult();
+  }
+
   renderGameTrailResultCommand(trailResult) {
     this.outputView.renderGameTrailResultCommand(trailResult);
   }
