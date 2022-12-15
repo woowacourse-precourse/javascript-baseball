@@ -1,15 +1,18 @@
-const { Console } = require('@woowacourse/mission-utils');
-const Game = require('./components/Game');
-const { MESSAGE } = require('./constant/baseball');
+const CarView = require('./view/CarView');
+const CarModel = require('./model/CarModel');
+const CarCtrl = require('./controller/CarCtrl');
+const InputView = require('./view/InputView');
+const OutputView = require('./view/OutputView');
 
 class App {
   constructor() {
-    this.game = new Game();
+    this.view = new CarView(InputView, OutputView);
+    this.model = new CarModel();
+    this.ctrl = new CarCtrl(this.view, this.model);
   }
 
   play() {
-    Console.print(MESSAGE.START);
-    this.game.start();
+    this.ctrl.start();
   }
 }
 
