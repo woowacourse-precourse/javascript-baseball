@@ -11,6 +11,17 @@ class GameView extends IGameView {
     }
   }
 
+  retryWhenError(callerFunction, callback) {
+    return input => {
+      try {
+        callback(input);
+      } catch (error) {
+        this.errorHandler(error);
+        callerFunction(callback);
+      }
+    };
+  }
+
   input(message, callback) {
     this.inputView.input(message, callback);
   }
@@ -22,6 +33,6 @@ class GameView extends IGameView {
   close() {
     this.outputView.close();
   }
-};
+}
 
 module.exports = GameView;

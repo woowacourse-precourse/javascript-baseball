@@ -4,20 +4,17 @@ const GameModel = require('./GameModel');
 class CarModel extends GameModel {
   #carNameList = [];
   #trailCnt = 0;
-  #carAdvanceCnt = {};
 
-  constructor() {
-    super();
+  splitCarNameList(carNameList) {
+    return carNameList.split(', ');
   }
 
   setCarNameList(carNameList) {
-    carNameList = carNameList.split(', ');
     this.#carNameList = carNameList;
   }
 
   initTrailCnt(trailCnt) {
-    trailCnt = Number(trailCnt);
-    this.#trailCnt = trailCnt;
+    this.#trailCnt = Number(trailCnt);
   }
 
   reduceTrailCnt() {
@@ -30,10 +27,6 @@ class CarModel extends GameModel {
 
   getTrailCnt() {
     return this.#trailCnt;
-  }
-
-  getCarAdvanceCnt() {
-    return this.#carAdvanceCnt;
   }
 
   initCarAdvanceCnt() {

@@ -1,18 +1,18 @@
 const GameView = require('./GameView');
 
 class CarView extends GameView {
-  constructor(inputView, outputView) {
-    super();
-    this.inputView = inputView;
-    this.outputView = outputView;
+  errorHandler(error) {
+    console.log(error.message);
   }
 
   inputCarNameList(callback) {
-    this.inputView.inputCarNameList(callback);
+    this.inputView.inputCarNameList(
+      this.retryWhenError(this.inputCarNameList.bind(this), callback),
+    );
   }
 
   inputTrailCnt(callback) {
-    this.inputView.inputTrailCnt(callback);
+    this.inputView.inputTrailCnt(this.retryWhenError(this.inputTrailCnt.bind(this), callback));
   }
 
   renderGameStartCommand() {

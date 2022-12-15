@@ -13,6 +13,13 @@ const ERROR_MESSAGE = deepFreeze({
   interface_class: '메서드 구현이 필요합니다',
 });
 
+const VALIDATION_MESSAGE = deepFreeze({
+  car: {
+    multiple: '차는 여러 대여야 합니다.',
+    name_length: '차 이름은 5글자 이내여야 합니다.',
+  },
+});
+
 const RESULT = {
   game_result: '실행 결과\n',
   game_winner: '최종 우승자:',
@@ -22,5 +29,6 @@ const RESULT = {
 module.exports = {
   GAME_MESSAGE,
   ERROR_MESSAGE,
+  VALIDATION_MESSAGE,
   RESULT,
 };

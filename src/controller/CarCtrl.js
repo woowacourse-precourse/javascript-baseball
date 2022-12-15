@@ -1,12 +1,7 @@
 const GameCtrl = require('./GameCtrl');
+const { CarListValidator } = require('../validators');
 
 class CarCtrl extends GameCtrl {
-  constructor(view, model) {
-    super();
-    this.view = view;
-    this.model = model;
-  }
-
   start() {
     this.view.renderGameStartCommand();
     this.#setTrailCarList();
@@ -14,7 +9,10 @@ class CarCtrl extends GameCtrl {
 
   #setTrailCarList() {
     this.view.inputCarNameList(carNameList => {
-      this.model.setCarNameList(carNameList);
+      const splittedCarNameList = this.model.splitCarNameList(carNameList);
+      CarListValidator.validateCarList(splittedCarNameList);
+
+      this.model.setCarNameList(splittedCarNameList);
       this.#setTrailCnt();
     });
   }
@@ -28,7 +26,7 @@ class CarCtrl extends GameCtrl {
 
   gameProcess() {
     const carAdvanceCnt = this.model.initCarAdvanceCnt();
-    const carExecutionResult = '';
+    const carExecutionResult = [];
 
     this.move({ carAdvanceCnt, carExecutionResult });
   }
@@ -44,8 +42,8 @@ class CarCtrl extends GameCtrl {
       }
     });
 
-    const currExecutionResult = this.makeCurrExecutionResult(carAdvanceCnt) + '\n';
-    carExecutionResult = currExecutionResult.concat(carExecutionResult);
+    const currExecutionResult = this.makeCurrExecutionResult(carAdvanceCnt);
+    carExecutionResult.push(currExecutionResult);
 
     this.processNextStep({ carAdvanceCnt, carExecutionResult });
   }
@@ -66,13 +64,15 @@ class CarCtrl extends GameCtrl {
     this.model.reduceTrailCnt();
 
     const isGameEnd = this.model.isGameEnd();
-    if (isGameEnd) return this.end(carExecutionResult);
+    if (isGameEnd) return this.end({ carAdvanceCnt, carExecutionResult });
 
     return this.move({ carAdvanceCnt, carExecutionResult });
   }
 
-  end(carExecutionResult) {
-    this.view.output(carExecutionResult);
+  end({ carAdvanceCnt, carExecutionResult }) {
+    this.view.renderGameTrailResultCommand(carExecutionResult.join('\n'));
+
+    const gameWinner = this.model.checkWhoTheFinalWinnerIs(carAdvanceCnt);
   }
 }
 
