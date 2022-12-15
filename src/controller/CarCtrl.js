@@ -1,5 +1,5 @@
 const GameCtrl = require('./GameCtrl');
-const { CarListValidator } = require('../validators');
+const { CarListValidator, TrailValidator } = require('../validators');
 
 class CarCtrl extends GameCtrl {
   start() {
@@ -9,16 +9,17 @@ class CarCtrl extends GameCtrl {
 
   #setTrailCarList() {
     this.view.inputCarNameList(carNameList => {
-      const splittedCarNameList = this.model.splitCarNameList(carNameList);
-      CarListValidator.validateCarList(splittedCarNameList);
+      CarListValidator.validateCarList(carNameList);
 
-      this.model.setCarNameList(splittedCarNameList);
+      this.model.setCarNameList(carNameList);
       this.#setTrailCnt();
     });
   }
 
   #setTrailCnt() {
     this.view.inputTrailCnt(trailCnt => {
+      TrailValidator.validateCarList(trailCnt);
+
       this.model.initTrailCnt(trailCnt);
       this.gameProcess();
     });

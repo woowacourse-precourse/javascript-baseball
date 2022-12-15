@@ -5,13 +5,15 @@ const LIMIT = 5;
 
 class CarListValidator {
   static validateCarList(carList) {
+    const splittedCarNameList = carList.split(', ');
+
     const validations = {
       multiple: CarListValidator.#isCarMultiple,
       name_length: CarListValidator.#isLengthMoreThanLimit,
     };
 
     Object.entries(validations).forEach(([key, validateFunc]) => {
-      CarListValidator.#validate(carList, validateFunc, VALIDATION_MESSAGE.car[key]);
+      CarListValidator.#validate(splittedCarNameList, validateFunc, VALIDATION_MESSAGE.car[key]);
     });
   }
 

@@ -18,6 +18,9 @@ const VALIDATION_MESSAGE = deepFreeze({
     multiple: '차는 여러 대여야 합니다.',
     name_length: '차 이름은 5글자 이내여야 합니다.',
   },
+  trailCnt: {
+    is_number: '시도 횟수는 숫자여야 합니다.',
+  },
 });
 
 const RESULT = {

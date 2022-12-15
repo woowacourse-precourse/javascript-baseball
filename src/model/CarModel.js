@@ -5,12 +5,8 @@ class CarModel extends GameModel {
   #carNameList = [];
   #trailCnt = 0;
 
-  splitCarNameList(carNameList) {
-    return carNameList.split(', ');
-  }
-
   setCarNameList(carNameList) {
-    this.#carNameList = carNameList;
+    this.#carNameList = carNameList.split(', ');
   }
 
   initTrailCnt(trailCnt) {
