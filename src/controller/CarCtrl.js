@@ -44,8 +44,8 @@ class CarCtrl extends GameCtrl {
       }
     });
 
-    const currExecutionResult = this.makeCurrExecutionResult(carAdvanceCnt);
-    currExecutionResult.concat(carExecutionResult);
+    const currExecutionResult = this.makeCurrExecutionResult(carAdvanceCnt) + '\n';
+    carExecutionResult = currExecutionResult.concat(carExecutionResult);
 
     this.processNextStep({ carAdvanceCnt, carExecutionResult });
   }
@@ -55,7 +55,7 @@ class CarCtrl extends GameCtrl {
       (currExecutionResult, [currCarName, currCarCnt]) => {
         const currCarAdvance = Array(currCarCnt).fill('-').join('');
 
-        const currCarResult = `${currCarName}: ${currCarAdvance}`;
+        const currCarResult = `${currCarName}: ${currCarAdvance}\n`;
         return currExecutionResult.concat(currCarResult);
       },
       '',
@@ -66,12 +66,14 @@ class CarCtrl extends GameCtrl {
     this.model.reduceTrailCnt();
 
     const isGameEnd = this.model.isGameEnd();
-    if (isGameEnd) return this.end({ carAdvanceCnt, carExecutionResult });
+    if (isGameEnd) return this.end(carExecutionResult);
 
     return this.move({ carAdvanceCnt, carExecutionResult });
   }
 
-  end() {}
+  end(carExecutionResult) {
+    this.view.output(carExecutionResult);
+  }
 }
 
 module.exports = CarCtrl;
