@@ -135,7 +135,7 @@ north: ---
 
 # 모듈
 
-## View
+## CarView
 
 게임 입출력 담당 (InputView, OutputView 로직 위임)
 
@@ -150,12 +150,16 @@ north: ---
 - [x] 각 시도에 대한 자동차 게임 결과 출력 renderGameTrailResultCommand
 - [x] 최종 우승자 출력 renderGameWinner
 
-## Model
+## CarCtrl
+
+- [] 게임 시작 start
+- [] 게임 진행 gameProcess
+- [] 게임 종료 end
+
+## CarModel
 
 - []
 - []
 - []
-
-## Ctrl
 
 ## Validation

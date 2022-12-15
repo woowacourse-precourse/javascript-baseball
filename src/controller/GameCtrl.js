@@ -16,8 +16,6 @@ const GameCtrl = class extends IGameCtrl {
   gameProcess() {}
 
   end() {}
-
-  askToReplayGame() {}
 };
 
 module.exports = GameCtrl;
