@@ -36,10 +36,11 @@ class CarCtrl extends GameCtrl {
   move({ carAdvanceCnt, carExecutionResult }) {
     const carNameList = this.model.getCarNameList();
 
-    carNameList.forEach(carName => {
+    Array.from(carNameList).forEach(carName => {
       const isCarMovable = this.model.isCarMovable();
+
       if (isCarMovable) {
-        carAdvanceCnt[carName] + 1;
+        carAdvanceCnt[carName] += 1;
       }
     });
 
