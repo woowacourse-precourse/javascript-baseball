@@ -10,8 +10,11 @@ const OutputView = {
     this.output(GAME_MESSAGE.game_start);
   },
 
+  renderGameExecutionResult() {
+    this.output(GAME_MESSAGE.game_result);
+  },
+
   renderGameTrailResultCommand(trailResult) {
-    trailResult = GAME_MESSAGE.game_result.concat(trailResult);
     this.output(trailResult);
   },
 

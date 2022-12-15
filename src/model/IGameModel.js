@@ -1,3 +1,3 @@
-const IGameModel = class {};
+class IGameModel {}
 
 module.exports = IGameModel;

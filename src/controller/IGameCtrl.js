@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from '../constants';
 
-const IGameCtrl = class {
+class IGameCtrl {
   start() {
     throw Error(ERROR_MESSAGE.interface_class);
   }

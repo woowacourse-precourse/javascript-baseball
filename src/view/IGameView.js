@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from '../constants';
 
-const IGameView = class {
+class IGameView {
   errorBoundary(callerFunction, callback) {
     throw Error(ERROR_MESSAGE.interface_class);
   }
@@ -20,6 +20,6 @@ const IGameView = class {
   close() {
     throw Error(ERROR_MESSAGE.interface_class);
   }
-};
+}
 
 module.exports = IGameView;

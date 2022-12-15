@@ -1,7 +1,7 @@
 const IGameView = require('./IGameView');
 const { ERROR_MESSAGE } = require('../constants');
 
-const GameView = class extends IGameView {
+class GameView extends IGameView {
   constructor(inputView, outputView) {
     super();
     this.inputView = inputView;

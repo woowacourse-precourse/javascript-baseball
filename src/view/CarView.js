@@ -1,6 +1,6 @@
 const GameView = require('./GameView');
 
-const CarView = class extends GameView {
+class CarView extends GameView {
   inputCarNameList() {
     this.inputView.inputCarNameList();
   }
@@ -20,6 +20,6 @@ const CarView = class extends GameView {
   renderGameWinnerCommand(gameWinner) {
     this.outputView.renderGameWinnerCommand(gameWinner);
   }
-};
+}
 
 module.exports = CarView;

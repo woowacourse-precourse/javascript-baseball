@@ -1,7 +1,7 @@
 const IGameCtrl = require('./IGameCtrl');
 const { ERROR_MESSAGE } = require('../constants');
 
-const GameCtrl = class extends IGameCtrl {
+class GameCtrl extends IGameCtrl {
   constructor(view, model) {
     super();
     this.view = view;
@@ -16,6 +16,6 @@ const GameCtrl = class extends IGameCtrl {
   gameProcess() {}
 
   end() {}
-};
+}
 
 module.exports = GameCtrl;

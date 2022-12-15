@@ -96,7 +96,7 @@ east, west, south, north
 ```
 
 - 시도할 횟수를 입력받기 trialCnt
-- 입력받은 횟수를 Model에 저장하기 trialCnt
+- 입력받은 횟수를 Model에 저장하기 carListAdvanceCnt
 
 4. 실행 결과
 
@@ -147,19 +147,27 @@ north: ---
 ### 2. OutputView
 
 - [x] 자동차 게임 시작 메세지 출력 renderGameStartCommand
-- [x] 각 시도에 대한 자동차 게임 결과 출력 renderGameTrailResultCommand
+- [x] 자동차 게임 결과 출력 renderGameTrailResultCommand
 - [x] 최종 우승자 출력 renderGameWinner
 
 ## CarCtrl
 
 - [] 게임 시작 start
+  - 게임 시작 문구 띄우기
+  - 자동차 이름 입력 받기
+  - 시도할 횟수 입력 받기
 - [] 게임 진행 gameProcess
+  - [] 실행 결과 메세지 출력하기
+  - [] 각 trail에 대한 실행 결과 출력하기
 - [] 게임 종료 end
+  - 최종 우승자 출력하기
 
 ## CarModel
 
-- []
-- []
-- []
+- [] 무작위로 숫자를 얻은 후 전진 여부를 계산 isCarMovable
+- [] 최종 우승자가 누구인지 계산하기 checkWhoTheFinalWinnerIs
+
+ex. trailCnt 3 / carList ['north', 'west']
+carList.reduce();
 
 ## Validation
