@@ -1,18 +1,18 @@
-const Console = require('../utils/Console');
+const { MESSAGE_QUESTION } = require('../constants/messages');
+const console = require('../utils/console');
 
-class InputView {
-  static question = {
-    answerMessage: '숫자를 입력해주세요 : ',
-    choiceMessage: '게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.',
-  };
+const InputView = {
+  readAnswers(setUserAnswers) {
+    console.readline(MESSAGE_QUESTION.SET_ANSWERS, setUserAnswers);
+  },
 
-  static startQuiz(question, answerFunc) {
-    Console.readline(question, answerFunc);
-  }
+  readSelect(setGameState) {
+    console.readline(MESSAGE_QUESTION.SET_GAME_STATE, setGameState);
+  },
 
-  static closeConsole() {
-    Console.close();
-  }
-}
+  close() {
+    console.close();
+  },
+};
 
 module.exports = InputView;

@@ -1,22 +1,43 @@
-const Console = require('../utils/Console');
+const { MESSAGE_SYSTEM, MESSAGE_RESULT } = require('../constants/messages');
+const console = require('../utils/console');
 
-class OutputView {
-  static message = {
-    start: '숫자 야구 게임을 시작합니다.',
-    end: '숫자 야구 게임을 종료합니다.',
-  };
+const OutputView = {
+  printStartMessage() {
+    console.print(MESSAGE_SYSTEM.START_POINT);
+  },
 
-  static printStartingMessage() {
-    Console.print(this.message.start);
-  }
+  printError(error) {
+    console.print(error);
+  },
 
-  static printEndingMessage() {
-    Console.print(this.message.end);
-  }
+  printResult(result) {
+    if (result.ball && result.strike) {
+      console.print(
+        `${result.ball}${MESSAGE_RESULT.BALL} ${result.strike}${MESSAGE_RESULT.STRIKE}`
+      );
+      return;
+    }
 
-  static printScoreMessage(message) {
-    Console.print(message);
-  }
-}
+    if (result.ball && !result.strike) {
+      console.print(`${result.ball}${MESSAGE_RESULT.BALL}`);
+      return;
+    }
+
+    if (!result.ball && result.strike) {
+      console.print(`${result.strike}${MESSAGE_RESULT.STRIKE}`);
+      return;
+    }
+
+    console.print(`${MESSAGE_RESULT.NOTHING}`);
+  },
+
+  printStopGame() {
+    console.print(MESSAGE_RESULT.THREE_STRIKE);
+  },
+
+  printEndGame() {
+    console.print(MESSAGE_SYSTEM.END_POINT);
+  },
+};
 
 module.exports = OutputView;
