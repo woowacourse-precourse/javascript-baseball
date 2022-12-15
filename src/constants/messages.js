@@ -9,7 +9,7 @@ const MESSAGE_QUESTION = Object.freeze({
 });
 
 const MESSAGE_ERROR = Object.freeze({
-  INVALID_VALUE: '잘못된 값의 입력입니다.',
+  INVALID_VALUE: '[ERROR] 잘못된 값의 입력입니다.',
 });
 
 const MESSAGE_RESULT = Object.freeze({
