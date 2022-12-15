@@ -164,10 +164,9 @@ north: ---
 
 ## CarModel
 
-- [] 무작위로 숫자를 얻은 후 전진 여부를 계산 isCarMovable
-- [] 최종 우승자가 누구인지 계산하기 checkWhoTheFinalWinnerIs
-
-ex. trailCnt 3 / carList ['north', 'west']
-carList.reduce();
+- [x] 무작위로 숫자를 얻은 후 전진 여부를 계산 isCarMovable
+- [x] 최종 우승자가 누구인지 계산하기 checkWhoTheFinalWinnerIs
+  - ex. { north: 3, east: 1 }
+  - return north
 
 ## Validation
