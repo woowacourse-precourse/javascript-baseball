@@ -2,8 +2,8 @@ const { deepFreeze } = require('../utils/deepFreeze');
 
 const GAME_MESSAGE = deepFreeze({
   game_start: '자동차 경주 게임을 시작합니다.',
-  input_car_name: '자동차 이름을 5자 이하 콤마로 구분하여 입력해주세요.',
-  input_game_trial: '시도할 횟수를 입력해주세요.',
+  input_car_name: '\n자동차 이름을 5자 이하 콤마로 구분하여 입력해주세요.',
+  input_game_trial: '\n시도할 횟수를 입력해주세요.',
   game_result: '실행 결과',
   game_winner: '최종 우승자:',
 });
